@@ -29,6 +29,9 @@ iOS versions: https://github.com/AdguardTeam/AdguardForiOS/releases
 Developers of Adguard for iOS would like to express their gratitude for the following software, without which the iOS version would not be possible:
 
 StaticDataTableViewController by peterpaulis (https://github.com/peterpaulis/StaticDataTableViewController) — License (https://github.com/peterpaulis/StaticDataTableViewController/blob/master/LICENSE.txt)
+
 GZIP by nicklockwood (https://github.com/nicklockwood/GZIP) — License (https://github.com/nicklockwood/GZIP/blob/master/LICENCE.md)
+
 Reachability component by Tony Million (https://github.com/tonymillion/Reachability) — License (https://github.com/tonymillion/Reachability/blob/master/LICENCE.txt)
+
 Fmdb component by August «Gus» Mueller (https://github.com/ccgus/fmdb) — License (https://github.com/ccgus/fmdb/blob/master/LICENSE.txt)
