@@ -11,7 +11,7 @@
       location = "container:SupportingScripts"
       name = "SupportingScripts">
       <Group
-         location = "container:SupportingScripts/Private"
+         location = "group:Private"
          name = "Private">
          <FileRef
             location = "group:readme.md">

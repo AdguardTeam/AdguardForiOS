@@ -8,8 +8,6 @@
 
 #!/bin/bash
 
-ACTION=${1}
-
 echo "Running with ACTION=${ACTION}"
 
 case $ACTION in
