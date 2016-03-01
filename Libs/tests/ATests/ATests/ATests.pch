@@ -1,0 +1,17 @@
+//
+//  ATests.pch
+//  ATests
+//
+//  Created by Roman Sokolov on 18.08.15.
+//
+//
+
+#ifndef ATests_ATests_pch
+#define ATests_ATests_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <Cocoa/Cocoa.h>
+
+#endif

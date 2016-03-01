@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4EB3C13E-6FFF-4360-B485-EA34B6AF5BFB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757" : "AdguardSafariExtension\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AdguardSafariExtension-iOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AdguardSafariExtension-iOS.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AdguardTeam\/AdguardForiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/svn.performix.ru\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DefaultProcessForFilteringDescription</key>
+	<dict>
+		<key>com.maxthon.mac.Maxthon</key>
+		<string>Maxthon</string>
+		<key>org.mozilla.waterfox</key>
+		<string>Waterfox</string>
+		<key>com.vivaldi.Vivaldi</key>
+		<string>Vivaldi</string>
+		<key>com.flashpeak.SlimBoat</key>
+		<string>SlimBoat</string>
+		<key>com.omnigroup.OmniWeb6</key>
+		<string>OmniWeb</string>
+		<key>com.AlphaOmegaSoftware.DesktopWebBrowser</key>
+		<string>Desktop Web Browser</string>
+		<key>com.polysuite.polybrowser</key>
+		<string>PolyBrowser</string>
+		<key>de.icab.iCab</key>
+		<string>iCab</string>
+		<key>org.Runecats.Roccat</key>
+		<string>Roccat</string>
+		<key>com.whitehatsec.aviator</key>
+		<string>Aviator</string>
+		<key>org.mozilla.SeaMonkey</key>
+		<string>SeaMonkey</string>
+		<key>com.catalinagroup.Citrio</key>
+		<string>Citrio</string>
+		<key>jp.co.fenrir.sleipnir</key>
+		<string>Sleipnir</string>
+		<key>org.chromium.Chromium</key>
+		<string>Chromium</string>
+		<key>com.apple.Safari</key>
+		<string>Safari</string>
+		<key>com.apple.mail</key>
+		<string>Mail</string>
+		<key>com.google.Chrome</key>
+		<string>Google Chrome</string>
+		<key>com.operasoftware.Opera</key>
+		<string>Opera</string>
+		<key>org.mozilla.firefox</key>
+		<string>Firefox</string>
+		<key>ru.yandex.desktop.yandex-browser</key>
+		<string>Yandex</string>
+		<key>org.mozilla.nightly</key>
+		<string>Nightly</string>
+		<key>com.google.Chrome.canary</key>
+		<string>Google Chrome Canary</string>
+	</dict>
+	<key>FeedbackSubjects</key>
+	<array>
+		<string>Bug Report</string>
+		<string>Feature Request</string>
+		<string>Others</string>
+	</array>
+	<key>FilterDescription</key>
+	<array>
+		<dict>
+			<key>description</key>
+			<string>An ad filter that you create on your own. You can add rules to it manually or using Adguard Asisstant.</string>
+			<key>name</key>
+			<string>User filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the Russian-speaking Internet.</string>
+			<key>name</key>
+			<string>Russian filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the English-speaking Internet.</string>
+			<key>name</key>
+			<string>English filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>A filter for all known counters and analytical systems.</string>
+			<key>name</key>
+			<string>Spyware Filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>A filter for social network widgets (&quot;Like&quot; buttons and such).</string>
+			<key>name</key>
+			<string>Social networks widgets filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>New filtering rules are being tested here.</string>
+			<key>name</key>
+			<string>Experimental filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the German-speaking Internet.</string>
+			<key>name</key>
+			<string>German filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the Japanese-speaking Internet.</string>
+			<key>name</key>
+			<string>Japanese filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the Dutch-speaking Internet.</string>
+			<key>name</key>
+			<string>Dutch filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>An ad filter created specifically for the Spanish and Portuguese-speaking Internet.</string>
+			<key>name</key>
+			<string>Spanish/Portuguese filter</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>This setting turns on a special filter for unblocking ads which may be helpful to the user. For example, a context-based ad which appears in a search result.</string>
+			<key>name</key>
+			<string>Filter for useful ads</string>
+		</dict>
+	</array>
+</dict>
+</plist>

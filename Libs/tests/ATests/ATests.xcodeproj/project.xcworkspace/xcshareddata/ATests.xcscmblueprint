@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1059",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1059" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1059" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3A0A1A13-65EE-4F9C-B3EB-12937033481E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1059" : "trunk\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ATests",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Applications\/iOS\/AdguardSafariExtension\/trunk\/Libs\/tests\/ATests\/ATests.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/svn.performix.ru\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1059"
+    }
+  ]
+}

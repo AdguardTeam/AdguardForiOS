@@ -1,0 +1,17 @@
+{
+  "images" : [
+    {
+      "idiom" : "ipad",
+      "filename" : "launch-logo-test.pdf",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

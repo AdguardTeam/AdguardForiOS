@@ -1,0 +1,12 @@
+//
+//  Builder.xcconfig
+//  
+//
+//  Created by Roman Sokolov on 24.08.15.
+//
+//
+
+// Global product settings
+AG_PRODUCT=Adguard
+AG_VERSION = 1.0.5
+AG_BUILD = 41

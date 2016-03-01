@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "container:Config.xcconfig">
+   </FileRef>
+   <Group
+      location = "container:SupportingScripts"
+      name = "SupportingScripts">
+      <Group
+         location = "container:SupportingScripts/Private"
+         name = "Private">
+         <FileRef
+            location = "group:readme.md">
+         </FileRef>
+         <FileRef
+            location = "group:exportLocalization.sh">
+         </FileRef>
+         <FileRef
+            location = "group:importLocalization.sh">
+         </FileRef>
+         <Group
+            location = "group:Resources"
+            name = "Resources">
+            <FileRef
+               location = "group:download.py">
+            </FileRef>
+            <FileRef
+               location = "group:fix-base-application-strings.py">
+            </FileRef>
+            <FileRef
+               location = "group:upload.py">
+            </FileRef>
+            <FileRef
+               location = "group:xib-files-list.txt">
+            </FileRef>
+         </Group>
+      </Group>
+      <FileRef
+         location = "group:runBuilder.sh">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "container:Builder/Builder.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:AdguardExtension/Adguard.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:classStyleTemplate.txt">
+   </FileRef>
+   <FileRef
+      location = "container:MediaResources">
+   </FileRef>
+</Workspace>

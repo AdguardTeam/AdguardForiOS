@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3A0A1A13-65EE-4F9C-B3EB-12937033481E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1796</key>
+		<string>http://svn.performix.ru/svn/AG/trunk/CommonObjC</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tests/ATests/ATests.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1796</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1796</key>
+		<string>http://svn.performix.ru/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://svn.performix.ru/svn/AG/trunk/CommonObjC/tests/ATests/ATests.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1796</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>aeda2b1f-4a94-4ad0-948f-579595e4a5ee++1796</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CommonObjC</string>
+		</dict>
+	</array>
+</dict>
+</plist>

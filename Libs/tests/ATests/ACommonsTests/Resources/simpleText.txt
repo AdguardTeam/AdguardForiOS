@@ -1,0 +1,15 @@
+Test Suite 'Multiple Selected Tests' started at 2014-03-11 15:25:59 +0000
+Test Suite 'ACommonsTests.xctest' started at 2014-03-11 15:25:59 +0000
+Test Suite 'ACFFileUtilsTest' started at 2014-03-11 15:25:59 +0000
+Test Case '-[ACFFileUtilsTest testFileContains]' started.
+
+
+Write errors:           0
+Non-2xx responses:      8995
+Total transferred:      77671720 bytes
+HTML transferred:       76736240 bytes
+Requests per second:    325.59 [#/sec] (mean)
+Time per request:       307.131 [ms] (mean)
+Time per request:       3.071 [ms] (mean, across all concurrent requests)
+Transfer rate:          2744.08 [Kbytes/sec] received
+
