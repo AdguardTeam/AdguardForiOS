@@ -16,6 +16,9 @@
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6514819E1BC42E2A00211147 /* AEUIAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514819D1BC42E2A00211147 /* AEUIAboutController.m */; };
 		651703971B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651703961B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m */; };
+		6517EE751C86F46400E055D2 /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
+		6517EE761C86F46E00E055D2 /* ActionExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 651D67931BB02B44007F00FA /* ActionExtension.entitlements */; };
+		6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65F398711B7C9C5000ABCD39 /* Adguard.entitlements */; };
 		652F89F41B92F2E5002E0601 /* AEUISubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F89F31B92F2E5002E0601 /* AEUISubscriptionController.m */; };
 		652F89F71B92F94D002E0601 /* AEUISubscriptionSectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F89F61B92F94D002E0601 /* AEUISubscriptionSectionObject.m */; };
 		653843011B9B52B300AABD5A /* AEUISubscriptionLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653843001B9B52B300AABD5A /* AEUISubscriptionLoaderController.m */; };
@@ -1323,6 +1326,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
 						};
 					};
 					65F398291B7B684700ABCD39 = {
@@ -1388,6 +1394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */,
+				6517EE761C86F46E00E055D2 /* ActionExtension.entitlements in Resources */,
 				65FB990F1BE14DD400D4C92B /* ExtensionPreprocessing.js in Resources */,
 				65B40D341BDE635200A9C595 /* JSConverter.js in Resources */,
 				65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */,
@@ -1411,6 +1418,7 @@
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				65F3981F1B7B684700ABCD39 /* Main.storyboard in Resources */,
 				65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */,
+				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				655A026A1C6B7686000F00D7 /* README.txt in Resources */,
 				6551D4341BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 in Resources */,
 			);
@@ -1435,6 +1443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655A026B1C6B7686000F00D7 /* README.txt in Resources */,
+				6517EE751C86F46400E055D2 /* Extension.entitlements in Resources */,
 				65C12EFD1BD7CCB500FFC71C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
