@@ -282,6 +282,27 @@
 			remoteGlobalIDString = 65C52B351B906105003AF42F;
 			remoteInfo = ActionExtension;
 		};
+		65423D991C89B86100DD1224 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65423D951C89B7C900DD1224;
+			remoteInfo = "Clean Script";
+		};
+		65423D9B1C89B86700DD1224 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65423D951C89B7C900DD1224;
+			remoteInfo = "Clean Script";
+		};
+		65423D9D1C89B86F00DD1224 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65423D951C89B7C900DD1224;
+			remoteInfo = "Clean Script";
+		};
 		65B40D2E1BDE53B300A9C595 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -383,6 +404,7 @@
 		653843031B9B67C600AABD5A /* AEUILoaderSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILoaderSegue.m; sourceTree = "<group>"; };
 		653DB37C1BF228640064ED91 /* AEUISubscriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionTableViewCell.h; sourceTree = "<group>"; };
 		653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionTableViewCell.m; sourceTree = "<group>"; };
+		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367BD1BBAAEFF00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		654367BE1BBAAEFF00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -540,9 +562,6 @@
 		65CD51981C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		65CD51991C43ACB1004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		65D04F791C872B92001A9A02 /* adguard-rules-constructor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-rules-constructor.js"; sourceTree = "<group>"; };
-		65D04F7A1C872B92001A9A02 /* adguard-selector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-selector.js"; sourceTree = "<group>"; };
-		65D04F7B1C872B92001A9A02 /* JavascriptLibs.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = JavascriptLibs.js; sourceTree = "<group>"; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
@@ -969,9 +988,6 @@
 			isa = PBXGroup;
 			children = (
 				65AA104D1C88540800CB67C5 /* adguard-assistant.js */,
-				65D04F791C872B92001A9A02 /* adguard-rules-constructor.js */,
-				65D04F7A1C872B92001A9A02 /* adguard-selector.js */,
-				65D04F7B1C872B92001A9A02 /* JavascriptLibs.js */,
 				65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */,
 				65D04F7D1C872B92001A9A02 /* selector.css */,
 			);
@@ -1095,6 +1111,7 @@
 			isa = PBXGroup;
 			children = (
 				65DAE6E31B8B76B60020BC3C /* project.xcconfig */,
+				65423D941C89B72000DD1224 /* clean-script.sh */,
 				65EC9A021BB9824C00F53F3B /* Libs */,
 				65AD3BB81B7CAF9F00004A02 /* SharedComponents */,
 				65F3985F1B7B6A5300ABCD39 /* Extension */,
@@ -1196,6 +1213,20 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
+		65423D951C89B7C900DD1224 /* Clean Script */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "${SRCROOT}/clean-script.sh $(ACTION)";
+			buildConfigurationList = 65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "Clean Script";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Clean Script";
+		};
 		6548B0601C50EF630092E77C /* Fix Base Application Strings */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "./fix-base-application-strings.py";
@@ -1268,6 +1299,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				65423D9A1C89B86100DD1224 /* PBXTargetDependency */,
 				65B40D2F1BDE53B300A9C595 /* PBXTargetDependency */,
 			);
 			name = ActionExtension;
@@ -1288,6 +1320,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				65423D9E1C89B86F00DD1224 /* PBXTargetDependency */,
 				65B40D311BDE53BB00A9C595 /* PBXTargetDependency */,
 				65F398671B7B6A5300ABCD39 /* PBXTargetDependency */,
 				651318301BDE448D008DCFF9 /* PBXTargetDependency */,
@@ -1345,6 +1378,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				65423D9C1C89B86700DD1224 /* PBXTargetDependency */,
 			);
 			name = AdguardBlockingExtension;
 			productName = extension;
@@ -1360,6 +1394,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
+					65423D951C89B7C900DD1224 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					65982AEB1BA16ECA00770EA9 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -1446,6 +1483,7 @@
 				65982AF81BA1A64300770EA9 /* Import Localization */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
 				6548B0601C50EF630092E77C /* Fix Base Application Strings */,
+				65423D951C89B7C900DD1224 /* Clean Script */,
 			);
 		};
 /* End PBXProject section */
@@ -1567,7 +1605,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\ntempFile=\"${PROJECT_TEMP_DIR}/temp001\"\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\" ) |sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_SELECTOR}\" ) | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_LIBS}\"\n) > \"${tempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${tempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
+			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${ACTION_RESOURCES_DIR}/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nDownload()\n{\n    echo -n \"${1}\"\n    curl -s \"${1}\" >> \"${LibsFile}\"\n    if [ ! $? == 0 ]; then\n    echo \" - fail\"\n    rm -f \"${LibsFile}\"\n    exit 1\n    fi\n    \n    echo \" - done\"\n}\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\n#if [ ! -f \"$LibsFile\" ]; then\n\necho \"Downloading external libs sources..\"\n\nrm -f \"$LibsFile\"\n\n\nDownload \"${ACTION_JAVASCRIPT_LIB01}\"\nDownload \"${ACTION_JAVASCRIPT_LIB02}\"\nDownload \"${ACTION_JAVASCRIPT_LIB03}\"\nDownload \"${ACTION_JAVASCRIPT_SELECTOR}\"\nDownload \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\"\n\necho \"Done\"\n\n#fi\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1840,6 +1878,21 @@
 			target = 65C52B351B906105003AF42F /* ActionExtension */;
 			targetProxy = 6513182F1BDE448D008DCFF9 /* PBXContainerItemProxy */;
 		};
+		65423D9A1C89B86100DD1224 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65423D951C89B7C900DD1224 /* Clean Script */;
+			targetProxy = 65423D991C89B86100DD1224 /* PBXContainerItemProxy */;
+		};
+		65423D9C1C89B86700DD1224 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65423D951C89B7C900DD1224 /* Clean Script */;
+			targetProxy = 65423D9B1C89B86700DD1224 /* PBXContainerItemProxy */;
+		};
+		65423D9E1C89B86F00DD1224 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65423D951C89B7C900DD1224 /* Clean Script */;
+			targetProxy = 65423D9D1C89B86F00DD1224 /* PBXContainerItemProxy */;
+		};
 		65B40D2F1BDE53B300A9C595 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
@@ -1976,6 +2029,29 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		65423D971C89B7C900DD1224 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65423D981C89B7C900DD1224 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		6548B0621C50EF630092E77C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2311,6 +2387,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65423D971C89B7C900DD1224 /* Debug */,
+				65423D981C89B7C900DD1224 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
