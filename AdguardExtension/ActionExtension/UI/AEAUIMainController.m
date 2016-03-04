@@ -1,20 +1,21 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © 2015 Performix LLC. All rights reserved.
-
+ 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
+ 
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
+ 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+
 #import "AEAUIMainController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -37,12 +38,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // Do any additional setup after loading the view.
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
     _enabledHolder = self.domainEnabled;
-
+    
+    self.blockElementLabel.textColor = self.blockElementLabel.tintColor;
+    
     if (self.iconUrl) {
         [ACNNetworking dataWithURL:self.iconUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
@@ -70,7 +73,7 @@
         }];
     }
     else{
-    
+        
         
     }
 }
@@ -83,18 +86,18 @@
 - (void)dealloc{
     
     DDLogDebug(@"(AEAUIMainController) run dealloc.");
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)toggleStatus:(id)sender {
-
+    
     BOOL newEnabled = [(UISwitch *)sender isOn];
     
     if (newEnabled == self.domainEnabled) {
         
         return;
     }
-
+    
     //check rule overlimit
     if (!self.enabled) {
         [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(Action Extension - AEAUIMainController) Error tile") message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(Action Extension - AEAUIMainController) error occurs when try turn off filtration on site.")];
@@ -114,16 +117,16 @@
             
             [[[AEService singleton] antibanner] rollbackTransaction];
             [self.statusButton setOn:self.domainEnabled animated:YES];
-
+            
         }
         else {
-        
+            
             [AEUIUtils invalidateJsonWithController:self completionBlock:^{
                 
                 self.domainEnabled = newEnabled;
                 
                 [[[AEService singleton] antibanner] endTransaction];
-
+                
                 
             } rollbackBlock:^{
                 
@@ -155,22 +158,22 @@
             self.domainObject = nil;
             
             [[[AEService singleton] antibanner] endTransaction];
-
+            
             
         }rollbackBlock:^{
             
             // enable rule (rollback)
             
             [[[AEService singleton] antibanner] rollbackTransaction];
-
+            
             [self.statusButton setOn:self.domainEnabled animated:YES];
         }];
     }
-
+    
 }
 
 - (IBAction)clickMissedAd:(id)sender {
-
+    
     NSString *subject = [AESSupportSubjectPrefix stringByAppendingString:NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
     
@@ -185,8 +188,15 @@
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
-- (IBAction)done:(id)sender {
+- (IBAction)clickBlockElement:(id)sender {
+    
+    NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
+    extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
+    [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
+}
 
+- (IBAction)done:(id)sender {
+    
     NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
     extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"needReload":@(_enabledHolder != self.domainEnabled)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
     [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];

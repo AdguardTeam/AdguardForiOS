@@ -14,20 +14,31 @@
 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+
+
+/* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
+/*LOAD_LIBRARY_HERE*/
+
+/**************************************************************/
+
 var ExtensionJavaScriptClass = function() {};
 
 ExtensionJavaScriptClass.prototype = {
-    
-run: function(arguments) {
-    
+
+  run: function(arguments) {
     arguments.completionFunction({"urlString": document.location.href});
-},
-    
-finalize: function(arguments) {
+  },
+
+  finalize: function(arguments) {
     if (arguments["needReload"])
-        document.location.reload();
-}
+    document.location.reload();
+    else if (arguments["blockElement"]){
+
+      AdguardAssistant.init();
+    }
+  }
+
 };
 
 // The JavaScript file must contain a global object named "ExtensionPreprocessingJS".

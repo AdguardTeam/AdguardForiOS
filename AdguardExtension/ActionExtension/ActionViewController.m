@@ -1,20 +1,21 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © 2015 Performix LLC. All rights reserved.
-
+ 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
+ 
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
+ 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+
 #import "ActionViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -91,6 +92,7 @@
     // For example, look for an image and place it into an image view.
     // Replace this with something appropriate for the type[s] your extension supports.
     
+    
     NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
@@ -104,7 +106,7 @@
                 _url = [NSURL URLWithString:urlString];
             }
             _host = [_url hostWithPort];
-//            _host = url.host;
+            //            _host = url.host;
             
             if (error) {
                 
@@ -126,12 +128,12 @@
                         
                         [_mainController.navigationController setViewControllers:@[self] animated:NO];
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                      (int64_t)(USER_FRIENDLY_DELAY * NSEC_PER_SEC)),
+                                                     (int64_t)(USER_FRIENDLY_DELAY * NSEC_PER_SEC)),
                                        dispatch_get_main_queue(), ^{
-                            
-                            [self startProcessing];
-                        });
-
+                                           
+                                           [self startProcessing];
+                                       });
+                        
                     }];
                     if (observerObject) {
                         [_observerObjects addObject:observerObject];
@@ -152,9 +154,9 @@
                         [_observerObjects addObject:observerObject];
                     }
                     //--------------------------------------------
-
+                    
                     _iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/favicon.ico", _url.scheme, [_url hostWithPort]]];
-
+                    
                     [self startProcessing];
                     
                 }];
@@ -220,12 +222,12 @@
         return NO;
     }
     //-------------------------------
-
+    
     // Init database
     [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-       
+        
         //------------ Checking DB status -----------------------------
         ASDatabase *dbService = [ASDatabase singleton];
         if (dbService.error) {
@@ -233,13 +235,13 @@
             //        [self dbFailure];
         }
         else if (!dbService.ready){
-
+            
             [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
         }
         //--------------------- Start Services ---------------------------
         else
             [[AEService singleton] start];
-
+        
     });
     
     return YES;
@@ -299,7 +301,7 @@
 /////////////////////////////////////////////////////////////////////
 
 - (BOOL)isRulesOverLimit{
-
+    
     NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
     NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
     
@@ -309,9 +311,9 @@
 }
 
 - (void)stopProcessingWithMessage:(NSString *)message{
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-       
+        
         [self.loadIndicator stopAnimating];
         [self.loadIndicator setHidden:YES];
         if (message) {
@@ -335,7 +337,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });
-
+    
 }
 
 @end

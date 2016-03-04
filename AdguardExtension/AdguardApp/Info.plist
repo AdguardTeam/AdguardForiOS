@@ -28,6 +28,16 @@
 				<string>prefs</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.adguard.extension</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>adguard</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>

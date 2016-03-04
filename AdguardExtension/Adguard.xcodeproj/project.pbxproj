@@ -158,6 +158,49 @@
 		65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
+		65D04F7F1C8819E7001A9A02 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
+		65D04F801C8819E7001A9A02 /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A081BB9824C00F53F3B /* ABECRequest.m */; };
+		65D04F811C8819E7001A9A02 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
+		65D04F821C8819E7001A9A02 /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
+		65D04F831C8819E7001A9A02 /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
+		65D04F841C8819E7001A9A02 /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
+		65D04F851C8819E7001A9A02 /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
+		65D04F861C8819E7001A9A02 /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
+		65D04F871C8819E7001A9A02 /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C01C6B7686000F00D7 /* ACLJobController.m */; };
+		65D04F881C8819E7001A9A02 /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
+		65D04F891C8819E7001A9A02 /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01CC1C6B7686000F00D7 /* ACLWildcard.m */; };
+		65D04F8A1C8819E7001A9A02 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
+		65D04F8B1C8819E7001A9A02 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D31C6B7686000F00D7 /* DDAbstractDatabaseLogger.m */; };
+		65D04F8C1C8819E7001A9A02 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D51C6B7686000F00D7 /* DDASLLogger.m */; };
+		65D04F8D1C8819E7001A9A02 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D71C6B7686000F00D7 /* DDFileLogger.m */; };
+		65D04F8E1C8819E7001A9A02 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DA1C6B7686000F00D7 /* DDLog.m */; };
+		65D04F8F1C8819E7001A9A02 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
+		65D04F901C8819E7001A9A02 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DF1C6B7686000F00D7 /* DDContextFilterLogFormatter.m */; };
+		65D04F911C8819E7001A9A02 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
+		65D04F921C8819E7001A9A02 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E31C6B7686000F00D7 /* DDMultiFormatter.m */; };
+		65D04F931C8819E7001A9A02 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
+		65D04F941C8819E7001A9A02 /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		65D04F951C8819E7001A9A02 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		65D04F961C8819E7001A9A02 /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
+		65D04F971C8819E7001A9A02 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
+		65D04F981C8819E7001A9A02 /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
+		65D04F991C8819E7001A9A02 /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		65D04F9A1C8819E7001A9A02 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
+		65D04F9B1C8819E7001A9A02 /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
+		65D04F9C1C8819E7001A9A02 /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
+		65D04F9D1C8819E7001A9A02 /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
+		65D04F9E1C8819E7001A9A02 /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
+		65D04F9F1C8819E7001A9A02 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
+		65D04FA01C8819E7001A9A02 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
+		65D04FA11C8819E7001A9A02 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
+		65D04FA21C8819E7001A9A02 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE01BB9824C00F53F3B /* FMDatabaseAdditions.m */; };
+		65D04FA31C8819E7001A9A02 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
+		65D04FA41C8819E7001A9A02 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE41BB9824C00F53F3B /* FMDatabaseQueue.m */; };
+		65D04FA51C8819E7001A9A02 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
+		65D04FA61C8819E7001A9A02 /* FMSQLStatementSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEA1BB9824C00F53F3B /* FMSQLStatementSplitter.m */; };
+		65D04FA71C8819E7001A9A02 /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
+		65D04FA81C8819E7001A9A02 /* FMStatementQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEE1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m */; };
+		65D04FA91C881A21001A9A02 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		65D9A2631C032AE2004DA210 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
@@ -229,7 +272,6 @@
 		65F3983A1B7B684700ABCD39 /* AdguardExtensionUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F398391B7B684700ABCD39 /* AdguardExtensionUITests.m */; };
 		65F398681B7B6A5300ABCD39 /* AdguardBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
-		65FB990F1BE14DD400D4C92B /* ExtensionPreprocessing.js in Resources */ = {isa = PBXBuildFile; fileRef = 65FB990E1BE14DD400D4C92B /* ExtensionPreprocessing.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -435,6 +477,7 @@
 		65A6AC9C1BE123C8006A86E5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65A6AC9D1BE123CA006A86E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65A6AC9E1BE123CC006A86E5 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65AA104D1C88540800CB67C5 /* adguard-assistant.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-assistant.js"; sourceTree = "<group>"; };
 		65AAC5D01C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SafariAdguardVideo-ru.mp4"; sourceTree = "<group>"; };
 		65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SafariAdguardVideo.mp4; sourceTree = "<group>"; };
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
@@ -497,6 +540,11 @@
 		65CD51981C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		65CD51991C43ACB1004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65D04F791C872B92001A9A02 /* adguard-rules-constructor.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-rules-constructor.js"; sourceTree = "<group>"; };
+		65D04F7A1C872B92001A9A02 /* adguard-selector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-selector.js"; sourceTree = "<group>"; };
+		65D04F7B1C872B92001A9A02 /* JavascriptLibs.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = JavascriptLibs.js; sourceTree = "<group>"; };
+		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
+		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
 		65D9A2611C032AE2004DA210 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
@@ -565,7 +613,6 @@
 		65F398651B7B6A5300ABCD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
-		65FB990E1BE14DD400D4C92B /* ExtensionPreprocessing.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ExtensionPreprocessing.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -607,6 +654,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D04FA91C881A21001A9A02 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,7 +895,6 @@
 			children = (
 				65A6AC981BE123AF006A86E5 /* Localizable.strings */,
 				65C52B3E1B906105003AF42F /* Info.plist */,
-				65FB990E1BE14DD400D4C92B /* ExtensionPreprocessing.js */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -910,11 +957,25 @@
 				651D67931BB02B44007F00FA /* ActionExtension.entitlements */,
 				65C52B381B906105003AF42F /* ActionViewController.h */,
 				65C52B391B906105003AF42F /* ActionViewController.m */,
+				65D04F781C872B92001A9A02 /* js */,
 				659FBCEC1BDE31B4007A87FE /* UI */,
 				65C52B3B1B906105003AF42F /* MainInterface.storyboard */,
 				65A6AC971BE12280006A86E5 /* Supporting Files */,
 			);
 			path = ActionExtension;
+			sourceTree = "<group>";
+		};
+		65D04F781C872B92001A9A02 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				65AA104D1C88540800CB67C5 /* adguard-assistant.js */,
+				65D04F791C872B92001A9A02 /* adguard-rules-constructor.js */,
+				65D04F7A1C872B92001A9A02 /* adguard-selector.js */,
+				65D04F7B1C872B92001A9A02 /* JavascriptLibs.js */,
+				65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */,
+				65D04F7D1C872B92001A9A02 /* selector.css */,
+			);
+			path = js;
 			sourceTree = "<group>";
 		};
 		65D9A2601C032AAD004DA210 /* vendors */ = {
@@ -1202,6 +1263,7 @@
 				65C52B331B906105003AF42F /* Frameworks */,
 				65C52B341B906105003AF42F /* Resources */,
 				651318311BDE4B7D008DCFF9 /* Copy DB Resources (Custom Script) */,
+				65D04F7E1C873029001A9A02 /* Build javascript components */,
 			);
 			buildRules = (
 			);
@@ -1395,7 +1457,6 @@
 			files = (
 				65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */,
 				6517EE761C86F46E00E055D2 /* ActionExtension.entitlements in Resources */,
-				65FB990F1BE14DD400D4C92B /* ExtensionPreprocessing.js in Resources */,
 				65B40D341BDE635200A9C595 /* JSConverter.js in Resources */,
 				65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */,
 				65C52B3D1B906105003AF42F /* MainInterface.storyboard in Resources */,
@@ -1493,6 +1554,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\n\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 | xargs -J % cp -v % \"${RESOURCES}\"\necho \"Done\"\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 | xargs -J % cp -v % \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"\n";
+		};
+		65D04F7E1C873029001A9A02 /* Build javascript components */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build javascript components";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\ntempFile=\"${PROJECT_TEMP_DIR}/temp001\"\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\" ) |sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_SELECTOR}\" ) | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_LIBS}\"\n) > \"${tempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${tempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1672,6 +1747,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D04F7F1C8819E7001A9A02 /* ABECFilter.m in Sources */,
+				65D04F801C8819E7001A9A02 /* ABECRequest.m in Sources */,
+				65D04F811C8819E7001A9A02 /* ACFFileUtils.m in Sources */,
+				65D04F821C8819E7001A9A02 /* ACIOStream.m in Sources */,
+				65D04F831C8819E7001A9A02 /* ACIOUtils.m in Sources */,
+				65D04F841C8819E7001A9A02 /* ACLExecuteBlockDelayed.m in Sources */,
+				65D04F851C8819E7001A9A02 /* ACLFileLocker.m in Sources */,
+				65D04F861C8819E7001A9A02 /* ACLFileLogger.m in Sources */,
+				65D04F871C8819E7001A9A02 /* ACLJobController.m in Sources */,
+				65D04F881C8819E7001A9A02 /* ACLLogger.m in Sources */,
+				65D04F891C8819E7001A9A02 /* ACLWildcard.m in Sources */,
+				65D04F8A1C8819E7001A9A02 /* CLIColor.m in Sources */,
+				65D04F8B1C8819E7001A9A02 /* DDAbstractDatabaseLogger.m in Sources */,
+				65D04F8C1C8819E7001A9A02 /* DDASLLogger.m in Sources */,
+				65D04F8D1C8819E7001A9A02 /* DDFileLogger.m in Sources */,
+				65D04F8E1C8819E7001A9A02 /* DDLog.m in Sources */,
+				65D04F8F1C8819E7001A9A02 /* DDTTYLogger.m in Sources */,
+				65D04F901C8819E7001A9A02 /* DDContextFilterLogFormatter.m in Sources */,
+				65D04F911C8819E7001A9A02 /* DDDispatchQueueLogFormatter.m in Sources */,
+				65D04F921C8819E7001A9A02 /* DDMultiFormatter.m in Sources */,
+				65D04F931C8819E7001A9A02 /* NSDate+Utils.m in Sources */,
+				65D04F941C8819E7001A9A02 /* NSException+Utils.m in Sources */,
+				65D04F951C8819E7001A9A02 /* NSString+Utils.m in Sources */,
+				65D04F961C8819E7001A9A02 /* NSURL+Utils.m in Sources */,
+				65D04F971C8819E7001A9A02 /* ACNHttpUtils.m in Sources */,
+				65D04F981C8819E7001A9A02 /* ACNNetworking.m in Sources */,
+				65D04F991C8819E7001A9A02 /* ACSSystemUtils.m in Sources */,
+				65D04F9A1C8819E7001A9A02 /* Reachability.m in Sources */,
+				65D04F9B1C8819E7001A9A02 /* ADLocales.m in Sources */,
+				65D04F9C1C8819E7001A9A02 /* ADLocations.m in Sources */,
+				65D04F9D1C8819E7001A9A02 /* ADProductInfo.m in Sources */,
+				65D04F9E1C8819E7001A9A02 /* ASDatabase.m in Sources */,
+				65D04F9F1C8819E7001A9A02 /* ASDFilterObjects.m in Sources */,
+				65D04FA01C8819E7001A9A02 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				65D04FA11C8819E7001A9A02 /* FMDatabase.m in Sources */,
+				65D04FA21C8819E7001A9A02 /* FMDatabaseAdditions.m in Sources */,
+				65D04FA31C8819E7001A9A02 /* FMDatabasePool.m in Sources */,
+				65D04FA41C8819E7001A9A02 /* FMDatabaseQueue.m in Sources */,
+				65D04FA51C8819E7001A9A02 /* FMResultSet.m in Sources */,
+				65D04FA61C8819E7001A9A02 /* FMSQLStatementSplitter.m in Sources */,
+				65D04FA71C8819E7001A9A02 /* FMStatementKeywordRecogniser.m in Sources */,
+				65D04FA81C8819E7001A9A02 /* FMStatementQuotedRecogniser.m in Sources */,
 				65F3983A1B7B684700ABCD39 /* AdguardExtensionUITests.m in Sources */,
 				65E9E7B41BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 			);

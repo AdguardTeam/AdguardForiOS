@@ -11,3 +11,13 @@
 // Builder target resources directory
 BUILDER_DIR = $(SYMROOT)/Build/Products/$(CONFIGURATION)
 BUILDER_RESOURCES_DIR = $(BUILDER_DIR)/BuilderResources
+
+// Action Extension VARs
+
+ACTION_JAVASCRIPT_LIBS = $(SRCROOT)/ActionExtension/js/JavascriptLibs.js
+ACTION_JAVASCRIPT_SELECTOR = $(SRCROOT)/ActionExtension/js/adguard-selector.js
+ACTION_JAVASCRIPT_RULE_CONSTRUCTOR = $(SRCROOT)/ActionExtension/js/adguard-rules-constructor.js
+ACTION_JAVASCRIPT_ASSISTANT = $(SRCROOT)/ActionExtension/js/adguard-assistant.js
+ACTION_JAVASCRIPT_PROCESSING_TEMPLATE = $(SRCROOT)/ActionExtension/js/ProcessingTemplate.js
+ACTION_EXTENSION_PREPROCESSING_FILENAME = ExtensionPreprocessing
+ACTION_SELECTOR_CSS_FILE = $(SRCROOT)/ActionExtension/js/selector.css
