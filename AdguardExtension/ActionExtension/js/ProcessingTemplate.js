@@ -16,11 +16,28 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+function Assistant(){
+  (function() {
 
-/* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
-/*LOAD_LIBRARY_HERE*/
+    /* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
+    /*LOAD_LIBRARY_HERE*/
+
+    AdguardAssistant.init();
+  })();
+}
 
 /**************************************************************/
+
+function injectScript(fn) {
+  var scriptId = 'adguard-assistant-script';
+  var script = document.getElementById(scriptId);
+  if (script){ script.remove();}
+    script = document.createElement('script');
+    script.id = scriptId;
+    script.innerHTML = fn + ' Assistant();';
+    // script.appendChild(document.createTextNode('(' + fn + ')();'));
+    document.head.appendChild(script);
+}
 
 var ExtensionJavaScriptClass = function() {};
 
@@ -35,7 +52,7 @@ ExtensionJavaScriptClass.prototype = {
     document.location.reload();
     else if (arguments["blockElement"]){
 
-      AdguardAssistant.init();
+      injectScript(Assistant);
     }
   }
 

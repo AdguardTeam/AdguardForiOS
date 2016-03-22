@@ -88,6 +88,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+
+    [[self navigationController] setNavigationBarHidden:NO animated:animated];
+    [self hideStatusBar:NO];
+    
+}
+
 - (void)hideStatusBar:(BOOL)hide {
 
     if (_statusBarHidden != hide) {

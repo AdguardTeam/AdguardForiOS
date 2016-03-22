@@ -1605,7 +1605,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${ACTION_RESOURCES_DIR}/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nDownload()\n{\n    echo -n \"${1}\"\n    curl -s \"${1}\" >> \"${LibsFile}\"\n    if [ ! $? == 0 ]; then\n    echo \" - fail\"\n    rm -f \"${LibsFile}\"\n    exit 1\n    fi\n    \n    echo \" - done\"\n}\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\n#if [ ! -f \"$LibsFile\" ]; then\n\necho \"Downloading external libs sources..\"\n\nrm -f \"$LibsFile\"\n\n\nDownload \"${ACTION_JAVASCRIPT_LIB01}\"\nDownload \"${ACTION_JAVASCRIPT_LIB02}\"\nDownload \"${ACTION_JAVASCRIPT_LIB03}\"\nDownload \"${ACTION_JAVASCRIPT_SELECTOR}\"\nDownload \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\"\n\necho \"Done\"\n\n#fi\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
+			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${ACTION_RESOURCES_DIR}/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nDownload()\n{\n    echo -n \"${1}\"\n    curl -s \"${1}\" >> \"${LibsFile}\"\n    if [ ! $? == 0 ]; then\n    echo \" - fail\"\n    rm -f \"${LibsFile}\"\n    exit 1\n    fi\n    \n    echo \" - done\"\n}\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nif [ ! -f \"$LibsFile\" ]; then\n\necho \"Downloading external libs sources..\"\n\nrm -f \"$LibsFile\"\n\n\nDownload \"${ACTION_JAVASCRIPT_LIB01}\"\nDownload \"${ACTION_JAVASCRIPT_LIB02}\"\nDownload \"${ACTION_JAVASCRIPT_LIB03}\"\nDownload \"${ACTION_JAVASCRIPT_SELECTOR}\"\nDownload \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\"\n\necho \"Done\"\n\nfi\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2206,6 +2206,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ADGUARD_URL_SCHEME=@\\\"$(ADGUARD_URL_SCHEME)\\\"",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -2251,6 +2252,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "ADGUARD_URL_SCHEME=@\\\"$(ADGUARD_URL_SCHEME)\\\"";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2394,6 +2396,7 @@
 				65423D981C89B7C900DD1224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
 			isa = XCConfigurationList;

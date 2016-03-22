@@ -27,6 +27,8 @@
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
+#define AE_URLSCHEME_COMMAND_ADD            @"add"
+
 /**
  User Defaults key that defines enable/disable filtration.
  */

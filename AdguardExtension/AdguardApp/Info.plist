@@ -35,7 +35,7 @@
 			<string>com.adguard.extension</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>adguard</string>
+				<string>$(ADGUARD_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>

@@ -24,6 +24,7 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESSupport.h"
+#import "AEUIRulesController.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -37,6 +38,9 @@
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
 #define RESET_UPDATE_FILTERS_DELAY  3 //seconds
+
+#define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController
 /////////////////////////////////////////////////////////////////////
@@ -48,6 +52,8 @@
     BOOL _inCheckUpdates;
     NSString *_updateButtonTextHolder;
     NSMutableArray *_observers;
+    
+    NSString *_ruleTextHolderForAddRuleCommand;
 }
 
 @end
@@ -163,6 +169,28 @@
     }
 }
 
+- (void)addRuleToUserFilter:(NSString *)ruleText{
+
+    if ([NSString isNullOrEmpty:ruleText]) {
+        return;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        _ruleTextHolderForAddRuleCommand = ruleText;
+        id topController = self.navigationController.topViewController;
+        if ([topController isKindOfClass:[AEUIRulesController class]]) {
+            
+            [topController setRuleTextForAdding:_ruleTextHolderForAddRuleCommand];
+            _ruleTextHolderForAddRuleCommand = nil;
+        }
+        else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self performSegueWithIdentifier:TO_USER_FILTER_SEGUE_ID sender:self];
+        }
+    });
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Table view delegates
 /////////////////////////////////////////////////////////////////////
@@ -204,6 +232,15 @@
         
         UIPageViewController *destination = [segue destinationViewController];
         [self prepareWelcomeScreenForController:destination];
+    }
+    else if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
+        
+        if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
+            
+            AEUIRulesController *dest = [segue destinationViewController];
+            dest.ruleTextForAdding = _ruleTextHolderForAddRuleCommand;
+            _ruleTextHolderForAddRuleCommand = nil;
+        }
     }
 }
 

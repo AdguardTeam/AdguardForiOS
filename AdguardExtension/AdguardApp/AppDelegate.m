@@ -27,10 +27,12 @@
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 #import "AEUIWelcomePagerDataSource.h"
+#import "AEUIMainController.h"
 
 #import "AESharedResources.h"
 
 #define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
+#define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
@@ -280,7 +282,39 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
-    DDLogError(@"OPAAA!");
+    DDLogError(@"(AppDelegate) application Open URL.");
+    if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:SAFARI_BUNDLE_ID]
+        && [url.scheme isEqualToString:ADGUARD_URL_SCHEME]) {
+        
+        [[AEService singleton] onReady:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @autoreleasepool {
+                    
+                    NSString *command = url.host;
+                    NSString *path = [url.path substringFromIndex:1];
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+                        
+                        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+                        if (nav.viewControllers.count) {
+                            AEUIMainController *main = nav.viewControllers[0];
+                            if ([main isKindOfClass:[AEUIMainController class]]) {
+                                
+                                [main addRuleToUserFilter:path];
+                            }
+                            else{
+                                
+                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
+                            }
+                        }
+                    }
+                }
+                //
+            });
+        }];
+        
+        return YES;
+    }
     return NO;
 }
 

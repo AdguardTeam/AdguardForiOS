@@ -26,3 +26,6 @@ ACTION_JAVASCRIPT_SELECTOR = https:${SLASH}/raw.githubusercontent.com/AdguardTea
 ACTION_JAVASCRIPT_LIB01 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/balalaika.patched.js
 ACTION_JAVASCRIPT_LIB02 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/diff_match_patch.js
 ACTION_JAVASCRIPT_LIB03 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/dom.patched.js
+
+// URL scheme for receiving commands in Adguard main app from Safari
+ADGUARD_URL_SCHEME = adguard

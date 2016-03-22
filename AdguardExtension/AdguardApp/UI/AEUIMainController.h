@@ -47,5 +47,10 @@
 - (IBAction)clickMessage:(id)sender;
 - (IBAction)clickMail:(id)sender;
 
+/**
+ Adds rule to User filter.
+ This method is used for adding rule from "open URL" command.
+ */
+- (void)addRuleToUserFilter:(NSString *)ruleText;
 
 @end

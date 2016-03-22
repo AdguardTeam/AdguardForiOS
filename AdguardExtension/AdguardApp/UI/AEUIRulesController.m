@@ -59,23 +59,31 @@
     _newRuleCount = 0;
     self.addButton.enabled = NO;
     [[AEService singleton] onReloadContentBlockingJsonComplete:^{
-
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            
-            self.addButton.enabled = YES;
-            NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
-            NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-            _newRuleCount = [maxLimit unsignedIntegerValue] - [converted unsignedIntegerValue];
-            if (_newRuleCount < 0) {
-                _newRuleCount = 0;
-            }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self calculateNewRuleCount];
+            [self addRuleWhenActivateIfExists];
         });
     }];
 
-    _observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+    _observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication] queue:nil usingBlock:^(NSNotification * _Nonnull note) {
 
-        [self reloadRulesAndScrollBottom:NO];
-        
+//        if (! [self.navigationController.topViewController isEqual:self]) {
+//            [self.navigationController popToViewController:self animated:YES];
+//        }
+        _newRuleCount = 0;
+        [[AEService singleton] onReloadContentBlockingJsonComplete:^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self calculateNewRuleCount];
+                [self reloadRulesAndScrollBottom:NO];
+                // check that controller on top
+                if ([self.navigationController.topViewController isEqual:self]) {
+                    // on top
+                    [self addRuleWhenActivateIfExists];
+                }
+            });
+        }];
     }];
 }
 
@@ -180,13 +188,9 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
 
-    if ([identifier isEqualToString:@"newRule"] && _newRuleCount <= 0) {
+    if ([identifier isEqualToString:@"newRule"]) {
         
-        
-        [ACSSystemUtils showSimpleAlertForController:self
-                                           withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when attempt add rule and max rules limit exceeded.")
-                                             message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(AEUIRulesController) Alert message. Error when attempt add rule and max rules limit exceeded.")];
-        return NO;
+        return [self checkNewRuleCountWithAlert];
     }
     
     return YES;
@@ -222,40 +226,8 @@
         ASDFilterRule *rule = _editRuleController.rule;
         if ([rule.ruleId unsignedIntegerValue] == 0) {
             
-            [[[AEService singleton] antibanner] beginTransaction];
-            
             // New rule
-            NSError *error = [[AEService singleton] addRule:rule temporarily:NO];
-            if (error){
-                
-                [[[AEService singleton] antibanner] rollbackTransaction];
-                
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-
-                    rule.ruleText = _ruleTextHolder;
-                    [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-                }
-            }
-            else {
-                [self reloadRulesAndScrollBottom:YES];
-
-                // if rule is not comment decrease counter of the new rules
-                if (![rule.ruleText hasPrefix:COMMENT]) {
-                    
-                    if(_newRuleCount > 0) _newRuleCount--;
-
-                    [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-                        
-                        [[[AEService singleton] antibanner] endTransaction];
-                        
-                    } rollbackBlock:^{
-                        
-                        [[[AEService singleton] antibanner] rollbackTransaction];
-                        [self reloadRulesAndScrollBottom:YES];
-                    }];
-                }
-                
-            }
+            [self addNewRule:rule];
         }
         else{
             // Update rule
@@ -388,6 +360,85 @@
               });
           }
         });
+}
+
+- (void)calculateNewRuleCount{
+    
+    self.addButton.enabled = YES;
+    NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
+    NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
+    _newRuleCount = [maxLimit unsignedIntegerValue] - [converted unsignedIntegerValue];
+    if (_newRuleCount < 0) {
+        _newRuleCount = 0;
+    }
+}
+
+- (BOOL)checkNewRuleCountWithAlert{
+
+    if (_newRuleCount <= 0) {
+        
+        [ACSSystemUtils showSimpleAlertForController:self
+                                           withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when attempt add rule and max rules limit exceeded.")
+                                             message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(AEUIRulesController) Alert message. Error when attempt add rule and max rules limit exceeded.")];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)addRuleWhenActivateIfExists{
+    
+    if (![NSString isNullOrEmpty:_ruleTextForAdding]) {
+        if ([self checkNewRuleCountWithAlert]) {
+        
+            ASDFilterRule *rule = [ASDFilterRule new];
+            rule.ruleText = _ruleTextForAdding;
+            rule.isEnabled = @(YES);
+            _ruleTextForAdding = nil;
+            [self addNewRule:rule];
+        }
+    }
+}
+
+- (void)addNewRule:(ASDFilterRule *)rule{
+    
+    [[[AEService singleton] antibanner] beginTransaction];
+    
+    NSError *error = [[AEService singleton] addRule:rule temporarily:NO];
+    if (error){
+        
+        [[[AEService singleton] antibanner] rollbackTransaction];
+        
+        if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+            
+            rule.ruleText = _ruleTextHolder;
+            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
+        }
+    }
+    else {
+        [self reloadRulesAndScrollBottom:YES];
+        
+        // if rule is not comment decrease counter of the new rules
+        if (![rule.ruleText hasPrefix:COMMENT]) {
+            
+            if(_newRuleCount > 0) _newRuleCount--;
+            
+            NSInteger newRuleCountHolder = _newRuleCount;
+            [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+                
+                _newRuleCount = newRuleCountHolder;
+                [[[AEService singleton] antibanner] endTransaction];
+                
+            } rollbackBlock:^{
+                
+                _newRuleCount = newRuleCountHolder + 1;
+                [[[AEService singleton] antibanner] rollbackTransaction];
+                [self reloadRulesAndScrollBottom:YES];
+            }];
+        }
+        
+    }
 }
 
 @end
