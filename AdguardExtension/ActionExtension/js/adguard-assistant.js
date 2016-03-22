@@ -117,9 +117,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
     //-------
     onZoom: function(e){
-      console.log('onZoom: window.innerWidth='+ window.innerWidth+' document.documentElement.clientWidth='+document.documentElement.clientWidth);
+      console.log('onZoom');
       // var _width = document.documentElement.clientWidth;
-      var _width = window.orientation == 0 ? window.screen.availWidth : window.screen.availHeight;
+      var _width = (window.orientation == 0 || window.orientation == 180) ? window.screen.availWidth : window.screen.availHeight;
       var zoomFactor = window.innerWidth/_width;
       console.log('Zoom factor:'+zoomFactor);
       uiHandler.style.zoom = ''+zoomFactor;
@@ -153,6 +153,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       uiHandler.id = uiId;
       $(window).on("resize", eventHandlers.onZoom, true);
       $(window).on("scroll", eventHandlers.onZoom, true);
+      $(window).on("orientationchange", eventHandlers.onZoom, true);
 
       mainButtons = document.createElement('div');
       mainButtons.id = mainButtunsId;
@@ -222,8 +223,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
     previewButton = null;
     cancelButton = null;
 
-    $(window).off("resize", eventHandlers.onZoom, true);
-    $(window).off("scroll", eventHandlers.onZoom, true);
+    $(window).off("resize", eventHandlers.onZoom);
+    $(window).off("scroll", eventHandlers.onZoom);
+    $(window).off("orientationchange", eventHandlers.onZoom);
     uiHandler = 0;
     var elem = $('#' + uiId).get(0);
     if (elem) {
