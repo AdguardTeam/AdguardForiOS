@@ -26,8 +26,9 @@
 @property (nonatomic) NSURL *url;
 @property (nonatomic) NSURL *iconUrl;
 @property (nonatomic) AEUIWhitelistDomainObject *domainObject;
-@property BOOL enabled;
+@property BOOL enableChangeDomainFilteringStatus;
 @property BOOL domainEnabled;
+@property BOOL injectScriptSupported;
 
 @property (weak, nonatomic) IBOutlet UISwitch *statusButton;
 

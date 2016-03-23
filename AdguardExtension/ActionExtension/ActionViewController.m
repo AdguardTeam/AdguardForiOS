@@ -34,6 +34,7 @@
     
     AESharedResources *_sharedResources;
     NSURL *_url;
+    BOOL _injectScriptSupported;
     NSString *_host;
     NSURL *_iconUrl;
     AEUIWhitelistDomainObject *_domainObject;
@@ -107,6 +108,8 @@
             }
             _host = [_url hostWithPort];
             //            _host = url.host;
+            
+            _injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
             
             if (error) {
                 
@@ -262,11 +265,13 @@
         _mainController.iconUrl = _iconUrl;
         _mainController.domainObject = _domainObject;
         _mainController.domainEnabled = (_domainObject == nil);
-        _mainController.enabled = YES;
+        _mainController.injectScriptSupported = _injectScriptSupported;
+        
+        _mainController.enableChangeDomainFilteringStatus = YES;
         if (!_domainObject) {
             // if we did not find whitelist rule we check overlimit
             if ([self isRulesOverLimit]) {
-                _mainController.enabled = NO;
+                _mainController.enableChangeDomainFilteringStatus = NO;
             }
         }
     }

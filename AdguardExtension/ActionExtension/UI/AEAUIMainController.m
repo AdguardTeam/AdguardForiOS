@@ -99,7 +99,7 @@
     }
     
     //check rule overlimit
-    if (!self.enabled) {
+    if (!self.enableChangeDomainFilteringStatus) {
         [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(Action Extension - AEAUIMainController) Error tile") message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(Action Extension - AEAUIMainController) error occurs when try turn off filtration on site.")];
         [self.statusButton setOn:self.domainEnabled animated:YES];
         return;
@@ -189,10 +189,17 @@
 }
 
 - (IBAction)clickBlockElement:(id)sender {
-    
-    NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
-    extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
-    [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
+    if (_injectScriptSupported) {
+        
+        NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
+        extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
+        [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
+    }
+    else{
+        
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(Action Extension - AEAUIMainController) Error tile") message:NSLocalizedString(@"This website security policy does not allow to launch Adguard Assistant.", @"(Action Extension - AEAUIMainController) error occurs when click on Block Element button.")];
+        [self.statusButton setOn:self.domainEnabled animated:YES];
+    }
 }
 
 - (IBAction)done:(id)sender {

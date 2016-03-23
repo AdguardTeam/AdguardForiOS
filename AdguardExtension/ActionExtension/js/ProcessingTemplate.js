@@ -28,15 +28,16 @@ function Assistant(){
 
 /**************************************************************/
 
+var lastErrorEventHandler = null;
 function injectScript(fn) {
   var scriptId = 'adguard-assistant-script';
   var script = document.getElementById(scriptId);
   if (script){ script.remove();}
     script = document.createElement('script');
     script.id = scriptId;
-    script.innerHTML = fn + ' Assistant();';
-    // script.appendChild(document.createTextNode('(' + fn + ')();'));
-    document.head.appendChild(script);
+    script.appendChild(document.createTextNode('(' + fn + ')();'));
+
+   document.head.appendChild(script);
 }
 
 var ExtensionJavaScriptClass = function() {};
@@ -44,7 +45,18 @@ var ExtensionJavaScriptClass = function() {};
 ExtensionJavaScriptClass.prototype = {
 
   run: function(arguments) {
-    arguments.completionFunction({"urlString": document.location.href});
+
+    injectScript(function(){
+      var elem  = document.createElement('div');
+      elem.id = "adguard-assistant-checkInject";
+      elem.style.display = 'none';
+      document.body.appendChild(elem);
+    });
+
+    var injectScriptSupported = document.getElementById('adguard-assistant-checkInject') ? true : false;
+    arguments.completionFunction(
+      {"urlString": document.location.href,
+    'injectScriptSupported': injectScriptSupported});
   },
 
   finalize: function(arguments) {
