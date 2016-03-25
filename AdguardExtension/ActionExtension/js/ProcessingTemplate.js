@@ -23,7 +23,20 @@ function Assistant(){
     /*LOAD_LIBRARY_HERE*/
 
     AdguardAssistant.init();
+
+    window.AdguardAssistantDestroy = function(){ AdguardAssistant.close();};
+
   })();
+}
+
+function DestroyAssistant(){
+    var scriptId = 'adguard-assistant-destroy-script';
+    var script = document.getElementById(scriptId);
+    if (script){ script.remove();}
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.appendChild(document.createTextNode('(function() {try { window.AdguardAssistantDestroy(); } catch (e) { }  })();'));
+     document.head.appendChild(script);
 }
 
 /**************************************************************/
@@ -54,6 +67,18 @@ ExtensionJavaScriptClass.prototype = {
     });
 
     var injectScriptSupported = document.getElementById('adguard-assistant-checkInject') ? true : false;
+
+    // Destroy Assistant if was injected before
+    if (injectScriptSupported) {
+        // try {
+        //
+        //     window.AdguardAssistantDestroy();
+        // } catch (e) {
+        //
+        // }
+        DestroyAssistant();
+    }
+
     arguments.completionFunction(
       {"urlString": document.location.href,
     'injectScriptSupported': injectScriptSupported});

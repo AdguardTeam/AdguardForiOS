@@ -26,6 +26,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   var uiId          = 'adguard-assistant-dialog'
     , cssId         = 'adguard-assistant-css'
     , mainButtunsId = 'adguard-assistant-main-buttons'
+    , ignoreClass   = elemSelector.ignoreClassName()
       ;
 
   var uiHandler; // Main UI element
@@ -38,6 +39,15 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   var selectedElements = []; // Selected elements stack
 
   var previewState = false;
+
+  var zoomFactor = 1;
+
+  //--- renderer vars ---
+  var BORDER_WIDTH = 2;
+  var BORDER_PADDING = 2;
+  var BOTTOM_HEIGHT = 12;
+  var selectionLayout = null;
+  var selectionLayoutBottom = null;
 
   // PRIVATE METHODS
 
@@ -87,7 +97,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       var len = selectedElements.length;
       if (len > 1) {
         selectedElements.pop();
-        var item = selectedElements[len - 1];
+        var item = selectedElements[len - 2];
         elemSelector.selectElement(item);
         setMainButtons();
       }
@@ -120,13 +130,99 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       console.log('onZoom');
       // var _width = document.documentElement.clientWidth;
       var _width = (window.orientation == 0 || window.orientation == 180) ? window.screen.availWidth : window.screen.availHeight;
-      var zoomFactor = window.innerWidth/_width;
+      zoomFactor = window.innerWidth/_width;
       console.log('Zoom factor:'+zoomFactor);
+
       uiHandler.style.zoom = ''+zoomFactor;
       uiHandler.style.top = (window.pageYOffset + window.innerHeight)/zoomFactor - 50 + 'px';
       uiHandler.style.left = (window.pageXOffset + (window.innerWidth/2))/zoomFactor + 'px';
+
+      if (!previewState) {
+
+          var len = selectedElements.length;
+          if (len) {
+            var item = selectedElements[len - 1];
+            elemSelector.selectElement(item);
+          }
+      }
     }
-};
+  };
+
+  var selectionRenderer = {
+      init: function(){
+
+          if (!selectionLayout) {
+
+              selectionLayout = $('<div/>').addClass('adguard-sg-layout').hide();
+              selectionLayoutBottom = $('<div/>').addClass('adguard-sg-layout-bottom');
+              selectionLayoutBottom.get(0).textContent = '&nbsp;';
+              selectionLayout.get(0).appendChild(selectionLayoutBottom.get(0));
+              document.body.appendChild(selectionLayout.get(0));
+          }
+      },
+
+      finalize: function(){
+
+          if (selectionLayout && selectionLayout.get(0)) {
+              var parent = selectionLayout.get(0).parentNode;
+
+              if (parent) {
+                  parent.removeChild(selectionLayout.get(0));
+              }
+          }
+
+          selectionLayout = selectionLayoutBottom = null;
+      },
+
+      add: function (element) {
+        this.remove();
+
+        if (!(element && selectionLayout)) {
+          return;
+        }
+
+        var px = function(v){return (v + 'px');};
+
+        var rect = element.getBoundingClientRect();
+        var
+            top = rect.top + (window.pageYOffset || document.documentElement.scrollTop),
+            left = rect.left + (window.pageXOffset || document.documentElement.scrollLeft),
+            width = element.offsetWidth,
+            height = element.offsetHeight,
+            border = BORDER_WIDTH * zoomFactor,
+            bottomHeight = BOTTOM_HEIGHT * zoomFactor;
+
+            if (border < 0.5) {
+                border = 0.5;
+            }
+            if (bottomHeight < 3) {
+                bottomHeight = 3;
+            }
+
+        selectionLayout.css('border-width', px(border))
+        .css('top', px(top - BORDER_PADDING))
+        .css('left', px(left - BORDER_PADDING))
+        .css('width', px(width + BORDER_PADDING * 2))
+        .css('height', px(height + BORDER_PADDING * 2 + bottomHeight));
+
+        selectionLayoutBottom.css('line-height', px(bottomHeight))
+        .css('font-size', px(bottomHeight));
+
+        if (element.parentNode) {
+            selectionLayoutBottom.get(0).textContent =  element.parentNode.tagName.toLowerCase() + ' ' + element.tagName.toLowerCase();
+        } else {
+            selectionLayoutBottom.get(0).textContent =  element.tagName.toLowerCase();
+        }
+
+        selectionLayout.show();
+      },
+
+      remove: function () {
+          if (selectionLayout) {
+              selectionLayout.hide();
+          }
+      }
+  };
 
   var addCSS = function(){
     try {
@@ -146,24 +242,25 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
   var addButtons = function(titles){
     try {
-      debugger;
       uiHandler = document.getElementById(uiId);
       if (uiHandler) {uiHandler.remove();}
       uiHandler = document.createElement('div');
       uiHandler.id = uiId;
+      $(uiHandler).addClass(ignoreClass);
       $(window).on("resize", eventHandlers.onZoom, true);
       $(window).on("scroll", eventHandlers.onZoom, true);
       $(window).on("orientationchange", eventHandlers.onZoom, true);
 
       mainButtons = document.createElement('div');
       mainButtons.id = mainButtunsId;
+      $(mainButtons).addClass(ignoreClass);
 
 //------------
       acceptButton = document.createElement('div');
       acceptButton.id = "adguard-button-accept";
       acceptButton.innerHTML = "&nbsp;";
       acceptButton.title = titles["accept"];
-      $(acceptButton).addClass('adguard-assistant-button enabled');
+      $(acceptButton).addClass(ignoreClass + ' adguard-assistant-button enabled');
       $(acceptButton).on("click",eventHandlers.doAccept);
       mainButtons.appendChild(acceptButton);
 
@@ -171,21 +268,21 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       previewButton.id = "adguard-button-preview";
       previewButton.innerHTML = "&nbsp;";
       previewButton.title = titles["preview"];
-      $(previewButton).addClass('adguard-assistant-button');
+      $(previewButton).addClass(ignoreClass + ' adguard-assistant-button');
       mainButtons.appendChild(previewButton);
 
       plusButton = document.createElement('div');
       plusButton.id = "adguard-button-plus";
       plusButton.innerHTML = "&nbsp;";
       plusButton.title = titles["plus"];
-      $(plusButton).addClass('adguard-assistant-button');
+      $(plusButton).addClass(ignoreClass + ' adguard-assistant-button');
       mainButtons.appendChild(plusButton);
 
       minusButton = document.createElement('div');
       minusButton.id = "adguard-button-minus";
       minusButton.innerHTML = "&nbsp;";
       minusButton.title = titles["minus"];
-      $(minusButton).addClass('adguard-assistant-button');
+      $(minusButton).addClass(ignoreClass + ' adguard-assistant-button');
       mainButtons.appendChild(minusButton);
 
       uiHandler.appendChild(mainButtons);
@@ -194,7 +291,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       cancelButton.id = "adguard-button-cancel";
       cancelButton.innerHTML = "&nbsp;";
       cancelButton.title = titles["cancel"];
-      $(cancelButton).addClass('adguard-assistant-button enabled');
+      $(cancelButton).addClass(ignoreClass + ' adguard-assistant-button enabled');
       $(cancelButton).on("click",eventHandlers.doCancel);
       uiHandler.appendChild(cancelButton);
 
@@ -257,7 +354,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
           $(previewButton).on('click', eventHandlers.doPreview);
         }
 
-        console.log("setMenuButtons item.parentNode:" + item.parentNode + " item.parentNode.tagName:" + item.parentNode.tagName);
         if (previewState || (item.parentNode && item.parentNode.tagName && item.parentNode.tagName === 'BODY')) {
           $(plusButton).removeClass('enabled');
           $(plusButton).off('click', eventHandlers.doPlus);
@@ -312,6 +408,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
   var selectElementHandler = function(element){
     console.warn('Element selected:' + element);
+    elemSelector.selectElement(element);
     selectedElements = [element];
     setMainButtons();
   };
@@ -327,7 +424,8 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
     //   selectElementHandler.call(AdguardAssistant, element);
     // });
 
-    elemSelector.init(selectElementHandler);
+    elemSelector.init(selectElementHandler, selectionRenderer);
+    // elemSelector.init(selectElementHandler);
 
     if (!addCSS()) {
       throw "(Init) Can't add css styles to page.";
@@ -346,7 +444,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
   api.reset = function(){
 
-    elemSelector.reset();
+    elemSelector.close();
+    elemSelector.init(selectElementHandler, selectionRenderer);
+    // elemSelector.init(selectElementHandler);
     selectedElements = [];
     setMainButtons();
   };
