@@ -54,7 +54,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   var eventHandlers = {
 
     doAccept: function(e){
-      console.log('doAccept');
       api.close();
       var len = selectedElements.length;
       if (len) {
@@ -62,14 +61,11 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
         var item = ruleConstructor.constructRuleText(item,{'domain': document.domain});
         if (item) {
           item = 'adguard://add/' + encodeURIComponent(item);
-          console.info('Open URL in Adguard:' + item);
           document.location = item;
-          console.log('test');
         }
       }
     },
     doPreview: function(e){
-      console.log('doPreview');
       var len = selectedElements.length;
       if (len) {
         previewState = true;
@@ -80,7 +76,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       }
     },
     doPlus: function(e){
-      console.log('doPlus');
       var len = selectedElements.length;
       if (len) {
         var item = selectedElements[len - 1];
@@ -93,7 +88,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       }
     },
     doMinus: function(e){
-      console.log('doMinus');
       var len = selectedElements.length;
       if (len > 1) {
         selectedElements.pop();
@@ -103,9 +97,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       }
     },
     doCancel: function(e){
-      console.log('doCancel');
       if (previewState) {
-        console.log('doCancel cancel preview');
         var len = selectedElements.length;
         if (len) {
           previewState = false;
@@ -116,22 +108,18 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
         }
       }
       else if (selectedElements.length) {
-        console.log('doCancel reset');
         api.reset();
       }
       else {
-        console.log('doCancel close');
         api.close();
       }
     },
 
     //-------
     onZoom: function(e){
-      console.log('onZoom');
       // var _width = document.documentElement.clientWidth;
       var _width = (window.orientation == 0 || window.orientation == 180) ? window.screen.availWidth : window.screen.availHeight;
       zoomFactor = window.innerWidth/_width;
-      console.log('Zoom factor:'+zoomFactor);
 
       uiHandler.style.zoom = ''+zoomFactor;
       uiHandler.style.top = (window.pageYOffset + window.innerHeight)/zoomFactor - 50 + 'px';
@@ -407,7 +395,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   }
 
   var selectElementHandler = function(element){
-    console.warn('Element selected:' + element);
     elemSelector.selectElement(element);
     selectedElements = [element];
     setMainButtons();
@@ -419,7 +406,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
     i18n = typeof i18n !== 'undefined' ? i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel'}};
 
     api.close();
-    console.info('Adguard Assistant Init');
     // elemSelector.init(function(element){
     //   selectElementHandler.call(AdguardAssistant, element);
     // });
