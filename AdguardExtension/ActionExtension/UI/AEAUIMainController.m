@@ -192,7 +192,15 @@
     if (_injectScriptSupported) {
         
         NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
-        extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
+        NSDictionary *i18n = @{
+            @"buttons": @{@"plus":NSLocalizedString(@"More", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'plus' button"),
+                @"minus": NSLocalizedString(@"Less", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'munus' button"),
+                @"accept": NSLocalizedString(@"Accept", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button"),
+                @"cancel": NSLocalizedString(@"Cancel", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button"),
+                @"preview": NSLocalizedString(@"Preview", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button")
+            }
+        };
+        extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1), @"i18n": i18n}} typeIdentifier:(NSString *)kUTTypePropertyList]];
         [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
     }
     else{

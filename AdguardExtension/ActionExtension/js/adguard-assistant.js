@@ -403,7 +403,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   // PUBLIC API
   api.init = function (i18n) {
     // default vaules
-    i18n = typeof i18n !== 'undefined' ? i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel'}};
+    i18n = typeof i18n !== 'undefined' ? i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
 
     api.close();
     // elemSelector.init(function(element){
