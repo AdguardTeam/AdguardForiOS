@@ -25,6 +25,12 @@
     NSInteger _newRuleCount;
 }
 
+/**
+ If this propetry defined, when controller is became active, 
+ it attempts add new rule with this value into user filter.
+ */
+@property (nonatomic) NSString *ruleTextForAdding;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end

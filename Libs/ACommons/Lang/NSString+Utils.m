@@ -356,7 +356,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
                                 (selfLength + 1), kCFStringEncodingASCII)) {
             
             free(selfChars);
-            return NO;
+            return nil;
         }
         
         selfCharsNeedFree = YES;

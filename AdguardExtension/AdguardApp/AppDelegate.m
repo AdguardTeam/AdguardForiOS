@@ -1,20 +1,21 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © 2015 Performix LLC. All rights reserved.
-
+ 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
+ 
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
+ 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+
 #import <SafariServices/SafariServices.h>
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
@@ -26,10 +27,12 @@
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 #import "AEUIWelcomePagerDataSource.h"
+#import "AEUIMainController.h"
 
 #import "AESharedResources.h"
 
 #define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
+#define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
@@ -54,7 +57,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 /////////////////////////////////////////////////////////////////////
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(nullable NSDictionary *)launchOptions{
-
+    
     @autoreleasepool {
         
         //------------- Preparing for start application. Stage 1. -----------------
@@ -74,7 +77,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         DDLogInfo(@"Application started. Version: %@", [ADProductInfo buildVersion]);
         
         DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 1.");
-
+        
         _fetchCompletion = nil;
         self.userDefaultsInitialized = NO;
         
@@ -91,7 +94,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         
         //----------- Set main navigation controller -----------------------
         if ([[AEService singleton] firstRunInProgress]) {
-        
+            
             [[AEService singleton] onReady:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -112,27 +115,27 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     //------------- Preparing for start application. Stage 2. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 2.");
-
+    
     //------------- If running in interactive mode, then Init/Update User Defaults system and other preparing ------------------
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
         
-
+        
         [self updateDefaultsOnSuccess:^{
             
             DDLogInfo(@"(AAAppDelegate) User Defaults up to date.");
             
             [self launchStageThree];
-
+            
         } onFailure:^{
             
             DDLogError(@"(AAAppDelegate) User Defaults failed on updating.");
-
+            
         }];
     }
     else
         [self launchStageThree];
-
-
+    
+    
     return YES;
 }
 
@@ -142,7 +145,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     //------------- Preparing for start application. Stage 3. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 3.");
     
-
+    
     //------------ Subscribe to Antibanner notification -----------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFailuredUpdateNotification object:nil];
@@ -152,22 +155,27 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     //------------ Subscribe to Service notification -----------------------------
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serviceNotify:) name:AEServiceUserFilterRulesChangedNotification object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serviceNotify:) name:AEServiceUserFilterRulesChangedNotification object:nil];
     
     
     //------------ Checking DB status -----------------------------
     ASDatabase *dbService = [ASDatabase singleton];
     if (dbService.error) {
         
+        DDLogWarn(@"(AppDelegate) Stage 3. DB Error. Panic!");
         //        [self dbFailure];
     }
     else if (!dbService.ready){
         
+        DDLogWarn(@"(AppDelegate) Stage 3. DB not ready.");
         [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
     }
     //--------------------- Start Services ---------------------------
-    else
+    else{
+        
         [[AEService singleton] start];
+        DDLogInfo(@"(AppDelegate) Stage 3. Main service started.");
+    }
     
     //--------------------- Processing User Notification Action ---------
     //        NSUserNotification *userNotification =
@@ -179,6 +187,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
+    DDLogInfo(@"(AppDelegate) Stage 3 completed.");
 }
 
 - (void)setPeriodForCheckingFilters{
@@ -188,7 +197,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         interval = UIApplicationBackgroundFetchIntervalMinimum;
     }
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:interval];
-
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -206,9 +215,9 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-
+    
     DDLogInfo(@"(AppDelegate) applicationDidEnterBackground.");
-        [AESharedResources synchronizeSharedDefaults];
+    [AESharedResources synchronizeSharedDefaults];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -220,18 +229,18 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     DDLogInfo(@"(AppDelegate) applicationDidBecomeActive.");
-
+    
     [[AEService singleton] onReady:^{
         
         //Entry point for updating of the filters
         [self invalidateAntibanner:NO];
     }];
-
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
+    
     DDLogInfo(@"(AppDelegate) applicationWillTerminate.");
     [AESharedResources synchronizeSharedDefaults];
 }
@@ -252,18 +261,61 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
             DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. Not via WiFi.");
         }
         
-        if (!(viaWiFi && [self invalidateAntibanner:NO])){
+        [[AEService singleton] onReady:^{
             
-            if (_fetchCompletion) {
+            if (!(viaWiFi && [self invalidateAntibanner:NO])){
                 
-                DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
-
-                _fetchCompletion(UIBackgroundFetchResultNoData);
-                _fetchCompletion = nil;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    
+                    if (_fetchCompletion) {
+                        
+                        DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
+                        
+                        _fetchCompletion(UIBackgroundFetchResultNoData);
+                        _fetchCompletion = nil;
+                    }
+                });
             }
-            
-        }
+        }];
     }
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    
+    DDLogError(@"(AppDelegate) application Open URL.");
+    if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:SAFARI_BUNDLE_ID]
+        && [url.scheme isEqualToString:ADGUARD_URL_SCHEME]) {
+        
+        [[AEService singleton] onReady:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @autoreleasepool {
+                    
+                    NSString *command = url.host;
+                    NSString *path = [url.path substringFromIndex:1];
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+                        
+                        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+                        if (nav.viewControllers.count) {
+                            AEUIMainController *main = nav.viewControllers[0];
+                            if ([main isKindOfClass:[AEUIMainController class]]) {
+                                
+                                [main addRuleToUserFilter:path];
+                            }
+                            else{
+                                
+                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
+                            }
+                        }
+                    }
+                }
+                //
+            });
+        }];
+        
+        return YES;
+    }
+    return NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -280,11 +332,11 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
             self.userDefaultsInitialized = YES;
             dispatch_async(dispatch_get_main_queue(), successBlock);
         }
-//        else{
-//            
-//            self.userDefaultsInitialized = NO;
-//            dispatch_async(dispatch_get_main_queue(), failureBlock);
-//        }
+        //        else{
+        //
+        //            self.userDefaultsInitialized = NO;
+        //            dispatch_async(dispatch_get_main_queue(), failureBlock);
+        //        }
     });
 }
 
@@ -306,7 +358,12 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
             
             [self updateStartedNotify];
             
-            DDLogInfo(@"(AppDelegate) Update process started by timer.");
+            if (fromUI) {
+                DDLogInfo(@"(AppDelegate) Update process started from UI.");
+            }
+            else{
+                DDLogInfo(@"(AppDelegate) Update process started by timer.");
+            }
             
             [[[AEService singleton] antibanner] beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
@@ -338,6 +395,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         
         //--------------------- Start Services ---------------------------
         [[AEService singleton] start];
+        DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
         
         return;
     }
@@ -351,10 +409,10 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 /////////////////////////////////////////////////////////////////////
 
 - (void)antibannerNotify:(NSNotification *)notification {
- 
+    
     // Update filter rule
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
-
+        
         [[AEService singleton] reloadContentBlockingJsonASync:YES backgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
             
             if (error) {
@@ -388,13 +446,13 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     // Update started
     else if ([notification.name
               isEqualToString:ASAntibannerStartedUpdateNotification]) {
-
+        
         // turn on network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     }
     // Update performed
     else if ([notification.name
-            isEqualToString:ASAntibannerFinishedUpdateNotification]) {
+              isEqualToString:ASAntibannerFinishedUpdateNotification]) {
         
         _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
         
@@ -419,8 +477,8 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     }
     // Update failed
     else if ([notification.name
-                 isEqualToString:ASAntibannerFailuredUpdateNotification]) {
-
+              isEqualToString:ASAntibannerFailuredUpdateNotification]) {
+        
         if ([[[AEService singleton] antibanner] inTransaction]) {
             
             [[[AEService singleton] antibanner] rollbackTransaction];
@@ -431,7 +489,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         
         // Special update case.
         [self callCompletionHandler:UIBackgroundFetchResultNewData];
-
+        
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }
@@ -442,9 +500,9 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 /////////////////////////////////////////////////////////////////////
 
 - (void)updateStartedNotify{
-
+    
     [self callOnMainQueue:^{
-
+        
         DDLogDebug(@"(AppDelegate) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
     }];
@@ -452,8 +510,8 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 
 - (void)updateFailuredNotify{
     
-
-     [self callOnMainQueue:^{
+    
+    [self callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Failured update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFailuredUpdateNotification object:self];
@@ -464,7 +522,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 
 - (void)updateFinishedNotify{
     
-     [self callOnMainQueue:^{
+    [self callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Finished update process.");
         NSArray *metas = @[];
@@ -496,30 +554,30 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 /////////////////////////////////////////////////////////////////////
 
 - (void)loadMainNavigationController {
-
+    
     UIViewController *nav = [[self mainStoryborad]
-        instantiateViewControllerWithIdentifier:@"mainNavigationController"];
-
+                             instantiateViewControllerWithIdentifier:@"mainNavigationController"];
+    
     if (nav) {
-
+        
         [UIView transitionWithView:self.window
                           duration:0.3
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:^{
-                          self.window.rootViewController = nav;
+                            self.window.rootViewController = nav;
                         }
                         completion:nil];
         return;
     }
-
+    
     DDLogError(@"(AppDelegate) Can't load main navigation controller");
 }
 
 - (UIStoryboard *)mainStoryborad{
     
-        NSBundle *bundle = [NSBundle mainBundle];
-        NSString *storyboardName = [bundle objectForInfoDictionaryKey:@"UIMainStoryboardFile"];
-        return [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *storyboardName = [bundle objectForInfoDictionaryKey:@"UIMainStoryboardFile"];
+    return [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
 }
 
 - (void)callOnMainQueue:(dispatch_block_t)block{
@@ -532,7 +590,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     else{
         dispatch_sync(mainQueue, block);
     }
-
+    
 }
 
 @end
