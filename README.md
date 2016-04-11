@@ -25,7 +25,7 @@ If you want to see what's in our nearest plans, or would like to submit a new bu
 ### Releases
 
 Latest stable version: 1.0.5 <br/>
-Latest beta: 1.0.5
+Latest beta: 1.0.6
 
 iOS versions: https://github.com/AdguardTeam/AdguardForiOS/releases
 
