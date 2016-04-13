@@ -89,6 +89,11 @@ NSString *AESFConverterError = @"AESFConverterError";
             DDLogError(@"(AESFilterConverter) Can't obtain converter function object: %@", JS_CONVERTER_FUNC);
             return nil;
         }
+#ifdef DEBUG
+        else{
+            DDLogInfo(@"ConvertFunction: \n%@", [_converterFunc toString]);
+        }
+#endif
     }
     return self;
 }
