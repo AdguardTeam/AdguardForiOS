@@ -34,6 +34,7 @@
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
 #define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
+#define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -167,6 +168,11 @@
         
         [self presentViewController:compose animated:YES completion:nil];
     }
+}
+
+- (IBAction)clickViewOnGitHub:(id)sender {
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{

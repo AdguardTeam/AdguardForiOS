@@ -46,6 +46,7 @@
 - (IBAction)clickFacebook:(id)sender;
 - (IBAction)clickMessage:(id)sender;
 - (IBAction)clickMail:(id)sender;
+- (IBAction)clickViewOnGitHub:(id)sender;
 
 /**
  Adds rule to User filter.

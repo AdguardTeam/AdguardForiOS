@@ -30,6 +30,10 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       ;
 
   var uiHandler; // Main UI element
+  var UI_BORDER_WIDTH = 1; // Base border width of the main UI element
+  var UI_BORDER_RADIUS = 3; // Base border radius of the main UI element
+  var zoomHandler; // Element for setting zoom factor
+
   var mainButtons; // Main buttons element
   var plusButton; // Plus button element
   var minusButton; // Minus button element
@@ -43,9 +47,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   var zoomFactor = 1;
 
   //--- renderer vars ---
-  var BORDER_WIDTH = 2;
-  var BORDER_PADDING = 2;
-  var BOTTOM_HEIGHT = 12;
+  var R_BORDER_WIDTH = 2;
+  var R_BORDER_PADDING = 2;
+  var R_BOTTOM_HEIGHT = 12;
   var selectionLayout = null;
   var selectionLayoutBottom = null;
 
@@ -121,9 +125,18 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       var _width = (window.orientation == 0 || window.orientation == 180) ? window.screen.availWidth : window.screen.availHeight;
       zoomFactor = window.innerWidth/_width;
 
-      uiHandler.style.zoom = ''+zoomFactor;
-      uiHandler.style.top = (window.pageYOffset + window.innerHeight)/zoomFactor - 50 + 'px';
-      uiHandler.style.left = (window.pageXOffset + (window.innerWidth/2))/zoomFactor + 'px';
+       zoomHandler.style.zoom = ''+zoomFactor;
+
+      var value = (UI_BORDER_WIDTH * zoomFactor);
+      if (value < 0.5) {
+          value = 0.5;
+      }
+      uiHandler.style.borderWidth = value + 'px';
+      value = (UI_BORDER_RADIUS * zoomFactor);
+      uiHandler.style.borderRadius = value + 'px';
+
+    uiHandler.style.top = (window.pageYOffset + window.innerHeight) - (50 * zoomFactor) + 'px';
+    uiHandler.style.left = (window.pageXOffset + (window.innerWidth/2)) + 'px';
 
       if (!previewState) {
 
@@ -177,8 +190,8 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
             left = rect.left + (window.pageXOffset || document.documentElement.scrollLeft),
             width = element.offsetWidth,
             height = element.offsetHeight,
-            border = BORDER_WIDTH * zoomFactor,
-            bottomHeight = BOTTOM_HEIGHT * zoomFactor;
+            border = R_BORDER_WIDTH * zoomFactor,
+            bottomHeight = R_BOTTOM_HEIGHT * zoomFactor;
 
             if (border < 0.5) {
                 border = 0.5;
@@ -188,10 +201,10 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
             }
 
         selectionLayout.css('border-width', px(border))
-        .css('top', px(top - BORDER_PADDING))
-        .css('left', px(left - BORDER_PADDING))
-        .css('width', px(width + BORDER_PADDING * 2))
-        .css('height', px(height + BORDER_PADDING * 2 + bottomHeight));
+        .css('top', px(top - R_BORDER_PADDING))
+        .css('left', px(left - R_BORDER_PADDING))
+        .css('width', px(width + R_BORDER_PADDING * 2))
+        .css('height', px(height + R_BORDER_PADDING * 2 + bottomHeight));
 
         selectionLayoutBottom.css('line-height', px(bottomHeight))
         .css('font-size', px(bottomHeight));
@@ -239,6 +252,10 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       $(window).on("scroll", eventHandlers.onZoom, true);
       $(window).on("orientationchange", eventHandlers.onZoom, true);
 
+      zoomHandler = document.createElement('div');
+      $(zoomHandler).addClass(ignoreClass + ' adguard-assistant-zoom');
+      uiHandler.appendChild(zoomHandler);
+
       mainButtons = document.createElement('div');
       mainButtons.id = mainButtunsId;
       $(mainButtons).addClass(ignoreClass);
@@ -273,7 +290,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       $(minusButton).addClass(ignoreClass + ' adguard-assistant-button');
       mainButtons.appendChild(minusButton);
 
-      uiHandler.appendChild(mainButtons);
+      zoomHandler.appendChild(mainButtons);
 //-------
       cancelButton = document.createElement('div');
       cancelButton.id = "adguard-button-cancel";
@@ -281,7 +298,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       cancelButton.title = titles["cancel"];
       $(cancelButton).addClass(ignoreClass + ' adguard-assistant-button enabled');
       $(cancelButton).on("click",eventHandlers.doCancel);
-      uiHandler.appendChild(cancelButton);
+      zoomHandler.appendChild(cancelButton);
 
       eventHandlers.onZoom();
 
@@ -311,7 +328,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
     $(window).off("resize", eventHandlers.onZoom);
     $(window).off("scroll", eventHandlers.onZoom);
     $(window).off("orientationchange", eventHandlers.onZoom);
-    uiHandler = 0;
+    uiHandler = null;
     var elem = $('#' + uiId).get(0);
     if (elem) {
       elem.remove();

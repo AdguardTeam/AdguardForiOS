@@ -90,9 +90,7 @@
     
     // Get the item[s] we're handling from the extension context.
     
-    // For example, look for an image and place it into an image view.
-    // Replace this with something appropriate for the type[s] your extension supports.
-    
+    [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
     NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
     

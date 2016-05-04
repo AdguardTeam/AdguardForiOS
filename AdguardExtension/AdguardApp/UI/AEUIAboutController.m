@@ -29,7 +29,6 @@
 #define ADGUARD_WEBSITE_LINK        @"http://adguard.com/"
 #define ADGUARD_FORUM_LINK          @"http://forum.adguard.com/"
 #define ADGUARD_ACKNOWLEDGEMENTS    @"http://adguard.com/acknowledgements.html#ios-acknowledgments"
-#define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 
 @interface AEUIAboutController ()
 
@@ -60,10 +59,6 @@
 
 - (IBAction)clickAcknowledgments:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS]];
-}
-
-- (IBAction)clickViewOnGithub:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
 @end

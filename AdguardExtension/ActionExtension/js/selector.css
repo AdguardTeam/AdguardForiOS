@@ -29,8 +29,11 @@
   border-radius: 3px;
   border: solid 1px #333;
   opacity: 0.93;
-  display: -webkit-flex !important;
   -webkit-flex-flow: row;
+}
+.adguard-assistant-zoom{
+    
+    display: -webkit-flex !important;
 }
 
 .adguard-assistant-button {
@@ -40,10 +43,15 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-color: white;
-  margin: 2px;
+  margin: 5px;
   opacity: 0.4;
   position: relative;
 }
+
+#adguard-assistant-main-buttons .adguard-assistant-button{
+    margin-right: 26px;
+}
+
 .adguard-assistant-button.enabled{
   opacity: 1;
 }
