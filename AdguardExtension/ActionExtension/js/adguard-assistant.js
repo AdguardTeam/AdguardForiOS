@@ -222,7 +222,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
           if (selectionLayout) {
               selectionLayout.hide();
           }
-      }
+      },
+
+      BORDER_CLASS: "sg_selected"
   };
 
   var addCSS = function(){
