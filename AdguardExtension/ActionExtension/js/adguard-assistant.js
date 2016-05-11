@@ -50,7 +50,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   var R_BORDER_WIDTH = 2;
   var R_BORDER_PADDING = 2;
   var R_BOTTOM_HEIGHT = 12;
-  var selectionStartingPoint = null;
   var selectionLayout = null;
   var selectionLayoutBottom = null;
 
@@ -160,14 +159,6 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
               selectionLayoutBottom.get(0).textContent = '&nbsp;';
               selectionLayout.get(0).appendChild(selectionLayoutBottom.get(0));
               document.body.appendChild(selectionLayout.get(0));
-
-              selectionStartingPoint = $('<div/>')
-              .css('position', 'absolute')
-              .css('left', '0px')
-              .css('top', '0px')
-              .css('visibility', 'hidden');
-              selectionStartingPoint = selectionStartingPoint.get(0);
-              document.body.appendChild(selectionStartingPoint);
           }
       },
 
@@ -178,11 +169,10 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
               if (parent) {
                   parent.removeChild(selectionLayout.get(0));
-                  parent.removeChild(selectionStartingPoint);
               }
           }
 
-          selectionLayout = selectionLayoutBottom = selectionStartingPoint = null;
+          selectionLayout = selectionLayoutBottom = null;
       },
 
       add: function (element) {
@@ -195,7 +185,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
         var px = function(v){return (v + 'px');};
 
         var rect = element.getBoundingClientRect();
-        var startingPointRect = selectionStartingPoint.getBoundingClientRect();
+        var startingPointRect = document.body.getBoundingClientRect();
         var
             top = rect.top - startingPointRect.top,
             left = rect.left - startingPointRect.left,
