@@ -876,7 +876,9 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
                 //determin interval
                 interval = [filterMeta.checkDate timeIntervalSinceNow] * -1;
                 // updated only enabled filters
-                if ([filterMeta.enabled boolValue] && interval >= [filterMeta.expires integerValue]){
+                if ([filterMeta.enabled boolValue]
+                    && interval >= [filterMeta.expires integerValue]){
+                    
                     if ([filterMeta.filterId isEqual:@(ASDF_USER_FILTER_ID)])
                         updateUserFilterMetadata = YES;
                     else
