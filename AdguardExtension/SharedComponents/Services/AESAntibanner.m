@@ -1034,11 +1034,9 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
                 
                 DDLogInfo(@"(ASAntibanner) Finished update process.");
                 DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
-#if DEBUG
                 for (ASDFilterMetadata *meta in updatedVersions) {
-                    DDLogDebug(@"Filter id: %@, name: \"%@\".", meta.filterId, meta.name);
+                    DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
                 }
-#endif
                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFinishedUpdateNotification object:self userInfo:@{ASAntibannerUpdatedFiltersKey: updatedVersions}];
             });
             
