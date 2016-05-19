@@ -116,12 +116,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ruleCellView" forIndexPath:indexPath];
     
 
-    AEUIFilterRuleObject *rule = self.rules[[indexPath row]];
-    if (rule) {
-        cell.textLabel.text = rule.ruleText;
-        cell.textLabel.textColor = rule.textColor;
-        cell.textLabel.font = rule.font;
-        return cell;
+    NSArray *rules = self.rules;
+    NSInteger row = indexPath.row;
+    if (row < rules.count) {
+        
+        AEUIFilterRuleObject *rule = rules[row];
+        if (rule) {
+            cell.textLabel.text = rule.ruleText;
+            cell.textLabel.textColor = rule.textColor;
+            cell.textLabel.font = rule.font;
+            return cell;
+        }
     }
 
     return nil;

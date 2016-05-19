@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="73U-9Z-0yf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="73U-9Z-0yf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -274,9 +274,13 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Check Filter Updates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5vt-Vp-qiW">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="aWM-VF-cJD" appends="YES" id="wfa-hg-MGt"/>
+                                                    </connections>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -310,6 +314,10 @@
                                                 <constraint firstItem="Y2d-c9-5ne" firstAttribute="centerY" secondItem="I2v-98-9sd" secondAttribute="centerY" id="xW2-ok-Kor"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="bi6-X3-Yyz" appends="YES" id="xpT-V8-C9O"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Rco-UW-TcV">
                                         <rect key="frame" x="0.0" y="609.5" width="600" height="44"/>
@@ -448,9 +456,13 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Send Bug Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DJo-k0-dYd">
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="yTL-Dx-Zqz" appends="YES" id="T35-Jm-XBu"/>
+                                                    </connections>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -495,9 +507,24 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKw-sT-1kJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="g9W-Lr-pFn">
+                <tapGestureRecognizer id="g9W-Lr-pFn" userLabel="Gesture &quot;View on GitHub&quot;">
                     <connections>
                         <action selector="clickViewOnGitHub:" destination="js3-jN-1gx" id="nzv-aX-rxW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="aWM-VF-cJD" userLabel="Gesture &quot;Check for Update&quot;">
+                    <connections>
+                        <action selector="clickCheckForUpdates:" destination="js3-jN-1gx" id="7QO-bk-XHR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="bi6-X3-Yyz" userLabel="Gesture &quot;Rate this app&quot;">
+                    <connections>
+                        <action selector="clickRateThisApp:" destination="js3-jN-1gx" id="NEB-kl-4bw"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yTL-Dx-Zqz" userLabel="Gesture &quot;Send Bug Report&quot;">
+                    <connections>
+                        <action selector="clickSendBugReport:" destination="js3-jN-1gx" id="n7K-jH-XTt"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

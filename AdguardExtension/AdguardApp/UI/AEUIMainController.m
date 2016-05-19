@@ -175,6 +175,23 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
+- (IBAction)clickCheckForUpdates:(id)sender {
+    if (!_inCheckUpdates) {
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
+    }
+}
+
+- (IBAction)clickRateThisApp:(id)sender {
+    NSURL *theURL =
+    [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
+                          ITUNES_APP_ID]];
+    [[UIApplication sharedApplication] openURL:theURL];
+}
+
+- (IBAction)clickSendBugReport:(id)sender {
+    [[AESSupport singleton] sendMailBugReportWithParentController:self];
+}
+
 - (void)addRuleToUserFilter:(NSString *)ruleText{
 
     if ([NSString isNullOrEmpty:ruleText]) {
@@ -200,30 +217,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Table view delegates
 /////////////////////////////////////////////////////////////////////
-
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    // Selected RATE APP
-    if (indexPath.section == 2 && indexPath.row == 0) {
-
-        NSURL *theURL =
-            [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
-                                                            ITUNES_APP_ID]];
-        [[UIApplication sharedApplication] openURL:theURL];
-    }
-    // Selected Check Filter Updates
-    else if (!_inCheckUpdates && indexPath.section == 1 &&
-               indexPath.row == 4) {
-
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
-    }
-    else if (indexPath.section == 3 && indexPath.row == 1){
-    // Selected Send Bug Report
-        
-        [[AESSupport singleton] sendMailBugReportWithParentController:self];
-    }
-}
 
 #pragma mark Navigation
 
