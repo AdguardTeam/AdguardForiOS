@@ -4,9 +4,6 @@
    <FileRef
       location = "group:README.md">
    </FileRef>
-   <FileRef
-      location = "container:Config.xcconfig">
-   </FileRef>
    <Group
       location = "container:SupportingScripts"
       name = "SupportingScripts">

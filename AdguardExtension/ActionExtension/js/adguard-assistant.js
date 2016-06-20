@@ -23,6 +23,8 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
 
   // PRIVATE FIELDS
 
+  var acceptUrlScheme; //Url scheme for redirecting to Adguard app
+
   var uiId          = 'adguard-assistant-dialog'
     , cssId         = 'adguard-assistant-css'
     , mainButtunsId = 'adguard-assistant-main-buttons'
@@ -64,7 +66,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
         var item = selectedElements[len - 1];
         var item = ruleConstructor.constructRuleText(item,{'domain': document.domain});
         if (item) {
-          item = 'adguard://add/' + encodeURIComponent(item);
+          item = acceptUrlScheme + '://add/' + encodeURIComponent(item);
           document.location = item;
         }
       }
@@ -421,9 +423,12 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   };
 
   // PUBLIC API
-  api.init = function (i18n) {
+  api.init = function (settings) {
     // default vaules
-    i18n = typeof i18n !== 'undefined' ? i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
+    i18n = typeof settings.i18n !== 'undefined' ? settings.i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
+
+    //set accept url scheme
+    acceptUrlScheme = typeof settings.urlScheme !== 'undefined' ? settings.urlScheme : "adguard";
 
     api.close();
     // elemSelector.init(function(element){

@@ -477,25 +477,10 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
+
     CGFloat height = [super tableView:tableView heightForHeaderInSection:section];
-    
-    if (self.originalTable == nil) {
-        return height;
-    }
-    
-    if (!self.hideSectionsWithHiddenRows) {
-        return height;
-    }
-    
-    OriginalSection * os = self.originalTable.sections[section];
-    if ([os numberOfVissibleRows] == 0) {
-        return CGFLOAT_MIN;
-    } else {
-        return height;
-    }
-    
-    return 0;
+
+    return [self headerFooterHeightForSection:section originalHeight:height];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -503,6 +488,39 @@
         return nil;
     } else {
         return [super tableView:tableView titleForHeaderInSection:section];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    CGFloat height = [super tableView:tableView heightForFooterInSection:section];
+
+    return [self headerFooterHeightForSection:section originalHeight:height];
+}
+
+- (CGFloat)headerFooterHeightForSection:(NSInteger)section originalHeight:(CGFloat)height
+{
+    if (self.originalTable == nil) {
+        return height;
+    }
+
+    if (!self.hideSectionsWithHiddenRows) {
+        return height;
+    }
+
+    OriginalSection * os = self.originalTable.sections[section];
+    if ([os numberOfVissibleRows] == 0) {
+        return CGFLOAT_MIN;
+    } else {
+        return height;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    } else {
+        return [super tableView:tableView titleForFooterInSection:section];
     }
 }
 

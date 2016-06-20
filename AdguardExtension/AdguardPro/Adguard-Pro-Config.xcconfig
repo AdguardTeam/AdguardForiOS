@@ -1,0 +1,21 @@
+//
+//  Adguard-Pro-Config.xcconfig
+//  Adguard
+//
+//  Created by Roman Sokolov on 27.05.16.
+//  Copyright © 2016 Performiks. All rights reserved.
+//
+
+
+// Global product settings
+AG_PRODUCT = Adguard Pro
+AG_VERSION = 1.0.0
+AG_BUILD = 5
+
+// URL scheme for receiving commands in Adguard main app from Safari
+ADGUARD_URL_SCHEME = adguard-pro
+
+#include "project.xcconfig"
+#include "../macro-definitions.xcconfig"
+
+PREPROCESSOR_MACRO = $(PREPROCESSOR_MACRO) PRO=1

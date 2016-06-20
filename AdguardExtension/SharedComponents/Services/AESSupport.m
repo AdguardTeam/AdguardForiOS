@@ -27,7 +27,7 @@
 #import "ASDModels/ASDFilterObjects.h"
 
 
-NSString *AESSupportSubjectPrefix = @"[Adguard for iOS] ";
+NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
 
 #define SUPPORT_ADDRESS         @"support@adguard.com"
 
@@ -89,7 +89,7 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[AESSupportSubjectPrefix stringByAppendingString:NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];

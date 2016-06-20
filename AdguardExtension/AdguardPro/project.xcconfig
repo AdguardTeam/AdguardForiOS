@@ -1,0 +1,16 @@
+//
+//  project.xcconfig
+//  AdguardExtension
+//
+//  Created by Roman Sokolov on 24.08.15.
+//  Copyright © 2015 Performiks. All rights reserved.
+//
+
+#include "../project.xcconfig"
+
+// Main App bundle identifier for Adguard Pro
+ADGUARD_BUNDLE_ID = com.adguard.AdguardPro
+// Blocking extension bundle identifier
+ADGUARD_EXTENSION_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).extension
+// Group for shared resources
+ADGUARD_SHARED_RESOURCES_GROUP = group.com.adguard.AdguardPro

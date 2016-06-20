@@ -6,8 +6,6 @@
 //  Copyright © 2015 Performiks. All rights reserved.
 //
 
-#include "../../Config.xcconfig"
-
 // Builder target resources directory
 BUILDER_DIR = $(SYMROOT)/$(CONFIGURATION)
 BUILDER_RESOURCES_DIR = $(BUILDER_DIR)/BuilderResources

@@ -284,7 +284,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     DDLogError(@"(AppDelegate) application Open URL.");
     if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:SAFARI_BUNDLE_ID]
-        && [url.scheme isEqualToString:ADGUARD_URL_SCHEME]) {
+        && [url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [[AEService singleton] onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{

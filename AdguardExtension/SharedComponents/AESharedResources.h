@@ -21,12 +21,14 @@
 #pragma mark - AESharedResources Constants
 /////////////////////////////////////////////////////////////////////
 
-#define AE_HOSTAPP_ID                       @"com.adguard.AdguardExtension"
-#define AE_EXTENSION_ID                     @"com.adguard.AdguardExtension.extension"
-#define AE_SHARED_RESOURCES_GROUP           @"group.com.adguard.AdguardExtension"
+#define AE_PRODUCT_NAME                     @AG_PRODUCT
+#define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
+#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
+#define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
+#define AE_URLSCHEME                        @ADGUARD_URL_SCHEME
 #define AE_URLSCHEME_COMMAND_ADD            @"add"
 
 /**

@@ -1,0 +1,10 @@
+//
+//  macro-definitions.xcconfig
+//  Adguard
+//
+//  Created by Roman Sokolov on 27.05.16.
+//  Copyright © 2016 Performiks. All rights reserved.
+//
+
+// Preprocessor macro definitions
+PREPROCESSOR_MACRO = ADGUARD_BUNDLE_ID=\"$(ADGUARD_BUNDLE_ID)\" ADGUARD_URL_SCHEME=\"$(ADGUARD_URL_SCHEME)\" ADGUARD_EXTENSION_BUNDLE_ID=\"$(ADGUARD_EXTENSION_BUNDLE_ID)\" ADGUARD_SHARED_RESOURCES_GROUP=\"$(ADGUARD_SHARED_RESOURCES_GROUP)\" AG_PRODUCT="\"$(AG_PRODUCT)\""

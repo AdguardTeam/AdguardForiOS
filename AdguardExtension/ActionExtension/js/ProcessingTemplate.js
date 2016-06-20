@@ -22,12 +22,7 @@ function Assistant(){
     /* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
     /*LOAD_LIBRARY_HERE*/
 
-    if (window.AdguardAssistant_i18n) {
-        AdguardAssistant.init(window.AdguardAssistant_i18n);
-    }
-    else {
-        AdguardAssistant.init();
-    }
+    AdguardAssistant.init(window.AdguardAssistant_settings);
 
     window.AdguardAssistantDestroy = function(){ AdguardAssistant.close();};
 
@@ -93,10 +88,10 @@ ExtensionJavaScriptClass.prototype = {
     if (arguments["needReload"])
     document.location.reload();
     else if (arguments["blockElement"]){
-        var i18n = arguments['i18n'];
-        if (i18n) {
-            i18n = 'function(){window.AdguardAssistant_i18n = '+JSON.stringify(i18n)+';}';
-            injectScript(i18n);
+        var settings = arguments['settings'];
+        if (settings) {
+            settings = 'function(){window.window.AdguardAssistant_settings = '+JSON.stringify(settings)+';}';
+            injectScript(settings);
         }
       injectScript(Assistant);
     }

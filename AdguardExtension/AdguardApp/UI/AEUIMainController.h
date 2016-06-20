@@ -27,7 +27,7 @@
 #pragma mark - AEUIMainController
 /////////////////////////////////////////////////////////////////////
 
-@interface AEUIMainController : StaticDataTableViewController < MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate >
+@interface AEUIMainController : StaticDataTableViewController < MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *shareCell;
@@ -41,6 +41,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdated;
 @property (weak, nonatomic) IBOutlet UITableViewCell *checkFiltersCell;
 
+@property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *proSectionCells;
+@property (weak, nonatomic) IBOutlet UITableViewCell *proAdguardDnsCell;
+
+
 - (IBAction)toggleAdguard:(id)sender;
 - (IBAction)clickTwitter:(id)sender;
 - (IBAction)clickFacebook:(id)sender;
@@ -50,6 +54,9 @@
 - (IBAction)clickCheckForUpdates:(id)sender;
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
+
+- (IBAction)clickDNS:(id)sender;
+
 
 /**
  Adds rule to User filter.
