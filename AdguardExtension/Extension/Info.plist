@@ -33,5 +33,7 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>ActionRequestHandler</string>
 	</dict>
+	<key>NSHumanReadableDescription</key>
+	<string>Adguard - Adblock and Privacy Protection for the Web.</string>
 </dict>
 </plist>
