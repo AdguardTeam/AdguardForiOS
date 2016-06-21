@@ -18,6 +18,7 @@
 
 #import "APUIAdguardDNSController.h"
 #import "APVPNManager.h"
+#import "ACommons/ACSystem.h"
 
 #define PRO_SECTION_INDEX               0
 #define NBSP_CODE                       @"\u00A0"
@@ -209,6 +210,16 @@
             break;
     }
 
+    if (manager.lastError) {
+        [ACSSystemUtils
+            showSimpleAlertForController:self
+                               withTitle:NSLocalizedString(@"Error",
+                                             @"(APUIAdguardDNSCon"
+                                             @"troller) PRO "
+                                             @"version. Alert "
+                                             @"title. On error.")
+                                 message:manager.lastError.localizedDescription];
+    }
 }
 
 @end

@@ -54,6 +54,8 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     NSLock      *_busyLock;
     NSNumber    *_delayedSetEnabled;
     NSNumber    *_delayedSetMode;
+    
+    NSError     *_standartError;
 }
 
 static APVPNManager *singletonVPNManager;
@@ -86,6 +88,18 @@ static APVPNManager *singletonVPNManager;
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
         _busy = NO;
         _busyLock = [NSLock new];
+
+        _standartError = [NSError
+            errorWithDomain:APVpnManagerErrorDomain
+                       code:APVPN_MANAGER_ERROR_STANDART
+                   userInfo:@{
+                       NSLocalizedDescriptionKey : NSLocalizedString(
+                           @"There was a problem with VPN configuration, "
+                           @"please contact our support team.",
+                           @"(APVPNManager)  PRO version. Error, which may "
+                           @"occur in Adguard DNS module. When user turns on "
+                           @"Adguard DNS functionality.")
+                   }];
 
         [self initDefinitions];
 
@@ -189,8 +203,8 @@ static APVPNManager *singletonVPNManager;
                                        andReturnError:&err];
                         if (!result || err) {
                             
-                            _lastError = err;
-                            DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", _lastError.localizedDescription);
+                            DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", err.localizedDescription);
+                            _lastError = _standartError;
                             [self sendNotification];
                             return;
                         }
@@ -255,8 +269,8 @@ static APVPNManager *singletonVPNManager;
     [NETunnelProviderManager loadAllFromPreferencesWithCompletionHandler:^(NSArray<NETunnelProviderManager *> * _Nullable managers, NSError * _Nullable error) {
         if (error){
             
-            DDLogError(@"(APVPNManager) Error loading vpn configuration: %@", error.localizedDescription);
-            _lastError = error;
+            DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
+            _lastError = _standartError;
         }
         else {
             
@@ -325,8 +339,8 @@ static APVPNManager *singletonVPNManager;
     [newManager saveToPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
         if (error){
             
-            DDLogError(@"(APVPNManager) Error updating vpn configuration: %@", error.localizedDescription);
-            _lastError = error;
+            DDLogError(@"(APVPNManager) Error updating vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
+            _lastError = _standartError;
         }
         else {
             
@@ -460,6 +474,11 @@ static APVPNManager *singletonVPNManager;
     
     [_busyLock lock];
     if (!_busy) {
+        
+        if (_lastError) {
+            _delayedSetEnabled = _delayedSetMode = nil;
+        }
+        
         int localValue = 0;
         if (_delayedSetMode) {
             localValue = [_delayedSetMode intValue];
@@ -502,6 +521,9 @@ static APVPNManager *singletonVPNManager;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
+        
+        // Reset last ERROR!!!
+        _lastError = nil;
     });
 
 }
