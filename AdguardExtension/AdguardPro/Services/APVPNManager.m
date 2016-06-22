@@ -108,7 +108,7 @@ static APVPNManager *singletonVPNManager;
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
-        [self loadConfigurationWithCompletion];
+        [self loadConfiguration];
     }
     
     return self;
@@ -260,7 +260,7 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
-- (void)loadConfigurationWithCompletion{
+- (void)loadConfiguration{
 
     [_busyLock lock];
     _busy = YES;
@@ -341,30 +341,25 @@ static APVPNManager *singletonVPNManager;
             
             DDLogError(@"(APVPNManager) Error updating vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
             _lastError = _standartError;
-        }
-        else {
+
+            [_busyLock lock];
+            _busy = NO;
+            [_busyLock unlock];
             
-            _manager = newManager;
-            _protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
-        }
-        
-        [_busyLock lock];
-        _busy = NO;
-        [_busyLock unlock];
-        
-        
-        dispatch_sync(workingQueue, ^{
+            dispatch_sync(workingQueue, ^{
+                
+                [self setStatuses];
+            });
             
-            [self setStatuses];
-        });
-        if (error) {
             DDLogInfo(@"(APVPNManager) Updating vpn conviguration failured: %@", ([self modeDescription:_vpnMode]?: @"None"));
-        }
-        else{
-            DDLogInfo(@"(APVPNManager) Vpn configuration successfully updated: %@", ([self modeDescription:_vpnMode]?: @"None"));
+            
+            [self sendNotification];
+            return;
         }
         
-        [self sendNotification];
+        DDLogInfo(@"(APVPNManager) Vpn configuration successfully updated: %@", ([self modeDescription:_vpnMode]?: @"None"));
+        
+        [self loadConfiguration];
     }];
 }
 
@@ -448,7 +443,7 @@ static APVPNManager *singletonVPNManager;
                        
                        // When configuration is changed
                        DDLogInfo(@"(APVPNManager) Notify that vpn configuration changed.");
-                       [self loadConfigurationWithCompletion];
+                       [self loadConfiguration];
 
                    }];
     
