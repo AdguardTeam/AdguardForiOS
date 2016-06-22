@@ -1514,7 +1514,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Whitelist" id="KSf-uA-guX">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="nNE-IK-lCa"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="xDh-E1-EWO">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="xDh-E1-EWO">
                             <connections>
                                 <segue destination="cCg-Gv-gYJ" kind="show" identifier="newRule" id="YQK-Jf-AuP"/>
                             </connections>
