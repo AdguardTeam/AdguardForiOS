@@ -33,6 +33,7 @@
 
 #define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
+#define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
@@ -283,7 +284,9 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
-    if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:SAFARI_BUNDLE_ID]
+    NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+    if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
+         || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
         && [url.scheme isEqualToString:ADGUARD_URL_SCHEME]) {
         
         [[AEService singleton] onReady:^{
