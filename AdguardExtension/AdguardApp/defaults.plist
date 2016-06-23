@@ -7,6 +7,6 @@
 	<key>AEDefaultsAdguardEnabled</key>
 	<true/>
 	<key>AEDefaultsJSONMaximumConvertedRules</key>
-	<integer>45000</integer>
+	<integer>50</integer>
 </dict>
 </plist>
