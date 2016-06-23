@@ -34,7 +34,7 @@
 /////////////////////////////////////////////////////////////////////
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
 
-+ (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message{
++ (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message {
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message

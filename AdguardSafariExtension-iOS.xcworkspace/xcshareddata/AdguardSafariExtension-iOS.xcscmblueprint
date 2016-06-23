@@ -1,26 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757+++39691EA",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++3119+++39691EA",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
-    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757+++39691EA" : {
+    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : {
+
+    },
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++3119+++39691EA" : {
 
     },
     "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++004D933" : {
 
-    },
-    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : {
-
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757+++39691EA" : 0,
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++3119+++39691EA" : 0,
     "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++004D933" : 0,
-    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : 0
+    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : 0,
+    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++5EFA86D" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4EB3C13E-6FFF-4360-B485-EA34B6AF5BFB",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757+++39691EA" : "..\/..",
+    "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++3119+++39691EA" : "..\/..",
     "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++004D933" : "AdguardSafariExtension\/",
-    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : "AdguardSafariExtension\/"
+    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB" : "AdguardSafariExtension\/",
+    "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++5EFA86D" : "Adguard\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "AdguardSafariExtension-iOS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++004D933"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AdguardTeam\/AdguardForiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++5EFA86D"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/svn.performix.ru\/svn",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "81DEE3D3EFA0EBA36E1D33C0EE8B14792B38D773+++B8222DB"
@@ -39,7 +46,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/svn.performix.ru\/svn",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++757+++39691EA"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "aeda2b1f-4a94-4ad0-948f-579595e4a5ee++3119+++39691EA"
     }
   ]
 }

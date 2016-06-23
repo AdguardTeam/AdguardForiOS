@@ -26,7 +26,6 @@
 		653DB37E1BF228640064ED91 /* AEUISubscriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */; };
 		653E46711C1ED93100C09E60 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		653E46721C1F343900C09E60 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
-		6551D4341BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6551D4331BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 */; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -123,7 +122,6 @@
 		65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
-		65AAC5D21C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D01C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 */; };
 		65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
@@ -411,7 +409,6 @@
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367C01BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		654367C11BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		6551D4331BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EnablingAdguardVideo-ru.mp4"; sourceTree = "<group>"; };
 		655A01991C6B7686000F00D7 /* ACFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFiles.h; sourceTree = "<group>"; };
 		655A019A1C6B7686000F00D7 /* ACIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACIO.h; sourceTree = "<group>"; };
 		655A019B1C6B7686000F00D7 /* ACLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
@@ -483,6 +480,7 @@
 		65711E551B8C670A00C8C4E7 /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		6578E3831BC5084300E2DFFD /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
 		6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
+		6589737D1D1BF39E00B91137 /* AEUICommons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICommons.h; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 		65A6AC9D1BE123CA006A86E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65A6AC9E1BE123CC006A86E5 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65AA104D1C88540800CB67C5 /* adguard-assistant.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-assistant.js"; sourceTree = "<group>"; };
-		65AAC5D01C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SafariAdguardVideo-ru.mp4"; sourceTree = "<group>"; };
 		65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SafariAdguardVideo.mp4; sourceTree = "<group>"; };
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		65AD3BB91B7CB15400004A02 /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
@@ -692,6 +689,7 @@
 			isa = PBXGroup;
 			children = (
 				6578E3821BC5082000E2DFFD /* vendors */,
+				6589737D1D1BF39E00B91137 /* AEUICommons.h */,
 				650F89061B947B67000A6012 /* AEUIMainController.h */,
 				650F89071B947B67000A6012 /* AEUIMainController.m */,
 				652F89F51B92F94D002E0601 /* AEUISubscriptionSectionObject.h */,
@@ -1156,9 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				659E59751BC6D82700FA2384 /* Localizable.strings */,
-				65AAC5D01C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 */,
 				65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */,
-				6551D4331BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 */,
 				655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */,
 				65F398251B7B684700ABCD39 /* Info.plist */,
 				65F398151B7B684700ABCD39 /* main.m */,
@@ -1509,7 +1505,6 @@
 			files = (
 				65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */,
 				65F398241B7B684700ABCD39 /* LaunchScreen.storyboard in Resources */,
-				65AAC5D21C01D13700EBF936 /* SafariAdguardVideo-ru.mp4 in Resources */,
 				65C12EFC1BD7CC5600FFC71C /* Assets.xcassets in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
@@ -1519,7 +1514,6 @@
 				65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				655A026A1C6B7686000F00D7 /* README.txt in Resources */,
-				6551D4341BC7DC81006CC222 /* EnablingAdguardVideo-ru.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

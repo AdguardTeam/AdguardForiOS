@@ -8,5 +8,5 @@
 
 // Global product settings
 AG_PRODUCT=Adguard
-AG_VERSION = 1.0.7
-AG_BUILD = 48
+AG_VERSION = 1.0.8
+AG_BUILD = 49

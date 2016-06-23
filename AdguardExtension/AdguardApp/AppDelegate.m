@@ -413,7 +413,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     // Update filter rule
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
         
-        [[AEService singleton] reloadContentBlockingJsonASync:YES backgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
+        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
             
             if (error) {
                 

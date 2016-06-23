@@ -266,12 +266,6 @@
         _mainController.injectScriptSupported = _injectScriptSupported;
         
         _mainController.enableChangeDomainFilteringStatus = YES;
-        if (!_domainObject) {
-            // if we did not find whitelist rule we check overlimit
-            if ([self isRulesOverLimit]) {
-                _mainController.enableChangeDomainFilteringStatus = NO;
-            }
-        }
     }
 }
 
@@ -302,16 +296,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 /////////////////////////////////////////////////////////////////////
-
-- (BOOL)isRulesOverLimit{
-    
-    NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
-    NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-    
-    DDLogDebug(@"(ActionViewController) Check rule overlimit: maxLimit=%@, converted=%@", maxLimit, converted);
-    NSInteger result = [maxLimit unsignedIntegerValue] - [converted unsignedIntegerValue];
-    return  result <= 0;
-}
 
 - (void)stopProcessingWithMessage:(NSString *)message{
     

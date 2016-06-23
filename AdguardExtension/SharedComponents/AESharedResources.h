@@ -51,9 +51,19 @@ extern NSString *AEDefaultsCheckFiltersLastDate;
 extern NSString *AEDefaultsJSONMaximumConvertedRules;
 
 /**
+ User Defaults key that define current count of the rules, which put into converter.
+ */
+extern NSString *AEDefaultsJSONRulesForConvertion;
+
+/**
  User Defaults key that define current count of the converted rules.
  */
 extern NSString *AEDefaultsJSONConvertedRules;
+
+/**
+ User Defaults key, which define that overlimit of rules was reached.
+ */
+extern NSString *AEDefaultsJSONRulesOverlimitReached;
 
 /**
  User Defaults key that define optimized procedure of the convertion for JSON Converter.

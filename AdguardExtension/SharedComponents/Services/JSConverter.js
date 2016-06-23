@@ -8958,6 +8958,8 @@ exports.SafariContentBlockerConverter = {
         converted = converted.concat(contentBlocker.urlBlocking);
         converted = converted.concat(contentBlocker.other);
 
+ var convertedLength = converted.length;
+
         if (limit && limit > 0 && converted.length > limit) {
             var message = '' + limit + ' limit is achieved. Next rules will be ignored.';
             contentBlocker.errors.push(message);
@@ -8970,6 +8972,7 @@ exports.SafariContentBlockerConverter = {
         Log.info('Content blocker length: ' + converted.length);
 
         var result = {
+ totalConvertedCount: convertedLength,
             convertedCount: converted.length,
             errorsCount: contentBlocker.errors.length,
             overLimit: overLimit,

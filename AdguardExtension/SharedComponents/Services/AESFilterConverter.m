@@ -19,6 +19,7 @@
 #import "ACommons/ACLang.h"
 #import "ASDModels/ASDFilterObjects.h"
 
+NSString *AESFTotalConvertedCountKey = @"totalConvertedCount";
 NSString *AESFConvertedCountKey = @"convertedCount";
 NSString *AESFConvertedRulesKey = @"converted";
 NSString *AESFCOverLimitKey = @"overLimit";
@@ -137,11 +138,15 @@ NSString *AESFConverterError = @"AESFConverterError";
             NSNumber *number = dict[AESFConvertedCountKey];
             if (number) {
                 
-                number = dict[AESFCOverLimitKey];
+                NSNumber *number = dict[AESFTotalConvertedCountKey];
                 if (number) {
-                    
-                    //All Okey!
-                    return dict;
+
+                    number = dict[AESFCOverLimitKey];
+                    if (number) {
+
+                        //All Okey!
+                        return dict;
+                    }
                 }
             }
         }
