@@ -1340,7 +1340,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AX2-q7-ZJJ">
-                                <rect key="frame" x="20" y="282" width="560" height="88.5"/>
+                                <rect key="frame" x="20" y="282" width="560" height="89"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-AP-IZQ">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -1358,7 +1358,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can learn more about filter rules syntax from" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgn-JD-KAD">
-                                        <rect key="frame" x="104.5" y="46" width="351.5" height="19.5"/>
+                                        <rect key="frame" x="105" y="46" width="352" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="C6k-kE-yo3">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="40"/>
@@ -1389,11 +1389,11 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHf-Kh-00L">
-                                        <rect key="frame" x="240" y="65" width="80" height="23"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHf-Kh-00L">
+                                        <rect key="frame" x="238" y="66" width="85" height="23"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="this article"/>
+                                        <state key="normal" title="this article."/>
                                         <attributedString key="userComments">
                                             <fragment content="Part of the whole phrase: 'You can learn more about filter rules syntax from this article’ where ‘this article’ is a hyperlink">
                                                 <attributes>

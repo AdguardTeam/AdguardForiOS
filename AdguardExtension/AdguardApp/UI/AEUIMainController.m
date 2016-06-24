@@ -25,6 +25,7 @@
 #import "AESAntibanner.h"
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
+#import "AEUICommons.h"
 #import "APUIAdguardDNSController.h"
 
 #ifdef PRO
@@ -96,7 +97,6 @@
     [self refreshDynamicObjects:nil];
 
     [self prepareCheckUpdatesButton];
-    
 
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -239,6 +239,17 @@
 }
 
 #pragma mark Navigation
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [self setToolbar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    self.navigationController.toolbarHidden = YES;
+}
+
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     
@@ -517,5 +528,59 @@
 }
 
 #endif
+
+- (void)setToolbar{
+    
+    static UILabel *warning;
+    
+    self.navigationController.toolbarHidden = YES;
+    
+    NSString *warningText;
+    
+    //Show warning if overlimit of rules was reached.
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
+        
+        NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
+        NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
+
+        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), rulesCount, totalRulesCount];
+    }
+    
+    if (warningText) {
+        
+        UIView *toolbar = self.navigationController.toolbar;
+        if (toolbar) {
+            
+            UIEdgeInsets insets = toolbar.layoutMargins;
+            //        UIEdgeInsets rootInsets = self.navigationController.view.layoutMargins;
+            CGRect frame = toolbar.bounds;
+            frame.origin = CGPointMake(0, 0);
+            //            frame.size.height -= insets.top + insets.bottom;
+            frame.size.width -= insets.left + insets.right;
+            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
+
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    warning = [[UILabel alloc] initWithFrame:frame];
+                    warning.textColor = AEUIC_WARNING_COLOR;
+                    warning.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+                    warning.textAlignment = NSTextAlignmentCenter;
+                    warning.numberOfLines = 2;
+                    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:warning];
+                    
+                    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    if (item) {
+                        self.toolbarItems = @[spacer, item, spacer];
+                    }
+                });
+
+                //                warning.lineBreakMode = NSLineBreakByWordWrapping;
+                warning.text = warningText;
+            }
+        }
+        
+        [self.navigationController setToolbarHidden:NO animated:YES];
+    }
+}
 
 @end

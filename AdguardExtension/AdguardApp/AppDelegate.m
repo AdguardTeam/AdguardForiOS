@@ -33,6 +33,7 @@
 
 #define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
+#define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
@@ -283,7 +284,9 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
-    if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:SAFARI_BUNDLE_ID]
+    NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+    if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
+         || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
         && [url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [[AEService singleton] onReady:^{
@@ -413,7 +416,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     // Update filter rule
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
         
-        [[AEService singleton] reloadContentBlockingJsonASync:YES backgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
+        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
             
             if (error) {
                 

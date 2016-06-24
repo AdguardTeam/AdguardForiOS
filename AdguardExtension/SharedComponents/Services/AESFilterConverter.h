@@ -36,7 +36,13 @@ extern NSString *AESFConverterError;
 extern NSString *AESFConvertedErrorKey;
 
 /**
- Dictionary key, it value represents count of the converted rules. 
+ Dictionary key, it value represents total count of the converted rules
+ (before truncation to limit).
+ Value type is NSNumber.
+ */
+extern NSString *AESFTotalConvertedCountKey;
+/**
+ Dictionary key, it value represents count of the converted rules.
  Value type is NSNumber.
  */
 extern NSString *AESFConvertedCountKey;

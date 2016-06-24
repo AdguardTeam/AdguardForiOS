@@ -72,7 +72,7 @@ extern NSString *AEServiceErrorDomain;
  and replaces this JSON in shared resources asynchronously. 
  Method performs completionBlock when done on service working queue.
  */
-- (void)reloadContentBlockingJsonASync:(BOOL)checkOverLimit backgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock;
+- (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock;
 
 /**
  If reloadContentBlockingJsonASync method is running still,

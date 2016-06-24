@@ -301,7 +301,7 @@ static AEService *singletonService;
     }
 }
 
-- (void)reloadContentBlockingJsonASync:(BOOL)checkOverLimit backgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock{
+- (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock{
 
     [_reloadContentBlockingJsonLock lock];
     _reloadContentBlockingJsonComplate = NO;
@@ -330,7 +330,7 @@ static AEService *singletonService;
 #endif
         
         //reloading
-        NSError *result = [self reloadContentBlockingJson:checkOverLimit];
+        NSError *result = [self reloadContentBlockingJson];
         
         if (result) {
             [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:result];
@@ -392,7 +392,7 @@ static AEService *singletonService;
         
         DDLogDebug(@"(AEService) ASAntibannerInstalledNotification received");
 
-        [self reloadContentBlockingJsonASync:YES backgroundUpdate:NO completionBlock:^(NSError *error) {
+        [self reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
             
             // If error then disable all installed filters
             if (error) {
@@ -403,7 +403,7 @@ static AEService *singletonService;
                     }
                 }
                 
-                [self reloadContentBlockingJsonASync:YES backgroundUpdate:NO completionBlock:^(NSError *error) {
+                [self reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
                     
                     // we think that no errors in this place. :)
                     if (error){
@@ -440,7 +440,7 @@ static AEService *singletonService;
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////////
 
-- (NSError *)reloadContentBlockingJson:(BOOL)checkOverLimit{
+- (NSError *)reloadContentBlockingJson{
     
     @synchronized(self) {
         @autoreleasepool {
@@ -453,7 +453,10 @@ static AEService *singletonService;
                 
                 NSArray *rules = [self.antibanner activeRules];
                 
-                NSNumber *convertedRulesCount = nil;
+                NSNumber *convertedRulesCount = @(0);
+                NSNumber *totalConvertedRulesCount = @(0);
+                
+                BOOL overlimit = NO;
                 
                 if (rules.count) {
                     
@@ -468,13 +471,14 @@ static AEService *singletonService;
                     }
                     
                     // check overlimit
-                    if (checkOverLimit && [result[AESFCOverLimitKey] boolValue]) {
+                    overlimit = [result[AESFCOverLimitKey] boolValue];
+                    if (overlimit) {
                         
-                        DDLogError(@"(AEService) Can't convert all rules. Limit of the rules count exceeded. Rules count limit: %lu", limit);
-                        DDLogErrorTrace();
+                        //now this is not fatal error.
+                        DDLogWarn(@"(AEService) Can't convert all rules. Limit of the rules count exceeded. Rules count limit: %lu", limit);
                         
-                        NSString *errorDescription = NSLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
-                        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_JSON_CONVERTER_OVERLIMIT userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
+//                        NSString *errorDescription = NSLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
+//                        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_JSON_CONVERTER_OVERLIMIT userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
                         
                     }
                     
@@ -485,12 +489,12 @@ static AEService *singletonService;
                     }
                     
                     convertedRulesCount = result[AESFConvertedCountKey];
+                    totalConvertedRulesCount = result[AESFTotalConvertedCountKey];
                 }
                 
                 // Temporarily save current converted rules in user defaults
-                if (!convertedRulesCount) {
-                    convertedRulesCount = @(0);
-                }
+                [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:totalConvertedRulesCount];
+                [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
                 [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:convertedRulesCount];
                 DDLogDebug(@"(AEService) Temporarily saved current converted rules in user defaults. Rules count: %@", convertedRulesCount);
                 
@@ -519,7 +523,7 @@ static AEService *singletonService;
          reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
          completionHandler:nil];
         
-        [self savePermanentlyCountOfConvertedRules];
+        [self savePermanentlyCountersOfConvertion];
         
         [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:nil];
     }
@@ -541,7 +545,7 @@ static AEService *singletonService;
              
              //no errors
 
-             [self savePermanentlyCountOfConvertedRules];
+             [self savePermanentlyCountersOfConvertion];
          }
          
          [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
@@ -553,13 +557,21 @@ static AEService *singletonService;
     }
 }
 
-- (void)savePermanentlyCountOfConvertedRules{
+- (void)savePermanentlyCountersOfConvertion{
 
     //Permanently save current converted rules in user defaults
-    NSNumber *rulesCount = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONConvertedRules];
-    if (rulesCount) {
-        [[AESharedResources sharedDefaults] setObject:rulesCount forKey:AEDefaultsJSONConvertedRules];
-        DDLogDebug(@"(AEService) Permanently saved current converted rules in user defaults. Rule count: %@", rulesCount);
+    NSNumber *value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONConvertedRules];
+    if (value) {
+        DDLogInfo(@"(AEService) Permanently saved current converted rules in user defaults.");
+        [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONConvertedRules];
+        DDLogInfo(@"Rules: %@", value);
+        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesForConvertion];
+        [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONRulesForConvertion];
+        DDLogInfo(@"From rules: %@", value);
+        
+        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesOverlimitReached];
+        [[AESharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
+        
     }
 
 }

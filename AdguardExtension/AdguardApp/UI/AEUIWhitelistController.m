@@ -97,15 +97,6 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     
-    if ([identifier isEqualToString:@"newRule"] && _newRuleCount <= 0) {
-        
-        
-        [ACSSystemUtils showSimpleAlertForController:self
-                                           withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when attempt add domain and max rules limit exceeded.")
-                                             message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(AEUIWhitelistController) Alert message. Error when attempt add domain and max rules limit exceeded.")];
-        return NO;
-    }
-    
     return YES;
 }
 
@@ -160,7 +151,7 @@
                 [AEUIUtils invalidateJsonWithController:self completionBlock:^{
                 
                     // if rule is not comment decrease counter of the new rules
-                    if(_newRuleCount > 0) _newRuleCount--;
+                    _newRuleCount--;
                     
                     [self reloadRulesAndScrollBottom:YES];
                     

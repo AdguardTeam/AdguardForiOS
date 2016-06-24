@@ -29,6 +29,7 @@
 #import "AppDelegate.h"
 #import "AEUILoadingModal.h"
 #import "AEUIUtils.h"
+#import "AEUICommons.h"
 
 @interface AEUISubscriptionController (){
     
@@ -146,15 +147,22 @@
                     }
                 }
             }
-            
-            NSString *filterInfoText = [NSString stringWithFormat:NSLocalizedString(@"Filters enabled: %1$lu out of %2$lu", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
+
+            NSString* filterInfoText = [NSString stringWithFormat:NSLocalizedString(@"Filters enabled: %1$lu out of %2$lu", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
             NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
-            NSString *rulesInfoText = [NSString stringWithFormat:NSLocalizedString(@"Active filter rules: %lu", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
-            
+            NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.filterInfo.text = filterInfoText;
-                self.rulesInfo.text = rulesInfoText;
+                if (totalRulesCount > rulesCount) {
+                    self.rulesInfo.textColor = AEUIC_WARNING_COLOR;
+                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"Enabled rules: %2$lu Active rules: %1$lu", @"(AEUISubscriptionController) Rules info, in bottom status. When overlimit occured."), rulesCount, totalRulesCount];
+                }
+                else{
+                    self.rulesInfo.textColor = [UIColor lightGrayColor];
+                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"Active filter rules: %lu", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
+                }
             });
         }
     }];

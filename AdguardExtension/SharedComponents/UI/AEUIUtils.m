@@ -26,7 +26,7 @@
     
     [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
         
-        [[AEService singleton] reloadContentBlockingJsonASync:YES backgroundUpdate:NO completionBlock:^(NSError *error) {
+        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
             
             if (error) {
                 

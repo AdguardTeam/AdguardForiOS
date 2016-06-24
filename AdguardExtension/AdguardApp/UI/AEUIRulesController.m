@@ -293,7 +293,7 @@
                 // was commet, became rule
                 if (![rule.ruleText hasPrefix:COMMENT] && [_ruleTextHolder hasPrefix:COMMENT]) {
                     
-                    if (_newRuleCount >0) _newRuleCount--;
+                    _newRuleCount--;
                     [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
                 }
                 // was rule, became comment
@@ -373,21 +373,9 @@
     NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
     NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
     _newRuleCount = [maxLimit unsignedIntegerValue] - [converted unsignedIntegerValue];
-    if (_newRuleCount < 0) {
-        _newRuleCount = 0;
-    }
 }
 
 - (BOOL)checkNewRuleCountWithAlert{
-
-    if (_newRuleCount <= 0) {
-        
-        [ACSSystemUtils showSimpleAlertForController:self
-                                           withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when attempt add rule and max rules limit exceeded.")
-                                             message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(AEUIRulesController) Alert message. Error when attempt add rule and max rules limit exceeded.")];
-        
-        return NO;
-    }
     
     return YES;
 }
@@ -427,7 +415,7 @@
         // if rule is not comment decrease counter of the new rules
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
-            if(_newRuleCount > 0) _newRuleCount--;
+            _newRuleCount--;
             
             NSInteger newRuleCountHolder = _newRuleCount;
             [AEUIUtils invalidateJsonWithController:self completionBlock:^{

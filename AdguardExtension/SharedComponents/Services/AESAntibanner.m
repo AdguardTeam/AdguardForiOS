@@ -1158,21 +1158,12 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
         
         __block NSArray *filters = nil;
         __block NSArray *groups = nil;
-        // Trying obtain filters metadata from back end.
-        if([reach isReachable]){
-            
-            ABECFilterClient *client = [ABECFilterClient new];
-            
-            groups = [client groupMetadataListForApp:[ADProductInfo applicationID]];
-            filters = [client filterMetadataListForApp:[ADProductInfo applicationID]];
-        }
         // Trying obtain filter groups metadata from default DB.
-        if (!groups)
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
-                
-                groups = [self groupsFromDb:db];
-            }];
-        
+        [[ASDatabase singleton] queryDefaultDB:^(FMDatabase* db) {
+
+            groups = [self groupsFromDb:db];
+        }];
+
         if (!groups)
             return NO;
         
@@ -1181,13 +1172,12 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
         
         //Get group metadata for user custom filter
         [sGroups addObject:[self generateUserFilterGroupMetadata]];
-        
-        if (!filters)
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
-                
-                filters = [self filtersFromDb:db];
-            }];
-        
+
+        [[ASDatabase singleton] queryDefaultDB:^(FMDatabase* db) {
+
+            filters = [self filtersFromDb:db];
+        }];
+
         if (!filters)
             return NO;
         
