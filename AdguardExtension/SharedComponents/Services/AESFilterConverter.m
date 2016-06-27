@@ -22,6 +22,7 @@
 NSString *AESFTotalConvertedCountKey = @"totalConvertedCount";
 NSString *AESFConvertedCountKey = @"convertedCount";
 NSString *AESFConvertedRulesKey = @"converted";
+NSString *AESErrorsCountKey = @"errorsCount";
 NSString *AESFCOverLimitKey = @"overLimit";
 NSString *AESFConvertedErrorKey = @"AESFConvertedErrorKey";
 

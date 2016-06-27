@@ -197,7 +197,7 @@ static AEService *singletonService;
                 return error;
             }
 
-            if(![convertResult[AESFConvertedCountKey] boolValue]){
+            if(![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]){
                 
                 NSString *errorDescription = NSLocalizedString(@"Cannot change the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
                 return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
@@ -242,7 +242,7 @@ static AEService *singletonService;
                 return error;
             }
 
-            if(![convertResult[AESFConvertedCountKey] boolValue]){
+            if(![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]){
                 
                 NSString *errorDescription = NSLocalizedString(@"Cannot add the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
                 return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
