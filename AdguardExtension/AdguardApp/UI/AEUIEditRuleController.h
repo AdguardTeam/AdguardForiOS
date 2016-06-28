@@ -23,12 +23,12 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *ruleTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UITextView *bottomTexView;
 
 @property (readonly) BOOL done;
 @property ASDFilterRule *rule;
 
 
 - (IBAction)clickDone:(id)sender;
-- (IBAction)clickArticle:(id)sender;
 
 @end
