@@ -46,7 +46,11 @@ extern NSString *AESFTotalConvertedCountKey;
  Value type is NSNumber.
  */
 extern NSString *AESFConvertedCountKey;
-
+/**
+ Dictionary key, it value represents count of the erros during convertion.
+ Value type is NSNumber.
+ */
+extern NSString *AESErrorsCountKey;
 /**
  Dictionary key, it value represents json with converted rules. 
  Value type is NSString.

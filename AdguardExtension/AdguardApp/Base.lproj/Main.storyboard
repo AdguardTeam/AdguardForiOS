@@ -1339,8 +1339,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AX2-q7-ZJJ">
-                                <rect key="frame" x="20" y="282" width="560" height="89"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="AX2-q7-ZJJ">
+                                <rect key="frame" x="20" y="292" width="560" height="69"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-AP-IZQ">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -1350,80 +1350,25 @@
                                             <outlet property="delegate" destination="XJx-lG-XNb" id="vTl-lT-uDA"/>
                                         </connections>
                                     </textField>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffb-b2-QbO">
-                                        <rect key="frame" x="0.0" y="30" width="560" height="16"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zEg-zR-Nzn">
+                                        <rect key="frame" x="275" y="36" width="10" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="hsx-uG-lQ2"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can learn more about filter rules syntax from" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgn-JD-KAD">
-                                        <rect key="frame" x="105" y="46" width="352" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="C6k-kE-yo3">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                                            </constraint>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <attributedString key="userComments">
-                                            <fragment content="You can learn more about filter rules syntax from this article’ where ‘this article’ is a hyperlink">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="15" name="Helvetica"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="C6k-kE-yo3"/>
-                                            </mask>
-                                        </variation>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <variation key="widthClass=compact">
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         </variation>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHf-Kh-00L">
-                                        <rect key="frame" x="238" y="66" width="85" height="23"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="this article."/>
-                                        <attributedString key="userComments">
-                                            <fragment content="Part of the whole phrase: 'You can learn more about filter rules syntax from this article’ where ‘this article’ is a hyperlink">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="15" name="Helvetica"/>
-                                                    <real key="NSKern" value="0.0"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                        <tabStops/>
-                                                    </paragraphStyle>
-                                                    <color key="NSStrokeColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <variation key="heightClass=compact-widthClass=compact">
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="clickArticle:" destination="XJx-lG-XNb" eventType="touchUpInside" id="o0b-Ta-oCe"/>
-                                        </connections>
-                                    </button>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="oKp-AP-IZQ" firstAttribute="leading" secondItem="AX2-q7-ZJJ" secondAttribute="leading" id="818-A4-GH8"/>
-                                    <constraint firstItem="Ffb-b2-QbO" firstAttribute="leading" secondItem="AX2-q7-ZJJ" secondAttribute="leading" id="XDC-Ck-bnx"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ffb-b2-QbO" secondAttribute="trailing" id="mP6-NI-Mbo"/>
                                     <constraint firstAttribute="trailing" secondItem="oKp-AP-IZQ" secondAttribute="trailing" id="u8Q-AD-PD7"/>
+                                    <constraint firstItem="oKp-AP-IZQ" firstAttribute="leading" secondItem="zEg-zR-Nzn" secondAttribute="leading" id="zdp-kR-JIC"/>
                                 </constraints>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <mask key="subviews">
-                                        <exclude reference="Ffb-b2-QbO"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="zdp-kR-JIC"/>
                                     </mask>
                                 </variation>
                             </stackView>
@@ -1454,6 +1399,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomConstraint" destination="BjA-bb-idD" id="KuL-Bg-kg7"/>
+                        <outlet property="bottomTexView" destination="zEg-zR-Nzn" id="4dR-CI-NyY"/>
                         <outlet property="ruleTextField" destination="oKp-AP-IZQ" id="Z8I-Y1-hgs"/>
                     </connections>
                 </viewController>

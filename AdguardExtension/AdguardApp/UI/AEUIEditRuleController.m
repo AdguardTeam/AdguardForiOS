@@ -21,6 +21,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIEditRuleController Constants
 /////////////////////////////////////////////////////////////////////
+NSString *AENbspCode = @"\u00A0";
 
 NSString *AERuleDocunebtationUrlString = @"http://adguard.com/filterrules.html";
 
@@ -48,6 +49,8 @@ NSString *AERuleDocunebtationUrlString = @"http://adguard.com/filterrules.html";
 
     _initialConstantOfBottomConstraint = self.bottomConstraint.constant;
     _done = NO;
+    
+    [self initBottomText];
     
     if (!self.rule) {
         self.rule = [ASDFilterRule new];
@@ -106,12 +109,6 @@ NSString *AERuleDocunebtationUrlString = @"http://adguard.com/filterrules.html";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)clickArticle:(id)sender {
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:AERuleDocunebtationUrlString]];
-}
-
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 /////////////////////////////////////////////////////////////////////
@@ -136,4 +133,39 @@ NSString *AERuleDocunebtationUrlString = @"http://adguard.com/filterrules.html";
         self.bottomConstraint.constant = _initialConstantOfBottomConstraint - offset;
     }];
 }
+
+- (void)initBottomText{
+
+    NSString *messageBegin = NSLocalizedString(@"You can learn more about filter rules syntax from [this article].", @"(AEUIEditRuleController) On screen of rule adding/editing. Text, that describes where user can find info about rule syntax. Where text in square brackets is the link text of the website with the decription.");
+    
+    NSString *linkText;
+    NSString *messageEnd;
+    NSArray *first = [messageBegin componentsSeparatedByString:@"["];
+    if (first.count == 2) {
+
+        NSArray *second = [first[1] componentsSeparatedByString:@"]"];
+        if (second.count == 2) {
+            
+            messageBegin = first[0];
+            linkText = [second[0] stringByReplacingOccurrencesOfString:@" "
+                                                            withString:AENbspCode];
+            messageEnd = second[1];
+        }
+    }
+    
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:messageBegin];
+    
+    if (linkText) {
+        
+        NSAttributedString *link = [[NSAttributedString alloc]
+                                    initWithString: linkText
+                                    attributes:@{NSLinkAttributeName: [NSURL URLWithString:AERuleDocunebtationUrlString]}];
+        [textString appendAttributedString:link];
+        [textString appendAttributedString:[[NSAttributedString alloc] initWithString:messageEnd]];
+    }
+
+    self.bottomTexView.attributedText = textString;
+    self.bottomTexView.textAlignment = NSTextAlignmentCenter;
+}
+
 @end
