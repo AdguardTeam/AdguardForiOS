@@ -182,6 +182,7 @@ static AESSupport *singletonSupport;
         [sb appendFormat:@"\r\n\r\nLocale: %@", [ADLocales lang]];
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
+        [sb appendFormat:@"\r\n\r\nOptimazed enabled: %@", ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
         NSArray *filters = [[[AEService singleton] antibanner] filters];
         for (ASDFilterMetadata *meta in filters)
