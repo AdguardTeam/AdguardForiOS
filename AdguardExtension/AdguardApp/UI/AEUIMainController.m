@@ -119,7 +119,7 @@
     SLComposeViewController *compose = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     if (compose) {
         
-        [compose setInitialText:NSLocalizedString(@"Adguard - Adblock for iOS:", @"(AEUIMainController) Share this app initial text on Twitter")];
+        [compose setInitialText:NSLocalizedString(@"I like Adguard for iOS - I don't see ads in Safari anymore.", @"(AEUIMainController) Share this app initial text on Twitter")];
         [compose addURL:[NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_STRING]]];
         [compose addImage:[UIImage imageNamed:@"share-logo"]];
         [self presentViewController:compose animated:YES completion:nil];
