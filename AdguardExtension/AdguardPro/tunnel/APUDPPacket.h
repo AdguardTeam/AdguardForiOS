@@ -16,30 +16,28 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import NetworkExtension;
+#import "APIPPacket.h"
+#include <sys/types.h>		/* uint16_t */
 
-#import "APVPNManager.h"
-
-/**
- Error domain for errors from tunnel provider.
+/*
+ * Udp protocol header.
+ * Per RFC 768, September, 1981.
  */
-extern NSString *APTunnelProviderErrorDomain;
+#pragma pack(push,1)
+struct udphdr {
+    uint16_t	uh_sport;		/* source port */
+    uint16_t	uh_dport;		/* destination port */
+    uint16_t	uh_ulen;		/* udp length */
+    uint16_t	uh_sum;			/* udp checksum */
+};
+#pragma pack(pop)
 
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
 
+@interface APUDPPacket : APIPPacket
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
+- (id)initWithAF:(NSNumber *)af;
 
-@interface PacketTunnelProvider : NEPacketTunnelProvider
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-
-/**
- Returns current selected VPN Mode
- */
-- (APVpnMode)vpnMode;
+@property NSString *srcPort;
+@property NSString *dstPort;
 
 @end

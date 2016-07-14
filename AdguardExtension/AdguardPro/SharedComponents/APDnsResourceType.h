@@ -16,30 +16,26 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import NetworkExtension;
 
-#import "APVPNManager.h"
-
-/**
- Error domain for errors from tunnel provider.
- */
-extern NSString *APTunnelProviderErrorDomain;
-
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
-
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
-
-@interface PacketTunnelProvider : NEPacketTunnelProvider
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
+#import <Foundation/Foundation.h>
 
 /**
- Returns current selected VPN Mode
+ Class for holding DNS resource type value. 
+ It main function is return name of the resource type as a description.
+ For example: intValue = 1 and [self description] returns @"A".
  */
-- (APVpnMode)vpnMode;
+@interface APDnsResourceType : NSObject
+
+/**
+ Returns object with apropiate value.
+ */
++ (APDnsResourceType *)type:(u_int16_t)value;
+
+@property (nonatomic) u_int16_t intValue;
+
+/**
+ Returns human readable description of the current resuorce type.
+ */
+- (NSString *)humanReadable;
 
 @end

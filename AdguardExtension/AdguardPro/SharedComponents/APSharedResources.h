@@ -17,34 +17,27 @@
 */
 #import <Foundation/Foundation.h>
 
+@class APDnsLogRecord;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - ACLExecuteBlockDelayed
+#pragma mark - APSharedResources Constants
+
 /////////////////////////////////////////////////////////////////////
+#pragma mark - APSharedResources
 
 /**
- *  Description of ACLExecuteBlockDelayed
+     (PRO) Class, which provides exchanging data between app and extension.
  */
-@interface ACLExecuteBlockDelayed  : NSObject{
-    
-    dispatch_block_t _block;
-    dispatch_queue_t _workQueue;
-    dispatch_source_t _updateTimer;
-    NSTimeInterval _interval;
-    NSTimeInterval _leeway;
-}
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Init and Class methods
-/////////////////////////////////////////////////////////////////////
-
--(id)initWithTimeout:(NSTimeInterval)interval leeway:(NSTimeInterval)leeway queue:(dispatch_queue_t)queue block:(dispatch_block_t)block;
+@interface APSharedResources : NSObject
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
-/////////////////////////////////////////////////////////////////////
 
-- (void)executeOnceAfterCalm;
-- (void)executeOnceForInterval;
++ (NSArray <APDnsLogRecord *> *)beginReadDnsLog;
++ (NSArray <APDnsLogRecord *> *)nextReadDnsLog;
+
++ (void)removeDnsLog;
+
++ (void)writeToDnsLogRecords:(NSArray <APDnsLogRecord *> *)logRecords;
 
 @end

@@ -16,30 +16,18 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import NetworkExtension;
+#import <Foundation/Foundation.h>
 
-#import "APVPNManager.h"
-
-/**
- Error domain for errors from tunnel provider.
- */
-extern NSString *APTunnelProviderErrorDomain;
-
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
-
+@interface APTDnsRequest : NSObject
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
-
-@interface PacketTunnelProvider : NEPacketTunnelProvider
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
+#pragma mark Init and Class methods
 
 /**
- Returns current selected VPN Mode
+ Creates object from request data.
+ If error occurs during of parsing data, returns nil.
  */
-- (APVpnMode)vpnMode;
+- (id)initWithData:(NSData *)requestData;
+
 
 @end

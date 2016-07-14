@@ -55,7 +55,7 @@ extern NSString *APVpnManagerParameterMode;
  Key of the parameter, 
  which contains DNS addresses for current mode of the vpn configuration.
  */
-extern NSString *APVpnManagerParameterDNSAddresses;
+extern NSString *APVpnManagerParameterIPv4DNSAddresses;
 
 /**
  Error domain for errors from vpn manager.
@@ -64,6 +64,7 @@ extern NSString *APVpnManagerErrorDomain;
 
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
+#define APVPN_MANAGER_ERROR_CONNECTION_HANDLER      300
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager

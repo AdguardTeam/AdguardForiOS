@@ -32,7 +32,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 
 NSString *APVpnManagerParameterMode = @"APVpnManagerParameterMode";
-NSString *APVpnManagerParameterDNSAddresses = @"APVpnManagerParameterDNSAddresses";
+NSString *APVpnManagerParameterIPv4DNSAddresses = @"APVpnManagerParameterIPv4DNSAddresses";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     NETunnelProviderProtocol *_protocolConfiguration;
     NSMutableArray *_observers;
     NSArray *_vpnModeDescription;
-    NSArray *_vpnModeDNSAddresses;
+    NSArray *_vpnModeIPv4DNSAddresses;
     
     BOOL        _enabled;
     
@@ -323,7 +323,7 @@ static APVPNManager *singletonVPNManager;
     protocol.serverAddress = [self modeDescription:vpnMode];
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterMode: @(vpnMode),
-                                       APVpnManagerParameterDNSAddresses: _vpnModeDNSAddresses[vpnMode]
+                                       APVpnManagerParameterIPv4DNSAddresses: _vpnModeIPv4DNSAddresses[vpnMode]
                                        };
     
     if (_manager) {
@@ -504,11 +504,11 @@ static APVPNManager *singletonVPNManager;
                             , NSLocalizedString(@"Stealth Mode", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Stealth Mode DNS")
                             , NSLocalizedString(@"Family Protection", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS")
                             ];
-    _vpnModeDNSAddresses = @[
+    _vpnModeIPv4DNSAddresses = @[
                              @[]
-                             , @[@"91.239.26.81"]
-                             , @[@"91.239.26.81"]
-                             , @[@"91.239.26.81"]
+                             , @[@"176.112.212.230"]
+                             , @[@"176.112.212.230"]
+                             , @[@"176.112.212.231"]
                              ];
 }
 

@@ -1,50 +1,51 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
-
+    Copyright © 2015-2016 Performix LLC. All rights reserved.
+ 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
+ 
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
+ 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
-#import <Foundation/Foundation.h>
+ */
 
+@import NetworkExtension;
+
+@class APTUdpProxySession, PacketTunnelProvider;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - ACLExecuteBlockDelayed
-/////////////////////////////////////////////////////////////////////
+#pragma mark - APTunnelConnectionsHandler
 
 /**
- *  Description of ACLExecuteBlockDelayed
+ Class controller for UDP sessions, which controls of the DNS traffic.
  */
-@interface ACLExecuteBlockDelayed  : NSObject{
-    
-    dispatch_block_t _block;
-    dispatch_queue_t _workQueue;
-    dispatch_source_t _updateTimer;
-    NSTimeInterval _interval;
-    NSTimeInterval _leeway;
-}
+@interface APTunnelConnectionsHandler : NSObject
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
-/////////////////////////////////////////////////////////////////////
 
--(id)initWithTimeout:(NSTimeInterval)interval leeway:(NSTimeInterval)leeway queue:(dispatch_queue_t)queue block:(dispatch_block_t)block;
+- (id)initWithProvider:(PacketTunnelProvider *)provider;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
-/////////////////////////////////////////////////////////////////////
 
-- (void)executeOnceAfterCalm;
-- (void)executeOnceForInterval;
+@property (weak, readonly) PacketTunnelProvider *provider;
+
+/**
+ Make the initial readPacketsWithCompletionHandler call.
+ */
+- (void)startHandlingPackets;
+
+/**
+ Removes session for endpont if it exists.
+ */
+- (void)removeSession:(APTUdpProxySession *)endpoint;
 
 @end
