@@ -152,6 +152,12 @@
 		655AAC9C1D37821200E316EA /* APDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC9A1D37821200E316EA /* APDnsLogRecord.m */; };
 		655AAC9D1D37821200E316EA /* APDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC9A1D37821200E316EA /* APDnsLogRecord.m */; };
 		655AAC9E1D379E9C00E316EA /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
+		655AACB01D3CD24B00E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		655AACB11D3CD24B00E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		655AACB21D3CD24B00E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		655AACB31D3CD24B00E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		655AACB61D3CD38000E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		655AACB71D3CD38000E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
 		655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
@@ -831,6 +837,12 @@
 		655AAC941D377B4600E316EA /* APSharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSharedResources.m; sourceTree = "<group>"; };
 		655AAC991D37821200E316EA /* APDnsLogRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsLogRecord.h; sourceTree = "<group>"; };
 		655AAC9A1D37821200E316EA /* APDnsLogRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsLogRecord.m; sourceTree = "<group>"; };
+		655AACAC1D3CD24B00E316EA /* ADBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBTable.h; sourceTree = "<group>"; };
+		655AACAD1D3CD24B00E316EA /* ADBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ADBTable.m; sourceTree = "<group>"; };
+		655AACAE1D3CD24B00E316EA /* ADBTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBTableRow.h; sourceTree = "<group>"; };
+		655AACAF1D3CD24B00E316EA /* ADBTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ADBTableRow.m; sourceTree = "<group>"; };
+		655AACB41D3CD38000E316EA /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		655AACB51D3CD38000E316EA /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655E94921BBEADD500286FBE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIPlayerViewController.h; sourceTree = "<group>"; };
 		655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIPlayerViewController.m; sourceTree = "<group>"; };
@@ -983,7 +995,7 @@
 		65EC9A8E1BB9824C00F53F3B /* ADProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADProductInfo.h; sourceTree = "<group>"; };
 		65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADProductInfo.m; sourceTree = "<group>"; };
 		65EC9A931BB9824C00F53F3B /* ASDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDatabase.h; sourceTree = "<group>"; };
-		65EC9A941BB9824C00F53F3B /* ASDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDatabase.m; sourceTree = "<group>"; };
+		65EC9A941BB9824C00F53F3B /* ASDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDatabase.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65EC9A9A1BB9824C00F53F3B /* ASDFilterObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDFilterObjects.h; sourceTree = "<group>"; };
 		65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDFilterObjects.m; sourceTree = "<group>"; };
 		65EC9ADB1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+InMemoryOnDiskIO.h"; sourceTree = "<group>"; };
@@ -1283,6 +1295,8 @@
 				655A01F21C6B7686000F00D7 /* NSString+Utils.m */,
 				655A01F51C6B7686000F00D7 /* NSURL+Utils.h */,
 				655A01F61C6B7686000F00D7 /* NSURL+Utils.m */,
+				655AACB41D3CD38000E316EA /* ACObject.h */,
+				655AACB51D3CD38000E316EA /* ACObject.m */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -1392,6 +1406,17 @@
 				655AAC9A1D37821200E316EA /* APDnsLogRecord.m */,
 			);
 			path = SharedComponents;
+			sourceTree = "<group>";
+		};
+		655AACAB1D3CD24B00E316EA /* ADBHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				655AACAC1D3CD24B00E316EA /* ADBTable.h */,
+				655AACAD1D3CD24B00E316EA /* ADBTable.m */,
+				655AACAE1D3CD24B00E316EA /* ADBTableRow.h */,
+				655AACAF1D3CD24B00E316EA /* ADBTableRow.m */,
+			);
+			path = ADBHelpers;
 			sourceTree = "<group>";
 		};
 		6578E3821BC5082000E2DFFD /* vendors */ = {
@@ -1575,6 +1600,7 @@
 				65EC9A881BB9824C00F53F3B /* ADomain */,
 				65EC9A921BB9824C00F53F3B /* ASDatabase */,
 				65EC9A991BB9824C00F53F3B /* ASDModels */,
+				655AACAB1D3CD24B00E316EA /* ADBHelpers */,
 				65EC9AD91BB9824C00F53F3B /* vendors */,
 			);
 			name = Libs;
@@ -2438,10 +2464,12 @@
 				658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */,
 				655AAC8B1D37780700E316EA /* APDnsRequest.m in Sources */,
 				653AE9FD1D084B6400AC81B4 /* DDFileLogger.m in Sources */,
+				655AACB31D3CD24B00E316EA /* ADBTableRow.m in Sources */,
 				653AEA061D084B6400AC81B4 /* NSURL+Utils.m in Sources */,
 				653AEA031D084B6400AC81B4 /* NSDate+Utils.m in Sources */,
 				653AE9F91D084B6400AC81B4 /* ACLWildcard.m in Sources */,
 				653AEA041D084B6400AC81B4 /* NSException+Utils.m in Sources */,
+				655AACB11D3CD24B00E316EA /* ADBTable.m in Sources */,
 				653AEA051D084B6400AC81B4 /* NSString+Utils.m in Sources */,
 				653AE9FC1D084B6400AC81B4 /* DDASLLogger.m in Sources */,
 				653AE9FF1D084B6400AC81B4 /* DDTTYLogger.m in Sources */,
@@ -2462,6 +2490,7 @@
 				653AE9F51D084B6400AC81B4 /* ACLFileLocker.m in Sources */,
 				659839491D182D6C005824ED /* APVPNManager.m in Sources */,
 				65B621141D2E4F8F0047248F /* APUDPPacket.m in Sources */,
+				655AACB71D3CD38000E316EA /* ACObject.m in Sources */,
 				653AEA021D084B6400AC81B4 /* DDMultiFormatter.m in Sources */,
 				653AE9F71D084B6400AC81B4 /* ACLJobController.m in Sources */,
 				65B621251D3139FF0047248F /* APTEndpoint.m in Sources */,
@@ -2492,6 +2521,7 @@
 				659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
+				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886621CF74DE9003ECD1C /* NSData+GZIP.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
@@ -2501,6 +2531,7 @@
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
 				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
+				655AACB21D3CD24B00E316EA /* ADBTableRow.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
 				6598866C1CF74DE9003ECD1C /* AEUILoaderSegue.m in Sources */,
@@ -2508,6 +2539,7 @@
 				655AAC8D1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				6598866E1CF74DE9003ECD1C /* NSURL+Utils.m in Sources */,
 				6598866F1CF74DE9003ECD1C /* StaticDataTableViewController.m in Sources */,
+				655AACB01D3CD24B00E316EA /* ADBTable.m in Sources */,
 				659886701CF74DE9003ECD1C /* AEUISubscriptionLoaderController.m in Sources */,
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,

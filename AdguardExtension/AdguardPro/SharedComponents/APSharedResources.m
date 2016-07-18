@@ -16,11 +16,28 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  #import "AESharedResources.h"
 */
+
 #import "APSharedResources.h"
 #import "AESharedResources.h"
 #import "ACommons/ACLang.h"
+#import "ADBHelpers/ADBTable.h"
+#import "ADBHelpers/ADBTableRow.h"
 
-#define DNS_LOG_RECORD_FILE         @"dns-log-records.dat"
+#define DNS_LOG_RECORD_FILE         @"dns-log-records.db"
+#define LOG_RECORDS_TTL             12*60*60 // 12 hours
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - APDnsLogTable
+
+@interface APDnsLogTable : ADBTableRow
+
+@property (nonatomic) NSDate *timeStamp;
+@property (nonatomic) APDnsLogRecord *record;
+
+@end
+
+@implementation APDnsLogTable
+@end
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -31,8 +48,8 @@
 #pragma mark Initialize
 
 static NSString *_dnsLogRecordsPath;
-static NSFileHandle *_readDnsLogHandler;
-static NSFileHandle *_writeDnsLogHandler;
+static FMDatabaseQueue *_readDnsLogHandler;
+static FMDatabaseQueue *_writeDnsLogHandler;
 
 + (void)initialize{
     
@@ -45,99 +62,58 @@ static NSFileHandle *_writeDnsLogHandler;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Class methods
 
-+ (NSArray <APDnsLogRecord *> *)beginReadDnsLog{
++ (NSArray <APDnsLogRecord *> *)readDnsLog{
 
-    [_readDnsLogHandler seekToFileOffset:0];
-    return [self nextReadDnsLog];
-}
+    [self initReadDnsLogHandler];
 
-+ (NSArray<APDnsLogRecord *> *)nextReadDnsLog {
-
-    NSMutableArray *result = [NSMutableArray new];
-
-    NSData *data;
-    ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:_dnsLogRecordsPath];
-    if ([locker lock]) {
-
-        data = [_readDnsLogHandler readDataToEndOfFile];
-
-        [locker unlock];
+    __block NSArray *result;
+    [_readDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        
+        ADBTable *table = [[ADBTable alloc] initWithRowClass:[APDnsLogTable class] db:db];
+        
+        result = [table selectWithKeys:nil inRowObject:nil];
+    }];
+    
+    if (result.count) {
+        
+        return [result valueForKey:@"record"];
     }
-
-    if (data.length) {
-
-        NSInteger size = data.length;
-        u_int16_t len = 1;
-        Byte *buf = (Byte *)data.bytes;
-
-        while (size > 0 && len) {
-
-            len = *(u_int16_t *)buf;
-            if (len > 0) {
-                buf += 2;
-                size -= 2;
-
-                if (len > size) {
-                    //error
-                    len = 0;
-                    break;
-                }
-                NSData *recordData = [NSData dataWithBytes:buf length:len];
-                if (recordData) {
-                    buf += len;
-                    size -= len;
-
-                    APDnsLogRecord *record = [NSKeyedUnarchiver unarchiveObjectWithData:recordData];
-                    if (record) {
-                        [result addObject:record];
-                    }
-                }
-            }
-        }
-    }
-
-    return result;
+    
+    return nil;
 }
 
 + (void)removeDnsLog{
     
     [self initWriteDnsLogHandler];
-    
-    [_writeDnsLogHandler truncateFileAtOffset:0];
+
+    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+       
+        ADBTable *table = [[ADBTable alloc] initWithRowClass:[APDnsLogTable class] db:db];
+        
+        [table deleteWithKeys:nil inRowObject:nil];
+    }];
 }
 
 + (void)writeToDnsLogRecords:(NSArray<APDnsLogRecord *> *)logRecords {
 
     [self initWriteDnsLogHandler];
 
-    NSMutableData *dataForWrite = [NSMutableData new];
-
-    u_int16_t len;
-    for (APDnsLogRecord *item in logRecords) {
-
-        NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:item];
-        if (archive) {
-
-            len = (u_int16_t)archive.length;
-            if (len) {
-
-                [dataForWrite appendBytes:&len length:2];
-                [dataForWrite appendData:archive];
-            }
-        }
-    }
-
-    if (dataForWrite.length) {
+    [self purgeDnsLog];
+    
+    APDnsLogTable *row = [APDnsLogTable new];
+    
+    row.timeStamp = [NSDate date];
+    
+    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
         
-        ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:_dnsLogRecordsPath];
-        if ([locker lock]) {
-
-            [_writeDnsLogHandler writeData:dataForWrite];
-            [_writeDnsLogHandler synchronizeFile];
-
-            [locker unlock];
+        ADBTable *table = [[ADBTable alloc] initWithRowClass:[row class] db:db];
+        
+        for (APDnsLogRecord *item in logRecords) {
+            
+            row.record = item;
+            [table insertOrReplace:NO fromRowObject:row];
         }
-    }
+    }];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -147,9 +123,14 @@ static NSFileHandle *_writeDnsLogHandler;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _writeDnsLogHandler = [NSFileHandle fileHandleForWritingAtPath:_dnsLogRecordsPath];
-        if (_writeDnsLogHandler) {
-            [_writeDnsLogHandler seekToEndOfFile];
+        
+        _writeDnsLogHandler = [FMDatabaseQueue databaseQueueWithPath:_dnsLogRecordsPath flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)];
+        if (_writeDnsLogHandler){
+            
+            [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+                
+                [self createDnsLogTable:db];
+            }];
         }
     });
 }
@@ -158,9 +139,24 @@ static NSFileHandle *_writeDnsLogHandler;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _readDnsLogHandler = [NSFileHandle fileHandleForReadingAtPath:_dnsLogRecordsPath];
+        _readDnsLogHandler = [FMDatabaseQueue databaseQueueWithPath:_dnsLogRecordsPath flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_CREATE)];
     });
 }
 
-@end
++ (void)createDnsLogTable:(FMDatabase *)db {
 
+    BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXIST APDnsLogTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, record BLOB)"];
+    if (result) {
+        result = [db executeUpdate:@"CREATE INDEX IF NOT EXIST mainIndex ON APDnsLogTable (timeStamp)"];
+    }
+}
+
++ (void)purgeDnsLog{
+
+    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+
+        [db executeUpdate:@"DELETE FROM APDnsLogTable WHERE timeStamp < datetime(?)", [NSDate dateWithTimeIntervalSinceNow:-(LOG_RECORDS_TTL)]];
+    }];
+}
+
+@end

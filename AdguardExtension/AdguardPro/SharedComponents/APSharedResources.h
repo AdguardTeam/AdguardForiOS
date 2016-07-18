@@ -33,8 +33,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-+ (NSArray <APDnsLogRecord *> *)beginReadDnsLog;
-+ (NSArray <APDnsLogRecord *> *)nextReadDnsLog;
++ (NSArray <APDnsLogRecord *> *)readDnsLog;
 
 + (void)removeDnsLog;
 

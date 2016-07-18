@@ -60,6 +60,13 @@
 		651628611B85ED0E003EB113 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657247D91B8318DE008430CD /* libz.dylib */; };
 		651628621B85ED26003EB113 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247F81B8338B1008430CD /* ASDFilterObjects.m */; };
 		651628631B85ED37003EB113 /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247FC1B8338BD008430CD /* ASDatabase.m */; };
+		655AACB91D3CD5A400E316EA /* ADBHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB81D3CD5A400E316EA /* ADBHelperTests.m */; };
+		655AACBF1D3CD67500E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBC1D3CD67500E316EA /* ADBTable.m */; };
+		655AACC01D3CD67500E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBE1D3CD67500E316EA /* ADBTableRow.m */; };
+		655AACC11D3CD69C00E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBC1D3CD67500E316EA /* ADBTable.m */; };
+		655AACC21D3CD69C00E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBE1D3CD67500E316EA /* ADBTableRow.m */; };
+		655AACC51D3CD6D200E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
+		655AACC61D3CD6D200E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
 		657247C51B831772008430CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 657247781B831772008430CD /* README.txt */; };
 		657247DA1B8318DF008430CD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657247D91B8318DE008430CD /* libz.dylib */; };
 		657247DF1B833516008430CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657247DE1B833516008430CD /* Foundation.framework */; };
@@ -317,6 +324,13 @@
 		6516286A1B8607DB003EB113 /* update0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.001.sql; sourceTree = "<group>"; };
 		6516286B1B8607DB003EB113 /* update0.002.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.002.sql; sourceTree = "<group>"; };
 		6516286C1B860818003EB113 /* schema0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.001.sql; sourceTree = "<group>"; };
+		655AACB81D3CD5A400E316EA /* ADBHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBHelperTests.m; sourceTree = "<group>"; };
+		655AACBB1D3CD67500E316EA /* ADBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBTable.h; sourceTree = "<group>"; };
+		655AACBC1D3CD67500E316EA /* ADBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBTable.m; sourceTree = "<group>"; };
+		655AACBD1D3CD67500E316EA /* ADBTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBTableRow.h; sourceTree = "<group>"; };
+		655AACBE1D3CD67500E316EA /* ADBTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBTableRow.m; sourceTree = "<group>"; };
+		655AACC31D3CD6D200E316EA /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
+		655AACC41D3CD6D200E316EA /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		657246F81B8314AE008430CD /* ACommonsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACommonsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		657246FC1B8314AE008430CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		657247031B831570008430CD /* ACFFileUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACFFileUtilsTest.m; sourceTree = "<group>"; };
@@ -548,6 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				6516280A1B85DEB0003EB113 /* ASDatabaseTests.m */,
+				655AACB81D3CD5A400E316EA /* ADBHelperTests.m */,
 				651627C11B85DC8D003EB113 /* Supporting Files */,
 			);
 			name = ASDatabaseTests;
@@ -585,6 +600,18 @@
 				6516286B1B8607DB003EB113 /* update0.002.sql */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		655AACBA1D3CD67500E316EA /* ADBHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				655AACBB1D3CD67500E316EA /* ADBTable.h */,
+				655AACBC1D3CD67500E316EA /* ADBTable.m */,
+				655AACBD1D3CD67500E316EA /* ADBTableRow.h */,
+				655AACBE1D3CD67500E316EA /* ADBTableRow.m */,
+			);
+			name = ADBHelpers;
+			path = ../../ADBHelpers;
 			sourceTree = "<group>";
 		};
 		657246ED1B83144E008430CD = {
@@ -660,6 +687,7 @@
 				657247ED1B83389D008430CD /* ABackEndClients */,
 				657247FA1B8338BD008430CD /* ASDatabase */,
 				657247F61B8338B1008430CD /* ASDModels */,
+				655AACBA1D3CD67500E316EA /* ADBHelpers */,
 				657248041B833984008430CD /* vendors */,
 			);
 			name = Sources;
@@ -728,6 +756,8 @@
 				657247561B831772008430CD /* ACLLogger.m */,
 				6572475F1B831772008430CD /* ACLWildcard.h */,
 				657247601B831772008430CD /* ACLWildcard.m */,
+				655AACC31D3CD6D200E316EA /* ACObject.h */,
+				655AACC41D3CD6D200E316EA /* ACObject.m */,
 				657247611B831772008430CD /* Logger */,
 				6572477F1B831772008430CD /* NSDate+Utils.h */,
 				657247801B831772008430CD /* NSDate+Utils.m */,
@@ -1175,6 +1205,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655AACC11D3CD69C00E316EA /* ADBTable.m in Sources */,
+				655AACC61D3CD6D200E316EA /* ACObject.m in Sources */,
 				659492EA1C6CCAA700E501BA /* ADLocales.m in Sources */,
 				659492EB1C6CCAA700E501BA /* ADLocations.m in Sources */,
 				659492EC1C6CCAA700E501BA /* ADProductInfo.m in Sources */,
@@ -1191,6 +1223,7 @@
 				659492FF1C6CCAA700E501BA /* DDAbstractDatabaseLogger.m in Sources */,
 				659493001C6CCAA700E501BA /* DDASLLogger.m in Sources */,
 				659493011C6CCAA700E501BA /* DDFileLogger.m in Sources */,
+				655AACC21D3CD69C00E316EA /* ADBTableRow.m in Sources */,
 				659493021C6CCAA700E501BA /* DDLog.m in Sources */,
 				659493031C6CCAA700E501BA /* DDTTYLogger.m in Sources */,
 				659493041C6CCAA700E501BA /* DDContextFilterLogFormatter.m in Sources */,
@@ -1277,6 +1310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655AACC51D3CD6D200E316EA /* ACObject.m in Sources */,
 				659492AE1C6CCA4000E501BA /* ASDatabaseTests.m in Sources */,
 				659492741C6CCA2F00E501BA /* ADLocales.m in Sources */,
 				659492751C6CCA2F00E501BA /* ADLocations.m in Sources */,
@@ -1290,18 +1324,21 @@
 				659492851C6CCA2F00E501BA /* ACLJobController.m in Sources */,
 				659492861C6CCA2F00E501BA /* ACLLogger.m in Sources */,
 				659492871C6CCA2F00E501BA /* ACLWildcard.m in Sources */,
+				655AACB91D3CD5A400E316EA /* ADBHelperTests.m in Sources */,
 				659492881C6CCA2F00E501BA /* CLIColor.m in Sources */,
 				659492891C6CCA2F00E501BA /* DDAbstractDatabaseLogger.m in Sources */,
 				6594928A1C6CCA2F00E501BA /* DDASLLogger.m in Sources */,
 				6594928B1C6CCA2F00E501BA /* DDFileLogger.m in Sources */,
 				6594928C1C6CCA2F00E501BA /* DDLog.m in Sources */,
 				6594928D1C6CCA2F00E501BA /* DDTTYLogger.m in Sources */,
+				655AACBF1D3CD67500E316EA /* ADBTable.m in Sources */,
 				6594928E1C6CCA2F00E501BA /* DDContextFilterLogFormatter.m in Sources */,
 				6594928F1C6CCA2F00E501BA /* DDDispatchQueueLogFormatter.m in Sources */,
 				659492901C6CCA2F00E501BA /* DDMultiFormatter.m in Sources */,
 				659492911C6CCA2F00E501BA /* NSDate+Utils.m in Sources */,
 				659492921C6CCA2F00E501BA /* NSException+Utils.m in Sources */,
 				659492931C6CCA2F00E501BA /* NSString+Utils.m in Sources */,
+				655AACC01D3CD67500E316EA /* ADBTableRow.m in Sources */,
 				659492941C6CCA2F00E501BA /* NSURL+Utils.m in Sources */,
 				659492951C6CCA2F00E501BA /* ACNNetworking.m in Sources */,
 				659492971C6CCA2F00E501BA /* ACNHttpUtils.m in Sources */,
