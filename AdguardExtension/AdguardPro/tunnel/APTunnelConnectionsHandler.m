@@ -28,12 +28,19 @@
 #import "APDnsRequest.h"
 #import "APDnsDatagram.h"
 
+#define APT_DNS_LOG_MAX_COUNT           5000
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
 
 @implementation APTunnelConnectionsHandler {
 
     NSMutableSet<APTUdpProxySession *> *_sessions;
+    
+    BOOL _loggingEnabled;
+    OSSpinLock _loggingLock;
+    NSMutableArray <APDnsLogRecord *> *_loggingCache;
+
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -50,6 +57,8 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
+        _loggingLock = OS_SPINLOCK_INIT;
+        _loggingEnabled = NO;
     }
     return self;
 }
@@ -60,17 +69,78 @@
 - (void)startHandlingPackets {
     [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
 
-      [self handlePackets:packets protocols:protocols];
+        [self handlePackets:packets protocols:protocols];
     }];
 }
 
-- (void)removeSession:(APTUdpProxySession *)session{
-    
-    @synchronized (self) {
-        
+- (void)removeSession:(APTUdpProxySession *)session {
+
+    @synchronized(self) {
+
         [_sessions removeObject:session];
     }
 }
+
+- (void)writeToDnsActivityLog:(NSArray<APDnsLogRecord *> *)records {
+
+    if (_loggingEnabled && records.count) {
+
+        OSSpinLockLock(&_loggingLock);
+
+        NSInteger count = records.count;
+        if (count >= APT_DNS_LOG_MAX_COUNT) {
+            [_loggingCache setArray:[records subarrayWithRange:NSMakeRange((count - APT_DNS_LOG_MAX_COUNT), APT_DNS_LOG_MAX_COUNT)]];
+        } else {
+            count = count - APT_DNS_LOG_MAX_COUNT + _loggingCache.count;
+            if (count > 0) {
+                [_loggingCache removeObjectsInRange:NSMakeRange(0, count)];
+            }
+            [_loggingCache addObjectsFromArray:records];
+        }
+        OSSpinLockUnlock(&_loggingLock);
+    }
+}
+
+- (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
+
+    if (enabled != _loggingEnabled) {
+
+        OSSpinLockLock(&_loggingLock);
+
+        if (enabled) {
+
+            if (_loggingCache == nil) {
+                _loggingCache = [NSMutableArray new];
+            }
+        }
+
+        _loggingEnabled = enabled;
+
+        OSSpinLockUnlock(&_loggingLock);
+    }
+}
+
+- (void)clearDnsActivityLog {
+
+    OSSpinLockLock(&_loggingLock);
+
+    [_loggingCache removeAllObjects];
+
+    OSSpinLockUnlock(&_loggingLock);
+}
+
+- (NSArray <APDnsLogRecord *> *)dnsActivityLogRecords{
+    
+    NSArray <APDnsLogRecord *> *result;
+    OSSpinLockLock(&_loggingLock);
+    
+    result = [_loggingCache copy];
+    
+    OSSpinLockUnlock(&_loggingLock);
+    
+    return (result ?: @[]);
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - Helper Methods
 
@@ -144,7 +214,7 @@
               session = key;
               if ([session createSession]) {
                   
-                  [session setLoggingEnabled:YES];
+                  [session setLoggingEnabled:_loggingEnabled];
                   [_sessions addObject:session];
               }
               else

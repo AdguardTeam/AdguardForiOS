@@ -18,6 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class  APDnsLogRecord;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
 
@@ -103,6 +105,11 @@ extern NSString *APVpnManagerErrorDomain;
 @property (readonly) NSError *lastError;
 
 /**
+ Defines, turned on/off logging of the DNS requests. 
+ */
+@property BOOL dnsRequestsLogging;
+
+/**
     Returns localized description of the configuration mode.
     
     @param vpnMode Mode of the vpn configuration.
@@ -118,5 +125,18 @@ extern NSString *APVpnManagerErrorDomain;
  Sets mode of the vpn configuration.
  */
 - (void)setMode:(APVpnMode)vpnMode;
+
+/**
+ Sends command to network extension, that it will reset DNS Activity Log.
+ 
+ @return Returns YES on success. 
+ */
+- (BOOL)clearDnsRequestsLog;
+
+/**
+ Obtains DNS requests logging records,
+ and calls `completionBlock` with appropriate parameter.
+ */
+- (void)obtainDnsLogRecords:(void (^)(NSArray <APDnsLogRecord *> *records))completionBlock;
 
 @end

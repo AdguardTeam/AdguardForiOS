@@ -27,9 +27,16 @@
 
     self = [super init];
     if (self) {
-     
+        u_int16_t type = ns_rr_type(rr);
         _name = [NSString stringWithUTF8String:ns_rr_name(rr)];
-        _type = [APDnsResourceType type:ns_rr_type(rr)];
+        _type = [APDnsResourceType type:type];
+        
+        if (type == ns_t_a || type == ns_t_aaaa || type == ns_t_a6) {
+            _addressRequest = YES;
+        }
+        else{
+            _addressRequest = NO;
+        }
 
     }
     
@@ -42,11 +49,14 @@
     if (self) {
         
         _name = [aDecoder decodeObjectForKey:@"name"];
-        NSNumber *type = [aDecoder decodeObjectForKey:@"type"];
-        if (!type) {
-            type = @(0);
+        NSNumber *val = [aDecoder decodeObjectForKey:@"type"];
+        if (!val) {
+            val = @(0);
         }
-        _type = [APDnsResourceType type:[type intValue]];
+        _type = [APDnsResourceType type:[val intValue]];
+        
+        val = [aDecoder decodeObjectForKey:@"addressRequest"];
+        _addressRequest = [val boolValue];
     }
     return self;
 }
@@ -55,6 +65,7 @@
 
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:@(self.type.intValue) forKey:@"type"];
+    [aCoder encodeObject:@(self.addressRequest) forKey:@"addressRequest"];
 }
 
 - (NSString *)description{

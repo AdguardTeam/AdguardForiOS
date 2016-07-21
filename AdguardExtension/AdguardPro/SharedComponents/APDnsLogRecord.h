@@ -56,8 +56,6 @@
 /**
  Mode of the VPN connection (see type APVpnMode in APVPNManager.h)
  */
-
-
 @property (readonly, nonatomic) NSNumber *vpnMode;
 /**
  DNS request.
@@ -67,5 +65,9 @@
  DNS Response.
  */
 @property (nonatomic) NSArray <APDnsResponse *> *responses;
+/**
+ Returns DNS response, which will be used for presentation.
+ */
+@property (nonatomic, readonly) APDnsResponse *preferredResponse;
 
 @end

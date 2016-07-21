@@ -174,12 +174,12 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
 
         // Fitting size of the filter name
-        return [self heightForCell:self.nameCell];
+        return [self.nameCell fitHeight];
     }
     else if (indexPath.section == 2 && indexPath.row == 0){
         
         // Fitting size of the filter description
-        return [self heightForCell:self.descriptionCell];
+        return [self.descriptionCell fitHeight];
     }
     return UITableViewAutomaticDimension;
 }
@@ -200,16 +200,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////
-
-- (CGFloat)heightForCell:(AEUILongLabelViewCell *)longTextCell {
-
-    [longTextCell setNeedsLayout];
-    [longTextCell layoutIfNeeded];
-
-    CGSize size = [longTextCell.contentView
-        systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height + 1.0f; // Add 1.0f for the cell separator height
-}
 
 - (void)reloadJSON:(UISwitch *)sender filterMeta:(ASDFilterMetadata *)meta{
     

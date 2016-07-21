@@ -29,4 +29,11 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) APDnsResourceType *type;
 
+// Special meening
+
+/**
+ Returns YES if request type is 'A' or 'AAAA', response contains IP Address.
+ */
+@property (nonatomic, readonly) BOOL addressRequest;
+
 @end

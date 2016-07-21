@@ -21,7 +21,7 @@
 #import <NetworkExtension/NetworkExtension.h>
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
-#import "AESharedResources.h"
+#import "APSharedResources.h"
 #import "AppDelegate.h"
 #import "ACommons/ACNetwork.h"
 
@@ -56,6 +56,8 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     NSNumber    *_delayedSetMode;
     
     NSError     *_standartError;
+    
+    BOOL _dnsRequestsLogging;
 }
 
 static APVPNManager *singletonVPNManager;
@@ -108,6 +110,8 @@ static APVPNManager *singletonVPNManager;
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
+        _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
+        
         [self loadConfiguration];
     }
     
@@ -154,24 +158,123 @@ static APVPNManager *singletonVPNManager;
     [_busyLock unlock];
 }
 
-- (void)setMode:(APVpnMode)vpnMode{
-    
+- (void)setMode:(APVpnMode)vpnMode {
+
     _lastError = nil;
-    
+
     [_busyLock lock];
-    
+
     if (_busy) {
-        
+
         _delayedSetMode = @(vpnMode);
-    }
-    else{
+    } else {
         dispatch_async(workingQueue, ^{
-            
+
             [self internalSetMode:vpnMode];
         });
     }
-    
+
     [_busyLock unlock];
+}
+
+- (BOOL)dnsRequestsLogging {
+
+    return _dnsRequestsLogging;
+}
+
+- (void)setDnsRequestsLogging:(BOOL)dnsRequestsLogging {
+
+    if (dnsRequestsLogging != _dnsRequestsLogging) {
+
+        _lastError = nil;
+        if (_manager.connection) {
+
+            NSData *message;
+            if (dnsRequestsLogging) {
+                message = [APMDnsLoggingEnabled dataUsingEncoding:NSUTF8StringEncoding];
+            } else {
+                message = [APMDnsLoggingDisabled dataUsingEncoding:NSUTF8StringEncoding];
+            }
+
+            NSError *err = nil;
+            [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
+            if (err) {
+
+                DDLogError(@"(APVPNManager) Can't set logging DNS requests to %@: %@, %ld, %@", (dnsRequestsLogging ? @"YES" : @"NO"), err.domain, err.code, err.localizedDescription);
+                _lastError = _standartError;
+            }
+
+            _dnsRequestsLogging = dnsRequestsLogging;
+            [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
+            return;
+        }
+        else {
+            
+            DDLogError(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
+            _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+        }
+    }
+}
+
+- (BOOL)clearDnsRequestsLog {
+
+    _lastError = nil;
+    
+    if (_manager.connection) {
+
+        NSData *message = [APMDnsLoggingClearLog dataUsingEncoding:NSUTF8StringEncoding];
+
+        NSError *err = nil;
+        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
+        if (err) {
+
+            DDLogError(@"(APVPNManager) Can't clear log of the DNS requests: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            _lastError = _standartError;
+        }
+        else
+            return  YES;
+    }
+    else {
+        
+        DDLogError(@"(APVPNManager) Can't clear log of the DNS requests: VPN session connection is nil");
+        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+    }
+    
+    return NO;
+}
+
+- (void)obtainDnsLogRecords:(void (^)(NSArray<APDnsLogRecord *> *records))completionBlock {
+
+    _lastError = nil;
+    if (_manager.connection) {
+
+        NSData *message = [APMDnsLoggingGiveRecords dataUsingEncoding:NSUTF8StringEncoding];
+
+        NSError *err = nil;
+        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:^(NSData *_Nullable responseData) {
+
+            if (responseData.length) {
+
+                NSArray<APDnsLogRecord *> *records = [NSKeyedUnarchiver unarchiveObjectWithData:responseData];
+                completionBlock(records);
+                return;
+            }
+
+            completionBlock(nil);
+        }];
+
+        if (err) {
+
+            DDLogError(@"(APVPNManager) Can't obtain log records of the DNS requests: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            _lastError = _standartError;
+            return;
+        }
+    }
+    else {
+        
+        DDLogError(@"(APVPNManager) Can't obtain log records of the DNS requests: VPN session connection is nil");
+        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////

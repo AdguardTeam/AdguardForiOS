@@ -21,7 +21,6 @@
 #import "APDnsLogRecord.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
-#import "APSharedResources.h"
 #import "APTUdpProxySession.h"
 #import "APTunnelConnectionsHandler.h"
 #import "APUDPPacket.h"
@@ -119,6 +118,9 @@
     locLogTrace();
 
     [self setSession:nil];
+    if (_workingQueue) {
+        dispatch_resume(_workingQueue);
+    }
     _workingQueue = nil;
 }
 
@@ -235,24 +237,27 @@
 
         locLogVerboseTrace(@"newSession");
 
+        __weak __typeof__(self) wSelf = self;
+        
         // crete timeout timer
         _timeoutExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:_workingQueue block:^{
 
-            [self saveLogRecord:YES];
-            [self close];
+            __typeof__(self) sSelf = wSelf;
+            [sSelf saveLogRecord:YES];
+            [sSelf close];
         }];
 
         // crete save log timer
         _saveLogExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:_workingQueue block:^{
             
-            [self saveLogRecord:NO];
+            __typeof__(self) sSelf = wSelf;
+            [sSelf saveLogRecord:NO];
         }];
         
         _udpSession = session;
         [_udpSession addObserver:self forKeyPath:@"state" options:0 context:NULL];
         [_udpSession addObserver:self forKeyPath:@"hasBetterPath" options:0 context:NULL];
 
-        __typeof__(self) __weak wSelf = self;
         // block for reading data from remote endpoint
         [_udpSession setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
 
@@ -411,6 +416,13 @@
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         if (datagram.isRequest) {
 
+            NSMutableString *sb = [NSMutableString new];
+            for (APDnsRequest *item in datagram.requests) {
+                [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
+            }
+            
+            DDLogInfo(@"DNS Request (ID:%@) srcPort: %@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
+            
             APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
 
             record.requests = datagram.requests;
@@ -427,6 +439,13 @@
         
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         if (datagram.isResponse) {
+            
+            NSMutableString *sb = [NSMutableString new];
+            for (APDnsResponse *item in datagram.responses) {
+                [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
+            }
+            
+            DDLogInfo(@"DNS Response (ID:%@) srcPort: %@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
             
             APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
             
@@ -445,7 +464,7 @@
 
         if (flush) {
 
-            [APSharedResources writeToDnsLogRecords:_dnsRecords];
+            [self.delegate writeToDnsActivityLog:_dnsRecords];
             [_dnsRecords removeAllObjects];
             [_dnsRecordsSet removeAllObjects];
         } else {
@@ -465,9 +484,8 @@
 
             if (records.count) {
 
-                [_dnsRecords removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, records.count)]];
-
-                [APSharedResources writeToDnsLogRecords:_dnsRecords];
+                [_dnsRecords removeObjectsInRange:NSMakeRange(0, records.count)];
+                [self.delegate writeToDnsActivityLog:records];
             }
         }
     }

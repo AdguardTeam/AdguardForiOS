@@ -43,8 +43,12 @@
     self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
     self.stealthDnsCell.textLabel.text = [manager modeDescription:APVpnModeStealthDNS];
     self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
- 
+    
     [self updateStatuses];
+    
+    [self.logSwitch setOn:manager.dnsRequestsLogging];
+
+    [self updateLogStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,6 +83,17 @@
     
     BOOL enabled = [(UISwitch *)sender isOn];
     [[APVPNManager singleton] setEnabled:enabled];
+}
+
+- (IBAction)toggleLogStatus:(id)sender {
+    
+    APVPNManager *manager = [APVPNManager singleton];
+    manager.dnsRequestsLogging = self.logSwitch.isOn;
+    if (manager.lastError) {
+        
+        [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    }
+    [self updateLogStatus];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -193,6 +208,8 @@
             
         case APVpnConnectionStatusReconnecting:
             self.statusSwitch.on = YES;
+
+            self.logSwitch.enabled = YES;
             
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
@@ -202,11 +219,17 @@
         case APVpnConnectionStatusConnected:
             self.statusLabel.text = NSLocalizedString(@"On",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is On.");
             self.statusSwitch.on = YES;
+            
+            self.logSwitch.enabled = YES;
             break;
             
         default:
             self.statusLabel.text = NSLocalizedString(@"Off",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Off.");
             self.statusSwitch.on = NO;
+            
+            [self.logSwitch setOn:NO animated:YES];
+            self.logSwitch.enabled = NO;
+            [self toggleLogStatus:nil];
             break;
     }
 
@@ -220,6 +243,14 @@
                                              @"title. On error.")
                                  message:manager.lastError.localizedDescription];
     }
+}
+
+- (void)updateLogStatus{
+    
+    BOOL logEnabled = [[APVPNManager singleton] dnsRequestsLogging];
+    self.dnsRequestsCell.textLabel.enabled
+    = self.dnsRequestsCell.userInteractionEnabled
+    = logEnabled;
 }
 
 @end

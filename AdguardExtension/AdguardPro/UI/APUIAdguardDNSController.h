@@ -37,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *defaultDnsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *stealthDnsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *familyDnsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
+@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
@@ -44,6 +46,8 @@
 
 - (IBAction)clickChooseServer:(id)sender;
 - (IBAction)toggleSwitchStatus:(id)sender;
+- (IBAction)toggleLogStatus:(id)sender;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

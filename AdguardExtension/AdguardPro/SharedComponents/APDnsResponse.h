@@ -29,6 +29,10 @@
 // Special meening
 
 /**
+ Returns YES if response type is 'A' or 'AAAA', response contains IP Address.
+ */
+@property (nonatomic, readonly) BOOL addressResponse;
+/**
  Returns YES if response type is 'A' or 'AAAA'
  and response value is equal localhost IP addess  (127.0.0.1 or ::1)
  */

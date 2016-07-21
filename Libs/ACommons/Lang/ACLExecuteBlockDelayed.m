@@ -44,6 +44,8 @@
 - (void)dealloc{
     
     [self stopUpdateTimer];
+    _workQueue = nil;
+    _block = nil;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -55,12 +57,19 @@
     if (!_updateTimer){
         
         _updateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _workQueue);
-        
+
+        __weak __typeof__(self) wSelf = self;
+
         dispatch_source_set_event_handler(_updateTimer, ^{
+        
+            __typeof__(self) sSelf = wSelf;
+
+            if (sSelf == nil) {
+                return;
+            }
             
-            [self stopUpdateTimer];
-            
-            _block();
+            [sSelf stopUpdateTimer];
+            sSelf->_block();
         });
         
         dispatch_resume(_updateTimer);
@@ -78,11 +87,17 @@
         
         _updateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _workQueue);
         
+        __weak __typeof__(self) wSelf = self;
         dispatch_source_set_event_handler(_updateTimer, ^{
             
-            [self stopUpdateTimer];
+            __typeof__(self) sSelf = wSelf;
             
-            _block();
+            if (sSelf == nil) {
+                return;
+            }
+            
+            [sSelf stopUpdateTimer];
+            sSelf->_block();
         });
         
         dispatch_resume(_updateTimer);

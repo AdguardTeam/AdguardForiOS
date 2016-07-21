@@ -16,11 +16,22 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-
-@class APDnsLogRecord;
+#import "AESharedResources.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources Constants
+
+/**
+ User Defaults key that define, create log of the DNS requests or not.
+ */
+extern NSString *APDefaultsDnsLoggingEnabled;
+
+
+// Commands for controlling "DNS activity log", between tunnel provider extension and host application.
+extern NSString *APMDnsLoggingEnabled;
+extern NSString *APMDnsLoggingDisabled;
+extern NSString *APMDnsLoggingGiveRecords;
+extern NSString *APMDnsLoggingClearLog;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -32,11 +43,5 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
-
-+ (NSArray <APDnsLogRecord *> *)readDnsLog;
-
-+ (void)removeDnsLog;
-
-+ (void)writeToDnsLogRecords:(NSArray <APDnsLogRecord *> *)logRecords;
 
 @end

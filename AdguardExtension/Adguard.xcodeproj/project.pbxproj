@@ -145,19 +145,16 @@
 		655AAC901D37780700E316EA /* APDnsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC861D37780700E316EA /* APDnsResponse.m */; };
 		655AAC911D37780700E316EA /* APDnsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC861D37780700E316EA /* APDnsResponse.m */; };
 		655AAC921D37780700E316EA /* APDnsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC861D37780700E316EA /* APDnsResponse.m */; };
-		655AAC951D377B4600E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC941D377B4600E316EA /* APSharedResources.m */; };
-		655AAC961D377B4600E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC941D377B4600E316EA /* APSharedResources.m */; };
-		655AAC971D377B4600E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC941D377B4600E316EA /* APSharedResources.m */; };
 		655AAC9B1D37821200E316EA /* APDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC9A1D37821200E316EA /* APDnsLogRecord.m */; };
 		655AAC9C1D37821200E316EA /* APDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC9A1D37821200E316EA /* APDnsLogRecord.m */; };
 		655AAC9D1D37821200E316EA /* APDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC9A1D37821200E316EA /* APDnsLogRecord.m */; };
 		655AAC9E1D379E9C00E316EA /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
-		655AACB01D3CD24B00E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
-		655AACB11D3CD24B00E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
-		655AACB21D3CD24B00E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
-		655AACB31D3CD24B00E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
 		655AACB61D3CD38000E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		655AACB71D3CD38000E316EA /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		655AACC91D3E10C100E316EA /* APUIDnsRequestsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC81D3E10C100E316EA /* APUIDnsRequestsController.m */; };
+		655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
+		655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
+		655AACD31D417C7D00E316EA /* APUIDnsRequestDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
 		655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
@@ -833,8 +830,6 @@
 		655AAC841D37780700E316EA /* APDnsResourceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsResourceType.m; sourceTree = "<group>"; };
 		655AAC851D37780700E316EA /* APDnsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsResponse.h; sourceTree = "<group>"; };
 		655AAC861D37780700E316EA /* APDnsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsResponse.m; sourceTree = "<group>"; };
-		655AAC931D377B4600E316EA /* APSharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSharedResources.h; sourceTree = "<group>"; };
-		655AAC941D377B4600E316EA /* APSharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSharedResources.m; sourceTree = "<group>"; };
 		655AAC991D37821200E316EA /* APDnsLogRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsLogRecord.h; sourceTree = "<group>"; };
 		655AAC9A1D37821200E316EA /* APDnsLogRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsLogRecord.m; sourceTree = "<group>"; };
 		655AACAC1D3CD24B00E316EA /* ADBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBTable.h; sourceTree = "<group>"; };
@@ -843,6 +838,12 @@
 		655AACAF1D3CD24B00E316EA /* ADBTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ADBTableRow.m; sourceTree = "<group>"; };
 		655AACB41D3CD38000E316EA /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		655AACB51D3CD38000E316EA /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		655AACC71D3E10C100E316EA /* APUIDnsRequestsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsRequestsController.h; sourceTree = "<group>"; };
+		655AACC81D3E10C100E316EA /* APUIDnsRequestsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsRequestsController.m; sourceTree = "<group>"; };
+		655AACCC1D3E46D700E316EA /* APSharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSharedResources.m; sourceTree = "<group>"; };
+		655AACCE1D3E46EA00E316EA /* APSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APSharedResources.h; sourceTree = "<group>"; };
+		655AACD11D417C7D00E316EA /* APUIDnsRequestDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsRequestDetail.h; sourceTree = "<group>"; };
+		655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsRequestDetail.m; sourceTree = "<group>"; };
 		655E94921BBEADD500286FBE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIPlayerViewController.h; sourceTree = "<group>"; };
 		655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIPlayerViewController.m; sourceTree = "<group>"; };
@@ -1219,6 +1220,10 @@
 				653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */,
 				653153631CFC899E00C92A73 /* APUIProSectionFooter.h */,
 				653153641CFC899E00C92A73 /* APUIProSectionFooter.m */,
+				655AACC71D3E10C100E316EA /* APUIDnsRequestsController.h */,
+				655AACC81D3E10C100E316EA /* APUIDnsRequestsController.m */,
+				655AACD11D417C7D00E316EA /* APUIDnsRequestDetail.h */,
+				655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1392,8 +1397,8 @@
 		655AAC7E1D37775100E316EA /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
-				655AAC931D377B4600E316EA /* APSharedResources.h */,
-				655AAC941D377B4600E316EA /* APSharedResources.m */,
+				655AACCE1D3E46EA00E316EA /* APSharedResources.h */,
+				655AACCC1D3E46D700E316EA /* APSharedResources.m */,
 				655AAC7F1D37780700E316EA /* APDnsDatagram.h */,
 				655AAC801D37780700E316EA /* APDnsDatagram.m */,
 				655AAC811D37780700E316EA /* APDnsRequest.h */,
@@ -2459,17 +2464,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655AAC961D377B4600E316EA /* APSharedResources.m in Sources */,
 				653AEA001D084B6400AC81B4 /* DDContextFilterLogFormatter.m in Sources */,
 				658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */,
 				655AAC8B1D37780700E316EA /* APDnsRequest.m in Sources */,
 				653AE9FD1D084B6400AC81B4 /* DDFileLogger.m in Sources */,
-				655AACB31D3CD24B00E316EA /* ADBTableRow.m in Sources */,
 				653AEA061D084B6400AC81B4 /* NSURL+Utils.m in Sources */,
 				653AEA031D084B6400AC81B4 /* NSDate+Utils.m in Sources */,
 				653AE9F91D084B6400AC81B4 /* ACLWildcard.m in Sources */,
 				653AEA041D084B6400AC81B4 /* NSException+Utils.m in Sources */,
-				655AACB11D3CD24B00E316EA /* ADBTable.m in Sources */,
 				653AEA051D084B6400AC81B4 /* NSString+Utils.m in Sources */,
 				653AE9FC1D084B6400AC81B4 /* DDASLLogger.m in Sources */,
 				653AE9FF1D084B6400AC81B4 /* DDTTYLogger.m in Sources */,
@@ -2479,6 +2481,7 @@
 				653AE9F81D084B6400AC81B4 /* ACLLogger.m in Sources */,
 				65B621211D2F95EE0047248F /* APTUdpProxySession.m in Sources */,
 				655AAC8E1D37780700E316EA /* APDnsResourceType.m in Sources */,
+				655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */,
 				657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */,
 				653AE9FB1D084B6400AC81B4 /* DDAbstractDatabaseLogger.m in Sources */,
 				657672B21D2BAA6300CF8C11 /* APTunnelConnectionsHandler.m in Sources */,
@@ -2518,6 +2521,7 @@
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */,
+				655AACC91D3E10C100E316EA /* APUIDnsRequestsController.m in Sources */,
 				659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
@@ -2531,7 +2535,6 @@
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
 				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
-				655AACB21D3CD24B00E316EA /* ADBTableRow.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
 				6598866C1CF74DE9003ECD1C /* AEUILoaderSegue.m in Sources */,
@@ -2539,16 +2542,15 @@
 				655AAC8D1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				6598866E1CF74DE9003ECD1C /* NSURL+Utils.m in Sources */,
 				6598866F1CF74DE9003ECD1C /* StaticDataTableViewController.m in Sources */,
-				655AACB01D3CD24B00E316EA /* ADBTable.m in Sources */,
 				659886701CF74DE9003ECD1C /* AEUISubscriptionLoaderController.m in Sources */,
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
-				655AAC951D377B4600E316EA /* APSharedResources.m in Sources */,
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
 				659886761CF74DE9003ECD1C /* AEUIUtils.m in Sources */,
+				655AACD31D417C7D00E316EA /* APUIDnsRequestDetail.m in Sources */,
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
 				659886781CF74DE9003ECD1C /* AEUIMainController.m in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
@@ -2574,6 +2576,7 @@
 				655AAC901D37780700E316EA /* APDnsResponse.m in Sources */,
 				6598868C1CF74DE9003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
+				655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */,
 				6598868E1CF74DE9003ECD1C /* AEUISubscriptionSectionObject.m in Sources */,
 				6598868F1CF74DE9003ECD1C /* AEUIWelcomePageController.m in Sources */,
 				659886901CF74DE9003ECD1C /* FMDatabaseQueue.m in Sources */,
@@ -2707,7 +2710,6 @@
 				65B621151D2E4F8F0047248F /* APUDPPacket.m in Sources */,
 				65B621171D2E78AD0047248F /* APUDPPacketTest.m in Sources */,
 				655AAC8F1D37780700E316EA /* APDnsResourceType.m in Sources */,
-				655AAC971D377B4600E316EA /* APSharedResources.m in Sources */,
 				65B621221D2F95EF0047248F /* APTUdpProxySession.m in Sources */,
 				65B621261D3139FF0047248F /* APTEndpoint.m in Sources */,
 				65B621101D2D41880047248F /* APIPPacket.m in Sources */,

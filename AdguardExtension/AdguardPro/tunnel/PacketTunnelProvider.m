@@ -19,7 +19,7 @@
 #import "PacketTunnelProvider.h"
 #import "ACommons/ACLang.h"
 #import "APTunnelConnectionsHandler.h"
-#import "AESharedResources.h"
+#import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
 
 /////////////////////////////////////////////////////////////////////
@@ -136,12 +136,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     __typeof__(self) __weak wSelf = self;
     [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
 
-      __typeof__(self) sSelf = wSelf;
-        
-      [sSelf->_connectionHandler startHandlingPackets];
+        __typeof__(self) sSelf = wSelf;
 
-      sSelf->pendingStartCompletion(error);
-      sSelf->pendingStartCompletion = nil;
+        [sSelf->_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
+        [sSelf->_connectionHandler startHandlingPackets];
+
+        sSelf->pendingStartCompletion(error);
+        sSelf->pendingStartCompletion = nil;
     }];
 }
 
@@ -157,7 +158,39 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
 {
-	// Add code here to handle the message.
+    NSString *command = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+    
+    // Logging command conversations
+    if (_connectionHandler) {
+        
+        if ([command isEqualToString:APMDnsLoggingEnabled]) {
+            
+            //Log enabled
+            [_connectionHandler setDnsActivityLoggingEnabled:YES];
+        }
+        else if ([command isEqualToString:APMDnsLoggingDisabled]){
+            
+            //Log disabled
+            [_connectionHandler setDnsActivityLoggingEnabled:NO];
+        }
+        else if ([command isEqualToString:APMDnsLoggingClearLog]){
+            
+            //Clear log
+            [_connectionHandler clearDnsActivityLog];
+        }
+        else if ([command isEqualToString:APMDnsLoggingGiveRecords]){
+            
+            //Request for log records
+            NSArray *records = [_connectionHandler dnsActivityLogRecords];
+            if (records.count) {
+                
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:records];
+                completionHandler(data);
+                return;
+            }
+            completionHandler(nil);
+        }
+    }
 }
 
 - (void)sleepWithCompletionHandler:(void (^)(void))completionHandler
@@ -184,6 +217,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
     }
     
+    [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
     [_connectionHandler startHandlingPackets];
 }
 

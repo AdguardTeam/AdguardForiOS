@@ -18,7 +18,7 @@
 
 
 #import "APDnsLogRecord.h"
-
+#import "APDnsResponse.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogRecord
@@ -26,6 +26,8 @@
 @implementation APDnsLogRecord{
     
     NSUInteger _hash;
+    APDnsResponse *_preferredResponse;
+    NSArray <APDnsResponse *> *_responses;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -52,7 +54,42 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+- (NSArray <APDnsResponse *> *)responses{
+    
+    return _responses;
+}
 
+- (void)setResponses:(NSArray<APDnsResponse *> *)responses{
+    
+    _responses = responses;
+    _preferredResponse = nil;
+}
+
+- (APDnsResponse *)preferredResponse{
+    
+    if (_preferredResponse) {
+        return _preferredResponse;
+    }
+    
+    if (_responses.count) {
+        
+        _preferredResponse = _responses[0];
+        BOOL foundA = NO;
+        for (APDnsResponse *item in _responses) {
+            if (!foundA && item.addressResponse) {
+                foundA = YES;
+                _preferredResponse = item;
+            }
+            
+            if (item.blocked) {
+                _preferredResponse = item;
+                break;
+            }
+        }
+    }
+    
+    return _preferredResponse;
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark NSCoding protocol

@@ -21,4 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *longLabel;
 
+- (CGFloat)fitHeight;
+
 @end

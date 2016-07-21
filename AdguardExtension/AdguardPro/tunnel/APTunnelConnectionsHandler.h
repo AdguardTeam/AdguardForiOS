@@ -18,7 +18,7 @@
 
 @import NetworkExtension;
 
-@class APTUdpProxySession, PacketTunnelProvider;
+@class APTUdpProxySession, PacketTunnelProvider, APDnsLogRecord;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -47,5 +47,24 @@
  Removes session for endpont if it exists.
  */
 - (void)removeSession:(APTUdpProxySession *)endpoint;
+
+/**
+ Sets that sessions will be create log of the DNS activity.
+ */
+- (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
+
+/**
+ Removes all records from log of the DNS activity.
+ */
+- (void)clearDnsActivityLog;
+/**
+ Returns log records of the DNS activity.
+ */
+- (NSArray <APDnsLogRecord *> *)dnsActivityLogRecords;
+
+/**
+ Endpoints sessions use this method for writing log records.
+ */
+- (void)writeToDnsActivityLog:(NSArray <APDnsLogRecord *> *)records;
 
 @end

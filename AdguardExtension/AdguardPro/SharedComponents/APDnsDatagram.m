@@ -101,12 +101,6 @@
             
             NSMutableArray *responses = [NSMutableArray arrayWithCapacity:count];
             
-            char *buffer = (char *) malloc(NS_MAXDNAME);
-            if(buffer == NULL){
-                
-                return NO;
-            }
-            
             for (u_int16_t i = 0; i < count; i++) {
                 
                 if(ns_parserr(&handle, ns_s_an, i, &rr) < 0){

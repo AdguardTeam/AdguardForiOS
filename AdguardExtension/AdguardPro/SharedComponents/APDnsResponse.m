@@ -21,6 +21,9 @@
 #import "APDnsResponse.h"
 #include <arpa/inet.h>
 
+#define IPV4_FOR_BLOCKING       @"127.0.0.1"
+#define IPV6_FOR_BLOCKING       @"::1"
+
 @implementation APDnsResponse
 
 - (id)initWithRR:(ns_rr)rr msg:(ns_msg)msg{
@@ -28,6 +31,7 @@
     self = [super initWithRR:rr];
     if (self) {
         
+        _addressResponse = _blocked = NO;
         _rdata = [NSData dataWithBytes:ns_rr_rdata(rr)
                                 length:ns_rr_rdlen(rr)];
         char *buffer = (char *) malloc(NS_MAXDNAME);
@@ -60,16 +64,21 @@
                 break;
                 
             case ns_t_a:
+                _addressResponse = YES;
                 _stringValue = [NSString stringWithUTF8String:inet_ntoa(*((struct in_addr *)_rdata.bytes))];
-
+                _blocked = [_stringValue isEqualToString:IPV4_FOR_BLOCKING];
+                
                 break;
                 
             case ns_t_aaaa:
             case ns_t_a6:
+                _addressResponse = YES;
                 str = inet_ntop(AF_INET6, _rdata.bytes, buffer, NS_MAXDNAME);
                 if (str) {
                     _stringValue = [NSString stringWithUTF8String:str];
+                    _blocked = [_stringValue isEqualToString:IPV6_FOR_BLOCKING];
                 }
+                break;
                 
             default:
                 break;
@@ -116,6 +125,12 @@
         
         _rdata = [aDecoder decodeObjectForKey:@"rdata"];
         _stringValue = [aDecoder decodeObjectForKey:@"stringValue"];
+        
+        NSNumber *val = [aDecoder decodeObjectForKey:@"addressResponse"];
+        _addressResponse = [val boolValue];
+
+        val = [aDecoder decodeObjectForKey:@"blocked"];
+        _blocked = [val boolValue];
     }
     return self;
 }
@@ -125,6 +140,8 @@
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:self.rdata forKey:@"rdata"];
     [aCoder encodeObject:self.stringValue forKey:@"stringValue"];
+    [aCoder encodeObject:@(self.addressResponse) forKey:@"addressResponse"];
+    [aCoder encodeObject:@(self.blocked) forKey:@"blocked"];
 }
 
 @end
