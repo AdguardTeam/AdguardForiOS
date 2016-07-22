@@ -35,7 +35,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *defaultDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *stealthDnsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *familyDnsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;

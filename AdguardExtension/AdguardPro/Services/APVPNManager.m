@@ -603,15 +603,13 @@ static APVPNManager *singletonVPNManager;
 
     _vpnModeDescription = @[
                             NSLocalizedString(@"Default system DNS", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is desabled and iOS uses DNS from current network configuration")
-                            , NSLocalizedString(@"Default Server", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard DNS, where only 'regular' ads will be blocked")
-                            , NSLocalizedString(@"Stealth Mode", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Stealth Mode DNS")
+                            , NSLocalizedString(@"Default", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard DNS, where only 'regular' ads will be blocked")
                             , NSLocalizedString(@"Family Protection", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS")
                             ];
     _vpnModeIPv4DNSAddresses = @[
                              @[]
-                             , @[@"176.112.212.230"]
-                             , @[@"176.112.212.230"]
-                             , @[@"176.112.212.231"]
+                             , @[@"176.103.130.130",@"176.103.130.131"]
+                             , @[@"176.103.130.132", @"176.103.130.134"]
                              ];
 }
 

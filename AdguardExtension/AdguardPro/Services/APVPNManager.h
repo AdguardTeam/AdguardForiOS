@@ -28,7 +28,6 @@ typedef enum {
     APVpnModeUndef = -1,
     APVpnModeNone,
     APVpnModeDNS,
-    APVpnModeStealthDNS,
     APVpnModeFamilyDNS
 } APVpnMode;
 

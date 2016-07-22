@@ -22,7 +22,7 @@
 
 #define PRO_SECTION_INDEX               0
 #define NBSP_CODE                       @"\u00A0"
-#define LINK_URL_STRING                 @"https://adguard.com/"
+#define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIAdguardDNSController
@@ -41,7 +41,6 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
-    self.stealthDnsCell.textLabel.text = [manager modeDescription:APVpnModeStealthDNS];
     self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
     
     [self updateStatuses];
@@ -142,7 +141,7 @@
 
 - (NSAttributedString *)textForProSectionFooter{
     
-    NSString *message = NSLocalizedString(@"To make system use Adguard DNS, app establishes a fake VPN connection. Please note, that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. It is the description under Adguard DNS switch.");
+    NSString *message = NSLocalizedString(@"To make system use Adguard DNS, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. It is the description under Adguard DNS switch.");
     
     NSString *linkFormat = NSLocalizedString(@"Learn more about[nbsp]Adguard[nbsp]DNS.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Link text of the website with the decription.  Where '[nbsp]' stands for 'non-breakable space'.");
     
@@ -180,18 +179,12 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     self.defaultDnsCell.accessoryType =
-    self.stealthDnsCell.accessoryType =
     self.familyDnsCell.accessoryType = UITableViewCellAccessoryNone;
     
     switch (manager.vpnMode) {
             
         case APVpnModeDNS:
             self.defaultDnsCell.accessoryType = UITableViewCellAccessoryCheckmark;
-            
-            break;
-            
-        case APVpnModeStealthDNS:
-            self.stealthDnsCell.accessoryType = UITableViewCellAccessoryCheckmark;
             
             break;
             

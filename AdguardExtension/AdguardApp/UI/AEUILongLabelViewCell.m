@@ -35,7 +35,7 @@
     [self layoutIfNeeded];
     
     CGSize size = [self.contentView
-                   systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+                   systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];//UILayoutFittingCompressedSize];
     return size.height + 1.0f; // Add 1.0f for the cell separator height
 }
 

@@ -13,6 +13,7 @@
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
 #import "APDnsLogRecord.h"
+#import "APUIDnsRequestDetail.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]
 
@@ -67,14 +68,21 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dnsRequestCell" forIndexPath:indexPath];
 
     NSInteger row = indexPath.row;
-    if (row < self.filteredLogRecords.count) {
+    NSArray *records = self.filteredLogRecords;
+    if (row < records.count) {
 
-        APDnsLogRecord *record = self.filteredLogRecords[row];
+        APDnsLogRecord *record = records[row];
         APDnsResponse *response = record.preferredResponse;
         
+        if (!record.requests.count) {
+            return nil;
+        }
+        
+        APDnsRequest *request = record.requests[0];
+        
+        cell.textLabel.text = request.name;
+
         if (response) {
-            
-            cell.textLabel.text = response.name;
             
             if (response.blocked) {
                 cell.detailTextLabel.textColor = AEUIC_WARNING_COLOR;
@@ -93,8 +101,6 @@
             cell.textLabel.textColor = [UIColor darkTextColor];
             cell.detailTextLabel.textColor = [UIColor darkTextColor];
             
-            APDnsRequest *request = record.requests[0];
-            cell.textLabel.text = request.name;
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request do not have response."), DATE_FORMAT(record.recordDate)];
         }
     }
@@ -102,15 +108,34 @@
     return cell;
 }
 
-/*
+
 #pragma mark - Navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    
+    if ([identifier isEqualToString:@"dnsRequestDetail"]) {
+
+        APDnsLogRecord *record = [self logRecordForSelectedRow];
+        if (!(record.requests.count)) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"dnsRequestDetail"]) {
+
+        APUIDnsRequestDetail *destination = [segue destinationViewController];
+
+        destination.logRecord = [self logRecordForSelectedRow];
+    }
 }
-*/
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Search Bar Delegates
 
@@ -194,4 +219,20 @@
     }
 }
 
+- (APDnsLogRecord *)logRecordForSelectedRow{
+    
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    if (path) {
+        
+        NSInteger row = path.row;
+        NSArray *records = self.filteredLogRecords;
+        
+        if (row < records.count) {
+            
+            return records[row];
+        }
+    }
+    
+    return nil;
+}
 @end
