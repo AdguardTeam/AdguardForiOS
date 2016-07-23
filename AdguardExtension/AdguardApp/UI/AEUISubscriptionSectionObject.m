@@ -198,8 +198,16 @@
                   NSUInteger index = [filters indexOfObject:item];
                   if (index != NSNotFound) {
                       meta = filters[index];
-                      meta.enabled = item.enabled;
-                      meta.rulesCount = item.rulesCount;
+                      NSDictionary *values = [item dictionaryWithValuesForKeys:@[
+                          @"updateDate",
+                          @"updateDateString",
+                          @"checkDate",
+                          @"checkDateString",
+                          @"version",
+                          @"enabled",
+                          @"rulesCount"
+                      ]];
+                      [meta setValuesForKeysWithDictionary:values];
                   } else if ([item.filterId unsignedIntegerValue] !=
                              ASDF_USER_FILTER_ID) {
                       [filters addObject:item];

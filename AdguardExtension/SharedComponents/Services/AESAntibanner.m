@@ -646,49 +646,79 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
     dispatch_sync(workQueue, ^{
         
         @autoreleasepool {
-            
+
+            __block NSArray *defaultDbFilters;
+
+            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+
+                defaultDbFilters = [self filtersFromDb:db];
+            }];
+
             [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
-                
+
                 *rollback = YES;
-                
+
                 if (groupsMetadataCache) {
                     // If were loaded metadata of groups from backend,
                     // updating the DB.
                     result = [self insertMetadataIntoDb:db groups:groupsMetadataCache];
                     if (!result) {
-                        
+
                         return;
                     }
                 }
-                
-                result = [self insertMetadataIntoDb:db filters:filters];
+                NSMutableArray *filtersMetaForSave = [NSMutableArray new];
+                for (ASDFilterMetadata *filter in filters) {
+
+                    if (jobController && jobController.state != ACLJCExecuteState) {
+
+                        result = NO;
+                        return;
+                    }
+
+                    if ([self installRulesFromBackendWithFilter:filter db:db]) {
+
+                        [filtersMetaForSave addObject:filter];
+                    } else if ([self installRulesFromDefaultDbWithFilter:filter db:db]) {
+
+                        NSUInteger index = [defaultDbFilters indexOfObject:filter];
+                        if (index != NSNotFound) {
+                            ASDFilterMetadata *dbFilter = defaultDbFilters[index];
+                            if (dbFilter) {
+
+                                NSDictionary *values = [dbFilter dictionaryWithValuesForKeys:@[
+                                    @"updateDate",
+                                    @"updateDateString",
+                                    @"checkDate",
+                                    @"checkDateString",
+                                    @"version",
+                                    @"rulesCount"
+                                ]];
+                                [filter setValuesForKeysWithDictionary:values];
+                                [filtersMetaForSave addObject:filter];
+                            }
+                        }
+                    }
+                }
+
+                if (jobController && jobController.state != ACLJCExecuteState) {
+
+                    result = NO;
+                    return;
+                }
+
+                result = [self insertMetadataIntoDb:db filters:filtersMetaForSave];
                 if (!result)
                     return;
-                
-                if (jobController && jobController.state != ACLJCExecuteState) {
-                    
-                    result = NO;
-                    return;
-                }
-                
-                // Trying obtain filter rules from default DB and to insert into production DB.
-                [self installRulesFromDefaultDbOrBackend:YES IntoDb:db forFilters:filters jobController:jobController];
-                
-                
-                if (jobController && jobController.state != ACLJCExecuteState) {
-                    
-                    result = NO;
-                    return;
-                }
-                
+
                 *rollback = NO;
             }];
-            
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
             
             //do nothing
 #elif TARGET_OS_MAC
-            
+
             // Notifying to all, that filter rules were updated
             if (result)
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -696,7 +726,6 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
                     [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
                 });
 #endif
-            
         }
     });
     
@@ -1214,8 +1243,10 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
             return NO;
         
         // Trying obtain filter rules from default DB and to insert into production DB.
-        [self installRulesFromDefaultDbOrBackend:NO IntoDb:productionDb forFilters:sFilters jobController:nil];
-        
+        for (ASDFilterMetadata *filter in sFilters) {
+            
+            [self installRulesFromDefaultDbWithFilter:filter db:productionDb];
+        }
     }
     
     return YES;
@@ -1287,69 +1318,77 @@ NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilte
     return result;
 }
 
-- (void)installRulesFromDefaultDbOrBackend:(BOOL)fromBackend IntoDb:(FMDatabase *)db forFilters:(NSArray *)filtersMetadata jobController:(ACLJobController *)jobController{
+- (BOOL)installRulesFromDefaultDbWithFilter:(ASDFilterMetadata *)filter db:(FMDatabase *)db {
+
+    __block NSArray *rules;
     
+    // Trying obtain filter rules from default DB
+    [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+        FMResultSet *resultSet = [db executeQuery:@"select * from filter_rules where filter_id = ?", filter.filterId];
+        if (resultSet) {
+            
+            NSMutableArray *_rules = [NSMutableArray array];
+            ASDFilterRule *rule;
+            while ([resultSet next]) {
+                
+                rule = [[ASDFilterRule alloc] initFromDbResult:resultSet];
+                if (rule) {
+                    
+                    [_rules addObject:rule];
+                }
+            }
+            rules = _rules;
+        }
+        [resultSet close];
+    }];
+
+    if (!rules.count) {
+        return NO;
+    }
     
-    for (ASDFilterMetadata *meta in filtersMetadata) {
-        @autoreleasepool {
+    [self replaceRules:rules forFilter:filter inDb:db];
+    
+    return YES;
+}
+
+- (BOOL)installRulesFromBackendWithFilter:(ASDFilterMetadata *)filter db:(FMDatabase *)db {
+    
+    NSArray *rules;
+    // Trying obtain filter rules from backend
+    if ([reach isReachable]) {
+        
+        ABECFilterClient *client = [ABECFilterClient new];
+        
+        ASDFilter *filterData = [client filterForApp:[ADProductInfo applicationID] affiliateId:@"" filterId:[filter.filterId unsignedIntegerValue]];
+        if (filterData) {
             
-            // job canceled or stoped
-            if (jobController && jobController.state != ACLJCExecuteState) {
-                
-                break;
-            }
-            
-            __block NSArray *rules = nil;
-            
-            // Trying obtain filter rules from default DB
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
-                FMResultSet *resultSet = [db executeQuery:@"select * from filter_rules where filter_id = ?", meta.filterId];
-                if (resultSet) {
-                    
-                    NSMutableArray *_rules = [NSMutableArray array];
-                    ASDFilterRule *rule;
-                    while ([resultSet next]) {
-                        
-                        rule = [[ASDFilterRule alloc] initFromDbResult:resultSet];
-                        if (rule) {
-                            
-                            [_rules addObject:rule];
-                        }
-                    }
-                    rules = _rules;
-                }
-                [resultSet close];
-            }];
-            
-            // Trying obtain filter rules from backend
-            if (fromBackend && !rules.count && [reach isReachable]) {
-                
-                ABECFilterClient *client = [ABECFilterClient new];
-                
-                ASDFilter *filterData = [client filterForApp:[ADProductInfo applicationID] affiliateId:@"" filterId:[meta.filterId unsignedIntegerValue]];
-                if (filterData) {
-                    
-                    rules = filterData.rules;
-                }
-            }
-            
-            // and to insert into production DB.
-            
-            if (rules.count) {
-                
-                [db executeUpdate:@"delete from filter_rules where filter_id = ?", meta.filterId];
-                BOOL result = YES;
-                for (ASDFilterRule *item in rules) {
-                    
-                    result = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)",
-                              item.filterId, item.ruleId, item.ruleText, item.isEnabled];
-                    if (!result)
-                        DDLogError(@"Error install filter rules from default DB: %@", [[db lastError] localizedDescription]);
-                }
-            }
-            
+            rules = filterData.rules;
         }
     }
+    if (!rules.count) {
+        return NO;
+    }
+    
+    [self replaceRules:rules forFilter:filter inDb:db];
+    
+    return YES;
+}
+
+- (void)replaceRules:(NSArray *)rules forFilter:(ASDFilterMetadata *)filter inDb:(FMDatabase *)db {
+
+    if (rules.count) {
+        
+        [db executeUpdate:@"delete from filter_rules where filter_id = ?", filter.filterId];
+        BOOL result = YES;
+        for (ASDFilterRule *item in rules) {
+            
+            result = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)",
+                      item.filterId, item.ruleId, item.ruleText, item.isEnabled];
+            if (!result)
+                DDLogError(@"Error install filter rules from default DB: %@", [[db lastError] localizedDescription]);
+        }
+    }
+
 }
 
 - (NSArray *)groupsFromDb:(FMDatabase *)db{
