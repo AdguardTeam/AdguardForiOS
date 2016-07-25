@@ -27,7 +27,7 @@
 #import "ASDModels/ASDFilterObjects.h"
 
 
-NSString *AESSupportSubjectPrefix = @"[Adguard for iOS] ";
+NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
 
 #define SUPPORT_ADDRESS         @"support@adguard.com"
 
@@ -89,7 +89,7 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[AESSupportSubjectPrefix stringByAppendingString:NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
@@ -98,9 +98,18 @@ static AESSupport *singletonSupport;
             if (jsonData) {
                 [compose addAttachmentData:jsonData mimeType:@"application/x-gzip" fileName:@"filter.gz"];
             }
-            NSData *logData = [self applicationLog];
-            if (logData) {
-                [compose addAttachmentData:logData mimeType:@"text/plain" fileName:@"adguard.log"];
+            
+            // Flush Logs
+            [[ACLLogger singleton] flush];
+            //
+            
+            for (NSURL *item in [self appLogsUrls]) {
+                
+                NSData *logData = [self applicationLogFromURL:item];
+                if (logData) {
+                    NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+                    [compose addAttachmentData:logData mimeType:@"application/x-gzip" fileName:fileName];
+                }
             }
             [compose setToRecipients:@[SUPPORT_ADDRESS]];
             compose.mailComposeDelegate = self;
@@ -194,15 +203,12 @@ static AESSupport *singletonSupport;
 
 
 // Get application log data
-- (NSData *)applicationLog{
+- (NSData *)applicationLogFromURL:(NSURL *)url{
     
     @autoreleasepool {
         
-        // Flush Logs
-        [[ACLLogger singleton] flush];
-        //
-        
-        NSArray *logFileInfos = [[[[ACLLogger singleton] fileLogger] logFileManager] sortedLogFileInfos];
+        DDLogFileManagerDefault *manager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:[url path]];
+        NSArray *logFileInfos = [manager sortedLogFileInfos];
         
         NSMutableData *logData = [NSMutableData dataWithCapacity:ACL_MAX_LOG_FILE_SIZE];
         NSUInteger loadSize = ACL_MAX_LOG_FILE_SIZE;
@@ -232,8 +238,14 @@ static AESSupport *singletonSupport;
             
         }
         
-        return logData;
+        return [logData gzippedData];
     }
+}
+
+- (NSArray *)appLogsUrls{
+    
+    NSURL *logs = [AESharedResources sharedLogsURL];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:logs includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 error:NULL];
 }
 
 - (NSData *)compressedJson{

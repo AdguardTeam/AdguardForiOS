@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RcZ-aB-avh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RcZ-aB-avh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -80,7 +80,7 @@
                             <tableViewSection footerTitle="Tap here to use the tool for removing missed ads or generally any element you don't want to see on the page." id="w71-eF-IFh" userLabel="Name">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" shouldIndentWhileEditing="NO" textLabel="IVJ-w6-IVC" style="IBUITableViewCellStyleDefault" id="kgZ-VW-Bwx">
-                                        <rect key="frame" x="0.0" y="220" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="219.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kgZ-VW-Bwx" id="K1Q-Cv-YrL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -105,7 +105,7 @@
                             <tableViewSection headerTitle="Contact Support" id="9dR-3m-MTe" userLabel="Name">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" textLabel="bzo-sR-4LR" style="IBUITableViewCellStyleDefault" id="Pnv-74-qHL">
-                                        <rect key="frame" x="0.0" y="346.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="345.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pnv-74-qHL" id="NLt-6z-rof">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -126,7 +126,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" textLabel="DFa-u4-apc" style="IBUITableViewCellStyleDefault" id="wtV-Mp-Ldn">
-                                        <rect key="frame" x="0.0" y="390.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="389.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wtV-Mp-Ldn" id="unV-ZC-YAo">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -154,7 +154,7 @@
                             <outlet property="delegate" destination="SAS-BZ-Yxb" id="xsr-im-lJt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Adguard" id="QU1-5t-Sf2">
+                    <navigationItem key="navigationItem" id="QU1-5t-Sf2">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="g6K-wN-CqM">
                             <connections>
                                 <action selector="done:" destination="SAS-BZ-Yxb" id="TMg-zq-egv"/>
@@ -239,7 +239,7 @@
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="centerX" secondItem="Wqh-ks-max" secondAttribute="centerX" id="ycC-7M-jYJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Adguard" id="Slh-lt-JH2">
+                    <navigationItem key="navigationItem" id="Slh-lt-JH2">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="uIy-RG-qWe">
                             <connections>
                                 <action selector="done" destination="tQP-Ou-q2c" id="79m-z5-MHd"/>

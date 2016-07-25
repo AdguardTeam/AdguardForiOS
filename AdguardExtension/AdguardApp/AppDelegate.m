@@ -287,7 +287,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
     if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
          || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
-        && [url.scheme isEqualToString:ADGUARD_URL_SCHEME]) {
+        && [url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [[AEService singleton] onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{

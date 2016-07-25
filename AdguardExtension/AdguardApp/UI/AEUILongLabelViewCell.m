@@ -29,4 +29,14 @@
     // Configure the view for the selected state
 }
 
+- (CGFloat)fitHeight {
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
+    CGSize size = [self.contentView
+                   systemLayoutSizeFittingSize:UILayoutFittingExpandedSize];//UILayoutFittingCompressedSize];
+    return size.height + 1.0f; // Add 1.0f for the cell separator height
+}
+
 @end

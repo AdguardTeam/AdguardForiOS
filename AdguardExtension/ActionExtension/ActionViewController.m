@@ -87,8 +87,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Get the item[s] we're handling from the extension context.
+
+    self.title = AE_PRODUCT_NAME;
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     

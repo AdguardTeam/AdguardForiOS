@@ -29,6 +29,8 @@ xcodebuild -workspace "${SRCROOT}/../AdguardSafariExtension-iOS.xcworkspace" -sc
 
 
 echo "================================ RUN BUILDER ==================================="
+echo "resource folder:"
+echo "${BUILDER_RESOURCES_DIR}"
 "${BUILDER_DIR}"/Builder --${CONFIGURATION} "${BUILDER_RESOURCES_DIR}" || exit 1
 
 echo "============================ RUN BUILDER DONE =================================="

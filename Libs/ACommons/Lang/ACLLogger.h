@@ -26,13 +26,16 @@
 typedef enum{
     
     ACLLDefaultLevel = LOG_LEVEL_INFO,
-    ACLLDebugLevel = LOG_LEVEL_DEBUG
+    ACLLDebugLevel = LOG_LEVEL_DEBUG,
+    ACLLVerboseLevel = LOG_LEVEL_VERBOSE
     
 } ACLLogLevelType;
 
 //---------------------------------------------------
 
 #define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+
+#define DDLogVerboseTrace(fmt, ...) LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"(%@[%p]: %@) " fmt, THIS_FILE, self, THIS_METHOD,  ##__VA_ARGS__)
 
 #define DDLogErrorTrace() LOG_OBJC_MAYBE(LOG_ASYNC_ERROR, ddLogLevel, LOG_FLAG_ERROR, 0, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 

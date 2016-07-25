@@ -29,7 +29,7 @@
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
 #import "AESSupport.h"
-
+#import "AESharedResources.h"
 
 @implementation AEAUIMainController{
     
@@ -40,6 +40,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
+    self.title = AE_PRODUCT_NAME;
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
     _enabledHolder = self.domainEnabled;
@@ -174,7 +175,7 @@
 
 - (IBAction)clickMissedAd:(id)sender {
     
-    NSString *subject = [AESSupportSubjectPrefix stringByAppendingString:NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
+    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
     
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
@@ -182,7 +183,7 @@
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
     
-    NSString *subject = [AESSupportSubjectPrefix stringByAppendingString:NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
+    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Incorrect blocking on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
     
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
@@ -192,15 +193,32 @@
     if (_injectScriptSupported) {
         
         NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
-        NSDictionary *i18n = @{
-            @"buttons": @{@"plus":NSLocalizedString(@"More", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'plus' button"),
-                @"minus": NSLocalizedString(@"Less", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'munus' button"),
-                @"accept": NSLocalizedString(@"Accept", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button"),
-                @"cancel": NSLocalizedString(@"Cancel", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button"),
-                @"preview": NSLocalizedString(@"Preview", @"(Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button")
+        NSDictionary *settings = @{
+            @"urlScheme" : AE_URLSCHEME,
+            @"i18n" : @{
+                @"buttons" : @{
+                    @"plus" : NSLocalizedString(
+                        @"More", @"(Action Extension - Adguard Assistant) "
+                                 @"Assistant UI. Title for 'plus' button"),
+                    @"minus" : NSLocalizedString(
+                        @"Less", @"(Action Extension - Adguard Assistant) "
+                                 @"Assistant UI. Title for 'munus' button"),
+                    @"accept" : NSLocalizedString(
+                        @"Accept", @"(Action Extension - Adguard Assistant) "
+                                   @"Assistant UI. Title for 'Adguard icon' "
+                                   @"button"),
+                    @"cancel" : NSLocalizedString(
+                        @"Cancel", @"(Action Extension - Adguard Assistant) "
+                                   @"Assistant UI. Title for 'close icon' "
+                                   @"button"),
+                    @"preview" : NSLocalizedString(
+                        @"Preview", @"(Action Extension - Adguard Assistant) "
+                                    @"Assistant UI. Title for 'eye icon' "
+                                    @"button")
+                }
             }
         };
-        extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1), @"i18n": i18n}} typeIdentifier:(NSString *)kUTTypePropertyList]];
+        extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"blockElement":@(1), @"settings": settings}} typeIdentifier:(NSString *)kUTTypePropertyList]];
         [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
     }
     else{

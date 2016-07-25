@@ -26,6 +26,11 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
+#import "APUIAdguardDNSController.h"
+
+#ifdef PRO
+#import "APVPNManager.h"
+#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -56,6 +61,7 @@
     NSMutableArray *_observers;
     
     NSString *_ruleTextHolderForAddRuleCommand;
+    
 }
 
 @end
@@ -64,6 +70,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = AE_PRODUCT_NAME;
+    
+#ifdef PRO
+    [self proAttachToNotifications];
+    [self proUpdateAdguardDnsStatus];
+   
+#else
+    self.hideSectionsWithHiddenRows = YES;
+    [self cells:self.proSectionCells setHidden:YES];
+#endif
+    
+    [self reloadDataAnimated:NO];
+    
     
     [self.enableAdguardSwitch setOn:[[AESharedResources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled]];
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -190,6 +210,10 @@
 
 - (IBAction)clickSendBugReport:(id)sender {
     [[AESSupport singleton] sendMailBugReportWithParentController:self];
+}
+
+- (IBAction)clickDNS:(id)sender {
+    DDLogError(@"Id %@", sender);
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{
@@ -460,6 +484,50 @@
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
     _inCheckUpdates = NO;
 }
+
+#ifdef PRO
+- (void)proUpdateAdguardDnsStatus{
+    APVPNManager *manager = [APVPNManager singleton];
+    
+    switch (manager.connectionStatus) {
+            
+        case APVpnConnectionStatusReconnecting:
+            
+        case APVpnConnectionStatusConnecting:
+        case APVpnConnectionStatusDisconnecting:
+            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is 'In Progress'.");
+            break;
+            
+        case APVpnConnectionStatusConnected:
+            self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
+            break;
+            
+        default:
+            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Off",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Off.");
+            break;
+    }
+    
+}
+
+- (void)proAttachToNotifications{
+    
+    id observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:APVpnChangedNotification
+                 object: nil
+                 queue:nil
+                 usingBlock:^(NSNotification *_Nonnull note) {
+                     
+                     // When configuration is changed
+                     
+                     [self proUpdateAdguardDnsStatus];
+                 }];
+    
+    if (observer) {
+        [_observers addObject:observer];
+    }
+}
+
+#endif
 
 - (void)setToolbar{
     

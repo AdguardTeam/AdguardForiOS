@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 
-extern NSString *AESSupportSubjectPrefix;
+extern NSString *AESSupportSubjectPrefixFormat;
 
 @interface AESSupport : NSObject <MFMailComposeViewControllerDelegate>
 
