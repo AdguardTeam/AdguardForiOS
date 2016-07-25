@@ -67,9 +67,12 @@
 #pragma mark Properties and public methods
 
 - (void)startHandlingPackets {
+
+    __typeof__(self) __weak wSelf = self;
     [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
 
-        [self handlePackets:packets protocols:protocols];
+        __typeof__(self) sSelf = wSelf;
+        [sSelf handlePackets:packets protocols:protocols];
     }];
 }
 
@@ -196,9 +199,11 @@
 
     // Read more
 
+    __typeof__(self) __weak wSelf = self;
     [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
 
-      [self handlePackets:packets protocols:protocols];
+        __typeof__(self) sSelf = wSelf;
+      [sSelf handlePackets:packets protocols:protocols];
     }];
 }
 

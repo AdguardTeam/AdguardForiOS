@@ -197,8 +197,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
-    _connectionHandler = nil;
-    
+    [_connectionHandler setDnsActivityLoggingEnabled:NO];
 	completionHandler();
 }
 
@@ -215,10 +214,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             DDLogError(@"(PacketTunnelProvider) Can't create connection handler on wakeup.");
             return;
         }
+        
+        [_connectionHandler startHandlingPackets];
     }
     
     [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
-    [_connectionHandler startHandlingPackets];
 }
 
 /////////////////////////////////////////////////////////////////////
