@@ -225,7 +225,7 @@
             [self toggleLogStatus:nil];
             break;
     }
-
+    
     if (manager.lastError) {
         [ACSSystemUtils
             showSimpleAlertForController:self

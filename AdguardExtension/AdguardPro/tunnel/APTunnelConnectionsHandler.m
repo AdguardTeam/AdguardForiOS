@@ -27,8 +27,10 @@
 #import "APDnsResourceType.h"
 #import "APDnsRequest.h"
 #import "APDnsDatagram.h"
+#import "APSharedResources.h"
 
 #define APT_DNS_LOG_MAX_COUNT           5000
+#define LOGGING_DATA_FILENAME           @"dnsRequestLoggingData.dat"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -61,6 +63,11 @@
         _loggingEnabled = NO;
     }
     return self;
+}
+
+- (void)dealloc {
+
+    [self saveLoggingCache];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -98,6 +105,15 @@
             if (count > 0) {
                 [_loggingCache removeObjectsInRange:NSMakeRange(0, count)];
             }
+            //TODO: delete this
+//            else{
+//                
+//                while (_loggingCache.count < APT_DNS_LOG_MAX_COUNT) {
+//                    
+//                    [_loggingCache addObjectsFromArray:records];
+//                }
+//            }
+            //---------------
             [_loggingCache addObjectsFromArray:records];
         }
         OSSpinLockUnlock(&_loggingLock);
@@ -114,6 +130,18 @@
 
             if (_loggingCache == nil) {
                 _loggingCache = [NSMutableArray new];
+                
+                // restore logging data from file (synchronously)
+                NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
+                if ([dataUrl checkResourceIsReachableAndReturnError:NULL]) {
+                    
+                    NSData *loggingCacheDataFromDisk = [NSData dataWithContentsOfURL:dataUrl];
+                    NSArray *savedLoggingCache = [NSKeyedUnarchiver unarchiveObjectWithData:loggingCacheDataFromDisk];
+                    if (savedLoggingCache && [savedLoggingCache isKindOfClass:[NSArray class]]) {
+                        
+                        [_loggingCache addObjectsFromArray:savedLoggingCache];
+                    }
+                }
             }
         }
 
@@ -228,6 +256,20 @@
 
           [session appendPackets:obj];
         }];
+    }
+}
+
+- (void)saveLoggingCache {
+
+    if (_loggingCache.count) {
+
+        NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
+
+        NSData *dataToSave = [NSKeyedArchiver archivedDataWithRootObject:_loggingCache];
+        if (dataToSave) {
+
+            [dataToSave writeToURL:dataUrl atomically:YES];
+        }
     }
 }
 

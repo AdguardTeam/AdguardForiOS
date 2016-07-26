@@ -27,7 +27,7 @@
 #import "PacketTunnelProvider.h"
 
 #define MAX_DATAGRAMS_RECEIVED 10
-#define TTL_SESSION 5 //seconds
+#define TTL_SESSION 10 //seconds
 
 #define locLogError(fmt, ...) DDLogError(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
 #define locLogWarn(fmt, ...) DDLogWarn(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
