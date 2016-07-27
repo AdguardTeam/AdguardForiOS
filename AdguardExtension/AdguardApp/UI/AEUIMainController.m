@@ -498,12 +498,12 @@
             self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is 'In Progress'.");
             break;
             
-        case APVpnConnectionStatusConnected:
-            self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
-            break;
-            
         default:
-            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Off",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Off.");
+            
+            if (manager.enabled)
+                self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
+            else
+                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Off",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Off.");
             break;
     }
     

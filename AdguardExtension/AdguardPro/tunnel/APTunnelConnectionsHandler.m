@@ -29,8 +29,10 @@
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
 
-#define APT_DNS_LOG_MAX_COUNT           5000
+#define APT_DNS_LOG_MAX_COUNT           2000
 #define LOGGING_DATA_FILENAME           @"dnsRequestLoggingData.dat"
+
+#define TTL_SESSION                     30 //seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -42,6 +44,7 @@
     BOOL _loggingEnabled;
     OSSpinLock _loggingLock;
     NSMutableArray <APDnsLogRecord *> *_loggingCache;
+    ACLExecuteBlockDelayed *_saveLogExecution;
     
     BOOL _packetFlowObserver;
 }
@@ -115,6 +118,10 @@
             }
             [_loggingCache addObjectsFromArray:records];
         }
+        
+        // ping 
+        [_saveLogExecution executeOnceForInterval];
+
         OSSpinLockUnlock(&_loggingLock);
     }
 }
@@ -141,6 +148,14 @@
                         [_loggingCache addObjectsFromArray:savedLoggingCache];
                     }
                 }
+                
+                // crete save log timer
+                __weak __typeof__(self) wSelf = self;
+                _saveLogExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:dispatch_get_main_queue() block:^{
+                    
+                    __typeof__(self) sSelf = wSelf;
+                    [sSelf saveLoggingCache];
+                }];
             }
         }
 

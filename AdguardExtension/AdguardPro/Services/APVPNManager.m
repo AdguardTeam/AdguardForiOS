@@ -53,6 +53,7 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     BOOL         _busy;
     NSLock      *_busyLock;
     NSNumber    *_delayedSetEnabled;
+//    NSNumber    *_delayedSetTunnelEnabled;
     NSNumber    *_delayedSetMode;
     
     NSError     *_standartError;
@@ -138,6 +139,10 @@ static APVPNManager *singletonVPNManager;
     return nil;
 }
 
+- (BOOL)enabled {
+    
+    return _enabled;
+}
 - (void)setEnabled:(BOOL)enabled{
     
     _lastError = nil;
@@ -294,64 +299,15 @@ static APVPNManager *singletonVPNManager;
 //must be called on workingQueue
 - (void)internalSetEnabled:(BOOL)enabled{
     
-    if (_vpnMode == APVpnModeUndef) {
-        // if we have initial state, when vpn configuration still was not loaded.
-        _delayedSetEnabled = @(enabled);
-        return;
-    }
-    
-    if (_connectionStatus) {
+    if (enabled != _enabled) {
         
-        switch (_connectionStatus) {
-                
-            case APVpnConnectionStatusDisconnected:
-            case APVpnConnectionStatusInvalid:
-                if (enabled) {
-
-                    // check that we have connection
-                    Reachability *reach = [Reachability reachabilityForInternetConnection];
-                    if ([reach isReachable]) {
-                        NSError *err;
-                        BOOL result = [(NETunnelProviderSession *)_manager.connection
-                                       startTunnelWithOptions:nil
-                                       andReturnError:&err];
-                        if (!result || err) {
-                            
-                            DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", err.localizedDescription);
-                            _lastError = _standartError;
-                            [self sendNotification];
-                            return;
-                        }
-                        DDLogInfo(@"(APVPNManager) Tunnel started in mode: %@", [self modeDescription:_vpnMode]);
-                    }
-                    else{
-                        //Do nothing if we not have network
-                        [self sendNotification];
-                    }
-                }
-                break;
-                
-            case APVpnConnectionStatusDisconnecting:
-            case APVpnConnectionStatusConnecting:
-                _delayedSetEnabled = @(enabled);
-                break;
-                
-            case APVpnConnectionStatusReconnecting:
-            case APVpnConnectionStatusConnected:
-                if (enabled) {
-                    _delayedSetEnabled = @(YES);
-                }
-                [(NETunnelProviderSession *)_manager.connection stopTunnel];
-                DDLogInfo(@"(APVPNManager) Tunnel stoped in mode: %@",
-                          [self modeDescription:_vpnMode]);
-                break;
-
-            default:
-                break;
+        if (_vpnMode == APVpnModeUndef) {
+            // if we have initial state, when vpn configuration still was not loaded.
+            _delayedSetEnabled = @(enabled);
+            return;
         }
-    }
-    else{
-        _delayedSetEnabled = @(enabled);
+        
+        
         [self updateConfigurationForMode:_vpnMode enabled:enabled];
     }
 }
@@ -360,7 +316,7 @@ static APVPNManager *singletonVPNManager;
 - (void)internalSetMode:(APVpnMode)vpnMode{
     
     if (vpnMode > 0 && vpnMode != _vpnMode) {
-
+        
         if (_vpnMode == APVpnModeUndef) {
             // if we have initial state, when vpn configuration still was not loaded.
             _delayedSetMode = @(vpnMode);
@@ -370,9 +326,66 @@ static APVPNManager *singletonVPNManager;
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForMode:vpnMode enabled:_enabled];
+        [self updateConfigurationForMode:vpnMode enabled:NO];
     }
 }
+
+/*
+//must be called on workingQueue
+- (void)internalSetTunnelEnabled:(BOOL)enabled{
+    
+    if (_connectionStatus) {
+
+        switch (_connectionStatus) {
+
+        case APVpnConnectionStatusDisconnected:
+        case APVpnConnectionStatusInvalid:
+            if (enabled) {
+
+                NSError *err;
+                BOOL result = [(NETunnelProviderSession *)_manager.connection
+                    startTunnelWithOptions:nil
+                            andReturnError:&err];
+                if (!result || err) {
+
+                    DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", err.localizedDescription);
+                    _lastError = _standartError;
+                    [self sendNotification];
+                    return;
+                }
+                DDLogInfo(@"(APVPNManager) Tunnel started in mode: %@", [self modeDescription:_vpnMode]);
+            }
+            break;
+
+        case APVpnConnectionStatusDisconnecting:
+        case APVpnConnectionStatusConnecting:
+            _delayedSetTunnelEnabled = @(enabled);
+            break;
+
+        case APVpnConnectionStatusReconnecting:
+        case APVpnConnectionStatusConnected:
+            if (enabled) {
+                _delayedSetTunnelEnabled = @(YES);
+            }
+            [(NETunnelProviderSession *)_manager.connection stopTunnel];
+            DDLogInfo(@"(APVPNManager) Tunnel stoped in mode: %@",
+                      [self modeDescription:_vpnMode]);
+            break;
+
+        default:
+            break;
+        }
+    }
+    else{
+        
+        if (enabled) {
+            
+            _delayedSetTunnelEnabled = @(enabled);
+            [self updateConfigurationForMode:_vpnMode enabled:enabled];
+        }
+    }
+}
+*/
 
 - (void)loadConfiguration{
 
@@ -446,9 +459,15 @@ static APVPNManager *singletonVPNManager;
     else{
         newManager = [NETunnelProviderManager new];
         newManager.protocolConfiguration = protocol;
+        
+        // Configure onDemand
+        NEOnDemandRuleConnect *rule = [NEOnDemandRuleConnect new];
+        rule.interfaceTypeMatch = NEOnDemandRuleInterfaceTypeAny;
+        newManager.onDemandRules = @[rule];
     }
     
     newManager.enabled = enabled;
+    newManager.onDemandEnabled = enabled;
     newManager.localizedDescription = AE_PRODUCT_NAME VPN_NAME;
     [newManager saveToPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
         if (error){
@@ -479,12 +498,16 @@ static APVPNManager *singletonVPNManager;
 
 - (void)setStatuses{
     
+    _enabled = NO;
+    
     if (_manager) {
         
         _vpnMode = [_protocolConfiguration.providerConfiguration[APVpnManagerParameterMode] intValue];
         
-        if (_manager.enabled) {
+        if (_manager.enabled && _manager.onDemandEnabled) {
             
+            _enabled = YES;
+
             switch (_manager.connection.status) {
                     
                 case NEVPNStatusDisconnected:
@@ -521,20 +544,6 @@ static APVPNManager *singletonVPNManager;
     else{
         _vpnMode = APVpnModeNone;
         _connectionStatus = APVpnConnectionStatusDisabled;
-    }
-    
-    // set agregated status (_enabled)
-    switch (_connectionStatus) {
-            
-        case APVpnConnectionStatusConnecting:
-        case APVpnConnectionStatusReconnecting:
-        case APVpnConnectionStatusConnected:
-            _enabled = YES;
-            break;
-
-        default:
-            _enabled = NO;
-            break;
     }
     
     // start delayed

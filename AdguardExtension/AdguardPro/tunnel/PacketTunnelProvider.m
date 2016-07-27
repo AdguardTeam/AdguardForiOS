@@ -204,9 +204,6 @@ static APTunnelConnectionsHandler *_connectionHandler;
 {
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
-//    @synchronized (_connectionHandler) {
-//        _connectionHandler = nil;
-//    }
 	completionHandler();
 }
 

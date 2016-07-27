@@ -196,14 +196,17 @@
         default:
             break;
     }
+
+    self.statusSwitch.on = self.logSwitch.enabled = manager.enabled;
+    if (!manager.enabled) {
+        
+        [self.logSwitch setOn:NO animated:YES];
+        [self toggleLogStatus:nil];
+    }
     
     switch (manager.connectionStatus) {
             
         case APVpnConnectionStatusReconnecting:
-            self.statusSwitch.on = YES;
-
-            self.logSwitch.enabled = YES;
-            
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
             self.statusLabel.text = NSLocalizedString(@"In Progress",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is 'In Progress'.");
@@ -211,18 +214,10 @@
             
         case APVpnConnectionStatusConnected:
             self.statusLabel.text = NSLocalizedString(@"On",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is On.");
-            self.statusSwitch.on = YES;
-            
-            self.logSwitch.enabled = YES;
             break;
             
         default:
             self.statusLabel.text = NSLocalizedString(@"Off",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Off.");
-            self.statusSwitch.on = NO;
-            
-            [self.logSwitch setOn:NO animated:YES];
-            self.logSwitch.enabled = NO;
-            [self toggleLogStatus:nil];
             break;
     }
     

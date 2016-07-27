@@ -118,7 +118,7 @@ extern NSString *APVpnManagerErrorDomain;
 /**
  Switch on/off of the fake vpn.
  */
-- (void)setEnabled:(BOOL)enabled;
+@property BOOL enabled;
 
 /**
  Sets mode of the vpn configuration.
