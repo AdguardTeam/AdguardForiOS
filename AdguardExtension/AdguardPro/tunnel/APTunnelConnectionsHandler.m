@@ -42,7 +42,8 @@
     BOOL _loggingEnabled;
     OSSpinLock _loggingLock;
     NSMutableArray <APDnsLogRecord *> *_loggingCache;
-
+    
+    BOOL _packetFlowObserver;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -67,6 +68,9 @@
 
 - (void)dealloc {
 
+    if (_packetFlowObserver) {
+        [_provider removeObserver:self forKeyPath:@"packetFlow"];
+    }
     [self saveLoggingCache];
 }
 
@@ -75,12 +79,16 @@
 
 - (void)startHandlingPackets {
 
-    __typeof__(self) __weak wSelf = self;
-    [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+    if (_provider.packetFlow) {
 
-        __typeof__(self) sSelf = wSelf;
-        [sSelf handlePackets:packets protocols:protocols];
-    }];
+        [self startHandlingPacketsInternal];
+    } else {
+
+        DDLogWarn(@"(APTunnelConnectionsHandler) - startHandlingPackets PacketFlow empty!");
+
+        [_provider addObserver:self forKeyPath:@"packetFlow" options:0 context:NULL];
+        _packetFlowObserver = YES;
+    }
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
@@ -105,15 +113,6 @@
             if (count > 0) {
                 [_loggingCache removeObjectsInRange:NSMakeRange(0, count)];
             }
-            //TODO: delete this
-//            else{
-//                
-//                while (_loggingCache.count < APT_DNS_LOG_MAX_COUNT) {
-//                    
-//                    [_loggingCache addObjectsFromArray:records];
-//                }
-//            }
-            //---------------
             [_loggingCache addObjectsFromArray:records];
         }
         OSSpinLockUnlock(&_loggingLock);
@@ -173,7 +172,43 @@
 }
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+
+    if ([keyPath isEqual:@"packetFlow"]) {
+
+        DDLogDebug(@"(APTunnelConnectionsHandler) KVO _provider.packetFlow: %@", _provider.packetFlow);
+        if (_provider.packetFlow) {
+
+            if (_packetFlowObserver) {
+                
+                [_provider removeObserver:self forKeyPath:@"packetFlow"];
+                _packetFlowObserver = NO;
+            }
+            [self startHandlingPacketsInternal];
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark - Helper Methods
+
+- (void)startHandlingPacketsInternal {
+    
+    __typeof__(self) __weak wSelf = self;
+
+    DDLogDebug(@"(APTunnelConnectionsHandler) startHandlingPacketsInternal");
+    [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+        
+        __typeof__(self) sSelf = wSelf;
+        [sSelf handlePackets:packets protocols:protocols];
+    }];
+
+}
 
 /// Handle packets coming from the packet flow.
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
@@ -261,15 +296,20 @@
 
 - (void)saveLoggingCache {
 
-    if (_loggingCache.count) {
+    NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
 
-        NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
+    NSData *dataToSave;
+    if (_loggingCache) {
+        
+        dataToSave = [NSKeyedArchiver archivedDataWithRootObject:_loggingCache];
+    }
+    else {
+        dataToSave = [NSKeyedArchiver archivedDataWithRootObject:@[]];
+    }
+    
+    if (dataToSave) {
 
-        NSData *dataToSave = [NSKeyedArchiver archivedDataWithRootObject:_loggingCache];
-        if (dataToSave) {
-
-            [dataToSave writeToURL:dataUrl atomically:YES];
-        }
+        [dataToSave writeToURL:dataUrl atomically:YES];
     }
 }
 

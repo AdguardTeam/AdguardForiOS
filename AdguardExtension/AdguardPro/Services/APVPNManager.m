@@ -246,6 +246,11 @@ static APVPNManager *singletonVPNManager;
 - (void)obtainDnsLogRecords:(void (^)(NSArray<APDnsLogRecord *> *records))completionBlock {
 
     _lastError = nil;
+    
+    if (completionBlock == nil) {
+        return;
+    }
+    
     if (_manager.connection) {
 
         NSData *message = [APMDnsLoggingGiveRecords dataUsingEncoding:NSUTF8StringEncoding];
@@ -256,11 +261,17 @@ static APVPNManager *singletonVPNManager;
             if (responseData.length) {
 
                 NSArray<APDnsLogRecord *> *records = [NSKeyedUnarchiver unarchiveObjectWithData:responseData];
-                completionBlock(records);
+                dispatch_async(dispatch_get_main_queue(), ^{
+
+                    completionBlock(records);
+                });
                 return;
             }
 
-            completionBlock(nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completionBlock(nil);
+            });
         }];
 
         if (err) {

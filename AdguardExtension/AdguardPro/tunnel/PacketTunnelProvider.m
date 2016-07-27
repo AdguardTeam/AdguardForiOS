@@ -42,9 +42,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     void (^pendingStartCompletion)(NSError *error);
     
-    APTunnelConnectionsHandler *_connectionHandler;
     APVpnMode _currentMode;
 }
+
+static APTunnelConnectionsHandler *_connectionHandler;
 
 + (void)initialize{
     
@@ -56,6 +57,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
 #endif
+        
+        _connectionHandler = nil;
     }
 }
 
@@ -136,7 +139,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
         __typeof__(self) sSelf = wSelf;
 
-        [sSelf->_connectionHandler startHandlingPackets];
+        @synchronized (_connectionHandler) {
+            if (_connectionHandler) {
+                [_connectionHandler startHandlingPackets];
+            }
+        }
 
         sSelf->pendingStartCompletion(error);
         sSelf->pendingStartCompletion = nil;
@@ -148,7 +155,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 	// Add code here to start the process of stopping the tunnel.
     DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Event");
     
-    @synchronized (self) {
+    @synchronized (_connectionHandler) {
         _connectionHandler = nil;
     }
     
@@ -157,34 +164,39 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
 {
+    DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
+    
     NSString *command = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
 
     [self restoreConnectionHandlerWithStartHandling:NO];
     
-    // Logging command conversations
-    if ([command isEqualToString:APMDnsLoggingEnabled]) {
-
-        //Log enabled
-        [_connectionHandler setDnsActivityLoggingEnabled:YES];
-    } else if ([command isEqualToString:APMDnsLoggingDisabled]) {
-
-        //Log disabled
-        [_connectionHandler setDnsActivityLoggingEnabled:NO];
-    } else if ([command isEqualToString:APMDnsLoggingClearLog]) {
-
-        //Clear log
-        [_connectionHandler clearDnsActivityLog];
-    } else if ([command isEqualToString:APMDnsLoggingGiveRecords]) {
-
-        //Request for log records
-        NSArray *records = [_connectionHandler dnsActivityLogRecords];
-        if (records.count) {
-
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:records];
-            completionHandler(data);
-            return;
+    @synchronized (_connectionHandler) {
+        
+        // Logging command conversations
+        if ([command isEqualToString:APMDnsLoggingEnabled]) {
+            
+            //Log enabled
+            [_connectionHandler setDnsActivityLoggingEnabled:YES];
+        } else if ([command isEqualToString:APMDnsLoggingDisabled]) {
+            
+            //Log disabled
+            [_connectionHandler setDnsActivityLoggingEnabled:NO];
+        } else if ([command isEqualToString:APMDnsLoggingClearLog]) {
+            
+            //Clear log
+            [_connectionHandler clearDnsActivityLog];
+        } else if ([command isEqualToString:APMDnsLoggingGiveRecords]) {
+            
+            //Request for log records
+            NSArray *records = [_connectionHandler dnsActivityLogRecords];
+            if (records.count) {
+                
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:records];
+                completionHandler(data);
+                return;
+            }
+            completionHandler(nil);
         }
-        completionHandler(nil);
     }
 }
 
@@ -192,9 +204,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
-    @synchronized (self) {
-        _connectionHandler = nil;
-    }
+//    @synchronized (_connectionHandler) {
+//        _connectionHandler = nil;
+//    }
 	completionHandler();
 }
 
@@ -216,9 +228,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (NSError *)restoreConnectionHandlerWithStartHandling:(BOOL)startHandling{
     
-    @synchronized (self) {
+    @synchronized (_connectionHandler) {
         
         if (_connectionHandler == nil) {
+            
+           DDLogWarn(@"(PacketTunnelProvider) _connectionHandler is NULL, restoreConnectionHandlerWithStartHandling.");
             
             // Create connection handler
             _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];

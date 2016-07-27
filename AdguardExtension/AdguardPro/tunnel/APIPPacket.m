@@ -197,7 +197,9 @@
         _ipHeaderLength = _ipHeader->ip_hl * 4; //unit 32bit
         
         _protocol = _ipHeader->ip_p;
-        
+#if DEBUG
+        _ipId = [NSString stringWithFormat:@"%d",_ipHeader->ip_id];
+#endif
         _dstAddress = [NSString stringWithUTF8String:inet_ntoa(_ipHeader->ip_dst)];
         _srcAddress = [NSString stringWithUTF8String:inet_ntoa(_ipHeader->ip_src)];
         
@@ -224,7 +226,11 @@
         
         _ipHeader->ip_v = IPVERSION;
         _ipHeader->ip_hl = 5;
+        
         _ipHeader->ip_id = 0;
+#if DEBUG
+        _ipId = @"0";
+#endif
         _ipHeader->ip_len = htons(_ipHeaderLength);
         _ipHeader->ip_off = 0;
         _ipHeader->ip_ttl = 255; //seconds

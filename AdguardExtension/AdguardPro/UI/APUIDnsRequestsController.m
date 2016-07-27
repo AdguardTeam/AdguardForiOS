@@ -20,8 +20,8 @@
 @interface APUIDnsRequestsController ()
 
 @property (strong, nonatomic) UISearchController *searchController;
-@property (nonatomic) NSArray <APDnsLogRecord *> *logRecords;
-@property (nonatomic) NSArray <APDnsLogRecord *> *filteredLogRecords;
+@property NSArray <APDnsLogRecord *> *logRecords;
+@property NSArray <APDnsLogRecord *> *filteredLogRecords;
 
 @end
 

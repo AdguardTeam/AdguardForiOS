@@ -18,13 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-#ifdef PRO
-
-    self.backgroundImage.image = [UIImage imageNamed:@"pro-launch-background"];
-#else
+//#ifdef PRO
+//
+//    self.backgroundImage.image = [UIImage imageNamed:@"pro-launch-background"];
+//#else
     
     self.backgroundImage.image = [UIImage imageNamed:@"launch-background"];
-#endif
+//#endif
     
 }
 

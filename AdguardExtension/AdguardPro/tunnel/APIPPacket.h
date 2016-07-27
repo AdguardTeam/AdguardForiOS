@@ -73,6 +73,10 @@ uint16_t checksum_finalize(uint32_t sum);
 @property (readonly, nonatomic) NSNumber *aFamily;
 @property (readonly, nonatomic) int protocol;
 
+#if DEBUG
+@property (readonly, nonatomic) NSString *ipId;
+#endif
+
 @property NSData *payload;
 @property NSString *srcAddress;
 @property NSString *dstAddress;
