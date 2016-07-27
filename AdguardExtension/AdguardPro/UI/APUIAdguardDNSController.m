@@ -213,11 +213,11 @@
             break;
             
         case APVpnConnectionStatusConnected:
-            self.statusLabel.text = NSLocalizedString(@"On",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is On.");
+            self.statusLabel.text = NSLocalizedString(@"Connected",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Connected.");
             break;
             
         default:
-            self.statusLabel.text = NSLocalizedString(@"Off",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Off.");
+            self.statusLabel.text = NSLocalizedString(@"Not Connected",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Not Connected.");
             break;
     }
     

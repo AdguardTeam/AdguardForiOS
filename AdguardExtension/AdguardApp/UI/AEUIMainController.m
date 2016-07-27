@@ -503,7 +503,7 @@
             if (manager.enabled)
                 self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
             else
-                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Off",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Off.");
+                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Not Connected.");
             break;
     }
     
