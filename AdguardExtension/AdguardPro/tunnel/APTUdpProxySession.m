@@ -421,11 +421,11 @@
                 [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
             }
             
-#if DEBUG
-            DDLogInfo(@"DNS Request (ID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-#else
+//#if DEBUG
+//            DDLogInfo(@"DNS Request (ID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
+//#else
             DDLogInfo(@"DNS Request (ID:%@) srcPort: %@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-#endif
+//#endif
             APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
 
             record.requests = datagram.requests;
@@ -451,11 +451,11 @@
                 [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
             }
 
-#if DEBUG
-            DDLogInfo(@"DNS Response (ID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-#else
+//#if DEBUG
+//            DDLogInfo(@"DNS Response (ID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
+//#else
             DDLogInfo(@"DNS Response (ID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-#endif
+//#endif
             
             APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
             

@@ -29,7 +29,7 @@
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
 
-#define APT_DNS_LOG_MAX_COUNT           2000
+#define APT_DNS_LOG_MAX_COUNT           500
 #define LOGGING_DATA_FILENAME           @"dnsRequestLoggingData.dat"
 
 #define TTL_SESSION                     30 //seconds
