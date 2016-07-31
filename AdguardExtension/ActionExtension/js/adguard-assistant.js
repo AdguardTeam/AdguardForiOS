@@ -425,7 +425,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   // PUBLIC API
   api.init = function (settings) {
     // default vaules
-    i18n = typeof settings.i18n !== 'undefined' ? settings.i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
+    i18n = (typeof settings !== 'undefined' && typeof settings.i18n !== 'undefined') ? settings.i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
 
     //set accept url scheme
     acceptUrlScheme = typeof settings.urlScheme !== 'undefined' ? settings.urlScheme : "adguard";
