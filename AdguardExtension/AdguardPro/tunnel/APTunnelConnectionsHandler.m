@@ -29,10 +29,6 @@
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
 
-#define APT_DNS_LOG_MAX_COUNT           500
-#define LOGGING_DATA_FILENAME           @"dnsRequestLoggingData.dat"
-
-#define TTL_SESSION                     30 //seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -74,7 +70,6 @@
     if (_packetFlowObserver) {
         [_provider removeObserver:self forKeyPath:@"packetFlow"];
     }
-    [self saveLoggingCache];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -102,88 +97,9 @@
     }
 }
 
-- (void)writeToDnsActivityLog:(NSArray<APDnsLogRecord *> *)records {
-
-    if (_loggingEnabled && records.count) {
-
-        OSSpinLockLock(&_loggingLock);
-
-        NSInteger count = records.count;
-        if (count >= APT_DNS_LOG_MAX_COUNT) {
-            [_loggingCache setArray:[records subarrayWithRange:NSMakeRange((count - APT_DNS_LOG_MAX_COUNT), APT_DNS_LOG_MAX_COUNT)]];
-        } else {
-            count = count - APT_DNS_LOG_MAX_COUNT + _loggingCache.count;
-            if (count > 0) {
-                [_loggingCache removeObjectsInRange:NSMakeRange(0, count)];
-            }
-            [_loggingCache addObjectsFromArray:records];
-        }
-        
-        // ping 
-        [_saveLogExecution executeOnceForInterval];
-
-        OSSpinLockUnlock(&_loggingLock);
-    }
-}
-
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
 
-    if (enabled != _loggingEnabled) {
-
-        OSSpinLockLock(&_loggingLock);
-
-        if (enabled) {
-
-            if (_loggingCache == nil) {
-                _loggingCache = [NSMutableArray new];
-                
-                // restore logging data from file (synchronously)
-                NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
-                if ([dataUrl checkResourceIsReachableAndReturnError:NULL]) {
-                    
-                    NSData *loggingCacheDataFromDisk = [NSData dataWithContentsOfURL:dataUrl];
-                    NSArray *savedLoggingCache = [NSKeyedUnarchiver unarchiveObjectWithData:loggingCacheDataFromDisk];
-                    if (savedLoggingCache && [savedLoggingCache isKindOfClass:[NSArray class]]) {
-                        
-                        [_loggingCache addObjectsFromArray:savedLoggingCache];
-                    }
-                }
-                
-                // crete save log timer
-                __weak __typeof__(self) wSelf = self;
-                _saveLogExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:dispatch_get_main_queue() block:^{
-                    
-                    __typeof__(self) sSelf = wSelf;
-                    [sSelf saveLoggingCache];
-                }];
-            }
-        }
-
-        _loggingEnabled = enabled;
-
-        OSSpinLockUnlock(&_loggingLock);
-    }
-}
-
-- (void)clearDnsActivityLog {
-
-    OSSpinLockLock(&_loggingLock);
-
-    [_loggingCache removeAllObjects];
-
-    OSSpinLockUnlock(&_loggingLock);
-}
-
-- (NSArray <APDnsLogRecord *> *)dnsActivityLogRecords{
-    
-    NSArray <APDnsLogRecord *> *result;
-    OSSpinLockLock(&_loggingLock);
-    
-    result = [_loggingCache copy];
-    
-    OSSpinLockUnlock(&_loggingLock);
-    
-    return (result ?: @[]);
+    _loggingEnabled = enabled;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -306,25 +222,6 @@
 
           [session appendPackets:obj];
         }];
-    }
-}
-
-- (void)saveLoggingCache {
-
-    NSURL *dataUrl = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:LOGGING_DATA_FILENAME];
-
-    NSData *dataToSave;
-    if (_loggingCache) {
-        
-        dataToSave = [NSKeyedArchiver archivedDataWithRootObject:_loggingCache];
-    }
-    else {
-        dataToSave = [NSKeyedArchiver archivedDataWithRootObject:@[]];
-    }
-    
-    if (dataToSave) {
-
-        [dataToSave writeToURL:dataUrl atomically:YES];
     }
 }
 
