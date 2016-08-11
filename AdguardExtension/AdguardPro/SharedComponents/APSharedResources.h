@@ -18,6 +18,9 @@
 #import <Foundation/Foundation.h>
 #import "AESharedResources.h"
 
+
+@class APDnsLogRecord;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources Constants
 
@@ -30,8 +33,6 @@ extern NSString *APDefaultsDnsLoggingEnabled;
 // Commands for controlling "DNS activity log", between tunnel provider extension and host application.
 extern NSString *APMDnsLoggingEnabled;
 extern NSString *APMDnsLoggingDisabled;
-extern NSString *APMDnsLoggingGiveRecords;
-extern NSString *APMDnsLoggingClearLog;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -43,5 +44,11 @@ extern NSString *APMDnsLoggingClearLog;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
+
++ (NSArray <APDnsLogRecord *> *)readDnsLog;
+
++ (BOOL)removeDnsLog;
+
++ (void)writeToDnsLogRecords:(NSArray <APDnsLogRecord *> *)logRecords;
 
 @end

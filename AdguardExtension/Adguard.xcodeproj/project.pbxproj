@@ -396,6 +396,16 @@
 		65B40D5F1BDFF28D00A9C595 /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
 		65B40D601BDFF2AC00A9C595 /* AEUILoadingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5B1BDFF28C00A9C595 /* AEUILoadingModal.m */; };
 		65B40D611BDFF2AC00A9C595 /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
+		65B4F02D1D5C828300893BA0 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
+		65B4F02E1D5C828300893BA0 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE01BB9824C00F53F3B /* FMDatabaseAdditions.m */; };
+		65B4F02F1D5C828300893BA0 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
+		65B4F0301D5C828300893BA0 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE41BB9824C00F53F3B /* FMDatabaseQueue.m */; };
+		65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
+		65B4F0321D5C829100893BA0 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		65B4F0331D5C829100893BA0 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		65B6210F1D2D3E290047248F /* APIPPacketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B6210E1D2D3E290047248F /* APIPPacketTest.m */; };
 		65B621101D2D41880047248F /* APIPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B61D2CF97900CF8C11 /* APIPPacket.m */; };
 		65B621141D2E4F8F0047248F /* APUDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B621131D2E4F8F0047248F /* APUDPPacket.m */; };
@@ -1039,6 +1049,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1700,7 +1711,6 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
-				65C98AA21D3661B500E4B57D /* libresolv.tbd */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
 				65F398131B7B684700ABCD39 /* AdguardApp */,
 				659886E91CF8315F003ECD1C /* AdguardPro */,
@@ -1796,6 +1806,7 @@
 		65F3986F1B7C8A2000ABCD39 /* Linked Frameworks/Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				65C98AA21D3661B500E4B57D /* libresolv.tbd */,
 				65E5A0991B8632F600319AA3 /* libz.tbd */,
 				65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */,
 				655E94921BBEADD500286FBE /* AVKit.framework */,
@@ -2427,6 +2438,8 @@
 				65B6211A1D2E845D0047248F /* APTDnsRequest.m in Sources */,
 				655AAC911D37780700E316EA /* APDnsResponse.m in Sources */,
 				653AE9F81D084B6400AC81B4 /* ACLLogger.m in Sources */,
+				65B4F02E1D5C828300893BA0 /* FMDatabaseAdditions.m in Sources */,
+				65B4F02D1D5C828300893BA0 /* FMDatabase.m in Sources */,
 				65B621211D2F95EE0047248F /* APTUdpProxySession.m in Sources */,
 				655AAC8E1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */,
@@ -2435,17 +2448,22 @@
 				657672B21D2BAA6300CF8C11 /* APTunnelConnectionsHandler.m in Sources */,
 				653AE9FE1D084B6400AC81B4 /* DDLog.m in Sources */,
 				653AE9F61D084B6400AC81B4 /* ACLFileLogger.m in Sources */,
+				65B4F0301D5C828300893BA0 /* FMDatabaseQueue.m in Sources */,
 				6598394A1D182D74005824ED /* Reachability.m in Sources */,
+				65B4F0331D5C829100893BA0 /* ADBTableRow.m in Sources */,
 				655AAC881D37780700E316EA /* APDnsDatagram.m in Sources */,
 				653AEA011D084B6400AC81B4 /* DDDispatchQueueLogFormatter.m in Sources */,
+				65B4F02F1D5C828300893BA0 /* FMDatabasePool.m in Sources */,
 				653AE9F51D084B6400AC81B4 /* ACLFileLocker.m in Sources */,
 				659839491D182D6C005824ED /* APVPNManager.m in Sources */,
 				65B621141D2E4F8F0047248F /* APUDPPacket.m in Sources */,
 				655AACB71D3CD38000E316EA /* ACObject.m in Sources */,
 				653AEA021D084B6400AC81B4 /* DDMultiFormatter.m in Sources */,
 				653AE9F71D084B6400AC81B4 /* ACLJobController.m in Sources */,
+				65B4F0321D5C829100893BA0 /* ADBTable.m in Sources */,
 				65B621251D3139FF0047248F /* APTEndpoint.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
+				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
 				657672B31D2BB9B100CF8C11 /* AESharedResources.m in Sources */,
 				653AE9FA1D084B6400AC81B4 /* CLIColor.m in Sources */,
 			);
@@ -2483,6 +2501,7 @@
 				659886671CF74DE9003ECD1C /* AEUIFilterRuleObject.m in Sources */,
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
+				65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */,
 				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
@@ -2536,6 +2555,7 @@
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				659886951CF74DE9003ECD1C /* AESAntibanner.m in Sources */,
 				659886961CF74DE9003ECD1C /* DDMultiFormatter.m in Sources */,
+				65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */,
 				659886971CF74DE9003ECD1C /* ACLJobController.m in Sources */,
 				659886981CF74DE9003ECD1C /* AEUISubscriptionTableViewCell.m in Sources */,
 				659886991CF74DE9003ECD1C /* Reachability.m in Sources */,

@@ -181,22 +181,7 @@ static APTunnelConnectionsHandler *_connectionHandler;
             
             //Log disabled
             [_connectionHandler setDnsActivityLoggingEnabled:NO];
-        } else if ([command isEqualToString:APMDnsLoggingClearLog]) {
-            
-            //Clear log
-            [_connectionHandler clearDnsActivityLog];
-        } else if ([command isEqualToString:APMDnsLoggingGiveRecords]) {
-            
-            //Request for log records
-            NSArray *records = [_connectionHandler dnsActivityLogRecords];
-            if (records.count) {
-                
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:records];
-                completionHandler(data);
-                return;
-            }
-            completionHandler(nil);
-        }
+        } 
     }
 }
 

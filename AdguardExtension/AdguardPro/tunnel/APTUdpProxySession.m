@@ -21,6 +21,7 @@
 #import "APDnsLogRecord.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
+#import "APSharedResources.h"
 #import "APTUdpProxySession.h"
 #import "APTunnelConnectionsHandler.h"
 #import "APUDPPacket.h"
@@ -474,7 +475,7 @@
 
         if (flush) {
 
-            [self.delegate writeToDnsActivityLog:_dnsRecords];
+            [APSharedResources writeToDnsLogRecords:_dnsRecords];
             [_dnsRecords removeAllObjects];
             [_dnsRecordsSet removeAllObjects];
         } else {
@@ -495,7 +496,7 @@
             if (records.count) {
 
                 [_dnsRecords removeObjectsInRange:NSMakeRange(0, records.count)];
-                [self.delegate writeToDnsActivityLog:records];
+                [APSharedResources writeToDnsLogRecords:records];
             }
         }
     }
