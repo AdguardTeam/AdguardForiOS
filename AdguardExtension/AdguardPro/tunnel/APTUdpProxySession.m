@@ -135,9 +135,6 @@
 
     [self setWhitelistSession:nil];
     [self setSession:nil];
-    if (_workingQueue) {
-        dispatch_resume(_workingQueue);
-    }
     _workingQueue = nil;
 }
 
@@ -330,13 +327,14 @@
         
         [self setSessionReaders:_udpSession];
 
-        if (oldSession) {
-            dispatch_resume(_workingQueue);
-        }
-
         //start timeout timer
         [_timeoutExecution executeOnceAfterCalm];
     }
+    
+    if (oldSession) {
+        dispatch_resume(_workingQueue);
+    }
+    
 }
 
 - (void)setWhitelistSession:(NWUDPSession *)session {
@@ -359,16 +357,14 @@
         locLogVerboseTrace(@"newWhitelistSession");
         
         
-        if (oldSession) {
-            dispatch_resume(_workingQueue);
-        }
-        
         _whitelistUdpSession = session;
         
         [self setSessionReaders:_whitelistUdpSession];
-        
-        //start timeout timer
-        [_timeoutExecution executeOnceAfterCalm];
+
+    }
+    
+    if (oldSession) {
+        dispatch_resume(_workingQueue);
     }
 }
 
@@ -475,16 +471,7 @@
                     return;
                 }
                 // write packets to main UDP session
-//                if (packets.count) {
-//TODO: delete this
-                [packets removeAllObjects];
-                //----------
-                    [_udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
-//                }
-//                else {
-//                    [sSelf->_timeoutExecution executeOnceAfterCalm];
-//                    _waitWrite = NO;
-//                }
+                [_udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
             }];
         }
         else

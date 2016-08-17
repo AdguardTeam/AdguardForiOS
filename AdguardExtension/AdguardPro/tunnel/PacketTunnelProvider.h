@@ -42,6 +42,4 @@ extern NSString *APTunnelProviderErrorDomain;
  */
 - (APVpnMode)vpnMode;
 
-- (NSString *)getDNSServers;
-
 @end

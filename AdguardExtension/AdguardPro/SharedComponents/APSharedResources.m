@@ -148,32 +148,11 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return [NSData dataWithBytes:&message length:1];
 }
 
-+ (NSData *)host2tunnelMessageWhitelist:(NSArray <NSString *> *)domains {
++ (NSData *)host2tunnelMessageWhitelistReload {
     
-    if (!domains) {
-        return nil;
-    }
+    APHost2TunnelMessageType message = APHTMWhitelistDomainsReload;
     
-    APHost2TunnelMessageType message = APHTMWhitelistDomains;
-    
-    NSData *payload = [NSKeyedArchiver archivedDataWithRootObject:domains];
-    NSMutableData *result = [NSMutableData dataWithBytes:&message length:1];
-    [result appendData:payload];
-    
-    return result;
-}
-
-+ (NSArray <NSString *> *)domainsFromHost2tunnelMessageWhitelist:(NSData *)messageData {
-    
-    if ([self host2tunnelMessageType:messageData] != APHTMWhitelistDomains) {
-        
-        return nil;
-    }
-    
-    NSData *payload = [NSData dataWithBytesNoCopy:((Byte *)[messageData bytes]+1) length:(messageData.length-1)];
-    
-    NSArray <NSString *> * result = [NSKeyedUnarchiver unarchiveObjectWithData:payload];
-    return result;
+    return [NSData dataWithBytes:&message length:1];
 }
 
 /////////////////////////////////////////////////////////////////////

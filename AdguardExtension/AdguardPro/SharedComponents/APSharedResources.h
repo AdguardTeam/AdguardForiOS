@@ -35,8 +35,8 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     // Commands for controlling "DNS activity log", between tunnel provider extension and host application.
     APHTMLoggingEnabled = 1,
     APHTMLoggingDisabled,
-    // Command for transferring whitelist of the domains
-    APHTMWhitelistDomains
+    // Command for notification of the tunnel provider extension that domains whitelist were changed.
+    APHTMWhitelistDomainsReload
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -59,7 +59,5 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 + (APHost2TunnelMessageType)host2tunnelMessageType:(NSData *)messageData;
 + (NSData *)host2tunnelMessageLogEnabled;
 + (NSData *)host2tunnelMessageLogDisabled;
-+ (NSData *)host2tunnelMessageWhitelist:(NSArray <NSString *> *)domains;
-+ (NSArray <NSString *> *)domainsFromHost2tunnelMessageWhitelist:(NSData *)messageData;
-
++ (NSData *)host2tunnelMessageWhitelistReload;
 @end

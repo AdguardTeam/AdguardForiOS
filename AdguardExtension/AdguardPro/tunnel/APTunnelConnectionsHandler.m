@@ -29,6 +29,7 @@
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
 
+#define DEFAULT_DNS_SERVER_IP           @"208.67.222.222" // opendns.com
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -86,6 +87,12 @@
 
     if (!(deviceDnsAddresses.count && adguardDnsAddresses.count)) {
         
+        OSSpinLockLock(&_dnsAddressLock);
+        
+        //set default device DNS to first address.
+        _deviceDnsAddressForAny = DEFAULT_DNS_SERVER_IP;
+        
+        OSSpinLockUnlock(&_dnsAddressLock);
         return;
     }
     

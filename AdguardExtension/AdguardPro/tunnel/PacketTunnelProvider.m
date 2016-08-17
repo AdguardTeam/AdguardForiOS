@@ -23,6 +23,12 @@
 #import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
 
+#import "ASDFilterObjects.h"
+#import "AESAntibanner.h"
+#import "AEService.h"
+#import "AEUIWhitelistDomainObject.h"
+#import "ASDatabase.h"
+
 #include <arpa/inet.h>
 #include <ifaddrs.h>
 #include <resolv.h>
@@ -87,11 +93,10 @@ static APTunnelConnectionsHandler *_connectionHandler;
 {
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
-    NSString *currentDNSServers = [self getDNSServers];
+    // Init database
+    [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
     
     [_reachabilityHandler startNotifier];
-
-    DDLogInfo(@"(PacketTunnelProvider) Current DNS servers: %@", currentDNSServers);
     
    pendingStartCompletion = completionHandler;
     
@@ -157,6 +162,9 @@ static APTunnelConnectionsHandler *_connectionHandler;
         return;
     }
     
+    [_connectionHandler setDeviceDnsAddresses:[self getDNSServers] adguardDnsAddresses:ipv4DnsAddresses];
+    [self reloadWhitelistDomain];
+    
     // SETs network settings
     __typeof__(self) __weak wSelf = self;
     [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
@@ -207,10 +215,11 @@ static APTunnelConnectionsHandler *_connectionHandler;
                 [_connectionHandler setDnsActivityLoggingEnabled:NO];
                 break;
                 
-            case APHTMWhitelistDomains:
+            case APHTMWhitelistDomainsReload:
                 //Set whitelist domains
-//                [_connectionHandler setDnsActivityLoggingEnabled:NO];
+                [self reloadWhitelistDomain];
                 break;
+                
             default:
                 break;
         }
@@ -240,26 +249,38 @@ static APTunnelConnectionsHandler *_connectionHandler;
     return _currentMode;
 }
 
-- (NSString *)getDNSServers {
-    // dont forget to link libresolv.lib
-    NSMutableString *addresses = [[NSMutableString alloc] initWithString:@"DNS Addresses \n"];
-    
-    res_state res = malloc(sizeof(struct __res_state));
-    
-    int result = res_ninit(res);
-    
-    if (result == 0) {
-        for (int i = 0; i < res->nscount; i++) {
-            NSString *s = [NSString stringWithUTF8String:inet_ntoa(res->nsaddr_list[i].sin_addr)];
-            [addresses appendFormat:@"%@\n", s];
-            NSLog(@"%@", s);
+- (NSArray <NSString *> *)getDNSServers {
+    @autoreleasepool {
+        
+        NSMutableArray *ips = [NSMutableArray array];
+        res_state res = malloc(sizeof(struct __res_state));
+        int result = res_ninit(res);
+        if (result == 0) {
+            union res_9_sockaddr_union *addr_union = malloc(res->nscount * sizeof(union res_9_sockaddr_union));
+            res_getservers(res, addr_union, res->nscount);
+            
+            const char *str;
+            for (int i = 0; i < res->nscount; i++) {
+                if (addr_union[i].sin.sin_family == AF_INET) {
+                    char ip[INET_ADDRSTRLEN];
+                    str = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
+                } else if (addr_union[i].sin6.sin6_family == AF_INET6) {
+                    char ip[INET6_ADDRSTRLEN];
+                    str = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
+                } else {
+                    str = NULL;
+                }
+                
+                if (str) {
+                    [ips addObject:[NSString stringWithUTF8String:str]];
+                }
+            }
         }
-    } else
-        [addresses appendString:@" res_init result != 0"];
-    
-    free(res);
-    
-    return addresses;
+        res_nclose(res);
+        free(res);
+        
+        return [ips copy];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -297,4 +318,26 @@ static APTunnelConnectionsHandler *_connectionHandler;
     return nil;
 }
 
+- (void)reloadWhitelistDomain {
+    
+    @autoreleasepool {
+        
+        NSArray *rules = [[[AEService singleton] antibanner]
+                          rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        
+        NSMutableArray *wRules = [NSMutableArray array];
+        AEUIWhitelistDomainObject *object;
+        for (ASDFilterRule *item in rules) {
+            
+            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            if (object) {
+                [wRules addObject:object];
+            }
+        }
+        
+        wRules = [wRules valueForKey:@"domain"];
+        
+        [_connectionHandler setWhitelistDomains:wRules];
+    }
+}
 @end
