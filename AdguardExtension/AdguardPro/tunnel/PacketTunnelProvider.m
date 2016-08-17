@@ -18,9 +18,15 @@
 
 #import "PacketTunnelProvider.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
 #import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
+
+#include <arpa/inet.h>
+#include <ifaddrs.h>
+#include <resolv.h>
+#include <dns.h>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider Constants
@@ -43,6 +49,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     void (^pendingStartCompletion)(NSError *error);
     
     APVpnMode _currentMode;
+    Reachability *_reachabilityHandler;
 }
 
 static APTunnelConnectionsHandler *_connectionHandler;
@@ -62,12 +69,29 @@ static APTunnelConnectionsHandler *_connectionHandler;
     }
 }
 
+- (id)init {
+    
+    self = [super init];
+    if (self) {
+        _reachabilityHandler = [Reachability reachabilityForInternetConnection];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
+    }
+    return self;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Controll connection methods
 
 - (void)startTunnelWithOptions:(NSDictionary *)options completionHandler:(void (^)(NSError *))completionHandler
 {
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
+    
+    NSString *currentDNSServers = [self getDNSServers];
+    
+    [_reachabilityHandler startNotifier];
+
+    DDLogInfo(@"(PacketTunnelProvider) Current DNS servers: %@", currentDNSServers);
     
    pendingStartCompletion = completionHandler;
     
@@ -155,6 +179,8 @@ static APTunnelConnectionsHandler *_connectionHandler;
 	// Add code here to start the process of stopping the tunnel.
     DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Event");
     
+    [_reachabilityHandler stopNotifier];
+
     @synchronized (_connectionHandler) {
         _connectionHandler = nil;
     }
@@ -166,22 +192,28 @@ static APTunnelConnectionsHandler *_connectionHandler;
 {
     DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
     
-    NSString *command = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
-
     [self restoreConnectionHandlerWithStartHandling:NO];
     
     @synchronized (_connectionHandler) {
         
-        // Logging command conversations
-        if ([command isEqualToString:APMDnsLoggingEnabled]) {
-            
-            //Log enabled
-            [_connectionHandler setDnsActivityLoggingEnabled:YES];
-        } else if ([command isEqualToString:APMDnsLoggingDisabled]) {
-            
-            //Log disabled
-            [_connectionHandler setDnsActivityLoggingEnabled:NO];
-        } 
+        switch ([APSharedResources host2tunnelMessageType:messageData]) {
+            case APHTMLoggingEnabled:
+                //Log enabled
+                [_connectionHandler setDnsActivityLoggingEnabled:YES];
+                break;
+                
+            case APHTMLoggingDisabled:
+                //Log disabled
+                [_connectionHandler setDnsActivityLoggingEnabled:NO];
+                break;
+                
+            case APHTMWhitelistDomains:
+                //Set whitelist domains
+//                [_connectionHandler setDnsActivityLoggingEnabled:NO];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -206,6 +238,39 @@ static APTunnelConnectionsHandler *_connectionHandler;
 - (APVpnMode)vpnMode{
 
     return _currentMode;
+}
+
+- (NSString *)getDNSServers {
+    // dont forget to link libresolv.lib
+    NSMutableString *addresses = [[NSMutableString alloc] initWithString:@"DNS Addresses \n"];
+    
+    res_state res = malloc(sizeof(struct __res_state));
+    
+    int result = res_ninit(res);
+    
+    if (result == 0) {
+        for (int i = 0; i < res->nscount; i++) {
+            NSString *s = [NSString stringWithUTF8String:inet_ntoa(res->nsaddr_list[i].sin_addr)];
+            [addresses appendFormat:@"%@\n", s];
+            NSLog(@"%@", s);
+        }
+    } else
+        [addresses appendString:@" res_init result != 0"];
+    
+    free(res);
+    
+    return addresses;
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods (private)
+
+- (void)reachNotify:(NSNotification *)note {
+    
+    self.reasserting = YES;
+    
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    [self cancelTunnelWithError:nil];
 }
 
 - (NSError *)restoreConnectionHandlerWithStartHandling:(BOOL)startHandling{

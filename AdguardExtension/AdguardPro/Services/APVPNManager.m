@@ -196,9 +196,9 @@ static APVPNManager *singletonVPNManager;
 
             NSData *message;
             if (dnsRequestsLogging) {
-                message = [APMDnsLoggingEnabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogEnabled];
             } else {
-                message = [APMDnsLoggingDisabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogDisabled];
             }
 
             NSError *err = nil;

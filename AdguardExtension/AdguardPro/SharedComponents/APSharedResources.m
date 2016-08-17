@@ -44,9 +44,6 @@
 
 NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
 
-NSString *APMDnsLoggingEnabled = @"APMDnsLoggingEnabled";
-NSString *APMDnsLoggingDisabled = @"APMDnsLoggingDisabled";
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
 
@@ -126,6 +123,57 @@ static FMDatabaseQueue *_writeDnsLogHandler;
             [table insertOrReplace:NO fromRowObject:row];
         }
     }];
+}
+
++ (APHost2TunnelMessageType)host2tunnelMessageType:(NSData *)messageData{
+    
+    if (!messageData) {
+        return 0;
+    }
+    
+    return (APHost2TunnelMessageType)*((Byte *)[messageData bytes]);
+}
+
++ (NSData *)host2tunnelMessageLogEnabled {
+
+    APHost2TunnelMessageType message = APHTMLoggingEnabled;
+    
+    return [NSData dataWithBytes:&message length:1];
+}
+
++ (NSData *)host2tunnelMessageLogDisabled {
+    
+    APHost2TunnelMessageType message = APHTMLoggingDisabled;
+
+    return [NSData dataWithBytes:&message length:1];
+}
+
++ (NSData *)host2tunnelMessageWhitelist:(NSArray <NSString *> *)domains {
+    
+    if (!domains) {
+        return nil;
+    }
+    
+    APHost2TunnelMessageType message = APHTMWhitelistDomains;
+    
+    NSData *payload = [NSKeyedArchiver archivedDataWithRootObject:domains];
+    NSMutableData *result = [NSMutableData dataWithBytes:&message length:1];
+    [result appendData:payload];
+    
+    return result;
+}
+
++ (NSArray <NSString *> *)domainsFromHost2tunnelMessageWhitelist:(NSData *)messageData {
+    
+    if ([self host2tunnelMessageType:messageData] != APHTMWhitelistDomains) {
+        
+        return nil;
+    }
+    
+    NSData *payload = [NSData dataWithBytesNoCopy:((Byte *)[messageData bytes]+1) length:(messageData.length-1)];
+    
+    NSArray <NSString *> * result = [NSKeyedUnarchiver unarchiveObjectWithData:payload];
+    return result;
 }
 
 /////////////////////////////////////////////////////////////////////
