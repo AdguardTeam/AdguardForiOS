@@ -35,7 +35,11 @@
 @property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *nameCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *typeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *serverCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *statusCell;
 @property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *responsesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *whitelistCell;
 
+- (IBAction)clickWhitelist:(id)sender;
+- (IBAction)longPressOnName:(id)sender;
 
 @end

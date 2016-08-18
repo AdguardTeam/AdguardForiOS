@@ -50,21 +50,29 @@
             
             if (response.blocked) {
                 _color = AEUIC_WARNING_COLOR;
-                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request was blocked."), DATE_FORMAT(record.recordDate)];
+                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request was blocked."), DATE_FORMAT(record.recordDate)];
             } else {
                 
                 _color = [UIColor darkTextColor];
                 NSArray *responses = [record.responses valueForKey:@"stringValue"];
-                _detailText = [NSString stringWithFormat:@"%@ - %@", DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
+                if (record.isWhitelisted) {
+
+                    _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Exception %@", @"(APUIDnsLogRecord) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request for domain, which is included in whitelist."), DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
+                } else {
+                    _detailText = [NSString stringWithFormat:@"%@ - %@", DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
+                }
             }
         }
         else{
             
             _color = [UIColor darkTextColor];
             
-            _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request do not have response."), DATE_FORMAT(record.recordDate)];
+            _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsLogRecord) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request do not have response."), DATE_FORMAT(record.recordDate)];
         }
         
+        if (record.isWhitelisted) {
+            _color = AEUIC_EXCEPTION_COLOR;
+        }
     }
     
     return self;

@@ -58,6 +58,10 @@
  */
 @property (readonly, nonatomic) NSNumber *vpnMode;
 /**
+ Indicates that this record contains domain from whitelist.
+ */
+@property (nonatomic) BOOL isWhitelisted;
+/**
  DNS request.
  */
 @property (nonatomic) NSArray <APDnsRequest *> *requests;

@@ -513,17 +513,20 @@
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         if (datagram.isRequest) {
 
+            //Create DNS log record, if logging is enabled.
+            APDnsLogRecord *record;
+            if (_dnsLoggingEnabled) {
+                
+                record = [self gettingDnsRecordForOutgoingDnsDatagram:datagram];
+            }
+            
             //Check that this is request to domain from whitelist.
             NSString *name = [datagram.requests[0] name];
             if (![NSString isNullOrEmpty:name] && [self.delegate isWhitelistDomain:name]) {
                 [whitelistPackets addObject:packet];
+                record.isWhitelisted = YES;
             }
             
-            //Create DNS log record, if logging is enabled.
-            if (_dnsLoggingEnabled) {
-             
-                [self gettingDnsRecordsForOutgoingDnsDatagram:datagram];
-            }
         }
     }
     
@@ -534,7 +537,7 @@
     return whitelistPackets;
 }
 
-- (void)gettingDnsRecordsForOutgoingDnsDatagram:(APDnsDatagram *)datagram {
+- (APDnsLogRecord *)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram {
     
     NSMutableString *sb = [NSMutableString new];
     for (APDnsRequest *item in datagram.requests) {
@@ -555,6 +558,8 @@
         [_dnsRecords addObject:record];
         [_dnsRecordsSet addObject:record];
     }
+    
+    return record;
 }
 
 - (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets {

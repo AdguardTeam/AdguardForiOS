@@ -194,6 +194,7 @@
 		6581C9321D64950C00E739CC /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		6581C9331D64952C00E739CC /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
 		6581C93B1D64FC3B00E739CC /* APUIDnsLogRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */; };
+		6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */; };
 		658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
 		6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 658237331D07FE6700B824F4 /* ProTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		658237411D08004400B824F4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6582373A1D07FE6700B824F4 /* Info.plist */; };
@@ -890,6 +891,8 @@
 		6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		6581C9391D64FC3B00E739CC /* APUIDnsLogRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsLogRecord.h; sourceTree = "<group>"; };
 		6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsLogRecord.m; sourceTree = "<group>"; };
+		6581C93C1D66536400E739CC /* AEUILabelWithCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILabelWithCopy.h; sourceTree = "<group>"; };
+		6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILabelWithCopy.m; sourceTree = "<group>"; };
 		658237331D07FE6700B824F4 /* ProTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		658237361D07FE6700B824F4 /* tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = tunnel.entitlements; sourceTree = "<group>"; };
 		658237371D07FE6700B824F4 /* PacketTunnelProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketTunnelProvider.h; sourceTree = "<group>"; };
@@ -1212,6 +1215,8 @@
 				6514819D1BC42E2A00211147 /* AEUIAboutController.m */,
 				65D9A2641C034095004DA210 /* AEUIAdvSettingsController.h */,
 				65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */,
+				6581C93C1D66536400E739CC /* AEUILabelWithCopy.h */,
+				6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2593,6 +2598,7 @@
 				659886871CF74DE9003ECD1C /* DDContextFilterLogFormatter.m in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
+				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
 				6598868A1CF74DE9003ECD1C /* AEUIAboutController.m in Sources */,
 				653153591CFC0E4000C92A73 /* APUIAdguardDNSController.m in Sources */,
 				6598868B1CF74DE9003ECD1C /* DDLog.m in Sources */,

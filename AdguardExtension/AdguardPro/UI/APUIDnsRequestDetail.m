@@ -23,6 +23,12 @@
 #import "AEUILongLabelViewCell.h"
 #import "APDnsResourceType.h"
 #import "APVPNManager.h"
+#import "AEService.h"
+#import "AESAntibanner.h"
+#import "ASDFilterObjects.h"
+#import "AEUIWhitelistDomainObject.h"
+#import "ACommons/ACSystem.h"
+#import "AEUIUtils.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
@@ -45,8 +51,8 @@ static NSDateFormatter *_timeFormatter;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+
+    self.hideSectionsWithHiddenRows = YES;
     APDnsRequest *request = self.logRecord.requests[0];
     
     self.timeCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
@@ -64,6 +70,20 @@ static NSDateFormatter *_timeFormatter;
     
     if (self.logRecord.responses.count) {
         
+        // Set status cell
+        if (self.logRecord.preferredResponse.blocked) {
+           
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was blocked. this will be shown as status text.");
+        }
+        else if (self.logRecord.isWhitelisted){
+            
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Exception", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was for domain from the whitelist, this will be shown as status text.");
+        }
+        else {
+            
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Processed", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was processed as normal, this will be shown as status text.");
+        }
+        //set response cell
         for (APDnsResponse *item in self.logRecord.responses) {
             
             NSString *str;
@@ -81,7 +101,9 @@ static NSDateFormatter *_timeFormatter;
     }
     else{
         
-        self.responsesCell.longLabel.text = NSLocalizedString(@"No response", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. It is the detailed text in RESPONSES section, if this DNS request do not have response.");
+        NSString *text =  NSLocalizedString(@"No response", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. It is the detailed text in RESPONSES section, if this DNS request do not have response.");
+        self.responsesCell.longLabel.text = text;
+        self.statusCell.detailTextLabel.text = text;
     }
 }
 
@@ -99,6 +121,7 @@ static NSDateFormatter *_timeFormatter;
     // Pass the selected object to the new view controller.
 }
 */
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Table View Delegates
 
@@ -116,6 +139,108 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return [self.responsesCell fitHeight];
     }
     return UITableViewAutomaticDimension;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self setupWhitelistCell];
+}
+/////////////////////////////////////////////////////////////////////
+#pragma mark Actions
+
+- (IBAction)clickWhitelist:(id)sender {
+
+    if (!self.whitelistCell.textLabel.enabled) {
+        return;
+    }
+    
+    AEUIWhitelistDomainObject *domainRule = [[AEUIWhitelistDomainObject alloc] initWithDomain:self.nameCell.longLabel.text];
+
+    if (!domainRule) {
+        return;
+    }
+
+    [[[AEService singleton] antibanner] beginTransaction];
+
+    NSError *error = [[AEService singleton] addRule:domainRule.rule temporarily:NO];
+    if (error) {
+
+        [[[AEService singleton] antibanner] rollbackTransaction];
+
+        if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+
+            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
+        }
+    } else {
+
+        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+
+            // if rule is not comment decrease counter of the new rules
+
+            [[[AEService singleton] antibanner] endTransaction];
+            [self setupWhitelistCell];
+
+        }
+            rollbackBlock:^{
+
+                [[[AEService singleton] antibanner] rollbackTransaction];
+            }];
+    }
+}
+
+- (IBAction)longPressOnName:(id)sender {
+
+    UIGestureRecognizer *req = sender;
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setTargetRect:req.view.frame inView:req.view.superview];
+    [menu setMenuVisible:YES animated:YES];
+    
+    [req.view becomeFirstResponder];
+}
+
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods
+
+- (void)setupWhitelistCell {
+
+    @autoreleasepool {
+        self.whitelistCell.textLabel.textColor = self.whitelistCell.textLabel.tintColor;
+
+        NSArray *rules = [[[AEService singleton] antibanner]
+            rulesForFilter:@(ASDF_USER_FILTER_ID)];
+
+        NSMutableArray *wRules = [NSMutableArray array];
+        AEUIWhitelistDomainObject *object;
+        for (ASDFilterRule *item in rules) {
+
+            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            if (object) {
+                [wRules addObject:object];
+            }
+        }
+
+        wRules = [wRules valueForKey:@"domain"];
+        APDnsRequest *request = self.logRecord.requests[0];
+
+        if (self.logRecord.preferredResponse.blocked) {
+            
+            [self cells:@[self.whitelistCell] setHidden:NO];
+            if ([wRules containsObject:request.name]){
+                self.whitelistCell.textLabel.enabled = NO;
+            }
+            else{
+                self.whitelistCell.textLabel.enabled = YES;
+            }
+        }
+        else {
+            
+            [self cells:@[self.whitelistCell] setHidden:YES];
+            self.whitelistCell.textLabel.enabled = NO;
+        }
+        
+        [self reloadDataAnimated:YES];
+    }
 }
 
 @end
