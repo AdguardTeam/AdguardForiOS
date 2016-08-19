@@ -29,6 +29,7 @@
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
 
+#define DEFAULT_DNS_SERVER_IP           @"208.67.222.222" // opendns.com
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -38,11 +39,17 @@
     NSMutableSet<APTUdpProxySession *> *_sessions;
     
     BOOL _loggingEnabled;
-    OSSpinLock _loggingLock;
-    NSMutableArray <APDnsLogRecord *> *_loggingCache;
-    ACLExecuteBlockDelayed *_saveLogExecution;
+    
+    OSSpinLock _dnsAddressLock;
+    OSSpinLock _whitelistDomainLock;
+    
+    NSDictionary *_dnsAddresses;
+    NSString *_deviceDnsAddressForAny;
+    
+    NSSet *_whitelistDomains;
     
     BOOL _packetFlowObserver;
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -59,7 +66,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _loggingLock = OS_SPINLOCK_INIT;
+        _whitelistDomainLock = _dnsAddressLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
     }
     return self;
@@ -74,6 +81,58 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
+
+- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses {
+
+    if (!(deviceDnsAddresses.count && adguardDnsAddresses.count)) {
+        
+        OSSpinLockLock(&_dnsAddressLock);
+        
+        //set default device DNS to first address.
+        _deviceDnsAddressForAny = DEFAULT_DNS_SERVER_IP;
+        
+        OSSpinLockUnlock(&_dnsAddressLock);
+        return;
+    }
+    
+    @autoreleasepool {
+        
+        NSUInteger devicesLastIndex = deviceDnsAddresses.count - 1;
+        NSMutableDictionary *dnsCache = [NSMutableDictionary dictionary];
+        [adguardDnsAddresses enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (idx > devicesLastIndex) {
+                *stop = YES;
+                return;
+            }
+            
+            dnsCache[obj] = deviceDnsAddresses[idx];
+        }];
+        
+        OSSpinLockLock(&_dnsAddressLock);
+        
+        _dnsAddresses = [dnsCache copy];
+        //set default device DNS to first address.
+        _deviceDnsAddressForAny = deviceDnsAddresses[0];
+        
+        OSSpinLockUnlock(&_dnsAddressLock);
+    }
+}
+
+- (void)setWhitelistDomains:(NSArray <NSString *> *)domains {
+    
+    OSSpinLockLock(&_whitelistDomainLock);
+    
+    _whitelistDomains = nil;
+    
+    if (domains.count) {
+        
+        _whitelistDomains = [NSSet setWithArray:domains];
+    }
+
+    OSSpinLockUnlock(&_whitelistDomainLock);
+}
 
 - (void)startHandlingPackets {
 
@@ -100,6 +159,37 @@
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
 
     _loggingEnabled = enabled;
+}
+
+- (BOOL)isWhitelistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_whitelistDomainLock);
+    
+    result = [_whitelistDomains containsObject:domainName];
+    
+    OSSpinLockUnlock(&_whitelistDomainLock);
+    
+    return result;
+}
+
+- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress {
+    
+    if (!serverAddress) {
+        serverAddress = [NSString new];
+    }
+    
+    OSSpinLockLock(&_dnsAddressLock);
+
+    NSString *address = _dnsAddresses[serverAddress];
+    
+    if (!address) {
+        address = _deviceDnsAddressForAny;
+    }
+    
+    OSSpinLockUnlock(&_dnsAddressLock);
+
+    return address;
 }
 
 /////////////////////////////////////////////////////////////////////

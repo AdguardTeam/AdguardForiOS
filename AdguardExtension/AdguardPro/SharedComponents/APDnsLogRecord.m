@@ -46,6 +46,7 @@
         _srcPort = srcPort;
         _vpnMode = vpnMode;
         _hash = [srcPort longLongValue] * 100000 + [ID unsignedIntegerValue];
+        _isWhitelisted = NO;
     }
     
     return self;
@@ -105,6 +106,7 @@
         _vpnMode = [aDecoder decodeObjectForKey:@"vpnMode"];
         _requests = [aDecoder decodeObjectForKey:@"requests"];
         _responses = [aDecoder decodeObjectForKey:@"responses"];
+        _isWhitelisted = [[aDecoder decodeObjectForKey:@"isWhitelisted"] boolValue];
     }
     return self;
 }
@@ -117,6 +119,7 @@
     [aCoder encodeObject:self.vpnMode forKey:@"vpnMode"];
     [aCoder encodeObject:self.requests forKey:@"requests"];
     [aCoder encodeObject:self.responses forKey:@"responses"];
+    [aCoder encodeObject:@(self.isWhitelisted) forKey:@"isWhitelisted"];
 }
 
 /////////////////////////////////////////////////////////////////////
