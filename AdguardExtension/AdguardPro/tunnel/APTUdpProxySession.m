@@ -245,6 +245,7 @@
 - (void)setSessionReaders:(NWUDPSession *)session {
     
     __weak __typeof__(self) wSelf = self;
+    __weak __typeof__(session) wSession = session;
     
     [session addObserver:self forKeyPath:@"state" options:0 context:NULL];
     [session addObserver:self forKeyPath:@"hasBetterPath" options:0 context:NULL];
@@ -258,10 +259,14 @@
             return;
         }
         
+        
         if (sSelf->_dnsLoggingEnabled) {
+            
+            __typeof__(session) sSession = wSession;
+            
             dispatch_sync(sSelf->_workingQueue, ^{
                 
-                [sSelf settingDnsRecordsForIncomingPackets:datagrams];
+                [sSelf settingDnsRecordsForIncomingPackets:datagrams session:sSession];
             });
             
             [sSelf->_saveLogExecution executeOnceForInterval];
@@ -513,18 +518,19 @@
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         if (datagram.isRequest) {
 
-            //Create DNS log record, if logging is enabled.
-            APDnsLogRecord *record;
-            if (_dnsLoggingEnabled) {
-                
-                record = [self gettingDnsRecordForOutgoingDnsDatagram:datagram];
-            }
+            BOOL whitelisted = NO;
             
             //Check that this is request to domain from whitelist.
             NSString *name = [datagram.requests[0] name];
             if (![NSString isNullOrEmpty:name] && [self.delegate isWhitelistDomain:name]) {
                 [whitelistPackets addObject:packet];
-                record.isWhitelisted = YES;
+                whitelisted = YES;
+            }
+            
+            //Create DNS log record, if logging is enabled.
+            if (_dnsLoggingEnabled) {
+                
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted];
             }
             
         }
@@ -537,21 +543,26 @@
     return whitelistPackets;
 }
 
-- (APDnsLogRecord *)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram {
+- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist{
     
-    NSMutableString *sb = [NSMutableString new];
-    for (APDnsRequest *item in datagram.requests) {
-        [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
-    }
-    
-    //#if DEBUG
-    //            DDLogInfo(@"DNS Request (ID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-    //#else
-    DDLogInfo(@"DNS Request (ID:%@) srcPort: %@ mode: %d to server: %@:%@ requests:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
-    //#endif
     APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
-    
     record.requests = datagram.requests;
+    
+    
+    NSString *dstHost;
+    NSString *dstPort;
+    if (whitelist) {
+        record.isWhitelisted = YES;
+        
+        NWHostEndpoint *endpoint = (NWHostEndpoint *)self.whitelistUdpSession.resolvedEndpoint;
+        dstHost = endpoint.hostname;
+        dstPort = endpoint.port;
+    }
+    else {
+        
+        dstHost = _basePacket.dstAddress;
+        dstPort = _basePacket.dstPort;
+    }
     
     if (![_dnsRecordsSet containsObject:record]) {
         
@@ -559,10 +570,19 @@
         [_dnsRecordsSet addObject:record];
     }
     
-    return record;
+    NSMutableString *sb = [NSMutableString new];
+    for (APDnsRequest *item in datagram.requests) {
+        [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
+    }
+    
+    //#if DEBUG
+    //            DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], dstHost, dstPort, (sb.length ? sb : @" None."));
+    //#else
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %d to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], dstHost, dstPort, (sb.length ? sb : @" None."));
+    //#endif
 }
 
-- (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets {
+- (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets session:(NWUDPSession *)session{
     
     for (NSData *packet in packets) {
         
@@ -571,13 +591,14 @@
             
             NSMutableString *sb = [NSMutableString new];
             for (APDnsResponse *item in datagram.responses) {
-                [sb appendFormat:@"(ID:%@) \"%@\"\n", datagram.ID, item];
+                [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
             }
 
+            NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
 //#if DEBUG
-//            DDLogInfo(@"DNS Response (ID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
+//            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
 //#else
-            DDLogInfo(@"DNS Response (ID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], _basePacket.dstAddress, _basePacket.dstPort, (sb.length ? sb : @" None."));
+            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
 //#endif
             
             APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];

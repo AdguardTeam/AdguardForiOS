@@ -179,6 +179,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
             [[[AEService singleton] antibanner] endTransaction];
             [self setupWhitelistCell];
+            [[APVPNManager singleton] sendReloadWhitelist];
 
         }
             rollbackBlock:^{

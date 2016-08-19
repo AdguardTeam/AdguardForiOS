@@ -68,7 +68,7 @@ static APTunnelConnectionsHandler *_connectionHandler;
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
         
 #if DEBUG
-        [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
+        [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
         
         _connectionHandler = nil;
