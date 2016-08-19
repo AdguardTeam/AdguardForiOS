@@ -16,11 +16,17 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import "APDnsLogRecord.h"
 #import <UIKit/UIKit.h>
 
-@interface APUIDnsRequestsController : UITableViewController <UISearchResultsUpdating>
+@interface APUIDnsLogRecord : NSObject
 
-- (IBAction)clickClear:(id)sender;
+- (id)initWithRecord:(APDnsLogRecord *)record;
 
+@property (readonly, nonatomic) APDnsLogRecord *representedObject;
+
+@property NSString *text;
+@property NSString *detailText;
+@property UIColor *color;
 
 @end

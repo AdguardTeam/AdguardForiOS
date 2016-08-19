@@ -39,6 +39,17 @@
 @property (weak, readonly) PacketTunnelProvider *provider;
 
 /**
+ Sets addresses of the DNS servers.
+ */
+- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+
+/**
+ Sets whitelist domains names.
+ */
+- (void)setWhitelistDomains:(NSArray <NSString *> *)domains;
+
+/**
  Make the initial readPacketsWithCompletionHandler call.
  */
 - (void)startHandlingPackets;
@@ -52,5 +63,15 @@
  Sets that sessions will be create log of the DNS activity.
  */
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
+
+/**
+ Checks domain name, that it is included in whitelist.
+ */
+- (BOOL)isWhitelistDomain:(NSString *)domainName;
+
+/**
+ Returns IP address of the whitelist DNS server for appropriate DNS server.
+ */
+- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 @end

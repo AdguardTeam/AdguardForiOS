@@ -196,9 +196,9 @@ static APVPNManager *singletonVPNManager;
 
             NSData *message;
             if (dnsRequestsLogging) {
-                message = [APMDnsLoggingEnabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogEnabled];
             } else {
-                message = [APMDnsLoggingDisabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogDisabled];
             }
 
             NSError *err = nil;
@@ -219,6 +219,28 @@ static APVPNManager *singletonVPNManager;
             _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
         }
     }
+}
+
+- (void)sendReloadWhitelist {
+    
+        _lastError = nil;
+        if (_manager.connection) {
+            
+            NSData *message = [APSharedResources host2tunnelMessageWhitelistReload];
+            NSError *err = nil;
+            [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
+            if (err) {
+                
+                DDLogError(@"(APVPNManager) Can't send message for reload whitelist: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+                _lastError = _standartError;
+            }
+            return;
+        }
+        else {
+            
+            DDLogError(@"(APVPNManager)  Can't send message for reload whitelist: VPN session connection is nil");
+            _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+        }
 }
 
 - (BOOL)clearDnsRequestsLog {

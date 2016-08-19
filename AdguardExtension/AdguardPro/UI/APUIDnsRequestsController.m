@@ -1,10 +1,20 @@
-//
-//  APUIDnsRequestsController.m
-//  Adguard
-//
-//  Created by Roman Sokolov on 19.07.16.
-//  Copyright © 2016 Performiks. All rights reserved.
-//
+/**
+    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+    Copyright © 2015-2016 Performix LLC. All rights reserved.
+ 
+    Adguard for iOS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Adguard for iOS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #import "APUIDnsRequestsController.h"
 #import "ACommons/ACLang.h"
@@ -12,16 +22,14 @@
 #import "APVPNManager.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
-#import "APDnsLogRecord.h"
+#import "APUIDnsLogRecord.h"
 #import "APUIDnsRequestDetail.h"
-
-#define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]
 
 @interface APUIDnsRequestsController ()
 
 @property (strong, nonatomic) UISearchController *searchController;
-@property NSArray <APDnsLogRecord *> *logRecords;
-@property NSArray <APDnsLogRecord *> *filteredLogRecords;
+@property NSMutableArray <APUIDnsLogRecord *> *logRecords;
+@property NSArray <APUIDnsLogRecord *> *filteredLogRecords;
 
 @end
 
@@ -29,6 +37,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.logRecords = [NSMutableArray array];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -71,38 +81,15 @@
     NSArray *records = self.filteredLogRecords;
     if (row < records.count) {
 
-        APDnsLogRecord *record = records[row];
-        APDnsResponse *response = record.preferredResponse;
+        APUIDnsLogRecord *record = records[row];
         
-        if (!record.requests.count) {
+        if (!record.representedObject.requests.count) {
             return nil;
         }
         
-        APDnsRequest *request = record.requests[0];
-        
-        cell.textLabel.text = request.name;
-
-        if (response) {
-            
-            if (response.blocked) {
-                cell.detailTextLabel.textColor = AEUIC_WARNING_COLOR;
-                cell.textLabel.textColor = AEUIC_WARNING_COLOR;
-                cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request was blocked."), DATE_FORMAT(record.recordDate)];
-            } else {
-                
-                cell.textLabel.textColor = [UIColor darkTextColor];
-                cell.detailTextLabel.textColor = [UIColor darkTextColor];
-                NSArray *responses = [record.responses valueForKey:@"stringValue"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
-            }
-        }
-        else{
-            
-            cell.textLabel.textColor = [UIColor darkTextColor];
-            cell.detailTextLabel.textColor = [UIColor darkTextColor];
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsRequestsController) PRO version. On the Adguard DNS -> DNS Requests screen. It is the detailed text in row of the request, if this DNS request do not have response."), DATE_FORMAT(record.recordDate)];
-        }
+        cell.textLabel.text = record.text;
+        cell.detailTextLabel.textColor = cell.textLabel.textColor = record.color;
+        cell.detailTextLabel.text = record.detailText;
     }
 
     return cell;
@@ -145,27 +132,21 @@
     
     if ([NSString isNullOrEmpty:searchString]){
         
-        self.filteredLogRecords = [self revertArray:self.logRecords];
+        self.filteredLogRecords = [self revertRecords:self.logRecords];
     }
     else {
 
         NSMutableArray *fileredReverted = [NSMutableArray new];
         //revert array
-        [self.logRecords enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(APDnsLogRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.logRecords enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(APUIDnsLogRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
-            if ([obj.requests[0].name contains:searchString caseSensitive:NO]) {
-                [fileredReverted addObject:obj];
-                return;
-            }
-
-            if ([DATE_FORMAT(obj.recordDate) contains:searchString caseSensitive:NO]) {
-                
-                [fileredReverted addObject:obj];
-                return;
-            }
             
-            NSString *responsesString = [[obj.responses valueForKey:@"stringValue"] componentsJoinedByString:@" "];
-            if ([responsesString contains:searchString caseSensitive:NO]) {
+            if ([obj.text contains:searchString caseSensitive:NO]) {
+                [fileredReverted addObject:obj];
+                return;
+            }
+
+            if ([obj.detailText contains:searchString caseSensitive:NO]) {
                 
                 [fileredReverted addObject:obj];
             }
@@ -193,7 +174,14 @@
     [self.refreshControl beginRefreshing];
     [[APVPNManager singleton] obtainDnsLogRecords:^(NSArray<APDnsLogRecord *> *records) {
         
-        self.logRecords = records;
+        [self.logRecords removeAllObjects];
+        for (APDnsLogRecord *item in records) {
+            APUIDnsLogRecord *uiRecord = [[APUIDnsLogRecord alloc] initWithRecord:item];
+            if (uiRecord) {
+                [self.logRecords addObject:uiRecord];
+            }
+        }
+        
         [self updateSearchResultsForSearchController:self.searchController];
         if (self.refreshControl.refreshing) {
             [self.refreshControl endRefreshing];
@@ -201,7 +189,7 @@
     }];
 }
 
-- (NSArray *)revertArray:(NSArray *)arr {
+- (NSArray *)revertRecords:(NSArray *)arr {
 
     NSMutableArray *reversed = [NSMutableArray arrayWithCapacity:arr.count];
     [arr enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -229,10 +217,11 @@
         
         if (row < records.count) {
             
-            return records[row];
+            return [records[row] representedObject];
         }
     }
     
     return nil;
 }
+
 @end

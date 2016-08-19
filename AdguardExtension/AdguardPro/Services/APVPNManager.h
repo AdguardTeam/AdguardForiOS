@@ -138,4 +138,9 @@ extern NSString *APVpnManagerErrorDomain;
  */
 - (void)obtainDnsLogRecords:(void (^)(NSArray <APDnsLogRecord *> *records))completionBlock;
 
+/**
+ Sends message to tunnel extension, which notifies that extension needs reload whitelist of the domains.
+ */
+- (void)sendReloadWhitelist;
+
 @end
