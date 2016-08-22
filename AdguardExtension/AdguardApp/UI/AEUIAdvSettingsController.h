@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UISwitch *simplifiedButton;
 
 - (IBAction)toggleSimplified:(id)sender;
+- (IBAction)toggleWifiOnly:(id)sender;
 
 @end

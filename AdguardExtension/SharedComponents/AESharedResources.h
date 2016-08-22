@@ -25,6 +25,7 @@
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
 #define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
+#define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
@@ -71,6 +72,11 @@ extern NSString *AEDefaultsJSONRulesOverlimitReached;
  User Defaults key that define optimized procedure of the convertion for JSON Converter.
  */
 extern NSString *AEDefaultsJSONConverterOptimize;
+
+/**
+ User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
+ */
+extern NSString *AEDefaultsWifiOnlyUpdates;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

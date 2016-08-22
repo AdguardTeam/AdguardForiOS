@@ -27,6 +27,7 @@ NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
 NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
 NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
+NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"

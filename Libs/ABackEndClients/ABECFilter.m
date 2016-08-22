@@ -26,6 +26,8 @@
 #pragma mark - ABECFilterClient Constants
 /////////////////////////////////////////////////////////////////////
 
+#define FILTERID_PARAM                  @"filterid"
+
 NSString *ABECPlatformKey               = @"ABECPlatformKey";
 
 NSString *ABECFilterParserKey           = @"ABECFilterParserKey";
@@ -38,6 +40,7 @@ NSString *ABECFIlterVersionUrlKey       = @"ABECFIlterVersionUrlKey";
 NSString *ABECFilterMetaUrlKey          = @"ABECFILTERMetaUrlKey";
 NSString *ABECFilterGroupMetaUrlKey     = @"ABECFilterGroupMetaUrlKey";
 
+NSString *ABECFilterError = @"ABECFilterError";
 
 static NSDictionary *ABECFilterSettings;
 
@@ -82,11 +85,33 @@ void settings(){
     NSURL *groupMetaUrl;
     NSURL *filterVersionUrl;
     NSURL *filterUrl;
+    
+    BOOL _handleBackground;
+    BOOL _asyncInProgress;
+    NSMutableArray <NSURLSessionDownloadTask *> *_obtainFilterTasks;
+    NSMutableDictionary <NSNumber *, id> *_filterResults;
+    
+    void (^_responseBlock)(void);
 }
+
+static ABECFilterClient *ABECFilterSingleton;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
+
++ (ABECFilterClient *)singleton{
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        ABECFilterSingleton = [ABECFilterClient alloc];
+        ABECFilterSingleton = [ABECFilterSingleton init];
+    });
+    
+    return ABECFilterSingleton;
+    
+}
 
 - (id)init{
     
@@ -105,6 +130,10 @@ void settings(){
         filterVersionUrl = [NSURL URLWithString:settings[ABECFIlterVersionUrlKey]];
         filterMetaUrl = [NSURL URLWithString:settings[ABECFilterMetaUrlKey]];
         groupMetaUrl = [NSURL URLWithString:settings[ABECFilterGroupMetaUrlKey]];
+        
+        _asyncInProgress = YES;
+        _handleBackground = NO;
+        _responseBlock = nil;
     }
     
     return self;
@@ -137,62 +166,18 @@ void settings(){
 
 - (NSArray *)filterVersionListForApp:(NSString *)applicationId filterIds:(id<NSFastEnumeration>)filterIds{
 
-    if (!(applicationId && filterIds))
+    
+    ABECRequest *sURLRequest = [self requestForFilterVersionListForApp:applicationId filterIds:filterIds];
+    if (!sURLRequest) {
         return nil;
-
-    NSMutableString *parameters = [NSMutableString
-        stringWithFormat:@"%@app_id=%@",
-                         ([NSString isNullOrEmpty:[filterVersionUrl query]]
-                              ? @"?"
-                              : @"&"),
-                         applicationId];
-    BOOL emptyFilterIds = YES;
-    for (NSNumber *filterId in filterIds) {
-
-        [parameters appendFormat:@"&filterid=%@", filterId];
-        emptyFilterIds = NO;
     }
-    if (emptyFilterIds) return nil;
     
-    NSURL *url = [NSURL URLWithString:[[filterVersionUrl absoluteString] stringByAppendingString:parameters]];
-    
-    ABECRequest *sURLRequest = [ABECRequest getRequestForURL:url parameters:nil];
     NSURLResponse *response;
     NSError *error;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:sURLRequest returningResponse:&response error:&error];
-    
-    // here we check for any returned NSError from the server, "and" we also check for any http response errors
-    if (error != nil)
-        DDLogError(@"Error loading filters version info:%@", [error localizedDescription]);
-    
-    else {
-        // check for any response errors
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if ((([httpResponse statusCode]/100) == 2)) {
-            
-            // parse response data
-            id<VersionParserProtocol> versionParser = [self parserForKey:ABECFilterVersionParserKey];
-            
-            if ([versionParser parseWithData:data]) {
-                
-                return [versionParser versionList];
-            }
-            else{
-                
-                DDLogError(@"Error loading filters version info: Can't parse XML.");
-                DDLogErrorTrace();
-                return nil;
-            }
-        }
-        else {
-            
-            DDLogError(@"Http Error when loading filter version info. Http Status:%li", (long)[httpResponse statusCode]);
-            DDLogErrorTrace();
-        }
-    }
-    
-    return nil;
+
+    return [self filterVersionFromData:data response:response error:error];
 }
 
 - (ABECRequest *)requestForApp:(NSString *)applicationId affiliateId:(NSString *)affiliateId filterId:(NSUInteger)filterId{
@@ -205,7 +190,7 @@ void settings(){
             parameters:@{
                          @"app_id": applicationId,
                          @"webmaster_id": affiliateId,
-                         @"filterid": [NSString stringWithFormat:@"%lu", (unsigned long)filterId]
+                         FILTERID_PARAM: [NSString stringWithFormat:@"%lu", (unsigned long)filterId]
                          }];
 
 }
@@ -222,40 +207,7 @@ void settings(){
     
     NSData *data = [NSURLConnection sendSynchronousRequest:sURLRequest returningResponse:&response error:&error];
     
-    // here we check for any returned NSError from the server, "and" we also check for any http response errors
-    if (error != nil)
-        DDLogError(@"Error loading filter rules:%@", [error localizedDescription]);
-    
-    else {
-        // check for any response errors
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if ((([httpResponse statusCode]/100) == 2)) {
-            
-            
-            id<FilterParserProtocol> filterParser = [self parserForKey:ABECFilterParserKey];
-            
-            filterParser.filterId = @(filterId);
-            
-            if (![filterParser parseWithData:data]) {
-                
-                DDLogError(@"Error when loading filter rules (filterId = %lu). Can't parse XML.", (unsigned long)filterId);
-                DDLogErrorTrace();
-                return nil;
-            }
-            
-            ASDFilter *filter = [filterParser filter];
-            
-            return filter;
-        }
-        else {
-            
-            DDLogError(@"Http Error when loading filter rules (filterId = %lu). Http Status:%li", (unsigned long)filterId, [httpResponse statusCode]);
-            DDLogErrorTrace();
-        }
-    }
-    
-    return nil;
-    
+    return [self filterForData:data response:response filterId:@(filterId) error:error];
 }
 
 - (NSArray *)filterMetadataListForApp:(NSString *)applicationId {
@@ -346,19 +298,307 @@ void settings(){
 }
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark  Async support methods
+
+- (void)setupWithSessionId:(NSString *)sessionId delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate{
+    
+    self.sessionId = sessionId;
+    self.delegate = delegate;
+}
+
+- (void)handleBackgroundWithSessionId:(NSString *)sessionId delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate{
+    
+    @synchronized (ABECFilterSingleton) {
+        _handleBackground = YES;
+        _asyncInProgress = YES;
+        [self setupWithSessionId:sessionId delegate:delegate];
+        return;
+    }
+}
+
+- (NSError *)asyncFilterVersionListForApp:(NSString *)applicationId filterIds:(id<NSFastEnumeration>)filterIds {
+
+    @synchronized (ABECFilterSingleton) {
+        
+        if (_asyncInProgress) {
+            
+            return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
+        }
+        
+        ABECRequest *sURLRequest = [self requestForFilterVersionListForApp:applicationId filterIds:filterIds];
+        if (!sURLRequest) {
+            return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_PARAMETERS userInfo:nil];
+        }
+        
+        NSURLSessionDownloadTask *currentTask = [[self backgroundSession] downloadTaskWithRequest:sURLRequest];
+        [currentTask resume];
+        _asyncInProgress = YES;
+        
+        return nil;
+    }
+}
+
+- (NSError *)asyncFilterForApp:(NSString *)applicationId affiliateId:(NSString *)affiliateId filterIds:(NSArray <NSNumber *>*)filterIds {
+
+    @synchronized (ABECFilterSingleton) {
+        
+        if (_asyncInProgress) {
+            
+            return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
+        }
+        
+        if (!_obtainFilterTasks) {
+            _obtainFilterTasks = [NSMutableArray array];
+        }
+        
+        for (NSNumber *filterId in filterIds) {
+            ABECRequest *sURLRequest = [self requestForApp:applicationId affiliateId:affiliateId filterId:[filterId integerValue]];
+            if (!sURLRequest) {
+                return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_PARAMETERS userInfo:nil];
+            }
+            
+            NSURLSessionDownloadTask *currentTask = [[self backgroundSession] downloadTaskWithRequest:sURLRequest];
+            [currentTask resume];
+            [_obtainFilterTasks addObject:currentTask];
+        }
+        _asyncInProgress = YES;
+        
+        return nil;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Download session delegate methods
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)downloadURL {
+
+    [self processDownloadTask:downloadTask error:nil downloadURL:downloadURL];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+
+    [self processDownloadTask:(NSURLSessionDownloadTask *)task error:error downloadURL:nil];
+}
+
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
+    
+    if (_responseBlock) {
+        _responseBlock();
+    }
+    
+    _responseBlock = nil;
+}
+/////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 /////////////////////////////////////////////////////////////////////
 
 - (id)parserForKey:(NSString *)key{
-
+    
     NSDictionary *settings = ABECFilterSettings[_platform];
     id theClass = settings[key];
     if (!theClass) {
         
         [[NSException argumentException:key] raise];
     }
-
+    
     return [theClass new];
+}
+
+- (ABECRequest *)requestForFilterVersionListForApp:(NSString *)applicationId filterIds:(id<NSFastEnumeration>)filterIds {
+    
+    if (!(applicationId && filterIds))
+        return nil;
+    
+    NSMutableString *parameters = [NSMutableString
+                                   stringWithFormat:@"%@app_id=%@",
+                                   ([NSString isNullOrEmpty:[filterVersionUrl query]]
+                                    ? @"?"
+                                    : @"&"),
+                                   applicationId];
+    BOOL emptyFilterIds = YES;
+    for (NSNumber *filterId in filterIds) {
+        
+        [parameters appendFormat:@"&filterid=%@", filterId];
+        emptyFilterIds = NO;
+    }
+    if (emptyFilterIds) return nil;
+    
+    NSURL *url = [NSURL URLWithString:[[filterVersionUrl absoluteString] stringByAppendingString:parameters]];
+    
+    return [ABECRequest getRequestForURL:url parameters:nil];
+}
+
+- (NSArray *)filterVersionFromData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
+    
+    // here we check for any returned NSError from the server, "and" we also check for any http response errors
+    if (error != nil)
+        DDLogError(@"Error loading filters version info:%@", [error localizedDescription]);
+    
+    else {
+        // check for any response errors
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if ((([httpResponse statusCode]/100) == 2)) {
+            
+            // parse response data
+            id<VersionParserProtocol> versionParser = [self parserForKey:ABECFilterVersionParserKey];
+            
+            if ([versionParser parseWithData:data]) {
+                
+                return [versionParser versionList];
+            }
+            else{
+                
+                DDLogError(@"Error loading filters version info: Can't parse XML.");
+                DDLogErrorTrace();
+                return nil;
+            }
+        }
+        else {
+            
+            DDLogError(@"Http Error when loading filter version info. Http Status:%li", (long)[httpResponse statusCode]);
+            DDLogErrorTrace();
+        }
+    }
+    
+    return nil;
+}
+
+- (ASDFilter *)filterForData:(NSData *)data response:(NSURLResponse *)response filterId:(NSNumber *)filterId error:(NSError *)error{
+    
+    // here we check for any returned NSError from the server, "and" we also check for any http response errors
+    if (error != nil)
+        DDLogError(@"Error loading filter rules:%@", [error localizedDescription]);
+    
+    else {
+        // check for any response errors
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if ((([httpResponse statusCode]/100) == 2)) {
+            
+            
+            id<FilterParserProtocol> filterParser = [self parserForKey:ABECFilterParserKey];
+            
+            filterParser.filterId = filterId;
+            
+            if (![filterParser parseWithData:data]) {
+                
+                DDLogError(@"Error when loading filter rules (filterId = %lu). Can't parse XML.", [filterId unsignedLongValue]);
+                DDLogErrorTrace();
+                return nil;
+            }
+            
+            ASDFilter *filter = [filterParser filter];
+            
+            return filter;
+        }
+        else {
+            
+            DDLogError(@"Http Error when loading filter rules (filterId = %lu). Http Status:%li", (unsigned long)filterId, [httpResponse statusCode]);
+            DDLogErrorTrace();
+        }
+    }
+    
+    return nil;
+    
+}
+
+- (NSURLSession *)backgroundSession
+{
+    static NSURLSession *session = nil;
+    static dispatch_once_t onceToken;
+    
+    if ([NSString isNullOrEmpty:self.sessionId]) {
+        return nil;
+    }
+    
+    dispatch_once(&onceToken, ^{
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:self.sessionId];
+        session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    });
+    return session;
+}
+
+- (void)unlockAsync {
+    @synchronized(ABECFilterSingleton) {
+        
+        _asyncInProgress = NO;
+        _filterResults = nil;
+    }
+}
+
+- (void)processDownloadTask:(NSURLSessionDownloadTask *)downloadTask error:(NSError *)error downloadURL:(NSURL *)downloadURL {
+    
+    __typeof__(self) __weak wSelf = self;
+    
+    NSURL *requestUrl = [[downloadTask originalRequest] URL];
+    if ([[requestUrl absoluteString] hasPrefix:[filterVersionUrl absoluteString]]) {
+        
+        // was filter version request
+        
+        NSData *data;
+        if (error || (data = [NSData dataWithContentsOfURL:downloadURL]) == nil) {
+            _responseBlock = ^() {
+                __typeof__(self) sSelf = wSelf;
+                
+                [sSelf unlockAsync];
+                [sSelf.delegate filterClient:sSelf filterVersionList:nil];
+            };
+        } else {
+            NSArray *filterVersions = [self filterVersionFromData:data response:[downloadTask response] error:nil];
+            _responseBlock = ^() {
+                __typeof__(self) sSelf = wSelf;
+                
+                [sSelf unlockAsync];
+                [sSelf.delegate filterClient:sSelf filterVersionList:filterVersions];
+            };
+        }
+        
+        if (!_handleBackground) {
+            _responseBlock(); // if app in active mode, we call block for transferring of the result to delegate
+        }
+        
+    } else if ([[requestUrl absoluteString] hasPrefix:[filterUrl absoluteString]]) {
+        
+        //was filter request
+        
+        NSURLComponents *components = [NSURLComponents componentsWithURL:requestUrl resolvingAgainstBaseURL:NO];
+        NSNumber *filterId;
+        for (NSURLQueryItem *item in components.queryItems) {
+            
+            if ([item.name isEqualToString:FILTERID_PARAM]) {
+                filterId = @([item.value integerValue]);
+                break;
+            }
+        }
+        if (!filterId) {
+            return;
+        }
+        
+        _responseBlock = ^() {
+            __typeof__(self) sSelf = wSelf;
+            
+            NSDictionary *filterResults = [sSelf->_filterResults copy];
+            [sSelf unlockAsync];
+            [sSelf.delegate filterClient:sSelf filters:filterResults];
+        };
+        
+        if (!_filterResults) {
+            _filterResults = [NSMutableDictionary dictionary];
+        }
+        
+        NSData *data;
+        if (error || (data = [NSData dataWithContentsOfURL:downloadURL]) == nil) {
+            
+            _filterResults[filterId] = [NSNull null];
+        } else {
+            
+            ASDFilter *filter = [self filterForData:data response:[downloadTask response] filterId:filterId error:nil];
+            _filterResults[filterId] = filter;
+        }
+        
+        if (!_handleBackground && _filterResults.count == _obtainFilterTasks.count) {
+            _responseBlock(); // if app in active mode, we call block for transferring of the result to delegate
+        }
+    }
 }
 
 @end

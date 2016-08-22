@@ -135,5 +135,10 @@
     }
 }
 
+- (IBAction)toggleWifiOnly:(id)sender {
+    
+    [[AESharedResources sharedDefaults] setBool:[sender isOn] forKey:AEDefaultsWifiOnlyUpdates];
+}
+
 
 @end

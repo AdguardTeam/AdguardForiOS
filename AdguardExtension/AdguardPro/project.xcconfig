@@ -12,5 +12,7 @@
 ADGUARD_BUNDLE_ID = com.adguard.AdguardPro
 // Blocking extension bundle identifier
 ADGUARD_EXTENSION_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).extension
+// Downloads session for filter updates identifier
+ADGUARD_FILTER_UPDATES_ID = $(ADGUARD_BUNDLE_ID).filterUpdatesSession
 // Group for shared resources
 ADGUARD_SHARED_RESOURCES_GROUP = group.com.adguard.AdguardPro
