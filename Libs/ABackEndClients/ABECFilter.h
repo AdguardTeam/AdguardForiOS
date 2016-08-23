@@ -29,7 +29,7 @@
  Calls this method when downloding filter versions complated.
  @param versions Array of ASDFilterMetadata objects or nil if error occurs. 
  */
-- (void)filterClient:(ABECFilterClient *)client filterVersionList:(NSArray *)versions;
+- (void)filterClient:(ABECFilterClient *)client filterVersionList:(NSArray <ASDFilterMetadata *>*)versions;
 
 - (void)filterClient:(ABECFilterClient *)client filters:(NSDictionary <NSNumber *, ASDFilter *> *)filters;
 
@@ -42,6 +42,7 @@
 extern NSString *ABECFilterError;
 #define ABECFILTER_ERROR_PARAMETERS             100
 #define ABECFILTER_ERROR_ASYNC_INPROGRESS       200
+#define ABECFILTER_ERROR_ASYNC_NOTINIT          300
 
 
 /**
@@ -135,7 +136,7 @@ extern NSString *ABECFilterError;
 
 
 /**
- Add download task for obtaining last version of filter from backend.
+ Add download tasks for obtaining last version of filters from backend.
  @return Returns nil on success.
  */
 - (NSError *)asyncFilterForApp:(NSString *)applicationId affiliateId:(NSString *)affiliateId filterIds:(NSArray <NSNumber *>*)filterIds;

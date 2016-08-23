@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
+#import "ABackEndClients/ABECFilter.h"
 
 #define AS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
 #define AS_EXECUTION_LEEWAY                                5 // 5 seconds
@@ -38,14 +39,14 @@ extern NSString *ASAntibannerNotInstalledNotification;
 /// When anitbanner service ready to work
 extern NSString *ASAntibannerReadyNotification;
 
-/// When antibanner filter metadata updated
-extern NSString *ASAntibannerUpdateFilterMetadataNotification;
-
 /// When antibanner filter rules updated
 extern NSString *ASAntibannerUpdateFilterRulesNotification;
 
 /// When anitbanner started update process
 extern NSString *ASAntibannerStartedUpdateNotification;
+
+/// When some part of the update process completed
+extern NSString *ASAntibannerUpdatePartCompletedNotification;
 
 /// When anitbanner finished update process
 extern NSString *ASAntibannerFinishedUpdateNotification;
@@ -69,7 +70,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  Service implements: updating from backend, auto detect filters, storing info and rules
  for Ad Blocker (the same Antibanner, requestFilter), and so on..
  */
-@interface AESAntibanner : NSObject
+@interface AESAntibanner : NSObject <ABECFilterAsyncDelegateProtocol>
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -239,8 +240,12 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
 /**
  Starts updating of filters from Backend service.
  */
-- (void)startUpdating;
-
+- (void)startUpdatingInteractive:(BOOL)interactive;
+/**
+ Call this method after starting of the app, 
+ that must adjust right processing for backgound downloads of the filter updates.
+ */
+- (void)repairUpdateStateWithBackground:(BOOL)backgourd;
 
 - (BOOL)inTransaction;
 - (void)beginTransaction;

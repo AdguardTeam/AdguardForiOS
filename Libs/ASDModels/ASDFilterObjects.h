@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
+#import "ACommons/ACLang.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Filtering constants
@@ -136,7 +137,7 @@
 /**
  Filter representation in localization context.
  */
-@interface ASDFilterLocalization : NSObject
+@interface ASDFilterLocalization : ACObject
 
 /**
  Initializing using Database result object.
@@ -211,7 +212,7 @@
  Filter representation in metadata context.
  Two object of this class is equal if they have equal values of "filterId" property.
  */
-@interface ASDFilterMetadata : NSObject
+@interface ASDFilterMetadata : ACObject
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods

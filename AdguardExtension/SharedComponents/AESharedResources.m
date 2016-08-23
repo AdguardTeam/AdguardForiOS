@@ -28,8 +28,10 @@ NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion"
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
 NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
+NSString *AEDefaultsFilterUpdateInProgress = @"AEDefaultsFilterUpdateInProgress";
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_LAST_UPDATE_FILTERVERSIONS_META     @"lastupdate-versions.data"
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 
 /////////////////////////////////////////////////////////////////////
@@ -88,6 +90,31 @@ static NSUserDefaults *_sharedUserDefaults;
 - (void)setBlockingContentRules:(NSData *)blockingContentRules{
 
     [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
+- (NSArray <ASDFilterMetadata *> *)lastUpdateFilterVersionsMetadata {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTERVERSIONS_META];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setLastUpdateFilterVersionsMetadata:(NSArray<ASDFilterMetadata *> *)lastUpdateFilterVersionsMetadata {
+    
+    if (lastUpdateFilterVersionsMetadata == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTERVERSIONS_META];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilterVersionsMetadata];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERVERSIONS_META];
+    }
 }
 
 + (NSUserDefaults *)sharedDefaults{

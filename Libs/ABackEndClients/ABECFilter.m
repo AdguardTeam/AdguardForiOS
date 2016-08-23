@@ -304,6 +304,7 @@ static ABECFilterClient *ABECFilterSingleton;
     
     self.sessionId = sessionId;
     self.delegate = delegate;
+    [self backgroundSession];
 }
 
 - (void)handleBackgroundWithSessionId:(NSString *)sessionId delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate{
@@ -320,9 +321,9 @@ static ABECFilterClient *ABECFilterSingleton;
 
     @synchronized (ABECFilterSingleton) {
         
-        if (_asyncInProgress) {
-            
-            return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
+        NSError *error = [self checkConditionForAsync];
+        if (error) {
+            return error;
         }
         
         ABECRequest *sURLRequest = [self requestForFilterVersionListForApp:applicationId filterIds:filterIds];
@@ -342,9 +343,9 @@ static ABECFilterClient *ABECFilterSingleton;
 
     @synchronized (ABECFilterSingleton) {
         
-        if (_asyncInProgress) {
-            
-            return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
+        NSError *error = [self checkConditionForAsync];
+        if (error) {
+            return error;
         }
         
         if (!_obtainFilterTasks) {
@@ -523,6 +524,19 @@ static ABECFilterClient *ABECFilterSingleton;
         _asyncInProgress = NO;
         _filterResults = nil;
     }
+}
+
+- (NSError *)checkConditionForAsync {
+    if (_asyncInProgress) {
+        
+        return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
+    }
+
+    if (!(self.delegate && self.sessionId)) {
+        return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_NOTINIT userInfo:nil];
+    }
+    
+    return nil;
 }
 
 - (void)processDownloadTask:(NSURLSessionDownloadTask *)downloadTask error:(NSError *)error downloadURL:(NSURL *)downloadURL {
