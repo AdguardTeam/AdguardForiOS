@@ -781,15 +781,17 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     }
 }
 
-- (void)repairUpdateStateWithBackground:(BOOL)backgourd {
+- (void)repairUpdateStateWithBackground:(BOOL)background {
 
     ABECFilterClient *client = [ABECFilterClient singleton];
-    if (backgourd) {
-        [client handleBackgroundWithSessionId:AE_FILTER_UPDATES_ID delegate:self];
+    if (background) {
+        DDLogInfo(@"(ASAntibanner) repair update state - background");
+        [client handleBackgroundWithSessionId:AE_FILTER_UPDATES_ID updateTimeout:AS_FETCH_UPDATE_STATUS_PERIOD delegate:self];
     }
-    else if (self.updatesRightNow)
-        [client setupWithSessionId:AE_FILTER_UPDATES_ID delegate:self];
-
+    else if (self.updatesRightNow){
+        DDLogInfo(@"(ASAntibanner) repair update state - updatesRightNow");
+        [client setupWithSessionId:AE_FILTER_UPDATES_ID updateTimeout:AS_FETCH_UPDATE_STATUS_PERIOD delegate:self inProgress:YES];
+    }
 }
 
 - (BOOL)inTransaction{
@@ -867,24 +869,35 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             // checking version
             ASDFilterMetadata *filterMeta = [dbFilterMetas member:version];
 
-            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
+            //TODO: delete comments
+//            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
                 [updatedVersions addObject:version];
-            }
+//            }
         }
 
         AESharedResources *res = [AESharedResources new];
         res.lastUpdateFilterVersionsMetadata = updatedVersions;
-        NSError *error = [client asyncFilterForApp:[ADProductInfo applicationID] affiliateId:@"" filterIds:[updatedVersions valueForKey:@"filterId"]];
+        
+        if (updatedVersions.count) {
 
-        if (error) {
-            [self updateFailure];
+            //update stage 2
+            NSError *error = [client asyncFilterForApp:[ADProductInfo applicationID] affiliateId:@"" filterIds:[updatedVersions valueForKey:@"filterId"]];
+            
+            if (error) {
+                [self updateFailure];
+            }
+            else {
+                
+                DDLogDebug(@"(AESAntibanner) -filterClient:filterVersionList: filters requested");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdatePartCompletedNotification object:self];
+                });
+            }
         }
         else {
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdatePartCompletedNotification object:self];
-            });
+            [self updateFinished:updatedVersions];
         }
     });
 }
@@ -908,7 +921,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         for (ASDFilterMetadata *version in versions) {
             
             ASDFilter *filter = filters[version.filterId];
-            if ((NSNull *)filter == [NSNull null]) {
+            if (!filter || ((NSNull *)filter == [NSNull null])) {
                 continue;
             }
             
@@ -947,19 +960,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
             });
 
-        self.updatesRightNow = NO;
-        [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsFilterUpdateInProgress];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            DDLogInfo(@"(ASAntibanner) Finished update process.");
-            DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
-            for (ASDFilterMetadata *meta in updatedVersions) {
-                DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFinishedUpdateNotification object:self userInfo:@{ASAntibannerUpdatedFiltersKey : updatedVersions}];
-        });
-
+        [self updateFinished:updatedVersions];
     });
 }
 
@@ -995,7 +996,6 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
              
             // Getting filter info from DB
             NSMutableSet *dbFilterMetas = [NSMutableSet setWithArray:[self filters]];
-            NSMutableArray *filterIdsForUpdate = [NSMutableArray array];
             
             if (interactive) {
 
@@ -1022,12 +1022,12 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             }
             
             ABECFilterClient *filterClient = [ABECFilterClient singleton];
-            [filterClient setupWithSessionId:AE_FILTER_UPDATES_ID delegate:self];
+            [filterClient setupWithSessionId:AE_FILTER_UPDATES_ID updateTimeout:AS_FETCH_UPDATE_STATUS_PERIOD delegate:self inProgress:NO];
             
             NSTimeInterval interval;
+            NSMutableArray *filterIdsForUpdate = [NSMutableArray array];
             
             // Determine filter list for updating versions and rules
-            [filterIdsForUpdate removeAllObjects];
             for (ASDFilterMetadata *filterMeta in dbFilterMetas) {
                 
                 //determin not editable
@@ -1051,6 +1051,13 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 if (error) {
                     [self updateFailure];
                 }
+                else {
+                    DDLogDebug(@"(AESAntibanner) -updateAntibannerForced version list requested");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdatePartCompletedNotification object:self];
+                    });
+                }
             }
         }
     }
@@ -1070,6 +1077,24 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerStartedUpdateNotification object:self];
     });
 }
+
+- (void)updateFinished:(NSArray *)updatedVersions {
+    
+    self.updatesRightNow = NO;
+    [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsFilterUpdateInProgress];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        DDLogInfo(@"(ASAntibanner) Finished update process.");
+        DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
+        for (ASDFilterMetadata *meta in updatedVersions) {
+            DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFinishedUpdateNotification object:self userInfo:@{ASAntibannerUpdatedFiltersKey : updatedVersions}];
+    });
+
+}
+
 - (void)updateFailure{
     
     self.updatesRightNow = NO;

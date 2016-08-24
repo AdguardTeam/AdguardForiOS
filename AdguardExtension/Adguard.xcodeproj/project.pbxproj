@@ -865,7 +865,7 @@
 		655AACAD1D3CD24B00E316EA /* ADBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ADBTable.m; sourceTree = "<group>"; };
 		655AACAE1D3CD24B00E316EA /* ADBTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBTableRow.h; sourceTree = "<group>"; };
 		655AACAF1D3CD24B00E316EA /* ADBTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ADBTableRow.m; sourceTree = "<group>"; };
-		655AACB41D3CD38000E316EA /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		655AACB41D3CD38000E316EA /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACObject.h; sourceTree = "<group>"; };
 		655AACB51D3CD38000E316EA /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACObject.m; sourceTree = "<group>"; };
 		655AACC71D3E10C100E316EA /* APUIDnsRequestsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsRequestsController.h; sourceTree = "<group>"; };
 		655AACC81D3E10C100E316EA /* APUIDnsRequestsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsRequestsController.m; sourceTree = "<group>"; };

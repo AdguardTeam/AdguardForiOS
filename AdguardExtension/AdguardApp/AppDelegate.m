@@ -31,7 +31,6 @@
 
 #import "AESharedResources.h"
 
-#define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
@@ -196,7 +195,7 @@ typedef void (^AEDownloadsCompletionBlock)();
 
 - (void)setPeriodForCheckingFilters{
     
-    NSTimeInterval interval = (AS_CHECK_FILTERS_UPDATES_PERIOD)/AE_AD_FETCH_UPDATE_STATUS_COUNT;
+    NSTimeInterval interval = AS_FETCH_UPDATE_STATUS_PERIOD;
     if (interval < UIApplicationBackgroundFetchIntervalMinimum) {
         interval = UIApplicationBackgroundFetchIntervalMinimum;
     }
@@ -292,7 +291,9 @@ typedef void (^AEDownloadsCompletionBlock)();
 }
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)())completionHandler {
-    
+
+    DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
+
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
         [[AEService singleton] onReady:^{
@@ -392,14 +393,15 @@ typedef void (^AEDownloadsCompletionBlock)();
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
             
-            [self updateStartedNotify];
-            
             if (fromUI) {
                 DDLogInfo(@"(AppDelegate) Update process started from UI.");
             }
             else{
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
+            
+            [[[AEService singleton] antibanner] beginTransaction];
+            DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
             [[[AEService singleton] antibanner] startUpdatingInteractive:fromUI];
             return YES;
@@ -483,6 +485,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         // turn on network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [self updateStartedNotify];
     }
     // Update performed
     else if ([notification.name
@@ -530,12 +533,8 @@ typedef void (^AEDownloadsCompletionBlock)();
     else if ([notification.name
               isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
         
-        if (_downloadCompletion) {
-
-            DDLogInfo(@"(AppDelegate - Background update downloads) Call Completion when update PART notification.");
-            _downloadCompletion();
-            _downloadCompletion = nil;
-        }
+        DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
+        [self callCompletionHandler:UIBackgroundFetchResultNewData];
     }
 }
 

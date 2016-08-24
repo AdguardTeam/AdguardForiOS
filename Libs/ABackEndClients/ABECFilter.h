@@ -122,10 +122,12 @@ extern NSString *ABECFilterError;
 #pragma mark  Async support methods
 
 @property NSString *sessionId;
+@property NSTimeInterval updateTimeout;
 @property (weak) id <ABECFilterAsyncDelegateProtocol> delegate;
 
-- (void)setupWithSessionId:(NSString *)sessionId delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate;
-- (void)handleBackgroundWithSessionId:(NSString *)sessionId delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate;
+- (void)setupWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate inProgress:(BOOL)inProgress;
+
+- (void)handleBackgroundWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate;
 
 
 /**
