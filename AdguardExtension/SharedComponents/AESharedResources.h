@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata;
+@class ASDFilterMetadata, ASDFilter;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -137,6 +137,11 @@ extern NSString *AEDefaultsFilterUpdateInProgress;
  We need it because filter update process is performed in two steps.
  */
 @property NSArray <ASDFilterMetadata *> *lastUpdateFilterVersionsMetadata;
+/**
+ Filter rules from last filter update process.
+ We need it because filter update process is performed in two steps.
+ */
+@property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
 
 @end

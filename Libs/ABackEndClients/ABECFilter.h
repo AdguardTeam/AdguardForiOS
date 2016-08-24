@@ -31,7 +31,7 @@
  */
 - (void)filterClient:(ABECFilterClient *)client filterVersionList:(NSArray <ASDFilterMetadata *>*)versions;
 
-- (void)filterClient:(ABECFilterClient *)client filters:(NSDictionary <NSNumber *, ASDFilter *> *)filters;
+- (void)filterClient:(ABECFilterClient *)client filterId:(NSNumber *)filterId filter:(ASDFilter *)filter;
 
 @end
 

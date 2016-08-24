@@ -163,7 +163,7 @@
 /**
  Filter representation with rules.
  */
-@interface ASDFilter : NSObject
+@interface ASDFilter : ACObject
 
 @property (nonatomic) NSNumber *filterId;
 @property (nonatomic) NSString *name;
@@ -171,19 +171,19 @@
 @property (nonatomic) NSString *updateDateString;
 @property (nonatomic) NSDate *updateDate;
 
-/// Array of AASDFilterRule objects.
+/// Array of ASDFilterRule objects.
 @property (nonatomic) NSArray *rules;
 
 @end
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark -  AASDFilterRule
+#pragma mark -  ASDFilterRule
 /////////////////////////////////////////////////////////////////////
 
 /**
  Filter rule representation.
  */
-@interface ASDFilterRule : NSObject
+@interface ASDFilterRule : ACObject
 
 /**
  Initializing using Database result object.

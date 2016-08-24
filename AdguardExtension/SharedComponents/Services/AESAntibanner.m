@@ -70,6 +70,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     BOOL _updatesRightNow;
     BOOL _inTransaction;
     
+    NSArray *_lastUpdateVersions;
+    NSMutableDictionary *_lastUpdateFilters;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -856,6 +858,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
     dispatch_sync(workQueue, ^{
 
+        DDLogDebug(@"(AESAntibanner) filterClient:filterVersionList:\n%@", versions);
+        
         if (versions == nil) {
             [self updateFailure];
             return;
@@ -902,66 +906,48 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     });
 }
 
-- (void)filterClient:(ABECFilterClient *)client filters:(NSDictionary<NSNumber *, ASDFilter *> *)filters {
+- (void)filterClient:(ABECFilterClient *)client filterId:(NSNumber *)filterId filter:(ASDFilter *)filter {
     
-    [self beginTransaction];
-    DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
+    DDLogDebug(@"(AESAntibanner) filterClient:filterId:%@ filter:%@ ", filterId, filter);
     
-
+    if (!filterId) {
+        return;
+    }
     
-    dispatch_sync(workQueue, ^{
-
-        __block BOOL rulesUpdated = NO;
-        NSMutableArray *updatedVersions = [NSMutableArray array];
-        AESharedResources *res = [AESharedResources new];
-        NSArray *versions = res.lastUpdateFilterVersionsMetadata;
-
-        res.lastUpdateFilterVersionsMetadata = nil;
+    AESharedResources *res = [AESharedResources new];
+    
+    //repair filters dictionary from disk
+    if (!_lastUpdateFilters) {
         
-        for (ASDFilterMetadata *version in versions) {
-            
-            ASDFilter *filter = filters[version.filterId];
-            if (!filter || ((NSNull *)filter == [NSNull null])) {
-                continue;
-            }
-            
-            // needs update filter
-            [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
-                
-                *rollback = YES;
-
-                //get disabled rules
-                NSArray *disabledRuleTexts = [self disabledRuleTextsForDb:db filterId:version.filterId];
-                BOOL boolResult = [db executeUpdate:@"delete from filter_rules where filter_id = ?", version.filterId];
-                
-                boolResult &= [db executeUpdate:@"update filters set last_update_time = datetime(?), last_check_time = datetime(?), version = ? where filter_id = ?", version.updateDateString, version.checkDateString, version.version, version.filterId];
-                
-                if (!boolResult)
-                    return;
-                
-                if (filter.rules.count)
-                    for (ASDFilterRule *rule in filter.rules) {
-                        
-                        if ([disabledRuleTexts containsObject:rule.ruleText])
-                            rule.isEnabled = @(0);
-                        [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
-                    }
-                
-                *rollback = NO;
-                rulesUpdated = YES;
-                [updatedVersions addObject:version];
-            }];
+        _lastUpdateFilters = [res.lastUpdateFilters mutableCopy];
+        if (!_lastUpdateFilters) {
+            _lastUpdateFilters = [NSMutableDictionary dictionary];
         }
+    }
+    //repair filter versions from disk
+    if (!_lastUpdateVersions) {
+        _lastUpdateVersions = res.lastUpdateFilterVersionsMetadata;
+    }
 
-        // Notifying to all, that filter rules were updated
-        if (rulesUpdated)
-            dispatch_async(dispatch_get_main_queue(), ^{
+    _lastUpdateFilters[filterId] = filter ?: [NSNull null];
 
-                [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
-            });
-
-        [self updateFinished:updatedVersions];
-    });
+    
+    if (_lastUpdateVersions.count == _lastUpdateFilters.count) {
+        
+        res.lastUpdateFilterVersionsMetadata = nil;
+        res.lastUpdateFilters = nil;
+        
+        // update fiters in DB
+        [self updateVersions:_lastUpdateVersions filters:_lastUpdateFilters];
+        
+        _lastUpdateVersions = nil;
+        _lastUpdateFilters = nil;
+    }
+    else {
+        
+        //save filters dictionary to disk
+        res.lastUpdateFilters = _lastUpdateFilters;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -1068,9 +1054,71 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     }
 }
 
+- (void)updateVersions:(NSArray <ASDFilterMetadata *> *)versions filters:(NSDictionary<NSNumber *, ASDFilter *> *)filters {
+    
+    [self beginTransaction];
+    DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
+    
+    
+    
+    dispatch_sync(workQueue, ^{
+        
+        __block BOOL rulesUpdated = NO;
+        NSMutableArray *updatedVersions = [NSMutableArray array];
+        
+        for (ASDFilterMetadata *version in versions) {
+            
+            ASDFilter *filter = filters[version.filterId];
+            if (!filter || ((NSNull *)filter == [NSNull null])) {
+                continue;
+            }
+            
+            // needs update filter
+            [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+                
+                *rollback = YES;
+                
+                //get disabled rules
+                NSArray *disabledRuleTexts = [self disabledRuleTextsForDb:db filterId:version.filterId];
+                BOOL boolResult = [db executeUpdate:@"delete from filter_rules where filter_id = ?", version.filterId];
+                
+                boolResult &= [db executeUpdate:@"update filters set last_update_time = datetime(?), last_check_time = datetime(?), version = ? where filter_id = ?", version.updateDateString, version.checkDateString, version.version, version.filterId];
+                
+                if (!boolResult)
+                    return;
+                
+                if (filter.rules.count)
+                    for (ASDFilterRule *rule in filter.rules) {
+                        
+                        if ([disabledRuleTexts containsObject:rule.ruleText])
+                            rule.isEnabled = @(0);
+                        [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+                    }
+                
+                *rollback = NO;
+                rulesUpdated = YES;
+                [updatedVersions addObject:version];
+            }];
+        }
+        
+        // Notifying to all, that filter rules were updated
+        if (rulesUpdated)
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+            });
+        
+        [self updateFinished:updatedVersions];
+    });
+}
+
 - (void)updateStart {
     self.updatesRightNow = YES;
     [[AESharedResources sharedDefaults] setBool:YES forKey:AEDefaultsFilterUpdateInProgress];
+
+    _lastUpdateVersions = nil;
+    _lastUpdateFilters = nil;
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         DDLogInfo(@"(ASAntibanner) Started update process.");

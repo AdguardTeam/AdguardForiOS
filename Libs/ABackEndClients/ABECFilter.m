@@ -86,12 +86,12 @@ void settings(){
     NSURL *filterVersionUrl;
     NSURL *filterUrl;
     
+    NSArray *_asyncFilterVersions;
+    ASDFilter *_asyncFilter;
+    NSUInteger _asyncFiltersCount;
+    NSUInteger _asyncCurrentFiltersCount;
     BOOL _handleBackground;
     BOOL _asyncInProgress;
-    NSMutableArray <NSURLSessionDownloadTask *> *_obtainFilterTasks;
-    NSMutableDictionary <NSNumber *, id> *_filterResults;
-    
-    void (^_responseBlock)(void);
 }
 
 static ABECFilterClient *ABECFilterSingleton;
@@ -133,7 +133,6 @@ static ABECFilterClient *ABECFilterSingleton;
         
         _asyncInProgress = YES;
         _handleBackground = NO;
-        _responseBlock = nil;
         _updateTimeout = 0;
     }
     
@@ -300,27 +299,26 @@ static ABECFilterClient *ABECFilterSingleton;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Async support methods
-- (void)setupWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate inProgress:(BOOL)inProgress
-{
-    
-    DDLogDebug(@"(ABECFilterClient) setupWithSessionId:delegate: %@ inProgress: %@", delegate, (inProgress ? @"YES" : @"NO"));
-    
-    self.sessionId = sessionId;
-    self.delegate = delegate;
-    self.updateTimeout = updateTimeout;
-    _asyncInProgress = inProgress;
-    [self backgroundSession];
+- (void)setupWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id<ABECFilterAsyncDelegateProtocol>)delegate inProgress:(BOOL)inProgress {
+
+    @synchronized(ABECFilterSingleton) {
+
+        DDLogDebug(@"(ABECFilterClient) setupWithSessionId:delegate: %@ inProgress: %@", delegate, (inProgress ? @"YES" : @"NO"));
+
+        self.sessionId = sessionId;
+        self.delegate = delegate;
+        self.updateTimeout = updateTimeout;
+        _asyncInProgress = inProgress;
+        [self backgroundSession];
+    }
 }
 
-- (void)handleBackgroundWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate
-{
-    @synchronized (ABECFilterSingleton) {
-        DDLogDebug(@"(ABECFilterClient) handleBackgroundWithSessionId:delegate: %@", delegate);
-        
-        _handleBackground = YES;
-        [self setupWithSessionId:sessionId updateTimeout:updateTimeout delegate:delegate inProgress:YES];
-        return;
-    }
+- (void)handleBackgroundWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id<ABECFilterAsyncDelegateProtocol>)delegate {
+    DDLogDebug(@"(ABECFilterClient) handleBackgroundWithSessionId:delegate: %@", delegate);
+
+    [self setupWithSessionId:sessionId updateTimeout:updateTimeout delegate:delegate inProgress:YES];
+    _handleBackground = YES;
+    return;
 }
 
 - (NSError *)asyncFilterVersionListForApp:(NSString *)applicationId filterIds:(id<NSFastEnumeration>)filterIds {
@@ -331,6 +329,8 @@ static ABECFilterClient *ABECFilterSingleton;
         if (error) {
             return error;
         }
+        
+        _asyncFilterVersions = nil;
         
         NSURLRequest *sURLRequest = [self requestForFilterVersionListForApp:applicationId filterIds:filterIds];
         if (!sURLRequest) {
@@ -353,11 +353,10 @@ static ABECFilterClient *ABECFilterSingleton;
         if (error) {
             return error;
         }
-        
-        if (!_obtainFilterTasks) {
-            _obtainFilterTasks = [NSMutableArray array];
-        }
-        
+
+        _asyncFilter = nil;
+        _asyncFiltersCount = filterIds.count;
+
         for (NSNumber *filterId in filterIds) {
             NSURLRequest *sURLRequest = [self requestForApp:applicationId affiliateId:affiliateId filterId:[filterId integerValue]];
             if (!sURLRequest) {
@@ -365,11 +364,10 @@ static ABECFilterClient *ABECFilterSingleton;
             }
             
             NSURLSessionDownloadTask *currentTask = [[self backgroundSession] downloadTaskWithRequest:sURLRequest];
-            [_obtainFilterTasks addObject:currentTask];
+            [currentTask resume];
         }
-        _asyncInProgress = YES;
 
-        [_obtainFilterTasks makeObjectsPerformSelector:@selector(resume)];
+        _asyncInProgress = YES;
         
         return nil;
     }
@@ -394,16 +392,15 @@ static ABECFilterClient *ABECFilterSingleton;
     
     DDLogDebug(@"(ABECFilterClient) URLSessionDidFinishEventsForBackgroundURLSession:");
     
-    if (_responseBlock) {
-        _responseBlock();
-    }
-    
-    _responseBlock = nil;
+    _handleBackground = NO;
+    [self unlockAsync];
 }
 
 - (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
     
     DDLogDebug(@"(ABECFilterClient) URLSession:didBecomeInvalidWithError: %@", error);
+    
+    [self unlockAsync];
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
@@ -542,18 +539,18 @@ static ABECFilterClient *ABECFilterSingleton;
     @synchronized(ABECFilterSingleton) {
         
         _asyncInProgress = NO;
-        _filterResults = nil;
-        _obtainFilterTasks = nil;
     }
 }
 
 - (NSError *)checkConditionForAsync {
     if (_asyncInProgress) {
         
+        DDLogError(@"(ABECFilterClient) Error: async operation in progress");
         return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_INPROGRESS userInfo:nil];
     }
 
-    if (!(self.delegate && self.sessionId)) {
+    if (!(self.delegate && self.sessionId && self.updateTimeout)) {
+        DDLogError(@"(ABECFilterClient) Async operations can't be performed. You need setup it before.");
         return [NSError errorWithDomain:ABECFilterError code:ABECFILTER_ERROR_ASYNC_NOTINIT userInfo:nil];
     }
     
@@ -561,8 +558,6 @@ static ABECFilterClient *ABECFilterSingleton;
 }
 
 - (void)processDownloadTask:(NSURLSessionDownloadTask *)downloadTask error:(NSError *)error downloadURL:(NSURL *)downloadURL {
-    
-    __typeof__(self) __weak wSelf = self;
     
     NSURL *requestUrl = [[downloadTask originalRequest] URL];
     if ([[requestUrl absoluteString] hasPrefix:[filterVersionUrl absoluteString]]) {
@@ -573,35 +568,25 @@ static ABECFilterClient *ABECFilterSingleton;
         
         if (error) {
             DDLogError(@"(ABECFilterClient) ASync. Error loading filter versions info:%@", [error localizedDescription]);
-            [self filterVersionListErrorBlock];
         }
 
         if (downloadURL) {
             
             //call finished download
             
-            NSData *data;
-            if ((data = [NSData dataWithContentsOfURL:downloadURL]) == nil) {
-                
-                [self filterVersionListErrorBlock];
-            }
-            else {
-                NSArray *filterVersions = [self filterVersionFromData:data response:[downloadTask response] error:nil];
-                _responseBlock = ^() {
-                    __typeof__(self) sSelf = wSelf;
-                    
-                    [sSelf unlockAsync];
-                    [sSelf.delegate filterClient:sSelf filterVersionList:filterVersions];
-                };
+            NSData *data = [NSData dataWithContentsOfURL:downloadURL];
+            if (data) {
+
+                _asyncFilterVersions = [self filterVersionFromData:data response:[downloadTask response] error:nil];
             }
         }
         else {
             
             // call from task complated
             
-            if (!_handleBackground) {
-                _responseBlock(); // if app in active mode, we call block for transferring of the result to delegate
-            }
+            [self unlockAsync];
+            [self.delegate filterClient:self filterVersionList:_asyncFilterVersions];
+            _asyncFilterVersions = nil;
         }
         
     } else if ([[requestUrl absoluteString] hasPrefix:[filterUrl absoluteString]]) {
@@ -615,66 +600,31 @@ static ABECFilterClient *ABECFilterSingleton;
             return;
         }
         
-        if (!_filterResults) {
-            _filterResults = [NSMutableDictionary dictionary];
-        }
-        
-        [self filtersBlock];
-        
         if (error) {
             DDLogError(@"(ABECFilterClient) ASync. Error loading filter data:%@", [error localizedDescription]);
-            _filterResults[filterId] = [NSNull null];
         }
         
         if (downloadURL) {
 
             //call finished download
-            NSData *data;
-            if ((data = [NSData dataWithContentsOfURL:downloadURL]) == nil) {
+            NSData *data = [NSData dataWithContentsOfURL:downloadURL];
+            if (data) {
                 
-                _filterResults[filterId] = [NSNull null];
-            } else {
-                
-                ASDFilter *filter = [self filterForData:data response:[downloadTask response] filterId:filterId error:nil];
-                _filterResults[filterId] = filter;
+                _asyncFilter = [self filterForData:data response:[downloadTask response] filterId:filterId error:nil];
             }
         }
         else {
             
             // call from task complated
-            
-            if (!_handleBackground && _filterResults.count == _obtainFilterTasks.count) {
-                _responseBlock(); // if app in active mode, we call block for transferring of the result to delegate
+
+            if (_asyncFiltersCount <= (++_asyncCurrentFiltersCount)) {
+                [self unlockAsync];
             }
+            
+            [self.delegate filterClient:self filterId:filterId filter:_asyncFilter];
+            _asyncFilter = nil;
         }
     }
-}
-
-- (void)filterVersionListErrorBlock {
-    
-    
-    __typeof__(self) __weak wSelf = self;
-    
-    _responseBlock = ^() {
-        __typeof__(self) sSelf = wSelf;
-        
-        [sSelf unlockAsync];
-        [sSelf.delegate filterClient:sSelf filterVersionList:nil];
-    };
-
-}
-
-- (void)filtersBlock {
-
-    __typeof__(self) __weak wSelf = self;
-    
-    _responseBlock = ^() {
-        __typeof__(self) sSelf = wSelf;
-        
-        NSDictionary *filterResults = [sSelf->_filterResults copy];
-        [sSelf unlockAsync];
-        [sSelf.delegate filterClient:sSelf filters:filterResults];
-    };
 }
 
 - (NSNumber *)filterIdFromRequestUrl:(NSURL *)requestUrl {
