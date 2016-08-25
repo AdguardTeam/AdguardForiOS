@@ -573,6 +573,7 @@
 		65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		65FAB33D1D6F162E00A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1864,48 +1865,48 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Clean Script";
 		};
-        6548B0601C50EF630092E77C /* Fix Base Application Strings */ = {
-        isa = PBXLegacyTarget;
-        buildArgumentsString = "./fix-base-application-strings.py";
-        buildConfigurationList = 6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */;
-        buildPhases = (
-        );
-        buildToolPath = /usr/bin/python;
-        buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private/Resources";
-        dependencies = (
-        );
-        name = "Fix Base Application Strings";
-        passBuildSettingsInEnvironment = 1;
-        productName = "Import Localization";
-        };
-        65982AEB1BA16ECA00770EA9 /* Export Localization */ = {
-        isa = PBXLegacyTarget;
-        buildArgumentsString = ./exportLocalization.sh;
-        buildConfigurationList = 65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */;
-        buildPhases = (
-        );
-        buildToolPath = /bin/bash;
-        buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-        dependencies = (
-        );
-        name = "Export Localization";
-        passBuildSettingsInEnvironment = 1;
-        productName = "Export Localization";
-        };
-        65982AF81BA1A64300770EA9 /* Import Localization */ = {
-        isa = PBXLegacyTarget;
-        buildArgumentsString = ./importLocalization.sh;
-        buildConfigurationList = 65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */;
-        buildPhases = (
-        );
-        buildToolPath = /bin/bash;
-        buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-        dependencies = (
-        );
-        name = "Import Localization";
-        passBuildSettingsInEnvironment = 1;
-        productName = "Import Localization";
-        };
+		6548B0601C50EF630092E77C /* Fix Base Application Strings */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "./fix-base-application-strings.py";
+			buildConfigurationList = 6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/python;
+			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private/Resources";
+			dependencies = (
+			);
+			name = "Fix Base Application Strings";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Import Localization";
+		};
+		65982AEB1BA16ECA00770EA9 /* Export Localization */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = ./exportLocalization.sh;
+			buildConfigurationList = 65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
+			dependencies = (
+			);
+			name = "Export Localization";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Export Localization";
+		};
+		65982AF81BA1A64300770EA9 /* Import Localization */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = ./importLocalization.sh;
+			buildConfigurationList = 65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
+			dependencies = (
+			);
+			name = "Import Localization";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Import Localization";
+		};
 		65B40D2A1BDE520500A9C595 /* Run Builder */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = ./runBuilder.sh;
@@ -2143,12 +2144,12 @@
 							};
 						};
 					};
-65982AEB1BA16ECA00770EA9 = {
-CreatedOnToolsVersion = 7.0;
-};
-65982AF81BA1A64300770EA9 = {
-CreatedOnToolsVersion = 7.0;
-};
+					65982AEB1BA16ECA00770EA9 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					65982AF81BA1A64300770EA9 = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					659886481CF74DE9003ECD1C = {
 						DevelopmentTeam = N33TQXN8C7;
 						SystemCapabilities = {
@@ -2246,10 +2247,10 @@ CreatedOnToolsVersion = 7.0;
 				65F398341B7B684700ABCD39 /* AdguardUITests */,
 				65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */,
 				65C52B351B906105003AF42F /* ActionExtension */,
-65982AEB1BA16ECA00770EA9 /* Export Localization */,
-65982AF81BA1A64300770EA9 /* Import Localization */,
+				65982AEB1BA16ECA00770EA9 /* Export Localization */,
+				65982AF81BA1A64300770EA9 /* Import Localization */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
-6548B0601C50EF630092E77C /* Fix Base Application Strings */,
+				6548B0601C50EF630092E77C /* Fix Base Application Strings */,
 				65423D951C89B7C900DD1224 /* Clean Script */,
 				659886481CF74DE9003ECD1C /* Adguard Pro */,
 				659886EC1CF83580003ECD1C /* ProActionExtension */,
@@ -2715,6 +2716,7 @@ CreatedOnToolsVersion = 7.0;
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
+				65FAB33D1D6F162E00A0706B /* ACObject.m in Sources */,
 				659887121CF83580003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				659887131CF83580003ECD1C /* FMDatabaseQueue.m in Sources */,
 				659887141CF83580003ECD1C /* DDASLLogger.m in Sources */,
@@ -3287,29 +3289,29 @@ CreatedOnToolsVersion = 7.0;
 			};
 			name = Release;
 		};
-6548B0621C50EF630092E77C /* Debug */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUGGING_SYMBOLS = YES;
-DEBUG_INFORMATION_FORMAT = dwarf;
-GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-GCC_OPTIMIZATION_LEVEL = 0;
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Debug;
-};
-6548B0631C50EF630092E77C /* Release */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Release;
-};
+		6548B0621C50EF630092E77C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6548B0631C50EF630092E77C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		6582373F1D07FE6700B824F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
@@ -3350,52 +3352,52 @@ name = Release;
 			};
 			name = Release;
 		};
-65982AED1BA16ECA00770EA9 /* Debug */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUGGING_SYMBOLS = YES;
-DEBUG_INFORMATION_FORMAT = dwarf;
-GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-GCC_OPTIMIZATION_LEVEL = 0;
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Debug;
-};
-65982AEE1BA16ECA00770EA9 /* Release */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Release;
-};
-65982AFA1BA1A64300770EA9 /* Debug */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUGGING_SYMBOLS = YES;
-DEBUG_INFORMATION_FORMAT = dwarf;
-GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-GCC_OPTIMIZATION_LEVEL = 0;
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Debug;
-};
-65982AFB1BA1A64300770EA9 /* Release */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-OTHER_CFLAGS = "";
-OTHER_LDFLAGS = "";
-PRODUCT_NAME = "$(TARGET_NAME)";
-};
-name = Release;
-};
+		65982AED1BA16ECA00770EA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65982AEE1BA16ECA00770EA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		65982AFA1BA1A64300770EA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65982AFB1BA1A64300770EA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		659886B71CF74DE9003ECD1C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
@@ -3807,15 +3809,15 @@ name = Release;
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
-isa = XCConfigurationList;
-buildConfigurations = (
-6548B0621C50EF630092E77C /* Debug */,
-6548B0631C50EF630092E77C /* Release */,
-);
-defaultConfigurationIsVisible = 0;
-defaultConfigurationName = Release;
-};
+		6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6548B0621C50EF630092E77C /* Debug */,
+				6548B0631C50EF630092E77C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6582373E1D07FE6700B824F4 /* Build configuration list for PBXNativeTarget "ProTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3825,24 +3827,24 @@ defaultConfigurationName = Release;
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */ = {
-isa = XCConfigurationList;
-buildConfigurations = (
-65982AED1BA16ECA00770EA9 /* Debug */,
-65982AEE1BA16ECA00770EA9 /* Release */,
-);
-defaultConfigurationIsVisible = 0;
-defaultConfigurationName = Release;
-};
-65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */ = {
-isa = XCConfigurationList;
-buildConfigurations = (
-65982AFA1BA1A64300770EA9 /* Debug */,
-65982AFB1BA1A64300770EA9 /* Release */,
-);
-defaultConfigurationIsVisible = 0;
-defaultConfigurationName = Release;
-};
+		65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65982AED1BA16ECA00770EA9 /* Debug */,
+				65982AEE1BA16ECA00770EA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65982AFA1BA1A64300770EA9 /* Debug */,
+				65982AFB1BA1A64300770EA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Adguard Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
