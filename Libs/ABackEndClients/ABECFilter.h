@@ -18,20 +18,43 @@
 #import <Foundation/Foundation.h>
 #import "ABECConstants.h"
 
-@class ASDFilter, ASDFilterMetadata, ABECRequest;
+@class ASDFilter, ASDFilterMetadata, ABECRequest, ABECFilterClient;
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - ABECFilterAsyncProtocol
+
+@protocol ABECFilterAsyncDelegateProtocol <NSObject>
+
+/**
+ Calls this method when downloding filter versions complated.
+ @param versions Array of ASDFilterMetadata objects or nil if error occurs. 
+ */
+- (void)filterClient:(ABECFilterClient *)client filterVersionList:(NSArray <ASDFilterMetadata *>*)versions;
+
+- (void)filterClient:(ABECFilterClient *)client filterId:(NSNumber *)filterId filter:(ASDFilter *)filter;
+
+@end
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ABECFilterClient
 /////////////////////////////////////////////////////////////////////
 
+extern NSString *ABECFilterError;
+#define ABECFILTER_ERROR_PARAMETERS             100
+#define ABECFILTER_ERROR_ASYNC_INPROGRESS       200
+#define ABECFILTER_ERROR_ASYNC_NOTINIT          300
+
+
 /**
     Backend client for retrieve filters data
  */
-@interface ABECFilterClient : NSObject
+@interface ABECFilterClient : NSObject <NSURLSessionDownloadDelegate>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Init and class methods
 /////////////////////////////////////////////////////////////////////
+
++ (ABECFilterClient *)singleton;
 
 /**
  Initializes object for platform.
@@ -94,5 +117,31 @@
  @return Array of ASDFilterGroup objects or nil if error occurs.
  */
 - (NSArray *)groupMetadataListForApp:(NSString *)applicationId;
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Async support methods
+
+@property NSString *sessionId;
+@property NSTimeInterval updateTimeout;
+@property (weak) id <ABECFilterAsyncDelegateProtocol> delegate;
+
+- (void)setupWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate inProgress:(BOOL)inProgress;
+
+- (void)handleBackgroundWithSessionId:(NSString *)sessionId updateTimeout:(NSTimeInterval)updateTimeout delegate:(id <ABECFilterAsyncDelegateProtocol>)delegate;
+
+
+/**
+ Add download task for obtaining list of filter versions.
+ @return Returns nil on success.
+ */
+- (NSError *)asyncFilterVersionListForApp:(NSString *)applicationId filterIds:(id<NSFastEnumeration>)filterIds;
+
+
+/**
+ Add download tasks for obtaining last version of filters from backend.
+ @return Returns nil on success.
+ */
+- (NSError *)asyncFilterForApp:(NSString *)applicationId affiliateId:(NSString *)affiliateId filterIds:(NSArray <NSNumber *>*)filterIds;
+
 
 @end

@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
+#import "ACommons/ACLang.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Filtering constants
@@ -136,7 +137,7 @@
 /**
  Filter representation in localization context.
  */
-@interface ASDFilterLocalization : NSObject
+@interface ASDFilterLocalization : ACObject
 
 /**
  Initializing using Database result object.
@@ -162,7 +163,7 @@
 /**
  Filter representation with rules.
  */
-@interface ASDFilter : NSObject
+@interface ASDFilter : ACObject
 
 @property (nonatomic) NSNumber *filterId;
 @property (nonatomic) NSString *name;
@@ -170,19 +171,19 @@
 @property (nonatomic) NSString *updateDateString;
 @property (nonatomic) NSDate *updateDate;
 
-/// Array of AASDFilterRule objects.
+/// Array of ASDFilterRule objects.
 @property (nonatomic) NSArray *rules;
 
 @end
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark -  AASDFilterRule
+#pragma mark -  ASDFilterRule
 /////////////////////////////////////////////////////////////////////
 
 /**
  Filter rule representation.
  */
-@interface ASDFilterRule : NSObject
+@interface ASDFilterRule : ACObject
 
 /**
  Initializing using Database result object.
@@ -211,7 +212,7 @@
  Filter representation in metadata context.
  Two object of this class is equal if they have equal values of "filterId" property.
  */
-@interface ASDFilterMetadata : NSObject
+@interface ASDFilterMetadata : ACObject
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
