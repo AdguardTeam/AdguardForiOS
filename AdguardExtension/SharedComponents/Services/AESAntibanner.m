@@ -1045,6 +1045,9 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                     });
                 }
             }
+            else {
+                [self updateFinished:@[]];
+            }
         }
     }
     else if (!observingDbStatus){
@@ -1092,7 +1095,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                         
                         if ([disabledRuleTexts containsObject:rule.ruleText])
                             rule.isEnabled = @(0);
-                        [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+                        boolResult = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+                        if (!boolResult) {
+                            return;
+                        }
                     }
                 
                 *rollback = NO;
@@ -1100,15 +1106,18 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 [updatedVersions addObject:version];
             }];
         }
-        
+
         // Notifying to all, that filter rules were updated
-        if (rulesUpdated)
+        if (rulesUpdated) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+
                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
             });
-        
-        [self updateFinished:updatedVersions];
+
+            [self updateFinished:updatedVersions];
+        } else {
+            [self updateFailure];
+        }
     });
 }
 
@@ -1812,7 +1821,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     dispatch_async(workQueue, ^{
         
         if([reach isReachable])
-            [self updateAntibannerForced:NO interactive:YES];
+            [self updateAntibannerForced:YES interactive:YES];
     });
 }
 

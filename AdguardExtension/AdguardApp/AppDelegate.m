@@ -534,7 +534,7 @@ typedef void (^AEDownloadsCompletionBlock)();
               isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
         
         DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+//        [self callCompletionHandler:UIBackgroundFetchResultNewData];
     }
 }
 
