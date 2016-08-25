@@ -1953,7 +1953,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection footerTitle="If this setting is set to true, Adguard will only use WiFi for background filter updates." id="J25-IO-JkL">
+                            <tableViewSection footerTitle="If this setting is enabled, Adguard will only use WiFi for background filter updates." id="J25-IO-JkL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="x5D-K1-eUX" style="IBUITableViewCellStyleDefault" id="Noi-hj-Rv5">
                                         <rect key="frame" x="0.0" y="99" width="600" height="44"/>
@@ -1978,7 +1978,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="UH5-l5-jPn">
-                                <string key="footerTitle">If this setting is set to true, Adguard will ignore generic «cosmetic» rules. This will speed up pages rendering in exchange of filtering quality.</string>
+                                <string key="footerTitle">If this setting is enabled, Adguard will ignore generic «cosmetic» rules. This will speed up pages rendering in exchange of filtering quality.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="6zk-TZ-zcI" style="IBUITableViewCellStyleDefault" id="LGn-cv-bzc">
                                         <rect key="frame" x="0.0" y="188" width="600" height="44"/>
