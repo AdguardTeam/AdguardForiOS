@@ -25,6 +25,10 @@
 #import "AEUIEditDomainController.h"
 #import "AEUIUtils.h"
 
+#ifdef PRO
+#import "APVPNManager.h"
+#endif
+
 @interface AEUIWhitelistController (){
     
     AEUIEditDomainController *_editRuleController;
@@ -81,6 +85,9 @@
             
             [[[AEService singleton] antibanner] endTransaction];
             
+#ifdef PRO
+            [[APVPNManager singleton] sendReloadWhitelist];
+#endif
         }rollbackBlock:^{
             
             // enable rule (rollback)
@@ -156,7 +163,9 @@
                     [self reloadRulesAndScrollBottom:YES];
                     
                     [[[AEService singleton] antibanner] endTransaction];
-                    
+#ifdef PRO
+                    [[APVPNManager singleton] sendReloadWhitelist];
+#endif
                 } rollbackBlock:^{
                     
                     [[[AEService singleton] antibanner] rollbackTransaction];
@@ -187,6 +196,9 @@
 
                     [[[AEService singleton] antibanner] endTransaction];
                     
+#ifdef PRO
+                    [[APVPNManager singleton] sendReloadWhitelist];
+#endif
                 } rollbackBlock:^{
 
                     _ruleTextHolder = domain.rule.ruleText;

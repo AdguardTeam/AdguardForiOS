@@ -64,7 +64,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
             }
             else if (
                      [pType containsAny:@[@"NSDictionary",@"NSMutableDictionary",@"NSArray",@"NSMutableArray"]]
-                     || [NSClassFromString(pType) isSubclassOfClass:[ACObject class]]
+                     || [NSClassFromString(pType) conformsToProtocol:@protocol(NSCoding)]
                      ){
                 
                 [plistNames addObject:propertyName];

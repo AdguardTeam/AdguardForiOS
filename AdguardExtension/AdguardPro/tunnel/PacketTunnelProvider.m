@@ -18,9 +18,21 @@
 
 #import "PacketTunnelProvider.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
 #import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
+
+#import "ASDFilterObjects.h"
+#import "AESAntibanner.h"
+#import "AEService.h"
+#import "AEUIWhitelistDomainObject.h"
+#import "ASDatabase.h"
+
+#include <arpa/inet.h>
+#include <ifaddrs.h>
+#include <resolv.h>
+#include <dns.h>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider Constants
@@ -43,6 +55,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     void (^pendingStartCompletion)(NSError *error);
     
     APVpnMode _currentMode;
+    Reachability *_reachabilityHandler;
 }
 
 static APTunnelConnectionsHandler *_connectionHandler;
@@ -55,11 +68,22 @@ static APTunnelConnectionsHandler *_connectionHandler;
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
         
 #if DEBUG
-        [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
+        [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
         
         _connectionHandler = nil;
     }
+}
+
+- (id)init {
+    
+    self = [super init];
+    if (self) {
+        _reachabilityHandler = [Reachability reachabilityForInternetConnection];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
+    }
+    return self;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -68,6 +92,11 @@ static APTunnelConnectionsHandler *_connectionHandler;
 - (void)startTunnelWithOptions:(NSDictionary *)options completionHandler:(void (^)(NSError *))completionHandler
 {
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
+    
+    // Init database
+    [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+    
+    [_reachabilityHandler startNotifier];
     
    pendingStartCompletion = completionHandler;
     
@@ -133,6 +162,9 @@ static APTunnelConnectionsHandler *_connectionHandler;
         return;
     }
     
+    [_connectionHandler setDeviceDnsAddresses:[self getDNSServers] adguardDnsAddresses:ipv4DnsAddresses];
+    [self reloadWhitelistDomain];
+    
     // SETs network settings
     __typeof__(self) __weak wSelf = self;
     [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
@@ -155,6 +187,8 @@ static APTunnelConnectionsHandler *_connectionHandler;
 	// Add code here to start the process of stopping the tunnel.
     DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Event");
     
+    [_reachabilityHandler stopNotifier];
+
     @synchronized (_connectionHandler) {
         _connectionHandler = nil;
     }
@@ -166,36 +200,28 @@ static APTunnelConnectionsHandler *_connectionHandler;
 {
     DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
     
-    NSString *command = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
-
     [self restoreConnectionHandlerWithStartHandling:NO];
     
     @synchronized (_connectionHandler) {
         
-        // Logging command conversations
-        if ([command isEqualToString:APMDnsLoggingEnabled]) {
-            
-            //Log enabled
-            [_connectionHandler setDnsActivityLoggingEnabled:YES];
-        } else if ([command isEqualToString:APMDnsLoggingDisabled]) {
-            
-            //Log disabled
-            [_connectionHandler setDnsActivityLoggingEnabled:NO];
-        } else if ([command isEqualToString:APMDnsLoggingClearLog]) {
-            
-            //Clear log
-            [_connectionHandler clearDnsActivityLog];
-        } else if ([command isEqualToString:APMDnsLoggingGiveRecords]) {
-            
-            //Request for log records
-            NSArray *records = [_connectionHandler dnsActivityLogRecords];
-            if (records.count) {
+        switch ([APSharedResources host2tunnelMessageType:messageData]) {
+            case APHTMLoggingEnabled:
+                //Log enabled
+                [_connectionHandler setDnsActivityLoggingEnabled:YES];
+                break;
                 
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:records];
-                completionHandler(data);
-                return;
-            }
-            completionHandler(nil);
+            case APHTMLoggingDisabled:
+                //Log disabled
+                [_connectionHandler setDnsActivityLoggingEnabled:NO];
+                break;
+                
+            case APHTMWhitelistDomainsReload:
+                //Set whitelist domains
+                [self reloadWhitelistDomain];
+                break;
+                
+            default:
+                break;
         }
     }
 }
@@ -223,6 +249,51 @@ static APTunnelConnectionsHandler *_connectionHandler;
     return _currentMode;
 }
 
+- (NSArray <NSString *> *)getDNSServers {
+    @autoreleasepool {
+        
+        NSMutableArray *ips = [NSMutableArray array];
+        res_state res = malloc(sizeof(struct __res_state));
+        int result = res_ninit(res);
+        if (result == 0) {
+            union res_9_sockaddr_union *addr_union = malloc(res->nscount * sizeof(union res_9_sockaddr_union));
+            res_getservers(res, addr_union, res->nscount);
+            
+            const char *str;
+            for (int i = 0; i < res->nscount; i++) {
+                if (addr_union[i].sin.sin_family == AF_INET) {
+                    char ip[INET_ADDRSTRLEN];
+                    str = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
+                } else if (addr_union[i].sin6.sin6_family == AF_INET6) {
+                    char ip[INET6_ADDRSTRLEN];
+                    str = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
+                } else {
+                    str = NULL;
+                }
+                
+                if (str) {
+                    [ips addObject:[NSString stringWithUTF8String:str]];
+                }
+            }
+        }
+        res_nclose(res);
+        free(res);
+        
+        return [ips copy];
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods (private)
+
+- (void)reachNotify:(NSNotification *)note {
+    
+    self.reasserting = YES;
+    
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    [self cancelTunnelWithError:nil];
+}
+
 - (NSError *)restoreConnectionHandlerWithStartHandling:(BOOL)startHandling{
     
     @synchronized (_connectionHandler) {
@@ -247,4 +318,26 @@ static APTunnelConnectionsHandler *_connectionHandler;
     return nil;
 }
 
+- (void)reloadWhitelistDomain {
+    
+    @autoreleasepool {
+        
+        NSArray *rules = [[[AEService singleton] antibanner]
+                          rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        
+        NSMutableArray *wRules = [NSMutableArray array];
+        AEUIWhitelistDomainObject *object;
+        for (ASDFilterRule *item in rules) {
+            
+            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            if (object) {
+                [wRules addObject:object];
+            }
+        }
+        
+        wRules = [wRules valueForKey:@"domain"];
+        
+        [_connectionHandler setWhitelistDomains:wRules];
+    }
+}
 @end
