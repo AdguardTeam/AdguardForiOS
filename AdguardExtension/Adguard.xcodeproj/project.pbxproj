@@ -573,6 +573,7 @@
 		65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -701,6 +702,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65F3985D1B7B6A5300ABCD39;
 			remoteInfo = extension;
+		};
+		65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65423D951C89B7C900DD1224;
+			remoteInfo = "Clean Script";
+		};
+		65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
+			remoteInfo = "Run Builder";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1893,6 +1908,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				65FAB3451D6F2BA800A0706B /* PBXTargetDependency */,
+				65FAB3431D6F2BA500A0706B /* PBXTargetDependency */,
 			);
 			name = ProTunnel;
 			productName = tunnel;
@@ -2664,6 +2681,7 @@
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
+				65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */,
 				659887121CF83580003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				659887131CF83580003ECD1C /* FMDatabaseQueue.m in Sources */,
 				659887141CF83580003ECD1C /* DDASLLogger.m in Sources */,
@@ -3106,6 +3124,16 @@
 			isa = PBXTargetDependency;
 			target = 65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */;
 			targetProxy = 65F398661B7B6A5300ABCD39 /* PBXContainerItemProxy */;
+		};
+		65FAB3431D6F2BA500A0706B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65423D951C89B7C900DD1224 /* Clean Script */;
+			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
+		};
+		65FAB3451D6F2BA800A0706B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
+			targetProxy = 65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
