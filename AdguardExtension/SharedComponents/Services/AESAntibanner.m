@@ -873,10 +873,9 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             // checking version
             ASDFilterMetadata *filterMeta = [dbFilterMetas member:version];
 
-            //TODO: delete comments
-//            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
+            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
                 [updatedVersions addObject:version];
-//            }
+            }
         }
 
         AESharedResources *res = [AESharedResources new];
@@ -934,10 +933,16 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     if (_lastUpdateVersions.count == _lastUpdateFilters.count) {
         
+        DDLogDebug(@"(AESAntibanner) filterClient:filterId:filter: Start update.");
+        
         res.lastUpdateFilterVersionsMetadata = nil;
         res.lastUpdateFilters = nil;
         
-        // update fiters in DB
+        // prevent inProgress state, because process may be aborted
+        [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsFilterUpdateInProgress];
+        [AESharedResources synchronizeSharedDefaults];
+        
+      // update fiters in DB
         [self updateVersions:_lastUpdateVersions filters:_lastUpdateFilters];
         
         _lastUpdateVersions = nil;
@@ -947,6 +952,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         //save filters dictionary to disk
         res.lastUpdateFilters = _lastUpdateFilters;
+        DDLogDebug(@"(AESAntibanner) filterClient:filterId:filter: saved filters count-%lu", _lastUpdateFilters.count);
     }
 }
 
@@ -1033,6 +1039,9 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             // Get filters data from backend
             if (filterIdsForUpdate.count) {
                 
+                [[AESharedResources sharedDefaults] setBool:YES forKey:AEDefaultsFilterUpdateInProgress];
+                [AESharedResources synchronizeSharedDefaults];
+                
                 NSError *error = [filterClient asyncFilterVersionListForApp:[ADProductInfo applicationID] filterIds:filterIdsForUpdate];
                 if (error) {
                     [self updateFailure];
@@ -1064,7 +1073,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     
     
-    dispatch_sync(workQueue, ^{
+    dispatch_async(workQueue, ^{
         
         __block BOOL rulesUpdated = NO;
         NSMutableArray *updatedVersions = [NSMutableArray array];
@@ -1123,8 +1132,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)updateStart {
     self.updatesRightNow = YES;
-    [[AESharedResources sharedDefaults] setBool:YES forKey:AEDefaultsFilterUpdateInProgress];
-
+    
     _lastUpdateVersions = nil;
     _lastUpdateFilters = nil;
 
@@ -1139,6 +1147,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     self.updatesRightNow = NO;
     [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsFilterUpdateInProgress];
+    [AESharedResources synchronizeSharedDefaults];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -1156,6 +1165,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     self.updatesRightNow = NO;
     [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsFilterUpdateInProgress];
+    [AESharedResources synchronizeSharedDefaults];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFailuredUpdateNotification object:self];

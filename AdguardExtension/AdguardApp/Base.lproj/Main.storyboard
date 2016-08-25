@@ -2007,6 +2007,7 @@
                     <navigationItem key="navigationItem" title="Advanced Settings" id="Iyo-zw-Pn7"/>
                     <connections>
                         <outlet property="simplifiedButton" destination="PT4-sR-qS2" id="3B1-Jw-O6U"/>
+                        <outlet property="wifiButton" destination="Psp-BF-NJm" id="5I9-kE-4TG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fxk-Gz-W7d" userLabel="First Responder" sceneMemberID="firstResponder"/>

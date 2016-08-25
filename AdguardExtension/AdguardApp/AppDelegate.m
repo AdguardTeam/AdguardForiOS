@@ -238,7 +238,9 @@ typedef void (^AEDownloadsCompletionBlock)();
         [[[AEService singleton] antibanner] repairUpdateStateWithBackground:NO];
         
         //Entry point for updating of the filters
-        [self invalidateAntibanner:NO];
+        if ([self checkBackgroundUpdateConditions]) {
+            [self invalidateAntibanner:NO];
+        }
     }];
     
 }
@@ -257,13 +259,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        BOOL viaWiFi = YES;
-        
-        if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
-            Reachability *reach = [Reachability reachabilityForInternetConnection];
-            
-            viaWiFi = [reach isReachableViaWiFi];
-        }
+        BOOL viaWiFi = [self checkBackgroundUpdateConditions];
         
         [[AEService singleton] onReady:^{
             
@@ -640,6 +636,20 @@ typedef void (^AEDownloadsCompletionBlock)();
         dispatch_sync(mainQueue, block);
     }
     
+}
+
+- (BOOL)checkBackgroundUpdateConditions {
+
+    BOOL result = YES;
+    
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
+        
+        Reachability *reach = [Reachability reachabilityForInternetConnection];
+        
+        result = [reach isReachableViaWiFi];
+    }
+    
+    return result;
 }
 
 @end

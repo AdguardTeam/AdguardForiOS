@@ -36,6 +36,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.simplifiedButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
+    self.wifiButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates];
 }
 
 - (void)didReceiveMemoryWarning {
