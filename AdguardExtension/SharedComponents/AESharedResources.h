@@ -17,6 +17,8 @@
 */
 #import <Foundation/Foundation.h>
 
+@class ASDFilterMetadata, ASDFilter;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
 /////////////////////////////////////////////////////////////////////
@@ -25,6 +27,7 @@
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
 #define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
+#define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
@@ -71,6 +74,16 @@ extern NSString *AEDefaultsJSONRulesOverlimitReached;
  User Defaults key that define optimized procedure of the convertion for JSON Converter.
  */
 extern NSString *AEDefaultsJSONConverterOptimize;
+
+/**
+ User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
+ */
+extern NSString *AEDefaultsWifiOnlyUpdates;
+
+/**
+ User Defaults key, which defines that filter updates is performed right now.
+ */
+extern NSString *AEDefaultsFilterUpdateInProgress;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -119,6 +132,16 @@ extern NSString *AEDefaultsJSONConverterOptimize;
  Data with blocking content rules JSON.
  */
 @property NSData *blockingContentRules;
+/**
+ Filter version metadata from last filter update process.
+ We need it because filter update process is performed in two steps.
+ */
+@property NSArray <ASDFilterMetadata *> *lastUpdateFilterVersionsMetadata;
+/**
+ Filter rules from last filter update process.
+ We need it because filter update process is performed in two steps.
+ */
+@property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
 
 @end
