@@ -1981,7 +1981,7 @@
                                 <string key="footerTitle">If this setting is enabled, Adguard will ignore generic «cosmetic» rules. This will speed up pages rendering in exchange of filtering quality.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="6zk-TZ-zcI" style="IBUITableViewCellStyleDefault" id="LGn-cv-bzc">
-                                        <rect key="frame" x="0.0" y="188" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="187.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LGn-cv-bzc" id="qzp-6a-iMG">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
