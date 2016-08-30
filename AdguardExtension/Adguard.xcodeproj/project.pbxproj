@@ -1935,6 +1935,20 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Run Builder";
 		};
+		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
+			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "$(SRCROOT)/../";
+			dependencies = (
+			);
+			name = "Git Tagging (Beta/Release Branch)";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Git Tagging (Beta/Release Branch)";
+		};
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
@@ -2199,6 +2213,9 @@
 							};
 						};
 					};
+					65CB60381D75DF8B005A3C04 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					65F398101B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
@@ -2273,6 +2290,7 @@
 				659887411CF83947003ECD1C /* ProBlockingExtension */,
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
+				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
 			);
 		};
 /* End PBXProject section */
@@ -3615,6 +3633,35 @@
 			};
 			name = Release;
 		};
+		65CB60391D75DF8B005A3C04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65CB603A1D75DF8B005A3C04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		65F3983C1B7B684700ABCD39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
@@ -3924,6 +3971,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65CB60391D75DF8B005A3C04 /* Debug */,
+				65CB603A1D75DF8B005A3C04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */ = {
 			isa = XCConfigurationList;
