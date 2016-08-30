@@ -26,7 +26,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ASDatabase.h"
 
 #include <arpa/inet.h>
@@ -326,10 +326,10 @@ static APTunnelConnectionsHandler *_connectionHandler;
                           rulesForFilter:@(ASDF_USER_FILTER_ID)];
         
         NSMutableArray *wRules = [NSMutableArray array];
-        AEUIWhitelistDomainObject *object;
+        AEWhitelistDomainObject *object;
         for (ASDFilterRule *item in rules) {
             
-            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            object = [[AEWhitelistDomainObject alloc] initWithRule:item];
             if (object) {
                 [wRules addObject:object];
             }

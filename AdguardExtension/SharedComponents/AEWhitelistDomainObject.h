@@ -19,7 +19,7 @@
 
 @class ASDFilterRule;
 
-@interface AEUIWhitelistDomainObject : NSObject{
+@interface AEWhitelistDomainObject : NSObject{
     
     NSString *_domain;
     ASDFilterRule *_rule;

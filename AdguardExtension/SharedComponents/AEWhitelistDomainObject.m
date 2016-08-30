@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "AEFilterRuleSyntaxConstants.h"
 #import "ACommons/ACLang.h"
 #import "ASDFilterObjects.h"
@@ -23,7 +23,7 @@
 static NSString *ruleDomainPrefix = MASK_WHITE_LIST AFRU_MASK_START_URL;
 static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
 
-@implementation AEUIWhitelistDomainObject
+@implementation AEWhitelistDomainObject
 
 - (id)initWithDomain:(NSString *)domain{
     
