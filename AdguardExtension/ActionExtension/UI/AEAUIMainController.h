@@ -18,14 +18,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class AEAUIDomainCell, AEUIWhitelistDomainObject;
+@class AEAUIDomainCell, AEWhitelistDomainObject;
 
 @interface AEAUIMainController : UITableViewController <UITableViewDelegate>
 
 @property (nonatomic) NSString *domainName;
 @property (nonatomic) NSURL *url;
 @property (nonatomic) NSURL *iconUrl;
-@property (nonatomic) AEUIWhitelistDomainObject *domainObject;
+@property (nonatomic) AEWhitelistDomainObject *domainObject;
 @property BOOL enableChangeDomainFilteringStatus;
 @property BOOL domainEnabled;
 @property BOOL injectScriptSupported;

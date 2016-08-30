@@ -156,10 +156,6 @@ typedef void (^AEDownloadsCompletionBlock)();
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerStartedUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
-    //------------ Subscribe to Service notification -----------------------------
-    
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serviceNotify:) name:AEServiceUserFilterRulesChangedNotification object:nil];
-    
     
     //------------ Checking DB status -----------------------------
     ASDatabase *dbService = [ASDatabase singleton];

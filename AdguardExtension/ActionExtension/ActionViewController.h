@@ -17,7 +17,7 @@
 */
 #import <UIKit/UIKit.h>
 
-@class AEUIWhitelistDomainObject;
+@class AEWhitelistDomainObject;
 
 @interface ActionViewController : UIViewController
 
@@ -25,6 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadIndicator;
 
-+ (AEUIWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host;
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host;
 
 @end
