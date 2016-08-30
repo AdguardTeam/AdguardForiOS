@@ -1921,6 +1921,20 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Import Localization";
 		};
+		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
+			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "$(SRCROOT)/../";
+			dependencies = (
+			);
+			name = "Git Tagging PRO (Beta/Release Branch)";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Git Tagging (Beta/Release Branch)";
+		};
 		65B40D2A1BDE520500A9C595 /* Run Builder */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = ./runBuilder.sh;
@@ -2291,6 +2305,7 @@
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
 				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
+				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */,
 			);
 		};
 /* End PBXProject section */
@@ -3544,6 +3559,37 @@
 			};
 			name = Release;
 		};
+		65B39E051D75E9B2001AD773 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65B39E061D75E9B2001AD773 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		65B40D2B1BDE520500A9C595 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3635,6 +3681,7 @@
 		};
 		65CB60391D75DF8B005A3C04 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				DEBUGGING_SYMBOLS = YES;
@@ -3653,6 +3700,7 @@
 		};
 		65CB603A1D75DF8B005A3C04 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3945,6 +3993,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65B39E051D75E9B2001AD773 /* Debug */,
+				65B39E061D75E9B2001AD773 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65B40D2D1BDE520600A9C595 /* Build configuration list for PBXLegacyTarget "Run Builder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3979,6 +4036,7 @@
 				65CB603A1D75DF8B005A3C04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */ = {
 			isa = XCConfigurationList;
