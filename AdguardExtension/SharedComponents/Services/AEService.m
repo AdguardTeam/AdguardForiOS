@@ -251,7 +251,7 @@ static AEService *singletonService;
     }
 }
 
-- (void)addWhitelistDomain:(NSString *)domainName completionBlock:(void (^)(NSError *error))completionBlock {
+- (void)addWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock {
 
     if (!started) {
         return;
@@ -269,17 +269,15 @@ static AEService *singletonService;
 
         do {
 
-            if ([NSString isNullOrEmpty:domainName]) {
-
+            if (!(rule && [[AEWhitelistDomainObject alloc] initWithRule:rule])) {
+                
                 error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_ARGUMENT userInfo:nil];
                 break;
             }
 
-            AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:domainName];
-
             BOOL result = NO;
 
-            result = [antibanner addRule:domainObject.rule];
+            result = [antibanner addRule:rule];
 
             if (!result) {
 
@@ -298,7 +296,7 @@ static AEService *singletonService;
             if ((maxRules - convertedRules)) {
 
                 NSError *error = nil;
-                convertResult = [self convertOneRule:domainObject.rule optimize:NO error:&error];
+                convertResult = [self convertOneRule:rule optimize:NO error:&error];
 
                 if (error) {
                     break;

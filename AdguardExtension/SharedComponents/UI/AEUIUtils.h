@@ -34,7 +34,7 @@
 
 /**
  Method shows modal dialog with "standard" loading message,
- then adds whitelist domain and modifies content blocking JSON. 
+ then adds whitelist rule and modifies content blocking JSON.
  On success performs completionBlock,
  on failure shows error message and performs rollbackBlock.
  Blocks are performed synchronously in main queue.
@@ -42,7 +42,7 @@
  @param completionBlock Block which is performed on success. May be nil.
  @param rollbackBlock Block which is performed on failure. May be nil.
  */
-+ (void)addWhitelistdomain:(NSString *)domainName toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
++ (void)addWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
 
 /**
  Method shows modal dialog with "standard" loading message,

@@ -64,11 +64,11 @@ extern NSString *AEServiceErrorDomain;
 - (BOOL)removeRules:(NSArray *)rules;
 
 /**
- Adds whitelist domain, modifies content blocking JSON
+ Adds whitelist rule, modifies content blocking JSON
  and replaces this JSON in shared resources asynchronously.
  Method performs completionBlock when done on service working queue.
  */
-- (void)addWhitelistDomain:(NSString *)domainName completionBlock:(void (^)(NSError *error))completionBlock;
+- (void)addWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
 
 /**
  Removes whitelist rule, modifies content blocking JSON

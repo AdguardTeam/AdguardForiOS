@@ -71,13 +71,8 @@
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        // disable rule temporarily
-        [[[AEService singleton] antibanner] setRules:@[object.rule.ruleId] filter:object.rule.filterId enabled:NO];
-
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+        [AEUIUtils removeWhitelistRule:object.rule toJsonWithController:self completionBlock:^{
             
-            // delete rule permanently
-            [[AEService singleton] removeRules:@[object.rule]];
             [self.rules removeObjectAtIndex:[indexPath row]];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -88,12 +83,13 @@
 #ifdef PRO
             [[APVPNManager singleton] sendReloadWhitelist];
 #endif
-        }rollbackBlock:^{
+            
+        } rollbackBlock:^{
             
             // enable rule (rollback)
             
             [[[AEService singleton] antibanner] rollbackTransaction];
-
+            
             [tableView setEditing:NO animated:YES];
         }];
     }
@@ -143,34 +139,21 @@
             
             [[[AEService singleton] antibanner] beginTransaction];
             
-            NSError *error = [[AEService singleton] addRule:domain.rule temporarily:NO];
-            if (error){
-
-                [[[AEService singleton] antibanner] rollbackTransaction];
-
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-
-                    [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-                }
-            }
-            else{
-
-                [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+            [AEUIUtils addWhitelistRule:domain.rule toJsonWithController:self completionBlock:^{
                 
-                    // if rule is not comment decrease counter of the new rules
-                    _newRuleCount--;
-                    
-                    [self reloadRulesAndScrollBottom:YES];
-                    
-                    [[[AEService singleton] antibanner] endTransaction];
+                // if rule is not comment decrease counter of the new rules
+                _newRuleCount--;
+                
+                [self reloadRulesAndScrollBottom:YES];
+                
+                [[[AEService singleton] antibanner] endTransaction];
 #ifdef PRO
-                    [[APVPNManager singleton] sendReloadWhitelist];
+                [[APVPNManager singleton] sendReloadWhitelist];
 #endif
-                } rollbackBlock:^{
-                    
-                    [[[AEService singleton] antibanner] rollbackTransaction];
-                }];
-            }
+            } rollbackBlock:^{
+                
+                [[[AEService singleton] antibanner] rollbackTransaction];
+            }];
         }
         else{
             // Update rule

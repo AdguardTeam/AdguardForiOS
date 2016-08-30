@@ -34,11 +34,11 @@
     }];
 }
 
-+ (void)addWhitelistdomain:(NSString *)domainName toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
++ (void)addWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
     
     [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
         
-        [[AEService singleton] addWhitelistDomain:domainName completionBlock:^(NSError *error) {
+        [[AEService singleton] addWhitelistRule:rule completionBlock:^(NSError *error) {
             
             [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
         }];

@@ -109,9 +109,11 @@
     // disable filtering (add to whitelist)
     if (self.domainEnabled) {
         
+        self.domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
+        
         [[[AEService singleton] antibanner] beginTransaction];
         
-        [AEUIUtils addWhitelistdomain:self.domainName toJsonWithController:self completionBlock:^{
+        [AEUIUtils addWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
             
             self.domainEnabled = newEnabled;
             
