@@ -64,6 +64,20 @@ extern NSString *AEServiceErrorDomain;
 - (BOOL)removeRules:(NSArray *)rules;
 
 /**
+ Adds whitelist domain, modifies content blocking JSON
+ and replaces this JSON in shared resources asynchronously.
+ Method performs completionBlock when done on service working queue.
+ */
+- (void)addWhitelistDomain:(NSString *)domainName completionBlock:(void (^)(NSError *error))completionBlock;
+
+/**
+ Removes whitelist rule, modifies content blocking JSON
+ and replaces this JSON in shared resources asynchronously.
+ Method performs completionBlock when done on service working queue.
+ */
+- (void)removeWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
+
+/**
  Converts active filter rules to content blocking JSON 
  and replaces this JSON in shared resources asynchronously. 
  Method performs completionBlock when done on service working queue.
@@ -71,9 +85,10 @@ extern NSString *AEServiceErrorDomain;
 - (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock;
 
 /**
- If reloadContentBlockingJsonASync method is running still,
- this method pushes block of code into queue,
- which will be run when reloadContentBlockingJsonASync method will be completed, 
+ If reloadContentBlockingJsonASync (addWhitelistDomain, removeWhitelistRule) 
+ method is running still, this method pushes block of code into queue,
+ which will be run when reloadContentBlockingJsonASync 
+ (addWhitelistDomain, removeWhitelistRule) method will be completed,
  else performs block of code immediately.
  Blocks are performed on service working queue.
  */

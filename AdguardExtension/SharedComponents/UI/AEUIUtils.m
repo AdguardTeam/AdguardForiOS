@@ -19,6 +19,7 @@
 #import "ACommons/ACSystem.h"
 #import "AEService.h"
 #import "AEUILoadingModal.h"
+#import "ASDFilterObjects.h"
 
 @implementation AEUIUtils
 
@@ -28,28 +29,57 @@
         
         [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
             
-            if (error) {
-                
-                if (rollbackBlock) {
-                    dispatch_sync(dispatch_get_main_queue(),rollbackBlock);
-                }
-                
-                [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
-                    
-                    [ACSSystemUtils showSimpleAlertForController:controller withTitle: NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
-                }];
-                
-                return;
-            }
-            
-            [[AEUILoadingModal singleton] loadingModalHide];
-            
-            if (completionBlock) {
-                dispatch_sync(dispatch_get_main_queue(), completionBlock);
-            }
-            
+            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
         }];
     }];
+}
+
++ (void)addWhitelistdomain:(NSString *)domainName toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
+    
+    [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
+        
+        [[AEService singleton] addWhitelistDomain:domainName completionBlock:^(NSError *error) {
+            
+            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+        }];
+    }];
+}
+
++ (void)removeWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
+    
+    [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
+        
+        [[AEService singleton] removeWhitelistRule:rule completionBlock:^(NSError *error) {
+            
+            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+        }];
+    }];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods (Private)
+
++ (void)complateWithError:(NSError *)error controller:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock {
+
+    if (error) {
+
+        if (rollbackBlock) {
+            dispatch_sync(dispatch_get_main_queue(), rollbackBlock);
+        }
+
+        [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
+
+            [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+        }];
+
+        return;
+    }
+
+    [[AEUILoadingModal singleton] loadingModalHide];
+
+    if (completionBlock) {
+        dispatch_sync(dispatch_get_main_queue(), completionBlock);
+    }
 }
 
 @end

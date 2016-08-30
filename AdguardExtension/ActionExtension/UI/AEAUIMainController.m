@@ -109,34 +109,21 @@
     // disable filtering (add to whitelist)
     if (self.domainEnabled) {
         
-        self.domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
-        
         [[[AEService singleton] antibanner] beginTransaction];
         
-        NSError *error = [[AEService singleton] addRule:self.domainObject.rule temporarily:NO];
-        if (error){
+        [AEUIUtils addWhitelistdomain:self.domainName toJsonWithController:self completionBlock:^{
+            
+            self.domainEnabled = newEnabled;
+            
+            [[[AEService singleton] antibanner] endTransaction];
+            
+        } rollbackBlock:^{
             
             [[[AEService singleton] antibanner] rollbackTransaction];
+            
             [self.statusButton setOn:self.domainEnabled animated:YES];
             
-        }
-        else {
-            
-            [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-                
-                self.domainEnabled = newEnabled;
-                
-                [[[AEService singleton] antibanner] endTransaction];
-                
-                
-            } rollbackBlock:^{
-                
-                [[[AEService singleton] antibanner] rollbackTransaction];
-                
-                [self.statusButton setOn:self.domainEnabled animated:YES];
-            }];
-        }
-        
+        }];
     }
     // enable filtering (remove from whitelist)
     else {
@@ -148,20 +135,14 @@
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        // disable rule temporarily
-        [[[AEService singleton] antibanner] setRules:@[self.domainObject.rule.ruleId] filter:self.domainObject.rule.filterId enabled:NO];
-        
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+        [AEUIUtils removeWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
             
-            // delete rule permanently
-            [[AEService singleton] removeRules:@[self.domainObject.rule]];
             self.domainEnabled = newEnabled;
             self.domainObject = nil;
             
             [[[AEService singleton] antibanner] endTransaction];
             
-            
-        }rollbackBlock:^{
+        } rollbackBlock:^{
             
             // enable rule (rollback)
             

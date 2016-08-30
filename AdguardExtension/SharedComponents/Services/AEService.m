@@ -264,6 +264,7 @@ static AEService *singletonService;
     dispatch_async(workQueue, ^{
 
         NSError *error = nil;
+        BOOL jsonNotModified = YES;
         NSDictionary *convertResult;
 
         do {
@@ -309,10 +310,8 @@ static AEService *singletonService;
                     @autoreleasepool {
 
                         NSMutableData *jsonData = [NSMutableData dataWithData:_sharedResources.blockingContentRules];
-                        // delete last 2 chars
-                        jsonData.length -= 2;
-                        //add ,\n
-                        [jsonData appendBytes:",\n" length:2];
+                        //
+                        [jsonData replaceBytesInRange:NSMakeRange(jsonData.length - 2, 2) withBytes:",\n"];
                         // add whitelist rule
                         NSData *jsonRuleData = [jsonRule dataUsingEncoding:NSUTF8StringEncoding];
                         [jsonData appendBytes:([jsonRuleData bytes] + 2) length:(jsonRuleData.length - 2)];
@@ -323,6 +322,8 @@ static AEService *singletonService;
                         convertedRules++;
                         [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
                         [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
+                        
+                        jsonNotModified = NO;
                     }
                 }
             }
@@ -331,7 +332,7 @@ static AEService *singletonService;
 
         //reloading
 
-        if (error) {
+        if (error || jsonNotModified) {
             [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
             return;
         }
@@ -355,11 +356,12 @@ static AEService *singletonService;
     dispatch_async(workQueue, ^{
         
         NSError *error = nil;
+        BOOL jsonNotModified = YES;
         NSDictionary *convertResult;
         
         do {
             
-            if (!rule) {
+            if (!(rule && [[AEWhitelistDomainObject alloc] initWithRule:rule])) {
                 
                 error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_ARGUMENT userInfo:nil];
                 break;
@@ -395,7 +397,7 @@ static AEService *singletonService;
                     @autoreleasepool {
                         
                         NSData *jsonRuleData = [jsonRule dataUsingEncoding:NSUTF8StringEncoding];
-                        jsonRuleData = [NSData dataWithBytes:(jsonRuleData.bytes + 1) length:(jsonRuleData.length - 2)];
+                        jsonRuleData = [NSData dataWithBytes:(jsonRuleData.bytes + 2) length:(jsonRuleData.length - 4)];
                         
                         NSMutableData *jsonData = [NSMutableData dataWithData:_sharedResources.blockingContentRules];
                         //find rule into json
@@ -403,10 +405,10 @@ static AEService *singletonService;
 
                         if (loc.location != NSNotFound) {
                             
-                            Byte oneByte = 0;
-                            [jsonData getBytes:&oneByte range:NSMakeRange(loc.location + loc.length, 1)];
-                            if (oneByte == ',') {
-                                loc.length++;
+                            // delete 2 chars before
+                            if (loc.location > 8) {
+                                loc.location -= 2;
+                                loc.length += 2;
                             }
                             
                             [jsonData replaceBytesInRange:loc withBytes:NULL length:0];
@@ -419,6 +421,8 @@ static AEService *singletonService;
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
+                            
+                            jsonNotModified = NO;
                         }
                     }
                 }
@@ -427,7 +431,7 @@ static AEService *singletonService;
         
         //reloading
         
-        if (error) {
+        if (error || jsonNotModified) {
             [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
             return;
         }
