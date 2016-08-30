@@ -21,7 +21,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "AEUIEditDomainController.h"
 #import "AEUIUtils.h"
 
@@ -49,7 +49,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doaminCellView" forIndexPath:indexPath];
     
     
-    AEUIWhitelistDomainObject *object = self.rules[[indexPath row]];
+    AEWhitelistDomainObject *object = self.rules[[indexPath row]];
     if (object) {
         cell.textLabel.text = object.domain;
         return cell;
@@ -63,7 +63,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        AEUIWhitelistDomainObject *object = self.rules[[indexPath row]];
+        AEWhitelistDomainObject *object = self.rules[[indexPath row]];
         
         if (!object) {
             return;
@@ -122,7 +122,7 @@
         _editRuleController.navigationItem.title = NSLocalizedString(@"Edit Domain", @"(AEUIWhitelistController) Edit domain title");
         
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        AEUIWhitelistDomainObject *object = self.rules[[path row]];
+        AEWhitelistDomainObject *object = self.rules[[path row]];
         if (object) {
             _editRuleController.domain = object;
             _ruleTextHolder = object.rule.ruleText;
@@ -136,7 +136,7 @@
     
     if (_editRuleController && _editRuleController.done) {
 
-        AEUIWhitelistDomainObject *domain = _editRuleController.domain;
+        AEWhitelistDomainObject *domain = _editRuleController.domain;
         if ([domain.rule.ruleId unsignedIntegerValue] == 0) {
 
             // New rule
@@ -237,10 +237,10 @@
 
               NSMutableArray *uiRules = [NSMutableArray array];
               self.rules = uiRules;
-              AEUIWhitelistDomainObject *object;
+              AEWhitelistDomainObject *object;
               for (ASDFilterRule *item in rules) {
 
-                  object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+                  object = [[AEWhitelistDomainObject alloc] initWithRule:item];
                   if (object) {
                       [uiRules addObject:object];
                   }

@@ -21,10 +21,6 @@
 #pragma mark - AEServices Constants
 /////////////////////////////////////////////////////////////////////
 
-/**
- Notification raised when to add/update/delete rules.
- */
-extern NSString *AEServiceUserFilterRulesChangedNotification;
 
 /**
  NSError domain for errors from AEService object.

@@ -15,16 +15,21 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@class AEWhitelistDomainObject;
+@class ASDFilterRule;
 
-@interface ActionViewController : UIViewController
+@interface AEWhitelistDomainObject : NSObject{
+    
+    NSString *_domain;
+    ASDFilterRule *_rule;
+    
+}
 
-@property (weak, nonatomic) IBOutlet UIButton *actionButton;
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadIndicator;
+- (id)initWithDomain:(NSString *)domain;
+- (id)initWithRule:(ASDFilterRule *)rule;
 
-+ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host;
+@property NSString *domain;
+@property ASDFilterRule *rule;
 
 @end

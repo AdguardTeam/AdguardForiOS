@@ -25,7 +25,7 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AEAUIMainController.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 
 #define USER_FRIENDLY_DELAY     0.5
@@ -37,7 +37,7 @@
     BOOL _injectScriptSupported;
     NSString *_host;
     NSURL *_iconUrl;
-    AEUIWhitelistDomainObject *_domainObject;
+    AEWhitelistDomainObject *_domainObject;
     NSMutableArray *_observerObjects;
     AEAUIMainController __weak *_mainController;
 }
@@ -52,7 +52,7 @@
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEUIWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
     
     @autoreleasepool {
         
@@ -66,9 +66,9 @@
         
         if (rules.count) {
             
-            AEUIWhitelistDomainObject *obj;
+            AEWhitelistDomainObject *obj;
             for (ASDFilterRule *rule in rules) {
-                obj = [[AEUIWhitelistDomainObject alloc] initWithRule:rule];
+                obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
                 if (obj) {
                     break;
                 }

@@ -24,7 +24,7 @@
 #import "ACommons/ACSystem.h"
 #import "AEAUIDomainCell.h"
 #import "AEUIUtils.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
@@ -109,7 +109,7 @@
     // disable filtering (add to whitelist)
     if (self.domainEnabled) {
         
-        self.domainObject = [[AEUIWhitelistDomainObject alloc] initWithDomain:self.domainName];
+        self.domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
         
         [[[AEService singleton] antibanner] beginTransaction];
         

@@ -24,8 +24,7 @@
 #import "AESFilterConverter.h"
 #import "AESharedResources.h"
 #import "AEFilterRuleSyntaxConstants.h"
-
-NSString *AEServiceUserFilterRulesChangedNotification = @"AEServiceUserFilterRulesChangedNotification";
+#import "AEWhitelistDomainObject.h"
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
 
@@ -49,7 +48,6 @@ typedef enum {
     
     dispatch_queue_t workQueue;
     AESAntibanner *antibanner;
-    AESFilterConverter *_converterToJSON;
     AESharedResources *_sharedResources;
 
     NSMutableArray *_onReadyBlocks;
@@ -131,12 +129,6 @@ static AEService *singletonService;
         
         if (started) return;
         
-        // Init converter filter rules to JSON format
-        _converterToJSON = [AESFilterConverter new];
-        if (!_converterToJSON) {
-            DDLogError(@"(AEService) Can't initialize converter to JSON format!");
-            return;
-        }
 
         // Init shared resources
         _sharedResources = [AESharedResources new];
@@ -157,7 +149,6 @@ static AEService *singletonService;
         
         if (!started) return;
         
-        _converterToJSON = nil;
         _sharedResources = nil;
         
         // Disabling antibanner service
@@ -191,29 +182,17 @@ static AEService *singletonService;
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
             BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            NSDictionary *convertResult = [_converterToJSON jsonFromRules:@[rule] upTo:1 optimize:optimize];
-            NSError *error = convertResult[AESFConvertedErrorKey];
+            
+            NSError *error = nil;
+            [self convertOneRule:rule optimize:optimize error:&error];
+            
             if (error) {
                 return error;
-            }
-
-            if(![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]){
-                
-                NSString *errorDescription = NSLocalizedString(@"Cannot change the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
-                return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
             }
         }
         //
         
         BOOL result = [antibanner updateRule:rule];
-        
-        if (result && [rule.isEnabled boolValue]) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:AEServiceUserFilterRulesChangedNotification object:self];
-            });
-        }
         
         if (result) {
             return nil;
@@ -236,16 +215,12 @@ static AEService *singletonService;
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
             BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            NSDictionary *convertResult = [_converterToJSON jsonFromRules:@[rule] upTo:1 optimize:optimize];
-            NSError *error = convertResult[AESFConvertedErrorKey];
+            
+            NSError *error = nil;
+            [self convertOneRule:rule optimize:optimize error:&error];
+            
             if (error) {
                 return error;
-            }
-
-            if(![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]){
-                
-                NSString *errorDescription = NSLocalizedString(@"Cannot add the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
-                return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
             }
         }
         //
@@ -254,15 +229,6 @@ static AEService *singletonService;
         if (!result) {
             result = [antibanner addRule:rule];
         }
-
-        if (result && rule.isEnabled)
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-              [[NSNotificationCenter defaultCenter]
-                  postNotificationName:
-                      AEServiceUserFilterRulesChangedNotification
-                                object:self];
-            });
 
         if (result) {
             return nil;
@@ -281,24 +247,194 @@ static AEService *singletonService;
         NSNumber *filterId = [[rules firstObject] filterId];
         result = [antibanner removeRules:[rules valueForKey:@"ruleId"]
                                 filterId:filterId];
-        if (result) {
-            NSArray *enabledRules = [rules
-                filteredArrayUsingPredicate:
-                    [NSPredicate predicateWithFormat:@"isEnabled = YES"]];
-            if (enabledRules.count) {
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-
-                  [[NSNotificationCenter defaultCenter]
-                      postNotificationName:
-                          AEServiceUserFilterRulesChangedNotification
-                                    object:self];
-                });
-            }
-        }
-
         return result;
     }
+}
+
+- (void)addWhitelistDomain:(NSString *)domainName completionBlock:(void (^)(NSError *error))completionBlock {
+
+    if (!started) {
+        return;
+    }
+    
+    [_reloadContentBlockingJsonLock lock];
+    _reloadContentBlockingJsonComplate = NO;
+    [_reloadContentBlockingJsonLock unlock];
+
+    dispatch_async(workQueue, ^{
+
+        NSError *error = nil;
+        NSDictionary *convertResult;
+
+        do {
+
+            if ([NSString isNullOrEmpty:domainName]) {
+
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_ARGUMENT userInfo:nil];
+                break;
+            }
+
+            AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:domainName];
+
+            BOOL result = NO;
+
+            result = [antibanner addRule:domainObject.rule];
+
+            if (!result) {
+
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+                break;
+            }
+
+            NSInteger maxRules = [[[AESharedResources sharedDefaults]
+                objectForKey:AEDefaultsJSONMaximumConvertedRules] integerValue];
+            NSInteger convertedRules = [[[AESharedResources sharedDefaults]
+                objectForKey:AEDefaultsJSONConvertedRules] integerValue];
+            NSInteger totalConvertedRulesCount = [[[AESharedResources sharedDefaults]
+                objectForKey:AEDefaultsJSONRulesForConvertion] integerValue];
+
+            // add rule to json if we have space for that
+            if ((maxRules - convertedRules)) {
+
+                NSError *error = nil;
+                convertResult = [self convertOneRule:domainObject.rule optimize:NO error:&error];
+
+                if (error) {
+                    break;
+                }
+
+                NSString *jsonRule = convertResult[AESFConvertedRulesKey];
+                if (![NSString isNullOrEmpty:jsonRule]) {
+
+                    @autoreleasepool {
+
+                        NSMutableData *jsonData = [NSMutableData dataWithData:_sharedResources.blockingContentRules];
+                        // delete last 2 chars
+                        jsonData.length -= 2;
+                        //add ,\n
+                        [jsonData appendBytes:",\n" length:2];
+                        // add whitelist rule
+                        NSData *jsonRuleData = [jsonRule dataUsingEncoding:NSUTF8StringEncoding];
+                        [jsonData appendBytes:([jsonRuleData bytes] + 2) length:(jsonRuleData.length - 2)];
+
+                        _sharedResources.blockingContentRules = jsonData;
+
+                        totalConvertedRulesCount++;
+                        convertedRules++;
+                        [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
+                        [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
+                    }
+                }
+            }
+
+        } while (0);
+
+        //reloading
+
+        if (error) {
+            [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
+            return;
+        }
+
+        // after reloading notify Safari
+        [self invalidateJsonInSafariWithCompletionBlock:completionBlock backgroundUpdate:NO];
+    });
+}
+
+- (void)removeWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock {
+    
+    if (!started) {
+        return;
+    }
+    
+    
+    [_reloadContentBlockingJsonLock lock];
+    _reloadContentBlockingJsonComplate = NO;
+    [_reloadContentBlockingJsonLock unlock];
+    
+    dispatch_async(workQueue, ^{
+        
+        NSError *error = nil;
+        NSDictionary *convertResult;
+        
+        do {
+            
+            if (!rule) {
+                
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_ARGUMENT userInfo:nil];
+                break;
+            }
+            
+            BOOL result = NO;
+            
+            result = [self removeRules:@[rule]];
+            
+            if (!result) {
+                
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+                break;
+            }
+            
+            NSInteger convertedRules = [[[AESharedResources sharedDefaults]
+                                         objectForKey:AEDefaultsJSONConvertedRules] integerValue];
+            NSInteger totalConvertedRulesCount = [[[AESharedResources sharedDefaults]
+                                                   objectForKey:AEDefaultsJSONRulesForConvertion] integerValue];
+            BOOL overlimit = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached];
+            
+            
+                NSError *error = nil;
+                convertResult = [self convertOneRule:rule optimize:NO error:&error];
+                
+                if (error) {
+                    break;
+                }
+                
+                NSString *jsonRule = convertResult[AESFConvertedRulesKey];
+                if (![NSString isNullOrEmpty:jsonRule]) {
+                    
+                    @autoreleasepool {
+                        
+                        NSData *jsonRuleData = [jsonRule dataUsingEncoding:NSUTF8StringEncoding];
+                        jsonRuleData = [NSData dataWithBytes:(jsonRuleData.bytes + 1) length:(jsonRuleData.length - 2)];
+                        
+                        NSMutableData *jsonData = [NSMutableData dataWithData:_sharedResources.blockingContentRules];
+                        //find rule into json
+                        NSRange loc = [jsonData rangeOfData:jsonRuleData options:NSDataSearchBackwards range:NSMakeRange(0, jsonData.length)];
+
+                        if (loc.location != NSNotFound) {
+                            
+                            Byte oneByte = 0;
+                            [jsonData getBytes:&oneByte range:NSMakeRange(loc.location + loc.length, 1)];
+                            if (oneByte == ',') {
+                                loc.length++;
+                            }
+                            
+                            [jsonData replaceBytesInRange:loc withBytes:NULL length:0];
+                            
+                            _sharedResources.blockingContentRules = jsonData;
+                            
+                            totalConvertedRulesCount--;
+                            convertedRules--;
+                            overlimit = NO;
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
+                        }
+                    }
+                }
+            
+        } while (0);
+        
+        //reloading
+        
+        if (error) {
+            [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
+            return;
+        }
+        
+        // after reloading notify Safari
+        [self invalidateJsonInSafariWithCompletionBlock:completionBlock backgroundUpdate:NO];
+    });
 }
 
 - (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock{
@@ -451,47 +587,78 @@ static AEService *singletonService;
                 // Empty JSON
                 NSData *json = [NSData data];
                 
-                NSArray *rules = [self.antibanner activeRules];
-                
                 NSNumber *convertedRulesCount = @(0);
                 NSNumber *totalConvertedRulesCount = @(0);
                 
                 BOOL overlimit = NO;
                 
-                if (rules.count) {
+                @autoreleasepool {
                     
-                    // run converter
-                    NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
-                    BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
+                    NSString *jsonString;
                     
-                    NSDictionary *result = [_converterToJSON jsonFromRules:rules upTo:limit optimize:optimize];
-                    NSError *error = result[AESFConvertedErrorKey];
-                    if (error) {
-                        return error;
+                    @autoreleasepool {
+                        NSDictionary *result;
+                        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
+                        BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
+                        
+                        @autoreleasepool {
+                            
+                            NSArray *rules = [self.antibanner activeRules];
+                            if (rules.count) {
+                                
+                                // run converter
+                                
+                                @autoreleasepool {
+                                    NSError *error = nil;
+                                    AESFilterConverter *converterToJSON = [self createConverterToJsonWithError:&error];
+                                    if (!converterToJSON) {
+                                        return error;
+                                    }
+                                    
+                                    result = [converterToJSON jsonFromRules:rules upTo:limit optimize:optimize];
+                                }
+                                
+                                NSError *error = result[AESFConvertedErrorKey];
+                                if (error) {
+                                    return error;
+                                }
+                            }
+                            
+                            rules = nil;
+                        }
+                        
+                        if (result) {
+                            
+                            // check overlimit
+                            overlimit = [result[AESFCOverLimitKey] boolValue];
+                            if (overlimit) {
+                                
+                                //now this is not fatal error.
+                                DDLogWarn(@"(AEService) Can't convert all rules. Limit of the rules count exceeded. Rules count limit: %lu", limit);
+                                
+                                //                        NSString *errorDescription = NSLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
+                                //                        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_JSON_CONVERTER_OVERLIMIT userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
+                                
+                            }
+                            
+                            convertedRulesCount = result[AESFConvertedCountKey];
+                            totalConvertedRulesCount = result[AESFTotalConvertedCountKey];
+                            
+                            // obtain rules
+                            jsonString = result[AESFConvertedRulesKey];
+                            
+                            result = nil;
+                            
+                        }
+                        
                     }
-                    
-                    // check overlimit
-                    overlimit = [result[AESFCOverLimitKey] boolValue];
-                    if (overlimit) {
-                        
-                        //now this is not fatal error.
-                        DDLogWarn(@"(AEService) Can't convert all rules. Limit of the rules count exceeded. Rules count limit: %lu", limit);
-                        
-//                        NSString *errorDescription = NSLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
-//                        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_JSON_CONVERTER_OVERLIMIT userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
-                        
-                    }
-                    
-                    // obtain rules
-                    NSString *jsonString = result[AESFConvertedRulesKey];
                     if (jsonString && !([jsonString isEqualToString:@"undefined"] || [jsonString isEqualToString:@"[]"])) {
                         json = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
                     }
                     
-                    convertedRulesCount = result[AESFConvertedCountKey];
-                    totalConvertedRulesCount = result[AESFTotalConvertedCountKey];
+                    jsonString = nil;
                 }
-                
+        
                 // Temporarily save current converted rules in user defaults
                 [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:totalConvertedRulesCount];
                 [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
@@ -668,5 +835,53 @@ static AEService *singletonService;
     
 }
 
+- (AESFilterConverter *)createConverterToJsonWithError:(NSError **)error {
+    
+    AESFilterConverter *converterToJSON = [AESFilterConverter new];
+    if (!converterToJSON) {
+        DDLogError(@"(AEService) Can't initialize converter to JSON format!");
+        NSString *errorDescription = NSLocalizedString(@"Can't initialize converter to JSON format!", @"(AEService) Service errors descriptions");
+        if (error != nil) {
+            *error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
+        }
+    }
+    return converterToJSON;
+}
+
+- (NSDictionary *)convertOneRule:(ASDFilterRule *)rule optimize:(BOOL)optimize error:(NSError **)error {
+
+    NSDictionary *convertResult;
+    NSError *err = nil;
+
+    @autoreleasepool {
+
+        do {
+            AESFilterConverter *converterToJSON = [self createConverterToJsonWithError:&err];
+            if (!converterToJSON) {
+                break;
+            }
+
+            convertResult = [converterToJSON jsonFromRules:@[ rule ] upTo:1 optimize:optimize];
+            err = convertResult[AESFConvertedErrorKey];
+            if (err) {
+                break;
+            }
+
+            if (![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]) {
+
+                NSString *errorDescription = NSLocalizedString(@"Cannot add the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
+                err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription}];
+                break;
+            }
+            
+        } while (0);
+
+        if (err && error) {
+            *error = err;
+        }
+    }
+
+    return convertResult;
+}
 
 @end
