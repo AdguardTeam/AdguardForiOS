@@ -160,33 +160,20 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return;
     }
 
+    
     [[[AEService singleton] antibanner] beginTransaction];
-
-    NSError *error = [[AEService singleton] addRule:domainRule.rule temporarily:NO];
-    if (error) {
-
+    
+    [AEUIUtils addWhitelistRule:domainRule.rule toJsonWithController:self completionBlock:^{
+        
+        [[[AEService singleton] antibanner] endTransaction];
+        [self setupWhitelistCell];
+        [[APVPNManager singleton] sendReloadWhitelist];
+        
+    } rollbackBlock:^{
+        
         [[[AEService singleton] antibanner] rollbackTransaction];
-
-        if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-
-            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-        }
-    } else {
-
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-
-            // if rule is not comment decrease counter of the new rules
-
-            [[[AEService singleton] antibanner] endTransaction];
-            [self setupWhitelistCell];
-            [[APVPNManager singleton] sendReloadWhitelist];
-
-        }
-            rollbackBlock:^{
-
-                [[[AEService singleton] antibanner] rollbackTransaction];
-            }];
-    }
+        
+    }];
 }
 
 - (IBAction)longPressOnName:(id)sender {
