@@ -21,7 +21,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "AEUIEditDomainController.h"
 #import "AEUIUtils.h"
 
@@ -49,7 +49,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doaminCellView" forIndexPath:indexPath];
     
     
-    AEUIWhitelistDomainObject *object = self.rules[[indexPath row]];
+    AEWhitelistDomainObject *object = self.rules[[indexPath row]];
     if (object) {
         cell.textLabel.text = object.domain;
         return cell;
@@ -63,7 +63,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        AEUIWhitelistDomainObject *object = self.rules[[indexPath row]];
+        AEWhitelistDomainObject *object = self.rules[[indexPath row]];
         
         if (!object) {
             return;
@@ -71,13 +71,8 @@
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        // disable rule temporarily
-        [[[AEService singleton] antibanner] setRules:@[object.rule.ruleId] filter:object.rule.filterId enabled:NO];
-
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+        [AEUIUtils removeWhitelistRule:object.rule toJsonWithController:self completionBlock:^{
             
-            // delete rule permanently
-            [[AEService singleton] removeRules:@[object.rule]];
             [self.rules removeObjectAtIndex:[indexPath row]];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
@@ -88,12 +83,13 @@
 #ifdef PRO
             [[APVPNManager singleton] sendReloadWhitelist];
 #endif
-        }rollbackBlock:^{
+            
+        } rollbackBlock:^{
             
             // enable rule (rollback)
             
             [[[AEService singleton] antibanner] rollbackTransaction];
-
+            
             [tableView setEditing:NO animated:YES];
         }];
     }
@@ -122,7 +118,7 @@
         _editRuleController.navigationItem.title = NSLocalizedString(@"Edit Domain", @"(AEUIWhitelistController) Edit domain title");
         
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        AEUIWhitelistDomainObject *object = self.rules[[path row]];
+        AEWhitelistDomainObject *object = self.rules[[path row]];
         if (object) {
             _editRuleController.domain = object;
             _ruleTextHolder = object.rule.ruleText;
@@ -136,41 +132,28 @@
     
     if (_editRuleController && _editRuleController.done) {
 
-        AEUIWhitelistDomainObject *domain = _editRuleController.domain;
+        AEWhitelistDomainObject *domain = _editRuleController.domain;
         if ([domain.rule.ruleId unsignedIntegerValue] == 0) {
 
             // New rule
             
             [[[AEService singleton] antibanner] beginTransaction];
             
-            NSError *error = [[AEService singleton] addRule:domain.rule temporarily:NO];
-            if (error){
-
-                [[[AEService singleton] antibanner] rollbackTransaction];
-
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-
-                    [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-                }
-            }
-            else{
-
-                [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+            [AEUIUtils addWhitelistRule:domain.rule toJsonWithController:self completionBlock:^{
                 
-                    // if rule is not comment decrease counter of the new rules
-                    _newRuleCount--;
-                    
-                    [self reloadRulesAndScrollBottom:YES];
-                    
-                    [[[AEService singleton] antibanner] endTransaction];
+                // if rule is not comment decrease counter of the new rules
+                _newRuleCount--;
+                
+                [self reloadRulesAndScrollBottom:YES];
+                
+                [[[AEService singleton] antibanner] endTransaction];
 #ifdef PRO
-                    [[APVPNManager singleton] sendReloadWhitelist];
+                [[APVPNManager singleton] sendReloadWhitelist];
 #endif
-                } rollbackBlock:^{
-                    
-                    [[[AEService singleton] antibanner] rollbackTransaction];
-                }];
-            }
+            } rollbackBlock:^{
+                
+                [[[AEService singleton] antibanner] rollbackTransaction];
+            }];
         }
         else{
             // Update rule
@@ -237,10 +220,10 @@
 
               NSMutableArray *uiRules = [NSMutableArray array];
               self.rules = uiRules;
-              AEUIWhitelistDomainObject *object;
+              AEWhitelistDomainObject *object;
               for (ASDFilterRule *item in rules) {
 
-                  object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+                  object = [[AEWhitelistDomainObject alloc] initWithRule:item];
                   if (object) {
                       [uiRules addObject:object];
                   }

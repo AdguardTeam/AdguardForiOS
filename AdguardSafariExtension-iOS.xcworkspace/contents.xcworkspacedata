@@ -19,6 +19,9 @@
          <FileRef
             location = "group:importLocalization.sh">
          </FileRef>
+         <FileRef
+            location = "group:git-tagging.sh">
+         </FileRef>
          <Group
             location = "group:Resources"
             name = "Resources">

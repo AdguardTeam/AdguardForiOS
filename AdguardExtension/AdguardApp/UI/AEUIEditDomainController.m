@@ -17,7 +17,7 @@
 */
 #import "AEUIEditDomainController.h"
 #import "ACommons/ACLang.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 
 @interface AEUIEditDomainController ()
 
@@ -43,7 +43,7 @@
     _done = NO;
     
     if (!self.domain) {
-        self.domain = [AEUIWhitelistDomainObject new];
+        self.domain = [AEWhitelistDomainObject new];
     }
     self.domainTextField.text = self.domain.domain;
     

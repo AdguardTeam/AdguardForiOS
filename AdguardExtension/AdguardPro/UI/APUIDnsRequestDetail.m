@@ -26,7 +26,7 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ACommons/ACSystem.h"
 #import "AEUIUtils.h"
 
@@ -154,39 +154,26 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return;
     }
     
-    AEUIWhitelistDomainObject *domainRule = [[AEUIWhitelistDomainObject alloc] initWithDomain:self.nameCell.longLabel.text];
+    AEWhitelistDomainObject *domainRule = [[AEWhitelistDomainObject alloc] initWithDomain:self.nameCell.longLabel.text];
 
     if (!domainRule) {
         return;
     }
 
+    
     [[[AEService singleton] antibanner] beginTransaction];
-
-    NSError *error = [[AEService singleton] addRule:domainRule.rule temporarily:NO];
-    if (error) {
-
+    
+    [AEUIUtils addWhitelistRule:domainRule.rule toJsonWithController:self completionBlock:^{
+        
+        [[[AEService singleton] antibanner] endTransaction];
+        [self setupWhitelistCell];
+        [[APVPNManager singleton] sendReloadWhitelist];
+        
+    } rollbackBlock:^{
+        
         [[[AEService singleton] antibanner] rollbackTransaction];
-
-        if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-
-            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-        }
-    } else {
-
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-
-            // if rule is not comment decrease counter of the new rules
-
-            [[[AEService singleton] antibanner] endTransaction];
-            [self setupWhitelistCell];
-            [[APVPNManager singleton] sendReloadWhitelist];
-
-        }
-            rollbackBlock:^{
-
-                [[[AEService singleton] antibanner] rollbackTransaction];
-            }];
-    }
+        
+    }];
 }
 
 - (IBAction)longPressOnName:(id)sender {
@@ -212,10 +199,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             rulesForFilter:@(ASDF_USER_FILTER_ID)];
 
         NSMutableArray *wRules = [NSMutableArray array];
-        AEUIWhitelistDomainObject *object;
+        AEWhitelistDomainObject *object;
         for (ASDFilterRule *item in rules) {
 
-            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            object = [[AEWhitelistDomainObject alloc] initWithRule:item];
             if (object) {
                 [wRules addObject:object];
             }
