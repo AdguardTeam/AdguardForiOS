@@ -133,8 +133,11 @@
 
     locLogTrace();
 
+    [self saveLogRecord:YES];
+    
     [self setWhitelistSession:nil];
     [self setSession:nil];
+    
     _workingQueue = nil;
 }
 
