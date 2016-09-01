@@ -17,12 +17,12 @@
 */
 #import <UIKit/UIKit.h>
 
-@class AEUIWhitelistDomainObject;
+@class AEWhitelistDomainObject;
 
 @interface AEUIEditDomainController : UIViewController <UITextFieldDelegate>
 
 @property (readonly) BOOL done;
-@property AEUIWhitelistDomainObject *domain;
+@property AEWhitelistDomainObject *domain;
 
 @property (weak, nonatomic) IBOutlet UITextField *domainTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;

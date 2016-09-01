@@ -26,7 +26,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ASDatabase.h"
 
 #include <arpa/inet.h>
@@ -56,9 +56,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     APVpnMode _currentMode;
     Reachability *_reachabilityHandler;
+    APTunnelConnectionsHandler *_connectionHandler;
 }
-
-static APTunnelConnectionsHandler *_connectionHandler;
 
 + (void)initialize{
     
@@ -71,7 +70,6 @@ static APTunnelConnectionsHandler *_connectionHandler;
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
         
-        _connectionHandler = nil;
     }
 }
 
@@ -79,6 +77,11 @@ static APTunnelConnectionsHandler *_connectionHandler;
     
     self = [super init];
     if (self) {
+        
+        // Create connection handler
+        _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];
+        [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
+
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
@@ -154,13 +157,6 @@ static APTunnelConnectionsHandler *_connectionHandler;
     dns.matchDomains = @[ @"" ];
 
     settings.DNSSettings = dns;
-
-    // Create connection handler
-    NSError *error = [self restoreConnectionHandlerWithStartHandling:NO];
-    if (error) {
-        pendingStartCompletion(error);
-        return;
-    }
     
     [_connectionHandler setDeviceDnsAddresses:[self getDNSServers] adguardDnsAddresses:ipv4DnsAddresses];
     [self reloadWhitelistDomain];
@@ -189,18 +185,12 @@ static APTunnelConnectionsHandler *_connectionHandler;
     
     [_reachabilityHandler stopNotifier];
 
-    @synchronized (_connectionHandler) {
-        _connectionHandler = nil;
-    }
-    
 	completionHandler();
 }
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
 {
     DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
-    
-    [self restoreConnectionHandlerWithStartHandling:NO];
     
     @synchronized (_connectionHandler) {
         
@@ -216,8 +206,10 @@ static APTunnelConnectionsHandler *_connectionHandler;
                 break;
                 
             case APHTMWhitelistDomainsReload:
-                //Set whitelist domains
-                [self reloadWhitelistDomain];
+                
+                DDLogInfo(@"(PacketTunnelProvider) Whitelist domain changed. Reconnecting..");
+                [self stopVPN];
+
                 break;
                 
             default:
@@ -237,8 +229,6 @@ static APTunnelConnectionsHandler *_connectionHandler;
 {
 	// Add code here to wake up.
     DDLogInfo(@"(PacketTunnelProvider) Wake Event");
-    [self restoreConnectionHandlerWithStartHandling:YES];
-    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -286,36 +276,22 @@ static APTunnelConnectionsHandler *_connectionHandler;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
 
-- (void)reachNotify:(NSNotification *)note {
+- (void)stopVPN {
     
+    
+    DDLogInfo(@"(PacketTunnelProvider) Stop VPN.");
+
+    [_reachabilityHandler stopNotifier];
+
     self.reasserting = YES;
-    
-    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
     [self cancelTunnelWithError:nil];
+
 }
 
-- (NSError *)restoreConnectionHandlerWithStartHandling:(BOOL)startHandling{
+- (void)reachNotify:(NSNotification *)note {
     
-    @synchronized (_connectionHandler) {
-        
-        if (_connectionHandler == nil) {
-            
-           DDLogWarn(@"(PacketTunnelProvider) _connectionHandler is NULL, restoreConnectionHandlerWithStartHandling.");
-            
-            // Create connection handler
-            _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];
-            if (!_connectionHandler) {
-                DDLogError(@"(PacketTunnelProvider) Can't create connection handler.");
-                return [NSError errorWithDomain:APTunnelProviderErrorDomain code:APTN_ERROR_CONNECTION_HANDLER userInfo:nil];
-            }
-            [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
-            if (startHandling) {
-                [_connectionHandler startHandlingPackets];
-            }
-        }
-    }
-    
-    return nil;
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    [self stopVPN];
 }
 
 - (void)reloadWhitelistDomain {
@@ -326,10 +302,10 @@ static APTunnelConnectionsHandler *_connectionHandler;
                           rulesForFilter:@(ASDF_USER_FILTER_ID)];
         
         NSMutableArray *wRules = [NSMutableArray array];
-        AEUIWhitelistDomainObject *object;
+        AEWhitelistDomainObject *object;
         for (ASDFilterRule *item in rules) {
             
-            object = [[AEUIWhitelistDomainObject alloc] initWithRule:item];
+            object = [[AEWhitelistDomainObject alloc] initWithRule:item];
             if (object) {
                 [wRules addObject:object];
             }
