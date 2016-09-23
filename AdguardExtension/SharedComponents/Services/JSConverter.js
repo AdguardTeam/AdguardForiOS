@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[5797]={exports:{}};
+cachedModules[7919]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -91,7 +91,7 @@ var SimpleRegex = exports.SimpleRegex = (function() {
     /**
      * Creates regex
      */
-    var createRegex = function(str) {
+    var createRegexText = function(str) {
         var regex = escapeRegExp(str);
 
         if (startsWith(regex, regexConfiguration.maskStartUrl)) {
@@ -126,14 +126,14 @@ var SimpleRegex = exports.SimpleRegex = (function() {
     // EXPOSE
     return {
         // Function for creating regex
-        createRegex: createRegex,
+        createRegexText: createRegexText,
         
         // Configuration used for the transformation
         regexConfiguration: regexConfiguration
     };
 })();
-}).call(this,cachedModules[5797],cachedModules[5797].exports);
-cachedModules[3964]={exports:{}};
+}).call(this,cachedModules[7919],cachedModules[7919].exports);
+cachedModules[3771]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -228,8 +228,8 @@ var Log = exports.Log = (function() {
 		}
 	};
 })();
-}).call(this,cachedModules[3964],cachedModules[3964].exports);
-cachedModules[5942]={exports:{}};
+}).call(this,cachedModules[3771],cachedModules[3771].exports);
+cachedModules[8189]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -251,9 +251,9 @@ cachedModules[5942]={exports:{}};
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Log = cachedModules[3964].exports.Log;
+var Log = cachedModules[3771].exports.Log; // jshint ignore:line
 
-var StringUtils = exports.StringUtils = {
+var StringUtils = exports.StringUtils = { // jshint ignore:line
 
     isEmpty: function (str) {
         return !str || str.trim().length === 0;
@@ -410,7 +410,7 @@ var CollectionUtils = exports.CollectionUtils = {
     }
 };
 
-var EventNotifierTypes = exports.EventNotifierTypes = {
+var EventNotifierTypes = exports.EventNotifierTypes = { // jshint ignore:line
     ADD_RULE: "event.add.rule",
     ADD_RULES: "event.add.rules",
     REMOVE_RULE: "event.remove.rule",
@@ -440,7 +440,7 @@ var EventNotifierTypes = exports.EventNotifierTypes = {
 /**
  * Request types enumeration
  */
-var RequestTypes = exports.RequestTypes = {
+var RequestTypes = exports.RequestTypes = { // jshint ignore:line
 
     /**
      * Document that is loaded for a top-level frame
@@ -460,12 +460,13 @@ var RequestTypes = exports.RequestTypes = {
     OBJECT_SUBREQUEST: "OBJECT-SUBREQUEST",
     MEDIA: "MEDIA",
     FONT: "FONT",
+    WEBSOCKET: "WEBSOCKET",
+    OTHER: "OTHER",
 
     /**
      * Synthetic request type for requests detected as pop-ups
      */
     POPUP: "POPUP",
-    OTHER: "OTHER",
 
     /**
      * Checks if loaded element could be visible to user
@@ -481,12 +482,12 @@ var RequestTypes = exports.RequestTypes = {
     }
 };
 
-var AntiBannerFiltersId = exports.AntiBannerFiltersId = {
+var AntiBannerFiltersId = exports.AntiBannerFiltersId = { // jshint ignore:line
     USER_FILTER_ID: 0,
     ENGLISH_FILTER_ID: 2,
     TRACKING_FILTER_ID: 3,
     SOCIAL_FILTER_ID: 4,
-    ACCEPTABLE_ADS_FILTER_ID: 10,
+    SEARCH_AND_SELF_PROMO_FILTER_ID: 10,
     SAFARI_FILTER: 12,
     WHITE_LIST_FILTER_ID: 100,
     EASY_PRIVACY: 118,
@@ -495,7 +496,7 @@ var AntiBannerFiltersId = exports.AntiBannerFiltersId = {
     FANBOY_ENHANCED: 215
 };
 
-var LogEvents = exports.LogEvents = {
+var LogEvents = exports.LogEvents = { // jshint ignore:line
     TAB_ADDED: 'log.tab.added',
     TAB_CLOSE: 'log.tab.close',
     TAB_UPDATE: 'log.tab.update',
@@ -503,7 +504,7 @@ var LogEvents = exports.LogEvents = {
     EVENT_ADDED: 'log.event.added'
 };
 
-var FilterUtils = exports.FilterUtils = {
+var FilterUtils = exports.FilterUtils = { // jshint ignore:line
 
     isUserFilter: function (filter) {
         return filter.filterId == AntiBannerFiltersId.USER_FILTER_ID;
@@ -514,7 +515,7 @@ var FilterUtils = exports.FilterUtils = {
     },
 
     isAdguardFilter: function (filter) {
-        return filter.filterId <= AntiBannerFiltersId.ACCEPTABLE_ADS_FILTER_ID ||
+        return filter.filterId <= AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID ||
             filter.filterId == AntiBannerFiltersId.SAFARI_FILTER;
     },
 
@@ -527,7 +528,7 @@ var FilterUtils = exports.FilterUtils = {
     }
 };
 
-var StopWatch = exports.StopWatch = function (name) {
+var StopWatch = exports.StopWatch = function (name) { // jshint ignore:line
     this.name = name;
 };
 
@@ -546,8 +547,8 @@ StopWatch.prototype = {
         console.log(this.name + "[elapsed: " + elapsed + " ms]");
     }
 };
-}).call(this,cachedModules[5942],cachedModules[5942].exports);
-cachedModules[7041]={exports:{}};
+}).call(this,cachedModules[8189],cachedModules[8189].exports);
+cachedModules[2959]={exports:{}};
 (function(module,exports) {/*! http://mths.be/punycode v1.3.0 by @mathias */
 ;(function(root) {
 
@@ -1073,8 +1074,8 @@ cachedModules[7041]={exports:{}};
 	}
 
 }(this));
-}).call(this,cachedModules[7041],cachedModules[7041].exports);
-cachedModules[6397]={exports:{}};
+}).call(this,cachedModules[2959],cachedModules[2959].exports);
+cachedModules[2318]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -1096,8 +1097,8 @@ cachedModules[6397]={exports:{}};
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var punycode = cachedModules[7041].exports.punycode;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var punycode = cachedModules[2959].exports.punycode;
 
 /**
  * Helper methods to work with URLs
@@ -1199,6 +1200,10 @@ var UrlUtils = exports.UrlUtils = {
 
 	getDomainName: function (url) {
 		var host = UrlUtils.getHost(url);
+		return this.getCroppedDomainName(host);
+	},
+
+	getCroppedDomainName: function (host) {
 		return StringUtils.startWith(host, "www.") ? host.substring(4) : host;
 	},
 
@@ -7342,8 +7347,8 @@ var RESERVED_DOMAINS = {
 	"zushi.kanagawa.jp": 1
 };
 
-}).call(this,cachedModules[6397],cachedModules[6397].exports);
-cachedModules[2006]={exports:{}};
+}).call(this,cachedModules[2318],cachedModules[2318].exports);
+cachedModules[1776]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7361,14 +7366,16 @@ cachedModules[2006]={exports:{}};
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* global require, exports */
+
 /**
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var CollectionUtils = cachedModules[5942].exports.CollectionUtils;
-var UrlUtils = cachedModules[6397].exports.UrlUtils;
-var Log = cachedModules[3964].exports.Log;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var CollectionUtils = cachedModules[8189].exports.CollectionUtils;
+var UrlUtils = cachedModules[2318].exports.UrlUtils;
+var Log = cachedModules[3771].exports.Log;
 
 /**
  * Base class for all filter rules
@@ -7414,7 +7421,7 @@ FilterRule.prototype = {
 						if (permittedDomains == null) {
 							permittedDomains = [];
 						}
-						permittedDomains.push(domainName);
+						permittedDomains.push(UrlUtils.getCroppedDomainName(domainName));
 					}
 				}
 			}
@@ -7474,7 +7481,6 @@ FilterRule.prototype = {
 	 */
 	isDomainSensitive: function () {
 		return this.hasRestrictedDomains() || this.hasPermittedDomains();
-
 	},
 
 	/**
@@ -7537,6 +7543,15 @@ FilterRule.prototype = {
 	 */
 	addRestrictedDomains: function (domains) {
 		if (domains) {
+			if (this.hasPermittedDomains()) {
+				var self = this;
+				// If a rule already has permitted domains, we should check that
+				// these restricted domains make any sense
+				domains = domains.filter(function(domainName) {
+					return self.isPermitted(domainName);
+				});
+			}
+
 			var restrictedDomains = this.getRestrictedDomains();
 			restrictedDomains = CollectionUtils.removeDuplicates((restrictedDomains || []).concat(domains));
 			this.setRestrictedDomains(restrictedDomains);
@@ -7587,8 +7602,8 @@ FilterRule.COMA_DELIMITER = ",";
 FilterRule.LINE_DELIMITER = "|";
 FilterRule.NOT_MARK = "~";
 FilterRule.OLD_INJECT_RULES = "adg_start_style_inject";
-}).call(this,cachedModules[2006],cachedModules[2006].exports);
-cachedModules[6586]={exports:{}};
+}).call(this,cachedModules[1776],cachedModules[1776].exports);
+cachedModules[7792]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7610,8 +7625,8 @@ cachedModules[6586]={exports:{}};
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var FilterRule = cachedModules[2006].exports.FilterRule;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var FilterRule = cachedModules[1776].exports.FilterRule;
 
 /**
  * CSS rule.
@@ -7632,7 +7647,8 @@ var CssFilterRule = exports.CssFilterRule = (function () {
         ":focus", ":hover", ":in-range", ":invalid", ":lang", ":last-child", ":last-of-type",
         ":link", ":not", ":nth-child", ":nth-last-child", ":nth-last-of-type", ":nth-of-type",
         ":only-child", ":only-of-type", ":optional", ":out-of-range", ":read-only",
-        ":read-write", ":required", ":root", ":target", ":valid", ":visited", ":has", ":contains"];
+        ":read-write", ":required", ":root", ":target", ":valid", ":visited", ":has", ":contains",
+        ":matches-css", ":matches-css-before", ":matches-css-after"];
 
     /**
      * The problem with it is that ":has" and ":contains" pseudo classes are not a valid pseudo classes,
@@ -7640,7 +7656,9 @@ var CssFilterRule = exports.CssFilterRule = (function () {
      *
      * @type {string[]}
      */
-    var EXTENDED_CSS_MARKERS = ["[-ext-has=", "[-ext-contains=", ":has(", ":contains("];
+    var EXTENDED_CSS_MARKERS = ["[-ext-has=", "[-ext-contains=", "[-ext-matches-css=", 
+        "[-ext-matches-css-before=", "[-ext-matches-css-after=", ":has(", ":contains(", 
+        ":matches-css(", ":matches-css-before(", ":matches-css-after("];
 
     /**
      * Tries to convert CSS injections rules from uBlock syntax to our own
@@ -7676,21 +7694,43 @@ var CssFilterRule = exports.CssFilterRule = (function () {
      * @returns {*} first PseudoClass found or null
      */
     var parsePseudoClass = function (selector) {
-        var nameStartIndex = selector.indexOf(':');
-        if (nameStartIndex < 0) {
-            return null;
-        }
+        var beginIndex = 0;
+        var nameStartIndex = -1;
+        var squareBracketIndex = 0;
 
-        if (nameStartIndex > 0 && selector.charAt(nameStartIndex - 1) == '\\') {
-            // Escaped colon character
-            return null;
-        }
+        while (squareBracketIndex >= 0) {
+            nameStartIndex = selector.indexOf(':', beginIndex);
+            if (nameStartIndex < 0) {
+                return null;
+            }
 
-        var squareBracketIndex = selector.indexOf('[');
-        if (squareBracketIndex >= 0 && nameStartIndex > squareBracketIndex) {
-            // Means that colon character is somewhere inside attribute selector
-            // Something like a[src^="http://domain.com"]
-            return null;
+            if (nameStartIndex > 0 && selector.charAt(nameStartIndex - 1) == '\\') {
+                // Escaped colon character
+                return null;
+            }
+
+            squareBracketIndex = selector.indexOf("[", beginIndex);
+            while (squareBracketIndex >= 0) {
+                if (nameStartIndex > squareBracketIndex) {
+                    var squareEndBracketIndex = selector.indexOf("]", squareBracketIndex + 1);
+                    beginIndex = squareEndBracketIndex + 1;
+                    if (nameStartIndex < squareEndBracketIndex) {
+                        // Means that colon character is somewhere inside attribute selector
+                        // Something like a[src^="http://domain.com"]
+                        break;
+                    }
+
+                    if (squareEndBracketIndex > 0) {
+                        squareBracketIndex = selector.indexOf("[", beginIndex);
+                    } else {
+                        // bad rule, example: a[src="http:
+                        return null;
+                    }
+                } else {
+                    squareBracketIndex = -1;
+                    break;
+                }
+            }
         }
 
         var nameEndIndex = StringUtils.indexOfAny(selector, nameStartIndex + 1, [' ', '\t', '>', '(', '[', '.', '#', ':']);
@@ -7775,8 +7815,8 @@ var CssFilterRule = exports.CssFilterRule = (function () {
 })();
 
 CssFilterRule.prototype = Object.create(FilterRule.prototype);
-}).call(this,cachedModules[6586],cachedModules[6586].exports);
-cachedModules[6711]={exports:{}};
+}).call(this,cachedModules[7792],cachedModules[7792].exports);
+cachedModules[5560]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7802,8 +7842,8 @@ var Prefs = exports.Prefs = {
 		return false;
 	}
 };
-}).call(this,cachedModules[6711],cachedModules[6711].exports);
-cachedModules[1560]={exports:{}};
+}).call(this,cachedModules[5560],cachedModules[5560].exports);
+cachedModules[3919]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7825,12 +7865,12 @@ cachedModules[1560]={exports:{}};
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Prefs = cachedModules[6711].exports.Prefs;
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var FilterRule = cachedModules[2006].exports.FilterRule;
-var Log = cachedModules[3964].exports.Log;
-var UrlUtils = cachedModules[6397].exports.UrlUtils;
-var SimpleRegex = cachedModules[5797].exports.SimpleRegex;
+var Prefs = cachedModules[5560].exports.Prefs;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var FilterRule = cachedModules[1776].exports.FilterRule;
+var Log = cachedModules[3771].exports.Log;
+var UrlUtils = cachedModules[2318].exports.UrlUtils;
+var SimpleRegex = cachedModules[7919].exports.SimpleRegex;
 
 /**
  * Rule for blocking requests to URLs.
@@ -7884,7 +7924,7 @@ UrlFilterRule.prototype.getUrlRegExpSource = function () {
         //parse rule text
         var parseResult = parseRuleText(this.ruleText);
         // Creating regex source
-        this.urlRegExpSource = SimpleRegex.createRegex(parseResult.urlRuleText);
+        this.urlRegExpSource = SimpleRegex.createRegexText(parseResult.urlRuleText);
     }
     return this.urlRegExpSource;
 };
@@ -7955,7 +7995,7 @@ UrlFilterRule.prototype.isFiltered = function (requestUrl, thirdParty, requestCo
         }
     }
 
-    if (this.shortcut != null && !StringUtils.containsIgnoreCase(requestUrl, this.shortcut)) {
+    if (this.shortcut !== null && !StringUtils.containsIgnoreCase(requestUrl, this.shortcut)) {
         return false;
     }
 
@@ -7964,7 +8004,7 @@ UrlFilterRule.prototype.isFiltered = function (requestUrl, thirdParty, requestCo
         //not in permitted list - skip this rule
         return false;
     }
-    if (this.restrictedContentType != 0 && (this.restrictedContentType & requestTypeMask) == requestTypeMask) {
+    if (this.restrictedContentType !== 0 && (this.restrictedContentType & requestTypeMask) == requestTypeMask) {
         //in restricted list - skip this rule
         return false;
     }
@@ -8087,6 +8127,7 @@ UrlFilterRule.contentTypes = {
     'OBJECT-SUBREQUEST': 1 << 7,
     MEDIA: 1 << 8,
     FONT: 1 << 9,
+    WEBSOCKET: 1 << 10,
 
     ELEMHIDE: 1 << 20,  //CssFilter cannot be applied to page
     URLBLOCK: 1 << 21,  //This attribute is only for exception rules. If true - do not use urlblocking rules for urls where referrer satisfies this rule.
@@ -8128,6 +8169,7 @@ UrlFilterRule.contentTypes.ALL |= UrlFilterRule.contentTypes.XMLHTTPREQUEST;
 UrlFilterRule.contentTypes.ALL |= UrlFilterRule.contentTypes['OBJECT-SUBREQUEST'];
 UrlFilterRule.contentTypes.ALL |= UrlFilterRule.contentTypes.MEDIA;
 UrlFilterRule.contentTypes.ALL |= UrlFilterRule.contentTypes.FONT;
+UrlFilterRule.contentTypes.ALL |= UrlFilterRule.contentTypes.WEBSOCKET;
 
 /**
  * Searches for domain name in rule text and transforms it to punycode if needed.
@@ -8253,8 +8295,8 @@ function parseRuleText(ruleText) {
         whiteListRule: whiteListRule
     };
 }
-}).call(this,cachedModules[1560],cachedModules[1560].exports);
-cachedModules[9255]={exports:{}};
+}).call(this,cachedModules[3919],cachedModules[3919].exports);
+cachedModules[741]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8283,8 +8325,8 @@ cachedModules[9255]={exports:{}};
  *    or from this DEFAULT_SCRIPT_RULES object
  */
 var DEFAULT_SCRIPT_RULES = exports.DEFAULT_SCRIPT_RULES = Object.create(null);
-}).call(this,cachedModules[9255],cachedModules[9255].exports);
-cachedModules[7351]={exports:{}};
+}).call(this,cachedModules[741],cachedModules[741].exports);
+cachedModules[5755]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8306,10 +8348,10 @@ cachedModules[7351]={exports:{}};
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var FilterRule = cachedModules[2006].exports.FilterRule;
-var AntiBannerFiltersId = cachedModules[5942].exports.AntiBannerFiltersId;
-var DEFAULT_SCRIPT_RULES = cachedModules[9255].exports.DEFAULT_SCRIPT_RULES;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var FilterRule = cachedModules[1776].exports.FilterRule;
+var AntiBannerFiltersId = cachedModules[8189].exports.AntiBannerFiltersId;
+var DEFAULT_SCRIPT_RULES = cachedModules[741].exports.DEFAULT_SCRIPT_RULES;
 
 /**
  * JS injection rule:
@@ -8349,8 +8391,8 @@ var ScriptFilterRule = exports.ScriptFilterRule = function (rule, filterId) {
 };
 
 ScriptFilterRule.prototype = Object.create(FilterRule.prototype);
-}).call(this,cachedModules[7351],cachedModules[7351].exports);
-cachedModules[5869]={exports:{}};
+}).call(this,cachedModules[5755],cachedModules[5755].exports);
+cachedModules[2353]={exports:{}};
 (function(module,exports) {/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8367,14 +8409,15 @@ cachedModules[5869]={exports:{}};
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var FilterRule = cachedModules[2006].exports.FilterRule;
-var CssFilterRule = cachedModules[6586].exports.CssFilterRule;
-var UrlFilterRule = cachedModules[1560].exports.UrlFilterRule;
-var ScriptFilterRule = cachedModules[7351].exports.ScriptFilterRule;
-var Log = cachedModules[3964].exports.Log;
+/* global exports, require */
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var FilterRule = cachedModules[1776].exports.FilterRule;
+var CssFilterRule = cachedModules[7792].exports.CssFilterRule;
+var UrlFilterRule = cachedModules[3919].exports.UrlFilterRule;
+var ScriptFilterRule = cachedModules[5755].exports.ScriptFilterRule;
+var Log = cachedModules[3771].exports.Log;
 
-var FilterRuleBuilder = exports.FilterRuleBuilder = {
+var FilterRuleBuilder = exports.FilterRuleBuilder = { // jshint ignore:line
     
     /**
      * Method that parses rule text and creates object of a suitable class.
@@ -8417,8 +8460,8 @@ var FilterRuleBuilder = exports.FilterRuleBuilder = {
         return rule;
     }
 };
-}).call(this,cachedModules[5869],cachedModules[5869].exports);
-cachedModules[457]={exports:{}};
+}).call(this,cachedModules[2353],cachedModules[2353].exports);
+cachedModules[556]={exports:{}};
 (function(module,exports) {/**
 * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
 *
@@ -8439,7 +8482,7 @@ cachedModules[457]={exports:{}};
 /**
  * Safari content blocking format rules converter.
  */
-var CONVERTER_VERSION = '1.3.13';
+var CONVERTER_VERSION = '1.3.15';
 // Max number of CSS selectors per rule (look at _compactCssRules function)
 var MAX_SELECTORS_PER_WIDE_RULE = 250;
 var URL_FILTER_ANY_URL = ".*";
@@ -8448,15 +8491,15 @@ var URL_FILTER_REGEXP_START_URL = "^https?://([^/]*\\.)?";
 // Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp)
 var URL_FILTER_REGEXP_SEPARATOR = "[/:&?]?";
 
-var SimpleRegex = cachedModules[5797].exports.SimpleRegex;
-var FilterRule = cachedModules[2006].exports.FilterRule; // jshint ignore:line
-var FilterRuleBuilder = cachedModules[5869].exports.FilterRuleBuilder;
-var CssFilterRule = cachedModules[6586].exports.CssFilterRule;
-var UrlFilterRule = cachedModules[1560].exports.UrlFilterRule;
-var ScriptFilterRule = cachedModules[7351].exports.ScriptFilterRule;
-var StringUtils = cachedModules[5942].exports.StringUtils;
-var Log = cachedModules[3964].exports.Log;
-var UrlUtils = cachedModules[6397].exports.UrlUtils;
+var SimpleRegex = cachedModules[7919].exports.SimpleRegex;
+var FilterRule = cachedModules[1776].exports.FilterRule; // jshint ignore:line
+var FilterRuleBuilder = cachedModules[2353].exports.FilterRuleBuilder;
+var CssFilterRule = cachedModules[7792].exports.CssFilterRule;
+var UrlFilterRule = cachedModules[3919].exports.UrlFilterRule;
+var ScriptFilterRule = cachedModules[5755].exports.ScriptFilterRule;
+var StringUtils = cachedModules[8189].exports.StringUtils;
+var Log = cachedModules[3771].exports.Log;
+var UrlUtils = cachedModules[2318].exports.UrlUtils;
 
 exports.SafariContentBlockerConverter = {
 
@@ -8570,14 +8613,15 @@ exports.SafariContentBlockerConverter = {
                 types.push("media");                
             }
             if (this._hasContentType(rule, UrlFilterRule.contentTypes.XMLHTTPREQUEST) ||
-                this._hasContentType(rule, UrlFilterRule.contentTypes.OTHER)) {
-                types.push("raw");                    
+                this._hasContentType(rule, UrlFilterRule.contentTypes.OTHER) ||
+                this._hasContentType(rule, UrlFilterRule.contentTypes.WEBSOCKET)) {
+                types.push("raw");
             }
             if (this._hasContentType(rule, UrlFilterRule.contentTypes.FONT)) {
                 types.push("font");                
             }
             if (this._hasContentType(rule, UrlFilterRule.contentTypes.SUBDOCUMENT)) {
-                types.push("document");                
+                types.push("document");
             }
             if (this._hasContentType(rule, UrlFilterRule.contentTypes.POPUP)) {
                 // Ignore other in case of $popup modifier
@@ -8924,9 +8968,10 @@ exports.SafariContentBlockerConverter = {
     convertAGRule: function (rule, errors) {
         try {
             return this._convertAGRule(rule);
-        } catch (ex) {
-            var message = 'Error converting rule from: ' + rule + ' cause:\n' + ex;
-            message = (rule.ruleText ? rule.ruleText : rule) + '\r\n' + message + '\r\n';
+        } catch (ex) {          
+            var message = 'Error converting rule from: ' + 
+                (rule.ruleText ? rule.ruleText : rule) + 
+                ' cause:\n' + ex + '\r\n';
             Log.debug(message);
 
             if (errors) {
@@ -9273,7 +9318,7 @@ exports.SafariContentBlockerConverter = {
         return this._createConversionResult(contentBlocker, limit);
     }
 };
-}).call(this,cachedModules[457],cachedModules[457].exports);var SafariContentBlockerConverter = cachedModules[457].exports.SafariContentBlockerConverter;
+}).call(this,cachedModules[556],cachedModules[556].exports);var SafariContentBlockerConverter = cachedModules[556].exports.SafariContentBlockerConverter;
 
 function jsonFromFilters(rules, limit, optimize){
     try {
