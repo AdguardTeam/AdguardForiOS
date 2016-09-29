@@ -94,7 +94,7 @@
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
-    NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
+    __block NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -107,7 +107,7 @@
                 _url = [NSURL URLWithString:urlString];
             }
             _host = [_url hostWithPort];
-            //            _host = url.host;
+            //            _host = url.host;x
             
             _injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
             
@@ -118,6 +118,7 @@
             else if ([NSString isNullOrEmpty:_host]) {
                 
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
+                errorMessage = NSLocalizedString(@"The hostname is not obtained. Perhaps the page is not yet loaded.", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
                 
