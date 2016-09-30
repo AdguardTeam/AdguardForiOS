@@ -36,7 +36,12 @@
 #pragma mark - AEUIMainController Constants
 /////////////////////////////////////////////////////////////////////
 
+#ifdef PRO
+#define ITUNES_APP_ID               @"1126386264"
+#else
 #define ITUNES_APP_ID               @"1047223162"
+#endif
+
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
 #define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
