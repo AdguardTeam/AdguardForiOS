@@ -43,6 +43,11 @@
     self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
     self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
     
+    self.defaultDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    self.familyDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    
+    self.statusLabel.accessibilityHint = [self shortStatusDescription];
+    
     [self updateStatuses];
     
     [self.logSwitch setOn:manager.dnsRequestsLogging];
@@ -137,11 +142,14 @@
     return _proFooter;
 }
 
-
+- (NSString *)shortStatusDescription {
+    
+    return NSLocalizedString(@"To make system use Adguard DNS, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. It is the description under Adguard DNS switch.");
+}
 
 - (NSAttributedString *)textForProSectionFooter{
     
-    NSString *message = NSLocalizedString(@"To make system use Adguard DNS, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. It is the description under Adguard DNS switch.");
+    NSString *message = [self shortStatusDescription];
     
     NSString *linkFormat = NSLocalizedString(@"Learn more about[nbsp]Adguard[nbsp]DNS.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Link text of the website with the decription.  Where '[nbsp]' stands for 'non-breakable space'.");
     

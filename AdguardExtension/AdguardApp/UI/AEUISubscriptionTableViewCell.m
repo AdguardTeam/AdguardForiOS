@@ -50,6 +50,12 @@
         _on = on;
         
         [self setImageAnimated:NO];
+        if (_on) {
+            self.accessibilityTraits |= UIAccessibilityTraitSelected;
+        }
+        else{
+            self.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+        }
     }
 }
 
