@@ -52,13 +52,6 @@
     return traits;
 }
 
-//- (NSString *)accessibilityHint {
-//    
-//    NSString *hint = _statusSwitch.accessibilityHint;
-//    NSLog(@"Hint: %@", hint);
-//    return hint;
-//}
-
 - (BOOL)accessibilityActivate {
     
     if (_statusSwitch.enabled) {
