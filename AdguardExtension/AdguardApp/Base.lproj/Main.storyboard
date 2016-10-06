@@ -587,7 +587,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="How to enable Adguard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Db5-io-lRz">
                                                     <frame key="frameInset" minX="45" width="295" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <accessibility key="accessibilityConfiguration">
+                                                    <accessibility key="accessibilityConfiguration" label="How to enable Adguard. Video.">
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -617,6 +617,9 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Manage Adguard from Safari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aK9-na-jWI">
                                                     <frame key="frameInset" minX="45" width="295" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Manage Adguard from Safari. Video.">
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -759,7 +762,9 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Last Checked" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rpL-Mz-xwI">
                                                     <frame key="frameInset" minX="15" minY="12" width="99" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <accessibility key="accessibilityConfiguration" identifier="lastChecked" label="Filters last checked for update at"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Last checked for update at">
+                                                        <accessibilityTraits key="traits" staticText="YES"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -834,6 +839,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93Y-I8-Ha9">
+                                                    <accessibility key="accessibilityConfiguration" label=" ">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -841,6 +850,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Q1N-rZ-azR">
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-f4-Rox" userLabel="Mail">
+                                                            <accessibility key="accessibilityConfiguration" label="Share with mail"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="RvS-Vh-Zfc"/>
                                                                 <constraint firstAttribute="height" constant="24" id="lie-Bg-vUZ"/>
@@ -852,6 +862,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z6-O6-QzV" userLabel="Message">
+                                                            <accessibility key="accessibilityConfiguration" label="Share with iMessage"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="906-Wf-Mw1"/>
                                                                 <constraint firstAttribute="width" constant="24" id="IX9-2u-SmO"/>
@@ -863,6 +874,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2O-oQ-yhe" userLabel="Twitter">
+                                                            <accessibility key="accessibilityConfiguration" label="Share with Twitter"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="W8d-5F-5na"/>
                                                                 <constraint firstAttribute="width" constant="24" id="yBi-wg-CI5"/>
@@ -874,6 +886,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiA-PR-JUW" userLabel="Facebook">
+                                                            <accessibility key="accessibilityConfiguration" label="Share with Facebook"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="0Gw-OC-smC"/>
                                                                 <constraint firstAttribute="width" constant="24" id="eoW-ZO-PfP"/>
@@ -901,6 +914,9 @@
                                                 <constraint firstItem="Q1N-rZ-azR" firstAttribute="centerY" secondItem="UhB-eQ-ayF" secondAttribute="centerY" id="zly-j7-CvK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1629,6 +1645,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="AX2-q7-ZJJ">
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oKp-AP-IZQ">
+                                        <accessibility key="accessibilityConfiguration" hint="Enter rule text."/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         <connections>
@@ -1771,6 +1788,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2aq-7r-5ql">
+                                <accessibility key="accessibilityConfiguration" hint="Enter domain name."/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="339" id="LDt-du-doK"/>
                                 </constraints>
