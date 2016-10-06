@@ -44,6 +44,10 @@
         [NSDateFormatter localizedStringFromDate:self.meta.updateDate
                                        dateStyle:NSDateFormatterShortStyle
                                        timeStyle:NSDateFormatterShortStyle];
+    self.filterLastModified.accessibilityLabel =
+    [NSDateFormatter localizedStringFromDate:self.meta.updateDate
+                                   dateStyle:NSDateFormatterLongStyle
+                                   timeStyle:NSDateFormatterShortStyle];
 
     self.statusButton.on = [self.meta.enabled boolValue];
 
