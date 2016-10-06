@@ -79,10 +79,15 @@
 */
 
 - (IBAction)clickCancel:(id)sender {
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
     if (self.cancelAction && [self.delegate respondsToSelector:self.cancelAction]) {
         [self.delegate performSelector:self.cancelAction withObject:self];
     }
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+#pragma clang diagnostic pop
 }
 
 @end

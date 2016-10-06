@@ -42,11 +42,13 @@
     
     OSSpinLock _dnsAddressLock;
     OSSpinLock _whitelistDomainLock;
+    OSSpinLock _blacklistDomainLock;
     
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
     
     NSSet *_whitelistDomains;
+    NSSet *_blacklistDomains;
     
     BOOL _packetFlowObserver;
     
@@ -66,7 +68,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _whitelistDomainLock = _dnsAddressLock = OS_SPINLOCK_INIT;
+        _whitelistDomainLock = _blacklistDomainLock =_dnsAddressLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
     }
     return self;
@@ -134,6 +136,20 @@
     OSSpinLockUnlock(&_whitelistDomainLock);
 }
 
+- (void)setBlacklistDomains:(NSArray <NSString *> *)domains {
+    
+    OSSpinLockLock(&_blacklistDomainLock);
+    
+    _blacklistDomains = nil;
+    
+    if (domains.count) {
+        
+        _blacklistDomains = [NSSet setWithArray:domains];
+    }
+    
+    OSSpinLockUnlock(&_blacklistDomainLock);
+}
+
 - (void)startHandlingPackets {
 
     if (_provider.packetFlow) {
@@ -169,6 +185,18 @@
     result = [_whitelistDomains containsObject:domainName];
     
     OSSpinLockUnlock(&_whitelistDomainLock);
+    
+    return result;
+}
+
+- (BOOL)isBlacklistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_blacklistDomainLock);
+    
+    result = [_blacklistDomains containsObject:domainName];
+    
+    OSSpinLockUnlock(&_blacklistDomainLock);
     
     return result;
 }

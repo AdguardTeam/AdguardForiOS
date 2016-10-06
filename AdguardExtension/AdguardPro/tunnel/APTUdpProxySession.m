@@ -415,7 +415,9 @@
         [_packetsForSend removeAllObjects];
         _waitWrite = YES;
 
-        NSArray *whitelistPackets = [self whitelistDomainsPacketsExcludeFromOutgoingPackets:packets];
+        NSArray *specialPackets = [self processingOutgoingPackets:packets];
+        NSArray *whitelistPackets = specialPackets[0];
+        NSArray *blacklistDatagrams = specialPackets[1];
         
         if (_dnsLoggingEnabled) {
             [_saveLogExecution executeOnceForInterval];
@@ -457,6 +459,11 @@
                 });
             }
         };
+        
+        if (blacklistDatagrams.count) {
+        
+            [self sendBackBlacklistDnsDatagrams:blacklistDatagrams];
+        }
         
         if (whitelistPackets.count) {
             
@@ -512,28 +519,45 @@
     }
 }
 
-
-- (NSArray <NSData *> *)whitelistDomainsPacketsExcludeFromOutgoingPackets:(NSMutableArray<NSData *> *)packets {
+/**
+ Performs separating of the outgoing packets on whitelisted, blacklisted. 
+ Creates log records if needs it.
+ */
+- (NSArray <NSArray *> *)processingOutgoingPackets:(NSMutableArray<NSData *> *)packets {
 
     NSMutableArray *whitelistPackets = [NSMutableArray array];
+    NSMutableArray *blacklistDatagrams = [NSMutableArray array];
     for (NSData *packet in packets) {
 
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         if (datagram.isRequest) {
 
             BOOL whitelisted = NO;
+            BOOL blacklisted = NO;
             
             //Check that this is request to domain from whitelist.
             NSString *name = [datagram.requests[0] name];
-            if (![NSString isNullOrEmpty:name] && [self.delegate isWhitelistDomain:name]) {
+            if (! [NSString isNullOrEmpty:name]) {
+                
+                // whitelist is processed first
+                if ([self.delegate isWhitelistDomain:name]) {
                 [whitelistPackets addObject:packet];
                 whitelisted = YES;
+                }
+                else if ([self.delegate isBlacklistDomain:name]) {
+                    
+                    [blacklistDatagrams addObject:datagram];
+                    
+                    [packets removeObject:packet];
+                    
+                    blacklisted = YES;
+                }
             }
             
             //Create DNS log record, if logging is enabled.
             if (_dnsLoggingEnabled) {
                 
-                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted];
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
             }
             
         }
@@ -543,14 +567,60 @@
         [packets removeObjectsInArray:whitelistPackets];
     }
     
-    return whitelistPackets;
+    return @[whitelistPackets, blacklistDatagrams];
 }
 
-- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist{
+- (void)sendBackBlacklistDnsDatagrams:(NSArray <APDnsDatagram *> *)dnsDatagrams {
+    
+
+    BOOL logUpdated = NO;
+    NSMutableArray *datagrams = [NSMutableArray arrayWithCapacity:dnsDatagrams.count];
+    for (APDnsDatagram *item in dnsDatagrams) {
+        
+        if ([item convertToBlockingResponse]) {
+            
+            if (_dnsLoggingEnabled) {
+                [self settingDnsRecordForIncomingDnsDatagram:item session:_udpSession];
+                logUpdated = YES;
+            }
+            
+            NSData *datagram = [item generatePayload];
+            if (datagram) {
+                [datagrams addObject:datagram];
+            }
+        }
+    }
+    
+    if (datagrams.count == 0) {
+        return;
+    }
+    
+    if (logUpdated) {
+        [_saveLogExecution executeOnceForInterval];
+    }
+    
+    NSMutableArray *protocols = [NSMutableArray new];
+    
+    //TODO: ONLY IPv4 is supported
+    
+    NSArray *ipPackets = [self ipPacketsWithDatagrams:datagrams];
+    for (int i = 0; i < ipPackets.count; i++) {
+        
+        [protocols addObject:@(AF_INET)];
+    }
+    
+    //write data from remote endpoint into local TUN interface
+    [self.delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
+
+}
+
+- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
     
     APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
     record.requests = datagram.requests;
     
+    
+    record.isBlacklisted = blacklist;
     
     NSString *dstHost;
     NSString *dstPort;
@@ -590,30 +660,36 @@
     for (NSData *packet in packets) {
         
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
-        if (datagram.isResponse) {
-            
-            NSMutableString *sb = [NSMutableString new];
-            for (APDnsResponse *item in datagram.responses) {
-                [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
-            }
+        [self settingDnsRecordForIncomingDnsDatagram:datagram session:session];
+    }
+}
 
-            NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-//#if DEBUG
-//            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-//#else
-            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-//#endif
+- (void)settingDnsRecordForIncomingDnsDatagram:(APDnsDatagram *)datagram session:(NWUDPSession *)session{
+    
+    if (datagram.isResponse) {
+        
+        NSMutableString *sb = [NSMutableString new];
+        for (APDnsResponse *item in datagram.responses) {
+            [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
+        }
+        
+        NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
+        //#if DEBUG
+        //            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+        //#else
+        DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+        //#endif
+        
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
+        
+        record = [_dnsRecordsSet member:record];
+        if (record) {
             
-            APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
-            
-            record = [_dnsRecordsSet member:record];
-            if (record) {
-                
-                record.responses = datagram.responses;
-            }
+            record.responses = datagram.responses;
         }
     }
 }
+
 
 - (void)saveLogRecord:(BOOL)flush {
 
