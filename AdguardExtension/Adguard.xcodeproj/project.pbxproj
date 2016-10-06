@@ -203,6 +203,8 @@
 		658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
 		6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 658237331D07FE6700B824F4 /* ProTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		658237421D08004B00B824F4 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
+		658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */; };
+		658DDFFB1DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFA1DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		6598394A1D182D74005824ED /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
@@ -923,6 +925,10 @@
 		658237381D07FE6700B824F4 /* PacketTunnelProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PacketTunnelProvider.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6582373A1D07FE6700B824F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6589737D1D1BF39E00B91137 /* AEUICommons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICommons.h; sourceTree = "<group>"; };
+		658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsStatusTableViewCell.h; sourceTree = "<group>"; };
+		658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsStatusTableViewCell.m; sourceTree = "<group>"; };
+		658DDFF91DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
+		658DDFFA1DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		659886B91CF74DE9003ECD1C /* Adguard Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adguard Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1282,6 +1288,10 @@
 				655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */,
 				6581C9391D64FC3B00E739CC /* APUIDnsLogRecord.h */,
 				6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */,
+				658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */,
+				658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */,
+				658DDFF91DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.h */,
+				658DDFFA1DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2568,12 +2578,14 @@
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
+				658DDFFB1DA69F5600688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */,
 				659886581CF74DE9003ECD1C /* AESSupport.m in Sources */,
 				659886591CF74DE9003ECD1C /* ACLLogger.m in Sources */,
 				6598865A1CF74DE9003ECD1C /* ACLWildcard.m in Sources */,
 				6598865B1CF74DE9003ECD1C /* ADLocations.m in Sources */,
 				65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				6598865C1CF74DE9003ECD1C /* FMDatabasePool.m in Sources */,
+				658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */,
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */,
