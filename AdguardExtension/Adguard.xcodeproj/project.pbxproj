@@ -49,6 +49,12 @@
 		653AEA041D084B6400AC81B4 /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
 		653AEA051D084B6400AC81B4 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
 		653AEA061D084B6400AC81B4 /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
+		653B4CE71DA5001D00B1FF54 /* AEBlacklistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */; };
+		653B4CE91DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */; };
+		653B4CEA1DA5051200B1FF54 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
+		653B4CEB1DA5051200B1FF54 /* AEBlacklistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */; };
+		653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */; };
+		653C929C1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */; };
 		653DB37E1BF228640064ED91 /* AEUISubscriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */; };
 		653E46711C1ED93100C09E60 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		653E46721C1F343900C09E60 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
@@ -196,7 +202,6 @@
 		6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */; };
 		658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
 		6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 658237331D07FE6700B824F4 /* ProTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		658237411D08004400B824F4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6582373A1D07FE6700B824F4 /* Info.plist */; };
 		658237421D08004B00B824F4 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
@@ -289,7 +294,6 @@
 		659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
 		659886AE1CF74DE9003ECD1C /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		659886B01CF74DE9003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
-		659886EB1CF834FD003ECD1C /* AdguardPro.plist in Resources */ = {isa = PBXBuildFile; fileRef = 659886EA1CF834FD003ECD1C /* AdguardPro.plist */; };
 		659886F21CF83580003ECD1C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
 		659886F31CF83580003ECD1C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
 		659886F41CF83580003ECD1C /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
@@ -355,7 +359,6 @@
 		659887341CF83580003ECD1C /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
 		659887351CF83580003ECD1C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C52B3B1B906105003AF42F /* MainInterface.storyboard */; };
 		659887361CF83580003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
-		659887401CF836F1003ECD1C /* ProActionExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6598873F1CF836F1003ECD1C /* ProActionExtension.plist */; };
 		659887451CF83947003ECD1C /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		659887461CF83947003ECD1C /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DF1C6B7686000F00D7 /* DDContextFilterLogFormatter.m */; };
 		659887471CF83947003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
@@ -389,7 +392,6 @@
 		659887631CF83947003ECD1C /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
 		659887651CF83947003ECD1C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		659887671CF83947003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
-		659887701CF8399D003ECD1C /* ProBlockingExtension.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6598876F1CF8399D003ECD1C /* ProBlockingExtension.plist */; };
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
@@ -799,6 +801,11 @@
 		653843001B9B52B300AABD5A /* AEUISubscriptionLoaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionLoaderController.m; sourceTree = "<group>"; };
 		653843021B9B67C600AABD5A /* AEUILoaderSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILoaderSegue.h; sourceTree = "<group>"; };
 		653843031B9B67C600AABD5A /* AEUILoaderSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILoaderSegue.m; sourceTree = "<group>"; };
+		653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlacklistDomainObject.h; sourceTree = "<group>"; };
+		653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObject.m; sourceTree = "<group>"; };
+		653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObjectTest.m; sourceTree = "<group>"; };
+		653C92991DA2A9D3008BE1C1 /* APDnsResourceClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsResourceClass.h; sourceTree = "<group>"; };
+		653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsResourceClass.m; sourceTree = "<group>"; };
 		653DB37C1BF228640064ED91 /* AEUISubscriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionTableViewCell.h; sourceTree = "<group>"; };
 		653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionTableViewCell.m; sourceTree = "<group>"; };
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
@@ -1454,6 +1461,8 @@
 				655AAC801D37780700E316EA /* APDnsDatagram.m */,
 				655AAC811D37780700E316EA /* APDnsRequest.h */,
 				655AAC821D37780700E316EA /* APDnsRequest.m */,
+				653C92991DA2A9D3008BE1C1 /* APDnsResourceClass.h */,
+				653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */,
 				655AAC831D37780700E316EA /* APDnsResourceType.h */,
 				655AAC841D37780700E316EA /* APDnsResourceType.m */,
 				655AAC851D37780700E316EA /* APDnsResponse.h */,
@@ -1558,6 +1567,8 @@
 				65C12EE41BD4D29F00FFC71C /* Services */,
 				65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */,
 				65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */,
+				653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */,
+				653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */,
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
 				65B40D391BDE807400A9C595 /* stringUIResources.plist */,
@@ -1822,6 +1833,7 @@
 			isa = PBXGroup;
 			children = (
 				65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */,
+				653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
 			);
 			path = AdguardTests;
@@ -2173,7 +2185,7 @@
 		65F398091B7B684700ABCD39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
 					65423D951C89B7C900DD1224 = {
@@ -2315,7 +2327,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				658237411D08004400B824F4 /* Info.plist in Resources */,
 				655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */,
 				658237421D08004B00B824F4 /* tunnel.entitlements in Resources */,
 			);
@@ -2330,7 +2341,6 @@
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */,
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
-				659886EB1CF834FD003ECD1C /* AdguardPro.plist in Resources */,
 				655AACDD1D423B7900E316EA /* Assets.xcassets in Resources */,
 				653153841D00179300C92A73 /* Main.storyboard in Resources */,
 				659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */,
@@ -2350,7 +2360,6 @@
 				659887341CF83580003ECD1C /* stringUIResources.plist in Resources */,
 				659887351CF83580003ECD1C /* MainInterface.storyboard in Resources */,
 				659887361CF83580003ECD1C /* README.txt in Resources */,
-				659887401CF836F1003ECD1C /* ProActionExtension.plist in Resources */,
 				655AACDE1D423B7A00E316EA /* Assets.xcassets in Resources */,
 				653153451CF9935D00C92A73 /* ProActionExtension.entitlements in Resources */,
 			);
@@ -2363,7 +2372,6 @@
 				659887671CF83947003ECD1C /* README.txt in Resources */,
 				653153471CF9939300C92A73 /* ProBlockingExtension.entitlements in Resources */,
 				655AACDF1D423B7B00E316EA /* Assets.xcassets in Resources */,
-				659887701CF8399D003ECD1C /* ProBlockingExtension.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2615,10 +2623,12 @@
 				6581C92B1D6494A200E739CC /* ADProductInfo.m in Sources */,
 				6581C9271D64948200E739CC /* ASDFilterObjects.m in Sources */,
 				655AACB71D3CD38000E316EA /* ACObject.m in Sources */,
+				653C929C1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
 				6581C92F1D6494E600E739CC /* ABECRequest.m in Sources */,
 				653AEA021D084B6400AC81B4 /* DDMultiFormatter.m in Sources */,
 				653AE9F71D084B6400AC81B4 /* ACLJobController.m in Sources */,
 				65B4F0321D5C829100893BA0 /* ADBTable.m in Sources */,
+				653B4CE71DA5001D00B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				65B621251D3139FF0047248F /* APTEndpoint.m in Sources */,
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
@@ -2680,6 +2690,7 @@
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
+				653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
 				659886761CF74DE9003ECD1C /* AEUIUtils.m in Sources */,
 				655AACD31D417C7D00E316EA /* APUIDnsRequestDetail.m in Sources */,
@@ -3007,6 +3018,7 @@
 			files = (
 				65EC9C991BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
+				653B4CE91DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				65EC9C8D1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				65EC9CA11BB9824C00F53F3B /* FMResultSet.m in Sources */,
@@ -3014,7 +3026,9 @@
 				65EC9CAD1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				65EC9CA91BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				65EC9AF51BB9824C00F53F3B /* ABECRequest.m in Sources */,
+				653B4CEB1DA5051200B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				65EC9C951BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
+				653B4CEA1DA5051200B1FF54 /* AEWhitelistDomainObject.m in Sources */,
 				65EC9C911BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				65EC9BD91BB9824C00F53F3B /* ASDatabase.m in Sources */,
@@ -3715,6 +3729,7 @@
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3724,8 +3739,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3764,6 +3781,7 @@
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3773,8 +3791,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

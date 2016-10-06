@@ -33,6 +33,7 @@
 - (void)awakeFromNib {
     // Initialization code
     
+    [super awakeFromNib];
     _on = NO;
 }
 
