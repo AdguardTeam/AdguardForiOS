@@ -78,6 +78,9 @@ void settings(){
 #pragma mark - ABECFilterClient
 /////////////////////////////////////////////////////////////////////
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+
 @implementation ABECFilterClient{
     
     NSString *_platform;
@@ -640,5 +643,7 @@ static ABECFilterClient *ABECFilterSingleton;
     }
     return filterId;
 }
+
+#pragma clang diagnostic pop
 
 @end

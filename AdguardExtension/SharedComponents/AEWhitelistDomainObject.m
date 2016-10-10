@@ -20,9 +20,6 @@
 #import "ACommons/ACLang.h"
 #import "ASDFilterObjects.h"
 
-static NSString *ruleDomainPrefix = MASK_WHITE_LIST AFRU_MASK_START_URL;
-static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
-
 @implementation AEWhitelistDomainObject
 
 - (id)initWithDomain:(NSString *)domain{
@@ -40,7 +37,7 @@ static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
 
 - (id)initWithRule:(ASDFilterRule *)rule{
     
-    if ([self checkExceptionURLRule:rule]) {
+    if ([self checkURLRule:rule]) {
         
         self = [super init]; // [super _init_];
         if (self)
@@ -123,10 +120,10 @@ static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
 #pragma mark Private methods
 /////////////////////////////////////////////////////////////////////
 
-- (BOOL)checkExceptionURLRule:(ASDFilterRule *)rule{
+- (BOOL)checkURLRule:(ASDFilterRule *)rule{
     
-    return ([rule.ruleText hasPrefix:ruleDomainPrefix]
-            && [rule.ruleText hasSuffix:ruleDomainSufix]
+    return ([rule.ruleText hasPrefix:self.ruleDomainPrefix]
+            && [rule.ruleText hasSuffix:self.ruleDomainSufix]
             && [rule.isEnabled boolValue]);
 }
 
@@ -139,11 +136,11 @@ static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
             return rule.ruleText;
         }
         
-        NSRange range = [rule.ruleText rangeOfString:ruleDomainPrefix];
+        NSRange range = [rule.ruleText rangeOfString:self.ruleDomainPrefix];
         if (range.location != NSNotFound) {
             
             NSString *result = [rule.ruleText substringFromIndex:(range.location + range.length)];
-            range = [result rangeOfString:ruleDomainSufix];
+            range = [result rangeOfString:self.ruleDomainSufix];
             if (range.location != NSNotFound) {
                 
                 return [result substringToIndex:range.location];
@@ -159,11 +156,20 @@ static NSString *ruleDomainSufix = AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
     if (![NSString isNullOrEmpty:domain]) {
         
         ASDFilterRule *rule = [ASDFilterRule new];
-        rule.ruleText = [NSString stringWithFormat:@"%@%@%@", ruleDomainPrefix, domain, ruleDomainSufix];
+        rule.ruleText = [NSString stringWithFormat:@"%@%@%@", self.ruleDomainPrefix, domain, self.ruleDomainSufix];
         rule.isEnabled = @(YES);
         return rule;
     }
 
     return nil;
 }
+
+- (NSString *)ruleDomainPrefix {
+    
+    return MASK_WHITE_LIST AFRU_MASK_START_URL;
+}
+- (NSString *)ruleDomainSufix {
+    return AFRU_OPTIONS_DELIMITER AFRU_DOCUMENT_OPTION;
+}
+
 @end

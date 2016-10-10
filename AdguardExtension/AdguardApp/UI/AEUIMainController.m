@@ -36,7 +36,12 @@
 #pragma mark - AEUIMainController Constants
 /////////////////////////////////////////////////////////////////////
 
+#ifdef PRO
+#define ITUNES_APP_ID               @"1126386264"
+#else
 #define ITUNES_APP_ID               @"1047223162"
+#endif
+
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
 #define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
@@ -99,7 +104,7 @@
     [self prepareCheckUpdatesButton];
 
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.navigation = self.navigationController;
     
     if ([[AEService singleton] firstRunInProgress]) {
@@ -297,6 +302,7 @@
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
     }
 
     BOOL enabled = NO;
@@ -363,7 +369,9 @@
     self.checkFiltersCell.accessoryView = activity;
     self.checkFiltersCell.textLabel.textColor =
         self.checkFiltersCell.textLabel.tintColor;
-
+    UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
+    self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits | UIAccessibilityTraitButton;
+    
     _inCheckUpdates = NO;
 
     _observers = [NSMutableArray arrayWithCapacity:3];
@@ -376,6 +384,7 @@
                 usingBlock:^(NSNotification *_Nonnull note) {
 
                   self.checkFiltersCell.textLabel.enabled = NO;
+                  self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
                   UIActivityIndicatorView *activity =
                       (UIActivityIndicatorView *)
                           self.checkFiltersCell.accessoryView;
@@ -430,6 +439,7 @@
                                             dateStyle:NSDateFormatterShortStyle
                                             timeStyle:
                                                 NSDateFormatterShortStyle];
+                          self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
                       }
                     });
 
@@ -482,6 +492,8 @@
 
     self.checkFiltersCell.textLabel.enabled = YES;
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
+    self.checkFiltersCell.accessibilityTraits = self.checkFiltersCell.accessibilityTraits | UIAccessibilityTraitButton;
+
     _inCheckUpdates = NO;
 }
 
