@@ -30,5 +30,7 @@ ACTION_JAVASCRIPT_LIB03 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/A
 ADGUARD_BUNDLE_ID = com.adguard.AdguardExtension
 // Blocking extension bundle identifier
 ADGUARD_EXTENSION_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).extension
+// Downloads session for filter updates identifier
+ADGUARD_FILTER_UPDATES_ID = $(ADGUARD_BUNDLE_ID).filterUpdatesSession
 // Group for shared resources
 ADGUARD_SHARED_RESOURCES_GROUP = group.com.adguard.AdguardExtension

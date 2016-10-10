@@ -25,7 +25,7 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AEAUIMainController.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 
 #define USER_FRIENDLY_DELAY     0.5
@@ -37,7 +37,7 @@
     BOOL _injectScriptSupported;
     NSString *_host;
     NSURL *_iconUrl;
-    AEUIWhitelistDomainObject *_domainObject;
+    AEWhitelistDomainObject *_domainObject;
     NSMutableArray *_observerObjects;
     AEAUIMainController __weak *_mainController;
 }
@@ -52,7 +52,7 @@
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEUIWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
     
     @autoreleasepool {
         
@@ -66,9 +66,9 @@
         
         if (rules.count) {
             
-            AEUIWhitelistDomainObject *obj;
+            AEWhitelistDomainObject *obj;
             for (ASDFilterRule *rule in rules) {
-                obj = [[AEUIWhitelistDomainObject alloc] initWithRule:rule];
+                obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
                 if (obj) {
                     break;
                 }
@@ -94,7 +94,7 @@
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
-    NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
+    __block NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -107,7 +107,7 @@
                 _url = [NSURL URLWithString:urlString];
             }
             _host = [_url hostWithPort];
-            //            _host = url.host;
+            //            _host = url.host;x
             
             _injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
             
@@ -118,6 +118,7 @@
             else if ([NSString isNullOrEmpty:_host]) {
                 
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
+                errorMessage = NSLocalizedString(@"The hostname is not obtained. Perhaps the page is not yet loaded.", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
                 

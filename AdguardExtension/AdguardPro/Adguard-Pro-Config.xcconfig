@@ -9,8 +9,10 @@
 
 // Global product settings
 AG_PRODUCT = Adguard Pro
-AG_VERSION = 1.0.0
-AG_BUILD = 16
+AG_VERSION = 1.1.0
+AG_BUILD = 21
+
+AG_GIT_TAG_SUFIX = pro
 
 // URL scheme for receiving commands in Adguard main app from Safari
 ADGUARD_URL_SCHEME = adguard-pro

@@ -18,7 +18,7 @@
 
 @import NetworkExtension;
 
-@class APTUdpProxySession, PacketTunnelProvider, APDnsLogRecord;
+@class APTUdpProxySession, PacketTunnelProvider;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -39,6 +39,17 @@
 @property (weak, readonly) PacketTunnelProvider *provider;
 
 /**
+ Sets addresses of the DNS servers.
+ */
+- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+
+/**
+ Sets whitelist domains names.
+ */
+- (void)setWhitelistDomains:(NSArray <NSString *> *)domains;
+
+/**
  Make the initial readPacketsWithCompletionHandler call.
  */
 - (void)startHandlingPackets;
@@ -54,17 +65,13 @@
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
 
 /**
- Removes all records from log of the DNS activity.
+ Checks domain name, that it is included in whitelist.
  */
-- (void)clearDnsActivityLog;
-/**
- Returns log records of the DNS activity.
- */
-- (NSArray <APDnsLogRecord *> *)dnsActivityLogRecords;
+- (BOOL)isWhitelistDomain:(NSString *)domainName;
 
 /**
- Endpoints sessions use this method for writing log records.
+ Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
-- (void)writeToDnsActivityLog:(NSArray <APDnsLogRecord *> *)records;
+- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 @end

@@ -18,6 +18,9 @@
 #import <Foundation/Foundation.h>
 #import "AESharedResources.h"
 
+
+@class APDnsLogRecord;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources Constants
 
@@ -27,11 +30,14 @@
 extern NSString *APDefaultsDnsLoggingEnabled;
 
 
-// Commands for controlling "DNS activity log", between tunnel provider extension and host application.
-extern NSString *APMDnsLoggingEnabled;
-extern NSString *APMDnsLoggingDisabled;
-extern NSString *APMDnsLoggingGiveRecords;
-extern NSString *APMDnsLoggingClearLog;
+typedef NS_ENUM(Byte, APHost2TunnelMessageType){
+    
+    // Commands for controlling "DNS activity log", between tunnel provider extension and host application.
+    APHTMLoggingEnabled = 1,
+    APHTMLoggingDisabled,
+    // Command for notification of the tunnel provider extension that domains whitelist were changed.
+    APHTMWhitelistDomainsReload
+};
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -44,4 +50,14 @@ extern NSString *APMDnsLoggingClearLog;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
++ (NSArray <APDnsLogRecord *> *)readDnsLog;
+
++ (BOOL)removeDnsLog;
+
++ (void)writeToDnsLogRecords:(NSArray <APDnsLogRecord *> *)logRecords;
+
++ (APHost2TunnelMessageType)host2tunnelMessageType:(NSData *)messageData;
++ (NSData *)host2tunnelMessageLogEnabled;
++ (NSData *)host2tunnelMessageLogDisabled;
++ (NSData *)host2tunnelMessageWhitelistReload;
 @end
