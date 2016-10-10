@@ -1984,7 +1984,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Advanced Settings" id="Iyo-zw-Pn7"/>
                     <connections>
+                        <outlet property="autoUpdateCell" destination="Noi-hj-Rv5" id="qIT-ja-mXO"/>
                         <outlet property="simplifiedButton" destination="PT4-sR-qS2" id="3B1-Jw-O6U"/>
+                        <outlet property="useSimplifiedCell" destination="LGn-cv-bzc" id="5U3-iV-eIc"/>
                         <outlet property="wifiButton" destination="Psp-BF-NJm" id="5I9-kE-4TG"/>
                     </connections>
                 </tableViewController>
