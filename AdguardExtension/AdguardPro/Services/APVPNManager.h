@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class  APDnsLogRecord;
+@class  APDnsLogRecord, ASDFilterRule;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
@@ -139,8 +139,10 @@ extern NSString *APVpnManagerErrorDomain;
 - (void)obtainDnsLogRecords:(void (^)(NSArray <APDnsLogRecord *> *records))completionBlock;
 
 /**
- Sends message to tunnel extension, which notifies that extension needs reload whitelist of the domains.
+ Checks that rule is type of whitelist or blacklist,
+ if so, sends message to tunnel extension,
+ which notifies that extension needs reload whitelist/blacklist of the domains.
  */
-- (void)sendReloadWhitelist;
+- (void)sendReloadUserfilterDataIfRule:(ASDFilterRule *)rule;
 
 @end
