@@ -206,9 +206,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 [_connectionHandler setDnsActivityLoggingEnabled:NO];
                 break;
                 
-            case APHTMWhitelistDomainsReload:
+            case APHTMUserfilterDataReload:
                 
-                DDLogInfo(@"(PacketTunnelProvider) Whitelist domain changed. Reconnecting..");
+                DDLogInfo(@"(PacketTunnelProvider) User Filter changed. Reconnecting..");
                 [self stopVPN];
 
                 break;

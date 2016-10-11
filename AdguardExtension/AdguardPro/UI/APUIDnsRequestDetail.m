@@ -26,17 +26,32 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
-#import "AEWhitelistDomainObject.h"
+#import "AEBlacklistDomainObject.h"
 #import "ACommons/ACSystem.h"
 #import "AEUIUtils.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
+typedef enum {
+
+    DomainControllNone = 0,
+    DomainControllAddToWhitelist,
+    DomainControllRemoveFromWhitelist,
+    DomainControllAddToBlacklist,
+    DomainControllRemoveFromBlacklist
+} TDomainControllCellType;
+
 @interface APUIDnsRequestDetail ()
 
 @end
 
-@implementation APUIDnsRequestDetail
+
+
+@implementation APUIDnsRequestDetail {
+    
+    TDomainControllCellType _domainControllCellType;
+    ASDFilterRule *_appropriateRuleForDomain;
+}
 
 static NSDateFormatter *_timeFormatter;
 
@@ -52,6 +67,8 @@ static NSDateFormatter *_timeFormatter;
     
     [super viewDidLoad];
 
+    _domainControllCellType = DomainControllNone;
+    
     self.hideSectionsWithHiddenRows = YES;
     APDnsRequest *request = self.logRecord.requests[0];
     
@@ -143,37 +160,56 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    [self setupWhitelistCell];
+    [self setupDomainControllCell];
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)clickWhitelist:(id)sender {
+- (IBAction)clickDomainControll:(id)sender {
 
-    if (!self.whitelistCell.textLabel.enabled) {
+    if (_domainControllCellType == DomainControllNone || !_appropriateRuleForDomain) {
         return;
     }
-    
-    AEWhitelistDomainObject *domainRule = [[AEWhitelistDomainObject alloc] initWithDomain:self.nameCell.longLabel.text];
-
-    if (!domainRule) {
-        return;
-    }
-
     
     [[[AEService singleton] antibanner] beginTransaction];
-    
-    [AEUIUtils addWhitelistRule:domainRule.rule toJsonWithController:self completionBlock:^{
+
+    dispatch_block_t completionBlock = ^(){
         
         [[[AEService singleton] antibanner] endTransaction];
-        [self setupWhitelistCell];
-        [[APVPNManager singleton] sendReloadWhitelist];
+        [[APVPNManager singleton] sendReloadUserfilterDataIfRule:_appropriateRuleForDomain];
+        [self setupDomainControllCell];
+    };
+    
+
+    if (_domainControllCellType == DomainControllAddToWhitelist) {
         
-    } rollbackBlock:^{
+        [AEUIUtils addWhitelistRule:_appropriateRuleForDomain toJsonWithController:self completionBlock:completionBlock rollbackBlock:^{
+            
+            [[[AEService singleton] antibanner] rollbackTransaction];
+        }];
+    }
+    else if (_domainControllCellType == DomainControllAddToBlacklist) {
+    
+        [AEUIUtils addRule:_appropriateRuleForDomain withController:self completionBlock:completionBlock rollbackBlock:^{
+            
+            [[[AEService singleton] antibanner] rollbackTransaction];
+        }];
+    }
+    else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
         
-        [[[AEService singleton] antibanner] rollbackTransaction];
+        [AEUIUtils removeWhitelistRule:_appropriateRuleForDomain toJsonWithController:self completionBlock:completionBlock rollbackBlock:^{
+            
+            [[[AEService singleton] antibanner] rollbackTransaction];
+        }];
+       
+    }
+    else if (_domainControllCellType == DomainControllRemoveFromBlacklist) {
         
-    }];
+        [AEUIUtils removeRule:_appropriateRuleForDomain withController:self completionBlock:completionBlock rollbackBlock:^{
+            
+            [[[AEService singleton] antibanner] rollbackTransaction];
+        }];
+    }
 }
 
 - (IBAction)longPressOnName:(id)sender {
@@ -190,41 +226,72 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods
 
-- (void)setupWhitelistCell {
+- (void)setupDomainControllCell {
 
     @autoreleasepool {
-        self.whitelistCell.textLabel.textColor = self.whitelistCell.textLabel.tintColor;
+        
+        _domainControllCellType = DomainControllNone;
+        _appropriateRuleForDomain = nil;
+        
+        self.domainControllCell.textLabel.textColor = self.domainControllCell.textLabel.tintColor;
+
+        APDnsRequest *request = self.logRecord.requests[0];
 
         NSArray *rules = [[[AEService singleton] antibanner]
             rulesForFilter:@(ASDF_USER_FILTER_ID)];
-
-        NSMutableArray *wRules = [NSMutableArray array];
-        AEWhitelistDomainObject *object;
-        for (ASDFilterRule *item in rules) {
-
-            object = [[AEWhitelistDomainObject alloc] initWithRule:item];
-            if (object) {
-                [wRules addObject:object];
-            }
-        }
-
-        wRules = [wRules valueForKey:@"domain"];
-        APDnsRequest *request = self.logRecord.requests[0];
-
-        if (self.logRecord.preferredResponse.blocked) {
+        rules = [rules
+                 filteredArrayUsingPredicate:
+                 [NSPredicate
+                  predicateWithFormat:@"ruleText CONTAINS[cd] %@",
+                  request.name]];
+        
+        AEWhitelistDomainObject *whitelistObject;
+        AEBlacklistDomainObject *blacklistObject;
+        
+        if (rules.count) {
             
-            [self cells:@[self.whitelistCell] setHidden:NO];
-            if ([wRules containsObject:request.name]){
-                self.whitelistCell.textLabel.enabled = NO;
+            
+            
+            AEWhitelistDomainObject *object;
+            for (ASDFilterRule *item in rules) {
+                
+                object = [[AEWhitelistDomainObject alloc] initWithRule:item];
+                if (object && [object.domain isEqualToString:request.name]) {
+                    whitelistObject = object;
+                }
+                else {
+                    
+                    object = [[AEBlacklistDomainObject alloc] initWithRule:item];
+                    if (object && [object.domain isEqualToString:request.name] ) {
+                        blacklistObject = (AEBlacklistDomainObject *)object;
+                    }
+                }
             }
-            else{
-                self.whitelistCell.textLabel.enabled = YES;
-            }
+            
+        }
+        
+        if (whitelistObject){
+            self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Whitelist", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. Text on button");
+            _domainControllCellType = DomainControllRemoveFromWhitelist;
+            _appropriateRuleForDomain = whitelistObject.rule;
+        }
+        else if (blacklistObject) {
+            self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. Text on button");
+            _domainControllCellType = DomainControllRemoveFromBlacklist;
+            _appropriateRuleForDomain = blacklistObject.rule;
         }
         else {
             
-            [self cells:@[self.whitelistCell] setHidden:YES];
-            self.whitelistCell.textLabel.enabled = NO;
+            if (self.logRecord.preferredResponse.blocked) {
+                self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. Text on button");
+                _domainControllCellType = DomainControllAddToWhitelist;
+                _appropriateRuleForDomain = [[[AEWhitelistDomainObject alloc] initWithDomain:request.name] rule];
+            }
+            else {
+                self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. Text on button");
+                _domainControllCellType = DomainControllAddToBlacklist;
+                _appropriateRuleForDomain = [[[AEBlacklistDomainObject alloc] initWithDomain:request.name] rule];
+            }
         }
         
         [self reloadDataAnimated:YES];

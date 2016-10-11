@@ -34,6 +34,30 @@
 
 /**
  Method shows modal dialog with "standard" loading message,
+ then adds rule and reloads content blocking JSON.
+ On success performs completionBlock,
+ on failure shows error message and performs rollbackBlock.
+ Blocks are performed synchronously in main queue.
+ 
+ @param completionBlock Block which is performed on success. May be nil.
+ @param rollbackBlock Block which is performed on failure. May be nil.
+ */
++ (void)addRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
+
+/**
+ Method shows modal dialog with "standard" loading message,
+ then removes rule and reloads content blocking JSON.
+ On success performs completionBlock,
+ on failure shows error message and performs rollbackBlock.
+ Blocks are performed synchronously in main queue.
+ 
+ @param completionBlock Block which is performed on success. May be nil.
+ @param rollbackBlock Block which is performed on failure. May be nil.
+ */
++ (void)removeRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
+
+/**
+ Method shows modal dialog with "standard" loading message,
  then adds whitelist rule and modifies content blocking JSON.
  On success performs completionBlock,
  on failure shows error message and performs rollbackBlock.
