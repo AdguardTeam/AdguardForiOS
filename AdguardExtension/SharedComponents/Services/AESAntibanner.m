@@ -22,6 +22,7 @@
 #import "ASDatabase/ASDatabase.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "AESharedResources.h"
+#import "AEBlacklistDomainObject.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
 
@@ -398,7 +399,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         } ];
         
     }});
-    
+
     return added;
 }
 

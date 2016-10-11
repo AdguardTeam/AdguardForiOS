@@ -20,6 +20,8 @@
 #import "AEService.h"
 #import "AEUILoadingModal.h"
 #import "ASDFilterObjects.h"
+#import "AESAntibanner.h"
+#import "AEFilterRuleSyntaxConstants.h"
 
 @implementation AEUIUtils
 
@@ -32,6 +34,16 @@
             [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
         }];
     }];
+}
+
++ (void)addRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
+    
+    [self addOrRemove:NO Rule:rule withController:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+}
+
++ (void)removeRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
+
+    [self addOrRemove:YES Rule:rule withController:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
 }
 
 + (void)addWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
@@ -81,5 +93,46 @@
         dispatch_sync(dispatch_get_main_queue(), completionBlock);
     }
 }
+
++ (void)addOrRemove:(BOOL)remove Rule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
+    
+    if (!(rule && controller)) {
+        return;
+    }
+    
+    [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
+        
+        NSError *error;
+        if (remove)
+            [[AEService singleton] removeRules:@[rule]];
+        else
+            error = [[AEService singleton] addRule:rule temporarily:NO];
+        
+        if (error){
+            
+            if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+                
+                [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
+            }
+        }
+        else {
+            
+            // if rule is not comment decrease counter of the new rules
+            if (![rule.ruleText hasPrefix:COMMENT]) {
+                
+                [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
+                    
+                    [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+                }];
+                
+                return;
+            }
+        }
+        
+        [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+        
+    }];
+}
+
 
 @end
