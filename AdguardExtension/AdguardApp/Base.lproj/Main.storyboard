@@ -444,8 +444,8 @@
                                             <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add to Whitelist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kvk-Bm-O0j">
-                                                    <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kvk-Bm-O0j">
+                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -468,19 +468,19 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Request Detail" id="UG4-lw-q0k"/>
                     <connections>
+                        <outlet property="domainControllCell" destination="V2q-UF-ZBv" id="b3U-u3-8sU"/>
                         <outlet property="nameCell" destination="f0x-F3-fY8" id="IZe-zK-0jq"/>
                         <outlet property="responsesCell" destination="1H3-rz-b7i" id="m1d-y3-Js3"/>
                         <outlet property="serverCell" destination="kcc-Th-lyE" id="JPf-4f-Ele"/>
                         <outlet property="statusCell" destination="fkh-3y-MIH" id="ucP-Ww-I9k"/>
                         <outlet property="timeCell" destination="oBf-ZG-HJc" id="5Xo-dP-Vhj"/>
                         <outlet property="typeCell" destination="YCb-Gw-hsO" id="KJq-fb-od9"/>
-                        <outlet property="whitelistCell" destination="V2q-UF-ZBv" id="b3U-u3-8sU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzw-az-rGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="uKX-tI-piF">
                     <connections>
-                        <action selector="clickWhitelist:" destination="dcq-l9-8VQ" id="BYX-dK-bsm"/>
+                        <action selector="clickDomainControll:" destination="dcq-l9-8VQ" id="BYX-dK-bsm"/>
                     </connections>
                 </tapGestureRecognizer>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="2Bw-Wk-BAj" userLabel="Name Gesture">
