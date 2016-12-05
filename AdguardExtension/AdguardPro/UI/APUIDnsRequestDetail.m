@@ -88,13 +88,17 @@ static NSDateFormatter *_timeFormatter;
     if (self.logRecord.responses.count) {
         
         // Set status cell
-        if (self.logRecord.preferredResponse.blocked) {
-           
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was blocked. this will be shown as status text.");
+        if (self.logRecord.isBlacklisted){
+            
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by User Filter", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was blocked be rule in User Filter, this will be shown as status text.");
         }
         else if (self.logRecord.isWhitelisted){
             
             self.statusCell.detailTextLabel.text = NSLocalizedString(@"Exception", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was for domain from the whitelist, this will be shown as status text.");
+        }
+        else if (self.logRecord.preferredResponse.blocked) {
+            
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by DNS", @"(APUIDnsRequestDetail) PRO version. On the Adguard DNS -> DNS Requests screen -> Request Detail. If this DNS request was blocked be DNS server, this will be shown as status text.");
         }
         else {
             
