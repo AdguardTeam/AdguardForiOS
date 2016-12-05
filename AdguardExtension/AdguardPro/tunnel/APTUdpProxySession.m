@@ -535,7 +535,7 @@
             BOOL whitelisted = NO;
             BOOL blacklisted = NO;
             
-            //Check that this is request to domain from whitelist.
+            //Check that this is request to domain from whitelist or blacklist.
             NSString *name = [datagram.requests[0] name];
             if (! [NSString isNullOrEmpty:name]) {
                 
