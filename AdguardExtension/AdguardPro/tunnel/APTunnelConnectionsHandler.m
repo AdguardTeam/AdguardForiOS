@@ -47,8 +47,8 @@
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
     
-    NSSet *_whitelistDomains;
-    NSSet *_blacklistDomains;
+    NSArray <NSString *> *_whitelistDomains;
+    NSArray <NSString *> *_blacklistDomains;
     
     BOOL _packetFlowObserver;
     
@@ -130,7 +130,7 @@
     
     if (domains.count) {
         
-        _whitelistDomains = [NSSet setWithArray:domains];
+        _whitelistDomains = [domains copy];
     }
 
     OSSpinLockUnlock(&_whitelistDomainLock);
@@ -144,7 +144,7 @@
     
     if (domains.count) {
         
-        _blacklistDomains = [NSSet setWithArray:domains];
+        _blacklistDomains = [domains copy];
     }
     
     OSSpinLockUnlock(&_blacklistDomainLock);
@@ -182,7 +182,7 @@
     BOOL result = NO;
     OSSpinLockLock(&_whitelistDomainLock);
     
-    result = [_whitelistDomains containsObject:domainName];
+    result = [self checkDomain:domainName withList:_whitelistDomains];
     
     OSSpinLockUnlock(&_whitelistDomainLock);
     
@@ -194,7 +194,7 @@
     BOOL result = NO;
     OSSpinLockLock(&_blacklistDomainLock);
     
-    result = [_blacklistDomains containsObject:domainName];
+    result = [self checkDomain:domainName withList:_blacklistDomains];
     
     OSSpinLockUnlock(&_blacklistDomainLock);
     
@@ -341,6 +341,29 @@
           [session appendPackets:obj];
         }];
     }
+}
+
+- (BOOL)checkDomain:(__unsafe_unretained NSString *)domainName withList:(__unsafe_unretained NSArray <NSString *> *)domainList {
+    
+    BOOL result = NO;
+    
+    for (NSString *item in domainList) {
+        
+        if ([item hash] == [domainName hash]) {
+            if ([domainName isEqualToString:item]) {
+                result = YES;
+                break;
+            }
+        }
+        
+        NSString *domain = [@"." stringByAppendingString:item];
+        if ([domainName hasSuffix:domain]) {
+            result = YES;
+            break;
+        }
+    }
+
+    return result;
 }
 
 @end

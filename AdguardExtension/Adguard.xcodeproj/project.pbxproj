@@ -457,6 +457,8 @@
 		65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
+		65C672F41DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C672F31DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m */; };
+		65C672F71DF5BC45001BE6C5 /* APTunnelConnectionsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B11D2BAA6300CF8C11 /* APTunnelConnectionsHandler.m */; };
 		65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
 		65C98AAD1D3676C600E4B57D /* APDnsResourceTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C98AAC1D3676C600E4B57D /* APDnsResourceTypeTest.m */; };
 		65C98AAE1D367BAF00E4B57D /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
@@ -1001,6 +1003,7 @@
 		65C52B391B906105003AF42F /* ActionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ActionViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65C52B3C1B906105003AF42F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		65C52B3E1B906105003AF42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65C672F31DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTunnelConnectionHandlerTest.m; sourceTree = "<group>"; };
 		65C98AA21D3661B500E4B57D /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		65C98AAC1D3676C600E4B57D /* APDnsResourceTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsResourceTypeTest.m; sourceTree = "<group>"; };
 		65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEWhitelistDomainObject.h; sourceTree = "<group>"; };
@@ -1603,6 +1606,7 @@
 				65B6211C1D2E962F0047248F /* APTDnsRequestTest.m */,
 				65B621061D2D3D9F0047248F /* Info.plist */,
 				65C98AAC1D3676C600E4B57D /* APDnsResourceTypeTest.m */,
+				65C672F31DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m */,
 			);
 			path = AdguardProTests;
 			sourceTree = "<group>";
@@ -2130,6 +2134,7 @@
 					658237321D07FE6700B824F4 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = N33TQXN8C7;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2138,6 +2143,7 @@
 					};
 					659886481CF74DE9003ECD1C = {
 						DevelopmentTeam = N33TQXN8C7;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2158,6 +2164,7 @@
 					};
 					65B621011D2D3D9E0047248F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = N33TQXN8C7;
 						TestTargetID = 659886481CF74DE9003ECD1C;
 					};
 					65C52B351B906105003AF42F = {
@@ -2775,6 +2782,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65C672F71DF5BC45001BE6C5 /* APTunnelConnectionsHandler.m in Sources */,
 				655AAC921D37780700E316EA /* APDnsResponse.m in Sources */,
 				65B6211B1D2E845D0047248F /* APTDnsRequest.m in Sources */,
 				65C98AAD1D3676C600E4B57D /* APDnsResourceTypeTest.m in Sources */,
@@ -2784,6 +2792,7 @@
 				65B621171D2E78AD0047248F /* APUDPPacketTest.m in Sources */,
 				655AAC8F1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				65B621221D2F95EF0047248F /* APTUdpProxySession.m in Sources */,
+				65C672F41DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m in Sources */,
 				65B621261D3139FF0047248F /* APTEndpoint.m in Sources */,
 				65B621101D2D41880047248F /* APIPPacket.m in Sources */,
 				655AAC9D1D37821200E316EA /* APDnsLogRecord.m in Sources */,
@@ -3299,6 +3308,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -3308,6 +3318,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6adfa0d3-1dd7-4997-ad7a-bc6e11f4efe6";
+				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro.tunnel";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -3321,11 +3333,14 @@
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/tunnel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).tunnel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6adfa0d3-1dd7-4997-ad7a-bc6e11f4efe6";
+				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro.tunnel";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -3338,12 +3353,15 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = $inherited;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1a90a74b-f871-452e-b8b6-caad3cdf04bb";
+				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro";
 				USER_HEADER_SEARCH_PATHS = $inherited;
 			};
 			name = Debug;
@@ -3356,12 +3374,15 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = $inherited;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1a90a74b-f871-452e-b8b6-caad3cdf04bb";
+				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro";
 				USER_HEADER_SEARCH_PATHS = $inherited;
 			};
 			name = Release;
@@ -3460,6 +3481,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -3478,6 +3500,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = AdguardProTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
