@@ -878,11 +878,12 @@ static AEService *singletonService;
             
         } while (0);
 
-        if (err && error) {
-            *error = err;
-        }
     }
 
+    if (err && error) {
+        *error = err;
+    }
+    
     return convertResult;
 }
 
