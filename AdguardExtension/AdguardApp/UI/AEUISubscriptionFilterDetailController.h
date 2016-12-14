@@ -18,11 +18,11 @@
 #import "StaticDataTableViewController.h"
 #import "AEUILongLabelViewCell.h"
 
-@class ASDFilterMetadata, AEUISubscriptionController;
+@class ASDFilterMetadata, AEUISubscriptionController, AEUISubscriptionSectionFilterMetadata;
 
 @interface AEUISubscriptionFilterDetailController : StaticDataTableViewController <UITableViewDelegate>
 
-@property (nonatomic) ASDFilterMetadata *meta;
+@property (nonatomic) AEUISubscriptionSectionFilterMetadata *meta;
 @property (nonatomic, weak) AEUISubscriptionController *parent;
 @property (nonatomic, weak) NSIndexPath  *selectedFilterCellPath;
 

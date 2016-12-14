@@ -50,7 +50,8 @@
                                                                        @"subscriptionUrl",
                                                                        @"rulesCount",
                                                                        @"langs",
-                                                                       @"localizations"
+                                                                       @"i18nName",
+                                                                       @"i18nDescription"
                                                                        
 ]];
    
@@ -75,7 +76,7 @@
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-+ (NSMutableArray *)obtainSectionsObjectsFromMetadatas:(NSArray *)metadatas groups:(NSArray *)groups{
++ (NSMutableArray *)obtainSectionsObjectsFromMetadatas:(NSArray *)metadatas groups:(NSArray *)groups i18n:(ABECFilterClientLocalization *)i18n{
     
     @autoreleasepool {
         
@@ -157,7 +158,7 @@
                 if (index) {
                     
                     group = groups[[index unsignedIntegerValue]];
-                    object.name = group.localization.name;
+                    object.name = [[i18n.groups localizationForGroup:group] name];
                     if (!object.name) {
                         object.name = [NSString new];
                     }
@@ -166,7 +167,12 @@
                 }
             }
 
-            [filters addObject:[AEUISubscriptionSectionFilterMetadata copyFromMetadata:item]];
+            AEUISubscriptionSectionFilterMetadata *obj = [AEUISubscriptionSectionFilterMetadata copyFromMetadata:item];
+            ASDFilterLocalization *localization = [i18n.filters localizationForFilter:item];
+            obj.i18nName = localization.name;
+            obj.i18nDescription = localization.descr;
+            [filters addObject:obj];
+            
         }
 
         // end last
@@ -189,8 +195,10 @@
         dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
           @autoreleasepool {
 
-              NSMutableArray *filters = [[[[AEService singleton] antibanner]
-                  filtersForSubscribe:refresh] mutableCopy];
+              ABECFilterClientMetadata *metadata = [[[AEService singleton] antibanner] metadataForSubscribe:refresh];
+              ABECFilterClientLocalization *i18n = [[[AEService singleton] antibanner] i18nForSubscribe:refresh];
+              
+              NSMutableArray <ASDFilterMetadata *> *filters = [metadata.filters mutableCopy];
               NSArray *installedFilters =
                   [[[AEService singleton] antibanner] filters];
               ASDFilterMetadata *meta;
@@ -225,8 +233,7 @@
                   .networkActivityIndicatorVisible = NO;
               NSArray *loadedFilters = [AEUISubscriptionSectionObject
                   obtainSectionsObjectsFromMetadatas:
-                      filters groups:[[[AEService singleton] antibanner]
-                                         groupsForSubscribe:YES]];
+                                        filters groups:metadata.groups i18n:i18n];
 
               dispatch_async(dispatch_get_main_queue(), ^{
                 completionBlock(loadedFilters);
