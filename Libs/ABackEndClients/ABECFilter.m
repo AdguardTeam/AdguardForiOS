@@ -329,6 +329,9 @@ static ABECFilterClient *ABECFilterSingleton;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private Methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+
 /**
  Loads entity from back-end server.
  
@@ -372,6 +375,8 @@ static ABECFilterClient *ABECFilterSingleton;
     
     return nil;
 }
+
+#pragma clang diagnostic pop
 
 /**
  Getting background session for downloading tasks.
