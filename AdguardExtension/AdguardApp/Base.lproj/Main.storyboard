@@ -450,7 +450,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kvk-Bm-O0j">
-                                                    <frame key="frameInset" minX="15" width="345" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -829,7 +829,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="five-stars" translatesAutoresizingMaskIntoConstraints="NO" id="iW2-Vv-cu0">
-                                                    <rect key="frame" x="235" y="10" width="107" height="25"/>
+                                                    <rect key="frame" x="235" y="9" width="107" height="25"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1454,7 +1454,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-QK-TRf">
-                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1572,7 +1572,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="LMm-IB-jZF">
-                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1914,10 +1914,10 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-Gf-KoQ">
-                                <rect key="frame" x="37.5" y="416" width="300" height="235"/>
+                                <rect key="frame" x="37.5" y="416" width="300" height="78.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Loading filters to Safari. Please do not turn off Adguard, the process will take no more than 30 seconds..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78D-xK-lgr">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="227"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1926,7 +1926,7 @@
                                         </variation>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WmF-5x-G2b">
-                                        <rect key="frame" x="0.0" y="235" width="300" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="58.5" width="300" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <constraints>

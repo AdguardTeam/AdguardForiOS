@@ -202,7 +202,7 @@
 
 - (IBAction)clickCheckForUpdates:(id)sender {
     if (!_inCheckUpdates) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES interactive:YES];
     }
 }
 

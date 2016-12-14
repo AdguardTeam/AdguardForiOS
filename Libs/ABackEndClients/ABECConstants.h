@@ -18,36 +18,8 @@
 #ifndef Adguard_ABECConstants_h
 #define Adguard_ABECConstants_h
 
-/**
- iOS platform identificator.
- */
-#define ABEC_PLATFORM_IOS       @"ABEC_PLATFORM_IOS"
-/**
- OS X platform identificator.
- */
-#define ABEC_PLATFORM_OSX       @"ABEC_PLATFORM_OSX"
+#define ABEC_FILTER_URL_BASE         @"https://filters.adtidy.org/ios/"
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Only iOS code here
-/////////////////////////////////////////////////////////////////////
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-
-#define ABEC_DEFAULT_PLATFORM          ABEC_PLATFORM_IOS
-
-#define ABEC_BACKEND_READ_TIMEOUT      10
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Only OS X code here
-/////////////////////////////////////////////////////////////////////
-#elif TARGET_OS_MAC
-
-#define ABEC_DEFAULT_PLATFORM          ABEC_PLATFORM_OSX
-
-#define ABEC_BACKEND_READ_TIMEOUT      60
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Common code here
-/////////////////////////////////////////////////////////////////////
-#endif
+#define ABEC_BACKEND_READ_TIMEOUT      30
 
 #endif

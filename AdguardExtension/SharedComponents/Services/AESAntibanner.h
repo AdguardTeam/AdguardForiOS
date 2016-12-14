@@ -27,7 +27,7 @@
 #define AS_CHECK_FILTERS_UPDATES_LEEWAY                    AS_EXECUTION_LEEWAY
 #define AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD            AS_EXECUTION_PERIOD_TIME*6
 
-#define AS_FETCH_UPDATE_STATUS_PERIOD                       (AS_CHECK_FILTERS_UPDATES_PERIOD/3)
+#define AS_FETCH_UPDATE_STATUS_PERIOD                       (AS_CHECK_FILTERS_UPDATES_PERIOD / 2)
 
 /// Timeout for downloading of data from the remote services
 #define AS_URL_LOAD_TIMEOUT                                60
@@ -46,7 +46,8 @@ extern NSString *ASAntibannerUpdateFilterRulesNotification;
 
 /// When anitbanner started update process
 extern NSString *ASAntibannerStartedUpdateNotification;
-
+/// When antibanner does not start update process, according to internal reason.
+extern NSString *ASAntibannerDidntStartUpdateNotification;
 /// When some part of the update process completed
 extern NSString *ASAntibannerUpdatePartCompletedNotification;
 
@@ -120,6 +121,11 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  all stored in database groups.
  */
 - (NSArray *)groups;
+/**
+ Obtains groups localization information.
+ @return ASDGroupsI18n object that contains data from database.
+ */
+- (ASDGroupsI18n *)groupsI18n;
 
 /**
  Obtain filters information.
@@ -127,6 +133,11 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  all stored in database antibanner filters.
  */
 - (NSArray *)filters;
+/**
+ Obtains filters localization information.
+ @return ASDFiltersI18n object that contains data from database.
+ */
+- (ASDFiltersI18n *)filtersI18n;
 
 /**
  Obtain rules for filter.
@@ -197,30 +208,30 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
 - (BOOL)removeRules:(NSArray *)ruleIds filterId:(NSNumber *)filterId;
 
 /**
- Retuns list of filters.
- Gets fresh list of filters.
+ Retuns metadata.
+ Gets fresh metadata.
  Tries load metadata from backend service if need it
- or obtains filters metadata from default DB.
+ or obtains metadata from default DB.
  Request to backend is performed synchronous.
  
  @param refresh Makes attempting to download metadata from the backend forced.
  
- @return Array of ASDFilterMetadata objects or nil if error occurs.
+ @return ABECFilterClientMetadata object or nil if error occurs.
  */
-- (NSArray *)filtersForSubscribe:(BOOL)refresh;
+- (ABECFilterClientMetadata *)metadataForSubscribe:(BOOL)refresh;
 
 /**
- Retuns list of groups.
- Gets fresh list of groups.
- Tries load metadata from backend service if need it
- or obtains groups metadata from default DB.
+ Retuns localizations.
+ Gets fresh localizations.
+ Tries load localizations from backend service if need it
+ or obtains localizations from default DB.
  Request to backend is performed synchronous.
  
- @param refresh Makes attempting to download metadata from the backend forced.
+ @param refresh Makes attempting to download localizations from the backend forced.
  
- @return Array of ASDFilterGroup objects or nil if error occurs.
+ @return ABECFilterClientLocalization object or nil if error occurs.
  */
-- (NSArray *)groupsForSubscribe:(BOOL)refresh;
+- (ABECFilterClientLocalization *)i18nForSubscribe:(BOOL)refresh;
 
 /**
  Performs subscription to filters.
@@ -241,13 +252,27 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
 
 /**
  Starts updating of filters from Backend service.
+ 
  */
-- (void)startUpdatingInteractive:(BOOL)interactive;
 /**
- Call this method after starting of the app, 
+ Starts updating of filters from Backend service.
+
+ @param forced If set to YES, method ignores filter update periods.
+ 
+ @return Return YES if update process started.
+ */
+- (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive;
+/**
+ Call this method after starting of the app, from 'handleEventsForBackgroundURLSession' app delegate.
+ This must adjust right processing for backgound downloads of the filter updates.
+ */
+- (void)repairUpdateStateForBackground;
+
+/**
+ Call this method after starting of the app,
  that must adjust right processing for backgound downloads of the filter updates.
  */
-- (void)repairUpdateStateWithBackground:(BOOL)background;
+- (void)repairUpdateStateWithCompletionBlock:(void (^)(void))block;
 
 - (BOOL)inTransaction;
 - (void)beginTransaction;
