@@ -54,6 +54,7 @@
 - (IBAction)clickCheckForUpdates:(id)sender;
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
+- (IBAction)clickGetPro:(id)sender;
 
 - (IBAction)clickDNS:(id)sender;
 
