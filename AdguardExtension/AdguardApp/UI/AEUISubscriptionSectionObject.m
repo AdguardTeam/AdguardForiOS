@@ -76,6 +76,13 @@
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
+/**
+ Converts list of ASDFilterMetadata objects to list of AEUISubscriptionSectionObject objects.
+ 
+ @param metadatas   List of ASDFilterMetadata objects.
+ 
+ @return List of AEUISubscriptionSectionObject objects.
+ */
 + (NSMutableArray *)obtainSectionsObjectsFromMetadatas:(NSArray *)metadatas groups:(NSArray *)groups i18n:(ABECFilterClientLocalization *)i18n{
     
     @autoreleasepool {

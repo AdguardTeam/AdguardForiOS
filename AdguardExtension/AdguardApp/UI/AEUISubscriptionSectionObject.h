@@ -53,15 +53,6 @@
 /////////////////////////////////////////////////////////////////////
 
 /**
- Converts list of ASDFilterMetadata objects to list of AEUISubscriptionSectionObject objects.
- 
- @param metadatas   List of ASDFilterMetadata objects.
- 
- @return List of AEUISubscriptionSectionObject objects.
- */
-+ (NSArray *)obtainSectionsObjectsFromMetadatas:(NSArray *)metadatas groups:(NSArray *)groups ;
-
-/**
  Method loads filters asynchronously from backend server and calls completion block when done.
  As parameter in completionBlock will transfer array of the AEUISubscriptionSectionObject objects.
  If error occured, filters parameter of the completionBlock will be nil.
