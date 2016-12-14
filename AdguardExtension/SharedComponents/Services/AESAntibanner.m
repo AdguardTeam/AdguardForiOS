@@ -896,6 +896,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 
                 [db commit];
             }];
+            
+            self.updatesRightNow = NO;
         }
         _inTransaction = NO;
     });
@@ -912,6 +914,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 
                 [db rollback];
             }];
+            
+            self.updatesRightNow = NO;
         }
         _inTransaction = NO;
     });
@@ -1332,22 +1336,26 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 }
 
 - (void)updateStart {
+    
     self.updatesRightNow = YES;
+    DDLogInfo(@"(ASAntibanner) Started update process.");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        DDLogInfo(@"(ASAntibanner) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerStartedUpdateNotification object:self];
     });
 }
 
 - (void)updateFinished:(NSArray *)updatedVersions {
     
-    self.updatesRightNow = NO;
+    if (! _inTransaction) {
+        self.updatesRightNow = NO;
+    }
+    
+    DDLogInfo(@"(ASAntibanner) Finished update process.");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        DDLogInfo(@"(ASAntibanner) Finished update process.");
         DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
         for (ASDFilterMetadata *meta in updatedVersions) {
             DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
@@ -1359,8 +1367,13 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)updateFailure{
     
-    self.updatesRightNow = NO;
+    if (! _inTransaction) {
+        
+        self.updatesRightNow = NO;
+    }
 
+    DDLogInfo(@"(ASAntibanner) update process failure.");
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFailuredUpdateNotification object:self];
