@@ -43,6 +43,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *proSectionCells;
 @property (weak, nonatomic) IBOutlet UITableViewCell *proAdguardDnsCell;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 
 
 - (IBAction)toggleAdguard:(id)sender;
