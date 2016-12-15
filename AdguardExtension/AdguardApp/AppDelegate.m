@@ -287,7 +287,7 @@ typedef void (^AEDownloadsCompletionBlock)();
                             
                             DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
                             
-                            _fetchCompletion(UIBackgroundFetchResultFailed);
+                            _fetchCompletion(UIBackgroundFetchResultNewData);
                             _fetchCompletion = nil;
                         }
                     });
@@ -505,7 +505,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self callCompletionHandler:UIBackgroundFetchResultNewData];
     }
     // Update performed
     else if ([notification.name
@@ -545,7 +545,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self callCompletionHandler:UIBackgroundFetchResultNewData];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
