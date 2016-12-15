@@ -17,10 +17,12 @@
 */
 #import <UIKit/UIKit.h>
 
+@class ASDFilterRule;
+
 @interface AEUIRulesController : UITableViewController <UISearchResultsUpdating>{
 
 @protected
-    NSString *_ruleTextHolder;
+    ASDFilterRule *_ruleHolder;
     
     NSInteger _newRuleCount;
 }

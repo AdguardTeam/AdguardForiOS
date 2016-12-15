@@ -25,10 +25,24 @@
 #include <resolv.h>
 #import "APDnsDatagram.h"
 #import "APDnsResourceType.h"
+#import "APDnsResourceClass.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
 
+@interface APDnsDatagram ()
+
+@property (nonatomic) NSNumber *ID;
+@property (nonatomic) BOOL isRequest;
+@property (nonatomic) BOOL isResponse;
+@property (nonatomic) NSArray <APDnsRequest *> *requests;
+@property (nonatomic) NSArray <APDnsResponse *> *responses;
+
+@end
+
 @implementation APDnsDatagram
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Properties and public methods
 
 - (id)initWithData:(NSData *)datagram{
     
@@ -41,6 +55,84 @@
     }
     return nil;
 }
+
+- (NSData *)generatePayload{
+    
+    NSMutableData *payload = [NSMutableData dataWithLength:12];
+    
+    uint16_t trId = [_ID unsignedShortValue];
+    if (trId == 0) {
+        trId = (uint16_t)arc4random_uniform(UINT16_MAX);
+    }
+    
+    [self setData:payload withUInt16:trId offset:0];
+    
+    uint8_t flags = 0;
+    
+    if (self.isResponse) {
+        
+        flags += 1 << 7;
+    }
+    [self setData:payload withUInt8:flags offset:2];
+    
+    [self setData:payload withUInt16:(uint16_t)self.requests.count offset:4];
+    [self setData:payload withUInt16:(uint16_t)self.responses.count offset:6];
+    
+    for (APDnsRequest *item in self.requests) {
+        if ([self appendRequest:item toData:payload] == NO) {
+            return nil;
+        }
+    }
+    for (APDnsResponse *item in self.responses) {
+        if ([self appendResponse:item toData:payload] == NO) {
+            return nil;
+        }
+    }
+    
+    return payload;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    
+    APDnsDatagram *obj = [APDnsDatagram new];
+    
+    obj.ID = self.ID;
+    obj.isRequest = obj.isRequest ;
+    obj.isResponse = self.isResponse;
+    obj.requests = [self.requests copyWithZone:zone];
+    obj.responses = [self.responses copyWithZone:zone];
+   
+    return obj;
+}
+
+- (BOOL)convertToBlockingResponse {
+    
+    if (self.isRequest == NO) {
+        return NO;
+    }
+    
+    NSMutableArray *responses = [NSMutableArray array];
+    
+    for (APDnsRequest *request in self.requests) {
+        APDnsResponse *response = [APDnsResponse blockedResponseWithName:request.name type:request.type];
+        if (response) {
+            [responses addObject:response];
+        }
+    }
+    
+    if (responses.count) {
+        _responses = responses;
+        _isRequest = NO;
+        _isResponse = YES;
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Private Methods
 
 
 - (BOOL)parseData:(NSData *)datagram{
@@ -67,14 +159,14 @@
     }
     
     // read requests
-    u_int16_t count = ns_msg_count(handle, ns_s_qd);
+    uint16_t count = ns_msg_count(handle, ns_s_qd);
     ns_rr rr;
     
     if (count) {
         
         NSMutableArray *requests = [NSMutableArray arrayWithCapacity:count];
         
-        for (u_int16_t i = 0; i < count; i++) {
+        for (uint16_t i = 0; i < count; i++) {
             
             if(ns_parserr(&handle, ns_s_qd, i, &rr) < 0){
                 continue;
@@ -101,7 +193,7 @@
             
             NSMutableArray *responses = [NSMutableArray arrayWithCapacity:count];
             
-            for (u_int16_t i = 0; i < count; i++) {
+            for (uint16_t i = 0; i < count; i++) {
                 
                 if(ns_parserr(&handle, ns_s_an, i, &rr) < 0){
                     continue;
@@ -120,6 +212,79 @@
             }
         }
     }
+    
+    return YES;
+}
+
+- (void)setData:(NSMutableData *)data withUInt8:(uint8_t)value offset:(NSUInteger)offset {
+    
+    [data replaceBytesInRange:NSMakeRange(offset, 1) withBytes:&value];
+}
+
+- (void)setData:(NSMutableData *)data withUInt16:(uint16_t)value offset:(NSUInteger)offset {
+  
+    uint16_t swaped = htons(value);
+    [data replaceBytesInRange:NSMakeRange(offset, 2) withBytes:&swaped];
+}
+
+- (void)setData:(NSMutableData *)data withUInt32:(uint32_t)value offset:(NSUInteger)offset {
+    
+    uint32_t swaped = htonl(value);
+    [data replaceBytesInRange:NSMakeRange(offset, 4) withBytes:&swaped];
+}
+
+- (BOOL)appendName:(NSString *)name toData:(NSMutableData *)data {
+    
+    for (NSString *item in [name componentsSeparatedByString:@"."]) {
+        
+        if (item.length == 0) {
+            return NO;
+        }
+        NSData *itemData = [item dataUsingEncoding:NSUTF8StringEncoding];
+        NSUInteger len = itemData.length;
+        if (len == 0 || len > 255) {
+            return  NO;
+        }
+        uint8_t b_len = (uint8_t)len;
+        [data appendBytes:&b_len length:1];
+        [data appendData:itemData];
+    }
+    [data setLength:(data.length + 1)];
+    
+    return YES;
+}
+
+- (BOOL)appendRequest:(APDnsRequest *)request toData:(NSMutableData *)data {
+    
+    if (![self appendName:request.name toData:data])
+        return NO;
+    
+    [self setData:data withUInt16:request.type.intValue offset:data.length];
+    [self setData:data withUInt16:request.qClass.intValue offset:data.length];
+    
+    return  YES;
+}
+
+- (BOOL)appendResponse:(APDnsResponse *)response toData:(NSMutableData *)data {
+    
+    if (![self appendName:response.name toData:data])
+        return NO;
+    
+    [self setData:data withUInt16:response.type.intValue offset:data.length];
+    [self setData:data withUInt16:response.qClass.intValue offset:data.length];
+    
+    // TTL equals 0
+    [data setLength:(data.length + 4)];
+    
+//    NSUInteger length = response.rdata.length;
+//    if (length > UINT16_MAX) {
+//        return NO;
+//    }
+//    uint16_t len = (uint16_t)length;
+    uint16_t len = response.rdata.length;
+    [self setData:data withUInt16:len offset:data.length];
+    
+    [data appendData:response.rdata];
     
     return YES;
 }

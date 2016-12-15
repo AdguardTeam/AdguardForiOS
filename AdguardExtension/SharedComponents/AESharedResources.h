@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -80,11 +80,6 @@ extern NSString *AEDefaultsJSONConverterOptimize;
  */
 extern NSString *AEDefaultsWifiOnlyUpdates;
 
-/**
- User Defaults key, which defines that filter updates is performed right now.
- */
-extern NSString *AEDefaultsFilterUpdateInProgress;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -133,10 +128,14 @@ extern NSString *AEDefaultsFilterUpdateInProgress;
  */
 @property NSData *blockingContentRules;
 /**
- Filter version metadata from last filter update process.
+ Filter metadata from last filter update process.
  We need it because filter update process is performed in two steps.
  */
-@property NSArray <ASDFilterMetadata *> *lastUpdateFilterVersionsMetadata;
+@property ABECFilterClientMetadata *lastUpdateFilterMetadata;
+/**
+ Filter Ids from last filter update process.
+ */
+@property NSArray <NSNumber *> *lastUpdateFilterIds;
 /**
  Filter rules from last filter update process.
  We need it because filter update process is performed in two steps.

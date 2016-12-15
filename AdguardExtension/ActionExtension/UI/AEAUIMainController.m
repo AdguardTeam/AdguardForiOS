@@ -47,6 +47,14 @@
     
     self.blockElementLabel.textColor = self.blockElementLabel.tintColor;
     
+    // tunning accessibility
+    self.blockElementLabel.accessibilityTraits |= UIAccessibilityTraitButton;
+    
+    NSString *labelFormat = NSLocalizedString(@"Enable filtering on %@", @"(Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com'");
+    self.enableOnCell.textLabel.accessibilityLabel = [NSString stringWithFormat:labelFormat, self.domainName];
+    //--------------
+    
+    
     if (self.iconUrl) {
         [ACNNetworking dataWithURL:self.iconUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
@@ -231,6 +239,36 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return [self heightForCell:self.nameCell];
     }
     return UITableViewAutomaticDimension;
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    
+//    if (section == PRO_SECTION_INDEX) {
+//        
+//        return [self proSectionFooter];
+//    }
+//    
+//    return [super tableView:tableView viewForFooterInSection:section];
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    
+//    if (section == PRO_SECTION_INDEX) {
+//        
+//        APUIProSectionFooter *footer = [self proSectionFooter];
+//        return footer.height;
+//    }
+//    
+//    return [super tableView:tableView heightForFooterInSection:section];
+//}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+    
+    // tunning accessibility
+    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+    footer.isAccessibilityElement = NO;
+    footer.textLabel.isAccessibilityElement = NO;
+    footer.detailTextLabel.isAccessibilityElement = NO;
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -79,9 +79,8 @@
             _newRuleCount++;
             
             [[[AEService singleton] antibanner] endTransaction];
-            
 #ifdef PRO
-            [[APVPNManager singleton] sendReloadWhitelist];
+            [[APVPNManager singleton] sendReloadUserfilterDataIfRule:object.rule];
 #endif
             
         } rollbackBlock:^{
@@ -121,7 +120,7 @@
         AEWhitelistDomainObject *object = self.rules[[path row]];
         if (object) {
             _editRuleController.domain = object;
-            _ruleTextHolder = object.rule.ruleText;
+            _ruleHolder = [object.rule copy];
             _domainHolder = object.domain;
         }
     }
@@ -148,7 +147,7 @@
                 
                 [[[AEService singleton] antibanner] endTransaction];
 #ifdef PRO
-                [[APVPNManager singleton] sendReloadWhitelist];
+                [[APVPNManager singleton] sendReloadUserfilterDataIfRule:domain.rule];
 #endif
             } rollbackBlock:^{
                 
@@ -160,7 +159,7 @@
             
             [[[AEService singleton] antibanner] beginTransaction];
             
-            NSError *error = [[AEService singleton] updateRule:domain.rule oldRuleText:_ruleTextHolder];
+            NSError *error = [[AEService singleton] updateRule:domain.rule oldRuleText:_ruleHolder.ruleText];
             if (error){
                 
                 [[[AEService singleton] antibanner] rollbackTransaction];
@@ -180,11 +179,11 @@
                     [[[AEService singleton] antibanner] endTransaction];
                     
 #ifdef PRO
-                    [[APVPNManager singleton] sendReloadWhitelist];
+                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:domain.rule];
 #endif
                 } rollbackBlock:^{
 
-                    _ruleTextHolder = domain.rule.ruleText;
+                    _ruleHolder.ruleText = domain.rule.ruleText;
                     domain.domain = _domainHolder;
                     
                     [[[AEService singleton] antibanner] rollbackTransaction];
