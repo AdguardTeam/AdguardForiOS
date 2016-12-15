@@ -87,6 +87,9 @@
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    
+    self.getProButton.enabled = YES;
+    self.getProButton.title = @"Get PRO";
 #endif
     
     [self reloadDataAnimated:NO];
