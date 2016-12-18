@@ -196,7 +196,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     if (interval < UIApplicationBackgroundFetchIntervalMinimum) {
         interval = UIApplicationBackgroundFetchIntervalMinimum;
     }
+    
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:interval];
+    DDLogInfo(@"(AppDelegate) Set background fetch interval: %f", interval);
     
 }
 
@@ -287,7 +289,7 @@ typedef void (^AEDownloadsCompletionBlock)();
                             
                             DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
                             
-                            _fetchCompletion(UIBackgroundFetchResultNewData);
+                            _fetchCompletion(UIBackgroundFetchResultFailed);
                             _fetchCompletion = nil;
                         }
                     });
@@ -505,7 +507,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
     }
     // Update performed
     else if ([notification.name
@@ -545,7 +547,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -604,7 +606,12 @@ typedef void (^AEDownloadsCompletionBlock)();
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (_fetchCompletion) {
-            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
+            NSArray *resultName = @[
+                                    @"NewData",
+                                    @"NoData",
+                                    @"Failed"];
+
+            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion. With result: %@", resultName[result]);
             _fetchCompletion(result);
             _fetchCompletion = nil;
         }
