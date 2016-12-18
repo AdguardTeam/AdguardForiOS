@@ -72,6 +72,10 @@ typedef void (^AEDownloadsCompletionBlock)();
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
         
+        //TODO: delete this
+        [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
+        //----------------
+        
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
 #endif
