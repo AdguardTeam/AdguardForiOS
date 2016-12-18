@@ -36,8 +36,10 @@
 #pragma mark - AEUIMainController Constants
 /////////////////////////////////////////////////////////////////////
 
+#define ITUNES_PRO_APP_ID           @"1126386264"
+
 #ifdef PRO
-#define ITUNES_APP_ID               @"1126386264"
+#define ITUNES_APP_ID               ITUNES_PRO_APP_ID
 #else
 #define ITUNES_APP_ID               @"1047223162"
 #endif
@@ -85,6 +87,9 @@
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    
+    self.getProButton.enabled = YES;
+    self.getProButton.title = @"Get PRO";
 #endif
     
     [self reloadDataAnimated:NO];
@@ -202,7 +207,7 @@
 
 - (IBAction)clickCheckForUpdates:(id)sender {
     if (!_inCheckUpdates) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES interactive:YES];
     }
 }
 
@@ -215,6 +220,13 @@
 
 - (IBAction)clickSendBugReport:(id)sender {
     [[AESSupport singleton] sendMailBugReportWithParentController:self];
+}
+
+- (IBAction)clickGetPro:(id)sender {
+    NSURL *theURL =
+    [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
+                          ITUNES_PRO_APP_ID]];
+    [[UIApplication sharedApplication] openURL:theURL];
 }
 
 - (IBAction)clickDNS:(id)sender {
