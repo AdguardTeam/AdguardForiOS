@@ -839,6 +839,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)repairUpdateStateWithCompletionBlock:(void (^)(void))block {
     
+    DDLogDebugTrace();
+    
     [self setLastUpdateFilters];
     if (_lastUpdateFilterIds.count && _lastUpdateFilters.count
         && _lastUpdateFilterIds.count == _lastUpdateFilters.count ) {
@@ -1928,6 +1930,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)setLastUpdateFilters {
 
+    DDLogDebugTrace();
     AESharedResources *res = [AESharedResources new];
     //repair filters dictionary from disk
     if (!_lastUpdateFilters) {
