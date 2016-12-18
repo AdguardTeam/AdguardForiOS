@@ -148,9 +148,9 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return [NSData dataWithBytes:&message length:1];
 }
 
-+ (NSData *)host2tunnelMessageWhitelistReload {
++ (NSData *)host2tunnelMessageUserfilterDataReload {
     
-    APHost2TunnelMessageType message = APHTMWhitelistDomainsReload;
+    APHost2TunnelMessageType message = APHTMUserfilterDataReload;
     
     return [NSData dataWithBytes:&message length:1];
 }

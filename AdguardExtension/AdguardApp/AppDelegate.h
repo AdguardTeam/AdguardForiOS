@@ -54,9 +54,14 @@ extern NSString *AppDelegateUpdatedFiltersKey;
 /**
  If interval between last update and current time more then update period,
  method starts the update procedure of the antibanner.
+ 
+ @param fromUI Set to YES if calling is performed by user action. 
+ In this case update process will start forcedly.
+ @param interactive Set to YES if we want to start update in interactive mode.
+
  @return Returns YES if antibanner will start update of the filters from backend.
  */
-- (BOOL)invalidateAntibanner:(BOOL)fromUI;
+- (BOOL)invalidateAntibanner:(BOOL)fromUI interactive:(BOOL)interactive;
 
 
 @end

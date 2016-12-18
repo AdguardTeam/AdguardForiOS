@@ -22,6 +22,7 @@ extern NSString *AEUIWelcomePageLabelKey;
 extern NSString *AEUIWelcomePageImageNameKey;
 extern NSString *AEUIWelcomePageButtonTitleKey;
 extern NSString *AEUIWelcomePageButtonActionKey;
+extern NSString *AEUIWelcomePageAccessibilityLabelKey;
 
 
 @interface AEUIWelcomePageController : UIViewController

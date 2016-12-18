@@ -29,9 +29,21 @@
 /**
  Returns object with apropiate value.
  */
-+ (APDnsResourceType *)type:(u_int16_t)value;
++ (APDnsResourceType *)type:(uint16_t)value;
+/**
+ Returns A resource type.
+ */
++ (APDnsResourceType *)aType;
+/**
+ Returns AAAA resource type.
+ */
++ (APDnsResourceType *)aaaaType;
+/**
+ Returns A6 resource type.
+ */
++ (APDnsResourceType *)a6Type;
 
-@property (nonatomic) u_int16_t intValue;
+@property (nonatomic) uint16_t intValue;
 
 /**
  Returns human readable description of the current resuorce type.

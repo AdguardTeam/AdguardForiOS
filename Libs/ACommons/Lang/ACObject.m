@@ -134,7 +134,7 @@ static NSMutableDictionary *_propertyNamesForClasses;
     id newObj = [[[self class] allocWithZone:zone] init];
     if (newObj) {
         
-        NSDictionary *propertyValues = [self dictionaryWithValuesForKeys:[_propertyNamesForClasses[NSStringFromClass([self class])] allObjects]];
+        NSDictionary *propertyValues = [self dictionaryWithValuesForKeys:[self propertyNames]];
         if (propertyValues.count)
             [newObj setValuesForKeysWithDictionary:propertyValues];
     }

@@ -27,6 +27,7 @@
 #import "AESAntibanner.h"
 #import "AEService.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEBlacklistDomainObject.h"
 #import "ASDatabase.h"
 
 #include <arpa/inet.h>
@@ -159,7 +160,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     settings.DNSSettings = dns;
     
     [_connectionHandler setDeviceDnsAddresses:[self getDNSServers] adguardDnsAddresses:ipv4DnsAddresses];
-    [self reloadWhitelistDomain];
+    [self reloadWhitelistBlacklistDomain];
     
     // SETs network settings
     __typeof__(self) __weak wSelf = self;
@@ -205,9 +206,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 [_connectionHandler setDnsActivityLoggingEnabled:NO];
                 break;
                 
-            case APHTMWhitelistDomainsReload:
+            case APHTMUserfilterDataReload:
                 
-                DDLogInfo(@"(PacketTunnelProvider) Whitelist domain changed. Reconnecting..");
+                DDLogInfo(@"(PacketTunnelProvider) User Filter changed. Reconnecting..");
                 [self stopVPN];
 
                 break;
@@ -294,7 +295,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [self stopVPN];
 }
 
-- (void)reloadWhitelistDomain {
+- (void)reloadWhitelistBlacklistDomain {
     
     @autoreleasepool {
         
@@ -302,6 +303,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                           rulesForFilter:@(ASDF_USER_FILTER_ID)];
         
         NSMutableArray *wRules = [NSMutableArray array];
+        NSMutableArray *bRules = [NSMutableArray array];
         AEWhitelistDomainObject *object;
         for (ASDFilterRule *item in rules) {
             
@@ -309,11 +311,22 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             if (object) {
                 [wRules addObject:object];
             }
+            else {
+                
+                object = [[AEBlacklistDomainObject alloc] initWithRule:item];
+                if (object) {
+                    [bRules addObject:object];
+                }
+            }
         }
         
         wRules = [wRules valueForKey:@"domain"];
         
         [_connectionHandler setWhitelistDomains:wRules];
+        
+        bRules = [bRules valueForKey:@"domain"];
+        
+        [_connectionHandler setBlacklistDomains:bRules];
     }
 }
 @end

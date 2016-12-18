@@ -20,14 +20,16 @@
 #import <Foundation/Foundation.h>
 #import <resolv.h>
 
-@class APDnsResourceType;
+@class APDnsResourceType, APDnsResourceClass;
 
-@interface APDnsRequest : NSObject <NSCoding>
+@interface APDnsRequest : NSObject <NSCoding, NSCopying>
 
 - (id)initWithRR:(ns_rr)rr;
+- (id)initWithName:(NSString *)name type:(APDnsResourceType *)type class:(APDnsResourceClass *)class;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) APDnsResourceType *type;
+@property (nonatomic, readonly) APDnsResourceClass *qClass;
 
 // Special meening
 

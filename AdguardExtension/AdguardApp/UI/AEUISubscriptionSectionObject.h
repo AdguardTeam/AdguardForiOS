@@ -27,6 +27,14 @@
 + (AEUISubscriptionSectionFilterMetadata *)copyFromMetadata:(ASDFilterMetadata *)filterMetadata;
 
 @property NSNumber *editedEnabled;
+/**
+ Localized object name.
+ */
+@property NSString *i18nName;
+/**
+ Localized object description if exists.
+ */
+@property NSString *i18nDescription;
 
 @end
 
@@ -43,15 +51,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
-
-/**
- Converts list of ASDFilterMetadata objects to list of AEUISubscriptionSectionObject objects.
- 
- @param metadatas   List of ASDFilterMetadata objects.
- 
- @return List of AEUISubscriptionSectionObject objects.
- */
-+ (NSArray *)obtainSectionsObjectsFromMetadatas:(NSArray *)metadatas groups:(NSArray *)groups;
 
 /**
  Method loads filters asynchronously from backend server and calls completion block when done.

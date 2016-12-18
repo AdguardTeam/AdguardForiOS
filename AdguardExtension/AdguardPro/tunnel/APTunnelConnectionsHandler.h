@@ -48,6 +48,10 @@
  Sets whitelist domains names.
  */
 - (void)setWhitelistDomains:(NSArray <NSString *> *)domains;
+/**
+ Sets blacklist domains names.
+ */
+- (void)setBlacklistDomains:(NSArray <NSString *> *)domains;
 
 /**
  Make the initial readPacketsWithCompletionHandler call.
@@ -68,6 +72,10 @@
  Checks domain name, that it is included in whitelist.
  */
 - (BOOL)isWhitelistDomain:(NSString *)domainName;
+/**
+ Checks domain name, that it is included in blacklist.
+ */
+- (BOOL)isBlacklistDomain:(NSString *)domainName;
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.

@@ -42,14 +42,17 @@
     
     OSSpinLock _dnsAddressLock;
     OSSpinLock _whitelistDomainLock;
+    OSSpinLock _blacklistDomainLock;
     
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
     
-    NSSet *_whitelistDomains;
+    NSArray <NSString *> *_whitelistDomains;
+    NSArray <NSString *> *_blacklistDomains;
     
     BOOL _packetFlowObserver;
     
+    dispatch_queue_t _readQueue;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -66,8 +69,10 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _whitelistDomainLock = _dnsAddressLock = OS_SPINLOCK_INIT;
+        _whitelistDomainLock = _blacklistDomainLock =_dnsAddressLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
+        
+        _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -128,10 +133,24 @@
     
     if (domains.count) {
         
-        _whitelistDomains = [NSSet setWithArray:domains];
+        _whitelistDomains = [domains copy];
     }
 
     OSSpinLockUnlock(&_whitelistDomainLock);
+}
+
+- (void)setBlacklistDomains:(NSArray <NSString *> *)domains {
+    
+    OSSpinLockLock(&_blacklistDomainLock);
+    
+    _blacklistDomains = nil;
+    
+    if (domains.count) {
+        
+        _blacklistDomains = [domains copy];
+    }
+    
+    OSSpinLockUnlock(&_blacklistDomainLock);
 }
 
 - (void)startHandlingPackets {
@@ -166,9 +185,21 @@
     BOOL result = NO;
     OSSpinLockLock(&_whitelistDomainLock);
     
-    result = [_whitelistDomains containsObject:domainName];
+    result = [self checkDomain:domainName withList:_whitelistDomains];
     
     OSSpinLockUnlock(&_whitelistDomainLock);
+    
+    return result;
+}
+
+- (BOOL)isBlacklistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_blacklistDomainLock);
+    
+    result = [self checkDomain:domainName withList:_blacklistDomains];
+    
+    OSSpinLockUnlock(&_blacklistDomainLock);
     
     return result;
 }
@@ -223,17 +254,38 @@
     __typeof__(self) __weak wSelf = self;
 
     DDLogDebug(@"(APTunnelConnectionsHandler) startHandlingPacketsInternal");
-    [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+    
+    dispatch_async(_readQueue, ^{
         
-        __typeof__(self) sSelf = wSelf;
-        [sSelf handlePackets:packets protocols:protocols];
-    }];
+        [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+            
+            __typeof__(self) sSelf = wSelf;
+            
+#ifdef DEBUG
+            [sSelf handlePackets:packets protocols:protocols counter:0];
+#else
+            [sSelf handlePackets:packets protocols:protocols];
+#endif
+            
+        }];
+    });
 
 }
 
 /// Handle packets coming from the packet flow.
-- (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
+#ifdef DEBUG
 
+- (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols counter:(NSUInteger)packetCounter{
+#else
+- (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
+#endif
+
+    DDLogTrace();
+
+#ifdef DEBUG
+    packetCounter++;
+#endif
+    
     // Work here
 
     //    DDLogInfo(@"----------- Packets %lu ---------------", packets.count);
@@ -281,20 +333,42 @@
     //Create remote endpoint sessions if neeed it and send data to remote endpoint
     [self performSend:packetsBySessions];
 
+#ifdef DEBUG
+    DDLogDebug(@"Before readPacketsWithCompletionHandler: %lu", packetCounter);
+#endif
     // Read more
-
     __typeof__(self) __weak wSelf = self;
-    [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
-
-        __typeof__(self) sSelf = wSelf;
-      [sSelf handlePackets:packets protocols:protocols];
-    }];
+    
+    dispatch_async(_readQueue, ^{
+        
+        [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+            
+            __typeof__(self) sSelf = wSelf;
+#ifdef DEBUG
+            DDLogDebug(@"In readPacketsWithCompletionHandler (before handlePackets): %lu", packetCounter);
+            
+            [sSelf handlePackets:packets protocols:protocols counter:packetCounter];
+#else
+            [sSelf handlePackets:packets protocols:protocols];
+            
+#endif
+#ifdef DEBUG
+            DDLogDebug(@"In readPacketsWithCompletionHandler (after handlePackets): %lu", packetCounter);
+#endif
+            
+        }];
+    });
+    
+#ifdef DEBUG
+    DDLogDebug(@"After readPacketsWithCompletionHandler : %lu", packetCounter);
+#endif
 }
 
 - (void)performSend:(NSDictionary<APTUdpProxySession *, NSArray *> *)packetsBySessions {
 
     @synchronized(self) {
 
+        DDLogTrace();
         [packetsBySessions enumerateKeysAndObjectsUsingBlock:^(APTUdpProxySession *_Nonnull key, NSArray *_Nonnull obj, BOOL *_Nonnull stop) {
 
           APTUdpProxySession *session = [_sessions member:key];
@@ -313,6 +387,29 @@
           [session appendPackets:obj];
         }];
     }
+}
+
+- (BOOL)checkDomain:(__unsafe_unretained NSString *)domainName withList:(__unsafe_unretained NSArray <NSString *> *)domainList {
+    
+    BOOL result = NO;
+    
+    for (NSString *item in domainList) {
+        
+        if ([item hash] == [domainName hash]) {
+            if ([domainName isEqualToString:item]) {
+                result = YES;
+                break;
+            }
+        }
+        
+        NSString *domain = [@"." stringByAppendingString:item];
+        if ([domainName hasSuffix:domain]) {
+            result = YES;
+            break;
+        }
+    }
+
+    return result;
 }
 
 @end
