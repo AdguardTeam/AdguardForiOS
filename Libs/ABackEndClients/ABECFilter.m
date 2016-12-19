@@ -394,6 +394,10 @@ static ABECFilterClient *ABECFilterSingleton;
     configuration.networkServiceType = NSURLNetworkServiceTypeBackground;
     configuration.timeoutIntervalForRequest = ABEC_BACKEND_READ_TIMEOUT;
     configuration.timeoutIntervalForResource = updateTimeout;
+    configuration.discretionary = YES;
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+    configuration.sessionSendsLaunchEvents = YES;
+#endif
     
     return [NSURLSession sessionWithConfiguration:configuration delegate:sessionDelegate delegateQueue:nil];
 }
