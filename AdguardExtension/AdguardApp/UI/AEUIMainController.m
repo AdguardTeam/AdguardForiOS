@@ -36,8 +36,10 @@
 #pragma mark - AEUIMainController Constants
 /////////////////////////////////////////////////////////////////////
 
+#define ITUNES_PRO_APP_ID           @"1126386264"
+
 #ifdef PRO
-#define ITUNES_APP_ID               @"1126386264"
+#define ITUNES_APP_ID               ITUNES_PRO_APP_ID
 #else
 #define ITUNES_APP_ID               @"1047223162"
 #endif
@@ -85,6 +87,9 @@
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    
+    self.getProButton.enabled = YES;
+    self.getProButton.title = @"Get PRO";
 #endif
     
     [self reloadDataAnimated:NO];
@@ -104,7 +109,7 @@
     [self prepareCheckUpdatesButton];
 
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.navigation = self.navigationController;
     
     if ([[AEService singleton] firstRunInProgress]) {
@@ -202,7 +207,7 @@
 
 - (IBAction)clickCheckForUpdates:(id)sender {
     if (!_inCheckUpdates) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES interactive:YES];
     }
 }
 
@@ -215,6 +220,13 @@
 
 - (IBAction)clickSendBugReport:(id)sender {
     [[AESSupport singleton] sendMailBugReportWithParentController:self];
+}
+
+- (IBAction)clickGetPro:(id)sender {
+    NSURL *theURL =
+    [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
+                          ITUNES_PRO_APP_ID]];
+    [[UIApplication sharedApplication] openURL:theURL];
 }
 
 - (IBAction)clickDNS:(id)sender {
@@ -302,6 +314,7 @@
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
     }
 
     BOOL enabled = NO;
@@ -368,7 +381,9 @@
     self.checkFiltersCell.accessoryView = activity;
     self.checkFiltersCell.textLabel.textColor =
         self.checkFiltersCell.textLabel.tintColor;
-
+    UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
+    self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits | UIAccessibilityTraitButton;
+    
     _inCheckUpdates = NO;
 
     _observers = [NSMutableArray arrayWithCapacity:3];
@@ -381,6 +396,7 @@
                 usingBlock:^(NSNotification *_Nonnull note) {
 
                   self.checkFiltersCell.textLabel.enabled = NO;
+                  self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
                   UIActivityIndicatorView *activity =
                       (UIActivityIndicatorView *)
                           self.checkFiltersCell.accessoryView;
@@ -435,6 +451,7 @@
                                             dateStyle:NSDateFormatterShortStyle
                                             timeStyle:
                                                 NSDateFormatterShortStyle];
+                          self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
                       }
                     });
 
@@ -487,6 +504,8 @@
 
     self.checkFiltersCell.textLabel.enabled = YES;
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
+    self.checkFiltersCell.accessibilityTraits = self.checkFiltersCell.accessibilityTraits | UIAccessibilityTraitButton;
+
     _inCheckUpdates = NO;
 }
 

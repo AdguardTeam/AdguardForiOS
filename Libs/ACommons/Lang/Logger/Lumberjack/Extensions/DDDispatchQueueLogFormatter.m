@@ -99,9 +99,11 @@
             [threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
             [threadUnsafeDateFormatter setDateFormat:dateFormatString];
         }
-        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
         [threadUnsafeDateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
         return [threadUnsafeDateFormatter stringFromDate:date];
+#pragma clang diagnostic pop
     }
     else
     {
@@ -122,8 +124,11 @@
             threadDictionary[key] = dateFormatter;
         }
         
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
         [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
         return [dateFormatter stringFromDate:date];
+#pragma clang diagnostic pop
     }
 }
 

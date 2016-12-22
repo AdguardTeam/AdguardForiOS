@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet AEAUIDomainCell *nameCell;
 @property (weak, nonatomic) IBOutlet UILabel *blockElementLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *enableOnCell;
 
 - (IBAction)toggleStatus:(id)sender;
 - (IBAction)clickMissedAd:(id)sender;

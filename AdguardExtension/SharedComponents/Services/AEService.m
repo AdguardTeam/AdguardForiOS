@@ -502,10 +502,12 @@ static AEService *singletonService;
 
 - (void)onReady:(void (^)(void))block{
     
+    DDLogDebugTrace();
     [_readyLock lock];
 
     if (_readyFlags == RFAllReadyType) {
 
+        DDLogDebug(@"dispatch onReady block");
         dispatch_async(workQueue, block);
     }
     else {
@@ -514,6 +516,7 @@ static AEService *singletonService;
             _onReadyBlocks = [NSMutableArray new];
         }
         
+        DDLogDebug(@"delay onReady block");
         [_onReadyBlocks addObject:[block copy]];
     }
     [_readyLock unlock];
@@ -767,6 +770,8 @@ static AEService *singletonService;
 
 - (void)pushReadyBlocksToWorkingQueue{
 
+    DDLogDebugTrace();
+    
     for (void (^ block)() in _onReadyBlocks) {
        
         dispatch_async(workQueue, block);
@@ -878,11 +883,12 @@ static AEService *singletonService;
             
         } while (0);
 
-        if (err && error) {
-            *error = err;
-        }
     }
 
+    if (err && error) {
+        *error = err;
+    }
+    
     return convertResult;
 }
 

@@ -20,11 +20,36 @@
 
 #import "APDnsResponse.h"
 #include <arpa/inet.h>
+#import "APDnsResourceType.h"
+#import "APDnsResourceClass.h"
 
-#define IPV4_FOR_BLOCKING       @"127.0.0.1"
-#define IPV6_FOR_BLOCKING       @"::1"
+#define IPV4_FOR_BLOCKING_STRING        @"127.0.0.1"
+#define IPV6_FOR_BLOCKING_STRING        @"::1"
+
+#define IPV4_FOR_BLOCKING               "\x7F\0\0\1"
+#define IPV6_FOR_BLOCKING               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1"
+
+@interface APDnsResponse ()
+
+@property (nonatomic) NSString *stringValue;
+@property (nonatomic) NSData *rdata;
+@property (nonatomic) BOOL addressResponse;
+@property (nonatomic) BOOL blocked;
+
+@end
 
 @implementation APDnsResponse
+
+static NSData *ipv4BlockingResourceData;
+static NSData *ipv6BlockingResourceData;
+
++ (void)initialize {
+    
+    if (self == [APDnsResponse class]) {
+        ipv4BlockingResourceData = [NSData dataWithBytes:IPV4_FOR_BLOCKING length:4];
+        ipv6BlockingResourceData = [NSData dataWithBytes:IPV6_FOR_BLOCKING length:16];
+    }
+}
 
 - (id)initWithRR:(ns_rr)rr msg:(ns_msg)msg{
     
@@ -66,7 +91,7 @@
             case ns_t_a:
                 _addressResponse = YES;
                 _stringValue = [NSString stringWithUTF8String:inet_ntoa(*((struct in_addr *)_rdata.bytes))];
-                _blocked = [_stringValue isEqualToString:IPV4_FOR_BLOCKING];
+                _blocked = [_stringValue isEqualToString:IPV4_FOR_BLOCKING_STRING];
                 
                 break;
                 
@@ -76,7 +101,7 @@
                 str = inet_ntop(AF_INET6, _rdata.bytes, buffer, NS_MAXDNAME);
                 if (str) {
                     _stringValue = [NSString stringWithUTF8String:str];
-                    _blocked = [_stringValue isEqualToString:IPV6_FOR_BLOCKING];
+                    _blocked = [_stringValue isEqualToString:IPV6_FOR_BLOCKING_STRING];
                 }
                 break;
                 
@@ -95,9 +120,20 @@
     return [NSString stringWithFormat:@"name: %@, type: %@, value: %@", self.name, self.type, self.stringValue];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    
+    APDnsResponse *obj = [super copyWithZone:zone];
+    obj.rdata = self.rdata;
+    obj.stringValue = self.stringValue;
+    obj.addressResponse = self.addressResponse;
+    obj.blocked = self.blocked;
+    
+    return obj;
+}
+
 - (NSString *)parseChString{
     
-    u_int8_t *buf = (u_int8_t *)[_rdata bytes];
+    uint8_t *buf = (uint8_t *)[_rdata bytes];
     NSUInteger dataLength = _rdata.length;
     NSUInteger i = 0;
     
@@ -142,6 +178,39 @@
     [aCoder encodeObject:self.stringValue forKey:@"stringValue"];
     [aCoder encodeObject:@(self.addressResponse) forKey:@"addressResponse"];
     [aCoder encodeObject:@(self.blocked) forKey:@"blocked"];
+}
+
++ (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type {
+
+    APDnsResponse *response;
+    NSData *rdata;
+    NSString *stringValue;
+    
+    switch ([type intValue]) {
+        case ns_t_a:
+            rdata = ipv4BlockingResourceData;
+            stringValue = IPV4_FOR_BLOCKING_STRING;
+            break;
+            
+        case ns_t_aaaa:
+        case ns_t_a6:
+            rdata = ipv6BlockingResourceData;
+            stringValue = IPV6_FOR_BLOCKING_STRING;
+            break;
+
+        default:
+            // not supported type, return nil;
+            return nil;
+    }
+    
+    response = [[APDnsResponse alloc] initWithName:name type:type class:[APDnsResourceClass internetClass]];
+    response.stringValue = stringValue;
+    response.rdata = rdata;
+    response.addressResponse = YES;
+    response.blocked = YES;
+
+    
+    return  response;
 }
 
 @end

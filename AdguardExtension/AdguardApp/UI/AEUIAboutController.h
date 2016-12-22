@@ -25,6 +25,5 @@
 - (IBAction)clickAdguardWebsite:(id)sender;
 - (IBAction)clickAdguardForum:(id)sender;
 - (IBAction)clickAcknowledgments:(id)sender;
-- (IBAction)clickViewOnGithub:(id)sender;
 
 @end

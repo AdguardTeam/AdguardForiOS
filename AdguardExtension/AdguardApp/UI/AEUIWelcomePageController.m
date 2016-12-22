@@ -18,11 +18,12 @@
 #import "AEUIWelcomePageController.h"
 #import "ADomain/ADLocales.h"
 
-NSString *AEUIWelcomePageTitleKey =          @"title";
-NSString *AEUIWelcomePageLabelKey =          @"label";
-NSString *AEUIWelcomePageImageNameKey =      @"imageName";
-NSString *AEUIWelcomePageButtonTitleKey =    @"buttonTitle";
-NSString *AEUIWelcomePageButtonActionKey =   @"buttonSelector";
+NSString *AEUIWelcomePageTitleKey =                 @"title";
+NSString *AEUIWelcomePageLabelKey =                 @"label";
+NSString *AEUIWelcomePageImageNameKey =             @"imageName";
+NSString *AEUIWelcomePageButtonTitleKey =           @"buttonTitle";
+NSString *AEUIWelcomePageButtonActionKey =          @"buttonSelector";
+NSString *AEUIWelcomePageAccessibilityLabelKey =    @"accessibility";
 
 @interface AEUIWelcomePageController ()
 
@@ -35,6 +36,7 @@ NSString *AEUIWelcomePageButtonActionKey =   @"buttonSelector";
     // Do any additional setup after loading the view.
 
     self.welcomeTitle.text = _properties[AEUIWelcomePageTitleKey];
+    self.welcomeTitle.accessibilityLabel = _properties[AEUIWelcomePageAccessibilityLabelKey];
     self.welcomeLabel.text = _properties[AEUIWelcomePageLabelKey];
     NSString *welcomeImageName = _properties[AEUIWelcomePageImageNameKey];
     if (welcomeImageName) {

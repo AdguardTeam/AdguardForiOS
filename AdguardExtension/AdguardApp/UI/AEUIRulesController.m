@@ -29,6 +29,10 @@
 #import "AEUILoadingModal.h"
 #import "AEUIUtils.h"
 
+#ifdef PRO
+#import "APVPNManager.h"
+#endif
+
 @interface AEUIRulesController (){
 
     AEUIEditRuleController *_editRuleController;
@@ -45,7 +49,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _ruleTextHolder = @"";
+    _ruleHolder = [ASDFilterRule new];
+    _ruleHolder.ruleText = @"";
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -156,6 +161,9 @@
 
             [[[AEService singleton] antibanner] endTransaction];
 
+#ifdef PRO
+            [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
+#endif
         };
         
         [[[AEService singleton] antibanner] beginTransaction];
@@ -218,7 +226,7 @@
         AEUIFilterRuleObject *rule = self.rules[[path row]];
         if (rule) {
             _editRuleController.rule = rule;
-            _ruleTextHolder = rule.ruleText;
+            _ruleHolder = [rule copy];
         }
     }
     // Pass the selected object to the new view controller.
@@ -239,11 +247,11 @@
 
             // check that rule change count of new rules
             // was commet, became rule
-            if (![rule.ruleText hasPrefix:COMMENT] && [_ruleTextHolder hasPrefix:COMMENT]) {
+            if (![rule.ruleText hasPrefix:COMMENT] && [_ruleHolder.ruleText hasPrefix:COMMENT]) {
                 
                 if (_newRuleCount <= 0) {
                     
-                    rule.ruleText = _ruleTextHolder;
+                    rule.ruleText = _ruleHolder.ruleText;
                     _editRuleController = nil;
                     
                     [ACSSystemUtils showSimpleAlertForController:self
@@ -256,14 +264,14 @@
             
             [[[AEService singleton] antibanner] beginTransaction];
             
-            NSError *error = [[AEService singleton] updateRule:rule oldRuleText:_ruleTextHolder];
+            NSError *error = [[AEService singleton] updateRule:rule oldRuleText:_ruleHolder.ruleText];
             if (error){
                 
                 [[[AEService singleton] antibanner] rollbackTransaction];
                 
                 if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
                     
-                    rule.ruleText = _ruleTextHolder;
+                    rule.ruleText = _ruleHolder.ruleText;
                     [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
                 }
             }
@@ -273,16 +281,15 @@
                 dispatch_block_t completionBlock = ^(){
 
                     [[[AEService singleton] antibanner] endTransaction];
+#ifdef PRO
+                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
+                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:_ruleHolder];
+#endif
                 };
                 
                 // ---- Rollback Block ----------------
                 dispatch_block_t rollbackBlock = ^(){
                     
-//                    NSString *ruleText = _ruleTextHolder;
-//                    _ruleTextHolder = rule.ruleText;
-//                    rule.ruleText = ruleText;
-//                    
-//                    [[AEService singleton] updateRule:rule oldRuleText:_ruleTextHolder];
                     [[[AEService singleton] antibanner] rollbackTransaction];
                     [self reloadRulesAndScrollBottom:NO];
                 };
@@ -291,13 +298,13 @@
                 [self reloadRulesAndScrollBottom:NO];
 
                 // was commet, became rule
-                if (![rule.ruleText hasPrefix:COMMENT] && [_ruleTextHolder hasPrefix:COMMENT]) {
+                if (![rule.ruleText hasPrefix:COMMENT] && [_ruleHolder.ruleText hasPrefix:COMMENT]) {
                     
                     _newRuleCount--;
                     [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
                 }
                 // was rule, became comment
-                else if ([rule.ruleText hasPrefix:COMMENT] && ![_ruleTextHolder hasPrefix:COMMENT]){
+                else if ([rule.ruleText hasPrefix:COMMENT] && ![_ruleHolder.ruleText hasPrefix:COMMENT]){
                     
                     _newRuleCount++;
                     [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
@@ -405,7 +412,7 @@
         
         if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
             
-            rule.ruleText = _ruleTextHolder;
+            rule.ruleText = _ruleHolder.ruleText;
             [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
         }
     }
@@ -422,6 +429,9 @@
                 
                 _newRuleCount = newRuleCountHolder;
                 [[[AEService singleton] antibanner] endTransaction];
+#ifdef PRO
+                [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
+#endif
                 
             } rollbackBlock:^{
                 

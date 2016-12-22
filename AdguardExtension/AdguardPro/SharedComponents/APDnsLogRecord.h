@@ -62,6 +62,11 @@
  */
 @property (nonatomic) BOOL isWhitelisted;
 /**
+ Indicates that this record contains domain from blacklist.
+ blacklist - this is rules list from the User Filter, which have syntax `||domain.name^`
+ */
+@property (nonatomic) BOOL isBlacklisted;
+/**
  DNS request.
  */
 @property (nonatomic) NSArray <APDnsRequest *> *requests;

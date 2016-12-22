@@ -83,12 +83,27 @@ static NSDictionary *_types;
     }
 }
 
-+ (APDnsResourceType *)type:(u_int16_t)value{
++ (APDnsResourceType *)type:(uint16_t)value{
     
     APDnsResourceType *theType = [APDnsResourceType new];
     theType.intValue = value;
     
     return theType;
+}
+
++ (APDnsResourceType *)aType{
+    
+    return [APDnsResourceType type:1];
+}
+
++ (APDnsResourceType *)aaaaType{
+    
+    return [APDnsResourceType type:28];
+}
+
++ (APDnsResourceType *)a6Type{
+    
+    return [APDnsResourceType type:38];
 }
 
 - (NSString *)description{
