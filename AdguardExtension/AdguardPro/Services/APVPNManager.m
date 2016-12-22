@@ -24,6 +24,8 @@
 #import "APSharedResources.h"
 #import "AppDelegate.h"
 #import "ACommons/ACNetwork.h"
+#import "AEBlacklistDomainObject.h"
+#import "ASDFilterObjects.h"
 
 
 #define VPN_NAME                @" VPN"
@@ -222,26 +224,32 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
-- (void)sendReloadWhitelist {
+- (void)sendReloadUserfilterDataIfRule:(ASDFilterRule *)rule {
     
-        _lastError = nil;
-        if (_manager.connection) {
+    if (! ([[AEWhitelistDomainObject alloc] initWithRule:rule]
+           || [[AEBlacklistDomainObject alloc] initWithRule:rule])) {
+        
+        return;
+    }
+    
+    _lastError = nil;
+    if (_manager.connection) {
+        
+        NSData *message = [APSharedResources host2tunnelMessageUserfilterDataReload];
+        NSError *err = nil;
+        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
+        if (err) {
             
-            NSData *message = [APSharedResources host2tunnelMessageWhitelistReload];
-            NSError *err = nil;
-            [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
-            if (err) {
-                
-                DDLogError(@"(APVPNManager) Can't send message for reload whitelist: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
-                _lastError = _standartError;
-            }
-            return;
+            DDLogError(@"(APVPNManager) Can't send message for reload user filter data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            _lastError = _standartError;
         }
-        else {
-            
-            DDLogError(@"(APVPNManager)  Can't send message for reload whitelist: VPN session connection is nil");
-            _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
-        }
+        return;
+    }
+    else {
+        
+        DDLogError(@"(APVPNManager)  Can't send message for reload user filter data: VPN session connection is nil");
+        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+    }
 }
 
 - (BOOL)clearDnsRequestsLog {

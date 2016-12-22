@@ -24,6 +24,7 @@
 #import "AEService.h"
 #import "AEUILoadingModal.h"
 #import "AEUIUtils.h"
+#import "AEUISubscriptionSectionObject.h"
 
 @interface AEUISubscriptionFilterDetailController (){
 
@@ -37,13 +38,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.nameCell.longLabel.text = self.meta.localization.name;
-    self.descriptionCell.longLabel.text = self.meta.localization.descr;
+    self.nameCell.longLabel.text = self.meta.i18nName;
+    self.descriptionCell.longLabel.text = self.meta.i18nDescription;
     self.filterVersion.text = self.meta.version;
     self.filterLastModified.text =
         [NSDateFormatter localizedStringFromDate:self.meta.updateDate
                                        dateStyle:NSDateFormatterShortStyle
                                        timeStyle:NSDateFormatterShortStyle];
+    self.filterLastModified.accessibilityLabel =
+    [NSDateFormatter localizedStringFromDate:self.meta.updateDate
+                                   dateStyle:NSDateFormatterLongStyle
+                                   timeStyle:NSDateFormatterShortStyle];
 
     self.statusButton.on = [self.meta.enabled boolValue];
 

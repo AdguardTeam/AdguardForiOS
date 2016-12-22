@@ -73,6 +73,8 @@
 		657247EC1B8335A6008430CD /* simpleText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 657247E61B8335A6008430CD /* simpleText.txt */; };
 		657248881B83C02C008430CD /* ADlocationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248861B83C02C008430CD /* ADlocationsTests.m */; };
 		657248981B83C131008430CD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657248971B83C131008430CD /* libsqlite3.dylib */; };
+		657539CE1DA51DCB0047A48C /* ABERequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 657539CD1DA51DCB0047A48C /* ABERequestTests.m */; };
+		657539CF1DA51F0C0047A48C /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
 		659491B81C6CC96800E501BA /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248711B83BE15008430CD /* ADLocales.m */; };
 		659491B91C6CC96800E501BA /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248731B83BE15008430CD /* ADLocations.m */; };
 		659491BA1C6CC96800E501BA /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248761B83BE15008430CD /* ADProductInfo.m */; };
@@ -442,6 +444,7 @@
 		657248801B83BE39008430CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		657248861B83C02C008430CD /* ADlocationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADlocationsTests.m; sourceTree = "<group>"; };
 		657248971B83C131008430CD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		657539CD1DA51DCB0047A48C /* ABERequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABERequestTests.m; sourceTree = "<group>"; };
 		659493261C6CCF9000E501BA /* schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = schema.sql; path = createDefaultDB/Resources/schema.sql; sourceTree = SOURCE_ROOT; };
 		659493271C6CCF9000E501BA /* schema0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = schema0.001.sql; path = createDefaultDB/Resources/schema0.001.sql; sourceTree = SOURCE_ROOT; };
 		659493281C6CCF9000E501BA /* update0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = update0.001.sql; path = createDefaultDB/Resources/update0.001.sql; sourceTree = SOURCE_ROOT; };
@@ -544,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				651626C61B85CFF5003EB113 /* ABackEndClientsTests.m */,
+				657539CD1DA51DCB0047A48C /* ABERequestTests.m */,
 				651626C41B85CFF5003EB113 /* Supporting Files */,
 			);
 			name = ABackEndClientsTests;
@@ -1269,6 +1273,7 @@
 				659492471C6CC9FB00E501BA /* ACLExecuteBlockDelayed.m in Sources */,
 				659492481C6CC9FB00E501BA /* ACLFileLocker.m in Sources */,
 				659492491C6CC9FB00E501BA /* ACLFileLogger.m in Sources */,
+				657539CF1DA51F0C0047A48C /* ACObject.m in Sources */,
 				6594924A1C6CC9FB00E501BA /* ACLJobController.m in Sources */,
 				6594924B1C6CC9FB00E501BA /* ACLLogger.m in Sources */,
 				6594924C1C6CC9FB00E501BA /* ACLWildcard.m in Sources */,
@@ -1288,6 +1293,7 @@
 				6594925A1C6CC9FB00E501BA /* ACNNetworking.m in Sources */,
 				6594925C1C6CC9FB00E501BA /* ACNHttpUtils.m in Sources */,
 				659492611C6CC9FB00E501BA /* ACSSystemUtils.m in Sources */,
+				657539CE1DA51DCB0047A48C /* ABERequestTests.m in Sources */,
 				659492631C6CC9FB00E501BA /* Reachability.m in Sources */,
 				659492641C6CC9FB00E501BA /* ABECRequest.m in Sources */,
 				659492651C6CC9FB00E501BA /* ABECFilter.m in Sources */,

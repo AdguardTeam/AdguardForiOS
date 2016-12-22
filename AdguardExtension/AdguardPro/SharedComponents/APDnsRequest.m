@@ -20,6 +20,7 @@
 
 #import "APDnsRequest.h"
 #import "APDnsResourceType.h"
+#import "APDnsResourceClass.h"
 
 @implementation APDnsRequest
 
@@ -27,19 +28,28 @@
 
     self = [super init];
     if (self) {
-        u_int16_t type = ns_rr_type(rr);
+        uint16_t type = ns_rr_type(rr);
         _name = [NSString stringWithUTF8String:ns_rr_name(rr)];
         _type = [APDnsResourceType type:type];
+        _qClass = [APDnsResourceClass class:ns_rr_class(rr)];
         
-        if (type == ns_t_a || type == ns_t_aaaa || type == ns_t_a6) {
-            _addressRequest = YES;
-        }
-        else{
-            _addressRequest = NO;
-        }
-
+        [self setAddressRequestValue];
     }
     
+    return self;
+}
+
+- (id)initWithName:(NSString *)name type:(APDnsResourceType *)type class:(APDnsResourceClass *)class {
+
+    self = [super init];
+    if (self) {
+        
+        _name = name;
+        _type = type;
+        _qClass = class;
+        
+        [self setAddressRequestValue];
+    }
     return self;
 }
 
@@ -72,4 +82,23 @@
     
     return [NSString stringWithFormat:@"host: %@, type: %@", self.name, self.type];
 }
+
+- (id)copyWithZone:(NSZone *)zone {
+
+    return [[APDnsRequest alloc] initWithName:_name type:_type class:_qClass];
+}
+
+
+- (void)setAddressRequestValue {
+    
+    int type = [_type intValue];
+    if (type == ns_t_a || type == ns_t_aaaa || type == ns_t_a6) {
+        _addressRequest = YES;
+    }
+    else{
+        _addressRequest = NO;
+    }
+
+}
+
 @end

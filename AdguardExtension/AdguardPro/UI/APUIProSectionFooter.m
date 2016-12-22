@@ -29,6 +29,7 @@
     if (self) {
         
         _textView = [UITextView new];
+        _textView.isAccessibilityElement = NO;
         _textView.editable = NO;
         _textView.scrollEnabled = NO;
         _textView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -90,6 +91,15 @@
         //for preventing of error of the calculating of size.
         _textView.attributedText = [[NSTextStorage alloc] initWithAttributedString:textString];
     }
+}
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSString *)accessibilityLabel {
+    
+    return _textView.text;
 }
 
 @end

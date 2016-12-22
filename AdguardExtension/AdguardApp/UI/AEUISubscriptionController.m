@@ -202,7 +202,7 @@
      if ([segue.identifier isEqualToString:@"filterDetail"]) {
          
          AEUISubscriptionFilterDetailController *destination = [segue destinationViewController];
-         ASDFilterMetadata *meta = [self filterForSelectedRow];
+         AEUISubscriptionSectionFilterMetadata *meta = [self filterForSelectedRow];
          destination.meta = meta;
          destination.parent = self;
          destination.selectedFilterCellPath = [self.tableView indexPathForSelectedRow];
@@ -288,7 +288,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         return nil;
     }
     
-    cell.textLabel.text = meta.localization.name;
+    cell.textLabel.text = meta.i18nName;
 
     BOOL enabled = [meta.enabled boolValue];
     
