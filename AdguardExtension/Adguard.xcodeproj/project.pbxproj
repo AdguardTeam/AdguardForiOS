@@ -890,6 +890,7 @@
 
 /* Begin PBXFileReference section */
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
+		65040D2B1E11CD2A00DE25D1 /* AdguardLogSenderPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSenderPro.entitlements; sourceTree = "<group>"; };
 		6504C0861C58D4C30014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		6504C0871C58D4C40014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
 		6504C0891C58D4C50014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -937,7 +938,6 @@
 		652F58B01E106FEA0012353C /* AdguardLogSender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSender.entitlements; sourceTree = "<group>"; };
 		652F58DE1E1071470012353C /* AdguardLogSenderPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardLogSenderPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AdguardLogSender copy-Info.plist"; path = "/Users/still/Documents/dev/AG/ios/AdguardExtension/AdguardLogSender copy-Info.plist"; sourceTree = "<absolute>"; };
-		652F58E01E10716A0012353C /* AdguardLogSenderPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSenderPro.entitlements; sourceTree = "<group>"; };
 		652F89F21B92F2E5002E0601 /* AEUISubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionController.h; sourceTree = "<group>"; };
 		652F89F31B92F2E5002E0601 /* AEUISubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUISubscriptionController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		652F89F51B92F94D002E0601 /* AEUISubscriptionSectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionSectionObject.h; sourceTree = "<group>"; };
@@ -1374,6 +1374,7 @@
 		652F587A1E106DF10012353C /* AdguardLogSender */ = {
 			isa = PBXGroup;
 			children = (
+				65040D2B1E11CD2A00DE25D1 /* AdguardLogSenderPro.entitlements */,
 				652F58B01E106FEA0012353C /* AdguardLogSender.entitlements */,
 				652F587E1E106DF10012353C /* AppDelegate.h */,
 				652F587F1E106DF10012353C /* AppDelegate.m */,
@@ -1972,7 +1973,6 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
-				652F58E01E10716A0012353C /* AdguardLogSenderPro.entitlements */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
 				65F398131B7B684700ABCD39 /* AdguardApp */,
 				659886E91CF8315F003ECD1C /* AdguardPro */,
@@ -3800,7 +3800,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = AdguardLogSenderPro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSender/AdguardLogSenderPro.entitlements;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3822,7 +3822,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = AdguardLogSenderPro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSender/AdguardLogSenderPro.entitlements;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "AdguardLogSender copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
