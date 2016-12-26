@@ -64,7 +64,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       var len = selectedElements.length;
       if (len) {
         var item = selectedElements[len - 1];
-        var item = ruleConstructor.constructRuleText(item,{'domain': document.domain});
+        var item = ruleConstructor.constructRuleText(item,{'url': document.URL, 'ruleType': 'CSS'});
         if (item) {
           item = acceptUrlScheme + '://add/' + encodeURIComponent(item);
           document.location = item;
