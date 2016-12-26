@@ -761,6 +761,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		6504C0861C58D4C30014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		6504C0871C58D4C40014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
 		6504C0891C58D4C50014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1666,6 +1667,7 @@
 				65AA104D1C88540800CB67C5 /* adguard-assistant.js */,
 				65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */,
 				65D04F7D1C872B92001A9A02 /* selector.css */,
+				65040D251E11652A00DE25D1 /* ExternalLibsSources.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -1898,6 +1900,20 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
+		65040D261E11657F00DE25D1 /* Getting External Javascript Libs */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = ./getExtJsLibs.sh;
+			buildConfigurationList = 65040D271E11657F00DE25D1 /* Build configuration list for PBXLegacyTarget "Getting External Javascript Libs" */;
+			buildPhases = (
+			);
+			buildToolPath = /bin/bash;
+			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts";
+			dependencies = (
+			);
+			name = "Getting External Javascript Libs";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Getting External Javascript Libs";
+		};
 		65423D951C89B7C900DD1224 /* Clean Script */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "${SRCROOT}/clean-script.sh $(ACTION)";
@@ -2209,6 +2225,11 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
+					65040D261E11657F00DE25D1 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = N33TQXN8C7;
+						ProvisioningStyle = Automatic;
+					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -2342,6 +2363,7 @@
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
 				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
 				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */,
+				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
 			);
 		};
 /* End PBXProject section */
@@ -2548,7 +2570,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${ACTION_RESOURCES_DIR}/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nDownload()\n{\n    echo -n \"${1}\"\n    curl -s \"${1}\" >> \"${LibsFile}\"\n    if [ ! $? == 0 ]; then\n    echo \" - fail\"\n    rm -f \"${LibsFile}\"\n    exit 1\n    fi\n    \n    echo \" - done\"\n}\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nif [ ! -f \"$LibsFile\" ]; then\n\necho \"Downloading external libs sources..\"\n\nrm -f \"$LibsFile\"\n\n\nDownload \"${ACTION_JAVASCRIPT_LIB01}\"\nDownload \"${ACTION_JAVASCRIPT_LIB02}\"\nDownload \"${ACTION_JAVASCRIPT_LIB03}\"\nDownload \"${ACTION_JAVASCRIPT_SELECTOR}\"\nDownload \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\"\n\necho \"Done\"\n\nfi\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
+			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${SRCROOT}/ActionExtension/js/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
 		};
 		6598876A1CF83947003ECD1C /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2591,7 +2613,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${ACTION_RESOURCES_DIR}/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nDownload()\n{\n    echo -n \"${1}\"\n    curl -s \"${1}\" >> \"${LibsFile}\"\n    if [ ! $? == 0 ]; then\n    echo \" - fail\"\n    rm -f \"${LibsFile}\"\n    exit 1\n    fi\n    \n    echo \" - done\"\n}\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nif [ ! -f \"$LibsFile\" ]; then\n\necho \"Downloading external libs sources..\"\n\nrm -f \"$LibsFile\"\n\n\nDownload \"${ACTION_JAVASCRIPT_LIB01}\"\nDownload \"${ACTION_JAVASCRIPT_LIB02}\"\nDownload \"${ACTION_JAVASCRIPT_LIB03}\"\nDownload \"${ACTION_JAVASCRIPT_SELECTOR}\"\nDownload \"${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}\"\n\necho \"Done\"\n\nfi\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
+			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${SRCROOT}/ActionExtension/js/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3374,6 +3396,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		65040D281E11657F00DE25D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65040D291E11657F00DE25D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		65423D971C89B7C900DD1224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3990,6 +4045,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65040D271E11657F00DE25D1 /* Build configuration list for PBXLegacyTarget "Getting External Javascript Libs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65040D281E11657F00DE25D1 /* Debug */,
+				65040D291E11657F00DE25D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
