@@ -291,7 +291,9 @@ static ABECFilterClient *ABECFilterSingleton;
     
     @synchronized(ABECFilterSingleton) {
         self.delegate = delegate;
-        _backgroundSession = [self backgroundSession:sessionId updateTimeout:updateTimeout sessionDelegate:self];
+        if (! _backgroundSession) {
+            _backgroundSession = [self backgroundSession:sessionId updateTimeout:updateTimeout sessionDelegate:self];
+        }
         _asyncInit = YES;
         _background = YES;
     }
