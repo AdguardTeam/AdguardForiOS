@@ -48,6 +48,8 @@ typedef void (^AEDownloadsCompletionBlock)();
     AEDownloadsCompletionBlock _downloadCompletion;
     AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
+    
+    BOOL _activateWithOpenUrl;
 }
 
 @end
@@ -82,6 +84,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         _fetchCompletion = nil;
         _downloadCompletion = nil;
+        _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
         // Init database
@@ -208,6 +211,12 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
             
+            if (_activateWithOpenUrl) {
+                _activateWithOpenUrl = NO;
+                DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.");
+                return;
+            }
+            
             if (AEService.singleton.antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
@@ -304,6 +313,9 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
+    
+    _activateWithOpenUrl = YES;
+    
     NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
     if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
          || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
