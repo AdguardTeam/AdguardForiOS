@@ -25,6 +25,134 @@
 		6518BD891DABBEBB00FDD1F3 /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		6518BD8A1DABBEE900FDD1F3 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
 		6518BD8B1DABBEE900FDD1F3 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		652F587D1E106DF10012353C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587C1E106DF10012353C /* main.m */; };
+		652F58801E106DF10012353C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587F1E106DF10012353C /* AppDelegate.m */; };
+		652F58831E106DF10012353C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F58821E106DF10012353C /* ViewController.m */; };
+		652F58861E106DF10012353C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F58841E106DF10012353C /* Main.storyboard */; };
+		652F58881E106DF10012353C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652F58871E106DF10012353C /* Assets.xcassets */; };
+		652F588B1E106DF10012353C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F58891E106DF10012353C /* LaunchScreen.storyboard */; };
+		652F58901E106FD40012353C /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
+		652F58911E106FD40012353C /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
+		652F58921E106FD40012353C /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
+		652F58931E106FD40012353C /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C01C6B7686000F00D7 /* ACLJobController.m */; };
+		652F58941E106FD40012353C /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
+		652F58951E106FD40012353C /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01CC1C6B7686000F00D7 /* ACLWildcard.m */; };
+		652F58961E106FD40012353C /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
+		652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D31C6B7686000F00D7 /* DDAbstractDatabaseLogger.m */; };
+		652F58981E106FD40012353C /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D51C6B7686000F00D7 /* DDASLLogger.m */; };
+		652F58991E106FD40012353C /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D71C6B7686000F00D7 /* DDFileLogger.m */; };
+		652F589A1E106FD40012353C /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DA1C6B7686000F00D7 /* DDLog.m */; };
+		652F589B1E106FD40012353C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
+		652F589C1E106FD40012353C /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DF1C6B7686000F00D7 /* DDContextFilterLogFormatter.m */; };
+		652F589D1E106FD40012353C /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
+		652F589E1E106FD40012353C /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E31C6B7686000F00D7 /* DDMultiFormatter.m */; };
+		652F589F1E106FD40012353C /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
+		652F58A01E106FD40012353C /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		652F58A11E106FD40012353C /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		652F58A21E106FD40012353C /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
+		652F58A31E106FD40012353C /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		652F58A41E106FD40012353C /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
+		652F58A51E106FD40012353C /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
+		652F58A61E106FD40012353C /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		652F58A71E106FD40012353C /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
+		652F58A81E106FD40012353C /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
+		652F58A91E106FD40012353C /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
+		652F58AA1E106FD40012353C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
+		652F58AB1E106FD40012353C /* AEUILoadingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5B1BDFF28C00A9C595 /* AEUILoadingModal.m */; };
+		652F58AC1E106FD40012353C /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
+		652F58AD1E106FD40012353C /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
+		652F58AE1E106FD40012353C /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
+		652F58AF1E106FD40012353C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
+		652F58B31E1071470012353C /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
+		652F58B41E1071470012353C /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
+		652F58B51E1071470012353C /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
+		652F58B61E1071470012353C /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C01C6B7686000F00D7 /* ACLJobController.m */; };
+		652F58B71E1071470012353C /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
+		652F58B81E1071470012353C /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01CC1C6B7686000F00D7 /* ACLWildcard.m */; };
+		652F58B91E1071470012353C /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
+		652F58BA1E1071470012353C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D31C6B7686000F00D7 /* DDAbstractDatabaseLogger.m */; };
+		652F58BB1E1071470012353C /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D51C6B7686000F00D7 /* DDASLLogger.m */; };
+		652F58BC1E1071470012353C /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D71C6B7686000F00D7 /* DDFileLogger.m */; };
+		652F58BD1E1071470012353C /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DA1C6B7686000F00D7 /* DDLog.m */; };
+		652F58BE1E1071470012353C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
+		652F58BF1E1071470012353C /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DF1C6B7686000F00D7 /* DDContextFilterLogFormatter.m */; };
+		652F58C01E1071470012353C /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
+		652F58C11E1071470012353C /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E31C6B7686000F00D7 /* DDMultiFormatter.m */; };
+		652F58C21E1071470012353C /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
+		652F58C31E1071470012353C /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		652F58C41E1071470012353C /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		652F58C51E1071470012353C /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
+		652F58C61E1071470012353C /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		652F58C71E1071470012353C /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
+		652F58C81E1071470012353C /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
+		652F58C91E1071470012353C /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		652F58CA1E1071470012353C /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
+		652F58CB1E1071470012353C /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
+		652F58CC1E1071470012353C /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
+		652F58CD1E1071470012353C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
+		652F58CE1E1071470012353C /* AEUILoadingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5B1BDFF28C00A9C595 /* AEUILoadingModal.m */; };
+		652F58CF1E1071470012353C /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
+		652F58D01E1071470012353C /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
+		652F58D11E1071470012353C /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
+		652F58D21E1071470012353C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
+		652F58D31E1071470012353C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F58821E106DF10012353C /* ViewController.m */; };
+		652F58D41E1071470012353C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587F1E106DF10012353C /* AppDelegate.m */; };
+		652F58D51E1071470012353C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587C1E106DF10012353C /* main.m */; };
+		652F58D81E1071470012353C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F58891E106DF10012353C /* LaunchScreen.storyboard */; };
+		652F58D91E1071470012353C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652F58871E106DF10012353C /* Assets.xcassets */; };
+		652F58DA1E1071470012353C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F58841E106DF10012353C /* Main.storyboard */; };
+		652F58E11E1071EA0012353C /* AEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE81BD4D29F00FFC71C /* AEService.m */; };
+		652F58E21E10720B0012353C /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
+		652F58E31E1072690012353C /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
+		652F58E41E1072690012353C /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
+		652F58E51E1072690012353C /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A081BB9824C00F53F3B /* ABECRequest.m */; };
+		652F58E61E1072690012353C /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
+		652F58E71E1072690012353C /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
+		652F58E81E1072690012353C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
+		652F58E91E1072690012353C /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
+		652F58EA1E1072690012353C /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
+		652F58EB1E1072690012353C /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		652F58EC1E1072690012353C /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		652F58ED1E1072690012353C /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
+		652F58EE1E1072690012353C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
+		652F58EF1E1072690012353C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE01BB9824C00F53F3B /* FMDatabaseAdditions.m */; };
+		652F58F01E1072690012353C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
+		652F58F11E1072690012353C /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE41BB9824C00F53F3B /* FMDatabaseQueue.m */; };
+		652F58F21E1072690012353C /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
+		652F58F31E1072690012353C /* FMSQLStatementSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEA1BB9824C00F53F3B /* FMSQLStatementSplitter.m */; };
+		652F58F41E1072690012353C /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
+		652F58F51E1072690012353C /* FMStatementQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEE1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m */; };
+		652F58F61E1072690012353C /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
+		652F58F71E1072690012353C /* AESFilterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */; };
+		652F58F81E1072690012353C /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
+		652F58F91E1072690012353C /* AEBlacklistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */; };
+		652F58FA1E10727E0012353C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
+		652F58FB1E1072ED0012353C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
+		652F58FC1E1073080012353C /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
+		652F58FD1E1073080012353C /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
+		652F58FE1E1073080012353C /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A081BB9824C00F53F3B /* ABECRequest.m */; };
+		652F58FF1E1073080012353C /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
+		652F59001E1073080012353C /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
+		652F59011E1073080012353C /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
+		652F59021E1073080012353C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
+		652F59031E1073080012353C /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
+		652F59041E1073080012353C /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
+		652F59051E1073080012353C /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
+		652F59061E1073080012353C /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		652F59071E1073080012353C /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
+		652F59081E1073080012353C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
+		652F59091E1073080012353C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE01BB9824C00F53F3B /* FMDatabaseAdditions.m */; };
+		652F590A1E1073080012353C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
+		652F590B1E1073080012353C /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE41BB9824C00F53F3B /* FMDatabaseQueue.m */; };
+		652F590C1E1073080012353C /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
+		652F590D1E1073080012353C /* FMSQLStatementSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEA1BB9824C00F53F3B /* FMSQLStatementSplitter.m */; };
+		652F590E1E1073080012353C /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
+		652F590F1E1073080012353C /* FMStatementQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEE1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m */; };
+		652F59101E1073080012353C /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
+		652F59111E1073080012353C /* AEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE81BD4D29F00FFC71C /* AEService.m */; };
+		652F59121E1073080012353C /* AESFilterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */; };
+		652F59131E1073080012353C /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
+		652F59141E1073080012353C /* AEBlacklistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */; };
 		652F89F41B92F2E5002E0601 /* AEUISubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F89F31B92F2E5002E0601 /* AEUISubscriptionController.m */; };
 		652F89F71B92F94D002E0601 /* AEUISubscriptionSectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F89F61B92F94D002E0601 /* AEUISubscriptionSectionObject.m */; };
 		653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153411CF9911800C92A73 /* AdguardPro.entitlements */; };
@@ -796,6 +924,20 @@
 		651703951B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionFilterDetailController.h; sourceTree = "<group>"; };
 		651703961B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionFilterDetailController.m; sourceTree = "<group>"; };
 		651D67931BB02B44007F00FA /* ActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ActionExtension.entitlements; sourceTree = "<group>"; };
+		652F58791E106DF10012353C /* AdguardLogSender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardLogSender.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		652F587C1E106DF10012353C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		652F587E1E106DF10012353C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		652F587F1E106DF10012353C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		652F58811E106DF10012353C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		652F58821E106DF10012353C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		652F58851E106DF10012353C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		652F58871E106DF10012353C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		652F588A1E106DF10012353C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		652F588C1E106DF10012353C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		652F58B01E106FEA0012353C /* AdguardLogSender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSender.entitlements; sourceTree = "<group>"; };
+		652F58DE1E1071470012353C /* AdguardLogSenderPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardLogSenderPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AdguardLogSender copy-Info.plist"; path = "/Users/still/Documents/dev/AG/ios/AdguardExtension/AdguardLogSender copy-Info.plist"; sourceTree = "<absolute>"; };
+		652F58E01E10716A0012353C /* AdguardLogSenderPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSenderPro.entitlements; sourceTree = "<group>"; };
 		652F89F21B92F2E5002E0601 /* AEUISubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionController.h; sourceTree = "<group>"; };
 		652F89F31B92F2E5002E0601 /* AEUISubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUISubscriptionController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		652F89F51B92F94D002E0601 /* AEUISubscriptionSectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionSectionObject.h; sourceTree = "<group>"; };
@@ -1109,6 +1251,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		652F58761E106DF10012353C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F58FA1E10727E0012353C /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652F58D61E1071470012353C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F58FB1E1072ED0012353C /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		658237301D07FE6700B824F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1213,6 +1371,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		652F587A1E106DF10012353C /* AdguardLogSender */ = {
+			isa = PBXGroup;
+			children = (
+				652F58B01E106FEA0012353C /* AdguardLogSender.entitlements */,
+				652F587E1E106DF10012353C /* AppDelegate.h */,
+				652F587F1E106DF10012353C /* AppDelegate.m */,
+				652F58811E106DF10012353C /* ViewController.h */,
+				652F58821E106DF10012353C /* ViewController.m */,
+				652F58841E106DF10012353C /* Main.storyboard */,
+				652F58871E106DF10012353C /* Assets.xcassets */,
+				652F58891E106DF10012353C /* LaunchScreen.storyboard */,
+				652F588C1E106DF10012353C /* Info.plist */,
+				652F587B1E106DF10012353C /* Supporting Files */,
+			);
+			path = AdguardLogSender;
+			sourceTree = "<group>";
+		};
+		652F587B1E106DF10012353C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				652F587C1E106DF10012353C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		652F89EE1B92E064002E0601 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1789,6 +1972,7 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
+				652F58E01E10716A0012353C /* AdguardLogSenderPro.entitlements */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
 				65F398131B7B684700ABCD39 /* AdguardApp */,
 				659886E91CF8315F003ECD1C /* AdguardPro */,
@@ -1800,7 +1984,9 @@
 				65B621031D2D3D9F0047248F /* AdguardProTests */,
 				65F398381B7B684700ABCD39 /* AdguardUITests */,
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
+				652F587A1E106DF10012353C /* AdguardLogSender */,
 				65F398121B7B684700ABCD39 /* Products */,
+				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1817,6 +2003,8 @@
 				6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */,
 				658237331D07FE6700B824F4 /* ProTunnel.appex */,
 				65B621021D2D3D9E0047248F /* AdguardProTests.xctest */,
+				652F58791E106DF10012353C /* AdguardLogSender.app */,
+				652F58DE1E1071470012353C /* AdguardLogSenderPro.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2015,6 +2203,40 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		652F58781E106DF10012353C /* AdguardLogSender */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 652F588F1E106DF10012353C /* Build configuration list for PBXNativeTarget "AdguardLogSender" */;
+			buildPhases = (
+				652F58751E106DF10012353C /* Sources */,
+				652F58761E106DF10012353C /* Frameworks */,
+				652F58771E106DF10012353C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdguardLogSender;
+			productName = AdguardLogSender;
+			productReference = 652F58791E106DF10012353C /* AdguardLogSender.app */;
+			productType = "com.apple.product-type.application";
+		};
+		652F58B11E1071470012353C /* AdguardLogSenderPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 652F58DB1E1071470012353C /* Build configuration list for PBXNativeTarget "AdguardLogSenderPro" */;
+			buildPhases = (
+				652F58B21E1071470012353C /* Sources */,
+				652F58D61E1071470012353C /* Frameworks */,
+				652F58D71E1071470012353C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdguardLogSenderPro;
+			productName = AdguardLogSender;
+			productReference = 652F58DE1E1071470012353C /* AdguardLogSenderPro.app */;
+			productType = "com.apple.product-type.application";
+		};
 		658237321D07FE6700B824F4 /* ProTunnel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6582373E1D07FE6700B824F4 /* Build configuration list for PBXNativeTarget "ProTunnel" */;
@@ -2230,6 +2452,19 @@
 						DevelopmentTeam = N33TQXN8C7;
 						ProvisioningStyle = Automatic;
 					};
+					652F58781E106DF10012353C = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = N33TQXN8C7;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					652F58B11E1071470012353C = {
+						DevelopmentTeam = N33TQXN8C7;
+					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -2363,12 +2598,34 @@
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
 				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
 				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */,
+				652F58781E106DF10012353C /* AdguardLogSender */,
+				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		652F58771E106DF10012353C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F588B1E106DF10012353C /* LaunchScreen.storyboard in Resources */,
+				652F58881E106DF10012353C /* Assets.xcassets in Resources */,
+				652F58861E106DF10012353C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652F58D71E1071470012353C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F58D81E1071470012353C /* LaunchScreen.storyboard in Resources */,
+				652F58D91E1071470012353C /* Assets.xcassets in Resources */,
+				652F58DA1E1071470012353C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		658237311D07FE6700B824F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2618,6 +2875,140 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		652F58751E106DF10012353C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F58E31E1072690012353C /* ABECFilter.m in Sources */,
+				652F58E41E1072690012353C /* ABECFilterParsers.m in Sources */,
+				652F58E51E1072690012353C /* ABECRequest.m in Sources */,
+				652F58E61E1072690012353C /* ACIOStream.m in Sources */,
+				652F58E71E1072690012353C /* ACIOUtils.m in Sources */,
+				652F58E81E1072690012353C /* Reachability.m in Sources */,
+				652F58E91E1072690012353C /* ASDatabase.m in Sources */,
+				652F58EA1E1072690012353C /* ASDFilterObjects.m in Sources */,
+				652F58EB1E1072690012353C /* ADBTable.m in Sources */,
+				652F58EC1E1072690012353C /* ADBTableRow.m in Sources */,
+				652F58ED1E1072690012353C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				652F58EE1E1072690012353C /* FMDatabase.m in Sources */,
+				652F58EF1E1072690012353C /* FMDatabaseAdditions.m in Sources */,
+				652F58F01E1072690012353C /* FMDatabasePool.m in Sources */,
+				652F58F11E1072690012353C /* FMDatabaseQueue.m in Sources */,
+				652F58F21E1072690012353C /* FMResultSet.m in Sources */,
+				652F58F31E1072690012353C /* FMSQLStatementSplitter.m in Sources */,
+				652F58F41E1072690012353C /* FMStatementKeywordRecogniser.m in Sources */,
+				652F58F51E1072690012353C /* FMStatementQuotedRecogniser.m in Sources */,
+				652F58F61E1072690012353C /* AESAntibanner.m in Sources */,
+				652F58F71E1072690012353C /* AESFilterConverter.m in Sources */,
+				652F58F81E1072690012353C /* AEWhitelistDomainObject.m in Sources */,
+				652F58F91E1072690012353C /* AEBlacklistDomainObject.m in Sources */,
+				652F58901E106FD40012353C /* ACLExecuteBlockDelayed.m in Sources */,
+				652F58911E106FD40012353C /* ACLFileLocker.m in Sources */,
+				652F58921E106FD40012353C /* ACLFileLogger.m in Sources */,
+				652F58931E106FD40012353C /* ACLJobController.m in Sources */,
+				652F58941E106FD40012353C /* ACLLogger.m in Sources */,
+				652F58951E106FD40012353C /* ACLWildcard.m in Sources */,
+				652F58961E106FD40012353C /* CLIColor.m in Sources */,
+				652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */,
+				652F58981E106FD40012353C /* DDASLLogger.m in Sources */,
+				652F58991E106FD40012353C /* DDFileLogger.m in Sources */,
+				652F58E21E10720B0012353C /* ACFFileUtils.m in Sources */,
+				652F589A1E106FD40012353C /* DDLog.m in Sources */,
+				652F589B1E106FD40012353C /* DDTTYLogger.m in Sources */,
+				652F589C1E106FD40012353C /* DDContextFilterLogFormatter.m in Sources */,
+				652F589D1E106FD40012353C /* DDDispatchQueueLogFormatter.m in Sources */,
+				652F589E1E106FD40012353C /* DDMultiFormatter.m in Sources */,
+				652F589F1E106FD40012353C /* NSDate+Utils.m in Sources */,
+				652F58A01E106FD40012353C /* NSException+Utils.m in Sources */,
+				652F58A11E106FD40012353C /* NSString+Utils.m in Sources */,
+				652F58A21E106FD40012353C /* NSURL+Utils.m in Sources */,
+				652F58A31E106FD40012353C /* ACObject.m in Sources */,
+				652F58A41E106FD40012353C /* ACNHttpUtils.m in Sources */,
+				652F58A51E106FD40012353C /* ACNNetworking.m in Sources */,
+				652F58A61E106FD40012353C /* ACSSystemUtils.m in Sources */,
+				652F58A71E106FD40012353C /* ADLocales.m in Sources */,
+				652F58A81E106FD40012353C /* ADLocations.m in Sources */,
+				652F58A91E106FD40012353C /* ADProductInfo.m in Sources */,
+				652F58AA1E106FD40012353C /* NSData+GZIP.m in Sources */,
+				652F58AB1E106FD40012353C /* AEUILoadingModal.m in Sources */,
+				652F58AC1E106FD40012353C /* AEUILoadingModalController.m in Sources */,
+				652F58E11E1071EA0012353C /* AEService.m in Sources */,
+				652F58AD1E106FD40012353C /* AEUIUtils.m in Sources */,
+				652F58AE1E106FD40012353C /* AESSupport.m in Sources */,
+				652F58AF1E106FD40012353C /* AESharedResources.m in Sources */,
+				652F58831E106DF10012353C /* ViewController.m in Sources */,
+				652F58801E106DF10012353C /* AppDelegate.m in Sources */,
+				652F587D1E106DF10012353C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652F58B21E1071470012353C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652F58FC1E1073080012353C /* ABECFilter.m in Sources */,
+				652F58FD1E1073080012353C /* ABECFilterParsers.m in Sources */,
+				652F58FE1E1073080012353C /* ABECRequest.m in Sources */,
+				652F58FF1E1073080012353C /* ACFFileUtils.m in Sources */,
+				652F59001E1073080012353C /* ACIOStream.m in Sources */,
+				652F59011E1073080012353C /* ACIOUtils.m in Sources */,
+				652F59021E1073080012353C /* Reachability.m in Sources */,
+				652F59031E1073080012353C /* ASDatabase.m in Sources */,
+				652F59041E1073080012353C /* ASDFilterObjects.m in Sources */,
+				652F59051E1073080012353C /* ADBTable.m in Sources */,
+				652F59061E1073080012353C /* ADBTableRow.m in Sources */,
+				652F59071E1073080012353C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				652F59081E1073080012353C /* FMDatabase.m in Sources */,
+				652F59091E1073080012353C /* FMDatabaseAdditions.m in Sources */,
+				652F590A1E1073080012353C /* FMDatabasePool.m in Sources */,
+				652F590B1E1073080012353C /* FMDatabaseQueue.m in Sources */,
+				652F590C1E1073080012353C /* FMResultSet.m in Sources */,
+				652F590D1E1073080012353C /* FMSQLStatementSplitter.m in Sources */,
+				652F590E1E1073080012353C /* FMStatementKeywordRecogniser.m in Sources */,
+				652F590F1E1073080012353C /* FMStatementQuotedRecogniser.m in Sources */,
+				652F59101E1073080012353C /* AESAntibanner.m in Sources */,
+				652F59111E1073080012353C /* AEService.m in Sources */,
+				652F59121E1073080012353C /* AESFilterConverter.m in Sources */,
+				652F59131E1073080012353C /* AEWhitelistDomainObject.m in Sources */,
+				652F59141E1073080012353C /* AEBlacklistDomainObject.m in Sources */,
+				652F58B31E1071470012353C /* ACLExecuteBlockDelayed.m in Sources */,
+				652F58B41E1071470012353C /* ACLFileLocker.m in Sources */,
+				652F58B51E1071470012353C /* ACLFileLogger.m in Sources */,
+				652F58B61E1071470012353C /* ACLJobController.m in Sources */,
+				652F58B71E1071470012353C /* ACLLogger.m in Sources */,
+				652F58B81E1071470012353C /* ACLWildcard.m in Sources */,
+				652F58B91E1071470012353C /* CLIColor.m in Sources */,
+				652F58BA1E1071470012353C /* DDAbstractDatabaseLogger.m in Sources */,
+				652F58BB1E1071470012353C /* DDASLLogger.m in Sources */,
+				652F58BC1E1071470012353C /* DDFileLogger.m in Sources */,
+				652F58BD1E1071470012353C /* DDLog.m in Sources */,
+				652F58BE1E1071470012353C /* DDTTYLogger.m in Sources */,
+				652F58BF1E1071470012353C /* DDContextFilterLogFormatter.m in Sources */,
+				652F58C01E1071470012353C /* DDDispatchQueueLogFormatter.m in Sources */,
+				652F58C11E1071470012353C /* DDMultiFormatter.m in Sources */,
+				652F58C21E1071470012353C /* NSDate+Utils.m in Sources */,
+				652F58C31E1071470012353C /* NSException+Utils.m in Sources */,
+				652F58C41E1071470012353C /* NSString+Utils.m in Sources */,
+				652F58C51E1071470012353C /* NSURL+Utils.m in Sources */,
+				652F58C61E1071470012353C /* ACObject.m in Sources */,
+				652F58C71E1071470012353C /* ACNHttpUtils.m in Sources */,
+				652F58C81E1071470012353C /* ACNNetworking.m in Sources */,
+				652F58C91E1071470012353C /* ACSSystemUtils.m in Sources */,
+				652F58CA1E1071470012353C /* ADLocales.m in Sources */,
+				652F58CB1E1071470012353C /* ADLocations.m in Sources */,
+				652F58CC1E1071470012353C /* ADProductInfo.m in Sources */,
+				652F58CD1E1071470012353C /* NSData+GZIP.m in Sources */,
+				652F58CE1E1071470012353C /* AEUILoadingModal.m in Sources */,
+				652F58CF1E1071470012353C /* AEUILoadingModalController.m in Sources */,
+				652F58D01E1071470012353C /* AEUIUtils.m in Sources */,
+				652F58D11E1071470012353C /* AESSupport.m in Sources */,
+				652F58D21E1071470012353C /* AESharedResources.m in Sources */,
+				652F58D31E1071470012353C /* ViewController.m in Sources */,
+				652F58D41E1071470012353C /* AppDelegate.m in Sources */,
+				652F58D51E1071470012353C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6582372F1D07FE6700B824F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3293,6 +3684,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		652F58841E106DF10012353C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				652F58851E106DF10012353C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		652F58891E106DF10012353C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				652F588A1E106DF10012353C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		655AACD41D4233A000E316EA /* ProLaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3425,6 +3832,86 @@
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		652F588D1E106DF10012353C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSender/AdguardLogSender.entitlements;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AdguardLogSender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardLogSender;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		652F588E1E106DF10012353C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSender/AdguardLogSender.entitlements;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = AdguardLogSender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardLogSender;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		652F58DC1E1071470012353C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSenderPro.entitlements;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AdguardLogSender copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardLogSenderPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		652F58DD1E1071470012353C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdguardLogSenderPro.entitlements;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = "AdguardLogSender copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardLogSenderPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4052,6 +4539,25 @@
 				65040D291E11657F00DE25D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		652F588F1E106DF10012353C /* Build configuration list for PBXNativeTarget "AdguardLogSender" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652F588D1E106DF10012353C /* Debug */,
+				652F588E1E106DF10012353C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		652F58DB1E1071470012353C /* Build configuration list for PBXNativeTarget "AdguardLogSenderPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652F58DC1E1071470012353C /* Debug */,
+				652F58DD1E1071470012353C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */ = {
 			isa = XCConfigurationList;
