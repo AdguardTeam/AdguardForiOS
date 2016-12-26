@@ -10,6 +10,9 @@
       <FileRef
          location = "group:runBuilder.sh">
       </FileRef>
+      <FileRef
+         location = "group:getExtJsLibs.sh">
+      </FileRef>
    </Group>
    <FileRef
       location = "container:Builder/Builder.xcodeproj">
