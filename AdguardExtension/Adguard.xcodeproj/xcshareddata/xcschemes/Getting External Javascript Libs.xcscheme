@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65CB60381D75DF8B005A3C04"
-               BuildableName = "Git Tagging (Beta/Release Branch)"
-               BlueprintName = "Git Tagging (Beta/Release Branch)"
+               BlueprintIdentifier = "65040D261E11657F00DE25D1"
+               BuildableName = "Getting External Javascript Libs"
+               BlueprintName = "Getting External Javascript Libs"
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65CB60381D75DF8B005A3C04"
-            BuildableName = "Git Tagging (Beta/Release Branch)"
-            BlueprintName = "Git Tagging (Beta/Release Branch)"
+            BlueprintIdentifier = "65040D261E11657F00DE25D1"
+            BuildableName = "Getting External Javascript Libs"
+            BlueprintName = "Getting External Javascript Libs"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65CB60381D75DF8B005A3C04"
-            BuildableName = "Git Tagging (Beta/Release Branch)"
-            BlueprintName = "Git Tagging (Beta/Release Branch)"
+            BlueprintIdentifier = "65040D261E11657F00DE25D1"
+            BuildableName = "Getting External Javascript Libs"
+            BlueprintName = "Getting External Javascript Libs"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
