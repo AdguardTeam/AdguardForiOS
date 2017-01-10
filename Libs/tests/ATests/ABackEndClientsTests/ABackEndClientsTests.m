@@ -41,28 +41,35 @@
     [DDLog removeAllLoggers];
 }
 
-- (void)testFilterVersions
+- (void)testFilterMetaI18n
 {
-    ABECFilterClient *filterClient = [ABECFilterClient new];
+ 
+    ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] i18n];
     
-    NSArray *versions = [filterClient filterVersionListForApp:@"MACOSXADGUARDTESTAPPLICATIONIDSTRING" filterIds:@[@0, @1, @2, @5, @7]];
+    XCTAssertNotNil(i18n.filters);
+    XCTAssertNotNil(i18n.groups);
     
-    for (ASDFilterMetadata *item in versions)
-        DDLogError(@"Filter data-%@", item);
+    NSLog(@"Groups i18n\n%@", i18n.groups.localizations);
+    NSLog(@"Filters i18n\n%@", i18n.filters.localizations);
+    
+    ABECFilterClientMetadata *meta = [[ABECFilterClient singleton] metadata];
+    
+    XCTAssertNotNil(meta.filters);
+    XCTAssertNotNil(meta.groups);
+    
+    NSLog(@"Groups metas\n%@", meta.groups);
+    NSLog(@"Filters metas\n%@", meta.filters);
     
 }
 
 - (void)testFilter {
     
-    ABECFilterClient *filterClient = [ABECFilterClient new];
+    ASDFilter *filter = [[ABECFilterClient singleton] filterWithFilterId:@1];
     
-    ASDFilter *filter = [filterClient filterForApp:@"MACOSXADGUARDTESTAPPLICATIONIDSTRING" affiliateId:@"performix.ru" filterId:2];
+    XCTAssertNotNil(filter);
     
-    DDLogError(@"Filter data-%@", filter);
+    NSLog(@"Filter data-%@", filter);
     
-    filter = [filterClient filterForApp:@"MACOSXADGUARDTESTAPPLICATIONIDSTRING" affiliateId:@"performix.ru" filterId:1];
-    
-    DDLogError(@"Filter data-%@", filter);
 }
 
 @end

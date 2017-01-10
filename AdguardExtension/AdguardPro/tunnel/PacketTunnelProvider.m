@@ -106,6 +106,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
+    //TODO: delete this
+    
+//    NEProxySettings *proxySettings = [NEProxySettings new];
+//    proxySettings.HTTPEnabled = YES;
+//    proxySettings.HTTPServer = [[NEProxyServer alloc] initWithAddress:@"10.210.210.120" port:3128];
+//    settings.proxySettings = proxySettings;
+    //-------------------
+    
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
     
