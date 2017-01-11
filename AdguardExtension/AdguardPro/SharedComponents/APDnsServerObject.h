@@ -36,13 +36,35 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+/**
+ Title of the object
+ */
 @property (nonnull) NSString *serverName;
+/**
+ Description of the object
+ */
 @property (nonnull) NSString *serverDescription;
 
+/**
+ Array, which contains ipV4 addresses in form of strings.
+ */
 @property (nonnull) NSArray <NSString *> *ipv4Addresses;
+/**
+ Array, which contains ipV6 addresses in form of strings.
+ */
 @property (nonnull) NSArray <NSString *> *ipv6Addresses;
 
+/**
+ Returns list of all IPs (ipV4 and ipV6) separated by '\n'.
+
+ @return IPs addresses or empty string.
+ */
 - (NSString * _Nonnull)ipAddressesAsString;
+/**
+ Parses input string and fills appropriate properties (`ipv4Addresses`, `ipv6Addresses`).
+ 
+ @param ipAddresses String for parsing.
+ */
 - (void)setIpAddressesFromString:(NSString  * _Nonnull)ipAddresses;
 
 @end

@@ -18,14 +18,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class APDnsServerObject;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController
+@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods and Properties
 
 
+@property APDnsServerObject *serverObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
@@ -33,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
@@ -40,5 +44,6 @@
 - (IBAction)clickOnTableView:(id)sender;
 - (IBAction)clickCancel:(id)sender;
 
+- (IBAction)nameChanged:(id)sender;
 
 @end

@@ -52,7 +52,7 @@
 }
 
 - (BOOL)hidden {
-    return (self.hiddenPlanned || self.hiddenPlanned);
+    return (self.hiddenReal || self.hiddenPlanned);
 }
 
 - (void)setHidden:(BOOL)hidden {
@@ -187,6 +187,30 @@
     return self;
 }
 
+- (OriginalRow *)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    OriginalSection *originalSection = self.sections[indexPath.section];
+    
+    OriginalRow * tableViewRow = [OriginalRow new];
+    tableViewRow.cell = cell;
+    
+    NSAssert(tableViewRow.cell != nil, @"cannot be nil");
+    
+    tableViewRow.originalIndexPath = indexPath;
+    
+    originalSection.rows[indexPath.row] = tableViewRow;
+    
+    return tableViewRow;
+}
+
+- (void)removeCellAtIndedexPath:(NSIndexPath *)indexPath {
+    
+    OriginalSection *originalSection = self.sections[indexPath.section];
+    
+    [originalSection.rows removeObjectAtIndex:indexPath.row];
+    
+}
+
 - (OriginalRow *)originalRowWithIndexPath:(NSIndexPath *)indexPath {
     
     OriginalSection * oSection = self.sections[indexPath.section];
@@ -286,6 +310,11 @@
                 NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
                 [self.deleteIndexPaths addObject:ip];
                 
+                if (or.cell == nil) {
+                    //real delete
+                    [self removeCellAtIndedexPath:ip];
+                }
+                
             } else if (or.batchOperation == kBatchOperationInsert) {
             
                 NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
@@ -357,6 +386,23 @@
 }
 
 #pragma mark - Public
+
+- (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    OriginalRow *row = [self.originalTable insertCell:cell atIndexPath:indexPath];
+    
+    [row setHidden:NO];
+}
+
+- (void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
+    
+    OriginalRow *row = [self.originalTable originalRowWithIndexPath:indexPath];
+    if (!row) {
+        
+        [row setHidden:YES];
+        row.cell = nil;
+    }
+}
 
 - (void)updateCell:(UITableViewCell *)cell {
     

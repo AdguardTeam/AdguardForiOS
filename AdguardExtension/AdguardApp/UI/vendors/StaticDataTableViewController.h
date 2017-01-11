@@ -20,6 +20,9 @@
 @property (nonatomic, assign) UITableViewRowAnimation reloadTableViewRowAnimation;
 
 
+- (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)removeCellAtIndexPath:(NSIndexPath *)indexPath;
+
 - (BOOL)cellIsHidden:(UITableViewCell *)cell;
 
 - (void)updateCell:(UITableViewCell *)cell;

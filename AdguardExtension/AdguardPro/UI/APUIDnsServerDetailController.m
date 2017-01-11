@@ -17,6 +17,7 @@
  */
 
 #import "APUIDnsServerDetailController.h"
+#import "APDnsServerObject.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
@@ -31,6 +32,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    APDnsServerObject *obj = self.serverObject;
+    if (obj) {
+        self.nameTextField.text = obj.serverName;
+        self.descriptionTextField.text = obj.serverDescription;
+        self.ipAddressesTextView.text = obj.ipAddressesAsString;
+    }
+    else {
+        
+        self.serverObject = [APDnsServerObject new];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +65,22 @@
     [presenting dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (IBAction)nameChanged:(id)sender {
+    
+    self.serverObject.serverName = self.nameTextField.text;
+    
+    [self resetStatusDoneButton];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Text View Delegate
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    [self.serverObject setIpAddressesFromString:textView.text];
+
+    [self resetStatusDoneButton];
 }
 
 #pragma mark - Table view data source
@@ -120,4 +148,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Private Methods
+
+- (void)resetStatusDoneButton {
+
+    APDnsServerObject *obj = self.serverObject;
+    self.doneButton.enabled = (obj.serverName.length && obj.ipAddressesAsString.length);
+}
+
 @end

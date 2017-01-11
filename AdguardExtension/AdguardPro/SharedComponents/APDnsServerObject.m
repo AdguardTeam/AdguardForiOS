@@ -39,6 +39,20 @@ static NSMutableCharacterSet *delimCharSet;
 
 }
 
+- (id)init {
+    
+    self = [super init];
+    if (self) {
+        
+        _serverName = [NSString new];
+        _serverDescription = [NSString new];
+        _ipv4Addresses = [NSArray new];
+        _ipv6Addresses = [NSArray new];
+    }
+    
+    return self;
+}
+
 - (id)initWithName:(NSString *)serverName
        description:(NSString *)serverDescription
        ipAddresses:(NSString *)ipAddresses {
@@ -63,45 +77,77 @@ static NSMutableCharacterSet *delimCharSet;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+- (NSString *)ipAddressesAsString {
+    
+    NSArray *ips = self.ipv4Addresses;
+    NSString *result = [ips componentsJoinedByString:@"\n"];
+    
+    ips = self.ipv6Addresses;
+    if (ips.count) {
+        if (result.length) {
+            result = [NSString stringWithFormat:@"%@\n%@", result,
+                      [ips componentsJoinedByString:@"\n"]];
+        }
+        else {
+            result = [ips componentsJoinedByString:@"\n"];
+        }
+    }
+    
+    return result;
+}
 
 - (void)setIpAddressesFromString:(NSString *)ipAddresses {
 
-//    NSMutableArray *
+    NSArray *parts = [ipAddresses componentsSeparatedByCharactersInSet:delimCharSet];
     
-    [self willChangeValueForKey:@"ipv4Addresses"];
-    [self willChangeValueForKey:@"ipv6Addresses"];
-    
-    @synchronized (self) {
-
+    NSMutableArray *ipV4 = [NSMutableArray array];
+    NSMutableArray *ipV6 = [NSMutableArray array];
+    for (NSString *item in parts) {
         
+        NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (candidate.length) {
+            if ([ACNUrlUtils isIPv4:candidate]) {
+                [ipV4 addObject:candidate];
+            }
+            else if ([ACNUrlUtils isIPv6:candidate]){
+                [ipV6 addObject:candidate];
+            }
+        }
     }
-    [self didChangeValueForKey:@"ipv6Addresses"];
-    [self didChangeValueForKey:@"ipv4Addresses"];
+    
+    self.ipv4Addresses = [ipV4 copy];
+    self.ipv6Addresses = [ipV6  copy];
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Description, equals, hash
 
-//- (NSString *)description
-//{
-//    return [self stringValue];
-//}
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[serverName: \"%@\"\nserverDescription: \"%@\"\nips:\n%@]", self.serverName, self.serverDescription, [self ipAddressesAsString]];
+}
 
-//- (BOOL)isEqual:(id)object{
-//
-//    if (object == self)
-//        return YES;
-//    if ([object isKindOfClass:[self class]])
-//        return YES;
-//
-//    else
-//        return NO;
-//}
+- (BOOL)isEqual:(id)object{
 
-//- (NSUInteger)hash
-//{
-//    return 0
-//}
+    if (object == self)
+        return YES;
+    if ([object isKindOfClass:[self class]]) {
+        
+        if ([object hash] == [self hash]) {
+            
+            if ([[object serverName] isEqualToString:self.serverName]) {
+                
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    return [self.serverName hash];
+}
 
 
 @end

@@ -176,9 +176,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
         __typeof__(self) sSelf = wSelf;
 
-        @synchronized (_connectionHandler) {
-            if (_connectionHandler) {
-                [_connectionHandler startHandlingPackets];
+        @synchronized (sSelf->_connectionHandler) {
+            if (sSelf->_connectionHandler) {
+                [sSelf->_connectionHandler startHandlingPackets];
             }
         }
 

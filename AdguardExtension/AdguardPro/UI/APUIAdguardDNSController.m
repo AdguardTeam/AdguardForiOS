@@ -19,10 +19,17 @@
 #import "APUIAdguardDNSController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
+#import "APDnsServerObject.h"
 
 #define PRO_SECTION_INDEX               0
 #define NBSP_CODE                       @"\u00A0"
 #define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
+
+#define CHECKMARK_NORMAL_DISABLE        @"table-empty"
+#define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
+
+#define ADGUARD_DNS_SERVERS_COUNT       2
+#define DNS_SERVER_SECTION              2
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIAdguardDNSController
@@ -31,6 +38,9 @@
     
     APUIProSectionFooter *_proFooter;
     id _observer;
+    
+    NSMutableArray <APDnsServerObject *> *_dnsServers;
+    BOOL _dnsServersChanged;
 }
 
 - (void)viewDidLoad {
@@ -39,6 +49,9 @@
     [self attachToNotifications];
     
     APVPNManager *manager = [APVPNManager singleton];
+    
+    _dnsServers = [NSMutableArray new];
+    _dnsServersChanged = YES;
     
     self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
     self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
@@ -72,6 +85,23 @@
 #pragma mark Properties and public methods
 
 
+- (void)addDnsServer:(APDnsServerObject *)serverObject {
+    
+    if (serverObject) {
+        
+        UITableViewCell *newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        newCell.textLabel.text = serverObject.serverName;
+        newCell.detailTextLabel.text = serverObject.serverDescription;
+        newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+        newCell.accessoryType = UITableViewCellAccessoryDetailButton;
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_dnsServers.count + ADGUARD_DNS_SERVERS_COUNT) inSection:DNS_SERVER_SECTION];
+        [self insertCell:newCell atIndexPath:indexPath];
+        
+        [_dnsServers addObject:serverObject];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Actions
 /////////////////////////////////////////////////////////////////////
@@ -98,6 +128,21 @@
         [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
     }
     [self updateLogStatus];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Navigation
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    if (_dnsServersChanged) {
+        _dnsServersChanged = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            [self reloadDataAnimated:YES];
+        });
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
