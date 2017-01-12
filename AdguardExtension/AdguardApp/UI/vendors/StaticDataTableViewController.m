@@ -29,7 +29,7 @@
 
 @property (nonatomic, assign) int batchOperation;
 
-@property (nonatomic, weak) UITableViewCell * cell;
+@property (nonatomic, strong) UITableViewCell * cell;
 
 @property (nonatomic, strong) NSIndexPath * originalIndexPath;
 
@@ -187,20 +187,32 @@
     return self;
 }
 
-- (OriginalRow *)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     OriginalSection *originalSection = self.sections[indexPath.section];
     
     OriginalRow * tableViewRow = [OriginalRow new];
-    tableViewRow.cell = cell;
     
+    tableViewRow.cell = cell;
     NSAssert(tableViewRow.cell != nil, @"cannot be nil");
+    
+    tableViewRow.height = 44.0f; //UITableViewAutomaticDimension;
+    tableViewRow.hiddenReal = YES;
+    tableViewRow.hiddenPlanned = NO;
+    tableViewRow.batchOperation = kBatchOperationInsert;;
+
     
     tableViewRow.originalIndexPath = indexPath;
     
-    originalSection.rows[indexPath.row] = tableViewRow;
+    NSMutableArray *rows = originalSection.rows;
     
-    return tableViewRow;
+    [rows insertObject:tableViewRow atIndex:indexPath.row];
+    
+//    for (NSUInteger i = (indexPath.row + 1); i < rows.count; i++) {
+//        
+//        tableViewRow = rows[i];
+//        tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
+//    }
 }
 
 - (void)removeCellAtIndedexPath:(NSIndexPath *)indexPath {
@@ -389,9 +401,7 @@
 
 - (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    OriginalRow *row = [self.originalTable insertCell:cell atIndexPath:indexPath];
-    
-    [row setHidden:NO];
+   [self.originalTable insertCell:cell atIndexPath:indexPath];
 }
 
 - (void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
@@ -505,6 +515,19 @@
     NSAssert(or.cell != nil, @"CANNOT BE NULL");
     
     return or.cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+
+    if (self.originalTable != nil) {
+        OriginalRow *or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
+
+        if (or) {
+            return or.cell.indentationLevel;
+        }
+    }
+    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

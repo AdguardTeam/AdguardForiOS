@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class  APDnsLogRecord, ASDFilterRule;
+@class  APDnsLogRecord, ASDFilterRule, APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
@@ -89,6 +89,8 @@ extern NSString *APVpnManagerErrorDomain;
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
+@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsServers;
+
 /**
  Contains current mode of the vpn configuration.
  If configuration was not created, then property contains APVpnModeNone.
@@ -126,7 +128,7 @@ extern NSString *APVpnManagerErrorDomain;
 - (void)setMode:(APVpnMode)vpnMode;
 
 /**
- Sends command to network extension, that it will reset DNS Activity Log.
+ Clears DNS Activity Log.
  
  @return Returns YES on success. 
  */

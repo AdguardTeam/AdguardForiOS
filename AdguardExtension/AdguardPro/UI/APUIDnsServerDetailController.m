@@ -18,6 +18,7 @@
 
 #import "APUIDnsServerDetailController.h"
 #import "APDnsServerObject.h"
+#import "APUIAdguardDNSController.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
@@ -65,6 +66,21 @@
     [presenting dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (IBAction)clickDone:(id)sender {
+    
+    APDnsServerObject *obj = self.serverObject;
+    obj.serverDescription = self.descriptionTextField.text;
+    
+    UIViewController *presenting = self.navigationController.presentingViewController;
+
+    APUIAdguardDNSController *delegate = self.delegate;
+    [presenting dismissViewControllerAnimated:YES completion:^{
+        [delegate addDnsServer:obj];
+        [delegate reloadDataAnimated:YES];
+    }];
+    
 }
 
 - (IBAction)nameChanged:(id)sender {

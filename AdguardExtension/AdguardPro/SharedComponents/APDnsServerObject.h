@@ -44,7 +44,10 @@
  Description of the object
  */
 @property (nonnull) NSString *serverDescription;
-
+/**
+ If set to YES, then this server is not predefined and it may be edited or removed.
+ */
+@property BOOL editable;
 /**
  Array, which contains ipV4 addresses in form of strings.
  */

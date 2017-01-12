@@ -20,6 +20,7 @@
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
 #import "APDnsServerObject.h"
+#import "APUIDnsServerDetailController.h"
 
 #define PRO_SECTION_INDEX               0
 #define NBSP_CODE                       @"\u00A0"
@@ -28,7 +29,7 @@
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
 
-#define ADGUARD_DNS_SERVERS_COUNT       2
+#define DNS_SERVER_CELL_TEMPLATE_TAG    111
 #define DNS_SERVER_SECTION              2
 
 /////////////////////////////////////////////////////////////////////
@@ -53,11 +54,11 @@
     _dnsServers = [NSMutableArray new];
     _dnsServersChanged = YES;
     
-    self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
-    self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
-    
-    self.defaultDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
-    self.familyDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
+//    self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
+//    self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
+//    
+//    self.defaultDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
+//    self.familyDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
     
     self.statusLabel.accessibilityHint = [self shortStatusDescription];
     
@@ -89,14 +90,30 @@
     
     if (serverObject) {
         
+        UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
         UITableViewCell *newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-        newCell.textLabel.text = serverObject.serverName;
-        newCell.detailTextLabel.text = serverObject.serverDescription;
-        newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-        newCell.accessoryType = UITableViewCellAccessoryDetailButton;
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_dnsServers.count + ADGUARD_DNS_SERVERS_COUNT) inSection:DNS_SERVER_SECTION];
+        newCell.textLabel.textColor = templateCell.textLabel.textColor;
+        newCell.textLabel.font = templateCell.textLabel.font;
+        newCell.detailTextLabel.textColor = templateCell.detailTextLabel.textColor;
+        newCell.detailTextLabel.font = templateCell.detailTextLabel.font;
+        newCell.indentationLevel = templateCell.indentationLevel;
+        newCell.indentationWidth = templateCell.indentationWidth;
+        newCell.selectionStyle = templateCell.selectionStyle;
+        
+        newCell.textLabel.text = [serverObject.serverName capitalizedString];
+        newCell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
+        newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+        if (serverObject.editable) {
+            newCell.accessoryType = UITableViewCellAccessoryDetailButton;
+        }
+        
+        newCell.accessibilityTraits |= UIAccessibilityTraitButton;
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_dnsServers.count inSection:DNS_SERVER_SECTION];
         [self insertCell:newCell atIndexPath:indexPath];
+        
+        _dnsServersChanged = YES;
         
         [_dnsServers addObject:serverObject];
     }
@@ -133,16 +150,30 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Navigation
 
-- (void)viewWillAppear:(BOOL)animated{
-    
-    if (_dnsServersChanged) {
-        _dnsServersChanged = NO;
+//- (void)viewWillAppear:(BOOL)animated{
+//    
+//    if (_dnsServersChanged) {
+//        _dnsServersChanged = NO;
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//           
+//            [self reloadDataAnimated:YES];
+//        });
+//    }
+//}
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    if ([segue.identifier isEqualToString:@"dnsServerDetailSegue"]) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-           
-            [self reloadDataAnimated:YES];
-        });
+        APUIDnsServerDetailController *destination = (APUIDnsServerDetailController *)[(UINavigationController *)[segue destinationViewController]
+                                         topViewController];
+        
+        destination.delegate = self;
     }
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -230,10 +261,8 @@
 
 - (void)updateStatuses{
     APVPNManager *manager = [APVPNManager singleton];
-    
-    self.defaultDnsCell.accessoryType =
-    self.familyDnsCell.accessoryType = UITableViewCellAccessoryNone;
-    
+    //TODO:
+    /*
     switch (manager.vpnMode) {
             
         case APVpnModeDNS:
@@ -249,7 +278,7 @@
         default:
             break;
     }
-
+*/
     self.statusSwitch.on = self.logSwitch.enabled = manager.enabled;
     if (!manager.enabled) {
         

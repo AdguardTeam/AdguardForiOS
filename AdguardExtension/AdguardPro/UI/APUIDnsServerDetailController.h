@@ -18,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class APDnsServerObject;
+@class APDnsServerObject, APUIAdguardDNSController;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
@@ -29,6 +29,7 @@
 
 
 @property APDnsServerObject *serverObject;
+@property (weak, nonatomic) APUIAdguardDNSController *delegate;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
@@ -43,6 +44,7 @@
 
 - (IBAction)clickOnTableView:(id)sender;
 - (IBAction)clickCancel:(id)sender;
+- (IBAction)clickDone:(id)sender;
 
 - (IBAction)nameChanged:(id)sender;
 

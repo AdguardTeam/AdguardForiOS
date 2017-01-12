@@ -48,6 +48,7 @@ static NSMutableCharacterSet *delimCharSet;
         _serverDescription = [NSString new];
         _ipv4Addresses = [NSArray new];
         _ipv6Addresses = [NSArray new];
+        _editable = YES;
     }
     
     return self;
@@ -67,6 +68,7 @@ static NSMutableCharacterSet *delimCharSet;
     {
         _serverName = serverName;
         _serverDescription = serverDescription;
+        _editable = YES;
         
         [self setIpAddressesFromString:ipAddresses];
     }
