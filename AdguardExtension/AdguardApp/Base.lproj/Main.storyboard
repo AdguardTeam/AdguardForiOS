@@ -83,13 +83,16 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="R9h-tP-7E2" appends="YES" id="leu-Gd-VxX"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="REMOTE DNS-SERVERS" id="dSz-wo-9mg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="BHW-Ef-XE0" imageView="kvB-o0-qo9" style="IBUITableViewCellStyleDefault" id="xaM-9n-eH7" userLabel="Add Custom Cell">
-                                        <rect key="frame" x="0.0" y="216" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="215" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xaM-9n-eH7" id="rOq-6j-oWC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -117,7 +120,7 @@
                             <tableViewSection headerTitle="DNS REQUESTS LOG" id="0tB-gz-G1r">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="deJ-RF-2BG" style="IBUITableViewCellStyleDefault" id="ybC-l4-Nzb">
-                                        <rect key="frame" x="0.0" y="317" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="315" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ybC-l4-Nzb" id="34z-aO-5gc">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -137,7 +140,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5WO-LM-1QA" style="IBUITableViewCellStyleDefault" id="svQ-Uf-dzY">
-                                        <rect key="frame" x="0.0" y="361" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="359" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="svQ-Uf-dzY" id="hlH-Uh-wvk">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
@@ -227,6 +230,11 @@
                         <bool key="isElement" value="NO"/>
                     </accessibility>
                 </view>
+                <tapGestureRecognizer id="R9h-tP-7E2" userLabel="Local Filtering Gesture Recognizer">
+                    <connections>
+                        <action selector="toggleLocalFiltering:" destination="vhp-wm-NSW" id="Qyi-Kc-a0W"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2659" y="-2283"/>
         </scene>
@@ -238,6 +246,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="f8E-0q-Evb">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="XFi-sr-f1o" kind="relationship" relationship="rootViewController" id="4sv-0p-ich"/>
                     </connections>

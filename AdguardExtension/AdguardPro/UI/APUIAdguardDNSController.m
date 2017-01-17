@@ -40,8 +40,7 @@
     APUIProSectionFooter *_proFooter;
     id _observer;
     
-    NSMutableArray <APDnsServerObject *> *_dnsServers;
-    BOOL _dnsServersChanged;
+    NSArray <APDnsServerObject *> *_dnsServers;
 }
 
 - (void)viewDidLoad {
@@ -51,14 +50,11 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    _dnsServers = [NSMutableArray new];
-    _dnsServersChanged = YES;
-    
-//    self.defaultDnsCell.textLabel.text = [manager modeDescription:APVpnModeDNS];
-//    self.familyDnsCell.textLabel.text = [manager modeDescription:APVpnModeFamilyDNS];
-//    
-//    self.defaultDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
-//    self.familyDnsCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    _dnsServers = manager.remoteDnsServers;
+    [_dnsServers enumerateObjectsUsingBlock:^(APDnsServerObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [self internalInsertDnsServer:obj atIndex:idx];
+    }];
     
     self.statusLabel.accessibilityHint = [self shortStatusDescription];
     
@@ -67,6 +63,11 @@
     [self.logSwitch setOn:manager.dnsRequestsLogging];
 
     [self updateLogStatus];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self reloadDataAnimated:NO];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,32 +91,13 @@
     
     if (serverObject) {
         
-        UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
-        UITableViewCell *newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-        
-        newCell.textLabel.textColor = templateCell.textLabel.textColor;
-        newCell.textLabel.font = templateCell.textLabel.font;
-        newCell.detailTextLabel.textColor = templateCell.detailTextLabel.textColor;
-        newCell.detailTextLabel.font = templateCell.detailTextLabel.font;
-        newCell.indentationLevel = templateCell.indentationLevel;
-        newCell.indentationWidth = templateCell.indentationWidth;
-        newCell.selectionStyle = templateCell.selectionStyle;
-        
-        newCell.textLabel.text = [serverObject.serverName capitalizedString];
-        newCell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
-        newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-        if (serverObject.editable) {
-            newCell.accessoryType = UITableViewCellAccessoryDetailButton;
+        if ([[APVPNManager singleton] addRemoteDnsServer:serverObject]) {
+            
+            _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1)];
         }
         
-        newCell.accessibilityTraits |= UIAccessibilityTraitButton;
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_dnsServers.count inSection:DNS_SERVER_SECTION];
-        [self insertCell:newCell atIndexPath:indexPath];
-        
-        _dnsServersChanged = YES;
-        
-        [_dnsServers addObject:serverObject];
     }
 }
 
@@ -123,11 +105,7 @@
 #pragma mark  Actions
 /////////////////////////////////////////////////////////////////////
 
-- (IBAction)clickChooseServer:(id)sender {
-    
-    UITableViewCell *cell = (UITableViewCell *) [sender view];
-    
-    [[APVPNManager singleton] setMode:(APVpnMode)cell.tag];
+- (IBAction)toggleLocalFiltering:(id)sender {
 }
 
 - (IBAction)toggleSwitchStatus:(id)sender {
@@ -321,6 +299,34 @@
     self.dnsRequestsCell.textLabel.enabled
     = self.dnsRequestsCell.userInteractionEnabled
     = logEnabled;
+}
+
+- (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{
+    
+    UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
+    UITableViewCell *newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    
+    newCell.tag = index;
+    
+    newCell.textLabel.textColor = templateCell.textLabel.textColor;
+    newCell.textLabel.font = templateCell.textLabel.font;
+    newCell.detailTextLabel.textColor = templateCell.detailTextLabel.textColor;
+    newCell.detailTextLabel.font = templateCell.detailTextLabel.font;
+    newCell.indentationLevel = templateCell.indentationLevel;
+    newCell.indentationWidth = templateCell.indentationWidth;
+    newCell.selectionStyle = templateCell.selectionStyle;
+    
+    newCell.textLabel.text = [serverObject.serverName capitalizedString];
+    newCell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
+    newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+    if (serverObject.editable) {
+        newCell.accessoryType = UITableViewCellAccessoryDetailButton;
+    }
+    
+    newCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION];
+    [self insertCell:newCell atIndexPath:indexPath];
 }
 
 @end

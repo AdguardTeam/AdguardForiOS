@@ -38,8 +38,12 @@ extern NSString *APTunnelProviderErrorDomain;
 #pragma mark Properties and public methods
 
 /**
- Returns current selected VPN Mode
+ Returns current DNS server description object.
  */
-- (APVpnMode)vpnMode;
+- (APDnsServerObject *)currentDnsServer;
+/**
+ Returns local filtering flag.
+ */
+- (BOOL)localFiltering;
 
 @end

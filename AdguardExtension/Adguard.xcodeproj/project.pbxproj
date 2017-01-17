@@ -317,6 +317,8 @@
 		655AACDF1D423B7B00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		655AACE11D423C9100E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
+		655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
 		655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
@@ -2975,6 +2977,7 @@
 				6581C9301D6494F700E739CC /* FMStatementKeywordRecogniser.m in Sources */,
 				651F5E121E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				653AE9FA1D084B6400AC81B4 /* CLIColor.m in Sources */,
+				655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3122,6 +3125,7 @@
 				659887081CF83580003ECD1C /* CLIColor.m in Sources */,
 				659887091CF83580003ECD1C /* AESharedResources.m in Sources */,
 				6598870A1CF83580003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */,
+				655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */,
 				6518BD871DABBE6D00FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				6598870B1CF83580003ECD1C /* ABECFilter.m in Sources */,
 				6598870C1CF83580003ECD1C /* AEAUIMainController.m in Sources */,

@@ -43,6 +43,8 @@
 #pragma mark - APSharedResources Constants
 
 NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
+NSString *APDefaultsRemoteDnsServers = @"APDefaultsRemoteDnsServers";
+NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources

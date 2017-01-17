@@ -18,11 +18,17 @@
 
 #import "APDnsServerObject.h"
 #import "ACommons/ACNetwork.h"
+#import "ACommons/ACSystem.h"
+
+NSString *APDnsServerTagLocal = @"APDnsServerTagLocal";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsServerObject
 
-@implementation APDnsServerObject
+@implementation APDnsServerObject {
+    
+    NSString *_uuid;
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
@@ -35,6 +41,8 @@ static NSMutableCharacterSet *delimCharSet;
         
         delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
         [delimCharSet addCharactersInString:@","];
+        
+        [super initialize];
     }
 
 }
@@ -49,6 +57,7 @@ static NSMutableCharacterSet *delimCharSet;
         _ipv4Addresses = [NSArray new];
         _ipv6Addresses = [NSArray new];
         _editable = YES;
+        _uuid = [ACSSystemUtils createUUID];
     }
     
     return self;
@@ -63,12 +72,11 @@ static NSMutableCharacterSet *delimCharSet;
         return nil;
     }
     
-    self = [super init]; // [super _init_];
+    self = [self init]; // [super _init_];
     if (self)
     {
         _serverName = serverName;
         _serverDescription = serverDescription;
-        _editable = YES;
         
         [self setIpAddressesFromString:ipAddresses];
     }
@@ -121,12 +129,30 @@ static NSMutableCharacterSet *delimCharSet;
     self.ipv6Addresses = [ipV6  copy];
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:@(_editable) forKey:@"editable"];
+    [aCoder encodeObject:_uuid forKey:@"uuid"];
+
+}
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+
+        _editable = [[aDecoder decodeObjectOfClass:[NSNumber class] forKey:@"editable"] boolValue];
+        _uuid = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"uuid"];
+    }
+    return self;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Description, equals, hash
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[serverName: \"%@\"\nserverDescription: \"%@\"\nips:\n%@]", self.serverName, self.serverDescription, [self ipAddressesAsString]];
+    return [NSString stringWithFormat:@"[UUID: %@ serverName: \"%@\"\nserverDescription: \"%@\"\nips:\n%@]", _uuid, self.serverName, self.serverDescription, [self ipAddressesAsString]];
 }
 
 - (BOOL)isEqual:(id)object{
@@ -137,7 +163,8 @@ static NSMutableCharacterSet *delimCharSet;
         
         if ([object hash] == [self hash]) {
             
-            if ([[object serverName] isEqualToString:self.serverName]) {
+            __typeof__(self) obj = object;
+            if ([obj->_uuid isEqualToString:_uuid]) {
                 
                 return YES;
             }
@@ -148,7 +175,7 @@ static NSMutableCharacterSet *delimCharSet;
 
 - (NSUInteger)hash
 {
-    return [self.serverName hash];
+    return [_uuid hash];
 }
 
 

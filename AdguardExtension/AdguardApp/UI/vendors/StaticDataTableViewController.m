@@ -52,7 +52,7 @@
 }
 
 - (BOOL)hidden {
-    return (self.hiddenReal || self.hiddenPlanned);
+    return self.hiddenPlanned;
 }
 
 - (void)setHidden:(BOOL)hidden {
@@ -96,7 +96,7 @@
 - (NSInteger)numberOfVissibleRows {
     NSInteger count = 0;
     for (OriginalRow * or in self.rows) {
-        if (!or.hidden) {
+        if (!or.hiddenReal) {
             ++count;
         }
     }

@@ -18,6 +18,12 @@
 
 #import "ACObject.h"
 
+/**
+ Tag that server object contains only description properties, 
+ it has no remote DNS servers. It is fake server.
+ */
+extern NSString * _Nonnull APDnsServerTagLocal;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsServerObject
 
@@ -56,7 +62,10 @@
  Array, which contains ipV6 addresses in form of strings.
  */
 @property (nonnull) NSArray <NSString *> *ipv6Addresses;
-
+/**
+ Field, which may contain special labels about server, for example APDnsServerTagLocal.
+ */
+@property (nullable) NSString *tag;
 /**
  Returns list of all IPs (ipV4 and ipV6) separated by '\n'.
 

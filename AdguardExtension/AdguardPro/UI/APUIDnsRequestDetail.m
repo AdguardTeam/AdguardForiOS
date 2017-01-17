@@ -29,6 +29,7 @@
 #import "AEBlacklistDomainObject.h"
 #import "ACommons/ACSystem.h"
 #import "AEUIUtils.h"
+#import "APDnsServerObject.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
@@ -78,7 +79,7 @@ static NSDateFormatter *_timeFormatter;
     
     self.nameCell.longLabel.text = request.name;
     self.typeCell.detailTextLabel.text = [request.type description];
-    self.serverCell.detailTextLabel.text = [[APVPNManager singleton] modeDescription:[self.logRecord.vpnMode intValue]];
+    self.serverCell.detailTextLabel.text = self.logRecord.dnsServer.serverName;
     
     NSMutableAttributedString *sb = [NSMutableAttributedString new];
     

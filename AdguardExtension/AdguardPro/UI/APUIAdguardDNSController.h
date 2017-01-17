@@ -41,8 +41,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-
-- (IBAction)clickChooseServer:(id)sender;
+- (IBAction)toggleLocalFiltering:(id)sender;
 - (IBAction)toggleSwitchStatus:(id)sender;
 - (IBAction)toggleLogStatus:(id)sender;
 

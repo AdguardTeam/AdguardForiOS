@@ -30,6 +30,7 @@
 
 #ifdef PRO
 #import "APVPNManager.h"
+#import "APDnsServerObject.h"
 #endif
 
 /////////////////////////////////////////////////////////////////////
@@ -525,7 +526,7 @@
         default:
             
             if (manager.enabled)
-                self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
+                self.proAdguardDnsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
             else
                 self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Not Connected.");
             break;
