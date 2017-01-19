@@ -23,7 +23,9 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
 
-@implementation APUIDnsServerDetailController
+@implementation APUIDnsServerDetailController {
+    BOOL _editMode;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,10 +41,14 @@
         self.nameTextField.text = obj.serverName;
         self.descriptionTextField.text = obj.serverDescription;
         self.ipAddressesTextView.text = obj.ipAddressesAsString;
+        self.removeCell.hidden = NO;
+        _editMode = YES;
     }
     else {
         
         self.serverObject = [APDnsServerObject new];
+        self.removeCell.hidden = YES;
+        _editMode = NO;
     }
 }
 
@@ -76,16 +82,64 @@
     UIViewController *presenting = self.navigationController.presentingViewController;
 
     APUIAdguardDNSController *delegate = self.delegate;
-    [presenting dismissViewControllerAnimated:YES completion:^{
-        [delegate addDnsServer:obj];
-        [delegate reloadDataAnimated:YES];
-    }];
     
+    if (_editMode) {
+        [presenting dismissViewControllerAnimated:YES completion:^{
+            [delegate modifyDnsServer:obj];
+            [delegate reloadDataAnimated:YES];
+        }];
+    }
+    else {
+        [presenting dismissViewControllerAnimated:YES completion:^{
+            [delegate addDnsServer:obj];
+            [delegate reloadDataAnimated:YES];
+        }];
+    }
+    
+}
+
+- (IBAction)clickRemove:(id)sender {
+    
+    APDnsServerObject *obj = self.serverObject;
+    
+    UIViewController *presenting = self.navigationController.presentingViewController;
+    
+    APUIAdguardDNSController *delegate = self.delegate;
+    
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove Server", @"(APUIAdguardDNSController) PRO version. Button text for deleting a custom DNS server.")
+                                                          style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction * action) {
+                                                              
+                                                              [presenting dismissViewControllerAnimated:YES completion:^{
+                                                                  [delegate removeDnsServer:obj];
+                                                                  [delegate reloadDataAnimated:YES];
+                                                              }];
+                                                          }];
+    
+    [sheet addAction:action];
+
+    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIAdguardDNSController) PRO version. Text on the button that cancels the deleting of a custom DNS server.")
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:nil];
+    
+    [sheet addAction:action];
+
+    [self presentViewController:sheet animated:YES completion:nil];
+
 }
 
 - (IBAction)nameChanged:(id)sender {
     
     self.serverObject.serverName = self.nameTextField.text;
+    
+    [self resetStatusDoneButton];
+}
+
+- (IBAction)descriptionChanged:(id)sender {
     
     [self resetStatusDoneButton];
 }

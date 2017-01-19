@@ -30,7 +30,9 @@
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
 
 #define DNS_SERVER_CELL_TEMPLATE_TAG    111
-#define DNS_SERVER_SECTION              2
+#define DNS_SERVER_SECTION_INDEX        2
+
+#define DNS_SERVER_DETAIL_SEGUE         @"dnsServerDetailSegue"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIAdguardDNSController
@@ -41,10 +43,14 @@
     id _observer;
     
     NSArray <APDnsServerObject *> *_dnsServers;
+    BOOL _localFiltering;
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    self.reloadTableViewRowAnimation = UITableViewRowAnimationAutomatic;
     
     [self attachToNotifications];
     
@@ -62,8 +68,6 @@
     
     [self.logSwitch setOn:manager.dnsRequestsLogging];
 
-    [self updateLogStatus];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [self reloadDataAnimated:NO];
@@ -95,17 +99,66 @@
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
             [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1)];
+            
+            [self updateStatuses];
         }
-        
-        
     }
 }
+
+- (void)removeDnsServer:(APDnsServerObject *)serverObject {
+    
+    if (serverObject) {
+
+        NSUInteger index = [_dnsServers indexOfObject:serverObject];
+        if (index == NSNotFound) {
+            return;
+        }
+        
+        if ([[APVPNManager singleton] removeRemoteDnsServer:serverObject]) {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
+            [self removeCellAtIndexPath:indexPath];
+            
+            _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            
+            [self updateStatuses];
+        }
+    }
+}
+
+- (void)modifyDnsServer:(APDnsServerObject *)serverObject {
+    
+    if (serverObject) {
+        
+        NSUInteger index = [_dnsServers indexOfObject:serverObject];
+        if (index == NSNotFound) {
+            return;
+        }
+        
+        if ([[APVPNManager singleton] resetRemoteDnsServer:serverObject]) {
+            
+            _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            cell.textLabel.text = [serverObject.serverName capitalizedString];
+            cell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
+            
+            [self updateCell:cell];
+            
+            [self updateStatuses];
+        }
+    }
+}
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Actions
 /////////////////////////////////////////////////////////////////////
 
 - (IBAction)toggleLocalFiltering:(id)sender {
+    
+    APVPNManager.singleton.localFiltering = ! _localFiltering;
 }
 
 - (IBAction)toggleSwitchStatus:(id)sender {
@@ -122,33 +175,27 @@
         
         [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
     }
-    [self updateLogStatus];
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Navigation
 
-//- (void)viewWillAppear:(BOOL)animated{
-//    
-//    if (_dnsServersChanged) {
-//        _dnsServersChanged = NO;
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//           
-//            [self reloadDataAnimated:YES];
-//        });
-//    }
-//}
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.identifier isEqualToString:@"dnsServerDetailSegue"]) {
+    if ([segue.identifier isEqualToString:DNS_SERVER_DETAIL_SEGUE]) {
         
         APUIDnsServerDetailController *destination = (APUIDnsServerDetailController *)[(UINavigationController *)[segue destinationViewController]
                                          topViewController];
         
         destination.delegate = self;
+        
+        if ([sender isKindOfClass:[APDnsServerObject class]]) {
+            
+            APDnsServerObject *server = sender;
+            
+            destination.serverObject = server;
+        }
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -157,6 +204,25 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Table Delegate Methods
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
+    
+    if (selectedServer) {
+        
+        APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
+    
+    if (selectedServer) {
+        
+        [self performSegueWithIdentifier:DNS_SERVER_DETAIL_SEGUE sender:selectedServer];
+    }
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
@@ -239,24 +305,24 @@
 
 - (void)updateStatuses{
     APVPNManager *manager = [APVPNManager singleton];
-    //TODO:
-    /*
-    switch (manager.vpnMode) {
-            
-        case APVpnModeDNS:
-            self.defaultDnsCell.accessoryType = UITableViewCellAccessoryCheckmark;
-            
-            break;
-            
-        case APVpnModeFamilyDNS:
-            self.familyDnsCell.accessoryType = UITableViewCellAccessoryCheckmark;
-            
-            break;
-            
-        default:
-            break;
+    
+    _localFiltering = manager.localFiltering;
+    
+    self.localFilteringCell.imageView.image = _localFiltering ?
+    [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE] :
+    [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+
+    APDnsServerObject *activeDnsServer = manager.activeRemoteDnsServer;
+    
+    for (int i = 0; i < _dnsServers.count; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:DNS_SERVER_SECTION_INDEX];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.imageView.image = [activeDnsServer isEqual:_dnsServers[i]] ?
+        [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE] :
+        [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
     }
-*/
+    
     self.statusSwitch.on = self.logSwitch.enabled = manager.enabled;
     if (!manager.enabled) {
         
@@ -281,6 +347,17 @@
             break;
     }
     
+    if (_dnsServers.count < manager.maxCountOfRemoteDnsServers) {
+
+        self.addCustomCell.userInteractionEnabled = YES;
+        self.addCustomCell.textLabel.enabled = YES;
+    }
+    else {
+        
+        self.addCustomCell.userInteractionEnabled = NO;
+        self.addCustomCell.textLabel.enabled = NO;
+    }
+    
     if (manager.lastError) {
         [ACSSystemUtils
             showSimpleAlertForController:self
@@ -291,14 +368,6 @@
                                              @"title. On error.")
                                  message:manager.lastError.localizedDescription];
     }
-}
-
-- (void)updateLogStatus{
-    
-    BOOL logEnabled = [[APVPNManager singleton] dnsRequestsLogging];
-    self.dnsRequestsCell.textLabel.enabled
-    = self.dnsRequestsCell.userInteractionEnabled
-    = logEnabled;
 }
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{
@@ -325,8 +394,23 @@
     
     newCell.accessibilityTraits |= UIAccessibilityTraitButton;
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
     [self insertCell:newCell atIndexPath:indexPath];
+}
+
+- (APDnsServerObject *)remoteDnsServerAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section != DNS_SERVER_SECTION_INDEX) {
+        return nil;
+    }
+    
+    NSUInteger index = indexPath.row;
+    if (index < _dnsServers.count) {
+        
+        return _dnsServers[index];
+    }
+    
+    return nil;
 }
 
 @end

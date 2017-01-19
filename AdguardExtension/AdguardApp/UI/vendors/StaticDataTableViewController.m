@@ -165,6 +165,7 @@
                 
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView.dataSource tableView:tableView cellForRowAtIndexPath:ip];
+                tableViewRow.height = [tableView.delegate tableView:tableView heightForRowAtIndexPath:ip];
                 
                 NSAssert(tableViewRow.cell != nil, @"cannot be nil");
                 
@@ -196,7 +197,7 @@
     tableViewRow.cell = cell;
     NSAssert(tableViewRow.cell != nil, @"cannot be nil");
     
-    tableViewRow.height = 44.0f; //UITableViewAutomaticDimension;
+    tableViewRow.height = UITableViewAutomaticDimension;
     tableViewRow.hiddenReal = YES;
     tableViewRow.hiddenPlanned = NO;
     tableViewRow.batchOperation = kBatchOperationInsert;;
@@ -208,19 +209,24 @@
     
     [rows insertObject:tableViewRow atIndex:indexPath.row];
     
-//    for (NSUInteger i = (indexPath.row + 1); i < rows.count; i++) {
-//        
-//        tableViewRow = rows[i];
-//        tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
-//    }
+    for (NSUInteger i = (indexPath.row + 1); i < rows.count; i++) {
+        
+        tableViewRow = rows[i];
+        tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
+    }
 }
 
 - (void)removeCellAtIndedexPath:(NSIndexPath *)indexPath {
     
     OriginalSection *originalSection = self.sections[indexPath.section];
+    NSMutableArray *rows = originalSection.rows;
     
-    [originalSection.rows removeObjectAtIndex:indexPath.row];
+    [rows removeObjectAtIndex:indexPath.row];
     
+    for (NSUInteger i = indexPath.row; i < rows.count; i++) {
+        
+        ((OriginalRow *)rows[i]).originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
+    }
 }
 
 - (OriginalRow *)originalRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -315,7 +321,7 @@
     
     for (OriginalSection * os in self.sections) {
         
-        for (OriginalRow * or in os.rows) {
+        for (OriginalRow * or in [os.rows copy]) {
         
             if (or.batchOperation == kBatchOperationDelete) {
                 
@@ -407,7 +413,7 @@
 - (void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
     
     OriginalRow *row = [self.originalTable originalRowWithIndexPath:indexPath];
-    if (!row) {
+    if (row) {
         
         [row setHidden:YES];
         row.cell = nil;

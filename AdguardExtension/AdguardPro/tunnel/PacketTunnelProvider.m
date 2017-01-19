@@ -121,8 +121,23 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
     
-    _currentServer = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
-    _localFiltering = protocol.providerConfiguration[APVpnManagerParameterLocalFiltering];
+    _currentServer = nil;
+    NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+    if (currentServerData) {
+
+        _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
+    }
+    
+    if (_currentServer == nil) {
+        
+        DDLogError(@"(PacketTunnelProvider) Bad configuration. Can't obtain remote DNS server object.");
+        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_BADCONFIGURATION userInfo:nil];
+        
+        pendingStartCompletion(error);
+        return;
+    }
+    
+    _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
     _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
     
     // Check configuration

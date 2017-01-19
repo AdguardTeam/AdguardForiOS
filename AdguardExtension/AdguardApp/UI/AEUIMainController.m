@@ -83,7 +83,7 @@
     
 #ifdef PRO
     [self proAttachToNotifications];
-    [self proUpdateAdguardDnsStatus];
+//    [self proUpdateAdguardDnsStatus];
    
 #else
     self.hideSectionsWithHiddenRows = YES;
@@ -261,6 +261,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [self setToolbar];
+#ifdef PRO
+    [self proUpdateAdguardDnsStatus];
+#endif
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

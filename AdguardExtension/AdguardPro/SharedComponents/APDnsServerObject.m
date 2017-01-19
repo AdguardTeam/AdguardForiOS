@@ -47,6 +47,10 @@ static NSMutableCharacterSet *delimCharSet;
 
 }
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (id)init {
     
     self = [super init];
@@ -145,6 +149,15 @@ static NSMutableCharacterSet *delimCharSet;
         _uuid = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"uuid"];
     }
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    
+    APDnsServerObject *result = [super copyWithZone:zone];
+    result.editable = self.editable;
+    result->_uuid = [_uuid copyWithZone:zone];
+    
+    return result;
 }
 
 /////////////////////////////////////////////////////////////////////

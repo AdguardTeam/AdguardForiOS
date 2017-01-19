@@ -37,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
 @property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
@@ -50,5 +52,7 @@
 #pragma mark Properties and public methods
 
 - (void)addDnsServer:(APDnsServerObject *)serverObject;
+- (void)removeDnsServer:(APDnsServerObject *)serverObject;
+- (void)modifyDnsServer:(APDnsServerObject *)serverObject;
 
 @end

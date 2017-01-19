@@ -323,7 +323,7 @@ static APVPNManager *singletonVPNManager;
     return NO;
 }
 
-- (void)removeRemoteDnsServer:(APDnsServerObject *)server {
+- (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server {
     
     if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
         
@@ -332,7 +332,7 @@ static APVPNManager *singletonVPNManager;
         }
         
         // async because method have not returns value
-        dispatch_async(workingQueue, ^{
+        dispatch_sync(workingQueue, ^{
             
             NSMutableArray *servers = [_remoteDnsServers mutableCopy];
             [servers removeObject:server];
@@ -340,8 +340,11 @@ static APVPNManager *singletonVPNManager;
             
             [self saveRemoteDnsServersToDefaults];
         });
+        
+        return YES;
     }
     
+    return NO;
 }
 
 - (BOOL)resetRemoteDnsServer:(APDnsServerObject *)server {
@@ -547,6 +550,31 @@ static APVPNManager *singletonVPNManager;
         remoteServer = _remoteDnsServers[0];
     }
 
+    //Check input parameters
+    
+    if (enabled
+        && [remoteServer.tag isEqualToString:APDnsServerTagLocal]
+        && localFiltering == NO) {
+        
+        _lastError = [NSError
+                      errorWithDomain:APVpnManagerErrorDomain
+                      code:APVPN_MANAGER_ERROR_BADCONFIGURATION
+                      userInfo:@{
+                                 NSLocalizedDescriptionKey :
+                                     NSLocalizedString(@"VPN will not be enabled because you have turned off the filtering locally, and are not using spoofing DNS server.",
+                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in Adguard DNS module. When user turns on Adguard DNS functionality.")
+                                 }];
+
+        [_busyLock lock];
+        _busy = NO;
+        [_busyLock unlock];
+        
+        [self sendNotification];
+        return;
+    }
+    
+    //------
+    
     NETunnelProviderProtocol *protocol;
     NETunnelProviderManager *newManager;
     
@@ -558,10 +586,12 @@ static APVPNManager *singletonVPNManager;
         protocol = [NETunnelProviderProtocol new];
         protocol.providerBundleIdentifier =  AE_HOSTAPP_ID @".tunnel";
     }
+    
+    NSData *remoteServerData = [NSKeyedArchiver archivedDataWithRootObject:remoteServer];
     protocol.serverAddress = remoteServer.serverName;
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterLocalFiltering: @(localFiltering),
-                                       APVpnManagerParameterRemoteDnsServer: remoteServer
+                                       APVpnManagerParameterRemoteDnsServer: remoteServerData
                                        };
     
     if (_manager) {
@@ -617,7 +647,8 @@ static APVPNManager *singletonVPNManager;
     
     if (_manager) {
         
-        _activeRemoteDnsServer = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+        NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+        _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
         _localFiltering = [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
         
         if (_manager.enabled && _manager.onDemandEnabled) {
@@ -759,17 +790,20 @@ static APVPNManager *singletonVPNManager;
                                                                 description: @"None"
                                                                 ipAddresses:@"127.0.0.1, ::1"];
         server.tag = APDnsServerTagLocal;
+        server.editable = NO;
         
         [servers addObject:server];
 
         server = [[APDnsServerObject alloc] initWithName: @"Adguard Default"
                                              description: @"Adguard Default"
                                              ipAddresses:@"176.103.130.130, 176.103.130.131"];
+        server.editable = NO;
         [servers addObject:server];
 
         server = [[APDnsServerObject alloc] initWithName: @"Adguard Family Protection"
                                              description: @"Adguard Family Protection"
                                              ipAddresses:@"176.103.130.132, 176.103.130.134"];
+        server.editable = NO;
         [servers addObject:server];
         _remoteDnsServers = [servers copy];
         

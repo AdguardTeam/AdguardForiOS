@@ -129,8 +129,9 @@ extern NSString *APVpnManagerErrorDomain;
  Removes custom (editable) DNS server
 
  @param server Server instance. It must be editable.
+ @return YES on success.
  */
-- (void)removeRemoteDnsServer:(APDnsServerObject *)server;
+- (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server;
 
 /**
  Changes properties of the custom (editable) DNS server.

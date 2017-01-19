@@ -169,7 +169,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="DNS Filtering" id="vC1-5r-hHk"/>
                     <connections>
+                        <outlet property="addCustomCell" destination="xaM-9n-eH7" id="2Su-p1-aIX"/>
                         <outlet property="dnsRequestsCell" destination="svQ-Uf-dzY" id="eGw-HA-UWu"/>
+                        <outlet property="localFilteringCell" destination="0h5-6c-1Th" id="dkC-zA-5QH"/>
                         <outlet property="logSwitch" destination="seI-lV-dFS" id="ajc-4s-K0t"/>
                         <outlet property="remoteDnsServerTemplateCell" destination="rFj-gY-eD9" id="gaN-Ce-Jzu"/>
                         <outlet property="statusLabel" destination="FFT-Jz-t77" id="zXx-mK-yFb"/>
@@ -319,6 +321,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="descriptionChanged:" destination="XFi-sr-f1o" eventType="editingChanged" id="wtA-Z6-PO1"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -361,6 +366,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="0HZ-Nw-7X0">
+                                <cells>
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EJ4-3W-Fp6">
+                                        <rect key="frame" x="0.0" y="383" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJ4-3W-Fp6" id="cDI-fC-iFf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Server" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkY-pd-BQi">
+                                                    <rect key="frame" x="102.5" y="11" width="115.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.79215686269999996" green="0.27450980390000002" blue="0.34509803919999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fkY-pd-BQi" firstAttribute="centerX" secondItem="cDI-fC-iFf" secondAttribute="centerX" id="CEG-UN-D2O"/>
+                                                <constraint firstItem="fkY-pd-BQi" firstAttribute="centerY" secondItem="cDI-fC-iFf" secondAttribute="centerY" id="ykQ-Ld-s0S"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="M51-zw-7Yh" appends="YES" id="WNm-mL-7HR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="XFi-sr-f1o" id="SiY-bh-sOh"/>
@@ -387,12 +420,18 @@
                         <outlet property="doneButton" destination="8uZ-EB-aVM" id="OH4-9o-uk8"/>
                         <outlet property="ipAddressesTextView" destination="ysu-RU-bHI" id="85H-tA-hKK"/>
                         <outlet property="nameTextField" destination="Jot-rn-HdO" id="NAR-du-t4f"/>
+                        <outlet property="removeCell" destination="EJ4-3W-Fp6" id="mwZ-gi-rLe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXO-hm-iMX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fTS-x5-o2f" userLabel="Tap On Table Gesture Recognizer">
                     <connections>
                         <action selector="clickOnTableView:" destination="XFi-sr-f1o" id="SbL-rt-RdC"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="M51-zw-7Yh" userLabel="Remove Server Gesture Recognizer">
+                    <connections>
+                        <action selector="clickRemove:" destination="XFi-sr-f1o" id="WzI-fG-ybq"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
