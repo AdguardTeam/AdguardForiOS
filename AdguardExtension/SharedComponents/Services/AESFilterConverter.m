@@ -85,6 +85,8 @@ NSString *AESFConverterError = @"AESFConverterError";
             DDLogError(@"Javascript Error: %@",message);
         };
 
+        _context[@"window"] = _context.globalObject;
+        
         [_context evaluateScript:script];
         _converterFunc = _context[JS_CONVERTER_FUNC];
         if (!_converterFunc || [_converterFunc isUndefined]) {
