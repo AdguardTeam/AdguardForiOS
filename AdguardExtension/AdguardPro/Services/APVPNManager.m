@@ -372,11 +372,14 @@ static APVPNManager *singletonVPNManager;
                 
                 [self saveRemoteDnsServersToDefaults];
                 
+                _activeRemoteDnsServer = server;
+                
                 result = YES;
             }
         });
         
         if (resetEnabled) {
+            
             self.enabled = YES;
         }
         return result;
