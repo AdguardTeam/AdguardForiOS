@@ -372,7 +372,7 @@ static APVPNManager *singletonVPNManager;
                 
                 [self saveRemoteDnsServersToDefaults];
                 
-                _activeRemoteDnsServer = server;
+                _activeRemoteDnsServer = _remoteDnsServers[index];
                 
                 result = YES;
             }
