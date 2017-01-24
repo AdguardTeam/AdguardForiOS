@@ -150,7 +150,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         return;
     }
     
-    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv4Addresses.count)) {
+    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
         
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
         NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_NODNSCONFIGURATION userInfo:nil];
@@ -372,8 +372,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     @autoreleasepool {
         
-        NSArray *rules = [[[AEService singleton] antibanner]
-                          rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        AESAntibanner *antibanner = [[AEService singleton] antibanner];
+        NSMutableArray *rules = [NSMutableArray arrayWithArray:
+                                 [antibanner rulesForFilter:@(ASDF_USER_FILTER_ID)]];
+        
+        if (_localFiltering) {
+            [rules addObjectsFromArray:
+            [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
+        }
         
         NSMutableArray *wRules = [NSMutableArray array];
         NSMutableArray *bRules = [NSMutableArray array];

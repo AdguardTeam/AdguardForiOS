@@ -107,8 +107,8 @@ static APVPNManager *singletonVPNManager;
                            @"There was a problem with VPN configuration, "
                            @"please contact our support team.",
                            @"(APVPNManager)  PRO version. Error, which may "
-                           @"occur in Adguard DNS module. When user turns on "
-                           @"Adguard DNS functionality.")
+                           @"occur in DNS Filtering module. When user turns on "
+                           @"DNS Filtering functionality.")
                    }];
 
         [self initDefinitions];
@@ -352,12 +352,10 @@ static APVPNManager *singletonVPNManager;
     if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
         
         BOOL resetEnabled = NO;
-        if ([_activeRemoteDnsServer isEqual:server] && self.enabled) {
-            self.enabled = NO;
+        if ([self.activeRemoteDnsServer isEqual:server]) {
             resetEnabled = YES;
         }
-        
-        __block BOOL result = NO;
+       __block BOOL result = NO;
         dispatch_sync(workingQueue, ^{
             
             NSUInteger index = [_remoteDnsServers indexOfObject:server];
@@ -372,15 +370,15 @@ static APVPNManager *singletonVPNManager;
                 
                 [self saveRemoteDnsServersToDefaults];
                 
-                _activeRemoteDnsServer = _remoteDnsServers[index];
-                
                 result = YES;
             }
         });
         
-        if (resetEnabled) {
+        if (result && resetEnabled) {
             
-            self.enabled = YES;
+            _activeRemoteDnsServer = _remoteDnsServers[0];
+            
+            self.activeRemoteDnsServer = server;
         }
         return result;
     }
@@ -565,7 +563,7 @@ static APVPNManager *singletonVPNManager;
                       userInfo:@{
                                  NSLocalizedDescriptionKey :
                                      NSLocalizedString(@"VPN will not be enabled because you have turned off the filtering locally, and are not using spoofing DNS server.",
-                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in Adguard DNS module. When user turns on Adguard DNS functionality.")
+                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
                                  }];
 
         [_busyLock lock];
@@ -821,8 +819,8 @@ static APVPNManager *singletonVPNManager;
     
     
     server = _remoteDnsServers[1];
-    server.serverName = NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard DNS, where only 'regular' ads will be blocked");
-    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is enabled and iOS uses Adguard DNS, where only 'regular' ads will be blocked");
+    server.serverName = NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses DNS Filtering, where only 'regular' ads will be blocked");
+    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is enabled and iOS uses DNS Filtering, where only 'regular' ads will be blocked");
     
     server = _remoteDnsServers[2];
     server.serverName = NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS");

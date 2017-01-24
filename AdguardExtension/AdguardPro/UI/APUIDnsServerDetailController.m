@@ -77,7 +77,8 @@
 - (IBAction)clickDone:(id)sender {
     
     APDnsServerObject *obj = self.serverObject;
-    obj.serverDescription = self.descriptionTextField.text;
+    obj.serverDescription = [self.descriptionTextField.text lowercaseString];
+    obj.serverName = [obj.serverName capitalizedString];
     
     UIViewController *presenting = self.navigationController.presentingViewController;
 

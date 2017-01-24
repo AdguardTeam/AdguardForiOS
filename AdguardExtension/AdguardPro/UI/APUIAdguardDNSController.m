@@ -44,6 +44,7 @@
     
     NSArray <APDnsServerObject *> *_dnsServers;
     BOOL _localFiltering;
+    BOOL _logSwitchStatusHandler;
 }
 
 - (void)viewDidLoad {
@@ -64,13 +65,13 @@
     
     self.statusLabel.accessibilityHint = [self shortStatusDescription];
     
-    [self updateStatuses];
-    
-    [self.logSwitch setOn:manager.dnsRequestsLogging];
+    _logSwitchStatusHandler = manager.dnsRequestsLogging;
+    [self.logSwitch setOn:_logSwitchStatusHandler];
 
     dispatch_async(dispatch_get_main_queue(), ^{
        
         [self reloadDataAnimated:NO];
+        [self updateStatuses];
     });
 }
 
@@ -141,8 +142,8 @@
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            cell.textLabel.text = [serverObject.serverName capitalizedString];
-            cell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
+            cell.textLabel.text = serverObject.serverName;
+            cell.detailTextLabel.text = serverObject.serverDescription;
             
             [self updateCell:cell];
             
@@ -157,6 +158,8 @@
 /////////////////////////////////////////////////////////////////////
 
 - (IBAction)toggleLocalFiltering:(id)sender {
+    
+    _logSwitchStatusHandler = self.logSwitch.on;
     
     APVPNManager.singleton.localFiltering = ! _localFiltering;
 }
@@ -209,6 +212,8 @@
     APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
     
     if (selectedServer) {
+        
+        _logSwitchStatusHandler = self.logSwitch.on;
         
         APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
     }
@@ -264,14 +269,14 @@
 
 - (NSString *)shortStatusDescription {
     
-    return NSLocalizedString(@"To make system use Adguard DNS, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. It is the description under Adguard DNS switch.");
+    return NSLocalizedString(@"To make system use DNS Filtering, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. It is the description under DNS Filtering switch.");
 }
 
 - (NSAttributedString *)textForProSectionFooter{
     
     NSString *message = [self shortStatusDescription];
     
-    NSString *linkFormat = NSLocalizedString(@"Learn more about[nbsp]Adguard[nbsp]DNS.", @"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Link text of the website with the decription.  Where '[nbsp]' stands for 'non-breakable space'.");
+    NSString *linkFormat = NSLocalizedString(@"Learn more about[nbsp]Adguard[nbsp]DNS.", @"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Link text of the website with the decription.  Where '[nbsp]' stands for 'non-breakable space'.");
     
     NSString *linkText = [@" " stringByAppendingString:
                           [linkFormat stringByReplacingOccurrencesOfString:@"[nbsp]"
@@ -324,26 +329,31 @@
     }
     
     self.statusSwitch.on = self.logSwitch.enabled = manager.enabled;
-    if (!manager.enabled) {
+    
+    if (manager.enabled) {
+        
+        [self.logSwitch setOn:_logSwitchStatusHandler animated:YES];
+    }
+    else {
         
         [self.logSwitch setOn:NO animated:YES];
-        [self toggleLogStatus:nil];
     }
+    [self toggleLogStatus:nil];
     
     switch (manager.connectionStatus) {
             
         case APVpnConnectionStatusReconnecting:
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
-            self.statusLabel.text = NSLocalizedString(@"In Progress",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is 'In Progress'.");
+            self.statusLabel.text = NSLocalizedString(@"In Progress",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is 'In Progress'.");
             break;
             
         case APVpnConnectionStatusConnected:
-            self.statusLabel.text = NSLocalizedString(@"Connected",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Connected.");
+            self.statusLabel.text = NSLocalizedString(@"Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Connected.");
             break;
             
         default:
-            self.statusLabel.text = NSLocalizedString(@"Not Connected",@"(APUIAdguardDNSController) PRO version. On the Adguard DNS settings screen. Current status title. When status is Not Connected.");
+            self.statusLabel.text = NSLocalizedString(@"Not Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Not Connected.");
             break;
     }
     
@@ -385,8 +395,8 @@
     newCell.indentationWidth = templateCell.indentationWidth;
     newCell.selectionStyle = templateCell.selectionStyle;
     
-    newCell.textLabel.text = [serverObject.serverName capitalizedString];
-    newCell.detailTextLabel.text = [serverObject.serverDescription lowercaseString];
+    newCell.textLabel.text = serverObject.serverName;
+    newCell.detailTextLabel.text = serverObject.serverDescription;
     newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
     if (serverObject.editable) {
         newCell.accessoryType = UITableViewCellAccessoryDetailButton;

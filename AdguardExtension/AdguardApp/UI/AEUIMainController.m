@@ -524,15 +524,20 @@
             
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
-            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is 'In Progress'.");
+            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is 'In Progress'.");
             break;
             
         default:
             
-            if (manager.enabled)
-                self.proAdguardDnsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+            if (manager.enabled) {
+                
+                if ([manager.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal])
+                    self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Local",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is Local Filtering.");
+                else
+                    self.proAdguardDnsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+            }
             else
-                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Not Connected.");
+                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is Not Connected.");
             break;
     }
     
