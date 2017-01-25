@@ -19,7 +19,7 @@
 #import "StaticDataTableViewController.h"
 #import "APUIProSectionFooter.h"
 
-@class AEUIMainController;
+@class AEUIMainController, APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIProSectionController
@@ -34,16 +34,16 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-@property (weak, nonatomic) IBOutlet UITableViewCell *defaultDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *familyDnsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-
-- (IBAction)clickChooseServer:(id)sender;
+- (IBAction)toggleLocalFiltering:(id)sender;
 - (IBAction)toggleSwitchStatus:(id)sender;
 - (IBAction)toggleLogStatus:(id)sender;
 
@@ -51,5 +51,8 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+- (void)addDnsServer:(APDnsServerObject *)serverObject;
+- (void)removeDnsServer:(APDnsServerObject *)serverObject;
+- (void)modifyDnsServer:(APDnsServerObject *)serverObject;
 
 @end

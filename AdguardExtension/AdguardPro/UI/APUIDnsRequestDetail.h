@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *statusCell;
 @property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *responsesCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *domainControllCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
 
 - (IBAction)clickDomainControll:(id)sender;
 - (IBAction)longPressOnName:(id)sender;

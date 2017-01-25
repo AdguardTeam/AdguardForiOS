@@ -22,6 +22,7 @@
 #import "APTunnelConnectionsHandler.h"
 #import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
+#import "APDnsServerObject.h"
 
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
@@ -40,7 +41,7 @@
 
 NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
-#define V_REMOTE_ADDRESS             @"111.111.111.111"
+#define V_REMOTE_ADDRESS             @"127.0.0.1"
 
 #define V_INTERFACE_IPV4_ADDRESS     @"169.254.254.2"
 #define V_INTERFACE_IPV4_MASK        @"255.255.255.255"
@@ -55,7 +56,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     void (^pendingStartCompletion)(NSError *error);
     
-    APVpnMode _currentMode;
+    APDnsServerObject *_currentServer;
+    BOOL    _localFiltering;
+    BOOL    _isRemoteServer;
+    
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
 }
@@ -106,37 +110,72 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
+    //TODO: delete this
+    
+//    NEProxySettings *proxySettings = [NEProxySettings new];
+//    proxySettings.HTTPEnabled = YES;
+//    proxySettings.HTTPServer = [[NEProxyServer alloc] initWithAddress:@"10.210.210.120" port:3128];
+//    settings.proxySettings = proxySettings;
+    //-------------------
+    
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
     
-    NSArray *ipv4DnsAddresses = protocol.providerConfiguration[APVpnManagerParameterIPv4DNSAddresses];
-    if (!ipv4DnsAddresses) {
+    _currentServer = nil;
+    NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+    if (currentServerData) {
+
+        _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
+    }
+    
+    if (_currentServer == nil) {
+        
+        DDLogError(@"(PacketTunnelProvider) Bad configuration. Can't obtain remote DNS server object.");
+        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_BADCONFIGURATION userInfo:nil];
+        
+        pendingStartCompletion(error);
+        return;
+    }
+    
+    _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
+    _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+    
+    // Check configuration
+    if (_localFiltering == NO && [_currentServer.tag isEqualToString:APDnsServerTagLocal]) {
+        
+        DDLogError(@"(PacketTunnelProvider) Bad configuration. Attempting set localFiltering = NO and to use system DNS settings.");
+        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_BADCONFIGURATION userInfo:nil];
+        
+        pendingStartCompletion(error);
+        return;
+    }
+    
+    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
         
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
         NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_NODNSCONFIGURATION userInfo:nil];
         
         pendingStartCompletion(error);
+        return;
     }
-    
-    _currentMode = [protocol.providerConfiguration[APVpnManagerParameterMode] intValue];
     
     // IPv4
     NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
                             initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
                             subnetMasks:@[V_INTERFACE_IPV4_MASK]];
     
-    // route for ipv4, which includes dns addresses
-    NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
-//    [routers addObject:[[NEIPv4Route alloc]
-//                        initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
-//                        subnetMask:V_INTERFACE_IPV4_MASK]];
-    for (NSString *item in ipv4DnsAddresses) {
-        [routers addObject:[[NEIPv4Route alloc]
-                            initWithDestinationAddress:item
-                            subnetMask:V_INTERFACE_IPV4_MASK]];
+    if (_isRemoteServer) {
+
+        // route for ipv4, which includes dns addresses
+        NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
+        for (NSString *item in _currentServer.ipv4Addresses) {
+            [routers addObject:[[NEIPv4Route alloc]
+                                initWithDestinationAddress:item
+                                subnetMask:V_INTERFACE_IPV4_MASK]];
+        }
+        
+        ipv4.includedRoutes = routers;
     }
-    
-    ipv4.includedRoutes = routers;
     ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
     
     settings.IPv4Settings = ipv4;
@@ -145,21 +184,47 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
                             initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
                             networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
-//    ipv6.includedRoutes = @[[[NEIPv6Route alloc]
-//                             initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
-//                            networkPrefixLength:V_INTERFACE_IPV6_MASK]];
+    
+    if (_isRemoteServer) {
+        
+        // route for ipv6, which includes dns addresses
+        NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
+        for (NSString *item in _currentServer.ipv6Addresses) {
+            [routers addObject:[[NEIPv6Route alloc]
+                                initWithDestinationAddress:item
+                                networkPrefixLength:V_INTERFACE_IPV6_MASK]];
+        }
+        
+        ipv6.includedRoutes = routers;
+    }
+    
     ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
     
     settings.IPv6Settings = ipv6;
 
     // DNS
 
-    NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers:ipv4DnsAddresses];
+    NSMutableArray *dnsAddresses = [NSMutableArray arrayWithCapacity:2];
+    NSArray *deviceDnsServers = [self getDNSServers];
+    
+    if (_isRemoteServer) {
+        
+        [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
+        [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
+        
+    }
+    else {
+        
+        [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
+        [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
+    }
+    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardDnsAddresses:dnsAddresses];
+    
+    NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers:dnsAddresses];
     dns.matchDomains = @[ @"" ];
 
     settings.DNSSettings = dns;
     
-    [_connectionHandler setDeviceDnsAddresses:[self getDNSServers] adguardDnsAddresses:ipv4DnsAddresses];
     [self reloadWhitelistBlacklistDomain];
     
     // SETs network settings
@@ -168,9 +233,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
         __typeof__(self) sSelf = wSelf;
 
-        @synchronized (_connectionHandler) {
-            if (_connectionHandler) {
-                [_connectionHandler startHandlingPackets];
+        @synchronized (sSelf->_connectionHandler) {
+            if (sSelf->_connectionHandler) {
+                [sSelf->_connectionHandler startHandlingPackets];
             }
         }
 
@@ -235,9 +300,19 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (APVpnMode)vpnMode{
+- (APDnsServerObject *)currentDnsServer {
+    
+    return _currentServer;
+}
 
-    return _currentMode;
+- (BOOL)localFiltering {
+    
+    return _localFiltering;
+}
+
+- (BOOL)isRemoteServer {
+
+    return _isRemoteServer;
 }
 
 - (NSArray <NSString *> *)getDNSServers {
@@ -299,8 +374,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     @autoreleasepool {
         
-        NSArray *rules = [[[AEService singleton] antibanner]
-                          rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        AESAntibanner *antibanner = [[AEService singleton] antibanner];
+        NSMutableArray *rules = [NSMutableArray arrayWithArray:
+                                 [antibanner rulesForFilter:@(ASDF_USER_FILTER_ID)]];
+        
+        if (_localFiltering) {
+            [rules addObjectsFromArray:
+            [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
+        }
         
         NSMutableArray *wRules = [NSMutableArray array];
         NSMutableArray *bRules = [NSMutableArray array];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		651F5F131E2564F400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F121E2564F400E22157 /* ACNUrlUtils.m */; };
 		655A05871C6B7790000F00D7 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04A61C6B7790000F00D7 /* ABECFilter.m */; };
 		655A05881C6B7790000F00D7 /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04A81C6B7790000F00D7 /* ABECFilterParsers.m */; };
 		655A05891C6B7790000F00D7 /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04AA1C6B7790000F00D7 /* ABECRequest.m */; };
@@ -67,9 +68,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		651F5F111E2564F400E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
+		651F5F121E2564F400E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		655A04A41C6B7790000F00D7 /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
 		655A04A51C6B7790000F00D7 /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		655A04A61C6B7790000F00D7 /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		655A04A61C6B7790000F00D7 /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
 		655A04A71C6B7790000F00D7 /* ABECFilterParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilterParsers.h; sourceTree = "<group>"; };
 		655A04A81C6B7790000F00D7 /* ABECFilterParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABECFilterParsers.m; sourceTree = "<group>"; };
 		655A04A91C6B7790000F00D7 /* ABECRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECRequest.h; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 		655A050D1C6B7790000F00D7 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				651F5F111E2564F400E22157 /* ACNUrlUtils.h */,
+				651F5F121E2564F400E22157 /* ACNUrlUtils.m */,
 				655A05111C6B7790000F00D7 /* ACNHttpUtils.h */,
 				655A05121C6B7790000F00D7 /* ACNHttpUtils.m */,
 				655A05131C6B7790000F00D7 /* ACNNetworking.h */,
@@ -618,6 +623,7 @@
 				655A05B31C6B7790000F00D7 /* ACNHttpUtils.m in Sources */,
 				655A059E1C6B7790000F00D7 /* ACLWildcard.m in Sources */,
 				655A05BE1C6B7790000F00D7 /* ASDatabase.m in Sources */,
+				651F5F131E2564F400E22157 /* ACNUrlUtils.m in Sources */,
 				655A05941C6B7790000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				655A05D81C6B7790000F00D7 /* FMDatabaseAdditions.m in Sources */,
 				655A05BC1C6B7790000F00D7 /* ADLocations.m in Sources */,

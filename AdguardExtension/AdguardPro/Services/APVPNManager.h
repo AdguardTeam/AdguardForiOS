@@ -18,18 +18,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class  APDnsLogRecord, ASDFilterRule;
+@class  APDnsLogRecord, ASDFilterRule, APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
-
-typedef enum {
-    
-    APVpnModeUndef = -1,
-    APVpnModeNone,
-    APVpnModeDNS,
-    APVpnModeFamilyDNS
-} APVpnMode;
 
 typedef enum {
     
@@ -49,14 +41,14 @@ typedef enum {
 extern NSString *APVpnChangedNotification;
 
 /**
- Key of the parameter, which contains mode of the vpn configuration.
+ Key of the parameter, which contains remote DNS server configuration.
 */
-extern NSString *APVpnManagerParameterMode;
+extern NSString *APVpnManagerParameterRemoteDnsServer;
 /**
  Key of the parameter, 
- which contains DNS addresses for current mode of the vpn configuration.
+ which contains BOOL value of local filtering switch.
  */
-extern NSString *APVpnManagerParameterIPv4DNSAddresses;
+extern NSString *APVpnManagerParameterLocalFiltering;
 
 /**
  Error domain for errors from vpn manager.
@@ -66,6 +58,8 @@ extern NSString *APVpnManagerErrorDomain;
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
 #define APVPN_MANAGER_ERROR_CONNECTION_HANDLER      300
+#define APVPN_MANAGER_ERROR_BADCONFIGURATION        400
+#define APVPN_MANAGER_ERROR_INSTALL_FILTER          500
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
@@ -89,11 +83,22 @@ extern NSString *APVpnManagerErrorDomain;
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
+@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsServers;
+
 /**
- Contains current mode of the vpn configuration.
- If configuration was not created, then property contains APVpnModeNone.
+ Defines state of the filtering using "Simplified domain names filter" filter rules.
  */
-@property (readonly, nonatomic) APVpnMode vpnMode;
+@property BOOL localFiltering;
+/**
+ Active DNS server.
+ */
+@property APDnsServerObject *activeRemoteDnsServer;
+
+/**
+ Maximum count of DNS servers.
+ */
+@property (readonly, nonatomic) NSUInteger maxCountOfRemoteDnsServers;
+
 /**
  Contains current connection status of the vpn.
  */
@@ -109,24 +114,39 @@ extern NSString *APVpnManagerErrorDomain;
 @property BOOL dnsRequestsLogging;
 
 /**
-    Returns localized description of the configuration mode.
-    
-    @param vpnMode Mode of the vpn configuration.
- */
-- (NSString *)modeDescription:(APVpnMode)vpnMode;
-
-/**
  Switch on/off of the fake vpn.
  */
 @property BOOL enabled;
 
 /**
- Sets mode of the vpn configuration.
+ Adds custom (editable) DNS server.
+
+ @param server Server instance. It must be editable.
+ @return YES on success.
  */
-- (void)setMode:(APVpnMode)vpnMode;
+- (BOOL)addRemoteDnsServer:(APDnsServerObject *)server;
 
 /**
- Sends command to network extension, that it will reset DNS Activity Log.
+ Removes custom (editable) DNS server
+
+ @param server Server instance. It must be editable.
+ @return YES on success.
+ */
+- (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server;
+
+/**
+ Changes properties of the custom (editable) DNS server.
+ When you create new server object, this object obtains uuid.
+ This uuid is used for identification of the object.
+ And you can change all properties of the server object.
+
+ @param server Server instance. It must be editable.
+ @return YES on success.
+ */
+- (BOOL)resetRemoteDnsServer:(APDnsServerObject *)server;
+
+/**
+ Clears DNS Activity Log.
  
  @return Returns YES on success. 
  */

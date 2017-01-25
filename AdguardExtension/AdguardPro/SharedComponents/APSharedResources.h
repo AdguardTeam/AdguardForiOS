@@ -28,7 +28,14 @@
  User Defaults key that define, create log of the DNS requests or not.
  */
 extern NSString *APDefaultsDnsLoggingEnabled;
-
+/**
+ User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
+ */
+extern NSString *APDefaultsRemoteDnsServers;
+/**
+ User Defaults key, which defines, to filter DNS request locally or not.
+ */
+extern NSString *APDefaultsDnsLocalFiltering;
 
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     
