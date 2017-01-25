@@ -48,6 +48,8 @@ typedef void (^AEDownloadsCompletionBlock)();
     AEDownloadsCompletionBlock _downloadCompletion;
     AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
+    
+    BOOL _activateWithOpenUrl;
 }
 
 @end
@@ -82,6 +84,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         _fetchCompletion = nil;
         _downloadCompletion = nil;
+        _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
         // Init database
@@ -119,36 +122,6 @@ typedef void (^AEDownloadsCompletionBlock)();
     //------------- Preparing for start application. Stage 2. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 2.");
     
-    //------------- If running in interactive mode, then Init/Update User Defaults system and other preparing ------------------
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
-        
-        
-        [self updateDefaultsOnSuccess:^{
-            
-            DDLogInfo(@"(AAAppDelegate) User Defaults up to date.");
-            
-            [self launchStageThree];
-            
-        } onFailure:^{
-            
-            DDLogError(@"(AAAppDelegate) User Defaults failed on updating.");
-            
-        }];
-    }
-    else
-        [self launchStageThree];
-    
-    
-    return YES;
-}
-
-
-- (void)launchStageThree{
-    
-    //------------- Preparing for start application. Stage 3. -----------------
-    DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 3.");
-    
-    
     //------------ Subscribe to Antibanner notification -----------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFailuredUpdateNotification object:nil];
@@ -162,19 +135,19 @@ typedef void (^AEDownloadsCompletionBlock)();
     ASDatabase *dbService = [ASDatabase singleton];
     if (dbService.error) {
         
-        DDLogWarn(@"(AppDelegate) Stage 3. DB Error. Panic!");
+        DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
         //        [self dbFailure];
     }
     else if (!dbService.ready){
         
-        DDLogWarn(@"(AppDelegate) Stage 3. DB not ready.");
+        DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
         [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
     }
     //--------------------- Start Services ---------------------------
     else{
         
         [[AEService singleton] start];
-        DDLogInfo(@"(AppDelegate) Stage 3. Main service started.");
+        DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
     
     //--------------------- Processing User Notification Action ---------
@@ -187,7 +160,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
-    DDLogInfo(@"(AppDelegate) Stage 3 completed.");
+    DDLogInfo(@"(AppDelegate) Stage 2 completed.");
+    
+    return YES;
 }
 
 - (void)setPeriodForCheckingFilters{
@@ -196,7 +171,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     if (interval < UIApplicationBackgroundFetchIntervalMinimum) {
         interval = UIApplicationBackgroundFetchIntervalMinimum;
     }
+    
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:interval];
+    DDLogInfo(@"(AppDelegate) Set background fetch interval: %f", interval);
     
 }
 
@@ -234,6 +211,12 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
             
+            if (_activateWithOpenUrl) {
+                _activateWithOpenUrl = NO;
+                DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.");
+                return;
+            }
+            
             if (AEService.singleton.antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
@@ -260,6 +243,18 @@ typedef void (^AEDownloadsCompletionBlock)();
     @autoreleasepool {
         
         DDLogInfo(@"(AppDelegate) application perform Fetch.");
+        
+        if (_fetchCompletion) {
+            
+            // In this case we receive fetch event when previous event still not processed.
+            DDLogInfo(@"(AppDelegate) Previous Fetch still not processed.");
+            
+            // handle new completion handler
+            _fetchCompletion = completionHandler;
+            
+            return;
+        }
+        
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
@@ -285,9 +280,9 @@ typedef void (^AEDownloadsCompletionBlock)();
                     
                         if (_fetchCompletion) {
                             
-                            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
+                            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion with result: failed.");
                             
-                            _fetchCompletion(UIBackgroundFetchResultNewData);
+                            _fetchCompletion(UIBackgroundFetchResultFailed);
                             _fetchCompletion = nil;
                         }
                     });
@@ -304,7 +299,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
         [[AEService singleton] onReady:^{
-            
+
             _downloadCompletion = completionHandler;
             [[[AEService singleton] antibanner] repairUpdateStateForBackground];
         }];
@@ -318,6 +313,9 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
+    
+    _activateWithOpenUrl = YES;
+    
     NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
     if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
          || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
@@ -353,28 +351,6 @@ typedef void (^AEDownloadsCompletionBlock)();
         return YES;
     }
     return NO;
-}
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Preferences Updater Methods
-/////////////////////////////////////////////////////////////////////
-
-/// Updates User Defaults, and after that runns blocks.
-- (void)updateDefaultsOnSuccess:(dispatch_block_t)successBlock onFailure:(dispatch_block_t)failureBlock{
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        if (YES){
-            
-            self.userDefaultsInitialized = YES;
-            dispatch_async(dispatch_get_main_queue(), successBlock);
-        }
-        //        else{
-        //
-        //            self.userDefaultsInitialized = NO;
-        //            dispatch_async(dispatch_get_main_queue(), failureBlock);
-        //        }
-    });
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -505,7 +481,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
     }
     // Update performed
     else if ([notification.name
@@ -545,7 +521,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -604,7 +580,12 @@ typedef void (^AEDownloadsCompletionBlock)();
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (_fetchCompletion) {
-            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
+            NSArray *resultName = @[
+                                    @"NewData",
+                                    @"NoData",
+                                    @"Failed"];
+
+            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion. With result: %@", resultName[result]);
             _fetchCompletion(result);
             _fetchCompletion = nil;
         }

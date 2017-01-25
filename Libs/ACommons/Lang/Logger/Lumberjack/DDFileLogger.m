@@ -239,6 +239,12 @@ BOOL doesAppRunInBackground(void);
 **/
 - (BOOL)isLogFile:(NSString *)fileName
 {
+    
+    // Now we think that any files with .log extension is log file.
+    
+    return [fileName hasSuffix:@".log"];
+
+    /*
     NSString *appName = [self applicationName];
 
     BOOL hasProperPrefix = [fileName hasPrefix:appName];
@@ -280,6 +286,7 @@ BOOL doesAppRunInBackground(void);
     }
 
     return (hasProperPrefix && hasProperDate && hasProperSuffix);
+     */
 }
 
 - (NSDateFormatter *)logFileDateFormatter
