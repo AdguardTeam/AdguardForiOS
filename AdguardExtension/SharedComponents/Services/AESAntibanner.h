@@ -126,7 +126,13 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return ASDGroupsI18n object that contains data from database.
  */
 - (ASDGroupsI18n *)groupsI18n;
+/**
+ Checks if specified filter was installed.
 
+ @param filterId Filter id.
+ @return YES, if filter was installed into production DB.
+ */
+- (BOOL)checkIfFilterInstalled:(NSNumber *)filterId;
 /**
  Obtain filters information.
  @return Array of ASDFilterMetadata objects that contains

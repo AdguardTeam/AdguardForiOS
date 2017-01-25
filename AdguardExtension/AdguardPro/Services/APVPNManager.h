@@ -59,6 +59,7 @@ extern NSString *APVpnManagerErrorDomain;
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
 #define APVPN_MANAGER_ERROR_CONNECTION_HANDLER      300
 #define APVPN_MANAGER_ERROR_BADCONFIGURATION        400
+#define APVPN_MANAGER_ERROR_INSTALL_FILTER          500
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager

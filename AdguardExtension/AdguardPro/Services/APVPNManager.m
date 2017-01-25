@@ -27,6 +27,8 @@
 #import "AEBlacklistDomainObject.h"
 #import "ASDFilterObjects.h"
 #import "APDnsServerObject.h"
+#import "AEService.h"
+#import "AESAntibanner.h"
 
 
 #define VPN_NAME                            @" VPN"
@@ -433,6 +435,27 @@ static APVPNManager *singletonVPNManager;
         
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
+        }
+        
+        if (localFiltering) {
+            
+            if (![self prepareForLocalFiltering]) {
+                
+                DDLogError(@"Error occurred when loading Simplified domain names filter.");
+                _lastError = [NSError
+                              errorWithDomain:APVpnManagerErrorDomain
+                              code:APVPN_MANAGER_ERROR_INSTALL_FILTER
+                              userInfo:@{
+                                         NSLocalizedDescriptionKey :
+                                             NSLocalizedString(@"Unable to install filter for local filtering of the DNS. Contact to support team.",
+                                                               @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
+                                         }];
+                DDLogErrorTrace();
+                
+                [self sendNotification];
+
+                return;
+            }
         }
         [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
     }
@@ -857,5 +880,34 @@ static APVPNManager *singletonVPNManager;
         _remoteDnsServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
     }
 }
+
+/**
+ Checks that Simplified Domain Names Filter was installed. If not, installs it.
+ */
+- (BOOL)prepareForLocalFiltering {
+ 
+    AESAntibanner *antibanner = [[AEService singleton] antibanner];
+    if ([antibanner checkIfFilterInstalled:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
+        
+        return YES;
+    }
+    else {
+        
+        NSArray *filters = [[[antibanner metadataForSubscribe:NO] filters]
+                            filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId == %@", @(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
+        if (filters.count == 1) {
+            ASDFilterMetadata *filter = filters[0];
+            
+            filter.removable = @(NO);
+            filter.editable = @(NO);
+            filter.enabled = @(NO);
+
+            return [antibanner subscribeFilters:filters jobController:nil];
+        }
+    }
+
+    return NO;
+}
+
 @end
 
