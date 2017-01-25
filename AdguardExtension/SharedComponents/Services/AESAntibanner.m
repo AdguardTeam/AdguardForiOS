@@ -130,7 +130,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         serviceInstalled = NO;
         
         _metadataForSubscribeOutdated = YES;
-        _updatesRightNow = YES;
+        _updatesRightNow = NO;
         _inTransaction = NO;
         
     }
@@ -831,18 +831,25 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)repairUpdateStateForBackground {
 
+    dispatch_sync(workQueue, ^{
+        
         DDLogInfo(@"(ASAntibanner) repair update state - background");
+        self.updatesRightNow = YES;
         [[ABECFilterClient singleton] handleBackgroundWithSessionId:AE_FILTER_UPDATES_ID
                                                       updateTimeout:AS_FETCH_UPDATE_STATUS_PERIOD
                                                            delegate:self];
+    });
 }
 
 - (void)repairUpdateStateWithCompletionBlock:(void (^)(void))block {
+    
+    DDLogDebugTrace();
     
     [self setLastUpdateFilters];
     if (_lastUpdateFilterIds.count && _lastUpdateFilters.count
         && _lastUpdateFilterIds.count == _lastUpdateFilters.count ) {
         
+        DDLogInfo(@"(ASAntibanner) repair update state - finish update in background mode");
         [self finishUpdateInBackgroundMode];
         if (block) {
             block();
@@ -851,16 +858,27 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         return;
     }
     
+    if (self.updatesRightNow) {
+        if (block) {
+            block();
+        }
+        return;
+    }
+    
     DDLogInfo(@"(ASAntibanner) repair update state - reset download session");
     [[ABECFilterClient singleton] resetSession:AE_FILTER_UPDATES_ID
                                  updateTimeout:AS_FETCH_UPDATE_STATUS_PERIOD
                                       delegate:self
                                completionBlock:^(BOOL updateInProgress) {
-        
-        self.updatesRightNow = updateInProgress;
-        if (block) {
-            block();
-        }
+        dispatch_sync(workQueue, ^{
+            
+            if (updateInProgress) {
+                [self updateStart];
+            }
+        });
+       if (block) {
+           block();
+       }
     }];
 }
 
@@ -1227,8 +1245,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     [self beginTransaction];
     DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
-    
-    [self updateStart];
+
+    dispatch_sync(workQueue, ^{
+        [self updateStart];
+    });
     
     // update fiters in DB
     [self updateMetadata:res.lastUpdateFilterMetadata filters:res.lastUpdateFilters];
@@ -1336,6 +1356,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 }
 
 - (void)updateStart {
+    
+    if (self.updatesRightNow) {
+        return;
+    }
     
     self.updatesRightNow = YES;
     DDLogInfo(@"(ASAntibanner) Started update process.");
@@ -1928,6 +1952,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)setLastUpdateFilters {
 
+    DDLogDebugTrace();
     AESharedResources *res = [AESharedResources new];
     //repair filters dictionary from disk
     if (!_lastUpdateFilters) {
