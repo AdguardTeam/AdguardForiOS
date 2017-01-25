@@ -106,8 +106,8 @@
         _waitWrite = _closed = NO;
         
         // Create session for whitelist
-        NSString *whitelistServerIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
-        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:whitelistServerIp port:_basePacket.dstPort];
+        NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
+        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
         NWUDPSession *session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (!session) {
             
@@ -117,7 +117,13 @@
         [self setWhitelistSession:session];
         
         // Create main session
-        rEndpoint = [NWHostEndpoint endpointWithHostname:_basePacket.dstAddress port:_basePacket.dstPort];
+        
+        // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
+        if (_delegate.provider.isRemoteServer) {
+            serverIp = _basePacket.dstAddress;
+        }
+        rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
+        
         session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (session) {
             
@@ -542,8 +548,11 @@
                 
                 // whitelist is processed first
                 if ([self.delegate isWhitelistDomain:name]) {
-                [whitelistPackets addObject:packet];
-                whitelisted = YES;
+
+                    [whitelistPackets addObject:packet];
+                    whitelisted = YES;
+                    locLogVerboseTrace(@"Domain to whiltelist: %@", name);
+
                 }
                 else if ([self.delegate isBlacklistDomain:name]) {
                     
@@ -552,6 +561,8 @@
                     [packets removeObject:packet];
                     
                     blacklisted = YES;
+                    
+                    locLogVerboseTrace(@"Domain to blacklist: %@", name);
                 }
             }
             

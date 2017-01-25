@@ -46,4 +46,9 @@ extern NSString *APTunnelProviderErrorDomain;
  */
 - (BOOL)localFiltering;
 
+/**
+ Returns YES if configuration contains remote DNS server.
+ */
+- (BOOL)isRemoteServer;
+
 @end

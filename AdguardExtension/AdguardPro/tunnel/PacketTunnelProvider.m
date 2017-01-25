@@ -212,16 +212,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
         [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
         
-        [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardDnsAddresses:dnsAddresses];
     }
     else {
         
         [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
         [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
-        
-        // Here, both settings points to the same.
-        [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardDnsAddresses:deviceDnsServers];
     }
+    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardDnsAddresses:dnsAddresses];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers:dnsAddresses];
     dns.matchDomains = @[ @"" ];
@@ -311,6 +308,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 - (BOOL)localFiltering {
     
     return _localFiltering;
+}
+
+- (BOOL)isRemoteServer {
+
+    return _isRemoteServer;
 }
 
 - (NSArray <NSString *> *)getDNSServers {
