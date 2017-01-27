@@ -29,10 +29,10 @@ If you want to see what's in our nearest plans, or would like to submit a new bu
 ### Releases
 
 Latest stable free version: 1.1.4 <br/>
-Latest free beta: 1.1.4
+Latest free beta: 1.1.5
 
-Latest stable PRO version: 1.1.4 <br/>
-Latest PRO beta: 1.1.4
+Latest stable PRO version: 1.1.5 <br/>
+Latest PRO beta: 1.1.5
 
 iOS versions: https://github.com/AdguardTeam/AdguardForiOS/releases
 
