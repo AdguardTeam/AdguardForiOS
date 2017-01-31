@@ -837,8 +837,8 @@ static APVPNManager *singletonVPNManager;
     //Changes names and descriptions for predefined servers
     
     APDnsServerObject *server = _remoteDnsServers[0];
-    server.serverName = NSLocalizedString(@"Not Used", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is desabled and iOS uses DNS from current network configuration");
-    server.serverDescription = NSLocalizedString(@"used default system DNS settings", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is desabled and iOS uses DNS from current network configuration");
+    server.serverName = NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration");
+    server.serverDescription = NSLocalizedString(@"used default system DNS settings", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration");
     
     
     server = _remoteDnsServers[1];

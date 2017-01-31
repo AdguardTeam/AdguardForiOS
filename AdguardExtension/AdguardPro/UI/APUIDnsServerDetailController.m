@@ -18,7 +18,7 @@
 
 #import "APUIDnsServerDetailController.h"
 #import "APDnsServerObject.h"
-#import "APUIAdguardDNSController.h"
+#import "APUIDnsServersController.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
@@ -82,18 +82,16 @@
     
     UIViewController *presenting = self.navigationController.presentingViewController;
 
-    APUIAdguardDNSController *delegate = self.delegate;
+    APUIDnsServersController *delegate = self.delegate;
     
     if (_editMode) {
         [presenting dismissViewControllerAnimated:YES completion:^{
             [delegate modifyDnsServer:obj];
-            [delegate reloadDataAnimated:YES];
         }];
     }
     else {
         [presenting dismissViewControllerAnimated:YES completion:^{
             [delegate addDnsServer:obj];
-            [delegate reloadDataAnimated:YES];
         }];
     }
     
@@ -105,7 +103,7 @@
     
     UIViewController *presenting = self.navigationController.presentingViewController;
     
-    APUIAdguardDNSController *delegate = self.delegate;
+    APUIDnsServersController *delegate = self.delegate;
     
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
@@ -117,7 +115,6 @@
                                                               
                                                               [presenting dismissViewControllerAnimated:YES completion:^{
                                                                   [delegate removeDnsServer:obj];
-                                                                  [delegate reloadDataAnimated:YES];
                                                               }];
                                                           }];
     

@@ -92,8 +92,10 @@
     self.title = AE_PRODUCT_NAME;
     
 #ifdef PRO
+    
+    self.proStatusCell.textLabel.accessibilityHint = [self proShortStatusDescription];
+    
     [self proAttachToNotifications];
-//    [self proUpdateAdguardDnsStatus];
    
 #else
     self.hideSectionsWithHiddenRows = YES;

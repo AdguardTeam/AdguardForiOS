@@ -18,37 +18,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class APDnsServerObject, APUIDnsServersController;
-
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Public Methods and Properties
+#pragma mark - APUISystemWideController
 
 
-@property APDnsServerObject *serverObject;
-@property (weak, nonatomic) APUIDnsServersController *delegate;
+@interface APUISystemWideController  : UITableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
-@property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)clickOnTableView:(id)sender;
-- (IBAction)clickCancel:(id)sender;
-- (IBAction)clickDone:(id)sender;
-- (IBAction)clickRemove:(id)sender;
 
-- (IBAction)nameChanged:(id)sender;
-- (IBAction)descriptionChanged:(id)sender;
 
 @end

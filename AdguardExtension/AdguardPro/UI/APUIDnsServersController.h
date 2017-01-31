@@ -16,39 +16,32 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <UIKit/UIKit.h>
+#import "StaticDataTableViewController.h"
 
-@class APDnsServerObject, APUIDnsServersController;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
+@class APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Public Methods and Properties
+#pragma mark - APUIDnsServersController
 
-
-@property APDnsServerObject *serverObject;
-@property (weak, nonatomic) APUIDnsServersController *delegate;
+@interface APUIDnsServersController  : StaticDataTableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
-@property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *systemDefaultCell;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)clickOnTableView:(id)sender;
-- (IBAction)clickCancel:(id)sender;
-- (IBAction)clickDone:(id)sender;
-- (IBAction)clickRemove:(id)sender;
 
-- (IBAction)nameChanged:(id)sender;
-- (IBAction)descriptionChanged:(id)sender;
+/////////////////////////////////////////////////////////////////////
+#pragma mark Properties and public methods
+
+- (void)addDnsServer:(APDnsServerObject *)serverObject;
+- (void)removeDnsServer:(APDnsServerObject *)serverObject;
+- (void)modifyDnsServer:(APDnsServerObject *)serverObject;
 
 @end
