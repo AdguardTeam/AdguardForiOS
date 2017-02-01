@@ -246,10 +246,7 @@
         [ACSSystemUtils
          showSimpleAlertForController:self
          withTitle:NSLocalizedString(@"Error",
-                                     @"(APUIAdguardDNSCon"
-                                     @"troller) PRO "
-                                     @"version. Alert "
-                                     @"title. On error.")
+                                     @"(APUIAdguardDNSController) PRO version. Alert title. On error.")
          message:manager.lastError.localizedDescription];
     }
     

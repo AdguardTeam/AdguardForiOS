@@ -27,10 +27,14 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
+@property (strong, nonatomic) IBOutlet UISwitch *statusSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
+- (IBAction)toggleLocalFiltering:(id)sender;
+- (IBAction)toggleLogStatus:(id)sender;
 
 
 @end

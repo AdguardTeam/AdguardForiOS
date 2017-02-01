@@ -21,16 +21,19 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDomainListController
 
-@interface APUIDomainListController  : UIViewController
+@interface APUIDomainListController  : UIViewController <UITextViewDelegate>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-
+@property (weak, nonatomic) IBOutlet UITextView *domainsTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachBarConstraint;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
+- (IBAction)clickDone:(id)sender;
 
 
 @end

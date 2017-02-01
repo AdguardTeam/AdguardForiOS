@@ -240,17 +240,22 @@ static APVPNManager *singletonVPNManager;
                 DDLogError(@"(APVPNManager) Can't set logging DNS requests to %@: %@, %ld, %@", (dnsRequestsLogging ? @"YES" : @"NO"), err.domain, err.code, err.localizedDescription);
                 _lastError = _standartError;
             }
+            else {
+                
+                _dnsRequestsLogging = dnsRequestsLogging;
+            }
 
-            _dnsRequestsLogging = dnsRequestsLogging;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
-            return;
         }
         else {
             
             DDLogError(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
             _dnsRequestsLogging = NO;
+            _lastError = _standartError;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
         }
+        
+        [self sendNotification];
     }
 }
 

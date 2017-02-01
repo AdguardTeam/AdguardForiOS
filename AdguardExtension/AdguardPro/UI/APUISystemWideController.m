@@ -17,6 +17,8 @@
  */
 
 #import "APUISystemWideController.h"
+#import "APVPNManager.h"
+#import "ACommons/ACSystem.h"
 #import "APUIDomainListController.h"
 
 
@@ -29,18 +31,25 @@
 @implementation APUISystemWideController {
     
     UIBarButtonItem *_cancelNavigationItem;
+    id _observer;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _cancelNavigationItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    _cancelNavigationItem = [[UIBarButtonItem alloc]
+                             initWithTitle:NSLocalizedString(@"Cancel",
+                                                             @"(APUIAdguardDNSController) PRO version. Title of the 'Back' button on cancel operation.")
+                                                             style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self attachToNotifications];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self updateStatuses];
+    });
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,6 +59,26 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
+
+- (IBAction)toggleLocalFiltering:(id)sender {
+    
+    APVPNManager.singleton.localFiltering = self.statusSwitch.isOn;
+    if (APVPNManager.singleton.lastError) {
+        
+        [self.statusSwitch setOn:APVPNManager.singleton.localFiltering animated:YES];
+    }
+}
+
+- (IBAction)toggleLogStatus:(id)sender {
+    
+    APVPNManager *manager = [APVPNManager singleton];
+    manager.dnsRequestsLogging = self.logSwitch.isOn;
+    if (manager.lastError) {
+        
+        [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    }
+}
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Table view data source
@@ -115,22 +144,57 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    BOOL toWhitelist = [segue.identifier isEqualToString:SEGUE_WHITELIST];
+    BOOL toBlacklist = [segue.identifier isEqualToString:SEGUE_BLACKLIST];
     
-    if ([segue.identifier isEqualToString:SEGUE_WHITELIST]) {
+    if (toBlacklist || toWhitelist) {
     
-        APUIDomainListController *whitelistController = segue.destinationViewController;
+        APUIDomainListController *domainList = segue.destinationViewController;
         
-        whitelistController.navigationItem.title = @"Whitelist";
+        domainList.navigationItem.title = toWhitelist
+        ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
+        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide blacklist screen.");
         self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
-    }
-    else if ([segue.identifier isEqualToString:SEGUE_BLACKLIST]) {
-        
-        self.navigationItem.backBarButtonItem = _cancelNavigationItem;
     }
     else {
         
         self.navigationItem.backBarButtonItem = nil;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Helper Methods (Private)
+
+- (void)attachToNotifications{
+    
+    _observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:APVpnChangedNotification
+                 object: nil
+                 queue:nil
+                 usingBlock:^(NSNotification *_Nonnull note) {
+                     
+                     // When configuration is changed
+                     
+                     [self updateStatuses];
+                 }];
+}
+
+- (void)updateStatuses{
+    APVPNManager *manager = [APVPNManager singleton];
+    
+    [self.statusSwitch setOn:manager.localFiltering animated:YES];
+    [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    
+    if (manager.lastError) {
+        [ACSSystemUtils
+         showSimpleAlertForController:self
+         withTitle:NSLocalizedString(@"Error",
+                                     @"(APUIAdguardDNSCon"
+                                     @"troller) PRO "
+                                     @"version. Alert "
+                                     @"title. On error.")
+         message:manager.lastError.localizedDescription];
     }
 }
 

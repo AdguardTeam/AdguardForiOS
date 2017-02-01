@@ -19,15 +19,23 @@
 
 #import "APUIDomainListController.h"
 
+#define TOP_BOUNSE_LIMIT                    -5
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDomainListController
 
-@implementation APUIDomainListController
+@implementation APUIDomainListController {
+    
+    BOOL _searchBarHidden;
+    CGFloat _searchBarTopConstraintValue;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _searchBarTopConstraintValue = self.seachBarConstraint.constant;
+    _searchBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,4 +53,51 @@
 }
 */
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark Actions
+
+- (IBAction)clickDone:(id)sender {
+
+    NSLog(@"offset: %@", NSStringFromCGPoint(self.domainsTextView.contentOffset));
+    self.domainsTextView.contentOffset = CGPointZero;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    [self.searchBar setNeedsUpdateConstraints];
+
+    CGFloat absoluteTopVal = ABS(_searchBarTopConstraintValue);
+    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : _searchBarTopConstraintValue;
+    
+    if (decelerate) {
+        [self.searchBar resignFirstResponder];
+    }
+
+    if(scrollView.contentOffset.y < topValue)
+    {
+        
+        _searchBarHidden = NO;
+        self.seachBarConstraint.constant = 0.0f;
+        [UIView animateWithDuration:0.1 animations:^{
+            
+            self.domainsTextView.contentInset = UIEdgeInsetsMake(absoluteTopVal, 0, 0, 0);
+            [self.view layoutIfNeeded];
+        }];
+        [self.searchBar becomeFirstResponder];
+        
+    } else {
+
+        _searchBarHidden = YES;
+        [self.searchBar resignFirstResponder];
+        [self.searchBar setText:@""];
+        
+        self.seachBarConstraint.constant = _searchBarTopConstraintValue;
+        [UIView animateWithDuration:0.1 animations:^{
+            
+            self.domainsTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            [self.view layoutIfNeeded];
+        }];
+        
+    }
+}
 @end
