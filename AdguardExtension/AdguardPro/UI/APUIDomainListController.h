@@ -21,19 +21,32 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDomainListController
 
-@interface APUIDomainListController  : UIViewController <UITextViewDelegate>
+@interface APUIDomainListController  : UIViewController <UITextViewDelegate, UISearchBarDelegate>
+
+/**
+ Block of the code, which will be performed when user press the Done key.
+ */
+@property (nonatomic, copy) void (^done)(NSString *text);
+/**
+ Initial text, which will be edited.
+ */
+@property (nonatomic) NSString *textForEditing;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
 @property (weak, nonatomic) IBOutlet UITextView *domainsTextView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachBarConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachToolBarConstraint;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
 - (IBAction)clickDone:(id)sender;
+- (IBAction)clickSearchNext:(id)sender;
+- (IBAction)clickSearchPrev:(id)sender;
 
 
 @end

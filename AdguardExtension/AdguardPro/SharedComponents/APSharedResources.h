@@ -52,7 +52,7 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 /**
      (PRO) Class, which provides exchanging data between app and extension.
  */
-@interface APSharedResources : NSObject
+@interface APSharedResources : AESharedResources
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -67,4 +67,14 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 + (NSData *)host2tunnelMessageLogEnabled;
 + (NSData *)host2tunnelMessageLogDisabled;
 + (NSData *)host2tunnelMessageUserfilterDataReload;
+
+/**
+ User-entered list of domains to be excluded from locking at the system-wide level.
+ */
+@property (class) NSArray <NSString *> *whitelistDomains;
+/**
+ User-entered list of domains that are blocked at the system-wide level.
+ */
+@property (class) NSArray <NSString *> *blacklistDomains;
+
 @end
