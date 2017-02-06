@@ -28,79 +28,46 @@
 @interface UITextView (insets)
 
 // Scrolls to visible range, eventually considering insets
-- (void)scrollRangeToVisible:(NSRange)range consideringInsets:(BOOL)considerInsets;
-
-// Scrolls to visible rect, eventually considering insets
-- (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated consideringInsets:(BOOL)considerInsets;
+- (CGRect)scrollRangeToVisible:(NSRange)range animated:(BOOL)animated;
 
 // Returns visible rect, eventually considering insets
-- (CGRect)visibleRectConsideringInsets:(BOOL)considerInsets;
+- (CGRect)visibleRectConsideringInsets;
 
 @end
 
 @implementation UITextView (insets)
 
 // Scrolls to visible range, eventually considering insets
-- (void)scrollRangeToVisible:(NSRange)range consideringInsets:(BOOL)considerInsets
-{
-    if (considerInsets && (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1))
+- (CGRect)scrollRangeToVisible:(NSRange)range animated:(BOOL)animated{
+    // Calculates rect for range
+    UITextPosition *startPosition = [self positionFromPosition:self.beginningOfDocument offset:range.location];
+    UITextPosition *endPosition = [self positionFromPosition:startPosition offset:range.length];
+    UITextRange *textRange = [self textRangeFromPosition:startPosition toPosition:endPosition];
+    CGRect rect = [self firstRectForRange:textRange];
+    
+    // Scrolls to visible rect
+    // Gets bounds and calculates visible rect
+    CGRect visibleRect = [self visibleRectConsideringInsets];
+    
+    // Do not scroll if rect is on screen
+    if (!CGRectContainsRect(visibleRect, rect))
     {
-        // Calculates rect for range
-        UITextPosition *startPosition = [self positionFromPosition:self.beginningOfDocument offset:range.location];
-        UITextPosition *endPosition = [self positionFromPosition:startPosition offset:range.length];
-        UITextRange *textRange = [self textRangeFromPosition:startPosition toPosition:endPosition];
-        CGRect rect = [self firstRectForRange:textRange];
-        
-        // Scrolls to visible rect
-        [self scrollRectToVisible:rect animated:YES consideringInsets:YES];
-    }
-    else
-        [self scrollRangeToVisible:range];
-}
-
-// Scrolls to visible rect, eventually considering insets
-- (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated consideringInsets:(BOOL)considerInsets
-{
-    if (considerInsets && (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1))
-    {
-        // Gets bounds and calculates visible rect
-        CGRect bounds = self.bounds;
-        UIEdgeInsets contentInset = self.contentInset;
-        CGRect visibleRect = [self visibleRectConsideringInsets:YES];
-        
-        // Do not scroll if rect is on screen
-        if (!CGRectContainsRect(visibleRect, rect))
-        {
-            CGPoint contentOffset = self.contentOffset;
-            // Calculates new contentOffset
-            if (rect.origin.y < visibleRect.origin.y)
-                // rect precedes bounds, scroll up
-                contentOffset.y = rect.origin.y - contentInset.top;
-            else
-                // rect follows bounds, scroll down
-                contentOffset.y = rect.origin.y + contentInset.bottom + rect.size.height - bounds.size.height;
-            [self setContentOffset:contentOffset animated:animated];
-        }
-    }
-    else
         [self scrollRectToVisible:rect animated:animated];
+    }
+    
+    return rect;
 }
 
 // Returns visible rect, eventually considering insets
-- (CGRect)visibleRectConsideringInsets:(BOOL)considerInsets
+- (CGRect)visibleRectConsideringInsets
 {
-    CGRect bounds = self.bounds;
-    if (considerInsets)
-    {
-        UIEdgeInsets contentInset = self.contentInset;
-        CGRect visibleRect = self.bounds;
-        visibleRect.origin.x += contentInset.left;
-        visibleRect.origin.y += contentInset.top;
-        visibleRect.size.width -= (contentInset.left + contentInset.right);
-        visibleRect.size.height -= (contentInset.top + contentInset.bottom);
-        return visibleRect;
-    }
-    return bounds;
+    UIEdgeInsets contentInset = self.contentInset;
+    CGRect visibleRect = self.bounds;
+    visibleRect.origin.x += contentInset.left;
+    visibleRect.origin.y += contentInset.top;
+    visibleRect.size.width -= (contentInset.left + contentInset.right);
+    visibleRect.size.height -= (contentInset.top + contentInset.bottom);
+    return visibleRect;
 }
 
 @end
@@ -131,9 +98,18 @@
     _searchBarHidden = _keyboardHidden = YES;
     _currentTextSelection = NSMakeRange(0, 0);
 
-    self.domainsTextView.text = self.textForEditing;
+    [self.domainsTextView setText:self.textForEditing];
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
+    
+    // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
+    [self.domainsTextView sizeToFit];
+    [self.domainsTextView setScrollEnabled:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        [self.domainsTextView setContentOffset:
+         CGPointMake(- self.domainsTextView.contentInset.left, - self.domainsTextView.contentInset.top)];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,6 +129,10 @@
 - (IBAction)clickDone:(id)sender {
 
     UIEdgeInsets insets = self.domainsTextView.contentInset;
+    CGPoint offset = self.domainsTextView.contentOffset;
+    CGSize size = self.domainsTextView.contentSize;
+    
+    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
     return;
     self.done(self.domainsTextView.text);
     [self.navigationController popViewControllerAnimated:YES];
@@ -172,7 +152,8 @@
 #pragma mark Delegate Methods
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
+
+
     [self.searchToolBar setNeedsUpdateConstraints];
     [self.searchToolBar setNeedsLayout];
 
@@ -246,7 +227,7 @@
 #pragma mark Helper Methods (Private)
 
 - (void)keyboardDidChangeFrameWithNotification:(NSNotification *)notification {
-    
+
     CGRect rect = [self.domainsTextView convertRect:[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:nil];
     CGFloat keyboardHeight = rect.size.height;
     
@@ -256,7 +237,6 @@
         return;
     }
     
-    NSLog(@"asfdasdasdasd: %f", keyboardHeight);
 
     _keyboardHidden = keyboardHidden;
     
@@ -265,6 +245,8 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(topVal, 0.0, keyboardHeight, 0.0);
     self.domainsTextView.contentInset = contentInsets;
     self.domainsTextView.scrollIndicatorInsets = contentInsets;
+    
+    NSLog(@"keyboard inset: %@", NSStringFromUIEdgeInsets(contentInsets));
 }
 
 - (void)selectFirst {
@@ -331,14 +313,15 @@
 
 - (void)updateSelectionOnTextView {
     
-    if (![self.domainsTextView isFirstResponder]) {
+    [self.domainsTextView scrollRangeToVisible:_currentTextSelection animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        [self.domainsTextView becomeFirstResponder];
-    }
-    self.domainsTextView.selectedRange = _currentTextSelection;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.domainsTextView scrollRangeToVisible:_currentTextSelection consideringInsets:YES];
-//    });
+        if (![self.domainsTextView isFirstResponder]) {
+            
+            [self.domainsTextView becomeFirstResponder];
+        }
+        self.domainsTextView.selectedRange = _currentTextSelection;
+    });
 
 }
 
