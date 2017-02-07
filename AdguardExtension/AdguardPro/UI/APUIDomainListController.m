@@ -33,6 +33,8 @@
 // Returns visible rect, eventually considering insets
 - (CGRect)visibleRectConsideringInsets;
 
+- (UITextRange *)textRangeFromNSRange:(NSRange)range;
+
 @end
 
 @implementation UITextView (insets)
@@ -40,10 +42,11 @@
 // Scrolls to visible range, eventually considering insets
 - (CGRect)scrollRangeToVisible:(NSRange)range animated:(BOOL)animated{
     // Calculates rect for range
-    UITextPosition *startPosition = [self positionFromPosition:self.beginningOfDocument offset:range.location];
-    UITextPosition *endPosition = [self positionFromPosition:startPosition offset:range.length];
-    UITextRange *textRange = [self textRangeFromPosition:startPosition toPosition:endPosition];
+    UITextRange *textRange = [self textRangeFromNSRange:range];
     CGRect rect = [self firstRectForRange:textRange];
+    
+    rect.size.width = rect.size.width ?: 5.0f;
+    rect.size.height = rect.size.height ?: 5.0f;
     
     // Scrolls to visible rect
     // Gets bounds and calculates visible rect
@@ -70,6 +73,13 @@
     return visibleRect;
 }
 
+- (UITextRange *)textRangeFromNSRange:(NSRange)range {
+    
+    UITextPosition *startPosition = [self positionFromPosition:self.beginningOfDocument offset:range.location];
+    UITextPosition *endPosition = [self positionFromPosition:startPosition offset:range.length];
+    return [self textRangeFromPosition:startPosition toPosition:endPosition];
+}
+
 @end
 
 /////////////////////////////////////////////////////////////////////
@@ -83,20 +93,17 @@
     
     NSString *_currentSearchString;
     NSRange _currentTextSelection;
+    UIView *_currentSelectionMarker;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(keyboardDidChangeFrameWithNotification:)
-     name:UIKeyboardDidChangeFrameNotification
-     object:nil];
+    [self registerForKeyboardNotifications];
     
     _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
     _searchBarHidden = _keyboardHidden = YES;
-    _currentTextSelection = NSMakeRange(0, 0);
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
     [self.domainsTextView setText:self.textForEditing];
     
@@ -128,12 +135,12 @@
 
 - (IBAction)clickDone:(id)sender {
 
-    UIEdgeInsets insets = self.domainsTextView.contentInset;
-    CGPoint offset = self.domainsTextView.contentOffset;
-    CGSize size = self.domainsTextView.contentSize;
-    
-    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
-    return;
+//    UIEdgeInsets insets = self.domainsTextView.contentInset;
+//    CGPoint offset = self.domainsTextView.contentOffset;
+//    CGSize size = self.domainsTextView.contentSize;
+//    
+//    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
+//    return;
     self.done(self.domainsTextView.text);
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -150,6 +157,32 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Delegate Methods
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
+    _currentSelectionMarker.hidden = YES;
+}
+
+// For supporting of the URL insertion 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    @autoreleasepool {
+        
+        if ([text contains:@"/"]) {
+            if (text.length > 1) {
+                
+                NSURL *url = [NSURL URLWithString:text];
+                text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                if (text) {
+                    
+                    [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                }
+            }
+            return NO;
+        }
+        return YES;
+    }
+}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 
@@ -226,27 +259,47 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
-- (void)keyboardDidChangeFrameWithNotification:(NSNotification *)notification {
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
 
-    CGRect rect = [self.domainsTextView convertRect:[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:nil];
-    CGFloat keyboardHeight = rect.size.height;
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    BOOL keyboardHidden = (keyboardHeight == 0);
+    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
     
-    if (keyboardHidden == _keyboardHidden) {
-        return;
-    }
-    
-
-    _keyboardHidden = keyboardHidden;
-    
-    CGFloat topVal = _searchBarHidden ? 0.0 :ABS(_searchBarTopConstraintValue);
-
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(topVal, 0.0, keyboardHeight, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, kbSize.height, 0.0);
     self.domainsTextView.contentInset = contentInsets;
     self.domainsTextView.scrollIndicatorInsets = contentInsets;
     
-    NSLog(@"keyboard inset: %@", NSStringFromUIEdgeInsets(contentInsets));
+    if ([self.domainsTextView isFirstResponder]) {
+        
+        [self.domainsTextView scrollRangeToVisible:self.domainsTextView.selectedRange animated:YES];
+    }
+    else {
+        
+        [self updateSelectionOnTextView];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    
+    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, 0.0, 0.0);
+    self.domainsTextView.contentInset = contentInsets;
+    self.domainsTextView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)selectFirst {
@@ -258,7 +311,6 @@
     _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
     if (_currentTextSelection.location == NSNotFound) {
-        _currentTextSelection = NSMakeRange(0, 0);
         return;
     }
 
@@ -271,7 +323,7 @@
     if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
         return;
     }
-    NSUInteger location = _currentTextSelection.location + _currentTextSelection.length;
+    NSUInteger location = (_currentTextSelection.location == NSNotFound ? 0 : _currentTextSelection.location) + _currentTextSelection.length;
     NSRange searchRange = NSMakeRange(location, len - location);
     
     _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch range:searchRange];
@@ -290,7 +342,10 @@
     if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
         return;
     }
-    NSRange searchRange = NSMakeRange(0, _currentTextSelection.location ?: len);
+    NSRange searchRange = NSMakeRange(0, (_currentTextSelection.location
+                                       && _currentTextSelection.location != NSNotFound)
+                                      ? _currentTextSelection.location
+                                      : len);
     
     _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString
                                                              options:(NSCaseInsensitiveSearch | NSBackwardsSearch)
@@ -303,7 +358,6 @@
                                                                    range:searchRange];
         if (_currentTextSelection.location == NSNotFound) {
             
-            _currentTextSelection = NSMakeRange(0, 0);
             return;
         }
     }
@@ -313,16 +367,30 @@
 
 - (void)updateSelectionOnTextView {
     
-    [self.domainsTextView scrollRangeToVisible:_currentTextSelection animated:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    if (_currentTextSelection.location == NSNotFound) {
+        _currentSelectionMarker.hidden = YES;
+        return;
+    }
+    
+    CGRect rect = [self.domainsTextView scrollRangeToVisible:_currentTextSelection animated:YES];
+    
+    if (_currentTextSelection.length == 0) {
+        _currentSelectionMarker.hidden = YES;
+        return;
+    }
+    
+    if (_currentSelectionMarker == nil) {
         
-        if (![self.domainsTextView isFirstResponder]) {
-            
-            [self.domainsTextView becomeFirstResponder];
-        }
-        self.domainsTextView.selectedRange = _currentTextSelection;
-    });
-
+        _currentSelectionMarker = [[UIView alloc] initWithFrame:rect];
+        _currentSelectionMarker.backgroundColor = [self.domainsTextView.tintColor colorWithAlphaComponent:0.2f];
+        _currentSelectionMarker.layer.cornerRadius = 3.0f;
+        _currentSelectionMarker.userInteractionEnabled = NO;
+        [self.domainsTextView addSubview:_currentSelectionMarker];
+    }
+    else {
+        [_currentSelectionMarker setFrame:rect];
+    }
+    _currentSelectionMarker.hidden = NO;
 }
 
 @end
