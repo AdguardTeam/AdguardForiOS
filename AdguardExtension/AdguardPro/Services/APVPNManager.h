@@ -159,10 +159,9 @@ extern NSString *APVpnManagerErrorDomain;
 - (void)obtainDnsLogRecords:(void (^)(NSArray <APDnsLogRecord *> *records))completionBlock;
 
 /**
- Checks that rule is type of whitelist or blacklist,
- if so, sends message to tunnel extension,
+ Sends message to tunnel extension,
  which notifies that extension needs reload whitelist/blacklist of the domains.
  */
-- (void)sendReloadUserfilterDataIfRule:(ASDFilterRule *)rule;
+- (void)sendReloadSystemWideDomainLists;
 
 @end

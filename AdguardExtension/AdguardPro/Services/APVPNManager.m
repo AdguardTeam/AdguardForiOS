@@ -259,32 +259,27 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
-- (void)sendReloadUserfilterDataIfRule:(ASDFilterRule *)rule {
-    
-    if (! ([[AEWhitelistDomainObject alloc] initWithRule:rule]
-           || [[AEBlacklistDomainObject alloc] initWithRule:rule])) {
-        
-        return;
-    }
+- (void)sendReloadSystemWideDomainLists {
     
     _lastError = nil;
     if (_manager.connection) {
         
-        NSData *message = [APSharedResources host2tunnelMessageUserfilterDataReload];
+        NSData *message = [APSharedResources host2tunnelMessageSystemWideDomainListReload];
         NSError *err = nil;
         [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
         if (err) {
             
-            DDLogError(@"(APVPNManager) Can't send message for reload user filter data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            DDLogError(@"(APVPNManager) Can't send message for reload domains lists data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
             _lastError = _standartError;
         }
-        return;
     }
     else {
         
-        DDLogError(@"(APVPNManager)  Can't send message for reload user filter data: VPN session connection is nil");
-        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+        DDLogError(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
+        _lastError = _standartError;
     }
+    
+    [self sendNotification];
 }
 
 - (BOOL)clearDnsRequestsLog {

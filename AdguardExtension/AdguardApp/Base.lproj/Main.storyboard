@@ -652,7 +652,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="fDG-WP-5VW">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="mHA-FX-Jfq">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="done" id="mHA-FX-Jfq">
                             <connections>
                                 <action selector="clickDone:" destination="04M-uU-tjs" id="Tuz-Kv-XYN"/>
                             </connections>
@@ -661,6 +661,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="domainsTextView" destination="Ru9-g2-Yvv" id="CJe-CH-hHz"/>
+                        <outlet property="doneButton" destination="mHA-FX-Jfq" id="PzC-x3-lSB"/>
                         <outlet property="seachToolBarConstraint" destination="rHf-Xq-uWl" id="w9M-nl-6q7"/>
                         <outlet property="searchBar" destination="lHn-v7-UvW" id="IZW-yg-URT"/>
                         <outlet property="searchBarItem" destination="LOM-vg-Jmm" id="0aW-0y-rL3"/>

@@ -184,9 +184,9 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return [NSData dataWithBytes:&message length:1];
 }
 
-+ (NSData *)host2tunnelMessageUserfilterDataReload {
++ (NSData *)host2tunnelMessageSystemWideDomainListReload {
     
-    APHost2TunnelMessageType message = APHTMUserfilterDataReload;
+    APHost2TunnelMessageType message = APHTMLSystemWideDomainListReload;
     
     return [NSData dataWithBytes:&message length:1];
 }

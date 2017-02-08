@@ -26,7 +26,7 @@
 /**
  Block of the code, which will be performed when user press the Done key.
  */
-@property (nonatomic, copy) void (^done)(NSString *text);
+@property (nonatomic, copy) BOOL (^done)(NSString *text);
 /**
  Initial text, which will be edited.
  */
@@ -40,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions

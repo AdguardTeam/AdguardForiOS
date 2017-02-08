@@ -58,6 +58,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc{
+    
+    if (_observer) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
@@ -98,7 +105,7 @@
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide blacklist screen.");
         self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
-        domainList.done = ^void(NSString *text) {
+        domainList.done = ^BOOL(NSString *text) {
 
             NSMutableArray *domains = [NSMutableArray array];
             @autoreleasepool {
@@ -117,14 +124,42 @@
                 }
             }
             
-            if (toBlacklist) {
+            @autoreleasepool {
                 
-                APSharedResources.blacklistDomains = domains;
-            }
-            else {
+                NSArray *propertyHolder;
                 
-                APSharedResources.whitelistDomains = domains;
+                if (toBlacklist) {
+                    
+                    propertyHolder = APSharedResources.blacklistDomains;
+                    APSharedResources.blacklistDomains = domains;
+                }
+                else {
+                    
+                    propertyHolder = APSharedResources.whitelistDomains;
+                    APSharedResources.whitelistDomains = domains;
+                }
+                
+                APVPNManager *manager = [APVPNManager singleton];
+                [manager sendReloadSystemWideDomainLists];
+                
+                if (manager.lastError) {
+
+                    //processing of the error
+                    if (toBlacklist) {
+                        
+                        APSharedResources.blacklistDomains = propertyHolder;
+                    }
+                    else {
+                        
+                        APSharedResources.whitelistDomains = propertyHolder;
+                    }
+                    
+                    return NO;
+                }
             }
+            
+            return YES;
+
         };
         
         if (toBlacklist) {
@@ -177,6 +212,5 @@
          message:manager.lastError.localizedDescription];
     }
 }
-
 
 @end

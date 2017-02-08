@@ -43,7 +43,7 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     APHTMLoggingEnabled = 1,
     APHTMLoggingDisabled,
     // Command for notification of the tunnel provider extension that domains whitelist/blacklist were changed.
-    APHTMUserfilterDataReload
+    APHTMLSystemWideDomainListReload
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 + (APHost2TunnelMessageType)host2tunnelMessageType:(NSData *)messageData;
 + (NSData *)host2tunnelMessageLogEnabled;
 + (NSData *)host2tunnelMessageLogDisabled;
-+ (NSData *)host2tunnelMessageUserfilterDataReload;
++ (NSData *)host2tunnelMessageSystemWideDomainListReload;
 
 /**
  User-entered list of domains to be excluded from locking at the system-wide level.

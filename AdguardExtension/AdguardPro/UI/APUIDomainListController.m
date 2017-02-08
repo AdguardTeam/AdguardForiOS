@@ -19,6 +19,8 @@
 
 #import "APUIDomainListController.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/ACSystem.h"
+#import "APVPNManager.h"
 
 #define TOP_BOUNSE_LIMIT                    -5
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
@@ -94,12 +96,15 @@
     NSString *_currentSearchString;
     NSRange _currentTextSelection;
     UIView *_currentSelectionMarker;
+    
+    id _observer;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
  
     [self registerForKeyboardNotifications];
+    [self attachToNotifications];
     
     _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
     _searchBarHidden = _keyboardHidden = YES;
@@ -128,6 +133,10 @@
     
     [self.view removeObserver:self forKeyPath:WIDTH_CHANGE_KEY];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (_observer) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -141,8 +150,10 @@
 //    
 //    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
 //    return;
-    self.done(self.domainsTextView.text);
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.done(self.domainsTextView.text)) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)clickSearchNext:(id)sender {
@@ -164,7 +175,7 @@
     _currentSelectionMarker.hidden = YES;
 }
 
-// For supporting of the URL insertion 
+// For supporting of the URL insertion and enabling of the Done button.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     @autoreleasepool {
         
@@ -176,10 +187,13 @@
                 if (text) {
                     
                     [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                    self.doneButton.enabled = YES;
                 }
             }
             return NO;
         }
+        
+        self.doneButton.enabled = YES;
         return YES;
     }
 }
@@ -391,6 +405,35 @@
         [_currentSelectionMarker setFrame:rect];
     }
     _currentSelectionMarker.hidden = NO;
+}
+
+- (void)attachToNotifications{
+    
+    _observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:APVpnChangedNotification
+                 object: nil
+                 queue:nil
+                 usingBlock:^(NSNotification *_Nonnull note) {
+                     
+                     // When configuration is changed
+                     
+                     [self updateStatuses];
+                 }];
+}
+
+- (void)updateStatuses{
+    APVPNManager *manager = [APVPNManager singleton];
+    
+    if (manager.lastError) {
+        [ACSSystemUtils
+         showSimpleAlertForController:self
+         withTitle:NSLocalizedString(@"Error",
+                                     @"(APUIAdguardDNSCon"
+                                     @"troller) PRO "
+                                     @"version. Alert "
+                                     @"title. On error.")
+         message:manager.lastError.localizedDescription];
+    }
 }
 
 @end

@@ -112,6 +112,9 @@
             return;
         }
         
+        // because from second server
+        index --;
+        
         if ([[APVPNManager singleton] removeRemoteDnsServer:serverObject]) {
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
@@ -132,6 +135,9 @@
         if (index == NSNotFound) {
             return;
         }
+        
+        // because from second server
+        index --;
         
         if ([[APVPNManager singleton] resetRemoteDnsServer:serverObject]) {
             
@@ -255,6 +261,9 @@
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{
     
+    // because from second server
+    index--;
+    
     UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
     UITableViewCell *newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     
@@ -286,7 +295,8 @@
     NSInteger index = indexPath.row;
     
     if (indexPath.section == DNS_SERVER_SECTION_INDEX) {
-        index --;
+        // because from second server
+        index ++;
     }
     
     if (index < _dnsServers.count) {
