@@ -2139,17 +2139,17 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Import Localization";
 		};
-		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */ = {
+		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */;
+			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = "$(SRCROOT)/../";
 			dependencies = (
 			);
-			name = "Git Tagging PRO (Beta/Release Branch)";
+			name = "Git Tagging PRO (Beta.Release Branch)";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Git Tagging (Beta/Release Branch)";
 		};
@@ -2167,17 +2167,17 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Run Builder";
 		};
-		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */ = {
+		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */;
+			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = "$(SRCROOT)/../";
 			dependencies = (
 			);
-			name = "Git Tagging (Beta/Release Branch)";
+			name = "Git Tagging (Beta.Release Branch)";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Git Tagging (Beta/Release Branch)";
 		};
@@ -2577,8 +2577,8 @@
 				659887411CF83947003ECD1C /* ProBlockingExtension */,
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
-				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
-				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */,
+				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */,
+				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */,
 				652F58781E106DF10012353C /* AdguardLogSender */,
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
@@ -4609,7 +4609,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */ = {
+		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65B39E051D75E9B2001AD773 /* Debug */,
@@ -4645,7 +4645,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */ = {
+		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65CB60391D75DF8B005A3C04 /* Debug */,
