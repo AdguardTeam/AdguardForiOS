@@ -373,6 +373,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 - (void)reloadWhitelistBlacklistDomain {
     
     if (_localFiltering == NO) {
+        
+        [_connectionHandler setWhitelistDomains:nil];
+        [_connectionHandler setBlacklistDomains:nil];
+
         return;
     }
     
@@ -399,17 +403,35 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 }
             }
         }
-        
-        wRules = [wRules valueForKey:@"domain"];
 
-        [wRules addObjectsFromArray:APSharedResources.whitelistDomains];
+        @autoreleasepool {
+            
+            NSArray *list = [wRules valueForKey:@"domain"];
+            wRules = [NSMutableArray arrayWithArray:list];
+        }
+
+        @autoreleasepool {
+            NSArray *domainList = APSharedResources.whitelistDomains;
+            if (domainList.count) {
+                [wRules addObjectsFromArray:domainList];
+            }
+        }
         
         
         [_connectionHandler setWhitelistDomains:wRules];
         
-        bRules = [bRules valueForKey:@"domain"];
+        @autoreleasepool {
+            
+            NSArray *list = [bRules valueForKey:@"domain"];
+            bRules = [NSMutableArray arrayWithArray:list];
+        }
         
-        [bRules addObjectsFromArray:APSharedResources.blacklistDomains];
+        @autoreleasepool {
+            NSArray *domainList = APSharedResources.blacklistDomains;
+            if (domainList.count) {
+                [bRules addObjectsFromArray:domainList];
+            }
+        }
         
         [_connectionHandler setBlacklistDomains:bRules];
     }

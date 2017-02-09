@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 
 
 /////////////////////////////////////////////////////////////////////

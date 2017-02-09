@@ -76,7 +76,7 @@ extern NSString *APVpnManagerErrorDomain;
 /**
     Returns singleton object.
  */
-+ (APVPNManager *)singleton;
+@property (class, readonly) APVPNManager *singleton;
 
 
 /////////////////////////////////////////////////////////////////////

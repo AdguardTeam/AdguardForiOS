@@ -47,7 +47,8 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(nonnull UIView *)view forSection:(NSInteger)section {
-    
+
+    // tunning accessibility
     UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
     
     footer.isAccessibilityElement = NO;

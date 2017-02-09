@@ -29,6 +29,7 @@
 
 @property (strong, nonatomic) IBOutlet UISwitch *statusSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *statusSwitchCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions

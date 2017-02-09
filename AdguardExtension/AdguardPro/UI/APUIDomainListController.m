@@ -105,6 +105,11 @@
  
     [self registerForKeyboardNotifications];
     [self attachToNotifications];
+
+    // tunning accessibility
+    self.domainsTextView.accessibilityHint = self.placeholderLabel.text;
+    self.placeholderLabel.isAccessibilityElement = NO;
+    //---
     
     _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
     _searchBarHidden = _keyboardHidden = YES;
@@ -114,14 +119,24 @@
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
-    // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-    [self.domainsTextView sizeToFit];
-    [self.domainsTextView setScrollEnabled:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-       
-        [self.domainsTextView setContentOffset:
-         CGPointMake(- self.domainsTextView.contentInset.left, - self.domainsTextView.contentInset.top)];
-    });
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        [self scrollViewDidEndDragging:self.domainsTextView willDecelerate:NO];
+    }
+    
+    if ([NSString isNullOrEmpty:self.textForEditing]) {
+        
+        self.placeholderLabel.hidden = NO;
+    }
+    else {
+        // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
+        [self.domainsTextView sizeToFit];
+        [self.domainsTextView setScrollEnabled:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.domainsTextView setContentOffset:
+             CGPointMake(- self.domainsTextView.contentInset.left, - self.domainsTextView.contentInset.top)];
+        });
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,15 +202,19 @@
                 if (text) {
                     
                     [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
-                    self.doneButton.enabled = YES;
                 }
             }
             return NO;
         }
         
-        self.doneButton.enabled = YES;
         return YES;
     }
+}
+
+- (void)textViewDidChange:(UITextView *)textView{
+
+    self.doneButton.enabled = YES;
+    self.placeholderLabel.hidden = ! [NSString isNullOrEmpty:textView.text];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -211,7 +230,7 @@
         [self.searchBar resignFirstResponder];
     }
 
-    if(scrollView.contentOffset.y < topValue)
+    if(scrollView.contentOffset.y < topValue || UIAccessibilityIsVoiceOverRunning())
     {
         
         _searchBarHidden = NO;
@@ -224,7 +243,10 @@
             self.domainsTextView.scrollIndicatorInsets = insets;
             [self.view layoutIfNeeded];
         }];
-        [self.searchBar becomeFirstResponder];
+        
+        if (! UIAccessibilityIsVoiceOverRunning()) {
+            [self.searchBar becomeFirstResponder];
+        }
         
     } else {
 

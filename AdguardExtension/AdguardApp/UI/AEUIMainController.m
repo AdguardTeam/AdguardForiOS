@@ -27,12 +27,12 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
-#import "APUIAdguardDNSController.h"
 
 #ifdef PRO
 
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
+#import "APUIProSectionFooter.h"
 
 #define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
@@ -93,7 +93,8 @@
     
 #ifdef PRO
     
-    self.proStatusCell.textLabel.accessibilityHint = [self proShortStatusDescription];
+    self.proStatusSwitch.accessibilityHint = [self proShortStatusDescription];
+    self.proStatusCell.isAccessibilityElement = NO;
     
     [self proAttachToNotifications];
    
@@ -242,8 +243,12 @@
     [[UIApplication sharedApplication] openURL:theURL];
 }
 
-- (IBAction)clickDNS:(id)sender {
-    DDLogError(@"Id %@", sender);
+- (IBAction)proToggleStatus:(id)sender {
+    
+#ifdef PRO
+    BOOL enabled = [(UISwitch *)sender isOn];
+    [[APVPNManager singleton] setEnabled:enabled];
+#endif
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{

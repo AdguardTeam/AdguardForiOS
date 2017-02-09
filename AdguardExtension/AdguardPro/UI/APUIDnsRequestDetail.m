@@ -53,6 +53,8 @@ typedef enum {
     
     TDomainControllCellType _domainControllCellType;
     NSString *_domainName;
+    
+    id _observer;
 }
 
 static NSDateFormatter *_timeFormatter;
@@ -69,6 +71,8 @@ static NSDateFormatter *_timeFormatter;
     
     [super viewDidLoad];
 
+    [self attachToNotifications];
+    
     _domainControllCellType = DomainControllNone;
     
     self.hideSectionsWithHiddenRows = YES;
@@ -139,6 +143,13 @@ static NSDateFormatter *_timeFormatter;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    if (_observer) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -186,10 +197,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         if (_domainControllCellType == DomainControllAddToWhitelist) {
             
             APSharedResources.whitelistDomains = [APSharedResources.whitelistDomains arrayByAddingObject:_domainName];
+            [self enableLocalFilteringIfNeedIt];
         }
         else if (_domainControllCellType == DomainControllAddToBlacklist) {
             
             APSharedResources.blacklistDomains = [APSharedResources.blacklistDomains arrayByAddingObject:_domainName];
+            [self enableLocalFilteringIfNeedIt];
         }
         else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
             
@@ -206,6 +219,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     }
     
     [[APVPNManager singleton] sendReloadSystemWideDomainLists];
+    [self setupDomainControllCell];
 }
 
 - (IBAction)longPressOnName:(id)sender {
@@ -266,6 +280,60 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         [self reloadDataAnimated:YES];
     }
+}
+
+- (void)enableLocalFilteringIfNeedIt {
+    
+    if (APVPNManager.singleton.localFiltering) {
+        return;
+    }
+    
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:NSLocalizedString(@"Blacklist or whitelist work only if you enable system-wide ad blocking.", @"(APUIDnsRequestDetail) PRO version. DNS request log. Message in the alert action when user attempts to add domain in black/white list.")
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"(APUIDnsRequestDetail) PRO version. DNS request log. Button text for enabling system-wide filtering.")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * action) {
+
+                                                        [[APVPNManager singleton] setLocalFiltering:YES];
+                                                    }];
+    
+    [sheet addAction:action];
+    
+    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIDnsRequestDetail) PRO version. DNS request log. Text on the button that cancels enabling system-wide filtering.")
+                                      style:UIAlertActionStyleCancel
+                                    handler:nil];
+    
+    [sheet addAction:action];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
+
+}
+
+- (void)attachToNotifications{
+    
+    _observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:APVpnChangedNotification
+                 object: nil
+                 queue:nil
+                 usingBlock:^(NSNotification *_Nonnull note) {
+                     
+                     // When configuration is changed
+                     
+                     APVPNManager *manager = [APVPNManager singleton];
+                     
+                     if (manager.lastError) {
+                         [ACSSystemUtils
+                          showSimpleAlertForController:self
+                          withTitle:NSLocalizedString(@"Error",
+                                                      @"(APUIAdguardDNSCon"
+                                                      @"troller) PRO "
+                                                      @"version. Alert "
+                                                      @"title. On error.")
+                          message:manager.lastError.localizedDescription];
+                     }
+                 }];
 }
 
 @end

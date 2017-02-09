@@ -6,9 +6,9 @@
 //  Copyright © 2016 Performiks. All rights reserved.
 //
 
-#import "APUIAccessibilityHiddenTableViewCell.h"
+#import "AEUIAccessibilityHiddenTableViewCell.h"
 
-@implementation APUIAccessibilityHiddenTableViewCell
+@implementation AEUIAccessibilityHiddenTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

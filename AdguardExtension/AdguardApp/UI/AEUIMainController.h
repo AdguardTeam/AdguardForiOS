@@ -62,9 +62,7 @@
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
 - (IBAction)clickGetPro:(id)sender;
-
-- (IBAction)clickDNS:(id)sender;
-
+- (IBAction)proToggleStatus:(id)sender;
 
 /**
  Adds rule to User filter.

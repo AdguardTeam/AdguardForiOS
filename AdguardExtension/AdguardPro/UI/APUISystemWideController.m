@@ -23,8 +23,9 @@
 #import "APSharedResources.h"
 
 
-#define SEGUE_BLACKLIST         @"blacklist"
-#define SEGUE_WHITELIST         @"whitelist"
+#define SEGUE_BLACKLIST                     @"blacklist"
+#define SEGUE_WHITELIST                     @"whitelist"
+#define STATUS_SECTION_INDEX                0
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUISystemWideController
@@ -146,7 +147,6 @@
 
                     //processing of the error
                     if (toBlacklist) {
-                        
                         APSharedResources.blacklistDomains = propertyHolder;
                     }
                     else {
@@ -175,6 +175,23 @@
     else {
         
         self.navigationItem.backBarButtonItem = nil;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Table Delegate
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(nonnull UIView *)view forSection:(NSInteger)section {
+    
+    // tunning accessibility
+    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+    
+    footer.isAccessibilityElement = NO;
+    footer.textLabel.isAccessibilityElement = NO;
+    footer.detailTextLabel.isAccessibilityElement = NO;
+    
+    if (section == STATUS_SECTION_INDEX) {
+        self.statusSwitchCell.accessibilityHint = footer.textLabel.text;
     }
 }
 

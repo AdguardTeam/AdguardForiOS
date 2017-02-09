@@ -249,9 +249,8 @@ static APVPNManager *singletonVPNManager;
         }
         else {
             
-            DDLogError(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
+            DDLogWarn(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
             _dnsRequestsLogging = NO;
-            _lastError = _standartError;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
         }
         
@@ -275,8 +274,7 @@ static APVPNManager *singletonVPNManager;
     }
     else {
         
-        DDLogError(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
-        _lastError = _standartError;
+        DDLogWarn(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
     }
     
     [self sendNotification];
