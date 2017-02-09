@@ -45,7 +45,9 @@
         self.descriptionTextField.text = obj.serverDescription;
         self.ipAddressesTextView.text = obj.ipAddressesAsString;
         self.removeCell.hidden = NO;
+        // tunning accessibility
         self.removeCell.accessibilityTraits |= UIAccessibilityTraitButton;
+        //---------
         _editMode = YES;
     }
     else {

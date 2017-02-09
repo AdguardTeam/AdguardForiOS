@@ -428,12 +428,18 @@
                                             </connections>
                                         </searchBar>
                                     </barButtonItem>
-                                    <barButtonItem image="search-prev" id="i31-gd-PLq" userLabel="Search Prev">
+                                    <barButtonItem image="search-prev" id="i31-gd-PLq" userLabel="Search Previous">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Search Previous"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="clickSearchPrev:" destination="04M-uU-tjs" id="hZe-U0-uhc"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem image="search-next" id="ele-FH-t8r" userLabel="Search Next">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Search Next"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="clickSearchNext:" destination="04M-uU-tjs" id="gCJ-UY-9kR"/>
                                         </connections>
@@ -441,7 +447,7 @@
                                 </items>
                                 <color key="barTintColor" red="0.83987205610000004" green="0.83987205610000004" blue="0.83987205610000004" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4C-i7-VxE">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Добавьте сюда список имен доменов. Пишите имена разделяя запятыми или переводом строки." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4C-i7-VxE">
                                 <rect key="frame" x="16" y="184" width="288" height="200"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>

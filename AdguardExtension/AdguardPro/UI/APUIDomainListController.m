@@ -106,10 +106,6 @@
     [self registerForKeyboardNotifications];
     [self attachToNotifications];
 
-    // tunning accessibility
-    self.domainsTextView.accessibilityHint = self.placeholderLabel.text;
-    self.placeholderLabel.isAccessibilityElement = NO;
-    //---
     
     _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
     _searchBarHidden = _keyboardHidden = YES;
@@ -119,9 +115,13 @@
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
+    // tunning accessibility
+    self.domainsTextView.accessibilityHint = self.placeholderLabel.text;
+    self.placeholderLabel.isAccessibilityElement = NO;
     if (UIAccessibilityIsVoiceOverRunning()) {
         [self scrollViewDidEndDragging:self.domainsTextView willDecelerate:NO];
     }
+    //---
     
     if ([NSString isNullOrEmpty:self.textForEditing]) {
         

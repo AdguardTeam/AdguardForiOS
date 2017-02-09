@@ -93,7 +93,9 @@
     
 #ifdef PRO
     
+    // tunning accessibility
     self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    //-----------------
     
     [self proAttachToNotifications];
    
@@ -335,7 +337,9 @@
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        // tunning accessibility
         self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+        //------------
     }
 
     BOOL enabled = NO;
@@ -402,8 +406,11 @@
     self.checkFiltersCell.accessoryView = activity;
     self.checkFiltersCell.textLabel.textColor =
         self.checkFiltersCell.textLabel.tintColor;
+    
+    // tunning accessibility
     UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
     self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits | UIAccessibilityTraitButton;
+    //-----------------
     
     _inCheckUpdates = NO;
 
@@ -417,7 +424,9 @@
                 usingBlock:^(NSNotification *_Nonnull note) {
 
                   self.checkFiltersCell.textLabel.enabled = NO;
+                    // tunning accessibility
                   self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
+                    //------------
                   UIActivityIndicatorView *activity =
                       (UIActivityIndicatorView *)
                           self.checkFiltersCell.accessoryView;
@@ -472,7 +481,9 @@
                                             dateStyle:NSDateFormatterShortStyle
                                             timeStyle:
                                                 NSDateFormatterShortStyle];
+                          // tunning accessibility
                           self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+                          //-------
                       }
                     });
 
@@ -525,8 +536,9 @@
 
     self.checkFiltersCell.textLabel.enabled = YES;
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
+    // tunning accessibility
     self.checkFiltersCell.accessibilityTraits = self.checkFiltersCell.accessibilityTraits | UIAccessibilityTraitButton;
-
+    //--------
     _inCheckUpdates = NO;
 }
 

@@ -47,8 +47,10 @@
     
     self.reloadTableViewRowAnimation = UITableViewRowAnimationAutomatic;
     
+    // tunning accessibility
     self.addCustomCell.accessibilityTraits |= UIAccessibilityTraitButton;
     self.systemDefaultCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    //--------------
     
     [self attachToNotifications];
     
@@ -246,12 +248,16 @@
     if ([activeDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
         
         self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
+        // tunning accessibility
         self.systemDefaultCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+        //------------
     }
     else {
         
         self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+        // tunning accessibility
         self.systemDefaultCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+        //-----
     }
     
     for (int i = 1; i < _dnsServers.count; i++) {
@@ -261,12 +267,16 @@
         if ([activeDnsServer isEqual:_dnsServers[i]]) {
             
             cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
+            // tunning accessibility
             cell.accessibilityTraits |= UIAccessibilityTraitSelected;
+            //------------
         }
         else {
             
             cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+            // tunning accessibility
             cell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+            //----------------
         }
     }
     
@@ -317,7 +327,9 @@
         newCell.accessoryType = UITableViewCellAccessoryDetailButton;
     }
     
+    // tunning accessibility
     newCell.accessibilityTraits |= UIAccessibilityTraitButton;
+    //---------------
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
     [self insertCell:newCell atIndexPath:indexPath];
