@@ -6,9 +6,9 @@
 //  Copyright © 2016 Performiks. All rights reserved.
 //
 
-#import "APUIDnsStatusTableViewCell.h"
+#import "APUIProStatusTableViewCell.h"
 
-@implementation APUIDnsStatusTableViewCell {
+@implementation APUIProStatusTableViewCell {
     
     UISwitch *_statusSwitch;
 }
@@ -22,7 +22,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -33,7 +33,7 @@
 
 - (NSString *)accessibilityValue {
     
-    return [NSString string];
+    return _statusSwitch.accessibilityValue;
 }
 
 - (NSString *)accessibilityLabel {
@@ -46,7 +46,6 @@
     
     UIAccessibilityTraits traits = [super accessibilityTraits];
     traits &= ~UIAccessibilityTraitSelected;
-//    traits |= UIAccessibilityTraitButton;
     
     traits |= _statusSwitch.accessibilityTraits;
     return traits;
@@ -57,7 +56,7 @@
     if (_statusSwitch.enabled) {
         _statusSwitch.on = ! _statusSwitch.on;
         [_statusSwitch sendActionsForControlEvents:UIControlEventValueChanged];
-//        return YES;
+        return YES;
     }
     
     return NO;

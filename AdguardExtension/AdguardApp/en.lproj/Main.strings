@@ -1,0 +1,327 @@
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "0Fc-BN-KOh"; */
+"0Fc-BN-KOh.title" = "Cancel";
+
+/* Class = "UITableViewSection"; headerTitle = "CUSTOM DNS-SERVERS"; ObjectID = "0gU-l5-6Ha"; */
+"0gU-l5-6Ha.headerTitle" = "CUSTOM DNS-SERVERS";
+
+/* Class = "UITableViewSection"; headerTitle = "PRO"; ObjectID = "1kz-08-bdL"; */
+"1kz-08-bdL.headerTitle" = "PRO";
+
+/* Class = "UINavigationItem"; title = "Filter Detail"; ObjectID = "21H-uP-397"; */
+"21H-uP-397.title" = "Filter Detail";
+
+/* Class = "UITextField"; accessibilityHint = "Enter domain name."; ObjectID = "2aq-7r-5ql"; */
+"2aq-7r-5ql.accessibilityHint" = "Enter domain name.";
+
+/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "5ac-wo-Zed"; */
+"5ac-wo-Zed.title" = "Clear";
+
+/* Class = "UILabel"; text = "Check Filter Updates"; ObjectID = "5vt-Vp-qiW"; */
+"5vt-Vp-qiW.text" = "Check Filter Updates";
+
+/* Class = "UINavigationItem"; title = "How to enable Adguard"; ObjectID = "66c-w8-jTW"; */
+"66c-w8-jTW.title" = "How to enable Adguard";
+
+/* Class = "UILabel"; text = "Loading Filter..."; ObjectID = "6Pr-sf-McK"; */
+"6Pr-sf-McK.text" = "Loading Filter...";
+
+/* Class = "UILabel"; text = "Use Simplified Filters"; ObjectID = "6zk-TZ-zcI"; */
+"6zk-TZ-zcI.text" = "Use Simplified Filters";
+
+/* Class = "UILabel"; text = "Adguard Website"; ObjectID = "76w-KJ-7EN"; */
+"76w-KJ-7EN.text" = "Adguard Website";
+
+/* Class = "UILabel"; text = "Loading filters to Safari. Please do not turn off Adguard, the process will take no more than 30 seconds..."; ObjectID = "78D-xK-lgr"; */
+"78D-xK-lgr.text" = "Loading filters to Safari. Please do not turn off Adguard, the process will take no more than 30 seconds...";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "7g7-aK-eBG"; */
+"7g7-aK-eBG.title" = "Filters";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "8hU-LQ-5wN"; */
+"8hU-LQ-5wN.text" = "Name";
+
+/* Class = "UILabel"; text = "not translate this"; ObjectID = "8mf-oU-Qvd"; */
+"8mf-oU-Qvd.text" = "not translate this";
+
+/* Class = "UILabel"; accessibilityLabel = " "; ObjectID = "93Y-I8-Ha9"; */
+"93Y-I8-Ha9.accessibilityLabel" = " ";
+
+/* Class = "UILabel"; text = "Share this app"; ObjectID = "93Y-I8-Ha9"; */
+"93Y-I8-Ha9.text" = "Share this app";
+
+/* Class = "UIButton"; accessibilityLabel = "Share with iMessage"; ObjectID = "9z6-O6-QzV"; */
+"9z6-O6-QzV.accessibilityLabel" = "Share with iMessage";
+
+/* Class = "UINavigationItem"; title = "Quick Tour"; ObjectID = "AOh-Kx-OgK"; */
+"AOh-Kx-OgK.title" = "Quick Tour";
+
+/* Class = "UILabel"; text = "View on GitHub"; ObjectID = "Agx-Gw-kKE"; */
+"Agx-Gw-kKE.text" = "View on GitHub";
+
+/* Class = "UITextField"; accessibilityLabel = "Server Description"; ObjectID = "BGg-Te-3zy"; */
+"BGg-Te-3zy.accessibilityLabel" = "Server Description";
+
+/* Class = "UITextField"; placeholder = "Optional"; ObjectID = "BGg-Te-3zy"; */
+"BGg-Te-3zy.placeholder" = "Optional";
+
+/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "BfN-yH-ycq"; */
+"BfN-yH-ycq.text" = "Acknowledgments";
+
+/* Class = "UILabel"; text = "Not translate this"; ObjectID = "C0k-M7-WrN"; */
+"C0k-M7-WrN.text" = "Not translate this";
+
+/* Class = "UILabel"; text = "Send Bug Report"; ObjectID = "DJo-k0-dYd"; */
+"DJo-k0-dYd.text" = "Send Bug Report";
+
+/* Class = "UITableViewSection"; headerTitle = "PROPERTIES"; ObjectID = "DXT-7S-Yh9"; */
+"DXT-7S-Yh9.headerTitle" = "PROPERTIES";
+
+/* Class = "UILabel"; accessibilityLabel = "How to enable Adguard. Video."; ObjectID = "Db5-io-lRz"; */
+"Db5-io-lRz.accessibilityLabel" = "How to enable Adguard. Video.";
+
+/* Class = "UILabel"; text = "How to enable Adguard"; ObjectID = "Db5-io-lRz"; */
+"Db5-io-lRz.text" = "How to enable Adguard";
+
+/* Class = "UILabel"; text = "Adguard Forum"; ObjectID = "ENy-5y-b3I"; */
+"ENy-5y-b3I.text" = "Adguard Forum";
+
+/* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
+"Fle-Y5-Zj9.text" = "Local Filtering";
+
+/* Class = "UILabel"; text = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
+"G4C-i7-VxE.text" = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "GZu-fQ-9oP"; */
+"GZu-fQ-9oP.text" = "Server";
+
+/* Class = "UILabel"; text = "not translate this"; ObjectID = "H9H-HX-Ya5"; */
+"H9H-HX-Ya5.text" = "not translate this";
+
+/* Class = "UITableViewSection"; footerTitle = "Супер текст, который объясняет движение планет, звезд, галактик, притяжение и отталкивание \"элементарных\" частиц. Не обходит стороной межгалактические одномерные струны и простые вибрации вселенной."; ObjectID = "HFA-vL-9J7"; */
+"HFA-vL-9J7.footerTitle" = "Супер текст, который объясняет движение планет, звезд, галактик, притяжение и отталкивание \"элементарных\" частиц. Не обходит стороной межгалактические одномерные струны и простые вибрации вселенной.";
+
+/* Class = "UITableViewSection"; headerTitle = "SETTINGS"; ObjectID = "HFA-vL-9J7"; */
+"HFA-vL-9J7.headerTitle" = "SETTINGS";
+
+/* Class = "UITableViewSection"; headerTitle = "ADVANCED"; ObjectID = "HLK-5x-bSz"; */
+"HLK-5x-bSz.headerTitle" = "ADVANCED";
+
+/* Class = "UIButton"; accessibilityLabel = "Share with Facebook"; ObjectID = "IiA-PR-JUW"; */
+"IiA-PR-JUW.accessibilityLabel" = "Share with Facebook";
+
+/* Class = "UINavigationItem"; title = "Advanced Settings"; ObjectID = "Iyo-zw-Pn7"; */
+"Iyo-zw-Pn7.title" = "Advanced Settings";
+
+/* Class = "UITableViewSection"; footerTitle = "If this setting is enabled, Adguard will only use WiFi for background filter updates."; ObjectID = "J25-IO-JkL"; */
+"J25-IO-JkL.footerTitle" = "If this setting is enabled, Adguard will only use WiFi for background filter updates.";
+
+/* Class = "UINavigationItem"; title = "Using Adguard from Safari"; ObjectID = "JIB-kQ-gBg"; */
+"JIB-kQ-gBg.title" = "Using Adguard from Safari";
+
+/* Class = "UITableViewSection"; headerTitle = "RATE AND SHARE"; ObjectID = "JVE-ft-ZbE"; */
+"JVE-ft-ZbE.headerTitle" = "RATE AND SHARE";
+
+/* Class = "UITextField"; accessibilityLabel = "Server Name"; ObjectID = "Jot-rn-HdO"; */
+"Jot-rn-HdO.accessibilityLabel" = "Server Name";
+
+/* Class = "UITextField"; placeholder = "Server Name"; ObjectID = "Jot-rn-HdO"; */
+"Jot-rn-HdO.placeholder" = "Server Name";
+
+/* Class = "UINavigationItem"; title = "Whitelist"; ObjectID = "KSf-uA-guX"; */
+"KSf-uA-guX.title" = "Whitelist";
+
+/* Class = "UILabel"; text = "Advanced Settings"; ObjectID = "Lbo-nt-LPS"; */
+"Lbo-nt-LPS.text" = "Advanced Settings";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "Lfh-LN-p70"; */
+"Lfh-LN-p70.text" = "Description";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "NMJ-WC-2cF"; */
+"NMJ-WC-2cF.text" = "Filters";
+
+/* Class = "UILabel"; text = "System-wide Ad Blocking"; ObjectID = "O7h-LY-f13"; */
+"O7h-LY-f13.text" = "System-wide Ad Blocking";
+
+/* Class = "UINavigationItem"; title = "DNS Server"; ObjectID = "PEv-Ro-tyt"; */
+"PEv-Ro-tyt.title" = "DNS Server";
+
+/* Class = "UINavigationItem"; title = "Adguard"; ObjectID = "Q9j-kk-zJ7"; */
+"Q9j-kk-zJ7.title" = "Adguard";
+
+/* Class = "UILabel"; text = "Last Modified"; ObjectID = "QRM-Mg-LkG"; */
+"QRM-Mg-LkG.text" = "Last Modified";
+
+/* Class = "UITableViewSection"; headerTitle = "MORE"; ObjectID = "Qns-T4-NMW"; */
+"Qns-T4-NMW.headerTitle" = "MORE";
+
+/* Class = "UILabel"; accessibilityLabel = "Add Custom Server"; ObjectID = "QvS-eb-Dm3"; */
+"QvS-eb-Dm3.accessibilityLabel" = "Add Custom Server";
+
+/* Class = "UILabel"; text = "Add Custom..."; ObjectID = "QvS-eb-Dm3"; */
+"QvS-eb-Dm3.text" = "Add Custom...";
+
+/* Class = "UINavigationItem"; title = "Domain"; ObjectID = "Rln-76-MGs"; */
+"Rln-76-MGs.title" = "Domain";
+
+/* Class = "UINavigationItem"; title = "Request Detail"; ObjectID = "UG4-lw-q0k"; */
+"UG4-lw-q0k.title" = "Request Detail";
+
+/* Class = "UITableViewSection"; footerTitle = "If this setting is enabled, Adguard will ignore generic «cosmetic» rules. This will speed up pages rendering in exchange of filtering quality."; ObjectID = "UH5-l5-jPn"; */
+"UH5-l5-jPn.footerTitle" = "If this setting is enabled, Adguard will ignore generic «cosmetic» rules. This will speed up pages rendering in exchange of filtering quality.";
+
+/* Class = "UILabel"; text = "DNS Settings"; ObjectID = "UeP-WD-3SS"; */
+"UeP-WD-3SS.text" = "DNS Settings";
+
+/* Class = "UIButton"; accessibilityLabel = "Share with mail"; ObjectID = "VUm-f4-Rox"; */
+"VUm-f4-Rox.accessibilityLabel" = "Share with mail";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "Vov-Qa-c5v"; */
+"Vov-Qa-c5v.text" = "Time";
+
+/* Class = "UILabel"; text = "User Filter"; ObjectID = "Wm6-3n-dsw"; */
+"Wm6-3n-dsw.text" = "User Filter";
+
+/* Class = "UILabel"; text = "System Default"; ObjectID = "Wmd-ay-ZDm"; */
+"Wmd-ay-ZDm.text" = "System Default";
+
+/* Class = "UILabel"; text = "Rate this app"; ObjectID = "Y2d-c9-5ne"; */
+"Y2d-c9-5ne.text" = "Rate this app";
+
+/* Class = "UILabel"; text = "Whitelist"; ObjectID = "YRI-K8-S98"; */
+"YRI-K8-S98.text" = "Whitelist";
+
+/* Class = "UILabel"; accessibilityLabel = "Manage Adguard from Safari. Video."; ObjectID = "aK9-na-jWI"; */
+"aK9-na-jWI.accessibilityLabel" = "Manage Adguard from Safari. Video.";
+
+/* Class = "UILabel"; text = "Manage Adguard from Safari"; ObjectID = "aK9-na-jWI"; */
+"aK9-na-jWI.text" = "Manage Adguard from Safari";
+
+/* Class = "UINavigationItem"; title = "DNS Settings"; ObjectID = "bRv-X8-sV2"; */
+"bRv-X8-sV2.title" = "DNS Settings";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "c9p-Kz-7nc"; */
+"c9p-Kz-7nc.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Disable Adguard for this website:"; ObjectID = "cbq-Bi-Zvm"; */
+"cbq-Bi-Zvm.text" = "Disable Adguard for this website:";
+
+/* Class = "UIButton"; accessibilityLabel = "Share with Twitter"; ObjectID = "d2O-oQ-yhe"; */
+"d2O-oQ-yhe.accessibilityLabel" = "Share with Twitter";
+
+/* Class = "UITableViewSection"; headerTitle = "Properties"; ObjectID = "d4x-qp-Oxt"; */
+"d4x-qp-Oxt.headerTitle" = "Properties";
+
+/* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "dCj-z8-O2Y"; */
+"dCj-z8-O2Y.headerTitle" = "Description";
+
+/* Class = "UILabel"; text = "remote dns server description here"; ObjectID = "dUW-m2-dJR"; */
+"dUW-m2-dJR.text" = "remote dns server description here";
+
+/* Class = "UITableViewSection"; footerTitle = "Here you can change the DNS servers to be used by the system."; ObjectID = "dot-9a-P84"; */
+"dot-9a-P84.footerTitle" = "Here you can change the DNS servers to be used by the system.";
+
+/* Class = "UITableViewSection"; headerTitle = "SAFARI CONTENT BLOCKING"; ObjectID = "e3n-mQ-CFS"; */
+"e3n-mQ-CFS.headerTitle" = "SAFARI CONTENT BLOCKING";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "eDR-07-wut"; */
+"eDR-07-wut.text" = "Version";
+
+/* Class = "UILabel"; text = "Whitelist"; ObjectID = "eMs-Eq-7wW"; */
+"eMs-Eq-7wW.text" = "Whitelist";
+
+/* Class = "UILabel"; text = "Filter Homepage"; ObjectID = "egy-jk-HY1"; */
+"egy-jk-HY1.text" = "Filter Homepage";
+
+/* Class = "UILabel"; text = "Remove Server"; ObjectID = "fkY-pd-BQi"; */
+"fkY-pd-BQi.text" = "Remove Server";
+
+/* Class = "UINavigationItem"; title = "DNS Requests"; ObjectID = "fov-We-MES"; */
+"fov-We-MES.title" = "DNS Requests";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "g5A-Fz-7FG"; */
+"g5A-Fz-7FG.text" = "Status";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "iG0-Ou-4GW"; */
+"iG0-Ou-4GW.text" = "Version";
+
+/* Class = "UILabel"; text = "DNS Requests"; ObjectID = "icS-tR-srI"; */
+"icS-tR-srI.text" = "DNS Requests";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "jB0-23-f5T"; */
+"jB0-23-f5T.text" = "About";
+
+/* Class = "UILabel"; text = "Not translate this"; ObjectID = "jeQ-cV-4uz"; */
+"jeQ-cV-4uz.text" = "Not translate this";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "lHn-v7-UvW"; */
+"lHn-v7-UvW.placeholder" = "Search";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "m8z-v3-W7T"; */
+"m8z-v3-W7T.title" = "Filters";
+
+/* Class = "UINavigationItem"; title = "Rule"; ObjectID = "mHC-rO-3ag"; */
+"mHC-rO-3ag.title" = "Rule";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "mZs-iK-90C"; */
+"mZs-iK-90C.text" = "Type";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "nNE-IK-lCa"; */
+"nNE-IK-lCa.title" = "Cancel";
+
+/* Class = "UITableViewSection"; headerTitle = "RESPONSES"; ObjectID = "nQ7-DM-a3O"; */
+"nQ7-DM-a3O.headerTitle" = "RESPONSES";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "nSx-39-ZBm"; */
+"nSx-39-ZBm.text" = "Status";
+
+/* Class = "UILabel"; text = "Quick Tour"; ObjectID = "nac-dy-f0o"; */
+"nac-dy-f0o.text" = "Quick Tour";
+
+/* Class = "UITextField"; accessibilityHint = "Enter rule text."; ObjectID = "oKp-AP-IZQ"; */
+"oKp-AP-IZQ.accessibilityHint" = "Enter rule text.";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "oWj-Lf-Mp9"; */
+"oWj-Lf-Mp9.title" = "About";
+
+/* Class = "UITableViewSection"; headerTitle = "GENERAL"; ObjectID = "pEe-TF-Jvg"; */
+"pEe-TF-Jvg.headerTitle" = "GENERAL";
+
+/* Class = "UINavigationItem"; title = "User Filter"; ObjectID = "rYp-VU-hew"; */
+"rYp-VU-hew.title" = "User Filter";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "rft-NS-ejI"; */
+"rft-NS-ejI.text" = "Status";
+
+/* Class = "UILabel"; accessibilityLabel = "Last checked for update at"; ObjectID = "rpL-Mz-xwI"; */
+"rpL-Mz-xwI.accessibilityLabel" = "Last checked for update at";
+
+/* Class = "UILabel"; text = "Last Checked"; ObjectID = "rpL-Mz-xwI"; */
+"rpL-Mz-xwI.text" = "Last Checked";
+
+/* Class = "UILabel"; text = "Blacklist"; ObjectID = "sGp-bq-UV6"; */
+"sGp-bq-UV6.text" = "Blacklist";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "sV1-SB-Gpd"; */
+"sV1-SB-Gpd.text" = "Status";
+
+/* Class = "UITableViewSection"; footerTitle = "Enter here IP addresses of the DNS servers separated by comma or return."; ObjectID = "sdZ-kr-Pk1"; */
+"sdZ-kr-Pk1.footerTitle" = "Enter here IP addresses of the DNS servers separated by comma or return.";
+
+/* Class = "UITableViewSection"; headerTitle = "IP Addresses"; ObjectID = "sdZ-kr-Pk1"; */
+"sdZ-kr-Pk1.headerTitle" = "IP Addresses";
+
+/* Class = "UILabel"; text = "Remote DNS Server Title"; ObjectID = "tIq-QX-3HP"; */
+"tIq-QX-3HP.text" = "Remote DNS Server Title";
+
+/* Class = "UILabel"; text = "Log DNS Requests"; ObjectID = "tWU-pP-c1b"; */
+"tWU-pP-c1b.text" = "Log DNS Requests";
+
+/* Class = "UINavigationItem"; title = "System-Wide Ad Blocking"; ObjectID = "v66-Ra-FDg"; */
+"v66-Ra-FDg.title" = "System-Wide Ad Blocking";
+
+/* Class = "UILabel"; text = "Auto Update over Wi-Fi only"; ObjectID = "x5D-K1-eUX"; */
+"x5D-K1-eUX.text" = "Auto Update over Wi-Fi only";
+
+/* Class = "UITextView"; accessibilityHint = "Enter here IP addresses of the DNS servers separated by comma or return"; ObjectID = "ysu-RU-bHI"; */
+"ysu-RU-bHI.accessibilityHint" = "Enter here IP addresses of the DNS servers separated by comma or return";

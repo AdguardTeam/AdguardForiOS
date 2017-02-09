@@ -93,8 +93,7 @@
     
 #ifdef PRO
     
-    self.proStatusSwitch.accessibilityHint = [self proShortStatusDescription];
-    self.proStatusCell.isAccessibilityElement = NO;
+    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
     
     [self proAttachToNotifications];
    
