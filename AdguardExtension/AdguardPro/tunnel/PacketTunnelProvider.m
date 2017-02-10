@@ -271,9 +271,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 [_connectionHandler setDnsActivityLoggingEnabled:NO];
                 break;
                 
-            case APHTMUserfilterDataReload:
+            case APHTMLSystemWideDomainListReload:
                 
-                DDLogInfo(@"(PacketTunnelProvider) User Filter changed. Reconnecting..");
+                DDLogInfo(@"(PacketTunnelProvider) Domains lists changed. Reconnecting..");
                 [self stopVPN];
 
                 break;
@@ -372,16 +372,19 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)reloadWhitelistBlacklistDomain {
     
+    if (_localFiltering == NO) {
+        
+        [_connectionHandler setWhitelistDomains:nil];
+        [_connectionHandler setBlacklistDomains:nil];
+
+        return;
+    }
+    
     @autoreleasepool {
+
         
         AESAntibanner *antibanner = [[AEService singleton] antibanner];
-        NSMutableArray *rules = [NSMutableArray arrayWithArray:
-                                 [antibanner rulesForFilter:@(ASDF_USER_FILTER_ID)]];
-        
-        if (_localFiltering) {
-            [rules addObjectsFromArray:
-            [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
-        }
+        NSArray *rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
         
         NSMutableArray *wRules = [NSMutableArray array];
         NSMutableArray *bRules = [NSMutableArray array];
@@ -400,12 +403,35 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 }
             }
         }
+
+        @autoreleasepool {
+            
+            NSArray *list = [wRules valueForKey:@"domain"];
+            wRules = [NSMutableArray arrayWithArray:list];
+        }
+
+        @autoreleasepool {
+            NSArray *domainList = APSharedResources.whitelistDomains;
+            if (domainList.count) {
+                [wRules addObjectsFromArray:domainList];
+            }
+        }
         
-        wRules = [wRules valueForKey:@"domain"];
         
         [_connectionHandler setWhitelistDomains:wRules];
         
-        bRules = [bRules valueForKey:@"domain"];
+        @autoreleasepool {
+            
+            NSArray *list = [bRules valueForKey:@"domain"];
+            bRules = [NSMutableArray arrayWithArray:list];
+        }
+        
+        @autoreleasepool {
+            NSArray *domainList = APSharedResources.blacklistDomains;
+            if (domainList.count) {
+                [bRules addObjectsFromArray:domainList];
+            }
+        }
         
         [_connectionHandler setBlacklistDomains:bRules];
     }

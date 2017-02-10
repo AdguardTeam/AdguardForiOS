@@ -30,6 +30,7 @@
 #import "ACommons/ACSystem.h"
 #import "AEUIUtils.h"
 #import "APDnsServerObject.h"
+#import "APSharedResources.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
@@ -51,7 +52,9 @@ typedef enum {
 @implementation APUIDnsRequestDetail {
     
     TDomainControllCellType _domainControllCellType;
-    ASDFilterRule *_appropriateRuleForDomain;
+    NSString *_domainName;
+    
+    id _observer;
 }
 
 static NSDateFormatter *_timeFormatter;
@@ -68,6 +71,8 @@ static NSDateFormatter *_timeFormatter;
     
     [super viewDidLoad];
 
+    [self attachToNotifications];
+    
     _domainControllCellType = DomainControllNone;
     
     self.hideSectionsWithHiddenRows = YES;
@@ -138,6 +143,13 @@ static NSDateFormatter *_timeFormatter;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    if (_observer) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -176,49 +188,38 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (IBAction)clickDomainControll:(id)sender {
 
-    if (_domainControllCellType == DomainControllNone || !_appropriateRuleForDomain) {
+    if (_domainControllCellType == DomainControllNone) {
         return;
     }
     
-    [[[AEService singleton] antibanner] beginTransaction];
-
-    dispatch_block_t completionBlock = ^(){
+    @autoreleasepool {
         
-        [[[AEService singleton] antibanner] endTransaction];
-        [[APVPNManager singleton] sendReloadUserfilterDataIfRule:_appropriateRuleForDomain];
-        [self setupDomainControllCell];
-    };
+        if (_domainControllCellType == DomainControllAddToWhitelist) {
+            
+            APSharedResources.whitelistDomains = [APSharedResources.whitelistDomains arrayByAddingObject:_domainName];
+            [self enableLocalFilteringIfNeedIt];
+        }
+        else if (_domainControllCellType == DomainControllAddToBlacklist) {
+            
+            APSharedResources.blacklistDomains = [APSharedResources.blacklistDomains arrayByAddingObject:_domainName];
+            [self enableLocalFilteringIfNeedIt];
+        }
+        else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
+            
+            NSMutableArray *domains = [APSharedResources.whitelistDomains mutableCopy];
+            [domains removeObject:_domainName];
+            APSharedResources.whitelistDomains = [domains copy];
+        }
+        else if (_domainControllCellType == DomainControllRemoveFromBlacklist) {
+            
+            NSMutableArray *domains = [APSharedResources.blacklistDomains mutableCopy];
+            [domains removeObject:_domainName];
+            APSharedResources.blacklistDomains = [domains copy];
+        }
+    }
     
-
-    if (_domainControllCellType == DomainControllAddToWhitelist) {
-        
-        [AEUIUtils addWhitelistRule:_appropriateRuleForDomain toJsonWithController:self completionBlock:completionBlock rollbackBlock:^{
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-        }];
-    }
-    else if (_domainControllCellType == DomainControllAddToBlacklist) {
-    
-        [AEUIUtils addRule:_appropriateRuleForDomain withController:self completionBlock:completionBlock rollbackBlock:^{
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-        }];
-    }
-    else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
-        
-        [AEUIUtils removeWhitelistRule:_appropriateRuleForDomain toJsonWithController:self completionBlock:completionBlock rollbackBlock:^{
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-        }];
-       
-    }
-    else if (_domainControllCellType == DomainControllRemoveFromBlacklist) {
-        
-        [AEUIUtils removeRule:_appropriateRuleForDomain withController:self completionBlock:completionBlock rollbackBlock:^{
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-        }];
-    }
+    [[APVPNManager singleton] sendReloadSystemWideDomainLists];
+    [self setupDomainControllCell];
 }
 
 - (IBAction)longPressOnName:(id)sender {
@@ -240,71 +241,99 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     @autoreleasepool {
         
         _domainControllCellType = DomainControllNone;
-        _appropriateRuleForDomain = nil;
         
         self.domainControllCell.textLabel.textColor = self.domainControllCell.textLabel.tintColor;
 
         APDnsRequest *request = self.logRecord.requests[0];
 
-        NSArray *rules = [[[AEService singleton] antibanner]
-            rulesForFilter:@(ASDF_USER_FILTER_ID)];
-        rules = [rules
-                 filteredArrayUsingPredicate:
-                 [NSPredicate
-                  predicateWithFormat:@"ruleText CONTAINS[cd] %@",
-                  request.name]];
+        _domainName = request.name;
         
-        AEWhitelistDomainObject *whitelistObject;
-        AEBlacklistDomainObject *blacklistObject;
+        NSArray *domainslist = APSharedResources.whitelistDomains;
         
-        if (rules.count) {
+        // We check on equal
+        if ([domainslist containsObject:_domainName]) {
             
-            
-            
-            AEWhitelistDomainObject *object;
-            for (ASDFilterRule *item in rules) {
-                
-                object = [[AEWhitelistDomainObject alloc] initWithRule:item];
-                if (object && [object.domain isEqualToString:request.name]) {
-                    whitelistObject = object;
-                }
-                else {
-                    
-                    object = [[AEBlacklistDomainObject alloc] initWithRule:item];
-                    if (object && [object.domain isEqualToString:request.name] ) {
-                        blacklistObject = (AEBlacklistDomainObject *)object;
-                    }
-                }
-            }
-            
-        }
-        
-        if (whitelistObject){
             self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
             _domainControllCellType = DomainControllRemoveFromWhitelist;
-            _appropriateRuleForDomain = whitelistObject.rule;
-        }
-        else if (blacklistObject) {
-            self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
-            _domainControllCellType = DomainControllRemoveFromBlacklist;
-            _appropriateRuleForDomain = blacklistObject.rule;
         }
         else {
             
-            if (self.logRecord.preferredResponse.blocked) {
-                self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
-                _domainControllCellType = DomainControllAddToWhitelist;
-                _appropriateRuleForDomain = [[[AEWhitelistDomainObject alloc] initWithDomain:request.name] rule];
+            domainslist = APSharedResources.blacklistDomains;
+            if ([domainslist containsObject:_domainName]) {
+                
+                self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                _domainControllCellType = DomainControllRemoveFromBlacklist;
             }
             else {
-                self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
-                _domainControllCellType = DomainControllAddToBlacklist;
-                _appropriateRuleForDomain = [[[AEBlacklistDomainObject alloc] initWithDomain:request.name] rule];
+                
+                if (self.logRecord.preferredResponse.blocked) {
+                    self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                    _domainControllCellType = DomainControllAddToWhitelist;
+                }
+                else {
+                    self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                    _domainControllCellType = DomainControllAddToBlacklist;
+                }
             }
+            
         }
         
         [self reloadDataAnimated:YES];
     }
+}
+
+- (void)enableLocalFilteringIfNeedIt {
+    
+    if (APVPNManager.singleton.localFiltering) {
+        return;
+    }
+    
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:NSLocalizedString(@"Blacklist or whitelist work only if you enable system-wide ad blocking.", @"(APUIDnsRequestDetail) PRO version. DNS request log. Message in the alert action when user attempts to add domain in black/white list.")
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"(APUIDnsRequestDetail) PRO version. DNS request log. Button text for enabling system-wide filtering.")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * action) {
+
+                                                        [[APVPNManager singleton] setLocalFiltering:YES];
+                                                    }];
+    
+    [sheet addAction:action];
+    
+    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIDnsRequestDetail) PRO version. DNS request log. Text on the button that cancels enabling system-wide filtering.")
+                                      style:UIAlertActionStyleCancel
+                                    handler:nil];
+    
+    [sheet addAction:action];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
+
+}
+
+- (void)attachToNotifications{
+    
+    _observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:APVpnChangedNotification
+                 object: nil
+                 queue:nil
+                 usingBlock:^(NSNotification *_Nonnull note) {
+                     
+                     // When configuration is changed
+                     
+                     APVPNManager *manager = [APVPNManager singleton];
+                     
+                     if (manager.lastError) {
+                         [ACSSystemUtils
+                          showSimpleAlertForController:self
+                          withTitle:NSLocalizedString(@"Error",
+                                                      @"(APUIAdguardDNSCon"
+                                                      @"troller) PRO "
+                                                      @"version. Alert "
+                                                      @"title. On error.")
+                          message:manager.lastError.localizedDescription];
+                     }
+                 }];
 }
 
 @end

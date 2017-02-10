@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,35 +17,24 @@
  */
 
 #import "StaticDataTableViewController.h"
-#import "APUIProSectionFooter.h"
 
-@class AEUIMainController, APDnsServerObject;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APUIProSectionController
-
-@interface APUIAdguardDNSController : StaticDataTableViewController
+@class APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Init and Class methods
+#pragma mark - APUIDnsServersController
+
+@interface APUIDnsServersController  : StaticDataTableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-@property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
-@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
 @property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *systemDefaultCell;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
-
-- (IBAction)toggleLocalFiltering:(id)sender;
-- (IBAction)toggleSwitchStatus:(id)sender;
-- (IBAction)toggleLogStatus:(id)sender;
 
 
 /////////////////////////////////////////////////////////////////////

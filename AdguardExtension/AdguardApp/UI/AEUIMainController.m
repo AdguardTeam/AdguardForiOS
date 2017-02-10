@@ -18,6 +18,7 @@
 #import "AEUIMainController.h"
 #import "ADomain/ADomain.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/ACSystem.h"
 #import "AESharedResources.h"
 #import "AppDelegate.h"
 #import "AEUIWelcomePagerDataSource.h"
@@ -26,11 +27,17 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
-#import "APUIAdguardDNSController.h"
 
 #ifdef PRO
+
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
+#import "APUIProSectionFooter.h"
+
+#define PRO_SECTION_INDEX               1
+#define NBSP_CODE                       @"\u00A0"
+#define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
+
 #endif
 
 /////////////////////////////////////////////////////////////////////
@@ -69,7 +76,10 @@
     NSMutableArray *_observers;
     
     NSString *_ruleTextHolderForAddRuleCommand;
-    
+
+#ifdef PRO
+    APUIProSectionFooter *_proFooter;
+#endif
 }
 
 @end
@@ -82,8 +92,12 @@
     self.title = AE_PRODUCT_NAME;
     
 #ifdef PRO
+    
+    // tunning accessibility
+    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    //-----------------
+    
     [self proAttachToNotifications];
-//    [self proUpdateAdguardDnsStatus];
    
 #else
     self.hideSectionsWithHiddenRows = YES;
@@ -230,8 +244,12 @@
     [[UIApplication sharedApplication] openURL:theURL];
 }
 
-- (IBAction)clickDNS:(id)sender {
-    DDLogError(@"Id %@", sender);
+- (IBAction)proToggleStatus:(id)sender {
+    
+#ifdef PRO
+    BOOL enabled = [(UISwitch *)sender isOn];
+    [[APVPNManager singleton] setEnabled:enabled];
+#endif
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{
@@ -262,7 +280,7 @@
     
     [self setToolbar];
 #ifdef PRO
-    [self proUpdateAdguardDnsStatus];
+    [self proUpdateStatuses];
 #endif
 
 }
@@ -319,7 +337,9 @@
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        // tunning accessibility
         self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+        //------------
     }
 
     BOOL enabled = NO;
@@ -386,8 +406,11 @@
     self.checkFiltersCell.accessoryView = activity;
     self.checkFiltersCell.textLabel.textColor =
         self.checkFiltersCell.textLabel.tintColor;
+    
+    // tunning accessibility
     UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
     self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits | UIAccessibilityTraitButton;
+    //-----------------
     
     _inCheckUpdates = NO;
 
@@ -401,7 +424,9 @@
                 usingBlock:^(NSNotification *_Nonnull note) {
 
                   self.checkFiltersCell.textLabel.enabled = NO;
+                    // tunning accessibility
                   self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
+                    //------------
                   UIActivityIndicatorView *activity =
                       (UIActivityIndicatorView *)
                           self.checkFiltersCell.accessoryView;
@@ -456,7 +481,9 @@
                                             dateStyle:NSDateFormatterShortStyle
                                             timeStyle:
                                                 NSDateFormatterShortStyle];
+                          // tunning accessibility
                           self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+                          //-------
                       }
                     });
 
@@ -509,38 +536,110 @@
 
     self.checkFiltersCell.textLabel.enabled = YES;
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
+    // tunning accessibility
     self.checkFiltersCell.accessibilityTraits = self.checkFiltersCell.accessibilityTraits | UIAccessibilityTraitButton;
-
+    //--------
     _inCheckUpdates = NO;
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Table Delegate Methods
+
 #ifdef PRO
-- (void)proUpdateAdguardDnsStatus{
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if (section == PRO_SECTION_INDEX) {
+        
+        return [self proSectionFooter];
+    }
+    
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    if (section == PRO_SECTION_INDEX) {
+        
+        APUIProSectionFooter *footer = [self proSectionFooter];
+        return footer.height;
+    }
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  PRO Helper Methods (Private)
+/////////////////////////////////////////////////////////////////////
+
+- (APUIProSectionFooter *)proSectionFooter{
+    
+    if (_proFooter) {
+        return _proFooter;
+    }
+    
+    _proFooter = [[APUIProSectionFooter alloc] initWithFrame:self.view.bounds];
+    _proFooter.text = [self proTextForProSectionFooter];
+    
+    return _proFooter;
+}
+
+- (NSString *)proShortStatusDescription {
+    
+    return NSLocalizedString(@"To make system-wide filtering, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+}
+
+- (NSAttributedString *)proTextForProSectionFooter{
+    
+    NSString *message = [self proShortStatusDescription];
+    
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:message];
+    
+    return textString;
+}
+
+- (void)proUpdateStatuses{
+    
     APVPNManager *manager = [APVPNManager singleton];
+    
+    self.proSystemWideCell.detailTextLabel.text = manager.localFiltering
+    ? NSLocalizedString(@"Enabled", @"(APUIAdguardDNSController) PRO version. On the main screen. Status of the System-wide ads blocking feature. When it is enabled.")
+    : NSLocalizedString(@"Disabled", @"(APUIAdguardDNSController) PRO version. On the main screen. Status of the System-wide ads blocking feature. When it is disabled.");
+    
+    self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    
+    self.proStatusSwitch.on = manager.enabled;
     
     switch (manager.connectionStatus) {
             
         case APVpnConnectionStatusReconnecting:
-            
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
-            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is 'In Progress'.");
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is 'In Progress'.");
+            break;
+            
+        case APVpnConnectionStatusConnected:
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Connected.");
             break;
             
         default:
-            
-            if (manager.enabled) {
-                
-                if ([manager.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal])
-                    self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Local",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is Local Filtering.");
-                else
-                    self.proAdguardDnsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
-            }
-            else
-                self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Pro section, DNS Filtering row. Current status title. When status is Not Connected.");
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Not Connected.");
             break;
     }
     
+    if (manager.lastError) {
+        [ACSSystemUtils
+         showSimpleAlertForController:self
+         withTitle:NSLocalizedString(@"Error",
+                                     @"(APUIAdguardDNSCon"
+                                     @"troller) PRO "
+                                     @"version. Alert "
+                                     @"title. On error.")
+         message:manager.lastError.localizedDescription];
+    }
+    
+    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{
@@ -553,7 +652,7 @@
                      
                      // When configuration is changed
                      
-                     [self proUpdateAdguardDnsStatus];
+                     [self proUpdateStatuses];
                  }];
     
     if (observer) {

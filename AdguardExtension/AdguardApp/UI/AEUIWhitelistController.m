@@ -79,9 +79,6 @@
             _newRuleCount++;
             
             [[[AEService singleton] antibanner] endTransaction];
-#ifdef PRO
-            [[APVPNManager singleton] sendReloadUserfilterDataIfRule:object.rule];
-#endif
             
         } rollbackBlock:^{
             
@@ -146,9 +143,6 @@
                 [self reloadRulesAndScrollBottom:YES];
                 
                 [[[AEService singleton] antibanner] endTransaction];
-#ifdef PRO
-                [[APVPNManager singleton] sendReloadUserfilterDataIfRule:domain.rule];
-#endif
             } rollbackBlock:^{
                 
                 [[[AEService singleton] antibanner] rollbackTransaction];
@@ -178,9 +172,6 @@
 
                     [[[AEService singleton] antibanner] endTransaction];
                     
-#ifdef PRO
-                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:domain.rule];
-#endif
                 } rollbackBlock:^{
 
                     _ruleHolder.ruleText = domain.rule.ruleText;

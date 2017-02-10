@@ -23,8 +23,21 @@
 #import "ADBHelpers/ADBTable.h"
 #import "ADBHelpers/ADBTableRow.h"
 
+#define APS_WHITELIST_DOAMINS              @"pro-whitelist-doamins.data"
+#define APS_BLACKLIST_DOAMINS              @"pro-blacklist-doamins.data"
 #define DNS_LOG_RECORD_FILE         @"dns-log-records.db"
 #define LOG_RECORDS_TTL             12*60*60 // 12 hours
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AESharedResources
+
+@interface AESharedResources (internal)
+
+- (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
+- (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
+
+@end
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogTable
@@ -67,7 +80,28 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Class methods
+#pragma mark Properties and Class methods
+
+
++ (NSArray <NSString *> *)whitelistDomains {
+    
+    return [self domainsListWithName:APS_WHITELIST_DOAMINS];
+}
+
++ (void)setWhitelistDomains:(NSArray<NSString *> *)whitelistDomains {
+    
+    [self setDomainsList:whitelistDomains forName:APS_WHITELIST_DOAMINS];
+}
+
++ (NSArray <NSString *> *)blacklistDomains {
+    
+    return [self domainsListWithName:APS_BLACKLIST_DOAMINS];
+}
+
++ (void)setBlacklistDomains:(NSArray<NSString *> *)blacklistDomains {
+    
+    [self setDomainsList:blacklistDomains forName:APS_BLACKLIST_DOAMINS];
+}
 
 + (NSArray <APDnsLogRecord *> *)readDnsLog{
     
@@ -150,9 +184,9 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return [NSData dataWithBytes:&message length:1];
 }
 
-+ (NSData *)host2tunnelMessageUserfilterDataReload {
++ (NSData *)host2tunnelMessageSystemWideDomainListReload {
     
-    APHost2TunnelMessageType message = APHTMUserfilterDataReload;
+    APHost2TunnelMessageType message = APHTMLSystemWideDomainListReload;
     
     return [NSData dataWithBytes:&message length:1];
 }
@@ -199,6 +233,33 @@ static FMDatabaseQueue *_writeDnsLogHandler;
         NSDate *purgeDate = [NSDate dateWithTimeIntervalSinceNow:-(LOG_RECORDS_TTL)];
         [db executeUpdate:@"DELETE FROM APDnsLogTable WHERE timeStamp < datetime(?)", [purgeDate iso8601String]];
     }];
+}
+
++ (NSArray <NSString *> *)domainsListWithName:(NSString *)name {
+
+    AESharedResources *resources = [AESharedResources new];
+    NSData *data = [resources loadDataFromFileRelativePath:name];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
++ (void)setDomainsList:(NSArray <NSString *> *)domainsList forName:(NSString *)name {
+    
+    AESharedResources *resources = [AESharedResources new];
+    if (domainsList == nil) {
+        [resources saveData:[NSData data] toFileRelativePath:name];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:domainsList];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [resources saveData:data toFileRelativePath:name];
+    }
 }
 
 @end

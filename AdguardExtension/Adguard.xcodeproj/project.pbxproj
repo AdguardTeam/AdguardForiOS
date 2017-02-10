@@ -170,7 +170,6 @@
 		653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153411CF9911800C92A73 /* AdguardPro.entitlements */; };
 		653153451CF9935D00C92A73 /* ProActionExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153441CF9935D00C92A73 /* ProActionExtension.entitlements */; };
 		653153471CF9939300C92A73 /* ProBlockingExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */; };
-		653153591CFC0E4000C92A73 /* APUIAdguardDNSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */; };
 		653153621CFC63C000C92A73 /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153641CFC899E00C92A73 /* APUIProSectionFooter.m */; };
 		653153841D00179300C92A73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F3981D1B7B684700ABCD39 /* Main.storyboard */; };
@@ -351,9 +350,9 @@
 		658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
 		6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 658237331D07FE6700B824F4 /* ProTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		658237421D08004B00B824F4 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
-		658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */; };
-		658DDFFE1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */; };
-		658DDFFF1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */; };
+		658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */; };
+		658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
+		658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
 		658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
@@ -546,6 +545,9 @@
 		659887671CF83947003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47911E4123B50027D287 /* APUISystemWideController.m */; };
+		659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47941E41248D0027D287 /* APUIDomainListController.m */; };
+		659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B79251E40E626003B1E70 /* APUIDnsServersController.m */; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
 		659FBCF21BDE3F03007A87FE /* AEAUIDomainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */; };
@@ -920,8 +922,6 @@
 		653153411CF9911800C92A73 /* AdguardPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AdguardPro.entitlements; sourceTree = "<group>"; };
 		653153441CF9935D00C92A73 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
 		653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProBlockingExtension.entitlements; sourceTree = "<group>"; };
-		653153571CFC0E4000C92A73 /* APUIAdguardDNSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIAdguardDNSController.h; sourceTree = "<group>"; };
-		653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIAdguardDNSController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APVPNManager.h; sourceTree = "<group>"; };
 		653153611CFC63C000C92A73 /* APVPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APVPNManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153631CFC899E00C92A73 /* APUIProSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProSectionFooter.h; sourceTree = "<group>"; };
@@ -1050,10 +1050,10 @@
 		658237381D07FE6700B824F4 /* PacketTunnelProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PacketTunnelProvider.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6582373A1D07FE6700B824F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6589737D1D1BF39E00B91137 /* AEUICommons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICommons.h; sourceTree = "<group>"; };
-		658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsStatusTableViewCell.h; sourceTree = "<group>"; };
-		658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsStatusTableViewCell.m; sourceTree = "<group>"; };
-		658DDFFC1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
-		658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
+		658DDFF61DA67FE600688557 /* APUIProStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProStatusTableViewCell.h; sourceTree = "<group>"; };
+		658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIProStatusTableViewCell.m; sourceTree = "<group>"; };
+		658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
+		658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
 		658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdguardProUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		658FECFC1E240B8F0013BCE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1069,6 +1069,12 @@
 		659887791CF841F4003ECD1C /* macro-definitions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "macro-definitions.xcconfig"; sourceTree = "<group>"; };
 		6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Config.xcconfig"; sourceTree = "<group>"; };
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
+		659A47901E4123B50027D287 /* APUISystemWideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUISystemWideController.h; sourceTree = "<group>"; };
+		659A47911E4123B50027D287 /* APUISystemWideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUISystemWideController.m; sourceTree = "<group>"; };
+		659A47931E41248D0027D287 /* APUIDomainListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDomainListController.h; sourceTree = "<group>"; };
+		659A47941E41248D0027D287 /* APUIDomainListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDomainListController.m; sourceTree = "<group>"; };
+		659B79241E40E626003B1E70 /* APUIDnsServersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsServersController.h; sourceTree = "<group>"; };
+		659B79251E40E626003B1E70 /* APUIDnsServersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsServersController.m; sourceTree = "<group>"; };
 		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		659E59781BC6D86D00FA2384 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		659E59791BC6D87000FA2384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -1159,6 +1165,8 @@
 		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
+		65D616951E4D0DA900E81E40 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		65D616971E4D0DB400E81E40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
 		65D9A2611C032AE2004DA210 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
@@ -1417,8 +1425,8 @@
 				65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */,
 				6581C93C1D66536400E739CC /* AEUILabelWithCopy.h */,
 				6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */,
-				658DDFFC1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.h */,
-				658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */,
+				658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */,
+				658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1450,8 +1458,6 @@
 		653153561CFC0DC100C92A73 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				653153571CFC0E4000C92A73 /* APUIAdguardDNSController.h */,
-				653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */,
 				653153631CFC899E00C92A73 /* APUIProSectionFooter.h */,
 				653153641CFC899E00C92A73 /* APUIProSectionFooter.m */,
 				655AACC71D3E10C100E316EA /* APUIDnsRequestsController.h */,
@@ -1460,10 +1466,16 @@
 				655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */,
 				6581C9391D64FC3B00E739CC /* APUIDnsLogRecord.h */,
 				6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */,
-				658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */,
-				658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */,
+				658DDFF61DA67FE600688557 /* APUIProStatusTableViewCell.h */,
+				658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */,
 				651F5E011E24DFBC00E22157 /* APUIDnsServerDetailController.h */,
 				651F5E021E24DFBC00E22157 /* APUIDnsServerDetailController.m */,
+				659B79241E40E626003B1E70 /* APUIDnsServersController.h */,
+				659B79251E40E626003B1E70 /* APUIDnsServersController.m */,
+				659A47901E4123B50027D287 /* APUISystemWideController.h */,
+				659A47911E4123B50027D287 /* APUISystemWideController.m */,
+				659A47931E41248D0027D287 /* APUIDomainListController.h */,
+				659A47941E41248D0027D287 /* APUIDomainListController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3083,15 +3095,16 @@
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
+				659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
-				658DDFFF1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */,
+				658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				659886581CF74DE9003ECD1C /* AESSupport.m in Sources */,
 				659886591CF74DE9003ECD1C /* ACLLogger.m in Sources */,
 				6598865A1CF74DE9003ECD1C /* ACLWildcard.m in Sources */,
 				6598865B1CF74DE9003ECD1C /* ADLocations.m in Sources */,
 				65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				6598865C1CF74DE9003ECD1C /* FMDatabasePool.m in Sources */,
-				658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */,
+				658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */,
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */,
@@ -3103,6 +3116,7 @@
 				659886621CF74DE9003ECD1C /* NSData+GZIP.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
+				659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */,
 				655AACDA1D4237F700E316EA /* AEUIFirstStartViewController.m in Sources */,
 				659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */,
 				659886661CF74DE9003ECD1C /* CLIColor.m in Sources */,
@@ -3114,6 +3128,7 @@
 				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
+				659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */,
 				6598866C1CF74DE9003ECD1C /* AEUILoaderSegue.m in Sources */,
 				6598866D1CF74DE9003ECD1C /* AEUIWhitelistController.m in Sources */,
 				655AAC8D1D37780700E316EA /* APDnsResourceType.m in Sources */,
@@ -3152,7 +3167,6 @@
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
 				6598868A1CF74DE9003ECD1C /* AEUIAboutController.m in Sources */,
-				653153591CFC0E4000C92A73 /* APUIAdguardDNSController.m in Sources */,
 				6598868B1CF74DE9003ECD1C /* DDLog.m in Sources */,
 				655AAC901D37780700E316EA /* APDnsResponse.m in Sources */,
 				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
@@ -3442,7 +3456,7 @@
 				655A02611C6B7686000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
-				658DDFFE1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */,
+				658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				6514819E1BC42E2A00211147 /* AEUIAboutController.m in Sources */,
 				655A025B1C6B7686000F00D7 /* DDLog.m in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
@@ -3739,8 +3753,8 @@
 				65B033E11E27C2E20090EC8C /* it */,
 				65B033E31E27C2EC0090EC8C /* pl */,
 				65B033E51E27C2F80090EC8C /* de */,
-				6513A9DD1E390E30008E7E5D /* ru */,
-				6513A9DF1E390E39008E7E5D /* en */,
+				65D616951E4D0DA900E81E40 /* ru */,
+				65D616971E4D0DB400E81E40 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

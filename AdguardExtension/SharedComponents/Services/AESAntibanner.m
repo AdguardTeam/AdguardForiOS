@@ -986,8 +986,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         NSMutableArray *filtersForUpdate = [NSMutableArray array];
         for (ASDFilterMetadata *version in metadata.filters) {
             
-            // checking version
             ASDFilterMetadata *filterMeta = [metadataForUpdate member:version];
+            [self copyUserSettingsFromMeta:filterMeta toMeta:version];
+            
+            // checking version
             if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
 
                 [filtersForUpdate addObject:version];
@@ -1215,8 +1217,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             for (ASDFilterMetadata *version in metadata.filters) {
                 
-                // checking version
                 filterMeta = [metadataForUpdate member:version];
+                [self copyUserSettingsFromMeta:filterMeta toMeta:version];
+                
+                // checking version
                 if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
                     
                     ASDFilter *filterData = [filterClient filterWithFilterId:version.filterId];
@@ -2006,6 +2010,14 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     if (!_lastUpdateFilterIds) {
         _lastUpdateFilterIds = res.lastUpdateFilterIds;
     }
+
+}
+
+- (void)copyUserSettingsFromMeta:(ASDFilterMetadata *)fromMeta toMeta:(ASDFilterMetadata *)toMeta {
+
+    toMeta.enabled = [fromMeta.enabled copy];
+    toMeta.editable = [fromMeta.editable copy];
+    toMeta.removable = [fromMeta.removable copy];
 
 }
 

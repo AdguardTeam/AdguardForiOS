@@ -18,37 +18,24 @@
 
 #import <UIKit/UIKit.h>
 
-@class APDnsServerObject, APUIDnsServersController;
-
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Public Methods and Properties
+#pragma mark - APUISystemWideController
 
 
-@property APDnsServerObject *serverObject;
-@property (weak, nonatomic) APUIDnsServersController *delegate;
+@interface APUISystemWideController  : UITableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
-@property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
+@property (strong, nonatomic) IBOutlet UISwitch *statusSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *statusSwitchCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)clickOnTableView:(id)sender;
-- (IBAction)clickCancel:(id)sender;
-- (IBAction)clickDone:(id)sender;
-- (IBAction)clickRemove:(id)sender;
+- (IBAction)toggleLocalFiltering:(id)sender;
+- (IBAction)toggleLogStatus:(id)sender;
 
-- (IBAction)nameChanged:(id)sender;
-- (IBAction)descriptionChanged:(id)sender;
 
 @end

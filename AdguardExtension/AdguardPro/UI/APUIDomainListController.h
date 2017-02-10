@@ -18,37 +18,38 @@
 
 #import <UIKit/UIKit.h>
 
-@class APDnsServerObject, APUIDnsServersController;
-
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
+#pragma mark - APUIDomainListController
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Public Methods and Properties
+@interface APUIDomainListController  : UIViewController <UITextViewDelegate, UISearchBarDelegate>
 
-
-@property APDnsServerObject *serverObject;
-@property (weak, nonatomic) APUIDnsServersController *delegate;
+/**
+ Block of the code, which will be performed when user press the Done key.
+ */
+@property (nonatomic, copy) BOOL (^done)(NSString *text);
+/**
+ Initial text, which will be edited.
+ */
+@property (nonatomic) NSString *textForEditing;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
-@property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
+@property (weak, nonatomic) IBOutlet UITextView *domainsTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachToolBarConstraint;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)clickOnTableView:(id)sender;
-- (IBAction)clickCancel:(id)sender;
 - (IBAction)clickDone:(id)sender;
-- (IBAction)clickRemove:(id)sender;
+- (IBAction)clickSearchNext:(id)sender;
+- (IBAction)clickSearchPrev:(id)sender;
 
-- (IBAction)nameChanged:(id)sender;
-- (IBAction)descriptionChanged:(id)sender;
 
 @end

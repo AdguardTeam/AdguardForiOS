@@ -240,46 +240,44 @@ static APVPNManager *singletonVPNManager;
                 DDLogError(@"(APVPNManager) Can't set logging DNS requests to %@: %@, %ld, %@", (dnsRequestsLogging ? @"YES" : @"NO"), err.domain, err.code, err.localizedDescription);
                 _lastError = _standartError;
             }
+            else {
+                
+                _dnsRequestsLogging = dnsRequestsLogging;
+            }
 
-            _dnsRequestsLogging = dnsRequestsLogging;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
-            return;
         }
         else {
             
-            DDLogError(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
+            DDLogWarn(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
             _dnsRequestsLogging = NO;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
         }
+        
+        [self sendNotification];
     }
 }
 
-- (void)sendReloadUserfilterDataIfRule:(ASDFilterRule *)rule {
-    
-    if (! ([[AEWhitelistDomainObject alloc] initWithRule:rule]
-           || [[AEBlacklistDomainObject alloc] initWithRule:rule])) {
-        
-        return;
-    }
+- (void)sendReloadSystemWideDomainLists {
     
     _lastError = nil;
     if (_manager.connection) {
         
-        NSData *message = [APSharedResources host2tunnelMessageUserfilterDataReload];
+        NSData *message = [APSharedResources host2tunnelMessageSystemWideDomainListReload];
         NSError *err = nil;
         [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
         if (err) {
             
-            DDLogError(@"(APVPNManager) Can't send message for reload user filter data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            DDLogError(@"(APVPNManager) Can't send message for reload domains lists data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
             _lastError = _standartError;
         }
-        return;
     }
     else {
         
-        DDLogError(@"(APVPNManager)  Can't send message for reload user filter data: VPN session connection is nil");
-        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+        DDLogWarn(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
     }
+    
+    [self sendNotification];
 }
 
 - (BOOL)clearDnsRequestsLog {
@@ -837,8 +835,8 @@ static APVPNManager *singletonVPNManager;
     //Changes names and descriptions for predefined servers
     
     APDnsServerObject *server = _remoteDnsServers[0];
-    server.serverName = NSLocalizedString(@"Not Used", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is desabled and iOS uses DNS from current network configuration");
-    server.serverDescription = NSLocalizedString(@"used default system DNS settings", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is desabled and iOS uses DNS from current network configuration");
+    server.serverName = NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration");
+    server.serverDescription = NSLocalizedString(@"used default system DNS settings", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration");
     
     
     server = _remoteDnsServers[1];

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface APUIAccessibilityHiddenTableViewCell : UITableViewCell
+@interface AEUIAccessibilityHiddenTableViewCell : UITableViewCell
 
 @end
