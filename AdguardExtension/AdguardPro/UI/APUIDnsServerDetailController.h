@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,40 +16,39 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "StaticDataTableViewController.h"
-#import "APUIProSectionFooter.h"
+#import <UIKit/UIKit.h>
 
-@class AEUIMainController;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APUIProSectionController
-
-@interface APUIAdguardDNSController : StaticDataTableViewController
+@class APDnsServerObject, APUIDnsServersController;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Init and Class methods
+#pragma mark - APUIDnsServerDetailController
+@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Public Methods and Properties
+
+
+@property APDnsServerObject *serverObject;
+@property (weak, nonatomic) APUIDnsServersController *delegate;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-@property (weak, nonatomic) IBOutlet UITableViewCell *defaultDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *familyDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
-@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
+@property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
+- (IBAction)clickOnTableView:(id)sender;
+- (IBAction)clickCancel:(id)sender;
+- (IBAction)clickDone:(id)sender;
+- (IBAction)clickRemove:(id)sender;
 
-- (IBAction)clickChooseServer:(id)sender;
-- (IBAction)toggleSwitchStatus:(id)sender;
-- (IBAction)toggleLogStatus:(id)sender;
-
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-
+- (IBAction)nameChanged:(id)sender;
+- (IBAction)descriptionChanged:(id)sender;
 
 @end

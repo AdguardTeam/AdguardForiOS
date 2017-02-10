@@ -227,6 +227,27 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return rules;
 }
 
+- (BOOL)checkIfFilterInstalled:(NSNumber *)filterId{
+    
+    if (!filterId)
+        [[NSException argumentException:@"filterId"] raise];
+    
+    if (serviceEnabled) {
+        
+        __block BOOL checkResult = NO;
+        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+            
+            FMResultSet *result = [db executeQuery:@"select * from filters where filter_id = ? limit 1", filterId];
+            
+            checkResult = [result next];
+            [result close];
+        }];
+        
+        return checkResult;
+    }
+    
+    return NO;
+}
 
 - (NSArray *)activeRulesForFilter:(NSNumber *)filterId{
     
@@ -965,8 +986,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         NSMutableArray *filtersForUpdate = [NSMutableArray array];
         for (ASDFilterMetadata *version in metadata.filters) {
             
-            // checking version
             ASDFilterMetadata *filterMeta = [metadataForUpdate member:version];
+            [self copyUserSettingsFromMeta:filterMeta toMeta:version];
+            
+            // checking version
             if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
 
                 [filtersForUpdate addObject:version];
@@ -1109,7 +1132,11 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 if (![filterMeta.editable boolValue]) {
                     
                     // updated only enabled filters
-                    if ([filterMeta.enabled boolValue]
+                    if (([filterMeta.enabled boolValue]
+                         //Special case for Simplified domain names filter. We allow update of this filter in any case.
+                         //https://github.com/AdguardTeam/AdguardForiOS/issues/302
+                         || [filterMeta.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)])
+                        
                         && ( forced || interval >= [filterMeta.expires integerValue] )) {
                         
                         [metadataForUpdate addObject:filterMeta];
@@ -1190,8 +1217,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             for (ASDFilterMetadata *version in metadata.filters) {
                 
-                // checking version
                 filterMeta = [metadataForUpdate member:version];
+                [self copyUserSettingsFromMeta:filterMeta toMeta:version];
+                
+                // checking version
                 if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
                     
                     ASDFilter *filterData = [filterClient filterWithFilterId:version.filterId];
@@ -1504,8 +1533,23 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 || [filter.filterId isEqual:@(ASDF_SPYWARE_FILTER_ID)]   // Privacy Protection Filter
                 || [filter.filterId isEqual:@(ASDF_SOC_NETWORKS_FILTER_ID)] // Social networks filter identifier
                 || [filter.filterId isEqual:@(ASDF_MOBILE_SAFARI_FILTER_ID)] // Mobile Safari FIlter
-                )
+#ifdef PRO
+                || [filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)] // Simplified domain names filter
+#endif
+                ) {
+
+#ifdef PRO
+                //Special case for Simplified domain names filter. We prevent deleting of this filter.
+                //https://github.com/AdguardTeam/AdguardForiOS/issues/302
+                if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
+                    filter.removable = @(NO);
+                    filter.editable = @(NO);
+                    filter.enabled = @(NO);
+                }
+#endif
+                
                 [sFilters addObject:filter];
+            }
         
         if (!sFilters)
             return NO;
@@ -1966,6 +2010,14 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     if (!_lastUpdateFilterIds) {
         _lastUpdateFilterIds = res.lastUpdateFilterIds;
     }
+
+}
+
+- (void)copyUserSettingsFromMeta:(ASDFilterMetadata *)fromMeta toMeta:(ASDFilterMetadata *)toMeta {
+
+    toMeta.enabled = [fromMeta.enabled copy];
+    toMeta.editable = [fromMeta.editable copy];
+    toMeta.removable = [fromMeta.removable copy];
 
 }
 

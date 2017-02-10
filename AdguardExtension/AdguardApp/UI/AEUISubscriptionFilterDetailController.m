@@ -45,11 +45,13 @@
         [NSDateFormatter localizedStringFromDate:self.meta.updateDate
                                        dateStyle:NSDateFormatterShortStyle
                                        timeStyle:NSDateFormatterShortStyle];
+    // tunning accessibility
     self.filterLastModified.accessibilityLabel =
     [NSDateFormatter localizedStringFromDate:self.meta.updateDate
                                    dateStyle:NSDateFormatterLongStyle
                                    timeStyle:NSDateFormatterShortStyle];
-
+    //-----------------
+    
     self.statusButton.on = [self.meta.enabled boolValue];
 
     if ([NSString isNullOrEmpty:self.meta.homepage]) {

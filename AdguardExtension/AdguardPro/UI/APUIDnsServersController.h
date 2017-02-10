@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,31 +16,32 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #import "StaticDataTableViewController.h"
 
-@class AEUILongLabelViewCell, APDnsLogRecord;
-
-@interface APUIDnsRequestDetail : StaticDataTableViewController <UITableViewDelegate>
+@class APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
+#pragma mark - APUIDnsServersController
 
-@property (nonatomic) APDnsLogRecord *logRecord;
+@interface APUIDnsServersController  : StaticDataTableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITableViewCell *timeCell;
-@property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *nameCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *typeCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *serverCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *statusCell;
-@property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *responsesCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *domainControllCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *systemDefaultCell;
 
-- (IBAction)clickDomainControll:(id)sender;
-- (IBAction)longPressOnName:(id)sender;
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Actions
+
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Properties and public methods
+
+- (void)addDnsServer:(APDnsServerObject *)serverObject;
+- (void)removeDnsServer:(APDnsServerObject *)serverObject;
+- (void)modifyDnsServer:(APDnsServerObject *)serverObject;
 
 @end

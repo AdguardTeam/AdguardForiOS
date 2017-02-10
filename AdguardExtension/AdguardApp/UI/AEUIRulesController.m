@@ -161,9 +161,6 @@
 
             [[[AEService singleton] antibanner] endTransaction];
 
-#ifdef PRO
-            [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
-#endif
         };
         
         [[[AEService singleton] antibanner] beginTransaction];
@@ -281,10 +278,6 @@
                 dispatch_block_t completionBlock = ^(){
 
                     [[[AEService singleton] antibanner] endTransaction];
-#ifdef PRO
-                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
-                    [[APVPNManager singleton] sendReloadUserfilterDataIfRule:_ruleHolder];
-#endif
                 };
                 
                 // ---- Rollback Block ----------------
@@ -429,9 +422,6 @@
                 
                 _newRuleCount = newRuleCountHolder;
                 [[[AEService singleton] antibanner] endTransaction];
-#ifdef PRO
-                [[APVPNManager singleton] sendReloadUserfilterDataIfRule:rule];
-#endif
                 
             } rollbackBlock:^{
                 

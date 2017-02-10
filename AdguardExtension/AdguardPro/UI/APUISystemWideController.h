@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,39 +16,26 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import NetworkExtension;
-
-#import "APVPNManager.h"
-
-/**
- Error domain for errors from tunnel provider.
- */
-extern NSString *APTunnelProviderErrorDomain;
-
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
-
+#import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
+#pragma mark - APUISystemWideController
 
-@interface PacketTunnelProvider : NEPacketTunnelProvider
+
+@interface APUISystemWideController  : UITableViewController
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
+#pragma mark Outlets
 
-/**
- Returns current DNS server description object.
- */
-- (APDnsServerObject *)currentDnsServer;
-/**
- Returns local filtering flag.
- */
-- (BOOL)localFiltering;
+@property (strong, nonatomic) IBOutlet UISwitch *statusSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *statusSwitchCell;
 
-/**
- Returns YES if configuration contains remote DNS server.
- */
-- (BOOL)isRemoteServer;
+/////////////////////////////////////////////////////////////////////
+#pragma mark Actions
+
+- (IBAction)toggleLocalFiltering:(id)sender;
+- (IBAction)toggleLogStatus:(id)sender;
+
 
 @end

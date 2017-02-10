@@ -308,11 +308,20 @@ static AEService *singletonService;
                     @autoreleasepool {
 
                         NSMutableData *jsonData = [NSMutableData dataWithData:_sharedResources.blockingContentRules];
-                        //
-                        [jsonData replaceBytesInRange:NSMakeRange(jsonData.length - 2, 2) withBytes:",\n"];
+                        
                         // add whitelist rule
                         NSData *jsonRuleData = [jsonRule dataUsingEncoding:NSUTF8StringEncoding];
-                        [jsonData appendBytes:([jsonRuleData bytes] + 2) length:(jsonRuleData.length - 2)];
+                        
+                        if (jsonData.length > 1) {
+                            //must be at list 2 symbols.
+                            [jsonData replaceBytesInRange:NSMakeRange(jsonData.length - 2, 2) withBytes:",\n"];
+                            [jsonData appendBytes:([jsonRuleData bytes] + 2) length:(jsonRuleData.length - 2)];
+                        }
+                        else {
+                            
+                            [jsonData setData:jsonRuleData];
+                        }
+                        //
 
                         _sharedResources.blockingContentRules = jsonData;
 
