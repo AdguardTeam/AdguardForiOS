@@ -89,11 +89,8 @@
 /* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
 "Fle-Y5-Zj9.text" = "Local Filtering";
 
-/* Class = "UILabel"; text = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
-"G4C-i7-VxE.text" = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
-
-/* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
-"Fle-Y5-Zj9.text" = "Local Filtering";
+/* Class = "UILabel"; text = "Добавьте сюда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
+"G4C-i7-VxE.text" = "Добавьте сюда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "GZu-fQ-9oP"; */
 "GZu-fQ-9oP.text" = "Server";
@@ -194,7 +191,6 @@
 /* Class = "UILabel"; text = "Whitelist"; ObjectID = "YRI-K8-S98"; */
 "YRI-K8-S98.text" = "Whitelist";
 
->>>>>>> feature/302
 /* Class = "UILabel"; accessibilityLabel = "Manage Adguard from Safari. Video."; ObjectID = "aK9-na-jWI"; */
 "aK9-na-jWI.accessibilityLabel" = "Manage Adguard from Safari. Video.";
 
@@ -290,9 +286,6 @@
 
 /* Class = "UITableViewSection"; headerTitle = "GENERAL"; ObjectID = "pEe-TF-Jvg"; */
 "pEe-TF-Jvg.headerTitle" = "GENERAL";
-
-/* Class = "UILabel"; text = "Remote DNS Server Title"; ObjectID = "rGf-5M-kKA"; */
-"rGf-5M-kKA.text" = "Remote DNS Server Title";
 
 /* Class = "UINavigationItem"; title = "User Filter"; ObjectID = "rYp-VU-hew"; */
 "rYp-VU-hew.title" = "User Filter";

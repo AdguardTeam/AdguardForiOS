@@ -89,11 +89,8 @@
 /* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
 "Fle-Y5-Zj9.text" = "Local Filtering";
 
-/* Class = "UILabel"; text = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
-"G4C-i7-VxE.text" = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
-
-/* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
-"Fle-Y5-Zj9.text" = "Local Filtering";
+/* Class = "UILabel"; text = "Добавьте сюда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
+"G4C-i7-VxE.text" = "Добавьте сюда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "GZu-fQ-9oP"; */
 "GZu-fQ-9oP.text" = "Server";
@@ -191,12 +188,9 @@
 /* Class = "UILabel"; text = "Rate this app"; ObjectID = "Y2d-c9-5ne"; */
 "Y2d-c9-5ne.text" = "Rate this app";
 
-<<<<<<< HEAD
-=======
 /* Class = "UILabel"; text = "Whitelist"; ObjectID = "YRI-K8-S98"; */
 "YRI-K8-S98.text" = "Whitelist";
 
->>>>>>> feature/302
 /* Class = "UILabel"; accessibilityLabel = "Manage Adguard from Safari. Video."; ObjectID = "aK9-na-jWI"; */
 "aK9-na-jWI.accessibilityLabel" = "Manage Adguard from Safari. Video.";
 
@@ -293,9 +287,6 @@
 /* Class = "UITableViewSection"; headerTitle = "GENERAL"; ObjectID = "pEe-TF-Jvg"; */
 "pEe-TF-Jvg.headerTitle" = "GENERAL";
 
-/* Class = "UILabel"; text = "Remote DNS Server Title"; ObjectID = "rGf-5M-kKA"; */
-"rGf-5M-kKA.text" = "Remote DNS Server Title";
-
 /* Class = "UINavigationItem"; title = "User Filter"; ObjectID = "rYp-VU-hew"; */
 "rYp-VU-hew.title" = "User Filter";
 
@@ -311,30 +302,15 @@
 /* Class = "UILabel"; text = "Blacklist"; ObjectID = "sGp-bq-UV6"; */
 "sGp-bq-UV6.text" = "Blacklist";
 
-<<<<<<< HEAD
-/* Class = "UITableViewSection"; footerTitle = "Enter here IP addresses of the DNS servers separated by comma or return"; ObjectID = "sdZ-kr-Pk1"; */
-"sdZ-kr-Pk1.footerTitle" = "Enter here IP addresses of the DNS servers separated by comma or return";
-=======
 /* Class = "UILabel"; text = "Status"; ObjectID = "sV1-SB-Gpd"; */
 "sV1-SB-Gpd.text" = "Status";
 
 /* Class = "UITableViewSection"; footerTitle = "Enter here IP addresses of the DNS servers separated by comma or return."; ObjectID = "sdZ-kr-Pk1"; */
 "sdZ-kr-Pk1.footerTitle" = "Enter here IP addresses of the DNS servers separated by comma or return.";
->>>>>>> feature/302
 
 /* Class = "UITableViewSection"; headerTitle = "IP Addresses"; ObjectID = "sdZ-kr-Pk1"; */
 "sdZ-kr-Pk1.headerTitle" = "IP Addresses";
 
-<<<<<<< HEAD
-/* Class = "UILabel"; text = "remote dns server description here"; ObjectID = "tZ5-Ad-V84"; */
-"tZ5-Ad-V84.text" = "remote dns server description here";
-
-/* Class = "UINavigationItem"; title = "DNS Filtering"; ObjectID = "vC1-5r-hHk"; */
-"vC1-5r-hHk.title" = "DNS Filtering";
-
-/* Class = "UILabel"; text = "Auto Update over Wi-Fi only"; ObjectID = "x5D-K1-eUX"; */
-"x5D-K1-eUX.text" = "Auto Update over Wi-Fi only";
-=======
 /* Class = "UILabel"; text = "Remote DNS Server Title"; ObjectID = "tIq-QX-3HP"; */
 "tIq-QX-3HP.text" = "Remote DNS Server Title";
 
@@ -349,4 +325,3 @@
 
 /* Class = "UITextView"; accessibilityHint = "Enter here IP addresses of the DNS servers separated by comma or return"; ObjectID = "ysu-RU-bHI"; */
 "ysu-RU-bHI.accessibilityHint" = "Enter here IP addresses of the DNS servers separated by comma or return";
->>>>>>> feature/302
