@@ -76,18 +76,28 @@
 
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
+    
+    void *dest;
     if (af == AF_INET) {
 
-        [self repareMutable];
-
-        if (inet_pton(AF_INET, [dstAddress cStringUsingEncoding:NSUTF8StringEncoding], &(_ipHeader->ip_dst)) == 1) {
-
-            _dstAddress = dstAddress;
-            [self checksumIPv4];
-        }
+        dest = &(_ipHeader->ip_dst);
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        dest = &(_ip6Header->ip6_dst);
     }
+    
+    if (inet_pton(af, [dstAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {
+        
+        _dstAddress = dstAddress;
+    }
+    
+    if (af == AF_INET) {
+        
+        [self checksumIPv4];
+    }
+    
     OSSpinLockUnlock(&_lock);
 }
 
@@ -100,18 +110,26 @@
 
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    void *dest;
     if (af == AF_INET) {
-
-        [self repareMutable];
-
-        if (inet_pton(AF_INET, [srcAddress cStringUsingEncoding:NSUTF8StringEncoding], &(_ipHeader->ip_src)) == 1) {
-
-            _srcAddress = srcAddress;
-            [self checksumIPv4];
-        }
+        
+        dest = &(_ipHeader->ip_src);
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        dest = &(_ip6Header->ip6_src);
     }
+    
+    if (inet_pton(af, [srcAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {
+        
+        _srcAddress = srcAddress;
+    }
+    
+    if (af == AF_INET) {
+        
+        [self checksumIPv4];
+    }
+    
     OSSpinLockUnlock(&_lock);
 }
 
@@ -151,19 +169,21 @@
     
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
+    
+    [_ipMPacket replaceBytesInRange:NSMakeRange(_ipHeaderLength, (_ipMPacket.length - _ipHeaderLength)) withBytes:payload.bytes length:payload.length];
+    
     if (af == AF_INET) {
 
-        [self repareMutable];
         
-        [_ipMPacket replaceBytesInRange:NSMakeRange(_ipHeaderLength, (_ipMPacket.length - _ipHeaderLength)) withBytes:payload.bytes length:payload.length];
-        
-        _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
         _ipHeader->ip_len = htons(_ipMPacket.length);
         
         [self checksumIPv4];
         
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        _ip6Header->ip6_plen = htons(_ipMPacket.length);
     }
     OSSpinLockUnlock(&_lock);
  
@@ -176,7 +196,9 @@
     if (!_ipMPacket) {
         _ipMPacket = [_ipPacket mutableCopy];
         _ipPacket = nil;
+        
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
     }
 }
 
@@ -313,7 +335,6 @@
 
 }
 
-//TODO: checksum calculation was not tested.
 - (void)checksumIPv4 {
 
     _ipHeader->ip_sum = 0;
