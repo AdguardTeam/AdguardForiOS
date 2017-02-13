@@ -21,6 +21,7 @@
 @import Darwin.libkern;
 
 #include <netinet/ip.h>
+#include <netinet/ip6.h>
 #include <arpa/inet.h>
 
 /*
@@ -55,11 +56,16 @@ uint16_t checksum_finalize(uint32_t sum);
 @interface APIPPacket : NSObject {
 
     @protected
+    
+    struct iphdr *_ipHeader;
+    struct ip6_hdr *_ip6Header;
+
+    
     NSString *_dstAddress;
     NSString *_srcAddress;
     NSData *_ipPacket;
     NSMutableData *_ipMPacket;
-    struct iphdr *_ipHeader;
+    
     NSUInteger _ipHeaderLength;
     
     OSSpinLock _lock;

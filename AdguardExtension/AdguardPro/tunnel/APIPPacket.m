@@ -206,7 +206,58 @@
         return YES;
     }
     else if (aFamily == AF_INET6){
-        //TODO: Not implemented yet
+        
+        _ipPacket = data;
+        
+        _ip6Header = (struct ip6_hdr *)_ipPacket.bytes;
+        
+        u_int8_t next = _ip6Header->ip6_nxt;
+        struct ip6_ext *extTest = (struct ip6_ext *)(_ip6Header + sizeof(_ip6Header));
+        u_int64_t extLen = 0;
+        for (u_int8_t i = 8; i > 0; i--) {
+        
+            switch (next) {
+                case IPPROTO_HOPOPTS:
+                case IPPROTO_DSTOPTS:
+                case IPPROTO_ROUTING:
+                case IPPROTO_FRAGMENT:
+                case IPPROTO_AH:
+                case IPPROTO_ESP:
+
+                    extLen = extTest->ip6e_len * 8 + 8; // 64 bit + first 8 bytes
+                    extTest = (struct ip6_ext *)(extTest + extLen);
+                    next = extTest->ip6e_nxt;
+                    break;
+                    
+                default:
+                    i = 0;
+                    
+                    break;
+            }
+        }
+        
+        _ipHeaderLength = (void *)extTest - (void *)_ip6Header;
+        
+        _protocol = next;
+        
+#if DEBUG
+        _ipId = [NSString stringWithFormat:@"%d",_ip6Header->ip6_flow];
+#endif
+        char addr[INET6_ADDRSTRLEN];
+
+        if (inet_ntop(AF_INET6, &(_ip6Header->ip6_dst),
+                      addr, INET6_ADDRSTRLEN) == NULL) {
+            return NO;
+        }
+        _dstAddress = [NSString stringWithUTF8String:addr];
+        
+        if (inet_ntop(AF_INET6, &(_ip6Header->ip6_src),
+                      addr, INET6_ADDRSTRLEN) == NULL) {
+            return NO;
+        }
+        _srcAddress = [NSString stringWithUTF8String:addr];
+        
+        return YES;
     }
     
     return NO;
@@ -241,7 +292,21 @@
         return YES;
     }
     else if (aFamily == AF_INET6){
-        //TODO: Not implemented yet
+        
+        _ipMPacket = [NSMutableData dataWithLength:40];
+        _ipHeaderLength = 40;
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        
+        _ip6Header->ip6_vfc = IPV6_VERSION;
+        
+#if DEBUG
+        _ipId = @"0";
+#endif
+        _ip6Header->ip6_plen = htons(_ipHeaderLength);
+        _ip6Header->ip6_hops = 0xff;
+        _ip6Header->ip6_nxt = protocol;
+        
+        return YES;
     }
     
     return NO;
