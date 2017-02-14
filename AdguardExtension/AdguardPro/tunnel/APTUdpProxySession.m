@@ -287,12 +287,10 @@
         
         NSMutableArray *protocols = [NSMutableArray new];
         
-        //TODO: ONLY IPv4 is supported
-        
         NSArray *ipPackets = [sSelf ipPacketsWithDatagrams:datagrams];
         for (int i = 0; i < ipPackets.count; i++) {
             
-            [protocols addObject:@(AF_INET)];
+            [protocols addObject:_basePacket.aFamily];
         }
         
         //write data from remote endpoint into local TUN interface
@@ -613,12 +611,10 @@
     
     NSMutableArray *protocols = [NSMutableArray new];
     
-    //TODO: ONLY IPv4 is supported
-    
     NSArray *ipPackets = [self ipPacketsWithDatagrams:datagrams];
     for (int i = 0; i < ipPackets.count; i++) {
         
-        [protocols addObject:@(AF_INET)];
+        [protocols addObject:_basePacket.aFamily];
     }
     
     //write data from remote endpoint into local TUN interface

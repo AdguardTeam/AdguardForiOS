@@ -19,8 +19,6 @@
 
 #import "APIPPacket.h"
 
-#define PACKED_STRUCT_DEF struct __attribute__((packed))
-
 @implementation APIPPacket
 
 - (id)init{
@@ -37,6 +35,9 @@
     if (self) {
         
         _lock = OS_SPINLOCK_INIT;
+        
+        _ipHeader = NULL;
+        _ip6Header = NULL;
         
         if(![self parseData:data af:af])
             return nil;
@@ -56,6 +57,9 @@
         
         _lock = OS_SPINLOCK_INIT;
 
+        _ipHeader = NULL;
+        _ip6Header = NULL;
+        
         if(![self createWithAF:af protocol:protocol])
             return nil;
     }
@@ -64,6 +68,11 @@
     
 }
 
+- (void)dealloc {
+    
+    _ip6Header = NULL;
+    _ipHeader = NULL;
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
@@ -110,6 +119,8 @@
 
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
     
     void *dest;
     if (af == AF_INET) {
@@ -177,13 +188,15 @@
     if (af == AF_INET) {
 
         
+        _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
         _ipHeader->ip_len = htons(_ipMPacket.length);
         
         [self checksumIPv4];
         
     } else if (af == AF_INET6) {
         
-        _ip6Header->ip6_plen = htons(_ipMPacket.length);
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        _ip6Header->ip6_plen = htons(_ipMPacket.length - APT_IPV6_FIXED_HEADER_LENGTH);
     }
     OSSpinLockUnlock(&_lock);
  
@@ -197,8 +210,12 @@
         _ipMPacket = [_ipPacket mutableCopy];
         _ipPacket = nil;
         
-        _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
-        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        if (_aFamily.intValue == AF_INET) {
+            _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
+        }
+        else { // AF_INET6
+            _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        }
     }
 }
 
@@ -234,9 +251,9 @@
         _ip6Header = (struct ip6_hdr *)_ipPacket.bytes;
         
         u_int8_t next = _ip6Header->ip6_nxt;
-        struct ip6_ext *extTest = (struct ip6_ext *)(_ip6Header + sizeof(_ip6Header));
+        struct ip6_ext *extTest = (struct ip6_ext *)((void *)_ip6Header + APT_IPV6_FIXED_HEADER_LENGTH);
         u_int64_t extLen = 0;
-        for (u_int8_t i = 8; i > 0; i--) {
+        for (int i = 10; i > 0; i--) {
         
             switch (next) {
                 case IPPROTO_HOPOPTS:
@@ -267,6 +284,10 @@
 #endif
         char addr[INET6_ADDRSTRLEN];
 
+        // Note that routing header extention is ignored!
+        // And destionation address may be wrong.
+        // https://tools.ietf.org/html/rfc2460#section-4.4
+        
         if (inet_ntop(AF_INET6, &(_ip6Header->ip6_dst),
                       addr, INET6_ADDRSTRLEN) == NULL) {
             return NO;
@@ -288,13 +309,14 @@
 - (BOOL)createWithAF:(NSNumber *)af protocol:(int)protocol{
     
     _aFamily = af;
+    _protocol = protocol;
     
     int aFamily = [af intValue];
     
     if (aFamily == AF_INET) {
         
-        _ipMPacket = [NSMutableData dataWithLength:20];
-        _ipHeaderLength = 20;
+        _ipMPacket = [NSMutableData dataWithLength:APT_IPV4_HEADER_LENGTH];
+        _ipHeaderLength = APT_IPV4_HEADER_LENGTH;
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
         
         _ipHeader->ip_v = IPVERSION;
@@ -315,8 +337,8 @@
     }
     else if (aFamily == AF_INET6){
         
-        _ipMPacket = [NSMutableData dataWithLength:40];
-        _ipHeaderLength = 40;
+        _ipMPacket = [NSMutableData dataWithLength:APT_IPV6_FIXED_HEADER_LENGTH];
+        _ipHeaderLength = APT_IPV6_FIXED_HEADER_LENGTH;
         _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
         
         _ip6Header->ip6_vfc = IPV6_VERSION;
@@ -324,8 +346,8 @@
 #if DEBUG
         _ipId = @"0";
 #endif
-        _ip6Header->ip6_plen = htons(_ipHeaderLength);
-        _ip6Header->ip6_hops = 0xff;
+        _ip6Header->ip6_plen = 0;
+        _ip6Header->ip6_hops = 64;
         _ip6Header->ip6_nxt = protocol;
         
         return YES;

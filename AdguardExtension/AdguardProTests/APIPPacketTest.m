@@ -35,20 +35,6 @@
     [super tearDown];
 }
 
-- (void)testUnsupportIPv6 {
-    
-    NSString *packetData = @"96,0,0,0,0,24,58,255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,255,2,0,0,0,0,0,0,0,0,0,1,255,0,170,170,135,0,38,210,0,0,0,0,254,128,0,0,0,0,0,0,0,0,0,0,0,0,170,170";
-    
-    
-    NSData *packet = [self packetFromDumpString:packetData];
-    
-    XCTAssert(packet.length == 64);
-    
-    APIPPacket *ipPacket = [[APIPPacket alloc] initWithData:packet af:@(AF_INET6)];
-    
-    XCTAssertNil(ipPacket);
-}
-
 - (void)testPacket {
     
     NSString *packetData = @"69,0,0,63,178,41,0,0,255,17,38,177,169,254,254,2,185,53,129,156,243,247,0,53,0,43,162,8,200,204,1,0,0,1,0,0,0,0,0,0,7,103,117,122,122,111,110,105,5,97,112,112,108,101,3,99,111,109,0,0,1,0,1";
