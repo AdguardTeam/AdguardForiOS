@@ -49,6 +49,28 @@
     XCTAssertNotNil(ipPacket);
     XCTAssert(ipPacket.protocol == IPPROTO_UDP);
 }
+
+- (void)testCheckV6Packet {
+
+NSString *packetString = @"60 00 00 00 00 18 3A FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 02 00 00 00 00 00 00 00 00 00 01 FF 00 AA AA 87 00 26 D2 00 00 00 00 FE 80 00 00 00 00 00 00 00 00 00 00 00 00 AA AA";
+    
+    packetString = [packetString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSMutableData *packetData= [NSMutableData new];
+    unsigned char whole_byte;
+    char byte_chars[3] = {'\0','\0','\0'};
+    int i;
+    for (i=0; i < [packetString length]/2; i++) {
+        byte_chars[0] = [packetString characterAtIndex:i*2];
+        byte_chars[1] = [packetString characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [packetData appendBytes:&whole_byte length:1];
+    }
+    
+    APIPPacket *packet = [[APIPPacket alloc] initWithData:packetData af:@(AF_INET6)];
+    
+    NSLog(@"src: %@ dst: %@", packet.srcAddress, packet.dstAddress);
+}
+    
 - (void)testChangePacket {
     
     NSString *packetData = @"69,0,0,99,195,22,0,0,255,17,21,160,169,254,254,2,185,53,129,156,250,183,0,53,0,79,230,247,70,214,1,0,0,1,0,0,0,0,0,0,27,112,51,54,45,107,101,121,118,97,108,117,101,115,101,114,118,105,99,101,45,99,117,114,114,101,110,116,4,101,100,103,101,6,105,99,108,111,117,100,9,97,112,112,108,101,45,100,110,115,3,110,101,116,0,0,1,0,1";
