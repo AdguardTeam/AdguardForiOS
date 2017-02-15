@@ -43,10 +43,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 #define V_REMOTE_ADDRESS             @"127.0.0.1"
 
-#define V_INTERFACE_IPV4_ADDRESS     @"169.254.254.2"
+#define V_INTERFACE_IPV4_ADDRESS     @"172.16.209.2"
 #define V_INTERFACE_IPV4_MASK        @"255.255.255.255"
 
-#define V_INTERFACE_IPV6_ADDRESS     @"fe80::aaaa"
+#define V_INTERFACE_IPV6_ADDRESS     @"fd12:1:1:1::2"
 #define V_INTERFACE_IPV6_MASK        @(128)
 
 /////////////////////////////////////////////////////////////////////
@@ -164,20 +164,26 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                             initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
                             subnetMasks:@[V_INTERFACE_IPV4_MASK]];
     
+    NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
+    
     if (_isRemoteServer) {
 
         // route for ipv4, which includes dns addresses
-        NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
         for (NSString *item in _currentServer.ipv4Addresses) {
             [routers addObject:[[NEIPv4Route alloc]
                                 initWithDestinationAddress:item
                                 subnetMask:V_INTERFACE_IPV4_MASK]];
         }
-        
-        ipv4.includedRoutes = routers;
     }
+    else {
+        // route for ipv4, which includes FAKE dns addresses
+        [routers addObject:[[NEIPv4Route alloc]
+                              initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
+                              subnetMask:V_INTERFACE_IPV4_MASK]];
+    }
+    ipv4.includedRoutes = routers;
     ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
-    
+  
     settings.IPv4Settings = ipv4;
     
     // IPv6
@@ -185,19 +191,24 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                             initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
                             networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
     
+    routers = [NSMutableArray arrayWithCapacity:2];
     if (_isRemoteServer) {
         
         // route for ipv6, which includes dns addresses
-        NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
         for (NSString *item in _currentServer.ipv6Addresses) {
             [routers addObject:[[NEIPv6Route alloc]
                                 initWithDestinationAddress:item
                                 networkPrefixLength:V_INTERFACE_IPV6_MASK]];
         }
         
-        ipv6.includedRoutes = routers;
     }
-    
+    else {
+        // route for ipv6, which includes FAKE dns addresses
+        [routers addObject:[[NEIPv6Route alloc]
+                              initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
+                              networkPrefixLength:V_INTERFACE_IPV6_MASK]];
+    }
+    ipv6.includedRoutes = routers;
     ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
     
     settings.IPv6Settings = ipv6;
@@ -214,7 +225,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
     }
     else {
-        
         [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
         [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
     }

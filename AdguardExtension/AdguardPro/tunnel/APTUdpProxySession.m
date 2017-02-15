@@ -70,26 +70,24 @@
 
     self = [super init];
     if (self) {
-
-        if ([self checkHost:udpPacket.dstAddress]) {
-            
-            _dnsLoggingEnabled = NO;
-            _dnsRecords = [NSMutableArray new];
-            _dnsRecordsSet = [NSMutableSet new];
-
-            _basePacket = udpPacket;
-            _key = [NSString stringWithFormat:@"%@:%@|%@:%@", udpPacket.dstAddress, udpPacket.dstPort, udpPacket.srcAddress, udpPacket.srcPort];
-
-            _reversBasePacket = [APUDPPacket new];
-            _reversBasePacket.dstAddress = _basePacket.srcAddress;
-            _reversBasePacket.srcAddress = _basePacket.dstAddress;
-            _reversBasePacket.dstPort = _basePacket.srcPort;
-            _reversBasePacket.srcPort = _basePacket.dstPort;
-
-            _delegate = delegate;
-
-            return self;
-        }
+        
+        
+        _dnsLoggingEnabled = NO;
+        _dnsRecords = [NSMutableArray new];
+        _dnsRecordsSet = [NSMutableSet new];
+        
+        _basePacket = udpPacket;
+        _key = [NSString stringWithFormat:@"%@:%@|%@:%@", udpPacket.dstAddress, udpPacket.dstPort, udpPacket.srcAddress, udpPacket.srcPort];
+        
+        _reversBasePacket = [[APUDPPacket alloc] initWithAF:udpPacket.aFamily];
+        _reversBasePacket.dstAddress = _basePacket.srcAddress;
+        _reversBasePacket.srcAddress = _basePacket.dstAddress;
+        _reversBasePacket.dstPort = _basePacket.srcPort;
+        _reversBasePacket.srcPort = _basePacket.dstPort;
+        
+        _delegate = delegate;
+        
+        return self;
     }
 
     return nil;
@@ -245,13 +243,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Method (Private)
 
-- (BOOL)checkHost:(NSString *)host {
-
-    // Check that this is IPv4 address
-    struct in_addr addr;
-    return (inet_pton(AF_INET, [host cStringUsingEncoding:NSUTF8StringEncoding], &(addr)) == 1);
-}
-
 - (void)setSessionReaders:(NWUDPSession *)session {
     
     __weak __typeof__(self) wSelf = self;
@@ -287,12 +278,10 @@
         
         NSMutableArray *protocols = [NSMutableArray new];
         
-        //TODO: ONLY IPv4 is supported
-        
         NSArray *ipPackets = [sSelf ipPacketsWithDatagrams:datagrams];
         for (int i = 0; i < ipPackets.count; i++) {
             
-            [protocols addObject:@(AF_INET)];
+            [protocols addObject:_basePacket.aFamily];
         }
         
         //write data from remote endpoint into local TUN interface
@@ -613,12 +602,10 @@
     
     NSMutableArray *protocols = [NSMutableArray new];
     
-    //TODO: ONLY IPv4 is supported
-    
     NSArray *ipPackets = [self ipPacketsWithDatagrams:datagrams];
     for (int i = 0; i < ipPackets.count; i++) {
         
-        [protocols addObject:@(AF_INET)];
+        [protocols addObject:_basePacket.aFamily];
     }
     
     //write data from remote endpoint into local TUN interface
@@ -663,11 +650,11 @@
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    //#if DEBUG
-    //            DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], dstHost, dstPort, (sb.length ? sb : @" None."));
-    //#else
+    #if DEBUG
+                DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort,dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    #else
     DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
-    //#endif
+    #endif
 }
 
 - (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets session:(NWUDPSession *)session{
@@ -692,11 +679,11 @@
         BOOL localFiltering = _delegate.provider.localFiltering;
         
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        //#if DEBUG
-        //            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        //#else
+        #if DEBUG
+                    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+        #else
         DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        //#endif
+        #endif
         
         APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
         
