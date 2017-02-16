@@ -181,45 +181,69 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    [self setupDomainControllCell];
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+    
+        [self setupDomainControllCell];
+    });
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
 - (IBAction)clickDomainControll:(id)sender {
 
-    if (_domainControllCellType == DomainControllNone) {
+    if (_domainControllCellType == DomainControllNone || [NSString isNullOrEmpty:_domainName]) {
         return;
     }
     
-    @autoreleasepool {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         
-        if (_domainControllCellType == DomainControllAddToWhitelist) {
+        @autoreleasepool {
             
-            APSharedResources.whitelistDomains = [APSharedResources.whitelistDomains arrayByAddingObject:_domainName];
-            [self enableLocalFilteringIfNeedIt];
+            if (_domainControllCellType == DomainControllAddToWhitelist) {
+                
+                NSArray *domainList = APSharedResources.whitelistDomains;
+                if (domainList) {
+                    APSharedResources.whitelistDomains = [domainList arrayByAddingObject:_domainName];
+                }
+                else {
+                    APSharedResources.whitelistDomains = @[_domainName];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self enableLocalFilteringIfNeedIt];
+                });
+            }
+            else if (_domainControllCellType == DomainControllAddToBlacklist) {
+                
+                NSArray *domainList = APSharedResources.blacklistDomains;
+                if (domainList) {
+                    APSharedResources.blacklistDomains = [domainList arrayByAddingObject:_domainName];
+                }
+                else {
+                    APSharedResources.blacklistDomains = @[_domainName];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self enableLocalFilteringIfNeedIt];
+                });
+            }
+            else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
+                
+                NSMutableArray *domains = [APSharedResources.whitelistDomains mutableCopy];
+                [domains removeObject:_domainName];
+                APSharedResources.whitelistDomains = [domains copy];
+            }
+            else if (_domainControllCellType == DomainControllRemoveFromBlacklist) {
+                
+                NSMutableArray *domains = [APSharedResources.blacklistDomains mutableCopy];
+                [domains removeObject:_domainName];
+                APSharedResources.blacklistDomains = [domains copy];
+            }
         }
-        else if (_domainControllCellType == DomainControllAddToBlacklist) {
-            
-            APSharedResources.blacklistDomains = [APSharedResources.blacklistDomains arrayByAddingObject:_domainName];
-            [self enableLocalFilteringIfNeedIt];
-        }
-        else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
-            
-            NSMutableArray *domains = [APSharedResources.whitelistDomains mutableCopy];
-            [domains removeObject:_domainName];
-            APSharedResources.whitelistDomains = [domains copy];
-        }
-        else if (_domainControllCellType == DomainControllRemoveFromBlacklist) {
-            
-            NSMutableArray *domains = [APSharedResources.blacklistDomains mutableCopy];
-            [domains removeObject:_domainName];
-            APSharedResources.blacklistDomains = [domains copy];
-        }
-    }
-    
-    [[APVPNManager singleton] sendReloadSystemWideDomainLists];
-    [self setupDomainControllCell];
+        
+        [[APVPNManager singleton] sendReloadSystemWideDomainLists];
+        [self setupDomainControllCell];
+    });
 }
 
 - (IBAction)longPressOnName:(id)sender {
@@ -250,10 +274,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         NSArray *domainslist = APSharedResources.whitelistDomains;
         
+        NSString *labelText = [NSString new];
+        
         // We check on equal
         if ([domainslist containsObject:_domainName]) {
             
-            self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+             labelText = NSLocalizedString(@"Remove from Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
             _domainControllCellType = DomainControllRemoveFromWhitelist;
         }
         else {
@@ -261,24 +287,27 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             domainslist = APSharedResources.blacklistDomains;
             if ([domainslist containsObject:_domainName]) {
                 
-                self.domainControllCell.textLabel.text = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                labelText = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
                 _domainControllCellType = DomainControllRemoveFromBlacklist;
             }
             else {
                 
                 if (self.logRecord.preferredResponse.blocked) {
-                    self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                    labelText = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
                     _domainControllCellType = DomainControllAddToWhitelist;
                 }
                 else {
-                    self.domainControllCell.textLabel.text = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
+                    labelText = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Detail. Text on button");
                     _domainControllCellType = DomainControllAddToBlacklist;
                 }
             }
             
         }
-        
-        [self reloadDataAnimated:YES];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            self.domainControllCell.textLabel.text = labelText;
+            [self reloadDataAnimated:YES];
+        });
     }
 }
 
@@ -290,7 +319,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
                                                                    message:NSLocalizedString(@"Blacklist or whitelist work only if you enable system-wide ad blocking.", @"(APUIDnsRequestDetail) PRO version. DNS request log. Message in the alert action when user attempts to add domain in black/white list.")
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"(APUIDnsRequestDetail) PRO version. DNS request log. Button text for enabling system-wide filtering.")
                                                       style:UIAlertActionStyleDefault
@@ -308,7 +337,13 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     [sheet addAction:action];
     
     [self presentViewController:sheet animated:YES completion:nil];
-
+    
+    UIPopoverPresentationController *popover = sheet.popoverPresentationController;
+    if (popover) {
+        
+        popover.sourceView = self.domainControllCell;
+        popover.sourceRect = self.domainControllCell.bounds;
+    }
 }
 
 - (void)attachToNotifications{

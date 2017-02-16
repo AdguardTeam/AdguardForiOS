@@ -218,6 +218,17 @@
     [self.statusSwitch setOn:manager.localFiltering animated:YES];
     [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
     
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        
+        self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.blacklistDomains.count];
+        self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.whitelistDomains.count];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
+    });
+    
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
