@@ -42,7 +42,7 @@
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
                              initWithTitle:NSLocalizedString(@"Cancel",
-                                                             @"(APUIAdguardDNSController) PRO version. Title of the 'Back' button on cancel operation.")
+                                                             @"(APUIAdguardDNSController) PRO version. Text on the button that cancels an operation.")
                                                              style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self attachToNotifications];
@@ -103,7 +103,7 @@
         
         domainList.navigationItem.title = toWhitelist
         ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
-        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide blacklist screen.");
+        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
         domainList.done = ^BOOL(NSString *text) {
@@ -217,6 +217,17 @@
     
     [self.statusSwitch setOn:manager.localFiltering animated:YES];
     [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        
+        self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.blacklistDomains.count];
+        self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.whitelistDomains.count];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
+    });
     
     if (manager.lastError) {
         [ACSSystemUtils

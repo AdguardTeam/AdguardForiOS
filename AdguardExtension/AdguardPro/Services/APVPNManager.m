@@ -445,7 +445,7 @@ static APVPNManager *singletonVPNManager;
                               code:APVPN_MANAGER_ERROR_INSTALL_FILTER
                               userInfo:@{
                                          NSLocalizedDescriptionKey :
-                                             NSLocalizedString(@"Unable to install filter for local filtering of the DNS. Contact to support team.",
+                                             NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
                                                                @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
                                          }];
                 DDLogErrorTrace();
@@ -583,7 +583,7 @@ static APVPNManager *singletonVPNManager;
                       code:APVPN_MANAGER_ERROR_BADCONFIGURATION
                       userInfo:@{
                                  NSLocalizedDescriptionKey :
-                                     NSLocalizedString(@"VPN will not be enabled because you have turned off the filtering locally, and are not using spoofing DNS server.",
+                                     NSLocalizedString(@"VPN can not be enabled because you have turned off the System-wide ad blocking and are not using spoofing DNS server.",
                                                        @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
                                  }];
 
@@ -836,16 +836,16 @@ static APVPNManager *singletonVPNManager;
     
     APDnsServerObject *server = _remoteDnsServers[0];
     server.serverName = NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration");
-    server.serverDescription = NSLocalizedString(@"used default system DNS settings", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration");
+    server.serverDescription = NSLocalizedString(@"default system DNS settings are used", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration");
     
     
     server = _remoteDnsServers[1];
-    server.serverName = NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses DNS Filtering, where only 'regular' ads will be blocked");
-    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is enabled and iOS uses DNS Filtering, where only 'regular' ads will be blocked");
+    server.serverName = NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.");
+    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.");
     
     server = _remoteDnsServers[2];
-    server.serverName = NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS");
-    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. It is description of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS");
+    server.serverName = NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.");
+    server.serverDescription = NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.");
 
 }
 
