@@ -587,7 +587,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"To make system-wide filtering, app establishes a fake VPN connection. Please note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"The app establishes a fake VPN connection, which is required in order to use System-wide Ad Blocking or custom DNS server. Note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -604,8 +604,8 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     self.proSystemWideCell.detailTextLabel.text = manager.localFiltering
-    ? NSLocalizedString(@"Enabled", @"(APUIAdguardDNSController) PRO version. On the main screen. Status of the System-wide ads blocking feature. When it is enabled.")
-    : NSLocalizedString(@"Disabled", @"(APUIAdguardDNSController) PRO version. On the main screen. Status of the System-wide ads blocking feature. When it is disabled.");
+    ? NSLocalizedString(@"Enabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is enabled.")
+    : NSLocalizedString(@"Disabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is disabled.");
     
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
@@ -616,15 +616,15 @@
         case APVpnConnectionStatusReconnecting:
         case APVpnConnectionStatusConnecting:
         case APVpnConnectionStatusDisconnecting:
-            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is 'In Progress'.");
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is 'In Progress'.");
             break;
             
         case APVpnConnectionStatusConnected:
-            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Connected.");
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Connected",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is Connected.");
             break;
             
         default:
-            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(APUIAdguardDNSController) PRO version. On the DNS Filtering settings screen. Current status title. When status is Not Connected.");
+            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Not Connected",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is Not Connected.");
             break;
     }
     
