@@ -32,7 +32,7 @@
 
 
 #define VPN_NAME                            @" VPN"
-#define MAX_COUNT_OF_REMOTE_DNS_SERVERS     10
+#define MAX_COUNT_OF_REMOTE_DNS_SERVERS     16
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
@@ -68,6 +68,9 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     NSError     *_standartError;
     
     BOOL _dnsRequestsLogging;
+    
+    NSMutableArray <APDnsServerObject *> *_predefinedRemoteDnsServers;
+    NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
 }
 
 static APVPNManager *singletonVPNManager;
@@ -313,8 +316,9 @@ static APVPNManager *singletonVPNManager;
         dispatch_sync(workingQueue, ^{
            
             _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:server];
+            [_customRemoteDnsServers addObject:server];
             
-            [self saveRemoteDnsServersToDefaults];
+            [self saveCustomRemoteDnsServersToDefaults];
         });
         
         return YES;
@@ -334,11 +338,11 @@ static APVPNManager *singletonVPNManager;
         // async because method have not returns value
         dispatch_sync(workingQueue, ^{
             
-            NSMutableArray *servers = [_remoteDnsServers mutableCopy];
-            [servers removeObject:server];
-            _remoteDnsServers = [servers copy];
+            [_customRemoteDnsServers removeObject:server];
+            _remoteDnsServers = [_predefinedRemoteDnsServers copy];
+            _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
             
-            [self saveRemoteDnsServersToDefaults];
+            [self saveCustomRemoteDnsServersToDefaults];
         });
         
         return YES;
@@ -358,17 +362,15 @@ static APVPNManager *singletonVPNManager;
        __block BOOL result = NO;
         dispatch_sync(workingQueue, ^{
             
-            NSUInteger index = [_remoteDnsServers indexOfObject:server];
-            APDnsServerObject *remoteDnsServer = _remoteDnsServers[index];
+            NSUInteger index = [_customRemoteDnsServers indexOfObject:server];
+            APDnsServerObject *remoteDnsServer = _customRemoteDnsServers[index];
             if (remoteDnsServer.editable) {
         
-                NSMutableArray *servers = [[_remoteDnsServers subarrayWithRange:NSMakeRange(0, index)] mutableCopy];
-                [servers addObject:server];
-                [servers addObjectsFromArray:
-                 [_remoteDnsServers subarrayWithRange:NSMakeRange((index + 1), (_remoteDnsServers.count - index - 1))]];
-                _remoteDnsServers = [servers copy];
+                [_customRemoteDnsServers replaceObjectAtIndex:index withObject:server];
+                _remoteDnsServers = [_predefinedRemoteDnsServers copy];
+                _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
                 
-                [self saveRemoteDnsServersToDefaults];
+                [self saveCustomRemoteDnsServersToDefaults];
                 
                 result = YES;
             }
@@ -801,52 +803,64 @@ static APVPNManager *singletonVPNManager;
 
 - (void)initDefinitions{
     
-    [self loadRemoteDnsServersFromDefaults];
-
-    if (_remoteDnsServers == nil) {
-        
         // Create default Adgaurd servers
         
-        NSMutableArray *servers = [NSMutableArray arrayWithCapacity:3];
-        APDnsServerObject *server = [[APDnsServerObject alloc] initWithName: @"None"
-                                                                description: @"None"
-                                                                ipAddresses:@"127.0.0.1, ::1"];
-        server.tag = APDnsServerTagLocal;
-        server.editable = NO;
-        
-        [servers addObject:server];
+    _predefinedRemoteDnsServers = [NSMutableArray arrayWithCapacity:3];
+    APDnsServerObject *server = [[APDnsServerObject alloc]
+                                 initWithUUID: @"AGDEF00"
+                                 name: NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration")
+                                 description: NSLocalizedString(@"default system DNS settings are used", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration")
+                                 ipAddresses:@"127.0.0.1, ::1"];
+    server.tag = APDnsServerTagLocal;
+    server.editable = NO;
+    
+    [_predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF01"
+              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
+              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
+              ipAddresses:@"176.103.130.130, 176.103.130.131"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF02"
+              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
+              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
+              ipAddresses:@"176.103.130.132, 176.103.130.134"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF03"
+              name: NSLocalizedString(@"OpenDNS Home", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Home.")
+              description: NSLocalizedString(@"custom filtering and identity theft protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Home' mode.")
+              ipAddresses:@"208.67.222.222, 208.67.220.220"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
 
-        server = [[APDnsServerObject alloc] initWithName: @"Adguard Default"
-                                             description: @"Adguard Default"
-                                             ipAddresses:@"176.103.130.130, 176.103.130.131"];
-        server.editable = NO;
-        [servers addObject:server];
-
-        server = [[APDnsServerObject alloc] initWithName: @"Adguard Family Protection"
-                                             description: @"Adguard Family Protection"
-                                             ipAddresses:@"176.103.130.132, 176.103.130.134"];
-        server.editable = NO;
-        [servers addObject:server];
-        _remoteDnsServers = [servers copy];
-        
-        [self saveRemoteDnsServersToDefaults];
-    }
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF04"
+              name: NSLocalizedString(@"OpenDNS Family Shield", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Family Shield.")
+              description: NSLocalizedString(@"preconfigured to block adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Family Shield' mode.")
+              ipAddresses:@"208.67.222.123, 208.67.220.123"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
     
-    //Changes names and descriptions for predefined servers
-    
-    APDnsServerObject *server = _remoteDnsServers[0];
-    server.serverName = NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration");
-    server.serverDescription = NSLocalizedString(@"default system DNS settings are used", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration");
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF05"
+              name: NSLocalizedString(@"Google Public DNS", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Google Public DNS.")
+              description: NSLocalizedString(@"global dns resolution service prodived by Google", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Google Public DNS' mode.")
+              ipAddresses:@"8.8.8.8, 8.8.4.4, 2001:4860:4860::8888, 2001:4860:4860::8844"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
     
     
-    server = _remoteDnsServers[1];
-    server.serverName = NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.");
-    server.serverDescription = NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.");
+    _remoteDnsServers = [_predefinedRemoteDnsServers copy];
     
-    server = _remoteDnsServers[2];
-    server.serverName = NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.");
-    server.serverDescription = NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.");
-
+    [self loadCustomRemoteDnsServersFromDefaults];
+    _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
 }
 
 - (void)sendNotification{
@@ -860,22 +874,25 @@ static APVPNManager *singletonVPNManager;
 
 }
 
-- (void)saveRemoteDnsServersToDefaults {
+- (void)saveCustomRemoteDnsServersToDefaults {
     
-    NSData *dataForSave = [NSKeyedArchiver archivedDataWithRootObject:_remoteDnsServers];
+    NSData *dataForSave = [NSKeyedArchiver archivedDataWithRootObject:_customRemoteDnsServers];
     
     if (dataForSave) {
-        [[AESharedResources sharedDefaults] setObject:dataForSave forKey:APDefaultsRemoteDnsServers];
+        [[AESharedResources sharedDefaults] setObject:dataForSave forKey:APDefaultsCustomRemoteDnsServers];
         [[AESharedResources sharedDefaults] synchronize];
     }
 }
 
-- (void)loadRemoteDnsServersFromDefaults {
+- (void)loadCustomRemoteDnsServersFromDefaults {
  
-    NSData *loadedData = [[AESharedResources sharedDefaults] objectForKey:APDefaultsRemoteDnsServers];
+    NSData *loadedData = [[AESharedResources sharedDefaults] objectForKey:APDefaultsCustomRemoteDnsServers];
     
     if (loadedData) {
-        _remoteDnsServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
+        _customRemoteDnsServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
+    }
+    else {
+        _customRemoteDnsServers = [NSMutableArray arrayWithCapacity:MAX_COUNT_OF_REMOTE_DNS_SERVERS];
     }
 }
 

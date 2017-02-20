@@ -35,9 +35,10 @@ extern NSString * _Nonnull APDnsServerTagLocal;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-- (id _Nullable)initWithName:(NSString * _Nonnull)serverName
-       description:(NSString * _Nonnull)serverDescription
-       ipAddresses:(NSString * _Nonnull)ipAddresses;
+- (id _Nullable)initWithUUID:(NSString * _Nonnull)uuid
+                        name:(NSString * _Nonnull)serverName
+                 description:(NSString * _Nonnull)serverDescription
+                 ipAddresses:(NSString * _Nonnull)ipAddresses;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
