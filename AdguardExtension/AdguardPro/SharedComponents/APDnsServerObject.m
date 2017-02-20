@@ -67,11 +67,12 @@ static NSMutableCharacterSet *delimCharSet;
     return self;
 }
 
-- (id)initWithName:(NSString *)serverName
+- (id)initWithUUID:(NSString *)uuid
+              name:(NSString *)serverName
        description:(NSString *)serverDescription
        ipAddresses:(NSString *)ipAddresses {
     
-    if (! (serverName && serverDescription && ipAddresses) ) {
+    if (! (uuid && serverName && serverDescription && ipAddresses) ) {
         
         return nil;
     }
@@ -79,6 +80,7 @@ static NSMutableCharacterSet *delimCharSet;
     self = [self init]; // [super _init_];
     if (self)
     {
+        _uuid = uuid;
         _serverName = serverName;
         _serverDescription = serverDescription;
         
