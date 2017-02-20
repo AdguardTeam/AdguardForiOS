@@ -60,6 +60,9 @@
 		651628611B85ED0E003EB113 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657247D91B8318DE008430CD /* libz.dylib */; };
 		651628621B85ED26003EB113 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247F81B8338B1008430CD /* ASDFilterObjects.m */; };
 		651628631B85ED37003EB113 /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247FC1B8338BD008430CD /* ASDatabase.m */; };
+		651F5E091E25628000E22157 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
+		651F5F151E2591BC00E22157 /* ACNUrlUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */; };
+		651F5F191E25929600E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F171E25929000E22157 /* ACNUrlUtils.m */; };
 		655AACB91D3CD5A400E316EA /* ADBHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB81D3CD5A400E316EA /* ADBHelperTests.m */; };
 		655AACBF1D3CD67500E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBC1D3CD67500E316EA /* ADBTable.m */; };
 		655AACC01D3CD67500E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBE1D3CD67500E316EA /* ADBTableRow.m */; };
@@ -326,6 +329,9 @@
 		6516286A1B8607DB003EB113 /* update0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.001.sql; sourceTree = "<group>"; };
 		6516286B1B8607DB003EB113 /* update0.002.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.002.sql; sourceTree = "<group>"; };
 		6516286C1B860818003EB113 /* schema0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.001.sql; sourceTree = "<group>"; };
+		651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtilsTests.m; sourceTree = "<group>"; };
+		651F5F161E25929000E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
+		651F5F171E25929000E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		655AACB81D3CD5A400E316EA /* ADBHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBHelperTests.m; sourceTree = "<group>"; };
 		655AACBB1D3CD67500E316EA /* ADBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBTable.h; sourceTree = "<group>"; };
 		655AACBC1D3CD67500E316EA /* ADBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBTable.m; sourceTree = "<group>"; };
@@ -408,7 +414,7 @@
 		657247E61B8335A6008430CD /* simpleText.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simpleText.txt; sourceTree = "<group>"; };
 		657247EE1B83389D008430CD /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
 		657247EF1B83389D008430CD /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		657247F01B83389D008430CD /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		657247F01B83389D008430CD /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
 		657247F71B8338B1008430CD /* ASDFilterObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDFilterObjects.h; sourceTree = "<group>"; };
 		657247F81B8338B1008430CD /* ASDFilterObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDFilterObjects.m; sourceTree = "<group>"; };
 		657247FB1B8338BD008430CD /* ASDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDatabase.h; sourceTree = "<group>"; };
@@ -675,6 +681,7 @@
 				6572470E1B831570008430CD /* ACommonsTests.m */,
 				657247101B831570008430CD /* ACSSystemUtilsTest.m */,
 				65B40D4A1BDF915700A9C595 /* ACNNetworkingTests.m */,
+				651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */,
 				657247111B831570008430CD /* reservedDomains.plist */,
 				657247E01B8335A6008430CD /* Resources */,
 				657246FB1B8314AE008430CD /* Supporting Files */,
@@ -829,6 +836,8 @@
 		6572478D1B831772008430CD /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				651F5F161E25929000E22157 /* ACNUrlUtils.h */,
+				651F5F171E25929000E22157 /* ACNUrlUtils.m */,
 				65B40D411BDF90E700A9C595 /* ACNNetworking.h */,
 				65B40D421BDF90E700A9C595 /* ACNNetworking.m */,
 				657247911B831772008430CD /* ACNHttpUtils.h */,
@@ -1428,6 +1437,7 @@
 				659492341C6CC9DF00E501BA /* ACNSStringUtilsTests.m in Sources */,
 				659492361C6CC9DF00E501BA /* ACommonsTests.m in Sources */,
 				659492371C6CC9DF00E501BA /* ACSSystemUtilsTest.m in Sources */,
+				651F5F151E2591BC00E22157 /* ACNUrlUtilsTests.m in Sources */,
 				659492381C6CC9DF00E501BA /* ACNNetworkingTests.m in Sources */,
 				659491F71C6CC9CD00E501BA /* ACFFileUtils.m in Sources */,
 				659491FE1C6CC9CD00E501BA /* ACIOStream.m in Sources */,
@@ -1443,6 +1453,7 @@
 				659492081C6CC9CD00E501BA /* DDASLLogger.m in Sources */,
 				659492091C6CC9CD00E501BA /* DDFileLogger.m in Sources */,
 				6594920A1C6CC9CD00E501BA /* DDLog.m in Sources */,
+				651F5F191E25929600E22157 /* ACNUrlUtils.m in Sources */,
 				6594920B1C6CC9CD00E501BA /* DDTTYLogger.m in Sources */,
 				6594920C1C6CC9CD00E501BA /* DDContextFilterLogFormatter.m in Sources */,
 				6594920D1C6CC9CD00E501BA /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -1462,6 +1473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				651F5E091E25628000E22157 /* ACObject.m in Sources */,
 				659491B81C6CC96800E501BA /* ADLocales.m in Sources */,
 				659491B91C6CC96800E501BA /* ADLocations.m in Sources */,
 				659491BA1C6CC96800E501BA /* ADProductInfo.m in Sources */,

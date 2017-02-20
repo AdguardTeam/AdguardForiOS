@@ -26,6 +26,7 @@
 #import "APTunnelConnectionsHandler.h"
 #import "APUDPPacket.h"
 #import "PacketTunnelProvider.h"
+#import "APDnsServerObject.h"
 
 #define MAX_DATAGRAMS_RECEIVED 10
 #define TTL_SESSION 10 //seconds
@@ -69,26 +70,24 @@
 
     self = [super init];
     if (self) {
-
-        if ([self checkHost:udpPacket.dstAddress]) {
-            
-            _dnsLoggingEnabled = NO;
-            _dnsRecords = [NSMutableArray new];
-            _dnsRecordsSet = [NSMutableSet new];
-
-            _basePacket = udpPacket;
-            _key = [NSString stringWithFormat:@"%@:%@|%@:%@", udpPacket.dstAddress, udpPacket.dstPort, udpPacket.srcAddress, udpPacket.srcPort];
-
-            _reversBasePacket = [APUDPPacket new];
-            _reversBasePacket.dstAddress = _basePacket.srcAddress;
-            _reversBasePacket.srcAddress = _basePacket.dstAddress;
-            _reversBasePacket.dstPort = _basePacket.srcPort;
-            _reversBasePacket.srcPort = _basePacket.dstPort;
-
-            _delegate = delegate;
-
-            return self;
-        }
+        
+        
+        _dnsLoggingEnabled = NO;
+        _dnsRecords = [NSMutableArray new];
+        _dnsRecordsSet = [NSMutableSet new];
+        
+        _basePacket = udpPacket;
+        _key = [NSString stringWithFormat:@"%@:%@|%@:%@", udpPacket.dstAddress, udpPacket.dstPort, udpPacket.srcAddress, udpPacket.srcPort];
+        
+        _reversBasePacket = [[APUDPPacket alloc] initWithAF:udpPacket.aFamily];
+        _reversBasePacket.dstAddress = _basePacket.srcAddress;
+        _reversBasePacket.srcAddress = _basePacket.dstAddress;
+        _reversBasePacket.dstPort = _basePacket.srcPort;
+        _reversBasePacket.srcPort = _basePacket.dstPort;
+        
+        _delegate = delegate;
+        
+        return self;
     }
 
     return nil;
@@ -105,8 +104,8 @@
         _waitWrite = _closed = NO;
         
         // Create session for whitelist
-        NSString *whitelistServerIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
-        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:whitelistServerIp port:_basePacket.dstPort];
+        NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
+        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
         NWUDPSession *session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (!session) {
             
@@ -116,7 +115,13 @@
         [self setWhitelistSession:session];
         
         // Create main session
-        rEndpoint = [NWHostEndpoint endpointWithHostname:_basePacket.dstAddress port:_basePacket.dstPort];
+        
+        // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
+        if (_delegate.provider.isRemoteServer) {
+            serverIp = _basePacket.dstAddress;
+        }
+        rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
+        
         session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (session) {
             
@@ -238,13 +243,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Method (Private)
 
-- (BOOL)checkHost:(NSString *)host {
-
-    // Check that this is IPv4 address
-    struct in_addr addr;
-    return (inet_pton(AF_INET, [host cStringUsingEncoding:NSUTF8StringEncoding], &(addr)) == 1);
-}
-
 - (void)setSessionReaders:(NWUDPSession *)session {
     
     __weak __typeof__(self) wSelf = self;
@@ -280,12 +278,10 @@
         
         NSMutableArray *protocols = [NSMutableArray new];
         
-        //TODO: ONLY IPv4 is supported
-        
         NSArray *ipPackets = [sSelf ipPacketsWithDatagrams:datagrams];
         for (int i = 0; i < ipPackets.count; i++) {
             
-            [protocols addObject:@(AF_INET)];
+            [protocols addObject:_basePacket.aFamily];
         }
         
         //write data from remote endpoint into local TUN interface
@@ -541,8 +537,11 @@
                 
                 // whitelist is processed first
                 if ([self.delegate isWhitelistDomain:name]) {
-                [whitelistPackets addObject:packet];
-                whitelisted = YES;
+
+                    [whitelistPackets addObject:packet];
+                    whitelisted = YES;
+                    locLogVerboseTrace(@"Domain to whiltelist: %@", name);
+
                 }
                 else if ([self.delegate isBlacklistDomain:name]) {
                     
@@ -551,6 +550,8 @@
                     [packets removeObject:packet];
                     
                     blacklisted = YES;
+                    
+                    locLogVerboseTrace(@"Domain to blacklist: %@", name);
                 }
             }
             
@@ -601,12 +602,10 @@
     
     NSMutableArray *protocols = [NSMutableArray new];
     
-    //TODO: ONLY IPv4 is supported
-    
     NSArray *ipPackets = [self ipPacketsWithDatagrams:datagrams];
     for (int i = 0; i < ipPackets.count; i++) {
         
-        [protocols addObject:@(AF_INET)];
+        [protocols addObject:_basePacket.aFamily];
     }
     
     //write data from remote endpoint into local TUN interface
@@ -616,7 +615,10 @@
 
 - (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
     
-    APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
+    APDnsServerObject *dnsServer = _delegate.provider.currentDnsServer;
+    BOOL localFiltering = _delegate.provider.localFiltering;
+    
+    APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
     record.requests = datagram.requests;
     
     
@@ -648,11 +650,11 @@
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    //#if DEBUG
-    //            DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %d to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], dstHost, dstPort, (sb.length ? sb : @" None."));
-    //#else
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %d to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], dstHost, dstPort, (sb.length ? sb : @" None."));
-    //#endif
+    #if DEBUG
+                DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort,dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    #else
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    #endif
 }
 
 - (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets session:(NWUDPSession *)session{
@@ -673,14 +675,17 @@
             [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
         }
         
-        NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        //#if DEBUG
-        //            DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        //#else
-        DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %d from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, [_delegate.provider vpnMode], endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        //#endif
+        APDnsServerObject *dnsServer = _delegate.provider.currentDnsServer;
+        BOOL localFiltering = _delegate.provider.localFiltering;
         
-        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort vpnMode:@([_delegate.provider vpnMode])];
+        NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
+        #if DEBUG
+                    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+        #else
+        DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+        #endif
+        
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
         
         record = [_dnsRecordsSet member:record];
         if (record) {

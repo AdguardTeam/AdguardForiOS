@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,40 +16,28 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "StaticDataTableViewController.h"
-#import "APUIProSectionFooter.h"
-
-@class AEUIMainController;
+#import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIProSectionController
+#pragma mark - APUISystemWideController
 
-@interface APUIAdguardDNSController : StaticDataTableViewController
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Init and Class methods
+@interface APUISystemWideController  : UITableViewController
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-@property (weak, nonatomic) IBOutlet UITableViewCell *defaultDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *familyDnsCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *dnsRequestsCell;
+@property (strong, nonatomic) IBOutlet UISwitch *statusSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *statusSwitchCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *whitelistCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *blacklistCell;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-
-- (IBAction)clickChooseServer:(id)sender;
-- (IBAction)toggleSwitchStatus:(id)sender;
+- (IBAction)toggleLocalFiltering:(id)sender;
 - (IBAction)toggleLogStatus:(id)sender;
-
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
 
 
 @end

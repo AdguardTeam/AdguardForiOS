@@ -113,6 +113,10 @@ static NSMutableDictionary *_propertyNamesForClasses;
     return [[self new] propertyNames];
 }
 
+// We lie here
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface APUIDnsStatusTableViewCell : UITableViewCell
+@interface APUIProStatusTableViewCell : UITableViewCell
 
 @end
