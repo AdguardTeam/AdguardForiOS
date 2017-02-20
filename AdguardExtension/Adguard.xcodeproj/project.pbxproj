@@ -714,6 +714,13 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		655611701E5B3D3900F39A7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
+			remoteInfo = "Run Builder";
+		};
 		6582373B1D07FE6700B824F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -818,13 +825,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
-		};
-		65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
-			remoteInfo = "Run Builder";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2227,12 +2227,12 @@
 				6582372F1D07FE6700B824F4 /* Sources */,
 				658237301D07FE6700B824F4 /* Frameworks */,
 				658237311D07FE6700B824F4 /* Resources */,
-				6581C9341D64D62A00E739CC /* Copy DB Resources (Custom Script) */,
+				6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65FAB3451D6F2BA800A0706B /* PBXTargetDependency */,
+				655611711E5B3D3900F39A7C /* PBXTargetDependency */,
 				65FAB3431D6F2BA500A0706B /* PBXTargetDependency */,
 			);
 			name = ProTunnel;
@@ -2753,7 +2753,7 @@
 			shellPath = /bin/bash;
 			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
 		};
-		6581C9341D64D62A00E739CC /* Copy DB Resources (Custom Script) */ = {
+		6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2765,7 +2765,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
+			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default_empty.db\" \"${RESOURCES}/default.db\"";
 		};
 		659886B21CF74DE9003ECD1C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3554,6 +3554,11 @@
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65423D9D1C89B86F00DD1224 /* PBXContainerItemProxy */;
 		};
+		655611711E5B3D3900F39A7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
+			targetProxy = 655611701E5B3D3900F39A7C /* PBXContainerItemProxy */;
+		};
 		6582373C1D07FE6700B824F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 658237321D07FE6700B824F4 /* ProTunnel */;
@@ -3628,11 +3633,6 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
-		};
-		65FAB3451D6F2BA800A0706B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
-			targetProxy = 65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

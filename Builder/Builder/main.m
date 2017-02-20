@@ -104,7 +104,10 @@ int main(int argc, const char * argv[])
             }
             
             if ([[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
-                
+
+                //save empty defult db
+                [db writeToFile:[productPath stringByAppendingPathComponent:ASD_EMPTY_DEFAULT_DB_NAME]];
+
 #pragma mark *** Get filters data from backend and insert to DB
                 ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
                 if (!metadata) {
