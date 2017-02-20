@@ -23,6 +23,7 @@
 /////////////////////////////////////////////////////////////////////
 
 #define ASD_DEFAULT_DB_NAME             @"default.db"
+#define ASD_EMPTY_DEFAULT_DB_NAME       @"default_empty.db"
 
 #define ASDatabaseErrorDomain        @"ASDatabaseErrorDomain"
 #define ASDatabaseOpenErrorCode      100
