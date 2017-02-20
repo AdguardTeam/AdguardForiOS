@@ -320,7 +320,6 @@
 		655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
-		655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
 		656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656B2ACE1B9EFBDD006A1C48 /* Social.framework */; };
 		656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 657107AC1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m */; };
@@ -441,9 +440,7 @@
 		659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */; };
 		659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
-		659886AB1CF74DE9003ECD1C /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
 		659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
-		659886AE1CF74DE9003ECD1C /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		659886B01CF74DE9003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
 		659886F21CF83580003ECD1C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
 		659886F31CF83580003ECD1C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
@@ -554,7 +551,6 @@
 		65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
-		65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65B40D331BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
@@ -1026,7 +1022,6 @@
 		655E94921BBEADD500286FBE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIPlayerViewController.h; sourceTree = "<group>"; };
 		655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIPlayerViewController.m; sourceTree = "<group>"; };
-		655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnablingAdguardVideo.mp4; sourceTree = "<group>"; };
 		656B2ACE1B9EFBDD006A1C48 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		657107AB1BA5C575006255F3 /* AEUIWelcomePagerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWelcomePagerDataSource.h; sourceTree = "<group>"; };
@@ -1088,7 +1083,6 @@
 		65A6AC9D1BE123CA006A86E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65A6AC9E1BE123CC006A86E5 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65AA104D1C88540800CB67C5 /* adguard-assistant.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-assistant.js"; sourceTree = "<group>"; };
-		65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SafariAdguardVideo.mp4; sourceTree = "<group>"; };
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		65AD3BB91B7CB15400004A02 /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
 		65AD3BBA1B7CB15400004A02 /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
@@ -2031,8 +2025,6 @@
 			isa = PBXGroup;
 			children = (
 				659E59751BC6D82700FA2384 /* Localizable.strings */,
-				65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */,
-				655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */,
 				65F398251B7B684700ABCD39 /* Info.plist */,
 				65F398151B7B684700ABCD39 /* main.m */,
 				65711E551B8C670A00C8C4E7 /* defaults.plist */,
@@ -2562,9 +2554,7 @@
 				655AACDD1D423B7900E316EA /* Assets.xcassets in Resources */,
 				653153841D00179300C92A73 /* Main.storyboard in Resources */,
 				659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */,
-				659886AB1CF74DE9003ECD1C /* EnablingAdguardVideo.mp4 in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
-				659886AE1CF74DE9003ECD1C /* SafariAdguardVideo.mp4 in Resources */,
 				659886B01CF74DE9003ECD1C /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2623,10 +2613,8 @@
 				655AACE11D423C9100E316EA /* Assets.xcassets in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
-				655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				65F3981F1B7B684700ABCD39 /* Main.storyboard in Resources */,
-				65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				655A026A1C6B7686000F00D7 /* README.txt in Resources */,
 			);
