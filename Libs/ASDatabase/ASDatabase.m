@@ -17,6 +17,7 @@
 */
 #import "ASDatabase.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/vendor/SSZipArchive/SSZipArchive.h"
 #import "FMSQLStatementSplitter.h"
 
 #define DB_SCHEME_FILE_FORMAT       @"%@/schema%@.sql"
@@ -86,7 +87,34 @@ static ASDatabase *singletonDB;
         __block NSString *defaultDBVersion;
 
         // Open default DB
-        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:[[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME] flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
+        
+        NSURL *defaultDbUrl = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME];
+        
+        if (![defaultDbUrl checkResourceIsReachableAndReturnError:nil]) {
+            // unzip default DB into working folder
+            BOOL result = NO;
+            @autoreleasepool {
+                
+                NSURL *zippedDefaultDbUrl = [[[NSBundle bundleForClass:[self class]] resourceURL] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".zip"];
+                [SSZipArchive unzipFileAtPath:<#(nonnull NSString *)#> toDestination:<#(nonnull NSString *)#>]
+                NSData *data = [NSData dataWithContentsOfURL:zippedDefaultDbUrl];
+                if (data) {
+                    
+                    NSData *unzippedData = [data gunzippedData];
+                    result = [unzippedData writeToURL:defaultDbUrl atomically:YES];
+                }
+            }
+            
+            if (result == NO) {
+                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
+                                             userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
+                DDLogError(@"Error init default DB.");
+                
+                return;
+            }
+        }
+        
+        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:[defaultDbUrl path] flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
         if (defaultDbQueue){
             
             [defaultDbQueue inDatabase:^(FMDatabase *db) {
