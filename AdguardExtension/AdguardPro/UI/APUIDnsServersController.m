@@ -194,6 +194,11 @@
     if (selectedServer) {
         
         APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            [self selectActiveDnsServer:selectedServer];
+            [self reloadDataAnimated:YES];
+        });
     }
 }
 
@@ -243,42 +248,7 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    APDnsServerObject *activeDnsServer = manager.activeRemoteDnsServer;
-    
-    if ([activeDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
-        
-        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
-        // tunning accessibility
-        self.systemDefaultCell.accessibilityTraits |= UIAccessibilityTraitSelected;
-        //------------
-    }
-    else {
-        
-        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-        // tunning accessibility
-        self.systemDefaultCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
-        //-----
-    }
-    
-    for (int i = 1; i < _dnsServers.count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_SERVER_SECTION_INDEX];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        if ([activeDnsServer isEqual:_dnsServers[i]]) {
-            
-            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
-            // tunning accessibility
-            cell.accessibilityTraits |= UIAccessibilityTraitSelected;
-            //------------
-        }
-        else {
-            
-            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-            // tunning accessibility
-            cell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
-            //----------------
-        }
-    }
+    [self selectActiveDnsServer:manager.activeRemoteDnsServer];
     
     if (_dnsServers.count < manager.maxCountOfRemoteDnsServers) {
         
@@ -352,4 +322,41 @@
     return nil;
 }
 
+- (void)selectActiveDnsServer:(APDnsServerObject *)activeDnsServer {
+    
+    if ([activeDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
+        
+        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
+        // tunning accessibility
+        self.systemDefaultCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+        //------------
+    }
+    else {
+        
+        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+        // tunning accessibility
+        self.systemDefaultCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+        //-----
+    }
+    
+    for (int i = 1; i < _dnsServers.count; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_SERVER_SECTION_INDEX];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        if ([activeDnsServer isEqual:_dnsServers[i]]) {
+            
+            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
+            // tunning accessibility
+            cell.accessibilityTraits |= UIAccessibilityTraitSelected;
+            //------------
+        }
+        else {
+            
+            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+            // tunning accessibility
+            cell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+            //----------------
+        }
+    }
+}
 @end
