@@ -2,8 +2,8 @@
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "0Fc-BN-KOh"; */
 "0Fc-BN-KOh.title" = "Cancel";
 
-/* Class = "UITableViewSection"; headerTitle = "CUSTOM DNS-SERVERS"; ObjectID = "0gU-l5-6Ha"; */
-"0gU-l5-6Ha.headerTitle" = "CUSTOM DNS-SERVERS";
+/* Class = "UITableViewSection"; headerTitle = "CUSTOM DNS SERVERS"; ObjectID = "0gU-l5-6Ha"; */
+"0gU-l5-6Ha.headerTitle" = "CUSTOM DNS SERVERS";
 
 /* Class = "UITableViewSection"; headerTitle = "PRO"; ObjectID = "1kz-08-bdL"; */
 "1kz-08-bdL.headerTitle" = "PRO";
@@ -86,11 +86,11 @@
 /* Class = "UILabel"; text = "Adguard Forum"; ObjectID = "ENy-5y-b3I"; */
 "ENy-5y-b3I.text" = "Adguard Forum";
 
-/* Class = "UILabel"; text = "Local Filtering"; ObjectID = "Fle-Y5-Zj9"; */
-"Fle-Y5-Zj9.text" = "Local Filtering";
+/* Class = "UILabel"; text = "System-wide Ad Blocking"; ObjectID = "Fle-Y5-Zj9"; */
+"Fle-Y5-Zj9.text" = "System-wide Ad Blocking";
 
-/* Class = "UILabel"; text = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки."; ObjectID = "G4C-i7-VxE"; */
-"G4C-i7-VxE.text" = "Добавьте сюуда список имен доменов. Пишите имена разделяя запятыми или переводом строки.";
+/* Class = "UILabel"; text = "List the domain names here. Separate different domain names by commas or line breaks."; ObjectID = "G4C-i7-VxE"; */
+"G4C-i7-VxE.text" = "List the domain names here. Separate different domain names by commas or line breaks.";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "GZu-fQ-9oP"; */
 "GZu-fQ-9oP.text" = "Server";
@@ -98,8 +98,8 @@
 /* Class = "UILabel"; text = "not translate this"; ObjectID = "H9H-HX-Ya5"; */
 "H9H-HX-Ya5.text" = "not translate this";
 
-/* Class = "UITableViewSection"; footerTitle = "Супер текст, который объясняет движение планет, звезд, галактик, притяжение и отталкивание \"элементарных\" частиц. Не обходит стороной межгалактические одномерные струны и простые вибрации вселенной."; ObjectID = "HFA-vL-9J7"; */
-"HFA-vL-9J7.footerTitle" = "Супер текст, который объясняет движение планет, звезд, галактик, притяжение и отталкивание \"элементарных\" частиц. Не обходит стороной межгалактические одномерные струны и простые вибрации вселенной.";
+/* Class = "UITableViewSection"; footerTitle = "System-wide ad blocking allows you to filter all apps' traffic (not only Safari) on the network level. It blocks access to ad and tracking servers. The traffic is filtered right on your device based on the 'Simplified domain names filter' and your blacklist/whitelist settings."; ObjectID = "HFA-vL-9J7"; */
+"HFA-vL-9J7.footerTitle" = "System-wide ad blocking allows you to filter all apps' traffic (not only Safari) on the network level. It blocks access to ad and tracking servers. The traffic is filtered right on your device based on the 'Simplified domain names filter' and your blacklist/whitelist settings.";
 
 /* Class = "UITableViewSection"; headerTitle = "SETTINGS"; ObjectID = "HFA-vL-9J7"; */
 "HFA-vL-9J7.headerTitle" = "SETTINGS";
@@ -236,8 +236,8 @@
 /* Class = "UILabel"; text = "Remove Server"; ObjectID = "fkY-pd-BQi"; */
 "fkY-pd-BQi.text" = "Remove Server";
 
-/* Class = "UINavigationItem"; title = "DNS Requests"; ObjectID = "fov-We-MES"; */
-"fov-We-MES.title" = "DNS Requests";
+/* Class = "UINavigationItem"; title = "Filtering Log"; ObjectID = "fov-We-MES"; */
+"fov-We-MES.title" = "Filtering Log";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "g5A-Fz-7FG"; */
 "g5A-Fz-7FG.text" = "Status";
@@ -245,8 +245,8 @@
 /* Class = "UILabel"; text = "Version"; ObjectID = "iG0-Ou-4GW"; */
 "iG0-Ou-4GW.text" = "Version";
 
-/* Class = "UILabel"; text = "DNS Requests"; ObjectID = "icS-tR-srI"; */
-"icS-tR-srI.text" = "DNS Requests";
+/* Class = "UILabel"; text = "View Filtering Log"; ObjectID = "icS-tR-srI"; */
+"icS-tR-srI.text" = "View Filtering Log";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "jB0-23-f5T"; */
 "jB0-23-f5T.text" = "About";
@@ -305,8 +305,8 @@
 /* Class = "UILabel"; text = "Status"; ObjectID = "sV1-SB-Gpd"; */
 "sV1-SB-Gpd.text" = "Status";
 
-/* Class = "UITableViewSection"; footerTitle = "Enter here IP addresses of the DNS servers separated by comma or return."; ObjectID = "sdZ-kr-Pk1"; */
-"sdZ-kr-Pk1.footerTitle" = "Enter here IP addresses of the DNS servers separated by comma or return.";
+/* Class = "UITableViewSection"; footerTitle = "Enter the IP addresses of the DNS servers here, separated by commas or line breaks."; ObjectID = "sdZ-kr-Pk1"; */
+"sdZ-kr-Pk1.footerTitle" = "Enter the IP addresses of the DNS servers here, separated by commas or line breaks.";
 
 /* Class = "UITableViewSection"; headerTitle = "IP Addresses"; ObjectID = "sdZ-kr-Pk1"; */
 "sdZ-kr-Pk1.headerTitle" = "IP Addresses";
@@ -314,14 +314,11 @@
 /* Class = "UILabel"; text = "Remote DNS Server Title"; ObjectID = "tIq-QX-3HP"; */
 "tIq-QX-3HP.text" = "Remote DNS Server Title";
 
-/* Class = "UILabel"; text = "Log DNS Requests"; ObjectID = "tWU-pP-c1b"; */
-"tWU-pP-c1b.text" = "Log DNS Requests";
+/* Class = "UILabel"; text = "Enable Filtering Log"; ObjectID = "tWU-pP-c1b"; */
+"tWU-pP-c1b.text" = "Enable Filtering Log";
 
-/* Class = "UINavigationItem"; title = "System-Wide Ad Blocking"; ObjectID = "v66-Ra-FDg"; */
-"v66-Ra-FDg.title" = "System-Wide Ad Blocking";
+/* Class = "UINavigationItem"; title = "System-wide Ad Blocking"; ObjectID = "v66-Ra-FDg"; */
+"v66-Ra-FDg.title" = "System-wide Ad Blocking";
 
 /* Class = "UILabel"; text = "Auto Update over Wi-Fi only"; ObjectID = "x5D-K1-eUX"; */
 "x5D-K1-eUX.text" = "Auto Update over Wi-Fi only";
-
-/* Class = "UITextView"; accessibilityHint = "Enter here IP addresses of the DNS servers separated by comma or return"; ObjectID = "ysu-RU-bHI"; */
-"ysu-RU-bHI.accessibilityHint" = "Enter here IP addresses of the DNS servers separated by comma or return";
