@@ -610,31 +610,7 @@
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
     self.proStatusSwitch.on = manager.enabled;
-    
-//    switch (manager.connectionStatus) {
-//            
-//        case APVpnConnectionStatusReconnecting:
-//        case APVpnConnectionStatusConnecting:
-//        case APVpnConnectionStatusDisconnecting:
-//            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is 'In Progress'.");
-//            break;
-//            
-//        case APVpnConnectionStatusConnected:
-//            self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Enabled",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is Enabled.");
-//            break;
-//            
-//        default:
-//            if (manager.enabled) {
-//                
-//                self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Ready",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is Not Connected.");
-//            }
-//            else {
-//                
-//                self.proStatusCell.detailTextLabel.text = NSLocalizedString(@"Disabled",@"(AEUIMainController) PRO version. On the main screen. Current PRO status title. When the status is Diabled.");
-//            }
-//            break;
-//    }
-    
+        
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
