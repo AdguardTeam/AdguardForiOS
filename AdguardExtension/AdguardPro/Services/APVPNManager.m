@@ -33,6 +33,7 @@
 
 #define VPN_NAME                            @" VPN"
 #define MAX_COUNT_OF_REMOTE_DNS_SERVERS     16
+#define NOTIFICATION_DELAY                  1
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
@@ -47,6 +48,9 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 @implementation APVPNManager{
     
     dispatch_queue_t workingQueue;
+    NSOperationQueue *_notificationQueue;
+    
+    ACLExecuteBlockDelayed *_delayedSendNotify;
     
     NETunnelProviderManager *_manager;
     NETunnelProviderProtocol *_protocolConfiguration;
@@ -101,6 +105,28 @@ static APVPNManager *singletonVPNManager;
     if (self) {
         
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
+        _notificationQueue = [NSOperationQueue new];
+        _notificationQueue.underlyingQueue = workingQueue;
+        _notificationQueue.name = @"APVPNManager notification";
+        
+        // set delayed notify
+        _delayedSendNotify = [[ACLExecuteBlockDelayed alloc]
+                              initWithTimeout:NOTIFICATION_DELAY
+                              leeway:NOTIFICATION_DELAY
+                              queue:workingQueue block:^{
+            
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      
+                                      DDLogInfo(@"(APVPNManager) Notify others that vpn connection status changed with error: %@", _lastError.localizedDescription);
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
+                                      
+                                      // Reset last ERROR!!!
+                                      _lastError = nil;
+                                  });
+                                  
+        }];
+        //------------------
+        
         _busy = NO;
         _busyLock = [NSLock new];
 
@@ -733,7 +759,7 @@ static APVPNManager *singletonVPNManager;
     id observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNConfigurationChangeNotification
                    object: nil //_manager
-                   queue:nil
+                   queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                        
                        // When configuration is changed
@@ -747,7 +773,7 @@ static APVPNManager *singletonVPNManager;
     observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNStatusDidChangeNotification
                 object: nil //_manager.connection
-                   queue:nil
+                   queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                        
                        // When connection status is changed
@@ -864,14 +890,8 @@ static APVPNManager *singletonVPNManager;
 }
 
 - (void)sendNotification{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
-        
-        // Reset last ERROR!!!
-        _lastError = nil;
-    });
-
+    
+    [_delayedSendNotify executeOnceAfterCalm];
 }
 
 - (void)saveCustomRemoteDnsServersToDefaults {
