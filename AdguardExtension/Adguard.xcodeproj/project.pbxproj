@@ -228,10 +228,37 @@
 		655611BC1E5C6D4E00F39A7C /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119A1E5C6D4E00F39A7C /* unzip.c */; };
 		655611BD1E5C6D4E00F39A7C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119C1E5C6D4E00F39A7C /* zip.c */; };
 		655611BE1E5C6D4E00F39A7C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119C1E5C6D4E00F39A7C /* zip.c */; };
-		655611BF1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556119E1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift */; };
-		655611C01E5C6D4E00F39A7C /* SSZipArchive+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556119E1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift */; };
 		655611C11E5C6D4E00F39A7C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611A01E5C6D4E00F39A7C /* SSZipArchive.m */; };
 		655611C21E5C6D4E00F39A7C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611A01E5C6D4E00F39A7C /* SSZipArchive.m */; };
+		655611F71E5C780B00F39A7C /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611801E5C6D4E00F39A7C /* aescrypt.c */; };
+		655611F81E5C780B00F39A7C /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611811E5C6D4E00F39A7C /* aeskey.c */; };
+		655611F91E5C780B00F39A7C /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611831E5C6D4E00F39A7C /* aestab.c */; };
+		655611FA1E5C780B00F39A7C /* entropy.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611871E5C6D4E00F39A7C /* entropy.c */; };
+		655611FB1E5C780B00F39A7C /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611891E5C6D4E00F39A7C /* fileenc.c */; };
+		655611FC1E5C780B00F39A7C /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118B1E5C6D4E00F39A7C /* hmac.c */; };
+		655611FD1E5C780B00F39A7C /* prng.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118D1E5C6D4E00F39A7C /* prng.c */; };
+		655611FE1E5C780B00F39A7C /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118F1E5C6D4E00F39A7C /* pwd2key.c */; };
+		655611FF1E5C780B00F39A7C /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611911E5C6D4E00F39A7C /* sha1.c */; };
+		655612001E5C780B00F39A7C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611961E5C6D4E00F39A7C /* ioapi.c */; };
+		655612011E5C780B00F39A7C /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611981E5C6D4E00F39A7C /* mztools.c */; };
+		655612021E5C780B00F39A7C /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119A1E5C6D4E00F39A7C /* unzip.c */; };
+		655612031E5C780B00F39A7C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119C1E5C6D4E00F39A7C /* zip.c */; };
+		655612041E5C781E00F39A7C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611A01E5C6D4E00F39A7C /* SSZipArchive.m */; };
+		655612051E5C785C00F39A7C /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611801E5C6D4E00F39A7C /* aescrypt.c */; };
+		655612061E5C785C00F39A7C /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611811E5C6D4E00F39A7C /* aeskey.c */; };
+		655612071E5C785C00F39A7C /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611831E5C6D4E00F39A7C /* aestab.c */; };
+		655612081E5C785C00F39A7C /* entropy.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611871E5C6D4E00F39A7C /* entropy.c */; };
+		655612091E5C785C00F39A7C /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611891E5C6D4E00F39A7C /* fileenc.c */; };
+		6556120A1E5C785C00F39A7C /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118B1E5C6D4E00F39A7C /* hmac.c */; };
+		6556120B1E5C785C00F39A7C /* prng.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118D1E5C6D4E00F39A7C /* prng.c */; };
+		6556120C1E5C785C00F39A7C /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556118F1E5C6D4E00F39A7C /* pwd2key.c */; };
+		6556120D1E5C785C00F39A7C /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611911E5C6D4E00F39A7C /* sha1.c */; };
+		6556120E1E5C785C00F39A7C /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611961E5C6D4E00F39A7C /* ioapi.c */; };
+		6556120F1E5C785C00F39A7C /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 655611981E5C6D4E00F39A7C /* mztools.c */; };
+		655612101E5C785C00F39A7C /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119A1E5C6D4E00F39A7C /* unzip.c */; };
+		655612111E5C785C00F39A7C /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6556119C1E5C6D4E00F39A7C /* zip.c */; };
+		655612121E5C786C00F39A7C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611A01E5C6D4E00F39A7C /* SSZipArchive.m */; };
+		655612131E5C789700F39A7C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -992,7 +1019,6 @@
 		6556119B1E5C6D4E00F39A7C /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		6556119C1E5C6D4E00F39A7C /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
 		6556119D1E5C6D4E00F39A7C /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		6556119E1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SSZipArchive+Swift.swift"; sourceTree = "<group>"; };
 		6556119F1E5C6D4E00F39A7C /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		655611A01E5C6D4E00F39A7C /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		655611A11E5C6D4E00F39A7C /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
@@ -1308,6 +1334,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655612131E5C789700F39A7C /* libz.tbd in Frameworks */,
 				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
 			);
@@ -1556,7 +1583,6 @@
 			children = (
 				6556117D1E5C6D4E00F39A7C /* aes */,
 				655611941E5C6D4E00F39A7C /* minizip */,
-				6556119E1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift */,
 				6556119F1E5C6D4E00F39A7C /* SSZipArchive.h */,
 				655611A01E5C6D4E00F39A7C /* SSZipArchive.m */,
 				655611A11E5C6D4E00F39A7C /* SSZipCommon.h */,
@@ -3029,6 +3055,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655612041E5C781E00F39A7C /* SSZipArchive.m in Sources */,
+				655611F71E5C780B00F39A7C /* aescrypt.c in Sources */,
+				655611F81E5C780B00F39A7C /* aeskey.c in Sources */,
+				655611F91E5C780B00F39A7C /* aestab.c in Sources */,
+				655611FA1E5C780B00F39A7C /* entropy.c in Sources */,
+				655611FB1E5C780B00F39A7C /* fileenc.c in Sources */,
+				655611FC1E5C780B00F39A7C /* hmac.c in Sources */,
+				655611FD1E5C780B00F39A7C /* prng.c in Sources */,
+				655611FE1E5C780B00F39A7C /* pwd2key.c in Sources */,
+				655611FF1E5C780B00F39A7C /* sha1.c in Sources */,
+				655612001E5C780B00F39A7C /* ioapi.c in Sources */,
+				655612011E5C780B00F39A7C /* mztools.c in Sources */,
+				655612021E5C780B00F39A7C /* unzip.c in Sources */,
+				655612031E5C780B00F39A7C /* zip.c in Sources */,
 				6581C9331D64952C00E739CC /* ACNHttpUtils.m in Sources */,
 				653AEA001D084B6400AC81B4 /* DDContextFilterLogFormatter.m in Sources */,
 				658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */,
@@ -3135,7 +3175,6 @@
 				659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				655611BE1E5C6D4E00F39A7C /* zip.c in Sources */,
-				655611C01E5C6D4E00F39A7C /* SSZipArchive+Swift.swift in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
@@ -3231,6 +3270,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655612121E5C786C00F39A7C /* SSZipArchive.m in Sources */,
+				655612051E5C785C00F39A7C /* aescrypt.c in Sources */,
+				655612061E5C785C00F39A7C /* aeskey.c in Sources */,
+				655612071E5C785C00F39A7C /* aestab.c in Sources */,
+				655612081E5C785C00F39A7C /* entropy.c in Sources */,
+				655612091E5C785C00F39A7C /* fileenc.c in Sources */,
+				6556120A1E5C785C00F39A7C /* hmac.c in Sources */,
+				6556120B1E5C785C00F39A7C /* prng.c in Sources */,
+				6556120C1E5C785C00F39A7C /* pwd2key.c in Sources */,
+				6556120D1E5C785C00F39A7C /* sha1.c in Sources */,
+				6556120E1E5C785C00F39A7C /* ioapi.c in Sources */,
+				6556120F1E5C785C00F39A7C /* mztools.c in Sources */,
+				655612101E5C785C00F39A7C /* unzip.c in Sources */,
+				655612111E5C785C00F39A7C /* zip.c in Sources */,
 				659886F21CF83580003ECD1C /* FMDatabasePool.m in Sources */,
 				659886F31CF83580003ECD1C /* DDTTYLogger.m in Sources */,
 				659886F41CF83580003ECD1C /* AESSupport.m in Sources */,
@@ -3468,7 +3521,6 @@
 				653843011B9B52B300AABD5A /* AEUISubscriptionLoaderController.m in Sources */,
 				655611BB1E5C6D4E00F39A7C /* unzip.c in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
-				655611BF1E5C6D4E00F39A7C /* SSZipArchive+Swift.swift in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				655611AD1E5C6D4E00F39A7C /* hmac.c in Sources */,
 				657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */,
@@ -4003,7 +4055,6 @@
 		658FED001E240B8F0013BCE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4026,7 +4077,6 @@
 		658FED011E240B8F0013BCE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4176,7 +4226,6 @@
 		65B621091D2D3D9F0047248F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -4196,7 +4245,6 @@
 		65B6210A1D2D3D9F0047248F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -4380,7 +4428,6 @@
 		65F398421B7B684700ABCD39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = AdguardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -4393,7 +4440,6 @@
 		65F398431B7B684700ABCD39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = AdguardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

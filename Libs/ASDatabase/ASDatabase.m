@@ -17,11 +17,15 @@
 */
 #import "ASDatabase.h"
 #import "ACommons/ACLang.h"
+#import "ADomain/ADomain.h"
 #import "ACommons/vendor/SSZipArchive/SSZipArchive.h"
 #import "FMSQLStatementSplitter.h"
 
 #define DB_SCHEME_FILE_FORMAT       @"%@/schema%@.sql"
 #define DB_SCHEME_UPDATE_FORMAT     @"%@/update%@.sql"
+
+// Marker which defines version of the default DB in Adguard shared folder
+#define DB_DEFAULTDB_MARKER_FILE    @"defaultdb-marker.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ASDatabase
@@ -88,21 +92,27 @@ static ASDatabase *singletonDB;
 
         // Open default DB
         
-        NSURL *defaultDbUrl = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME];
+        NSString *defaultDbPath = [[[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME] path];
         
-        if (![defaultDbUrl checkResourceIsReachableAndReturnError:nil]) {
+        NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
+        
+        NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
+        
+        if (! [marker isEqualToString:[ADProductInfo buildVersion]]) {
+            
             // unzip default DB into working folder
             BOOL result = NO;
             @autoreleasepool {
                 
-                NSURL *zippedDefaultDbUrl = [[[NSBundle bundleForClass:[self class]] resourceURL] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".zip"];
-                [SSZipArchive unzipFileAtPath:<#(nonnull NSString *)#> toDestination:<#(nonnull NSString *)#>]
-                NSData *data = [NSData dataWithContentsOfURL:zippedDefaultDbUrl];
-                if (data) {
-                    
-                    NSData *unzippedData = [data gunzippedData];
-                    result = [unzippedData writeToURL:defaultDbUrl atomically:YES];
+                NSString *zippedDefaultDbPath = [[[NSBundle bundleForClass:[self class]] resourcePath]
+                                                 stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".zip"];
+                result = [SSZipArchive unzipFileAtPath:zippedDefaultDbPath toDestination:[defaultDbPath strin]];
+                
+                if (result) {
+                    // save marker as current version+build
+                    result = [[ADProductInfo buildVersion] writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
+
             }
             
             if (result == NO) {
@@ -112,9 +122,10 @@ static ASDatabase *singletonDB;
                 
                 return;
             }
+            
         }
         
-        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:[defaultDbUrl path] flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
+        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:defaultDbPath flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
         if (defaultDbQueue){
             
             [defaultDbQueue inDatabase:^(FMDatabase *db) {
