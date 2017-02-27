@@ -102,7 +102,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
     // Init database
-    [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+    if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
+        
+        DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
+        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
+        
+        pendingStartCompletion(error);
+        return;
+    }
+    
+    [[ASDatabase singleton] initDbWithURL:dbURL];
+    //--------------------------
     
     [_reachabilityHandler startNotifier];
     

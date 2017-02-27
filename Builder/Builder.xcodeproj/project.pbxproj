@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		651F5F131E2564F400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F121E2564F400E22157 /* ACNUrlUtils.m */; };
+		6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 6556117A1E5C499100F39A7C /* NSData+GZIP.m */; };
 		655A05871C6B7790000F00D7 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04A61C6B7790000F00D7 /* ABECFilter.m */; };
 		655A05881C6B7790000F00D7 /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04A81C6B7790000F00D7 /* ABECFilterParsers.m */; };
 		655A05891C6B7790000F00D7 /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04AA1C6B7790000F00D7 /* ABECRequest.m */; };
@@ -70,6 +71,8 @@
 /* Begin PBXFileReference section */
 		651F5F111E2564F400E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
 		651F5F121E2564F400E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
+		655611791E5C499100F39A7C /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		6556117A1E5C499100F39A7C /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
 		655A04A41C6B7790000F00D7 /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
 		655A04A51C6B7790000F00D7 /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
 		655A04A61C6B7790000F00D7 /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
@@ -195,6 +198,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		655611781E5C499100F39A7C /* NSDataGZip */ = {
+			isa = PBXGroup;
+			children = (
+				655611791E5C499100F39A7C /* NSData+GZIP.h */,
+				6556117A1E5C499100F39A7C /* NSData+GZIP.m */,
+			);
+			path = NSDataGZip;
+			sourceTree = "<group>";
+		};
 		655A04A21C6B7790000F00D7 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +381,7 @@
 		655A051E1C6B7790000F00D7 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				655611781E5C499100F39A7C /* NSDataGZip */,
 				655A05211C6B7790000F00D7 /* Reachability */,
 			);
 			path = vendor;
@@ -595,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */,
 				655A05B01C6B7790000F00D7 /* NSURL+Utils.m in Sources */,
 				655A05A31C6B7790000F00D7 /* DDLog.m in Sources */,
 				655A05A51C6B7790000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
