@@ -2303,7 +2303,6 @@
 				6582372F1D07FE6700B824F4 /* Sources */,
 				658237301D07FE6700B824F4 /* Frameworks */,
 				658237311D07FE6700B824F4 /* Resources */,
-				6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */,
 			);
 			buildRules = (
 			);
@@ -2365,7 +2364,6 @@
 				659886F11CF83580003ECD1C /* Sources */,
 				6598872B1CF83580003ECD1C /* Frameworks */,
 				659887301CF83580003ECD1C /* Resources */,
-				659887381CF83580003ECD1C /* Copy DB Resources (Custom Script) */,
 				659887391CF83580003ECD1C /* Build javascript components */,
 			);
 			buildRules = (
@@ -2423,7 +2421,6 @@
 				65C52B321B906105003AF42F /* Sources */,
 				65C52B331B906105003AF42F /* Frameworks */,
 				65C52B341B906105003AF42F /* Resources */,
-				651318311BDE4B7D008DCFF9 /* Copy DB Resources (Custom Script) */,
 				65D04F7E1C873029001A9A02 /* Build javascript components */,
 			);
 			buildRules = (
@@ -2801,34 +2798,6 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi";
 			showEnvVarsInLog = 0;
 		};
-		651318311BDE4B7D008DCFF9 /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
-		};
-		6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default_empty.db\" \"${RESOURCES}/default.db\"";
-		};
 		659886B21CF74DE9003ECD1C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2841,21 +2810,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\nzip -j \"${RESOURCES}/default.db.zip\" \"${BUILDER_RESOURCES_DIR}/default.db\"\n#cp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"\n";
-		};
-		659887381CF83580003ECD1C /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\n#RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#echo \"Attempting find DB update script and coping.. \"\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\n#echo \"Done\"\n\n#cp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\n#cp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
+			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n";
 		};
 		659887391CF83580003ECD1C /* Build javascript components */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2898,7 +2853,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\n\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"\n";
+			shellScript = "\n\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n";
 		};
 		65D04F7E1C873029001A9A02 /* Build javascript components */ = {
 			isa = PBXShellScriptBuildPhase;

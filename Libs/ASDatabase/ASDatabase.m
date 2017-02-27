@@ -18,7 +18,7 @@
 #import "ASDatabase.h"
 #import "ACommons/ACLang.h"
 #import "ADomain/ADomain.h"
-#import "ACommons/vendor/SSZipArchive/SSZipArchive.h"
+#import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
 #import "FMSQLStatementSplitter.h"
 
 #define DB_SCHEME_FILE_FORMAT       @"%@/schema%@.sql"
@@ -77,6 +77,16 @@ static ASDatabase *singletonDB;
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
+
+- (BOOL)checkDefaultDbVersionWithURL:(NSURL *)dbURL {
+    
+    NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
+    
+    NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
+    
+    return [marker isEqualToString:[ADProductInfo buildVersion]];
+}
+
 - (void)initDbWithURL:(NSURL *)dbURL{
     
     if (!dbURL) {
@@ -94,22 +104,32 @@ static ASDatabase *singletonDB;
         
         NSString *defaultDbPath = [[[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME] path];
         
-        NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
-        
-        NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
-        
-        if (! [marker isEqualToString:[ADProductInfo buildVersion]]) {
+        if (! [self checkDefaultDbVersionWithURL:dbURL]) {
             
             // unzip default DB into working folder
             BOOL result = NO;
             @autoreleasepool {
                 
                 NSString *zippedDefaultDbPath = [[[NSBundle bundleForClass:[self class]] resourcePath]
-                                                 stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".zip"];
-                result = [SSZipArchive unzipFileAtPath:zippedDefaultDbPath toDestination:[defaultDbPath strin]];
+                                                 stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".gz"];
+                
+                NSData *dbData;
+                @autoreleasepool {
+                    NSData *zippedDbData = [NSData dataWithContentsOfFile:zippedDefaultDbPath];
+                    if (zippedDbData.length) {
+                        
+                        dbData = [zippedDbData gunzippedData];
+                    }
+                }
+                if (dbData.length) {
+                    
+                    result = [dbData writeToFile:defaultDbPath atomically:YES];
+                }
+                
                 
                 if (result) {
                     // save marker as current version+build
+                    NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
                     result = [[ADProductInfo buildVersion] writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 }
 

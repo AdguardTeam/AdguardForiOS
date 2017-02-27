@@ -130,7 +130,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
                 NSError *error = [self prepareDataModel];
                 if (error) {
                     
-                    if (error.code == AE_ACTION_ERROR_NODEFAULTS) {
+                    if (error.code == AE_ACTION_ERROR_NODB) {
                         errorMessage = error.localizedDescription;
                     }
                 }
@@ -244,7 +244,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     // Init database
     NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-    if (! [dbURL checkResourceIsReachableAndReturnError:nil]) {
+    if ( ! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
         
         DDLogError(@"(ActionViewController) production DB was not created before.");
         NSString *messageFormat =
