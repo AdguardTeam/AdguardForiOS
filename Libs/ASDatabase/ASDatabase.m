@@ -17,10 +17,15 @@
 */
 #import "ASDatabase.h"
 #import "ACommons/ACLang.h"
+#import "ADomain/ADomain.h"
+#import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
 #import "FMSQLStatementSplitter.h"
 
 #define DB_SCHEME_FILE_FORMAT       @"%@/schema%@.sql"
 #define DB_SCHEME_UPDATE_FORMAT     @"%@/update%@.sql"
+
+// Marker which defines version of the default DB in Adguard shared folder
+#define DB_DEFAULTDB_MARKER_FILE    @"defaultdb-marker.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ASDatabase
@@ -72,6 +77,16 @@ static ASDatabase *singletonDB;
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
+
+- (BOOL)checkDefaultDbVersionWithURL:(NSURL *)dbURL {
+    
+    NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
+    
+    NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
+    
+    return [marker isEqualToString:[ADProductInfo buildVersion]];
+}
+
 - (void)initDbWithURL:(NSURL *)dbURL{
     
     if (!dbURL) {
@@ -86,7 +101,51 @@ static ASDatabase *singletonDB;
         __block NSString *defaultDBVersion;
 
         // Open default DB
-        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:[[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME] flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
+        
+        NSString *defaultDbPath = [[[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME] path];
+        
+        if (! [self checkDefaultDbVersionWithURL:dbURL]) {
+            
+            // unzip default DB into working folder
+            BOOL result = NO;
+            @autoreleasepool {
+                
+                NSString *zippedDefaultDbPath = [[[NSBundle bundleForClass:[self class]] resourcePath]
+                                                 stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".gz"];
+                
+                NSData *dbData;
+                @autoreleasepool {
+                    NSData *zippedDbData = [NSData dataWithContentsOfFile:zippedDefaultDbPath];
+                    if (zippedDbData.length) {
+                        
+                        dbData = [zippedDbData gunzippedData];
+                    }
+                }
+                if (dbData.length) {
+                    
+                    result = [dbData writeToFile:defaultDbPath atomically:YES];
+                }
+                
+                
+                if (result) {
+                    // save marker as current version+build
+                    NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
+                    result = [[ADProductInfo buildVersion] writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                }
+
+            }
+            
+            if (result == NO) {
+                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
+                                             userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
+                DDLogError(@"Error init default DB.");
+                
+                return;
+            }
+            
+        }
+        
+        defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:defaultDbPath flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
         if (defaultDbQueue){
             
             [defaultDbQueue inDatabase:^(FMDatabase *db) {

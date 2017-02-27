@@ -69,7 +69,6 @@
 		652F58A71E106FD40012353C /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
 		652F58A81E106FD40012353C /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
 		652F58A91E106FD40012353C /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
-		652F58AA1E106FD40012353C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		652F58AB1E106FD40012353C /* AEUILoadingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5B1BDFF28C00A9C595 /* AEUILoadingModal.m */; };
 		652F58AC1E106FD40012353C /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
 		652F58AD1E106FD40012353C /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
@@ -101,7 +100,6 @@
 		652F58CA1E1071470012353C /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
 		652F58CB1E1071470012353C /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
 		652F58CC1E1071470012353C /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
-		652F58CD1E1071470012353C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		652F58CE1E1071470012353C /* AEUILoadingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5B1BDFF28C00A9C595 /* AEUILoadingModal.m */; };
 		652F58CF1E1071470012353C /* AEUILoadingModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */; };
 		652F58D01E1071470012353C /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
@@ -202,7 +200,9 @@
 		653C929C1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */; };
 		653DB37E1BF228640064ED91 /* AEUISubscriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */; };
 		653E46711C1ED93100C09E60 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
-		653E46721C1F343900C09E60 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
+		655611761E5C485000F39A7C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
+		655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
+		655612131E5C789700F39A7C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -372,7 +372,6 @@
 		6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D51C6B7686000F00D7 /* DDASLLogger.m */; };
 		659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
-		659886621CF74DE9003ECD1C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D31C6B7686000F00D7 /* DDAbstractDatabaseLogger.m */; };
 		659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
 		659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
@@ -462,7 +461,6 @@
 		659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */; };
 		659887051CF83580003ECD1C /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
 		659887061CF83580003ECD1C /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
-		659887071CF83580003ECD1C /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		659887081CF83580003ECD1C /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
 		659887091CF83580003ECD1C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		6598870A1CF83580003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
@@ -612,7 +610,6 @@
 		65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
-		65D9A2631C032AE2004DA210 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
 		65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		65E5A09A1B8632F600319AA3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -936,6 +933,8 @@
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		655611741E5C485000F39A7C /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		655611751E5C485000F39A7C /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
 		655A01991C6B7686000F00D7 /* ACFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFiles.h; sourceTree = "<group>"; };
 		655A019A1C6B7686000F00D7 /* ACIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACIO.h; sourceTree = "<group>"; };
 		655A019B1C6B7686000F00D7 /* ACLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
@@ -1161,8 +1160,6 @@
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
-		65D9A2611C032AE2004DA210 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
-		65D9A2621C032AE2004DA210 /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
 		65D9A2641C034095004DA210 /* AEUIAdvSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAdvSettingsController.h; sourceTree = "<group>"; };
 		65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAdvSettingsController.m; sourceTree = "<group>"; };
 		65DAE6E31B8B76B60020BC3C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
@@ -1247,6 +1244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655612131E5C789700F39A7C /* libz.tbd in Frameworks */,
 				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
 			);
@@ -1481,6 +1479,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		655611731E5C47D900F39A7C /* NSDataGZip */ = {
+			isa = PBXGroup;
+			children = (
+				655611741E5C485000F39A7C /* NSData+GZIP.h */,
+				655611751E5C485000F39A7C /* NSData+GZIP.m */,
+			);
+			path = NSDataGZip;
+			sourceTree = "<group>";
+		};
 		655A01971C6B7686000F00D7 /* ACommons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1626,6 +1633,7 @@
 		655A020A1C6B7686000F00D7 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				655611731E5C47D900F39A7C /* NSDataGZip */,
 				655A020D1C6B7686000F00D7 /* Reachability */,
 			);
 			path = vendor;
@@ -1761,7 +1769,6 @@
 		65AD3BB81B7CAF9F00004A02 /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
-				65D9A2601C032AAD004DA210 /* vendors */,
 				65B40D4C1BDFBD9600A9C595 /* UI */,
 				65C12EE41BD4D29F00FFC71C /* Services */,
 				65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */,
@@ -1848,15 +1855,6 @@
 				65040D251E11652A00DE25D1 /* ExternalLibsSources.js */,
 			);
 			path = js;
-			sourceTree = "<group>";
-		};
-		65D9A2601C032AAD004DA210 /* vendors */ = {
-			isa = PBXGroup;
-			children = (
-				65D9A2611C032AE2004DA210 /* NSData+GZIP.h */,
-				65D9A2621C032AE2004DA210 /* NSData+GZIP.m */,
-			);
-			path = vendors;
 			sourceTree = "<group>";
 		};
 		65EC9A021BB9824C00F53F3B /* Libs */ = {
@@ -2157,7 +2155,6 @@
 				6582372F1D07FE6700B824F4 /* Sources */,
 				658237301D07FE6700B824F4 /* Frameworks */,
 				658237311D07FE6700B824F4 /* Resources */,
-				6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */,
 			);
 			buildRules = (
 			);
@@ -2219,7 +2216,6 @@
 				659886F11CF83580003ECD1C /* Sources */,
 				6598872B1CF83580003ECD1C /* Frameworks */,
 				659887301CF83580003ECD1C /* Resources */,
-				659887381CF83580003ECD1C /* Copy DB Resources (Custom Script) */,
 				659887391CF83580003ECD1C /* Build javascript components */,
 			);
 			buildRules = (
@@ -2277,7 +2273,6 @@
 				65C52B321B906105003AF42F /* Sources */,
 				65C52B331B906105003AF42F /* Frameworks */,
 				65C52B341B906105003AF42F /* Resources */,
-				651318311BDE4B7D008DCFF9 /* Copy DB Resources (Custom Script) */,
 				65D04F7E1C873029001A9A02 /* Build javascript components */,
 			);
 			buildRules = (
@@ -2655,34 +2650,6 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi";
 			showEnvVarsInLog = 0;
 		};
-		651318311BDE4B7D008DCFF9 /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
-		};
-		6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default_empty.db\" \"${RESOURCES}/default.db\"";
-		};
 		659886B21CF74DE9003ECD1C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2695,21 +2662,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"\n";
-		};
-		659887381CF83580003ECD1C /* Copy DB Resources (Custom Script) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy DB Resources (Custom Script)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
+			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n";
 		};
 		659887391CF83580003ECD1C /* Build javascript components */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2752,7 +2705,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\n\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"\n";
+			shellScript = "\n\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n";
 		};
 		65D04F7E1C873029001A9A02 /* Build javascript components */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2825,7 +2778,6 @@
 				652F58A71E106FD40012353C /* ADLocales.m in Sources */,
 				652F58A81E106FD40012353C /* ADLocations.m in Sources */,
 				652F58A91E106FD40012353C /* ADProductInfo.m in Sources */,
-				652F58AA1E106FD40012353C /* NSData+GZIP.m in Sources */,
 				652F58AB1E106FD40012353C /* AEUILoadingModal.m in Sources */,
 				652F58AC1E106FD40012353C /* AEUILoadingModalController.m in Sources */,
 				652F58E11E1071EA0012353C /* AEService.m in Sources */,
@@ -2894,7 +2846,6 @@
 				652F58CA1E1071470012353C /* ADLocales.m in Sources */,
 				652F58CB1E1071470012353C /* ADLocations.m in Sources */,
 				652F58CC1E1071470012353C /* ADProductInfo.m in Sources */,
-				652F58CD1E1071470012353C /* NSData+GZIP.m in Sources */,
 				652F58CE1E1071470012353C /* AEUILoadingModal.m in Sources */,
 				652F58CF1E1071470012353C /* AEUILoadingModalController.m in Sources */,
 				652F58D01E1071470012353C /* AEUIUtils.m in Sources */,
@@ -3015,7 +2966,6 @@
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
-				659886621CF74DE9003ECD1C /* NSData+GZIP.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
 				659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */,
@@ -3044,6 +2994,7 @@
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
 				653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
+				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
 				659886761CF74DE9003ECD1C /* AEUIUtils.m in Sources */,
 				655AACD31D417C7D00E316EA /* APUIDnsRequestDetail.m in Sources */,
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
@@ -3121,7 +3072,6 @@
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
 				65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
-				659887071CF83580003ECD1C /* NSData+GZIP.m in Sources */,
 				659887081CF83580003ECD1C /* CLIColor.m in Sources */,
 				659887091CF83580003ECD1C /* AESharedResources.m in Sources */,
 				6598870A1CF83580003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -3254,7 +3204,6 @@
 				65EC9BDB1BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				655A023F1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				65CB60341D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
-				653E46721C1F343900C09E60 /* NSData+GZIP.m in Sources */,
 				655A02511C6B7686000F00D7 /* CLIColor.m in Sources */,
 				65C12EF71BD7B05D00FFC71C /* AESharedResources.m in Sources */,
 				655A02661C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -3314,7 +3263,6 @@
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02551C6B7686000F00D7 /* DDASLLogger.m in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
-				65D9A2631C032AE2004DA210 /* NSData+GZIP.m in Sources */,
 				655A02521C6B7686000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
@@ -3351,6 +3299,7 @@
 				65EBC2511BC2D25E00788D98 /* AEUILongLabelViewCell.m in Sources */,
 				65EC9C941BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				655A02641C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m in Sources */,
+				655611761E5C485000F39A7C /* NSData+GZIP.m in Sources */,
 				655A025E1C6B7686000F00D7 /* DDTTYLogger.m in Sources */,
 				652F89F41B92F2E5002E0601 /* AEUISubscriptionController.m in Sources */,
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
