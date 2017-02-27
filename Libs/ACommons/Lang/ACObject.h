@@ -16,7 +16,7 @@
     You must inherit from this class if you create object of data model.
     Also supports not deep copying of the object.
  */
-@interface ACObject : NSObject <NSCoding, NSCopying>
+@interface ACObject : NSObject <NSSecureCoding, NSCopying>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods

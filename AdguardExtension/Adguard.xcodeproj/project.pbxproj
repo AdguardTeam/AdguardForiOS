@@ -25,6 +25,18 @@
 		6518BD891DABBEBB00FDD1F3 /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		6518BD8A1DABBEE900FDD1F3 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
 		6518BD8B1DABBEE900FDD1F3 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
+		651F5E031E24DFBC00E22157 /* APUIDnsServerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E021E24DFBC00E22157 /* APUIDnsServerDetailController.m */; };
+		651F5E061E25004600E22157 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		651F5E071E25004600E22157 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E0D1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E101E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E111E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E121E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E131E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		651F5E141E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		652F587D1E106DF10012353C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587C1E106DF10012353C /* main.m */; };
 		652F58801E106DF10012353C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F587F1E106DF10012353C /* AppDelegate.m */; };
 		652F58831E106DF10012353C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F58821E106DF10012353C /* ViewController.m */; };
@@ -158,7 +170,6 @@
 		653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153411CF9911800C92A73 /* AdguardPro.entitlements */; };
 		653153451CF9935D00C92A73 /* ProActionExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153441CF9935D00C92A73 /* ProActionExtension.entitlements */; };
 		653153471CF9939300C92A73 /* ProBlockingExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */; };
-		653153591CFC0E4000C92A73 /* APUIAdguardDNSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */; };
 		653153621CFC63C000C92A73 /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153641CFC899E00C92A73 /* APUIProSectionFooter.m */; };
 		653153841D00179300C92A73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F3981D1B7B684700ABCD39 /* Main.storyboard */; };
@@ -305,9 +316,10 @@
 		655AACDF1D423B7B00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		655AACE11D423C9100E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
+		655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
-		655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
 		656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656B2ACE1B9EFBDD006A1C48 /* Social.framework */; };
 		656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 657107AC1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m */; };
@@ -337,9 +349,10 @@
 		658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
 		6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 658237331D07FE6700B824F4 /* ProTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		658237421D08004B00B824F4 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
-		658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */; };
-		658DDFFE1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */; };
-		658DDFFF1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */; };
+		658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */; };
+		658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
+		658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
+		658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		6598394A1D182D74005824ED /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
@@ -427,9 +440,7 @@
 		659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */; };
 		659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
-		659886AB1CF74DE9003ECD1C /* EnablingAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */; };
 		659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
-		659886AE1CF74DE9003ECD1C /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		659886B01CF74DE9003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
 		659886F21CF83580003ECD1C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
 		659886F31CF83580003ECD1C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
@@ -531,13 +542,15 @@
 		659887671CF83947003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47911E4123B50027D287 /* APUISystemWideController.m */; };
+		659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47941E41248D0027D287 /* APUIDomainListController.m */; };
+		659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B79251E40E626003B1E70 /* APUIDnsServersController.m */; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
 		659FBCF21BDE3F03007A87FE /* AEAUIDomainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */; };
 		65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
-		65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */; };
 		65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65B40D331BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
@@ -598,49 +611,6 @@
 		65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
-		65D04F7F1C8819E7001A9A02 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
-		65D04F801C8819E7001A9A02 /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A081BB9824C00F53F3B /* ABECRequest.m */; };
-		65D04F811C8819E7001A9A02 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
-		65D04F821C8819E7001A9A02 /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
-		65D04F831C8819E7001A9A02 /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
-		65D04F841C8819E7001A9A02 /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
-		65D04F851C8819E7001A9A02 /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
-		65D04F861C8819E7001A9A02 /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
-		65D04F871C8819E7001A9A02 /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C01C6B7686000F00D7 /* ACLJobController.m */; };
-		65D04F881C8819E7001A9A02 /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
-		65D04F891C8819E7001A9A02 /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01CC1C6B7686000F00D7 /* ACLWildcard.m */; };
-		65D04F8A1C8819E7001A9A02 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
-		65D04F8B1C8819E7001A9A02 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D31C6B7686000F00D7 /* DDAbstractDatabaseLogger.m */; };
-		65D04F8C1C8819E7001A9A02 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D51C6B7686000F00D7 /* DDASLLogger.m */; };
-		65D04F8D1C8819E7001A9A02 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D71C6B7686000F00D7 /* DDFileLogger.m */; };
-		65D04F8E1C8819E7001A9A02 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DA1C6B7686000F00D7 /* DDLog.m */; };
-		65D04F8F1C8819E7001A9A02 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DC1C6B7686000F00D7 /* DDTTYLogger.m */; };
-		65D04F901C8819E7001A9A02 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01DF1C6B7686000F00D7 /* DDContextFilterLogFormatter.m */; };
-		65D04F911C8819E7001A9A02 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E11C6B7686000F00D7 /* DDDispatchQueueLogFormatter.m */; };
-		65D04F921C8819E7001A9A02 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01E31C6B7686000F00D7 /* DDMultiFormatter.m */; };
-		65D04F931C8819E7001A9A02 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
-		65D04F941C8819E7001A9A02 /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
-		65D04F951C8819E7001A9A02 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
-		65D04F961C8819E7001A9A02 /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
-		65D04F971C8819E7001A9A02 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
-		65D04F981C8819E7001A9A02 /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
-		65D04F991C8819E7001A9A02 /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
-		65D04F9A1C8819E7001A9A02 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
-		65D04F9B1C8819E7001A9A02 /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
-		65D04F9C1C8819E7001A9A02 /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
-		65D04F9D1C8819E7001A9A02 /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
-		65D04F9E1C8819E7001A9A02 /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
-		65D04F9F1C8819E7001A9A02 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
-		65D04FA01C8819E7001A9A02 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
-		65D04FA11C8819E7001A9A02 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
-		65D04FA21C8819E7001A9A02 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE01BB9824C00F53F3B /* FMDatabaseAdditions.m */; };
-		65D04FA31C8819E7001A9A02 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
-		65D04FA41C8819E7001A9A02 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE41BB9824C00F53F3B /* FMDatabaseQueue.m */; };
-		65D04FA51C8819E7001A9A02 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
-		65D04FA61C8819E7001A9A02 /* FMSQLStatementSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEA1BB9824C00F53F3B /* FMSQLStatementSplitter.m */; };
-		65D04FA71C8819E7001A9A02 /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
-		65D04FA81C8819E7001A9A02 /* FMStatementQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEE1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m */; };
-		65D04FA91C881A21001A9A02 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		65D9A2631C032AE2004DA210 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2621C032AE2004DA210 /* NSData+GZIP.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
@@ -648,7 +618,6 @@
 		65E5A09A1B8632F600319AA3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
-		65E9E7B41BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		65EBC2511BC2D25E00788D98 /* AEUILongLabelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */; };
 		65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
@@ -709,7 +678,6 @@
 		65F3981F1B7B684700ABCD39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F3981D1B7B684700ABCD39 /* Main.storyboard */; };
 		65F398241B7B684700ABCD39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */; };
 		65F3982F1B7B684700ABCD39 /* AdguardExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */; };
-		65F3983A1B7B684700ABCD39 /* AdguardExtensionUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F398391B7B684700ABCD39 /* AdguardExtensionUITests.m */; };
 		65F398681B7B6A5300ABCD39 /* AdguardBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
@@ -746,12 +714,26 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		655611701E5B3D3900F39A7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
+			remoteInfo = "Run Builder";
+		};
 		6582373B1D07FE6700B824F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 658237321D07FE6700B824F4;
 			remoteInfo = tunnel;
+		};
+		658FECFD1E240B8F0013BCE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 659886481CF74DE9003ECD1C;
+			remoteInfo = "Adguard Pro";
 		};
 		6598864A1CF74DE9003ECD1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -830,13 +812,6 @@
 			remoteGlobalIDString = 65F398101B7B684700ABCD39;
 			remoteInfo = AdguardExtension;
 		};
-		65F398361B7B684700ABCD39 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65F398101B7B684700ABCD39;
-			remoteInfo = AdguardExtension;
-		};
 		65F398661B7B6A5300ABCD39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -850,13 +825,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
-		};
-		65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
-			remoteInfo = "Run Builder";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -892,7 +860,7 @@
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65040D2B1E11CD2A00DE25D1 /* AdguardLogSenderPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSenderPro.entitlements; sourceTree = "<group>"; };
 		6504C0861C58D4C30014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		6504C0871C58D4C40014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; };
+		6504C0871C58D4C40014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fi; path = fi.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		6504C0891C58D4C50014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6504C08A1C58D4C60014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		650F88F21B9374AD000A6012 /* AEUIRulesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIRulesController.h; sourceTree = "<group>"; };
@@ -911,20 +879,23 @@
 		6514819C1BC42E2A00211147 /* AEUIAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAboutController.h; sourceTree = "<group>"; };
 		6514819D1BC42E2A00211147 /* AEUIAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAboutController.m; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65163CBE1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		65163CC01BE7BA02000A3575 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		65163CC11BE7BA03000A3575 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65163CC11BE7BA03000A3575 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65163CC21BE7BB36000A3575 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/MainInterface.strings"; sourceTree = "<group>"; };
-		65163CC31BE7BB37000A3575 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Main.strings"; sourceTree = "<group>"; };
 		65163CC51BE7BB38000A3575 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		65163CC61BE7BB39000A3575 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		65163CC61BE7BB39000A3575 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65163CC71BE7BF02000A3575 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/MainInterface.strings"; sourceTree = "<group>"; };
-		65163CC81BE7BF02000A3575 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
 		65163CCA1BE7BF03000A3575 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		65163CCB1BE7BF04000A3575 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		65163CCB1BE7BF04000A3575 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		651703951B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionFilterDetailController.h; sourceTree = "<group>"; };
 		651703961B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionFilterDetailController.m; sourceTree = "<group>"; };
 		651D67931BB02B44007F00FA /* ActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ActionExtension.entitlements; sourceTree = "<group>"; };
+		651F5E011E24DFBC00E22157 /* APUIDnsServerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsServerDetailController.h; sourceTree = "<group>"; };
+		651F5E021E24DFBC00E22157 /* APUIDnsServerDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsServerDetailController.m; sourceTree = "<group>"; };
+		651F5E041E25004600E22157 /* APDnsServerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsServerObject.h; sourceTree = "<group>"; };
+		651F5E051E25004600E22157 /* APDnsServerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerObject.m; sourceTree = "<group>"; };
+		651F5E0A1E2563A400E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
+		651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		652F58791E106DF10012353C /* AdguardLogSender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardLogSender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652F587C1E106DF10012353C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		652F587E1E106DF10012353C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -945,10 +916,8 @@
 		653153411CF9911800C92A73 /* AdguardPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AdguardPro.entitlements; sourceTree = "<group>"; };
 		653153441CF9935D00C92A73 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
 		653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProBlockingExtension.entitlements; sourceTree = "<group>"; };
-		653153571CFC0E4000C92A73 /* APUIAdguardDNSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIAdguardDNSController.h; sourceTree = "<group>"; };
-		653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIAdguardDNSController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APVPNManager.h; sourceTree = "<group>"; };
-		653153611CFC63C000C92A73 /* APVPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APVPNManager.m; sourceTree = "<group>"; };
+		653153611CFC63C000C92A73 /* APVPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APVPNManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153631CFC899E00C92A73 /* APUIProSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProSectionFooter.h; sourceTree = "<group>"; };
 		653153641CFC899E00C92A73 /* APUIProSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIProSectionFooter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653842FF1B9B52B300AABD5A /* AEUISubscriptionLoaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionLoaderController.h; sourceTree = "<group>"; };
@@ -962,11 +931,13 @@
 		653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsResourceClass.m; sourceTree = "<group>"; };
 		653DB37C1BF228640064ED91 /* AEUISubscriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionTableViewCell.h; sourceTree = "<group>"; };
 		653DB37D1BF228640064ED91 /* AEUISubscriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionTableViewCell.m; sourceTree = "<group>"; };
+		6541E3251E5D863100847CE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6541E3271E5D863C00847CE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		654367BD1BBAAEFF00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		654367C01BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6553E07C1E56EE1300A6575A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6553E07E1E56EE1E00A6575A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		655A01991C6B7686000F00D7 /* ACFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACFiles.h; sourceTree = "<group>"; };
 		655A019A1C6B7686000F00D7 /* ACIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACIO.h; sourceTree = "<group>"; };
 		655A019B1C6B7686000F00D7 /* ACLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
@@ -1055,7 +1026,6 @@
 		655E94921BBEADD500286FBE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIPlayerViewController.h; sourceTree = "<group>"; };
 		655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIPlayerViewController.m; sourceTree = "<group>"; };
-		655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnablingAdguardVideo.mp4; sourceTree = "<group>"; };
 		656B2ACE1B9EFBDD006A1C48 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		657107AB1BA5C575006255F3 /* AEUIWelcomePagerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWelcomePagerDataSource.h; sourceTree = "<group>"; };
@@ -1068,7 +1038,7 @@
 		6578E3831BC5084300E2DFFD /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
 		6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		6581C9391D64FC3B00E739CC /* APUIDnsLogRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsLogRecord.h; sourceTree = "<group>"; };
-		6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsLogRecord.m; sourceTree = "<group>"; };
+		6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIDnsLogRecord.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6581C93C1D66536400E739CC /* AEUILabelWithCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILabelWithCopy.h; sourceTree = "<group>"; };
 		6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILabelWithCopy.m; sourceTree = "<group>"; };
 		658237331D07FE6700B824F4 /* ProTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1077,10 +1047,13 @@
 		658237381D07FE6700B824F4 /* PacketTunnelProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PacketTunnelProvider.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6582373A1D07FE6700B824F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6589737D1D1BF39E00B91137 /* AEUICommons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICommons.h; sourceTree = "<group>"; };
-		658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsStatusTableViewCell.h; sourceTree = "<group>"; };
-		658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsStatusTableViewCell.m; sourceTree = "<group>"; };
-		658DDFFC1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
-		658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
+		658DDFF61DA67FE600688557 /* APUIProStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProStatusTableViewCell.h; sourceTree = "<group>"; };
+		658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIProStatusTableViewCell.m; sourceTree = "<group>"; };
+		658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
+		658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
+		658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdguardProUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		658FECFC1E240B8F0013BCE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		659886B91CF74DE9003ECD1C /* Adguard Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adguard Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1093,9 +1066,15 @@
 		659887791CF841F4003ECD1C /* macro-definitions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "macro-definitions.xcconfig"; sourceTree = "<group>"; };
 		6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Config.xcconfig"; sourceTree = "<group>"; };
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
-		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		659E59781BC6D86D00FA2384 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		659E59791BC6D87000FA2384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		659A47901E4123B50027D287 /* APUISystemWideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUISystemWideController.h; sourceTree = "<group>"; };
+		659A47911E4123B50027D287 /* APUISystemWideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUISystemWideController.m; sourceTree = "<group>"; };
+		659A47931E41248D0027D287 /* APUIDomainListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDomainListController.h; sourceTree = "<group>"; };
+		659A47941E41248D0027D287 /* APUIDomainListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDomainListController.m; sourceTree = "<group>"; };
+		659B79241E40E626003B1E70 /* APUIDnsServersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsServersController.h; sourceTree = "<group>"; };
+		659B79251E40E626003B1E70 /* APUIDnsServersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsServersController.m; sourceTree = "<group>"; };
+		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		659E59781BC6D86D00FA2384 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		659E59791BC6D87000FA2384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		659FBCED1BDE3229007A87FE /* AEAUIMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AEAUIMainController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEAUIMainController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		659FBCF01BDE3F03007A87FE /* AEAUIDomainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAUIDomainCell.h; sourceTree = "<group>"; };
@@ -1108,16 +1087,18 @@
 		65A6AC9D1BE123CA006A86E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65A6AC9E1BE123CC006A86E5 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65AA104D1C88540800CB67C5 /* adguard-assistant.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-assistant.js"; sourceTree = "<group>"; };
-		65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SafariAdguardVideo.mp4; sourceTree = "<group>"; };
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		65AD3BB91B7CB15400004A02 /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
 		65AD3BBA1B7CB15400004A02 /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
 		65B007091BCD6D0F00844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65B0070A1BCD6D0F00844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		65B0070C1BCD6D1000844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65B0070C1BCD6D1000844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65B0070D1BCD6D2500844F2E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65B0070E1BCD6D2500844F2E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
-		65B007101BCD6D2600844F2E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65B007101BCD6D2600844F2E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		65B033DD1E27C2CD0090EC8C /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		65B033DF1E27C2D70090EC8C /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Main.strings"; sourceTree = "<group>"; };
+		65B033E11E27C2E20090EC8C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		65B033E31E27C2EC0090EC8C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
+		65B033E51E27C2F80090EC8C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		65B40D321BDE635200A9C595 /* JSConverter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSConverter.js; sourceTree = "<group>"; };
 		65B40D361BDE7D1800A9C595 /* AEAUILoaderSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAUILoaderSegue.h; sourceTree = "<group>"; };
 		65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAUILoaderSegue.m; sourceTree = "<group>"; };
@@ -1159,25 +1140,25 @@
 		65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEWhitelistDomainObject.h; sourceTree = "<group>"; };
 		65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEWhitelistDomainObject.m; sourceTree = "<group>"; };
 		65CD517D1C43A9F9004669F2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65CD517E1C43A9F9004669F2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		65CD517E1C43A9F9004669F2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51801C43A9FA004669F2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD51811C43A9FB004669F2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD51821C43AA1A004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65CD51831C43AA1B004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		65CD51831C43AA1B004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51851C43AA1C004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		65CD51861C43AA1D004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65CD51861C43AA1D004669F2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD518C1C43AC5F004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainInterface.strings"; sourceTree = "<group>"; };
-		65CD518D1C43AC5F004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		65CD518D1C43AC5F004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD518F1C43AC60004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		65CD51901C43AC61004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		65CD51901C43AC61004669F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51911C43AC89004669F2 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/MainInterface.strings"; sourceTree = "<group>"; };
-		65CD51921C43AC89004669F2 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Main.strings"; sourceTree = "<group>"; };
+		65CD51921C43AC89004669F2 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = "es-ES"; path = "es-ES.lproj/Main.strings"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51941C43AC8B004669F2 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		65CD51951C43AC8C004669F2 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		65CD51961C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		65CD51971C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
+		65CD51971C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51991C43ACB1004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
@@ -1195,7 +1176,7 @@
 		65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILongLabelViewCell.m; sourceTree = "<group>"; };
 		65EC9A041BB9824C00F53F3B /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
 		65EC9A051BB9824C00F53F3B /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		65EC9A061BB9824C00F53F3B /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		65EC9A061BB9824C00F53F3B /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
 		65EC9A071BB9824C00F53F3B /* ABECRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECRequest.h; sourceTree = "<group>"; };
 		65EC9A081BB9824C00F53F3B /* ABECRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABECRequest.m; sourceTree = "<group>"; };
 		65EC9A891BB9824C00F53F3B /* ADLocales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLocales.h; sourceTree = "<group>"; };
@@ -1239,9 +1220,6 @@
 		65F3982A1B7B684700ABCD39 /* AdguardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdguardExtensionTests.m; sourceTree = "<group>"; };
 		65F398301B7B684700ABCD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65F398351B7B684700ABCD39 /* AdguardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65F398391B7B684700ABCD39 /* AdguardExtensionUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdguardExtensionUITests.m; sourceTree = "<group>"; };
-		65F3983B1B7B684700ABCD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F398621B7B6A5300ABCD39 /* ActionRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionRequestHandler.h; sourceTree = "<group>"; };
 		65F398631B7B6A5300ABCD39 /* ActionRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionRequestHandler.m; sourceTree = "<group>"; };
@@ -1273,6 +1251,13 @@
 			files = (
 				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		658FECF51E240B8F0013BCE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,14 +1334,6 @@
 			files = (
 				65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */,
 				65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65F398321B7B684700ABCD39 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65D04FA91C881A21001A9A02 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1442,8 +1419,8 @@
 				65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */,
 				6581C93C1D66536400E739CC /* AEUILabelWithCopy.h */,
 				6581C93D1D66536500E739CC /* AEUILabelWithCopy.m */,
-				658DDFFC1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.h */,
-				658DDFFD1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m */,
+				658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */,
+				658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1475,8 +1452,6 @@
 		653153561CFC0DC100C92A73 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				653153571CFC0E4000C92A73 /* APUIAdguardDNSController.h */,
-				653153581CFC0E4000C92A73 /* APUIAdguardDNSController.m */,
 				653153631CFC899E00C92A73 /* APUIProSectionFooter.h */,
 				653153641CFC899E00C92A73 /* APUIProSectionFooter.m */,
 				655AACC71D3E10C100E316EA /* APUIDnsRequestsController.h */,
@@ -1485,8 +1460,16 @@
 				655AACD21D417C7D00E316EA /* APUIDnsRequestDetail.m */,
 				6581C9391D64FC3B00E739CC /* APUIDnsLogRecord.h */,
 				6581C93A1D64FC3B00E739CC /* APUIDnsLogRecord.m */,
-				658DDFF61DA67FE600688557 /* APUIDnsStatusTableViewCell.h */,
-				658DDFF71DA67FE600688557 /* APUIDnsStatusTableViewCell.m */,
+				658DDFF61DA67FE600688557 /* APUIProStatusTableViewCell.h */,
+				658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */,
+				651F5E011E24DFBC00E22157 /* APUIDnsServerDetailController.h */,
+				651F5E021E24DFBC00E22157 /* APUIDnsServerDetailController.m */,
+				659B79241E40E626003B1E70 /* APUIDnsServersController.h */,
+				659B79251E40E626003B1E70 /* APUIDnsServersController.m */,
+				659A47901E4123B50027D287 /* APUISystemWideController.h */,
+				659A47911E4123B50027D287 /* APUISystemWideController.m */,
+				659A47931E41248D0027D287 /* APUIDomainListController.h */,
+				659A47941E41248D0027D287 /* APUIDomainListController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1623,6 +1606,8 @@
 		655A01F91C6B7686000F00D7 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				651F5E0A1E2563A400E22157 /* ACNUrlUtils.h */,
+				651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */,
 				655A01FD1C6B7686000F00D7 /* ACNHttpUtils.h */,
 				655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */,
 				655A01FF1C6B7686000F00D7 /* ACNNetworking.h */,
@@ -1674,6 +1659,8 @@
 				655AAC861D37780700E316EA /* APDnsResponse.m */,
 				655AAC991D37821200E316EA /* APDnsLogRecord.h */,
 				655AAC9A1D37821200E316EA /* APDnsLogRecord.m */,
+				651F5E041E25004600E22157 /* APDnsServerObject.h */,
+				651F5E051E25004600E22157 /* APDnsServerObject.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -1727,6 +1714,15 @@
 				658237361D07FE6700B824F4 /* tunnel.entitlements */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		658FECF91E240B8F0013BCE3 /* AdguardProUITests */ = {
+			isa = PBXGroup;
+			children = (
+				658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */,
+				658FECFC1E240B8F0013BCE3 /* Info.plist */,
+			);
+			path = AdguardProUITests;
 			sourceTree = "<group>";
 		};
 		659886E91CF8315F003ECD1C /* AdguardPro */ = {
@@ -1982,7 +1978,7 @@
 				65AD3BB81B7CAF9F00004A02 /* SharedComponents */,
 				65F3982D1B7B684700ABCD39 /* AdguardTests */,
 				65B621031D2D3D9F0047248F /* AdguardProTests */,
-				65F398381B7B684700ABCD39 /* AdguardUITests */,
+				658FECF91E240B8F0013BCE3 /* AdguardProUITests */,
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
 				652F587A1E106DF10012353C /* AdguardLogSender */,
 				65F398121B7B684700ABCD39 /* Products */,
@@ -1995,7 +1991,6 @@
 			children = (
 				65F398111B7B684700ABCD39 /* Adguard.app */,
 				65F3982A1B7B684700ABCD39 /* AdguardTests.xctest */,
-				65F398351B7B684700ABCD39 /* AdguardUITests.xctest */,
 				65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */,
 				65C52B361B906105003AF42F /* ActionExtension.appex */,
 				659886B91CF74DE9003ECD1C /* Adguard Pro.app */,
@@ -2005,6 +2000,7 @@
 				65B621021D2D3D9E0047248F /* AdguardProTests.xctest */,
 				652F58791E106DF10012353C /* AdguardLogSender.app */,
 				652F58DE1E1071470012353C /* AdguardLogSenderPro.app */,
+				658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2031,8 +2027,6 @@
 			isa = PBXGroup;
 			children = (
 				659E59751BC6D82700FA2384 /* Localizable.strings */,
-				65AAC5D11C01D13700EBF936 /* SafariAdguardVideo.mp4 */,
-				655E94991BBEF04900286FBE /* EnablingAdguardVideo.mp4 */,
 				65F398251B7B684700ABCD39 /* Info.plist */,
 				65F398151B7B684700ABCD39 /* main.m */,
 				65711E551B8C670A00C8C4E7 /* defaults.plist */,
@@ -2048,15 +2042,6 @@
 				65F398301B7B684700ABCD39 /* Info.plist */,
 			);
 			path = AdguardTests;
-			sourceTree = "<group>";
-		};
-		65F398381B7B684700ABCD39 /* AdguardUITests */ = {
-			isa = PBXGroup;
-			children = (
-				65F398391B7B684700ABCD39 /* AdguardExtensionUITests.m */,
-				65F3983B1B7B684700ABCD39 /* Info.plist */,
-			);
-			path = AdguardUITests;
 			sourceTree = "<group>";
 		};
 		65F3985F1B7B6A5300ABCD39 /* Extension */ = {
@@ -2158,17 +2143,17 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Import Localization";
 		};
-		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */ = {
+		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */;
+			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = "$(SRCROOT)/../";
 			dependencies = (
 			);
-			name = "Git Tagging PRO (Beta/Release Branch)";
+			name = "Git Tagging PRO (Beta.Release Branch)";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Git Tagging (Beta/Release Branch)";
 		};
@@ -2186,17 +2171,17 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Run Builder";
 		};
-		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */ = {
+		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */;
+			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */;
 			buildPhases = (
 			);
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = "$(SRCROOT)/../";
 			dependencies = (
 			);
-			name = "Git Tagging (Beta/Release Branch)";
+			name = "Git Tagging (Beta.Release Branch)";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Git Tagging (Beta/Release Branch)";
 		};
@@ -2244,18 +2229,36 @@
 				6582372F1D07FE6700B824F4 /* Sources */,
 				658237301D07FE6700B824F4 /* Frameworks */,
 				658237311D07FE6700B824F4 /* Resources */,
-				6581C9341D64D62A00E739CC /* Copy DB Resources (Custom Script) */,
+				6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65FAB3451D6F2BA800A0706B /* PBXTargetDependency */,
+				655611711E5B3D3900F39A7C /* PBXTargetDependency */,
 				65FAB3431D6F2BA500A0706B /* PBXTargetDependency */,
 			);
 			name = ProTunnel;
 			productName = tunnel;
 			productReference = 658237331D07FE6700B824F4 /* ProTunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		658FECF71E240B8F0013BCE3 /* AdguardProUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 658FECFF1E240B8F0013BCE3 /* Build configuration list for PBXNativeTarget "AdguardProUITests" */;
+			buildPhases = (
+				658FECF41E240B8F0013BCE3 /* Sources */,
+				658FECF51E240B8F0013BCE3 /* Frameworks */,
+				658FECF61E240B8F0013BCE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				658FECFE1E240B8F0013BCE3 /* PBXTargetDependency */,
+			);
+			name = AdguardProUITests;
+			productName = AdguardProUITests;
+			productReference = 658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		659886481CF74DE9003ECD1C /* Adguard Pro */ = {
 			isa = PBXNativeTarget;
@@ -2401,24 +2404,6 @@
 			productReference = 65F3982A1B7B684700ABCD39 /* AdguardTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		65F398341B7B684700ABCD39 /* AdguardUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 65F398441B7B684700ABCD39 /* Build configuration list for PBXNativeTarget "AdguardUITests" */;
-			buildPhases = (
-				65F398311B7B684700ABCD39 /* Sources */,
-				65F398321B7B684700ABCD39 /* Frameworks */,
-				65F398331B7B684700ABCD39 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				65F398371B7B684700ABCD39 /* PBXTargetDependency */,
-			);
-			name = AdguardUITests;
-			productName = AdguardExtensionUITests;
-			productReference = 65F398351B7B684700ABCD39 /* AdguardUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65F398691B7B6A5300ABCD39 /* Build configuration list for PBXNativeTarget "AdguardBlockingExtension" */;
@@ -2477,6 +2462,11 @@
 								enabled = 1;
 							};
 						};
+					};
+					658FECF71E240B8F0013BCE3 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 659886481CF74DE9003ECD1C;
 					};
 					65982AEB1BA16ECA00770EA9 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2541,10 +2531,6 @@
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = 65F398101B7B684700ABCD39;
 					};
-					65F398341B7B684700ABCD39 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 65F398101B7B684700ABCD39;
-					};
 					65F3985D1B7B6A5300ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
@@ -2583,7 +2569,6 @@
 			targets = (
 				65F398101B7B684700ABCD39 /* Adguard */,
 				65F398291B7B684700ABCD39 /* AdguardTests */,
-				65F398341B7B684700ABCD39 /* AdguardUITests */,
 				65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */,
 				65C52B351B906105003AF42F /* ActionExtension */,
 				65982AEB1BA16ECA00770EA9 /* Export Localization */,
@@ -2596,11 +2581,12 @@
 				659887411CF83947003ECD1C /* ProBlockingExtension */,
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
-				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta/Release Branch) */,
-				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta/Release Branch) */,
+				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */,
+				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */,
 				652F58781E106DF10012353C /* AdguardLogSender */,
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
+				658FECF71E240B8F0013BCE3 /* AdguardProUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2635,6 +2621,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		658FECF61E240B8F0013BCE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		659886A41CF74DE9003ECD1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2647,9 +2640,7 @@
 				655AACDD1D423B7900E316EA /* Assets.xcassets in Resources */,
 				653153841D00179300C92A73 /* Main.storyboard in Resources */,
 				659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */,
-				659886AB1CF74DE9003ECD1C /* EnablingAdguardVideo.mp4 in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
-				659886AE1CF74DE9003ECD1C /* SafariAdguardVideo.mp4 in Resources */,
 				659886B01CF74DE9003ECD1C /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2708,23 +2699,14 @@
 				655AACE11D423C9100E316EA /* Assets.xcassets in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
-				655E949A1BBEF04900286FBE /* EnablingAdguardVideo.mp4 in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				65F3981F1B7B684700ABCD39 /* Main.storyboard in Resources */,
-				65AAC5D31C01D13700EBF936 /* SafariAdguardVideo.mp4 in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				655A026A1C6B7686000F00D7 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		65F398281B7B684700ABCD39 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65F398331B7B684700ABCD39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2773,7 +2755,7 @@
 			shellPath = /bin/bash;
 			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
 		};
-		6581C9341D64D62A00E739CC /* Copy DB Resources (Custom Script) */ = {
+		6556116F1E5B3BFB00F39A7C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2785,7 +2767,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db\" \"${RESOURCES}\"";
+			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default_empty.db\" \"${RESOURCES}/default.db\"";
 		};
 		659886B21CF74DE9003ECD1C /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2934,6 +2916,7 @@
 				652F58AC1E106FD40012353C /* AEUILoadingModalController.m in Sources */,
 				652F58E11E1071EA0012353C /* AEService.m in Sources */,
 				652F58AD1E106FD40012353C /* AEUIUtils.m in Sources */,
+				651F5E131E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				652F58AE1E106FD40012353C /* AESSupport.m in Sources */,
 				652F58AF1E106FD40012353C /* AESharedResources.m in Sources */,
 				652F58831E106DF10012353C /* ViewController.m in Sources */,
@@ -3001,6 +2984,7 @@
 				652F58CE1E1071470012353C /* AEUILoadingModal.m in Sources */,
 				652F58CF1E1071470012353C /* AEUILoadingModalController.m in Sources */,
 				652F58D01E1071470012353C /* AEUIUtils.m in Sources */,
+				651F5E141E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				652F58D11E1071470012353C /* AESSupport.m in Sources */,
 				652F58D21E1071470012353C /* AESharedResources.m in Sources */,
 				652F58D31E1071470012353C /* ViewController.m in Sources */,
@@ -3017,6 +3001,7 @@
 				653AEA001D084B6400AC81B4 /* DDContextFilterLogFormatter.m in Sources */,
 				658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */,
 				655AAC8B1D37780700E316EA /* APDnsRequest.m in Sources */,
+				651F5E071E25004600E22157 /* APDnsServerObject.m in Sources */,
 				653AE9FD1D084B6400AC81B4 /* DDFileLogger.m in Sources */,
 				653AEA061D084B6400AC81B4 /* NSURL+Utils.m in Sources */,
 				653AEA031D084B6400AC81B4 /* NSDate+Utils.m in Sources */,
@@ -3074,7 +3059,17 @@
 				6581C92E1D6494E600E739CC /* ABECFilterParsers.m in Sources */,
 				657672B31D2BB9B100CF8C11 /* AESharedResources.m in Sources */,
 				6581C9301D6494F700E739CC /* FMStatementKeywordRecogniser.m in Sources */,
+				651F5E121E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				653AE9FA1D084B6400AC81B4 /* CLIColor.m in Sources */,
+				655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		658FECF41E240B8F0013BCE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3088,15 +3083,16 @@
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
+				659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
-				658DDFFF1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */,
+				658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				659886581CF74DE9003ECD1C /* AESSupport.m in Sources */,
 				659886591CF74DE9003ECD1C /* ACLLogger.m in Sources */,
 				6598865A1CF74DE9003ECD1C /* ACLWildcard.m in Sources */,
 				6598865B1CF74DE9003ECD1C /* ADLocations.m in Sources */,
 				65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				6598865C1CF74DE9003ECD1C /* FMDatabasePool.m in Sources */,
-				658DDFF81DA67FE600688557 /* APUIDnsStatusTableViewCell.m in Sources */,
+				658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */,
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */,
@@ -3108,16 +3104,19 @@
 				659886621CF74DE9003ECD1C /* NSData+GZIP.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
+				659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */,
 				655AACDA1D4237F700E316EA /* AEUIFirstStartViewController.m in Sources */,
 				659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */,
 				659886661CF74DE9003ECD1C /* CLIColor.m in Sources */,
 				659886671CF74DE9003ECD1C /* AEUIFilterRuleObject.m in Sources */,
+				651F5E061E25004600E22157 /* APDnsServerObject.m in Sources */,
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
 				65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */,
 				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
+				659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */,
 				6598866C1CF74DE9003ECD1C /* AEUILoaderSegue.m in Sources */,
 				6598866D1CF74DE9003ECD1C /* AEUIWhitelistController.m in Sources */,
 				655AAC8D1D37780700E316EA /* APDnsResourceType.m in Sources */,
@@ -3142,6 +3141,7 @@
 				6598867C1CF74DE9003ECD1C /* AESharedResources.m in Sources */,
 				6598867D1CF74DE9003ECD1C /* FMResultSet.m in Sources */,
 				6598867E1CF74DE9003ECD1C /* main.m in Sources */,
+				651F5E031E24DFBC00E22157 /* APUIDnsServerDetailController.m in Sources */,
 				6598867F1CF74DE9003ECD1C /* ABECFilter.m in Sources */,
 				659886801CF74DE9003ECD1C /* AEUILongLabelViewCell.m in Sources */,
 				659886811CF74DE9003ECD1C /* FMDatabaseAdditions.m in Sources */,
@@ -3155,9 +3155,9 @@
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
 				6598868A1CF74DE9003ECD1C /* AEUIAboutController.m in Sources */,
-				653153591CFC0E4000C92A73 /* APUIAdguardDNSController.m in Sources */,
 				6598868B1CF74DE9003ECD1C /* DDLog.m in Sources */,
 				655AAC901D37780700E316EA /* APDnsResponse.m in Sources */,
+				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				6598868C1CF74DE9003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
 				655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */,
@@ -3211,6 +3211,7 @@
 				659887081CF83580003ECD1C /* CLIColor.m in Sources */,
 				659887091CF83580003ECD1C /* AESharedResources.m in Sources */,
 				6598870A1CF83580003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */,
+				655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */,
 				6518BD871DABBE6D00FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				6598870B1CF83580003ECD1C /* ABECFilter.m in Sources */,
 				6598870C1CF83580003ECD1C /* AEAUIMainController.m in Sources */,
@@ -3246,6 +3247,7 @@
 				659887271CF83580003ECD1C /* ACSSystemUtils.m in Sources */,
 				659887281CF83580003ECD1C /* ADLocations.m in Sources */,
 				659887291CF83580003ECD1C /* NSURL+Utils.m in Sources */,
+				651F5E101E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				6598872A1CF83580003ECD1C /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3284,6 +3286,7 @@
 				659887601CF83947003ECD1C /* ACNHttpUtils.m in Sources */,
 				659887611CF83947003ECD1C /* ADLocales.m in Sources */,
 				659887621CF83947003ECD1C /* Reachability.m in Sources */,
+				651F5E111E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				659887631CF83947003ECD1C /* CLIColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3331,6 +3334,7 @@
 				65EC9AF71BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				655A02331C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				65EC9CAF1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
+				651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02361C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				65B40D381BDE7D1800A9C595 /* AEAUILoaderSegue.m in Sources */,
 				65EC9BDB1BB9824C00F53F3B /* ASDatabase.m in Sources */,
@@ -3410,6 +3414,7 @@
 				650F88FE1B944871000A6012 /* AEUIWhitelistController.m in Sources */,
 				65FAB3371D6C569500A0706B /* ACObject.m in Sources */,
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
+				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
 				653843011B9B52B300AABD5A /* AEUISubscriptionLoaderController.m in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
@@ -3439,7 +3444,7 @@
 				655A02611C6B7686000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
-				658DDFFE1DA6C41B00688557 /* APUIAccessibilityHiddenTableViewCell.m in Sources */,
+				658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				6514819E1BC42E2A00211147 /* AEUIAboutController.m in Sources */,
 				655A025B1C6B7686000F00D7 /* DDLog.m in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
@@ -3489,57 +3494,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65F398311B7B684700ABCD39 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65D04F7F1C8819E7001A9A02 /* ABECFilter.m in Sources */,
-				65D04F801C8819E7001A9A02 /* ABECRequest.m in Sources */,
-				65D04F811C8819E7001A9A02 /* ACFFileUtils.m in Sources */,
-				65D04F821C8819E7001A9A02 /* ACIOStream.m in Sources */,
-				65D04F831C8819E7001A9A02 /* ACIOUtils.m in Sources */,
-				65D04F841C8819E7001A9A02 /* ACLExecuteBlockDelayed.m in Sources */,
-				65D04F851C8819E7001A9A02 /* ACLFileLocker.m in Sources */,
-				65D04F861C8819E7001A9A02 /* ACLFileLogger.m in Sources */,
-				65D04F871C8819E7001A9A02 /* ACLJobController.m in Sources */,
-				65D04F881C8819E7001A9A02 /* ACLLogger.m in Sources */,
-				65D04F891C8819E7001A9A02 /* ACLWildcard.m in Sources */,
-				65D04F8A1C8819E7001A9A02 /* CLIColor.m in Sources */,
-				65D04F8B1C8819E7001A9A02 /* DDAbstractDatabaseLogger.m in Sources */,
-				65D04F8C1C8819E7001A9A02 /* DDASLLogger.m in Sources */,
-				65D04F8D1C8819E7001A9A02 /* DDFileLogger.m in Sources */,
-				65D04F8E1C8819E7001A9A02 /* DDLog.m in Sources */,
-				65D04F8F1C8819E7001A9A02 /* DDTTYLogger.m in Sources */,
-				65D04F901C8819E7001A9A02 /* DDContextFilterLogFormatter.m in Sources */,
-				65D04F911C8819E7001A9A02 /* DDDispatchQueueLogFormatter.m in Sources */,
-				65D04F921C8819E7001A9A02 /* DDMultiFormatter.m in Sources */,
-				65D04F931C8819E7001A9A02 /* NSDate+Utils.m in Sources */,
-				65D04F941C8819E7001A9A02 /* NSException+Utils.m in Sources */,
-				65D04F951C8819E7001A9A02 /* NSString+Utils.m in Sources */,
-				65D04F961C8819E7001A9A02 /* NSURL+Utils.m in Sources */,
-				65D04F971C8819E7001A9A02 /* ACNHttpUtils.m in Sources */,
-				65D04F981C8819E7001A9A02 /* ACNNetworking.m in Sources */,
-				65D04F991C8819E7001A9A02 /* ACSSystemUtils.m in Sources */,
-				65D04F9A1C8819E7001A9A02 /* Reachability.m in Sources */,
-				65D04F9B1C8819E7001A9A02 /* ADLocales.m in Sources */,
-				65D04F9C1C8819E7001A9A02 /* ADLocations.m in Sources */,
-				65D04F9D1C8819E7001A9A02 /* ADProductInfo.m in Sources */,
-				65D04F9E1C8819E7001A9A02 /* ASDatabase.m in Sources */,
-				65D04F9F1C8819E7001A9A02 /* ASDFilterObjects.m in Sources */,
-				65D04FA01C8819E7001A9A02 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
-				65D04FA11C8819E7001A9A02 /* FMDatabase.m in Sources */,
-				65D04FA21C8819E7001A9A02 /* FMDatabaseAdditions.m in Sources */,
-				65D04FA31C8819E7001A9A02 /* FMDatabasePool.m in Sources */,
-				65D04FA41C8819E7001A9A02 /* FMDatabaseQueue.m in Sources */,
-				65D04FA51C8819E7001A9A02 /* FMResultSet.m in Sources */,
-				65D04FA61C8819E7001A9A02 /* FMSQLStatementSplitter.m in Sources */,
-				65D04FA71C8819E7001A9A02 /* FMStatementKeywordRecogniser.m in Sources */,
-				65D04FA81C8819E7001A9A02 /* FMStatementQuotedRecogniser.m in Sources */,
-				65F3983A1B7B684700ABCD39 /* AdguardExtensionUITests.m in Sources */,
-				65E9E7B41BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		65F3985A1B7B6A5300ABCD39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3574,6 +3528,7 @@
 				655A028F1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9CC61BB9841400F53F3B /* ADLocales.m in Sources */,
 				655A02A41C6B7686000F00D7 /* Reachability.m in Sources */,
+				651F5E0D1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02501C6B7686000F00D7 /* CLIColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3601,10 +3556,20 @@
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65423D9D1C89B86F00DD1224 /* PBXContainerItemProxy */;
 		};
+		655611711E5B3D3900F39A7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
+			targetProxy = 655611701E5B3D3900F39A7C /* PBXContainerItemProxy */;
+		};
 		6582373C1D07FE6700B824F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 658237321D07FE6700B824F4 /* ProTunnel */;
 			targetProxy = 6582373B1D07FE6700B824F4 /* PBXContainerItemProxy */;
+		};
+		658FECFE1E240B8F0013BCE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 659886481CF74DE9003ECD1C /* Adguard Pro */;
+			targetProxy = 658FECFD1E240B8F0013BCE3 /* PBXContainerItemProxy */;
 		};
 		659886491CF74DE9003ECD1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3661,11 +3626,6 @@
 			target = 65F398101B7B684700ABCD39 /* Adguard */;
 			targetProxy = 65F3982B1B7B684700ABCD39 /* PBXContainerItemProxy */;
 		};
-		65F398371B7B684700ABCD39 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65F398101B7B684700ABCD39 /* Adguard */;
-			targetProxy = 65F398361B7B684700ABCD39 /* PBXContainerItemProxy */;
-		};
 		65F398671B7B6A5300ABCD39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */;
@@ -3675,11 +3635,6 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
-		};
-		65FAB3451D6F2BA800A0706B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
-			targetProxy = 65FAB3441D6F2BA800A0706B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3775,19 +3730,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				65F3981E1B7B684700ABCD39 /* Base */,
-				654367BD1BBAAEFF00D48B5F /* en */,
-				654367C01BBAAF7800D48B5F /* ru */,
-				65B0070A1BCD6D0F00844F2E /* de */,
-				65B0070E1BCD6D2500844F2E /* pl */,
-				65163CBE1BE7BA01000A3575 /* it */,
-				65163CC31BE7BB37000A3575 /* sr-Latn */,
-				65163CC81BE7BF02000A3575 /* es-419 */,
 				65CD517E1C43A9F9004669F2 /* ko */,
 				65CD51831C43AA1B004669F2 /* tr */,
 				65CD518D1C43AC5F004669F2 /* zh-Hans */,
 				65CD51921C43AC89004669F2 /* es-ES */,
 				65CD51971C43ACB0004669F2 /* uk */,
 				6504C0871C58D4C40014FB52 /* fi */,
+				65B033DD1E27C2CD0090EC8C /* es-419 */,
+				65B033DF1E27C2D70090EC8C /* sr-Latn */,
+				65B033E11E27C2E20090EC8C /* it */,
+				65B033E31E27C2EC0090EC8C /* pl */,
+				65B033E51E27C2F80090EC8C /* de */,
+				6541E3251E5D863100847CE4 /* ru */,
+				6541E3271E5D863C00847CE4 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4005,6 +3960,46 @@
 				PROVISIONING_PROFILE = "6adfa0d3-1dd7-4997-ad7a-bc6e11f4efe6";
 				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro.tunnel";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		658FED001E240B8F0013BCE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AdguardProUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardProUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TEST_TARGET_NAME = "Adguard Pro";
+			};
+			name = Debug;
+		};
+		658FED011E240B8F0013BCE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = AdguardProUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardProUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TEST_TARGET_NAME = "Adguard Pro";
 			};
 			name = Release;
 		};
@@ -4473,30 +4468,6 @@
 			};
 			name = Release;
 		};
-		65F398451B7B684700ABCD39 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AdguardUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtensionUITests;
-				PRODUCT_NAME = AdguardUITests;
-				TEST_TARGET_NAME = AdguardExtension;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		65F398461B7B684700ABCD39 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AdguardUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtensionUITests;
-				PRODUCT_NAME = AdguardUITests;
-				TEST_TARGET_NAME = AdguardExtension;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 		65F3986A1B7B6A5300ABCD39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4586,6 +4557,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		658FECFF1E240B8F0013BCE3 /* Build configuration list for PBXNativeTarget "AdguardProUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				658FED001E240B8F0013BCE3 /* Debug */,
+				658FED011E240B8F0013BCE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4631,7 +4611,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta/Release Branch)" */ = {
+		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65B39E051D75E9B2001AD773 /* Debug */,
@@ -4667,7 +4647,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta/Release Branch)" */ = {
+		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65CB60391D75DF8B005A3C04 /* Debug */,
@@ -4699,15 +4679,6 @@
 			buildConfigurations = (
 				65F398421B7B684700ABCD39 /* Debug */,
 				65F398431B7B684700ABCD39 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65F398441B7B684700ABCD39 /* Build configuration list for PBXNativeTarget "AdguardUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65F398451B7B684700ABCD39 /* Debug */,
-				65F398461B7B684700ABCD39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
