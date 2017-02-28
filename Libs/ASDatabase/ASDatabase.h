@@ -23,7 +23,6 @@
 /////////////////////////////////////////////////////////////////////
 
 #define ASD_DEFAULT_DB_NAME             @"default.db"
-#define ASD_EMPTY_DEFAULT_DB_NAME       @"default_empty.db"
 
 #define ASDatabaseErrorDomain        @"ASDatabaseErrorDomain"
 #define ASDatabaseOpenErrorCode      100
@@ -51,6 +50,14 @@
 @property (readonly) BOOL ready;
 @property (readonly) NSError *error;
 @property (readonly, nonatomic) NSURL *dbURL;
+
+/**
+ Checks version of the default DB.
+
+ @param dbURL Url of the production DB
+ @return YES, if default DB was installed, and it has actual version.
+ */
+- (BOOL)checkDefaultDbVersionWithURL:(NSURL *)dbURL;
 
 /**
     Init database, copying default.db to production if need it, checking scheme version.
