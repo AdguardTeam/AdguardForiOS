@@ -522,6 +522,7 @@
 - (NSArray <NSArray *> *)processingOutgoingPackets:(NSMutableArray<NSData *> *)packets {
 
     NSMutableArray *whitelistPackets = [NSMutableArray array];
+    NSMutableArray *blacklistPackets = [NSMutableArray array];
     NSMutableArray *blacklistDatagrams = [NSMutableArray array];
     for (NSData *packet in packets) {
 
@@ -547,7 +548,7 @@
                     
                     [blacklistDatagrams addObject:datagram];
                     
-                    [packets removeObject:packet];
+                    [blacklistPackets addObject:packet];
                     
                     blacklisted = YES;
                     
@@ -566,6 +567,9 @@
     
     if (whitelistPackets.count) {
         [packets removeObjectsInArray:whitelistPackets];
+    }
+    if (blacklistPackets.count) {
+        [packets removeObjectsInArray:blacklistPackets];
     }
     
     return @[whitelistPackets, blacklistDatagrams];
