@@ -506,7 +506,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return updated;
 }
 
-- (BOOL)importRuleTexts:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId{
+- (BOOL)importRules:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId{
     
     if (!rules) {
         

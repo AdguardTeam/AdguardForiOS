@@ -17,7 +17,7 @@
  */
 
 
-#import "APUIDomainListController.h"
+#import "AEUICustomTextEditorController.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
 #import "APVPNManager.h"
@@ -85,9 +85,9 @@
 @end
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDomainListController
+#pragma mark - AEUICustomTextEditorController
 
-@implementation APUIDomainListController {
+@implementation AEUICustomTextEditorController {
     
     BOOL _searchBarHidden;
     BOOL _keyboardHidden;
@@ -98,6 +98,9 @@
     UIView *_currentSelectionMarker;
     
     id _observer;
+    
+    NSString *_textForEditing;
+    NSAttributedString *_attributedTextForEditing;
 }
 
 - (void)viewDidLoad {
@@ -111,32 +114,19 @@
     _searchBarHidden = _keyboardHidden = YES;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
-    [self.domainsTextView setText:self.textForEditing];
+    self.placeholderLabel.text = self.textForPlaceholder;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
     // tunning accessibility
-    self.domainsTextView.accessibilityHint = self.placeholderLabel.text;
+    self.editorTextView.accessibilityHint = self.textForPlaceholder;
     self.placeholderLabel.isAccessibilityElement = NO;
     if (UIAccessibilityIsVoiceOverRunning()) {
-        [self scrollViewDidEndDragging:self.domainsTextView willDecelerate:NO];
+        [self scrollViewDidEndDragging:self.editorTextView willDecelerate:NO];
     }
     //---
-    
-    if ([NSString isNullOrEmpty:self.textForEditing]) {
-        
-        self.placeholderLabel.hidden = NO;
-    }
-    else {
-        // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-        [self.domainsTextView sizeToFit];
-        [self.domainsTextView setScrollEnabled:YES];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self.domainsTextView setContentOffset:
-             CGPointMake(- self.domainsTextView.contentInset.left, - self.domainsTextView.contentInset.top)];
-        });
-    }
+ 
+    [self resetText];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -155,17 +145,38 @@
 }
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark Public Methods
+
+- (NSString *)textForEditing {
+    return _textForEditing;
+}
+- (void)setTextForEditing:(NSString *)textForEditing {
+    
+    _textForEditing = textForEditing;
+    [self resetText];
+}
+
+- (NSAttributedString *)attributedTextForEditing {
+    return _attributedTextForEditing;
+}
+- (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
+    
+    _attributedTextForEditing = attributedTextForEditing;
+    [self resetText];
+}
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
 - (IBAction)clickDone:(id)sender {
 
-//    UIEdgeInsets insets = self.domainsTextView.contentInset;
-//    CGPoint offset = self.domainsTextView.contentOffset;
-//    CGSize size = self.domainsTextView.contentSize;
+//    UIEdgeInsets insets = self.editorTextView.contentInset;
+//    CGPoint offset = self.editorTextView.contentOffset;
+//    CGSize size = self.editorTextView.contentSize;
 //    
 //    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
 //    return;
-    if (self.done(self.domainsTextView.text)) {
+    if (self.done(self.editorTextView.text)) {
         
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -239,8 +250,8 @@
         [UIView animateWithDuration:0.1 animations:^{
             
             UIEdgeInsets insets = UIEdgeInsetsMake(absoluteTopVal, 0, 0, 0);
-            self.domainsTextView.contentInset = insets;
-            self.domainsTextView.scrollIndicatorInsets = insets;
+            self.editorTextView.contentInset = insets;
+            self.editorTextView.scrollIndicatorInsets = insets;
             [self.view layoutIfNeeded];
         }];
         
@@ -257,8 +268,8 @@
         [UIView animateWithDuration:0.1 animations:^{
             
             UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 0, 0);
-            self.domainsTextView.contentInset = insets;
-            self.domainsTextView.scrollIndicatorInsets = insets;
+            self.editorTextView.contentInset = insets;
+            self.editorTextView.scrollIndicatorInsets = insets;
             [self.view layoutIfNeeded];
         }];
         
@@ -295,6 +306,44 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
+- (void)resetText {
+    
+    if (self.editorTextView == nil) {
+        return;
+    }
+    
+    NSString *checkString;
+    
+    if (self.attributedTextForEditing) {
+        
+        [self.editorTextView setAttributedText:self.attributedTextForEditing];
+        checkString = self.attributedTextForEditing.string;
+    }
+    else {
+        
+        [self.editorTextView setText:self.textForEditing];
+        checkString = self.textForEditing;
+    }
+    
+    if ([NSString isNullOrEmpty:checkString]) {
+        
+        self.placeholderLabel.hidden = NO;
+    }
+    else {
+        self.placeholderLabel.hidden = NO;
+        
+        // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
+        [self.editorTextView sizeToFit];
+        [self.editorTextView setScrollEnabled:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.editorTextView setContentOffset:
+             CGPointMake(- self.editorTextView.contentInset.left, - self.editorTextView.contentInset.top)];
+        });
+    }
+    
+}
+
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -315,12 +364,12 @@
     CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, kbSize.height, 0.0);
-    self.domainsTextView.contentInset = contentInsets;
-    self.domainsTextView.scrollIndicatorInsets = contentInsets;
+    self.editorTextView.contentInset = contentInsets;
+    self.editorTextView.scrollIndicatorInsets = contentInsets;
     
-    if ([self.domainsTextView isFirstResponder]) {
+    if ([self.editorTextView isFirstResponder]) {
         
-        [self.domainsTextView scrollRangeToVisible:self.domainsTextView.selectedRange animated:YES];
+        [self.editorTextView scrollRangeToVisible:self.editorTextView.selectedRange animated:YES];
     }
     else {
         
@@ -334,17 +383,17 @@
     CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, 0.0, 0.0);
-    self.domainsTextView.contentInset = contentInsets;
-    self.domainsTextView.scrollIndicatorInsets = contentInsets;
+    self.editorTextView.contentInset = contentInsets;
+    self.editorTextView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)selectFirst {
 
-    NSUInteger len = self.domainsTextView.text.length;
+    NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
         return;
     }
-    _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
+    _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
     if (_currentTextSelection.location == NSNotFound) {
         return;
@@ -355,14 +404,14 @@
 
 - (void)selectNext {
     
-    NSUInteger len = self.domainsTextView.text.length;
+    NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
         return;
     }
     NSUInteger location = (_currentTextSelection.location == NSNotFound ? 0 : _currentTextSelection.location) + _currentTextSelection.length;
     NSRange searchRange = NSMakeRange(location, len - location);
     
-    _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch range:searchRange];
+    _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch range:searchRange];
     
     if (_currentTextSelection.location == NSNotFound) {
         [self selectFirst];
@@ -374,7 +423,7 @@
 
 - (void)selectPrev {
     
-    NSUInteger len = self.domainsTextView.text.length;
+    NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
         return;
     }
@@ -383,13 +432,13 @@
                                       ? _currentTextSelection.location
                                       : len);
     
-    _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString
+    _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString
                                                              options:(NSCaseInsensitiveSearch | NSBackwardsSearch)
                                                                range:searchRange];
     
     if (_currentTextSelection.location == NSNotFound && searchRange.length < len) {
         searchRange = NSMakeRange(0, len);
-        _currentTextSelection = [self.domainsTextView.text rangeOfString:_currentSearchString
+        _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString
                                                                  options:(NSCaseInsensitiveSearch | NSBackwardsSearch)
                                                                    range:searchRange];
         if (_currentTextSelection.location == NSNotFound) {
@@ -408,7 +457,7 @@
         return;
     }
     
-    CGRect rect = [self.domainsTextView scrollRangeToVisible:_currentTextSelection animated:YES];
+    CGRect rect = [self.editorTextView scrollRangeToVisible:_currentTextSelection animated:YES];
     
     if (_currentTextSelection.length == 0) {
         _currentSelectionMarker.hidden = YES;
@@ -418,10 +467,10 @@
     if (_currentSelectionMarker == nil) {
         
         _currentSelectionMarker = [[UIView alloc] initWithFrame:rect];
-        _currentSelectionMarker.backgroundColor = [self.domainsTextView.tintColor colorWithAlphaComponent:0.2f];
+        _currentSelectionMarker.backgroundColor = [self.editorTextView.tintColor colorWithAlphaComponent:0.2f];
         _currentSelectionMarker.layer.cornerRadius = 3.0f;
         _currentSelectionMarker.userInteractionEnabled = NO;
-        [self.domainsTextView addSubview:_currentSelectionMarker];
+        [self.editorTextView addSubview:_currentSelectionMarker];
     }
     else {
         [_currentSelectionMarker setFrame:rect];

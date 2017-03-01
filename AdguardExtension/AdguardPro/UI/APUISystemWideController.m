@@ -19,7 +19,7 @@
 #import "APUISystemWideController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
-#import "APUIDomainListController.h"
+#import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
 
 
@@ -99,7 +99,10 @@
     
     if (toBlacklist || toWhitelist) {
     
-        APUIDomainListController *domainList = segue.destinationViewController;
+        AEUICustomTextEditorController *domainList = segue.destinationViewController;
+    
+        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by commas or line breaks.",
+                                                          @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist(Whitelist) screen. The placeholder text.");
         
         domainList.navigationItem.title = toWhitelist
         ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")

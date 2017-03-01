@@ -27,6 +27,9 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
+#import "AEUICustomTextEditorController.h"
+#import "ASDFilterObjects.h"
+#import "AEUIFilterRuleObject.h"
 
 #ifdef PRO
 
@@ -77,6 +80,8 @@
     
     NSString *_ruleTextHolderForAddRuleCommand;
 
+    UIBarButtonItem *_cancelNavigationItem;
+
 #ifdef PRO
     APUIProSectionFooter *_proFooter;
 #endif
@@ -91,6 +96,10 @@
     
     self.title = AE_PRODUCT_NAME;
     
+    _cancelNavigationItem = [[UIBarButtonItem alloc]
+                             initWithTitle:NSLocalizedString(@"Cancel",
+                                                             @"(AEUIMainController) Text on the button that cancels an operation.")
+                             style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
     
     // tunning accessibility
@@ -312,6 +321,7 @@
             _ruleTextHolderForAddRuleCommand = nil;
         }
     }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -568,10 +578,115 @@
     return [super tableView:tableView heightForFooterInSection:section];
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Helper Methods (Private)
+
+- (void)prepareUserFilterControllerWithSegue:(UIStoryboardSegue *)segue {
+    
+    
+    AEUICustomTextEditorController *rulesList = segue.destinationViewController;
+    
+    rulesList.textForPlaceholder = NSLocalizedString(@"User Filter rules here",
+                                                      @"(AEUIMainController) Description!!!");
+    
+    rulesList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Description");
+    self.navigationItem.backBarButtonItem = _cancelNavigationItem;
+    
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                       @autoreleasepool {
+                           
+                           NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
+                           
+                           NSArray *rules = [[[AEService singleton] antibanner]
+                                             rulesForFilter:@(ASDF_USER_FILTER_ID)];
+                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"];
+                           for (ASDFilterRule *item in rules) {
+                               
+                               AEUIFilterRuleObject *obj = [[AEUIFilterRuleObject alloc]
+                                                            initWithRule:item];
+                               if (obj) {
+                                   [attributedText appendAttributedString:obj.attributeRuteText];
+                                   [attributedText appendAttributedString:newline];
+                               }
+                           }
+                           
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               
+                               rulesList.attributedTextForEditing = attributedText;
+                           });
+                       }
+                   });
+
+    rulesList.done = ^BOOL(NSString *text) {
+        
+        NSMutableArray *domains = [NSMutableArray array];
+        @autoreleasepool {
+            
+            NSMutableCharacterSet *delimCharSet;
+            
+            delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+            [delimCharSet addCharactersInString:@","];
+            
+            for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
+                
+                NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                if (candidate.length) {
+                    [domains addObject:candidate];
+                }
+            }
+        }
+        
+        @autoreleasepool {
+            
+            NSArray *propertyHolder;
+            
+            if (toBlacklist) {
+                
+                propertyHolder = APSharedResources.blacklistDomains;
+                APSharedResources.blacklistDomains = domains;
+            }
+            else {
+                
+                propertyHolder = APSharedResources.whitelistDomains;
+                APSharedResources.whitelistDomains = domains;
+            }
+            
+            APVPNManager *manager = [APVPNManager singleton];
+            [manager sendReloadSystemWideDomainLists];
+            
+            if (manager.lastError) {
+                
+                //processing of the error
+                if (toBlacklist) {
+                    APSharedResources.blacklistDomains = propertyHolder;
+                }
+                else {
+                    
+                    APSharedResources.whitelistDomains = propertyHolder;
+                }
+                
+                return NO;
+            }
+        }
+        
+        return YES;
+        
+    };
+    
+    if (toBlacklist) {
+        
+        domainList.textForEditing = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+    }
+    else {
+        
+        domainList.textForEditing = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+    }
+    
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
-/////////////////////////////////////////////////////////////////////
 
 - (APUIProSectionFooter *)proSectionFooter{
     

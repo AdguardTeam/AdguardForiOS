@@ -60,6 +60,8 @@ typedef enum {
     UIBackgroundTaskIdentifier _reloadContentBlockingJsonLongTaskId;
     
     BOOL started;
+    
+    NSString *_unexpectedErrorMessage;
 }
 
 @end
@@ -78,6 +80,8 @@ static AEService *singletonService;
     if (self) {
         
         workQueue = dispatch_queue_create("AAService", DISPATCH_QUEUE_SERIAL);
+        
+        _unexpectedErrorMessage = NSLocalizedString(@"An unexpected error occurred. Please contact support team.", @"(AEService) The default message for an unknown error.");
         
         //------------ Checking First Running -----------------------------
         [self checkFirstRunning];
@@ -165,6 +169,21 @@ static AEService *singletonService;
     return antibanner;
 }
 
+- (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules {
+    
+    if (rules == nil) {
+
+        rules = [NSArray new];
+    }
+    
+    if ([antibanner importRules:rules filterId:@(ASDF_USER_FILTER_ID)]) {
+        return nil;
+    }
+    
+    return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                           userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
+}
+
 - (NSError *)updateRule:(ASDFilterRule *)rule oldRuleText:(NSString *)oldRuleText{
 
     @autoreleasepool {
@@ -198,7 +217,8 @@ static AEService *singletonService;
             return nil;
         }
         
-        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                               userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
     }
 }
 
@@ -234,7 +254,8 @@ static AEService *singletonService;
             return nil;
         }
         
-        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                               userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
     }
 }
 
@@ -281,7 +302,8 @@ static AEService *singletonService;
 
             if (!result) {
 
-                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                                        userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
                 break;
             }
 
@@ -380,7 +402,8 @@ static AEService *singletonService;
             
             if (!result) {
                 
-                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                                        userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
                 break;
             }
             

@@ -59,6 +59,14 @@ extern NSString *AEServiceErrorDomain;
 - (void)stop;
 
 
+/**
+ Replace all rules in user filter of the production DB.
+
+ @param rules List of the new rules
+ @return Returns nil on success or DB error object. 
+ */
+- (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules;
+
 - (NSError *)updateRule:(ASDFilterRule *)rule oldRuleText:(NSString *)oldRuleText;
 - (NSError *)addRule:(ASDFilterRule *)rule temporarily:(BOOL)temporarily;
 - (BOOL)removeRules:(NSArray *)rules;

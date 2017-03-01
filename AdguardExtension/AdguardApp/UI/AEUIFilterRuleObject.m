@@ -140,6 +140,7 @@
     [self willChangeValueForKey:@"active"];
     [self willChangeValueForKey:@"textColor"];
     [self willChangeValueForKey:@"isEnabled"];
+    [self willChangeValueForKey:@"attributeRuteText"];
 
     _active = YES;
     _isEnabled = isEnabledHolder;
@@ -180,6 +181,14 @@
             break;
     }
     
+    _attributeRuteText = [[NSAttributedString alloc]
+                          initWithString:_ruleText
+                          attributes:@{
+                                       NSFontAttributeName: _font,
+                                       NSForegroundColorAttributeName: _textColor
+                                       }];
+    
+    [self didChangeValueForKey:@"attributeRuteText"];
     [self didChangeValueForKey:@"isEnabled"];
     [self didChangeValueForKey:@"textColor"];
     [self didChangeValueForKey:@"active"];

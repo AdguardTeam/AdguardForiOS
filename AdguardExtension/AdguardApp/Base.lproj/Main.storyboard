@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="73U-9Z-0yf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="73U-9Z-0yf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -112,7 +112,7 @@
                             <tableViewSection headerTitle="ADVANCED" id="HLK-5x-bSz">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="tWU-pP-c1b" style="IBUITableViewCellStyleDefault" id="fW7-8C-A7Z">
-                                        <rect key="frame" x="0.0" y="373" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fW7-8C-A7Z" id="8hS-pb-6d1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -132,7 +132,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="icS-tR-srI" style="IBUITableViewCellStyleDefault" id="yo4-HI-mu5">
-                                        <rect key="frame" x="0.0" y="417" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yo4-HI-mu5" id="EBz-Ck-xRB">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -184,7 +184,7 @@
                     </connections>
                 </switch>
             </objects>
-            <point key="canvasLocation" x="4179" y="-3808"/>
+            <point key="canvasLocation" x="2700" y="851"/>
         </scene>
         <!--PRO DNS Nav Custom Server-->
         <scene sceneID="KTn-jl-zaC">
@@ -204,7 +204,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9C-PP-3GS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5498" y="-2440"/>
+            <point key="canvasLocation" x="4016" y="-1940"/>
         </scene>
         <!--PRO DNS Custom Server-->
         <scene sceneID="6vu-CJ-5MH">
@@ -401,12 +401,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6278" y="-2441"/>
+            <point key="canvasLocation" x="4796" y="-1942"/>
         </scene>
-        <!--PRO System-Wide Domain List-->
+        <!--Custom Text Editor-->
         <scene sceneID="Aa5-N5-Tcy">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="04M-uU-tjs" userLabel="PRO System-Wide Domain List" customClass="APUIDomainListController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="04M-uU-tjs" userLabel="Custom Text Editor" customClass="AEUICustomTextEditorController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jIE-kK-k0W"/>
                         <viewControllerLayoutGuide type="bottom" id="TPi-Tq-Ny2"/>
@@ -420,7 +420,7 @@
                         </userGuides>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Ru9-g2-Yvv">
-                                <rect key="frame" x="16" y="64" width="288" height="504"/>
+                                <rect key="frame" x="16" y="64" width="288" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -462,7 +462,7 @@
                                 </items>
                                 <color key="barTintColor" red="0.83987205610000004" green="0.83987205610000004" blue="0.83987205610000004" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="List the domain names here. Separate different domain names by commas or line breaks." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4C-i7-VxE">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4C-i7-VxE">
                                 <rect key="frame" x="16" y="184" width="288" height="200"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -475,10 +475,17 @@
                                 <color key="textColor" red="0.61176470588235299" green="0.61176470588235299" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-J3-cap">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Clear All" style="plain" id="CM4-d8-GVV"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="Ru9-g2-Yvv" secondAttribute="bottom" id="0jX-Tb-7OQ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ru9-g2-Yvv" secondAttribute="bottom" constant="44" id="0jX-Tb-7OQ"/>
                             <constraint firstItem="G4C-i7-VxE" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leadingMargin" id="Das-HS-Hl7"/>
                             <constraint firstItem="1C7-7e-tc4" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leading" id="LMi-Nn-3MQ"/>
                             <constraint firstItem="Ru9-g2-Yvv" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leadingMargin" id="OZE-Qc-1ev"/>
@@ -499,10 +506,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="domainsTextView" destination="Ru9-g2-Yvv" id="CJe-CH-hHz"/>
                         <outlet property="doneButton" destination="mHA-FX-Jfq" id="PzC-x3-lSB"/>
+                        <outlet property="editorTextView" destination="Ru9-g2-Yvv" id="CJe-CH-hHz"/>
                         <outlet property="placeholderLabel" destination="G4C-i7-VxE" id="sA3-Jc-4zV"/>
                         <outlet property="seachToolBarConstraint" destination="rHf-Xq-uWl" id="w9M-nl-6q7"/>
                         <outlet property="searchBar" destination="lHn-v7-UvW" id="IZW-yg-URT"/>
@@ -512,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ce-4d-kMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5493.75" y="-3925.3521126760565"/>
+            <point key="canvasLocation" x="4012.5" y="175.35211267605635"/>
         </scene>
         <!--PRO DNS Requests-->
         <scene sceneID="tUB-Rb-u1Z">
@@ -570,7 +576,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7s-GI-RUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5498" y="-3230"/>
+            <point key="canvasLocation" x="4014" y="1066"/>
         </scene>
         <!--PRO DNS Request Detail-->
         <scene sceneID="g8X-Ve-X74">
@@ -822,7 +828,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6233" y="-3230"/>
+            <point key="canvasLocation" x="4748" y="1066"/>
         </scene>
         <!--PRO DNS Servers-->
         <scene sceneID="hJk-CU-PwW">
@@ -939,7 +945,7 @@
                     </tableViewCellContentView>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="4181" y="-2440"/>
+            <point key="canvasLocation" x="2700" y="-1940"/>
         </scene>
         <!--Loading Modal Controller-->
         <scene sceneID="NBX-MY-jYY">
@@ -1007,7 +1013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ELp-QO-uZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3345" y="-1503"/>
+            <point key="canvasLocation" x="4014" y="-1263"/>
         </scene>
         <!--Enabling Adguard Video-->
         <scene sceneID="YKn-bw-3Em">
@@ -1125,7 +1131,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sV1-SB-Gpd">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1236,7 +1242,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="7iK-k2-sPT" kind="show" identifier="toUserFilter" id="T3U-ze-3hm"/>
+                                            <segue destination="04M-uU-tjs" kind="show" id="6Ee-nM-Qm2"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="eMs-Eq-7wW" style="IBUITableViewCellStyleDefault" id="wst-Mw-2uS">
@@ -1256,7 +1262,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="417-LT-4LJ" kind="show" id="lRY-Qa-jgK"/>
+                                            <segue destination="04M-uU-tjs" kind="show" id="MKF-oV-GeK"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="rpL-Mz-xwI" detailTextLabel="aaV-fz-QGQ" style="IBUITableViewCellStyleValue1" id="OJV-bd-wDq">
@@ -1349,7 +1355,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93Y-I8-Ha9">
-                                                    <rect key="frame" x="18" y="12.5" width="104.5" height="19.5"/>
+                                                    <rect key="frame" x="18" y="12" width="105" height="20"/>
                                                     <accessibility key="accessibilityConfiguration" label=" ">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -1878,7 +1884,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIc-mj-mzU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="-803"/>
+            <point key="canvasLocation" x="2700" y="-611"/>
         </scene>
         <!--Filters-->
         <scene sceneID="xZW-Nl-y72">
@@ -1959,7 +1965,7 @@
                 </stackView>
                 <tapGestureRecognizer id="s58-IW-JGn"/>
             </objects>
-            <point key="canvasLocation" x="3345" y="-803"/>
+            <point key="canvasLocation" x="4014" y="-611"/>
         </scene>
         <!--Filter Detail-->
         <scene sceneID="Iy8-OZ-J4b">
@@ -2142,7 +2148,7 @@
                     </connections>
                 </switch>
             </objects>
-            <point key="canvasLocation" x="4053" y="-803"/>
+            <point key="canvasLocation" x="4721" y="-611"/>
         </scene>
         <!--User Filter-->
         <scene sceneID="L9z-96-t6Y">
@@ -2193,7 +2199,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OoQ-JB-ENX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2297" y="11"/>
+            <point key="canvasLocation" x="4723" y="2005"/>
         </scene>
         <!--Rule-->
         <scene sceneID="zhN-e6-dYe">
@@ -2274,7 +2280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uOz-4i-EI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3009" y="10"/>
+            <point key="canvasLocation" x="5434" y="2004"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1eZ-8k-IzN">
@@ -2341,7 +2347,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABL-2l-46I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2282" y="870"/>
+            <point key="canvasLocation" x="4371" y="2789"/>
         </scene>
         <!--Domain-->
         <scene sceneID="YjW-fp-vwZ">
@@ -2411,7 +2417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jO3-Zr-giM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2995" y="870"/>
+            <point key="canvasLocation" x="5085" y="2789"/>
         </scene>
         <!--First Start-->
         <scene sceneID="9IM-f8-CFn">
@@ -2601,8 +2607,8 @@
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="MKF-oV-GeK"/>
         <segue reference="HiX-UG-PxM"/>
-        <segue reference="PWA-3E-5nf"/>
         <segue reference="2RS-yU-LDi"/>
     </inferredMetricsTieBreakers>
 </document>

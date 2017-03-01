@@ -19,9 +19,9 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APUIDomainListController
+#pragma mark - AEUICustomTextEditorController
 
-@interface APUIDomainListController  : UIViewController <UITextViewDelegate, UISearchBarDelegate>
+@interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate>
 
 /**
  Block of the code, which will be performed when user press the Done key.
@@ -31,11 +31,20 @@
  Initial text, which will be edited.
  */
 @property (nonatomic) NSString *textForEditing;
+/**
+ Initial attributed text, which will be edited.
+ This property has priority above `textForEditing`.
+ */
+@property (nonatomic) NSAttributedString *attributedTextForEditing;
+/**
+ Text for placeholder, ie when textview is empty.
+ */
+@property (nonatomic) NSString *textForPlaceholder;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
-@property (weak, nonatomic) IBOutlet UITextView *domainsTextView;
+@property (weak, nonatomic) IBOutlet UITextView *editorTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachToolBarConstraint;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
