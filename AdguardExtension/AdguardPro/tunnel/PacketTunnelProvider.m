@@ -101,6 +101,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
+    pendingStartCompletion = completionHandler;
+    
     // Init database
     NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
     if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
@@ -116,8 +118,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     //--------------------------
     
     [_reachabilityHandler startNotifier];
-    
-   pendingStartCompletion = completionHandler;
     
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
