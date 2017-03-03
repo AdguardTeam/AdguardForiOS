@@ -949,7 +949,7 @@
 		655A01B21C6B7686000F00D7 /* ACIOUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACIOUtils.m; sourceTree = "<group>"; };
 		655A01B31C6B7686000F00D7 /* ACIOUtilsProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACIOUtilsProtocols.h; sourceTree = "<group>"; };
 		655A01B71C6B7686000F00D7 /* ACLExecuteBlockDelayed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLExecuteBlockDelayed.h; sourceTree = "<group>"; };
-		655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLExecuteBlockDelayed.m; sourceTree = "<group>"; };
+		655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACLExecuteBlockDelayed.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655A01B91C6B7686000F00D7 /* ACLFileLocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLocker.h; sourceTree = "<group>"; };
 		655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLocker.m; sourceTree = "<group>"; };
 		655A01BB1C6B7686000F00D7 /* ACLFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLogger.h; sourceTree = "<group>"; };
@@ -1113,7 +1113,7 @@
 		65B621191D2E845D0047248F /* APTDnsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTDnsRequest.m; sourceTree = "<group>"; };
 		65B6211C1D2E962F0047248F /* APTDnsRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTDnsRequestTest.m; sourceTree = "<group>"; };
 		65B6211F1D2F95EE0047248F /* APTUdpProxySession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTUdpProxySession.h; sourceTree = "<group>"; };
-		65B621201D2F95EE0047248F /* APTUdpProxySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTUdpProxySession.m; sourceTree = "<group>"; };
+		65B621201D2F95EE0047248F /* APTUdpProxySession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APTUdpProxySession.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65B621231D3139FF0047248F /* APTEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APTEndpoint.h; sourceTree = "<group>"; };
 		65B621241D3139FF0047248F /* APTEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTEndpoint.m; sourceTree = "<group>"; };
 		65BA76741BA5C2D100D11F50 /* AEUIWelcomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWelcomePageController.h; sourceTree = "<group>"; };
