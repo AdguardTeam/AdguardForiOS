@@ -93,7 +93,7 @@
 		655A04C61C6B7790000F00D7 /* ACIOUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACIOUtils.m; sourceTree = "<group>"; };
 		655A04C71C6B7790000F00D7 /* ACIOUtilsProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACIOUtilsProtocols.h; sourceTree = "<group>"; };
 		655A04CB1C6B7790000F00D7 /* ACLExecuteBlockDelayed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLExecuteBlockDelayed.h; sourceTree = "<group>"; };
-		655A04CC1C6B7790000F00D7 /* ACLExecuteBlockDelayed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLExecuteBlockDelayed.m; sourceTree = "<group>"; };
+		655A04CC1C6B7790000F00D7 /* ACLExecuteBlockDelayed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ACLExecuteBlockDelayed.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		655A04CD1C6B7790000F00D7 /* ACLFileLocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLocker.h; sourceTree = "<group>"; };
 		655A04CE1C6B7790000F00D7 /* ACLFileLocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLocker.m; sourceTree = "<group>"; };
 		655A04CF1C6B7790000F00D7 /* ACLFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLogger.h; sourceTree = "<group>"; };
