@@ -26,6 +26,69 @@
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
 #define WIDTH_CHANGE_KEY                    @"frame"
 
+#define EDITED_TEXT_FONT                    [UIFont systemFontOfSize:[UIFont systemFontSize]]
+#define EDITED_TEXT_COLOR                   [UIColor blackColor]
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AEUITextStorage
+
+@interface AEUITextStorage : NSTextStorage
+@end
+
+@implementation AEUITextStorage{
+    NSMutableAttributedString *_imp;
+    NSDictionary *_editAttrs;
+}
+
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        _imp = [NSMutableAttributedString new];
+        _editAttrs = @{
+                       NSFontAttributeName: EDITED_TEXT_FONT,
+                       NSForegroundColorAttributeName: EDITED_TEXT_COLOR
+                       };
+    }
+    
+    return self;
+}
+
+
+- (NSString *)string{
+    
+    return _imp.string;
+}
+
+- (NSDictionary *)attributesAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range{
+    return [_imp attributesAtIndex:location effectiveRange:range];
+}
+
+
+- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str {
+    [_imp replaceCharactersInRange:range withString:str];
+    [self edited:NSTextStorageEditedCharacters range:range changeInLength:(NSInteger)str.length - (NSInteger)range.length];
+}
+
+- (void)setAttributes:(NSDictionary *)attrs range:(NSRange)range {
+    [_imp setAttributes:attrs range:range];
+    [self edited:NSTextStorageEditedAttributes range:range changeInLength:0];
+}
+
+- (void)processEditing
+{
+    NSRange paragaphRange = [self.string paragraphRangeForRange: self.editedRange];
+    [self setAttributes:_editAttrs range:paragaphRange];
+    
+    [super processEditing];
+}
+
+
+
+@end
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - UITextView (insets)
 
 @interface UITextView (insets)
 
@@ -101,11 +164,34 @@
     
     NSString *_textForEditing;
     NSAttributedString *_attributedTextForEditing;
+    
+    NSDictionary *_editAttrs;
+    BOOL _editting;
+//    AEUITextStorage *_textStorage;
+//    NSLayoutManager *_layoutManager;
 }
 
 - (void)viewDidLoad {
+    
+//    NSTextStorage *originStorage = self.editorTextView.textStorage;
+//    [originStorage removeLayoutManager:self.editorTextView.layoutManager];
+//    
+//    _textStorage = [AEUITextStorage new];
+//    [_textStorage addLayoutManager:self.editorTextView.layoutManager];
+//    
+//    self.editorTextView.layoutManager.textStorage = _textStorage;
+//    [self.editorTextView.textContainer replaceLayoutManager:_layoutManager];
+    
     [super viewDidLoad];
- 
+    
+    _editting = NO;
+    _editAttrs = @{
+                   NSFontAttributeName: EDITED_TEXT_FONT,
+                   NSForegroundColorAttributeName: EDITED_TEXT_COLOR
+                   };
+
+    self.editorTextView.textStorage.delegate = self;
+    
     [self registerForKeyboardNotifications];
     [self attachToNotifications];
 
@@ -176,7 +262,7 @@
 //    
 //    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
 //    return;
-    if (self.done(self.editorTextView.text)) {
+    if (self.done(self, self.editorTextView.text)) {
         
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -195,8 +281,19 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Delegate Methods
 
+- (void)textStorage:(NSTextStorage *)textStorage
+  didProcessEditing:(NSTextStorageEditActions)editedMask
+              range:(NSRange)editedRange
+     changeInLength:(NSInteger)delta {
+    
+    if (_editting) {
+        [textStorage setAttributes:_editAttrs range:editedRange];
+    }
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
 
+    _editting = YES;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
     _currentSelectionMarker.hidden = YES;
 }
@@ -312,6 +409,8 @@
         return;
     }
     
+    _editting = NO;
+    
     NSString *checkString;
     
     if (self.attributedTextForEditing) {
@@ -330,7 +429,7 @@
         self.placeholderLabel.hidden = NO;
     }
     else {
-        self.placeholderLabel.hidden = NO;
+        self.placeholderLabel.hidden = YES;
         
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
         [self.editorTextView sizeToFit];

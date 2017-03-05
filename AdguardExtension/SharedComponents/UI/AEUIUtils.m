@@ -58,15 +58,39 @@
     }];
 }
 
-+ (void)importRules:(NSArray <ASDFilterRule *> *)rules toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
++ (void)replaceUserFilterRules:(NSArray <ASDFilterRule *> *)rules withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(void (^)(NSError *error))rollbackBlock{
     
     [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
         
-        BOOL result = [[[AEService singleton] antibanner] importRules:rules filterId:@(ASDF_USER_FILTER_ID)];
+        NSError *error;
+        for (ASDFilterRule *item in rules) {
+            error = [[AEService singleton] checkRule:item];
+            if (error) {
+                break;
+            }
+        }
+        
+        if (error == nil) {
+            error = [[AEService singleton] replaceUserFilterWithRules:rules];
+        }
+        
+        if (error) {
+            
+            if (rollbackBlock) {
+                rollbackBlock(error);
+            }
+            [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
+                
+                [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+            }];
+            return;
+        }
         
         [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
             
-            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
+            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:^{
+                rollbackBlock(error);
+            }];
         }];
 
     }];

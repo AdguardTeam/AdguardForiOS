@@ -30,7 +30,9 @@
  @param completionBlock Block which is performed on success. May be nil.
  @param rollbackBlock Block which is performed on failure. May be nil.
  */
-+ (void)invalidateJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
++ (void)invalidateJsonWithController:(UIViewController *)controller
+                     completionBlock:(dispatch_block_t)completionBlock
+                       rollbackBlock:(dispatch_block_t)rollbackBlock;
 
 /**
  Method shows modal dialog with "standard" loading message,
@@ -42,7 +44,10 @@
  @param completionBlock Block which is performed on success. May be nil.
  @param rollbackBlock Block which is performed on failure. May be nil.
  */
-+ (void)addWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
++ (void)addWhitelistRule:(ASDFilterRule *)rule
+    toJsonWithController:(UIViewController *)controller
+         completionBlock:(dispatch_block_t)completionBlock
+           rollbackBlock:(dispatch_block_t)rollbackBlock;
 
 /**
  Method shows modal dialog with "standard" loading message,
@@ -54,6 +59,25 @@
  @param completionBlock Block which is performed on success. May be nil.
  @param rollbackBlock Block which is performed on failure. May be nil.
  */
-+ (void)removeWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock;
++ (void)removeWhitelistRule:(ASDFilterRule *)rule
+       toJsonWithController:(UIViewController *)controller
+            completionBlock:(dispatch_block_t)completionBlock
+              rollbackBlock:(dispatch_block_t)rollbackBlock;
+
+/**
+ Method shows modal dialog with "standard" loading message,
+ then replaces all rules in User Filter.
+ On success performs completionBlock,
+ on failure shows error message and performs rollbackBlock.
+ Blocks are performed synchronously in main queue.
+
+ @param rules New rules for user filer
+ @param completionBlock Block which is performed on success. May be nil.
+ @param rollbackBlock Block which is performed on failure. May be nil.
+ */
++ (void)replaceUserFilterRules:(NSArray <ASDFilterRule *> *)rules
+                withController:(UIViewController *)controller
+               completionBlock:(dispatch_block_t)completionBlock
+                 rollbackBlock:(void (^)(NSError *error))rollbackBlock;
 
 @end

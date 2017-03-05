@@ -27,6 +27,7 @@
 #import "AEWhitelistDomainObject.h"
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
+NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEServices
@@ -169,6 +170,20 @@ static AEService *singletonService;
     return antibanner;
 }
 
+- (NSError *)checkRule:(ASDFilterRule *)rule {
+    
+    BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
+    
+    NSError *error = nil;
+    [self convertOneRule:rule optimize:optimize error:&error];
+    
+    if (error) {
+        return error;
+    }
+
+    return nil;
+}
+
 - (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules {
     
     if (rules == nil) {
@@ -200,10 +215,7 @@ static AEService *singletonService;
         //Check that rule may be converted
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
-            BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            
-            NSError *error = nil;
-            [self convertOneRule:rule optimize:optimize error:&error];
+            NSError *error = [self checkRule:rule];
             
             if (error) {
                 return error;
@@ -234,10 +246,7 @@ static AEService *singletonService;
         //Check that rule may be converted
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
-            BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            
-            NSError *error = nil;
-            [self convertOneRule:rule optimize:optimize error:&error];
+            NSError *error = [self checkRule:rule];
             
             if (error) {
                 return error;
@@ -908,8 +917,9 @@ static AEService *singletonService;
 
             if (![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]) {
 
-                NSString *errorDescription = NSLocalizedString(@"Cannot add the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
-                err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription}];
+                NSString *errorDescription = NSLocalizedString(@"Cannot convert the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
+                err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription,
+                                                                                                               AESUserInfoRuleObject: rule}];
                 break;
             }
             

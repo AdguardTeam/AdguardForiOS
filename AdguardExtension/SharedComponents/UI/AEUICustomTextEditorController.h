@@ -18,15 +18,22 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    
+    AETESelectionTypeNone = 0,
+    AETESelectionTypeFind,
+    AETESelectionTypeError
+} AETESelectionType;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUICustomTextEditorController
 
-@interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate>
+@interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate, NSTextStorageDelegate>
 
 /**
  Block of the code, which will be performed when user press the Done key.
  */
-@property (nonatomic, copy) BOOL (^done)(NSString *text);
+@property (nonatomic, copy) BOOL (^done)(AEUICustomTextEditorController *editor, NSString *text);
 /**
  Initial text, which will be edited.
  */
@@ -40,6 +47,13 @@
  Text for placeholder, ie when textview is empty.
  */
 @property (nonatomic) NSString *textForPlaceholder;
+
+/**
+ Performs visual selection of the text in editor view if it will find.
+
+ @return Returns YES if text was found and selection was performed.
+ */
+- (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets

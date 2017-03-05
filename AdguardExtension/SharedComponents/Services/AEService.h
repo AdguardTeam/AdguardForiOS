@@ -33,6 +33,8 @@ extern NSString *AEServiceErrorDomain;
 #define AES_ERROR_DB                                    40
 #define AES_ERROR_SAFARI_EXCEPTION                      50
 
+extern NSString *AESUserInfoRuleObject;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEServices
 /////////////////////////////////////////////////////////////////////
@@ -59,6 +61,13 @@ extern NSString *AEServiceErrorDomain;
 - (void)stop;
 
 
+/**
+ Checks filtering rule, that it is converted to Safari content-blocking json.
+ 
+ @param rule Rule
+ @return Returns nil on success, or error object.
+ */
+- (NSError *)checkRule:(ASDFilterRule *)rule;
 /**
  Replace all rules in user filter of the production DB.
 

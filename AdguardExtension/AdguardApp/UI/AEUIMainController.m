@@ -30,6 +30,7 @@
 #import "AEUICustomTextEditorController.h"
 #import "ASDFilterObjects.h"
 #import "AEUIFilterRuleObject.h"
+#import "AEUIUtils.h"
 
 #ifdef PRO
 
@@ -65,6 +66,7 @@
 #define RESET_UPDATE_FILTERS_DELAY  3 //seconds
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
+#define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController
@@ -313,13 +315,8 @@
         [self prepareWelcomeScreenForController:destination];
     }
     else if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
-        
-        if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
-            
-            AEUIRulesController *dest = [segue destinationViewController];
-            dest.ruleTextForAdding = _ruleTextHolderForAddRuleCommand;
-            _ruleTextHolderForAddRuleCommand = nil;
-        }
+
+        [self prepareUserFilterControllerWithSegue:segue];
     }
     
 }
@@ -587,20 +584,26 @@
     AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
     rulesList.textForPlaceholder = NSLocalizedString(@"User Filter rules here",
-                                                      @"(AEUIMainController) Description!!!");
+                                                     @"(AEUIMainController) Description!!!");
     
-    rulesList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Description");
+    rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Description");
     self.navigationItem.backBarButtonItem = _cancelNavigationItem;
     
     dispatch_async(
                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                        @autoreleasepool {
                            
-                           NSMutableAttributedString *attributedText = [NSMutableAttributedString new];
+                           //create attributed text with all rules
+                           NSDictionary *defaultStyle = @{
+                                                         NSFontAttributeName: EDITOR_TEXT_FONT
+                                                         };
+                           NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
+                                                                        initWithString:@""
+                                                                        attributes:defaultStyle];
                            
                            NSArray *rules = [[[AEService singleton] antibanner]
                                              rulesForFilter:@(ASDF_USER_FILTER_ID)];
-                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"];
+                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n" attributes:defaultStyle];
                            for (ASDFilterRule *item in rules) {
                                
                                AEUIFilterRuleObject *obj = [[AEUIFilterRuleObject alloc]
@@ -613,76 +616,72 @@
                            
                            dispatch_async(dispatch_get_main_queue(), ^{
                                
+                               // assign attributed text with all rules
                                rulesList.attributedTextForEditing = attributedText;
+                               
+                               // if this is launch from AG Assistent
+                               if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
+                                   
+                                   UITextRange *end = [rulesList.editorTextView
+                                                       textRangeFromPosition:rulesList.editorTextView.endOfDocument
+                                                       toPosition:rulesList.editorTextView.endOfDocument];
+                                   [rulesList.editorTextView replaceRange:end
+                                                                 withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
+                                   _ruleTextHolderForAddRuleCommand = nil;
+                                   rulesList.doneButton.enabled = YES;
+                                   [rulesList clickDone:self];
+                               }
+
                            });
                        }
                    });
-
-    rulesList.done = ^BOOL(NSString *text) {
+    
+    rulesList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
         
-        NSMutableArray *domains = [NSMutableArray array];
+        NSMutableArray *rules = [NSMutableArray array];
         @autoreleasepool {
             
             NSMutableCharacterSet *delimCharSet;
             
             delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-            [delimCharSet addCharactersInString:@","];
             
             for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                 
-                NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                if (candidate.length) {
-                    [domains addObject:candidate];
+                if (item.length) {
+                    ASDFilterRule *rule = [[ASDFilterRule alloc] initWithText:item enabled:YES];
+                    if (rule) {
+                        [rules addObject:rule];
+                    }
                 }
             }
         }
         
         @autoreleasepool {
             
-            NSArray *propertyHolder;
-            
-            if (toBlacklist) {
+            [[[AEService singleton] antibanner] beginTransaction];
+            [AEUIUtils replaceUserFilterRules:rules withController:editor completionBlock:^{
+                //Success
+                [[[AEService singleton] antibanner] endTransaction];
                 
-                propertyHolder = APSharedResources.blacklistDomains;
-                APSharedResources.blacklistDomains = domains;
-            }
-            else {
+                [editor.navigationController popViewControllerAnimated:YES];
                 
-                propertyHolder = APSharedResources.whitelistDomains;
-                APSharedResources.whitelistDomains = domains;
-            }
-            
-            APVPNManager *manager = [APVPNManager singleton];
-            [manager sendReloadSystemWideDomainLists];
-            
-            if (manager.lastError) {
+            } rollbackBlock:^(NSError *error) {
+                //Failure
+                [[[AEService singleton] antibanner] rollbackTransaction];
                 
-                //processing of the error
-                if (toBlacklist) {
-                    APSharedResources.blacklistDomains = propertyHolder;
-                }
-                else {
+                if (error.code == AES_ERROR_UNSUPPORTED_RULE ) {
                     
-                    APSharedResources.whitelistDomains = propertyHolder;
+                    ASDFilterRule *rule = error.userInfo[AESUserInfoRuleObject];
+                    if (rule) {
+                        [editor selectWithType:AETESelectionTypeError text:rule.ruleText];
+                    }
                 }
                 
-                return NO;
-            }
+            }];
         }
         
-        return YES;
-        
+        return NO;
     };
-    
-    if (toBlacklist) {
-        
-        domainList.textForEditing = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
-    }
-    else {
-        
-        domainList.textForEditing = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
-    }
-    
 }
 
 /////////////////////////////////////////////////////////////////////

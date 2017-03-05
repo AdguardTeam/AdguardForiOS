@@ -109,7 +109,7 @@
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
-        domainList.done = ^BOOL(NSString *text) {
+        domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
 
             NSMutableArray *domains = [NSMutableArray array];
             @autoreleasepool {
