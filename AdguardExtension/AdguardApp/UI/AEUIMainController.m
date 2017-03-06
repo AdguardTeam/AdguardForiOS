@@ -587,54 +587,12 @@
                                                      @"(AEUIMainController) Description!!!");
     
     rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Description");
+    
+    [rulesList setLoadingStatus:YES];
+    
     self.navigationItem.backBarButtonItem = _cancelNavigationItem;
     
-    dispatch_async(
-                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                       @autoreleasepool {
-                           
-                           //create attributed text with all rules
-                           NSDictionary *defaultStyle = @{
-                                                         NSFontAttributeName: EDITOR_TEXT_FONT
-                                                         };
-                           NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
-                                                                        initWithString:@""
-                                                                        attributes:defaultStyle];
-                           
-                           NSArray *rules = [[[AEService singleton] antibanner]
-                                             rulesForFilter:@(ASDF_USER_FILTER_ID)];
-                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n" attributes:defaultStyle];
-                           for (ASDFilterRule *item in rules) {
-                               
-                               AEUIFilterRuleObject *obj = [[AEUIFilterRuleObject alloc]
-                                                            initWithRule:item];
-                               if (obj) {
-                                   [attributedText appendAttributedString:obj.attributeRuteText];
-                                   [attributedText appendAttributedString:newline];
-                               }
-                           }
-                           
-                           dispatch_async(dispatch_get_main_queue(), ^{
-                               
-                               // assign attributed text with all rules
-                               rulesList.attributedTextForEditing = attributedText;
-                               
-                               // if this is launch from AG Assistent
-                               if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
-                                   
-                                   UITextRange *end = [rulesList.editorTextView
-                                                       textRangeFromPosition:rulesList.editorTextView.endOfDocument
-                                                       toPosition:rulesList.editorTextView.endOfDocument];
-                                   [rulesList.editorTextView replaceRange:end
-                                                                 withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
-                                   _ruleTextHolderForAddRuleCommand = nil;
-                                   rulesList.doneButton.enabled = YES;
-                                   [rulesList clickDone:self];
-                               }
-
-                           });
-                       }
-                   });
+    [self reloadUserFilterDataForEditorController:rulesList];
     
     rulesList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
         
@@ -657,13 +615,15 @@
         }
         
         @autoreleasepool {
-            
+        
             [[[AEService singleton] antibanner] beginTransaction];
             [AEUIUtils replaceUserFilterRules:rules withController:editor completionBlock:^{
+                
                 //Success
                 [[[AEService singleton] antibanner] endTransaction];
                 
-                [editor.navigationController popViewControllerAnimated:YES];
+                [editor setLoadingStatus:YES];
+                [self reloadUserFilterDataForEditorController:editor];
                 
             } rollbackBlock:^(NSError *error) {
                 //Failure
@@ -684,6 +644,55 @@
     };
 }
 
+- (void)reloadUserFilterDataForEditorController:(AEUICustomTextEditorController *)editor {
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                       @autoreleasepool {
+                           
+                           //create attributed text with all rules
+                           NSDictionary *defaultStyle = @{
+                                                          NSFontAttributeName: EDITOR_TEXT_FONT
+                                                          };
+                           NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
+                                                                        initWithString:@""
+                                                                        attributes:defaultStyle];
+                           
+                           NSArray *rules = [[[AEService singleton] antibanner]
+                                             rulesForFilter:@(ASDF_USER_FILTER_ID)];
+                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n" attributes:defaultStyle];
+                           for (ASDFilterRule *item in rules) {
+                               
+                               AEUIFilterRuleObject *obj = [[AEUIFilterRuleObject alloc]
+                                                            initWithRule:item];
+                               if (obj) {
+                                   [attributedText appendAttributedString:obj.attributeRuteText];
+                                   [attributedText appendAttributedString:newline];
+                               }
+                           }
+                           
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               
+                               // assign attributed text with all rules
+                               editor.attributedTextForEditing = attributedText;
+                               
+                               // if this is launch from AG Assistent
+                               if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
+                                   
+                                   UITextRange *end = [editor.editorTextView
+                                                       textRangeFromPosition:editor.editorTextView.endOfDocument
+                                                       toPosition:editor.editorTextView.endOfDocument];
+                                   [editor.editorTextView replaceRange:end
+                                                                 withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
+                                   _ruleTextHolderForAddRuleCommand = nil;
+                                   editor.doneButton.enabled = YES;
+                                   [editor clickDone:self];
+                               }
+                               
+                           });
+                       }
+                   });
+
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
 

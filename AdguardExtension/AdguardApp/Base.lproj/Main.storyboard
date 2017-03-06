@@ -423,7 +423,7 @@
                                 <rect key="frame" x="16" y="64" width="288" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                 <connections>
                                     <outlet property="delegate" destination="04M-uU-tjs" id="yCY-vS-l71"/>
@@ -479,14 +479,22 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Clear All" style="plain" id="CM4-d8-GVV"/>
+                                    <barButtonItem title="Clear All" style="plain" id="CM4-d8-GVV">
+                                        <connections>
+                                            <action selector="clickClearAll:" destination="04M-uU-tjs" id="sTW-X5-dOZ"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6DN-M2-Zuu">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottomMargin" secondItem="Ru9-g2-Yvv" secondAttribute="bottom" constant="44" id="0jX-Tb-7OQ"/>
                             <constraint firstItem="G4C-i7-VxE" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leadingMargin" id="Das-HS-Hl7"/>
+                            <constraint firstItem="6DN-M2-Zuu" firstAttribute="centerX" secondItem="U8w-8o-WD3" secondAttribute="centerX" id="JSi-vr-V2x"/>
                             <constraint firstItem="1C7-7e-tc4" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leading" id="LMi-Nn-3MQ"/>
                             <constraint firstItem="Ru9-g2-Yvv" firstAttribute="leading" secondItem="U8w-8o-WD3" secondAttribute="leadingMargin" id="OZE-Qc-1ev"/>
                             <constraint firstAttribute="trailing" secondItem="1C7-7e-tc4" secondAttribute="trailing" id="QdU-cE-6tu"/>
@@ -496,6 +504,7 @@
                             <constraint firstItem="G4C-i7-VxE" firstAttribute="centerX" secondItem="U8w-8o-WD3" secondAttribute="centerX" id="jSP-NR-VYZ"/>
                             <constraint firstItem="Ru9-g2-Yvv" firstAttribute="trailing" secondItem="U8w-8o-WD3" secondAttribute="trailingMargin" id="k57-JC-Ejk"/>
                             <constraint firstItem="1C7-7e-tc4" firstAttribute="top" secondItem="jIE-kK-k0W" secondAttribute="bottom" constant="-44" id="rHf-Xq-uWl"/>
+                            <constraint firstItem="6DN-M2-Zuu" firstAttribute="centerY" secondItem="U8w-8o-WD3" secondAttribute="centerY" id="z3s-bu-FDj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -507,8 +516,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clearAllButton" destination="CM4-d8-GVV" id="cUJ-Hi-BPH"/>
                         <outlet property="doneButton" destination="mHA-FX-Jfq" id="PzC-x3-lSB"/>
                         <outlet property="editorTextView" destination="Ru9-g2-Yvv" id="CJe-CH-hHz"/>
+                        <outlet property="loadingActivity" destination="6DN-M2-Zuu" id="DbI-K7-GT4"/>
                         <outlet property="placeholderLabel" destination="G4C-i7-VxE" id="sA3-Jc-4zV"/>
                         <outlet property="seachToolBarConstraint" destination="rHf-Xq-uWl" id="w9M-nl-6q7"/>
                         <outlet property="searchBar" destination="lHn-v7-UvW" id="IZW-yg-URT"/>
@@ -1355,7 +1366,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93Y-I8-Ha9">
-                                                    <rect key="frame" x="18" y="12" width="105" height="20"/>
+                                                    <rect key="frame" x="18" y="12.5" width="104.5" height="19.5"/>
                                                     <accessibility key="accessibilityConfiguration" label=" ">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>

@@ -54,6 +54,12 @@ typedef enum {
  @return Returns YES if text was found and selection was performed.
  */
 - (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text;
+/**
+ Sets loading status
+
+ @param loading If YES, then loading indicatior is activated.
+ */
+- (void)setLoadingStatus:(BOOL)loading;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
@@ -65,6 +71,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivity;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *clearAllButton;
 
 
 /////////////////////////////////////////////////////////////////////
@@ -73,6 +81,7 @@ typedef enum {
 - (IBAction)clickDone:(id)sender;
 - (IBAction)clickSearchNext:(id)sender;
 - (IBAction)clickSearchPrev:(id)sender;
+- (IBAction)clickClearAll:(id)sender;
 
 
 @end

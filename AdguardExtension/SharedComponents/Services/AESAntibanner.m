@@ -547,9 +547,6 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 }
             }
             
-            if (imported && serviceEnabled)
-                [updateFilterFromUI executeOnceAfterCalm];
-            
             [result close];
         }];
     }});

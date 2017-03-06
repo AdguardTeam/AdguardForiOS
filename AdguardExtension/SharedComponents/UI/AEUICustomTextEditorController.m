@@ -30,64 +30,6 @@
 #define EDITED_TEXT_COLOR                   [UIColor blackColor]
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - AEUITextStorage
-
-@interface AEUITextStorage : NSTextStorage
-@end
-
-@implementation AEUITextStorage{
-    NSMutableAttributedString *_imp;
-    NSDictionary *_editAttrs;
-}
-
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        _imp = [NSMutableAttributedString new];
-        _editAttrs = @{
-                       NSFontAttributeName: EDITED_TEXT_FONT,
-                       NSForegroundColorAttributeName: EDITED_TEXT_COLOR
-                       };
-    }
-    
-    return self;
-}
-
-
-- (NSString *)string{
-    
-    return _imp.string;
-}
-
-- (NSDictionary *)attributesAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range{
-    return [_imp attributesAtIndex:location effectiveRange:range];
-}
-
-
-- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str {
-    [_imp replaceCharactersInRange:range withString:str];
-    [self edited:NSTextStorageEditedCharacters range:range changeInLength:(NSInteger)str.length - (NSInteger)range.length];
-}
-
-- (void)setAttributes:(NSDictionary *)attrs range:(NSRange)range {
-    [_imp setAttributes:attrs range:range];
-    [self edited:NSTextStorageEditedAttributes range:range changeInLength:0];
-}
-
-- (void)processEditing
-{
-    NSRange paragaphRange = [self.string paragraphRangeForRange: self.editedRange];
-    [self setAttributes:_editAttrs range:paragaphRange];
-    
-    [super processEditing];
-}
-
-
-
-@end
-
-/////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
 @interface UITextView (insets)
@@ -167,20 +109,9 @@
     
     NSDictionary *_editAttrs;
     BOOL _editting;
-//    AEUITextStorage *_textStorage;
-//    NSLayoutManager *_layoutManager;
 }
 
 - (void)viewDidLoad {
-    
-//    NSTextStorage *originStorage = self.editorTextView.textStorage;
-//    [originStorage removeLayoutManager:self.editorTextView.layoutManager];
-//    
-//    _textStorage = [AEUITextStorage new];
-//    [_textStorage addLayoutManager:self.editorTextView.layoutManager];
-//    
-//    self.editorTextView.layoutManager.textStorage = _textStorage;
-//    [self.editorTextView.textContainer replaceLayoutManager:_layoutManager];
     
     [super viewDidLoad];
     
@@ -190,6 +121,7 @@
                    NSForegroundColorAttributeName: EDITED_TEXT_COLOR
                    };
 
+    self.editorTextView.font = EDITED_TEXT_FONT;
     self.editorTextView.textStorage.delegate = self;
     
     [self registerForKeyboardNotifications];
@@ -211,7 +143,7 @@
         [self scrollViewDidEndDragging:self.editorTextView willDecelerate:NO];
     }
     //---
- 
+    
     [self resetText];
 }
 
@@ -233,6 +165,27 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods
 
+- (void)setLoadingStatus:(BOOL)loading {
+    
+    if (loading) {
+        [self.loadingActivity startAnimating];
+    }
+    else {
+        [self.loadingActivity stopAnimating];
+    }
+    self.clearAllButton.enabled = ! loading;
+    self.editorTextView.editable = ! loading;
+    self.editorTextView.hidden = loading;
+    if (loading) {
+        
+        self.placeholderLabel.hidden = YES;
+    }
+    else {
+        
+        self.placeholderLabel.hidden = ! [NSString isNullOrEmpty:self.editorTextView.text];
+    }
+}
+
 - (NSString *)textForEditing {
     return _textForEditing;
 }
@@ -240,6 +193,7 @@
     
     _textForEditing = textForEditing;
     [self resetText];
+    [self setLoadingStatus:NO];
 }
 
 - (NSAttributedString *)attributedTextForEditing {
@@ -249,6 +203,7 @@
     
     _attributedTextForEditing = attributedTextForEditing;
     [self resetText];
+    [self setLoadingStatus:NO];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -278,6 +233,9 @@
     [self selectPrev];
 }
 
+- (IBAction)clickClearAll:(id)sender {
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Delegate Methods
 
@@ -296,6 +254,10 @@
     _editting = YES;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
     _currentSelectionMarker.hidden = YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    _editting = NO;
 }
 
 // For supporting of the URL insertion and enabling of the Done button.
@@ -410,6 +372,7 @@
     }
     
     _editting = NO;
+    self.doneButton.enabled = NO;
     
     NSString *checkString;
     
