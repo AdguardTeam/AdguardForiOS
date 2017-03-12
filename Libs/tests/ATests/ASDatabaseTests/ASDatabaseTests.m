@@ -26,6 +26,7 @@
 
     ASDatabase *dbq;
     NSUInteger counter;
+    NSTimer *timer;
 }
 
 @end
@@ -56,19 +57,18 @@
     } else {
 
         if (counter) {
-            dispatch_after(
-                           dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-                           dispatch_get_current_queue(), ^{
-                               
-                               [self testInit];
-                           });
+            if (timer == nil) {
+                timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+                    [self testInit];
+                }];
+                
+                [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:counter + 1]];
+            }
             counter--;
-            [[NSRunLoop currentRunLoop] run];
+            return;
         }
-        else{
-            
-            XCTAssert(NO, @"Time limit exceeded!");
-        }
+        
+        XCTAssert(NO, @"Time limit exceeded!");
     }
 }
 
