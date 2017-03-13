@@ -1,0 +1,30 @@
+
+/* Class = "UITableViewCell"; accessibilityHint = "This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads."; ObjectID = "3El-61-LPL"; */
+"3El-61-LPL.accessibilityHint" = "This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads.";
+
+/* Class = "UITableViewSection"; headerTitle = "Contact Support"; ObjectID = "9dR-3m-MTe"; */
+"9dR-3m-MTe.headerTitle" = "Contact Support";
+
+/* Class = "UILabel"; text = "Report Incorrect Blocking"; ObjectID = "DFa-u4-apc"; */
+"DFa-u4-apc.text" = "Report Incorrect Blocking";
+
+/* Class = "UITableViewSection"; footerTitle = "This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads."; ObjectID = "HEE-In-H4Y"; */
+"HEE-In-H4Y.footerTitle" = "This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads.";
+
+/* Class = "UILabel"; accessibilityHint = "Tap here to use the tool for removing missed ads or generally any element you don't want to see on the page."; ObjectID = "IVJ-w6-IVC"; */
+"IVJ-w6-IVC.accessibilityHint" = "Tap here to use the tool for removing missed ads or generally any element you don't want to see on the page.";
+
+/* Class = "UILabel"; text = "Block Element On This Page"; ObjectID = "IVJ-w6-IVC"; */
+"IVJ-w6-IVC.text" = "Block Element On This Page";
+
+/* Class = "UILabel"; text = "Report Missed Ad"; ObjectID = "bzo-sR-4LR"; */
+"bzo-sR-4LR.text" = "Report Missed Ad";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCa-IO-BlQ"; */
+"cCa-IO-BlQ.text" = "Loading...";
+
+/* Class = "UILabel"; text = "Enable on this website"; ObjectID = "kJV-yk-6d6"; */
+"kJV-yk-6d6.text" = "Enable on this website";
+
+/* Class = "UITableViewSection"; footerTitle = "Tap here to use the tool for removing missed ads or generally any element you don't want to see on the page."; ObjectID = "w71-eF-IFh"; */
+"w71-eF-IFh.footerTitle" = "Tap here to use the tool for removing missed ads or generally any element you don't want to see on the page.";

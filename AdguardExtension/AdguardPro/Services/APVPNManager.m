@@ -875,6 +875,22 @@ static APVPNManager *singletonVPNManager;
     [_predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF06"
+              name: NSLocalizedString(@"Yandex DNS Safe", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe.")
+              description: NSLocalizedString(@"protection from virus and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
+              ipAddresses:@"77.88.8.88, 77.88.8.2"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF07"
+              name: NSLocalizedString(@"Yandex DNS Family", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family.")
+              description: NSLocalizedString(@"blocks all above and adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
+              ipAddresses:@"77.88.8.7, 77.88.8.3"];
+    server.editable = NO;
+    [_predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF05"
               name: NSLocalizedString(@"Google Public DNS", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Google Public DNS.")
               description: NSLocalizedString(@"global dns resolution service prodived by Google", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Google Public DNS' mode.")
