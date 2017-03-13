@@ -327,6 +327,8 @@
 
                 [packetForSession addObject:udpPacket.payload];
             }
+            
+            session = nil;
         }
     }];
 
