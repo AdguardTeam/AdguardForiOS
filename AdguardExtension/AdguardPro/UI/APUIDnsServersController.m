@@ -106,7 +106,7 @@
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
             [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1)];
             
-            [self reloadDataAnimated:YES];
+            [self updateStatuses];
         }
     }
 }
@@ -130,7 +130,7 @@
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
             
-            [self reloadDataAnimated:YES];
+            [self updateStatuses];
         }
     }
 }
