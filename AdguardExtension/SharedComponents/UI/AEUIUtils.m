@@ -81,7 +81,9 @@
             }
             [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
                 
-                [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                if (error.code != AES_ERROR_UNSUPPORTED_RULE ) {
+                    [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                }
             }];
             return;
         }

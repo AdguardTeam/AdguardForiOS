@@ -20,8 +20,7 @@
 
 typedef enum {
     
-    AETESelectionTypeNone = 0,
-    AETESelectionTypeFind,
+    AETESelectionTypeFind = 0,
     AETESelectionTypeError
 } AETESelectionType;
 

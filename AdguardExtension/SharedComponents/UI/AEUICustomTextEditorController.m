@@ -20,7 +20,6 @@
 #import "AEUICustomTextEditorController.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
-#import "APVPNManager.h"
 
 #define TOP_BOUNSE_LIMIT                    -5
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
@@ -28,6 +27,8 @@
 
 #define EDITED_TEXT_FONT                    [UIFont systemFontOfSize:[UIFont systemFontSize]]
 #define EDITED_TEXT_COLOR                   [UIColor blackColor]
+#define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
+#define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
@@ -99,8 +100,10 @@
     CGFloat _searchBarTopConstraintValue;
     
     NSString *_currentSearchString;
+    
+    AETESelectionType _currentSelectionType;
     NSRange _currentTextSelection;
-    UIView *_currentSelectionMarker;
+    NSArray <UIView *> *_currentSelectionMarkers;
     
     id _observer;
     
@@ -109,11 +112,25 @@
     
     NSDictionary *_editAttrs;
     BOOL _editting;
+    BOOL _loadingStatusHandler;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        _loadingStatusHandler = NO;
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self setLoadingStatus:_loadingStatusHandler];
     
     _editting = NO;
     _editAttrs = @{
@@ -125,11 +142,12 @@
     self.editorTextView.textStorage.delegate = self;
     
     [self registerForKeyboardNotifications];
-    [self attachToNotifications];
+//    [self attachToNotifications];
 
     
     _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
     _searchBarHidden = _keyboardHidden = YES;
+    _currentSelectionType = AETESelectionTypeFind;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
     self.placeholderLabel.text = self.textForPlaceholder;
@@ -167,6 +185,8 @@
 
 - (void)setLoadingStatus:(BOOL)loading {
     
+    _loadingStatusHandler = loading;
+    
     if (loading) {
         [self.loadingActivity startAnimating];
     }
@@ -191,6 +211,8 @@
 }
 - (void)setTextForEditing:(NSString *)textForEditing {
     
+    [self clearText];
+    
     _textForEditing = textForEditing;
     [self resetText];
     [self setLoadingStatus:NO];
@@ -201,9 +223,32 @@
 }
 - (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
     
+    [self clearText];
+    
     _attributedTextForEditing = attributedTextForEditing;
     [self resetText];
     [self setLoadingStatus:NO];
+}
+
+- (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text {
+    
+    NSUInteger len = self.editorTextView.text.length;
+    if ([NSString isNullOrEmpty:text] || text.length > len) {
+        return NO;
+    }
+    
+    _currentSearchString = text;
+    
+    _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
+    
+    if (_currentTextSelection.location == NSNotFound) {
+        return NO;
+    }
+    
+    _currentSelectionType = selectionType;
+    [self updateSelectionOnTextView];
+
+    return YES;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -211,12 +256,8 @@
 
 - (IBAction)clickDone:(id)sender {
 
-//    UIEdgeInsets insets = self.editorTextView.contentInset;
-//    CGPoint offset = self.editorTextView.contentOffset;
-//    CGSize size = self.editorTextView.contentSize;
-//    
-//    NSLog(@"Content inset: %@, offset: %@, size: %@", NSStringFromUIEdgeInsets(insets), NSStringFromCGPoint(offset), NSStringFromCGSize(size));
-//    return;
+    self.doneButton.enabled = NO;
+    
     if (self.done(self, self.editorTextView.text)) {
         
         [self.navigationController popViewControllerAnimated:YES];
@@ -253,14 +294,13 @@
 
     _editting = YES;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
-    _currentSelectionMarker.hidden = YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     _editting = NO;
 }
 
-// For supporting of the URL insertion and enabling of the Done button.
+// For supporting of the URL insertion.
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     @autoreleasepool {
         
@@ -284,6 +324,7 @@
 - (void)textViewDidChange:(UITextView *)textView{
 
     self.doneButton.enabled = YES;
+    [self hideSelectionMarkers];
     self.placeholderLabel.hidden = ! [NSString isNullOrEmpty:textView.text];
 }
 
@@ -321,6 +362,7 @@
     } else {
 
         _searchBarHidden = YES;
+        [self hideSelectionMarkers];
         [self.searchBar resignFirstResponder];
         
         self.seachToolBarConstraint.constant = _searchBarTopConstraintValue;
@@ -337,8 +379,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
-    _currentSearchString = searchBar.text;
-    [self selectFirst];
+    [self selectWithType:AETESelectionTypeFind text:searchBar.text];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -346,6 +387,10 @@
     _currentSearchString = searchBar.text;
 }
 
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    
+    [self hideSelectionMarkers];
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Observing values
@@ -364,6 +409,12 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
+- (void)clearText {
+    
+    _attributedTextForEditing = nil;
+    _textForEditing = nil;
+    [self resetText];
+}
 
 - (void)resetText {
     
@@ -375,6 +426,13 @@
     self.doneButton.enabled = NO;
     
     NSString *checkString;
+    
+    CGPoint offset = CGPointMake(- self.editorTextView.contentInset.left, 5000);//- self.editorTextView.contentInset.top);
+    
+//    if (! CGPointEqualToPoint(offset, self.editorTextView.contentOffset)) {
+//        
+//        offset = self.editorTextView.contentOffset;
+//    }
     
     if (self.attributedTextForEditing) {
         
@@ -389,7 +447,7 @@
     
     if ([NSString isNullOrEmpty:checkString]) {
         
-        self.placeholderLabel.hidden = NO;
+        self.placeholderLabel.hidden = _loadingStatusHandler;
     }
     else {
         self.placeholderLabel.hidden = YES;
@@ -397,10 +455,10 @@
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
         [self.editorTextView sizeToFit];
         [self.editorTextView setScrollEnabled:YES];
+        //------
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self.editorTextView setContentOffset:
-             CGPointMake(- self.editorTextView.contentInset.left, - self.editorTextView.contentInset.top)];
+            [self.editorTextView setContentOffset:offset];
         });
     }
     
@@ -435,7 +493,7 @@
     }
     else {
         
-        [self updateSelectionOnTextView];
+//        [self updateSelectionOnTextView];
     }
 }
 
@@ -461,6 +519,7 @@
         return;
     }
 
+    _currentSelectionType = AETESelectionTypeFind;
     [self updateSelectionOnTextView];
 }
 
@@ -515,58 +574,62 @@
 - (void)updateSelectionOnTextView {
     
     if (_currentTextSelection.location == NSNotFound) {
-        _currentSelectionMarker.hidden = YES;
+        [self hideSelectionMarkers];
         return;
     }
-    
-    CGRect rect = [self.editorTextView scrollRangeToVisible:_currentTextSelection animated:YES];
     
     if (_currentTextSelection.length == 0) {
-        _currentSelectionMarker.hidden = YES;
+        [self hideSelectionMarkers];
         return;
     }
     
-    if (_currentSelectionMarker == nil) {
+    self.editorTextView.selectedRange = NSMakeRange(_currentTextSelection.location + _currentTextSelection.length, 0);
+    
+    [self.editorTextView scrollRangeToVisible:_currentTextSelection animated:YES];
+    
+    NSArray <UITextSelectionRect *> *textRects = [self.editorTextView
+                         selectionRectsForRange:[self.editorTextView textRangeFromNSRange:_currentTextSelection]];
+    
+    
+    if (_currentSelectionMarkers == nil) {
         
-        _currentSelectionMarker = [[UIView alloc] initWithFrame:rect];
-        _currentSelectionMarker.backgroundColor = [self.editorTextView.tintColor colorWithAlphaComponent:0.2f];
-        _currentSelectionMarker.layer.cornerRadius = 3.0f;
-        _currentSelectionMarker.userInteractionEnabled = NO;
-        [self.editorTextView addSubview:_currentSelectionMarker];
+        _currentSelectionMarkers = @[
+                                     [[UIView alloc] initWithFrame:CGRectZero],
+                                     [[UIView alloc] initWithFrame:CGRectZero],
+                                     [[UIView alloc] initWithFrame:CGRectZero]
+                                     ];
+        for (UIView *markerView in _currentSelectionMarkers) {
+            
+            markerView.layer.cornerRadius = 3.0f;
+            markerView.userInteractionEnabled = NO;
+            [self.editorTextView addSubview:markerView];
+        }
     }
-    else {
-        [_currentSelectionMarker setFrame:rect];
-    }
-    _currentSelectionMarker.hidden = NO;
-}
-
-- (void)attachToNotifications{
     
-    _observer = [[NSNotificationCenter defaultCenter]
-                 addObserverForName:APVpnChangedNotification
-                 object: nil
-                 queue:nil
-                 usingBlock:^(NSNotification *_Nonnull note) {
-                     
-                     // When configuration is changed
-                     
-                     [self updateStatuses];
-                 }];
-}
-
-- (void)updateStatuses{
-    APVPNManager *manager = [APVPNManager singleton];
-    
-    if (manager.lastError) {
-        [ACSSystemUtils
-         showSimpleAlertForController:self
-         withTitle:NSLocalizedString(@"Error",
-                                     @"(APUIAdguardDNSCon"
-                                     @"troller) PRO "
-                                     @"version. Alert "
-                                     @"title. On error.")
-         message:manager.lastError.localizedDescription];
+    for (NSInteger i=0; i < _currentSelectionMarkers.count; i++) {
+        if (textRects.count > i) {
+            
+            UIView *_currentSelectionMarker = _currentSelectionMarkers[i];
+            [_currentSelectionMarker setFrame:textRects[i].rect];
+            switch (_currentSelectionType) {
+                case AETESelectionTypeError:
+                    _currentSelectionMarker.backgroundColor = SELECTION_COLOR_ERROR;
+                    break;
+                    
+                default:
+                    _currentSelectionMarker.backgroundColor = SELECTION_COLOR_FIND;
+                    break;
+            }
+            _currentSelectionMarker.hidden = NO;
+        }
+        else {
+            _currentSelectionMarkers[i].hidden = YES;
+        }
     }
 }
 
+- (void)hideSelectionMarkers {
+    
+    [_currentSelectionMarkers setValue:@(YES) forKey:@"hidden"];
+}
 @end

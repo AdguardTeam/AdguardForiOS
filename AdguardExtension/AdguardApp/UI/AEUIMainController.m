@@ -549,35 +549,6 @@
     _inCheckUpdates = NO;
 }
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Table Delegate Methods
-
-#ifdef PRO
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    if (section == PRO_SECTION_INDEX) {
-        
-        return [self proSectionFooter];
-    }
-    
-    return [super tableView:tableView viewForFooterInSection:section];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    if (section == PRO_SECTION_INDEX) {
-        
-        APUIProSectionFooter *footer = [self proSectionFooter];
-        return footer.height;
-    }
-    
-    return [super tableView:tableView heightForFooterInSection:section];
-}
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Helper Methods (Private)
-
 - (void)prepareUserFilterControllerWithSegue:(UIStoryboardSegue *)segue {
     
     
@@ -590,7 +561,7 @@
     
     [rulesList setLoadingStatus:YES];
     
-    self.navigationItem.backBarButtonItem = _cancelNavigationItem;
+//    self.navigationItem.backBarButtonItem = _cancelNavigationItem;
     
     [self reloadUserFilterDataForEditorController:rulesList];
     
@@ -615,7 +586,7 @@
         }
         
         @autoreleasepool {
-        
+            
             [[[AEService singleton] antibanner] beginTransaction];
             [AEUIUtils replaceUserFilterRules:rules withController:editor completionBlock:^{
                 
@@ -682,7 +653,7 @@
                                                        textRangeFromPosition:editor.editorTextView.endOfDocument
                                                        toPosition:editor.editorTextView.endOfDocument];
                                    [editor.editorTextView replaceRange:end
-                                                                 withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
+                                                              withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
                                    _ruleTextHolderForAddRuleCommand = nil;
                                    editor.doneButton.enabled = YES;
                                    [editor clickDone:self];
@@ -691,8 +662,35 @@
                            });
                        }
                    });
-
+    
 }
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Table Delegate Methods
+
+#ifdef PRO
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if (section == PRO_SECTION_INDEX) {
+        
+        return [self proSectionFooter];
+    }
+    
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    if (section == PRO_SECTION_INDEX) {
+        
+        APUIProSectionFooter *footer = [self proSectionFooter];
+        return footer.height;
+    }
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
 
