@@ -61,6 +61,9 @@ extern NSString *APVpnManagerErrorDomain;
 #define APVPN_MANAGER_ERROR_BADCONFIGURATION        400
 #define APVPN_MANAGER_ERROR_INSTALL_FILTER          500
 
+
+#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX      0
+#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING       YES
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
@@ -78,6 +81,10 @@ extern NSString *APVpnManagerErrorDomain;
  */
 @property (class, readonly) APVPNManager *singleton;
 
+/**
+ List of the app defined DNS servers.
+ */
+@property (class, readonly) NSMutableArray <APDnsServerObject *> *predefinedDnsServers;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

@@ -19,6 +19,9 @@
 #import "AESharedResources.h"
 
 
+#define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
+
+
 @class APDnsLogRecord;
 
 /////////////////////////////////////////////////////////////////////
