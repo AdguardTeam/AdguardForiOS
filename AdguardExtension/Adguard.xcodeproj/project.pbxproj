@@ -616,6 +616,8 @@
 		65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
 		65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
+		65EBB4AD1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */; };
+		65EBB4AE1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */; };
 		65EBC2511BC2D25E00788D98 /* AEUILongLabelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */; };
 		65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
 		65EC9AF11BB9824C00F53F3B /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
@@ -1217,6 +1219,8 @@
 		65E5A0991B8632F600319AA3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABECFilterParsers.m; sourceTree = "<group>"; };
 		65E9E7B61BBD973200AE8DDF /* ABECFilterParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilterParsers.h; sourceTree = "<group>"; };
+		65EBB4AB1E79DB6400CB08E3 /* APWhitelistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APWhitelistDomainObject.h; sourceTree = "<group>"; };
+		65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APWhitelistDomainObject.m; sourceTree = "<group>"; };
 		65EBC24F1BC2D25E00788D98 /* AEUILongLabelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILongLabelViewCell.h; sourceTree = "<group>"; };
 		65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILongLabelViewCell.m; sourceTree = "<group>"; };
 		65EC9A041BB9824C00F53F3B /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
@@ -1717,6 +1721,8 @@
 				655AAC9A1D37821200E316EA /* APDnsLogRecord.m */,
 				651F5E041E25004600E22157 /* APDnsServerObject.h */,
 				651F5E051E25004600E22157 /* APDnsServerObject.m */,
+				65EBB4AB1E79DB6400CB08E3 /* APWhitelistDomainObject.h */,
+				65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -3029,6 +3035,7 @@
 				6581C9251D64945800E739CC /* AESAntibanner.m in Sources */,
 				655AAC8E1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */,
+				65EBB4AD1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
 				6581C92A1D6494A200E739CC /* ADLocations.m in Sources */,
 				657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */,
 				653AE9FB1D084B6400AC81B4 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -3302,6 +3309,7 @@
 				65C672F71DF5BC45001BE6C5 /* APTunnelConnectionsHandler.m in Sources */,
 				655AAC921D37780700E316EA /* APDnsResponse.m in Sources */,
 				65B6211B1D2E845D0047248F /* APTDnsRequest.m in Sources */,
+				65EBB4AE1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
 				65C98AAD1D3676C600E4B57D /* APDnsResourceTypeTest.m in Sources */,
 				65B6211D1D2E962F0047248F /* APTDnsRequestTest.m in Sources */,
 				65B6210F1D2D3E290047248F /* APIPPacketTest.m in Sources */,
