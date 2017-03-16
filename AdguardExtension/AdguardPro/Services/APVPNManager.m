@@ -24,7 +24,6 @@
 #import "APSharedResources.h"
 #import "AppDelegate.h"
 #import "ACommons/ACNetwork.h"
-#import "AEBlacklistDomainObject.h"
 #import "ASDFilterObjects.h"
 #import "APDnsServerObject.h"
 #import "AEService.h"

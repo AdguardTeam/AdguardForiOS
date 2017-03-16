@@ -27,7 +27,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEWhitelistDomainObject.h"
+#import "APWhitelistDomainObject.h"
 #import "AEBlacklistDomainObject.h"
 #import "ASDatabase.h"
 
@@ -412,23 +412,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         AEWhitelistDomainObject *object;
         for (ASDFilterRule *item in rules) {
             
-            object = [[AEWhitelistDomainObject alloc] initWithRule:item];
+            object = [[APWhitelistDomainObject alloc] initWithRule:item];
             if (object) {
-                [wRules addObject:object];
+                [wRules addObject:object.domain];
             }
             else {
                 
                 object = [[AEBlacklistDomainObject alloc] initWithRule:item];
                 if (object) {
-                    [bRules addObject:object];
+                    [bRules addObject:object.domain];
                 }
             }
-        }
-
-        @autoreleasepool {
-            
-            NSArray *list = [wRules valueForKey:@"domain"];
-            wRules = [NSMutableArray arrayWithArray:list];
         }
 
         @autoreleasepool {
@@ -440,12 +434,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         
         [_connectionHandler setWhitelistDomains:wRules];
-        
-        @autoreleasepool {
-            
-            NSArray *list = [bRules valueForKey:@"domain"];
-            bRules = [NSMutableArray arrayWithArray:list];
-        }
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
