@@ -3884,7 +3884,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/tunnel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_TUNNEL_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6adfa0d3-1dd7-4997-ad7a-bc6e11f4efe6";
 				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro.tunnel";
@@ -3905,7 +3905,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/tunnel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_TUNNEL_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6adfa0d3-1dd7-4997-ad7a-bc6e11f4efe6";
 				PROVISIONING_PROFILE_SPECIFIER = "NE com.adguard.AdguardPro.tunnel";
