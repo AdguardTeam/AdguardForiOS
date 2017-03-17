@@ -12,6 +12,8 @@
 ADGUARD_BUNDLE_ID = com.adguard.AdguardPro
 // Blocking extension bundle identifier
 ADGUARD_EXTENSION_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).extension
+// VPN Tunnel provider bundle identifier
+ADGUARD_TUNNEL_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).tunnel
 // Downloads session for filter updates identifier
 ADGUARD_FILTER_UPDATES_ID = $(ADGUARD_BUNDLE_ID).filterUpdatesSession
 // Group for shared resources
