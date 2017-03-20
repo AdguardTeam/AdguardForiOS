@@ -19,6 +19,7 @@
 #import "APUISystemWideController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
+#import "ACommons/ACLang.h"
 #import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
 
@@ -159,6 +160,24 @@
                     
                     return NO;
                 }
+            }
+            
+            return YES;
+
+        };
+        domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
+            
+            if ([text contains:@"/"]) {
+                if (text.length > 1) {
+                    
+                    NSURL *url = [NSURL URLWithString:text];
+                    text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                    if (text) {
+                        
+                        [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                    }
+                }
+                return NO;
             }
             
             return YES;

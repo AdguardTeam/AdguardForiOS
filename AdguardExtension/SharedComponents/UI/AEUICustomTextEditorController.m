@@ -33,18 +33,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
-@interface UITextView (insets)
-
-// Scrolls to visible range, eventually considering insets
-- (CGRect)scrollRangeToVisible:(NSRange)range animated:(BOOL)animated;
-
-// Returns visible rect, eventually considering insets
-- (CGRect)visibleRectConsideringInsets;
-
-- (UITextRange *)textRangeFromNSRange:(NSRange)range;
-
-@end
-
 @implementation UITextView (insets)
 
 // Scrolls to visible range, eventually considering insets
@@ -95,9 +83,7 @@
 
 @implementation AEUICustomTextEditorController {
     
-    BOOL _searchBarHidden;
     BOOL _keyboardHidden;
-    CGFloat _searchBarTopConstraintValue;
     
     NSString *_currentSearchString;
     
@@ -145,8 +131,7 @@
 //    [self attachToNotifications];
 
     
-    _searchBarTopConstraintValue = self.seachToolBarConstraint.constant;
-    _searchBarHidden = _keyboardHidden = YES;
+    _keyboardHidden = YES;
     _currentSelectionType = AETESelectionTypeFind;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
@@ -162,7 +147,7 @@
     }
     //---
     
-    [self resetText];
+    [self resetTextWithSizeToFit:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,17 +178,10 @@
     else {
         [self.loadingActivity stopAnimating];
     }
-    self.clearAllButton.enabled = ! loading;
     self.editorTextView.editable = ! loading;
     self.editorTextView.hidden = loading;
-    if (loading) {
-        
-        self.placeholderLabel.hidden = YES;
-    }
-    else {
-        
-        self.placeholderLabel.hidden = ! [NSString isNullOrEmpty:self.editorTextView.text];
-    }
+    
+    [self setControlsByLoadingAndTextExists];
 }
 
 - (NSString *)textForEditing {
@@ -211,10 +189,8 @@
 }
 - (void)setTextForEditing:(NSString *)textForEditing {
     
-    [self clearText];
-    
     _textForEditing = textForEditing;
-    [self resetText];
+    [self resetTextWithSizeToFit:NO];
     [self setLoadingStatus:NO];
 }
 
@@ -223,10 +199,8 @@
 }
 - (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
     
-    [self clearText];
-    
     _attributedTextForEditing = attributedTextForEditing;
-    [self resetText];
+    [self resetTextWithSizeToFit:NO];
     [self setLoadingStatus:NO];
 }
 
@@ -275,6 +249,12 @@
 }
 
 - (IBAction)clickClearAll:(id)sender {
+    
+    _textForEditing = nil;
+    _attributedTextForEditing = nil;
+    [self resetTextWithSizeToFit:NO];
+    //
+    [self textViewDidChange:self.editorTextView];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -304,17 +284,10 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     @autoreleasepool {
         
-        if ([text contains:@"/"]) {
-            if (text.length > 1) {
-                
-                NSURL *url = [NSURL URLWithString:text];
-                text = [[url hostWithPort] stringByAppendingString:@"\n"];
-                if (text) {
-                    
-                    [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
-                }
-            }
-            return NO;
+        [textView setScrollEnabled:YES];
+        
+        if (self.replaceText) {
+            return self.replaceText(text, textView, range);
         }
         
         return YES;
@@ -325,9 +298,10 @@
 
     self.doneButton.enabled = YES;
     [self hideSelectionMarkers];
-    self.placeholderLabel.hidden = ! [NSString isNullOrEmpty:textView.text];
+    [self setControlsByLoadingAndTextExists];
 }
 
+/*
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 
 
@@ -347,6 +321,7 @@
         _searchBarHidden = NO;
         self.seachToolBarConstraint.constant = 0.0f;
         self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
+
         [UIView animateWithDuration:0.1 animations:^{
             
             UIEdgeInsets insets = UIEdgeInsetsMake(absoluteTopVal, 0, 0, 0);
@@ -376,6 +351,7 @@
         
     }
 }
+ */
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
@@ -409,14 +385,8 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
-- (void)clearText {
-    
-    _attributedTextForEditing = nil;
-    _textForEditing = nil;
-    [self resetText];
-}
 
-- (void)resetText {
+- (void)resetTextWithSizeToFit:(BOOL)sizeToFit {
     
     if (self.editorTextView == nil) {
         return;
@@ -427,12 +397,12 @@
     
     NSString *checkString;
     
-    CGPoint offset = CGPointMake(- self.editorTextView.contentInset.left, 5000);//- self.editorTextView.contentInset.top);
+    CGPoint offset = CGPointMake(- self.editorTextView.contentInset.left, - self.editorTextView.contentInset.top);
     
-//    if (! CGPointEqualToPoint(offset, self.editorTextView.contentOffset)) {
-//        
-//        offset = self.editorTextView.contentOffset;
-//    }
+    if (! CGPointEqualToPoint(offset, self.editorTextView.contentOffset)) {
+        
+        offset = self.editorTextView.contentOffset;
+    }
     
     if (self.attributedTextForEditing) {
         
@@ -445,15 +415,14 @@
         checkString = self.textForEditing;
     }
     
-    if ([NSString isNullOrEmpty:checkString]) {
-        
-        self.placeholderLabel.hidden = _loadingStatusHandler;
-    }
-    else {
-        self.placeholderLabel.hidden = YES;
+    [self setControlsByLoadingAndTextExists];
+    
+    if (![NSString isNullOrEmpty:checkString]) {
         
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-        [self.editorTextView sizeToFit];
+        if (sizeToFit) {
+            [self.editorTextView sizeToFit];
+        }
         [self.editorTextView setScrollEnabled:YES];
         //------
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -462,6 +431,33 @@
         });
     }
     
+}
+
+- (void)setControlsByLoadingAndTextExists {
+    
+    if (_loadingStatusHandler) {
+        
+        self.placeholderLabel.hidden = YES;
+        self.clearAllButton.enabled = NO;
+        self.searchBarItem.enabled = NO;
+        self.searchBarNext.enabled = NO;
+        self.searchBarPrevious.enabled = NO;
+        
+        return;
+    }
+    
+    BOOL result = ! [NSString isNullOrEmpty:self.editorTextView.text];
+    self.placeholderLabel.hidden = result;
+    self.clearAllButton.enabled = result;
+    self.searchBarItem.enabled = result;
+    self.searchBarNext.enabled = result;
+    self.searchBarPrevious.enabled = result;
+    
+    if (!result) {
+        self.searchBar.text = nil;
+        _currentSearchString = nil;
+
+    }
 }
 
 - (void)registerForKeyboardNotifications
@@ -478,12 +474,11 @@
 
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification {
+    
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, kbSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.editorTextView.contentInset = contentInsets;
     self.editorTextView.scrollIndicatorInsets = contentInsets;
     
@@ -495,16 +490,16 @@
         
 //        [self updateSelectionOnTextView];
     }
+    
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-    
-    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : ABS(_searchBarTopConstraintValue);
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(topValue, 0.0, 0.0, 0.0);
+ 
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     self.editorTextView.contentInset = contentInsets;
     self.editorTextView.scrollIndicatorInsets = contentInsets;
+  
 }
 
 - (void)selectFirst {

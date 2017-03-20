@@ -25,6 +25,21 @@ typedef enum {
 } AETESelectionType;
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark - UITextView (insets)
+
+@interface UITextView (insets)
+
+// Scrolls to visible range, eventually considering insets
+- (CGRect)scrollRangeToVisible:(NSRange)range animated:(BOOL)animated;
+
+// Returns visible rect, eventually considering insets
+- (CGRect)visibleRectConsideringInsets;
+
+- (UITextRange *)textRangeFromNSRange:(NSRange)range;
+
+@end
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark - AEUICustomTextEditorController
 
 @interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate, NSTextStorageDelegate>
@@ -33,6 +48,11 @@ typedef enum {
  Block of the code, which will be performed when user press the Done key.
  */
 @property (nonatomic, copy) BOOL (^done)(AEUICustomTextEditorController *editor, NSString *text);
+/**
+ Block of the code, which will be performed when user change the text in editor text view.
+ */
+@property (nonatomic, copy) BOOL (^replaceText)(NSString *text, UITextView *textView, NSRange range);
+
 /**
  Initial text, which will be edited.
  */
@@ -68,6 +88,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarPrevious;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarNext;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivity;
