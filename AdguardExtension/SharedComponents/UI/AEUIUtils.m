@@ -62,39 +62,54 @@
     
     [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
         
-        NSError *error;
-        for (ASDFilterRule *item in rules) {
-            error = [[AEService singleton] checkRule:item];
-            if (error) {
-                break;
-            }
-        }
-        
-        if (error == nil) {
-            error = [[AEService singleton] replaceUserFilterWithRules:rules];
-        }
-        
-        if (error) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             
-            if (rollbackBlock) {
-                rollbackBlock(error);
-            }
-            [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
-                
-                if (error.code != AES_ERROR_UNSUPPORTED_RULE ) {
-                    [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
-                }
-            }];
-            return;
-        }
-        
-        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
-            
-            [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:^{
-                rollbackBlock(error);
-            }];
-        }];
+            NSError *error;
+            for (ASDFilterRule *item in rules) {
+                error = [[AEService singleton] checkRule:item];
+                if (error) {
+                    if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+                        
+                        error = nil;
+                        NSString *errorDescription = NSLocalizedString(@"Cannot convert the user filter rules. One of the rule contains error. Check cursor position.", @"(AEUIUtils) User filter convertering error description");
+                        error = [NSError errorWithDomain:AEServiceErrorDomain
+                                                    code:AES_ERROR_UNSUPPORTED_RULE
+                                                userInfo:@{NSLocalizedDescriptionKey : errorDescription,
+                                                           AESUserInfoRuleObject: item}];
 
+                    }
+                    break;
+                }
+            }
+            
+            if (error == nil) {
+                error = [[AEService singleton] replaceUserFilterWithRules:rules];
+            }
+            
+            if (error) {
+                
+                if (rollbackBlock) {
+                    
+                    [ACSSystemUtils callOnMainQueue:^{
+                        rollbackBlock(error);
+                    }];
+                }
+                [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
+                    
+                    if (error.code != AES_ERROR_UNSUPPORTED_RULE || UIAccessibilityIsVoiceOverRunning()) {
+                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                    }
+                }];
+                return;
+            }
+            
+            [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
+                
+                [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:^{
+                    rollbackBlock(error);
+                }];
+            }];
+        });
     }];
 }
 

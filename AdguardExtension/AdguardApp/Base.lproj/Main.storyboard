@@ -447,9 +447,6 @@
                                         </searchBar>
                                     </barButtonItem>
                                     <barButtonItem image="search-prev" id="i31-gd-PLq" userLabel="Search Previous">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Search Previous"/>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="clickSearchPrev:" destination="04M-uU-tjs" id="hZe-U0-uhc"/>
                                         </connections>

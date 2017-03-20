@@ -142,8 +142,10 @@
     // tunning accessibility
     self.editorTextView.accessibilityHint = self.textForPlaceholder;
     self.placeholderLabel.isAccessibilityElement = NO;
+    
     if (UIAccessibilityIsVoiceOverRunning()) {
-        [self scrollViewDidEndDragging:self.editorTextView willDecelerate:NO];
+        //turns off search functionality
+        self.searchToolBar.hidden = YES;
     }
     //---
     
@@ -301,58 +303,6 @@
     [self setControlsByLoadingAndTextExists];
 }
 
-/*
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-
-
-    [self.searchToolBar setNeedsUpdateConstraints];
-    [self.searchToolBar setNeedsLayout];
-
-    CGFloat absoluteTopVal = ABS(_searchBarTopConstraintValue);
-    CGFloat topValue = _searchBarHidden ? TOP_BOUNSE_LIMIT : _searchBarTopConstraintValue;
-    
-    if (decelerate) {
-        [self.searchBar resignFirstResponder];
-    }
-
-    if(scrollView.contentOffset.y < topValue || UIAccessibilityIsVoiceOverRunning())
-    {
-        
-        _searchBarHidden = NO;
-        self.seachToolBarConstraint.constant = 0.0f;
-        self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
-
-        [UIView animateWithDuration:0.1 animations:^{
-            
-            UIEdgeInsets insets = UIEdgeInsetsMake(absoluteTopVal, 0, 0, 0);
-            self.editorTextView.contentInset = insets;
-            self.editorTextView.scrollIndicatorInsets = insets;
-            [self.view layoutIfNeeded];
-        }];
-        
-        if (! UIAccessibilityIsVoiceOverRunning()) {
-            [self.searchBar becomeFirstResponder];
-        }
-        
-    } else {
-
-        _searchBarHidden = YES;
-        [self hideSelectionMarkers];
-        [self.searchBar resignFirstResponder];
-        
-        self.seachToolBarConstraint.constant = _searchBarTopConstraintValue;
-        [UIView animateWithDuration:0.1 animations:^{
-            
-            UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 0, 0);
-            self.editorTextView.contentInset = insets;
-            self.editorTextView.scrollIndicatorInsets = insets;
-            [self.view layoutIfNeeded];
-        }];
-        
-    }
-}
- */
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     [self selectWithType:AETESelectionTypeFind text:searchBar.text];
@@ -366,6 +316,15 @@
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     
     [self hideSelectionMarkers];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // tunning accessibility
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification,
+                                    self.editorTextView);
+    //-------------
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -454,6 +413,7 @@
     self.searchBarPrevious.enabled = result;
     
     if (!result) {
+        
         self.searchBar.text = nil;
         _currentSearchString = nil;
 
@@ -502,22 +462,6 @@
   
 }
 
-- (void)selectFirst {
-
-    NSUInteger len = self.editorTextView.text.length;
-    if ([NSString isNullOrEmpty:_currentSearchString] || _currentSearchString.length > len) {
-        return;
-    }
-    _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
-    
-    if (_currentTextSelection.location == NSNotFound) {
-        return;
-    }
-
-    _currentSelectionType = AETESelectionTypeFind;
-    [self updateSelectionOnTextView];
-}
-
 - (void)selectNext {
     
     NSUInteger len = self.editorTextView.text.length;
@@ -530,7 +474,7 @@
     _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch range:searchRange];
     
     if (_currentTextSelection.location == NSNotFound) {
-        [self selectFirst];
+        [self selectWithType:AETESelectionTypeFind text:_currentSearchString];
         return;
     }
     
@@ -581,6 +525,14 @@
     self.editorTextView.selectedRange = NSMakeRange(_currentTextSelection.location + _currentTextSelection.length, 0);
     
     [self.editorTextView scrollRangeToVisible:_currentTextSelection animated:YES];
+
+    // tunning accessibility
+    if (UIAccessibilityIsVoiceOverRunning()) {
+
+        [self.editorTextView becomeFirstResponder];
+        return;
+    }
+    //--------
     
     NSArray <UITextSelectionRect *> *textRects = [self.editorTextView
                          selectionRectsForRange:[self.editorTextView textRangeFromNSRange:_currentTextSelection]];
