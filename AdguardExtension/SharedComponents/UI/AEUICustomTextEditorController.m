@@ -96,10 +96,30 @@
     NSString *_textForEditing;
     NSAttributedString *_attributedTextForEditing;
     
-    NSDictionary *_editAttrs;
     BOOL _editting;
     BOOL _loadingStatusHandler;
 }
+
+static NSMutableParagraphStyle *_defaultParagraph;
+static NSDictionary *_editAttrs;
+
++ (void)initialize {
+    
+    if (self == [AEUICustomTextEditorController class]) {
+        _defaultParagraph = [NSMutableParagraphStyle new];
+        [_defaultParagraph setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+        _defaultParagraph.firstLineHeadIndent = 0.0f;
+        _defaultParagraph.headIndent = 10.0f;
+        //        _defaultParagraph.paragraphSpacing = 3.0f;
+        
+        _editAttrs = @{
+                       NSFontAttributeName: EDITED_TEXT_FONT,
+                       NSForegroundColorAttributeName: EDITED_TEXT_COLOR,
+                       NSParagraphStyleAttributeName: _defaultParagraph
+                       };
+    }
+}
+
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     
@@ -119,10 +139,6 @@
     [self setLoadingStatus:_loadingStatusHandler];
     
     _editting = NO;
-    _editAttrs = @{
-                   NSFontAttributeName: EDITED_TEXT_FONT,
-                   NSForegroundColorAttributeName: EDITED_TEXT_COLOR
-                   };
 
     self.editorTextView.font = EDITED_TEXT_FONT;
     self.editorTextView.textStorage.delegate = self;
@@ -166,6 +182,17 @@
         [[NSNotificationCenter defaultCenter] removeObserver:_observer];
     }
 }
+
++ (NSParagraphStyle *)defaultParagraph {
+    
+    return _defaultParagraph;
+}
+
++ (NSParagraphStyle *)defaultTextAttributes {
+    
+    return _editAttrs;
+}
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods

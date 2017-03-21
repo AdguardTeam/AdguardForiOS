@@ -44,6 +44,8 @@ typedef enum {
 
 @interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate, NSTextStorageDelegate>
 
+@property (readonly, class) NSParagraphStyle *defaultParagraph;
+@property (readonly, class) NSDictionary *defaultTextAttributes;
 /**
  Block of the code, which will be performed when user press the Done key.
  */

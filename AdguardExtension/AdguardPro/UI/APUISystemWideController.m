@@ -184,14 +184,17 @@
 
         };
         
+        NSString *text;
         if (toBlacklist) {
             
-            domainList.textForEditing = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
         }
         else {
             
-            domainList.textForEditing = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+            text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
         }
+        domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
+                                                                              attributes:AEUICustomTextEditorController.defaultTextAttributes];
         
     }
     else {

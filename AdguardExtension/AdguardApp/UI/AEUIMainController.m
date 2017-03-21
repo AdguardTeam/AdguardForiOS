@@ -631,9 +631,10 @@
                            NSArray *rules = [[[AEService singleton] antibanner]
                                              rulesForFilter:@(ASDF_USER_FILTER_ID)];
                            NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n" attributes:defaultStyle];
+                           AEUIFilterRuleObject *obj;
                            for (ASDFilterRule *item in rules) {
                                
-                               AEUIFilterRuleObject *obj = [[AEUIFilterRuleObject alloc]
+                               obj = [[AEUIFilterRuleObject alloc]
                                                             initWithRule:item];
                                if (obj) {
                                    [attributedText appendAttributedString:obj.attributeRuteText];
@@ -643,18 +644,25 @@
                            
                            dispatch_async(dispatch_get_main_queue(), ^{
                                
-                               // assign attributed text with all rules
-                               editor.attributedTextForEditing = attributedText;
-                               
-                               // if this is launch from AG Assistent
-                               if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
+                               if ([NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
+                                   // assign attributed text with all rules
+                                   editor.attributedTextForEditing = attributedText;
+                               }
+                               else {
+                                   // if this is launch from AG Assistent
                                    
-                                   UITextRange *end = [editor.editorTextView
-                                                       textRangeFromPosition:editor.editorTextView.endOfDocument
-                                                       toPosition:editor.editorTextView.endOfDocument];
-                                   [editor.editorTextView replaceRange:end
-                                                              withText:[@"\n" stringByAppendingString:_ruleTextHolderForAddRuleCommand]];
+                                   NSAttributedString *obj = [[NSAttributedString alloc] initWithString:_ruleTextHolderForAddRuleCommand
+                                                                                             attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                                   if (obj) {
+                                       
+                                       [attributedText appendAttributedString:obj];
+                                       [attributedText appendAttributedString:newline];
+                                   }
                                    _ruleTextHolderForAddRuleCommand = nil;
+                                   
+                                   // assign attributed text with all rules
+                                   editor.attributedTextForEditing = attributedText;
+                                   
                                    editor.doneButton.enabled = YES;
                                    [editor clickDone:self];
                                }

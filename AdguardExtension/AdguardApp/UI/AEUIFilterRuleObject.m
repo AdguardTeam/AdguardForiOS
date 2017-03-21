@@ -18,6 +18,7 @@
 #import "AEUIFilterRuleObject.h"
 #import "ACommons/ACLang.h"
 #import "AEFilterRuleSyntaxConstants.h"
+#import "AEUICustomTextEditorController.h"
 
 #define COLOR_DEFAULT       darkGrayColor
 #define COLOR_COMMENT       grayColor
@@ -185,7 +186,8 @@
                           initWithString:_ruleText
                           attributes:@{
                                        NSFontAttributeName: _font,
-                                       NSForegroundColorAttributeName: _textColor
+                                       NSForegroundColorAttributeName: _textColor,
+                                       NSParagraphStyleAttributeName: AEUICustomTextEditorController.defaultParagraph
                                        }];
     
     [self didChangeValueForKey:@"attributeRuteText"];
