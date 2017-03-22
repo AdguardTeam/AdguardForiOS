@@ -37,7 +37,7 @@
 
 - (void)testWhitelistDomain {
     
-    APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:@"fake"];
+    APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:(PacketTunnelProvider *)@"fake"];
     
     [handler setWhitelistDomains:@[ @"lenta.ru",
                                     @"domain.com"
@@ -55,7 +55,7 @@
 
 - (void)testBlacklistDomain {
     
-    APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:@"fake"];
+    APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:(PacketTunnelProvider *)@"fake"];
     
     [handler setBlacklistDomains:@[ @"lenta.ru",
                                     @"domain.com"

@@ -52,6 +52,14 @@
 @property (readonly, nonatomic) NSURL *dbURL;
 
 /**
+ Checks version of the default DB.
+
+ @param dbURL Url of the production DB
+ @return YES, if default DB was installed, and it has actual version.
+ */
+- (BOOL)checkDefaultDbVersionWithURL:(NSURL *)dbURL;
+
+/**
     Init database, copying default.db to production if need it, checking scheme version.
     @param dbURL    Url of the production DB.
  */

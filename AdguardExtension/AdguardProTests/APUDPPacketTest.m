@@ -36,6 +36,51 @@
     [super tearDown];
 }
 
+- (void)testUdpIpv6PacketBuild {
+    
+    APUDPPacket *udpIpPacket = [[APUDPPacket alloc] initWithAF:@(AF_INET6)];
+    
+    udpIpPacket.srcAddress = @"::1";
+    udpIpPacket.srcPort = @"80";
+    udpIpPacket.dstAddress = @"::2";
+    udpIpPacket.dstPort = @"80";
+
+    NSData *payload = [NSData dataWithBytes:"\01\01\01\01" length:4];
+    udpIpPacket.payload = payload;
+    
+    XCTAssertNotNil(udpIpPacket.packet);
+    XCTAssertEqual(payload.length, udpIpPacket.payload.length);
+
+    
+    NSString *resultBytes = @"96, 0, 0, 0, 0, 12, 17, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 80, 0, 80, 0, 12, -3, 49, 1, 1, 1, 1";
+    NSData *packet = [self packetFromDumpString:resultBytes];
+
+    XCTAssert([udpIpPacket.packet isEqualToData:packet], @"Good");
+}
+
+- (void)testUdpIpv6PacketParse {
+    
+    NSString *resultBytes = @"96, 0, 0, 0, 0, 12, 17, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 80, 0, 80, 0, 12, -3, 49, 1, 1, 1, 1";
+    NSData *packet = [self packetFromDumpString:resultBytes];
+    
+    APUDPPacket *udpIpPacket = [[APUDPPacket alloc] initWithData:packet af:@(AF_INET6)];
+    
+    XCTAssertNotNil(udpIpPacket);
+    XCTAssert([udpIpPacket.srcAddress isEqualToString:@"::1"]);
+    XCTAssert([udpIpPacket.dstAddress isEqualToString:@"::0.0.0.2"]);
+    XCTAssert([udpIpPacket.srcPort isEqualToString:@"80"]);
+    XCTAssert([udpIpPacket.dstPort isEqualToString:@"80"]);
+    
+    XCTAssert(udpIpPacket.payload.length == 4);
+    
+}
+
+- (void)testCreatePacket{
+    
+    APUDPPacket *packet = [APUDPPacket new];
+    packet = nil;
+}
+
 - (void)testCreateNewPacket{
     
     APUDPPacket *packet = [APUDPPacket new];
@@ -46,6 +91,7 @@
     packet.srcAddress = @"2.2.2.2";
     packet.dstPort = @"53";
     packet.srcPort = @"54544";
+    
     
     NSString *testString = @"Test string";
     packet.payload = [testString dataUsingEncoding:NSUTF8StringEncoding];
@@ -110,14 +156,14 @@
 
 - (NSData *)packetFromDumpString:(NSString *)dumpString{
     
-    NSArray *bytes = [dumpString componentsSeparatedByString:@","];
+    NSArray <NSString *> *bytes = [dumpString componentsSeparatedByString:@","];
     
     NSMutableData *_data = [NSMutableData dataWithLength:bytes.count];
     
     Byte *buffer = (Byte *)_data.mutableBytes;
-    [bytes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [bytes enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        *(buffer + idx) = (Byte)[obj intValue];
+        *(buffer + idx) = (Byte)[[obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] intValue];
     }];
     
     return _data;
