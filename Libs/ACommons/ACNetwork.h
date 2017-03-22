@@ -16,5 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "Network/ACNHttpUtils.h"
+#import "Network/ACNUrlUtils.h"
 #import "Network/ACNNetworking.h"
 #import "vendor/Reachability/Reachability.h"

@@ -128,6 +128,11 @@
     return self;
 }
 
+- (NSString *)description {
+    
+    return [NSString stringWithFormat:@"Group localization - groupId: %@, lang: %@, name: %@", self.groupId, self.lang, self.name];
+}
+
 @end
 
 

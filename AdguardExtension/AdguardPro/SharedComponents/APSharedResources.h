@@ -19,6 +19,9 @@
 #import "AESharedResources.h"
 
 
+#define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
+
+
 @class APDnsLogRecord;
 
 /////////////////////////////////////////////////////////////////////
@@ -28,7 +31,14 @@
  User Defaults key that define, create log of the DNS requests or not.
  */
 extern NSString *APDefaultsDnsLoggingEnabled;
-
+/**
+ User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
+ */
+extern NSString *APDefaultsCustomRemoteDnsServers;
+/**
+ User Defaults key, which defines, to filter DNS request locally or not.
+ */
+extern NSString *APDefaultsDnsLocalFiltering;
 
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     
@@ -36,7 +46,7 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     APHTMLoggingEnabled = 1,
     APHTMLoggingDisabled,
     // Command for notification of the tunnel provider extension that domains whitelist/blacklist were changed.
-    APHTMUserfilterDataReload
+    APHTMLSystemWideDomainListReload
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -45,7 +55,7 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 /**
      (PRO) Class, which provides exchanging data between app and extension.
  */
-@interface APSharedResources : NSObject
+@interface APSharedResources : AESharedResources
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -59,5 +69,15 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
 + (APHost2TunnelMessageType)host2tunnelMessageType:(NSData *)messageData;
 + (NSData *)host2tunnelMessageLogEnabled;
 + (NSData *)host2tunnelMessageLogDisabled;
-+ (NSData *)host2tunnelMessageUserfilterDataReload;
++ (NSData *)host2tunnelMessageSystemWideDomainListReload;
+
+/**
+ User-entered list of domains to be excluded from locking at the system-wide level.
+ */
+@property (class) NSArray <NSString *> *whitelistDomains;
+/**
+ User-entered list of domains that are blocked at the system-wide level.
+ */
+@property (class) NSArray <NSString *> *blacklistDomains;
+
 @end

@@ -9,8 +9,8 @@
 
 // Global product settings
 AG_PRODUCT = Adguard Pro
-AG_VERSION = 1.1.5
-AG_BUILD = 40
+AG_VERSION = 1.2.0
+AG_BUILD = 60
 
 AG_GIT_TAG_SUFIX = pro
 
@@ -20,4 +20,4 @@ ADGUARD_URL_SCHEME = adguard-pro
 #include "project.xcconfig"
 #include "../macro-definitions.xcconfig"
 
-PREPROCESSOR_MACRO = $(PREPROCESSOR_MACRO) PRO=1
+PREPROCESSOR_MACRO = $(PREPROCESSOR_MACRO) ADGUARD_TUNNEL_BUNDLE_ID=\"$(ADGUARD_TUNNEL_BUNDLE_ID)\" PRO=1

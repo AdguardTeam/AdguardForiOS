@@ -24,6 +24,7 @@
 #import "ASDatabase/ASDatabase.h"
 #import "FMDatabase+InMemoryOnDiskIO.h"
 #import "FMSQLStatementSplitter.h"
+#import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
 
 #define DB_SCHEME_FILE_NAME     @"schema.sql"
 #define DB_SCHEME_PATTERN       @"schema*.sql"
@@ -96,6 +97,8 @@ int main(int argc, const char * argv[])
         
         if (![fileManager fileExistsAtPath:dbPath]){
             
+            NSString *dbPath = [productPath stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME];
+            
             db = [FMDatabase databaseWithPath:nil];
             
             if (![db open]) {
@@ -104,7 +107,7 @@ int main(int argc, const char * argv[])
             }
             
             if ([[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
-                
+
 #pragma mark *** Get filters data from backend and insert to DB
                 ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
                 if (!metadata) {
@@ -156,16 +159,27 @@ int main(int argc, const char * argv[])
                     
                 }
                 
-                [db writeToFile:[productPath stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME]];
+                [db writeToFile:dbPath];
             }
             else{
                 
-                NSLog(@"Error creating DB from scheme: %@", [productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]);
+                NSLog(@"Error creating DB from scheme: %@", dbPath);
                 exit(1);
             }
             
             // close db
             [db close];
+            
+            // gzip default DB
+            NSData *dbData = [NSData dataWithContentsOfFile:dbPath];
+            if (dbData.length) {
+                dbData = [dbData gzippedData];
+            }
+            if (! [dbData writeToFile:[dbPath stringByAppendingString:@".gz"] atomically:YES]) {
+                
+                NSLog(@"Error compressing DB: %@", dbPath);
+                exit(1);
+            }
             
         }
         
