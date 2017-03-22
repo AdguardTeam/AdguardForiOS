@@ -105,6 +105,8 @@
         domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by commas or line breaks.",
                                                           @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist(Whitelist) screen. The placeholder text.");
         
+        domainList.keyboardType = UIKeyboardTypeURL;
+
         domainList.navigationItem.title = toWhitelist
         ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
@@ -193,8 +195,11 @@
             
             text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
         }
-        domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
-                                                                              attributes:AEUICustomTextEditorController.defaultTextAttributes];
+        if (! [NSString isNullOrEmpty:text]) {
+            
+            domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
+                                                                                  attributes:AEUICustomTextEditorController.defaultTextAttributes];
+        }
         
     }
     else {

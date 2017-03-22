@@ -424,7 +424,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="04M-uU-tjs" id="yCY-vS-l71"/>
                                 </connections>
@@ -1280,7 +1280,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="04M-uU-tjs" kind="show" id="MKF-oV-GeK"/>
+                                            <segue destination="04M-uU-tjs" kind="show" identifier="toWhitelist" id="MKF-oV-GeK"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="rpL-Mz-xwI" detailTextLabel="aaV-fz-QGQ" style="IBUITableViewCellStyleValue1" id="OJV-bd-wDq">
@@ -1373,7 +1373,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93Y-I8-Ha9">
-                                                    <rect key="frame" x="18" y="12" width="105" height="20"/>
+                                                    <rect key="frame" x="18" y="12.5" width="104.5" height="19.5"/>
                                                     <accessibility key="accessibilityConfiguration" label=" ">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -2625,8 +2625,8 @@
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Ee-nM-Qm2"/>
-        <segue reference="HiX-UG-PxM"/>
         <segue reference="2RS-yU-LDi"/>
+        <segue reference="MKF-oV-GeK"/>
+        <segue reference="HiX-UG-PxM"/>
     </inferredMetricsTieBreakers>
 </document>

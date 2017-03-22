@@ -24,6 +24,8 @@ typedef enum {
     AETESelectionTypeError
 } AETESelectionType;
 
+@class AEUICustomTextEditorController;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
@@ -40,12 +42,39 @@ typedef enum {
 @end
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark - AEUICustomTextEditorControllerDelegate Protocol
+
+@protocol AEUICustomTextEditorControllerDelegate <NSObject>
+
+@optional
+- (void)editorDidLoad:(AEUICustomTextEditorController *)editor;
+- (void)editorDidAppear:(AEUICustomTextEditorController *)editor;
+
+@end
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark - AEUICustomTextEditorController
 
 @interface AEUICustomTextEditorController  : UIViewController <UITextViewDelegate, UISearchBarDelegate, NSTextStorageDelegate>
 
+/**
+ Default paragraph style suitable for list of rules or domains.
+ */
 @property (readonly, class) NSParagraphStyle *defaultParagraph;
+/**
+ Default text attributes (for NSAttributedString) suitable for list of rules or domains.
+ */
 @property (readonly, class) NSDictionary *defaultTextAttributes;
+
+
+/**
+ Property for storing auxiliary object, 
+ which may make control or hold state, if need it.
+ */
+@property (strong) id auxiliaryObject;
+
+@property (weak, nonatomic) id<AEUICustomTextEditorControllerDelegate> delegate;
+
 /**
  Block of the code, which will be performed when user press the Done key.
  */
@@ -55,6 +84,10 @@ typedef enum {
  */
 @property (nonatomic, copy) BOOL (^replaceText)(NSString *text, UITextView *textView, NSRange range);
 
+/**
+ Set this property for changing keyboard type to other than default. 
+ */
+@property (nonatomic) UIKeyboardType    keyboardType;
 /**
  Initial text, which will be edited.
  */

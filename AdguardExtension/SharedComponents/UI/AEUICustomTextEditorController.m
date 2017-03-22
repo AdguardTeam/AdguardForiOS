@@ -98,6 +98,8 @@
     
     BOOL _editting;
     BOOL _loadingStatusHandler;
+    
+    UIKeyboardType _keyboardType;
 }
 
 static NSMutableParagraphStyle *_defaultParagraph;
@@ -127,6 +129,7 @@ static NSDictionary *_editAttrs;
     
     if (self) {
         _loadingStatusHandler = NO;
+        _keyboardType = UIKeyboardTypeDefault;
     }
     
     return self;
@@ -142,9 +145,13 @@ static NSDictionary *_editAttrs;
 
     self.editorTextView.font = EDITED_TEXT_FONT;
     self.editorTextView.textStorage.delegate = self;
+    self.editorTextView.keyboardType = _keyboardType;
     
     [self registerForKeyboardNotifications];
-//    [self attachToNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
 
     
     _keyboardHidden = YES;
@@ -166,6 +173,16 @@ static NSDictionary *_editAttrs;
     //---
     
     [self resetTextWithSizeToFit:YES];
+    
+    ASSIGN_WEAK(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        ASSIGN_STRONG(self);
+        if (USE_STRONG(self).delegate && [USE_STRONG(self).delegate respondsToSelector:@selector(editorDidLoad:)]) {
+            
+            [USE_STRONG(self).delegate editorDidLoad:USE_STRONG(self)];
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -188,7 +205,7 @@ static NSDictionary *_editAttrs;
     return _defaultParagraph;
 }
 
-+ (NSParagraphStyle *)defaultTextAttributes {
++ (NSDictionary *)defaultTextAttributes {
     
     return _editAttrs;
 }
@@ -211,6 +228,18 @@ static NSDictionary *_editAttrs;
     self.editorTextView.hidden = loading;
     
     [self setControlsByLoadingAndTextExists];
+}
+
+- (void)setKeyboardType:(UIKeyboardType)keyboardType {
+    
+    _keyboardType = keyboardType;
+    
+    self.editorTextView.keyboardType = _keyboardType;
+}
+
+- (UIKeyboardType)keyboardType {
+    
+    return _keyboardType;
 }
 
 - (NSString *)textForEditing {
@@ -352,6 +381,15 @@ static NSDictionary *_editAttrs;
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification,
                                     self.editorTextView);
     //-------------
+    
+    ASSIGN_WEAK(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        ASSIGN_STRONG(self);
+        if (USE_STRONG(self).delegate && [USE_STRONG(self).delegate respondsToSelector:@selector(editorDidAppear:)]) {
+            [USE_STRONG(self).delegate editorDidAppear:USE_STRONG(self)];
+        }
+    });
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -487,6 +525,19 @@ static NSDictionary *_editAttrs;
     self.editorTextView.contentInset = contentInsets;
     self.editorTextView.scrollIndicatorInsets = contentInsets;
   
+}
+
+- (void)appDidBecomeActive:(NSNotification *)aNotification {
+    
+    ASSIGN_WEAK(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        ASSIGN_STRONG(self);
+        if (USE_STRONG(self).delegate && [USE_STRONG(self).delegate respondsToSelector:@selector(editorDidAppear:)]) {
+            [USE_STRONG(self).delegate editorDidAppear:USE_STRONG(self)];
+        }
+    });
+
 }
 
 - (void)selectNext {
