@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "AEUILoadingModal.h"
+#import "ACommons/ACSystem.h"
 
 NSString *AEUILoadingModalIdentifier = @"loadingModal";
 
@@ -101,9 +102,10 @@ static AEUILoadingModal *lmSingleton;
 
 - (void)loadingModalHideWithCompletion:(dispatch_block_t)completionBlock{
     
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    [ACSSystemUtils callOnMainQueue:^{
+        
         [self.loadingModal dismissViewControllerAnimated:YES completion:completionBlock];
-    });
+    }];
 }
 
 
