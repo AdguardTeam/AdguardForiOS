@@ -152,4 +152,20 @@
     return result;
 }
 
++ (void)callOnMainQueue:(dispatch_block_t)block{
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+    dispatch_queue_t currentQueue = dispatch_get_current_queue();
+#pragma clang diagnostic pop
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    if (currentQueue == mainQueue) {
+        block();
+    }
+    else{
+        dispatch_sync(mainQueue, block);
+    }
+    
+}
+
 @end

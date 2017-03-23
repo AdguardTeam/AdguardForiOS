@@ -194,13 +194,12 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  and then removes all rules of the antibanner filter from DB,
  and then adds new rules from list.
  
- @param ruleTexts    List of NSString objects.
- Texts of rules, which must be added into filter.
+ @param rules        List of rules, which must be added into filter.
  @param filterId     Identificator of filter (filter Id).
  
  @return YES if success.
  */
-- (BOOL)importRuleTexts:(NSArray *)ruleTexts filterId:(NSNumber *)filterId;
+- (BOOL)importRules:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId;
 
 /**
  Checks that antibanner filter is editable,

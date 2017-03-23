@@ -68,6 +68,14 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // tunning accessibility
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification,
+                                    self.loadingMessage);
+    //-------------
+}
 /*
 #pragma mark - Navigation
 
