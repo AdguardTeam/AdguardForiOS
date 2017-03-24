@@ -664,8 +664,10 @@ static AEService *singletonService;
                             // getting filters rules
                             NSMutableArray *rules = [self.antibanner activeRules];
                             // getting whitelist rules
-                            AESharedResources *res = [AESharedResources new];
-                            [rules addObjectsFromArray:res.whitelistContentBlockingRules];
+                            NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
+                            if (whitelistRules.count) {
+                                [rules addObjectsFromArray:whitelistRules];
+                            }
                             
                             if (rules.count) {
                                 
