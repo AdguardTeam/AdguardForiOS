@@ -653,7 +653,23 @@
     return self;
 }
 
-// Equal by key value - "filterId"
+- (BOOL)isEqualRuleText:(id)object
+{
+    if (self == object) {
+        
+        return YES;
+    }
+    
+    if ([object isKindOfClass:[ASDFilterRule class]]) {
+        
+        ASDFilterRule *rule = (ASDFilterRule *)object;
+        return (self.hash == rule.hash
+                && [self.ruleText isEqualToString:rule.ruleText]);
+    }
+    
+    return NO;
+}
+
 - (BOOL)isEqual:(id)object
 {
     if (self == object) {

@@ -102,7 +102,7 @@
     
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
     
-        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by commas or line breaks.",
+        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
                                                           @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist(Whitelist) screen. The placeholder text.");
         
         domainList.keyboardType = UIKeyboardTypeURL;
@@ -120,7 +120,7 @@
                 NSMutableCharacterSet *delimCharSet;
                 
                 delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-                [delimCharSet addCharactersInString:@","];
+                [delimCharSet addCharactersInString:@", "];
 
                 for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                     

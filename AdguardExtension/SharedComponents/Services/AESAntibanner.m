@@ -187,7 +187,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     });
 }
 
-- (NSArray *)activeRules{
+- (NSMutableArray *)activeRules{
     
     NSMutableArray *rules = [NSMutableArray array];
     
