@@ -305,15 +305,11 @@ static AEService *singletonService;
                 break;
             }
 
-            BOOL result = NO;
-
-            result = [antibanner addRule:rule];
-
-            if (!result) {
-
-                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
-                                        userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
-                break;
+            @autoreleasepool {
+                AESharedResources *res = [AESharedResources new];
+                NSMutableArray *whitelistRules = res.whitelistContentBlockingRules;
+                [whitelistRules addObject:rule];
+                res.whitelistContentBlockingRules = whitelistRules;
             }
 
             NSInteger maxRules = [[[AESharedResources sharedDefaults]
@@ -405,10 +401,26 @@ static AEService *singletonService;
                 break;
             }
             
-            BOOL result = NO;
+            __block BOOL result = NO;
+            __block NSUInteger index = 0;
             
-            result = [self removeRules:@[rule]];
-            
+            @autoreleasepool {
+                AESharedResources *res = [AESharedResources new];
+                NSMutableArray *whitelistRules = res.whitelistContentBlockingRules;
+                [whitelistRules enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([rule isEqualRuleText:obj]) {
+                        index = idx;
+                        result = YES;
+                        *stop = YES;
+                    }
+                }];
+                
+                if (result) {
+                    [whitelistRules removeObjectAtIndex:index];
+                    res.whitelistContentBlockingRules = whitelistRules;
+                }
+            }
+
             if (!result) {
                 
                 error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
@@ -649,7 +661,12 @@ static AEService *singletonService;
                         
                         @autoreleasepool {
                             
-                            NSArray *rules = [self.antibanner activeRules];
+                            // getting filters rules
+                            NSMutableArray *rules = [self.antibanner activeRules];
+                            // getting whitelist rules
+                            AESharedResources *res = [AESharedResources new];
+                            [rules addObjectsFromArray:res.whitelistContentBlockingRules];
+                            
                             if (rules.count) {
                                 
                                 // run converter

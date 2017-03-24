@@ -40,7 +40,7 @@
     
     AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
-    rulesList.textForPlaceholder = NSLocalizedString(@"User Filter rules here",
+    rulesList.textForPlaceholder = NSLocalizedString(@"User Filter rules here, separated by line breaks",
                                                      @"(AEUIMainController) Description!!!");
     
     rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Description");
