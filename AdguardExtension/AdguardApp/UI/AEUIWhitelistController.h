@@ -17,6 +17,8 @@
 */
 #import "AEUIRulesController.h"
 
-@interface AEUIWhitelistController : AEUIRulesController
+@interface AEUIWhitelistController : NSObject <AEUICustomTextEditorControllerDelegate>
+
++ (AEUIWhitelistController *)createWhitelistControllerWithSegue:(UIStoryboardSegue *)segue;
 
 @end

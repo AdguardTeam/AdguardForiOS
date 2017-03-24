@@ -57,12 +57,12 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host{
     
     @autoreleasepool {
         
-        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromAntibannerServiceFor:\"%@\"", host);
-        NSArray *rules = [[[AEService singleton] antibanner] rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\"%@\"", host);
+        NSArray *rules = [[AESharedResources new] whitelistContentBlockingRules];
         rules = [rules
                  filteredArrayUsingPredicate:
                  [NSPredicate
@@ -351,7 +351,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [self.messageLabel setHidden:YES];
     });
     
-    _domainObject = [ActionViewController domainObjectIfExistsFromAntibannerServiceFor:_host];
+    _domainObject = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });

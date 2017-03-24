@@ -27,6 +27,11 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
+#import "AEUICustomTextEditorController.h"
+#import "ASDFilterObjects.h"
+#import "AEUIFilterRuleObject.h"
+#import "AEUIUtils.h"
+#import "AEUIWhitelistController.h"
 
 #ifdef PRO
 
@@ -62,6 +67,9 @@
 #define RESET_UPDATE_FILTERS_DELAY  3 //seconds
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
+#define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+
+#define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController
@@ -77,6 +85,8 @@
     
     NSString *_ruleTextHolderForAddRuleCommand;
 
+    UIBarButtonItem *_cancelNavigationItem;
+
 #ifdef PRO
     APUIProSectionFooter *_proFooter;
 #endif
@@ -91,6 +101,10 @@
     
     self.title = AE_PRODUCT_NAME;
     
+    _cancelNavigationItem = [[UIBarButtonItem alloc]
+                             initWithTitle:NSLocalizedString(@"Cancel",
+                                                             @"(AEUIMainController) Text on the button that cancels an operation.")
+                             style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
     
     // tunning accessibility
@@ -261,16 +275,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
        
         _ruleTextHolderForAddRuleCommand = ruleText;
-        id topController = self.navigationController.topViewController;
-        if ([topController isKindOfClass:[AEUIRulesController class]]) {
-            
-            [topController setRuleTextForAdding:_ruleTextHolderForAddRuleCommand];
-            _ruleTextHolderForAddRuleCommand = nil;
-        }
-        else {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            [self performSegueWithIdentifier:TO_USER_FILTER_SEGUE_ID sender:self];
-        }
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self performSegueWithIdentifier:TO_USER_FILTER_SEGUE_ID sender:self];
+        _ruleTextHolderForAddRuleCommand = nil;
     });
 }
 
@@ -304,14 +311,14 @@
         [self prepareWelcomeScreenForController:destination];
     }
     else if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
-        
-        if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
-            
-            AEUIRulesController *dest = [segue destinationViewController];
-            dest.ruleTextForAdding = _ruleTextHolderForAddRuleCommand;
-            _ruleTextHolderForAddRuleCommand = nil;
-        }
+
+        [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
     }
+    else if ([segue.identifier isEqualToString:TO_WHITELIST_SEGUE_ID]){
+        
+        [AEUIWhitelistController createWhitelistControllerWithSegue:segue];
+    }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -568,10 +575,8 @@
     return [super tableView:tableView heightForFooterInSection:section];
 }
 
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
-/////////////////////////////////////////////////////////////////////
 
 - (APUIProSectionFooter *)proSectionFooter{
     

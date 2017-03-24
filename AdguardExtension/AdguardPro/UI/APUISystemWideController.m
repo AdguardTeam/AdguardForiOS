@@ -19,7 +19,8 @@
 #import "APUISystemWideController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
-#import "APUIDomainListController.h"
+#import "ACommons/ACLang.h"
+#import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
 
 
@@ -99,14 +100,19 @@
     
     if (toBlacklist || toWhitelist) {
     
-        APUIDomainListController *domainList = segue.destinationViewController;
+        AEUICustomTextEditorController *domainList = segue.destinationViewController;
+    
+        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
+                                                          @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist(Whitelist) screen. The placeholder text.");
         
+        domainList.keyboardType = UIKeyboardTypeURL;
+
         domainList.navigationItem.title = toWhitelist
         ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
-        domainList.done = ^BOOL(NSString *text) {
+        domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
 
             NSMutableArray *domains = [NSMutableArray array];
             @autoreleasepool {
@@ -114,7 +120,7 @@
                 NSMutableCharacterSet *delimCharSet;
                 
                 delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-                [delimCharSet addCharactersInString:@","];
+                [delimCharSet addCharactersInString:@", "];
 
                 for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                     
@@ -161,14 +167,38 @@
             return YES;
 
         };
+        domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
+            
+            if ([text contains:@"/"]) {
+                if (text.length > 1) {
+                    
+                    NSURL *url = [NSURL URLWithString:text];
+                    text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                    if (text) {
+                        
+                        [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                    }
+                }
+                return NO;
+            }
+            
+            return YES;
+
+        };
         
+        NSString *text;
         if (toBlacklist) {
             
-            domainList.textForEditing = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
         }
         else {
             
-            domainList.textForEditing = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+            text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+        }
+        if (! [NSString isNullOrEmpty:text]) {
+            
+            domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
+                                                                                  attributes:AEUICustomTextEditorController.defaultTextAttributes];
         }
         
     }

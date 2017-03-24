@@ -25,6 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadIndicator;
 
-+ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host;
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host;
 
 @end
