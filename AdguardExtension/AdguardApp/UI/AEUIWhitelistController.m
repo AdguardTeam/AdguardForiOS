@@ -49,9 +49,9 @@
     
     AEUICustomTextEditorController *domainList = segue.destinationViewController;
     
-    domainList.textForPlaceholder = NSLocalizedString(@"Enter here domain names (separated by spaces, commas or line breaks), for which Adguard will disable filtering in Safari.", @"(AEUIMainController) Description!!!");
+    domainList.textForPlaceholder = NSLocalizedString(@"Enter the domain names here (separated by spaces, commas or line breaks) which Adguard will disable filtering in Safari for.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.");
     
-    domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Description");
+    domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. The title of the screen.");
     domainList.keyboardType = UIKeyboardTypeURL;
     
     AEUIWhitelistController *result = [AEUIWhitelistController new];

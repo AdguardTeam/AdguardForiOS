@@ -71,7 +71,7 @@
                     if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
                         
                         error = nil;
-                        NSString *errorDescription = NSLocalizedString(@"Cannot convert the user filter rules. One of the rule contains error. Check cursor position.", @"(AEUIUtils) User filter convertering error description");
+                        NSString *errorDescription = NSLocalizedString(@"Cannot convert user filter rules. One of the rules contains an error. Check the rule next to the current cursor position.", @"(AEUIUtils) User filter convertering error description.");
                         error = [NSError errorWithDomain:AEServiceErrorDomain
                                                     code:AES_ERROR_UNSUPPORTED_RULE
                                                 userInfo:@{NSLocalizedDescriptionKey : errorDescription,
