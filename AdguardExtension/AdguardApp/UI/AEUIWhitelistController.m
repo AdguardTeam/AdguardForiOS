@@ -24,21 +24,18 @@
 #import "AEWhitelistDomainObject.h"
 #import "AEUICustomTextEditorController.h"
 #import "AEUIUtils.h"
+#import "AESharedResources.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIWhitelistController
 
-@implementation AEUIWhitelistController {
-    
-    NSMutableArray <ASDFilterRule *> *_userFilterRules;
-}
+@implementation AEUIWhitelistController
 
 - (id)init {
     
     self = [super init];
     if (self) {
         
-        _userFilterRules = [NSMutableArray array];
     }
     
     return self;
@@ -52,7 +49,7 @@
     
     AEUICustomTextEditorController *domainList = segue.destinationViewController;
     
-    domainList.textForPlaceholder = NSLocalizedString(@"Enter here domain names (separated by line breaks), for which Adguard will disable filtering in Safari. For those domain names will be generated rules, which will added to end of the User Filter.", @"(AEUIMainController) Description!!!");
+    domainList.textForPlaceholder = NSLocalizedString(@"Enter here domain names (separated by spaces, commas or line breaks), for which Adguard will disable filtering in Safari.", @"(AEUIMainController) Description!!!");
     
     domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Description");
     domainList.keyboardType = UIKeyboardTypeURL;
@@ -62,19 +59,21 @@
     ASSIGN_WEAK(result);
     domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
         
-        ASSIGN_STRONG(result);
+        NSMutableArray <ASDFilterRule *> *rules = [NSMutableArray array];
+
         @autoreleasepool {
             
             NSMutableCharacterSet *delimCharSet;
             
             delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-            
+            [delimCharSet addCharactersInString:@", "];
+
             for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                 
                 if (item.length) {
                     AEWhitelistDomainObject *obj = [[AEWhitelistDomainObject alloc] initWithDomain:item];
                     if (obj) {
-                        [USE_STRONG(result)->_userFilterRules addObject:obj.rule];
+                        [rules addObject:obj.rule];
                     }
                 }
             }
@@ -82,30 +81,24 @@
         
         @autoreleasepool {
             
-            [[[AEService singleton] antibanner] beginTransaction];
-            [AEUIUtils replaceUserFilterRules:USE_STRONG(result)->_userFilterRules withController:editor completionBlock:^{
+            AESharedResources *res = [AESharedResources new];
+            
+            NSMutableArray *oldRules = res.whitelistContentBlockingRules;
+            
+            res.whitelistContentBlockingRules = rules;
+            
+            [AEUIUtils invalidateJsonWithController:editor completionBlock:^{
                 
                 //Success
                 ASSIGN_STRONG(result);
-                [[[AEService singleton] antibanner] endTransaction];
                 
                 [editor setLoadingStatus:YES];
                 [USE_STRONG(result) reloadUserFilterDataForEditorController:editor];
                 
-            } rollbackBlock:^(NSError *error) {
-                //Failure
-                [[[AEService singleton] antibanner] rollbackTransaction];
+            } rollbackBlock:^{
                 
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE ) {
-                    
-                    ASDFilterRule *rule = error.userInfo[AESUserInfoRuleObject];
-                    if (rule) {
-                        AEWhitelistDomainObject *obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
-                        if (obj) {
-                            [editor selectWithType:AETESelectionTypeError text:obj.domain];
-                        }
-                    }
-                }
+                //Failure
+                res.whitelistContentBlockingRules = oldRules;
                 
             }];
         }
@@ -157,26 +150,24 @@
 
 - (void)reloadUserFilterDataForEditorController:(AEUICustomTextEditorController *)editor {
     
-    ASSIGN_WEAK(self);
     dispatch_async(
                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                        @autoreleasepool {
                       
-                           ASSIGN_STRONG(self);
-                           
                            //create attributed text with all rules
                            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
                                                                         initWithString:@""
                                                                         attributes:AEUICustomTextEditorController.defaultTextAttributes];
                            
-                           NSArray *rules = [[[AEService singleton] antibanner]
-                                             rulesForFilter:@(ASDF_USER_FILTER_ID)];
+                           AESharedResources *resources = [AESharedResources new];
+                           
+                           NSMutableArray *rules = resources.whitelistContentBlockingRules;
+                           
                            NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
                                                                                          attributes:AEUICustomTextEditorController.defaultTextAttributes];
                            
                            AEWhitelistDomainObject *obj;
                            
-                           [USE_STRONG(self)->_userFilterRules removeAllObjects];
                            for (ASDFilterRule *item in rules) {
                                
                                obj = [[AEWhitelistDomainObject alloc]
@@ -187,9 +178,6 @@
                                                                                        attributes:AEUICustomTextEditorController.defaultTextAttributes];
                                    [attributedText appendAttributedString:attrDomain];
                                    [attributedText appendAttributedString:newline];
-                               }
-                               else {
-                                   [_userFilterRules addObject:item];
                                }
                            }
                            

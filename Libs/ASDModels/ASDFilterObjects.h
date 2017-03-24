@@ -305,6 +305,14 @@
 @property (nonatomic) NSString *ruleText;
 @property (nonatomic) NSNumber *isEnabled;
 
+/**
+ Checks object if it is kind of ASDFilterRule class, 
+ and has ruleText is equal receaver ruleText.
+
+ @param object Candidate object
+ */
+- (BOOL)isEqualRuleText:(id)object;
+
 @end
 
 

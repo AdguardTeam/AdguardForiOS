@@ -102,7 +102,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return Array of ASDFilterRule objects that represent rules of filtering.
  Returns empty array if receiver property "enabled" equal NO.
  */
-- (NSArray *)activeRules;
+- (NSMutableArray *)activeRules;
 
 /**
  Obtain active rules for active (enabled) filter.
