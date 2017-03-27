@@ -397,8 +397,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     if (_localFiltering == NO) {
         
-        [_connectionHandler setWhitelistDomains:nil];
-        [_connectionHandler setBlacklistDomains:nil];
+        [_connectionHandler setWhitelistFilter:nil];
+        [_connectionHandler setBlacklistFilter:nil];
 
         return;
     }
@@ -409,42 +409,52 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         AESAntibanner *antibanner = [[AEService singleton] antibanner];
         NSArray *rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
         
-        NSMutableArray *wRules = [NSMutableArray array];
-        NSMutableArray *bRules = [NSMutableArray array];
-        AEWhitelistDomainObject *object;
+        AERDomainFilter *wRules = [AERDomainFilter filter];
+        AERDomainFilter *bRules = [AERDomainFilter filter];
+        
+        
+        AERDomainFilterRule *rule;
         for (ASDFilterRule *item in rules) {
             
-            object = [[APWhitelistDomainObject alloc] initWithRule:item];
-            if (object) {
-                [wRules addObject:object.domain];
+            rule = [AERDomainFilterRule rule:item.ruleText];
+            
+            if (rule.isWhiteListRule) {
+                [wRules addRule:rule];
             }
             else {
                 
-                object = [[AEBlacklistDomainObject alloc] initWithRule:item];
-                if (object) {
-                    [bRules addObject:object.domain];
-                }
+                [bRules addRule:rule];
             }
         }
 
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
-            if (domainList.count) {
-                [wRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [wRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
         
-        [_connectionHandler setWhitelistDomains:wRules];
+        [_connectionHandler setWhitelistFilter:wRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
-            if (domainList.count) {
-                [bRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[AEBlacklistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [bRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
-        [_connectionHandler setBlacklistDomains:bRules];
+        [_connectionHandler setBlacklistFilter:bRules];
     }
 }
 @end

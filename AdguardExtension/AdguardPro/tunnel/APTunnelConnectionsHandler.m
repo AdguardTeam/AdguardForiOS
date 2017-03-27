@@ -28,6 +28,7 @@
 #import "APDnsRequest.h"
 #import "APDnsDatagram.h"
 #import "APSharedResources.h"
+#import "AERDomainFilter.h"
 
 #define DEFAULT_DNS_SERVER_IP           @"208.67.222.222" // opendns.com
 
@@ -41,14 +42,15 @@
     BOOL _loggingEnabled;
     
     OSSpinLock _dnsAddressLock;
-    OSSpinLock _whitelistDomainLock;
-    OSSpinLock _blacklistDomainLock;
+    OSSpinLock _whitelistLock;
+    OSSpinLock _blacklistLock;
     
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
     
-    NSArray <NSString *> *_whitelistDomains;
-    NSArray <NSString *> *_blacklistDomains;
+    
+    AERDomainFilter *_whitelist;
+    AERDomainFilter *_blacklist;
     
     BOOL _packetFlowObserver;
     
@@ -69,7 +71,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _whitelistDomainLock = _blacklistDomainLock =_dnsAddressLock = OS_SPINLOCK_INIT;
+        _whitelistLock = _blacklistLock =_dnsAddressLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
         
         _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
@@ -125,32 +127,18 @@
     }
 }
 
-- (void)setWhitelistDomains:(NSArray <NSString *> *)domains {
+- (void)setWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_whitelistDomainLock);
-    
-    _whitelistDomains = nil;
-    
-    if (domains.count) {
-        
-        _whitelistDomains = [domains copy];
-    }
-
-    OSSpinLockUnlock(&_whitelistDomainLock);
+    OSSpinLockLock(&_whitelistLock);
+        _whitelist = filter;
+    OSSpinLockUnlock(&_whitelistLock);
 }
 
-- (void)setBlacklistDomains:(NSArray <NSString *> *)domains {
+- (void)setBlacklistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_blacklistDomainLock);
-    
-    _blacklistDomains = nil;
-    
-    if (domains.count) {
-        
-        _blacklistDomains = [domains copy];
-    }
-    
-    OSSpinLockUnlock(&_blacklistDomainLock);
+    OSSpinLockLock(&_blacklistLock);
+    _blacklist = filter;
+    OSSpinLockUnlock(&_blacklistLock);
 }
 
 - (void)startHandlingPackets {
@@ -180,26 +168,26 @@
     _loggingEnabled = enabled;
 }
 
-- (BOOL)isWhitelistDomain:(NSString *)domainName {
+- (BOOL)isWhitelistUrl:(NSString *)url {
     
     BOOL result = NO;
-    OSSpinLockLock(&_whitelistDomainLock);
+    OSSpinLockLock(&_whitelistLock);
     
-    result = [self checkDomain:domainName withList:_whitelistDomains];
+    result = [_whitelist filteredURL:url] != nil;
     
-    OSSpinLockUnlock(&_whitelistDomainLock);
+    OSSpinLockUnlock(&_whitelistLock);
     
     return result;
 }
 
-- (BOOL)isBlacklistDomain:(NSString *)domainName {
+- (BOOL)isBlacklistUrl:(NSString *)url {
     
     BOOL result = NO;
-    OSSpinLockLock(&_blacklistDomainLock);
+    OSSpinLockLock(&_blacklistLock);
     
-    result = [self checkDomain:domainName withList:_blacklistDomains];
+    result = [_blacklist filteredURL:url] != nil;
     
-    OSSpinLockUnlock(&_blacklistDomainLock);
+    OSSpinLockUnlock(&_blacklistLock);
     
     return result;
 }

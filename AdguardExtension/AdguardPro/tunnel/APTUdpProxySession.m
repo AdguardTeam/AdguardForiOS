@@ -28,8 +28,9 @@
 #import "PacketTunnelProvider.h"
 #import "APDnsServerObject.h"
 
-#define MAX_DATAGRAMS_RECEIVED 10
-#define TTL_SESSION 10 //seconds
+#define MAX_DATAGRAMS_RECEIVED                      10
+#define TTL_SESSION                                 10 //seconds
+#define DOMAIN_URL_FORMAT                           @"http://%@/"
 
 #define locLogError(fmt, ...) DDLogError(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
 #define locLogWarn(fmt, ...) DDLogWarn(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
@@ -570,15 +571,17 @@
             NSString *name = [datagram.requests[0] name];
             if (! [NSString isNullOrEmpty:name]) {
                 
+                NSString *url = [NSString stringWithFormat:DOMAIN_URL_FORMAT, name];
+                
                 // whitelist is processed first
-                if ([self.delegate isWhitelistDomain:name]) {
+                if ([self.delegate isWhitelistUrl:url]) {
 
                     [whitelistPackets addObject:packet];
                     whitelisted = YES;
                     locLogVerboseTrace(@"Domain to whiltelist: %@", name);
 
                 }
-                else if ([self.delegate isBlacklistDomain:name]) {
+                else if ([self.delegate isBlacklistUrl:url]) {
                     
                     [blacklistDatagrams addObject:datagram];
                     

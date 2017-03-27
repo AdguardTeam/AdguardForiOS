@@ -350,6 +350,20 @@
 		658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */; };
 		658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
 		658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
+		658E43951E8902F4008DAA59 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439A1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E43A11E891E6A008DAA59 /* AERShortcutsLookupTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */; };
+		658E43A41E89231A008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
+		658E43A71E89348E008DAA59 /* AERDomainFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */; };
+		658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		658E43A91E8934A4008DAA59 /* AERShortcutsLookupTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */; };
+		658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
 		658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
@@ -865,7 +879,6 @@
 		650F88FA1B9436E0000A6012 /* AEUIFilterRuleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIFilterRuleObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		650F88FC1B944871000A6012 /* AEUIWhitelistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWhitelistController.h; sourceTree = "<group>"; };
 		650F88FD1B944871000A6012 /* AEUIWhitelistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIWhitelistController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		650F89021B944D6B000A6012 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
 		650F89061B947B67000A6012 /* AEUIMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIMainController.h; sourceTree = "<group>"; };
 		650F89071B947B67000A6012 /* AEUIMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIMainController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6514819C1BC42E2A00211147 /* AEUIAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAboutController.h; sourceTree = "<group>"; };
@@ -1091,6 +1104,16 @@
 		658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIProStatusTableViewCell.m; sourceTree = "<group>"; };
 		658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
 		658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
+		658E43931E8902F4008DAA59 /* AERDomainFilterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilterRule.h; sourceTree = "<group>"; };
+		658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterRule.m; sourceTree = "<group>"; };
+		658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringPunycodeAdditions.h; sourceTree = "<group>"; };
+		658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringPunycodeAdditions.m; sourceTree = "<group>"; };
+		658E439F1E891E6A008DAA59 /* AERShortcutsLookupTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERShortcutsLookupTable.h; sourceTree = "<group>"; };
+		658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERShortcutsLookupTable.m; sourceTree = "<group>"; };
+		658E43A21E89231A008DAA59 /* AERDomainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilter.h; sourceTree = "<group>"; };
+		658E43A31E89231A008DAA59 /* AERDomainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilter.m; sourceTree = "<group>"; };
+		658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
+		658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterTest.m; sourceTree = "<group>"; };
 		658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdguardProUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		658FECFC1E240B8F0013BCE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1592,6 +1615,8 @@
 				655A01F61C6B7686000F00D7 /* NSURL+Utils.m */,
 				655AACB41D3CD38000E316EA /* ACObject.h */,
 				655AACB51D3CD38000E316EA /* ACObject.m */,
+				658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */,
+				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -1763,6 +1788,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		658E43921E890272008DAA59 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				658E43931E8902F4008DAA59 /* AERDomainFilterRule.h */,
+				658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */,
+				658E439F1E891E6A008DAA59 /* AERShortcutsLookupTable.h */,
+				658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */,
+				658E43A21E89231A008DAA59 /* AERDomainFilter.h */,
+				658E43A31E89231A008DAA59 /* AERDomainFilter.m */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
 		658FECF91E240B8F0013BCE3 /* AdguardProUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1810,8 +1848,10 @@
 		65AD3BB81B7CAF9F00004A02 /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
+				658E43921E890272008DAA59 /* Rules */,
 				65B40D4C1BDFBD9600A9C595 /* UI */,
 				65C12EE41BD4D29F00FFC71C /* Services */,
+				658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */,
 				65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */,
 				65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */,
 				653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */,
@@ -2050,7 +2090,6 @@
 				65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */,
 				652F89EE1B92E064002E0601 /* UI */,
 				65F398711B7C9C5000ABCD39 /* Adguard.entitlements */,
-				650F89021B944D6B000A6012 /* AEFilterRuleSyntaxConstants.h */,
 				65F398171B7B684700ABCD39 /* AppDelegate.h */,
 				65F398181B7B684700ABCD39 /* AppDelegate.m */,
 				65F3981D1B7B684700ABCD39 /* Main.storyboard */,
@@ -2079,6 +2118,7 @@
 				65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */,
 				653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
+				658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -2938,8 +2978,11 @@
 				6581C9251D64945800E739CC /* AESAntibanner.m in Sources */,
 				655AAC8E1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */,
+				658E43951E8902F4008DAA59 /* AERDomainFilterRule.m in Sources */,
+				658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65EBB4AD1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
 				6581C92A1D6494A200E739CC /* ADLocations.m in Sources */,
+				658E43A11E891E6A008DAA59 /* AERShortcutsLookupTable.m in Sources */,
 				657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */,
 				653AE9FB1D084B6400AC81B4 /* DDAbstractDatabaseLogger.m in Sources */,
 				6581C9281D64949600E739CC /* ASDatabase.m in Sources */,
@@ -2975,6 +3018,7 @@
 				657672B31D2BB9B100CF8C11 /* AESharedResources.m in Sources */,
 				6581C9301D6494F700E739CC /* FMStatementKeywordRecogniser.m in Sources */,
 				651F5E121E2563A400E22157 /* ACNUrlUtils.m in Sources */,
+				658E43A41E89231A008DAA59 /* AERDomainFilter.m in Sources */,
 				653AE9FA1D084B6400AC81B4 /* CLIColor.m in Sources */,
 				655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */,
 			);
@@ -3013,6 +3057,7 @@
 				655AACC91D3E10C100E316EA /* APUIDnsRequestsController.m in Sources */,
 				659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
+				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
@@ -3138,6 +3183,7 @@
 				659887141CF83580003ECD1C /* DDASLLogger.m in Sources */,
 				659887151CF83580003ECD1C /* Reachability.m in Sources */,
 				659887161CF83580003ECD1C /* DDContextFilterLogFormatter.m in Sources */,
+				658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				6518BD891DABBEBB00FDD1F3 /* APSharedResources.m in Sources */,
 				659887171CF83580003ECD1C /* AEUILoadingModalController.m in Sources */,
 				659887181CF83580003ECD1C /* NSException+Utils.m in Sources */,
@@ -3189,6 +3235,7 @@
 				659887571CF83947003ECD1C /* DDFileLogger.m in Sources */,
 				659887581CF83947003ECD1C /* ACIOStream.m in Sources */,
 				659887591CF83947003ECD1C /* NSURL+Utils.m in Sources */,
+				658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				6598875A1CF83947003ECD1C /* ADLocations.m in Sources */,
 				6598875B1CF83947003ECD1C /* NSDate+Utils.m in Sources */,
 				6598875C1CF83947003ECD1C /* ACLLogger.m in Sources */,
@@ -3281,6 +3328,7 @@
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9CA31BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				658E439A1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65C12EEF1BD4D29F00FFC71C /* AEService.m in Sources */,
 				65C12EED1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				65B40D5E1BDFF28D00A9C595 /* AEUILoadingModal.m in Sources */,
@@ -3307,7 +3355,9 @@
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
+				658E43A91E8934A4008DAA59 /* AERShortcutsLookupTable.m in Sources */,
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02551C6B7686000F00D7 /* DDASLLogger.m in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
@@ -3329,6 +3379,7 @@
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */,
+				658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */,
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				651703971B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m in Sources */,
 				65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */,
@@ -3350,6 +3401,7 @@
 				655A025E1C6B7686000F00D7 /* DDTTYLogger.m in Sources */,
 				652F89F41B92F2E5002E0601 /* AEUISubscriptionController.m in Sources */,
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
+				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65C12EF01BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				655A02611C6B7686000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -3381,6 +3433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9C991BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
+				658E43A71E89348E008DAA59 /* AERDomainFilterTest.m in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				653B4CE91DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
@@ -3430,6 +3483,7 @@
 				655A02591C6B7686000F00D7 /* DDFileLogger.m in Sources */,
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
+				658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65EC9CC71BB9841400F53F3B /* ADLocations.m in Sources */,
 				655A02771C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				655A023E1C6B7686000F00D7 /* ACLLogger.m in Sources */,

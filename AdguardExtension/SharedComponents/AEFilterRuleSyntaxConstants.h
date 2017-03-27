@@ -40,6 +40,7 @@
 #define NOT_MARK                        @"~"
 
 #define AFRU_OPTIONS_DELIMITER          @"$"
+#define AFRU_OPTIONS_ESCAPE             @"\\"
 #define AFRU_DOMAIN_OPTION              @"domain"
 #define AFRU_THIRD_PARTY_OPTION         @"third-party"
 #define AFRU_MATCH_CASE_OPTION          @"match-case"
@@ -52,6 +53,11 @@
 #define AFRU_POPUP_OPTION               @"popup"
 #define AFRU_REPLACE_WITH_MP4_OPTION    @"mp4"
 #define AFRU_EMPTY_OPTION               @"empty"
+
+#define AFRU_OPTIONS_MARKER_SYM          '$'
+#define AFRU_OPTIONS_ESCAPE_SYM          '\\'
+#define AFRU_OPTIONS_DELIMITER_SYM       ','
+
 
 // content type filtering
 #define AFRU_AD_SCRIPT_OPTION           @"script"
