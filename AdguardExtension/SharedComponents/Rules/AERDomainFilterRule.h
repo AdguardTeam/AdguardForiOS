@@ -20,9 +20,7 @@
 #import "ACommons/ACNetwork.h"
 #import "AEFilterRuleSyntaxConstants.h"
 
-@interface AERDomainFilterRule : NSObject {
-    BOOL _incorrectRule;
-}
+@interface AERDomainFilterRule : NSObject 
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Constructor (parsing rule text)
@@ -44,7 +42,7 @@
 /// Url regexp. It is used when rule contains regex.
 @property (nonatomic, readonly) NSRegularExpression *urlRegexp;
 
-/// Checks request url against filter
-- (BOOL)filteredForURL:(NSString *)requestUrl;
+/// Checks request domain against filter
+- (BOOL)filteredForDomain:(NSString *)domain;
 
 @end

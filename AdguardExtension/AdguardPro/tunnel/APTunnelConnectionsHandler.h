@@ -70,13 +70,13 @@
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
 
 /**
- Checks url, that it is included in whitelist.
+ Checks domain name, that it is included in whitelist.
  */
-- (BOOL)isWhitelistUrl:(NSString *)url;
+- (BOOL)isWhitelistDomain:(NSString *)domainName;
 /**
- Checks url, that it is included in blacklist.
+ Checks domain name, that it is included in blacklist.
  */
-- (BOOL)isBlacklistUrl:(NSString *)url;
+- (BOOL)isBlacklistDomain:(NSString *)domainName;
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.

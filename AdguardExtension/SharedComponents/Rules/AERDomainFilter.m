@@ -22,12 +22,12 @@
 #import "AERShortcutsLookupTable.h"
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - UrlFilterRuleLookupTable Declaration
+#pragma mark - FilterRuleLookupTable Declaration
 
 /**
  * Encapsulates different lookup tables used to speed up basic rules search
  */
-@interface UrlFilterRuleLookupTable : NSObject
+@interface FilterRuleLookupTable : NSObject
 
 /**
  * Adds rule to the table
@@ -51,20 +51,20 @@
 /**
  * Returns filtering rule if request is filtered or NULL if nothing found
  *
- * @param url                 Url to check
+ * @param domain                 domain to check
  * @return First matching rule or null if no match found
  */
-- (AERDomainFilterRule *)findRuleWithUrl:(__unsafe_unretained NSString *)url;
+- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain;
 
 @end
 
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - AFRUrlFilter Implementation
+#pragma mark - AERDomainFilter Implementation
 
 @implementation AERDomainFilter {
     
-    UrlFilterRuleLookupTable *_basicRulesTable;
+    FilterRuleLookupTable *_basicRulesTable;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@
 - (id)init {
     self = [super init]; // [super _init_];
     if (self) {
-        _basicRulesTable = [UrlFilterRuleLookupTable new];
+        _basicRulesTable = [FilterRuleLookupTable new];
     }
 
     return self;
@@ -99,18 +99,18 @@
     [_basicRulesTable addRule:rule];
 }
 
-- (AERDomainFilterRule *)filteredURL:(NSString *)url {
+- (AERDomainFilterRule *)filteredDomain:(NSString *)domain {
 
 
-    return [_basicRulesTable findRuleWithUrl:url];
+    return [_basicRulesTable findRuleWithDomain:domain];
 }
 
 @end
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - UrlFilterRuleLookupTable Implementation
+#pragma mark - FilterRuleLookupTable Implementation
 
-@implementation UrlFilterRuleLookupTable {
+@implementation FilterRuleLookupTable {
     
     AERShortcutsLookupTable *_shortcutsLookupTable;
     NSMutableArray <AERDomainFilterRule *> *_rulesWithoutShortcuts;
@@ -146,20 +146,20 @@
     [_rulesWithoutShortcuts removeAllObjects];
 }
 
-- (AERDomainFilterRule *)findRuleWithUrl:(__unsafe_unretained NSString *)url {
+- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain {
     
-    if ([NSString isNullOrEmpty:url]) {
+    if ([NSString isNullOrEmpty:domain]) {
         return nil;
     }
     
-    NSString *urlLowerCase = [url lowercaseString];
+    NSString *domainLowerCase = [domain lowercaseString];
     
-    NSArray <AERDomainFilterRule *> *rules = [_shortcutsLookupTable lookupRules:urlLowerCase];
+    NSArray <AERDomainFilterRule *> *rules = [_shortcutsLookupTable lookupRules:domainLowerCase];
     
     // Check against rules with shortcuts
     if (rules.count) {
-        AERDomainFilterRule *rule = [self findRuleWithUrl:url
-                                          urlLowerCase:urlLowerCase
+        AERDomainFilterRule *rule = [self findRuleWithDomain:domain
+                                          domainLowerCase:domainLowerCase
                                                  rules:rules];
         if (rule) {
             return rule;
@@ -168,8 +168,8 @@
     
     // Check against rules without shortcuts
     if (_rulesWithoutShortcuts.count) {
-        AERDomainFilterRule *rule = [self findRuleWithUrl:url
-                                          urlLowerCase:urlLowerCase
+        AERDomainFilterRule *rule = [self findRuleWithDomain:domain
+                                          domainLowerCase:domainLowerCase
                                                  rules:_rulesWithoutShortcuts];
         if (rule) {
             return rule;
@@ -181,20 +181,20 @@
 
 
 /**
- Checks url against collection of rules
+ Checks domain against collection of rules
 
- @param url                 Request url
- @param urlLowerCase        Request url in lowercase
+ @param domain                 Request domain
+ @param domainLowerCase        Request domain in lowercase
  @param rules               Rules to check
  
  @return First matching rule or null if nothing found
  */
-- (AERDomainFilterRule *)findRuleWithUrl:(__unsafe_unretained NSString *)url
-                            urlLowerCase:(__unsafe_unretained NSString *)urlLowerCase
+- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain
+                            domainLowerCase:(__unsafe_unretained NSString *)domainLowerCase
                                    rules:(__unsafe_unretained NSArray <AERDomainFilterRule *> *)rules{
 
     for (AERDomainFilterRule *rule in rules) {
-        if ([self filteredRule:rule url:url urlLowerCase:urlLowerCase]) {
+        if ([self filteredRule:rule domain:domain domainLowerCase:domainLowerCase]) {
             return rule;
         }
         
@@ -207,16 +207,16 @@
  * Checks if rule filters request
  *
  * @param rule                Rule
- * @param url                 Request url
- * @param urlLowerCase        Request url in lower case
+ * @param domain                 Request domain
+ * @param domainLowerCase        Request domain in lower case
  * @return YES if rule should filter this request
  */
 - (BOOL)filteredRule:(__unsafe_unretained AERDomainFilterRule *)rule
-                 url:(__unsafe_unretained NSString *)url
-        urlLowerCase:(__unsafe_unretained NSString *)urlLowerCase {
+                 domain:(__unsafe_unretained NSString *)domain
+        domainLowerCase:(__unsafe_unretained NSString *)domainLowerCase {
     
-    return ((!rule.shortcut || [urlLowerCase contains:rule.shortcut])
-            && [rule filteredForURL:url]);
+    return ((!rule.shortcut || [domainLowerCase contains:rule.shortcut])
+            && [rule filteredForDomain:domain]);
 }
 
 @end

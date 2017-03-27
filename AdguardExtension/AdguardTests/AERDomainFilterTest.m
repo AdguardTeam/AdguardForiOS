@@ -31,7 +31,7 @@
     
     [filter addRule:[AERDomainFilterRule rule:@"||anet*.tradedoubler.com^"]];
     [filter addRule:[AERDomainFilterRule rule:@"@@://googleadservices.com"]];
-    [filter addRule:[AERDomainFilterRule rule:@"@@://www.googleadservices.com"]];
+    [filter addRule:[AERDomainFilterRule rule:@"@@|https://www.googleadservices.com"]];
     [filter addRule:[AERDomainFilterRule rule:@"|www.domain.com|"]];
     [filter addRule:[AERDomainFilterRule rule:@"www.domain2.com^"]];
     [filter addRule:[AERDomainFilterRule rule:@"||www.blacklist.com^"]];
@@ -39,37 +39,44 @@
 
     [filter addRule:[AERDomainFilterRule rule:@"@@*"]];
 
-    AERDomainFilterRule *rule = [filter filteredURL:@"http://superanet.tradedoubler.com/"];
+    AERDomainFilterRule *rule = [filter filteredDomain:@"superanet.tradedoubler.com"];
     XCTAssertNil(rule);
     
-    rule = [filter filteredURL:@"http://super.anet.tradedoubler.com/"];
+    [filter addRule:[AERDomainFilterRule rule:@"*anet*.tra*dedoubler.com**"]];
+    rule = [filter filteredDomain:@"superanet.tradedoubler.com"];
     XCTAssert(rule);
     
-    rule = [filter filteredURL:@"http://anet.privet.tradedoubler.com/"];
+    rule = [filter filteredDomain:@"superanet.tra.tata.dedoubler.com.con"];
+    XCTAssert(rule);
+
+    rule = [filter filteredDomain:@"super.anet.tradedoubler.com"];
     XCTAssert(rule);
     
-    rule = [filter filteredURL:@"http://www.domain.com"];
-    XCTAssertNil(rule);
-    
-    rule = [filter filteredURL:@"http://subdomain.www.blacklist.com/"];
+    rule = [filter filteredDomain:@"anet.privet.tradedoubler.com"];
     XCTAssert(rule);
     
-    rule = [filter filteredURL:@"http://www.whitelist.com/"];
+    rule = [filter filteredDomain:@"www.domain.com"];
+    XCTAssert(rule);
+    
+    rule = [filter filteredDomain:@"subdomain.www.blacklist.com"];
+    XCTAssert(rule);
+    
+    rule = [filter filteredDomain:@"www.whitelist.com"];
     XCTAssert(rule);
     XCTAssert(rule.isWhiteListRule);
 
-    rule = [filter filteredURL:@"http://googleadservices.com/"];
+    rule = [filter filteredDomain:@"googleadservices.com"];
     XCTAssert(rule);
     XCTAssert(rule.isWhiteListRule);
 
-    rule = [filter filteredURL:@"http://www.googleadservices.com/"];
+    rule = [filter filteredDomain:@"www.googleadservices.com"];
     XCTAssert(rule);
     XCTAssert(rule.isWhiteListRule);
 
-    rule = [filter filteredURL:@"http://subdomain.googleadservices.com/"];
+    rule = [filter filteredDomain:@"subdomain.googleadservices.com"];
     XCTAssertNil(rule);
     
-    rule = [filter filteredURL:@"http://bad.domain.com/"];
+    rule = [filter filteredDomain:@"bad.domain.com"];
     XCTAssertNil(rule);
     
 }

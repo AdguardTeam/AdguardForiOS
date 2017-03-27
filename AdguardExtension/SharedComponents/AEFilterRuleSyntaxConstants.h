@@ -71,6 +71,8 @@
 #define AFRU_MASK_START_URL             @"||"
 #define AFRU_MASK_PIPE                  @"|"
 #define AFRU_MASK_ANY_SYMBOL            @"*"
+#define AFRU_URL_SCHEME_SEPARATOR       @"//"
+#define AFRU_URL_PATH_SEPARATOR         @"/"
 #define AFRU_MASK_SEPARATOR             @"^"
 #define AFRU_REGEXP_START_URL           @"^https?://([a-z0-9-_.]+\\.)?"
 #define AFRU_REGEXP_ANY_SYMBOL          @".*"

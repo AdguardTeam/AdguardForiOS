@@ -168,24 +168,24 @@
     _loggingEnabled = enabled;
 }
 
-- (BOOL)isWhitelistUrl:(NSString *)url {
+- (BOOL)isWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
     OSSpinLockLock(&_whitelistLock);
     
-    result = [_whitelist filteredURL:url] != nil;
+    result = [_whitelist filteredDomain:domainName] != nil;
     
     OSSpinLockUnlock(&_whitelistLock);
     
     return result;
 }
 
-- (BOOL)isBlacklistUrl:(NSString *)url {
+- (BOOL)isBlacklistDomain:(NSString *)domainName {
     
     BOOL result = NO;
     OSSpinLockLock(&_blacklistLock);
     
-    result = [_blacklist filteredURL:url] != nil;
+    result = [_blacklist filteredDomain:domainName] != nil;
     
     OSSpinLockUnlock(&_blacklistLock);
     

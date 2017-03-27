@@ -571,18 +571,16 @@
             NSString *name = [datagram.requests[0] name];
             if (! [NSString isNullOrEmpty:name]) {
                 
-                NSString *url = [NSString stringWithFormat:DOMAIN_URL_FORMAT, name];
-                
                 // whitelist is processed first
-                if ([self.delegate isWhitelistUrl:url]) {
+                if ([self.delegate isWhitelistDomain:name]) {
 
                     [whitelistPackets addObject:packet];
                     whitelisted = YES;
                     locLogVerboseTrace(@"Domain to whiltelist: %@", name);
 
                 }
-                else if ([self.delegate isBlacklistUrl:url]) {
-                    
+                else if ([self.delegate isBlacklistDomain:name]) {
+
                     [blacklistDatagrams addObject:datagram];
                     
                     [blacklistPackets addObject:packet];
