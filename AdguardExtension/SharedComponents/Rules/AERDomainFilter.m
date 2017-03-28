@@ -16,26 +16,27 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef DEBUG
-#import <malloc/malloc.h>
-#endif
 #import "ACommons/ACNetwork.h"
 #import "ACommons/ACLang.h"
 #import "AERDomainFilter.h"
+
+#define HASH_TABLE_SIZE                 5000
+#define STRING_CONVERT_ENCODING         NSASCIIStringEncoding
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark -  Private Functions Declaration
+
+CFIndex getIndex(const char *str, size_t len);
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AERDomainFilter Implementation
 
 @implementation AERDomainFilter {
     
-    NSMutableSet <NSString *> *_domainsExactMatch;
-    NSMutableSet <NSString *> *_domainsFullMatch;
+    NSPointerFunctions *_pointerFunctions;
+    NSPointerArray *_domainsExactMatch[HASH_TABLE_SIZE];
+    NSPointerArray *_domainsFullMatch[HASH_TABLE_SIZE];
     NSMutableArray <AERDomainFilterRule *> *_domainsMasksRules;
-#ifdef DEBUG
-    NSUInteger _maskSize;
-    NSUInteger _fullSize;
-    NSUInteger _exactSize;
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -45,16 +46,24 @@
 - (id)init {
     self = [super init]; // [super _init_];
     if (self) {
-        _domainsExactMatch = [NSMutableSet new];
-        _domainsFullMatch = [NSMutableSet new];
-        _domainsMasksRules = [NSMutableArray new];
+        _pointerFunctions = [NSPointerFunctions pointerFunctionsWithOptions:
+                             NSPointerFunctionsMallocMemory
+                             | NSPointerFunctionsCStringPersonality
+                             | NSPointerFunctionsCopyIn];
         
-#ifdef DEBUG
-        _maskSize = _fullSize = _exactSize = 0;
-#endif
+        memset(_domainsExactMatch, 0, sizeof(_domainsExactMatch));
+        memset(_domainsFullMatch, 0, sizeof(_domainsFullMatch));
+
+        _domainsMasksRules = [NSMutableArray new];
     }
 
     return self;
+}
+
+- (void)dealloc {
+
+    [self clearHash:_domainsExactMatch];
+    [self clearHash:_domainsFullMatch];
 }
 
 + (AERDomainFilter *)filter {
@@ -76,49 +85,77 @@
     
     if (rule.maskRule) {
         
-#ifdef DEBUG
-        _maskSize += malloc_size((__bridge const void *) rule.domainPattern) + malloc_size((__bridge const void *) rule);
-#endif
         [_domainsMasksRules addObject:rule];
     }
     else if (rule.withSubdomainsRule) {
         // add '.' on tail for optimisation
         NSString *domain = [rule.domainPattern stringByAppendingString:@"."];
-#ifdef DEBUG
-        _fullSize += malloc_size((__bridge const void *) domain);
-#endif
-        [_domainsFullMatch addObject:domain];
+       
+        [self addDomain:domain toHash:_domainsFullMatch];
     }
     else {
         
-#ifdef DEBUG
-        _exactSize += malloc_size((__bridge const void *) rule.domainPattern);
-#endif
-        [_domainsExactMatch addObject:rule.domainPattern];
+        [self addDomain:rule.domainPattern toHash:_domainsExactMatch];
     }
 }
 
 - (BOOL)filteredDomain:(NSString *)domain {
 
-    return [_domainsExactMatch containsObject:domain]
+    return [self containsDomain:domain inHash:_domainsExactMatch]
     || [self fulldomainSearch:domain]
     || [self maskDomainSearch:domain];
 }
 
-#ifdef DEBUG
-- (void)printMemoryUsage {
-    
-    NSUInteger val = _exactSize + malloc_size((__bridge const void *) _domainsExactMatch);
-    NSLog(@"ProTunnel exact domains: %lu", val);
-    val = _fullSize + malloc_size((__bridge const void *) _domainsFullMatch);
-    NSLog(@"ProTunnel full domains: %lu", val);
-    val = _maskSize + malloc_size((__bridge const void *) _domainsMasksRules);
-    NSLog(@"ProTunnel mask domains: %lu", val);
-}
-#endif
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
+
+- (void)addDomain:(NSString *)domain toHash:(__strong NSPointerArray *[])hash {
+
+    const char *cDomain = [domain cStringUsingEncoding:STRING_CONVERT_ENCODING];
+    
+    if (cDomain) {
+        CFIndex index = getIndex(cDomain, strlen(cDomain));
+        NSPointerArray *list = hash[index];
+        
+        if (list == nil) {
+            // create pointer array
+            list = [NSPointerArray pointerArrayWithPointerFunctions:_pointerFunctions];
+            hash[index] = list;
+        }
+        [list addPointer:(void *)cDomain];
+    }
+}
+
+- (void)clearHash:(__strong NSPointerArray *[])hash {
+    
+    for (int i = 0; i < HASH_TABLE_SIZE; i++) {
+        if (hash[i] != nil) {
+            hash[i] = nil;
+        }
+    }
+}
+
+- (BOOL)containsDomain:(NSString *)domain inHash:(__strong NSPointerArray *[])hash{
+    
+    NSPointerArray *list = nil;
+    
+    const char *cDomain = [domain cStringUsingEncoding:STRING_CONVERT_ENCODING];
+    CFIndex index = getIndex(cDomain, strlen(cDomain));
+    list = hash[index];
+    
+    const char *cString = NULL;
+    for (CFIndex i = 0; i < list.count; i++) {
+        
+        cString = [list pointerAtIndex:i];
+        if (cString && strcmp(cString, cDomain) == 0) {
+            
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 - (BOOL)fulldomainSearch:(__unsafe_unretained NSString *)domain {
     
@@ -131,7 +168,7 @@
                                 
                                 searchDomain = [NSString stringWithFormat:@"%@.%@",obj, searchDomain];
                                 
-                                if ([_domainsFullMatch containsObject:searchDomain]) {
+                                if ([self containsDomain:searchDomain inHash:_domainsFullMatch]) {
                                     *stop = YES;
                                     result = YES;
                                 }
@@ -153,3 +190,16 @@
 
 @end
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark - Private functions Implementation
+/////////////////////////////////////////////////////////////////////
+
+CFIndex getIndex(const char *str, size_t len) {
+    
+    unsigned long hash = 5381;
+    for (uint i = 0; i < len; i++) {
+        hash = ((hash << 5) + hash) + *(str + i);
+    }
+    
+    return hash % HASH_TABLE_SIZE;
+}

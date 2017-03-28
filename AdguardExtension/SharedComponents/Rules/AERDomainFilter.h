@@ -42,9 +42,5 @@
  @return Returns YES if request is filtered
  */
 - (BOOL)filteredDomain:(NSString *)domain;
-
-#ifdef DEBUG
-- (void)printMemoryUsage;
-#endif
     
 @end

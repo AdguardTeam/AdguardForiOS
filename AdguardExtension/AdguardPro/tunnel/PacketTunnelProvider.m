@@ -467,9 +467,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         
         [_connectionHandler setWhitelistFilter:wRules];
-#ifdef DEBUG
-        [wRules printMemoryUsage];
-#endif
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
@@ -484,9 +481,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
         
         [_connectionHandler setBlacklistFilter:bRules];
-#ifdef DEBUG
-        [bRules printMemoryUsage];
-#endif
     }
     
     return YES;
