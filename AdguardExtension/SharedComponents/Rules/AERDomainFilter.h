@@ -43,4 +43,8 @@
  */
 - (BOOL)filteredDomain:(NSString *)domain;
 
+#ifdef DEBUG
+- (void)printMemoryUsage;
+#endif
+    
 @end

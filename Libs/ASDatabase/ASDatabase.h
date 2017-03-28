@@ -42,6 +42,7 @@
 }
 
 + (ASDatabase *)singleton;
++ (void)destroySingleton;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

@@ -16,6 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef DEBUG
+#import <malloc/malloc.h>
+#endif
 #import "ACommons/ACNetwork.h"
 #import "ACommons/ACLang.h"
 #import "AERDomainFilter.h"
@@ -28,6 +31,11 @@
     NSMutableSet <NSString *> *_domainsExactMatch;
     NSMutableSet <NSString *> *_domainsFullMatch;
     NSMutableArray <AERDomainFilterRule *> *_domainsMasksRules;
+#ifdef DEBUG
+    NSUInteger _maskSize;
+    NSUInteger _fullSize;
+    NSUInteger _exactSize;
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -40,6 +48,10 @@
         _domainsExactMatch = [NSMutableSet new];
         _domainsFullMatch = [NSMutableSet new];
         _domainsMasksRules = [NSMutableArray new];
+        
+#ifdef DEBUG
+        _maskSize = _fullSize = _exactSize = 0;
+#endif
     }
 
     return self;
@@ -64,14 +76,24 @@
     
     if (rule.maskRule) {
         
+#ifdef DEBUG
+        _maskSize += malloc_size((__bridge const void *) rule.domainPattern) + malloc_size((__bridge const void *) rule);
+#endif
         [_domainsMasksRules addObject:rule];
     }
     else if (rule.withSubdomainsRule) {
         // add '.' on tail for optimisation
-        [_domainsFullMatch addObject:[rule.domainPattern stringByAppendingString:@"."]];
+        NSString *domain = [rule.domainPattern stringByAppendingString:@"."];
+#ifdef DEBUG
+        _fullSize += malloc_size((__bridge const void *) domain);
+#endif
+        [_domainsFullMatch addObject:domain];
     }
     else {
         
+#ifdef DEBUG
+        _exactSize += malloc_size((__bridge const void *) rule.domainPattern);
+#endif
         [_domainsExactMatch addObject:rule.domainPattern];
     }
 }
@@ -82,6 +104,21 @@
     || [self fulldomainSearch:domain]
     || [self maskDomainSearch:domain];
 }
+
+#ifdef DEBUG
+- (void)printMemoryUsage {
+    
+    NSUInteger val = _exactSize + malloc_size((__bridge const void *) _domainsExactMatch);
+    NSLog(@"ProTunnel exact domains: %lu", val);
+    val = _fullSize + malloc_size((__bridge const void *) _domainsFullMatch);
+    NSLog(@"ProTunnel full domains: %lu", val);
+    val = _maskSize + malloc_size((__bridge const void *) _domainsMasksRules);
+    NSLog(@"ProTunnel mask domains: %lu", val);
+}
+#endif
+
+/////////////////////////////////////////////////////////////////////////
+#pragma mark Private methods
 
 - (BOOL)fulldomainSearch:(__unsafe_unretained NSString *)domain {
     
