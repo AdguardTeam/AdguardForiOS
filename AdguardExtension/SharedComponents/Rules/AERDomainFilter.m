@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <sys/queue.h>
 
 #import "ACommons/ACNetwork.h"
 #import "ACommons/ACLang.h"
@@ -22,6 +23,15 @@
 
 #define HASH_TABLE_SIZE                 5000
 #define STRING_CONVERT_ENCODING         NSASCIIStringEncoding
+
+typedef struct qEntry {
+    char *domain;
+    SLIST_ENTRY(qEntry) list;
+} qEntry;
+
+SLIST_HEAD(DomainQ, qEntry);
+
+typedef struct DomainQ DomainQueue;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Private Functions Declaration
@@ -34,8 +44,8 @@ CFIndex getIndex(const char *str, size_t len);
 @implementation AERDomainFilter {
     
     NSPointerFunctions *_pointerFunctions;
-    NSPointerArray *_domainsExactMatch[HASH_TABLE_SIZE];
-    NSPointerArray *_domainsFullMatch[HASH_TABLE_SIZE];
+    DomainQueue *_domainsExactMatch[HASH_TABLE_SIZE];
+    DomainQueue *_domainsFullMatch[HASH_TABLE_SIZE];
     NSMutableArray <AERDomainFilterRule *> *_domainsMasksRules;
 }
 
@@ -54,6 +64,7 @@ CFIndex getIndex(const char *str, size_t len);
         memset(_domainsExactMatch, 0, sizeof(_domainsExactMatch));
         memset(_domainsFullMatch, 0, sizeof(_domainsFullMatch));
 
+        size_t test = sizeof(_domainsFullMatch);
         _domainsMasksRules = [NSMutableArray new];
     }
 
@@ -110,47 +121,78 @@ CFIndex getIndex(const char *str, size_t len);
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 
-- (void)addDomain:(NSString *)domain toHash:(__strong NSPointerArray *[])hash {
+- (void)addDomain:(NSString *)domain toHash:(DomainQueue *[])hash {
 
-    const char *cDomain = [domain cStringUsingEncoding:STRING_CONVERT_ENCODING];
-    
-    if (cDomain) {
-        CFIndex index = getIndex(cDomain, strlen(cDomain));
-        NSPointerArray *list = hash[index];
-        
-        if (list == nil) {
-            // create pointer array
-            list = [NSPointerArray pointerArrayWithPointerFunctions:_pointerFunctions];
-            hash[index] = list;
+    qEntry *entry = malloc(sizeof(qEntry));
+    if (entry) {
+        size_t size = domain.length + 1;
+        entry->domain = malloc(sizeof(*(entry->domain)) * size);
+        if (entry->domain) {
+            
+            if ([domain getCString:entry->domain maxLength:size encoding:STRING_CONVERT_ENCODING]) {
+                
+                CFIndex index = getIndex(entry->domain, size - 1);
+                DomainQueue *queue = hash[index];
+                
+                if (queue == nil) {
+                    // create
+                    queue = malloc(sizeof(DomainQueue));
+                    if (queue) {
+                        
+                        SLIST_INIT(queue);
+                        hash[index] = queue;
+                        
+                        SLIST_INSERT_HEAD(queue, entry, list);
+                        return;
+                    }
+                }
+                else {
+                    
+                    SLIST_INSERT_HEAD(queue, entry, list);
+                    return;
+                }
+            }
+            
+            free(entry->domain);
         }
-        [list addPointer:(void *)cDomain];
+        free(entry);
     }
 }
 
-- (void)clearHash:(__strong NSPointerArray *[])hash {
+- (void)clearHash:(DomainQueue *[])hash {
     
     for (int i = 0; i < HASH_TABLE_SIZE; i++) {
-        if (hash[i] != nil) {
-            hash[i] = nil;
+        if (hash[i]) {
+            DomainQueue *queue = hash[i];
+            
+            while (!SLIST_EMPTY(queue)) {           /* List Deletion. */
+                qEntry *entry = SLIST_FIRST(queue);
+                SLIST_REMOVE_HEAD(queue, list);
+                free(entry->domain);
+                free(entry);
+            }
+            free(queue);
+            hash[i] = NULL;
         }
     }
 }
 
-- (BOOL)containsDomain:(NSString *)domain inHash:(__strong NSPointerArray *[])hash{
-    
-    NSPointerArray *list = nil;
+- (BOOL)containsDomain:(NSString *)domain inHash:(DomainQueue *[])hash{
     
     const char *cDomain = [domain cStringUsingEncoding:STRING_CONVERT_ENCODING];
     CFIndex index = getIndex(cDomain, strlen(cDomain));
-    list = hash[index];
     
-    const char *cString = NULL;
-    for (CFIndex i = 0; i < list.count; i++) {
-        
-        cString = [list pointerAtIndex:i];
-        if (cString && strcmp(cString, cDomain) == 0) {
-            
-            return YES;
+    DomainQueue *queue = hash[index];
+    
+    if (queue) {
+
+        qEntry *entry = NULL;
+        SLIST_FOREACH(entry, queue, list){
+
+            if (entry->domain && strcmp(entry->domain, cDomain) == 0) {
+                
+                return YES;
+            }
         }
     }
     

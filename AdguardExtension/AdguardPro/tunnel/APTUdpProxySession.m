@@ -555,58 +555,61 @@
  Creates log records if needs it.
  */
 - (NSArray <NSArray *> *)processingOutgoingPackets:(NSMutableArray<NSData *> *)packets {
-
+    
     NSMutableArray *whitelistPackets = [NSMutableArray array];
-    NSMutableArray *blacklistPackets = [NSMutableArray array];
     NSMutableArray *blacklistDatagrams = [NSMutableArray array];
-    for (NSData *packet in packets) {
-
-        APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
-        if (datagram.isRequest) {
-
-            BOOL whitelisted = NO;
-            BOOL blacklisted = NO;
+    
+    @autoreleasepool {
+        
+        NSMutableArray *blacklistPackets = [NSMutableArray array];
+        for (NSData *packet in packets) {
             
-            //Check that this is request to domain from whitelist or blacklist.
-            NSString *name = [datagram.requests[0] name];
-            if (! [NSString isNullOrEmpty:name]) {
+            APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
+            if (datagram.isRequest) {
                 
-                // whitelist is processed first
-                if ([self.delegate isWhitelistDomain:name]) {
-
-                    [whitelistPackets addObject:packet];
-                    whitelisted = YES;
-                    locLogVerboseTrace(@"Domain to whiltelist: %@", name);
-
-                }
-                else if ([self.delegate isBlacklistDomain:name]) {
-
-                    [blacklistDatagrams addObject:datagram];
-                    
-                    [blacklistPackets addObject:packet];
-                    
-                    blacklisted = YES;
-                    
-                    locLogVerboseTrace(@"Domain to blacklist: %@", name);
-                }
-            }
-            
-            //Create DNS log record, if logging is enabled.
-            if (self->_dnsLoggingEnabled) {
+                BOOL whitelisted = NO;
+                BOOL blacklisted = NO;
                 
-                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
+                //Check that this is request to domain from whitelist or blacklist.
+                NSString *name = [datagram.requests[0] name];
+                if (! [NSString isNullOrEmpty:name]) {
+                    
+                    // whitelist is processed first
+                    if ([self.delegate isWhitelistDomain:name]) {
+                        
+                        [whitelistPackets addObject:packet];
+                        whitelisted = YES;
+                        locLogVerboseTrace(@"Domain to whiltelist: %@", name);
+                        
+                    }
+                    else if ([self.delegate isBlacklistDomain:name]) {
+                        
+                        [blacklistDatagrams addObject:datagram];
+                        
+                        [blacklistPackets addObject:packet];
+                        
+                        blacklisted = YES;
+                        
+                        locLogVerboseTrace(@"Domain to blacklist: %@", name);
+                    }
+                }
+                
+                //Create DNS log record, if logging is enabled.
+                if (self->_dnsLoggingEnabled) {
+                    
+                    [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
+                }
+                
             }
-            
+        }
+        
+        if (whitelistPackets.count) {
+            [packets removeObjectsInArray:whitelistPackets];
+        }
+        if (blacklistPackets.count) {
+            [packets removeObjectsInArray:blacklistPackets];
         }
     }
-    
-    if (whitelistPackets.count) {
-        [packets removeObjectsInArray:whitelistPackets];
-    }
-    if (blacklistPackets.count) {
-        [packets removeObjectsInArray:blacklistPackets];
-    }
-    
     return @[whitelistPackets, blacklistDatagrams];
 }
 
