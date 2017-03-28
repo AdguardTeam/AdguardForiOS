@@ -21,8 +21,6 @@
 
 @implementation AERDomainFilterRule {
     
-    BOOL _withSubdomains;
-    NSString *_rule;
     NSUInteger *_partsLength;
     NSUInteger _partsCount;
 }
@@ -53,13 +51,13 @@
         self = [super init];
         if (self) {
             
-            _isWhiteListRule = _withSubdomains = NO;
+            _whiteListRule = _withSubdomainsRule = _maskRule = NO;
             _partsCount = 0;
             _partsLength = NULL;
             
             if ([rule hasPrefix:MASK_WHITE_LIST]) {
                 rule = [rule substringFromIndex:MASK_WHITE_LIST.length];
-                _isWhiteListRule = YES;
+                _whiteListRule = YES;
             }
             
             //check head
@@ -72,7 +70,7 @@
             else if ([rule hasPrefix:AFRU_MASK_START_URL]) {
                 
                 rule = [rule substringFromIndex:AFRU_MASK_START_URL.length];
-                _withSubdomains = YES;
+                _withSubdomainsRule = YES;
             }
             else if ([rule hasPrefix:AFRU_MASK_PIPE]) {
                 
@@ -105,9 +103,9 @@
             rule = [rule IDNAEncodedString];
             
             // Searching for shortcut
-            [self findShortcutAndParts:rule];
+            [self findParts:rule];
             
-            _rule = rule;
+            _domainPattern = rule;
         }
     }
     return self;
@@ -144,7 +142,7 @@
         
         if (len) {
             
-            part = [_rule substringWithRange:range];
+            part = [_domainPattern substringWithRange:range];
             
             //first part
             if (idx == 0) {
@@ -159,7 +157,7 @@
                 
                 // if this is subdomain rule
                 // and we on first part
-                if (idx == 0 && _withSubdomains) {
+                if (idx == 0 && _withSubdomainsRule) {
                     
                     part = [@"." stringByAppendingString:part];
                     domainIdx = [domain indexOf:part];
@@ -215,14 +213,15 @@
     return YES;
 }
 
-- (void)findShortcutAndParts:(NSString *)urlmask {
-    NSString *longest; // = @"";
+- (void)findParts:(NSString *)urlmask {
     NSCharacterSet *cSet = [NSCharacterSet characterSetWithCharactersInString: AFRU_MASK_ANY_SYMBOL];
     NSArray *parts = [urlmask componentsSeparatedByCharactersInSet:cSet];
     
     _partsCount = parts.count;
-    if (_partsCount) {
-        _partsLength = malloc(sizeof(*_partsLength) * _partsCount);
+    _partsLength = malloc(sizeof(*_partsLength) * _partsCount);
+    
+    if (_partsCount > 1) {
+        _maskRule = YES;
     }
     
     int i = 0;
@@ -230,15 +229,8 @@
         
         _partsLength[i++] = part.length;
         
-        if (part.length > longest.length) {
-            longest = part;
-        }
     }
     
-    if ([NSString isNullOrEmpty:longest])
-        return;
-    
-    _shortcut = [longest lowercaseString];
 }
 
 @end

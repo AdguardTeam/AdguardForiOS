@@ -358,11 +358,9 @@
 		658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
 		658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
 		658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
-		658E43A11E891E6A008DAA59 /* AERShortcutsLookupTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */; };
 		658E43A41E89231A008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
 		658E43A71E89348E008DAA59 /* AERDomainFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */; };
 		658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
-		658E43A91E8934A4008DAA59 /* AERShortcutsLookupTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */; };
 		658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
 		658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
@@ -1108,8 +1106,6 @@
 		658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterRule.m; sourceTree = "<group>"; };
 		658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringPunycodeAdditions.h; sourceTree = "<group>"; };
 		658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringPunycodeAdditions.m; sourceTree = "<group>"; };
-		658E439F1E891E6A008DAA59 /* AERShortcutsLookupTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERShortcutsLookupTable.h; sourceTree = "<group>"; };
-		658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERShortcutsLookupTable.m; sourceTree = "<group>"; };
 		658E43A21E89231A008DAA59 /* AERDomainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilter.h; sourceTree = "<group>"; };
 		658E43A31E89231A008DAA59 /* AERDomainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilter.m; sourceTree = "<group>"; };
 		658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
@@ -1793,8 +1789,6 @@
 			children = (
 				658E43931E8902F4008DAA59 /* AERDomainFilterRule.h */,
 				658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */,
-				658E439F1E891E6A008DAA59 /* AERShortcutsLookupTable.h */,
-				658E43A01E891E6A008DAA59 /* AERShortcutsLookupTable.m */,
 				658E43A21E89231A008DAA59 /* AERDomainFilter.h */,
 				658E43A31E89231A008DAA59 /* AERDomainFilter.m */,
 			);
@@ -2982,7 +2976,6 @@
 				658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65EBB4AD1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
 				6581C92A1D6494A200E739CC /* ADLocations.m in Sources */,
-				658E43A11E891E6A008DAA59 /* AERShortcutsLookupTable.m in Sources */,
 				657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */,
 				653AE9FB1D084B6400AC81B4 /* DDAbstractDatabaseLogger.m in Sources */,
 				6581C9281D64949600E739CC /* ASDatabase.m in Sources */,
@@ -3357,7 +3350,6 @@
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
-				658E43A91E8934A4008DAA59 /* AERShortcutsLookupTable.m in Sources */,
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02551C6B7686000F00D7 /* DDASLLogger.m in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,

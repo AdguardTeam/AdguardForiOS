@@ -19,52 +19,15 @@
 #import "ACommons/ACNetwork.h"
 #import "ACommons/ACLang.h"
 #import "AERDomainFilter.h"
-#import "AERShortcutsLookupTable.h"
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - FilterRuleLookupTable Declaration
-
-/**
- * Encapsulates different lookup tables used to speed up basic rules search
- */
-@interface FilterRuleLookupTable : NSObject
-
-/**
- * Adds rule to the table
- *
- * @param rule Rule to add
- */
-- (void)addRule:(__unsafe_unretained AERDomainFilterRule *)rule;
-
-/**
- * Removes rule from the table
- *
- * @param rule Rule to remove
- */
-- (void)removeRule:(__unsafe_unretained AERDomainFilterRule *)rule;
-
-/**
- * Clears rules
- */
-- (void)clearRules;
-
-/**
- * Returns filtering rule if request is filtered or NULL if nothing found
- *
- * @param domain                 domain to check
- * @return First matching rule or null if no match found
- */
-- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain;
-
-@end
-
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AERDomainFilter Implementation
 
 @implementation AERDomainFilter {
     
-    FilterRuleLookupTable *_basicRulesTable;
+    NSMutableSet <NSString *> *_domainsExactMatch;
+    NSMutableSet <NSString *> *_domainsFullMatch;
+    NSMutableArray <AERDomainFilterRule *> *_domainsMasksRules;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -74,7 +37,9 @@
 - (id)init {
     self = [super init]; // [super _init_];
     if (self) {
-        _basicRulesTable = [FilterRuleLookupTable new];
+        _domainsExactMatch = [NSMutableSet new];
+        _domainsFullMatch = [NSMutableSet new];
+        _domainsMasksRules = [NSMutableArray new];
     }
 
     return self;
@@ -93,130 +58,60 @@
 
 - (void)addRule:(AERDomainFilterRule *)rule {
 
-    if (rule == nil) {
+    if ([NSString isNullOrEmpty:rule.domainPattern]) {
         return;
     }
-    [_basicRulesTable addRule:rule];
-}
-
-- (AERDomainFilterRule *)filteredDomain:(NSString *)domain {
-
-
-    return [_basicRulesTable findRuleWithDomain:domain];
-}
-
-@end
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - FilterRuleLookupTable Implementation
-
-@implementation FilterRuleLookupTable {
     
-    AERShortcutsLookupTable *_shortcutsLookupTable;
-    NSMutableArray <AERDomainFilterRule *> *_rulesWithoutShortcuts;
-}
-
-- (id)init {
-    
-    self = [super init];
-    if (self) {
-        _shortcutsLookupTable = [AERShortcutsLookupTable table];
-        _rulesWithoutShortcuts = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
-- (void)addRule:(__unsafe_unretained AERDomainFilterRule *)rule {
-    
-    if (![_shortcutsLookupTable addRule:rule]) {
-            [_rulesWithoutShortcuts addObject:rule];
-    }
-}
-
-- (void)removeRule:(__unsafe_unretained AERDomainFilterRule *)rule {
-    
-    [_shortcutsLookupTable removeRule:rule];
-    [_rulesWithoutShortcuts removeObject:rule];
-}
-
-- (void)clearRules {
-    
-    [_shortcutsLookupTable clearRules];
-    [_rulesWithoutShortcuts removeAllObjects];
-}
-
-- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain {
-    
-    if ([NSString isNullOrEmpty:domain]) {
-        return nil;
-    }
-    
-    NSString *domainLowerCase = [domain lowercaseString];
-    
-    NSArray <AERDomainFilterRule *> *rules = [_shortcutsLookupTable lookupRules:domainLowerCase];
-    
-    // Check against rules with shortcuts
-    if (rules.count) {
-        AERDomainFilterRule *rule = [self findRuleWithDomain:domain
-                                          domainLowerCase:domainLowerCase
-                                                 rules:rules];
-        if (rule) {
-            return rule;
-        }
-    }
-    
-    // Check against rules without shortcuts
-    if (_rulesWithoutShortcuts.count) {
-        AERDomainFilterRule *rule = [self findRuleWithDomain:domain
-                                          domainLowerCase:domainLowerCase
-                                                 rules:_rulesWithoutShortcuts];
-        if (rule) {
-            return rule;
-        }
-    }
-    
-    return nil;
-}
-
-
-/**
- Checks domain against collection of rules
-
- @param domain                 Request domain
- @param domainLowerCase        Request domain in lowercase
- @param rules               Rules to check
- 
- @return First matching rule or null if nothing found
- */
-- (AERDomainFilterRule *)findRuleWithDomain:(__unsafe_unretained NSString *)domain
-                            domainLowerCase:(__unsafe_unretained NSString *)domainLowerCase
-                                   rules:(__unsafe_unretained NSArray <AERDomainFilterRule *> *)rules{
-
-    for (AERDomainFilterRule *rule in rules) {
-        if ([self filteredRule:rule domain:domain domainLowerCase:domainLowerCase]) {
-            return rule;
-        }
+    if (rule.maskRule) {
         
+        [_domainsMasksRules addObject:rule];
     }
-
-    return nil;
+    else if (rule.withSubdomainsRule) {
+        // add '.' on tail for optimisation
+        [_domainsFullMatch addObject:[rule.domainPattern stringByAppendingString:@"."]];
+    }
+    else {
+        
+        [_domainsExactMatch addObject:rule.domainPattern];
+    }
 }
 
-/**
- * Checks if rule filters request
- *
- * @param rule                Rule
- * @param domain                 Request domain
- * @param domainLowerCase        Request domain in lower case
- * @return YES if rule should filter this request
- */
-- (BOOL)filteredRule:(__unsafe_unretained AERDomainFilterRule *)rule
-                 domain:(__unsafe_unretained NSString *)domain
-        domainLowerCase:(__unsafe_unretained NSString *)domainLowerCase {
+- (BOOL)filteredDomain:(NSString *)domain {
+
+    return [_domainsExactMatch containsObject:domain]
+    || [self fulldomainSearch:domain]
+    || [self maskDomainSearch:domain];
+}
+
+- (BOOL)fulldomainSearch:(__unsafe_unretained NSString *)domain {
     
-    return ((!rule.shortcut || [domainLowerCase contains:rule.shortcut])
-            && [rule filteredForDomain:domain]);
+    NSArray <NSString *> *parts = [domain componentsSeparatedByString:@"."];
+    
+    __block NSString *searchDomain = [NSString new];
+    __block BOOL result = NO;
+    [parts enumerateObjectsWithOptions:NSEnumerationReverse
+                            usingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                
+                                searchDomain = [NSString stringWithFormat:@"%@.%@",obj, searchDomain];
+                                
+                                if ([_domainsFullMatch containsObject:searchDomain]) {
+                                    *stop = YES;
+                                    result = YES;
+                                }
+                            }];
+    
+    return result;
+}
+
+- (BOOL)maskDomainSearch:(__unsafe_unretained NSString *)domain {
+    
+    for (AERDomainFilterRule *rule in _domainsMasksRules) {
+        if ([rule filteredForDomain:domain]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 @end

@@ -418,7 +418,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             
             rule = [AERDomainFilterRule rule:item.ruleText];
             
-            if (rule.isWhiteListRule) {
+            if (rule.whiteListRule) {
                 [wRules addRule:rule];
             }
             else {

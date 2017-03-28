@@ -37,7 +37,10 @@
 /// Adds rule to Domain Filter
 - (void)addRule:(AERDomainFilterRule *)rule;
 
-/// Returns filtering rule if request is filtered or nil if nothing found.
-- (AERDomainFilterRule *)filteredDomain:(NSString *)domain;
+/**
+ @param domain Domain name
+ @return Returns YES if request is filtered
+ */
+- (BOOL)filteredDomain:(NSString *)domain;
 
 @end

@@ -25,6 +25,46 @@
     [super tearDown];
 }
 
+- (void)testDomainRule {
+    
+    AERDomainFilterRule *rule = [AERDomainFilterRule rule:@"||anet*.tradedoubler.com^"];
+    XCTAssertTrue(rule.maskRule);
+    XCTAssertTrue(rule.withSubdomainsRule);
+    XCTAssertFalse(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"anet*.tradedoubler.com"]);
+    
+    rule = [AERDomainFilterRule rule:@"||anet.tradedoubler.com^"];
+    XCTAssertFalse(rule.maskRule);
+    XCTAssertTrue(rule.withSubdomainsRule);
+    XCTAssertFalse(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"anet.tradedoubler.com"]);
+
+    rule = [AERDomainFilterRule rule:@"anet.tradedoubler.com"];
+    XCTAssertTrue(rule.maskRule);
+    XCTAssertFalse(rule.withSubdomainsRule);
+    XCTAssertFalse(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"*anet.tradedoubler.com*"]);
+    
+    rule = [AERDomainFilterRule rule:@"@@||anet.tradedoubler.com^"];
+    XCTAssertFalse(rule.maskRule);
+    XCTAssertTrue(rule.withSubdomainsRule);
+    XCTAssertTrue(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"anet.tradedoubler.com"]);
+
+    rule = [AERDomainFilterRule rule:@"@@//anet.tradedoubler.com^"];
+    XCTAssertFalse(rule.maskRule);
+    XCTAssertFalse(rule.withSubdomainsRule);
+    XCTAssertTrue(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"anet.tradedoubler.com"]);
+
+    rule = [AERDomainFilterRule rule:@"|anet.tradedoubler.com|"];
+    XCTAssertFalse(rule.maskRule);
+    XCTAssertFalse(rule.withSubdomainsRule);
+    XCTAssertFalse(rule.whiteListRule);
+    XCTAssert([rule.domainPattern isEqualToString:@"anet.tradedoubler.com"]);
+    
+}
+
 - (void)testDomainFilter {
     
     AERDomainFilter *filter = [AERDomainFilter filter];
@@ -39,45 +79,32 @@
 
     [filter addRule:[AERDomainFilterRule rule:@"@@*"]];
 
-    AERDomainFilterRule *rule = [filter filteredDomain:@"superanet.tradedoubler.com"];
-    XCTAssertNil(rule);
+    XCTAssertFalse([filter filteredDomain:@"superanet.tradedoubler.com"]);
     
     [filter addRule:[AERDomainFilterRule rule:@"*anet*.tra*dedoubler.com**"]];
-    rule = [filter filteredDomain:@"superanet.tradedoubler.com"];
-    XCTAssert(rule);
+    XCTAssertTrue([filter filteredDomain:@"superanet.tradedoubler.com"]);
     
-    rule = [filter filteredDomain:@"superanet.tra.tata.dedoubler.com.con"];
-    XCTAssert(rule);
+    XCTAssertTrue([filter filteredDomain:@"superanet.tra.tata.dedoubler.com.con"]);
 
-    rule = [filter filteredDomain:@"super.anet.tradedoubler.com"];
-    XCTAssert(rule);
+    XCTAssertTrue([filter filteredDomain:@"super.anet.tradedoubler.com"]);
     
-    rule = [filter filteredDomain:@"anet.privet.tradedoubler.com"];
-    XCTAssert(rule);
+    XCTAssertTrue([filter filteredDomain:@"anet.privet.tradedoubler.com"]);
     
-    rule = [filter filteredDomain:@"www.domain.com"];
-    XCTAssert(rule);
+    XCTAssertTrue([filter filteredDomain:@"www.domain.com"]);
     
-    rule = [filter filteredDomain:@"subdomain.www.blacklist.com"];
-    XCTAssert(rule);
+    XCTAssertFalse([filter filteredDomain:@"subdomainwww.blacklist.com"]);
     
-    rule = [filter filteredDomain:@"www.whitelist.com"];
-    XCTAssert(rule);
-    XCTAssert(rule.isWhiteListRule);
+    XCTAssertTrue([filter filteredDomain:@"subdomain.www.blacklist.com"]);
+    
+    XCTAssertTrue([filter filteredDomain:@"www.whitelist.com"]);
 
-    rule = [filter filteredDomain:@"googleadservices.com"];
-    XCTAssert(rule);
-    XCTAssert(rule.isWhiteListRule);
+    XCTAssertTrue([filter filteredDomain:@"googleadservices.com"]);
 
-    rule = [filter filteredDomain:@"www.googleadservices.com"];
-    XCTAssert(rule);
-    XCTAssert(rule.isWhiteListRule);
+    XCTAssertTrue([filter filteredDomain:@"www.googleadservices.com"]);
 
-    rule = [filter filteredDomain:@"subdomain.googleadservices.com"];
-    XCTAssertNil(rule);
+    XCTAssertFalse([filter filteredDomain:@"subdomain.googleadservices.com"]);
     
-    rule = [filter filteredDomain:@"bad.domain.com"];
-    XCTAssertNil(rule);
+    XCTAssertFalse([filter filteredDomain:@"bad.domain.com"]);
     
 }
 

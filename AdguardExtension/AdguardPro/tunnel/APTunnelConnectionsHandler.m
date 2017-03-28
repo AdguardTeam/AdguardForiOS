@@ -173,7 +173,7 @@
     BOOL result = NO;
     OSSpinLockLock(&_whitelistLock);
     
-    result = [_whitelist filteredDomain:domainName] != nil;
+    result = [_whitelist filteredDomain:domainName];
     
     OSSpinLockUnlock(&_whitelistLock);
     
@@ -185,7 +185,7 @@
     BOOL result = NO;
     OSSpinLockLock(&_blacklistLock);
     
-    result = [_blacklist filteredDomain:domainName] != nil;
+    result = [_blacklist filteredDomain:domainName];
     
     OSSpinLockUnlock(&_blacklistLock);
     

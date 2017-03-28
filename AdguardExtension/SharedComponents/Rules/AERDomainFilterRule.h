@@ -34,13 +34,14 @@
 /////////////////////////////////////////////////////////////////////////
 
 /// If set to true - this is exception rule
-@property (nonatomic, readonly) BOOL isWhiteListRule;
-/// Blocking domain shortcut (for fast filter rule search)
-@property (nonatomic, readonly) NSString *shortcut;
-/// Url regexp text.
-@property (nonatomic, readonly) NSString *urlRegexpText;
-/// Url regexp. It is used when rule contains regex.
-@property (nonatomic, readonly) NSRegularExpression *urlRegexp;
+@property (nonatomic, readonly) BOOL whiteListRule;
+@property (nonatomic, readonly) BOOL maskRule;
+@property (nonatomic, readonly) BOOL withSubdomainsRule;
+
+/**
+ Domain representation from rule text.
+ */
+@property (nonatomic, readonly) NSString *domainPattern;
 
 /// Checks request domain against filter
 - (BOOL)filteredForDomain:(NSString *)domain;
