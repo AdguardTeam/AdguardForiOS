@@ -146,7 +146,7 @@ static APVPNManager *singletonVPNManager;
         [self attachToNotifications];
         
         _maxCountOfRemoteDnsServers = MAX_COUNT_OF_REMOTE_DNS_SERVERS;
-        _localFiltering = YES;
+        _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
@@ -238,6 +238,17 @@ static APVPNManager *singletonVPNManager;
     [predefinedRemoteDnsServers addObject:server];
     
     return predefinedRemoteDnsServers;
+}
+
++ (BOOL)defaultLocalFilteringState {
+    
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_LOCAL_FILTERING_LESS_10 : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING);
+}
++ (NSUInteger)defaultDnsServerIndex {
+    
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10 : APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -432,7 +443,7 @@ static APVPNManager *singletonVPNManager;
     if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
         
         if ([_activeRemoteDnsServer isEqual:server]) {
-            self.activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            self.activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
         }
         
         // async because method have not returns value
@@ -478,7 +489,7 @@ static APVPNManager *singletonVPNManager;
         
         if (result && resetEnabled) {
             
-            _activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
             
             self.activeRemoteDnsServer = server;
         }
@@ -682,7 +693,7 @@ static APVPNManager *singletonVPNManager;
     
     if (remoteServer == nil) {
         
-        remoteServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+        remoteServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
     }
 
     //Check input parameters
@@ -786,9 +797,9 @@ static APVPNManager *singletonVPNManager;
         
         // Getting current settings from configuration.
         //If settings are incorrect, then we assign default values.
-        _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+        _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
         _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPNManager.defaultLocalFilteringState;
         //-------------
         
         if (_manager.enabled && _manager.onDemandEnabled) {
@@ -829,8 +840,8 @@ static APVPNManager *singletonVPNManager;
         }
     }
     else{
-        _activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
-        _localFiltering = YES;
+        _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+        _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisabled;
     }
     
