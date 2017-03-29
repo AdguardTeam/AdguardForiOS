@@ -143,13 +143,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if (_currentServer == nil) {
 
         @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.defaultDnsServerIndex];
         }
     }
     
     _localFiltering = protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
     [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue]
-    : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+    : APVPNManager.defaultLocalFilteringState;
     
     _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
     
