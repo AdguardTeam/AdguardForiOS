@@ -68,6 +68,11 @@ static ASDatabase *singletonDB;
     return singletonDB;
 }
 
++ (void)destroySingleton {
+    
+    singletonDB = nil;
+}
+
 - (void)dealloc{
     
     [queue close];
