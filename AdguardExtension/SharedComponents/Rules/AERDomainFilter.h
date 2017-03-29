@@ -35,7 +35,7 @@
 /////////////////////////////////////////////////////////////////////
 
 /// Adds rule to Domain Filter
-- (void)addRule:(AERDomainFilterRule *)rule;
+- (void)addRule:(__unsafe_unretained AERDomainFilterRule *)rule;
 
 /**
  @param domain Domain name

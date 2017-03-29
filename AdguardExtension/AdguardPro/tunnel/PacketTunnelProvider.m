@@ -453,6 +453,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             }
         }
 
+        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
             for (NSString *item in domainList) {
@@ -464,7 +465,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 }
             }
         }
-        
         
         [_connectionHandler setWhitelistFilter:wRules];
         

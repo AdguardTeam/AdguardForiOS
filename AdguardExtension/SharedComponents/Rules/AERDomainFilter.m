@@ -64,7 +64,6 @@ CFIndex getIndex(const char *str, size_t len);
         memset(_domainsExactMatch, 0, sizeof(_domainsExactMatch));
         memset(_domainsFullMatch, 0, sizeof(_domainsFullMatch));
 
-        size_t test = sizeof(_domainsFullMatch);
         _domainsMasksRules = [NSMutableArray new];
     }
 
@@ -89,7 +88,7 @@ CFIndex getIndex(const char *str, size_t len);
 /////////////////////////////////////////////////////////////////////////
 
 - (void)addRule:(AERDomainFilterRule *)rule {
-
+    
     if ([NSString isNullOrEmpty:rule.domainPattern]) {
         return;
     }
@@ -101,7 +100,7 @@ CFIndex getIndex(const char *str, size_t len);
     else if (rule.withSubdomainsRule) {
         // add '.' on tail for optimisation
         NSString *domain = [rule.domainPattern stringByAppendingString:@"."];
-       
+        
         [self addDomain:domain toHash:_domainsFullMatch];
     }
     else {
@@ -121,7 +120,7 @@ CFIndex getIndex(const char *str, size_t len);
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 
-- (void)addDomain:(NSString *)domain toHash:(DomainQueue *[])hash {
+- (void)addDomain:(__unsafe_unretained NSString *)domain toHash:(DomainQueue *[])hash {
 
     qEntry *entry = malloc(sizeof(qEntry));
     if (entry) {
