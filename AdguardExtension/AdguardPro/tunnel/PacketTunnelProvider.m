@@ -103,19 +103,19 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     pendingStartCompletion = completionHandler;
     
-    // Init database
-    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-    if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
-        
-        DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
-        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
-        
-        pendingStartCompletion(error);
-        return;
-    }
-    
-    [[ASDatabase singleton] initDbWithURL:dbURL];
-    //--------------------------
+//    // Init database
+//    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+//    if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
+//        
+//        DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
+//        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
+//        
+//        pendingStartCompletion(error);
+//        return;
+//    }
+//    
+//    [[ASDatabase singleton] initDbWithURL:dbURL];
+//    //--------------------------
     
     [_reachabilityHandler startNotifier];
     
@@ -143,13 +143,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if (_currentServer == nil) {
 
         @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.defaultDnsServerIndex];
         }
     }
     
     _localFiltering = protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
     [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue]
-    : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+    : APVPNManager.defaultLocalFilteringState;
     
     _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
     
@@ -248,7 +248,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     settings.DNSSettings = dns;
     
-    [self reloadWhitelistBlacklistDomain];
+    if ([self reloadWhitelistBlacklistDomain] == NO) {
+        
+        //stop tunnel, because db error occurred.
+        return;
+    }
     
     // SETs network settings
     __typeof__(self) __weak wSelf = self;
@@ -393,58 +397,92 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [self stopVPN];
 }
 
-- (void)reloadWhitelistBlacklistDomain {
+- (BOOL)reloadWhitelistBlacklistDomain {
     
     if (_localFiltering == NO) {
         
-        [_connectionHandler setWhitelistDomains:nil];
-        [_connectionHandler setBlacklistDomains:nil];
+        [_connectionHandler setWhitelistFilter:nil];
+        [_connectionHandler setBlacklistFilter:nil];
 
-        return;
+        return YES;
     }
     
     @autoreleasepool {
 
         
-        AESAntibanner *antibanner = [[AEService singleton] antibanner];
-        NSArray *rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
-        
-        NSMutableArray *wRules = [NSMutableArray array];
-        NSMutableArray *bRules = [NSMutableArray array];
-        AEWhitelistDomainObject *object;
-        for (ASDFilterRule *item in rules) {
+        AERDomainFilter *wRules = [AERDomainFilter filter];
+        AERDomainFilter *bRules = [AERDomainFilter filter];
+
+        NSArray *rules;
+        @autoreleasepool {
             
-            object = [[APWhitelistDomainObject alloc] initWithRule:item];
-            if (object) {
-                [wRules addObject:object.domain];
-            }
-            else {
+            // Init database
+            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+            if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
                 
-                object = [[AEBlacklistDomainObject alloc] initWithRule:item];
-                if (object) {
-                    [bRules addObject:object.domain];
+                DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
+                NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
+                
+                pendingStartCompletion(error);
+                return NO;
+            }
+            
+            [[ASDatabase singleton] initDbWithURL:dbURL];
+            //--------------------------
+            
+            AESAntibanner *antibanner = [[AEService new] antibanner];
+            rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
+            
+            [ASDatabase destroySingleton];
+        }
+        
+        @autoreleasepool {
+            
+            AERDomainFilterRule *rule;
+            for (ASDFilterRule *item in rules) {
+                
+                rule = [AERDomainFilterRule rule:item.ruleText];
+                
+                if (rule.whiteListRule) {
+                    [wRules addRule:rule];
+                }
+                else {
+                    
+                    [bRules addRule:rule];
                 }
             }
         }
 
+        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
-            if (domainList.count) {
-                [wRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [wRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
-        
-        [_connectionHandler setWhitelistDomains:wRules];
+        [_connectionHandler setWhitelistFilter:wRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
-            if (domainList.count) {
-                [bRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[AEBlacklistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [bRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
-        [_connectionHandler setBlacklistDomains:bRules];
+        [_connectionHandler setBlacklistFilter:bRules];
     }
+    
+    return YES;
 }
 @end
