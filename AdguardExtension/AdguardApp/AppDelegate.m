@@ -88,7 +88,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         self.userDefaultsInitialized = NO;
         
         // Init database
-        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
         
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
