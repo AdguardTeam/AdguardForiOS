@@ -413,8 +413,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 NSDate *date = [[AESharedResources sharedDefaults] objectForKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
                 if (date == nil || ([date timeIntervalSinceNow] * -1) > TIME_INTERVAL_FOR_WARNING_MESSAGE) {
                     
-                    [self displayMessage:NSLocalizedString(@"В данный момент у Вас отсудствует соединение с интернетом. Запустите приложение, что бы выполнить дополнительную настройку после обновления!",
-                                                           @"(PacketTunnelProvider) Description")
+                    [self displayMessage:NSLocalizedStringFromTable(@"В данный момент у Вас отсудствует соединение с интернетом. Запустите приложение, что бы выполнить дополнительную настройку после обновления!",
+                                                                    @"AdguardPro.Tunnel",
+                                                                    @"(PacketTunnelProvider) Description")
                        completionHandler:^(BOOL success) {
                         
                         [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
