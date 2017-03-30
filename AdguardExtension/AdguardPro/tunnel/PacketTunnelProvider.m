@@ -41,13 +41,15 @@
 
 NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
-#define V_REMOTE_ADDRESS             @"127.0.0.1"
+#define V_REMOTE_ADDRESS                        @"127.0.0.1"
 
-#define V_INTERFACE_IPV4_ADDRESS     @"172.16.209.2"
-#define V_INTERFACE_IPV4_MASK        @"255.255.255.255"
+#define V_INTERFACE_IPV4_ADDRESS                @"172.16.209.2"
+#define V_INTERFACE_IPV4_MASK                   @"255.255.255.255"
 
-#define V_INTERFACE_IPV6_ADDRESS     @"fd12:1:1:1::2"
-#define V_INTERFACE_IPV6_MASK        @(128)
+#define V_INTERFACE_IPV6_ADDRESS                @"fd12:1:1:1::2"
+#define V_INTERFACE_IPV6_MASK                   @(128)
+
+#define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
@@ -102,20 +104,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
     pendingStartCompletion = completionHandler;
-    
-//    // Init database
-//    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-//    if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
-//        
-//        DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
-//        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
-//        
-//        pendingStartCompletion(error);
-//        return;
-//    }
-//    
-//    [[ASDatabase singleton] initDbWithURL:dbURL];
-//    //--------------------------
     
     [_reachabilityHandler startNotifier];
     
@@ -248,27 +236,24 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     settings.DNSSettings = dns;
     
-    if ([self reloadWhitelistBlacklistDomain] == NO) {
+    if ([self reloadWhitelistBlacklistDomain]) {
         
-        //stop tunnel, because db error occurred.
-        return;
-    }
-    
-    // SETs network settings
-    __typeof__(self) __weak wSelf = self;
-    [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
-
-        __typeof__(self) sSelf = wSelf;
-
-        @synchronized (sSelf->_connectionHandler) {
-            if (sSelf->_connectionHandler) {
-                [sSelf->_connectionHandler startHandlingPackets];
+        // SETs network settings
+        __typeof__(self) __weak wSelf = self;
+        [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
+            
+            __typeof__(self) sSelf = wSelf;
+            
+            @synchronized (sSelf->_connectionHandler) {
+                if (sSelf->_connectionHandler) {
+                    [sSelf->_connectionHandler startHandlingPackets];
+                }
             }
-        }
-
-        sSelf->pendingStartCompletion(error);
-        sSelf->pendingStartCompletion = nil;
-    }];
+            
+            sSelf->pendingStartCompletion(error);
+            sSelf->pendingStartCompletion = nil;
+        }];
+    }
 }
 
 - (void)stopTunnelWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler
@@ -418,16 +403,30 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             
             // Init database
             NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-            if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
-                
+            
+            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+            if ([[ASDatabase singleton] error]) {
+
                 DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
                 NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
                 
-                pendingStartCompletion(error);
+                NSDate *date = [[AESharedResources sharedDefaults] objectForKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
+                if (date == nil || ([date timeIntervalSinceNow] * -1) > TIME_INTERVAL_FOR_WARNING_MESSAGE) {
+                    
+                    [self displayMessage:NSLocalizedString(@"В данный момент у Вас отсудствует соединение с интернетом. Запустите приложение, что бы выполнить дополнительную настройку после обновления!",
+                                                           @"")
+                       completionHandler:^(BOOL success) {
+                        
+                        [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
+                        pendingStartCompletion(error);
+                    }];
+                }
+                else{
+                    
+                    pendingStartCompletion(error);
+                }
                 return NO;
             }
-            
-            [[ASDatabase singleton] initDbWithURL:dbURL];
             //--------------------------
             
             AESAntibanner *antibanner = [[AEService new] antibanner];

@@ -244,7 +244,10 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     // Init database
     NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-    if ( ! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
+
+    [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+
+    if ([[ASDatabase singleton] error]) {
         
         DDLogError(@"(ActionViewController) production DB was not created before.");
         NSString *messageFormat =
@@ -255,8 +258,6 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
                                userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:messageFormat, AE_PRODUCT_NAME, AE_PRODUCT_NAME]
                                           }];
     }
-    
-    [[ASDatabase singleton] initDbWithURL:dbURL];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
