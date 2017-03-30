@@ -76,6 +76,16 @@ python ./Resources/upload.py -l en_US_POSIX -p $STRINGS_ID -f "${THEROOT}/Base.l
 
 echo "Done"
 
+echo "Pro Tunnel strings uploading.. "
+
+file="AdguardPro.Tunnel.strings"
+rm -v "${THEROOT}/Base.lproj/${file}"
+find "${THEROOT}" "${THESHAREDROOT}" "${THEPROROOT}" -name \*.m | xargs genstrings -o "${THEROOT}/Base.lproj"
+
+python ./Resources/upload.py -l en_US_POSIX -p $STRINGS_ID -f "${THEROOT}/Base.lproj/${file}" -a $apikey -s $secretkey -r IOS_STRINGS
+
+echo "Done"
+
 echo "Action Extension strings uploading.. "
 rm -v "${THEACTIONROOT}/Base.lproj/${file}"
 find "${THEACTIONROOT}" "${THESHAREDROOT}" -name \*.m | xargs genstrings -o "${THEACTIONROOT}/Base.lproj"
