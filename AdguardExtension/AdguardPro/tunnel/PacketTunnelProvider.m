@@ -413,7 +413,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 NSDate *date = [[AESharedResources sharedDefaults] objectForKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
                 if (date == nil || ([date timeIntervalSinceNow] * -1) > TIME_INTERVAL_FOR_WARNING_MESSAGE) {
                     
-                    [self displayMessage:NSLocalizedStringFromTable(@"WARNING. Internet connection is not available. It is required to run the application to finish the configuration process after the recent update.",
+                    [self displayMessage:NSLocalizedStringFromTable(@"WARNING. Internet connection is not available. It is necessary to run the application to finish the configuration process after the recent update.",
                                                                     @"AdguardPro.Tunnel",
                                                                     @"(PacketTunnelProvider) This is a warning message that will be shown to users after the update in some cases.")
                        completionHandler:^(BOOL success) {
