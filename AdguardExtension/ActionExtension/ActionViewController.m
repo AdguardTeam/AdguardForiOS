@@ -57,12 +57,12 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host{
     
     @autoreleasepool {
         
-        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromAntibannerServiceFor:\"%@\"", host);
-        NSArray *rules = [[[AEService singleton] antibanner] rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\"%@\"", host);
+        NSArray *rules = [[AESharedResources new] whitelistContentBlockingRules];
         rules = [rules
                  filteredArrayUsingPredicate:
                  [NSPredicate
@@ -244,7 +244,10 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     // Init database
     NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-    if ( ! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
+
+    [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+
+    if ([[ASDatabase singleton] error]) {
         
         DDLogError(@"(ActionViewController) production DB was not created before.");
         NSString *messageFormat =
@@ -255,8 +258,6 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
                                userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:messageFormat, AE_PRODUCT_NAME, AE_PRODUCT_NAME]
                                           }];
     }
-    
-    [[ASDatabase singleton] initDbWithURL:dbURL];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -351,7 +352,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [self.messageLabel setHidden:YES];
     });
     
-    _domainObject = [ActionViewController domainObjectIfExistsFromAntibannerServiceFor:_host];
+    _domainObject = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });

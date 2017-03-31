@@ -40,6 +40,12 @@ extern NSString *APDefaultsCustomRemoteDnsServers;
  */
 extern NSString *APDefaultsDnsLocalFiltering;
 
+/**
+ User Defaults key that define, 
+ date/time when was displayed warning message about bad VPN configuration (whicn displayed from tunnel provider).
+ */
+extern NSString *APDefaultsBadVPNConfigurationWarningDisplayDate;
+
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     
     // Commands for controlling "DNS activity log", between tunnel provider extension and host application.

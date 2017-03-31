@@ -102,7 +102,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return Array of ASDFilterRule objects that represent rules of filtering.
  Returns empty array if receiver property "enabled" equal NO.
  */
-- (NSArray *)activeRules;
+- (NSMutableArray *)activeRules;
 
 /**
  Obtain active rules for active (enabled) filter.
@@ -194,13 +194,12 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  and then removes all rules of the antibanner filter from DB,
  and then adds new rules from list.
  
- @param ruleTexts    List of NSString objects.
- Texts of rules, which must be added into filter.
+ @param rules        List of rules, which must be added into filter.
  @param filterId     Identificator of filter (filter Id).
  
  @return YES if success.
  */
-- (BOOL)importRuleTexts:(NSArray *)ruleTexts filterId:(NSNumber *)filterId;
+- (BOOL)importRules:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId;
 
 /**
  Checks that antibanner filter is editable,

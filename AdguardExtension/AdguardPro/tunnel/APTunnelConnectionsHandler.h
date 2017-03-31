@@ -17,6 +17,7 @@
  */
 
 @import NetworkExtension;
+#import "AERDomainFilter.h"
 
 @class APTUdpProxySession, PacketTunnelProvider;
 
@@ -45,13 +46,13 @@
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
 
 /**
- Sets whitelist domains names.
+ Sets whitelist filter.
  */
-- (void)setWhitelistDomains:(NSArray <NSString *> *)domains;
+- (void)setWhitelistFilter:(AERDomainFilter *)filter;
 /**
- Sets blacklist domains names.
+ Sets blacklist filter.
  */
-- (void)setBlacklistDomains:(NSArray <NSString *> *)domains;
+- (void)setBlacklistFilter:(AERDomainFilter *)filter;
 
 /**
  Make the initial readPacketsWithCompletionHandler call.

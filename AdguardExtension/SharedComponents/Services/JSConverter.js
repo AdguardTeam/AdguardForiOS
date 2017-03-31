@@ -724,6 +724,13 @@ adguard.utils = (function () {
  */
 (function (api) {
 
+    if (!String.prototype.endsWith) {
+        String.prototype.endsWith = function (suffix) { // jshint ignore:line
+            var index = this.lastIndexOf(suffix);
+            return index !== -1 && index === this.length - suffix.length;
+        };
+    }
+
     //noinspection UnnecessaryLocalVariableJS
     var StringUtils = {
 
@@ -735,17 +742,8 @@ adguard.utils = (function () {
             return str && str.indexOf(prefix) === 0;
         },
 
-        endWith: function (str, postfix) {
-            if (!str || !postfix) {
-                return false;
-            }
-
-            if (str.endsWith) {
-                return str.endsWith(postfix);
-            }
-            var t = String(postfix);
-            var index = str.lastIndexOf(t);
-            return index >= 0 && index === str.length - t.length;
+        endsWith: function (str, postfix) {
+            return str.endsWith(postfix);
         },
 
         substringAfter: function (str, separator) {
@@ -994,15 +992,10 @@ adguard.utils = (function () {
         EASY_PRIVACY: 118,
         FANBOY_ANNOYANCES: 122,
         FANBOY_SOCIAL: 123,
-        FANBOY_ENHANCED: 215,
-        LAST_ADGUARD_FILTER_ID: 14
+        FANBOY_ENHANCED: 215
     };
 
     var FilterUtils = {
-
-        isAdguardFilter: function (filter) {
-            return filter.filterId <= AntiBannerFiltersId.LAST_ADGUARD_FILTER_ID;
-        },
 
         isUserFilterRule: function (rule) {
             return rule.filterId == AntiBannerFiltersId.USER_FILTER_ID;
@@ -1426,16 +1419,15 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
     var UrlUtils = {
 
         isHttpRequest: function (url) {
-            return url && url.indexOf('http') == 0;
+            return url && url.indexOf('http') === 0;
         },
 
         isHttpOrWsRequest: function (url) {
-            return url
-                && (url.indexOf('http') == 0 || url.indexOf('wss:') == 0 || url.indexOf('ws:') == 0);
+            return url && (url.indexOf('http') === 0 || url.indexOf('ws') === 0);
         },
 
         toPunyCode: function (domain) {
-            if (api.strings.isEmpty(domain)) {
+            if (!domain) {
                 return "";
             }
             if (/^[\x00-\x7F]+$/.test(domain)) {
@@ -1477,26 +1469,10 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
             return domainName != refDomainName;
         },
 
-        getAbsoluteUrl: function (url) {
-
-            if (api.strings.isEmpty(url)) {
-                return null;
-            }
-
-            if (!api.strings.startWith(url, "http://") && !api.strings.startWith(url, "https://")) {
-                if (api.strings.startWith(url, "//")) {
-                    return "http:" + url;
-                }
-                return "http://" + url;
-            }
-
-            return url;
-        },
-
         //Get host name
         getHost: function (url) {
 
-            if (api.strings.isEmpty(url)) {
+            if (!url) {
                 return null;
             }
 
@@ -1621,19 +1597,18 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
          * @returns boolean true if there is suitable domain in domainNames
          */
         isDomainOrSubDomain: function (domainNameToCheck, domainName) {
-
             // Double endsWith check is memory optimization
             // Works in android, not sure if it makes sense here
-            return (domainName == domainNameToCheck ||
-            (api.strings.endWith(domainNameToCheck, domainName) &&
-            api.strings.endWith(domainNameToCheck, "." + domainName)));
+            return domainName == domainNameToCheck ||
+                api.strings.endsWith(domainNameToCheck, domainName) &&
+                api.strings.endsWith(domainNameToCheck, "." + domainName);
         },
 
         _get2NdLevelDomainName: function (url) {
 
             var host = this.getHost(url);
 
-            if (api.strings.isEmpty(host)) {
+            if (!host) {
                 return null;
             }
 
@@ -7820,7 +7795,48 @@ adguard.rules = (function () {
  * 3. We allow only custom rules got from the User filter (which user creates manually)
  *    or from this DEFAULT_SCRIPT_RULES object
  */
-adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
+
+(function (api) {
+
+    var DEFAULT_SCRIPT_RULES = Object.create(null);
+
+    /**
+     * Saves local script rules to object
+     * @param json JSON object loaded from the filters/local_script_rules.json file
+     */
+    var setLocalScriptRules = function (json) {
+
+        DEFAULT_SCRIPT_RULES = Object.create(null);
+
+        var rules = json.rules;
+        for (var i = 0; i < rules.length; i++) {
+            var rule = rules[i];
+            var domains = rule.domains;
+            var script = rule.script;
+            var ruleText = '';
+            if (domains !== '<any>') {
+                ruleText = domains;
+            }
+            ruleText += api.FilterRule.MASK_SCRIPT_RULE + script;
+            DEFAULT_SCRIPT_RULES[ruleText] = true;
+        }
+    };
+
+    /**
+     * Checks js rule is local
+     * @param ruleText Rule text
+     * @returns {boolean}
+     */
+    var isLocal = function (ruleText) {
+        return ruleText in DEFAULT_SCRIPT_RULES;
+    };
+
+    api.LocalScriptRulesService = {
+        setLocalScriptRules: setLocalScriptRules,
+        isLocal: isLocal
+    };
+
+})(adguard.rules);
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7913,6 +7929,12 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
          * Creates regex
          */
         var createRegexText = function (str) {
+            if (str === regexConfiguration.maskStartUrl ||
+                str === regexConfiguration.maskPipe ||
+                str === regexConfiguration.maskAnySymbol) {
+                return regexConfiguration.regexAnySymbol;
+            }
+
             var regex = escapeRegExp(str);
 
             if (startsWith(regex, regexConfiguration.maskStartUrl)) {
@@ -8407,7 +8429,7 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
                 }
             }
 
-            var nameEndIndex = adguard.utils.strings.indexOfAny(selector, nameStartIndex + 1, [' ', '\t', '>', '(', '[', '.', '#', ':']);
+            var nameEndIndex = adguard.utils.strings.indexOfAny(selector, nameStartIndex + 1, [' ', '\t', '>', '(', '[', '.', '#', ':', '+', '~']);
             if (nameEndIndex < 0) {
                 nameEndIndex = selector.length;
             }
@@ -8512,6 +8534,20 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
     'use strict';
 
     /**
+     * By the rules of AMO and addons.opera.com we cannot use remote scripts
+     * (and our JS injection rules could be considered as remote scripts).
+     *
+     * So, what we do:
+     * 1. Pre-compile all current JS rules to the add-on and mark them as 'local'. Other JS rules (new not pre-compiled) are maked as 'remote'.
+     * 2. Also we mark as 'local' rules from the "User Filter" (local filter which user can edit)
+     * 3. In case of Firefox and Opera we apply only 'local' JS rules and ignore all marked as 'remote'
+     * Note: LocalScriptRulesService may be undefined, in this case, we mark all rules as remote.
+     */
+    function getScriptSource(filterId, ruleText) {
+        return filterId == adguard.utils.filters.USER_FILTER_ID || api.LocalScriptRulesService && api.LocalScriptRulesService.isLocal(ruleText) ? 'local' : 'remote';
+    }
+
+    /**
      * JS injection rule:
      * http://adguard.com/en/filterrules.html#javascriptInjection
      */
@@ -8531,19 +8567,6 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
         }
 
         this.script = rule.substring(indexOfMask + mask.length);
-
-        /**
-         * By the rules of AMO and addons.opera.com we cannot use remote scripts
-         * (and our JS injection rules could be considered as remote scripts).
-         *
-         * So, what we do:
-         * 1. Pre-compile all current JS rules to the add-on and mark them as 'local'. Other JS rules (new not pre-compiled) are maked as 'remote'.
-         * 2. Also we mark as 'local' rules from the "User Filter" (local filter which user can edit)
-         * 3. In case of Firefox and Opera we apply only 'local' JS rules and ignore all marked as 'remote'
-         */
-        function getScriptSource(filterId, ruleText) {
-            return (filterId == adguard.utils.filters.USER_FILTER_ID || ruleText in api.DEFAULT_SCRIPT_RULES) ? 'local' : 'remote';
-        }
 
         this.scriptSource = getScriptSource(filterId, rule);
     };
@@ -8671,7 +8694,7 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
                 longest = part;
             }
         }
-        return longest.toLowerCase();
+        return longest ? longest.toLowerCase() : null;
     }
 
     /**
@@ -8719,7 +8742,7 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
             }
         }
 
-        return token;
+        return token ? token.toLowerCase() : null;
     }
 
     /**
@@ -8730,20 +8753,57 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
      */
     function parseRuleText(ruleText) {
 
+        var ESCAPE_CHARACTER = '\\';
+
         var urlRuleText = ruleText;
         var whiteListRule = null;
         var options = null;
 
+        var startIndex = 0;
+
         if (adguard.utils.strings.startWith(urlRuleText, api.FilterRule.MASK_WHITE_LIST)) {
-            urlRuleText = urlRuleText.substring(api.FilterRule.MASK_WHITE_LIST.length);
+            startIndex = api.FilterRule.MASK_WHITE_LIST.length;
+            urlRuleText = urlRuleText.substring(startIndex);
             whiteListRule = true;
         }
 
-        var optionsIndex = urlRuleText.lastIndexOf(UrlFilterRule.OPTIONS_DELIMITER);
-        if (optionsIndex >= 0) {
-            var optionsBase = urlRuleText;
-            urlRuleText = urlRuleText.substring(0, optionsIndex);
-            options = optionsBase.substring(optionsIndex + 1);
+        var parseOptions = true;
+        /**
+         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/517
+         * regexp rule may contain dollar sign which also is options delimiter
+         */
+        // Added check for replacement rule, because maybe problem with rules for example /.*/$replace=/hello/bug/
+
+        if (adguard.utils.strings.startWith(urlRuleText, api.UrlFilterRule.MASK_REGEX_RULE) &&
+            adguard.utils.strings.endsWith(urlRuleText, api.UrlFilterRule.MASK_REGEX_RULE) &&
+            !adguard.utils.strings.contains(urlRuleText, api.UrlFilterRule.REPLACE_OPTION + '=')) {
+
+            parseOptions = false;
+        }
+
+        if (parseOptions) {
+            var foundEscaped = false;
+            // Start looking from the prev to the last symbol
+            // If dollar sign is the last symbol - we simply ignore it.
+            for (var i = (ruleText.length - 2); i >= startIndex; i--) {
+                var c = ruleText.charAt(i);
+                if (c == UrlFilterRule.OPTIONS_DELIMITER) {
+                    if (i > 0 && ruleText.charAt(i - 1) == ESCAPE_CHARACTER) {
+                        foundEscaped = true;
+                    } else {
+                        urlRuleText = ruleText.substring(startIndex, i);
+                        options = ruleText.substring(i + 1);
+
+                        if (foundEscaped) {
+                            // Find and replace escaped options delimiter
+                            options = options.replace(ESCAPE_CHARACTER + UrlFilterRule.OPTIONS_DELIMITER, UrlFilterRule.OPTIONS_DELIMITER);
+                        }
+
+                        // Options delimiter was found, doing nothing
+                        break;
+                    }
+                }
+            }
         }
 
         // Transform to punycode
@@ -8786,12 +8846,13 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
         var urlRuleText = parseResult.urlRuleText;
 
         this.isRegexRule = adguard.utils.strings.startWith(urlRuleText, UrlFilterRule.MASK_REGEX_RULE) &&
-            adguard.utils.strings.endWith(urlRuleText, UrlFilterRule.MASK_REGEX_RULE) ||
+            adguard.utils.strings.endsWith(urlRuleText, UrlFilterRule.MASK_REGEX_RULE) ||
             urlRuleText === '' ||
-            urlRuleText == UrlFilterRule.MASK_ANY_SYMBOL;
+            urlRuleText === UrlFilterRule.MASK_ANY_SYMBOL;
 
         if (this.isRegexRule) {
             this.urlRegExpSource = urlRuleText.substring(UrlFilterRule.MASK_REGEX_RULE.length, urlRuleText.length - UrlFilterRule.MASK_REGEX_RULE.length);
+
             // Pre compile regex rules
             var regexp = this.getUrlRegExp();
             if (!regexp) {
@@ -8873,7 +8934,7 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
      */
     UrlFilterRule.prototype.isPermitted = function (domainName) {
 
-        if (adguard.utils.strings.isEmpty(domainName)) {
+        if (!domainName) {
             var hasPermittedDomains = this.hasPermittedDomains();
 
             // For white list rules to fire when request has no referrer
@@ -8906,7 +8967,8 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
             }
         }
 
-        if (this.shortcut !== null && !adguard.utils.strings.containsIgnoreCase(requestUrl, this.shortcut)) {
+        // Shortcut is always in lower case
+        if (this.shortcut !== null && requestUrl.toLowerCase().indexOf(this.shortcut) < 0) {
             return false;
         }
 
@@ -9069,6 +9131,7 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
     UrlFilterRule.MASK_ANY_SYMBOL = "*";
     UrlFilterRule.REGEXP_ANY_SYMBOL = ".*";
     UrlFilterRule.EMPTY_OPTION = "empty";
+    UrlFilterRule.REPLACE_OPTION = "replace"; // Extension doesn't support replace rules, $replace option is here only for correctly parsing
 
     UrlFilterRule.contentTypes = {
 
@@ -9155,11 +9218,12 @@ adguard.rules.DEFAULT_SCRIPT_RULES = Object.create(null);
 /**
  * Safari content blocking format rules converter.
  */
-var CONVERTER_VERSION = '1.3.23';
+var CONVERTER_VERSION = '1.3.26';
 // Max number of CSS selectors per rule (look at _compactCssRules function)
 var MAX_SELECTORS_PER_WIDE_RULE = 250;
-var ANY_URL_TEMPLATES = ['||*', '', '*'];
+var ANY_URL_TEMPLATES = ['||*', '', '*', '|*'];
 var URL_FILTER_ANY_URL = ".*";
+var URL_FILTER_WS_ANY_URL = "^wss?://.*";
 // Improved regular expression instead of UrlFilterRule.REGEXP_START_URL
 var URL_FILTER_REGEXP_START_URL = "^https?://([^/]*\\.)?";
 // Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp)
@@ -9315,13 +9379,16 @@ var SafariContentBlockerConverter = {
 
         _createUrlFilterString: function (filter) {
             if (ANY_URL_TEMPLATES.indexOf(filter.getUrlRuleText()) >= 0) {
+                if (adguard.rules.UrlFilterRule.contentTypes.WEBSOCKET === filter.permittedContentType) {
+                    return URL_FILTER_WS_ANY_URL;
+                }
                 return URL_FILTER_ANY_URL;
             }
 
             if (filter.isRegexRule && filter.urlRegExp) {
                 return filter.urlRegExp.source;
             }
-            
+
             var urlRegExpSource = filter.getUrlRegExpSource();
             if (urlRegExpSource) {
                 return urlRegExpSource;
@@ -9462,7 +9529,7 @@ var SafariContentBlockerConverter = {
                         //http://jira.performix.ru/browse/AG-8715
                         delete result.trigger["resource-type"];
                     }
-                    
+
                     var parseDomainResult = this._parseRuleDomain(rule.getUrlRuleText());
 
                     if (parseDomainResult !== null && 

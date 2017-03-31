@@ -88,7 +88,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         self.userDefaultsInitialized = NO;
         
         // Init database
-        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
         
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
@@ -540,7 +540,7 @@ typedef void (^AEDownloadsCompletionBlock)();
 
 - (void)updateStartedNotify{
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
@@ -550,7 +550,7 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (void)updateFailuredNotify{
     
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Failured update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFailuredUpdateNotification object:self];
@@ -561,7 +561,7 @@ typedef void (^AEDownloadsCompletionBlock)();
 
 - (void)updateFinishedNotify{
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Finished update process.");
         NSArray *metas = @[];
@@ -628,22 +628,6 @@ typedef void (^AEDownloadsCompletionBlock)();
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *storyboardName = [bundle objectForInfoDictionaryKey:@"UIMainStoryboardFile"];
     return [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
-}
-
-- (void)callOnMainQueue:(dispatch_block_t)block{
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
-#pragma clang diagnostic pop
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    if (currentQueue == mainQueue) {
-        block();
-    }
-    else{
-        dispatch_sync(mainQueue, block);
-    }
-    
 }
 
 - (BOOL)checkAutoUpdateConditions {

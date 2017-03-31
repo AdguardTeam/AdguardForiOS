@@ -81,4 +81,11 @@
  */
 + (NSString *)createUUID;
 
+/**
+ Execute block on main queue synchronously.
+
+ @param block Block of a code.
+ */
++ (void)callOnMainQueue:(dispatch_block_t)block;
+
 @end

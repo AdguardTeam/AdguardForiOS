@@ -187,7 +187,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     });
 }
 
-- (NSArray *)activeRules{
+- (NSMutableArray *)activeRules{
     
     NSMutableArray *rules = [NSMutableArray array];
     
@@ -505,7 +505,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return updated;
 }
 
-- (BOOL)importRuleTexts:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId{
+- (BOOL)importRules:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId{
     
     if (!rules) {
         
@@ -545,9 +545,6 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                     *rollback = NO;
                 }
             }
-            
-            if (imported && serviceEnabled)
-                [updateFilterFromUI executeOnceAfterCalm];
             
             [result close];
         }];

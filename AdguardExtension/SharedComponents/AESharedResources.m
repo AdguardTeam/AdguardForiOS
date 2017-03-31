@@ -35,6 +35,7 @@ NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
+#define AES_SAFARI_WHITELIST_RULES              @"safari-whitelist-rules.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -93,6 +94,32 @@ static NSUserDefaults *_sharedUserDefaults;
 
     [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
 }
+
+- (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setWhitelistContentBlockingRules:(NSMutableArray<ASDFilterRule *> *)whitelistContentBlockingRules {
+    
+    if (whitelistContentBlockingRules == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:whitelistContentBlockingRules];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    }
+}
+
 
 - (ABECFilterClientMetadata *)lastUpdateFilterMetadata {
     
