@@ -308,6 +308,9 @@ static AEService *singletonService;
             @autoreleasepool {
                 AESharedResources *res = [AESharedResources new];
                 NSMutableArray *whitelistRules = res.whitelistContentBlockingRules;
+                if (whitelistRules == nil) {
+                    whitelistRules = [NSMutableArray new];
+                }
                 [whitelistRules addObject:rule];
                 res.whitelistContentBlockingRules = whitelistRules;
             }
