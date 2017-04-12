@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		650F88F41B9374AD000A6012 /* AEUIRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88F31B9374AD000A6012 /* AEUIRulesController.m */; };
-		650F88F71B9387C0000A6012 /* AEUIEditRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88F61B9387C0000A6012 /* AEUIEditRuleController.m */; };
 		650F88FB1B9436E0000A6012 /* AEUIFilterRuleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88FA1B9436E0000A6012 /* AEUIFilterRuleObject.m */; };
 		650F88FE1B944871000A6012 /* AEUIWhitelistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88FD1B944871000A6012 /* AEUIWhitelistController.m */; };
-		650F89051B9458DA000A6012 /* AEUIEditDomainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F89041B9458DA000A6012 /* AEUIEditDomainController.m */; };
 		650F89081B947B67000A6012 /* AEUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F89071B947B67000A6012 /* AEUIMainController.m */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6514819E1BC42E2A00211147 /* AEUIAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514819D1BC42E2A00211147 /* AEUIAboutController.m */; };
@@ -352,11 +350,22 @@
 		658DDFF81DA67FE600688557 /* APUIProStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */; };
 		658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
 		658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */; };
+		658E43951E8902F4008DAA59 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439A1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		658E43A41E89231A008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
+		658E43A71E89348E008DAA59 /* AERDomainFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */; };
+		658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
 		658FECFB1E240B8F0013BCE3 /* AdguardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
 		659839491D182D6C005824ED /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		6598394A1D182D74005824ED /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
-		659886521CF74DE9003ECD1C /* AEUIEditDomainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F89041B9458DA000A6012 /* AEUIEditDomainController.m */; };
 		659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
 		659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
 		659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
@@ -378,7 +387,6 @@
 		659886661CF74DE9003ECD1C /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D11C6B7686000F00D7 /* CLIColor.m */; };
 		659886671CF74DE9003ECD1C /* AEUIFilterRuleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88FA1B9436E0000A6012 /* AEUIFilterRuleObject.m */; };
 		659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
-		659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650F88F61B9387C0000A6012 /* AEUIEditRuleController.m */; };
 		6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
 		6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01D71C6B7686000F00D7 /* DDFileLogger.m */; };
 		6598866C1CF74DE9003ECD1C /* AEUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 653843031B9B67C600AABD5A /* AEUILoaderSegue.m */; };
@@ -541,7 +549,6 @@
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47911E4123B50027D287 /* APUISystemWideController.m */; };
-		659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47941E41248D0027D287 /* APUIDomainListController.m */; };
 		659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B79251E40E626003B1E70 /* APUIDnsServersController.m */; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
@@ -551,6 +558,7 @@
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
 		65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
+		65AE3DAD1E8DC1F700A6627B /* AdguardPro.Tunnel.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65AE3D981E8DC1A200A6627B /* AdguardPro.Tunnel.strings */; };
 		65B40D331BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
 		65B40D341BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
 		65B40D381BDE7D1800A9C595 /* AEAUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */; };
@@ -609,6 +617,8 @@
 		65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
+		65CE8DA91E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
+		65CE8DAA1E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
 		65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
@@ -864,15 +874,10 @@
 		6504C08A1C58D4C60014FB52 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		650F88F21B9374AD000A6012 /* AEUIRulesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIRulesController.h; sourceTree = "<group>"; };
 		650F88F31B9374AD000A6012 /* AEUIRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIRulesController.m; sourceTree = "<group>"; };
-		650F88F51B9387C0000A6012 /* AEUIEditRuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIEditRuleController.h; sourceTree = "<group>"; };
-		650F88F61B9387C0000A6012 /* AEUIEditRuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIEditRuleController.m; sourceTree = "<group>"; };
 		650F88F91B9436E0000A6012 /* AEUIFilterRuleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AEUIFilterRuleObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		650F88FA1B9436E0000A6012 /* AEUIFilterRuleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIFilterRuleObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		650F88FC1B944871000A6012 /* AEUIWhitelistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWhitelistController.h; sourceTree = "<group>"; };
 		650F88FD1B944871000A6012 /* AEUIWhitelistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIWhitelistController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		650F89021B944D6B000A6012 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
-		650F89031B9458DA000A6012 /* AEUIEditDomainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AEUIEditDomainController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		650F89041B9458DA000A6012 /* AEUIEditDomainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIEditDomainController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		650F89061B947B67000A6012 /* AEUIMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIMainController.h; sourceTree = "<group>"; };
 		650F89071B947B67000A6012 /* AEUIMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIMainController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6514819C1BC42E2A00211147 /* AEUIAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAboutController.h; sourceTree = "<group>"; };
@@ -1100,6 +1105,14 @@
 		658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIProStatusTableViewCell.m; sourceTree = "<group>"; };
 		658DDFFC1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAccessibilityHiddenTableViewCell.h; sourceTree = "<group>"; };
 		658DDFFD1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAccessibilityHiddenTableViewCell.m; sourceTree = "<group>"; };
+		658E43931E8902F4008DAA59 /* AERDomainFilterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilterRule.h; sourceTree = "<group>"; };
+		658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterRule.m; sourceTree = "<group>"; };
+		658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringPunycodeAdditions.h; sourceTree = "<group>"; };
+		658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringPunycodeAdditions.m; sourceTree = "<group>"; };
+		658E43A21E89231A008DAA59 /* AERDomainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilter.h; sourceTree = "<group>"; };
+		658E43A31E89231A008DAA59 /* AERDomainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilter.m; sourceTree = "<group>"; };
+		658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
+		658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterTest.m; sourceTree = "<group>"; };
 		658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658FECFA1E240B8F0013BCE3 /* AdguardProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdguardProUITests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		658FECFC1E240B8F0013BCE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1116,9 +1129,7 @@
 		6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Config.xcconfig"; sourceTree = "<group>"; };
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
 		659A47901E4123B50027D287 /* APUISystemWideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUISystemWideController.h; sourceTree = "<group>"; };
-		659A47911E4123B50027D287 /* APUISystemWideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUISystemWideController.m; sourceTree = "<group>"; };
-		659A47931E41248D0027D287 /* APUIDomainListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDomainListController.h; sourceTree = "<group>"; };
-		659A47941E41248D0027D287 /* APUIDomainListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDomainListController.m; sourceTree = "<group>"; };
+		659A47911E4123B50027D287 /* APUISystemWideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUISystemWideController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		659B79241E40E626003B1E70 /* APUIDnsServersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsServersController.h; sourceTree = "<group>"; };
 		659B79251E40E626003B1E70 /* APUIDnsServersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsServersController.m; sourceTree = "<group>"; };
 		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -1139,6 +1150,26 @@
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		65AD3BB91B7CB15400004A02 /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
 		65AD3BBA1B7CB15400004A02 /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
+		65AE3D971E8DC1A200A6627B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D991E8DC1B400A6627B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D9A1E8DC1B500A6627B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D9B1E8DC1B600A6627B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D9D1E8DC1CF00A6627B /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D9E1E8DC1D200A6627B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3D9F1E8DC1D300A6627B /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA01E8DC1D700A6627B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA11E8DC1D800A6627B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DA21E8DC1D900A6627B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DA31E8DC1D900A6627B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA41E8DC1DB00A6627B /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA51E8DC1DC00A6627B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DA61E8DC1DD00A6627B /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DA71E8DC1DE00A6627B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA81E8DC1DF00A6627B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DA91E8DC1E000A6627B /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DAA1E8DC1E100A6627B /* et-EE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "et-EE"; path = "et-EE.lproj/AdguardPro.Tunnel.strings"; sourceTree = "<group>"; };
+		65AE3DAB1E8DC1E200A6627B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		65AE3DAC1E8DC1E300A6627B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
 		65B007091BCD6D0F00844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65B0070C1BCD6D1000844F2E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65B0070D1BCD6D2500844F2E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -1208,6 +1239,8 @@
 		65CD51971C43ACB0004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65CD51991C43ACB1004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD519A1C43ACB2004669F2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
+		65CE8DA71E65B98D009EBCC6 /* AEUICustomTextEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AEUICustomTextEditorController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUICustomTextEditorController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
@@ -1451,12 +1484,8 @@
 				650F88FA1B9436E0000A6012 /* AEUIFilterRuleObject.m */,
 				650F88F21B9374AD000A6012 /* AEUIRulesController.h */,
 				650F88F31B9374AD000A6012 /* AEUIRulesController.m */,
-				650F88F51B9387C0000A6012 /* AEUIEditRuleController.h */,
-				650F88F61B9387C0000A6012 /* AEUIEditRuleController.m */,
 				650F88FC1B944871000A6012 /* AEUIWhitelistController.h */,
 				650F88FD1B944871000A6012 /* AEUIWhitelistController.m */,
-				650F89031B9458DA000A6012 /* AEUIEditDomainController.h */,
-				650F89041B9458DA000A6012 /* AEUIEditDomainController.m */,
 				65BA76741BA5C2D100D11F50 /* AEUIWelcomePageController.h */,
 				65BA76751BA5C2D100D11F50 /* AEUIWelcomePageController.m */,
 				657107AB1BA5C575006255F3 /* AEUIWelcomePagerDataSource.h */,
@@ -1518,8 +1547,6 @@
 				659B79251E40E626003B1E70 /* APUIDnsServersController.m */,
 				659A47901E4123B50027D287 /* APUISystemWideController.h */,
 				659A47911E4123B50027D287 /* APUISystemWideController.m */,
-				659A47931E41248D0027D287 /* APUIDomainListController.h */,
-				659A47941E41248D0027D287 /* APUIDomainListController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1607,6 +1634,8 @@
 				655A01F61C6B7686000F00D7 /* NSURL+Utils.m */,
 				655AACB41D3CD38000E316EA /* ACObject.h */,
 				655AACB51D3CD38000E316EA /* ACObject.m */,
+				658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */,
+				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -1778,6 +1807,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		658E43921E890272008DAA59 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				658E43931E8902F4008DAA59 /* AERDomainFilterRule.h */,
+				658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */,
+				658E43A21E89231A008DAA59 /* AERDomainFilter.h */,
+				658E43A31E89231A008DAA59 /* AERDomainFilter.m */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
 		658FECF91E240B8F0013BCE3 /* AdguardProUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1825,8 +1865,10 @@
 		65AD3BB81B7CAF9F00004A02 /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
+				658E43921E890272008DAA59 /* Rules */,
 				65B40D4C1BDFBD9600A9C595 /* UI */,
 				65C12EE41BD4D29F00FFC71C /* Services */,
+				658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */,
 				65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */,
 				65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */,
 				653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */,
@@ -1847,6 +1889,8 @@
 				65B40D5D1BDFF28C00A9C595 /* AEUILoadingModalController.m */,
 				65A6AC931BE09FED006A86E5 /* AEUIUtils.h */,
 				65A6AC941BE09FED006A86E5 /* AEUIUtils.m */,
+				65CE8DA71E65B98D009EBCC6 /* AEUICustomTextEditorController.h */,
+				65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2063,7 +2107,6 @@
 				65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */,
 				652F89EE1B92E064002E0601 /* UI */,
 				65F398711B7C9C5000ABCD39 /* Adguard.entitlements */,
-				650F89021B944D6B000A6012 /* AEFilterRuleSyntaxConstants.h */,
 				65F398171B7B684700ABCD39 /* AppDelegate.h */,
 				65F398181B7B684700ABCD39 /* AppDelegate.m */,
 				65F3981D1B7B684700ABCD39 /* Main.storyboard */,
@@ -2079,6 +2122,7 @@
 			isa = PBXGroup;
 			children = (
 				659E59751BC6D82700FA2384 /* Localizable.strings */,
+				65AE3D981E8DC1A200A6627B /* AdguardPro.Tunnel.strings */,
 				65F398251B7B684700ABCD39 /* Info.plist */,
 				65F398151B7B684700ABCD39 /* main.m */,
 				65711E551B8C670A00C8C4E7 /* defaults.plist */,
@@ -2092,6 +2136,7 @@
 				65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */,
 				653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
+				658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -2672,6 +2717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */,
+				65AE3DAD1E8DC1F700A6627B /* AdguardPro.Tunnel.strings in Resources */,
 				658237421D08004B00B824F4 /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3035,6 +3081,8 @@
 				6581C9251D64945800E739CC /* AESAntibanner.m in Sources */,
 				655AAC8E1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */,
+				658E43951E8902F4008DAA59 /* AERDomainFilterRule.m in Sources */,
+				658E439E1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65EBB4AD1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
 				6581C92A1D6494A200E739CC /* ADLocations.m in Sources */,
 				657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */,
@@ -3072,6 +3120,7 @@
 				657672B31D2BB9B100CF8C11 /* AESharedResources.m in Sources */,
 				6581C9301D6494F700E739CC /* FMStatementKeywordRecogniser.m in Sources */,
 				651F5E121E2563A400E22157 /* ACNUrlUtils.m in Sources */,
+				658E43A41E89231A008DAA59 /* AERDomainFilter.m in Sources */,
 				653AE9FA1D084B6400AC81B4 /* CLIColor.m in Sources */,
 				655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */,
 			);
@@ -3089,7 +3138,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				659886521CF74DE9003ECD1C /* AEUIEditDomainController.m in Sources */,
 				659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */,
 				6581C93B1D64FC3B00E739CC /* APUIDnsLogRecord.m in Sources */,
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
@@ -3111,11 +3159,11 @@
 				655AACC91D3E10C100E316EA /* APUIDnsRequestsController.m in Sources */,
 				659886601CF74DE9003ECD1C /* DDASLLogger.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
+				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
-				659A47951E41248D0027D287 /* APUIDomainListController.m in Sources */,
 				655AACDA1D4237F700E316EA /* AEUIFirstStartViewController.m in Sources */,
 				659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */,
 				659886661CF74DE9003ECD1C /* CLIColor.m in Sources */,
@@ -3124,7 +3172,6 @@
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
 				65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */,
-				659886691CF74DE9003ECD1C /* AEUIEditRuleController.m in Sources */,
 				6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */,
 				6598866B1CF74DE9003ECD1C /* DDFileLogger.m in Sources */,
 				659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */,
@@ -3146,6 +3193,7 @@
 				655AACD31D417C7D00E316EA /* APUIDnsRequestDetail.m in Sources */,
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
 				659886781CF74DE9003ECD1C /* AEUIMainController.m in Sources */,
+				65CE8DAA1E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
 				6518BD861DABBE6900FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				6598867A1CF74DE9003ECD1C /* ASDatabase.m in Sources */,
@@ -3237,6 +3285,7 @@
 				659887141CF83580003ECD1C /* DDASLLogger.m in Sources */,
 				659887151CF83580003ECD1C /* Reachability.m in Sources */,
 				659887161CF83580003ECD1C /* DDContextFilterLogFormatter.m in Sources */,
+				658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				6518BD891DABBEBB00FDD1F3 /* APSharedResources.m in Sources */,
 				659887171CF83580003ECD1C /* AEUILoadingModalController.m in Sources */,
 				659887181CF83580003ECD1C /* NSException+Utils.m in Sources */,
@@ -3288,6 +3337,7 @@
 				659887571CF83947003ECD1C /* DDFileLogger.m in Sources */,
 				659887581CF83947003ECD1C /* ACIOStream.m in Sources */,
 				659887591CF83947003ECD1C /* NSURL+Utils.m in Sources */,
+				658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				6598875A1CF83947003ECD1C /* ADLocations.m in Sources */,
 				6598875B1CF83947003ECD1C /* NSDate+Utils.m in Sources */,
 				6598875C1CF83947003ECD1C /* ACLLogger.m in Sources */,
@@ -3380,6 +3430,7 @@
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9CA31BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				658E439A1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65C12EEF1BD4D29F00FFC71C /* AEService.m in Sources */,
 				65C12EED1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				65B40D5E1BDFF28D00A9C595 /* AEUILoadingModal.m in Sources */,
@@ -3395,7 +3446,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				650F89051B9458DA000A6012 /* AEUIEditDomainController.m in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3407,6 +3457,7 @@
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02551C6B7686000F00D7 /* DDASLLogger.m in Sources */,
@@ -3417,7 +3468,6 @@
 				655A024F1C6B7686000F00D7 /* CLIColor.m in Sources */,
 				650F88FB1B9436E0000A6012 /* AEUIFilterRuleObject.m in Sources */,
 				65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */,
-				650F88F71B9387C0000A6012 /* AEUIEditRuleController.m in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				655A02581C6B7686000F00D7 /* DDFileLogger.m in Sources */,
 				653843041B9B67C600AABD5A /* AEUILoaderSegue.m in Sources */,
@@ -3430,6 +3480,7 @@
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */,
+				658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */,
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				651703971B9C74C400848CC6 /* AEUISubscriptionFilterDetailController.m in Sources */,
 				65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */,
@@ -3451,6 +3502,7 @@
 				655A025E1C6B7686000F00D7 /* DDTTYLogger.m in Sources */,
 				652F89F41B92F2E5002E0601 /* AEUISubscriptionController.m in Sources */,
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
+				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65C12EF01BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				655A02611C6B7686000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -3465,6 +3517,7 @@
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
+				65CE8DA91E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */,
 				65B40D611BDFF2AC00A9C595 /* AEUILoadingModalController.m in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
@@ -3481,6 +3534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9C991BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
+				658E43A71E89348E008DAA59 /* AERDomainFilterTest.m in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				653B4CE91DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
@@ -3530,6 +3584,7 @@
 				655A02591C6B7686000F00D7 /* DDFileLogger.m in Sources */,
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
+				658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65EC9CC71BB9841400F53F3B /* ADLocations.m in Sources */,
 				655A02771C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				655A023E1C6B7686000F00D7 /* ACLLogger.m in Sources */,
@@ -3744,6 +3799,33 @@
 				654F5BF41E76C41200B8C1EC /* hr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		65AE3D981E8DC1A200A6627B /* AdguardPro.Tunnel.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65AE3D971E8DC1A200A6627B /* Base */,
+				65AE3D991E8DC1B400A6627B /* ru */,
+				65AE3D9A1E8DC1B500A6627B /* en */,
+				65AE3D9B1E8DC1B600A6627B /* de */,
+				65AE3D9D1E8DC1CF00A6627B /* pl */,
+				65AE3D9E1E8DC1D200A6627B /* it */,
+				65AE3D9F1E8DC1D300A6627B /* sr-Latn */,
+				65AE3DA01E8DC1D700A6627B /* es-419 */,
+				65AE3DA11E8DC1D800A6627B /* ko */,
+				65AE3DA21E8DC1D900A6627B /* tr */,
+				65AE3DA31E8DC1D900A6627B /* zh-Hans */,
+				65AE3DA41E8DC1DB00A6627B /* es-ES */,
+				65AE3DA51E8DC1DC00A6627B /* uk */,
+				65AE3DA61E8DC1DD00A6627B /* fi */,
+				65AE3DA71E8DC1DE00A6627B /* zh-Hant */,
+				65AE3DA81E8DC1DF00A6627B /* pt-BR */,
+				65AE3DA91E8DC1E000A6627B /* bg */,
+				65AE3DAA1E8DC1E100A6627B /* et-EE */,
+				65AE3DAB1E8DC1E200A6627B /* hu */,
+				65AE3DAC1E8DC1E300A6627B /* hr */,
+			);
+			name = AdguardPro.Tunnel.strings;
 			sourceTree = "<group>";
 		};
 		65C52B3B1B906105003AF42F /* MainInterface.storyboard */ = {

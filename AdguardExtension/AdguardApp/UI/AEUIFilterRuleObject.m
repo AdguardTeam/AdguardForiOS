@@ -18,6 +18,7 @@
 #import "AEUIFilterRuleObject.h"
 #import "ACommons/ACLang.h"
 #import "AEFilterRuleSyntaxConstants.h"
+#import "AEUICustomTextEditorController.h"
 
 #define COLOR_DEFAULT       darkGrayColor
 #define COLOR_COMMENT       grayColor
@@ -140,6 +141,7 @@
     [self willChangeValueForKey:@"active"];
     [self willChangeValueForKey:@"textColor"];
     [self willChangeValueForKey:@"isEnabled"];
+    [self willChangeValueForKey:@"attributeRuteText"];
 
     _active = YES;
     _isEnabled = isEnabledHolder;
@@ -180,6 +182,15 @@
             break;
     }
     
+    _attributeRuteText = [[NSAttributedString alloc]
+                          initWithString:_ruleText
+                          attributes:@{
+                                       NSFontAttributeName: _font,
+                                       NSForegroundColorAttributeName: _textColor,
+                                       NSParagraphStyleAttributeName: AEUICustomTextEditorController.defaultParagraph
+                                       }];
+    
+    [self didChangeValueForKey:@"attributeRuteText"];
     [self didChangeValueForKey:@"isEnabled"];
     [self didChangeValueForKey:@"textColor"];
     [self didChangeValueForKey:@"active"];

@@ -96,6 +96,11 @@
         
         dest = &(_ip6Header->ip6_dst);
     }
+    else {
+        
+        OSSpinLockUnlock(&_lock);
+        return;
+    }
     
     if (inet_pton(af, [dstAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {
         
@@ -129,6 +134,10 @@
     } else if (af == AF_INET6) {
         
         dest = &(_ip6Header->ip6_src);
+    }
+    else {
+        OSSpinLockUnlock(&_lock);
+        return;
     }
     
     if (inet_pton(af, [srcAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {

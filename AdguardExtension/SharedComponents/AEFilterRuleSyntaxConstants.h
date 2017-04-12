@@ -40,6 +40,7 @@
 #define NOT_MARK                        @"~"
 
 #define AFRU_OPTIONS_DELIMITER          @"$"
+#define AFRU_OPTIONS_ESCAPE             @"\\"
 #define AFRU_DOMAIN_OPTION              @"domain"
 #define AFRU_THIRD_PARTY_OPTION         @"third-party"
 #define AFRU_MATCH_CASE_OPTION          @"match-case"
@@ -53,6 +54,11 @@
 #define AFRU_REPLACE_WITH_MP4_OPTION    @"mp4"
 #define AFRU_EMPTY_OPTION               @"empty"
 
+#define AFRU_OPTIONS_MARKER_SYM          '$'
+#define AFRU_OPTIONS_ESCAPE_SYM          '\\'
+#define AFRU_OPTIONS_DELIMITER_SYM       ','
+
+
 // content type filtering
 #define AFRU_AD_SCRIPT_OPTION           @"script"
 #define AFRU_AD_IMAGE_OPTION            @"image"
@@ -65,6 +71,8 @@
 #define AFRU_MASK_START_URL             @"||"
 #define AFRU_MASK_PIPE                  @"|"
 #define AFRU_MASK_ANY_SYMBOL            @"*"
+#define AFRU_URL_SCHEME_SEPARATOR       @"//"
+#define AFRU_URL_PATH_SEPARATOR         @"/"
 #define AFRU_MASK_SEPARATOR             @"^"
 #define AFRU_REGEXP_START_URL           @"^https?://([a-z0-9-_.]+\\.)?"
 #define AFRU_REGEXP_ANY_SYMBOL          @".*"

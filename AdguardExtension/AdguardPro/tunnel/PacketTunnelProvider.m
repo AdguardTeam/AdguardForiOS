@@ -41,13 +41,15 @@
 
 NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
-#define V_REMOTE_ADDRESS             @"127.0.0.1"
+#define V_REMOTE_ADDRESS                        @"127.0.0.1"
 
-#define V_INTERFACE_IPV4_ADDRESS     @"172.16.209.2"
-#define V_INTERFACE_IPV4_MASK        @"255.255.255.255"
+#define V_INTERFACE_IPV4_ADDRESS                @"172.16.209.2"
+#define V_INTERFACE_IPV4_MASK                   @"255.255.255.255"
 
-#define V_INTERFACE_IPV6_ADDRESS     @"fd12:1:1:1::2"
-#define V_INTERFACE_IPV6_MASK        @(128)
+#define V_INTERFACE_IPV6_ADDRESS                @"fd12:1:1:1::2"
+#define V_INTERFACE_IPV6_MASK                   @(128)
+
+#define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
@@ -103,20 +105,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     pendingStartCompletion = completionHandler;
     
-    // Init database
-    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-    if (! [[ASDatabase singleton] checkDefaultDbVersionWithURL:dbURL]) {
-        
-        DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
-        NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
-        
-        pendingStartCompletion(error);
-        return;
-    }
-    
-    [[ASDatabase singleton] initDbWithURL:dbURL];
-    //--------------------------
-    
     [_reachabilityHandler startNotifier];
     
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
@@ -143,13 +131,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if (_currentServer == nil) {
 
         @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.defaultDnsServerIndex];
         }
     }
     
     _localFiltering = protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
     [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue]
-    : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+    : APVPNManager.defaultLocalFilteringState;
     
     _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
     
@@ -248,23 +236,24 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     settings.DNSSettings = dns;
     
-    [self reloadWhitelistBlacklistDomain];
-    
-    // SETs network settings
-    __typeof__(self) __weak wSelf = self;
-    [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
-
-        __typeof__(self) sSelf = wSelf;
-
-        @synchronized (sSelf->_connectionHandler) {
-            if (sSelf->_connectionHandler) {
-                [sSelf->_connectionHandler startHandlingPackets];
+    if ([self reloadWhitelistBlacklistDomain]) {
+        
+        // SETs network settings
+        __typeof__(self) __weak wSelf = self;
+        [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
+            
+            __typeof__(self) sSelf = wSelf;
+            
+            @synchronized (sSelf->_connectionHandler) {
+                if (sSelf->_connectionHandler) {
+                    [sSelf->_connectionHandler startHandlingPackets];
+                }
             }
-        }
-
-        sSelf->pendingStartCompletion(error);
-        sSelf->pendingStartCompletion = nil;
-    }];
+            
+            sSelf->pendingStartCompletion(error);
+            sSelf->pendingStartCompletion = nil;
+        }];
+    }
 }
 
 - (void)stopTunnelWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler
@@ -393,58 +382,107 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [self stopVPN];
 }
 
-- (void)reloadWhitelistBlacklistDomain {
+- (BOOL)reloadWhitelistBlacklistDomain {
     
     if (_localFiltering == NO) {
         
-        [_connectionHandler setWhitelistDomains:nil];
-        [_connectionHandler setBlacklistDomains:nil];
+        [_connectionHandler setWhitelistFilter:nil];
+        [_connectionHandler setBlacklistFilter:nil];
 
-        return;
+        return YES;
     }
     
     @autoreleasepool {
 
         
-        AESAntibanner *antibanner = [[AEService singleton] antibanner];
-        NSArray *rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
-        
-        NSMutableArray *wRules = [NSMutableArray array];
-        NSMutableArray *bRules = [NSMutableArray array];
-        AEWhitelistDomainObject *object;
-        for (ASDFilterRule *item in rules) {
+        AERDomainFilter *wRules = [AERDomainFilter filter];
+        AERDomainFilter *bRules = [AERDomainFilter filter];
+
+        NSArray *rules;
+        @autoreleasepool {
             
-            object = [[APWhitelistDomainObject alloc] initWithRule:item];
-            if (object) {
-                [wRules addObject:object.domain];
-            }
-            else {
+            // Init database
+            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+            
+            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+            if ([[ASDatabase singleton] error]) {
+
+                DDLogError(@"(PacketTunnelProvider) Fatal error. No production DB.");
+                NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
                 
-                object = [[AEBlacklistDomainObject alloc] initWithRule:item];
-                if (object) {
-                    [bRules addObject:object.domain];
+                NSDate *date = [[AESharedResources sharedDefaults] objectForKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
+                if (date == nil || ([date timeIntervalSinceNow] * -1) > TIME_INTERVAL_FOR_WARNING_MESSAGE) {
+                    
+                    [self displayMessage:NSLocalizedStringFromTable(@"WARNING. Internet connection is not available. It is necessary to run the application to finish the configuration process after the recent update.",
+                                                                    @"AdguardPro.Tunnel",
+                                                                    @"(PacketTunnelProvider) This is a warning message that will be shown to users after the update in some cases.")
+                       completionHandler:^(BOOL success) {
+                        
+                        [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
+                        pendingStartCompletion(error);
+                    }];
+                }
+                else{
+                    
+                    pendingStartCompletion(error);
+                }
+                return NO;
+            }
+            //--------------------------
+            
+            AESAntibanner *antibanner = [[AEService new] antibanner];
+            rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
+            
+            [ASDatabase destroySingleton];
+        }
+        
+        @autoreleasepool {
+            
+            AERDomainFilterRule *rule;
+            for (ASDFilterRule *item in rules) {
+                
+                rule = [AERDomainFilterRule rule:item.ruleText];
+                
+                if (rule.whiteListRule) {
+                    [wRules addRule:rule];
+                }
+                else {
+                    
+                    [bRules addRule:rule];
                 }
             }
         }
 
+        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
-            if (domainList.count) {
-                [wRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [wRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
-        
-        [_connectionHandler setWhitelistDomains:wRules];
+        [_connectionHandler setWhitelistFilter:wRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
-            if (domainList.count) {
-                [bRules addObjectsFromArray:domainList];
+            for (NSString *item in domainList) {
+                
+                NSString *ruleText = [[[[AEBlacklistDomainObject alloc] initWithDomain:item] rule] ruleText];
+                if (ruleText) {
+                    
+                    [bRules addRule:[AERDomainFilterRule rule:ruleText]];
+                }
             }
         }
         
-        [_connectionHandler setBlacklistDomains:bRules];
+        [_connectionHandler setBlacklistFilter:bRules];
     }
+    
+    return YES;
 }
 @end
