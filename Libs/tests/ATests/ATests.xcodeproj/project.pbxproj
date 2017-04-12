@@ -60,6 +60,15 @@
 		651628611B85ED0E003EB113 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657247D91B8318DE008430CD /* libz.dylib */; };
 		651628621B85ED26003EB113 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247F81B8338B1008430CD /* ASDFilterObjects.m */; };
 		651628631B85ED37003EB113 /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 657247FC1B8338BD008430CD /* ASDatabase.m */; };
+		651F5E091E25628000E22157 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
+		651F5F151E2591BC00E22157 /* ACNUrlUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */; };
+		651F5F191E25929600E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5F171E25929000E22157 /* ACNUrlUtils.m */; };
+		654F5BB81E75AD0400B8C1EC /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */; };
+		654F5BB91E75AD0400B8C1EC /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */; };
+		654F5BBA1E75AD0400B8C1EC /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */; };
+		654F5BBB1E75AD9200B8C1EC /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
+		654F5BBD1E75B1C300B8C1EC /* default.db.gz in Resources */ = {isa = PBXBuildFile; fileRef = 654F5BBC1E75B1C300B8C1EC /* default.db.gz */; };
+		654F5BBE1E75B28400B8C1EC /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */; };
 		655AACB91D3CD5A400E316EA /* ADBHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB81D3CD5A400E316EA /* ADBHelperTests.m */; };
 		655AACBF1D3CD67500E316EA /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBC1D3CD67500E316EA /* ADBTable.m */; };
 		655AACC01D3CD67500E316EA /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACBE1D3CD67500E316EA /* ADBTableRow.m */; };
@@ -73,6 +82,8 @@
 		657247EC1B8335A6008430CD /* simpleText.txt in Resources */ = {isa = PBXBuildFile; fileRef = 657247E61B8335A6008430CD /* simpleText.txt */; };
 		657248881B83C02C008430CD /* ADlocationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248861B83C02C008430CD /* ADlocationsTests.m */; };
 		657248981B83C131008430CD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 657248971B83C131008430CD /* libsqlite3.dylib */; };
+		657539CE1DA51DCB0047A48C /* ABERequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 657539CD1DA51DCB0047A48C /* ABERequestTests.m */; };
+		657539CF1DA51F0C0047A48C /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACC41D3CD6D200E316EA /* ACObject.m */; };
 		659491B81C6CC96800E501BA /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248711B83BE15008430CD /* ADLocales.m */; };
 		659491B91C6CC96800E501BA /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248731B83BE15008430CD /* ADLocations.m */; };
 		659491BA1C6CC96800E501BA /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 657248761B83BE15008430CD /* ADProductInfo.m */; };
@@ -324,6 +335,12 @@
 		6516286A1B8607DB003EB113 /* update0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.001.sql; sourceTree = "<group>"; };
 		6516286B1B8607DB003EB113 /* update0.002.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.002.sql; sourceTree = "<group>"; };
 		6516286C1B860818003EB113 /* schema0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.001.sql; sourceTree = "<group>"; };
+		651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtilsTests.m; sourceTree = "<group>"; };
+		651F5F161E25929000E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
+		651F5F171E25929000E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
+		654F5BB61E75AD0400B8C1EC /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
+		654F5BBC1E75B1C300B8C1EC /* default.db.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = default.db.gz; sourceTree = "<group>"; };
 		655AACB81D3CD5A400E316EA /* ADBHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBHelperTests.m; sourceTree = "<group>"; };
 		655AACBB1D3CD67500E316EA /* ADBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBTable.h; sourceTree = "<group>"; };
 		655AACBC1D3CD67500E316EA /* ADBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBTable.m; sourceTree = "<group>"; };
@@ -406,7 +423,7 @@
 		657247E61B8335A6008430CD /* simpleText.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simpleText.txt; sourceTree = "<group>"; };
 		657247EE1B83389D008430CD /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
 		657247EF1B83389D008430CD /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		657247F01B83389D008430CD /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		657247F01B83389D008430CD /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
 		657247F71B8338B1008430CD /* ASDFilterObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDFilterObjects.h; sourceTree = "<group>"; };
 		657247F81B8338B1008430CD /* ASDFilterObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDFilterObjects.m; sourceTree = "<group>"; };
 		657247FB1B8338BD008430CD /* ASDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDatabase.h; sourceTree = "<group>"; };
@@ -442,6 +459,7 @@
 		657248801B83BE39008430CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		657248861B83C02C008430CD /* ADlocationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADlocationsTests.m; sourceTree = "<group>"; };
 		657248971B83C131008430CD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		657539CD1DA51DCB0047A48C /* ABERequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABERequestTests.m; sourceTree = "<group>"; };
 		659493261C6CCF9000E501BA /* schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = schema.sql; path = createDefaultDB/Resources/schema.sql; sourceTree = SOURCE_ROOT; };
 		659493271C6CCF9000E501BA /* schema0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = schema0.001.sql; path = createDefaultDB/Resources/schema0.001.sql; sourceTree = SOURCE_ROOT; };
 		659493281C6CCF9000E501BA /* update0.001.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = update0.001.sql; path = createDefaultDB/Resources/update0.001.sql; sourceTree = SOURCE_ROOT; };
@@ -544,6 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				651626C61B85CFF5003EB113 /* ABackEndClientsTests.m */,
+				657539CD1DA51DCB0047A48C /* ABERequestTests.m */,
 				651626C41B85CFF5003EB113 /* Supporting Files */,
 			);
 			name = ABackEndClientsTests;
@@ -577,6 +596,7 @@
 				659493281C6CCF9000E501BA /* update0.001.sql */,
 				659493291C6CCF9000E501BA /* update0.002.sql */,
 				6594933A1C6CD49E00E501BA /* default.db */,
+				654F5BBC1E75B1C300B8C1EC /* default.db.gz */,
 				651627C21B85DC8D003EB113 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -600,6 +620,15 @@
 				6516286B1B8607DB003EB113 /* update0.002.sql */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		654F5BB51E75AD0400B8C1EC /* NSDataGZip */ = {
+			isa = PBXGroup;
+			children = (
+				654F5BB61E75AD0400B8C1EC /* NSData+GZIP.h */,
+				654F5BB71E75AD0400B8C1EC /* NSData+GZIP.m */,
+			);
+			path = NSDataGZip;
 			sourceTree = "<group>";
 		};
 		655AACBA1D3CD67500E316EA /* ADBHelpers */ = {
@@ -671,6 +700,7 @@
 				6572470E1B831570008430CD /* ACommonsTests.m */,
 				657247101B831570008430CD /* ACSSystemUtilsTest.m */,
 				65B40D4A1BDF915700A9C595 /* ACNNetworkingTests.m */,
+				651F5F141E2591BC00E22157 /* ACNUrlUtilsTests.m */,
 				657247111B831570008430CD /* reservedDomains.plist */,
 				657247E01B8335A6008430CD /* Resources */,
 				657246FB1B8314AE008430CD /* Supporting Files */,
@@ -825,6 +855,8 @@
 		6572478D1B831772008430CD /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				651F5F161E25929000E22157 /* ACNUrlUtils.h */,
+				651F5F171E25929000E22157 /* ACNUrlUtils.m */,
 				65B40D411BDF90E700A9C595 /* ACNNetworking.h */,
 				65B40D421BDF90E700A9C595 /* ACNNetworking.m */,
 				657247911B831772008430CD /* ACNHttpUtils.h */,
@@ -845,6 +877,7 @@
 		6572479E1B831772008430CD /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				654F5BB51E75AD0400B8C1EC /* NSDataGZip */,
 				657247A11B831772008430CD /* Reachability */,
 				657247A41B831772008430CD /* TrReadWriteLock */,
 			);
@@ -1178,6 +1211,7 @@
 				6594932D1C6CCF9000E501BA /* update0.002.sql in Resources */,
 				6594933B1C6CD49E00E501BA /* default.db in Resources */,
 				6594932C1C6CCF9000E501BA /* update0.001.sql in Resources */,
+				654F5BBD1E75B1C300B8C1EC /* default.db.gz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1269,6 +1303,7 @@
 				659492471C6CC9FB00E501BA /* ACLExecuteBlockDelayed.m in Sources */,
 				659492481C6CC9FB00E501BA /* ACLFileLocker.m in Sources */,
 				659492491C6CC9FB00E501BA /* ACLFileLogger.m in Sources */,
+				657539CF1DA51F0C0047A48C /* ACObject.m in Sources */,
 				6594924A1C6CC9FB00E501BA /* ACLJobController.m in Sources */,
 				6594924B1C6CC9FB00E501BA /* ACLLogger.m in Sources */,
 				6594924C1C6CC9FB00E501BA /* ACLWildcard.m in Sources */,
@@ -1288,6 +1323,7 @@
 				6594925A1C6CC9FB00E501BA /* ACNNetworking.m in Sources */,
 				6594925C1C6CC9FB00E501BA /* ACNHttpUtils.m in Sources */,
 				659492611C6CC9FB00E501BA /* ACSSystemUtils.m in Sources */,
+				657539CE1DA51DCB0047A48C /* ABERequestTests.m in Sources */,
 				659492631C6CC9FB00E501BA /* Reachability.m in Sources */,
 				659492641C6CC9FB00E501BA /* ABECRequest.m in Sources */,
 				659492651C6CC9FB00E501BA /* ABECFilter.m in Sources */,
@@ -1313,6 +1349,7 @@
 				655AACC51D3CD6D200E316EA /* ACObject.m in Sources */,
 				659492AE1C6CCA4000E501BA /* ASDatabaseTests.m in Sources */,
 				659492741C6CCA2F00E501BA /* ADLocales.m in Sources */,
+				654F5BBE1E75B28400B8C1EC /* NSData+GZIP.m in Sources */,
 				659492751C6CCA2F00E501BA /* ADLocations.m in Sources */,
 				659492761C6CCA2F00E501BA /* ADProductInfo.m in Sources */,
 				659492791C6CCA2F00E501BA /* ACFFileUtils.m in Sources */,
@@ -1372,8 +1409,10 @@
 				651628201B85ECF6003EB113 /* ADProductInfo.m in Sources */,
 				651628241B85ECF6003EB113 /* ACFFileUtils.m in Sources */,
 				6516282B1B85ECF6003EB113 /* ACIOStream.m in Sources */,
+				654F5BBA1E75AD0400B8C1EC /* NSData+GZIP.m in Sources */,
 				6516282C1B85ECF6003EB113 /* ACIOUtils.m in Sources */,
 				6516282E1B85ECF6003EB113 /* ACLExecuteBlockDelayed.m in Sources */,
+				654F5BBB1E75AD9200B8C1EC /* ACObject.m in Sources */,
 				6516282F1B85ECF6003EB113 /* ACLFileLocker.m in Sources */,
 				651628301B85ECF6003EB113 /* ACLFileLogger.m in Sources */,
 				65B40D491BDF90FD00A9C595 /* ACNNetworking.m in Sources */,
@@ -1422,6 +1461,7 @@
 				659492341C6CC9DF00E501BA /* ACNSStringUtilsTests.m in Sources */,
 				659492361C6CC9DF00E501BA /* ACommonsTests.m in Sources */,
 				659492371C6CC9DF00E501BA /* ACSSystemUtilsTest.m in Sources */,
+				651F5F151E2591BC00E22157 /* ACNUrlUtilsTests.m in Sources */,
 				659492381C6CC9DF00E501BA /* ACNNetworkingTests.m in Sources */,
 				659491F71C6CC9CD00E501BA /* ACFFileUtils.m in Sources */,
 				659491FE1C6CC9CD00E501BA /* ACIOStream.m in Sources */,
@@ -1431,12 +1471,14 @@
 				659492021C6CC9CD00E501BA /* ACLFileLogger.m in Sources */,
 				659492031C6CC9CD00E501BA /* ACLJobController.m in Sources */,
 				659492041C6CC9CD00E501BA /* ACLLogger.m in Sources */,
+				654F5BB91E75AD0400B8C1EC /* NSData+GZIP.m in Sources */,
 				659492051C6CC9CD00E501BA /* ACLWildcard.m in Sources */,
 				659492061C6CC9CD00E501BA /* CLIColor.m in Sources */,
 				659492071C6CC9CD00E501BA /* DDAbstractDatabaseLogger.m in Sources */,
 				659492081C6CC9CD00E501BA /* DDASLLogger.m in Sources */,
 				659492091C6CC9CD00E501BA /* DDFileLogger.m in Sources */,
 				6594920A1C6CC9CD00E501BA /* DDLog.m in Sources */,
+				651F5F191E25929600E22157 /* ACNUrlUtils.m in Sources */,
 				6594920B1C6CC9CD00E501BA /* DDTTYLogger.m in Sources */,
 				6594920C1C6CC9CD00E501BA /* DDContextFilterLogFormatter.m in Sources */,
 				6594920D1C6CC9CD00E501BA /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -1456,6 +1498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				651F5E091E25628000E22157 /* ACObject.m in Sources */,
 				659491B81C6CC96800E501BA /* ADLocales.m in Sources */,
 				659491B91C6CC96800E501BA /* ADLocations.m in Sources */,
 				659491BA1C6CC96800E501BA /* ADProductInfo.m in Sources */,
@@ -1497,6 +1540,7 @@
 				659491ED1C6CC96800E501BA /* FMDatabaseQueue.m in Sources */,
 				659491EE1C6CC96800E501BA /* FMResultSet.m in Sources */,
 				659491EF1C6CC96800E501BA /* FMSQLStatementSplitter.m in Sources */,
+				654F5BB81E75AD0400B8C1EC /* NSData+GZIP.m in Sources */,
 				659491F01C6CC96800E501BA /* FMStatementKeywordRecogniser.m in Sources */,
 				659491F11C6CC96800E501BA /* FMStatementQuotedRecogniser.m in Sources */,
 				657248881B83C02C008430CD /* ADlocationsTests.m in Sources */,

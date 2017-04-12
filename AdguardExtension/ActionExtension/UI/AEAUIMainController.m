@@ -24,7 +24,7 @@
 #import "ACommons/ACSystem.h"
 #import "AEAUIDomainCell.h"
 #import "AEUIUtils.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
@@ -46,6 +46,14 @@
     _enabledHolder = self.domainEnabled;
     
     self.blockElementLabel.textColor = self.blockElementLabel.tintColor;
+    
+    // tunning accessibility
+    self.blockElementLabel.accessibilityTraits |= UIAccessibilityTraitButton;
+    
+    NSString *labelFormat = NSLocalizedString(@"Enable filtering on %@", @"(Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com'");
+    self.enableOnCell.textLabel.accessibilityLabel = [NSString stringWithFormat:labelFormat, self.domainName];
+    //--------------
+    
     
     if (self.iconUrl) {
         [ACNNetworking dataWithURL:self.iconUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -109,34 +117,23 @@
     // disable filtering (add to whitelist)
     if (self.domainEnabled) {
         
-        self.domainObject = [[AEUIWhitelistDomainObject alloc] initWithDomain:self.domainName];
+        self.domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        NSError *error = [[AEService singleton] addRule:self.domainObject.rule temporarily:NO];
-        if (error){
+        [AEUIUtils addWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
+            
+            self.domainEnabled = newEnabled;
+            
+            [[[AEService singleton] antibanner] endTransaction];
+            
+        } rollbackBlock:^{
             
             [[[AEService singleton] antibanner] rollbackTransaction];
+            
             [self.statusButton setOn:self.domainEnabled animated:YES];
             
-        }
-        else {
-            
-            [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-                
-                self.domainEnabled = newEnabled;
-                
-                [[[AEService singleton] antibanner] endTransaction];
-                
-                
-            } rollbackBlock:^{
-                
-                [[[AEService singleton] antibanner] rollbackTransaction];
-                
-                [self.statusButton setOn:self.domainEnabled animated:YES];
-            }];
-        }
-        
+        }];
     }
     // enable filtering (remove from whitelist)
     else {
@@ -148,20 +145,14 @@
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        // disable rule temporarily
-        [[[AEService singleton] antibanner] setRules:@[self.domainObject.rule.ruleId] filter:self.domainObject.rule.filterId enabled:NO];
-        
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+        [AEUIUtils removeWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
             
-            // delete rule permanently
-            [[AEService singleton] removeRules:@[self.domainObject.rule]];
             self.domainEnabled = newEnabled;
             self.domainObject = nil;
             
             [[[AEService singleton] antibanner] endTransaction];
             
-            
-        }rollbackBlock:^{
+        } rollbackBlock:^{
             
             // enable rule (rollback)
             
@@ -248,6 +239,36 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return [self heightForCell:self.nameCell];
     }
     return UITableViewAutomaticDimension;
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    
+//    if (section == PRO_SECTION_INDEX) {
+//        
+//        return [self proSectionFooter];
+//    }
+//    
+//    return [super tableView:tableView viewForFooterInSection:section];
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    
+//    if (section == PRO_SECTION_INDEX) {
+//        
+//        APUIProSectionFooter *footer = [self proSectionFooter];
+//        return footer.height;
+//    }
+//    
+//    return [super tableView:tableView heightForFooterInSection:section];
+//}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+    
+    // tunning accessibility
+    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+    footer.isAccessibilityElement = NO;
+    footer.textLabel.isAccessibilityElement = NO;
+    footer.detailTextLabel.isAccessibilityElement = NO;
 }
 
 /////////////////////////////////////////////////////////////////////

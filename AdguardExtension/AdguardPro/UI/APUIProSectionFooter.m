@@ -29,6 +29,7 @@
     if (self) {
         
         _textView = [UITextView new];
+        _textView.isAccessibilityElement = NO;
         _textView.editable = NO;
         _textView.scrollEnabled = NO;
         _textView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -91,12 +92,14 @@
         _textView.attributedText = [[NSTextStorage alloc] initWithAttributedString:textString];
     }
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (BOOL)isAccessibilityElement {
+    return NO;
 }
-*/
+
+- (NSString *)accessibilityLabel {
+    
+    return _textView.text;
+}
 
 @end

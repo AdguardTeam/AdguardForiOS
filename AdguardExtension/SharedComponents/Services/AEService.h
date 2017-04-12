@@ -21,10 +21,6 @@
 #pragma mark - AEServices Constants
 /////////////////////////////////////////////////////////////////////
 
-/**
- Notification raised when to add/update/delete rules.
- */
-extern NSString *AEServiceUserFilterRulesChangedNotification;
 
 /**
  NSError domain for errors from AEService object.
@@ -36,6 +32,8 @@ extern NSString *AEServiceErrorDomain;
 #define AES_ERROR_UNSUPPORTED_RULE                      30
 #define AES_ERROR_DB                                    40
 #define AES_ERROR_SAFARI_EXCEPTION                      50
+
+extern NSString *AESUserInfoRuleObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEServices
@@ -63,9 +61,38 @@ extern NSString *AEServiceErrorDomain;
 - (void)stop;
 
 
+/**
+ Checks filtering rule, that it is converted to Safari content-blocking json.
+ 
+ @param rule Rule
+ @return Returns nil on success, or error object.
+ */
+- (NSError *)checkRule:(ASDFilterRule *)rule;
+/**
+ Replace all rules in user filter of the production DB.
+
+ @param rules List of the new rules
+ @return Returns nil on success or DB error object. 
+ */
+- (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules;
+
 - (NSError *)updateRule:(ASDFilterRule *)rule oldRuleText:(NSString *)oldRuleText;
 - (NSError *)addRule:(ASDFilterRule *)rule temporarily:(BOOL)temporarily;
 - (BOOL)removeRules:(NSArray *)rules;
+
+/**
+ Adds whitelist rule, modifies content blocking JSON
+ and replaces this JSON in shared resources asynchronously.
+ Method performs completionBlock when done on service working queue.
+ */
+- (void)addWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
+
+/**
+ Removes whitelist rule, modifies content blocking JSON
+ and replaces this JSON in shared resources asynchronously.
+ Method performs completionBlock when done on service working queue.
+ */
+- (void)removeWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
 
 /**
  Converts active filter rules to content blocking JSON 
@@ -75,9 +102,10 @@ extern NSString *AEServiceErrorDomain;
 - (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock;
 
 /**
- If reloadContentBlockingJsonASync method is running still,
- this method pushes block of code into queue,
- which will be run when reloadContentBlockingJsonASync method will be completed, 
+ If reloadContentBlockingJsonASync (addWhitelistDomain, removeWhitelistRule) 
+ method is running still, this method pushes block of code into queue,
+ which will be run when reloadContentBlockingJsonASync 
+ (addWhitelistDomain, removeWhitelistRule) method will be completed,
  else performs block of code immediately.
  Blocks are performed on service working queue.
  */

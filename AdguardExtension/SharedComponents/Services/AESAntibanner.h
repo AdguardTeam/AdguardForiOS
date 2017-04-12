@@ -16,15 +16,18 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
+#import "ABackEndClients/ABECFilter.h"
 
 #define AS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
 #define AS_EXECUTION_LEEWAY                                5 // 5 seconds
 #define AS_EXECUTION_DELAY                                 2 // 2 seconds
 
-#define AS_CHECK_FILTERS_UPDATES_PERIOD                    AS_EXECUTION_PERIOD_TIME
+#define AS_CHECK_FILTERS_UPDATES_PERIOD                    AS_EXECUTION_PERIOD_TIME*6
 #define AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY             AS_EXECUTION_DELAY
 #define AS_CHECK_FILTERS_UPDATES_LEEWAY                    AS_EXECUTION_LEEWAY
 #define AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD            AS_EXECUTION_PERIOD_TIME*6
+
+#define AS_FETCH_UPDATE_STATUS_PERIOD                       (AS_CHECK_FILTERS_UPDATES_PERIOD / 2)
 
 /// Timeout for downloading of data from the remote services
 #define AS_URL_LOAD_TIMEOUT                                60
@@ -38,14 +41,15 @@ extern NSString *ASAntibannerNotInstalledNotification;
 /// When anitbanner service ready to work
 extern NSString *ASAntibannerReadyNotification;
 
-/// When antibanner filter metadata updated
-extern NSString *ASAntibannerUpdateFilterMetadataNotification;
-
 /// When antibanner filter rules updated
 extern NSString *ASAntibannerUpdateFilterRulesNotification;
 
 /// When anitbanner started update process
 extern NSString *ASAntibannerStartedUpdateNotification;
+/// When antibanner does not start update process, according to internal reason.
+extern NSString *ASAntibannerDidntStartUpdateNotification;
+/// When some part of the update process completed
+extern NSString *ASAntibannerUpdatePartCompletedNotification;
 
 /// When anitbanner finished update process
 extern NSString *ASAntibannerFinishedUpdateNotification;
@@ -69,7 +73,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  Service implements: updating from backend, auto detect filters, storing info and rules
  for Ad Blocker (the same Antibanner, requestFilter), and so on..
  */
-@interface AESAntibanner : NSObject
+@interface AESAntibanner : NSObject <ABECFilterAsyncDelegateProtocol>
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -98,7 +102,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return Array of ASDFilterRule objects that represent rules of filtering.
  Returns empty array if receiver property "enabled" equal NO.
  */
-- (NSArray *)activeRules;
+- (NSMutableArray *)activeRules;
 
 /**
  Obtain active rules for active (enabled) filter.
@@ -117,13 +121,29 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  all stored in database groups.
  */
 - (NSArray *)groups;
+/**
+ Obtains groups localization information.
+ @return ASDGroupsI18n object that contains data from database.
+ */
+- (ASDGroupsI18n *)groupsI18n;
+/**
+ Checks if specified filter was installed.
 
+ @param filterId Filter id.
+ @return YES, if filter was installed into production DB.
+ */
+- (BOOL)checkIfFilterInstalled:(NSNumber *)filterId;
 /**
  Obtain filters information.
  @return Array of ASDFilterMetadata objects that contains
  all stored in database antibanner filters.
  */
 - (NSArray *)filters;
+/**
+ Obtains filters localization information.
+ @return ASDFiltersI18n object that contains data from database.
+ */
+- (ASDFiltersI18n *)filtersI18n;
 
 /**
  Obtain rules for filter.
@@ -174,13 +194,12 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  and then removes all rules of the antibanner filter from DB,
  and then adds new rules from list.
  
- @param ruleTexts    List of NSString objects.
- Texts of rules, which must be added into filter.
+ @param rules        List of rules, which must be added into filter.
  @param filterId     Identificator of filter (filter Id).
  
  @return YES if success.
  */
-- (BOOL)importRuleTexts:(NSArray *)ruleTexts filterId:(NSNumber *)filterId;
+- (BOOL)importRules:(NSArray <ASDFilterRule *> *)rules filterId:(NSNumber *)filterId;
 
 /**
  Checks that antibanner filter is editable,
@@ -194,30 +213,30 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
 - (BOOL)removeRules:(NSArray *)ruleIds filterId:(NSNumber *)filterId;
 
 /**
- Retuns list of filters.
- Gets fresh list of filters.
+ Retuns metadata.
+ Gets fresh metadata.
  Tries load metadata from backend service if need it
- or obtains filters metadata from default DB.
+ or obtains metadata from default DB.
  Request to backend is performed synchronous.
  
  @param refresh Makes attempting to download metadata from the backend forced.
  
- @return Array of ASDFilterMetadata objects or nil if error occurs.
+ @return ABECFilterClientMetadata object or nil if error occurs.
  */
-- (NSArray *)filtersForSubscribe:(BOOL)refresh;
+- (ABECFilterClientMetadata *)metadataForSubscribe:(BOOL)refresh;
 
 /**
- Retuns list of groups.
- Gets fresh list of groups.
- Tries load metadata from backend service if need it
- or obtains groups metadata from default DB.
+ Retuns localizations.
+ Gets fresh localizations.
+ Tries load localizations from backend service if need it
+ or obtains localizations from default DB.
  Request to backend is performed synchronous.
  
- @param refresh Makes attempting to download metadata from the backend forced.
+ @param refresh Makes attempting to download localizations from the backend forced.
  
- @return Array of ASDFilterGroup objects or nil if error occurs.
+ @return ABECFilterClientLocalization object or nil if error occurs.
  */
-- (NSArray *)groupsForSubscribe:(BOOL)refresh;
+- (ABECFilterClientLocalization *)i18nForSubscribe:(BOOL)refresh;
 
 /**
  Performs subscription to filters.
@@ -238,9 +257,27 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
 
 /**
  Starts updating of filters from Backend service.
+ 
  */
-- (void)startUpdating;
+/**
+ Starts updating of filters from Backend service.
 
+ @param forced If set to YES, method ignores filter update periods.
+ 
+ @return Return YES if update process started.
+ */
+- (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive;
+/**
+ Call this method after starting of the app, from 'handleEventsForBackgroundURLSession' app delegate.
+ This must adjust right processing for backgound downloads of the filter updates.
+ */
+- (void)repairUpdateStateForBackground;
+
+/**
+ Call this method after starting of the app,
+ that must adjust right processing for backgound downloads of the filter updates.
+ */
+- (void)repairUpdateStateWithCompletionBlock:(void (^)(void))block;
 
 - (BOOL)inTransaction;
 - (void)beginTransaction;

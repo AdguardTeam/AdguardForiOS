@@ -18,8 +18,9 @@
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
 
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/%@/%@.mp4"
+
 #define DEFAULT_TUTORIAL_VIDEO          @"EnablingAdguardVideo"
-#define TUTORIAL_VIDEO_EXT      @"mp4"
 #define HIDE_NAVIGATION_DELAY 2 // seconds
 
 @interface AEUIPlayerViewController ()
@@ -40,11 +41,7 @@
         self.videoName = DEFAULT_TUTORIAL_VIDEO;
     }
     
-    NSURL *videoURL =
-        [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@-%@",self.videoName, [ADLocales lang]] withExtension:TUTORIAL_VIDEO_EXT];
-    if (!videoURL) {
-        videoURL = [[NSBundle mainBundle] URLForResource:self.videoName withExtension:TUTORIAL_VIDEO_EXT];
-    }
+    NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, [ADLocales lang], self.videoName]];
     
     if (videoURL) {
 
@@ -53,18 +50,11 @@
                     action:@selector(handleGesture:)];
         _gesture.delegate = self;
 
-        self.player = [AVPlayer playerWithURL:videoURL];
-
         self.showsPlaybackControls = NO;
         self.allowsPictureInPicturePlayback = NO;
 
-        [[NSNotificationCenter defaultCenter]
-            addObserver:self
-               selector:@selector(playerEnd:)
-                   name:AVPlayerItemDidPlayToEndTimeNotification
-                 object:self.player.currentItem];
-
-        [self.player play];
+        [self createPlayerForUrl:videoURL];
+        
         dispatch_after(
             dispatch_time(DISPATCH_TIME_NOW,
                           (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
@@ -85,7 +75,7 @@
 
 - (void)dealloc {
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removePlayer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -155,5 +145,61 @@ preparation before navigation
           [self.navigationController popViewControllerAnimated:YES];
         });
 }
+
+- (void)createPlayerForUrl:(NSURL *)videoURL {
+    
+    AVPlayer *player  = [AVPlayer playerWithURL:videoURL];
+    
+    [player.currentItem addObserver:self forKeyPath:@"status" options:(NSKeyValueObservingOptionNew) context:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(playerEnd:)
+     name:AVPlayerItemDidPlayToEndTimeNotification
+     object:player.currentItem];
+    
+    self.player = player;
+    
+    if (player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
+        
+        [self.player play];
+    }
+}
+
+- (void)removePlayer {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
+    
+    [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    // if error occurs, we attempt replace locale specific video on default video
+    if ([object isEqual:self.player.currentItem] && [keyPath isEqualToString:@"status"]) {
+        
+        AVPlayerStatus status = [change[NSKeyValueChangeNewKey] intValue];
+        
+        if (status == AVPlayerItemStatusFailed) {
+            
+            NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, ADL_DEFAULT_LANG, self.videoName]];
+            
+            if (videoURL) {
+
+                [self removePlayer];
+                [self createPlayerForUrl:videoURL];
+            }
+
+        }
+        else if (status == AVPlayerItemStatusReadyToPlay) {
+            
+            [self.player play];
+        }
+    }
+//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
 
 @end

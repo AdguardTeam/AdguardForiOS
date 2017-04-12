@@ -17,8 +17,9 @@
  */
 
 @import NetworkExtension;
+#import "AERDomainFilter.h"
 
-@class APTUdpProxySession, PacketTunnelProvider, APDnsLogRecord;
+@class APTUdpProxySession, PacketTunnelProvider;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
@@ -39,6 +40,21 @@
 @property (weak, readonly) PacketTunnelProvider *provider;
 
 /**
+ Sets addresses of the DNS servers.
+ */
+- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+
+/**
+ Sets whitelist filter.
+ */
+- (void)setWhitelistFilter:(AERDomainFilter *)filter;
+/**
+ Sets blacklist filter.
+ */
+- (void)setBlacklistFilter:(AERDomainFilter *)filter;
+
+/**
  Make the initial readPacketsWithCompletionHandler call.
  */
 - (void)startHandlingPackets;
@@ -54,17 +70,17 @@
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
 
 /**
- Removes all records from log of the DNS activity.
+ Checks domain name, that it is included in whitelist.
  */
-- (void)clearDnsActivityLog;
+- (BOOL)isWhitelistDomain:(NSString *)domainName;
 /**
- Returns log records of the DNS activity.
+ Checks domain name, that it is included in blacklist.
  */
-- (NSArray <APDnsLogRecord *> *)dnsActivityLogRecords;
+- (BOOL)isBlacklistDomain:(NSString *)domainName;
 
 /**
- Endpoints sessions use this method for writing log records.
+ Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
-- (void)writeToDnsActivityLog:(NSArray <APDnsLogRecord *> *)records;
+- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 @end

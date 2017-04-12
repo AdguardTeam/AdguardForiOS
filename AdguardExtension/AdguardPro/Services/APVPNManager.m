@@ -24,15 +24,21 @@
 #import "APSharedResources.h"
 #import "AppDelegate.h"
 #import "ACommons/ACNetwork.h"
+#import "ASDFilterObjects.h"
+#import "APDnsServerObject.h"
+#import "AEService.h"
+#import "AESAntibanner.h"
 
 
-#define VPN_NAME                @" VPN"
+#define VPN_NAME                            @" VPN"
+#define MAX_COUNT_OF_REMOTE_DNS_SERVERS     16
+#define NOTIFICATION_DELAY                  1
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 
-NSString *APVpnManagerParameterMode = @"APVpnManagerParameterMode";
-NSString *APVpnManagerParameterIPv4DNSAddresses = @"APVpnManagerParameterIPv4DNSAddresses";
+NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
+NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
@@ -41,29 +47,39 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 @implementation APVPNManager{
     
     dispatch_queue_t workingQueue;
+    NSOperationQueue *_notificationQueue;
+    
+    ACLExecuteBlockDelayed *_delayedSendNotify;
     
     NETunnelProviderManager *_manager;
     NETunnelProviderProtocol *_protocolConfiguration;
     NSMutableArray *_observers;
-    NSArray *_vpnModeDescription;
-    NSArray *_vpnModeIPv4DNSAddresses;
     
     BOOL        _enabled;
     
     BOOL         _busy;
     NSLock      *_busyLock;
     NSNumber    *_delayedSetEnabled;
-    NSNumber    *_delayedSetMode;
+//    NSNumber    *_delayedSetTunnelEnabled;
+    
+    APDnsServerObject *_activeRemoteDnsServer;
+    APDnsServerObject *_delayedSetActiveRemoteDnsServer;
+    
+    BOOL               _localFiltering;
+    NSNumber          *_delayedSetLocalFiltering;
     
     NSError     *_standartError;
     
     BOOL _dnsRequestsLogging;
+    
+    NSMutableArray <APDnsServerObject *> *_predefinedRemoteDnsServers;
+    NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
 }
 
 static APVPNManager *singletonVPNManager;
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Initialize
+#pragma mark Initialize and class properties
 
 + (APVPNManager *)singleton{
     
@@ -88,6 +104,28 @@ static APVPNManager *singletonVPNManager;
     if (self) {
         
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
+        _notificationQueue = [NSOperationQueue new];
+        _notificationQueue.underlyingQueue = workingQueue;
+        _notificationQueue.name = @"APVPNManager notification";
+        
+        // set delayed notify
+        _delayedSendNotify = [[ACLExecuteBlockDelayed alloc]
+                              initWithTimeout:NOTIFICATION_DELAY
+                              leeway:NOTIFICATION_DELAY
+                              queue:workingQueue block:^{
+            
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      
+                                      DDLogInfo(@"(APVPNManager) Notify others that vpn connection status changed with error: %@", _lastError.localizedDescription);
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
+                                      
+                                      // Reset last ERROR!!!
+                                      _lastError = nil;
+                                  });
+                                  
+        }];
+        //------------------
+        
         _busy = NO;
         _busyLock = [NSLock new];
 
@@ -99,14 +137,16 @@ static APVPNManager *singletonVPNManager;
                            @"There was a problem with VPN configuration, "
                            @"please contact our support team.",
                            @"(APVPNManager)  PRO version. Error, which may "
-                           @"occur in Adguard DNS module. When user turns on "
-                           @"Adguard DNS functionality.")
+                           @"occur in DNS Filtering module. When user turns on "
+                           @"DNS Filtering functionality.")
                    }];
 
         [self initDefinitions];
 
         [self attachToNotifications];
-        _vpnMode = APVpnModeUndef;
+        
+        _maxCountOfRemoteDnsServers = MAX_COUNT_OF_REMOTE_DNS_SERVERS;
+        _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
@@ -125,19 +165,99 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
+
++ (NSMutableArray <APDnsServerObject *> *)predefinedDnsServers {
+    
+    // Create default Adgaurd servers
+    
+    NSMutableArray *predefinedRemoteDnsServers = [NSMutableArray arrayWithCapacity:3];
+    APDnsServerObject *server = [[APDnsServerObject alloc]
+                                 initWithUUID: @"AGDEF00"
+                                 name: NSLocalizedString(@"System Default", @"(APVPNManager) PRO version. It is title of the mode when iOS uses DNS from current network configuration")
+                                 description: NSLocalizedString(@"default system DNS settings are used", @"(APVPNManager) PRO version. It is description of the mode when iOS uses DNS from current network configuration")
+                                 ipAddresses:@"127.0.0.1, ::1"];
+    server.tag = APDnsServerTagLocal;
+    server.editable = NO;
+    
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF01"
+              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
+              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
+              ipAddresses:@"176.103.130.130, 176.103.130.131"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF02"
+              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
+              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
+              ipAddresses:@"176.103.130.132, 176.103.130.134"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF03"
+              name: NSLocalizedString(@"OpenDNS Home", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Home.")
+              description: NSLocalizedString(@"custom filtering and identity theft protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Home' mode.")
+              ipAddresses:@"208.67.222.222, 208.67.220.220"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF04"
+              name: NSLocalizedString(@"OpenDNS Family Shield", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Family Shield.")
+              description: NSLocalizedString(@"preconfigured to block adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Family Shield' mode.")
+              ipAddresses:@"208.67.222.123, 208.67.220.123"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF06"
+              name: NSLocalizedString(@"Yandex DNS Safe", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe.")
+              description: NSLocalizedString(@"protection from virus and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
+              ipAddresses:@"77.88.8.88, 77.88.8.2"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF07"
+              name: NSLocalizedString(@"Yandex DNS Family", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family.")
+              description: NSLocalizedString(@"blocks all above and adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
+              ipAddresses:@"77.88.8.7, 77.88.8.3"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF05"
+              name: NSLocalizedString(@"Google Public DNS", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Google Public DNS.")
+              description: NSLocalizedString(@"global dns resolution service prodived by Google", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Google Public DNS' mode.")
+              ipAddresses:@"8.8.8.8, 8.8.4.4, 2001:4860:4860::8888, 2001:4860:4860::8844"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    return predefinedRemoteDnsServers;
+}
+
++ (BOOL)defaultLocalFilteringState {
+    
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_LOCAL_FILTERING_LESS_10 : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING);
+}
++ (NSUInteger)defaultDnsServerIndex {
+    
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10 : APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX);
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (NSString *)modeDescription:(APVpnMode)vpnMode{
-
-    // 'vpnMode > 0' - ignore 0
-    if (vpnMode > 0 && _vpnModeDescription.count > vpnMode) {
-        return _vpnModeDescription[vpnMode];
-    }
+- (BOOL)enabled {
     
-    return nil;
+    return _enabled;
 }
-
 - (void)setEnabled:(BOOL)enabled{
     
     _lastError = nil;
@@ -158,23 +278,54 @@ static APVPNManager *singletonVPNManager;
     [_busyLock unlock];
 }
 
-- (void)setMode:(APVpnMode)vpnMode {
-
+- (void)setActiveRemoteDnsServer:(APDnsServerObject *)activeRemoteDnsServer {
+    
     _lastError = nil;
-
+    
     [_busyLock lock];
-
+    
     if (_busy) {
-
-        _delayedSetMode = @(vpnMode);
+        
+        _delayedSetActiveRemoteDnsServer = activeRemoteDnsServer;
     } else {
         dispatch_async(workingQueue, ^{
-
-            [self internalSetMode:vpnMode];
+            
+            [self internalSetRemoteServer:activeRemoteDnsServer];
         });
     }
-
+    
     [_busyLock unlock];
+    
+}
+
+- (APDnsServerObject *)activeRemoteDnsServer {
+    
+    return _activeRemoteDnsServer;
+}
+
+- (void)setLocalFiltering:(BOOL)localFiltering {
+    
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        
+        _delayedSetLocalFiltering = @(localFiltering);
+    } else {
+        dispatch_async(workingQueue, ^{
+            
+            [self internalSetLocalFiltering:localFiltering];
+        });
+    }
+    
+    [_busyLock unlock];
+    
+}
+
+- (BOOL)localFiltering {
+    
+    return _localFiltering;
 }
 
 - (BOOL)dnsRequestsLogging {
@@ -191,9 +342,9 @@ static APVPNManager *singletonVPNManager;
 
             NSData *message;
             if (dnsRequestsLogging) {
-                message = [APMDnsLoggingEnabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogEnabled];
             } else {
-                message = [APMDnsLoggingDisabled dataUsingEncoding:NSUTF8StringEncoding];
+                message = [APSharedResources host2tunnelMessageLogDisabled];
             }
 
             NSError *err = nil;
@@ -203,78 +354,149 @@ static APVPNManager *singletonVPNManager;
                 DDLogError(@"(APVPNManager) Can't set logging DNS requests to %@: %@, %ld, %@", (dnsRequestsLogging ? @"YES" : @"NO"), err.domain, err.code, err.localizedDescription);
                 _lastError = _standartError;
             }
+            else {
+                
+                _dnsRequestsLogging = dnsRequestsLogging;
+            }
 
-            _dnsRequestsLogging = dnsRequestsLogging;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
-            return;
         }
         else {
             
-            DDLogError(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
-            _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+            DDLogWarn(@"(APVPNManager)  Can't set logging DNS requests to %@: VPN session connection is nil", (dnsRequestsLogging ? @"YES" : @"NO"));
+            _dnsRequestsLogging = NO;
+            [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
+        }
+        
+        [self sendNotification];
+    }
+}
+
+- (void)sendReloadSystemWideDomainLists {
+    
+    _lastError = nil;
+    if (_manager.connection) {
+        
+        NSData *message = [APSharedResources host2tunnelMessageSystemWideDomainListReload];
+        NSError *err = nil;
+        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
+        if (err) {
+            
+            DDLogError(@"(APVPNManager) Can't send message for reload domains lists data: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
+            _lastError = _standartError;
         }
     }
+    else {
+        
+        DDLogWarn(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
+    }
+    
+    [self sendNotification];
 }
 
 - (BOOL)clearDnsRequestsLog {
 
     _lastError = nil;
-    
-    if (_manager.connection) {
 
-        NSData *message = [APMDnsLoggingClearLog dataUsingEncoding:NSUTF8StringEncoding];
-
-        NSError *err = nil;
-        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:nil];
-        if (err) {
-
-            DDLogError(@"(APVPNManager) Can't clear log of the DNS requests: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
-            _lastError = _standartError;
-        }
-        else
-            return  YES;
-    }
-    else {
-        
-        DDLogError(@"(APVPNManager) Can't clear log of the DNS requests: VPN session connection is nil");
-        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
-    }
-    
-    return NO;
+    return [APSharedResources removeDnsLog];
 }
 
 - (void)obtainDnsLogRecords:(void (^)(NSArray<APDnsLogRecord *> *records))completionBlock {
 
     _lastError = nil;
-    if (_manager.connection) {
-
-        NSData *message = [APMDnsLoggingGiveRecords dataUsingEncoding:NSUTF8StringEncoding];
-
-        NSError *err = nil;
-        [(NETunnelProviderSession *)(_manager.connection) sendProviderMessage:message returnError:&err responseHandler:^(NSData *_Nullable responseData) {
-
-            if (responseData.length) {
-
-                NSArray<APDnsLogRecord *> *records = [NSKeyedUnarchiver unarchiveObjectWithData:responseData];
-                completionBlock(records);
-                return;
-            }
-
-            completionBlock(nil);
-        }];
-
-        if (err) {
-
-            DDLogError(@"(APVPNManager) Can't obtain log records of the DNS requests: %@, %ld, %@", err.domain, err.code, err.localizedDescription);
-            _lastError = _standartError;
-            return;
-        }
+    
+    if (completionBlock == nil) {
+        return;
     }
-    else {
+    
+    NSArray <APDnsLogRecord *> *records = [APSharedResources readDnsLog];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        DDLogError(@"(APVPNManager) Can't obtain log records of the DNS requests: VPN session connection is nil");
-        _lastError = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_CONNECTION_HANDLER userInfo:nil];
+        completionBlock(records);
+    });
+}
+
+- (BOOL)addRemoteDnsServer:(APDnsServerObject *)server {
+    
+    if (server.editable
+        && _remoteDnsServers
+        && _remoteDnsServers.count < self.maxCountOfRemoteDnsServers
+        && ! [_remoteDnsServers containsObject:server]) {
+        
+        dispatch_sync(workingQueue, ^{
+           
+            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:server];
+            [_customRemoteDnsServers addObject:server];
+            
+            [self saveCustomRemoteDnsServersToDefaults];
+        });
+        
+        return YES;
     }
+    
+    return NO;
+}
+
+- (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server {
+    
+    if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
+        
+        if ([_activeRemoteDnsServer isEqual:server]) {
+            self.activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+        }
+        
+        // async because method have not returns value
+        dispatch_sync(workingQueue, ^{
+            
+            [_customRemoteDnsServers removeObject:server];
+            _remoteDnsServers = [_predefinedRemoteDnsServers copy];
+            _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+            
+            [self saveCustomRemoteDnsServersToDefaults];
+        });
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)resetRemoteDnsServer:(APDnsServerObject *)server {
+    
+    if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
+        
+        BOOL resetEnabled = NO;
+        if ([self.activeRemoteDnsServer isEqual:server]) {
+            resetEnabled = YES;
+        }
+       __block BOOL result = NO;
+        dispatch_sync(workingQueue, ^{
+            
+            NSUInteger index = [_customRemoteDnsServers indexOfObject:server];
+            APDnsServerObject *remoteDnsServer = _customRemoteDnsServers[index];
+            if (remoteDnsServer.editable) {
+        
+                [_customRemoteDnsServers replaceObjectAtIndex:index withObject:server];
+                _remoteDnsServers = [_predefinedRemoteDnsServers copy];
+                _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+                
+                [self saveCustomRemoteDnsServersToDefaults];
+                
+                result = YES;
+            }
+        });
+        
+        if (result && resetEnabled) {
+            
+            _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+            
+            self.activeRemoteDnsServer = server;
+        }
+        return result;
+    }
+    
+    return NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -283,85 +505,129 @@ static APVPNManager *singletonVPNManager;
 //must be called on workingQueue
 - (void)internalSetEnabled:(BOOL)enabled{
     
-    if (_vpnMode == APVpnModeUndef) {
-        // if we have initial state, when vpn configuration still was not loaded.
-        _delayedSetEnabled = @(enabled);
-        return;
-    }
-    
-    if (_connectionStatus) {
+    if (enabled != _enabled) {
         
-        switch (_connectionStatus) {
-                
-            case APVpnConnectionStatusDisconnected:
-            case APVpnConnectionStatusInvalid:
-                if (enabled) {
-
-                    // check that we have connection
-                    Reachability *reach = [Reachability reachabilityForInternetConnection];
-                    if ([reach isReachable]) {
-                        NSError *err;
-                        BOOL result = [(NETunnelProviderSession *)_manager.connection
-                                       startTunnelWithOptions:nil
-                                       andReturnError:&err];
-                        if (!result || err) {
-                            
-                            DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", err.localizedDescription);
-                            _lastError = _standartError;
-                            [self sendNotification];
-                            return;
-                        }
-                        DDLogInfo(@"(APVPNManager) Tunnel started in mode: %@", [self modeDescription:_vpnMode]);
-                    }
-                    else{
-                        //Do nothing if we not have network
-                        [self sendNotification];
-                    }
-                }
-                break;
-                
-            case APVpnConnectionStatusDisconnecting:
-            case APVpnConnectionStatusConnecting:
-                _delayedSetEnabled = @(enabled);
-                break;
-                
-            case APVpnConnectionStatusReconnecting:
-            case APVpnConnectionStatusConnected:
-                if (enabled) {
-                    _delayedSetEnabled = @(YES);
-                }
-                [(NETunnelProviderSession *)_manager.connection stopTunnel];
-                DDLogInfo(@"(APVPNManager) Tunnel stoped in mode: %@",
-                          [self modeDescription:_vpnMode]);
-                break;
-
-            default:
-                break;
+        if (_activeRemoteDnsServer == nil) {
+            // if we have initial state, when vpn configuration still was not loaded.
+            _delayedSetEnabled = @(enabled);
+            return;
         }
-    }
-    else{
-        _delayedSetEnabled = @(enabled);
-        [self updateConfigurationForMode:_vpnMode enabled:enabled];
+        
+        
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer enabled:enabled];
     }
 }
 
 //must be called on workingQueue
-- (void)internalSetMode:(APVpnMode)vpnMode{
+- (void)internalSetRemoteServer:(APDnsServerObject *)server{
     
-    if (vpnMode > 0 && vpnMode != _vpnMode) {
-
-        if (_vpnMode == APVpnModeUndef) {
-            // if we have initial state, when vpn configuration still was not loaded.
-            _delayedSetMode = @(vpnMode);
-            return;
-        }
+    if (_activeRemoteDnsServer == nil) {
+        // if we have initial state, when vpn configuration still was not loaded.
+        _delayedSetActiveRemoteDnsServer = server;
+        return;
+    }
+    
+    if (server
+        && ![server isEqual:_activeRemoteDnsServer]
+        && [_remoteDnsServers containsObject:server]) {
+        
         
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForMode:vpnMode enabled:_enabled];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:server enabled:NO];
     }
 }
+
+//must be called on workingQueue
+- (void)internalSetLocalFiltering:(BOOL)localFiltering{
+    
+    if (localFiltering != _localFiltering) {
+        
+        if (_enabled) {
+            _delayedSetEnabled = @(_enabled);
+        }
+        
+        if (localFiltering) {
+            
+            if (![self prepareForLocalFiltering]) {
+                
+                DDLogError(@"Error occurred when loading Simplified domain names filter.");
+                _lastError = [NSError
+                              errorWithDomain:APVpnManagerErrorDomain
+                              code:APVPN_MANAGER_ERROR_INSTALL_FILTER
+                              userInfo:@{
+                                         NSLocalizedDescriptionKey :
+                                             NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
+                                                               @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
+                                         }];
+                DDLogErrorTrace();
+                
+                [self sendNotification];
+
+                return;
+            }
+        }
+        [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
+    }
+}
+
+/*
+//must be called on workingQueue
+- (void)internalSetTunnelEnabled:(BOOL)enabled{
+    
+    if (_connectionStatus) {
+
+        switch (_connectionStatus) {
+
+        case APVpnConnectionStatusDisconnected:
+        case APVpnConnectionStatusInvalid:
+            if (enabled) {
+
+                NSError *err;
+                BOOL result = [(NETunnelProviderSession *)_manager.connection
+                    startTunnelWithOptions:nil
+                            andReturnError:&err];
+                if (!result || err) {
+
+                    DDLogError(@"(APVPNManager) Error occurs when starting tunnel: %@", err.localizedDescription);
+                    _lastError = _standartError;
+                    [self sendNotification];
+                    return;
+                }
+                DDLogInfo(@"(APVPNManager) Tunnel started in mode: %@", [self modeDescription:_vpnMode]);
+            }
+            break;
+
+        case APVpnConnectionStatusDisconnecting:
+        case APVpnConnectionStatusConnecting:
+            _delayedSetTunnelEnabled = @(enabled);
+            break;
+
+        case APVpnConnectionStatusReconnecting:
+        case APVpnConnectionStatusConnected:
+            if (enabled) {
+                _delayedSetTunnelEnabled = @(YES);
+            }
+            [(NETunnelProviderSession *)_manager.connection stopTunnel];
+            DDLogInfo(@"(APVPNManager) Tunnel stoped in mode: %@",
+                      [self modeDescription:_vpnMode]);
+            break;
+
+        default:
+            break;
+        }
+    }
+    else{
+        
+        if (enabled) {
+            
+            _delayedSetTunnelEnabled = @(enabled);
+            [self updateConfigurationForMode:_vpnMode enabled:enabled];
+        }
+    }
+}
+*/
 
 - (void)loadConfiguration{
 
@@ -380,6 +646,17 @@ static APVPNManager *singletonVPNManager;
             if (managers.count) {
                 _manager = managers[0];
                 _protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
+                
+                //Checks that loaded configuration is related to tunnel bundle ID.
+                //If no, removes all old configurations.
+                if (! [_protocolConfiguration.providerBundleIdentifier isEqualToString:AP_TUNNEL_ID]) {
+                    for (NETunnelProviderManager *item in managers) {
+                        [item removeFromPreferencesWithCompletionHandler:nil];
+                    }
+                    
+                    _manager = nil;
+                    _protocolConfiguration = nil;
+                }
             }
         }
 
@@ -393,10 +670,14 @@ static APVPNManager *singletonVPNManager;
         });
         
         if (error) {
-            DDLogInfo(@"(APVPNManager) Loading vpn conviguration failured: %@", ([self modeDescription:_vpnMode]?: @"None"));
+            DDLogInfo(@"(APVPNManager) Loading vpn conviguration failured: %@, local filtering: %@",
+                      (self.activeRemoteDnsServer.serverName ?: @"None"),
+                      (self.localFiltering ? @"YES" : @"NO"));
         }
         else{
-            DDLogInfo(@"(APVPNManager) Vpn configuration successfully loaded: %@", ([self modeDescription:_vpnMode]?: @"None"));
+            DDLogInfo(@"(APVPNManager) Vpn configuration successfully loaded: %@, local filtering: %@",
+                      (self.activeRemoteDnsServer.serverName ?: @"None"),
+                      (self.localFiltering ? @"YES" : @"NO"));
         }
         
         [self sendNotification];
@@ -404,14 +685,42 @@ static APVPNManager *singletonVPNManager;
     
 }
 
-- (void)updateConfigurationForMode:(APVpnMode)vpnMode enabled:(BOOL)enabled{
+- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer enabled:(BOOL)enabled{
     
     [_busyLock lock];
     _busy = YES;
     [_busyLock unlock];
     
-    vpnMode = (vpnMode > 0 ? vpnMode : APVpnModeDNS);
+    if (remoteServer == nil) {
+        
+        remoteServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+    }
 
+    //Check input parameters
+    
+    if (enabled
+        && [remoteServer.tag isEqualToString:APDnsServerTagLocal]
+        && localFiltering == NO) {
+        
+        _lastError = [NSError
+                      errorWithDomain:APVpnManagerErrorDomain
+                      code:APVPN_MANAGER_ERROR_BADCONFIGURATION
+                      userInfo:@{
+                                 NSLocalizedDescriptionKey :
+                                     NSLocalizedString(@"VPN can not be enabled because you have turned off the System-wide ad blocking and are not using spoofing DNS server.",
+                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
+                                 }];
+
+        [_busyLock lock];
+        _busy = NO;
+        [_busyLock unlock];
+        
+        [self sendNotification];
+        return;
+    }
+    
+    //------
+    
     NETunnelProviderProtocol *protocol;
     NETunnelProviderManager *newManager;
     
@@ -421,12 +730,14 @@ static APVPNManager *singletonVPNManager;
     else{
         
         protocol = [NETunnelProviderProtocol new];
-        protocol.providerBundleIdentifier =  AE_HOSTAPP_ID @".tunnel";
+        protocol.providerBundleIdentifier =  AP_TUNNEL_ID;
     }
-    protocol.serverAddress = [self modeDescription:vpnMode];
+    
+    NSData *remoteServerData = [NSKeyedArchiver archivedDataWithRootObject:remoteServer];
+    protocol.serverAddress = remoteServer.serverName;
     protocol.providerConfiguration = @{
-                                       APVpnManagerParameterMode: @(vpnMode),
-                                       APVpnManagerParameterIPv4DNSAddresses: _vpnModeIPv4DNSAddresses[vpnMode]
+                                       APVpnManagerParameterLocalFiltering: @(localFiltering),
+                                       APVpnManagerParameterRemoteDnsServer: remoteServerData
                                        };
     
     if (_manager) {
@@ -435,9 +746,15 @@ static APVPNManager *singletonVPNManager;
     else{
         newManager = [NETunnelProviderManager new];
         newManager.protocolConfiguration = protocol;
+        
+        // Configure onDemand
+        NEOnDemandRuleConnect *rule = [NEOnDemandRuleConnect new];
+        rule.interfaceTypeMatch = NEOnDemandRuleInterfaceTypeAny;
+        newManager.onDemandRules = @[rule];
     }
     
     newManager.enabled = enabled;
+    newManager.onDemandEnabled = enabled;
     newManager.localizedDescription = AE_PRODUCT_NAME VPN_NAME;
     [newManager saveToPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
         if (error){
@@ -454,13 +771,17 @@ static APVPNManager *singletonVPNManager;
                 [self setStatuses];
             });
             
-            DDLogInfo(@"(APVPNManager) Updating vpn conviguration failured: %@", ([self modeDescription:_vpnMode]?: @"None"));
+            DDLogInfo(@"(APVPNManager) Updating vpn conviguration failured: %@, local filtering: %@",
+                      (self.activeRemoteDnsServer.serverName ?: @"None"),
+                      (self.localFiltering ? @"YES" : @"NO"));
             
             [self sendNotification];
             return;
         }
         
-        DDLogInfo(@"(APVPNManager) Vpn configuration successfully updated: %@", ([self modeDescription:_vpnMode]?: @"None"));
+        DDLogInfo(@"(APVPNManager) Vpn configuration successfully updated: %@, local filtering: %@",
+                  (self.activeRemoteDnsServer.serverName ?: @"None"),
+                  (self.localFiltering ? @"YES" : @"NO"));
         
         [self loadConfiguration];
     }];
@@ -468,12 +789,23 @@ static APVPNManager *singletonVPNManager;
 
 - (void)setStatuses{
     
+    _enabled = NO;
+    
     if (_manager) {
         
-        _vpnMode = [_protocolConfiguration.providerConfiguration[APVpnManagerParameterMode] intValue];
+        NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
         
-        if (_manager.enabled) {
+        // Getting current settings from configuration.
+        //If settings are incorrect, then we assign default values.
+        _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+        _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
+        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPNManager.defaultLocalFilteringState;
+        //-------------
+        
+        if (_manager.enabled && _manager.onDemandEnabled) {
             
+            _enabled = YES;
+
             switch (_manager.connection.status) {
                     
                 case NEVPNStatusDisconnected:
@@ -508,22 +840,9 @@ static APVPNManager *singletonVPNManager;
         }
     }
     else{
-        _vpnMode = APVpnModeNone;
+        _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
+        _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisabled;
-    }
-    
-    // set agregated status (_enabled)
-    switch (_connectionStatus) {
-            
-        case APVpnConnectionStatusConnecting:
-        case APVpnConnectionStatusReconnecting:
-        case APVpnConnectionStatusConnected:
-            _enabled = YES;
-            break;
-
-        default:
-            _enabled = NO;
-            break;
     }
     
     // start delayed
@@ -541,7 +860,7 @@ static APVPNManager *singletonVPNManager;
     id observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNConfigurationChangeNotification
                    object: nil //_manager
-                   queue:nil
+                   queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                        
                        // When configuration is changed
@@ -555,7 +874,7 @@ static APVPNManager *singletonVPNManager;
     observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNStatusDidChangeNotification
                 object: nil //_manager.connection
-                   queue:nil
+                   queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                        
                        // When connection status is changed
@@ -574,16 +893,26 @@ static APVPNManager *singletonVPNManager;
     if (!_busy) {
         
         if (_lastError) {
-            _delayedSetEnabled = _delayedSetMode = nil;
+            _delayedSetEnabled = nil;
+            _delayedSetActiveRemoteDnsServer = nil;
+            _delayedSetLocalFiltering = nil;
         }
         
         int localValue = 0;
-        if (_delayedSetMode) {
-            localValue = [_delayedSetMode intValue];
-            _delayedSetMode = nil;
+        if (_delayedSetActiveRemoteDnsServer) {
+            APDnsServerObject *server = _delayedSetActiveRemoteDnsServer;
+            _delayedSetActiveRemoteDnsServer = nil;
             dispatch_async(workingQueue, ^{
                
-                [self internalSetMode:localValue];
+                [self internalSetRemoteServer:server];
+            });
+        }
+        else if (_delayedSetLocalFiltering){
+            
+            localValue = [_delayedSetLocalFiltering boolValue];
+            _delayedSetLocalFiltering = nil;
+            dispatch_async(workingQueue, ^{
+                [self internalSetLocalFiltering:localValue];
             });
         }
         else if (_delayedSetEnabled){
@@ -600,28 +929,70 @@ static APVPNManager *singletonVPNManager;
 }
 
 - (void)initDefinitions{
-
-    _vpnModeDescription = @[
-                            NSLocalizedString(@"Default system DNS", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is desabled and iOS uses DNS from current network configuration")
-                            , NSLocalizedString(@"Default", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard DNS, where only 'regular' ads will be blocked")
-                            , NSLocalizedString(@"Family Protection", @"(APVPNManager) PRO version. It is title of the mode when fake VPN is enabled and iOS uses Adguard Famaly DNS")
-                            ];
-    _vpnModeIPv4DNSAddresses = @[
-                             @[]
-                             , @[@"176.103.130.130",@"176.103.130.131"]
-                             , @[@"176.103.130.132", @"176.103.130.134"]
-                             ];
+    
+        // Create default Adgaurd servers
+        
+    _predefinedRemoteDnsServers = APVPNManager.predefinedDnsServers;
+    
+    _remoteDnsServers = [_predefinedRemoteDnsServers copy];
+    
+    [self loadCustomRemoteDnsServersFromDefaults];
+    _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
 }
 
 - (void)sendNotification{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
-        
-        // Reset last ERROR!!!
-        _lastError = nil;
-    });
+    
+    [_delayedSendNotify executeOnceAfterCalm];
+}
 
+- (void)saveCustomRemoteDnsServersToDefaults {
+    
+    NSData *dataForSave = [NSKeyedArchiver archivedDataWithRootObject:_customRemoteDnsServers];
+    
+    if (dataForSave) {
+        [[AESharedResources sharedDefaults] setObject:dataForSave forKey:APDefaultsCustomRemoteDnsServers];
+        [[AESharedResources sharedDefaults] synchronize];
+    }
+}
+
+- (void)loadCustomRemoteDnsServersFromDefaults {
+ 
+    NSData *loadedData = [[AESharedResources sharedDefaults] objectForKey:APDefaultsCustomRemoteDnsServers];
+    
+    if (loadedData) {
+        _customRemoteDnsServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
+    }
+    else {
+        _customRemoteDnsServers = [NSMutableArray arrayWithCapacity:MAX_COUNT_OF_REMOTE_DNS_SERVERS];
+    }
+}
+
+/**
+ Checks that Simplified Domain Names Filter was installed. If not, installs it.
+ */
+- (BOOL)prepareForLocalFiltering {
+ 
+    AESAntibanner *antibanner = [[AEService singleton] antibanner];
+    if ([antibanner checkIfFilterInstalled:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
+        
+        return YES;
+    }
+    else {
+        
+        NSArray *filters = [[[antibanner metadataForSubscribe:NO] filters]
+                            filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId == %@", @(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
+        if (filters.count == 1) {
+            ASDFilterMetadata *filter = filters[0];
+            
+            filter.removable = @(NO);
+            filter.editable = @(NO);
+            filter.enabled = @(NO);
+
+            return [antibanner subscribeFilters:filters jobController:nil];
+        }
+    }
+
+    return NO;
 }
 
 @end

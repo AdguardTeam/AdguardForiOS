@@ -45,6 +45,8 @@
 #pragma mark Properties and public methods
 
 @property (nonatomic, readonly) NWUDPSession *udpSession;
+@property (nonatomic, readonly) NWUDPSession *whitelistUdpSession;
+
 @property (nonatomic, readonly, weak) APTunnelConnectionsHandler *delegate;
 
 /**

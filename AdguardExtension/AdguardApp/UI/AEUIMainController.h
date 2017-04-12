@@ -41,8 +41,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdated;
 @property (weak, nonatomic) IBOutlet UITableViewCell *checkFiltersCell;
 
+@property (weak, nonatomic) IBOutlet UISwitch *proStatusSwitch;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *proSectionCells;
-@property (weak, nonatomic) IBOutlet UITableViewCell *proAdguardDnsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *proStatusCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *proSystemWideCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *proDnsSettingsCell;
+
+
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 
 
 - (IBAction)toggleAdguard:(id)sender;
@@ -54,9 +61,8 @@
 - (IBAction)clickCheckForUpdates:(id)sender;
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
-
-- (IBAction)clickDNS:(id)sender;
-
+- (IBAction)clickGetPro:(id)sender;
+- (IBAction)proToggleStatus:(id)sender;
 
 /**
  Adds rule to User filter.

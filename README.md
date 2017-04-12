@@ -11,6 +11,10 @@ Adguard for iOS will come in a form of a free browser extension. The development
 Adguard for iOS can be downloaded from AppStore:
 https://itunes.apple.com/us/app/adguard-adblock-privacy-protection/id1047223162?mt=8
 
+### How to become a beta tester?
+
+All information related to Adguard beta-testing is collected in this [blog article](https://blog.adguard.com/en/adguard-beta-test/). 
+
 ### Requirements
 Aaguard app uses content blocking API, which is only available on 64-bit devices. This means the supported devices are: iPhone 5s, iPhone 6, iPhone 6 Plus, iPhone 6s, iPhone 6s Plus, iPad Air, iPad Air Wi-Fi + Cellular, iPad mini 2, iPad mini 2 Wi-Fi + Cellular, iPad Air 2, iPad Air 2 Wi-Fi + Cellular, iPad mini 3, iPad mini 3 Wi-Fi + Cellular, iPad mini 4, iPad mini 4 Wi-Fi + Cellular, iPad Pro, iPad Pro Wi-Fi + Cellular and iPod touch (6th generation).
 
@@ -24,8 +28,11 @@ If you want to see what's in our nearest plans, or would like to submit a new bu
 
 ### Releases
 
-Latest stable version: 1.0.8 <br/>
-Latest beta: 1.0.8
+Latest stable free version: 1.2.0 <br/>
+Latest free beta: 1.2.0
+
+Latest stable PRO version: 1.2.0 <br/>
+Latest PRO beta: 1.2.0
 
 iOS versions: https://github.com/AdguardTeam/AdguardForiOS/releases
 

@@ -15,22 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import <UIKit/UIKit.h>
+#import "AEUICustomTextEditorController.h"
 
-@interface AEUIRulesController : UITableViewController <UISearchResultsUpdating>{
+@class ASDFilterRule;
 
-@protected
-    NSString *_ruleTextHolder;
-    
-    NSInteger _newRuleCount;
-}
+@interface AEUIRulesController : NSObject <AEUICustomTextEditorControllerDelegate>
 
-/**
- If this propetry defined, when controller is became active, 
- it attempts add new rule with this value into user filter.
- */
-@property (nonatomic) NSString *ruleTextForAdding;
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
++ (AEUIRulesController *)createUserFilterControllerWithSegue:(UIStoryboardSegue *)segue
+                             ruleTextHolderForAddRuleCommand:(NSString *)ruleTextHolderForAddRuleCommand;
 
 @end

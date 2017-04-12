@@ -67,9 +67,19 @@
     self.filterInfo.text = NSLocalizedString(@"Loading info...", @"(AEUISubscriptionController) Title on bottom bar.");
     self.rulesInfo.text = @"";
 
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(appDidActive:)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
+
     [self setToolbar];
     [self setNavigationBar];
     [self updateStatusInfo];
+}
+
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -192,7 +202,7 @@
      if ([segue.identifier isEqualToString:@"filterDetail"]) {
          
          AEUISubscriptionFilterDetailController *destination = [segue destinationViewController];
-         ASDFilterMetadata *meta = [self filterForSelectedRow];
+         AEUISubscriptionSectionFilterMetadata *meta = [self filterForSelectedRow];
          destination.meta = meta;
          destination.parent = self;
          destination.selectedFilterCellPath = [self.tableView indexPathForSelectedRow];
@@ -278,7 +288,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         return nil;
     }
     
-    cell.textLabel.text = meta.localization.name;
+    cell.textLabel.text = meta.i18nName;
 
     BOOL enabled = [meta.enabled boolValue];
     
@@ -623,6 +633,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         [[[AEService singleton] antibanner] rollbackTransaction];
         [self editDoneClick:self];
     }];
+}
+
+- (void)appDidActive:(NSNotification *)noti {
+
+    [self updateStatusInfo];
 }
 
 @end

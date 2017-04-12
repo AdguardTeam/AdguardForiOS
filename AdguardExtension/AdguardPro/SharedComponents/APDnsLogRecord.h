@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class APDnsResponse, APDnsRequest;
+@class APDnsResponse, APDnsRequest, APDnsServerObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogRecord
@@ -36,7 +36,7 @@
  
  @return Returns object, or nil if error occurs.
  */
-- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort vpnMode:(NSNumber *)vpnMode;
+- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(APDnsServerObject *)dnsServer localFiltering:(BOOL)localFiltering;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -54,9 +54,23 @@
 */
 @property (readonly, nonatomic) NSString *srcPort;
 /**
- Mode of the VPN connection (see type APVpnMode in APVPNManager.h)
+ DNS server description.
  */
-@property (readonly, nonatomic) NSNumber *vpnMode;
+@property (readonly, nonatomic) APDnsServerObject *dnsServer;
+/**
+ Flag that defianes filtering locally, 
+ using "Simplified domain names filter" filter rules.
+ */
+@property (readonly, nonatomic) BOOL localFiltering;
+/**
+ Indicates that this record contains domain from whitelist.
+ */
+@property (nonatomic) BOOL isWhitelisted;
+/**
+ Indicates that this record contains domain from blacklist.
+ blacklist - this is rules list from the User Filter, which have syntax `||domain.name^`
+ */
+@property (nonatomic) BOOL isBlacklisted;
 /**
  DNS request.
  */

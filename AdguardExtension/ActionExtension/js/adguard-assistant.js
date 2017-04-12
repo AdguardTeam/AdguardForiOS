@@ -64,7 +64,7 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       var len = selectedElements.length;
       if (len) {
         var item = selectedElements[len - 1];
-        var item = ruleConstructor.constructRuleText(item,{'domain': document.domain});
+        var item = ruleConstructor.constructRuleText(item,{'url': document.URL, 'ruleType': 'CSS'});
         if (item) {
           item = acceptUrlScheme + '://add/' + encodeURIComponent(item);
           document.location = item;
@@ -425,10 +425,10 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
   // PUBLIC API
   api.init = function (settings) {
     // default vaules
-    i18n = typeof settings.i18n !== 'undefined' ? settings.i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
+    i18n = (typeof settings !== 'undefined' && typeof settings.i18n !== 'undefined') ? settings.i18n : {'buttons':{'plus':'+', 'minus':'-', 'accept':'Accept', 'cancel': 'Cancel', 'preview': 'Preview'}};
 
     //set accept url scheme
-    acceptUrlScheme = typeof settings.urlScheme !== 'undefined' ? settings.urlScheme : "adguard";
+    acceptUrlScheme = (typeof settings !== 'undefined' && typeof settings.urlScheme !== 'undefined') ? settings.urlScheme : "adguard";
 
     api.close();
     // elemSelector.init(function(element){

@@ -24,6 +24,7 @@
 #import "ASDatabase/ASDatabase.h"
 #import "FMDatabase+InMemoryOnDiskIO.h"
 #import "FMSQLStatementSplitter.h"
+#import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
 
 #define DB_SCHEME_FILE_NAME     @"schema.sql"
 #define DB_SCHEME_PATTERN       @"schema*.sql"
@@ -96,6 +97,8 @@ int main(int argc, const char * argv[])
         
         if (![fileManager fileExistsAtPath:dbPath]){
             
+            NSString *dbPath = [productPath stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME];
+            
             db = [FMDatabase databaseWithPath:nil];
             
             if (![db open]) {
@@ -104,60 +107,51 @@ int main(int argc, const char * argv[])
             }
             
             if ([[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
-                
+
 #pragma mark *** Get filters data from backend and insert to DB
-                
-                ABECFilterClient *filterClient = [[ABECFilterClient alloc] initWithPlatform:ABEC_PLATFORM_IOS];
-                
-                NSArray *groupMetaList = [filterClient groupMetadataListForApp:[ADProductInfo applicationID]];
-                
-                if (!groupMetaList) {
+                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
+                if (!metadata) {
                     
-                    NSLog(@"Error creating DB: Can't load filter group data from backend service.");
+                    NSLog(@"Error creating DB: Can't load filters/groups metadata from backend service.");
+                    exit(1);
+                }
+                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] i18n];
+                if (!i18n) {
+                    
+                    NSLog(@"Error creating DB: Can't load filters/groups i18n data from backend service.");
                     exit(1);
                 }
                 
-                for (ASDFilterGroup *item in groupMetaList) {
+                for (ASDFilterGroup *item in metadata.groups) {
                     
                     [db executeUpdate:@"insert into filter_groups (group_id, name, display_number) values (?, ?, ?)", item.groupId, item.name, item.displayNumber];
                     
-                    for (ASDFilterGroupLocalization *locale in [item.localizations  allValues]) {
-                        
-                        [db executeUpdate:@"insert into filter_group_localizations (group_id, lang, name) values (?, ?, ?)",
-                         locale.groupId, locale.lang, locale.name];
-                    }
+                }
+                for (ASDFilterGroupLocalization *locale in i18n.groups.localizations) {
+                    
+                    [db executeUpdate:@"insert into filter_group_localizations (group_id, lang, name) values (?, ?, ?)",
+                     locale.groupId, locale.lang, locale.name];
                 }
                 
-                NSArray *metadataList = [filterClient filterMetadataListForApp:[ADProductInfo applicationID]];
-                
-                if (!metadataList) {
+                for (ASDFilterMetadata *meta in metadata.filters) {
                     
-                    NSLog(@"Error creating DB: Can't load filter data from backend service.");
-                    exit(1);
-                }
-                
-                for (ASDFilterMetadata *meta in metadataList) {
-                    
-                    [db executeUpdate:@"insert into filters (filter_id, group_id, version, display_number, name, description, homepage, expires) values (?, ?, ?, ?, ?, ?, ?, ?)",
-                     meta.filterId, meta.groupId, meta.version, meta.displayNumber, meta.name, meta.descr, meta.homepage, meta.expires];
+                    [db executeUpdate:@"insert into filters (filter_id, group_id, version, display_number, name, description, homepage, expires, subscriptionUrl) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                     meta.filterId, meta.groupId, meta.version, meta.displayNumber, meta.name, meta.descr, meta.homepage, meta.expires, meta.subscriptionUrl];
                     
                     for (NSString *lang in meta.langs)
                         [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
                     
-                    for (ASDFilterLocalization *locale in [meta.localizations allValues])
-                        [db executeUpdate:@"insert into filter_localizations (filter_id, lang, name, description) values (?, ?, ?, ?)",
-                         meta.filterId, locale.lang, locale.name, locale.descr];
-                    
                 }
-                
-                NSArray *versions = [filterClient filterVersionListForApp:[ADProductInfo applicationID] filterIds:[metadataList valueForKey:@"filterId"]];
+                for (ASDFilterLocalization *locale in i18n.filters.localizations)
+                    [db executeUpdate:@"insert into filter_localizations (filter_id, lang, name, description) values (?, ?, ?, ?)",
+                     locale.filterId, locale.lang, locale.name, locale.descr];
                 
                 ASDFilter *filterData;
-                for (ASDFilterMetadata *version in versions) {
+                for (ASDFilterMetadata *version in metadata.filters) {
                     
-                    [db executeUpdate:@"update filters set last_update_time = datetime(?), version = ?, last_check_time = datetime(?) where filter_id = ?", version.updateDateString, version.version, [[NSDate date] iso8601String] , version.filterId ];
+                    //                    [db executeUpdate:@"update filters set last_update_time = datetime(?), version = ?, last_check_time = datetime(?) where filter_id = ?", version.updateDateString, version.version, [[NSDate date] iso8601String] , version.filterId ];
                     
-                    filterData = [filterClient filterForApp:[ADProductInfo applicationID] affiliateId:@"" filterId:[version.filterId integerValue]];
+                    filterData = [[ABECFilterClient singleton] filterWithFilterId:version.filterId];
                     
                     if (filterData && filterData.rules.count)
                         for (ASDFilterRule *rule in filterData.rules)
@@ -165,18 +159,27 @@ int main(int argc, const char * argv[])
                     
                 }
                 
-                
-                
-                [db writeToFile:[productPath stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME]];
+                [db writeToFile:dbPath];
             }
             else{
                 
-                NSLog(@"Error creating DB from scheme: %@", [productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]);
+                NSLog(@"Error creating DB from scheme: %@", dbPath);
                 exit(1);
             }
             
             // close db
             [db close];
+            
+            // gzip default DB
+            NSData *dbData = [NSData dataWithContentsOfFile:dbPath];
+            if (dbData.length) {
+                dbData = [dbData gzippedData];
+            }
+            if (! [dbData writeToFile:[dbPath stringByAppendingString:@".gz"] atomically:YES]) {
+                
+                NSLog(@"Error compressing DB: %@", dbPath);
+                exit(1);
+            }
             
         }
         

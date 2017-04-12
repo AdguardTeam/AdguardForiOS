@@ -20,7 +20,12 @@
 @interface AEUIAdvSettingsController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UISwitch *simplifiedButton;
+@property (strong, nonatomic) IBOutlet UISwitch *wifiButton;
+@property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
+
 
 - (IBAction)toggleSimplified:(id)sender;
+- (IBAction)toggleWifiOnly:(id)sender;
 
 @end

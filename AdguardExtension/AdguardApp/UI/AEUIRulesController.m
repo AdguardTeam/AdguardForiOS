@@ -17,421 +17,178 @@
 */
 #import "AEUIRulesController.h"
 #import "ACommons/ACLang.h"
-#import "ACommons/ACSystem.h"
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
-#import "AEUIEditRuleController.h"
 #import "AEUIFilterRuleObject.h"
-#import "AESharedResources.h"
-#import "AEFilterRuleSyntaxConstants.h"
-#import "AppDelegate.h"
-#import "AEUILoadingModal.h"
 #import "AEUIUtils.h"
 
-@interface AEUIRulesController (){
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AEUIRulesController
 
-    AEUIEditRuleController *_editRuleController;
-    id _observerObject;
+@implementation AEUIRulesController{
+    
+    NSString *_ruleTextHolderForAddRuleCommand;
 }
 
-@property NSMutableArray *rules;
-@property (strong, nonatomic) UISearchController *searchController;
+/////////////////////////////////////////////////////////////////////
+#pragma mark - Public methods
 
-@end
-
-@implementation AEUIRulesController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
++ (AEUIRulesController *)createUserFilterControllerWithSegue:(UIStoryboardSegue *)segue
+                             ruleTextHolderForAddRuleCommand:(NSString *)ruleTextHolderForAddRuleCommand{
     
-    _ruleTextHolder = @"";
     
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
+    AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    self.definesPresentationContext = YES;
+    rulesList.textForPlaceholder = NSLocalizedString(@"Enter your custom rules here, separated by line breaks.",
+                                                     @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. This is the text shown when the User Filter is empty.");
     
-    [self reloadRulesAndScrollBottom:NO];
+    rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
     
-    _newRuleCount = 0;
-    self.addButton.enabled = NO;
-    [[AEService singleton] onReloadContentBlockingJsonComplete:^{
+    [rulesList setLoadingStatus:YES];
+    
+    AEUIRulesController *result = [AEUIRulesController new];
+    
+    result->_ruleTextHolderForAddRuleCommand = ruleTextHolderForAddRuleCommand;
+    
+    ASSIGN_WEAK(result);
+    rulesList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self calculateNewRuleCount];
-            [self addRuleWhenActivateIfExists];
-        });
-    }];
-
-    _observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication] queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-
-//        if (! [self.navigationController.topViewController isEqual:self]) {
-//            [self.navigationController popToViewController:self animated:YES];
-//        }
-        _newRuleCount = 0;
-        [[AEService singleton] onReloadContentBlockingJsonComplete:^{
+        NSMutableArray *rules = [NSMutableArray array];
+        @autoreleasepool {
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self calculateNewRuleCount];
-                [self reloadRulesAndScrollBottom:NO];
-                // check that controller on top
-                if ([self.navigationController.topViewController isEqual:self]) {
-                    // on top
-                    [self addRuleWhenActivateIfExists];
-                }
-            });
-        }];
-    }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc{
-    
-    if (_observerObject) {
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:_observerObject];
-    }
-}
-
-
-#pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 0;
-//}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.rules.count;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ruleCellView" forIndexPath:indexPath];
-    
-
-    NSArray *rules = self.rules;
-    NSInteger row = indexPath.row;
-    if (row < rules.count) {
-        
-        AEUIFilterRuleObject *rule = rules[row];
-        if (rule) {
-            cell.textLabel.text = rule.ruleText;
-            cell.textLabel.textColor = rule.textColor;
-            cell.textLabel.font = rule.font;
-            return cell;
-        }
-    }
-
-    return nil;
-}
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        // Delete the row from the data source
-        ASDFilterRule *rule = self.rules[[indexPath row]];
-        if (!rule) {
-            return;
-        }
-        
-        void (^remove)() = ^{
-
-            [[AEService singleton] removeRules:@[rule]];
-            [self.rules removeObjectAtIndex:[indexPath row]];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-            [[[AEService singleton] antibanner] endTransaction];
-
-        };
-        
-        [[[AEService singleton] antibanner] beginTransaction];
-        
-        if ([rule.ruleText hasPrefix:COMMENT]) {
+            NSMutableCharacterSet *delimCharSet;
             
-            remove();
-        }
-        else{
+            delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
             
-            // disable rule temporarily
-            [[[AEService singleton] antibanner] setRules:@[rule.ruleId] filter:rule.filterId enabled:NO];
-            
-            [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+            for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                 
-                // delete rule permanently
-                remove();
-                
-                _newRuleCount++;
-                
-            }rollbackBlock:^{
-                
-                // enable rule (rollback)
-                
-                [[[AEService singleton] antibanner] rollbackTransaction];
-                
-                [tableView setEditing:NO animated:YES];
-                
-            }];
-        }
-    }
-}
-
-#pragma mark - Navigation
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-
-    if ([identifier isEqualToString:@"newRule"]) {
-        
-        return [self checkNewRuleCountWithAlert];
-    }
-    
-    return YES;
-}
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    
-    _editRuleController = segue.destinationViewController;
-    
-    if ([segue.identifier isEqualToString:@"newRule"]){
-        
-        _editRuleController.navigationItem.title = NSLocalizedString(@"Enter Rule", @"(AEUIRulesController) New rule title");
-    }
-    else if ([segue.identifier isEqualToString:@"editRule"]) {
-        _editRuleController.navigationItem.title = NSLocalizedString(@"Edit Rule", @"(AEUIRulesController) Edit rule title");
-        
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        AEUIFilterRuleObject *rule = self.rules[[path row]];
-        if (rule) {
-            _editRuleController.rule = rule;
-            _ruleTextHolder = rule.ruleText;
-        }
-    }
-    // Pass the selected object to the new view controller.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    
-    if (_editRuleController && _editRuleController.done) {
-        
-        ASDFilterRule *rule = _editRuleController.rule;
-        if ([rule.ruleId unsignedIntegerValue] == 0) {
-            
-            // New rule
-            [self addNewRule:rule];
-        }
-        else{
-            // Update rule
-
-            // check that rule change count of new rules
-            // was commet, became rule
-            if (![rule.ruleText hasPrefix:COMMENT] && [_ruleTextHolder hasPrefix:COMMENT]) {
-                
-                if (_newRuleCount <= 0) {
-                    
-                    rule.ruleText = _ruleTextHolder;
-                    _editRuleController = nil;
-                    
-                    [ACSSystemUtils showSimpleAlertForController:self
-                                                       withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when rule was changed and max rules limit exceeded.")
-                                                         message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(AEUIRulesController) Alert message. Error when rule was changed and max rules limit exceeded.")];
-                    return;
+                if (item.length) {
+                    ASDFilterRule *rule = [[ASDFilterRule alloc] initWithText:item enabled:YES];
+                    if (rule) {
+                        [rules addObject:rule];
+                    }
                 }
             }
-            //------------------------------------------
+        }
+        
+        @autoreleasepool {
             
             [[[AEService singleton] antibanner] beginTransaction];
-            
-            NSError *error = [[AEService singleton] updateRule:rule oldRuleText:_ruleTextHolder];
-            if (error){
+            [AEUIUtils replaceUserFilterRules:rules withController:editor completionBlock:^{
                 
-                [[[AEService singleton] antibanner] rollbackTransaction];
-                
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-                    
-                    rule.ruleText = _ruleTextHolder;
-                    [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-                }
-            }
-            else {
-                
-                // ---- Completion Block ----------------
-                dispatch_block_t completionBlock = ^(){
-
-                    [[[AEService singleton] antibanner] endTransaction];
-                };
-                
-                // ---- Rollback Block ----------------
-                dispatch_block_t rollbackBlock = ^(){
-                    
-//                    NSString *ruleText = _ruleTextHolder;
-//                    _ruleTextHolder = rule.ruleText;
-//                    rule.ruleText = ruleText;
-//                    
-//                    [[AEService singleton] updateRule:rule oldRuleText:_ruleTextHolder];
-                    [[[AEService singleton] antibanner] rollbackTransaction];
-                    [self reloadRulesAndScrollBottom:NO];
-                };
-                // -----------------------------------
-                
-                [self reloadRulesAndScrollBottom:NO];
-
-                // was commet, became rule
-                if (![rule.ruleText hasPrefix:COMMENT] && [_ruleTextHolder hasPrefix:COMMENT]) {
-                    
-                    _newRuleCount--;
-                    [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
-                }
-                // was rule, became comment
-                else if ([rule.ruleText hasPrefix:COMMENT] && ![_ruleTextHolder hasPrefix:COMMENT]){
-                    
-                    _newRuleCount++;
-                    [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
-                }
-                else if (![rule.ruleText hasPrefix:COMMENT]){
-                    
-                    [AEUIUtils invalidateJsonWithController:self completionBlock:completionBlock rollbackBlock:rollbackBlock];
-                }
-            }
-        }
-    }
-    _editRuleController = nil;
-}
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Search Bar Delegates
-/////////////////////////////////////////////////////////////////////
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
-    
-    [self reloadRulesAndScrollBottom:NO];
-}
-
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Private methods
-/////////////////////////////////////////////////////////////////////
-
-- (void)reloadRulesAndScrollBottom:(BOOL)bottom {
-
-    dispatch_async(
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-          @autoreleasepool {
-              NSArray *rules = [[[AEService singleton] antibanner]
-                  rulesForFilter:@(ASDF_USER_FILTER_ID)];
-              NSString *searchString = self.searchController.searchBar.text;
-
-              if (![NSString isNullOrEmpty:searchString]) {
-
-                  rules = [rules
-                      filteredArrayUsingPredicate:
-                          [NSPredicate
-                              predicateWithFormat:@"ruleText CONTAINS[cd] %@",
-                                                  searchString]];
-              }
-              NSMutableArray *uiRules = [NSMutableArray array];
-              self.rules = uiRules;
-              for (ASDFilterRule *item in rules) {
-
-                  [uiRules addObject:[[AEUIFilterRuleObject alloc]
-                                         initWithRule:item]];
-              }
-
-              dispatch_async(dispatch_get_main_queue(), ^{
-
-                [self.tableView reloadData];
-                if (bottom && self.rules.count) {
-                    [self.tableView
-                        scrollToRowAtIndexPath:
-                            [NSIndexPath indexPathForRow:(self.rules.count - 1)
-                                               inSection:0]
-                              atScrollPosition:UITableViewScrollPositionMiddle
-                                      animated:YES];
-                }
-              });
-          }
-        });
-}
-
-- (void)calculateNewRuleCount{
-    
-    self.addButton.enabled = YES;
-    NSNumber *maxLimit = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules];
-    NSNumber *converted = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-    _newRuleCount = [maxLimit unsignedIntegerValue] - [converted unsignedIntegerValue];
-}
-
-- (BOOL)checkNewRuleCountWithAlert{
-    
-    return YES;
-}
-
-- (void)addRuleWhenActivateIfExists{
-    
-    if (![NSString isNullOrEmpty:_ruleTextForAdding]) {
-        if ([self checkNewRuleCountWithAlert]) {
-        
-            ASDFilterRule *rule = [ASDFilterRule new];
-            rule.ruleText = _ruleTextForAdding;
-            rule.isEnabled = @(YES);
-            _ruleTextForAdding = nil;
-            [self addNewRule:rule];
-        }
-    }
-}
-
-- (void)addNewRule:(ASDFilterRule *)rule{
-    
-    [[[AEService singleton] antibanner] beginTransaction];
-    
-    NSError *error = [[AEService singleton] addRule:rule temporarily:NO];
-    if (error){
-        
-        [[[AEService singleton] antibanner] rollbackTransaction];
-        
-        if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-            
-            rule.ruleText = _ruleTextHolder;
-            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-        }
-    }
-    else {
-        [self reloadRulesAndScrollBottom:YES];
-        
-        // if rule is not comment decrease counter of the new rules
-        if (![rule.ruleText hasPrefix:COMMENT]) {
-            
-            _newRuleCount--;
-            
-            NSInteger newRuleCountHolder = _newRuleCount;
-            [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-                
-                _newRuleCount = newRuleCountHolder;
+                //Success
+                ASSIGN_STRONG(result);
                 [[[AEService singleton] antibanner] endTransaction];
                 
-            } rollbackBlock:^{
+                [editor setLoadingStatus:YES];
+                [USE_STRONG(result) reloadUserFilterDataForEditorController:editor];
                 
-                _newRuleCount = newRuleCountHolder + 1;
+            } rollbackBlock:^(NSError *error) {
+                //Failure
                 [[[AEService singleton] antibanner] rollbackTransaction];
-                [self reloadRulesAndScrollBottom:YES];
+                
+                if (error.code == AES_ERROR_UNSUPPORTED_RULE ) {
+                    
+                    ASDFilterRule *rule = error.userInfo[AESUserInfoRuleObject];
+                    if (rule) {
+                        [editor selectWithType:AETESelectionTypeError text:rule.ruleText];
+                    }
+                }
+                
             }];
         }
         
-    }
+        return NO;
+    };
+    
+    rulesList.auxiliaryObject = result;
+    rulesList.delegate = result;
+    
+    return result;
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Delegates
+
+
+- (void)editorDidAppear:(AEUICustomTextEditorController *)editor {
+    
+//    if ([NSString isNullOrEmpty:self->_ruleTextHolderForAddRuleCommand]) {
+    
+        [editor setLoadingStatus:YES];
+        [self reloadUserFilterDataForEditorController:editor];
+//    }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Private methods
+
+- (void)reloadUserFilterDataForEditorController:(AEUICustomTextEditorController *)editor {
+    
+    ASSIGN_WEAK(self);
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                       @autoreleasepool {
+                           
+                           //create attributed text with all rules
+                           NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
+                                                                        initWithString:@""
+                                                                        attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                           
+                           NSArray *rules = [[[AEService singleton] antibanner]
+                                             rulesForFilter:@(ASDF_USER_FILTER_ID)];
+                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
+                                                                                         attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                           AEUIFilterRuleObject *obj;
+                           for (ASDFilterRule *item in rules) {
+                               
+                               obj = [[AEUIFilterRuleObject alloc]
+                                      initWithRule:item];
+                               if (obj) {
+                                   [attributedText appendAttributedString:obj.attributeRuteText];
+                                   [attributedText appendAttributedString:newline];
+                               }
+                           }
+                           
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               
+                               ASSIGN_STRONG(self);
+                               if ([NSString isNullOrEmpty:USE_STRONG(self)->_ruleTextHolderForAddRuleCommand]) {
+                                   // assign attributed text with all rules
+                                   editor.attributedTextForEditing = attributedText;
+                               }
+                               else {
+                                   // if this is launch from AG Assistent
+                                   
+                                   NSAttributedString *obj = [[NSAttributedString alloc] initWithString:USE_STRONG(self)->_ruleTextHolderForAddRuleCommand
+                                                                                             attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                                   if (obj) {
+                                       
+                                       [attributedText appendAttributedString:obj];
+                                       [attributedText appendAttributedString:newline];
+                                   }
+                                   
+                                   // assign attributed text with all rules
+                                   editor.attributedTextForEditing = attributedText;
+                                   
+                                   self->_ruleTextHolderForAddRuleCommand = nil;
+                                   
+                                   // scroll to bottom
+                                   NSRange bottom = NSMakeRange(attributedText.length - 1, 1);
+                                   [editor.editorTextView scrollRangeToVisible:bottom];
+                                   
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       
+                                       [editor clickDone:editor.doneButton];
+                                   });
+
+                               }
+                               
+                           });
+                       }
+                   });
+    
 }
 
 @end

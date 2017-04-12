@@ -29,7 +29,7 @@
 
 @property (nonatomic, assign) int batchOperation;
 
-@property (nonatomic, weak) UITableViewCell * cell;
+@property (nonatomic, strong) UITableViewCell * cell;
 
 @property (nonatomic, strong) NSIndexPath * originalIndexPath;
 
@@ -52,7 +52,7 @@
 }
 
 - (BOOL)hidden {
-    return (self.hiddenPlanned || self.hiddenPlanned);
+    return self.hiddenPlanned;
 }
 
 - (void)setHidden:(BOOL)hidden {
@@ -96,7 +96,7 @@
 - (NSInteger)numberOfVissibleRows {
     NSInteger count = 0;
     for (OriginalRow * or in self.rows) {
-        if (!or.hidden) {
+        if (!or.hiddenReal) {
             ++count;
         }
     }
@@ -165,6 +165,7 @@
                 
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView.dataSource tableView:tableView cellForRowAtIndexPath:ip];
+                tableViewRow.height = [tableView.delegate tableView:tableView heightForRowAtIndexPath:ip];
                 
                 NSAssert(tableViewRow.cell != nil, @"cannot be nil");
                 
@@ -185,6 +186,47 @@
     }
     
     return self;
+}
+
+- (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    OriginalSection *originalSection = self.sections[indexPath.section];
+    
+    OriginalRow * tableViewRow = [OriginalRow new];
+    
+    tableViewRow.cell = cell;
+    NSAssert(tableViewRow.cell != nil, @"cannot be nil");
+    
+    tableViewRow.height = UITableViewAutomaticDimension;
+    tableViewRow.hiddenReal = YES;
+    tableViewRow.hiddenPlanned = NO;
+    tableViewRow.batchOperation = kBatchOperationInsert;;
+
+    
+    tableViewRow.originalIndexPath = indexPath;
+    
+    NSMutableArray *rows = originalSection.rows;
+    
+    [rows insertObject:tableViewRow atIndex:indexPath.row];
+    
+    for (NSUInteger i = (indexPath.row + 1); i < rows.count; i++) {
+        
+        tableViewRow = rows[i];
+        tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
+    }
+}
+
+- (void)removeCellAtIndedexPath:(NSIndexPath *)indexPath {
+    
+    OriginalSection *originalSection = self.sections[indexPath.section];
+    NSMutableArray *rows = originalSection.rows;
+    
+    [rows removeObjectAtIndex:indexPath.row];
+    
+    for (NSUInteger i = indexPath.row; i < rows.count; i++) {
+        
+        ((OriginalRow *)rows[i]).originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
+    }
 }
 
 - (OriginalRow *)originalRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -279,12 +321,17 @@
     
     for (OriginalSection * os in self.sections) {
         
-        for (OriginalRow * or in os.rows) {
+        for (OriginalRow * or in [os.rows copy]) {
         
             if (or.batchOperation == kBatchOperationDelete) {
                 
                 NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
                 [self.deleteIndexPaths addObject:ip];
+                
+                if (or.cell == nil) {
+                    //real delete
+                    [self removeCellAtIndedexPath:ip];
+                }
                 
             } else if (or.batchOperation == kBatchOperationInsert) {
             
@@ -357,6 +404,21 @@
 }
 
 #pragma mark - Public
+
+- (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+   [self.originalTable insertCell:cell atIndexPath:indexPath];
+}
+
+- (void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
+    
+    OriginalRow *row = [self.originalTable originalRowWithIndexPath:indexPath];
+    if (row) {
+        
+        [row setHidden:YES];
+        row.cell = nil;
+    }
+}
 
 - (void)updateCell:(UITableViewCell *)cell {
     
@@ -459,6 +521,19 @@
     NSAssert(or.cell != nil, @"CANNOT BE NULL");
     
     return or.cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+
+    if (self.originalTable != nil) {
+        OriginalRow *or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
+
+        if (or) {
+            return or.cell.indentationLevel;
+        }
+    }
+    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -17,6 +17,7 @@
 */
 #import "AESharedResources.h"
 #import "ACommons/ACLang.h"
+#import "ABECFilter.h"
 
 NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
@@ -27,9 +28,14 @@ NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
 NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
 NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
+NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
+#define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
+#define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
+#define AES_SAFARI_WHITELIST_RULES              @"safari-whitelist-rules.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -87,6 +93,107 @@ static NSUserDefaults *_sharedUserDefaults;
 - (void)setBlockingContentRules:(NSData *)blockingContentRules{
 
     [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
+- (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setWhitelistContentBlockingRules:(NSMutableArray<ASDFilterRule *> *)whitelistContentBlockingRules {
+    
+    if (whitelistContentBlockingRules == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:whitelistContentBlockingRules];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+    }
+}
+
+
+- (ABECFilterClientMetadata *)lastUpdateFilterMetadata {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setLastUpdateFilterMetadata:(ABECFilterClientMetadata *)lastUpdateFilterMetadata {
+    
+    if (lastUpdateFilterMetadata == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilterMetadata];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
+    }
+}
+
+- (NSDictionary <NSNumber *, ASDFilter *> *)lastUpdateFilters {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTERS];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setLastUpdateFilters:(NSDictionary <NSNumber *, ASDFilter *> *)lastUpdateFilters {
+    
+    if (lastUpdateFilters == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTERS];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilters];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERS];
+    }
+}
+
+- (NSArray <NSNumber *> *)lastUpdateFilterIds {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setLastUpdateFilterIds:(NSArray<NSNumber *> *)lastUpdateFilterIds {
+    
+    if (lastUpdateFilterIds == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilterIds];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
+    }
 }
 
 + (NSUserDefaults *)sharedDefaults{

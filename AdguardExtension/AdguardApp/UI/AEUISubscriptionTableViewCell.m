@@ -33,6 +33,7 @@
 - (void)awakeFromNib {
     // Initialization code
     
+    [super awakeFromNib];
     _on = NO;
 }
 
@@ -49,6 +50,14 @@
         _on = on;
         
         [self setImageAnimated:NO];
+        // tunning accessibility
+        if (_on) {
+            self.accessibilityTraits |= UIAccessibilityTraitSelected;
+        }
+        else{
+            self.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+        }
+        //-------
     }
 }
 

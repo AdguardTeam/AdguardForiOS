@@ -31,7 +31,6 @@
 
 #import "AESharedResources.h"
 
-#define AE_AD_FETCH_UPDATE_STATUS_COUNT         3
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
@@ -41,12 +40,16 @@ NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNot
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
 
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
+typedef void (^AEDownloadsCompletionBlock)();
 
 @interface AppDelegate (){
     
     AETFetchCompletionBlock _fetchCompletion;
+    AEDownloadsCompletionBlock _downloadCompletion;
     AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
+    
+    BOOL _activateWithOpenUrl;
 }
 
 @end
@@ -80,10 +83,12 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 1.");
         
         _fetchCompletion = nil;
+        _downloadCompletion = nil;
+        _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
         // Init database
-        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
         
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
@@ -117,65 +122,32 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     //------------- Preparing for start application. Stage 2. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 2.");
     
-    //------------- If running in interactive mode, then Init/Update User Defaults system and other preparing ------------------
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
-        
-        
-        [self updateDefaultsOnSuccess:^{
-            
-            DDLogInfo(@"(AAAppDelegate) User Defaults up to date.");
-            
-            [self launchStageThree];
-            
-        } onFailure:^{
-            
-            DDLogError(@"(AAAppDelegate) User Defaults failed on updating.");
-            
-        }];
-    }
-    else
-        [self launchStageThree];
-    
-    
-    return YES;
-}
-
-
-- (void)launchStageThree{
-    
-    //------------- Preparing for start application. Stage 3. -----------------
-    DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 3.");
-    
-    
     //------------ Subscribe to Antibanner notification -----------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFailuredUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFinishedUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerStartedUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
-    
-    //------------ Subscribe to Service notification -----------------------------
-    
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serviceNotify:) name:AEServiceUserFilterRulesChangedNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     
     //------------ Checking DB status -----------------------------
     ASDatabase *dbService = [ASDatabase singleton];
     if (dbService.error) {
         
-        DDLogWarn(@"(AppDelegate) Stage 3. DB Error. Panic!");
+        DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
         //        [self dbFailure];
     }
     else if (!dbService.ready){
         
-        DDLogWarn(@"(AppDelegate) Stage 3. DB not ready.");
+        DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
         [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
     }
     //--------------------- Start Services ---------------------------
     else{
         
         [[AEService singleton] start];
-        DDLogInfo(@"(AppDelegate) Stage 3. Main service started.");
+        DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
     
     //--------------------- Processing User Notification Action ---------
@@ -188,16 +160,20 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
-    DDLogInfo(@"(AppDelegate) Stage 3 completed.");
+    DDLogInfo(@"(AppDelegate) Stage 2 completed.");
+    
+    return YES;
 }
 
 - (void)setPeriodForCheckingFilters{
     
-    NSTimeInterval interval = (AS_CHECK_FILTERS_UPDATES_PERIOD)/AE_AD_FETCH_UPDATE_STATUS_COUNT;
+    NSTimeInterval interval = AS_FETCH_UPDATE_STATUS_PERIOD;
     if (interval < UIApplicationBackgroundFetchIntervalMinimum) {
         interval = UIApplicationBackgroundFetchIntervalMinimum;
     }
+    
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:interval];
+    DDLogInfo(@"(AppDelegate) Set background fetch interval: %f", interval);
     
 }
 
@@ -233,8 +209,25 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     
     [[AEService singleton] onReady:^{
         
-        //Entry point for updating of the filters
-        [self invalidateAntibanner:NO];
+        [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
+            
+            if (_activateWithOpenUrl) {
+                _activateWithOpenUrl = NO;
+                DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.");
+                return;
+            }
+            
+            if (AEService.singleton.antibanner.updatesRightNow) {
+                DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
+                return;
+            }
+            
+            //Entry point for updating of the filters
+            if ([self checkAutoUpdateConditions]) {
+                [self invalidateAntibanner:NO interactive:YES];
+            }
+        }];
+        
     }];
     
 }
@@ -250,40 +243,79 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     @autoreleasepool {
         
         DDLogInfo(@"(AppDelegate) application perform Fetch.");
+        
+        if (_fetchCompletion) {
+            
+            // In this case we receive fetch event when previous event still not processed.
+            DDLogInfo(@"(AppDelegate) Previous Fetch still not processed.");
+            
+            // handle new completion handler
+            _fetchCompletion = completionHandler;
+            
+            return;
+        }
+        
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        Reachability *reach = [Reachability reachabilityForInternetConnection];
-        
-        BOOL viaWiFi = [reach isReachableViaWiFi];
-        
-        if (!viaWiFi) {
-            
-            DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. Not via WiFi.");
-        }
+        BOOL checkResult = [self checkAutoUpdateConditions];
         
         [[AEService singleton] onReady:^{
             
-            if (!(viaWiFi && [self invalidateAntibanner:NO])){
+            [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
                 
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                if (AEService.singleton.antibanner.updatesRightNow) {
+                    DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
+                    return;
+                }
+                
+                
+                if (!checkResult) {
+                    DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.");
+                }
+                
+                if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
                     
-                    if (_fetchCompletion) {
-                        
-                        DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
-                        
-                        _fetchCompletion(UIBackgroundFetchResultNoData);
-                        _fetchCompletion = nil;
-                    }
-                });
-            }
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                    
+                        if (_fetchCompletion) {
+                            
+                            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion with result: failed.");
+                            
+                            _fetchCompletion(UIBackgroundFetchResultFailed);
+                            _fetchCompletion = nil;
+                        }
+                    });
+                }
+            }];
         }];
+    }
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)())completionHandler {
+
+    DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
+
+    if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
+        
+        [[AEService singleton] onReady:^{
+
+            _downloadCompletion = completionHandler;
+            [[[AEService singleton] antibanner] repairUpdateStateForBackground];
+        }];
+    }
+    else{
+        DDLogError(@"(AppDelegate) Uncknown background session id: %@", identifier);
+        completionHandler();
     }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
+    
+    _activateWithOpenUrl = YES;
+    
     NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
     if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
          || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
@@ -322,32 +354,10 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Preferences Updater Methods
-/////////////////////////////////////////////////////////////////////
-
-/// Updates User Defaults, and after that runns blocks.
-- (void)updateDefaultsOnSuccess:(dispatch_block_t)successBlock onFailure:(dispatch_block_t)failureBlock{
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        if (YES){
-            
-            self.userDefaultsInitialized = YES;
-            dispatch_async(dispatch_get_main_queue(), successBlock);
-        }
-        //        else{
-        //
-        //            self.userDefaultsInitialized = NO;
-        //            dispatch_async(dispatch_get_main_queue(), failureBlock);
-        //        }
-    });
-}
-
-/////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods
 /////////////////////////////////////////////////////////////////////
 
-- (BOOL)invalidateAntibanner:(BOOL)fromUI {
+- (BOOL)invalidateAntibanner:(BOOL)fromUI interactive:(BOOL)interactive {
     
     @synchronized(self) {
         
@@ -359,8 +369,6 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
             
-            [self updateStartedNotify];
-            
             if (fromUI) {
                 DDLogInfo(@"(AppDelegate) Update process started from UI.");
             }
@@ -371,8 +379,15 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
             [[[AEService singleton] antibanner] beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
-            [[[AEService singleton] antibanner] startUpdating];
-            return YES;
+            BOOL result = [[[AEService singleton] antibanner] startUpdatingForced:fromUI interactive:interactive];
+            
+            if (! result) {
+                DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
+                [[[AEService singleton] antibanner] rollbackTransaction];
+                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+            }
+
+            return result;
         }
         
         DDLogInfo(@"(AppDelegate) Update process NOT started by timer. Time period from previous update too small.");
@@ -416,7 +431,8 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     // Update filter rule
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
         
-        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:(_fetchCompletion != nil) completionBlock:^(NSError *error) {
+        BOOL background = (_fetchCompletion || _downloadCompletion);
+        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:background completionBlock:^(NSError *error) {
             
             if (error) {
                 
@@ -452,6 +468,20 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         
         // turn on network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [self updateStartedNotify];
+    }
+    // Update did not start
+    else if ([notification.name
+              isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
+        
+        if ([[[AEService singleton] antibanner] inTransaction]) {
+            
+            [[[AEService singleton] antibanner] rollbackTransaction];
+            DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+        }
+        
+        // Special update case.
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
     }
     // Update performed
     else if ([notification.name
@@ -491,10 +521,16 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self callCompletionHandler:UIBackgroundFetchResultFailed];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
+    else if ([notification.name
+              isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
+        
+        DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
+        [self callCompletionHandler:UIBackgroundFetchResultNewData];
     }
 }
 
@@ -504,7 +540,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 
 - (void)updateStartedNotify{
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
@@ -514,7 +550,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 - (void)updateFailuredNotify{
     
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Failured update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFailuredUpdateNotification object:self];
@@ -525,7 +561,7 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 
 - (void)updateFinishedNotify{
     
-    [self callOnMainQueue:^{
+    [ACSSystemUtils callOnMainQueue:^{
         
         DDLogDebug(@"(AppDelegate) Finished update process.");
         NSArray *metas = @[];
@@ -544,9 +580,20 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     dispatch_async(dispatch_get_main_queue(), ^{
         
         if (_fetchCompletion) {
-            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion.");
+            NSArray *resultName = @[
+                                    @"NewData",
+                                    @"NoData",
+                                    @"Failed"];
+
+            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion. With result: %@", resultName[result]);
             _fetchCompletion(result);
             _fetchCompletion = nil;
+        }
+        else if (_downloadCompletion){
+            
+            DDLogInfo(@"(AppDelegate - Background update downloads) Call Completion.");
+            _downloadCompletion();
+            _downloadCompletion = nil;
         }
         
     });
@@ -583,17 +630,22 @@ typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
     return [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
 }
 
-- (void)callOnMainQueue:(dispatch_block_t)block{
+- (BOOL)checkAutoUpdateConditions {
+
+    BOOL result = YES;
     
-    dispatch_queue_t currentQueue = dispatch_get_current_queue();
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    if (currentQueue == mainQueue) {
-        block();
-    }
-    else{
-        dispatch_sync(mainQueue, block);
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
+        
+        Reachability *reach = [Reachability reachabilityForInternetConnection];
+        
+        result = [reach isReachableViaWiFi];
+        
+        if (! result) {
+            DDLogInfo(@"(AppDelegate - checkAutoUpdateConditions) App settings permit updates only over WiFi.");
+        }
     }
     
+    return result;
 }
 
 @end

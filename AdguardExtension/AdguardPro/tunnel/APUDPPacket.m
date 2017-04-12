@@ -31,6 +31,17 @@ struct udph_pseudo {
     uint16_t len;
 };
 
+struct udph6_pseudo {
+    
+    struct in6_addr saddr;	/* source address */
+    struct in6_addr daddr;	/* destination address */
+    uint32_t   len;
+    uint16_t zero0;
+    uint8_t zero1;
+    uint8_t proto;
+};
+
+
 @interface APIPPacket (internal)
 
 - (void)repareMutable;
@@ -92,22 +103,17 @@ struct udph_pseudo {
 - (void)setDstPort:(NSString *)dstPort {
     
     OSSpinLockLock(&_lock);
-    int af = [self.aFamily intValue];
-    if (af == AF_INET) {
+    
+    uint16_t port = [dstPort intValue];
+    if (port) {
         
-        uint16_t port = [dstPort intValue];
-        if (port) {
-            
-            _dstPort = dstPort;
-            
-            [self repareMutable];
-            
-            _udpHeader->uh_dport = htons(port);
-            
-            [self checksumUdpIPv4];
-        }
-    } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        _dstPort = dstPort;
+        
+        [self repareMutable];
+        
+        _udpHeader->uh_dport = htons(port);
+        
+        [self checksumUdp];
     }
     OSSpinLockUnlock(&_lock);
 }
@@ -120,22 +126,17 @@ struct udph_pseudo {
 - (void)setSrcPort:(NSString *)srcPort {
 
     OSSpinLockLock(&_lock);
-    int af = [self.aFamily intValue];
-    if (af == AF_INET) {
+    
+    int port = [srcPort intValue];
+    if (port) {
         
-        int port = [srcPort intValue];
-        if (port) {
-            
-            _srcPort = srcPort;
-            
-            [self repareMutable];
-            
-            _udpHeader->uh_sport = htons(port);
-            
-        }
-        [self checksumUdpIPv4];
-    } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        _srcPort = srcPort;
+        
+        [self repareMutable];
+        
+        _udpHeader->uh_sport = htons(port);
+        
+        [self checksumUdp];
     }
     OSSpinLockUnlock(&_lock);
 }
@@ -160,25 +161,31 @@ struct udph_pseudo {
 - (void)setPayload:(NSData *)payload{
     
     OSSpinLockLock(&_lock);
+    
+    [self repareMutable];
+    
+    [_ipMPacket replaceBytesInRange:NSMakeRange(_udpHeaderLength, (_ipMPacket.length - _udpHeaderLength)) withBytes:payload.bytes length:payload.length];
+    
     int af = [self.aFamily intValue];
     if (af == AF_INET) {
         
-        [self repareMutable];
-        
-        [_ipMPacket replaceBytesInRange:NSMakeRange(_udpHeaderLength, (_ipMPacket.length - _udpHeaderLength)) withBytes:payload.bytes length:payload.length];
         
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
-        _udpHeader = (struct udphdr *)((Byte *)_ipMPacket.mutableBytes + _ipHeaderLength);
-        
         _ipHeader->ip_len = htons(_ipMPacket.length);
-        _udpHeader->uh_ulen = htons(_ipMPacket.length - _ipHeaderLength);
         
         [self checksumIPv4];
-        [self checksumUdpIPv4];
         
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        _ip6Header->ip6_plen = htons(_ipMPacket.length - APT_IPV6_FIXED_HEADER_LENGTH);
     }
+    
+    _udpHeader = (struct udphdr *)((Byte *)_ipMPacket.mutableBytes + _ipHeaderLength);
+    _udpHeader->uh_ulen = htons(_ipMPacket.length - _ipHeaderLength);
+    
+    [self checksumUdp];
+    
     OSSpinLockUnlock(&_lock);
     
 }
@@ -196,71 +203,78 @@ struct udph_pseudo {
 
 - (BOOL)parseUdpData{
     
-    int af = [self.aFamily intValue];
-    if ( af == AF_INET) {
-        
-        _udpHeader = (struct udphdr *)((Byte *)_ipPacket.bytes + _ipHeaderLength);
-        _udpHeaderLength = _ipHeaderLength + sizeof(struct udphdr);
-        
-        _dstPort = [NSString stringWithFormat:@"%d", ntohs(_udpHeader->uh_dport)];
-        _srcPort = [NSString stringWithFormat:@"%d", ntohs(_udpHeader->uh_sport)];
-        
-        return YES;
-    }
-    else if (af == AF_INET6){
-        //TODO: Not implemented yet
-    }
+    _udpHeader = (struct udphdr *)((Byte *)_ipPacket.bytes + _ipHeaderLength);
+    _udpHeaderLength = _ipHeaderLength + sizeof(struct udphdr);
     
-    return NO;
-
+    _dstPort = [NSString stringWithFormat:@"%d", ntohs(_udpHeader->uh_dport)];
+    _srcPort = [NSString stringWithFormat:@"%d", ntohs(_udpHeader->uh_sport)];
+    
+    return YES;
 }
 
 - (BOOL)setUdpData{
     
-    int aFamily = [self.aFamily intValue];
+    _udpHeaderLength = _ipHeaderLength + sizeof(struct udphdr);
+    _ipMPacket.length = _udpHeaderLength;
     
-    if (aFamily == AF_INET) {
-
-        _udpHeaderLength = _ipHeaderLength + sizeof(struct udphdr);
-        _ipMPacket.length = _udpHeaderLength;
+    _udpHeader = (struct udphdr *)((Byte *)_ipMPacket.mutableBytes + _ipHeaderLength);
+    _udpHeader->uh_ulen = htons(sizeof(struct udphdr));
+    
+    _srcPort = @"0";
+    _dstPort = @"0";
+    
+    if (self.aFamily.intValue == AF_INET) {
 
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
-        _udpHeader = (struct udphdr *)((Byte *)_ipMPacket.mutableBytes + _ipHeaderLength);
-        
         _ipHeader->ip_len = htons(_udpHeaderLength);
-        _udpHeader->uh_ulen = htons(sizeof(struct udphdr));
-        
-        _srcPort = @"0";
-        _dstPort = @"0";
         
         [self checksumIPv4];
-        [self checksumUdpIPv4];
-        
-        return YES;
     }
-    else if (aFamily == AF_INET6){
-        //TODO: Not implemented yet
+    else {// INET6
+        
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        _ip6Header->ip6_plen = htons(sizeof(struct udphdr));
     }
     
-    return NO;
+    [self checksumUdp];
+    
+    return YES;
     
 }
 
-//TODO: checksum calculation was not tested.
-- (void)checksumUdpIPv4 {
+- (void)checksumUdp {
 
     struct udph_pseudo ph;
+    struct udph6_pseudo ph6;
+    void *buffer = NULL;
+    int size = 0;
 
-    ph.saddr = _ipHeader->ip_src;
-    ph.daddr = _ipHeader->ip_dst;
-    ph.zero = 0;
-    ph.proto = _ipHeader->ip_p;
-    ph.len = htons((uint16_t)(_ipMPacket.length - _ipHeaderLength));
-
-    _udpHeader->uh_sum = 0;
-
-    void *buffer = (void *)&ph;
-    int size = sizeof(ph);
+    if (self.aFamily.intValue == AF_INET) {
+        
+        ph.saddr = _ipHeader->ip_src;
+        ph.daddr = _ipHeader->ip_dst;
+        ph.zero = 0;
+        ph.proto = _ipHeader->ip_p;
+        ph.len = htons((uint16_t)(_ipMPacket.length - _ipHeaderLength));
+        
+        _udpHeader->uh_sum = 0;
+        
+        buffer = (void *)&ph;
+        size = sizeof(ph);
+    }
+    else { //INET6
+        
+        ph6.saddr = _ip6Header->ip6_src;
+        ph6.daddr = _ip6Header->ip6_dst;
+        ph6.len = ntohl((uint32_t)(_ipMPacket.length - _ipHeaderLength));
+        ph6.zero0 = ph6.zero1 = 0;
+        ph6.proto = self.protocol;
+        
+        _udpHeader->uh_sum = 0;
+        
+        buffer = (void *)&ph6;
+        size = sizeof(ph6);
+    }
     
     uint32_t sum = checksum_adder(0, buffer, size);
 

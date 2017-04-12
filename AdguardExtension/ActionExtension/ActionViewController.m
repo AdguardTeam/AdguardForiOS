@@ -25,10 +25,15 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AEAUIMainController.h"
-#import "AEUIWhitelistDomainObject.h"
+#import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 
 #define USER_FRIENDLY_DELAY     0.5
+
+NSString *AEActionErrorDomain = @"AEActionErrorDomain";
+#define AE_ACTION_ERROR_NODEFAULTS     100
+#define AE_ACTION_ERROR_NODB           200
+
 
 @interface ActionViewController (){
     
@@ -37,7 +42,7 @@
     BOOL _injectScriptSupported;
     NSString *_host;
     NSURL *_iconUrl;
-    AEUIWhitelistDomainObject *_domainObject;
+    AEWhitelistDomainObject *_domainObject;
     NSMutableArray *_observerObjects;
     AEAUIMainController __weak *_mainController;
 }
@@ -52,12 +57,12 @@
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEUIWhitelistDomainObject *)domainObjectIfExistsFromAntibannerServiceFor:(NSString *)host{
++ (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host{
     
     @autoreleasepool {
         
-        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromAntibannerServiceFor:\"%@\"", host);
-        NSArray *rules = [[[AEService singleton] antibanner] rulesForFilter:@(ASDF_USER_FILTER_ID)];
+        DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\"%@\"", host);
+        NSArray *rules = [[AESharedResources new] whitelistContentBlockingRules];
         rules = [rules
                  filteredArrayUsingPredicate:
                  [NSPredicate
@@ -66,9 +71,9 @@
         
         if (rules.count) {
             
-            AEUIWhitelistDomainObject *obj;
+            AEWhitelistDomainObject *obj;
             for (ASDFilterRule *rule in rules) {
-                obj = [[AEUIWhitelistDomainObject alloc] initWithRule:rule];
+                obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
                 if (obj) {
                     break;
                 }
@@ -94,7 +99,7 @@
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
-    NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
+    __block NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -107,7 +112,7 @@
                 _url = [NSURL URLWithString:urlString];
             }
             _host = [_url hostWithPort];
-            //            _host = url.host;
+            //            _host = url.host;x
             
             _injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
             
@@ -118,53 +123,62 @@
             else if ([NSString isNullOrEmpty:_host]) {
                 
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
+                errorMessage = NSLocalizedString(@"The hostname is not obtained. Perhaps the page is not yet loaded.", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
                 
-                [self prepareDataModel];
-                [[AEService singleton] onReady:^{
+                NSError *error = [self prepareDataModel];
+                if (error) {
                     
-                    // Add observers for application notifications
-                    _observerObjects = [NSMutableArray arrayWithCapacity:2];
-                    
-                    id observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                    if (error.code == AE_ACTION_ERROR_NODB) {
+                        errorMessage = error.localizedDescription;
+                    }
+                }
+                else {
+                    [[AEService singleton] onReady:^{
                         
-                        [_mainController.navigationController setViewControllers:@[self] animated:NO];
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                                     (int64_t)(USER_FRIENDLY_DELAY * NSEC_PER_SEC)),
-                                       dispatch_get_main_queue(), ^{
-                                           
-                                           [self startProcessing];
-                                       });
+                        // Add observers for application notifications
+                        _observerObjects = [NSMutableArray arrayWithCapacity:2];
+                        
+                        id observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                            
+                            [_mainController.navigationController setViewControllers:@[self] animated:NO];
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                                         (int64_t)(USER_FRIENDLY_DELAY * NSEC_PER_SEC)),
+                                           dispatch_get_main_queue(), ^{
+                                               
+                                               [self startProcessing];
+                                           });
+                            
+                        }];
+                        if (observerObject) {
+                            [_observerObjects addObject:observerObject];
+                        }
+                        
+                        observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                            
+                            [AESharedResources synchronizeSharedDefaults];
+                        }];
+                        if (observerObject) {
+                            [_observerObjects addObject:observerObject];
+                        }
+                        observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                            
+                            [AESharedResources synchronizeSharedDefaults];
+                        }];
+                        if (observerObject) {
+                            [_observerObjects addObject:observerObject];
+                        }
+                        //--------------------------------------------
+                        
+                        _iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/favicon.ico", _url.scheme, [_url hostWithPort]]];
+                        
+                        [self startProcessing];
                         
                     }];
-                    if (observerObject) {
-                        [_observerObjects addObject:observerObject];
-                    }
                     
-                    observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-                        
-                        [AESharedResources synchronizeSharedDefaults];
-                    }];
-                    if (observerObject) {
-                        [_observerObjects addObject:observerObject];
-                    }
-                    observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-                        
-                        [AESharedResources synchronizeSharedDefaults];
-                    }];
-                    if (observerObject) {
-                        [_observerObjects addObject:observerObject];
-                    }
-                    //--------------------------------------------
-                    
-                    _iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/favicon.ico", _url.scheme, [_url hostWithPort]]];
-                    
-                    [self startProcessing];
-                    
-                }];
-                
-                return;
+                    return;
+                }
             }
             //done on error
             [self stopProcessingWithMessage:errorMessage];
@@ -201,7 +215,7 @@
 }
 
 
-- (BOOL)prepareDataModel{
+- (NSError *)prepareDataModel{
     
     // Init Logger
     [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
@@ -222,12 +236,28 @@
     else{
         
         DDLogError(@"(ActionViewController) default.plist was not loaded.");
-        return NO;
+        return [NSError errorWithDomain:AEActionErrorDomain
+                                   code:AE_ACTION_ERROR_NODEFAULTS
+                               userInfo:nil];
     }
     //-------------------------------
     
     // Init database
-    [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB]];
+    NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+
+    [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+
+    if ([[ASDatabase singleton] error]) {
+        
+        DDLogError(@"(ActionViewController) production DB was not created before.");
+        NSString *messageFormat =
+        NSLocalizedString(@"Before you can use this action extension, %@ has to perform an initial configuration. Launch the main %@ app to let it do so.",
+                          @"(Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app.");
+        return [NSError errorWithDomain:AEActionErrorDomain
+                                   code:AE_ACTION_ERROR_NODB
+                               userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:messageFormat, AE_PRODUCT_NAME, AE_PRODUCT_NAME]
+                                          }];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -247,7 +277,7 @@
         
     });
     
-    return YES;
+    return nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -322,7 +352,7 @@
         [self.messageLabel setHidden:YES];
     });
     
-    _domainObject = [ActionViewController domainObjectIfExistsFromAntibannerServiceFor:_host];
+    _domainObject = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });

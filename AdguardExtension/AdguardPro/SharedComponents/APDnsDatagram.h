@@ -23,7 +23,7 @@
 
 @class APDnsRequest, APDnsResponse;
 
-@interface APDnsDatagram : NSObject
+@interface APDnsDatagram : NSObject <NSCopying>
 
 - (id)initWithData:(NSData *)datagram;
 
@@ -33,5 +33,15 @@
 
 @property (readonly, nonatomic) NSArray <APDnsRequest *> *requests;
 @property (readonly, nonatomic) NSArray <APDnsResponse *> *responses;
+
+/**
+ Converts to blocking response. 
+ Ie appends responses for all address requests , herewith, responses contain localhost address.
+ 
+ @return Returns YES on success
+ */
+- (BOOL)convertToBlockingResponse;
+
+- (NSData *)generatePayload;
 
 @end

@@ -18,6 +18,7 @@
 #import "AEUIMainController.h"
 #import "ADomain/ADomain.h"
 #import "ACommons/ACLang.h"
+#import "ACommons/ACSystem.h"
 #import "AESharedResources.h"
 #import "AppDelegate.h"
 #import "AEUIWelcomePagerDataSource.h"
@@ -26,17 +27,36 @@
 #import "AESSupport.h"
 #import "AEUIRulesController.h"
 #import "AEUICommons.h"
-#import "APUIAdguardDNSController.h"
+#import "AEUICustomTextEditorController.h"
+#import "ASDFilterObjects.h"
+#import "AEUIFilterRuleObject.h"
+#import "AEUIUtils.h"
+#import "AEUIWhitelistController.h"
 
 #ifdef PRO
+
 #import "APVPNManager.h"
+#import "APDnsServerObject.h"
+#import "APUIProSectionFooter.h"
+
+#define PRO_SECTION_INDEX               1
+#define NBSP_CODE                       @"\u00A0"
+#define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
+
 #endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
 /////////////////////////////////////////////////////////////////////
 
+#define ITUNES_PRO_APP_ID           @"1126386264"
+
+#ifdef PRO
+#define ITUNES_APP_ID               ITUNES_PRO_APP_ID
+#else
 #define ITUNES_APP_ID               @"1047223162"
+#endif
+
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
 #define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
@@ -47,6 +67,9 @@
 #define RESET_UPDATE_FILTERS_DELAY  3 //seconds
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
+#define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+
+#define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController
@@ -61,7 +84,12 @@
     NSMutableArray *_observers;
     
     NSString *_ruleTextHolderForAddRuleCommand;
-    
+
+    UIBarButtonItem *_cancelNavigationItem;
+
+#ifdef PRO
+    APUIProSectionFooter *_proFooter;
+#endif
 }
 
 @end
@@ -73,13 +101,24 @@
     
     self.title = AE_PRODUCT_NAME;
     
+    _cancelNavigationItem = [[UIBarButtonItem alloc]
+                             initWithTitle:NSLocalizedString(@"Cancel",
+                                                             @"(AEUIMainController) Text on the button that cancels an operation.")
+                             style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
+    
+    // tunning accessibility
+    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    //-----------------
+    
     [self proAttachToNotifications];
-    [self proUpdateAdguardDnsStatus];
    
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    
+    self.getProButton.enabled = YES;
+    self.getProButton.title = @"Get PRO";
 #endif
     
     [self reloadDataAnimated:NO];
@@ -99,7 +138,7 @@
     [self prepareCheckUpdatesButton];
 
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.navigation = self.navigationController;
     
     if ([[AEService singleton] firstRunInProgress]) {
@@ -197,7 +236,7 @@
 
 - (IBAction)clickCheckForUpdates:(id)sender {
     if (!_inCheckUpdates) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] invalidateAntibanner:YES interactive:YES];
     }
 }
 
@@ -212,8 +251,19 @@
     [[AESSupport singleton] sendMailBugReportWithParentController:self];
 }
 
-- (IBAction)clickDNS:(id)sender {
-    DDLogError(@"Id %@", sender);
+- (IBAction)clickGetPro:(id)sender {
+    NSURL *theURL =
+    [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
+                          ITUNES_PRO_APP_ID]];
+    [[UIApplication sharedApplication] openURL:theURL];
+}
+
+- (IBAction)proToggleStatus:(id)sender {
+    
+#ifdef PRO
+    BOOL enabled = [(UISwitch *)sender isOn];
+    [[APVPNManager singleton] setEnabled:enabled];
+#endif
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{
@@ -225,16 +275,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
        
         _ruleTextHolderForAddRuleCommand = ruleText;
-        id topController = self.navigationController.topViewController;
-        if ([topController isKindOfClass:[AEUIRulesController class]]) {
-            
-            [topController setRuleTextForAdding:_ruleTextHolderForAddRuleCommand];
-            _ruleTextHolderForAddRuleCommand = nil;
-        }
-        else {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            [self performSegueWithIdentifier:TO_USER_FILTER_SEGUE_ID sender:self];
-        }
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self performSegueWithIdentifier:TO_USER_FILTER_SEGUE_ID sender:self];
+        _ruleTextHolderForAddRuleCommand = nil;
     });
 }
 
@@ -243,6 +286,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [self setToolbar];
+#ifdef PRO
+    [self proUpdateStatuses];
+#endif
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -264,14 +311,14 @@
         [self prepareWelcomeScreenForController:destination];
     }
     else if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
-        
-        if (![NSString isNullOrEmpty:_ruleTextHolderForAddRuleCommand]) {
-            
-            AEUIRulesController *dest = [segue destinationViewController];
-            dest.ruleTextForAdding = _ruleTextHolderForAddRuleCommand;
-            _ruleTextHolderForAddRuleCommand = nil;
-        }
+
+        [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
     }
+    else if ([segue.identifier isEqualToString:TO_WHITELIST_SEGUE_ID]){
+        
+        [AEUIWhitelistController createWhitelistControllerWithSegue:segue];
+    }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -297,6 +344,9 @@
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        // tunning accessibility
+        self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+        //------------
     }
 
     BOOL enabled = NO;
@@ -363,7 +413,12 @@
     self.checkFiltersCell.accessoryView = activity;
     self.checkFiltersCell.textLabel.textColor =
         self.checkFiltersCell.textLabel.tintColor;
-
+    
+    // tunning accessibility
+    UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
+    self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits | UIAccessibilityTraitButton;
+    //-----------------
+    
     _inCheckUpdates = NO;
 
     _observers = [NSMutableArray arrayWithCapacity:3];
@@ -376,6 +431,9 @@
                 usingBlock:^(NSNotification *_Nonnull note) {
 
                   self.checkFiltersCell.textLabel.enabled = NO;
+                    // tunning accessibility
+                  self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
+                    //------------
                   UIActivityIndicatorView *activity =
                       (UIActivityIndicatorView *)
                           self.checkFiltersCell.accessoryView;
@@ -430,6 +488,9 @@
                                             dateStyle:NSDateFormatterShortStyle
                                             timeStyle:
                                                 NSDateFormatterShortStyle];
+                          // tunning accessibility
+                          self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
+                          //-------
                       }
                     });
 
@@ -482,31 +543,91 @@
 
     self.checkFiltersCell.textLabel.enabled = YES;
     self.checkFiltersCell.textLabel.text = _updateButtonTextHolder;
+    // tunning accessibility
+    self.checkFiltersCell.accessibilityTraits = self.checkFiltersCell.accessibilityTraits | UIAccessibilityTraitButton;
+    //--------
     _inCheckUpdates = NO;
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Table Delegate Methods
+
 #ifdef PRO
-- (void)proUpdateAdguardDnsStatus{
-    APVPNManager *manager = [APVPNManager singleton];
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    switch (manager.connectionStatus) {
-            
-        case APVpnConnectionStatusReconnecting:
-            
-        case APVpnConnectionStatusConnecting:
-        case APVpnConnectionStatusDisconnecting:
-            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"In Progress",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is 'In Progress'.");
-            break;
-            
-        case APVpnConnectionStatusConnected:
-            self.proAdguardDnsCell.detailTextLabel.text = [manager modeDescription:manager.vpnMode];
-            break;
-            
-        default:
-            self.proAdguardDnsCell.detailTextLabel.text = NSLocalizedString(@"Off",@"(AEUIMainController) PRO version. On the main screen. Pro section, Adguard DNS row. Current status title. When status is Off.");
-            break;
+    if (section == PRO_SECTION_INDEX) {
+        
+        return [self proSectionFooter];
     }
     
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    if (section == PRO_SECTION_INDEX) {
+        
+        APUIProSectionFooter *footer = [self proSectionFooter];
+        return footer.height;
+    }
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  PRO Helper Methods (Private)
+
+- (APUIProSectionFooter *)proSectionFooter{
+    
+    if (_proFooter) {
+        return _proFooter;
+    }
+    
+    _proFooter = [[APUIProSectionFooter alloc] initWithFrame:self.view.bounds];
+    _proFooter.text = [self proTextForProSectionFooter];
+    
+    return _proFooter;
+}
+
+- (NSString *)proShortStatusDescription {
+    
+    return NSLocalizedString(@"The app establishes a fake VPN connection, which is required in order to use System-wide Ad Blocking or custom DNS settings. Note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+}
+
+- (NSAttributedString *)proTextForProSectionFooter{
+    
+    NSString *message = [self proShortStatusDescription];
+    
+    NSMutableAttributedString *textString = [[NSMutableAttributedString alloc] initWithString:message];
+    
+    return textString;
+}
+
+- (void)proUpdateStatuses{
+    
+    APVPNManager *manager = [APVPNManager singleton];
+    
+    self.proSystemWideCell.detailTextLabel.text = manager.localFiltering
+    ? NSLocalizedString(@"Enabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is enabled.")
+    : NSLocalizedString(@"Disabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is disabled.");
+    
+    self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    
+    self.proStatusSwitch.on = manager.enabled;
+        
+    if (manager.lastError) {
+        [ACSSystemUtils
+         showSimpleAlertForController:self
+         withTitle:NSLocalizedString(@"Error",
+                                     @"(APUIAdguardDNSCon"
+                                     @"troller) PRO "
+                                     @"version. Alert "
+                                     @"title. On error.")
+         message:manager.lastError.localizedDescription];
+    }
+    
+    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{
@@ -519,7 +640,7 @@
                      
                      // When configuration is changed
                      
-                     [self proUpdateAdguardDnsStatus];
+                     [self proUpdateStatuses];
                  }];
     
     if (observer) {

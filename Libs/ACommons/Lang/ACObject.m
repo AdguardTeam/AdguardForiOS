@@ -93,7 +93,7 @@ static NSMutableDictionary *_propertyNamesForClasses;
             
             NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionary];
             id obj;
-            for (NSString *key in _propertyNamesForClasses[NSStringFromClass([self class])]) {
+            for (NSString *key in [self propertyNames]) {
                 
                 obj = [aDecoder decodeObjectForKey:key];
                 if (obj)
@@ -110,9 +110,13 @@ static NSMutableDictionary *_propertyNamesForClasses;
 
 + (NSArray *)propertyNamesArray{
     
-    return [_propertyNamesForClasses[NSStringFromClass([self class])] allObjects];
+    return [[self new] propertyNames];
 }
 
+// We lie here
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -122,7 +126,7 @@ static NSMutableDictionary *_propertyNamesForClasses;
 {
 //    [super encodeWithCoder:coder];
     
-    NSDictionary *propertiesDict = [self dictionaryWithValuesForKeys:[_propertyNamesForClasses[NSStringFromClass([self class])] allObjects]];
+    NSDictionary *propertiesDict = [self dictionaryWithValuesForKeys:[self propertyNames]];
     for (NSString *key in [propertiesDict allKeys]) {
         
         [coder encodeObject:propertiesDict[key] forKey:key];
@@ -134,7 +138,7 @@ static NSMutableDictionary *_propertyNamesForClasses;
     id newObj = [[[self class] allocWithZone:zone] init];
     if (newObj) {
         
-        NSDictionary *propertyValues = [self dictionaryWithValuesForKeys:[_propertyNamesForClasses[NSStringFromClass([self class])] allObjects]];
+        NSDictionary *propertyValues = [self dictionaryWithValuesForKeys:[self propertyNames]];
         if (propertyValues.count)
             [newObj setValuesForKeysWithDictionary:propertyValues];
     }
@@ -142,4 +146,18 @@ static NSMutableDictionary *_propertyNamesForClasses;
     return newObj;
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark Private Methods
+
+- (NSArray *)propertyNames {
+    
+    NSMutableArray *properties = [NSMutableArray array];
+    id currentClass = [self class];
+    while (currentClass != [ACObject class]) {
+        [properties addObjectsFromArray:[_propertyNamesForClasses[NSStringFromClass(currentClass)] allObjects]];
+        currentClass = [currentClass superclass];
+    }
+    
+    return properties;
+}
 @end
