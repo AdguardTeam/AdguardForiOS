@@ -794,6 +794,8 @@ static APVPNManager *singletonVPNManager;
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPNManager.defaultLocalFilteringState;
         //-------------
         
+        NSString *connectionStatusReason = @"Unknown";
+        
         if (_manager.enabled && _manager.onDemandEnabled) {
             
             _enabled = YES;
@@ -802,25 +804,31 @@ static APVPNManager *singletonVPNManager;
                     
                 case NEVPNStatusDisconnected:
                     _connectionStatus = APVpnConnectionStatusDisconnected;
+                    connectionStatusReason = @"NEVPNStatusDisconnected The VPN is disconnected.";
                     break;
                     
                 case NEVPNStatusReasserting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusReasserting The VPN is reconnecting following loss of underlying network connectivity.";
                     break;
                     
                 case NEVPNStatusConnecting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusConnecting The VPN is connecting.";
                     break;
                     
                 case NEVPNStatusDisconnecting:
                     _connectionStatus = APVpnConnectionStatusDisconnecting;
+                    connectionStatusReason = @"NEVPNStatusDisconnecting The VPN is disconnecting.";
                     break;
                     
                 case NEVPNStatusConnected:
                     _connectionStatus = APVpnConnectionStatusConnected;
+                    connectionStatusReason = @"NEVPNStatusConnected The VPN is connected.";
                     break;
                     
                 case NEVPNStatusInvalid:
+                    connectionStatusReason = @"NEVPNStatusInvalid The VPN is not configured.";
                 default:
                     _connectionStatus = APVpnConnectionStatusInvalid;
                     break;
@@ -830,11 +838,15 @@ static APVPNManager *singletonVPNManager;
             
             _connectionStatus = APVpnConnectionStatusDisabled;
         }
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nmanager.enabled = %@\nmanager.onDemandEnabled = %@\nConnection Status: %@", _manager.enabled ? @"YES" : @"NO", _manager.onDemandEnabled ? @"YES" : @"NO", connectionStatusReason);
     }
     else{
         _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
         _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisabled;
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
     }
     
     // start delayed
