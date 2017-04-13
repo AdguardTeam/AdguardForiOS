@@ -261,6 +261,61 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 	// Add code here to start the process of stopping the tunnel.
     DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Event");
     
+    NSString *reasonString;
+    
+    switch (reason) {
+        case NEProviderStopReasonNone:
+            reasonString = @"NEProviderStopReasonNone No specific reason. ";
+            break;
+        case NEProviderStopReasonUserInitiated:
+            reasonString = @"NEProviderStopReasonUserInitiated The user stopped the provider. ";
+            break;
+        case NEProviderStopReasonProviderFailed:
+            reasonString = @"NEProviderStopReasonProviderFailed The provider failed. ";
+            break;
+        case NEProviderStopReasonNoNetworkAvailable:
+            reasonString = @"NEProviderStopReasonNoNetworkAvailable There is no network connectivity. ";
+            break;
+        case NEProviderStopReasonUnrecoverableNetworkChange:
+            reasonString = @"NEProviderStopReasonUnrecoverableNetworkChange The device attached to a new network. ";
+            break;
+        case NEProviderStopReasonProviderDisabled:
+            reasonString = @"NEProviderStopReasonProviderDisabled The provider was disabled. ";
+            break;
+        case NEProviderStopReasonAuthenticationCanceled:
+            reasonString = @"NEProviderStopReasonAuthenticationCanceled The authentication process was cancelled. ";
+            break;
+        case NEProviderStopReasonConfigurationFailed:
+            reasonString = @"NEProviderStopReasonConfigurationFailed The provider could not be configured. ";
+            break;
+        case NEProviderStopReasonIdleTimeout:
+            reasonString = @"NEProviderStopReasonIdleTimeout The provider was idle for too long. ";
+            break;
+        case NEProviderStopReasonConfigurationDisabled:
+            reasonString = @"NEProviderStopReasonConfigurationDisabled The associated configuration was disabled. ";
+            break;
+        case NEProviderStopReasonConfigurationRemoved:
+            reasonString = @"NEProviderStopReasonConfigurationRemoved The associated configuration was deleted. ";
+            break;
+        case NEProviderStopReasonSuperceded:
+            reasonString = @"NEProviderStopReasonSuperceded A high-priority configuration was started. ";
+            break;
+        case NEProviderStopReasonUserLogout:
+            reasonString = @"NEProviderStopReasonUserLogout The user logged out. ";
+            break;
+        case NEProviderStopReasonUserSwitch:
+            reasonString = @"NEProviderStopReasonUserSwitch The active user changed. ";
+            break;
+        case NEProviderStopReasonConnectionFailed:
+            reasonString = @"NEProviderStopReasonConnectionFailed Failed to establish connection. ";
+            break;
+            
+        default:
+            reasonString = @"Unknown reason. ";
+            
+    }
+    DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Reason String:\n%@", reasonString);
+    
     [_reachabilityHandler stopNotifier];
 
 	completionHandler();
