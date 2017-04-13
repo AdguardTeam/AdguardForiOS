@@ -152,6 +152,18 @@ static APVPNManager *singletonVPNManager;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
         
+        if (APVPNManager.defaultLocalFilteringState) {
+            // In this case we need in subscribing to simple domains filter
+            dispatch_async(workingQueue, ^{
+                
+                if (![self prepareForLocalFiltering]) {
+                    
+                    [self sendNotification];
+                }
+            });
+        }
+
+        
         [self loadConfiguration];
     }
     
@@ -548,26 +560,6 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = @(_enabled);
         }
         
-        if (localFiltering) {
-            
-            if (![self prepareForLocalFiltering]) {
-                
-                DDLogError(@"Error occurred when loading Simplified domain names filter.");
-                _lastError = [NSError
-                              errorWithDomain:APVpnManagerErrorDomain
-                              code:APVPN_MANAGER_ERROR_INSTALL_FILTER
-                              userInfo:@{
-                                         NSLocalizedDescriptionKey :
-                                             NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
-                                                               @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
-                                         }];
-                DDLogErrorTrace();
-                
-                [self sendNotification];
-
-                return;
-            }
-        }
         [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
     }
 }
@@ -979,6 +971,8 @@ static APVPNManager *singletonVPNManager;
     }
     else {
         
+        BOOL result = NO;
+        
         NSArray *filters = [[[antibanner metadataForSubscribe:NO] filters]
                             filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId == %@", @(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
         if (filters.count == 1) {
@@ -988,11 +982,25 @@ static APVPNManager *singletonVPNManager;
             filter.editable = @(NO);
             filter.enabled = @(NO);
 
-            return [antibanner subscribeFilters:filters jobController:nil];
+            result = [antibanner subscribeFilters:filters jobController:nil];
         }
+        
+        if (result == NO) {
+            
+            DDLogError(@"Error occurred when loading Simplified domain names filter.");
+            _lastError = [NSError
+                          errorWithDomain:APVpnManagerErrorDomain
+                          code:APVPN_MANAGER_ERROR_INSTALL_FILTER
+                          userInfo:@{
+                                     NSLocalizedDescriptionKey :
+                                         NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
+                                                           @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
+                                     }];
+            DDLogErrorTrace();
+        }
+        
+        return result;
     }
-
-    return NO;
 }
 
 @end
