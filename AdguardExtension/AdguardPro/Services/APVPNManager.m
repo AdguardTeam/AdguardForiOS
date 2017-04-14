@@ -152,6 +152,18 @@ static APVPNManager *singletonVPNManager;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
         
+        if (APVPNManager.defaultLocalFilteringState) {
+            // In this case we need in subscribing to simple domains filter
+            dispatch_async(workingQueue, ^{
+                
+                if (![self prepareForLocalFiltering]) {
+                    
+                    [self sendNotification];
+                }
+            });
+        }
+
+        
         [self loadConfiguration];
     }
     
@@ -548,26 +560,6 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = @(_enabled);
         }
         
-        if (localFiltering) {
-            
-            if (![self prepareForLocalFiltering]) {
-                
-                DDLogError(@"Error occurred when loading Simplified domain names filter.");
-                _lastError = [NSError
-                              errorWithDomain:APVpnManagerErrorDomain
-                              code:APVPN_MANAGER_ERROR_INSTALL_FILTER
-                              userInfo:@{
-                                         NSLocalizedDescriptionKey :
-                                             NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
-                                                               @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
-                                         }];
-                DDLogErrorTrace();
-                
-                [self sendNotification];
-
-                return;
-            }
-        }
         [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
     }
 }
@@ -802,6 +794,8 @@ static APVPNManager *singletonVPNManager;
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPNManager.defaultLocalFilteringState;
         //-------------
         
+        NSString *connectionStatusReason = @"Unknown";
+        
         if (_manager.enabled && _manager.onDemandEnabled) {
             
             _enabled = YES;
@@ -810,25 +804,31 @@ static APVPNManager *singletonVPNManager;
                     
                 case NEVPNStatusDisconnected:
                     _connectionStatus = APVpnConnectionStatusDisconnected;
+                    connectionStatusReason = @"NEVPNStatusDisconnected The VPN is disconnected.";
                     break;
                     
                 case NEVPNStatusReasserting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusReasserting The VPN is reconnecting following loss of underlying network connectivity.";
                     break;
                     
                 case NEVPNStatusConnecting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusConnecting The VPN is connecting.";
                     break;
                     
                 case NEVPNStatusDisconnecting:
                     _connectionStatus = APVpnConnectionStatusDisconnecting;
+                    connectionStatusReason = @"NEVPNStatusDisconnecting The VPN is disconnecting.";
                     break;
                     
                 case NEVPNStatusConnected:
                     _connectionStatus = APVpnConnectionStatusConnected;
+                    connectionStatusReason = @"NEVPNStatusConnected The VPN is connected.";
                     break;
                     
                 case NEVPNStatusInvalid:
+                    connectionStatusReason = @"NEVPNStatusInvalid The VPN is not configured.";
                 default:
                     _connectionStatus = APVpnConnectionStatusInvalid;
                     break;
@@ -838,11 +838,15 @@ static APVPNManager *singletonVPNManager;
             
             _connectionStatus = APVpnConnectionStatusDisabled;
         }
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nmanager.enabled = %@\nmanager.onDemandEnabled = %@\nConnection Status: %@", _manager.enabled ? @"YES" : @"NO", _manager.onDemandEnabled ? @"YES" : @"NO", connectionStatusReason);
     }
     else{
         _activeRemoteDnsServer = _remoteDnsServers[APVPNManager.defaultDnsServerIndex];
         _localFiltering = APVPNManager.defaultLocalFilteringState;
         _connectionStatus = APVpnConnectionStatusDisabled;
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
     }
     
     // start delayed
@@ -979,6 +983,8 @@ static APVPNManager *singletonVPNManager;
     }
     else {
         
+        BOOL result = NO;
+        
         NSArray *filters = [[[antibanner metadataForSubscribe:NO] filters]
                             filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId == %@", @(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
         if (filters.count == 1) {
@@ -988,11 +994,25 @@ static APVPNManager *singletonVPNManager;
             filter.editable = @(NO);
             filter.enabled = @(NO);
 
-            return [antibanner subscribeFilters:filters jobController:nil];
+            result = [antibanner subscribeFilters:filters jobController:nil];
         }
+        
+        if (result == NO) {
+            
+            DDLogError(@"Error occurred when loading Simplified domain names filter.");
+            _lastError = [NSError
+                          errorWithDomain:APVpnManagerErrorDomain
+                          code:APVPN_MANAGER_ERROR_INSTALL_FILTER
+                          userInfo:@{
+                                     NSLocalizedDescriptionKey :
+                                         NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
+                                                           @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
+                                     }];
+            DDLogErrorTrace();
+        }
+        
+        return result;
     }
-
-    return NO;
 }
 
 @end
