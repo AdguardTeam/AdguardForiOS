@@ -57,6 +57,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 @implementation PacketTunnelProvider{
     
     void (^pendingStartCompletion)(NSError *error);
+    void (^pendingStopCompletion)(void);
     
     APDnsServerObject *_currentServer;
     BOOL    _localFiltering;
@@ -320,8 +321,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) Stop Tunnel Reason String:\n%@", reasonString);
     
     [_reachabilityHandler stopNotifier];
-
-	completionHandler();
+    
+    pendingStartCompletion = nil;
+    pendingStopCompletion = completionHandler;
+    
+    [_connectionHandler closeAllConnection:^{
+        pendingStartCompletion = nil;
+        pendingStopCompletion();
+        pendingStopCompletion = nil;
+        
+        DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+    }];
 }
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler

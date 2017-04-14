@@ -17,6 +17,7 @@
  */
 
 #import "ACommons/ACLang.h"
+#import "ACommons/ACSystem.h"
 #import "APTUdpProxySession.h"
 #import "APTunnelConnectionsHandler.h"
 #import "PacketTunnelProvider.h"
@@ -55,6 +56,7 @@
     BOOL _packetFlowObserver;
     
     dispatch_queue_t _readQueue;
+    dispatch_block_t _closeCompletion;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -73,6 +75,8 @@
         _sessions = [NSMutableSet set];
         _whitelistLock = _blacklistLock =_dnsAddressLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
+        
+        _closeCompletion = nil;
         
         _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
     }
@@ -157,9 +161,19 @@
 
 - (void)removeSession:(APTUdpProxySession *)session {
 
+    dispatch_block_t closeCompletion = nil;
     @synchronized(self) {
 
         [_sessions removeObject:session];
+        
+        if (_closeCompletion && _sessions.count == 0) {
+            closeCompletion = _closeCompletion;
+            _closeCompletion = nil;
+        }
+    }
+    if (closeCompletion) {
+        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnection completion will be run.");
+        [ACSSystemUtils callOnMainQueue:closeCompletion];
     }
 }
 
@@ -211,6 +225,18 @@
     return address;
 }
 
+- (void)closeAllConnection:(void (^)(void))completion {
+    
+    @synchronized (self) {
+        _closeCompletion = completion;
+        NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
+        for (APTUdpProxySession *item in sessions) {
+            
+            [item close];
+        }
+        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnection method completed.");
+    }
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark KVO
 

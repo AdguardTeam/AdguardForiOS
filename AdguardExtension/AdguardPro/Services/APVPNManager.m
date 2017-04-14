@@ -116,7 +116,12 @@ static APVPNManager *singletonVPNManager;
             
                                   dispatch_async(dispatch_get_main_queue(), ^{
                                       
-                                      DDLogInfo(@"(APVPNManager) Notify others that vpn connection status changed with error: %@", _lastError.localizedDescription);
+                                      if (self.lastError) {
+                                          DDLogInfo(@"(APVPNManager) Notify others that vpn connection status changed with error: %@", self.lastError.localizedDescription);
+                                      }
+                                      else {
+                                          DDLogInfo(@"(APVPNManager) Notify others that vpn connection status changed.");
+                                      }
                                       [[NSNotificationCenter defaultCenter] postNotificationName:APVpnChangedNotification object:self];
                                       
                                       // Reset last ERROR!!!
@@ -156,10 +161,7 @@ static APVPNManager *singletonVPNManager;
             // In this case we need in subscribing to simple domains filter
             dispatch_async(workingQueue, ^{
                 
-                if (![self prepareForLocalFiltering]) {
-                    
-                    [self sendNotification];
-                }
+                [self prepareForLocalFiltering];
             });
         }
 
@@ -380,7 +382,7 @@ static APVPNManager *singletonVPNManager;
             [[AESharedResources sharedDefaults] setBool:_dnsRequestsLogging forKey:APDefaultsDnsLoggingEnabled];
         }
         
-        [self sendNotification];
+        [self sendNotificationForced:NO];
     }
 }
 
@@ -403,7 +405,7 @@ static APVPNManager *singletonVPNManager;
         DDLogWarn(@"(APVPNManager)  Can't send message for reload domains lists data: VPN session connection is nil");
     }
     
-    [self sendNotification];
+    [self sendNotificationForced:NO];
 }
 
 - (BOOL)clearDnsRequestsLog {
@@ -672,7 +674,7 @@ static APVPNManager *singletonVPNManager;
                       (self.localFiltering ? @"YES" : @"NO"));
         }
         
-        [self sendNotification];
+        [self sendNotificationForced:YES];
     }];
     
 }
@@ -707,7 +709,7 @@ static APVPNManager *singletonVPNManager;
         _busy = NO;
         [_busyLock unlock];
         
-        [self sendNotification];
+        [self sendNotificationForced:NO];
         return;
     }
     
@@ -767,7 +769,7 @@ static APVPNManager *singletonVPNManager;
                       (self.activeRemoteDnsServer.serverName ?: @"None"),
                       (self.localFiltering ? @"YES" : @"NO"));
             
-            [self sendNotification];
+            [self sendNotificationForced:NO];
             return;
         }
         
@@ -884,7 +886,7 @@ static APVPNManager *singletonVPNManager;
                        // When connection status is changed
                        DDLogInfo(@"(APVPNManager) Notify that vpn connection status changed.");
                        [self setStatuses];
-                       [self sendNotification];
+                       [self sendNotificationForced:NO];
                    }];
     
     [_observers addObject:observer];
@@ -944,9 +946,14 @@ static APVPNManager *singletonVPNManager;
     _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
 }
 
-- (void)sendNotification{
+- (void)sendNotificationForced:(BOOL)forced{
     
-    [_delayedSendNotify executeOnceAfterCalm];
+    if (forced) {
+        [_delayedSendNotify executeNow];
+    }
+    else {
+        [_delayedSendNotify executeOnceAfterCalm];
+    }
 }
 
 - (void)saveCustomRemoteDnsServersToDefaults {

@@ -83,4 +83,13 @@
  */
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
+/**
+ Closes all existing connections, prevents to create new.
+ Call this method before stop tunnel.
+
+ @param completion code blocks, 
+ which is performed on main queue, when all connections will be closed.
+ */
+- (void)closeAllConnection:(void (^)(void))completion;
+
 @end
