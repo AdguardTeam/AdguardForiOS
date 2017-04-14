@@ -47,6 +47,7 @@ CFIndex getIndex(const char *str, size_t len);
     DomainQueue *_domainsExactMatch[HASH_TABLE_SIZE];
     DomainQueue *_domainsFullMatch[HASH_TABLE_SIZE];
     NSMutableArray <AERDomainFilterRule *> *_domainsMasksRules;
+    NSUInteger _rulesCount;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -56,6 +57,8 @@ CFIndex getIndex(const char *str, size_t len);
 - (id)init {
     self = [super init]; // [super _init_];
     if (self) {
+        
+        _rulesCount = 0;
         _pointerFunctions = [NSPointerFunctions pointerFunctionsWithOptions:
                              NSPointerFunctionsMallocMemory
                              | NSPointerFunctionsCStringPersonality
@@ -87,6 +90,11 @@ CFIndex getIndex(const char *str, size_t len);
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////////
 
+- (NSUInteger)rulesCount {
+    
+    return _rulesCount;
+}
+
 - (void)addRule:(AERDomainFilterRule *)rule {
     
     if ([NSString isNullOrEmpty:rule.domainPattern]) {
@@ -107,6 +115,8 @@ CFIndex getIndex(const char *str, size_t len);
         
         [self addDomain:rule.domainPattern toHash:_domainsExactMatch];
     }
+    
+    _rulesCount++;
 }
 
 - (BOOL)filteredDomain:(NSString *)domain {
