@@ -34,6 +34,8 @@
 #pragma mark -  Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
+@property (readonly, nonatomic) NSUInteger rulesCount;
+
 /// Adds rule to Domain Filter
 - (void)addRule:(__unsafe_unretained AERDomainFilterRule *)rule;
 

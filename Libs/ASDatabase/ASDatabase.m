@@ -155,7 +155,7 @@ static ASDatabase *singletonDB;
                 }
             }
             if (result == NO) {
-                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
+                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseInitDefaultDbErrorCode
                                              userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
                 DDLogError(@"Error init default DB.");
                 
