@@ -171,6 +171,7 @@
 		653153841D00179300C92A73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F3981D1B7B684700ABCD39 /* Main.storyboard */; };
 		653843011B9B52B300AABD5A /* AEUISubscriptionLoaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653843001B9B52B300AABD5A /* AEUISubscriptionLoaderController.m */; };
 		653843041B9B67C600AABD5A /* AEUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 653843031B9B67C600AABD5A /* AEUILoaderSegue.m */; };
+		653987AC1EA4052C001D1A5F /* APSProductSchemaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653987AB1EA4052C001D1A5F /* APSProductSchemaManager.m */; };
 		653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
 		653AE9F51D084B6400AC81B4 /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
 		653AE9F61D084B6400AC81B4 /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
@@ -318,6 +319,8 @@
 		655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
+		6562800A1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656280091EA3EB2600EC9F97 /* AESProductSchemaManager.m */; };
+		6562800B1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656280091EA3EB2600EC9F97 /* AESProductSchemaManager.m */; };
 		656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656B2ACE1B9EFBDD006A1C48 /* Social.framework */; };
 		656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 657107AC1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m */; };
@@ -928,6 +931,8 @@
 		653843001B9B52B300AABD5A /* AEUISubscriptionLoaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUISubscriptionLoaderController.m; sourceTree = "<group>"; };
 		653843021B9B67C600AABD5A /* AEUILoaderSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILoaderSegue.h; sourceTree = "<group>"; };
 		653843031B9B67C600AABD5A /* AEUILoaderSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILoaderSegue.m; sourceTree = "<group>"; };
+		653987AA1EA4052C001D1A5F /* APSProductSchemaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSProductSchemaManager.h; sourceTree = "<group>"; };
+		653987AB1EA4052C001D1A5F /* APSProductSchemaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSProductSchemaManager.m; sourceTree = "<group>"; };
 		653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlacklistDomainObject.h; sourceTree = "<group>"; };
 		653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObject.m; sourceTree = "<group>"; };
 		653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObjectTest.m; sourceTree = "<group>"; };
@@ -1080,6 +1085,8 @@
 		655E94921BBEADD500286FBE /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIPlayerViewController.h; sourceTree = "<group>"; };
 		655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIPlayerViewController.m; sourceTree = "<group>"; };
+		656280081EA3EB2600EC9F97 /* AESProductSchemaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AESProductSchemaManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		656280091EA3EB2600EC9F97 /* AESProductSchemaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AESProductSchemaManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		656B2ACE1B9EFBDD006A1C48 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		657107AB1BA5C575006255F3 /* AEUIWelcomePagerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIWelcomePagerDataSource.h; sourceTree = "<group>"; };
@@ -1556,6 +1563,8 @@
 			children = (
 				653153601CFC63C000C92A73 /* APVPNManager.h */,
 				653153611CFC63C000C92A73 /* APVPNManager.m */,
+				653987AA1EA4052C001D1A5F /* APSProductSchemaManager.h */,
+				653987AB1EA4052C001D1A5F /* APSProductSchemaManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1919,6 +1928,8 @@
 				65D9A25E1C0328E6004DA210 /* AESSupport.m */,
 				65C12EE91BD4D29F00FFC71C /* AESFilterConverter.h */,
 				65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */,
+				656280081EA3EB2600EC9F97 /* AESProductSchemaManager.h */,
+				656280091EA3EB2600EC9F97 /* AESProductSchemaManager.m */,
 				65B40D321BDE635200A9C595 /* JSConverter.js */,
 				65C12EEB1BD4D29F00FFC71C /* Database */,
 			);
@@ -3208,9 +3219,11 @@
 				659886821CF74DE9003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */,
 				659886831CF74DE9003ECD1C /* DDTTYLogger.m in Sources */,
 				659886841CF74DE9003ECD1C /* AEUISubscriptionController.m in Sources */,
+				6562800B1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
 				659886861CF74DE9003ECD1C /* AESFilterConverter.m in Sources */,
 				659886871CF74DE9003ECD1C /* DDContextFilterLogFormatter.m in Sources */,
+				653987AC1EA4052C001D1A5F /* APSProductSchemaManager.m in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
@@ -3475,6 +3488,7 @@
 				65FAB3371D6C569500A0706B /* ACObject.m in Sources */,
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
+				6562800A1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
 				653843011B9B52B300AABD5A /* AEUISubscriptionLoaderController.m in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
