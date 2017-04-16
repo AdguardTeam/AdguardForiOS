@@ -71,7 +71,6 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     NSError     *_standartError;
     
     BOOL _dnsRequestsLogging;
-    BOOL _tunnelRestarted;
     
     NSMutableArray <APDnsServerObject *> *_predefinedRemoteDnsServers;
     NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
@@ -103,8 +102,6 @@ static APVPNManager *singletonVPNManager;
     
     self = [super init];
     if (self) {
-        
-        _tunnelRestarted = NO;
         
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
         _notificationQueue = [NSOperationQueue new];
@@ -155,14 +152,16 @@ static APVPNManager *singletonVPNManager;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
         
-        // We need in subscribing to simple domains filter
-        dispatch_async(workingQueue, ^{
-            
-            if (![self prepareForLocalFiltering]) {
+        if (APVPNManager.defaultLocalFilteringState) {
+            // In this case we need in subscribing to simple domains filter
+            dispatch_async(workingQueue, ^{
                 
-                [self sendNotification];
-            }
-        });
+                if (![self prepareForLocalFiltering]) {
+                    
+                    [self sendNotification];
+                }
+            });
+        }
 
         
         [self loadConfiguration];
@@ -255,11 +254,18 @@ static APVPNManager *singletonVPNManager;
 
 + (BOOL)defaultLocalFilteringState {
     
-    return APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_LOCAL_FILTERING_LESS_10 : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING);
 }
 + (NSUInteger)defaultDnsServerIndex {
     
-    return APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX;
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    return (version < 10.0 ? APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10 : APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX);
+}
+
++ (NSUInteger)workaroundDnsServerIndex {
+    
+    return APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -658,20 +664,6 @@ static APVPNManager *singletonVPNManager;
         dispatch_sync(workingQueue, ^{
             
             [self setStatuses];
-            
-            // Restart tunnel (once) if it started incorrectly before.
-            if (! _tunnelRestarted
-                && [[AESharedResources sharedDefaults] boolForKey:APDefaultsSystemWideRulesInTunnelIsEmpty]) {
-                _tunnelRestarted = YES;
-                
-                DDLogInfo(@"(APVPNManager) Tunnel set APDefaultsSystemWideRulesInTunnelIsEmpty flag.");
-                
-                [[AESharedResources sharedDefaults] setBool:NO forKey:APDefaultsSystemWideRulesInTunnelIsEmpty];
-                [[AESharedResources sharedDefaults] synchronize];
-                
-                DDLogInfo(@"(APVPNManager) Send signal to tunnel that will cause it restart.");
-                [self sendReloadSystemWideDomainLists];
-            }
         });
         
         if (error) {
