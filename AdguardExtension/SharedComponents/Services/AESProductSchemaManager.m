@@ -72,7 +72,7 @@
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Helper methods (private)
+#pragma mark Helper Methods (private)
 
 
 @end

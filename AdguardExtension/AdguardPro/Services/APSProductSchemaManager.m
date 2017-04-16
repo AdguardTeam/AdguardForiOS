@@ -30,6 +30,8 @@
     BOOL result = [super onInstall];
     if (result) {
         
+        //set VPN Manager
+        [self installDefaultSettingsForVPNManager];
         
     }
     return result;
@@ -50,15 +52,7 @@
                 if (result) {
                     
                     //set VPN Manager
-                    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-                    if (version < 10.0) {
-                        
-                        [self installDefaultSettingsForVPNManagerV9];
-
-                    }
-                    else {
-                        [self installDefaultSettingsForVPNManagerV10];
-                    }
+                    [self installDefaultSettingsForVPNManager];
                 }
             }
         }
@@ -67,6 +61,8 @@
     return result;
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper Methods (private)
 
 + (BOOL)installSimpleDomainnamesFilter {
     
@@ -117,4 +113,17 @@
     DDLogInfo(@"(APSProductSchemaManager) VPN Manager: local filtering = YES, system default DNS server.");
 }
 
++ (void)installDefaultSettingsForVPNManager {
+    
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (version < 10.0) {
+        
+        [self installDefaultSettingsForVPNManagerV9];
+        
+    }
+    else {
+        [self installDefaultSettingsForVPNManagerV10];
+    }
+
+}
 @end
