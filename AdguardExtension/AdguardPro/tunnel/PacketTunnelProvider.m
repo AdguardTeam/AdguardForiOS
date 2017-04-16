@@ -164,6 +164,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         return;
     }
     
+    if ([self reloadWhitelistBlacklistDomain] == NO) {
+        
+        DDLogError(@"(PacketTunnelProvider) We switch filtration to Default server. And turn off local filtering.");
+        @autoreleasepool {
+            _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.defaultDnsServerIndex];
+            _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+        }
+
+        _localFiltering = NO;
+    }
+    
     // IPv4
     NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
                             initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
@@ -240,24 +251,21 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     settings.DNSSettings = dns;
     
-    if ([self reloadWhitelistBlacklistDomain]) {
+    // SETs network settings
+    __typeof__(self) __weak wSelf = self;
+    [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
         
-        // SETs network settings
-        __typeof__(self) __weak wSelf = self;
-        [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
-            
-            __typeof__(self) sSelf = wSelf;
-            
-            @synchronized (sSelf->_connectionHandler) {
-                if (sSelf->_connectionHandler) {
-                    [sSelf->_connectionHandler startHandlingPackets];
-                }
+        __typeof__(self) sSelf = wSelf;
+        
+        @synchronized (sSelf->_connectionHandler) {
+            if (sSelf->_connectionHandler) {
+                [sSelf->_connectionHandler startHandlingPackets];
             }
-            
-            sSelf->pendingStartCompletion(error);
-            sSelf->pendingStartCompletion = nil;
-        }];
-    }
+        }
+        
+        sSelf->pendingStartCompletion(error);
+        sSelf->pendingStartCompletion = nil;
+    }];
 }
 
 - (void)stopTunnelWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler
@@ -464,7 +472,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     @autoreleasepool {
 
-        NSLog(@"TEst nslog");
         AERDomainFilter *wRules = [AERDomainFilter filter];
         AERDomainFilter *bRules = [AERDomainFilter filter];
 
@@ -476,38 +483,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             
             [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
             NSError *error = [[ASDatabase singleton] error];
-            if (error) {
-
-                if (error.code == ASDatabaseInitDefaultDbErrorCode) {
-                    
-                    DDLogError(@"(PacketTunnelProvider) Init default DB failured.");
-                    NSError *error = [NSError errorWithDomain:APVpnManagerErrorDomain code:APVPN_MANAGER_ERROR_STANDART userInfo:nil];
-                    
-                    NSDate *date = [[AESharedResources sharedDefaults] objectForKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
-                    if (date == nil || ([date timeIntervalSinceNow] * -1) > TIME_INTERVAL_FOR_WARNING_MESSAGE) {
-                        
-                        [self displayMessage:NSLocalizedStringFromTable(@"WARNING. Internet connection is not available. It is necessary to run the application to finish the configuration process after the recent update.",
-                                                                        @"AdguardPro.Tunnel",
-                                                                        @"(PacketTunnelProvider) This is a warning message that will be shown to users after the update in some cases.")
-                           completionHandler:^(BOOL success) {
-                               
-                               DDLogInfo(@"(PacketTunnelProvider) Warning message about upgrade was shown.");
-                               [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:APDefaultsBadVPNConfigurationWarningDisplayDate];
-                               pendingStartCompletion(error);
-                           }];
-                    }
-                    else{
-                        
-                        pendingStartCompletion(error);
-                    }
-                    
-                    return NO;
-                }
-                
-                rules = [NSArray new];
-                DDLogInfo(@"(PacketTunnelProvider) System-Wide filtering was initialized with empty rules list.");
-            }
-            else {
+            if (!error) {
                 
                 AESAntibanner *antibanner = [[AEService new] antibanner];
                 rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
@@ -516,8 +492,15 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             }
             
             [ASDatabase destroySingleton];
-            
             //--------------------------
+            if (rules.count == 0) {
+                DDLogInfo(@"(PacketTunnelProvider) System-Wide filtering has empty rules list.");
+                DDLogInfo(@"(PacketTunnelProvider) Set APDefaultsSystemWideRulesInTunnelIsEmpty flag.");
+                [[AESharedResources sharedDefaults] setBool:YES forKey:APDefaultsSystemWideRulesInTunnelIsEmpty];
+                [[AESharedResources sharedDefaults] synchronize];
+
+                return NO;
+            }
         }
         
         @autoreleasepool {
