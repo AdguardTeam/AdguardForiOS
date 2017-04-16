@@ -18,6 +18,7 @@
 
 
 #import "AESProductSchemaManager.h"
+#import "ACommons/ACLang.h"
 #import "AESharedResources.h"
 
 #define SCHEMA_VERSION                      @(1)
@@ -37,11 +38,17 @@
  
     if (! [currentSchemaVersion isEqual:SCHEMA_VERSION]) {
         
+        DDLogInfo(@"(AESProductSchemaManager) Upgrade will be started. Current schema version: %@, we need: %@.", currentSchemaVersion, SCHEMA_VERSION);
+        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             
             if ([self onUpgradeFrom:currentSchemaVersion to:SCHEMA_VERSION]) {
                 
                 [[AESharedResources sharedDefaults] setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
+            }
+            else {
+                
+                DDLogError(@"(AESProductSchemaManager) Product schema could not upgraded.");
             }
         });
     }

@@ -39,6 +39,8 @@
 
 + (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
     
+    DDLogInfo(@"(APSProductSchemaManager) upgrade from:%@ to:%@ started.", from, to);
+    
     BOOL result = [super onUpgradeFrom:from to:to];
     if (result) {
         
@@ -46,6 +48,7 @@
             
             if ([to isEqual:@(1)]) {
                 // Upgrade from 1.1.* or 1.2.0 to 1.2.1
+                DDLogInfo(@"(APSProductSchemaManager) Upgrade from 1.1.* or 1.2.0 to 1.2.1");
                 
                 //install filter
                 result = [self installSimpleDomainnamesFilter];

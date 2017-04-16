@@ -35,11 +35,6 @@ extern NSString *APDefaultsDnsLoggingEnabled;
  User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
  */
 extern NSString *APDefaultsCustomRemoteDnsServers;
-/**
- User Defaults key that define, 
- date/time when was displayed warning message about bad VPN configuration (whicn displayed from tunnel provider).
- */
-extern NSString *APDefaultsBadVPNConfigurationWarningDisplayDate;
 
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     
