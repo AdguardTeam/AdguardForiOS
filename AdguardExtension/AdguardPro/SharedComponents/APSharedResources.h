@@ -36,12 +36,6 @@ extern NSString *APDefaultsDnsLoggingEnabled;
  */
 extern NSString *APDefaultsCustomRemoteDnsServers;
 /**
- User Defaults key, which defines that when tunnel started last time,
- it could not load rules for system-wide filtering.
- */
-extern NSString *APDefaultsSystemWideRulesInTunnelIsEmpty;
-
-/**
  User Defaults key that define, 
  date/time when was displayed warning message about bad VPN configuration (whicn displayed from tunnel provider).
  */

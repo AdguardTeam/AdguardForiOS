@@ -31,6 +31,12 @@
 
 #import "AESharedResources.h"
 
+#ifdef PRO
+#import "APSProductSchemaManager.h"
+#else
+#import "AESProductSchemaManager.h"
+#endif
+
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
@@ -102,6 +108,12 @@ typedef void (^AEDownloadsCompletionBlock)();
         if ([[AEService singleton] firstRunInProgress]) {
             
             [[AEService singleton] onReady:^{
+                
+#ifdef PRO
+                [APSProductSchemaManager install];
+#else
+                [AESProductSchemaManager install];
+#endif
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [self loadMainNavigationController];
@@ -110,6 +122,13 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         else{
             
+            [[AEService singleton] onReady:^{
+#ifdef PRO
+                [APSProductSchemaManager upgrade];
+#else
+                [AESProductSchemaManager upgrade];
+#endif
+            }];
             [self loadMainNavigationController];
         }
         

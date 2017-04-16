@@ -65,8 +65,7 @@ extern NSString *APVpnManagerErrorDomain;
 #define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX              0
 #define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               YES
 
-#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10      1
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING_LESS_10       NO
+#define APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX       1
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
@@ -89,19 +88,6 @@ extern NSString *APVpnManagerErrorDomain;
  List of the app defined DNS servers.
  */
 @property (class, readonly) NSMutableArray <APDnsServerObject *> *predefinedDnsServers;
-/**
- Default state of the local filtering.
- */
-@property (class, readonly) BOOL defaultLocalFilteringState;
-/**
- Index of the default DNS server in `predefinedDnsServers` class property.
- */
-@property (class, readonly) NSUInteger defaultDnsServerIndex;
-/**
- Index of the DNS server in `predefinedDnsServers` class property, 
- which used if error occurs in system-wide filtering.
- */
-@property (class, readonly) NSUInteger workaroundDnsServerIndex;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

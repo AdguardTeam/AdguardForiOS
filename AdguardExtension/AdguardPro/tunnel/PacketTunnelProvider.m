@@ -121,15 +121,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if (_currentServer == nil) {
 
         @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.defaultDnsServerIndex];
+            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
+            _localFiltering = NO;
+            _isRemoteServer = YES;
         }
     }
+    else {
+        
+        _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
+        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+    }
     
-    _localFiltering = protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
-    [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue]
-    : APVPNManager.defaultLocalFilteringState;
-    
-    _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
     
     DDLogInfo(@"PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
               (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
@@ -394,8 +396,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 
                 DDLogError(@"(PacketTunnelProvider) We switch filtration to default remote server.");
                 @autoreleasepool {
-                    _currentServer = APVPNManager.predefinedDnsServers[APVPNManager.workaroundDnsServerIndex];
-                    _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+                    _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
+                    _isRemoteServer = YES;
                 }
             }
         }
