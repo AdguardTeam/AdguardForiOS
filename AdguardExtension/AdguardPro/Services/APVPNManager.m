@@ -163,7 +163,10 @@ static APVPNManager *singletonVPNManager;
         // We need in subscribing to simple domains filter
         dispatch_async(workingQueue, ^{
             
-                [self prepareForLocalFiltering];
+            if (![self prepareForLocalFiltering]) {
+                
+                [self sendNotificationForced:NO];
+            }
         });
         
         [self loadConfiguration];
