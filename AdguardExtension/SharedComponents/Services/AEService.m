@@ -27,6 +27,7 @@
 #import "AEWhitelistDomainObject.h"
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
+NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEServices
@@ -60,6 +61,8 @@ typedef enum {
     UIBackgroundTaskIdentifier _reloadContentBlockingJsonLongTaskId;
     
     BOOL started;
+    
+    NSString *_unexpectedErrorMessage;
 }
 
 @end
@@ -78,6 +81,8 @@ static AEService *singletonService;
     if (self) {
         
         workQueue = dispatch_queue_create("AAService", DISPATCH_QUEUE_SERIAL);
+        
+        _unexpectedErrorMessage = NSLocalizedString(@"An unexpected error occurred. Please contact support team.", @"(AEService) The default message for an unknown error.");
         
         //------------ Checking First Running -----------------------------
         [self checkFirstRunning];
@@ -165,6 +170,35 @@ static AEService *singletonService;
     return antibanner;
 }
 
+- (NSError *)checkRule:(ASDFilterRule *)rule {
+    
+    BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
+    
+    NSError *error = nil;
+    [self convertOneRule:rule optimize:optimize error:&error];
+    
+    if (error) {
+        return error;
+    }
+
+    return nil;
+}
+
+- (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules {
+    
+    if (rules == nil) {
+
+        rules = [NSArray new];
+    }
+    
+    if ([antibanner importRules:rules filterId:@(ASDF_USER_FILTER_ID)]) {
+        return nil;
+    }
+    
+    return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                           userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
+}
+
 - (NSError *)updateRule:(ASDFilterRule *)rule oldRuleText:(NSString *)oldRuleText{
 
     @autoreleasepool {
@@ -181,10 +215,7 @@ static AEService *singletonService;
         //Check that rule may be converted
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
-            BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            
-            NSError *error = nil;
-            [self convertOneRule:rule optimize:optimize error:&error];
+            NSError *error = [self checkRule:rule];
             
             if (error) {
                 return error;
@@ -198,7 +229,8 @@ static AEService *singletonService;
             return nil;
         }
         
-        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                               userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
     }
 }
 
@@ -214,10 +246,7 @@ static AEService *singletonService;
         //Check that rule may be converted
         if (![rule.ruleText hasPrefix:COMMENT]) {
             
-            BOOL optimize = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-            
-            NSError *error = nil;
-            [self convertOneRule:rule optimize:optimize error:&error];
+            NSError *error = [self checkRule:rule];
             
             if (error) {
                 return error;
@@ -234,7 +263,8 @@ static AEService *singletonService;
             return nil;
         }
         
-        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                               userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
     }
 }
 
@@ -275,14 +305,14 @@ static AEService *singletonService;
                 break;
             }
 
-            BOOL result = NO;
-
-            result = [antibanner addRule:rule];
-
-            if (!result) {
-
-                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
-                break;
+            @autoreleasepool {
+                AESharedResources *res = [AESharedResources new];
+                NSMutableArray *whitelistRules = res.whitelistContentBlockingRules;
+                if (whitelistRules == nil) {
+                    whitelistRules = [NSMutableArray new];
+                }
+                [whitelistRules addObject:rule];
+                res.whitelistContentBlockingRules = whitelistRules;
             }
 
             NSInteger maxRules = [[[AESharedResources sharedDefaults]
@@ -374,13 +404,30 @@ static AEService *singletonService;
                 break;
             }
             
-            BOOL result = NO;
+            __block BOOL result = NO;
+            __block NSUInteger index = 0;
             
-            result = [self removeRules:@[rule]];
-            
+            @autoreleasepool {
+                AESharedResources *res = [AESharedResources new];
+                NSMutableArray *whitelistRules = res.whitelistContentBlockingRules;
+                [whitelistRules enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([rule isEqualRuleText:obj]) {
+                        index = idx;
+                        result = YES;
+                        *stop = YES;
+                    }
+                }];
+                
+                if (result) {
+                    [whitelistRules removeObjectAtIndex:index];
+                    res.whitelistContentBlockingRules = whitelistRules;
+                }
+            }
+
             if (!result) {
                 
-                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB userInfo:nil];
+                error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_DB
+                                        userInfo:@{NSLocalizedDescriptionKey: _unexpectedErrorMessage}];
                 break;
             }
             
@@ -617,7 +664,14 @@ static AEService *singletonService;
                         
                         @autoreleasepool {
                             
-                            NSArray *rules = [self.antibanner activeRules];
+                            // getting filters rules
+                            NSMutableArray *rules = [self.antibanner activeRules];
+                            // getting whitelist rules
+                            NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
+                            if (whitelistRules.count) {
+                                [rules addObjectsFromArray:whitelistRules];
+                            }
+                            
                             if (rules.count) {
                                 
                                 // run converter
@@ -885,8 +939,9 @@ static AEService *singletonService;
 
             if (![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]) {
 
-                NSString *errorDescription = NSLocalizedString(@"Cannot add the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
-                err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription}];
+                NSString *errorDescription = NSLocalizedString(@"Cannot convert the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
+                err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription,
+                                                                                                               AESUserInfoRuleObject: rule}];
                 break;
             }
             

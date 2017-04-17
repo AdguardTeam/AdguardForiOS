@@ -26,3 +26,8 @@
 #import "Lang/ACLExecuteBlockDelayed.h"
 #import "Lang/ACLFileLocker.h"
 #import "Lang/ACObject.h"
+#import "Lang/NSStringPunycodeAdditions.h"
+
+#define ASSIGN_WEAK(A)     __weak __typeof__(A) w##A = A
+#define ASSIGN_STRONG(A)   __typeof__(A) s##A = w##A
+#define USE_STRONG(A)          s##A

@@ -146,7 +146,7 @@ static APVPNManager *singletonVPNManager;
         [self attachToNotifications];
         
         _maxCountOfRemoteDnsServers = MAX_COUNT_OF_REMOTE_DNS_SERVERS;
-        _localFiltering = YES;
+        _localFiltering = NO;
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
@@ -537,26 +537,6 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = @(_enabled);
         }
         
-        if (localFiltering) {
-            
-            if (![self prepareForLocalFiltering]) {
-                
-                DDLogError(@"Error occurred when loading Simplified domain names filter.");
-                _lastError = [NSError
-                              errorWithDomain:APVpnManagerErrorDomain
-                              code:APVPN_MANAGER_ERROR_INSTALL_FILTER
-                              userInfo:@{
-                                         NSLocalizedDescriptionKey :
-                                             NSLocalizedString(@"Unable to install filter for local DNS filtering. Please contact the support team.",
-                                                               @"(APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on Local Filtering functionality.")
-                                         }];
-                DDLogErrorTrace();
-                
-                [self sendNotification];
-
-                return;
-            }
-        }
         [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
     }
 }
@@ -791,6 +771,8 @@ static APVPNManager *singletonVPNManager;
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
         //-------------
         
+        NSString *connectionStatusReason = @"Unknown";
+        
         if (_manager.enabled && _manager.onDemandEnabled) {
             
             _enabled = YES;
@@ -799,25 +781,31 @@ static APVPNManager *singletonVPNManager;
                     
                 case NEVPNStatusDisconnected:
                     _connectionStatus = APVpnConnectionStatusDisconnected;
+                    connectionStatusReason = @"NEVPNStatusDisconnected The VPN is disconnected.";
                     break;
                     
                 case NEVPNStatusReasserting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusReasserting The VPN is reconnecting following loss of underlying network connectivity.";
                     break;
                     
                 case NEVPNStatusConnecting:
                     _connectionStatus = APVpnConnectionStatusReconnecting;
+                    connectionStatusReason = @"NEVPNStatusConnecting The VPN is connecting.";
                     break;
                     
                 case NEVPNStatusDisconnecting:
                     _connectionStatus = APVpnConnectionStatusDisconnecting;
+                    connectionStatusReason = @"NEVPNStatusDisconnecting The VPN is disconnecting.";
                     break;
                     
                 case NEVPNStatusConnected:
                     _connectionStatus = APVpnConnectionStatusConnected;
+                    connectionStatusReason = @"NEVPNStatusConnected The VPN is connected.";
                     break;
                     
                 case NEVPNStatusInvalid:
+                    connectionStatusReason = @"NEVPNStatusInvalid The VPN is not configured.";
                 default:
                     _connectionStatus = APVpnConnectionStatusInvalid;
                     break;
@@ -827,11 +815,15 @@ static APVPNManager *singletonVPNManager;
             
             _connectionStatus = APVpnConnectionStatusDisabled;
         }
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nmanager.enabled = %@\nmanager.onDemandEnabled = %@\nConnection Status: %@", _manager.enabled ? @"YES" : @"NO", _manager.onDemandEnabled ? @"YES" : @"NO", connectionStatusReason);
     }
     else{
         _activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
-        _localFiltering = YES;
+        _localFiltering = APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
         _connectionStatus = APVpnConnectionStatusDisabled;
+        
+        DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
     }
     
     // start delayed
@@ -954,34 +946,6 @@ static APVPNManager *singletonVPNManager;
     else {
         _customRemoteDnsServers = [NSMutableArray arrayWithCapacity:MAX_COUNT_OF_REMOTE_DNS_SERVERS];
     }
-}
-
-/**
- Checks that Simplified Domain Names Filter was installed. If not, installs it.
- */
-- (BOOL)prepareForLocalFiltering {
- 
-    AESAntibanner *antibanner = [[AEService singleton] antibanner];
-    if ([antibanner checkIfFilterInstalled:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
-        
-        return YES;
-    }
-    else {
-        
-        NSArray *filters = [[[antibanner metadataForSubscribe:NO] filters]
-                            filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId == %@", @(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]];
-        if (filters.count == 1) {
-            ASDFilterMetadata *filter = filters[0];
-            
-            filter.removable = @(NO);
-            filter.editable = @(NO);
-            filter.enabled = @(NO);
-
-            return [antibanner subscribeFilters:filters jobController:nil];
-        }
-    }
-
-    return NO;
 }
 
 @end

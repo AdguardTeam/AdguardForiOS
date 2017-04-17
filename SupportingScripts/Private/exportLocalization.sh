@@ -67,12 +67,21 @@ echo "========================= UPLOAD STRING FILES ============================
 echo "Uploading Application Strings for DEV locale"
 
 file="Localizable.strings"
+tfile="AdguardPro.Tunnel.strings"
+
+rm -v "${THEROOT}/Base.lproj/${tfile}"
+rm -v "${THEROOT}/Base.lproj/${file}"
 
 echo "Main App strings uploading.. "
-rm -v "${THEROOT}/Base.lproj/${file}"
 find "${THEROOT}" "${THESHAREDROOT}" "${THEPROROOT}" -name \*.m | xargs genstrings -o "${THEROOT}/Base.lproj"
 
 python ./Resources/upload.py -l en_US_POSIX -p $STRINGS_ID -f "${THEROOT}/Base.lproj/${file}" -a $apikey -s $secretkey -r IOS_STRINGS
+
+echo "Done"
+
+echo "Pro Tunnel strings uploading.. "
+
+python ./Resources/upload.py -l en_US_POSIX -p $STRINGS_ID -f "${THEROOT}/Base.lproj/${tfile}" -a $apikey -s $secretkey -r IOS_STRINGS
 
 echo "Done"
 
@@ -88,6 +97,8 @@ python ./Resources/upload.py -l en_US_POSIX -p $STRINGS_ID -f "${aFile}" -a $api
 rm -v "${aFile}"
 
 echo "Done"
+
+
 
 #echo "Uploading Application Strings Dict for DEV locale"
 #file="Localizable.stringsdict"

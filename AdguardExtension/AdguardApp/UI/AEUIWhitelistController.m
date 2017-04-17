@@ -15,224 +15,181 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #import "AEUIWhitelistController.h"
 #import "ACommons/ACLang.h"
-#import "ACommons/ACSystem.h"
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEService.h"
 #import "AEWhitelistDomainObject.h"
-#import "AEUIEditDomainController.h"
+#import "AEUICustomTextEditorController.h"
 #import "AEUIUtils.h"
+#import "AESharedResources.h"
 
-#ifdef PRO
-#import "APVPNManager.h"
-#endif
-
-@interface AEUIWhitelistController (){
-    
-    AEUIEditDomainController *_editRuleController;
-    NSString *_domainHolder;
-}
-
-@property NSMutableArray *rules;
-@property (strong, nonatomic) UISearchController *searchController;
-
-@end
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AEUIWhitelistController
 
 @implementation AEUIWhitelistController
 
-#pragma mark - Table view data source
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"doaminCellView" forIndexPath:indexPath];
+- (id)init {
     
-    
-    AEWhitelistDomainObject *object = self.rules[[indexPath row]];
-    if (object) {
-        cell.textLabel.text = object.domain;
-        return cell;
+    self = [super init];
+    if (self) {
+        
     }
     
-    return nil;
+    return self;
 }
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark Public methods
 
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        AEWhitelistDomainObject *object = self.rules[[indexPath row]];
++ (AEUIWhitelistController *)createWhitelistControllerWithSegue:(UIStoryboardSegue *)segue {
+    
+    
+    AEUICustomTextEditorController *domainList = segue.destinationViewController;
+    
+    domainList.textForPlaceholder = NSLocalizedString(@"Enter the domain names here (separated by spaces, commas or line breaks) which Adguard will disable filtering in Safari for.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.");
+    
+    domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. The title of the screen.");
+    domainList.keyboardType = UIKeyboardTypeURL;
+    
+    AEUIWhitelistController *result = [AEUIWhitelistController new];
+    
+    ASSIGN_WEAK(result);
+    domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
         
-        if (!object) {
-            return;
+        NSMutableArray <ASDFilterRule *> *rules = [NSMutableArray array];
+
+        @autoreleasepool {
+            
+            NSMutableCharacterSet *delimCharSet;
+            
+            delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+            [delimCharSet addCharactersInString:@", "];
+
+            for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
+                
+                if (item.length) {
+                    AEWhitelistDomainObject *obj = [[AEWhitelistDomainObject alloc] initWithDomain:item];
+                    if (obj) {
+                        [rules addObject:obj.rule];
+                    }
+                }
+            }
         }
         
-        [[[AEService singleton] antibanner] beginTransaction];
-        
-        [AEUIUtils removeWhitelistRule:object.rule toJsonWithController:self completionBlock:^{
+        @autoreleasepool {
             
-            [self.rules removeObjectAtIndex:[indexPath row]];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            AESharedResources *res = [AESharedResources new];
             
-            _newRuleCount++;
+            NSMutableArray *oldRules = res.whitelistContentBlockingRules;
             
-            [[[AEService singleton] antibanner] endTransaction];
+            res.whitelistContentBlockingRules = rules;
             
-        } rollbackBlock:^{
-            
-            // enable rule (rollback)
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-            
-            [tableView setEditing:NO animated:YES];
-        }];
-    }
-}
-
-
-#pragma mark - Navigation
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    
-    return YES;
-}
-
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    
-    _editRuleController = segue.destinationViewController;
-    
-    if ([segue.identifier isEqualToString:@"newRule"]){
-        
-        _editRuleController.navigationItem.title = NSLocalizedString(@"Enter Domain", @"(AEUIWhitelistController) New domain title");
-    }
-    else if ([segue.identifier isEqualToString:@"editRule"]) {
-        _editRuleController.navigationItem.title = NSLocalizedString(@"Edit Domain", @"(AEUIWhitelistController) Edit domain title");
-        
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        AEWhitelistDomainObject *object = self.rules[[path row]];
-        if (object) {
-            _editRuleController.domain = object;
-            _ruleHolder = [object.rule copy];
-            _domainHolder = object.domain;
-        }
-    }
-    // Pass the selected object to the new view controller.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    
-    if (_editRuleController && _editRuleController.done) {
-
-        AEWhitelistDomainObject *domain = _editRuleController.domain;
-        if ([domain.rule.ruleId unsignedIntegerValue] == 0) {
-
-            // New rule
-            
-            [[[AEService singleton] antibanner] beginTransaction];
-            
-            [AEUIUtils addWhitelistRule:domain.rule toJsonWithController:self completionBlock:^{
+            [AEUIUtils invalidateJsonWithController:editor completionBlock:^{
                 
-                // if rule is not comment decrease counter of the new rules
-                _newRuleCount--;
+                //Success
+                ASSIGN_STRONG(result);
                 
-                [self reloadRulesAndScrollBottom:YES];
+                [editor setLoadingStatus:YES];
+                [USE_STRONG(result) reloadUserFilterDataForEditorController:editor];
                 
-                [[[AEService singleton] antibanner] endTransaction];
             } rollbackBlock:^{
                 
-                [[[AEService singleton] antibanner] rollbackTransaction];
+                //Failure
+                res.whitelistContentBlockingRules = oldRules;
+                
             }];
         }
-        else{
-            // Update rule
-            
-            [[[AEService singleton] antibanner] beginTransaction];
-            
-            NSError *error = [[AEService singleton] updateRule:domain.rule oldRuleText:_ruleHolder.ruleText];
-            if (error){
+        
+        return NO;
+    };
+    
+    domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
+        
+        if ([text contains:@"/"]) {
+            if (text.length > 1) {
                 
-                [[[AEService singleton] antibanner] rollbackTransaction];
-
-                if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+                NSURL *url = [NSURL URLWithString:text];
+                text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                if (text) {
                     
-                    domain.domain = _domainHolder;
-                    [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUIWhitelistController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
+                    [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
                 }
             }
-            else{
-
-                [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-                
-                    [self reloadRulesAndScrollBottom:NO];
-
-                    [[[AEService singleton] antibanner] endTransaction];
-                    
-                } rollbackBlock:^{
-
-                    _ruleHolder.ruleText = domain.rule.ruleText;
-                    domain.domain = _domainHolder;
-                    
-                    [[[AEService singleton] antibanner] rollbackTransaction];
-                }];
-            }
+            return NO;
         }
+        
+        return YES;
+        
+    };
 
-    }
-    _editRuleController = nil;
+    domainList.auxiliaryObject = result;
+    domainList.delegate = result;
+    
+    return result;
+}
+/////////////////////////////////////////////////////////////////////
+#pragma mark Delegates
+
+
+- (void)editorDidAppear:(AEUICustomTextEditorController *)editor {
+    
+    //    if ([NSString isNullOrEmpty:self->_ruleTextHolderForAddRuleCommand]) {
+    
+    [editor setLoadingStatus:YES];
+    [self reloadUserFilterDataForEditorController:editor];
+    //    }
 }
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Private methods
-/////////////////////////////////////////////////////////////////////
 
-- (void)reloadRulesAndScrollBottom:(BOOL)bottom {
+/////////////////////////////////////////////////////////////////////
+#pragma mark Private methods
 
+
+- (void)reloadUserFilterDataForEditorController:(AEUICustomTextEditorController *)editor {
+    
     dispatch_async(
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-          @autoreleasepool {
-              NSArray *rules = [[[AEService singleton] antibanner]
-                  rulesForFilter:@(ASDF_USER_FILTER_ID)];
-              NSString *searchString = self.searchController.searchBar.text;
-
-              if (![NSString isNullOrEmpty:searchString]) {
-
-                  rules = [rules
-                      filteredArrayUsingPredicate:
-                          [NSPredicate
-                              predicateWithFormat:@"ruleText CONTAINS[cd] %@",
-                                                  searchString]];
-              }
-
-              NSMutableArray *uiRules = [NSMutableArray array];
-              self.rules = uiRules;
-              AEWhitelistDomainObject *object;
-              for (ASDFilterRule *item in rules) {
-
-                  object = [[AEWhitelistDomainObject alloc] initWithRule:item];
-                  if (object) {
-                      [uiRules addObject:object];
-                  }
-              }
-
-              dispatch_async(dispatch_get_main_queue(), ^{
-
-                [self.tableView reloadData];
-                if (bottom && self.rules.count) {
-                    [self.tableView
-                        scrollToRowAtIndexPath:
-                            [NSIndexPath indexPathForRow:(self.rules.count - 1)
-                                               inSection:0]
-                              atScrollPosition:UITableViewScrollPositionMiddle
-                                      animated:YES];
-                }
-              });
-          }
-        });
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                       @autoreleasepool {
+                      
+                           //create attributed text with all rules
+                           NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]
+                                                                        initWithString:@""
+                                                                        attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                           
+                           AESharedResources *resources = [AESharedResources new];
+                           
+                           NSMutableArray *rules = resources.whitelistContentBlockingRules;
+                           
+                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
+                                                                                         attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                           
+                           AEWhitelistDomainObject *obj;
+                           
+                           for (ASDFilterRule *item in rules) {
+                               
+                               obj = [[AEWhitelistDomainObject alloc]
+                                      initWithRule:item];
+                               if (obj) {
+                                   
+                                   NSAttributedString *attrDomain = [[NSAttributedString alloc] initWithString:obj.domain
+                                                                                       attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                                   [attributedText appendAttributedString:attrDomain];
+                                   [attributedText appendAttributedString:newline];
+                               }
+                           }
+                           
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               
+                                   // assign attributed text with all rules
+                                   editor.attributedTextForEditing = attributedText;
+                           });
+                       }
+                   });
+    
 }
 
 @end
+

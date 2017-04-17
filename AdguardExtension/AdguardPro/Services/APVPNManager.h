@@ -62,8 +62,11 @@ extern NSString *APVpnManagerErrorDomain;
 #define APVPN_MANAGER_ERROR_INSTALL_FILTER          500
 
 
-#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX      0
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING       YES
+#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX              0
+#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               YES
+
+#define APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX       1
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
