@@ -242,7 +242,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     pendingStartCompletion = nil;
     pendingStopCompletion = completionHandler;
     
-    [_connectionHandler closeAllConnection:^{
+    [_connectionHandler closeAllConnections:^{
         pendingStartCompletion = nil;
         pendingStopCompletion();
         pendingStopCompletion = nil;

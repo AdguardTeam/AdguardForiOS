@@ -172,7 +172,7 @@
         }
     }
     if (closeCompletion) {
-        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnection completion will be run.");
+        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
         [ACSSystemUtils callOnMainQueue:closeCompletion];
     }
 }
@@ -225,7 +225,7 @@
     return address;
 }
 
-- (void)closeAllConnection:(void (^)(void))completion {
+- (void)closeAllConnections:(void (^)(void))completion {
     
     @synchronized (self) {
         _closeCompletion = completion;
@@ -234,7 +234,7 @@
             
             [item close];
         }
-        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnection method completed.");
+        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections method completed.");
     }
 }
 /////////////////////////////////////////////////////////////////////

@@ -90,6 +90,6 @@
  @param completion code blocks, 
  which is performed on main queue, when all connections will be closed.
  */
-- (void)closeAllConnection:(void (^)(void))completion;
+- (void)closeAllConnections:(void (^)(void))completion;
 
 @end
