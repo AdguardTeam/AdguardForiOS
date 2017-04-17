@@ -469,11 +469,8 @@
 
         ASSIGN_WEAK(self);
 
-//        locLogVerboseTrace(@"before write packets");
         
         void (^completionForMainWrite)(NSError *_Nullable error) = ^(NSError *_Nullable error) {
-            
-//            locLogVerboseTrace(@"completion handler");
             
            ASSIGN_STRONG(self);
             
@@ -516,8 +513,6 @@
             
             // write packets to whitelist UDP session
             [self.whitelistUdpSession writeMultipleDatagrams:whitelistPackets completionHandler:^(NSError * _Nullable error) {
-                
-//                locLogVerboseTrace(@"whitelist completion handler");
                 
                 ASSIGN_STRONG(self);
                 
@@ -594,7 +589,6 @@
                         
                         [whitelistPackets addObject:packet];
                         whitelisted = YES;
-//                        locLogVerboseTrace(@"Domain to whiltelist: %@", name);
                         
                     }
                     else if ([self.delegate isBlacklistDomain:name]) {
@@ -605,7 +599,6 @@
                         
                         blacklisted = YES;
                         
-//                        locLogVerboseTrace(@"Domain to blacklist: %@", name);
                     }
                 }
                 
