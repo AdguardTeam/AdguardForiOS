@@ -69,6 +69,7 @@ static ACLLogger *singletonLogger;
         [DDLog addLogger:_fileLogger];
 #ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        [DDLog addLogger:[DDASLLogger sharedInstance]];
 #endif
         
         _initialized = YES;
