@@ -168,9 +168,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         @synchronized (sSelf->_connectionHandler) {
             if (sSelf->_connectionHandler) {
                 [sSelf->_connectionHandler startHandlingPackets];
+                DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
             }
         }
         
+        
+        DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
         sSelf->pendingStartCompletion(error);
         sSelf->pendingStartCompletion = nil;
     }];
@@ -238,6 +241,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     [_reachabilityHandler stopNotifier];
 
+    DDLogInfo(@"(PacketTunnelProvider) Call Stop CompletionHandler.");
 	completionHandler();
 }
 
@@ -251,11 +255,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             case APHTMLoggingEnabled:
                 //Log enabled
                 [_connectionHandler setDnsActivityLoggingEnabled:YES];
+                DDLogInfo(@"(PacketTunnelProvider) Handled LoggingEnabled Message Event");
                 break;
                 
             case APHTMLoggingDisabled:
                 //Log disabled
                 [_connectionHandler setDnsActivityLoggingEnabled:NO];
+                DDLogInfo(@"(PacketTunnelProvider) Handled LoggingDisabled Message Event");
                 break;
                 
             case APHTMLSystemWideDomainListReload:

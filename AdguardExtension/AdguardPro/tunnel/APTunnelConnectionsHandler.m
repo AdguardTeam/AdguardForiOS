@@ -92,6 +92,9 @@
 - (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses {
 
+    DDLogInfo(@"(APTunnelConnectionsHandler) Set device DNS addresses:\n%@\nAdguard DNS addresses:\n%@",
+              deviceDnsAddresses, adguardDnsAddresses);
+    
     if (!(deviceDnsAddresses.count && adguardDnsAddresses.count)) {
         
         OSSpinLockLock(&_dnsAddressLock);
