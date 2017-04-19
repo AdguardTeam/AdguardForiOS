@@ -109,6 +109,22 @@
     }
 }
 
+- (void)executeNow {
+    
+    __weak __typeof__(self) wSelf = self;
+    
+    dispatch_async(_workQueue, ^{
+        
+        __typeof__(self) sSelf = wSelf;
+        
+        if (sSelf == nil) {
+            return;
+        }
+        
+        sSelf->_block();
+    });
+}
+
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////////
