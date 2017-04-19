@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import "Logger/Lumberjack/DDFileLogger.h"
 #import "Logger/Lumberjack/DDTTYLogger.h"
+#import "Logger/Lumberjack/DDASLLogger.h"
 
 //Max log file size
 #define ACL_MAX_LOG_FILE_SIZE     512000

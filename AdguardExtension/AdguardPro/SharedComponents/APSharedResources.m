@@ -58,7 +58,6 @@
 NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
 NSString *APDefaultsCustomRemoteDnsServers = @"APDefaultsCustomRemoteDnsServers";
 NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
-NSString *APDefaultsBadVPNConfigurationWarningDisplayDate = @"APDefaultsBadVPNConfigurationWarningDisplayDate";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources

@@ -24,8 +24,9 @@
 
 #define ASD_DEFAULT_DB_NAME             @"default.db"
 
-#define ASDatabaseErrorDomain        @"ASDatabaseErrorDomain"
-#define ASDatabaseOpenErrorCode      100
+#define ASDatabaseErrorDomain               @"ASDatabaseErrorDomain"
+#define ASDatabaseOpenErrorCode             100
+#define ASDatabaseInitDefaultDbErrorCode    200
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ASDatabase
