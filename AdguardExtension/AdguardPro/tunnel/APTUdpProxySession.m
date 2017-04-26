@@ -141,7 +141,12 @@
 
     [self saveLogRecord:YES];
     
-    _workingQueue = nil;
+    [self.udpSession removeObserver:self forKeyPath:@"state"];
+    [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
+    [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    
+_workingQueue = nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -437,11 +442,6 @@
         locLogVerboseTrace(@"NWUDPSessionStateCancelled");
         if (_closed) {
             
-            [session removeObserver:self forKeyPath:@"state"];
-            [session removeObserver:self forKeyPath:@"hasBetterPath"];
-            [whitelistSession removeObserver:self forKeyPath:@"state"];
-            [whitelistSession removeObserver:self forKeyPath:@"hasBetterPath"];
-
             [self.delegate removeSession:self];
         }
     }
