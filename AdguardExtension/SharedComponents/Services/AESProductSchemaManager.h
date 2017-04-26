@@ -16,33 +16,31 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Foundation/Foundation.h>
-#import "ACommons/ACNetwork.h"
-#import "AERDomainFilterRule.h"
-
-/// Filters URLs
-@interface AERDomainFilter  : NSObject
+#import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark -  Init and Class methods
-/////////////////////////////////////////////////////////////////////
+#pragma mark - AESProductSchemaManager
 
-/// Main Create Method (constructor)
-+ (AERDomainFilter *)filter;
+@interface AESProductSchemaManager  : NSObject
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark -  Properties and public methods
+#pragma mark Init and Class methods
+
++ (void)upgrade;
++ (void)install;
+
 /////////////////////////////////////////////////////////////////////
+#pragma mark Properties and public methods
 
-@property (readonly, nonatomic) NSUInteger rulesCount;
+@end
 
-/// Adds rule to Domain Filter
-- (void)addRule:(__unsafe_unretained AERDomainFilterRule *)rule;
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AESProductSchemaManager (protected)
 
-/**
- @param domain Domain name
- @return Returns YES if request is filtered
- */
-- (BOOL)filteredDomain:(NSString *)domain;
-    
+@interface AESProductSchemaManager (protected)
+
++ (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to;
+
++ (BOOL)onInstall;
+
 @end

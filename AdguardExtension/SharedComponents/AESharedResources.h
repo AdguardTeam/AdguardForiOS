@@ -43,6 +43,10 @@ extern NSString *AEDefaultsAdguardEnabled;
  User Defaults key that defines app performs first start or not.
  */
 extern NSString *AEDefaultsFirstRunKey;
+/**
+ User Defaults key that defines schema version for upgrade procedure.
+ */
+extern NSString *AEDefaultsProductSchemaVersion;
 
 /**
  User Defaults key that defines last time, when the application checked updates of filters.
