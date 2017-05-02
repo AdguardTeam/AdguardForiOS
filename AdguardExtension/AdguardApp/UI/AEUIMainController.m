@@ -263,6 +263,7 @@
 #ifdef PRO
     BOOL enabled = [(UISwitch *)sender isOn];
     [[APVPNManager singleton] setEnabled:enabled];
+    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
 #endif
 }
 
