@@ -20,6 +20,7 @@
 #import "APUIDnsServersController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
+#import "ACommons/ACLang.h"
 #import "APDnsServerObject.h"
 #import "APUIDnsServerDetailController.h"
 
@@ -194,6 +195,7 @@
     if (selectedServer) {
         
         APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+        DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
         dispatch_async(dispatch_get_main_queue(), ^{
            
             [self selectActiveDnsServer:selectedServer];
