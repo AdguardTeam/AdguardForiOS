@@ -43,11 +43,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 #define V_REMOTE_ADDRESS                        @"127.1.1.1"
 
-#define V_INTERFACE_IPV4_ADDRESS                @"169.254.254.2"
-#define V_INTERFACE_IPV4_MASK                   @"255.255.255.255"
+#define V_INTERFACE_IPV4_ADDRESS                @"172.16.209.2"
+#define V_INTERFACE_IPV4_MASK                   @"255.255.255.252"
 
-#define V_INTERFACE_IPV6_ADDRESS                @"fe80::aaaa"
-#define V_INTERFACE_IPV6_MASK                   @(128)
+#define V_INTERFACE_IPV6_ADDRESS                @"fd12:1:1:1::2"
+#define V_INTERFACE_IPV6_MASK                   @(64)
 
 #define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
