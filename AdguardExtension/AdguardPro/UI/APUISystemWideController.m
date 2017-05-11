@@ -72,11 +72,9 @@
 
 - (IBAction)toggleLocalFiltering:(id)sender {
     
-    APVPNManager.singleton.localFiltering = self.statusSwitch.isOn;
-    if (APVPNManager.singleton.lastError) {
-        
-        [self.statusSwitch setOn:APVPNManager.singleton.localFiltering animated:YES];
-    }
+    BOOL enabled = self.statusSwitch.isOn;
+    APVPNManager.singleton.localFiltering = enabled;
+    DDLogInfo(@"(APUISystemWideController) Set Local Filtering to: %@", (enabled ? @"YES" : @"NO"));
 }
 
 - (IBAction)toggleLogStatus:(id)sender {

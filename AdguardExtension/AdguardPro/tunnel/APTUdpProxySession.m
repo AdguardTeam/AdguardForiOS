@@ -141,7 +141,12 @@
 
     [self saveLogRecord:YES];
     
-    _workingQueue = nil;
+    [self.udpSession removeObserver:self forKeyPath:@"state"];
+    [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
+    [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    
+_workingQueue = nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -167,6 +172,16 @@
             }
         });
     }
+}
+
+- (void)close {
+    
+    ASSIGN_WEAK(self);
+    dispatch_sync(_workingQueue, ^{
+        
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self) internalClose];
+    });
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -268,8 +283,13 @@
         }
         
         
-        if (error) {
-            DDLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.localizedDescription);
+        if (error &&
+            (USE_STRONG(self)->_dnsLoggingEnabled
+             || error.code != 89) // 89 - operation canceled
+            ) {
+            
+            
+            DDLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
             return;
         }
         
@@ -334,7 +354,7 @@
                 @autoreleasepool {
                     ASSIGN_STRONG(self);
                     [USE_STRONG(self) saveLogRecord:YES];
-                    [USE_STRONG(self) close];
+                    [USE_STRONG(self) internalClose];
                 }
             }];
         }
@@ -415,18 +435,13 @@
 
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
         locLogError(@"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
-        [self close];
+        [self internalClose];
     } else if (session.state == NWUDPSessionStateCancelled
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
         locLogVerboseTrace(@"NWUDPSessionStateCancelled");
         if (_closed) {
             
-            [session removeObserver:self forKeyPath:@"state"];
-            [session removeObserver:self forKeyPath:@"hasBetterPath"];
-            [whitelistSession removeObserver:self forKeyPath:@"state"];
-            [whitelistSession removeObserver:self forKeyPath:@"hasBetterPath"];
-
             [self.delegate removeSession:self];
         }
     }
@@ -454,11 +469,8 @@
 
         ASSIGN_WEAK(self);
 
-        locLogVerboseTrace(@"before write packets");
         
         void (^completionForMainWrite)(NSError *_Nullable error) = ^(NSError *_Nullable error) {
-            
-            locLogVerboseTrace(@"completion handler");
             
            ASSIGN_STRONG(self);
             
@@ -470,7 +482,7 @@
                 
                 NWHostEndpoint *endpoint = (NWHostEndpoint *)USE_STRONG(self).udpSession.endpoint;
                 locLogError(@"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
-                [USE_STRONG(self) close];
+                [USE_STRONG(self) internalClose];
                 return;
             }
             
@@ -502,8 +514,6 @@
             // write packets to whitelist UDP session
             [self.whitelistUdpSession writeMultipleDatagrams:whitelistPackets completionHandler:^(NSError * _Nullable error) {
                 
-                locLogVerboseTrace(@"whitelist completion handler");
-                
                 ASSIGN_STRONG(self);
                 
                 if (USE_STRONG(self) == nil) {
@@ -514,7 +524,7 @@
                     
                     NWHostEndpoint *endpoint = (NWHostEndpoint *)USE_STRONG(self)->_whitelistUdpSession.endpoint;
                     locLogError(@"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
-                    [USE_STRONG(self) close];
+                    [USE_STRONG(self) internalClose];
                     return;
                 }
                 // write packets to main UDP session
@@ -539,7 +549,7 @@
     return ipPackets;
 }
 
-- (void)close {
+- (void)internalClose {
 
     locLogTrace();
 
@@ -579,7 +589,6 @@
                         
                         [whitelistPackets addObject:packet];
                         whitelisted = YES;
-                        locLogVerboseTrace(@"Domain to whiltelist: %@", name);
                         
                     }
                     else if ([self.delegate isBlacklistDomain:name]) {
@@ -590,7 +599,6 @@
                         
                         blacklisted = YES;
                         
-                        locLogVerboseTrace(@"Domain to blacklist: %@", name);
                     }
                 }
                 

@@ -325,6 +325,8 @@
 		656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		657107AD1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 657107AC1BA5C575006255F3 /* AEUIWelcomePagerDataSource.m */; };
 		65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65711E551B8C670A00C8C4E7 /* defaults.plist */; };
+		6574ADE31EA511A10054DC7E /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
+		6574ADE41EA511A20054DC7E /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
 		657672B21D2BAA6300CF8C11 /* APTunnelConnectionsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B11D2BAA6300CF8C11 /* APTunnelConnectionsHandler.m */; };
 		657672B31D2BB9B100CF8C11 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		657672B71D2CF97900CF8C11 /* APIPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B61D2CF97900CF8C11 /* APIPPacket.m */; };
@@ -3279,6 +3281,7 @@
 				659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */,
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
+				6574ADE31EA511A10054DC7E /* NSData+GZIP.m in Sources */,
 				65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				659887081CF83580003ECD1C /* CLIColor.m in Sources */,
 				659887091CF83580003ECD1C /* AESharedResources.m in Sources */,
@@ -3445,6 +3448,7 @@
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				658E439A1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				65C12EEF1BD4D29F00FFC71C /* AEService.m in Sources */,
+				6574ADE41EA511A20054DC7E /* NSData+GZIP.m in Sources */,
 				65C12EED1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				65B40D5E1BDFF28D00A9C595 /* AEUILoadingModal.m in Sources */,
 				65C52B3A1B906105003AF42F /* ActionViewController.m in Sources */,
