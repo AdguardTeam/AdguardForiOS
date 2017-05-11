@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -43,6 +43,10 @@ extern NSString *AEDefaultsAdguardEnabled;
  User Defaults key that defines app performs first start or not.
  */
 extern NSString *AEDefaultsFirstRunKey;
+/**
+ User Defaults key that defines schema version for upgrade procedure.
+ */
+extern NSString *AEDefaultsProductSchemaVersion;
 
 /**
  User Defaults key that defines last time, when the application checked updates of filters.
@@ -127,6 +131,10 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  Data with blocking content rules JSON.
  */
 @property NSData *blockingContentRules;
+/**
+ Rules from whitelist, which used for Safari content-blocking.
+ */
+@property NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
 /**
  Filter metadata from last filter update process.
  We need it because filter update process is performed in two steps.

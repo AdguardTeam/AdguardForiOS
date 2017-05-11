@@ -71,5 +71,6 @@ typedef enum {
 @property (nonatomic, readonly) BOOL active;
 @property (nonatomic, readonly) UIFont *font;
 @property (nonatomic, readonly) UIColor *textColor;
+@property (nonatomic, readonly) NSAttributedString *attributeRuteText;
 
 @end

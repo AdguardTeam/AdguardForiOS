@@ -61,6 +61,8 @@
 
 /// Mobile Safari Filter
 #define ASDF_MOBILE_SAFARI_FILTER_ID     12
+/// Simplified domain names filter
+#define ASDF_SIMPL_DOMAINNAMES_FILTER_ID 15
 
 /// List of filters Ids that block trackers.
 #define ASDF_TRACKERS_BLOCKING_FILTERS   @[\
@@ -302,6 +304,14 @@
 @property (nonatomic) NSNumber *ruleId;
 @property (nonatomic) NSString *ruleText;
 @property (nonatomic) NSNumber *isEnabled;
+
+/**
+ Checks object if it is kind of ASDFilterRule class, 
+ and has ruleText is equal receaver ruleText.
+
+ @param object Candidate object
+ */
+- (BOOL)isEqualRuleText:(id)object;
 
 @end
 

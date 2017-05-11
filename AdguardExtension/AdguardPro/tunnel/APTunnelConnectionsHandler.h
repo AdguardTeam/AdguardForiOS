@@ -17,6 +17,7 @@
  */
 
 @import NetworkExtension;
+#import "AERDomainFilter.h"
 
 @class APTUdpProxySession, PacketTunnelProvider;
 
@@ -45,13 +46,13 @@
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
 
 /**
- Sets whitelist domains names.
+ Sets whitelist filter.
  */
-- (void)setWhitelistDomains:(NSArray <NSString *> *)domains;
+- (void)setWhitelistFilter:(AERDomainFilter *)filter;
 /**
- Sets blacklist domains names.
+ Sets blacklist filter.
  */
-- (void)setBlacklistDomains:(NSArray <NSString *> *)domains;
+- (void)setBlacklistFilter:(AERDomainFilter *)filter;
 
 /**
  Make the initial readPacketsWithCompletionHandler call.
@@ -81,5 +82,14 @@
  Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
+
+/**
+ Closes all existing connections, prevents to create new.
+ Call this method before stop tunnel.
+
+ @param completion code blocks, 
+ which is performed on main queue, when all connections will be closed.
+ */
+- (void)closeAllConnections:(void (^)(void))completion;
 
 @end

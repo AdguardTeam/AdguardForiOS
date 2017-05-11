@@ -19,8 +19,6 @@
 
 #import "APIPPacket.h"
 
-#define PACKED_STRUCT_DEF struct __attribute__((packed))
-
 @implementation APIPPacket
 
 - (id)init{
@@ -37,6 +35,9 @@
     if (self) {
         
         _lock = OS_SPINLOCK_INIT;
+        
+        _ipHeader = NULL;
+        _ip6Header = NULL;
         
         if(![self parseData:data af:af])
             return nil;
@@ -56,6 +57,9 @@
         
         _lock = OS_SPINLOCK_INIT;
 
+        _ipHeader = NULL;
+        _ip6Header = NULL;
+        
         if(![self createWithAF:af protocol:protocol])
             return nil;
     }
@@ -64,6 +68,11 @@
     
 }
 
+- (void)dealloc {
+    
+    _ip6Header = NULL;
+    _ipHeader = NULL;
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
@@ -76,18 +85,33 @@
 
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
+    
+    void *dest;
     if (af == AF_INET) {
 
-        [self repareMutable];
-
-        if (inet_pton(AF_INET, [dstAddress cStringUsingEncoding:NSUTF8StringEncoding], &(_ipHeader->ip_dst)) == 1) {
-
-            _dstAddress = dstAddress;
-            [self checksumIPv4];
-        }
+        dest = &(_ipHeader->ip_dst);
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        dest = &(_ip6Header->ip6_dst);
     }
+    else {
+        
+        OSSpinLockUnlock(&_lock);
+        return;
+    }
+    
+    if (inet_pton(af, [dstAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {
+        
+        _dstAddress = dstAddress;
+    }
+    
+    if (af == AF_INET) {
+        
+        [self checksumIPv4];
+    }
+    
     OSSpinLockUnlock(&_lock);
 }
 
@@ -100,18 +124,32 @@
 
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
+    
+    void *dest;
     if (af == AF_INET) {
-
-        [self repareMutable];
-
-        if (inet_pton(AF_INET, [srcAddress cStringUsingEncoding:NSUTF8StringEncoding], &(_ipHeader->ip_src)) == 1) {
-
-            _srcAddress = srcAddress;
-            [self checksumIPv4];
-        }
+        
+        dest = &(_ipHeader->ip_src);
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        dest = &(_ip6Header->ip6_src);
     }
+    else {
+        OSSpinLockUnlock(&_lock);
+        return;
+    }
+    
+    if (inet_pton(af, [srcAddress cStringUsingEncoding:NSUTF8StringEncoding], dest) == 1) {
+        
+        _srcAddress = srcAddress;
+    }
+    
+    if (af == AF_INET) {
+        
+        [self checksumIPv4];
+    }
+    
     OSSpinLockUnlock(&_lock);
 }
 
@@ -151,11 +189,13 @@
     
     OSSpinLockLock(&_lock);
     int af = [_aFamily intValue];
+    
+    [self repareMutable];
+    
+    [_ipMPacket replaceBytesInRange:NSMakeRange(_ipHeaderLength, (_ipMPacket.length - _ipHeaderLength)) withBytes:payload.bytes length:payload.length];
+    
     if (af == AF_INET) {
 
-        [self repareMutable];
-        
-        [_ipMPacket replaceBytesInRange:NSMakeRange(_ipHeaderLength, (_ipMPacket.length - _ipHeaderLength)) withBytes:payload.bytes length:payload.length];
         
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
         _ipHeader->ip_len = htons(_ipMPacket.length);
@@ -163,7 +203,9 @@
         [self checksumIPv4];
         
     } else if (af == AF_INET6) {
-        //TODO: Not implemented yet
+        
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        _ip6Header->ip6_plen = htons(_ipMPacket.length - APT_IPV6_FIXED_HEADER_LENGTH);
     }
     OSSpinLockUnlock(&_lock);
  
@@ -176,7 +218,13 @@
     if (!_ipMPacket) {
         _ipMPacket = [_ipPacket mutableCopy];
         _ipPacket = nil;
-        _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
+        
+        if (_aFamily.intValue == AF_INET) {
+            _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
+        }
+        else { // AF_INET6
+            _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        }
     }
 }
 
@@ -206,7 +254,62 @@
         return YES;
     }
     else if (aFamily == AF_INET6){
-        //TODO: Not implemented yet
+        
+        _ipPacket = data;
+        
+        _ip6Header = (struct ip6_hdr *)_ipPacket.bytes;
+        
+        u_int8_t next = _ip6Header->ip6_nxt;
+        struct ip6_ext *extTest = (struct ip6_ext *)((void *)_ip6Header + APT_IPV6_FIXED_HEADER_LENGTH);
+        u_int64_t extLen = 0;
+        for (int i = 10; i > 0; i--) {
+        
+            switch (next) {
+                case IPPROTO_HOPOPTS:
+                case IPPROTO_DSTOPTS:
+                case IPPROTO_ROUTING:
+                case IPPROTO_FRAGMENT:
+                case IPPROTO_AH:
+                case IPPROTO_ESP:
+
+                    extLen = extTest->ip6e_len * 8 + 8; // 64 bit + first 8 bytes
+                    extTest = (struct ip6_ext *)(extTest + extLen);
+                    next = extTest->ip6e_nxt;
+                    break;
+                    
+                default:
+                    i = 0;
+                    
+                    break;
+            }
+        }
+        
+        _ipHeaderLength = (void *)extTest - (void *)_ip6Header;
+        
+        _protocol = next;
+        
+#if DEBUG
+        _ipId = [NSString stringWithFormat:@"%d",_ip6Header->ip6_flow];
+#endif
+        char addr[INET6_ADDRSTRLEN];
+
+        // Note that routing header extention is ignored!
+        // And destionation address may be wrong.
+        // https://tools.ietf.org/html/rfc2460#section-4.4
+        
+        if (inet_ntop(AF_INET6, &(_ip6Header->ip6_dst),
+                      addr, INET6_ADDRSTRLEN) == NULL) {
+            return NO;
+        }
+        _dstAddress = [NSString stringWithUTF8String:addr];
+        
+        if (inet_ntop(AF_INET6, &(_ip6Header->ip6_src),
+                      addr, INET6_ADDRSTRLEN) == NULL) {
+            return NO;
+        }
+        _srcAddress = [NSString stringWithUTF8String:addr];
+        
+        return YES;
     }
     
     return NO;
@@ -215,13 +318,14 @@
 - (BOOL)createWithAF:(NSNumber *)af protocol:(int)protocol{
     
     _aFamily = af;
+    _protocol = protocol;
     
     int aFamily = [af intValue];
     
     if (aFamily == AF_INET) {
         
-        _ipMPacket = [NSMutableData dataWithLength:20];
-        _ipHeaderLength = 20;
+        _ipMPacket = [NSMutableData dataWithLength:APT_IPV4_HEADER_LENGTH];
+        _ipHeaderLength = APT_IPV4_HEADER_LENGTH;
         _ipHeader = (struct iphdr *)_ipMPacket.mutableBytes;
         
         _ipHeader->ip_v = IPVERSION;
@@ -241,14 +345,27 @@
         return YES;
     }
     else if (aFamily == AF_INET6){
-        //TODO: Not implemented yet
+        
+        _ipMPacket = [NSMutableData dataWithLength:APT_IPV6_FIXED_HEADER_LENGTH];
+        _ipHeaderLength = APT_IPV6_FIXED_HEADER_LENGTH;
+        _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
+        
+        _ip6Header->ip6_vfc = IPV6_VERSION;
+        
+#if DEBUG
+        _ipId = @"0";
+#endif
+        _ip6Header->ip6_plen = 0;
+        _ip6Header->ip6_hops = 64;
+        _ip6Header->ip6_nxt = protocol;
+        
+        return YES;
     }
     
     return NO;
 
 }
 
-//TODO: checksum calculation was not tested.
 - (void)checksumIPv4 {
 
     _ipHeader->ip_sum = 0;

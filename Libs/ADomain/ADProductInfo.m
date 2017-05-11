@@ -117,10 +117,13 @@ static NSDictionary *persistentProductInfo;
         
 #elif TARGET_OS_MAC
         
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
         SInt32 major, minor, bugfix;
         Gestalt(gestaltSystemVersionMajor, &major);
         Gestalt(gestaltSystemVersionMinor, &minor);
         Gestalt(gestaltSystemVersionBugFix, &bugfix);
+#pragma clang diagnostic pop
         
         userAgentString = [NSString stringWithFormat:@"%@/%@ (Macintosh; Intel Mac OS X %d_%d_%d)",
                            DEFAULT_PRODUCT_NAME, [ADProductInfo version], major, minor, bugfix];

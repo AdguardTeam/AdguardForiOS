@@ -46,5 +46,6 @@
 
 - (void)executeOnceAfterCalm;
 - (void)executeOnceForInterval;
+- (void)executeNow;
 
 @end

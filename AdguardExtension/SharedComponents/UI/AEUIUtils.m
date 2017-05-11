@@ -36,16 +36,6 @@
     }];
 }
 
-+ (void)addRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
-    
-    [self addOrRemove:NO Rule:rule withController:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
-}
-
-+ (void)removeRule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
-
-    [self addOrRemove:YES Rule:rule withController:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
-}
-
 + (void)addWhitelistRule:(ASDFilterRule *)rule toJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
     
     [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
@@ -65,6 +55,61 @@
             
             [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
         }];
+    }];
+}
+
++ (void)replaceUserFilterRules:(NSArray <ASDFilterRule *> *)rules withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(void (^)(NSError *error))rollbackBlock{
+    
+    [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+            
+            NSError *error;
+            for (ASDFilterRule *item in rules) {
+                error = [[AEService singleton] checkRule:item];
+                if (error) {
+                    if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
+                        
+                        error = nil;
+                        NSString *errorDescription = NSLocalizedString(@"Cannot convert user filter rules. One of the rules contains an error. Check the rule next to the current cursor position.", @"(AEUIUtils) User filter convertering error description.");
+                        error = [NSError errorWithDomain:AEServiceErrorDomain
+                                                    code:AES_ERROR_UNSUPPORTED_RULE
+                                                userInfo:@{NSLocalizedDescriptionKey : errorDescription,
+                                                           AESUserInfoRuleObject: item}];
+
+                    }
+                    break;
+                }
+            }
+            
+            if (error == nil) {
+                error = [[AEService singleton] replaceUserFilterWithRules:rules];
+            }
+            
+            if (error) {
+                
+                if (rollbackBlock) {
+                    
+                    [ACSSystemUtils callOnMainQueue:^{
+                        rollbackBlock(error);
+                    }];
+                }
+                [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
+                    
+                    if (error.code != AES_ERROR_UNSUPPORTED_RULE || UIAccessibilityIsVoiceOverRunning()) {
+                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                    }
+                }];
+                return;
+            }
+            
+            [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
+                
+                [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:^{
+                    rollbackBlock(error);
+                }];
+            }];
+        });
     }];
 }
 
@@ -92,46 +137,6 @@
     if (completionBlock) {
         dispatch_sync(dispatch_get_main_queue(), completionBlock);
     }
-}
-
-+ (void)addOrRemove:(BOOL)remove Rule:(ASDFilterRule *)rule withController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
-    
-    if (!(rule && controller)) {
-        return;
-    }
-    
-    [[AEUILoadingModal singleton] standardLoadingModalShowWithParent:controller completion:^{
-        
-        NSError *error;
-        if (remove)
-            [[AEService singleton] removeRules:@[rule]];
-        else
-            error = [[AEService singleton] addRule:rule temporarily:NO];
-        
-        if (error){
-            
-            if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
-                
-                [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIRulesController) Alert title. Error when add incorrect rule into user filter.") message:[error localizedDescription]];
-            }
-        }
-        else {
-            
-            // if rule is not comment decrease counter of the new rules
-            if (![rule.ruleText hasPrefix:COMMENT]) {
-                
-                [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:NO completionBlock:^(NSError *error) {
-                    
-                    [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
-                }];
-                
-                return;
-            }
-        }
-        
-        [self complateWithError:error controller:controller completionBlock:completionBlock rollbackBlock:rollbackBlock];
-        
-    }];
 }
 
 
