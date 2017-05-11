@@ -377,7 +377,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             
             NSArray *sectionFilters = [item.filters filteredArrayUsingPredicate:
                                        [NSPredicate
-                                        predicateWithFormat:@"localization.name CONTAINS[cd] %@",
+                                        predicateWithFormat:@"i18nName CONTAINS[cd] %@",
                                         searchString]];
             if (sectionFilters.count) {
                 AEUISubscriptionSectionObject *newSection = [AEUISubscriptionSectionObject new];
