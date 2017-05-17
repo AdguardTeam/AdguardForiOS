@@ -45,9 +45,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 #define V_INTERFACE_IPV4_ADDRESS                @"172.16.209.2"
 #define V_INTERFACE_IPV4_MASK                   @"255.255.255.252"
+#define V_INTERFACE_IPV4_FULL_MASK              @"255.255.255.255"
 
 #define V_INTERFACE_IPV6_ADDRESS                @"fd12:1:1:1::2"
 #define V_INTERFACE_IPV6_MASK                   @(64)
+#define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
 #define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
@@ -489,14 +491,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         for (NSString *item in _currentServer.ipv4Addresses) {
             [routers addObject:[[NEIPv4Route alloc]
                                 initWithDestinationAddress:item
-                                subnetMask:V_INTERFACE_IPV4_MASK]];
+                                subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
         }
     }
     else {
         // route for ipv4, which includes FAKE dns addresses
         [routers addObject:[[NEIPv4Route alloc]
                             initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
-                            subnetMask:V_INTERFACE_IPV4_MASK]];
+                            subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
     }
     ipv4.includedRoutes = routers;
     ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
@@ -515,7 +517,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         for (NSString *item in _currentServer.ipv6Addresses) {
             [routers addObject:[[NEIPv6Route alloc]
                                 initWithDestinationAddress:item
-                                networkPrefixLength:V_INTERFACE_IPV6_MASK]];
+                                networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
         }
         
     }
@@ -523,7 +525,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         // route for ipv6, which includes FAKE dns addresses
         [routers addObject:[[NEIPv6Route alloc]
                             initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
-                            networkPrefixLength:V_INTERFACE_IPV6_MASK]];
+                            networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
     }
     ipv6.includedRoutes = routers;
     ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
