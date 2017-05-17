@@ -952,8 +952,6 @@
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		6553E07C1E56EE1300A6575A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		6553E07E1E56EE1E00A6575A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		654F5BC51E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		654F5BC61E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		654F5BC71E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ProLaunchScreen.strings"; sourceTree = "<group>"; };
@@ -2216,62 +2214,6 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Clean Script";
 		};
-		6548B0601C50EF630092E77C /* Fix Base Application Strings */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./fix-base-application-strings.py";
-			buildConfigurationList = 6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/python;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private/Resources";
-			dependencies = (
-			);
-			name = "Fix Base Application Strings";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Import Localization";
-		};
-		65982AEB1BA16ECA00770EA9 /* Export Localization */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = ./exportLocalization.sh;
-			buildConfigurationList = 65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-			dependencies = (
-			);
-			name = "Export Localization";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Export Localization";
-		};
-		65982AF81BA1A64300770EA9 /* Import Localization */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = ./importLocalization.sh;
-			buildConfigurationList = 65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-			dependencies = (
-			);
-			name = "Import Localization";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Import Localization";
-		};
-		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../";
-			dependencies = (
-			);
-			name = "Git Tagging PRO (Beta.Release Branch)";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Git Tagging (Beta/Release Branch)";
-		};
 		65B40D2A1BDE520500A9C595 /* Run Builder */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = ./runBuilder.sh;
@@ -2285,20 +2227,6 @@
 			name = "Run Builder";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Run Builder";
-		};
-		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../";
-			dependencies = (
-			);
-			name = "Git Tagging (Beta.Release Branch)";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Git Tagging (Beta/Release Branch)";
 		};
 /* End PBXLegacyTarget section */
 
@@ -2580,12 +2508,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 659886481CF74DE9003ECD1C;
 					};
-					65982AEB1BA16ECA00770EA9 = {
-						CreatedOnToolsVersion = 7.0;
-					};
-					65982AF81BA1A64300770EA9 = {
-						CreatedOnToolsVersion = 7.0;
-					};
 					659886481CF74DE9003ECD1C = {
 						DevelopmentTeam = N33TQXN8C7;
 						ProvisioningStyle = Manual;
@@ -2620,9 +2542,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					65CB60381D75DF8B005A3C04 = {
-						CreatedOnToolsVersion = 7.3.1;
 					};
 					65F398101B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2689,18 +2608,13 @@
 				65F398291B7B684700ABCD39 /* AdguardTests */,
 				65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */,
 				65C52B351B906105003AF42F /* ActionExtension */,
-				65982AEB1BA16ECA00770EA9 /* Export Localization */,
-				65982AF81BA1A64300770EA9 /* Import Localization */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
-				6548B0601C50EF630092E77C /* Fix Base Application Strings */,
 				65423D951C89B7C900DD1224 /* Clean Script */,
 				659886481CF74DE9003ECD1C /* Adguard Pro */,
 				659886EC1CF83580003ECD1C /* ProActionExtension */,
 				659887411CF83947003ECD1C /* ProBlockingExtension */,
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
-				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */,
-				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */,
 				652F58781E106DF10012353C /* AdguardLogSender */,
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
@@ -4063,29 +3977,6 @@
 			};
 			name = Release;
 		};
-		6548B0621C50EF630092E77C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		6548B0631C50EF630092E77C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		6582373F1D07FE6700B824F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
@@ -4169,52 +4060,6 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = "Adguard Pro";
-			};
-			name = Release;
-		};
-		65982AED1BA16ECA00770EA9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65982AEE1BA16ECA00770EA9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		65982AFA1BA1A64300770EA9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65982AFB1BA1A64300770EA9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -4326,37 +4171,6 @@
 			};
 			name = Release;
 		};
-		65B39E051D75E9B2001AD773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65B39E061D75E9B2001AD773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		65B40D2B1BDE520500A9C595 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4445,37 +4259,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		65CB60391D75DF8B005A3C04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65CB603A1D75DF8B005A3C04 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -4708,15 +4491,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6548B0621C50EF630092E77C /* Debug */,
-				6548B0631C50EF630092E77C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		6582373E1D07FE6700B824F4 /* Build configuration list for PBXNativeTarget "ProTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4731,24 +4505,6 @@
 			buildConfigurations = (
 				658FED001E240B8F0013BCE3 /* Debug */,
 				658FED011E240B8F0013BCE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65982AED1BA16ECA00770EA9 /* Debug */,
-				65982AEE1BA16ECA00770EA9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65982AFA1BA1A64300770EA9 /* Debug */,
-				65982AFB1BA1A64300770EA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4780,15 +4536,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65B39E051D75E9B2001AD773 /* Debug */,
-				65B39E061D75E9B2001AD773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		65B40D2D1BDE520600A9C595 /* Build configuration list for PBXLegacyTarget "Run Builder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4812,15 +4559,6 @@
 			buildConfigurations = (
 				65C52B421B906105003AF42F /* Debug */,
 				65C52B431B906105003AF42F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65CB60391D75DF8B005A3C04 /* Debug */,
-				65CB603A1D75DF8B005A3C04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
