@@ -180,6 +180,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
         sSelf->pendingStartCompletion(error);
         sSelf->pendingStartCompletion = nil;
+        
+        [sSelf checkNetworkInterfaces];
     }];
 }
 
@@ -597,5 +599,48 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return ipv6Available;
 }
 
+- (void)checkNetworkInterfaces {
+    
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        NSMutableString* log = [NSMutableString new];
+        addr = interfaces;
+        
+        while(addr != NULL) {
+            int32_t flags = addr->ifa_flags;
+            
+            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
+            if ((flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
+                
+                NSString* address;
+                if(addr->ifa_addr->sa_family == AF_INET){
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)addr->ifa_addr)->sin_addr)];
+                    
+                    NSString* interfaceString = [NSString stringWithFormat:@"%@/ipv4:%@", [NSString stringWithUTF8String:addr->ifa_name], address];
+                    [log appendFormat:@"%@\n", interfaceString];
+                }
+                else if(addr->ifa_addr->sa_family == AF_INET6){
+                    char ip[INET6_ADDRSTRLEN];
+                    const char *str = inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)addr->ifa_addr)->sin6_addr), ip, INET6_ADDRSTRLEN);
+                    
+                    address = [NSString stringWithUTF8String:str];
+                    
+                    NSString* interfaceString = [NSString stringWithFormat:@"%@/ipv6:%@", [NSString stringWithUTF8String:addr->ifa_name], address];
+                    [log appendFormat:@"%@\n", interfaceString];
+                }
+            }
+            
+            addr = addr->ifa_next;
+        }
+        
+        DDLogInfo(@"Available network interfaces:\n%@", log);
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+}
 
 @end
