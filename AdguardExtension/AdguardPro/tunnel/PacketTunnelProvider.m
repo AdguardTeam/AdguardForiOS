@@ -17,6 +17,9 @@
  */
 
 #import "PacketTunnelProvider.h"
+
+#import <UIKit/UIDevice.h>
+
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
@@ -506,31 +509,38 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     settings.IPv4Settings = ipv4;
     
     // IPv6
-    NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
-                            networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
+    float iosVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
     
-    routers = [NSMutableArray arrayWithCapacity:2];
-    if (_isRemoteServer) {
+    if (iosVersion >= 10.0) {
         
-        // route for ipv6, which includes dns addresses
-        for (NSString *item in _currentServer.ipv6Addresses) {
+        NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
+                                initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
+                                networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
+        
+        routers = [NSMutableArray arrayWithCapacity:2];
+        
+        if (_isRemoteServer) {
+            
+            // route for ipv6, which includes dns addresses
+            for (NSString *item in _currentServer.ipv6Addresses) {
+                [routers addObject:[[NEIPv6Route alloc]
+                                    initWithDestinationAddress:item
+                                    networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+            }
+            
+        }
+        else {
+            // route for ipv6, which includes FAKE dns addresses
             [routers addObject:[[NEIPv6Route alloc]
-                                initWithDestinationAddress:item
+                                initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
                                 networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
         }
         
+        ipv6.includedRoutes = routers;
+        ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
+        
+        settings.IPv6Settings = ipv6;
     }
-    else {
-        // route for ipv6, which includes FAKE dns addresses
-        [routers addObject:[[NEIPv6Route alloc]
-                            initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
-                            networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-    }
-    ipv6.includedRoutes = routers;
-    ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
-    
-    settings.IPv6Settings = ipv6;
     
     // DNS
     
