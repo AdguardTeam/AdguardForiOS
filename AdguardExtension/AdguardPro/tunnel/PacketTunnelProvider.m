@@ -38,6 +38,7 @@
 #include <ifaddrs.h>
 #include <resolv.h>
 #include <dns.h>
+#include <net/if.h>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider Constants
@@ -182,6 +183,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
         sSelf->pendingStartCompletion(error);
         sSelf->pendingStartCompletion = nil;
+        
+        [sSelf checkNetworkInterfaces];
     }];
 }
 
@@ -511,7 +514,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // IPv6
     float iosVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
     
-    if (iosVersion >= 10.0) {
+    if (iosVersion >= 10.0 && [self isIpv6Available]) {
         
         NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
                                 initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
@@ -535,7 +538,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                                 initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
                                 networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
         }
-        
         ipv6.includedRoutes = routers;
         ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
         
@@ -565,6 +567,87 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     settings.DNSSettings = dns;
 
     return settings;
+}
+
+- (BOOL) isIpv6Available {
+    BOOL ipv6Available = NO;
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        addr = interfaces;
+        
+        while(addr != NULL) {
+            int32_t flags = addr->ifa_flags;
+            
+            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
+            if ((flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
+                
+                NSString* address;
+                if(addr->ifa_addr->sa_family == AF_INET6){
+                    char ip[INET6_ADDRSTRLEN];
+                    const char *str = inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)addr->ifa_addr)->sin6_addr), ip, INET6_ADDRSTRLEN);
+                    
+                    address = [NSString stringWithUTF8String:str];
+                    NSArray* addressComponents = [address componentsSeparatedByString:@":"];
+                    if(![addressComponents.firstObject isEqualToString:@"fe80"]){ // fe80 prefix in link-local ip
+                        ipv6Available = YES;
+                        break;
+                    }
+                }
+            }
+            
+            addr = addr->ifa_next;
+        }
+    }
+    freeifaddrs(interfaces);
+    return ipv6Available;
+}
+
+- (void)checkNetworkInterfaces {
+    
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        NSMutableString* log = [NSMutableString new];
+        addr = interfaces;
+        
+        while(addr != NULL) {
+            int32_t flags = addr->ifa_flags;
+            
+            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
+            if ((flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
+                
+                NSString* address;
+                if(addr->ifa_addr->sa_family == AF_INET){
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)addr->ifa_addr)->sin_addr)];
+                    
+                    NSString* interfaceString = [NSString stringWithFormat:@"%@/ipv4:%@", [NSString stringWithUTF8String:addr->ifa_name], address];
+                    [log appendFormat:@"%@\n", interfaceString];
+                }
+                else if(addr->ifa_addr->sa_family == AF_INET6){
+                    char ip[INET6_ADDRSTRLEN];
+                    const char *str = inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)addr->ifa_addr)->sin6_addr), ip, INET6_ADDRSTRLEN);
+                    
+                    address = [NSString stringWithUTF8String:str];
+                    
+                    NSString* interfaceString = [NSString stringWithFormat:@"%@/ipv6:%@", [NSString stringWithUTF8String:addr->ifa_name], address];
+                    [log appendFormat:@"%@\n", interfaceString];
+                }
+            }
+            
+            addr = addr->ifa_next;
+        }
+        
+        DDLogInfo(@"Available network interfaces:\n%@", log);
+    }
+    // Free memory
+    freeifaddrs(interfaces);
 }
 
 @end
