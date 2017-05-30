@@ -512,9 +512,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     settings.IPv4Settings = ipv4;
     
     // IPv6
-    float iosVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-    
-    if (iosVersion >= 10.0 && [self isIpv6Available]) {
+    if ([self isIpv6Available]) {
         
         NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
                                 initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
