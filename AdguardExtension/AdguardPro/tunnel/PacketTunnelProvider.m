@@ -184,7 +184,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         sSelf->pendingStartCompletion(error);
         sSelf->pendingStartCompletion = nil;
         
-        [sSelf checkNetworkInterfaces];
+        [sSelf logNetworkInterfaces];
     }];
 }
 
@@ -606,7 +606,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return ipv6Available;
 }
 
-- (void)checkNetworkInterfaces {
+- (void)logNetworkInterfaces {
     
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *addr = NULL;
@@ -644,7 +644,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             addr = addr->ifa_next;
         }
         
-        DDLogInfo(@"Available network interfaces:\n%@", log);
+        DDLogInfo(@"(PacketTunnelProvider) Available network interfaces:\n%@", log);
     }
     // Free memory
     freeifaddrs(interfaces);
