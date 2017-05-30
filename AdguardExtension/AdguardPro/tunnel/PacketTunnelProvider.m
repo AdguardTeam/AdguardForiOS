@@ -637,7 +637,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             addr = addr->ifa_next;
         }
         
-        DDLogInfo(@"Available network interfaces:\n%@", log);
+        DDLogInfo(@"(PacketTunnelProvider) Available network interfaces:\n%@", log);
     }
     // Free memory
     freeifaddrs(interfaces);
