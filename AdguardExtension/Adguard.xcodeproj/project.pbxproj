@@ -629,6 +629,8 @@
 		65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CE8DA91E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
 		65CE8DAA1E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
+		65D8294F1EDDA905008F7F30 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
+		65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
 		65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
@@ -1255,6 +1257,7 @@
 		65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUICustomTextEditorController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
+		65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
 		65D9A2641C034095004DA210 /* AEUIAdvSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAdvSettingsController.h; sourceTree = "<group>"; };
@@ -1344,6 +1347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655612131E5C789700F39A7C /* libz.tbd in Frameworks */,
+				65D8294F1EDDA905008F7F30 /* NetworkExtension.framework in Frameworks */,
 				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
 			);
@@ -1364,6 +1368,7 @@
 				6598869D1CF74DE9003ECD1C /* AVKit.framework in Frameworks */,
 				6598869E1CF74DE9003ECD1C /* MessageUI.framework in Frameworks */,
 				6598869F1CF74DE9003ECD1C /* Social.framework in Frameworks */,
+				65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
@@ -1973,6 +1978,14 @@
 			path = js;
 			sourceTree = "<group>";
 		};
+		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		65EC9A021BB9824C00F53F3B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2095,6 +2108,7 @@
 				652F587A1E106DF10012353C /* AdguardLogSender */,
 				65F398121B7B684700ABCD39 /* Products */,
 				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
+				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

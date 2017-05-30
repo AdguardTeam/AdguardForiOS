@@ -17,6 +17,9 @@
  */
 
 #import "PacketTunnelProvider.h"
+
+#import <UIKit/UIDevice.h>
+
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
@@ -509,12 +512,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     settings.IPv4Settings = ipv4;
     
     // IPv6
-    if([self isIpv6Available]) {
+    if ([self isIpv6Available]) {
+        
         NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
                                 initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
                                 networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
         
         routers = [NSMutableArray arrayWithCapacity:2];
+        
         if (_isRemoteServer) {
             
             // route for ipv6, which includes dns addresses
@@ -533,7 +538,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
         ipv6.includedRoutes = routers;
         ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
-    
+        
         settings.IPv6Settings = ipv6;
     }
     
