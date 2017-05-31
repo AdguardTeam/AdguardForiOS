@@ -195,7 +195,7 @@ _workingQueue = nil;
     ASSIGN_WEAK(self);
     ASSIGN_WEAK(object);
     
-    dispatch_sync(_workingQueue, ^{
+    dispatch_async(_workingQueue, ^{
 
         ASSIGN_STRONG(self);
         ASSIGN_STRONG(object);
