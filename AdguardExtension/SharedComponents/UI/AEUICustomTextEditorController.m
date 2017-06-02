@@ -30,6 +30,8 @@
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
+#define FILTER_RULES_LINK                   @"https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
@@ -313,6 +315,10 @@ static NSDictionary *_editAttrs;
     [self resetTextWithSizeToFit:NO];
     //
     [self textViewDidChange:self.editorTextView];
+}
+
+- (IBAction)clickRules:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULES_LINK]];
 }
 
 /////////////////////////////////////////////////////////////////////
