@@ -2503,6 +2503,11 @@
 					};
 					652F58B11E1071470012353C = {
 						DevelopmentTeam = N33TQXN8C7;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
