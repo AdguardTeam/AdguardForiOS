@@ -651,10 +651,10 @@
 }
 
 - (void) proSetSystemWideEnabled:(BOOL) enabled {
-    [_proSystemWideCell setUserInteractionEnabled: enabled];
-    [_proSystemWideCell.textLabel setEnabled:enabled];
-    [_proDnsSettingsCell setUserInteractionEnabled: enabled];
-    [_proDnsSettingsCell.textLabel setEnabled:enabled];
+    self.proSystemWideCell.userInteractionEnabled = enabled;
+    self.proSystemWideCell.textLabel.enabled = enabled;
+    self.proDnsSettingsCell.userInteractionEnabled = enabled;
+    self.proDnsSettingsCell.textLabel.enabled = enabled;
 }
 
 #endif
