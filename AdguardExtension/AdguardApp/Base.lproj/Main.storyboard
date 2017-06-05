@@ -487,7 +487,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="fBL-gc-jbB"/>
-                                    <barButtonItem enabled="NO" title="Rules" style="plain" id="CM4-d8-GVV">
+                                    <barButtonItem enabled="NO" title="Rules Syntax" style="plain" id="CM4-d8-GVV">
                                         <connections>
                                             <action selector="clickRules:" destination="04M-uU-tjs" id="tHR-PW-4Ng"/>
                                         </connections>
