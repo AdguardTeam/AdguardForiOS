@@ -274,11 +274,13 @@ _workingQueue = nil;
     [session addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     [session addObserver:self forKeyPath:@"hasBetterPath" options:NSKeyValueObservingOptionNew context:NULL];
     
-    locLogInfo(@"(APTUdpProxySession) setReadHandler");
+    BOOL whiteListSession = session == _whitelistUdpSession;
+    
+    locLogInfo(@"(APTUdpProxySession) setReadHandler %@", whiteListSession ? @"whitelistUdpSession" : @"udpSession");
     // block for reading data from remote endpoint
     [session setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
         
-        locLogInfo(@"(APTUdpProxySession) read datagrams");
+        locLogInfo(@"(APTUdpProxySession) read datagrams %@", whiteListSession ? @"whitelistUdpSession" : @"udpSession");
         
         ASSIGN_STRONG(self);
         if (USE_STRONG(self) == nil) {

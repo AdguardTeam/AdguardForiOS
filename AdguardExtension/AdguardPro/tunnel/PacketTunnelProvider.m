@@ -301,12 +301,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
 	completionHandler();
+    [self logNetworkInterfaces];
 }
 
 - (void)wake
 {
 	// Add code here to wake up.
     DDLogInfo(@"(PacketTunnelProvider) Wake Event");
+    [self logNetworkInterfaces];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -368,6 +370,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     
     DDLogInfo(@"(PacketTunnelProvider) Stop VPN.");
+    
+    [self logNetworkInterfaces];
 
     [_reachabilityHandler stopNotifier];
 
