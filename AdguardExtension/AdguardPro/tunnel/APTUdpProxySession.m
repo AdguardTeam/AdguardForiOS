@@ -274,8 +274,11 @@ _workingQueue = nil;
     [session addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     [session addObserver:self forKeyPath:@"hasBetterPath" options:NSKeyValueObservingOptionNew context:NULL];
     
+    locLogInfo(@"(APTUdpProxySession) setReadHandler");
     // block for reading data from remote endpoint
     [session setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
+        
+        locLogInfo(@"(APTUdpProxySession) read datagrams");
         
         ASSIGN_STRONG(self);
         if (USE_STRONG(self) == nil) {
@@ -676,7 +679,7 @@ _workingQueue = nil;
     
     NSString *dstHost;
     NSString *dstPort;
-    if (whitelist) {
+    if (whitelist || !_delegate.provider.isRemoteServer) {
         record.isWhitelisted = YES;
         
         NWHostEndpoint *endpoint = (NWHostEndpoint *)self.whitelistUdpSession.resolvedEndpoint;
