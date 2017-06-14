@@ -329,10 +329,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return _isRemoteServer;
 }
 
-- (NSArray <NSString *> *)getDNSServers {
+- (void)getDNSServersIpv4: (NSArray <NSString *> **) ipv4DNSServers ipv6: (NSArray <NSString *> **) ipv6DNSServers {
+  
+    NSMutableArray *ipv4s = [NSMutableArray array];
+    NSMutableArray *ipv6s = [NSMutableArray array];
+    
     @autoreleasepool {
         
-        NSMutableArray *ips = [NSMutableArray array];
         res_state res = malloc(sizeof(struct __res_state));
         int result = res_ninit(res);
         if (result == 0) {
@@ -344,23 +347,30 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 if (addr_union[i].sin.sin_family == AF_INET) {
                     char ip[INET_ADDRSTRLEN];
                     str = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
+                    if (str) {
+                        [ipv4s addObject:[NSString stringWithUTF8String:str]];
+                    }
                 } else if (addr_union[i].sin6.sin6_family == AF_INET6) {
                     char ip[INET6_ADDRSTRLEN];
                     str = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
+                    if (str) {
+                        [ipv6s addObject:[NSString stringWithUTF8String:str]];
+                    }
                 } else {
                     str = NULL;
                 }
                 
-                if (str) {
-                    [ips addObject:[NSString stringWithUTF8String:str]];
-                }
+                
             }
         }
         res_nclose(res);
         free(res);
-        
-        return [ips copy];
     }
+    
+    *ipv4DNSServers = [ipv4s copy];
+    *ipv6DNSServers = [ipv6s copy];
+    
+    return;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -490,68 +500,16 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
-    // IPv4
-    NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
-                            subnetMasks:@[V_INTERFACE_IPV4_MASK]];
-    
-    NSMutableArray *routers = [NSMutableArray arrayWithCapacity:2];
-    
-    if (_isRemoteServer) {
-        
-        // route for ipv4, which includes dns addresses
-        for (NSString *item in _currentServer.ipv4Addresses) {
-            [routers addObject:[[NEIPv4Route alloc]
-                                initWithDestinationAddress:item
-                                subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
-        }
-    }
-    else {
-        // route for ipv4, which includes FAKE dns addresses
-        [routers addObject:[[NEIPv4Route alloc]
-                            initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
-                            subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
-    }
-    ipv4.includedRoutes = routers;
-    ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
-    
-    settings.IPv4Settings = ipv4;
-    
-    // IPv6
-    if ([self isIpv6Available]) {
-        
-        NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
-                                initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
-                                networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
-        
-        routers = [NSMutableArray arrayWithCapacity:2];
-        
-        if (_isRemoteServer) {
-            
-            // route for ipv6, which includes dns addresses
-            for (NSString *item in _currentServer.ipv6Addresses) {
-                [routers addObject:[[NEIPv6Route alloc]
-                                    initWithDestinationAddress:item
-                                    networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-            }
-            
-        }
-        else {
-            // route for ipv6, which includes FAKE dns addresses
-            [routers addObject:[[NEIPv6Route alloc]
-                                initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
-                                networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-        }
-        ipv6.includedRoutes = routers;
-        ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
-        
-        settings.IPv6Settings = ipv6;
-    }
-    
     // DNS
     
     NSMutableArray *dnsAddresses = [NSMutableArray arrayWithCapacity:2];
-    NSArray *deviceDnsServers = [self getDNSServers];
+    NSArray *deviceIpv4DnsServers;
+    NSArray *deviceIpv6DnsServers;
+    
+    [self getDNSServersIpv4:&deviceIpv4DnsServers ipv6:&deviceIpv6DnsServers];
+    NSMutableArray *allDeviceDnsServers = [NSMutableArray new];
+    [allDeviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
+    [allDeviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
     if (_isRemoteServer) {
         
@@ -563,13 +521,100 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
         [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
     }
-    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardDnsAddresses:dnsAddresses];
+    
+    [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
+    
+    [_connectionHandler setDeviceDnsAddresses:allDeviceDnsServers adguardDnsAddresses:dnsAddresses];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers:dnsAddresses];
     dns.matchDomains = @[ @"" ];
     
     settings.DNSSettings = dns;
-
+    
+    
+    // IPv4
+    NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
+                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
+                            subnetMasks:@[V_INTERFACE_IPV4_MASK]];
+    
+    NSMutableArray *ipv4routes = [NSMutableArray new];
+    
+    if (_isRemoteServer) {
+        
+        // route for ipv4, which includes dns addresses
+        for (NSString *item in _currentServer.ipv4Addresses) {
+            [ipv4routes addObject:[[NEIPv4Route alloc]
+                                initWithDestinationAddress:item
+                                subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
+        }
+    }
+    else {
+        // route for ipv4, which includes FAKE dns addresses
+        [ipv4routes addObject:[[NEIPv4Route alloc]
+                            initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
+                            subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
+    }
+    
+    // add primary DNS ips to routes
+    for(NSString* ipv4Dns in deviceIpv4DnsServers) {
+        [ipv4routes addObject:[[NEIPv4Route alloc]
+                           initWithDestinationAddress:ipv4Dns
+                           subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
+    }
+    
+    ipv4.includedRoutes = ipv4routes;
+    ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
+    
+    settings.IPv4Settings = ipv4;
+    
+    // IPv6
+    if ([self isIpv6Available]) {
+        
+        NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
+                                initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
+                                networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
+        
+        NSMutableArray *ipv6routes = [NSMutableArray new];
+        
+        if (_isRemoteServer) {
+            
+            // route for ipv6, which includes dns addresses
+            for (NSString *item in _currentServer.ipv6Addresses) {
+                [ipv6routes addObject:[[NEIPv6Route alloc]
+                                    initWithDestinationAddress:item
+                                    networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+            }
+            
+        }
+        else {
+            // route for ipv6, which includes FAKE dns addresses
+            [ipv6routes addObject:[[NEIPv6Route alloc]
+                                initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
+                                networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+        }
+        
+        // add primary DNS ips to routes
+        for(NSString* ipv6Dns in deviceIpv6DnsServers) {
+            [ipv6routes addObject:[[NEIPv6Route alloc]
+                               initWithDestinationAddress:ipv6Dns
+                               networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+        }
+        
+        // add mapped ipv4 routes
+        for(NEIPv4Route* ipv4Route in ipv4routes) {
+            NSString* mappedIpv4 = [self ipv6MappedFromIpv4: ipv4Route.destinationAddress];
+            
+            [ipv6routes addObject:[[NEIPv6Route alloc]
+                                   initWithDestinationAddress:mappedIpv4
+                                   networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+        }
+        
+        ipv6.includedRoutes = ipv6routes;
+        ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
+        
+        settings.IPv6Settings = ipv6;
+    }
+    
     return settings;
 }
 
@@ -652,6 +697,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
     // Free memory
     freeifaddrs(interfaces);
+}
+
+- (NSString*) ipv6MappedFromIpv4:(NSString*)ipv4Address {
+    return [@"::FFFF:" stringByAppendingString:ipv4Address];
 }
 
 @end

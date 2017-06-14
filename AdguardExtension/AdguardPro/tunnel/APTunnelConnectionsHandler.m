@@ -396,7 +396,7 @@
               session = key;
               if ([session createSession]) {
                   
-                  [session setLoggingEnabled:_loggingEnabled];
+                  [session setLoggingEnabled:YES];
                   [_sessions addObject:session];
               }
               else
