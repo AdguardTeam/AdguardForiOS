@@ -287,12 +287,7 @@ _workingQueue = nil;
             return;
         }
         
-        
-        if (error &&
-            (USE_STRONG(self)->_dnsLoggingEnabled
-             || error.code != 89) // 89 - operation canceled
-            ) {
-            
+        if (error && !_closed) {
             
             DDLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
             return;
