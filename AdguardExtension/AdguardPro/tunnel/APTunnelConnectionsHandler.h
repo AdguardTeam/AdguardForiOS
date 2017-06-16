@@ -84,6 +84,11 @@
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 /**
+ Returns YES if serverAddress in system DNS addresses.
+ */
+- (BOOL) isDeviceServerAddress: (NSString*) serverAddress;
+
+/**
  Closes all existing connections, prevents to create new.
  Call this method before stop tunnel.
 

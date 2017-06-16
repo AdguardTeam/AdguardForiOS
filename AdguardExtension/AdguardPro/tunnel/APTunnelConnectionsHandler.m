@@ -48,6 +48,7 @@
     
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
+    NSSet *_deviceDnsAddresses;
     
     
     AERDomainFilter *_whitelist;
@@ -129,6 +130,8 @@
         _dnsAddresses = [dnsCache copy];
         //set default device DNS to first address.
         _deviceDnsAddressForAny = deviceDnsAddresses[0];
+        
+        _deviceDnsAddresses = [NSSet setWithArray:deviceDnsAddresses];
         
         OSSpinLockUnlock(&_dnsAddressLock);
     }
@@ -226,6 +229,10 @@
     OSSpinLockUnlock(&_dnsAddressLock);
 
     return address;
+}
+
+- (BOOL)isDeviceServerAddress:(NSString *)serverAddress {
+    return [_deviceDnsAddresses containsObject:serverAddress];
 }
 
 - (void)closeAllConnections:(void (^)(void))completion {
@@ -396,7 +403,7 @@
               session = key;
               if ([session createSession]) {
                   
-                  [session setLoggingEnabled:YES];
+                  [session setLoggingEnabled:_loggingEnabled];
                   [_sessions addObject:session];
               }
               else

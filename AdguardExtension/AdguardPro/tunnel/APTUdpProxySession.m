@@ -27,6 +27,7 @@
 #import "APUDPPacket.h"
 #import "PacketTunnelProvider.h"
 #import "APDnsServerObject.h"
+#import "APVPNManager.h"
 
 #define MAX_DATAGRAMS_RECEIVED                      10
 #define TTL_SESSION                                 10 //seconds
@@ -53,11 +54,13 @@
     NSString *_key;
     APUDPPacket *_basePacket;
     APUDPPacket *_reversBasePacket;
+    APDnsServerObject *_currentDnsServer;
     
     BOOL _dnsLoggingEnabled;
     ACLExecuteBlockDelayed *_saveLogExecution;
     NSMutableArray <APDnsLogRecord *> *_dnsRecords;
-    NSMutableSet *_dnsRecordsSet;    
+    NSMutableSet *_dnsRecordsSet;
+    BOOL _bypassSession;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -103,6 +106,8 @@
         _workingQueue = dispatch_queue_create("APTUdpProxySession", DISPATCH_QUEUE_SERIAL);
         _packetsForSend = [NSMutableArray new];
         _waitWrite = _closed = NO;
+        
+        _bypassSession = _delegate.provider.isRemoteServer && [_delegate isDeviceServerAddress:_basePacket.dstAddress];
         
         // Create session for whitelist
         NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
@@ -293,16 +298,14 @@ _workingQueue = nil;
             return;
         }
         
+        dispatch_sync(USE_STRONG(self)->_workingQueue, ^{
+            
+            ASSIGN_STRONG(session);
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
+        });
+        
         if (USE_STRONG(self)->_dnsLoggingEnabled) {
-            
-            
-            dispatch_sync(USE_STRONG(self)->_workingQueue, ^{
-                
-                ASSIGN_STRONG(session);
-                ASSIGN_STRONG(self);
-                [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
-            });
-            
             [USE_STRONG(self)->_saveLogExecution executeOnceForInterval];
         }
         
@@ -603,11 +606,7 @@ _workingQueue = nil;
                 }
                 
                 //Create DNS log record, if logging is enabled.
-                if (self->_dnsLoggingEnabled) {
-                    
-                    [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
-                }
-                
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
             }
         }
         
@@ -630,8 +629,9 @@ _workingQueue = nil;
         
         if ([item convertToBlockingResponse]) {
             
+            [self settingDnsRecordForIncomingDnsDatagram:item session:_udpSession];
+            
             if (_dnsLoggingEnabled) {
-                [self settingDnsRecordForIncomingDnsDatagram:item session:_udpSession];
                 logUpdated = YES;
             }
             
@@ -665,19 +665,34 @@ _workingQueue = nil;
 
 - (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
     
-    APDnsServerObject *dnsServer = _delegate.provider.currentDnsServer;
-    BOOL localFiltering = _delegate.provider.localFiltering;
+    [self logDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelist blacklist:blacklist];
     
-    APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
-    record.requests = datagram.requests;
-    
-    
-    record.isBlacklisted = blacklist;
+    if(_dnsLoggingEnabled) {
+        
+        APDnsServerObject *dnsServer = _currentDnsServer;
+        BOOL localFiltering = _delegate.provider.localFiltering;
+        
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
+        record.requests = datagram.requests;
+        
+        record.isWhitelisted = whitelist;
+        record.isBlacklisted = blacklist;
+        
+        
+        if (![_dnsRecordsSet containsObject:record]) {
+            
+            [_dnsRecords addObject:record];
+            [_dnsRecordsSet addObject:record];
+        }
+    }
+}
+
+- (void)logDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
     
     NSString *dstHost;
     NSString *dstPort;
+    
     if (whitelist || !_delegate.provider.isRemoteServer) {
-        record.isWhitelisted = YES;
         
         NWHostEndpoint *endpoint = (NWHostEndpoint *)self.whitelistUdpSession.resolvedEndpoint;
         dstHost = endpoint.hostname;
@@ -689,23 +704,20 @@ _workingQueue = nil;
         dstPort = _basePacket.dstPort;
     }
     
-    if (![_dnsRecordsSet containsObject:record]) {
-        
-        [_dnsRecords addObject:record];
-        [_dnsRecordsSet addObject:record];
-    }
+    BOOL localFiltering = _delegate.provider.localFiltering;
     
     NSMutableString *sb = [NSMutableString new];
     for (APDnsRequest *item in datagram.requests) {
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    #if DEBUG
-                DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort,dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
-    #else
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
-    #endif
+#if DEBUG
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort,_currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+#else
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+#endif
 }
+
 
 - (void)settingDnsRecordsForIncomingPackets:(NSArray<NSData *> *)packets session:(NWUDPSession *)session{
     
@@ -720,29 +732,39 @@ _workingQueue = nil;
     
     if (datagram.isResponse) {
         
-        NSMutableString *sb = [NSMutableString new];
-        for (APDnsResponse *item in datagram.responses) {
-            [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
-        }
+        [self logDnsRecordForIncomingDnsDatagram:datagram session:session];
         
-        APDnsServerObject *dnsServer = _delegate.provider.currentDnsServer;
-        BOOL localFiltering = _delegate.provider.localFiltering;
-        
-        NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        #if DEBUG
-                    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        #else
-        DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, dnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
-        #endif
-        
-        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
-        
-        record = [_dnsRecordsSet member:record];
-        if (record) {
+        if(_dnsLoggingEnabled) {
             
-            record.responses = datagram.responses;
+            BOOL localFiltering = _delegate.provider.localFiltering;
+            
+            
+            APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer localFiltering:localFiltering];
+            
+            record = [_dnsRecordsSet member:record];
+            if (record) {
+                
+                record.responses = datagram.responses;
+            }
         }
     }
+}
+
+- (void) logDnsRecordForIncomingDnsDatagram:(APDnsDatagram *)datagram session:(NWUDPSession *)session {
+    
+    NSMutableString *sb = [NSMutableString new];
+    for (APDnsResponse *item in datagram.responses) {
+        [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
+    }
+    
+    BOOL localFiltering = _delegate.provider.localFiltering;
+    
+    NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
+#if DEBUG
+    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+#else
+    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+#endif
 }
 
 

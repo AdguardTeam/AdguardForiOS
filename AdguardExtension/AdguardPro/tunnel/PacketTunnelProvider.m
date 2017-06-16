@@ -522,9 +522,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
     }
     
-    [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
-    
     [_connectionHandler setDeviceDnsAddresses:allDeviceDnsServers adguardDnsAddresses:dnsAddresses];
+    
+    [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers:dnsAddresses];
     dns.matchDomains = @[ @"" ];
