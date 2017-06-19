@@ -232,7 +232,12 @@
 }
 
 - (BOOL)isDeviceServerAddress:(NSString *)serverAddress {
-    return [_deviceDnsAddresses containsObject:serverAddress];
+    
+    OSSpinLockLock(&_dnsAddressLock);
+    BOOL result = [_deviceDnsAddresses containsObject:serverAddress];
+    OSSpinLockUnlock(&_dnsAddressLock);
+    
+    return result;
 }
 
 - (void)closeAllConnections:(void (^)(void))completion {

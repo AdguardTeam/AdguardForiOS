@@ -109,6 +109,10 @@
         
         _bypassSession = _delegate.provider.isRemoteServer && [_delegate isDeviceServerAddress:_basePacket.dstAddress];
         
+        _currentDnsServer = _bypassSession ?
+        APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX] :
+        _delegate.provider.currentDnsServer;
+        
         // Create session for whitelist
         NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
         NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
@@ -304,10 +308,6 @@ _workingQueue = nil;
             ASSIGN_STRONG(self);
             [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
         });
-        
-        if (USE_STRONG(self)->_dnsLoggingEnabled) {
-            [USE_STRONG(self)->_saveLogExecution executeOnceForInterval];
-        }
         
         // reset timeout timer
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
@@ -631,9 +631,7 @@ _workingQueue = nil;
             
             [self settingDnsRecordForIncomingDnsDatagram:item session:_udpSession];
             
-            if (_dnsLoggingEnabled) {
-                logUpdated = YES;
-            }
+            logUpdated = _dnsLoggingEnabled;
             
             NSData *datagram = [item generatePayload];
             if (datagram) {
@@ -669,10 +667,9 @@ _workingQueue = nil;
     
     if(_dnsLoggingEnabled) {
         
-        APDnsServerObject *dnsServer = _currentDnsServer;
         BOOL localFiltering = _delegate.provider.localFiltering;
         
-        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:dnsServer localFiltering:localFiltering];
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer localFiltering:localFiltering];
         record.requests = datagram.requests;
         
         record.isWhitelisted = whitelist;
@@ -712,7 +709,7 @@ _workingQueue = nil;
     }
     
 #if DEBUG
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort,_currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
 #else
     DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
 #endif
@@ -725,6 +722,10 @@ _workingQueue = nil;
         
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
         [self settingDnsRecordForIncomingDnsDatagram:datagram session:session];
+    }
+    
+    if (self->_dnsLoggingEnabled) {
+        [self->_saveLogExecution executeOnceForInterval];
     }
 }
 
@@ -750,7 +751,7 @@ _workingQueue = nil;
     }
 }
 
-- (void) logDnsRecordForIncomingDnsDatagram:(APDnsDatagram *)datagram session:(NWUDPSession *)session {
+- (void) logDnsRecordForIncomingDnsDatagram:(__unsafe_unretained APDnsDatagram *)datagram session:(__unsafe_unretained NWUDPSession *)session {
     
     NSMutableString *sb = [NSMutableString new];
     for (APDnsResponse *item in datagram.responses) {
