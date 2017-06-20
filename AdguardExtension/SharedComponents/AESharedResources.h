@@ -117,9 +117,27 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  */
 + (NSUserDefaults *)sharedDefaults;
 
-//TODO: need descriptions
+/**
+ Saves defaults value in NSArgumentDomain.
+ This lets to use defaults value in current process, 
+ but this value did not save on disk (permanent domain).
+ 
+ @param key Defaults key
+ @param value Devaults value
+ */
 + (void)sharedDefaultsSetTempKey:(NSString *)key value:(id)value;
+/**
+ Gets defaults value from NSArgumentDomain.
+
+ @param key Defaults key.
+ @return Defaults value or nil.
+ */
 + (id)sharedDefaultsValueOfTempKey:(NSString *)key;
+/**
+ Removes defaults value from NSArgumentDomain.
+
+ @param key Defaults key.
+ */
 + (void)sharedDefaultsRemoveTempKey:(NSString *)key;
 
 /**
