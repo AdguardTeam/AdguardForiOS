@@ -881,23 +881,35 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSArray *deviceIpv6DnsServers;
     
     [self getDNSServersIpv4:&deviceIpv4DnsServers ipv6:&deviceIpv6DnsServers];
+    
     NSMutableArray *allDeviceDnsServers = [NSMutableArray new];
     [allDeviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
     [allDeviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
-    if (_isRemoteServer) {
-        
-        [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
-        [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
-        
+    if(fullTunnel) {
+        if (_isRemoteServer) {
+            [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
+            [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
+            
+        }
+        else {
+            [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
+        }
     }
     else {
-        [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
-        [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
+        if (_isRemoteServer) {
+            
+            [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
+            [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
+            
+        }
+        else {
+            [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
+            [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
+        }
     }
     
     [_connectionHandler setDeviceDnsAddresses:allDeviceDnsServers adguardDnsAddresses:dnsAddresses];
-    
     
     NEDNSSettings *dns;
     if(fullTunnel) {
