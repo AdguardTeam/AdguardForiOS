@@ -267,12 +267,17 @@ static NSDictionary *_editAttrs;
 
 - (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text {
     
+    _currentSearchString = text;
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
+    _currentSelectionType = selectionType;
+    [self updateSelectionOnTextView];
+    
     NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:text] || text.length > len) {
         return NO;
     }
     
-    _currentSearchString = text;
+    
     
     _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
@@ -280,7 +285,7 @@ static NSDictionary *_editAttrs;
         return NO;
     }
     
-    _currentSelectionType = selectionType;
+    
     [self updateSelectionOnTextView];
 
     return YES;
