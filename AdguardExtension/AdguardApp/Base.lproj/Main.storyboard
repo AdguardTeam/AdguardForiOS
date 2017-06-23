@@ -481,9 +481,15 @@
                                     <constraint firstAttribute="height" constant="44" id="oGk-oU-iEm"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Clear All" style="plain" id="CM4-d8-GVV">
+                                    <barButtonItem title="Clear All" style="plain" id="j5B-WF-5L7">
                                         <connections>
-                                            <action selector="clickClearAll:" destination="04M-uU-tjs" id="sTW-X5-dOZ"/>
+                                            <action selector="clickClearAll:" destination="04M-uU-tjs" id="7bT-Oi-IVd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fBL-gc-jbB"/>
+                                    <barButtonItem enabled="NO" title="Rules Syntax" style="plain" id="CM4-d8-GVV">
+                                        <connections>
+                                            <action selector="clickRules:" destination="04M-uU-tjs" id="tHR-PW-4Ng"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -521,11 +527,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="clearAllButton" destination="CM4-d8-GVV" id="cUJ-Hi-BPH"/>
                         <outlet property="doneButton" destination="mHA-FX-Jfq" id="PzC-x3-lSB"/>
                         <outlet property="editorTextView" destination="Ru9-g2-Yvv" id="CJe-CH-hHz"/>
                         <outlet property="loadingActivity" destination="6DN-M2-Zuu" id="DbI-K7-GT4"/>
                         <outlet property="placeholderLabel" destination="G4C-i7-VxE" id="sA3-Jc-4zV"/>
+                        <outlet property="rulesButton" destination="CM4-d8-GVV" id="Lzz-lf-E56"/>
                         <outlet property="seachToolBarConstraint" destination="rHf-Xq-uWl" id="w9M-nl-6q7"/>
                         <outlet property="searchBar" destination="lHn-v7-UvW" id="IZW-yg-URT"/>
                         <outlet property="searchBarItem" destination="LOM-vg-Jmm" id="0aW-0y-rL3"/>
@@ -2329,14 +2335,14 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="bai-Bl-QoX">
-                                <mutableString key="footerTitle">Split-Tunnel
+                                <string key="footerTitle">Split-Tunnel
     In this mode, Adguard is compatible with so-called "Personal VPN" apps. The full list of known compatible apps can be seen here: https://github.com/AdguardTeam/AdguardForiOS/issues/162. As a trade-off, in this mode Adguard may be bypassed by iOS in case of bad connectivity. 
     
 Full-Tunnel
     In this mode, Adguard is incompatible with other VPN apps, but can't be bypassed regardless of the connection quality.
     
 Auto
-    In this mode, Adguard will switch to Split-Tunnel mode if another active "Personal VPN" is detected. Otherwise, it will use the Full-Tunnel mode.</mutableString>
+    In this mode, Adguard will switch to Split-Tunnel mode if another active "Personal VPN" is detected. Otherwise, it will use the Full-Tunnel mode.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="lYE-ow-dIW" detailTextLabel="GUc-Wj-Y0U" imageView="J1t-l7-Q3A" style="IBUITableViewCellStyleSubtitle" id="qQC-G1-vF8">
                                         <rect key="frame" x="0.0" y="267" width="320" height="44"/>
@@ -2471,6 +2477,6 @@ Auto
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MKF-oV-GeK"/>
+        <segue reference="6Ee-nM-Qm2"/>
     </inferredMetricsTieBreakers>
 </document>

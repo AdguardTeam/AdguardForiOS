@@ -596,20 +596,29 @@ _workingQueue = nil;
                 NSString *name = [datagram.requests[0] name];
                 if (! [NSString isNullOrEmpty:name]) {
                     
-                    // whitelist is processed first
-                    if ([self.delegate isWhitelistDomain:name]) {
+                    // user filter lists are processed first
+                    if ([self.delegate isUserWhitelistDomain:name]) {
+                        whitelisted = YES;
+                    }
+                    else if ([self.delegate isUserBlacklistDomain:name]) {
+                        blacklisted = YES;
+                    }
+                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
+                        whitelisted = YES;
+                    }
+                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
+                        blacklisted = YES;
+                    }
+                    
+                    if(whitelisted) {
                         
                         [whitelistPackets addObject:packet];
-                        whitelisted = YES;
                         
                     }
-                    else if ([self.delegate isBlacklistDomain:name]) {
+                    else if (blacklisted) {
                         
                         [blacklistDatagrams addObject:datagram];
-                        
                         [blacklistPackets addObject:packet];
-                        
-                        blacklisted = YES;
                         
                     }
                 }

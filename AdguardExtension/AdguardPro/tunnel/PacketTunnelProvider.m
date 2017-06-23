@@ -469,8 +469,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     if (_localFiltering == NO) {
         
-        [_connectionHandler setWhitelistFilter:nil];
-        [_connectionHandler setBlacklistFilter:nil];
+        [_connectionHandler setGlobalWhitelistFilter:nil];
+        [_connectionHandler setGlobalBlacklistFilter:nil];
+        [_connectionHandler setUserWhitelistFilter:nil];
+        [_connectionHandler setUserBlacklistFilter:nil];
         
         DDLogInfo(@"(PacketTunnelProvider) System-Wide Filtering rules set to nil.");
 
@@ -479,8 +481,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     @autoreleasepool {
 
-        AERDomainFilter *wRules = [AERDomainFilter filter];
-        AERDomainFilter *bRules = [AERDomainFilter filter];
+        AERDomainFilter *globalWhiteRules = [AERDomainFilter filter];
+        AERDomainFilter *globalBlackRules = [AERDomainFilter filter];
 
         NSArray *rules;
         @autoreleasepool {
@@ -518,16 +520,23 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 rule = [AERDomainFilterRule rule:item.ruleText];
                 
                 if (rule.whiteListRule) {
-                    [wRules addRule:rule];
+                    [globalWhiteRules addRule:rule];
                 }
                 else {
                     
-                    [bRules addRule:rule];
+                    [globalBlackRules addRule:rule];
                 }
             }
         }
+        
+        [_connectionHandler setGlobalWhitelistFilter:globalWhiteRules];
+        [_connectionHandler setGlobalBlacklistFilter:globalBlackRules];
+        
+        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", globalWhiteRules.rulesCount, globalBlackRules.rulesCount);
+        
+        AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
+        AERDomainFilter *userBlackRules = [AERDomainFilter filter];
 
-        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", wRules.rulesCount, bRules.rulesCount);
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
@@ -537,14 +546,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
                 if (ruleText) {
                     
-                    [wRules addRule:[AERDomainFilterRule rule:ruleText]];
+                    [userWhiteRules addRule:[AERDomainFilterRule rule:ruleText]];
                     counter++;
                 }
             }
             DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", counter);
         }
         
-        [_connectionHandler setWhitelistFilter:wRules];
+        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
@@ -554,14 +563,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                 NSString *ruleText = [[[[AEBlacklistDomainObject alloc] initWithDomain:item] rule] ruleText];
                 if (ruleText) {
                     
-                    [bRules addRule:[AERDomainFilterRule rule:ruleText]];
+                    [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
                     counter++;
                 }
             }
             DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", counter);
         }
         
-        [_connectionHandler setBlacklistFilter:bRules];
+        [_connectionHandler setUserBlacklistFilter:userBlackRules];
     }
 }
 
