@@ -144,7 +144,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];
         [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
 
-        _reachabilityHandler = [Reachability reachabilityForInternetConnectionIpv6];
+        _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
     }
