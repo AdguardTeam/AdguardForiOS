@@ -616,6 +616,7 @@
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
     self.proStatusSwitch.on = manager.enabled;
+    [self proSetSystemWideEnabled:manager.enabled];
         
     if (manager.lastError) {
         [ACSSystemUtils
@@ -647,6 +648,13 @@
     if (observer) {
         [_observers addObject:observer];
     }
+}
+
+- (void) proSetSystemWideEnabled:(BOOL) enabled {
+    self.proSystemWideCell.userInteractionEnabled = enabled;
+    self.proSystemWideCell.textLabel.enabled = enabled;
+    self.proDnsSettingsCell.userInteractionEnabled = enabled;
+    self.proDnsSettingsCell.textLabel.enabled = enabled;
 }
 
 #endif
