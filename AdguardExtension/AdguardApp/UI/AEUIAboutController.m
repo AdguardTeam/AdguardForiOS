@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.versionLabel.text = [ADProductInfo version];
+    self.versionLabel.text = [ADProductInfo versionWithBuildNumber];
 }
 
 - (void)didReceiveMemoryWarning {

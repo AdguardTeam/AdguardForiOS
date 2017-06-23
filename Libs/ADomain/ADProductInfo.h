@@ -27,7 +27,10 @@
 /// Returns Product Version.
 + (NSString *)version;
 
-/// Returns Product Version With Build Number
+/// Returns Product Version with build number. e.g. 1.2.2(88)
++ (NSString *)versionWithBuildNumber;
+
+/// Returns Product Version With Build Number for logs. e.g. 1.2.2.88.DEBUG
 + (NSString *)buildVersion;
 
 /// Returns Localized Product Name.
