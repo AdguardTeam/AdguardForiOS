@@ -23,6 +23,9 @@
 @property (strong, nonatomic) IBOutlet UISwitch *wifiButton;
 @property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *fullTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *splitTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *autoTunnelCell;
 
 
 - (IBAction)toggleSimplified:(id)sender;

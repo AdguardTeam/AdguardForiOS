@@ -128,8 +128,17 @@
         
         // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
         if (_delegate.provider.isRemoteServer) {
-            serverIp = _basePacket.dstAddress;
+            
+            if(_delegate.provider.fullTunnel) {
+                
+                serverIp = [self.delegate serverAddressForFullTunnelDnsAddress:_basePacket.dstAddress];
+            }
+            else {
+                
+                serverIp = _basePacket.dstAddress;
+            }
         }
+    
         rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
         
         session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];

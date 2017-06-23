@@ -46,6 +46,12 @@
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
 
 /**
+ Sets addresses of the DNS servers for full tunnel
+ */
+- (void)setRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+
+/**
  Sets whitelist filter.
  */
 - (void)setWhitelistFilter:(AERDomainFilter *)filter;
@@ -82,6 +88,11 @@
  Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
+
+/**
+ Returns IP address of the DNS server for full tunnel fake DNS server.
+ */
+- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress;
 
 /**
  Returns YES if serverAddress in system DNS addresses.

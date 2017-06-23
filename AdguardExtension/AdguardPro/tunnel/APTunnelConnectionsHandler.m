@@ -50,6 +50,7 @@
     NSString *_deviceDnsAddressForAny;
     NSSet *_deviceDnsAddresses;
     
+    NSDictionary *_dnsAddressesForFullTunnel;
     
     AERDomainFilter *_whitelist;
     AERDomainFilter *_blacklist;
@@ -132,6 +133,35 @@
         _deviceDnsAddressForAny = deviceDnsAddresses[0];
         
         _deviceDnsAddresses = [NSSet setWithArray:deviceDnsAddresses];
+        
+        OSSpinLockUnlock(&_dnsAddressLock);
+    }
+}
+
+- (void)setRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses adguardDnsAddresses:(NSArray<NSString *> *)adguardDnsAddresses {
+    
+    DDLogInfo(@"(APTunnelConnectionsHandler) Set remote DNS addresses:\n%@\nAdguard DNS addresses:\n%@",
+              remoteDnsAddresses, adguardDnsAddresses);
+    
+    @autoreleasepool {
+        
+        NSUInteger remoteLastIndex = remoteDnsAddresses.count - 1;
+        NSMutableDictionary *dnsCache = [NSMutableDictionary dictionary];
+        [adguardDnsAddresses enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (idx > remoteLastIndex) {
+                *stop = YES;
+                return;
+            }
+            
+            dnsCache[obj] = remoteDnsAddresses[idx];
+        }];
+        
+        OSSpinLockLock(&_dnsAddressLock);
+        
+        _dnsAddressesForFullTunnel = [dnsCache copy];
+        //set default device DNS to first address.
+        _deviceDnsAddressForAny = remoteDnsAddresses[0];
         
         OSSpinLockUnlock(&_dnsAddressLock);
     }
@@ -228,6 +258,25 @@
     
     OSSpinLockUnlock(&_dnsAddressLock);
 
+    return address;
+}
+
+- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress {
+    
+    if (!serverAddress) {
+        serverAddress = [NSString new];
+    }
+    
+    OSSpinLockLock(&_dnsAddressLock);
+    
+    NSString *address = _dnsAddressesForFullTunnel[serverAddress];
+    
+    if (!address) {
+        address = _deviceDnsAddressForAny;
+    }
+    
+    OSSpinLockUnlock(&_dnsAddressLock);
+    
     return address;
 }
 

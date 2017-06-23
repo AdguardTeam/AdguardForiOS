@@ -40,6 +40,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
 NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
+NSString *APVpnManagerTunnelMode = @"APVpnManagerTunnelMode";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
@@ -67,6 +68,9 @@ NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
     
     BOOL               _localFiltering;
     NSNumber          *_delayedSetLocalFiltering;
+    
+    APVpnManagerTunnelModeEnum _tunnelMode;
+    NSNumber          *_delayedSetTunnelMode;
     
     NSError     *_standartError;
     
@@ -193,7 +197,7 @@ static APVPNManager *singletonVPNManager;
                   initWithUUID: @"AGDEF01"
                   name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
                   description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
-                  ipAddresses:@"176.103.130.130, 176.103.130.131"];
+                  ipAddresses:@"255.103.130.130, 176.103.130.131"];
         server.editable = NO;
         [predefinedRemoteDnsServers addObject:server];
         
@@ -322,6 +326,24 @@ static APVPNManager *singletonVPNManager;
     
 }
 
+- (void)setTunnelMode:(APVpnManagerTunnelModeEnum)tunnelMode {
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        
+        _delayedSetTunnelMode = @(tunnelMode);
+    } else {
+        dispatch_async(workingQueue, ^{
+            
+            [self internalSetTunnelMode:tunnelMode];
+        });
+    }
+    
+    [_busyLock unlock];
+}
+
 - (BOOL)localFiltering {
     
     return _localFiltering;
@@ -330,6 +352,10 @@ static APVPNManager *singletonVPNManager;
 - (BOOL)dnsRequestsLogging {
 
     return _dnsRequestsLogging;
+}
+
+- (APVpnManagerTunnelModeEnum)tunnelMode {
+    return _tunnelMode;
 }
 
 - (void)setDnsRequestsLogging:(BOOL)dnsRequestsLogging {
@@ -513,7 +539,7 @@ static APVPNManager *singletonVPNManager;
         }
         
         
-        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer enabled:enabled];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode enabled:enabled];
     }
 }
 
@@ -534,7 +560,7 @@ static APVPNManager *singletonVPNManager;
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:server enabled:NO];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:server tunnelMode:_tunnelMode enabled:NO];
     }
 }
 
@@ -547,7 +573,18 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = @(_enabled);
         }
         
-        [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer enabled:NO];
+        [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode enabled:NO];
+    }
+}
+
+//must be called on workingQueue
+- (void)internalSetTunnelMode:(APVpnManagerTunnelModeEnum)tunnelMode {
+    if(tunnelMode != _tunnelMode) {
+        
+        if (_enabled) {
+            _delayedSetEnabled = @(_enabled);
+        }
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:tunnelMode enabled:NO];
     }
 }
 
@@ -664,7 +701,7 @@ static APVPNManager *singletonVPNManager;
     
 }
 
-- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer enabled:(BOOL)enabled{
+- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer tunnelMode:(APVpnManagerTunnelModeEnum) tunnelMode enabled:(BOOL)enabled{
     
     [_busyLock lock];
     _busy = YES;
@@ -716,7 +753,8 @@ static APVPNManager *singletonVPNManager;
     protocol.serverAddress = remoteServer.serverName;
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterLocalFiltering: @(localFiltering),
-                                       APVpnManagerParameterRemoteDnsServer: remoteServerData
+                                       APVpnManagerParameterRemoteDnsServer: remoteServerData,
+                                       APVpnManagerTunnelMode: @(tunnelMode)
                                        };
     
     if (_manager) {
@@ -779,6 +817,8 @@ static APVPNManager *singletonVPNManager;
         _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
         _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] ?
+        [_protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeAuto;
         //-------------
         
         NSString *connectionStatusReason = @"Unknown";
@@ -912,6 +952,14 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = nil;
             dispatch_async(workingQueue, ^{
                 [self internalSetEnabled:localValue];
+            });
+        }
+        else if (_delayedSetTunnelMode) {
+            
+            APVpnManagerTunnelModeEnum mode = [_delayedSetTunnelMode unsignedIntegerValue];
+            _delayedSetTunnelMode = nil;
+            dispatch_async(workingQueue, ^{
+                [self internalSetTunnelMode:mode];
             });
         }
     }
