@@ -165,8 +165,6 @@
         OSSpinLockLock(&_dnsAddressLock);
         
         _dnsAddressesForFullTunnel = [dnsCache copy];
-        //set default device DNS to first address.
-        _deviceDnsAddressForAny = remoteDnsAddresses[0];
         
         OSSpinLockUnlock(&_dnsAddressLock);
     }
