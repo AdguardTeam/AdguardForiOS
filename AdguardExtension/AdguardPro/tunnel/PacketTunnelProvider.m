@@ -325,6 +325,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         pendingStopCompletion();
         pendingStopCompletion = nil;
         
+        [self setTunnelNetworkSettings:nil completionHandler:nil];
+        
         DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
     }];
 }
