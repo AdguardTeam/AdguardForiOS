@@ -36,8 +36,7 @@ typedef enum {
 
 typedef enum : NSUInteger {
     APVpnManagerTunnelModeSplit = 0,
-    APVpnManagerTunnelModeFull,
-    APVpnManagerTunnelModeAuto // not using now
+    APVpnManagerTunnelModeFull
     
 } APVpnManagerTunnelModeEnum;
 

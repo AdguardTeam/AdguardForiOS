@@ -812,7 +812,7 @@ static APVPNManager *singletonVPNManager;
         _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeAuto;
+        [_protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         //-------------
         
         NSString *connectionStatusReason = @"Unknown";

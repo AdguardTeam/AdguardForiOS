@@ -76,9 +76,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
         APVpnManagerTunnelModeEnum selectedMode =
-            indexPath.row == 0 ? APVpnManagerTunnelModeSplit :
-            indexPath.row == 1 ? APVpnManagerTunnelModeFull :
-            APVpnManagerTunnelModeAuto;
+            indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
         
         [self setTunnelModeUI:selectedMode];
         [APVPNManager.singleton setTunnelMode:selectedMode];
@@ -131,13 +129,9 @@
 
 #ifdef PRO
 - (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
-    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = _autoTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
     switch (tunnelMode) {
-        case APVpnManagerTunnelModeAuto:
-            _autoTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
-            break;
-            
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
             break;

@@ -219,10 +219,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             _fullTunnel = NO;
             modeName = @"split";
         }
-        else if (mode == APVpnManagerTunnelModeAuto) {
-            _fullTunnel = [self autoFullTunnel];
-            modeName = @"auto";
-        }
+       
         [self logNetworkInterfaces];
         DDLogInfo(@"PacketTunnelProvider) Start Tunnel user mode: %@, fullTunnel: %@", modeName, _fullTunnel ? @"YES" : @"NO");
         
