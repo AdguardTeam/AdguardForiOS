@@ -453,6 +453,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     [_reachabilityHandler stopNotifier];
 
+    [self setTunnelNetworkSettings:nil completionHandler:nil];
+    
     self.reasserting = YES;
     [self cancelTunnelWithError:nil];
 
