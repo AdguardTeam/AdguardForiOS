@@ -46,7 +46,6 @@
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
 
 /**
-<<<<<<< HEAD
  Sets addresses of the DNS servers for full tunnel
  */
 - (void)setRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses

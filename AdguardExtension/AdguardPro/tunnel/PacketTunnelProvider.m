@@ -219,10 +219,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             _fullTunnel = NO;
             modeName = @"split";
         }
-        else if (mode == APVpnManagerTunnelModeAuto) {
-            _fullTunnel = [self autoFullTunnel];
-            modeName = @"auto";
-        }
+       
         [self logNetworkInterfaces];
         DDLogInfo(@"PacketTunnelProvider) Start Tunnel user mode: %@, fullTunnel: %@", modeName, _fullTunnel ? @"YES" : @"NO");
         
@@ -324,6 +321,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         pendingStartCompletion = nil;
         pendingStopCompletion();
         pendingStopCompletion = nil;
+        
+        [self setTunnelNetworkSettings:nil completionHandler:nil];
         
         DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
     }];

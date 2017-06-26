@@ -19,7 +19,10 @@
 #import "ACommons/ACLang.h"
 #import "AESharedResources.h"
 #import "AEUIUtils.h"
+
+#ifdef PRO
 #import "APVPNManager.h"
+#endif
 
 @interface AEUIAdvSettingsController ()
 
@@ -38,7 +41,10 @@
     
     self.simplifiedButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
     self.wifiButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates];
+    
+#ifdef PRO
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,17 +72,24 @@
     }
 }
 
+#ifdef PRO
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
         APVpnManagerTunnelModeEnum selectedMode =
-            indexPath.row == 0 ? APVpnManagerTunnelModeSplit :
-            indexPath.row == 1 ? APVpnManagerTunnelModeFull :
-            APVpnManagerTunnelModeAuto;
+            indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
         
         [self setTunnelModeUI:selectedMode];
         [APVPNManager.singleton setTunnelMode:selectedMode];
     }
 }
+#endif
+
+#ifndef PRO
+// hide tunnel mode section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
@@ -113,14 +126,12 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark helper methods
 /////////////////////////////////////////////////////////////////////
+
+#ifdef PRO
 - (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
-    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = _autoTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
     switch (tunnelMode) {
-        case APVpnManagerTunnelModeAuto:
-            _autoTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
-            break;
-            
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
             break;
@@ -133,5 +144,7 @@
             break;
     }
 }
+
+#endif
 
 @end

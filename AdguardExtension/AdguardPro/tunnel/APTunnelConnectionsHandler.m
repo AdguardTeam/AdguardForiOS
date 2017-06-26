@@ -165,8 +165,6 @@
         OSSpinLockLock(&_dnsAddressLock);
         
         _dnsAddressesForFullTunnel = [dnsCache copy];
-        //set default device DNS to first address.
-        _deviceDnsAddressForAny = remoteDnsAddresses[0];
         
         OSSpinLockUnlock(&_dnsAddressLock);
     }
@@ -335,11 +333,22 @@
 - (void)closeAllConnections:(void (^)(void))completion {
     
     @synchronized (self) {
-        _closeCompletion = completion;
         NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
-        for (APTUdpProxySession *item in sessions) {
+        if(_sessions.count == 0) {
             
-            [item close];
+            if (completion) {
+                DDLogInfo(@"(APTunnelConnectionsHandler) no open sessions. closeAllConnections completion will be run.");
+                [ACSSystemUtils callOnMainQueue:completion];
+            }
+        }
+        else {
+            
+            _closeCompletion = completion;
+            
+            for (APTUdpProxySession *item in sessions) {
+                
+                [item close];
+            }
         }
         DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections method completed.");
     }
