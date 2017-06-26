@@ -672,26 +672,26 @@ static APVPNManager *singletonVPNManager;
 
     //Check input parameters
     
-    if (enabled
-        && [remoteServer.tag isEqualToString:APDnsServerTagLocal]
-        && localFiltering == NO) {
-        
-        _lastError = [NSError
-                      errorWithDomain:APVpnManagerErrorDomain
-                      code:APVPN_MANAGER_ERROR_BADCONFIGURATION
-                      userInfo:@{
-                                 NSLocalizedDescriptionKey :
-                                     NSLocalizedString(@"VPN can not be enabled because you have turned off the System-wide ad blocking and are not using spoofing DNS server.",
-                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
-                                 }];
-
-        [_busyLock lock];
-        _busy = NO;
-        [_busyLock unlock];
-        
-        [self sendNotificationForced:NO];
-        return;
-    }
+//    if (enabled
+//        && [remoteServer.tag isEqualToString:APDnsServerTagLocal]
+//        && localFiltering == NO) {
+//
+//        _lastError = [NSError
+//                      errorWithDomain:APVpnManagerErrorDomain
+//                      code:APVPN_MANAGER_ERROR_BADCONFIGURATION
+//                      userInfo:@{
+//                                 NSLocalizedDescriptionKey :
+//                                     NSLocalizedString(@"VPN can not be enabled because you have turned off the System-wide ad blocking and are not using spoofing DNS server.",
+//                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
+//                                 }];
+//
+//        [_busyLock lock];
+//        _busy = NO;
+//        [_busyLock unlock];
+//
+//        [self sendNotificationForced:NO];
+//        return;
+//    }
     
     //------
     
