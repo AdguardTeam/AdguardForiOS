@@ -40,6 +40,7 @@
     self.textView.scrollEnabled = NO;
     self.textView.textContainerInset = UIEdgeInsetsMake(0.0, -5.0, -5.0, -5.0);
     self.textView.backgroundColor = [UIColor clearColor];
+    self.textView.accessibilityTraits = UIAccessibilityTraitStaticText;
     [self addSubview:self.textView];
 }
 
