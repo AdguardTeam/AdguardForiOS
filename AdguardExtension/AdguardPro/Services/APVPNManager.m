@@ -534,6 +534,12 @@ static APVPNManager *singletonVPNManager;
         
         
         [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode enabled:enabled];
+        
+        // If do not completely stop the tunnel in full mode, then other VPNs can not start
+        if(!enabled && _tunnelMode == APVpnManagerTunnelModeFull) {
+            [(NETunnelProviderSession *)_manager.connection stopTunnel];
+        }
+
     }
 }
 
