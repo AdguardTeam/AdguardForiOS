@@ -46,13 +46,29 @@
           adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
 
 /**
+ Sets addresses of the DNS servers for full tunnel
+ */
+- (void)setRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses
+          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+
+/**
  Sets whitelist filter.
  */
-- (void)setWhitelistFilter:(AERDomainFilter *)filter;
+- (void)setGlobalWhitelistFilter:(AERDomainFilter *)filter;
 /**
- Sets blacklist filter.
+ Sets global blacklist filter.
  */
-- (void)setBlacklistFilter:(AERDomainFilter *)filter;
+- (void)setGlobalBlacklistFilter:(AERDomainFilter *)filter;
+
+/**
+ Sets user whitelist filter.
+ */
+- (void)setUserWhitelistFilter:(AERDomainFilter *)filter;
+/**
+ Sets user blacklist filter.
+ */
+- (void)setUserBlacklistFilter:(AERDomainFilter *)filter;
+
 
 /**
  Make the initial readPacketsWithCompletionHandler call.
@@ -70,18 +86,38 @@
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
 
 /**
- Checks domain name, that it is included in whitelist.
+ Checks domain name, that it is included in global whitelist.
  */
-- (BOOL)isWhitelistDomain:(NSString *)domainName;
+- (BOOL)isGlobalWhitelistDomain:(NSString *)domainName;
 /**
- Checks domain name, that it is included in blacklist.
+ Checks domain name, that it is included in global blacklist.
  */
-- (BOOL)isBlacklistDomain:(NSString *)domainName;
+- (BOOL)isGlobalBlacklistDomain:(NSString *)domainName;
+
+/**
+ Checks domain name, that it is included in user whitelist.
+ */
+- (BOOL)isUserWhitelistDomain:(NSString *)domainName;
+/**
+ Checks domain name, that it is included in user blacklist.
+ */
+- (BOOL)isUserBlacklistDomain:(NSString *)domainName;
+
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
+
+/**
+ Returns IP address of the DNS server for full tunnel fake DNS server.
+ */
+- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress;
+
+/**
+ Returns YES if serverAddress in system DNS addresses.
+ */
+- (BOOL) isDeviceServerAddress: (NSString*) serverAddress;
 
 /**
  Closes all existing connections, prevents to create new.

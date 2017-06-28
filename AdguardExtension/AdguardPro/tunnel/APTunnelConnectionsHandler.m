@@ -43,15 +43,22 @@
     BOOL _loggingEnabled;
     
     OSSpinLock _dnsAddressLock;
-    OSSpinLock _whitelistLock;
-    OSSpinLock _blacklistLock;
+    OSSpinLock _globalWhitelistLock;
+    OSSpinLock _globalBlacklistLock;
+    OSSpinLock _userWhitelistLock;
+    OSSpinLock _userBlacklistLock;
     
     NSDictionary *_dnsAddresses;
     NSString *_deviceDnsAddressForAny;
+    NSSet *_deviceDnsAddresses;
     
+    NSDictionary *_dnsAddressesForFullTunnel;
     
-    AERDomainFilter *_whitelist;
-    AERDomainFilter *_blacklist;
+    AERDomainFilter *_globalWhitelist;
+    AERDomainFilter *_globalBlacklist;
+    
+    AERDomainFilter *_userWhitelist;
+    AERDomainFilter *_userBlacklist;
     
     BOOL _packetFlowObserver;
     
@@ -73,7 +80,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _whitelistLock = _blacklistLock =_dnsAddressLock = OS_SPINLOCK_INIT;
+        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
         
         _closeCompletion = nil;
@@ -130,22 +137,65 @@
         //set default device DNS to first address.
         _deviceDnsAddressForAny = deviceDnsAddresses[0];
         
+        _deviceDnsAddresses = [NSSet setWithArray:deviceDnsAddresses];
+        
         OSSpinLockUnlock(&_dnsAddressLock);
     }
 }
 
-- (void)setWhitelistFilter:(AERDomainFilter *)filter {
+- (void)setRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses adguardDnsAddresses:(NSArray<NSString *> *)adguardDnsAddresses {
     
-    OSSpinLockLock(&_whitelistLock);
-        _whitelist = filter;
-    OSSpinLockUnlock(&_whitelistLock);
+    DDLogInfo(@"(APTunnelConnectionsHandler) Set remote DNS addresses:\n%@\nAdguard DNS addresses:\n%@",
+              remoteDnsAddresses, adguardDnsAddresses);
+    
+    @autoreleasepool {
+        
+        NSUInteger remoteLastIndex = remoteDnsAddresses.count - 1;
+        NSMutableDictionary *dnsCache = [NSMutableDictionary dictionary];
+        [adguardDnsAddresses enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (idx > remoteLastIndex) {
+                *stop = YES;
+                return;
+            }
+            
+            dnsCache[obj] = remoteDnsAddresses[idx];
+        }];
+        
+        OSSpinLockLock(&_dnsAddressLock);
+        
+        _dnsAddressesForFullTunnel = [dnsCache copy];
+        
+        OSSpinLockUnlock(&_dnsAddressLock);
+    }
 }
 
-- (void)setBlacklistFilter:(AERDomainFilter *)filter {
+- (void)setGlobalWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_blacklistLock);
-    _blacklist = filter;
-    OSSpinLockUnlock(&_blacklistLock);
+    OSSpinLockLock(&_globalWhitelistLock);
+        _globalWhitelist = filter;
+    OSSpinLockUnlock(&_globalWhitelistLock);
+}
+
+- (void)setGlobalBlacklistFilter:(AERDomainFilter *)filter {
+    
+    OSSpinLockLock(&_globalBlacklistLock);
+    _globalBlacklist = filter;
+    OSSpinLockUnlock(&_globalBlacklistLock);
+}
+
+- (void)setUserWhitelistFilter:(AERDomainFilter *)filter {
+    
+    OSSpinLockLock(&_userWhitelistLock);
+    _userWhitelist = filter;
+    OSSpinLockUnlock(&_userWhitelistLock);
+}
+
+- (void)setUserBlacklistFilter:(AERDomainFilter *)filter {
+    
+    OSSpinLockLock(&_userBlacklistLock);
+    _userBlacklist = filter;
+    OSSpinLockUnlock(&_userBlacklistLock);
 }
 
 - (void)startHandlingPackets {
@@ -185,26 +235,50 @@
     _loggingEnabled = enabled;
 }
 
-- (BOOL)isWhitelistDomain:(NSString *)domainName {
+- (BOOL)isGlobalWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_whitelistLock);
+    OSSpinLockLock(&_globalWhitelistLock);
     
-    result = [_whitelist filteredDomain:domainName];
+    result = [_globalWhitelist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_whitelistLock);
+    OSSpinLockUnlock(&_globalWhitelistLock);
     
     return result;
 }
 
-- (BOOL)isBlacklistDomain:(NSString *)domainName {
+- (BOOL)isGlobalBlacklistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_blacklistLock);
+    OSSpinLockLock(&_globalBlacklistLock);
     
-    result = [_blacklist filteredDomain:domainName];
+    result = [_globalBlacklist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_blacklistLock);
+    OSSpinLockUnlock(&_globalBlacklistLock);
+    
+    return result;
+}
+
+- (BOOL)isUserWhitelistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_userWhitelistLock);
+    
+    result = [_userWhitelist filteredDomain:domainName];
+    
+    OSSpinLockUnlock(&_userWhitelistLock);
+    
+    return result;
+}
+
+- (BOOL)isUserBlacklistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_userBlacklistLock);
+    
+    result = [_userBlacklist filteredDomain:domainName];
+    
+    OSSpinLockUnlock(&_userBlacklistLock);
     
     return result;
 }
@@ -228,14 +302,53 @@
     return address;
 }
 
+- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress {
+    
+    if (!serverAddress) {
+        serverAddress = [NSString new];
+    }
+    
+    OSSpinLockLock(&_dnsAddressLock);
+    
+    NSString *address = _dnsAddressesForFullTunnel[serverAddress];
+    
+    if (!address) {
+        address = _deviceDnsAddressForAny;
+    }
+    
+    OSSpinLockUnlock(&_dnsAddressLock);
+    
+    return address;
+}
+
+- (BOOL)isDeviceServerAddress:(NSString *)serverAddress {
+    
+    OSSpinLockLock(&_dnsAddressLock);
+    BOOL result = [_deviceDnsAddresses containsObject:serverAddress];
+    OSSpinLockUnlock(&_dnsAddressLock);
+    
+    return result;
+}
+
 - (void)closeAllConnections:(void (^)(void))completion {
     
     @synchronized (self) {
-        _closeCompletion = completion;
         NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
-        for (APTUdpProxySession *item in sessions) {
+        if(_sessions.count == 0) {
             
-            [item close];
+            if (completion) {
+                DDLogInfo(@"(APTunnelConnectionsHandler) no open sessions. closeAllConnections completion will be run.");
+                [ACSSystemUtils callOnMainQueue:completion];
+            }
+        }
+        else {
+            
+            _closeCompletion = completion;
+            
+            for (APTUdpProxySession *item in sessions) {
+                
+                [item close];
+            }
         }
         DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections method completed.");
     }

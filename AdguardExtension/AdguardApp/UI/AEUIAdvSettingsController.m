@@ -20,7 +20,62 @@
 #import "AESharedResources.h"
 #import "AEUIUtils.h"
 
+#ifdef PRO
+#import "APVPNManager.h"
+#endif
+
+#define TUNNEL_MODE_FOOTER_CELL_ID @"LinkTableViewHeaderFooterView"
+
+@interface AEUILinkTableViewHeaderFooterView : UITableViewHeaderFooterView
+
+@property (nonatomic) UITextView *textView;
+
+@end
+
+@implementation AEUILinkTableViewHeaderFooterView
+
+- (void) setupTextView {
+    self.textView = [UITextView new];
+    self.textView.editable = NO;
+    self.textView.scrollEnabled = NO;
+    self.textView.textContainerInset = UIEdgeInsetsMake(0.0, -5.0, -5.0, -5.0);
+    self.textView.backgroundColor = [UIColor clearColor];
+    self.textView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    [self addSubview:self.textView];
+}
+
+- (instancetype)init {
+    if(self = [super init]) {
+        [self setupTextView];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if(self = [super initWithCoder:aDecoder]) {
+        [self setupTextView];
+    }
+    return self;
+}
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
+    if(self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        [self setupTextView];
+    }
+    return self;
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    self.textView.frame = self.textLabel.frame;
+}
+
+@end
+
 @interface AEUIAdvSettingsController ()
+
+@property (nonatomic) NSAttributedString* tunnelModeFooterAttributedString;
+@property (nonatomic) NSString* htmlString;
 
 @end
 
@@ -37,6 +92,24 @@
     
     self.simplifiedButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
     self.wifiButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates];
+    
+    [self.tableView registerClass:[AEUILinkTableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:TUNNEL_MODE_FOOTER_CELL_ID];
+    
+#ifdef PRO
+    self.htmlString = NSLocalizedString(@"Adguard Pro works in two different modes. In the Split-Tunnel mode Adguard is compatible with so-called \"Personal VPN\" apps (full list: <a href=\"https://github.com/AdguardTeam/AdguardForiOS/issues/162\">https://github.com/AdguardTeam/AdguardForiOS/issues/162</a>). As a trade-off, in this mode Adguard may be bypassed by system in case of bad connectivity. On the contrary, in the Full-Tunnel mode Adguard can't be run along any other VPN apps, but also can't be bypassed regardless of the connection quality.", @"Advanced settings - tunnel mode description");
+    
+    // convert html string to attributed string
+    NSData *data = [self.htmlString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError* error;
+    NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
+    self.tunnelModeFooterAttributedString = [[NSAttributedString alloc] initWithData:data
+                                                                             options:options
+                                                                  documentAttributes:nil error:&error];
+    
+    
+    [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +135,57 @@
         
         self.useSimplifiedCell.accessibilityHint = footer.textLabel.text;
     }
+    else if (section == 2) {
+        AEUILinkTableViewHeaderFooterView* footer = (AEUILinkTableViewHeaderFooterView*)view;
+        
+        UIFont *fontAttribute = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        NSString *textColorAttribute = [footer.textLabel.attributedText attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:nil];
+        NSDictionary *attributes = @{NSFontAttributeName : fontAttribute, NSForegroundColorAttributeName : textColorAttribute};
+        NSMutableAttributedString *mutableAttributedText = [self.tunnelModeFooterAttributedString mutableCopy];
+        [mutableAttributedText addAttributes:attributes range:NSMakeRange(0, mutableAttributedText.length)];
+        footer.textView.attributedText = mutableAttributedText;
+        footer.textView.tintColor = tableView.tintColor;
+        footer.textLabel.attributedText = mutableAttributedText;
+        footer.textLabel.hidden = YES;
+    }
+}
+
+#ifdef PRO
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 2) {
+        APVpnManagerTunnelModeEnum selectedMode =
+            indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
+        
+        [self setTunnelModeUI:selectedMode];
+        [APVPNManager.singleton setTunnelMode:selectedMode];
+    }
+}
+#endif
+
+#ifndef PRO
+// hide tunnel mode section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 2;
+}
+#endif
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    
+    if(section == 2) {
+        return self.htmlString;
+    }
+    
+    return [super tableView:tableView titleForFooterInSection:section];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if(section == 2) {
+        return [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:TUNNEL_MODE_FOOTER_CELL_ID];
+    }
+    
+    return [super tableView:tableView viewForFooterInSection:section];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -94,5 +218,30 @@
     [[AESharedResources sharedDefaults] setBool:[sender isOn] forKey:AEDefaultsWifiOnlyUpdates];
 }
 
+
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark helper methods
+/////////////////////////////////////////////////////////////////////
+
+#ifdef PRO
+- (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
+    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    
+    switch (tunnelMode) {
+        case APVpnManagerTunnelModeFull:
+            _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            break;
+            
+        case APVpnManagerTunnelModeSplit:
+            _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#endif
 
 @end

@@ -101,6 +101,11 @@ typedef enum {
  Text for placeholder, ie when textview is empty.
  */
 @property (nonatomic) NSString *textForPlaceholder;
+/**
+ show/hide filter rules button
+ default NO;
+ */
+@property (nonatomic) BOOL showFilterRules;
 
 /**
  Performs visual selection of the text in editor view if it will find.
@@ -129,6 +134,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivity;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *clearAllButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rulesButton;
 
 
 /////////////////////////////////////////////////////////////////////

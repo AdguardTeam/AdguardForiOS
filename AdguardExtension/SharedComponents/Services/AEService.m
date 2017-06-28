@@ -758,8 +758,9 @@ static AEService *singletonService;
          reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
          completionHandler:nil];
         
-        [self savePermanentlyCountersOfConvertion];
-        
+        [self savePermanentlyCountersOfConversion];
+        [self removeTempCountersOfConversion];
+
         [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:nil];
     }
     else{
@@ -780,10 +781,10 @@ static AEService *singletonService;
              
              //no errors
 
-             [self savePermanentlyCountersOfConvertion];
+             [self savePermanentlyCountersOfConversion];
          }
          
-         [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
+         [self removeTempCountersOfConversion];
          
          DDLogInfo(@"(AEService) Notify Safari fihished.");
          
@@ -792,23 +793,33 @@ static AEService *singletonService;
     }
 }
 
-- (void)savePermanentlyCountersOfConvertion{
+- (void)savePermanentlyCountersOfConversion{
 
     //Permanently save current converted rules in user defaults
-    NSNumber *value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONConvertedRules];
+    
+    DDLogInfo(@"(AEService) Permanently saving current converted rules in user defaults.");
+    NSNumber *value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONConvertedRules];
     if (value) {
-        DDLogInfo(@"(AEService) Permanently saved current converted rules in user defaults.");
         [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONConvertedRules];
         DDLogInfo(@"Rules: %@", value);
-        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesForConvertion];
+    }
+    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesForConvertion];
+    if (value) {
         [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONRulesForConvertion];
         DDLogInfo(@"From rules: %@", value);
-        
-        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesOverlimitReached];
-        [[AESharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
-        
     }
+    
+    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesOverlimitReached];
+    if (value) {
+        [[AESharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
+    }
+}
 
+- (void)removeTempCountersOfConversion {
+    
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesForConvertion];
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesOverlimitReached];
 }
 
 - (void)checkForServiceReady:(ReadyFlagType)readyFlag{
