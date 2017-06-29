@@ -395,6 +395,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return _isRemoteServer;
 }
 
+- (BOOL)isFullMode {
+    return _fullTunnel;
+}
+
 - (void)getDNSServersIpv4: (NSArray <NSString *> **) ipv4DNSServers ipv6: (NSArray <NSString *> **) ipv6DNSServers {
   
     NSMutableArray *ipv4s = [NSMutableArray array];

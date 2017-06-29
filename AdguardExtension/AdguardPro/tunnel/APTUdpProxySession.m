@@ -714,10 +714,12 @@ _workingQueue = nil;
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
+    NSString* mode = [_delegate.provider isFullMode] ? @"full" : @"split";
+    
 #if DEBUG
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #else
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #endif
 }
 
