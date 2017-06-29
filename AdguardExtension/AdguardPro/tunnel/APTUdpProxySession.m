@@ -703,9 +703,9 @@ _workingQueue = nil;
         dstPort = endpoint.port;
     }
     else {
-        
-        dstHost = _basePacket.dstAddress;
-        dstPort = _basePacket.dstPort;
+        NWHostEndpoint *endpoint = (NWHostEndpoint *)self.udpSession.resolvedEndpoint;
+        dstHost = endpoint.hostname;
+        dstPort = endpoint.port;
     }
     
     BOOL localFiltering = _delegate.provider.localFiltering;
