@@ -107,11 +107,7 @@
         _packetsForSend = [NSMutableArray new];
         _waitWrite = _closed = NO;
         
-        _bypassSession = _delegate.provider.isRemoteServer && [_delegate isDeviceServerAddress:_basePacket.dstAddress];
-        
-        _currentDnsServer = _bypassSession ?
-        APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX] :
-        _delegate.provider.currentDnsServer;
+        _currentDnsServer = _delegate.provider.currentDnsServer;
         
         // Create session for whitelist
         NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
@@ -129,14 +125,7 @@
         // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
         if (_delegate.provider.isRemoteServer) {
             
-            if(_delegate.provider.fullTunnel) {
-                
-                serverIp = [self.delegate serverAddressForFullTunnelDnsAddress:_basePacket.dstAddress];
-            }
-            else {
-                
-                serverIp = _basePacket.dstAddress;
-            }
+            serverIp = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
         }
     
         rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];

@@ -48,11 +48,8 @@
     OSSpinLock _userWhitelistLock;
     OSSpinLock _userBlacklistLock;
     
-    NSDictionary *_dnsAddresses;
-    NSString *_deviceDnsAddressForAny;
-    NSSet *_deviceDnsAddresses;
-    
-    NSDictionary *_dnsAddressesForFullTunnel;
+    NSDictionary *_whitelistDnsAddresses;
+    NSDictionary *_remoteDnsAddresses;
     
     AERDomainFilter *_globalWhitelist;
     AERDomainFilter *_globalBlacklist;
@@ -100,71 +97,53 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
-          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses {
-
-    DDLogInfo(@"(APTunnelConnectionsHandler) Set device DNS addresses:\n%@\nAdguard DNS addresses:\n%@",
-              deviceDnsAddresses, adguardDnsAddresses);
+- (void)setDeviceDnsAddresses:(NSArray<NSString *> *)deviceDnsAddresses
+    adguardRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses
+      adguardFakeDnsAddresses:(NSArray<NSString *> *)fakeDnsAddresses {
     
-    if (!(deviceDnsAddresses.count && adguardDnsAddresses.count)) {
-        
-        OSSpinLockLock(&_dnsAddressLock);
-        
-        //set default device DNS to first address.
-        _deviceDnsAddressForAny = DEFAULT_DNS_SERVER_IP;
-        
-        OSSpinLockUnlock(&_dnsAddressLock);
-        return;
-    }
+    DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses:\n%@remote DNS addresses:\n%@Adgourd internal DNS addresses:\n%@",
+              deviceDnsAddresses, remoteDnsAddresses, fakeDnsAddresses);
     
     @autoreleasepool {
+    
+        NSMutableDictionary* whiteListDnsDictionary = [NSMutableDictionary dictionary];
+    
+        NSUInteger deviceDnsIndex = 0;
         
-        NSUInteger devicesLastIndex = deviceDnsAddresses.count - 1;
-        NSMutableDictionary *dnsCache = [NSMutableDictionary dictionary];
-        [adguardDnsAddresses enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if (idx > devicesLastIndex) {
-                *stop = YES;
-                return;
-            }
-            
-            dnsCache[obj] = deviceDnsAddresses[idx];
-        }];
-        
-        OSSpinLockLock(&_dnsAddressLock);
-        
-        _dnsAddresses = [dnsCache copy];
-        //set default device DNS to first address.
-        _deviceDnsAddressForAny = deviceDnsAddresses[0];
-        
-        _deviceDnsAddresses = [NSSet setWithArray:deviceDnsAddresses];
-        
-        OSSpinLockUnlock(&_dnsAddressLock);
-    }
-}
+        for(NSString* fakeDns in fakeDnsAddresses) {
+            if(deviceDnsAddresses.count) {
+                whiteListDnsDictionary[fakeDns] = deviceDnsAddresses[deviceDnsIndex];
+                
+                ++deviceDnsIndex;
+                if(deviceDnsIndex >= deviceDnsAddresses.count)
+                    deviceDnsIndex = 0;
 
-- (void)setRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses adguardDnsAddresses:(NSArray<NSString *> *)adguardDnsAddresses {
-    
-    DDLogInfo(@"(APTunnelConnectionsHandler) Set remote DNS addresses:\n%@\nAdguard DNS addresses:\n%@",
-              remoteDnsAddresses, adguardDnsAddresses);
-    
-    @autoreleasepool {
-        
-        NSUInteger remoteLastIndex = remoteDnsAddresses.count - 1;
-        NSMutableDictionary *dnsCache = [NSMutableDictionary dictionary];
-        [adguardDnsAddresses enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if (idx > remoteLastIndex) {
-                *stop = YES;
-                return;
             }
-            
-            dnsCache[obj] = remoteDnsAddresses[idx];
-        }];
+            else {
+                whiteListDnsDictionary[fakeDns] = DEFAULT_DNS_SERVER_IP;
+            }
+        }
+        
+        NSMutableDictionary *remoteDnsDictionary = [NSMutableDictionary dictionary];
+        NSUInteger remoteDnsIndex = 0;
+        
+        for (NSString* fakeDns in fakeDnsAddresses) {
+            if(remoteDnsAddresses.count) {
+                remoteDnsDictionary[fakeDns] = remoteDnsAddresses[remoteDnsIndex];
+                
+                ++remoteDnsIndex;
+                if(remoteDnsIndex >= remoteDnsAddresses.count)
+                    remoteDnsIndex = 0;
+            }
+            else {
+                remoteDnsDictionary[fakeDns] = DEFAULT_DNS_SERVER_IP;
+            }
+        }
         
         OSSpinLockLock(&_dnsAddressLock);
         
-        _dnsAddressesForFullTunnel = [dnsCache copy];
+        _whitelistDnsAddresses = [whiteListDnsDictionary copy];
+        _remoteDnsAddresses = [remoteDnsDictionary copy];
         
         OSSpinLockUnlock(&_dnsAddressLock);
     }
@@ -291,10 +270,10 @@
     
     OSSpinLockLock(&_dnsAddressLock);
 
-    NSString *address = _dnsAddresses[serverAddress];
+    NSString *address = _whitelistDnsAddresses[serverAddress];
     
     if (!address) {
-        address = _deviceDnsAddressForAny;
+        address = DEFAULT_DNS_SERVER_IP;
     }
     
     OSSpinLockUnlock(&_dnsAddressLock);
@@ -302,7 +281,7 @@
     return address;
 }
 
-- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress {
+- (NSString *)serverAddressForFakeDnsAddress:(NSString *)serverAddress {
     
     if (!serverAddress) {
         serverAddress = [NSString new];
@@ -310,24 +289,15 @@
     
     OSSpinLockLock(&_dnsAddressLock);
     
-    NSString *address = _dnsAddressesForFullTunnel[serverAddress];
+    NSString *address = _remoteDnsAddresses[serverAddress];
     
     if (!address) {
-        address = _deviceDnsAddressForAny;
+        address = DEFAULT_DNS_SERVER_IP;
     }
     
     OSSpinLockUnlock(&_dnsAddressLock);
     
     return address;
-}
-
-- (BOOL)isDeviceServerAddress:(NSString *)serverAddress {
-    
-    OSSpinLockLock(&_dnsAddressLock);
-    BOOL result = [_deviceDnsAddresses containsObject:serverAddress];
-    OSSpinLockUnlock(&_dnsAddressLock);
-    
-    return result;
 }
 
 - (void)closeAllConnections:(void (^)(void))completion {

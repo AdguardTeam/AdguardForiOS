@@ -43,13 +43,8 @@
  Sets addresses of the DNS servers.
  */
 - (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
-          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
-
-/**
- Sets addresses of the DNS servers for full tunnel
- */
-- (void)setRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses
-          adguardDnsAddresses:(NSArray <NSString *> *)adguardDnsAddresses;
+    adguardRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses
+      adguardFakeDnsAddresses:(NSArray <NSString *> *)fakeDnsAddresses;
 
 /**
  Sets whitelist filter.
@@ -110,14 +105,9 @@
 - (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 /**
- Returns IP address of the DNS server for full tunnel fake DNS server.
+ Returns IP address of the DNS server for fake DNS server.
  */
-- (NSString *)serverAddressForFullTunnelDnsAddress:(NSString *)serverAddress;
-
-/**
- Returns YES if serverAddress in system DNS addresses.
- */
-- (BOOL) isDeviceServerAddress: (NSString*) serverAddress;
+- (NSString *)serverAddressForFakeDnsAddress:(NSString *)serverAddress;
 
 /**
  Closes all existing connections, prevents to create new.
