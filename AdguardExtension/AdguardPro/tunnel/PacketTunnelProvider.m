@@ -820,13 +820,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                             initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
                             subnetMasks:@[V_INTERFACE_IPV4_MASK]];
     
-    ipv4.excludedRoutes = [self ipv4ExcludeRoutes];
-
+    
     NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
                             initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
                             networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
-    
-    ipv6.excludedRoutes = [self ipv6ExcludeRoutes];
     
     
     // include routes
@@ -835,6 +832,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
+        
+        ipv4.excludedRoutes = [self ipv4ExcludeRoutes];
+        ipv6.excludedRoutes = [self ipv6ExcludeRoutes];
     }
     else {
         
@@ -853,6 +853,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         ipv4.includedRoutes = ipv4IncludeRoutes;
         ipv6.includedRoutes = ipv6IncludeRoutes;
+        
+        ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
+        ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
     }
     
     settings.IPv4Settings = ipv4;
