@@ -51,6 +51,10 @@ extern NSString *APTunnelProviderErrorDomain;
  */
 - (BOOL)isRemoteServer;
 
-- (BOOL)fullTunnel;
+/**
+ Return is full tunnel mode
+ */
+
+- (BOOL)isFullMode;
 
 @end

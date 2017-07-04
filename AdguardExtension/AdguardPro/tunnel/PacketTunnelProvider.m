@@ -60,6 +60,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 #define V_DNS_IPV4_ADDRESS                      @"121.121.121.121"
 #define V_DNS_IPV4_ADDRESS2                     @"121.121.121.122"
+#define V_DNS_IPV4_ADDRESS3                     @"121.121.121.123"
+#define V_DNS_IPV4_ADDRESS4                     @"121.121.121.124"
 
 #define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
@@ -119,6 +121,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
+    
+    NetworkStatus _startNetworkStatus;
 }
 
 + (void)initialize{
@@ -161,6 +165,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     pendingStartCompletion = completionHandler;
     
     [_reachabilityHandler startNotifier];
+    _startNetworkStatus = [_reachabilityHandler currentReachabilityStatus];
     
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
@@ -393,7 +398,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return _isRemoteServer;
 }
 
-- (BOOL)fullTunnel {
+- (BOOL)isFullMode {
     return _fullTunnel;
 }
 
@@ -463,6 +468,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 - (void)reachNotify:(NSNotification *)note {
     
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    
+    // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
+    if(_startNetworkStatus == [_reachabilityHandler currentReachabilityStatus]) {
+        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Ski reachability notify");
+        return;
+    }
+        
     [self stopVPN];
 }
 
@@ -575,20 +587,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
 }
 
-- (void)addRoutesToSettingsFull:(NEPacketTunnelNetworkSettings *)settings{
-    
-    // IPv4
-    NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
-                            subnetMasks:@[V_INTERFACE_IPV4_MASK]];
-    
+- (NSArray<NEIPv4Route *> *) ipv4ExcludeRoutes {
     
     NSMutableArray *ipv4excludeRoutes = [NSMutableArray new];
     
     // exclude all ip addresses. Our tunnel interface ip will not be excluded.
     // NSArray* excludeCidrs = @[@"0.0.0.0/1", @"128.0.0.0/1"];
-    
-    
     
     NSArray* excludeIpv4Cidrs = @[
                                   @"0.0.0.0/2",
@@ -611,8 +615,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                                   @"121.121.121.96/28",
                                   @"121.121.121.112/29",
                                   @"121.121.121.120/32",
-                                  @"121.121.121.123/32",
-                                  @"121.121.121.124/30",
+                                  @"121.121.121.125/32",
+                                  @"121.121.121.126/31",
                                   @"121.121.121.128/25",
                                   @"121.121.122.0/23",
                                   @"121.121.124.0/22",
@@ -623,252 +627,155 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                                   @"122.0.0.0/7",
                                   @"124.0.0.0/6",
                                   @"128.0.0.0/1",
-                              ];
+                                  ];
     
     for(NSString* cidr in excludeIpv4Cidrs) {
         [ipv4excludeRoutes addObject:[NEIPv4Route ipv4RouteWithCidr:cidr]];
     }
     
-    ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
-    ipv4.excludedRoutes = ipv4excludeRoutes;
-    
-    settings.IPv4Settings = ipv4;
-    
-    // IPv6
-    if ([self isIpv6Available]) {
-        
-        NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
-                                initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
-                                networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
-        
-        NSMutableArray *ipv6ExcludedRoutes = [NSMutableArray new];
-        
-        //NSArray* excludeIpv6cidrs = @[@"::/1", @"8000::/1"];
-        NSArray *excludeIpv6cidrs = @[
-                                     @"2001:ad00:ad00::/113",
-                                     @"2001:ad00:ad00::8000/115",
-                                     @"2001:ad00:ad00::a000/117",
-                                     @"2001:ad00:ad00::a800/118",
-                                     @"2001:ad00:ad00::ac00/120",
-                                     @"2001:ad00::/33",
-                                     @"2001:ad00:8000::/35",
-                                     @"2001:ad00:a000::/37",
-                                     @"2001:ad00:a800::/38",
-                                     @"2001:ad00:ac00::/40",
-                                     @"2001::/17",
-                                     @"2001:8000::/19",
-                                     @"2001:a000::/21",
-                                     @"2001:a800::/22",
-                                     @"2001:ac00::/24",
-                                     @"2000::/16",
-                                     @"::/3",
-                                     @"2001:ad00:ad00::ad02/127",
-                                     @"2001:ad00:ad00::ad04/126",
-                                     @"2001:ad00:ad00::ad08/125",
-                                     @"2001:ad00:ad00::ad10/124",
-                                     @"2001:ad00:ad00::ad20/123",
-                                     @"2001:ad00:ad00::ad40/122",
-                                     @"2001:ad00:ad00::ad80/121",
-                                     @"2001:ad00:ad00::ae00/119",
-                                     @"2001:ad00:ad00::b000/116",
-                                     @"2001:ad00:ad00::c000/114",
-                                     @"2001:ad00:ad00::1:0/112",
-                                     @"2001:ad00:ad00::2:0/111",
-                                     @"2001:ad00:ad00::4:0/110",
-                                     @"2001:ad00:ad00::8:0/109",
-                                     @"2001:ad00:ad00::10:0/108",
-                                     @"2001:ad00:ad00::20:0/107",
-                                     @"2001:ad00:ad00::40:0/106",
-                                     @"2001:ad00:ad00::80:0/105",
-                                     @"2001:ad00:ad00::100:0/104",
-                                     @"2001:ad00:ad00::200:0/103",
-                                     @"2001:ad00:ad00::400:0/102",
-                                     @"2001:ad00:ad00::800:0/101",
-                                     @"2001:ad00:ad00::1000:0/100",
-                                     @"2001:ad00:ad00::2000:0/99",
-                                     @"2001:ad00:ad00::4000:0/98",
-                                     @"2001:ad00:ad00::8000:0/97",
-                                     @"2001:ad00:ad00::1:0:0/96",
-                                     @"2001:ad00:ad00::2:0:0/95",
-                                     @"2001:ad00:ad00::4:0:0/94",
-                                     @"2001:ad00:ad00::8:0:0/93",
-                                     @"2001:ad00:ad00::10:0:0/92",
-                                     @"2001:ad00:ad00::20:0:0/91",
-                                     @"2001:ad00:ad00::40:0:0/90",
-                                     @"2001:ad00:ad00::80:0:0/89",
-                                     @"2001:ad00:ad00::100:0:0/88",
-                                     @"2001:ad00:ad00::200:0:0/87",
-                                     @"2001:ad00:ad00::400:0:0/86",
-                                     @"2001:ad00:ad00::800:0:0/85",
-                                     @"2001:ad00:ad00::1000:0:0/84",
-                                     @"2001:ad00:ad00::2000:0:0/83",
-                                     @"2001:ad00:ad00::4000:0:0/82",
-                                     @"2001:ad00:ad00::8000:0:0/81",
-                                     @"2001:ad00:ad00:0:1::/80",
-                                     @"2001:ad00:ad00:0:2::/79",
-                                     @"2001:ad00:ad00:0:4::/78",
-                                     @"2001:ad00:ad00:0:8::/77",
-                                     @"2001:ad00:ad00:0:10::/76",
-                                     @"2001:ad00:ad00:0:20::/75",
-                                     @"2001:ad00:ad00:0:40::/74",
-                                     @"2001:ad00:ad00:0:80::/73",
-                                     @"2001:ad00:ad00:0:100::/72",
-                                     @"2001:ad00:ad00:0:200::/71",
-                                     @"2001:ad00:ad00:0:400::/70",
-                                     @"2001:ad00:ad00:0:800::/69",
-                                     @"2001:ad00:ad00:0:1000::/68",
-                                     @"2001:ad00:ad00:0:2000::/67",
-                                     @"2001:ad00:ad00:0:4000::/66",
-                                     @"2001:ad00:ad00:0:8000::/65",
-                                     @"2001:ad00:ad00:1::/64",
-                                     @"2001:ad00:ad00:2::/63",
-                                     @"2001:ad00:ad00:4::/62",
-                                     @"2001:ad00:ad00:8::/61",
-                                     @"2001:ad00:ad00:10::/60",
-                                     @"2001:ad00:ad00:20::/59",
-                                     @"2001:ad00:ad00:40::/58",
-                                     @"2001:ad00:ad00:80::/57",
-                                     @"2001:ad00:ad00:100::/56",
-                                     @"2001:ad00:ad00:200::/55",
-                                     @"2001:ad00:ad00:400::/54",
-                                     @"2001:ad00:ad00:800::/53",
-                                     @"2001:ad00:ad00:1000::/52",
-                                     @"2001:ad00:ad00:2000::/51",
-                                     @"2001:ad00:ad00:4000::/50",
-                                     @"2001:ad00:ad00:8000::/49",
-                                     @"2001:ad00:ad01::/48",
-                                     @"2001:ad00:ad02::/47",
-                                     @"2001:ad00:ad04::/46",
-                                     @"2001:ad00:ad08::/45",
-                                     @"2001:ad00:ad10::/44",
-                                     @"2001:ad00:ad20::/43",
-                                     @"2001:ad00:ad40::/42",
-                                     @"2001:ad00:ad80::/41",
-                                     @"2001:ad00:ae00::/39",
-                                     @"2001:ad00:b000::/36",
-                                     @"2001:ad00:c000::/34",
-                                     @"2001:ad01::/32",
-                                     @"2001:ad02::/31",
-                                     @"2001:ad04::/30",
-                                     @"2001:ad08::/29",
-                                     @"2001:ad10::/28",
-                                     @"2001:ad20::/27",
-                                     @"2001:ad40::/26",
-                                     @"2001:ad80::/25",
-                                     @"2001:ae00::/23",
-                                     @"2001:b000::/20",
-                                     @"2001:c000::/18",
-                                     @"2002::/15",
-                                     @"2004::/14",
-                                     @"2008::/13",
-                                     @"2010::/12",
-                                     @"2020::/11",
-                                     @"2040::/10",
-                                     @"2080::/9",
-                                     @"2100::/8",
-                                     @"2200::/7",
-                                     @"2400::/6",
-                                     @"2800::/5",
-                                     @"3000::/4",
-                                     @"4000::/2",
-                                     @"8000::/1",
-                                     ];
-        
-        for (NSString* cidr in excludeIpv6cidrs) {
-            [ipv6ExcludedRoutes addObject:[NEIPv6Route ipv6RouteWithCidr:cidr]];
-        }
-        
-        ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
-        ipv6.excludedRoutes = ipv6ExcludedRoutes;
-        
-        settings.IPv6Settings = ipv6;
-    }
+    return ipv4excludeRoutes;
 }
 
-- (void)addRoutesToSettingsSplit:(NEPacketTunnelNetworkSettings *)settings deviceIpv4DnsServers:(NSArray *)deviceIpv4DnsServers deviceIpv6DnsServers:(NSArray *)deviceIpv6DnsServers {
+- (NSArray<NEIPv6Route *> *) ipv6ExcludeRoutes {
     
-    // IPv4
-    NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
-                            subnetMasks:@[V_INTERFACE_IPV4_MASK]];
+    NSMutableArray *ipv6ExcludedRoutes = [NSMutableArray new];
     
-    NSMutableArray *ipv4routes = [NSMutableArray new];
+    //NSArray* excludeIpv6cidrs = @[@"::/1", @"8000::/1"];
+    NSArray *excludeIpv6cidrs = @[
+                                  @"2001:ad00:ad00::/113",
+                                  @"2001:ad00:ad00::8000/115",
+                                  @"2001:ad00:ad00::a000/117",
+                                  @"2001:ad00:ad00::a800/118",
+                                  @"2001:ad00:ad00::ac00/120",
+                                  @"2001:ad00::/33",
+                                  @"2001:ad00:8000::/35",
+                                  @"2001:ad00:a000::/37",
+                                  @"2001:ad00:a800::/38",
+                                  @"2001:ad00:ac00::/40",
+                                  @"2001::/17",
+                                  @"2001:8000::/19",
+                                  @"2001:a000::/21",
+                                  @"2001:a800::/22",
+                                  @"2001:ac00::/24",
+                                  @"2000::/16",
+                                  @"::/3",
+                                  @"2001:ad00:ad00::ad02/127",
+                                  @"2001:ad00:ad00::ad04/126",
+                                  @"2001:ad00:ad00::ad08/125",
+                                  @"2001:ad00:ad00::ad10/124",
+                                  @"2001:ad00:ad00::ad20/123",
+                                  @"2001:ad00:ad00::ad40/122",
+                                  @"2001:ad00:ad00::ad80/121",
+                                  @"2001:ad00:ad00::ae00/119",
+                                  @"2001:ad00:ad00::b000/116",
+                                  @"2001:ad00:ad00::c000/114",
+                                  @"2001:ad00:ad00::1:0/112",
+                                  @"2001:ad00:ad00::2:0/111",
+                                  @"2001:ad00:ad00::4:0/110",
+                                  @"2001:ad00:ad00::8:0/109",
+                                  @"2001:ad00:ad00::10:0/108",
+                                  @"2001:ad00:ad00::20:0/107",
+                                  @"2001:ad00:ad00::40:0/106",
+                                  @"2001:ad00:ad00::80:0/105",
+                                  @"2001:ad00:ad00::100:0/104",
+                                  @"2001:ad00:ad00::200:0/103",
+                                  @"2001:ad00:ad00::400:0/102",
+                                  @"2001:ad00:ad00::800:0/101",
+                                  @"2001:ad00:ad00::1000:0/100",
+                                  @"2001:ad00:ad00::2000:0/99",
+                                  @"2001:ad00:ad00::4000:0/98",
+                                  @"2001:ad00:ad00::8000:0/97",
+                                  @"2001:ad00:ad00::1:0:0/96",
+                                  @"2001:ad00:ad00::2:0:0/95",
+                                  @"2001:ad00:ad00::4:0:0/94",
+                                  @"2001:ad00:ad00::8:0:0/93",
+                                  @"2001:ad00:ad00::10:0:0/92",
+                                  @"2001:ad00:ad00::20:0:0/91",
+                                  @"2001:ad00:ad00::40:0:0/90",
+                                  @"2001:ad00:ad00::80:0:0/89",
+                                  @"2001:ad00:ad00::100:0:0/88",
+                                  @"2001:ad00:ad00::200:0:0/87",
+                                  @"2001:ad00:ad00::400:0:0/86",
+                                  @"2001:ad00:ad00::800:0:0/85",
+                                  @"2001:ad00:ad00::1000:0:0/84",
+                                  @"2001:ad00:ad00::2000:0:0/83",
+                                  @"2001:ad00:ad00::4000:0:0/82",
+                                  @"2001:ad00:ad00::8000:0:0/81",
+                                  @"2001:ad00:ad00:0:1::/80",
+                                  @"2001:ad00:ad00:0:2::/79",
+                                  @"2001:ad00:ad00:0:4::/78",
+                                  @"2001:ad00:ad00:0:8::/77",
+                                  @"2001:ad00:ad00:0:10::/76",
+                                  @"2001:ad00:ad00:0:20::/75",
+                                  @"2001:ad00:ad00:0:40::/74",
+                                  @"2001:ad00:ad00:0:80::/73",
+                                  @"2001:ad00:ad00:0:100::/72",
+                                  @"2001:ad00:ad00:0:200::/71",
+                                  @"2001:ad00:ad00:0:400::/70",
+                                  @"2001:ad00:ad00:0:800::/69",
+                                  @"2001:ad00:ad00:0:1000::/68",
+                                  @"2001:ad00:ad00:0:2000::/67",
+                                  @"2001:ad00:ad00:0:4000::/66",
+                                  @"2001:ad00:ad00:0:8000::/65",
+                                  @"2001:ad00:ad00:1::/64",
+                                  @"2001:ad00:ad00:2::/63",
+                                  @"2001:ad00:ad00:4::/62",
+                                  @"2001:ad00:ad00:8::/61",
+                                  @"2001:ad00:ad00:10::/60",
+                                  @"2001:ad00:ad00:20::/59",
+                                  @"2001:ad00:ad00:40::/58",
+                                  @"2001:ad00:ad00:80::/57",
+                                  @"2001:ad00:ad00:100::/56",
+                                  @"2001:ad00:ad00:200::/55",
+                                  @"2001:ad00:ad00:400::/54",
+                                  @"2001:ad00:ad00:800::/53",
+                                  @"2001:ad00:ad00:1000::/52",
+                                  @"2001:ad00:ad00:2000::/51",
+                                  @"2001:ad00:ad00:4000::/50",
+                                  @"2001:ad00:ad00:8000::/49",
+                                  @"2001:ad00:ad01::/48",
+                                  @"2001:ad00:ad02::/47",
+                                  @"2001:ad00:ad04::/46",
+                                  @"2001:ad00:ad08::/45",
+                                  @"2001:ad00:ad10::/44",
+                                  @"2001:ad00:ad20::/43",
+                                  @"2001:ad00:ad40::/42",
+                                  @"2001:ad00:ad80::/41",
+                                  @"2001:ad00:ae00::/39",
+                                  @"2001:ad00:b000::/36",
+                                  @"2001:ad00:c000::/34",
+                                  @"2001:ad01::/32",
+                                  @"2001:ad02::/31",
+                                  @"2001:ad04::/30",
+                                  @"2001:ad08::/29",
+                                  @"2001:ad10::/28",
+                                  @"2001:ad20::/27",
+                                  @"2001:ad40::/26",
+                                  @"2001:ad80::/25",
+                                  @"2001:ae00::/23",
+                                  @"2001:b000::/20",
+                                  @"2001:c000::/18",
+                                  @"2002::/15",
+                                  @"2004::/14",
+                                  @"2008::/13",
+                                  @"2010::/12",
+                                  @"2020::/11",
+                                  @"2040::/10",
+                                  @"2080::/9",
+                                  @"2100::/8",
+                                  @"2200::/7",
+                                  @"2400::/6",
+                                  @"2800::/5",
+                                  @"3000::/4",
+                                  @"4000::/2",
+                                  @"8000::/1",
+                                  ];
     
-    if (_isRemoteServer) {
-        
-        // route for ipv4, which includes dns addresses
-        for (NSString *item in _currentServer.ipv4Addresses) {
-            [ipv4routes addObject:[[NEIPv4Route alloc]
-                                   initWithDestinationAddress:item
-                                   subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
-        }
+    for (NSString* cidr in excludeIpv6cidrs) {
+        [ipv6ExcludedRoutes addObject:[NEIPv6Route ipv6RouteWithCidr:cidr]];
     }
-    else {
-        // route for ipv4, which includes FAKE dns addresses
-        [ipv4routes addObject:[[NEIPv4Route alloc]
-                               initWithDestinationAddress:V_INTERFACE_IPV4_ADDRESS
-                               subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
-    }
     
-    // add primary DNS ips to routes
-    for(NSString* ipv4Dns in deviceIpv4DnsServers) {
-        [ipv4routes addObject:[[NEIPv4Route alloc]
-                               initWithDestinationAddress:ipv4Dns
-                               subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
-    }
-    
-    ipv4.includedRoutes = ipv4routes;
-    ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
-    
-    settings.IPv4Settings = ipv4;
-    
-    // IPv6
-    if ([self isIpv6Available]) {
-        
-        NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
-                                initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
-                                networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
-        
-        NSMutableArray *ipv6routes = [NSMutableArray new];
-        
-        if (_isRemoteServer) {
-            
-            // route for ipv6, which includes dns addresses
-            for (NSString *item in _currentServer.ipv6Addresses) {
-                [ipv6routes addObject:[[NEIPv6Route alloc]
-                                       initWithDestinationAddress:item
-                                       networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-            }
-            
-        }
-        else {
-            // route for ipv6, which includes FAKE dns addresses
-            [ipv6routes addObject:[[NEIPv6Route alloc]
-                                   initWithDestinationAddress:V_INTERFACE_IPV6_ADDRESS
-                                   networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-        }
-        
-        // add primary DNS ips to routes
-        for(NSString* ipv6Dns in deviceIpv6DnsServers) {
-            [ipv6routes addObject:[[NEIPv6Route alloc]
-                                   initWithDestinationAddress:ipv6Dns
-                                   networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-        }
-        
-        // add mapped ipv4 routes
-        for(NEIPv4Route* ipv4Route in ipv4routes) {
-            NSString* mappedIpv4 = [self ipv6MappedFromIpv4: ipv4Route.destinationAddress];
-            
-            [ipv6routes addObject:[[NEIPv6Route alloc]
-                                   initWithDestinationAddress:mappedIpv4
-                                   networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
-        }
-        
-        ipv6.includedRoutes = ipv6routes;
-        ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
-        
-        settings.IPv6Settings = ipv6;
-    }
+    return ipv6ExcludedRoutes;
 }
 
 - (NEPacketTunnelNetworkSettings *)createTunnelSettings: (BOOL)fullTunnel {
@@ -877,61 +784,82 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     // DNS
     
-    NSMutableArray *dnsAddresses = [NSMutableArray arrayWithCapacity:2];
     NSArray *deviceIpv4DnsServers;
     NSArray *deviceIpv6DnsServers;
     
     [self getDNSServersIpv4:&deviceIpv4DnsServers ipv6:&deviceIpv6DnsServers];
     
-    NSMutableArray *allDeviceDnsServers = [NSMutableArray new];
-    [allDeviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
-    [allDeviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
+    NSMutableArray *deviceDnsServers = [NSMutableArray new];
+    [deviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
+    [deviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
-    if(fullTunnel) {
-        if (_isRemoteServer) {
-            [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
-            [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
-            
-        }
-        else {
-            [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
-        }
-    }
-    else {
-        if (_isRemoteServer) {
-            
-            [dnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
-            [dnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
-            
-        }
-        else {
-            [dnsAddresses addObject:V_INTERFACE_IPV4_ADDRESS];
-            [dnsAddresses addObject:V_INTERFACE_IPV6_ADDRESS];
-        }
+    NSMutableArray *remoteDnsAddresses = [NSMutableArray new];
+    
+    if(_isRemoteServer) {
+        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
+        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
     
-    [_connectionHandler setDeviceDnsAddresses:allDeviceDnsServers adguardDnsAddresses:dnsAddresses];
+    NSArray* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
+    NSArray* fakeIpv6DnsAddresses = @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2];
+    NSMutableArray* fakeDnsAddresses = [NSMutableArray new];
+    [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
+    [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];
+   
+    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardRemoteDnsAddresses:remoteDnsAddresses adguardFakeDnsAddresses:fakeDnsAddresses];
     
-    NEDNSSettings *dns;
-    if(fullTunnel) {
-        NSArray* fakeDnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS];
-        dns = [[NEDNSSettings alloc] initWithServers: fakeDnsAddresses];
-        
-        [_connectionHandler setRemoteDnsAddresses:dnsAddresses adguardDnsAddresses:fakeDnsAddresses];
-    }
-    else {
-        [dnsAddresses addObjectsFromArray:allDeviceDnsServers];
-        dns = [[NEDNSSettings alloc] initWithServers: dnsAddresses];
-    }
+    NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers: fakeDnsAddresses];
     
     dns.matchDomains = @[ @"" ];
     
     settings.DNSSettings = dns;
     
-    if(fullTunnel)
-        [self addRoutesToSettingsFull:settings];
-    else
-        [self addRoutesToSettingsSplit:settings deviceIpv4DnsServers:deviceIpv4DnsServers deviceIpv6DnsServers:deviceIpv6DnsServers];
+    // exclude routes
+    
+    NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
+                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
+                            subnetMasks:@[V_INTERFACE_IPV4_MASK]];
+    
+    ipv4.excludedRoutes = [self ipv4ExcludeRoutes];
+
+    NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
+                            initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
+                            networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
+    
+    ipv6.excludedRoutes = [self ipv6ExcludeRoutes];
+    
+    
+    // include routes
+    
+    if(fullTunnel) {
+        
+        ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
+        ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
+    }
+    else {
+        
+        NSMutableArray* ipv4IncludeRoutes = [NSMutableArray new];
+        for(NSString* dns in fakeIpv4DnsAddresses) {
+            
+            [ipv4IncludeRoutes addObject:[[NEIPv4Route alloc] initWithDestinationAddress:dns
+                                                                              subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
+        }
+        
+        NSMutableArray* ipv6IncludeRoutes = [NSMutableArray new];
+        for(NSString* dns in fakeIpv6DnsAddresses) {
+            [ipv6IncludeRoutes addObject:[[NEIPv6Route alloc] initWithDestinationAddress:dns
+                                                                     networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
+        }
+        
+        ipv4.includedRoutes = ipv4IncludeRoutes;
+        ipv6.includedRoutes = ipv6IncludeRoutes;
+    }
+    
+    settings.IPv4Settings = ipv4;
+    
+    if([self isIpv6Available]) {
+        settings.IPv6Settings = ipv6;
+    }
     
     return settings;
 }

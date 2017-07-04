@@ -2334,10 +2334,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="bai-Bl-QoX">
+                            <tableViewSection headerTitle="Tunnel mode" id="bai-Bl-QoX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="lYE-ow-dIW" detailTextLabel="GUc-Wj-Y0U" imageView="J1t-l7-Q3A" style="IBUITableViewCellStyleSubtitle" id="qQC-G1-vF8">
-                                        <rect key="frame" x="0.0" y="267" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qQC-G1-vF8" id="twN-yC-ptn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -2365,7 +2365,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Vhn-Fl-Rgs" detailTextLabel="TXz-VG-5ab" imageView="ltR-rq-Wam" style="IBUITableViewCellStyleSubtitle" id="YWr-tS-Ac8">
-                                        <rect key="frame" x="0.0" y="311" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="331" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWr-tS-Ac8" id="nrc-qQ-cmo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
