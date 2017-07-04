@@ -121,6 +121,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
+    
+    NetworkStatus _startNetworkStatus;
 }
 
 + (void)initialize{
@@ -163,6 +165,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     pendingStartCompletion = completionHandler;
     
     [_reachabilityHandler startNotifier];
+    _startNetworkStatus = [_reachabilityHandler currentReachabilityStatus];
     
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
@@ -465,6 +468,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 - (void)reachNotify:(NSNotification *)note {
     
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    
+    // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
+    if(_startNetworkStatus == [_reachabilityHandler currentReachabilityStatus]) {
+        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Ski reachability notify");
+        return;
+    }
+        
     [self stopVPN];
 }
 
