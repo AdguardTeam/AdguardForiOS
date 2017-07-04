@@ -109,6 +109,7 @@
     
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
+   
 #endif
 }
 
@@ -147,10 +148,22 @@
         footer.textView.tintColor = tableView.tintColor;
         footer.textLabel.attributedText = mutableAttributedText;
         footer.textLabel.hidden = YES;
+        footer.textView.isAccessibilityElement = NO;
     }
 }
 
 #ifdef PRO
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    
+    if(section == 2) {
+        
+        UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+        
+        header.accessibilityLabel = [NSString stringWithFormat: @"%@. %@",
+                                     header.textLabel.text, self.tunnelModeFooterAttributedString.string];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
         APVpnManagerTunnelModeEnum selectedMode =
@@ -160,6 +173,7 @@
         [APVPNManager.singleton setTunnelMode:selectedMode];
     }
 }
+
 #endif
 
 #ifndef PRO
@@ -228,13 +242,18 @@
 - (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
     _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
+    _splitTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+    _fullTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+    
     switch (tunnelMode) {
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _fullTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         case APVpnManagerTunnelModeSplit:
             _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         default:
