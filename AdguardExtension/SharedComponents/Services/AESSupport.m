@@ -207,9 +207,10 @@ static AESSupport *singletonSupport;
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
 #ifdef PRO
-        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nSystem-Wide filtering %@.\r\n   DNS server: %@",
+        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nSystem-Wide filtering %@.\r\nTunnel mode %@\r\n   DNS server: %@",
          (APVPNManager.singleton.enabled ? @"ENABLED" : @"DISABLED"),
          (APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
+         (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
          APVPNManager.singleton.activeRemoteDnsServer.serverName];
         
         if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
