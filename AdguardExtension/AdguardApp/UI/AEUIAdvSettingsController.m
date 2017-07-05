@@ -149,20 +149,12 @@
         footer.textLabel.attributedText = mutableAttributedText;
         footer.textLabel.hidden = YES;
         footer.textView.isAccessibilityElement = NO;
+        
+        self.fullTunnelCell.accessibilityHint = self.splitTunnelCell.accessibilityHint = self.tunnelModeFooterAttributedString.string;
     }
 }
 
 #ifdef PRO
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    
-    if(section == 2) {
-        
-        UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-        
-        header.accessibilityLabel = [NSString stringWithFormat: @"%@. %@",
-                                     header.textLabel.text, self.tunnelModeFooterAttributedString.string];
-    }
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
