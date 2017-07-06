@@ -39,8 +39,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
 NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
+NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
-NSString *APVpnManagerTunnelMode = @"APVpnManagerTunnelMode";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
@@ -69,7 +69,7 @@ NSString *APVpnManagerTunnelMode = @"APVpnManagerTunnelMode";
     BOOL               _localFiltering;
     NSNumber          *_delayedSetLocalFiltering;
     
-    APVpnManagerTunnelModeEnum _tunnelMode;
+    APVpnManagerTunnelMode _tunnelMode;
     NSNumber          *_delayedSetTunnelMode;
     
     NSError     *_standartError;
@@ -320,7 +320,7 @@ static APVPNManager *singletonVPNManager;
     
 }
 
-- (void)setTunnelMode:(APVpnManagerTunnelModeEnum)tunnelMode {
+- (void)setTunnelMode:(APVpnManagerTunnelMode)tunnelMode {
     _lastError = nil;
     
     [_busyLock lock];
@@ -348,7 +348,7 @@ static APVPNManager *singletonVPNManager;
     return _dnsRequestsLogging;
 }
 
-- (APVpnManagerTunnelModeEnum)tunnelMode {
+- (APVpnManagerTunnelMode)tunnelMode {
     return _tunnelMode;
 }
 
@@ -578,7 +578,7 @@ static APVPNManager *singletonVPNManager;
 }
 
 //must be called on workingQueue
-- (void)internalSetTunnelMode:(APVpnManagerTunnelModeEnum)tunnelMode {
+- (void)internalSetTunnelMode:(APVpnManagerTunnelMode)tunnelMode {
     if(tunnelMode != _tunnelMode) {
         
         if (_enabled) {
@@ -701,7 +701,7 @@ static APVPNManager *singletonVPNManager;
     
 }
 
-- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer tunnelMode:(APVpnManagerTunnelModeEnum) tunnelMode enabled:(BOOL)enabled{
+- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer tunnelMode:(APVpnManagerTunnelMode) tunnelMode enabled:(BOOL)enabled{
     
     [_busyLock lock];
     _busy = YES;
@@ -711,31 +711,6 @@ static APVPNManager *singletonVPNManager;
         
         remoteServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
     }
-
-    //Check input parameters
-    
-//    if (enabled
-//        && [remoteServer.tag isEqualToString:APDnsServerTagLocal]
-//        && localFiltering == NO) {
-//
-//        _lastError = [NSError
-//                      errorWithDomain:APVpnManagerErrorDomain
-//                      code:APVPN_MANAGER_ERROR_BADCONFIGURATION
-//                      userInfo:@{
-//                                 NSLocalizedDescriptionKey :
-//                                     NSLocalizedString(@"VPN can not be enabled because you have turned off the System-wide ad blocking and are not using spoofing DNS server.",
-//                                                       @"(APVPNManager)  PRO version. Bad configuration error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality.")
-//                                 }];
-//
-//        [_busyLock lock];
-//        _busy = NO;
-//        [_busyLock unlock];
-//
-//        [self sendNotificationForced:NO];
-//        return;
-//    }
-    
-    //------
     
     NETunnelProviderProtocol *protocol;
     NETunnelProviderManager *newManager;
@@ -754,7 +729,7 @@ static APVPNManager *singletonVPNManager;
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterLocalFiltering: @(localFiltering),
                                        APVpnManagerParameterRemoteDnsServer: remoteServerData,
-                                       APVpnManagerTunnelMode: @(tunnelMode)
+                                       APVpnManagerParameterTunnelMode: @(tunnelMode)
                                        };
     
     if (_manager) {
@@ -817,8 +792,8 @@ static APVPNManager *singletonVPNManager;
         _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
         _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
-        _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
+        _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
+        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         //-------------
         
         NSString *connectionStatusReason = @"Unknown";
@@ -956,7 +931,7 @@ static APVPNManager *singletonVPNManager;
         }
         else if (_delayedSetTunnelMode) {
             
-            APVpnManagerTunnelModeEnum mode = [_delayedSetTunnelMode unsignedIntegerValue];
+            APVpnManagerTunnelMode mode = [_delayedSetTunnelMode unsignedIntegerValue];
             _delayedSetTunnelMode = nil;
             dispatch_async(workingQueue, ^{
                 [self internalSetTunnelMode:mode];

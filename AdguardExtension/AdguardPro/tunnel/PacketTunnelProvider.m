@@ -63,7 +63,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNS_IPV4_ADDRESS3                     @"121.121.121.123"
 #define V_DNS_IPV4_ADDRESS4                     @"121.121.121.124"
 
-#define TIME_INTERVAL_FOR_WARNING_MESSAGE       30 //seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
@@ -213,7 +212,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
     }
     else {
-        APVpnManagerTunnelModeEnum mode = [protocol.providerConfiguration[APVpnManagerTunnelMode] unsignedIntegerValue];
+        APVpnManagerTunnelMode mode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
         
         NSString* modeName = @"";
         if(mode == APVpnManagerTunnelModeFull) {
@@ -939,24 +938,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }];
     
     DDLogInfo(@"(PacketTunnelProvider) Available network interfaces:\n%@", log);
-}
-
-- (BOOL) autoFullTunnel {
-    
-    __block BOOL full = YES;
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
-        NSString* interfaceName = [NSString stringWithUTF8String:addr->ifa_name];
-        if([interfaceName hasPrefix:@"ipsec"]) {
-            full = NO;
-            *stop = YES;
-        }
-    }];
-    
-    return full;
-}
-
-- (NSString*) ipv6MappedFromIpv4:(NSString*)ipv4Address {
-    return [@"::FFFF:" stringByAppendingString:ipv4Address];
 }
 
 @end

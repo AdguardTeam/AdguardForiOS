@@ -30,7 +30,7 @@
 #import "APVPNManager.h"
 
 #define MAX_DATAGRAMS_RECEIVED                      10
-#define TTL_SESSION                                 10 //seconds
+#define TTL_SESSION                                 3 //seconds
 #define DOMAIN_URL_FORMAT                           @"http://%@/"
 
 #define locLogError(fmt, ...) DDLogError(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
