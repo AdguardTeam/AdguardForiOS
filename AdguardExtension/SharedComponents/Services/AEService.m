@@ -33,8 +33,6 @@ NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
 #pragma mark - AEServices
 /////////////////////////////////////////////////////////////////////
 
-#define AES_RELOADJSON_TASK_NAME        @"AEService-Reload_JSON"
-
 typedef enum {
     
     RFNotReadyType = 0,
@@ -58,7 +56,6 @@ typedef enum {
     NSMutableArray *_onReloadContentBlockingJsonBlocks;
     BOOL _reloadContentBlockingJsonComplate;
     NSLock *_reloadContentBlockingJsonLock;
-    UIBackgroundTaskIdentifier _reloadContentBlockingJsonLongTaskId;
     
     BOOL started;
     
@@ -97,8 +94,7 @@ static AEService *singletonService;
         _readyLock = [NSLock new];
         _reloadContentBlockingJsonLock = [NSLock new];
         _reloadContentBlockingJsonComplate = YES;
-        _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-
+        
     }
     
     return self;
@@ -502,26 +498,6 @@ static AEService *singletonService;
     [_reloadContentBlockingJsonLock unlock];
 
     dispatch_async(workQueue, ^{
-
-#ifndef APP_EXTENSION
-        //Long-running task init
-        
-        if (!backgroundUpdate) {
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                
-                _reloadContentBlockingJsonLongTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_RELOADJSON_TASK_NAME expirationHandler:^{
-                    
-                    //TODO: ceanup
-                    
-                    if (_reloadContentBlockingJsonLongTaskId != UIBackgroundTaskInvalid) {
-                        [[UIApplication sharedApplication] endBackgroundTask:_reloadContentBlockingJsonLongTaskId];
-                        _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-                    }
-                }];
-            });
-        }
-#endif
         
         //reloading
         NSError *result = [self reloadContentBlockingJson];
@@ -863,12 +839,7 @@ static AEService *singletonService;
         if (completionBlock) {
             dispatch_async(workQueue, ^{
                 completionBlock(error);
-                [self finishLongRunningTask];
             });
-        }
-        else{
-            
-            [self finishLongRunningTask];
         }
         
         [_reloadContentBlockingJsonLock lock];
@@ -898,22 +869,6 @@ static AEService *singletonService;
             _firstRunInProgress = YES;
         }
     }
-}
-
-//Finish long-running task
-- (void)finishLongRunningTask{
-
-#ifndef APP_EXTENSION
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        if (_reloadContentBlockingJsonLongTaskId != UIBackgroundTaskInvalid) {
-            [[UIApplication sharedApplication] endBackgroundTask:_reloadContentBlockingJsonLongTaskId];
-            _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-        }
-    });
-#endif
-    
 }
 
 - (AESFilterConverter *)createConverterToJsonWithError:(NSError **)error {
