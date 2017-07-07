@@ -932,7 +932,7 @@
 		653153411CF9911800C92A73 /* AdguardPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AdguardPro.entitlements; sourceTree = "<group>"; };
 		653153441CF9935D00C92A73 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
 		653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProBlockingExtension.entitlements; sourceTree = "<group>"; };
-		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APVPNManager.h; sourceTree = "<group>"; };
+		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = APVPNManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		653153611CFC63C000C92A73 /* APVPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APVPNManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153631CFC899E00C92A73 /* APUIProSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProSectionFooter.h; sourceTree = "<group>"; };
 		653153641CFC899E00C92A73 /* APUIProSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIProSectionFooter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1261,7 +1261,7 @@
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
 		65D9A2641C034095004DA210 /* AEUIAdvSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAdvSettingsController.h; sourceTree = "<group>"; };
-		65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAdvSettingsController.m; sourceTree = "<group>"; };
+		65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIAdvSettingsController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65DAE6E31B8B76B60020BC3C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		65E5A0991B8632F600319AA3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };

@@ -158,7 +158,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
-        APVpnManagerTunnelModeEnum selectedMode =
+        APVpnManagerTunnelMode selectedMode =
             indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
         
         [self setTunnelModeUI:selectedMode];
@@ -231,7 +231,7 @@
 /////////////////////////////////////////////////////////////////////
 
 #ifdef PRO
-- (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
+- (void)setTunnelModeUI:(APVpnManagerTunnelMode)tunnelMode {
     _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
     _splitTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
