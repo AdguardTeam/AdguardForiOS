@@ -145,8 +145,6 @@
 
     locLogTrace();
 
-    [self saveLogRecord:YES];
-    
     [self.udpSession removeObserver:self forKeyPath:@"state"];
     [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
     [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
@@ -437,6 +435,7 @@ _workingQueue = nil;
         locLogVerboseTrace(@"NWUDPSessionStateCancelled");
         if (_closed) {
             
+            [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }
     }
