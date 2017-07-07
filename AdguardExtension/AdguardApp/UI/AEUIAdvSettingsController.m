@@ -109,7 +109,11 @@
     
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
-   
+    
+#else
+    self.hideSectionsWithHiddenRows = YES;
+    [self cell:self.splitTunnelCell setHidden:YES];
+    [self cell:self.fullTunnelCell setHidden:YES];
 #endif
 }
 
@@ -166,14 +170,6 @@
     }
 }
 
-#endif
-
-#ifndef PRO
-// hide tunnel mode section
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 2;
-}
 #endif
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {

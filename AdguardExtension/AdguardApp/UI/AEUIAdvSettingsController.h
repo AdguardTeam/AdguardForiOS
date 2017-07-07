@@ -17,7 +17,9 @@
 */
 #import <UIKit/UIKit.h>
 
-@interface AEUIAdvSettingsController : UITableViewController
+#import "StaticDataTableViewController.h"
+
+@interface AEUIAdvSettingsController : StaticDataTableViewController
 
 @property (strong, nonatomic) IBOutlet UISwitch *simplifiedButton;
 @property (strong, nonatomic) IBOutlet UISwitch *wifiButton;
