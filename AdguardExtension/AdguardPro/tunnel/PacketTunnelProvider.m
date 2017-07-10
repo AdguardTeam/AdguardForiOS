@@ -238,13 +238,15 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         __typeof__(self) sSelf = wSelf;
         
+        if(error)
+            DDLogInfo(@"(PacketTunnelProvider) setTunnelNetworkSettings error : %@", error.localizedDescription);
+        
         @synchronized (sSelf->_connectionHandler) {
             if (sSelf->_connectionHandler) {
                 [sSelf->_connectionHandler startHandlingPackets];
                 DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
             }
         }
-        
         
         DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
         sSelf->pendingStartCompletion(error);
@@ -366,8 +368,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
-	completionHandler();
+    
     [self logNetworkInterfaces];
+	completionHandler();
 }
 
 - (void)wake
@@ -466,7 +469,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_startNetworkStatus == [_reachabilityHandler currentReachabilityStatus]) {
-        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Ski reachability notify");
+        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
         return;
     }
         
@@ -582,7 +585,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
 }
 
-- (NSArray<NEIPv4Route *> *) ipv4ExcludeRoutes {
+- (NSArray<NEIPv4Route *> *) ipv4ExcludedRoutes {
     
     NSMutableArray *ipv4excludeRoutes = [NSMutableArray new];
     
@@ -631,7 +634,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return ipv4excludeRoutes;
 }
 
-- (NSArray<NEIPv6Route *> *) ipv6ExcludeRoutes {
+- (NSArray<NEIPv6Route *> *) ipv6ExcludedRoutes {
     
     NSMutableArray *ipv6ExcludedRoutes = [NSMutableArray new];
     
@@ -828,26 +831,26 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
         
-        ipv4.excludedRoutes = [self ipv4ExcludeRoutes];
-        ipv6.excludedRoutes = [self ipv6ExcludeRoutes];
+        ipv4.excludedRoutes = [self ipv4ExcludedRoutes];
+        ipv6.excludedRoutes = [self ipv6ExcludedRoutes];
     }
     else {
         
-        NSMutableArray* ipv4IncludeRoutes = [NSMutableArray new];
+        NSMutableArray* ipv4IncludedRoutes = [NSMutableArray new];
         for(NSString* dns in fakeIpv4DnsAddresses) {
             
-            [ipv4IncludeRoutes addObject:[[NEIPv4Route alloc] initWithDestinationAddress:dns
+            [ipv4IncludedRoutes addObject:[[NEIPv4Route alloc] initWithDestinationAddress:dns
                                                                               subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
         }
         
-        NSMutableArray* ipv6IncludeRoutes = [NSMutableArray new];
+        NSMutableArray* ipv6IncludedRoutes = [NSMutableArray new];
         for(NSString* dns in fakeIpv6DnsAddresses) {
-            [ipv6IncludeRoutes addObject:[[NEIPv6Route alloc] initWithDestinationAddress:dns
+            [ipv6IncludedRoutes addObject:[[NEIPv6Route alloc] initWithDestinationAddress:dns
                                                                      networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
         }
         
-        ipv4.includedRoutes = ipv4IncludeRoutes;
-        ipv6.includedRoutes = ipv6IncludeRoutes;
+        ipv4.includedRoutes = ipv4IncludedRoutes;
+        ipv6.includedRoutes = ipv6IncludedRoutes;
         
         ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];

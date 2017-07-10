@@ -101,7 +101,7 @@
     adguardRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses
       adguardFakeDnsAddresses:(NSArray<NSString *> *)fakeDnsAddresses {
     
-    DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses:\n%@remote DNS addresses:\n%@Adgourd internal DNS addresses:\n%@",
+    DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses:\n%@remote DNS addresses:\n%@Adguard internal DNS addresses:\n%@",
               deviceDnsAddresses, remoteDnsAddresses, fakeDnsAddresses);
     
     @autoreleasepool {
