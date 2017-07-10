@@ -25,14 +25,12 @@
 </details>
 
 
-### Adguard log files
-<!--- Send us a diagnostic report through the application, click on "Support" on Adguard's main screen. Specify the time of the issue-->
-
 ### Customer ID 
-<!--- You will get an autoreply with you Customer ID after sending a report -->
+<!--- Send us a diagnostic report through the application, choose "Send Bug Report" on the app's main screen. You will get an auto-reply with you Customer ID after sending a report -->
 
 ### Your environment
 <!--- Please include all relevant details about the environment you experienced the bug in -->
-* Device model: (e.g. iPhone 6s)
+* Device model and storage size: (e.g. iPhone 6s 64gb)
 * Operating system and version: (e.g. 10.3.1)
-* System--wide filtering and DNS settings:
+* Browser (e.g. Safari)
+* Wi-fi or mobile internet connection
