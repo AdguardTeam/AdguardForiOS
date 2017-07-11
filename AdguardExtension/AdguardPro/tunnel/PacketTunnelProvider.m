@@ -791,7 +791,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
     NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
     
-    if(_isRemoteServer) {
+    if(_isRemoteServer && [self isIpv4Available]) {
         [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
         [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
@@ -887,6 +887,19 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }];
     
     return ipv6Available;
+}
+
+- (BOOL) isIpv4Available {
+    __block BOOL ipv4Available = NO;
+    
+    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+        if(addr->ifa_addr->sa_family == AF_INET){
+            ipv4Available = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return ipv4Available;
 }
 
 - (void) enumerateNetorkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {

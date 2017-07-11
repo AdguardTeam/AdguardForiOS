@@ -132,19 +132,21 @@
         NSMutableDictionary* whiteListDnsDictionary = [NSMutableDictionary dictionary];
         
         NSString* defaultWhiteListDnsIpv4 = deviceDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
-        NSString* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: DEFAULT_DNS_SERVER_IP;
+        NSString* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: defaultWhiteListDnsIpv4;
         
         [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:deviceDnsAddressesIpv4 defaultDns:defaultWhiteListDnsIpv4];
         [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:deviceDnsAddressesIpv6 defaultDns:defaultWhiteListDnsIpv6];
         
         NSMutableDictionary *remoteDnsDictionary = [NSMutableDictionary dictionary];
         
-        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4 defaultDns:DEFAULT_DNS_SERVER_IP];
-        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6 defaultDns:defaultWhiteListDnsIpv6];
+        NSString* defaultRemoteDnsIpv4 = DEFAULT_DNS_SERVER_IP;
+        NSString* defaultRemoteDnsIpv6 = remoteDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
         
-        DDLogInfo(@"123 %@", whiteListDnsDictionary);
-        DDLogInfo(@"123 %@", remoteDnsDictionary);
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4 defaultDns:defaultRemoteDnsIpv4];
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6 defaultDns:defaultRemoteDnsIpv6];
         
+        DDLogInfo(@"(APTunnelConnectionsHandler) whiteListDnsDictionary %@", whiteListDnsDictionary);
+        DDLogInfo(@"(APTunnelConnectionsHandler) remoteDnsDictionary %@", remoteDnsDictionary);
         
         OSSpinLockLock(&_dnsAddressLock);
         
