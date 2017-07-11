@@ -42,9 +42,12 @@
 /**
  Sets addresses of the DNS servers.
  */
-- (void)setDeviceDnsAddresses:(NSArray <NSString *> *)deviceDnsAddresses
-    adguardRemoteDnsAddresses:(NSArray <NSString *> *)remoteDnsAddresses
-      adguardFakeDnsAddresses:(NSArray <NSString *> *)fakeDnsAddresses;
+- (void)setDeviceDnsAddressesIpv4:(NSArray <NSString *> *)deviceDnsAddressesIpv4
+           deviceDnsAddressesIpv6:(NSArray <NSString *> *)deviceDnsAddressesIpv6
+    adguardRemoteDnsAddressesIpv4:(NSArray <NSString *> *)remoteDnsAddressesIpv4
+    adguardRemoteDnsAddressesIpv6:(NSArray <NSString *> *)remoteDnsAddressesIpv6
+      adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv4
+      adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
 
 /**
  Sets whitelist filter.

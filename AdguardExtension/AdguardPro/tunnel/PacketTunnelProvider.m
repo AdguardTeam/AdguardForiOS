@@ -788,11 +788,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [deviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
     [deviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
-    NSMutableArray *remoteDnsAddresses = [NSMutableArray new];
+    NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
+    NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
     
     if(_isRemoteServer) {
-        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
-        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
+        [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
+        [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
     
     NSArray* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
@@ -801,7 +802,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];
    
-    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardRemoteDnsAddresses:remoteDnsAddresses adguardFakeDnsAddresses:fakeDnsAddresses];
+    [_connectionHandler setDeviceDnsAddressesIpv4:deviceIpv4DnsServers
+                           deviceDnsAddressesIpv6:deviceIpv6DnsServers
+                    adguardRemoteDnsAddressesIpv4:remoteDnsIpv4Addresses
+                    adguardRemoteDnsAddressesIpv6:remoteDnsIpv6Addresses
+                      adguardFakeDnsAddressesIpv4:fakeIpv4DnsAddresses
+                      adguardFakeDnsAddressesIpv4:fakeIpv6DnsAddresses];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers: fakeDnsAddresses];
     
