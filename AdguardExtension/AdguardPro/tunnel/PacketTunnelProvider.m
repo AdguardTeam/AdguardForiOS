@@ -241,6 +241,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         if(error)
             DDLogInfo(@"(PacketTunnelProvider) setTunnelNetworkSettings error : %@", error.localizedDescription);
         
+        if(sSelf == nil)
+            return;
+        
         @synchronized (sSelf->_connectionHandler) {
             if (sSelf->_connectionHandler) {
                 [sSelf->_connectionHandler startHandlingPackets];
