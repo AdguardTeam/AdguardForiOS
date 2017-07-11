@@ -30,7 +30,7 @@
 #import "APVPNManager.h"
 
 #define MAX_DATAGRAMS_RECEIVED                      10
-#define TTL_SESSION                                 10 //seconds
+#define TTL_SESSION                                 3 //seconds
 #define DOMAIN_URL_FORMAT                           @"http://%@/"
 
 #define locLogError(fmt, ...) DDLogError(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
@@ -60,7 +60,6 @@
     ACLExecuteBlockDelayed *_saveLogExecution;
     NSMutableArray <APDnsLogRecord *> *_dnsRecords;
     NSMutableSet *_dnsRecordsSet;
-    BOOL _bypassSession;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -107,11 +106,7 @@
         _packetsForSend = [NSMutableArray new];
         _waitWrite = _closed = NO;
         
-        _bypassSession = _delegate.provider.isRemoteServer && [_delegate isDeviceServerAddress:_basePacket.dstAddress];
-        
-        _currentDnsServer = _bypassSession ?
-        APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX] :
-        _delegate.provider.currentDnsServer;
+        _currentDnsServer = _delegate.provider.currentDnsServer;
         
         // Create session for whitelist
         NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
@@ -129,14 +124,7 @@
         // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
         if (_delegate.provider.isRemoteServer) {
             
-            if(_delegate.provider.fullTunnel) {
-                
-                serverIp = [self.delegate serverAddressForFullTunnelDnsAddress:_basePacket.dstAddress];
-            }
-            else {
-                
-                serverIp = _basePacket.dstAddress;
-            }
+            serverIp = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
         }
     
         rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
@@ -157,8 +145,6 @@
 
     locLogTrace();
 
-    [self saveLogRecord:YES];
-    
     [self.udpSession removeObserver:self forKeyPath:@"state"];
     [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
     [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
@@ -292,13 +278,8 @@ _workingQueue = nil;
     [session addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     [session addObserver:self forKeyPath:@"hasBetterPath" options:NSKeyValueObservingOptionNew context:NULL];
     
-    BOOL whiteListSession = session == _whitelistUdpSession;
-    
-    locLogInfo(@"(APTUdpProxySession) setReadHandler %@", whiteListSession ? @"whitelistUdpSession" : @"udpSession");
     // block for reading data from remote endpoint
     [session setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
-        
-        locLogInfo(@"(APTUdpProxySession) read datagrams %@", whiteListSession ? @"whitelistUdpSession" : @"udpSession");
         
         ASSIGN_STRONG(self);
         if (USE_STRONG(self) == nil) {
@@ -454,6 +435,7 @@ _workingQueue = nil;
         locLogVerboseTrace(@"NWUDPSessionStateCancelled");
         if (_closed) {
             
+            [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }
     }
@@ -714,9 +696,9 @@ _workingQueue = nil;
         dstPort = endpoint.port;
     }
     else {
-        
-        dstHost = _basePacket.dstAddress;
-        dstPort = _basePacket.dstPort;
+        NWHostEndpoint *endpoint = (NWHostEndpoint *)self.udpSession.resolvedEndpoint;
+        dstHost = endpoint.hostname;
+        dstPort = endpoint.port;
     }
     
     BOOL localFiltering = _delegate.provider.localFiltering;
@@ -726,10 +708,12 @@ _workingQueue = nil;
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
+    NSString* mode = [_delegate.provider isFullMode] ? @"full" : @"split";
+    
 #if DEBUG
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #else
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ mode: %@ localFiltering: %@ bypass:%@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), (_bypassSession ? @"YES" : @"NO"), dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #endif
 }
 

@@ -35,10 +35,10 @@ typedef enum {
 } APVpnConnectionStatus;
 
 typedef enum : NSUInteger {
+    
     APVpnManagerTunnelModeSplit = 0,
     APVpnManagerTunnelModeFull
-    
-} APVpnManagerTunnelModeEnum;
+} APVpnManagerTunnelMode;
 
 
 /**
@@ -62,9 +62,9 @@ extern NSString *APVpnManagerParameterLocalFiltering;
 extern NSString *APVpnManagerErrorDomain;
 
 /**
- Key of the paramenter, wich contain APVpnManagerTunnelModeEnum value.
+ Key of the paramenter, wich contain APVpnManagerTunnelMode value.
  */
-extern NSString *APVpnManagerTunnelMode;
+extern NSString *APVpnManagerParameterTunnelMode;
 
 
 #define APVPN_MANAGER_ERROR_STANDART                100
@@ -143,7 +143,7 @@ extern NSString *APVpnManagerTunnelMode;
 /** 
  tunnel mode full/split/auto
  */
-@property APVpnManagerTunnelModeEnum tunnelMode;
+@property APVpnManagerTunnelMode tunnelMode;
 
 /**
  Adds custom (editable) DNS server.

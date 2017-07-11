@@ -109,6 +109,11 @@
     
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
+    
+#else
+    self.hideSectionsWithHiddenRows = YES;
+    [self cell:self.splitTunnelCell setHidden:YES];
+    [self cell:self.fullTunnelCell setHidden:YES];
 #endif
 }
 
@@ -147,27 +152,24 @@
         footer.textView.tintColor = tableView.tintColor;
         footer.textLabel.attributedText = mutableAttributedText;
         footer.textLabel.hidden = YES;
+        footer.textView.isAccessibilityElement = NO;
+        
+        self.fullTunnelCell.accessibilityHint = self.splitTunnelCell.accessibilityHint = self.tunnelModeFooterAttributedString.string;
     }
 }
 
 #ifdef PRO
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2) {
-        APVpnManagerTunnelModeEnum selectedMode =
+        APVpnManagerTunnelMode selectedMode =
             indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
         
         [self setTunnelModeUI:selectedMode];
         [APVPNManager.singleton setTunnelMode:selectedMode];
     }
 }
-#endif
 
-#ifndef PRO
-// hide tunnel mode section
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 2;
-}
 #endif
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -225,16 +227,21 @@
 /////////////////////////////////////////////////////////////////////
 
 #ifdef PRO
-- (void)setTunnelModeUI:(APVpnManagerTunnelModeEnum)tunnelMode {
+- (void)setTunnelModeUI:(APVpnManagerTunnelMode)tunnelMode {
     _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    
+    _splitTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+    _fullTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     
     switch (tunnelMode) {
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _fullTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         case APVpnManagerTunnelModeSplit:
             _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         default:
