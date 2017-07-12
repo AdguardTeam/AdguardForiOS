@@ -102,6 +102,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
         
+        __typeof__(self) __weak wSelf = self;
+        
         updateFilterFromUI =
         [[ACLExecuteBlockDelayed alloc]
          initWithTimeout:AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY
@@ -109,16 +111,19 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
          queue:workQueue
          block:^{
              
-             if (!serviceEnabled) return;
+             __typeof__(self) sSelf = wSelf;
              
-             dispatch_async(workQueue, ^{
+             if (!sSelf->serviceEnabled)
+                 return;
+             
+             dispatch_async(sSelf->workQueue, ^{
                  
-                 [self updateAntibannerForced:NO interactive:YES];
+                 [sSelf updateAntibannerForced:NO interactive:YES];
              });
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:self];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
              });
              
          }];
