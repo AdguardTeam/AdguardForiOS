@@ -33,6 +33,7 @@
 #import "APWhitelistDomainObject.h"
 #import "AEBlacklistDomainObject.h"
 #import "ASDatabase.h"
+#import "ACNIPUtils.h"
 
 #include <arpa/inet.h>
 #include <ifaddrs.h>
@@ -791,7 +792,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
     NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
     
-    if(_isRemoteServer && [self isIpv4Available]) {
+    if(_isRemoteServer && [ACNIPUtils isIpv4Available]) {
         [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
         [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
@@ -861,78 +862,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     settings.IPv4Settings = ipv4;
     
-    if([self isIpv6Available]) {
+    if([ACNIPUtils isIpv6Available]) {
         settings.IPv6Settings = ipv6;
     }
     
     return settings;
 }
 
-- (BOOL) isIpv6Available {
-    __block BOOL ipv6Available = NO;
-    
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
-        NSString* address;
-        if(addr->ifa_addr->sa_family == AF_INET6){
-            char ip[INET6_ADDRSTRLEN];
-            const char *str = inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)addr->ifa_addr)->sin6_addr), ip, INET6_ADDRSTRLEN);
-            
-            address = [NSString stringWithUTF8String:str];
-            NSArray* addressComponents = [address componentsSeparatedByString:@":"];
-            if(![addressComponents.firstObject isEqualToString:@"fe80"]){ // fe80 prefix in link-local ip
-                ipv6Available = YES;
-                *stop = YES;
-            }
-        }
-    }];
-    
-    return ipv6Available;
-}
-
-- (BOOL) isIpv4Available {
-    __block BOOL ipv4Available = NO;
-    
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
-        if(addr->ifa_addr->sa_family == AF_INET){
-            ipv4Available = YES;
-            *stop = YES;
-        }
-    }];
-    
-    return ipv4Available;
-}
-
-- (void) enumerateNetorkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *addr = NULL;
-    int success = 0;
-    
-    success = getifaddrs(&interfaces);
-    if (success == 0) {
-        addr = interfaces;
-        BOOL stop = NO;
-        
-        while(addr != NULL && !stop) {
-            
-            int32_t flags = addr->ifa_flags;
-            
-            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
-            if ((flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
-                processingBlock(addr, &stop);
-            }
-            
-            addr = addr->ifa_next;
-        }
-    }
-    // Free memory
-    freeifaddrs(interfaces);
-}
-
 - (void)logNetworkInterfaces {
     
     NSMutableString* log = [NSMutableString new];
     
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+    [ACNIPUtils enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
         
         NSString* address;
         if(addr->ifa_addr->sa_family == AF_INET){
