@@ -189,7 +189,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     else {
         
         _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
-        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+        // in ipv6-only networks we can not use remote dns server
+        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal] && [ACNIPUtils isIpv4Available];
     }
     
     
@@ -800,7 +801,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
     NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
     
-    if(_isRemoteServer && [ACNIPUtils isIpv4Available]) {
+    if(_isRemoteServer) {
         [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
         [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
