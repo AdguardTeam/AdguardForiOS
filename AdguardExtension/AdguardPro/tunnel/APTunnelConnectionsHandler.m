@@ -97,48 +97,56 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)setDeviceDnsAddresses:(NSArray<NSString *> *)deviceDnsAddresses
-    adguardRemoteDnsAddresses:(NSArray<NSString *> *)remoteDnsAddresses
-      adguardFakeDnsAddresses:(NSArray<NSString *> *)fakeDnsAddresses {
+- (void)fillDnsDictionary:(NSMutableDictionary*)dnsDictionary sourceDnsArray:(NSArray*) sourceDns dstDnsArray: (NSArray*) dstDns defaultDns:(NSString*)defaultDns {
     
-    DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses:\n%@remote DNS addresses:\n%@Adguard internal DNS addresses:\n%@",
-              deviceDnsAddresses, remoteDnsAddresses, fakeDnsAddresses);
+    NSUInteger dstIndex = 0;
+    
+    for(NSString* dns in sourceDns) {
+        if(dstDns.count) {
+            dnsDictionary[dns] = dstDns[dstIndex];
+            
+            ++dstIndex;
+            if(dstIndex >= dstDns.count)
+                dstIndex = 0;
+            
+        }
+        else {
+            dnsDictionary[dns] = defaultDns;
+        }
+    }
+}
+
+-(void)setDeviceDnsAddressesIpv4:(NSArray<NSString *> *)deviceDnsAddressesIpv4
+          deviceDnsAddressesIpv6:(NSArray<NSString *> *)deviceDnsAddressesIpv6
+   adguardRemoteDnsAddressesIpv4:(NSArray<NSString *> *)remoteDnsAddressesIpv4
+   adguardRemoteDnsAddressesIpv6:(NSArray<NSString *> *)remoteDnsAddressesIpv6
+     adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv4
+     adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv6
+{
+    
+    DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses ipv4:\n%@device DNS addresses ipv6:\n%@remote DNS addresses ipv4:\n%@remote DNS addresses ipv6:\n%@Adguard internal DNS addresses ipv4:\n%@Adguard internal DNS addresses ipv6:\n%@",
+              deviceDnsAddressesIpv4, deviceDnsAddressesIpv6, remoteDnsAddressesIpv4, remoteDnsAddressesIpv6, fakeDnsAddressesIpv4, fakeDnsAddressesIpv6);
     
     @autoreleasepool {
     
         NSMutableDictionary* whiteListDnsDictionary = [NSMutableDictionary dictionary];
-    
-        NSUInteger deviceDnsIndex = 0;
         
-        for(NSString* fakeDns in fakeDnsAddresses) {
-            if(deviceDnsAddresses.count) {
-                whiteListDnsDictionary[fakeDns] = deviceDnsAddresses[deviceDnsIndex];
-                
-                ++deviceDnsIndex;
-                if(deviceDnsIndex >= deviceDnsAddresses.count)
-                    deviceDnsIndex = 0;
-
-            }
-            else {
-                whiteListDnsDictionary[fakeDns] = DEFAULT_DNS_SERVER_IP;
-            }
-        }
+        NSString* defaultWhiteListDnsIpv4 = deviceDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
+        NSString* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: defaultWhiteListDnsIpv4;
+        
+        [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:deviceDnsAddressesIpv4 defaultDns:defaultWhiteListDnsIpv4];
+        [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:deviceDnsAddressesIpv6 defaultDns:defaultWhiteListDnsIpv6];
         
         NSMutableDictionary *remoteDnsDictionary = [NSMutableDictionary dictionary];
-        NSUInteger remoteDnsIndex = 0;
         
-        for (NSString* fakeDns in fakeDnsAddresses) {
-            if(remoteDnsAddresses.count) {
-                remoteDnsDictionary[fakeDns] = remoteDnsAddresses[remoteDnsIndex];
-                
-                ++remoteDnsIndex;
-                if(remoteDnsIndex >= remoteDnsAddresses.count)
-                    remoteDnsIndex = 0;
-            }
-            else {
-                remoteDnsDictionary[fakeDns] = DEFAULT_DNS_SERVER_IP;
-            }
-        }
+        NSString* defaultRemoteDnsIpv4 = DEFAULT_DNS_SERVER_IP;
+        NSString* defaultRemoteDnsIpv6 = remoteDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
+        
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4 defaultDns:defaultRemoteDnsIpv4];
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6 defaultDns:defaultRemoteDnsIpv6];
+        
+        DDLogInfo(@"(APTunnelConnectionsHandler) whiteListDnsDictionary %@", whiteListDnsDictionary);
+        DDLogInfo(@"(APTunnelConnectionsHandler) remoteDnsDictionary %@", remoteDnsDictionary);
         
         OSSpinLockLock(&_dnsAddressLock);
         
