@@ -874,7 +874,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NSMutableString* log = [NSMutableString new];
     
-    [ACNIPUtils enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+    [ACNIPUtils enumerateNetworkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
         
         NSString* address;
         if(addr->ifa_addr->sa_family == AF_INET){
