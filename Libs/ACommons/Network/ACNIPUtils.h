@@ -18,6 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
+#include <ifaddrs.h>
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ACNIPUtils
 
@@ -32,7 +34,7 @@
 
 + (BOOL) isIpv6Available;
 + (BOOL) isIpv4Available;
-+ (void) enumerateNetorkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock;
++ (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock;
 
 @end
 

@@ -22,7 +22,6 @@
 #import "ACNIPUtils.h"
 
 #include <arpa/inet.h>
-#include <ifaddrs.h>
 #include <net/if.h>
 
 /////////////////////////////////////////////////////////////////////
@@ -37,7 +36,7 @@
 + (BOOL) isIpv6Available {
     __block BOOL ipv6Available = NO;
     
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+    [self enumerateNetworkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
         NSString* address;
         if(addr->ifa_addr->sa_family == AF_INET6){
             char ip[INET6_ADDRSTRLEN];
@@ -58,7 +57,7 @@
 + (BOOL) isIpv4Available {
     __block BOOL ipv4Available = NO;
     
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+    [self enumerateNetworkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
         if(addr->ifa_addr->sa_family == AF_INET){
             ipv4Available = YES;
             *stop = YES;
@@ -68,7 +67,7 @@
     return ipv4Available;
 }
 
-+ (void) enumerateNetorkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
++ (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *addr = NULL;
     int success = 0;
