@@ -600,6 +600,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSArray* excludeIpv4Cidrs = @[
                                   
                                   // if we add 0.0.0.0 with any mask to excluded routes, then Ios starts to work very strange. Hides VPN icon in statusbar. And sometimes turn off wi-fi.
+                                  // https://github.com/AdguardTeam/AdguardForiOS/issues/424#issuecomment-315397726
                                   //@"0.0.0.0/2",
                                   
                                   @"0.0.0.1/32",
