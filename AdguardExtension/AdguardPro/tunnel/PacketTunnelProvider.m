@@ -462,8 +462,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [self logNetworkInterfaces];
 
     [_reachabilityHandler stopNotifier];
-
-    self.reasserting = YES;
     
     [_connectionHandler closeAllConnections:^{
         [self cancelTunnelWithError:nil];
@@ -600,7 +598,41 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // NSArray* excludeCidrs = @[@"0.0.0.0/1", @"128.0.0.0/1"];
     
     NSArray* excludeIpv4Cidrs = @[
-                                  @"0.0.0.0/2",
+                                  
+                                  // if we add 0.0.0.0 with any mask to excluded routes, then Ios starts to work very strange. Hides VPN icon in statusbar. And sometimes turn off wi-fi.
+                                  //@"0.0.0.0/2",
+                                  
+                                  @"0.0.0.1/32",
+                                  @"0.0.0.2/31",
+                                  @"0.0.0.4/30",
+                                  @"0.0.0.8/29",
+                                  @"0.0.0.16/28",
+                                  @"0.0.0.32/27",
+                                  @"0.0.0.64/26",
+                                  @"0.0.0.128/25",
+                                  @"0.0.1.0/24",
+                                  @"0.0.2.0/23",
+                                  @"0.0.4.0/22",
+                                  @"0.0.8.0/21",
+                                  @"0.0.16.0/20",
+                                  @"0.0.32.0/19",
+                                  @"0.0.64.0/18",
+                                  @"0.0.128.0/17",
+                                  @"0.1.0.0/16",
+                                  @"0.2.0.0/15",
+                                  @"0.4.0.0/14",
+                                  @"0.8.0.0/13",
+                                  @"0.16.0.0/12",
+                                  @"0.32.0.0/11",
+                                  @"0.64.0.0/10",
+                                  @"0.128.0.0/9",
+                                  @"1.0.0.0/8",
+                                  @"2.0.0.0/7",
+                                  @"4.0.0.0/6",
+                                  @"8.0.0.0/5",
+                                  @"16.0.0.0/4",
+                                  @"32.0.0.0/3",
+                                  
                                   @"64.0.0.0/3",
                                   @"96.0.0.0/4",
                                   @"112.0.0.0/5",
