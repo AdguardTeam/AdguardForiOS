@@ -704,6 +704,8 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1323,6 +1325,8 @@
 		65F398651B7B6A5300ABCD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
+		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1719,6 +1723,8 @@
 				655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */,
 				655A01FF1C6B7686000F00D7 /* ACNNetworking.h */,
 				655A02001C6B7686000F00D7 /* ACNNetworking.m */,
+				D004F1F81F16338400F75A4B /* ACNIPUtils.h */,
+				D004F1F91F16338400F75A4B /* ACNIPUtils.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3069,6 +3075,7 @@
 				653B4CE71DA5001D00B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				65B621251D3139FF0047248F /* APTEndpoint.m in Sources */,
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
+				D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
@@ -3189,6 +3196,7 @@
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				659886951CF74DE9003ECD1C /* AESAntibanner.m in Sources */,
 				659886961CF74DE9003ECD1C /* DDMultiFormatter.m in Sources */,
+				D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */,
 				659886971CF74DE9003ECD1C /* ACLJobController.m in Sources */,
 				659886981CF74DE9003ECD1C /* AEUISubscriptionTableViewCell.m in Sources */,

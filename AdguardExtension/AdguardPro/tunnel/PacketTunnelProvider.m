@@ -33,6 +33,7 @@
 #import "APWhitelistDomainObject.h"
 #import "AEBlacklistDomainObject.h"
 #import "ASDatabase.h"
+#import "ACNIPUtils.h"
 
 #include <arpa/inet.h>
 #include <ifaddrs.h>
@@ -188,7 +189,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     else {
         
         _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
-        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+        // in ipv6-only networks we can not use remote dns server
+        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal] && [ACNIPUtils isIpv4Available];
     }
     
     
@@ -238,13 +240,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         __typeof__(self) sSelf = wSelf;
         
+        if(error)
+            DDLogInfo(@"(PacketTunnelProvider) setTunnelNetworkSettings error : %@", error.localizedDescription);
+        
+        if(sSelf == nil)
+            return;
+        
         @synchronized (sSelf->_connectionHandler) {
             if (sSelf->_connectionHandler) {
                 [sSelf->_connectionHandler startHandlingPackets];
                 DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
             }
         }
-        
         
         DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
         sSelf->pendingStartCompletion(error);
@@ -366,8 +373,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
 	// Add code here to get ready to sleep.
     DDLogInfo(@"(PacketTunnelProvider) Sleep Event");
-	completionHandler();
+    
     [self logNetworkInterfaces];
+	completionHandler();
 }
 
 - (void)wake
@@ -454,10 +462,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [self logNetworkInterfaces];
 
     [_reachabilityHandler stopNotifier];
-
-    self.reasserting = YES;
-    [self cancelTunnelWithError:nil];
-
+    
+    [_connectionHandler closeAllConnections:^{
+        [self cancelTunnelWithError:nil];
+    }];
 }
 
 - (void)reachNotify:(NSNotification *)note {
@@ -466,7 +474,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_startNetworkStatus == [_reachabilityHandler currentReachabilityStatus]) {
-        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Ski reachability notify");
+        DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
         return;
     }
         
@@ -582,7 +590,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
 }
 
-- (NSArray<NEIPv4Route *> *) ipv4ExcludeRoutes {
+- (NSArray<NEIPv4Route *> *) ipv4ExcludedRoutes {
     
     NSMutableArray *ipv4excludeRoutes = [NSMutableArray new];
     
@@ -590,7 +598,42 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // NSArray* excludeCidrs = @[@"0.0.0.0/1", @"128.0.0.0/1"];
     
     NSArray* excludeIpv4Cidrs = @[
-                                  @"0.0.0.0/2",
+                                  
+                                  // if we add 0.0.0.0 with any mask to excluded routes, then Ios starts to work very strange. Hides VPN icon in statusbar. And sometimes turn off wi-fi.
+                                  // https://github.com/AdguardTeam/AdguardForiOS/issues/424#issuecomment-315397726
+                                  //@"0.0.0.0/2",
+                                  
+                                  @"0.0.0.1/32",
+                                  @"0.0.0.2/31",
+                                  @"0.0.0.4/30",
+                                  @"0.0.0.8/29",
+                                  @"0.0.0.16/28",
+                                  @"0.0.0.32/27",
+                                  @"0.0.0.64/26",
+                                  @"0.0.0.128/25",
+                                  @"0.0.1.0/24",
+                                  @"0.0.2.0/23",
+                                  @"0.0.4.0/22",
+                                  @"0.0.8.0/21",
+                                  @"0.0.16.0/20",
+                                  @"0.0.32.0/19",
+                                  @"0.0.64.0/18",
+                                  @"0.0.128.0/17",
+                                  @"0.1.0.0/16",
+                                  @"0.2.0.0/15",
+                                  @"0.4.0.0/14",
+                                  @"0.8.0.0/13",
+                                  @"0.16.0.0/12",
+                                  @"0.32.0.0/11",
+                                  @"0.64.0.0/10",
+                                  @"0.128.0.0/9",
+                                  @"1.0.0.0/8",
+                                  @"2.0.0.0/7",
+                                  @"4.0.0.0/6",
+                                  @"8.0.0.0/5",
+                                  @"16.0.0.0/4",
+                                  @"32.0.0.0/3",
+                                  
                                   @"64.0.0.0/3",
                                   @"96.0.0.0/4",
                                   @"112.0.0.0/5",
@@ -631,7 +674,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return ipv4excludeRoutes;
 }
 
-- (NSArray<NEIPv6Route *> *) ipv6ExcludeRoutes {
+- (NSArray<NEIPv6Route *> *) ipv6ExcludedRoutes {
     
     NSMutableArray *ipv6ExcludedRoutes = [NSMutableArray new];
     
@@ -788,11 +831,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [deviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
     [deviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
-    NSMutableArray *remoteDnsAddresses = [NSMutableArray new];
+    NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
+    NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
     
     if(_isRemoteServer) {
-        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv4Addresses];
-        [remoteDnsAddresses addObjectsFromArray:_currentServer.ipv6Addresses];
+        [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
+        [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
     
     NSArray* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
@@ -801,7 +845,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];
    
-    [_connectionHandler setDeviceDnsAddresses:deviceDnsServers adguardRemoteDnsAddresses:remoteDnsAddresses adguardFakeDnsAddresses:fakeDnsAddresses];
+    [_connectionHandler setDeviceDnsAddressesIpv4:deviceIpv4DnsServers
+                           deviceDnsAddressesIpv6:deviceIpv6DnsServers
+                    adguardRemoteDnsAddressesIpv4:remoteDnsIpv4Addresses
+                    adguardRemoteDnsAddressesIpv6:remoteDnsIpv6Addresses
+                      adguardFakeDnsAddressesIpv4:fakeIpv4DnsAddresses
+                      adguardFakeDnsAddressesIpv4:fakeIpv6DnsAddresses];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers: fakeDnsAddresses];
     
@@ -828,26 +877,26 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
         
-        ipv4.excludedRoutes = [self ipv4ExcludeRoutes];
-        ipv6.excludedRoutes = [self ipv6ExcludeRoutes];
+        ipv4.excludedRoutes = [self ipv4ExcludedRoutes];
+        ipv6.excludedRoutes = [self ipv6ExcludedRoutes];
     }
     else {
         
-        NSMutableArray* ipv4IncludeRoutes = [NSMutableArray new];
+        NSMutableArray* ipv4IncludedRoutes = [NSMutableArray new];
         for(NSString* dns in fakeIpv4DnsAddresses) {
             
-            [ipv4IncludeRoutes addObject:[[NEIPv4Route alloc] initWithDestinationAddress:dns
+            [ipv4IncludedRoutes addObject:[[NEIPv4Route alloc] initWithDestinationAddress:dns
                                                                               subnetMask:V_INTERFACE_IPV4_FULL_MASK]];
         }
         
-        NSMutableArray* ipv6IncludeRoutes = [NSMutableArray new];
+        NSMutableArray* ipv6IncludedRoutes = [NSMutableArray new];
         for(NSString* dns in fakeIpv6DnsAddresses) {
-            [ipv6IncludeRoutes addObject:[[NEIPv6Route alloc] initWithDestinationAddress:dns
+            [ipv6IncludedRoutes addObject:[[NEIPv6Route alloc] initWithDestinationAddress:dns
                                                                      networkPrefixLength:V_INTERFACE_IPV6_FULL_MASK]];
         }
         
-        ipv4.includedRoutes = ipv4IncludeRoutes;
-        ipv6.includedRoutes = ipv6IncludeRoutes;
+        ipv4.includedRoutes = ipv4IncludedRoutes;
+        ipv6.includedRoutes = ipv6IncludedRoutes;
         
         ipv4.excludedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.excludedRoutes = @[[NEIPv6Route defaultRoute]];
@@ -855,65 +904,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     settings.IPv4Settings = ipv4;
     
-    if([self isIpv6Available]) {
+    if([ACNIPUtils isIpv6Available]) {
         settings.IPv6Settings = ipv6;
     }
     
     return settings;
 }
 
-- (BOOL) isIpv6Available {
-    __block BOOL ipv6Available = NO;
-    
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
-        NSString* address;
-        if(addr->ifa_addr->sa_family == AF_INET6){
-            char ip[INET6_ADDRSTRLEN];
-            const char *str = inet_ntop(AF_INET6, &(((struct sockaddr_in6 *)addr->ifa_addr)->sin6_addr), ip, INET6_ADDRSTRLEN);
-            
-            address = [NSString stringWithUTF8String:str];
-            NSArray* addressComponents = [address componentsSeparatedByString:@":"];
-            if(![addressComponents.firstObject isEqualToString:@"fe80"]){ // fe80 prefix in link-local ip
-                ipv6Available = YES;
-                *stop = YES;
-            }
-        }
-    }];
-    
-    return ipv6Available;
-}
-
-- (void) enumerateNetorkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
-    struct ifaddrs *interfaces = NULL;
-    struct ifaddrs *addr = NULL;
-    int success = 0;
-    
-    success = getifaddrs(&interfaces);
-    if (success == 0) {
-        addr = interfaces;
-        BOOL stop = NO;
-        
-        while(addr != NULL && !stop) {
-            
-            int32_t flags = addr->ifa_flags;
-            
-            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
-            if ((flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
-                processingBlock(addr, &stop);
-            }
-            
-            addr = addr->ifa_next;
-        }
-    }
-    // Free memory
-    freeifaddrs(interfaces);
-}
-
 - (void)logNetworkInterfaces {
     
     NSMutableString* log = [NSMutableString new];
     
-    [self enumerateNetorkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
+    [ACNIPUtils enumerateNetworkInterfacesWithProcessingBlock:^(struct ifaddrs *addr, BOOL *stop) {
         
         NSString* address;
         if(addr->ifa_addr->sa_family == AF_INET){

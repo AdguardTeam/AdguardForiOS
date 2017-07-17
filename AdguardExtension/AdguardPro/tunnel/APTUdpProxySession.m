@@ -288,7 +288,7 @@ _workingQueue = nil;
         
         if (error && !_closed) {
             
-            DDLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
+            locLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
             return;
         }
         
