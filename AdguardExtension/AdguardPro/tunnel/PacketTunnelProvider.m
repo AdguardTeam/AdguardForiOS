@@ -189,12 +189,19 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     else {
         
         _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
+        
+        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+        
         // in ipv6-only networks we can not use remote dns server
-        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal] && [ACNIPUtils isIpv4Available];
+        if(_isRemoteServer && ![ACNIPUtils isIpv4Available]) {
+            
+            DDLogInfo(@"(PacketTunnelProvider) ipv4 not available. Set _isRemoteServer = NO");
+            _isRemoteServer = NO;
+        }
     }
     
     
-    DDLogInfo(@"PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
+    DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
               (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
     
     [self reloadWhitelistBlacklistDomain];
@@ -779,6 +786,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
+    BOOL ipv6Available = [ACNIPUtils isIpv6Available];
+    
     // DNS
     
     NSArray *deviceIpv4DnsServers;
@@ -799,7 +808,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
     
     NSArray* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
-    NSArray* fakeIpv6DnsAddresses = @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2];
+    NSArray* fakeIpv6DnsAddresses = ipv6Available ? @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2] : @[];
     NSMutableArray* fakeDnsAddresses = [NSMutableArray new];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];
@@ -809,7 +818,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                     adguardRemoteDnsAddressesIpv4:remoteDnsIpv4Addresses
                     adguardRemoteDnsAddressesIpv6:remoteDnsIpv6Addresses
                       adguardFakeDnsAddressesIpv4:fakeIpv4DnsAddresses
-                      adguardFakeDnsAddressesIpv4:fakeIpv6DnsAddresses];
+                      adguardFakeDnsAddressesIpv6:fakeIpv6DnsAddresses];
     
     NEDNSSettings *dns = [[NEDNSSettings alloc] initWithServers: fakeDnsAddresses];
     
@@ -863,7 +872,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     settings.IPv4Settings = ipv4;
     
-    if([ACNIPUtils isIpv6Available]) {
+    if(ipv6Available) {
         settings.IPv6Settings = ipv6;
     }
     

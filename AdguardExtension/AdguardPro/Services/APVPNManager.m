@@ -209,7 +209,7 @@ static APVPNManager *singletonVPNManager;
               initWithUUID: @"AGDEF03"
               name: NSLocalizedString(@"OpenDNS Home", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Home.")
               description: NSLocalizedString(@"custom filtering and identity theft protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Home' mode.")
-              ipAddresses:@"208.67.222.222, 208.67.220.220"];
+              ipAddresses:@"208.67.222.222, 208.67.220.220, 2620:0:ccc::2, 2620:0:ccd::2"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
@@ -225,7 +225,7 @@ static APVPNManager *singletonVPNManager;
               initWithUUID: @"AGDEF06"
               name: NSLocalizedString(@"Yandex DNS Safe", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe.")
               description: NSLocalizedString(@"protection from virus and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
-              ipAddresses:@"77.88.8.88, 77.88.8.2"];
+              ipAddresses:@"77.88.8.88, 77.88.8.2, 2a02:6b8::feed:bad, 2a02:6b8:0:1::feed:bad"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
@@ -233,7 +233,7 @@ static APVPNManager *singletonVPNManager;
               initWithUUID: @"AGDEF07"
               name: NSLocalizedString(@"Yandex DNS Family", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family.")
               description: NSLocalizedString(@"blocks all above and adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
-              ipAddresses:@"77.88.8.7, 77.88.8.3"];
+              ipAddresses:@"77.88.8.7, 77.88.8.3, 2a02:6b8::feed:a11, 2a02:6b8:0:1::feed:a11"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
