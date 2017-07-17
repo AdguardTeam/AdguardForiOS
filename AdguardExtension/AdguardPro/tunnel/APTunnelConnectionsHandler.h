@@ -74,6 +74,11 @@
 - (void)startHandlingPackets;
 
 /**
+ Stop packet handling cycle
+ */
+- (void)stopHandlingPackets;
+
+/**
  Removes session for endpont if it exists.
  */
 - (void)removeSession:(APTUdpProxySession *)endpoint;
