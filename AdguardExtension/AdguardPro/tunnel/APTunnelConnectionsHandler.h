@@ -47,7 +47,7 @@
     adguardRemoteDnsAddressesIpv4:(NSArray <NSString *> *)remoteDnsAddressesIpv4
     adguardRemoteDnsAddressesIpv6:(NSArray <NSString *> *)remoteDnsAddressesIpv6
       adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv4
-      adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
+      adguardFakeDnsAddressesIpv6:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
 
 /**
  Sets whitelist filter.

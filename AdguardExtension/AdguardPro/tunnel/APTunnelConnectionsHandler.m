@@ -121,7 +121,7 @@
    adguardRemoteDnsAddressesIpv4:(NSArray<NSString *> *)remoteDnsAddressesIpv4
    adguardRemoteDnsAddressesIpv6:(NSArray<NSString *> *)remoteDnsAddressesIpv6
      adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv4
-     adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv6
+     adguardFakeDnsAddressesIpv6:(NSArray<NSString *> *)fakeDnsAddressesIpv6
 {
     
     DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses ipv4:\n%@device DNS addresses ipv6:\n%@remote DNS addresses ipv4:\n%@remote DNS addresses ipv6:\n%@Adguard internal DNS addresses ipv4:\n%@Adguard internal DNS addresses ipv6:\n%@",
