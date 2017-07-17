@@ -1327,6 +1327,15 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
+		D0B7F2571F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F2581F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProLaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		D0B7F25A1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
+		D0B7F25B1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F25C1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0B7F25D1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		D0B7F25E1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2623,6 +2632,7 @@
 				"et-EE",
 				hu,
 				hr,
+				fa,
 			);
 			mainGroup = 65F398081B7B684700ABCD39;
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -3684,6 +3694,7 @@
 				654F5BE11E76C37800B8C1EC /* et-EE */,
 				654F5BE91E76C3E700B8C1EC /* hu */,
 				654F5BF11E76C41200B8C1EC /* hr */,
+				D0B7F25A1F1CE76000D545CD /* fa */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3698,6 +3709,7 @@
 				654F5BE21E76C37800B8C1EC /* et-EE */,
 				654F5BEA1E76C3E700B8C1EC /* hu */,
 				654F5BF21E76C41200B8C1EC /* hr */,
+				D0B7F25B1F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3712,6 +3724,7 @@
 				654F5BDF1E76C37800B8C1EC /* et-EE */,
 				654F5BE71E76C3E600B8C1EC /* hu */,
 				654F5BEF1E76C41200B8C1EC /* hr */,
+				D0B7F2581F1CE76000D545CD /* fa */,
 			);
 			name = ProLaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3739,6 +3752,7 @@
 				654F5BE31E76C37800B8C1EC /* et-EE */,
 				654F5BEB1E76C3E700B8C1EC /* hu */,
 				654F5BF31E76C41200B8C1EC /* hr */,
+				D0B7F25C1F1CE76000D545CD /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3766,6 +3780,7 @@
 				654F5BE41E76C37900B8C1EC /* et-EE */,
 				654F5BEC1E76C3E700B8C1EC /* hu */,
 				654F5BF41E76C41200B8C1EC /* hr */,
+				D0B7F25E1F1CE76000D545CD /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3793,6 +3808,7 @@
 				65AE3DAA1E8DC1E100A6627B /* et-EE */,
 				65AE3DAB1E8DC1E200A6627B /* hu */,
 				65AE3DAC1E8DC1E300A6627B /* hr */,
+				D0B7F25D1F1CE76000D545CD /* fa */,
 			);
 			name = AdguardPro.Tunnel.strings;
 			sourceTree = "<group>";
@@ -3820,6 +3836,7 @@
 				654F5BE01E76C37800B8C1EC /* et-EE */,
 				654F5BE81E76C3E700B8C1EC /* hu */,
 				654F5BF01E76C41200B8C1EC /* hr */,
+				D0B7F2591F1CE76000D545CD /* fa */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -3847,6 +3864,7 @@
 				654F5BDD1E76C37800B8C1EC /* et-EE */,
 				654F5BE51E76C3E600B8C1EC /* hu */,
 				654F5BED1E76C41100B8C1EC /* hr */,
+				D0B7F2561F1CE76000D545CD /* fa */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3861,6 +3879,7 @@
 				654F5BDE1E76C37800B8C1EC /* et-EE */,
 				654F5BE61E76C3E600B8C1EC /* hu */,
 				654F5BEE1E76C41100B8C1EC /* hr */,
+				D0B7F2571F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
