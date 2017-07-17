@@ -260,9 +260,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             }
         }
         
-        DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
-        sSelf->pendingStartCompletion(error);
-        sSelf->pendingStartCompletion = nil;
+        if(sSelf->pendingStartCompletion) {
+            DDLogInfo(@"(PacketTunnelProvider) Call pendingStartCompletion.");
+            sSelf->pendingStartCompletion(error);
+            sSelf->pendingStartCompletion = nil;
+        }
         
         [sSelf logNetworkInterfaces];
     }];

@@ -61,6 +61,8 @@
     
     dispatch_queue_t _readQueue;
     dispatch_block_t _closeCompletion;
+    
+    BOOL _stopHandling;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -199,6 +201,11 @@
     }
 }
 
+- (void)stopHandlingPackets {
+    
+    _stopHandling = YES;
+}
+
 - (void)removeSession:(APTUdpProxySession *)session {
 
     dispatch_block_t closeCompletion = nil;
@@ -311,6 +318,9 @@
 - (void)closeAllConnections:(void (^)(void))completion {
     
     @synchronized (self) {
+        
+        [self stopHandlingPackets];
+        
         NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
         if(_sessions.count == 0) {
             
@@ -364,6 +374,8 @@
     DDLogDebug(@"(APTunnelConnectionsHandler) startHandlingPacketsInternal");
     
     dispatch_async(_readQueue, ^{
+        
+        _stopHandling = NO;
         
         [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
             
@@ -454,6 +466,13 @@
         [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
             
             __typeof__(self) sSelf = wSelf;
+            
+            if(!sSelf || sSelf->_stopHandling){
+                
+                DDLogDebug(@"In readPacketsWithCompletionHandler stop handle");
+                
+                return;
+            }
 #ifdef DEBUG
             DDLogDebug(@"In readPacketsWithCompletionHandler (before handlePackets): %lu", packetCounter);
             
