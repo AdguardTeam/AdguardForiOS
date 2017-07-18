@@ -107,6 +107,10 @@
                              style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
     
+    // tunning accessibility
+    self.proDnsSettingsCell.accessibilityHint = [self proShortStatusDescription];
+    //-----------------
+    
     [self proAttachToNotifications];
 #else
     self.hideSectionsWithHiddenRows = YES;
