@@ -585,12 +585,12 @@ _workingQueue = nil;
                     else if ([self.delegate isUserBlacklistDomain:name]) {
                         blacklisted = YES;
                     }
-                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
-                        whitelisted = YES;
-                    }
-                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
-                        blacklisted = YES;
-                    }
+//                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
+//                        whitelisted = YES;
+//                    }
+//                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
+//                        blacklisted = YES;
+//                    }
                     
                     if(whitelisted) {
                         

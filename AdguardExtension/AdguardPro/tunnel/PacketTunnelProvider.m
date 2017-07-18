@@ -492,72 +492,72 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)reloadWhitelistBlacklistDomain {
     
-    if (_localFiltering == NO) {
-        
-        [_connectionHandler setGlobalWhitelistFilter:nil];
-        [_connectionHandler setGlobalBlacklistFilter:nil];
-        [_connectionHandler setUserWhitelistFilter:nil];
-        [_connectionHandler setUserBlacklistFilter:nil];
-        
-        DDLogInfo(@"(PacketTunnelProvider) System-Wide Filtering rules set to nil.");
-
-        return;
-    }
-    
+//    if (_localFiltering == NO) {
+//
+//        [_connectionHandler setGlobalWhitelistFilter:nil];
+//        [_connectionHandler setGlobalBlacklistFilter:nil];
+//        [_connectionHandler setUserWhitelistFilter:nil];
+//        [_connectionHandler setUserBlacklistFilter:nil];
+//
+//        DDLogInfo(@"(PacketTunnelProvider) System-Wide Filtering rules set to nil.");
+//
+//        return;
+//    }
+//
     @autoreleasepool {
 
-        AERDomainFilter *globalWhiteRules = [AERDomainFilter filter];
-        AERDomainFilter *globalBlackRules = [AERDomainFilter filter];
-
-        NSArray *rules;
-        @autoreleasepool {
-            
-            // Init database and get rules
-            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-            
-            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
-            NSError *error = [[ASDatabase singleton] error];
-            if (!error) {
-                
-                AESAntibanner *antibanner = [[AEService new] antibanner];
-                rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
-                
-                DDLogInfo(@"(PacketTunnelProvider) Count of rules, which was loaded from simple domain names filter: %lu.", rules.count);
-            }
-            
-            [ASDatabase destroySingleton];
-            //--------------------------
-            if (rules.count == 0 && _isRemoteServer == NO) {
-                
-                DDLogError(@"(PacketTunnelProvider) We switch filtration to default remote server.");
-                @autoreleasepool {
-                    _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
-                    _isRemoteServer = YES;
-                }
-            }
-        }
-        
-        @autoreleasepool {
-            
-            AERDomainFilterRule *rule;
-            for (ASDFilterRule *item in rules) {
-                
-                rule = [AERDomainFilterRule rule:item.ruleText];
-                
-                if (rule.whiteListRule) {
-                    [globalWhiteRules addRule:rule];
-                }
-                else {
-                    
-                    [globalBlackRules addRule:rule];
-                }
-            }
-        }
-        
-        [_connectionHandler setGlobalWhitelistFilter:globalWhiteRules];
-        [_connectionHandler setGlobalBlacklistFilter:globalBlackRules];
-        
-        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", globalWhiteRules.rulesCount, globalBlackRules.rulesCount);
+//        AERDomainFilter *globalWhiteRules = [AERDomainFilter filter];
+//        AERDomainFilter *globalBlackRules = [AERDomainFilter filter];
+//
+//        NSArray *rules;
+//        @autoreleasepool {
+//
+//            // Init database and get rules
+//            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
+//
+//            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
+//            NSError *error = [[ASDatabase singleton] error];
+//            if (!error) {
+//
+//                AESAntibanner *antibanner = [[AEService new] antibanner];
+//                rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
+//
+//                DDLogInfo(@"(PacketTunnelProvider) Count of rules, which was loaded from simple domain names filter: %lu.", rules.count);
+//            }
+//
+//            [ASDatabase destroySingleton];
+//            //--------------------------
+//            if (rules.count == 0 && _isRemoteServer == NO) {
+//
+//                DDLogError(@"(PacketTunnelProvider) We switch filtration to default remote server.");
+//                @autoreleasepool {
+//                    _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
+//                    _isRemoteServer = YES;
+//                }
+//            }
+//        }
+//
+//        @autoreleasepool {
+//
+//            AERDomainFilterRule *rule;
+//            for (ASDFilterRule *item in rules) {
+//
+//                rule = [AERDomainFilterRule rule:item.ruleText];
+//
+//                if (rule.whiteListRule) {
+//                    [globalWhiteRules addRule:rule];
+//                }
+//                else {
+//
+//                    [globalBlackRules addRule:rule];
+//                }
+//            }
+//        }
+//
+//        [_connectionHandler setGlobalWhitelistFilter:globalWhiteRules];
+//        [_connectionHandler setGlobalBlacklistFilter:globalBlackRules];
+//
+//        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", globalWhiteRules.rulesCount, globalBlackRules.rulesCount);
         
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];

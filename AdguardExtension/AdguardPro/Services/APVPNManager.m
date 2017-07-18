@@ -173,7 +173,6 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
-
 + (NSMutableArray <APDnsServerObject *> *)predefinedDnsServers {
     
     // Create default Adgaurd servers
@@ -672,6 +671,32 @@ static APVPNManager *singletonVPNManager;
                     
                     _manager = nil;
                     _protocolConfiguration = nil;
+                }
+                
+                // migration from version with adguard predefined dns server.
+                // If adguard default dns server used as remote server, we add this server to custom user defined servers
+                
+                NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+                
+                if(remoteDnsServerData) {
+                    
+                    APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
+                    
+                    BOOL allreadyAdded = NO;
+                    if(remoteServer) {
+                        for(APDnsServerObject* server in _remoteDnsServers) {
+                            if([server isEqual:remoteServer]) {
+                                
+                                allreadyAdded = YES;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if(!allreadyAdded) {
+                        remoteServer.editable = YES;
+                        _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
+                    }
                 }
             }
         }
