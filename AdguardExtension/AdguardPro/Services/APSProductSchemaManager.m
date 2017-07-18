@@ -101,7 +101,7 @@
 
 + (void)installDefaultSettingsForVPNManagerV9 {
 
-    APVPNManager.singleton.localFiltering = NO;
+    //APVPNManager.singleton.localFiltering = NO;
     APVPNManager.singleton.activeRemoteDnsServer =
      APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
     DDLogInfo(@"(APSProductSchemaManager) VPN Manager: local filtering = NO, default remote DNS server.");
@@ -110,7 +110,7 @@
 
 + (void)installDefaultSettingsForVPNManagerV10 {
     
-    APVPNManager.singleton.localFiltering = YES;
+    //APVPNManager.singleton.localFiltering = YES;
     APVPNManager.singleton.activeRemoteDnsServer =
     APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
     DDLogInfo(@"(APSProductSchemaManager) VPN Manager: local filtering = YES, system default DNS server.");

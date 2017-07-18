@@ -189,13 +189,13 @@ static APVPNManager *singletonVPNManager;
     
     [predefinedRemoteDnsServers addObject:server];
     
-    server = [[APDnsServerObject alloc]
-              initWithUUID: @"AGDEF01"
-              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
-              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
-              ipAddresses:@"176.103.130.130, 176.103.130.131"];
-    server.editable = NO;
-    [predefinedRemoteDnsServers addObject:server];
+//    server = [[APDnsServerObject alloc]
+//              initWithUUID: @"AGDEF01"
+//              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
+//              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
+//              ipAddresses:@"176.103.130.130, 176.103.130.131"];
+//    server.editable = NO;
+//    [predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF02"

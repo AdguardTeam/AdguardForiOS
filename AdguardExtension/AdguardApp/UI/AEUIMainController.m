@@ -107,12 +107,7 @@
                              style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
     
-    // tunning accessibility
-    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
-    //-----------------
-    
     [self proAttachToNotifications];
-   
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
@@ -256,15 +251,6 @@
     [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
                           ITUNES_PRO_APP_ID]];
     [[UIApplication sharedApplication] openURL:theURL];
-}
-
-- (IBAction)proToggleStatus:(id)sender {
-    
-#ifdef PRO
-    BOOL enabled = [(UISwitch *)sender isOn];
-    [[APVPNManager singleton] setEnabled:enabled];
-    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
-#endif
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{
@@ -593,7 +579,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"The app establishes a fake VPN connection, which is required in order to use System-wide Ad Blocking or custom DNS settings. Note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"AdGuard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware, protecting your DNS traffic from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -609,15 +595,8 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    self.proSystemWideCell.detailTextLabel.text = manager.localFiltering
-    ? NSLocalizedString(@"Enabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is enabled.")
-    : NSLocalizedString(@"Disabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is disabled.");
-    
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
-    self.proStatusSwitch.on = manager.enabled;
-    [self proSetSystemWideEnabled:manager.enabled];
-        
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
@@ -648,13 +627,6 @@
     if (observer) {
         [_observers addObject:observer];
     }
-}
-
-- (void) proSetSystemWideEnabled:(BOOL) enabled {
-    self.proSystemWideCell.userInteractionEnabled = enabled;
-    self.proSystemWideCell.textLabel.enabled = enabled;
-    self.proDnsSettingsCell.userInteractionEnabled = enabled;
-    self.proDnsSettingsCell.textLabel.enabled = enabled;
 }
 
 #endif

@@ -110,7 +110,7 @@ extern NSString *APVpnManagerParameterTunnelMode;
 /**
  Defines state of the filtering using "Simplified domain names filter" filter rules.
  */
-@property BOOL localFiltering;
+//@property BOOL localFiltering;
 /**
  Active DNS server.
  */

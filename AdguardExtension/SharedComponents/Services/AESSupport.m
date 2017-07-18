@@ -209,7 +209,7 @@ static AESSupport *singletonSupport;
 #ifdef PRO
         [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nSystem-Wide filtering %@.\r\nTunnel mode %@\r\nDNS server: %@",
          (APVPNManager.singleton.enabled ? @"ENABLED" : @"DISABLED"),
-         (APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
+         //(APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
          (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
          APVPNManager.singleton.activeRemoteDnsServer.serverName];
         
