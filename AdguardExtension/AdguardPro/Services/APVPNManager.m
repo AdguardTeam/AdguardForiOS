@@ -644,6 +644,36 @@ static APVPNManager *singletonVPNManager;
 }
 */
 
+- (void) magrateDNSIfNeeded {
+    // migration from version with adguard predefined dns server.
+    // If adguard default dns server used as remote server, we add this server to custom user defined servers
+    
+    NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+    
+    if(remoteDnsServerData) {
+        
+        APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
+        
+        BOOL allreadyAdded = NO;
+        if(remoteServer) {
+            for(APDnsServerObject* server in _remoteDnsServers) {
+                if([server isEqual:remoteServer]) {
+                    
+                    allreadyAdded = YES;
+                    break;
+                }
+            }
+        }
+        
+        if(!allreadyAdded) {
+            remoteServer.editable = YES;
+            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
+            [_customRemoteDnsServers addObject:remoteServer];
+            [self saveCustomRemoteDnsServersToDefaults];
+        }
+    }
+}
+
 - (void)loadConfiguration{
 
     [_busyLock lock];
@@ -673,31 +703,7 @@ static APVPNManager *singletonVPNManager;
                     _protocolConfiguration = nil;
                 }
                 
-                // migration from version with adguard predefined dns server.
-                // If adguard default dns server used as remote server, we add this server to custom user defined servers
-                
-                NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
-                
-                if(remoteDnsServerData) {
-                    
-                    APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
-                    
-                    BOOL allreadyAdded = NO;
-                    if(remoteServer) {
-                        for(APDnsServerObject* server in _remoteDnsServers) {
-                            if([server isEqual:remoteServer]) {
-                                
-                                allreadyAdded = YES;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if(!allreadyAdded) {
-                        remoteServer.editable = YES;
-                        _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
-                    }
-                }
+                [self magrateDNSIfNeeded];
             }
         }
 
@@ -815,8 +821,10 @@ static APVPNManager *singletonVPNManager;
         // Getting current settings from configuration.
         //If settings are incorrect, then we assign default values.
         _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
-        _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        
+        //_localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
+        //[_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         //-------------
