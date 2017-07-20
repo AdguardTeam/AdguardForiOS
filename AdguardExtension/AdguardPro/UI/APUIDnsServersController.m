@@ -353,17 +353,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
-    
-    if (selectedServer) {
+    if(indexPath.section == DNS_SERVER_SECTION_INDEX) {
+        APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
         
-        APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
-        DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
-        dispatch_async(dispatch_get_main_queue(), ^{
-           
-            [self selectActiveDnsServer:selectedServer];
-            [self reloadDataAnimated:YES];
-        });
+        if (selectedServer) {
+            
+            APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+            DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self selectActiveDnsServer:selectedServer];
+                [self reloadDataAnimated:YES];
+            });
+        }
     }
 }
 
