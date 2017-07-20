@@ -644,7 +644,7 @@ static APVPNManager *singletonVPNManager;
 }
 */
 
-- (void) magrateDNSIfNeeded {
+- (void) migrateDNSIfNeeded {
     // migration from version with adguard predefined dns server.
     // If adguard default dns server used as remote server, we add this server to custom user defined servers
     
@@ -703,7 +703,7 @@ static APVPNManager *singletonVPNManager;
                     _protocolConfiguration = nil;
                 }
                 
-                [self magrateDNSIfNeeded];
+                [self migrateDNSIfNeeded];
             }
         }
 
