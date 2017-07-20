@@ -583,9 +583,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
             NSUInteger counter = 0;
-            for (NSString *item in domainList) {
+            for (NSString *ruleText in domainList) {
                 
-                NSString *ruleText = [[[[AEBlacklistDomainObject alloc] initWithDomain:item] rule] ruleText];
                 if (ruleText) {
                     
                     [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];

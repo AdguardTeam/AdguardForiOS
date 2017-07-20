@@ -244,7 +244,6 @@
                 NSMutableCharacterSet *delimCharSet;
                 
                 delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-                [delimCharSet addCharactersInString:@", "];
                 
                 for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
                     
@@ -293,6 +292,13 @@
         };
         domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
             
+            // copy-paste multiline text from file
+            NSMutableCharacterSet* delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+            if ([text rangeOfCharacterFromSet:delimCharSet].location != NSNotFound) {
+                return YES;
+            }
+            
+            // copy-paste single line address from safari address bar
             if ([text contains:@"/"]) {
                 if (text.length > 1) {
                     
