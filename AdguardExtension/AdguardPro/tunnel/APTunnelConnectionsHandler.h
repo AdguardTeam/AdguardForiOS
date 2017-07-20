@@ -47,7 +47,7 @@
     adguardRemoteDnsAddressesIpv4:(NSArray <NSString *> *)remoteDnsAddressesIpv4
     adguardRemoteDnsAddressesIpv6:(NSArray <NSString *> *)remoteDnsAddressesIpv6
       adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv4
-      adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
+      adguardFakeDnsAddressesIpv6:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
 
 /**
  Sets whitelist filter.
@@ -72,6 +72,11 @@
  Make the initial readPacketsWithCompletionHandler call.
  */
 - (void)startHandlingPackets;
+
+/**
+ Stop packet handling cycle
+ */
+- (void)stopHandlingPackets;
 
 /**
  Removes session for endpont if it exists.

@@ -99,7 +99,7 @@ static NSDateFormatter *_timeFormatter;
         // Set status cell
         if (self.logRecord.isBlacklisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by System-wide Ad Blocking", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Status text shown when a DNS request was blocked by a rule in the 'Simplified Domain Names Filter' or by the blacklist.");
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
         }
         else if (self.logRecord.isWhitelisted){
             
@@ -207,10 +207,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                 else {
                     APSharedResources.whitelistDomains = @[_domainName];
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self enableLocalFilteringIfNeedIt];
-                });
             }
             else if (_domainControllCellType == DomainControllAddToBlacklist) {
                 
@@ -221,10 +217,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                 else {
                     APSharedResources.blacklistDomains = @[_domainName];
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self enableLocalFilteringIfNeedIt];
-                });
             }
             else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
                 
@@ -307,41 +299,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             self.domainControllCell.textLabel.text = labelText;
             [self reloadDataAnimated:YES];
         });
-    }
-}
-
-- (void)enableLocalFilteringIfNeedIt {
-    
-    if (APVPNManager.singleton.localFiltering) {
-        return;
-    }
-    
-    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:NSLocalizedString(@"Blacklist and whitelist only work if you have enabled system-wide ad blocking.", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Alert message when the user attempts to add a domain to the black/white list.")
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details screen. Button text for enabling system-wide filtering after you try to blacklis/whitelist a request.")
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * action) {
-
-                                                        [[APVPNManager singleton] setLocalFiltering:YES];
-                                                    }];
-    
-    [sheet addAction:action];
-    
-    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIDnsRequestDetail)PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details screen. Text on the button that cancels enabling system-wide filtering after you try to blacklist/whitelist a request.")
-                                      style:UIAlertActionStyleCancel
-                                    handler:nil];
-    
-    [sheet addAction:action];
-    
-    [self presentViewController:sheet animated:YES completion:nil];
-    
-    UIPopoverPresentationController *popover = sheet.popoverPresentationController;
-    if (popover) {
-        
-        popover.sourceView = self.domainControllCell;
-        popover.sourceRect = self.domainControllCell.bounds;
     }
 }
 

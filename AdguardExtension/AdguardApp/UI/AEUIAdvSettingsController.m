@@ -114,6 +114,8 @@
     self.hideSectionsWithHiddenRows = YES;
     [self cell:self.splitTunnelCell setHidden:YES];
     [self cell:self.fullTunnelCell setHidden:YES];
+    
+    [self reloadDataAnimated:YES];
 #endif
 }
 
@@ -141,6 +143,8 @@
         self.useSimplifiedCell.accessibilityHint = footer.textLabel.text;
     }
     else if (section == 2) {
+        
+#ifdef PRO
         AEUILinkTableViewHeaderFooterView* footer = (AEUILinkTableViewHeaderFooterView*)view;
         
         UIFont *fontAttribute = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
@@ -155,6 +159,7 @@
         footer.textView.isAccessibilityElement = NO;
         
         self.fullTunnelCell.accessibilityHint = self.splitTunnelCell.accessibilityHint = self.tunnelModeFooterAttributedString.string;
+#endif
     }
 }
 

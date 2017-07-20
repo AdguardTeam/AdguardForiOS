@@ -553,7 +553,6 @@
 		659887671CF83947003ECD1C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655A01E41C6B7686000F00D7 /* README.txt */; };
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A47911E4123B50027D287 /* APUISystemWideController.m */; };
 		659B79261E40E626003B1E70 /* APUIDnsServersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B79251E40E626003B1E70 /* APUIDnsServersController.m */; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
@@ -1144,8 +1143,6 @@
 		659887791CF841F4003ECD1C /* macro-definitions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "macro-definitions.xcconfig"; sourceTree = "<group>"; };
 		6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Config.xcconfig"; sourceTree = "<group>"; };
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
-		659A47901E4123B50027D287 /* APUISystemWideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUISystemWideController.h; sourceTree = "<group>"; };
-		659A47911E4123B50027D287 /* APUISystemWideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUISystemWideController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		659B79241E40E626003B1E70 /* APUIDnsServersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIDnsServersController.h; sourceTree = "<group>"; };
 		659B79251E40E626003B1E70 /* APUIDnsServersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APUIDnsServersController.m; sourceTree = "<group>"; };
 		659E59761BC6D82700FA2384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -1327,6 +1324,15 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
+		D0B7F2571F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F2581F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProLaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		D0B7F25A1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
+		D0B7F25B1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D0B7F25C1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0B7F25D1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
+		D0B7F25E1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1566,8 +1572,6 @@
 				651F5E021E24DFBC00E22157 /* APUIDnsServerDetailController.m */,
 				659B79241E40E626003B1E70 /* APUIDnsServersController.h */,
 				659B79251E40E626003B1E70 /* APUIDnsServersController.m */,
-				659A47901E4123B50027D287 /* APUISystemWideController.h */,
-				659A47911E4123B50027D287 /* APUISystemWideController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2623,6 +2627,7 @@
 				"et-EE",
 				hu,
 				hr,
+				fa,
 			);
 			mainGroup = 65F398081B7B684700ABCD39;
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -3106,7 +3111,6 @@
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
-				659A47921E4123B50027D287 /* APUISystemWideController.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
 				658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				659886581CF74DE9003ECD1C /* AESSupport.m in Sources */,
@@ -3684,6 +3688,7 @@
 				654F5BE11E76C37800B8C1EC /* et-EE */,
 				654F5BE91E76C3E700B8C1EC /* hu */,
 				654F5BF11E76C41200B8C1EC /* hr */,
+				D0B7F25A1F1CE76000D545CD /* fa */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3698,6 +3703,7 @@
 				654F5BE21E76C37800B8C1EC /* et-EE */,
 				654F5BEA1E76C3E700B8C1EC /* hu */,
 				654F5BF21E76C41200B8C1EC /* hr */,
+				D0B7F25B1F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3712,6 +3718,7 @@
 				654F5BDF1E76C37800B8C1EC /* et-EE */,
 				654F5BE71E76C3E600B8C1EC /* hu */,
 				654F5BEF1E76C41200B8C1EC /* hr */,
+				D0B7F2581F1CE76000D545CD /* fa */,
 			);
 			name = ProLaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -3739,6 +3746,7 @@
 				654F5BE31E76C37800B8C1EC /* et-EE */,
 				654F5BEB1E76C3E700B8C1EC /* hu */,
 				654F5BF31E76C41200B8C1EC /* hr */,
+				D0B7F25C1F1CE76000D545CD /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3766,6 +3774,7 @@
 				654F5BE41E76C37900B8C1EC /* et-EE */,
 				654F5BEC1E76C3E700B8C1EC /* hu */,
 				654F5BF41E76C41200B8C1EC /* hr */,
+				D0B7F25E1F1CE76000D545CD /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3793,6 +3802,7 @@
 				65AE3DAA1E8DC1E100A6627B /* et-EE */,
 				65AE3DAB1E8DC1E200A6627B /* hu */,
 				65AE3DAC1E8DC1E300A6627B /* hr */,
+				D0B7F25D1F1CE76000D545CD /* fa */,
 			);
 			name = AdguardPro.Tunnel.strings;
 			sourceTree = "<group>";
@@ -3820,6 +3830,7 @@
 				654F5BE01E76C37800B8C1EC /* et-EE */,
 				654F5BE81E76C3E700B8C1EC /* hu */,
 				654F5BF01E76C41200B8C1EC /* hr */,
+				D0B7F2591F1CE76000D545CD /* fa */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -3847,6 +3858,7 @@
 				654F5BDD1E76C37800B8C1EC /* et-EE */,
 				654F5BE51E76C3E600B8C1EC /* hu */,
 				654F5BED1E76C41100B8C1EC /* hr */,
+				D0B7F2561F1CE76000D545CD /* fa */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3861,6 +3873,7 @@
 				654F5BDE1E76C37800B8C1EC /* et-EE */,
 				654F5BE61E76C3E600B8C1EC /* hu */,
 				654F5BEE1E76C41100B8C1EC /* hr */,
+				D0B7F2571F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

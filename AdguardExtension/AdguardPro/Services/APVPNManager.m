@@ -173,7 +173,6 @@ static APVPNManager *singletonVPNManager;
     }
 }
 
-
 + (NSMutableArray <APDnsServerObject *> *)predefinedDnsServers {
     
     // Create default Adgaurd servers
@@ -189,27 +188,27 @@ static APVPNManager *singletonVPNManager;
     
     [predefinedRemoteDnsServers addObject:server];
     
-    server = [[APDnsServerObject alloc]
-              initWithUUID: @"AGDEF01"
-              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
-              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
-              ipAddresses:@"176.103.130.130, 176.103.130.131"];
-    server.editable = NO;
-    [predefinedRemoteDnsServers addObject:server];
+//    server = [[APDnsServerObject alloc]
+//              initWithUUID: @"AGDEF01"
+//              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
+//              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
+//              ipAddresses:@"176.103.130.130, 176.103.130.131"];
+//    server.editable = NO;
+//    [predefinedRemoteDnsServers addObject:server];
     
-    server = [[APDnsServerObject alloc]
-              initWithUUID: @"AGDEF02"
-              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
-              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
-              ipAddresses:@"176.103.130.132, 176.103.130.134"];
-    server.editable = NO;
-    [predefinedRemoteDnsServers addObject:server];
+//    server = [[APDnsServerObject alloc]
+//              initWithUUID: @"AGDEF02"
+//              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
+//              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
+//              ipAddresses:@"176.103.130.132, 176.103.130.134"];
+//    server.editable = NO;
+//    [predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF03"
               name: NSLocalizedString(@"OpenDNS Home", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses OpenDNS Home.")
               description: NSLocalizedString(@"custom filtering and identity theft protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'OpenDNS Home' mode.")
-              ipAddresses:@"208.67.222.222, 208.67.220.220"];
+              ipAddresses:@"208.67.222.222, 208.67.220.220, 2620:0:ccc::2, 2620:0:ccd::2"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
@@ -224,16 +223,16 @@ static APVPNManager *singletonVPNManager;
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF06"
               name: NSLocalizedString(@"Yandex DNS Safe", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe.")
-              description: NSLocalizedString(@"protection from virus and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
-              ipAddresses:@"77.88.8.88, 77.88.8.2"];
+              description: NSLocalizedString(@"protection from viruses and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
+              ipAddresses:@"77.88.8.88, 77.88.8.2, 2a02:6b8::feed:bad, 2a02:6b8:0:1::feed:bad"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF07"
               name: NSLocalizedString(@"Yandex DNS Family", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family.")
-              description: NSLocalizedString(@"blocks all above and adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
-              ipAddresses:@"77.88.8.7, 77.88.8.3"];
+              description: NSLocalizedString(@"blocks all of the above plus adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
+              ipAddresses:@"77.88.8.7, 77.88.8.3, 2a02:6b8::feed:a11, 2a02:6b8:0:1::feed:a11"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
@@ -645,6 +644,36 @@ static APVPNManager *singletonVPNManager;
 }
 */
 
+- (void) migrateDNSIfNeeded {
+    // migration from version with adguard predefined dns server.
+    // If adguard default dns server used as remote server, we add this server to custom user defined servers
+    
+    NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+    
+    if(remoteDnsServerData) {
+        
+        APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
+        
+        BOOL allreadyAdded = NO;
+        if(remoteServer) {
+            for(APDnsServerObject* server in _remoteDnsServers) {
+                if([server isEqual:remoteServer]) {
+                    
+                    allreadyAdded = YES;
+                    break;
+                }
+            }
+        }
+        
+        if(!allreadyAdded) {
+            remoteServer.editable = YES;
+            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
+            [_customRemoteDnsServers addObject:remoteServer];
+            [self saveCustomRemoteDnsServersToDefaults];
+        }
+    }
+}
+
 - (void)loadConfiguration{
 
     [_busyLock lock];
@@ -673,6 +702,8 @@ static APVPNManager *singletonVPNManager;
                     _manager = nil;
                     _protocolConfiguration = nil;
                 }
+                
+                [self migrateDNSIfNeeded];
             }
         }
 
@@ -790,8 +821,10 @@ static APVPNManager *singletonVPNManager;
         // Getting current settings from configuration.
         //If settings are incorrect, then we assign default values.
         _activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
-        _localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        
+        //_localFiltering = _protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] ?
+        //[_protocolConfiguration.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue] : APVPN_MANAGER_DEFAULT_LOCAL_FILTERING;
+        
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         //-------------
