@@ -545,7 +545,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"To apply the DNS settings, AdGuard establishes a fake VPN connection in order to make the system use custom DNS. Please note, that your outgoing traffic stays the same and not being routed to any remote server.", @"(APUIAdguardDNSController) PRO version. On the dns screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"To be able to apply DNS settings, Adguard establishes a local VPN in order to make the system use custom DNS. Please note that your outgoing traffic stays unaltered and is not routed to any remote server.", @"(APUIAdguardDNSController) PRO version. On the dns screen. It is the description under PRO Status switch.");
 }
 
 - (void)proUpdateStatuses{

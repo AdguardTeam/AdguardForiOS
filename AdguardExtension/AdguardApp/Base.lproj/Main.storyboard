@@ -415,7 +415,7 @@
                             <outlet property="delegate" destination="GoF-p1-h9a" id="wEQ-Xl-Aja"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Filtering Log" id="fov-We-MES">
+                    <navigationItem key="navigationItem" title="DNS Requests Log" id="fov-We-MES">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="5ac-wo-Zed">
                             <connections>
                                 <action selector="clickClear:" destination="GoF-p1-h9a" id="OBt-sy-b8X"/>
@@ -571,36 +571,12 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Fle-Y5-Zj9" detailTextLabel="e2d-6V-pYD" style="IBUITableViewCellStyleValue1" id="MO6-2F-sh0" userLabel="Local Filtering Cell">
-                                        <rect key="frame" x="0.0" y="311" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MO6-2F-sh0" id="Lao-xE-HkP">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="System-wide Ad Blocking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fle-Y5-Zj9">
-                                                    <rect key="frame" x="16" y="12" width="185.5" height="19.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e2d-6V-pYD">
-                                                    <rect key="frame" x="263.5" y="12" width="41.5" height="19.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="RESPONSES" id="nQ7-DM-a3O">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1H3-rz-b7i" customClass="AEUILongLabelViewCell">
-                                        <rect key="frame" x="0.0" y="411" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="367" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1H3-rz-b7i" id="biu-YR-dZW">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -629,7 +605,7 @@
                             <tableViewSection id="fga-LN-zfS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Kvk-Bm-O0j" style="IBUITableViewCellStyleDefault" id="V2q-UF-ZBv">
-                                        <rect key="frame" x="0.0" y="491" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="447" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V2q-UF-ZBv" id="lDt-xm-ys9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -660,7 +636,6 @@
                     <navigationItem key="navigationItem" title="Request Detail" id="UG4-lw-q0k"/>
                     <connections>
                         <outlet property="domainControllCell" destination="V2q-UF-ZBv" id="b3U-u3-8sU"/>
-                        <outlet property="localFilteringCell" destination="MO6-2F-sh0" id="nwg-69-lvW"/>
                         <outlet property="nameCell" destination="f0x-F3-fY8" id="IZe-zK-0jq"/>
                         <outlet property="responsesCell" destination="1H3-rz-b7i" id="m1d-y3-Js3"/>
                         <outlet property="serverCell" destination="kcc-Th-lyE" id="JPf-4f-Ele"/>
@@ -693,7 +668,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="1kz-08-bdL">
-                                <string key="footerTitle">To apply the DNS settings, AdGuard establishes a fake VPN connection in order to make the system use custom DNS. Please note, that your outgoing traffic stays the same and not being routed to any remote server.</string>
+                                <string key="footerTitle">To be able to apply DNS settings, Adguard establishes a local VPN in order to make the system use custom DNS. Please note that your outgoing traffic stays unaltered and is not routed to any remote server.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" tag="3" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="sV1-SB-Gpd" style="IBUITableViewCellStyleDefault" id="pn8-1c-rSh" customClass="APUIProStatusTableViewCell">
                                         <rect key="frame" x="0.0" y="35" width="320" height="44"/>
@@ -789,7 +764,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Enable Filtering Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tWU-pP-c1b">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Enable DNS Requests Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tWU-pP-c1b">
                                                     <rect key="frame" x="16" y="0.0" width="289" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -809,7 +784,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="View Filtering Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icS-tR-srI">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="View DNS Requests Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="icS-tR-srI">
                                                     <rect key="frame" x="16" y="0.0" width="269" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

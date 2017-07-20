@@ -99,7 +99,7 @@ static NSDateFormatter *_timeFormatter;
         // Set status cell
         if (self.logRecord.isBlacklisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by System-wide Ad Blocking", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Status text shown when a DNS request was blocked by a rule in the 'Simplified Domain Names Filter' or by the blacklist.");
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
         }
         else if (self.logRecord.isWhitelisted){
             

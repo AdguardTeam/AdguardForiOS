@@ -196,13 +196,13 @@ static APVPNManager *singletonVPNManager;
 //    server.editable = NO;
 //    [predefinedRemoteDnsServers addObject:server];
     
-    server = [[APDnsServerObject alloc]
-              initWithUUID: @"AGDEF02"
-              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
-              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
-              ipAddresses:@"176.103.130.132, 176.103.130.134"];
-    server.editable = NO;
-    [predefinedRemoteDnsServers addObject:server];
+//    server = [[APDnsServerObject alloc]
+//              initWithUUID: @"AGDEF02"
+//              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
+//              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
+//              ipAddresses:@"176.103.130.132, 176.103.130.134"];
+//    server.editable = NO;
+//    [predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF03"
@@ -223,7 +223,7 @@ static APVPNManager *singletonVPNManager;
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF06"
               name: NSLocalizedString(@"Yandex DNS Safe", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe.")
-              description: NSLocalizedString(@"protection from virus and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
+              description: NSLocalizedString(@"protection from viruses and fraudulent content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Safe' mode.")
               ipAddresses:@"77.88.8.88, 77.88.8.2, 2a02:6b8::feed:bad, 2a02:6b8:0:1::feed:bad"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
@@ -231,7 +231,7 @@ static APVPNManager *singletonVPNManager;
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF07"
               name: NSLocalizedString(@"Yandex DNS Family", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family.")
-              description: NSLocalizedString(@"blocks all above and adult content", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
+              description: NSLocalizedString(@"blocks all of the above plus adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Yandex DNS Family' mode.")
               ipAddresses:@"77.88.8.7, 77.88.8.3, 2a02:6b8::feed:a11, 2a02:6b8:0:1::feed:a11"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
