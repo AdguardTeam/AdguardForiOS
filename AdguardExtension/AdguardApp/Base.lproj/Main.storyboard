@@ -880,7 +880,7 @@
                             <rect key="frame" x="8" y="0.0" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <connections>
-                                <action selector="toggleStatus" destination="5AC-2G-C1N" eventType="valueChanged" id="SJ3-4x-azU"/>
+                                <action selector="toggleStatus:" destination="5AC-2G-C1N" eventType="valueChanged" id="ggn-bY-Pkv"/>
                             </connections>
                         </switch>
                     </subviews>
