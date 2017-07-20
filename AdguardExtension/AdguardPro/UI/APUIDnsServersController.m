@@ -125,13 +125,11 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)proToggleStatus:(id)sender {
+- (IBAction)toggleStatus:(id)sender {
     
-#ifdef PRO
     BOOL enabled = [(UISwitch *)sender isOn];
     [[APVPNManager singleton] setEnabled:enabled];
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
-#endif
 }
 
 - (IBAction)toggleLogStatus:(id)sender {
