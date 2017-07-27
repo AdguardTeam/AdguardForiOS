@@ -46,6 +46,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 
+@property (nonatomic) NSNumber *startStatus;
 
 - (IBAction)toggleAdguard:(id)sender;
 - (IBAction)clickTwitter:(id)sender;

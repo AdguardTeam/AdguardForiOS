@@ -40,6 +40,11 @@ extern NSString *AppDelegateFailuredUpdateNotification;
  */
 extern NSString *AppDelegateUpdatedFiltersKey;
 
+/**
+ Open dns segue identifier
+ */
+extern NSString *OpenDnsSettingsSegue;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate
 /////////////////////////////////////////////////////////////////////

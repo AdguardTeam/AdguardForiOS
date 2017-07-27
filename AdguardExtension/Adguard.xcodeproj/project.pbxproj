@@ -705,6 +705,11 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
+		D096D9461F28C0D70081004D /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D096D9451F28C0D70081004D /* TodayViewController.m */; };
+		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
+		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -848,6 +853,13 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		D096D94B1F28C0D70081004D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D096D93F1F28C0D70081004D;
+			remoteInfo = TodayExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -859,6 +871,7 @@
 			files = (
 				6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */,
 				659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */,
+				D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */,
 				659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -1324,6 +1337,13 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D096D9441F28C0D70081004D /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		D096D9451F28C0D70081004D /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		D096D9481F28C0D70081004D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D096D94A1F28C0D70081004D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D096D9521F28C2BD0081004D /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
 		D0B7F2571F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D0B7F2581F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProLaunchScreen.strings; sourceTree = "<group>"; };
@@ -1452,6 +1472,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93D1F28C0D70081004D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */,
+				D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1992,6 +2021,7 @@
 			isa = PBXGroup;
 			children = (
 				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
+				D096D9411F28C0D70081004D /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2116,6 +2146,7 @@
 				658FECF91E240B8F0013BCE3 /* AdguardProUITests */,
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
 				652F587A1E106DF10012353C /* AdguardLogSender */,
+				D096D9431F28C0D70081004D /* TodayExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
@@ -2137,6 +2168,7 @@
 				652F58791E106DF10012353C /* AdguardLogSender.app */,
 				652F58DE1E1071470012353C /* AdguardLogSenderPro.app */,
 				658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */,
+				D096D9401F28C0D70081004D /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2205,6 +2237,18 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		D096D9431F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D096D9521F28C2BD0081004D /* TodayExtension.entitlements */,
+				D096D9441F28C0D70081004D /* TodayViewController.h */,
+				D096D9451F28C0D70081004D /* TodayViewController.m */,
+				D096D9471F28C0D70081004D /* MainInterface.storyboard */,
+				D096D94A1F28C0D70081004D /* Info.plist */,
+			);
+			path = TodayExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2344,6 +2388,7 @@
 				659887741CF83CE7003ECD1C /* PBXTargetDependency */,
 				659887771CF83CF3003ECD1C /* PBXTargetDependency */,
 				6582373C1D07FE6700B824F4 /* PBXTargetDependency */,
+				D096D94C1F28C0D70081004D /* PBXTargetDependency */,
 			);
 			name = "Adguard Pro";
 			productName = AdguardExtension;
@@ -2487,6 +2532,23 @@
 			productReference = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		D096D93F1F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */;
+			buildPhases = (
+				D096D93C1F28C0D70081004D /* Sources */,
+				D096D93D1F28C0D70081004D /* Frameworks */,
+				D096D93E1F28C0D70081004D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayExtension;
+			productName = TodayExtension;
+			productReference = D096D9401F28C0D70081004D /* TodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2600,6 +2662,15 @@
 							};
 						};
 					};
+					D096D93F1F28C0D70081004D = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = N33TQXN8C7;
+						SystemCapabilities = {
+							com.apple.NetworkExtensions = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */;
@@ -2649,6 +2720,7 @@
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
 				658FECF71E240B8F0013BCE3 /* AdguardProUITests */,
+				D096D93F1F28C0D70081004D /* TodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2783,6 +2855,14 @@
 				655A026B1C6B7686000F00D7 /* README.txt in Resources */,
 				655AACDB1D423B7200E316EA /* Assets.xcassets in Resources */,
 				6517EE751C86F46400E055D2 /* Extension.entitlements in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93E1F28C0D70081004D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3572,6 +3652,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D096D93C1F28C0D70081004D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D096D9461F28C0D70081004D /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3674,6 +3762,11 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
+		};
+		D096D94C1F28C0D70081004D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D096D93F1F28C0D70081004D /* TodayExtension */;
+			targetProxy = D096D94B1F28C0D70081004D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3876,6 +3969,14 @@
 				D0B7F2571F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D096D9471F28C0D70081004D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D096D9481F28C0D70081004D /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -4492,6 +4593,66 @@
 			};
 			name = Release;
 		};
+		D096D94E1F28C0D70081004D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D096D94F1F28C0D70081004D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4635,6 +4796,15 @@
 			buildConfigurations = (
 				65F3986A1B7B6A5300ABCD39 /* Debug */,
 				65F3986B1B7B6A5300ABCD39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D096D94E1F28C0D70081004D /* Debug */,
+				D096D94F1F28C0D70081004D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

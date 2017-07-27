@@ -41,11 +41,23 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServersController
 
+@interface APUIDnsServersController()
+
+@property (nonatomic) NSNumber* startStatus;
+
+@end
+
 @implementation APUIDnsServersController {
     
     id _observer;
     
     NSArray <APDnsServerObject *> *_dnsServers;
+}
+
++ (void)createDnsSercersControllerWithSegue:(UIStoryboardSegue *)segue status:(NSNumber *)status {
+    
+    APUIDnsServersController* dnsController = (APUIDnsServersController*)segue.destinationViewController;
+    dnsController.startStatus = status;
 }
 
 - (void)viewDidLoad {
@@ -91,6 +103,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self updateStatuses];
+        
+        if(self.startStatus) {
+            
+            [self.proStatusSwitch setOn:self.startStatus.boolValue];
+            [self toggleStatus:self.proStatusSwitch];
+        }
     });
     
 }

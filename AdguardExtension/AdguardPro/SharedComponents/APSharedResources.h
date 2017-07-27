@@ -21,6 +21,9 @@
 
 #define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
 
+#define AP_URLSCHEME                        @ADGUARD_URL_SCHEME
+#define AP_URLSCHEME_COMMAND_STATUS_ON      @"status-on"
+#define AP_URLSCHEME_COMMAND_STATUS_OFF     @"status-off"
 
 @class APDnsLogRecord;
 
