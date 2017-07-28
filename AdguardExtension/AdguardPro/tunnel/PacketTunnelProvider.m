@@ -212,11 +212,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
     
     // Check configuration
-    if (_localFiltering == NO && [_currentServer.tag isEqualToString:APDnsServerTagLocal]) {
-        
-        DDLogError(@"(PacketTunnelProvider) Bad configuration. Attempting set localFiltering = NO and to use system DNS settings.");
-    }
-    else if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
+    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
         
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
     }
