@@ -8,8 +8,8 @@
 
 // Global product settings
 AG_PRODUCT = Adguard
-AG_VERSION = 1.2.2
-AG_BUILD = 80
+AG_VERSION = 1.3.0
+AG_BUILD = 81
 
 // URL scheme for receiving commands in Adguard main app from Safari
 ADGUARD_URL_SCHEME = adguard

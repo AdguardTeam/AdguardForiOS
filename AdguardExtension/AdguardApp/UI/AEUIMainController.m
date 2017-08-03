@@ -108,11 +108,10 @@
 #ifdef PRO
     
     // tunning accessibility
-    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    self.proDnsSettingsCell.accessibilityHint = [self proShortStatusDescription];
     //-----------------
     
     [self proAttachToNotifications];
-   
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
@@ -256,15 +255,6 @@
     [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
                           ITUNES_PRO_APP_ID]];
     [[UIApplication sharedApplication] openURL:theURL];
-}
-
-- (IBAction)proToggleStatus:(id)sender {
-    
-#ifdef PRO
-    BOOL enabled = [(UISwitch *)sender isOn];
-    [[APVPNManager singleton] setEnabled:enabled];
-    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
-#endif
 }
 
 - (void)addRuleToUserFilter:(NSString *)ruleText{
@@ -593,7 +583,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"The app establishes a fake VPN connection, which is required in order to use System-wide Ad Blocking or custom DNS settings. Note that your traffic is not routed through any remote server.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"Adguard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware & keeping your DNS traffic safe from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -609,14 +599,8 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    self.proSystemWideCell.detailTextLabel.text = manager.localFiltering
-    ? NSLocalizedString(@"Enabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is enabled.")
-    : NSLocalizedString(@"Disabled", @"(AEUIMainController) PRO version. On the main screen. The status of the System-wide ad blocking feature when it is disabled.");
-    
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
-    self.proStatusSwitch.on = manager.enabled;
-        
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
@@ -662,10 +646,10 @@
     //Show warning if overlimit of rules was reached.
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
         
-        NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
+        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
         NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
 
-        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), rulesCount, totalRulesCount];
+        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
     }
     
     if (warningText) {

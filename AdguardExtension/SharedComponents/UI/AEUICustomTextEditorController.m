@@ -30,6 +30,8 @@
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
+#define FILTER_RULE_SYNTAX_LINK             @"https://kb.adguard.com/general/how-to-create-your-own-ad-filters"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
@@ -140,6 +142,7 @@ static NSDictionary *_editAttrs;
     [super viewDidLoad];
     
     [self setLoadingStatus:_loadingStatusHandler];
+    [self setShowFilterRules:_showFilterRules];
     
     _editting = NO;
 
@@ -172,7 +175,7 @@ static NSDictionary *_editAttrs;
     }
     //---
     
-    [self resetTextWithSizeToFit:YES];
+    [self resetText];
     
     ASSIGN_WEAK(self);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -248,7 +251,7 @@ static NSDictionary *_editAttrs;
 - (void)setTextForEditing:(NSString *)textForEditing {
     
     _textForEditing = textForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
@@ -258,18 +261,23 @@ static NSDictionary *_editAttrs;
 - (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
     
     _attributedTextForEditing = attributedTextForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
 - (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text {
+    
+    _currentSearchString = text;
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
+    _currentSelectionType = selectionType;
+    [self updateSelectionOnTextView];
     
     NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:text] || text.length > len) {
         return NO;
     }
     
-    _currentSearchString = text;
+    
     
     _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
@@ -277,10 +285,23 @@ static NSDictionary *_editAttrs;
         return NO;
     }
     
-    _currentSelectionType = selectionType;
+    
     [self updateSelectionOnTextView];
 
     return YES;
+}
+
+- (void)setShowFilterRules:(BOOL)showFilterRules {
+    _showFilterRules = showFilterRules;
+    
+    if(self.showFilterRules){
+        self.rulesButton.enabled = YES;
+        self.rulesButton.tintColor = nil;
+    }
+    else {
+        self.rulesButton.enabled = NO;
+        self.rulesButton.tintColor = [UIColor clearColor];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -310,9 +331,13 @@ static NSDictionary *_editAttrs;
     
     _textForEditing = nil;
     _attributedTextForEditing = nil;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     //
     [self textViewDidChange:self.editorTextView];
+}
+
+- (IBAction)clickRules:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK]];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -410,7 +435,7 @@ static NSDictionary *_editAttrs;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
-- (void)resetTextWithSizeToFit:(BOOL)sizeToFit {
+- (void)resetText {
     
     if (self.editorTextView == nil) {
         return;
@@ -428,6 +453,8 @@ static NSDictionary *_editAttrs;
         offset = self.editorTextView.contentOffset;
     }
     
+    [self.editorTextView setScrollEnabled:YES];
+    
     if (self.attributedTextForEditing) {
         
         [self.editorTextView setAttributedText:self.attributedTextForEditing];
@@ -444,11 +471,11 @@ static NSDictionary *_editAttrs;
     if (![NSString isNullOrEmpty:checkString]) {
         
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-        if (sizeToFit) {
-            [self.editorTextView sizeToFit];
-        }
+        // https://stackoverflow.com/questions/18696706/large-text-being-cut-off-in-uitextview-that-is-inside-uiscrollview
+        [self.editorTextView setScrollEnabled:NO];
         [self.editorTextView setScrollEnabled:YES];
         //------
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.editorTextView setContentOffset:offset];
