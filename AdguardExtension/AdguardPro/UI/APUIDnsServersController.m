@@ -362,6 +362,12 @@
                 
                 [self selectActiveDnsServer:selectedServer];
                 [self reloadDataAnimated:YES];
+                
+                if(![selectedServer.tag isEqualToString:APDnsServerTagLocal]) {
+                    
+                    [self.proStatusSwitch setOn:YES animated:YES];
+                    [self toggleStatus:self.proStatusSwitch];
+                }
             });
         }
     }
