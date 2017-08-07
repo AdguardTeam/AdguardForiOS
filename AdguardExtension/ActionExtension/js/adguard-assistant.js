@@ -137,9 +137,9 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       value = (UI_BORDER_RADIUS * zoomFactor);
       uiHandler.style.borderRadius = value + 'px';
                         
-      element = document.getElementsByTagName('body')[0],
-      style = window.getComputedStyle(element),
-      marginTop = parseInt(style.marginTop, 10);
+      var element = document.getElementsByTagName('body')[0];
+      var style = window.getComputedStyle(element);
+      var marginTop = parseInt(style.marginTop, 10);
                         
     uiHandler.style.top = (window.pageYOffset + window.innerHeight - marginTop) - (50 * zoomFactor) + 'px';
                         
