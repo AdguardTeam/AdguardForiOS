@@ -31,7 +31,7 @@
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
 
 #define DNS_SERVER_SECTION_INDEX        2
-#define DNS_DESCRIPTION_SECTION_INDEX   1
+#define DNS_SYSTEM_DEFAULT_SECTION_INDEX   1
 #define STATUS_SECTION_INDEX                0
 
 #define SEGUE_BLACKLIST                     @"blacklist"
@@ -351,7 +351,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(indexPath.section == DNS_SERVER_SECTION_INDEX) {
+    if(indexPath.section == DNS_SERVER_SECTION_INDEX || indexPath.section == DNS_SYSTEM_DEFAULT_SECTION_INDEX) {
+        
         APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
         
         if (selectedServer) {
@@ -386,7 +387,7 @@
     footer.textLabel.isAccessibilityElement = NO;
     footer.detailTextLabel.isAccessibilityElement = NO;
     
-    if (section == DNS_DESCRIPTION_SECTION_INDEX) {
+    if (section == DNS_SYSTEM_DEFAULT_SECTION_INDEX) {
         self.systemDefaultCell.accessibilityHint = footer.textLabel.text;
     }
 }
