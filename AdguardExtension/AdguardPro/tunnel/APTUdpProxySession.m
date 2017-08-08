@@ -428,7 +428,11 @@ _workingQueue = nil;
 
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
         locLogError(@"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
-        [self internalClose];
+        
+        _closed = YES;
+        [self saveLogRecord:YES];
+        [self.delegate removeSession:self];
+        
     } else if (session.state == NWUDPSessionStateCancelled
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
