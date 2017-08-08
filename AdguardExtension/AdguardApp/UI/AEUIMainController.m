@@ -599,7 +599,10 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    if(manager.enabled)
+        self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    else
+        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"Off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
     
     if (manager.lastError) {
         [ACSSystemUtils
