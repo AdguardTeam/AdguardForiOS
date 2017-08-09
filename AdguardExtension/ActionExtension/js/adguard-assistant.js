@@ -136,8 +136,13 @@ var AdguardAssistant = (function (api, $, elemSelector, ruleConstructor) {
       uiHandler.style.borderWidth = value + 'px';
       value = (UI_BORDER_RADIUS * zoomFactor);
       uiHandler.style.borderRadius = value + 'px';
-
-    uiHandler.style.top = (window.pageYOffset + window.innerHeight) - (50 * zoomFactor) + 'px';
+                        
+      var element = document.getElementsByTagName('body')[0];
+      var style = window.getComputedStyle(element);
+      var marginTop = parseInt(style.marginTop, 10);
+                        
+    uiHandler.style.top = (window.pageYOffset + window.innerHeight - marginTop) - (50 * zoomFactor) + 'px';
+                        
     uiHandler.style.left = (window.pageXOffset + (window.innerWidth/2)) + 'px';
 
       if (!previewState) {
