@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="widget-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Cs1-bA-dov">
+                                <rect key="frame" x="20.5" y="20" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="OKb-p9-cjX"/>
+                                    <constraint firstAttribute="height" constant="60" id="nCa-Wc-hsg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-UP-HFY">
+                                <rect key="frame" x="95.5" y="20" width="209.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOV-3c-Ejo">
+                                <rect key="frame" x="96" y="49" width="209" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upz-0V-1O6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <connections>
+                                    <action selector="touchWidgetAction:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="9BB-6r-xJL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" id="1Bc-Ix-Xdp"/>
+                            <constraint firstItem="C4x-UP-HFY" firstAttribute="top" secondItem="Cs1-bA-dov" secondAttribute="top" id="8RC-7J-QIU"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="height" secondItem="S3S-Oj-5AN" secondAttribute="height" id="Awq-ri-dK6"/>
+                            <constraint firstItem="Cs1-bA-dov" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="20.5" id="EAr-mJ-RGz"/>
+                            <constraint firstItem="C4x-UP-HFY" firstAttribute="leading" secondItem="Cs1-bA-dov" secondAttribute="trailing" constant="15" id="Pev-5a-bDe"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="PhM-9z-Ghm"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="top" secondItem="C4x-UP-HFY" secondAttribute="bottom" constant="8" id="Q0z-LT-Mjd"/>
+                            <constraint firstItem="Cs1-bA-dov" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="Zw1-to-UJC"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="leading" secondItem="C4x-UP-HFY" secondAttribute="leading" id="cCc-Oe-dU8"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="trailing" secondItem="C4x-UP-HFY" secondAttribute="trailing" id="n4l-QY-eQG"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="C4x-UP-HFY" secondAttribute="trailing" constant="15" id="rca-ya-Wni"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" id="x8J-km-mV7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="100"/>
+                    <connections>
+                        <outlet property="detailTextLabel" destination="aOV-3c-Ejo" id="Pzq-LB-f2a"/>
+                        <outlet property="mainTextLabel" destination="C4x-UP-HFY" id="7l4-FG-JGl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.59999999999999" y="112.44377811094454"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="widget-logo" width="70" height="73"/>
+    </resources>
+</document>
