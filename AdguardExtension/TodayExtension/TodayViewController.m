@@ -22,17 +22,20 @@
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
 #import <NetworkExtension/NetworkExtension.h>
-#import "APSharedResources.h"
+#import "APCommonSharedResources.h"
+#import "APDnsServerObject.h"
+#import "ACLang.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - TodayViewController
 
 @interface TodayViewController () <NCWidgetProviding> {
     
-    NSMutableArray *_observers;
+    BOOL _enabled;
 }
 
-@property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *mainTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailTextLabel;
 
 @end
 
@@ -41,22 +44,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-//    _observers = [NSMutableArray new];
-//
-//    NSObject* observer = [[NSNotificationCenter defaultCenter] addObserverForName:NEVPNConfigurationChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//
-//        [self checkStatus];
-//    }];
-//
-//    [_observers addObject:observer];
-//
-//    observer = [[NSNotificationCenter defaultCenter] addObserverForName:NEVPNStatusDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//
-//        [self checkStatus];
-//    }];
-//
-//    [_observers addObject:observer];
 }
 
 - (void)viewDidUnload {
@@ -83,15 +70,15 @@
 
 #pragma mark - actions
 
-- (IBAction)toogleStatusSwitch:(id)sender {
+- (IBAction)touchWidgetAction:(id)sender {
     
     NSString* url = [NSString stringWithFormat:@"%@://%@", AP_URLSCHEME,
-                     self.statusSwitch.isOn ? AP_URLSCHEME_COMMAND_STATUS_ON :                                                             AP_URLSCHEME_COMMAND_STATUS_OFF];
+                     _enabled ? AP_URLSCHEME_COMMAND_STATUS_OFF :                                                             AP_URLSCHEME_COMMAND_STATUS_ON];
     [self.extensionContext openURL:[NSURL URLWithString:url] completionHandler:^(BOOL success) {
         
     }];
-}
 
+}
 
 #pragma mark - private methods
 
@@ -101,20 +88,37 @@
         
         NETunnelProviderManager* manager = managers.firstObject;
         
-        BOOL enabled = manager.enabled;
+        _enabled = manager.enabled;
+        
+        ASSIGN_WEAK(self);
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.statusSwitch setOn:enabled];
+            
+            ASSIGN_STRONG(self);
+            
+            if(USE_STRONG(self)->_enabled) {
+                NETunnelProviderProtocol * protocolConfiguration = (NETunnelProviderProtocol *)manager.protocolConfiguration;
+                
+                NSData *remoteDnsServerData = protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+                
+                APDnsServerObject *activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
+             
+                NSString* format = NSLocalizedString(@"Connected to \"%@\"", @"Today widget - text when remote DNS is enabled");
+                USE_STRONG(self).mainTextLabel.text = [NSString stringWithFormat:format, activeRemoteDnsServer.serverName];
+                
+                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to disable DNS filtering", @"Today widget - hint text");
+            }
+            else {
+        
+                USE_STRONG(self).mainTextLabel.text = NSLocalizedString(@"DNS filtering is disabled", @"Today widget - text when remote DNS is disabled");
+                
+                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to enable DNS filtering", @"Today widget - hint text");
+            }
+            
+            [USE_STRONG(self).mainTextLabel sizeToFit];
         });
     }];
     
-}
-
-- (void)dealloc {
-    
-    for (id observer in _observers) {
-        [[NSNotificationCenter defaultCenter] removeObserver:observer];
-    }
 }
 
 @end

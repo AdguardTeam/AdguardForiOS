@@ -36,12 +36,6 @@
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
-
-NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
-NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
-NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
-NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 

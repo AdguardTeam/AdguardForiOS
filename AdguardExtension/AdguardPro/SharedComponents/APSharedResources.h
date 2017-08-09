@@ -16,28 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-#import "AESharedResources.h"
-
-
-#define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
-
-#define AP_URLSCHEME                        @ADGUARD_URL_SCHEME
-#define AP_URLSCHEME_COMMAND_STATUS_ON      @"status-on"
-#define AP_URLSCHEME_COMMAND_STATUS_OFF     @"status-off"
+#import "APCommonSharedResources.h"
 
 @class APDnsLogRecord;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APSharedResources Constants
-
-/**
- User Defaults key that define, create log of the DNS requests or not.
- */
-extern NSString *APDefaultsDnsLoggingEnabled;
-/**
- User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
- */
-extern NSString *APDefaultsCustomRemoteDnsServers;
 
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     

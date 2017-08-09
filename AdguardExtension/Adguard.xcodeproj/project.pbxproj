@@ -705,6 +705,22 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
 		D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
 		D096D9461F28C0D70081004D /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D096D9451F28C0D70081004D /* TodayViewController.m */; };
 		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
@@ -1337,6 +1353,8 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
+		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
 		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D096D9441F28C0D70081004D /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -1810,6 +1828,8 @@
 				651F5E051E25004600E22157 /* APDnsServerObject.m */,
 				65EBB4AB1E79DB6400CB08E3 /* APWhitelistDomainObject.h */,
 				65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */,
+				D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */,
+				D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -2992,6 +3012,7 @@
 				652F58931E106FD40012353C /* ACLJobController.m in Sources */,
 				652F58941E106FD40012353C /* ACLLogger.m in Sources */,
 				652F58951E106FD40012353C /* ACLWildcard.m in Sources */,
+				D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58961E106FD40012353C /* CLIColor.m in Sources */,
 				652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */,
 				652F58981E106FD40012353C /* DDASLLogger.m in Sources */,
@@ -3081,6 +3102,7 @@
 				652F58C61E1071470012353C /* ACObject.m in Sources */,
 				652F58C71E1071470012353C /* ACNHttpUtils.m in Sources */,
 				652F58C81E1071470012353C /* ACNNetworking.m in Sources */,
+				D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58C91E1071470012353C /* ACSSystemUtils.m in Sources */,
 				652F58CA1E1071470012353C /* ADLocales.m in Sources */,
 				652F58CB1E1071470012353C /* ADLocations.m in Sources */,
@@ -3162,6 +3184,7 @@
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
 				D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
+				D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
 				6581C92E1D6494E600E739CC /* ABECFilterParsers.m in Sources */,
@@ -3208,6 +3231,7 @@
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
+				D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
@@ -3315,6 +3339,7 @@
 				659887031CF83580003ECD1C /* ACLFileLogger.m in Sources */,
 				659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */,
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
+				D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
 				6574ADE31EA511A10054DC7E /* NSData+GZIP.m in Sources */,
 				65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
@@ -3389,6 +3414,7 @@
 				659887581CF83947003ECD1C /* ACIOStream.m in Sources */,
 				659887591CF83947003ECD1C /* NSURL+Utils.m in Sources */,
 				658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6598875A1CF83947003ECD1C /* ADLocations.m in Sources */,
 				6598875B1CF83947003ECD1C /* NSDate+Utils.m in Sources */,
 				6598875C1CF83947003ECD1C /* ACLLogger.m in Sources */,
@@ -3476,6 +3502,7 @@
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				655A025D1C6B7686000F00D7 /* DDLog.m in Sources */,
+				D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655A02931C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3544,6 +3571,7 @@
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
@@ -3638,6 +3666,7 @@
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CC71BB9841400F53F3B /* ADLocations.m in Sources */,
 				655A02771C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				655A023E1C6B7686000F00D7 /* ACLLogger.m in Sources */,
@@ -3656,7 +3685,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */,
+				D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */,
+				D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */,
+				D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
+				D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */,
+				D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */,
 				D096D9461F28C0D70081004D /* TodayViewController.m in Sources */,
+				D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
