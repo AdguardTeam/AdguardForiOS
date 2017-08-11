@@ -177,11 +177,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         [sSelf reloadWhitelistBlacklistDomain];
         
-        @synchronized (sSelf->_connectionHandler) {
-            if (sSelf->_connectionHandler) {
-                [sSelf->_connectionHandler startHandlingPackets];
-                DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
-            }
+        if (sSelf->_connectionHandler) {
+            [sSelf->_connectionHandler startHandlingPackets];
+            DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
         }
         
         if(sSelf->pendingStartCompletion) {
@@ -272,8 +270,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 {
     DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
     
-    @synchronized (_connectionHandler) {
-        
         switch ([APSharedResources host2tunnelMessageType:messageData]) {
             case APHTMLoggingEnabled:
                 //Log enabled
@@ -298,7 +294,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             default:
                 break;
         }
-    }
 }
 
 - (void)sleepWithCompletionHandler:(void (^)(void))completionHandler
