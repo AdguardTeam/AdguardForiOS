@@ -122,7 +122,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
     
-    NetworkStatus _startNetworkStatus;
+    NetworkStatus _lastReachabilityStatus;
 }
 
 + (void)initialize{
@@ -165,89 +165,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     pendingStartCompletion = completionHandler;
     
     [_reachabilityHandler startNotifier];
-    _startNetworkStatus = [_reachabilityHandler currentReachabilityStatus];
+    _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
     
-    // Getting DNS
-    NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
-    
-    _currentServer = nil;
-    NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
-    if (currentServerData) {
-
-        _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
-    }
-    
-    //protection for bad or old configuration
-    if (_currentServer == nil) {
-
-        @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
-            _localFiltering = NO;
-            _isRemoteServer = YES;
-        }
-    }
-    else {
-        
-        _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
-        
-        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
-        
-        // in ipv6-only networks we can not use remote dns server
-        if(_isRemoteServer && ![ACNIPUtils isIpv4Available]) {
-            
-            DDLogInfo(@"(PacketTunnelProvider) ipv4 not available. Set _isRemoteServer = NO");
-            _isRemoteServer = NO;
-        }
-    }
-    
-    
-    DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
-              (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
-    
-    [self reloadWhitelistBlacklistDomain];
-
-    //create empty tunnel settings
-    NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
-    
-    DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
-    
-    // Check configuration
-    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
-        
-        DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
-    }
-    else {
-        APVpnManagerTunnelMode mode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
-        
-        NSString* modeName = @"";
-        if(mode == APVpnManagerTunnelModeFull) {
-            _fullTunnel = YES;
-            modeName = @"full";
-        }
-        else if (mode == APVpnManagerTunnelModeSplit){
-            _fullTunnel = NO;
-            modeName = @"split";
-        }
-       
-        [self logNetworkInterfaces];
-        DDLogInfo(@"PacketTunnelProvider) Start Tunnel user mode: %@, fullTunnel: %@", modeName, _fullTunnel ? @"YES" : @"NO");
-        
-        settings = [self createTunnelSettings:_fullTunnel];
-        DDLogInfo(@"(PacketTunnelProvider) Tunnel settings filled.");
-    }
-    
-    
-    // SETs network settings
     __typeof__(self) __weak wSelf = self;
-    [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
+    
+    [self updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error) {
         
         __typeof__(self) sSelf = wSelf;
-        
-        if(error)
-            DDLogInfo(@"(PacketTunnelProvider) setTunnelNetworkSettings error : %@", error.localizedDescription);
-        
-        if(sSelf == nil)
+        if(!sSelf)
             return;
+        
+        [sSelf reloadWhitelistBlacklistDomain];
         
         @synchronized (sSelf->_connectionHandler) {
             if (sSelf->_connectionHandler) {
@@ -261,8 +189,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             sSelf->pendingStartCompletion(error);
             sSelf->pendingStartCompletion = nil;
         }
-        
-        [sSelf logNetworkInterfaces];
     }];
 }
 
@@ -364,7 +290,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             case APHTMLSystemWideDomainListReload:
                 
                 DDLogInfo(@"(PacketTunnelProvider) Domains lists changed. Reconnecting..");
-                [self stopVPN];
+            
+                [self updateTunnelSettingsWithCompletionHandler:nil];
 
                 break;
                 
@@ -458,18 +385,98 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
-
-- (void)stopVPN {
+    
+- (void) updateTunnelSettingsWithCompletionHandler:(nullable void (^)( NSError * __nullable error))completionHandler {
+    
+    DDLogInfo(@"(PacketTunnelProvider) update Tunnel Settings");
+    // Getting DNS
+    NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
+    
+    _currentServer = nil;
+    NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+    if (currentServerData) {
+        
+        _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
+    }
+    
+    //protection for bad or old configuration
+    if (_currentServer == nil) {
+        
+        @autoreleasepool {
+            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
+            _localFiltering = NO;
+            _isRemoteServer = YES;
+        }
+    }
+    else {
+        
+        _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
+        
+        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
+        
+        // in ipv6-only networks we can not use remote dns server
+        if(_isRemoteServer && ![ACNIPUtils isIpv4Available]) {
+            
+            DDLogInfo(@"(PacketTunnelProvider) ipv4 not available. Set _isRemoteServer = NO");
+            _isRemoteServer = NO;
+        }
+    }
     
     
-    DDLogInfo(@"(PacketTunnelProvider) Stop VPN.");
+    DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
+              (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
     
-    [self logNetworkInterfaces];
-
-    [_reachabilityHandler stopNotifier];
+    //create empty tunnel settings
+    NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
-    [_connectionHandler closeAllConnections:^{
-        [self cancelTunnelWithError:nil];
+    DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
+    
+    // Check configuration
+    if (! (_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
+        
+        DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
+    }
+    else {
+        APVpnManagerTunnelMode mode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
+        
+        NSString* modeName = @"";
+        if(mode == APVpnManagerTunnelModeFull) {
+            _fullTunnel = YES;
+            modeName = @"full";
+        }
+        else if (mode == APVpnManagerTunnelModeSplit){
+            _fullTunnel = NO;
+            modeName = @"split";
+        }
+        
+        [self logNetworkInterfaces];
+        DDLogInfo(@"PacketTunnelProvider) Start Tunnel user mode: %@, fullTunnel: %@", modeName, _fullTunnel ? @"YES" : @"NO");
+        
+        settings = [self createTunnelSettings:_fullTunnel];
+        DDLogInfo(@"(PacketTunnelProvider) Tunnel settings filled.");
+    }
+    
+    
+    // SETs network settings
+    __typeof__(self) __weak wSelf = self;
+    [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
+        
+        __typeof__(self) sSelf = wSelf;
+        
+        if(error)
+            DDLogInfo(@"(PacketTunnelProvider) setTunnelNetworkSettings error : %@", error.localizedDescription);
+        
+        if(sSelf == nil)
+            return;
+        
+        if(completionHandler) {
+            
+            DDLogInfo(@"(PacketTunnelProvider) update Tunnel Settings ");
+            
+            completionHandler(error);
+        }
+        
+        [sSelf logNetworkInterfaces];
     }];
 }
 
@@ -478,12 +485,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
-    if(_startNetworkStatus == [_reachabilityHandler currentReachabilityStatus]) {
+    if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
         DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
         return;
     }
-        
-    [self stopVPN];
+    
+    _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
+    
+    [self updateTunnelSettingsWithCompletionHandler:nil];
 }
 
 - (void)reloadWhitelistBlacklistDomain {
