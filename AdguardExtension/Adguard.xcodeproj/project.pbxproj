@@ -705,6 +705,28 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
+		D096D9461F28C0D70081004D /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D096D9451F28C0D70081004D /* TodayViewController.m */; };
+		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
+		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
+		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -848,6 +870,13 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		D096D94B1F28C0D70081004D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D096D93F1F28C0D70081004D;
+			remoteInfo = TodayExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -859,6 +888,7 @@
 			files = (
 				6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */,
 				659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */,
+				D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */,
 				659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -1324,6 +1354,15 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
+		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
+		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D096D9441F28C0D70081004D /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		D096D9451F28C0D70081004D /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		D096D9481F28C0D70081004D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D096D94A1F28C0D70081004D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D096D9521F28C2BD0081004D /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
 		D0B7F2571F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D0B7F2581F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProLaunchScreen.strings; sourceTree = "<group>"; };
@@ -1452,6 +1491,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93D1F28C0D70081004D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */,
+				D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1781,6 +1829,8 @@
 				651F5E051E25004600E22157 /* APDnsServerObject.m */,
 				65EBB4AB1E79DB6400CB08E3 /* APWhitelistDomainObject.h */,
 				65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */,
+				D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */,
+				D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -1992,6 +2042,7 @@
 			isa = PBXGroup;
 			children = (
 				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
+				D096D9411F28C0D70081004D /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2116,6 +2167,7 @@
 				658FECF91E240B8F0013BCE3 /* AdguardProUITests */,
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
 				652F587A1E106DF10012353C /* AdguardLogSender */,
+				D096D9431F28C0D70081004D /* TodayExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
@@ -2137,6 +2189,7 @@
 				652F58791E106DF10012353C /* AdguardLogSender.app */,
 				652F58DE1E1071470012353C /* AdguardLogSenderPro.app */,
 				658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */,
+				D096D9401F28C0D70081004D /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2205,6 +2258,18 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		D096D9431F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D096D9521F28C2BD0081004D /* TodayExtension.entitlements */,
+				D096D9441F28C0D70081004D /* TodayViewController.h */,
+				D096D9451F28C0D70081004D /* TodayViewController.m */,
+				D096D9471F28C0D70081004D /* MainInterface.storyboard */,
+				D096D94A1F28C0D70081004D /* Info.plist */,
+			);
+			path = TodayExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2344,6 +2409,7 @@
 				659887741CF83CE7003ECD1C /* PBXTargetDependency */,
 				659887771CF83CF3003ECD1C /* PBXTargetDependency */,
 				6582373C1D07FE6700B824F4 /* PBXTargetDependency */,
+				D096D94C1F28C0D70081004D /* PBXTargetDependency */,
 			);
 			name = "Adguard Pro";
 			productName = AdguardExtension;
@@ -2487,6 +2553,23 @@
 			productReference = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		D096D93F1F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */;
+			buildPhases = (
+				D096D93C1F28C0D70081004D /* Sources */,
+				D096D93D1F28C0D70081004D /* Frameworks */,
+				D096D93E1F28C0D70081004D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayExtension;
+			productName = TodayExtension;
+			productReference = D096D9401F28C0D70081004D /* TodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2600,6 +2683,15 @@
 							};
 						};
 					};
+					D096D93F1F28C0D70081004D = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = N33TQXN8C7;
+						SystemCapabilities = {
+							com.apple.NetworkExtensions = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */;
@@ -2649,6 +2741,7 @@
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
 				658FECF71E240B8F0013BCE3 /* AdguardProUITests */,
+				D096D93F1F28C0D70081004D /* TodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2786,6 +2879,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D096D93E1F28C0D70081004D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */,
+				D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2912,6 +3014,7 @@
 				652F58931E106FD40012353C /* ACLJobController.m in Sources */,
 				652F58941E106FD40012353C /* ACLLogger.m in Sources */,
 				652F58951E106FD40012353C /* ACLWildcard.m in Sources */,
+				D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58961E106FD40012353C /* CLIColor.m in Sources */,
 				652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */,
 				652F58981E106FD40012353C /* DDASLLogger.m in Sources */,
@@ -3001,6 +3104,7 @@
 				652F58C61E1071470012353C /* ACObject.m in Sources */,
 				652F58C71E1071470012353C /* ACNHttpUtils.m in Sources */,
 				652F58C81E1071470012353C /* ACNNetworking.m in Sources */,
+				D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58C91E1071470012353C /* ACSSystemUtils.m in Sources */,
 				652F58CA1E1071470012353C /* ADLocales.m in Sources */,
 				652F58CB1E1071470012353C /* ADLocations.m in Sources */,
@@ -3082,6 +3186,7 @@
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
 				D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
+				D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
 				6581C92E1D6494E600E739CC /* ABECFilterParsers.m in Sources */,
@@ -3128,6 +3233,7 @@
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
+				D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
@@ -3235,6 +3341,7 @@
 				659887031CF83580003ECD1C /* ACLFileLogger.m in Sources */,
 				659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */,
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
+				D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
 				6574ADE31EA511A10054DC7E /* NSData+GZIP.m in Sources */,
 				65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
@@ -3309,6 +3416,7 @@
 				659887581CF83947003ECD1C /* ACIOStream.m in Sources */,
 				659887591CF83947003ECD1C /* NSURL+Utils.m in Sources */,
 				658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6598875A1CF83947003ECD1C /* ADLocations.m in Sources */,
 				6598875B1CF83947003ECD1C /* NSDate+Utils.m in Sources */,
 				6598875C1CF83947003ECD1C /* ACLLogger.m in Sources */,
@@ -3396,6 +3504,7 @@
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				655A025D1C6B7686000F00D7 /* DDLog.m in Sources */,
+				D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655A02931C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3464,6 +3573,7 @@
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
@@ -3558,6 +3668,7 @@
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CC71BB9841400F53F3B /* ADLocations.m in Sources */,
 				655A02771C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				655A023E1C6B7686000F00D7 /* ACLLogger.m in Sources */,
@@ -3569,6 +3680,21 @@
 				655A02A41C6B7686000F00D7 /* Reachability.m in Sources */,
 				651F5E0D1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02501C6B7686000F00D7 /* CLIColor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93C1F28C0D70081004D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */,
+				D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */,
+				D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */,
+				D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
+				D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */,
+				D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */,
+				D096D9461F28C0D70081004D /* TodayViewController.m in Sources */,
+				D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3674,6 +3800,11 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
+		};
+		D096D94C1F28C0D70081004D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D096D93F1F28C0D70081004D /* TodayExtension */;
+			targetProxy = D096D94B1F28C0D70081004D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3876,6 +4007,14 @@
 				D0B7F2571F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D096D9471F28C0D70081004D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D096D9481F28C0D70081004D /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -4492,6 +4631,66 @@
 			};
 			name = Release;
 		};
+		D096D94E1F28C0D70081004D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D096D94F1F28C0D70081004D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4635,6 +4834,15 @@
 			buildConfigurations = (
 				65F3986A1B7B6A5300ABCD39 /* Debug */,
 				65F3986B1B7B6A5300ABCD39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D096D94E1F28C0D70081004D /* Debug */,
+				D096D94F1F28C0D70081004D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

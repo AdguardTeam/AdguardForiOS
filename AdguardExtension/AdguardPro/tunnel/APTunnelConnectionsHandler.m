@@ -62,6 +62,8 @@
     dispatch_queue_t _readQueue;
     dispatch_block_t _closeCompletion;
     
+    dispatch_queue_t _sessionsQueue;
+    
     BOOL _stopHandling;
 }
 
@@ -85,6 +87,7 @@
         _closeCompletion = nil;
         
         _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
+        _sessionsQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.sessions", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -207,21 +210,30 @@
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
+    
+    ASSIGN_WEAK(self);
 
-    dispatch_block_t closeCompletion = nil;
-    @synchronized(self) {
-
+    dispatch_async(_sessionsQueue, ^{
+        
+        ASSIGN_STRONG(self);
+        
+        if(!USE_STRONG(self))
+            return;
+        
+        dispatch_block_t closeCompletion = nil;
+        
         [_sessions removeObject:session];
         
-        if (_closeCompletion && _sessions.count == 0) {
-            closeCompletion = _closeCompletion;
-            _closeCompletion = nil;
+        if (USE_STRONG(self)->_closeCompletion && USE_STRONG(self)->_sessions.count == 0) {
+            closeCompletion = USE_STRONG(self)->_closeCompletion;
+            USE_STRONG(self)->_closeCompletion = nil;
         }
-    }
-    if (closeCompletion) {
-        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
-        [ACSSystemUtils callOnMainQueue:closeCompletion];
-    }
+        
+        if (closeCompletion) {
+            DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
+            [ACSSystemUtils callOnMainQueue:closeCompletion];
+        }
+    });
 }
 
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
@@ -317,12 +329,19 @@
 
 - (void)closeAllConnections:(void (^)(void))completion {
     
-    @synchronized (self) {
+    ASSIGN_WEAK(self);
+    
+    dispatch_async(_sessionsQueue, ^{
         
-        [self stopHandlingPackets];
+        ASSIGN_STRONG(self);
         
-        NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
-        if(_sessions.count == 0) {
+        if(!USE_STRONG(self))
+            return;
+        
+        [USE_STRONG(self) stopHandlingPackets];
+        
+        NSArray <APTUdpProxySession *> *sessions = [USE_STRONG(self)->_sessions allObjects];
+        if(USE_STRONG(self)->_sessions.count == 0) {
             
             if (completion) {
                 DDLogInfo(@"(APTunnelConnectionsHandler) no open sessions. closeAllConnections completion will be run.");
@@ -331,7 +350,7 @@
         }
         else {
             
-            _closeCompletion = completion;
+            USE_STRONG(self)->_closeCompletion = completion;
             
             for (APTUdpProxySession *item in sessions) {
                 
@@ -339,7 +358,7 @@
             }
         }
         DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections method completed.");
-    }
+    });
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark KVO
@@ -495,27 +514,34 @@
 
 - (void)performSend:(NSDictionary<APTUdpProxySession *, NSArray *> *)packetsBySessions {
 
-    @synchronized(self) {
-
+    ASSIGN_WEAK(self);
+    
+    dispatch_sync(_sessionsQueue, ^{
+        
+        ASSIGN_STRONG(self);
+        
+        if(!USE_STRONG(self))
+            return;
+        
         DDLogTrace();
         [packetsBySessions enumerateKeysAndObjectsUsingBlock:^(APTUdpProxySession *_Nonnull key, NSArray *_Nonnull obj, BOOL *_Nonnull stop) {
-
-          APTUdpProxySession *session = [_sessions member:key];
-          if (!session) {
-              //create session
-              session = key;
-              if ([session createSession]) {
-                  
-                  [session setLoggingEnabled:_loggingEnabled];
-                  [_sessions addObject:session];
-              }
-              else
-                  session = nil;
-          }
-
-          [session appendPackets:obj];
+            
+            APTUdpProxySession *session = [USE_STRONG(self)->_sessions member:key];
+            if (!session) {
+                //create session
+                session = key;
+                if ([session createSession]) {
+                    
+                    [session setLoggingEnabled:USE_STRONG(self)->_loggingEnabled];
+                    [USE_STRONG(self)->_sessions addObject:session];
+                }
+                else
+                    session = nil;
+            }
+            
+            [session appendPackets:obj];
         }];
-    }
+    });
 }
 
 - (BOOL)checkDomain:(__unsafe_unretained NSString *)domainName withList:(__unsafe_unretained NSArray <NSString *> *)domainList {

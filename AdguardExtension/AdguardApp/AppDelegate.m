@@ -33,6 +33,7 @@
 
 #ifdef PRO
 #import "APSProductSchemaManager.h"
+#import "APSharedResources.h"
 #else
 #import "AESProductSchemaManager.h"
 #endif
@@ -44,6 +45,8 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
+
+NSString *OpenDnsSettingsSegue = @"dns_settings";
 
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
@@ -369,6 +372,38 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         return YES;
     }
+#ifdef PRO
+    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
+        
+        NSString *command = url.host;
+        
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        AEUIMainController *main = nav.viewControllers.firstObject;
+        
+        if(!main){
+            return NO;
+        }
+        
+        [nav popToRootViewControllerAnimated:NO];
+        
+        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
+            
+            main.startStatus = @(YES);
+            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+        }
+        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
+            
+            main.startStatus = @(NO);
+            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+        }
+        else {
+            return NO;
+        }
+        
+        return YES;
+    }
+#endif
+
     return NO;
 }
 
