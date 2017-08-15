@@ -380,8 +380,20 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
-    
+
 - (void) updateTunnelSettingsWithCompletionHandler:(nullable void (^)( NSError * __nullable error))completionHandler {
+    
+    // we need to reset network settings to remove our dns servers and read system default dns servers
+    ASSIGN_WEAK(self);
+    [self setTunnelNetworkSettings:nil completionHandler:^(NSError * _Nullable error) {
+        
+        ASSIGN_STRONG(self);
+        
+        [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+    }];
+}
+
+- (void) updateTunnelSettingsInternalWithCompletionHandler:(nullable void (^)( NSError * __nullable error))completionHandler {
     
     DDLogInfo(@"(PacketTunnelProvider) update Tunnel Settings");
     // Getting DNS
@@ -482,6 +494,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
         DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
+        return;
+    }
+    
+    if(!_reachabilityHandler.isReachable) {
+        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Skip reachability notify");
         return;
     }
     
