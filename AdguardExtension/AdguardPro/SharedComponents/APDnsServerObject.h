@@ -59,11 +59,11 @@ extern NSString * _Nonnull APDnsServerTagLocal;
 /**
  Array, which contains ipV4 addresses in form of strings.
  */
-@property (nonnull) NSArray <APDnsServerAddress *> *ipv4Addresses;
+@property (nonnull, nonatomic) NSArray <APDnsServerAddress *> *ipv4Addresses;
 /**
  Array, which contains ipV6 addresses in form of strings.
  */
-@property (nonnull) NSArray <APDnsServerAddress *> *ipv6Addresses;
+@property (nonnull, nonatomic) NSArray <APDnsServerAddress *> *ipv6Addresses;
 
 /**
  Field, which may contain special labels about server, for example APDnsServerTagLocal.

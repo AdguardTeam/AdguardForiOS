@@ -185,6 +185,14 @@ static NSMutableCharacterSet *delimCharSet;
     return result;
 }
 
+- (void)setIpv4Addresses:(NSArray<APDnsServerAddress *> *)ipv4Addresses {
+    _ipv4Addresses = [self migrateIpsIfNeeded:ipv4Addresses];
+}
+
+- (void)setIpv6Addresses:(NSArray<APDnsServerAddress *> *)ipv6Addresses {
+    _ipv6Addresses = [self migrateIpsIfNeeded:ipv6Addresses];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Description, equals, hash
 
@@ -214,6 +222,24 @@ static NSMutableCharacterSet *delimCharSet;
 - (NSUInteger)hash
 {
     return [_uuid hash];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark private methods
+
+- (NSArray*) migrateIpsIfNeeded:(NSArray*) ips {
+   
+    // In older versions of the application NSString arrays were used, rather than arrays of APDnsServerAddress objects
+    if(!ips.count || [ips.firstObject isKindOfClass:[APDnsServerAddress class]])
+        return ips;
+    
+    NSMutableArray* migrated = [NSMutableArray array];
+    
+    for(NSString* ip in ips) {
+        [migrated addObject:[[APDnsServerAddress alloc] initWithIp:ip port:nil]];
+    }
+    
+    return [migrated copy];
 }
 
 
