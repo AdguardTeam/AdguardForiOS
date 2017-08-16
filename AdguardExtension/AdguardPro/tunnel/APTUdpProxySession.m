@@ -109,8 +109,8 @@
         _currentDnsServer = _delegate.provider.currentDnsServer;
         
         // Create session for whitelist
-        NSString *serverIp = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
-        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
+        APDnsServerAddress *serverAddress = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
+        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverAddress.ip port:_basePacket.dstPort];
         NWUDPSession *session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (!session) {
             
@@ -124,10 +124,10 @@
         // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
         if (_delegate.provider.isRemoteServer) {
             
-            serverIp = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
+            serverAddress = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
         }
     
-        rEndpoint = [NWHostEndpoint endpointWithHostname:serverIp port:_basePacket.dstPort];
+        rEndpoint = [NWHostEndpoint endpointWithHostname:serverAddress.ip port: serverAddress.port ?: _basePacket.dstPort];
         
         session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (session) {

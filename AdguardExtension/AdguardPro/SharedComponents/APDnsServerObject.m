@@ -96,20 +96,32 @@ static NSMutableCharacterSet *delimCharSet;
 - (NSString *)ipAddressesAsString {
     
     NSArray *ips = self.ipv4Addresses;
-    NSString *result = [ips componentsJoinedByString:@"\n"];
     
-    ips = self.ipv6Addresses;
-    if (ips.count) {
-        if (result.length) {
-            result = [NSString stringWithFormat:@"%@\n%@", result,
-                      [ips componentsJoinedByString:@"\n"]];
+    NSMutableString* result = [NSMutableString new];
+    
+    for (APDnsServerAddress* ipv4 in ips) {
+        
+        if(ipv4.port) {
+            [result appendFormat:@"%@:%@\n", ipv4.ip, ipv4.port];
         }
         else {
-            result = [ips componentsJoinedByString:@"\n"];
+            [result appendFormat:@"%@\n", ipv4.ip];
         }
     }
     
-    return result;
+    ips = self.ipv6Addresses;
+    
+    for (APDnsServerAddress* ipv6 in ips) {
+        
+        if(ipv6.port) {
+            [result appendFormat:@"[%@]:%@\n", ipv6.ip, ipv6.port];
+        }
+        else {
+            [result appendFormat:@"%@\n", ipv6.ip];
+        }
+    }
+    
+    return [result copy];
 }
 
 - (void)setIpAddressesFromString:(NSString *)ipAddresses {
@@ -118,21 +130,32 @@ static NSMutableCharacterSet *delimCharSet;
     
     NSMutableArray *ipV4 = [NSMutableArray array];
     NSMutableArray *ipV6 = [NSMutableArray array];
+    
     for (NSString *item in parts) {
         
         NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (candidate.length) {
+            
+            NSString* ip;
+            NSString* port;
+            
             if ([ACNUrlUtils isIPv4:candidate]) {
-                [ipV4 addObject:candidate];
+                [ipV4 addObject:[[APDnsServerAddress alloc] initWithIp:candidate port:nil]];
             }
             else if ([ACNUrlUtils isIPv6:candidate]){
-                [ipV6 addObject:candidate];
+                [ipV6 addObject:[[APDnsServerAddress alloc] initWithIp:candidate port:nil]];
+            }
+            else if ([ACNUrlUtils checkIpv4WithPort:candidate ip:&ip port:&port]) {
+                [ipV4 addObject:[[APDnsServerAddress alloc] initWithIp:ip port:port]];
+            }
+            else if ([ACNUrlUtils checkIpv6WithPort:candidate ip:&ip port:&port]) {
+                [ipV6 addObject:[[APDnsServerAddress alloc] initWithIp:ip port:port]];
             }
         }
     }
     
     self.ipv4Addresses = [ipV4 copy];
-    self.ipv6Addresses = [ipV6  copy];
+    self.ipv6Addresses = [ipV6 copy];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{

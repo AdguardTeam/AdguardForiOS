@@ -17,6 +17,7 @@
  */
 
 #import "ACObject.h"
+#import "APDnsServerAddress.h"
 
 /**
  Tag that server object contains only description properties, 
@@ -58,11 +59,12 @@ extern NSString * _Nonnull APDnsServerTagLocal;
 /**
  Array, which contains ipV4 addresses in form of strings.
  */
-@property (nonnull) NSArray <NSString *> *ipv4Addresses;
+@property (nonnull) NSArray <APDnsServerAddress *> *ipv4Addresses;
 /**
  Array, which contains ipV6 addresses in form of strings.
  */
-@property (nonnull) NSArray <NSString *> *ipv6Addresses;
+@property (nonnull) NSArray <APDnsServerAddress *> *ipv6Addresses;
+
 /**
  Field, which may contain special labels about server, for example APDnsServerTagLocal.
  */
