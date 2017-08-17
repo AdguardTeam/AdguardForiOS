@@ -31,12 +31,15 @@
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
 
 #define DNS_SERVER_SECTION_INDEX        2
-#define DNS_DESCRIPTION_SECTION_INDEX   1
+#define DNS_SYSTEM_DEFAULT_SECTION_INDEX   1
 #define STATUS_SECTION_INDEX                0
 
 #define SEGUE_BLACKLIST                     @"blacklist"
 #define SEGUE_WHITELIST                     @"whitelist"
 #define DNS_SERVER_DETAIL_SEGUE         @"dnsServerDetailSegue"
+
+#define DNS_CHECK_ENABLED_COLOR         [UIColor colorWithRed:0 green:0.478431 blue:1 alpha:1]
+#define DNS_CHECK_DISABLED_COLOR        [UIColor grayColor]
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServersController
@@ -369,7 +372,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(indexPath.section == DNS_SERVER_SECTION_INDEX) {
+    if(indexPath.section == DNS_SERVER_SECTION_INDEX || indexPath.section == DNS_SYSTEM_DEFAULT_SECTION_INDEX) {
+        
         APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
         
         if (selectedServer) {
@@ -380,6 +384,12 @@
                 
                 [self selectActiveDnsServer:selectedServer];
                 [self reloadDataAnimated:YES];
+                
+                if(![selectedServer.tag isEqualToString:APDnsServerTagLocal]) {
+                    
+                    [self.proStatusSwitch setOn:YES animated:YES];
+                    [self toggleStatus:self.proStatusSwitch];
+                }
             });
         }
     }
@@ -404,7 +414,7 @@
     footer.textLabel.isAccessibilityElement = NO;
     footer.detailTextLabel.isAccessibilityElement = NO;
     
-    if (section == DNS_DESCRIPTION_SECTION_INDEX) {
+    if (section == DNS_SYSTEM_DEFAULT_SECTION_INDEX) {
         self.systemDefaultCell.accessibilityHint = footer.textLabel.text;
     }
 }
@@ -523,39 +533,29 @@
 
 - (void)selectActiveDnsServer:(APDnsServerObject *)activeDnsServer {
     
-    if ([activeDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
-        
-        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
-        // tunning accessibility
-        self.systemDefaultCell.accessibilityTraits |= UIAccessibilityTraitSelected;
-        //------------
-    }
-    else {
-        
-        self.systemDefaultCell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-        // tunning accessibility
-        self.systemDefaultCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
-        //-----
-    }
+    [self setCell:self.systemDefaultCell selected: [activeDnsServer.tag isEqualToString:APDnsServerTagLocal]];
     
     for (int i = 1; i < _dnsServers.count; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_SERVER_SECTION_INDEX];
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
-        if ([activeDnsServer isEqual:_dnsServers[i]]) {
-            
-            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
-            // tunning accessibility
-            cell.accessibilityTraits |= UIAccessibilityTraitSelected;
-            //------------
-        }
-        else {
-            
-            cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-            // tunning accessibility
-            cell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
-            //----------------
-        }
+        [self setCell:cell selected: [activeDnsServer isEqual:_dnsServers[i]]];
+    }
+}
+
+- (void) setCell:(UITableViewCell*) cell selected:(BOOL) selected {
+    
+    if(selected) {
+        
+        cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_ENABLE];
+        cell.accessibilityTraits |= UIAccessibilityTraitSelected;
+        
+        cell.imageView.tintColor = self.proStatusSwitch.isOn ? DNS_CHECK_ENABLED_COLOR : DNS_CHECK_DISABLED_COLOR;
+    }
+    else {
+        
+        cell.imageView.image = [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
+        cell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     }
 }
 
