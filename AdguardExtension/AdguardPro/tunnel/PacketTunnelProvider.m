@@ -334,10 +334,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     return _fullTunnel;
 }
 
-- (void)getDNSServersIpv4: (NSArray <NSString *> **) ipv4DNSServers ipv6: (NSArray <NSString *> **) ipv6DNSServers {
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods (private)
+
+- (void)getDNSServersIpv4: (NSArray <APDnsServerAddress *> **) ipv4DNSServers ipv6: (NSArray <APDnsServerAddress *> **) ipv6DNSServers {
   
-    NSMutableArray *ipv4s = [NSMutableArray array];
-    NSMutableArray *ipv6s = [NSMutableArray array];
+    NSMutableArray<APDnsServerAddress*> *ipv4s = [NSMutableArray array];
+    NSMutableArray<APDnsServerAddress*> *ipv6s = [NSMutableArray array];
     
     @autoreleasepool {
         
@@ -347,22 +350,32 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             union res_9_sockaddr_union *addr_union = malloc(res->nscount * sizeof(union res_9_sockaddr_union));
             res_getservers(res, addr_union, res->nscount);
             
-            const char *str;
+            const char *ipStr;
             for (int i = 0; i < res->nscount; i++) {
                 if (addr_union[i].sin.sin_family == AF_INET) {
                     char ip[INET_ADDRSTRLEN];
-                    str = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
-                    if (str) {
-                        [ipv4s addObject:[NSString stringWithUTF8String:str]];
+                    ipStr = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
+                    NSString* ipStringObject = ipStr ?[NSString stringWithUTF8String:ipStr] : nil;
+                    
+                    int port = (int)ntohs(addr_union[i].sin.sin_port);
+                    NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
+                    
+                    if (ipStr) {
+                        [ipv4s addObject:[[APDnsServerAddress alloc] initWithIp:ipStringObject port:portStringObject]];
                     }
                 } else if (addr_union[i].sin6.sin6_family == AF_INET6) {
                     char ip[INET6_ADDRSTRLEN];
-                    str = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
-                    if (str) {
-                        [ipv6s addObject:[NSString stringWithUTF8String:str]];
+                    ipStr = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
+                    NSString* ipStringObject = ipStr ?[NSString stringWithUTF8String:ipStr] : nil;
+                    
+                    int port = (int) ntohs(addr_union[i].sin6.sin6_port);
+                    NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
+                    
+                    if (ipStr) {
+                        [ipv6s addObject:[[APDnsServerAddress alloc] initWithIp:ipStringObject port:portStringObject]];
                     }
                 } else {
-                    str = NULL;
+                    ipStr = NULL;
                 }
                 
                 
@@ -377,9 +390,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     return;
 }
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Helper methods (private)
 
 - (void) updateTunnelSettingsWithCompletionHandler:(nullable void (^)( NSError * __nullable error))completionHandler {
     
@@ -849,25 +859,25 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     // DNS
     
-    NSArray *deviceIpv4DnsServers;
-    NSArray *deviceIpv6DnsServers;
+    NSArray<APDnsServerAddress*> *deviceIpv4DnsServers;
+    NSArray<APDnsServerAddress*> *deviceIpv6DnsServers;
     
     [self getDNSServersIpv4:&deviceIpv4DnsServers ipv6:&deviceIpv6DnsServers];
     
-    NSMutableArray *deviceDnsServers = [NSMutableArray new];
+    NSMutableArray<APDnsServerAddress*> *deviceDnsServers = [NSMutableArray new];
     [deviceDnsServers addObjectsFromArray:deviceIpv4DnsServers];
     [deviceDnsServers addObjectsFromArray:deviceIpv6DnsServers];
     
-    NSMutableArray *remoteDnsIpv4Addresses = [NSMutableArray new];
-    NSMutableArray *remoteDnsIpv6Addresses = [NSMutableArray new];
+    NSMutableArray<APDnsServerAddress*> *remoteDnsIpv4Addresses = [NSMutableArray new];
+    NSMutableArray<APDnsServerAddress*> *remoteDnsIpv6Addresses = [NSMutableArray new];
     
     if(_isRemoteServer) {
         [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
         [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
     }
     
-    NSArray* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
-    NSArray* fakeIpv6DnsAddresses = ipv6Available ? @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2] : @[];
+    NSArray<NSString*>* fakeIpv4DnsAddresses = @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4];
+    NSArray<NSString*>* fakeIpv6DnsAddresses = ipv6Available ? @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2] : @[];
     NSMutableArray* fakeDnsAddresses = [NSMutableArray new];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];

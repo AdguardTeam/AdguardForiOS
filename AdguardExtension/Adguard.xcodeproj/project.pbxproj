@@ -705,6 +705,10 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D047E51C1F443D6D00A4F0C5 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
 		D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
 		D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
@@ -727,6 +731,7 @@
 		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D0E607531F45909700B4D72B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E607511F45909700B4D72B /* Localizable.strings */; };
+		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -1355,6 +1360,8 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D0427C761F434129002FB018 /* APDnsServerAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsServerAddress.h; sourceTree = "<group>"; };
+		D0427C771F434129002FB018 /* APDnsServerAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerAddress.m; sourceTree = "<group>"; };
 		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
 		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
 		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1853,6 +1860,8 @@
 				65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */,
 				D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */,
 				D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */,
+				D0427C761F434129002FB018 /* APDnsServerAddress.h */,
+				D0427C771F434129002FB018 /* APDnsServerAddress.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -3103,6 +3112,7 @@
 				65A82BBC1EC9AD66004B0140 /* APVPNManager.m in Sources */,
 				652F590A1E1073080012353C /* FMDatabasePool.m in Sources */,
 				652F590B1E1073080012353C /* FMDatabaseQueue.m in Sources */,
+				D047E51C1F443D6D00A4F0C5 /* APDnsServerAddress.m in Sources */,
 				652F590C1E1073080012353C /* FMResultSet.m in Sources */,
 				652F590D1E1073080012353C /* FMSQLStatementSplitter.m in Sources */,
 				652F590E1E1073080012353C /* FMStatementKeywordRecogniser.m in Sources */,
@@ -3175,6 +3185,7 @@
 				65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				65B6211A1D2E845D0047248F /* APTDnsRequest.m in Sources */,
 				655AAC911D37780700E316EA /* APDnsResponse.m in Sources */,
+				D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				653AE9F81D084B6400AC81B4 /* ACLLogger.m in Sources */,
 				65B4F02E1D5C828300893BA0 /* FMDatabaseAdditions.m in Sources */,
 				65B4F02D1D5C828300893BA0 /* FMDatabase.m in Sources */,
@@ -3291,6 +3302,7 @@
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
+				D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
 				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
@@ -3406,6 +3418,7 @@
 				6598871D1CF83580003ECD1C /* DDLog.m in Sources */,
 				6598871E1CF83580003ECD1C /* ACNNetworking.m in Sources */,
 				6598871F1CF83580003ECD1C /* ABECFilterParsers.m in Sources */,
+				D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */,
 				659887201CF83580003ECD1C /* ACNHttpUtils.m in Sources */,
 				659887211CF83580003ECD1C /* FMResultSet.m in Sources */,
 				659887221CF83580003ECD1C /* ASDFilterObjects.m in Sources */,
@@ -3719,6 +3732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */,
 				D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */,
 				D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */,
