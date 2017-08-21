@@ -76,14 +76,19 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
                 NSItemProvider *attachment =
                     [[NSItemProvider alloc] initWithContentsOfURL:jsonURL];
 
+                NSArray* items = nil;
+                
                 if (attachment) {
                     NSLog(@"ActionRequestHandler: Attachment initialized!");
+                    
+                    NSExtensionItem *item = [[NSExtensionItem alloc] init];
+                    item.attachments = @[ attachment ];
+
+                    items = @[item];
                 }
 
-                NSExtensionItem *item = [[NSExtensionItem alloc] init];
-                item.attachments = @[ attachment ];
-
-                [context completeRequestReturningItems:@[ item ]
+                
+                [context completeRequestReturningItems:items
                                      completionHandler:nil];
                 return;
             }

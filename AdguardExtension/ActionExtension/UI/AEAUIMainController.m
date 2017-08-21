@@ -40,7 +40,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    self.title = AE_PRODUCT_NAME;
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
     _enabledHolder = self.domainEnabled;

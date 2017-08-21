@@ -215,7 +215,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     
     BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS APDnsLogTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, record BLOB)"];
     if (result) {
-        result = [db executeUpdate:@"CREATE INDEX IF NOT EXISTS mainIndex ON APDnsLogTable (timeStamp)"];
+        [db executeUpdate:@"CREATE INDEX IF NOT EXISTS mainIndex ON APDnsLogTable (timeStamp)"];
     }
 }
 
