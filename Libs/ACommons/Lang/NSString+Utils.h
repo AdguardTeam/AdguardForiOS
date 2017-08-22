@@ -135,3 +135,12 @@
 - (NSString *)sha256Digest;
 
 @end
+
+/**
+ just returns its input but is annotated to return a localized string
+ */
+__attribute__((annotate("returns_localized_nsstring")))
+static inline NSString *LocalizationNotNeeded(NSString *s) {
+    return s;
+}
+

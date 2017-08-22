@@ -100,7 +100,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = AE_PRODUCT_NAME;
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
                              initWithTitle:NSLocalizedString(@"Cancel",
@@ -277,6 +277,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
+    
     [self setToolbar];
 #ifdef PRO
     [self proUpdateStatuses];
@@ -285,6 +287,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
     
     self.navigationController.toolbarHidden = YES;
 }

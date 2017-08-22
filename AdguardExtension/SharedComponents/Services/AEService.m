@@ -431,7 +431,6 @@ static AEService *singletonService;
                                          objectForKey:AEDefaultsJSONConvertedRules] integerValue];
             NSInteger totalConvertedRulesCount = [[[AESharedResources sharedDefaults]
                                                    objectForKey:AEDefaultsJSONRulesForConvertion] integerValue];
-            BOOL overlimit = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached];
             
             
                 NSError *error = nil;
@@ -467,10 +466,9 @@ static AEService *singletonService;
                             
                             totalConvertedRulesCount--;
                             convertedRules--;
-                            overlimit = NO;
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
-                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(NO)];
                             
                             jsonNotModified = NO;
                         }
