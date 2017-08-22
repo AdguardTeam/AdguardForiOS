@@ -35,4 +35,15 @@
     return self;
 }
 
+- (NSString *)description {
+    
+    if(!self.ip)
+        return @"not defined";
+    
+    if(!self.port)
+        return self.ip;
+    
+    return [NSString stringWithFormat:@"%@#%@", self.ip, self.port];
+}
+
 @end
