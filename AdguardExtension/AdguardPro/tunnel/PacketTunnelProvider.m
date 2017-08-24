@@ -175,8 +175,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         if(!sSelf)
             return;
         
-        [sSelf reloadWhitelistBlacklistDomain];
-        
         if (sSelf->_connectionHandler) {
             [sSelf->_connectionHandler startHandlingPackets];
             DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
@@ -485,6 +483,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         if(sSelf == nil)
             return;
+        
+        [sSelf reloadWhitelistBlacklistDomain];
         
         if(completionHandler) {
             
