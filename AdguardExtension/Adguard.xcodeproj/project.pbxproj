@@ -730,8 +730,8 @@
 		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
 		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
-		D0E607531F45909700B4D72B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E607511F45909700B4D72B /* Localizable.strings */; };
 		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0E607531F45909700B4D72B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E607511F45909700B4D72B /* Localizable.strings */; };
 		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -4729,7 +4729,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4757,7 +4757,7 @@
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
