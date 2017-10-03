@@ -36,12 +36,6 @@
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
-
-NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
-NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
-NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
-NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
@@ -654,8 +648,10 @@ static APVPNManager *singletonVPNManager;
         
         APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
         
-        BOOL allreadyAdded = NO;
         if(remoteServer) {
+            
+            BOOL allreadyAdded = NO;
+            
             for(APDnsServerObject* server in _remoteDnsServers) {
                 if([server isEqual:remoteServer]) {
                     
@@ -663,13 +659,13 @@ static APVPNManager *singletonVPNManager;
                     break;
                 }
             }
-        }
         
-        if(!allreadyAdded) {
-            remoteServer.editable = YES;
-            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
-            [_customRemoteDnsServers addObject:remoteServer];
-            [self saveCustomRemoteDnsServersToDefaults];
+            if(!allreadyAdded) {
+                remoteServer.editable = YES;
+                _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
+                [_customRemoteDnsServers addObject:remoteServer];
+                [self saveCustomRemoteDnsServersToDefaults];
+            }
         }
     }
 }

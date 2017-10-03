@@ -38,6 +38,7 @@
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
 #import "APUIProSectionFooter.h"
+#import "APUIDnsServersController.h"
 
 #define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
@@ -99,7 +100,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = AE_PRODUCT_NAME;
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
                              initWithTitle:NSLocalizedString(@"Cancel",
@@ -276,6 +277,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
+    
     [self setToolbar];
 #ifdef PRO
     [self proUpdateStatuses];
@@ -284,6 +287,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
     
     self.navigationController.toolbarHidden = YES;
 }
@@ -310,6 +315,14 @@
         [AEUIWhitelistController createWhitelistControllerWithSegue:segue];
     }
     
+#ifdef PRO
+    if([segue.identifier isEqualToString:OpenDnsSettingsSegue]) {
+        
+        [APUIDnsServersController createDnsSercersControllerWithSegue:segue status:self.startStatus];
+        
+        self.startStatus = nil;
+    }
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -599,7 +612,10 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    if(manager.enabled)
+        self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    else
+        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"Off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
     
     if (manager.lastError) {
         [ACSSystemUtils

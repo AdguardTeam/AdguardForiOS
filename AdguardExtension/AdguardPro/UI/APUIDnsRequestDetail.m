@@ -180,6 +180,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
     
         [self setupDomainControllCell];
@@ -265,7 +267,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         NSArray *domainslist = APSharedResources.whitelistDomains;
         
-        NSString *labelText = [NSString new];
+        NSString *labelText;
         
         // We check on equal
         if ([domainslist containsObject:_domainName]) {

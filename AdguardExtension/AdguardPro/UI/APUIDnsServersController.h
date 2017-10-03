@@ -27,6 +27,10 @@
 @interface APUIDnsServersController  : StaticDataTableViewController
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark init
++ (void)createDnsSercersControllerWithSegue:(UIStoryboardSegue *)segue status:(NSNumber*)status;
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;

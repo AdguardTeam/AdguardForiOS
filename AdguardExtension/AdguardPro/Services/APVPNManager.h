@@ -46,27 +46,6 @@ typedef enum : NSUInteger {
  */
 extern NSString *APVpnChangedNotification;
 
-/**
- Key of the parameter, which contains remote DNS server configuration.
-*/
-extern NSString *APVpnManagerParameterRemoteDnsServer;
-/**
- Key of the parameter, 
- which contains BOOL value of local filtering switch.
- */
-extern NSString *APVpnManagerParameterLocalFiltering;
-
-/**
- Error domain for errors from vpn manager.
- */
-extern NSString *APVpnManagerErrorDomain;
-
-/**
- Key of the paramenter, wich contain APVpnManagerTunnelMode value.
- */
-extern NSString *APVpnManagerParameterTunnelMode;
-
-
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
 #define APVPN_MANAGER_ERROR_CONNECTION_HANDLER      300
