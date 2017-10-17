@@ -247,8 +247,9 @@
         
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
         
-        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
-                                                          @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.");
+        domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
+                                                   NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
+                                                                     @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.")];
         
         domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
         

@@ -149,6 +149,7 @@ static NSDictionary *_editAttrs;
     self.editorTextView.font = EDITED_TEXT_FONT;
     self.editorTextView.textStorage.delegate = self;
     self.editorTextView.keyboardType = _keyboardType;
+    self.searchBar.keyboardType = _keyboardType;
     
     [self registerForKeyboardNotifications];
     
@@ -161,12 +162,12 @@ static NSDictionary *_editAttrs;
     _currentSelectionType = AETESelectionTypeFind;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
-    self.placeholderLabel.text = self.textForPlaceholder;
+    self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
     // tunning accessibility
-    self.editorTextView.accessibilityHint = self.textForPlaceholder;
+    self.editorTextView.accessibilityHint = self.attributedTextForPlaceholder.string;
     self.placeholderLabel.isAccessibilityElement = NO;
     
     if (UIAccessibilityIsVoiceOverRunning()) {
@@ -238,6 +239,7 @@ static NSDictionary *_editAttrs;
     _keyboardType = keyboardType;
     
     self.editorTextView.keyboardType = _keyboardType;
+    self.searchBar.keyboardType = _keyboardType;
 }
 
 - (UIKeyboardType)keyboardType {
@@ -423,7 +425,7 @@ static NSDictionary *_editAttrs;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
 
     if (object == self.view && [keyPath isEqualToString:WIDTH_CHANGE_KEY]) {
-        self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
+        //self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
         [self.searchToolBar setNeedsLayout];
         
         return;
@@ -490,9 +492,9 @@ static NSDictionary *_editAttrs;
         
         self.placeholderLabel.hidden = YES;
         self.clearAllButton.enabled = NO;
-        self.searchBarItem.enabled = NO;
-        self.searchBarNext.enabled = NO;
-        self.searchBarPrevious.enabled = NO;
+        self.searchBar.userInteractionEnabled = NO;
+        self.prevButton.enabled = NO;
+        self.nextButton.enabled = NO;
         
         return;
     }
@@ -500,15 +502,14 @@ static NSDictionary *_editAttrs;
     BOOL result = ! [NSString isNullOrEmpty:self.editorTextView.text];
     self.placeholderLabel.hidden = result;
     self.clearAllButton.enabled = result;
-    self.searchBarItem.enabled = result;
-    self.searchBarNext.enabled = result;
-    self.searchBarPrevious.enabled = result;
+    self.searchBar.userInteractionEnabled = result;
+    self.nextButton.enabled = result;
+    self.prevButton.enabled = result;
     
     if (!result) {
         
         self.searchBar.text = nil;
         _currentSearchString = nil;
-
     }
 }
 

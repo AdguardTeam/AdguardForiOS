@@ -25,6 +25,7 @@
 #import "AESharedResources.h"
 #import "AEFilterRuleSyntaxConstants.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
 NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
@@ -644,6 +645,12 @@ static AEService *singletonService;
                             NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
                             if (whitelistRules.count) {
                                 [rules addObjectsFromArray:whitelistRules];
+                            }
+                            
+                            AEInvertedWhitelistDomainsObject *invertedWhitelistObject = [AESharedResources new].invertedWhitelistContentBlockingObject;
+                            
+                            if(invertedWhitelistObject.rule) {
+                                [rules addObject:invertedWhitelistObject.rule];
                             }
                             
                             if (rules.count) {

@@ -27,9 +27,12 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *fullTunnelCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *splitTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *invertWhitelistCell;
+@property (strong, nonatomic) IBOutlet UISwitch *invertWhitelistSwitch;
 
 
 - (IBAction)toggleSimplified:(id)sender;
 - (IBAction)toggleWifiOnly:(id)sender;
+- (IBAction)toggleInvertWhitelist:(id)sender;
 
 @end

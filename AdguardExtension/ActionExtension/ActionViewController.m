@@ -27,6 +27,7 @@
 #import "AEAUIMainController.h"
 #import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
+#import "AEInvertedWhitelistDomainsObject.h"
 
 #define USER_FRIENDLY_DELAY     0.5
 
@@ -42,7 +43,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     BOOL _injectScriptSupported;
     NSString *_host;
     NSURL *_iconUrl;
-    AEWhitelistDomainObject *_domainObject;
+    BOOL _enabled;
     NSMutableArray *_observerObjects;
     AEAUIMainController __weak *_mainController;
 }
@@ -57,33 +58,59 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
 #pragma mark Class Methods
 /////////////////////////////////////////////////////////////////////
 
++ (BOOL) isHostInInvertedWhitelist:(NSString *)host {
+    
+    @autoreleasepool {
+        
+        AEInvertedWhitelistDomainsObject *invertedDomainsObj = [AESharedResources new].invertedWhitelistContentBlockingObject;
+        
+        __block BOOL found = NO;
+        
+        [invertedDomainsObj.domains enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if([obj caseInsensitiveCompare:host] == NSOrderedSame) {
+                found = YES;
+                *stop = YES;
+            }
+        }];
+        
+        return found;
+    }
+}
+
 + (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host{
     
     @autoreleasepool {
         
         DDLogDebug(@"(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\"%@\"", host);
         NSArray *rules = [[AESharedResources new] whitelistContentBlockingRules];
-        rules = [rules
-                 filteredArrayUsingPredicate:
-                 [NSPredicate
-                  predicateWithFormat:@"ruleText CONTAINS[cd] %@",
-                  host]];
         
-        if (rules.count) {
-            
-            AEWhitelistDomainObject *obj;
-            for (ASDFilterRule *rule in rules) {
-                obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
-                if (obj) {
-                    break;
-                }
+        return [self domainObjectIfExists:host inRules:rules];
+    }
+}
+
++ (AEWhitelistDomainObject *)domainObjectIfExists:(NSString *)host inRules:(NSArray*) rules {
+    
+    rules = [rules
+             filteredArrayUsingPredicate:
+             [NSPredicate
+              predicateWithFormat:@"ruleText CONTAINS[cd] %@",
+              host]];
+    
+    if (rules.count) {
+        
+        AEWhitelistDomainObject *obj;
+        for (ASDFilterRule *rule in rules) {
+            obj = [[AEWhitelistDomainObject alloc] initWithRule:rule];
+            if (obj) {
+                break;
             }
-            
-            return obj;
         }
         
-        return nil;
+        return obj;
     }
+    
+    return nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -293,8 +320,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         _mainController.domainName = _host;
         _mainController.url = _url;
         _mainController.iconUrl = _iconUrl;
-        _mainController.domainObject = _domainObject;
-        _mainController.domainEnabled = (_domainObject == nil);
+        _mainController.domainEnabled = _enabled;
         _mainController.injectScriptSupported = _injectScriptSupported;
         
         _mainController.enableChangeDomainFilteringStatus = YES;
@@ -352,7 +378,17 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [self.messageLabel setHidden:YES];
     });
     
-    _domainObject = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host];
+    BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+    
+    if(inverted) {
+        
+        _enabled = [ActionViewController isHostInInvertedWhitelist:_host];
+    }
+    else {
+       
+        _enabled = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host] == nil;
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });

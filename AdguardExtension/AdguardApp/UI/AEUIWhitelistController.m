@@ -1,3 +1,4 @@
+
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © 2015 Performix LLC. All rights reserved.
@@ -22,6 +23,7 @@
 #import "AESAntibanner.h"
 #import "AEService.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
 #import "AEUICustomTextEditorController.h"
 #import "AEUIUtils.h"
 #import "AESharedResources.h"
@@ -49,7 +51,30 @@
     
     AEUICustomTextEditorController *domainList = segue.destinationViewController;
     
-    domainList.textForPlaceholder = NSLocalizedString(@"Enter the domain names here (separated by spaces, commas or line breaks) which Adguard will disable filtering in Safari for.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.");
+    NSMutableAttributedString* placeholderText;
+    
+    if([AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist]) {
+        
+        placeholderText = [[NSMutableAttributedString alloc] initWithString:
+                           NSLocalizedString(@"Enter here the domain names separated by spaces, commas or line breaks. AdGuard will block ads in Safari on these websites only.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Inverted Whitelist. This is the text shown when the whitelist is empty.")];
+        
+        NSString* boldSubstring = NSLocalizedString(@"on these websites only.", @"Main screen -> Safari Content Blocking -> Inverted Whitelist. This is part of inverted whitelist hint string that should be heighlighted in bold");
+        
+        if(boldSubstring.length) {
+            
+            NSRange range = [placeholderText.string rangeOfString:boldSubstring];
+            if(range.length) {
+                
+                [placeholderText addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:range];
+            }
+        }
+    }
+    else {
+        
+        placeholderText = [[NSMutableAttributedString alloc] initWithString:
+                           NSLocalizedString(@"Enter here the domain names separated by spaces, commas or line breaks. AdGuard will disable filtering in Safari for these websites.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.")];
+    }
+    domainList.attributedTextForPlaceholder = placeholderText;
     
     domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. The title of the screen.");
     domainList.keyboardType = UIKeyboardTypeURL;
@@ -58,19 +83,35 @@
     
     ASSIGN_WEAK(result);
     domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
-        
-        NSMutableArray <ASDFilterRule *> *rules = [NSMutableArray array];
 
+        NSMutableArray <ASDFilterRule *> *rules = [NSMutableArray array];
+        AEInvertedWhitelistDomainsObject *invertedObj;
+        
+        BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+        
         @autoreleasepool {
             
             NSMutableCharacterSet *delimCharSet;
             
             delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
             [delimCharSet addCharactersInString:@", "];
-
-            for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
+            
+            NSMutableArray* domains = [NSMutableArray new];
+            [[text componentsSeparatedByCharactersInSet:delimCharSet] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                if (item.length) {
+                if(obj.length)
+                    [domains addObject:obj];
+            }];
+            
+
+            if(inverted) {
+                
+                invertedObj = [[AEInvertedWhitelistDomainsObject alloc] initWithDomains:domains];
+            }
+            else {
+                
+                for (NSString *item in domains) {
+                    
                     AEWhitelistDomainObject *obj = [[AEWhitelistDomainObject alloc] initWithDomain:item];
                     if (obj) {
                         [rules addObject:obj.rule];
@@ -83,9 +124,18 @@
             
             AESharedResources *res = [AESharedResources new];
             
-            NSMutableArray *oldRules = res.whitelistContentBlockingRules;
+            NSMutableArray *oldRules;
+            AEInvertedWhitelistDomainsObject* oldInverterdObject;
             
-            res.whitelistContentBlockingRules = rules;
+            if(inverted) {
+                oldInverterdObject = res.invertedWhitelistContentBlockingObject;
+                res.invertedWhitelistContentBlockingObject = invertedObj;
+            }
+            else {
+                
+                oldRules = res.whitelistContentBlockingRules;
+                res.whitelistContentBlockingRules = rules;
+            }
             
             [AEUIUtils invalidateJsonWithController:editor completionBlock:^{
                 
@@ -98,7 +148,12 @@
             } rollbackBlock:^{
                 
                 //Failure
-                res.whitelistContentBlockingRules = oldRules;
+                if(inverted) {
+                    res.invertedWhitelistContentBlockingObject = oldInverterdObject;
+                }
+                else {
+                    res.whitelistContentBlockingRules = oldRules;
+                }
                 
             }];
         }
@@ -128,6 +183,8 @@
     domainList.auxiliaryObject = result;
     domainList.delegate = result;
     
+    [domainList setLoadingStatus:YES];
+    
     return result;
 }
 /////////////////////////////////////////////////////////////////////
@@ -143,12 +200,13 @@
     //    }
 }
 
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 
 
 - (void)reloadUserFilterDataForEditorController:(AEUICustomTextEditorController *)editor {
+    
+    BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
     dispatch_async(
                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -161,25 +219,52 @@
                            
                            AESharedResources *resources = [AESharedResources new];
                            
-                           NSMutableArray *rules = resources.whitelistContentBlockingRules;
-                           
-                           NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
-                                                                                         attributes:AEUICustomTextEditorController.defaultTextAttributes];
-                           
-                           AEWhitelistDomainObject *obj;
-                           
-                           for (ASDFilterRule *item in rules) {
+                           NSMutableArray *rules;
+                           if(inverted) {
+                               AEInvertedWhitelistDomainsObject *obj = resources.invertedWhitelistContentBlockingObject;
                                
-                               obj = [[AEWhitelistDomainObject alloc]
-                                      initWithRule:item];
-                               if (obj) {
-                                   
-                                   NSAttributedString *attrDomain = [[NSAttributedString alloc] initWithString:obj.domain
-                                                                                       attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                               if(obj) {
+                                   ASDFilterRule* rule = obj.rule;
+                                   if(rule)
+                                       rules = [NSMutableArray arrayWithObject:rule];
+                               }
+                               else {
+                                   rules = [NSMutableArray new];
+                               }
+                               
+                               NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
+                                                                                             attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                               
+                               for(NSString* domain in obj.domains) {
+                                   NSAttributedString *attrDomain = [[NSAttributedString alloc] initWithString:domain
+                                                                                                    attributes:AEUICustomTextEditorController.defaultTextAttributes];
                                    [attributedText appendAttributedString:attrDomain];
                                    [attributedText appendAttributedString:newline];
                                }
                            }
+                           else {
+                               rules = resources.whitelistContentBlockingRules;
+                               
+                               NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
+                                                                                             attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                               
+                               AEWhitelistDomainObject *obj;
+                               
+                               for (ASDFilterRule *item in rules) {
+                                   
+                                   obj = [[AEWhitelistDomainObject alloc]
+                                          initWithRule:item];
+                                   if (obj) {
+                                       
+                                       NSAttributedString *attrDomain = [[NSAttributedString alloc] initWithString:obj.domain
+                                                                                                        attributes:AEUICustomTextEditorController.defaultTextAttributes];
+                                       [attributedText appendAttributedString:attrDomain];
+                                       [attributedText appendAttributedString:newline];
+                                   }
+                               }
+                           }
+                           
+                           
                            
                            dispatch_async(dispatch_get_main_queue(), ^{
                                

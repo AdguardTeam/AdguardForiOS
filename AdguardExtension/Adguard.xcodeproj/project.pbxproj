@@ -731,7 +731,15 @@
 		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85B1F94EC5900F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85D1F94EC5B00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85E1F94EC5C00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0E607531F45909700B4D72B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E607511F45909700B4D72B /* Localizable.strings */; };
+		D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -1401,6 +1409,8 @@
 		D0E607791F45918600B4D72B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0E6077A1F45918700B4D72B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0E6077B1F45918800B4D72B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEInvertedWhitelistDomainsObject.h; sourceTree = "<group>"; };
+		D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEInvertedWhitelistDomainsObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1986,6 +1996,8 @@
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
 				65B40D391BDE807400A9C595 /* stringUIResources.plist */,
+				D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */,
+				D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -3057,6 +3069,7 @@
 				652F58951E106FD40012353C /* ACLWildcard.m in Sources */,
 				D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58961E106FD40012353C /* CLIColor.m in Sources */,
+				D0E3A85D1F94EC5B00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */,
 				652F58981E106FD40012353C /* DDASLLogger.m in Sources */,
 				652F58991E106FD40012353C /* DDFileLogger.m in Sources */,
@@ -3116,6 +3129,7 @@
 				652F590C1E1073080012353C /* FMResultSet.m in Sources */,
 				652F590D1E1073080012353C /* FMSQLStatementSplitter.m in Sources */,
 				652F590E1E1073080012353C /* FMStatementKeywordRecogniser.m in Sources */,
+				D0E3A85E1F94EC5C00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				652F590F1E1073080012353C /* FMStatementQuotedRecogniser.m in Sources */,
 				652F59101E1073080012353C /* AESAntibanner.m in Sources */,
 				652F59111E1073080012353C /* AEService.m in Sources */,
@@ -3180,6 +3194,7 @@
 				653AEA041D084B6400AC81B4 /* NSException+Utils.m in Sources */,
 				653AEA051D084B6400AC81B4 /* NSString+Utils.m in Sources */,
 				653AE9FC1D084B6400AC81B4 /* DDASLLogger.m in Sources */,
+				D0E3A85B1F94EC5900F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				653AE9FF1D084B6400AC81B4 /* DDTTYLogger.m in Sources */,
 				655AAC9C1D37821200E316EA /* APDnsLogRecord.m in Sources */,
 				65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
@@ -3333,6 +3348,7 @@
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
+				D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				6598868A1CF74DE9003ECD1C /* AEUIAboutController.m in Sources */,
 				6598868B1CF74DE9003ECD1C /* DDLog.m in Sources */,
 				655AAC901D37780700E316EA /* APDnsResponse.m in Sources */,
@@ -3399,6 +3415,7 @@
 				6598870D1CF83580003ECD1C /* NSString+Utils.m in Sources */,
 				6598870E1CF83580003ECD1C /* AEAUIDomainCell.m in Sources */,
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
+				D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */,
@@ -3513,6 +3530,7 @@
 				65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */,
 				65C12EF11BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
+				D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				655A023C1C6B7686000F00D7 /* ACLJobController.m in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				655A02541C6B7686000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -3572,6 +3590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3684,6 +3703,7 @@
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
+				D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
