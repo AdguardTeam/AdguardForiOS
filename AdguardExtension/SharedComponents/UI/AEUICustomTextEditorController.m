@@ -529,9 +529,11 @@ static NSDictionary *_editAttrs;
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    CGFloat textViewBottomMargin = self.view.frame.size.height - self.editorTextView.frame.origin.y - self.editorTextView.frame.size.height;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height - textViewBottomMargin, 0.0);
     self.editorTextView.contentInset = contentInsets;
     self.editorTextView.scrollIndicatorInsets = contentInsets;
     
