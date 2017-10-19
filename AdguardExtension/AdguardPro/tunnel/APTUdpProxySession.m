@@ -286,7 +286,7 @@ _workingQueue = nil;
             return;
         }
         
-        if (error && !_closed) {
+        if (error && !USE_STRONG(self)->_closed) {
             
             locLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
             return;
@@ -298,6 +298,10 @@ _workingQueue = nil;
             ASSIGN_STRONG(self);
             [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
         });
+        
+        if(USE_STRONG(self)->_closed) {
+            return;
+        }
         
         // reset timeout timer
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
