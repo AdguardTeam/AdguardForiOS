@@ -74,7 +74,9 @@ typedef enum : NSUInteger {
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    self.textView.frame = self.textLabel.frame;
+    CGRect frame = self.textLabel.frame;
+    frame.origin.y = 10;
+    self.textView.frame = frame;
 }
 
 @end
