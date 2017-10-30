@@ -467,7 +467,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self.tableView reloadData];
+            [self reloadDataAnimated:YES];
         });
     });
     
@@ -540,7 +540,7 @@
     
     for (int i = 1; i < _dnsServers.count; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_SERVER_SECTION_INDEX];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
         
         [self setCell:cell selected: [activeDnsServer isEqual:_dnsServers[i]]];
     }
