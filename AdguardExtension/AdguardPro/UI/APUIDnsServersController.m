@@ -26,6 +26,7 @@
 #import "ACNIPUtils.h"
 #import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
+#import "AERDomainFilterRule.h"
 
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
@@ -271,6 +272,13 @@
                     
                     NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                     if (candidate.length) {
+                        
+                        if(toBlacklist && ![AERDomainFilterRule isValidRuleText:candidate]) {
+                            
+                            [editor selectWithType:AETESelectionTypeError text:candidate];
+                            return NO;
+                        }
+                        
                         [domains addObject:candidate];
                     }
                 }

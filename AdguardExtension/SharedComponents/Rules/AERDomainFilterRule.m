@@ -34,7 +34,7 @@
     
     @autoreleasepool {
         
-        if ([self isValidRuleText:rule] == NO) {
+        if ([AERDomainFilterRule isValidRuleText:rule] == NO) {
             DDLogWarn(@"Error creating invalid rule: %@", rule);
             return nil;
         }
@@ -181,7 +181,7 @@
 /////////////////////////////////////////////////////////////////////
 
 
-- (BOOL)isValidRuleText:(__unsafe_unretained NSString *)ruleText {
++ (BOOL)isValidRuleText:(__unsafe_unretained NSString *)ruleText {
     
     if ([NSString isNullOrEmpty:ruleText]
         || [ruleText contains:MASK_OBSOLETE_SCRIPT_INJECTION]) {
