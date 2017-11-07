@@ -178,6 +178,7 @@
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
             [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1)];
+            [self reloadDataAnimated:YES];
             
             [self updateStatuses];
         }
@@ -202,6 +203,8 @@
             [self removeCellAtIndexPath:indexPath];
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            
+            [self reloadDataAnimated:YES];
             
             [self updateStatuses];
         }
@@ -228,10 +231,6 @@
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             cell.textLabel.text = serverObject.serverName;
             cell.detailTextLabel.text = serverObject.serverDescription;
-            
-            [self updateCell:cell];
-            
-            [self reloadDataAnimated:YES];
         }
     }
 }
@@ -394,7 +393,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self selectActiveDnsServer:selectedServer];
-                [self reloadDataAnimated:YES];
                 
                 if(![selectedServer.tag isEqualToString:APDnsServerTagLocal]) {
                     
@@ -470,15 +468,16 @@
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         
-        self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.blacklistDomains.count];
-        self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.whitelistDomains.count];
+        NSUInteger blacklistDomainsCount = APSharedResources.blacklistDomains.count;
+        NSUInteger whitelistDomainsCount = APSharedResources.whitelistDomains.count;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self reloadDataAnimated:YES];
+           
+            self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", blacklistDomainsCount];
+            self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", whitelistDomainsCount];
         });
+        
     });
-    
     
     if (manager.lastError) {
         [ACSSystemUtils
@@ -487,9 +486,6 @@
                                      @"(APUIAdguardDNSController) PRO version. Alert title. On error.")
          message:manager.lastError.localizedDescription];
     }
-    
-    
-    [self reloadDataAnimated:YES];
 }
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{

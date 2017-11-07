@@ -649,8 +649,6 @@
                                      @"title. On error.")
          message:manager.lastError.localizedDescription];
     }
-    
-    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{
