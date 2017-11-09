@@ -261,7 +261,13 @@ static APVPNManager *singletonVPNManager;
     else{
         dispatch_async(workingQueue, ^{
             
-            [self internalSetEnabled:enabled];
+            if(_busy) {
+                
+                _delayedSetEnabled = @(enabled);
+            } else {
+                
+                [self internalSetEnabled:enabled];
+            }
         });
     }
     
@@ -280,7 +286,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetRemoteServer:activeRemoteDnsServer];
+            if (_busy) {
+                
+                _delayedSetActiveRemoteDnsServer = activeRemoteDnsServer;
+            } else {
+                
+                [self internalSetRemoteServer:activeRemoteDnsServer];
+            }
         });
     }
     
@@ -305,7 +317,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetLocalFiltering:localFiltering];
+            if (_busy) {
+                
+                _delayedSetLocalFiltering = @(localFiltering);
+            } else {
+                
+                [self internalSetLocalFiltering:localFiltering];
+            }
         });
     }
     
@@ -324,7 +342,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetTunnelMode:tunnelMode];
+            if (_busy) {
+                
+                _delayedSetTunnelMode = @(tunnelMode);
+            } else {
+                
+                [self internalSetTunnelMode:tunnelMode];
+            }
         });
     }
     
