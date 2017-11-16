@@ -589,39 +589,42 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];
 
-        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
-            NSUInteger counter = 0;
             for (NSString *item in domainList) {
                 
                 NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
                 if (ruleText) {
                     
                     [userWhiteRules addRule:[AERDomainFilterRule rule:ruleText]];
-                    counter++;
                 }
             }
-            DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", counter);
         }
-        
-        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
-            NSUInteger counter = 0;
             for (NSString *ruleText in domainList) {
                 
                 if (ruleText) {
                     
-                    [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
-                    counter++;
+                    AERDomainFilterRule* rule = [AERDomainFilterRule rule:ruleText];
+                    if(rule.whiteListRule) {
+                        
+                        [userWhiteRules addRule:rule];
+                    }
+                    else {
+                        
+                        [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
+                    }
                 }
             }
-            DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", counter);
         }
         
+        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         [_connectionHandler setUserBlacklistFilter:userBlackRules];
+        
+        DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
+        DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);
     }
 }
 
