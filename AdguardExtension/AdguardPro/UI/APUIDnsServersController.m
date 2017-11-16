@@ -486,6 +486,8 @@
                                      @"(APUIAdguardDNSController) PRO version. Alert title. On error.")
          message:manager.lastError.localizedDescription];
     }
+    
+    [self proUpdateStatuses];
 }
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{
@@ -576,6 +578,7 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     self.proStatusSwitch.on = manager.enabled;
+    self.logSwitch.enabled = manager.enabled;
 }
 
 @end
