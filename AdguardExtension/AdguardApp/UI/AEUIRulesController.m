@@ -40,8 +40,8 @@
     
     AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
-    rulesList.textForPlaceholder = NSLocalizedString(@"Enter your custom rules here, separated by line breaks.",
-                                                     @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. This is the text shown when the User Filter is empty.");
+    rulesList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"Enter your custom rules here, separated by line breaks.",
+                                                                                                           @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. This is the text shown when the User Filter is empty.")];
     
     rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
     

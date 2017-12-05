@@ -26,6 +26,13 @@
 
 #define TUNNEL_MODE_FOOTER_CELL_ID @"LinkTableViewHeaderFooterView"
 
+typedef enum : NSUInteger {
+    AutoupdateSection = 0,
+    SimplifiedSection,
+    InvertWhitelistSection,
+    TunnelModeSection
+} AEUIAdvSettingsControllerSections;
+
 @interface AEUILinkTableViewHeaderFooterView : UITableViewHeaderFooterView
 
 @property (nonatomic) UITextView *textView;
@@ -67,7 +74,9 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    self.textView.frame = self.textLabel.frame;
+    CGRect frame = self.textLabel.frame;
+    frame.origin.y = 10;
+    self.textView.frame = frame;
 }
 
 @end
@@ -94,6 +103,8 @@
     self.wifiButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates];
     
     [self.tableView registerClass:[AEUILinkTableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:TUNNEL_MODE_FOOTER_CELL_ID];
+    
+    _invertWhitelistSwitch.on = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
 #ifdef PRO
     self.htmlString = NSLocalizedString(@"Adguard Pro works in two different modes. In the Split-Tunnel mode Adguard is compatible with so-called \"Personal VPN\" apps (full list: <a href=\"https://github.com/AdguardTeam/AdguardForiOS/issues/162\">https://github.com/AdguardTeam/AdguardForiOS/issues/162</a>). As a trade-off, in this mode Adguard may be bypassed by system in case of bad connectivity. On the contrary, in the Full-Tunnel mode Adguard can't be run along any other VPN apps, but also can't be bypassed regardless of the connection quality.", @"Advanced settings - tunnel mode description");
@@ -135,14 +146,18 @@
     footer.textLabel.isAccessibilityElement = NO;
     footer.detailTextLabel.isAccessibilityElement = NO;
     
-    if (section == 0) {
+    if (section == AutoupdateSection) {
         self.autoUpdateCell.accessibilityHint = footer.textLabel.text;
     }
-    else if (section == 1) {
+    else if (section == SimplifiedSection) {
         
         self.useSimplifiedCell.accessibilityHint = footer.textLabel.text;
     }
-    else if (section == 2) {
+    else if(section == InvertWhitelistSection) {
+        
+        self.invertWhitelistCell.accessibilityHint = footer.textLabel.text;
+    }
+    else if (section == TunnelModeSection) {
         
 #ifdef PRO
         AEUILinkTableViewHeaderFooterView* footer = (AEUILinkTableViewHeaderFooterView*)view;
@@ -166,7 +181,7 @@
 #ifdef PRO
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 2) {
+    if(indexPath.section == TunnelModeSection) {
         APVpnManagerTunnelMode selectedMode =
             indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
         
@@ -179,7 +194,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     
-    if(section == 2) {
+    if(section == TunnelModeSection) {
         return self.htmlString;
     }
     
@@ -188,7 +203,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if(section == 2) {
+    if(section == TunnelModeSection) {
         return [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:TUNNEL_MODE_FOOTER_CELL_ID];
     }
     
@@ -225,7 +240,19 @@
     [[AESharedResources sharedDefaults] setBool:[sender isOn] forKey:AEDefaultsWifiOnlyUpdates];
 }
 
-
+- (IBAction)toggleInvertWhitelist:(UISwitch*)sender {
+    
+    BOOL inverted = sender.on;
+    [AESharedResources.sharedDefaults setBool:inverted forKey:AEDefaultsInvertedWhitelist];
+    
+    [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+        
+    } rollbackBlock:^{
+        
+        [AESharedResources.sharedDefaults setBool:!inverted forKey:AEDefaultsInvertedWhitelist];
+        sender.on = !inverted;
+    }];
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark helper methods

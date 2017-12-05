@@ -36,6 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *mainTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailTextLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 
 @end
 
@@ -107,15 +108,28 @@
                 USE_STRONG(self).mainTextLabel.text = [NSString stringWithFormat:format, activeRemoteDnsServer.serverName];
                 
                 USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to disable DNS filtering", @"Today widget - hint text");
+                
+                [USE_STRONG(self).mainTextLabel sizeToFit];
+                
+                if(USE_STRONG(self).mainTextLabel.frame.size.height >= USE_STRONG(self).mainTextLabel.font.pointSize * 2) {
+                    
+                    USE_STRONG(self).mainTextLabel.text = activeRemoteDnsServer.serverName;
+                    [USE_STRONG(self).mainTextLabel sizeToFit];
+                }
+                
+                USE_STRONG(self).logo.alpha = 1.0;
             }
             else {
         
                 USE_STRONG(self).mainTextLabel.text = NSLocalizedString(@"DNS filtering is disabled", @"Today widget - text when remote DNS is disabled");
                 
+                [USE_STRONG(self).mainTextLabel sizeToFit];
+
                 USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to enable DNS filtering", @"Today widget - hint text");
+
+                USE_STRONG(self).logo.alpha = 0.5;
             }
             
-            [USE_STRONG(self).mainTextLabel sizeToFit];
         });
     }];
     

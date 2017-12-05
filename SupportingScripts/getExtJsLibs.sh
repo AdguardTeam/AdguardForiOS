@@ -19,7 +19,7 @@
 #   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 
 
-LibsFile="${SRCROOT}/ActionExtension/js/ExternalLibsSources.js"
+LibsFile="${SRCROOT}/ActionExtension/js/adguard-assistant.js"
 
 Download()
 {
@@ -38,11 +38,6 @@ echo "Downloading external libs sources.."
 
 rm -f "$LibsFile"
 
-
-Download "${ACTION_JAVASCRIPT_LIB01}"
-Download "${ACTION_JAVASCRIPT_LIB02}"
-Download "${ACTION_JAVASCRIPT_LIB03}"
-Download "${ACTION_JAVASCRIPT_SELECTOR}"
-Download "${ACTION_JAVASCRIPT_RULE_CONSTRUCTOR}"
+Download "${ACTION_JAVASCRIPT_ASSISTANT_REMOTE}"
 
 echo "Done"

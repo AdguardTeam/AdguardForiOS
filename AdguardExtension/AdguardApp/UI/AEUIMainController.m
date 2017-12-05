@@ -145,6 +145,8 @@
         
         [self showWelcomeScreen];
     }
+    
+    [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,6 +159,7 @@
 - (void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [AESharedResources.sharedDefaults removeObserver:self forKeyPath:AEDefaultsInvertedWhitelist];
     
     for (id observer in _observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
@@ -313,6 +316,9 @@
     else if ([segue.identifier isEqualToString:TO_WHITELIST_SEGUE_ID]){
         
         [AEUIWhitelistController createWhitelistControllerWithSegue:segue];
+        
+        UIViewController* destination = [segue destinationViewController];
+        destination.navigationItem.title = self.whitelistLabel.text;
     }
     
 #ifdef PRO
@@ -373,6 +379,22 @@
 
     [self cell:self.shareCell setHidden:!enabled];
     [self reloadDataAnimated:YES];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if([keyPath isEqualToString:AEDefaultsInvertedWhitelist]) {
+        
+        id value = change[NSKeyValueChangeNewKey];
+        
+        BOOL inverted = NO;
+        
+        if([value isKindOfClass:NSNumber.class]) {
+            inverted = [value boolValue];
+        }
+        
+        self.whitelistLabel.text = inverted ? NSLocalizedString(@"Whitelist (inverted)", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"Whitelist", @"Main Controller. Whitelist cell caption");
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -627,8 +649,6 @@
                                      @"title. On error.")
          message:manager.lastError.localizedDescription];
     }
-    
-    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{

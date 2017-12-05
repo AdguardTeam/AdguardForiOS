@@ -175,8 +175,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         if(!sSelf)
             return;
         
-        [sSelf reloadWhitelistBlacklistDomain];
-        
         if (sSelf->_connectionHandler) {
             [sSelf->_connectionHandler startHandlingPackets];
             DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
@@ -486,6 +484,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         if(sSelf == nil)
             return;
         
+        [sSelf reloadWhitelistBlacklistDomain];
+        
         if(completionHandler) {
             
             DDLogInfo(@"(PacketTunnelProvider) update Tunnel Settings ");
@@ -589,39 +589,42 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];
 
-        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
-            NSUInteger counter = 0;
             for (NSString *item in domainList) {
                 
                 NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
                 if (ruleText) {
                     
                     [userWhiteRules addRule:[AERDomainFilterRule rule:ruleText]];
-                    counter++;
                 }
             }
-            DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", counter);
         }
-        
-        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         
         @autoreleasepool {
             NSArray *domainList = APSharedResources.blacklistDomains;
-            NSUInteger counter = 0;
             for (NSString *ruleText in domainList) {
                 
                 if (ruleText) {
                     
-                    [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
-                    counter++;
+                    AERDomainFilterRule* rule = [AERDomainFilterRule rule:ruleText];
+                    if(rule.whiteListRule) {
+                        
+                        [userWhiteRules addRule:rule];
+                    }
+                    else {
+                        
+                        [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
+                    }
                 }
             }
-            DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", counter);
         }
         
+        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         [_connectionHandler setUserBlacklistFilter:userBlackRules];
+        
+        DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
+        DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);
     }
 }
 
@@ -634,11 +637,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NSArray* excludeIpv4Cidrs = @[
                                   
-                                  // if we add 0.0.0.0 with any mask to excluded routes, then Ios starts to work very strange. Hides VPN icon in statusbar. And sometimes turn off wi-fi.
-                                  // https://github.com/AdguardTeam/AdguardForiOS/issues/424#issuecomment-315397726
-                                  //@"0.0.0.0/2",
+                                  @"0.0.0.0/31",
                                   
-                                  @"0.0.0.1/32",
+//                                  @"0.0.0.1/32",
                                   @"0.0.0.2/31",
                                   @"0.0.0.4/30",
                                   @"0.0.0.8/29",

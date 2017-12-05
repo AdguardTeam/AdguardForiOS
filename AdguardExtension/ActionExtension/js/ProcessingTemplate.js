@@ -22,9 +22,14 @@ function Assistant(){
     /* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
     /*LOAD_LIBRARY_HERE*/
 
-    AdguardAssistant.init(window.AdguardAssistant_settings);
-
-    window.AdguardAssistantDestroy = function(){ AdguardAssistant.close();};
+   adguardAssistant.start(function(ruleText) {
+                          
+                          settings = window.AdguardAssistant_settings;
+                          acceptUrlScheme = (typeof settings !== 'undefined' && typeof settings.urlScheme !== 'undefined') ? settings.urlScheme : "adguard";
+                          
+                           var item = acceptUrlScheme + '://add/' + encodeURIComponent(ruleText);
+                           document.location = item;
+                          });
 
   })();
 }
