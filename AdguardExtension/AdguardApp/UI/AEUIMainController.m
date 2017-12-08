@@ -59,7 +59,7 @@
 #endif
 
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
-#define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
+#define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/us/app/itunes-u/id%@?action=write-review"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 
