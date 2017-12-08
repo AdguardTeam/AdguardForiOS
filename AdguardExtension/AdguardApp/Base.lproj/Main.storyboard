@@ -963,7 +963,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9p-Kz-7nc">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="clickCancel:" destination="R8j-9d-i12" eventType="touchUpInside" id="cEh-Pd-9HX"/>
@@ -1262,7 +1262,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2d-c9-5ne">
-                                                    <rect key="frame" x="26" y="12" width="96" height="20"/>
+                                                    <rect key="frame" x="16" y="12" width="96" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1272,7 +1272,7 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Y2d-c9-5ne" firstAttribute="leading" secondItem="I2v-98-9sd" secondAttribute="leadingMargin" constant="10" id="JkE-mP-8TD"/>
+                                                <constraint firstItem="Y2d-c9-5ne" firstAttribute="leading" secondItem="I2v-98-9sd" secondAttribute="leadingMargin" id="JkE-mP-8TD"/>
                                                 <constraint firstItem="iW2-Vv-cu0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Y2d-c9-5ne" secondAttribute="trailing" constant="8" id="Pxx-nR-knj"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="iW2-Vv-cu0" secondAttribute="trailing" constant="-8" id="SFg-Z6-is3"/>
                                                 <constraint firstItem="iW2-Vv-cu0" firstAttribute="centerY" secondItem="I2v-98-9sd" secondAttribute="centerY" id="iWE-RS-Pg9"/>
@@ -1292,7 +1292,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93Y-I8-Ha9">
-                                                    <rect key="frame" x="25.999999999999993" y="12.666666666666666" width="104.33333333333331" height="19.333333333333336"/>
+                                                    <rect key="frame" x="15.999999999999993" y="12.666666666666666" width="104.33333333333331" height="19.333333333333336"/>
                                                     <accessibility key="accessibilityConfiguration" label=" ">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -1369,7 +1369,7 @@
                                                 <constraint firstItem="93Y-I8-Ha9" firstAttribute="centerY" secondItem="UhB-eQ-ayF" secondAttribute="centerY" id="PCX-b7-77x"/>
                                                 <constraint firstItem="Q1N-rZ-azR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="93Y-I8-Ha9" secondAttribute="trailing" constant="8" id="VgD-NT-c9p"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Q1N-rZ-azR" secondAttribute="trailing" constant="10" id="lGQ-5B-K1s"/>
-                                                <constraint firstItem="93Y-I8-Ha9" firstAttribute="leading" secondItem="UhB-eQ-ayF" secondAttribute="leadingMargin" constant="10" id="qx6-wq-PTB"/>
+                                                <constraint firstItem="93Y-I8-Ha9" firstAttribute="leading" secondItem="UhB-eQ-ayF" secondAttribute="leadingMargin" id="qx6-wq-PTB"/>
                                                 <constraint firstItem="Q1N-rZ-azR" firstAttribute="centerY" secondItem="UhB-eQ-ayF" secondAttribute="centerY" id="zly-j7-CvK"/>
                                             </constraints>
                                         </tableViewCellContentView>
