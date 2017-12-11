@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
+@property (weak, nonatomic) IBOutlet UILabel *whitelistLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdated;
 @property (weak, nonatomic) IBOutlet UITableViewCell *checkFiltersCell;
@@ -46,6 +47,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 
+@property (nonatomic) NSNumber *startStatus;
 
 - (IBAction)toggleAdguard:(id)sender;
 - (IBAction)clickTwitter:(id)sender;
@@ -57,7 +59,6 @@
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
 - (IBAction)clickGetPro:(id)sender;
-- (IBAction)proToggleStatus:(id)sender;
 
 /**
  Adds rule to User filter.

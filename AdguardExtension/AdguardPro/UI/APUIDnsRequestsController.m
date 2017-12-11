@@ -84,7 +84,9 @@
         APUIDnsLogRecord *record = records[row];
         
         if (!record.representedObject.requests.count) {
-            return nil;
+            cell.textLabel.text = @"";
+            cell.detailTextLabel.text = @"";
+            return cell;
         }
         
         cell.textLabel.text = record.text;

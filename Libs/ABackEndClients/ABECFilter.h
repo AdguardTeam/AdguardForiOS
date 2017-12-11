@@ -19,6 +19,10 @@
 #import "ACommons/ACLang.h"
 #import "ABECConstants.h"
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+#endif
+
 
 @class ASDFilter, ASDFilterMetadata, ASDFilterGroup, ASDFiltersI18n, ASDGroupsI18n, ABECFilterClientMetadata, ABECFilterClientLocalization, ABECFilterClient;
 

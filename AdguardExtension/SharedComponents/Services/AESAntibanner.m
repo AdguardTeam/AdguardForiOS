@@ -434,7 +434,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 [result close];
                 result = [db executeQuery:@"select max(rule_id) from filter_rules where filter_id = ?", rule.filterId];
                 
-                NSNumber *ruleId = @(0);
+                NSNumber *ruleId;
                 if ([result next]) {
                     
                     id maxValue = result[0];

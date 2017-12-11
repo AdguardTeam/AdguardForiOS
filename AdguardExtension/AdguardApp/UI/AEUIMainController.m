@@ -38,6 +38,7 @@
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
 #import "APUIProSectionFooter.h"
+#import "APUIDnsServersController.h"
 
 #define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
@@ -58,7 +59,7 @@
 #endif
 
 #define ITUNES_APP_NAME             @"adguard-adblock-for-ios"
-#define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"
+#define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/us/app/itunes-u/id%@?action=write-review"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 
@@ -99,7 +100,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = AE_PRODUCT_NAME;
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
                              initWithTitle:NSLocalizedString(@"Cancel",
@@ -144,6 +145,8 @@
         
         [self showWelcomeScreen];
     }
+    
+    [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,6 +159,7 @@
 - (void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [AESharedResources.sharedDefaults removeObserver:self forKeyPath:AEDefaultsInvertedWhitelist];
     
     for (id observer in _observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
@@ -276,6 +280,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillAppear:animated];
+    
     [self setToolbar];
 #ifdef PRO
     [self proUpdateStatuses];
@@ -284,6 +290,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
     
     self.navigationController.toolbarHidden = YES;
 }
@@ -308,8 +316,19 @@
     else if ([segue.identifier isEqualToString:TO_WHITELIST_SEGUE_ID]){
         
         [AEUIWhitelistController createWhitelistControllerWithSegue:segue];
+        
+        UIViewController* destination = [segue destinationViewController];
+        destination.navigationItem.title = self.whitelistLabel.text;
     }
     
+#ifdef PRO
+    if([segue.identifier isEqualToString:OpenDnsSettingsSegue]) {
+        
+        [APUIDnsServersController createDnsSercersControllerWithSegue:segue status:self.startStatus];
+        
+        self.startStatus = nil;
+    }
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -360,6 +379,22 @@
 
     [self cell:self.shareCell setHidden:!enabled];
     [self reloadDataAnimated:YES];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if([keyPath isEqualToString:AEDefaultsInvertedWhitelist]) {
+        
+        id value = change[NSKeyValueChangeNewKey];
+        
+        BOOL inverted = NO;
+        
+        if([value isKindOfClass:NSNumber.class]) {
+            inverted = [value boolValue];
+        }
+        
+        self.whitelistLabel.text = inverted ? NSLocalizedString(@"Whitelist (inverted)", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"Whitelist", @"Main Controller. Whitelist cell caption");
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -599,7 +634,10 @@
     
     APVPNManager *manager = [APVPNManager singleton];
     
-    self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    if(manager.enabled)
+        self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
+    else
+        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"Off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
     
     if (manager.lastError) {
         [ACSSystemUtils
@@ -611,8 +649,6 @@
                                      @"title. On error.")
          message:manager.lastError.localizedDescription];
     }
-    
-    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{

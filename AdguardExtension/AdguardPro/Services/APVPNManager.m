@@ -36,12 +36,6 @@
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
-
-NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
-NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
-NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
-NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
@@ -267,7 +261,13 @@ static APVPNManager *singletonVPNManager;
     else{
         dispatch_async(workingQueue, ^{
             
-            [self internalSetEnabled:enabled];
+            if(_busy) {
+                
+                _delayedSetEnabled = @(enabled);
+            } else {
+                
+                [self internalSetEnabled:enabled];
+            }
         });
     }
     
@@ -286,7 +286,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetRemoteServer:activeRemoteDnsServer];
+            if (_busy) {
+                
+                _delayedSetActiveRemoteDnsServer = activeRemoteDnsServer;
+            } else {
+                
+                [self internalSetRemoteServer:activeRemoteDnsServer];
+            }
         });
     }
     
@@ -311,7 +317,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetLocalFiltering:localFiltering];
+            if (_busy) {
+                
+                _delayedSetLocalFiltering = @(localFiltering);
+            } else {
+                
+                [self internalSetLocalFiltering:localFiltering];
+            }
         });
     }
     
@@ -330,7 +342,13 @@ static APVPNManager *singletonVPNManager;
     } else {
         dispatch_async(workingQueue, ^{
             
-            [self internalSetTunnelMode:tunnelMode];
+            if (_busy) {
+                
+                _delayedSetTunnelMode = @(tunnelMode);
+            } else {
+                
+                [self internalSetTunnelMode:tunnelMode];
+            }
         });
     }
     
@@ -654,8 +672,10 @@ static APVPNManager *singletonVPNManager;
         
         APDnsServerObject* remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
         
-        BOOL allreadyAdded = NO;
         if(remoteServer) {
+            
+            BOOL allreadyAdded = NO;
+            
             for(APDnsServerObject* server in _remoteDnsServers) {
                 if([server isEqual:remoteServer]) {
                     
@@ -663,13 +683,13 @@ static APVPNManager *singletonVPNManager;
                     break;
                 }
             }
-        }
         
-        if(!allreadyAdded) {
-            remoteServer.editable = YES;
-            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
-            [_customRemoteDnsServers addObject:remoteServer];
-            [self saveCustomRemoteDnsServersToDefaults];
+            if(!allreadyAdded) {
+                remoteServer.editable = YES;
+                _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:remoteServer];
+                [_customRemoteDnsServers addObject:remoteServer];
+                [self saveCustomRemoteDnsServersToDefaults];
+            }
         }
     }
 }

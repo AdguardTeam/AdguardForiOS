@@ -48,8 +48,8 @@
     OSSpinLock _userWhitelistLock;
     OSSpinLock _userBlacklistLock;
     
-    NSDictionary *_whitelistDnsAddresses;
-    NSDictionary *_remoteDnsAddresses;
+    NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
+    NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
     
     AERDomainFilter *_globalWhitelist;
     AERDomainFilter *_globalBlacklist;
@@ -61,6 +61,8 @@
     
     dispatch_queue_t _readQueue;
     dispatch_block_t _closeCompletion;
+    
+    dispatch_queue_t _sessionsQueue;
     
     BOOL _stopHandling;
 }
@@ -85,6 +87,7 @@
         _closeCompletion = nil;
         
         _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
+        _sessionsQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.sessions", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -99,7 +102,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)fillDnsDictionary:(NSMutableDictionary*)dnsDictionary sourceDnsArray:(NSArray*) sourceDns dstDnsArray: (NSArray*) dstDns defaultDns:(NSString*)defaultDns {
+- (void)fillDnsDictionary:(NSMutableDictionary<NSString*, APDnsServerAddress*> *)dnsDictionary sourceDnsArray:(NSArray<NSString*> *) sourceDns dstDnsArray: (NSArray<APDnsServerAddress*> *) dstDns defaultDns:(APDnsServerAddress*)defaultDns {
     
     NSUInteger dstIndex = 0;
     
@@ -118,10 +121,10 @@
     }
 }
 
--(void)setDeviceDnsAddressesIpv4:(NSArray<NSString *> *)deviceDnsAddressesIpv4
-          deviceDnsAddressesIpv6:(NSArray<NSString *> *)deviceDnsAddressesIpv6
-   adguardRemoteDnsAddressesIpv4:(NSArray<NSString *> *)remoteDnsAddressesIpv4
-   adguardRemoteDnsAddressesIpv6:(NSArray<NSString *> *)remoteDnsAddressesIpv6
+-(void)setDeviceDnsAddressesIpv4:(NSArray<APDnsServerAddress *> *)deviceDnsAddressesIpv4
+          deviceDnsAddressesIpv6:(NSArray<APDnsServerAddress *> *)deviceDnsAddressesIpv6
+   adguardRemoteDnsAddressesIpv4:(NSArray<APDnsServerAddress *> *)remoteDnsAddressesIpv4
+   adguardRemoteDnsAddressesIpv6:(NSArray<APDnsServerAddress *> *)remoteDnsAddressesIpv6
      adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv4
      adguardFakeDnsAddressesIpv6:(NSArray<NSString *> *)fakeDnsAddressesIpv6
 {
@@ -133,16 +136,16 @@
     
         NSMutableDictionary* whiteListDnsDictionary = [NSMutableDictionary dictionary];
         
-        NSString* defaultWhiteListDnsIpv4 = deviceDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
-        NSString* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: defaultWhiteListDnsIpv4;
+        APDnsServerAddress* defaultWhiteListDnsIpv4 = deviceDnsAddressesIpv4.firstObject ?: [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
+        APDnsServerAddress* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: defaultWhiteListDnsIpv4;
         
         [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:deviceDnsAddressesIpv4 defaultDns:defaultWhiteListDnsIpv4];
         [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:deviceDnsAddressesIpv6 defaultDns:defaultWhiteListDnsIpv6];
         
         NSMutableDictionary *remoteDnsDictionary = [NSMutableDictionary dictionary];
         
-        NSString* defaultRemoteDnsIpv4 = DEFAULT_DNS_SERVER_IP;
-        NSString* defaultRemoteDnsIpv6 = remoteDnsAddressesIpv4.firstObject ?: DEFAULT_DNS_SERVER_IP;
+        APDnsServerAddress* defaultRemoteDnsIpv4 = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
+        APDnsServerAddress* defaultRemoteDnsIpv6 = remoteDnsAddressesIpv4.firstObject ?: [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
         
         [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4 defaultDns:defaultRemoteDnsIpv4];
         [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6 defaultDns:defaultRemoteDnsIpv6];
@@ -207,21 +210,30 @@
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
+    
+    ASSIGN_WEAK(self);
 
-    dispatch_block_t closeCompletion = nil;
-    @synchronized(self) {
-
+    dispatch_async(_sessionsQueue, ^{
+        
+        ASSIGN_STRONG(self);
+        
+        if(!USE_STRONG(self))
+            return;
+        
+        dispatch_block_t closeCompletion = nil;
+        
         [_sessions removeObject:session];
         
-        if (_closeCompletion && _sessions.count == 0) {
-            closeCompletion = _closeCompletion;
-            _closeCompletion = nil;
+        if (USE_STRONG(self)->_closeCompletion && USE_STRONG(self)->_sessions.count == 0) {
+            closeCompletion = USE_STRONG(self)->_closeCompletion;
+            USE_STRONG(self)->_closeCompletion = nil;
         }
-    }
-    if (closeCompletion) {
-        DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
-        [ACSSystemUtils callOnMainQueue:closeCompletion];
-    }
+        
+        if (closeCompletion) {
+            DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
+            [ACSSystemUtils callOnMainQueue:closeCompletion];
+        }
+    });
 }
 
 - (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
@@ -277,7 +289,7 @@
     return result;
 }
 
-- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress {
+- (APDnsServerAddress *)whitelistServerAddressForAddress:(NSString *)serverAddress {
     
     if (!serverAddress) {
         serverAddress = [NSString new];
@@ -285,10 +297,10 @@
     
     OSSpinLockLock(&_dnsAddressLock);
 
-    NSString *address = _whitelistDnsAddresses[serverAddress];
+    APDnsServerAddress *address = _whitelistDnsAddresses[serverAddress];
     
     if (!address) {
-        address = DEFAULT_DNS_SERVER_IP;
+        address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
     OSSpinLockUnlock(&_dnsAddressLock);
@@ -296,7 +308,7 @@
     return address;
 }
 
-- (NSString *)serverAddressForFakeDnsAddress:(NSString *)serverAddress {
+- (APDnsServerAddress *)serverAddressForFakeDnsAddress:(NSString *)serverAddress {
     
     if (!serverAddress) {
         serverAddress = [NSString new];
@@ -304,10 +316,10 @@
     
     OSSpinLockLock(&_dnsAddressLock);
     
-    NSString *address = _remoteDnsAddresses[serverAddress];
+    APDnsServerAddress *address = _remoteDnsAddresses[serverAddress];
     
     if (!address) {
-        address = DEFAULT_DNS_SERVER_IP;
+        address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
     OSSpinLockUnlock(&_dnsAddressLock);
@@ -317,12 +329,19 @@
 
 - (void)closeAllConnections:(void (^)(void))completion {
     
-    @synchronized (self) {
+    ASSIGN_WEAK(self);
+    
+    dispatch_async(_sessionsQueue, ^{
         
-        [self stopHandlingPackets];
+        ASSIGN_STRONG(self);
         
-        NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
-        if(_sessions.count == 0) {
+        if(!USE_STRONG(self))
+            return;
+        
+        [USE_STRONG(self) stopHandlingPackets];
+        
+        NSArray <APTUdpProxySession *> *sessions = [USE_STRONG(self)->_sessions allObjects];
+        if(USE_STRONG(self)->_sessions.count == 0) {
             
             if (completion) {
                 DDLogInfo(@"(APTunnelConnectionsHandler) no open sessions. closeAllConnections completion will be run.");
@@ -331,7 +350,7 @@
         }
         else {
             
-            _closeCompletion = completion;
+            USE_STRONG(self)->_closeCompletion = completion;
             
             for (APTUdpProxySession *item in sessions) {
                 
@@ -339,7 +358,7 @@
             }
         }
         DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections method completed.");
-    }
+    });
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark KVO
@@ -495,27 +514,34 @@
 
 - (void)performSend:(NSDictionary<APTUdpProxySession *, NSArray *> *)packetsBySessions {
 
-    @synchronized(self) {
-
+    ASSIGN_WEAK(self);
+    
+    dispatch_sync(_sessionsQueue, ^{
+        
+        ASSIGN_STRONG(self);
+        
+        if(!USE_STRONG(self))
+            return;
+        
         DDLogTrace();
         [packetsBySessions enumerateKeysAndObjectsUsingBlock:^(APTUdpProxySession *_Nonnull key, NSArray *_Nonnull obj, BOOL *_Nonnull stop) {
-
-          APTUdpProxySession *session = [_sessions member:key];
-          if (!session) {
-              //create session
-              session = key;
-              if ([session createSession]) {
-                  
-                  [session setLoggingEnabled:_loggingEnabled];
-                  [_sessions addObject:session];
-              }
-              else
-                  session = nil;
-          }
-
-          [session appendPackets:obj];
+            
+            APTUdpProxySession *session = [USE_STRONG(self)->_sessions member:key];
+            if (!session) {
+                //create session
+                session = key;
+                if ([session createSession]) {
+                    
+                    [session setLoggingEnabled:USE_STRONG(self)->_loggingEnabled];
+                    [USE_STRONG(self)->_sessions addObject:session];
+                }
+                else
+                    session = nil;
+            }
+            
+            [session appendPackets:obj];
         }];
-    }
+    });
 }
 
 - (BOOL)checkDomain:(__unsafe_unretained NSString *)domainName withList:(__unsafe_unretained NSArray <NSString *> *)domainList {

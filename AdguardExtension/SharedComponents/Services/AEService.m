@@ -25,6 +25,7 @@
 #import "AESharedResources.h"
 #import "AEFilterRuleSyntaxConstants.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
 NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
@@ -431,7 +432,6 @@ static AEService *singletonService;
                                          objectForKey:AEDefaultsJSONConvertedRules] integerValue];
             NSInteger totalConvertedRulesCount = [[[AESharedResources sharedDefaults]
                                                    objectForKey:AEDefaultsJSONRulesForConvertion] integerValue];
-            BOOL overlimit = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached];
             
             
                 NSError *error = nil;
@@ -467,10 +467,9 @@ static AEService *singletonService;
                             
                             totalConvertedRulesCount--;
                             convertedRules--;
-                            overlimit = NO;
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
-                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(NO)];
                             
                             jsonNotModified = NO;
                         }
@@ -642,11 +641,27 @@ static AEService *singletonService;
                             
                             // getting filters rules
                             NSMutableArray *rules = [self.antibanner activeRules];
-                            // getting whitelist rules
-                            NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
-                            if (whitelistRules.count) {
-                                [rules addObjectsFromArray:whitelistRules];
+                            
+                            BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+                            
+                            if(inverted) {
+                                
+                                // get rule for inverted whilelist
+                                AEInvertedWhitelistDomainsObject *invertedWhitelistObject = [AESharedResources new].invertedWhitelistContentBlockingObject;
+                                
+                                if(invertedWhitelistObject.rule) {
+                                    [rules addObject:invertedWhitelistObject.rule];
+                                }
                             }
+                            else {
+                                
+                                // getting whitelist rules
+                                NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
+                                if (whitelistRules.count) {
+                                    [rules addObjectsFromArray:whitelistRules];
+                                }
+                            }
+                            
                             
                             if (rules.count) {
                                 

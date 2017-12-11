@@ -705,6 +705,43 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D047E51C1F443D6D00A4F0C5 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
+		D096D9461F28C0D70081004D /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D096D9451F28C0D70081004D /* TodayViewController.m */; };
+		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
+		D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D096D9401F28C0D70081004D /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
+		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85B1F94EC5900F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85D1F94EC5B00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E3A85E1F94EC5C00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0E607531F45909700B4D72B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E607511F45909700B4D72B /* Localizable.strings */; };
+		D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
+		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -848,6 +885,13 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		D096D94B1F28C0D70081004D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D096D93F1F28C0D70081004D;
+			remoteInfo = TodayExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -859,6 +903,7 @@
 			files = (
 				6582373D1D07FE6700B824F4 /* ProTunnel.appex in Embed App Extensions */,
 				659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */,
+				D096D94D1F28C0D70081004D /* TodayExtension.appex in Embed App Extensions */,
 				659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -1324,6 +1369,17 @@
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D0427C761F434129002FB018 /* APDnsServerAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsServerAddress.h; sourceTree = "<group>"; };
+		D0427C771F434129002FB018 /* APDnsServerAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerAddress.m; sourceTree = "<group>"; };
+		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
+		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
+		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D096D9441F28C0D70081004D /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		D096D9451F28C0D70081004D /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		D096D9481F28C0D70081004D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D096D94A1F28C0D70081004D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D096D9521F28C2BD0081004D /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
 		D0B7F2571F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D0B7F2581F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProLaunchScreen.strings; sourceTree = "<group>"; };
@@ -1333,6 +1389,29 @@
 		D0B7F25C1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0B7F25D1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/AdguardPro.Tunnel.strings; sourceTree = "<group>"; };
 		D0B7F25E1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607521F45909700B4D72B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = TodayExtension/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		D0E607681F4590F500B4D72B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607691F45917600B4D72B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6076A1F45917700B4D72B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6076B1F45917800B4D72B /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6076C1F45917900B4D72B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6076D1F45917A00B4D72B /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E6076E1F45917B00B4D72B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E6076F1F45917C00B4D72B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607701F45917D00B4D72B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607711F45917E00B4D72B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E607721F45917F00B4D72B /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E607731F45918100B4D72B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607741F45918200B4D72B /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607751F45918200B4D72B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E607761F45918400B4D72B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E607771F45918500B4D72B /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E607781F45918500B4D72B /* et-EE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "et-EE"; path = "et-EE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D0E607791F45918600B4D72B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6077A1F45918700B4D72B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E6077B1F45918800B4D72B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEInvertedWhitelistDomainsObject.h; sourceTree = "<group>"; };
+		D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEInvertedWhitelistDomainsObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1452,6 +1531,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93D1F28C0D70081004D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */,
+				D096D9511F28C2BD0081004D /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1781,6 +1869,10 @@
 				651F5E051E25004600E22157 /* APDnsServerObject.m */,
 				65EBB4AB1E79DB6400CB08E3 /* APWhitelistDomainObject.h */,
 				65EBB4AC1E79DB6400CB08E3 /* APWhitelistDomainObject.m */,
+				D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */,
+				D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */,
+				D0427C761F434129002FB018 /* APDnsServerAddress.h */,
+				D0427C771F434129002FB018 /* APDnsServerAddress.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -1905,6 +1997,8 @@
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
 				65B40D391BDE807400A9C595 /* stringUIResources.plist */,
+				D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */,
+				D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -1992,6 +2086,7 @@
 			isa = PBXGroup;
 			children = (
 				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
+				D096D9411F28C0D70081004D /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2116,6 +2211,7 @@
 				658FECF91E240B8F0013BCE3 /* AdguardProUITests */,
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
 				652F587A1E106DF10012353C /* AdguardLogSender */,
+				D096D9431F28C0D70081004D /* TodayExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
@@ -2137,6 +2233,7 @@
 				652F58791E106DF10012353C /* AdguardLogSender.app */,
 				652F58DE1E1071470012353C /* AdguardLogSenderPro.app */,
 				658FECF81E240B8F0013BCE3 /* AdguardProUITests.xctest */,
+				D096D9401F28C0D70081004D /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2205,6 +2302,27 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		D096D9431F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D0E607341F45844D00B4D72B /* Supporting Files */,
+				D096D9521F28C2BD0081004D /* TodayExtension.entitlements */,
+				D096D9441F28C0D70081004D /* TodayViewController.h */,
+				D096D9451F28C0D70081004D /* TodayViewController.m */,
+				D096D9471F28C0D70081004D /* MainInterface.storyboard */,
+			);
+			path = TodayExtension;
+			sourceTree = "<group>";
+		};
+		D0E607341F45844D00B4D72B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D0E607511F45909700B4D72B /* Localizable.strings */,
+				D096D94A1F28C0D70081004D /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2344,6 +2462,7 @@
 				659887741CF83CE7003ECD1C /* PBXTargetDependency */,
 				659887771CF83CF3003ECD1C /* PBXTargetDependency */,
 				6582373C1D07FE6700B824F4 /* PBXTargetDependency */,
+				D096D94C1F28C0D70081004D /* PBXTargetDependency */,
 			);
 			name = "Adguard Pro";
 			productName = AdguardExtension;
@@ -2487,6 +2606,23 @@
 			productReference = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		D096D93F1F28C0D70081004D /* TodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */;
+			buildPhases = (
+				D096D93C1F28C0D70081004D /* Sources */,
+				D096D93D1F28C0D70081004D /* Frameworks */,
+				D096D93E1F28C0D70081004D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayExtension;
+			productName = TodayExtension;
+			productReference = D096D9401F28C0D70081004D /* TodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2600,6 +2736,15 @@
 							};
 						};
 					};
+					D096D93F1F28C0D70081004D = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = N33TQXN8C7;
+						SystemCapabilities = {
+							com.apple.NetworkExtensions = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */;
@@ -2649,6 +2794,7 @@
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
 				658FECF71E240B8F0013BCE3 /* AdguardProUITests */,
+				D096D93F1F28C0D70081004D /* TodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2786,6 +2932,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D096D93E1F28C0D70081004D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */,
+				D0E607531F45909700B4D72B /* Localizable.strings in Resources */,
+				D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2912,7 +3068,9 @@
 				652F58931E106FD40012353C /* ACLJobController.m in Sources */,
 				652F58941E106FD40012353C /* ACLLogger.m in Sources */,
 				652F58951E106FD40012353C /* ACLWildcard.m in Sources */,
+				D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58961E106FD40012353C /* CLIColor.m in Sources */,
+				D0E3A85D1F94EC5B00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				652F58971E106FD40012353C /* DDAbstractDatabaseLogger.m in Sources */,
 				652F58981E106FD40012353C /* DDASLLogger.m in Sources */,
 				652F58991E106FD40012353C /* DDFileLogger.m in Sources */,
@@ -2968,9 +3126,11 @@
 				65A82BBC1EC9AD66004B0140 /* APVPNManager.m in Sources */,
 				652F590A1E1073080012353C /* FMDatabasePool.m in Sources */,
 				652F590B1E1073080012353C /* FMDatabaseQueue.m in Sources */,
+				D047E51C1F443D6D00A4F0C5 /* APDnsServerAddress.m in Sources */,
 				652F590C1E1073080012353C /* FMResultSet.m in Sources */,
 				652F590D1E1073080012353C /* FMSQLStatementSplitter.m in Sources */,
 				652F590E1E1073080012353C /* FMStatementKeywordRecogniser.m in Sources */,
+				D0E3A85E1F94EC5C00F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				652F590F1E1073080012353C /* FMStatementQuotedRecogniser.m in Sources */,
 				652F59101E1073080012353C /* AESAntibanner.m in Sources */,
 				652F59111E1073080012353C /* AEService.m in Sources */,
@@ -3001,6 +3161,7 @@
 				652F58C61E1071470012353C /* ACObject.m in Sources */,
 				652F58C71E1071470012353C /* ACNHttpUtils.m in Sources */,
 				652F58C81E1071470012353C /* ACNNetworking.m in Sources */,
+				D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				652F58C91E1071470012353C /* ACSSystemUtils.m in Sources */,
 				652F58CA1E1071470012353C /* ADLocales.m in Sources */,
 				652F58CB1E1071470012353C /* ADLocations.m in Sources */,
@@ -3034,11 +3195,13 @@
 				653AEA041D084B6400AC81B4 /* NSException+Utils.m in Sources */,
 				653AEA051D084B6400AC81B4 /* NSString+Utils.m in Sources */,
 				653AE9FC1D084B6400AC81B4 /* DDASLLogger.m in Sources */,
+				D0E3A85B1F94EC5900F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				653AE9FF1D084B6400AC81B4 /* DDTTYLogger.m in Sources */,
 				655AAC9C1D37821200E316EA /* APDnsLogRecord.m in Sources */,
 				65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				65B6211A1D2E845D0047248F /* APTDnsRequest.m in Sources */,
 				655AAC911D37780700E316EA /* APDnsResponse.m in Sources */,
+				D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				653AE9F81D084B6400AC81B4 /* ACLLogger.m in Sources */,
 				65B4F02E1D5C828300893BA0 /* FMDatabaseAdditions.m in Sources */,
 				65B4F02D1D5C828300893BA0 /* FMDatabase.m in Sources */,
@@ -3082,6 +3245,7 @@
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
 				D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
+				D05CA8731F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
 				6581C92E1D6494E600E739CC /* ABECFilterParsers.m in Sources */,
@@ -3128,6 +3292,7 @@
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				653153651CFC899E00C92A73 /* APUIProSectionFooter.m in Sources */,
+				D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
@@ -3153,6 +3318,7 @@
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
+				D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
 				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
@@ -3183,10 +3349,12 @@
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				6581C93E1D66536500E739CC /* AEUILabelWithCopy.m in Sources */,
+				D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				6598868A1CF74DE9003ECD1C /* AEUIAboutController.m in Sources */,
 				6598868B1CF74DE9003ECD1C /* DDLog.m in Sources */,
 				655AAC901D37780700E316EA /* APDnsResponse.m in Sources */,
 				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
+				D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */,
 				6598868C1CF74DE9003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
 				655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */,
@@ -3235,6 +3403,7 @@
 				659887031CF83580003ECD1C /* ACLFileLogger.m in Sources */,
 				659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */,
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
+				D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
 				6574ADE31EA511A10054DC7E /* NSData+GZIP.m in Sources */,
 				65CB60361D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
@@ -3248,6 +3417,7 @@
 				6598870D1CF83580003ECD1C /* NSString+Utils.m in Sources */,
 				6598870E1CF83580003ECD1C /* AEAUIDomainCell.m in Sources */,
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
+				D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */,
@@ -3267,6 +3437,7 @@
 				6598871D1CF83580003ECD1C /* DDLog.m in Sources */,
 				6598871E1CF83580003ECD1C /* ACNNetworking.m in Sources */,
 				6598871F1CF83580003ECD1C /* ABECFilterParsers.m in Sources */,
+				D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */,
 				659887201CF83580003ECD1C /* ACNHttpUtils.m in Sources */,
 				659887211CF83580003ECD1C /* FMResultSet.m in Sources */,
 				659887221CF83580003ECD1C /* ASDFilterObjects.m in Sources */,
@@ -3309,6 +3480,7 @@
 				659887581CF83947003ECD1C /* ACIOStream.m in Sources */,
 				659887591CF83947003ECD1C /* NSURL+Utils.m in Sources */,
 				658E439D1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA8721F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				6598875A1CF83947003ECD1C /* ADLocations.m in Sources */,
 				6598875B1CF83947003ECD1C /* NSDate+Utils.m in Sources */,
 				6598875C1CF83947003ECD1C /* ACLLogger.m in Sources */,
@@ -3360,6 +3532,7 @@
 				65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */,
 				65C12EF11BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
+				D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				655A023C1C6B7686000F00D7 /* ACLJobController.m in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				655A02541C6B7686000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -3396,6 +3569,7 @@
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				655A025D1C6B7686000F00D7 /* DDLog.m in Sources */,
+				D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655A02931C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3418,6 +3592,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
@@ -3464,6 +3639,7 @@
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
@@ -3529,6 +3705,7 @@
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
+				D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3558,6 +3735,7 @@
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				658E43991E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
+				D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				65EC9CC71BB9841400F53F3B /* ADLocations.m in Sources */,
 				655A02771C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				655A023E1C6B7686000F00D7 /* ACLLogger.m in Sources */,
@@ -3569,6 +3747,22 @@
 				655A02A41C6B7686000F00D7 /* Reachability.m in Sources */,
 				651F5E0D1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02501C6B7686000F00D7 /* CLIColor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D096D93C1F28C0D70081004D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */,
+				D05CA86A1F3B635C006DFD7F /* ACObject.m in Sources */,
+				D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */,
+				D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */,
+				D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
+				D05CA8671F3B61CC006DFD7F /* ACSSystemUtils.m in Sources */,
+				D05CA8681F3B61DA006DFD7F /* NSException+Utils.m in Sources */,
+				D096D9461F28C0D70081004D /* TodayViewController.m in Sources */,
+				D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3674,6 +3868,11 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
+		};
+		D096D94C1F28C0D70081004D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D096D93F1F28C0D70081004D /* TodayExtension */;
+			targetProxy = D096D94B1F28C0D70081004D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3876,6 +4075,43 @@
 				D0B7F2571F1CE76000D545CD /* fa */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D096D9471F28C0D70081004D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D096D9481F28C0D70081004D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		D0E607511F45909700B4D72B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0E607521F45909700B4D72B /* Base */,
+				D0E607681F4590F500B4D72B /* ru */,
+				D0E607691F45917600B4D72B /* en */,
+				D0E6076A1F45917700B4D72B /* de */,
+				D0E6076B1F45917800B4D72B /* pl */,
+				D0E6076C1F45917900B4D72B /* it */,
+				D0E6076D1F45917A00B4D72B /* sr-Latn */,
+				D0E6076E1F45917B00B4D72B /* es-419 */,
+				D0E6076F1F45917C00B4D72B /* ko */,
+				D0E607701F45917D00B4D72B /* tr */,
+				D0E607711F45917E00B4D72B /* zh-Hans */,
+				D0E607721F45917F00B4D72B /* es-ES */,
+				D0E607731F45918100B4D72B /* uk */,
+				D0E607741F45918200B4D72B /* fi */,
+				D0E607751F45918200B4D72B /* zh-Hant */,
+				D0E607761F45918400B4D72B /* pt-BR */,
+				D0E607771F45918500B4D72B /* bg */,
+				D0E607781F45918500B4D72B /* et-EE */,
+				D0E607791F45918600B4D72B /* hu */,
+				D0E6077A1F45918700B4D72B /* hr */,
+				D0E6077B1F45918800B4D72B /* fa */,
+			);
+			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -4492,6 +4728,66 @@
 			};
 			name = Release;
 		};
+		D096D94E1F28C0D70081004D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D096D94F1F28C0D70081004D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(SRCROOT)/TodayExtension/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.AdguardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4635,6 +4931,15 @@
 			buildConfigurations = (
 				65F3986A1B7B6A5300ABCD39 /* Debug */,
 				65F3986B1B7B6A5300ABCD39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D096D9501F28C0D70081004D /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D096D94E1F28C0D70081004D /* Debug */,
+				D096D94F1F28C0D70081004D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -23,6 +23,8 @@
 #import "ASDFilterObjects.h"
 #import "ABECRequest.h"
 #import "ABECFilterParsers.h"
+#import "ADProductInfo.h"
+#import "ADLocales.h"
 
 @implementation ABECFilterClientMetadata
 @end
@@ -63,7 +65,16 @@ NSString *FilterUrlEnd = @"_optimized.txt";
 NSString *FilterMetadataUrl = ABEC_FILTER_URL_BASE @"filters.json";
 NSString *FilterI18nUrl = ABEC_FILTER_URL_BASE @"filters_i18n.json";
 
+NSString *VERSION_PARAM = @"v";
+NSString *USER_ID_PARAM = @"cid";
+NSString *SYSTEM_LANGUAGE_PARAM = @"lang";
+NSString *PRODUCT_TYPE_PARAM = @"id";
 
+#ifdef PRO
+NSString *PRODUCT_TYPE = @"ios_pro";
+#else
+NSString *PRODUCT_TYPE = @"ios";
+#endif
 
 
 @implementation ABECFilterClient {
@@ -153,7 +164,7 @@ static ABECFilterClient *ABECFilterSingleton;
             return error;
         }
         
-        NSURLRequest *sURLRequest = [[ABECRequest getRequestForURL:[NSURL URLWithString:FilterMetadataUrl] parameters:nil] copy];
+        NSURLRequest *sURLRequest = [[self createMetadataRequest] copy];
         
         NSURLSessionDownloadTask *currentTask = [_backgroundSession downloadTaskWithRequest:sURLRequest];
         [currentTask resume];
@@ -210,7 +221,7 @@ static ABECFilterClient *ABECFilterSingleton;
 - (ABECFilterClientMetadata *)metadata {
     @autoreleasepool {
         
-        ABECRequest *sURLRequest = [ABECRequest getRequestForURL:[NSURL URLWithString:FilterMetadataUrl] parameters:nil];
+        ABECRequest *sURLRequest = [self createMetadataRequest];
         JSONMetadataParser *parser = [JSONMetadataParser new];
         
         parser = (JSONMetadataParser *)[self loadEntityWithRequest:sURLRequest parser:parser];
@@ -570,5 +581,22 @@ static ABECFilterClient *ABECFilterSingleton;
     
     return nil;
  }
+
+- (ABECRequest*) createMetadataRequest {
+    
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    
+    params[VERSION_PARAM] = [ADProductInfo version];
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+    params[USER_ID_PARAM] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+#endif
+    
+    params[PRODUCT_TYPE_PARAM] = PRODUCT_TYPE;
+    params[SYSTEM_LANGUAGE_PARAM] = [NSString stringWithFormat:@"%@-%@", [ADLocales lang], [ADLocales region]];
+    
+    ABECRequest *request = [ABECRequest getRequestForURL:[NSURL URLWithString:FilterMetadataUrl] parameters:params];
+    
+    return request;
+}
 
 @end
