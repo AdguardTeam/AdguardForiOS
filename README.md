@@ -26,7 +26,7 @@ To see the 'big picture', to watch current progress and to get an idea of approx
 
 ### Releases
 
- * AdGuard for iOS latest version: [1.3.1](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v.1.3.1)
+ * AdGuard for iOS latest version: [1.3.3](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v1.3.3)
  * AdGuard Pro for iOS latest version: [1.3.3](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v1.3.3-pro)
 
 You can find all AdGuard and AdGuard Pro for iOS releases here: https://github.com/AdguardTeam/AdguardForiOS/releases
