@@ -103,8 +103,8 @@ typedef void (^AEDownloadsCompletionBlock)();
         self.window.backgroundColor = [UIColor whiteColor];
         
         UIPageControl *pageControl = [UIPageControl appearance];
-        pageControl.backgroundColor = [UIColor whiteColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+        pageControl.backgroundColor = [UIColor blackColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
         //----------- Set main navigation controller -----------------------
@@ -222,6 +222,14 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
+    
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    AEUIMainController *main = nav.viewControllers[0];
+    
+    if ([main isKindOfClass:[AEUIMainController class]]) {
+        
+        [main checkContentBlockerStatus];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -388,13 +396,11 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
             
-            main.startStatus = @(YES);
-            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+            [main setProStatus:YES];
         }
         else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
             
-            main.startStatus = @(NO);
-            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+            [main setProStatus:NO];
         }
         else {
             return NO;

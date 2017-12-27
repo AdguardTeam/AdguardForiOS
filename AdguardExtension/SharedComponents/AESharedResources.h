@@ -85,6 +85,25 @@ extern NSString *AEDefaultsJSONConverterOptimize;
 extern NSString *AEDefaultsWifiOnlyUpdates;
 
 /**
+ User Defaults key, which defines that video tutorial cell must be hidden.
+ */
+extern NSString *AEDefaultsHideVideoTutorial;
+
+/**
+ User Defaults key, which defines total request count.
+ */
+extern NSString *AEDefaultsTotalRequestsCount;
+
+/**
+ User Defaults key, which defines total request time.
+ */
+extern NSString *AEDefaultsTotalRequestsTime;
+/**
+ User Defaults key, which defines total trackers request count.
+ */
+extern NSString *AEDefaultsTotalTrackersCount;
+
+/**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
  */
 extern NSString *AEDefaultsInvertedWhitelist;
@@ -178,6 +197,5 @@ extern NSString *AEDefaultsInvertedWhitelist;
  We need it because filter update process is performed in two steps.
  */
 @property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
-
 
 @end

@@ -40,7 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
@@ -86,6 +87,11 @@
         
         
     }
+    
+    [AEService.singleton checkStatusWithCallback:^(BOOL enabled) {
+       
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(Action Extension - AEAUIMainController) Warning tile") message:NSLocalizedString(@"Note that the Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

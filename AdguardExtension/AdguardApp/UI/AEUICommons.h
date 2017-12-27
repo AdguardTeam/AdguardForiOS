@@ -21,4 +21,5 @@
 
 #define AEUIC_WARNING_COLOR      [UIColor colorWithRed:0.737254902f green:0.274509804f blue:0.345098039f alpha:1.0f]
 #define AEUIC_EXCEPTION_COLOR      [UIColor colorWithRed:0.22745098f green:0.670588235f blue:0.278431373f alpha:1.0f]
+#define AEUIC_TRACKER_COLOR      [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:1.0f]
 #endif /* AEUICommons_h */

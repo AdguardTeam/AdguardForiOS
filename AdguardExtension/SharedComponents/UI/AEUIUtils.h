@@ -80,4 +80,9 @@
                completionBlock:(dispatch_block_t)completionBlock
                  rollbackBlock:(void (^)(NSError *error))rollbackBlock;
 
+/**
+ add adguard logo to navigation bar
+ */
++ (void) addTitleViewToNavigationItem:(UINavigationItem*) navigationItem;
+
 @end

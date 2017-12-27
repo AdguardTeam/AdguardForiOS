@@ -139,5 +139,14 @@
     }
 }
 
++ (void)addTitleViewToNavigationItem:(UINavigationItem *)navigationItem {
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 119, 27)];
+    UIImageView *titleLogo = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"navbarLogo"]];
+    titleLogo.contentMode = UIViewContentModeScaleAspectFit;
+    titleLogo.frame = titleView.frame;
+    [titleView addSubview:titleLogo];
+    navigationItem.titleView = titleView;
+}
 
 @end

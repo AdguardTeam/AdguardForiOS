@@ -39,10 +39,14 @@
 #import "APDnsServerObject.h"
 #import "APUIProSectionFooter.h"
 #import "APUIDnsServersController.h"
+#import "AERDomainFilterRule.h"
+#import "APSharedResources.h"
 
 #define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
 #define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
+
+#define VIDEO_IMAGE_MAX_HEIGHT 200
 
 #endif
 
@@ -69,6 +73,8 @@
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
 #define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+#define TO_DNS_BLACKLIST_SEGUE_ID   @"toDnsBlacklist"
+#define TO_DNS_WHITELIST_SEGUE_ID   @"toDnsWhitelist"
 
 #define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
@@ -79,7 +85,6 @@
 
 @interface AEUIMainController (){
     
-    AEUIWelcomePagerDataSource *_welcomePageSource;
     BOOL _inCheckUpdates;
     NSString *_updateButtonTextHolder;
     NSMutableArray *_observers;
@@ -100,6 +105,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
@@ -113,12 +119,17 @@
     //-----------------
     
     [self proAttachToNotifications];
+    [self updateCounters];
+    self.hideSectionsWithHiddenRows = YES;
+    //self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
     
     self.getProButton.enabled = YES;
     self.getProButton.title = @"Get PRO";
+    
 #endif
     
     [self reloadDataAnimated:NO];
@@ -145,6 +156,54 @@
         
         [self showWelcomeScreen];
     }
+
+    CGSize starsSize = CGSizeMake(self.view.frame.size.width, self.headerView.frame.size.height);
+    self.starsLayer = [[AEUIStarsLayer alloc] initWithSize:starsSize];
+    [self.headerView.layer addSublayer:self.starsLayer];
+    
+
+    [AEUIUtils addTitleViewToNavigationItem:self.navigationItem];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                             forBarMetrics:UIBarMetricsDefault];
+    
+    if([[AESharedResources.sharedDefaults valueForKey:AEDefaultsHideVideoTutorial] boolValue])
+    {
+        [self cell:self.videoCell setHidden:YES];
+        [self reloadDataAnimated:NO];
+    }
+    else {
+        
+        self.shareCell.separatorInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, CGFLOAT_MAX);
+        
+        for (UIView *view in self.videoCell.subviews){
+            
+            if(view != self.videoCell.contentView) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
+        [hideButton centerIconOverText];
+        
+        hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            
+            [self cell:self.videoCell setHidden:YES];
+            [self reloadDataAnimated:YES];
+            
+            [AESharedResources.sharedDefaults setObject:@(YES) forKey:AEDefaultsHideVideoTutorial];
+            
+            return NO;
+        };
+        self.videoCell.rightButtons = @[hideButton];
+    }
+    
+    [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsTotalRequestsCount options:NSKeyValueObservingOptionNew context:nil];
+    
+    [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsTotalRequestsTime options:NSKeyValueObservingOptionNew context:nil];
+    
+    [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsTotalTrackersCount options:NSKeyValueObservingOptionNew context:nil];
+
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
 }
@@ -152,8 +211,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    _welcomePageSource = nil;
 }
 
 - (void)dealloc{
@@ -261,6 +318,17 @@
     [[UIApplication sharedApplication] openURL:theURL];
 }
 
+#ifdef PRO
+- (IBAction)toggleStatus:(id)sender {
+    
+    BOOL enabled = [(UISwitch *)sender isOn];
+    [[APVPNManager singleton] setEnabled:enabled];
+    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
+}
+#endif
+
+#pragma mark public methods
+
 - (void)addRuleToUserFilter:(NSString *)ruleText{
 
     if ([NSString isNullOrEmpty:ruleText]) {
@@ -276,11 +344,55 @@
     });
 }
 
+- (void)checkContentBlockerStatus {
+    
+    ASSIGN_WEAK(self);
+    
+    [AEService.singleton checkStatusWithCallback:^(BOOL enabled) {
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            ASSIGN_STRONG(self);
+            
+            static BOOL status = NO;
+            
+            if(status != enabled) {
+                
+                status = enabled;
+                
+                [USE_STRONG(self).starsLayer removeFromSuperlayer];
+                
+                UIView* headerView = USE_STRONG(self).tableView.tableHeaderView;
+                CGSize starsSize = CGSizeMake(USE_STRONG(self).view.frame.size.width, headerView.frame.size.height);
+                USE_STRONG(self).starsLayer = [[AEUIStarsLayer alloc] initWithSize:starsSize];
+                
+                USE_STRONG(self).starsLayer.fast = enabled;
+                
+                [headerView.layer addSublayer:USE_STRONG(self).starsLayer];
+                
+                self.disabledLabel.hidden = enabled;
+            }
+        });
+    }];
+}
+
+#ifdef PRO
+
+- (void)setProStatus:(BOOL)enabled {
+    
+    // todo: switchStatus:enabled; updatestatuses;
+}
+
+#endif
+
 #pragma mark Navigation
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    [self checkContentBlockerStatus];
     
     [self setToolbar];
 #ifdef PRO
@@ -304,12 +416,132 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"tutorialRunSegue"]) {
+#ifdef PRO
+    BOOL toWhitelist = [segue.identifier isEqualToString:TO_DNS_WHITELIST_SEGUE_ID];
+    BOOL toBlacklist = [segue.identifier isEqualToString:TO_DNS_BLACKLIST_SEGUE_ID];
+    
+    if (toBlacklist || toWhitelist) {
         
-        UIPageViewController *destination = [segue destinationViewController];
-        [self prepareWelcomeScreenForController:destination];
+        AEUICustomTextEditorController *domainList = segue.destinationViewController;
+        
+        domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
+                                                   NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
+                                                                     @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.")];
+        
+        domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
+        
+        domainList.navigationItem.title = toWhitelist
+        ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
+        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
+        //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
+        
+        domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
+            
+            NSMutableArray *domains = [NSMutableArray array];
+            @autoreleasepool {
+                
+                NSMutableCharacterSet *delimCharSet;
+                
+                delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+                
+                for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
+                    
+                    NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    if (candidate.length) {
+                        
+                        if(toBlacklist && ![AERDomainFilterRule isValidRuleText:candidate]) {
+                            
+                            [editor selectWithType:AETESelectionTypeError text:candidate];
+                            return NO;
+                        }
+                        
+                        [domains addObject:candidate];
+                    }
+                }
+            }
+            
+            @autoreleasepool {
+                
+                NSArray *propertyHolder;
+                
+                if (toBlacklist) {
+                    
+                    propertyHolder = APSharedResources.blacklistDomains;
+                    APSharedResources.blacklistDomains = domains;
+                }
+                else {
+                    
+                    propertyHolder = APSharedResources.whitelistDomains;
+                    APSharedResources.whitelistDomains = domains;
+                }
+                
+                APVPNManager *manager = [APVPNManager singleton];
+                [manager sendReloadSystemWideDomainLists];
+                
+                if (manager.lastError) {
+                    
+                    //processing of the error
+                    if (toBlacklist) {
+                        APSharedResources.blacklistDomains = propertyHolder;
+                    }
+                    else {
+                        
+                        APSharedResources.whitelistDomains = propertyHolder;
+                    }
+                    
+                    return NO;
+                }
+            }
+            
+            return YES;
+            
+        };
+        domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
+            
+            // copy-paste multiline text from file
+            NSMutableCharacterSet* delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+            if ([text rangeOfCharacterFromSet:delimCharSet].location != NSNotFound) {
+                return YES;
+            }
+            
+            // copy-paste single line address from safari address bar
+            if ([text contains:@"/"]) {
+                if (text.length > 1) {
+                    
+                    NSURL *url = [NSURL URLWithString:text];
+                    text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                    if (text) {
+                        
+                        [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                    }
+                }
+                return NO;
+            }
+            
+            return YES;
+            
+        };
+        
+        NSString *text;
+        if (toBlacklist) {
+            
+            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+        }
+        else {
+            
+            text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+        }
+        if (! [NSString isNullOrEmpty:text]) {
+            
+            domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
+                                                                                  attributes:AEUICustomTextEditorController.defaultTextAttributes];
+        }
+        
     }
-    else if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
+    
+#endif
+    
+    if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
 
         [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
     }
@@ -320,15 +552,6 @@
         UIViewController* destination = [segue destinationViewController];
         destination.navigationItem.title = self.whitelistLabel.text;
     }
-    
-#ifdef PRO
-    if([segue.identifier isEqualToString:OpenDnsSettingsSegue]) {
-        
-        [APUIDnsServersController createDnsSercersControllerWithSegue:segue status:self.startStatus];
-        
-        self.startStatus = nil;
-    }
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -383,6 +606,23 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     
+#ifdef PRO
+    if([keyPath isEqualToString: AEDefaultsTotalRequestsCount]) {
+        
+        [self updateTotalRequests];
+    }
+    
+    if([keyPath isEqualToString: AEDefaultsTotalRequestsTime]) {
+        
+        [self updateRequestTime];
+    }
+    
+    if([keyPath isEqualToString: AEDefaultsTotalTrackersCount]) {
+        
+        [self updateTrackers];
+    }
+#endif
+    
     if([keyPath isEqualToString:AEDefaultsInvertedWhitelist]) {
         
         id value = change[NSKeyValueChangeNewKey];
@@ -406,25 +646,7 @@
     UIPageViewController *pager = (UIPageViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"welcomePager"];
     if (pager) {
         
-        [self prepareWelcomeScreenForController:pager];
         [self.navigationController pushViewController:pager animated:YES];
-    }
-}
-
-- (void)prepareWelcomeScreenForController:(UIPageViewController *)pager{
-    
-    if (pager) {
-        
-        if (!_welcomePageSource) {
-            _welcomePageSource = [[AEUIWelcomePagerDataSource alloc] initWithStoryboard:pager.storyboard];
-        }
-        if (_welcomePageSource) {
-            
-            pager.dataSource = _welcomePageSource;
-            _welcomePageSource.currentIndex = 0;
-            [pager setViewControllers:@[[_welcomePageSource currentControllerForIndex:0 ]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-            
-        }
     }
 }
 
@@ -434,11 +656,8 @@
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
     activity.hidden = YES;
-    //    activity.color = self.view.tintColor;
 
     self.checkFiltersCell.accessoryView = activity;
-    self.checkFiltersCell.textLabel.textColor =
-        self.checkFiltersCell.textLabel.tintColor;
     
     // tunning accessibility
     UIAccessibilityTraits checkFiltersCellTraits = self.checkFiltersCell.accessibilityTraits;
@@ -575,6 +794,36 @@
     _inCheckUpdates = NO;
 }
 
+#ifdef PRO
+- (void) updateCounters {
+    
+    [self updateTotalRequests];
+    [self updateTrackers];
+    [self updateRequestTime];
+}
+
+- (void) updateTotalRequests {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    self.totalRequestsCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+- (void) updateRequestTime {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
+    float averageTime = count ? time * 1000 / count : 0;
+    self.avarageTimeLabel.text = [NSString stringWithFormat:@"%.f ms", averageTime];
+}
+
+- (void) updateTrackers {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
+    self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+#endif
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Table Delegate Methods
 
@@ -601,6 +850,19 @@
     return [super tableView:tableView heightForFooterInSection:section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.section == 0) {
+        
+        UIImage *image = [UIImage imageNamed:@"video-image"];
+        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
+        
+        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
 
@@ -618,7 +880,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"Adguard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware & keeping your DNS traffic safe from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"AdGuard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware, protecting your DNS traffic from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -631,6 +893,7 @@
 }
 
 - (void)proUpdateStatuses{
+    
     
     APVPNManager *manager = [APVPNManager singleton];
     
@@ -649,6 +912,10 @@
                                      @"title. On error.")
          message:manager.lastError.localizedDescription];
     }
+    
+    self.proStatusSwitch.on = manager.enabled;
+
+    [self reloadDataAnimated:YES];
 }
 
 - (void)proAttachToNotifications{
@@ -669,12 +936,14 @@
     }
 }
 
+
 #endif
 
 - (void)setToolbar{
     
     static UILabel *warning;
     
+    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
     self.navigationController.toolbarHidden = YES;
     
     NSString *warningText;
@@ -722,6 +991,8 @@
         }
         
         [self.navigationController setToolbarHidden:NO animated:YES];
+        
+        
     }
 }
 

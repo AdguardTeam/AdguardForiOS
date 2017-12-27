@@ -22,6 +22,8 @@
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
 #import "APVPNManager.h"
+#import "ABECServicesParser.h"
+#import "APSharedResources.h"
 
 @implementation APSProductSchemaManager
 
@@ -35,6 +37,13 @@
         
     }
     return result;
+}
+
++ (void)upgrade {
+    
+    [super upgrade];
+    
+    [self installTrackersDomainList]; // todo: move this call to right place
 }
 
 + (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
@@ -97,6 +106,20 @@
     
     return result;
 
+}
+
++ (BOOL) installTrackersDomainList {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"services" ofType: @"json"];
+    
+    NSData* data = [NSData dataWithContentsOfFile:path];
+    
+    ABECServicesParser* parser = [ABECServicesParser new];
+    [parser parseData:data];
+    
+    APSharedResources.trackerslistDomains = parser.hosts;
+    
+    return YES;
 }
 
 + (void)installDefaultSettingsForVPNManagerV9 {

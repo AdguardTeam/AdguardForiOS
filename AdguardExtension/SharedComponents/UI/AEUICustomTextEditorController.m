@@ -26,7 +26,7 @@
 #define WIDTH_CHANGE_KEY                    @"frame"
 
 #define EDITED_TEXT_FONT                    [UIFont systemFontOfSize:[UIFont systemFontSize]]
-#define EDITED_TEXT_COLOR                   [UIColor blackColor]
+#define EDITED_TEXT_COLOR                   [UIColor whiteColor]
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
@@ -150,6 +150,12 @@ static NSDictionary *_editAttrs;
     self.editorTextView.textStorage.delegate = self;
     self.editorTextView.keyboardType = _keyboardType;
     self.searchBar.keyboardType = _keyboardType;
+    self.editorTextView.tintColor = UIColor.whiteColor;
+    
+    [[UITextView appearance] setTintColor:[UIColor colorWithWhite:1.0f alpha:0.99f]];
+    
+    [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].textColor = UIColor.whiteColor;
+    [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].tintColor = UIColor.whiteColor;
     
     [self registerForKeyboardNotifications];
     

@@ -17,13 +17,7 @@
 */
 #import "AEUIWelcomePageController.h"
 #import "ADomain/ADLocales.h"
-
-NSString *AEUIWelcomePageTitleKey =                 @"title";
-NSString *AEUIWelcomePageLabelKey =                 @"label";
-NSString *AEUIWelcomePageImageNameKey =             @"imageName";
-NSString *AEUIWelcomePageButtonTitleKey =           @"buttonTitle";
-NSString *AEUIWelcomePageButtonActionKey =          @"buttonSelector";
-NSString *AEUIWelcomePageAccessibilityLabelKey =    @"accessibility";
+#import "AEUIStarsLayer.h"
 
 @interface AEUIWelcomePageController ()
 
@@ -33,33 +27,11 @@ NSString *AEUIWelcomePageAccessibilityLabelKey =    @"accessibility";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    self.welcomeTitle.text = _properties[AEUIWelcomePageTitleKey];
-    self.welcomeTitle.accessibilityLabel = _properties[AEUIWelcomePageAccessibilityLabelKey];
-    self.welcomeLabel.text = _properties[AEUIWelcomePageLabelKey];
-    NSString *welcomeImageName = _properties[AEUIWelcomePageImageNameKey];
-    if (welcomeImageName) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-%@",welcomeImageName, [ADLocales lang]]];
-        if (!image) {
-            image = [UIImage imageNamed:welcomeImageName];
-        }
-        self.welcomeImage.image = image;
-    }
-    else {
-        self.welcomeImage.hidden = YES;
-    }
-
-    NSString *buttonAction = _properties[AEUIWelcomePageButtonActionKey];
-    if (buttonAction && [self respondsToSelector:NSSelectorFromString(buttonAction)]) {
-        
-        [self.actionButton setTitle: _properties[AEUIWelcomePageButtonTitleKey ] forState:UIControlStateNormal];
-        [self.actionButton addTarget:self action:NSSelectorFromString(buttonAction) forControlEvents:UIControlEventTouchUpInside];
-        self.actionButton.hidden = NO;
-//        [self.view setNeedsLayout];
-//        [self.view layoutIfNeeded];
-    }
-
+    
+    AEUIStarsLayer* starsLayer = [[AEUIStarsLayer alloc] initWithSize:self.starsView.frame.size];
+    starsLayer.fast = YES;
+    
+    [self.starsView.layer addSublayer:starsLayer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,5 +53,6 @@ NSString *AEUIWelcomePageAccessibilityLabelKey =    @"accessibility";
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

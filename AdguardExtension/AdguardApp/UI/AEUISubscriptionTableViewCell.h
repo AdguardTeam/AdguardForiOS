@@ -17,7 +17,9 @@
 */
 #import <UIKit/UIKit.h>
 
-@interface AEUISubscriptionTableViewCell : UITableViewCell
+#import "AEUISelectableTableViewCell.h"
+
+@interface AEUISubscriptionTableViewCell : AEUISelectableTableViewCell
 
 @property BOOL on;
 

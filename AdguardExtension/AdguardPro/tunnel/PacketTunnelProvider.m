@@ -146,7 +146,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         // Create connection handler
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];
-        [_connectionHandler setDnsActivityLoggingEnabled:[[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled]];
+        [_connectionHandler setDnsActivityLoggingEnabled:YES];
 
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
@@ -588,7 +588,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];
-
+        AERDomainFilter *trackersRules = [AERDomainFilter filter];
+        
         @autoreleasepool {
             NSArray *domainList = APSharedResources.whitelistDomains;
             for (NSString *item in domainList) {
@@ -620,8 +621,23 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             }
         }
         
+        @autoreleasepool {
+            NSDictionary *domainList = APSharedResources.trackerslistDomains;
+            __block NSUInteger counter = 0;
+            [domainList enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                NSString* domain = key;
+                //NSString* name = obj;
+                
+                [trackersRules addRule:[AERDomainFilterRule rule:domain]];
+                
+                counter++;
+            }];
+            DDLogInfo(@"(PacketTunnelProvider) User trackers rules: %lu", counter);
+        }
+        
         [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         [_connectionHandler setUserBlacklistFilter:userBlackRules];
+        [_connectionHandler setTrackersFilter:trackersRules];
         
         DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
         DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);

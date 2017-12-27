@@ -25,6 +25,7 @@
 
 #define APS_WHITELIST_DOAMINS              @"pro-whitelist-doamins.data"
 #define APS_BLACKLIST_DOAMINS              @"pro-blacklist-doamins.data"
+#define APS_TRACKERS_DOMAINS               @"pro-trackers-doamins.data"
 #define DNS_LOG_RECORD_FILE         @"dns-log-records.db"
 #define LOG_RECORDS_TTL             12*60*60 // 12 hours
 
@@ -94,6 +95,17 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 + (void)setBlacklistDomains:(NSArray<NSString *> *)blacklistDomains {
     
     [self setDomainsList:blacklistDomains forName:APS_BLACKLIST_DOAMINS];
+}
+
++(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
+    
+    return [self domainsListWithName:APS_TRACKERS_DOMAINS];
+}
+
+
++(void)setTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
+    
+    [self setDomainsList:trackerslistDomains forName:APS_TRACKERS_DOMAINS];
 }
 
 + (NSArray <APDnsLogRecord *> *)readDnsLog{
@@ -228,7 +240,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     }];
 }
 
-+ (NSArray <NSString *> *)domainsListWithName:(NSString *)name {
++ (id)domainsListWithName:(NSString *)name {
 
     AESharedResources *resources = [AESharedResources new];
     NSData *data = [resources loadDataFromFileRelativePath:name];
@@ -238,7 +250,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return nil;
 }
 
-+ (void)setDomainsList:(NSArray <NSString *> *)domainsList forName:(NSString *)name {
++ (void)setDomainsList:(id)domainsList forName:(NSString *)name {
     
     AESharedResources *resources = [AESharedResources new];
     if (domainsList == nil) {

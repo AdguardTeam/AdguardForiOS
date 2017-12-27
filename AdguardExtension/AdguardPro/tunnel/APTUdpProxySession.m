@@ -28,6 +28,7 @@
 #import "PacketTunnelProvider.h"
 #import "APDnsServerObject.h"
 #import "APVPNManager.h"
+#import <QuartzCore/CAAnimation.h>
 
 #define MAX_DATAGRAMS_RECEIVED                      10
 #define TTL_SESSION                                 3 //seconds
@@ -60,6 +61,9 @@
     ACLExecuteBlockDelayed *_saveLogExecution;
     NSMutableArray <APDnsLogRecord *> *_dnsRecords;
     NSMutableSet *_dnsRecordsSet;
+    
+    double startSendingTime;
+    BOOL tracker;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -282,6 +286,7 @@ _workingQueue = nil;
     [session setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
         
         ASSIGN_STRONG(self);
+        
         if (USE_STRONG(self) == nil) {
             return;
         }
@@ -316,6 +321,10 @@ _workingQueue = nil;
         
         //write data from remote endpoint into local TUN interface
         [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
+        
+        if(!_closed) {
+            [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - startSendingTime tracker:tracker];
+        }
         
     }
                             maxDatagrams:MAX_DATAGRAMS_RECEIVED];
@@ -452,6 +461,8 @@ _workingQueue = nil;
 - (void)sendPackets {
 
     if (_packetsForSend.count) {
+        
+        startSendingTime = CACurrentMediaTime();
 
         if (_waitWrite || _closed) {
             return;
@@ -554,7 +565,7 @@ _workingQueue = nil;
 - (void)internalClose {
 
     locLogTrace();
-
+    
     if (! _closed) {
         _closed = YES;
         [self.udpSession cancel];
@@ -611,6 +622,8 @@ _workingQueue = nil;
                         [blacklistPackets addObject:packet];
                         
                     }
+                    
+                    tracker = [self.delegate isTrackerslistDomain:name];
                 }
                 
                 //Create DNS log record, if logging is enabled.
@@ -682,7 +695,7 @@ _workingQueue = nil;
         
         record.isWhitelisted = whitelist;
         record.isBlacklisted = blacklist;
-        
+        record.isTracker = tracker;
         
         if (![_dnsRecordsSet containsObject:record]) {
             

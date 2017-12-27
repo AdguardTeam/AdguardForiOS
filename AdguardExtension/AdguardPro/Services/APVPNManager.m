@@ -28,6 +28,7 @@
 #import "APDnsServerObject.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
+#import "APDnsCryptParser.h"
 
 
 #define VPN_NAME                            @" VPN"
@@ -71,6 +72,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     BOOL _dnsRequestsLogging;
     
     NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
+    
+    NSMutableArray <APDnsServerObject *> *_remoteDnsCryptServers;
+    
+    NSArray<APDnsServerObject *> *_predefinedDnsCryptServer;
 }
 
 static APVPNManager *singletonVPNManager;
@@ -239,6 +244,11 @@ static APVPNManager *singletonVPNManager;
     [predefinedRemoteDnsServers addObject:server];
     
     return predefinedRemoteDnsServers;
+}
+
+- (NSArray<APDnsServerObject *> *)predefinedDnsCryptServers {
+    
+    return _predefinedDnsCryptServer;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -997,12 +1007,14 @@ static APVPNManager *singletonVPNManager;
 
 - (void)initDefinitions{
     
-        // Create default Adgaurd servers
+    // Create default Adgaurd servers
         
     _remoteDnsServers = [APVPNManager.predefinedDnsServers copy];
     
     [self loadCustomRemoteDnsServersFromDefaults];
     _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+    
+    [self loadPredefinedDnsCryptServers];
 }
 
 - (void)sendNotificationForced:(BOOL)forced{
@@ -1035,6 +1047,14 @@ static APVPNManager *singletonVPNManager;
     else {
         _customRemoteDnsServers = [NSMutableArray arrayWithCapacity:MAX_COUNT_OF_REMOTE_DNS_SERVERS];
     }
+}
+
+- (void) loadPredefinedDnsCryptServers {
+    
+    [[APDnsCryptParser new] parseServers:^(NSArray<APDnsServerObject *> * servers) {
+        
+        _predefinedDnsCryptServer = servers;
+    }];
 }
 
 @end

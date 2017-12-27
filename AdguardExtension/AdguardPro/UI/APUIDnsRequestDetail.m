@@ -88,6 +88,18 @@ static NSDateFormatter *_timeFormatter;
     NSLocalizedString(@"On", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
     : NSLocalizedString(@"Off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
 
+    ABECService *service = APSharedResources.trackerslistDomains[request.name];
+    self.serviceNameCell.detailTextLabel.text = service.name;
+    self.serviceDescriptionCell.detailTextLabel.text = service.serviceDescription;
+    self.servideCategoriesCell.detailTextLabel.text = [service.categories componentsJoinedByString:@", "];
+    self.serviceNotesCell.detailTextLabel.text = [service.notes componentsJoinedByString:@", "];
+    
+    [self cell: self.serviceNameCell setHidden:!self.serviceNameCell.detailTextLabel.text.length];
+    [self cell: self.serviceDescriptionCell setHidden:!self.serviceDescriptionCell.detailTextLabel.text.length];
+    [self cell: self.servideCategoriesCell setHidden:!self.servideCategoriesCell.detailTextLabel.text.length];
+    [self cell: self.serviceNotesCell setHidden:!self.serviceNotesCell.detailTextLabel.text.length];
+    
+    [self reloadDataAnimated:NO];
     
     NSMutableAttributedString *sb = [NSMutableAttributedString new];
     
@@ -259,7 +271,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         _domainControllCellType = DomainControllNone;
         
-        self.domainControllCell.textLabel.textColor = self.domainControllCell.textLabel.tintColor;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.domainControllCell.textLabel.textColor = self.domainControllCell.tintColor;
+        });
 
         APDnsRequest *request = self.logRecord.requests[0];
 

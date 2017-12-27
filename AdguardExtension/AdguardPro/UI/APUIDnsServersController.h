@@ -28,7 +28,6 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark init
-+ (void)createDnsSercersControllerWithSegue:(UIStoryboardSegue *)segue status:(NSNumber*)status;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
@@ -36,8 +35,6 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *systemDefaultCell;
-@property (weak, nonatomic) IBOutlet UISwitch *proStatusSwitch;
-@property (weak, nonatomic) IBOutlet APUIProStatusTableViewCell *proStatusCell;
 
 @property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *whitelistCell;
