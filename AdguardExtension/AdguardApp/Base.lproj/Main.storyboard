@@ -138,11 +138,143 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="dns crypt provider settings" id="fE9-X1-Iu9">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rjV-kD-mez">
+                                        <rect key="frame" x="0.0" y="179" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rjV-kD-mez" id="BkG-ko-PEP">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0q-qQ-2k7">
+                                                    <rect key="frame" x="16" y="11" width="45" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server Name" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQy-D9-ECz">
+                                                    <rect key="frame" x="114" y="11" width="253" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Server Name"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="resolverNameChanged:" destination="XFi-sr-f1o" eventType="editingChanged" id="jcb-uf-szS"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="V0q-qQ-2k7" firstAttribute="leading" secondItem="BkG-ko-PEP" secondAttribute="leadingMargin" id="0m7-gL-oXS"/>
+                                                <constraint firstItem="MQy-D9-ECz" firstAttribute="leading" secondItem="BkG-ko-PEP" secondAttribute="leading" constant="114" id="6YJ-pJ-t7M"/>
+                                                <constraint firstItem="V0q-qQ-2k7" firstAttribute="centerY" secondItem="BkG-ko-PEP" secondAttribute="centerY" id="CSQ-2P-wIH"/>
+                                                <constraint firstAttribute="trailing" secondItem="MQy-D9-ECz" secondAttribute="trailing" constant="8" id="Qng-AY-fvS"/>
+                                                <constraint firstItem="MQy-D9-ECz" firstAttribute="top" secondItem="V0q-qQ-2k7" secondAttribute="top" id="RIP-lH-u5y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="O7j-em-57X">
+                                        <rect key="frame" x="0.0" y="223" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O7j-em-57X" id="g7N-U1-NwJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3D-HG-ile">
+                                                    <rect key="frame" x="16" y="11" width="63" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Xi-0VN">
+                                                    <rect key="frame" x="114" y="11" width="253" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Server Description"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="resolverAddressChanged:" destination="XFi-sr-f1o" eventType="editingDidEnd" id="Mgb-a4-4Zz"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Uc9-Xi-0VN" firstAttribute="leading" secondItem="g7N-U1-NwJ" secondAttribute="leading" constant="114" id="Gqy-qm-GKa"/>
+                                                <constraint firstItem="T3D-HG-ile" firstAttribute="centerY" secondItem="g7N-U1-NwJ" secondAttribute="centerY" id="P90-Z0-u5h"/>
+                                                <constraint firstItem="T3D-HG-ile" firstAttribute="leading" secondItem="g7N-U1-NwJ" secondAttribute="leadingMargin" id="RYL-81-4Jq"/>
+                                                <constraint firstItem="Uc9-Xi-0VN" firstAttribute="top" secondItem="T3D-HG-ile" secondAttribute="top" id="k4A-FD-YDX"/>
+                                                <constraint firstAttribute="trailing" secondItem="Uc9-Xi-0VN" secondAttribute="trailing" constant="8" id="o0A-QL-TpB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="QNR-mc-Dk9">
+                                        <rect key="frame" x="0.0" y="267" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QNR-mc-Dk9" id="CSY-C7-TW6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public key" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55b-oC-HZF">
+                                                    <rect key="frame" x="16" y="11" width="77.666666666666671" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                        <bool key="isElement" value="NO"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-0H-JNa">
+                                                    <rect key="frame" x="114" y="11" width="253" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Server Description"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="publicKeyChanged:" destination="XFi-sr-f1o" eventType="editingDidEnd" id="fG9-VJ-zkQ"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="gAv-0H-JNa" secondAttribute="trailing" constant="8" id="7qd-mV-MBA"/>
+                                                <constraint firstItem="55b-oC-HZF" firstAttribute="centerY" secondItem="CSY-C7-TW6" secondAttribute="centerY" id="CWw-6p-AM8"/>
+                                                <constraint firstItem="55b-oC-HZF" firstAttribute="leading" secondItem="CSY-C7-TW6" secondAttribute="leadingMargin" id="ejN-EW-4rC"/>
+                                                <constraint firstItem="gAv-0H-JNa" firstAttribute="top" secondItem="55b-oC-HZF" secondAttribute="top" id="utO-gW-yGp"/>
+                                                <constraint firstItem="gAv-0H-JNa" firstAttribute="leading" secondItem="CSY-C7-TW6" secondAttribute="leading" constant="114" id="vzh-KF-MkH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="IP Addresses" id="sdZ-kr-Pk1">
                                 <string key="footerTitle">Enter the IP addresses of the DNS servers here (in IPv4 or IPv6 format), separated by commas or line breaks. If necessary, add a port number to the DNS address, e.g: 208.67.222.222:5353 for IPv4 or [2620:0:ccc::2]:5353 for IPv6.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="132" id="gWE-lF-Hxl">
-                                        <rect key="frame" x="0.0" y="186.33333333333334" width="375" height="132"/>
+                                        <rect key="frame" x="0.0" y="374.33333333333331" width="375" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gWE-lF-Hxl" id="xqL-9A-ckn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="131.66666666666666"/>
@@ -174,7 +306,7 @@
                             <tableViewSection id="0HZ-Nw-7X0">
                                 <cells>
                                     <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EJ4-3W-Fp6">
-                                        <rect key="frame" x="0.0" y="430.33333333333337" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="618.33333333333337" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJ4-3W-Fp6" id="cDI-fC-iFf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
@@ -229,8 +361,15 @@
                         <outlet property="descriptionTextField" destination="BGg-Te-3zy" id="x6U-tt-7nJ"/>
                         <outlet property="doneButton" destination="8uZ-EB-aVM" id="OH4-9o-uk8"/>
                         <outlet property="ipAddressesTextView" destination="ysu-RU-bHI" id="85H-tA-hKK"/>
+                        <outlet property="ipaddressesCell" destination="gWE-lF-Hxl" id="Bci-tj-FNT"/>
                         <outlet property="nameTextField" destination="Jot-rn-HdO" id="NAR-du-t4f"/>
+                        <outlet property="publicKeyCell" destination="QNR-mc-Dk9" id="eeh-Nm-ig7"/>
+                        <outlet property="publicKeyTextField" destination="gAv-0H-JNa" id="6hK-ep-MO7"/>
                         <outlet property="removeCell" destination="EJ4-3W-Fp6" id="mwZ-gi-rLe"/>
+                        <outlet property="resolverAddressCell" destination="O7j-em-57X" id="v4i-GZ-x4y"/>
+                        <outlet property="resolverAddressTextField" destination="Uc9-Xi-0VN" id="Wnx-tx-Pcu"/>
+                        <outlet property="resolverNameCell" destination="rjV-kD-mez" id="uNK-KD-JBw"/>
+                        <outlet property="resolverNameTextField" destination="MQy-D9-ECz" id="VXw-28-teO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXO-hm-iMX" userLabel="First Responder" sceneMemberID="firstResponder"/>

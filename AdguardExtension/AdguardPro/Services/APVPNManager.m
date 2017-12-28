@@ -73,9 +73,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
     
-    NSMutableArray <APDnsServerObject *> *_remoteDnsCryptServers;
+    NSMutableArray <APDnsServerObject *> *_customRemoteDnsCryptServers;
     
-    NSArray<APDnsServerObject *> *_predefinedDnsCryptServer;
+    NSArray<APDnsServerObject *> *_predefinedDnsCryptServers;
 }
 
 static APVPNManager *singletonVPNManager;
@@ -248,7 +248,7 @@ static APVPNManager *singletonVPNManager;
 
 - (NSArray<APDnsServerObject *> *)predefinedDnsCryptServers {
     
-    return _predefinedDnsCryptServer;
+    return _predefinedDnsCryptServers;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -465,17 +465,28 @@ static APVPNManager *singletonVPNManager;
 
 - (BOOL)addRemoteDnsServer:(APDnsServerObject *)server {
     
+    BOOL allredyAdded = server.isDnsCrypt.boolValue ? [_remoteDnsCryptServers containsObject:server] : [_remoteDnsServers containsObject:server];
+    
+    BOOL overLimit = server.isDnsCrypt.boolValue ? NO : _remoteDnsServers.count < self.maxCountOfRemoteDnsServers;
     if (server.editable
         && _remoteDnsServers
-        && _remoteDnsServers.count < self.maxCountOfRemoteDnsServers
-        && ! [_remoteDnsServers containsObject:server]) {
+        && !overLimit
+        && !allredyAdded) {
         
         dispatch_sync(workingQueue, ^{
            
-            _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:server];
-            [_customRemoteDnsServers addObject:server];
+            if(server.isDnsCrypt.boolValue) {
+                _remoteDnsCryptServers = [_remoteDnsCryptServers arrayByAddingObject:server];
+                [_customRemoteDnsCryptServers addObject:server];
+                [self saveCustomRemoteDnsCryptServersToDefaults];
+            }
+            else {
+                _remoteDnsServers = [_remoteDnsServers arrayByAddingObject:server];
+                [_customRemoteDnsServers addObject:server];
+                [self saveCustomRemoteDnsServersToDefaults];
+            }
             
-            [self saveCustomRemoteDnsServersToDefaults];
+            
         });
         
         return YES;
@@ -486,23 +497,36 @@ static APVPNManager *singletonVPNManager;
 
 - (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server {
     
-    if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
+    if (server.editable){
         
-        if ([_activeRemoteDnsServer isEqual:server]) {
-            self.activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+        if((server.isDnsCrypt.boolValue && _remoteDnsCryptServers &&  [_remoteDnsCryptServers containsObject:server]) || (!server.isDnsCrypt.boolValue && _remoteDnsServers && [_remoteDnsServers containsObject:server])) {
+        
+            if ([_activeRemoteDnsServer isEqual:server]) {
+                self.activeRemoteDnsServer = _remoteDnsServers[APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX];
+            }
+            
+            // async because method have not returns value
+            dispatch_sync(workingQueue, ^{
+                
+                if(server.isDnsCrypt.boolValue) {
+                    
+                    [_customRemoteDnsCryptServers removeObject:server];
+                    _remoteDnsCryptServers = [self.predefinedDnsCryptServers arrayByAddingObjectsFromArray:_customRemoteDnsCryptServers];
+                    [self saveCustomRemoteDnsCryptServersToDefaults];
+                }
+                else {
+                    
+                    [_customRemoteDnsServers removeObject:server];
+                    _remoteDnsServers = [APVPNManager.predefinedDnsServers copy];
+                    _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+                    [self saveCustomRemoteDnsServersToDefaults];
+                }
+                
+                
+            });
+            
+            return YES;
         }
-        
-        // async because method have not returns value
-        dispatch_sync(workingQueue, ^{
-            
-            [_customRemoteDnsServers removeObject:server];
-            _remoteDnsServers = [APVPNManager.predefinedDnsServers copy];
-            _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
-            
-            [self saveCustomRemoteDnsServersToDefaults];
-        });
-        
-        return YES;
     }
     
     return NO;
@@ -510,7 +534,7 @@ static APVPNManager *singletonVPNManager;
 
 - (BOOL)resetRemoteDnsServer:(APDnsServerObject *)server {
     
-    if (server.editable &&  _remoteDnsServers && [_remoteDnsServers containsObject:server]) {
+    if((server.isDnsCrypt.boolValue && _remoteDnsCryptServers &&  [_remoteDnsCryptServers containsObject:server]) || (!server.isDnsCrypt.boolValue && _remoteDnsServers && [_remoteDnsServers containsObject:server])) {
         
         BOOL resetEnabled = NO;
         if ([self.activeRemoteDnsServer isEqual:server]) {
@@ -519,17 +543,34 @@ static APVPNManager *singletonVPNManager;
        __block BOOL result = NO;
         dispatch_sync(workingQueue, ^{
             
-            NSUInteger index = [_customRemoteDnsServers indexOfObject:server];
-            APDnsServerObject *remoteDnsServer = _customRemoteDnsServers[index];
-            if (remoteDnsServer.editable) {
-        
-                [_customRemoteDnsServers replaceObjectAtIndex:index withObject:server];
-                _remoteDnsServers = [APVPNManager.predefinedDnsServers copy];
-                _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+            if(server.isDnsCrypt.boolValue) {
                 
-                [self saveCustomRemoteDnsServersToDefaults];
+                NSUInteger index = [_customRemoteDnsCryptServers indexOfObject:server];
+                APDnsServerObject *remoteDnsServer = _customRemoteDnsCryptServers[index];
+                if (remoteDnsServer.editable) {
+                    
+                    [_customRemoteDnsCryptServers replaceObjectAtIndex:index withObject:server];
+                    _remoteDnsCryptServers = [self.predefinedDnsCryptServers arrayByAddingObjectsFromArray:_customRemoteDnsCryptServers];
+                    
+                    [self saveCustomRemoteDnsCryptServersToDefaults];
+                    
+                    result = YES;
+                }
+            }
+            else {
                 
-                result = YES;
+                NSUInteger index = [_customRemoteDnsServers indexOfObject:server];
+                APDnsServerObject *remoteDnsServer = _customRemoteDnsServers[index];
+                if (remoteDnsServer.editable) {
+            
+                    [_customRemoteDnsServers replaceObjectAtIndex:index withObject:server];
+                    _remoteDnsServers = [APVPNManager.predefinedDnsServers copy];
+                    _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+                    
+                    [self saveCustomRemoteDnsServersToDefaults];
+                    
+                    result = YES;
+                }
             }
         });
         
@@ -581,7 +622,7 @@ static APVPNManager *singletonVPNManager;
     
     if (server
         && ![server isEqual:_activeRemoteDnsServer]
-        && [_remoteDnsServers containsObject:server]) {
+        && ([_remoteDnsServers containsObject:server] || [_remoteDnsCryptServers containsObject:server])) {
         
         
         if (_enabled) {
@@ -687,6 +728,14 @@ static APVPNManager *singletonVPNManager;
             BOOL allreadyAdded = NO;
             
             for(APDnsServerObject* server in _remoteDnsServers) {
+                if([server isEqual:remoteServer]) {
+                    
+                    allreadyAdded = YES;
+                    break;
+                }
+            }
+            
+            for(APDnsServerObject* server in _remoteDnsCryptServers) {
                 if([server isEqual:remoteServer]) {
                     
                     allreadyAdded = YES;
@@ -1015,6 +1064,8 @@ static APVPNManager *singletonVPNManager;
     _remoteDnsServers = [_remoteDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
     
     [self loadPredefinedDnsCryptServers];
+    [self loadCustomRemoteDnsCryptServersFromDefaults];
+    _remoteDnsCryptServers = [self.predefinedDnsCryptServers arrayByAddingObjectsFromArray:_customRemoteDnsCryptServers];
 }
 
 - (void)sendNotificationForced:(BOOL)forced{
@@ -1044,8 +1095,32 @@ static APVPNManager *singletonVPNManager;
     if (loadedData) {
         _customRemoteDnsServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
     }
-    else {
+    
+    if(!_customRemoteDnsServers){
         _customRemoteDnsServers = [NSMutableArray arrayWithCapacity:MAX_COUNT_OF_REMOTE_DNS_SERVERS];
+    }
+}
+
+- (void)saveCustomRemoteDnsCryptServersToDefaults {
+    
+    NSData *dataForSave = [NSKeyedArchiver archivedDataWithRootObject:_customRemoteDnsCryptServers];
+    
+    if (dataForSave) {
+        [[AESharedResources sharedDefaults] setObject:dataForSave forKey:APDefaultsCustomRemoteDnsCryptServers];
+        [[AESharedResources sharedDefaults] synchronize];
+    }
+}
+
+- (void)loadCustomRemoteDnsCryptServersFromDefaults {
+    
+    NSData *loadedData = [[AESharedResources sharedDefaults] objectForKey:APDefaultsCustomRemoteDnsCryptServers];
+    
+    if(loadedData) {
+        _customRemoteDnsCryptServers = [NSKeyedUnarchiver unarchiveObjectWithData:loadedData];
+    }
+    
+    if(!_customRemoteDnsCryptServers) {
+        _customRemoteDnsCryptServers = [NSMutableArray new];
     }
 }
 
@@ -1053,7 +1128,7 @@ static APVPNManager *singletonVPNManager;
     
     [[APDnsCryptParser new] parseServers:^(NSArray<APDnsServerObject *> * servers) {
         
-        _predefinedDnsCryptServer = servers;
+        _predefinedDnsCryptServers = servers;
     }];
 }
 

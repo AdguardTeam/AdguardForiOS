@@ -36,6 +36,7 @@
 #define DNS_CRYPT_SERVER_SECTION_INDEX        2
 
 #define DNS_SERVER_DETAIL_SEGUE         @"dnsServerDetailSegue"
+#define DNS_CRYPT_SERVER_DETAIL_SEGUE         @"dnsCryptServerDetailSegue"
 
 #define DNS_CHECK_DISABLED_COLOR        [UIColor grayColor]
 
@@ -51,6 +52,7 @@
     id _observer;
     
     NSArray <APDnsServerObject *> *_dnsServers;
+    NSArray <APDnsServerObject *> *_dnsCryptServers;
 }
 
 - (void)viewDidLoad {
@@ -69,6 +71,7 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     _dnsServers = manager.remoteDnsServers;
+    _dnsCryptServers = manager.remoteDnsCryptServers;
     
     APDnsServerObject *systemDefault = _dnsServers[0];
     self.systemDefaultCell.textLabel.text = systemDefault.serverName;
@@ -80,12 +83,9 @@
         }
     }];
     
-    NSArray* dnsCryptServers = manager.predefinedDnsCryptServers;
-    
-    [dnsCryptServers enumerateObjectsUsingBlock:^(APDnsServerObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_dnsCryptServers enumerateObjectsUsingBlock:^(APDnsServerObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        if (idx)
-            [self internalInsertDnsServer:obj atIndex:idx section:DNS_CRYPT_SERVER_SECTION_INDEX];
+        [self internalInsertDnsServer:obj atIndex:idx section:DNS_CRYPT_SERVER_SECTION_INDEX];
     }];
     
     
@@ -154,9 +154,16 @@
     if (serverObject) {
         
         if ([[APVPNManager singleton] addRemoteDnsServer:serverObject]) {
+        
+            if(serverObject.isDnsCrypt.boolValue) {
+                _dnsCryptServers = APVPNManager.singleton.remoteDnsCryptServers;
+                [self internalInsertDnsServer:serverObject atIndex:(_dnsCryptServers.count - 1) section:DNS_CRYPT_SERVER_SECTION_INDEX];
+            }
+            else {
+                _dnsServers = APVPNManager.singleton.remoteDnsServers;
+                [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1) section:DNS_SERVER_SECTION_INDEX];
+            }
             
-            _dnsServers = APVPNManager.singleton.remoteDnsServers;
-            [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1) section:DNS_SERVER_SECTION_INDEX];
             [self reloadDataAnimated:YES];
             
             [self updateStatuses];
@@ -168,20 +175,32 @@
     
     if (serverObject) {
         
-        NSUInteger index = [_dnsServers indexOfObject:serverObject];
+        NSUInteger index = serverObject.isDnsCrypt.boolValue ?  [_dnsCryptServers indexOfObject:serverObject] :
+                                                                [_dnsServers indexOfObject:serverObject];
+        
         if (index == NSNotFound) {
             return;
         }
         
-        // because from second server
-        index --;
+        if(!serverObject.isDnsCrypt.boolValue) {
+            // because from second server
+            index --;
+        }
         
         if ([[APVPNManager singleton] removeRemoteDnsServer:serverObject]) {
             
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
-            [self removeCellAtIndexPath:indexPath];
+            NSIndexPath *indexPath;
             
-            _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            if(serverObject.isDnsCrypt.boolValue) {
+                indexPath = [NSIndexPath indexPathForRow:index inSection: DNS_CRYPT_SERVER_SECTION_INDEX];
+                _dnsCryptServers = APVPNManager.singleton.remoteDnsCryptServers;
+            }
+            else {
+                indexPath = [NSIndexPath indexPathForRow:index inSection: DNS_SERVER_SECTION_INDEX];
+                _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            }
+            
+            [self removeCellAtIndexPath:indexPath];
             
             [self reloadDataAnimated:YES];
             
@@ -194,19 +213,33 @@
     
     if (serverObject) {
         
-        NSUInteger index = [_dnsServers indexOfObject:serverObject];
+        NSUInteger index = serverObject.isDnsCrypt.boolValue ?  [_dnsCryptServers indexOfObject:serverObject] :
+                                                                [_dnsServers indexOfObject:serverObject];
+        
         if (index == NSNotFound) {
             return;
         }
         
-        // because from second server
-        index --;
+        if(!serverObject.isDnsCrypt.boolValue) {
+            // because from second server
+            index --;
+        }
         
         if ([[APVPNManager singleton] resetRemoteDnsServer:serverObject]) {
             
-            _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            NSIndexPath *indexPath;
             
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
+            if(serverObject.isDnsCrypt.boolValue) {
+                _dnsCryptServers = APVPNManager.singleton.remoteDnsCryptServers;
+                
+                indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_CRYPT_SERVER_SECTION_INDEX];
+            }
+            else {
+                _dnsServers = APVPNManager.singleton.remoteDnsServers;
+                
+                indexPath = [NSIndexPath indexPathForRow:index inSection:DNS_SERVER_SECTION_INDEX];
+            }
+            
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             cell.textLabel.text = serverObject.serverName;
             cell.detailTextLabel.text = serverObject.serverDescription;
@@ -219,7 +252,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:DNS_SERVER_DETAIL_SEGUE]) {
+    BOOL dnsDetails = [segue.identifier isEqualToString:DNS_SERVER_DETAIL_SEGUE];
+    BOOL dnsCryptDetails = [segue.identifier isEqualToString:DNS_CRYPT_SERVER_DETAIL_SEGUE];
+    
+    if (dnsDetails || dnsCryptDetails) {
         
         APUIDnsServerDetailController *destination = (APUIDnsServerDetailController *)[(UINavigationController *)[segue destinationViewController]
                                                                                        topViewController];
@@ -232,6 +268,8 @@
             
             destination.serverObject = server;
         }
+        
+        destination.dnsCrypt = dnsCryptDetails;
     }
 }
 
@@ -344,8 +382,10 @@
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index section:(NSUInteger)section{
     
-    // because from second server
-    index--;
+    if(section == DNS_SERVER_SECTION_INDEX) {
+        // because from second server
+        index--;
+    }
     
     UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
     UITableViewCell *newCell = [[[templateCell class] alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
@@ -382,7 +422,7 @@
     
     if(indexPath.section == DNS_CRYPT_SERVER_SECTION_INDEX) {
         
-        return APVPNManager.singleton.predefinedDnsCryptServers[indexPath.row + 1];
+        return indexPath.row < _dnsCryptServers.count ? _dnsCryptServers[indexPath.row] : nil;
     }
     
     NSInteger index = indexPath.row;
@@ -411,14 +451,13 @@
         [self setCell:cell selected: [activeDnsServer isEqual:_dnsServers[i]]];
     }
     
-    NSArray* servers = APVPNManager.singleton.predefinedDnsCryptServers;
-    for(int i = 1; i < servers.count; ++i) {
+    for(int i = 0; i < _dnsCryptServers.count; ++i) {
         
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_CRYPT_SERVER_SECTION_INDEX];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:DNS_CRYPT_SERVER_SECTION_INDEX];
         UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
         
-        [self setCell:cell selected: [activeDnsServer isEqual:servers[i]]];
+        [self setCell:cell selected: [activeDnsServer isEqual:_dnsCryptServers[i]]];
     }
 }
 

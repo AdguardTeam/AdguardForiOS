@@ -193,6 +193,11 @@ static NSMutableCharacterSet *delimCharSet;
     _ipv6Addresses = [self migrateIpsIfNeeded:ipv6Addresses];
 }
 
+- (void)setDnsCryptId:(NSString *)dnsCryptId {
+    
+    _uuid =_dnsCryptId = dnsCryptId;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Description, equals, hash
 

@@ -75,16 +75,25 @@ typedef enum : NSUInteger {
     _currentServer = [APDnsServerObject new];
     
     _currentServer.editable = NO;
+    _currentServer.isDnsCrypt = @(YES);
 }
 
 - (void)parser:(CHCSVParser *)parser didEndLine:(NSUInteger)recordNumber {
     
-    [_servers addObject:_currentServer];
+    if(recordNumber != 1) {
+        // do not add field captions
+        [_servers addObject:_currentServer];
+    }
 }
 
 - (void)parser:(CHCSVParser *)parser didReadField:(NSString *)field atIndex:(NSInteger)fieldIndex {
     
     switch (fieldIndex) {
+            
+        case Name:
+            _currentServer.dnsCryptId = field;
+            break;
+            
         case FullName:
             _currentServer.serverName = field;
             break;
@@ -93,8 +102,48 @@ typedef enum : NSUInteger {
             _currentServer.serverDescription = field;
             break;
             
+        case Location:
+            _currentServer.dnsCryptLocation = field;
+            break;
+            
+        case Coordinates:
+            _currentServer.dnsCryptCoordinates = field;
+            break;
+            
+        case URL:
+            _currentServer.dnsCryptURL = field;
+            break;
+            
+        case Version:
+            _currentServer.dnsCryptVersion = field;
+            break;
+            
+        case  DNSSECValidation:
+            _currentServer.dnsCryptDNSSECValidation = field;
+            break;
+            
+        case NoLogs:
+            _currentServer.dnsCryptNoLogs = field;
+            break;
+            
+        case Namecoin:
+            _currentServer.dnsCryptNamecoin = field;
+            break;
+       
         case ResolverAddress:
-            [_currentServer setIpAddressesFromString:field];
+            _currentServer.dnsCryptResolverAddress = field;
+            break;
+            
+        case ProviderName:
+            _currentServer.dnsCryptProviderName = field;
+            break;
+            
+        case ProviderPublicKey:
+            _currentServer.dnsCryptProviderPublicKey = field;
+            break;
+            
+        case ProviderPublicKeyTXTRecord:
+            _currentServer.dnsCryptProviderPublicKeyTXTRecord = field;
             break;
             
         default:
