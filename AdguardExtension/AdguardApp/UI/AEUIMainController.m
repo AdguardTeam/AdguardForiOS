@@ -73,8 +73,6 @@
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
 #define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
-#define TO_DNS_BLACKLIST_SEGUE_ID   @"toDnsBlacklist"
-#define TO_DNS_WHITELIST_SEGUE_ID   @"toDnsWhitelist"
 
 #define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
@@ -417,127 +415,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 #ifdef PRO
-    BOOL toWhitelist = [segue.identifier isEqualToString:TO_DNS_WHITELIST_SEGUE_ID];
-    BOOL toBlacklist = [segue.identifier isEqualToString:TO_DNS_BLACKLIST_SEGUE_ID];
     
-    if (toBlacklist || toWhitelist) {
-        
-        AEUICustomTextEditorController *domainList = segue.destinationViewController;
-        
-        domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
-                                                   NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
-                                                                     @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.")];
-        
-        domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
-        
-        domainList.navigationItem.title = toWhitelist
-        ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
-        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
-        //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
-        
-        domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
-            
-            NSMutableArray *domains = [NSMutableArray array];
-            @autoreleasepool {
-                
-                NSMutableCharacterSet *delimCharSet;
-                
-                delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-                
-                for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
-                    
-                    NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    if (candidate.length) {
-                        
-                        if(toBlacklist && ![AERDomainFilterRule isValidRuleText:candidate]) {
-                            
-                            [editor selectWithType:AETESelectionTypeError text:candidate];
-                            return NO;
-                        }
-                        
-                        [domains addObject:candidate];
-                    }
-                }
-            }
-            
-            @autoreleasepool {
-                
-                NSArray *propertyHolder;
-                
-                if (toBlacklist) {
-                    
-                    propertyHolder = APSharedResources.blacklistDomains;
-                    APSharedResources.blacklistDomains = domains;
-                }
-                else {
-                    
-                    propertyHolder = APSharedResources.whitelistDomains;
-                    APSharedResources.whitelistDomains = domains;
-                }
-                
-                APVPNManager *manager = [APVPNManager singleton];
-                [manager sendReloadSystemWideDomainLists];
-                
-                if (manager.lastError) {
-                    
-                    //processing of the error
-                    if (toBlacklist) {
-                        APSharedResources.blacklistDomains = propertyHolder;
-                    }
-                    else {
-                        
-                        APSharedResources.whitelistDomains = propertyHolder;
-                    }
-                    
-                    return NO;
-                }
-            }
-            
-            return YES;
-            
-        };
-        domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
-            
-            // copy-paste multiline text from file
-            NSMutableCharacterSet* delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
-            if ([text rangeOfCharacterFromSet:delimCharSet].location != NSNotFound) {
-                return YES;
-            }
-            
-            // copy-paste single line address from safari address bar
-            if ([text contains:@"/"]) {
-                if (text.length > 1) {
-                    
-                    NSURL *url = [NSURL URLWithString:text];
-                    text = [[url hostWithPort] stringByAppendingString:@"\n"];
-                    if (text) {
-                        
-                        [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
-                    }
-                }
-                return NO;
-            }
-            
-            return YES;
-            
-        };
-        
-        NSString *text;
-        if (toBlacklist) {
-            
-            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
-        }
-        else {
-            
-            text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
-        }
-        if (! [NSString isNullOrEmpty:text]) {
-            
-            domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
-                                                                                  attributes:AEUICustomTextEditorController.defaultTextAttributes];
-        }
-        
-    }
     
 #endif
     

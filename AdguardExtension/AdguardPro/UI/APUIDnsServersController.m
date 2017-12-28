@@ -27,6 +27,7 @@
 #import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
 #import "AERDomainFilterRule.h"
+#import "AEUIUtils.h"
 
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
@@ -388,24 +389,13 @@
     }
     
     UITableViewCell *templateCell = self.remoteDnsServerTemplateCell;
-    UITableViewCell *newCell = [[[templateCell class] alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    UITableViewCell *newCell = [AEUIUtils createCellByTemplate:templateCell style:UITableViewCellStyleSubtitle];
     
     newCell.tag = index;
-    
-    newCell.textLabel.textColor = templateCell.textLabel.textColor;
-    newCell.textLabel.font = templateCell.textLabel.font;
-    newCell.detailTextLabel.textColor = templateCell.detailTextLabel.textColor;
-    newCell.detailTextLabel.font = templateCell.detailTextLabel.font;
-    newCell.indentationLevel = templateCell.indentationLevel;
-    newCell.indentationWidth = templateCell.indentationWidth;
-    newCell.selectionStyle = templateCell.selectionStyle;
-    newCell.backgroundColor = templateCell.backgroundColor;
-    newCell.tintColor = templateCell.tintColor;
     
     newCell.textLabel.text = serverObject.serverName;
     newCell.detailTextLabel.text = serverObject.serverDescription;
     newCell.imageView.image= [UIImage imageNamed:CHECKMARK_NORMAL_DISABLE];
-    newCell.imageView.tintColor = templateCell.tintColor;
     if (serverObject.editable) {
         newCell.accessoryType = UITableViewCellAccessoryDetailButton;
     }

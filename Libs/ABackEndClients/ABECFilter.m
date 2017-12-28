@@ -322,7 +322,7 @@ static ABECFilterClient *ABECFilterSingleton;
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     
     DDLogInfo(@"(ABECFilterClient) URLSession:task:didCompleteWithError: %@. Request URL: %@", error, [[task originalRequest] URL]);
-    [self processDownloadTask:(NSURLSessionDownloadTask *)task complateWithError:error];
+    [self processDownloadTask:(NSURLSessionDownloadTask *)task completeWithError:error];
 }
 
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
@@ -511,7 +511,7 @@ static ABECFilterClient *ABECFilterSingleton;
     }
 }
 
-- (void)processDownloadTask:(NSURLSessionDownloadTask *)downloadTask complateWithError:(NSError *)error {
+- (void)processDownloadTask:(NSURLSessionDownloadTask *)downloadTask completeWithError:(NSError *)error {
     
     @synchronized(ABECFilterSingleton) {
         

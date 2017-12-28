@@ -41,12 +41,12 @@
 @property (nonatomic, readonly) BOOL blocked;
 
 /**
- Returns response object with value, which equals localhost IP address (127.0.0.1 or ::1).
+ Returns response object with value, which equals ip param or localhost IP address (127.0.0.1 or ::1).
  
  @param type Type of the resource. May be: A, AAAA, A6,
  
  @return Returns object or nil if resource type is not permitted.
  */
-+ (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type;
++ (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip;
 
 @end

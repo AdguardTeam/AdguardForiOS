@@ -36,6 +36,7 @@
 #import "ASDatabase.h"
 #import "ACNIPUtils.h"
 #import "APDnsServerAddress.h"
+#import "APBlockingSubscriptionsManager.h"
 
 #include <arpa/inet.h>
 #include <ifaddrs.h>
@@ -627,7 +628,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
                     }
                     else {
                         
-                        [userBlackRules addRule:[AERDomainFilterRule rule:ruleText]];
+                        [userBlackRules addRule:rule];
                     }
                 }
             }
@@ -647,9 +648,25 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             DDLogInfo(@"(PacketTunnelProvider) User trackers rules: %lu", counter);
         }
         
+        AERDomainFilter *subscriptionRules = [AERDomainFilter filter];
+       
+        NSArray* subscriptionRulesStrings = [APBlockingSubscriptionsManager loadRules];
+        
+        for (NSString* ruleString in subscriptionRulesStrings) {
+            [subscriptionRules addRule:[AERDomainFilterRule rule:ruleString]];
+        }
+        
+        NSMutableDictionary* hosts = [[NSMutableDictionary alloc] initWithDictionary:APSharedResources.hosts];
+        NSDictionary *subscriptionsHosts = [APBlockingSubscriptionsManager loadHosts];
+        [hosts addEntriesFromDictionary:subscriptionsHosts];
+        
         [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         [_connectionHandler setUserBlacklistFilter:userBlackRules];
         [_connectionHandler setTrackersFilter:trackersRules];
+        
+        [_connectionHandler setHostsFilter:hosts];
+        
+        [_connectionHandler setGlobalBlacklistFilter:subscriptionRules];
         
         DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
         DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);

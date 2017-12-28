@@ -30,6 +30,7 @@
 #import "AEUIUtils.h"
 #import "APDnsServerObject.h"
 #import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
@@ -111,7 +112,19 @@ static NSDateFormatter *_timeFormatter;
         // Set status cell
         if (self.logRecord.isBlacklisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
+            NSString* statusText;
+            
+            NSString* domain = self.logRecord.requests[0].name;
+            
+            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
+            if(subscription) {
+                statusText = [NSString stringWithFormat:@"Blocked by subscription: %@", subscription.name];
+            }
+            else {
+                statusText = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
+            }
+            
+            self.statusCell.detailTextLabel.text = statusText;
         }
         else if (self.logRecord.isWhitelisted){
             

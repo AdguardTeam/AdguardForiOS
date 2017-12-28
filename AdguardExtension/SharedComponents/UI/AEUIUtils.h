@@ -85,4 +85,9 @@
  */
 + (void) addTitleViewToNavigationItem:(UINavigationItem*) navigationItem;
 
+/**
+ create new table view cell by prototype
+ */
++ (UITableViewCell*) createCellByTemplate:(UITableViewCell*) templateCell style:(UITableViewCellStyle)style;
+
 @end

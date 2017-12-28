@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import "APCommonSharedResources.h"
 #import "ABECService.h"
+#import "APBlockingSubscription.h"
 
 @class APDnsLogRecord;
 
@@ -65,4 +66,13 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
  */
 @property (class) NSDictionary <NSString *, ABECService*> *trackerslistDomains;
 
+/**
+ list of hosts (domain with ip) at the system-wide level
+ */
+@property (class) NSDictionary <NSString *, NSString*> *hosts;
+
++ (NSString*)pathForSubscriptionsData;
++ (NSString*)pathForSubscriptionsMeta;
++ (NSString*)pathForSubscriptionsHosts;
++ (NSString *)pathForSubscriptionsRules;
 @end

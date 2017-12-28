@@ -25,8 +25,14 @@
 
 #define APS_WHITELIST_DOAMINS              @"pro-whitelist-doamins.data"
 #define APS_BLACKLIST_DOAMINS              @"pro-blacklist-doamins.data"
-#define APS_TRACKERS_DOMAINS               @"pro-trackers-doamins.data"
-#define DNS_LOG_RECORD_FILE         @"dns-log-records.db"
+#define APS_TRACKERS_DOMAINS               @"pro-trackers-domains.data"
+#define APS_HOSTS_DOMAINS                  @"pro-hosts-domains.data"
+#define DNS_LOG_RECORD_FILE                @"dns-log-records.db"
+#define BLOCKING_SUBSCRIPTIONS_FILE        @"blocking-subscriptions.db"
+#define BLOCKING_SUBSCRIPTIONS_META_FILE   @"blocking-subscriptions-meta.db"
+#define BLOCKING_SUBSCRIPTIONS_HOSTS_FILE  @"blocking-subscriptions-hosts.db"
+#define BLOCKING_SUBSCRIPTIONS_RULES_FILE  @"blocking-subscriptions-rules.db"
+
 #define LOG_RECORDS_TTL             12*60*60 // 12 hours
 
 /////////////////////////////////////////////////////////////////////
@@ -36,6 +42,7 @@
 
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
 - (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
+- (NSString*) pathForRelativePath:(NSString*) relativePath;
 
 @end
 
@@ -102,10 +109,19 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return [self domainsListWithName:APS_TRACKERS_DOMAINS];
 }
 
-
 +(void)setTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
     
     [self setDomainsList:trackerslistDomains forName:APS_TRACKERS_DOMAINS];
+}
+
++ (NSDictionary<NSString *,NSString *> *)hosts {
+    
+    return [self domainsListWithName:APS_HOSTS_DOMAINS];
+}
+
++ (void)setHosts:(NSDictionary<NSString *,NSString *> *)hosts {
+    
+    [self setDomainsList:hosts forName:APS_HOSTS_DOMAINS];
 }
 
 + (NSArray <APDnsLogRecord *> *)readDnsLog{
@@ -266,5 +282,43 @@ static FMDatabaseQueue *_writeDnsLogHandler;
         [resources saveData:data toFileRelativePath:name];
     }
 }
+
++ (void)setSubscriptionsData:(NSData *)subscriptionsData {
+    
+    AESharedResources *resources = [AESharedResources new];
+    
+    if(!subscriptionsData) {
+        subscriptionsData = [NSData data];
+    }
+    
+    [resources saveData:subscriptionsData toFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSData *)subscriptionsData {
+    AESharedResources *resources = [AESharedResources new];
+    
+    return [resources loadDataFromFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsData {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsMeta {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_META_FILE];
+}
+
++ (NSString *)pathForSubscriptionsHosts {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_HOSTS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsRules {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_RULES_FILE];
+}
+
 
 @end

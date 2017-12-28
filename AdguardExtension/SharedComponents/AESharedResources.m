@@ -358,5 +358,12 @@ static NSUserDefaults *_sharedUserDefaults;
     }
 }
 
+- (NSString*) pathForRelativePath:(NSString*) relativePath {
+    
+    NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
+    
+    return dataUrl.path;
+}
+
 @end
 

@@ -34,6 +34,8 @@
 #ifdef PRO
 #import "APSProductSchemaManager.h"
 #import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
+#import "APVPNManager.h"
 #else
 #import "AESProductSchemaManager.h"
 #endif
@@ -285,6 +287,21 @@ typedef void (^AEDownloadsCompletionBlock)();
             return;
         }
         
+#ifdef PRO
+        if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
+            
+            [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
+                
+                [APVPNManager.singleton sendReloadSystemWideDomainLists];
+                completionHandler(UIBackgroundFetchResultNewData);
+            } errorBlock:^(NSError *error) {
+                completionHandler(UIBackgroundFetchResultFailed);
+            }];
+            
+            return;
+        }
+#endif
+        
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
@@ -322,7 +339,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     }
 }
 
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)())completionHandler {
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
 
     DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
 

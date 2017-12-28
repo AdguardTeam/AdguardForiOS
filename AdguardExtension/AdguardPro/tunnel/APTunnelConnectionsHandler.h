@@ -72,6 +72,15 @@
  */
 - (void)setTrackersFilter:(AERDomainFilter *)filter;
 
+/**
+ Sets hosts filter.
+ */
+- (void)setHostsFilter:(NSDictionary *)filter;
+
+/**
+ Sets susbscriptions hosts filter.
+ */
+- (void)setSubscriptionsHostsFilter:(NSDictionary *)filter;
 
 /**
  Make the initial readPacketsWithCompletionHandler call.
@@ -119,7 +128,10 @@
  Checks domain name, that it is included in trackers list.
  */
 - (BOOL)isTrackerslistDomain:(NSString *)domainName;
-
+/**
+ Checks domain name, that it is included in hosts list.
+ */
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString**)ip;
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.

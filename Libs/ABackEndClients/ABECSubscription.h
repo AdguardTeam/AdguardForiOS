@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © 2015-2017 Performix LLC. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,27 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import <Foundation/Foundation.h>
 
-
-@import Darwin.libkern;
-@import Foundation;
-
-@class APDnsRequest, APDnsResponse;
-
-@interface APDnsDatagram : NSObject <NSCopying>
-
-- (id)initWithData:(NSData *)datagram;
-
-@property (readonly, nonatomic) NSNumber *ID;
-@property (readonly, nonatomic) BOOL isRequest;
-@property (readonly, nonatomic) BOOL isResponse;
-
-@property (readonly, nonatomic) NSArray <APDnsRequest *> *requests;
-@property (readonly, nonatomic) NSArray <APDnsResponse *> *responses;
+typedef NS_ENUM(NSInteger, ABECSubscriptionErrorCode) {
+    /**
+     *  Indicates that the file can not be downloaded.
+     */
+    ABECSubscriptionErrorCodeNetworkError = 1,
+    
+    /**
+     *  Indicates that the rules can not be parsed.
+     */
+    ABECSubscriptionErrorCodeParseError,
+};
 
 /**
- Converts to blocking response. 
- Ie appends responses for all address requests , herewith, responses contain localhost address.
- 
- @return Returns YES on success
+ Backend client for retrieve subscripitons data
  */
-- (BOOL)convertToBlockingResponseWithIP: (NSString*)ip;
+@interface ABECSubscription : NSObject
 
-- (NSData *)generatePayload;
++ (ABECSubscription *)singleton;
+
+- (void) downloadSubscription:(NSString*) url completionBlock: (void (^)(NSArray* rules, NSDictionary* hosts))completionBlock errorBlock:(void(^)(NSError* error))errorBlock;
 
 @end

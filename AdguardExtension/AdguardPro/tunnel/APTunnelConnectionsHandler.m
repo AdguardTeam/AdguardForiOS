@@ -48,6 +48,7 @@
     OSSpinLock _userWhitelistLock;
     OSSpinLock _userBlacklistLock;
     OSSpinLock _trackersLock;
+    OSSpinLock _hostsLock;
     
     NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
@@ -58,6 +59,8 @@
     AERDomainFilter *_userWhitelist;
     AERDomainFilter *_userBlacklist;
     AERDomainFilter *_trackersList;
+    NSDictionary *_hosts;
+    NSDictionary *_subscriptionsHosts;
     
     BOOL _packetFlowObserver;
     
@@ -85,7 +88,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = OS_SPINLOCK_INIT;
+        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
         
         _closeCompletion = nil;
@@ -202,6 +205,20 @@
     OSSpinLockUnlock(&_trackersLock);
 }
 
+- (void)setHostsFilter:(NSDictionary *)filter {
+    
+    OSSpinLockLock(&_hostsLock);
+    _hosts = filter;
+    OSSpinLockUnlock(&_hostsLock);
+}
+
+- (void)setSubscriptionsHostsFilter:(NSDictionary *)filter {
+    
+    OSSpinLockLock(&_hostsLock);
+    _subscriptionsHosts = filter;
+    OSSpinLockUnlock(&_hostsLock);
+}
+
 - (void)startHandlingPackets {
 
     if (_provider.packetFlow) {
@@ -264,7 +281,7 @@
         
         [AESharedResources.sharedDefaults setValue:time forKey:AEDefaultsTotalRequestsTime];
         
-        if(tracker) { // todo: set real trackers counter
+        if(tracker) {
             
             NSNumber* countTrackers = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount];
             int countTrackersValue = countTrackers.intValue + 1;
@@ -336,6 +353,29 @@
     result = [_trackersList filteredDomain:domainName];
     
     OSSpinLockUnlock(&_trackersLock);
+    
+    return result;
+}
+
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_hostsLock);
+    
+    NSString* foundIp = _hosts[domainName];
+    if(foundIp) {
+        result = YES;
+        *ip = foundIp;
+    }
+    else {
+        foundIp = _subscriptionsHosts[domainName];
+        if(foundIp) {
+            result = YES;
+            *ip = foundIp;
+        }
+    }
+    
+    OSSpinLockUnlock(&_hostsLock);
     
     return result;
 }

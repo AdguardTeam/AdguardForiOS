@@ -17,6 +17,7 @@
  */
 
 #import "APUIProSectionFooter.h"
+#import "AEUICommons.h"
 
 @implementation APUIProSectionFooter{
     
@@ -76,7 +77,7 @@
         
 //        CGFloat fontSize = [UIFont buttonFontSize];
         UIFont *font = [UIFont systemFontOfSize:13];
-        UIColor *color = [UIColor darkGrayColor];
+        UIColor *color = SUBTITLE_TEXT_COLOR;
 
 //        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //        style.alignment = NSTextAlignmentJustified;

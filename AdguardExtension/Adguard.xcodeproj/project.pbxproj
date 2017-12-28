@@ -707,8 +707,8 @@
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D0295AEF1F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
 		D0295AF01F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
-		D02EFD081F7B9327006CDBD5 /* ABECTrackersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECTrackersParser.m */; };
-		D02EFD091F7B9327006CDBD5 /* ABECTrackersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECTrackersParser.m */; };
+		D02EFD081F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
+		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
@@ -736,6 +736,14 @@
 		D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
 		D08933471FC8178E007A221A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0BC64E21FC5C30100E9193D /* libcrypto.a */; };
+		D08C96C01FE16F86002456B3 /* APBlockingListsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96BF1FE16F86002456B3 /* APBlockingListsController.m */; };
+		D08C96C31FE2763B002456B3 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */; };
+		D08C96C61FE27CED002456B3 /* APBlockingSubscriptionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */; };
+		D08C96CC1FE2D848002456B3 /* APNewBlockingSubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C71FE2BF18002456B3 /* APNewBlockingSubscriptionController.m */; };
+		D08C96CF1FE3C459002456B3 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
+		D08C96D21FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96D11FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.m */; };
+		D08C96D51FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96D41FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m */; };
+		D08C96D71FE937E7002456B3 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */; };
 		D096D9421F28C0D70081004D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
 		D096D9461F28C0D70081004D /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D096D9451F28C0D70081004D /* TodayViewController.m */; };
 		D096D9491F28C0D70081004D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D096D9471F28C0D70081004D /* MainInterface.storyboard */; };
@@ -909,6 +917,12 @@
 		D0BC69081FC5D19800E9193D /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65B41FC5C6B000E9193D /* buffer.c */; };
 		D0BC690B1FC6AC9800E9193D /* bufferevent_ratelim.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65BC1FC5C6B000E9193D /* bufferevent_ratelim.c */; };
 		D0BC690C1FC6AFFC00E9193D /* app.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64ED1FC5C30100E9193D /* app.c */; };
+		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
+		D0CA2EBF1FF3E2430072B4A6 /* AEUICellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */; };
+		D0CA2EC01FF3E2430072B4A6 /* AEUICellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */; };
+		D0CA32481FF4E2470072B4A6 /* APBlockingSubscriptionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */; };
+		D0CA324B1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA324A1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m */; };
+		D0CA324C1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA324A1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m */; };
 		D0E3782E1FA361C300726747 /* services.json in Resources */ = {isa = PBXBuildFile; fileRef = D0E3782D1FA3609200726747 /* services.json */; };
 		D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
@@ -1563,6 +1577,20 @@
 		D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUISelectableTableViewCell.m; sourceTree = "<group>"; };
 		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
 		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
+		D08C96BE1FE16F86002456B3 /* APBlockingListsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APBlockingListsController.h; sourceTree = "<group>"; };
+		D08C96BF1FE16F86002456B3 /* APBlockingListsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APBlockingListsController.m; sourceTree = "<group>"; };
+		D08C96C11FE2763B002456B3 /* APBlockingSubscription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscription.h; sourceTree = "<group>"; };
+		D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APBlockingSubscription.m; sourceTree = "<group>"; };
+		D08C96C41FE27CED002456B3 /* APBlockingSubscriptionsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscriptionsManager.h; sourceTree = "<group>"; };
+		D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APBlockingSubscriptionsManager.m; sourceTree = "<group>"; };
+		D08C96C71FE2BF18002456B3 /* APNewBlockingSubscriptionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APNewBlockingSubscriptionController.m; sourceTree = "<group>"; };
+		D08C96CA1FE2C25A002456B3 /* APNewBlockingSubscriptionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APNewBlockingSubscriptionController.h; sourceTree = "<group>"; };
+		D08C96CD1FE3C459002456B3 /* ABECSubscription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECSubscription.h; sourceTree = "<group>"; };
+		D08C96CE1FE3C459002456B3 /* ABECSubscription.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECSubscription.m; sourceTree = "<group>"; };
+		D08C96D01FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPredefinedBlockingSubscriptionsController.h; sourceTree = "<group>"; };
+		D08C96D11FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPredefinedBlockingSubscriptionsController.m; sourceTree = "<group>"; };
+		D08C96D31FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscriptionDetailsController.h; sourceTree = "<group>"; };
+		D08C96D41FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APBlockingSubscriptionDetailsController.m; sourceTree = "<group>"; };
 		D096D9401F28C0D70081004D /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D096D9441F28C0D70081004D /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -2049,6 +2077,10 @@
 		D0BC69051FC5D18100E9193D /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		D0BC69061FC5D18100E9193D /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		D0BC69071FC5D18100E9193D /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		D0CA2EBD1FF3E2430072B4A6 /* AEUICellTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICellTextField.h; sourceTree = "<group>"; };
+		D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUICellTextField.m; sourceTree = "<group>"; };
+		D0CA32491FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUIRightDetailTableViewCell.h; sourceTree = "<group>"; };
+		D0CA324A1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUIRightDetailTableViewCell.m; sourceTree = "<group>"; };
 		D0E3782D1FA3609200726747 /* services.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = services.json; sourceTree = "<group>"; };
 		D0E607521F45909700B4D72B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = TodayExtension/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		D0E607681F4590F500B4D72B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2286,6 +2318,8 @@
 				D0FDF0D01F6955E600A5550A /* AEUIWelcomePagerController.m */,
 				D05747B51F7E6E26009162FF /* AEUISelectableTableViewCell.h */,
 				D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */,
+				D0CA32491FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.h */,
+				D0CA324A1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2331,6 +2365,14 @@
 				658DDFF71DA67FE600688557 /* APUIProStatusTableViewCell.m */,
 				659B79241E40E626003B1E70 /* APUIDnsServersController.h */,
 				659B79251E40E626003B1E70 /* APUIDnsServersController.m */,
+				D08C96BE1FE16F86002456B3 /* APBlockingListsController.h */,
+				D08C96BF1FE16F86002456B3 /* APBlockingListsController.m */,
+				D08C96CA1FE2C25A002456B3 /* APNewBlockingSubscriptionController.h */,
+				D08C96C71FE2BF18002456B3 /* APNewBlockingSubscriptionController.m */,
+				D08C96D01FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.h */,
+				D08C96D11FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.m */,
+				D08C96D31FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.h */,
+				D08C96D41FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2344,6 +2386,8 @@
 				653987AB1EA4052C001D1A5F /* APSProductSchemaManager.m */,
 				D0B0383D1FB48D1500A5EA3F /* APDnsCryptParser.h */,
 				D0B0383E1FB48D1500A5EA3F /* APDnsCryptParser.m */,
+				D08C96C41FE27CED002456B3 /* APBlockingSubscriptionsManager.h */,
+				D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2546,6 +2590,8 @@
 				D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */,
 				D0427C761F434129002FB018 /* APDnsServerAddress.h */,
 				D0427C771F434129002FB018 /* APDnsServerAddress.m */,
+				D08C96C11FE2763B002456B3 /* APBlockingSubscription.h */,
+				D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -2689,6 +2735,8 @@
 				65A6AC941BE09FED006A86E5 /* AEUIUtils.m */,
 				65CE8DA71E65B98D009EBCC6 /* AEUICustomTextEditorController.h */,
 				65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */,
+				D0CA2EBD1FF3E2430072B4A6 /* AEUICellTextField.h */,
+				D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2796,6 +2844,8 @@
 				D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */,
 				D0B035571FD972AB00AB8F9D /* ABECService.h */,
 				D0B035581FD972AB00AB8F9D /* ABECService.m */,
+				D08C96CD1FE3C459002456B3 /* ABECSubscription.h */,
+				D08C96CE1FE3C459002456B3 /* ABECSubscription.m */,
 			);
 			path = ABackEndClients;
 			sourceTree = "<group>";
@@ -5126,9 +5176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */,
 				D0BC686C1FC5CE5D00E9193D /* crypto_stream.c in Sources */,
 				6581C9331D64952C00E739CC /* ACNHttpUtils.m in Sources */,
 				653AEA001D084B6400AC81B4 /* DDContextFilterLogFormatter.m in Sources */,
+				D0CA32481FF4E2470072B4A6 /* APBlockingSubscriptionsManager.m in Sources */,
 				D0BC68181FC5CE5D00E9193D /* crypto_box.c in Sources */,
 				658237391D07FE6700B824F4 /* PacketTunnelProvider.m in Sources */,
 				D0BC69081FC5D19800E9193D /* buffer.c in Sources */,
@@ -5151,6 +5203,7 @@
 				D0BC68621FC5CE5D00E9193D /* beforenm_aes128ctr.c in Sources */,
 				D0BC68651FC5CE5D00E9193D /* stream_aes128ctr_nacl.c in Sources */,
 				653AEA031D084B6400AC81B4 /* NSDate+Utils.m in Sources */,
+				D0B0355A1FD972AB00AB8F9D /* ABECService.m in Sources */,
 				D0BC68AD1FC5D06600E9193D /* kqueue.c in Sources */,
 				D0B038471FB4968600A5EA3F /* CHCSVParser.m in Sources */,
 				D0BC687C1FC5CE5E00E9193D /* randombytes.c in Sources */,
@@ -5197,6 +5250,7 @@
 				6581C9231D6493A400E739CC /* AEService.m in Sources */,
 				D0BC683D1FC5CE5D00E9193D /* crypto_pwhash.c in Sources */,
 				65B621211D2F95EE0047248F /* APTUdpProxySession.m in Sources */,
+				D08C96D71FE937E7002456B3 /* APBlockingSubscription.m in Sources */,
 				D0BC68431FC5CE5D00E9193D /* pwhash_scryptsalsa208sha256_sse.c in Sources */,
 				D0BC65221FC5C30100E9193D /* cert.c in Sources */,
 				6581C9251D64945800E739CC /* AESAntibanner.m in Sources */,
@@ -5373,6 +5427,7 @@
 				659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */,
 				6581C93B1D64FC3B00E739CC /* APUIDnsLogRecord.m in Sources */,
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
+				D08C96CC1FE2D848002456B3 /* APNewBlockingSubscriptionController.m in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
@@ -5402,10 +5457,12 @@
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
 				D04B97E41F601E9A00CE2E03 /* MGSwipeButton.m in Sources */,
 				655AACDA1D4237F700E316EA /* AEUIFirstStartViewController.m in Sources */,
+				D08C96C01FE16F86002456B3 /* APBlockingListsController.m in Sources */,
 				659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */,
 				659886661CF74DE9003ECD1C /* CLIColor.m in Sources */,
 				659886671CF74DE9003ECD1C /* AEUIFilterRuleObject.m in Sources */,
 				651F5E061E25004600E22157 /* APDnsServerObject.m in Sources */,
+				D08C96CF1FE3C459002456B3 /* ABECSubscription.m in Sources */,
 				655AAC8A1D37780700E316EA /* APDnsRequest.m in Sources */,
 				659886681CF74DE9003ECD1C /* AEUIAdvSettingsController.m in Sources */,
 				65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */,
@@ -5424,10 +5481,12 @@
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
+				D08C96D51FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
 				D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */,
 				653C929B1DA2A9D3008BE1C1 /* APDnsResourceClass.m in Sources */,
+				D0CA2EC01FF3E2430072B4A6 /* AEUICellTextField.m in Sources */,
 				655AAC871D37780700E316EA /* APDnsDatagram.m in Sources */,
 				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
 				659886761CF74DE9003ECD1C /* AEUIUtils.m in Sources */,
@@ -5445,13 +5504,16 @@
 				651F5E031E24DFBC00E22157 /* APUIDnsServerDetailController.m in Sources */,
 				6598867F1CF74DE9003ECD1C /* ABECFilter.m in Sources */,
 				659886801CF74DE9003ECD1C /* AEUILongLabelViewCell.m in Sources */,
+				D0CA324C1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m in Sources */,
 				659886811CF74DE9003ECD1C /* FMDatabaseAdditions.m in Sources */,
 				659886821CF74DE9003ECD1C /* DDDispatchQueueLogFormatter.m in Sources */,
 				659886831CF74DE9003ECD1C /* DDTTYLogger.m in Sources */,
 				659886841CF74DE9003ECD1C /* AEUISubscriptionController.m in Sources */,
 				6562800B1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
+				D08C96C31FE2763B002456B3 /* APBlockingSubscription.m in Sources */,
 				659886861CF74DE9003ECD1C /* AESFilterConverter.m in Sources */,
+				D08C96C61FE27CED002456B3 /* APBlockingSubscriptionsManager.m in Sources */,
 				659886871CF74DE9003ECD1C /* DDContextFilterLogFormatter.m in Sources */,
 				D05747B81F7E709D009162FF /* AEUISelectableTableViewCell.m in Sources */,
 				653987AC1EA4052C001D1A5F /* APSProductSchemaManager.m in Sources */,
@@ -5465,6 +5527,7 @@
 				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */,
 				6598868C1CF74DE9003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
+				D08C96D21FE7E35C002456B3 /* APPredefinedBlockingSubscriptionsController.m in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
 				655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */,
 				6598868E1CF74DE9003ECD1C /* AEUISubscriptionSectionObject.m in Sources */,
@@ -5751,6 +5814,7 @@
 				65EC9BD81BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
+				D0CA2EBF1FF3E2430072B4A6 /* AEUICellTextField.m in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D04B97E51F6022ED00CE2E03 /* MGSwipeTableCell.m in Sources */,
@@ -5773,6 +5837,7 @@
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
 				658DDFFE1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
 				6514819E1BC42E2A00211147 /* AEUIAboutController.m in Sources */,
+				D0CA324B1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m in Sources */,
 				655A025B1C6B7686000F00D7 /* DDLog.m in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
