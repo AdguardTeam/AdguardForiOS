@@ -21,7 +21,7 @@
 #import "ACommons/ACLang.h"
 #import "AESharedResources.h"
 
-#define SCHEMA_VERSION                      @(1)
+#define SCHEMA_VERSION                      @(2)
 
 
 /////////////////////////////////////////////////////////////////////

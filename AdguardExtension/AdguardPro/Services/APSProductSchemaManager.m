@@ -35,6 +35,9 @@
         //set VPN Manager
         [self installDefaultSettingsForVPNManager];
         
+        //setup trackers
+        [self installTrackersDomainList];
+        
     }
     return result;
 }
@@ -42,8 +45,6 @@
 + (void)upgrade {
     
     [super upgrade];
-    
-    [self installTrackersDomainList]; // todo: move this call to right place
 }
 
 + (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
@@ -67,6 +68,13 @@
                     [self installDefaultSettingsForVPNManager];
                 }
             }
+        }
+        else if ([to isEqual:@(2)]) {
+            // upgrade to 2.0.*
+            
+            DDLogInfo(@"(APSProductSchemaManager) Upgrade to 2.0.*");
+            
+            [self installTrackersDomainList];
         }
         
     }
