@@ -19,7 +19,7 @@
 
 #import "AEUISelectableTableViewCell.h"
 
-@interface AEUISubscriptionTableViewCell : AEUISelectableTableViewCell
+@interface AEUISubscriptionTableViewCell : UITableViewCell
 
 @property BOOL on;
 
