@@ -379,7 +379,9 @@
 
 - (void)setProStatus:(BOOL)enabled {
     
-    // todo: switchStatus:enabled; updatestatuses;
+    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
+    [[APVPNManager singleton] setEnabled:enabled];
+    self.proStatusSwitch.enabled = enabled;
 }
 
 #endif
