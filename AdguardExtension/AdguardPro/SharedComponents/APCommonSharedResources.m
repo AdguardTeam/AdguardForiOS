@@ -24,6 +24,7 @@
 
 NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
 NSString *APDefaultsCustomRemoteDnsServers = @"APDefaultsCustomRemoteDnsServers";
+NSString *APDefaultsCustomRemoteDnsCryptServers = @"APDefaultsCustomRemoteDnsCryptServers";
 NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
 
 NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";

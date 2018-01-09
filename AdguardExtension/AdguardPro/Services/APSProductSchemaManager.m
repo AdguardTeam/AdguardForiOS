@@ -22,6 +22,8 @@
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
 #import "APVPNManager.h"
+#import "ABECServicesParser.h"
+#import "APSharedResources.h"
 
 @implementation APSProductSchemaManager
 
@@ -33,8 +35,16 @@
         //set VPN Manager
         [self installDefaultSettingsForVPNManager];
         
+        //setup trackers
+        [self installTrackersDomainList];
+        
     }
     return result;
+}
+
++ (void)upgrade {
+    
+    [super upgrade];
 }
 
 + (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
@@ -58,6 +68,13 @@
                     [self installDefaultSettingsForVPNManager];
                 }
             }
+        }
+        else if ([to isEqual:@(2)]) {
+            // upgrade to 2.0.*
+            
+            DDLogInfo(@"(APSProductSchemaManager) Upgrade to 2.0.*");
+            
+            [self installTrackersDomainList];
         }
         
     }
@@ -97,6 +114,20 @@
     
     return result;
 
+}
+
++ (BOOL) installTrackersDomainList {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"services" ofType: @"json"];
+    
+    NSData* data = [NSData dataWithContentsOfFile:path];
+    
+    ABECServicesParser* parser = [ABECServicesParser new];
+    [parser parseData:data];
+    
+    APSharedResources.trackerslistDomains = parser.hosts;
+    
+    return YES;
 }
 
 + (void)installDefaultSettingsForVPNManagerV9 {

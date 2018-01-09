@@ -39,6 +39,12 @@
 @property (weak, nonatomic) IBOutlet AEUILongLabelViewCell *responsesCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *domainControllCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *localFilteringCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *serviceNameCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *serviceDescriptionCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *servideCategoriesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *serviceNotesCell;
+
+
 
 - (IBAction)clickDomainControll:(id)sender;
 - (IBAction)longPressOnName:(id)sender;

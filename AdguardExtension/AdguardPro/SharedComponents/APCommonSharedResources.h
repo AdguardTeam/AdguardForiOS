@@ -37,6 +37,11 @@ extern NSString *APDefaultsDnsLoggingEnabled;
 extern NSString *APDefaultsCustomRemoteDnsServers;
 
 /**
+ User Defaults key, which defines list of the remote DNScrypt servers (list of APDnsServerObject objects).
+ */
+extern NSString *APDefaultsCustomRemoteDnsCryptServers;
+
+/**
  Key of the parameter, which contains remote DNS server configuration.
  */
 extern NSString *APVpnManagerParameterRemoteDnsServer;

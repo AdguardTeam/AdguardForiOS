@@ -43,6 +43,15 @@
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.tintColor = [UIColor blackColor];
+    self.searchController.searchBar.backgroundColor = [UIColor blackColor];
+    self.searchController.searchBar.barTintColor = [UIColor colorWithWhite:0.12f alpha:1.0f];
+    
+    UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
+    searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
+    searchField.tintColor = searchField.textColor = UIColor.lightGrayColor;
+    
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
     
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
@@ -63,6 +72,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - Table view data source
 
@@ -76,7 +89,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dnsRequestCell" forIndexPath:indexPath];
-
+    cell.backgroundColor = [UIColor clearColor];
+    
     NSInteger row = indexPath.row;
     NSArray *records = self.filteredLogRecords;
     if (row < records.count) {

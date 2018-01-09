@@ -1,0 +1,2774 @@
+{
+  "categories" : [
+    {
+      "id" : "Analitics",
+      "name" : "Analitics",
+      "desription" : "track user data"
+    }
+  ],
+  "trackers" : [
+    {
+      "name" : "63 Squares",
+      "domains" : [
+        "63squares.com",
+        "i-stats.com"
+      ],
+      "id" : "63 Squares",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/63squares.com\/"
+    },
+    {
+      "name" : "AT Internet",
+      "domains" : [
+        "atinternet.com",
+        "xiti.com"
+      ],
+      "id" : "AT Internet",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.atinternet.com\/"
+    },
+    {
+      "name" : "Acxiom",
+      "domains" : [
+        "acxiom.com",
+        "mm7.net",
+        "acxiomapac.com"
+      ],
+      "id" : "Acxiom",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.acxiom.com\/"
+    },
+    {
+      "name" : "AddFreeStats",
+      "domains" : [
+        "3dstats.com",
+        "addfreestats.com"
+      ],
+      "id" : "AddFreeStats",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.addfreestats.com\/"
+    },
+    {
+      "name" : "Adloox",
+      "domains" : [
+        "adlooxtracking.com",
+        "adloox.com"
+      ],
+      "id" : "Adloox",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.adloox.com\/"
+    },
+    {
+      "name" : "Adobe",
+      "domains" : [
+        "adobedtm.com"
+      ],
+      "id" : "Adobe",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.adobe.com\/"
+    },
+    {
+      "name" : "Adventori",
+      "domains" : [
+        "adventori.com"
+      ],
+      "id" : "Adventori",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/adventori.com"
+    },
+    {
+      "name" : "Amadesa",
+      "domains" : [
+        "amadesa.com"
+      ],
+      "id" : "Amadesa",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.amadesa.com\/"
+    },
+    {
+      "name" : "Amazing Counters",
+      "domains" : [
+        "amazingcounters.com"
+      ],
+      "id" : "Amazing Counters",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/amazingcounters.com\/"
+    },
+    {
+      "name" : "Amazon.com",
+      "domains" : [
+        "alexa.com",
+        "alexametrics.com"
+      ],
+      "id" : "Amazon.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.amazon.com\/"
+    },
+    {
+      "name" : "Attracta",
+      "domains" : [
+        "attracta.com"
+      ],
+      "id" : "Attracta",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.attracta.com\/"
+    },
+    {
+      "name" : "Automattic",
+      "domains" : [
+        "polldaddy.com"
+      ],
+      "id" : "Automattic",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/automattic.com\/"
+    },
+    {
+      "name" : "Awio",
+      "domains" : [
+        "awio.com",
+        "w3counter.com",
+        "w3roi.com"
+      ],
+      "id" : "Awio",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.awio.com\/"
+    },
+    {
+      "name" : "Belstat",
+      "domains" : [
+        "belstat.be",
+        "belstat.com",
+        "belstat.de",
+        "belstat.fr",
+        "belstat.nl"
+      ],
+      "id" : "Belstat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.belstat.com\/"
+    },
+    {
+      "name" : "BlogCounter.com",
+      "domains" : [
+        "blogcounter.de"
+      ],
+      "id" : "BlogCounter.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.blogcounter.de\/"
+    },
+    {
+      "name" : "Bluemetrix",
+      "domains" : [
+        "bluemetrix.com",
+        "bmmetrix.com"
+      ],
+      "id" : "Bluemetrix",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.bluemetrix.com\/"
+    },
+    {
+      "name" : "Branica",
+      "domains" : [
+        "branica.com"
+      ],
+      "id" : "Branica",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.branica.com\/"
+    },
+    {
+      "name" : "BrightEdge",
+      "domains" : [
+        "brightedge.com"
+      ],
+      "id" : "BrightEdge",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.brightedge.com\/"
+    },
+    {
+      "name" : "Bubblestat",
+      "domains" : [
+        "bubblestat.com"
+      ],
+      "id" : "Bubblestat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.bubblestat.com\/"
+    },
+    {
+      "name" : "C3 Metrics",
+      "domains" : [
+        "attributionmodel.com",
+        "c3metrics.com",
+        "c3tag.com"
+      ],
+      "id" : "C3 Metrics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/c3metrics.com\/"
+    },
+    {
+      "name" : "CNZZ",
+      "domains" : [
+        "cnzz.com"
+      ],
+      "id" : "CNZZ",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.cnzz.com\/"
+    },
+    {
+      "name" : "Chartbeat",
+      "domains" : [
+        "chartbeat.com",
+        "chartbeat.net"
+      ],
+      "id" : "Chartbeat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/chartbeat.com\/"
+    },
+    {
+      "name" : "ClickTale",
+      "domains" : [
+        "clicktale.com",
+        "clicktale.net",
+        "pantherssl.com"
+      ],
+      "id" : "ClickTale",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.clicktale.com\/"
+    },
+    {
+      "name" : "Clickdensity",
+      "domains" : [
+        "clickdensity.com"
+      ],
+      "id" : "Clickdensity",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.clickdensity.com\/"
+    },
+    {
+      "name" : "ClixMetrix",
+      "domains" : [
+        "clixmetrix.com"
+      ],
+      "id" : "ClixMetrix",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.clixmetrix.com\/"
+    },
+    {
+      "name" : "Clixpy",
+      "domains" : [
+        "clixpy.com"
+      ],
+      "id" : "Clixpy",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/clixpy.com\/"
+    },
+    {
+      "name" : "ClustrMaps",
+      "domains" : [
+        "clustrmaps.com"
+      ],
+      "id" : "ClustrMaps",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.clustrmaps.com\/"
+    },
+    {
+      "name" : "Compuware",
+      "domains" : [
+        "axf8.net",
+        "compuware.com",
+        "gomez.com"
+      ],
+      "id" : "Compuware",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.compuware.com\/"
+    },
+    {
+      "name" : "Connexity",
+      "domains" : [
+        "connexity.com",
+        "connexity.net"
+      ],
+      "id" : "Connexity",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.connexity.com\/"
+    },
+    {
+      "name" : "Conversant Media",
+      "domains" : [
+        "zmedia.com",
+        "conversantmedia.com"
+      ],
+      "id" : "Conversant Media",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.conversantmedia.com\/"
+    },
+    {
+      "name" : "Convert Insights",
+      "domains" : [
+        "convert.com",
+        "reedge.com"
+      ],
+      "id" : "Convert Insights",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.convert.com\/"
+    },
+    {
+      "name" : "Convertro",
+      "domains" : [
+        "convertro.com"
+      ],
+      "id" : "Convertro",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.convertro.com\/"
+    },
+    {
+      "name" : "Crazy Egg",
+      "domains" : [
+        "cetrk.com",
+        "crazyegg.com"
+      ],
+      "id" : "Crazy Egg",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.crazyegg.com\/"
+    },
+    {
+      "name" : "Crowd Science",
+      "domains" : [
+        "crowdscience.com"
+      ],
+      "id" : "Crowd Science",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/crowdscience.com\/"
+    },
+    {
+      "name" : "Cya2",
+      "domains" : [
+        "cya2.net"
+      ],
+      "id" : "Cya2",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/cya2.net\/"
+    },
+    {
+      "name" : "Dataium",
+      "domains" : [
+        "collserve.com",
+        "dataium.com"
+      ],
+      "id" : "Dataium",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.dataium.com\/"
+    },
+    {
+      "name" : "Deep Intent",
+      "domains" : [
+        "deepintent.com"
+      ],
+      "id" : "Deep Intent",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.deepintent.com\/"
+    },
+    {
+      "name" : "Demandbase",
+      "domains" : [
+        "demandbase.com"
+      ],
+      "id" : "Demandbase",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.demandbase.com\/"
+    },
+    {
+      "name" : "DirectCORP",
+      "domains" : [
+        "ipcounter.de"
+      ],
+      "id" : "DirectCORP",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.directcorp.de\/"
+    },
+    {
+      "name" : "EFF",
+      "domains" : [
+        "trackersimulator.org",
+        "eviltracker.net",
+        "do-not-tracker.org"
+      ],
+      "id" : "EFF",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.eff.org\/"
+    },
+    {
+      "name" : "Eloqua",
+      "domains" : [
+        "eloqua.com"
+      ],
+      "id" : "Eloqua",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.eloqua.com\/"
+    },
+    {
+      "name" : "Encore",
+      "domains" : [
+        "encoremetrics.com",
+        "sitecompass.com"
+      ],
+      "id" : "Encore",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.encoremetrics.com\/"
+    },
+    {
+      "name" : "Eulerian Technologies",
+      "domains" : [
+        "eulerian.com",
+        "eulerian.net"
+      ],
+      "id" : "Eulerian Technologies",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.eulerian.com\/"
+    },
+    {
+      "name" : "Feedjit",
+      "domains" : [
+        "feedjit.com"
+      ],
+      "id" : "Feedjit",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/feedjit.com\/"
+    },
+    {
+      "name" : "Footprint",
+      "domains" : [
+        "footprintlive.com"
+      ],
+      "id" : "Footprint",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.footprintlive.com\/"
+    },
+    {
+      "name" : "Free Online Users",
+      "domains" : [
+        "freeonlineusers.com"
+      ],
+      "id" : "Free Online Users",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.freeonlineusers.com\/"
+    },
+    {
+      "name" : "Free-PageRank.com",
+      "domains" : [
+        "free-pagerank.com"
+      ],
+      "id" : "Free-PageRank.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.free-pagerank.com\/"
+    },
+    {
+      "name" : "GTop",
+      "domains" : [
+        "gtop.ro",
+        "gtopstats.com"
+      ],
+      "id" : "GTop",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.gtop.ro\/"
+    },
+    {
+      "name" : "GfK Group",
+      "domains" : [
+        "daphnecm.com",
+        "gfk.com",
+        "gfkdaphne.com"
+      ],
+      "id" : "GfK Group",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.gfk.com\/"
+    },
+    {
+      "name" : "GitHub",
+      "domains" : [
+        "gaug.es"
+      ],
+      "id" : "GitHub",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/github.com\/"
+    },
+    {
+      "name" : "Go Daddy",
+      "domains" : [
+        "godaddy.com",
+        "trafficfacts.com"
+      ],
+      "id" : "Go Daddy",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.godaddy.com\/"
+    },
+    {
+      "name" : "GoSquared",
+      "domains" : [
+        "gosquared.com"
+      ],
+      "id" : "GoSquared",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.gosquared.com\/"
+    },
+    {
+      "name" : "GoStats",
+      "domains" : [
+        "gostats.com"
+      ],
+      "id" : "GoStats",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/gostats.com\/"
+    },
+    {
+      "name" : "Hearst",
+      "domains" : [
+        "raasnet.com",
+        "redaril.com"
+      ],
+      "id" : "Hearst",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.hearst.com\/"
+    },
+    {
+      "name" : "Histats",
+      "domains" : [
+        "histats.com"
+      ],
+      "id" : "Histats",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.histats.com\/"
+    },
+    {
+      "name" : "Hit Sniffer",
+      "domains" : [
+        "hitsniffer.com"
+      ],
+      "id" : "Hit Sniffer",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.hitsniffer.com\/"
+    },
+    {
+      "name" : "HitsLink",
+      "domains" : [
+        "hitslink.com"
+      ],
+      "id" : "HitsLink",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.hitslink.com\/"
+    },
+    {
+      "name" : "Hotjar",
+      "domains" : [
+        "hotjar.com"
+      ],
+      "id" : "Hotjar",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.hotjar.com"
+    },
+    {
+      "name" : "IBM",
+      "domains" : [
+        "cmcore.com",
+        "coremetrics.com",
+        "ibm.com"
+      ],
+      "id" : "IBM",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.ibm.com\/"
+    },
+    {
+      "name" : "INFOnline",
+      "domains" : [
+        "infonline.de",
+        "ivwbox.de",
+        "ioam.de"
+      ],
+      "id" : "INFOnline",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.infonline.de\/"
+    },
+    {
+      "name" : "InboundWriter",
+      "domains" : [
+        "enquisite.com",
+        "inboundwriter.com"
+      ],
+      "id" : "InboundWriter",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.inboundwriter.com\/"
+    },
+    {
+      "name" : "InfoStars",
+      "domains" : [
+        "hotlog.ru",
+        "infostars.ru"
+      ],
+      "id" : "InfoStars",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/infostars.ru\/"
+    },
+    {
+      "name" : "Inspectlet",
+      "domains" : [
+        "inspectlet.com"
+      ],
+      "id" : "Inspectlet",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.inspectlet.com\/"
+    },
+    {
+      "name" : "IntelligenceFocus",
+      "domains" : [
+        "domodomain.com",
+        "intelligencefocus.com"
+      ],
+      "id" : "IntelligenceFocus",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.intelligencefocus.com\/"
+    },
+    {
+      "name" : "Intercom",
+      "domains" : [
+        "intercom.io"
+      ],
+      "id" : "Intercom",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.intercom.io\/"
+    },
+    {
+      "name" : "KISSmetrics",
+      "domains" : [
+        "kissmetrics.com"
+      ],
+      "id" : "KISSmetrics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/kissmetrics.com\/"
+    },
+    {
+      "name" : "KeyMetric",
+      "domains" : [
+        "keymetric.net"
+      ],
+      "id" : "KeyMetric",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.keymetric.net\/"
+    },
+    {
+      "name" : "Kitcode",
+      "domains" : [
+        "src.kitcode.net"
+      ],
+      "id" : "Kitcode",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/src.kitcode.net\/"
+    },
+    {
+      "name" : "LineZing",
+      "domains" : [
+        "linezing.com"
+      ],
+      "id" : "LineZing",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.linezing.com\/"
+    },
+    {
+      "name" : "LivePerson",
+      "domains" : [
+        "liveperson.com",
+        "nuconomy.com"
+      ],
+      "id" : "LivePerson",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.liveperson.net\/"
+    },
+    {
+      "name" : "Logdy",
+      "domains" : [
+        "logdy.com"
+      ],
+      "id" : "Logdy",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/logdy.com\/"
+    },
+    {
+      "name" : "Lotame",
+      "domains" : [
+        "crwdcntrl.net",
+        "lotame.com"
+      ],
+      "id" : "Lotame",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.lotame.com\/"
+    },
+    {
+      "name" : "Lynchpin",
+      "domains" : [
+        "lynchpin.com",
+        "lypn.com"
+      ],
+      "id" : "Lynchpin",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.lynchpin.com\/"
+    },
+    {
+      "name" : "Lyris",
+      "domains" : [
+        "clicktracks.com",
+        "lyris.com"
+      ],
+      "id" : "Lyris",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.lyris.com\/"
+    },
+    {
+      "name" : "Lytiks",
+      "domains" : [
+        "lytiks.com"
+      ],
+      "id" : "Lytiks",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.lytiks.com\/"
+    },
+    {
+      "name" : "MarkMonitor",
+      "domains" : [
+        "markmonitor.com",
+        "9c9media.ca"
+      ],
+      "id" : "MarkMonitor",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.markmonitor.com"
+    },
+    {
+      "name" : "Marktest",
+      "domains" : [
+        "marktest.com",
+        "marktest.pt"
+      ],
+      "id" : "Marktest",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.marktest.com\/"
+    },
+    {
+      "name" : "Maxymiser",
+      "domains" : [
+        "maxymiser.com"
+      ],
+      "id" : "Maxymiser",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.maxymiser.com\/"
+    },
+    {
+      "name" : "Meetrics",
+      "domains" : [
+        "meetrics.de",
+        "meetrics.net",
+        "research.de.com"
+      ],
+      "id" : "Meetrics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.meetrics.de\/"
+    },
+    {
+      "name" : "Mixpanel",
+      "domains" : [
+        "mixpanel.com"
+      ],
+      "id" : "Mixpanel",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/mixpanel.com\/"
+    },
+    {
+      "name" : "Mongoose Metrics",
+      "domains" : [
+        "mongoosemetrics.com"
+      ],
+      "id" : "Mongoose Metrics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.mongoosemetrics.com\/"
+    },
+    {
+      "name" : "Monitus",
+      "domains" : [
+        "monitus.net"
+      ],
+      "id" : "Monitus",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.monitus.net\/"
+    },
+    {
+      "name" : "Mouseflow",
+      "domains" : [
+        "mouseflow.com"
+      ],
+      "id" : "Mouseflow",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/mouseflow.com\/"
+    },
+    {
+      "name" : "ItIsATracker",
+      "domains" : [
+        "itisatracker.com"
+      ],
+      "id" : "ItIsATracker",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/itisatracker.com\/"
+    },
+    {
+      "name" : "MyPagerank.Net",
+      "domains" : [
+        "mypagerank.net"
+      ],
+      "id" : "MyPagerank.Net",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.mypagerank.net\/"
+    },
+    {
+      "name" : "Médiamétrie-eStat",
+      "domains" : [
+        "estat.com",
+        "mediametrie-estat.com"
+      ],
+      "id" : "Médiamétrie-eStat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.mediametrie-estat.com\/"
+    },
+    {
+      "name" : "Net Applications",
+      "domains" : [
+        "hitsprocessor.com",
+        "netapplications.com"
+      ],
+      "id" : "Net Applications",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.netapplications.com\/"
+    },
+    {
+      "name" : "New Relic",
+      "domains" : [
+        "newrelic.com",
+        "nr-data.net"
+      ],
+      "id" : "New Relic",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/newrelic.com\/"
+    },
+    {
+      "name" : "NewsRight",
+      "domains" : [
+        "apnewsregistry.com"
+      ],
+      "id" : "NewsRight",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.newsright.com\/"
+    },
+    {
+      "name" : "NextSTAT",
+      "domains" : [
+        "nextstat.com"
+      ],
+      "id" : "NextSTAT",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.nextstat.com\/"
+    },
+    {
+      "name" : "Nielsen",
+      "domains" : [
+        "glanceguide.com",
+        "nielsen.com"
+      ],
+      "id" : "Nielsen",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.nielsen.com\/"
+    },
+    {
+      "name" : "Observer",
+      "domains" : [
+        "observerapp.com"
+      ],
+      "id" : "Observer",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/observerapp.com\/"
+    },
+    {
+      "name" : "OneStat",
+      "domains" : [
+        "onestat.com"
+      ],
+      "id" : "OneStat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.onestat.com\/"
+    },
+    {
+      "name" : "Openstat",
+      "domains" : [
+        "openstat.ru",
+        "spylog.com"
+      ],
+      "id" : "Openstat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.openstat.ru\/"
+    },
+    {
+      "name" : "Opentracker",
+      "domains" : [
+        "opentracker.net"
+      ],
+      "id" : "Opentracker",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.opentracker.net\/"
+    },
+    {
+      "name" : "PersianStat.com",
+      "domains" : [
+        "persianstat.com"
+      ],
+      "id" : "PersianStat.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.persianstat.com\/"
+    },
+    {
+      "name" : "Phonalytics",
+      "domains" : [
+        "phonalytics.com"
+      ],
+      "id" : "Phonalytics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.phonalytics.com\/"
+    },
+    {
+      "name" : "Piwik",
+      "domains" : [
+        "piwik.org"
+      ],
+      "id" : "Piwik",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/piwik.org\/"
+    },
+    {
+      "name" : "Pronunciator",
+      "domains" : [
+        "pronunciator.com",
+        "visitorville.com"
+      ],
+      "id" : "Pronunciator",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.pronunciator.com\/"
+    },
+    {
+      "name" : "Protected Media",
+      "domains" : [
+        "protected.media",
+        "ad-score.com"
+      ],
+      "id" : "Protected Media",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.protected.media\/"
+    },
+    {
+      "name" : "Qualaroo",
+      "domains" : [
+        "kissinsights.com",
+        "qualaroo.com"
+      ],
+      "id" : "Qualaroo",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/qualaroo.com\/"
+    },
+    {
+      "name" : "QuinStreet",
+      "domains" : [
+        "thecounter.com"
+      ],
+      "id" : "QuinStreet",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/quinstreet.com\/"
+    },
+    {
+      "name" : "Quintelligence",
+      "domains" : [
+        "quintelligence.com"
+      ],
+      "id" : "Quintelligence",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.quintelligence.com\/"
+    },
+    {
+      "name" : "RadarURL",
+      "domains" : [
+        "radarurl.com"
+      ],
+      "id" : "RadarURL",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/radarurl.com\/"
+    },
+    {
+      "name" : "Research Now",
+      "domains" : [
+        "researchnow.com",
+        "valuedopinions.co.uk"
+      ],
+      "id" : "Research Now",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.researchnow.com\/"
+    },
+    {
+      "name" : "Revtracks",
+      "domains" : [
+        "revtrax.com"
+      ],
+      "id" : "Revtracks",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/revtrax.com\/"
+    },
+    {
+      "name" : "Ringier",
+      "domains" : [
+        "ringier.cz"
+      ],
+      "id" : "Ringier",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/ringier.cz\/"
+    },
+    {
+      "name" : "Roxr",
+      "domains" : [
+        "getclicky.com",
+        "roxr.net",
+        "staticstuff.net"
+      ],
+      "id" : "Roxr",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/roxr.net\/"
+    },
+    {
+      "name" : "STATSIT",
+      "domains" : [
+        "statsit.com"
+      ],
+      "id" : "STATSIT",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.statsit.com\/"
+    },
+    {
+      "name" : "Safecount",
+      "domains" : [
+        "dl-rms.com",
+        "dlqm.net",
+        "questionmarket.com",
+        "safecount.net"
+      ],
+      "id" : "Safecount",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.safecount.net\/"
+    },
+    {
+      "name" : "SageMetrics",
+      "domains" : [
+        "sageanalyst.net",
+        "sagemetrics.com"
+      ],
+      "id" : "SageMetrics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.sagemetrics.com\/"
+    },
+    {
+      "name" : "SeeVolution",
+      "domains" : [
+        "seevolution.com",
+        "svlu.net"
+      ],
+      "id" : "SeeVolution",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.seevolution.com\/"
+    },
+    {
+      "name" : "Segment.io",
+      "domains" : [
+        "segment.io"
+      ],
+      "id" : "Segment.io",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/segment.io\/"
+    },
+    {
+      "name" : "ShinyStat",
+      "domains" : [
+        "shinystat.com"
+      ],
+      "id" : "ShinyStat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.shinystat.com\/"
+    },
+    {
+      "name" : "Shortest",
+      "domains" : [
+        "shorte.st"
+      ],
+      "id" : "Shortest",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/shorte.st\/"
+    },
+    {
+      "name" : "Snoobi",
+      "domains" : [
+        "snoobi.com"
+      ],
+      "id" : "Snoobi",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.snoobi.com\/"
+    },
+    {
+      "name" : "Soasta",
+      "domains" : [
+        "go-mpulse.net"
+      ],
+      "id" : "Soasta",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.soasta.com"
+    },
+    {
+      "name" : "StatCounter",
+      "domains" : [
+        "statcounter.com"
+      ],
+      "id" : "StatCounter",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/statcounter.com\/"
+    },
+    {
+      "name" : "Statisfy",
+      "domains" : [
+        "statisfy.net"
+      ],
+      "id" : "Statisfy",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/statisfy.net"
+    },
+    {
+      "name" : "Stratigent",
+      "domains" : [
+        "stratigent.com"
+      ],
+      "id" : "Stratigent",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.stratigent.com\/"
+    },
+    {
+      "name" : "TENSQUARE",
+      "domains" : [
+        "tensquare.com"
+      ],
+      "id" : "TENSQUARE",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.tensquare.com\/"
+    },
+    {
+      "name" : "TNS",
+      "domains" : [
+        "sesamestats.com",
+        "statistik-gallup.net",
+        "tns-counter.ru",
+        "tns-cs.net",
+        "tnsglobal.com"
+      ],
+      "id" : "TNS",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.tnsglobal.com\/"
+    },
+    {
+      "name" : "The Heron Partnership",
+      "domains" : [
+        "heronpartners.com.au",
+        "marinsm.com"
+      ],
+      "id" : "The Heron Partnership",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.heronpartners.com.au\/"
+    },
+    {
+      "name" : "TrackingSoft",
+      "domains" : [
+        "roia.biz",
+        "trackingsoft.com"
+      ],
+      "id" : "TrackingSoft",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/trackingsoft.com\/"
+    },
+    {
+      "name" : "Umbel",
+      "domains" : [
+        "umbel.com"
+      ],
+      "id" : "Umbel",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.umbel.com\/"
+    },
+    {
+      "name" : "User Local",
+      "domains" : [
+        "nakanohito.jp"
+      ],
+      "id" : "User Local",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/nakanohito.jp\/"
+    },
+    {
+      "name" : "Vertster",
+      "domains" : [
+        "vertster.com"
+      ],
+      "id" : "Vertster",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.vertster.com\/"
+    },
+    {
+      "name" : "VisiStat",
+      "domains" : [
+        "sa-as.com",
+        "visistat.com"
+      ],
+      "id" : "VisiStat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.visistat.com\/"
+    },
+    {
+      "name" : "Visit Streamer",
+      "domains" : [
+        "visitstreamer.com"
+      ],
+      "id" : "Visit Streamer",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.visitstreamer.com\/"
+    },
+    {
+      "name" : "ViziSense",
+      "domains" : [
+        "vizisense.com",
+        "vizisense.net"
+      ],
+      "id" : "ViziSense",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.vizisense.com\/"
+    },
+    {
+      "name" : "WOW Analytics",
+      "domains" : [
+        "wowanalytics.co.uk"
+      ],
+      "id" : "WOW Analytics",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.wowanalytics.co.uk\/"
+    },
+    {
+      "name" : "WPP",
+      "domains" : [
+        "compete.com"
+      ],
+      "id" : "WPP",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.wpp.com\/"
+    },
+    {
+      "name" : "Web Stats",
+      "domains" : [
+        "onlinewebstats.com"
+      ],
+      "id" : "Web Stats",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.onlinewebstats.com\/"
+    },
+    {
+      "name" : "Web Tracking Services",
+      "domains" : [
+        "web-stat.com",
+        "webtrackingservices.com"
+      ],
+      "id" : "Web Tracking Services",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.webtrackingservices.com\/"
+    },
+    {
+      "name" : "Web Traxs",
+      "domains" : [
+        "webtraxs.com"
+      ],
+      "id" : "Web Traxs",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.webtraxs.com\/"
+    },
+    {
+      "name" : "Webclicktracker",
+      "domains" : [
+        "webclicktracker.com"
+      ],
+      "id" : "Webclicktracker",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.webclicktracker.com\/"
+    },
+    {
+      "name" : "Webtrekk",
+      "domains" : [
+        "webtrekk.com",
+        "webtrekk.net"
+      ],
+      "id" : "Webtrekk",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.webtrekk.com\/"
+    },
+    {
+      "name" : "Webtrends",
+      "domains" : [
+        "reinvigorate.net",
+        "webtrends.com",
+        "webtrendslive.com"
+      ],
+      "id" : "Webtrends",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/webtrends.com\/"
+    },
+    {
+      "name" : "White Ops",
+      "domains" : [
+        "adzmath.com",
+        "whiteops.com"
+      ],
+      "id" : "White Ops",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "https:\/\/www.whiteops.com\/"
+    },
+    {
+      "name" : "Woopra",
+      "domains" : [
+        "woopra-ns.com",
+        "woopra.com"
+      ],
+      "id" : "Woopra",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.woopra.com\/"
+    },
+    {
+      "name" : "Wysistat",
+      "domains" : [
+        "wysistat.com"
+      ],
+      "id" : "Wysistat",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.wysistat.com\/"
+    },
+    {
+      "name" : "Yahoo!",
+      "domains" : [
+        "analytics.yahoo.com"
+      ],
+      "id" : "Yahoo!",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.yahoo.com\/"
+    },
+    {
+      "name" : "YellowTracker",
+      "domains" : [
+        "yellowtracker.com"
+      ],
+      "id" : "YellowTracker",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.yellowtracker.com\/"
+    },
+    {
+      "name" : "anormal-media.de",
+      "domains" : [
+        "anormal-media.de",
+        "anormal-tracker.de"
+      ],
+      "id" : "anormal-media.de",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/anormal-media.de\/"
+    },
+    {
+      "name" : "comScore",
+      "domains" : [
+        "certifica.com",
+        "comscore.com",
+        "scorecardresearch.com",
+        "sitestat.com",
+        "voicefive.com",
+        "mdotlabs.com"
+      ],
+      "id" : "comScore",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.comscore.com\/"
+    },
+    {
+      "name" : "dwstat.com",
+      "domains" : [
+        "dwstat.cn"
+      ],
+      "id" : "dwstat.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.dwstat.cn\/"
+    },
+    {
+      "name" : "eProof.com",
+      "domains" : [
+        "eproof.com"
+      ],
+      "id" : "eProof.com",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.eproof.com\/"
+    },
+    {
+      "name" : "eXTReMe digital",
+      "domains" : [
+        "extreme-dm.com",
+        "extremetracking.com"
+      ],
+      "id" : "eXTReMe digital",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/extremetracking.com\/"
+    },
+    {
+      "name" : "etracker",
+      "domains" : [
+        "etracker.com",
+        "etracker.de",
+        "sedotracker.com",
+        "sedotracker.de"
+      ],
+      "id" : "etracker",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.etracker.com\/"
+    },
+    {
+      "name" : "iPerceptions",
+      "domains" : [
+        "iperceptions.com"
+      ],
+      "id" : "iPerceptions",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.iperceptions.com\/"
+    },
+    {
+      "name" : "motigo",
+      "domains" : [
+        "motigo.com",
+        "nedstatbasic.net"
+      ],
+      "id" : "motigo",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/motigo.com\/"
+    },
+    {
+      "name" : "nurago",
+      "domains" : [
+        "nurago.com",
+        "nurago.de",
+        "sensic.net"
+      ],
+      "id" : "nurago",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.nurago.com\/"
+    },
+    {
+      "name" : "phpMyVisites",
+      "domains" : [
+        "phpmyvisites.us"
+      ],
+      "id" : "phpMyVisites",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.phpmyvisites.us\/"
+    },
+    {
+      "name" : "stat4u",
+      "domains" : [
+        "4u.pl"
+      ],
+      "id" : "stat4u",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/stat.4u.pl\/"
+    },
+    {
+      "name" : "vistrac",
+      "domains" : [
+        "vistrac.com"
+      ],
+      "id" : "vistrac",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/vistrac.com\/"
+    },
+    {
+      "name" : "whos.amung.us",
+      "domains" : [
+        "amung.us"
+      ],
+      "id" : "whos.amung.us",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/whos.amung.us\/"
+    },
+    {
+      "name" : "ÖWA",
+      "domains" : [
+        "oewa.at",
+        "oewabox.at"
+      ],
+      "id" : "ÖWA",
+      "categories" : [
+        "analytics"
+      ],
+      "description" : "",
+      "notes" : [
+        "note",
+        "note",
+        "note"
+      ],
+      "homepage" : "http:\/\/www.oewa.at\/"
+    }
+  ]
+}

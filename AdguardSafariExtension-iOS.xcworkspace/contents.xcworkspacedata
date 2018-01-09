@@ -11,7 +11,7 @@
          location = "group:runBuilder.sh">
       </FileRef>
       <FileRef
-         location = "group:getExtJsLibs.sh">
+         location = "group:getExtResources.sh">
       </FileRef>
    </Group>
    <FileRef

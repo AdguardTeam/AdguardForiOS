@@ -55,7 +55,14 @@
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
-
+    self.searchController.searchBar.tintColor = [UIColor blackColor];
+    self.searchController.searchBar.backgroundColor = [UIColor blackColor];
+    self.searchController.searchBar.barTintColor = [UIColor darkGrayColor];
+    
+    UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
+    searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
+    searchField.tintColor = searchField.textColor = UIColor.lightGrayColor;
+    
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
@@ -476,12 +483,19 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             frame.origin = CGPointMake(0, 0);
             frame.size.height -= insets.top + insets.bottom;
             
-            [self.toolBarView setFrame:frame];
-            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.toolBarView];
-            UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            if (item) {
-                self.toolbarItems = @[spacer, item, spacer];
-            }
+                [self.toolBarView setFrame:frame];
+                [self.toolBarView setTintColor:[UIColor redColor]];
+                [self.toolBarView setBackgroundColor:[UIColor blueColor]];
+                
+                self.navigationController.toolbar.tintColor = UIColor.blackColor;
+                self.navigationController.toolbar.backgroundColor = UIColor.blackColor;
+                self.navigationController.toolbar.barStyle = UIBarStyleBlack;
+                
+                UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.toolBarView];
+                UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                if (item) {
+                    self.toolbarItems = @[spacer, item, spacer];
+                }
         }
         
     }

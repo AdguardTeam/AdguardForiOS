@@ -47,6 +47,8 @@
     OSSpinLock _globalBlacklistLock;
     OSSpinLock _userWhitelistLock;
     OSSpinLock _userBlacklistLock;
+    OSSpinLock _trackersLock;
+    OSSpinLock _hostsLock;
     
     NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
@@ -56,6 +58,9 @@
     
     AERDomainFilter *_userWhitelist;
     AERDomainFilter *_userBlacklist;
+    AERDomainFilter *_trackersList;
+    NSDictionary *_hosts;
+    NSDictionary *_subscriptionsHosts;
     
     BOOL _packetFlowObserver;
     
@@ -63,6 +68,8 @@
     dispatch_block_t _closeCompletion;
     
     dispatch_queue_t _sessionsQueue;
+    
+    dispatch_queue_t _countersQueue;
     
     BOOL _stopHandling;
 }
@@ -81,13 +88,14 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = OS_SPINLOCK_INIT;
+        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_SPINLOCK_INIT;
         _loggingEnabled = NO;
         
         _closeCompletion = nil;
         
         _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
         _sessionsQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.sessions", DISPATCH_QUEUE_SERIAL);
+        _countersQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.counters", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -190,6 +198,27 @@
     OSSpinLockUnlock(&_userBlacklistLock);
 }
 
+- (void)setTrackersFilter:(AERDomainFilter *)filter {
+    
+    OSSpinLockLock(&_trackersLock);
+    _trackersList = filter;
+    OSSpinLockUnlock(&_trackersLock);
+}
+
+- (void)setHostsFilter:(NSDictionary *)filter {
+    
+    OSSpinLockLock(&_hostsLock);
+    _hosts = filter;
+    OSSpinLockUnlock(&_hostsLock);
+}
+
+- (void)setSubscriptionsHostsFilter:(NSDictionary *)filter {
+    
+    OSSpinLockLock(&_hostsLock);
+    _subscriptionsHosts = filter;
+    OSSpinLockUnlock(&_hostsLock);
+}
+
 - (void)startHandlingPackets {
 
     if (_provider.packetFlow) {
@@ -232,6 +261,33 @@
         if (closeCompletion) {
             DDLogInfo(@"(APTunnelConnectionsHandler) closeAllConnections completion will be run.");
             [ACSSystemUtils callOnMainQueue:closeCompletion];
+        }
+    });
+}
+
+- (void)sessionWorkDoneWithTime:(float)workTime tracker:(BOOL)tracker {
+    
+    dispatch_async(_countersQueue, ^{
+        
+        NSNumber* count = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount];
+        int countValue = count.intValue + 1;
+        count = [NSNumber numberWithInt:countValue];
+        
+        [AESharedResources.sharedDefaults setValue:count forKey:AEDefaultsTotalRequestsCount];
+        
+        NSNumber* time = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime];
+        float timeValue = time.floatValue + workTime;
+        time = [NSNumber numberWithFloat:timeValue];
+        
+        [AESharedResources.sharedDefaults setValue:time forKey:AEDefaultsTotalRequestsTime];
+        
+        if(tracker) {
+            
+            NSNumber* countTrackers = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount];
+            int countTrackersValue = countTrackers.intValue + 1;
+            countTrackers = [NSNumber numberWithInt:countTrackersValue];
+            
+            [AESharedResources.sharedDefaults setValue:countTrackers forKey:AEDefaultsTotalTrackersCount];
         }
     });
 }
@@ -285,6 +341,41 @@
     result = [_userBlacklist filteredDomain:domainName];
     
     OSSpinLockUnlock(&_userBlacklistLock);
+    
+    return result;
+}
+
+- (BOOL)isTrackerslistDomain:(NSString *)domainName {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_trackersLock);
+    
+    result = [_trackersList filteredDomain:domainName];
+    
+    OSSpinLockUnlock(&_trackersLock);
+    
+    return result;
+}
+
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip {
+    
+    BOOL result = NO;
+    OSSpinLockLock(&_hostsLock);
+    
+    NSString* foundIp = _hosts[domainName];
+    if(foundIp) {
+        result = YES;
+        *ip = foundIp;
+    }
+    else {
+        foundIp = _subscriptionsHosts[domainName];
+        if(foundIp) {
+            result = YES;
+            *ip = foundIp;
+        }
+    }
+    
+    OSSpinLockUnlock(&_hostsLock);
     
     return result;
 }

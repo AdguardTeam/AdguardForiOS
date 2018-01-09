@@ -30,7 +30,10 @@ NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion"
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
 NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
-
+NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
+NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
+NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
+NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 
@@ -353,6 +356,13 @@ static NSUserDefaults *_sharedUserDefaults;
         
         return NO;;
     }
+}
+
+- (NSString*) pathForRelativePath:(NSString*) relativePath {
+    
+    NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
+    
+    return dataUrl.path;
 }
 
 @end

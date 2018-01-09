@@ -69,6 +69,22 @@ extern NSString * _Nonnull APDnsServerTagLocal;
  Field, which may contain special labels about server, for example APDnsServerTagLocal.
  */
 @property (nullable) NSString *tag;
+
+@property (nonatomic, nullable) NSNumber* isDnsCrypt;
+
+@property (nonatomic, nullable) NSString* dnsCryptId;
+@property (nonatomic, nullable) NSString* dnsCryptLocation;
+@property (nonatomic, nullable) NSString* dnsCryptCoordinates;
+@property (nonatomic, nullable) NSString* dnsCryptURL;
+@property (nonatomic, nullable) NSString* dnsCryptVersion;
+@property (nonatomic, nullable) NSString* dnsCryptDNSSECValidation;
+@property (nonatomic, nullable) NSString* dnsCryptNoLogs;
+@property (nonatomic, nullable) NSString* dnsCryptNamecoin;
+@property (nonatomic, nullable) NSString* dnsCryptResolverAddress;
+@property (nonatomic, nullable) NSString* dnsCryptProviderName;
+@property (nonatomic, nullable) NSString* dnsCryptProviderPublicKey;
+@property (nonatomic, nullable) NSString* dnsCryptProviderPublicKeyTXTRecord;
+
 /**
  Returns list of all IPs (ipV4 and ipV6) separated by '\n'.
 

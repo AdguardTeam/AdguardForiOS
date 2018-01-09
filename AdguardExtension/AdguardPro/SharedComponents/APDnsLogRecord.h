@@ -84,4 +84,9 @@
  */
 @property (nonatomic, readonly) APDnsResponse *preferredResponse;
 
+/**
+ Indicates that this record contains domain from trackers list.
+ */
+@property (nonatomic) BOOL isTracker;
+
 @end

@@ -28,20 +28,21 @@
 #import "PacketTunnelProvider.h"
 #import "APDnsServerObject.h"
 #import "APVPNManager.h"
+#import <QuartzCore/CAAnimation.h>
 
 #define MAX_DATAGRAMS_RECEIVED                      10
 #define TTL_SESSION                                 3 //seconds
 #define DOMAIN_URL_FORMAT                           @"http://%@/"
 
-#define locLogError(fmt, ...) DDLogError(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogWarn(fmt, ...) DDLogWarn(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogInfo(fmt, ...) DDLogInfo(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogVerbose(fmt, ...) DDLogVerbose(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogDebug(fmt, ...) DDLogDebug(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogVerbose(fmt, ...) DDLogVerbose(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogVerboseTrace(fmt, ...) DDLogVerboseTrace(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogErrorTrace() DDLogErrorTrace(@"(ID:%@) " fmt, _basePacket.srcPort, ##__VA_ARGS__)
-#define locLogTrace() DDLogVerboseTrace(@"(ID:%@)", _basePacket.srcPort)
+#define locLogError(logself, fmt, ...) DDLogError(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogWarn(logself, fmt, ...) DDLogWarn(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogInfo(logself, fmt, ...) DDLogInfo(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogVerbose(logself, fmt, ...) DDLogVerbose(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogDebug(logself, fmt, ...) DDLogDebug(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogVerbose(logself, fmt, ...) DDLogVerbose(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogVerboseTrace(logself, fmt, ...) DDLogVerboseTrace(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogErrorTrace(logself) DDLogErrorTrace(@"(ID:%@) " fmt, logself->_basePacket.srcPort, ##__VA_ARGS__)
+#define locLogTrace(logself) DDLogVerboseTrace(@"(ID:%@)", logself->_basePacket.srcPort)
 
 @implementation APTUdpProxySession {
 
@@ -60,6 +61,9 @@
     ACLExecuteBlockDelayed *_saveLogExecution;
     NSMutableArray <APDnsLogRecord *> *_dnsRecords;
     NSMutableSet *_dnsRecordsSet;
+    
+    double startSendingTime;
+    BOOL tracker;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -100,7 +104,7 @@
 
     @autoreleasepool {
         
-        locLogTrace();
+        locLogTrace(self);
         
         _workingQueue = dispatch_queue_create("APTUdpProxySession", DISPATCH_QUEUE_SERIAL);
         _packetsForSend = [NSMutableArray new];
@@ -143,7 +147,7 @@
 
 - (void)dealloc {
 
-    locLogTrace();
+    locLogTrace(self);
 
     [self.udpSession removeObserver:self forKeyPath:@"state"];
     [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
@@ -166,7 +170,7 @@ _workingQueue = nil;
 
     if (_sessionCreated && !_closed && packets.count) {
 
-        locLogTrace();
+        locLogTrace(self);
         dispatch_sync(_workingQueue, ^{
 
             [_packetsForSend addObjectsFromArray:packets];
@@ -210,11 +214,11 @@ _workingQueue = nil;
         
         if ([keyPath isEqual:@"state"]) {
 
-            locLogVerboseTrace(@"state");
+            locLogVerboseTrace(USE_STRONG(self), @"state");
             [USE_STRONG(self) sessionStateChanged];
         } else if ([keyPath isEqual:@"hasBetterPath"]) {
 
-            locLogVerboseTrace(@"hasBetterPath");
+            locLogVerboseTrace(USE_STRONG(self) ,@"hasBetterPath");
             NWUDPSession *session = USE_STRONG(object);
             if (session.hasBetterPath) {
 
@@ -282,13 +286,14 @@ _workingQueue = nil;
     [session setReadHandler:^(NSArray<NSData *> *_Nullable datagrams, NSError *_Nullable error) {
         
         ASSIGN_STRONG(self);
+        
         if (USE_STRONG(self) == nil) {
             return;
         }
         
         if (error && !USE_STRONG(self)->_closed) {
-            
-            locLogError(@"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
+
+            locLogError(USE_STRONG(self), @"Error when reading data for \"%@\":%@", USE_STRONG(self), error.description);
             return;
         }
         
@@ -299,12 +304,12 @@ _workingQueue = nil;
             [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
         });
         
+        // reset timeout timer
+        [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
+        
         if(USE_STRONG(self)->_closed) {
             return;
         }
-        
-        // reset timeout timer
-        [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
         
         NSMutableArray *protocols = [NSMutableArray new];
         
@@ -317,18 +322,19 @@ _workingQueue = nil;
         //write data from remote endpoint into local TUN interface
         [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
         
+        [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
     }
                             maxDatagrams:MAX_DATAGRAMS_RECEIVED];
 
 }
 - (void)setSession:(NWUDPSession *)session {
 
-    locLogTrace();
+    locLogTrace(self);
 
     NWUDPSession *oldSession = self.udpSession;
     if (oldSession) {
 
-        locLogVerboseTrace(@"oldSession");
+        locLogVerboseTrace(self, @"oldSession");
 
         dispatch_suspend(_workingQueue);
         [oldSession removeObserver:self forKeyPath:@"state"];
@@ -340,13 +346,13 @@ _workingQueue = nil;
 
     if (session) {
 
-        locLogVerboseTrace(@"newSession");
+        locLogVerboseTrace(self, @"newSession");
 
         ASSIGN_WEAK(self);
         
         // crete timeout timer
         if (! _timeoutExecution) {
-            
+
             _timeoutExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:_workingQueue block:^{
                 @autoreleasepool {
                     ASSIGN_STRONG(self);
@@ -360,7 +366,7 @@ _workingQueue = nil;
         if (! _saveLogExecution) {
 
             _saveLogExecution = [[ACLExecuteBlockDelayed alloc] initWithTimeout:TTL_SESSION leeway:0.1 queue:_workingQueue block:^{
-                
+
                 @autoreleasepool {
                     ASSIGN_STRONG(self);
                     [USE_STRONG(self) saveLogRecord:NO];
@@ -384,12 +390,12 @@ _workingQueue = nil;
 
 - (void)setWhitelistSession:(NWUDPSession *)session {
     
-    locLogTrace();
+    locLogTrace(self);
     
     NWUDPSession *oldSession = self.whitelistUdpSession;
     if (oldSession) {
         
-        locLogVerboseTrace(@"oldWhitelistSession");
+        locLogVerboseTrace(self, @"oldWhitelistSession");
         
         dispatch_suspend(_workingQueue);
         [oldSession removeObserver:self forKeyPath:@"state"];
@@ -401,7 +407,7 @@ _workingQueue = nil;
     
     if (session) {
         
-        locLogVerboseTrace(@"newWhitelistSession");
+        locLogVerboseTrace(self, @"newWhitelistSession");
         
         
         _whitelistUdpSession = session;
@@ -423,15 +429,15 @@ _workingQueue = nil;
     if (session.state == NWUDPSessionStateReady
         && whitelistSession.state == NWUDPSessionStateReady) {
 
-        locLogVerboseTrace(@"NWUDPSessionStateReady");
+        locLogVerboseTrace(self, @"NWUDPSessionStateReady");
         [self sendPackets];
     } else if (session.state == NWUDPSessionStateFailed
                || whitelistSession.state == NWUDPSessionStateFailed) {
 
-        locLogVerboseTrace(@"NWUDPSessionStateFailed");
+        locLogVerboseTrace(self, @"NWUDPSessionStateFailed");
 
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        locLogError(@"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
+        locLogError(self, @"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
         
         _closed = YES;
         [self saveLogRecord:YES];
@@ -440,7 +446,7 @@ _workingQueue = nil;
     } else if (session.state == NWUDPSessionStateCancelled
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
-        locLogVerboseTrace(@"NWUDPSessionStateCancelled");
+        locLogVerboseTrace(self, @"NWUDPSessionStateCancelled");
         if (_closed) {
             
             [self saveLogRecord:YES];
@@ -452,6 +458,8 @@ _workingQueue = nil;
 - (void)sendPackets {
 
     if (_packetsForSend.count) {
+        
+        startSendingTime = CACurrentMediaTime();
 
         if (_waitWrite || _closed) {
             return;
@@ -483,7 +491,7 @@ _workingQueue = nil;
             if (error) {
                 
                 NWHostEndpoint *endpoint = (NWHostEndpoint *)USE_STRONG(self).udpSession.endpoint;
-                locLogError(@"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
+                locLogError(USE_STRONG(self), @"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
                 [USE_STRONG(self) internalClose];
                 return;
             }
@@ -499,7 +507,7 @@ _workingQueue = nil;
                     
                     if (USE_STRONG(self)) {
                         
-                        _waitWrite = NO;
+                        USE_STRONG(self)->_waitWrite = NO;
                         [USE_STRONG(self) sendPackets];
                     }
                 });
@@ -525,7 +533,7 @@ _workingQueue = nil;
                 if (error) {
                     
                     NWHostEndpoint *endpoint = (NWHostEndpoint *)USE_STRONG(self)->_whitelistUdpSession.endpoint;
-                    locLogError(@"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
+                    locLogError(USE_STRONG(self), @"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
                     [USE_STRONG(self) internalClose];
                     return;
                 }
@@ -553,8 +561,8 @@ _workingQueue = nil;
 
 - (void)internalClose {
 
-    locLogTrace();
-
+    locLogTrace(self);
+    
     if (! _closed) {
         _closed = YES;
         [self.udpSession cancel];
@@ -584,6 +592,7 @@ _workingQueue = nil;
                 
                 //Check that this is request to domain from whitelist or blacklist.
                 NSString *name = [datagram.requests[0] name];
+                NSString *ip;
                 if (! [NSString isNullOrEmpty:name]) {
                     
                     // user filter lists are processed first
@@ -593,24 +602,27 @@ _workingQueue = nil;
                     else if ([self.delegate isUserBlacklistDomain:name]) {
                         blacklisted = YES;
                     }
+                    else if ([self.delegate checkHostsDomain:name ip:&ip]) {
+                        blacklisted = YES;
+                    }
 //                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
 //                        whitelisted = YES;
 //                    }
-//                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
-//                        blacklisted = YES;
-//                    }
+                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
+                        blacklisted = YES;
+                    }
                     
                     if(whitelisted) {
                         
                         [whitelistPackets addObject:packet];
-                        
                     }
                     else if (blacklisted) {
                         
-                        [blacklistDatagrams addObject:datagram];
+                        [blacklistDatagrams addObject: ip ? @[datagram, ip] : @[datagram]];
                         [blacklistPackets addObject:packet];
-                        
                     }
+                    
+                    tracker = [self.delegate isTrackerslistDomain:name];
                 }
                 
                 //Create DNS log record, if logging is enabled.
@@ -628,22 +640,25 @@ _workingQueue = nil;
     return @[whitelistPackets, blacklistDatagrams];
 }
 
-- (void)sendBackBlacklistDnsDatagrams:(NSArray <APDnsDatagram *> *)dnsDatagrams {
+- (void)sendBackBlacklistDnsDatagrams:(NSArray <NSArray *> *)dnsDatagrams {
     
 
     BOOL logUpdated = NO;
     NSMutableArray *datagrams = [NSMutableArray arrayWithCapacity:dnsDatagrams.count];
-    for (APDnsDatagram *item in dnsDatagrams) {
+    for (NSArray *item in dnsDatagrams) {
         
-        if ([item convertToBlockingResponse]) {
+        APDnsDatagram* datagram = item[0];
+        NSString* ip = item.count > 1 ? item[1] : nil;
+        
+        if ([datagram convertToBlockingResponseWithIP:ip]) {
             
-            [self settingDnsRecordForIncomingDnsDatagram:item session:_udpSession];
+            [self settingDnsRecordForIncomingDnsDatagram:datagram session:_udpSession];
             
             logUpdated = _dnsLoggingEnabled;
             
-            NSData *datagram = [item generatePayload];
-            if (datagram) {
-                [datagrams addObject:datagram];
+            NSData *datagramPayload = [datagram generatePayload];
+            if (datagramPayload) {
+                [datagrams addObject:datagramPayload];
             }
         }
     }
@@ -682,7 +697,7 @@ _workingQueue = nil;
         
         record.isWhitelisted = whitelist;
         record.isBlacklisted = blacklist;
-        
+        record.isTracker = tracker;
         
         if (![_dnsRecordsSet containsObject:record]) {
             

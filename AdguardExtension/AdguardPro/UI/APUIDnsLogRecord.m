@@ -53,7 +53,7 @@
                 _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
             } else {
                 
-                _color = [UIColor darkTextColor];
+                _color = [UIColor whiteColor];
                 NSArray *responses = [record.responses valueForKey:@"stringValue"];
                 if (record.isWhitelisted) {
 
@@ -65,13 +65,16 @@
         }
         else{
             
-            _color = [UIColor darkTextColor];
+            _color = [UIColor whiteColor];
             
             _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the DNS request without a response."), DATE_FORMAT(record.recordDate)];
         }
         
         if (record.isWhitelisted) {
             _color = AEUIC_EXCEPTION_COLOR;
+        }
+        else if(record.isTracker) {
+            _color = AEUIC_TRACKER_COLOR;
         }
     }
     

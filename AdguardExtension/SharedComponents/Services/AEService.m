@@ -937,4 +937,11 @@ static AEService *singletonService;
     return convertResult;
 }
 
+- (void)checkStatusWithCallback:(void (^)(BOOL))callback{
+    
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AE_EXTENSION_ID completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+        callback(state.enabled);
+    }];
+}
+
 @end

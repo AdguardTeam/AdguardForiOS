@@ -139,5 +139,37 @@
     }
 }
 
++ (void)addTitleViewToNavigationItem:(UINavigationItem *)navigationItem {
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 119, 27)];
+    UIImageView *titleLogo = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"navbarLogo"]];
+    titleLogo.contentMode = UIViewContentModeScaleAspectFit;
+    titleLogo.frame = titleView.frame;
+    [titleView addSubview:titleLogo];
+    navigationItem.titleView = titleView;
+}
+
++ (UITableViewCell *)createCellByTemplate:(UITableViewCell *)templateCell style:(UITableViewCellStyle)style {
+    
+    UITableViewCell *newCell = [[[templateCell class] alloc] initWithStyle:style reuseIdentifier:nil];
+    
+    newCell.textLabel.textColor = templateCell.textLabel.textColor;
+    newCell.textLabel.font = templateCell.textLabel.font;
+    newCell.detailTextLabel.textColor = templateCell.detailTextLabel.textColor;
+    newCell.detailTextLabel.font = templateCell.detailTextLabel.font;
+    newCell.indentationLevel = templateCell.indentationLevel;
+    newCell.indentationWidth = templateCell.indentationWidth;
+    newCell.selectionStyle = templateCell.selectionStyle;
+    newCell.backgroundColor = templateCell.backgroundColor;
+    newCell.tintColor = templateCell.tintColor;
+    newCell.imageView.tintColor = templateCell.tintColor;
+    newCell.autoresizingMask = templateCell.autoresizingMask;
+    newCell.autoresizesSubviews = templateCell.autoresizesSubviews;
+    newCell.textLabel.autoresizingMask = templateCell.textLabel.autoresizingMask;
+    newCell.detailTextLabel.autoresizingMask = templateCell.detailTextLabel.autoresizingMask;
+    
+    return newCell;
+}
+
 
 @end

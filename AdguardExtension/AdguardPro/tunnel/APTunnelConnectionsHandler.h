@@ -67,7 +67,20 @@
  Sets user blacklist filter.
  */
 - (void)setUserBlacklistFilter:(AERDomainFilter *)filter;
+/**
+ Sets trackrs filter.
+ */
+- (void)setTrackersFilter:(AERDomainFilter *)filter;
 
+/**
+ Sets hosts filter.
+ */
+- (void)setHostsFilter:(NSDictionary *)filter;
+
+/**
+ Sets susbscriptions hosts filter.
+ */
+- (void)setSubscriptionsHostsFilter:(NSDictionary *)filter;
 
 /**
  Make the initial readPacketsWithCompletionHandler call.
@@ -83,6 +96,11 @@
  Removes session for endpont if it exists.
  */
 - (void)removeSession:(APTUdpProxySession *)endpoint;
+
+/**
+ Update statistics.
+ */
+- (void)sessionWorkDoneWithTime:(float)workTime tracker:(BOOL)tracker;
 
 /**
  Sets that sessions will be create log of the DNS activity.
@@ -106,7 +124,14 @@
  Checks domain name, that it is included in user blacklist.
  */
 - (BOOL)isUserBlacklistDomain:(NSString *)domainName;
-
+/**
+ Checks domain name, that it is included in trackers list.
+ */
+- (BOOL)isTrackerslistDomain:(NSString *)domainName;
+/**
+ Checks domain name, that it is included in hosts list.
+ */
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString**)ip;
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.
