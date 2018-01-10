@@ -68,7 +68,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNS_IPV4_ADDRESS4                     @"121.121.121.124"
 
 #define V_DNSCRYPT_LOCAL_ADDDRESS               @"127.0.0.1"
-#define V_DNSCRYPT_LOCAL_PORT                   @"53"
+#define V_DNSCRYPT_LOCAL_PORT                   @"8853"
 
 
 /////////////////////////////////////////////////////////////////////
