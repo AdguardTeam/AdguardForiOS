@@ -136,15 +136,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
-- (IBAction)toggleLogStatus:(id)sender {
-    
-    APVPNManager *manager = [APVPNManager singleton];
-    manager.dnsRequestsLogging = self.logSwitch.isOn;
-    if (manager.lastError) {
-        
-        [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
-    }
-}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

@@ -467,7 +467,7 @@ static APVPNManager *singletonVPNManager;
     
     BOOL allredyAdded = server.isDnsCrypt.boolValue ? [_remoteDnsCryptServers containsObject:server] : [_remoteDnsServers containsObject:server];
     
-    BOOL overLimit = server.isDnsCrypt.boolValue ? NO : _remoteDnsServers.count < self.maxCountOfRemoteDnsServers;
+    BOOL overLimit = server.isDnsCrypt.boolValue ? NO : _remoteDnsServers.count >= self.maxCountOfRemoteDnsServers;
     if (server.editable
         && _remoteDnsServers
         && !overLimit

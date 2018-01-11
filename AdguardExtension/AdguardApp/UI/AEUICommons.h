@@ -24,4 +24,7 @@
 #define AEUIC_TRACKER_COLOR      [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:1.0f]
 
 #define SUBTITLE_TEXT_COLOR     [UIColor colorWithRed:((float)0x6d)/255.0 green:((float)0x6d)/255.0 blue:((float)0x72)/255.0 alpha:1.0]
+
+#define SEARCHBAR_TINT_COLOR     [UIColor colorWithRed:((float)0x1e)/255.0 green:((float)0x1e)/255.0 blue:((float)0x1e)/255.0 alpha:1.0]
+
 #endif /* AEUICommons_h */
