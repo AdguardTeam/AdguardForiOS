@@ -251,7 +251,21 @@
         NSString *text;
         if (toBlacklist) {
             
-            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+            NSMutableString *resultText = [NSMutableString new];
+            
+            NSArray* storedDomains = APSharedResources.blacklistDomains;
+            if(storedDomains.count)
+                [resultText appendString: [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"]];
+            
+            NSDictionary <NSString *, NSString*> *storedHosts = APSharedResources.hosts;
+            
+            if(storedHosts.count) {
+                [storedHosts enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+                    [resultText appendFormat:@"%@ %@\n", obj, key];
+                }];
+            }
+            
+            text = resultText.copy;
         }
         else {
             
