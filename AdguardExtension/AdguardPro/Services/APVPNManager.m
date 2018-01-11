@@ -773,7 +773,7 @@ static APVPNManager *singletonVPNManager;
                 
                 //Checks that loaded configuration is related to tunnel bundle ID.
                 //If no, removes all old configurations.
-                if (! [_protocolConfiguration.providerBundleIdentifier isEqualToString:AP_TUNNEL_ID]) {
+                if (managers.count > 1 || ! [_protocolConfiguration.providerBundleIdentifier isEqualToString:AP_TUNNEL_ID]) {
                     for (NETunnelProviderManager *item in managers) {
                         [item removeFromPreferencesWithCompletionHandler:nil];
                     }

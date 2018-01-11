@@ -38,6 +38,8 @@
 
 @interface APBlockingListsController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *blackListCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *whitelistCountLabel;
 @property (weak, nonatomic) IBOutlet AEUISelectableTableViewCell *checkUpdatesCell;
 
 @property (strong, nonatomic) IBOutlet AEUISelectableTableViewCell *subscriptionTemplateCell;
@@ -52,6 +54,7 @@
     [super viewDidLoad];
     
     [self updateSubscriptionCells];
+    [self updateCounters];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,6 +150,8 @@
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
+        ASSIGN_WEAK(self);
+        
         domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
             
             NSMutableArray *domains = [NSMutableArray array];
@@ -180,6 +185,9 @@
                             else {
                                 [domains addObject:candidate];
                             }
+                        }
+                        else {
+                            [domains addObject:candidate];
                         }
                     }
                 }
@@ -219,6 +227,9 @@
                 }
             }
             
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self) updateCounters];
+            
             return YES;
             
         };
@@ -254,8 +265,10 @@
             NSMutableString *resultText = [NSMutableString new];
             
             NSArray* storedDomains = APSharedResources.blacklistDomains;
-            if(storedDomains.count)
+            if(storedDomains.count) {
                 [resultText appendString: [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"]];
+                [resultText appendString:@"\n"];
+            }
             
             NSDictionary <NSString *, NSString*> *storedHosts = APSharedResources.hosts;
             
@@ -359,6 +372,12 @@
     }
     
     [self reloadDataAnimated:NO];
+}
+
+- (void) updateCounters {
+    
+    self.whitelistCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.whitelistDomains.count];
+    self.blackListCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.blacklistDomains.count + APSharedResources.hosts.count];
 }
 
 @end
