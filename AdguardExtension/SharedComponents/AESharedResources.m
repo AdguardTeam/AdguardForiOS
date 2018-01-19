@@ -22,6 +22,7 @@
 NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
+NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
 
 NSString *AEDefaultsCheckFiltersLastDate = @"AEDefaultsCheckFiltersLastDate";
 NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";

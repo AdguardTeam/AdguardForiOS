@@ -49,6 +49,11 @@ extern NSString *AEDefaultsFirstRunKey;
 extern NSString *AEDefaultsProductSchemaVersion;
 
 /**
+ User Defaults key that defines last used build version for upgrade procedure.
+ */
+extern NSString *AEDefaultsProductBuildVersion;
+
+/**
  User Defaults key that defines last time, when the application checked updates of filters.
  */
 extern NSString *AEDefaultsCheckFiltersLastDate;
