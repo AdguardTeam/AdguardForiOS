@@ -55,6 +55,8 @@
     
     [self updateSubscriptionCells];
     [self updateCounters];
+    [self prepareUpdateCell];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,6 +85,8 @@
                     
                     subscription.hosts = hosts;
                     subscription.rules = rules;
+                    
+                    subscription.updateDate = [NSDate new];
                     
                     NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
                     if(!subscriptions)
@@ -315,24 +319,27 @@
     
     ASSIGN_WEAK(self);
     
-    [AEUILoadingModal.singleton loadingModalShowWithParent:self message:@"" cancelAction:nil completion:^{
-        
-        [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                ASSIGN_STRONG(self);
-                
-                [USE_STRONG(self) updateSubscriptionCells];
-                
-                [AEUILoadingModal.singleton loadingModalHide];
-                
-                [USE_STRONG(self) dismissViewControllerAnimated:YES completion:nil];
-            });
-        } errorBlock:^(NSError * error) {
-            
-        }];
-    }];
+    self.checkUpdatesCell.accessoryView.hidden = NO;
+    self.checkUpdatesCell.detailTextLabel.hidden = YES;
+    [((UIActivityIndicatorView*)self.checkUpdatesCell.accessoryView) startAnimating];
     
+    [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            ASSIGN_STRONG(self);
+            
+            [USE_STRONG(self) updateSubscriptionCells];
+            
+            [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
+            USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
+        });
+    } errorBlock:^(NSError * error) {
+        
+        ASSIGN_STRONG(self);
+        
+        [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
+        USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
+    }];
 }
 
 #pragma mark private methods
@@ -355,6 +362,8 @@
     [self reloadDataAnimated:NO];
     
     int row = 0;
+    
+    NSTimeInterval minUpdateTimestamp = FLT_MAX;
     for (APBlockingSubscription* subscription in subscriptions) {
     
         UITableViewCell *newCell = [AEUIUtils createCellByTemplate:self.subscriptionTemplateCell style:UITableViewCellStyleValue1];
@@ -368,8 +377,15 @@
         
         [self insertCell:newCell atIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
         
+        minUpdateTimestamp = MIN(minUpdateTimestamp, subscription.updateDate.timeIntervalSince1970);
+        
         ++row;
     }
+    
+    self.checkUpdatesCell.detailTextLabel.text = [NSDateFormatter
+                                                  localizedStringFromDate: [NSDate dateWithTimeIntervalSince1970: minUpdateTimestamp]
+                                                  dateStyle: NSDateFormatterShortStyle
+                                                  timeStyle: NSDateFormatterShortStyle];
     
     [self reloadDataAnimated:NO];
 }
@@ -378,6 +394,17 @@
     
     self.whitelistCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.whitelistDomains.count];
     self.blackListCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.blacklistDomains.count + APSharedResources.hosts.count];
+}
+
+- (void) prepareUpdateCell {
+    
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc]
+                                         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activity.hidesWhenStopped = YES;
+    activity.hidden = YES;
+    activity.color = self.checkUpdatesCell.tintColor;
+    
+    self.checkUpdatesCell.accessoryView = activity;
 }
 
 @end

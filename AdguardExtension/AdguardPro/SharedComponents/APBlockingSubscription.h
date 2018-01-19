@@ -43,6 +43,11 @@ unique subscription identifier
 @property (nonatomic) NSString* subscriptionDescription;
 
 /**
+ subscription update date
+ */
+@property (nonatomic) NSDate* updateDate;
+
+/**
  url for downloading rules
  */
 @property (nonatomic) NSString* url;

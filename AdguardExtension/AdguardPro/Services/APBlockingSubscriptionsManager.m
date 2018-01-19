@@ -258,6 +258,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
                 
                 subscription.rules = rules;
                 
+                subscription.updateDate = [NSDate new];
+                
                 dispatch_group_leave(group);
                 
             } errorBlock:^(NSError *error) {
@@ -268,6 +270,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         }
         
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        
+        _subscriptions = _subscriptionsMeta;
         
         [self saveSubscriptions: _subscriptions];
         [self saveSubscriptionsMeta: _subscriptions];
