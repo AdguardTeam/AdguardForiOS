@@ -239,7 +239,9 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     return (!nextUpdateTimestamp || [[NSDate new] timeIntervalSince1970] > nextUpdateTimestamp);
 }
 
-+ (void)updateSubscriptionsWithCompletionBlock:(void (^)())completionBlock errorBlock:(void (^)(NSError *))errorBlock {
+
++ (void)updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock
+{
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -280,7 +282,11 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         
         [self setNextUpdateTime];
         
-        completionBlock();
+        if(successBlock)
+            successBlock();
+        
+        if(completionBlock)
+            completionBlock();
     });
 }
 

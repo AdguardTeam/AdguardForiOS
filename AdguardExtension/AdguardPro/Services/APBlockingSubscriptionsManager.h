@@ -61,6 +61,6 @@ load all rules array from file
 /**
  update all subscriptions
  */
-+ (void) updateSubscriptionsWithCompletionBlock:(void (^)())completionBlock errorBlock:(void (^)(NSError *))errorBlock;
++ (void) updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock;
 
 @end

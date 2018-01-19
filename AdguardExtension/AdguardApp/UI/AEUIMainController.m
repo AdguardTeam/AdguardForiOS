@@ -536,7 +536,7 @@
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
     activity.hidden = YES;
-    activity.color = self.checkFiltersCell.tintColor;
+    activity.color = self.checkFiltersCell.detailTextLabel.textColor;
 
     self.checkFiltersCell.accessoryView = activity;
     

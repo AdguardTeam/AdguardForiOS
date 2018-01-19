@@ -321,24 +321,22 @@
     
     self.checkUpdatesCell.accessoryView.hidden = NO;
     self.checkUpdatesCell.detailTextLabel.hidden = YES;
+    self.checkUpdatesCell.textLabel.enabled = NO;
     [((UIActivityIndicatorView*)self.checkUpdatesCell.accessoryView) startAnimating];
     
-    [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            ASSIGN_STRONG(self);
-            
-            [USE_STRONG(self) updateSubscriptionCells];
-            
-            [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
-            USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
-        });
-    } errorBlock:^(NSError * error) {
+    [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
         
         ASSIGN_STRONG(self);
+        [USE_STRONG(self) updateSubscriptionCells];
         
+    } errorBlock:^(NSError * error) {
+        
+    } completionBlock:^{
+        
+        ASSIGN_STRONG(self);
         [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
         USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
+        USE_STRONG(self).checkUpdatesCell.textLabel.enabled = YES;
     }];
 }
 
@@ -402,7 +400,7 @@
                                          initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
     activity.hidden = YES;
-    activity.color = self.checkUpdatesCell.tintColor;
+    activity.color = self.checkUpdatesCell.detailTextLabel.textColor;
     
     self.checkUpdatesCell.accessoryView = activity;
 }
