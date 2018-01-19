@@ -381,7 +381,7 @@
     
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
     [[APVPNManager singleton] setEnabled:enabled];
-    self.proStatusSwitch.enabled = enabled;
+    self.proStatusSwitch.on = enabled;
 }
 
 #endif
