@@ -129,6 +129,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     APTunnelConnectionsHandler *_connectionHandler;
     
     NetworkStatus _lastReachabilityStatus;
+    
+    dispatch_queue_t _dnsCryptDispatchQueue;
+    void (^_dnsCryptEndBlock)();
 }
 
 + (void)initialize{
@@ -266,14 +269,15 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     [self logNetworkInterfaces];
     
-    [self stopDnscryptProxy];
-    
-    [_connectionHandler closeAllConnections:^{
-        pendingStartCompletion = nil;
-        pendingStopCompletion();
-        pendingStopCompletion = nil;
+    [self stopDnscryptProxyWithCallback:^{
         
-        DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+        [_connectionHandler closeAllConnections:^{
+            pendingStartCompletion = nil;
+            pendingStopCompletion();
+            pendingStopCompletion = nil;
+            
+            DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+        }];
     }];
 }
 
@@ -527,7 +531,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
     
-    [self updateTunnelSettingsWithCompletionHandler:nil];
+    
+    if(_currentServer.isDnsCrypt.boolValue) {
+        
+        [self stopDnscryptProxyWithCallback:^{
+            [self startDnscryptProxy];
+        }];
+    }
+    
+    [self updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error) {
+        
+    }];
 }
 
 - (void)reloadWhitelistBlacklistDomain {
@@ -647,6 +661,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
             }];
             DDLogInfo(@"(PacketTunnelProvider) User trackers rules: %lu", counter);
         }
+        
+        [_connectionHandler setUserWhitelistFilter:nil];
+        [_connectionHandler setUserBlacklistFilter:nil];
+        [_connectionHandler setTrackersFilter:nil];
+        [_connectionHandler setHostsFilter:nil];
+        [_connectionHandler setGlobalBlacklistFilter:nil];
         
         AERDomainFilter *subscriptionRules = [AERDomainFilter filter];
        
@@ -1035,9 +1055,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void) startDnscryptProxy {
     
-    dispatch_queue_t dq = dispatch_queue_create("dns_crypt_queue", DISPATCH_QUEUE_CONCURRENT);
+    if(!_dnsCryptDispatchQueue) {
+        _dnsCryptDispatchQueue = dispatch_queue_create("dns_crypt_queue", DISPATCH_QUEUE_SERIAL);
+    }
     
-    dispatch_async(dq, ^{
+    dispatch_async(_dnsCryptDispatchQueue, ^{
         
         NSString* localAddress = [NSString stringWithFormat:@"%@:%@", V_DNSCRYPT_LOCAL_ADDDRESS, V_DNSCRYPT_LOCAL_PORT];
         
@@ -1062,12 +1084,31 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
             DDLogError(@"(PacketTunnelProvider) can't start dns crypt proxy");
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(_dnsCryptEndBlock) {
+                _dnsCryptEndBlock();
+                
+                _dnsCryptEndBlock = nil;
+            }
+        });
     });
 }
 
-- (void) stopDnscryptProxy {
+- (void) stopDnscryptProxyWithCallback:(void (^)())callback {
     
-    dnscrypt_proxy_loop_break();
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+        _dnsCryptEndBlock = ^void() {
+            
+            if(callback) {
+                callback();
+            }
+        };
+        
+        dnscrypt_proxy_loop_break();
+    });
 }
 
 @end
