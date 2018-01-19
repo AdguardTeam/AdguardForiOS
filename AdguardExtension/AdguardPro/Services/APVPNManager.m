@@ -187,21 +187,21 @@ static APVPNManager *singletonVPNManager;
     
     [predefinedRemoteDnsServers addObject:server];
     
-//    server = [[APDnsServerObject alloc]
-//              initWithUUID: @"AGDEF01"
-//              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
-//              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
-//              ipAddresses:@"176.103.130.130, 176.103.130.131"];
-//    server.editable = NO;
-//    [predefinedRemoteDnsServers addObject:server];
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF01"
+              name: NSLocalizedString(@"Adguard Default", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when only 'regular' ads are blocked.")
+              description: NSLocalizedString(@"blocks ads, trackers and phishing websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Default' mode.")
+              ipAddresses:@"176.103.130.130, 176.103.130.131, 2a00:5a60::ad1:0ff, 2a00:5a60::ad2:0ff"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
     
-//    server = [[APDnsServerObject alloc]
-//              initWithUUID: @"AGDEF02"
-//              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
-//              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
-//              ipAddresses:@"176.103.130.132, 176.103.130.134"];
-//    server.editable = NO;
-//    [predefinedRemoteDnsServers addObject:server];
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF02"
+              name: NSLocalizedString(@"Adguard Family Protection", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses DNS Filtering, when 'regular' ads are blocked as well as adult websites.")
+              description: NSLocalizedString(@"blocks all above and adult websites", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the Adguard DNS 'Family Protection' mode.")
+              ipAddresses:@"176.103.130.132, 176.103.130.134, 2a00:5a60::bad1:0ff, 2a00:5a60::bad2:0ff"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
     
     server = [[APDnsServerObject alloc]
               initWithUUID: @"AGDEF03"
