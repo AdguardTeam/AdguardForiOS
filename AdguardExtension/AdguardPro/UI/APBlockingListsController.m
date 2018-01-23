@@ -38,6 +38,8 @@
 
 @interface APBlockingListsController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *blackListCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *whitelistCountLabel;
 @property (weak, nonatomic) IBOutlet AEUISelectableTableViewCell *checkUpdatesCell;
 
 @property (strong, nonatomic) IBOutlet AEUISelectableTableViewCell *subscriptionTemplateCell;
@@ -52,6 +54,9 @@
     [super viewDidLoad];
     
     [self updateSubscriptionCells];
+    [self updateCounters];
+    [self prepareUpdateCell];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +85,8 @@
                     
                     subscription.hosts = hosts;
                     subscription.rules = rules;
+                    
+                    subscription.updateDate = [NSDate new];
                     
                     NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
                     if(!subscriptions)
@@ -147,6 +154,8 @@
         : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
+        ASSIGN_WEAK(self);
+        
         domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
             
             NSMutableArray *domains = [NSMutableArray array];
@@ -180,6 +189,9 @@
                             else {
                                 [domains addObject:candidate];
                             }
+                        }
+                        else {
+                            [domains addObject:candidate];
                         }
                     }
                 }
@@ -219,6 +231,9 @@
                 }
             }
             
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self) updateCounters];
+            
             return YES;
             
         };
@@ -251,7 +266,23 @@
         NSString *text;
         if (toBlacklist) {
             
-            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+            NSMutableString *resultText = [NSMutableString new];
+            
+            NSArray* storedDomains = APSharedResources.blacklistDomains;
+            if(storedDomains.count) {
+                [resultText appendString: [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"]];
+                [resultText appendString:@"\n"];
+            }
+            
+            NSDictionary <NSString *, NSString*> *storedHosts = APSharedResources.hosts;
+            
+            if(storedHosts.count) {
+                [storedHosts enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+                    [resultText appendFormat:@"%@ %@\n", obj, key];
+                }];
+            }
+            
+            text = resultText.copy;
         }
         else {
             
@@ -288,24 +319,25 @@
     
     ASSIGN_WEAK(self);
     
-    [AEUILoadingModal.singleton loadingModalShowWithParent:self message:@"" cancelAction:nil completion:^{
-        
-        [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                ASSIGN_STRONG(self);
-                
-                [USE_STRONG(self) updateSubscriptionCells];
-                
-                [AEUILoadingModal.singleton loadingModalHide];
-                
-                [USE_STRONG(self) dismissViewControllerAnimated:YES completion:nil];
-            });
-        } errorBlock:^(NSError * error) {
-            
-        }];
-    }];
+    self.checkUpdatesCell.accessoryView.hidden = NO;
+    self.checkUpdatesCell.detailTextLabel.hidden = YES;
+    self.checkUpdatesCell.textLabel.enabled = NO;
+    [((UIActivityIndicatorView*)self.checkUpdatesCell.accessoryView) startAnimating];
     
+    [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
+        
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self) updateSubscriptionCells];
+        
+    } errorBlock:^(NSError * error) {
+        
+    } completionBlock:^{
+        
+        ASSIGN_STRONG(self);
+        [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
+        USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
+        USE_STRONG(self).checkUpdatesCell.textLabel.enabled = YES;
+    }];
 }
 
 #pragma mark private methods
@@ -328,6 +360,8 @@
     [self reloadDataAnimated:NO];
     
     int row = 0;
+    
+    NSTimeInterval minUpdateTimestamp = FLT_MAX;
     for (APBlockingSubscription* subscription in subscriptions) {
     
         UITableViewCell *newCell = [AEUIUtils createCellByTemplate:self.subscriptionTemplateCell style:UITableViewCellStyleValue1];
@@ -341,10 +375,34 @@
         
         [self insertCell:newCell atIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
         
+        minUpdateTimestamp = MIN(minUpdateTimestamp, subscription.updateDate.timeIntervalSince1970);
+        
         ++row;
     }
     
+    self.checkUpdatesCell.detailTextLabel.text = [NSDateFormatter
+                                                  localizedStringFromDate: [NSDate dateWithTimeIntervalSince1970: minUpdateTimestamp]
+                                                  dateStyle: NSDateFormatterShortStyle
+                                                  timeStyle: NSDateFormatterShortStyle];
+    
     [self reloadDataAnimated:NO];
+}
+
+- (void) updateCounters {
+    
+    self.whitelistCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.whitelistDomains.count];
+    self.blackListCountLabel.text = [NSString stringWithFormat:@"%lu", APSharedResources.blacklistDomains.count + APSharedResources.hosts.count];
+}
+
+- (void) prepareUpdateCell {
+    
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc]
+                                         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activity.hidesWhenStopped = YES;
+    activity.hidden = YES;
+    activity.color = self.checkUpdatesCell.detailTextLabel.textColor;
+    
+    self.checkUpdatesCell.accessoryView = activity;
 }
 
 @end

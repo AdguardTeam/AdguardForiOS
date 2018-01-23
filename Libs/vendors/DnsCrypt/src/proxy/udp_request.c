@@ -590,5 +590,20 @@ udp_listener_stop(ProxyContext * const proxy_context)
     event_free(proxy_context->udp_proxy_resolver_event);
     proxy_context->udp_proxy_resolver_event = NULL;
     while (udp_listener_kill_oldest_request(proxy_context) == 0) { }
+    
+    // this modification was made for AdGuard  ====================================
+    // close udp socket
+    if (proxy_context->udp_listener_handle != -1) {
+        shutdown(proxy_context->udp_listener_handle, SHUT_RDWR);
+        evutil_closesocket(proxy_context->udp_listener_handle);
+        proxy_context->udp_listener_handle = -1;
+    }
+    if (proxy_context->udp_proxy_resolver_handle != -1) {
+        shutdown(proxy_context->udp_proxy_resolver_handle, SHUT_RDWR);
+        evutil_closesocket(proxy_context->udp_proxy_resolver_handle);
+        proxy_context->udp_proxy_resolver_handle = -1;
+    }
+    // ============================================================================
+    
     logger_noformat(proxy_context, LOG_INFO, "UDP listener shut down");
 }

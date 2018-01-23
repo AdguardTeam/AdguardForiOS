@@ -69,16 +69,15 @@
                 }
             }
         }
-        else if ([to isEqual:@(2)]) {
-            // upgrade to 2.0.*
-            
-            DDLogInfo(@"(APSProductSchemaManager) Upgrade to 2.0.*");
-            
-            [self installTrackersDomainList];
-        }
-        
     }
     return result;
+}
+
++ (void)onMinorUpgrade {
+    
+    [super onMinorUpgrade];
+    
+    [self installTrackersDomainList];
 }
 
 /////////////////////////////////////////////////////////////////////

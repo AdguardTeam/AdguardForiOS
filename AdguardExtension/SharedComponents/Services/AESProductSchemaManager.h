@@ -43,4 +43,6 @@
 
 + (BOOL)onInstall;
 
++ (void)onMinorUpgrade;
+
 @end

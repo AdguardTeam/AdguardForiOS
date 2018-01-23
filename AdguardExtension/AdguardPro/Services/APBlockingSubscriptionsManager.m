@@ -239,7 +239,9 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     return (!nextUpdateTimestamp || [[NSDate new] timeIntervalSince1970] > nextUpdateTimestamp);
 }
 
-+ (void)updateSubscriptionsWithCompletionBlock:(void (^)())completionBlock errorBlock:(void (^)(NSError *))errorBlock {
+
++ (void)updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock
+{
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -258,6 +260,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
                 
                 subscription.rules = rules;
                 
+                subscription.updateDate = [NSDate new];
+                
                 dispatch_group_leave(group);
                 
             } errorBlock:^(NSError *error) {
@@ -269,6 +273,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
         
+        _subscriptions = _subscriptionsMeta;
+        
         [self saveSubscriptions: _subscriptions];
         [self saveSubscriptionsMeta: _subscriptions];
         [self saveHostsForSubscriptions: _subscriptions];
@@ -276,7 +282,11 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         
         [self setNextUpdateTime];
         
-        completionBlock();
+        if(successBlock)
+            successBlock();
+        
+        if(completionBlock)
+            completionBlock();
     });
 }
 

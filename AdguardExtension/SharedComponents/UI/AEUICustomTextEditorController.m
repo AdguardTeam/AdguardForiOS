@@ -152,10 +152,14 @@ static NSDictionary *_editAttrs;
     self.searchBar.keyboardType = _keyboardType;
     self.editorTextView.tintColor = UIColor.whiteColor;
     
-    [[UITextView appearance] setTintColor:[UIColor colorWithWhite:1.0f alpha:0.99f]];
-    
     [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].textColor = UIColor.whiteColor;
-    [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].tintColor = UIColor.whiteColor;
+    
+    for (UIView* subView in self.searchBar.subviews[0].subviews) {
+        if([subView isKindOfClass:[UITextField class]]) {
+            ((UITextField*)subView).tintColor = UIColor.lightGrayColor;
+            ((UITextField*)subView).textColor = UIColor.lightGrayColor;
+        }
+    }
     
     [self registerForKeyboardNotifications];
     

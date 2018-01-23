@@ -43,10 +43,6 @@
     self.rulesCount = self.rules.count + self.hosts.count;
 }
 
-- (NSInteger)rulesCount {
-    return self.hosts.count + self.rules.count;
-}
-
 - (instancetype)meta {
     
     APBlockingSubscription *meta = [[[self class] alloc] init];
@@ -56,7 +52,9 @@
     meta.subscriptionDescription = self.subscriptionDescription;
     meta.url = self.url;
     meta.rulesCount = self.rulesCount;
-
+    meta.updateDate = self.updateDate;
+    meta.rulesCount = self.rulesCount;
+    
     return meta;
 }
 
@@ -74,6 +72,8 @@
             self.url = [aDecoder decodeObjectForKey:@"url"];
             self.rules = [aDecoder decodeObjectForKey:@"rules"];
             self.hosts = [aDecoder decodeObjectForKey:@"hosts"];
+            self.updateDate = [aDecoder decodeObjectForKey:@"date"];
+            self.rulesCount = [aDecoder decodeInt64ForKey:@"rules_count"];
         }
     }
     
@@ -89,6 +89,8 @@
         [aCoder encodeObject:self.url forKey:@"url"];
         [aCoder encodeObject:self.rules forKey:@"rules"];
         [aCoder encodeObject:self.hosts forKey:@"hosts"];
+        [aCoder encodeObject:self.updateDate forKey:@"date"];
+        [aCoder encodeInt64:self.rulesCount forKey:@"rules_count"];
     }
 }
 

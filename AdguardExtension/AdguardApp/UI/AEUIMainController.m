@@ -381,7 +381,7 @@
     
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
     [[APVPNManager singleton] setEnabled:enabled];
-    self.proStatusSwitch.enabled = enabled;
+    self.proStatusSwitch.on = enabled;
 }
 
 #endif
@@ -536,6 +536,7 @@
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
     activity.hidden = YES;
+    activity.color = self.checkFiltersCell.detailTextLabel.textColor;
 
     self.checkFiltersCell.accessoryView = activity;
     
@@ -555,16 +556,18 @@
                      queue:nil
                 usingBlock:^(NSNotification *_Nonnull note) {
 
-                  self.checkFiltersCell.textLabel.enabled = NO;
-                    // tunning accessibility
-                  self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
-                    //------------
-                  UIActivityIndicatorView *activity =
-                      (UIActivityIndicatorView *)
-                          self.checkFiltersCell.accessoryView;
-                  activity.hidden = NO;
-                  [activity startAnimating];
-                  _inCheckUpdates = YES;
+                      self.checkFiltersCell.textLabel.enabled = NO;
+                        // tunning accessibility
+                      self.checkFiltersCell.accessibilityTraits = checkFiltersCellTraits;
+                        //------------
+                      UIActivityIndicatorView *activity =
+                          (UIActivityIndicatorView *)
+                              self.checkFiltersCell.accessoryView;
+                      activity.hidden = NO;
+                      [activity startAnimating];
+                    
+                      self.lastUpdated.hidden = YES;
+                      _inCheckUpdates = YES;
                 }];
 
     [_observers addObject:observer];
@@ -586,10 +589,12 @@
                         self.checkFiltersCell.accessoryView;
                         [activity stopAnimating];
                         
-                      // setting text of result on "Check Filter Updates"
-                      NSArray *updatedMetas =
+                        self.lastUpdated.hidden = NO;
+                        
+                        // setting text of result on "Check Filter Updates"
+                        NSArray *updatedMetas =
                           [note userInfo][AppDelegateUpdatedFiltersKey];
-                      if (updatedMetas.count) {
+                        if (updatedMetas.count) {
 
                           NSString *format =
                               NSLocalizedString(@"Filters updated: %lu",
@@ -597,17 +602,17 @@
                                                 @"- Check Filter Updates");
                           self.checkFiltersCell.textLabel.text = [NSString
                               stringWithFormat:format, updatedMetas.count];
-                      } else {
+                        } else {
 
                           self.checkFiltersCell.textLabel.text =
                               NSLocalizedString(@"No updates found",
                                                 @"(AEUIMainController) Button "
                                                 @"- Check Filter Updates");
-                      }
+                        }
 
-                      NSDate *checkDate = [[AESharedResources sharedDefaults]
+                        NSDate *checkDate = [[AESharedResources sharedDefaults]
                           objectForKey:AEDefaultsCheckFiltersLastDate];
-                      if (checkDate) {
+                        if (checkDate) {
                           self.lastUpdated.text = [NSDateFormatter
                               localizedStringFromDate:checkDate
                                             dateStyle:NSDateFormatterShortStyle
@@ -616,7 +621,7 @@
                           // tunning accessibility
                           self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
                           //-------
-                      }
+                        }
                     });
 
                     dispatch_after(
@@ -644,6 +649,8 @@
                           self.checkFiltersCell.accessoryView;
                   [activity stopAnimating];
 
+                    self.lastUpdated.hidden = NO;
+                    
                   dispatch_async(dispatch_get_main_queue(), ^{
 
                     // setting text of result on "Check Filter Updates"

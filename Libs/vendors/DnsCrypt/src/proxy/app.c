@@ -375,7 +375,7 @@ dnscrypt_proxy_main(int argc, char *argv[])
     setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
     stack_trace_on_crash();
     entropy_check();
-    if (sodium_init() != 0) {
+    if (sodium_init() < 0) {
         return -1;
     }
     app_context.allocated_args = 0;

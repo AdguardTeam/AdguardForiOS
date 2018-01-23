@@ -44,6 +44,11 @@
     }
     
     self.descriptionLabel.text = self.subscription.subscriptionDescription;
+    
+    self.lastModifiedLabel.text = [NSDateFormatter
+                                   localizedStringFromDate: self.subscription.updateDate
+                                   dateStyle: NSDateFormatterShortStyle
+                                   timeStyle: NSDateFormatterShortStyle];
 }
 
 #pragma mark table view methods

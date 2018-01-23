@@ -290,14 +290,15 @@ typedef void (^AEDownloadsCompletionBlock)();
 #ifdef PRO
         if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
             
-            [APBlockingSubscriptionsManager updateSubscriptionsWithCompletionBlock:^{
+            [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
                 
                 [APVPNManager.singleton sendReloadSystemWideDomainLists];
                 completionHandler(UIBackgroundFetchResultNewData);
-            } errorBlock:^(NSError *error) {
+            } errorBlock:^(NSError * error) {
+                
                 completionHandler(UIBackgroundFetchResultFailed);
-            }];
-            
+            } completionBlock:nil];
+           
             return;
         }
 #endif

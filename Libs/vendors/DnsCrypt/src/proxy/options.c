@@ -678,6 +678,13 @@ options_parse(AppContext * const app_context,
         }
         app_context->allocated_args = 1;
     }
+    
+    // this modification was made for AdGuard ====================================
+    // reset getopt_long internal state. This is necessary in order to be able to call the dnscrypt_proxy_main function multiple times
+    optreset = 1;
+    optind = 1;
+    // ===========================================================================
+    
     while ((opt_flag = getopt_long(*argc_p, *argv_p,
                                    getopt_options, getopt_long_options,
                                    &option_index)) != -1) {
