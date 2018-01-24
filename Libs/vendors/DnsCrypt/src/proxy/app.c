@@ -51,6 +51,8 @@
 # define INET6_ADDRSTRLEN 46U
 #endif
 
+#include "thread.h"
+
 static AppContext            app_context;
 static volatile sig_atomic_t skip_dispatch;
 
@@ -454,6 +456,14 @@ dnscrypt_proxy_main(int argc, char *argv[])
 #ifdef HAVE_LIBSYSTEMD
     sd_notifyf(0, "MAINPID=%lu", (unsigned long) getpid());
 #endif
+
+    // this modification was made for AdGuard ====================================
+    // dnscrypt_proxy_loop_break does not stop dnscrypt while the tunnel is stopped without these changes    
+    if(evthread_make_base_notifiable(proxy_context.event_loop)) {
+        return -1;
+    }
+    // ===========================================================================
+    
     if (skip_dispatch == 0) {
         event_base_dispatch(proxy_context.event_loop);
     }
