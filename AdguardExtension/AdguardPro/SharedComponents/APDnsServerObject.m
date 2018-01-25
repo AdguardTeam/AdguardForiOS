@@ -22,6 +22,9 @@
 
 NSString *APDnsServerTagLocal = @"APDnsServerTagLocal";
 
+NSString *APDnsServerUUIDAdguard = @"AGDEF01";
+NSString *APDnsServerUUIDAdguardFamily = @"AGDEF02";
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsServerObject
 
@@ -93,6 +96,10 @@ static NSMutableCharacterSet *delimCharSet;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+- (NSString *)uuid {
+    return _uuid;
+}
+
 - (NSString *)ipAddressesAsString {
     
     NSArray *ips = self.ipv4Addresses;
@@ -163,6 +170,7 @@ static NSMutableCharacterSet *delimCharSet;
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:@(_editable) forKey:@"editable"];
     [aCoder encodeObject:_uuid forKey:@"uuid"];
+    [aCoder encodeObject:_tag forKey:@"tag"];
 
 }
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {

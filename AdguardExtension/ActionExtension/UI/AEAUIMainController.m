@@ -31,6 +31,32 @@
 #import "ASDFilterObjects.h"
 #import "AESSupport.h"
 #import "AESharedResources.h"
+#import "ABECRequest.h"
+#import "ADProductInfo.h"
+
+#ifdef PRO
+#import "APVPNManager.h"
+#import "APDnsServerObject.h"
+#endif
+
+#define REPORT_URL @"https://reports.adguard.com/ru/new_issue.html"
+
+#define REPORT_PARAM_PRODUCT @"product_type"
+#define REPORT_PARAM_VERSION @"product_version"
+#define REPORT_PARAM_BROWSER @"browser"
+#define REPORT_PARAM_URL @"url"
+#define REPORT_PARAM_FILTERS @"filters"
+#define REPORT_PARAM_SYSTEM_WIDE @"ios.systemwide"
+#define REPORT_PARAM_SIMPLIFIED @"ios.simplified"
+#define REPORT_PARAM_CUSTOM_DNS @"ios.CustomDNS"
+#define REPORT_PARAM_DNS @"ios.DNS"
+
+#define REPORT_PRODUCT @"iOS"
+#define REPORT_BROWSER @"Safari"
+
+#define REPORT_DNS_ADGUARD @"Default"
+#define REPORT_DNS_ADGUARD_FAMILY @"Family"
+#define REPORT_DNS_OTHER @"Other"
 
 @implementation AEAUIMainController{
     
@@ -216,18 +242,78 @@
 }
 
 - (IBAction)clickMissedAd:(id)sender {
+
+    NSMutableDictionary *params = [NSMutableDictionary new];
     
-    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
-    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
+    params[REPORT_PARAM_PRODUCT] = REPORT_PRODUCT;
+    params[REPORT_PARAM_VERSION] = ADProductInfo.version;
+    params[REPORT_PARAM_URL] = self.url;
+    params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
-    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
+    
+    NSMutableString *filtersString = [NSMutableString new];
+    NSArray* filters = [AESAntibanner new].filters;
+    
+    for (ASDFilterMetadata *filter in filters) {
+        
+        NSString* format = filter == filters.firstObject ? @"%@" : @".%@";
+        [filtersString appendFormat:format, filter.filterId];
+    }
+    params[REPORT_PARAM_FILTERS] = filtersString.copy;
+    
+    params[REPORT_PARAM_SIMPLIFIED] =  [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
+    
+#ifdef PRO
+    
+    NSString* dnsServerParam = nil;
+    BOOL custom = NO;
+    
+    APDnsServerObject * dnsServer = [APVPNManager.singleton loadActiveRemoteDnsServer];
+    if([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguard]) {
+        dnsServerParam = REPORT_DNS_ADGUARD;
+    }
+    else if ([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguardFamily]) {
+        dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
+    }
+    else if(dnsServer) {
+        dnsServerParam = REPORT_DNS_OTHER;
+        custom = YES;
+    }
+    
+    if(dnsServerParam) {
+        params[REPORT_PARAM_DNS] = dnsServerParam;
+        
+        if(custom) {
+            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.serverName;
+        }
+    }
+    
+#endif
+    
+    params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
+    
+    NSString *paramsString = [ABECRequest createStringFromParameters:params];
+    NSString *url = [NSString stringWithFormat:@"%@?%@", REPORT_URL, paramsString];
+    
+    UIResponder *responder = self;
+    while(responder){
+        if ([responder respondsToSelector: @selector(openURL:)]){
+            [responder performSelector: @selector(openURL:) withObject: [NSURL URLWithString:url]];
+        }
+        responder = [responder nextResponder];
+    }
+    
+//    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
+//    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
+//
+//    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
     
     NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Incorrect blocking on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
-    
+
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
