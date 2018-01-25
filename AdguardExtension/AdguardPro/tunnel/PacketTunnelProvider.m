@@ -269,16 +269,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     [self logNetworkInterfaces];
     
-    [self stopDnscryptProxyWithCallback:^{
-        
-        [_connectionHandler closeAllConnections:^{
-            pendingStartCompletion = nil;
-            pendingStopCompletion();
-            pendingStopCompletion = nil;
-            
-            DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+    if(_currentServer.isDnsCrypt.boolValue) {
+        [self stopDnscryptProxyWithCallback:^{
+            [self closeConnections];
         }];
-    }];
+    }
+    else {
+        [self closeConnections];
+    }
 }
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
@@ -351,6 +349,16 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
+
+- (void)closeConnections {
+    [_connectionHandler closeAllConnections:^{
+        pendingStartCompletion = nil;
+        pendingStopCompletion();
+        pendingStopCompletion = nil;
+        
+        DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+    }];
+}
 
 - (void)getDNSServersIpv4: (NSArray <APDnsServerAddress *> **) ipv4DNSServers ipv6: (NSArray <APDnsServerAddress *> **) ipv6DNSServers {
   
