@@ -51,6 +51,8 @@
             if (response.blocked) {
                 _color = AEUIC_WARNING_COLOR;
                 _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
+            } else if(record.isTracker) {
+                _color = AEUIC_TRACKER_COLOR;
             } else {
                 
                 _color = [UIColor whiteColor];
@@ -72,9 +74,6 @@
         
         if (record.isWhitelisted) {
             _color = AEUIC_EXCEPTION_COLOR;
-        }
-        else if(record.isTracker) {
-            _color = AEUIC_TRACKER_COLOR;
         }
     }
     

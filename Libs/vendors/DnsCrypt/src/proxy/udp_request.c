@@ -582,14 +582,32 @@ udp_listener_start(ProxyContext * const proxy_context)
 void
 udp_listener_stop(ProxyContext * const proxy_context)
 {
-    if (proxy_context->udp_proxy_resolver_event == NULL) {
-        return;
+    
+    // this modification was made for AdGuard  ====================================
+    //old
+//    if (proxy_context->udp_proxy_resolver_event == NULL) {
+//        return;
+//    }
+//    event_free(proxy_context->udp_listener_event);
+//    proxy_context->udp_listener_event = NULL;
+//    event_free(proxy_context->udp_proxy_resolver_event);
+//    proxy_context->udp_proxy_resolver_event = NULL;
+//    while (udp_listener_kill_oldest_request(proxy_context) == 0) { }
+    
+    // new
+    // We can stop dnscrypt after the socket binding, but before the initialization of the udp_proxy_resolver_event
+    // It is necessary to close the socket
+    if (proxy_context->udp_listener_event != NULL) {
+        event_free(proxy_context->udp_listener_event);
+        proxy_context->udp_listener_event = NULL;
     }
-    event_free(proxy_context->udp_listener_event);
-    proxy_context->udp_listener_event = NULL;
-    event_free(proxy_context->udp_proxy_resolver_event);
-    proxy_context->udp_proxy_resolver_event = NULL;
-    while (udp_listener_kill_oldest_request(proxy_context) == 0) { }
+    
+    if (proxy_context->udp_proxy_resolver_event != NULL) {
+        event_free(proxy_context->udp_proxy_resolver_event);
+        proxy_context->udp_proxy_resolver_event = NULL;
+        while (udp_listener_kill_oldest_request(proxy_context) == 0) { }
+    }
+    // ============================================================================
     
     // this modification was made for AdGuard  ====================================
     // close udp socket

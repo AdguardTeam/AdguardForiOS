@@ -269,16 +269,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     [self logNetworkInterfaces];
     
-    [self stopDnscryptProxyWithCallback:^{
-        
-        [_connectionHandler closeAllConnections:^{
-            pendingStartCompletion = nil;
-            pendingStopCompletion();
-            pendingStopCompletion = nil;
-            
-            DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+    if(_currentServer.isDnsCrypt.boolValue) {
+        [self stopDnscryptProxyWithCallback:^{
+            [self closeConnections];
         }];
-    }];
+    }
+    else {
+        [self closeConnections];
+    }
 }
 
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
@@ -351,6 +349,16 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
+
+- (void)closeConnections {
+    [_connectionHandler closeAllConnections:^{
+        pendingStartCompletion = nil;
+        pendingStopCompletion();
+        pendingStopCompletion = nil;
+        
+        DDLogInfo(@"(PacketTunnelProvider) Stop completion performed.");
+    }];
+}
 
 - (void)getDNSServersIpv4: (NSArray <APDnsServerAddress *> **) ipv4DNSServers ipv6: (NSArray <APDnsServerAddress *> **) ipv6DNSServers {
   
@@ -518,6 +526,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
     
+    if(_currentServer.isDnsCrypt.boolValue) {
+        
+        [self stopDnscryptProxyWithCallback:^{
+            [self startDnscryptProxy];
+        }];
+    }
+    
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
         DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
@@ -530,14 +545,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
     
     _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
-    
-    
-    if(_currentServer.isDnsCrypt.boolValue) {
-        
-        [self stopDnscryptProxyWithCallback:^{
-            [self startDnscryptProxy];
-        }];
-    }
     
     [self updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error) {
         
@@ -1080,6 +1087,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
         
         DDLogInfo(@"(PacketTunnelProvider) start dns crypt proxy with args: %@", args);
+        
         if(dnscrypt_proxy_main(argc, (char **)argv) != 0) {
         
             DDLogError(@"(PacketTunnelProvider) can't start dns crypt proxy");
