@@ -24,6 +24,7 @@
 #import "APDnsResponse.h"
 #import "APUIDnsLogRecord.h"
 #import "APUIDnsRequestDetail.h"
+#import "AESharedResources.h"
 
 @interface APUIDnsRequestsController ()
 
@@ -182,6 +183,17 @@
     [self reloadData];
 }
 
+- (IBAction)clickClear:(id)sender {
+    
+    [self requestResetStatisticsWithCompletionBlock:^{
+        
+        if ([[APVPNManager singleton] clearDnsRequestsLog]) {
+            
+            [self reloadData];
+        }
+    }];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - Helper Methods
 
@@ -215,14 +227,6 @@
     return reversed;
 }
 
-- (IBAction)clickClear:(id)sender {
-
-    if ([[APVPNManager singleton] clearDnsRequestsLog]) {
-        
-        [self reloadData];
-    }
-}
-
 - (APDnsLogRecord *)logRecordForSelectedRow{
     
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
@@ -238,6 +242,39 @@
     }
     
     return nil;
+}
+
+- (void) requestResetStatisticsWithCompletionBlock:(void(^)())completionBlock {
+    
+    NSString* message = NSLocalizedString(@"Do you want to reset the statistics along with clearing the log", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
+    
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"YES", @"YES Button caption in alert") style:UIAlertActionStyleDestructive
+                                                      handler:^(UIAlertAction * action) {
+                                                          
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsTime];
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsCount];
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalTrackersCount];
+                                                          
+                                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                                          if(completionBlock)
+                                                              completionBlock();
+                                                      }];
+    
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"NO", @"NO Button caption in alert") style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          
+                                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                                          if(completionBlock)
+                                                              completionBlock();
+                                                      }];
+    
+    [alertController addAction:yesAction];
+    [alertController addAction:noAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end
