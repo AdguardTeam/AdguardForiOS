@@ -63,6 +63,8 @@
 #define ASDF_MOBILE_SAFARI_FILTER_ID     12
 /// Simplified domain names filter
 #define ASDF_SIMPL_DOMAINNAMES_FILTER_ID 15
+/// Mobile Ads filter
+#define MOBILE_ADS_FILTER_ID 11
 
 /// List of filters Ids that block trackers.
 #define ASDF_TRACKERS_BLOCKING_FILTERS   @[\
