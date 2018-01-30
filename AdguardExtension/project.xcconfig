@@ -22,7 +22,7 @@ ACTION_RESOURCES_DIR = $(BUILDER_DIR)/ActionResources
 
 ACTION_JAVASCRIPT_ASSISTANT_REMOTE = https:${SLASH}/adguardteam.github.io/AdguardAssistant/mobile/script.js
 
-DNS_CRYPT_RESOLVERS_REMOTE = https:${SLASH}/raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/dnscrypt-resolvers.csv
+DNS_CRYPT_RESOLVERS_REMOTE = https:${SLASH}/download.dnscrypt.info/dnscrypt-resolvers/v1/dnscrypt-resolvers.csv
 
 // Main App bundle identifier
 ADGUARD_BUNDLE_ID = com.adguard.AdguardExtension

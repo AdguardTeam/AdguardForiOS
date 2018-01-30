@@ -19,7 +19,7 @@
 #   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 
 
-LibsFile="${SRCROOT}/ActionExtension/js/adguard-assistant.js"
+#LibsFile="${SRCROOT}/ActionExtension/js/adguard-assistant.js"
 DnscryptResolversFile="${SRCROOT}/AdguardPro/Resources/dnscrypt-resolvers.csv"
 
 Download()
@@ -35,12 +35,12 @@ fi
 echo " - done"
 }
 
-echo "Downloading external libs sources.."
-
-rm -f "$LibsFile"
-
-Download "${ACTION_JAVASCRIPT_ASSISTANT_REMOTE}" "$LibsFile"
-
+#echo "Downloading external libs sources.."
+#
+#rm -f "$LibsFile"
+#
+#Download "${ACTION_JAVASCRIPT_ASSISTANT_REMOTE}" "$LibsFile"
+#
 
 echo "Downloading dnscrypt resolvers list.."
 
