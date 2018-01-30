@@ -128,6 +128,10 @@ static NSMutableCharacterSet *delimCharSet;
         }
     }
     
+    if(self.dnsCryptResolverAddress.length) {
+        [result appendFormat:@"%@\n", self.dnsCryptResolverAddress];
+    }
+    
     return [result copy];
 }
 
