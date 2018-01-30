@@ -211,13 +211,23 @@ static NSMutableCharacterSet *urlQueryParameterAllowedCharset;
     
     BOOL validIp = ipv6 ? [self isIPv6:ipCandidate] : [self isIPv4:ipCandidate];
     if(validIp) {
-        *ip = ipCandidate;
-        *port = portCandidate;
+        if(ip)
+            *ip = ipCandidate;
+        if(port)
+            *port = portCandidate;
         
         return YES;
     }
     
     return NO;
+}
+
++ (BOOL)isValidIpWithPort:(NSString *)candidate {
+    
+    return  [self isIPv4:candidate] ||
+            [self isIPv6:candidate] ||
+            [self checkIpvWithPort:candidate ip:nil port:nil ipv6:NO] ||
+            [self checkIpvWithPort:candidate ip:nil port:nil ipv6:YES];
 }
 
 /// Gets domain name from the url

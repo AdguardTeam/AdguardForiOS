@@ -68,7 +68,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server Name" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jot-rn-HdO" customClass="AEUICellTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jot-rn-HdO" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Name"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,7 +110,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-Te-3zy" customClass="AEUICellTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-Te-3zy" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Description"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,8 +147,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0q-qQ-2k7">
-                                                    <rect key="frame" x="16" y="11" width="45" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provider" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0q-qQ-2k7">
+                                                    <rect key="frame" x="15.999999999999996" y="11" width="63.666666666666657" height="21"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -157,10 +157,10 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server Name" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQy-D9-ECz">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Provider Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="MQy-D9-ECz" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Name"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -199,14 +199,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Xi-0VN">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="IP Address" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Xi-0VN" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Description"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="resolverAddressChanged:" destination="XFi-sr-f1o" eventType="editingDidEnd" id="Mgb-a4-4Zz"/>
+                                                        <action selector="resolverAddressChanged:" destination="XFi-sr-f1o" eventType="editingChanged" id="wBl-Fa-sh2"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -232,8 +232,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public key" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55b-oC-HZF">
-                                                    <rect key="frame" x="16" y="11" width="77.666666666666671" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Key" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55b-oC-HZF">
+                                                    <rect key="frame" x="16" y="11" width="79.666666666666671" height="21"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
@@ -242,14 +242,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-0H-JNa">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Provider Public Key" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-0H-JNa" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Description"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="publicKeyChanged:" destination="XFi-sr-f1o" eventType="editingDidEnd" id="fG9-VJ-zkQ"/>
+                                                        <action selector="publicKeyChanged:" destination="XFi-sr-f1o" eventType="editingChanged" id="pjm-9D-c68"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -1160,7 +1160,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9p-Kz-7nc">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
                                                     <action selector="clickCancel:" destination="R8j-9d-i12" eventType="touchUpInside" id="cEh-Pd-9HX"/>
@@ -1243,16 +1243,16 @@
                                         <rect key="frame" x="0.0" y="44" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pMP-oJ-FLr" id="XV6-dT-bmD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="video2-image" translatesAutoresizingMaskIntoConstraints="NO" id="jaJ-ZP-HI3">
-                                                    <rect key="frame" x="4" y="-24" width="370" height="200.5"/>
+                                                    <rect key="frame" x="3" y="-27" width="370" height="204"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How to enable Adguard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpT-Zt-7rJ">
-                                                    <rect key="frame" x="13" y="129.5" width="341.5" height="22"/>
+                                                    <rect key="frame" x="12" y="129" width="342" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3166,7 +3166,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="YnX-eX-SEl" customClass="AEUICellTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="YnX-eX-SEl" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Name"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3208,7 +3208,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="kB0-ih-u6i" customClass="AEUICellTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Optional" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="kB0-ih-u6i" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Description"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3251,12 +3251,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://example.org" textAlignment="natural" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z6X-GW-C99" customClass="AEUICellTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://example.org" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Z6X-GW-C99" customClass="AEUICellTextField">
                                                     <rect key="frame" x="114" y="11" width="253" height="21"/>
                                                     <accessibility key="accessibilityConfiguration" label="Server Description"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
                                                     <connections>
                                                         <action selector="urlChanged:" destination="cvV-lj-bnx" eventType="editingChanged" id="3cq-bp-dbg"/>
                                                     </connections>
@@ -3603,8 +3603,8 @@
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pq7-GC-pTF"/>
-        <segue reference="6Ee-nM-Qm2"/>
+        <segue reference="cER-G1-xll"/>
+        <segue reference="PWA-3E-5nf"/>
         <segue reference="uD1-XP-a5e"/>
     </inferredMetricsTieBreakers>
 </document>
