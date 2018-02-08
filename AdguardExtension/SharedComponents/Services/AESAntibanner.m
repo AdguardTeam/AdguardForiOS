@@ -237,6 +237,28 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return rules;
 }
 
+- (NSArray*) activeFilterIDs {
+    
+    NSMutableArray *filterIDs = [NSMutableArray array];
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
+        
+        while ([result next]) {
+            
+            NSNumber *filterId = result[0];
+            
+            if ([filterId integerValue] != ASDF_USER_FILTER_ID) {
+                [filterIDs addObject:filterId];
+            }
+        }
+        [result close];
+    }];
+   
+    return filterIDs.copy;
+}
+
 - (BOOL)checkIfFilterInstalled:(NSNumber *)filterId{
     
     if (!filterId)
