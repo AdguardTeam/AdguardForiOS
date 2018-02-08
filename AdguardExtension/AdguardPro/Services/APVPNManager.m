@@ -32,7 +32,7 @@
 
 
 #define VPN_NAME                            @" VPN"
-#define MAX_COUNT_OF_REMOTE_DNS_SERVERS     16
+#define MAX_COUNT_OF_REMOTE_DNS_SERVERS     20
 #define NOTIFICATION_DELAY                  1
 
 NSString *APVpnChangedNotification = @"APVpnChangedNotification";
@@ -240,6 +240,14 @@ static APVPNManager *singletonVPNManager;
               name: NSLocalizedString(@"Google Public DNS", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Google Public DNS.")
               description: NSLocalizedString(@"global dns resolution service provided by Google", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Google Public DNS' mode.")
               ipAddresses:@"8.8.8.8, 8.8.4.4, 2001:4860:4860::8888, 2001:4860:4860::8844"];
+    server.editable = NO;
+    [predefinedRemoteDnsServers addObject:server];
+    
+    server = [[APDnsServerObject alloc]
+              initWithUUID: @"AGDEF08"
+              name: NSLocalizedString(@"Quad 9 DNS", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Quad 9 DNS.")
+              description: NSLocalizedString(@"blocks malware and other threats", @"(APVPNManager) PRO version. On the DNS Filtering screen. It is the description of the 'Quad 9 DNS' mode.")
+              ipAddresses: @"9.9.9.9"];
     server.editable = NO;
     [predefinedRemoteDnsServers addObject:server];
     
