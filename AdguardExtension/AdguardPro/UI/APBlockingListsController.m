@@ -28,6 +28,7 @@
 #import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
 #import "APVPNManager.h"
+#import "APUIProSectionFooter.h"
 
 #define SUBSCRIPTIONS_SECTION 1
 
@@ -43,8 +44,8 @@
 @property (weak, nonatomic) IBOutlet AEUISelectableTableViewCell *checkUpdatesCell;
 
 @property (strong, nonatomic) IBOutlet AEUISelectableTableViewCell *subscriptionTemplateCell;
-
 @property (nonatomic) APBlockingSubscription* selectedSubscription;
+@property (nonatomic) APUIProSectionFooter* footer;
 
 @end
 
@@ -313,6 +314,24 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    if(section == SUBSCRIPTIONS_SECTION) {
+        return [self sectionFooter].height;
+    }
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if(section == SUBSCRIPTIONS_SECTION) {
+        return [self sectionFooter];
+    }
+    
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
 #pragma mark aktions
 
 - (IBAction)checkUpdatesAction:(id)sender {
@@ -403,6 +422,33 @@
     activity.color = self.checkUpdatesCell.detailTextLabel.textColor;
     
     self.checkUpdatesCell.accessoryView = activity;
+}
+
+- (APUIProSectionFooter*) sectionFooter {
+    
+    if(!self.footer) {
+        
+        self.footer = [[APUIProSectionFooter alloc] initWithFrame:self.view.frame];
+        [self.footer setText:[self footerText]];
+    }
+    
+    return self.footer;
+}
+
+- (NSAttributedString*) footerText {
+    
+    NSString *htmlString = NSLocalizedString(@"AdGuard supports both hosts files or \"adblock\" rules syntax. Click <a href=\"https://kb.adguard.com/ios/features\">here</a> to learn more about it.", @"(APBlockingListsController) Blocking subscriptions footer text");
+    
+    NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError* error;
+    NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
+    
+    NSAttributedString* string = [[NSAttributedString alloc] initWithData:data
+                                                                             options:options
+                                                                  documentAttributes:nil error:&error];
+    
+    return string;
 }
 
 @end

@@ -18,9 +18,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface APUIProSectionFooter : UITableViewHeaderFooterView
+@interface APUIProSectionFooter : UITableViewHeaderFooterView<UITextViewDelegate>
 
 @property (readonly) CGFloat height;
 @property NSAttributedString *text;
+@property (nonatomic, copy, nullable) BOOL (^urlClickBlock)(NSURL* url);
+
 
 @end

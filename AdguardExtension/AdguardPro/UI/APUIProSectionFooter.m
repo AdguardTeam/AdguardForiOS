@@ -39,6 +39,7 @@
         _textView.layoutManager.usesFontLeading = NO;
         _textView.textContainer.lineFragmentPadding = 0;
         _textView.preservesSuperviewLayoutMargins = self.preservesSuperviewLayoutMargins = NO;
+        _textView.delegate = self;
         
         self.layoutMargins = UIEdgeInsetsMake(7, 15, 7, 15);
         
@@ -101,6 +102,15 @@
 - (NSString *)accessibilityLabel {
     
     return _textView.text;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    
+    if(self.urlClickBlock && self.urlClickBlock(URL)) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
