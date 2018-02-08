@@ -347,16 +347,20 @@
     [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
         
         ASSIGN_STRONG(self);
-        [USE_STRONG(self) updateSubscriptionCells];
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [USE_STRONG(self) updateSubscriptionCells];
+        });
     } errorBlock:^(NSError * error) {
         
     } completionBlock:^{
         
-        ASSIGN_STRONG(self);
-        [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
-        USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
-        USE_STRONG(self).checkUpdatesCell.textLabel.enabled = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ASSIGN_STRONG(self);
+            [((UIActivityIndicatorView*)USE_STRONG(self).checkUpdatesCell.accessoryView) stopAnimating];
+            USE_STRONG(self).checkUpdatesCell.detailTextLabel.hidden = NO;
+            USE_STRONG(self).checkUpdatesCell.textLabel.enabled = YES;
+            USE_STRONG(self).checkUpdatesCell.accessoryView.hidden = YES;
+        });
     }];
 }
 
