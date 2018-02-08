@@ -49,7 +49,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *proDnsSettingsCell;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
-@property (weak, nonatomic) IBOutlet UITableViewCell *starsCell;
 @property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UIImageView *titleLogo;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -64,10 +63,6 @@
 @property (nonatomic) AEUIStarsLayer* starsLayer;
 
 - (IBAction)toggleAdguard:(id)sender;
-- (IBAction)clickTwitter:(id)sender;
-- (IBAction)clickFacebook:(id)sender;
-- (IBAction)clickMessage:(id)sender;
-- (IBAction)clickMail:(id)sender;
 - (IBAction)clickViewOnGitHub:(id)sender;
 - (IBAction)clickCheckForUpdates:(id)sender;
 - (IBAction)clickRateThisApp:(id)sender;

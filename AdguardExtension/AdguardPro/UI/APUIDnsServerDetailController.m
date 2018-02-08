@@ -19,6 +19,7 @@
 #import "APUIDnsServerDetailController.h"
 #import "APDnsServerObject.h"
 #import "APUIDnsServersController.h"
+#import "ACNUrlUtils.h"
 
 #define IP_ADDRESSES_SECTION_INDEX          1
 
@@ -217,9 +218,11 @@
     
     if(self.serverObject.isDnsCrypt.boolValue) {
         
+        BOOL validAddress = [ACNUrlUtils isValidIpWithPort:self.resolverAddressTextField.text];
+        
         enabled = enabled && self.resolverNameTextField.text.length &&
-                            self.resolverAddressTextField.text.length &&
-                            self.publicKeyTextField.text.length;
+                            validAddress &&
+                            [self isValidResolverKey];
     }
     else {
     
@@ -227,6 +230,15 @@
     }
     
     self.doneButton.enabled = enabled;
+}
+
+- (BOOL) isValidResolverKey {
+    
+    NSString *regex = @"^[0-9,aAbBcCdDeEfF]{4}(:[0-9,aAbBcCdDeEfF]{4}){15}$";
+    
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", regex];
+    
+    return [test evaluateWithObject:self.publicKeyTextField.text];
 }
 
 @end

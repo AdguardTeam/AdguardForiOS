@@ -180,4 +180,9 @@ extern NSString *APVpnChangedNotification;
  */
 - (void)sendReloadSystemWideDomainLists;
 
+/**
+ Loads active DNS server from deafults. It used by action extension for bug reporting.
+ */
+- (APDnsServerObject*) loadActiveRemoteDnsServer;
+
 @end

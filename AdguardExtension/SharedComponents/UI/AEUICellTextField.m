@@ -24,9 +24,11 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
-    NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:SUBTITLE_TEXT_COLOR}];
-    
-    [self setAttributedPlaceholder:attributed];
+    if(self.placeholder) {
+        NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:SUBTITLE_TEXT_COLOR}];
+        
+        [self setAttributedPlaceholder:attributed];
+    }
     
     return self;
 }

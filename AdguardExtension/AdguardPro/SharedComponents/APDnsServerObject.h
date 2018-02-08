@@ -25,6 +25,16 @@
  */
 extern NSString * _Nonnull APDnsServerTagLocal;
 
+/**
+ Adguard dns uuid
+ */
+extern NSString * _Nonnull APDnsServerUUIDAdguard;
+
+/**
+ Adguard family dns uuid
+ */
+extern NSString * _Nonnull APDnsServerUUIDAdguardFamily;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsServerObject
 
@@ -69,6 +79,11 @@ extern NSString * _Nonnull APDnsServerTagLocal;
  Field, which may contain special labels about server, for example APDnsServerTagLocal.
  */
 @property (nullable) NSString *tag;
+
+/**
+ Field, which contains unique id
+ */
+@property (nullable, readonly) NSString *uuid;
 
 @property (nonatomic, nullable) NSNumber* isDnsCrypt;
 

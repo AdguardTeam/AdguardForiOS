@@ -1558,23 +1558,24 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 || [filter.filterId isEqual:@(ASDF_SPYWARE_FILTER_ID)]   // Privacy Protection Filter
                 || [filter.filterId isEqual:@(ASDF_SOC_NETWORKS_FILTER_ID)] // Social networks filter identifier
                 || [filter.filterId isEqual:@(ASDF_MOBILE_SAFARI_FILTER_ID)] // Mobile Safari FIlter
+                || [filter.filterId isEqual:@(MOBILE_ADS_FILTER_ID)] // Mobile ads filter
 #ifdef PRO
                 || [filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)] // Simplified domain names filter
 #endif
                 ) {
 
 #ifdef PRO
-                //Special case for Simplified domain names filter. We prevent deleting of this filter.
-                //https://github.com/AdguardTeam/AdguardForiOS/issues/302
-                if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
-                    filter.removable = @(NO);
-                    filter.editable = @(NO);
-                    filter.enabled = @(NO);
-                }
+                    //Special case for Simplified domain names filter. We prevent deleting of this filter.
+                    //https://github.com/AdguardTeam/AdguardForiOS/issues/302
+                    if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
+                        filter.removable = @(NO);
+                        filter.editable = @(NO);
+                        filter.enabled = @(NO);
+                    }
 #endif
                 
-                [sFilters addObject:filter];
-            }
+                    [sFilters addObject:filter];
+                }
         
         if (!sFilters)
             return NO;

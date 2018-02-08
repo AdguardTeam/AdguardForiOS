@@ -28,6 +28,7 @@
 #ifdef PRO
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
+#import "APBlockingSubscriptionsManager.h"
 #endif
 
 
@@ -216,6 +217,23 @@ static AESSupport *singletonSupport;
         if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
             
             [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
+            
+            [sb appendFormat:@"\r\nDnsCrypt: %@", APVPNManager.singleton.activeRemoteDnsServer.isDnsCrypt];
+        }
+        
+        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptions;
+        
+        if(subscriptions.count) {
+            [sb appendFormat:@"\r\n\r\nSystem wide blocking subscriptions: "];
+            
+            for(APBlockingSubscription* subscription in subscriptions) {
+                
+                NSString* updateDate = [NSDateFormatter
+                                        localizedStringFromDate: subscription.updateDate
+                                        dateStyle: NSDateFormatterShortStyle
+                                        timeStyle: NSDateFormatterShortStyle];
+                [sb appendFormat:@"\r\nname: %@ url: %@ last update: %@", subscription.name, subscription.url, updateDate];
+            }
         }
 #endif
         return sb;

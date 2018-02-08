@@ -717,6 +717,10 @@
 		D04B97E41F601E9A00CE2E03 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97DF1F601D3100CE2E03 /* MGSwipeButton.m */; };
 		D04B97E51F6022ED00CE2E03 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */; };
 		D04B97E61F6022EE00CE2E03 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */; };
+		D04D1B7B201F3F0900D53073 /* APBlockingSubscriptionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */; };
+		D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
+		D04D1B7D201F3F3700D53073 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */; };
+		D04D1B7E201F3F4900D53073 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
 		D05747B71F7E6E26009162FF /* AEUISelectableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */; };
 		D05747B81F7E709D009162FF /* AEUISelectableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */; };
 		D05CA8661F3B5E9A006DFD7F /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
@@ -5585,12 +5589,15 @@
 				655B4E2E1E2E458A00894C06 /* APDnsServerObject.m in Sources */,
 				6518BD871DABBE6D00FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				6598870B1CF83580003ECD1C /* ABECFilter.m in Sources */,
+				D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */,
 				6598870C1CF83580003ECD1C /* AEAUIMainController.m in Sources */,
 				D0B038431FB4966200A5EA3F /* APDnsCryptParser.m in Sources */,
 				6598870D1CF83580003ECD1C /* NSString+Utils.m in Sources */,
 				6598870E1CF83580003ECD1C /* AEAUIDomainCell.m in Sources */,
+				D04D1B7D201F3F3700D53073 /* APBlockingSubscription.m in Sources */,
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
 				D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
+				D04D1B7E201F3F4900D53073 /* AERDomainFilterRule.m in Sources */,
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */,
@@ -5602,6 +5609,7 @@
 				658E439C1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				6518BD891DABBEBB00FDD1F3 /* APSharedResources.m in Sources */,
 				659887171CF83580003ECD1C /* AEUILoadingModalController.m in Sources */,
+				D04D1B7B201F3F0900D53073 /* APBlockingSubscriptionsManager.m in Sources */,
 				659887181CF83580003ECD1C /* NSException+Utils.m in Sources */,
 				659887191CF83580003ECD1C /* DDMultiFormatter.m in Sources */,
 				6598871A1CF83580003ECD1C /* ADProductInfo.m in Sources */,

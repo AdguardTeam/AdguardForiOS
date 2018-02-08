@@ -231,65 +231,9 @@
     [[AESharedResources sharedDefaults] setBool:[sender isOn] forKey:AEDefaultsAdguardEnabled];
 }
 
-- (IBAction)clickTwitter:(id)sender {
-
-    SLComposeViewController *compose = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    if (compose) {
-        
-        [compose setInitialText:NSLocalizedString(@"I like Adguard for iOS - I don't see ads in Safari anymore.", @"(AEUIMainController) Share this app initial text on Twitter")];
-        [compose addURL:[NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_STRING]]];
-        [compose addImage:[UIImage imageNamed:@"share-logo"]];
-        [self presentViewController:compose animated:YES completion:nil];
-    }
-}
-
-- (IBAction)clickFacebook:(id)sender {
-    
-    SLComposeViewController *compose = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    if (compose) {
-        
-        BOOL result = [compose setInitialText:[NSString stringWithFormat:@"%@\n", NSLocalizedString(@"I've just installed Adguard ad blocker. If you want to surf the web ad-free as I do, check it out:", @"(AEUIMainController) Share this app initial text on Facebook")]];
-        
-        DDLogInfo(@"(AEUIMainController) Facebook initial text installed: %@", (result ? @"YES" : @"NO"));
-        
-        [compose addURL:[NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_STRING]]];
-        [compose addImage:[UIImage imageNamed:@"share-logo"]];
-        [self presentViewController:compose animated:YES completion:nil];
-    }
-}
-
-- (IBAction)clickMessage:(id)sender {
-    
-    if ([MFMessageComposeViewController canSendText]) {
-        MFMessageComposeViewController *compose = [MFMessageComposeViewController new];
-        NSString *body = [NSString stringWithFormat:@"%@\n%@\n",
-                          NSLocalizedString(@"I've just installed Adguard AdBlocker for iOS.", @"(AEUIMainController) Share this app initial text on iMessage (text row)"),
-        NSLocalizedString(@"If you want to surf the web ad-free as I do, check it out:", @"(AEUIMainController) Share this app initial text on iMessage (before link row)")];
-        body = [body stringByAppendingFormat:SHARE_APP_URL_STRING];
-        compose.body = body;
-        compose.messageComposeDelegate = self;
-        [self presentViewController:compose animated:YES completion:nil];
-    }
-}
-
-- (IBAction)clickMail:(id)sender {
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *compose = [MFMailComposeViewController new];
-        NSString *body = [NSString stringWithFormat:@"%@\n%@\n",
-                          NSLocalizedString(@"I've just installed Adguard AdBlocker for iOS.", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
-                          NSLocalizedString(@"If you want to surf the web ad-free as I do, check it out:", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
-        body = [body stringByAppendingFormat:SHARE_APP_URL_STRING];
-        [compose setMessageBody:body isHTML:NO];
-        [compose setSubject:NSLocalizedString(@"Check this out!", @"(AEUIMainController) Share this app initial text on Mail Subject")];
-        compose.mailComposeDelegate = self;
-        
-        [self presentViewController:compose animated:YES completion:nil];
-    }
-}
-
 - (IBAction)clickViewOnGitHub:(id)sender {
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB] options:@{} completionHandler:nil];
 }
 
 - (IBAction)clickCheckForUpdates:(id)sender {
@@ -302,7 +246,26 @@
     NSURL *theURL =
     [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
                           ITUNES_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL];
+    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+}
+
+- (IBAction)clickShare:(id)sender {
+    
+    NSString *message = [NSString stringWithFormat:@"%@\n%@\n",
+                                          NSLocalizedString(@"I've just installed Adguard AdBlocker for iOS.", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
+                                          NSLocalizedString(@"If you want to surf the web ad-free as I do, check it out:", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
+    message = [message stringByAppendingFormat:SHARE_APP_URL_STRING];
+    
+    NSArray *items = @[message, [UIImage imageNamed:@"share-logo"]];
+    
+    UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+    controller.modalPresentationStyle = UIModalPresentationPopover;
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
+    UIPopoverPresentationController *popController = [controller popoverPresentationController];
+    popController.sourceView = self.shareCell;
+    popController.sourceRect = self.shareCell.bounds;
 }
 
 - (IBAction)clickSendBugReport:(id)sender {
@@ -313,7 +276,7 @@
     NSURL *theURL =
     [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
                           ITUNES_PRO_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL];
+    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
 }
 
 #ifdef PRO
@@ -462,25 +425,6 @@
         //------------
     }
 
-    BOOL enabled = NO;
-    
-    BOOL result = [SLComposeViewController
-        isAvailableForServiceType:SLServiceTypeFacebook];
-    enabled |= result;
-    self.facebookButton.hidden = !result;
-    
-    enabled |= result = [SLComposeViewController
-        isAvailableForServiceType:SLServiceTypeTwitter];
-    self.twitterButton.hidden = !result;
-    
-    enabled |= result = [MFMessageComposeViewController canSendText];
-    self.messageButton.hidden = !result;
-    [self.messageButton invalidateIntrinsicContentSize];
-
-    enabled |= result = [MFMailComposeViewController canSendMail];
-    self.mailButton.hidden = !result;
-
-    [self cell:self.shareCell setHidden:!enabled];
     [self reloadDataAnimated:YES];
 }
 

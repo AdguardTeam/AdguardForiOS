@@ -59,6 +59,8 @@
     self.searchController.searchBar.backgroundColor = [UIColor blackColor];
     self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
     
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
+    
     UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
     searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
     searchField.tintColor = searchField.textColor = UIColor.lightGrayColor;

@@ -20,11 +20,19 @@
 #import "APNewBlockingSubscriptionController.h"
 #import "ACNUrlUtils.h"
 #import "APPredefinedBlockingSubscriptionsController.h"
+#import "AEUICommons.h"
+#import "APUIProSectionFooter.h"
 
-@interface APNewBlockingSubscriptionController ()
+#define FOOTER_TEXT_MARGIN 10
+
+@interface APNewBlockingSubscriptionController () {
+    NSAttributedString* _footerString;
+}
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextField *urlLabel;
+
+@property (strong, nonatomic) APUIProSectionFooter * footer;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
@@ -82,6 +90,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark UITableView methods
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if (section == 0)
+        return [self sectionFooter];
+    
+    return nil;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    if (section == 0)
+        return [self sectionFooter].height;
+    
+    return 0;
+}
+
+
 #pragma mark private methods
 
 - (void) updateDone {
@@ -94,6 +122,43 @@
     self.nameLabel.text = self.subscription.name;
     self.descriptionLabel.text = self.subscription.subscriptionDescription;
     self.urlLabel.text = self.subscription.url;
+}
+
+- (APUIProSectionFooter*) sectionFooter {
+    
+    if(!self.footer) {
+        
+        self.footer = [[APUIProSectionFooter alloc] initWithFrame:self.view.frame];
+        [self.footer setText:[self footerString]];
+        
+        ASSIGN_WEAK(self);
+        self.footer.urlClickBlock = ^BOOL(NSURL *url) {
+            
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self) performSegueWithIdentifier:@"toPredefinedSubscriptions" sender:USE_STRONG(self)];
+            
+            return YES;
+        };
+    }
+    
+    return self.footer;
+}
+
+- (NSAttributedString*) footerString {
+    if(!_footerString) {
+        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Filter subscriptions are lists of filtering rules combined together. Usually each filter subscription serves some particular purpose like blocking language-specific ads, blocking trackers etc. Here you can find examples of such filter subscriptions.", @"(APBlockingListsController) blocking subscriptions footer text. Also you need to define clickable part of this string - \"Here\"")];
+        
+        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"Here", @"(APNewBlockingSubscriptionController) Clockable part of blocking subscriptions footer text")];
+        
+        [string addAttributes:@{NSForegroundColorAttributeName : UIColor.blueColor,
+                                            NSLinkAttributeName:[NSString stringWithFormat:@"adguardlink://a"]
+                                }
+                        range:clickableRange];
+        
+        _footerString = string.copy;
+    }
+    
+    return _footerString;
 }
 
 @end
