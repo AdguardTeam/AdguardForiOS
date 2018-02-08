@@ -78,7 +78,8 @@
         
         controller.done = ^(UIViewController* _Nonnull sender, APBlockingSubscription * _Nonnull subscription) {
             
-            [AEUILoadingModal.singleton loadingModalShowWithParent:sender message:@"" cancelAction:nil completion:^{
+            NSString *message = NSLocalizedString(@"Loading filter subscription. Please do not turn off AdGuard, this will take no more than 30 seconds.", @"(APBlockingListsController) blocking list loading message");
+            [AEUILoadingModal.singleton loadingModalShowWithParent:sender message:message cancelAction:nil completion:^{
                 
                 [ABECSubscription.singleton downloadSubscription:subscription.url completionBlock:^(NSArray *rules, NSDictionary *hosts) {
                     
