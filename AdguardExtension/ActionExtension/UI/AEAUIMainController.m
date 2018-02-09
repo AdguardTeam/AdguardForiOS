@@ -252,12 +252,13 @@
     
     
     NSMutableString *filtersString = [NSMutableString new];
-    NSArray* filters = [AESAntibanner new].filters;
+    AESAntibanner* antibaner = [AESAntibanner new];
+    NSArray* filterIDs = antibaner.activeFilterIDs;
     
-    for (ASDFilterMetadata *filter in filters) {
+    for (NSNumber *filterId in filterIDs) {
         
-        NSString* format = filter == filters.firstObject ? @"%@" : @".%@";
-        [filtersString appendFormat:format, filter.filterId];
+        NSString* format = filterId == filterIDs.firstObject ? @"%@" : @".%@";
+        [filtersString appendFormat:format, filterId];
     }
     params[REPORT_PARAM_FILTERS] = filtersString.copy;
     
