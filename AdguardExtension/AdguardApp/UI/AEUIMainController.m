@@ -66,6 +66,7 @@
 #define RATE_APP_URL_FORMAT         @"itms-apps://itunes.apple.com/us/app/itunes-u/id%@?action=write-review"
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
+#define OTHER_APPS_URL              @"http://agrd.io/ios_adguard_products"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -172,7 +173,7 @@
     }
     else {
         
-        self.shareCell.separatorInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, CGFLOAT_MAX);
+        //self.shareCell.separatorInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, CGFLOAT_MAX);
         
         for (UIView *view in self.videoCell.subviews){
             
@@ -288,6 +289,12 @@
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
 }
 #endif
+
+- (IBAction)clickOtherApps:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:OTHER_APPS_URL] options:@{} completionHandler:nil];
+}
+
 
 #pragma mark public methods
 
