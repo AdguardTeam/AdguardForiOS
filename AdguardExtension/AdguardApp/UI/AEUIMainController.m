@@ -260,6 +260,7 @@
     
     UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
     controller.modalPresentationStyle = UIModalPresentationPopover;
+    controller.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll];
     
     [self presentViewController:controller animated:YES completion:nil];
     
