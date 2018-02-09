@@ -78,6 +78,7 @@
     [super onMinorUpgrade];
     
     [self installTrackersDomainList];
+    [APVPNManager.singleton removeCustomRemoteServersDuplicates];
 }
 
 /////////////////////////////////////////////////////////////////////
