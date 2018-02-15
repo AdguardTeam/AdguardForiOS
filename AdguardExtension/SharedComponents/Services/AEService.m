@@ -747,56 +747,45 @@ static AEService *singletonService;
     
     DDLogInfo(@"(AEService) Starting notify Safari - reloadContentBlockerWithIdentifier.");
     
-    // Safari Content Blocker Loader is terminated by the system if there is not enough memory.
-    // At the same time, Java Scripto Core consumes a lot of memory and does not release it immediately.
-    // For iPad mini 2, the conversion of 50,000 rules consumes 120 megabytes of memory and frees it in about 3 seconds.
-    // Here we pause to make JSCore free up memory.
-    NSInteger convertedRules = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] integerValue];
-    float timeToFreeMemory = convertedRules > 30000 ? 4.0 : 1.0;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeToFreeMemory * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if (backgroundUpdate) {
         
-        if (backgroundUpdate) {
-            
-            [SFContentBlockerManager
-             reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
-             completionHandler:nil];
-            
-            [self savePermanentlyCountersOfConversion];
-            [self removeTempCountersOfConversion];
-
-            [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:nil];
-        }
-        else{
-            
         [SFContentBlockerManager
          reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
-         completionHandler: ^(NSError * _Nullable error) {
-             
-             DDLogInfo(@"(AEService) Finishing notify Safari - reloadContentBlockerWithIdentifier.");
-             if (error) {
-                 
-                 DDLogError(@"(AEService) Error occured: %@", [error localizedDescription]);
-                 
-                 NSString *errorDescription = NSLocalizedString(@"Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.", @"(AEService) Service errors descriptions");
-                 error =  [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_SAFARI_EXCEPTION userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
-             }
-             else{
-                 
-                 //no errors
-
-                 [self savePermanentlyCountersOfConversion];
-             }
-             
-             [self removeTempCountersOfConversion];
-             
-             DDLogInfo(@"(AEService) Notify Safari fihished.");
-             
-             [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
-         }];
-        }
+         completionHandler:nil];
         
-    });
+        [self savePermanentlyCountersOfConversion];
+        [self removeTempCountersOfConversion];
+
+        [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:nil];
+    }
+    else{
+        
+    [SFContentBlockerManager
+     reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
+     completionHandler: ^(NSError * _Nullable error) {
+         
+         DDLogInfo(@"(AEService) Finishing notify Safari - reloadContentBlockerWithIdentifier.");
+         if (error) {
+             
+             DDLogError(@"(AEService) Error occured: %@", [error localizedDescription]);
+             
+             NSString *errorDescription = NSLocalizedString(@"Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.", @"(AEService) Service errors descriptions");
+             error =  [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_SAFARI_EXCEPTION userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
+         }
+         else{
+             
+             //no errors
+
+             [self savePermanentlyCountersOfConversion];
+         }
+         
+         [self removeTempCountersOfConversion];
+         
+         DDLogInfo(@"(AEService) Notify Safari fihished.");
+         
+         [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:error];
+     }];
+    }
 }
 
 - (void)savePermanentlyCountersOfConversion{

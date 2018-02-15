@@ -39,7 +39,7 @@
 #import "APDnsServerObject.h"
 #endif
 
-#define REPORT_URL @"https://reports.adguard.com/ru/new_issue.html"
+#define REPORT_URL @"https://reports.adguard.com/new_issue.html"
 
 #define REPORT_PARAM_PRODUCT @"product_type"
 #define REPORT_PARAM_VERSION @"product_version"

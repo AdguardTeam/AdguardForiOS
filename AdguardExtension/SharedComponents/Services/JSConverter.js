@@ -1,4 +1,13 @@
 /**
+* The main conversion function that is called from the iOS app
+* 
+* @param {} rules Rules to convert
+* @param {*} limit Max number of rules
+* @param {*} optimize True if we should apply additional optimization
+*/
+var jsonFromFilters = (function () {
+
+    /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
  * Adguard Browser Extension is free software: you can redistribute it and/or modify
@@ -97,24 +106,7 @@ var adguard = (function () { // jshint ignore:line
 
 })();
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * Extension global preferences
+ * Extension global preferences stub
  */
 
 adguard.prefs = (function (adguard) {
@@ -126,22 +118,13 @@ adguard.prefs = (function (adguard) {
 
     return Prefs;
 })(adguard);
+
+/**
+ * Patched: changed the way punycode is exposed, removed AMD/exports
+ */
+
 /*! http://mths.be/punycode v1.3.0 by @mathias */
 ;(function(root) {
-
-	/** Detect free variables */
-	var freeExports = typeof exports == 'object' && exports &&
-		!exports.nodeType && exports;
-	var freeModule = typeof module == 'object' && module &&
-		!module.nodeType && module;
-	var freeGlobal = typeof global == 'object' && global;
-	if (
-		freeGlobal.global === freeGlobal ||
-		freeGlobal.window === freeGlobal ||
-		freeGlobal.self === freeGlobal
-		) {
-		root = freeGlobal;
-	}
 
 	/**
 	 * The `punycode` object.
@@ -625,32 +608,9 @@ adguard.prefs = (function (adguard) {
 		'toUnicode': toUnicode
 	};
 
-	/** Expose `punycode` */
-	// Some AMD build optimizers, like r.js, check for specific condition patterns
-	// like the following:
-	if (typeof exports !== 'undefined') {
-		exports.punycode = punycode;
-	} else if (
-		typeof define == 'function' &&
-		typeof define.amd == 'object' &&
-		define.amd
-		) {
-		define('punycode', function () {
-			return punycode;
-		});
-	} else if (freeExports && freeModule) {
-		if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
-			freeModule.exports = punycode;
-		} else { // in Narwhal or RingoJS v0.7.0-
-			for (key in punycode) {
-				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
-			}
-		}
-	} else { // in Rhino or a web browser
-		root.punycode = punycode;
-	}
-
-}(this));
+    // Changed the way punycode is exposed
+	root.punycode = punycode;
+}(window));
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7677,6 +7637,7 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
 })(adguard.utils, window);
 
 
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -7867,6 +7828,7 @@ adguard.rules = (function () {
     };
 
 })(adguard.rules);
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8009,25 +7971,9 @@ adguard.rules = (function () {
     api.SimpleRegex = SimpleRegex;
 
 })(adguard.rules);
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 /**
- * Browser utils
+ * Browser utils stub
  */
 (function (adguard, api) {
     var Utils = {
@@ -8042,9 +7988,13 @@ adguard.rules = (function () {
     api.browser = Utils;
 
 })(adguard, adguard.utils);
+/**
+ * CSP filter stub
+ */
 
 adguard.rules.CspFilter = adguard.rules.CspFilter || {};
-adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src http: https:; child-src http: https:';/**
+adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src http: https:; child-src http: https:';
+/**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
  * Adguard Browser Extension is free software: you can redistribute it and/or modify
@@ -8299,6 +8249,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.FilterRule = FilterRule;
 
 })(adguard, adguard.rules);
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8364,7 +8315,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
                 rule = new api.UrlFilterRule(ruleText, filterId);
             }
         } catch (ex) {
-            adguard.console.warn("Cannot create rule from filter {0}: {1}, cause {2}", filterId, ruleText, ex);
+            adguard.console.warn("Cannot create rule from filter {0}: {1}, cause {2}", filterId || 0, ruleText, ex);
         }
         return rule;
     };
@@ -8374,6 +8325,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     };
 
 })(adguard, adguard.rules);
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8583,6 +8535,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.CssFilterRule = CssFilterRule;
 
 })(adguard, adguard.rules);
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -8647,6 +8600,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.ScriptFilterRule = ScriptFilterRule;
 
 })(adguard, adguard.rules);
+
 
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
@@ -9747,6 +9701,7 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.UrlFilterRule = UrlFilterRule;
 
 })(adguard, adguard.rules);
+
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -9765,22 +9720,40 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
  */
 
 /**
- * Safari content blocking format rules converter.
+ * Converts URLs in the AdGuard format to the format supported by Safari
+ * https://webkit.org/blog/3476/content-blockers-first-look/
  */
-var CONVERTER_VERSION = '1.3.34';
-// Max number of CSS selectors per rule (look at compactCssRules function)
-var MAX_SELECTORS_PER_WIDE_RULE = 250;
-var ANY_URL_TEMPLATES = ['||*', '', '*', '|*'];
-var URL_FILTER_ANY_URL = ".*";
-var URL_FILTER_WS_ANY_URL = "^wss?://.*";
-// Improved regular expression instead of UrlFilterRule.REGEXP_START_URL
-var URL_FILTER_REGEXP_START_URL = "^[htpsw]+://([^/]*\\.)?";
-// Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp)
-var URL_FILTER_REGEXP_SEPARATOR = "[/:&?]?";
+var SafariContentBlockerConverter = (function () {
 
-var SafariContentBlockerConverter = (function() {
+    /**
+     * Safari content blocking format rules converter.
+     */
+    var CONVERTER_VERSION = '2.0.0';
+    // Max number of CSS selectors per rule (look at compactCssRules function)
+    var MAX_SELECTORS_PER_WIDE_RULE = 250;
 
-    var AGRuleConverter = (function() {
+    /**
+     * It's important to mention why do we need these regular expression.
+     * The thing is that on iOS it is crucial to use regexes as simple as possible.
+     * Otherwise, Safari takes too much memory on compiling a content blocker, and iOS simply kills the process.
+     * 
+     * Angry users are here:
+     * https://github.com/AdguardTeam/AdguardForiOS/issues/550
+     */
+
+    var ANY_URL_TEMPLATES = ['||*', '', '*', '|*'];
+    var URL_FILTER_ANY_URL = "^[htpsw]+:\\/\\/";
+    var URL_FILTER_WS_ANY_URL = "^wss?:\\/\\/";
+    /** 
+     * Improved regular expression instead of UrlFilterRule.REGEXP_START_URL (||)
+     * Please note, that this regular expression matches only ONE level of subdomains
+     * Using ([a-z0-9-.]+\\.)? instead increases memory usage by 10Mb
+     */
+    var URL_FILTER_REGEXP_START_URL = URL_FILTER_ANY_URL + "([a-z0-9-]+\\.)?";
+    /** Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp) */
+    var URL_FILTER_REGEXP_SEPARATOR = "[/:&?]?";
+
+    var AGRuleConverter = (function () {
 
         var parseDomains = function (rule, included, excluded) {
             var domain, domains, iDomains;
@@ -9933,8 +9906,15 @@ var SafariContentBlockerConverter = (function() {
             //TODO: Add restricted content types?
         };
 
+        /**
+         * Creates a regular expression that will be used in the trigger["url-filter"].
+         * This method transforms
+         * 
+         * @param {*} filter UrlFilterRule object
+         */
         var createUrlFilterString = function (filter) {
-            if (ANY_URL_TEMPLATES.indexOf(filter.getUrlRuleText()) >= 0) {
+            var urlRuleText = filter.getUrlRuleText();
+            if (ANY_URL_TEMPLATES.indexOf(urlRuleText) >= 0) {
                 if (adguard.rules.UrlFilterRule.contentTypes.WEBSOCKET === filter.permittedContentType) {
                     return URL_FILTER_WS_ANY_URL;
                 }
@@ -9946,12 +9926,13 @@ var SafariContentBlockerConverter = (function() {
             }
 
             var urlRegExpSource = filter.getUrlRegExpSource();
-            if (urlRegExpSource) {
-                return urlRegExpSource;
+
+            if (!urlRegExpSource) {
+                // Rule with empty regexp
+                return URL_FILTER_ANY_URL;
             }
 
-            // Rule with empty regexp
-            return URL_FILTER_ANY_URL;
+            return urlRegExpSource;
         };
 
         var parseRuleDomain = function (ruleText) {
@@ -10152,10 +10133,6 @@ var SafariContentBlockerConverter = (function() {
 
             var urlFilter = createUrlFilterString(rule);
 
-            // Redefine some of regular expressions
-            urlFilter = adguard.utils.strings.replaceAll(urlFilter, adguard.rules.SimpleRegex.regexConfiguration.regexStartUrl, URL_FILTER_REGEXP_START_URL);
-            urlFilter = adguard.utils.strings.replaceAll(urlFilter, adguard.rules.SimpleRegex.regexConfiguration.regexSeparator, URL_FILTER_REGEXP_SEPARATOR);
-
             validateRegExp(urlFilter);
 
             var result = {
@@ -10232,9 +10209,9 @@ var SafariContentBlockerConverter = (function() {
      */
     var parseAGRule = function (ruleText, errors) {
         try {
-            if (ruleText === null || 
+            if (ruleText === null ||
                 ruleText === '' ||
-                ruleText.indexOf('!') === 0 || 
+                ruleText.indexOf('!') === 0 ||
                 ruleText.indexOf(' ') === 0 ||
                 ruleText.indexOf(' - ') > 0) {
                 return null;
@@ -10683,29 +10660,51 @@ var SafariContentBlockerConverter = (function() {
     var convertArray = function (rules, limit, optimize) {
         printVersionMessage();
 
-        if (rules === null) {
-            adguard.console.error('Invalid argument rules');
-            return null;
-        }
+        // Temporarily change the configuration in order to generate more effective regular expressions
+        var regexConfiguration = adguard.rules.SimpleRegex.regexConfiguration;
+        var prevRegexStartUrl = regexConfiguration.regexStartUrl;
+        var prevRegexSeparator = regexConfiguration.regexSeparator;
 
-        if (rules.length === 0) {
-            adguard.console.info('No rules presented for convertation');
-            return null;
-        }
+        try {
+            regexConfiguration.regexStartUrl = URL_FILTER_REGEXP_START_URL;
+            regexConfiguration.regexSeparator = URL_FILTER_REGEXP_SEPARATOR;
 
-        var contentBlocker = convertLines(rules, !!optimize);
-        return createConversionResult(contentBlocker, limit);
-    }
+            if (rules === null) {
+                adguard.console.error('Invalid argument rules');
+                return null;
+            }
+
+            if (rules.length === 0) {
+                adguard.console.info('No rules presented for convertation');
+                return null;
+            }
+
+            var contentBlocker = convertLines(rules, !!optimize);
+            return createConversionResult(contentBlocker, limit);
+        } finally {
+            // Restore the regex configuration
+            regexConfiguration.regexStartUrl = prevRegexStartUrl;
+            regexConfiguration.regexSeparator = prevRegexSeparator;
+        }
+    };
 
     // Expose SafariContentBlockerConverter API
     return {
         convertArray: convertArray
     }
 })();
-function jsonFromFilters(rules, limit, optimize){
-    try {
-        return SafariContentBlockerConverter.convertArray(rules, limit, optimize);
-    } catch (ex) {
-        console.log('Unexpected error: ' + ex);
-    }
-};
+
+
+    return function (rules, limit, optimize) {
+        try {
+            return SafariContentBlockerConverter.convertArray(rules, limit, optimize);
+        } catch (ex) {
+            console.log('Unexpected error: ' + ex);
+        }
+    };
+})();
+
+// expose to node
+if (module && module.exports) {
+    module.exports.jsonFromFilters = jsonFromFilters;
+}
