@@ -1163,5 +1163,14 @@ static APVPNManager *singletonVPNManager;
     return nil;
 }
 
+- (void)removeCustomRemoteServersDuplicates {
+    
+    NSArray* predefinedUUIDs = [APVPNManager.predefinedDnsServers valueForKeyPath:@"uuid"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"!(uuid in %@)", predefinedUUIDs];
+    [_customRemoteDnsServers filterUsingPredicate:predicate];
+    [self saveCustomRemoteDnsServersToDefaults];
+    _remoteDnsServers = [APVPNManager.predefinedDnsServers arrayByAddingObjectsFromArray:_customRemoteDnsServers];
+}
+
 @end
 

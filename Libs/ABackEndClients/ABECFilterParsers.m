@@ -35,6 +35,11 @@
     if ([key isEqualToString:@"timeUpdated"]) {
         self.updateDateString = [self dateStringConvertFrom:value];
         self.updateDate = [NSDate dateWithISO8601String:self.updateDateString];
+        if (! self.updateDate) {
+            // If can't convert, set update date to current datetime
+            self.updateDate = [NSDate date];
+            self.updateDateString = [[NSDate date] iso8601String];
+        }
         
         // last_check_time creating
         self.checkDate = [NSDate date];

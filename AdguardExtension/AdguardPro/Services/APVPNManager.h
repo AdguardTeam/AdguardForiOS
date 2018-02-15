@@ -185,4 +185,10 @@ extern NSString *APVpnChangedNotification;
  */
 - (APDnsServerObject*) loadActiveRemoteDnsServer;
 
+/**
+ Removes duplicates of predefined servers from the list of custom servers.
+ https://github.com/AdguardTeam/AdguardForiOS/issues/639
+ */
+- (void) removeCustomRemoteServersDuplicates;
+
 @end
