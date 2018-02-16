@@ -469,6 +469,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Clear Selected", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
 
             UIBarButtonItem *itemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(editDoneClick:)];
+            
+            itemLeft.tintColor = itemRight.tintColor = self.view.tintColor;
 
             UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 

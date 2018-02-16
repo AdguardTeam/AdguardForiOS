@@ -2434,6 +2434,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <color key="separatorColor" red="0.71764705880000002" green="0.71764705880000002" blue="0.71764705880000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                         <prototypes>
