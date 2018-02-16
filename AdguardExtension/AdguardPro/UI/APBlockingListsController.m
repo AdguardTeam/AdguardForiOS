@@ -404,10 +404,11 @@
         ++row;
     }
     
-    self.checkUpdatesCell.detailTextLabel.text = [NSDateFormatter
-                                                  localizedStringFromDate: [NSDate dateWithTimeIntervalSince1970: minUpdateTimestamp]
-                                                  dateStyle: NSDateFormatterShortStyle
-                                                  timeStyle: NSDateFormatterShortStyle];
+    NSDate *checkDate = [NSDate dateWithTimeIntervalSince1970: minUpdateTimestamp];
+    
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:checkDate];
+    
+    self.checkUpdatesCell.detailTextLabel.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle: today ? NSDateFormatterNoStyle : NSDateFormatterShortStyle timeStyle: today ? NSDateFormatterShortStyle : NSDateFormatterNoStyle];
     
     [self reloadDataAnimated:NO];
 }

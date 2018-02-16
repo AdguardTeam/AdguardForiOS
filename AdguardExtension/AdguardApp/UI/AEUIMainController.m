@@ -427,7 +427,10 @@
 
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
-        self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        
+        BOOL today = [[NSCalendar currentCalendar] isDateInToday:checkDate];
+        
+        self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle: today ? NSDateFormatterNoStyle : NSDateFormatterShortStyle timeStyle: today ? NSDateFormatterShortStyle : NSDateFormatterNoStyle];
         // tunning accessibility
         self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
         //------------
