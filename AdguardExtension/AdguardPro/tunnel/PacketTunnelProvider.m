@@ -656,7 +656,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
         
         @autoreleasepool {
-            NSDictionary *domainList = APSharedResources.trackerslistDomains;
+            NSDictionary *domainList = [APSharedResources loadTrackerslistDomainsAndCacheResult:NO];
             __block NSUInteger counter = 0;
             [domainList enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 NSString* domain = key;

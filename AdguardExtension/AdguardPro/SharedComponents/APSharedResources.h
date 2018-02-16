@@ -62,17 +62,28 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
  */
 @property (class) NSArray <NSString *> *blacklistDomains;
 /**
- list of trackers domains at the system-wide level
+ save list of trackers domains at the system-wide level
  */
-@property (class) NSDictionary <NSString *, ABECService*> *trackerslistDomains;
++ (void) saveTrackerslistDomains: (NSDictionary <NSString *, ABECService*> *) trackerslistDomains;
+/**
+ load list of trackers domains at the system-wide level
+ */
++ (NSDictionary <NSString *, ABECService*> *) loadTrackerslistDomainsAndCacheResult:(BOOL) cacheResult;
+/**
+ service search by domain name
+ */
++ (ABECService *)serviceByDomain:(NSString*) domain;
 
 /**
  list of hosts (domain with ip) at the system-wide level
  */
 @property (class) NSDictionary <NSString *, NSString*> *hosts;
 
+
 + (NSString*)pathForSubscriptionsData;
 + (NSString*)pathForSubscriptionsMeta;
 + (NSString*)pathForSubscriptionsHosts;
 + (NSString *)pathForSubscriptionsRules;
+
+
 @end

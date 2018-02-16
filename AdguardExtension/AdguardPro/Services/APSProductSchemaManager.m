@@ -125,7 +125,7 @@
     ABECServicesParser* parser = [ABECServicesParser new];
     [parser parseData:data];
     
-    APSharedResources.trackerslistDomains = parser.hosts;
+    [APSharedResources saveTrackerslistDomains: parser.hosts];
     
     return YES;
 }

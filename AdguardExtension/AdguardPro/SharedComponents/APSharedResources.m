@@ -71,6 +71,7 @@
 static NSString *_dnsLogRecordsPath;
 static FMDatabaseQueue *_readDnsLogHandler;
 static FMDatabaseQueue *_writeDnsLogHandler;
+static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 
 + (void)initialize{
     
@@ -104,14 +105,47 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     [self setDomainsList:blacklistDomains forName:APS_BLACKLIST_DOAMINS];
 }
 
-+(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
++(NSDictionary<NSString *,ABECService *> *)loadTrackerslistDomainsAndCacheResult:(BOOL)cacheResult {
     
-    return [self domainsListWithName:APS_TRACKERS_DOMAINS];
+    NSDictionary* result = _trackerslistDomains;
+    
+    if(!result){
+        result = [self domainsListWithName:APS_TRACKERS_DOMAINS];
+        
+        if(cacheResult)
+            _trackerslistDomains = result;
+    }
+    
+    return result;
 }
 
-+(void)setTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
++(void)saveTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
     
+    _trackerslistDomains = trackerslistDomains;
     [self setDomainsList:trackerslistDomains forName:APS_TRACKERS_DOMAINS];
+}
+
++ (ABECService *)serviceByDomain:(NSString*) domain {
+    
+    NSDictionary<NSString*, ABECService*>* hosts = [self loadTrackerslistDomainsAndCacheResult:YES];
+    
+    //fullmatch
+    __block ABECService *service = hosts[domain];
+    
+    // mask search
+    if(!service) {
+        
+        [hosts enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, ABECService * _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            if([domain hasSuffix:key]) {
+                
+                service = obj;
+                *stop = YES;
+            }
+        }];
+    }
+    
+    return service;
 }
 
 + (NSDictionary<NSString *,NSString *> *)hosts {
