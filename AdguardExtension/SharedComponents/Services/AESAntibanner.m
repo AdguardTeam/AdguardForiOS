@@ -1574,9 +1574,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         // Get suitable filters.
         NSMutableArray *sFilters = [NSMutableArray arrayWithCapacity:4];
-        NSString *langString = [NSString stringWithFormat:@"%@|%@|%@", ADL_DEFAULT_LANG, [ADLocales lang], [ADLocales region]];
+        NSString *langString = [NSString stringWithFormat:@"%@|%@", [ADLocales lang], [ADLocales region]];
         for (ASDFilterMetadata *filter in filters)
-            if ([langString containsAny:filter.langs]                   // Filters for user language and english
+            if ([langString containsAny:filter.langs]                   // Filters for user language
+                || [filter.filterId isEqual:@(ASDF_ENGLISH_FILTER_ID)]   // Base Filter
                 || [filter.filterId isEqual:@(ASDF_SPYWARE_FILTER_ID)]   // Privacy Protection Filter
                 || [filter.filterId isEqual:@(ASDF_SOC_NETWORKS_FILTER_ID)] // Social networks filter identifier
                 || [filter.filterId isEqual:@(ASDF_MOBILE_SAFARI_FILTER_ID)] // Mobile Safari FIlter
