@@ -683,7 +683,7 @@
     if (section == PRO_SECTION_INDEX) {
         
         APUIProSectionFooter *footer = [self proSectionFooter];
-        return footer.height;
+        return [footer heightForWidth:self.view.frame.size.width];
     }
     
     return [super tableView:tableView heightForFooterInSection:section];

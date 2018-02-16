@@ -318,7 +318,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     if(section == SUBSCRIPTIONS_SECTION) {
-        return [self sectionFooter].height;
+        return [[self sectionFooter] heightForWidth:self.view.frame.size.width];
     }
     
     return [super tableView:tableView heightForFooterInSection:section];

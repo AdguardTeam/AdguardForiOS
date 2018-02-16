@@ -20,7 +20,7 @@
 
 @interface APUIProSectionFooter : UITableViewHeaderFooterView<UITextViewDelegate>
 
-@property (readonly) CGFloat height;
+-(CGFloat) heightForWidth:(CGFloat) width;
 @property NSAttributedString *text;
 @property (nonatomic, copy, nullable) BOOL (^urlClickBlock)(NSURL* url);
 
