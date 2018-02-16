@@ -62,7 +62,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="HEE-In-H4Y" userLabel="Name">
-                                <string key="footerTitle">This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads.</string>
+                                <string key="footerTitle">This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in AdGuard's ignoring the website and displaying all ads.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" shouldIndentWhileEditing="NO" textLabel="kJV-yk-6d6" style="IBUITableViewCellStyleDefault" id="3El-61-LPL">
                                         <rect key="frame" x="0.0" y="115" width="375" height="44"/>
@@ -82,7 +82,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.080000000000000002" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
-                                            <string key="hint">This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in ignoring the website by Adguard and displaying all the ads.</string>
+                                            <string key="hint">This switch lets you choose between filtering the website and excluding it from filtering. Adding a website to exceptions results in AdGuard's ignoring the website and displaying all ads.</string>
                                             <accessibilityTraits key="traits" none="YES"/>
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
