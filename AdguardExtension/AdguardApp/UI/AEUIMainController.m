@@ -421,10 +421,7 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Notification
-/////////////////////////////////////////////////////////////////////
-
-- (void)refreshDynamicObjects:(NSNotification *)notification {
-
+- (void)refreshCheckDate {
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
         
@@ -435,6 +432,13 @@
         self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
         //------------
     }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void)refreshDynamicObjects:(NSNotification *)notification {
+
+    [self refreshCheckDate];
 
     [self reloadDataAnimated:YES];
 }
@@ -565,18 +569,8 @@
                                                 @"- Check Filter Updates");
                         }
 
-                        NSDate *checkDate = [[AESharedResources sharedDefaults]
-                          objectForKey:AEDefaultsCheckFiltersLastDate];
-                        if (checkDate) {
-                          self.lastUpdated.text = [NSDateFormatter
-                              localizedStringFromDate:checkDate
-                                            dateStyle:NSDateFormatterShortStyle
-                                            timeStyle:
-                                                NSDateFormatterShortStyle];
-                          // tunning accessibility
-                          self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
-                          //-------
-                        }
+                        [self refreshCheckDate];
+                        
                     });
 
                     dispatch_after(
