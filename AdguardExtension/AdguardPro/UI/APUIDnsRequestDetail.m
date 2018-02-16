@@ -122,13 +122,13 @@ static NSDateFormatter *_timeFormatter;
             
             NSString* domain = self.logRecord.requests[0].name;
             
+            NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
+            
             APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
-            if(subscription) {
-                statusText = [NSString stringWithFormat:@"Blocked by subscription: %@", subscription.name];
-            }
-            else {
-                statusText = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
-            }
+            
+            NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
+            
+            statusText = [NSString stringWithFormat:format, name];
             
             self.statusCell.detailTextLabel.text = statusText;
         }
