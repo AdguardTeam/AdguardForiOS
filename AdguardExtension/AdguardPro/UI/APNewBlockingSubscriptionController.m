@@ -150,8 +150,9 @@
         
         NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"Here", @"(APNewBlockingSubscriptionController) Clockable part of blocking subscriptions footer text")];
         
-        [string addAttributes:@{NSForegroundColorAttributeName : UIColor.blueColor,
-                                            NSLinkAttributeName:[NSString stringWithFormat:@"adguardlink://a"]
+        [string addAttributes:@{ NSForegroundColorAttributeName : UIColor.blueColor,
+                                  NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle),
+                                            NSLinkAttributeName : [NSString stringWithFormat:@"adguardlink://info"]
                                 }
                         range:clickableRange];
         
