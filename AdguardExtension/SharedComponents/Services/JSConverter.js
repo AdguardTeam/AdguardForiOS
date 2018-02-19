@@ -1,4 +1,10 @@
 /**
+ * AdGuard -> Safari Content Blocker converter
+ * Version 2.0.3
+ * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
+ */
+
+/**
 * The main conversion function that is called from the iOS app
 * 
 * @param {} rules Rules to convert
@@ -7,23 +13,10 @@
 */
 var jsonFromFilters = (function () {
 
-    /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Start of the dependencies content 
  */
-
+/** start of adguard.js */
 /**
  * Global adguard object
  */
@@ -105,10 +98,8 @@ var adguard = (function () { // jshint ignore:line
     };
 
 })();
-/**
- * Extension global preferences stub
- */
-
+/** end of adguard.js */
+/** start of prefs.js */
 adguard.prefs = (function (adguard) {
     var Prefs = {
         speedupStartup: function () {
@@ -118,11 +109,8 @@ adguard.prefs = (function (adguard) {
 
     return Prefs;
 })(adguard);
-
-/**
- * Patched: changed the way punycode is exposed, removed AMD/exports
- */
-
+/** end of prefs.js */
+/** start of punycode.js */
 /*! http://mths.be/punycode v1.3.0 by @mathias */
 ;(function(root) {
 
@@ -611,23 +599,8 @@ adguard.prefs = (function (adguard) {
     // Changed the way punycode is exposed
 	root.punycode = punycode;
 }(window));
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of punycode.js */
+/** start of common.js */
 /**
  * Request types enumeration
  */
@@ -670,6 +643,7 @@ adguard.utils = (function () {
         browser: null, // BrowserUtils
         filters: null, // FilterUtils,
         workaround: null, // WorkaroundUtils
+        i18n: null, // I18nUtils
         StopWatch: null,
         Promise: null // Deferred,
     };
@@ -1253,6 +1227,61 @@ adguard.utils = (function () {
 })(adguard.utils);
 
 /**
+ * Simple i18n utils
+ */
+(function (api) {
+
+    function isArrayElement(array, elem) {
+        return array.indexOf(elem) >= 0;
+    }
+
+    function isObjectKey(object, key) {
+        return key in object;
+    }
+
+    api.i18n = {
+
+        /**
+         * Tries to find locale in the given collection of locales
+         * @param locales Collection of locales (array or object)
+         * @param locale Locale (e.g. en, en_GB, pt_BR)
+         * @returns matched locale from the locales collection or null
+         */
+        normalize: function (locales, locale) {
+
+            if (!locale) {
+                return null;
+            }
+
+            // Transform Language-Country => Language_Country
+            locale = locale.replace("-", "_");
+
+            var search;
+
+            if (api.collections.isArray(locales)) {
+                search = isArrayElement;
+            } else {
+                search = isObjectKey;
+            }
+
+            if (search(locales, locale)) {
+                return locale;
+            }
+
+            // Try to search by the language
+            var parts = locale.split('_');
+            var language = parts[0];
+            if (search(locales, language)) {
+                return language;
+            }
+
+            return null;
+        }
+    };
+
+})(adguard.utils);
+
+/**
  * Unload handler. When extension is unload then 'fireUnload' is invoked.
  * You can add own handler with method 'when'
  * @type {{when, fireUnload}}
@@ -1399,23 +1428,8 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
     };
 
 };
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of common.js */
+/** start of url.js */
 (function (api, global) {
 
     /**
@@ -7635,26 +7649,8 @@ adguard.utils.RingBuffer = function (size) { // jshint ignore:line
     api.url = UrlUtils;
 
 })(adguard.utils, window);
-
-
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of url.js */
+/** start of log.js */
 /**
  * Simple logger with log levels
  */
@@ -7732,23 +7728,8 @@ adguard.console = (function () {
         }
     };
 })();
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of log.js */
+/** start of rules.js */
 /**
  * Namespace for adguard rules classes and utils
  */
@@ -7759,23 +7740,8 @@ adguard.rules = (function () {
     return {};
 
 })();
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of rules.js */
+/** start of local-script-rules.js */
 /**
  * By the rules of AMO and addons.opera.com we cannot use remote scripts
  * (and our JS injection rules could be counted as remote scripts).
@@ -7828,23 +7794,8 @@ adguard.rules = (function () {
     };
 
 })(adguard.rules);
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
+/** end of local-script-rules.js */
+/** start of simple-regex.js */
 (function (api) {
 
     'use strict';
@@ -7971,10 +7922,8 @@ adguard.rules = (function () {
     api.SimpleRegex = SimpleRegex;
 
 })(adguard.rules);
-
-/**
- * Browser utils stub
- */
+/** end of simple-regex.js */
+/** start of browser-utils.js */
 (function (adguard, api) {
     var Utils = {
         isFirefoxBrowser: function () {
@@ -7988,29 +7937,12 @@ adguard.rules = (function () {
     api.browser = Utils;
 
 })(adguard, adguard.utils);
-/**
- * CSP filter stub
- */
-
+/** end of browser-utils.js */
+/** start of csp-filter.js */
 adguard.rules.CspFilter = adguard.rules.CspFilter || {};
 adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src http: https:; child-src http: https:';
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of csp-filter.js */
+/** start of base-filter-rule.js */
 (function (adguard, api) {
 
     'use strict';
@@ -8249,24 +8181,8 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.FilterRule = FilterRule;
 
 })(adguard, adguard.rules);
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of base-filter-rule.js */
+/** start of filter-rule-builder.js */
 (function (adguard, api) {
 
     'use strict';
@@ -8325,24 +8241,8 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     };
 
 })(adguard, adguard.rules);
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of filter-rule-builder.js */
+/** start of css-filter-rule.js */
 (function (adguard, api) {
 
     'use strict';
@@ -8535,24 +8435,8 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.CssFilterRule = CssFilterRule;
 
 })(adguard, adguard.rules);
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of css-filter-rule.js */
+/** start of script-filter-rule.js */
 (function (adguard, api) {
 
     'use strict';
@@ -8600,25 +8484,8 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.ScriptFilterRule = ScriptFilterRule;
 
 })(adguard, adguard.rules);
-
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of script-filter-rule.js */
+/** start of url-filter-rule.js */
 (function (adguard, api) {
 
     'use strict';
@@ -9701,24 +9568,8 @@ adguard.rules.CspFilter.DEFAULT_DIRECTIVE = 'connect-src http: https:; frame-src
     api.UrlFilterRule = UrlFilterRule;
 
 })(adguard, adguard.rules);
-
-/**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
- *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+/** end of url-filter-rule.js */
+/** start of converter.js */
 /**
  * Converts URLs in the AdGuard format to the format supported by Safari
  * https://webkit.org/blog/3476/content-blockers-first-look/
@@ -9728,7 +9579,7 @@ var SafariContentBlockerConverter = (function () {
     /**
      * Safari content blocking format rules converter.
      */
-    var CONVERTER_VERSION = '2.0.0';
+    var CONVERTER_VERSION = '2.0.3';
     // Max number of CSS selectors per rule (look at compactCssRules function)
     var MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -9744,6 +9595,12 @@ var SafariContentBlockerConverter = (function () {
     var ANY_URL_TEMPLATES = ['||*', '', '*', '|*'];
     var URL_FILTER_ANY_URL = "^[htpsw]+:\\/\\/";
     var URL_FILTER_WS_ANY_URL = "^wss?:\\/\\/";
+    /**
+     * Using .* for the css-display-none rules trigger.url-filter.
+     * Please note, that this is important to use ".*" for this kind of rules, otherwise performance is degraded:
+     * https://github.com/AdguardTeam/AdguardForiOS/issues/662
+     */
+    var URL_FILTER_CSS_RULES = ".*";
     /** 
      * Improved regular expression instead of UrlFilterRule.REGEXP_START_URL (||)
      * Please note, that this regular expression matches only ONE level of subdomains
@@ -9846,35 +9703,35 @@ var SafariContentBlockerConverter = (function () {
         var addResourceType = function (rule, result) {
             var types = [];
 
-            var UrlFilterRule = adguard.rules.UrlFilterRule;
+            var contentTypes = adguard.rules.UrlFilterRule.contentTypes;
 
-            if (rule.permittedContentType === UrlFilterRule.contentTypes.ALL &&
+            if (rule.permittedContentType === contentTypes.ALL &&
                 rule.restrictedContentType === 0) {
                 // Safari does not support all other default content types, like subdocument etc.
                 // So we can use default safari content types instead.
                 return;
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.IMAGE)) {
+            if (hasContentType(rule, contentTypes.IMAGE)) {
                 types.push("image");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.STYLESHEET)) {
+            if (hasContentType(rule, contentTypes.STYLESHEET)) {
                 types.push("style-sheet");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.SCRIPT)) {
+            if (hasContentType(rule, contentTypes.SCRIPT)) {
                 types.push("script");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.MEDIA)) {
+            if (hasContentType(rule, contentTypes.MEDIA)) {
                 types.push("media");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.XMLHTTPREQUEST) ||
-                hasContentType(rule, UrlFilterRule.contentTypes.OTHER) ||
-                hasContentType(rule, UrlFilterRule.contentTypes.WEBSOCKET)) {
+            if (hasContentType(rule, contentTypes.XMLHTTPREQUEST) ||
+                hasContentType(rule, contentTypes.OTHER) ||
+                hasContentType(rule, contentTypes.WEBSOCKET)) {
                 types.push("raw");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.FONT)) {
+            if (hasContentType(rule, contentTypes.FONT)) {
                 types.push("font");
             }
-            if (hasContentType(rule, UrlFilterRule.contentTypes.SUBDOCUMENT)) {
+            if (hasContentType(rule, contentTypes.SUBDOCUMENT)) {
                 types.push("document");
             }
             if (rule.isBlockPopups()) {
@@ -9883,16 +9740,16 @@ var SafariContentBlockerConverter = (function () {
             }
 
             // Not supported modificators
-            if (isContentType(rule, UrlFilterRule.contentTypes.OBJECT)) {
+            if (isContentType(rule, contentTypes.OBJECT)) {
                 throw new Error('$object content type is not yet supported');
             }
-            if (isContentType(rule, UrlFilterRule.contentTypes.OBJECT_SUBREQUEST)) {
+            if (isContentType(rule, contentTypes.OBJECT_SUBREQUEST)) {
                 throw new Error('$object_subrequest content type is not yet supported');
             }
-            if (isContentType(rule, UrlFilterRule.contentTypes.WEBRTC)) {
+            if (isContentType(rule, contentTypes.WEBRTC)) {
                 throw new Error('$webrtc content type is not yet supported');
             }
-            if (isSingleOption(rule, UrlFilterRule.options.JSINJECT)) {
+            if (isSingleOption(rule, adguard.rules.UrlFilterRule.options.JSINJECT)) {
                 throw new Error('$jsinject rules are ignored.');
             }
             if (rule.getReplace()) {
@@ -9914,11 +9771,11 @@ var SafariContentBlockerConverter = (function () {
          */
         var createUrlFilterString = function (filter) {
             var urlRuleText = filter.getUrlRuleText();
+            var isWebSocket = (filter.permittedContentType === adguard.rules.UrlFilterRule.contentTypes.WEBSOCKET);
+
+            // Use a single standard regex for rules that are supposed to match every URL 
             if (ANY_URL_TEMPLATES.indexOf(urlRuleText) >= 0) {
-                if (adguard.rules.UrlFilterRule.contentTypes.WEBSOCKET === filter.permittedContentType) {
-                    return URL_FILTER_WS_ANY_URL;
-                }
-                return URL_FILTER_ANY_URL;
+                return isWebSocket ? URL_FILTER_WS_ANY_URL : URL_FILTER_ANY_URL;
             }
 
             if (filter.isRegexRule && filter.urlRegExp) {
@@ -9930,6 +9787,14 @@ var SafariContentBlockerConverter = (function () {
             if (!urlRegExpSource) {
                 // Rule with empty regexp
                 return URL_FILTER_ANY_URL;
+            }
+
+            // Prepending WebSocket protocol to resolve this:
+            // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/957
+            if (isWebSocket &&
+                urlRegExpSource.indexOf("^") !== 0 &&
+                urlRegExpSource.indexOf("ws") !== 0) {
+                return URL_FILTER_WS_ANY_URL + ".*" + urlRegExpSource;
             }
 
             return urlRegExpSource;
@@ -10003,7 +9868,7 @@ var SafariContentBlockerConverter = (function () {
 
             var result = {
                 trigger: {
-                    "url-filter": URL_FILTER_ANY_URL
+                    "url-filter": URL_FILTER_CSS_RULES
                     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/153#issuecomment-263067779
                     //,"resource-type": [ "document" ]
                 },
@@ -10438,7 +10303,7 @@ var SafariContentBlockerConverter = (function () {
 
             var rule = {
                 trigger: {
-                    "url-filter": URL_FILTER_ANY_URL
+                    "url-filter": URL_FILTER_CSS_RULES
                     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/153#issuecomment-263067779
                     //,"resource-type": [ "document" ]
                 },
@@ -10693,7 +10558,11 @@ var SafariContentBlockerConverter = (function () {
         convertArray: convertArray
     }
 })();
+/** end of converter.js */
 
+/**
+ * End of the dependencies content 
+ */
 
     return function (rules, limit, optimize) {
         try {
