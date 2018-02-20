@@ -704,6 +704,10 @@
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D018672A203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
+		D018672B203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
+		D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
+		D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
 		D0295AEF1F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
 		D0295AF01F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
 		D02EFD081F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
@@ -712,10 +716,6 @@
 		D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0427C7A1F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D047E51C1F443D6D00A4F0C5 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
-		D04B97E31F601E9800CE2E03 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97DF1F601D3100CE2E03 /* MGSwipeButton.m */; };
-		D04B97E41F601E9A00CE2E03 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97DF1F601D3100CE2E03 /* MGSwipeButton.m */; };
-		D04B97E51F6022ED00CE2E03 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */; };
-		D04B97E61F6022EE00CE2E03 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */; };
 		D04D1B7B201F3F0900D53073 /* APBlockingSubscriptionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C51FE27CED002456B3 /* APBlockingSubscriptionsManager.m */; };
 		D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D04D1B7D201F3F3700D53073 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */; };
@@ -773,7 +773,6 @@
 		D0BC65261FC5C30100E9193D /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64FA1FC5C30100E9193D /* logger.c */; };
 		D0BC65271FC5C30100E9193D /* minicsv.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64FC1FC5C30100E9193D /* minicsv.c */; };
 		D0BC65291FC5C30100E9193D /* pid_file.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65011FC5C30100E9193D /* pid_file.c */; };
-		D0BC652C1FC5C30100E9193D /* probes_dnscrypt_proxy.d in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65091FC5C30100E9193D /* probes_dnscrypt_proxy.d */; };
 		D0BC652D1FC5C30100E9193D /* safe_rw.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC650C1FC5C30100E9193D /* safe_rw.c */; };
 		D0BC652E1FC5C30100E9193D /* sandboxes.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC650E1FC5C30100E9193D /* sandboxes.c */; };
 		D0BC652F1FC5C30100E9193D /* simpleconf.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65111FC5C30100E9193D /* simpleconf.c */; };
@@ -1548,6 +1547,10 @@
 		D0159DA8203593DE00751D2A /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
 		D0159DA9203593E000751D2A /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
 		D0159DAA203593E300751D2A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
+		D0186726203C86040003110A /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
+		D0186727203C86050003110A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		D0186728203C86050003110A /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
+		D0186729203C86050003110A /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		D0295AED1F54477800C2C844 /* AEUIStarsLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUIStarsLayer.h; sourceTree = "<group>"; };
 		D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUIStarsLayer.m; sourceTree = "<group>"; };
 		D02EFD061F7B9327006CDBD5 /* ABECServicesParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECServicesParser.h; sourceTree = "<group>"; };
@@ -1560,10 +1563,6 @@
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D04B8CB72031C8520028877C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D04B8CB82031C8520028877C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D04B97DF1F601D3100CE2E03 /* MGSwipeButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MGSwipeButton.m; path = "../../../../../../../Downloads/MGSwipeTableCell-master/MGSwipeTableCell/MGSwipeButton.m"; sourceTree = "<group>"; };
-		D04B97E01F601D3100CE2E03 /* MGSwipeTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MGSwipeTableCell.h; path = "../../../../../../../Downloads/MGSwipeTableCell-master/MGSwipeTableCell/MGSwipeTableCell.h"; sourceTree = "<group>"; };
-		D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MGSwipeTableCell.m; path = "../../../../../../../Downloads/MGSwipeTableCell-master/MGSwipeTableCell/MGSwipeTableCell.m"; sourceTree = "<group>"; };
-		D04B97E21F601D3100CE2E03 /* MGSwipeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MGSwipeButton.h; path = "../../../../../../../Downloads/MGSwipeTableCell-master/MGSwipeTableCell/MGSwipeButton.h"; sourceTree = "<group>"; };
 		D05747B51F7E6E26009162FF /* AEUISelectableTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUISelectableTableViewCell.h; sourceTree = "<group>"; };
 		D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUISelectableTableViewCell.m; sourceTree = "<group>"; };
 		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
@@ -3032,10 +3031,10 @@
 		D04B97DE1F601D1900CE2E03 /* MGSwipeTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				D04B97E21F601D3100CE2E03 /* MGSwipeButton.h */,
-				D04B97DF1F601D3100CE2E03 /* MGSwipeButton.m */,
-				D04B97E01F601D3100CE2E03 /* MGSwipeTableCell.h */,
-				D04B97E11F601D3100CE2E03 /* MGSwipeTableCell.m */,
+				D0186729203C86050003110A /* MGSwipeButton.h */,
+				D0186726203C86040003110A /* MGSwipeButton.m */,
+				D0186727203C86050003110A /* MGSwipeTableCell.h */,
+				D0186728203C86050003110A /* MGSwipeTableCell.m */,
 			);
 			path = MGSwipeTableCell;
 			sourceTree = "<group>";
@@ -5275,7 +5274,6 @@
 				D0BC682E1FC5CE5D00E9193D /* hash_sha512.c in Sources */,
 				D0BC68311FC5CE5D00E9193D /* crypto_kx.c in Sources */,
 				D0BC68441FC5CE5D00E9193D /* crypto_scalarmult.c in Sources */,
-				D0BC652C1FC5C30100E9193D /* probes_dnscrypt_proxy.d in Sources */,
 				653AE9F61D084B6400AC81B4 /* ACLFileLogger.m in Sources */,
 				D0BC68521FC5CE5D00E9193D /* crypto_secretbox.c in Sources */,
 				65B4F0301D5C828300893BA0 /* FMDatabaseQueue.m in Sources */,
@@ -5418,7 +5416,6 @@
 				659886561CF74DE9003ECD1C /* AEUILoadingModal.m in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
 				658DDFFF1DA6C41B00688557 /* AEUIAccessibilityHiddenTableViewCell.m in Sources */,
-				D04B97E61F6022EE00CE2E03 /* MGSwipeTableCell.m in Sources */,
 				659886581CF74DE9003ECD1C /* AESSupport.m in Sources */,
 				659886591CF74DE9003ECD1C /* ACLLogger.m in Sources */,
 				6598865A1CF74DE9003ECD1C /* ACLWildcard.m in Sources */,
@@ -5441,7 +5438,6 @@
 				659886631CF74DE9003ECD1C /* DDAbstractDatabaseLogger.m in Sources */,
 				D0295AF01F54477800C2C844 /* AEUIStarsLayer.m in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
-				D04B97E41F601E9A00CE2E03 /* MGSwipeButton.m in Sources */,
 				655AACDA1D4237F700E316EA /* AEUIFirstStartViewController.m in Sources */,
 				D08C96C01FE16F86002456B3 /* APBlockingListsController.m in Sources */,
 				659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */,
@@ -5467,6 +5463,7 @@
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
 				659886731CF74DE9003ECD1C /* AEUIWelcomePagerDataSource.m in Sources */,
+				D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D08C96D51FE81CD8002456B3 /* APBlockingSubscriptionDetailsController.m in Sources */,
 				659886741CF74DE9003ECD1C /* AppDelegate.m in Sources */,
 				659886751CF74DE9003ECD1C /* AEUISubscriptionFilterDetailController.m in Sources */,
@@ -5518,6 +5515,7 @@
 				655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */,
 				6598868E1CF74DE9003ECD1C /* AEUISubscriptionSectionObject.m in Sources */,
 				6598868F1CF74DE9003ECD1C /* AEUIWelcomePageController.m in Sources */,
+				D018672B203C86050003110A /* MGSwipeButton.m in Sources */,
 				659886901CF74DE9003ECD1C /* FMDatabaseQueue.m in Sources */,
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				653153621CFC63C000C92A73 /* APVPNManager.m in Sources */,
@@ -5763,12 +5761,12 @@
 				65B40D601BDFF2AC00A9C595 /* AEUILoadingModal.m in Sources */,
 				65EC9BC81BB9824C00F53F3B /* ADLocales.m in Sources */,
 				65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */,
-				D04B97E31F601E9800CE2E03 /* MGSwipeButton.m in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				D018672A203C86050003110A /* MGSwipeButton.m in Sources */,
 				658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
@@ -5807,7 +5805,6 @@
 				D0CA2EBF1FF3E2430072B4A6 /* AEUICellTextField.m in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
-				D04B97E51F6022ED00CE2E03 /* MGSwipeTableCell.m in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
@@ -5830,6 +5827,7 @@
 				D0CA324B1FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.m in Sources */,
 				655A025B1C6B7686000F00D7 /* DDLog.m in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
+				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				652F89F71B92F94D002E0601 /* AEUISubscriptionSectionObject.m in Sources */,
 				65BA76761BA5C2D100D11F50 /* AEUIWelcomePageController.m in Sources */,
