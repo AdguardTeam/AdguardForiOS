@@ -421,17 +421,24 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Notification
-/////////////////////////////////////////////////////////////////////
-
-- (void)refreshDynamicObjects:(NSNotification *)notification {
-
+- (void)refreshCheckDate {
     NSDate *checkDate = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsCheckFiltersLastDate];
     if (checkDate) {
-        self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        
+        BOOL today = [[NSCalendar currentCalendar] isDateInToday:checkDate];
+        
+        self.lastUpdated.text = [NSDateFormatter localizedStringFromDate:checkDate dateStyle: today ? NSDateFormatterNoStyle : NSDateFormatterShortStyle timeStyle: today ? NSDateFormatterShortStyle : NSDateFormatterNoStyle];
         // tunning accessibility
         self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
         //------------
     }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void)refreshDynamicObjects:(NSNotification *)notification {
+
+    [self refreshCheckDate];
 
     [self reloadDataAnimated:YES];
 }
@@ -562,18 +569,8 @@
                                                 @"- Check Filter Updates");
                         }
 
-                        NSDate *checkDate = [[AESharedResources sharedDefaults]
-                          objectForKey:AEDefaultsCheckFiltersLastDate];
-                        if (checkDate) {
-                          self.lastUpdated.text = [NSDateFormatter
-                              localizedStringFromDate:checkDate
-                                            dateStyle:NSDateFormatterShortStyle
-                                            timeStyle:
-                                                NSDateFormatterShortStyle];
-                          // tunning accessibility
-                          self.lastUpdated.accessibilityLabel = [NSDateFormatter localizedStringFromDate:checkDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterShortStyle];
-                          //-------
-                        }
+                        [self refreshCheckDate];
+                        
                     });
 
                     dispatch_after(
@@ -683,7 +680,7 @@
     if (section == PRO_SECTION_INDEX) {
         
         APUIProSectionFooter *footer = [self proSectionFooter];
-        return footer.height;
+        return [footer heightForWidth:self.view.frame.size.width];
     }
     
     return [super tableView:tableView heightForFooterInSection:section];

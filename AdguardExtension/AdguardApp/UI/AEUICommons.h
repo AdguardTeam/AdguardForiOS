@@ -19,9 +19,9 @@
 #ifndef AEUICommons_h
 #define AEUICommons_h
 
-#define AEUIC_WARNING_COLOR      [UIColor colorWithRed:0.737254902f green:0.274509804f blue:0.345098039f alpha:1.0f]
+#define AEUIC_WARNING_COLOR      [UIColor colorWithRed:((float)0xd3)/255.0 green:((float)0x2f)/255.0 blue:((float)0x2f)/255.0 alpha:1.0]
 #define AEUIC_EXCEPTION_COLOR      [UIColor colorWithRed:0.22745098f green:0.670588235f blue:0.278431373f alpha:1.0f]
-#define AEUIC_TRACKER_COLOR      [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:1.0f]
+#define AEUIC_TRACKER_COLOR      [UIColor colorWithRed:((float)0xfb)/255.0 green:((float)0xc0)/255.0 blue:((float)0x2d)/255.0 alpha:1.0]
 
 #define SUBTITLE_TEXT_COLOR     [UIColor colorWithRed:((float)0x6d)/255.0 green:((float)0x6d)/255.0 blue:((float)0x72)/255.0 alpha:1.0]
 

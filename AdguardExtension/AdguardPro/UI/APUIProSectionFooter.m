@@ -57,10 +57,10 @@
     return self;
 }
 
-- (CGFloat)height{
+- (CGFloat)heightForWidth:(CGFloat)width{
     @synchronized (self) {
         CGSize size = CGSizeZero;
-        size.width = self.bounds.size.width - self.layoutMargins.left - self.layoutMargins.right;
+        size.width = width - self.layoutMargins.left - self.layoutMargins.right;
         size = [_textView sizeThatFits:CGSizeMake(size.width, CGFLOAT_MAX)];
         return size.height + self.layoutMargins.top + self.layoutMargins.bottom;
     }

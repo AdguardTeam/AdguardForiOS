@@ -34,6 +34,8 @@
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
 
+#define RESPONSES_SECTION 3
+
 typedef enum {
 
     DomainControllNone = 0,
@@ -89,11 +91,15 @@ static NSDateFormatter *_timeFormatter;
     NSLocalizedString(@"On", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
     : NSLocalizedString(@"Off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
 
-    ABECService *service = APSharedResources.trackerslistDomains[request.name];
-    self.serviceNameCell.detailTextLabel.text = service.name;
-    self.serviceDescriptionCell.detailTextLabel.text = service.serviceDescription;
-    self.servideCategoriesCell.detailTextLabel.text = [service.categories componentsJoinedByString:@", "];
-    self.serviceNotesCell.detailTextLabel.text = [service.notes componentsJoinedByString:@", "];
+    if(self.logRecord.isTracker) {
+        
+        ABECService * service = [APSharedResources serviceByDomain: request.name];
+        
+        self.serviceNameCell.detailTextLabel.text = service.name;
+        self.serviceDescriptionCell.detailTextLabel.text = service.serviceDescription;
+        self.servideCategoriesCell.detailTextLabel.text = [service.categories componentsJoinedByString:@", "];
+        self.serviceNotesCell.detailTextLabel.text = [service.notes componentsJoinedByString:@", "];
+    }
     
     [self cell: self.serviceNameCell setHidden:!self.serviceNameCell.detailTextLabel.text.length];
     [self cell: self.serviceDescriptionCell setHidden:!self.serviceDescriptionCell.detailTextLabel.text.length];
@@ -116,13 +122,13 @@ static NSDateFormatter *_timeFormatter;
             
             NSString* domain = self.logRecord.requests[0].name;
             
+            NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
+            
             APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
-            if(subscription) {
-                statusText = [NSString stringWithFormat:@"Blocked by subscription: %@", subscription.name];
-            }
-            else {
-                statusText = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
-            }
+            
+            NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
+            
+            statusText = [NSString stringWithFormat:format, name];
             
             self.statusCell.detailTextLabel.text = statusText;
         }
@@ -195,7 +201,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         // Fitting size of the request name
         return [self.nameCell fitHeight];
     }
-    else if (indexPath.section == 2 && indexPath.row == 0){
+    else if (indexPath.section == RESPONSES_SECTION && indexPath.row == 0){
         
         // Fitting size of the responses
         return [self.responsesCell fitHeight];

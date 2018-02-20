@@ -20,9 +20,10 @@
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
 #import "AEUICommons.h"
+#import "ABECService.h"
+#import "APSharedResources.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]
-
 
 @implementation APUIDnsLogRecord
 
@@ -51,11 +52,19 @@
             if (response.blocked) {
                 _color = AEUIC_WARNING_COLOR;
                 _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
-            } else if(record.isTracker) {
+            }
+            else if(record.isTracker) {
+                
+                ABECService* service = [APSharedResources serviceByDomain:record.requests[0].name];
+                NSString* trackerName = service.name ?: @"";
+                
                 _color = AEUIC_TRACKER_COLOR;
-            } else {
+                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@, Tracker detected - %@", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the tracker DNS request."), DATE_FORMAT(record.recordDate), trackerName];
+            }
+            else {
                 
                 _color = [UIColor whiteColor];
+                
                 NSArray *responses = [record.responses valueForKey:@"stringValue"];
                 if (record.isWhitelisted) {
 
