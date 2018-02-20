@@ -32,6 +32,7 @@ NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitRe
 NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
+NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
 NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
 NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
 NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";

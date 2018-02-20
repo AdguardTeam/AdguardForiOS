@@ -53,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *titleLogo;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet MGSwipeTableCell *videoCell;
+@property (strong, nonatomic) IBOutlet MGSwipeTableCell *safariVideoCell;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *disabledLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalRequestsCountLabel;

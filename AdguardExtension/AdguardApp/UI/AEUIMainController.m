@@ -101,6 +101,37 @@
 
 @implementation AEUIMainController
 
+- (void)setupSwipeCell:(MGSwipeTableCell *)swipeCell swipeCellDefaultsKey:(NSString *)swipeCellDefaultsKey {
+    if([[AESharedResources.sharedDefaults valueForKey:swipeCellDefaultsKey] boolValue])
+    {
+        [self cell:swipeCell setHidden:YES];
+        [self reloadDataAnimated:NO];
+    }
+    else {
+        
+        for (UIView *view in swipeCell.subviews){
+            
+            if(view != swipeCell.contentView) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
+        [hideButton centerIconOverText];
+        
+        hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            
+            [self cell:swipeCell setHidden:YES];
+            [self reloadDataAnimated:YES];
+            
+            [AESharedResources.sharedDefaults setObject:@(YES) forKey:swipeCellDefaultsKey];
+            
+            return NO;
+        };
+        swipeCell.rightButtons = @[hideButton];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -166,36 +197,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     
-    if([[AESharedResources.sharedDefaults valueForKey:AEDefaultsHideVideoTutorial] boolValue])
-    {
-        [self cell:self.videoCell setHidden:YES];
-        [self reloadDataAnimated:NO];
-    }
-    else {
-        
-        //self.shareCell.separatorInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, CGFLOAT_MAX);
-        
-        for (UIView *view in self.videoCell.subviews){
-            
-            if(view != self.videoCell.contentView) {
-                [view removeFromSuperview];
-            }
-        }
-        
-        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
-        [hideButton centerIconOverText];
-        
-        hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
-            
-            [self cell:self.videoCell setHidden:YES];
-            [self reloadDataAnimated:YES];
-            
-            [AESharedResources.sharedDefaults setObject:@(YES) forKey:AEDefaultsHideVideoTutorial];
-            
-            return NO;
-        };
-        self.videoCell.rightButtons = @[hideButton];
-    }
+    [self setupSwipeCell:self.videoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
+    [self setupSwipeCell:self.safariVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
+    
+    [self swipeCells];
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsTotalRequestsCount options:NSKeyValueObservingOptionNew context:nil];
     
@@ -205,6 +210,18 @@
 
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void) swipeCells {
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect frame = self.videoCell.contentView.frame;
+        frame.origin.x += 70;
+        self.videoCell.contentView.frame = frame;
+
+        frame = self.safariVideoCell.contentView.frame;
+        frame.origin.x += 70;
+        self.safariVideoCell.contentView.frame = frame;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -366,6 +383,7 @@
     [self checkContentBlockerStatus];
     
     [self setToolbar];
+    
 #ifdef PRO
     [self proUpdateStatuses];
 #endif
