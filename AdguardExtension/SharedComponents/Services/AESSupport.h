@@ -28,4 +28,6 @@ extern NSString *AESSupportSubjectPrefixFormat;
 
 - (void)sendSimpleMailWithParentController:(UIViewController *)parent subject:(NSString *)subject body:(NSString *)body;
 
+- (NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
+
 @end

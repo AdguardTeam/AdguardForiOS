@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *trackersCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *avarageTimeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *proStatusSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *bugReportCell;
 
 @property (nonatomic) AEUIStarsLayer* starsLayer;
 

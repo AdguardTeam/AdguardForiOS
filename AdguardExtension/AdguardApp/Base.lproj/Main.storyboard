@@ -1720,7 +1720,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learn about other AdGuard products" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJ2-mt-kfu">
                                                     <rect key="frame" x="8" y="12.5" width="266.5" height="19.5"/>
-                                                    <accessibility key="accessibilityConfiguration" label=" ">
+                                                    <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
@@ -1796,8 +1796,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Send Bug Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DJo-k0-dYd">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="43.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Report an issue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DJo-k0-dYd">
+                                                    <rect key="frame" x="16" y="0.0" width="269" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1849,6 +1849,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="avarageTimeLabel" destination="QbL-Io-HoY" id="RTf-5l-Vtt"/>
+                        <outlet property="bugReportCell" destination="QCs-Ux-C3O" id="7Wf-kp-dF1"/>
                         <outlet property="checkFiltersCell" destination="bSW-1l-y1g" id="nLC-FJ-M2g"/>
                         <outlet property="disabledLabel" destination="h2t-QC-6Ly" id="LVr-Rr-fvk"/>
                         <outlet property="facebookButton" destination="IiA-PR-JUW" id="vZz-Ct-DV4"/>

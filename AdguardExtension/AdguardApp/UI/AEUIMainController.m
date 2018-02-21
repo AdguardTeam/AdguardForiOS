@@ -67,6 +67,7 @@
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 #define OTHER_APPS_URL              @"http://agrd.io/ios_adguard_products"
+#define BUGREPORT_URL               @"http://agrd.io/report_ios_bug"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -288,7 +289,8 @@
 }
 
 - (IBAction)clickSendBugReport:(id)sender {
-    [[AESSupport singleton] sendMailBugReportWithParentController:self];
+    
+    [self showReportActionSheet];
 }
 
 - (IBAction)clickGetPro:(id)sender {
@@ -674,6 +676,36 @@
     
     int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
     self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+- (void) showReportActionSheet {
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Incorrect Blocking / Missed Ad", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
+        [[UIApplication sharedApplication] openURL:reportUrl options:@{} completionHandler:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Bug Report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: BUGREPORT_URL] options:@{} completionHandler:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Contact Support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [[AESSupport singleton] sendMailBugReportWithParentController:self];
+    }]];
+    
+    UIPopoverPresentationController *popController = [actionSheet popoverPresentationController];
+    popController.sourceView = self.bugReportCell;
+    popController.sourceRect = self.bugReportCell.bounds;
+    
+    [self presentViewController:actionSheet animated:YES completion:^{
+    }];
 }
 
 #endif
