@@ -734,7 +734,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"AdGuard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware, protecting your DNS traffic from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"Privacy module establishes a fake local VPN and intercepts the DNS traffic in order to let you see and control what trackers your device connects to or use a custom DNS server with advanced capabilities.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{

@@ -1470,7 +1470,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="With AdGuard Pro you can decide for yourself which domains are allowed for your apps to connect." id="kfy-6h-zAP">
+                            <tableViewSection footerTitle="Privacy module configuration: whitelist, blacklist, subscriptions." id="kfy-6h-zAP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="wh3-Sg-Mlf" style="IBUITableViewCellStyleDefault" id="S5I-gh-aNS" customClass="AEUISelectableTableViewCell">
                                         <rect key="frame" x="0.0" y="670" width="320" height="44"/>
@@ -1479,7 +1479,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Blocking Lists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wh3-Sg-Mlf">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Privacy Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wh3-Sg-Mlf">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -3033,10 +3033,10 @@
             </objects>
             <point key="canvasLocation" x="1560" y="1065.8450704225352"/>
         </scene>
-        <!--Blocking Lists-->
+        <!--Privacy Settings-->
         <scene sceneID="A7S-fM-wtW">
             <objects>
-                <tableViewController id="uur-bm-6GK" userLabel="Blocking Lists" customClass="APBlockingListsController" sceneMemberID="viewController">
+                <tableViewController id="uur-bm-6GK" userLabel="Privacy Settings" customClass="APBlockingListsController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="P3Q-fY-ihj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3163,7 +3163,7 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Blocking Lists" id="rhQ-dZ-5BV"/>
+                    <navigationItem key="navigationItem" title="Privacy Settings" id="rhQ-dZ-5BV"/>
                     <connections>
                         <outlet property="blackListCountLabel" destination="aAi-Qp-VOh" id="ibD-xq-wDq"/>
                         <outlet property="checkUpdatesCell" destination="Udp-ME-F9e" id="AZa-Sg-PaL"/>

@@ -146,8 +146,8 @@
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
         
         domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
-                                                   NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
-                                                                     @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.")];
+                                                   NSLocalizedString(@"List the domain names here. Separate different domain names with line breaks.",
+                                                                     @"(APUIAdguardDNSController) PRO version. On the Privacy Settings -> Blacklist (Whitelist) screen. The placeholder text.")];
         
         domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
         
@@ -443,7 +443,7 @@
 
 - (NSAttributedString*) footerText {
     
-    NSString *htmlString = NSLocalizedString(@"AdGuard supports both hosts files or \"adblock\" rules syntax. Click <a href=\"https://kb.adguard.com/ios/features\">here</a> to learn more about it.", @"(APBlockingListsController) Blocking subscriptions footer text");
+    NSString *htmlString = NSLocalizedString(@"Privacy module allows you to extend its functionality by adding custom rules subscriptions. It supports both <a href=\"https://wikipedia.org/wiki/Hosts_(file)\">hosts files</a> and also a limited set of AdGuard rules syntax. Click <a href=\"https://kb.adguard.com/ios/features\">here</a> to learn more about it.", @"(APBlockingListsController) Blocking subscriptions footer text");
     
     NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     

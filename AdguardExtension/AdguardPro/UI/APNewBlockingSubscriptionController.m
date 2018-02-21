@@ -146,9 +146,9 @@
 
 - (NSAttributedString*) footerString {
     if(!_footerString) {
-        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Filter subscriptions are lists of filtering rules combined together. Usually each filter subscription serves some particular purpose like blocking language-specific ads, blocking trackers etc. Here you can find examples of such filter subscriptions.", @"(APBlockingListsController) blocking subscriptions footer text. Also you need to define clickable part of this string - \"Here\"")];
+        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Rules subscriptions are lists of filtering rules combined together. Usually, a subscription serves some particular purpose like blocking malicious or tracking domains. Here you can find some popular filter subscriptions.", @"(APBlockingListsController) blocking subscriptions footer text. Also you must define a clickable part of this string - \"Here\". Please be careful, this is very important to define it properly.")];
         
-        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"Here", @"(APNewBlockingSubscriptionController) Clockable part of blocking subscriptions footer text")];
+        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"Here", @"(APNewBlockingSubscriptionController) Clickable part of blocking subscriptions footer text")];
         
         [string addAttributes:@{ NSForegroundColorAttributeName : UIColor.blueColor,
                                   NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle),
