@@ -669,7 +669,8 @@
     int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
     float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
     float averageTime = count ? time * 1000 / count : 0;
-    self.avarageTimeLabel.text = [NSString stringWithFormat:@"%.f ms", averageTime];
+    NSString* format = NSLocalizedString(@"%.f ms", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
+    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
 }
 
 - (void) updateTrackers {

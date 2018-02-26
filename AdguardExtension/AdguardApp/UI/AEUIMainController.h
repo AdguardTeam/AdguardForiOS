@@ -49,9 +49,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *proDnsSettingsCell;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
-@property (strong, nonatomic) IBOutlet UIView *titleView;
-@property (weak, nonatomic) IBOutlet UIImageView *titleLogo;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet MGSwipeTableCell *videoCell;
 @property (strong, nonatomic) IBOutlet MGSwipeTableCell *safariVideoCell;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
