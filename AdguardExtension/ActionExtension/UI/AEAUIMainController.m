@@ -39,25 +39,6 @@
 #import "APDnsServerObject.h"
 #endif
 
-#define REPORT_URL @"https://reports.adguard.com/new_issue.html"
-
-#define REPORT_PARAM_PRODUCT @"product_type"
-#define REPORT_PARAM_VERSION @"product_version"
-#define REPORT_PARAM_BROWSER @"browser"
-#define REPORT_PARAM_URL @"url"
-#define REPORT_PARAM_FILTERS @"filters"
-#define REPORT_PARAM_SYSTEM_WIDE @"ios.systemwide"
-#define REPORT_PARAM_SIMPLIFIED @"ios.simplified"
-#define REPORT_PARAM_CUSTOM_DNS @"ios.CustomDNS"
-#define REPORT_PARAM_DNS @"ios.DNS"
-
-#define REPORT_PRODUCT @"iOS"
-#define REPORT_BROWSER @"Safari"
-
-#define REPORT_DNS_ADGUARD @"Default"
-#define REPORT_DNS_ADGUARD_FAMILY @"Family"
-#define REPORT_DNS_OTHER @"Other"
-
 @implementation AEAUIMainController{
     
     BOOL _enabledHolder;
@@ -242,72 +223,9 @@
 }
 
 - (IBAction)clickMissedAd:(id)sender {
-
-    NSMutableDictionary *params = [NSMutableDictionary new];
     
-    params[REPORT_PARAM_PRODUCT] = REPORT_PRODUCT;
-    params[REPORT_PARAM_VERSION] = ADProductInfo.version;
-    params[REPORT_PARAM_URL] = self.url;
-    params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
-    
-    
-    NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = [AESAntibanner new];
-    NSArray* filterIDs = antibaner.activeFilterIDs;
-    
-    for (NSNumber *filterId in filterIDs) {
-        
-        NSString* format = filterId == filterIDs.firstObject ? @"%@" : @".%@";
-        [filtersString appendFormat:format, filterId];
-    }
-    params[REPORT_PARAM_FILTERS] = filtersString.copy;
-    
-    params[REPORT_PARAM_SIMPLIFIED] =  [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
-    
-#ifdef PRO
-    
-    NSString* dnsServerParam = nil;
-    BOOL custom = NO;
-    
-    APDnsServerObject * dnsServer = [APVPNManager.singleton loadActiveRemoteDnsServer];
-    if([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguard]) {
-        dnsServerParam = REPORT_DNS_ADGUARD;
-    }
-    else if ([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguardFamily]) {
-        dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
-    }
-    else if(dnsServer) {
-        dnsServerParam = REPORT_DNS_OTHER;
-        custom = YES;
-    }
-    
-    if(dnsServerParam) {
-        params[REPORT_PARAM_DNS] = dnsServerParam;
-        
-        if(custom) {
-            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.serverName;
-        }
-    }
-    
-#endif
-    
-    params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
-    
-    NSString *paramsString = [ABECRequest createStringFromParameters:params];
-    NSString *url = [NSString stringWithFormat:@"%@?%@", REPORT_URL, paramsString];
-    
-    UIResponder *responder = self;
-    while(responder){
-        if ([responder respondsToSelector: @selector(openURL:)]){
-            [responder performSelector: @selector(openURL:) withObject: [NSURL URLWithString:url]];
-        }
-        responder = [responder nextResponder];
-    }
-    
-//    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
-//    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
-//
-//    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
+    NSURL *url = [AESSupport.singleton composeWebReportUrlForSite:self.url];
+    [self openUrl:url];
 }
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
@@ -400,6 +318,16 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGSize size = [longTextCell.contentView
                    systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height + 1.0f; // Add 1.0f for the cell separator height
+}
+
+- (void)openUrl:(NSURL *)url {
+    UIResponder *responder = self;
+    while(responder){
+        if ([responder respondsToSelector: @selector(openURL:)]){
+            [responder performSelector: @selector(openURL:) withObject: url];
+        }
+        responder = [responder nextResponder];
+    }
 }
 
 @end

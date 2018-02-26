@@ -20,6 +20,7 @@
 #import "AEUICustomTextEditorController.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
+#import "AEUICommons.h"
 
 #define TOP_BOUNSE_LIMIT                    -5
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
@@ -173,6 +174,7 @@ static NSDictionary *_editAttrs;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
     self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
+    self.placeholderLabel.textColor = SUBTITLE_TEXT_COLOR;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     

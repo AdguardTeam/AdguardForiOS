@@ -95,6 +95,11 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
 extern NSString *AEDefaultsHideVideoTutorial;
 
 /**
+ User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
+ */
+extern NSString *AEDefaultsHideSafariVideoTutorial;
+
+/**
  User Defaults key, which defines total request count.
  */
 extern NSString *AEDefaultsTotalRequestsCount;

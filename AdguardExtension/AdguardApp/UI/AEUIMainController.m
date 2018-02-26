@@ -67,6 +67,7 @@
 #define SHARE_APP_URL_FORMAT        @"https://itunes.apple.com/app/id%@"
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 #define OTHER_APPS_URL              @"http://agrd.io/ios_adguard_products"
+#define BUGREPORT_URL               @"http://agrd.io/report_ios_bug"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -100,6 +101,37 @@
 @end
 
 @implementation AEUIMainController
+
+- (void)setupSwipeCell:(MGSwipeTableCell *)swipeCell swipeCellDefaultsKey:(NSString *)swipeCellDefaultsKey {
+    if([[AESharedResources.sharedDefaults valueForKey:swipeCellDefaultsKey] boolValue])
+    {
+        [self cell:swipeCell setHidden:YES];
+        [self reloadDataAnimated:NO];
+    }
+    else {
+        
+        for (UIView *view in swipeCell.subviews){
+            
+            if(view != swipeCell.contentView) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
+        [hideButton centerIconOverText];
+        
+        hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            
+            [self cell:swipeCell setHidden:YES];
+            [self reloadDataAnimated:YES];
+            
+            [AESharedResources.sharedDefaults setObject:@(YES) forKey:swipeCellDefaultsKey];
+            
+            return NO;
+        };
+        swipeCell.rightButtons = @[hideButton];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -166,36 +198,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     
-    if([[AESharedResources.sharedDefaults valueForKey:AEDefaultsHideVideoTutorial] boolValue])
-    {
-        [self cell:self.videoCell setHidden:YES];
-        [self reloadDataAnimated:NO];
-    }
-    else {
-        
-        //self.shareCell.separatorInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, CGFLOAT_MAX);
-        
-        for (UIView *view in self.videoCell.subviews){
-            
-            if(view != self.videoCell.contentView) {
-                [view removeFromSuperview];
-            }
-        }
-        
-        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
-        [hideButton centerIconOverText];
-        
-        hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
-            
-            [self cell:self.videoCell setHidden:YES];
-            [self reloadDataAnimated:YES];
-            
-            [AESharedResources.sharedDefaults setObject:@(YES) forKey:AEDefaultsHideVideoTutorial];
-            
-            return NO;
-        };
-        self.videoCell.rightButtons = @[hideButton];
-    }
+    [self setupSwipeCell:self.videoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
+    [self setupSwipeCell:self.safariVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
+    
+    [self swipeCells];
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsTotalRequestsCount options:NSKeyValueObservingOptionNew context:nil];
     
@@ -205,6 +211,18 @@
 
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void) swipeCells {
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect frame = self.videoCell.contentView.frame;
+        frame.origin.x += 70;
+        self.videoCell.contentView.frame = frame;
+
+        frame = self.safariVideoCell.contentView.frame;
+        frame.origin.x += 70;
+        self.safariVideoCell.contentView.frame = frame;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -271,7 +289,8 @@
 }
 
 - (IBAction)clickSendBugReport:(id)sender {
-    [[AESSupport singleton] sendMailBugReportWithParentController:self];
+    
+    [self showReportActionSheet];
 }
 
 - (IBAction)clickGetPro:(id)sender {
@@ -366,6 +385,7 @@
     [self checkContentBlockerStatus];
     
     [self setToolbar];
+    
 #ifdef PRO
     [self proUpdateStatuses];
 #endif
@@ -649,13 +669,44 @@
     int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
     float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
     float averageTime = count ? time * 1000 / count : 0;
-    self.avarageTimeLabel.text = [NSString stringWithFormat:@"%.f ms", averageTime];
+    NSString* format = NSLocalizedString(@"%.f ms", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
+    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
 }
 
 - (void) updateTrackers {
     
     int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
     self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+- (void) showReportActionSheet {
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Incorrect Blocking / Missed Ad", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
+        [[UIApplication sharedApplication] openURL:reportUrl options:@{} completionHandler:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Bug Report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: BUGREPORT_URL] options:@{} completionHandler:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Contact Support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [[AESSupport singleton] sendMailBugReportWithParentController:self];
+    }]];
+    
+    UIPopoverPresentationController *popController = [actionSheet popoverPresentationController];
+    popController.sourceView = self.bugReportCell;
+    popController.sourceRect = self.bugReportCell.bounds;
+    
+    [self presentViewController:actionSheet animated:YES completion:^{
+    }];
 }
 
 #endif
@@ -716,7 +767,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"AdGuard Pro provides you with advanced capabilities via using custom DNS servers. Parental control, protection from phishing and malware, protecting your DNS traffic from intercepting and snooping.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRO Status switch.");
+    return NSLocalizedString(@"Privacy module establishes a fake local VPN and intercepts the DNS traffic in order to let you see and control what trackers your device connects to or use a custom DNS server with advanced capabilities.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
