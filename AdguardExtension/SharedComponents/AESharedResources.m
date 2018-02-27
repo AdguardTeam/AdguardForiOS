@@ -47,6 +47,8 @@ NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 #define AES_SAFARI_WHITELIST_RULES              @"safari-whitelist-rules.data"
 #define AES_SAFARI_INVERTED_WHITELIST_RULES     @"safari-inverdet-whitelist-rules.data"
+#define AES_FILTERS_META_CACHE                  @"metadata-cache.data"
+#define AES_FILTERS_I18_CACHE                   @"i18-cache.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -179,6 +181,56 @@ static NSUserDefaults *_sharedUserDefaults;
         }
         
         [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
+    }
+}
+
+- (ABECFilterClientMetadata *)filtersMetadataCache {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_FILTERS_META_CACHE];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setFiltersMetadataCache:(ABECFilterClientMetadata *)filtersMetadataCache {
+    
+    if (filtersMetadataCache == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_FILTERS_META_CACHE];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:filtersMetadataCache];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_FILTERS_META_CACHE];
+    }
+}
+
+- (ABECFilterClientLocalization *)i18nCacheForFilterSubscription {
+    
+    NSData *data = [self loadDataFromFileRelativePath:AES_FILTERS_I18_CACHE];
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setI18nCacheForFilterSubscription:(ABECFilterClientLocalization *)i18nCacheForFilterSubscription {
+    
+    if (i18nCacheForFilterSubscription == nil) {
+        [self saveData:[NSData data] toFileRelativePath:AES_FILTERS_I18_CACHE];
+    }
+    else {
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:i18nCacheForFilterSubscription];
+        if (!data) {
+            data = [NSData data];
+        }
+        
+        [self saveData:data toFileRelativePath:AES_FILTERS_I18_CACHE];
     }
 }
 

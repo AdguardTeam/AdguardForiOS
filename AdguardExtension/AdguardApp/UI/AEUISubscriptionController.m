@@ -68,6 +68,7 @@
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
+    self.refreshControl.tintColor = self.view.tintColor;
     [self.refreshControl addTarget:self action:@selector(refreshFilters:) forControlEvents:UIControlEventValueChanged];
     
     [self updateSearchResultsForSearchController:self.searchController];
