@@ -39,6 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     self.logRecords = [NSMutableArray array];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
