@@ -1232,19 +1232,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="eTw-lb-aHG">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="eTw-lb-aHG">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Safari content blocker is disabled" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-QC-6Ly">
-                                    <rect key="frame" x="9" y="12" width="300" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari content blocker is disabled" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-QC-6Ly">
+                                    <rect key="frame" x="16" y="12" width="288" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="h2t-QC-6Ly" firstAttribute="centerY" secondItem="eTw-lb-aHG" secondAttribute="centerY" id="TEy-T3-KmY"/>
+                                <constraint firstItem="h2t-QC-6Ly" firstAttribute="centerX" secondItem="eTw-lb-aHG" secondAttribute="centerX" id="adY-Dw-RQv"/>
+                                <constraint firstAttribute="trailing" secondItem="h2t-QC-6Ly" secondAttribute="trailing" constant="16" id="fQM-P2-iHN"/>
+                                <constraint firstItem="h2t-QC-6Ly" firstAttribute="leading" secondItem="eTw-lb-aHG" secondAttribute="leading" constant="16" id="hb2-zJ-JKe"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection id="sz8-VX-xxt">
@@ -1962,7 +1967,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="video2-image" translatesAutoresizingMaskIntoConstraints="NO" id="o7s-L8-DpH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -1989,7 +1994,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="video-image" translatesAutoresizingMaskIntoConstraints="NO" id="2J6-z9-D1O">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
