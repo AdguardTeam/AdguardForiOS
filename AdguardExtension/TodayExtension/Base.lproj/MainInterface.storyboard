@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rRd-IN-vf5"/>
+                        <viewControllerLayoutGuide type="bottom" id="LpR-xL-UgA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="widget-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Cs1-bA-dov">
+                                <rect key="frame" x="20.5" y="22.5" width="52.5" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="OKb-p9-cjX"/>
+                                    <constraint firstAttribute="height" constant="55" id="nCa-Wc-hsg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-UP-HFY">
+                                <rect key="frame" x="85" y="25.5" width="220" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <color key="textColor" white="0.14762834821428572" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOV-3c-Ejo">
+                                <rect key="frame" x="85.5" y="50" width="219.5" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upz-0V-1O6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <connections>
+                                    <action selector="touchWidgetAction:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="9BB-6r-xJL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="top" secondItem="rRd-IN-vf5" secondAttribute="bottom" id="1Bc-Ix-Xdp"/>
+                            <constraint firstItem="C4x-UP-HFY" firstAttribute="top" secondItem="Cs1-bA-dov" secondAttribute="top" priority="100" constant="3" id="8RC-7J-QIU"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="height" secondItem="S3S-Oj-5AN" secondAttribute="height" id="Awq-ri-dK6"/>
+                            <constraint firstItem="Cs1-bA-dov" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20.5" id="EAr-mJ-RGz"/>
+                            <constraint firstItem="LpR-xL-UgA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aOV-3c-Ejo" secondAttribute="bottom" constant="10" id="Gpi-bP-dsn"/>
+                            <constraint firstItem="C4x-UP-HFY" firstAttribute="leading" secondItem="Cs1-bA-dov" secondAttribute="trailing" constant="12" id="Pev-5a-bDe"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="PhM-9z-Ghm"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="top" secondItem="C4x-UP-HFY" secondAttribute="bottom" constant="5" id="Q0z-LT-Mjd"/>
+                            <constraint firstItem="Cs1-bA-dov" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="Zw1-to-UJC"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="leading" secondItem="C4x-UP-HFY" secondAttribute="leading" id="cCc-Oe-dU8"/>
+                            <constraint firstItem="aOV-3c-Ejo" firstAttribute="trailing" secondItem="C4x-UP-HFY" secondAttribute="trailing" id="n4l-QY-eQG"/>
+                            <constraint firstAttribute="trailing" secondItem="C4x-UP-HFY" secondAttribute="trailing" constant="15" id="rca-ya-Wni"/>
+                            <constraint firstItem="upz-0V-1O6" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" id="x8J-km-mV7"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="100"/>
+                    <connections>
+                        <outlet property="detailTextLabel" destination="aOV-3c-Ejo" id="Pzq-LB-f2a"/>
+                        <outlet property="mainTextLabel" destination="C4x-UP-HFY" id="7l4-FG-JGl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.59999999999999" y="112.44377811094454"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="widget-logo" width="70" height="73"/>
+    </resources>
+</document>

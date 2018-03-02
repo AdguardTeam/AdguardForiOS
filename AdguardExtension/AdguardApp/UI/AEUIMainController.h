@@ -46,6 +46,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 
+@property (nonatomic) NSNumber *startStatus;
 
 - (IBAction)toggleAdguard:(id)sender;
 - (IBAction)clickTwitter:(id)sender;
@@ -57,7 +58,6 @@
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
 - (IBAction)clickGetPro:(id)sender;
-- (IBAction)proToggleStatus:(id)sender;
 
 /**
  Adds rule to User filter.

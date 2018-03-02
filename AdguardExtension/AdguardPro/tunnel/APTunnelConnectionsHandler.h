@@ -18,6 +18,7 @@
 
 @import NetworkExtension;
 #import "AERDomainFilter.h"
+#import "APDnsServerAddress.h"
 
 @class APTUdpProxySession, PacketTunnelProvider;
 
@@ -42,12 +43,12 @@
 /**
  Sets addresses of the DNS servers.
  */
-- (void)setDeviceDnsAddressesIpv4:(NSArray <NSString *> *)deviceDnsAddressesIpv4
-           deviceDnsAddressesIpv6:(NSArray <NSString *> *)deviceDnsAddressesIpv6
-    adguardRemoteDnsAddressesIpv4:(NSArray <NSString *> *)remoteDnsAddressesIpv4
-    adguardRemoteDnsAddressesIpv6:(NSArray <NSString *> *)remoteDnsAddressesIpv6
-      adguardFakeDnsAddressesIpv4:(NSArray <NSString *> *)fakeDnsAddressesIpv4
-      adguardFakeDnsAddressesIpv6:(NSArray <NSString *> *)fakeDnsAddressesIpv6;
+-(void)setDeviceDnsAddressesIpv4:(NSArray<APDnsServerAddress *> *)deviceDnsAddressesIpv4
+          deviceDnsAddressesIpv6:(NSArray<APDnsServerAddress *> *)deviceDnsAddressesIpv6
+   adguardRemoteDnsAddressesIpv4:(NSArray<APDnsServerAddress *> *)remoteDnsAddressesIpv4
+   adguardRemoteDnsAddressesIpv6:(NSArray<APDnsServerAddress *> *)remoteDnsAddressesIpv6
+     adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv4
+     adguardFakeDnsAddressesIpv6:(NSArray<NSString *> *)fakeDnsAddressesIpv6;
 
 /**
  Sets whitelist filter.
@@ -110,12 +111,12 @@
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.
  */
-- (NSString *)whitelistServerAddressForAddress:(NSString *)serverAddress;
+- (APDnsServerAddress *)whitelistServerAddressForAddress:(NSString *)serverAddress;
 
 /**
  Returns IP address of the DNS server for fake DNS server.
  */
-- (NSString *)serverAddressForFakeDnsAddress:(NSString *)serverAddress;
+- (APDnsServerAddress *)serverAddressForFakeDnsAddress:(NSString *)serverAddress;
 
 /**
  Closes all existing connections, prevents to create new.
