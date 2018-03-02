@@ -24,13 +24,18 @@
 #import "APDnsServerObject.h"
 #import "APUIDnsServerDetailController.h"
 #import "ACNIPUtils.h"
+#import "AEUICustomTextEditorController.h"
+#import "APSharedResources.h"
 
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
 
-#define DNS_SERVER_SECTION_INDEX        1
-#define DNS_DESCRIPTION_SECTION_INDEX   0
+#define DNS_SERVER_SECTION_INDEX        2
+#define DNS_DESCRIPTION_SECTION_INDEX   1
+#define STATUS_SECTION_INDEX                0
 
+#define SEGUE_BLACKLIST                     @"blacklist"
+#define SEGUE_WHITELIST                     @"whitelist"
 #define DNS_SERVER_DETAIL_SEGUE         @"dnsServerDetailSegue"
 
 /////////////////////////////////////////////////////////////////////
@@ -76,8 +81,24 @@
         
         [self updateStatuses];
     });
+    
+    // tunning accessibility
+    self.proStatusCell.accessibilityHint = [self proShortStatusDescription];
+    //-----------------
+    
+    [self attachToNotifications];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self updateStatuses];
+    });
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self proUpdateStatuses];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     
@@ -104,6 +125,22 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
 
+- (IBAction)toggleStatus:(id)sender {
+    
+    BOOL enabled = [(UISwitch *)sender isOn];
+    [[APVPNManager singleton] setEnabled:enabled];
+    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
+}
+
+- (IBAction)toggleLogStatus:(id)sender {
+    
+    APVPNManager *manager = [APVPNManager singleton];
+    manager.dnsRequestsLogging = self.logSwitch.isOn;
+    if (manager.lastError) {
+        
+        [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    }
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -180,7 +217,120 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:DNS_SERVER_DETAIL_SEGUE]) {
+    BOOL toWhitelist = [segue.identifier isEqualToString:SEGUE_WHITELIST];
+    BOOL toBlacklist = [segue.identifier isEqualToString:SEGUE_BLACKLIST];
+    
+    if (toBlacklist || toWhitelist) {
+        
+        AEUICustomTextEditorController *domainList = segue.destinationViewController;
+        
+        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
+                                                          @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.");
+        
+        domainList.keyboardType = UIKeyboardTypeURL;
+        
+        domainList.navigationItem.title = toWhitelist
+        ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
+        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
+        //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
+        
+        domainList.done = ^BOOL(AEUICustomTextEditorController *editor, NSString *text) {
+            
+            NSMutableArray *domains = [NSMutableArray array];
+            @autoreleasepool {
+                
+                NSMutableCharacterSet *delimCharSet;
+                
+                delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+                
+                for (NSString *item in  [text componentsSeparatedByCharactersInSet:delimCharSet]) {
+                    
+                    NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    if (candidate.length) {
+                        [domains addObject:candidate];
+                    }
+                }
+            }
+            
+            @autoreleasepool {
+                
+                NSArray *propertyHolder;
+                
+                if (toBlacklist) {
+                    
+                    propertyHolder = APSharedResources.blacklistDomains;
+                    APSharedResources.blacklistDomains = domains;
+                }
+                else {
+                    
+                    propertyHolder = APSharedResources.whitelistDomains;
+                    APSharedResources.whitelistDomains = domains;
+                }
+                
+                APVPNManager *manager = [APVPNManager singleton];
+                [manager sendReloadSystemWideDomainLists];
+                
+                if (manager.lastError) {
+                    
+                    //processing of the error
+                    if (toBlacklist) {
+                        APSharedResources.blacklistDomains = propertyHolder;
+                    }
+                    else {
+                        
+                        APSharedResources.whitelistDomains = propertyHolder;
+                    }
+                    
+                    return NO;
+                }
+            }
+            
+            return YES;
+            
+        };
+        domainList.replaceText = ^BOOL(NSString *text, UITextView *textView, NSRange range) {
+            
+            // copy-paste multiline text from file
+            NSMutableCharacterSet* delimCharSet = [NSMutableCharacterSet newlineCharacterSet];
+            if ([text rangeOfCharacterFromSet:delimCharSet].location != NSNotFound) {
+                return YES;
+            }
+            
+            // copy-paste single line address from safari address bar
+            if ([text contains:@"/"]) {
+                if (text.length > 1) {
+                    
+                    NSURL *url = [NSURL URLWithString:text];
+                    text = [[url hostWithPort] stringByAppendingString:@"\n"];
+                    if (text) {
+                        
+                        [textView replaceRange:[textView textRangeFromNSRange:range] withText:text];
+                    }
+                }
+                return NO;
+            }
+            
+            return YES;
+            
+        };
+        
+        NSString *text;
+        if (toBlacklist) {
+            
+            text = [APSharedResources.blacklistDomains componentsJoinedByString:@"\n"];
+        }
+        else {
+            
+            text = [APSharedResources.whitelistDomains componentsJoinedByString:@"\n"];
+        }
+        if (! [NSString isNullOrEmpty:text]) {
+            
+            domainList.attributedTextForEditing = [[NSAttributedString alloc] initWithString:text
+                                                                                  attributes:AEUICustomTextEditorController.defaultTextAttributes];
+        }
+        
+    }
+    else if ([segue.identifier isEqualToString:DNS_SERVER_DETAIL_SEGUE]) {
         
         APUIDnsServerDetailController *destination = (APUIDnsServerDetailController *)[(UINavigationController *)[segue destinationViewController]
                                                                                        topViewController];
@@ -201,17 +351,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
-    
-    if (selectedServer) {
+    if(indexPath.section == DNS_SERVER_SECTION_INDEX) {
+        APDnsServerObject *selectedServer = [self remoteDnsServerAtIndexPath:indexPath];
         
-        APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
-        DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
-        dispatch_async(dispatch_get_main_queue(), ^{
-           
-            [self selectActiveDnsServer:selectedServer];
-            [self reloadDataAnimated:YES];
-        });
+        if (selectedServer) {
+            
+            APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+            DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self selectActiveDnsServer:selectedServer];
+                [self reloadDataAnimated:YES];
+            });
+        }
     }
 }
 
@@ -241,6 +393,7 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Helper Methods (Private)
+
 
 
 - (void)attachToNotifications{
@@ -274,6 +427,20 @@
         self.addCustomCell.textLabel.enabled = NO;
     }
     
+    [self.logSwitch setOn:manager.dnsRequestsLogging animated:YES];
+    
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        
+        self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.blacklistDomains.count];
+        self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.whitelistDomains.count];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
+    });
+    
+    
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
@@ -281,6 +448,7 @@
                                      @"(APUIAdguardDNSController) PRO version. Alert title. On error.")
          message:manager.lastError.localizedDescription];
     }
+    
     
     [self reloadDataAnimated:YES];
 }
@@ -372,4 +540,17 @@
         }
     }
 }
+
+- (NSString *)proShortStatusDescription {
+    
+    return NSLocalizedString(@"To be able to apply DNS settings, Adguard establishes a local VPN in order to make the system use custom DNS. Please note that your outgoing traffic stays unaltered and is not routed to any remote server.", @"(APUIAdguardDNSController) PRO version. On the dns screen. It is the description under PRO Status switch.");
+}
+
+- (void)proUpdateStatuses{
+    
+    APVPNManager *manager = [APVPNManager singleton];
+    
+    self.proStatusSwitch.on = manager.enabled;
+}
+
 @end

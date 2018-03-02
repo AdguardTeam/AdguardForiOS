@@ -61,6 +61,8 @@
     
     dispatch_queue_t _readQueue;
     dispatch_block_t _closeCompletion;
+    
+    BOOL _stopHandling;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -121,7 +123,7 @@
    adguardRemoteDnsAddressesIpv4:(NSArray<NSString *> *)remoteDnsAddressesIpv4
    adguardRemoteDnsAddressesIpv6:(NSArray<NSString *> *)remoteDnsAddressesIpv6
      adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv4
-     adguardFakeDnsAddressesIpv4:(NSArray<NSString *> *)fakeDnsAddressesIpv6
+     adguardFakeDnsAddressesIpv6:(NSArray<NSString *> *)fakeDnsAddressesIpv6
 {
     
     DDLogInfo(@"(APTunnelConnectionsHandler) set device DNS addresses ipv4:\n%@device DNS addresses ipv6:\n%@remote DNS addresses ipv4:\n%@remote DNS addresses ipv6:\n%@Adguard internal DNS addresses ipv4:\n%@Adguard internal DNS addresses ipv6:\n%@",
@@ -197,6 +199,11 @@
         [_provider addObserver:self forKeyPath:@"packetFlow" options:0 context:NULL];
         _packetFlowObserver = YES;
     }
+}
+
+- (void)stopHandlingPackets {
+    
+    _stopHandling = YES;
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
@@ -311,6 +318,9 @@
 - (void)closeAllConnections:(void (^)(void))completion {
     
     @synchronized (self) {
+        
+        [self stopHandlingPackets];
+        
         NSArray <APTUdpProxySession *> *sessions = [_sessions allObjects];
         if(_sessions.count == 0) {
             
@@ -364,6 +374,8 @@
     DDLogDebug(@"(APTunnelConnectionsHandler) startHandlingPacketsInternal");
     
     dispatch_async(_readQueue, ^{
+        
+        _stopHandling = NO;
         
         [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
             
@@ -454,6 +466,13 @@
         [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
             
             __typeof__(self) sSelf = wSelf;
+            
+            if(!sSelf || sSelf->_stopHandling){
+                
+                DDLogDebug(@"In readPacketsWithCompletionHandler stop handle");
+                
+                return;
+            }
 #ifdef DEBUG
             DDLogDebug(@"In readPacketsWithCompletionHandler (before handlePackets): %lu", packetCounter);
             

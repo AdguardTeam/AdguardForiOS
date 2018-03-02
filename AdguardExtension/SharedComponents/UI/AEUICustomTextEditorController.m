@@ -175,7 +175,7 @@ static NSDictionary *_editAttrs;
     }
     //---
     
-    [self resetTextWithSizeToFit:YES];
+    [self resetText];
     
     ASSIGN_WEAK(self);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -251,7 +251,7 @@ static NSDictionary *_editAttrs;
 - (void)setTextForEditing:(NSString *)textForEditing {
     
     _textForEditing = textForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
@@ -261,7 +261,7 @@ static NSDictionary *_editAttrs;
 - (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
     
     _attributedTextForEditing = attributedTextForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
@@ -331,7 +331,7 @@ static NSDictionary *_editAttrs;
     
     _textForEditing = nil;
     _attributedTextForEditing = nil;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     //
     [self textViewDidChange:self.editorTextView];
 }
@@ -435,7 +435,7 @@ static NSDictionary *_editAttrs;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
-- (void)resetTextWithSizeToFit:(BOOL)sizeToFit {
+- (void)resetText {
     
     if (self.editorTextView == nil) {
         return;
@@ -453,6 +453,8 @@ static NSDictionary *_editAttrs;
         offset = self.editorTextView.contentOffset;
     }
     
+    [self.editorTextView setScrollEnabled:YES];
+    
     if (self.attributedTextForEditing) {
         
         [self.editorTextView setAttributedText:self.attributedTextForEditing];
@@ -469,11 +471,11 @@ static NSDictionary *_editAttrs;
     if (![NSString isNullOrEmpty:checkString]) {
         
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-        if (sizeToFit) {
-            [self.editorTextView sizeToFit];
-        }
+        // https://stackoverflow.com/questions/18696706/large-text-being-cut-off-in-uitextview-that-is-inside-uiscrollview
+        [self.editorTextView setScrollEnabled:NO];
         [self.editorTextView setScrollEnabled:YES];
         //------
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.editorTextView setContentOffset:offset];

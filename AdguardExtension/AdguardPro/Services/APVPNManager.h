@@ -75,7 +75,7 @@ extern NSString *APVpnManagerParameterTunnelMode;
 
 
 #define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX              0
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               YES
+#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               NO
 
 #define APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX       1
 
@@ -110,7 +110,7 @@ extern NSString *APVpnManagerParameterTunnelMode;
 /**
  Defines state of the filtering using "Simplified domain names filter" filter rules.
  */
-@property BOOL localFiltering;
+//@property BOOL localFiltering;
 /**
  Active DNS server.
  */
