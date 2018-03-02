@@ -58,6 +58,15 @@ static NSDictionary *persistentProductInfo;
     return mVersion;
 }
 
++ (NSString *)versionWithBuildNumber {
+    NSString *build = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    
+    if(build)
+        return [NSString stringWithFormat:@"%@(%@)", [self version], build];
+    else
+        return [self version];
+}
+
 /// Returns Product Version With Build Number
 + (NSString *)buildVersion{
     

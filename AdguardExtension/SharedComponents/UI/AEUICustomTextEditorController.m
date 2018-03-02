@@ -30,6 +30,8 @@
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
+#define FILTER_RULE_SYNTAX_LINK             @"https://kb.adguard.com/general/how-to-create-your-own-ad-filters"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
 
@@ -140,6 +142,7 @@ static NSDictionary *_editAttrs;
     [super viewDidLoad];
     
     [self setLoadingStatus:_loadingStatusHandler];
+    [self setShowFilterRules:_showFilterRules];
     
     _editting = NO;
 
@@ -264,12 +267,17 @@ static NSDictionary *_editAttrs;
 
 - (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text {
     
+    _currentSearchString = text;
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
+    _currentSelectionType = selectionType;
+    [self updateSelectionOnTextView];
+    
     NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:text] || text.length > len) {
         return NO;
     }
     
-    _currentSearchString = text;
+    
     
     _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
@@ -277,10 +285,23 @@ static NSDictionary *_editAttrs;
         return NO;
     }
     
-    _currentSelectionType = selectionType;
+    
     [self updateSelectionOnTextView];
 
     return YES;
+}
+
+- (void)setShowFilterRules:(BOOL)showFilterRules {
+    _showFilterRules = showFilterRules;
+    
+    if(self.showFilterRules){
+        self.rulesButton.enabled = YES;
+        self.rulesButton.tintColor = nil;
+    }
+    else {
+        self.rulesButton.enabled = NO;
+        self.rulesButton.tintColor = [UIColor clearColor];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -313,6 +334,10 @@ static NSDictionary *_editAttrs;
     [self resetTextWithSizeToFit:NO];
     //
     [self textViewDidChange:self.editorTextView];
+}
+
+- (IBAction)clickRules:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK]];
 }
 
 /////////////////////////////////////////////////////////////////////

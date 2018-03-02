@@ -34,6 +34,12 @@ typedef enum {
     APVpnConnectionStatusInvalid
 } APVpnConnectionStatus;
 
+typedef enum : NSUInteger {
+    
+    APVpnManagerTunnelModeSplit = 0,
+    APVpnManagerTunnelModeFull
+} APVpnManagerTunnelMode;
+
 
 /**
  This notification arises when state or mode of the vpn is changed.
@@ -54,6 +60,12 @@ extern NSString *APVpnManagerParameterLocalFiltering;
  Error domain for errors from vpn manager.
  */
 extern NSString *APVpnManagerErrorDomain;
+
+/**
+ Key of the paramenter, wich contain APVpnManagerTunnelMode value.
+ */
+extern NSString *APVpnManagerParameterTunnelMode;
+
 
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
@@ -127,6 +139,11 @@ extern NSString *APVpnManagerErrorDomain;
  Switch on/off of the fake vpn.
  */
 @property BOOL enabled;
+
+/** 
+ tunnel mode full/split/auto
+ */
+@property APVpnManagerTunnelMode tunnelMode;
 
 /**
  Adds custom (editable) DNS server.

@@ -25,6 +25,10 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
+#ifdef PRO
+#import "APVPNManager.h"
+#import "APDnsServerObject.h"
+#endif
 
 
 NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
@@ -178,7 +182,7 @@ static AESSupport *singletonSupport;
         
         NSMutableString *sb = [NSMutableString stringWithFormat:@"Application version: %@", [ADProductInfo buildVersion]];
         
-        NSURL *supportFolder = [AESharedResources sharedResuorcesURL];
+        NSURL *supportFolder = [AESharedResources sharedLogsURL];
         if (supportFolder) {
             [sb appendFormat:@"\r\nApplication lifetime: %@", [ACFFileUtils fileCreatedTimeForUrl:supportFolder]];
         }
@@ -191,12 +195,29 @@ static AESSupport *singletonSupport;
         [sb appendFormat:@"\r\n\r\nLocale: %@", [ADLocales lang]];
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
-        [sb appendFormat:@"\r\n\r\nOptimazed enabled: %@", ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
+        [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
+        
+        NSNumber *rulesCount = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
+        NSNumber *totalRulesCount = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion];
+        [sb appendFormat:@"\r\nRules converted: %@ from: %@.", rulesCount, totalRulesCount];
+
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
         NSArray *filters = [[[AEService singleton] antibanner] filters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
+#ifdef PRO
+        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nSystem-Wide filtering %@.\r\nTunnel mode %@\r\nDNS server: %@",
+         (APVPNManager.singleton.enabled ? @"ENABLED" : @"DISABLED"),
+         (APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
+         (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
+         APVPNManager.singleton.activeRemoteDnsServer.serverName];
+        
+        if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
+            
+            [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
+        }
+#endif
         return sb;
     }
 }

@@ -1,2 +1,0 @@
-AdguardApp/Base.lproj/Main
-ActionExtension/Base.lproj/MainInterface

@@ -263,6 +263,7 @@
 #ifdef PRO
     BOOL enabled = [(UISwitch *)sender isOn];
     [[APVPNManager singleton] setEnabled:enabled];
+    DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
 #endif
 }
 
@@ -615,6 +616,7 @@
     self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     
     self.proStatusSwitch.on = manager.enabled;
+    [self proSetSystemWideEnabled:manager.enabled];
         
     if (manager.lastError) {
         [ACSSystemUtils
@@ -648,6 +650,13 @@
     }
 }
 
+- (void) proSetSystemWideEnabled:(BOOL) enabled {
+    self.proSystemWideCell.userInteractionEnabled = enabled;
+    self.proSystemWideCell.textLabel.enabled = enabled;
+    self.proDnsSettingsCell.userInteractionEnabled = enabled;
+    self.proDnsSettingsCell.textLabel.enabled = enabled;
+}
+
 #endif
 
 - (void)setToolbar{
@@ -661,10 +670,10 @@
     //Show warning if overlimit of rules was reached.
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
         
-        NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
+        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
         NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
 
-        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), rulesCount, totalRulesCount];
+        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
     }
     
     if (warningText) {

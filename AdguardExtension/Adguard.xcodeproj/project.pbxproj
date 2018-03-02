@@ -561,6 +561,11 @@
 		65A6AC951BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC961BE09FED006A86E5 /* AEUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A6AC941BE09FED006A86E5 /* AEUIUtils.m */; };
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
+		65A82BBC1EC9AD66004B0140 /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
+		65A82BBD1EC9AD91004B0140 /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
+		65A82BBE1EC9ADA4004B0140 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E051E25004600E22157 /* APDnsServerObject.m */; };
+		65A82BBF1EC9B59B004B0140 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
+		65A82BC01EC9B59C004B0140 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 655611751E5C485000F39A7C /* NSData+GZIP.m */; };
 		65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65AE3DAD1E8DC1F700A6627B /* AdguardPro.Tunnel.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65AE3D981E8DC1A200A6627B /* AdguardPro.Tunnel.strings */; };
@@ -624,6 +629,8 @@
 		65CB60371D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
 		65CE8DA91E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
 		65CE8DAA1E65B98D009EBCC6 /* AEUICustomTextEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */; };
+		65D8294F1EDDA905008F7F30 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
+		65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		65D9A2661C034095004DA210 /* AEUIAdvSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */; };
 		65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
@@ -697,6 +704,8 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -917,7 +926,7 @@
 		652F588C1E106DF10012353C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		652F58B01E106FEA0012353C /* AdguardLogSender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardLogSender.entitlements; sourceTree = "<group>"; };
 		652F58DE1E1071470012353C /* AdguardLogSenderPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardLogSenderPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AdguardLogSender copy-Info.plist"; path = "/Users/still/Documents/dev/AG/ios/AdguardExtension/AdguardLogSender copy-Info.plist"; sourceTree = "<absolute>"; };
+		652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AdguardLogSender copy-Info.plist"; sourceTree = "<group>"; };
 		652F89F21B92F2E5002E0601 /* AEUISubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionController.h; sourceTree = "<group>"; };
 		652F89F31B92F2E5002E0601 /* AEUISubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUISubscriptionController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		652F89F51B92F94D002E0601 /* AEUISubscriptionSectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUISubscriptionSectionObject.h; sourceTree = "<group>"; };
@@ -925,7 +934,7 @@
 		653153411CF9911800C92A73 /* AdguardPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AdguardPro.entitlements; sourceTree = "<group>"; };
 		653153441CF9935D00C92A73 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
 		653153461CF9939300C92A73 /* ProBlockingExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProBlockingExtension.entitlements; sourceTree = "<group>"; };
-		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APVPNManager.h; sourceTree = "<group>"; };
+		653153601CFC63C000C92A73 /* APVPNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = APVPNManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		653153611CFC63C000C92A73 /* APVPNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APVPNManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		653153631CFC899E00C92A73 /* APUIProSectionFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APUIProSectionFooter.h; sourceTree = "<group>"; };
 		653153641CFC899E00C92A73 /* APUIProSectionFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = APUIProSectionFooter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -947,8 +956,6 @@
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		6553E07C1E56EE1300A6575A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		6553E07E1E56EE1E00A6575A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		654F5BC51E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		654F5BC61E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		654F5BC71E76C21F00B8C1EC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ProLaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1252,10 +1259,11 @@
 		65CE8DA81E65B98D009EBCC6 /* AEUICustomTextEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUICustomTextEditorController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65D04F7C1C872B92001A9A02 /* ProcessingTemplate.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProcessingTemplate.js; sourceTree = "<group>"; };
 		65D04F7D1C872B92001A9A02 /* selector.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = selector.css; sourceTree = "<group>"; };
+		65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		65D9A25D1C0328E6004DA210 /* AESSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESSupport.h; sourceTree = "<group>"; };
 		65D9A25E1C0328E6004DA210 /* AESSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESSupport.m; sourceTree = "<group>"; };
 		65D9A2641C034095004DA210 /* AEUIAdvSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUIAdvSettingsController.h; sourceTree = "<group>"; };
-		65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUIAdvSettingsController.m; sourceTree = "<group>"; };
+		65D9A2651C034095004DA210 /* AEUIAdvSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEUIAdvSettingsController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65DAE6E31B8B76B60020BC3C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		65E5A0991B8632F600319AA3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -1317,6 +1325,8 @@
 		65F398651B7B6A5300ABCD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
+		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1341,6 +1351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				655612131E5C789700F39A7C /* libz.tbd in Frameworks */,
+				65D8294F1EDDA905008F7F30 /* NetworkExtension.framework in Frameworks */,
 				65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */,
 				65C98AA31D3661B500E4B57D /* libresolv.tbd in Frameworks */,
 			);
@@ -1361,6 +1372,7 @@
 				6598869D1CF74DE9003ECD1C /* AVKit.framework in Frameworks */,
 				6598869E1CF74DE9003ECD1C /* MessageUI.framework in Frameworks */,
 				6598869F1CF74DE9003ECD1C /* Social.framework in Frameworks */,
+				65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
@@ -1711,6 +1723,8 @@
 				655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */,
 				655A01FF1C6B7686000F00D7 /* ACNNetworking.h */,
 				655A02001C6B7686000F00D7 /* ACNNetworking.m */,
+				D004F1F81F16338400F75A4B /* ACNIPUtils.h */,
+				D004F1F91F16338400F75A4B /* ACNIPUtils.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1970,6 +1984,14 @@
 			path = js;
 			sourceTree = "<group>";
 		};
+		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		65EC9A021BB9824C00F53F3B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2092,6 +2114,7 @@
 				652F587A1E106DF10012353C /* AdguardLogSender */,
 				65F398121B7B684700ABCD39 /* Products */,
 				652F58DF1E1071470012353C /* AdguardLogSender copy-Info.plist */,
+				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2211,62 +2234,6 @@
 			passBuildSettingsInEnvironment = 1;
 			productName = "Clean Script";
 		};
-		6548B0601C50EF630092E77C /* Fix Base Application Strings */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./fix-base-application-strings.py";
-			buildConfigurationList = 6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/python;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private/Resources";
-			dependencies = (
-			);
-			name = "Fix Base Application Strings";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Import Localization";
-		};
-		65982AEB1BA16ECA00770EA9 /* Export Localization */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = ./exportLocalization.sh;
-			buildConfigurationList = 65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-			dependencies = (
-			);
-			name = "Export Localization";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Export Localization";
-		};
-		65982AF81BA1A64300770EA9 /* Import Localization */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = ./importLocalization.sh;
-			buildConfigurationList = 65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../SupportingScripts/Private";
-			dependencies = (
-			);
-			name = "Import Localization";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Import Localization";
-		};
-		65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../";
-			dependencies = (
-			);
-			name = "Git Tagging PRO (Beta.Release Branch)";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Git Tagging (Beta/Release Branch)";
-		};
 		65B40D2A1BDE520500A9C595 /* Run Builder */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = ./runBuilder.sh;
@@ -2280,20 +2247,6 @@
 			name = "Run Builder";
 			passBuildSettingsInEnvironment = 1;
 			productName = "Run Builder";
-		};
-		65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "./SupportingScripts/Private/git-tagging.sh $(ACTION)";
-			buildConfigurationList = 65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */;
-			buildPhases = (
-			);
-			buildToolPath = /bin/bash;
-			buildWorkingDirectory = "$(SRCROOT)/../";
-			dependencies = (
-			);
-			name = "Git Tagging (Beta.Release Branch)";
-			passBuildSettingsInEnvironment = 1;
-			productName = "Git Tagging (Beta/Release Branch)";
 		};
 /* End PBXLegacyTarget section */
 
@@ -2556,6 +2509,11 @@
 					};
 					652F58B11E1071470012353C = {
 						DevelopmentTeam = N33TQXN8C7;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -2574,12 +2532,6 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 659886481CF74DE9003ECD1C;
-					};
-					65982AEB1BA16ECA00770EA9 = {
-						CreatedOnToolsVersion = 7.0;
-					};
-					65982AF81BA1A64300770EA9 = {
-						CreatedOnToolsVersion = 7.0;
 					};
 					659886481CF74DE9003ECD1C = {
 						DevelopmentTeam = N33TQXN8C7;
@@ -2615,9 +2567,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					65CB60381D75DF8B005A3C04 = {
-						CreatedOnToolsVersion = 7.3.1;
 					};
 					65F398101B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2684,18 +2633,13 @@
 				65F398291B7B684700ABCD39 /* AdguardTests */,
 				65F3985D1B7B6A5300ABCD39 /* AdguardBlockingExtension */,
 				65C52B351B906105003AF42F /* ActionExtension */,
-				65982AEB1BA16ECA00770EA9 /* Export Localization */,
-				65982AF81BA1A64300770EA9 /* Import Localization */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
-				6548B0601C50EF630092E77C /* Fix Base Application Strings */,
 				65423D951C89B7C900DD1224 /* Clean Script */,
 				659886481CF74DE9003ECD1C /* Adguard Pro */,
 				659886EC1CF83580003ECD1C /* ProActionExtension */,
 				659887411CF83947003ECD1C /* ProBlockingExtension */,
 				658237321D07FE6700B824F4 /* ProTunnel */,
 				65B621011D2D3D9E0047248F /* AdguardProTests */,
-				65CB60381D75DF8B005A3C04 /* Git Tagging (Beta.Release Branch) */,
-				65B39E031D75E9B2001AD773 /* Git Tagging PRO (Beta.Release Branch) */,
 				652F58781E106DF10012353C /* AdguardLogSender */,
 				652F58B11E1071470012353C /* AdguardLogSenderPro */,
 				65040D261E11657F00DE25D1 /* Getting External Javascript Libs */,
@@ -2954,6 +2898,7 @@
 				652F58F51E1072690012353C /* FMStatementQuotedRecogniser.m in Sources */,
 				652F58F61E1072690012353C /* AESAntibanner.m in Sources */,
 				652F58F71E1072690012353C /* AESFilterConverter.m in Sources */,
+				65A82BBF1EC9B59B004B0140 /* NSData+GZIP.m in Sources */,
 				652F58F81E1072690012353C /* AEWhitelistDomainObject.m in Sources */,
 				652F58F91E1072690012353C /* AEBlacklistDomainObject.m in Sources */,
 				652F58901E106FD40012353C /* ACLExecuteBlockDelayed.m in Sources */,
@@ -3004,6 +2949,7 @@
 				652F58FD1E1073080012353C /* ABECFilterParsers.m in Sources */,
 				652F58FE1E1073080012353C /* ABECRequest.m in Sources */,
 				652F58FF1E1073080012353C /* ACFFileUtils.m in Sources */,
+				65A82BBE1EC9ADA4004B0140 /* APDnsServerObject.m in Sources */,
 				652F59001E1073080012353C /* ACIOStream.m in Sources */,
 				652F59011E1073080012353C /* ACIOUtils.m in Sources */,
 				652F59021E1073080012353C /* Reachability.m in Sources */,
@@ -3014,6 +2960,7 @@
 				652F59071E1073080012353C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				652F59081E1073080012353C /* FMDatabase.m in Sources */,
 				652F59091E1073080012353C /* FMDatabaseAdditions.m in Sources */,
+				65A82BBC1EC9AD66004B0140 /* APVPNManager.m in Sources */,
 				652F590A1E1073080012353C /* FMDatabasePool.m in Sources */,
 				652F590B1E1073080012353C /* FMDatabaseQueue.m in Sources */,
 				652F590C1E1073080012353C /* FMResultSet.m in Sources */,
@@ -3032,11 +2979,13 @@
 				652F58B71E1071470012353C /* ACLLogger.m in Sources */,
 				652F58B81E1071470012353C /* ACLWildcard.m in Sources */,
 				652F58B91E1071470012353C /* CLIColor.m in Sources */,
+				65A82BBD1EC9AD91004B0140 /* APSharedResources.m in Sources */,
 				652F58BA1E1071470012353C /* DDAbstractDatabaseLogger.m in Sources */,
 				652F58BB1E1071470012353C /* DDASLLogger.m in Sources */,
 				652F58BC1E1071470012353C /* DDFileLogger.m in Sources */,
 				652F58BD1E1071470012353C /* DDLog.m in Sources */,
 				652F58BE1E1071470012353C /* DDTTYLogger.m in Sources */,
+				65A82BC01EC9B59C004B0140 /* NSData+GZIP.m in Sources */,
 				652F58BF1E1071470012353C /* DDContextFilterLogFormatter.m in Sources */,
 				652F58C01E1071470012353C /* DDDispatchQueueLogFormatter.m in Sources */,
 				652F58C11E1071470012353C /* DDMultiFormatter.m in Sources */,
@@ -3126,6 +3075,7 @@
 				653B4CE71DA5001D00B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				65B621251D3139FF0047248F /* APTEndpoint.m in Sources */,
 				6581C92D1D6494DF00E739CC /* ABECFilter.m in Sources */,
+				D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				653AE9F41D084B6400AC81B4 /* ACLExecuteBlockDelayed.m in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
@@ -3246,6 +3196,7 @@
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				659886951CF74DE9003ECD1C /* AESAntibanner.m in Sources */,
 				659886961CF74DE9003ECD1C /* DDMultiFormatter.m in Sources */,
+				D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */,
 				65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */,
 				659886971CF74DE9003ECD1C /* ACLJobController.m in Sources */,
 				659886981CF74DE9003ECD1C /* AEUISubscriptionTableViewCell.m in Sources */,
@@ -4053,29 +4004,6 @@
 			};
 			name = Release;
 		};
-		6548B0621C50EF630092E77C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		6548B0631C50EF630092E77C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		6582373F1D07FE6700B824F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
@@ -4159,52 +4087,6 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_TARGET_NAME = "Adguard Pro";
-			};
-			name = Release;
-		};
-		65982AED1BA16ECA00770EA9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65982AEE1BA16ECA00770EA9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		65982AFA1BA1A64300770EA9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65982AFB1BA1A64300770EA9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -4316,37 +4198,6 @@
 			};
 			name = Release;
 		};
-		65B39E051D75E9B2001AD773 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65B39E061D75E9B2001AD773 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		65B40D2B1BDE520500A9C595 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4435,37 +4286,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		65CB60391D75DF8B005A3C04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUGGING_SYMBOLS = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		65CB603A1D75DF8B005A3C04 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -4698,15 +4518,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6548B0611C50EF630092E77C /* Build configuration list for PBXLegacyTarget "Fix Base Application Strings" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6548B0621C50EF630092E77C /* Debug */,
-				6548B0631C50EF630092E77C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		6582373E1D07FE6700B824F4 /* Build configuration list for PBXNativeTarget "ProTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4721,24 +4532,6 @@
 			buildConfigurations = (
 				658FED001E240B8F0013BCE3 /* Debug */,
 				658FED011E240B8F0013BCE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65982AEC1BA16ECA00770EA9 /* Build configuration list for PBXLegacyTarget "Export Localization" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65982AED1BA16ECA00770EA9 /* Debug */,
-				65982AEE1BA16ECA00770EA9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65982AF91BA1A64300770EA9 /* Build configuration list for PBXLegacyTarget "Import Localization" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65982AFA1BA1A64300770EA9 /* Debug */,
-				65982AFB1BA1A64300770EA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4770,15 +4563,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65B39E041D75E9B2001AD773 /* Build configuration list for PBXLegacyTarget "Git Tagging PRO (Beta.Release Branch)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65B39E051D75E9B2001AD773 /* Debug */,
-				65B39E061D75E9B2001AD773 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		65B40D2D1BDE520600A9C595 /* Build configuration list for PBXLegacyTarget "Run Builder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4802,15 +4586,6 @@
 			buildConfigurations = (
 				65C52B421B906105003AF42F /* Debug */,
 				65C52B431B906105003AF42F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65CB603B1D75DF8B005A3C04 /* Build configuration list for PBXLegacyTarget "Git Tagging (Beta.Release Branch)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65CB60391D75DF8B005A3C04 /* Debug */,
-				65CB603A1D75DF8B005A3C04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

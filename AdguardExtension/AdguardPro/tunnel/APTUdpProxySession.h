@@ -65,4 +65,9 @@
  */
 - (void)appendPackets:(NSArray<NSData *> *)packets;
 
+/**
+ Closes UPD session.
+ */
+- (void)close;
+
 @end

@@ -20,8 +20,10 @@
 #import "APUIDnsServersController.h"
 #import "APVPNManager.h"
 #import "ACommons/ACSystem.h"
+#import "ACommons/ACLang.h"
 #import "APDnsServerObject.h"
 #import "APUIDnsServerDetailController.h"
+#import "ACNIPUtils.h"
 
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
@@ -74,6 +76,16 @@
         
         [self updateStatuses];
     });
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    if(![ACNIPUtils isIpv4Available]) {
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(APUIAdguardDNSController) PRO version. Alert title. On warning.") message:NSLocalizedString(@"You are connecteed to the ipv6-only network. In such networks you can not use custom DNS servers. The 'System default' DNS setting will be used instead.", @"(APUIAdguardDNSController) Alert message. When custom dns not available.")];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -194,6 +206,7 @@
     if (selectedServer) {
         
         APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+        DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
         dispatch_async(dispatch_get_main_queue(), ^{
            
             [self selectActiveDnsServer:selectedServer];

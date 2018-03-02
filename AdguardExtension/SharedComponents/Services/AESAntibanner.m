@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+#import <UIKit/UIApplication.h>
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "ADomain/ADomain.h"
@@ -24,6 +25,9 @@
 #import "AESharedResources.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
+
+#define AES_TRANSACTION_TASK_NAME        @"AESAntibaner-Transaction_Task"
+
 
 NSString *ASAntibannerUpdatedFiltersKey = @"ASAntibannerUpdatedFiltersKey";
 NSString *ASAntibannerInstalledNotification = @"ASAntibannerInstalledNotification";
@@ -81,6 +85,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     ASDFiltersI18n *_dbFiltersI18nCache;
     ASDGroupsI18n *_dbGroupsI18nCache;
+    
+    UIBackgroundTaskIdentifier _transactionBackroundTaskID;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -96,6 +102,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
         
+        __typeof__(self) __weak wSelf = self;
+        
         updateFilterFromUI =
         [[ACLExecuteBlockDelayed alloc]
          initWithTimeout:AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY
@@ -103,16 +111,19 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
          queue:workQueue
          block:^{
              
-             if (!serviceEnabled) return;
+             __typeof__(self) sSelf = wSelf;
              
-             dispatch_async(workQueue, ^{
+             if (!sSelf->serviceEnabled)
+                 return;
+             
+             dispatch_async(sSelf->workQueue, ^{
                  
-                 [self updateAntibannerForced:NO interactive:YES];
+                 [sSelf updateAntibannerForced:NO interactive:YES];
              });
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:self];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
              });
              
          }];
@@ -914,6 +925,11 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             return;
         }
         
+        [self beginBackgroundTaskWithExpirationHandler:^{
+            
+            [self rollbackTransactionInternal:YES];
+        }];
+        
         [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
             [db beginDeferredTransaction];
         }];
@@ -934,13 +950,22 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             self.updatesRightNow = NO;
         }
+        
+        [self endBackgroundTask];
+        
         _inTransaction = NO;
     });
     [[ASDatabase singleton] readUncommited:NO];
     [[ASDatabase singleton] resetIsolationQueue:workQueue];
+    
 }
 
 - (void)rollbackTransaction{
+    
+    [self rollbackTransactionInternal:NO];
+}
+
+- (void)rollbackTransactionInternal:(BOOL)backgroundTaskExpired{
     
     dispatch_sync(workQueue, ^{
         
@@ -952,6 +977,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             self.updatesRightNow = NO;
         }
+        
+        if(!backgroundTaskExpired)
+            [self endBackgroundTask];
+        
         _inTransaction = NO;
     });
     [[ASDatabase singleton] readUncommited:NO];
@@ -2015,6 +2044,25 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     toMeta.editable = [fromMeta.editable copy];
     toMeta.removable = [fromMeta.removable copy];
 
+}
+
+- (void) beginBackgroundTaskWithExpirationHandler:(void (^)(void))expirationBlock {
+    
+#ifndef APP_EXTENSION
+    _transactionBackroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_TRANSACTION_TASK_NAME expirationHandler:^{
+        
+        if(expirationBlock)
+            expirationBlock();
+    }];
+#endif
+}
+
+- (void) endBackgroundTask {
+    
+#ifndef APP_EXTENSION
+    [[UIApplication sharedApplication] endBackgroundTask:_transactionBackroundTaskID];
+    _transactionBackroundTaskID = UIBackgroundTaskInvalid;
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////////

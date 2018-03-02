@@ -45,6 +45,8 @@
     
     rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
     
+    rulesList.showFilterRules = YES;
+    
     [rulesList setLoadingStatus:YES];
     
     AEUIRulesController *result = [AEUIRulesController new];

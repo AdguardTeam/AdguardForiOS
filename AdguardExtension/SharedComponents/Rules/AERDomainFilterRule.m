@@ -29,15 +29,6 @@
 #pragma mark -  Constructor (parsing rule text)
 /////////////////////////////////////////////////////////////////////
 
-/*
-+ (void)initialize {
-
-    if (self == [AERDomainFilterRule class]) {
-
-    }
-}
-*/
-
 /// Init (parsing rule text)
 - (id)initWithRule:(NSString *)rule {
     
@@ -45,6 +36,10 @@
         
         if ([self isValidRuleText:rule] == NO) {
             DDLogWarn(@"Error creating invalid rule: %@", rule);
+            return nil;
+        }
+        
+        if ([self isComment:rule]) {
             return nil;
         }
         
@@ -186,10 +181,9 @@
 /////////////////////////////////////////////////////////////////////
 
 
-- (BOOL)isValidRuleText:(NSString *)ruleText {
+- (BOOL)isValidRuleText:(__unsafe_unretained NSString *)ruleText {
     
     if ([NSString isNullOrEmpty:ruleText]
-        || [[NSString stringByTrim:ruleText] hasPrefix:COMMENT]
         || [ruleText contains:MASK_OBSOLETE_SCRIPT_INJECTION]) {
         
         return NO;
@@ -211,6 +205,11 @@
     }
     
     return YES;
+}
+
+- (BOOL)isComment:(__unsafe_unretained NSString *)ruleText {
+    
+    return [[NSString stringByTrim:ruleText] hasPrefix:COMMENT];
 }
 
 - (void)findParts:(NSString *)urlmask {
