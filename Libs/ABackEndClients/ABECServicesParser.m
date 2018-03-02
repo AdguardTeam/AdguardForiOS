@@ -26,8 +26,7 @@
 - (BOOL)parseData:(NSData *)data {
     
     NSError *error = nil;
-    NSDictionary *root =
-    [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    NSDictionary *root = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     
     if (error) {
         

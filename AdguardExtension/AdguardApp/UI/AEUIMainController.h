@@ -47,6 +47,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *proSectionCells;
 @property (weak, nonatomic) IBOutlet UITableViewCell *proDnsSettingsCell;
+@property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *privacySettingsCells;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
 @property (strong, nonatomic) IBOutlet MGSwipeTableCell *videoCell;

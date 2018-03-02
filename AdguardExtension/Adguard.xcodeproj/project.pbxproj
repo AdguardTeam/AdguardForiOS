@@ -711,7 +711,6 @@
 		D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
 		D0295AEF1F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
 		D0295AF01F54477800C2C844 /* AEUIStarsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0295AEE1F54477800C2C844 /* AEUIStarsLayer.m */; };
-		D02EFD081F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D0427C781F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0427C791F434129002FB018 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
@@ -5852,7 +5851,6 @@
 				D0FDF0D11F6955EE00A5550A /* AEUIWelcomePagerController.m in Sources */,
 				653DB37E1BF228640064ED91 /* AEUISubscriptionTableViewCell.m in Sources */,
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
-				D02EFD081F7B9327006CDBD5 /* ABECServicesParser.m in Sources */,
 				650F88F41B9374AD000A6012 /* AEUIRulesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

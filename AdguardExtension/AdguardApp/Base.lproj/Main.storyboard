@@ -1890,6 +1890,7 @@
                         <outletCollection property="proSectionCells" destination="pn8-1c-rSh" id="14z-sQ-cLQ"/>
                         <outletCollection property="proSectionCells" destination="sz8-VX-xxt" id="yb8-CY-spT"/>
                         <outletCollection property="proSectionCells" destination="sI5-av-aiA" id="8LF-be-0ey"/>
+                        <outletCollection property="privacySettingsCells" destination="S5I-gh-aNS" id="tjE-BF-Czy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKw-sT-1kJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
