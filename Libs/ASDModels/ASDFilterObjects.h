@@ -107,7 +107,7 @@
 /**
  Filter representation in filter group localization context.
  */
-@interface ASDFilterGroupLocalization : NSObject
+@interface ASDFilterGroupLocalization : ACObject
 
 - (id)initFromDbResult:(FMResultSet *)result;
 
@@ -123,7 +123,7 @@
 /**
  Service class for holding and operating with group localizations.
  */
-@interface ASDGroupsI18n : NSObject
+@interface ASDGroupsI18n : ACObject
 
 /**
  Initializes object with appropriate localizations data.
@@ -206,7 +206,7 @@
 /**
  Filter representation in localization context.
  */
-@interface ASDFilterLocalization : NSObject
+@interface ASDFilterLocalization : ACObject
 
 /**
  Initializing using Database result object.
@@ -226,7 +226,7 @@
 /**
  Service class for holding and operating with filter localizations.
  */
-@interface ASDFiltersI18n : NSObject
+@interface ASDFiltersI18n : ACObject
 
 /**
  Initializes object with appropriate localizations data.

@@ -25,6 +25,7 @@
 #import "AESharedResources.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
+#define UPDATE_METADATA_TIMEOUT           3.0
 
 #define AES_TRANSACTION_TASK_NAME        @"AESAntibaner-Transaction_Task"
 
@@ -655,16 +656,21 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     @autoreleasepool {
         
+        if(!_metadataCacheForFilterSubscription) {
+            _metadataCacheForFilterSubscription = [AESharedResources new].filtersMetadataCache;
+        }
+        
         if (! _metadataCacheForFilterSubscription
             || refresh
             || ([_metaCacheLastUpdated timeIntervalSinceNow] * -1) >= AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD) {
             // trying load metadata from backend service.
             if ([reach isReachable]) {
                 
-                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
+                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] loadMetadataWithTimeoutInterval:@(UPDATE_METADATA_TIMEOUT)];
                 if (metadata) {
                     
                     _metadataCacheForFilterSubscription = metadata;
+                    [AESharedResources new].filtersMetadataCache = _metadataCacheForFilterSubscription;
                     _metaCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -696,16 +702,21 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     @autoreleasepool {
         
+        if(!_i18nCacheForFilterSubscription) {
+            _i18nCacheForFilterSubscription = [AESharedResources new].i18nCacheForFilterSubscription;
+        }
+        
         if (! _i18nCacheForFilterSubscription
             || refresh
             || ([_i18nCacheLastUpdated timeIntervalSinceNow] * -1) >= AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD) {
             // trying load metadata from backend service.
             if ([reach isReachable]) {
                 
-                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] i18n];
+                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] loadI18nWithTimeoutInterval:@(UPDATE_METADATA_TIMEOUT)];
                 if (i18n) {
                     
                     _i18nCacheForFilterSubscription = i18n;
+                    [AESharedResources new].i18nCacheForFilterSubscription = _i18nCacheForFilterSubscription;
                     _i18nCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -1235,7 +1246,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         // Get filters/groups metadata and i18n from backend and insert to  DB.
         // update i18n
-        ABECFilterClientLocalization *i18n = [filterClient i18n];
+        ABECFilterClientLocalization *i18n = [filterClient loadI18nWithTimeoutInterval:nil];
         if (i18n) {
             
             [theDB exec:^(FMDatabase *db, BOOL *rollback) {
@@ -1254,7 +1265,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         }
         
         // main updating work
-        ABECFilterClientMetadata *metadata = [filterClient metadata];
+        ABECFilterClientMetadata *metadata = [filterClient loadMetadataWithTimeoutInterval:nil];
         if (metadata) {
             
             // get metadata only for filters, which must be updated

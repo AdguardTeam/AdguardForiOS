@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -198,6 +198,17 @@ extern NSString *AEDefaultsInvertedWhitelist;
  We need it because filter update process is performed in two steps.
  */
 @property ABECFilterClientMetadata *lastUpdateFilterMetadata;
+
+/**
+ Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
+ */
+@property ABECFilterClientMetadata *filtersMetadataCache;
+
+/**
+ Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
+ */
+@property ABECFilterClientLocalization *i18nCacheForFilterSubscription;
+
 /**
  Filter Ids from last filter update process.
  */

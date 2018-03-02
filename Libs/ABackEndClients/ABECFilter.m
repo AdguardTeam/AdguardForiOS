@@ -218,10 +218,14 @@ static ABECFilterClient *ABECFilterSingleton;
     }
 }
 
-- (ABECFilterClientMetadata *)metadata {
+- (ABECFilterClientMetadata *)loadMetadataWithTimeoutInterval:(NSNumber*)timeoutInterval{
     @autoreleasepool {
         
         ABECRequest *sURLRequest = [self createMetadataRequest];
+        if(timeoutInterval){
+            sURLRequest.timeoutInterval = [timeoutInterval doubleValue];
+        }
+        
         JSONMetadataParser *parser = [JSONMetadataParser new];
         
         parser = (JSONMetadataParser *)[self loadEntityWithRequest:sURLRequest parser:parser];
@@ -237,10 +241,14 @@ static ABECFilterClient *ABECFilterSingleton;
     }
 }
 
-- (ABECFilterClientLocalization *)i18n {
+- (ABECFilterClientLocalization *)loadI18nWithTimeoutInterval:(NSNumber *)timeoutInterval {
     @autoreleasepool {
         
         ABECRequest *sURLRequest = [ABECRequest getRequestForURL:[NSURL URLWithString:FilterI18nUrl] parameters:nil];
+        if(timeoutInterval){
+            sURLRequest.timeoutInterval = [timeoutInterval doubleValue];
+        }
+        
         JSONI18nParser *parser = [JSONI18nParser new];
         
         parser = (JSONI18nParser *)[self loadEntityWithRequest:sURLRequest parser:parser];
