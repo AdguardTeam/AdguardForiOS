@@ -18,3 +18,5 @@ ADGUARD_TUNNEL_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).tunnel
 ADGUARD_FILTER_UPDATES_ID = $(ADGUARD_BUNDLE_ID).filterUpdatesSession
 // Group for shared resources
 ADGUARD_SHARED_RESOURCES_GROUP = group.com.adguard.AdguardPro
+// Group for shared resources
+AE_SHARED_SUBSCRIPTIOSN_GROUP = group.com.adguard.AdguardPro.subscriptions

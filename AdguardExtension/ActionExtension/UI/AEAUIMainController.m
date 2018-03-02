@@ -31,6 +31,13 @@
 #import "ASDFilterObjects.h"
 #import "AESSupport.h"
 #import "AESharedResources.h"
+#import "ABECRequest.h"
+#import "ADProductInfo.h"
+
+#ifdef PRO
+#import "APVPNManager.h"
+#import "APDnsServerObject.h"
+#endif
 
 @implementation AEAUIMainController{
     
@@ -40,7 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
@@ -86,6 +94,18 @@
         
         
     }
+    
+    [AEService.singleton checkStatusWithCallback:^(BOOL enabled) {
+       
+        if(!enabled) {
+            
+            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(Action Extension - AEAUIMainController) Warning tile") message:NSLocalizedString(@"Note that the Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+        }
+    }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -208,17 +228,15 @@
 
 - (IBAction)clickMissedAd:(id)sender {
     
-    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
-    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
-    
-    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
+    NSURL *url = [AESSupport.singleton composeWebReportUrlForSite:self.url];
+    [self openUrl:url];
 }
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
     
     NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Incorrect blocking on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
-    
+
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
@@ -304,6 +322,16 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGSize size = [longTextCell.contentView
                    systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height + 1.0f; // Add 1.0f for the cell separator height
+}
+
+- (void)openUrl:(NSURL *)url {
+    UIResponder *responder = self;
+    while(responder){
+        if ([responder respondsToSelector: @selector(openURL:)]){
+            [responder performSelector: @selector(openURL:) withObject: url];
+        }
+        responder = [responder nextResponder];
+    }
 }
 
 @end

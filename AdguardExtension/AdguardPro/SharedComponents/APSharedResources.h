@@ -17,6 +17,8 @@
 */
 #import <Foundation/Foundation.h>
 #import "APCommonSharedResources.h"
+#import "ABECService.h"
+#import "APBlockingSubscription.h"
 
 @class APDnsLogRecord;
 
@@ -59,5 +61,29 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
  User-entered list of domains that are blocked at the system-wide level.
  */
 @property (class) NSArray <NSString *> *blacklistDomains;
+/**
+ save list of trackers domains at the system-wide level
+ */
++ (void) saveTrackerslistDomains: (NSDictionary <NSString *, ABECService*> *) trackerslistDomains;
+/**
+ load list of trackers domains at the system-wide level
+ */
++ (NSDictionary <NSString *, ABECService*> *) loadTrackerslistDomainsAndCacheResult:(BOOL) cacheResult;
+/**
+ service search by domain name
+ */
++ (ABECService *)serviceByDomain:(NSString*) domain;
+
+/**
+ list of hosts (domain with ip) at the system-wide level
+ */
+@property (class) NSDictionary <NSString *, NSString*> *hosts;
+
+
++ (NSString*)pathForSubscriptionsData;
++ (NSString*)pathForSubscriptionsMeta;
++ (NSString*)pathForSubscriptionsHosts;
++ (NSString *)pathForSubscriptionsRules;
+
 
 @end

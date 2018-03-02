@@ -31,10 +31,21 @@
  User Defaults key that define, create log of the DNS requests or not.
  */
 extern NSString *APDefaultsDnsLoggingEnabled;
+
+/**
+ User Defaults key, which defines active remote DNS server (APDnsServerObject object).
+ */
+extern NSString *APDefaultsActiveRemoteDnsServer;
+
 /**
  User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
  */
 extern NSString *APDefaultsCustomRemoteDnsServers;
+
+/**
+ User Defaults key, which defines list of the remote DNScrypt servers (list of APDnsServerObject objects).
+ */
+extern NSString *APDefaultsCustomRemoteDnsCryptServers;
 
 /**
  Key of the parameter, which contains remote DNS server configuration.

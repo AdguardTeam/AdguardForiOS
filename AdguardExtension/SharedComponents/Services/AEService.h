@@ -118,4 +118,6 @@ extern NSString *AESUserInfoRuleObject;
  */
 - (void)onReady:(void (^)(void))block;
 
+- (void)checkStatusWithCallback:(void (^)(BOOL))callback;
+
 @end

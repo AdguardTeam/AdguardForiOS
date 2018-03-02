@@ -30,8 +30,11 @@
 #import "AEUIUtils.h"
 #import "APDnsServerObject.h"
 #import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
+
+#define RESPONSES_SECTION 3
 
 typedef enum {
 
@@ -88,6 +91,22 @@ static NSDateFormatter *_timeFormatter;
     NSLocalizedString(@"On", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
     : NSLocalizedString(@"Off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
 
+    if(self.logRecord.isTracker) {
+        
+        ABECService * service = [APSharedResources serviceByDomain: request.name];
+        
+        self.serviceNameCell.detailTextLabel.text = service.name;
+        self.serviceDescriptionCell.detailTextLabel.text = service.serviceDescription;
+        self.servideCategoriesCell.detailTextLabel.text = [service.categories componentsJoinedByString:@", "];
+        self.serviceNotesCell.detailTextLabel.text = [service.notes componentsJoinedByString:@", "];
+    }
+    
+    [self cell: self.serviceNameCell setHidden:!self.serviceNameCell.detailTextLabel.text.length];
+    [self cell: self.serviceDescriptionCell setHidden:!self.serviceDescriptionCell.detailTextLabel.text.length];
+    [self cell: self.servideCategoriesCell setHidden:!self.servideCategoriesCell.detailTextLabel.text.length];
+    [self cell: self.serviceNotesCell setHidden:!self.serviceNotesCell.detailTextLabel.text.length];
+    
+    [self reloadDataAnimated:NO];
     
     NSMutableAttributedString *sb = [NSMutableAttributedString new];
     
@@ -99,7 +118,19 @@ static NSDateFormatter *_timeFormatter;
         // Set status cell
         if (self.logRecord.isBlacklisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by blacklist", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist.");
+            NSString* statusText;
+            
+            NSString* domain = self.logRecord.requests[0].name;
+            
+            NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
+            
+            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
+            
+            NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
+            
+            statusText = [NSString stringWithFormat:format, name];
+            
+            self.statusCell.detailTextLabel.text = statusText;
         }
         else if (self.logRecord.isWhitelisted){
             
@@ -170,7 +201,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         // Fitting size of the request name
         return [self.nameCell fitHeight];
     }
-    else if (indexPath.section == 2 && indexPath.row == 0){
+    else if (indexPath.section == RESPONSES_SECTION && indexPath.row == 0){
         
         // Fitting size of the responses
         return [self.responsesCell fitHeight];
@@ -259,7 +290,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         _domainControllCellType = DomainControllNone;
         
-        self.domainControllCell.textLabel.textColor = self.domainControllCell.textLabel.tintColor;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.domainControllCell.textLabel.textColor = self.domainControllCell.tintColor;
+        });
 
         APDnsRequest *request = self.logRecord.requests[0];
 

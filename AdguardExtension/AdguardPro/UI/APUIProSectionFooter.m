@@ -17,6 +17,7 @@
  */
 
 #import "APUIProSectionFooter.h"
+#import "AEUICommons.h"
 
 @implementation APUIProSectionFooter{
     
@@ -38,6 +39,7 @@
         _textView.layoutManager.usesFontLeading = NO;
         _textView.textContainer.lineFragmentPadding = 0;
         _textView.preservesSuperviewLayoutMargins = self.preservesSuperviewLayoutMargins = NO;
+        _textView.delegate = self;
         
         self.layoutMargins = UIEdgeInsetsMake(7, 15, 7, 15);
         
@@ -55,10 +57,10 @@
     return self;
 }
 
-- (CGFloat)height{
+- (CGFloat)heightForWidth:(CGFloat)width{
     @synchronized (self) {
         CGSize size = CGSizeZero;
-        size.width = self.bounds.size.width - self.layoutMargins.left - self.layoutMargins.right;
+        size.width = width - self.layoutMargins.left - self.layoutMargins.right;
         size = [_textView sizeThatFits:CGSizeMake(size.width, CGFLOAT_MAX)];
         return size.height + self.layoutMargins.top + self.layoutMargins.bottom;
     }
@@ -76,7 +78,7 @@
         
 //        CGFloat fontSize = [UIFont buttonFontSize];
         UIFont *font = [UIFont systemFontOfSize:13];
-        UIColor *color = [UIColor darkGrayColor];
+        UIColor *color = SUBTITLE_TEXT_COLOR;
 
 //        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //        style.alignment = NSTextAlignmentJustified;
@@ -100,6 +102,15 @@
 - (NSString *)accessibilityLabel {
     
     return _textView.text;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
+    
+    if(self.urlClickBlock && self.urlClickBlock(URL)) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

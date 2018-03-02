@@ -21,6 +21,8 @@
 @interface AEUIAboutController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UITableViewCell *howToEnableCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *howToAddRulesCell;
 
 - (IBAction)clickAdguardWebsite:(id)sender;
 - (IBAction)clickAdguardForum:(id)sender;

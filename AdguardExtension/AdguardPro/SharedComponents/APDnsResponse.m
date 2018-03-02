@@ -20,6 +20,7 @@
 
 #import "APDnsResponse.h"
 #include <arpa/inet.h>
+#include <netinet/in.h>
 #import "APDnsResourceType.h"
 #import "APDnsResourceClass.h"
 
@@ -180,35 +181,45 @@ static NSData *ipv6BlockingResourceData;
     [aCoder encodeObject:@(self.blocked) forKey:@"blocked"];
 }
 
-+ (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type {
++ (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip{
 
     APDnsResponse *response;
     NSData *rdata;
     NSString *stringValue;
     
-    switch ([type intValue]) {
-        case ns_t_a:
-            rdata = ipv4BlockingResourceData;
-            stringValue = IPV4_FOR_BLOCKING_STRING;
-            break;
-            
-        case ns_t_aaaa:
-        case ns_t_a6:
-            rdata = ipv6BlockingResourceData;
-            stringValue = IPV6_FOR_BLOCKING_STRING;
-            break;
+    if(ip.length) {
+        
+        struct    in_addr addr;
+        inet_pton(AF_INET, [ip UTF8String], &addr);
+        rdata = [NSData dataWithBytes:&(addr.s_addr) length:4];
+        
+        stringValue = ip;
+    }
+    else {
+        
+        switch ([type intValue]) {
+            case ns_t_a:
+                rdata = ipv4BlockingResourceData;
+                stringValue = ip ?: IPV4_FOR_BLOCKING_STRING;
+                break;
+                
+            case ns_t_aaaa:
+            case ns_t_a6:
+                rdata = ipv6BlockingResourceData;
+                stringValue = ip ?: IPV6_FOR_BLOCKING_STRING;
+                break;
 
-        default:
-            // not supported type, return nil;
-            return nil;
+            default:
+                // not supported type, return nil;
+                return nil;
+        }
     }
     
     response = [[APDnsResponse alloc] initWithName:name type:type class:[APDnsResourceClass internetClass]];
     response.stringValue = stringValue;
-    response.rdata = rdata;
     response.addressResponse = YES;
     response.blocked = YES;
-
+    response.rdata = rdata;
     
     return  response;
 }

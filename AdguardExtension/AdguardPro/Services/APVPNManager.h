@@ -80,11 +80,21 @@ extern NSString *APVpnChangedNotification;
  */
 @property (class, readonly) NSMutableArray <APDnsServerObject *> *predefinedDnsServers;
 
+/**
+ List of the app defined DNS Crypt servers.
+ */
+@property (nonatomic, readonly) NSArray <APDnsServerObject *> *predefinedDnsCryptServers;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
 @property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsServers;
+
+/**
+ remote DNS Crypt serevrs
+ */
+@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsCryptServers;
 
 /**
  Defines state of the filtering using "Simplified domain names filter" filter rules.
@@ -169,5 +179,16 @@ extern NSString *APVpnChangedNotification;
  which notifies that extension needs reload whitelist/blacklist of the domains.
  */
 - (void)sendReloadSystemWideDomainLists;
+
+/**
+ Loads active DNS server from deafults. It used by action extension for bug reporting.
+ */
+- (APDnsServerObject*) loadActiveRemoteDnsServer;
+
+/**
+ Removes duplicates of predefined servers from the list of custom servers.
+ https://github.com/AdguardTeam/AdguardForiOS/issues/639
+ */
+- (void) removeCustomRemoteServersDuplicates;
 
 @end

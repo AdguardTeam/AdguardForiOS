@@ -17,12 +17,13 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "StaticDataTableViewController.h"
 
 @class APDnsServerObject, APUIDnsServersController;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APUIDnsServerDetailController
-@interface APUIDnsServerDetailController : UITableViewController <UITextViewDelegate>
+@interface APUIDnsServerDetailController : StaticDataTableViewController <UITextViewDelegate>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods and Properties
@@ -30,6 +31,7 @@
 
 @property APDnsServerObject *serverObject;
 @property (weak, nonatomic) APUIDnsServersController *delegate;
+@property (nonatomic) BOOL dnsCrypt;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
@@ -38,7 +40,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextView *ipAddressesTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *removeCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *ipaddressesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *resolverNameCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *resolverAddressCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *publicKeyCell;
+
+@property (weak, nonatomic) IBOutlet UITextField *resolverNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *resolverAddressTextField;
+@property (weak, nonatomic) IBOutlet UITextField *publicKeyTextField;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions

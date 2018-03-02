@@ -70,4 +70,12 @@
 
 + (BOOL) checkIpv4WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port;
 
++ (BOOL) checkHostsLine:(NSString*) candidate ip:(NSString**)ip domain:(NSString**)domain;
+
++ (BOOL) isValidIpWithPort:(NSString*) candidate;
+
++ (BOOL) isValidUrl:(NSString*)candidate;
+
++ (NSString*) ipv4StringFromIP:(uint32_t)ip;
+
 @end
