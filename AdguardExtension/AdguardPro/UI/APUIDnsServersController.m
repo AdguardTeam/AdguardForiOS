@@ -26,6 +26,7 @@
 #import "ACNIPUtils.h"
 #import "AEUICustomTextEditorController.h"
 #import "APSharedResources.h"
+#import "AERDomainFilterRule.h"
 
 #define CHECKMARK_NORMAL_DISABLE        @"table-empty"
 #define CHECKMARK_NORMAL_ENABLE         @"table-checkmark"
@@ -177,6 +178,7 @@
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
             [self internalInsertDnsServer:serverObject atIndex:(_dnsServers.count - 1)];
+            [self reloadDataAnimated:YES];
             
             [self updateStatuses];
         }
@@ -201,6 +203,8 @@
             [self removeCellAtIndexPath:indexPath];
             
             _dnsServers = APVPNManager.singleton.remoteDnsServers;
+            
+            [self reloadDataAnimated:YES];
             
             [self updateStatuses];
         }
@@ -227,10 +231,6 @@
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             cell.textLabel.text = serverObject.serverName;
             cell.detailTextLabel.text = serverObject.serverDescription;
-            
-            [self updateCell:cell];
-            
-            [self reloadDataAnimated:YES];
         }
     }
 }
@@ -247,10 +247,11 @@
         
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
         
-        domainList.textForPlaceholder = NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
-                                                          @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.");
+        domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
+                                                   NSLocalizedString(@"List the domain names here. Separate different domain names by spaces, commas or line breaks.",
+                                                                     @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist (Whitelist) screen. The placeholder text.")];
         
-        domainList.keyboardType = UIKeyboardTypeURL;
+        domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
         
         domainList.navigationItem.title = toWhitelist
         ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
@@ -270,6 +271,13 @@
                     
                     NSString *candidate = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                     if (candidate.length) {
+                        
+                        if(toBlacklist && ![AERDomainFilterRule isValidRuleText:candidate]) {
+                            
+                            [editor selectWithType:AETESelectionTypeError text:candidate];
+                            return NO;
+                        }
+                        
                         [domains addObject:candidate];
                     }
                 }
@@ -385,7 +393,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self selectActiveDnsServer:selectedServer];
-                [self reloadDataAnimated:YES];
                 
                 if(![selectedServer.tag isEqualToString:APDnsServerTagLocal]) {
                     
@@ -461,15 +468,16 @@
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         
-        self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.blacklistDomains.count];
-        self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",APSharedResources.whitelistDomains.count];
+        NSUInteger blacklistDomainsCount = APSharedResources.blacklistDomains.count;
+        NSUInteger whitelistDomainsCount = APSharedResources.whitelistDomains.count;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self.tableView reloadData];
+           
+            self.blacklistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", blacklistDomainsCount];
+            self.whitelistCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", whitelistDomainsCount];
         });
+        
     });
-    
     
     if (manager.lastError) {
         [ACSSystemUtils
@@ -479,8 +487,7 @@
          message:manager.lastError.localizedDescription];
     }
     
-    
-    [self reloadDataAnimated:YES];
+    [self proUpdateStatuses];
 }
 
 - (void)internalInsertDnsServer:(APDnsServerObject *)serverObject atIndex:(NSUInteger)index{
@@ -539,7 +546,7 @@
     
     for (int i = 1; i < _dnsServers.count; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i - 1) inSection:DNS_SERVER_SECTION_INDEX];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
         
         [self setCell:cell selected: [activeDnsServer isEqual:_dnsServers[i]]];
     }
@@ -571,6 +578,7 @@
     APVPNManager *manager = [APVPNManager singleton];
     
     self.proStatusSwitch.on = manager.enabled;
+    self.logSwitch.enabled = manager.enabled;
 }
 
 @end

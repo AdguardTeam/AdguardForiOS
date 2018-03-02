@@ -454,9 +454,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIView *toolbar = self.navigationController.toolbar;
     if (toolbar) {
         
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        
         if (self.tableView.editing) {
             // EDIT MODE
             
@@ -478,18 +475,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             CGRect frame = toolbar.bounds;
             frame.origin = CGPointMake(0, 0);
             frame.size.height -= insets.top + insets.bottom;
-            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
-                
-                [self.toolBarView setFrame:frame];
-                UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.toolBarView];
-                UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-                if (item) {
-                    self.toolbarItems = @[spacer, item, spacer];
-                }
+            
+            [self.toolBarView setFrame:frame];
+            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.toolBarView];
+            UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+            if (item) {
+                self.toolbarItems = @[spacer, item, spacer];
             }
         }
         
-        [UIView commitAnimations];
     }
 }
 

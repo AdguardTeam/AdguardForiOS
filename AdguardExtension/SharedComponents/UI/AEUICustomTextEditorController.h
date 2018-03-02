@@ -49,6 +49,7 @@ typedef enum {
 @optional
 - (void)editorDidLoad:(AEUICustomTextEditorController *)editor;
 - (void)editorDidAppear:(AEUICustomTextEditorController *)editor;
+- (void)editor:(AEUICustomTextEditorController *)editor toggleInvertedSwitchOn:(BOOL) on;
 
 @end
 
@@ -100,7 +101,7 @@ typedef enum {
 /**
  Text for placeholder, ie when textview is empty.
  */
-@property (nonatomic) NSString *textForPlaceholder;
+@property (nonatomic) NSAttributedString *attributedTextForPlaceholder;
 /**
  show/hide filter rules button
  default NO;
@@ -123,19 +124,16 @@ typedef enum {
 /////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
+@property (weak, nonatomic) IBOutlet UIView *searchToolBar;
 @property (weak, nonatomic) IBOutlet UITextView *editorTextView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *seachToolBarConstraint;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UIToolbar *searchToolBar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarPrevious;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBarNext;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivity;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *clearAllButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rulesButton;
-
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *prevButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Actions
@@ -144,6 +142,5 @@ typedef enum {
 - (IBAction)clickSearchNext:(id)sender;
 - (IBAction)clickSearchPrev:(id)sender;
 - (IBAction)clickClearAll:(id)sender;
-
 
 @end

@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -83,6 +83,11 @@ extern NSString *AEDefaultsJSONConverterOptimize;
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
 extern NSString *AEDefaultsWifiOnlyUpdates;
+
+/**
+ User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
+ */
+extern NSString *AEDefaultsInvertedWhitelist;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -153,6 +158,12 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  Rules from whitelist, which used for Safari content-blocking.
  */
 @property NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
+
+ /**
+ Rules from inverted whitelist, which used for Safari content-blocking.
+ */
+@property AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
+
 /**
  Filter metadata from last filter update process.
  We need it because filter update process is performed in two steps.

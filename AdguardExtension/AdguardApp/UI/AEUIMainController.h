@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
+@property (weak, nonatomic) IBOutlet UILabel *whitelistLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdated;
 @property (weak, nonatomic) IBOutlet UITableViewCell *checkFiltersCell;

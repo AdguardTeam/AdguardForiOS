@@ -70,6 +70,7 @@
                     <size key="freeformSize" width="320" height="100"/>
                     <connections>
                         <outlet property="detailTextLabel" destination="aOV-3c-Ejo" id="Pzq-LB-f2a"/>
+                        <outlet property="logo" destination="Cs1-bA-dov" id="hrg-58-80x"/>
                         <outlet property="mainTextLabel" destination="C4x-UP-HFY" id="7l4-FG-JGl"/>
                     </connections>
                 </viewController>

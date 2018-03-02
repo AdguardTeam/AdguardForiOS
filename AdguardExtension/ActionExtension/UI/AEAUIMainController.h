@@ -25,7 +25,6 @@
 @property (nonatomic) NSString *domainName;
 @property (nonatomic) NSURL *url;
 @property (nonatomic) NSURL *iconUrl;
-@property (nonatomic) AEWhitelistDomainObject *domainObject;
 @property BOOL enableChangeDomainFilteringStatus;
 @property BOOL domainEnabled;
 @property BOOL injectScriptSupported;

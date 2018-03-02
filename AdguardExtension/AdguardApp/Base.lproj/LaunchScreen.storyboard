@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -10,18 +15,18 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="Cvv-VG-5dL"/>
+                        <viewControllerLayoutGuide type="bottom" id="iHB-XS-Cxo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-background" translatesAutoresizingMaskIntoConstraints="NO" id="DeF-Df-zBW">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="launch-background" translatesAutoresizingMaskIntoConstraints="NO" id="DeF-Df-zBW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-adguard-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-Lt-vE2">
-                                <rect key="frame" x="203.5" y="149.5" width="193" height="201"/>
+                                <rect key="frame" x="91" y="255.66666666666663" width="193" height="201"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="193" id="d8Z-Jo-cHE">
                                         <variation key="heightClass=regular-widthClass=regular" constant="289"/>
@@ -32,21 +37,21 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="DeF-Df-zBW" secondAttribute="bottom" id="2gm-bb-1A7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DeF-Df-zBW" secondAttribute="trailing" constant="-20" id="6G9-GF-rd4"/>
                             <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="A6b-hV-YXq"/>
                             <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="anu-Zl-ten"/>
                             <constraint firstItem="DeF-Df-zBW" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="eff-YY-b3v"/>
-                            <constraint firstItem="DeF-Df-zBW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="pWK-zu-xwh"/>
+                            <constraint firstItem="DeF-Df-zBW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fPV-DP-TsR"/>
+                            <constraint firstAttribute="bottom" secondItem="DeF-Df-zBW" secondAttribute="bottom" id="z5n-9a-rZv"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
         </scene>
     </scenes>
     <resources>

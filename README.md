@@ -1,49 +1,40 @@
-# Adguard for iOS
+# AdGuard/AdGuard Pro for iOS
+> ### Disclaimer
+> * AdGuard for iOS is a free app. We believe that all free products should be open source, and AdGuard for iOS is not an exception. Its code can be found in this repository.
+> * AdGuard Pro for iOS is also an open source product despite being a paid app. Its code can be found in this repository.
+> * Privacy policy: https://adguard.com/privacy/ios.html (Briefly: AdGuard sends only necessary, limited information, e.g. information required for filter updates).
 
-Adguard for iOS is the most recent addition to Adguard family, a long-awaited solution for iPhone/iPad owners. 
-Adguard for iOS will come in a form of a free browser extension. The development is still in progress.
+AdGuard for iOS is a Content blocker for Safari browser. It uses the latest ad blocking technology that enables the best filtering quality while still allowing to use multiple filters at the same time.
+
+To get more information and to download AdGuard for iOS, visit our website [https://adguard.com/](https://adguard.com/adguard-ios/overview.html).
+
+AdGuard Pro is an advanced version of AdGuard for iOS that provides access to custom DNS settings. It has multiple applications like ad blocking, parental control and protecting personal data from theft.
+
+To get more information and to download AdGuard Pro for iOS, follow this link [https://adguard.com/](https://adguard.com/adguard-ios-pro/overview.html).
 
 <img src="https://cloud.githubusercontent.com/assets/8577533/11779507/983bb9f4-a26c-11e5-8140-99bc72d02cec.png" width="270px"><img src="https://cloud.githubusercontent.com/assets/8577533/24612408/deec4a74-188d-11e7-92b1-e2b0ae9c89ae.png" width="270px"><img src="https://cloud.githubusercontent.com/assets/8577533/24968657/8e8266c4-1fb6-11e7-8351-78927cde39e6.PNG" width="270px">
 
-### How to get Adguard for iOS?  
-Adguard for iOS can be downloaded from AppStore:
-https://itunes.apple.com/us/app/adguard-adblock-privacy-protection/id1047223162?mt=8
+### How to report an issue?
 
-### How to become a beta tester?
+GitHub can be used to report a bug or to submit a feature request. To do so, go to [this page](https://github.com/AdguardTeam/AdguardForiOS/issues) and click the *New issue* button.
 
-All information related to Adguard beta-testing is collected in this [blog article](https://blog.adguard.com/en/adguard-beta-test/). 
-
-### Requirements
-Aaguard app uses content blocking API, which is only available on 64-bit devices. This means the supported devices are: iPhone 5s, iPhone 6, iPhone 6 Plus, iPhone 6s, iPhone 6s Plus, iPad Air, iPad Air Wi-Fi + Cellular, iPad mini 2, iPad mini 2 Wi-Fi + Cellular, iPad Air 2, iPad Air 2 Wi-Fi + Cellular, iPad mini 3, iPad mini 3 Wi-Fi + Cellular, iPad mini 4, iPad mini 4 Wi-Fi + Cellular, iPad Pro, iPad Pro Wi-Fi + Cellular and iPod touch (6th generation).
-
-Adguard also requires 24.4 Mb of free disk space to install. 
+>**Note:** for the filter-related issues (missed ads, false positives etc.) use the [dedicated repository](https://github.com/AdguardTeam/AdguardFilters). 
 
 ### Our plans
 
-To see the 'big picture', watch current progress and get an idea of approximate dates for iOS releases, see this page: https://github.com/AdguardTeam/AdguardForiOS/milestones
-
-If you want to see what's in our nearest plans, or would like to submit a new bug/feature request, you can do it here: https://github.com/AdguardTeam/AdguardForiOS/issues
+To see the 'big picture', to watch current progress and to get an idea of approximate dates for upcoming AdGuard for iOS releases, see this page: https://github.com/AdguardTeam/AdguardForiOS/milestones
 
 ### Releases
 
-Latest stable free version: 1.3.0 <br/>
-Latest free beta: 1.3.0
+ * AdGuard for iOS latest version: [1.3.1](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v.1.3.1)
+ * AdGuard Pro for iOS latest version: [1.3.2](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v1.3.2-pro)
 
-Latest stable PRO version: 1.3.0 <br/>
-Latest PRO beta: 1.3.0
+You can find all AdGuard and AdGuard Pro for iOS releases here: https://github.com/AdguardTeam/AdguardForiOS/releases
 
-iOS versions: https://github.com/AdguardTeam/AdguardForiOS/releases
+### How to become a beta tester?
+
+You can submit an application to participate in AdGuard/AdGuard Pro for iOS beta-testing program. All necessary information on this topic can be found in our [Knowledgebase article](https://kb.adguard.com/en/general/adguard-beta-testing-program#adguardadguard-pro-for-ios).
 
 ### Acknowledgements
 
-Developers of Adguard for iOS would like to express their gratitude for the following software, without which the iOS version would not be possible:
-
-StaticDataTableViewController by peterpaulis (https://github.com/peterpaulis/StaticDataTableViewController) — License (https://github.com/peterpaulis/StaticDataTableViewController/blob/master/LICENSE.txt)
-
-GZIP by nicklockwood (https://github.com/nicklockwood/GZIP) — License (https://github.com/nicklockwood/GZIP/blob/master/LICENCE.md)
-
-Reachability component by Tony Million (https://github.com/tonymillion/Reachability) — License (https://github.com/tonymillion/Reachability/blob/master/LICENCE.txt)
-
-Fmdb component by August «Gus» Mueller (https://github.com/ccgus/fmdb) — License (https://github.com/ccgus/fmdb/blob/master/LICENSE.txt)
-
-NSStringPunycodeAdditions component by Nate "Wevah" Weaver (https://github.com/Wevah/Punycode-Cocoa) — License (https://github.com/Wevah/Punycode-Cocoa/blob/master/LICENSE)
+Adguard for iOS developers would like to express their gratitude for the software that has been used in the development process, without which the AdGuard for iOS would not be possible. See the [full list](https://kb.adguard.com/en/miscellaneous/acknowledgments#ios).

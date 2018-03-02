@@ -29,6 +29,11 @@
 /// Creates an domain blocking rule from its text presentation.
 + (AERDomainFilterRule *)rule:(NSString *)ruleText;
 
+/**
+ check rule syntax
+ */
++ (BOOL) isValidRuleText:(NSString*)ruleText;
+
 /////////////////////////////////////////////////////////////////////////
 #pragma mark -  Properties and query methods
 /////////////////////////////////////////////////////////////////////////
