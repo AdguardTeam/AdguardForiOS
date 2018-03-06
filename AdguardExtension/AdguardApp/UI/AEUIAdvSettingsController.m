@@ -100,7 +100,11 @@ typedef enum : NSUInteger {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.simplifiedButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize];
-    self.wifiButton.on = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates];
+    
+    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
+    
+    self.wifiButton.on = wifiOnly;
     
     [self.tableView registerClass:[AEUILinkTableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:TUNNEL_MODE_FOOTER_CELL_ID];
     
