@@ -1084,7 +1084,6 @@
                         <outlet property="addCustomCell" destination="Pav-9d-3wu" id="Snm-hb-0ML"/>
                         <outlet property="blacklistCell" destination="EJL-IJ-k9g" id="3oL-38-Hfq"/>
                         <outlet property="logSwitch" destination="54e-4C-GYX" id="57m-BB-QGo"/>
-                        <outlet property="proStatusSwitch" destination="c8v-o9-dAV" id="DhR-jc-IYw"/>
                         <outlet property="remoteDnsServerTemplateCell" destination="W9b-gI-zZ3" id="qgI-Sc-nof"/>
                         <outlet property="systemDefaultCell" destination="SHy-SK-rk8" id="IV6-r9-eEK"/>
                         <outlet property="whitelistCell" destination="Kb4-Ra-I4s" id="uGB-gi-yaF"/>
@@ -1904,7 +1903,6 @@
                             <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="toggleStatus:" destination="js3-jN-1gx" eventType="valueChanged" id="7PT-ZP-TUm"/>
-                                <action selector="toggleStatus:" destination="5AC-2G-C1N" eventType="valueChanged" id="ggn-bY-Pkv"/>
                             </connections>
                         </switch>
                     </subviews>

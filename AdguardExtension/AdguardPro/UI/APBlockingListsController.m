@@ -333,7 +333,7 @@
     return [super tableView:tableView viewForFooterInSection:section];
 }
 
-#pragma mark aktions
+#pragma mark actions
 
 - (IBAction)checkUpdatesAction:(id)sender {
     
@@ -350,6 +350,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [USE_STRONG(self) updateSubscriptionCells];
         });
+        
+        [APVPNManager.singleton sendReloadSystemWideDomainLists];
+        
     } errorBlock:^(NSError * error) {
         
     } completionBlock:^{
