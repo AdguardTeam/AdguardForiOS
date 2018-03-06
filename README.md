@@ -12,7 +12,7 @@ AdGuard Pro is an advanced version of AdGuard for iOS that provides access to cu
 
 To get more information and to download AdGuard Pro for iOS, follow this link [https://adguard.com/](https://adguard.com/adguard-ios-pro/overview.html).
 
-<img src="https://cloud.githubusercontent.com/assets/8577533/11779507/983bb9f4-a26c-11e5-8140-99bc72d02cec.png" width="270px"><img src="https://cloud.githubusercontent.com/assets/8577533/24612408/deec4a74-188d-11e7-92b1-e2b0ae9c89ae.png" width="270px"><img src="https://cloud.githubusercontent.com/assets/8577533/24968657/8e8266c4-1fb6-11e7-8351-78927cde39e6.PNG" width="270px">
+<img src="https://user-images.githubusercontent.com/28860202/37027256-e56f4596-2141-11e8-9d79-3f8a98028b14.png" width="270px"><img src="https://user-images.githubusercontent.com/28860202/37027267-e9cf7534-2141-11e8-89fd-3fc99c3f2c86.png" width="270px"><img src="https://user-images.githubusercontent.com/28860202/37027271-ec5f5972-2141-11e8-884b-038d73fb68ae.png" width="270px">
 
 ### How to report an issue?
 
@@ -27,7 +27,7 @@ To see the 'big picture', to watch current progress and to get an idea of approx
 ### Releases
 
  * AdGuard for iOS latest version: [1.3.3](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v1.3.3)
- * AdGuard Pro for iOS latest version: [1.3.3](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v1.3.3-pro)
+ * AdGuard Pro for iOS latest version: [2.0.1](https://github.com/AdguardTeam/AdguardForiOS/releases/tag/v2.0.1-pro)
 
 You can find all AdGuard and AdGuard Pro for iOS releases here: https://github.com/AdguardTeam/AdguardForiOS/releases
 
