@@ -32,6 +32,7 @@
 #import "AEUIFilterRuleObject.h"
 #import "AEUIUtils.h"
 #import "AEUIWhitelistController.h"
+#import "AEUIPlayerViewController.h"
 
 #ifdef PRO
 
@@ -78,6 +79,9 @@
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
 #define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+#define TO_SAFARI_VIDEO_SEGUE_ID    @"toSafariVideo"
+#define TO_SETTINGS_VIDEO_SEGUE_ID  @"toSettingsVideo"
+
 
 #define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
@@ -411,11 +415,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-#ifdef PRO
-    
-    
-#endif
-    
     if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
 
         [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
@@ -427,6 +426,19 @@
         UIViewController* destination = [segue destinationViewController];
         destination.navigationItem.title = self.whitelistLabel.text;
     }
+    else if ([segue.identifier isEqualToString:TO_SAFARI_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.safariVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    else if ([segue.identifier isEqualToString:TO_SETTINGS_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.videoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
