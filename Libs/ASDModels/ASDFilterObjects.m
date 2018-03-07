@@ -192,6 +192,24 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if(self) {
+        _i18nDictionary = [aDecoder decodeObjectForKey:@"i18nDictionary"];
+        _localizations = [aDecoder decodeObjectForKey:@"localizations"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    
+    [aCoder encodeObject:_i18nDictionary forKey:@"i18nDictionary"];
+    [aCoder encodeObject:_localizations forKey:@"localizations"];
+}
+
 - (ASDFilterGroupLocalization *)localizationForGroup:(ASDFilterGroup *)group{
     
     /*
@@ -512,6 +530,24 @@
         }
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if(self) {
+        _i18nDictionary = [aDecoder decodeObjectForKey:@"i18nDictionary"];
+        _localizations = [aDecoder decodeObjectForKey:@"localizations"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    
+    [aCoder encodeObject:_i18nDictionary forKey:@"i18nDictionary"];
+    [aCoder encodeObject:_localizations forKey:@"localizations"];
 }
 
 - (ASDFilterLocalization *)localizationForFilter:(ASDFilterMetadata *)filterMetadata{

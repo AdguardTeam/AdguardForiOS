@@ -712,7 +712,10 @@ typedef void (^AEDownloadsCompletionBlock)();
 
     BOOL result = YES;
     
-    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
+    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
+    
+    if (wifiOnly) {
         
         Reachability *reach = [Reachability reachabilityForInternetConnection];
         

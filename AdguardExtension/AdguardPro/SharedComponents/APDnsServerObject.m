@@ -174,7 +174,6 @@ static NSMutableCharacterSet *delimCharSet;
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:@(_editable) forKey:@"editable"];
     [aCoder encodeObject:_uuid forKey:@"uuid"];
-    [aCoder encodeObject:_tag forKey:@"tag"];
 
 }
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {

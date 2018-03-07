@@ -55,23 +55,8 @@
 - (void)executeOnceAfterCalm{
     
     if (!_updateTimer){
-        
-        _updateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _workQueue);
 
-        __weak __typeof__(self) wSelf = self;
-
-        dispatch_source_set_event_handler(_updateTimer, ^{
-        
-            __typeof__(self) sSelf = wSelf;
-
-            if (sSelf == nil) {
-                return;
-            }
-            
-            [sSelf stopUpdateTimer];
-            sSelf->_block();
-        });
-        
+        [self defineUpdateTimer];
         dispatch_resume(_updateTimer);
     }
     
@@ -85,21 +70,7 @@
     
     if (!_updateTimer){
         
-        _updateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _workQueue);
-        
-        __weak __typeof__(self) wSelf = self;
-        dispatch_source_set_event_handler(_updateTimer, ^{
-            
-            __typeof__(self) sSelf = wSelf;
-            
-            if (sSelf == nil) {
-                return;
-            }
-            
-            [sSelf stopUpdateTimer];
-            sSelf->_block();
-        });
-        
+        [self defineUpdateTimer];
         dispatch_resume(_updateTimer);
 
         dispatch_source_set_timer(_updateTimer,
@@ -121,6 +92,7 @@
             return;
         }
         
+        [sSelf stopUpdateTimer];
         sSelf->_block();
     });
 }
@@ -141,6 +113,24 @@
         _updateTimer = nil;
     }
     
+}
+- (void)defineUpdateTimer {
+    
+    _updateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _workQueue);
+    
+    __weak __typeof__(self) wSelf = self;
+    
+    dispatch_source_set_event_handler(_updateTimer, ^{
+        
+        __typeof__(self) sSelf = wSelf;
+        
+        if (sSelf == nil) {
+            return;
+        }
+        
+        [sSelf stopUpdateTimer];
+        sSelf->_block();
+    });
 }
 
 @end

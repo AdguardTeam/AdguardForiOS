@@ -248,7 +248,7 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         DDLogInfo(@"(APBlockingSubscriptionsManager) update subscriptions");
         dispatch_group_t group = dispatch_group_create();
         
-        for(APBlockingSubscription* subscription in _subscriptionsMeta) {
+        for(APBlockingSubscription* subscription in self.subscriptions) {
             
             dispatch_group_enter(group);
             DDLogInfo(@"(APBlockingSubscriptionsManager) try to download subscription: %@ url:%@", subscription.name, subscription.url);

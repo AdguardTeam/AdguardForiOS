@@ -32,6 +32,7 @@
 #import "AEUIFilterRuleObject.h"
 #import "AEUIUtils.h"
 #import "AEUIWhitelistController.h"
+#import "AEUIPlayerViewController.h"
 
 #ifdef PRO
 
@@ -42,13 +43,16 @@
 #import "AERDomainFilterRule.h"
 #import "APSharedResources.h"
 
-#define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
 #define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
 
+#endif
+
+#define VIDEO_SECTION_INDEX             0
+#define PRO_SECTION_INDEX               1
+
 #define VIDEO_IMAGE_MAX_HEIGHT 200
 
-#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -75,6 +79,9 @@
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
 #define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+#define TO_SAFARI_VIDEO_SEGUE_ID    @"toSafariVideo"
+#define TO_SETTINGS_VIDEO_SEGUE_ID  @"toSettingsVideo"
+
 
 #define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
@@ -157,6 +164,7 @@
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    [self cells:self.privacySettingsCells setHidden:YES];
     
     self.getProButton.enabled = YES;
     self.getProButton.title = @"Get PRO";
@@ -407,11 +415,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-#ifdef PRO
-    
-    
-#endif
-    
     if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
 
         [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
@@ -423,6 +426,19 @@
         UIViewController* destination = [segue destinationViewController];
         destination.navigationItem.title = self.whitelistLabel.text;
     }
+    else if ([segue.identifier isEqualToString:TO_SAFARI_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.safariVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    else if ([segue.identifier isEqualToString:TO_SETTINGS_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.videoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -494,6 +510,47 @@
         
         self.whitelistLabel.text = inverted ? NSLocalizedString(@"Whitelist (inverted)", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"Whitelist", @"Main Controller. Whitelist cell caption");
     }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Table Delegate Methods
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+
+#ifdef PRO
+    if (section == PRO_SECTION_INDEX) {
+        
+        return [self proSectionFooter];
+    }
+#endif
+    
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+#ifdef PRO
+    if (section == PRO_SECTION_INDEX) {
+        
+        APUIProSectionFooter *footer = [self proSectionFooter];
+        return [footer heightForWidth:self.view.frame.size.width];
+    }
+#endif
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.section == VIDEO_SECTION_INDEX) {
+        
+        UIImage *image = [UIImage imageNamed:@"video-image"];
+        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
+        
+        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -650,35 +707,6 @@
     _inCheckUpdates = NO;
 }
 
-#ifdef PRO
-- (void) updateCounters {
-    
-    [self updateTotalRequests];
-    [self updateTrackers];
-    [self updateRequestTime];
-}
-
-- (void) updateTotalRequests {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
-    self.totalRequestsCountLabel.text = [NSString stringWithFormat:@"%d", count];
-}
-
-- (void) updateRequestTime {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
-    float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
-    float averageTime = count ? time * 1000 / count : 0;
-    NSString* format = NSLocalizedString(@"%.f ms", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
-    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
-}
-
-- (void) updateTrackers {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
-    self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
-}
-
 - (void) showReportActionSheet {
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -709,49 +737,67 @@
     }];
 }
 
-#endif
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Table Delegate Methods
-
-#ifdef PRO
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (void)setToolbar{
     
-    if (section == PRO_SECTION_INDEX) {
+    static UILabel *warning;
+    
+    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
+    self.navigationController.toolbarHidden = YES;
+    
+    NSString *warningText;
+    
+    //Show warning if overlimit of rules was reached.
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
         
-        return [self proSectionFooter];
+        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
+        NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
+        
+        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
     }
     
-    return [super tableView:tableView viewForFooterInSection:section];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    if (section == PRO_SECTION_INDEX) {
+    if (warningText) {
         
-        APUIProSectionFooter *footer = [self proSectionFooter];
-        return [footer heightForWidth:self.view.frame.size.width];
+        UIView *toolbar = self.navigationController.toolbar;
+        if (toolbar) {
+            
+            UIEdgeInsets insets = toolbar.layoutMargins;
+            //        UIEdgeInsets rootInsets = self.navigationController.view.layoutMargins;
+            CGRect frame = toolbar.bounds;
+            frame.origin = CGPointMake(0, 0);
+            //            frame.size.height -= insets.top + insets.bottom;
+            frame.size.width -= insets.left + insets.right;
+            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
+                
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    warning = [[UILabel alloc] initWithFrame:frame];
+                    warning.textColor = AEUIC_WARNING_COLOR;
+                    warning.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+                    warning.textAlignment = NSTextAlignmentCenter;
+                    warning.numberOfLines = 2;
+                    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:warning];
+                    
+                    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    if (item) {
+                        self.toolbarItems = @[spacer, item, spacer];
+                    }
+                });
+                
+                //                warning.lineBreakMode = NSLineBreakByWordWrapping;
+                warning.text = warningText;
+            }
+        }
+        
+        [self.navigationController setToolbarHidden:NO animated:YES];
+        
+        
     }
-    
-    return [super tableView:tableView heightForFooterInSection:section];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(indexPath.section == 0) {
-        
-        UIImage *image = [UIImage imageNamed:@"video-image"];
-        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
-        
-        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
-    }
-    
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
+
+#ifdef PRO
 
 - (APUIProSectionFooter *)proSectionFooter{
     
@@ -823,64 +869,34 @@
     }
 }
 
+- (void) updateCounters {
+    
+    [self updateTotalRequests];
+    [self updateTrackers];
+    [self updateRequestTime];
+}
+
+- (void) updateTotalRequests {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    self.totalRequestsCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+- (void) updateRequestTime {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
+    float averageTime = count ? time * 1000 / count : 0;
+    NSString* format = NSLocalizedString(@"%.f ms", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
+    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
+}
+
+- (void) updateTrackers {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
+    self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
 
 #endif
-
-- (void)setToolbar{
-    
-    static UILabel *warning;
-    
-    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
-    self.navigationController.toolbarHidden = YES;
-    
-    NSString *warningText;
-    
-    //Show warning if overlimit of rules was reached.
-    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
-        
-        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
-        NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
-
-        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
-    }
-    
-    if (warningText) {
-        
-        UIView *toolbar = self.navigationController.toolbar;
-        if (toolbar) {
-            
-            UIEdgeInsets insets = toolbar.layoutMargins;
-            //        UIEdgeInsets rootInsets = self.navigationController.view.layoutMargins;
-            CGRect frame = toolbar.bounds;
-            frame.origin = CGPointMake(0, 0);
-            //            frame.size.height -= insets.top + insets.bottom;
-            frame.size.width -= insets.left + insets.right;
-            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
-
-                static dispatch_once_t onceToken;
-                dispatch_once(&onceToken, ^{
-                    warning = [[UILabel alloc] initWithFrame:frame];
-                    warning.textColor = AEUIC_WARNING_COLOR;
-                    warning.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-                    warning.textAlignment = NSTextAlignmentCenter;
-                    warning.numberOfLines = 2;
-                    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:warning];
-                    
-                    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-                    if (item) {
-                        self.toolbarItems = @[spacer, item, spacer];
-                    }
-                });
-
-                //                warning.lineBreakMode = NSLineBreakByWordWrapping;
-                warning.text = warningText;
-            }
-        }
-        
-        [self.navigationController setToolbarHidden:NO animated:YES];
-        
-        
-    }
-}
 
 @end

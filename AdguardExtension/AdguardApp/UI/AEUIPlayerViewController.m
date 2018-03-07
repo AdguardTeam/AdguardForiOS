@@ -95,6 +95,14 @@
     }
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    
+    if(!parent) { // pop view controller
+        if(self.completionBlock)
+            self.completionBlock();
+    }
+}
+
 - (BOOL)prefersStatusBarHidden {
 
     return _statusBarHidden;

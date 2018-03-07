@@ -1084,7 +1084,6 @@
                         <outlet property="addCustomCell" destination="Pav-9d-3wu" id="Snm-hb-0ML"/>
                         <outlet property="blacklistCell" destination="EJL-IJ-k9g" id="3oL-38-Hfq"/>
                         <outlet property="logSwitch" destination="54e-4C-GYX" id="57m-BB-QGo"/>
-                        <outlet property="proStatusSwitch" destination="c8v-o9-dAV" id="DhR-jc-IYw"/>
                         <outlet property="remoteDnsServerTemplateCell" destination="W9b-gI-zZ3" id="qgI-Sc-nof"/>
                         <outlet property="systemDefaultCell" destination="SHy-SK-rk8" id="IV6-r9-eEK"/>
                         <outlet property="whitelistCell" destination="Kb4-Ra-I4s" id="uGB-gi-yaF"/>
@@ -1236,7 +1235,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari content blocker is disabled" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-QC-6Ly">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari content blocker is disabled" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-QC-6Ly">
                                     <rect key="frame" x="16" y="12" width="288" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1285,7 +1284,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="uAJ-kc-09e" kind="show" id="Pq7-GC-pTF"/>
+                                            <segue destination="uAJ-kc-09e" kind="show" identifier="toSettingsVideo" id="Pq7-GC-pTF"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="121" id="FAI-NO-RQN" customClass="MGSwipeTableCell">
@@ -1319,7 +1318,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="N5l-JJ-jQH" kind="show" id="33m-zD-2JG"/>
+                                            <segue destination="N5l-JJ-jQH" kind="show" identifier="toSafariVideo" id="33m-zD-2JG"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1890,6 +1889,7 @@
                         <outletCollection property="proSectionCells" destination="pn8-1c-rSh" id="14z-sQ-cLQ"/>
                         <outletCollection property="proSectionCells" destination="sz8-VX-xxt" id="yb8-CY-spT"/>
                         <outletCollection property="proSectionCells" destination="sI5-av-aiA" id="8LF-be-0ey"/>
+                        <outletCollection property="privacySettingsCells" destination="S5I-gh-aNS" id="tjE-BF-Czy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AKw-sT-1kJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1903,7 +1903,6 @@
                             <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="toggleStatus:" destination="js3-jN-1gx" eventType="valueChanged" id="7PT-ZP-TUm"/>
-                                <action selector="toggleStatus:" destination="5AC-2G-C1N" eventType="valueChanged" id="ggn-bY-Pkv"/>
                             </connections>
                         </switch>
                     </subviews>
@@ -3649,8 +3648,8 @@
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y5L-OH-uCC"/>
-        <segue reference="cER-G1-xll"/>
+        <segue reference="33m-zD-2JG"/>
+        <segue reference="Pq7-GC-pTF"/>
         <segue reference="MKF-oV-GeK"/>
         <segue reference="uD1-XP-a5e"/>
     </inferredMetricsTieBreakers>

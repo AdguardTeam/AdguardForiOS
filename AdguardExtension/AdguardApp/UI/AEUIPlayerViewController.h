@@ -22,4 +22,6 @@
 
 @property NSString *videoName;
 
+@property (copy) void (^completionBlock)(void);
+
 @end
