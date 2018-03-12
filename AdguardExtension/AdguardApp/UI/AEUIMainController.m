@@ -99,6 +99,8 @@
     NSString *_ruleTextHolderForAddRuleCommand;
 
     UIBarButtonItem *_cancelNavigationItem;
+    
+    BOOL _contentBlockerEnabled;
 
 #ifdef PRO
     APUIProSectionFooter *_proFooter;
@@ -351,11 +353,9 @@
             
             ASSIGN_STRONG(self);
             
-            static BOOL status = NO;
-            
-            if(status != enabled) {
+            if(_contentBlockerEnabled != enabled) {
                 
-                status = enabled;
+                _contentBlockerEnabled = enabled;
                 
                 [USE_STRONG(self).starsLayer removeFromSuperlayer];
                 
@@ -366,9 +366,9 @@
                 USE_STRONG(self).starsLayer.fast = enabled;
                 
                 [headerView.layer addSublayer:USE_STRONG(self).starsLayer];
-                
-                self.disabledLabel.hidden = enabled;
             }
+            
+            self.disabledLabel.hidden = enabled;
         });
     }];
 }
