@@ -220,7 +220,8 @@
     if (!group) {
         return nil;
     }
-    NSString *langCode = [NSString stringWithFormat:@"%@-%@", [ADLocales lang], [ADLocales region]];
+    
+    NSString *langCode = [ADLocales canonicalLanguageIdentifier];
     
     ASDFilterGroupLocalization *localization = _i18nDictionary[group.groupId][langCode];
     
@@ -409,15 +410,6 @@
 
 @end
 
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterLocalization
 /////////////////////////////////////////////////////////////////////
@@ -555,7 +547,8 @@
     if (!filterMetadata) {
         return nil;
     }
-    NSString *langCode = [NSString stringWithFormat:@"%@-%@", [ADLocales lang], [ADLocales region]];
+    
+    NSString *langCode = [ADLocales canonicalLanguageIdentifier];
     
     ASDFilterLocalization *localization = _i18nDictionary[filterMetadata.filterId][langCode];
     
@@ -610,17 +603,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterRule
