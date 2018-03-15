@@ -72,6 +72,7 @@
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 #define OTHER_APPS_URL              @"http://agrd.io/ios_adguard_products"
 #define BUGREPORT_URL               @"http://agrd.io/report_ios_bug"
+#define GET_PRO_URL                 @"https://itunes.apple.com/app/apple-store/id1126386264?pt=31050800&ct=ios_app&mt=8"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -305,8 +306,7 @@
 
 - (IBAction)clickGetPro:(id)sender {
     NSURL *theURL =
-    [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
-                          ITUNES_PRO_APP_ID]];
+    [NSURL URLWithString:GET_PRO_URL];
     [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
 }
 
