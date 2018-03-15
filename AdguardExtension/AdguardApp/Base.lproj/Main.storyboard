@@ -1664,7 +1664,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Q1N-rZ-azR">
                                                     <rect key="frame" x="176" y="10" width="126" height="24"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-f4-Rox" userLabel="Mail">
+                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-f4-Rox" userLabel="Mail">
                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                             <accessibility key="accessibilityConfiguration" label="Share with mail"/>
                                                             <constraints>
@@ -1674,7 +1674,7 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                             <state key="normal" image="social-mail"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z6-O6-QzV" userLabel="Message">
+                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z6-O6-QzV" userLabel="Message">
                                                             <rect key="frame" x="34" y="0.0" width="24" height="24"/>
                                                             <accessibility key="accessibilityConfiguration" label="Share with iMessage"/>
                                                             <constraints>
@@ -1684,7 +1684,7 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                             <state key="normal" image="social-imessage"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2O-oQ-yhe" userLabel="Twitter">
+                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2O-oQ-yhe" userLabel="Twitter">
                                                             <rect key="frame" x="68" y="0.0" width="24" height="24"/>
                                                             <accessibility key="accessibilityConfiguration" label="Share with Twitter"/>
                                                             <constraints>
@@ -1694,7 +1694,7 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                             <state key="normal" image="social-twitter"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiA-PR-JUW" userLabel="Facebook">
+                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiA-PR-JUW" userLabel="Facebook">
                                                             <rect key="frame" x="102" y="0.0" width="24" height="24"/>
                                                             <accessibility key="accessibilityConfiguration" label="Share with Facebook"/>
                                                             <constraints>
