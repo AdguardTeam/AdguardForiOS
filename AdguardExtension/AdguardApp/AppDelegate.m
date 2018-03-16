@@ -34,6 +34,8 @@
 #ifdef PRO
 #import "APSProductSchemaManager.h"
 #import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
+#import "APVPNManager.h"
 #else
 #import "AESProductSchemaManager.h"
 #endif
@@ -103,8 +105,8 @@ typedef void (^AEDownloadsCompletionBlock)();
         self.window.backgroundColor = [UIColor whiteColor];
         
         UIPageControl *pageControl = [UIPageControl appearance];
-        pageControl.backgroundColor = [UIColor whiteColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+        pageControl.backgroundColor = [UIColor blackColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
         //----------- Set main navigation controller -----------------------
@@ -222,6 +224,14 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
+    
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    AEUIMainController *main = nav.viewControllers[0];
+    
+    if ([main isKindOfClass:[AEUIMainController class]]) {
+        
+        [main checkContentBlockerStatus];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -277,6 +287,22 @@ typedef void (^AEDownloadsCompletionBlock)();
             return;
         }
         
+#ifdef PRO
+        if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
+            
+            [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
+                
+                [APVPNManager.singleton sendReloadSystemWideDomainLists];
+                completionHandler(UIBackgroundFetchResultNewData);
+            } errorBlock:^(NSError * error) {
+                
+                completionHandler(UIBackgroundFetchResultFailed);
+            } completionBlock:nil];
+           
+            return;
+        }
+#endif
+        
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
@@ -314,7 +340,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     }
 }
 
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)())completionHandler {
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
 
     DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
 
@@ -388,13 +414,11 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
             
-            main.startStatus = @(YES);
-            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+            [main setProStatus:YES];
         }
         else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
             
-            main.startStatus = @(NO);
-            [main performSegueWithIdentifier:OpenDnsSettingsSegue sender:main];
+            [main setProStatus:NO];
         }
         else {
             return NO;
@@ -688,7 +712,10 @@ typedef void (^AEDownloadsCompletionBlock)();
 
     BOOL result = YES;
     
-    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
+    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
+    
+    if (wifiOnly) {
         
         Reachability *reach = [Reachability reachabilityForInternetConnection];
         

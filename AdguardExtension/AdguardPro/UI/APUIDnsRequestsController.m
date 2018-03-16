@@ -24,6 +24,7 @@
 #import "APDnsResponse.h"
 #import "APUIDnsLogRecord.h"
 #import "APUIDnsRequestDetail.h"
+#import "AESharedResources.h"
 
 @interface APUIDnsRequestsController ()
 
@@ -38,11 +39,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     self.logRecords = [NSMutableArray array];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.tintColor = [UIColor blackColor];
+    self.searchController.searchBar.backgroundColor = [UIColor blackColor];
+    self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
+    
+    UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
+    searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
+    searchField.tintColor = searchField.textColor = UIColor.lightGrayColor;
+    
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
     
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
@@ -63,6 +75,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - Table view data source
 
@@ -76,7 +92,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dnsRequestCell" forIndexPath:indexPath];
-
+    cell.backgroundColor = [UIColor clearColor];
+    
     NSInteger row = indexPath.row;
     NSArray *records = self.filteredLogRecords;
     if (row < records.count) {
@@ -168,6 +185,17 @@
     [self reloadData];
 }
 
+- (IBAction)clickClear:(id)sender {
+    
+    [self requestResetStatisticsWithCompletionBlock:^{
+        
+        if ([[APVPNManager singleton] clearDnsRequestsLog]) {
+            
+            [self reloadData];
+        }
+    }];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - Helper Methods
 
@@ -201,14 +229,6 @@
     return reversed;
 }
 
-- (IBAction)clickClear:(id)sender {
-
-    if ([[APVPNManager singleton] clearDnsRequestsLog]) {
-        
-        [self reloadData];
-    }
-}
-
 - (APDnsLogRecord *)logRecordForSelectedRow{
     
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
@@ -224,6 +244,39 @@
     }
     
     return nil;
+}
+
+- (void) requestResetStatisticsWithCompletionBlock:(void(^)())completionBlock {
+    
+    NSString* message = NSLocalizedString(@"Do you want to reset the statistics along with clearing the log", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
+    
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"YES", @"YES Button caption in alert") style:UIAlertActionStyleDestructive
+                                                      handler:^(UIAlertAction * action) {
+                                                          
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsTime];
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsCount];
+                                                          [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalTrackersCount];
+                                                          
+                                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                                          if(completionBlock)
+                                                              completionBlock();
+                                                      }];
+    
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"NO", @"NO Button caption in alert") style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          
+                                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                                          if(completionBlock)
+                                                              completionBlock();
+                                                      }];
+    
+    [alertController addAction:yesAction];
+    [alertController addAction:noAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

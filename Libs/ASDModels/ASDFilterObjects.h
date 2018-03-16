@@ -63,6 +63,8 @@
 #define ASDF_MOBILE_SAFARI_FILTER_ID     12
 /// Simplified domain names filter
 #define ASDF_SIMPL_DOMAINNAMES_FILTER_ID 15
+/// Mobile Ads filter
+#define MOBILE_ADS_FILTER_ID 11
 
 /// List of filters Ids that block trackers.
 #define ASDF_TRACKERS_BLOCKING_FILTERS   @[\
@@ -105,7 +107,7 @@
 /**
  Filter representation in filter group localization context.
  */
-@interface ASDFilterGroupLocalization : NSObject
+@interface ASDFilterGroupLocalization : ACObject
 
 - (id)initFromDbResult:(FMResultSet *)result;
 
@@ -121,7 +123,7 @@
 /**
  Service class for holding and operating with group localizations.
  */
-@interface ASDGroupsI18n : NSObject
+@interface ASDGroupsI18n : ACObject
 
 /**
  Initializes object with appropriate localizations data.
@@ -204,7 +206,7 @@
 /**
  Filter representation in localization context.
  */
-@interface ASDFilterLocalization : NSObject
+@interface ASDFilterLocalization : ACObject
 
 /**
  Initializing using Database result object.
@@ -224,7 +226,7 @@
 /**
  Service class for holding and operating with filter localizations.
  */
-@interface ASDFiltersI18n : NSObject
+@interface ASDFiltersI18n : ACObject
 
 /**
  Initializes object with appropriate localizations data.

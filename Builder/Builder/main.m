@@ -109,13 +109,13 @@ int main(int argc, const char * argv[])
             if ([[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
 
 #pragma mark *** Get filters data from backend and insert to DB
-                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
+                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] loadMetadataWithTimeoutInterval:nil];
                 if (!metadata) {
                     
                     NSLog(@"Error creating DB: Can't load filters/groups metadata from backend service.");
                     exit(1);
                 }
-                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] i18n];
+                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] loadI18nWithTimeoutInterval:nil];
                 if (!i18n) {
                     
                     NSLog(@"Error creating DB: Can't load filters/groups i18n data from backend service.");

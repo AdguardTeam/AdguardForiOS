@@ -22,6 +22,7 @@
 /////////////////////////////////////////////////////////////////////
 
 #define ADL_DEFAULT_LANG            @"en"
+#define ADL_DEFAULT_REGION          @"us"
 
 #define ADL_FILTER_NAME             @"name"
 #define ADL_FILTER_DESCRIPTION      @"description"
@@ -39,6 +40,11 @@
 
 /// Get 2 letters identifier of current application Region (Country Code)
 + (NSString *)region;
+
+/**
+ returns canonical language identifier for current locale
+ */
++ (NSString *)canonicalLanguageIdentifier;
 
 /**
     Obtain localized description of AdBlocker (Antibanner) filters.

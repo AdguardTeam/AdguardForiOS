@@ -20,8 +20,9 @@
 #import "AESProductSchemaManager.h"
 #import "ACommons/ACLang.h"
 #import "AESharedResources.h"
+#import "ADProductInfo.h"
 
-#define SCHEMA_VERSION                      @(1)
+#define SCHEMA_VERSION                      @(2)
 
 
 /////////////////////////////////////////////////////////////////////
@@ -52,6 +53,15 @@
             }
         });
     }
+    
+    NSString *lastBuildVersion = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsProductBuildVersion];
+    NSString* build = [ADProductInfo buildNumber];
+    
+    if(![lastBuildVersion isEqual:build]) {
+        
+        [self onMinorUpgrade];
+        [[AESharedResources sharedDefaults] setObject:build forKey:AEDefaultsProductBuildVersion];
+    }
 }
 
 + (void)install {
@@ -76,6 +86,10 @@
 + (BOOL)onInstall {
     
     return YES;
+}
+
++ (void)onMinorUpgrade {
+    
 }
 
 /////////////////////////////////////////////////////////////////////

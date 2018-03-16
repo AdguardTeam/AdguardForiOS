@@ -25,9 +25,11 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
+#import "ABECRequest.h"
 #ifdef PRO
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
+#import "APBlockingSubscriptionsManager.h"
 #endif
 
 
@@ -43,6 +45,26 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
 #define LOG_DELIMETER_FORMAT    @"\r\n-------------------------------------------------------------\r\n"\
 @"LOG FILE:%@"\
 @"\r\n-------------------------------------------------------------\r\n"
+
+#define REPORT_URL @"https://reports.adguard.com/new_issue.html"
+
+#define REPORT_PARAM_PRODUCT @"product_type"
+#define REPORT_PARAM_VERSION @"product_version"
+#define REPORT_PARAM_BROWSER @"browser"
+#define REPORT_PARAM_URL @"url"
+#define REPORT_PARAM_FILTERS @"filters"
+#define REPORT_PARAM_SYSTEM_WIDE @"ios.systemwide"
+#define REPORT_PARAM_SIMPLIFIED @"ios.simplified"
+#define REPORT_PARAM_CUSTOM_DNS @"ios.CustomDNS"
+#define REPORT_PARAM_DNS @"ios.DNS"
+
+#define REPORT_PRODUCT @"iOS"
+#define REPORT_BROWSER @"Safari"
+
+#define REPORT_DNS_ADGUARD @"Default"
+#define REPORT_DNS_ADGUARD_FAMILY @"Family"
+#define REPORT_DNS_OTHER @"Other"
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESSupport
@@ -162,6 +184,67 @@ static AESSupport *singletonSupport;
 
 }
 
+- (NSURL *)composeWebReportUrlForSite:(nullable NSURL *)siteUrl {
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if(siteUrl) {
+        params[REPORT_PARAM_URL] = siteUrl;
+    }
+    
+    params[REPORT_PARAM_PRODUCT] = REPORT_PRODUCT;
+    params[REPORT_PARAM_VERSION] = ADProductInfo.version;
+    params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
+    
+    NSMutableString *filtersString = [NSMutableString new];
+    AESAntibanner* antibaner = [AESAntibanner new];
+    NSArray* filterIDs = antibaner.activeFilterIDs;
+    
+    for (NSNumber *filterId in filterIDs) {
+        
+        NSString* format = filterId == filterIDs.firstObject ? @"%@" : @".%@";
+        [filtersString appendFormat:format, filterId];
+    }
+    params[REPORT_PARAM_FILTERS] = filtersString.copy;
+    
+    params[REPORT_PARAM_SIMPLIFIED] =  [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
+    
+#ifdef PRO
+    
+    NSString* dnsServerParam = nil;
+    BOOL custom = NO;
+    
+    APDnsServerObject * dnsServer = [APVPNManager.singleton loadActiveRemoteDnsServer];
+    if([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguard]) {
+        dnsServerParam = REPORT_DNS_ADGUARD;
+    }
+    else if ([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguardFamily]) {
+        dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
+    }
+    else if(dnsServer) {
+        dnsServerParam = REPORT_DNS_OTHER;
+        custom = YES;
+    }
+    
+    if(dnsServerParam) {
+        params[REPORT_PARAM_DNS] = dnsServerParam;
+        
+        if(custom) {
+            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.serverName;
+        }
+    }
+    
+#endif
+    
+    params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
+    
+    NSString *paramsString = [ABECRequest createStringFromParameters:params];
+    NSString *url = [NSString stringWithFormat:@"%@?%@", REPORT_URL, paramsString];
+    
+    return [NSURL URLWithString: url];
+}
+
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Mail Compose Delegate Methods
 /////////////////////////////////////////////////////////////////////
@@ -216,6 +299,23 @@ static AESSupport *singletonSupport;
         if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
             
             [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
+            
+            [sb appendFormat:@"\r\nDnsCrypt: %@", APVPNManager.singleton.activeRemoteDnsServer.isDnsCrypt];
+        }
+        
+        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptions;
+        
+        if(subscriptions.count) {
+            [sb appendFormat:@"\r\n\r\nSystem wide blocking subscriptions: "];
+            
+            for(APBlockingSubscription* subscription in subscriptions) {
+                
+                NSString* updateDate = [NSDateFormatter
+                                        localizedStringFromDate: subscription.updateDate
+                                        dateStyle: NSDateFormatterShortStyle
+                                        timeStyle: NSDateFormatterShortStyle];
+                [sb appendFormat:@"\r\nname: %@ url: %@ last update: %@", subscription.name, subscription.url, updateDate];
+            }
         }
 #endif
         return sb;

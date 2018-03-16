@@ -26,6 +26,8 @@
 #import "AEFilterRuleSyntaxConstants.h"
 #import "AEWhitelistDomainObject.h"
 #import "AEInvertedWhitelistDomainsObject.h"
+#import <mach/mach.h>
+
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
 NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
@@ -662,6 +664,8 @@ static AEService *singletonService;
                                 }
                             }
                             
+                            // remove comments
+                            [rules filterUsingPredicate:[NSPredicate predicateWithFormat:@"!(ruleText BEGINSWITH[c] '!')"]];
                             
                             if (rules.count) {
                                 
@@ -935,6 +939,13 @@ static AEService *singletonService;
     }
     
     return convertResult;
+}
+
+- (void)checkStatusWithCallback:(void (^)(BOOL))callback{
+    
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AE_EXTENSION_ID completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+        callback(state.enabled);
+    }];
 }
 
 @end

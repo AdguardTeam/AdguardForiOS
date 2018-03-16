@@ -40,7 +40,7 @@
  
  @return Returns YES on success
  */
-- (BOOL)convertToBlockingResponse;
+- (BOOL)convertToBlockingResponseWithIP: (NSString*)ip;
 
 - (NSData *)generatePayload;
 

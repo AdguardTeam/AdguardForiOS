@@ -20,13 +20,14 @@
 #import "AEUICustomTextEditorController.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
+#import "AEUICommons.h"
 
 #define TOP_BOUNSE_LIMIT                    -5
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
 #define WIDTH_CHANGE_KEY                    @"frame"
 
 #define EDITED_TEXT_FONT                    [UIFont systemFontOfSize:[UIFont systemFontSize]]
-#define EDITED_TEXT_COLOR                   [UIColor blackColor]
+#define EDITED_TEXT_COLOR                   [UIColor whiteColor]
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
 
@@ -150,6 +151,16 @@ static NSDictionary *_editAttrs;
     self.editorTextView.textStorage.delegate = self;
     self.editorTextView.keyboardType = _keyboardType;
     self.searchBar.keyboardType = _keyboardType;
+    self.editorTextView.tintColor = UIColor.whiteColor;
+    
+    [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].textColor = UIColor.whiteColor;
+    
+    for (UIView* subView in self.searchBar.subviews[0].subviews) {
+        if([subView isKindOfClass:[UITextField class]]) {
+            ((UITextField*)subView).tintColor = UIColor.lightGrayColor;
+            ((UITextField*)subView).textColor = UIColor.lightGrayColor;
+        }
+    }
     
     [self registerForKeyboardNotifications];
     
@@ -163,6 +174,7 @@ static NSDictionary *_editAttrs;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
     self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
+    self.placeholderLabel.textColor = SUBTITLE_TEXT_COLOR;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     

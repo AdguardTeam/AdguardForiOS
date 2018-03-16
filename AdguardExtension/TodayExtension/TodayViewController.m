@@ -97,6 +97,9 @@
             
             ASSIGN_STRONG(self);
             
+            if(!USE_STRONG(self))
+                return;
+            
             if(USE_STRONG(self)->_enabled) {
                 NETunnelProviderProtocol * protocolConfiguration = (NETunnelProviderProtocol *)manager.protocolConfiguration;
                 

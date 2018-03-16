@@ -22,6 +22,9 @@
 
 NSString *APDnsServerTagLocal = @"APDnsServerTagLocal";
 
+NSString *APDnsServerUUIDAdguard = @"AGDEF01";
+NSString *APDnsServerUUIDAdguardFamily = @"AGDEF02";
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsServerObject
 
@@ -93,6 +96,10 @@ static NSMutableCharacterSet *delimCharSet;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
+- (NSString *)uuid {
+    return _uuid;
+}
+
 - (NSString *)ipAddressesAsString {
     
     NSArray *ips = self.ipv4Addresses;
@@ -119,6 +126,10 @@ static NSMutableCharacterSet *delimCharSet;
         else {
             [result appendFormat:@"%@\n", ipv6.ip];
         }
+    }
+    
+    if(self.dnsCryptResolverAddress.length) {
+        [result appendFormat:@"%@\n", self.dnsCryptResolverAddress];
     }
     
     return [result copy];
@@ -191,6 +202,11 @@ static NSMutableCharacterSet *delimCharSet;
 
 - (void)setIpv6Addresses:(NSArray<APDnsServerAddress *> *)ipv6Addresses {
     _ipv6Addresses = [self migrateIpsIfNeeded:ipv6Addresses];
+}
+
+- (void)setDnsCryptId:(NSString *)dnsCryptId {
+    
+    _uuid =_dnsCryptId = dnsCryptId;
 }
 
 /////////////////////////////////////////////////////////////////////
