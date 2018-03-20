@@ -943,9 +943,15 @@ static AEService *singletonService;
 
 - (void)checkStatusWithCallback:(void (^)(BOOL))callback{
     
-    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AE_EXTENSION_ID completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-        callback(state.enabled);
-    }];
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AE_EXTENSION_ID completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+            callback(state.enabled);
+        }];
+    }
+    else {
+        callback(YES);
+    }
+        
 }
 
 @end
