@@ -263,7 +263,7 @@
 
 - (IBAction)clickViewOnGitHub:(id)sender {
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB] options:@{} completionHandler:nil];
+    [self openUrl: [NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
 - (IBAction)clickCheckForUpdates:(id)sender {
@@ -276,7 +276,7 @@
     NSURL *theURL =
     [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
                           ITUNES_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [self openUrl:theURL];
 }
 
 - (IBAction)clickShare:(id)sender {
@@ -307,7 +307,7 @@
 - (IBAction)clickGetPro:(id)sender {
     NSURL *theURL =
     [NSURL URLWithString:GET_PRO_URL];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [self openUrl:theURL];
 }
 
 #ifdef PRO
@@ -321,7 +321,7 @@
 
 - (IBAction)clickOtherApps:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:OTHER_APPS_URL] options:@{} completionHandler:nil];
+    [self openUrl:[NSURL URLWithString:OTHER_APPS_URL]];
 }
 
 
@@ -716,12 +716,12 @@
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Incorrect Blocking / Missed Ad", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
-        [[UIApplication sharedApplication] openURL:reportUrl options:@{} completionHandler:nil];
+        [self openUrl:reportUrl];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Bug Report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: BUGREPORT_URL] options:@{} completionHandler:nil];
+        [self openUrl:[NSURL URLWithString: BUGREPORT_URL]];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Contact Support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -791,6 +791,15 @@
         [self.navigationController setToolbarHidden:NO animated:YES];
         
         
+    }
+}
+
+- (void) openUrl:(NSURL*)url {
+    
+    if ([UIApplication.sharedApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+    } else {
+        [UIApplication.sharedApplication openURL:url];
     }
 }
 
