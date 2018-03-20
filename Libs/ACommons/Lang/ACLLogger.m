@@ -20,6 +20,23 @@
 
 int ddLogLevel = LOG_LEVEL_VERBOSE;
 
+@interface ACLoggerFormatter : DDLogFileFormatterDefault
+@end
+
+@implementation ACLoggerFormatter
+
+
+- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
+{
+    NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
+    
+    NSString* thread = logMessage->queueLabel ?  [NSString stringWithFormat:@"[%u(%s)]", logMessage->machThreadID, logMessage->queueLabel] :
+                                                        [NSString stringWithFormat:@"[%u]", logMessage->machThreadID];
+    return [NSString stringWithFormat:@"%@ %@  %@", dateAndTime, thread, logMessage->logMsg];
+}
+
+@end
+
 @implementation ACLLogger
 
 static ACLLogger *singletonLogger;
@@ -65,10 +82,12 @@ static ACLLogger *singletonLogger;
         _fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
         _fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
         _fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
+        _fileLogger.logFormatter = [ACLoggerFormatter new];
         
         [DDLog addLogger:_fileLogger];
 #ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        [DDLog addLogger:[DDASLLogger sharedInstance]];
 #endif
         
         _initialized = YES;

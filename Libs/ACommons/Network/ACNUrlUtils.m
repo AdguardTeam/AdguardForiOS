@@ -175,6 +175,61 @@ static NSMutableCharacterSet *urlQueryParameterAllowedCharset;
     return [test evaluateWithObject:candidate];
 }
 
++ (BOOL) checkIpv6WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port {
+    
+    return [self checkIpvWithPort:candidate ip:ip port:port ipv6:YES];
+}
+
++ (BOOL) checkIpv4WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port {
+    
+    return [self checkIpvWithPort:candidate ip:ip port:port ipv6:NO];
+}
+
++ (BOOL) checkIpvWithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port ipv6:(BOOL)ipv6 {
+    
+    NSString* regexString = ipv6 ? @"^\\[(.*)\\]:(\\d+)$" :  @"^([0-9.]*):(\\d+)$";
+    
+    NSError *regexError;
+    
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&regexError];
+    
+    NSArray* results = [regex matchesInString:candidate options:0 range:NSMakeRange(0, candidate.length)];
+    
+    if(results.count != 1)
+        return NO;
+    
+    NSTextCheckingResult *match = results.firstObject;
+    
+    if([match numberOfRanges] != 3)
+        return NO;
+    
+    NSRange ipRange = [match rangeAtIndex:1];
+    NSRange portRange = [match rangeAtIndex:2];
+    
+    NSString* ipCandidate = [candidate substringWithRange:ipRange];
+    NSString* portCandidate = [candidate substringWithRange:portRange];
+    
+    BOOL validIp = ipv6 ? [self isIPv6:ipCandidate] : [self isIPv4:ipCandidate];
+    if(validIp) {
+        if(ip)
+            *ip = ipCandidate;
+        if(port)
+            *port = portCandidate;
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isValidIpWithPort:(NSString *)candidate {
+    
+    return  [self isIPv4:candidate] ||
+            [self isIPv6:candidate] ||
+            [self checkIpvWithPort:candidate ip:nil port:nil ipv6:NO] ||
+            [self checkIpvWithPort:candidate ip:nil port:nil ipv6:YES];
+}
+
 /// Gets domain name from the url
 + (NSString *)domainNameFor:(NSString *)url cropWWW:(BOOL)cropWWW
 {
@@ -197,12 +252,56 @@ static NSMutableCharacterSet *urlQueryParameterAllowedCharset;
     return [NSURL URLWithString:[URLString stringByAddingPercentEncodingWithAllowedCharacters:urlAllowedCharset] relativeToURL:baseURL];
 }
 
++ (BOOL)isDomain:(NSString*) candidate {
+    
+    NSString *regex = @"^(((?!-))(xn--)?[a-z0-9-_]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9\\-]{1,61}|[a-z0-9-]{1,30}\\.[a-z]{2,})$";
+    
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", regex];
+    
+    return [test evaluateWithObject:candidate];
+}
+
++ (BOOL)checkHostsLine:(NSString *)candidate ip:(NSString *__autoreleasing *)ip domain:(NSString *__autoreleasing *)domain {
+    
+    NSArray* parts = [candidate componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if(parts.count != 2)
+        return NO;
+    
+    if (![self isIPv4:parts[0]] && ![self isIPv6:parts[0]])
+        return NO;
+    
+    if(![self isDomain:parts[1]])
+        return NO;
+    
+    *ip = parts[0];
+    *domain = parts[1];
+    
+    return YES;
+}
+
++ (BOOL)isValidUrl:(NSString *)candidate {
+    
+    NSURL* url = [NSURL URLWithString:candidate];
+    
+    return (url && url.scheme && url.host);
+}
 
 #pragma mark - Private Methods
 
 + (NSString *)rightUrlEscaping:(NSString *)urlString{
     
     return [urlString stringByAddingPercentEncodingWithAllowedCharacters:urlAllowedCharset];
+}
+
++(NSString *)ipv4StringFromIP:(uint32_t)ip {
+    
+    NSString *ipString = [NSString stringWithFormat:@"%u.%u.%u.%u",
+                          ((ip >> 24) & 0xFF),
+                          ((ip >> 16) & 0xFF),
+                          ((ip >> 8) & 0xFF),
+                          ((ip >> 0) & 0xFF)];
+    
+    return ipString;
 }
 
 @end

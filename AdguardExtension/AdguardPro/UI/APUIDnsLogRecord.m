@@ -20,9 +20,10 @@
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
 #import "AEUICommons.h"
+#import "ABECService.h"
+#import "APSharedResources.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]
-
 
 @implementation APUIDnsLogRecord
 
@@ -51,9 +52,19 @@
             if (response.blocked) {
                 _color = AEUIC_WARNING_COLOR;
                 _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
-            } else {
+            }
+            else if(record.isTracker) {
                 
-                _color = [UIColor darkTextColor];
+                ABECService* service = [APSharedResources serviceByDomain:record.requests[0].name];
+                NSString* trackerName = service.name ?: @"";
+                
+                _color = AEUIC_TRACKER_COLOR;
+                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@, Tracker detected - %@", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the tracker DNS request."), DATE_FORMAT(record.recordDate), trackerName];
+            }
+            else {
+                
+                _color = [UIColor whiteColor];
+                
                 NSArray *responses = [record.responses valueForKey:@"stringValue"];
                 if (record.isWhitelisted) {
 
@@ -65,7 +76,7 @@
         }
         else{
             
-            _color = [UIColor darkTextColor];
+            _color = [UIColor whiteColor];
             
             _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the DNS request without a response."), DATE_FORMAT(record.recordDate)];
         }

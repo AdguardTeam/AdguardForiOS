@@ -30,6 +30,8 @@
 #define ADGUARD_FORUM_LINK          @"http://forum.adguard.com/"
 #define ADGUARD_ACKNOWLEDGEMENTS    @"http://adguard.com/acknowledgements.html#ios-acknowledgments"
 
+#define VIDEO_IMAGE_MAX_HEIGHT 200
+
 @interface AEUIAboutController ()
 
 @end
@@ -39,7 +41,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.versionLabel.text = [ADProductInfo version];
+    self.versionLabel.text = [ADProductInfo versionWithBuildNumber];
+    
+    // remove cell separator
+    for (UIView *view in self.howToEnableCell.subviews){
+        
+        if(view != self.howToEnableCell.contentView) {
+            [view removeFromSuperview];
+        }
+    }
+    for (UIView *view in self.howToAddRulesCell.subviews){
+        
+        if(view != self.howToAddRulesCell.contentView) {
+            [view removeFromSuperview];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +75,19 @@
 
 - (IBAction)clickAcknowledgments:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.section == 0) {
+        
+        UIImage *image = [UIImage imageNamed:@"video-image"];
+        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
+        
+        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 @end

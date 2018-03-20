@@ -66,4 +66,16 @@
 /// @warning May work incorrectly because it taken from internet
 + (BOOL)isIPv6:(NSString *)candidate;
 
++ (BOOL) checkIpv6WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port;
+
++ (BOOL) checkIpv4WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port;
+
++ (BOOL) checkHostsLine:(NSString*) candidate ip:(NSString**)ip domain:(NSString**)domain;
+
++ (BOOL) isValidIpWithPort:(NSString*) candidate;
+
++ (BOOL) isValidUrl:(NSString*)candidate;
+
++ (NSString*) ipv4StringFromIP:(uint32_t)ip;
+
 @end

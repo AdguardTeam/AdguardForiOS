@@ -30,8 +30,11 @@
 #import "AEUIUtils.h"
 #import "APDnsServerObject.h"
 #import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle]
+
+#define RESPONSES_SECTION 3
 
 typedef enum {
 
@@ -88,6 +91,22 @@ static NSDateFormatter *_timeFormatter;
     NSLocalizedString(@"On", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
     : NSLocalizedString(@"Off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
 
+    if(self.logRecord.isTracker) {
+        
+        ABECService * service = [APSharedResources serviceByDomain: request.name];
+        
+        self.serviceNameCell.detailTextLabel.text = service.name;
+        self.serviceDescriptionCell.detailTextLabel.text = service.serviceDescription;
+        self.servideCategoriesCell.detailTextLabel.text = [service.categories componentsJoinedByString:@", "];
+        self.serviceNotesCell.detailTextLabel.text = [service.notes componentsJoinedByString:@", "];
+    }
+    
+    [self cell: self.serviceNameCell setHidden:!self.serviceNameCell.detailTextLabel.text.length];
+    [self cell: self.serviceDescriptionCell setHidden:!self.serviceDescriptionCell.detailTextLabel.text.length];
+    [self cell: self.servideCategoriesCell setHidden:!self.servideCategoriesCell.detailTextLabel.text.length];
+    [self cell: self.serviceNotesCell setHidden:!self.serviceNotesCell.detailTextLabel.text.length];
+    
+    [self reloadDataAnimated:NO];
     
     NSMutableAttributedString *sb = [NSMutableAttributedString new];
     
@@ -99,7 +118,19 @@ static NSDateFormatter *_timeFormatter;
         // Set status cell
         if (self.logRecord.isBlacklisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by System-wide Ad Blocking", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Status text shown when a DNS request was blocked by a rule in the 'Simplified Domain Names Filter' or by the blacklist.");
+            NSString* statusText;
+            
+            NSString* domain = self.logRecord.requests[0].name;
+            
+            NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
+            
+            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
+            
+            NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
+            
+            statusText = [NSString stringWithFormat:format, name];
+            
+            self.statusCell.detailTextLabel.text = statusText;
         }
         else if (self.logRecord.isWhitelisted){
             
@@ -170,7 +201,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         // Fitting size of the request name
         return [self.nameCell fitHeight];
     }
-    else if (indexPath.section == 2 && indexPath.row == 0){
+    else if (indexPath.section == RESPONSES_SECTION && indexPath.row == 0){
         
         // Fitting size of the responses
         return [self.responsesCell fitHeight];
@@ -179,6 +210,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
     
@@ -207,10 +240,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                 else {
                     APSharedResources.whitelistDomains = @[_domainName];
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self enableLocalFilteringIfNeedIt];
-                });
             }
             else if (_domainControllCellType == DomainControllAddToBlacklist) {
                 
@@ -221,10 +250,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                 else {
                     APSharedResources.blacklistDomains = @[_domainName];
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self enableLocalFilteringIfNeedIt];
-                });
             }
             else if (_domainControllCellType == DomainControllRemoveFromWhitelist) {
                 
@@ -265,7 +290,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         _domainControllCellType = DomainControllNone;
         
-        self.domainControllCell.textLabel.textColor = self.domainControllCell.textLabel.tintColor;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.domainControllCell.textLabel.textColor = self.domainControllCell.tintColor;
+        });
 
         APDnsRequest *request = self.logRecord.requests[0];
 
@@ -273,7 +300,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         NSArray *domainslist = APSharedResources.whitelistDomains;
         
-        NSString *labelText = [NSString new];
+        NSString *labelText;
         
         // We check on equal
         if ([domainslist containsObject:_domainName]) {
@@ -307,41 +334,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             self.domainControllCell.textLabel.text = labelText;
             [self reloadDataAnimated:YES];
         });
-    }
-}
-
-- (void)enableLocalFilteringIfNeedIt {
-    
-    if (APVPNManager.singleton.localFiltering) {
-        return;
-    }
-    
-    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:NSLocalizedString(@"Blacklist and whitelist only work if you have enabled system-wide ad blocking.", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Alert message when the user attempts to add a domain to the black/white list.")
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details screen. Button text for enabling system-wide filtering after you try to blacklis/whitelist a request.")
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * action) {
-
-                                                        [[APVPNManager singleton] setLocalFiltering:YES];
-                                                    }];
-    
-    [sheet addAction:action];
-    
-    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIDnsRequestDetail)PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details screen. Text on the button that cancels enabling system-wide filtering after you try to blacklist/whitelist a request.")
-                                      style:UIAlertActionStyleCancel
-                                    handler:nil];
-    
-    [sheet addAction:action];
-    
-    [self presentViewController:sheet animated:YES completion:nil];
-    
-    UIPopoverPresentationController *popover = sheet.popoverPresentationController;
-    if (popover) {
-        
-        popover.sourceView = self.domainControllCell;
-        popover.sourceRect = self.domainControllCell.bounds;
     }
 }
 

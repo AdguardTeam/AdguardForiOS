@@ -50,12 +50,21 @@ static NSDictionary *persistentProductInfo;
         
         NSString *version = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         if (!version)
-            version = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
+            version = [self buildNumber];
         
         mVersion = version ? version : DEFAULT_PRODUCT_VERSION;
     });
     
     return mVersion;
+}
+
++ (NSString *)versionWithBuildNumber {
+    NSString *build = [self buildNumber];
+    
+    if(build)
+        return [NSString stringWithFormat:@"%@(%@)", [self version], build];
+    else
+        return [self version];
 }
 
 /// Returns Product Version With Build Number
@@ -65,7 +74,7 @@ static NSDictionary *persistentProductInfo;
     dispatch_once(&onceToken, ^{
         
         NSString *version = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        NSString *build = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
+        NSString *build = [self buildNumber];
 #ifdef DEBUG
         build = [build stringByAppendingString:@".DEBUG"];
 #endif
@@ -79,6 +88,10 @@ static NSDictionary *persistentProductInfo;
     });
     
     return _buildVersion;
+}
+
++ (NSString *)buildNumber {
+    return [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
 /// Returns Localized Product Name

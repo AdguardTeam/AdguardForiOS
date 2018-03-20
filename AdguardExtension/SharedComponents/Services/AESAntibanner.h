@@ -139,6 +139,13 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  all stored in database antibanner filters.
  */
 - (NSArray *)filters;
+
+/**
+ Obtain active filters information.
+ @return Array of NSNumber objects that contains active filter IDs
+ */
+- (NSArray*) activeFilterIDs;
+
 /**
  Obtains filters localization information.
  @return ASDFiltersI18n object that contains data from database.

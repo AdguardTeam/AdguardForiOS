@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+#import <UIKit/UIApplication.h>
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "ADomain/ADomain.h"
@@ -24,6 +25,10 @@
 #import "AESharedResources.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
+#define UPDATE_METADATA_TIMEOUT           3.0
+
+#define AES_TRANSACTION_TASK_NAME        @"AESAntibaner-Transaction_Task"
+
 
 NSString *ASAntibannerUpdatedFiltersKey = @"ASAntibannerUpdatedFiltersKey";
 NSString *ASAntibannerInstalledNotification = @"ASAntibannerInstalledNotification";
@@ -81,6 +86,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     ASDFiltersI18n *_dbFiltersI18nCache;
     ASDGroupsI18n *_dbGroupsI18nCache;
+    
+    UIBackgroundTaskIdentifier _transactionBackroundTaskID;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -96,6 +103,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
         
+        __typeof__(self) __weak wSelf = self;
+        
         updateFilterFromUI =
         [[ACLExecuteBlockDelayed alloc]
          initWithTimeout:AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY
@@ -103,16 +112,19 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
          queue:workQueue
          block:^{
              
-             if (!serviceEnabled) return;
+             __typeof__(self) sSelf = wSelf;
              
-             dispatch_async(workQueue, ^{
+             if (!sSelf->serviceEnabled)
+                 return;
+             
+             dispatch_async(sSelf->workQueue, ^{
                  
-                 [self updateAntibannerForced:NO interactive:YES];
+                 [sSelf updateAntibannerForced:NO interactive:YES];
              });
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:self];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
              });
              
          }];
@@ -224,6 +236,28 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     }
     
     return rules;
+}
+
+- (NSArray*) activeFilterIDs {
+    
+    NSMutableArray *filterIDs = [NSMutableArray array];
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
+        
+        while ([result next]) {
+            
+            NSNumber *filterId = result[0];
+            
+            if ([filterId integerValue] != ASDF_USER_FILTER_ID) {
+                [filterIDs addObject:filterId];
+            }
+        }
+        [result close];
+    }];
+   
+    return filterIDs.copy;
 }
 
 - (BOOL)checkIfFilterInstalled:(NSNumber *)filterId{
@@ -423,7 +457,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 [result close];
                 result = [db executeQuery:@"select max(rule_id) from filter_rules where filter_id = ?", rule.filterId];
                 
-                NSNumber *ruleId = @(0);
+                NSNumber *ruleId;
                 if ([result next]) {
                     
                     id maxValue = result[0];
@@ -622,16 +656,21 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     @autoreleasepool {
         
+        if(!_metadataCacheForFilterSubscription) {
+            _metadataCacheForFilterSubscription = [AESharedResources new].filtersMetadataCache;
+        }
+        
         if (! _metadataCacheForFilterSubscription
             || refresh
             || ([_metaCacheLastUpdated timeIntervalSinceNow] * -1) >= AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD) {
             // trying load metadata from backend service.
             if ([reach isReachable]) {
                 
-                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] metadata];
+                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] loadMetadataWithTimeoutInterval:@(UPDATE_METADATA_TIMEOUT)];
                 if (metadata) {
                     
                     _metadataCacheForFilterSubscription = metadata;
+                    [AESharedResources new].filtersMetadataCache = _metadataCacheForFilterSubscription;
                     _metaCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -663,16 +702,21 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     @autoreleasepool {
         
+        if(!_i18nCacheForFilterSubscription) {
+            _i18nCacheForFilterSubscription = [AESharedResources new].i18nCacheForFilterSubscription;
+        }
+        
         if (! _i18nCacheForFilterSubscription
             || refresh
             || ([_i18nCacheLastUpdated timeIntervalSinceNow] * -1) >= AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD) {
             // trying load metadata from backend service.
             if ([reach isReachable]) {
                 
-                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] i18n];
+                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] loadI18nWithTimeoutInterval:@(UPDATE_METADATA_TIMEOUT)];
                 if (i18n) {
                     
                     _i18nCacheForFilterSubscription = i18n;
+                    [AESharedResources new].i18nCacheForFilterSubscription = _i18nCacheForFilterSubscription;
                     _i18nCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -914,6 +958,11 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             return;
         }
         
+        [self beginBackgroundTaskWithExpirationHandler:^{
+            
+            [self rollbackTransactionInternal:YES];
+        }];
+        
         [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
             [db beginDeferredTransaction];
         }];
@@ -934,13 +983,22 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             self.updatesRightNow = NO;
         }
+        
+        [self endBackgroundTask];
+        
         _inTransaction = NO;
     });
     [[ASDatabase singleton] readUncommited:NO];
     [[ASDatabase singleton] resetIsolationQueue:workQueue];
+    
 }
 
 - (void)rollbackTransaction{
+    
+    [self rollbackTransactionInternal:NO];
+}
+
+- (void)rollbackTransactionInternal:(BOOL)backgroundTaskExpired{
     
     dispatch_sync(workQueue, ^{
         
@@ -952,6 +1010,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             self.updatesRightNow = NO;
         }
+        
+        if(!backgroundTaskExpired)
+            [self endBackgroundTask];
+        
         _inTransaction = NO;
     });
     [[ASDatabase singleton] readUncommited:NO];
@@ -1184,7 +1246,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         // Get filters/groups metadata and i18n from backend and insert to  DB.
         // update i18n
-        ABECFilterClientLocalization *i18n = [filterClient i18n];
+        ABECFilterClientLocalization *i18n = [filterClient loadI18nWithTimeoutInterval:nil];
         if (i18n) {
             
             [theDB exec:^(FMDatabase *db, BOOL *rollback) {
@@ -1203,7 +1265,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         }
         
         // main updating work
-        ABECFilterClientMetadata *metadata = [filterClient metadata];
+        ABECFilterClientMetadata *metadata = [filterClient loadMetadataWithTimeoutInterval:nil];
         if (metadata) {
             
             // get metadata only for filters, which must be updated
@@ -1523,29 +1585,31 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         
         // Get suitable filters.
         NSMutableArray *sFilters = [NSMutableArray arrayWithCapacity:4];
-        NSString *langString = [NSString stringWithFormat:@"%@|%@|%@", ADL_DEFAULT_LANG, [ADLocales lang], [ADLocales region]];
+        NSString *langString = [NSString stringWithFormat:@"%@|%@", [ADLocales lang], [ADLocales region]];
         for (ASDFilterMetadata *filter in filters)
-            if ([langString containsAny:filter.langs]                   // Filters for user language and english
+            if ([langString containsAny:filter.langs]                   // Filters for user language
+                || [filter.filterId isEqual:@(ASDF_ENGLISH_FILTER_ID)]   // Base Filter
                 || [filter.filterId isEqual:@(ASDF_SPYWARE_FILTER_ID)]   // Privacy Protection Filter
                 || [filter.filterId isEqual:@(ASDF_SOC_NETWORKS_FILTER_ID)] // Social networks filter identifier
                 || [filter.filterId isEqual:@(ASDF_MOBILE_SAFARI_FILTER_ID)] // Mobile Safari FIlter
+                || [filter.filterId isEqual:@(MOBILE_ADS_FILTER_ID)] // Mobile ads filter
 #ifdef PRO
                 || [filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)] // Simplified domain names filter
 #endif
                 ) {
 
 #ifdef PRO
-                //Special case for Simplified domain names filter. We prevent deleting of this filter.
-                //https://github.com/AdguardTeam/AdguardForiOS/issues/302
-                if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
-                    filter.removable = @(NO);
-                    filter.editable = @(NO);
-                    filter.enabled = @(NO);
-                }
+                    //Special case for Simplified domain names filter. We prevent deleting of this filter.
+                    //https://github.com/AdguardTeam/AdguardForiOS/issues/302
+                    if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
+                        filter.removable = @(NO);
+                        filter.editable = @(NO);
+                        filter.enabled = @(NO);
+                    }
 #endif
                 
-                [sFilters addObject:filter];
-            }
+                    [sFilters addObject:filter];
+                }
         
         if (!sFilters)
             return NO;
@@ -2015,6 +2079,25 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     toMeta.editable = [fromMeta.editable copy];
     toMeta.removable = [fromMeta.removable copy];
 
+}
+
+- (void) beginBackgroundTaskWithExpirationHandler:(void (^)(void))expirationBlock {
+    
+#ifndef APP_EXTENSION
+    _transactionBackroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_TRANSACTION_TASK_NAME expirationHandler:^{
+        
+        if(expirationBlock)
+            expirationBlock();
+    }];
+#endif
+}
+
+- (void) endBackgroundTask {
+    
+#ifndef APP_EXTENSION
+    [[UIApplication sharedApplication] endBackgroundTask:_transactionBackroundTaskID];
+    _transactionBackroundTaskID = UIBackgroundTaskInvalid;
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////////

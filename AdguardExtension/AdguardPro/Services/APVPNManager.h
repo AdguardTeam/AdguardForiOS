@@ -34,26 +34,17 @@ typedef enum {
     APVpnConnectionStatusInvalid
 } APVpnConnectionStatus;
 
+typedef enum : NSUInteger {
+    
+    APVpnManagerTunnelModeSplit = 0,
+    APVpnManagerTunnelModeFull
+} APVpnManagerTunnelMode;
+
 
 /**
  This notification arises when state or mode of the vpn is changed.
  */
 extern NSString *APVpnChangedNotification;
-
-/**
- Key of the parameter, which contains remote DNS server configuration.
-*/
-extern NSString *APVpnManagerParameterRemoteDnsServer;
-/**
- Key of the parameter, 
- which contains BOOL value of local filtering switch.
- */
-extern NSString *APVpnManagerParameterLocalFiltering;
-
-/**
- Error domain for errors from vpn manager.
- */
-extern NSString *APVpnManagerErrorDomain;
 
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
@@ -63,10 +54,10 @@ extern NSString *APVpnManagerErrorDomain;
 
 
 #define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX              0
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               YES
+#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               NO
 
-#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX_LESS_10      1
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING_LESS_10       NO
+#define APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX       1
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
@@ -88,14 +79,11 @@ extern NSString *APVpnManagerErrorDomain;
  List of the app defined DNS servers.
  */
 @property (class, readonly) NSMutableArray <APDnsServerObject *> *predefinedDnsServers;
+
 /**
- Default state of the local filtering.
+ List of the app defined DNS Crypt servers.
  */
-@property (class, readonly) BOOL defaultLocalFilteringState;
-/**
- Index of the default DNS server in `predefinedDnsServers` class property.
- */
-@property (class, readonly) NSUInteger defaultDnsServerIndex;
+@property (nonatomic, readonly) NSArray <APDnsServerObject *> *predefinedDnsCryptServers;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -104,9 +92,14 @@ extern NSString *APVpnManagerErrorDomain;
 @property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsServers;
 
 /**
+ remote DNS Crypt serevrs
+ */
+@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsCryptServers;
+
+/**
  Defines state of the filtering using "Simplified domain names filter" filter rules.
  */
-@property BOOL localFiltering;
+//@property BOOL localFiltering;
 /**
  Active DNS server.
  */
@@ -135,6 +128,11 @@ extern NSString *APVpnManagerErrorDomain;
  Switch on/off of the fake vpn.
  */
 @property BOOL enabled;
+
+/** 
+ tunnel mode full/split/auto
+ */
+@property APVpnManagerTunnelMode tunnelMode;
 
 /**
  Adds custom (editable) DNS server.
@@ -181,5 +179,16 @@ extern NSString *APVpnManagerErrorDomain;
  which notifies that extension needs reload whitelist/blacklist of the domains.
  */
 - (void)sendReloadSystemWideDomainLists;
+
+/**
+ Loads active DNS server from deafults. It used by action extension for bug reporting.
+ */
+- (APDnsServerObject*) loadActiveRemoteDnsServer;
+
+/**
+ Removes duplicates of predefined servers from the list of custom servers.
+ https://github.com/AdguardTeam/AdguardForiOS/issues/639
+ */
+- (void) removeCustomRemoteServersDuplicates;
 
 @end

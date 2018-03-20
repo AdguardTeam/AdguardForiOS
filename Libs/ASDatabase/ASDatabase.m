@@ -155,7 +155,7 @@ static ASDatabase *singletonDB;
                 }
             }
             if (result == NO) {
-                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
+                self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseInitDefaultDbErrorCode
                                              userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
                 DDLogError(@"Error init default DB.");
                 
@@ -167,7 +167,11 @@ static ASDatabase *singletonDB;
         defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:defaultDbPath flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
         if (defaultDbQueue){
             
+            __typeof__(self) __weak  wSelf = self;
+            
             [defaultDbQueue inDatabase:^(FMDatabase *db) {
+                
+                __typeof__(self) sSelf = wSelf;
                 
                 // check current version of production DB
                 FMResultSet *result = [db executeQuery:@"select schema_version from version;"];
@@ -178,7 +182,7 @@ static ASDatabase *singletonDB;
                 }
                 else{
                     
-                    self.error = [db lastError];
+                    sSelf.error = [db lastError];
                     DDLogError(@"Error selecting scheme_version from default DB: %@", [[db lastError] localizedDescription]);
                 }
             }];

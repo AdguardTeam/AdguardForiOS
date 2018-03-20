@@ -25,6 +25,9 @@
 #import "AESharedResources.h"
 #import "AEFilterRuleSyntaxConstants.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
+#import <mach/mach.h>
+
 
 NSString *AEServiceErrorDomain = @"AEServiceErrorDomain";
 NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
@@ -32,8 +35,6 @@ NSString *AESUserInfoRuleObject = @"AESUserInfoRuleObject";
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEServices
 /////////////////////////////////////////////////////////////////////
-
-#define AES_RELOADJSON_TASK_NAME        @"AEService-Reload_JSON"
 
 typedef enum {
     
@@ -58,7 +59,6 @@ typedef enum {
     NSMutableArray *_onReloadContentBlockingJsonBlocks;
     BOOL _reloadContentBlockingJsonComplate;
     NSLock *_reloadContentBlockingJsonLock;
-    UIBackgroundTaskIdentifier _reloadContentBlockingJsonLongTaskId;
     
     BOOL started;
     
@@ -97,8 +97,7 @@ static AEService *singletonService;
         _readyLock = [NSLock new];
         _reloadContentBlockingJsonLock = [NSLock new];
         _reloadContentBlockingJsonComplate = YES;
-        _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-
+        
     }
     
     return self;
@@ -435,7 +434,6 @@ static AEService *singletonService;
                                          objectForKey:AEDefaultsJSONConvertedRules] integerValue];
             NSInteger totalConvertedRulesCount = [[[AESharedResources sharedDefaults]
                                                    objectForKey:AEDefaultsJSONRulesForConvertion] integerValue];
-            BOOL overlimit = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached];
             
             
                 NSError *error = nil;
@@ -471,10 +469,9 @@ static AEService *singletonService;
                             
                             totalConvertedRulesCount--;
                             convertedRules--;
-                            overlimit = NO;
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesForConvertion value:@(totalConvertedRulesCount)];
                             [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONConvertedRules value:@(convertedRules)];
-                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(overlimit)];
+                            [AESharedResources sharedDefaultsSetTempKey:AEDefaultsJSONRulesOverlimitReached value:@(NO)];
                             
                             jsonNotModified = NO;
                         }
@@ -502,26 +499,6 @@ static AEService *singletonService;
     [_reloadContentBlockingJsonLock unlock];
 
     dispatch_async(workQueue, ^{
-
-#ifndef APP_EXTENSION
-        //Long-running task init
-        
-        if (!backgroundUpdate) {
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                
-                _reloadContentBlockingJsonLongTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_RELOADJSON_TASK_NAME expirationHandler:^{
-                    
-                    //TODO: ceanup
-                    
-                    if (_reloadContentBlockingJsonLongTaskId != UIBackgroundTaskInvalid) {
-                        [[UIApplication sharedApplication] endBackgroundTask:_reloadContentBlockingJsonLongTaskId];
-                        _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-                    }
-                }];
-            });
-        }
-#endif
         
         //reloading
         NSError *result = [self reloadContentBlockingJson];
@@ -666,11 +643,29 @@ static AEService *singletonService;
                             
                             // getting filters rules
                             NSMutableArray *rules = [self.antibanner activeRules];
-                            // getting whitelist rules
-                            NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
-                            if (whitelistRules.count) {
-                                [rules addObjectsFromArray:whitelistRules];
+                            
+                            BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+                            
+                            if(inverted) {
+                                
+                                // get rule for inverted whilelist
+                                AEInvertedWhitelistDomainsObject *invertedWhitelistObject = [AESharedResources new].invertedWhitelistContentBlockingObject;
+                                
+                                if(invertedWhitelistObject.rule) {
+                                    [rules addObject:invertedWhitelistObject.rule];
+                                }
                             }
+                            else {
+                                
+                                // getting whitelist rules
+                                NSMutableArray *whitelistRules = [[AESharedResources new] whitelistContentBlockingRules];
+                                if (whitelistRules.count) {
+                                    [rules addObjectsFromArray:whitelistRules];
+                                }
+                            }
+                            
+                            // remove comments
+                            [rules filterUsingPredicate:[NSPredicate predicateWithFormat:@"!(ruleText BEGINSWITH[c] '!')"]];
                             
                             if (rules.count) {
                                 
@@ -758,8 +753,9 @@ static AEService *singletonService;
          reloadContentBlockerWithIdentifier:AE_EXTENSION_ID
          completionHandler:nil];
         
-        [self savePermanentlyCountersOfConvertion];
-        
+        [self savePermanentlyCountersOfConversion];
+        [self removeTempCountersOfConversion];
+
         [self finishReloadingContentBlockingJsonWithCompletionBlock:completionBlock error:nil];
     }
     else{
@@ -780,10 +776,10 @@ static AEService *singletonService;
              
              //no errors
 
-             [self savePermanentlyCountersOfConvertion];
+             [self savePermanentlyCountersOfConversion];
          }
          
-         [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
+         [self removeTempCountersOfConversion];
          
          DDLogInfo(@"(AEService) Notify Safari fihished.");
          
@@ -792,23 +788,33 @@ static AEService *singletonService;
     }
 }
 
-- (void)savePermanentlyCountersOfConvertion{
+- (void)savePermanentlyCountersOfConversion{
 
     //Permanently save current converted rules in user defaults
-    NSNumber *value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONConvertedRules];
+    
+    DDLogInfo(@"(AEService) Permanently saving current converted rules in user defaults.");
+    NSNumber *value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONConvertedRules];
     if (value) {
-        DDLogInfo(@"(AEService) Permanently saved current converted rules in user defaults.");
         [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONConvertedRules];
         DDLogInfo(@"Rules: %@", value);
-        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesForConvertion];
+    }
+    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesForConvertion];
+    if (value) {
         [[AESharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONRulesForConvertion];
         DDLogInfo(@"From rules: %@", value);
-        
-        value = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsJSONRulesOverlimitReached];
-        [[AESharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
-        
     }
+    
+    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesOverlimitReached];
+    if (value) {
+        [[AESharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
+    }
+}
 
+- (void)removeTempCountersOfConversion {
+    
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesForConvertion];
+    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesOverlimitReached];
 }
 
 - (void)checkForServiceReady:(ReadyFlagType)readyFlag{
@@ -852,12 +858,7 @@ static AEService *singletonService;
         if (completionBlock) {
             dispatch_async(workQueue, ^{
                 completionBlock(error);
-                [self finishLongRunningTask];
             });
-        }
-        else{
-            
-            [self finishLongRunningTask];
         }
         
         [_reloadContentBlockingJsonLock lock];
@@ -887,22 +888,6 @@ static AEService *singletonService;
             _firstRunInProgress = YES;
         }
     }
-}
-
-//Finish long-running task
-- (void)finishLongRunningTask{
-
-#ifndef APP_EXTENSION
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        if (_reloadContentBlockingJsonLongTaskId != UIBackgroundTaskInvalid) {
-            [[UIApplication sharedApplication] endBackgroundTask:_reloadContentBlockingJsonLongTaskId];
-            _reloadContentBlockingJsonLongTaskId = UIBackgroundTaskInvalid;
-        }
-    });
-#endif
-    
 }
 
 - (AESFilterConverter *)createConverterToJsonWithError:(NSError **)error {
@@ -954,6 +939,13 @@ static AEService *singletonService;
     }
     
     return convertResult;
+}
+
+- (void)checkStatusWithCallback:(void (^)(BOOL))callback{
+    
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AE_EXTENSION_ID completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+        callback(state.enabled);
+    }];
 }
 
 @end

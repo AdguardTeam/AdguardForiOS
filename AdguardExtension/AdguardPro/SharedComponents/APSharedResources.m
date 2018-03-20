@@ -25,7 +25,14 @@
 
 #define APS_WHITELIST_DOAMINS              @"pro-whitelist-doamins.data"
 #define APS_BLACKLIST_DOAMINS              @"pro-blacklist-doamins.data"
-#define DNS_LOG_RECORD_FILE         @"dns-log-records.db"
+#define APS_TRACKERS_DOMAINS               @"pro-trackers-domains.data"
+#define APS_HOSTS_DOMAINS                  @"pro-hosts-domains.data"
+#define DNS_LOG_RECORD_FILE                @"dns-log-records.db"
+#define BLOCKING_SUBSCRIPTIONS_FILE        @"blocking-subscriptions.db"
+#define BLOCKING_SUBSCRIPTIONS_META_FILE   @"blocking-subscriptions-meta.db"
+#define BLOCKING_SUBSCRIPTIONS_HOSTS_FILE  @"blocking-subscriptions-hosts.db"
+#define BLOCKING_SUBSCRIPTIONS_RULES_FILE  @"blocking-subscriptions-rules.db"
+
 #define LOG_RECORDS_TTL             12*60*60 // 12 hours
 
 /////////////////////////////////////////////////////////////////////
@@ -35,6 +42,7 @@
 
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
 - (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
+- (NSString*) pathForRelativePath:(NSString*) relativePath;
 
 @end
 
@@ -53,14 +61,6 @@
 @end
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark - APSharedResources Constants
-
-NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
-NSString *APDefaultsCustomRemoteDnsServers = @"APDefaultsCustomRemoteDnsServers";
-NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
-NSString *APDefaultsBadVPNConfigurationWarningDisplayDate = @"APDefaultsBadVPNConfigurationWarningDisplayDate";
-
-/////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
 
 @implementation APSharedResources
@@ -71,6 +71,7 @@ NSString *APDefaultsBadVPNConfigurationWarningDisplayDate = @"APDefaultsBadVPNCo
 static NSString *_dnsLogRecordsPath;
 static FMDatabaseQueue *_readDnsLogHandler;
 static FMDatabaseQueue *_writeDnsLogHandler;
+static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 
 + (void)initialize{
     
@@ -102,6 +103,59 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 + (void)setBlacklistDomains:(NSArray<NSString *> *)blacklistDomains {
     
     [self setDomainsList:blacklistDomains forName:APS_BLACKLIST_DOAMINS];
+}
+
++(NSDictionary<NSString *,ABECService *> *)loadTrackerslistDomainsAndCacheResult:(BOOL)cacheResult {
+    
+    NSDictionary* result = _trackerslistDomains;
+    
+    if(!result){
+        result = [self domainsListWithName:APS_TRACKERS_DOMAINS];
+        
+        if(cacheResult)
+            _trackerslistDomains = result;
+    }
+    
+    return result;
+}
+
++(void)saveTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
+    
+    _trackerslistDomains = trackerslistDomains;
+    [self setDomainsList:trackerslistDomains forName:APS_TRACKERS_DOMAINS];
+}
+
++ (ABECService *)serviceByDomain:(NSString*) domain {
+    
+    NSDictionary<NSString*, ABECService*>* hosts = [self loadTrackerslistDomainsAndCacheResult:YES];
+    
+    //fullmatch
+    __block ABECService *service = hosts[domain];
+    
+    // mask search
+    if(!service) {
+        
+        [hosts enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, ABECService * _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            if([domain hasSuffix:key]) {
+                
+                service = obj;
+                *stop = YES;
+            }
+        }];
+    }
+    
+    return service;
+}
+
++ (NSDictionary<NSString *,NSString *> *)hosts {
+    
+    return [self domainsListWithName:APS_HOSTS_DOMAINS];
+}
+
++ (void)setHosts:(NSDictionary<NSString *,NSString *> *)hosts {
+    
+    [self setDomainsList:hosts forName:APS_HOSTS_DOMAINS];
 }
 
 + (NSArray <APDnsLogRecord *> *)readDnsLog{
@@ -223,7 +277,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     
     BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS APDnsLogTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, record BLOB)"];
     if (result) {
-        result = [db executeUpdate:@"CREATE INDEX IF NOT EXISTS mainIndex ON APDnsLogTable (timeStamp)"];
+        [db executeUpdate:@"CREATE INDEX IF NOT EXISTS mainIndex ON APDnsLogTable (timeStamp)"];
     }
 }
 
@@ -236,7 +290,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     }];
 }
 
-+ (NSArray <NSString *> *)domainsListWithName:(NSString *)name {
++ (id)domainsListWithName:(NSString *)name {
 
     AESharedResources *resources = [AESharedResources new];
     NSData *data = [resources loadDataFromFileRelativePath:name];
@@ -246,7 +300,7 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     return nil;
 }
 
-+ (void)setDomainsList:(NSArray <NSString *> *)domainsList forName:(NSString *)name {
++ (void)setDomainsList:(id)domainsList forName:(NSString *)name {
     
     AESharedResources *resources = [AESharedResources new];
     if (domainsList == nil) {
@@ -262,5 +316,43 @@ static FMDatabaseQueue *_writeDnsLogHandler;
         [resources saveData:data toFileRelativePath:name];
     }
 }
+
++ (void)setSubscriptionsData:(NSData *)subscriptionsData {
+    
+    AESharedResources *resources = [AESharedResources new];
+    
+    if(!subscriptionsData) {
+        subscriptionsData = [NSData data];
+    }
+    
+    [resources saveData:subscriptionsData toFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSData *)subscriptionsData {
+    AESharedResources *resources = [AESharedResources new];
+    
+    return [resources loadDataFromFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsData {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsMeta {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_META_FILE];
+}
+
++ (NSString *)pathForSubscriptionsHosts {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_HOSTS_FILE];
+}
+
++ (NSString *)pathForSubscriptionsRules {
+    
+    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_RULES_FILE];
+}
+
 
 @end

@@ -18,6 +18,9 @@
 #import "StaticDataTableViewController.h"
 #import <Social/Social.h>
 #import <MessageUI/MessageUI.h>
+#import "AEUIStarsLayer.h"
+#import "MGSwipeTableCell.h"
+#import "APUIProStatusTableViewCell.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -37,37 +40,53 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 @property (weak, nonatomic) IBOutlet UIButton *mailButton;
+@property (weak, nonatomic) IBOutlet UILabel *whitelistLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdated;
 @property (weak, nonatomic) IBOutlet UITableViewCell *checkFiltersCell;
 
-@property (weak, nonatomic) IBOutlet UISwitch *proStatusSwitch;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *proSectionCells;
-@property (weak, nonatomic) IBOutlet UITableViewCell *proStatusCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *proSystemWideCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *proDnsSettingsCell;
-
-
+@property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *privacySettingsCells;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
+@property (strong, nonatomic) IBOutlet MGSwipeTableCell *videoCell;
+@property (strong, nonatomic) IBOutlet MGSwipeTableCell *safariVideoCell;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *disabledLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalRequestsCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trackersCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *avarageTimeLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *proStatusSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *bugReportCell;
 
+@property (nonatomic) AEUIStarsLayer* starsLayer;
 
 - (IBAction)toggleAdguard:(id)sender;
-- (IBAction)clickTwitter:(id)sender;
-- (IBAction)clickFacebook:(id)sender;
-- (IBAction)clickMessage:(id)sender;
-- (IBAction)clickMail:(id)sender;
 - (IBAction)clickViewOnGitHub:(id)sender;
 - (IBAction)clickCheckForUpdates:(id)sender;
 - (IBAction)clickRateThisApp:(id)sender;
 - (IBAction)clickSendBugReport:(id)sender;
 - (IBAction)clickGetPro:(id)sender;
-- (IBAction)proToggleStatus:(id)sender;
 
 /**
  Adds rule to User filter.
  This method is used for adding rule from "open URL" command.
  */
 - (void)addRuleToUserFilter:(NSString *)ruleText;
+
+/**
+ Check content blocker status and update ui of needed
+ */
+- (void) checkContentBlockerStatus;
+
+#ifdef PRO
+
+/**
+ set pro status. Needed for switch status from today widget
+ */
+- (void) setProStatus:(BOOL) enabled;
+
+#endif
 
 @end

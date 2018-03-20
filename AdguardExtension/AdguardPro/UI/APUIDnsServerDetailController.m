@@ -19,6 +19,7 @@
 #import "APUIDnsServerDetailController.h"
 #import "APDnsServerObject.h"
 #import "APUIDnsServersController.h"
+#import "ACNUrlUtils.h"
 
 #define IP_ADDRESSES_SECTION_INDEX          1
 
@@ -33,17 +34,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.hideSectionsWithHiddenRows = YES;
     
     APDnsServerObject *obj = self.serverObject;
+    
     if (obj) {
         self.nameTextField.text = obj.serverName;
         self.descriptionTextField.text = obj.serverDescription;
         self.ipAddressesTextView.text = obj.ipAddressesAsString;
+        self.resolverNameTextField.text = obj.dnsCryptProviderName;
+        self.resolverAddressTextField.text = obj.dnsCryptResolverAddress;
+        self.publicKeyTextField.text = obj.dnsCryptProviderPublicKey;
         self.removeCell.hidden = NO;
         // tunning accessibility
         self.removeCell.accessibilityTraits |= UIAccessibilityTraitButton;
@@ -54,10 +55,22 @@
         
         self.serverObject = [APDnsServerObject new];
         self.removeCell.hidden = YES;
+        self.serverObject.isDnsCrypt = @(self.dnsCrypt);
         _editMode = NO;
         
         [self.nameTextField becomeFirstResponder];
     }
+    
+    if(self.serverObject.isDnsCrypt.boolValue) {
+        
+        [self cell:self.ipaddressesCell setHidden:YES];
+    }
+    else {
+        
+        [self cells:@[self.resolverNameCell, self.resolverAddressCell, self.publicKeyCell] setHidden:YES];
+    }
+    
+    [self reloadDataAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,8 +98,7 @@
 - (IBAction)clickDone:(id)sender {
     
     APDnsServerObject *obj = self.serverObject;
-    obj.serverDescription = [self.descriptionTextField.text lowercaseString];
-    obj.serverName = [obj.serverName capitalizedString];
+    obj.serverDescription = self.descriptionTextField.text;
     
     UIViewController *presenting = self.navigationController.presentingViewController;
 
@@ -102,7 +114,6 @@
             [delegate addDnsServer:obj];
         }];
     }
-    
 }
 
 - (IBAction)clickRemove:(id)sender {
@@ -149,12 +160,33 @@
     [self resetStatusDoneButton];
 }
 
+- (IBAction)resolverNameChanged:(id)sender {
+    
+    self.serverObject.dnsCryptProviderName = self.resolverNameTextField.text;
+    [self resetStatusDoneButton];
+}
+
+- (IBAction)resolverAddressChanged:(id)sender {
+    
+    self.serverObject.dnsCryptResolverAddress = self.resolverAddressTextField.text;
+    [self resetStatusDoneButton];
+}
+
+- (IBAction)publicKeyChanged:(id)sender {
+    
+    self.serverObject.dnsCryptProviderPublicKey = self.publicKeyTextField.text;
+    [self resetStatusDoneButton];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Text View Delegate
 - (void)textViewDidChange:(UITextView *)textView {
     
-    [self.serverObject setIpAddressesFromString:textView.text];
-
+    if(textView == self.ipAddressesTextView) {
+    
+        [self.serverObject setIpAddressesFromString:textView.text];
+    }
+    
     [self resetStatusDoneButton];
 }
 
@@ -181,7 +213,32 @@
 - (void)resetStatusDoneButton {
 
     APDnsServerObject *obj = self.serverObject;
-    self.doneButton.enabled = (obj.serverName.length && obj.ipAddressesAsString.length);
+    
+    BOOL enabled = obj.serverName.length;
+    
+    if(self.serverObject.isDnsCrypt.boolValue) {
+        
+        BOOL validAddress = [ACNUrlUtils isValidIpWithPort:self.resolverAddressTextField.text];
+        
+        enabled = enabled && self.resolverNameTextField.text.length &&
+                            validAddress &&
+                            [self isValidResolverKey];
+    }
+    else {
+    
+        enabled = enabled && obj.ipAddressesAsString.length;
+    }
+    
+    self.doneButton.enabled = enabled;
+}
+
+- (BOOL) isValidResolverKey {
+    
+    NSString *regex = @"^[0-9,aAbBcCdDeEfF]{4}(:[0-9,aAbBcCdDeEfF]{4}){15}$";
+    
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", regex];
+    
+    return [test evaluateWithObject:self.publicKeyTextField.text];
 }
 
 @end

@@ -31,6 +31,15 @@
 
 #import "AESharedResources.h"
 
+#ifdef PRO
+#import "APSProductSchemaManager.h"
+#import "APSharedResources.h"
+#import "APBlockingSubscriptionsManager.h"
+#import "APVPNManager.h"
+#else
+#import "AESProductSchemaManager.h"
+#endif
+
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
@@ -38,6 +47,8 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
+
+NSString *OpenDnsSettingsSegue = @"dns_settings";
 
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
@@ -94,14 +105,20 @@ typedef void (^AEDownloadsCompletionBlock)();
         self.window.backgroundColor = [UIColor whiteColor];
         
         UIPageControl *pageControl = [UIPageControl appearance];
-        pageControl.backgroundColor = [UIColor whiteColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+        pageControl.backgroundColor = [UIColor blackColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
         //----------- Set main navigation controller -----------------------
         if ([[AEService singleton] firstRunInProgress]) {
             
             [[AEService singleton] onReady:^{
+                
+#ifdef PRO
+                [APSProductSchemaManager install];
+#else
+                [AESProductSchemaManager install];
+#endif
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     [self loadMainNavigationController];
@@ -110,6 +127,13 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         else{
             
+            [[AEService singleton] onReady:^{
+#ifdef PRO
+                [APSProductSchemaManager upgrade];
+#else
+                [AESProductSchemaManager upgrade];
+#endif
+            }];
             [self loadMainNavigationController];
         }
         
@@ -200,6 +224,14 @@ typedef void (^AEDownloadsCompletionBlock)();
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
+    
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    AEUIMainController *main = nav.viewControllers[0];
+    
+    if ([main isKindOfClass:[AEUIMainController class]]) {
+        
+        [main checkContentBlockerStatus];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -255,6 +287,22 @@ typedef void (^AEDownloadsCompletionBlock)();
             return;
         }
         
+#ifdef PRO
+        if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
+            
+            [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
+                
+                [APVPNManager.singleton sendReloadSystemWideDomainLists];
+                completionHandler(UIBackgroundFetchResultNewData);
+            } errorBlock:^(NSError * error) {
+                
+                completionHandler(UIBackgroundFetchResultFailed);
+            } completionBlock:nil];
+           
+            return;
+        }
+#endif
+        
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
@@ -292,7 +340,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     }
 }
 
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)())completionHandler {
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
 
     DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
 
@@ -350,6 +398,36 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         return YES;
     }
+#ifdef PRO
+    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
+        
+        NSString *command = url.host;
+        
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        AEUIMainController *main = nav.viewControllers.firstObject;
+        
+        if(!main){
+            return NO;
+        }
+        
+        [nav popToRootViewControllerAnimated:NO];
+        
+        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
+            
+            [main setProStatus:YES];
+        }
+        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
+            
+            [main setProStatus:NO];
+        }
+        else {
+            return NO;
+        }
+        
+        return YES;
+    }
+#endif
+
     return NO;
 }
 
@@ -634,7 +712,10 @@ typedef void (^AEDownloadsCompletionBlock)();
 
     BOOL result = YES;
     
-    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsWifiOnlyUpdates]) {
+    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
+    
+    if (wifiOnly) {
         
         Reachability *reach = [Reachability reachabilityForInternetConnection];
         

@@ -16,35 +16,11 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-#import "AESharedResources.h"
-
-
-#define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
-
+#import "APCommonSharedResources.h"
+#import "ABECService.h"
+#import "APBlockingSubscription.h"
 
 @class APDnsLogRecord;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APSharedResources Constants
-
-/**
- User Defaults key that define, create log of the DNS requests or not.
- */
-extern NSString *APDefaultsDnsLoggingEnabled;
-/**
- User Defaults key, which defines list of the remote DNS servers (list of APDnsServerObject objects).
- */
-extern NSString *APDefaultsCustomRemoteDnsServers;
-/**
- User Defaults key, which defines, to filter DNS request locally or not.
- */
-extern NSString *APDefaultsDnsLocalFiltering;
-
-/**
- User Defaults key that define, 
- date/time when was displayed warning message about bad VPN configuration (whicn displayed from tunnel provider).
- */
-extern NSString *APDefaultsBadVPNConfigurationWarningDisplayDate;
 
 typedef NS_ENUM(Byte, APHost2TunnelMessageType){
     
@@ -85,5 +61,29 @@ typedef NS_ENUM(Byte, APHost2TunnelMessageType){
  User-entered list of domains that are blocked at the system-wide level.
  */
 @property (class) NSArray <NSString *> *blacklistDomains;
+/**
+ save list of trackers domains at the system-wide level
+ */
++ (void) saveTrackerslistDomains: (NSDictionary <NSString *, ABECService*> *) trackerslistDomains;
+/**
+ load list of trackers domains at the system-wide level
+ */
++ (NSDictionary <NSString *, ABECService*> *) loadTrackerslistDomainsAndCacheResult:(BOOL) cacheResult;
+/**
+ service search by domain name
+ */
++ (ABECService *)serviceByDomain:(NSString*) domain;
+
+/**
+ list of hosts (domain with ip) at the system-wide level
+ */
+@property (class) NSDictionary <NSString *, NSString*> *hosts;
+
+
++ (NSString*)pathForSubscriptionsData;
++ (NSString*)pathForSubscriptionsMeta;
++ (NSString*)pathForSubscriptionsHosts;
++ (NSString *)pathForSubscriptionsRules;
+
 
 @end

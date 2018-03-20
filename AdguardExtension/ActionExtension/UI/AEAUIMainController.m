@@ -25,11 +25,19 @@
 #import "AEAUIDomainCell.h"
 #import "AEUIUtils.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
 #import "AESSupport.h"
 #import "AESharedResources.h"
+#import "ABECRequest.h"
+#import "ADProductInfo.h"
+
+#ifdef PRO
+#import "APVPNManager.h"
+#import "APDnsServerObject.h"
+#endif
 
 @implementation AEAUIMainController{
     
@@ -39,8 +47,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
-    self.title = AE_PRODUCT_NAME;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     self.nameCell.longLabel.text = self.domainName;
     self.statusButton.on = self.domainEnabled;
     _enabledHolder = self.domainEnabled;
@@ -85,6 +94,18 @@
         
         
     }
+    
+    [AEService.singleton checkStatusWithCallback:^(BOOL enabled) {
+       
+        if(!enabled) {
+            
+            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(Action Extension - AEAUIMainController) Warning tile") message:NSLocalizedString(@"Note that the Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+        }
+    }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,14 +135,54 @@
         return;
     }
     
-    // disable filtering (add to whitelist)
-    if (self.domainEnabled) {
+    BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+    
+    // disable filtering == remove from inverted whitelist
+    if (inverted && self.domainEnabled) {
         
-        self.domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
+        AEInvertedWhitelistDomainsObject* invertedObj = [AESharedResources new].invertedWhitelistContentBlockingObject;
+        
+        __block NSMutableArray* newDomains = [NSMutableArray new];
+        
+        [invertedObj.domains enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if([obj caseInsensitiveCompare:self.domainName] != NSOrderedSame) {
+                [newDomains addObject:obj];
+            }
+        }];
+        
+        invertedObj.domains = newDomains;
+        [AESharedResources new].invertedWhitelistContentBlockingObject = invertedObj;
+        
+        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+            self.domainEnabled = NO;
+        } rollbackBlock:^{
+            
+        }];
+    }
+    // enable filtering == add to inverted whitelist
+    else if (inverted && !self.domainEnabled) {
+        
+        AEInvertedWhitelistDomainsObject* invertedObj = [AESharedResources new].invertedWhitelistContentBlockingObject;
+        
+        invertedObj.domains = [invertedObj.domains arrayByAddingObject:self.domainName];
+        [AESharedResources new].invertedWhitelistContentBlockingObject = invertedObj;
+        
+        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
+            self.domainEnabled = YES;
+        } rollbackBlock:^{
+            
+        }];
+        
+    }
+    // disable filtering (add to whitelist)
+    else if (self.domainEnabled) {
+        
+        AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        [AEUIUtils addWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
+        [AEUIUtils addWhitelistRule: domainObject.rule toJsonWithController:self completionBlock:^{
             
             self.domainEnabled = newEnabled;
             
@@ -138,17 +199,18 @@
     // enable filtering (remove from whitelist)
     else {
         
-        if (!self.domainObject) {
+        AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
+        
+        if (!domainObject) {
             [self.statusButton setOn:self.domainEnabled animated:YES];
             return;
         }
         
         [[[AEService singleton] antibanner] beginTransaction];
         
-        [AEUIUtils removeWhitelistRule:self.domainObject.rule toJsonWithController:self completionBlock:^{
+        [AEUIUtils removeWhitelistRule:domainObject.rule toJsonWithController:self completionBlock:^{
             
             self.domainEnabled = newEnabled;
-            self.domainObject = nil;
             
             [[[AEService singleton] antibanner] endTransaction];
             
@@ -166,17 +228,15 @@
 
 - (IBAction)clickMissedAd:(id)sender {
     
-    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Missed Ad", @"(Action Extension - AEAUIMainController) Mail subject to support team about missed ad")];
-    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Missed ad on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about missed ad"), [self.url absoluteString]];
-    
-    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
+    NSURL *url = [AESSupport.singleton composeWebReportUrlForSite:self.url];
+    [self openUrl:url];
 }
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
     
     NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
     NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Incorrect blocking on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
-    
+
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
@@ -241,27 +301,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    
-//    if (section == PRO_SECTION_INDEX) {
-//        
-//        return [self proSectionFooter];
-//    }
-//    
-//    return [super tableView:tableView viewForFooterInSection:section];
-//}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    
-//    if (section == PRO_SECTION_INDEX) {
-//        
-//        APUIProSectionFooter *footer = [self proSectionFooter];
-//        return footer.height;
-//    }
-//    
-//    return [super tableView:tableView heightForFooterInSection:section];
-//}
-
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
     
     // tunning accessibility
@@ -283,6 +322,16 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGSize size = [longTextCell.contentView
                    systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height + 1.0f; // Add 1.0f for the cell separator height
+}
+
+- (void)openUrl:(NSURL *)url {
+    UIResponder *responder = self;
+    while(responder){
+        if ([responder respondsToSelector: @selector(openURL:)]){
+            [responder performSelector: @selector(openURL:) withObject: url];
+        }
+        responder = [responder nextResponder];
+    }
 }
 
 @end

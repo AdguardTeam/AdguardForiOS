@@ -47,6 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -55,10 +57,20 @@
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
-
+    self.searchController.searchBar.tintColor = [UIColor blackColor];
+    self.searchController.searchBar.backgroundColor = [UIColor blackColor];
+    self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
+    
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
+    
+    UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
+    searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
+    searchField.tintColor = searchField.textColor = UIColor.lightGrayColor;
+    
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
     
+    self.refreshControl.tintColor = self.view.tintColor;
     [self.refreshControl addTarget:self action:@selector(refreshFilters:) forControlEvents:UIControlEventValueChanged];
     
     [self updateSearchResultsForSearchController:self.searchController];
@@ -211,11 +223,15 @@
 
 
 - (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
 
     self.navigationController.toolbarHidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
     
     self.navigationController.toolbarHidden = YES;
 }
@@ -377,7 +393,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             
             NSArray *sectionFilters = [item.filters filteredArrayUsingPredicate:
                                        [NSPredicate
-                                        predicateWithFormat:@"localization.name CONTAINS[cd] %@",
+                                        predicateWithFormat:@"i18nName CONTAINS[cd] %@",
                                         searchString]];
             if (sectionFilters.count) {
                 AEUISubscriptionSectionObject *newSection = [AEUISubscriptionSectionObject new];
@@ -450,15 +466,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIView *toolbar = self.navigationController.toolbar;
     if (toolbar) {
         
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        
         if (self.tableView.editing) {
             // EDIT MODE
             
             UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Clear Selected", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
 
             UIBarButtonItem *itemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(editDoneClick:)];
+            
+            itemLeft.tintColor = itemRight.tintColor = self.view.tintColor;
 
             UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
@@ -474,18 +489,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             CGRect frame = toolbar.bounds;
             frame.origin = CGPointMake(0, 0);
             frame.size.height -= insets.top + insets.bottom;
-            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
-                
+            
                 [self.toolBarView setFrame:frame];
+                [self.toolBarView setTintColor:[UIColor redColor]];
+                [self.toolBarView setBackgroundColor:[UIColor blueColor]];
+                
+                self.navigationController.toolbar.tintColor = UIColor.blackColor;
+                self.navigationController.toolbar.backgroundColor = UIColor.blackColor;
+                self.navigationController.toolbar.barStyle = UIBarStyleBlack;
+                
                 UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:self.toolBarView];
                 UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
                 if (item) {
                     self.toolbarItems = @[spacer, item, spacer];
                 }
-            }
         }
         
-        [UIView commitAnimations];
     }
 }
 

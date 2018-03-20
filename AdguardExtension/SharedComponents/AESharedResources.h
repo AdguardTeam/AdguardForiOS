@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -43,6 +43,15 @@ extern NSString *AEDefaultsAdguardEnabled;
  User Defaults key that defines app performs first start or not.
  */
 extern NSString *AEDefaultsFirstRunKey;
+/**
+ User Defaults key that defines schema version for upgrade procedure.
+ */
+extern NSString *AEDefaultsProductSchemaVersion;
+
+/**
+ User Defaults key that defines last used build version for upgrade procedure.
+ */
+extern NSString *AEDefaultsProductBuildVersion;
 
 /**
  User Defaults key that defines last time, when the application checked updates of filters.
@@ -80,6 +89,35 @@ extern NSString *AEDefaultsJSONConverterOptimize;
  */
 extern NSString *AEDefaultsWifiOnlyUpdates;
 
+/**
+ User Defaults key, which defines that video tutorial cell must be hidden.
+ */
+extern NSString *AEDefaultsHideVideoTutorial;
+
+/**
+ User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
+ */
+extern NSString *AEDefaultsHideSafariVideoTutorial;
+
+/**
+ User Defaults key, which defines total request count.
+ */
+extern NSString *AEDefaultsTotalRequestsCount;
+
+/**
+ User Defaults key, which defines total request time.
+ */
+extern NSString *AEDefaultsTotalRequestsTime;
+/**
+ User Defaults key, which defines total trackers request count.
+ */
+extern NSString *AEDefaultsTotalTrackersCount;
+
+/**
+ User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
+ */
+extern NSString *AEDefaultsInvertedWhitelist;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -113,9 +151,27 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  */
 + (NSUserDefaults *)sharedDefaults;
 
-//TODO: need descriptions
+/**
+ Saves defaults value in NSArgumentDomain.
+ This lets to use defaults value in current process, 
+ but this value did not save on disk (permanent domain).
+ 
+ @param key Defaults key
+ @param value Devaults value
+ */
 + (void)sharedDefaultsSetTempKey:(NSString *)key value:(id)value;
+/**
+ Gets defaults value from NSArgumentDomain.
+
+ @param key Defaults key.
+ @return Defaults value or nil.
+ */
 + (id)sharedDefaultsValueOfTempKey:(NSString *)key;
+/**
+ Removes defaults value from NSArgumentDomain.
+
+ @param key Defaults key.
+ */
 + (void)sharedDefaultsRemoveTempKey:(NSString *)key;
 
 /**
@@ -131,11 +187,28 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  Rules from whitelist, which used for Safari content-blocking.
  */
 @property NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
+
+ /**
+ Rules from inverted whitelist, which used for Safari content-blocking.
+ */
+@property AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
+
 /**
  Filter metadata from last filter update process.
  We need it because filter update process is performed in two steps.
  */
 @property ABECFilterClientMetadata *lastUpdateFilterMetadata;
+
+/**
+ Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
+ */
+@property ABECFilterClientMetadata *filtersMetadataCache;
+
+/**
+ Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
+ */
+@property ABECFilterClientLocalization *i18nCacheForFilterSubscription;
+
 /**
  Filter Ids from last filter update process.
  */
@@ -145,6 +218,5 @@ extern NSString *AEDefaultsWifiOnlyUpdates;
  We need it because filter update process is performed in two steps.
  */
 @property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
-
 
 @end

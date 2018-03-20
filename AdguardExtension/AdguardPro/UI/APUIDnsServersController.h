@@ -17,6 +17,7 @@
  */
 
 #import "StaticDataTableViewController.h"
+#import "APUIProStatusTableViewCell.h"
 
 @class APDnsServerObject;
 
@@ -26,11 +27,18 @@
 @interface APUIDnsServersController  : StaticDataTableViewController
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark init
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark Outlets
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *remoteDnsServerTemplateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addCustomCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *systemDefaultCell;
+
+@property (strong, nonatomic) IBOutlet UISwitch *logSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *whitelistCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *blacklistCell;
 
 
 /////////////////////////////////////////////////////////////////////

@@ -7,43 +7,11 @@
    <Group
       location = "container:SupportingScripts"
       name = "SupportingScripts">
-      <Group
-         location = "group:Private"
-         name = "Private">
-         <FileRef
-            location = "group:readme.md">
-         </FileRef>
-         <FileRef
-            location = "group:exportLocalization.sh">
-         </FileRef>
-         <FileRef
-            location = "group:importLocalization.sh">
-         </FileRef>
-         <FileRef
-            location = "group:git-tagging.sh">
-         </FileRef>
-         <Group
-            location = "group:Resources"
-            name = "Resources">
-            <FileRef
-               location = "group:download.py">
-            </FileRef>
-            <FileRef
-               location = "group:fix-base-application-strings.py">
-            </FileRef>
-            <FileRef
-               location = "group:upload.py">
-            </FileRef>
-            <FileRef
-               location = "group:xib-files-list.txt">
-            </FileRef>
-         </Group>
-      </Group>
       <FileRef
          location = "group:runBuilder.sh">
       </FileRef>
       <FileRef
-         location = "group:getExtJsLibs.sh">
+         location = "group:getExtResources.sh">
       </FileRef>
    </Group>
    <FileRef
@@ -54,8 +22,5 @@
    </FileRef>
    <FileRef
       location = "group:classStyleTemplate.txt">
-   </FileRef>
-   <FileRef
-      location = "container:MediaResources">
    </FileRef>
 </Workspace>

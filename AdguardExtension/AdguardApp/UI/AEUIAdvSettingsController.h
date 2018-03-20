@@ -17,15 +17,22 @@
 */
 #import <UIKit/UIKit.h>
 
-@interface AEUIAdvSettingsController : UITableViewController
+#import "StaticDataTableViewController.h"
+
+@interface AEUIAdvSettingsController : StaticDataTableViewController
 
 @property (strong, nonatomic) IBOutlet UISwitch *simplifiedButton;
 @property (strong, nonatomic) IBOutlet UISwitch *wifiButton;
 @property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *fullTunnelCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *splitTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *invertWhitelistCell;
+@property (strong, nonatomic) IBOutlet UISwitch *invertWhitelistSwitch;
 
 
 - (IBAction)toggleSimplified:(id)sender;
 - (IBAction)toggleWifiOnly:(id)sender;
+- (IBAction)toggleInvertWhitelist:(id)sender;
 
 @end

@@ -18,7 +18,7 @@
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/%@/%@.mp4"
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.0/%@/%@.mp4"
 
 #define DEFAULT_TUTORIAL_VIDEO          @"EnablingAdguardVideo"
 #define HIDE_NAVIGATION_DELAY 2 // seconds
@@ -79,6 +79,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
 
     [[self navigationController] setNavigationBarHidden:NO animated:animated];
     [self hideStatusBar:NO];
@@ -90,6 +92,14 @@
     if (_statusBarHidden != hide) {
         _statusBarHidden = hide;
         [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    
+    if(!parent) { // pop view controller
+        if(self.completionBlock)
+            self.completionBlock();
     }
 }
 

@@ -112,6 +112,7 @@
         _responses = [aDecoder decodeObjectForKey:@"responses"];
         _isWhitelisted = [[aDecoder decodeObjectForKey:@"isWhitelisted"] boolValue];
         _isBlacklisted = [[aDecoder decodeObjectForKey:@"isBlacklisted"] boolValue];
+        _isTracker = [[aDecoder decodeObjectForKey:@"isTracker"] boolValue];
     }
     return self;
 }
@@ -127,6 +128,7 @@
     [aCoder encodeObject:self.responses forKey:@"responses"];
     [aCoder encodeObject:@(self.isWhitelisted) forKey:@"isWhitelisted"];
     [aCoder encodeObject:@(self.isBlacklisted) forKey:@"isBlacklisted"];
+    [aCoder encodeObject:@(self.isTracker) forKey:@"isTracker"];
 }
 
 /////////////////////////////////////////////////////////////////////

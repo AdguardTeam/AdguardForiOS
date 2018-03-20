@@ -19,12 +19,10 @@ ACTION_EXTENSION_PREPROCESSING_FILENAME = ExtensionPreprocessing
 ACTION_SELECTOR_CSS_FILE = $(SRCROOT)/ActionExtension/js/selector.css
 
 ACTION_RESOURCES_DIR = $(BUILDER_DIR)/ActionResources
-ACTION_JAVASCRIPT_RULE_CONSTRUCTOR = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/content-script/assistant/js/adguard-rules-constructor.js
-ACTION_JAVASCRIPT_SELECTOR = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/content-script/assistant/js/adguard-selector.js
-ACTION_JAVASCRIPT_LIB01 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/balalaika.patched.js
-ACTION_JAVASCRIPT_LIB02 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/diff_match_patch.js
-ACTION_JAVASCRIPT_LIB03 = https:${SLASH}/raw.githubusercontent.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/dom.patched.js
 
+ACTION_JAVASCRIPT_ASSISTANT_REMOTE = https:${SLASH}/adguardteam.github.io/AdguardAssistant/mobile/script.js
+
+DNS_CRYPT_RESOLVERS_REMOTE = https:${SLASH}/download.dnscrypt.info/dnscrypt-resolvers/v1/dnscrypt-resolvers.csv
 
 // Main App bundle identifier
 ADGUARD_BUNDLE_ID = com.adguard.AdguardExtension

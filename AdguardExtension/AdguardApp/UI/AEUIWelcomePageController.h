@@ -17,28 +17,9 @@
 */
 #import <UIKit/UIKit.h>
 
-extern NSString *AEUIWelcomePageTitleKey;
-extern NSString *AEUIWelcomePageLabelKey;
-extern NSString *AEUIWelcomePageImageNameKey;
-extern NSString *AEUIWelcomePageButtonTitleKey;
-extern NSString *AEUIWelcomePageButtonActionKey;
-extern NSString *AEUIWelcomePageAccessibilityLabelKey;
-
-
 @interface AEUIWelcomePageController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *welcomeImage;
-@property (weak, nonatomic) IBOutlet UILabel *welcomeTitle;
-@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *actionButton;
-
-@property NSInteger index;
-
-@property (nonatomic) NSDictionary *properties;
-@property (nonatomic) NSString *welcomeImageName;
-@property (nonatomic) NSString *welcomeTitleText;
-@property (nonatomic) NSString *welcomeText;
-
+@property (weak, nonatomic) IBOutlet UIView *starsView;
 - (IBAction)clickFinish:(id)sender;
 
 @end

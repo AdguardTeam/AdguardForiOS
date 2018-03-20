@@ -20,15 +20,18 @@
 #import "AEUICustomTextEditorController.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACSystem.h"
+#import "AEUICommons.h"
 
 #define TOP_BOUNSE_LIMIT                    -5
 #define SEARCH_BAR_BUTTONS_SIZE             95.0f
 #define WIDTH_CHANGE_KEY                    @"frame"
 
 #define EDITED_TEXT_FONT                    [UIFont systemFontOfSize:[UIFont systemFontSize]]
-#define EDITED_TEXT_COLOR                   [UIColor blackColor]
+#define EDITED_TEXT_COLOR                   [UIColor whiteColor]
 #define SELECTION_COLOR_FIND                [self.editorTextView.tintColor colorWithAlphaComponent:0.2f]
 #define SELECTION_COLOR_ERROR               [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.2f]
+
+#define FILTER_RULE_SYNTAX_LINK             @"https://kb.adguard.com/general/how-to-create-your-own-ad-filters"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - UITextView (insets)
@@ -140,12 +143,24 @@ static NSDictionary *_editAttrs;
     [super viewDidLoad];
     
     [self setLoadingStatus:_loadingStatusHandler];
+    [self setShowFilterRules:_showFilterRules];
     
     _editting = NO;
 
     self.editorTextView.font = EDITED_TEXT_FONT;
     self.editorTextView.textStorage.delegate = self;
     self.editorTextView.keyboardType = _keyboardType;
+    self.searchBar.keyboardType = _keyboardType;
+    self.editorTextView.tintColor = UIColor.whiteColor;
+    
+    [UITextField appearanceWhenContainedInInstancesOfClasses:@[UISearchBar.class]].textColor = UIColor.whiteColor;
+    
+    for (UIView* subView in self.searchBar.subviews[0].subviews) {
+        if([subView isKindOfClass:[UITextField class]]) {
+            ((UITextField*)subView).tintColor = UIColor.lightGrayColor;
+            ((UITextField*)subView).textColor = UIColor.lightGrayColor;
+        }
+    }
     
     [self registerForKeyboardNotifications];
     
@@ -158,12 +173,13 @@ static NSDictionary *_editAttrs;
     _currentSelectionType = AETESelectionTypeFind;
     _currentTextSelection = NSMakeRange(NSNotFound, 0);
 
-    self.placeholderLabel.text = self.textForPlaceholder;
+    self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
+    self.placeholderLabel.textColor = SUBTITLE_TEXT_COLOR;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
     // tunning accessibility
-    self.editorTextView.accessibilityHint = self.textForPlaceholder;
+    self.editorTextView.accessibilityHint = self.attributedTextForPlaceholder.string;
     self.placeholderLabel.isAccessibilityElement = NO;
     
     if (UIAccessibilityIsVoiceOverRunning()) {
@@ -172,7 +188,7 @@ static NSDictionary *_editAttrs;
     }
     //---
     
-    [self resetTextWithSizeToFit:YES];
+    [self resetText];
     
     ASSIGN_WEAK(self);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -235,6 +251,7 @@ static NSDictionary *_editAttrs;
     _keyboardType = keyboardType;
     
     self.editorTextView.keyboardType = _keyboardType;
+    self.searchBar.keyboardType = _keyboardType;
 }
 
 - (UIKeyboardType)keyboardType {
@@ -248,7 +265,7 @@ static NSDictionary *_editAttrs;
 - (void)setTextForEditing:(NSString *)textForEditing {
     
     _textForEditing = textForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
@@ -258,18 +275,23 @@ static NSDictionary *_editAttrs;
 - (void)setAttributedTextForEditing:(NSAttributedString *)attributedTextForEditing {
     
     _attributedTextForEditing = attributedTextForEditing;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     [self setLoadingStatus:NO];
 }
 
 - (BOOL)selectWithType:(AETESelectionType)selectionType text:(NSString *)text {
+    
+    _currentSearchString = text;
+    _currentTextSelection = NSMakeRange(NSNotFound, 0);
+    _currentSelectionType = selectionType;
+    [self updateSelectionOnTextView];
     
     NSUInteger len = self.editorTextView.text.length;
     if ([NSString isNullOrEmpty:text] || text.length > len) {
         return NO;
     }
     
-    _currentSearchString = text;
+    
     
     _currentTextSelection = [self.editorTextView.text rangeOfString:_currentSearchString options:NSCaseInsensitiveSearch];
     
@@ -277,10 +299,23 @@ static NSDictionary *_editAttrs;
         return NO;
     }
     
-    _currentSelectionType = selectionType;
+    
     [self updateSelectionOnTextView];
 
     return YES;
+}
+
+- (void)setShowFilterRules:(BOOL)showFilterRules {
+    _showFilterRules = showFilterRules;
+    
+    if(self.showFilterRules){
+        self.rulesButton.enabled = YES;
+        self.rulesButton.tintColor = nil;
+    }
+    else {
+        self.rulesButton.enabled = NO;
+        self.rulesButton.tintColor = [UIColor clearColor];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -310,9 +345,13 @@ static NSDictionary *_editAttrs;
     
     _textForEditing = nil;
     _attributedTextForEditing = nil;
-    [self resetTextWithSizeToFit:NO];
+    [self resetText];
     //
     [self textViewDidChange:self.editorTextView];
+}
+
+- (IBAction)clickRules:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK]];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -398,7 +437,7 @@ static NSDictionary *_editAttrs;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
 
     if (object == self.view && [keyPath isEqualToString:WIDTH_CHANGE_KEY]) {
-        self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
+        //self.searchBarItem.width = self.view.frame.size.width - SEARCH_BAR_BUTTONS_SIZE;
         [self.searchToolBar setNeedsLayout];
         
         return;
@@ -410,7 +449,7 @@ static NSDictionary *_editAttrs;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
-- (void)resetTextWithSizeToFit:(BOOL)sizeToFit {
+- (void)resetText {
     
     if (self.editorTextView == nil) {
         return;
@@ -428,6 +467,8 @@ static NSDictionary *_editAttrs;
         offset = self.editorTextView.contentOffset;
     }
     
+    [self.editorTextView setScrollEnabled:YES];
+    
     if (self.attributedTextForEditing) {
         
         [self.editorTextView setAttributedText:self.attributedTextForEditing];
@@ -444,11 +485,11 @@ static NSDictionary *_editAttrs;
     if (![NSString isNullOrEmpty:checkString]) {
         
         // Ebanuty code. This is required for correcting issue with wrong height of the UITextView content.
-        if (sizeToFit) {
-            [self.editorTextView sizeToFit];
-        }
+        // https://stackoverflow.com/questions/18696706/large-text-being-cut-off-in-uitextview-that-is-inside-uiscrollview
+        [self.editorTextView setScrollEnabled:NO];
         [self.editorTextView setScrollEnabled:YES];
         //------
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.editorTextView setContentOffset:offset];
@@ -463,9 +504,9 @@ static NSDictionary *_editAttrs;
         
         self.placeholderLabel.hidden = YES;
         self.clearAllButton.enabled = NO;
-        self.searchBarItem.enabled = NO;
-        self.searchBarNext.enabled = NO;
-        self.searchBarPrevious.enabled = NO;
+        self.searchBar.userInteractionEnabled = NO;
+        self.prevButton.enabled = NO;
+        self.nextButton.enabled = NO;
         
         return;
     }
@@ -473,15 +514,14 @@ static NSDictionary *_editAttrs;
     BOOL result = ! [NSString isNullOrEmpty:self.editorTextView.text];
     self.placeholderLabel.hidden = result;
     self.clearAllButton.enabled = result;
-    self.searchBarItem.enabled = result;
-    self.searchBarNext.enabled = result;
-    self.searchBarPrevious.enabled = result;
+    self.searchBar.userInteractionEnabled = result;
+    self.nextButton.enabled = result;
+    self.prevButton.enabled = result;
     
     if (!result) {
         
         self.searchBar.text = nil;
         _currentSearchString = nil;
-
     }
 }
 
@@ -501,9 +541,11 @@ static NSDictionary *_editAttrs;
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    CGFloat textViewBottomMargin = self.view.frame.size.height - self.editorTextView.frame.origin.y - self.editorTextView.frame.size.height;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height - textViewBottomMargin, 0.0);
     self.editorTextView.contentInset = contentInsets;
     self.editorTextView.scrollIndicatorInsets = contentInsets;
     

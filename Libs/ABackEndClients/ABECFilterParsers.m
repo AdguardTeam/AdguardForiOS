@@ -35,6 +35,11 @@
     if ([key isEqualToString:@"timeUpdated"]) {
         self.updateDateString = [self dateStringConvertFrom:value];
         self.updateDate = [NSDate dateWithISO8601String:self.updateDateString];
+        if (! self.updateDate) {
+            // If can't convert, set update date to current datetime
+            self.updateDate = [NSDate date];
+            self.updateDateString = [[NSDate date] iso8601String];
+        }
         
         // last_check_time creating
         self.checkDate = [NSDate date];
@@ -222,9 +227,10 @@
         NSMutableDictionary <NSString *, ASDFilterLocalization *> *targetLangs = [NSMutableDictionary dictionaryWithCapacity:langs.count];
         [langs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
             
+            NSString* langCode = [[key lowercaseString] stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
             ASDFilterLocalization *localization = [ASDFilterLocalization new];
             localization.filterId = filterId;
-            localization.lang = [self canonicalLangFromString:key];
+            localization.lang = [self canonicalLangFromString:langCode];
             localization.name = obj[@"name"];
             localization.descr = obj[@"description"];
             
@@ -243,9 +249,10 @@
         NSMutableDictionary <NSString *, ASDFilterGroupLocalization *> *targetLangs = [NSMutableDictionary dictionaryWithCapacity:langs.count];
         [langs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
             
+            NSString* langCode = [[key lowercaseString] stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
             ASDFilterGroupLocalization *localization = [ASDFilterGroupLocalization new];
             localization.groupId = groupId;
-            localization.lang = [self canonicalLangFromString:key];
+            localization.lang = [self canonicalLangFromString:langCode];
             localization.name = obj[@"name"];
             
             targetLangs[localization.lang] = localization;

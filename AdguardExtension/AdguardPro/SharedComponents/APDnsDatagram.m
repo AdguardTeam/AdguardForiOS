@@ -105,7 +105,7 @@
     return obj;
 }
 
-- (BOOL)convertToBlockingResponse {
+- (BOOL)convertToBlockingResponseWithIP: (NSString*)ip {
     
     if (self.isRequest == NO) {
         return NO;
@@ -114,7 +114,7 @@
     NSMutableArray *responses = [NSMutableArray array];
     
     for (APDnsRequest *request in self.requests) {
-        APDnsResponse *response = [APDnsResponse blockedResponseWithName:request.name type:request.type];
+        APDnsResponse *response = [APDnsResponse blockedResponseWithName:request.name type:request.type ip:ip];
         if (response) {
             [responses addObject:response];
         }

@@ -19,6 +19,10 @@
 #import "ACommons/ACLang.h"
 #import "ABECConstants.h"
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+#endif
+
 
 @class ASDFilter, ASDFilterMetadata, ASDFilterGroup, ASDFiltersI18n, ASDGroupsI18n, ABECFilterClientMetadata, ABECFilterClientLocalization, ABECFilterClient;
 
@@ -91,7 +95,7 @@
 /**
  Localizations representation.
  */
-@interface ABECFilterClientLocalization : NSObject
+@interface ABECFilterClientLocalization : ACObject
 
 /**
  Filters localizations object.
@@ -169,7 +173,7 @@ extern NSString *ABECFilterError;
  
  @return ABECFilterClientMetadata object or nil if error occurs
  */
-- (ABECFilterClientMetadata *)metadata;
+- (ABECFilterClientMetadata *)loadMetadataWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
 
 /**
  Retuns localizations for filters and groups from backend.
@@ -177,7 +181,7 @@ extern NSString *ABECFilterError;
  
  @return ABECFilterClientLocalization object or nil if error occurs
  */
-- (ABECFilterClientLocalization *)i18n;
+- (ABECFilterClientLocalization *)loadI18nWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Async support methods
