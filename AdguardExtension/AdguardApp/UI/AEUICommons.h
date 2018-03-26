@@ -27,4 +27,7 @@
 
 #define SEARCHBAR_TINT_COLOR     [UIColor colorWithRed:((float)0x1e)/255.0 green:((float)0x1e)/255.0 blue:((float)0x1e)/255.0 alpha:1.0]
 
+#define CELL_BACKGROUND_COLOR    [UIColor colorWithWhite:1.0 alpha:.08]
+
+
 #endif /* AEUICommons_h */

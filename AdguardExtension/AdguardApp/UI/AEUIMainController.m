@@ -33,6 +33,7 @@
 #import "AEUIUtils.h"
 #import "AEUIWhitelistController.h"
 #import "AEUIPlayerViewController.h"
+#import "AEUISelectableTableViewCell.h"
 
 #ifdef PRO
 
@@ -222,6 +223,13 @@
 
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+    
+    // https://github.com/AdguardTeam/AdguardForiOS/issues/731
+    // on ios 9 ipad cell the background color defined in the storyboard is ignored
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
+        self.videoCell.backgroundColor = self.safariVideoCell.backgroundColor = UIColor.clearColor;
+    }
 }
 
 - (void) swipeCells {

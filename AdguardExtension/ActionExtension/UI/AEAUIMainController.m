@@ -33,6 +33,7 @@
 #import "AESharedResources.h"
 #import "ABECRequest.h"
 #import "ADProductInfo.h"
+#import "AEUICommons.h"
 
 #ifdef PRO
 #import "APVPNManager.h"
@@ -102,6 +103,12 @@
             [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(Action Extension - AEAUIMainController) Warning tile") message:NSLocalizedString(@"Note that the Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
         }
     }];
+    
+    // https://github.com/AdguardTeam/AdguardForiOS/issues/731
+    // on ios 9 ipad cell the background color defined in the storyboard is ignored
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
+     }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
