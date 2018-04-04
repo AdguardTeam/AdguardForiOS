@@ -52,9 +52,9 @@ extern NSString *APTunnelProviderErrorDomain;
 - (BOOL)isRemoteServer;
 
 /**
- Return is full tunnel mode
+ Returns tunnel mode
  */
 
-- (BOOL)isFullMode;
+- (APVpnManagerTunnelMode)tunnelMode;
 
 @end

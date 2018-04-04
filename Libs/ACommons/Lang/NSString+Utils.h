@@ -134,6 +134,12 @@
 /// Gets SHA256 digest, max string length 4GB.
 - (NSString *)sha256Digest;
 
+/// returns count of occurances of substring in string
+- (NSUInteger) countOccurencesOfString:(NSString*)string;
+
+/// Repeat a String repeat times to form a new String, with a String separator injected each time.
++ (NSString*) repeat:(NSString*)string separator:(NSString*) separator repeat:(NSInteger)repeat;
+
 @end
 
 /**

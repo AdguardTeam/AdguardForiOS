@@ -437,7 +437,7 @@ _workingQueue = nil;
         locLogVerboseTrace(self, @"NWUDPSessionStateFailed");
 
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        locLogError(self, @"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
+        locLogError(self, @"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@ endpoint: %@", endpoint.hostname, endpoint.port, session.endpoint);
         
         _closed = YES;
         [self saveLogRecord:YES];
@@ -585,6 +585,11 @@ _workingQueue = nil;
         for (NSData *packet in packets) {
             
             APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
+            
+            if(!datagram) {
+                DDLogError(@"(APTUdpProxySession) Outgoing datagram parsing error. Base packet dst address: %@ port: %@", _basePacket.dstAddress, _basePacket.dstPort);
+            }
+            
             if (datagram.isRequest) {
                 
                 BOOL whitelisted = NO;
@@ -731,7 +736,10 @@ _workingQueue = nil;
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    NSString* mode = [_delegate.provider isFullMode] ? @"full" : @"split";
+    APVpnManagerTunnelMode tunnelMode = [_delegate.provider tunnelMode];
+    NSString* mode = tunnelMode == APVpnManagerTunnelModeSplit ? @"split" :
+                     tunnelMode == APVpnManagerTunnelModeFull  ? @"full" :
+                                                                 @"full (without VPN icon)";
     
 #if DEBUG
     DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
@@ -746,6 +754,11 @@ _workingQueue = nil;
     for (NSData *packet in packets) {
         
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
+        
+        if(!datagram) {
+            DDLogError(@"(APTUdpProxySession) Incoming datagram parsing error. Base packet dst address: %@ port: %@", _basePacket.dstAddress, _basePacket.dstPort);
+        }
+        
         [self settingDnsRecordForIncomingDnsDatagram:datagram session:session];
     }
     

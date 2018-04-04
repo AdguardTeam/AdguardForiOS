@@ -521,6 +521,38 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             result[28], result[29], result[30], result[31]];
 }
 
+- (NSUInteger )countOccurencesOfString:(NSString *)str {
+    
+    NSUInteger count = 0;
+    NSUInteger length = [self length];
+    NSRange range = NSMakeRange(0, length);
+    while(range.location != NSNotFound)
+    {
+        range = [self rangeOfString: str options:0 range:range];
+        if(range.location != NSNotFound)
+        {
+            range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
+            count++;
+        }
+    }
+    
+    return count;
+}
+
++ (NSString *)repeat:(NSString *)string separator:(NSString *)separator repeat:(NSInteger)repeat {
+    
+    NSMutableString* result = [NSMutableString new];
+    
+    for(int i = 0; i < repeat; ++i) {
+        
+        if(i != 0) [result appendString:separator];
+        
+        [result appendString:string];
+    }
+    
+    return result.copy;
+}
+
 @end
 
 @implementation NSString (Utils_Private)

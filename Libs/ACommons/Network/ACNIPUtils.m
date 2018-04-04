@@ -22,6 +22,9 @@
 #import "ACNIPUtils.h"
 
 #include <arpa/inet.h>
+#include <ifaddrs.h>
+#include <resolv.h>
+#include <dns.h>
 #include <net/if.h>
 
 /////////////////////////////////////////////////////////////////////
@@ -51,7 +54,16 @@
         }
     }];
     
-    return ipv6Available;
+    __block BOOL hasIpv6Dns = NO;
+    
+    [self enumerateSystemDnsWithProcessingBlock:^(NSString *ip, NSString *port, BOOL ipv4, BOOL *stop) {
+        if(!ipv4) {
+            hasIpv6Dns = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return ipv6Available && hasIpv6Dns;
 }
 
 + (BOOL) isIpv4Available {
@@ -64,7 +76,16 @@
         }
     }];
     
-    return ipv4Available;
+    __block BOOL hasIpv4Dns = NO;
+    
+    [self enumerateSystemDnsWithProcessingBlock:^(NSString *ip, NSString *port, BOOL ipv4, BOOL *stop) {
+        if(ipv4) {
+            hasIpv4Dns = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return ipv4Available && hasIpv4Dns;
 }
 
 + (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
@@ -93,5 +114,54 @@
     freeifaddrs(interfaces);
 }
 
++ (void)enumerateSystemDnsWithProcessingBlock:(void (^)(NSString *, NSString *, BOOL, BOOL *))processingBlock {
+    
+    @autoreleasepool {
+        
+        res_state res = malloc(sizeof(struct __res_state));
+        int result = res_ninit(res);
+        if (result == 0) {
+            union res_9_sockaddr_union *addr_union = malloc(res->nscount * sizeof(union res_9_sockaddr_union));
+            res_getservers(res, addr_union, res->nscount);
+            
+            const char *ipStr;
+            for (int i = 0; i < res->nscount; i++) {
+                if (addr_union[i].sin.sin_family == AF_INET) {
+                    char ip[INET_ADDRSTRLEN];
+                    ipStr = inet_ntop(AF_INET, &(addr_union[i].sin.sin_addr), ip, INET_ADDRSTRLEN);
+                    NSString* ipStringObject = ipStr ?[NSString stringWithUTF8String:ipStr] : nil;
+                    
+                    int port = (int)ntohs(addr_union[i].sin.sin_port);
+                    NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
+                    
+                    if (ipStr) {
+                        BOOL stop;
+                        processingBlock(ipStringObject, portStringObject, YES, &stop);
+                        if (stop) break;
+                    }
+                } else if (addr_union[i].sin6.sin6_family == AF_INET6) {
+                    char ip[INET6_ADDRSTRLEN];
+                    ipStr = inet_ntop(AF_INET6, &(addr_union[i].sin6.sin6_addr), ip, INET6_ADDRSTRLEN);
+                    NSString* ipStringObject = ipStr ?[NSString stringWithUTF8String:ipStr] : nil;
+                    
+                    int port = (int) ntohs(addr_union[i].sin6.sin6_port);
+                    NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
+                    
+                    if (ipStr) {
+                        BOOL stop;
+                        processingBlock(ipStringObject, portStringObject, NO, &stop);
+                        if (stop) break;
+                    }
+                } else {
+                    ipStr = NULL;
+                }
+            }
+        }
+        res_nclose(res);
+        free(res);
+    }
+    
+    return;
+}
 
 @end

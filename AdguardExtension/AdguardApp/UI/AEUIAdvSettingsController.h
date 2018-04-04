@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *fullTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *fullTunnelWithoutVPNCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *splitTunnelCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *invertWhitelistCell;
 @property (strong, nonatomic) IBOutlet UISwitch *invertWhitelistSwitch;

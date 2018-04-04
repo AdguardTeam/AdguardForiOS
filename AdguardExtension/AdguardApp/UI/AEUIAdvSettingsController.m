@@ -33,6 +33,12 @@ typedef enum : NSUInteger {
     TunnelModeSection
 } AEUIAdvSettingsControllerSections;
 
+typedef enum : NSUInteger {
+    SplitModeRow = 0,
+    FullModeRow,
+    FullModeWithoutVPNIconRow
+} AEUIAdvSettingsTunnelModeRows;
+
 @interface AEUILinkTableViewHeaderFooterView : UITableViewHeaderFooterView
 
 @property (nonatomic) UITextView *textView;
@@ -187,7 +193,9 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == TunnelModeSection) {
         APVpnManagerTunnelMode selectedMode =
-            indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
+            indexPath.row == SplitModeRow ?                     APVpnManagerTunnelModeSplit :
+            indexPath.row == FullModeRow ?                      APVpnManagerTunnelModeFull :
+                                                                APVpnManagerTunnelModeFullWithoutVPNIcon;
         
         [self setTunnelModeUI:selectedMode];
         [APVPNManager.singleton setTunnelMode:selectedMode];
@@ -264,20 +272,30 @@ typedef enum : NSUInteger {
 
 #ifdef PRO
 - (void)setTunnelModeUI:(APVpnManagerTunnelMode)tunnelMode {
-    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    
+    _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelWithoutVPNCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
     _splitTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     _fullTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+    _fullTunnelWithoutVPNCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     
     switch (tunnelMode) {
+            
+        case APVpnManagerTunnelModeSplit:
+            _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+            break;
+            
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
             _fullTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
-        case APVpnManagerTunnelModeSplit:
-            _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
-            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+            _fullTunnelWithoutVPNCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _fullTunnelWithoutVPNCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         default:

@@ -35,6 +35,7 @@
 + (BOOL) isIpv6Available;
 + (BOOL) isIpv4Available;
 + (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock;
++ (void) enumerateSystemDnsWithProcessingBlock:(void (^)(NSString *ip, NSString* port, BOOL ipv4, BOOL *stop))processingBlock;
 
 @end
 
