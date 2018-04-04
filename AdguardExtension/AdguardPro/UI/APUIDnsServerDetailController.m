@@ -70,6 +70,13 @@
         [self cells:@[self.resolverNameCell, self.resolverAddressCell, self.publicKeyCell] setHidden:YES];
     }
     
+    self.nameTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.descriptionTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.publicKeyTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.resolverNameTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.resolverAddressTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.ipAddressesTextView.keyboardAppearance = UIKeyboardAppearanceDark;
+    
     [self reloadDataAnimated:YES];
 }
 

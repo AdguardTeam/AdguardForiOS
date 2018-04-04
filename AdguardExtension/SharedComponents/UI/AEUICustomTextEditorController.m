@@ -176,6 +176,9 @@ static NSDictionary *_editAttrs;
     self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
     self.placeholderLabel.textColor = SUBTITLE_TEXT_COLOR;
     
+    self.editorTextView.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
+    
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
     // tunning accessibility

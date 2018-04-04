@@ -46,6 +46,10 @@
     [super viewDidLoad];
     
     self.subscription = [APBlockingSubscription new];
+    
+    self.nameLabel.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.descriptionLabel.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.urlLabel.keyboardAppearance = UIKeyboardAppearanceDark;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -28,6 +28,8 @@
         NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:SUBTITLE_TEXT_COLOR}];
         
         [self setAttributedPlaceholder:attributed];
+        
+        self.keyboardAppearance = UIKeyboardAppearanceDark;
     }
     
     return self;

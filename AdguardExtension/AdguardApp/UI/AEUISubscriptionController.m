@@ -60,6 +60,7 @@
     self.searchController.searchBar.tintColor = [UIColor blackColor];
     self.searchController.searchBar.backgroundColor = [UIColor blackColor];
     self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
+    self.searchController.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
     
