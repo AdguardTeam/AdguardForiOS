@@ -33,19 +33,20 @@
 #define BLOCKING_SUBSCRIPTIONS_HOSTS_FILE  @"blocking-subscriptions-hosts.db"
 #define BLOCKING_SUBSCRIPTIONS_RULES_FILE  @"blocking-subscriptions-rules.db"
 
-#define LOG_RECORDS_TTL             12*60*60 // 12 hours
+#define LOG_RECORDS_LIMIT           1000
+#define PURGE_TIME_INTERVAL         60      // seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 
 @interface AESharedResources (internal)
-
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
 - (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
 - (NSString*) pathForRelativePath:(NSString*) relativePath;
 
 @end
 
+static NSTimeInterval lastPurgeTime;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogTable
@@ -283,11 +284,16 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 
 + (void)purgeDnsLog{
     
-    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+    NSTimeInterval now = NSDate.date.timeIntervalSince1970;
+    if(now - lastPurgeTime > PURGE_TIME_INTERVAL) {
         
-        NSDate *purgeDate = [NSDate dateWithTimeIntervalSinceNow:-(LOG_RECORDS_TTL)];
-        [db executeUpdate:@"DELETE FROM APDnsLogTable WHERE timeStamp < datetime(?)", [purgeDate iso8601String]];
-    }];
+        lastPurgeTime = now;
+        
+        [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            
+            [db executeUpdate:@"DELETE FROM APDnsLogTable WHERE timeStamp > 0 ORDER BY timeStamp DESC LIMIT -1 OFFSET ?", @(LOG_RECORDS_LIMIT)];
+        }];
+    }
 }
 
 + (id)domainsListWithName:(NSString *)name {
