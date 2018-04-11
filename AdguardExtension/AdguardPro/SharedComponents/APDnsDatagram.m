@@ -97,7 +97,7 @@
     APDnsDatagram *obj = [APDnsDatagram new];
     
     obj.ID = self.ID;
-    obj.isRequest = obj.isRequest ;
+    obj.isRequest = self.isRequest;
     obj.isResponse = self.isResponse;
     obj.requests = [self.requests copyWithZone:zone];
     obj.responses = [self.responses copyWithZone:zone];
