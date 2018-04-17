@@ -922,7 +922,8 @@
 		D0BC68B31FC5D06600E9193D /* strlcpy.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC66451FC5C6B100E9193D /* strlcpy.c */; };
 		D0BC69081FC5D19800E9193D /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65B41FC5C6B000E9193D /* buffer.c */; };
 		D0BC690B1FC6AC9800E9193D /* bufferevent_ratelim.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65BC1FC5C6B000E9193D /* bufferevent_ratelim.c */; };
-		D0BC690C1FC6AFFC00E9193D /* app.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64ED1FC5C30100E9193D /* app.c */; };
+		D0BF8438207B63C0001C0E1A /* APDnscryptService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF8437207B63C0001C0E1A /* APDnscryptService.m */; };
+		D0BF8439207B63C0001C0E1A /* APDnscryptService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF8437207B63C0001C0E1A /* APDnscryptService.m */; };
 		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D0CA2EBF1FF3E2430072B4A6 /* AEUICellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */; };
 		D0CA2EC01FF3E2430072B4A6 /* AEUICellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */; };
@@ -2075,6 +2076,8 @@
 		D0BC69051FC5D18100E9193D /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		D0BC69061FC5D18100E9193D /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		D0BC69071FC5D18100E9193D /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		D0BF8436207B63C0001C0E1A /* APDnscryptService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnscryptService.h; sourceTree = "<group>"; };
+		D0BF8437207B63C0001C0E1A /* APDnscryptService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APDnscryptService.m; sourceTree = "<group>"; };
 		D0CA2EBD1FF3E2430072B4A6 /* AEUICellTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUICellTextField.h; sourceTree = "<group>"; };
 		D0CA2EBE1FF3E2430072B4A6 /* AEUICellTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEUICellTextField.m; sourceTree = "<group>"; };
 		D0CA32491FF4FE870072B4A6 /* AEUIRightDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUIRightDetailTableViewCell.h; sourceTree = "<group>"; };
@@ -2634,6 +2637,8 @@
 				65B621191D2E845D0047248F /* APTDnsRequest.m */,
 				65B621231D3139FF0047248F /* APTEndpoint.h */,
 				65B621241D3139FF0047248F /* APTEndpoint.m */,
+				D0BF8436207B63C0001C0E1A /* APDnscryptService.h */,
+				D0BF8437207B63C0001C0E1A /* APDnscryptService.m */,
 				6582373A1D07FE6700B824F4 /* Info.plist */,
 				658237351D07FE6700B824F4 /* Supporting Files */,
 			);
@@ -5315,6 +5320,7 @@
 				653AEA011D084B6400AC81B4 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D0BC68281FC5CE5D00E9193D /* generichash_blake2b.c in Sources */,
 				D0BC68A71FC5D05700E9193D /* evthread.c in Sources */,
+				D0BF8438207B63C0001C0E1A /* APDnscryptService.m in Sources */,
 				D0BC68AA1FC5D05700E9193D /* evutil.c in Sources */,
 				D0BC684C1FC5CE5D00E9193D /* fe51_pack.S in Sources */,
 				D0BC68801FC5CE5E00E9193D /* runtime.c in Sources */,
@@ -5386,7 +5392,6 @@
 				D0BC68371FC5CE5D00E9193D /* argon2-encoding.c in Sources */,
 				6581C9261D64946000E739CC /* AESFilterConverter.m in Sources */,
 				D0BC652E1FC5C30100E9193D /* sandboxes.c in Sources */,
-				D0BC690C1FC6AFFC00E9193D /* app.c in Sources */,
 				D0BC688D1FC5D04300E9193D /* bufferevent_sock.c in Sources */,
 				D0BC68591FC5CE5D00E9193D /* shorthash_siphash24.c in Sources */,
 				65B4F0311D5C828300893BA0 /* FMResultSet.m in Sources */,
@@ -5692,6 +5697,7 @@
 				65B621171D2E78AD0047248F /* APUDPPacketTest.m in Sources */,
 				655AAC8F1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				65B621221D2F95EF0047248F /* APTUdpProxySession.m in Sources */,
+				D0BF8439207B63C0001C0E1A /* APDnscryptService.m in Sources */,
 				65C672F41DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m in Sources */,
 				65B621261D3139FF0047248F /* APTEndpoint.m in Sources */,
 				65B621101D2D41880047248F /* APIPPacket.m in Sources */,
