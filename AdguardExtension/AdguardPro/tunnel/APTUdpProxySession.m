@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -598,6 +598,8 @@ _workingQueue = nil;
                 //Check that this is request to domain from whitelist or blacklist.
                 NSString *name = [datagram.requests[0] name];
                 NSString *ip;
+                NSString *subscriptionUUID;
+                
                 if (! [NSString isNullOrEmpty:name]) {
                     
                     // user filter lists are processed first
@@ -607,13 +609,10 @@ _workingQueue = nil;
                     else if ([self.delegate isUserBlacklistDomain:name]) {
                         blacklisted = YES;
                     }
-                    else if ([self.delegate checkHostsDomain:name ip:&ip]) {
+                    else if ([self.delegate checkHostsDomain:name ip:&ip subscriptionUUID:&subscriptionUUID]) {
                         blacklisted = YES;
                     }
-//                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
-//                        whitelisted = YES;
-//                    }
-                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
+                    else if ([self.delegate checkSubscriptionBlacklistDomain:name subscriptionUUID:&subscriptionUUID]) {
                         blacklisted = YES;
                     }
                     
@@ -631,7 +630,7 @@ _workingQueue = nil;
                 }
                 
                 //Create DNS log record, if logging is enabled.
-                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted subscriptionUUID:subscriptionUUID];
             }
         }
         
@@ -689,7 +688,7 @@ _workingQueue = nil;
 
 }
 
-- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
+- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist subscriptionUUID:(NSString*) uuid {
     
     [self logDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelist blacklist:blacklist];
     
@@ -703,6 +702,7 @@ _workingQueue = nil;
         record.isWhitelisted = whitelist;
         record.isBlacklisted = blacklist;
         record.isTracker = tracker;
+        record.subscriptionUUID = uuid;
         
         if (![_dnsRecordsSet containsObject:record]) {
             

@@ -769,6 +769,12 @@
 		D0B038471FB4968600A5EA3F /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */; };
 		D0B038481FB4997500A5EA3F /* dnscrypt-resolvers.csv in Resources */ = {isa = PBXBuildFile; fileRef = D0B038351FB4864100A5EA3F /* dnscrypt-resolvers.csv */; };
 		D0B038491FB4997600A5EA3F /* dnscrypt-resolvers.csv in Resources */ = {isa = PBXBuildFile; fileRef = D0B038351FB4864100A5EA3F /* dnscrypt-resolvers.csv */; };
+		D0B27BBF207280D20073E13C /* AERDomainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43A31E89231A008DAA59 /* AERDomainFilter.m */; };
+		D0B27BC120736DB20073E13C /* ABECSubscriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC020736DB20073E13C /* ABECSubscriptionTest.m */; };
+		D0B27BC3207372CD0073E13C /* ACNUrlUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */; };
+		D0B27BC62074BBE20073E13C /* APPacketTunnelMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */; };
+		D0B27BC72074BBE20073E13C /* APPacketTunnelMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */; };
+		D0B27BC92074C1E60073E13C /* APPacketTunnelMigrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC82074C1E60073E13C /* APPacketTunnelMigrationTest.m */; };
 		D0BC65201FC5C30100E9193D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0BC64E41FC5C30100E9193D /* libssl.a */; };
 		D0BC65221FC5C30100E9193D /* cert.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64EF1FC5C30100E9193D /* cert.c */; };
 		D0BC65231FC5C30100E9193D /* dnscrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC64F21FC5C30100E9193D /* dnscrypt.c */; };
@@ -1609,6 +1615,11 @@
 		D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		D0B0383D1FB48D1500A5EA3F /* APDnsCryptParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsCryptParser.h; sourceTree = "<group>"; };
 		D0B0383E1FB48D1500A5EA3F /* APDnsCryptParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APDnsCryptParser.m; sourceTree = "<group>"; };
+		D0B27BC020736DB20073E13C /* ABECSubscriptionTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECSubscriptionTest.m; sourceTree = "<group>"; };
+		D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtilsTest.m; sourceTree = "<group>"; };
+		D0B27BC42074BBE20073E13C /* APPacketTunnelMigration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPacketTunnelMigration.h; sourceTree = "<group>"; };
+		D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPacketTunnelMigration.m; sourceTree = "<group>"; };
+		D0B27BC82074C1E60073E13C /* APPacketTunnelMigrationTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPacketTunnelMigrationTest.m; sourceTree = "<group>"; };
 		D0B7F2561F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
 		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D0B7F25C1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2637,6 +2648,8 @@
 				65B621191D2E845D0047248F /* APTDnsRequest.m */,
 				65B621231D3139FF0047248F /* APTEndpoint.h */,
 				65B621241D3139FF0047248F /* APTEndpoint.m */,
+				D0B27BC42074BBE20073E13C /* APPacketTunnelMigration.h */,
+				D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */,
 				D0BF8436207B63C0001C0E1A /* APDnscryptService.h */,
 				D0BF8437207B63C0001C0E1A /* APDnscryptService.m */,
 				6582373A1D07FE6700B824F4 /* Info.plist */,
@@ -2752,9 +2765,11 @@
 				65B6210E1D2D3E290047248F /* APIPPacketTest.m */,
 				65B621161D2E78AD0047248F /* APUDPPacketTest.m */,
 				65B6211C1D2E962F0047248F /* APTDnsRequestTest.m */,
-				65B621061D2D3D9F0047248F /* Info.plist */,
 				65C98AAC1D3676C600E4B57D /* APDnsResourceTypeTest.m */,
 				65C672F31DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m */,
+				D0B27BC020736DB20073E13C /* ABECSubscriptionTest.m */,
+				D0B27BC82074C1E60073E13C /* APPacketTunnelMigrationTest.m */,
+				65B621061D2D3D9F0047248F /* Info.plist */,
 			);
 			path = AdguardProTests;
 			sourceTree = "<group>";
@@ -3009,6 +3024,7 @@
 				653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
 				658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */,
+				D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */,
 				D0116CF12063E004009598B1 /* ACNCidrRangeTest.m */,
 			);
 			path = AdguardTests;
@@ -5350,6 +5366,7 @@
 				D0BC687E1FC5CE5E00E9193D /* randombytes_sysrandom.c in Sources */,
 				D0BC68731FC5CE5D00E9193D /* stream_salsa2012_ref.c in Sources */,
 				D0BC68AF1FC5D06600E9193D /* log.c in Sources */,
+				D0B27BC62074BBE20073E13C /* APPacketTunnelMigration.m in Sources */,
 				D0BC68821FC5CE5E00E9193D /* version.c in Sources */,
 				D0BC652D1FC5C30100E9193D /* safe_rw.c in Sources */,
 				6581C92F1D6494E600E739CC /* ABECRequest.m in Sources */,
@@ -5687,19 +5704,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C672F71DF5BC45001BE6C5 /* APTunnelConnectionsHandler.m in Sources */,
+				D0B27BC120736DB20073E13C /* ABECSubscriptionTest.m in Sources */,
 				655AAC921D37780700E316EA /* APDnsResponse.m in Sources */,
 				65B6211B1D2E845D0047248F /* APTDnsRequest.m in Sources */,
 				65EBB4AE1E79DB6400CB08E3 /* APWhitelistDomainObject.m in Sources */,
+				D0B27BC72074BBE20073E13C /* APPacketTunnelMigration.m in Sources */,
 				65C98AAD1D3676C600E4B57D /* APDnsResourceTypeTest.m in Sources */,
 				65B6211D1D2E962F0047248F /* APTDnsRequestTest.m in Sources */,
 				65B6210F1D2D3E290047248F /* APIPPacketTest.m in Sources */,
 				65B621151D2E4F8F0047248F /* APUDPPacket.m in Sources */,
+				D0B27BBF207280D20073E13C /* AERDomainFilter.m in Sources */,
 				65B621171D2E78AD0047248F /* APUDPPacketTest.m in Sources */,
 				655AAC8F1D37780700E316EA /* APDnsResourceType.m in Sources */,
 				65B621221D2F95EF0047248F /* APTUdpProxySession.m in Sources */,
 				D0BF8439207B63C0001C0E1A /* APDnscryptService.m in Sources */,
 				65C672F41DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m in Sources */,
 				65B621261D3139FF0047248F /* APTEndpoint.m in Sources */,
+				D0B27BC92074C1E60073E13C /* APPacketTunnelMigrationTest.m in Sources */,
 				65B621101D2D41880047248F /* APIPPacket.m in Sources */,
 				655AAC9D1D37821200E316EA /* APDnsLogRecord.m in Sources */,
 				655AAC891D37780700E316EA /* APDnsDatagram.m in Sources */,
@@ -5898,6 +5919,7 @@
 				65EC9BD91BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				65EC9AF11BB9824C00F53F3B /* ABECFilter.m in Sources */,
 				65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */,
+				D0B27BC3207372CD0073E13C /* ACNUrlUtilsTest.m in Sources */,
 				65F3982F1B7B684700ABCD39 /* AdguardExtensionTests.m in Sources */,
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,

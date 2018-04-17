@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -306,7 +306,7 @@
         
         NSInteger row = indexPath.row;
         
-        NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
+        NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
         if(row >= subscriptions.count)
             return;
         
@@ -371,7 +371,7 @@
 
 - (void) updateSubscriptionCells {
     
-    NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
+    NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
     
     BOOL showUpdateCell = subscriptions.count > 0;
     BOOL wasHidden = [self cellIsHidden:self.checkUpdatesCell];

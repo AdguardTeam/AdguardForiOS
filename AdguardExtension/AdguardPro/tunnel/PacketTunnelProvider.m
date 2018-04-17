@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 #import "ACNIPUtils.h"
 #import "APDnsServerAddress.h"
 #import "APBlockingSubscriptionsManager.h"
+#import "APPacketTunnelMigration.h"
 #import "ACNCidrRange.h"
 #import "APDnscryptService.h"
 
@@ -659,27 +660,38 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [_connectionHandler setUserBlacklistFilter:nil];
         [_connectionHandler setTrackersFilter:nil];
         [_connectionHandler setHostsFilter:nil];
-        [_connectionHandler setGlobalBlacklistFilter:nil];
+        [_connectionHandler setSubscriptionsFilters:nil];
         
-        AERDomainFilter *subscriptionRules = [AERDomainFilter filter];
+        NSMutableDictionary<NSString*, AERDomainFilter*> *subscriptionRules = [NSMutableDictionary new];
        
-        NSArray* subscriptionRulesStrings = [APBlockingSubscriptionsManager loadRules];
+        NSDictionary<NSString*, NSArray<NSString*>* > *subscriptionRulesStrings = [APBlockingSubscriptionsManager loadRules];
         
-        for (NSString* ruleString in subscriptionRulesStrings) {
-            [subscriptionRules addRule:[AERDomainFilterRule rule:ruleString]];
-        }
+        subscriptionRulesStrings = [APPacketTunnelMigration migrateRulesIfNeeded:subscriptionRulesStrings];
+        
+        [subscriptionRulesStrings enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull uuid, NSArray<NSString *> * _Nonnull ruleStrings, BOOL * _Nonnull stop) {
+            
+            AERDomainFilter* filter = [AERDomainFilter filter];
+            
+            for (NSString* ruleString in ruleStrings) {
+                [filter addRule:[AERDomainFilterRule rule:ruleString]];
+            }
+            
+            subscriptionRules[uuid] = filter;
+        }];
         
         NSMutableDictionary* hosts = [[NSMutableDictionary alloc] initWithDictionary:APSharedResources.hosts];
-        NSDictionary *subscriptionsHosts = [APBlockingSubscriptionsManager loadHosts];
-        [hosts addEntriesFromDictionary:subscriptionsHosts];
+        NSDictionary<NSString*, NSDictionary*> *subscriptionsHosts = [APBlockingSubscriptionsManager loadHosts];
+        
+        subscriptionsHosts = [APPacketTunnelMigration migrateHostsIfNeeded:subscriptionsHosts];
         
         [_connectionHandler setUserWhitelistFilter:userWhiteRules];
         [_connectionHandler setUserBlacklistFilter:userBlackRules];
         [_connectionHandler setTrackersFilter:trackersRules];
         
         [_connectionHandler setHostsFilter:hosts];
+        [_connectionHandler setSubscriptionsHostsFilter:subscriptionsHosts];
         
-        [_connectionHandler setGlobalBlacklistFilter:subscriptionRules];
+        [_connectionHandler setSubscriptionsFilters:subscriptionRules];
         
         DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
         DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);

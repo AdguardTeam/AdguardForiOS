@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,40 +35,89 @@
     [super tearDown];
 }
 
-- (void)testWhitelistDomain {
+- (void) testDnsReplacement {
     
+    APTunnelConnectionsHandler * handler = [[APTunnelConnectionsHandler alloc] initWithProvider:(PacketTunnelProvider *)@"fake"];
+    
+    NSArray* systemIpv4DNSs = @[[APDnsServerAddress addressWithIp:@"111.111.111.111" port:@"53"],
+                                [APDnsServerAddress addressWithIp:@"111.111.111.112" port:@"54"]];
+    
+    NSArray* systemIpv6DNSs = @[[APDnsServerAddress addressWithIp:@"aa::aa" port:@"53"],
+                                [APDnsServerAddress addressWithIp:@"bb::bb" port:@"54"]];
+    
+    NSArray* remoteIpv4DNSs = @[[APDnsServerAddress addressWithIp:@"222.222.222.222" port:@"53"],
+                                [APDnsServerAddress addressWithIp:@"222.222.222.223" port:@"54"]];
+    
+    NSArray* remoteIpv6DNSs = @[[APDnsServerAddress addressWithIp:@"cc::cc" port:@"53"],
+                                [APDnsServerAddress addressWithIp:@"dd::dd" port:@"53"]];
+    
+    NSArray* fakeIpv4DNSs = @[@"333.333.333.333", @"444.444.444.444"];
+    
+    NSArray* fakeIpv6DNSs = @[@"ee::ee", @"gg::gg"];
+    
+    
+    [handler setDeviceDnsAddressesIpv4:systemIpv4DNSs
+                deviceDnsAddressesIpv6:systemIpv6DNSs
+         adguardRemoteDnsAddressesIpv4:remoteIpv4DNSs
+         adguardRemoteDnsAddressesIpv6:remoteIpv6DNSs
+           adguardFakeDnsAddressesIpv4:fakeIpv4DNSs
+           adguardFakeDnsAddressesIpv6:fakeIpv6DNSs];
+    
+    APDnsServerAddress* whitelisTest = [handler whitelistServerAddressForAddress:@"333.333.333.333"];
+    XCTAssertEqualObjects(whitelisTest.ip, @"111.111.111.111");
+    XCTAssertEqualObjects(whitelisTest.port, @"53");
+    
+    APDnsServerAddress* whitelisTest2 = [handler whitelistServerAddressForAddress:@"444.444.444.444"];
+    XCTAssertEqualObjects(whitelisTest2.ip, @"111.111.111.112");
+    XCTAssertEqualObjects(whitelisTest2.port, @"54");
+    
+    APDnsServerAddress* remoteTest = [handler serverAddressForFakeDnsAddress:@"333.333.333.333"];
+    XCTAssertEqualObjects(remoteTest.ip, @"222.222.222.222");
+    XCTAssertEqualObjects(remoteTest.port, @"53");
+    
+    APDnsServerAddress* remoteTest2 = [handler serverAddressForFakeDnsAddress:@"444.444.444.444"];
+    XCTAssertEqualObjects(remoteTest2.ip, @"222.222.222.223");
+    XCTAssertEqualObjects(remoteTest2.port, @"54");
+}
+
+- (void)testWhitelistDomain {
+
     APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:(PacketTunnelProvider *)@"fake"];
     
-    [handler setWhitelistDomains:@[ @"lenta.ru",
-                                    @"domain.com"
-                                    ]];
+    AERDomainFilter* filter = [AERDomainFilter filter];
+    [filter addRule: [AERDomainFilterRule rule: @"@@||lenta.ru^"]];
+    [filter addRule: [AERDomainFilterRule rule: @"@@||domain.com^"]];
     
-    XCTAssert([handler isWhitelistDomain:@"www.lenta.ru"]);
-    XCTAssert([handler isWhitelistDomain:@"lenta.ru"]);
-    XCTAssertFalse([handler isWhitelistDomain:@"www.lenta.com"]);
-    XCTAssertFalse([handler isWhitelistDomain:@"wwwlenta.ru"]);
+    [handler setUserWhitelistFilter:filter];
     
-    [handler setWhitelistDomains:@[]];
-    
-    XCTAssertFalse([handler isWhitelistDomain:@"www.lenta.com"]);
+    XCTAssert([handler isUserWhitelistDomain:@"www.lenta.ru"]);
+    XCTAssert([handler isUserWhitelistDomain:@"lenta.ru"]);
+    XCTAssertFalse([handler isUserWhitelistDomain:@"www.lenta.com"]);
+    XCTAssertFalse([handler isUserWhitelistDomain:@"wwwlenta.ru"]);
+
+    [handler setUserWhitelistFilter:[AERDomainFilter filter]];
+
+    XCTAssertFalse([handler isUserWhitelistDomain:@"www.lenta.com"]);
 }
 
 - (void)testBlacklistDomain {
-    
+
     APTunnelConnectionsHandler *handler = [[APTunnelConnectionsHandler alloc] initWithProvider:(PacketTunnelProvider *)@"fake"];
+
+    AERDomainFilter* filter = [AERDomainFilter filter];
+    [filter addRule: [AERDomainFilterRule rule: @"||lenta.ru^"]];
+    [filter addRule: [AERDomainFilterRule rule: @"||domain.com^"]];
     
-    [handler setBlacklistDomains:@[ @"lenta.ru",
-                                    @"domain.com"
-                                    ]];
+    [handler setUserBlacklistFilter:filter];
     
-    XCTAssert([handler isBlacklistDomain:@"www.lenta.ru"]);
-    XCTAssert([handler isBlacklistDomain:@"lenta.ru"]);
-    XCTAssertFalse([handler isBlacklistDomain:@"www.lenta.com"]);
-    XCTAssertFalse([handler isBlacklistDomain:@"wwwlenta.ru"]);
-    
-    [handler setBlacklistDomains:@[]];
-    
-    XCTAssertFalse([handler isBlacklistDomain:@"www.lenta.com"]);
+    XCTAssert([handler isUserBlacklistDomain:@"www.lenta.ru"]);
+    XCTAssert([handler isUserBlacklistDomain:@"lenta.ru"]);
+    XCTAssertFalse([handler isUserBlacklistDomain:@"www.lenta.com"]);
+    XCTAssertFalse([handler isUserBlacklistDomain:@"wwwlenta.ru"]);
+
+    [handler setUserBlacklistFilter:[AERDomainFilter filter]];
+
+    XCTAssertFalse([handler isUserBlacklistDomain:@"www.lenta.com"]);
 }
 
 @end

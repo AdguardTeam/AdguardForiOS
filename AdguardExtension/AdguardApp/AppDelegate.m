@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -288,26 +288,29 @@ typedef void (^AEDownloadsCompletionBlock)();
             return;
         }
         
+        BOOL checkResult = [self checkAutoUpdateConditions];
+        
 #ifdef PRO
         if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
             
-            [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
-                
-                [APVPNManager.singleton sendReloadSystemWideDomainLists];
-                completionHandler(UIBackgroundFetchResultNewData);
-            } errorBlock:^(NSError * error) {
-                
-                completionHandler(UIBackgroundFetchResultFailed);
-            } completionBlock:nil];
-           
-            return;
+            if (!checkResult) {
+                DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch subscriptions. App settings permit updates only over WiFi.");
+            }
+            else {
+                [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
+                    
+                    [APVPNManager.singleton sendReloadSystemWideDomainLists];
+                    completionHandler(UIBackgroundFetchResultNewData);
+                } errorBlock:^(NSError * error) {
+                    
+                    completionHandler(UIBackgroundFetchResultFailed);
+                } completionBlock:nil];
+            }
         }
 #endif
         
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
-        
-        BOOL checkResult = [self checkAutoUpdateConditions];
         
         [[AEService singleton] onReady:^{
             
@@ -317,7 +320,6 @@ typedef void (^AEDownloadsCompletionBlock)();
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
-                
                 
                 if (!checkResult) {
                     DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.");
