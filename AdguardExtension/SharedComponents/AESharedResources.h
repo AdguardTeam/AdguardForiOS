@@ -118,6 +118,16 @@ extern NSString *AEDefaultsTotalTrackersCount;
  */
 extern NSString *AEDefaultsInvertedWhitelist;
 
+/**
+ User Defaults key, which defines app first launch date. Used for show Rate me allert.
+ */
+extern NSString *AEDefaultsFirstLaunchDate;
+
+/**
+ User Defaults key, which defines that action extension was used. Used for show Rate me allert.
+ */
+extern NSString* AEDefaultsActionExtensionUsed;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

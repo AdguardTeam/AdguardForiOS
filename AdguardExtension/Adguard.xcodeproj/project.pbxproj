@@ -928,6 +928,7 @@
 		D0BC68B31FC5D06600E9193D /* strlcpy.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC66451FC5C6B100E9193D /* strlcpy.c */; };
 		D0BC69081FC5D19800E9193D /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65B41FC5C6B000E9193D /* buffer.c */; };
 		D0BC690B1FC6AC9800E9193D /* bufferevent_ratelim.c in Sources */ = {isa = PBXBuildFile; fileRef = D0BC65BC1FC5C6B000E9193D /* bufferevent_ratelim.c */; };
+		D0BD96252080AF3400B1B7C0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0BD96242080AF3400B1B7C0 /* StoreKit.framework */; };
 		D0BF8438207B63C0001C0E1A /* APDnscryptService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF8437207B63C0001C0E1A /* APDnscryptService.m */; };
 		D0BF8439207B63C0001C0E1A /* APDnscryptService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF8437207B63C0001C0E1A /* APDnscryptService.m */; };
 		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
@@ -2216,6 +2217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0BD96252080AF3400B1B7C0 /* StoreKit.framework in Frameworks */,
 				655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */,
 				65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */,
 				656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */,
@@ -2828,6 +2830,7 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0BD96242080AF3400B1B7C0 /* StoreKit.framework */,
 				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
 				D096D9411F28C0D70081004D /* NotificationCenter.framework */,
 			);

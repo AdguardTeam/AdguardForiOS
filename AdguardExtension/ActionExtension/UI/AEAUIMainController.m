@@ -109,6 +109,8 @@
     if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
         UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
      }
+    
+    [AESharedResources.sharedDefaults setBool:YES forKey:AEDefaultsActionExtensionUsed];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

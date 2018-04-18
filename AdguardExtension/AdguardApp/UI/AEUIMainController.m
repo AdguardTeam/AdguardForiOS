@@ -35,6 +35,9 @@
 #import "AEUIPlayerViewController.h"
 #import "AEUISelectableTableViewCell.h"
 
+#import <StoreKit/StoreKit.h>
+
+
 #ifdef PRO
 
 #import "APVPNManager.h"
@@ -54,6 +57,9 @@
 
 #define VIDEO_IMAGE_MAX_HEIGHT 200
 
+#define MIN_DAYS_TO_RATE_ME          7
+#define MIN_TIME_INTERVAL_TO_RATE_ME MIN_DAYS_TO_RATE_ME * 24 * 3600
+#define RATE_ME_TIME_AFTER_START     10 // seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -377,6 +383,10 @@
             }
             
             self.disabledLabel.hidden = enabled;
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RATE_ME_TIME_AFTER_START * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self showRateMeIfNeeded];
+            });
         });
     }];
 }
@@ -809,6 +819,35 @@
     } else {
         [UIApplication.sharedApplication openURL:url];
     }
+}
+
+- (void) showRateMeIfNeeded {
+    
+    // check first launch day
+    NSDate* firstLaunchDate = [AESharedResources.sharedDefaults objectForKey:AEDefaultsFirstLaunchDate];
+    if(!firstLaunchDate) {
+        [AESharedResources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsFirstLaunchDate];
+        return;
+    }
+    
+    if([firstLaunchDate timeIntervalSinceNow] > - MIN_TIME_INTERVAL_TO_RATE_ME) {
+        return;
+    }
+    
+    // check safari content blocker is active
+    if(!_contentBlockerEnabled) {
+        return;
+    }
+    
+    // check user used safari action extension
+    if(![AESharedResources.sharedDefaults boolForKey:AEDefaultsActionExtensionUsed]) {
+        return;
+    }
+    
+    [SKStoreReviewController requestReview];
+    
+    // reset firstLaunchDate
+    [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsFirstLaunchDate];
 }
 
 /////////////////////////////////////////////////////////////////////
