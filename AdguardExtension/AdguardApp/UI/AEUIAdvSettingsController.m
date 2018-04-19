@@ -135,6 +135,7 @@ typedef enum : NSUInteger {
     self.hideSectionsWithHiddenRows = YES;
     [self cell:self.splitTunnelCell setHidden:YES];
     [self cell:self.fullTunnelCell setHidden:YES];
+    [self cell:self.fullTunnelWithoutVPNCell setHidden:YES];
     
     [self reloadDataAnimated:YES];
 #endif
