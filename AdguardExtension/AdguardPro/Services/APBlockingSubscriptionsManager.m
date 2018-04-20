@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,10 +39,19 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
 
 + (NSArray<APBlockingSubscription *> *)subscriptions {
     
+    if(!_subscriptions) {
+        _subscriptions = _subscriptionsMeta = [self loadSubscriptions];
+    }
+
+    return _subscriptions;
+}
+
++ (NSArray<APBlockingSubscription *> *)subscriptionsMeta {
+    
     if(!_subscriptionsMeta) {
         _subscriptionsMeta = [self loadSubscriptionsMeta];
     }
-
+    
     return _subscriptionsMeta;
 }
 
@@ -124,21 +133,36 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     return subscriptions.copy;
 }
 
-+ (void)saveHostsForSubscriptions:(NSArray<APBlockingSubscription *> *)subscriptions {
++ (BOOL)saveHostsForSubscriptions:(NSArray<APBlockingSubscription *> *)subscriptions {
     
     DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions hosts to file");
-    NSMutableDictionary *hosts = [NSMutableDictionary new];
-    for(APBlockingSubscription* subscriprtion in subscriptions) {
-        [hosts addEntriesFromDictionary:subscriprtion.hosts];
+    
+    NSUInteger hostsCount = 0;
+    
+    NSMutableDictionary<NSString*, NSDictionary*> *subscriptionsHosts = [NSMutableDictionary new];
+    
+    // do not add one domain multiple times
+    NSMutableSet* addedHosts = [NSMutableSet new];
+
+    for(APBlockingSubscription* subscription in subscriptions) {
+        
+        NSMutableDictionary* hostsToAdd = subscription.hosts.mutableCopy;
+        [hostsToAdd removeObjectsForKeys:addedHosts.allObjects];
+        
+        subscriptionsHosts[subscription.uuid] = hostsToAdd;
+        hostsCount += hostsToAdd.count;
+        [addedHosts addObjectsFromArray:hostsToAdd.allKeys];
     }
     
-    NSData* plistData = [NSPropertyListSerialization dataWithPropertyList:hosts format:NSPropertyListBinaryFormat_v1_0 options:0 error:NULL];
+    NSData* plistData = [NSPropertyListSerialization dataWithPropertyList:subscriptionsHosts format:NSPropertyListBinaryFormat_v1_0 options:0 error:NULL];
     BOOL result = [plistData writeToFile:[APSharedResources pathForSubscriptionsHosts] atomically:YES];
     
-    DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions hosts result: %@ hosts count: %lu", result ? @"YES" : @"NO", hosts.count);
+    DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions hosts result: %@ hosts count: %lu", result ? @"YES" : @"NO", hostsCount);
+    
+    return result;
 }
 
-+ (NSDictionary *)loadHosts {
++ (NSDictionary<NSString*, NSDictionary*>*)loadHosts {
     
     DDLogInfo(@"(APBlockingSubscriptionsManager) load subscriptions hosts from file");
     NSInputStream* inputStream = [NSInputStream inputStreamWithFileAtPath:[APSharedResources pathForSubscriptionsHosts]];
@@ -151,28 +175,35 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     return dict;
 }
 
-+ (void)saveRulesForSubscriptions:(NSArray<APBlockingSubscription *> *) subscriptions {
++ (BOOL)saveRulesForSubscriptions:(NSArray<APBlockingSubscription *> *) subscriptions {
     
     DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions rules to file");
-    NSMutableArray *rules = [NSMutableArray new];
+    
+    NSMutableDictionary<NSString*, NSArray*> *subscriptionsRules = [NSMutableDictionary new];
+    NSUInteger rulesCount = 0;
+    
     for(APBlockingSubscription* subscriprtion in subscriptions) {
-        [rules addObjectsFromArray:subscriprtion.rules];
+        subscriptionsRules[subscriprtion.uuid] = subscriprtion.rules;
+        rulesCount += subscriprtion.rules.count;
     }
     
-    NSData* plistData = [NSPropertyListSerialization dataWithPropertyList:rules format:NSPropertyListBinaryFormat_v1_0 options:0 error:NULL];
+    NSData* plistData = [NSPropertyListSerialization dataWithPropertyList:subscriptionsRules format:NSPropertyListBinaryFormat_v1_0 options:0 error:NULL];
+    
     BOOL result = [plistData writeToFile:[APSharedResources pathForSubscriptionsRules] atomically:YES];
     
-    DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions rules result: %@ hosts count: %lu", result ? @"YES" : @"NO", rules.count);
+    DDLogInfo(@"(APBlockingSubscriptionsManager) save subscriptions rules result: %@ hosts count: %lu", result ? @"YES" : @"NO", rulesCount);
+    
+    return result;
 }
 
-+ (NSArray<NSString*> *) loadRules {
++ (NSDictionary<NSString*, NSArray<NSString*> *> *) loadRules {
     
     DDLogInfo(@"(APBlockingSubscriptionsManager) load subscriptions rules from file");
     NSInputStream* inputStream = [NSInputStream inputStreamWithFileAtPath:[APSharedResources pathForSubscriptionsRules]];
     [inputStream open];
     
     NSError *error;
-    NSArray *rules = [NSPropertyListSerialization propertyListWithStream:inputStream options:NSPropertyListImmutable format:NULL error:&error];
+    NSDictionary *rules = [NSPropertyListSerialization propertyListWithStream:inputStream options:NSPropertyListImmutable format:NULL error:&error];
     
     DDLogInfo(@"(APBlockingSubscriptionsManager) load subscriptions rules count:%lu", rules.count);
     return rules;
@@ -217,21 +248,6 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     return _predefinedSubscriptions;
 }
 
-+ (APBlockingSubscription *)checkDomain:(NSString *)domain {
-    
-    if(!_subscriptions) {
-        _subscriptions = [self loadSubscriptions];
-    }
-    
-    for (APBlockingSubscription* subscription in _subscriptions) {
-        
-        if(subscription.hosts[domain])
-            return subscription;
-    }
-    
-    return nil;
-}
-
 + (BOOL)needUpdateSubscriptions {
     
     NSTimeInterval nextUpdateTimestamp = [AESharedResources.sharedDefaults doubleForKey:APBlockingSubscriptionsNextUpdateKey];
@@ -248,7 +264,7 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         DDLogInfo(@"(APBlockingSubscriptionsManager) update subscriptions");
         dispatch_group_t group = dispatch_group_create();
         
-        for(APBlockingSubscription* subscription in self.subscriptions) {
+        for(APBlockingSubscription* subscription in self.subscriptionsMeta) {
             
             dispatch_group_enter(group);
             DDLogInfo(@"(APBlockingSubscriptionsManager) try to download subscription: %@ url:%@", subscription.name, subscription.url);
@@ -294,6 +310,25 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
     
     NSTimeInterval nextUpdate = [[NSDate new] timeIntervalSince1970] + UPDATE_INTERVAL;
     [AESharedResources.sharedDefaults setDouble:nextUpdate forKey:APBlockingSubscriptionsNextUpdateKey];
+}
+
++ (APBlockingSubscription *)subscriptionByUUID:(NSString *)uuid {
+    
+    for(APBlockingSubscription* subscription in self.subscriptionsMeta) {
+        if([subscription.uuid isEqualToString:uuid]) {
+            return subscription;
+        }
+    }
+    
+    return nil;
+}
+
++ (BOOL)saveHostsAndRulesForSubscriptions {
+    
+    BOOL result = [self saveHostsForSubscriptions:self.subscriptions];
+    result = result && [self saveRulesForSubscriptions:self.subscriptions];
+    
+    return result;
 }
 
 @end

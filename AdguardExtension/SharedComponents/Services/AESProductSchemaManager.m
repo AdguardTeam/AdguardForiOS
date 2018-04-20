@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,8 +59,8 @@
     
     if(![lastBuildVersion isEqual:build]) {
         
-        [self onMinorUpgrade];
-        [[AESharedResources sharedDefaults] setObject:build forKey:AEDefaultsProductBuildVersion];
+        if([self onMinorUpgrade])
+            [[AESharedResources sharedDefaults] setObject:build forKey:AEDefaultsProductBuildVersion];
     }
 }
 
@@ -88,8 +88,9 @@
     return YES;
 }
 
-+ (void)onMinorUpgrade {
++ (BOOL)onMinorUpgrade {
     
+    return YES;
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -117,6 +117,16 @@ extern NSString *AEDefaultsTotalTrackersCount;
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
  */
 extern NSString *AEDefaultsInvertedWhitelist;
+
+/**
+ User Defaults key, which defines app first launch date. Used for show Rate me allert.
+ */
+extern NSString *AEDefaultsFirstLaunchDate;
+
+/**
+ User Defaults key, which defines that action extension was used. Used for show Rate me allert.
+ */
+extern NSString* AEDefaultsActionExtensionUsed;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

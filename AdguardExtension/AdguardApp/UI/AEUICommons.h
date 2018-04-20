@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,5 +26,8 @@
 #define SUBTITLE_TEXT_COLOR     [UIColor colorWithRed:((float)0x6d)/255.0 green:((float)0x6d)/255.0 blue:((float)0x72)/255.0 alpha:1.0]
 
 #define SEARCHBAR_TINT_COLOR     [UIColor colorWithRed:((float)0x1e)/255.0 green:((float)0x1e)/255.0 blue:((float)0x1e)/255.0 alpha:1.0]
+
+#define CELL_BACKGROUND_COLOR    [UIColor colorWithWhite:1.0 alpha:.08]
+
 
 #endif /* AEUICommons_h */

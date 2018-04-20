@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -776,18 +776,29 @@ static APVPNManager *singletonVPNManager;
         else {
             
             if (managers.count) {
-                _manager = managers[0];
-                _protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
-                
                 //Checks that loaded configuration is related to tunnel bundle ID.
                 //If no, removes all old configurations.
-                if (managers.count > 1 || ! [_protocolConfiguration.providerBundleIdentifier isEqualToString:AP_TUNNEL_ID]) {
+                if (managers.count > 1 || ! [((NETunnelProviderProtocol *)managers.firstObject.protocolConfiguration).providerBundleIdentifier isEqualToString:AP_TUNNEL_ID]) {
+                    
+                    DDLogError(@"(APVPNManager) Error. there are %lu managers in system. Remove all", managers.count);
                     for (NETunnelProviderManager *item in managers) {
-                        [item removeFromPreferencesWithCompletionHandler:nil];
+                        [item removeFromPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
+                            if(error) {
+                                DDLogError(@"(APVPNManager) Error. Manager removing failed with error: %@", error.localizedDescription);
+                            }
+                            else {
+                                DDLogInfo(@"(APVPNManager) Error. Manager successfully removed");
+                            }
+                        }];
                     }
                     
                     _manager = nil;
                     _protocolConfiguration = nil;
+                }
+                else {
+                    
+                    _manager = managers[0];
+                    _protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
                 }
                 
                 [self migrateDNSIfNeeded];

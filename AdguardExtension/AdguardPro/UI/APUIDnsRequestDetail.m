@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -120,11 +120,9 @@ static NSDateFormatter *_timeFormatter;
             
             NSString* statusText;
             
-            NSString* domain = self.logRecord.requests[0].name;
-            
             NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
             
-            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
+            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager subscriptionByUUID:self.logRecord.subscriptionUUID];
             
             NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
             

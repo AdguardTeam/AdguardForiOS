@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,6 +69,13 @@
         
         [self cells:@[self.resolverNameCell, self.resolverAddressCell, self.publicKeyCell] setHidden:YES];
     }
+    
+    self.nameTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.descriptionTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.publicKeyTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.resolverNameTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.resolverAddressTextField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.ipAddressesTextView.keyboardAppearance = UIKeyboardAppearanceDark;
     
     [self reloadDataAnimated:YES];
 }

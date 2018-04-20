@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +33,10 @@
 #import "AEUIUtils.h"
 #import "AEUIWhitelistController.h"
 #import "AEUIPlayerViewController.h"
+#import "AEUISelectableTableViewCell.h"
+
+#import <StoreKit/StoreKit.h>
+
 
 #ifdef PRO
 
@@ -53,6 +57,9 @@
 
 #define VIDEO_IMAGE_MAX_HEIGHT 200
 
+#define MIN_DAYS_TO_RATE_ME          7
+#define MIN_TIME_INTERVAL_TO_RATE_ME MIN_DAYS_TO_RATE_ME * 24 * 3600
+#define RATE_ME_TIME_AFTER_START     10 // seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -222,6 +229,13 @@
 
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+    
+    // https://github.com/AdguardTeam/AdguardForiOS/issues/731
+    // on ios 9 ipad cell the background color defined in the storyboard is ignored
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
+        self.videoCell.backgroundColor = self.safariVideoCell.backgroundColor = UIColor.clearColor;
+    }
 }
 
 - (void) swipeCells {
@@ -263,7 +277,7 @@
 
 - (IBAction)clickViewOnGitHub:(id)sender {
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB] options:@{} completionHandler:nil];
+    [self openUrl: [NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
 - (IBAction)clickCheckForUpdates:(id)sender {
@@ -276,7 +290,7 @@
     NSURL *theURL =
     [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
                           ITUNES_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [self openUrl:theURL];
 }
 
 - (IBAction)clickShare:(id)sender {
@@ -307,7 +321,7 @@
 - (IBAction)clickGetPro:(id)sender {
     NSURL *theURL =
     [NSURL URLWithString:GET_PRO_URL];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [self openUrl:theURL];
 }
 
 #ifdef PRO
@@ -321,7 +335,7 @@
 
 - (IBAction)clickOtherApps:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:OTHER_APPS_URL] options:@{} completionHandler:nil];
+    [self openUrl:[NSURL URLWithString:OTHER_APPS_URL]];
 }
 
 
@@ -369,6 +383,10 @@
             }
             
             self.disabledLabel.hidden = enabled;
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RATE_ME_TIME_AFTER_START * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self showRateMeIfNeeded];
+            });
         });
     }];
 }
@@ -716,12 +734,12 @@
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Incorrect Blocking / Missed Ad", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
-        [[UIApplication sharedApplication] openURL:reportUrl options:@{} completionHandler:nil];
+        [self openUrl:reportUrl];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Bug Report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: BUGREPORT_URL] options:@{} completionHandler:nil];
+        [self openUrl:[NSURL URLWithString: BUGREPORT_URL]];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Contact Support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -792,6 +810,44 @@
         
         
     }
+}
+
+- (void) openUrl:(NSURL*)url {
+    
+    if ([UIApplication.sharedApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+    } else {
+        [UIApplication.sharedApplication openURL:url];
+    }
+}
+
+- (void) showRateMeIfNeeded {
+    
+    // check first launch day
+    NSDate* firstLaunchDate = [AESharedResources.sharedDefaults objectForKey:AEDefaultsFirstLaunchDate];
+    if(!firstLaunchDate) {
+        [AESharedResources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsFirstLaunchDate];
+        return;
+    }
+    
+    if([firstLaunchDate timeIntervalSinceNow] > - MIN_TIME_INTERVAL_TO_RATE_ME) {
+        return;
+    }
+    
+    // check safari content blocker is active
+    if(!_contentBlockerEnabled) {
+        return;
+    }
+    
+    // check user used safari action extension
+    if(![AESharedResources.sharedDefaults boolForKey:AEDefaultsActionExtensionUsed]) {
+        return;
+    }
+    
+    [SKStoreReviewController requestReview];
+    
+    // reset firstLaunchDate
+    [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsFirstLaunchDate];
 }
 
 /////////////////////////////////////////////////////////////////////

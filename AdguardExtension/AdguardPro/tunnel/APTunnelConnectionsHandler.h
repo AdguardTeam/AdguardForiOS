@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@
 /**
  Sets global blacklist filter.
  */
-- (void)setGlobalBlacklistFilter:(AERDomainFilter *)filter;
+- (void)setSubscriptionsFilters:(NSDictionary<NSString*, AERDomainFilter *>*) filters;
 
 /**
  Sets user whitelist filter.
@@ -114,7 +114,7 @@
 /**
  Checks domain name, that it is included in global blacklist.
  */
-- (BOOL)isGlobalBlacklistDomain:(NSString *)domainName;
+- (BOOL)checkSubscriptionBlacklistDomain:(NSString *)domainName subscriptionUUID:(NSString**)uuid;
 
 /**
  Checks domain name, that it is included in user whitelist.
@@ -131,7 +131,7 @@
 /**
  Checks domain name, that it is included in hosts list.
  */
-- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString**)ip;
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString**)ip subscriptionUUID:(NSString**)subscriptionUUID;
 
 /**
  Returns IP address of the whitelist DNS server for appropriate DNS server.

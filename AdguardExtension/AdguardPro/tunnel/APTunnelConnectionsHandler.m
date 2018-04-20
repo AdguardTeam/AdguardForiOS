@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,13 +54,13 @@
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
     
     AERDomainFilter *_globalWhitelist;
-    AERDomainFilter *_globalBlacklist;
     
     AERDomainFilter *_userWhitelist;
     AERDomainFilter *_userBlacklist;
     AERDomainFilter *_trackersList;
     NSDictionary *_hosts;
-    NSDictionary *_subscriptionsHosts;
+    NSDictionary<NSString*, NSDictionary<NSString*, NSString*>*> *_subscriptionsHosts;
+    NSDictionary<NSString*, AERDomainFilter*> *_subscriptionsFilters;
     
     BOOL _packetFlowObserver;
     
@@ -177,10 +177,10 @@
     OSSpinLockUnlock(&_globalWhitelistLock);
 }
 
-- (void)setGlobalBlacklistFilter:(AERDomainFilter *)filter {
+- (void)setSubscriptionsFilters:(NSDictionary<NSString *,AERDomainFilter *> *)filters {
     
     OSSpinLockLock(&_globalBlacklistLock);
-    _globalBlacklist = filter;
+    _subscriptionsFilters = filters;
     OSSpinLockUnlock(&_globalBlacklistLock);
 }
 
@@ -309,12 +309,22 @@
     return result;
 }
 
-- (BOOL)isGlobalBlacklistDomain:(NSString *)domainName {
+- (BOOL)checkSubscriptionBlacklistDomain:(NSString *)domainName subscriptionUUID:(NSString *__autoreleasing *)uuid{
     
-    BOOL result = NO;
+    __block BOOL result = NO;
+    __block NSString* foundUUID;
     OSSpinLockLock(&_globalBlacklistLock);
+
+    [_subscriptionsFilters enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull subscriptionUUID, AERDomainFilter * _Nonnull filter, BOOL * _Nonnull stop) {
+        
+        if([filter filteredDomain:domainName]) {
+            result = YES;
+            foundUUID = subscriptionUUID;
+            *stop = YES;
+        }
+    }];
     
-    result = [_globalBlacklist filteredDomain:domainName];
+    *uuid = foundUUID;
     
     OSSpinLockUnlock(&_globalBlacklistLock);
     
@@ -357,21 +367,32 @@
     return result;
 }
 
-- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip {
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip subscriptionUUID:(NSString *__autoreleasing *)subscriptionUUID{
     
     BOOL result = NO;
     OSSpinLockLock(&_hostsLock);
     
-    NSString* foundIp = _hosts[domainName];
+    __block NSString* foundIp = _hosts[domainName];
+    __block NSString* foundUUID = nil;
+    
     if(foundIp) {
         result = YES;
         *ip = foundIp;
     }
     else {
-        foundIp = _subscriptionsHosts[domainName];
+        [_subscriptionsHosts enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull uuid, NSDictionary* _Nonnull hosts, BOOL * _Nonnull stop) {
+            
+            foundIp = hosts[domainName];
+            if(foundIp) {
+                foundUUID = uuid;
+                *stop = YES;
+            }
+        }];
+        
         if(foundIp) {
             result = YES;
             *ip = foundIp;
+            *subscriptionUUID = foundUUID;
         }
     }
     

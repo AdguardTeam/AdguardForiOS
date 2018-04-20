@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -225,8 +225,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
     
-    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-    AEUIMainController *main = nav.viewControllers[0];
+    UINavigationController *nav = [self getNavigationController];
+    
+    AEUIMainController *main = nav.viewControllers.firstObject;
     
     if ([main isKindOfClass:[AEUIMainController class]]) {
         
@@ -287,26 +288,29 @@ typedef void (^AEDownloadsCompletionBlock)();
             return;
         }
         
+        BOOL checkResult = [self checkAutoUpdateConditions];
+        
 #ifdef PRO
         if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
             
-            [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
-                
-                [APVPNManager.singleton sendReloadSystemWideDomainLists];
-                completionHandler(UIBackgroundFetchResultNewData);
-            } errorBlock:^(NSError * error) {
-                
-                completionHandler(UIBackgroundFetchResultFailed);
-            } completionBlock:nil];
-           
-            return;
+            if (!checkResult) {
+                DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch subscriptions. App settings permit updates only over WiFi.");
+            }
+            else {
+                [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
+                    
+                    [APVPNManager.singleton sendReloadSystemWideDomainLists];
+                    completionHandler(UIBackgroundFetchResultNewData);
+                } errorBlock:^(NSError * error) {
+                    
+                    completionHandler(UIBackgroundFetchResultFailed);
+                } completionBlock:nil];
+            }
         }
 #endif
         
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
-        
-        BOOL checkResult = [self checkAutoUpdateConditions];
         
         [[AEService singleton] onReady:^{
             
@@ -316,7 +320,6 @@ typedef void (^AEDownloadsCompletionBlock)();
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
-                
                 
                 if (!checkResult) {
                     DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.");
@@ -378,9 +381,9 @@ typedef void (^AEDownloadsCompletionBlock)();
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
                         
-                        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+                        UINavigationController *nav = [self getNavigationController];
                         if (nav.viewControllers.count) {
-                            AEUIMainController *main = nav.viewControllers[0];
+                            AEUIMainController *main = nav.viewControllers.firstObject;
                             if ([main isKindOfClass:[AEUIMainController class]]) {
                                 
                                 [main addRuleToUserFilter:path];
@@ -403,7 +406,8 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         NSString *command = url.host;
         
-        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        UINavigationController *nav = [self getNavigationController];
+        
         AEUIMainController *main = nav.viewControllers.firstObject;
         
         if(!main){
@@ -727,6 +731,17 @@ typedef void (^AEDownloadsCompletionBlock)();
     }
     
     return result;
+}
+
+- (UINavigationController*) getNavigationController {
+    
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    
+    if(![nav isKindOfClass:[UINavigationController class]]) {
+        return nil;
+    }
+    
+    return nav;
 }
 
 @end
