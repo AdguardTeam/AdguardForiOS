@@ -26,6 +26,7 @@
 #include "simpleconf.h"
 #include "options.h"
 #include "logger.h"
+#include "sandboxes.h"
 
 @interface APDnscryptService() {
 
