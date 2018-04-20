@@ -429,7 +429,11 @@ static APVPNManager *singletonVPNManager;
 - (void)sendReloadSystemWideDomainLists {
     
     _lastError = nil;
-    if (_manager.connection) {
+    
+    // We check status to prevent strange behaviour in some cases.
+    // A known case is on ios 11 if we send a message to the disabled provider after rebooting the device, then the tunel process will never start.
+    // https://github.com/AdguardTeam/AdguardForiOS/issues/752
+    if (_manager.connection && _manager.enabled) {
         
         NSData *message = [APSharedResources host2tunnelMessageSystemWideDomainListReload];
         NSError *err = nil;
