@@ -527,7 +527,7 @@ typedef void (^AEDownloadsCompletionBlock)();
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [ACSSystemUtils showSimpleAlertForController:self.navigation.topViewController withTitle: NSLocalizedString(@"Error", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:NSLocalizedString(@"Filters cannot be loaded into Safari. Try to clear your rules and the whitelist, or change the set of used filters.", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
+                        [ACSSystemUtils showSimpleAlertForController:self.navigation.topViewController withTitle: NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:NSLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
                     });
                 }
             }

@@ -135,7 +135,7 @@
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove Server", @"(APUIAdguardDNSController) PRO version. Button text for deleting a custom DNS server.")
+    UIAlertAction * action = [UIAlertAction actionWithTitle:NSLocalizedString(@"remove_server_caption", @"(APUIAdguardDNSController) PRO version. Button text for deleting a custom DNS server.")
                                                           style:UIAlertActionStyleDestructive
                                                           handler:^(UIAlertAction * action) {
                                                               
@@ -146,7 +146,7 @@
     
     [sheet addAction:action];
 
-    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(APUIAdguardDNSController) PRO version. Text on the button that cancels the deleting of a custom DNS server.")
+    action = [UIAlertAction actionWithTitle:NSLocalizedString(@"common_action_cancel", @"(APUIAdguardDNSController) PRO version. Text on the button that cancels the deleting of a custom DNS server.")
                                                       style:UIAlertActionStyleCancel
                                                     handler:nil];
     

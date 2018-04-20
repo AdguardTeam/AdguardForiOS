@@ -249,13 +249,13 @@
 
 - (void) requestResetStatisticsWithCompletionBlock:(void(^)(BOOL))completionBlock {
     
-    NSString* message = NSLocalizedString(@"Do you want to reset the statistics along with clearing the log", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
+    NSString* message = NSLocalizedString(@"reset_statistics", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
     
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Clear log and reset statistics", @"DNS Request log-> Reset -> Clear DNS log and statistic option.") style:UIAlertActionStyleDestructive
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"clear_log_and_statistic_action", @"DNS Request log-> Reset -> Clear DNS log and statistic option.") style:UIAlertActionStyleDestructive
                                                       handler:^(UIAlertAction * action) {
                                                           
                                                           [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsTime];
@@ -267,7 +267,7 @@
                                                               completionBlock(YES);
                                                       }];
     
-    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Clear log", @"DNS Request log-> Reset -> Clear DNS log only option.") style:UIAlertActionStyleDefault
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"clear_log_action", @"DNS Request log-> Reset -> Clear DNS log only option.") style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * action) {
                                                           
                                                           [self dismissViewControllerAnimated:YES completion:nil];
@@ -275,7 +275,7 @@
                                                               completionBlock(YES);
                                                       }];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel Button caption in alert") style:UIAlertActionStyleCancel
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common_action_cancel", @"Cancel Button caption in alert") style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * action) {
                                                          
                                                          [self dismissViewControllerAnimated:YES completion:nil];

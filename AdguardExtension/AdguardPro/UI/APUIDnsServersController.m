@@ -116,7 +116,7 @@
     [super viewDidAppear:animated];
     
     if(![ACNIPUtils isIpv4Available] && [ACNIPUtils isIpv6Available]) {
-        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(APUIAdguardDNSController) PRO version. Alert title. On warning.") message:NSLocalizedString(@"You are connecteed to the ipv6-only network. In such networks you can not use custom DNS servers. The 'System default' DNS setting will be used instead.", @"(APUIAdguardDNSController) Alert message. When custom dns not available.")];
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"common_warning_title", @"(APUIAdguardDNSController) PRO version. Alert title. On warning.") message:NSLocalizedString(@"ipv6_network_connection", @"(APUIAdguardDNSController) Alert message. When custom dns not available.")];
     }
 }
 
@@ -366,7 +366,7 @@
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
-         withTitle:NSLocalizedString(@"Error",
+         withTitle:NSLocalizedString(@"common_error_title",
                                      @"(APUIAdguardDNSController) PRO version. Alert title. On error.")
          message:manager.lastError.localizedDescription];
     }
