@@ -44,18 +44,23 @@
     self.versionLabel.text = [ADProductInfo versionWithBuildNumber];
     
     // remove cell separator
-    for (UIView *view in self.howToEnableCell.subviews){
+    for (UIView *view in self.manageContentBlockerCell.subviews){
         
-        if(view != self.howToEnableCell.contentView) {
+        if(view != self.manageContentBlockerCell.contentView) {
             [view removeFromSuperview];
         }
     }
-    for (UIView *view in self.howToAddRulesCell.subviews){
+    for (UIView *view in self.managePrivacySettingsCell.subviews){
         
-        if(view != self.howToAddRulesCell.contentView) {
+        if(view != self.managePrivacySettingsCell.contentView) {
             [view removeFromSuperview];
         }
     }
+    
+#ifndef PRO
+    [self cell: self.managePrivacySettingsCell setHidden:YES];
+    [self reloadDataAnimated:NO];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

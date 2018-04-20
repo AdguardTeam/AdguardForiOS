@@ -176,8 +176,11 @@
     [self cells:self.proSectionCells setHidden:YES];
     [self cells:self.privacySettingsCells setHidden:YES];
     
+    [self cell:self.managePrivacySettingsVideoCell setHidden:YES];
+    
     self.getProButton.enabled = YES;
     self.getProButton.title = @"Get PRO";
+    
     
 #endif
     
@@ -216,8 +219,8 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     
-    [self setupSwipeCell:self.videoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
-    [self setupSwipeCell:self.safariVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
+    [self setupSwipeCell:self.manageContentBlockerVideoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
+    [self setupSwipeCell:self.managePrivacySettingsVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
     
     [self swipeCells];
     
@@ -234,19 +237,19 @@
     // on ios 9 ipad cell the background color defined in the storyboard is ignored
     if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
         UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
-        self.videoCell.backgroundColor = self.safariVideoCell.backgroundColor = UIColor.clearColor;
+        self.manageContentBlockerVideoCell.backgroundColor = self.managePrivacySettingsVideoCell.backgroundColor = UIColor.clearColor;
     }
 }
 
 - (void) swipeCells {
     [UIView animateWithDuration:0.5 animations:^{
-        CGRect frame = self.videoCell.contentView.frame;
+        CGRect frame = self.manageContentBlockerVideoCell.contentView.frame;
         frame.origin.x += 70;
-        self.videoCell.contentView.frame = frame;
+        self.manageContentBlockerVideoCell.contentView.frame = frame;
 
-        frame = self.safariVideoCell.contentView.frame;
+        frame = self.managePrivacySettingsVideoCell.contentView.frame;
         frame.origin.x += 70;
-        self.safariVideoCell.contentView.frame = frame;
+        self.managePrivacySettingsVideoCell.contentView.frame = frame;
     }];
 }
 
@@ -447,13 +450,13 @@
     else if ([segue.identifier isEqualToString:TO_SAFARI_VIDEO_SEGUE_ID]) {
         AEUIPlayerViewController* destination = [segue destinationViewController];
         destination.completionBlock = ^{
-            [self.safariVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+            [self.managePrivacySettingsVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
         };
     }
     else if ([segue.identifier isEqualToString:TO_SETTINGS_VIDEO_SEGUE_ID]) {
         AEUIPlayerViewController* destination = [segue destinationViewController];
         destination.completionBlock = ^{
-            [self.videoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+            [self.manageContentBlockerVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
         };
     }
     

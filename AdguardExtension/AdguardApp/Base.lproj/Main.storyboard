@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="73U-9Z-0yf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="73U-9Z-0yf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Unknown constraint types" minToolsVersion="5.1"/>
@@ -1208,9 +1209,9 @@
         <scene sceneID="YKn-bw-3Em">
             <objects>
                 <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="uAJ-kc-09e" userLabel="Enabling Adguard Video" customClass="AEUIPlayerViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="How to enable AdGuard" id="66c-w8-jTW"/>
+                    <navigationItem key="navigationItem" title="How to use AdGuard with Safari" id="66c-w8-jTW"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="videoName" value="EnablingAdguardVideo"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="videoName" value="ManageContentBlocker"/>
                     </userDefinedRuntimeAttributes>
                 </avPlayerViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qC1-bj-uw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1259,7 +1260,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to enable AdGuard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpT-Zt-7rJ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to use AdGuard with Safari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpT-Zt-7rJ">
                                                     <rect key="frame" x="22" y="83.5" width="278" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1293,7 +1294,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage AdGuard from Safari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcI-Mf-jSz">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to use the Privacy module" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcI-Mf-jSz">
                                                     <rect key="frame" x="22" y="86.5" width="278" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1870,15 +1871,15 @@
                         <outlet property="headerView" destination="eTw-lb-aHG" id="WW7-Ie-68d"/>
                         <outlet property="lastUpdated" destination="RT7-z3-fTa" id="g5U-Em-Lnf"/>
                         <outlet property="mailButton" destination="VUm-f4-Rox" id="hct-ue-nbH"/>
+                        <outlet property="manageContentBlockerVideoCell" destination="pMP-oJ-FLr" id="L49-kr-1Wz"/>
+                        <outlet property="managePrivacySettingsVideoCell" destination="FAI-NO-RQN" id="7eT-bf-H3K"/>
                         <outlet property="messageButton" destination="9z6-O6-QzV" id="owd-Me-AX7"/>
                         <outlet property="proDnsSettingsCell" destination="Joi-V0-XOO" id="dAd-sx-oEM"/>
                         <outlet property="proStatusSwitch" destination="c8v-o9-dAV" id="J0T-q2-oil"/>
-                        <outlet property="safariVideoCell" destination="FAI-NO-RQN" id="mJ4-G6-Ayq"/>
                         <outlet property="shareCell" destination="Rco-UW-TcV" id="hmv-oC-rWb"/>
                         <outlet property="totalRequestsCountLabel" destination="6sx-af-GTJ" id="HDd-8E-Rkt"/>
                         <outlet property="trackersCountLabel" destination="Bya-27-nLj" id="hht-dE-2Xr"/>
                         <outlet property="twitterButton" destination="d2O-oQ-yhe" id="C9N-Jp-2E3"/>
-                        <outlet property="videoCell" destination="pMP-oJ-FLr" id="L49-kr-1Wz"/>
                         <outlet property="whitelistLabel" destination="eMs-Eq-7wW" id="5Xu-2B-3vS"/>
                         <outletCollection property="proSectionCells" destination="Joi-V0-XOO" id="JEI-ww-jBf"/>
                         <outletCollection property="proSectionCells" destination="pn8-1c-rSh" id="14z-sQ-cLQ"/>
@@ -1965,7 +1966,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How to enable AdGuard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6W-tp-q7h">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How to use AdGuard with Safari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6W-tp-q7h">
                                                     <rect key="frame" x="12" y="85" width="295" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1992,7 +1993,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manage AdGuard from Safari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUT-ES-QdV">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How to use the Privacy module" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUT-ES-QdV">
                                                     <rect key="frame" x="12" y="85" width="328" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2135,8 +2136,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="About" id="oWj-Lf-Mp9"/>
                     <connections>
-                        <outlet property="howToAddRulesCell" destination="vD2-hA-QP9" id="DDe-kI-d1H"/>
-                        <outlet property="howToEnableCell" destination="2R6-cH-Phd" id="9w0-N7-RTG"/>
+                        <outlet property="manageContentBlockerCell" destination="2R6-cH-Phd" id="9w0-N7-RTG"/>
+                        <outlet property="managePrivacySettingsCell" destination="vD2-hA-QP9" id="kUC-HE-5Y0"/>
                         <outlet property="versionLabel" destination="pbW-bh-F53" id="dJU-Er-h3b"/>
                     </connections>
                 </tableViewController>
@@ -2345,7 +2346,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPE-x4-joS">
-                                        <rect key="frame" x="72" y="56.5" width="0.0" height="8"/>
+                                        <rect key="frame" x="72.5" y="56.5" width="0.0" height="8"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -2358,7 +2359,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="750" image="welcome-logo" translatesAutoresizingMaskIntoConstraints="NO" id="r9M-88-fab">
-                                        <rect key="frame" x="22" y="72.5" width="100" height="104"/>
+                                        <rect key="frame" x="22.5" y="72.5" width="100" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="305" id="xE2-xx-1Ck"/>
                                             <constraint firstAttribute="height" constant="199" id="xRj-qR-mHR"/>
@@ -2371,7 +2372,7 @@
                                         </variation>
                                     </imageView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOu-B1-AiG">
-                                        <rect key="frame" x="57" y="176.5" width="30" height="0.0"/>
+                                        <rect key="frame" x="57.5" y="176.5" width="30" height="0.0"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -2822,9 +2823,9 @@
         <scene sceneID="2sm-SA-NOt">
             <objects>
                 <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="N5l-JJ-jQH" userLabel="Adguard From Safari Video" customClass="AEUIPlayerViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Using AdGuard from Safari" id="JIB-kQ-gBg"/>
+                    <navigationItem key="navigationItem" title="How to use the Privacy module" id="JIB-kQ-gBg"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="videoName" value="SafariAdguardVideo"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="videoName" value="ManagePrivacySettings"/>
                     </userDefinedRuntimeAttributes>
                 </avPlayerViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfN-eV-3b5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3675,8 +3676,8 @@
         <image name="welcome-logo" width="100" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="33m-zD-2JG"/>
-        <segue reference="Pq7-GC-pTF"/>
+        <segue reference="Y5L-OH-uCC"/>
+        <segue reference="cER-G1-xll"/>
         <segue reference="MKF-oV-GeK"/>
         <segue reference="uD1-XP-a5e"/>
     </inferredMetricsTieBreakers>
