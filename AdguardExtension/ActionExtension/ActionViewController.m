@@ -126,7 +126,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
-    __block NSString *errorMessage = NSLocalizedString(@"support_error_safari_extension", @"(Action Extension - ActionViewController) Some errors when starting.");
+    __block NSString *errorMessage = ACLocalizedString(@"support_error_safari_extension", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -150,7 +150,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
             else if ([NSString isNullOrEmpty:_host]) {
                 
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
-                errorMessage = NSLocalizedString(@"hostname_obtaining_error", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
+                errorMessage = ACLocalizedString(@"hostname_obtaining_error", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
                 
@@ -278,7 +278,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         
         DDLogError(@"(ActionViewController) production DB was not created before.");
         NSString *messageFormat =
-        NSLocalizedString(@"action_extension_no_configuration_message_format",
+        ACLocalizedString(@"action_extension_no_configuration_message_format",
                           @"(Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app.");
         return [NSError errorWithDomain:AEActionErrorDomain
                                    code:AE_ACTION_ERROR_NODB

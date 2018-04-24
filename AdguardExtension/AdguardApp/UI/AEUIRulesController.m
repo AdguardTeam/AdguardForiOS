@@ -40,10 +40,10 @@
     
     AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
-    rulesList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"custom_rules_hint",
+    rulesList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString: ACLocalizedString(@"custom_rules_hint",
                                                                                                            @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. This is the text shown when the User Filter is empty.")];
     
-    rulesList.navigationItem.title = NSLocalizedString(@"user_filter_title", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
+    rulesList.navigationItem.title = ACLocalizedString(@"user_filter_title", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
     
     rulesList.showFilterRules = YES;
     

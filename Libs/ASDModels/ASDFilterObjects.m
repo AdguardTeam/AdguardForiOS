@@ -617,7 +617,7 @@
         
         _filterId = @(ASDF_USER_FILTER_ID);
         _ruleId = @(0);
-        _ruleText = NSLocalizedString(@"!------- Enter a rule here.. ---------!", @"Create empty rule - ASDatabaseObjects");
+        _ruleText = ACLocalizedString(@"!------- Enter a rule here.. ---------!", @"Create empty rule - ASDatabaseObjects");
         _isEnabled = @(0);
     }
     

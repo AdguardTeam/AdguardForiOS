@@ -78,7 +78,7 @@
         
         controller.done = ^(UIViewController* _Nonnull sender, APBlockingSubscription * _Nonnull subscription) {
             
-            NSString *message = NSLocalizedString(@"filters_loading_text", @"(APBlockingListsController) blocking list loading message");
+            NSString *message = ACLocalizedString(@"filters_loading_text", @"(APBlockingListsController) blocking list loading message");
             [AEUILoadingModal.singleton loadingModalShowWithParent:sender message:message cancelAction:nil completion:^{
                 
                 [ABECSubscription.singleton downloadSubscription:subscription.url completionBlock:^(NSArray *rules, NSDictionary *hosts) {
@@ -146,14 +146,14 @@
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
         
         domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
-                                                   NSLocalizedString(@"domain_name_listing",
+                                                   ACLocalizedString(@"domain_name_listing",
                                                                      @"(APUIAdguardDNSController) PRO version. On the Privacy Settings -> Blacklist (Whitelist) screen. The placeholder text.")];
         
         domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
         
         domainList.navigationItem.title = toWhitelist
-        ? NSLocalizedString(@"whitelist_title", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
-        : NSLocalizedString(@"blacklist_title", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
+        ? ACLocalizedString(@"whitelist_title", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
+        : ACLocalizedString(@"blacklist_title", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
         ASSIGN_WEAK(self);
@@ -396,7 +396,7 @@
         newCell.textLabel.text = subscription.name;
         
         if(subscription.rulesCount) {
-            NSString* countFormat = NSLocalizedString(@"rules_counter_format", @"(APBlockingListsController) blocking list rules count format");
+            NSString* countFormat = ACLocalizedString(@"rules_counter_format", @"(APBlockingListsController) blocking list rules count format");
             newCell.detailTextLabel.text = [NSString stringWithFormat:countFormat, subscription.rulesCount];
         }
         
@@ -446,7 +446,7 @@
 
 - (NSAttributedString*) footerText {
     
-    NSString *htmlString = NSLocalizedString(@"privacy_module_rules_subscriptions", @"(APBlockingListsController) Blocking subscriptions footer text");
+    NSString *htmlString = ACLocalizedString(@"privacy_module_rules_subscriptions", @"(APBlockingListsController) Blocking subscriptions footer text");
     
     NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     

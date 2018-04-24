@@ -134,7 +134,7 @@
             }
         }
         
-        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"button_hide_video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
+        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:ACLocalizedString(@"button_hide_video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
         [hideButton centerIconOverText];
         
         hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
@@ -157,7 +157,7 @@
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
-                             initWithTitle:NSLocalizedString(@"common_action_cancel",
+                             initWithTitle:ACLocalizedString(@"common_action_cancel",
                                                              @"(AEUIMainController) Text on the button that cancels an operation.")
                              style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
@@ -299,8 +299,8 @@
 - (IBAction)clickShare:(id)sender {
     
     NSString *message = [NSString stringWithFormat:@"%@\n%@\n",
-                                          NSLocalizedString(@"share_mail_body_text", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
-                                          NSLocalizedString(@"share_mail_body_subtext", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
+                                          ACLocalizedString(@"share_mail_body_text", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
+                                          ACLocalizedString(@"share_mail_body_subtext", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
     message = [message stringByAppendingFormat:SHARE_APP_URL_STRING];
     
     NSArray *items = @[message, [UIImage imageNamed:@"share-logo"]];
@@ -529,7 +529,7 @@
             inverted = [value boolValue];
         }
         
-        self.whitelistLabel.text = inverted ? NSLocalizedString(@"inverted_whitelist_title", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"whitelist_title", @"Main Controller. Whitelist cell caption");
+        self.whitelistLabel.text = inverted ? ACLocalizedString(@"inverted_whitelist_title", @"Main Controller. Inverted whitelist cell caption") : ACLocalizedString(@"whitelist_title", @"Main Controller. Whitelist cell caption");
     }
 }
 
@@ -654,7 +654,7 @@
                         if (updatedMetas.count) {
 
                           NSString *format =
-                              NSLocalizedString(@"filters_updated_%lu",
+                              ACLocalizedString(@"filters_updated_%lu",
                                                 @"(AEUIMainController) Button "
                                                 @"- Check Filter Updates");
                           self.checkFiltersCell.textLabel.text = [NSString
@@ -662,7 +662,7 @@
                         } else {
 
                           self.checkFiltersCell.textLabel.text =
-                              NSLocalizedString(@"filters_noUpdates",
+                              ACLocalizedString(@"filters_noUpdates",
                                                 @"(AEUIMainController) Button "
                                                 @"- Check Filter Updates");
                         }
@@ -701,7 +701,7 @@
                   dispatch_async(dispatch_get_main_queue(), ^{
 
                     // setting text of result on "Check Filter Updates"
-                    self.checkFiltersCell.textLabel.text = NSLocalizedString(
+                    self.checkFiltersCell.textLabel.text = ACLocalizedString(
                         @"Filters update error",
                         @"(AEUIMainController) Button - Check Filter Updates");
                   });
@@ -732,20 +732,20 @@
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"common_action_cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:ACLocalizedString(@"common_action_cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"incorrect_blocking_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:ACLocalizedString(@"incorrect_blocking_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
         [self openUrl:reportUrl];
     }]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"action_bug_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:ACLocalizedString(@"action_bug_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         [self openUrl:[NSURL URLWithString: BUGREPORT_URL]];
     }]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"action_contact_support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:ACLocalizedString(@"action_contact_support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         [[AESSupport singleton] sendMailBugReportWithParentController:self];
     }]];
@@ -773,7 +773,7 @@
         NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
         NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
         
-        warningText = [NSString stringWithFormat:NSLocalizedString(@"safari_rules_enabled", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
+        warningText = [NSString stringWithFormat:ACLocalizedString(@"safari_rules_enabled", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
     }
     
     if (warningText) {
@@ -872,7 +872,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"privacy_module_description", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
+    return ACLocalizedString(@"privacy_module_description", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -892,12 +892,12 @@
     if(manager.enabled)
         self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     else
-        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"common_switch_off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
+        self.proDnsSettingsCell.detailTextLabel.text = ACLocalizedString(@"common_switch_off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
     
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
-         withTitle:NSLocalizedString(@"common_error_title",
+         withTitle:ACLocalizedString(@"common_error_title",
                                      @"(APUIAdguardDNSCon"
                                      @"troller) PRO "
                                      @"version. Alert "
@@ -946,7 +946,7 @@
     int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
     float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
     float averageTime = count ? time * 1000 / count : 0;
-    NSString* format = NSLocalizedString(@"average_time_format", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
+    NSString* format = ACLocalizedString(@"average_time_format", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
     self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
 }
 

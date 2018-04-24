@@ -117,7 +117,7 @@ typedef enum : NSUInteger {
     _invertWhitelistSwitch.on = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
 #ifdef PRO
-    self.htmlString = NSLocalizedString(@"pro_modes_description", @"Advanced settings - tunnel mode description");
+    self.htmlString = ACLocalizedString(@"pro_modes_description", @"Advanced settings - tunnel mode description");
     
     // convert html string to attributed string
     NSData *data = [self.htmlString dataUsingEncoding:NSUTF8StringEncoding];

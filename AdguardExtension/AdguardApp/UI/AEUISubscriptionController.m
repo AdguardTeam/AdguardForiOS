@@ -77,7 +77,7 @@
     [self updateSearchResultsForSearchController:self.searchController];
     
     // set toolbar items
-    self.filterInfo.text = NSLocalizedString(@"loading_info_title", @"(AEUISubscriptionController) Title on bottom bar.");
+    self.filterInfo.text = ACLocalizedString(@"loading_info_title", @"(AEUISubscriptionController) Title on bottom bar.");
     self.rulesInfo.text = @"";
 
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -171,7 +171,7 @@
                 }
             }
 
-            NSString* filterInfoText = [NSString stringWithFormat:NSLocalizedString(@"enabled_filters_format", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
+            NSString* filterInfoText = [NSString stringWithFormat:ACLocalizedString(@"enabled_filters_format", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
             NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
             NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
 
@@ -180,11 +180,11 @@
                 self.filterInfo.text = filterInfoText;
                 if (totalRulesCount > rulesCount) {
                     self.rulesInfo.textColor = AEUIC_WARNING_COLOR;
-                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"enabled_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status. When overlimit occured."), rulesCount, totalRulesCount];
+                    self.rulesInfo.text = [NSString stringWithFormat:ACLocalizedString(@"enabled_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status. When overlimit occured."), rulesCount, totalRulesCount];
                 }
                 else{
                     self.rulesInfo.textColor = [UIColor lightGrayColor];
-                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"active_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
+                    self.rulesInfo.text = [NSString stringWithFormat:ACLocalizedString(@"active_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
                 }
             });
         }
@@ -470,7 +470,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         if (self.tableView.editing) {
             // EDIT MODE
             
-            UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"clear_selected_caption", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
+            UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:ACLocalizedString(@"clear_selected_caption", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
 
             UIBarButtonItem *itemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(editDoneClick:)];
             
@@ -572,7 +572,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             // install filters in background task
             // Subscribe
             AEUILoadingModal *modal = [AEUILoadingModal singleton];
-            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"loading_filters_caption", @"(AEUISubscriptionController) When toggling Done button in edit mode and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
+            [modal loadingModalShowWithParent:self message:ACLocalizedString(@"loading_filters_caption", @"(AEUISubscriptionController) When toggling Done button in edit mode and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
                 
                 dispatch_async(
                                dispatch_get_global_queue(
@@ -604,7 +604,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
                                                [self editDoneClick:self];
                                                
                                                
-                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
+                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:ACLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
                                                
                                            }
                                            else{

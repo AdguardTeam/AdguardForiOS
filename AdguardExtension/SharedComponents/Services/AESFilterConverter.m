@@ -155,7 +155,7 @@ NSString *AESFConverterError = @"AESFConverterError";
         }
     }
     
-    NSString *message = NSLocalizedString(@"support_rule_converting_error", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
+    NSString *message = ACLocalizedString(@"support_rule_converting_error", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
     NSError *error = [NSError errorWithDomain:AESFConverterError code:AESF_ERROR_WRONG_DICTIONARY userInfo:@{NSLocalizedDescriptionKey: message}];
     
     return @{AESFConvertedErrorKey: error};

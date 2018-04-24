@@ -107,10 +107,10 @@
                 
                 APDnsServerObject *activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
              
-                NSString* format = NSLocalizedString(@"connected_to_server_format", @"Today widget - text when remote DNS is enabled");
+                NSString* format = ACLocalizedString(@"connected_to_server_format", @"Today widget - text when remote DNS is enabled");
                 USE_STRONG(self).mainTextLabel.text = [NSString stringWithFormat:format, activeRemoteDnsServer.serverName];
                 
-                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"disable_dns_filtering", @"Today widget - hint text");
+                USE_STRONG(self).detailTextLabel.text = ACLocalizedString(@"disable_dns_filtering", @"Today widget - hint text");
                 
                 [USE_STRONG(self).mainTextLabel sizeToFit];
                 
@@ -124,11 +124,11 @@
             }
             else {
         
-                USE_STRONG(self).mainTextLabel.text = NSLocalizedString(@"dns_filtering_disabled", @"Today widget - text when remote DNS is disabled");
+                USE_STRONG(self).mainTextLabel.text = ACLocalizedString(@"dns_filtering_disabled", @"Today widget - text when remote DNS is disabled");
                 
                 [USE_STRONG(self).mainTextLabel sizeToFit];
 
-                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"enable_dns_filtering", @"Today widget - hint text");
+                USE_STRONG(self).detailTextLabel.text = ACLocalizedString(@"enable_dns_filtering", @"Today widget - hint text");
 
                 USE_STRONG(self).logo.alpha = 0.5;
             }
