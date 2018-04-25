@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,6 +60,7 @@
     self.searchController.searchBar.tintColor = [UIColor blackColor];
     self.searchController.searchBar.backgroundColor = [UIColor blackColor];
     self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
+    self.searchController.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTintColor:[UIColor lightGrayColor]];
     
@@ -76,7 +77,7 @@
     [self updateSearchResultsForSearchController:self.searchController];
     
     // set toolbar items
-    self.filterInfo.text = NSLocalizedString(@"Loading info...", @"(AEUISubscriptionController) Title on bottom bar.");
+    self.filterInfo.text = NSLocalizedString(@"loading_info_title", @"(AEUISubscriptionController) Title on bottom bar.");
     self.rulesInfo.text = @"";
 
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -170,7 +171,7 @@
                 }
             }
 
-            NSString* filterInfoText = [NSString stringWithFormat:NSLocalizedString(@"Filters enabled: %1$lu out of %2$lu", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
+            NSString* filterInfoText = [NSString stringWithFormat:NSLocalizedString(@"enabled_filters_format", @"(AEUISubscriptionController) Filter info, in bottom status."), enabledCount, count];
             NSUInteger rulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules] unsignedIntegerValue];
             NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
 
@@ -179,11 +180,11 @@
                 self.filterInfo.text = filterInfoText;
                 if (totalRulesCount > rulesCount) {
                     self.rulesInfo.textColor = AEUIC_WARNING_COLOR;
-                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"Enabled rules: %2$lu Active rules: %1$lu", @"(AEUISubscriptionController) Rules info, in bottom status. When overlimit occured."), rulesCount, totalRulesCount];
+                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"enabled_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status. When overlimit occured."), rulesCount, totalRulesCount];
                 }
                 else{
                     self.rulesInfo.textColor = [UIColor lightGrayColor];
-                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"Active filter rules: %lu", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
+                    self.rulesInfo.text = [NSString stringWithFormat:NSLocalizedString(@"active_rules_format", @"(AEUISubscriptionController) Rules info, in bottom status."), rulesCount];
                 }
             });
         }
@@ -469,7 +470,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         if (self.tableView.editing) {
             // EDIT MODE
             
-            UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Clear Selected", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
+            UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"clear_selected_caption", @"(AEUISubscriptionController) Clear all button in edit mode on filter list.") style:UIBarButtonItemStylePlain target:self action:@selector(clearAllClick:)];
 
             UIBarButtonItem *itemRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(editDoneClick:)];
             
@@ -571,7 +572,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             // install filters in background task
             // Subscribe
             AEUILoadingModal *modal = [AEUILoadingModal singleton];
-            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"Loading Filters...", @"(AEUISubscriptionController) When toggling Done button in edit mode and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
+            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"loading_filters_caption", @"(AEUISubscriptionController) When toggling Done button in edit mode and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
                 
                 dispatch_async(
                                dispatch_get_global_queue(
@@ -603,7 +604,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
                                                [self editDoneClick:self];
                                                
                                                
-                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"Cannot load filter from the server.", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
+                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
                                                
                                            }
                                            else{

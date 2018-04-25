@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,11 @@
 #import "AEUIFilterRuleObject.h"
 #import "AEUIUtils.h"
 #import "AEUIWhitelistController.h"
+#import "AEUIPlayerViewController.h"
+#import "AEUISelectableTableViewCell.h"
+
+#import <StoreKit/StoreKit.h>
+
 
 #ifdef PRO
 
@@ -42,13 +47,19 @@
 #import "AERDomainFilterRule.h"
 #import "APSharedResources.h"
 
-#define PRO_SECTION_INDEX               1
 #define NBSP_CODE                       @"\u00A0"
 #define LINK_URL_STRING                 @"https://adguard.com/adguard-dns/overview.html#overview"
 
+#endif
+
+#define VIDEO_SECTION_INDEX             0
+#define PRO_SECTION_INDEX               1
+
 #define VIDEO_IMAGE_MAX_HEIGHT 200
 
-#endif
+#define MIN_DAYS_TO_RATE_ME          7
+#define MIN_TIME_INTERVAL_TO_RATE_ME MIN_DAYS_TO_RATE_ME * 24 * 3600
+#define RATE_ME_TIME_AFTER_START     10 // seconds
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AEUIMainController Constants
@@ -68,6 +79,7 @@
 #define VIEW_ON_GITHUB              @"https://github.com/AdguardTeam/AdguardForiOS"
 #define OTHER_APPS_URL              @"http://agrd.io/ios_adguard_products"
 #define BUGREPORT_URL               @"http://agrd.io/report_ios_bug"
+#define GET_PRO_URL                 @"https://itunes.apple.com/app/apple-store/id1126386264?pt=31050800&ct=ios_app&mt=8"
 
 #define SHARE_APP_URL_STRING        SHARE_APP_URL_FORMAT, ITUNES_APP_ID
 
@@ -75,6 +87,9 @@
 
 #define TO_USER_FILTER_SEGUE_ID     @"toUserFilter"
 #define TO_WHITELIST_SEGUE_ID       @"toWhitelist"
+#define TO_SAFARI_VIDEO_SEGUE_ID    @"toSafariVideo"
+#define TO_SETTINGS_VIDEO_SEGUE_ID  @"toSettingsVideo"
+
 
 #define EDITOR_TEXT_FONT            [UIFont systemFontOfSize:[UIFont systemFontSize]]
 
@@ -92,6 +107,8 @@
     NSString *_ruleTextHolderForAddRuleCommand;
 
     UIBarButtonItem *_cancelNavigationItem;
+    
+    BOOL _contentBlockerEnabled;
 
 #ifdef PRO
     APUIProSectionFooter *_proFooter;
@@ -117,7 +134,7 @@
             }
         }
         
-        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"Hide Video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
+        MGSwipeButton *hideButton = [MGSwipeButton buttonWithTitle:NSLocalizedString(@"button_hide_video", @"Hide video button caption in main screen") icon:[UIImage imageNamed:@"hideIcon"] backgroundColor:[UIColor clearColor]];
         [hideButton centerIconOverText];
         
         hideButton.callback = ^BOOL(MGSwipeTableCell * _Nonnull cell) {
@@ -140,7 +157,7 @@
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     _cancelNavigationItem = [[UIBarButtonItem alloc]
-                             initWithTitle:NSLocalizedString(@"Cancel",
+                             initWithTitle:NSLocalizedString(@"common_action_cancel",
                                                              @"(AEUIMainController) Text on the button that cancels an operation.")
                              style:UIBarButtonItemStylePlain target:nil action:nil];
 #ifdef PRO
@@ -157,9 +174,13 @@
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cells:self.proSectionCells setHidden:YES];
+    [self cells:self.privacySettingsCells setHidden:YES];
+    
+    [self cell:self.managePrivacySettingsVideoCell setHidden:YES];
     
     self.getProButton.enabled = YES;
     self.getProButton.title = @"Get PRO";
+    
     
 #endif
     
@@ -198,8 +219,8 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
     
-    [self setupSwipeCell:self.videoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
-    [self setupSwipeCell:self.safariVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
+    [self setupSwipeCell:self.manageContentBlockerVideoCell swipeCellDefaultsKey:AEDefaultsHideVideoTutorial];
+    [self setupSwipeCell:self.managePrivacySettingsVideoCell swipeCellDefaultsKey:AEDefaultsHideSafariVideoTutorial];
     
     [self swipeCells];
     
@@ -211,17 +232,24 @@
 
     
     [AESharedResources.sharedDefaults addObserver:self forKeyPath:AEDefaultsInvertedWhitelist options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+    
+    // https://github.com/AdguardTeam/AdguardForiOS/issues/731
+    // on ios 9 ipad cell the background color defined in the storyboard is ignored
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
+        UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
+        self.manageContentBlockerVideoCell.backgroundColor = self.managePrivacySettingsVideoCell.backgroundColor = UIColor.clearColor;
+    }
 }
 
 - (void) swipeCells {
     [UIView animateWithDuration:0.5 animations:^{
-        CGRect frame = self.videoCell.contentView.frame;
+        CGRect frame = self.manageContentBlockerVideoCell.contentView.frame;
         frame.origin.x += 70;
-        self.videoCell.contentView.frame = frame;
+        self.manageContentBlockerVideoCell.contentView.frame = frame;
 
-        frame = self.safariVideoCell.contentView.frame;
+        frame = self.managePrivacySettingsVideoCell.contentView.frame;
         frame.origin.x += 70;
-        self.safariVideoCell.contentView.frame = frame;
+        self.managePrivacySettingsVideoCell.contentView.frame = frame;
     }];
 }
 
@@ -252,7 +280,7 @@
 
 - (IBAction)clickViewOnGitHub:(id)sender {
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:VIEW_ON_GITHUB] options:@{} completionHandler:nil];
+    [self openUrl: [NSURL URLWithString:VIEW_ON_GITHUB]];
 }
 
 - (IBAction)clickCheckForUpdates:(id)sender {
@@ -265,14 +293,14 @@
     NSURL *theURL =
     [NSURL URLWithString:[NSString stringWithFormat:RATE_APP_URL_FORMAT,
                           ITUNES_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [self openUrl:theURL];
 }
 
 - (IBAction)clickShare:(id)sender {
     
     NSString *message = [NSString stringWithFormat:@"%@\n%@\n",
-                                          NSLocalizedString(@"I've just installed Adguard AdBlocker for iOS.", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
-                                          NSLocalizedString(@"If you want to surf the web ad-free as I do, check it out:", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
+                                          NSLocalizedString(@"share_mail_body_text", @"(AEUIMainController) Share this app initial text on Mail Body (text row)"),
+                                          NSLocalizedString(@"share_mail_body_subtext", @"(AEUIMainController) Share this app initial text on Mail Body (before link row)")];
     message = [message stringByAppendingFormat:SHARE_APP_URL_STRING];
     
     NSArray *items = @[message, [UIImage imageNamed:@"share-logo"]];
@@ -295,9 +323,8 @@
 
 - (IBAction)clickGetPro:(id)sender {
     NSURL *theURL =
-    [NSURL URLWithString:[NSString stringWithFormat:SHARE_APP_URL_FORMAT,
-                          ITUNES_PRO_APP_ID]];
-    [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
+    [NSURL URLWithString:GET_PRO_URL];
+    [self openUrl:theURL];
 }
 
 #ifdef PRO
@@ -311,7 +338,7 @@
 
 - (IBAction)clickOtherApps:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:OTHER_APPS_URL] options:@{} completionHandler:nil];
+    [self openUrl:[NSURL URLWithString:OTHER_APPS_URL]];
 }
 
 
@@ -343,11 +370,9 @@
             
             ASSIGN_STRONG(self);
             
-            static BOOL status = NO;
-            
-            if(status != enabled) {
+            if(_contentBlockerEnabled != enabled) {
                 
-                status = enabled;
+                _contentBlockerEnabled = enabled;
                 
                 [USE_STRONG(self).starsLayer removeFromSuperlayer];
                 
@@ -358,9 +383,13 @@
                 USE_STRONG(self).starsLayer.fast = enabled;
                 
                 [headerView.layer addSublayer:USE_STRONG(self).starsLayer];
-                
-                self.disabledLabel.hidden = enabled;
             }
+            
+            self.disabledLabel.hidden = enabled;
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(RATE_ME_TIME_AFTER_START * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self showRateMeIfNeeded];
+            });
         });
     }];
 }
@@ -407,11 +436,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-#ifdef PRO
-    
-    
-#endif
-    
     if ([segue.identifier isEqualToString:TO_USER_FILTER_SEGUE_ID]){
 
         [AEUIRulesController createUserFilterControllerWithSegue:segue ruleTextHolderForAddRuleCommand:_ruleTextHolderForAddRuleCommand];
@@ -423,6 +447,19 @@
         UIViewController* destination = [segue destinationViewController];
         destination.navigationItem.title = self.whitelistLabel.text;
     }
+    else if ([segue.identifier isEqualToString:TO_SAFARI_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.managePrivacySettingsVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    else if ([segue.identifier isEqualToString:TO_SETTINGS_VIDEO_SEGUE_ID]) {
+        AEUIPlayerViewController* destination = [segue destinationViewController];
+        destination.completionBlock = ^{
+            [self.manageContentBlockerVideoCell showSwipe:MGSwipeDirectionRightToLeft animated:YES];
+        };
+    }
+    
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -492,8 +529,49 @@
             inverted = [value boolValue];
         }
         
-        self.whitelistLabel.text = inverted ? NSLocalizedString(@"Whitelist (inverted)", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"Whitelist", @"Main Controller. Whitelist cell caption");
+        self.whitelistLabel.text = inverted ? NSLocalizedString(@"inverted_whitelist_title", @"Main Controller. Inverted whitelist cell caption") : NSLocalizedString(@"whitelist_title", @"Main Controller. Whitelist cell caption");
     }
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark  Table Delegate Methods
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+
+#ifdef PRO
+    if (section == PRO_SECTION_INDEX) {
+        
+        return [self proSectionFooter];
+    }
+#endif
+    
+    return [super tableView:tableView viewForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+#ifdef PRO
+    if (section == PRO_SECTION_INDEX) {
+        
+        APUIProSectionFooter *footer = [self proSectionFooter];
+        return [footer heightForWidth:self.view.frame.size.width];
+    }
+#endif
+    
+    return [super tableView:tableView heightForFooterInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.section == VIDEO_SECTION_INDEX) {
+        
+        UIImage *image = [UIImage imageNamed:@"video-image"];
+        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
+        
+        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -576,7 +654,7 @@
                         if (updatedMetas.count) {
 
                           NSString *format =
-                              NSLocalizedString(@"Filters updated: %lu",
+                              NSLocalizedString(@"filters_updated_%lu",
                                                 @"(AEUIMainController) Button "
                                                 @"- Check Filter Updates");
                           self.checkFiltersCell.textLabel.text = [NSString
@@ -584,7 +662,7 @@
                         } else {
 
                           self.checkFiltersCell.textLabel.text =
-                              NSLocalizedString(@"No updates found",
+                              NSLocalizedString(@"filters_noUpdates",
                                                 @"(AEUIMainController) Button "
                                                 @"- Check Filter Updates");
                         }
@@ -650,53 +728,24 @@
     _inCheckUpdates = NO;
 }
 
-#ifdef PRO
-- (void) updateCounters {
-    
-    [self updateTotalRequests];
-    [self updateTrackers];
-    [self updateRequestTime];
-}
-
-- (void) updateTotalRequests {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
-    self.totalRequestsCountLabel.text = [NSString stringWithFormat:@"%d", count];
-}
-
-- (void) updateRequestTime {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
-    float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
-    float averageTime = count ? time * 1000 / count : 0;
-    NSString* format = NSLocalizedString(@"%.f ms", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
-    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
-}
-
-- (void) updateTrackers {
-    
-    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
-    self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
-}
-
 - (void) showReportActionSheet {
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"common_action_cancel", @"(AEUIMainController) - report an issue actionsheet -> Cancel button caption") style:UIAlertActionStyleCancel handler:nil]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Incorrect Blocking / Missed Ad", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"incorrect_blocking_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         NSURL* reportUrl = [[AESSupport singleton] composeWebReportUrlForSite:nil];
-        [[UIApplication sharedApplication] openURL:reportUrl options:@{} completionHandler:nil];
+        [self openUrl:reportUrl];
     }]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Bug Report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"action_bug_report", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: BUGREPORT_URL] options:@{} completionHandler:nil];
+        [self openUrl:[NSURL URLWithString: BUGREPORT_URL]];
     }]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Contact Support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"action_contact_support", @"(AEUIMainController) - report an issue actionsheet button caption") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         [[AESSupport singleton] sendMailBugReportWithParentController:self];
     }]];
@@ -709,49 +758,105 @@
     }];
 }
 
-#endif
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark  Table Delegate Methods
-
-#ifdef PRO
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (void)setToolbar{
     
-    if (section == PRO_SECTION_INDEX) {
+    static UILabel *warning;
+    
+    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
+    self.navigationController.toolbarHidden = YES;
+    
+    NSString *warningText;
+    
+    //Show warning if overlimit of rules was reached.
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
         
-        return [self proSectionFooter];
+        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
+        NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
+        
+        warningText = [NSString stringWithFormat:NSLocalizedString(@"safari_rules_enabled", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
     }
     
-    return [super tableView:tableView viewForFooterInSection:section];
+    if (warningText) {
+        
+        UIView *toolbar = self.navigationController.toolbar;
+        if (toolbar) {
+            
+            UIEdgeInsets insets = toolbar.layoutMargins;
+            //        UIEdgeInsets rootInsets = self.navigationController.view.layoutMargins;
+            CGRect frame = toolbar.bounds;
+            frame.origin = CGPointMake(0, 0);
+            //            frame.size.height -= insets.top + insets.bottom;
+            frame.size.width -= insets.left + insets.right;
+            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
+                
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    warning = [[UILabel alloc] initWithFrame:frame];
+                    warning.textColor = AEUIC_WARNING_COLOR;
+                    warning.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+                    warning.textAlignment = NSTextAlignmentCenter;
+                    warning.numberOfLines = 2;
+                    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:warning];
+                    
+                    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    if (item) {
+                        self.toolbarItems = @[spacer, item, spacer];
+                    }
+                });
+                
+                //                warning.lineBreakMode = NSLineBreakByWordWrapping;
+                warning.text = warningText;
+            }
+        }
+        
+        [self.navigationController setToolbarHidden:NO animated:YES];
+        
+        
+    }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (void) openUrl:(NSURL*)url {
     
-    if (section == PRO_SECTION_INDEX) {
-        
-        APUIProSectionFooter *footer = [self proSectionFooter];
-        return [footer heightForWidth:self.view.frame.size.width];
+    if ([UIApplication.sharedApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+    } else {
+        [UIApplication.sharedApplication openURL:url];
     }
-    
-    return [super tableView:tableView heightForFooterInSection:section];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) showRateMeIfNeeded {
     
-    if(indexPath.section == 0) {
-        
-        UIImage *image = [UIImage imageNamed:@"video-image"];
-        CGFloat desiredHeight = [UIScreen mainScreen].bounds.size.width * image.size.height / image.size.width;
-        
-        return MIN(desiredHeight, VIDEO_IMAGE_MAX_HEIGHT);
+    // check first launch day
+    NSDate* firstLaunchDate = [AESharedResources.sharedDefaults objectForKey:AEDefaultsFirstLaunchDate];
+    if(!firstLaunchDate) {
+        [AESharedResources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsFirstLaunchDate];
+        return;
     }
     
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    if([firstLaunchDate timeIntervalSinceNow] > - MIN_TIME_INTERVAL_TO_RATE_ME) {
+        return;
+    }
+    
+    // check safari content blocker is active
+    if(!_contentBlockerEnabled) {
+        return;
+    }
+    
+    // check user used safari action extension
+    if(![AESharedResources.sharedDefaults boolForKey:AEDefaultsActionExtensionUsed]) {
+        return;
+    }
+    
+    [SKStoreReviewController requestReview];
+    
+    // reset firstLaunchDate
+    [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsFirstLaunchDate];
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  PRO Helper Methods (Private)
+
+#ifdef PRO
 
 - (APUIProSectionFooter *)proSectionFooter{
     
@@ -767,7 +872,7 @@
 
 - (NSString *)proShortStatusDescription {
     
-    return NSLocalizedString(@"Privacy module establishes a fake local VPN and intercepts the DNS traffic in order to let you see and control what trackers your device connects to or use a custom DNS server with advanced capabilities.", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
+    return NSLocalizedString(@"privacy_module_description", @"(APUIAdguardDNSController) PRO version. On the main screen. It is the description under PRIVACY module switch.");
 }
 
 - (NSAttributedString *)proTextForProSectionFooter{
@@ -787,12 +892,12 @@
     if(manager.enabled)
         self.proDnsSettingsCell.detailTextLabel.text = manager.activeRemoteDnsServer.serverName;
     else
-        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"Off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
+        self.proDnsSettingsCell.detailTextLabel.text = NSLocalizedString(@"common_switch_off", @"AEUIMainController on main screen. DNS Settings detail text, when pro mode is off");
     
     if (manager.lastError) {
         [ACSSystemUtils
          showSimpleAlertForController:self
-         withTitle:NSLocalizedString(@"Error",
+         withTitle:NSLocalizedString(@"common_error_title",
                                      @"(APUIAdguardDNSCon"
                                      @"troller) PRO "
                                      @"version. Alert "
@@ -823,64 +928,34 @@
     }
 }
 
+- (void) updateCounters {
+    
+    [self updateTotalRequests];
+    [self updateTrackers];
+    [self updateRequestTime];
+}
+
+- (void) updateTotalRequests {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    self.totalRequestsCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
+
+- (void) updateRequestTime {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount]).intValue;
+    float time = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime]).floatValue;
+    float averageTime = count ? time * 1000 / count : 0;
+    NSString* format = NSLocalizedString(@"average_time_format", @"(AEUIMainController) Main Screen -> average time format. Do not translate '%.f' part");
+    self.avarageTimeLabel.text = [NSString stringWithFormat:format, averageTime];
+}
+
+- (void) updateTrackers {
+    
+    int count = ((NSNumber*)[AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount]).intValue;
+    self.trackersCountLabel.text = [NSString stringWithFormat:@"%d", count];
+}
 
 #endif
-
-- (void)setToolbar{
-    
-    static UILabel *warning;
-    
-    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
-    self.navigationController.toolbarHidden = YES;
-    
-    NSString *warningText;
-    
-    //Show warning if overlimit of rules was reached.
-    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONRulesOverlimitReached]) {
-        
-        NSUInteger limit = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONMaximumConvertedRules] unsignedIntegerValue];
-        NSUInteger totalRulesCount = [[[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion] unsignedIntegerValue];
-
-        warningText = [NSString stringWithFormat:NSLocalizedString(@"Too many filters enabled. Safari cannot use more than %1$lu rules. Enabled rules: %2$lu.", @"(AEUIMainController) Warning text on main screen"), limit, totalRulesCount];
-    }
-    
-    if (warningText) {
-        
-        UIView *toolbar = self.navigationController.toolbar;
-        if (toolbar) {
-            
-            UIEdgeInsets insets = toolbar.layoutMargins;
-            //        UIEdgeInsets rootInsets = self.navigationController.view.layoutMargins;
-            CGRect frame = toolbar.bounds;
-            frame.origin = CGPointMake(0, 0);
-            //            frame.size.height -= insets.top + insets.bottom;
-            frame.size.width -= insets.left + insets.right;
-            if (!(frame.size.height <= 0 || frame.size.width <= 0)) {
-
-                static dispatch_once_t onceToken;
-                dispatch_once(&onceToken, ^{
-                    warning = [[UILabel alloc] initWithFrame:frame];
-                    warning.textColor = AEUIC_WARNING_COLOR;
-                    warning.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-                    warning.textAlignment = NSTextAlignmentCenter;
-                    warning.numberOfLines = 2;
-                    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:warning];
-                    
-                    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-                    if (item) {
-                        self.toolbarItems = @[spacer, item, spacer];
-                    }
-                });
-
-                //                warning.lineBreakMode = NSLineBreakByWordWrapping;
-                warning.text = warningText;
-            }
-        }
-        
-        [self.navigationController setToolbarHidden:NO animated:YES];
-        
-        
-    }
-}
 
 @end

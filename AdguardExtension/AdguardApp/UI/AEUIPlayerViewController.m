@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.0/%@/%@.mp4"
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.1/%@/%@.mp4"
 
-#define DEFAULT_TUTORIAL_VIDEO          @"EnablingAdguardVideo"
+#define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
 #define HIDE_NAVIGATION_DELAY 2 // seconds
 
 @interface AEUIPlayerViewController ()
@@ -92,6 +92,14 @@
     if (_statusBarHidden != hide) {
         _statusBarHidden = hide;
         [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    
+    if(!parent) { // pop view controller
+        if(self.completionBlock)
+            self.completionBlock();
     }
 }
 

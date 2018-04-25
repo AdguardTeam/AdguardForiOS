@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -192,6 +192,24 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if(self) {
+        _i18nDictionary = [aDecoder decodeObjectForKey:@"i18nDictionary"];
+        _localizations = [aDecoder decodeObjectForKey:@"localizations"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    
+    [aCoder encodeObject:_i18nDictionary forKey:@"i18nDictionary"];
+    [aCoder encodeObject:_localizations forKey:@"localizations"];
+}
+
 - (ASDFilterGroupLocalization *)localizationForGroup:(ASDFilterGroup *)group{
     
     /*
@@ -202,7 +220,8 @@
     if (!group) {
         return nil;
     }
-    NSString *langCode = [NSString stringWithFormat:@"%@-%@", [ADLocales lang], [ADLocales region]];
+    
+    NSString *langCode = [ADLocales canonicalLanguageIdentifier];
     
     ASDFilterGroupLocalization *localization = _i18nDictionary[group.groupId][langCode];
     
@@ -391,15 +410,6 @@
 
 @end
 
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterLocalization
 /////////////////////////////////////////////////////////////////////
@@ -514,12 +524,31 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
+    if(self) {
+        _i18nDictionary = [aDecoder decodeObjectForKey:@"i18nDictionary"];
+        _localizations = [aDecoder decodeObjectForKey:@"localizations"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    
+    [aCoder encodeObject:_i18nDictionary forKey:@"i18nDictionary"];
+    [aCoder encodeObject:_localizations forKey:@"localizations"];
+}
+
 - (ASDFilterLocalization *)localizationForFilter:(ASDFilterMetadata *)filterMetadata{
     
     if (!filterMetadata) {
         return nil;
     }
-    NSString *langCode = [NSString stringWithFormat:@"%@-%@", [ADLocales lang], [ADLocales region]];
+    
+    NSString *langCode = [ADLocales canonicalLanguageIdentifier];
     
     ASDFilterLocalization *localization = _i18nDictionary[filterMetadata.filterId][langCode];
     
@@ -574,17 +603,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterRule

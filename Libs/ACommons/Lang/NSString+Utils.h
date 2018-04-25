@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #import <Foundation/Foundation.h>
 
 @interface NSString (Utils)
@@ -133,6 +134,12 @@
 
 /// Gets SHA256 digest, max string length 4GB.
 - (NSString *)sha256Digest;
+
+/// returns count of occurances of substring in string
+- (NSUInteger) countOccurencesOfString:(NSString*)string;
+
+/// Repeat a String repeat times to form a new String, with a String separator injected each time.
++ (NSString*) repeat:(NSString*)string separator:(NSString*) separator repeat:(NSInteger)repeat;
 
 @end
 

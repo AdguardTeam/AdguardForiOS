@@ -1,7 +1,7 @@
 
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,9 +56,9 @@
     if([AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist]) {
         
         placeholderText = [[NSMutableAttributedString alloc] initWithString:
-                           NSLocalizedString(@"Enter here the domain names separated by spaces, commas or line breaks. AdGuard will block ads in Safari on these websites only.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Inverted Whitelist. This is the text shown when the whitelist is empty.")];
+                           NSLocalizedString(@"inverted_whitelist_hint", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Inverted Whitelist. This is the text shown when the whitelist is empty.")];
         
-        NSString* boldSubstring = NSLocalizedString(@"on these websites only.", @"Main screen -> Safari Content Blocking -> Inverted Whitelist. This is part of inverted whitelist hint string that should be heighlighted in bold");
+        NSString* boldSubstring = NSLocalizedString(@"inverted_whitelist_hint_bold_part", @"Main screen -> Safari Content Blocking -> Inverted Whitelist. This is part of inverted whitelist hint string that should be heighlighted in bold");
         
         if(boldSubstring.length) {
             
@@ -72,11 +72,11 @@
     else {
         
         placeholderText = [[NSMutableAttributedString alloc] initWithString:
-                           NSLocalizedString(@"Enter here the domain names separated by spaces, commas or line breaks. AdGuard will disable filtering in Safari for these websites.", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.")];
+                           NSLocalizedString(@"whitelist_hint", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. This is the text shown when the whitelist is empty.")];
     }
     domainList.attributedTextForPlaceholder = placeholderText;
     
-    domainList.navigationItem.title = NSLocalizedString(@"Whitelist", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. The title of the screen.");
+    domainList.navigationItem.title = NSLocalizedString(@"whitelist_title", @"(AEUIMainController) Main screen -> Safari Content Blocking -> Whitelist. The title of the screen.");
     domainList.keyboardType = UIKeyboardTypeURL;
     
     AEUIWhitelistController *result = [AEUIWhitelistController new];

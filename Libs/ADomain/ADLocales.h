@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 /////////////////////////////////////////////////////////////////////
 
 #define ADL_DEFAULT_LANG            @"en"
+#define ADL_DEFAULT_REGION          @"us"
 
 #define ADL_FILTER_NAME             @"name"
 #define ADL_FILTER_DESCRIPTION      @"description"
@@ -39,6 +40,11 @@
 
 /// Get 2 letters identifier of current application Region (Country Code)
 + (NSString *)region;
+
+/**
+ returns canonical language identifier for current locale
+ */
++ (NSString *)canonicalLanguageIdentifier;
 
 /**
     Obtain localized description of AdBlocker (Antibanner) filters.

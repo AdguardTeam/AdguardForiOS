@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,6 +49,7 @@
     self.searchController.searchBar.tintColor = [UIColor blackColor];
     self.searchController.searchBar.backgroundColor = [UIColor blackColor];
     self.searchController.searchBar.barTintColor = SEARCHBAR_TINT_COLOR;
+    self.searchController.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     
     UITextField *searchField = [self.searchController.searchBar valueForKey:@"searchField"];
     searchField.backgroundColor = [UIColor colorWithWhite:0.08f alpha:1.0];
@@ -187,9 +188,9 @@
 
 - (IBAction)clickClear:(id)sender {
     
-    [self requestResetStatisticsWithCompletionBlock:^{
+    [self requestResetStatisticsWithCompletionBlock:^(BOOL reset){
         
-        if ([[APVPNManager singleton] clearDnsRequestsLog]) {
+        if (reset && [[APVPNManager singleton] clearDnsRequestsLog]) {
             
             [self reloadData];
         }
@@ -246,15 +247,15 @@
     return nil;
 }
 
-- (void) requestResetStatisticsWithCompletionBlock:(void(^)())completionBlock {
+- (void) requestResetStatisticsWithCompletionBlock:(void(^)(BOOL))completionBlock {
     
-    NSString* message = NSLocalizedString(@"Do you want to reset the statistics along with clearing the log", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
+    NSString* message = NSLocalizedString(@"reset_statistics", @"(APUIDnsRequestsController) Reset dns requests statistics alert text");
     
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"YES", @"YES Button caption in alert") style:UIAlertActionStyleDestructive
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"clear_log_and_statistic_action", @"DNS Request log-> Reset -> Clear DNS log and statistic option.") style:UIAlertActionStyleDestructive
                                                       handler:^(UIAlertAction * action) {
                                                           
                                                           [AESharedResources.sharedDefaults removeObjectForKey:AEDefaultsTotalRequestsTime];
@@ -263,19 +264,28 @@
                                                           
                                                           [self dismissViewControllerAnimated:YES completion:nil];
                                                           if(completionBlock)
-                                                              completionBlock();
+                                                              completionBlock(YES);
                                                       }];
     
-    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"NO", @"NO Button caption in alert") style:UIAlertActionStyleDefault
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"clear_log_action", @"DNS Request log-> Reset -> Clear DNS log only option.") style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * action) {
                                                           
                                                           [self dismissViewControllerAnimated:YES completion:nil];
                                                           if(completionBlock)
-                                                              completionBlock();
+                                                              completionBlock(YES);
                                                       }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common_action_cancel", @"Cancel Button caption in alert") style:UIAlertActionStyleCancel
+                                                     handler:^(UIAlertAction * action) {
+                                                         
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                         if(completionBlock)
+                                                             completionBlock(NO);
+                                                     }];
     
     [alertController addAction:yesAction];
     [alertController addAction:noAction];
+    [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

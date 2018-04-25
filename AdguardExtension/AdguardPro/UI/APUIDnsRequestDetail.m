@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -88,8 +88,8 @@ static NSDateFormatter *_timeFormatter;
     self.typeCell.detailTextLabel.text = [request.type description];
     self.serverCell.detailTextLabel.text = self.logRecord.dnsServer.serverName;
     self.localFilteringCell.detailTextLabel.text = self.logRecord.localFiltering ?
-    NSLocalizedString(@"On", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
-    : NSLocalizedString(@"Off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
+    NSLocalizedString(@"common_switch_on", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is ON.")
+    : NSLocalizedString(@"common_switch_off", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. System-wide Ad Blocking is OFF.");
 
     if(self.logRecord.isTracker) {
         
@@ -120,13 +120,11 @@ static NSDateFormatter *_timeFormatter;
             
             NSString* statusText;
             
-            NSString* domain = self.logRecord.requests[0].name;
+            NSString *format = NSLocalizedString(@"blocked_format", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
             
-            NSString *format = NSLocalizedString(@"Blocked (%@)", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text shown when a DNS request was blocked by the blacklist or subscription.");
+            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager subscriptionByUUID:self.logRecord.subscriptionUUID];
             
-            APBlockingSubscription* subscription = [APBlockingSubscriptionsManager checkDomain:domain];
-            
-            NSString* name = subscription.name ? : NSLocalizedString(@"Blocking List", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
+            NSString* name = subscription.name ? : NSLocalizedString(@"blocking_list_title", @"(APUIDnsRequestDetail) PRO version. On the DNS Settigs -> View Filtering Log -> Request Details screen. Status text default blocking list name");
             
             statusText = [NSString stringWithFormat:format, name];
             
@@ -134,15 +132,15 @@ static NSDateFormatter *_timeFormatter;
         }
         else if (self.logRecord.isWhitelisted){
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Exception", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Details. If this DNS request was whitelisted, this will be shown as status text.");
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"request_status_exception", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Details. If this DNS request was whitelisted, this will be shown as status text.");
         }
         else if (self.logRecord.preferredResponse.blocked) {
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Blocked by DNS", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Status text shown in case when a DNS request was blocked by the DNS server.");
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"request_status_blocked_by_dns", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Status text shown in case when a DNS request was blocked by the DNS server.");
         }
         else {
             
-            self.statusCell.detailTextLabel.text = NSLocalizedString(@"Processed", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. If this DNS request was processed as normal, this will be shown as status text.");
+            self.statusCell.detailTextLabel.text = NSLocalizedString(@"request_status_processed", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests screen -> Request Details. If this DNS request was processed as normal, this will be shown as status text.");
         }
         //set response cell
         for (APDnsResponse *item in self.logRecord.responses) {
@@ -162,7 +160,7 @@ static NSDateFormatter *_timeFormatter;
     }
     else{
         
-        NSString *text =  NSLocalizedString(@"No response", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Details. It is the detailed text in the RESPONSES section, if this DNS request does not have a response.");
+        NSString *text =  NSLocalizedString(@"request_status_no_response", @"(APUIDnsRequestDetail) PRO version. On the DNS Filtering -> DNS Requests screen -> Request Details. It is the detailed text in the RESPONSES section, if this DNS request does not have a response.");
         self.responsesCell.longLabel.text = text;
         self.statusCell.detailTextLabel.text = text;
     }
@@ -305,7 +303,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         // We check on equal
         if ([domainslist containsObject:_domainName]) {
             
-             labelText = NSLocalizedString(@"Remove from Whitelist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
+             labelText = NSLocalizedString(@"remove_from_whitelist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
             _domainControllCellType = DomainControllRemoveFromWhitelist;
         }
         else {
@@ -313,17 +311,17 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
             domainslist = APSharedResources.blacklistDomains;
             if ([domainslist containsObject:_domainName]) {
                 
-                labelText = NSLocalizedString(@"Remove from Blacklist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
+                labelText = NSLocalizedString(@"remove_from_blacklist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
                 _domainControllCellType = DomainControllRemoveFromBlacklist;
             }
             else {
                 
                 if (self.logRecord.preferredResponse.blocked) {
-                    labelText = NSLocalizedString(@"Add to Whitelist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
+                    labelText = NSLocalizedString(@"add_to_whitelist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
                     _domainControllCellType = DomainControllAddToWhitelist;
                 }
                 else {
-                    labelText = NSLocalizedString(@"Add to Blacklist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
+                    labelText = NSLocalizedString(@"add_to_blacklist", @"(APUIDnsRequestDetail) PRO version. On the System-wide Ad Blocking -> DNS Requests -> Request Details screen. Text on the button.");
                     _domainControllCellType = DomainControllAddToBlacklist;
                 }
             }
@@ -352,7 +350,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                      if (manager.lastError) {
                          [ACSSystemUtils
                           showSimpleAlertForController:self
-                          withTitle:NSLocalizedString(@"Error",
+                          withTitle:NSLocalizedString(@"common_error_title",
                                                       @"(APUIAdguardDNSCon"
                                                       @"troller) PRO "
                                                       @"version. Alert "

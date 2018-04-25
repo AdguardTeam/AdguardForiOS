@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,24 +36,27 @@ void loadStringUIResources();
 
 + (NSString *)lang{
     
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *lang = ADL_DEFAULT_LANG;
-    
-    if (locale)
-        lang = [locale objectForKey:NSLocaleLanguageCode];
-        
-        return lang;
+    NSString *lang = [NSLocale.currentLocale objectForKey:NSLocaleLanguageCode];
+    if (! lang) {
+        lang = ADL_DEFAULT_LANG;
+    }
+    return lang;
 }
 
 + (NSString *)region{
     
-    NSLocale *locale = [NSLocale currentLocale];
-    NSString *region = ADL_DEFAULT_LANG;
-    
-    if (locale)
-        region = [[locale objectForKey:NSLocaleCountryCode] lowercaseString];
+    NSString *region = [[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] lowercaseString];
+    if (! region) {
+        region = ADL_DEFAULT_REGION;
+    }
     
     return region;
+}
+
++ (NSString *)canonicalLanguageIdentifier {
+    
+    NSString *localeIdentifier = NSLocale.currentLocale.localeIdentifier;
+    return [NSLocale canonicalLanguageIdentifierFromString:localeIdentifier];
 }
 
 + (NSArray *)filtersDescription{

@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,10 +40,10 @@
     
     AEUICustomTextEditorController *rulesList = segue.destinationViewController;
     
-    rulesList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"Enter your custom rules here, separated by line breaks.",
+    rulesList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"custom_rules_hint",
                                                                                                            @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. This is the text shown when the User Filter is empty.")];
     
-    rulesList.navigationItem.title = NSLocalizedString(@"User Filter", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
+    rulesList.navigationItem.title = NSLocalizedString(@"user_filter_title", @"(AEUIMainController) Main screen -> Safari Content Blocking -> User Filter. The title of the screen.");
     
     rulesList.showFilterRules = YES;
     

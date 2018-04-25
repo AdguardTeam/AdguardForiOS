@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -174,7 +174,6 @@ static NSMutableCharacterSet *delimCharSet;
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:@(_editable) forKey:@"editable"];
     [aCoder encodeObject:_uuid forKey:@"uuid"];
-    [aCoder encodeObject:_tag forKey:@"tag"];
 
 }
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {

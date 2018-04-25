@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,18 +44,23 @@
     self.versionLabel.text = [ADProductInfo versionWithBuildNumber];
     
     // remove cell separator
-    for (UIView *view in self.howToEnableCell.subviews){
+    for (UIView *view in self.manageContentBlockerCell.subviews){
         
-        if(view != self.howToEnableCell.contentView) {
+        if(view != self.manageContentBlockerCell.contentView) {
             [view removeFromSuperview];
         }
     }
-    for (UIView *view in self.howToAddRulesCell.subviews){
+    for (UIView *view in self.managePrivacySettingsCell.subviews){
         
-        if(view != self.howToAddRulesCell.contentView) {
+        if(view != self.managePrivacySettingsCell.contentView) {
             [view removeFromSuperview];
         }
     }
+    
+#ifndef PRO
+    [self cell: self.managePrivacySettingsCell setHidden:YES];
+    [self reloadDataAnimated:NO];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

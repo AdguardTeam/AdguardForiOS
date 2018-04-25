@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -78,7 +78,7 @@
         
         controller.done = ^(UIViewController* _Nonnull sender, APBlockingSubscription * _Nonnull subscription) {
             
-            NSString *message = NSLocalizedString(@"Loading filter subscription. Please do not turn off AdGuard, this will take no more than 30 seconds.", @"(APBlockingListsController) blocking list loading message");
+            NSString *message = NSLocalizedString(@"filters_loading_text", @"(APBlockingListsController) blocking list loading message");
             [AEUILoadingModal.singleton loadingModalShowWithParent:sender message:message cancelAction:nil completion:^{
                 
                 [ABECSubscription.singleton downloadSubscription:subscription.url completionBlock:^(NSArray *rules, NSDictionary *hosts) {
@@ -146,14 +146,14 @@
         AEUICustomTextEditorController *domainList = segue.destinationViewController;
         
         domainList.attributedTextForPlaceholder = [[NSAttributedString alloc] initWithString:
-                                                   NSLocalizedString(@"List the domain names here. Separate different domain names with line breaks.",
+                                                   NSLocalizedString(@"domain_name_listing",
                                                                      @"(APUIAdguardDNSController) PRO version. On the Privacy Settings -> Blacklist (Whitelist) screen. The placeholder text.")];
         
         domainList.keyboardType = toWhitelist ? UIKeyboardTypeURL : UIKeyboardTypeDefault;
         
         domainList.navigationItem.title = toWhitelist
-        ? NSLocalizedString(@"Whitelist", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
-        : NSLocalizedString(@"Blacklist", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
+        ? NSLocalizedString(@"whitelist_title", @"(APUIAdguardDNSController) PRO version. Title of the system-wide whitelist screen.")
+        : NSLocalizedString(@"blacklist_title", @"(APUIAdguardDNSController) PRO version. On the System-wide Ad Blocking -> Blacklist screen. The title of that screen.");
         //self.navigationItem.backBarButtonItem = _cancelNavigationItem;
         
         ASSIGN_WEAK(self);
@@ -306,7 +306,7 @@
         
         NSInteger row = indexPath.row;
         
-        NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
+        NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
         if(row >= subscriptions.count)
             return;
         
@@ -333,7 +333,7 @@
     return [super tableView:tableView viewForFooterInSection:section];
 }
 
-#pragma mark aktions
+#pragma mark actions
 
 - (IBAction)checkUpdatesAction:(id)sender {
     
@@ -350,6 +350,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [USE_STRONG(self) updateSubscriptionCells];
         });
+        
+        [APVPNManager.singleton sendReloadSystemWideDomainLists];
+        
     } errorBlock:^(NSError * error) {
         
     } completionBlock:^{
@@ -368,7 +371,7 @@
 
 - (void) updateSubscriptionCells {
     
-    NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptions;
+    NSArray* subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
     
     BOOL showUpdateCell = subscriptions.count > 0;
     BOOL wasHidden = [self cellIsHidden:self.checkUpdatesCell];
@@ -393,7 +396,7 @@
         newCell.textLabel.text = subscription.name;
         
         if(subscription.rulesCount) {
-            NSString* countFormat = NSLocalizedString(@"%d rules", @"(APBlockingListsController) blocking list rules count format");
+            NSString* countFormat = NSLocalizedString(@"rules_counter_format", @"(APBlockingListsController) blocking list rules count format");
             newCell.detailTextLabel.text = [NSString stringWithFormat:countFormat, subscription.rulesCount];
         }
         
@@ -443,7 +446,7 @@
 
 - (NSAttributedString*) footerText {
     
-    NSString *htmlString = NSLocalizedString(@"Privacy module allows you to extend its functionality by adding custom rules subscriptions. It supports both <a href=\"https://wikipedia.org/wiki/Hosts_(file)\">hosts files</a> and also a limited set of AdGuard rules syntax. Click <a href=\"https://kb.adguard.com/ios/features\">here</a> to learn more about it.", @"(APBlockingListsController) Blocking subscriptions footer text");
+    NSString *htmlString = NSLocalizedString(@"privacy_module_rules_subscriptions", @"(APBlockingListsController) Blocking subscriptions footer text");
     
     NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     

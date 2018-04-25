@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,5 +38,7 @@ typedef NS_ENUM(NSInteger, ABECSubscriptionErrorCode) {
 + (ABECSubscription *)singleton;
 
 - (void) downloadSubscription:(NSString*) url completionBlock: (void (^)(NSArray* rules, NSDictionary* hosts))completionBlock errorBlock:(void(^)(NSError* error))errorBlock;
+
+- (BOOL) parseText:(NSString*) text rules:(NSArray**) rules hosts:(NSDictionary**) hosts;
 
 @end

@@ -20,8 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo" translatesAutoresizingMaskIntoConstraints="NO" id="1rs-Oe-zfG">
-                                <rect key="frame" x="91" y="233" width="193" height="201"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo-free" translatesAutoresizingMaskIntoConstraints="NO" id="1rs-Oe-zfG">
+                                <rect key="frame" x="91" y="183" width="193" height="201"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="193" id="Anr-dB-FrN">
                                         <variation key="heightClass=regular-widthClass=regular" constant="289"/>
@@ -32,9 +32,9 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1rs-Oe-zfG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7XT-Ph-njJ"/>
+                            <constraint firstItem="1rs-Oe-zfG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="7XT-Ph-njJ"/>
                             <constraint firstItem="1rs-Oe-zfG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fpg-6Z-MA5"/>
                         </constraints>
                     </view>
@@ -46,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-logo" width="382" height="331"/>
+        <image name="launch-logo-free" width="382" height="331"/>
     </resources>
 </document>

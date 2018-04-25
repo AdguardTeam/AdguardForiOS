@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *autoUpdateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *useSimplifiedCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *fullTunnelCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *fullTunnelWithoutVPNCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *splitTunnelCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *invertWhitelistCell;
 @property (strong, nonatomic) IBOutlet UISwitch *invertWhitelistSwitch;

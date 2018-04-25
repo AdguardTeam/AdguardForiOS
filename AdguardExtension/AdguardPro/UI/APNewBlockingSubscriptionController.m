@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,6 +46,10 @@
     [super viewDidLoad];
     
     self.subscription = [APBlockingSubscription new];
+    
+    self.nameLabel.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.descriptionLabel.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.urlLabel.keyboardAppearance = UIKeyboardAppearanceDark;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -146,9 +150,9 @@
 
 - (NSAttributedString*) footerString {
     if(!_footerString) {
-        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Rules subscriptions are lists of filtering rules combined together. Usually, a subscription serves some particular purpose like blocking malicious or tracking domains. Here you can find some popular filter subscriptions.", @"(APBlockingListsController) blocking subscriptions footer text. Also you must define a clickable part of this string - \"Here\". Please be careful, this is very important to define it properly.")];
+        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"blocking_subscriptions_text", @"(APBlockingListsController) blocking subscriptions footer text. Also you must define a clickable part of this string - \"Here\". Please be careful, this is very important to define it properly.")];
         
-        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"Here", @"(APNewBlockingSubscriptionController) Clickable part of blocking subscriptions footer text")];
+        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"here_blocking_subscriptions_text", @"(APNewBlockingSubscriptionController) Clickable part of blocking subscriptions footer text")];
         
         [string addAttributes:@{ NSForegroundColorAttributeName : UIColor.blueColor,
                                   NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle),

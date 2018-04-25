@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -155,7 +155,7 @@ NSString *AESFConverterError = @"AESFConverterError";
         }
     }
     
-    NSString *message = NSLocalizedString(@"Can't convert rules. Unexpected error occured. Please contact support team.", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
+    NSString *message = NSLocalizedString(@"support_rule_converting_error", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
     NSError *error = [NSError errorWithDomain:AESFConverterError code:AESF_ERROR_WRONG_DICTIONARY userInfo:@{NSLocalizedDescriptionKey: message}];
     
     return @{AESFConvertedErrorKey: error};

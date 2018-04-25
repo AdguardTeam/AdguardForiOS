@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@
             
             // Subscribe
             AEUILoadingModal *modal = [AEUILoadingModal singleton];
-            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"Loading filter...", @"(AEUISubscriptionController) When toggling filter button and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
+            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"loading_filter_caption", @"(AEUISubscriptionController) When toggling filter button and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
                 
                 dispatch_async(
                                dispatch_get_global_queue(
@@ -153,7 +153,7 @@
                                                [[[AEService singleton] antibanner] rollbackTransaction];
                                                
                                                
-                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"Cannot load filter from the server.", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
+                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
                                                
                                            }
                                            else{

@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -227,9 +227,10 @@
         NSMutableDictionary <NSString *, ASDFilterLocalization *> *targetLangs = [NSMutableDictionary dictionaryWithCapacity:langs.count];
         [langs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
             
+            NSString* langCode = [[key lowercaseString] stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
             ASDFilterLocalization *localization = [ASDFilterLocalization new];
             localization.filterId = filterId;
-            localization.lang = [self canonicalLangFromString:key];
+            localization.lang = [self canonicalLangFromString:langCode];
             localization.name = obj[@"name"];
             localization.descr = obj[@"description"];
             
@@ -248,9 +249,10 @@
         NSMutableDictionary <NSString *, ASDFilterGroupLocalization *> *targetLangs = [NSMutableDictionary dictionaryWithCapacity:langs.count];
         [langs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
             
+            NSString* langCode = [[key lowercaseString] stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
             ASDFilterGroupLocalization *localization = [ASDFilterGroupLocalization new];
             localization.groupId = groupId;
-            localization.lang = [self canonicalLangFromString:key];
+            localization.lang = [self canonicalLangFromString:langCode];
             localization.name = obj[@"name"];
             
             targetLangs[localization.lang] = localization;

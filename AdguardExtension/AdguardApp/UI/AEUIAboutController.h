@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,12 +17,13 @@
 */
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "StaticDataTableViewController.h"
 
-@interface AEUIAboutController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface AEUIAboutController : StaticDataTableViewController <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *howToEnableCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *howToAddRulesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *manageContentBlockerCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *managePrivacySettingsCell;
 
 - (IBAction)clickAdguardWebsite:(id)sender;
 - (IBAction)clickAdguardForum:(id)sender;
