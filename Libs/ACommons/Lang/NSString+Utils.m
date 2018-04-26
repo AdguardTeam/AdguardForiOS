@@ -879,3 +879,15 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     
     return foundFor;
 }
+
+NSString* ACLocalizedString(NSString* key, NSString* comment) {
+    
+    NSString* localizedString = NSLocalizedString(key, nil);
+    
+    if (![[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"en"] && [localizedString isEqualToString:key]) {
+        NSString * path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
+        NSBundle * languageBundle = [NSBundle bundleWithPath:path];
+        localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
+    }
+    return localizedString;
+}

@@ -527,7 +527,7 @@ typedef void (^AEDownloadsCompletionBlock)();
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [ACSSystemUtils showSimpleAlertForController:self.navigation.topViewController withTitle: NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:NSLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
+                        [ACSSystemUtils showSimpleAlertForController:self.navigation.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
                     });
                 }
             }

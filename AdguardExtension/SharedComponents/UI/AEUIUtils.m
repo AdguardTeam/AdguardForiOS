@@ -71,7 +71,7 @@
                     if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
                         
                         error = nil;
-                        NSString *errorDescription = NSLocalizedString(@"filter_rules_converting_error", @"(AEUIUtils) User filter convertering error description.");
+                        NSString *errorDescription = ACLocalizedString(@"filter_rules_converting_error", @"(AEUIUtils) User filter convertering error description.");
                         error = [NSError errorWithDomain:AEServiceErrorDomain
                                                     code:AES_ERROR_UNSUPPORTED_RULE
                                                 userInfo:@{NSLocalizedDescriptionKey : errorDescription,
@@ -97,7 +97,7 @@
                 [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
                     
                     if (error.code != AES_ERROR_UNSUPPORTED_RULE || UIAccessibilityIsVoiceOverRunning()) {
-                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:ACLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
                     }
                 }];
                 return;
@@ -126,7 +126,7 @@
 
         [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
 
-            [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+            [ACSSystemUtils showSimpleAlertForController:controller withTitle:ACLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
         }];
 
         return;

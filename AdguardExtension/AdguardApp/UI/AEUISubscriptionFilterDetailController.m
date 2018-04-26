@@ -117,7 +117,7 @@
             
             // Subscribe
             AEUILoadingModal *modal = [AEUILoadingModal singleton];
-            [modal loadingModalShowWithParent:self message:NSLocalizedString(@"loading_filter_caption", @"(AEUISubscriptionController) When toggling filter button and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
+            [modal loadingModalShowWithParent:self message:ACLocalizedString(@"loading_filter_caption", @"(AEUISubscriptionController) When toggling filter button and subscription process goes.") cancelAction:@selector(cancelSubsrciption:) completion:^{
                 
                 dispatch_async(
                                dispatch_get_global_queue(
@@ -153,7 +153,7 @@
                                                [[[AEService singleton] antibanner] rollbackTransaction];
                                                
                                                
-                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:NSLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
+                                               [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When subscription process failed.") message:ACLocalizedString(@"filter_loading_error", @"(AEUISubscriptionController) Alert message. When subscription process failed.")];
                                                
                                            }
                                            else{

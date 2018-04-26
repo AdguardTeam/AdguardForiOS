@@ -145,16 +145,21 @@
     }
 }
 
+- (void) removeObservers {
+    @try {
+        [self.udpSession removeObserver:self forKeyPath:@"state"];
+        [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    }
+    @catch(id exception) {
+        locLogWarn(self, @"removeObservers failed");
+    }
+}
+
 - (void)dealloc {
-
     locLogTrace(self);
-
-    [self.udpSession removeObserver:self forKeyPath:@"state"];
-    [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    
-_workingQueue = nil;
+    _workingQueue = nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -433,6 +438,9 @@ _workingQueue = nil;
         [self sendPackets];
     } else if (session.state == NWUDPSessionStateFailed
                || whitelistSession.state == NWUDPSessionStateFailed) {
+        
+        if(_closed)
+            return;
 
         locLogVerboseTrace(self, @"NWUDPSessionStateFailed");
 

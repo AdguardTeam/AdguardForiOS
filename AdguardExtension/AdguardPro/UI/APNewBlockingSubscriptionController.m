@@ -150,9 +150,9 @@
 
 - (NSAttributedString*) footerString {
     if(!_footerString) {
-        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"blocking_subscriptions_text", @"(APBlockingListsController) blocking subscriptions footer text. Also you must define a clickable part of this string - \"Here\". Please be careful, this is very important to define it properly.")];
+        NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:ACLocalizedString(@"blocking_subscriptions_text", @"(APBlockingListsController) blocking subscriptions footer text. Also you must define a clickable part of this string - \"Here\". Please be careful, this is very important to define it properly.")];
         
-        NSRange clickableRange = [string.string rangeOfString:NSLocalizedString(@"here_blocking_subscriptions_text", @"(APNewBlockingSubscriptionController) Clickable part of blocking subscriptions footer text")];
+        NSRange clickableRange = [string.string rangeOfString:ACLocalizedString(@"here_blocking_subscriptions_text", @"(APNewBlockingSubscriptionController) Clickable part of blocking subscriptions footer text")];
         
         [string addAttributes:@{ NSForegroundColorAttributeName : UIColor.blueColor,
                                   NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle),

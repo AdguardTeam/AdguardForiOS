@@ -70,4 +70,7 @@
  */
 - (void)close;
 
+
+- (void) removeObservers;
+
 @end

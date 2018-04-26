@@ -439,6 +439,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [self logNetworkInterfaces];
         DDLogInfo(@"PacketTunnelProvider) Start Tunnel mode: %@", modeName);
         
+        if(clearSettings) {
+            _tunnelMode = APVpnManagerTunnelModeSplit;
+        }
+        
         settings = [self createTunnelSettings:full wihoutVPNIcon:withoutIcon];
         DDLogInfo(@"(PacketTunnelProvider) Tunnel settings filled.");
     }
@@ -510,18 +514,27 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
               (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
 }
 
+static BOOL clearSettings = NO;
+
 - (void)reachNotify:(NSNotification *)note {
     
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
     
+    if(!_reachabilityHandler.isReachable) {
+        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Skip reachability notify");
+        
+        // sometimes when we disconnect the Internet, the use of the memory tunnel grows. A lot of endpoints are created inside the system and maybe this leads to a crash. If we close the connections, then this effect does not appear
+        [_connectionHandler closeAllConnections:nil];
+        return;
+
+    }
+    else {
+        [_connectionHandler startHandlingPackets];
+    }
+    
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
         DDLogInfo(@"(PacketTunnelProvider) network status not changed. Skip reachability notify");
-        return;
-    }
-    
-    if(!_reachabilityHandler.isReachable) {
-        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Skip reachability notify");
         return;
     }
     
@@ -540,72 +553,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)reloadWhitelistBlacklistDomain {
     
-//    if (_localFiltering == NO) {
-//
-//        [_connectionHandler setGlobalWhitelistFilter:nil];
-//        [_connectionHandler setGlobalBlacklistFilter:nil];
-//        [_connectionHandler setUserWhitelistFilter:nil];
-//        [_connectionHandler setUserBlacklistFilter:nil];
-//
-//        DDLogInfo(@"(PacketTunnelProvider) System-Wide Filtering rules set to nil.");
-//
-//        return;
-//    }
-//
     @autoreleasepool {
-
-//        AERDomainFilter *globalWhiteRules = [AERDomainFilter filter];
-//        AERDomainFilter *globalBlackRules = [AERDomainFilter filter];
-//
-//        NSArray *rules;
-//        @autoreleasepool {
-//
-//            // Init database and get rules
-//            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-//
-//            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
-//            NSError *error = [[ASDatabase singleton] error];
-//            if (!error) {
-//
-//                AESAntibanner *antibanner = [[AEService new] antibanner];
-//                rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
-//
-//                DDLogInfo(@"(PacketTunnelProvider) Count of rules, which was loaded from simple domain names filter: %lu.", rules.count);
-//            }
-//
-//            [ASDatabase destroySingleton];
-//            //--------------------------
-//            if (rules.count == 0 && _isRemoteServer == NO) {
-//
-//                DDLogError(@"(PacketTunnelProvider) We switch filtration to default remote server.");
-//                @autoreleasepool {
-//                    _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
-//                    _isRemoteServer = YES;
-//                }
-//            }
-//        }
-//
-//        @autoreleasepool {
-//
-//            AERDomainFilterRule *rule;
-//            for (ASDFilterRule *item in rules) {
-//
-//                rule = [AERDomainFilterRule rule:item.ruleText];
-//
-//                if (rule.whiteListRule) {
-//                    [globalWhiteRules addRule:rule];
-//                }
-//                else {
-//
-//                    [globalBlackRules addRule:rule];
-//                }
-//            }
-//        }
-//
-//        [_connectionHandler setGlobalWhitelistFilter:globalWhiteRules];
-//        [_connectionHandler setGlobalBlacklistFilter:globalBlackRules];
-//
-//        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", globalWhiteRules.rulesCount, globalBlackRules.rulesCount);
         
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];
@@ -661,6 +609,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [_connectionHandler setTrackersFilter:nil];
         [_connectionHandler setHostsFilter:nil];
         [_connectionHandler setSubscriptionsFilters:nil];
+        [_connectionHandler setSubscriptionsHostsFilter:nil];
         
         NSMutableDictionary<NSString*, AERDomainFilter*> *subscriptionRules = [NSMutableDictionary new];
        

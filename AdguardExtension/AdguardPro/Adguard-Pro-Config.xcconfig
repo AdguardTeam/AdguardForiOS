@@ -20,7 +20,7 @@
 // Global product settings
 AG_PRODUCT = AdGuard Pro
 AG_VERSION = 2.1.0
-AG_BUILD = 151
+AG_BUILD = 152
 
 AG_GIT_TAG_SUFIX = pro
 

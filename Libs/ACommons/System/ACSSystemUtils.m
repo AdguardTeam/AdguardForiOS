@@ -17,6 +17,7 @@
 */
 #import "ACSSystemUtils.h"
 #import "NSException+Utils.h"
+#import "NSString+Utils.h"
 #import <stdlib.h>
 
 /////////////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK Button caption in alerts") style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"OK", @"OK Button caption in alerts") style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               
                                                               [controller dismissViewControllerAnimated:YES completion:nil];
