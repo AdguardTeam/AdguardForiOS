@@ -71,7 +71,7 @@
     
     dispatch_queue_t _countersQueue;
     
-    BOOL _stopHandling;
+    BOOL _packetHandling;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -235,7 +235,7 @@
 
 - (void)stopHandlingPackets {
     
-    _stopHandling = YES;
+    _packetHandling = NO;
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
@@ -250,6 +250,8 @@
             return;
         
         dispatch_block_t closeCompletion = nil;
+        
+        [session removeObservers];
         
         [_sessions removeObject:session];
         
@@ -506,19 +508,21 @@
     
     dispatch_async(_readQueue, ^{
         
-        _stopHandling = NO;
-        
-        [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+        if(!_packetHandling) {
+            _packetHandling = YES;
             
-            __typeof__(self) sSelf = wSelf;
-            
-#ifdef DEBUG
-            [sSelf handlePackets:packets protocols:protocols counter:0];
-#else
-            [sSelf handlePackets:packets protocols:protocols];
-#endif
-            
-        }];
+            [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+                
+                __typeof__(self) sSelf = wSelf;
+                
+    #ifdef DEBUG
+                [sSelf handlePackets:packets protocols:protocols counter:0];
+    #else
+                [sSelf handlePackets:packets protocols:protocols];
+    #endif
+                
+            }];
+        }
     });
 
 }
@@ -538,26 +542,6 @@
 #endif
     
     // Work here
-
-    //    DDLogInfo(@"----------- Packets %lu ---------------", packets.count);
-    //    [packets enumerateObjectsUsingBlock:^(NSData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //
-    //        DDLogInfo(@"Packet %lu length %lu protocol %@", idx, obj.length, protocols[idx]);
-    //        NSMutableString *out = [NSMutableString string];
-    //        Byte *bytes = (Byte *)[obj bytes];
-    //        for (int i = 0; i < obj.length; i++) {
-    //
-    //            if (i > 0) {
-    //                [out appendFormat:@",%d", *(bytes+i)];
-    //            }
-    //            else{
-    //                [out appendFormat:@"%d", *(bytes+i)];
-    //            }
-    //        }
-    //        DDLogInfo(@"Data:\n%@", out);
-    //    }];
-    //
-    //    DDLogInfo(@"---- End Packets -------------");
 
     NSMutableDictionary *packetsBySessions = [NSMutableDictionary dictionary];
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
@@ -598,7 +582,7 @@
             
             __typeof__(self) sSelf = wSelf;
             
-            if(!sSelf || sSelf->_stopHandling){
+            if(!sSelf || !sSelf->_packetHandling){
                 
                 DDLogDebug(@"In readPacketsWithCompletionHandler stop handle");
                 

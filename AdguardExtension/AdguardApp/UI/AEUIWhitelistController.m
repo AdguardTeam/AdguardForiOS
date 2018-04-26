@@ -223,15 +223,6 @@
                            if(inverted) {
                                AEInvertedWhitelistDomainsObject *obj = resources.invertedWhitelistContentBlockingObject;
                                
-                               if(obj) {
-                                   ASDFilterRule* rule = obj.rule;
-                                   if(rule)
-                                       rules = [NSMutableArray arrayWithObject:rule];
-                               }
-                               else {
-                                   rules = [NSMutableArray new];
-                               }
-                               
                                NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"
                                                                                              attributes:AEUICustomTextEditorController.defaultTextAttributes];
                                

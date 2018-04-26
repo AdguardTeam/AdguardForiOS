@@ -48,8 +48,6 @@
 
 - (ASDFilterRule*) ruleFromDomains:(NSArray<NSString*>*) domains {
     
-    BOOL emptyRule = YES;
-    
     NSMutableString* ruleString = [[self rulePrefix] mutableCopy];
     
     for(int i = 0; i < domains.count; ++i) {
@@ -61,7 +59,6 @@
             [ruleString appendString:@"|"];
         
         [ruleString appendFormat:@"~%@", domains[i]];
-        emptyRule = NO;
     }
     
     ASDFilterRule *rule = [ASDFilterRule new];
