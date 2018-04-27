@@ -521,15 +521,11 @@ static BOOL clearSettings = NO;
     DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
     
     if(!_reachabilityHandler.isReachable) {
-        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Skip reachability notify");
         
-        // sometimes when we disconnect the Internet, the use of the memory tunnel grows. A lot of endpoints are created inside the system and maybe this leads to a crash. If we close the connections, then this effect does not appear
-        [_connectionHandler closeAllConnections:nil];
+        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Cancel tunnel");
+        [self cancelTunnelWithError: nil];
+        
         return;
-
-    }
-    else {
-        [_connectionHandler startHandlingPackets];
     }
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
