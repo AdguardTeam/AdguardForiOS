@@ -199,7 +199,7 @@
         if (indexPath.row == 3) {
             
             NSURL *theURL = [NSURL URLWithString:self.meta.homepage];
-            [[UIApplication sharedApplication] openURL:theURL];
+            [[UIApplication sharedApplication] openURL:theURL options:@{} completionHandler:nil];
         }
     }
 }

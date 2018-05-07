@@ -47,10 +47,6 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
@@ -89,7 +85,7 @@
         
         NETunnelProviderManager* manager = managers.firstObject;
         
-        _enabled = manager.enabled;
+        self->_enabled = manager.enabled;
         
         ASSIGN_WEAK(self);
         

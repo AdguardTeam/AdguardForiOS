@@ -148,7 +148,7 @@
                     NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
                     
                     if (ipStr) {
-                        BOOL stop;
+                        BOOL stop = NO;
                         processingBlock(ipStringObject, portStringObject, NO, &stop);
                         if (stop) break;
                     }

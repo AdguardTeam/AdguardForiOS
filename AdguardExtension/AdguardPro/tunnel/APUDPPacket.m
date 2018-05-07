@@ -102,7 +102,7 @@ struct udph6_pseudo {
 
 - (void)setDstPort:(NSString *)dstPort {
     
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     
     uint16_t port = [dstPort intValue];
     if (port) {
@@ -115,7 +115,7 @@ struct udph6_pseudo {
         
         [self checksumUdp];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (NSString *)srcPort{
@@ -125,7 +125,7 @@ struct udph6_pseudo {
 
 - (void)setSrcPort:(NSString *)srcPort {
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     
     int port = [srcPort intValue];
     if (port) {
@@ -138,14 +138,14 @@ struct udph6_pseudo {
         
         [self checksumUdp];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (NSData *)payload{
     
     
     NSData *payload;
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     if (_ipMPacket) {
         payload = [NSData dataWithBytes:((Byte *)_ipMPacket.bytes + _udpHeaderLength) length:(_ipMPacket.length - _udpHeaderLength)];
     }
@@ -153,14 +153,14 @@ struct udph6_pseudo {
         
         payload = [NSData dataWithBytes:((Byte *)_ipPacket.bytes + _udpHeaderLength) length:(_ipPacket.length - _udpHeaderLength)];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
     
     return payload;
 }
 
 - (void)setPayload:(NSData *)payload{
     
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     
     [self repareMutable];
     
@@ -186,7 +186,7 @@ struct udph6_pseudo {
     
     [self checksumUdp];
     
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
     
 }
 

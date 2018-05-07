@@ -71,15 +71,15 @@
 #pragma mark - Table view data source
 
 - (IBAction)clickAdguardWebsite:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_WEBSITE_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_WEBSITE_LINK] options:@{} completionHandler:nil];
 }
 
 - (IBAction)clickAdguardForum:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_FORUM_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_FORUM_LINK] options:@{} completionHandler:nil];
 }
 
 - (IBAction)clickAcknowledgments:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS] options:@{} completionHandler:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

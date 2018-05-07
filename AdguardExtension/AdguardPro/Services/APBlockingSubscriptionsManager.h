@@ -63,7 +63,7 @@ load all rules array from file
 /**
  update all subscriptions
  */
-+ (void) updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock;
++ (void) updateSubscriptionsWithSuccessBlock:(void (^)(void))successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)(void))completionBlock;
 
 /**
  returns subscription info by uuid of subscription

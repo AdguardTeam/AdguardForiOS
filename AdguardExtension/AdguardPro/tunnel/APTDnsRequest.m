@@ -133,7 +133,7 @@
             [sb appendString:obj];
         }
         
-        [sb appendFormat:@", request type = %d", [requestTypes[idx] intValue]];
+        [sb appendFormat:@", request type = %d", [self->requestTypes[idx] intValue]];
     }];
     
     return sb;

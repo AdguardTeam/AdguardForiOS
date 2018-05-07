@@ -820,7 +820,7 @@
     if ([UIApplication.sharedApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
         [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     } else {
-        [UIApplication.sharedApplication openURL:url];
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     }
 }
 
