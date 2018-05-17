@@ -392,9 +392,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         if(USE_STRONG(self)->_currentServer.isDnsCrypt.boolValue) {
             
-            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+            [USE_STRONG(self)->_dnscryptService stopWithCompletionBlock:^{
                 
-                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+                    
+                    [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                }];
             }];
         }
         else {
