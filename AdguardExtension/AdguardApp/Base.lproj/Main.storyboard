@@ -2298,7 +2298,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUU-Z5-nN1">
-                                <rect key="frame" x="120" y="480" width="80" height="30"/>
+                                <rect key="frame" x="120" y="480" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fkh-MO-AwG"/>
+                                </constraints>
                                 <state key="normal" title="Get Started"/>
                                 <connections>
                                     <action selector="clickFinish:" destination="Pc5-0E-sZi" eventType="touchUpInside" id="YlT-GQ-9a8"/>
@@ -2317,7 +2320,7 @@
                             <constraint firstItem="yf2-Ml-kla" firstAttribute="centerX" secondItem="ePk-7R-8ql" secondAttribute="centerX" id="B6P-3S-zLI"/>
                             <constraint firstItem="IUU-Z5-nN1" firstAttribute="centerX" secondItem="ePk-7R-8ql" secondAttribute="centerX" id="R0S-Tu-SPD"/>
                             <constraint firstItem="yf2-Ml-kla" firstAttribute="top" secondItem="RaA-NV-QYw" secondAttribute="bottom" constant="120" id="XZv-PL-BSv"/>
-                            <constraint firstItem="wld-yh-L42" firstAttribute="top" secondItem="IUU-Z5-nN1" secondAttribute="bottom" constant="58" id="rPg-ZX-TPN"/>
+                            <constraint firstItem="wld-yh-L42" firstAttribute="top" secondItem="IUU-Z5-nN1" secondAttribute="bottom" constant="48" id="rPg-ZX-TPN"/>
                         </constraints>
                     </view>
                     <connections>
