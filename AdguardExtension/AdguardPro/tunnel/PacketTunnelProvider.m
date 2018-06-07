@@ -392,9 +392,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         if(USE_STRONG(self)->_currentServer.isDnsCrypt.boolValue) {
             
-            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+            [USE_STRONG(self)->_dnscryptService stopWithCompletionBlock:^{
                 
-                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+                    
+                    [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                }];
             }];
         }
         else {
@@ -518,15 +521,7 @@ static BOOL clearSettings = NO;
 
 - (void)reachNotify:(NSNotification *)note {
     
-    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
-    
-    if(!_reachabilityHandler.isReachable) {
-        
-        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Cancel tunnel");
-        [self cancelTunnelWithError: nil];
-        
-        return;
-    }
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %ld", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
@@ -536,14 +531,33 @@ static BOOL clearSettings = NO;
     
     _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
     
-    if(_currentServer.isDnsCrypt.boolValue)
-    {
+    // In some cases after a change from wifi to a mobile network, the system en(wi-fi) interfaces remain active.
+    // At the same time, we normally receive requests in our tunnel, we correctly process them and receive replies from a remote server, but these answers do not reach the requesting application.
+    // To avoid this situation, we close the tunnel for any reachability event.
+    
+    DDLogInfo(@"(PacketTunnelProvider) close tunnel");
+    
+    [_reachabilityHandler stopNotifier];
+    
+    ASSIGN_WEAK(self);
+    
+    void (^closeConnectionsBlock)() = ^void() {
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self)->_connectionHandler closeAllConnections:^{
+            
+            DDLogInfo(@"(PacketTunnelProvider) call cancelTunnelWithError:");
+            [USE_STRONG(self) cancelTunnelWithError:nil];
+        }];
+    };
+    
+    if(_currentServer.isDnsCrypt.boolValue) {
         [_dnscryptService stopWithCompletionBlock:^{
-            [self updateTunnelSettingsWithCompletionHandler:nil];
+            
+            closeConnectionsBlock();
         }];
     }
     else {
-        [self updateTunnelSettingsWithCompletionHandler:nil];
+        closeConnectionsBlock();
     }
 }
 

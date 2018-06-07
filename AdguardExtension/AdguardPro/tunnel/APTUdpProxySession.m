@@ -222,6 +222,11 @@
             locLogVerboseTrace(USE_STRONG(self), @"state");
             [USE_STRONG(self) sessionStateChanged];
         } else if ([keyPath isEqual:@"hasBetterPath"]) {
+            
+            if(USE_STRONG(self)->_closed) {
+                DDLogInfo(@"hasBetterPath called for closed session. Skip it");
+                return;
+            }
 
             locLogVerboseTrace(USE_STRONG(self) ,@"hasBetterPath");
             NWUDPSession *session = USE_STRONG(object);

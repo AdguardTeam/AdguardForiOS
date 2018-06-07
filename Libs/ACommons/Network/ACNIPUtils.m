@@ -54,16 +54,7 @@
         }
     }];
     
-    __block BOOL hasIpv6Dns = NO;
-    
-    [self enumerateSystemDnsWithProcessingBlock:^(NSString *ip, NSString *port, BOOL ipv4, BOOL *stop) {
-        if(!ipv4) {
-            hasIpv6Dns = YES;
-            *stop = YES;
-        }
-    }];
-    
-    return ipv6Available && hasIpv6Dns;
+    return ipv6Available;
 }
 
 + (BOOL) isIpv4Available {
@@ -76,16 +67,7 @@
         }
     }];
     
-    __block BOOL hasIpv4Dns = NO;
-    
-    [self enumerateSystemDnsWithProcessingBlock:^(NSString *ip, NSString *port, BOOL ipv4, BOOL *stop) {
-        if(ipv4) {
-            hasIpv4Dns = YES;
-            *stop = YES;
-        }
-    }];
-    
-    return ipv4Available && hasIpv4Dns;
+    return ipv4Available;
 }
 
 + (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock {
@@ -148,7 +130,7 @@
                     NSString* portStringObject = port ? [NSString stringWithFormat:@"%d", port] : nil;
                     
                     if (ipStr) {
-                        BOOL stop;
+                        BOOL stop = NO;
                         processingBlock(ipStringObject, portStringObject, NO, &stop);
                         if (stop) break;
                     }

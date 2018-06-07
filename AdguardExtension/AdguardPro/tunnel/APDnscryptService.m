@@ -34,6 +34,7 @@
     NSString* _port;
     dispatch_queue_t _dnsCryptDispatchQueue;
     void (^_dnsCryptEndBlock)();
+    BOOL _isStarted;
 }
 @end
 
@@ -57,6 +58,8 @@
 - (BOOL)startWithRemoteServer:(APDnsServerObject *)server completionBlock:(void (^)())completionBlock {
 
     dispatch_async(_dnsCryptDispatchQueue, ^{
+        
+        _isStarted = YES;
 
         NSString* localAddress = [NSString stringWithFormat:@"%@:%@", _ip, _port];
 
@@ -78,7 +81,6 @@
 
         DDLogInfo(@"(PacketTunnelProvider) start dns crypt proxy with args: %@", args);
 
-        //if(dnscrypt_proxy_main(argc, (char **)argv) != 0) {
         if([self dnscrypt_proxy_main:argc argv:(char**)argv completionBlock:^{
             if(completionBlock)
                 completionBlock();
@@ -95,6 +97,9 @@
                 _dnsCryptEndBlock = nil;
             }
         });
+        
+        _isStarted = NO;
+        
     });
     
     return YES;
@@ -104,6 +109,13 @@
 - (BOOL)stopWithCompletionBlock:(void (^)())completionBlock {
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if(!_isStarted) {
+            if(completionBlock) {
+                completionBlock();
+            }
+            return;
+        }
 
         _dnsCryptEndBlock = ^void() {
 
@@ -253,7 +265,7 @@ proxy_context_init(ProxyContext * const proxy_context, int *argc_p, char ***argv
     memset(proxy_context, 0, sizeof *proxy_context);
     proxy_context->event_loop = NULL;
     proxy_context->log_file = NULL;
-    proxy_context->max_log_level = LOG_INFO;
+    proxy_context->max_log_level = LOG_EMERG;
     proxy_context->tcp_accept_timer = NULL;
     proxy_context->tcp_conn_listener = NULL;
     proxy_context->udp_current_max_size = DNS_MAX_PACKET_SIZE_UDP_NO_EDNS_SEND;

@@ -702,7 +702,7 @@
 
                     // setting text of result on "Check Filter Updates"
                     self.checkFiltersCell.textLabel.text = ACLocalizedString(
-                        @"Filters update error",
+                        @"filter_updates_error",
                         @"(AEUIMainController) Button - Check Filter Updates");
                   });
 
@@ -820,7 +820,7 @@
     if ([UIApplication.sharedApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
         [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     } else {
-        [UIApplication.sharedApplication openURL:url];
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     }
 }
 

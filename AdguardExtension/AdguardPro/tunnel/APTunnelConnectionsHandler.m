@@ -24,6 +24,7 @@
 #import "APUDPPacket.h"
 #include <netinet/ip.h>
 #import <sys/socket.h>
+#import <os/lock.h>
 
 #import "APDnsResourceType.h"
 #import "APDnsRequest.h"
@@ -42,13 +43,13 @@
     
     BOOL _loggingEnabled;
     
-    OSSpinLock _dnsAddressLock;
-    OSSpinLock _globalWhitelistLock;
-    OSSpinLock _globalBlacklistLock;
-    OSSpinLock _userWhitelistLock;
-    OSSpinLock _userBlacklistLock;
-    OSSpinLock _trackersLock;
-    OSSpinLock _hostsLock;
+    os_unfair_lock _dnsAddressLock;
+    os_unfair_lock _globalWhitelistLock;
+    os_unfair_lock _globalBlacklistLock;
+    os_unfair_lock _userWhitelistLock;
+    os_unfair_lock _userBlacklistLock;
+    os_unfair_lock _trackersLock;
+    os_unfair_lock _hostsLock;
     
     NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
@@ -88,7 +89,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_SPINLOCK_INIT;
+        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_UNFAIR_LOCK_INIT;
         _loggingEnabled = NO;
         
         _closeCompletion = nil;
@@ -161,62 +162,62 @@
         DDLogInfo(@"(APTunnelConnectionsHandler) whiteListDnsDictionary %@", whiteListDnsDictionary);
         DDLogInfo(@"(APTunnelConnectionsHandler) remoteDnsDictionary %@", remoteDnsDictionary);
         
-        OSSpinLockLock(&_dnsAddressLock);
+        os_unfair_lock_lock(&_dnsAddressLock);
         
         _whitelistDnsAddresses = [whiteListDnsDictionary copy];
         _remoteDnsAddresses = [remoteDnsDictionary copy];
         
-        OSSpinLockUnlock(&_dnsAddressLock);
+        os_unfair_lock_unlock(&_dnsAddressLock);
     }
 }
 
 - (void)setGlobalWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_globalWhitelistLock);
+    os_unfair_lock_lock(&_globalWhitelistLock);
         _globalWhitelist = filter;
-    OSSpinLockUnlock(&_globalWhitelistLock);
+    os_unfair_lock_unlock(&_globalWhitelistLock);
 }
 
 - (void)setSubscriptionsFilters:(NSDictionary<NSString *,AERDomainFilter *> *)filters {
     
-    OSSpinLockLock(&_globalBlacklistLock);
+    os_unfair_lock_lock(&_globalBlacklistLock);
     _subscriptionsFilters = filters;
-    OSSpinLockUnlock(&_globalBlacklistLock);
+    os_unfair_lock_unlock(&_globalBlacklistLock);
 }
 
 - (void)setUserWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_userWhitelistLock);
+    os_unfair_lock_lock(&_userWhitelistLock);
     _userWhitelist = filter;
-    OSSpinLockUnlock(&_userWhitelistLock);
+    os_unfair_lock_unlock(&_userWhitelistLock);
 }
 
 - (void)setUserBlacklistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_userBlacklistLock);
+    os_unfair_lock_lock(&_userBlacklistLock);
     _userBlacklist = filter;
-    OSSpinLockUnlock(&_userBlacklistLock);
+    os_unfair_lock_unlock(&_userBlacklistLock);
 }
 
 - (void)setTrackersFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_trackersLock);
+    os_unfair_lock_lock(&_trackersLock);
     _trackersList = filter;
-    OSSpinLockUnlock(&_trackersLock);
+    os_unfair_lock_unlock(&_trackersLock);
 }
 
 - (void)setHostsFilter:(NSDictionary *)filter {
     
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     _hosts = filter;
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
 }
 
 - (void)setSubscriptionsHostsFilter:(NSDictionary *)filter {
     
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     _subscriptionsHosts = filter;
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
 }
 
 - (void)startHandlingPackets {
@@ -302,11 +303,11 @@
 - (BOOL)isGlobalWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_globalWhitelistLock);
+    os_unfair_lock_lock(&_globalWhitelistLock);
     
     result = [_globalWhitelist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_globalWhitelistLock);
+    os_unfair_lock_unlock(&_globalWhitelistLock);
     
     return result;
 }
@@ -315,7 +316,7 @@
     
     __block BOOL result = NO;
     __block NSString* foundUUID;
-    OSSpinLockLock(&_globalBlacklistLock);
+    os_unfair_lock_lock(&_globalBlacklistLock);
 
     [_subscriptionsFilters enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull subscriptionUUID, AERDomainFilter * _Nonnull filter, BOOL * _Nonnull stop) {
         
@@ -328,7 +329,7 @@
     
     *uuid = foundUUID;
     
-    OSSpinLockUnlock(&_globalBlacklistLock);
+    os_unfair_lock_unlock(&_globalBlacklistLock);
     
     return result;
 }
@@ -336,11 +337,11 @@
 - (BOOL)isUserWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_userWhitelistLock);
+    os_unfair_lock_lock(&_userWhitelistLock);
     
     result = [_userWhitelist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_userWhitelistLock);
+    os_unfair_lock_unlock(&_userWhitelistLock);
     
     return result;
 }
@@ -348,11 +349,11 @@
 - (BOOL)isUserBlacklistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_userBlacklistLock);
+    os_unfair_lock_lock(&_userBlacklistLock);
     
     result = [_userBlacklist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_userBlacklistLock);
+    os_unfair_lock_unlock(&_userBlacklistLock);
     
     return result;
 }
@@ -360,11 +361,11 @@
 - (BOOL)isTrackerslistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_trackersLock);
+    os_unfair_lock_lock(&_trackersLock);
     
     result = [_trackersList filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_trackersLock);
+    os_unfair_lock_unlock(&_trackersLock);
     
     return result;
 }
@@ -372,7 +373,7 @@
 - (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip subscriptionUUID:(NSString *__autoreleasing *)subscriptionUUID{
     
     BOOL result = NO;
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     
     __block NSString* foundIp = _hosts[domainName];
     __block NSString* foundUUID = nil;
@@ -398,7 +399,7 @@
         }
     }
     
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
     
     return result;
 }
@@ -409,7 +410,7 @@
         serverAddress = [NSString new];
     }
     
-    OSSpinLockLock(&_dnsAddressLock);
+    os_unfair_lock_lock(&_dnsAddressLock);
 
     APDnsServerAddress *address = _whitelistDnsAddresses[serverAddress];
     
@@ -417,7 +418,7 @@
         address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
-    OSSpinLockUnlock(&_dnsAddressLock);
+    os_unfair_lock_unlock(&_dnsAddressLock);
 
     return address;
 }
@@ -428,7 +429,7 @@
         serverAddress = [NSString new];
     }
     
-    OSSpinLockLock(&_dnsAddressLock);
+    os_unfair_lock_lock(&_dnsAddressLock);
     
     APDnsServerAddress *address = _remoteDnsAddresses[serverAddress];
     
@@ -436,7 +437,7 @@
         address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
-    OSSpinLockUnlock(&_dnsAddressLock);
+    os_unfair_lock_unlock(&_dnsAddressLock);
     
     return address;
 }
