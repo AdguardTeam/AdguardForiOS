@@ -127,6 +127,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     BOOL    _localFiltering;
     BOOL    _isRemoteServer;
     APVpnManagerTunnelMode _tunnelMode;
+    BOOL _restartByRechability;
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
@@ -513,6 +514,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
     
+    NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
+    _restartByRechability = restartValue ? [restartValue boolValue] : YES;
+    
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
               (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
 }
@@ -535,8 +539,6 @@ static BOOL clearSettings = NO;
     // At the same time, we normally receive requests in our tunnel, we correctly process them and receive replies from a remote server, but these answers do not reach the requesting application.
     // To avoid this situation, we close the tunnel for any reachability event.
     
-    DDLogInfo(@"(PacketTunnelProvider) close tunnel");
-    
     [_reachabilityHandler stopNotifier];
     
     // https://forums.developer.apple.com/thread/73432
@@ -545,10 +547,26 @@ static BOOL clearSettings = NO;
     // Perhaps it will fix the internet connection failure https://github.com/AdguardTeam/AdguardForiOS/issues/772
     self.reasserting = YES;
     
+    if(_restartByRechability) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
+        [self stopTunnel];
+    }
+    else {
+        
+        DDLogInfo(@"(PacketTunnelProvider) update settings");
+        [self updateSettings];
+    }
+}
+
+- (void) stopTunnel {
+    
     ASSIGN_WEAK(self);
     
     void (^closeConnectionsBlock)() = ^void() {
         ASSIGN_STRONG(self);
+        
+        DDLogInfo(@"(PacketTunnelProvider) stopTunnel - close connections");
         [USE_STRONG(self)->_connectionHandler closeAllConnections:^{
             
             DDLogInfo(@"(PacketTunnelProvider) call cancelTunnelWithError:");
@@ -557,6 +575,8 @@ static BOOL clearSettings = NO;
     };
     
     if(_currentServer.isDnsCrypt.boolValue) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) stopTunnel - stop dnscrypt");
         [_dnscryptService stopWithCompletionBlock:^{
             
             closeConnectionsBlock();
@@ -564,6 +584,40 @@ static BOOL clearSettings = NO;
     }
     else {
         closeConnectionsBlock();
+    }
+}
+
+- (void) updateSettings {
+    
+    ASSIGN_WEAK(self);
+    
+    void (^updateTunnelSettingsBlock)() = ^void() {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
+        
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self) updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error) {
+            self.reasserting = NO;
+            [_reachabilityHandler startNotifier];
+        }];
+    };
+    
+    if(_currentServer.isDnsCrypt.boolValue) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateSettings - stop dnscrypt");
+        [_dnscryptService stopWithCompletionBlock:^{
+            
+            DDLogInfo(@"(PacketTunnelProvider) updateSettings - start dnscrypt");
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer
+                                    completionBlock:^{
+                                        updateTunnelSettingsBlock();
+                                    }];
+            
+        }];
+    }
+    else {
+        updateTunnelSettingsBlock();
     }
 }
 

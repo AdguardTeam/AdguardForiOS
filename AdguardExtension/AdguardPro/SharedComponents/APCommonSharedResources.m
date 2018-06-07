@@ -32,4 +32,5 @@ NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDn
 NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
 NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
+NSString *APVpnManagerRestartByReachability = @"APVpnManagerRestartByReachability";
 

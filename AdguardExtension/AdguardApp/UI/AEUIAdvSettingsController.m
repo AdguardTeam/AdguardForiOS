@@ -131,6 +131,8 @@ typedef enum : NSUInteger {
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
     
+    self.restartSwitch.on = [APVPNManager.singleton restartByReachability];
+    
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cell:self.splitTunnelCell setHidden:YES];
@@ -265,6 +267,11 @@ typedef enum : NSUInteger {
         [AESharedResources.sharedDefaults setBool:!inverted forKey:AEDefaultsInvertedWhitelist];
         sender.on = !inverted;
     }];
+}
+
+- (IBAction)toggleRestartSwitch:(id)sender {
+    
+    [APVPNManager.singleton setRestartByReachability:self.restartSwitch.isOn];
 }
 
 /////////////////////////////////////////////////////////////////////
