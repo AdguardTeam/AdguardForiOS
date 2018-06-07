@@ -539,6 +539,12 @@ static BOOL clearSettings = NO;
     
     [_reachabilityHandler stopNotifier];
     
+    // https://forums.developer.apple.com/thread/73432
+    // reasseting shows "reconnecting" message in ios vpn settings
+    // Also, it stops processing traffic through the tunnel.
+    // Perhaps it will fix the internet connection failure https://github.com/AdguardTeam/AdguardForiOS/issues/772
+    self.reasserting = YES;
+    
     ASSIGN_WEAK(self);
     
     void (^closeConnectionsBlock)() = ^void() {
