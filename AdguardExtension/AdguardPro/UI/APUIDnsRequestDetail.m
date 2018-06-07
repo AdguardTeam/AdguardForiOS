@@ -153,7 +153,8 @@ static NSDateFormatter *_timeFormatter;
                 str = [NSString stringWithFormat:@"%@\n", item.type];
             }
             [sb appendAttributedString:[[NSAttributedString alloc] initWithString:str attributes:bold]];
-            [sb appendAttributedString:[[NSAttributedString alloc] initWithString:item.stringValue attributes:normal]];
+            if(item.stringValue)
+                [sb appendAttributedString:[[NSAttributedString alloc] initWithString:item.stringValue attributes:normal]];
         }
         
         self.responsesCell.longLabel.attributedText = sb;

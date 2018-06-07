@@ -30,6 +30,10 @@
 #define IPV4_FOR_BLOCKING               "\x7F\0\0\1"
 #define IPV6_FOR_BLOCKING               "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1"
 
+#define MNAME_FOR_BLOCKING              @"fake-for-negative-caching.adguard.com"
+
+#define NXDOMAIN_STRING                 @"NXDOMAIN"
+
 @interface APDnsResponse ()
 
 @property (nonatomic) NSString *stringValue;
@@ -91,23 +95,52 @@ static NSData *ipv6BlockingResourceData;
                 
             case ns_t_a:
                 _addressResponse = YES;
-                _stringValue = [NSString stringWithUTF8String:inet_ntoa(*((struct in_addr *)_rdata.bytes))];
-                _blocked = [_stringValue isEqualToString:IPV4_FOR_BLOCKING_STRING];
+                if(_rdata.bytes) {
+                    _stringValue = [NSString stringWithUTF8String:inet_ntoa(*((struct in_addr *)_rdata.bytes))];
+                    _blocked = [_stringValue isEqualToString:IPV4_FOR_BLOCKING_STRING];
+                }
                 
                 break;
                 
             case ns_t_aaaa:
             case ns_t_a6:
                 _addressResponse = YES;
-                str = inet_ntop(AF_INET6, _rdata.bytes, buffer, NS_MAXDNAME);
-                if (str) {
-                    _stringValue = [NSString stringWithUTF8String:str];
-                    _blocked = [_stringValue isEqualToString:IPV6_FOR_BLOCKING_STRING];
+                if(_rdata.bytes) {
+                    str = inet_ntop(AF_INET6, _rdata.bytes, buffer, NS_MAXDNAME);
+                    if (str) {
+                        _stringValue = [NSString stringWithUTF8String:str];
+                        _blocked = [_stringValue isEqualToString:IPV6_FOR_BLOCKING_STRING];
+                    }
                 }
+                
                 break;
                 
             default:
                 break;
+        }
+        
+        int rcode = ns_msg_getflag(msg, ns_f_rcode);
+        if(rcode == ns_r_nxdomain) {
+            _stringValue = NXDOMAIN_STRING;
+            
+            // parse SOA record
+            
+            if(ns_parserr(&msg, ns_s_ns, 0, &rr) >= 0){
+                
+                const u_char* reader = ns_rr_rdata(rr);
+                char mname[NS_MAXDNAME];
+                
+                int len = ns_name_uncompress(ns_msg_base(msg), ns_msg_end(msg), reader, mname, NS_MAXDNAME);
+                
+                reader += len;
+                
+                char rname[NS_MAXDNAME];
+                len = ns_name_uncompress(ns_msg_base(msg), ns_msg_end(msg), reader, rname, NS_MAXDNAME);
+                
+                NSString* mnameString = [NSString stringWithUTF8String:mname];
+                
+                _blocked = [mnameString isEqualToString: MNAME_FOR_BLOCKING];
+            }
         }
         
         free(buffer);

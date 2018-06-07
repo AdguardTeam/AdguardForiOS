@@ -66,3 +66,8 @@ extern NSString *APVpnManagerErrorDomain;
  Key of the paramenter, wich contain APVpnManagerTunnelMode value.
  */
 extern NSString *APVpnManagerParameterTunnelMode;
+
+/**
+ Key of the paramenter, wich contain APVpnManagerRestartByReachability value.
+ */
+extern NSString *APVpnManagerRestartByReachability;

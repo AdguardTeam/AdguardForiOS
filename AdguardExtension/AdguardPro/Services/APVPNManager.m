@@ -67,9 +67,13 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     APVpnManagerTunnelMode _tunnelMode;
     NSNumber          *_delayedSetTunnelMode;
     
+    BOOL          _delayedRestartByReachability;
+    
     NSError     *_standartError;
     
     BOOL _dnsRequestsLogging;
+    
+    BOOL _restartByReachability;
     
     NSMutableArray <APDnsServerObject *> *_customRemoteDnsServers;
     
@@ -158,6 +162,9 @@ static APVPNManager *singletonVPNManager;
         _enabled = NO;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
+        
+        // restart by default
+        _restartByReachability = YES;
         
         [self loadConfiguration];
     }
@@ -371,6 +378,35 @@ static APVPNManager *singletonVPNManager;
     }
     
     [_busyLock unlock];
+}
+
+- (BOOL)restartByReachability {
+    return _restartByReachability;
+}
+
+- (void)setRestartByReachability:(BOOL)restartByReachability {
+    
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        
+        _delayedRestartByReachability = restartByReachability;
+    } else {
+        dispatch_async(workingQueue, ^{
+            
+            if (_busy) {
+                
+                _delayedRestartByReachability = restartByReachability;
+            } else {
+                
+                [self internalSetRestartByReachability:restartByReachability];
+            }
+        });
+    }
+    
+     [_busyLock unlock];
 }
 
 - (BOOL)localFiltering {
@@ -613,7 +649,7 @@ static APVPNManager *singletonVPNManager;
         }
         
         
-        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode enabled:enabled];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:enabled];
         
         // If do not completely stop the tunnel in full mode, then other VPNs can not start
         if(!enabled && _tunnelMode == APVpnManagerTunnelModeFull) {
@@ -640,7 +676,7 @@ static APVPNManager *singletonVPNManager;
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:server tunnelMode:_tunnelMode enabled:NO];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:server tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO];
     }
 }
 
@@ -653,7 +689,7 @@ static APVPNManager *singletonVPNManager;
             _delayedSetEnabled = @(_enabled);
         }
         
-        [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode enabled:NO];
+        [self updateConfigurationForLocalFiltering:localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO];
     }
 }
 
@@ -664,7 +700,19 @@ static APVPNManager *singletonVPNManager;
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:tunnelMode enabled:NO];
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:tunnelMode restartByReachability:_restartByReachability enabled:NO];
+    }
+}
+
+//must be called on workingQueue
+- (void)internalSetRestartByReachability:(BOOL)restart {
+    
+    if(restart != _restartByReachability) {
+        
+        if (_enabled) {
+            _delayedSetEnabled = @(_enabled);
+        }
+        [self updateConfigurationForLocalFiltering:_localFiltering remoteServer:_activeRemoteDnsServer tunnelMode:_tunnelMode restartByReachability:restart enabled:NO];
     }
 }
 
@@ -834,7 +882,7 @@ static APVPNManager *singletonVPNManager;
     
 }
 
-- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer tunnelMode:(APVpnManagerTunnelMode) tunnelMode enabled:(BOOL)enabled{
+- (void)updateConfigurationForLocalFiltering:(BOOL)localFiltering remoteServer:(APDnsServerObject *)remoteServer tunnelMode:(APVpnManagerTunnelMode) tunnelMode restartByReachability:(BOOL)restartByReachability enabled:(BOOL)enabled{
     
     [_busyLock lock];
     _busy = YES;
@@ -862,7 +910,8 @@ static APVPNManager *singletonVPNManager;
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterLocalFiltering: @(localFiltering),
                                        APVpnManagerParameterRemoteDnsServer: remoteServerData,
-                                       APVpnManagerParameterTunnelMode: @(tunnelMode)
+                                       APVpnManagerParameterTunnelMode: @(tunnelMode),
+                                       APVpnManagerRestartByReachability : @(restartByReachability)
                                        };
     
     if (_manager) {
@@ -930,6 +979,9 @@ static APVPNManager *singletonVPNManager;
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         //-------------
+        
+        _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
+        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : YES; // YES by default
         
         NSString *connectionStatusReason = @"Unknown";
         
