@@ -52,6 +52,7 @@
     BOOL _waitWrite;
     BOOL _sessionCreated;
     BOOL _closed;
+    BOOL _removed;
     NSString *_key;
     APUDPPacket *_basePacket;
     APUDPPacket *_reversBasePacket;
@@ -318,6 +319,7 @@
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
         
         if(USE_STRONG(self)->_closed) {
+            locLogInfo(USE_STRONG(self), @"got response for closed session. break.");
             return;
         }
         
@@ -330,6 +332,7 @@
         }
         
         //write data from remote endpoint into local TUN interface
+        locLogInfo(USE_STRONG(self), @"write data from remote endpoint into local TUN interface");
         [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
         
         [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
@@ -460,8 +463,11 @@
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
         locLogVerboseTrace(self, @"NWUDPSessionStateCancelled");
-        if (_closed) {
+        
+        // session and whitelist session gan go into cancelled state simultaneously. We must use _removed flag to prevent call removeSession twice for one session
+        if (_closed && ! _removed) {
             
+            _removed = YES;
             [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }
