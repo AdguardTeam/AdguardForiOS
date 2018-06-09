@@ -2257,35 +2257,41 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-Ml-kla">
                                 <rect key="frame" x="-27.5" y="140" width="375" height="276"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settingsIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-y5-Hqc">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settingsIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QnY-y5-Hqc">
                                         <rect key="frame" x="69" y="20" width="53" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="53" id="876-bm-nuB"/>
+                                            <constraint firstAttribute="height" constant="53" id="Xlq-tp-r9K"/>
+                                        </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="switchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gs5-pw-gzr">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safariIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Nzz-39-Uhw">
+                                        <rect key="frame" x="68.5" y="112" width="53" height="53"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="53" id="Pkh-OM-wBG"/>
+                                            <constraint firstAttribute="width" constant="53" id="kKC-LK-ql3"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gs5-pw-gzr">
                                         <rect key="frame" x="69" y="203" width="53" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="53" id="9U3-cw-tMS"/>
+                                            <constraint firstAttribute="width" constant="53" id="cfS-to-Tih"/>
+                                        </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="safariIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Nzz-39-Uhw">
-                                        <rect key="frame" x="69" y="112" width="53" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open Settings App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvM-g3-UXU">
-                                        <rect key="frame" x="156" y="20" width="205" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Settings App" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvM-g3-UXU">
+                                        <rect key="frame" x="142" y="37" width="137" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Safari, then select Content Blockers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-jO-qTI">
-                                        <rect key="frame" x="156" y="112" width="205" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Safari, then select Content Blockers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-jO-qTI">
+                                        <rect key="frame" x="142" y="119.5" width="165.5" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable AdGuard" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUQ-4e-e8Z">
-                                        <rect key="frame" x="156" y="203" width="205" height="53"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable AdGuard" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUQ-4e-e8Z">
+                                        <rect key="frame" x="142" y="220" width="117" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2293,8 +2299,23 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="gs5-pw-gzr" firstAttribute="top" secondItem="Nzz-39-Uhw" secondAttribute="bottom" constant="38" id="2dC-ep-sWV"/>
+                                    <constraint firstItem="wUQ-4e-e8Z" firstAttribute="leading" secondItem="gs5-pw-gzr" secondAttribute="trailing" constant="20" id="2gY-xr-aM7"/>
                                     <constraint firstAttribute="width" constant="375" id="3uo-Ur-Dpm"/>
+                                    <constraint firstItem="9iF-jO-qTI" firstAttribute="centerY" secondItem="Nzz-39-Uhw" secondAttribute="centerY" id="Dmb-J1-iE6"/>
+                                    <constraint firstItem="SvM-g3-UXU" firstAttribute="centerY" secondItem="QnY-y5-Hqc" secondAttribute="centerY" id="Hxa-fI-9JI"/>
                                     <constraint firstAttribute="height" constant="276" id="Pug-aG-q9X"/>
+                                    <constraint firstItem="Nzz-39-Uhw" firstAttribute="leading" secondItem="yf2-Ml-kla" secondAttribute="leading" constant="68.5" id="R0x-ys-5mq"/>
+                                    <constraint firstItem="SvM-g3-UXU" firstAttribute="leading" secondItem="QnY-y5-Hqc" secondAttribute="trailing" constant="20" id="SHo-qs-2YO"/>
+                                    <constraint firstItem="9iF-jO-qTI" firstAttribute="leading" secondItem="Nzz-39-Uhw" secondAttribute="trailing" constant="20.5" id="TG4-uv-qYm"/>
+                                    <constraint firstItem="QnY-y5-Hqc" firstAttribute="leading" secondItem="yf2-Ml-kla" secondAttribute="leading" constant="69" id="fPv-Ve-D3Q"/>
+                                    <constraint firstItem="gs5-pw-gzr" firstAttribute="leading" secondItem="yf2-Ml-kla" secondAttribute="leading" constant="69" id="fxx-EL-CZe"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SvM-g3-UXU" secondAttribute="trailing" constant="51" id="iak-yG-PPF"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9iF-jO-qTI" secondAttribute="trailing" id="tiz-db-baG"/>
+                                    <constraint firstItem="Nzz-39-Uhw" firstAttribute="top" secondItem="QnY-y5-Hqc" secondAttribute="bottom" constant="39" id="vNM-jd-gf0"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wUQ-4e-e8Z" secondAttribute="trailing" constant="51" id="xE5-a6-zna"/>
+                                    <constraint firstItem="QnY-y5-Hqc" firstAttribute="top" secondItem="yf2-Ml-kla" secondAttribute="top" constant="20" id="yfP-Hx-3dr"/>
+                                    <constraint firstItem="wUQ-4e-e8Z" firstAttribute="centerY" secondItem="gs5-pw-gzr" secondAttribute="centerY" id="ze5-Nu-V7i"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUU-Z5-nN1">
