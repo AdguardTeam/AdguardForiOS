@@ -162,8 +162,8 @@ static APVPNManager *singletonVPNManager;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
         
-        // restart by default
-        _restartByReachability = YES;
+        // don't restart by default
+        _restartByReachability = NO;
         
         [self loadConfiguration];
     }
@@ -980,7 +980,7 @@ static APVPNManager *singletonVPNManager;
         //-------------
         
         _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : YES; // YES by default
+        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
         
         NSString *connectionStatusReason = @"Unknown";
         
