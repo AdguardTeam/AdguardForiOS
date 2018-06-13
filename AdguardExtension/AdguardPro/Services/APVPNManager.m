@@ -145,8 +145,7 @@ static APVPNManager *singletonVPNManager;
                        code:APVPN_MANAGER_ERROR_STANDART
                    userInfo:@{
                        NSLocalizedDescriptionKey : ACLocalizedString(
-                           @"There was a problem with VPN configuration, "
-                           @"please contact our support team.",
+                           @"support_vpn_configuration_problem",
                            @"(APVPNManager)  PRO version. Error, which may "
                            @"occur in DNS Filtering module. When user turns on "
                            @"DNS Filtering functionality.")
