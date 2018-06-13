@@ -3008,6 +3008,7 @@
                         <outlet property="fullTunnelWithoutVPNCell" destination="aiJ-9I-1AA" id="6Y7-O9-7Gw"/>
                         <outlet property="invertWhitelistCell" destination="y8O-T8-oXB" id="PvS-A8-OeF"/>
                         <outlet property="invertWhitelistSwitch" destination="tvr-AF-mBm" id="kil-rx-23B"/>
+                        <outlet property="restartCell" destination="kJK-zx-HsU" id="jfa-vG-fji"/>
                         <outlet property="restartSwitch" destination="4gc-6O-IN4" id="CN4-SO-gj8"/>
                         <outlet property="simplifiedButton" destination="PT4-sR-qS2" id="3B1-Jw-O6U"/>
                         <outlet property="splitTunnelCell" destination="qQC-G1-vF8" id="Kdd-M0-ixA"/>
