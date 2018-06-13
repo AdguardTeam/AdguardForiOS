@@ -113,4 +113,9 @@ extern NSString * _Nonnull APDnsServerUUIDAdguardFamily;
  */
 - (void)setIpAddressesFromString:(NSString  * _Nonnull)ipAddresses;
 
+/**
+ compare the equivalence of the settings
+ */
+- (BOOL) settingsEqual:(APDnsServerObject*) server;
+
 @end
