@@ -115,7 +115,7 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"action_bug_report", @"(AEUIAboutController) Subject field for mail bug report")]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
@@ -146,8 +146,8 @@ static AESSupport *singletonSupport;
     }
     else{
         
-        [ACSSystemUtils showSimpleAlertForController:parent withTitle:NSLocalizedString(@"Error", @"")
-                                             message:NSLocalizedString(@"Can't send bug report because no email is probably set up on your device.", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
+        [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
+                                             message:ACLocalizedString(@"bug_report_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
     }
 }
 
@@ -178,8 +178,8 @@ static AESSupport *singletonSupport;
     }
     else{
         
-        [ACSSystemUtils showSimpleAlertForController:parent withTitle:NSLocalizedString(@"Error", @"")
-                                             message:NSLocalizedString(@"Can't send message to support team because you have no configured email account.", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
+        [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
+                                             message:ACLocalizedString(@"support_message_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
     }
 
 }

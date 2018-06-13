@@ -17,6 +17,7 @@
 */
 #import "AEUILoadingModal.h"
 #import "ACommons/ACSystem.h"
+#import "NSString+Utils.h"
 
 NSString *AEUILoadingModalIdentifier = @"loadingModal";
 
@@ -90,7 +91,7 @@ static AEUILoadingModal *lmSingleton;
 
 - (void)standardLoadingModalShowWithParent:(UIViewController *)parent completion:(dispatch_block_t)completionBlock{
     
-    NSString *convertingMessage = NSLocalizedString(@"Loading filters to Safari. Please do not turn off Adguard, the process will take no more than 30 seconds...", @"(AEUILoadingModal) Standard message when filter conversion is performed.");
+    NSString *convertingMessage = ACLocalizedString(@"safari_filters_loading", @"(AEUILoadingModal) Standard message when filter conversion is performed.");
 
     [self loadingModalShowWithParent:parent message:convertingMessage cancelAction:nil  completion:completionBlock];
 }

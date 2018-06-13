@@ -117,7 +117,7 @@ typedef enum : NSUInteger {
     _invertWhitelistSwitch.on = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
 #ifdef PRO
-    self.htmlString = NSLocalizedString(@"Adguard Pro works in two different modes. In the Split-Tunnel mode Adguard is compatible with so-called \"Personal VPN\" apps (full list: <a href=\"https://github.com/AdguardTeam/AdguardForiOS/issues/162\">https://github.com/AdguardTeam/AdguardForiOS/issues/162</a>). As a trade-off, in this mode Adguard may be bypassed by system in case of bad connectivity. On the contrary, in the Full-Tunnel mode Adguard can't be run along any other VPN apps, but also can't be bypassed regardless of the connection quality.", @"Advanced settings - tunnel mode description");
+    self.htmlString = ACLocalizedString(@"pro_modes_description", @"Advanced settings - tunnel mode description");
     
     // convert html string to attributed string
     NSData *data = [self.htmlString dataUsingEncoding:NSUTF8StringEncoding];
@@ -131,11 +131,14 @@ typedef enum : NSUInteger {
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
     
+    self.restartSwitch.on = [APVPNManager.singleton restartByReachability];
+    
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cell:self.splitTunnelCell setHidden:YES];
     [self cell:self.fullTunnelCell setHidden:YES];
     [self cell:self.fullTunnelWithoutVPNCell setHidden:YES];
+    [self cell:self.restartCell setHidden:YES];
     
     [self reloadDataAnimated:YES];
 #endif
@@ -266,6 +269,15 @@ typedef enum : NSUInteger {
         sender.on = !inverted;
     }];
 }
+
+#ifdef PRO
+
+- (IBAction)toggleRestartSwitch:(id)sender {
+    
+    [APVPNManager.singleton setRestartByReachability:self.restartSwitch.isOn];
+}
+
+#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark helper methods

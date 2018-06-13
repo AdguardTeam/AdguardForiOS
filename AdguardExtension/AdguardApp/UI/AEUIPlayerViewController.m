@@ -18,9 +18,9 @@
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.0/%@/%@.mp4"
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.1/%@/%@.mp4"
 
-#define DEFAULT_TUTORIAL_VIDEO          @"EnablingAdguardVideo"
+#define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
 #define HIDE_NAVIGATION_DELAY 2 // seconds
 
 @interface AEUIPlayerViewController ()

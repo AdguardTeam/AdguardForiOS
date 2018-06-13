@@ -218,8 +218,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         APBlockingSubscription* subscription = [APBlockingSubscription new];
         
         subscription.uuid = @"SUBS01";
-        subscription.name = NSLocalizedString(@"AdGuard SDN filter", @"predefined subscription name");
-        subscription.subscriptionDescription = NSLocalizedString(@"Simplified Domain Names filter. Composed of several other filters (English filter, Social media filter, Spyware filter, Mobile ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking.", @"predefined subscription description");
+        subscription.name = ACLocalizedString(@"adguard_subscription_name", @"predefined subscription name");
+        subscription.subscriptionDescription = ACLocalizedString(@"adguard_subscription_description", @"predefined subscription description");
         subscription.url = @"https://filters.adtidy.org/ios/filters/15_optimized.txt";
         
         [predefinedSubscriptions addObject:subscription];
@@ -227,8 +227,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         subscription = [APBlockingSubscription new];
         
         subscription.uuid = @"SUBS02";
-        subscription.name = NSLocalizedString(@"AdAway default blocklist", @"predefined subscription name");
-        subscription.subscriptionDescription = NSLocalizedString(@"Blocking mobile ad providers and some analytics providers", @"predefined subscription description");
+        subscription.name = ACLocalizedString(@"adaway_subscription_name", @"predefined subscription name");
+        subscription.subscriptionDescription = ACLocalizedString(@"adaway_subscription_description", @"predefined subscription description");
         subscription.url = @"https://adaway.org/hosts.txt";
         
         [predefinedSubscriptions addObject:subscription];
@@ -236,8 +236,8 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
         subscription = [APBlockingSubscription new];
         
         subscription.uuid = @"SUBS03";
-        subscription.name = NSLocalizedString(@"hpHosts - Ad and Tracking servers", @"predefined subscription name");
-        subscription.subscriptionDescription = NSLocalizedString(@"Hosts in the hpHosts database with the ATS classification ONLY.", @"predefined subscription description");
+        subscription.name = ACLocalizedString(@"hphosts_subscription_name", @"predefined subscription name");
+        subscription.subscriptionDescription = ACLocalizedString(@"hphosts_subscription_description", @"predefined subscription description");
         subscription.url = @"https://hosts-file.net/ad_servers.txt";
         
         [predefinedSubscriptions addObject:subscription];
@@ -256,7 +256,7 @@ static NSArray<APBlockingSubscription *> *_subscriptionsMeta;
 }
 
 
-+ (void)updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock
++ (void)updateSubscriptionsWithSuccessBlock:(void (^)(void))successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)(void))completionBlock
 {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

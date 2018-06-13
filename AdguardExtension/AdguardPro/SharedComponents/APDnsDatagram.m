@@ -213,6 +213,28 @@
                 _responses = [responses copy];
             }
         }
+        else {
+            
+            // parse nxdomain responce
+            int rcode = ns_msg_getflag(handle, ns_f_rcode);
+            if(rcode != ns_r_nxdomain) {
+                return NO;
+            }
+            
+            if (ns_rr_class(rr) != ns_c_in) {
+                return NO;
+            }
+            
+            NSMutableArray *responses = [NSMutableArray arrayWithCapacity:count];
+            
+            APDnsResponse *response = [[APDnsResponse alloc] initWithRR:rr msg:handle];
+            [responses addObject:response];
+            
+            if (responses.count) {
+                _responses = [responses copy];
+            }
+        }
+       
     }
     
     return YES;

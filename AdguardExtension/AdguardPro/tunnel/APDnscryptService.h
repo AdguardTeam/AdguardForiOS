@@ -19,13 +19,35 @@
 #import <Foundation/Foundation.h>
 #import "APDnsServerObject.h"
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark - APDnscryptService
 
+/**
+ Class controls dnscrypt client.
+ */
 @interface APDnscryptService : NSObject
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark Init and Class methods
+
+/**
+ init service.
+ params - ip and port for dnscrypt client
+ */
 - (instancetype) initWithIp:(NSString*)ip port:(NSString*) port;
 
+/**
+ starts service
+ server - remote server configuration
+ completionBlock will called in main dispatch queue right after the service will be succesfully initialized
+ */
 - (BOOL) startWithRemoteServer:(APDnsServerObject*) server completionBlock:(void (^)())completionBlock;
 
+/**
+ stops service
+ completionBlock will called in main dispatch queue right after the service will be succesfully stopped
+ if service is not running now then completionBlock will call immediately in main queue
+ */
 - (BOOL) stopWithCompletionBlock:(void (^)())completionBlock;
 
 @end

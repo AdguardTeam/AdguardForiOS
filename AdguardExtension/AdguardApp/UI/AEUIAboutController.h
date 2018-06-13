@@ -17,12 +17,13 @@
 */
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "StaticDataTableViewController.h"
 
-@interface AEUIAboutController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface AEUIAboutController : StaticDataTableViewController <MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *howToEnableCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *howToAddRulesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *manageContentBlockerCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *managePrivacySettingsCell;
 
 - (IBAction)clickAdguardWebsite:(id)sender;
 - (IBAction)clickAdguardForum:(id)sender;

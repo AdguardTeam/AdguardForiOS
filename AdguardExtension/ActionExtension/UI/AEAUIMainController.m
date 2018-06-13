@@ -60,7 +60,7 @@
     // tunning accessibility
     self.blockElementLabel.accessibilityTraits |= UIAccessibilityTraitButton;
     
-    NSString *labelFormat = NSLocalizedString(@"Enable filtering on %@", @"(Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com'");
+    NSString *labelFormat = ACLocalizedString(@"enable_filtering_format", @"(Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com'");
     self.enableOnCell.textLabel.accessibilityLabel = [NSString stringWithFormat:labelFormat, self.domainName];
     //--------------
     
@@ -100,7 +100,7 @@
        
         if(!enabled) {
             
-            [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Warning", @"(Action Extension - AEAUIMainController) Warning tile") message:NSLocalizedString(@"Note that the Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+            [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_warning_title", @"(Action Extension - AEAUIMainController) Warning tile") message:ACLocalizedString(@"content_blocker_disabled_format", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
         }
     }];
     
@@ -114,6 +114,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     [self.tableView reloadData];
 }
 
@@ -139,7 +141,7 @@
     
     //check rule overlimit
     if (!self.enableChangeDomainFilteringStatus) {
-        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(Action Extension - AEAUIMainController) Error tile") message:NSLocalizedString(@"You have exceeded the maximum number of the filter rules.", @"(Action Extension - AEAUIMainController) error occurs when try turn off filtration on site.")];
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(Action Extension - AEAUIMainController) Error tile") message:ACLocalizedString(@"filter_rules_maximum", @"(Action Extension - AEAUIMainController) error occurs when try turn off filtration on site.")];
         [self.statusButton setOn:self.domainEnabled animated:YES];
         return;
     }
@@ -243,8 +245,8 @@
 
 - (IBAction)clickIncorrectBlocking:(id)sender {
     
-    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Report Incorrect Blocking", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
-    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"Incorrect blocking on page:\n%@", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
+    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"incorrect_blocking_report", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
+    NSString *body = [NSString stringWithFormat:ACLocalizedString(@"incorrect_blocking_page_format", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
 
     [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
@@ -257,21 +259,21 @@
             @"urlScheme" : AE_URLSCHEME,
             @"i18n" : @{
                 @"buttons" : @{
-                    @"plus" : NSLocalizedString(
+                    @"plus" : ACLocalizedString(
                         @"More", @"(Action Extension - Adguard Assistant) "
                                  @"Assistant UI. Title for 'plus' button"),
-                    @"minus" : NSLocalizedString(
+                    @"minus" : ACLocalizedString(
                         @"Less", @"(Action Extension - Adguard Assistant) "
                                  @"Assistant UI. Title for 'munus' button"),
-                    @"accept" : NSLocalizedString(
+                    @"accept" : ACLocalizedString(
                         @"Accept", @"(Action Extension - Adguard Assistant) "
                                    @"Assistant UI. Title for 'Adguard icon' "
                                    @"button"),
-                    @"cancel" : NSLocalizedString(
+                    @"cancel" : ACLocalizedString(
                         @"Cancel", @"(Action Extension - Adguard Assistant) "
                                    @"Assistant UI. Title for 'close icon' "
                                    @"button"),
-                    @"preview" : NSLocalizedString(
+                    @"preview" : ACLocalizedString(
                         @"Preview", @"(Action Extension - Adguard Assistant) "
                                     @"Assistant UI. Title for 'eye icon' "
                                     @"button")
@@ -283,7 +285,7 @@
     }
     else{
         
-        [ACSSystemUtils showSimpleAlertForController:self withTitle:NSLocalizedString(@"Error", @"(Action Extension - AEAUIMainController) Error tile") message:NSLocalizedString(@"This website security policy does not allow to launch Adguard Assistant.", @"(Action Extension - AEAUIMainController) error occurs when click on Block Element button.")];
+        [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(Action Extension - AEAUIMainController) Error tile") message:ACLocalizedString(@"assistant_launching_unable", @"(Action Extension - AEAUIMainController) error occurs when click on Block Element button.")];
         [self.statusButton setOn:self.domainEnabled animated:YES];
     }
 }

@@ -151,3 +151,9 @@ static inline NSString *LocalizationNotNeeded(NSString *s) {
     return s;
 }
 
+/**
+ returns localized string by key. If string not found in preffered language, rerurns english string -
+ NSLocalizedString() returns key in this case
+ */
+NSString* ACLocalizedString(NSString* key, NSString* comment);
+

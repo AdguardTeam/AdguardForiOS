@@ -136,6 +136,11 @@ extern NSString *APVpnChangedNotification;
 @property APVpnManagerTunnelMode tunnelMode;
 
 /**
+ The flag specifies whether to restart the tunnel by reachability event
+ */
+@property BOOL restartByReachability;
+
+/**
  Adds custom (editable) DNS server.
 
  @param server Server instance. It must be editable.

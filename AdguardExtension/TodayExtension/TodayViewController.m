@@ -47,10 +47,6 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
@@ -89,7 +85,7 @@
         
         NETunnelProviderManager* manager = managers.firstObject;
         
-        _enabled = manager.enabled;
+        self->_enabled = manager.enabled;
         
         ASSIGN_WEAK(self);
         
@@ -107,10 +103,10 @@
                 
                 APDnsServerObject *activeRemoteDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
              
-                NSString* format = NSLocalizedString(@"Connected to \"%@\"", @"Today widget - text when remote DNS is enabled");
+                NSString* format = ACLocalizedString(@"connected_to_server_format", @"Today widget - text when remote DNS is enabled");
                 USE_STRONG(self).mainTextLabel.text = [NSString stringWithFormat:format, activeRemoteDnsServer.serverName];
                 
-                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to disable DNS filtering", @"Today widget - hint text");
+                USE_STRONG(self).detailTextLabel.text = ACLocalizedString(@"disable_dns_filtering", @"Today widget - hint text");
                 
                 [USE_STRONG(self).mainTextLabel sizeToFit];
                 
@@ -124,11 +120,11 @@
             }
             else {
         
-                USE_STRONG(self).mainTextLabel.text = NSLocalizedString(@"DNS filtering is disabled", @"Today widget - text when remote DNS is disabled");
+                USE_STRONG(self).mainTextLabel.text = ACLocalizedString(@"dns_filtering_disabled", @"Today widget - text when remote DNS is disabled");
                 
                 [USE_STRONG(self).mainTextLabel sizeToFit];
 
-                USE_STRONG(self).detailTextLabel.text = NSLocalizedString(@"Touch to enable DNS filtering", @"Today widget - hint text");
+                USE_STRONG(self).detailTextLabel.text = ACLocalizedString(@"enable_dns_filtering", @"Today widget - hint text");
 
                 USE_STRONG(self).logo.alpha = 0.5;
             }

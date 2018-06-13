@@ -19,6 +19,7 @@
 #import "APBlockingSubscriptionDetailsController.h"
 #import "AEUILongLabelViewCell.h"
 #import "AEUILabelWithCopy.h"
+#import "NSString+Utils.h"
 
 @interface APBlockingSubscriptionDetailsController ()
 
@@ -39,7 +40,7 @@
     self.nameLabel.text = self.subscription.name;
     
     if(self.subscription.rulesCount) {
-        NSString* format = NSLocalizedString(@"%d rules", @"(APBlockingSubscriptionDetailsController.h) rules count format");
+        NSString* format = ACLocalizedString(@"rules_counter_format", @"(APBlockingSubscriptionDetailsController.h) rules count format");
         self.rulesCountLabel.text = [NSString stringWithFormat:format, self.subscription.rulesCount];
     }
     

@@ -354,7 +354,7 @@ static NSDictionary *_editAttrs;
 }
 
 - (IBAction)clickRules:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK] options:@{} completionHandler:nil];
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -34,7 +34,7 @@
     self = [super init];
     if (self) {
         
-        _lock = OS_SPINLOCK_INIT;
+        _lock = OS_UNFAIR_LOCK_INIT;
         
         _ipHeader = NULL;
         _ip6Header = NULL;
@@ -55,7 +55,7 @@
     self = [super init];
     if (self) {
         
-        _lock = OS_SPINLOCK_INIT;
+        _lock = OS_UNFAIR_LOCK_INIT;
 
         _ipHeader = NULL;
         _ip6Header = NULL;
@@ -83,7 +83,7 @@
 
 - (void)setDstAddress:(NSString *)dstAddress {
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     int af = [_aFamily intValue];
     
     [self repareMutable];
@@ -98,7 +98,7 @@
     }
     else {
         
-        OSSpinLockUnlock(&_lock);
+        os_unfair_lock_unlock(&_lock);
         return;
     }
     
@@ -112,7 +112,7 @@
         [self checksumIPv4];
     }
     
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (NSString *)srcAddress{
@@ -122,7 +122,7 @@
 
 - (void)setSrcAddress:(NSString *)srcAddress {
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     int af = [_aFamily intValue];
     
     [self repareMutable];
@@ -136,7 +136,7 @@
         dest = &(_ip6Header->ip6_src);
     }
     else {
-        OSSpinLockUnlock(&_lock);
+        os_unfair_lock_unlock(&_lock);
         return;
     }
     
@@ -150,20 +150,20 @@
         [self checksumIPv4];
     }
     
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (NSData *)packet {
 
     NSData *packet;
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     if (_ipMPacket) {
         packet = [_ipMPacket copy];
     }
     else{
         packet = _ipPacket;
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 
     return packet;
 }
@@ -172,7 +172,7 @@
 
     
     NSData *payload;
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     if (_ipMPacket) {
         payload = [NSData dataWithBytes:((Byte *)_ipMPacket.bytes + _ipHeaderLength) length:(_ipMPacket.length - _ipHeaderLength)];
     }
@@ -180,14 +180,14 @@
         
         payload = [NSData dataWithBytes:((Byte *)_ipPacket.bytes + _ipHeaderLength) length:(_ipPacket.length - _ipHeaderLength)];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
     
     return payload;
 }
 
 - (void)setPayload:(NSData *)payload{
     
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     int af = [_aFamily intValue];
     
     [self repareMutable];
@@ -207,7 +207,7 @@
         _ip6Header = (struct ip6_hdr *)_ipMPacket.mutableBytes;
         _ip6Header->ip6_plen = htons(_ipMPacket.length - APT_IPV6_FIXED_HEADER_LENGTH);
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
  
 }
 

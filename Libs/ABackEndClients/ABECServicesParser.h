@@ -20,8 +20,6 @@
 #import "ABECService.h"
 
 @interface ABECServicesParser : NSObject {
-    @private
-    BOOL test;
 }
 
 @property (nonatomic) NSDictionary<NSString*, ABECService*> *hosts;

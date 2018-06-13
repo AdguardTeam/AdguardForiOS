@@ -52,6 +52,7 @@
     BOOL _waitWrite;
     BOOL _sessionCreated;
     BOOL _closed;
+    BOOL _removed;
     NSString *_key;
     APUDPPacket *_basePacket;
     APUDPPacket *_reversBasePacket;
@@ -145,16 +146,21 @@
     }
 }
 
+- (void) removeObservers {
+    @try {
+        [self.udpSession removeObserver:self forKeyPath:@"state"];
+        [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    }
+    @catch(id exception) {
+        locLogWarn(self, @"removeObservers failed");
+    }
+}
+
 - (void)dealloc {
-
     locLogTrace(self);
-
-    [self.udpSession removeObserver:self forKeyPath:@"state"];
-    [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    
-_workingQueue = nil;
+    _workingQueue = nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -217,6 +223,11 @@ _workingQueue = nil;
             locLogVerboseTrace(USE_STRONG(self), @"state");
             [USE_STRONG(self) sessionStateChanged];
         } else if ([keyPath isEqual:@"hasBetterPath"]) {
+            
+            if(USE_STRONG(self)->_closed) {
+                DDLogInfo(@"hasBetterPath called for closed session. Skip it");
+                return;
+            }
 
             locLogVerboseTrace(USE_STRONG(self) ,@"hasBetterPath");
             NWUDPSession *session = USE_STRONG(object);
@@ -308,6 +319,7 @@ _workingQueue = nil;
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
         
         if(USE_STRONG(self)->_closed) {
+            locLogInfo(USE_STRONG(self), @"got response for closed session. break.");
             return;
         }
         
@@ -320,6 +332,7 @@ _workingQueue = nil;
         }
         
         //write data from remote endpoint into local TUN interface
+        locLogInfo(USE_STRONG(self), @"write data from remote endpoint into local TUN interface");
         [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
         
         [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
@@ -433,6 +446,9 @@ _workingQueue = nil;
         [self sendPackets];
     } else if (session.state == NWUDPSessionStateFailed
                || whitelistSession.state == NWUDPSessionStateFailed) {
+        
+        if(_closed)
+            return;
 
         locLogVerboseTrace(self, @"NWUDPSessionStateFailed");
 
@@ -447,8 +463,11 @@ _workingQueue = nil;
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
         locLogVerboseTrace(self, @"NWUDPSessionStateCancelled");
-        if (_closed) {
+        
+        // session and whitelist session gan go into cancelled state simultaneously. We must use _removed flag to prevent call removeSession twice for one session
+        if (_closed && ! _removed) {
             
+            _removed = YES;
             [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }

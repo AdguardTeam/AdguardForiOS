@@ -127,6 +127,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     BOOL    _localFiltering;
     BOOL    _isRemoteServer;
     APVpnManagerTunnelMode _tunnelMode;
+    BOOL _restartByRechability;
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
@@ -392,9 +393,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         if(USE_STRONG(self)->_currentServer.isDnsCrypt.boolValue) {
             
-            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+            [USE_STRONG(self)->_dnscryptService stopWithCompletionBlock:^{
                 
-                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
+                    
+                    [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+                }];
             }];
         }
         else {
@@ -438,6 +442,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         [self logNetworkInterfaces];
         DDLogInfo(@"PacketTunnelProvider) Start Tunnel mode: %@", modeName);
+        
+        if(clearSettings) {
+            _tunnelMode = APVpnManagerTunnelModeSplit;
+        }
         
         settings = [self createTunnelSettings:full wihoutVPNIcon:withoutIcon];
         DDLogInfo(@"(PacketTunnelProvider) Tunnel settings filled.");
@@ -506,13 +514,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
     
+    NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
+    _restartByRechability = restartValue ? [restartValue boolValue] : YES;
+    
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
               (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
 }
 
+static BOOL clearSettings = NO;
+
 - (void)reachNotify:(NSNotification *)note {
     
-    DDLogInfo(@"(PacketTunnelProvider) reachability Notify");
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %ld", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
@@ -520,92 +533,97 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         return;
     }
     
-    if(!_reachabilityHandler.isReachable) {
-        DDLogInfo(@"(PacketTunnelProvider) network not reachable. Skip reachability notify");
-        return;
-    }
-    
     _lastReachabilityStatus = [_reachabilityHandler currentReachabilityStatus];
     
-    if(_currentServer.isDnsCrypt.boolValue)
-    {
+    // In some cases after a change from wifi to a mobile network, the system en(wi-fi) interfaces remain active.
+    // At the same time, we normally receive requests in our tunnel, we correctly process them and receive replies from a remote server, but these answers do not reach the requesting application.
+    // To avoid this situation, we close the tunnel for any reachability event.
+    
+    [_reachabilityHandler stopNotifier];
+    
+    // https://forums.developer.apple.com/thread/73432
+    // reasseting shows "reconnecting" message in ios vpn settings
+    // Also, it stops processing traffic through the tunnel.
+    // Perhaps it will fix the internet connection failure https://github.com/AdguardTeam/AdguardForiOS/issues/772
+    self.reasserting = YES;
+    
+    if(_restartByRechability) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
+        [self stopTunnel];
+    }
+    else {
+        
+        DDLogInfo(@"(PacketTunnelProvider) update settings");
+        [self updateSettings];
+    }
+}
+
+- (void) stopTunnel {
+    
+    ASSIGN_WEAK(self);
+    
+    void (^closeConnectionsBlock)() = ^void() {
+        ASSIGN_STRONG(self);
+        
+        DDLogInfo(@"(PacketTunnelProvider) stopTunnel - close connections");
+        [USE_STRONG(self)->_connectionHandler closeAllConnections:^{
+            
+            DDLogInfo(@"(PacketTunnelProvider) call cancelTunnelWithError:");
+            [USE_STRONG(self) cancelTunnelWithError:nil];
+        }];
+    };
+    
+    if(_currentServer.isDnsCrypt.boolValue) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) stopTunnel - stop dnscrypt");
         [_dnscryptService stopWithCompletionBlock:^{
-            [self updateTunnelSettingsWithCompletionHandler:nil];
+            
+            closeConnectionsBlock();
         }];
     }
     else {
-        [self updateTunnelSettingsWithCompletionHandler:nil];
+        closeConnectionsBlock();
+    }
+}
+
+- (void) updateSettings {
+    
+    ASSIGN_WEAK(self);
+    
+    void (^updateTunnelSettingsBlock)() = ^void() {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
+        
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self) updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error) {
+            self.reasserting = NO;
+            [_reachabilityHandler startNotifier];
+        }];
+    };
+    
+    if(_currentServer.isDnsCrypt.boolValue) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateSettings - stop dnscrypt");
+        [_dnscryptService stopWithCompletionBlock:^{
+            
+            DDLogInfo(@"(PacketTunnelProvider) updateSettings - start dnscrypt");
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer
+                                    completionBlock:^{
+                                        updateTunnelSettingsBlock();
+                                    }];
+            
+        }];
+    }
+    else {
+        updateTunnelSettingsBlock();
     }
 }
 
 - (void)reloadWhitelistBlacklistDomain {
     
-//    if (_localFiltering == NO) {
-//
-//        [_connectionHandler setGlobalWhitelistFilter:nil];
-//        [_connectionHandler setGlobalBlacklistFilter:nil];
-//        [_connectionHandler setUserWhitelistFilter:nil];
-//        [_connectionHandler setUserBlacklistFilter:nil];
-//
-//        DDLogInfo(@"(PacketTunnelProvider) System-Wide Filtering rules set to nil.");
-//
-//        return;
-//    }
-//
     @autoreleasepool {
-
-//        AERDomainFilter *globalWhiteRules = [AERDomainFilter filter];
-//        AERDomainFilter *globalBlackRules = [AERDomainFilter filter];
-//
-//        NSArray *rules;
-//        @autoreleasepool {
-//
-//            // Init database and get rules
-//            NSURL *dbURL = [[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB];
-//
-//            [[ASDatabase singleton] initDbWithURL:dbURL upgradeDefaultDb:NO];
-//            NSError *error = [[ASDatabase singleton] error];
-//            if (!error) {
-//
-//                AESAntibanner *antibanner = [[AEService new] antibanner];
-//                rules = [antibanner rulesForFilter:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)];
-//
-//                DDLogInfo(@"(PacketTunnelProvider) Count of rules, which was loaded from simple domain names filter: %lu.", rules.count);
-//            }
-//
-//            [ASDatabase destroySingleton];
-//            //--------------------------
-//            if (rules.count == 0 && _isRemoteServer == NO) {
-//
-//                DDLogError(@"(PacketTunnelProvider) We switch filtration to default remote server.");
-//                @autoreleasepool {
-//                    _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
-//                    _isRemoteServer = YES;
-//                }
-//            }
-//        }
-//
-//        @autoreleasepool {
-//
-//            AERDomainFilterRule *rule;
-//            for (ASDFilterRule *item in rules) {
-//
-//                rule = [AERDomainFilterRule rule:item.ruleText];
-//
-//                if (rule.whiteListRule) {
-//                    [globalWhiteRules addRule:rule];
-//                }
-//                else {
-//
-//                    [globalBlackRules addRule:rule];
-//                }
-//            }
-//        }
-//
-//        [_connectionHandler setGlobalWhitelistFilter:globalWhiteRules];
-//        [_connectionHandler setGlobalBlacklistFilter:globalBlackRules];
-//
-//        DDLogInfo(@"(PacketTunnelProvider) Loaded whitelist rules: %lu, blacklist rules: %lu.", globalWhiteRules.rulesCount, globalBlackRules.rulesCount);
         
         AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
         AERDomainFilter *userBlackRules = [AERDomainFilter filter];
@@ -661,6 +679,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [_connectionHandler setTrackersFilter:nil];
         [_connectionHandler setHostsFilter:nil];
         [_connectionHandler setSubscriptionsFilters:nil];
+        [_connectionHandler setSubscriptionsHostsFilter:nil];
         
         NSMutableDictionary<NSString*, AERDomainFilter*> *subscriptionRules = [NSMutableDictionary new];
        

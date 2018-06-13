@@ -44,18 +44,23 @@
     self.versionLabel.text = [ADProductInfo versionWithBuildNumber];
     
     // remove cell separator
-    for (UIView *view in self.howToEnableCell.subviews){
+    for (UIView *view in self.manageContentBlockerCell.subviews){
         
-        if(view != self.howToEnableCell.contentView) {
+        if(view != self.manageContentBlockerCell.contentView) {
             [view removeFromSuperview];
         }
     }
-    for (UIView *view in self.howToAddRulesCell.subviews){
+    for (UIView *view in self.managePrivacySettingsCell.subviews){
         
-        if(view != self.howToAddRulesCell.contentView) {
+        if(view != self.managePrivacySettingsCell.contentView) {
             [view removeFromSuperview];
         }
     }
+    
+#ifndef PRO
+    [self cell: self.managePrivacySettingsCell setHidden:YES];
+    [self reloadDataAnimated:NO];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,15 +71,15 @@
 #pragma mark - Table view data source
 
 - (IBAction)clickAdguardWebsite:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_WEBSITE_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_WEBSITE_LINK] options:@{} completionHandler:nil];
 }
 
 - (IBAction)clickAdguardForum:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_FORUM_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_FORUM_LINK] options:@{} completionHandler:nil];
 }
 
 - (IBAction)clickAcknowledgments:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ADGUARD_ACKNOWLEDGEMENTS] options:@{} completionHandler:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

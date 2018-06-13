@@ -155,7 +155,7 @@ NSString *AESFConverterError = @"AESFConverterError";
         }
     }
     
-    NSString *message = NSLocalizedString(@"Can't convert rules. Unexpected error occured. Please contact support team.", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
+    NSString *message = ACLocalizedString(@"support_rule_converting_error", @"(AESFilterConverter) Error occured when checking of the result from JSON converter.");
     NSError *error = [NSError errorWithDomain:AESFConverterError code:AESF_ERROR_WRONG_DICTIONARY userInfo:@{NSLocalizedDescriptionKey: message}];
     
     return @{AESFConvertedErrorKey: error};
