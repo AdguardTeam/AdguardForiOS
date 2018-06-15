@@ -138,6 +138,7 @@ typedef enum : NSUInteger {
     [self cell:self.splitTunnelCell setHidden:YES];
     [self cell:self.fullTunnelCell setHidden:YES];
     [self cell:self.fullTunnelWithoutVPNCell setHidden:YES];
+    [self cell:self.restartCell setHidden:YES];
     
     [self reloadDataAnimated:YES];
 #endif
@@ -269,10 +270,14 @@ typedef enum : NSUInteger {
     }];
 }
 
+#ifdef PRO
+
 - (IBAction)toggleRestartSwitch:(id)sender {
     
     [APVPNManager.singleton setRestartByReachability:self.restartSwitch.isOn];
 }
+
+#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark helper methods

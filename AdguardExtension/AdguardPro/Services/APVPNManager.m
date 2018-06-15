@@ -162,8 +162,8 @@ static APVPNManager *singletonVPNManager;
         
         _dnsRequestsLogging = [[AESharedResources sharedDefaults] boolForKey:APDefaultsDnsLoggingEnabled];
         
-        // restart by default
-        _restartByReachability = YES;
+        // don't restart by default
+        _restartByReachability = NO;
         
         [self loadConfiguration];
     }
@@ -668,7 +668,7 @@ static APVPNManager *singletonVPNManager;
     }
     
     if (server
-        && ![server isEqual:_activeRemoteDnsServer]
+        && ![server settingsEqual:_activeRemoteDnsServer]
         && ([_remoteDnsServers containsObject:server] || [_remoteDnsCryptServers containsObject:server])) {
         
         
@@ -808,8 +808,31 @@ static APVPNManager *singletonVPNManager;
                 [_customRemoteDnsServers addObject:remoteServer];
                 [self saveCustomRemoteDnsServersToDefaults];
             }
+            
+            [self migratePredefinedServerIfNeeded: remoteServer];
         }
     }
+}
+
+- (void) migratePredefinedServerIfNeeded: (APDnsServerObject*) remoteServer {
+    
+    // If predefined server params was changed we need save this params in protocol configuration.
+    // This coud be happen if params changes during the app updating or if system language changed
+    
+    [APVPNManager.predefinedDnsServers enumerateObjectsUsingBlock:^(APDnsServerObject * _Nonnull predefinedServer, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if([predefinedServer.uuid isEqualToString:remoteServer.uuid]) {
+            
+            // check server params was changed
+            if(![predefinedServer settingsEqual:remoteServer]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setActiveRemoteDnsServer:predefinedServer];
+                });
+            }
+            
+            *stop = YES;
+        }
+    }];
 }
 
 - (void)loadConfiguration{
@@ -980,7 +1003,7 @@ static APVPNManager *singletonVPNManager;
         //-------------
         
         _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : YES; // YES by default
+        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
         
         NSString *connectionStatusReason = @"Unknown";
         

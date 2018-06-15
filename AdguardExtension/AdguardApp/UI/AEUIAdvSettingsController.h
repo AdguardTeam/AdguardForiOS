@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *invertWhitelistCell;
 @property (strong, nonatomic) IBOutlet UISwitch *invertWhitelistSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *restartSwitch;
+@property (weak, nonatomic) IBOutlet UITableViewCell *restartCell;
 
 
 - (IBAction)toggleSimplified:(id)sender;
