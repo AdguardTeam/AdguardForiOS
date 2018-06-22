@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ static AEService *singletonService;
         
         workQueue = dispatch_queue_create("AAService", DISPATCH_QUEUE_SERIAL);
         
-        _unexpectedErrorMessage = NSLocalizedString(@"An unexpected error occurred. Please contact support team.", @"(AEService) The default message for an unknown error.");
+        _unexpectedErrorMessage = ACLocalizedString(@"support_unexpected_error", @"(AEService) The default message for an unknown error.");
         
         //------------ Checking First Running -----------------------------
         [self checkFirstRunning];
@@ -699,7 +699,7 @@ static AEService *singletonService;
                                 //now this is not fatal error.
                                 DDLogWarn(@"(AEService) Can't convert all rules. Limit of the rules count exceeded. Rules count limit: %lu", limit);
                                 
-                                //                        NSString *errorDescription = NSLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
+                                //                        NSString *errorDescription = ACLocalizedString(@"Exceeded the maximum number of filter rules.", @"(AEService) Service errors descriptions");
                                 //                        return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_JSON_CONVERTER_OVERLIMIT userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
                                 
                             }
@@ -737,7 +737,7 @@ static AEService *singletonService;
             
             DDLogError(@"(AEService) Attempt converting rules to JSON when service not started.");
             DDLogErrorTrace();
-            NSString *errorDescription = NSLocalizedString(@"Attempted to convert rules to JSON while service is not started.", @"(AEService) Service errors descriptions");
+            NSString *errorDescription = ACLocalizedString(@"rule_converting_message", @"(AEService) Service errors descriptions");
             return [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_SERVICE_NOT_STARTED userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
         }
     }
@@ -769,7 +769,7 @@ static AEService *singletonService;
              
              DDLogError(@"(AEService) Error occured: %@", [error localizedDescription]);
              
-             NSString *errorDescription = NSLocalizedString(@"Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.", @"(AEService) Service errors descriptions");
+             NSString *errorDescription = ACLocalizedString(@"safari_filters_loading_error", @"(AEService) Service errors descriptions");
              error =  [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_SAFARI_EXCEPTION userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
          }
          else{
@@ -895,7 +895,7 @@ static AEService *singletonService;
     AESFilterConverter *converterToJSON = [AESFilterConverter new];
     if (!converterToJSON) {
         DDLogError(@"(AEService) Can't initialize converter to JSON format!");
-        NSString *errorDescription = NSLocalizedString(@"Can't initialize converter to JSON format!", @"(AEService) Service errors descriptions");
+        NSString *errorDescription = ACLocalizedString(@"json_converting_error", @"(AEService) Service errors descriptions");
         if (error != nil) {
             *error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
         }
@@ -924,7 +924,7 @@ static AEService *singletonService;
 
             if (![convertResult[AESFConvertedCountKey] boolValue] && [convertResult[AESErrorsCountKey] boolValue]) {
 
-                NSString *errorDescription = NSLocalizedString(@"Cannot convert the filter rule. Rule text is invalid.", @"(AEService) Service errors descriptions");
+                NSString *errorDescription = ACLocalizedString(@"rule_converting_error", @"(AEService) Service errors descriptions");
                 err = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey : errorDescription,
                                                                                                                AESUserInfoRuleObject: rule}];
                 break;

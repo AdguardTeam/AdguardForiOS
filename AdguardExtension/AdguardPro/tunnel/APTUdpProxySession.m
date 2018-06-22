@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,6 +52,7 @@
     BOOL _waitWrite;
     BOOL _sessionCreated;
     BOOL _closed;
+    BOOL _removed;
     NSString *_key;
     APUDPPacket *_basePacket;
     APUDPPacket *_reversBasePacket;
@@ -145,16 +146,21 @@
     }
 }
 
+- (void) removeObservers {
+    @try {
+        [self.udpSession removeObserver:self forKeyPath:@"state"];
+        [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
+        [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
+    }
+    @catch(id exception) {
+        locLogWarn(self, @"removeObservers failed");
+    }
+}
+
 - (void)dealloc {
-
     locLogTrace(self);
-
-    [self.udpSession removeObserver:self forKeyPath:@"state"];
-    [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
-    [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-    
-_workingQueue = nil;
+    _workingQueue = nil;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -217,6 +223,11 @@ _workingQueue = nil;
             locLogVerboseTrace(USE_STRONG(self), @"state");
             [USE_STRONG(self) sessionStateChanged];
         } else if ([keyPath isEqual:@"hasBetterPath"]) {
+            
+            if(USE_STRONG(self)->_closed) {
+                DDLogInfo(@"hasBetterPath called for closed session. Skip it");
+                return;
+            }
 
             locLogVerboseTrace(USE_STRONG(self) ,@"hasBetterPath");
             NWUDPSession *session = USE_STRONG(object);
@@ -308,6 +319,7 @@ _workingQueue = nil;
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
         
         if(USE_STRONG(self)->_closed) {
+            locLogInfo(USE_STRONG(self), @"got response for closed session. break.");
             return;
         }
         
@@ -320,6 +332,7 @@ _workingQueue = nil;
         }
         
         //write data from remote endpoint into local TUN interface
+        locLogInfo(USE_STRONG(self), @"write data from remote endpoint into local TUN interface");
         [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
         
         [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
@@ -433,11 +446,14 @@ _workingQueue = nil;
         [self sendPackets];
     } else if (session.state == NWUDPSessionStateFailed
                || whitelistSession.state == NWUDPSessionStateFailed) {
+        
+        if(_closed)
+            return;
 
         locLogVerboseTrace(self, @"NWUDPSessionStateFailed");
 
         NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
-        locLogError(self, @"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@.", endpoint.hostname, endpoint.port);
+        locLogError(self, @"(APTUdpProxySession) Session state is \"Failed\" on: %@ port: %@ endpoint: %@", endpoint.hostname, endpoint.port, session.endpoint);
         
         _closed = YES;
         [self saveLogRecord:YES];
@@ -447,8 +463,11 @@ _workingQueue = nil;
                && whitelistSession.state == NWUDPSessionStateCancelled) {
 
         locLogVerboseTrace(self, @"NWUDPSessionStateCancelled");
-        if (_closed) {
+        
+        // session and whitelist session gan go into cancelled state simultaneously. We must use _removed flag to prevent call removeSession twice for one session
+        if (_closed && ! _removed) {
             
+            _removed = YES;
             [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }
@@ -585,6 +604,11 @@ _workingQueue = nil;
         for (NSData *packet in packets) {
             
             APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
+            
+            if(!datagram) {
+                DDLogError(@"(APTUdpProxySession) Outgoing datagram parsing error. Base packet dst address: %@ port: %@", _basePacket.dstAddress, _basePacket.dstPort);
+            }
+            
             if (datagram.isRequest) {
                 
                 BOOL whitelisted = NO;
@@ -593,6 +617,8 @@ _workingQueue = nil;
                 //Check that this is request to domain from whitelist or blacklist.
                 NSString *name = [datagram.requests[0] name];
                 NSString *ip;
+                NSString *subscriptionUUID;
+                
                 if (! [NSString isNullOrEmpty:name]) {
                     
                     // user filter lists are processed first
@@ -602,13 +628,10 @@ _workingQueue = nil;
                     else if ([self.delegate isUserBlacklistDomain:name]) {
                         blacklisted = YES;
                     }
-                    else if ([self.delegate checkHostsDomain:name ip:&ip]) {
+                    else if ([self.delegate checkHostsDomain:name ip:&ip subscriptionUUID:&subscriptionUUID]) {
                         blacklisted = YES;
                     }
-//                    else if ([self.delegate isGlobalWhitelistDomain:name]) {
-//                        whitelisted = YES;
-//                    }
-                    else if ([self.delegate isGlobalBlacklistDomain:name]) {
+                    else if ([self.delegate checkSubscriptionBlacklistDomain:name subscriptionUUID:&subscriptionUUID]) {
                         blacklisted = YES;
                     }
                     
@@ -626,7 +649,7 @@ _workingQueue = nil;
                 }
                 
                 //Create DNS log record, if logging is enabled.
-                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted];
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted subscriptionUUID:subscriptionUUID];
             }
         }
         
@@ -684,7 +707,7 @@ _workingQueue = nil;
 
 }
 
-- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
+- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist subscriptionUUID:(NSString*) uuid {
     
     [self logDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelist blacklist:blacklist];
     
@@ -698,6 +721,7 @@ _workingQueue = nil;
         record.isWhitelisted = whitelist;
         record.isBlacklisted = blacklist;
         record.isTracker = tracker;
+        record.subscriptionUUID = uuid;
         
         if (![_dnsRecordsSet containsObject:record]) {
             
@@ -731,7 +755,10 @@ _workingQueue = nil;
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    NSString* mode = [_delegate.provider isFullMode] ? @"full" : @"split";
+    APVpnManagerTunnelMode tunnelMode = [_delegate.provider tunnelMode];
+    NSString* mode = tunnelMode == APVpnManagerTunnelModeSplit ? @"split" :
+                     tunnelMode == APVpnManagerTunnelModeFull  ? @"full" :
+                                                                 @"full (without VPN icon)";
     
 #if DEBUG
     DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
@@ -746,6 +773,11 @@ _workingQueue = nil;
     for (NSData *packet in packets) {
         
         APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
+        
+        if(!datagram) {
+            DDLogError(@"(APTUdpProxySession) Incoming datagram parsing error. Base packet dst address: %@ port: %@", _basePacket.dstAddress, _basePacket.dstPort);
+        }
+        
         [self settingDnsRecordForIncomingDnsDatagram:datagram session:session];
     }
     

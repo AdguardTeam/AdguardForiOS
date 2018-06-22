@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,8 +48,6 @@
 
 - (ASDFilterRule*) ruleFromDomains:(NSArray<NSString*>*) domains {
     
-    BOOL emptyRule = YES;
-    
     NSMutableString* ruleString = [[self rulePrefix] mutableCopy];
     
     for(int i = 0; i < domains.count; ++i) {
@@ -61,7 +59,6 @@
             [ruleString appendString:@"|"];
         
         [ruleString appendFormat:@"~%@", domains[i]];
-        emptyRule = NO;
     }
     
     ASDFilterRule *rule = [ASDFilterRule new];

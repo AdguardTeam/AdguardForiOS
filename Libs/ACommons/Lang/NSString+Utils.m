@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -521,6 +521,38 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             result[28], result[29], result[30], result[31]];
 }
 
+- (NSUInteger )countOccurencesOfString:(NSString *)str {
+    
+    NSUInteger count = 0;
+    NSUInteger length = [self length];
+    NSRange range = NSMakeRange(0, length);
+    while(range.location != NSNotFound)
+    {
+        range = [self rangeOfString: str options:0 range:range];
+        if(range.location != NSNotFound)
+        {
+            range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
+            count++;
+        }
+    }
+    
+    return count;
+}
+
++ (NSString *)repeat:(NSString *)string separator:(NSString *)separator repeat:(NSInteger)repeat {
+    
+    NSMutableString* result = [NSMutableString new];
+    
+    for(int i = 0; i < repeat; ++i) {
+        
+        if(i != 0) [result appendString:separator];
+        
+        [result appendString:string];
+    }
+    
+    return result.copy;
+}
+
 @end
 
 @implementation NSString (Utils_Private)
@@ -846,4 +878,16 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     }
     
     return foundFor;
+}
+
+NSString* ACLocalizedString(NSString* key, NSString* comment) {
+    
+    NSString* localizedString = NSLocalizedString(key, nil);
+    
+    if (![[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"en"] && [localizedString isEqualToString:key]) {
+        NSString * path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
+        NSBundle * languageBundle = [NSBundle bundleWithPath:path];
+        localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
+    }
+    return localizedString;
 }

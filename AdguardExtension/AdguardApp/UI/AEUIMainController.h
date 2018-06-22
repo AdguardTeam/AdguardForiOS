@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,8 +50,8 @@
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *privacySettingsCells;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *getProButton;
-@property (strong, nonatomic) IBOutlet MGSwipeTableCell *videoCell;
-@property (strong, nonatomic) IBOutlet MGSwipeTableCell *safariVideoCell;
+@property (strong, nonatomic) IBOutlet MGSwipeTableCell *manageContentBlockerVideoCell;
+@property (strong, nonatomic) IBOutlet MGSwipeTableCell *managePrivacySettingsVideoCell;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *disabledLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalRequestsCountLabel;

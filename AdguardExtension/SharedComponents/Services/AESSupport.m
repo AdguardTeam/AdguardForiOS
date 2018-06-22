@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, NSLocalizedString(@"Bug Report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"action_bug_report", @"(AEUIAboutController) Subject field for mail bug report")]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
@@ -146,8 +146,8 @@ static AESSupport *singletonSupport;
     }
     else{
         
-        [ACSSystemUtils showSimpleAlertForController:parent withTitle:NSLocalizedString(@"Error", @"")
-                                             message:NSLocalizedString(@"Can't send bug report because no email is probably set up on your device.", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
+        [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
+                                             message:ACLocalizedString(@"bug_report_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
     }
 }
 
@@ -178,8 +178,8 @@ static AESSupport *singletonSupport;
     }
     else{
         
-        [ACSSystemUtils showSimpleAlertForController:parent withTitle:NSLocalizedString(@"Error", @"")
-                                             message:NSLocalizedString(@"Can't send message to support team because you have no configured email account.", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
+        [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
+                                             message:ACLocalizedString(@"support_message_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
     }
 
 }
@@ -303,7 +303,7 @@ static AESSupport *singletonSupport;
             [sb appendFormat:@"\r\nDnsCrypt: %@", APVPNManager.singleton.activeRemoteDnsServer.isDnsCrypt];
         }
         
-        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptions;
+        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
         
         if(subscriptions.count) {
             [sb appendFormat:@"\r\n\r\nSystem wide blocking subscriptions: "];

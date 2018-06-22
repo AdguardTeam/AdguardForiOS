@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@
 #import "APDnsResourceClass.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
+
+#define BLOCKING_RESPONSE_TTL   60 * 60         // 1 hour
 
 @interface APDnsDatagram ()
 
@@ -97,7 +99,7 @@
     APDnsDatagram *obj = [APDnsDatagram new];
     
     obj.ID = self.ID;
-    obj.isRequest = obj.isRequest ;
+    obj.isRequest = self.isRequest;
     obj.isResponse = self.isResponse;
     obj.requests = [self.requests copyWithZone:zone];
     obj.responses = [self.responses copyWithZone:zone];
@@ -211,6 +213,28 @@
                 _responses = [responses copy];
             }
         }
+        else {
+            
+            // parse nxdomain responce
+            int rcode = ns_msg_getflag(handle, ns_f_rcode);
+            if(rcode != ns_r_nxdomain) {
+                return NO;
+            }
+            
+            if (ns_rr_class(rr) != ns_c_in) {
+                return NO;
+            }
+            
+            NSMutableArray *responses = [NSMutableArray arrayWithCapacity:count];
+            
+            APDnsResponse *response = [[APDnsResponse alloc] initWithRR:rr msg:handle];
+            [responses addObject:response];
+            
+            if (responses.count) {
+                _responses = [responses copy];
+            }
+        }
+       
     }
     
     return YES;
@@ -273,14 +297,9 @@
     [self setData:data withUInt16:response.type.intValue offset:data.length];
     [self setData:data withUInt16:response.qClass.intValue offset:data.length];
     
-    // TTL equals 0
-    [data setLength:(data.length + 4)];
+    // TTL
+    [self setData:data withUInt32: BLOCKING_RESPONSE_TTL offset:data.length];
     
-//    NSUInteger length = response.rdata.length;
-//    if (length > UINT16_MAX) {
-//        return NO;
-//    }
-//    uint16_t len = (uint16_t)length;
     uint16_t len = response.rdata.length;
     [self setData:data withUInt16:len offset:data.length];
     

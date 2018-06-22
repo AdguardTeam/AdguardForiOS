@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
 NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
-
 NSString *AEDefaultsCheckFiltersLastDate = @"AEDefaultsCheckFiltersLastDate";
 NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";
 NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
@@ -36,8 +35,9 @@ NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutoria
 NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
 NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
 NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
-
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
+NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
+NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
 
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"

@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,4 +32,5 @@ NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDn
 NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
 NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
+NSString *APVpnManagerRestartByReachability = @"APVpnManagerRestartByReachability";
 

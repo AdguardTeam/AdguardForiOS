@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -175,6 +175,9 @@ static NSDictionary *_editAttrs;
 
     self.placeholderLabel.attributedText = self.attributedTextForPlaceholder;
     self.placeholderLabel.textColor = SUBTITLE_TEXT_COLOR;
+    
+    self.editorTextView.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.searchBar.keyboardAppearance = UIKeyboardAppearanceDark;
     
     [self.view addObserver:self forKeyPath:WIDTH_CHANGE_KEY options:(NSKeyValueObservingOptionNew) context:NULL];
     
@@ -351,7 +354,7 @@ static NSDictionary *_editAttrs;
 }
 
 - (IBAction)clickRules:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FILTER_RULE_SYNTAX_LINK] options:@{} completionHandler:nil];
 }
 
 /////////////////////////////////////////////////////////////////////

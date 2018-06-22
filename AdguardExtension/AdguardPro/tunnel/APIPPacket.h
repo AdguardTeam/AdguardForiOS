@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include <netinet/ip.h>
 #include <netinet/ip6.h>
 #include <arpa/inet.h>
+#include <os/lock.h>
 
 /*
  * Structure of an internet header, naked of options.
@@ -72,7 +73,7 @@ uint16_t checksum_finalize(uint32_t sum);
     
     NSUInteger _ipHeaderLength;
     
-    OSSpinLock _lock;
+    os_unfair_lock _lock;
 }
 
 - (id)initWithData:(NSData *)data af:(NSNumber *)af;

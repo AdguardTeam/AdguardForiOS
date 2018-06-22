@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PredefinedListCell"];
     cell.textLabel.text = self.subscriptions[indexPath.row].name;
     
-    BOOL enabled = ![APBlockingSubscriptionsManager.subscriptions containsObject:self.subscriptions[indexPath.row]];
+    BOOL enabled = ![APBlockingSubscriptionsManager.subscriptionsMeta containsObject:self.subscriptions[indexPath.row]];
     
     cell.textLabel.enabled = enabled;
     
@@ -54,7 +54,7 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BOOL enabled = ![APBlockingSubscriptionsManager.subscriptions containsObject:self.subscriptions[indexPath.row]];
+    BOOL enabled = ![APBlockingSubscriptionsManager.subscriptionsMeta containsObject:self.subscriptions[indexPath.row]];
     
     return enabled ? indexPath : nil;
 }

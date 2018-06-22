@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
     
-    __block NSString *errorMessage = NSLocalizedString(@"Unexpected error occurred while initializing Safari action extension. Please contact Adguard support if this happens again.", @"(Action Extension - ActionViewController) Some errors when starting.");
+    __block NSString *errorMessage = ACLocalizedString(@"support_error_safari_extension", @"(Action Extension - ActionViewController) Some errors when starting.");
     
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
@@ -150,7 +150,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
             else if ([NSString isNullOrEmpty:_host]) {
                 
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
-                errorMessage = NSLocalizedString(@"The hostname is not obtained. Perhaps the page is not yet loaded.", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
+                errorMessage = ACLocalizedString(@"hostname_obtaining_error", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
                 
@@ -278,7 +278,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         
         DDLogError(@"(ActionViewController) production DB was not created before.");
         NSString *messageFormat =
-        NSLocalizedString(@"Before you can use this action extension, %@ has to perform an initial configuration. Launch the main %@ app to let it do so.",
+        ACLocalizedString(@"action_extension_no_configuration_message_format",
                           @"(Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app.");
         return [NSError errorWithDomain:AEActionErrorDomain
                                    code:AE_ACTION_ERROR_NODB

@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,11 @@
 #ifndef Adguard_ABECConstants_h
 #define Adguard_ABECConstants_h
 
-#define ABEC_FILTER_URL_BASE         @"https://filters.adtidy.org/ios/"
+#ifdef DEBUG
+#define ABEC_FILTER_URL_BASE           @"http://testfilters.adtidy.org/ios/"
+#else
+#define ABEC_FILTER_URL_BASE           @"https://filters.adtidy.org/ios/"
+#endif
 
 #define ABEC_BACKEND_READ_TIMEOUT      30
 

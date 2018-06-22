@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #import "AEUICommons.h"
 #import "ABECService.h"
 #import "APSharedResources.h"
+#import "NSString+Utils.h"
 
 #define DATE_FORMAT(DATE)   [NSDateFormatter localizedStringFromDate:DATE dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]
 
@@ -51,7 +52,7 @@
             
             if (response.blocked) {
                 _color = AEUIC_WARNING_COLOR;
-                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Blocked", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
+                _detailText = [NSString stringWithFormat:ACLocalizedString(@"domain_blocked_format", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the blocked DNS request."), DATE_FORMAT(record.recordDate)];
             }
             else if(record.isTracker) {
                 
@@ -59,7 +60,7 @@
                 NSString* trackerName = service.name ?: @"";
                 
                 _color = AEUIC_TRACKER_COLOR;
-                _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@, Tracker detected - %@", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the tracker DNS request."), DATE_FORMAT(record.recordDate), trackerName];
+                _detailText = [NSString stringWithFormat:ACLocalizedString(@"tracker_detected_format", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the tracker DNS request."), DATE_FORMAT(record.recordDate), trackerName];
             }
             else {
                 
@@ -68,7 +69,7 @@
                 NSArray *responses = [record.responses valueForKey:@"stringValue"];
                 if (record.isWhitelisted) {
 
-                    _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - Exception %@", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the whitelisted DNS request."), DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
+                    _detailText = [NSString stringWithFormat:ACLocalizedString(@"exception_format", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the whitelisted DNS request."), DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
                 } else {
                     _detailText = [NSString stringWithFormat:@"%@ - %@", DATE_FORMAT(record.recordDate), [responses componentsJoinedByString:@", "]];
                 }
@@ -78,7 +79,7 @@
             
             _color = [UIColor whiteColor];
             
-            _detailText = [NSString stringWithFormat:NSLocalizedString(@"%@ - No response", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the DNS request without a response."), DATE_FORMAT(record.recordDate)];
+            _detailText = [NSString stringWithFormat:ACLocalizedString(@"no_response_format", @"(APUIDnsLogRecord) PRO version. On the System-wide Ad Blocking -> DNS Requests screen. It is the complementary text below the DNS request without a response."), DATE_FORMAT(record.recordDate)];
         }
         
         if (record.isWhitelisted) {

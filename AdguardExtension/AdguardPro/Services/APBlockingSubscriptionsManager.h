@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,9 +29,14 @@
 @interface APBlockingSubscriptionsManager : NSObject
 
 /**
- list of added subscriptions
+ list of added subscriptions with rules and hosts
  */
 @property (class, nonatomic) NSArray<APBlockingSubscription*> *subscriptions;
+
+/**
+ list of meta of added subscriptions
+ */
+@property (class, nonatomic, readonly) NSArray<APBlockingSubscription*> *subscriptionsMeta;
 
 /**
  list of predefined subscriptions
@@ -40,18 +45,15 @@
 
 /**
  load all hosts dictionary from file
+  returns dictionary <subscription uuid, dictionary of rules>
  */
-+ (NSDictionary*) loadHosts;
++ (NSDictionary<NSString*, NSDictionary*>*) loadHosts;
 
 /**
 load all rules array from file
+ returns dictionary <subscription uuid, array of rules>
  */
-+ (NSArray<NSString*> *) loadRules;
-
-/**
- check the domain is in hosts
- */
-+ (APBlockingSubscription*) checkDomain:(NSString*) domain;
++ (NSDictionary<NSString*, NSArray<NSString*> *> *) loadRules;
 
 /**
  check need update subscriptions
@@ -61,6 +63,16 @@ load all rules array from file
 /**
  update all subscriptions
  */
-+ (void) updateSubscriptionsWithSuccessBlock:(void (^)())successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)())completionBlock;
++ (void) updateSubscriptionsWithSuccessBlock:(void (^)(void))successBlock errorBlock:(void (^)(NSError *))errorBlock completionBlock:(void (^)(void))completionBlock;
+
+/**
+ returns subscription info by uuid of subscription
+ */
++ (APBlockingSubscription*) subscriptionByUUID:(NSString*) uuid;
+
+/**
+ saves hosts and rules for future using in PacketTunnelProvider
+ */
++ (BOOL) saveHostsAndRulesForSubscriptions;
 
 @end

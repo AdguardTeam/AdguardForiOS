@@ -2,7 +2,7 @@
 
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2017 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -94,7 +94,7 @@
 
 #pragma mark privatemethods
 
-- (CGImageRef) cometImageWithWidth:(CGFloat) width {
+- (id) cometImageWithWidth:(CGFloat) width {
     
     UIGraphicsBeginImageContext(CGSizeMake(width, 30));
     
@@ -152,9 +152,7 @@
     
     CGImageRef cgImage = CGBitmapContextCreateImage(context);
     
-    CGContextRelease(context);
-    
-    return cgImage;
+    return CFBridgingRelease(cgImage);
 }
 
 - (void)setFast:(BOOL)fast {
@@ -171,12 +169,12 @@
         
         self.velocity = 3.0;
 
-        cell.contents = (id)[self cometImageWithWidth:1000];
+        cell.contents = [self cometImageWithWidth:1000];
         cell.birthRate = 5;
         cell.lifetime = 30;
         cell.velocity = 40;
         
-        cell2.contents = (id)[self cometImageWithWidth:500];
+        cell2.contents = [self cometImageWithWidth:500];
         cell2.birthRate = 0.5;
         cell2.lifetime = 30;
         cell2.velocity = 40;
@@ -186,12 +184,12 @@
         
         self.velocity = 1;
 
-        cell.contents = (id)[self cometImageWithWidth:50];
+        cell.contents = [self cometImageWithWidth:50];
         cell.birthRate = 1;
         cell.lifetime = 300;
         cell.velocity = 4;
         
-        cell2.contents = (id)[self cometImageWithWidth:50];
+        cell2.contents = [self cometImageWithWidth:50];
         cell2.birthRate = 0.1;
         cell2.lifetime = 30;
         cell2.velocity = 40;

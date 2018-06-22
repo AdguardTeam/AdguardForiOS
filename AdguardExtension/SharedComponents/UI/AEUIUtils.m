@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@
                     if (error.code == AES_ERROR_UNSUPPORTED_RULE) {
                         
                         error = nil;
-                        NSString *errorDescription = NSLocalizedString(@"Cannot convert user filter rules. One of the rules contains an error. Check the rule next to the current cursor position.", @"(AEUIUtils) User filter convertering error description.");
+                        NSString *errorDescription = ACLocalizedString(@"filter_rules_converting_error", @"(AEUIUtils) User filter convertering error description.");
                         error = [NSError errorWithDomain:AEServiceErrorDomain
                                                     code:AES_ERROR_UNSUPPORTED_RULE
                                                 userInfo:@{NSLocalizedDescriptionKey : errorDescription,
@@ -97,7 +97,7 @@
                 [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
                     
                     if (error.code != AES_ERROR_UNSUPPORTED_RULE || UIAccessibilityIsVoiceOverRunning()) {
-                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+                        [ACSSystemUtils showSimpleAlertForController:controller withTitle:ACLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
                     }
                 }];
                 return;
@@ -126,7 +126,7 @@
 
         [[AEUILoadingModal singleton] loadingModalHideWithCompletion:^{
 
-            [ACSSystemUtils showSimpleAlertForController:controller withTitle:NSLocalizedString(@"Error", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
+            [ACSSystemUtils showSimpleAlertForController:controller withTitle:ACLocalizedString(@"common_error_title", @"(AEUIUtils) Alert title. When converting rules process ended.") message:[error localizedDescription]];
         }];
 
         return;

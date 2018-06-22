@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015-2016 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
  
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #import "APUDPPacket.h"
 #include <netinet/ip.h>
 #import <sys/socket.h>
+#import <os/lock.h>
 
 #import "APDnsResourceType.h"
 #import "APDnsRequest.h"
@@ -42,25 +43,25 @@
     
     BOOL _loggingEnabled;
     
-    OSSpinLock _dnsAddressLock;
-    OSSpinLock _globalWhitelistLock;
-    OSSpinLock _globalBlacklistLock;
-    OSSpinLock _userWhitelistLock;
-    OSSpinLock _userBlacklistLock;
-    OSSpinLock _trackersLock;
-    OSSpinLock _hostsLock;
+    os_unfair_lock _dnsAddressLock;
+    os_unfair_lock _globalWhitelistLock;
+    os_unfair_lock _globalBlacklistLock;
+    os_unfair_lock _userWhitelistLock;
+    os_unfair_lock _userBlacklistLock;
+    os_unfair_lock _trackersLock;
+    os_unfair_lock _hostsLock;
     
     NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
     
     AERDomainFilter *_globalWhitelist;
-    AERDomainFilter *_globalBlacklist;
     
     AERDomainFilter *_userWhitelist;
     AERDomainFilter *_userBlacklist;
     AERDomainFilter *_trackersList;
     NSDictionary *_hosts;
-    NSDictionary *_subscriptionsHosts;
+    NSDictionary<NSString*, NSDictionary<NSString*, NSString*>*> *_subscriptionsHosts;
+    NSDictionary<NSString*, AERDomainFilter*> *_subscriptionsFilters;
     
     BOOL _packetFlowObserver;
     
@@ -71,7 +72,7 @@
     
     dispatch_queue_t _countersQueue;
     
-    BOOL _stopHandling;
+    BOOL _packetHandling;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -88,7 +89,7 @@
 
         _provider = provider;
         _sessions = [NSMutableSet set];
-        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_SPINLOCK_INIT;
+        _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_UNFAIR_LOCK_INIT;
         _loggingEnabled = NO;
         
         _closeCompletion = nil;
@@ -161,62 +162,62 @@
         DDLogInfo(@"(APTunnelConnectionsHandler) whiteListDnsDictionary %@", whiteListDnsDictionary);
         DDLogInfo(@"(APTunnelConnectionsHandler) remoteDnsDictionary %@", remoteDnsDictionary);
         
-        OSSpinLockLock(&_dnsAddressLock);
+        os_unfair_lock_lock(&_dnsAddressLock);
         
         _whitelistDnsAddresses = [whiteListDnsDictionary copy];
         _remoteDnsAddresses = [remoteDnsDictionary copy];
         
-        OSSpinLockUnlock(&_dnsAddressLock);
+        os_unfair_lock_unlock(&_dnsAddressLock);
     }
 }
 
 - (void)setGlobalWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_globalWhitelistLock);
+    os_unfair_lock_lock(&_globalWhitelistLock);
         _globalWhitelist = filter;
-    OSSpinLockUnlock(&_globalWhitelistLock);
+    os_unfair_lock_unlock(&_globalWhitelistLock);
 }
 
-- (void)setGlobalBlacklistFilter:(AERDomainFilter *)filter {
+- (void)setSubscriptionsFilters:(NSDictionary<NSString *,AERDomainFilter *> *)filters {
     
-    OSSpinLockLock(&_globalBlacklistLock);
-    _globalBlacklist = filter;
-    OSSpinLockUnlock(&_globalBlacklistLock);
+    os_unfair_lock_lock(&_globalBlacklistLock);
+    _subscriptionsFilters = filters;
+    os_unfair_lock_unlock(&_globalBlacklistLock);
 }
 
 - (void)setUserWhitelistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_userWhitelistLock);
+    os_unfair_lock_lock(&_userWhitelistLock);
     _userWhitelist = filter;
-    OSSpinLockUnlock(&_userWhitelistLock);
+    os_unfair_lock_unlock(&_userWhitelistLock);
 }
 
 - (void)setUserBlacklistFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_userBlacklistLock);
+    os_unfair_lock_lock(&_userBlacklistLock);
     _userBlacklist = filter;
-    OSSpinLockUnlock(&_userBlacklistLock);
+    os_unfair_lock_unlock(&_userBlacklistLock);
 }
 
 - (void)setTrackersFilter:(AERDomainFilter *)filter {
     
-    OSSpinLockLock(&_trackersLock);
+    os_unfair_lock_lock(&_trackersLock);
     _trackersList = filter;
-    OSSpinLockUnlock(&_trackersLock);
+    os_unfair_lock_unlock(&_trackersLock);
 }
 
 - (void)setHostsFilter:(NSDictionary *)filter {
     
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     _hosts = filter;
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
 }
 
 - (void)setSubscriptionsHostsFilter:(NSDictionary *)filter {
     
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     _subscriptionsHosts = filter;
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
 }
 
 - (void)startHandlingPackets {
@@ -235,7 +236,7 @@
 
 - (void)stopHandlingPackets {
     
-    _stopHandling = YES;
+    _packetHandling = NO;
 }
 
 - (void)removeSession:(APTUdpProxySession *)session {
@@ -250,6 +251,8 @@
             return;
         
         dispatch_block_t closeCompletion = nil;
+        
+        [session removeObservers];
         
         [_sessions removeObject:session];
         
@@ -300,23 +303,33 @@
 - (BOOL)isGlobalWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_globalWhitelistLock);
+    os_unfair_lock_lock(&_globalWhitelistLock);
     
     result = [_globalWhitelist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_globalWhitelistLock);
+    os_unfair_lock_unlock(&_globalWhitelistLock);
     
     return result;
 }
 
-- (BOOL)isGlobalBlacklistDomain:(NSString *)domainName {
+- (BOOL)checkSubscriptionBlacklistDomain:(NSString *)domainName subscriptionUUID:(NSString *__autoreleasing *)uuid{
     
-    BOOL result = NO;
-    OSSpinLockLock(&_globalBlacklistLock);
+    __block BOOL result = NO;
+    __block NSString* foundUUID;
+    os_unfair_lock_lock(&_globalBlacklistLock);
+
+    [_subscriptionsFilters enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull subscriptionUUID, AERDomainFilter * _Nonnull filter, BOOL * _Nonnull stop) {
+        
+        if([filter filteredDomain:domainName]) {
+            result = YES;
+            foundUUID = subscriptionUUID;
+            *stop = YES;
+        }
+    }];
     
-    result = [_globalBlacklist filteredDomain:domainName];
+    *uuid = foundUUID;
     
-    OSSpinLockUnlock(&_globalBlacklistLock);
+    os_unfair_lock_unlock(&_globalBlacklistLock);
     
     return result;
 }
@@ -324,11 +337,11 @@
 - (BOOL)isUserWhitelistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_userWhitelistLock);
+    os_unfair_lock_lock(&_userWhitelistLock);
     
     result = [_userWhitelist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_userWhitelistLock);
+    os_unfair_lock_unlock(&_userWhitelistLock);
     
     return result;
 }
@@ -336,11 +349,11 @@
 - (BOOL)isUserBlacklistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_userBlacklistLock);
+    os_unfair_lock_lock(&_userBlacklistLock);
     
     result = [_userBlacklist filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_userBlacklistLock);
+    os_unfair_lock_unlock(&_userBlacklistLock);
     
     return result;
 }
@@ -348,34 +361,45 @@
 - (BOOL)isTrackerslistDomain:(NSString *)domainName {
     
     BOOL result = NO;
-    OSSpinLockLock(&_trackersLock);
+    os_unfair_lock_lock(&_trackersLock);
     
     result = [_trackersList filteredDomain:domainName];
     
-    OSSpinLockUnlock(&_trackersLock);
+    os_unfair_lock_unlock(&_trackersLock);
     
     return result;
 }
 
-- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip {
+- (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString *__autoreleasing *)ip subscriptionUUID:(NSString *__autoreleasing *)subscriptionUUID{
     
     BOOL result = NO;
-    OSSpinLockLock(&_hostsLock);
+    os_unfair_lock_lock(&_hostsLock);
     
-    NSString* foundIp = _hosts[domainName];
+    __block NSString* foundIp = _hosts[domainName];
+    __block NSString* foundUUID = nil;
+    
     if(foundIp) {
         result = YES;
         *ip = foundIp;
     }
     else {
-        foundIp = _subscriptionsHosts[domainName];
+        [_subscriptionsHosts enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull uuid, NSDictionary* _Nonnull hosts, BOOL * _Nonnull stop) {
+            
+            foundIp = hosts[domainName];
+            if(foundIp) {
+                foundUUID = uuid;
+                *stop = YES;
+            }
+        }];
+        
         if(foundIp) {
             result = YES;
             *ip = foundIp;
+            *subscriptionUUID = foundUUID;
         }
     }
     
-    OSSpinLockUnlock(&_hostsLock);
+    os_unfair_lock_unlock(&_hostsLock);
     
     return result;
 }
@@ -386,7 +410,7 @@
         serverAddress = [NSString new];
     }
     
-    OSSpinLockLock(&_dnsAddressLock);
+    os_unfair_lock_lock(&_dnsAddressLock);
 
     APDnsServerAddress *address = _whitelistDnsAddresses[serverAddress];
     
@@ -394,7 +418,7 @@
         address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
-    OSSpinLockUnlock(&_dnsAddressLock);
+    os_unfair_lock_unlock(&_dnsAddressLock);
 
     return address;
 }
@@ -405,7 +429,7 @@
         serverAddress = [NSString new];
     }
     
-    OSSpinLockLock(&_dnsAddressLock);
+    os_unfair_lock_lock(&_dnsAddressLock);
     
     APDnsServerAddress *address = _remoteDnsAddresses[serverAddress];
     
@@ -413,7 +437,7 @@
         address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
     }
     
-    OSSpinLockUnlock(&_dnsAddressLock);
+    os_unfair_lock_unlock(&_dnsAddressLock);
     
     return address;
 }
@@ -485,19 +509,21 @@
     
     dispatch_async(_readQueue, ^{
         
-        _stopHandling = NO;
-        
-        [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+        if(!_packetHandling) {
+            _packetHandling = YES;
             
-            __typeof__(self) sSelf = wSelf;
-            
-#ifdef DEBUG
-            [sSelf handlePackets:packets protocols:protocols counter:0];
-#else
-            [sSelf handlePackets:packets protocols:protocols];
-#endif
-            
-        }];
+            [_provider.packetFlow readPacketsWithCompletionHandler:^(NSArray<NSData *> *_Nonnull packets, NSArray<NSNumber *> *_Nonnull protocols) {
+                
+                __typeof__(self) sSelf = wSelf;
+                
+    #ifdef DEBUG
+                [sSelf handlePackets:packets protocols:protocols counter:0];
+    #else
+                [sSelf handlePackets:packets protocols:protocols];
+    #endif
+                
+            }];
+        }
     });
 
 }
@@ -517,26 +543,6 @@
 #endif
     
     // Work here
-
-    //    DDLogInfo(@"----------- Packets %lu ---------------", packets.count);
-    //    [packets enumerateObjectsUsingBlock:^(NSData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //
-    //        DDLogInfo(@"Packet %lu length %lu protocol %@", idx, obj.length, protocols[idx]);
-    //        NSMutableString *out = [NSMutableString string];
-    //        Byte *bytes = (Byte *)[obj bytes];
-    //        for (int i = 0; i < obj.length; i++) {
-    //
-    //            if (i > 0) {
-    //                [out appendFormat:@",%d", *(bytes+i)];
-    //            }
-    //            else{
-    //                [out appendFormat:@"%d", *(bytes+i)];
-    //            }
-    //        }
-    //        DDLogInfo(@"Data:\n%@", out);
-    //    }];
-    //
-    //    DDLogInfo(@"---- End Packets -------------");
 
     NSMutableDictionary *packetsBySessions = [NSMutableDictionary dictionary];
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
@@ -577,7 +583,7 @@
             
             __typeof__(self) sSelf = wSelf;
             
-            if(!sSelf || sSelf->_stopHandling){
+            if(!sSelf || !sSelf->_packetHandling){
                 
                 DDLogDebug(@"In readPacketsWithCompletionHandler stop handle");
                 

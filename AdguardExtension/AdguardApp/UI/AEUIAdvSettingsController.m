@@ -1,6 +1,6 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © 2015 Performix LLC. All rights reserved.
+    Copyright © Adguard Software Limited. All rights reserved.
 
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,12 @@ typedef enum : NSUInteger {
     InvertWhitelistSection,
     TunnelModeSection
 } AEUIAdvSettingsControllerSections;
+
+typedef enum : NSUInteger {
+    SplitModeRow = 0,
+    FullModeRow,
+    FullModeWithoutVPNIconRow
+} AEUIAdvSettingsTunnelModeRows;
 
 @interface AEUILinkTableViewHeaderFooterView : UITableViewHeaderFooterView
 
@@ -111,7 +117,7 @@ typedef enum : NSUInteger {
     _invertWhitelistSwitch.on = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
 #ifdef PRO
-    self.htmlString = NSLocalizedString(@"Adguard Pro works in two different modes. In the Split-Tunnel mode Adguard is compatible with so-called \"Personal VPN\" apps (full list: <a href=\"https://github.com/AdguardTeam/AdguardForiOS/issues/162\">https://github.com/AdguardTeam/AdguardForiOS/issues/162</a>). As a trade-off, in this mode Adguard may be bypassed by system in case of bad connectivity. On the contrary, in the Full-Tunnel mode Adguard can't be run along any other VPN apps, but also can't be bypassed regardless of the connection quality.", @"Advanced settings - tunnel mode description");
+    self.htmlString = ACLocalizedString(@"pro_modes_description", @"Advanced settings - tunnel mode description");
     
     // convert html string to attributed string
     NSData *data = [self.htmlString dataUsingEncoding:NSUTF8StringEncoding];
@@ -125,10 +131,14 @@ typedef enum : NSUInteger {
     
     [self setTunnelModeUI:[APVPNManager.singleton tunnelMode]];
     
+    self.restartSwitch.on = [APVPNManager.singleton restartByReachability];
+    
 #else
     self.hideSectionsWithHiddenRows = YES;
     [self cell:self.splitTunnelCell setHidden:YES];
     [self cell:self.fullTunnelCell setHidden:YES];
+    [self cell:self.fullTunnelWithoutVPNCell setHidden:YES];
+    [self cell:self.restartCell setHidden:YES];
     
     [self reloadDataAnimated:YES];
 #endif
@@ -187,7 +197,9 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == TunnelModeSection) {
         APVpnManagerTunnelMode selectedMode =
-            indexPath.row == 0 ? APVpnManagerTunnelModeSplit : APVpnManagerTunnelModeFull;
+            indexPath.row == SplitModeRow ?                     APVpnManagerTunnelModeSplit :
+            indexPath.row == FullModeRow ?                      APVpnManagerTunnelModeFull :
+                                                                APVpnManagerTunnelModeFullWithoutVPNIcon;
         
         [self setTunnelModeUI:selectedMode];
         [APVPNManager.singleton setTunnelMode:selectedMode];
@@ -258,26 +270,45 @@ typedef enum : NSUInteger {
     }];
 }
 
+#ifdef PRO
+
+- (IBAction)toggleRestartSwitch:(id)sender {
+    
+    [APVPNManager.singleton setRestartByReachability:self.restartSwitch.isOn];
+}
+
+#endif
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark helper methods
 /////////////////////////////////////////////////////////////////////
 
 #ifdef PRO
 - (void)setTunnelModeUI:(APVpnManagerTunnelMode)tunnelMode {
-    _fullTunnelCell.imageView.image = _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    
+    _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-empty"];
+    _fullTunnelWithoutVPNCell.imageView.image = [UIImage imageNamed:@"table-empty"];
     
     _splitTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     _fullTunnelCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
+    _fullTunnelWithoutVPNCell.accessibilityTraits &= ~UIAccessibilityTraitSelected;
     
     switch (tunnelMode) {
+            
+        case APVpnManagerTunnelModeSplit:
+            _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+            break;
+            
         case APVpnManagerTunnelModeFull:
             _fullTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
             _fullTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
-        case APVpnManagerTunnelModeSplit:
-            _splitTunnelCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
-            _splitTunnelCell.accessibilityTraits |= UIAccessibilityTraitSelected;
+        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+            _fullTunnelWithoutVPNCell.imageView.image = [UIImage imageNamed:@"table-checkmark"];
+            _fullTunnelWithoutVPNCell.accessibilityTraits |= UIAccessibilityTraitSelected;
             break;
             
         default:
