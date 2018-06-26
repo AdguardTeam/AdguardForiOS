@@ -53,6 +53,14 @@ NSString *OpenDnsSettingsSegue = @"dns_settings";
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
 
+typedef enum : NSUInteger {
+    AEUpdateNotStarted,
+    AEUpdateStarted,
+    AEUpdateNewData,
+    AEUpdateFailed,
+    AEUpdateNoData
+} AEUpdateResult;
+
 @interface AppDelegate (){
     
     AETFetchCompletionBlock _fetchCompletion;
@@ -62,6 +70,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     
     BOOL _activateWithOpenUrl;
 }
+
+@property AEUpdateResult antibanerUpdateResult;
+@property AEUpdateResult blockingSubscriptionsUpdateResult;
 
 @end
 
@@ -295,15 +306,20 @@ typedef void (^AEDownloadsCompletionBlock)();
             
             if (!checkResult) {
                 DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch subscriptions. App settings permit updates only over WiFi.");
+                self.blockingSubscriptionsUpdateResult = AEUpdateNoData;
             }
             else {
+                
+                self.blockingSubscriptionsUpdateResult = AEUpdateStarted;
+                
                 [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
                     
                     [APVPNManager.singleton sendReloadSystemWideDomainLists];
-                    completionHandler(UIBackgroundFetchResultNewData);
+                    [self blockingSubscriptionsUpdateFinished:AEUpdateNewData];
+                    
                 } errorBlock:^(NSError * error) {
                     
-                    completionHandler(UIBackgroundFetchResultFailed);
+                    [self blockingSubscriptionsUpdateFinished:AEUpdateFailed];
                 } completionBlock:nil];
             }
         }
@@ -323,20 +339,15 @@ typedef void (^AEDownloadsCompletionBlock)();
                 
                 if (!checkResult) {
                     DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.");
+                    self.antibanerUpdateResult = UIBackgroundFetchResultNoData;
+                }
+                else {
+                    self.antibanerUpdateResult = AEUpdateStarted;
                 }
                 
                 if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
                     
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                    
-                        if (_fetchCompletion) {
-                            
-                            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion with result: failed.");
-                            
-                            _fetchCompletion(UIBackgroundFetchResultFailed);
-                            _fetchCompletion = nil;
-                        }
-                    });
+                    [self antibanerUpdateFinished:AEUpdateFailed];
                 }
             }];
         }];
@@ -563,7 +574,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         }
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self antibanerUpdateFinished:AEUpdateFailed];
     }
     // Update performed
     else if ([notification.name
@@ -584,7 +595,7 @@ typedef void (^AEDownloadsCompletionBlock)();
             
             
             // Special update case (in background).
-            [self callCompletionHandler:UIBackgroundFetchResultNewData];
+            [self antibanerUpdateFinished:AEUpdateNewData];
         }];
         
         // turn off network activity indicator
@@ -603,7 +614,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self antibanerUpdateFinished:AEUpdateFailed];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -612,7 +623,7 @@ typedef void (^AEDownloadsCompletionBlock)();
               isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
         
         DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self antibanerUpdateFinished:AEUpdateNewData];
     }
 }
 
@@ -655,6 +666,50 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFinishedUpdateNotification object:self userInfo:@{AppDelegateUpdatedFiltersKey: metas}];
     }];
+}
+
+/**
+ helper method for logs
+ */
+- (NSString*) resultDescription:(AEUpdateResult)result {
+    NSArray<NSString*> *names = @[@"AEUpdateNotStarted",
+                                  @"AEUpdateStarted",
+                                  @"AEUpdateNewData",
+                                  @"AEUpdateFailed",
+                                  @"AEUpdateNoData"];
+    
+    return names[result];
+}
+
+- (void)antibanerUpdateFinished:(AEUpdateResult)result {
+    DDLogDebug(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
+    self.antibanerUpdateResult = result;
+    [self updateFinished];
+}
+
+- (void)blockingSubscriptionsUpdateFinished:(AEUpdateResult)result {
+    DDLogDebug(@"(AppDelegate) blockingSubscriptionsUpdateFinished with result: %@", [self resultDescription:result]);
+    self.blockingSubscriptionsUpdateResult = result;
+    [self updateFinished];
+}
+
+- (void)updateFinished {
+    
+    DDLogDebug(@"(AppDelegate) updateFinished");
+    
+    if(self.antibanerUpdateResult == AEUpdateStarted || self.blockingSubscriptionsUpdateResult == AEUpdateStarted)
+        return;
+    
+    UIBackgroundFetchResult result;
+    
+    if(self.antibanerUpdateResult == AEUpdateNewData || self.blockingSubscriptionsUpdateResult == AEUpdateNewData)
+        result = UIBackgroundFetchResultNewData;
+    else if(self.antibanerUpdateResult == AEUpdateNoData && self.blockingSubscriptionsUpdateResult == AEUpdateNoData)
+        result = UIBackgroundFetchResultNoData;
+    else
+        result = UIBackgroundFetchResultFailed;
+    
+    [self callCompletionHandler:result];
 }
 
 - (void)callCompletionHandler:(UIBackgroundFetchResult)result{
