@@ -296,6 +296,8 @@ static AESSupport *singletonSupport;
          (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
          APVPNManager.singleton.activeRemoteDnsServer.serverName];
         
+        [sb appendFormat:@"\r\nRestart when network changes: %@", APVPNManager.singleton.restartByReachability ? @"YES" : @"NO"];
+        
         if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
             
             [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
