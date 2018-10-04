@@ -33,7 +33,7 @@ You can find all AdGuard and AdGuard Pro for iOS releases here: https://github.c
 
 ### How to become a beta tester?
 
-You can submit an application to participate in AdGuard/AdGuard Pro for iOS beta-testing program. All necessary information on this topic can be found in our [Knowledgebase article](https://kb.adguard.com/en/general/adguard-beta-testing-program#adguardadguard-pro-for-ios).
+You can submit an application to participate in AdGuard/AdGuard Pro for iOS beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
 
 ### Acknowledgements
 
