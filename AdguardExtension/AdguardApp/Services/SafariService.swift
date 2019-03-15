@@ -51,7 +51,7 @@ protocol SafariServiceProtocol : NSObjectProtocol {
      */
     func allBlockingContentRules()->[String : Data]
     
-    /** checks enabled status of all safari content blockers
+    /** chaecks enabled status of all safari content blockers
      returns true in callback if all content blockers are enabled in safari settings
      */
     func checkStatus(completion: @escaping (_ enabled: Bool)->Void)
@@ -171,7 +171,7 @@ class SafariService: NSObject, SafariServiceProtocol {
             for blockerBundleId in sSelf.contenBlockerBundleIds {
                 
                 group.enter()
-                sSelf.checkStatusOfContentBlocker(bundleId: blockerBundleId, callback: { (enabled) in
+                sSelf.chekStatusOfContentBlocker(bundleId: blockerBundleId, callback: { (enabled) in
                     allEnabled = allEnabled && enabled
                     group.leave()
                 })
@@ -182,7 +182,7 @@ class SafariService: NSObject, SafariServiceProtocol {
         }
     }
     
-    func checkStatusOfContentBlocker(bundleId: String, callback: @escaping (_ enabled: Bool)->Void)->Void {
+    func chekStatusOfContentBlocker(bundleId: String, callback: @escaping (_ enabled: Bool)->Void)->Void {
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: bundleId) { (state, _) in
             callback(state?.isEnabled ?? false)
         }

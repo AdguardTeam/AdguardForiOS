@@ -163,7 +163,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         let url = URL(string: LOGIN_URL)
         let request: URLRequest = ABECRequest.post(for: url, parameters: params)
         
-        network.data(with: request) { [weak self] (dataOrNil, response, error) in
+        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
             
             guard let strongSelf = self else {
                 return
@@ -180,9 +180,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
             
             do {
-                let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 
-                let loginSuccess = strongSelf.processLoginResponse(json: jsonResponse)
+                let loginSuccess = strongSelf.processLoginResponce(json: jsonResponce)
                 
                 if !loginSuccess {
                     success?(false)
@@ -407,7 +407,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         postNotification(PurchaseService.kPSNotificationLoginFailure, errorOrNil)
     }
     
-    private func processLoginResponse(json: [String: Any]) -> Bool {
+    private func processLoginResponce(json: [String: Any]) -> Bool {
         
         guard let status = json[LOGIN_AUTH_STATUS_KEY] as? String else {
             processLoginError(error: nil)

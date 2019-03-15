@@ -917,7 +917,6 @@
 		D0569E4921F1F11300985DA9 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
 		D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */; };
-		D0569E4D21F1F66C00985DA9 /* DnsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0569E4021F1E7F800985DA9 /* DnsSettings.storyboard */; };
 		D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */; };
 		D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D05747B71F7E6E26009162FF /* AEUISelectableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D05747B61F7E6E26009162FF /* AEUISelectableTableViewCell.m */; };
@@ -1065,6 +1064,7 @@
 		D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA066220823670065779F /* ChooseProtocolController.swift */; };
 		D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
 		D07AA06E22098C630065779F /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
+		D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */; };
 		D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D41D021FF1F6400B03872 /* DnsModeController.swift */; };
 		D08C96C01FE16F86002456B3 /* APBlockingListsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96BF1FE16F86002456B3 /* APBlockingListsController.m */; };
 		D08C96C31FE2763B002456B3 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96C21FE2763B002456B3 /* APBlockingSubscription.m */; };
@@ -1917,7 +1917,6 @@
 		D05538052161D8190020993A /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		D0569E2F21F1C0A800985DA9 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569E3021F1C0A800985DA9 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Tunnel.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Tunnel.plist; sourceTree = "<absolute>"; };
-		D0569E4021F1E7F800985DA9 /* DnsSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DnsSettings.storyboard; sourceTree = "<group>"; };
 		D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsSettingsController.swift; sourceTree = "<group>"; };
 		D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersController.swift; sourceTree = "<group>"; };
 		D05747B51F7E6E26009162FF /* AEUISelectableTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEUISelectableTableViewCell.h; sourceTree = "<group>"; };
@@ -1947,6 +1946,7 @@
 		D07AA066220823670065779F /* ChooseProtocolController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseProtocolController.swift; sourceTree = "<group>"; };
 		D07AA06B220833A10065779F /* ACDnsUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACDnsUtils.h; sourceTree = "<group>"; };
 		D07AA06C220833A10065779F /* ACDnsUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACDnsUtils.m; sourceTree = "<group>"; };
+		D07BC7CD223BBF2400C6B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DnsSettings.storyboard; sourceTree = "<group>"; };
 		D07D41D021FF1F6400B03872 /* DnsModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsModeController.swift; sourceTree = "<group>"; };
 		D08C96BE1FE16F86002456B3 /* APBlockingListsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APBlockingListsController.h; sourceTree = "<group>"; };
 		D08C96BF1FE16F86002456B3 /* APBlockingListsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APBlockingListsController.m; sourceTree = "<group>"; };
@@ -3310,7 +3310,7 @@
 				D0D6BA0721A6AF63007360BC /* Settings.storyboard */,
 				D0D6BA0A21A6AF67007360BC /* Tutorial.storyboard */,
 				D0D6BA0D21A6AF6C007360BC /* UserFilter.storyboard */,
-				D0569E4021F1E7F800985DA9 /* DnsSettings.storyboard */,
+				D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */,
 				D0508E6B22280BCC00E07600 /* ToastView.xib */,
 			);
 			name = Resources;
@@ -4132,7 +4132,7 @@
 				65F3981F1B7B684700ABCD39 /* Main.storyboard in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
-				D0569E4D21F1F66C00985DA9 /* DnsSettings.storyboard in Resources */,
+				D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5832,6 +5832,14 @@
 				D0D6BB5121A6C62B007360BC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D07BC7CD223BBF2400C6B48C /* Base */,
+			);
+			name = DnsSettings.storyboard;
 			sourceTree = "<group>";
 		};
 		D096D9471F28C0D70081004D /* TodayExtensionMainInterface.storyboard */ = {
