@@ -61,7 +61,6 @@
     APUDPPacket *_reversBasePacket;
     DnsServerInfo *_currentDnsServer;
     
-    BOOL _dnsLoggingEnabled;
     ACLExecuteBlockDelayed *_saveLogExecution;
     NSMutableArray <APDnsLogRecord *> *_dnsRecords;
     NSMutableSet *_dnsRecordsSet;
@@ -86,9 +85,6 @@
 
     self = [super init];
     if (self) {
-        
-        
-        _dnsLoggingEnabled = NO;
         _dnsRecords = [NSMutableArray new];
         _dnsRecordsSet = [NSMutableSet new];
         
@@ -690,7 +686,7 @@
             
             [self settingDnsRecordForIncomingDnsDatagram:datagram session:_udpSession];
             
-            logUpdated = _dnsLoggingEnabled;
+            logUpdated = YES;
             
             NSData *datagramPayload = [datagram generatePayload];
             if (datagramPayload) {
@@ -724,21 +720,18 @@
     
     [self logDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelist blacklist:blacklist];
     
-    if(_dnsLoggingEnabled) {
+    APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
+    record.requests = datagram.requests;
+    
+    record.isWhitelisted = whitelist;
+    record.isBlacklisted = blacklist;
+    record.isTracker = tracker;
+    record.subscriptionUUID = uuid;
+    
+    if (![_dnsRecordsSet containsObject:record]) {
         
-        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
-        record.requests = datagram.requests;
-        
-        record.isWhitelisted = whitelist;
-        record.isBlacklisted = blacklist;
-        record.isTracker = tracker;
-        record.subscriptionUUID = uuid;
-        
-        if (![_dnsRecordsSet containsObject:record]) {
-            
-            [_dnsRecords addObject:record];
-            [_dnsRecordsSet addObject:record];
-        }
+        [_dnsRecords addObject:record];
+        [_dnsRecordsSet addObject:record];
     }
 }
 
@@ -782,9 +775,7 @@
         [self settingDnsRecordForIncomingDnsDatagram:datagram session:session];
     }
     
-    if (self->_dnsLoggingEnabled) {
-        [self->_saveLogExecution executeOnceForInterval];
-    }
+    [self->_saveLogExecution executeOnceForInterval];
 }
 
 - (void)settingDnsRecordForIncomingDnsDatagram:(APDnsDatagram *)datagram session:(NWUDPSession *)session{
@@ -793,16 +784,12 @@
         
         [self logDnsRecordForIncomingDnsDatagram:datagram session:session];
         
-        if(_dnsLoggingEnabled) {
-            
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
         
-            APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
+        record = [_dnsRecordsSet member:record];
+        if (record) {
             
-            record = [_dnsRecordsSet member:record];
-            if (record) {
-                
-                record.responses = datagram.responses;
-            }
+            record.responses = datagram.responses;
         }
     }
 }
@@ -825,33 +812,30 @@
 
 - (void)saveLogRecord:(BOOL)flush {
 
-    if (_dnsLoggingEnabled) {
+    if (flush) {
 
-        if (flush) {
+        [APSharedResources writeToDnsLogRecords:_dnsRecords];
+        [_dnsRecords removeAllObjects];
+        [_dnsRecordsSet removeAllObjects];
+    } else {
 
-            [APSharedResources writeToDnsLogRecords:_dnsRecords];
-            [_dnsRecords removeAllObjects];
-            [_dnsRecordsSet removeAllObjects];
-        } else {
+        NSMutableArray *records = [NSMutableArray new];
+        NSDate *dateBefore = [NSDate dateWithTimeIntervalSinceNow:-(TTL_SESSION)];
 
-            NSMutableArray *records = [NSMutableArray new];
-            NSDate *dateBefore = [NSDate dateWithTimeIntervalSinceNow:-(TTL_SESSION)];
+        for (APDnsLogRecord *obj in _dnsRecords) {
 
-            for (APDnsLogRecord *obj in _dnsRecords) {
-
-                if ([obj.recordDate compare:dateBefore] == NSOrderedDescending) {
-                    break;
-                }
-
-                [records addObject:obj];
-                [_dnsRecordsSet removeObject:obj];
+            if ([obj.recordDate compare:dateBefore] == NSOrderedDescending) {
+                break;
             }
 
-            if (records.count) {
+            [records addObject:obj];
+            [_dnsRecordsSet removeObject:obj];
+        }
 
-                [_dnsRecords removeObjectsInRange:NSMakeRange(0, records.count)];
-                [APSharedResources writeToDnsLogRecords:records];
-            }
+        if (records.count) {
+
+            [_dnsRecords removeObjectsInRange:NSMakeRange(0, records.count)];
+            [APSharedResources writeToDnsLogRecords:records];
         }
     }
 }

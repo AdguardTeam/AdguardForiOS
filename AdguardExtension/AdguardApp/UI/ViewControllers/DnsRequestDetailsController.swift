@@ -65,9 +65,11 @@ class DnsRequestDetailsController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == responsesRow {
             // copy responses to pasteboard
-            UIPasteboard.general.string = logRecord?.responses?.joined(separator: ", ")
-            ToastView.presentinController(self, message: ACLocalizedString("text_copied", nil))
-            tableView.deselectRow(at: indexPath, animated: true)
+            if let responsesString = logRecord?.responses?.joined(separator: ", ") {
+                UIPasteboard.general.string = responsesString
+                ToastView.presentinController(self, message: ACLocalizedString("text_copied", nil))
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
         }
     }
     
