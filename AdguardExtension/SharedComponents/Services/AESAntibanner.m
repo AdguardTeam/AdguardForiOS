@@ -1813,30 +1813,16 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         for (ASDFilterMetadata *filter in filters){
             BOOL recomended = NO;
             for (ASDFilterTagMeta* tagMeta in filter.tags) {
-                if(tagMeta.type == ASDFilterTagTypeRecommended || (tagMeta.type == ASDFilterTagTypePlatform && [tagMeta.name isEqualToString:@"ios"])){
+                
+                if(tagMeta.type == ASDFilterTagTypeRecommended){
                     recomended = YES;
                     break;
                 }
             }
             
-            if (recomended && ([langString containsAny:filter.langs] || filter.langs.count == 0)                    // Filters for user language
-#ifdef PRO
-                || [filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)] // Simplified domain names filter
-#endif
-                ) {
-
-#ifdef PRO
-                    //Special case for Simplified domain names filter. We prevent deleting of this filter.
-                    //https://github.com/AdguardTeam/AdguardForiOS/issues/302
-                    if ([filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)]) {
-                        filter.removable = @(NO);
-                        filter.editable = @(NO);
-                        filter.enabled = @(NO);
-                    }
-#endif
-                
-                    [sFilters addObject:filter];
-                }
+            if (recomended && ([langString containsAny:filter.langs] || filter.langs.count == 0)) {
+                [sFilters addObject:filter];
+            }
         }
         
         if (!sFilters)
