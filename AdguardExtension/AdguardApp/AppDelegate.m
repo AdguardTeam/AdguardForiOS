@@ -40,6 +40,10 @@
 #import "AESProductSchemaManager.h"
 #endif
 
+#import "Adguard-Swift.h"
+
+#import "ACDnsUtils.h"
+
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
@@ -67,6 +71,9 @@ typedef enum : NSUInteger {
     AEDownloadsCompletionBlock _downloadCompletion;
     AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
+    AESharedResources *_resources;
+    AEService * _aeService;
+    ContentBlockerService* _contentBlockerService;
     
     BOOL _activateWithOpenUrl;
 }
@@ -88,11 +95,11 @@ typedef enum : NSUInteger {
         
         //------------- Preparing for start application. Stage 1. -----------------
         
-        // Registering standart Defaults
-        NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]];
-        if (defs)
-            [[AESharedResources sharedDefaults] registerDefaults:defs];
-        
+        [StartupService start];
+        _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
+        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
+        _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
         
@@ -121,9 +128,9 @@ typedef enum : NSUInteger {
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
         //----------- Set main navigation controller -----------------------
-        if ([[AEService singleton] firstRunInProgress]) {
+        if ([_aeService firstRunInProgress]) {
             
-            [[AEService singleton] onReady:^{
+            [_aeService onReady:^{
                 
 #ifdef PRO
                 [APSProductSchemaManager install];
@@ -138,7 +145,7 @@ typedef enum : NSUInteger {
         }
         else{
             
-            [[AEService singleton] onReady:^{
+            [_aeService onReady:^{
 #ifdef PRO
                 [APSProductSchemaManager upgrade];
 #else
@@ -181,7 +188,7 @@ typedef enum : NSUInteger {
     //--------------------- Start Services ---------------------------
     else{
         
-        [[AEService singleton] start];
+        [_aeService start];
         DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
     
@@ -236,14 +243,8 @@ typedef enum : NSUInteger {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
     
-    UINavigationController *nav = [self getNavigationController];
-    
-    AEUIMainController *main = nav.viewControllers.firstObject;
-    
-    if ([main isKindOfClass:[AEUIMainController class]]) {
-        
-        [main checkContentBlockerStatus];
-    }
+    ConfigurationService* configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
+    [configuration checkContentBlockerEnabled];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -251,9 +252,9 @@ typedef enum : NSUInteger {
     
     DDLogInfo(@"(AppDelegate) applicationDidBecomeActive.");
     
-    [[AEService singleton] onReady:^{
+    [_aeService onReady:^{
         
-        [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
+        [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
             
             if (_activateWithOpenUrl) {
                 _activateWithOpenUrl = NO;
@@ -261,7 +262,7 @@ typedef enum : NSUInteger {
                 return;
             }
             
-            if (AEService.singleton.antibanner.updatesRightNow) {
+            if (_aeService.antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
             }
@@ -328,11 +329,11 @@ typedef enum : NSUInteger {
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
             
-            [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
+            [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
                 
-                if (AEService.singleton.antibanner.updatesRightNow) {
+                if (_aeService.antibanner.updatesRightNow) {
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
@@ -360,10 +361,10 @@ typedef enum : NSUInteger {
 
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
 
             _downloadCompletion = completionHandler;
-            [[[AEService singleton] antibanner] repairUpdateStateForBackground];
+            [[_aeService antibanner] repairUpdateStateForBackground];
         }];
     }
     else{
@@ -383,7 +384,7 @@ typedef enum : NSUInteger {
          || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
         && [url.scheme isEqualToString:AE_URLSCHEME]) {
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 @autoreleasepool {
                     
@@ -394,10 +395,18 @@ typedef enum : NSUInteger {
                         
                         UINavigationController *nav = [self getNavigationController];
                         if (nav.viewControllers.count) {
-                            AEUIMainController *main = nav.viewControllers.firstObject;
-                            if ([main isKindOfClass:[AEUIMainController class]]) {
+                            MainController *main = nav.viewControllers.firstObject;
+                            if ([main isKindOfClass:[MainController class]]) {
                                 
-                                [main addRuleToUserFilter:path];
+                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
+                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
+                                
+                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
+                                UserFilterController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
+                                
+                                userFilterController.newRuleText = path;
+                                
+                                nav.viewControllers = @[main, mainMenuController, userFilterController];
                             }
                             else{
                                 
@@ -456,8 +465,7 @@ typedef enum : NSUInteger {
         
         // Begin update process (Downloading step)
         
-        NSDate *lastCheck = [[AESharedResources sharedDefaults]
-                             objectForKey:AEDefaultsCheckFiltersLastDate];
+        NSDate *lastCheck = [_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
         if (fromUI || !lastCheck ||
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
@@ -469,14 +477,14 @@ typedef enum : NSUInteger {
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
             
-            [[[AEService singleton] antibanner] beginTransaction];
+            [[_aeService antibanner] beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
-            BOOL result = [[[AEService singleton] antibanner] startUpdatingForced:fromUI interactive:interactive];
+            BOOL result = [[_aeService antibanner] startUpdatingForced:fromUI interactive:interactive];
             
             if (! result) {
                 DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                [[[AEService singleton] antibanner] rollbackTransaction];
+                [[_aeService antibanner] rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
             }
 
@@ -505,7 +513,7 @@ typedef enum : NSUInteger {
         [dbService removeObserver:self forKeyPath:@"ready"];
         
         //--------------------- Start Services ---------------------------
-        [[AEService singleton] start];
+        [_aeService start];
         DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
         
         return;
@@ -525,11 +533,11 @@ typedef enum : NSUInteger {
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
         
         BOOL background = (_fetchCompletion || _downloadCompletion);
-        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:background completionBlock:^(NSError *error) {
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
             
             if (error) {
                 
-                [[[AEService singleton] antibanner] rollbackTransaction];
+                [[_aeService antibanner] rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFailuredNotify];
@@ -546,9 +554,9 @@ typedef enum : NSUInteger {
                 
                 // Success antibanner updated from backend
                 
-                [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
                 
-                [[[AEService singleton] antibanner] endTransaction];
+                [[_aeService antibanner] endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFinishedNotify];
@@ -567,9 +575,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
         
-        if ([[[AEService singleton] antibanner] inTransaction]) {
+        if ([[_aeService antibanner] inTransaction]) {
             
-            [[[AEService singleton] antibanner] rollbackTransaction];
+            [[_aeService antibanner] rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
         }
         
@@ -582,12 +590,12 @@ typedef enum : NSUInteger {
         
         _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
         
-        [[AEService singleton] onReloadContentBlockingJsonComplete:^{
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
             
-            if ([[[AEService singleton] antibanner] inTransaction]) {
+            if ([[_aeService antibanner] inTransaction]) {
                 // Success antibanner updated from backend
-                [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [[[AEService singleton] antibanner] endTransaction];
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [[_aeService antibanner] endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
                 
                 [self updateFinishedNotify];
@@ -605,9 +613,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerFailuredUpdateNotification]) {
         
-        if ([[[AEService singleton] antibanner] inTransaction]) {
+        if ([[_aeService antibanner] inTransaction]) {
             
-            [[[AEService singleton] antibanner] rollbackTransaction];
+            [[_aeService antibanner] rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
         
@@ -747,6 +755,8 @@ typedef enum : NSUInteger {
     
     if (nav) {
         
+        ((UINavigationController*)nav).navigationBar.shadowImage = [UIImage new];
+        
         [UIView transitionWithView:self.window
                           duration:0.3
                            options:UIViewAnimationOptionTransitionCrossDissolve
@@ -771,7 +781,7 @@ typedef enum : NSUInteger {
 
     BOOL result = YES;
     
-    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    NSNumber* wifiOnlyObject = [_resources.sharedDefaults objectForKey:AEDefaultsWifiOnlyUpdates];
     BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
     
     if (wifiOnly) {

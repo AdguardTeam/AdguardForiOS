@@ -246,7 +246,7 @@ static NSMutableCharacterSet *delimCharSet;
         return NO;
     
     if((self.serverName || server.serverName) && ![self.serverName isEqualToString:server.serverName])
-        return NO;
+        return NO;  
     
     if((self.serverDescription || server.serverDescription) && ![self.serverDescription isEqualToString:server.serverDescription])
         return NO;

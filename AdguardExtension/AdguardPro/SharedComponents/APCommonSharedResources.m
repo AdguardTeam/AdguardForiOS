@@ -22,14 +22,11 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources Constants
 
-NSString *APDefaultsDnsLoggingEnabled = @"APDefaultsDnsLoggingEnabled";
-NSString *APDefaultsCustomRemoteDnsServers = @"APDefaultsCustomRemoteDnsServers";
-NSString *APDefaultsCustomRemoteDnsCryptServers = @"APDefaultsCustomRemoteDnsCryptServers";
+NSString *APDefaultsCustomDnsProviders = @"APDefaultsCustomDnsProviders";
 NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
 NSString *APDefaultsActiveRemoteDnsServer = @"APDefaultsActiveRemoteDnsServer";
 
 NSString *APVpnManagerParameterRemoteDnsServer = @"APVpnManagerParameterRemoteDnsServer";
-NSString *APVpnManagerParameterLocalFiltering = @"APVpnManagerParameterLocalFiltering";
 NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 NSString *APVpnManagerRestartByReachability = @"APVpnManagerRestartByReachability";

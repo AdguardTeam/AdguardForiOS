@@ -68,15 +68,8 @@ extern NSString *AESFCOverLimitKey;
 #pragma mark - AESFiltersConverter
 /////////////////////////////////////////////////////////////////////
 
-/**
- Converter from Adguard filter rules 
- to Apple content-blocking extension rules format.
- */
-@interface AESFilterConverter : NSObject
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and Public methods
-/////////////////////////////////////////////////////////////////////
+@protocol AESFilterConverterProtocol <NSObject>
 
 /**
  Converts array of the filter rules to JSON string.
@@ -89,5 +82,20 @@ extern NSString *AESFCOverLimitKey;
  Dictionary contains keys: AESFConvertedCountKey, AESFConvertedRulesKey, AESFCOoverLimitKey
  */
 - (NSDictionary *)jsonFromRules:(NSArray *)rules upTo:(NSUInteger)limit optimize:(BOOL)optimize;
+
+@end
+
+/**
+ Converter from Adguard filter rules 
+ to Apple content-blocking extension rules format.
+ */
+@interface AESFilterConverter : NSObject<AESFilterConverterProtocol>
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Properties and Public methods
+/////////////////////////////////////////////////////////////////////
+
+- (nullable AESFilterConverter *)init;
+
 
 @end

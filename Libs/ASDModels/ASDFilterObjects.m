@@ -60,6 +60,10 @@
         if (value)
             _displayNumber = value;
         
+        value = result[@"is_enabled"];
+        if (value && value != NSNull.null)
+            _enabled = value;
+        
     }
     
     return self;
@@ -245,6 +249,26 @@
 
 @end
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark - ASDFilterTagMeta
+/////////////////////////////////////////////////////////////////////
+
+@implementation ASDFilterTagMeta
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    self.type = ((NSNumber*)[aDecoder decodeObjectForKey:@"tagType"]).intValue;
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    
+    [aCoder encodeObject:@(_type) forKey:@"tagType"];
+}
+
+@end
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterMetadata
@@ -277,10 +301,13 @@
         _homepage = @"";
         _expires = @(AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD);
         _subscriptionUrl = @"";
-        _rulesCount = nil;
         _langs = @[];
     }
     return self;
+}
+
+- (void)setEnabled:(NSNumber *)enabled {
+    _enabled = enabled;
 }
 
 - (id)initFromDbResult:(FMResultSet *)result{
@@ -362,7 +389,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[filterId=%@, enabled=%@, updateDate=%@, version=%@, displayNumber=%@, groupId=%@, name=%@, description=%@, homepage=%@, expires=%@, langs=%@]", self.filterId, ([self.enabled boolValue] ? @"YES" : @"NO"), self.updateDate, self.version, self.displayNumber, self.groupId, self.name, self.descr, self.homepage, self.expires, self.langs];
+    return [NSString stringWithFormat:@"[filterId=%@, enabled=%@, updateDate=%@, version=%@, displayNumber=%@, groupId=%@, name=%@, description=%@, homepage=%@, expires=%@, langs=%@, tags=%@]", self.filterId, ([self.enabled boolValue] ? @"YES" : @"NO"), self.updateDate, self.version, self.displayNumber, self.groupId, self.name, self.descr, self.homepage, self.expires, self.langs, self.tags];
 }
 
 // Equal by key value - "filterId"
@@ -617,7 +644,7 @@
         
         _filterId = @(ASDF_USER_FILTER_ID);
         _ruleId = @(0);
-        _ruleText = ACLocalizedString(@"!------- Enter a rule here.. ---------!", @"Create empty rule - ASDatabaseObjects");
+        _ruleText = @"";
         _isEnabled = @(0);
     }
     

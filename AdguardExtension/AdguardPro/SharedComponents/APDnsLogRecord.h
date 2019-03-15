@@ -17,8 +17,10 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "APDnsRequest.h"
+#import "APDnsResponse.h"
 
-@class APDnsResponse, APDnsRequest, APDnsServerObject;
+@class DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogRecord
@@ -36,7 +38,7 @@
  
  @return Returns object, or nil if error occurs.
  */
-- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(APDnsServerObject *)dnsServer localFiltering:(BOOL)localFiltering;
+- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(DnsServerInfo *)dnsServer;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -56,12 +58,7 @@
 /**
  DNS server description.
  */
-@property (readonly, nonatomic) APDnsServerObject *dnsServer;
-/**
- Flag that defianes filtering locally, 
- using "Simplified domain names filter" filter rules.
- */
-@property (readonly, nonatomic) BOOL localFiltering;
+@property (readonly, nonatomic) DnsServerInfo *dnsServer;
 /**
  Indicates that this record contains domain from whitelist.
  */
@@ -78,7 +75,7 @@
 /**
  DNS Response.
  */
-@property (nonatomic) NSArray <APDnsResponse *> *responses;
+@property (nullable, nonatomic) NSArray <APDnsResponse *> *responses;
 /**
  Returns DNS response, which will be used for presentation.
  */

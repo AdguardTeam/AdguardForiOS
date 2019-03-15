@@ -28,6 +28,7 @@
 #import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 #import "AEInvertedWhitelistDomainsObject.h"
+#import "Adguard-Swift.h"
 
 #define USER_FRIENDLY_DELAY     0.5
 
@@ -39,6 +40,9 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
 @interface ActionViewController (){
     
     AESharedResources *_sharedResources;
+    AEService *_aeService;
+    SafariService *_safariService;
+    
     NSURL *_url;
     BOOL _injectScriptSupported;
     NSString *_host;
@@ -121,10 +125,15 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     [super viewDidLoad];
 
     // Get the item[s] we're handling from the extension context.
-
-    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
-    [self setPreferredContentSize:CGSizeMake(450.0f, 550)];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    _sharedResources = [AESharedResources new];
+    _safariService = [[SafariService alloc] initWithResources:_sharedResources];
+    ContentBlockerService* contentBlockerService = [[ContentBlockerService alloc] initWithResources:_sharedResources safariService:_safariService];
+    _aeService = [[AEService alloc] initWithContentBlocker:contentBlockerService resources:_sharedResources];
+    
+    self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
     __block NSString *errorMessage = ACLocalizedString(@"support_error_safari_extension", @"(Action Extension - ActionViewController) Some errors when starting.");
     
@@ -162,7 +171,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
                     }
                 }
                 else {
-                    [[AEService singleton] onReady:^{
+                    [_aeService onReady:^{
                         
                         // Add observers for application notifications
                         _observerObjects = [NSMutableArray arrayWithCapacity:2];
@@ -258,7 +267,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         
         DDLogInfo(@"(ActionViewController) default.plist loaded!");
         
-        [[AESharedResources sharedDefaults] registerDefaults:defs];
+        [[_sharedResources sharedDefaults] registerDefaults:defs];
     }
     else{
         
@@ -300,7 +309,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         }
         //--------------------- Start Services ---------------------------
         else
-            [[AEService singleton] start];
+            [_aeService start];
         
     });
     
@@ -316,6 +325,9 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     if ([segue.identifier isEqualToString:@"loader"]) {
         
         _mainController = (AEAUIMainController *)segue.destinationViewController;
+        
+        _mainController.resources = _sharedResources;
+        _mainController.safariService = _safariService;
         
         _mainController.domainName = _host;
         _mainController.url = _url;
@@ -342,7 +354,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [dbService removeObserver:self forKeyPath:@"ready"];
         
         //--------------------- Start Services ---------------------------
-        [[AEService singleton] start];
+        [_aeService start];
         
         return;
     }
@@ -378,7 +390,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [self.messageLabel setHidden:YES];
     });
     
-    BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+    BOOL inverted = [_sharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
     if(inverted) {
         

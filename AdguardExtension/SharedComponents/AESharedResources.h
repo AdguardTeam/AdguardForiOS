@@ -25,7 +25,7 @@
 
 #define AE_PRODUCT_NAME                     @AG_PRODUCT
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
-#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
+//#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 #define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
@@ -128,6 +128,32 @@ extern NSString *AEDefaultsFirstLaunchDate;
  */
 extern NSString* AEDefaultsActionExtensionUsed;
 
+/**
+ User Defaults key, which defines that pro feature is purchased.
+ */
+extern NSString* AEDefaultsIsProPurchasedThroughInApp;
+
+/**
+ User Defaults key, which defines that pro feature is purchased.
+ */
+extern NSString* AEDefaultsIsProPurchasedThroughLogin;
+
+/**
+ User defaults key, wich contains premium account expiration date (NSDate) */
+extern NSString* AEDefaultsPremiumExpirationDate;
+
+/**
+ User defaults key, wich defines that "pro expired" message showed */
+extern NSString* AEDefaultsPremiumExpiredMessageShowed;
+
+/**
+ User defaults key, wich defines dark theme is on */
+extern NSString* AEDefaultsDarkTheme;
+
+/**
+ User defaults key, wich defines dark theme is on */
+extern NSString* AEDefaultsAppRated;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -135,7 +161,7 @@ extern NSString* AEDefaultsActionExtensionUsed;
 /**
      Class, which provides exchanging data between app and extension.
  */
-@interface AESharedResources : NSObject
+@protocol AESharedResourcesProtocol
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -159,7 +185,7 @@ extern NSString* AEDefaultsActionExtensionUsed;
 /**
  Returns shared user defaults object.
  */
-+ (NSUserDefaults *)sharedDefaults;
+- (nonnull NSUserDefaults *)sharedDefaults;
 
 /**
  Saves defaults value in NSArgumentDomain.
@@ -189,19 +215,18 @@ extern NSString* AEDefaultsActionExtensionUsed;
  */
 + (void)synchronizeSharedDefaults;
 
-/**
- Data with blocking content rules JSON.
- */
-@property NSData *blockingContentRules;
+- (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
+- (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
+
 /**
  Rules from whitelist, which used for Safari content-blocking.
  */
-@property NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
+@property (nullable) NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
 
  /**
  Rules from inverted whitelist, which used for Safari content-blocking.
  */
-@property AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
+@property (nullable) AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
 
 /**
  Filter metadata from last filter update process.
@@ -228,5 +253,11 @@ extern NSString* AEDefaultsActionExtensionUsed;
  We need it because filter update process is performed in two steps.
  */
 @property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
+
+- (NSString*) pathForRelativePath:(NSString*) relativePath;
+
+@end
+
+@interface AESharedResources: NSObject<AESharedResourcesProtocol>
 
 @end

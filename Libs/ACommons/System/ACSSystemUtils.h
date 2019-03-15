@@ -44,6 +44,11 @@
  */
 + (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message;
 
+/**
+ Display simple alert with one button (Ok) with completionHandler
+ */
++ (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message completion:(void (^ __nullable)(void))completion;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Only OS X code here
 /////////////////////////////////////////////////////////////////////

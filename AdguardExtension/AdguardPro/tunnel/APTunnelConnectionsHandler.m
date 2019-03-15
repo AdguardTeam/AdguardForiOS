@@ -32,16 +32,12 @@
 #import "APSharedResources.h"
 #import "AERDomainFilter.h"
 
-#define DEFAULT_DNS_SERVER_IP           @"208.67.222.222" // opendns.com
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APTunnelConnectionsHandler
 
 @implementation APTunnelConnectionsHandler {
 
     NSMutableSet<APTUdpProxySession *> *_sessions;
-    
-    BOOL _loggingEnabled;
     
     os_unfair_lock _dnsAddressLock;
     os_unfair_lock _globalWhitelistLock;
@@ -51,7 +47,6 @@
     os_unfair_lock _trackersLock;
     os_unfair_lock _hostsLock;
     
-    NSDictionary <NSString*, APDnsServerAddress*> *_whitelistDnsAddresses;
     NSDictionary <NSString*, APDnsServerAddress*> *_remoteDnsAddresses;
     
     AERDomainFilter *_globalWhitelist;
@@ -73,24 +68,22 @@
     dispatch_queue_t _countersQueue;
     
     BOOL _packetHandling;
+    
+    id<AESharedResourcesProtocol> _resources;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-- (id)initWithProvider:(PacketTunnelProvider *)provider {
-
-    if (!provider) {
-        return nil;
-    }
+- (id)initWithProvider:(nonnull PacketTunnelProvider *)provider resources: (nonnull id<AESharedResourcesProtocol>) resources  {
 
     self = [super init];
     if (self) {
 
         _provider = provider;
+        _resources = resources;
         _sessions = [NSMutableSet set];
         _globalWhitelistLock = _globalBlacklistLock = _userWhitelistLock = _userBlacklistLock = _trackersLock = _hostsLock = OS_UNFAIR_LOCK_INIT;
-        _loggingEnabled = NO;
         
         _closeCompletion = nil;
         
@@ -111,7 +104,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)fillDnsDictionary:(NSMutableDictionary<NSString*, APDnsServerAddress*> *)dnsDictionary sourceDnsArray:(NSArray<NSString*> *) sourceDns dstDnsArray: (NSArray<APDnsServerAddress*> *) dstDns defaultDns:(APDnsServerAddress*)defaultDns {
+- (void)fillDnsDictionary:(NSMutableDictionary<NSString*, APDnsServerAddress*> *)dnsDictionary sourceDnsArray:(NSArray<NSString*> *) sourceDns dstDnsArray: (NSArray<APDnsServerAddress*> *) dstDns {
     
     NSUInteger dstIndex = 0;
     
@@ -125,7 +118,7 @@
             
         }
         else {
-            dnsDictionary[dns] = defaultDns;
+            DDLogError(@"(APTunnelConnctionsHandler) fillDnsDictionary - Error. Destination DNSs array is empty");
         }
     }
 }
@@ -143,28 +136,15 @@
     
     @autoreleasepool {
     
-        NSMutableDictionary* whiteListDnsDictionary = [NSMutableDictionary dictionary];
-        
-        APDnsServerAddress* defaultWhiteListDnsIpv4 = deviceDnsAddressesIpv4.firstObject ?: [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
-        APDnsServerAddress* defaultWhiteListDnsIpv6 = deviceDnsAddressesIpv6.firstObject ?: defaultWhiteListDnsIpv4;
-        
-        [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:deviceDnsAddressesIpv4 defaultDns:defaultWhiteListDnsIpv4];
-        [self fillDnsDictionary:whiteListDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:deviceDnsAddressesIpv6 defaultDns:defaultWhiteListDnsIpv6];
-        
         NSMutableDictionary *remoteDnsDictionary = [NSMutableDictionary dictionary];
         
-        APDnsServerAddress* defaultRemoteDnsIpv4 = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
-        APDnsServerAddress* defaultRemoteDnsIpv6 = remoteDnsAddressesIpv4.firstObject ?: [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4];
+        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6];
         
-        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv4 dstDnsArray:remoteDnsAddressesIpv4 defaultDns:defaultRemoteDnsIpv4];
-        [self fillDnsDictionary:remoteDnsDictionary sourceDnsArray:fakeDnsAddressesIpv6 dstDnsArray:remoteDnsAddressesIpv6 defaultDns:defaultRemoteDnsIpv6];
-        
-        DDLogInfo(@"(APTunnelConnectionsHandler) whiteListDnsDictionary %@", whiteListDnsDictionary);
         DDLogInfo(@"(APTunnelConnectionsHandler) remoteDnsDictionary %@", remoteDnsDictionary);
         
         os_unfair_lock_lock(&_dnsAddressLock);
         
-        _whitelistDnsAddresses = [whiteListDnsDictionary copy];
         _remoteDnsAddresses = [remoteDnsDictionary copy];
         
         os_unfair_lock_unlock(&_dnsAddressLock);
@@ -272,32 +252,27 @@
     
     dispatch_async(_countersQueue, ^{
         
-        NSNumber* count = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount];
+        NSNumber* count = [_resources.sharedDefaults valueForKey:AEDefaultsTotalRequestsCount];
         int countValue = count.intValue + 1;
         count = [NSNumber numberWithInt:countValue];
         
-        [AESharedResources.sharedDefaults setValue:count forKey:AEDefaultsTotalRequestsCount];
+        [_resources.sharedDefaults setValue:count forKey:AEDefaultsTotalRequestsCount];
         
-        NSNumber* time = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime];
+        NSNumber* time = [_resources.sharedDefaults valueForKey:AEDefaultsTotalRequestsTime];
         float timeValue = time.floatValue + workTime;
         time = [NSNumber numberWithFloat:timeValue];
         
-        [AESharedResources.sharedDefaults setValue:time forKey:AEDefaultsTotalRequestsTime];
+        [_resources.sharedDefaults setValue:time forKey:AEDefaultsTotalRequestsTime];
         
         if(tracker) {
             
-            NSNumber* countTrackers = [AESharedResources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount];
+            NSNumber* countTrackers = [_resources.sharedDefaults valueForKey:AEDefaultsTotalTrackersCount];
             int countTrackersValue = countTrackers.intValue + 1;
             countTrackers = [NSNumber numberWithInt:countTrackersValue];
             
-            [AESharedResources.sharedDefaults setValue:countTrackers forKey:AEDefaultsTotalTrackersCount];
+            [_resources.sharedDefaults setValue:countTrackers forKey:AEDefaultsTotalTrackersCount];
         }
     });
-}
-
-- (void)setDnsActivityLoggingEnabled:(BOOL)enabled {
-
-    _loggingEnabled = enabled;
 }
 
 - (BOOL)isGlobalWhitelistDomain:(NSString *)domainName {
@@ -404,25 +379,6 @@
     return result;
 }
 
-- (APDnsServerAddress *)whitelistServerAddressForAddress:(NSString *)serverAddress {
-    
-    if (!serverAddress) {
-        serverAddress = [NSString new];
-    }
-    
-    os_unfair_lock_lock(&_dnsAddressLock);
-
-    APDnsServerAddress *address = _whitelistDnsAddresses[serverAddress];
-    
-    if (!address) {
-        address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
-    }
-    
-    os_unfair_lock_unlock(&_dnsAddressLock);
-
-    return address;
-}
-
 - (APDnsServerAddress *)serverAddressForFakeDnsAddress:(NSString *)serverAddress {
     
     if (!serverAddress) {
@@ -434,7 +390,8 @@
     APDnsServerAddress *address = _remoteDnsAddresses[serverAddress];
     
     if (!address) {
-        address = [[APDnsServerAddress alloc] initWithIp:DEFAULT_DNS_SERVER_IP port:nil];
+        address = _remoteDnsAddresses.allValues.firstObject;
+        DDLogError(@"(APTunnelConnectionsHandler) serverAddressForFakeDnsAddress - Error. There is no remote dns addressees assotiated with fake dns %@. We will use %@", serverAddress, address);
     }
     
     os_unfair_lock_unlock(&_dnsAddressLock);
@@ -536,7 +493,7 @@
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
 #endif
 
-    DDLogTrace();
+    DDLogDebugTrace();
 
 #ifdef DEBUG
     packetCounter++;
@@ -549,8 +506,9 @@
 
         APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
         if (udpPacket) {
-            //performs only PIv4 UPD packets
-
+            
+            NSLog(@"(APTunnelConnectionsHandler) handlePackets - got new udp packet:", udpPacket);
+            
             APTUdpProxySession *session = [[APTUdpProxySession alloc] initWithUDPPacket:udpPacket delegate:self];
 
             if (session) {
@@ -620,7 +578,7 @@
         if(!USE_STRONG(self))
             return;
         
-        DDLogTrace();
+        DDLogDebugTrace();
         [packetsBySessions enumerateKeysAndObjectsUsingBlock:^(APTUdpProxySession *_Nonnull key, NSArray *_Nonnull obj, BOOL *_Nonnull stop) {
             
             APTUdpProxySession *session = [USE_STRONG(self)->_sessions member:key];
@@ -628,8 +586,6 @@
                 //create session
                 session = key;
                 if ([session createSession]) {
-                    
-                    [session setLoggingEnabled:USE_STRONG(self)->_loggingEnabled];
                     [USE_STRONG(self)->_sessions addObject:session];
                 }
                 else

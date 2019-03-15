@@ -43,17 +43,14 @@ extern NSString *ACNNetworkingErrorDomain;
  Various utilities for asynchronously downloading data on modern manner.
  (> OS X 10.9 / iOS 7)
  */
-@interface ACNNetworking : NSObject
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Class methods
-/////////////////////////////////////////////////////////////////////
+@protocol ACNNetworkingProtocol
 
 /**
  Creates an HTTP GET request for the specified URL with default read timeout,
  then calls a handler upon completion.
  */
-+ (void)dataWithURL:(NSURL *)url
+- (void)dataWithURL:(NSURL *)url
   completionHandler:(void (^)(NSData *data,
                               NSURLResponse *response,
                               NSError *error))completionHandler;
@@ -62,9 +59,19 @@ extern NSString *ACNNetworkingErrorDomain;
  Creates an HTTP GET request for the specified URL with specified read timeout,
  then calls a handler upon completion.
  */
-+ (void)dataWithURL:(NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
+- (void)dataWithURL:(NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
   completionHandler:(void (^)(NSData *data,
                               NSURLResponse *response,
                               NSError *error))completionHandler;
+
+/** Sends an HTTP request then calls a handler upon completion */
+- (void)dataWithURLRequest: (nonnull NSURLRequest*)URLrequest
+         completionHandler: (nonnull void (^)(NSData * _Nullable data,
+                                              NSURLResponse * _Nullable response,
+                                              NSError * _Nullable error))completionHandler;
+
+@end
+
+@interface ACNNetworking : NSObject<ACNNetworkingProtocol>
 
 @end

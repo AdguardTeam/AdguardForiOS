@@ -80,8 +80,6 @@
     
     BOOL installTrackersResult = [self installTrackersDomainList];
     
-    [APVPNManager.singleton removeCustomRemoteServersDuplicates];
-    
     BOOL saveSubscriptionsResult = [APBlockingSubscriptionsManager saveHostsAndRulesForSubscriptions];
     
     return result && installTrackersResult && saveSubscriptionsResult;

@@ -38,9 +38,15 @@ NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
+NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
+NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
+NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
+NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
+NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
+NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 
 
-#define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
@@ -67,7 +73,8 @@ static NSUserDefaults *_sharedUserDefaults;
     
     if (self == [AESharedResources class]) {
         
-        _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AE_SHARED_RESOURCES_GROUP];
+        NSString* groupId = AE_SHARED_RESOURCES_GROUP;
+        _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
         _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AE_SHARED_RESOURCES_GROUP];
     }
 }
@@ -96,16 +103,6 @@ static NSUserDefaults *_sharedUserDefaults;
 + (NSURL *)sharedLogsURL{
     
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
-}
-
-- (NSData *)blockingContentRules{
-    
-    return [self loadDataFromFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
-}
-
-- (void)setBlockingContentRules:(NSData *)blockingContentRules{
-
-    [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
 }
 
 - (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
@@ -284,7 +281,7 @@ static NSUserDefaults *_sharedUserDefaults;
     }
 }
 
-+ (NSUserDefaults *)sharedDefaults{
+- (NSUserDefaults *)sharedDefaults{
     
     return _sharedUserDefaults;
 }

@@ -45,7 +45,6 @@
 #pragma mark Properties and public methods
 
 @property (nonatomic, readonly) NWUDPSession *udpSession;
-@property (nonatomic, readonly) NWUDPSession *whitelistUdpSession;
 
 @property (nonatomic, readonly, weak) APTunnelConnectionsHandler *delegate;
 
@@ -54,11 +53,6 @@
  You must call this method before appending packets for processing.
  */
 - (BOOL)createSession;
-
-/**
- Sets that session will be create log of the DNS activity.
- */
-- (void)setLoggingEnabled:(BOOL)enabled;
 
 /**
  Appending of the packets into this proxy object, for sending to endpoint asynchroniously.

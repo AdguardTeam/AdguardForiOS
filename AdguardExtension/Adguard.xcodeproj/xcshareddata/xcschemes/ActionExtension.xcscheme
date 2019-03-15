@@ -43,13 +43,23 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0F911832136D2DC006DF0D3"
+               BuildableName = "AdguardSwiftTests.xctest"
+               BlueprintName = "AdguardSwiftTests"
+               ReferencedContainer = "container:Adguard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65C52B351B906105003AF42F"
-            BuildableName = "ActionExtension.appex"
-            BlueprintName = "ActionExtension"
+            BlueprintIdentifier = "65F398101B7B684700ABCD39"
+            BuildableName = "Adguard.app"
+            BlueprintName = "Adguard"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -26,9 +26,13 @@
 #import "APTunnelConnectionsHandler.h"
 #import "APUDPPacket.h"
 #import "PacketTunnelProvider.h"
-#import "APDnsServerObject.h"
 #import "APVPNManager.h"
+#import "ACNIPUtils.h"
+
 #import <QuartzCore/CAAnimation.h>
+
+#import "Adguard-Swift.h"
+
 
 #define MAX_DATAGRAMS_RECEIVED                      10
 #define TTL_SESSION                                 3 //seconds
@@ -52,11 +56,10 @@
     BOOL _waitWrite;
     BOOL _sessionCreated;
     BOOL _closed;
-    BOOL _removed;
     NSString *_key;
     APUDPPacket *_basePacket;
     APUDPPacket *_reversBasePacket;
-    APDnsServerObject *_currentDnsServer;
+    DnsServerInfo *_currentDnsServer;
     
     BOOL _dnsLoggingEnabled;
     ACLExecuteBlockDelayed *_saveLogExecution;
@@ -65,6 +68,11 @@
     
     double startSendingTime;
     BOOL tracker;
+    
+    NSMutableArray <APDnsDatagram*>* _outgoingDnsDatagrams;
+    NSMutableArray <NSData*>* _dns64MappedOutgoingPackets;
+    
+    BOOL _resendMappedDns64Request;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -94,6 +102,10 @@
         _reversBasePacket.srcPort = _basePacket.dstPort;
         
         _delegate = delegate;
+        _resendMappedDns64Request = NO;
+        
+        _outgoingDnsDatagrams = [NSMutableArray new];
+        _dns64MappedOutgoingPackets = [NSMutableArray new];
         
         return self;
     }
@@ -113,28 +125,14 @@
         
         _currentDnsServer = _delegate.provider.currentDnsServer;
         
-        // Create session for whitelist
-        APDnsServerAddress *serverAddress = [self.delegate whitelistServerAddressForAddress:_basePacket.dstAddress];
-        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverAddress.ip port:_basePacket.dstPort];
-        NWUDPSession *session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
-        if (!session) {
-            
-            return NO;
-        }
-        
-        [self setWhitelistSession:session];
-        
         // Create main session
         
-        // It is trick. If we have only local filtration, then normal remote DNS server is the same whitelist remote DNS server.
-        if (_delegate.provider.isRemoteServer) {
-            
-            serverAddress = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
-        }
-    
-        rEndpoint = [NWHostEndpoint endpointWithHostname:serverAddress.ip port: serverAddress.port ?: _basePacket.dstPort];
+        APDnsServerAddress *serverAddress = [self.delegate serverAddressForFakeDnsAddress:_basePacket.dstAddress];
         
-        session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
+        NWHostEndpoint *rEndpoint = [NWHostEndpoint endpointWithHostname:serverAddress.ip port: serverAddress.port ?: _basePacket.dstPort];
+        
+        
+        NWUDPSession * session = [_delegate.provider createUDPSessionToEndpoint:rEndpoint fromEndpoint:nil];
         if (session) {
             
             [self setSession:session];
@@ -150,8 +148,6 @@
     @try {
         [self.udpSession removeObserver:self forKeyPath:@"state"];
         [self.udpSession removeObserver:self forKeyPath:@"hasBetterPath"];
-        [self.whitelistUdpSession removeObserver:self forKeyPath:@"state"];
-        [self.whitelistUdpSession removeObserver:self forKeyPath:@"hasBetterPath"];
     }
     @catch(id exception) {
         locLogWarn(self, @"removeObservers failed");
@@ -166,12 +162,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)setLoggingEnabled:(BOOL)enabled{
-    
-    _dnsLoggingEnabled = enabled;
-}
-
-
 - (void)appendPackets:(NSArray<NSData *> *)packets {
 
     if (_sessionCreated && !_closed && packets.count) {
@@ -180,8 +170,8 @@
         dispatch_sync(_workingQueue, ^{
 
             [_packetsForSend addObjectsFromArray:packets];
-            if (self.udpSession.state == NWUDPSessionStateReady
-                && self.whitelistUdpSession.state == NWUDPSessionStateReady) {
+            
+            if (self.udpSession.state == NWUDPSessionStateReady) {
                 [self sendPackets];
             }
         });
@@ -235,15 +225,7 @@
 
                 NWUDPSession *newSession = [[NWUDPSession alloc] initWithUpgradeForSession:session];
                 if (newSession) {
-                    
-                    if ([session isEqual:USE_STRONG(self).udpSession]) {
-                        
-                        [USE_STRONG(self) setSession:newSession];
-                    }
-                    else if ([session isEqual:USE_STRONG(self).whitelistUdpSession]){
-                        
-                        [USE_STRONG(self) setWhitelistSession:newSession];
-                    }
+                    [USE_STRONG(self) setSession:newSession];
                 }
             }
         }
@@ -315,6 +297,8 @@
             [USE_STRONG(self) settingDnsRecordsForIncomingPackets:datagrams session:USE_STRONG(session)];
         });
         
+        
+        
         // reset timeout timer
         [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
         
@@ -327,15 +311,20 @@
         
         NSArray *ipPackets = [USE_STRONG(self) ipPacketsWithDatagrams:datagrams];
         for (int i = 0; i < ipPackets.count; i++) {
-            
             [protocols addObject:USE_STRONG(self)->_basePacket.aFamily];
         }
         
-        //write data from remote endpoint into local TUN interface
-        locLogInfo(USE_STRONG(self), @"write data from remote endpoint into local TUN interface");
-        [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
-        
-        [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
+        if(_delegate.provider.dns64Prefix.length && _outgoingDnsDatagrams.firstObject.requests.firstObject.type.intValue == APDnsResourceType.aaaaType.intValue && [self isEmptyResponse]) {
+            _resendMappedDns64Request = YES;
+            [self sendModifiedRequest];
+        }
+        else {
+            //write data from remote endpoint into local TUN interface
+            locLogInfo(USE_STRONG(self), @"write data from remote endpoint into local TUN interface");
+            [USE_STRONG(self).delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
+            
+            [USE_STRONG(self).delegate sessionWorkDoneWithTime:CACurrentMediaTime() - USE_STRONG(self)->startSendingTime tracker: USE_STRONG(self)->tracker];
+        }
     }
                             maxDatagrams:MAX_DATAGRAMS_RECEIVED];
 
@@ -401,51 +390,15 @@
     
 }
 
-- (void)setWhitelistSession:(NWUDPSession *)session {
-    
-    locLogTrace(self);
-    
-    NWUDPSession *oldSession = self.whitelistUdpSession;
-    if (oldSession) {
-        
-        locLogVerboseTrace(self, @"oldWhitelistSession");
-        
-        dispatch_suspend(_workingQueue);
-        [oldSession removeObserver:self forKeyPath:@"state"];
-        [oldSession removeObserver:self forKeyPath:@"hasBetterPath"];
-        [oldSession cancel];
-        
-        _whitelistUdpSession = nil;
-    }
-    
-    if (session) {
-        
-        locLogVerboseTrace(self, @"newWhitelistSession");
-        
-        
-        _whitelistUdpSession = session;
-        
-        [self setSessionReaders:_whitelistUdpSession];
-
-    }
-    
-    if (oldSession) {
-        dispatch_resume(_workingQueue);
-    }
-}
-
 - (void)sessionStateChanged {
 
     NWUDPSession *session = self.udpSession;
-    NWUDPSession *whitelistSession = self.whitelistUdpSession;
     
-    if (session.state == NWUDPSessionStateReady
-        && whitelistSession.state == NWUDPSessionStateReady) {
+    if (session.state == NWUDPSessionStateReady) {
 
         locLogVerboseTrace(self, @"NWUDPSessionStateReady");
         [self sendPackets];
-    } else if (session.state == NWUDPSessionStateFailed
-               || whitelistSession.state == NWUDPSessionStateFailed) {
+    } else if (session.state == NWUDPSessionStateFailed) {
         
         if(_closed)
             return;
@@ -459,19 +412,99 @@
         [self saveLogRecord:YES];
         [self.delegate removeSession:self];
         
-    } else if (session.state == NWUDPSessionStateCancelled
-               && whitelistSession.state == NWUDPSessionStateCancelled) {
+    } else if (session.state == NWUDPSessionStateCancelled) {
 
         locLogVerboseTrace(self, @"NWUDPSessionStateCancelled");
         
-        // session and whitelist session gan go into cancelled state simultaneously. We must use _removed flag to prevent call removeSession twice for one session
-        if (_closed && ! _removed) {
-            
-            _removed = YES;
+        if (_closed) {
             [self saveLogRecord:YES];
             [self.delegate removeSession:self];
         }
     }
+}
+
+/**
+ special method for dns64 compatibility
+ if device is used in nat64 network we must change dns responses. 'A' records are mapped to 'AAAA' with special nat64 prefix
+ */
+- (NSArray<NSData*>*)mappedIncomingPackets:(NSArray<NSData*>*)packets {
+    
+    if(!_delegate.provider.dns64Prefix.length || !_resendMappedDns64Request) {
+        return packets;
+    }
+    
+    NSMutableArray<NSData*>* mappedPackets = [NSMutableArray new];
+    
+    for (NSData* packet in packets) {
+        APDnsDatagram* datagram = [[APDnsDatagram alloc] initWithData:packet];
+        if (!datagram) {
+            [mappedPackets addObject:packet];
+            continue;
+        }
+        
+        NSMutableArray<APDnsResponse* >* modifiedResponses = [NSMutableArray new];
+        for (APDnsResponse* response in datagram.responses) {
+            if(response.type.intValue != APDnsResourceType.aType.intValue) {
+                [modifiedResponses addObject:response];
+                continue;
+            }
+            
+            // modify to AAAA
+            NSData* ipv6AddressData = [[Dns64Utils new] dns64MappedIpDataWithIpv4Data:response.rdata prefix:_delegate.provider.dns64Prefix];
+            
+            NSString* ipv6Address = [ACNIPUtils ipv6DataToString:ipv6AddressData];
+            APDnsResponse* modifiedResponse = [APDnsResponse createResponseWithName:response.name type:APDnsResourceType.aaaaType ip:ipv6Address];
+            
+            [modifiedResponses addObject:modifiedResponse];
+        }
+        
+        datagram.responses = modifiedResponses;
+        
+        [mappedPackets addObject:datagram.generatePayload];
+    }
+    
+    return mappedPackets;
+}
+
+/**
+ special method for dns64 compatibility
+ if device is used in nat64 network we must change dns responses. 'AAAA' records are mapped to 'A'
+ */
+- (NSArray<NSData*>*)mappedOutgoingPackets:(NSArray<NSData*>*)packets {
+    
+    if(!_delegate.provider.dns64Prefix.length) {
+        return packets;
+    }
+    
+    NSMutableArray<NSData*>* mappedPackets = [NSMutableArray new];
+    
+    for (NSData* packet in packets) {
+        APDnsDatagram* datagram = [[APDnsDatagram alloc] initWithData:packet];
+        if (!datagram) {
+            [mappedPackets addObject:packet];
+            continue;
+        }
+        
+        NSMutableArray<APDnsRequest* >* modifiedRequests = [NSMutableArray new];
+        for (APDnsRequest* request in datagram.requests) {
+            if(request.type.intValue != APDnsResourceType.aaaaType.intValue) {
+                [modifiedRequests addObject:request];
+                continue;
+            }
+            
+            // modify to A
+            
+            APDnsRequest* modifiedRequest = [[APDnsRequest alloc] initWithName:request.name type:APDnsResourceType.aType class:request.qClass];
+            
+            [modifiedRequests addObject:modifiedRequest];
+        }
+        
+        datagram.requests = modifiedRequests;
+        
+        [mappedPackets addObject:datagram.generatePayload];
+    }
+    
+    return mappedPackets;
 }
 
 - (void)sendPackets {
@@ -489,13 +522,10 @@
         _waitWrite = YES;
 
         NSArray *specialPackets = [self processingOutgoingPackets:packets];
-        NSArray *whitelistPackets = specialPackets[0];
         NSArray *blacklistDatagrams = specialPackets[1];
         
-        if (_dnsLoggingEnabled) {
-            [_saveLogExecution executeOnceForInterval];
-        }
-
+        [_saveLogExecution executeOnceForInterval];
+    
         ASSIGN_WEAK(self);
 
         
@@ -517,8 +547,7 @@
             
             [USE_STRONG(self)->_timeoutExecution executeOnceAfterCalm];
             
-            if (USE_STRONG(self).udpSession.state == NWUDPSessionStateReady
-                && USE_STRONG(self).whitelistUdpSession.state == NWUDPSessionStateReady) {
+            if (USE_STRONG(self).udpSession.state == NWUDPSessionStateReady) {
                 
                 dispatch_async(USE_STRONG(self)->_workingQueue, ^{
                     
@@ -538,36 +567,14 @@
             [self sendBackBlacklistDnsDatagrams:blacklistDatagrams];
         }
         
-        if (whitelistPackets.count) {
-            
-            // write packets to whitelist UDP session
-            [self.whitelistUdpSession writeMultipleDatagrams:whitelistPackets completionHandler:^(NSError * _Nullable error) {
-                
-                ASSIGN_STRONG(self);
-                
-                if (USE_STRONG(self) == nil) {
-                    return;
-                }
-                
-                if (error) {
-                    
-                    NWHostEndpoint *endpoint = (NWHostEndpoint *)USE_STRONG(self)->_whitelistUdpSession.endpoint;
-                    locLogError(USE_STRONG(self), @"(APTUdpProxySession) Error occured when write packets to: %@ port: %@.\n%@", endpoint.hostname, endpoint.port, [error localizedDescription]);
-                    [USE_STRONG(self) internalClose];
-                    return;
-                }
-                // write packets to main UDP session
-                [USE_STRONG(self).udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
-            }];
-        }
-        else
-            // write packets to main UDP session
-            [self.udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
+        // write packets to main UDP session
+        [self.udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
     }
 }
 
 - (NSArray<NSData *> *)ipPacketsWithDatagrams:(NSArray<NSData *> *)datagrams {
 
+    datagrams = [self mappedIncomingPackets: datagrams];
     NSMutableArray *ipPackets = [NSMutableArray new];
     for (NSData *item in datagrams) {
 
@@ -585,7 +592,6 @@
     if (! _closed) {
         _closed = YES;
         [self.udpSession cancel];
-        [self.whitelistUdpSession cancel];
     }
 }
 
@@ -643,6 +649,13 @@
                         
                         [blacklistDatagrams addObject: ip ? @[datagram, ip] : @[datagram]];
                         [blacklistPackets addObject:packet];
+                    }
+                    else {
+                        [_outgoingDnsDatagrams addObject:datagram];
+                        
+                        if(_delegate.provider.dns64Prefix.length && datagram.requests.firstObject.type.intValue == APDnsResourceType.aaaaType.intValue) {
+                            [_dns64MappedOutgoingPackets addObjectsFromArray:[self mappedOutgoingPackets:@[packet]]];
+                        }
                     }
                     
                     tracker = [self.delegate isTrackerslistDomain:name];
@@ -713,9 +726,7 @@
     
     if(_dnsLoggingEnabled) {
         
-        BOOL localFiltering = _delegate.provider.localFiltering;
-        
-        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer localFiltering:localFiltering];
+        APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
         record.requests = datagram.requests;
         
         record.isWhitelisted = whitelist;
@@ -736,34 +747,24 @@
     NSString *dstHost;
     NSString *dstPort;
     
-    if (whitelist || !_delegate.provider.isRemoteServer) {
-        
-        NWHostEndpoint *endpoint = (NWHostEndpoint *)self.whitelistUdpSession.resolvedEndpoint;
-        dstHost = endpoint.hostname;
-        dstPort = endpoint.port;
-    }
-    else {
-        NWHostEndpoint *endpoint = (NWHostEndpoint *)self.udpSession.resolvedEndpoint;
-        dstHost = endpoint.hostname;
-        dstPort = endpoint.port;
-    }
-    
-    BOOL localFiltering = _delegate.provider.localFiltering;
+    NWHostEndpoint *endpoint = (NWHostEndpoint *)self.udpSession.resolvedEndpoint;
+    dstHost = endpoint.hostname;
+    dstPort = endpoint.port;
     
     NSMutableString *sb = [NSMutableString new];
     for (APDnsRequest *item in datagram.requests) {
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
-    
+
     APVpnManagerTunnelMode tunnelMode = [_delegate.provider tunnelMode];
     NSString* mode = tunnelMode == APVpnManagerTunnelModeSplit ? @"split" :
                      tunnelMode == APVpnManagerTunnelModeFull  ? @"full" :
                                                                  @"full (without VPN icon)";
     
 #if DEBUG
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) (IPID:%@) from: %@:%@ DNS: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.ipId, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.name, mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #else
-    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ DNS: %@ localFiltering: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), mode, dstHost, dstPort, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Request (ID:%@) (DID:%@) srcPort: %@ DNS: %@ mode: %@ to server: %@:%@ requests:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.name, mode, dstHost, dstPort, (sb.length ? sb : @" None."));
 #endif
 }
 
@@ -794,10 +795,8 @@
         
         if(_dnsLoggingEnabled) {
             
-            BOOL localFiltering = _delegate.provider.localFiltering;
-            
-            
-            APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer localFiltering:localFiltering];
+        
+            APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
             
             record = [_dnsRecordsSet member:record];
             if (record) {
@@ -815,13 +814,11 @@
         [sb appendFormat:@"(ID:%@) (DID:%@) \"%@\"\n", _basePacket.srcPort, datagram.ID, item];
     }
     
-    BOOL localFiltering = _delegate.provider.localFiltering;
-    
     NWHostEndpoint *endpoint = (NWHostEndpoint *)session.resolvedEndpoint;
 #if DEBUG
-    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) to: %@:%@ mode: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcAddress, _basePacket.srcPort, _currentDnsServer.name, endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
 #else
-    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ localFiltering: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.serverName, (localFiltering ? @"YES" : @"NO"), endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
+    DDLogInfo(@"DNS Response (ID:%@) (DID:%@) dstPort: %@ mode: %@ from server: %@:%@ responses:\n%@", _basePacket.srcPort, datagram.ID, _basePacket.srcPort, _currentDnsServer.name, endpoint.hostname, endpoint.port, (sb.length ? sb : @" None."));
 #endif
 }
 
@@ -857,6 +854,16 @@
             }
         }
     }
+}
+
+- (BOOL) isEmptyResponse {
+    return YES;
+}
+
+- (void) sendModifiedRequest {
+    _packetsForSend = _dns64MappedOutgoingPackets;
+    [_outgoingDnsDatagrams removeAllObjects];
+    [self sendPackets];
 }
 
 @end

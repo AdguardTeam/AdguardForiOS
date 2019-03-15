@@ -26,91 +26,86 @@
 #import "AEUIUtils.h"
 #import "AEWhitelistDomainObject.h"
 #import "AEInvertedWhitelistDomainsObject.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDFilterObjects.h"
 #import "AESSupport.h"
-#import "AESharedResources.h"
 #import "ABECRequest.h"
 #import "ADProductInfo.h"
 #import "AEUICommons.h"
+#import "Adguard-Swift.h"
 
 #ifdef PRO
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
 #endif
 
-@implementation AEAUIMainController{
-    
-    BOOL _enabledHolder;
+@interface SimpleConfiguration : NSObject<ConfigurationServiceProtocol>
+
+@property id<AESharedResourcesProtocol> resources;
+@end
+
+@implementation SimpleConfiguration
+
+- (instancetype)initWithResources:(id<AESharedResourcesProtocol>)resources{
+    self = [super init];
+    self.resources = resources;
+    return self;
 }
+
+- (BOOL)darkTheme {
+    return [self.resources.sharedDefaults boolForKey:AEDefaultsDarkTheme];
+}
+
+@end
+
+@interface AEAUIMainController()
+
+@property BOOL enabledHolder;
+@property id<ThemeServiceProtocol> theme;
+@property ContentBlockerService* contentBlocker;
+
+@property IBOutlet UISwitch *enabledSwitch;
+@property IBOutlet ThemableLabel *domainLabel;
+
+@property (strong, nonatomic) IBOutletCollection(ThemableLabel) NSArray *themableLabels;
+
+
+@end
+
+@implementation AEAUIMainController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+
+    self.resources = [AESharedResources new];
+    SimpleConfiguration* configuration = [[SimpleConfiguration alloc] initWithResources:self.resources];
+    self.theme = [[ThemeService alloc] init:configuration];
+    self.safariService = [[SafariService alloc] initWithResources:self.resources];
+    self.contentBlocker = [[ContentBlockerService alloc] initWithResources:_resources safariService:_safariService];
     
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
-    self.nameCell.longLabel.text = self.domainName;
-    self.statusButton.on = self.domainEnabled;
+    
+    self.enabledSwitch.on = self.domainEnabled;
     _enabledHolder = self.domainEnabled;
     
-    self.blockElementLabel.textColor = self.blockElementLabel.tintColor;
+    self.domainLabel.text = self.domainName;
     
-    // tunning accessibility
-    self.blockElementLabel.accessibilityTraits |= UIAccessibilityTraitButton;
-    
-    NSString *labelFormat = ACLocalizedString(@"enable_filtering_format", @"(Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com'");
-    self.enableOnCell.textLabel.accessibilityLabel = [NSString stringWithFormat:labelFormat, self.domainName];
-    //--------------
-    
-    
-    if (self.iconUrl) {
-        [ACNNetworking dataWithURL:self.iconUrl completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-            if (error) {
-                DDLogError(@"(AEAUIMainController) Error of obtaining of the site icon \"%@\":\n%@", self.iconUrl, [error localizedDescription]);
-                return;
-            }
-            
-            //check response code if this is HTTP protocol
-            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                
-                if ((httpResponse.statusCode / 100) != 2) {
-                    
-                    DDLogError(@"(AEAUIMainController) Error of obtaining of the site icon \"%@\": response status code = %lu", self.iconUrl, httpResponse.statusCode);
-                    return;
-                }
-            }
-            UIImage *icon = [UIImage imageWithData:data];
-            if (icon) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.iconView.image = icon;
-                });
-            }
-        }];
-    }
-    else{
+    [_safariService checkStatusWithCompletion:^(BOOL enabled) {
         
-        
-    }
-    
-    [AEService.singleton checkStatusWithCallback:^(BOOL enabled) {
-       
         if(!enabled) {
             
             [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_warning_title", @"(Action Extension - AEAUIMainController) Warning tile") message:ACLocalizedString(@"content_blocker_disabled_format", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
         }
     }];
     
-    // https://github.com/AdguardTeam/AdguardForiOS/issues/731
-    // on ios 9 ipad cell the background color defined in the storyboard is ignored
-    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0}]) {
-        UITableViewCell.appearance.backgroundColor = CELL_BACKGROUND_COLOR;
-     }
+    [_resources.sharedDefaults setBool:YES forKey:AEDefaultsActionExtensionUsed];
     
-    [AESharedResources.sharedDefaults setBool:YES forKey:AEDefaultsActionExtensionUsed];
+    [self.theme setupTable:self.tableView];
+    [self.theme setupSwitch:self.enabledSwitch];
+    [self.theme setupNavigationBar:self.navigationController.navigationBar];
+    [self.theme setupLabels:self.themableLabels];
+    self.view.backgroundColor = self.theme.backgroundColor;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -142,69 +137,48 @@
     //check rule overlimit
     if (!self.enableChangeDomainFilteringStatus) {
         [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(Action Extension - AEAUIMainController) Error tile") message:ACLocalizedString(@"filter_rules_maximum", @"(Action Extension - AEAUIMainController) error occurs when try turn off filtration on site.")];
-        [self.statusButton setOn:self.domainEnabled animated:YES];
+        [self.enabledSwitch setOn:self.domainEnabled animated:YES];
         return;
     }
     
-    BOOL inverted = [AESharedResources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
+    BOOL inverted = [_resources.sharedDefaults boolForKey:AEDefaultsInvertedWhitelist];
     
     // disable filtering == remove from inverted whitelist
     if (inverted && self.domainEnabled) {
-        
-        AEInvertedWhitelistDomainsObject* invertedObj = [AESharedResources new].invertedWhitelistContentBlockingObject;
-        
-        __block NSMutableArray* newDomains = [NSMutableArray new];
-        
-        [invertedObj.domains enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if([obj caseInsensitiveCompare:self.domainName] != NSOrderedSame) {
-                [newDomains addObject:obj];
-            }
-        }];
-        
-        invertedObj.domains = newDomains;
-        [AESharedResources new].invertedWhitelistContentBlockingObject = invertedObj;
-        
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-            self.domainEnabled = NO;
-        } rollbackBlock:^{
-            
+
+        ASSIGN_WEAK(self);
+        [_contentBlocker removeInvertedWhitelistDomain: _domainName completion:^(NSError * _Nullable error) {
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self).safariService invalidateBlockingJsonsWithCompletion:^(NSError * _Nullable error) {
+                USE_STRONG(self).domainEnabled = NO;
+            }];
         }];
     }
     // enable filtering == add to inverted whitelist
     else if (inverted && !self.domainEnabled) {
         
-        AEInvertedWhitelistDomainsObject* invertedObj = [AESharedResources new].invertedWhitelistContentBlockingObject;
-        
-        invertedObj.domains = [invertedObj.domains arrayByAddingObject:self.domainName];
-        [AESharedResources new].invertedWhitelistContentBlockingObject = invertedObj;
-        
-        [AEUIUtils invalidateJsonWithController:self completionBlock:^{
-            self.domainEnabled = YES;
-        } rollbackBlock:^{
-            
+        ASSIGN_WEAK(self);
+        [_contentBlocker addInvertedWhitelistDomain: _domainName completion:^(NSError * _Nullable error) {
+            ASSIGN_STRONG(self);
+            [USE_STRONG(self).safariService invalidateBlockingJsonsWithCompletion:^(NSError * _Nullable error) {
+                USE_STRONG(self).domainEnabled = YES;
+            }];
         }];
-        
     }
     // disable filtering (add to whitelist)
     else if (self.domainEnabled) {
         
         AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
         
-        [[[AEService singleton] antibanner] beginTransaction];
-        
-        [AEUIUtils addWhitelistRule: domainObject.rule toJsonWithController:self completionBlock:^{
-            
-            self.domainEnabled = newEnabled;
-            
-            [[[AEService singleton] antibanner] endTransaction];
-            
-        } rollbackBlock:^{
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-            
-            [self.statusButton setOn:self.domainEnabled animated:YES];
-            
+        ASSIGN_WEAK(self);
+        [self.contentBlocker addWhitelistRule:domainObject.rule completion:^(NSError * _Nullable error) {
+            ASSIGN_STRONG(self);
+            if (error) {
+                [USE_STRONG(self).enabledSwitch setOn:USE_STRONG(self).domainEnabled animated:YES];
+            }
+            else {
+                USE_STRONG(self).domainEnabled = newEnabled;
+            }
         }];
     }
     // enable filtering (remove from whitelist)
@@ -213,42 +187,27 @@
         AEWhitelistDomainObject *domainObject = [[AEWhitelistDomainObject alloc] initWithDomain:self.domainName];
         
         if (!domainObject) {
-            [self.statusButton setOn:self.domainEnabled animated:YES];
+            [self.enabledSwitch setOn:self.domainEnabled animated:YES];
             return;
         }
         
-        [[[AEService singleton] antibanner] beginTransaction];
-        
-        [AEUIUtils removeWhitelistRule:domainObject.rule toJsonWithController:self completionBlock:^{
-            
-            self.domainEnabled = newEnabled;
-            
-            [[[AEService singleton] antibanner] endTransaction];
-            
-        } rollbackBlock:^{
-            
-            // enable rule (rollback)
-            
-            [[[AEService singleton] antibanner] rollbackTransaction];
-            
-            [self.statusButton setOn:self.domainEnabled animated:YES];
+        ASSIGN_WEAK(self);
+        [self.contentBlocker removeWhitelistRule:domainObject.rule completion:^(NSError * _Nullable error) {
+            ASSIGN_STRONG(self);
+            if (error) {
+                [USE_STRONG(self).enabledSwitch setOn:USE_STRONG(self).domainEnabled animated:YES];
+            }
+            else {
+                USE_STRONG(self).domainEnabled = newEnabled;
+            }
         }];
     }
-    
 }
 
 - (IBAction)clickMissedAd:(id)sender {
     
     NSURL *url = [AESSupport.singleton composeWebReportUrlForSite:self.url];
     [self openUrl:url];
-}
-
-- (IBAction)clickIncorrectBlocking:(id)sender {
-    
-    NSString *subject = [NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"incorrect_blocking_report", @"(Action Extension - AEAUIMainController) Mail subject to support team about incorrect blocking")];
-    NSString *body = [NSString stringWithFormat:ACLocalizedString(@"incorrect_blocking_page_format", @"(Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking"), [self.url absoluteString]];
-
-    [[AESSupport singleton] sendSimpleMailWithParentController:self subject:subject body:body];
 }
 
 - (IBAction)clickBlockElement:(id)sender {
@@ -286,7 +245,7 @@
     else{
         
         [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_error_title", @"(Action Extension - AEAUIMainController) Error tile") message:ACLocalizedString(@"assistant_launching_unable", @"(Action Extension - AEAUIMainController) error occurs when click on Block Element button.")];
-        [self.statusButton setOn:self.domainEnabled animated:YES];
+        [self.enabledSwitch setOn:self.domainEnabled animated:YES];
     }
 }
 
@@ -301,39 +260,15 @@
 #pragma mark Table View Delegates
 /////////////////////////////////////////////////////////////////////
 
-- (CGFloat)tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        
-        // Fitting size of the filter name
-        return [self heightForCell:self.nameCell];
-    }
-    return UITableViewAutomaticDimension;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    
-    // tunning accessibility
-    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
-    footer.isAccessibilityElement = NO;
-    footer.textLabel.isAccessibilityElement = NO;
-    footer.detailTextLabel.isAccessibilityElement = NO;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    [self.theme setupTableCell:cell];
+    return cell;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////
-
-- (CGFloat)heightForCell:(AEAUIDomainCell *)longTextCell {
-    
-    [longTextCell setNeedsLayout];
-    [longTextCell layoutIfNeeded];
-    
-    CGSize size = [longTextCell.contentView
-                   systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height + 1.0f; // Add 1.0f for the cell separator height
-}
 
 - (void)openUrl:(NSURL *)url {
     UIResponder *responder = self;

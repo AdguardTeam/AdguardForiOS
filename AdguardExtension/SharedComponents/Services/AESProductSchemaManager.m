@@ -35,7 +35,8 @@
 
 + (void)upgrade {
     
-    NSNumber *currentSchemaVersion = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsProductSchemaVersion];
+    AESharedResources *resources = [AESharedResources new];
+    NSNumber *currentSchemaVersion = [resources.sharedDefaults objectForKey:AEDefaultsProductSchemaVersion];
  
     if (! [currentSchemaVersion isEqual:SCHEMA_VERSION]) {
         
@@ -45,7 +46,7 @@
             
             if ([self onUpgradeFrom:currentSchemaVersion to:SCHEMA_VERSION]) {
                 
-                [[AESharedResources sharedDefaults] setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
+                [resources.sharedDefaults setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
             }
             else {
                 
@@ -54,13 +55,13 @@
         });
     }
     
-    NSString *lastBuildVersion = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsProductBuildVersion];
+    NSString *lastBuildVersion = [resources.sharedDefaults objectForKey:AEDefaultsProductBuildVersion];
     NSString* build = [ADProductInfo buildNumber];
     
     if(![lastBuildVersion isEqual:build]) {
         
         if([self onMinorUpgrade])
-            [[AESharedResources sharedDefaults] setObject:build forKey:AEDefaultsProductBuildVersion];
+            [resources.sharedDefaults setObject:build forKey:AEDefaultsProductBuildVersion];
     }
 }
 
@@ -70,7 +71,7 @@
         
         if ([self onInstall]) {
             
-            [[AESharedResources sharedDefaults] setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
+            [[AESharedResources new].sharedDefaults setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
         }
     });
 }

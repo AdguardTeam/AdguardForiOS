@@ -94,6 +94,7 @@
 @property (nonatomic) NSNumber *groupId;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSNumber *displayNumber;
+@property (nonatomic, nullable) NSNumber *enabled;
 
 @end
 
@@ -151,6 +152,33 @@
 
 @end
 
+/////////////////////////////////////////////////////////////////////
+#pragma mark - ASDFilterTagType
+/////////////////////////////////////////////////////////////////////
+
+typedef enum : NSUInteger {
+    ASDFilterTagTypePurpose,
+    ASDFilterTagTypeLang,
+    ASDFilterTagTypeRecommended,
+    ASDFilterTagTypeReference,
+    ASDFilterTagTypePlatform,
+    ASDFilterTagTypeProblematic,
+    ASDFilterTagTypeObsolete,
+    ASDFilterTagTypeIos
+} ASDFilterTagType;
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - ASDFilterTagMeta
+/////////////////////////////////////////////////////////////////////
+
+@interface ASDFilterTagMeta : ACObject
+
+@property (nonatomic) ASDFilterTagType type;
+@property (nonatomic) NSInteger tagId;
+@property (nonatomic, nullable) NSString *name;
+
+@end
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  ASDFilterMetadata
@@ -191,11 +219,13 @@
 @property (nonatomic) NSString *homepage;
 @property (nonatomic) NSNumber *expires;
 @property (nonatomic) NSString *subscriptionUrl;
-@property (nonatomic) NSNumber *rulesCount;
+@property (nonatomic) NSString *timeAdded;
 
 /// List of NSString objects
 /// that contains two-letter codes of languages, where this filter fits.
-@property (nonatomic) NSArray *langs;
+@property (nonatomic) NSArray<NSString*> *langs;
+
+@property (nonatomic) NSArray<ASDFilterTagMeta*> *tags;
 
 @end
 
@@ -300,7 +330,7 @@
  @return Initialized instance.
  If ruleText is nil, then object.ruleText is empty string.
  */
-- (id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled;
+- (nonnull id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled;
 
 @property (nonatomic) NSNumber *filterId;
 @property (nonatomic) NSNumber *ruleId;
@@ -316,5 +346,6 @@
 - (BOOL)isEqualRuleText:(id)object;
 
 @end
+
 
 

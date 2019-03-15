@@ -1,0 +1,151 @@
+
+import Foundation
+
+
+class AntibannerMock: NSObject, AESAntibannerProtocol {
+    
+    var enabled = true
+    var updatesRightNow = false
+    
+    var rules = [NSNumber: [ASDFilterRule]]()
+    
+    var metadata = ABECFilterClientMetadata()
+    var storedGroups = [ASDFilterGroup]()
+    var storedFilters = [ASDFilterMetadata]()
+    
+    func subscribeCustomFilter(from parserResult: AASCustomFilterParserResult!, completion completionBlock: (() -> Void)!) {
+    }
+    
+    func activeRules() -> NSMutableArray! {
+        return []
+    }
+    
+    func activeRules(forFilter filterId: NSNumber!) -> [ASDFilterRule]! {
+        return rules[filterId]
+    }
+    
+    func groups() -> [ASDFilterGroup] {
+        return storedGroups
+    }
+    
+    func groupsI18n() -> ASDGroupsI18n! {
+        return ASDGroupsI18n()
+    }
+    
+    func checkIfFilterInstalled(_ filterId: NSNumber!) -> Bool {
+        return true
+    }
+    
+    func filters() -> [ASDFilterMetadata]! {
+        return storedFilters
+    }
+    
+    func filters(forGroup groupId: NSNumber!) -> [ASDFilterMetadata]! {
+        return []
+    }
+    
+    func activeFilterIDs() -> [Any]! {
+        return []
+    }
+    
+    func activeGroupIDs() -> [NSNumber] {
+        return []
+    }
+    
+    func activeFilterIDs(byGroupID groupID: NSNumber!) -> [NSNumber]! {
+        return []
+    }
+    
+    func filtersI18n() -> ASDFiltersI18n! {
+        return ASDFiltersI18n()
+    }
+    
+    func rules(forFilter filterId: NSNumber!) -> [ASDFilterRule] {
+        return []
+    }
+    
+    func setFilter(_ filterId: NSNumber!, enabled: Bool, fromUI: Bool) {
+        
+    }
+    
+    func setFiltersGroup(_ groupId: NSNumber!, enabled: Bool) {
+        
+    }
+    
+    func setRules(_ ruleIds: [Any]!, filter filterId: NSNumber!, enabled: Bool) {
+        
+    }
+    
+    func add(_ rule: ASDFilterRule!) -> Bool {
+        return true
+    }
+    
+    func update(_ rule: ASDFilterRule!) -> Bool {
+        return true
+    }
+    
+    func `import`(_ rules: [ASDFilterRule]!, filterId: NSNumber!) -> Bool {
+        self.rules[filterId] = rules
+        return true
+    }
+    
+    func removeRules(_ ruleIds: [Any]!, filterId: NSNumber!) -> Bool {
+        return true
+    }
+    
+    func metadata(forSubscribe refresh: Bool) -> ABECFilterClientMetadata! {
+        return metadata
+    }
+    
+    func i18n(forSubscribe refresh: Bool) -> ABECFilterClientLocalization! {
+        return ABECFilterClientLocalization()
+    }
+    
+    func subscribeFilters(_ filters: [ASDFilterMetadata], jobController: ACLJobController?) -> Bool {
+        return true
+    }
+    
+    func unsubscribeFilter(_ filterId: NSNumber!) -> Bool {
+        return true
+    }
+    
+    func startUpdatingForced(_ forced: Bool, interactive: Bool) -> Bool {
+        return true
+    }
+    
+    func repairUpdateStateForBackground() {
+        
+    }
+    
+    func repairUpdateState(completionBlock block: (() -> Void)!) {
+        
+    }
+    
+    func filtersLastUpdateTime() -> Date! {
+        return Date()
+    }
+    
+    func inTransaction() -> Bool {
+        return false
+    }
+    
+    func beginTransaction() {
+        
+    }
+    
+    func endTransaction() {
+        
+    }
+    
+    func rollbackTransaction() {
+        
+    }
+    
+    func nextCustomFilterId() -> NSNumber! {
+        return 0
+    }
+    
+    func customFilterId(byUrl url: String!) -> NSNumber? {
+        return 0
+    }
+}

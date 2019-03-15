@@ -19,8 +19,8 @@
 
 #import <Foundation/Foundation.h>
 #import <resolv.h>
-
-@class APDnsResourceType, APDnsResourceClass;
+#import "APDnsResourceType.h"
+#import "APDnsResourceClass.h"
 
 @interface APDnsRequest : NSObject <NSCoding, NSCopying>
 

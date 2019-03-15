@@ -10,7 +10,7 @@
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.adguard.AdguardPro</string>
+		<string>group.com.adguard.AdguardExtension</string>
 	</array>
 </dict>
 </plist>

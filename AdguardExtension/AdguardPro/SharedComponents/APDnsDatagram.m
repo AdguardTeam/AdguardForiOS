@@ -22,12 +22,14 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/nameser.h>
+#include <arpa/inet.h>
 #include <resolv.h>
 #import "APDnsDatagram.h"
 #import "APDnsResourceType.h"
 #import "APDnsResourceClass.h"
 #import "APDnsRequest.h"
 #import "APDnsResponse.h"
+#import "Adguard-Swift.h"
 
 #define BLOCKING_RESPONSE_TTL   60 * 60         // 1 hour
 
@@ -36,8 +38,6 @@
 @property (nonatomic) NSNumber *ID;
 @property (nonatomic) BOOL isRequest;
 @property (nonatomic) BOOL isResponse;
-@property (nonatomic) NSArray <APDnsRequest *> *requests;
-@property (nonatomic) NSArray <APDnsResponse *> *responses;
 
 @end
 
@@ -136,7 +136,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private Methods
 
-
 - (BOOL)parseData:(NSData *)datagram{
     
     const u_char *msg = (const u_char *)datagram.bytes;
@@ -215,7 +214,7 @@
         }
         else {
             
-            // parse nxdomain responce
+            // parse nxdomain response
             int rcode = ns_msg_getflag(handle, ns_f_rcode);
             if(rcode != ns_r_nxdomain) {
                 return NO;

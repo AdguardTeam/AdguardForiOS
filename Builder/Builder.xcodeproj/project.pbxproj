@@ -56,6 +56,7 @@
 		659C60CF1B8B4F040081EBE3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 659C60CE1B8B4F040081EBE3 /* libsqlite3.tbd */; };
 		659C60D11B8B4F200081EBE3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 659C60D01B8B4F200081EBE3 /* libz.tbd */; };
 		65FAB33A1D6C572200A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FAB3391D6C572200A0706B /* ACObject.m */; };
+		D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A18E219F0811002C17D9 /* DDLoggerNames.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,11 @@
 		65DAE6E21B8B73E50020BC3C /* builder.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = builder.xcconfig; sourceTree = "<group>"; };
 		65FAB3381D6C572200A0706B /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
 		65FAB3391D6C572200A0706B /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
+		D031A18E219F0811002C17D9 /* DDLoggerNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoggerNames.m; sourceTree = "<group>"; };
+		D067D8CD213EC8A900ECDE6D /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
+		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
+		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +322,7 @@
 		655A04E21C6B7790000F00D7 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
+				D031A18E219F0811002C17D9 /* DDLoggerNames.m */,
 				655A04E31C6B7790000F00D7 /* CLI */,
 				655A04E61C6B7790000F00D7 /* DDAbstractDatabaseLogger.h */,
 				655A04E71C6B7790000F00D7 /* DDAbstractDatabaseLogger.m */,
@@ -477,6 +484,7 @@
 				655A04A21C6B7790000F00D7 /* Libs */,
 				659C5FCA1B8B4DC90081EBE3 /* Builder */,
 				659C5FC91B8B4DC90081EBE3 /* Products */,
+				D0D561772191F6EB00A35DEC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -502,6 +510,8 @@
 		659C60D21B8B50200081EBE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D067D8CD213EC8A900ECDE6D /* schema0.101.sql */,
+				D067D8CE213EC8A900ECDE6D /* update0.101.sql */,
 				659C60D01B8B4F200081EBE3 /* libz.tbd */,
 				659C60CE1B8B4F040081EBE3 /* libsqlite3.tbd */,
 				659C60D31B8B50200081EBE3 /* schema.sql */,
@@ -509,6 +519,15 @@
 				65D59F8E1BC2FE5700E7B8BF /* update0.100.sql */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D0D561772191F6EB00A35DEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0D5617A2191F6F700A35DEC /* Cocoa.framework */,
+				D0D561782191F6EB00A35DEC /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -614,6 +633,7 @@
 				655A05A51C6B7790000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				655A05A61C6B7790000F00D7 /* DDDispatchQueueLogFormatter.m in Sources */,
 				655A058C1C6B7790000F00D7 /* ACFFileUtils.m in Sources */,
+				D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */,
 				655A05891C6B7790000F00D7 /* ABECRequest.m in Sources */,
 				655A05AC1C6B7790000F00D7 /* NSException+Utils.m in Sources */,
 				655A05BF1C6B7790000F00D7 /* ASDFilterObjects.m in Sources */,

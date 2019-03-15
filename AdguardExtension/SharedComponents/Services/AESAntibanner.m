@@ -23,9 +23,13 @@
 #import "ASDatabase/ASDatabase.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "AESharedResources.h"
+#import "AASFilterSubscriptionParser.h"
+#import "Adguard-Swift.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
 #define UPDATE_METADATA_TIMEOUT           3.0
+
+#define ASDF_BASE_CUSTOM_FILTER_ID               100000
 
 #define AES_TRANSACTION_TASK_NAME        @"AESAntibaner-Transaction_Task"
 
@@ -41,7 +45,7 @@ NSString *ASAntibannerFinishedUpdateNotification = @"ASAntibannerFinishedUpdateN
 NSString *ASAntibannerFailuredUpdateNotification = @"ASAntibannerFailuredUpdateNotification";
 NSString *ASAntibannerUpdateFilterFromUINotification = @"ASAntibannerUpdateFilterFromUINotification";
 NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePartCompletedNotification";
-
+NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNotification";
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - ASAntibanner
@@ -54,7 +58,6 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 @end
 
 @implementation AESAntibanner {
-    
     
     dispatch_queue_t  workQueue;
     dispatch_source_t updateTimer;
@@ -260,6 +263,44 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return filterIDs.copy;
 }
 
+- (NSArray<NSNumber*> *)activeGroupIDs {
+    NSMutableArray *groupIDs = [NSMutableArray array];
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery:@"select group_id from filter_groups where is_enabled = 1"];
+        
+        while ([result next]) {
+            NSNumber *groupId = result[0];
+            [groupIDs addObject:groupId];
+        }
+        [result close];
+    }];
+    
+    return groupIDs.copy;
+}
+
+- (NSArray<NSNumber*> *)activeFilterIDsByGroupID:(NSNumber*)groupID {
+    NSMutableArray *filterIDs = [NSMutableArray array];
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery: [NSString stringWithFormat: @"select filter_id from filters where is_enabled = 1 and group_id = %@", groupID]];
+        
+        while ([result next]) {
+            
+            NSNumber *filterId = result[0];
+            
+//            if ([filterId integerValue] != ASDF_USER_FILTER_ID) {
+                [filterIDs addObject:filterId];
+//            }
+        }
+        [result close];
+    }];
+    
+    return filterIDs.copy;
+}
+
 - (BOOL)checkIfFilterInstalled:(NSNumber *)filterId{
     
     if (!filterId)
@@ -282,7 +323,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return NO;
 }
 
-- (NSArray *)activeRulesForFilter:(NSNumber *)filterId{
+- (NSArray<ASDFilterRule*> *)activeRulesForFilter:(NSNumber *)filterId{
     
     NSMutableArray *rules = [NSMutableArray array];
     
@@ -306,7 +347,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return rules;
 }
 
-- (NSArray *)groups{
+- (NSArray<ASDFilterGroup*> *)groups{
     
     __block NSArray *groups;
     
@@ -335,13 +376,24 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return i18n;
 }
 
-- (NSArray *)filters{
+- (NSArray<ASDFilterMetadata*> *)filters{
     
     __block NSArray *filters;
     
     [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
         
         filters = [self filtersFromDb:db];
+    }];
+    
+    return filters;
+}
+
+- (NSArray<ASDFilterMetadata *> *)filtersForGroup:(NSNumber *)groupId {
+    __block NSArray *filters;
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        filters = [self filtersFromDb:db groupId:groupId];
     }];
     
     return filters;
@@ -363,7 +415,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return i18n;
 }
 
-- (NSArray *)rulesForFilter:(NSNumber *)filterId{
+- (NSArray<ASDFilterRule*> *)rulesForFilter:(NSNumber *)filterId{
     
     __block NSArray *rules;
     [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
@@ -385,6 +437,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
+            
+            [NSNotificationCenter.defaultCenter postNotificationName:ASAntibannerFilterEnabledNotification object:nil userInfo:@{@"filter_id":filterId, @"enabled":@(enabled)}];
         }];
         
     });
@@ -409,6 +463,24 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
 #endif
     
+}
+
+- (BOOL)setGroupEnabled:(FMDatabase *)db enabled:(BOOL)enabled groupId:(NSNumber *)groupId result:(BOOL *)result {
+    return *result = [db executeUpdate:@"update filter_groups set is_enabled = ? where group_id = ?", @(enabled), groupId];
+}
+
+- (void)setFiltersGroup:(NSNumber *)groupId enabled:(BOOL)enabled {
+    
+    dispatch_sync(workQueue, ^{
+        
+        __block BOOL result = NO;
+        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+            
+            *rollback = NO;
+            [self setGroupEnabled:db enabled:enabled groupId:groupId result:&result];
+        }];
+        
+    });
 }
 
 - (void)setRules:(NSArray *)ruleIds filter:(NSNumber *)filterId enabled:(BOOL)enabled{
@@ -480,7 +552,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                         
                         DDLogError(@"Can't add rule: \"%@\", for filter Id: %@", rule.ruleText, rule.filterId);
                         DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
-                        DDLogErrorTrace();
+//                        DDLogErrorTrace();
                     }
                 }
             }
@@ -527,7 +599,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                     
                     DDLogError(@"Can't update rule: filterId-%@, ruleId-%@, ruleText-\"%@\"", rule.filterId, rule.ruleId, rule.ruleText);
                     DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
-                    DDLogErrorTrace();
+//                    DDLogErrorTrace();
                 }
             }
             
@@ -744,55 +816,106 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     }
 }
 
-- (BOOL)subscribeFilters:(NSArray *)filters jobController:(ACLJobController *)jobController{
+- (BOOL)subscribeFilters:(NSArray<ASDFilterMetadata*> *)filters jobController:(ACLJobController *)jobController{
     
     if (!filters) {
         
         [NSException argumentException:@"filters"];
     }
     
-    __block BOOL result = NO;
-    dispatch_sync(workQueue, ^{
-        
-        @autoreleasepool {
+    // getting of the filters, which need install
+    NSMutableArray *filtersForUpdate = filters.mutableCopy;
+    NSMutableArray *filtersForInstall = [NSMutableArray array];
+    NSArray *installedFilters = [self filters];
+    NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+    for (int i=0; i < filtersForUpdate.count; i++) {
+        ASDFilterMetadata *item = filtersForUpdate[i];
+        if (![installedFilters containsObject:item]) {
+            
+            item = [item copy];
+            item.enabled = @YES;
+            [filtersForInstall addObject:item];
+            [indexes addIndex:i];
+        }
+    }
+    [filtersForUpdate removeObjectsAtIndexes:indexes];
+    
+     __block BOOL result = NO;
+    
+    if (filtersForInstall.count) {
+       
+        dispatch_sync(workQueue, ^{
+            
+            @autoreleasepool {
 
-            __block NSArray *defaultDbFilters;
-            
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+                __block NSArray *defaultDbFilters;
                 
-                defaultDbFilters = [self filtersFromDb:db];
-            }];
-            
-            [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
-                
-                *rollback = YES;
-                
-                if (_metadataCacheForFilterSubscription) {
-                    // If were loaded metadata of groups from backend,
-                    // updating the DB.
-                    result = [self insertMetadataIntoDb:db groups:_metadataCacheForFilterSubscription.groups];
-                    if (!result) {
-                        
-                        return;
-                    }
-                }
-                if (_i18nCacheForFilterSubscription) {
+                [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
                     
-                    // If were loaded i18n from backend,
-                    // updating the DB.
-                    result = [self insertI18nIntoDb:db
-                                            filters:_i18nCacheForFilterSubscription.filters
-                                             groups:_i18nCacheForFilterSubscription.groups];
-                    if (result) {
-                        _dbGroupsI18nCache = nil;
-                        _dbFiltersI18nCache = nil;
-                    }
-                    else
-                        return;
-                }
+                    defaultDbFilters = [self filtersFromDb:db];
+                }];
                 
-                NSMutableArray *filtersMetaForSave = [NSMutableArray new];
-                for (ASDFilterMetadata *filter in filters) {
+                [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+                    
+                    *rollback = YES;
+                    
+                    if (_metadataCacheForFilterSubscription) {
+                        // If were loaded metadata of groups from backend,
+                        // updating the DB.
+//                        result = [self insertMetadataIntoDb:db groups:_metadataCacheForFilterSubscription.groups];
+//                        if (!result) {
+//
+//                            return;
+//                        }
+                    }
+                    if (_i18nCacheForFilterSubscription) {
+                        
+                        // If were loaded i18n from backend,
+                        // updating the DB.
+                        result = [self insertI18nIntoDb:db
+                                                filters:_i18nCacheForFilterSubscription.filters
+                                                 groups:_i18nCacheForFilterSubscription.groups];
+                        if (result) {
+                            _dbGroupsI18nCache = nil;
+                            _dbFiltersI18nCache = nil;
+                        }
+                        else
+                            return;
+                    }
+                    
+                    NSMutableArray *filtersMetaForSave = [NSMutableArray new];
+                    for (ASDFilterMetadata *filter in filters) {
+                        
+                        if (jobController && jobController.state != ACLJCExecuteState) {
+                            
+                            result = NO;
+                            return;
+                        }
+                        
+                        if ([self installRulesFromBackendWithFilterId:filter.filterId db:db]) {
+                            
+                            [filtersMetaForSave addObject:filter];
+                        } else if ([self installRulesFromDefaultDbWithFilterId:filter.filterId db:db]) {
+                            
+                            NSUInteger index = [defaultDbFilters indexOfObject:filter];
+                            if (index != NSNotFound) {
+                                ASDFilterMetadata *dbFilter = defaultDbFilters[index];
+                                if (dbFilter) {
+                                    
+                                    NSDictionary *values = [dbFilter dictionaryWithValuesForKeys:@[
+                                                                                                   @"updateDate",
+                                                                                                   @"updateDateString",
+                                                                                                   @"checkDate",
+                                                                                                   @"checkDateString",
+                                                                                                   @"version",
+                                                                                                   @"rulesCount"
+                                                                                                   ]];
+                                    [filter setValuesForKeysWithDictionary:values];
+                                    [filtersMetaForSave addObject:filter];
+                                }
+                            }
+                        }
+                    }
                     
                     if (jobController && jobController.state != ACLJCExecuteState) {
                         
@@ -800,45 +923,104 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                         return;
                     }
                     
-                    if ([self installRulesFromBackendWithFilter:filter db:db]) {
-                        
-                        [filtersMetaForSave addObject:filter];
-                    } else if ([self installRulesFromDefaultDbWithFilter:filter db:db]) {
-                        
-                        NSUInteger index = [defaultDbFilters indexOfObject:filter];
-                        if (index != NSNotFound) {
-                            ASDFilterMetadata *dbFilter = defaultDbFilters[index];
-                            if (dbFilter) {
-                                
-                                NSDictionary *values = [dbFilter dictionaryWithValuesForKeys:@[
-                                                                                               @"updateDate",
-                                                                                               @"updateDateString",
-                                                                                               @"checkDate",
-                                                                                               @"checkDateString",
-                                                                                               @"version",
-                                                                                               @"rulesCount"
-                                                                                               ]];
-                                [filter setValuesForKeysWithDictionary:values];
-                                [filtersMetaForSave addObject:filter];
-                            }
-                        }
-                    }
-                }
-                
-                if (jobController && jobController.state != ACLJCExecuteState) {
+                    result = [self insertMetadataIntoDb:db filters:filtersMetaForSave];
+                    if (!result)
+                        return;
                     
-                    result = NO;
-                    return;
-                }
-                
-                result = [self insertMetadataIntoDb:db filters:filtersMetaForSave];
-                if (!result)
-                    return;
-                
-                *rollback = NO;
-            }];
-        }
+                    *rollback = NO;
+                }];
+            }
+        });
+    }
+    
+    return result;
+}
+
+- (NSNumber*) nextCustomFilterId {
+    __block NSInteger filterId = ASDF_BASE_CUSTOM_FILTER_ID;
+    dispatch_sync(workQueue, ^{
+    
+        ASDatabase *theDB = [ASDatabase singleton];
+        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *result = [db executeQuery:@"select max(filter_id) from filters;"];
+            if ([result next]) {
+                NSInteger value = [result longLongIntForColumnIndex:0];
+                filterId = MAX(filterId, value) + 1;
+            }
+            [result close];
+        }];
     });
+    
+    return [NSNumber numberWithInteger: filterId];
+}
+
+- (void)subscribeCustomFilterFromResult:(AASCustomFilterParserResult *)parserResult completion:(void (^)(void))completionBlock {
+    
+    if (parserResult) {
+        dispatch_async(workQueue, ^{
+            parserResult.meta.groupId = @(FilterGroupId.custom);
+            
+            completionBlock();
+            
+            ASDatabase *theDB = [ASDatabase singleton];
+            if ([self updateFilter:parserResult.meta rules:parserResult.rules db:theDB]) {
+                // Notifying to all, that filter rules were updated
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+                });
+            }
+        });
+    }
+}
+
+- (NSNumber *)customFilterIdByUrl:(NSString *)url {
+    
+    __block NSNumber *filterId = nil;
+    
+    dispatch_sync(workQueue, ^{
+        ASDatabase *theDB = [ASDatabase singleton];
+        
+        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            FMResultSet *result = [db executeQuery:@"select filter_id from filters where subscriptionUrl = ?", url];
+            if ([result next]) {
+                filterId = [NSNumber numberWithInteger: [result longLongIntForColumnIndex:0]];
+            }
+            [result close];
+        }];
+    });
+    
+    return filterId;
+}
+
+- (BOOL)updateFilter:(ASDFilterMetadata *)filter rules:(NSArray <ASDFilterRule *> *)rules db:(ASDatabase *)theDB{
+    
+    __block BOOL result = NO;
+    [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        *rollback = YES;
+        
+        //get disabled rules
+        NSArray *disabledRuleTexts = [self disabledRuleTextsForDb:db filterId:filter.filterId];
+        
+        BOOL boolResult = [db executeUpdate:@"delete from filter_rules where filter_id = ?", filter.filterId];
+        
+        boolResult &= [self insertMetadataIntoDb:db filters:@[filter]];
+        
+        if (!boolResult)
+            return;
+        
+        if (rules.count)
+            for (ASDFilterRule *rule in rules){
+                rule.filterId = filter.filterId;
+                if ([disabledRuleTexts containsObject:rule.ruleText])
+                    rule.isEnabled = @(0);
+                [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+            }
+        
+        *rollback = NO;
+        result = YES;
+    }];
     
     return result;
 }
@@ -862,6 +1044,11 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                     *rollback = NO;
                     if (serviceEnabled)
                         [updateFilterFromUI executeOnceAfterCalm];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+                    });
                 }
             }
             else{
@@ -875,6 +1062,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
     return removed;
 }
+
+
 
 - (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive{
     
@@ -941,6 +1130,23 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
            block();
        }
     }];
+}
+
+- (NSDate *)filtersLastUpdateTime {
+    
+    __block NSDate* date = nil;
+    [[ASDatabase singleton] queryDefaultDB:^(FMDatabase* db) {
+        
+        FMResultSet *result = [db executeQuery:@"select MAX(last_update_time) from filters where is_enabled = 1"];
+        if([result next]) {
+            NSString* dateString = result[@"MAX(last_update_time)"];
+            date = [NSDate dateWithSQliteString:dateString];
+        }
+        
+        [result close];
+    }];
+    
+    return date;
 }
 
 - (BOOL)inTransaction{
@@ -1271,6 +1477,16 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             // get metadata only for filters, which must be updated
             metadata.filters = [metadata.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId IN %@", [[metadataForUpdate allObjects] valueForKey:@"filterId"]]];
             
+            NSMutableSet <NSNumber*> *enabledGroups = [NSMutableSet new];
+            for(ASDFilterGroup* group in self.groups) {
+                if(group.enabled)
+                    [enabledGroups addObject:group.groupId];
+            }
+            
+            for (ASDFilterGroup* group in metadata.groups) {
+                group.enabled = [NSNumber numberWithBool: [enabledGroups containsObject:group.groupId]];
+            }
+            
             NSMutableDictionary <NSNumber *, ASDFilter *> *filters = [NSMutableDictionary dictionary];
             
             for (ASDFilterMetadata *version in metadata.filters) {
@@ -1325,9 +1541,6 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void)finishUpdateInBackgroundMode {
     
-    DDLogDebug(@"(AESAntibanner) filterClient:filterId:filter: Start update.");
-    
-
     AESharedResources *res = [AESharedResources new];
     
     [self beginTransaction];
@@ -1366,6 +1579,17 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             __block BOOL metadataUpdated = NO;
             
             NSMutableArray *updatedVersions = [NSMutableArray array];
+            
+            // set enabled state for groups
+            NSMutableSet <NSNumber*> *enabledGroups = [NSMutableSet new];
+            for(ASDFilterGroup* group in self.groups) {
+                if(group.enabled)
+                    [enabledGroups addObject:group.groupId];
+            }
+            
+            for (ASDFilterGroup* group in metadata.groups) {
+                group.enabled = [NSNumber numberWithBool: [enabledGroups containsObject:group.groupId]];
+            }
             
             for (ASDFilterMetadata *version in metadata.filters) {
                 
@@ -1586,13 +1810,16 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         // Get suitable filters.
         NSMutableArray *sFilters = [NSMutableArray arrayWithCapacity:4];
         NSString *langString = [NSString stringWithFormat:@"%@|%@", [ADLocales lang], [ADLocales region]];
-        for (ASDFilterMetadata *filter in filters)
-            if ([langString containsAny:filter.langs]                   // Filters for user language
-                || [filter.filterId isEqual:@(ASDF_ENGLISH_FILTER_ID)]   // Base Filter
-                || [filter.filterId isEqual:@(ASDF_SPYWARE_FILTER_ID)]   // Privacy Protection Filter
-                || [filter.filterId isEqual:@(ASDF_SOC_NETWORKS_FILTER_ID)] // Social networks filter identifier
-                || [filter.filterId isEqual:@(ASDF_MOBILE_SAFARI_FILTER_ID)] // Mobile Safari FIlter
-                || [filter.filterId isEqual:@(MOBILE_ADS_FILTER_ID)] // Mobile ads filter
+        for (ASDFilterMetadata *filter in filters){
+            BOOL recomended = NO;
+            for (ASDFilterTagMeta* tagMeta in filter.tags) {
+                if(tagMeta.type == ASDFilterTagTypeRecommended || (tagMeta.type == ASDFilterTagTypePlatform && [tagMeta.name isEqualToString:@"ios"])){
+                    recomended = YES;
+                    break;
+                }
+            }
+            
+            if (recomended && ([langString containsAny:filter.langs] || filter.langs.count == 0)                    // Filters for user language
 #ifdef PRO
                 || [filter.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)] // Simplified domain names filter
 #endif
@@ -1610,6 +1837,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
                 
                     [sFilters addObject:filter];
                 }
+        }
         
         if (!sFilters)
             return NO;
@@ -1619,10 +1847,21 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             return NO;
         }
         
+        NSMutableSet<NSNumber*> *groupIds = [NSMutableSet new];
+        for (ASDFilterMetadata *filter in sFilters) {
+            [groupIds addObject: filter.groupId];
+        }
+        
+        for(NSNumber* groupId in groupIds) {
+            BOOL result = NO;
+            if ([EnabledFilterGroups.groupIds containsObject:groupId])
+                [self setGroupEnabled:productionDb enabled:YES groupId:groupId result:&result];
+        }
+        
         // Trying obtain filter rules from default DB and to insert into production DB.
         for (ASDFilterMetadata *filter in sFilters) {
             
-            [self installRulesFromDefaultDbWithFilter:filter db:productionDb];
+            [self installRulesFromDefaultDbWithFilterId:filter.filterId db:productionDb];
         }
     }
     
@@ -1646,6 +1885,12 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             result = [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
             if (!result) break;
         }
+        
+        for (ASDFilterTagMeta *tag in meta.tags) {
+            result = [db executeUpdate:@"insert or replace into filter_tags (filter_id, tag_id, type, name) values (?, ?, ?, ?)", meta.filterId, @(tag.tagId), @(tag.type), tag.name];
+            if (!result) break;
+        }
+        
         if (!result) break;
     }
     
@@ -1660,8 +1905,8 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     BOOL result = NO;
     for (ASDFilterGroup *meta in metadataList) {
         
-        result = [db executeUpdate:@"insert or replace into filter_groups (group_id, display_number, name) values (?, ?, ?)",
-                  meta.groupId, meta.displayNumber, meta.name];
+        result = [db executeUpdate:@"insert or replace into filter_groups (group_id, display_number, name, is_enabled) values (?, ?, ?, ?)",
+                  meta.groupId, meta.displayNumber, meta.name, meta.enabled];
         if (!result) break;
     }
     
@@ -1699,13 +1944,13 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     return result;
 }
 
-- (BOOL)installRulesFromDefaultDbWithFilter:(ASDFilterMetadata *)filter db:(FMDatabase *)db {
+- (BOOL)installRulesFromDefaultDbWithFilterId:(NSNumber *)filterId db:(FMDatabase *)db {
 
     __block NSArray *rules;
     
     // Trying obtain filter rules from default DB
     [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
-        FMResultSet *resultSet = [db executeQuery:@"select * from filter_rules where filter_id = ?", filter.filterId];
+        FMResultSet *resultSet = [db executeQuery:@"select * from filter_rules where filter_id = ?", filterId];
         if (resultSet) {
             
             NSMutableArray *_rules = [NSMutableArray array];
@@ -1727,18 +1972,18 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         return NO;
     }
     
-    [self replaceRules:rules forFilter:filter inDb:db];
+    [self replaceRules:rules forFilterID:filterId inDb:db];
     
     return YES;
 }
 
-- (BOOL)installRulesFromBackendWithFilter:(ASDFilterMetadata *)filter db:(FMDatabase *)db {
+- (BOOL)installRulesFromBackendWithFilterId:(NSNumber *)filterId db:(FMDatabase *)db {
     
     NSArray *rules;
     // Trying obtain filter rules from backend
     if ([reach isReachable]) {
         
-        ASDFilter *filterData = [[ABECFilterClient singleton] filterWithFilterId:filter.filterId];
+        ASDFilter *filterData = [[ABECFilterClient singleton] filterWithFilterId:filterId];
         if (filterData) {
             
             rules = filterData.rules;
@@ -1748,16 +1993,16 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         return NO;
     }
     
-    [self replaceRules:rules forFilter:filter inDb:db];
+    [self replaceRules:rules forFilterID:filterId inDb:db];
     
     return YES;
 }
 
-- (void)replaceRules:(NSArray *)rules forFilter:(ASDFilterMetadata *)filter inDb:(FMDatabase *)db {
+- (void)replaceRules:(NSArray *)rules forFilterID:(NSNumber *)filterID inDb:(FMDatabase *)db {
     
     if (rules.count) {
         
-        [db executeUpdate:@"delete from filter_rules where filter_id = ?", filter.filterId];
+        [db executeUpdate:@"delete from filter_rules where filter_id = ?", filterID];
         BOOL result = YES;
         for (ASDFilterRule *item in rules) {
             
@@ -1770,7 +2015,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     
 }
 
-- (NSArray *)groupsFromDb:(FMDatabase *)db{
+- (NSArray<ASDFilterGroup*> *)groupsFromDb:(FMDatabase *)db{
     
     NSMutableArray *groups = [NSMutableArray array];
     
@@ -1817,6 +2062,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 }
 
 - (NSArray *)filtersFromDb:(FMDatabase *)db{
+    return [self filtersFromDb:db groupId:nil];
+}
+
+- (NSArray *)filtersFromDb:(FMDatabase *)db groupId:(NSNumber*) groupId{
     
     NSMutableArray *filters = [NSMutableArray array];
     
@@ -1841,7 +2090,40 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
         }
         [result close];
         
-        result = [db executeQuery:@"select * from filters order by group_id, display_number, filter_id"];
+        result = [db executeQuery:@"select * from filter_tags"];
+        
+        NSMutableDictionary *tagsDict = [NSMutableDictionary dictionary];
+        while ([result next]) {
+            
+            filterId = result[@"filter_id"];
+            list = tagsDict[filterId];
+            if (!list)
+                tagsDict[filterId] = list = [NSMutableArray array];
+            
+            ASDFilterTagMeta* tagMeta = [ASDFilterTagMeta new];
+            
+            NSNumber* tagId = result[@"tag_id"];
+            NSNumber* tagType = result[@"type"];
+            NSString* tagName = result[@"name"];
+            
+            if([tagId isKindOfClass:NSNumber.class])
+                tagMeta.tagId = tagId.intValue;
+            if([tagType isKindOfClass:NSNumber.class])
+                tagMeta.type = tagType.intValue;
+            if([tagName isKindOfClass:NSString.class])
+                tagMeta.name = tagName;
+            
+            [list addObject:tagMeta];
+        }
+        [result close];
+        
+        if(groupId == nil) {
+            result = [db executeQuery: @"select * from filters order by group_id, display_number, filter_id"];
+        }
+        else  {
+            result = [db executeQuery: @"select * from filters where group_id = ?" , groupId];
+        }
+        
         ASDFilterMetadata *filterMetadata;
         while ([result next]) {
             
@@ -1851,6 +2133,10 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
             list = langsDict[filterId];
             if (list)
                 filterMetadata.langs = [list copy];
+            
+            list = tagsDict[filterId];
+            if (list)
+                filterMetadata.tags = [list copy];
             
             [filters addObject:filterMetadata];
         }
@@ -1882,7 +2168,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
     }
 }
 
-- (NSArray *)rulesFromDb:(FMDatabase *)db filterId:(NSNumber *)filterId{
+- (NSArray<ASDFilterRule*> *)rulesFromDb:(FMDatabase *)db filterId:(NSNumber *)filterId{
     
     NSMutableArray *rules = [NSMutableArray array];
     
@@ -2083,6 +2369,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void) beginBackgroundTaskWithExpirationHandler:(void (^)(void))expirationBlock {
     
+    DDLogInfo(@"(AESAntibanner) begin background task");
 #ifndef APP_EXTENSION
     _transactionBackroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_TRANSACTION_TASK_NAME expirationHandler:^{
         
@@ -2094,6 +2381,7 @@ NSString *ASAntibannerUpdatePartCompletedNotification = @"ASAntibannerUpdatePart
 
 - (void) endBackgroundTask {
     
+    DDLogInfo(@"(AESAntibanner) end background task");
 #ifndef APP_EXTENSION
     [[UIApplication sharedApplication] endBackgroundTask:_transactionBackroundTaskID];
     _transactionBackroundTaskID = UIBackgroundTaskInvalid;

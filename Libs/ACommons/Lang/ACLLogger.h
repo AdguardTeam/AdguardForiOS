@@ -15,10 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#define DD_LEGACY_MACROS 1
+
 #import <Foundation/Foundation.h>
 #import "Logger/Lumberjack/DDFileLogger.h"
 #import "Logger/Lumberjack/DDTTYLogger.h"
 #import "Logger/Lumberjack/DDASLLogger.h"
+#import "Logger/Lumberjack/DDLegacyMacros.h"
 
 //Max log file size
 #define ACL_MAX_LOG_FILE_SIZE     512000
@@ -26,9 +30,9 @@
 // Set this log level for application.
 typedef enum{
     
-    ACLLDefaultLevel = LOG_LEVEL_INFO,
-    ACLLDebugLevel = LOG_LEVEL_DEBUG,
-    ACLLVerboseLevel = LOG_LEVEL_VERBOSE
+    ACLLDefaultLevel = DDLogLevelInfo,
+    ACLLDebugLevel = DDLogLevelDebug,
+    ACLLVerboseLevel = DDLogLevelVerbose
     
 } ACLLogLevelType;
 

@@ -100,11 +100,11 @@
 /**
  Filters localizations object.
  */
-@property (nonatomic) ASDFiltersI18n *filters;
+@property (nonatomic, nullable) ASDFiltersI18n *filters;
 /**
  Groups localizations object
  */
-@property (nonatomic) ASDGroupsI18n *groups;
+@property (nonatomic, nullable) ASDGroupsI18n *groups;
 
 @end
 

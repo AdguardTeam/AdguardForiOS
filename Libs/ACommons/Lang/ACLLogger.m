@@ -18,21 +18,29 @@
 #import "ACLLogger.h"
 #import "ACLFileLogger.h"
 
-int ddLogLevel = LOG_LEVEL_VERBOSE;
+int ddLogLevel = DDLogLevelVerbose;
 
-@interface ACLoggerFormatter : DDLogFileFormatterDefault
+@interface ACLoggerFormatter : DDLogFileFormatterDefault {
+    NSDateFormatter *_dateFormatter;
+}
+    
 @end
 
 @implementation ACLoggerFormatter
 
+- (instancetype)initWithDateFormatter:(NSDateFormatter *)dateFormatter {
+    self = [super initWithDateFormatter:dateFormatter];
+    _dateFormatter = dateFormatter;
+    return self;
+}
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
-    NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
+    NSString *dateAndTime = [_dateFormatter stringFromDate:(logMessage->_timestamp)];
     
-    NSString* thread = logMessage->queueLabel ?  [NSString stringWithFormat:@"[%u(%s)]", logMessage->machThreadID, logMessage->queueLabel] :
-                                                        [NSString stringWithFormat:@"[%u]", logMessage->machThreadID];
-    return [NSString stringWithFormat:@"%@ %@  %@", dateAndTime, thread, logMessage->logMsg];
+    NSString* thread = logMessage->_queueLabel ?  [NSString stringWithFormat:@"[%@(%@)]", logMessage->_threadID, logMessage->_queueLabel] :
+    [NSString stringWithFormat:@"[%@]", logMessage->_threadID];
+    return [NSString stringWithFormat:@"%@ %@  %@", dateAndTime, thread, logMessage->_message];
 }
 
 @end
@@ -82,7 +90,9 @@ static ACLLogger *singletonLogger;
         _fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
         _fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
         _fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
-        _fileLogger.logFormatter = [ACLoggerFormatter new];
+        NSDateFormatter * dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
+        _fileLogger.logFormatter = [[ACLoggerFormatter alloc] initWithDateFormatter: dateFormatter];
         
         [DDLog addLogger:_fileLogger];
 #ifdef DEBUG

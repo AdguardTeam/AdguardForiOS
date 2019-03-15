@@ -46,7 +46,7 @@
     return self;
 }
 
-+ (id)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
++ (NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
     
     @autoreleasepool {
         

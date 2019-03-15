@@ -39,14 +39,16 @@ extern NSString *AESUserInfoRuleObject;
 #pragma mark - AEServices
 /////////////////////////////////////////////////////////////////////
 
-@class AESAntibanner, ASDFilterRule;
+@class AESAntibanner, ASDFilterRule, AEService, ContentBlockerService;
+@protocol AESharedResourcesProtocol;
 
-@interface AEService : NSObject
+@protocol AEServiceProtocol <NSObject>
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-+ (AEService *)singleton;
+//+ (AEService *)singleton;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -60,57 +62,6 @@ extern NSString *AESUserInfoRuleObject;
 
 - (void)stop;
 
-
-/**
- Checks filtering rule, that it is converted to Safari content-blocking json.
- 
- @param rule Rule
- @return Returns nil on success, or error object.
- */
-- (NSError *)checkRule:(ASDFilterRule *)rule;
-/**
- Replace all rules in user filter of the production DB.
-
- @param rules List of the new rules
- @return Returns nil on success or DB error object. 
- */
-- (NSError *)replaceUserFilterWithRules:(NSArray <ASDFilterRule *> *)rules;
-
-- (NSError *)updateRule:(ASDFilterRule *)rule oldRuleText:(NSString *)oldRuleText;
-- (NSError *)addRule:(ASDFilterRule *)rule temporarily:(BOOL)temporarily;
-- (BOOL)removeRules:(NSArray *)rules;
-
-/**
- Adds whitelist rule, modifies content blocking JSON
- and replaces this JSON in shared resources asynchronously.
- Method performs completionBlock when done on service working queue.
- */
-- (void)addWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
-
-/**
- Removes whitelist rule, modifies content blocking JSON
- and replaces this JSON in shared resources asynchronously.
- Method performs completionBlock when done on service working queue.
- */
-- (void)removeWhitelistRule:(ASDFilterRule *)rule completionBlock:(void (^)(NSError *error))completionBlock;
-
-/**
- Converts active filter rules to content blocking JSON 
- and replaces this JSON in shared resources asynchronously. 
- Method performs completionBlock when done on service working queue.
- */
-- (void)reloadContentBlockingJsonASyncWithBackgroundUpdate:(BOOL)backgroundUpdate completionBlock:(void (^)(NSError *error))completionBlock;
-
-/**
- If reloadContentBlockingJsonASync (addWhitelistDomain, removeWhitelistRule) 
- method is running still, this method pushes block of code into queue,
- which will be run when reloadContentBlockingJsonASync 
- (addWhitelistDomain, removeWhitelistRule) method will be completed,
- else performs block of code immediately.
- Blocks are performed on service working queue.
- */
-- (void)onReloadContentBlockingJsonComplete:(void (^)(void))block;
-
 /**
  Method pushes block of code into queue,
  which will be run when service object will be ready.
@@ -118,6 +69,10 @@ extern NSString *AESUserInfoRuleObject;
  */
 - (void)onReady:(void (^)(void))block;
 
-- (void)checkStatusWithCallback:(void (^)(BOOL))callback;
+@end
+
+@interface AEService : NSObject<AEServiceProtocol>
+
+- (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService resources:(id<AESharedResourcesProtocol>)resources;
 
 @end

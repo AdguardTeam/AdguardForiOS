@@ -141,6 +141,9 @@
 /// Repeat a String repeat times to form a new String, with a String separator injected each time.
 + (NSString*) repeat:(NSString*)string separator:(NSString*) separator repeat:(NSInteger)repeat;
 
+/// converts html string to attributed string
+- (NSMutableAttributedString*) attributedStringFromHtml;
+
 @end
 
 /**
@@ -155,5 +158,5 @@ static inline NSString *LocalizationNotNeeded(NSString *s) {
  returns localized string by key. If string not found in preffered language, rerurns english string -
  NSLocalizedString() returns key in this case
  */
-NSString* ACLocalizedString(NSString* key, NSString* comment);
+NSString* _Nonnull  ACLocalizedString(NSString* key, NSString* comment);
 

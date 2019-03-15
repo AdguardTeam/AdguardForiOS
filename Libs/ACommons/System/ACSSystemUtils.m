@@ -37,6 +37,11 @@
 
 + (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message {
     
+    [self showSimpleAlertForController:controller withTitle:title message:message completion:nil];
+}
+
++ (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message completion:(void (^)(void))completion {
+    
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -44,12 +49,14 @@
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"OK", @"OK Button caption in alerts") style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               
-                                                              [controller dismissViewControllerAnimated:YES completion:nil];
+                                                              if(completion)
+                                                                  completion();
                                                           }];
     
     [alert addAction:defaultAction];
     [controller presentViewController:alert animated:YES completion:nil];
 }
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Only OS X code here

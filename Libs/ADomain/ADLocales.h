@@ -54,7 +54,7 @@
 + (NSArray *)filtersDescription;
 
 /**
-    TODO: Need description.
+    returns localizations dictionary for filter with filterId
  */
 + (NSDictionary *)localizationsOfFilter:(NSUInteger)filterId;
 

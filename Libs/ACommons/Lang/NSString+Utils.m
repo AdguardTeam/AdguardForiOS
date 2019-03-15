@@ -18,6 +18,11 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+#else
+#import <AppKit/AppKit.h>
+#endif
 
 #define CHARSET_ARRAY_CAPACITY 5
 #define RANGE_REALLOC_SIZE 50
@@ -743,7 +748,6 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     return NSNotFound;
 }
 
-// TODO: Check if we need it
 - (BOOL)uniContains:(NSString *)string {
 
     // Simple (Slow) method
@@ -809,6 +813,19 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
         free(selfChars);
 
     return foundFor;
+}
+
+- (NSMutableAttributedString *)attributedStringFromHtml {
+    
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError* error;
+    NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithData:data
+                                                                 options:options
+                                                      documentAttributes:nil error:&error];
+    
+    return string;
 }
 
 @end

@@ -17,7 +17,6 @@
  */
 
 #import "PacketTunnelProvider.h"
-#import "app.h"
 
 #import <UIKit/UIDevice.h>
 
@@ -26,20 +25,13 @@
 #import "APTunnelConnectionsHandler.h"
 #import "APSharedResources.h"
 #import "APTunnelConnectionsHandler.h"
-#import "APDnsServerObject.h"
 
-#import "ASDFilterObjects.h"
-#import "AESAntibanner.h"
-#import "AEService.h"
-#import "APWhitelistDomainObject.h"
-#import "AEBlacklistDomainObject.h"
 #import "ASDatabase.h"
 #import "ACNIPUtils.h"
 #import "APDnsServerAddress.h"
-#import "APBlockingSubscriptionsManager.h"
-#import "APPacketTunnelMigration.h"
 #import "ACNCidrRange.h"
-#import "APDnscryptService.h"
+#import "ACDnsUtils.h"
+#import "Adguard-Swift.h"
 
 #include <arpa/inet.h>
 #include <ifaddrs.h>
@@ -63,16 +55,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
 #define V_DNS_IPV6_ADDRESS                      @"2001:ad00:ad00::ad00"
-#define V_DNS_IPV6_ADDRESS2                     @"2001:ad00:ad00::ad01"
 
+// todo: use normal ip address
 #define V_DNS_IPV4_ADDRESS                      @"121.121.121.121"
-#define V_DNS_IPV4_ADDRESS2                     @"121.121.121.122"
-#define V_DNS_IPV4_ADDRESS3                     @"121.121.121.123"
-#define V_DNS_IPV4_ADDRESS4                     @"121.121.121.124"
 
-#define V_DNSCRYPT_LOCAL_ADDDRESS               @"127.0.0.1"
-#define V_DNSCRYPT_LOCAL_PORT                   @"8853"
-
+#define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
+#define V_DNSPROXY_LOCAL_PORT                   8853
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
@@ -101,7 +89,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 @implementation NEIPv4Route(cidr)
 + (NEIPv4Route*) ipv4RouteWithCidr:(NSString*)cidr {
     
-    NSArray* components = [cidr componentsSeparatedByString:@"/"];
+    NSArray<NSString*>* components = [cidr componentsSeparatedByString:@"/"];
     if(components.count != 2)
         return nil;
     
@@ -123,9 +111,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     void (^pendingStartCompletion)(NSError *error);
     void (^pendingStopCompletion)(void);
     
-    APDnsServerObject *_currentServer;
-    BOOL    _localFiltering;
-    BOOL    _isRemoteServer;
+    DnsServerInfo *_currentServer;
+//    BOOL    _localFiltering;
+//    BOOL    _isRemoteServer;
     APVpnManagerTunnelMode _tunnelMode;
     BOOL _restartByRechability;
     
@@ -134,20 +122,27 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NetworkStatus _lastReachabilityStatus;
     
-    APDnscryptService *_dnscryptService;
+    AESharedResources* _resources;
+    
+    DnsProxyService* _dnsProxy;
+    
+    DnsProvidersService* _dnsProvidersService;
+    
+    NSData* _dns64Prefix;
+    
+    BOOL _clearSettings;
 }
 
 + (void)initialize{
-    
+
     if (self == [PacketTunnelProvider class]) {
-        
+
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
-        
+
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
-        
     }
 }
 
@@ -156,15 +151,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     self = [super init];
     if (self) {
         
+        _resources = [AESharedResources new];
+        
         // Create connection handler
-        _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self];
-        [_connectionHandler setDnsActivityLoggingEnabled:YES];
-
+        _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self resources:_resources];
+        
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        _dnscryptService = [[APDnscryptService alloc] initWithIp: V_DNSCRYPT_LOCAL_ADDDRESS port:V_DNSCRYPT_LOCAL_PORT];
+        _dnsProxy = [DnsProxyService new];
+        _dnsProvidersService = [DnsProvidersService new];
+        _clearSettings = NO;
     }
     return self;
 }
@@ -174,6 +172,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)startTunnelWithOptions:(NSDictionary *)options completionHandler:(void (^)(NSError *))completionHandler
 {
+    
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
     pendingStartCompletion = completionHandler;
@@ -269,44 +268,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     [self logNetworkInterfaces];
     
-    if(_currentServer.isDnsCrypt.boolValue) {
-        [_dnscryptService stopWithCompletionBlock:^{
-            [self closeConnections];
-        }];
-    }
-    else {
-        [self closeConnections];
-    }
-}
-
-- (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler
-{
-    DDLogInfo(@"(PacketTunnelProvider) Handle Message Event");
-    
-        switch ([APSharedResources host2tunnelMessageType:messageData]) {
-            case APHTMLoggingEnabled:
-                //Log enabled
-                [_connectionHandler setDnsActivityLoggingEnabled:YES];
-                DDLogInfo(@"(PacketTunnelProvider) Handled LoggingEnabled Message Event");
-                break;
-                
-            case APHTMLoggingDisabled:
-                //Log disabled
-                [_connectionHandler setDnsActivityLoggingEnabled:NO];
-                DDLogInfo(@"(PacketTunnelProvider) Handled LoggingDisabled Message Event");
-                break;
-                
-            case APHTMLSystemWideDomainListReload:
-                
-                DDLogInfo(@"(PacketTunnelProvider) Domains lists changed. Reconnecting..");
-            
-                [self updateTunnelSettingsWithCompletionHandler:nil];
-
-                break;
-                
-            default:
-                break;
-        }
+    [self stopTunnel];
+    [self closeConnections];
 }
 
 - (void)sleepWithCompletionHandler:(void (^)(void))completionHandler
@@ -328,23 +291,17 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (APDnsServerObject *)currentDnsServer {
+- (DnsServerInfo *)currentDnsServer {
     
     return _currentServer;
 }
 
-- (BOOL)localFiltering {
-    
-    return _localFiltering;
-}
-
-- (BOOL)isRemoteServer {
-
-    return _isRemoteServer;
-}
-
 - (APVpnManagerTunnelMode)tunnelMode {
     return _tunnelMode;
+}
+
+- (NSData *)dns64Prefix {
+    return _dns64Prefix;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -360,7 +317,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }];
 }
 
-- (void)getDNSServersIpv4: (NSArray <APDnsServerAddress *> **) ipv4DNSServers ipv6: (NSArray <APDnsServerAddress *> **) ipv6DNSServers {
+- (void)getDNSServersIpv4: (NSArray <APDnsServerAddress *> **)  ipv4DNSServers ipv6: (NSArray <APDnsServerAddress *> **) ipv6DNSServers {
   
     NSMutableArray<APDnsServerAddress*> *ipv4s = [NSMutableArray array];
     NSMutableArray<APDnsServerAddress*> *ipv6s = [NSMutableArray array];
@@ -391,19 +348,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         [USE_STRONG(self) readProtocolConfiguration];
         
-        if(USE_STRONG(self)->_currentServer.isDnsCrypt.boolValue) {
-            
-            [USE_STRONG(self)->_dnscryptService stopWithCompletionBlock:^{
-                
-                [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer completionBlock:^{
-                    
-                    [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
-                }];
-            }];
-        }
-        else {
-            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
-        }
+        [USE_STRONG(self)->_dnsProxy stop];
+        [USE_STRONG(self) startDnsProxy];
+        [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
     }];
 }
 
@@ -417,8 +364,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
     
     // Check configuration
-    if (!_currentServer.isDnsCrypt.boolValue && !(_currentServer.ipv4Addresses.count || _currentServer.ipv6Addresses.count)) {
-        
+    if(!_currentServer.upstreams.firstObject.length) {
+    
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
     }
     else {
@@ -443,7 +390,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [self logNetworkInterfaces];
         DDLogInfo(@"PacketTunnelProvider) Start Tunnel mode: %@", modeName);
         
-        if(clearSettings) {
+        if(_clearSettings) {
             _tunnelMode = APVpnManagerTunnelModeSplit;
         }
         
@@ -464,7 +411,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         if(sSelf == nil)
             return;
         
-        [sSelf reloadWhitelistBlacklistDomain];
+//        [sSelf reloadWhitelistBlacklistDomain];
         
         if(completionHandler) {
             
@@ -485,31 +432,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     _currentServer = nil;
     NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
     if (currentServerData) {
-        
         _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
     }
     
     //protection for bad or old configuration
     if (_currentServer == nil) {
-        
-        @autoreleasepool {
-            _currentServer = APVPNManager.predefinedDnsServers[APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX];
-            _localFiltering = NO;
-            _isRemoteServer = YES;
-        }
-    }
-    else {
-        
-        _localFiltering = [protocol.providerConfiguration[APVpnManagerParameterLocalFiltering] boolValue];
-        
-        _isRemoteServer = ! [_currentServer.tag isEqualToString:APDnsServerTagLocal];
-        
-        // in ipv6-only networks we can not use remote dns server
-        if(_isRemoteServer && ![ACNIPUtils isIpv4Available]) {
-            
-            DDLogInfo(@"(PacketTunnelProvider) ipv4 not available. Set _isRemoteServer = NO");
-            _isRemoteServer = NO;
-        }
+        _currentServer = [_dnsProvidersService defaultServer];
     }
     
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
@@ -517,11 +445,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
     _restartByRechability = restartValue ? [restartValue boolValue] : NO;
     
-    DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@%@%@", _currentServer.serverName,
-              (_localFiltering ? @", LocalFiltering" : @""), (_isRemoteServer ? @", isRemoteServer" : @""));
+    DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@", _currentServer.name);
 }
 
-static BOOL clearSettings = NO;
+
 
 - (void)reachNotify:(NSNotification *)note {
     
@@ -574,17 +501,8 @@ static BOOL clearSettings = NO;
         }];
     };
     
-    if(_currentServer.isDnsCrypt.boolValue) {
-        
-        DDLogInfo(@"(PacketTunnelProvider) stopTunnel - stop dnscrypt");
-        [_dnscryptService stopWithCompletionBlock:^{
-            
-            closeConnectionsBlock();
-        }];
-    }
-    else {
-        closeConnectionsBlock();
-    }
+    [_dnsProxy stop];
+    closeConnectionsBlock();
 }
 
 - (void) updateSettings {
@@ -602,119 +520,9 @@ static BOOL clearSettings = NO;
         }];
     };
     
-    if(_currentServer.isDnsCrypt.boolValue) {
-        
-        DDLogInfo(@"(PacketTunnelProvider) updateSettings - stop dnscrypt");
-        [_dnscryptService stopWithCompletionBlock:^{
-            
-            DDLogInfo(@"(PacketTunnelProvider) updateSettings - start dnscrypt");
-            ASSIGN_STRONG(self);
-            [USE_STRONG(self)->_dnscryptService startWithRemoteServer:USE_STRONG(self)->_currentServer
-                                    completionBlock:^{
-                                        updateTunnelSettingsBlock();
-                                    }];
-            
-        }];
-    }
-    else {
-        updateTunnelSettingsBlock();
-    }
-}
-
-- (void)reloadWhitelistBlacklistDomain {
-    
-    @autoreleasepool {
-        
-        AERDomainFilter *userWhiteRules = [AERDomainFilter filter];
-        AERDomainFilter *userBlackRules = [AERDomainFilter filter];
-        AERDomainFilter *trackersRules = [AERDomainFilter filter];
-        
-        @autoreleasepool {
-            NSArray *domainList = APSharedResources.whitelistDomains;
-            for (NSString *item in domainList) {
-                
-                NSString *ruleText = [[[[APWhitelistDomainObject alloc] initWithDomain:item] rule] ruleText];
-                if (ruleText) {
-                    
-                    [userWhiteRules addRule:[AERDomainFilterRule rule:ruleText]];
-                }
-            }
-        }
-        
-        @autoreleasepool {
-            NSArray *domainList = APSharedResources.blacklistDomains;
-            for (NSString *ruleText in domainList) {
-                
-                if (ruleText) {
-                    
-                    AERDomainFilterRule* rule = [AERDomainFilterRule rule:ruleText];
-                    if(rule.whiteListRule) {
-                        
-                        [userWhiteRules addRule:rule];
-                    }
-                    else {
-                        
-                        [userBlackRules addRule:rule];
-                    }
-                }
-            }
-        }
-        
-        @autoreleasepool {
-            NSDictionary *domainList = [APSharedResources loadTrackerslistDomainsAndCacheResult:NO];
-            __block NSUInteger counter = 0;
-            [domainList enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                NSString* domain = key;
-                //NSString* name = obj;
-                
-                [trackersRules addRule:[AERDomainFilterRule rule:domain]];
-                
-                counter++;
-            }];
-            DDLogInfo(@"(PacketTunnelProvider) User trackers rules: %lu", counter);
-        }
-        
-        [_connectionHandler setUserWhitelistFilter:nil];
-        [_connectionHandler setUserBlacklistFilter:nil];
-        [_connectionHandler setTrackersFilter:nil];
-        [_connectionHandler setHostsFilter:nil];
-        [_connectionHandler setSubscriptionsFilters:nil];
-        [_connectionHandler setSubscriptionsHostsFilter:nil];
-        
-        NSMutableDictionary<NSString*, AERDomainFilter*> *subscriptionRules = [NSMutableDictionary new];
-       
-        NSDictionary<NSString*, NSArray<NSString*>* > *subscriptionRulesStrings = [APBlockingSubscriptionsManager loadRules];
-        
-        subscriptionRulesStrings = [APPacketTunnelMigration migrateRulesIfNeeded:subscriptionRulesStrings];
-        
-        [subscriptionRulesStrings enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull uuid, NSArray<NSString *> * _Nonnull ruleStrings, BOOL * _Nonnull stop) {
-            
-            AERDomainFilter* filter = [AERDomainFilter filter];
-            
-            for (NSString* ruleString in ruleStrings) {
-                [filter addRule:[AERDomainFilterRule rule:ruleString]];
-            }
-            
-            subscriptionRules[uuid] = filter;
-        }];
-        
-        NSMutableDictionary* hosts = [[NSMutableDictionary alloc] initWithDictionary:APSharedResources.hosts];
-        NSDictionary<NSString*, NSDictionary*> *subscriptionsHosts = [APBlockingSubscriptionsManager loadHosts];
-        
-        subscriptionsHosts = [APPacketTunnelMigration migrateHostsIfNeeded:subscriptionsHosts];
-        
-        [_connectionHandler setUserWhitelistFilter:userWhiteRules];
-        [_connectionHandler setUserBlacklistFilter:userBlackRules];
-        [_connectionHandler setTrackersFilter:trackersRules];
-        
-        [_connectionHandler setHostsFilter:hosts];
-        [_connectionHandler setSubscriptionsHostsFilter:subscriptionsHosts];
-        
-        [_connectionHandler setSubscriptionsFilters:subscriptionRules];
-        
-        DDLogInfo(@"(PacketTunnelProvider) User whitelist rules: %lu", userWhiteRules.rulesCount);
-        DDLogInfo(@"(PacketTunnelProvider) User blacklist rules: %lu", userBlackRules.rulesCount);
-    }
+    [_dnsProxy stop];
+    [self startDnsProxy];
+    updateTunnelSettingsBlock();
 }
 
 /**
@@ -736,12 +544,7 @@ static BOOL clearSettings = NO;
     
     ACNCidrRange *defaultRoute = [[ACNCidrRange alloc]initWithCidrString:@"0.0.0.0/0"];
     
-    NSArray<ACNCidrRange*> * dnsRanges = @[
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV4_ADDRESS],
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV4_ADDRESS2],
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV4_ADDRESS3],
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV4_ADDRESS4]
-                                           ];
+    NSArray<ACNCidrRange*> * dnsRanges = @[[[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV4_ADDRESS]];
     
     if(!withoutVPNIcon) {
         // see comment in method header
@@ -768,10 +571,7 @@ static BOOL clearSettings = NO;
     NSMutableArray *ipv6ExcludedRoutes = [NSMutableArray new];
     
     ACNCidrRange *defaultRoute = [[ACNCidrRange alloc]initWithCidrString:@"::/0"];
-    NSArray<ACNCidrRange*> * dnsRanges = @[
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV6_ADDRESS],
-                                           [[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV6_ADDRESS2]
-                                           ];
+    NSArray<ACNCidrRange*> * dnsRanges = @[[[ACNCidrRange alloc]initWithCidrString:V_DNS_IPV6_ADDRESS]];
     
     if(!withoutVPNIcon) {
         dnsRanges = [dnsRanges arrayByAddingObject:[[ACNCidrRange alloc]initWithCidrString:@"::/127"]];
@@ -791,8 +591,6 @@ static BOOL clearSettings = NO;
 
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
-    BOOL dnsCrypt = _currentServer.isDnsCrypt.boolValue;
-    
     // DNS
     
     NSArray<APDnsServerAddress*> *deviceIpv4DnsServers;
@@ -810,26 +608,14 @@ static BOOL clearSettings = NO;
     NSMutableArray<APDnsServerAddress*> *remoteDnsIpv4Addresses = [NSMutableArray new];
     NSMutableArray<APDnsServerAddress*> *remoteDnsIpv6Addresses = [NSMutableArray new];
     
-    if(_isRemoteServer) {
-        
-        if(dnsCrypt) {
-            
-            APDnsServerAddress* localAddress = [[APDnsServerAddress alloc] initWithIp:V_DNSCRYPT_LOCAL_ADDDRESS port:V_DNSCRYPT_LOCAL_PORT];
-            
-            [remoteDnsIpv4Addresses addObject:localAddress];
-        }
-        else {
-            
-            [remoteDnsIpv4Addresses addObjectsFromArray:_currentServer.ipv4Addresses];
-            [remoteDnsIpv6Addresses addObjectsFromArray:_currentServer.ipv6Addresses];
-        }
-    }
+
+    APDnsServerAddress* localAddress = [[APDnsServerAddress alloc] initWithIp:V_DNSPROXY_LOCAL_ADDDRESS port:@(V_DNSPROXY_LOCAL_PORT).stringValue];
+    [remoteDnsIpv4Addresses addObject:localAddress];
     
-    NSArray<NSString*>* fakeIpv4DnsAddresses = ipv4Available ? @[V_DNS_IPV4_ADDRESS, V_DNS_IPV4_ADDRESS2, V_DNS_IPV4_ADDRESS3, V_DNS_IPV4_ADDRESS4] : @[];
-    NSArray<NSString*>* fakeIpv6DnsAddresses = (ipv6Available && !dnsCrypt) ? @[V_DNS_IPV6_ADDRESS, V_DNS_IPV6_ADDRESS2] : @[];
+    NSArray<NSString*>* fakeIpv4DnsAddresses = ipv4Available ? @[V_DNS_IPV4_ADDRESS] : @[];
+    NSArray<NSString*>* fakeIpv6DnsAddresses = !ipv4Available && ipv6Available ? @[V_DNS_IPV6_ADDRESS] : @[];
     NSMutableArray* fakeDnsAddresses = [NSMutableArray new];
     [fakeDnsAddresses addObjectsFromArray:fakeIpv4DnsAddresses];
-    [fakeDnsAddresses addObjectsFromArray:fakeIpv6DnsAddresses];
    
     [_connectionHandler setDeviceDnsAddressesIpv4:deviceIpv4DnsServers
                            deviceDnsAddressesIpv6:deviceIpv6DnsServers
@@ -927,6 +713,61 @@ static BOOL clearSettings = NO;
     }];
     
     DDLogInfo(@"(PacketTunnelProvider) Available network interfaces:\n%@", log);
+}
+
+- (BOOL) startDnsProxy {
+    
+    DDLogInfo(@"(PacketTunelProvider) - startDnsProxy ");
+    NSArray *upstreams = _currentServer.upstreams;
+    
+    NSArray<APDnsServerAddress*> *deviceIpv4DnsServers;
+    NSArray<APDnsServerAddress*> *deviceIpv6DnsServers;
+    
+    [self getDNSServersIpv4:&deviceIpv4DnsServers ipv6:&deviceIpv6DnsServers];
+    
+    NSArray<APDnsServerAddress*> *allDeviceDnsServers = [deviceIpv4DnsServers arrayByAddingObjectsFromArray:deviceIpv6DnsServers];
+    
+    NSMutableArray<NSString*> *allSystemDnsIps = [NSMutableArray new];
+    
+    for (APDnsServerAddress* dns in allDeviceDnsServers) {
+        [allSystemDnsIps addObject:dns.ip];
+    }
+    
+    if (allSystemDnsIps.count == 0) {
+        DDLogError(@"(PacketTunnelProvider) - startDnsProxy error. There is no system dns servers");
+        return NO;
+    }
+    
+    NSString* systemDns = [allSystemDnsIps componentsJoinedByString:@"\n"];
+    
+    _dns64Prefix = [[Dns64Utils new] dns64Prefix];
+    
+    NSMutableArray* mappedUpstreams = [NSMutableArray new];
+    for(NSString* upstream in upstreams) {
+        [mappedUpstreams addObject:[self dns64MappedUppstream:upstream]];
+    }
+    
+    DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", mappedUpstreams, systemDns);
+    
+    return [_dnsProxy startWithUpstreams:mappedUpstreams listenAddr:V_DNSPROXY_LOCAL_ADDDRESS listenPort:V_DNSPROXY_LOCAL_PORT bootstrapDns: systemDns  fallback: systemDns];
+}
+
+- (NSString*) dns64MappedUppstream:(NSString*) upstream {
+    
+    if(!_dns64Prefix.length) {
+        return upstream;
+    }
+    
+    NSData* ipv4Data = [ACNIPUtils ipv4StringToData:upstream];
+    if (!ipv4Data) {
+        DDLogError(@"(PacketTunnelProvider) dns64MappedUppstream  error - Can not convert upstream to ipv4 data: %@", upstream);
+        
+        return upstream;
+    }
+    
+    Dns64Utils* dns64Utils = [Dns64Utils new];
+    NSData* mappedUpstreamData = [dns64Utils dns64MappedIpDataWithIpv4Data:ipv4Data prefix:_dns64Prefix];
+    return [ACNIPUtils ipv6DataToString:mappedUpstreamData];
 }
 
 @end

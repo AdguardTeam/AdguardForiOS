@@ -19,6 +19,7 @@
 @import NetworkExtension;
 #import "AERDomainFilter.h"
 #import "APDnsServerAddress.h"
+#import "APSharedResources.h"
 
 @class APTUdpProxySession, PacketTunnelProvider;
 
@@ -33,7 +34,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-- (id)initWithProvider:(PacketTunnelProvider *)provider;
+- (id)initWithProvider:(nonnull PacketTunnelProvider *)provider resources: (nonnull id<AESharedResourcesProtocol>) resources;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -101,11 +102,6 @@
  Update statistics.
  */
 - (void)sessionWorkDoneWithTime:(float)workTime tracker:(BOOL)tracker;
-
-/**
- Sets that sessions will be create log of the DNS activity.
- */
-- (void)setDnsActivityLoggingEnabled:(BOOL)enabled;
 
 /**
  Checks domain name, that it is included in global whitelist.

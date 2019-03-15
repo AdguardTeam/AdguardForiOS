@@ -146,4 +146,45 @@
     return;
 }
 
++ (NSData *)ipv4StringToData:(NSString *)ipv4String {
+    
+    struct    in_addr addr;
+    
+    if(!inet_pton(AF_INET, [ipv4String UTF8String], &addr)) {
+        return nil;
+    }
+    
+    return [NSData dataWithBytes:&(addr.s_addr) length:4];
+}
+
++ (NSData *)ipv6StringToData:(NSString *)ipv6String {
+    
+    struct    in6_addr addr;
+    
+    if(!inet_pton(AF_INET6, [ipv6String UTF8String], &addr)) {
+        return nil;
+    }
+    
+    return [NSData dataWithBytes:&(addr) length:16];
+}
+
++ (NSString *)ipv6DataToString:(NSData *)ipv6Data {
+    char buf [64];
+    if(!inet_ntop(AF_INET6, ipv6Data.bytes, buf, 64)) {
+        return nil;
+    }
+    
+    return [NSString stringWithCString:buf encoding:kCFStringEncodingUTF8];
+}
+
++ (NSString *)ipv4DataToString:(NSData *)ipv4Data {
+    char buf [64];
+    if(!inet_ntop(AF_INET6, ipv4Data.bytes, buf, 64)) {
+        return nil;
+    }
+    
+    return [NSString stringWithCString:buf encoding:kCFStringEncodingUTF8];
+}
+
+
 @end

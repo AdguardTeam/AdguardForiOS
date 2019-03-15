@@ -19,7 +19,6 @@
 
 #import "APDnsLogRecord.h"
 #import "APDnsResponse.h"
-#import "APDnsServerObject.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APDnsLogRecord
@@ -34,7 +33,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(APDnsServerObject *)dnsServer localFiltering:(BOOL)localFiltering{
+- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(DnsServerInfo *)dnsServer{
     if (!(ID && srcPort)) {
         return nil;
     }
@@ -46,7 +45,6 @@
         _ID = ID;
         _srcPort = srcPort;
         _dnsServer = dnsServer;
-        _localFiltering = localFiltering;
         _hash = [srcPort longLongValue] * 100000 + [ID unsignedIntegerValue];
         _isWhitelisted = NO;
         _isBlacklisted = NO;
@@ -107,7 +105,6 @@
         _recordDate = [aDecoder decodeObjectForKey:@"recordDate"];
         _srcPort = [aDecoder decodeObjectForKey:@"srcPort"];
         _dnsServer = [aDecoder decodeObjectForKey:@"dnsServer"];
-        _localFiltering = [[aDecoder decodeObjectForKey:@"localFiltering"] boolValue];
         _requests = [aDecoder decodeObjectForKey:@"requests"];
         _responses = [aDecoder decodeObjectForKey:@"responses"];
         _isWhitelisted = [[aDecoder decodeObjectForKey:@"isWhitelisted"] boolValue];
@@ -124,7 +121,6 @@
     [aCoder encodeObject:self.recordDate forKey:@"recordDate"];
     [aCoder encodeObject:self.srcPort forKey:@"srcPort"];
     [aCoder encodeObject:self.dnsServer forKey:@"dnsServer"];
-    [aCoder encodeObject:@(self.localFiltering) forKey:@"localFiltering"];
     [aCoder encodeObject:self.requests forKey:@"requests"];
     [aCoder encodeObject:self.responses forKey:@"responses"];
     [aCoder encodeObject:@(self.isWhitelisted) forKey:@"isWhitelisted"];

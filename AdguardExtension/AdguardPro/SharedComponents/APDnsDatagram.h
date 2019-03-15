@@ -31,8 +31,8 @@
 @property (readonly, nonatomic) BOOL isRequest;
 @property (readonly, nonatomic) BOOL isResponse;
 
-@property (readonly, nonatomic) NSArray <APDnsRequest *> *requests;
-@property (readonly, nonatomic) NSArray <APDnsResponse *> *responses;
+@property (nonatomic) NSArray <APDnsRequest *> *requests;
+@property (nonatomic) NSArray <APDnsResponse *> *responses;
 
 /**
  Converts to blocking response. 

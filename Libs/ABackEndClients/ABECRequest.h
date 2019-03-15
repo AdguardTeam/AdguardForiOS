@@ -36,7 +36,7 @@
     Create request object with POST method.
     @param parameters   May be nil.
  */
-+ (id)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
++ (nonnull NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
 
 /**
     Create request object with GET method.

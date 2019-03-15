@@ -36,8 +36,6 @@
 
 @interface APDnsResponse ()
 
-@property (nonatomic) NSString *stringValue;
-@property (nonatomic) NSData *rdata;
 @property (nonatomic) BOOL addressResponse;
 @property (nonatomic) BOOL blocked;
 
@@ -215,6 +213,14 @@ static NSData *ipv6BlockingResourceData;
 }
 
 + (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip{
+    
+    APDnsResponse * response = [self createResponseWithName:name type:type ip:ip];
+    response.blocked = YES;
+    
+    return response;
+}
+
++ (APDnsResponse *)createResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip{
 
     APDnsResponse *response;
     NSData *rdata;
@@ -222,9 +228,16 @@ static NSData *ipv6BlockingResourceData;
     
     if(ip.length) {
         
-        struct    in_addr addr;
-        inet_pton(AF_INET, [ip UTF8String], &addr);
-        rdata = [NSData dataWithBytes:&(addr.s_addr) length:4];
+        if (type.intValue == APDnsResourceType.aType.intValue) {
+            struct    in_addr addr;
+            inet_pton(AF_INET, [ip UTF8String], &addr);
+            rdata = [NSData dataWithBytes:&(addr.s_addr) length:4];
+        }
+        else {
+            struct    in6_addr addr;
+            inet_pton(AF_INET6, [ip UTF8String], &addr);
+            rdata = [NSData dataWithBytes:&(addr) length:16];
+        }
         
         stringValue = ip;
     }
@@ -251,7 +264,6 @@ static NSData *ipv6BlockingResourceData;
     response = [[APDnsResponse alloc] initWithName:name type:type class:[APDnsResourceClass internetClass]];
     response.stringValue = stringValue;
     response.addressResponse = YES;
-    response.blocked = YES;
     response.rdata = rdata;
     
     return  response;

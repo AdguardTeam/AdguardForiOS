@@ -19,14 +19,15 @@
 
 #import "APDnsRequest.h"
 
+
 @class APDnsResourceType;
 
 @interface APDnsResponse : APDnsRequest <NSCopying>
 
 - (id)initWithRR:(ns_rr)rr msg:(ns_msg)msg;
 
-@property (nonatomic, readonly) NSString *stringValue;
-@property (nonatomic, readonly) NSData *rdata;
+@property (nonatomic) NSString *stringValue;
+@property (nonatomic) NSData *rdata;
 
 // Special meening
 
@@ -48,5 +49,6 @@
  @return Returns object or nil if resource type is not permitted.
  */
 + (APDnsResponse *)blockedResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip;
++ (APDnsResponse *)createResponseWithName:(NSString *)name type:(APDnsResourceType *)type ip:(NSString*)ip;
 
 @end

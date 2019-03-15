@@ -63,7 +63,11 @@ extern NSString *ASAntibannerFailuredUpdateNotification;
 /// When antibanner filter updated from Ad Block Preferences and Main Panel(enabled/desabled/unsubscribe etc..)
 extern NSString *ASAntibannerUpdateFilterFromUINotification;
 
+/// When filter enable status did change
+extern NSString *ASAntibannerFilterEnabledNotification;
+
 @class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed;
+@class AASCustomFilterParserResult;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - ASAntibanner
@@ -73,7 +77,8 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  Service implements: updating from backend, auto detect filters, storing info and rules
  for Ad Blocker (the same Antibanner, requestFilter), and so on..
  */
-@interface AESAntibanner : NSObject <ABECFilterAsyncDelegateProtocol>
+
+@protocol AESAntibannerProtocol <NSObject>
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -88,12 +93,6 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  Indicates that antibanner updates of filters right now.
  */
 @property (readonly) BOOL updatesRightNow;
-
-/**
- Indicator that metadata and count of filters are out of date.
- Used for subscribing of new filters.
- */
-@property (nonatomic, readonly) BOOL metadataForSubscribeOutdated;
 
 /**
  Obtain rules for active (enabled) filters.
@@ -113,14 +112,14 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return Array of ASDFilterRule objects that represent rules of filtering.
  Returns empty array if receiver property "enabled" equal NO.
  */
-- (NSArray *)activeRulesForFilter:(NSNumber *)filterId;
+- (nonnull NSArray<ASDFilterRule*> *)activeRulesForFilter:(NSNumber *)filterId;
 
 /**
  Obtain groups information.
  @return Array of ASDFilterGroup objects that contains
  all stored in database groups.
  */
-- (NSArray *)groups;
+- (nonnull NSArray<ASDFilterGroup*> *)groups;
 /**
  Obtains groups localization information.
  @return ASDGroupsI18n object that contains data from database.
@@ -138,13 +137,32 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @return Array of ASDFilterMetadata objects that contains
  all stored in database antibanner filters.
  */
-- (NSArray *)filters;
+- (NSArray<ASDFilterMetadata*> *)filters;
+
+/**
+ Obtain filters information.
+ @return Array of ASDFilterMetadata objects that contains
+ all stored in database antibanner filters.
+ */
+- (NSArray<ASDFilterMetadata*> *)filtersForGroup:(NSNumber*) groupId;
 
 /**
  Obtain active filters information.
  @return Array of NSNumber objects that contains active filter IDs
  */
 - (NSArray*) activeFilterIDs;
+
+/**
+ Obtain active group information.
+ @return Array of NSNumber objects that contains active groups IDs
+ */
+- (nonnull NSArray<NSNumber*>*) activeGroupIDs;
+
+/**
+ Obtain active filters information.
+ @return Array of NSNumber objects that contains active filter IDs by groupID
+ */
+- (NSArray<NSNumber*> *)activeFilterIDsByGroupID:(NSNumber*)groupID;
 
 /**
  Obtains filters localization information.
@@ -158,7 +176,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  all rules stored in database for antibanner filter,
  which is defined filterId parameter.
  */
-- (NSArray *)rulesForFilter:(NSNumber *)filterId;
+- (nonnull NSArray<ASDFilterRule*> *)rulesForFilter:(NSNumber *)filterId;
 
 /**
  Set status of antibanner filter.
@@ -168,6 +186,14 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @param  fromUI      Indicator that setting of filters status is performed from UI.
  */
 - (void)setFilter:(NSNumber *)filterId enabled:(BOOL)enabled fromUI:(BOOL)fromUI;
+
+/**
+ Set status of antibanner filter.
+ 
+ @param groupId     group id
+ @param enabled      Enable/Disable of filter.
+ */
+- (void)setFiltersGroup:(NSNumber*) groupId enabled:(BOOL) enabled;
 
 /**
  
@@ -255,7 +281,7 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  @param jobController   Because the subscription process is long,
  you may use this parameter for cancellation.
  */
-- (BOOL)subscribeFilters:(NSArray *)filters jobController:(ACLJobController *)jobController;
+- (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters jobController:(nullable ACLJobController *)jobController;
 
 /**
  Removes filter data from production DB.
@@ -286,9 +312,26 @@ extern NSString *ASAntibannerUpdateFilterFromUINotification;
  */
 - (void)repairUpdateStateWithCompletionBlock:(void (^)(void))block;
 
+- (NSDate*) filtersLastUpdateTime;
+
 - (BOOL)inTransaction;
 - (void)beginTransaction;
 - (void)endTransaction;
 - (void)rollbackTransaction;
+
+- (NSNumber*) nextCustomFilterId;
+- (void)subscribeCustomFilterFromResult:(AASCustomFilterParserResult *)parserResult completion:(void (^)(void))completionBlock;
+- (nullable NSNumber*) customFilterIdByUrl: (NSString*) url;
+
+@end
+
+@interface AESAntibanner : NSObject <AESAntibannerProtocol, ABECFilterAsyncDelegateProtocol>
+
+/**
+ Indicator that metadata and count of filters are out of date.
+ Used for subscribing of new filters.
+ */
+@property (nonatomic, readonly) BOOL metadataForSubscribeOutdated;
+
 
 @end

@@ -36,6 +36,10 @@
 + (BOOL) isIpv4Available;
 + (void) enumerateNetworkInterfacesWithProcessingBlock:(void (^)(struct ifaddrs *addr, BOOL *stop))processingBlock;
 + (void) enumerateSystemDnsWithProcessingBlock:(void (^)(NSString *ip, NSString* port, BOOL ipv4, BOOL *stop))processingBlock;
++ (NSData*) ipv4StringToData: (NSString*)ipv4String;
++ (NSData*) ipv6StringToData: (NSString*)ipv6String;
++ (NSString*) ipv6DataToString: (NSData*) ipv6Data;
++ (NSString*) ipv4DataToString: (NSData*) ipv4Data;
 
 @end
 

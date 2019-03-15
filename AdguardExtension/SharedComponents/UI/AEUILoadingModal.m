@@ -69,22 +69,25 @@ static AEUILoadingModal *lmSingleton;
 
 - (void)loadingModalShowWithParent:(UIViewController*)parent message:(NSString *)message cancelAction:(SEL)cancelAction completion:(dispatch_block_t)completionBlock {
     
-    if (!self.loadingModal) {
-        UIStoryboard *board = parent.storyboard;
-        _loadingModal = [board instantiateViewControllerWithIdentifier:AEUILoadingModalIdentifier];
-        self.loadingModal.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        self.loadingModal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    }
+    // todo: make loading dialog in storyboard
     
-    self.loadingModal.delegate = parent;
-    self.loadingModal.cancelAction = cancelAction;
-    self.loadingModal.hideCancelButton = (cancelAction == nil);
-    self.loadingModal.loadingMessageText = message;
-        
-    if (self.loadingModal.presentingViewController == nil) {
-        [parent presentViewController:self.loadingModal animated:YES completion:completionBlock];
-    }
-    else if (completionBlock){
+//    if (!self.loadingModal) {
+//        UIStoryboard *board = parent.storyboard;
+//        _loadingModal = [board instantiateViewControllerWithIdentifier:AEUILoadingModalIdentifier];
+//        self.loadingModal.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//        self.loadingModal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    }
+//
+//    self.loadingModal.delegate = parent;
+//    self.loadingModal.cancelAction = cancelAction;
+//    self.loadingModal.hideCancelButton = (cancelAction == nil);
+//    self.loadingModal.loadingMessageText = message;
+//
+//    if (self.loadingModal.presentingViewController == nil) {
+//        [parent presentViewController:self.loadingModal animated:YES completion:completionBlock];
+//    }
+//    else
+    if (completionBlock){
         completionBlock();
     }
 }
