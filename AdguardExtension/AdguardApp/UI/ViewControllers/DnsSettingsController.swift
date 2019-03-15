@@ -63,15 +63,15 @@ class DnsSettingsController : UITableViewController{
         
         let enabled = sender.isOn
         
-        if enabled && vpnManager.vpnInstalled {
-            self.vpnManager.enabled = enabled
-        }
-        else {
+        if enabled && !vpnManager.vpnInstalled {
             ACSSystemUtils.showSimpleAlert(for: self,
                                            withTitle: ACLocalizedString("vpn_alert_title", nil),
                                            message: ACLocalizedString("vpn_alert_message", nil)){
                 self.vpnManager.enabled = enabled
             }
+        }
+        else {
+            self.vpnManager.enabled = enabled
         }
     }
 

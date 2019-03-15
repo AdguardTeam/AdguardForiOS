@@ -38,6 +38,8 @@ class DnsProvidersController: UITableViewController {
     private var selectedCellRow = 0
     private var activeProviderObservation: NSKeyValueObservation?
     private var providersObservation: NSKeyValueObservation?
+    private var providerToShow: DnsProviderInfo?
+    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
@@ -106,6 +108,7 @@ class DnsProvidersController: UITableViewController {
             parentController.editProvider(providers[indexPath.row])
         }
         else {
+            providerToShow = providers[indexPath.row]
             performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
         }
     }
@@ -114,7 +117,7 @@ class DnsProvidersController: UITableViewController {
         
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderContainerController
-            controller.provider = providers[selectedCellRow]
+            controller.provider = providerToShow
         }
     }
     
