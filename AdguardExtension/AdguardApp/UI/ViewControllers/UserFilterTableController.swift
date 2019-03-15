@@ -219,16 +219,19 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     }
     
     @IBAction func searchAction(_ sender: Any) {
+        searchBar.text = ""
         model?.searchString = ""
         updateUI()
     }
     
     @IBAction func cancelSearchAction(_ sender: Any) {
+        searchBar.text = ""
         model?.searchString = nil
         updateUI()
     }
     
     @IBAction func addRuleButtonAction(_ sender: Any) {
+        searchBar.text = ""
         model?.searchString = nil
         
         updateUI()
