@@ -75,7 +75,7 @@ class SafariService: NSObject, SafariServiceProtocol {
         .privacy: "cb_privacy.json",
         .socialWidgetsAndAnnoyances: "cb_annoyances.json",
         .other: "cb_other.json",
-        .custom: "cb_castom.json"
+        .custom: "cb_custom.json"
     ]
     
     private lazy var contenBlockerBundleIds: [String] = { self.contenBlockerBundleIdByType.map({ $0.1 }) } ()

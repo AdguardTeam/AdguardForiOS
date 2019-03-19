@@ -1813,7 +1813,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         for (ASDFilterMetadata *filter in filters){
             BOOL recomended = NO;
             for (ASDFilterTagMeta* tagMeta in filter.tags) {
-                
                 if(tagMeta.type == ASDFilterTagTypeRecommended){
                     recomended = YES;
                     break;

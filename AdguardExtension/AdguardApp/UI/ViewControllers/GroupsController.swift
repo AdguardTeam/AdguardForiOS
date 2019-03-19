@@ -28,7 +28,7 @@ class GroupsController: UITableViewController {
     let customFiltersSegueID = "showCustomFiltersSegue"
     let getProSegueID = "getProSegue"
     
-    // MARK: - properties1
+    // MARK: - properties
     let viewModel: FilterGroupViewModelProtocol
     var selectedIndex: Int?
     
@@ -95,7 +95,9 @@ class GroupsController: UITableViewController {
         
         cell.nameLabel.text = group?.name
         cell.descriptionLabel.text = group?.subtitle
-        cell.enabledSwitch.isOn = group?.enabled ?? false
+        
+        cell.enabledSwitch.isOn = (group?.enabled ?? false)
+        
         cell.icon.image = UIImage(named: group?.iconName ?? "")
         cell.enabledSwitch.tag = indexPath.row
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
@@ -135,7 +137,7 @@ class GroupsController: UITableViewController {
         for subview in (sender.superview?.subviews)! {
             if subview.isKind(of: UISwitch.self) {
                 let enableSwitch = subview as! UISwitch
-                enableSwitch.isOn = !enableSwitch.isOn
+                enableSwitch.setOn(!enableSwitch.isOn, animated: true)
                 enabledChanged(enableSwitch)
             }
         }

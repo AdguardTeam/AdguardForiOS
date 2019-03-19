@@ -28,7 +28,7 @@ class GetProController: UIViewController {
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets
-    @IBOutlet weak var upgradeButton: UIBarButtonItem!
+    @IBOutlet weak var upgradeButton: RoundRectButton!
     @IBOutlet weak var signInButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
     
@@ -137,12 +137,14 @@ class GetProController: UIViewController {
     
     private func setUpgrateButtonTitle() {
         if purchaseService.ready {
-            upgradeButton.title = String(format: ACLocalizedString("upgrade_button_title_format", nil), purchaseService.price)
+            let title = String(format: ACLocalizedString("upgrade_button_title_format", nil), purchaseService.price)
+            upgradeButton.setTitle(title, for: .normal)
             upgradeButton.isEnabled = true
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
         else {
-            upgradeButton.title = ACLocalizedString("upgrade_button_title", nil)
+            let title = ACLocalizedString("upgrade_button_title", nil)
+            upgradeButton.setTitle(title, for: .normal)
             upgradeButton.isEnabled = false
             navigationItem.rightBarButtonItem?.isEnabled = false
         }

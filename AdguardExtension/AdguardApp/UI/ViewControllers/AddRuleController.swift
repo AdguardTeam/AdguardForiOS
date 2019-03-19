@@ -63,6 +63,9 @@ class AddRuleController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ruleTextField.becomeFirstResponder()
+        let placeholder = NSMutableAttributedString(string: ACLocalizedString(blacklist ? "add_blacklist_rule_placeholder" : "add_whitelist_domain_placeholder", ""))
+        placeholder.addAttribute(.foregroundColor, value: theme.placeholderTextColor, range: NSRange(location: 0, length: placeholder.length))
+        ruleTextField.attributedPlaceholder = placeholder
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

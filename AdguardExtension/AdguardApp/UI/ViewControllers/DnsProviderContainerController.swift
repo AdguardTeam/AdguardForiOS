@@ -51,6 +51,8 @@ class DnsProviderContainerController : UIViewController {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButtonUseServer)
         }
         
+        navigationItem.title = provider?.name
+        
         updateTheme()
     }
     

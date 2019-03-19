@@ -18,6 +18,7 @@
 
 import Foundation
 
+// MARK: - custom cells
 class NewRuleCell: UITableViewCell {
     @IBOutlet weak var addButton: UIButton!
 }
@@ -27,6 +28,7 @@ class RuleCell: UITableViewCell {
     @IBOutlet var themableLabels: [ThemableLabel]!
 }
 
+// MARK: - UserFilterTableController
 class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
@@ -106,27 +108,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         tableView.reloadData()
     }
     
-    func selectAllCells() {
-        
-        tableView.indexPathsForVisibleRows?.forEach({ (indexPath) in
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            tableView.reloadData()
-        })
-        
-        DispatchQueue(label: "update rule cells").async {
-            [weak self] in
-            
-            guard let count = self?.model?.rules.count else { return }
-            for row in 0..<count {
-                self?.tableView.selectRow(at: IndexPath(row: row, section: 1), animated: false, scrollPosition: .none)
-            }
-            
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
     // MARK: - UITableView
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -167,7 +148,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -177,24 +157,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             guard let rule = model?.rules[indexPath.row] else { return }
             if isCustomEditing {
                 if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
-                    rule.selected = true
-                    configureCell(cell, selected: true)
+                    toggleCellSelection(cell: cell, rule: rule)
+                    tableView.deselectRow(at: indexPath, animated: true)
                 }
             }
             else {
                 showRuleDetails(rule)
-            }
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            
-        }
-        else {
-            if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
-                model?.rules[indexPath.row].selected = false
-                configureCell(cell, selected: false)
             }
         }
     }
@@ -212,8 +180,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         model?.deleteRule(index: index, errorHandler: { (error) in
             
         }) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+                self?.notifyParent()
             }
         }
     }
@@ -221,6 +190,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     @IBAction func searchAction(_ sender: Any) {
         searchBar.text = ""
         model?.searchString = ""
+        searchBar.becomeFirstResponder()
         updateUI()
     }
     
@@ -260,7 +230,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                         self?.tableView.reloadData()
             },
                       completionHandler: { [weak self] in
-                        self?.tableView.reloadData()
+                        DispatchQueue.main.async {
+                            self?.tableView.reloadData()
+                            self?.notifyParent()
+                        }
         })
         
         tableView.reloadData()
@@ -320,7 +293,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     }
     
     // MARK: - private methods
-    func updateUI() {
+    private func updateUI() {
         
         if model?.searchString != nil {
             // add searchbar if needed
@@ -348,7 +321,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         theme.setupTable(tableView)
     }
     
-    func configureCell(_ cell: RuleCell, selected: Bool) {
+    private func configureCell(_ cell: RuleCell, selected: Bool) {
         
         if isCustomEditing {
             if cell.accessoryView == nil {
@@ -367,7 +340,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         }
     }
     
-    func showRuleDetails(_ rule: RuleInfo) {
+    private func showRuleDetails(_ rule: RuleInfo) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = self
@@ -378,7 +351,15 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         
         present(controller, animated: true, completion: nil)
     }
+    
+    private func toggleCellSelection(cell: RuleCell, rule: RuleInfo) {
+        let selected = !rule.selected
+        rule.selected = selected
+        configureCell(cell, selected: selected)
+        notifyParent()
+    }
+    
+    private func notifyParent() {
+        (parent as! UserFilterController).selectedRulesChanged()
+    }
 }
-
-
-

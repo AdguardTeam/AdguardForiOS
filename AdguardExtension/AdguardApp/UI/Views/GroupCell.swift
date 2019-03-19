@@ -24,6 +24,7 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var separator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     

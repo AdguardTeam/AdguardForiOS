@@ -28,13 +28,23 @@ protocol FiltersViewModelProtocol {
      array of filters to show. If search is active it returns filtered array
      */
     var filters: [Filter] { get }
-    var groupName: String { get }
+    
+    /**
+    current filters group
+     */
+    var group: Group { get }
+    
     var customGroup: Bool { get }
     
     /**
-     enable/disable filter with callback
+     enable/disable filter
      */
-    func set(filter: Filter, enabled: Bool, completion: @escaping (_ success: Bool)->Void);
+    func set(filter: Filter, enabled: Bool);
+    
+    /**
+     enable/disable group with callback
+     */
+    func setGroup(enabled: Bool);
     
     /**
      add custom filter to database and reloads safari content blockers
@@ -82,17 +92,11 @@ class FiltersViewModel: FiltersViewModelProtocol {
         }
     }
     
-    var groupName: String {
-        get {
-            return group.name ?? ""
-        }
-    }
-    
+    var group: Group
     var customGroup: Bool = false
     var isSearchActive = false
     
     // MARK: - private properties
-    var group: Group
     
     private let filtersService: FiltersServiceProtocol
     
@@ -115,8 +119,14 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     // MARK: - public methods
     
-    func set(filter: Filter, enabled: Bool, completion: @escaping (_ success: Bool)->Void) {
+    func set(filter: Filter, enabled: Bool) {
         filtersService.setFilter(filter, enabled: enabled)
+    }
+    
+    func setGroup(enabled: Bool) {
+        filtersService.setGroup(group, enabled: enabled)
+        
+        filtersChangedCallback?()
     }
     
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void) {

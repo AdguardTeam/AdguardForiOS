@@ -18,7 +18,7 @@
 
 import Foundation
 
-class BottomAlertController: UIViewController {
+class BottomAlertController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var contentView: RoundrectView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
@@ -50,16 +50,35 @@ class BottomAlertController: UIViewController {
             let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
             let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            if endFrameY >= UIScreen.main.bounds.size.height {
-                self.keyboardHeightLayoutConstraint?.constant = -54
+            
+            var bottomSafeArea: CGFloat
+            if #available(iOS 11.0, *) {
+                bottomSafeArea = view.safeAreaInsets.bottom
             } else {
-                self.keyboardHeightLayoutConstraint?.constant = (endFrame?.size.height ?? 0.0) - 54
+                bottomSafeArea = bottomLayoutGuide.length
             }
+            
+            var bottomConstrint: CGFloat
+            if endFrameY >= UIScreen.main.bounds.size.height {
+                bottomConstrint = -34
+            } else {
+                bottomConstrint = bottomSafeArea > 0 ? (endFrame?.size.height ?? 0.0) - 68 :
+                                                        (endFrame?.size.height ?? 0.0) - 34
+            }
+            
+            self.keyboardHeightLayoutConstraint?.constant = bottomConstrint
+            
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
                            options: animationCurve,
                            animations: { self.view.layoutIfNeeded() },
                            completion: nil)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

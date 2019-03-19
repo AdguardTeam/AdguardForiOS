@@ -68,7 +68,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     // MARK: constants -
     // store kit constants
-    private let kGetProProductID = "com.adguard.AdguardExtension.GetProFeature4"
+    private let kGetProProductID = "com.adguard.AdguardExtension.GetProSubscriptionTest"
     
     // keychain constants
     private let LOGIN_SERVER = "http://testmobile.adtidy.org"
@@ -122,11 +122,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
+    // MARK: - public properties
+    
     var isProPurchased: Bool {
         return isProPurchasedInternal
     }
     
-    // MARK: - public properties
     @objc dynamic var isProPurchasedInternal: Bool {
         get {
             return purchasedThroughInApp || (purchasedThroughLogin && !expired);

@@ -37,6 +37,8 @@ class UserFilterController : UIViewController {
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
         return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner())}()
     
+    private var observation: NSKeyValueObservation?
+    
     // MARK: IB outlets
     
     @IBOutlet weak var rightButtonView: UIView!
@@ -91,6 +93,12 @@ class UserFilterController : UIViewController {
         }
     }
     
+    // MARK: - pubilc methods
+    
+    func selectedRulesChanged() {
+        updateButtonStates()
+    }
+    
     // MARK: - Actions
     
     @IBAction func selectAction(_ sender: Any) {
@@ -123,19 +131,23 @@ class UserFilterController : UIViewController {
         barState = .normal
         model.selectAllRules(false)
         updateBottomBar()
+        selectedRulesChanged()
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        model.deleteSelected(completionHandler: {
-            
+        model.deleteSelected(completionHandler: { [weak self] in
+            DispatchQueue.main.async {
+                self?.selectedRulesChanged()
+            }
         }) { (message) in
-            
+    
         }
     }
     
     @IBAction func selectAllAction(_ sender: Any) {
         model.selectAllRules(true)
         tableController?.tableView.reloadData()
+        selectedRulesChanged()
     }
     
     // MARK: - private methods
@@ -160,12 +172,19 @@ class UserFilterController : UIViewController {
             leftButtonStack.addArrangedSubview(deleteButton)
             leftButtonStack.addArrangedSubview(selectAllButton)
         }
+        
+        selectedRulesChanged()
     }
     
-    func updateTheme() {
+    private func updateTheme() {
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor
         deleteButton.customHighlightedBackgroundColor = theme.selectedCellColor
+    }
+    
+    private func updateButtonStates() {
+        deleteButton.isEnabled = model.rules.contains { $0.selected }
+        selectAllButton.isEnabled = model.rules.contains { !$0.selected }
     }
 }

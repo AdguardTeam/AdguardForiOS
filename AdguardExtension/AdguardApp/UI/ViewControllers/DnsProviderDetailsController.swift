@@ -46,7 +46,6 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         updateTheme()
     }
     
@@ -141,9 +140,9 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         // hide empty cells
         switch (indexPath.section, indexPath.row) {
         case (buttonsSection, serverRow):
-            if provider?.protocols?.count == 0 { return 0 }
+            return provider?.protocols?.count == 0 ? 0 : 60
         case (buttonsSection, websiteRow):
-            if (provider?.website?.count ?? 0) == 0 { return 0 }
+            return (provider?.website?.count ?? 0) == 0 ? 0 : 60
         default:
             break
         }
@@ -200,6 +199,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     }
     
 }
+
+// MARK: - custom cells
 
 class DnsFeatureCell: UITableViewCell {
     

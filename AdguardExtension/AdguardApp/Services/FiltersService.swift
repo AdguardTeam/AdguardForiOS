@@ -101,7 +101,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     var groups = [Group]()
     
-    
     private var antibanner: AESAntibannerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
@@ -110,6 +109,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private var proGroups: Set<Int> = [FilterGroupId.security, FilterGroupId.custom]
     
     private var notificationObserver: Any?
+    private var proStatusObservation: NSKeyValueObservation?
     
     // exception languages
     private let langFlags = [
@@ -176,6 +176,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     self?.update(filterId: filter_id, enabled: enabled)
                 }
             }
+        }
+        
+        proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
+            self?.updateProStatus()
         }
     }
     
@@ -279,17 +283,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     func setGroup(_ group: Group, enabled: Bool) {
         
         group.enabled = enabled
-        
-        if enabled {
-            for filter in group.filters {
-                filter.enabled = enabledFilters[filter.filterId] ?? false
-            }
-        }
-        else {
-            for filter in group.filters {
-                filter.enabled = false
-            }
-        }
         
         updateGroupSubtitle(group)
         
@@ -552,13 +545,22 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     }
     
     private func updateGroupSubtitle(_ group: Group) {
-        var enabledCount = 0;
         if group.enabled {
-            enabledCount = group.filters.reduce(0) { (result, filter) -> Int in
+            let enabledCount = group.filters.reduce(0) { (result, filter) -> Int in
                 return filter.enabled ? result + 1 : result }
+            
+            group.subtitle = String(format: ACLocalizedString("filter_group_filters_count_format", nil), enabledCount, group.filters.count)
         }
-        
-        group.subtitle = String(format: ACLocalizedString("filter_group_filters_count_format", nil), enabledCount, group.filters.count)
+        else {
+            group.subtitle = ACLocalizedString("filters_group_disabled", nil)
+        }
+    }
+    
+    private func updateProStatus() {
+        for group in groups {
+            group.proOnly = !configuration.proStatus && proGroups.contains(group.groupId)
+        }
+        notifyChange()
     }
     
     

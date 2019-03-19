@@ -35,6 +35,9 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var upstreamsField: UITextField!
     
+    @IBOutlet var separators: [UIView]!
+    
+    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -50,6 +53,9 @@ class NewDnsServerController: BottomAlertController {
             nameField.text = provider?.name
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
         }
+        
+        nameField.becomeFirstResponder()
+        updateTheme()
     }
     
     // MARK: - Actions
@@ -79,13 +85,16 @@ class NewDnsServerController: BottomAlertController {
         vpnManager.resetCustomDnsProvider(provider!)
         dismiss(animated: true, completion: nil)
     }
+    
     // MARK: - private methods
     
     private func updateTheme() {
-        view.backgroundColor = theme.popupBackgroundColor
+        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
-        
+        for separator in separators {
+            separator.backgroundColor = theme.separatorColor
+        }
     }
 }

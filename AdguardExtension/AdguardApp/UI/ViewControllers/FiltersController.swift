@@ -99,10 +99,15 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     
     private let newFilterCellId = "newCustomFilterReuseID"
     private let filterCellId = "filterCellID"
+    private let groupCellId = "GroupCellReuseID"
     private let tagCellId = "tagCellId"
     private let langCellId = "langCellId"
     
     private var selectedIndex: Int?
+    
+    private let groupSection = 0
+    private let addFilterSection = 1
+    private let filtersSection = 2
     
     // MARK:  IB Outlets
     
@@ -125,7 +130,7 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
         viewModel?.searchChangedCallback = { [weak self] in self?.updateBarButtons() }
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
-        navigationItem.title = viewModel?.groupName
+        navigationItem.title = viewModel?.group.name
         if viewModel?.customGroup ?? false {
             tableView.tableHeaderView = headerView
         }
@@ -145,27 +150,51 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     // MARK: - TableView delegate methods
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel!.customGroup ? 2 : 1
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if isAddFilter(section: section) {
+        switch section {
+        case groupSection, addFilterSection:
             return 1
+        case filtersSection:
+            return viewModel?.filters.count ?? 0
+        default:
+            return 0
         }
-        
-        return viewModel?.filters.count ?? 0;
     }
     
     static var updated = false
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if(isAddFilter(section: indexPath.section)) {
+        switch indexPath.section {
+        case groupSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
+            cell.nameLabel.text = viewModel?.group.name
+            cell.descriptionLabel.text = viewModel?.group.subtitle
+            cell.icon.image = UIImage(named: viewModel?.group.iconName ?? "")
+            
+            let enabled = viewModel?.group.enabled ?? false
+            if cell.enabledSwitch.isOn != enabled {
+                cell.enabledSwitch.setOn(enabled, animated: true)
+            }
+            cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
+            cell.enabledSwitch.addTarget(self, action: #selector(toogleGroupEnable(_:)), for: .valueChanged)
+            
+            theme.setupLabels(cell.themableLabels)
+            theme.setupTableCell(cell)
+            theme.setupSwitch(cell.enabledSwitch)
+            cell.separator.backgroundColor = theme.separatorColor
+            
+            return cell
+            
+        case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
             return cell!
-        }
-        else {
+            
+        case filtersSection:
             let filter = viewModel?.filters[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
             cell.name.text = filter?.name ?? ""
@@ -188,28 +217,54 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             cell.collectionHeightConstraint.constant = cell.collectionView.contentSize.height
             cell.collectionTopConstraint.constant = (cell.filterDescription.text?.count ?? 0) > 0 ? 19 : 0
             
+            let groupEnabled = viewModel?.group.enabled ?? false
+            cell.enableSwitch.isEnabled = groupEnabled
+            cell.enableSwitch.isUserInteractionEnabled = groupEnabled
+            cell.contentView.alpha = groupEnabled ? 1.0 : 0.5
+            
             theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
             theme.setupSwitch(cell.enableSwitch)
             
             return cell
+            
+        default:
+            return UITableViewCell()
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(isAddFilter(section: indexPath.section)) {
+        switch indexPath.section {
+        case groupSection:
+            break
+        case addFilterSection:
             showAddFilterDialog()
-        }
-        else{
+        case filtersSection:
             if viewModel?.customGroup ?? false {
                 selectedIndex = indexPath.row
                 showCustomFilterInfoDialog()
             }
             else {
                 let cell = tableView.cellForRow(at: indexPath) as! FilterCell
-                cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
-                toggleEnableSwitch(cell.enableSwitch)
+                if cell.enableSwitch.isEnabled {
+                    cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
+                    toggleEnableSwitch(cell.enableSwitch)
+                }
             }
+            
+        default:
+            break
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case groupSection:
+            return 72
+        case addFilterSection:
+            return (viewModel?.customGroup ?? false) ? 60 : 0
+        default:
+            return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
@@ -266,7 +321,7 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         let row = sender.tag
         guard let filter = viewModel?.filters[row] else { return }
-        viewModel?.set(filter: filter, enabled: sender.isOn) { (success) in }
+        viewModel?.set(filter: filter, enabled: sender.isOn)
     }
     
     @IBAction func showSiteAction(_ sender: UIButton) {
@@ -297,6 +352,11 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     @objc func langAction(_ sender: LangView) {
         viewModel?.switchTag(name: sender.name ?? "")
     }
+    
+    @objc func toogleGroupEnable(_ sender: UISwitch) {
+        viewModel?.setGroup(enabled: sender.isOn)
+    }
+    
     // MARK: - searchbar methods
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -346,10 +406,6 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             tableView.tableHeaderView = nil
             searchBar.text = viewModel?.searchString
         }
-    }
-    
-    private func isAddFilter(section : Int) ->Bool {
-        return viewModel!.customGroup && section == 0
     }
     
     private func showAddFilterDialog() {

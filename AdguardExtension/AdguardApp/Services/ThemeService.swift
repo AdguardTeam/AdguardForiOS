@@ -29,6 +29,7 @@ import Foundation
     var bottomBarBackgroundColor: UIColor { get }
     var blackTextColor: UIColor { get }
     var lightGrayTextColor: UIColor { get }
+    var placeholderTextColor: UIColor { get }
     var grayTextColor: UIColor { get }
     var separatorColor: UIColor { get }
     var selectedCellColor: UIColor { get }
@@ -83,6 +84,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
 
     var lightGrayTextColor: UIColor {
         return configuration.darkTheme ? .white : UIColor.init(hexString: "#888888")
+    }
+    
+    var placeholderTextColor: UIColor {
+        return configuration.darkTheme ? UIColor.init(hexString: "#777777") : UIColor.init(hexString: "#DDDDDD")
     }
     
     var separatorColor: UIColor {
