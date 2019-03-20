@@ -349,6 +349,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             newFilter.enabled = true
             
             group.filters = [newFilter] + group.filters
+            
+            updateGroupSubtitle(group)
+            notifyChange()
         }
        
         antibanner.subscribeCustomFilter(from: filter) {
