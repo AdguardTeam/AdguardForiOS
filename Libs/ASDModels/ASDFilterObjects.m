@@ -680,19 +680,26 @@
         value = result[@"filter_id"];
         if (value)
             _filterId = value;
+        else
+            return nil;
         
         value = result[@"rule_id"];
         if (value)
             _ruleId = value;
+        else
+            return nil;
         
         value = result[@"rule_text"];
         if (value)
             _ruleText = value;
+        else
+            return nil;
         
         value = result[@"is_enabled"];
         if (value)
             _isEnabled = value;
-        
+        else
+            return nil;
     }
     
     return self;

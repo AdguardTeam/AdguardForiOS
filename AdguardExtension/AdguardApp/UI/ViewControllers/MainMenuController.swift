@@ -100,7 +100,7 @@ class MainMenuController: UITableViewController {
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         
         let incorrectAction = UIAlertAction(title: ACLocalizedString("incorrect_blocking_report", nil), style: .default) { (action) in
-            guard let reportUrl = AESSupport.singleton()?.composeWebReportUrl(forSite: nil) else { return }
+            guard let reportUrl = AESSupport.singleton().composeWebReportUrl(forSite: nil) else { return }
             UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
         }
         
@@ -110,7 +110,7 @@ class MainMenuController: UITableViewController {
         
         let contactSupportAction = UIAlertAction(title: ACLocalizedString("action_contact_support", nil), style: .default) { (action) in
             
-            AESSupport.singleton()?.sendMailBugReport(withParentController: self)
+            AESSupport.singleton().sendMailBugReport(withParentController: self)
         }
         
         actionSheet.addAction(cancelAction)

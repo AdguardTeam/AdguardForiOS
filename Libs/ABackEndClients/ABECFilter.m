@@ -333,12 +333,17 @@ static ABECFilterClient *ABECFilterSingleton;
     [self processDownloadTask:(NSURLSessionDownloadTask *)task completeWithError:error];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
     
     DDLogInfo(@"(ABECFilterClient) URLSessionDidFinishEventsForBackgroundURLSession:");
     
     [self.delegate filterClientFinishedDownloading:self error:nil];
 }
+
+#pragma clang diagnostic pop
 
 - (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
     

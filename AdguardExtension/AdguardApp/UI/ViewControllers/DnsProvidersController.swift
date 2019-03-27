@@ -86,7 +86,13 @@ class DnsProvidersController: UITableViewController {
         let provider = providers[indexPath.row]
         
         cell.nameLabel.text = provider.name
-        cell.descriptionLabel.text = ACLocalizedString(provider.summary, nil)
+        if provider.summary != nil {
+            cell.descriptionLabel.text = ACLocalizedString(provider.summary!, nil)
+        }
+        else {
+            cell.descriptionLabel.text = ""
+        }
+        
         cell.selectedButton.isSelected = selectedCellRow == indexPath.row
         cell.selectedButton.tag = indexPath.row
         

@@ -29,6 +29,9 @@
 // Marker which defines version of the default DB in Adguard shared folder
 #define DB_DEFAULTDB_MARKER_FILE    @"defaultdb-marker.data"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wimplicit-retain-self"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ASDatabase
 /////////////////////////////////////////////////////////////////////
@@ -505,5 +508,7 @@ static ASDatabase *singletonDB;
     
     return YES;
 }
+
+#pragma clang diagnostic pop
 
 @end

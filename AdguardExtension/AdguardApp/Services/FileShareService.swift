@@ -78,10 +78,8 @@ class FileShareService : NSObject, UIDocumentPickerDelegate, FileShareServicePro
                 return
             }
 
-            guard let text: String = try String(contentsOf: url) else {
-                return
-            }
-
+            let text = try String(contentsOf: url)
+            
             url.stopAccessingSecurityScopedResource()
             importCompletionHandler?(text, nil)
 

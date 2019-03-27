@@ -25,7 +25,7 @@
 /**
     Error domain for problem in converter.
  */
-extern NSString *AESFConverterError;
+extern NSString * _Nonnull AESFConverterError;
 
 #define AESF_ERROR_WRONG_DICTIONARY     10
 
@@ -33,36 +33,36 @@ extern NSString *AESFConverterError;
  Dictionary key, it value represents converter error.
  Value type is NSError.
  */
-extern NSString *AESFConvertedErrorKey;
+extern NSString * _Nonnull AESFConvertedErrorKey;
 
 /**
  Dictionary key, it value represents total count of the converted rules
  (before truncation to limit).
  Value type is NSNumber.
  */
-extern NSString *AESFTotalConvertedCountKey;
+extern NSString * _Nonnull AESFTotalConvertedCountKey;
 /**
  Dictionary key, it value represents count of the converted rules.
  Value type is NSNumber.
  */
-extern NSString *AESFConvertedCountKey;
+extern NSString * _Nonnull AESFConvertedCountKey;
 /**
  Dictionary key, it value represents count of the erros during convertion.
  Value type is NSNumber.
  */
-extern NSString *AESErrorsCountKey;
+extern NSString * _Nonnull AESErrorsCountKey;
 /**
  Dictionary key, it value represents json with converted rules. 
  Value type is NSString.
  */
-extern NSString *AESFConvertedRulesKey;
+extern NSString * _Nonnull AESFConvertedRulesKey;
 
 /**
  Dictionary key, it value represents flag, 
  which indicates that maximum count of rules was exceeded. 
  Value type is NSNumber (bool).
  */
-extern NSString *AESFCOverLimitKey;
+extern NSString * _Nonnull AESFCOverLimitKey;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESFiltersConverter
@@ -81,7 +81,7 @@ extern NSString *AESFCOverLimitKey;
  @return Returns dictionary with results or nil if error occured.
  Dictionary contains keys: AESFConvertedCountKey, AESFConvertedRulesKey, AESFCOoverLimitKey
  */
-- (NSDictionary *)jsonFromRules:(NSArray *)rules upTo:(NSUInteger)limit optimize:(BOOL)optimize;
+- (nullable NSDictionary *)jsonFromRules:(nonnull NSArray *)rules upTo:(NSUInteger)limit optimize:(BOOL)optimize;
 
 @end
 
@@ -95,7 +95,7 @@ extern NSString *AESFCOverLimitKey;
 #pragma mark Properties and Public methods
 /////////////////////////////////////////////////////////////////////
 
-- (nullable AESFilterConverter *)init;
+- (null_unspecified instancetype)init;
 
 
 @end

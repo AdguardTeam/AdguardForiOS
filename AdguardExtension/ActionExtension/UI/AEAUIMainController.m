@@ -31,7 +31,6 @@
 #import "AESSupport.h"
 #import "ABECRequest.h"
 #import "ADProductInfo.h"
-#import "AEUICommons.h"
 #import "Adguard-Swift.h"
 
 #ifdef PRO
@@ -55,6 +54,8 @@
 - (BOOL)darkTheme {
     return [self.resources.sharedDefaults boolForKey:AEDefaultsDarkTheme];
 }
+
+@synthesize proStatus;
 
 @end
 

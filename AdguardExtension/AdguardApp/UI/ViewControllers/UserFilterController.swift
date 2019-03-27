@@ -115,12 +115,13 @@ class UserFilterController : UIViewController {
     
     @IBAction func importAction(_ sender: Any) {
         fileShare.importFile(parentController: self) { [weak self] (text, errorMessage) in
+            guard let strongSelf = self else { return }
             if errorMessage != nil {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: errorMessage)
+                ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: errorMessage)
             }
             else {
                 self?.model.importRules(text) { errorMessage in
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: errorMessage)
+                    ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: errorMessage)
                 }
             }
         }

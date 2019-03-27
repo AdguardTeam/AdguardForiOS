@@ -161,7 +161,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func login(withName name: String, password: String, onSuccess success:((Bool)->Void)?) {
         
         let params = [LOGIN_EMAIL_PARAM: name, LOGIN_PASSWORD_PARAM: password]
-        let url = URL(string: LOGIN_URL)
+        guard let url = URL(string: LOGIN_URL) else  {
+            success?(false)
+            DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
+            return
+        }
+        
         let request: URLRequest = ABECRequest.post(for: url, parameters: params)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in

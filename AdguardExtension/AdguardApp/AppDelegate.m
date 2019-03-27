@@ -26,8 +26,6 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
-#import "AEUIWelcomePagerDataSource.h"
-#import "AEUIMainController.h"
 
 #import "AESharedResources.h"
 
@@ -69,7 +67,6 @@ typedef enum : NSUInteger {
     
     AETFetchCompletionBlock _fetchCompletion;
     AEDownloadsCompletionBlock _downloadCompletion;
-    AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
     AESharedResources *_resources;
     AEService * _aeService;

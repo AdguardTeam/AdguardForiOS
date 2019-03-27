@@ -328,7 +328,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var resultData = Data()
         var resultError: Error?
         if rules.count != 0 {
-            let (jsonData, converted, overlimit, total, error) = convertRulesToJson(rules)
+            // todo: save counters in shared preferences
+            let (jsonData, _, _, _, error) = convertRulesToJson(rules)
             if jsonData != nil { resultData = jsonData! }
             resultError = error
         }
@@ -418,7 +419,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
-                var jsonData = NSMutableData(data: sSelf.safariService.readJson(forType: type.rawValue))
+                guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                var jsonData = NSMutableData(data: data)
                 jsonData = processData(jsonData, jsonRuleData)
                 
                 sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
@@ -510,7 +512,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
-                var jsonData = NSMutableData(data: sSelf.safariService.readJson(forType: type.rawValue))
+                guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                var jsonData = NSMutableData(data: data)
                 jsonData = processData(jsonData, jsonOldRuleData, jsonNewRuleData)
                 
                 sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)

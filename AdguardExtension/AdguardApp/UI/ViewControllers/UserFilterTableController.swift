@@ -226,8 +226,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     func addRule(rule: String) {
         
         model?.addRule(ruleText: rule, errorHandler: { [weak self] (error) in
-                        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error.description)
-                        self?.tableView.reloadData()
+                        guard let strongSelf = self else { return }
+                        ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: error.description)
+                        strongSelf.tableView.reloadData()
             },
                       completionHandler: { [weak self] in
                         DispatchQueue.main.async {
@@ -254,12 +255,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             
             guard let strongSelf = self else {return}
             if let parserError = error {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
+                ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: parserError.localizedDescription)
                 return
             }
             
             if let rules = result?.rules as? [ASDFilterRule] {
-                let ruleTexts = rules.map({$0.ruleText!})
+                let ruleTexts = rules.map({$0.ruleText})
                 self?.model?.addRules(ruleTexts: ruleTexts, errorHandler: { (error) in
                     
                     }, completionHandler: {

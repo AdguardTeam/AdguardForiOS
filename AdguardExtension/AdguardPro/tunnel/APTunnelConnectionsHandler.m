@@ -507,7 +507,7 @@
         APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
         if (udpPacket) {
             
-            NSLog(@"(APTunnelConnectionsHandler) handlePackets - got new udp packet:", udpPacket);
+            DDLogInfo(@"(APTunnelConnectionsHandler) handlePackets - got new udp packet: %@ ", udpPacket);
             
             APTUdpProxySession *session = [[APTUdpProxySession alloc] initWithUDPPacket:udpPacket delegate:self];
 

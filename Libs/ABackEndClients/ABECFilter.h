@@ -37,7 +37,7 @@
  @param client Object of the client for backend server
  @param metadata Metadata object
  */
-- (void)filterClient:(ABECFilterClient *)client metadata:(ABECFilterClientMetadata *)metadata;
+- (void)filterClient:(nonnull ABECFilterClient *)client metadata:(nonnull ABECFilterClientMetadata *)metadata;
 
 /**
  Calls this method when downloading filters/groups localizations completed
@@ -45,7 +45,7 @@
  @param client Object of the client for backend server
  @param i18n Localizations
  */
-- (void)filterClient:(ABECFilterClient *)client localizations:(ABECFilterClientLocalization *)i18n;
+- (void)filterClient:(nonnull ABECFilterClient *)client localizations:(nonnull ABECFilterClientLocalization *)i18n;
 
 /**
  Calls this method when downloading filter rules completed.
@@ -56,7 +56,7 @@
  
  @return Must return YES when all requested filter rules were obtained, otherwise NO.
  */
-- (BOOL)filterClient:(ABECFilterClient *)client filterId:(NSNumber *)filterId filter:(ASDFilter *)filter;
+- (BOOL)filterClient:(nonnull ABECFilterClient *)client filterId:(nonnull NSNumber *)filterId filter:(nullable ASDFilter *)filter;
 
 
 /**
@@ -65,7 +65,7 @@
  @param client Object of the client for backend server.
  @param error If error occurs, contains error object, otherwise nil.
  */
-- (void)filterClientFinishedDownloading:(ABECFilterClient *)client error:(NSError *)error;
+- (void)filterClientFinishedDownloading:(nonnull ABECFilterClient *)client error:(nullable NSError *)error;
 
 @end
 
@@ -81,11 +81,11 @@
 /**
  List of filters metadata.
  */
-@property (nonatomic) NSArray <ASDFilterMetadata *> *filters;
+@property (nonatomic, nullable) NSArray <ASDFilterMetadata *> *filters;
 /**
  List of groups metadata.
  */
-@property (nonatomic) NSArray <ASDFilterGroup *> *groups;
+@property (nonatomic, nullable) NSArray <ASDFilterGroup *> *groups;
 
 @end
 
@@ -112,7 +112,7 @@
 #pragma mark - ABECFilterClient
 /////////////////////////////////////////////////////////////////////
 
-extern NSString *ABECFilterError;
+extern NSString * _Nonnull ABECFilterError;
 #define ABECFILTER_ERROR_ASYNC_NOTINIT          300
 
 
@@ -127,12 +127,12 @@ extern NSString *ABECFilterError;
 /**
  This class has singleton object.
  */
-+ (ABECFilterClient *)singleton;
++ (nonnull ABECFilterClient *)singleton;
 
 /**
  Returns hostname for checking of connection to backend service.
  */
-+ (NSString *)reachabilityHost;
++ (nonnull NSString *)reachabilityHost;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Properties and public methods
@@ -143,21 +143,21 @@ extern NSString *ABECFilterError;
  @param filterIds List of the filter ids for downloading.
  @return Returns nil on success.
  */
-- (NSError *)filtersRequestWithFilterIds:(NSArray <NSNumber *>*)filterIds;
+- (nullable NSError *)filtersRequestWithFilterIds:(nonnull NSArray <NSNumber *>*)filterIds;
 
 /**
  Add download task for obtaining filters/groups metadata.
  
  @return Returns nil on success.
  */
-- (NSError *)metadataRequest;
+- (nullable NSError *)metadataRequest;
 
 /**
  Add download task for obtaining filters/groups localizations.
  
  @return Returns nil on success.
  */
-- (NSError *)i18nRequest;
+- (nullable NSError *)i18nRequest;
 
 /**
  Returns last version of filter from backend.
@@ -165,7 +165,7 @@ extern NSString *ABECFilterError;
  
  @return ASDFilter object or nil if error occurs
  */
-- (ASDFilter *)filterWithFilterId:(NSNumber *)filterId;
+- (nullable ASDFilter *)filterWithFilterId:(nonnull NSNumber *)filterId;
 
 /**
  Retuns metadata for filters and groups from backend.
@@ -173,7 +173,7 @@ extern NSString *ABECFilterError;
  
  @return ABECFilterClientMetadata object or nil if error occurs
  */
-- (ABECFilterClientMetadata *)loadMetadataWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
+- (nullable ABECFilterClientMetadata *)loadMetadataWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
 
 /**
  Retuns localizations for filters and groups from backend.
@@ -181,12 +181,12 @@ extern NSString *ABECFilterError;
  
  @return ABECFilterClientLocalization object or nil if error occurs
  */
-- (ABECFilterClientLocalization *)loadI18nWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
+- (nullable ABECFilterClientLocalization *)loadI18nWithTimeoutInterval:(nullable NSNumber*)timeoutInterval;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark  Async support methods
 
-@property (weak) id <ABECFilterAsyncDelegateProtocol> delegate;
+@property (weak, nullable) id <ABECFilterAsyncDelegateProtocol> delegate;
 
 /**
  Resets async session.
@@ -195,10 +195,10 @@ extern NSString *ABECFilterError;
  @param updateTimeout Timeout for download tasks.
  @param block Completion block, which is called on session serial queue. 
  */
-- (void)resetSession:(NSString *)sessionId
+- (void)resetSession:(nonnull NSString *)sessionId
        updateTimeout:(NSTimeInterval)updateTimeout
-            delegate:(id<ABECFilterAsyncDelegateProtocol>)delegate
-     completionBlock:(void (^)(BOOL updateInProgress))block;
+            delegate:(nullable id<ABECFilterAsyncDelegateProtocol>)delegate
+     completionBlock:(nullable void (^)(BOOL updateInProgress))block;
 
 /**
  This method needs call when App is launched from background downloads event.
@@ -207,8 +207,8 @@ extern NSString *ABECFilterError;
  @param updateTimeout Timeout for download tasks.
  @param delegate Delegate object, which will be notifed about new data.
  */
-- (void)handleBackgroundWithSessionId:(NSString *)sessionId
+- (void)handleBackgroundWithSessionId:(nonnull NSString *)sessionId
                         updateTimeout:(NSTimeInterval)updateTimeout
-                             delegate:(id<ABECFilterAsyncDelegateProtocol>)delegate;
+                             delegate:(nullable id<ABECFilterAsyncDelegateProtocol>)delegate;
 
 @end

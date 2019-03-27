@@ -67,7 +67,7 @@ extern NSString* __nonnull APVpnChangedNotification;
 /**
  DNS providers <DnsProviderInfo>
  */
-@property (nonnull) NSArray<DnsProviderInfo*> *providers;
+@property (nonnull, readonly) NSArray<DnsProviderInfo*> *providers;
 
 /**
  active remote DNS server

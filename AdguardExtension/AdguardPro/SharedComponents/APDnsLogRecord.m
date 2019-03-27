@@ -46,8 +46,6 @@
         _srcPort = srcPort;
         _dnsServer = dnsServer;
         _hash = [srcPort longLongValue] * 100000 + [ID unsignedIntegerValue];
-        _isWhitelisted = NO;
-        _isBlacklisted = NO;
     }
     
     return self;
@@ -107,10 +105,7 @@
         _dnsServer = [aDecoder decodeObjectForKey:@"dnsServer"];
         _requests = [aDecoder decodeObjectForKey:@"requests"];
         _responses = [aDecoder decodeObjectForKey:@"responses"];
-        _isWhitelisted = [[aDecoder decodeObjectForKey:@"isWhitelisted"] boolValue];
-        _isBlacklisted = [[aDecoder decodeObjectForKey:@"isBlacklisted"] boolValue];
         _isTracker = [[aDecoder decodeObjectForKey:@"isTracker"] boolValue];
-        _subscriptionUUID = [aDecoder decodeObjectForKey:@"subscriptionUUID"];
     }
     return self;
 }
@@ -123,19 +118,11 @@
     [aCoder encodeObject:self.dnsServer forKey:@"dnsServer"];
     [aCoder encodeObject:self.requests forKey:@"requests"];
     [aCoder encodeObject:self.responses forKey:@"responses"];
-    [aCoder encodeObject:@(self.isWhitelisted) forKey:@"isWhitelisted"];
-    [aCoder encodeObject:@(self.isBlacklisted) forKey:@"isBlacklisted"];
     [aCoder encodeObject:@(self.isTracker) forKey:@"isTracker"];
-    [aCoder encodeObject:self.subscriptionUUID forKey:@"subscriptionUUID"];
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Description, equals, hash
-
-//- (NSString *)description
-//{
-//    return [self stringValue];
-//}
 
 - (BOOL)isEqual:(id)object {
 
@@ -154,6 +141,5 @@
 {
     return _hash;
 }
-
 
 @end

@@ -73,7 +73,7 @@ class AddCustomFilterController: BottomAlertController {
             DispatchQueue.main.async {
                 guard let strongSelf = self else {return}
                 if let parserError = error {
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
+                    ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: parserError.localizedDescription)
                     return
                 }
 

@@ -26,14 +26,11 @@
 @implementation ACLFileLogger
 
 - (void)flush{
-    
     @try {
-        NSFileHandle *handler = [self currentLogFileHandle];
-        [handler synchronizeFile];
+        [super flush];
     }
     @catch (NSException *exception) {
     }
-
 }
 
 @end

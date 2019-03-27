@@ -558,6 +558,19 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     return result.copy;
 }
 
+- (NSMutableAttributedString *)attributedStringFromHtml {
+    
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError* error;
+    NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithData:data
+                                                                                options:options
+                                                                     documentAttributes:nil error:&error];
+    
+    return string;
+}
+
 @end
 
 @implementation NSString (Utils_Private)
@@ -815,19 +828,6 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     return foundFor;
 }
 
-- (NSMutableAttributedString *)attributedStringFromHtml {
-    
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSError* error;
-    NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
-    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithData:data
-                                                                 options:options
-                                                      documentAttributes:nil error:&error];
-    
-    return string;
-}
-
 @end
 
 #pragma mark - Private Fuctions
@@ -898,6 +898,10 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 }
 
 NSString* ACLocalizedString(NSString* key, NSString* comment) {
+    
+    if (!key) {
+        return @"";
+    }
     
     NSString* localizedString = NSLocalizedString(key, nil);
     

@@ -36,19 +36,19 @@
     Create request object with POST method.
     @param parameters   May be nil.
  */
-+ (nonnull NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
++ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary *)parameters;
 
 /**
     Create request object with GET method.
     @param parameters   May be nil.
  */
-+ (id)getRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
++ (nonnull id) getRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary *)parameters;
 
 /**
     Create parameter string from dictionary.
     Parameters values is converted using percent escaping.
  */
-+ (NSString *)createStringFromParameters:(NSDictionary *)parameters;
++ (nonnull NSString *) createStringFromParameters:(nonnull NSDictionary *)parameters;
 
 @end
 

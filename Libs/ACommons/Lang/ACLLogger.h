@@ -16,13 +16,11 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define DD_LEGACY_MACROS 1
-
 #import <Foundation/Foundation.h>
+#import "Logger/Lumberjack/DDLogMacros.h"
 #import "Logger/Lumberjack/DDFileLogger.h"
 #import "Logger/Lumberjack/DDTTYLogger.h"
-#import "Logger/Lumberjack/DDASLLogger.h"
-#import "Logger/Lumberjack/DDLegacyMacros.h"
+#import "Logger/Lumberjack/DDOSLogger.h"
 
 //Max log file size
 #define ACL_MAX_LOG_FILE_SIZE     512000
@@ -38,13 +36,13 @@ typedef enum{
 
 //---------------------------------------------------
 
-#define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, DDLogFlagVerbose, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
-#define DDLogVerboseTrace(fmt, ...) LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"(%@[%p]: %@) " fmt, THIS_FILE, self, THIS_METHOD,  ##__VA_ARGS__)
+#define DDLogVerboseTrace(fmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagVerbose,   0, nil, __PRETTY_FUNCTION__, @"(%@[%p]: %@) " fmt, THIS_FILE, self, THIS_METHOD,  ##__VA_ARGS__)
 
-#define DDLogDebugTrace() LOG_OBJC_MAYBE(LOG_ASYNC_DEBUG, ddLogLevel, LOG_FLAG_DEBUG, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogDebugTrace()   LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
-#define DDLogErrorTrace() LOG_OBJC_MAYBE(LOG_ASYNC_ERROR, ddLogLevel, LOG_FLAG_ERROR, 0, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogErrorTrace()   LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
 extern int ddLogLevel;
 

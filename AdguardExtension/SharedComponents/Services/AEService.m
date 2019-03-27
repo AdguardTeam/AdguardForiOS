@@ -51,7 +51,7 @@ typedef enum {
     
     dispatch_queue_t workQueue;
     AESAntibanner *antibanner;
-    AESharedResources *_sharedResources;
+    id<AESharedResourcesProtocol> _sharedResources;
     ContentBlockerService *_contentBlockerService;
     
     NSMutableArray *_onReadyBlocks;

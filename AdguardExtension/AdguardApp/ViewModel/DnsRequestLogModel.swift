@@ -88,7 +88,7 @@ class DnsRequestLogViewModel {
             }
             
             for logRecord in logRecords.reversed() {
-                guard let firstRequest = logRecord.requests.first else { return }
+                guard let firstRequest = logRecord.requests?.first else { return }
                 let type = firstRequest.type.description
                 let responses = logRecord.responses?.map({ $0.stringValue ?? "" })
                 let record = LogRecord(name: firstRequest.name, time: sSelf.dateFromRecord(logRecord), type: type, serverName: logRecord.dnsServer.name, responses: responses)

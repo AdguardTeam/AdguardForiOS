@@ -311,7 +311,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="VE8-I7-1eE">
-                            <rect key="frame" x="0.0" y="360" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="332" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -406,22 +406,22 @@
                                             <segue destination="Das-Gb-UPp" kind="show" id="oDu-UM-j6Y"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="72" id="0Ew-dZ-1Qh">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="72"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="0Ew-dZ-1Qh">
+                                        <rect key="frame" x="0.0" y="216" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Ew-dZ-1Qh" id="MyS-5i-f66">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="71.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filters-icon" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-S6-L1O">
-                                                    <rect key="frame" x="24" y="24" width="24" height="24"/>
+                                                    <rect key="frame" x="24" y="10" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="MG9-aD-77G"/>
                                                         <constraint firstAttribute="height" constant="24" id="uay-zw-Dgu"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tunnel Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPC-fU-UPD" customClass="ThemableLabel" customModule="Adguard">
-                                                    <rect key="frame" x="64" y="18" width="253" height="18"/>
+                                                    <rect key="frame" x="64" y="18" width="253" height="5.6666666666666679"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -429,8 +429,8 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niO-Pl-Xad" customClass="ThemableLabel" customModule="Adguard">
-                                                    <rect key="frame" x="64" y="38" width="253" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niO-Pl-Xad" customClass="ThemableLabel" customModule="Adguard">
+                                                    <rect key="frame" x="64" y="25.666666666666668" width="253" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -444,6 +444,7 @@
                                                 <constraint firstItem="pPC-fU-UPD" firstAttribute="leading" secondItem="tTP-S6-L1O" secondAttribute="trailing" constant="16" id="4Ba-q0-2Bo"/>
                                                 <constraint firstItem="tTP-S6-L1O" firstAttribute="centerY" secondItem="MyS-5i-f66" secondAttribute="centerY" id="7Yf-xQ-IJN"/>
                                                 <constraint firstAttribute="trailing" secondItem="pPC-fU-UPD" secondAttribute="trailing" constant="24" id="KW3-Hj-Afr"/>
+                                                <constraint firstAttribute="bottom" secondItem="niO-Pl-Xad" secondAttribute="bottom" constant="18" id="NU8-YI-PZF"/>
                                                 <constraint firstItem="niO-Pl-Xad" firstAttribute="top" secondItem="pPC-fU-UPD" secondAttribute="bottom" constant="2" id="TwM-ii-qFm"/>
                                                 <constraint firstItem="tTP-S6-L1O" firstAttribute="leading" secondItem="MyS-5i-f66" secondAttribute="leading" constant="24" id="Vkv-4M-RFi"/>
                                                 <constraint firstItem="pPC-fU-UPD" firstAttribute="top" secondItem="MyS-5i-f66" secondAttribute="top" constant="18" id="lyH-2y-TQS"/>
@@ -457,7 +458,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="72" id="eeW-qc-wpC">
-                                        <rect key="frame" x="0.0" y="288" width="375" height="72"/>
+                                        <rect key="frame" x="0.0" y="260" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eeW-qc-wpC" id="JnM-Tt-fsJ">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="71.666666666666671"/>
@@ -638,7 +639,7 @@
                                     <segue destination="5ol-3D-VBk" kind="embed" id="xYI-16-E9I"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBx-dq-oa2" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBx-dq-oa2" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="730" width="375" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="gkA-2p-jKc"/>
@@ -724,7 +725,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="99.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DzF-Qn-Xxp">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DzF-Qn-Xxp">
                                             <rect key="frame" x="0.0" y="0.0" width="64" height="99.666666666666671"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="brp-yc-vqK"/>
@@ -964,8 +965,8 @@
                                                         <constraint firstAttribute="height" constant="24" id="q5x-Ka-oxh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjK-ON-EB4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="14" y="49" width="251" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjK-ON-EB4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="40.333333333333336" width="299" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1614,7 +1615,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dU-v6-hwM">
                                         <rect key="frame" x="0.0" y="66" width="375" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03E-rd-Slw" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03E-rd-Slw" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="iJt-wl-OQ2"/>
@@ -1659,7 +1660,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2w-mR-ccI">
                                         <rect key="frame" x="0.0" y="126.00000000000001" width="375" height="60.666666666666671"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh1-EV-7KD" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh1-EV-7KD" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="DO2-G0-bCL"/>
@@ -1704,7 +1705,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Fq-1p-6Tn">
                                         <rect key="frame" x="0.0" y="186" width="375" height="60.666666666666657"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrO-hc-ilW" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrO-hc-ilW" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="GIj-nm-go2"/>
@@ -1749,7 +1750,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feR-Mr-u4Q">
                                         <rect key="frame" x="0.0" y="245.99999999999997" width="375" height="60.666666666666657"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-J3-lVl" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-J3-lVl" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="C0S-Yt-lhH"/>

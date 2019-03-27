@@ -517,8 +517,7 @@
         [_packetsForSend removeAllObjects];
         _waitWrite = YES;
 
-        NSArray *specialPackets = [self processingOutgoingPackets:packets];
-        NSArray *blacklistDatagrams = specialPackets[1];
+        [self processingOutgoingPackets:packets];
         
         [_saveLogExecution executeOnceForInterval];
     
@@ -558,11 +557,6 @@
             }
         };
         
-        if (blacklistDatagrams.count) {
-        
-            [self sendBackBlacklistDnsDatagrams:blacklistDatagrams];
-        }
-        
         // write packets to main UDP session
         [self.udpSession writeMultipleDatagrams:packets completionHandler:completionForMainWrite];
     }
@@ -595,14 +589,10 @@
  Performs separating of the outgoing packets on whitelisted, blacklisted. 
  Creates log records if needs it.
  */
-- (NSArray <NSArray *> *)processingOutgoingPackets:(NSMutableArray<NSData *> *)packets {
-    
-    NSMutableArray *whitelistPackets = [NSMutableArray array];
-    NSMutableArray *blacklistDatagrams = [NSMutableArray array];
+- (void)processingOutgoingPackets:(NSMutableArray<NSData *> *)packets {
     
     @autoreleasepool {
         
-        NSMutableArray *blacklistPackets = [NSMutableArray array];
         for (NSData *packet in packets) {
             
             APDnsDatagram *datagram = [[APDnsDatagram alloc] initWithData:packet];
@@ -613,120 +603,38 @@
             
             if (datagram.isRequest) {
                 
-                BOOL whitelisted = NO;
-                BOOL blacklisted = NO;
-                
                 //Check that this is request to domain from whitelist or blacklist.
                 NSString *name = [datagram.requests[0] name];
-                NSString *ip;
-                NSString *subscriptionUUID;
                 
                 if (! [NSString isNullOrEmpty:name]) {
                     
                     // user filter lists are processed first
-                    if ([self.delegate isUserWhitelistDomain:name]) {
-                        whitelisted = YES;
-                    }
-                    else if ([self.delegate isUserBlacklistDomain:name]) {
-                        blacklisted = YES;
-                    }
-                    else if ([self.delegate checkHostsDomain:name ip:&ip subscriptionUUID:&subscriptionUUID]) {
-                        blacklisted = YES;
-                    }
-                    else if ([self.delegate checkSubscriptionBlacklistDomain:name subscriptionUUID:&subscriptionUUID]) {
-                        blacklisted = YES;
-                    }
+                   
+                    [_outgoingDnsDatagrams addObject:datagram];
                     
-                    if(whitelisted) {
-                        
-                        [whitelistPackets addObject:packet];
-                    }
-                    else if (blacklisted) {
-                        
-                        [blacklistDatagrams addObject: ip ? @[datagram, ip] : @[datagram]];
-                        [blacklistPackets addObject:packet];
-                    }
-                    else {
-                        [_outgoingDnsDatagrams addObject:datagram];
-                        
-                        if(_delegate.provider.dns64Prefix.length && datagram.requests.firstObject.type.intValue == APDnsResourceType.aaaaType.intValue) {
-                            [_dns64MappedOutgoingPackets addObjectsFromArray:[self mappedOutgoingPackets:@[packet]]];
-                        }
+                    if(_delegate.provider.dns64Prefix.length && datagram.requests.firstObject.type.intValue == APDnsResourceType.aaaaType.intValue) {
+                        [_dns64MappedOutgoingPackets addObjectsFromArray:[self mappedOutgoingPackets:@[packet]]];
                     }
                     
                     tracker = [self.delegate isTrackerslistDomain:name];
                 }
                 
                 //Create DNS log record, if logging is enabled.
-                [self gettingDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelisted blacklist:blacklisted subscriptionUUID:subscriptionUUID];
-            }
-        }
-        
-        if (whitelistPackets.count) {
-            [packets removeObjectsInArray:whitelistPackets];
-        }
-        if (blacklistPackets.count) {
-            [packets removeObjectsInArray:blacklistPackets];
-        }
-    }
-    return @[whitelistPackets, blacklistDatagrams];
-}
-
-- (void)sendBackBlacklistDnsDatagrams:(NSArray <NSArray *> *)dnsDatagrams {
-    
-
-    BOOL logUpdated = NO;
-    NSMutableArray *datagrams = [NSMutableArray arrayWithCapacity:dnsDatagrams.count];
-    for (NSArray *item in dnsDatagrams) {
-        
-        APDnsDatagram* datagram = item[0];
-        NSString* ip = item.count > 1 ? item[1] : nil;
-        
-        if ([datagram convertToBlockingResponseWithIP:ip]) {
-            
-            [self settingDnsRecordForIncomingDnsDatagram:datagram session:_udpSession];
-            
-            logUpdated = YES;
-            
-            NSData *datagramPayload = [datagram generatePayload];
-            if (datagramPayload) {
-                [datagrams addObject:datagramPayload];
+                [self gettingDnsRecordForOutgoingDnsDatagram:datagram];
             }
         }
     }
-    
-    if (datagrams.count == 0) {
-        return;
-    }
-    
-    if (logUpdated) {
-        [_saveLogExecution executeOnceForInterval];
-    }
-    
-    NSMutableArray *protocols = [NSMutableArray new];
-    
-    NSArray *ipPackets = [self ipPacketsWithDatagrams:datagrams];
-    for (int i = 0; i < ipPackets.count; i++) {
-        
-        [protocols addObject:_basePacket.aFamily];
-    }
-    
-    //write data from remote endpoint into local TUN interface
-    [self.delegate.provider.packetFlow writePackets:ipPackets withProtocols:protocols];
-
 }
 
-- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist subscriptionUUID:(NSString*) uuid {
+
+- (void)gettingDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram {
     
-    [self logDnsRecordForOutgoingDnsDatagram:datagram whitelist:whitelist blacklist:blacklist];
+    [self logDnsRecordForOutgoingDnsDatagram:datagram];
     
     APDnsLogRecord *record = [[APDnsLogRecord alloc] initWithID:datagram.ID srcPort:_basePacket.srcPort dnsServer:_currentDnsServer];
     record.requests = datagram.requests;
     
-    record.isWhitelisted = whitelist;
-    record.isBlacklisted = blacklist;
     record.isTracker = tracker;
-    record.subscriptionUUID = uuid;
     
     if (![_dnsRecordsSet containsObject:record]) {
         
@@ -735,7 +643,7 @@
     }
 }
 
-- (void)logDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram whitelist:(BOOL)whitelist blacklist:(BOOL)blacklist {
+- (void)logDnsRecordForOutgoingDnsDatagram:(APDnsDatagram *)datagram {
     
     NSString *dstHost;
     NSString *dstPort;

@@ -89,12 +89,12 @@
  */
 @interface ASDFilterGroup : ACObject
 
-- (id)initFromDbResult:(FMResultSet *)result;
+- (nullable id)initFromDbResult:(nonnull FMResultSet *)result;
 
-@property (nonatomic) NSNumber *groupId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSNumber *displayNumber;
-@property (nonatomic, nullable) NSNumber *enabled;
+@property (nonatomic, nonnull) NSNumber *groupId;
+@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, nonnull) NSNumber *displayNumber;
+@property (nonatomic, nonnull) NSNumber *enabled;
 
 @end
 
@@ -110,11 +110,11 @@
  */
 @interface ASDFilterGroupLocalization : ACObject
 
-- (id)initFromDbResult:(FMResultSet *)result;
+- (nullable id)initFromDbResult:(nonnull FMResultSet *)result;
 
-@property (nonatomic) NSNumber *groupId;
-@property (nonatomic) NSString *lang;
-@property (nonatomic) NSString *name;
+@property (nonatomic, nullable) NSNumber *groupId;
+@property (nonatomic, nullable) NSString *lang;
+@property (nonatomic, nullable) NSString *name;
 
 @end
 
@@ -131,15 +131,15 @@
  
  @return Returns receiver, or nil if errors occurs.
  */
-- (id)initWithLocalizations:(NSArray <ASDFilterGroupLocalization *> *)localizations;
+- (nullable id)initWithLocalizations:(nonnull NSArray <ASDFilterGroupLocalization *> *)localizations;
 /**
  Initializes object with appropriate dictionary data
  
  @return Returns receiver, or nil if errors occurs.
  */
-- (id)initWithDictionary:(NSDictionary <NSNumber *, NSDictionary <NSString *, ASDFilterGroupLocalization *> *> *)dictionary;
+- (nullable id)initWithDictionary:(nonnull NSDictionary <NSNumber *, NSDictionary <NSString *, ASDFilterGroupLocalization *> *> *)dictionary;
 
-@property (nonatomic, readonly) NSArray <ASDFilterGroupLocalization *> *localizations;
+@property (nonatomic, readonly, nullable) NSArray <ASDFilterGroupLocalization *> *localizations;
 
 /**
  Returns localization for current system language.
@@ -148,7 +148,7 @@
  @return localization object or nil if error occurs.
  If i18n will not found returns description from group object.
  */
-- (ASDFilterGroupLocalization *)localizationForGroup:(ASDFilterGroup *)group;
+- (nullable ASDFilterGroupLocalization *)localizationForGroup:(nonnull ASDFilterGroup *)group;
 
 @end
 
@@ -197,35 +197,35 @@ typedef enum : NSUInteger {
 /**
  Initializing using Database result object.
  */
-- (id)initFromDbResult:(FMResultSet *)result;
+- (nullable id)initFromDbResult:(nonnull FMResultSet *)result;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////////
 
-@property (nonatomic) NSNumber *filterId;
-@property (nonatomic) NSDate   *updateDate;
-@property (nonatomic) NSString *updateDateString;
-@property (nonatomic) NSDate   *checkDate;
-@property (nonatomic) NSString *checkDateString;
-@property (nonatomic) NSString *version;
-@property (nonatomic) NSNumber *enabled;
-@property (nonatomic) NSNumber *editable;
-@property (nonatomic) NSNumber *removable;
-@property (nonatomic) NSNumber *displayNumber;
-@property (nonatomic) NSNumber *groupId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *descr;
-@property (nonatomic) NSString *homepage;
-@property (nonatomic) NSNumber *expires;
-@property (nonatomic) NSString *subscriptionUrl;
-@property (nonatomic) NSString *timeAdded;
+@property (nonatomic, nonnull) NSNumber *filterId;
+@property (nonatomic, nullable) NSDate   *updateDate;
+@property (nonatomic, nullable) NSString *updateDateString;
+@property (nonatomic, nullable) NSDate   *checkDate;
+@property (nonatomic, nullable) NSString *checkDateString;
+@property (nonatomic, nullable) NSString *version;
+@property (nonatomic, nonnull) NSNumber *enabled;
+@property (nonatomic, nonnull) NSNumber *editable;
+@property (nonatomic, nonnull) NSNumber *removable;
+@property (nonatomic, nonnull) NSNumber *displayNumber;
+@property (nonatomic, nonnull) NSNumber *groupId;
+@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, nullable) NSString *descr;
+@property (nonatomic, nullable) NSString *homepage;
+@property (nonatomic, nullable) NSNumber *expires;
+@property (nonatomic, nonnull) NSString *subscriptionUrl;
+@property (nonatomic, nullable) NSString *timeAdded;
 
 /// List of NSString objects
 /// that contains two-letter codes of languages, where this filter fits.
-@property (nonatomic) NSArray<NSString*> *langs;
+@property (nonatomic, nullable) NSArray<NSString*> *langs;
 
-@property (nonatomic) NSArray<ASDFilterTagMeta*> *tags;
+@property (nonatomic, nullable) NSArray<ASDFilterTagMeta*> *tags;
 
 @end
 
@@ -241,12 +241,12 @@ typedef enum : NSUInteger {
 /**
  Initializing using Database result object.
  */
-- (id)initFromDbResult:(FMResultSet *)result;
+- (nullable id)initFromDbResult:(nonnull FMResultSet *)result;
 
-@property (nonatomic) NSNumber *filterId;
-@property (nonatomic) NSString *lang;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *descr;
+@property (nonatomic, nonnull) NSNumber *filterId;
+@property (nonatomic, nonnull) NSString *lang;
+@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, nullable) NSString *descr;
 
 @end
 
@@ -263,15 +263,15 @@ typedef enum : NSUInteger {
  
  @return Returns receiver, or nil if errors occurs.
  */
-- (id)initWithLocalizations:(NSArray <ASDFilterLocalization *> *)localizations;
+- (nullable id)initWithLocalizations:(nonnull NSArray <ASDFilterLocalization *> *)localizations;
 /**
  Initializes object with appropriate dictionary data
  
  @return Returns receiver, or nil if errors occurs.
  */
-- (id)initWithDictionary:(NSDictionary <NSNumber *, NSDictionary <NSString *, ASDFilterLocalization *> *> *)dictionary;
+- (nullable id)initWithDictionary:(nonnull NSDictionary <NSNumber *, NSDictionary <NSString *, ASDFilterLocalization *> *> *)dictionary;
 
-@property (nonatomic, readonly) NSArray <ASDFilterLocalization *> *localizations;
+@property (nonatomic, readonly, nullable) NSArray <ASDFilterLocalization *> *localizations;
 
 /**
  Returns localization for current system language.
@@ -280,7 +280,7 @@ typedef enum : NSUInteger {
  @return localization object or nil if error occurs.
  If i18n will not found returns description from filterMetadata object.
  */
-- (ASDFilterLocalization *)localizationForFilter:(ASDFilterMetadata *)filterMetadata;
+- (nullable ASDFilterLocalization *)localizationForFilter:(nonnull ASDFilterMetadata *)filterMetadata;
 
 @end
 
@@ -296,14 +296,14 @@ typedef enum : NSUInteger {
  */
 @interface ASDFilter : ACObject
 
-@property (nonatomic) NSNumber *filterId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *version;
-@property (nonatomic) NSString *updateDateString;
-@property (nonatomic) NSDate *updateDate;
+@property (nonatomic, nonnull) NSNumber *filterId;
+@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic, nullable) NSString *version;
+@property (nonatomic, nullable) NSString *updateDateString;
+@property (nonatomic, nullable) NSDate *updateDate;
 
 /// Array of ASDFilterRule objects.
-@property (nonatomic) NSArray *rules;
+@property (nonatomic, nullable) NSArray *rules;
 
 @end
 
@@ -319,7 +319,7 @@ typedef enum : NSUInteger {
 /**
  Initializing using Database result object.
  */
-- (id)initFromDbResult:(FMResultSet *)result;
+- (nullable id)initFromDbResult:(nonnull FMResultSet *)result;
 
 /**
  Initializing using parameters.
@@ -330,12 +330,12 @@ typedef enum : NSUInteger {
  @return Initialized instance.
  If ruleText is nil, then object.ruleText is empty string.
  */
-- (nonnull id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled;
+- (nonnull id)initWithText:(nonnull NSString *)ruleText enabled:(BOOL)enabled;
 
-@property (nonatomic) NSNumber *filterId;
-@property (nonatomic) NSNumber *ruleId;
-@property (nonatomic) NSString *ruleText;
-@property (nonatomic) NSNumber *isEnabled;
+@property (nonatomic, nonnull) NSNumber *filterId;
+@property (nonatomic, nonnull) NSNumber *ruleId;
+@property (nonatomic, nonnull) NSString *ruleText;
+@property (nonatomic, nonnull) NSNumber *isEnabled;
 
 /**
  Checks object if it is kind of ASDFilterRule class, 
@@ -343,7 +343,7 @@ typedef enum : NSUInteger {
 
  @param object Candidate object
  */
-- (BOOL)isEqualRuleText:(id)object;
+- (BOOL)isEqualRuleText:(nonnull id)object;
 
 @end
 

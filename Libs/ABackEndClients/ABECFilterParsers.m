@@ -266,8 +266,10 @@
     }
     
     NSDictionary *filters = dataDict[@"filters"];
+    ASSIGN_WEAK(self);
     [filters enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        ASSIGN_STRONG(self);
         NSNumber *filterId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -284,12 +286,13 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        _filtersI18nDict[filterId] = [targetLangs copy];
+        USE_STRONG(self)->_filtersI18nDict[filterId] = [targetLangs copy];
     }];
     
     NSDictionary *groups = dataDict[@"groups"];
     [groups enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        ASSIGN_STRONG(self);
         NSNumber *groupId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -305,7 +308,7 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        _groupsI18nDict[groupId] = [targetLangs copy];
+        USE_STRONG(self)->_groupsI18nDict[groupId] = [targetLangs copy];
     }];
     
     return YES;

@@ -38,7 +38,7 @@
  
  @return Returns object, or nil if error occurs.
  */
-- (id)initWithID:(NSNumber *)ID srcPort:(NSString *)srcPort dnsServer:(DnsServerInfo *)dnsServer;
+- (nullable id)initWithID:(nullable NSNumber *)ID srcPort:(nullable NSString *)srcPort dnsServer:(nonnull DnsServerInfo *)dnsServer;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -46,32 +46,23 @@
 /**
  Timestamp log record.
  */
-@property (nonatomic, readonly) NSDate *recordDate;
+@property (nonatomic, readonly, nonnull) NSDate *recordDate;
 /**
  DNS request id.
  */
-@property (readonly, nonatomic) NSNumber *ID;
+@property (readonly, nonatomic, nonnull) NSNumber *ID;
 /**
  Port of the app, that made request.
 */
-@property (readonly, nonatomic) NSString *srcPort;
+@property (readonly, nonatomic, nonnull) NSString *srcPort;
 /**
  DNS server description.
  */
-@property (readonly, nonatomic) DnsServerInfo *dnsServer;
-/**
- Indicates that this record contains domain from whitelist.
- */
-@property (nonatomic) BOOL isWhitelisted;
-/**
- Indicates that this record contains domain from blacklist.
- blacklist - this is rules list from the User Filter, which have syntax `||domain.name^`
- */
-@property (nonatomic) BOOL isBlacklisted;
+@property (readonly, nonatomic, nonnull) DnsServerInfo *dnsServer;
 /**
  DNS request.
  */
-@property (nonatomic) NSArray <APDnsRequest *> *requests;
+@property (nonatomic, nullable) NSArray <APDnsRequest *> *requests;
 /**
  DNS Response.
  */
@@ -79,16 +70,11 @@
 /**
  Returns DNS response, which will be used for presentation.
  */
-@property (nonatomic, readonly) APDnsResponse *preferredResponse;
+@property (nonatomic, readonly, nullable) APDnsResponse *preferredResponse;
 
 /**
  Indicates that this record contains domain from trackers list.
  */
 @property (nonatomic) BOOL isTracker;
-
-/**
- Stores the uuid of blocking subscription that blocked this request
- */
-@property (nonatomic) NSString* subscriptionUUID;
 
 @end

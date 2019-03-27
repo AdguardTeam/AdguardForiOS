@@ -59,15 +59,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             return false
         }
         
-        let appLogsUrl = APSharedResources.sharedAppLogsURL()
-        let logsUrl = URL(string: (appLogsUrl?.absoluteString.dropLast().appending(".dnsproxy.txt"))!)
-        
-        do {
-            try " ".write(to: logsUrl!, atomically: true, encoding: .utf8)
-        } catch let error as NSError {
-            NSLog("Unable to create directory \(error.debugDescription)")
-        }
-        
         config.listenAddr = listenAddr
         config.listenPort = listenPort
         config.bootstrapDNS = bootstrapDns

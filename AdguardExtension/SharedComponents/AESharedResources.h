@@ -37,122 +37,122 @@
 /**
  User Defaults key that defines enable/disable filtration.
  */
-extern NSString *AEDefaultsAdguardEnabled;
+extern NSString * _Nonnull AEDefaultsAdguardEnabled;
 
 /**
  User Defaults key that defines app performs first start or not.
  */
-extern NSString *AEDefaultsFirstRunKey;
+extern NSString * _Nonnull AEDefaultsFirstRunKey;
 /**
  User Defaults key that defines schema version for upgrade procedure.
  */
-extern NSString *AEDefaultsProductSchemaVersion;
+extern NSString * _Nonnull AEDefaultsProductSchemaVersion;
 
 /**
  User Defaults key that defines last used build version for upgrade procedure.
  */
-extern NSString *AEDefaultsProductBuildVersion;
+extern NSString * _Nonnull AEDefaultsProductBuildVersion;
 
 /**
  User Defaults key that defines last time, when the application checked updates of filters.
  */
-extern NSString *AEDefaultsCheckFiltersLastDate;
+extern NSString * _Nonnull AEDefaultsCheckFiltersLastDate;
 
 /**
  User Defaults key that define maximum of the rules count,
  which may be converted to content blocking JSON.
  */
-extern NSString *AEDefaultsJSONMaximumConvertedRules;
+extern NSString * _Nonnull AEDefaultsJSONMaximumConvertedRules;
 
 /**
  User Defaults key that define current count of the rules, which put into converter.
  */
-extern NSString *AEDefaultsJSONRulesForConvertion;
+extern NSString * _Nonnull AEDefaultsJSONRulesForConvertion;
 
 /**
  User Defaults key that define current count of the converted rules.
  */
-extern NSString *AEDefaultsJSONConvertedRules;
+extern NSString * _Nonnull AEDefaultsJSONConvertedRules;
 
 /**
  User Defaults key, which define that overlimit of rules was reached.
  */
-extern NSString *AEDefaultsJSONRulesOverlimitReached;
+extern NSString * _Nonnull AEDefaultsJSONRulesOverlimitReached;
 
 /**
  User Defaults key that define optimized procedure of the convertion for JSON Converter.
  */
-extern NSString *AEDefaultsJSONConverterOptimize;
+extern NSString * _Nonnull AEDefaultsJSONConverterOptimize;
 
 /**
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
-extern NSString *AEDefaultsWifiOnlyUpdates;
+extern NSString * _Nonnull AEDefaultsWifiOnlyUpdates;
 
 /**
  User Defaults key, which defines that video tutorial cell must be hidden.
  */
-extern NSString *AEDefaultsHideVideoTutorial;
+extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
 
 /**
  User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
  */
-extern NSString *AEDefaultsHideSafariVideoTutorial;
+extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 
 /**
  User Defaults key, which defines total request count.
  */
-extern NSString *AEDefaultsTotalRequestsCount;
+extern NSString * _Nonnull AEDefaultsTotalRequestsCount;
 
 /**
  User Defaults key, which defines total request time.
  */
-extern NSString *AEDefaultsTotalRequestsTime;
+extern NSString * _Nonnull AEDefaultsTotalRequestsTime;
 /**
  User Defaults key, which defines total trackers request count.
  */
-extern NSString *AEDefaultsTotalTrackersCount;
+extern NSString * _Nonnull AEDefaultsTotalTrackersCount;
 
 /**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
  */
-extern NSString *AEDefaultsInvertedWhitelist;
+extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 
 /**
  User Defaults key, which defines app first launch date. Used for show Rate me allert.
  */
-extern NSString *AEDefaultsFirstLaunchDate;
+extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
  User Defaults key, which defines that action extension was used. Used for show Rate me allert.
  */
-extern NSString* AEDefaultsActionExtensionUsed;
+extern NSString * _Nonnull AEDefaultsActionExtensionUsed;
 
 /**
  User Defaults key, which defines that pro feature is purchased.
  */
-extern NSString* AEDefaultsIsProPurchasedThroughInApp;
+extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
 
 /**
  User Defaults key, which defines that pro feature is purchased.
  */
-extern NSString* AEDefaultsIsProPurchasedThroughLogin;
+extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughLogin;
 
 /**
  User defaults key, wich contains premium account expiration date (NSDate) */
-extern NSString* AEDefaultsPremiumExpirationDate;
+extern NSString* _Nonnull AEDefaultsPremiumExpirationDate;
 
 /**
  User defaults key, wich defines that "pro expired" message showed */
-extern NSString* AEDefaultsPremiumExpiredMessageShowed;
+extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 
 /**
  User defaults key, wich defines dark theme is on */
-extern NSString* AEDefaultsDarkTheme;
+extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
 /**
  User defaults key, wich defines dark theme is on */
-extern NSString* AEDefaultsAppRated;
+extern NSString*  _Nonnull AEDefaultsAppRated;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -170,17 +170,17 @@ extern NSString* AEDefaultsAppRated;
 /**
  Returns URL where is shared resources.
  */
-+ (NSURL *)sharedResuorcesURL;
++ (nonnull NSURL *)sharedResuorcesURL;
 
 /**
  Returns URL where must be current application logs.
  */
-+ (NSURL *)sharedAppLogsURL;
++ (nonnull NSURL *)sharedAppLogsURL;
 
 /**
  Returns URL where must be the applications logs.
  */
-+ (NSURL *)sharedLogsURL;
++ (nonnull NSURL *)sharedLogsURL;
 
 /**
  Returns shared user defaults object.
@@ -195,28 +195,36 @@ extern NSString* AEDefaultsAppRated;
  @param key Defaults key
  @param value Devaults value
  */
-+ (void)sharedDefaultsSetTempKey:(NSString *)key value:(id)value;
++ (void)sharedDefaultsSetTempKey:(nonnull NSString *)key value:(nonnull id)value;
 /**
  Gets defaults value from NSArgumentDomain.
 
  @param key Defaults key.
  @return Defaults value or nil.
  */
-+ (id)sharedDefaultsValueOfTempKey:(NSString *)key;
++ (nullable id)sharedDefaultsValueOfTempKey:(nonnull NSString *)key;
 /**
  Removes defaults value from NSArgumentDomain.
 
  @param key Defaults key.
  */
-+ (void)sharedDefaultsRemoveTempKey:(NSString *)key;
++ (void)sharedDefaultsRemoveTempKey:(nonnull NSString *)key;
 
 /**
  Performs flush of the shared user defaults.
  */
 + (void)synchronizeSharedDefaults;
 
-- (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath;
-- (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath;
+/**
+ saves @data to file with @relativePath
+ returns YES if succeded
+ */
+- (BOOL)saveData:(nonnull NSData *)data toFileRelativePath:(nonnull NSString *)relativePath;
+
+/**
+ read data from file
+ */
+- (nullable NSData *)loadDataFromFileRelativePath:(nonnull NSString *)relativePath;
 
 /**
  Rules from whitelist, which used for Safari content-blocking.
@@ -232,29 +240,29 @@ extern NSString* AEDefaultsAppRated;
  Filter metadata from last filter update process.
  We need it because filter update process is performed in two steps.
  */
-@property ABECFilterClientMetadata *lastUpdateFilterMetadata;
+@property (nullable) ABECFilterClientMetadata *lastUpdateFilterMetadata;
 
 /**
  Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
  */
-@property ABECFilterClientMetadata *filtersMetadataCache;
+@property (nullable) ABECFilterClientMetadata *filtersMetadataCache;
 
 /**
  Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
  */
-@property ABECFilterClientLocalization *i18nCacheForFilterSubscription;
+@property (nullable) ABECFilterClientLocalization *i18nCacheForFilterSubscription;
 
 /**
  Filter Ids from last filter update process.
  */
-@property NSArray <NSNumber *> *lastUpdateFilterIds;
+@property (nullable) NSArray <NSNumber *> *lastUpdateFilterIds;
 /**
  Filter rules from last filter update process.
  We need it because filter update process is performed in two steps.
  */
-@property NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
+@property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
-- (NSString*) pathForRelativePath:(NSString*) relativePath;
+- (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
 @end
 

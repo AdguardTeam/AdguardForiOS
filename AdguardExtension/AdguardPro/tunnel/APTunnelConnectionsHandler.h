@@ -130,11 +130,6 @@
 - (BOOL)checkHostsDomain:(NSString *)domainName ip:(NSString**)ip subscriptionUUID:(NSString**)subscriptionUUID;
 
 /**
- Returns IP address of the whitelist DNS server for appropriate DNS server.
- */
-- (APDnsServerAddress *)whitelistServerAddressForAddress:(NSString *)serverAddress;
-
-/**
  Returns IP address of the DNS server for fake DNS server.
  */
 - (APDnsServerAddress *)serverAddressForFakeDnsAddress:(NSString *)serverAddress;

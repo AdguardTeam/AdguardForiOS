@@ -290,10 +290,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while ([result next]) {
             
             NSNumber *filterId = result[0];
-            
-//            if ([filterId integerValue] != ASDF_USER_FILTER_ID) {
-                [filterIDs addObject:filterId];
-//            }
+            [filterIDs addObject:filterId];
         }
         [result close];
     }];

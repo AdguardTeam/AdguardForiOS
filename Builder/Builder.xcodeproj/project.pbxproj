@@ -23,7 +23,6 @@
 		655A059E1C6B7790000F00D7 /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E01C6B7790000F00D7 /* ACLWildcard.m */; };
 		655A059F1C6B7790000F00D7 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E51C6B7790000F00D7 /* CLIColor.m */; };
 		655A05A01C6B7790000F00D7 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E71C6B7790000F00D7 /* DDAbstractDatabaseLogger.m */; };
-		655A05A11C6B7790000F00D7 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E91C6B7790000F00D7 /* DDASLLogger.m */; };
 		655A05A21C6B7790000F00D7 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04EB1C6B7790000F00D7 /* DDFileLogger.m */; };
 		655A05A31C6B7790000F00D7 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04EE1C6B7790000F00D7 /* DDLog.m */; };
 		655A05A41C6B7790000F00D7 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04F01C6B7790000F00D7 /* DDTTYLogger.m */; };
@@ -592,6 +591,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 659C5FBF1B8B4DC90081EBE3;
 			productRefGroup = 659C5FC91B8B4DC90081EBE3 /* Products */;
@@ -651,7 +651,6 @@
 				655A05F51C6B7E63000F00D7 /* ACSSystemUtils.m in Sources */,
 				655A05911C6B7790000F00D7 /* ACIOStream.m in Sources */,
 				655A05D71C6B7790000F00D7 /* FMDatabase.m in Sources */,
-				655A05A11C6B7790000F00D7 /* DDASLLogger.m in Sources */,
 				655A05DB1C6B7790000F00D7 /* FMResultSet.m in Sources */,
 				655A05881C6B7790000F00D7 /* ABECFilterParsers.m in Sources */,
 				655A05B31C6B7790000F00D7 /* ACNHttpUtils.m in Sources */,

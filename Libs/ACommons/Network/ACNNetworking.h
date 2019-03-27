@@ -31,7 +31,7 @@
 /**
  NSError domain for errors from ACNNetworking object.
  */
-extern NSString *ACNNetworkingErrorDomain;
+extern NSString * _Nonnull ACNNetworkingErrorDomain;
 
 #define ACN_ERROR_BAD_REQUEST                           1
 
@@ -50,19 +50,19 @@ extern NSString *ACNNetworkingErrorDomain;
  Creates an HTTP GET request for the specified URL with default read timeout,
  then calls a handler upon completion.
  */
-- (void)dataWithURL:(NSURL *)url
-  completionHandler:(void (^)(NSData *data,
-                              NSURLResponse *response,
-                              NSError *error))completionHandler;
+- (void)dataWithURL:(nonnull NSURL *)url
+  completionHandler:(nullable void (^)(NSData * _Nullable data,
+                              NSURLResponse * _Nullable response,
+                              NSError * _Nullable error))completionHandler;
 
 /**
  Creates an HTTP GET request for the specified URL with specified read timeout,
  then calls a handler upon completion.
  */
-- (void)dataWithURL:(NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
-  completionHandler:(void (^)(NSData *data,
-                              NSURLResponse *response,
-                              NSError *error))completionHandler;
+- (void)dataWithURL:(nonnull NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
+  completionHandler:(nullable void (^)(NSData * _Nullable data,
+                              NSURLResponse * _Nullable response,
+                              NSError * _Nullable error))completionHandler;
 
 /** Sends an HTTP request then calls a handler upon completion */
 - (void)dataWithURLRequest: (nonnull NSURLRequest*)URLrequest

@@ -39,7 +39,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pro-logo" translatesAutoresizingMaskIntoConstraints="NO" id="RWB-uy-7ds">
-                                                    <rect key="frame" x="193" y="16" width="214" height="49"/>
+                                                    <rect key="frame" x="100" y="16" width="214" height="49"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="214" id="De8-C3-Wu8"/>
                                                         <constraint firstAttribute="height" constant="49" id="lTf-rw-SYs"/>
@@ -328,7 +328,7 @@
                                     <constraint firstAttribute="width" constant="142" id="ShC-iW-jw5"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username or email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qfq-mJ-Yf4" customClass="AEUICellTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username or email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qfq-mJ-Yf4">
                                 <rect key="frame" x="24" y="125" width="370" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0IW-xd-uP4"/>
@@ -350,7 +350,7 @@
                                     <constraint firstAttribute="height" constant="1" id="xMB-e9-LCf"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YFd-La-Nty" customClass="AEUICellTextField">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YFd-La-Nty">
                                 <rect key="frame" x="24" y="182" width="370" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="5FW-qV-khL"/>

@@ -196,11 +196,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             guard   let metadata = strongSelf.antibanner.metadata(forSubscribe: refresh),
                 let i18n = strongSelf.antibanner.i18n(forSubscribe: refresh),
-                var filters = metadata.filters,
-                let installedFilters = strongSelf.antibanner.filters() else {
+                var filters = metadata.filters else {
                     completion()
                     return
             }
+            
+            let installedFilters = strongSelf.antibanner.filters() 
             
             var groups = strongSelf.antibanner.groups()
             
@@ -238,7 +239,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             disabledFilters.forEach({$0.enabled = false})
             
             // add custom group
-            let savedCustomGroup = groups.first(where: { $0.groupId?.intValue == FilterGroupId.custom })
+            let savedCustomGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom })
             
             if savedCustomGroup == nil {
                 let group = ASDFilterGroup()
@@ -388,10 +389,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         let groupMetas = self.antibanner.groups()
         
         var storedGroupStatuses = [Int: Bool]()
-        groupMetas.forEach { storedGroupStatuses[$0.groupId.intValue] = $0.enabled?.boolValue }
+        groupMetas.forEach { storedGroupStatuses[$0.groupId.intValue] = $0.enabled.boolValue }
         
         var storedfilterStatuses = [Int: Bool]()
-        filterMetas.forEach { storedfilterStatuses[$0.filterId.intValue] = $0.enabled?.boolValue }
+        filterMetas.forEach { storedfilterStatuses[$0.filterId.intValue] = $0.enabled.boolValue }
         
         groups.forEach { (group) in
             if let storedStatus = storedGroupStatuses[group.groupId] {
@@ -470,7 +471,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             let groupLocalization = i18n.groups?.localization(for: groupMeta)
             group.name = groupLocalization?.name
-            group.enabled = groupMeta.enabled?.boolValue ?? false
+            group.enabled = groupMeta.enabled.boolValue
             group.proOnly = !configuration.proStatus && proGroups.contains(group.groupId)
             
             let filterMetas = filterByGroupId[groupMeta.groupId.intValue] ?? []

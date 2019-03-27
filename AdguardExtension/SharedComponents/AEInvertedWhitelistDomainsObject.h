@@ -46,7 +46,7 @@
 /**
  add domain to list and to content blocker rule
  */
-- (void) addDomain:(NSString *)domain;
+- (void) addDomain:(nonnull NSString *)domain;
 
 /**
  list of domains
@@ -56,6 +56,6 @@
 /**
  Content blocker rule
  */
-@property (nonatomic) ASDFilterRule *rule;
+@property (nonatomic, nonnull) ASDFilterRule *rule;
 
 @end

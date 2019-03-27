@@ -45,7 +45,7 @@ protocol SafariServiceProtocol : NSObjectProtocol {
     
     /** read json for content blocker with @type
      */
-    func readJson(forType type: Int)->Data
+    func readJson(forType type: Int)->Data?
     
     /** returns all content blockers jsons in dictionary [filename: data]
      */
@@ -136,13 +136,17 @@ class SafariService: NSObject, SafariServiceProtocol {
     // MARK: save/load files
     
     func save(json: Data, type: Int) {
-        let fileName = fileNames[ContentBlockerType(rawValue: type)!]
-        resources.save(json, toFileRelativePath: fileName)
+        if let fileName = fileNames[ContentBlockerType(rawValue: type)!] {
+            resources.save(json, toFileRelativePath: fileName)
+        }
     }
     
-    func readJson(forType type: Int) -> Data {
-        let fileName = fileNames[ContentBlockerType(rawValue: type)!]
-        return resources.loadData(fromFileRelativePath: fileName)
+    func readJson(forType type: Int) -> Data? {
+        if let fileName = fileNames[ContentBlockerType(rawValue: type)!] {
+            return resources.loadData(fromFileRelativePath: fileName)
+        }
+        
+        return nil
     }
     
     @objc

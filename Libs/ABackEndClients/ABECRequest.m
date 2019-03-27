@@ -105,10 +105,7 @@
     NSMutableArray *parametersArray = [NSMutableArray arrayWithCapacity:parameters.count];
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         
-        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];
-//        NSString *value = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[obj description], NULL, (CFStringRef)@"/+=&", kCFStringEncodingUTF8));
-
-        
+        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];      
         [parametersArray addObject:[NSString stringWithFormat:@"%@=%@", [key description], value]];
     }];
     

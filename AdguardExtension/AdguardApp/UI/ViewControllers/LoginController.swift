@@ -26,8 +26,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private var notificationObserver: Any?
     
     // MARK: - IB outlets
-    @IBOutlet weak var nameEdit: AEUICellTextField!
-    @IBOutlet weak var passwordEdit: AEUICellTextField!
+    @IBOutlet weak var nameEdit: UITextField!
+    @IBOutlet weak var passwordEdit: UITextField!
     @IBOutlet weak var loginButton: RoundRectButton!
     @IBOutlet weak var nameLine: UIView!
     @IBOutlet weak var passwordLine: UIView!
