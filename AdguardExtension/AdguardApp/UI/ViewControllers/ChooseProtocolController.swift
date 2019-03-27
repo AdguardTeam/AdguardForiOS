@@ -24,13 +24,17 @@ protocol ChooseProtocolControllerDelegate {
 
 class ChooseProtocolController: BottomAlertController {
     
-    // public variables
+    // MARK: - public variables
     
     var selectedProtocol = DnsProtocol.dns
     var provider: DnsProviderInfo?
     var delegate: ChooseProtocolControllerDelegate?
     
-    // IB Outlets
+    // MARK: - constants
+    
+    let cellHeight: CGFloat = 60.0
+    
+    // MARK: - IB Outlets
     
     @IBOutlet weak var regularHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dnscryptHeightConstraint: NSLayoutConstraint!
@@ -51,6 +55,7 @@ class ChooseProtocolController: BottomAlertController {
     override func viewDidLoad() {
          super.viewDidLoad()
         
+        setupAvailibleProtocols()
         setupChecks()
     }
     
@@ -93,6 +98,29 @@ class ChooseProtocolController: BottomAlertController {
             dohCheck.isHidden = false
         case .dot:
             dotCheck.isHidden = false
+        }
+    }
+    
+    func setupAvailibleProtocols() {
+        
+        guard  let protocols = provider?.protocols else { return }
+        
+        regularHeightConstraint.constant = 0
+        dnscryptHeightConstraint.constant = 0
+        dohHeightConstraint.constant = 0
+        dotHeightConstraint.constant = 0
+        
+        for dnsProtocol in protocols {
+            switch dnsProtocol {
+            case .dns:
+                regularHeightConstraint.constant = cellHeight
+            case .dnsCrypt:
+                dnscryptHeightConstraint.constant = cellHeight
+            case .doh:
+                dohHeightConstraint.constant = cellHeight
+            case .dot:
+                dotHeightConstraint.constant = cellHeight
+            }
         }
     }
 }

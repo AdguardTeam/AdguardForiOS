@@ -63,6 +63,7 @@ class DnsServerInfo : ACObject {
         serverId = aDecoder.decodeObject(forKey: "server_id") as! String
         name = aDecoder.decodeObject(forKey: "name") as! String
         upstreams = aDecoder.decodeObject(forKey: "upstreams") as! [String]
+        dnsProtocol = DnsProtocol(rawValue: aDecoder.decodeInteger(forKey: "dns_protocol"))
         super.init(coder: aDecoder)
     }
     
@@ -72,6 +73,7 @@ class DnsServerInfo : ACObject {
         aCoder.encode(serverId, forKey: "server_id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(upstreams, forKey: "upstreams")
+        aCoder.encode(dnsProtocol?.rawValue ?? DnsProtocol.dns.rawValue, forKey: "dns_protocol")
     }
 }
 

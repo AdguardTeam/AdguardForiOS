@@ -1598,7 +1598,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eu-gA-SMo" customClass="RoundrectView" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="470" width="375" height="308"/>
+                                <rect key="frame" x="0.0" y="471.66666666666674" width="375" height="306.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select protocol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJt-Jd-BI2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="25" y="25" width="330" height="21"/>
@@ -1612,8 +1612,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dU-v6-hwM">
-                                        <rect key="frame" x="0.0" y="66" width="375" height="60"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dU-v6-hwM">
+                                        <rect key="frame" x="0.0" y="65.999999999999943" width="375" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03E-rd-Slw" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1637,7 +1637,7 @@
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVH-dZ-DEX">
-                                                <rect key="frame" x="0.0" y="59" width="375" height="0.6666666666666643"/>
+                                                <rect key="frame" x="0.0" y="59" width="375" height="0.3333333333333357"/>
                                                 <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="KpB-6G-I87"/>
@@ -1657,8 +1657,8 @@
                                             <constraint firstAttribute="trailing" secondItem="FQ9-fU-92k" secondAttribute="trailing" constant="20" id="xrw-IQ-Fli"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2w-mR-ccI">
-                                        <rect key="frame" x="0.0" y="126.00000000000001" width="375" height="60.666666666666671"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2w-mR-ccI">
+                                        <rect key="frame" x="0.0" y="125.99999999999993" width="375" height="60.333333333333329"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh1-EV-7KD" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1675,14 +1675,14 @@
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logocheck" translatesAutoresizingMaskIntoConstraints="NO" id="1FP-Mk-s20">
-                                                <rect key="frame" x="335" y="20.333333333333371" width="20" height="20"/>
+                                                <rect key="frame" x="335" y="20" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="LFQ-67-Ugb"/>
                                                     <constraint firstAttribute="height" constant="20" id="r4J-Tv-eB9"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdR-YA-1kg">
-                                                <rect key="frame" x="0.0" y="59" width="375" height="0.6666666666666643"/>
+                                                <rect key="frame" x="0.0" y="59" width="375" height="0.3333333333333357"/>
                                                 <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="G9E-jS-2r6"/>
@@ -1702,8 +1702,8 @@
                                             <constraint firstAttribute="trailing" secondItem="1FP-Mk-s20" secondAttribute="trailing" constant="20" id="uin-DU-KfW"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Fq-1p-6Tn">
-                                        <rect key="frame" x="0.0" y="186" width="375" height="60.666666666666657"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Fq-1p-6Tn">
+                                        <rect key="frame" x="0.0" y="185.99999999999994" width="375" height="60.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrO-hc-ilW" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1720,14 +1720,14 @@
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logocheck" translatesAutoresizingMaskIntoConstraints="NO" id="COG-Qx-Z3w">
-                                                <rect key="frame" x="335" y="20.333333333333371" width="20" height="20"/>
+                                                <rect key="frame" x="335" y="20" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="MNz-cM-NDE"/>
                                                     <constraint firstAttribute="width" constant="20" id="gjZ-yr-odI"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCs-lz-s07">
-                                                <rect key="frame" x="0.0" y="59" width="375" height="0.6666666666666643"/>
+                                                <rect key="frame" x="0.0" y="59" width="375" height="0.3333333333333357"/>
                                                 <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="RiG-Gt-XEs"/>
@@ -1747,8 +1747,8 @@
                                             <constraint firstItem="DrO-hc-ilW" firstAttribute="top" secondItem="7Fq-1p-6Tn" secondAttribute="top" id="z38-0L-byb"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feR-Mr-u4Q">
-                                        <rect key="frame" x="0.0" y="245.99999999999997" width="375" height="60.666666666666657"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feR-Mr-u4Q">
+                                        <rect key="frame" x="0.0" y="245.99999999999997" width="375" height="60.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-J3-lVl" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1765,14 +1765,14 @@
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logocheck" translatesAutoresizingMaskIntoConstraints="NO" id="hUr-IR-uXi">
-                                                <rect key="frame" x="335" y="20.333333333333371" width="20" height="20"/>
+                                                <rect key="frame" x="335" y="20" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="cz6-B1-6yL"/>
                                                     <constraint firstAttribute="height" constant="20" id="ilp-yD-GyS"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjY-qY-dL8">
-                                                <rect key="frame" x="0.0" y="59" width="375" height="0.6666666666666643"/>
+                                                <rect key="frame" x="0.0" y="59" width="375" height="0.3333333333333357"/>
                                                 <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="m8W-hQ-vGS"/>
@@ -1804,13 +1804,13 @@
                                     <constraint firstItem="V2w-mR-ccI" firstAttribute="leading" secondItem="4eu-gA-SMo" secondAttribute="leading" id="Xs4-O4-Kh8"/>
                                     <constraint firstItem="7Fq-1p-6Tn" firstAttribute="leading" secondItem="4eu-gA-SMo" secondAttribute="leading" id="but-h1-fX3"/>
                                     <constraint firstItem="7dU-v6-hwM" firstAttribute="leading" secondItem="4eu-gA-SMo" secondAttribute="leading" id="dWl-9d-KcS"/>
+                                    <constraint firstAttribute="bottom" secondItem="feR-Mr-u4Q" secondAttribute="bottom" id="efd-J9-T1B"/>
                                     <constraint firstAttribute="trailing" secondItem="vJt-Jd-BI2" secondAttribute="trailing" constant="20" id="ieU-px-QWJ"/>
                                     <constraint firstItem="7Fq-1p-6Tn" firstAttribute="top" secondItem="V2w-mR-ccI" secondAttribute="bottom" constant="-0.5" id="lkZ-8L-Y3e"/>
                                     <constraint firstItem="V2w-mR-ccI" firstAttribute="top" secondItem="7dU-v6-hwM" secondAttribute="bottom" id="nkc-ab-HTi"/>
                                     <constraint firstItem="feR-Mr-u4Q" firstAttribute="top" secondItem="7Fq-1p-6Tn" secondAttribute="bottom" constant="-0.5" id="p3D-JK-aue"/>
                                     <constraint firstAttribute="trailing" secondItem="7Fq-1p-6Tn" secondAttribute="trailing" id="w12-FE-p1b"/>
                                     <constraint firstAttribute="trailing" secondItem="7dU-v6-hwM" secondAttribute="trailing" id="wf9-A6-fBs"/>
-                                    <constraint firstAttribute="height" constant="308" id="wxM-rQ-YOX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1830,7 +1830,6 @@
                         <outlet property="dohHeightConstraint" destination="vWI-Kw-IPf" id="WER-5h-hwv"/>
                         <outlet property="dotCheck" destination="hUr-IR-uXi" id="aP1-nA-qlM"/>
                         <outlet property="dotHeightConstraint" destination="EHf-Jd-xbh" id="MRs-Bx-59p"/>
-                        <outlet property="keyboardHeightLayoutConstraint" destination="wxM-rQ-YOX" id="T8i-5Q-M5n"/>
                         <outlet property="regularCheck" destination="FQ9-fU-92k" id="1CI-Wg-YPi"/>
                         <outlet property="regularHeightConstraint" destination="1pc-MH-uzm" id="3sW-k3-IqJ"/>
                     </connections>

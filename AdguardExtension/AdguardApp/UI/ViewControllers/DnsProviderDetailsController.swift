@@ -41,11 +41,25 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     private let serverRow = 0
     private let websiteRow = 1
     
+    // MARK: - private fields
+    
+    var dnsServerObservetion: NSKeyValueObservation?
+    
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateProtocol()
+        
+        dnsServerObservetion = vpnManager.observe(\.activeDnsServer) { [weak self] (_, _) in
+            DispatchQueue.main.async {
+                self?.updateProtocol()
+                self?.tableView.reloadData()
+            }
+        }
+        
         updateTheme()
     }
     
@@ -180,6 +194,7 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         controller.delegate = self
         
         controller.selectedProtocol = selectedProtocol
+        controller.provider = provider
     
         present(controller, animated: true, completion: nil)
     }
@@ -198,6 +213,13 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         theme.setupTable(tableView)
     }
     
+    private func updateProtocol() {
+        if vpnManager.isActiveProvider(provider!) {
+            if let activeProtocol = vpnManager.activeDnsServer?.dnsProtocol {
+                selectedProtocol = activeProtocol
+            }
+        }
+    }
 }
 
 // MARK: - custom cells
