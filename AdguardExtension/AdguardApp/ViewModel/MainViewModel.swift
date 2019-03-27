@@ -78,7 +78,7 @@ class MainViewModel {
             var message: String?
             if updatedMetas != nil && updatedMetas!.count > 0 {
                 
-                let format = ACLocalizedString("filters_updated_%lu", nil);
+                let format = ACLocalizedString("filters_updated_format", nil);
                 message = String(format: format, updatedMetas!.count)
             } else {
                 message = ACLocalizedString("filters_noUpdates", nil);

@@ -21,8 +21,12 @@
 #import "ACommons/ACLang.h"
 #import "AESharedResources.h"
 #import "ADProductInfo.h"
+#import "AESAntibanner.h"
+#import "AEService.h"
 
-#define SCHEMA_VERSION                      @(2)
+#import "Adguard-Swift.h"
+
+#define SCHEMA_VERSION                      @(3)
 
 
 /////////////////////////////////////////////////////////////////////
@@ -81,7 +85,17 @@
 
 + (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
     
-    return YES;
+    BOOL result = YES;
+    
+    if ([to isEqualToNumber:@(3)]) {
+        
+        id<AEServiceProtocol> aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
+        AESAntibanner* antibanner = [aeService antibanner];
+        
+        result = [antibanner setDefaultEnabledGroups];
+    }
+    
+    return result;
 }
 
 + (BOOL)onInstall {

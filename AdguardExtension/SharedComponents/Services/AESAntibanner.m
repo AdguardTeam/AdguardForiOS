@@ -462,19 +462,18 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
 }
 
-- (BOOL)setGroupEnabled:(FMDatabase *)db enabled:(BOOL)enabled groupId:(NSNumber *)groupId result:(BOOL *)result {
-    return *result = [db executeUpdate:@"update filter_groups set is_enabled = ? where group_id = ?", @(enabled), groupId];
+- (BOOL)setGroupEnabled:(FMDatabase *)db enabled:(BOOL)enabled groupId:(NSNumber *)groupId {
+    return [db executeUpdate:@"update filter_groups set is_enabled = ? where group_id = ?", @(enabled), groupId];
 }
 
 - (void)setFiltersGroup:(NSNumber *)groupId enabled:(BOOL)enabled {
     
     dispatch_sync(workQueue, ^{
         
-        __block BOOL result = NO;
         [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = NO;
-            [self setGroupEnabled:db enabled:enabled groupId:groupId result:&result];
+            [self setGroupEnabled:db enabled:enabled groupId:groupId];
         }];
         
     });
@@ -1712,6 +1711,30 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     });
 }
 
+- (BOOL) setDefaultEnabledGroups {
+    
+    __block BOOL result = NO;
+    ASDatabase *theDB = [ASDatabase singleton];
+    
+    dispatch_sync(workQueue, ^{
+        
+        if (!theDB.ready) {
+            return;
+        }
+        
+        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            for(NSNumber* groupId in EnabledFilterGroups.groupIds) {
+                if (![self setGroupEnabled:db enabled:YES groupId:groupId]) {
+                    return;
+                }
+            }
+            result = YES;
+        }];
+    });
+    
+    return result;
+}
+
 - (BOOL)checkInstalledFiltersInDB{
     
     if (serviceInstalled)
@@ -1835,9 +1858,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         for(NSNumber* groupId in groupIds) {
-            BOOL result = NO;
             if ([EnabledFilterGroups.groupIds containsObject:groupId])
-                [self setGroupEnabled:productionDb enabled:YES groupId:groupId result:&result];
+                [self setGroupEnabled:productionDb enabled:YES groupId:groupId];
         }
         
         // Trying obtain filter rules from default DB and to insert into production DB.
