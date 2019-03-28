@@ -562,6 +562,7 @@
 		D016736A224912C70058E5C2 /* APDnsResourceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC841D37780700E316EA /* APDnsResourceType.m */; };
 		D016736B224912C90058E5C2 /* APDnsResourceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */; };
 		D016736C224912CC0058E5C2 /* APDnsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC821D37780700E316EA /* APDnsRequest.m */; };
+		D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D018672A203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
 		D018672B203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
 		D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
@@ -4696,6 +4697,7 @@
 				D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				65EC9C971BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D031A107219EFC99002C17D9 /* CLIColor.m in Sources */,
+				D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

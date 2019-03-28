@@ -952,22 +952,32 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (void)subscribeCustomFilterFromResult:(AASCustomFilterParserResult *)parserResult completion:(void (^)(void))completionBlock {
     
-    if (parserResult) {
-        dispatch_async(workQueue, ^{
-            parserResult.meta.groupId = @(FilterGroupId.custom);
+    dispatch_async(workQueue, ^{
+        [self subscribeCustomFilterFromResultInternal:parserResult completion:completionBlock];
+    });
+}
+
+- (void)subscribeCustomFilterFromResultInternal:(AASCustomFilterParserResult *)parserResult completion:(void (^)(void))completionBlock {
+    
+    if (!parserResult) {
+        return;
+    }
+    
+    parserResult.meta.groupId = @(FilterGroupId.custom);
+    
+    if(completionBlock){
+        completionBlock();
+    }
+    
+    ASDatabase *theDB = [ASDatabase singleton];
+    if ([self updateFilter:parserResult.meta rules:parserResult.rules db:theDB]) {
+        // Notifying to all, that filter rules were updated
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-            completionBlock();
-            
-            ASDatabase *theDB = [ASDatabase singleton];
-            if ([self updateFilter:parserResult.meta rules:parserResult.rules db:theDB]) {
-                // Notifying to all, that filter rules were updated
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
-                });
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
         });
     }
+    
 }
 
 - (NSNumber *)customFilterIdByUrl:(NSString *)url {
@@ -1027,38 +1037,47 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{ @autoreleasepool {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
-            
-            *rollback = YES;
-            
-            FMResultSet *result = [db executeQuery:@"select removable from filters where filter_id = ?", filterId];
-            if ([result next] && [result[0] isKindOfClass:[NSNumber class]] && [result[0] boolValue]){
-                
-                removed = [self deleteFilter:filterId fromDb:db];
-                if (removed){
-                    
-                    *rollback = NO;
-                    if (serviceEnabled)
-                        [updateFilterFromUI executeOnceAfterCalm];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
-                    });
-                }
-            }
-            else{
-                
-                DDLogError(@"Error of removing antibanner filter (filterId=%@): Can't remove stable filter.", filterId);
-                DDLogErrorTrace();
-            }
-            [result close];
-        }];
+        removed = [self unsubscribeFilterInternal:filterId];
+        
     }});
     
     return removed;
 }
 
+- (BOOL) unsubscribeFilterInternal:(NSNumber *)filterId {
+    
+    __block BOOL removed = NO;
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        *rollback = YES;
+        
+        FMResultSet *result = [db executeQuery:@"select removable from filters where filter_id = ?", filterId];
+        if ([result next] && [result[0] isKindOfClass:[NSNumber class]] && [result[0] boolValue]){
+            
+            removed = [self deleteFilter:filterId fromDb:db];
+            if (removed){
+                
+                *rollback = NO;
+                if (serviceEnabled)
+                    [updateFilterFromUI executeOnceAfterCalm];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+                });
+            }
+        }
+        else{
+            
+            DDLogError(@"Error of removing antibanner filter (filterId=%@): Can't remove stable filter.", filterId);
+            DDLogErrorTrace();
+        }
+        [result close];
+    }];
+    
+    return removed;
+}
 
 
 - (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive{
@@ -1498,12 +1517,73 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 }
             }
             
+            [self updateCustomFilters];
+            
             [self updateMetadata:metadata filters:filters];
         }
         else {
             [self updateFailure];
         }
     }
+}
+
+/** loads sync filters forom backend and update database
+ */
+- (void) updateCustomFilters {
+    
+    // Get custom filters from database
+    
+    NSMutableArray<ASDFilterMetadata *>* filtersToUpdate = [NSMutableArray new];
+    
+    ASDatabase *theDB = [ASDatabase singleton];
+    
+    if (!theDB.ready) {
+        return;
+    }
+    
+    [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery: @"select * from filters where group_id = ?" , @(FilterGroupId.custom)];
+        
+        
+        while ([result next]) {
+            
+            ASDFilterMetadata *filterMetadata = [[ASDFilterMetadata alloc] initFromDbResult:result];
+            [filtersToUpdate addObject:filterMetadata];
+        }
+        [result close];
+        
+        
+    }];
+
+    // load filters from backend
+    
+    dispatch_group_t parseGroup = dispatch_group_create();
+    
+    for (ASDFilterMetadata * filter in filtersToUpdate) {
+        
+        AASFilterSubscriptionParser* parser = [AASFilterSubscriptionParser new];
+        NSURL* url = [NSURL URLWithString:filter.subscriptionUrl];
+        
+        dispatch_group_enter(parseGroup);
+        
+        [parser parseFromUrl:url completion:^(AASCustomFilterParserResult *result, NSError *error) {
+            
+            if (!result || error) {
+                return;
+            }
+            
+            result.meta.name = filter.name;
+            result.meta.groupId = filter.groupId;
+            [self unsubscribeFilterInternal: filter.filterId];
+            
+            [self subscribeCustomFilterFromResultInternal:result completion:nil];
+            
+            dispatch_group_leave(parseGroup);
+        }];
+    }
+    
+    dispatch_group_wait(parseGroup, DISPATCH_TIME_FOREVER);
 }
 
 - (void)startUpdateInBackgroundModeWithMetadataForUpdate:(NSSet *)metadataForUpdate {
