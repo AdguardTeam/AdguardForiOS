@@ -110,7 +110,7 @@ static AESSupport *singletonSupport;
     
     self = [super init];
     if (self) {
-        _sharedResources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResources"];
+        _sharedResources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
         _safariService = [ServiceLocator.shared getSetviceWithTypeName:@"SafariService"];
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
     }
@@ -219,7 +219,7 @@ static AESSupport *singletonSupport;
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = [AESAntibanner new];
+    AESAntibanner* antibaner = _aeService.antibanner;
     NSArray* filterIDs = antibaner.activeFilterIDs;
     
     for (NSNumber *filterId in filterIDs) {
