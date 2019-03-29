@@ -20,10 +20,12 @@ import Foundation
 
 class AboutTableController : UITableViewController {
     
-    let siteUrl = URL(string: "https://adguard.com/en/welcome.html")!
-    let forumUrl = URL(string: "https://forum.adguard.com/index.php")!
-    let thanksUrl = URL(string: "https://kb.adguard.com/en/miscellaneous/acknowledgments")!
-    let moreUrl = URL(string: "http://agrd.io/ios_adguard_products")!
+    private let homeAction = "home"
+    private let forumAction = "forum"
+    private let acknowledgmentsAction = "acknowledgments"
+    private let moreAction = "other_products"
+    
+    private let openUrlFrom = "about"
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -45,16 +47,16 @@ class AboutTableController : UITableViewController {
     // MARK: - Actions
  
     @IBAction func siteAction(_ sender: Any) {
-        UIApplication.shared.open(siteUrl, options: [:], completionHandler: nil)
+        UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
     }
     @IBAction func forumAction(_ sender: Any) {
-        UIApplication.shared.open(forumUrl, options: [:], completionHandler: nil)
+        UIApplication.shared.openAdguardUrl(action: forumAction, from: openUrlFrom)
     }
     @IBAction func thanksAction(_ sender: Any) {
-        UIApplication.shared.open(thanksUrl, options: [:], completionHandler: nil)
+        UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
     }
     @IBAction func moreAction(_ sender: Any) {
-        UIApplication.shared.open(moreUrl, options: [:], completionHandler: nil)
+        UIApplication.shared.openAdguardUrl(action: moreAction, from: openUrlFrom)
     }
     
     private func updateTheme() {

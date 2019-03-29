@@ -563,6 +563,7 @@
 		D016736B224912C90058E5C2 /* APDnsResourceClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 653C929A1DA2A9D3008BE1C1 /* APDnsResourceClass.m */; };
 		D016736C224912CC0058E5C2 /* APDnsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AAC821D37780700E316EA /* APDnsRequest.m */; };
 		D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
+		D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */; };
 		D018672A203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
 		D018672B203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
 		D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
@@ -1686,6 +1687,7 @@
 		D0159DA8203593DE00751D2A /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
 		D0159DA9203593E000751D2A /* fa */ = {isa = PBXFileReference; fileEncoding = 2483028224; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
 		D0159DAA203593E300751D2A /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
+		D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenAdguardUrl.swift"; sourceTree = "<group>"; };
 		D0183BB720C93FD200813714 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D0183BB820C93FD200813714 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
 		D0183BB920C93FD200813714 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2445,6 +2447,7 @@
 			children = (
 				655A02081C6B7686000F00D7 /* ACSSystemUtils.h */,
 				655A02091C6B7686000F00D7 /* ACSSystemUtils.m */,
+				D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -4788,6 +4791,7 @@
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				D07AA061220490EC0065779F /* DnsProvidersContainerController.swift in Sources */,
+				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				D04CD26422007433000B0331 /* DnsRequestDetailsController.swift in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
