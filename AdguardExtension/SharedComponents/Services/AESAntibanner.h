@@ -142,15 +142,28 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  Obtain filters information.
  @return Array of ASDFilterMetadata objects that contains
+ all stored in database active antibanner filters.
+ */
+- (nonnull NSArray<ASDFilterMetadata*> *)activeFilters;
+
+/**
+ Obtain filters information.
+ @return Array of ASDFilterMetadata objects that contains
  all stored in database antibanner filters.
  */
 - (nonnull NSArray<ASDFilterMetadata*> *)filtersForGroup:(nonnull NSNumber*) groupId;
 
 /**
- Obtain active filters information.
- @return Array of NSNumber objects that contains active filter IDs
+ Obtain enabled filters information.
+ @return Array of NSNumber objects that contains enabled filter IDs
  */
-- (nonnull NSArray*) activeFilterIDs;
+- (nonnull NSArray<NSNumber*> *) enabledFilterIDs;
+
+/**
+ Obtain active filters information.
+ @return Array of NSNumber objects that contains enable filter IDs only for enabled groups
+ */
+- (nonnull NSArray<NSNumber*> *)activeFilterIDs;
 
 /**
  Obtain active group information.

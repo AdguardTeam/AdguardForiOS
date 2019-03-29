@@ -307,7 +307,7 @@ static AESSupport *singletonSupport;
         [sb appendFormat:@"\r\nRules converted: %@ from: %@.", rulesCount, totalRulesCount];
 
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
-        NSArray *filters = [[_aeService antibanner] filters];
+        NSArray *filters = [[_aeService antibanner] activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         

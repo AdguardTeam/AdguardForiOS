@@ -241,7 +241,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return rules;
 }
 
-- (NSArray*) activeFilterIDs {
+- (NSArray*) enabledFilterIDs {
     
     NSMutableArray *filterIDs = [NSMutableArray array];
     
@@ -260,6 +260,38 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         [result close];
     }];
    
+    return filterIDs.copy;
+}
+
+- (NSArray*) activeFilterIDs {
+    
+    NSMutableArray *filterIDs = [NSMutableArray array];
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery:@"select group_id from filter_groups where is_enabled = 1"];
+        
+        NSMutableSet<NSNumber*>* enabledGroupIds = [NSMutableSet new];
+        
+        while ([result next]) {
+            [enabledGroupIds addObject:result[0]];
+        }
+        [result close];
+        
+        result = [db executeQuery:@"select filter_id, group_id from filters where is_enabled = 1"];
+        
+        while ([result next]) {
+            
+            NSNumber *filterId = result[0];
+            NSNumber *groupId = result[1];
+            
+            if ([enabledGroupIds containsObject:groupId]) {
+                [filterIDs addObject:filterId];
+            }
+        }
+        [result close];
+    }];
+    
     return filterIDs.copy;
 }
 
@@ -384,6 +416,42 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     return filters;
 }
+
+- (NSArray<ASDFilterMetadata*> *)activeFilters{
+    
+    __block NSArray *filters;
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        filters = [self filtersFromDb:db];
+    }];
+    
+    __block NSArray *groups;
+    
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+
+        groups = [self groupsFromDb:db];
+    }];
+    
+    NSMutableSet<NSNumber*>* enabledGroups = [NSMutableSet new];
+    
+    for (ASDFilterGroup * group in groups) {
+        if (group.enabled.boolValue) {
+            [enabledGroups addObject:group.groupId];
+        }
+    }
+    
+    NSMutableArray* activeFilters = [NSMutableArray new];
+    
+    for (ASDFilterMetadata* filter in filters) {
+        if ([enabledGroups containsObject:filter.groupId]) {
+            [activeFilters addObject:filter];
+        }
+    }
+    
+    return activeFilters.copy;
+}
+
 
 - (NSArray<ASDFilterMetadata *> *)filtersForGroup:(NSNumber *)groupId {
     __block NSArray *filters;
