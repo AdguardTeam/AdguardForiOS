@@ -19,18 +19,40 @@
 import Foundation
 
 
-class GetProController: UIViewController {
+class GetProController: UIViewController, UIViewControllerTransitioningDelegate {
     
     // MARK: - properties
     var notificationObserver: Any?
     
     let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
+    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets
     @IBOutlet weak var upgradeButton: RoundRectButton!
-    @IBOutlet weak var signInButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
+    @IBOutlet weak var price: ThemableLabel!
+    @IBOutlet weak var subscriptionPeriod: ThemableLabel!
+    
+    @IBOutlet weak var purchaseView: UIView!
+    @IBOutlet weak var accountView: UIView!
+    
+    @IBOutlet weak var separator1: UIView!
+    @IBOutlet weak var separator2: UIView!
+    
+    @IBOutlet var themableLabels: [ThemableLabel]!
+    
+    @IBOutlet var loginBarButton: UIBarButtonItem!
+    @IBOutlet var logoutBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var priceLabel: ThemableLabel!
+    @IBOutlet weak var periodLabel: ThemableLabel!
+    
+    
+    // MARK: - constants
+    
+    private let accountAction = "account"
+    private let from = "license"
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -39,37 +61,32 @@ class GetProController: UIViewController {
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                object: nil, queue: nil)
         { [weak self](notification) in
-            if let info = notification.userInfo {
-                self?.processNotification(info: info)
-                self?.enableButtons(true)
+            
+            DispatchQueue.main.async {
+                if let info = notification.userInfo {
+                    self?.processNotification(info: info)
+                    self?.enableButtons(true)
+                    self?.updateViews()
+                }
             }
         }
         
         setUpgrateButtonTitle()
+        updateViews()
+        updateTheme()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.barStyle = .black
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.barStyle = .default
     }
     
     deinit {
         if let observer = notificationObserver {
             NotificationCenter.default.removeObserver(observer)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showLoginSegue" {
-            let controller = segue.destination as! LoginController
-            controller.purchaseService = purchaseService
         }
     }
     
@@ -83,6 +100,41 @@ class GetProController: UIViewController {
     @IBAction func restorePurchasesAction(_ sender: Any) {
         enableButtons(false)
         purchaseService.requestRestore()
+    }
+    
+    @IBAction func accountAction(_ sender: Any) {
+        UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
+    }
+    
+    @IBAction func loginAction(_ sender: Any) {
+        
+        showLoginDialog()
+    }
+    
+    @IBAction func logoutAction(_ sender: Any) {
+        
+        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: ACLocalizedString("common_action_yes", nil), style: .default) {
+            [weak self] (action) in
+            if self?.purchaseService.logout() ?? false {
+                DispatchQueue.main.async {
+                    self?.updateViews()
+                }
+            }
+        }
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
     
     // MARK: - private methods
@@ -136,15 +188,18 @@ class GetProController: UIViewController {
     }
     
     private func setUpgrateButtonTitle() {
+        
+        upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
+        
         if purchaseService.ready {
-            let title = String(format: ACLocalizedString("upgrade_button_title_format", nil), purchaseService.price)
-            upgradeButton.setTitle(title, for: .normal)
+            priceLabel.text = purchaseService.price
+            periodLabel.text = purchaseService.period
             upgradeButton.isEnabled = true
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
         else {
-            let title = ACLocalizedString("upgrade_button_title", nil)
-            upgradeButton.setTitle(title, for: .normal)
+            priceLabel.text = ""
+            periodLabel.text = ""
             upgradeButton.isEnabled = false
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
@@ -152,7 +207,43 @@ class GetProController: UIViewController {
     
     private func enableButtons(_ enable: Bool) {
         upgradeButton.isEnabled = enable
-        signInButton.isEnabled = enable
         restoreButton.isEnabled = enable
     }
+    
+    private func updateTheme() {
+        
+        view.backgroundColor = theme.backgroundColor
+        separator1.backgroundColor = theme.separatorColor
+        separator2.backgroundColor = theme.separatorColor
+        theme.setupLabels(themableLabels)
+    }
+    
+    private func updateViews() {
+        
+        switch (configurationService.proStatus, configurationService.purchasedThroughLogin) {
+        case (false, _):
+            purchaseView.isHidden = false
+            accountView.isHidden = true
+            navigationItem.rightBarButtonItems = [loginBarButton]
+        case (true, false):
+            purchaseView.isHidden = true
+            accountView.isHidden = true
+            navigationItem.rightBarButtonItems = [loginBarButton]
+        case (true, true):
+            purchaseView.isHidden = true
+            accountView.isHidden = false
+            navigationItem.rightBarButtonItems = [logoutBarButton]
+        }
+        
+        (children.first as? UITableViewController)?.tableView.reloadData()
+    }
+    
+    private func showLoginDialog() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "LoginController") as? LoginController else { return }
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = self
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
 }

@@ -18,52 +18,58 @@
 
 import Foundation
 
-class AboutTableController : UITableViewController {
+class GetProTableController: UITableViewController {
     
-    private let homeAction = "home"
-    private let forumAction = "forum"
-    private let acknowledgmentsAction = "acknowledgments"
-    private let moreAction = "other_products"
+    // MARK: - IB outlets
     
-    private let openUrlFrom = "about"
+    @IBOutlet weak var logo: ThemeableImageView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    // MARK: - services
     
-    // MARK: - view controller life cycle
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    // MARK: - private fields
+    
+    var proObservation: NSKeyValueObservation?
+    
+    // MARK: - View controller livecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         updateTheme()
+        
+        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
+            self?.updateTheme()
+        }
+    }
+    
+    // MARK: - table view delegate methods
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+        return configuration.proStatus ? 4 : 3
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
         theme.setupTableCell(cell)
+        
         return cell
     }
-
-    // MARK: - Actions
- 
-    @IBAction func siteAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
-    }
-    @IBAction func forumAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: forumAction, from: openUrlFrom)
-    }
-    @IBAction func thanksAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
-    }
-    @IBAction func moreAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: moreAction, from: openUrlFrom)
-    }
     
-    
+    // MARK: - private methods
     
     private func updateTheme() {
-        theme.setupLabels(themableLabels)
-        view.backgroundColor = theme.backgroundColor
+        
         theme.setupTable(tableView)
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logo)
     }
+    
+    
 }

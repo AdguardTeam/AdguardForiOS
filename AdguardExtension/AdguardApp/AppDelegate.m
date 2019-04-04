@@ -204,6 +204,7 @@ typedef enum : NSUInteger {
     return YES;
 }
 
+
 - (void)setPeriodForCheckingFilters{
     
     NSTimeInterval interval = AS_FETCH_UPDATE_STATUS_PERIOD;

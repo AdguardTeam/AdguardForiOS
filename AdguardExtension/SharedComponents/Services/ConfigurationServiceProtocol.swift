@@ -5,4 +5,5 @@ import Foundation
 protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var darkTheme: Bool { get }
     var proStatus : Bool { get }
+    var purchasedThroughLogin: Bool { get }
 }

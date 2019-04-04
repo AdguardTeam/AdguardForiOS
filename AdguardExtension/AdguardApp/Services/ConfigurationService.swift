@@ -74,6 +74,12 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         }
     }
     
+    @objc dynamic var purchasedThroughLogin: Bool {
+        get {
+            return purchaseService.purchasedThroughLogin
+        }
+    }
+    
     /**
      this flag indicates that all safari content blockers are enabled in safari settings
      */

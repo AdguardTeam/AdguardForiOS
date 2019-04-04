@@ -22,11 +22,14 @@ import StoreKit
 // MARK:  service protocol -
 protocol PurchaseServiceProtocol {
     var isProPurchased: Bool {get}
+    var purchasedThroughLogin: Bool {get}
     var ready: Bool {get}
     var price: String {get}
+    var period: String {get}
     
     func start()
     func login(withName name: String, password: String, onSuccess success: ((Bool)->Void )?)
+    func logout()->Bool
     func requestPurchase()
     func requestRestore()
 }
@@ -76,22 +79,54 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let LOGIN_URL = "http://testmobile.adtidy.org/api/2.0/auth"
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
+    private let LOGIN_APP_NAME_PARAM = "app_name"
+    
+    private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
     
     // login response params
     
-    // keys
-    private let LOGIN_AUTH_STATUS_KEY = "authStatus"
-    private let LOGIN_PREMIUM_STATUS_KEY = "premiumStatus"
-    private let LOGIN_EXPIRATION_DATE_KEY = "expirationDate"
+    // params
+    private let LOGIN_AUTH_STATUS_PARAM = "auth_status"
+    private let LOGIN_PREMIUM_STATUS_PARAM = "premium_status"
+    private let LOGIN_EXPIRATION_DATE_PARAM = "expiration_date"
+    private let LICENSE_INFO_PARAM = "license_info"
+    
+    // licenses info params
+    private let LICENSES_PARAM = "licenses"
+    private let BEST_LICENSE_ID_PARAM = "license"
+    
+    // one license info params
+    private let LICENSE_KEY_PARAM = "license_key"
+    private let LICENSE_STATUS_PARAM = "license_status"
+    private let LICENSE_TYPE_PARAM = "license_type"
+    private let LICENSE_EXPIRATION_DATE_PARAM = "expiration_date"
+    private let LICENSE_COMPUTERS_PARAM = "license_computers_count"
+    private let LICENSE_MAX_COMPUTERS_PARAM = "license_max_computers_count"
+    private let SUBSCRIPTION_PARAM = "subscription"
+    
+    // subscription params
+    private let SUBSCRIPTION_STATUS_PARAM = "status"
+    private let SUBSCRIPTION_NEXT_BILL_DATE_PARAM = "next_bill_date"
     
     // auth status values
-    private let AUTH_SUCCESS = "success"
-    private let AUTH_BAD_CREDINTIALS = "bad_credentials"
+    private let AUTH_SUCCESS = "SUCCESS"
+    private let AUTH_BAD_CREDINTIALS = "BAD_CREDENTIALS"
     
     // premium values
-    private let PREMIUM_STATUS_ACTIVE = "active"
-    private let PREMIUM_STATUS_EXPIRED = "expired"
-    private let PREMIUM_STATUS_FREE = "free"
+    private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
+    private let PREMIUM_STATUS_FREE = "FREE"
+    
+    // license status
+    private let LICENSE_STATUS_NOT_EXISTS = "NOT_EXISTS"
+    private let LICENSE_STATUS_EXPIRED = "EXPIRED"
+    private let LICENSE_STATUS_MAX_COMPUTERS_EXCEED = "MAX_COMPUTERS_EXCEED"
+    private let LICENSE_STATUS_BLOCKED = "BLOCKED"
+    private let LICENSE_STATUS_VALID = "VALID"
+    
+    // subscription status
+    private let SIBSCRIPTION_STATUS_ACTIVE = "ACTIVE"
+    private let SIBSCRIPTION_STATUS_PAST_DUE = "PAST_DUE"
+    private let SIBSCRIPTION_STATUS_DELETED = "DELETED"
     
     // MARK: - private properties
     private let network: ACNNetworkingProtocol
@@ -99,8 +134,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private var productRequest: SKProductsRequest?
     private var product: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
-    
-    private var purchsedThroughLogin: Bool?
     
     private var expired: Bool = false
     
@@ -113,19 +146,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
-    private var purchasedThroughLogin: Bool {
+    // MARK: - public properties
+    
+    var isProPurchased: Bool {
+        return isProPurchasedInternal
+    }
+    
+    var purchasedThroughLogin: Bool {
         get {
             return resources.sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
         }
         set {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
         }
-    }
-    
-    // MARK: - public properties
-    
-    var isProPurchased: Bool {
-        return isProPurchasedInternal
     }
     
     @objc dynamic var isProPurchasedInternal: Bool {
@@ -145,6 +178,34 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return formatter.string(from: product.price) ?? ""
     }
     
+    var period: String {
+        guard let product = self.product else { return "" }
+        
+        
+        if #available(iOS 11.2, *) {
+            guard let periodUnit = product.subscriptionPeriod?.unit,
+                let numberOfUnits = product.subscriptionPeriod?.numberOfUnits else { return "" }
+            
+            var unitString = ""
+            switch periodUnit {
+            case .day:
+                unitString = ACLocalizedString("day_period", nil)
+            case .week:
+                unitString = ACLocalizedString("week_period", nil)
+            case .month:
+                unitString = ACLocalizedString("month_period", nil)
+            case .year:
+                unitString = ACLocalizedString("year_period", nil)
+            }
+            
+            let format = ACLocalizedString("period_format", nil)
+            
+            return String(format: format, numberOfUnits, unitString)
+        } else {
+            return ""
+        }
+    }
+    
     // MARK: - public methods
     init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
         self.network = network
@@ -160,7 +221,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     func login(withName name: String, password: String, onSuccess success:((Bool)->Void)?) {
         
-        let params = [LOGIN_EMAIL_PARAM: name, LOGIN_PASSWORD_PARAM: password]
+        let params = [LOGIN_EMAIL_PARAM: name, LOGIN_PASSWORD_PARAM: password, LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE]
         guard let url = URL(string: LOGIN_URL) else  {
             success?(false)
             DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
@@ -200,7 +261,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                     return
                 }
                 
-                strongSelf.purchsedThroughLogin = true;
+                strongSelf.purchasedThroughLogin = true;
                 let expired = strongSelf.checkExpired()
                 
                 strongSelf.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
@@ -212,6 +273,15 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 success?(false)
             }
         }
+    }
+    
+    func logout()->Bool {
+        if !deleteLoginFromKeychain() {
+            return false
+        }
+        
+        purchasedThroughLogin = false
+        return true
     }
     
     func requestPurchase() {
@@ -227,6 +297,15 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     func requestRestore() {
         SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+    func getReceipt() -> String? {
+        // Load the receipt from the app bundle.
+        guard let receiptURL = Bundle.main.appStoreReceiptURL,
+              let receiptData = try? Data(contentsOf: receiptURL) else { return nil }
+        let encReceipt = receiptData.base64EncodedString()
+        
+        return encReceipt
     }
     
     // MARK: - private methods
@@ -415,13 +494,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private func processLoginResponce(json: [String: Any]) -> Bool {
         
-        guard let status = json[LOGIN_AUTH_STATUS_KEY] as? String else {
+        guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             processLoginError(error: nil)
             return false
         }
         
-        let premium = json[LOGIN_PREMIUM_STATUS_KEY] as? String?
-        let expirationTimestampAny = json[LOGIN_EXPIRATION_DATE_KEY]
+        let premium = json[LOGIN_PREMIUM_STATUS_PARAM] as? String?
+        let expirationTimestampAny = json[LOGIN_EXPIRATION_DATE_PARAM]
         
         var expirationTimestamp: Double?
         
@@ -440,9 +519,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             return false
         }
         
-        
         // process premium
-        if premium != PREMIUM_STATUS_ACTIVE && premium != PREMIUM_STATUS_EXPIRED {
+        if premium != PREMIUM_STATUS_ACTIVE {
             let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginNotPremiumAccount]
             NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                             object: self, userInfo: userInfo)

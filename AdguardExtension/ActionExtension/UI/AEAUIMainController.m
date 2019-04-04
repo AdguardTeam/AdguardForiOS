@@ -56,6 +56,7 @@
 }
 
 @synthesize proStatus;
+@synthesize purchasedThroughLogin;
 
 @end
 

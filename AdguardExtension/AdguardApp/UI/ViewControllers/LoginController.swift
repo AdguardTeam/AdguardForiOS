@@ -18,10 +18,11 @@
 
 import Foundation
 
-class LoginController: UIViewController, UITextFieldDelegate {
+class LoginController: BottomAlertController {
     
     // MARK: - properties
-    var purchaseService: PurchaseService?
+    let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationObserver: Any?
     
@@ -31,6 +32,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: RoundRectButton!
     @IBOutlet weak var nameLine: UIView!
     @IBOutlet weak var passwordLine: UIView!
+    
+    @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet var separators: [UIView]!
     
     // MARK: - pribate properties
     
@@ -52,18 +56,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         passwordEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.barStyle = .black
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.barStyle = .default
+        
+        updateTheme()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,13 +71,18 @@ class LoginController: UIViewController, UITextFieldDelegate {
         if  let name = nameEdit.text,
             let password = passwordEdit.text {
             
-            purchaseService?.login(withName: name, password: password, onSuccess: nil)
+            purchaseService.login(withName: name, password: password, onSuccess: nil)
         }
     }
     
     @IBAction func editingChanged(_ sender: Any) {
         updateLoginButton()
     }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     // MARK: - text field delegate methods
     
@@ -104,28 +103,31 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private func processNotification(info: [AnyHashable: Any]) {
         
-        let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-        let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-        
-        switch type {
-        
-        case PurchaseService.kPSNotificationLoginSuccess:
-            loginSuccess()
-        case PurchaseService.kPSNotificationLoginFailure:
-            loginFailure(error: error)
-        case PurchaseService.kPSNotificationLoginPremiumExpired:
-            premiumExpired()
-        case PurchaseService.kPSNotificationLoginNotPremiumAccount:
-            notPremium()
+        DispatchQueue.main.async { [weak self] in
             
-        default:
-            break
+            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+            
+            switch type {
+            
+            case PurchaseService.kPSNotificationLoginSuccess:
+                self?.loginSuccess()
+            case PurchaseService.kPSNotificationLoginFailure:
+                self?.loginFailure(error: error)
+            case PurchaseService.kPSNotificationLoginPremiumExpired:
+                self?.premiumExpired()
+            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+               self?.notPremium()
+                
+            default:
+                break
+            }
         }
     }
     
     private func loginSuccess(){
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) {
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -160,6 +162,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private func updateLoginButton() {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0 && passwordEdit.text?.count ?? 0 > 0
-        navigationItem.rightBarButtonItem?.isEnabled = loginButton.isEnabled
+    }
+    
+    private func updateTheme() {
+        
+        contentView.backgroundColor = theme.bottomBarBackgroundColor
+        
+        theme.setupTextField(nameEdit)
+        theme.setupTextField(passwordEdit)
+        
+        separators.forEach { $0.backgroundColor = theme.separatorColor }
+        
+        theme.setupLabels(themableLabels)
     }
 }

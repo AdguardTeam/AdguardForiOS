@@ -58,15 +58,15 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
                 bottomSafeArea = bottomLayoutGuide.length
             }
             
-            var bottomConstrint: CGFloat
+            var bottomConstraint: CGFloat
             if endFrameY >= UIScreen.main.bounds.size.height {
-                bottomConstrint = -34
+                bottomConstraint = -34
             } else {
-                bottomConstrint = bottomSafeArea > 0 ? (endFrame?.size.height ?? 0.0) - 68 :
+                bottomConstraint = bottomSafeArea > 0 ? (endFrame?.size.height ?? 0.0) - 68 :
                                                         (endFrame?.size.height ?? 0.0) - 34
             }
             
-            self.keyboardHeightLayoutConstraint?.constant = bottomConstrint
+            self.keyboardHeightLayoutConstraint?.constant = bottomConstraint
             
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
