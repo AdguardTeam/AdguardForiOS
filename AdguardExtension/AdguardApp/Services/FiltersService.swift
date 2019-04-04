@@ -245,7 +245,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 let group = ASDFilterGroup()
                 group.groupId = NSNumber(integerLiteral: FilterGroupId.custom)
                 group.name = ACLocalizedString("custom_group_name", nil);
-                group.enabled = NSNumber(value: true)
+                group.enabled = NSNumber(value: false)
                 
                 groups.append(group)
             }
@@ -298,11 +298,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             self?.enabledFilters[filter.filterId] = enabled
         }
         
-        notifyChange()
+        guard let group = getGroup(filter.groupId) else { return }
         
+        updateGroupSubtitle(group)
+        notifyChange()
         processUpdate()
         
-        guard let group = getGroup(filter.groupId) else { return }
         if !group.enabled && enabled {
             for filterToDisable in group.filters {
                 if (filterToDisable == filter) || !(enabledFilters[filterToDisable.filterId] ?? false) {
@@ -350,6 +351,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             newFilter.enabled = true
             
             group.filters = [newFilter] + group.filters
+
+            if !group.enabled {
+                setGroup(group, enabled: true)
+            }
             
             updateGroupSubtitle(group)
             notifyChange()
@@ -373,6 +378,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             if group.groupId != FilterGroupId.custom { continue }
             
             group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
+            
+            if group.enabled && group.filters.count == 0 {
+                setGroup(group, enabled: false)
+            }
+            
+            notifyChange()
         }
     }
     

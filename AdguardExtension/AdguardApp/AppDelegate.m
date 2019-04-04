@@ -124,7 +124,6 @@ typedef enum : NSUInteger {
         pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
-        //----------- Set main navigation controller -----------------------
         if ([_aeService firstRunInProgress]) {
             
             [_aeService onReady:^{
@@ -134,10 +133,6 @@ typedef enum : NSUInteger {
 #else
                 [AESProductSchemaManager install];
 #endif
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self loadMainNavigationController];
-                });
             }];
         }
         else{
@@ -149,7 +144,6 @@ typedef enum : NSUInteger {
                 [AESProductSchemaManager upgrade];
 #endif
             }];
-            [self loadMainNavigationController];
         }
         
         return YES;
@@ -745,28 +739,6 @@ typedef enum : NSUInteger {
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helpper Methods (private)
 /////////////////////////////////////////////////////////////////////
-
-- (void)loadMainNavigationController {
-    
-    UIViewController *nav = [[self mainStoryborad]
-                             instantiateViewControllerWithIdentifier:@"mainNavigationController"];
-    
-    if (nav) {
-        
-        ((UINavigationController*)nav).navigationBar.shadowImage = [UIImage new];
-        
-        [UIView transitionWithView:self.window
-                          duration:0.3
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.window.rootViewController = nav;
-                        }
-                        completion:nil];
-        return;
-    }
-    
-    DDLogError(@"(AppDelegate) Can't load main navigation controller");
-}
 
 - (UIStoryboard *)mainStoryborad{
     
