@@ -70,7 +70,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     DnsProvidersService * _providersService;
     
-    id<AESharedResourcesProtocol> _resources;
+    APSharedResources *_resources;
 }
 
 @synthesize connectionStatus = _connectionStatus;
@@ -79,7 +79,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
 
-- (id)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources {
+- (id)initWithResources: (nonnull APSharedResources*) resources {
     
     self = [super init];
     if (self) {
@@ -320,10 +320,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
     _lastError = nil;
 
-    return [APSharedResources removeDnsLog];
+    return [_resources removeDnsLog];
 }
 
-- (void)obtainDnsLogRecords:(void (^)(NSArray<APDnsLogRecord *> *records))completionBlock {
+- (void)obtainDnsLogRecords:(void (^)(NSArray<DnsLogRecord *> *records))completionBlock {
 
     _lastError = nil;
     
@@ -331,7 +331,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         return;
     }
     
-    NSArray <APDnsLogRecord *> *records = [APSharedResources readDnsLog];
+    NSArray <DnsLogRecord *> *records = [_resources readDnsLog];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

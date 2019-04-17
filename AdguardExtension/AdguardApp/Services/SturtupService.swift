@@ -29,7 +29,7 @@ class StartupService : NSObject{
         
         // init services
         
-        let sharedResources: AESharedResourcesProtocol = AESharedResources()
+        let sharedResources: AESharedResourcesProtocol = APSharedResources()
         ServiceLocator.shared.addService(service: sharedResources)
         
         // Registering standart Defaults

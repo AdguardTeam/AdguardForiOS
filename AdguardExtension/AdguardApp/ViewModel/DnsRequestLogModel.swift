@@ -24,7 +24,7 @@ struct LogRecord {
     var time: String?
     var type: String?
     var serverName: String?
-    var responses: [String]?
+    var answer: String?
 }
 
 // MARK: - DnsRequestLogModel -
@@ -88,10 +88,7 @@ class DnsRequestLogViewModel {
             }
             
             for logRecord in logRecords.reversed() {
-                guard let firstRequest = logRecord.requests?.first else { return }
-                let type = firstRequest.type.description
-                let responses = logRecord.responses?.map({ $0.stringValue ?? "" })
-                let record = LogRecord(name: firstRequest.name, time: sSelf.dateFromRecord(logRecord), type: type, serverName: logRecord.dnsServer.name, responses: responses)
+                let record = LogRecord(name: logRecord.domain, time: sSelf.dateFromRecord(logRecord), type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer)
                 sSelf.allRecords.append(record)
             }
             
@@ -101,8 +98,8 @@ class DnsRequestLogViewModel {
     
     // MARK: - private methods
     
-    func dateFromRecord (_ record: APDnsLogRecord) -> String {
-        return dateFormatter.string(from: record.recordDate)
+    func dateFromRecord (_ record: DnsLogRecord) -> String {
+        return dateFormatter.string(from: record.date)
     }
     
 }

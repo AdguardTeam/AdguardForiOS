@@ -27,31 +27,49 @@ class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
     }
 }
 
+@objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
-    func start(upstreams: [String], listenAddr: String, listenPort: Int, bootstrapDns: String, fallback: String) -> Bool
+    func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, maxQueues: Int, serverName: String) -> Bool
     func stop()
+    func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data)->Void);
 }
 
 class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     private let timeout = 5000
     private var proxy: MobileDNSProxy?
+    private var queues: [DispatchQueue] = []
+    private var lastQueue = 0
+    let dnsRecordsWriter: DnsLogRecordsWriter;
+    let resources: APSharedResources
     
-    override init() {
+    @objc
+    init(resources: APSharedResources) {
+        self.resources = resources
+        dnsRecordsWriter = DnsLogRecordsWriter(resources: resources)
+        
         super.init()
         
         var error: NSError?
-        MobileConfigureLogger(false, "", DnsProxyLogWriter(), &error)
+        MobileConfigureLogger(true, "", DnsProxyLogWriter(), &error)
+        MobileConfigureDNSRequestProcessedListener(dnsRecordsWriter)
         
         if error != nil {
             DDLogError("(DnsProxyService) - configure logger error: \(error!.localizedDescription)")
         }
     }
     
-    @objc func start(upstreams: [String], listenAddr: String, listenPort: Int, bootstrapDns: String, fallback: String) -> Bool {
+    @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, maxQueues: Int, serverName: String) -> Bool {
         
-        DDLogInfo("(DnsProxyService) start with upstrams: \(upstreams) listen at: \(listenAddr):\(listenPort) bootstrap: \(bootstrapDns) fallback: \(fallback)")
+        queues.removeAll()
+        for i in 0..<maxQueues {
+            queues.append(DispatchQueue(label: "Dns Proxy resolve queue \(i)"))
+        }
+        
+        dnsRecordsWriter.server = serverName
+        
+        DDLogInfo("(DnsProxyService) start with upstrams: \(upstreams) listen at: \(listenAddr) bootstrap: \(bootstrapDns) fallback: \(fallback)")
         let upstreamsStr = upstreams.joined(separator: "\n")
         
         guard let config = MobileConfig() else {
@@ -60,11 +78,13 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         
         config.listenAddr = listenAddr
-        config.listenPort = listenPort
+        config.listenPort = 0
         config.bootstrapDNS = bootstrapDns
         config.fallbacks = fallback
         config.upstreams = upstreamsStr
         config.timeout = timeout
+        config.systemResolvers = bootstrapDns
+        config.detectDNS64Prefix = true
         
         guard let proxy = MobileDNSProxy() else {
             DDLogError("(DnsProxyService) start Error - can not create MobileDNSProxy ")
@@ -96,5 +116,20 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         
         return
+    }
+    
+    @objc func resolve(dnsRequest: Data, callback: @escaping (Data) -> Void) {
+        
+        lastQueue = (lastQueue + 1) % queues.count
+        let queue = queues[lastQueue]
+        queue.async {
+            do {
+                let dnsResponse = try self.proxy!.resolve(dnsRequest)
+                callback(dnsResponse)
+            }
+            catch {
+                DDLogError("(DnsProxy) resolve error: \(error) ")
+            }
+        }
     }
 }

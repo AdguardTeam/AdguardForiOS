@@ -49,7 +49,7 @@ class DnsRequestDetailsController : UITableViewController {
         typeLabel.text = logRecord?.type
         domainLabel.text = logRecord?.name
         serverLabel.text = logRecord?.serverName
-        responsesLabel.text = logRecord?.responses?.joined(separator: "\n")
+        responsesLabel.text = logRecord?.answer
         
         updateTheme()
     }
@@ -65,7 +65,7 @@ class DnsRequestDetailsController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == responsesRow {
             // copy responses to pasteboard
-            if let responsesString = logRecord?.responses?.joined(separator: ", ") {
+            if let responsesString = logRecord?.answer {
                 UIPasteboard.general.string = responsesString
                 ToastView.presentinController(self, message: ACLocalizedString("text_copied", nil))
                 tableView.deselectRow(at: indexPath, animated: true)
@@ -80,10 +80,6 @@ class DnsRequestDetailsController : UITableViewController {
         
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
-    
-    // MARK: - Actions
-    
-    
     
     // MARK: - private methods
     

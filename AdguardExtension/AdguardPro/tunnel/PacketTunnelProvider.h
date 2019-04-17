@@ -47,6 +47,4 @@ extern NSString *APTunnelProviderErrorDomain;
  */
 - (APVpnManagerTunnelMode)tunnelMode;
 
-- (NSData*) dns64Prefix;
-
 @end

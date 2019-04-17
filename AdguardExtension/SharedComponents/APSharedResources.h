@@ -18,9 +18,8 @@
 #import <Foundation/Foundation.h>
 #import "APCommonSharedResources.h"
 #import "ABECService.h"
-#import "APBlockingSubscription.h"
 
-@class APDnsLogRecord;
+@class DnsLogRecord;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -33,43 +32,10 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-+ (NSArray <APDnsLogRecord *> *)readDnsLog;
+- (NSArray <DnsLogRecord *> *)readDnsLog;
 
-+ (BOOL)removeDnsLog;
+- (BOOL)removeDnsLog;
 
-+ (void)writeToDnsLogRecords:(NSArray <APDnsLogRecord *> *)logRecords;
-
-/**
- User-entered list of domains to be excluded from locking at the system-wide level.
- */
-@property (class) NSArray <NSString *> *whitelistDomains;
-/**
- User-entered list of domains that are blocked at the system-wide level.
- */
-@property (class) NSArray <NSString *> *blacklistDomains;
-/**
- save list of trackers domains at the system-wide level
- */
-+ (void) saveTrackerslistDomains: (NSDictionary <NSString *, ABECService*> *) trackerslistDomains;
-/**
- load list of trackers domains at the system-wide level
- */
-+ (NSDictionary <NSString *, ABECService*> *) loadTrackerslistDomainsAndCacheResult:(BOOL) cacheResult;
-/**
- service search by domain name
- */
-+ (ABECService *)serviceByDomain:(NSString*) domain;
-
-/**
- list of hosts (domain with ip) at the system-wide level
- */
-@property (class) NSDictionary <NSString *, NSString*> *hosts;
-
-
-+ (NSString*)pathForSubscriptionsData;
-+ (NSString*)pathForSubscriptionsMeta;
-+ (NSString*)pathForSubscriptionsHosts;
-+ (NSString *)pathForSubscriptionsRules;
-
+- (void)writeToDnsLogRecords:(NSArray <DnsLogRecord *> *)logRecords;
 
 @end

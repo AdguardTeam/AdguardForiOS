@@ -23,15 +23,7 @@
 #import "ADBHelpers/ADBTable.h"
 #import "ADBHelpers/ADBTableRow.h"
 
-#define APS_WHITELIST_DOAMINS              @"pro-whitelist-doamins.data"
-#define APS_BLACKLIST_DOAMINS              @"pro-blacklist-doamins.data"
-#define APS_TRACKERS_DOMAINS               @"pro-trackers-domains.data"
-#define APS_HOSTS_DOMAINS                  @"pro-hosts-domains.data"
 #define DNS_LOG_RECORD_FILE                @"dns-log-records.db"
-#define BLOCKING_SUBSCRIPTIONS_FILE        @"blocking-subscriptions.db"
-#define BLOCKING_SUBSCRIPTIONS_META_FILE   @"blocking-subscriptions-meta.db"
-#define BLOCKING_SUBSCRIPTIONS_HOSTS_FILE  @"blocking-subscriptions-hosts.db"
-#define BLOCKING_SUBSCRIPTIONS_RULES_FILE  @"blocking-subscriptions-rules.db"
 
 #define LOG_RECORDS_LIMIT           1000
 #define PURGE_TIME_INTERVAL         60      // seconds
@@ -54,7 +46,7 @@ static NSTimeInterval lastPurgeTime;
 @interface APDnsLogTable : ADBTableRow
 
 @property (nonatomic) NSDate *timeStamp;
-@property (nonatomic) APDnsLogRecord *record;
+@property (nonatomic) DnsLogRecord *record;
 
 @end
 
@@ -72,7 +64,6 @@ static NSTimeInterval lastPurgeTime;
 static NSString *_dnsLogRecordsPath;
 static FMDatabaseQueue *_readDnsLogHandler;
 static FMDatabaseQueue *_writeDnsLogHandler;
-static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 
 + (void)initialize{
     
@@ -83,83 +74,9 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Properties and Class methods
+#pragma mark public methods
 
-
-+ (NSArray <NSString *> *)whitelistDomains {
-    
-    return [self domainsListWithName:APS_WHITELIST_DOAMINS];
-}
-
-+ (void)setWhitelistDomains:(NSArray<NSString *> *)whitelistDomains {
-    
-    [self setDomainsList:whitelistDomains forName:APS_WHITELIST_DOAMINS];
-}
-
-+ (NSArray <NSString *> *)blacklistDomains {
-    
-    return [self domainsListWithName:APS_BLACKLIST_DOAMINS];
-}
-
-+ (void)setBlacklistDomains:(NSArray<NSString *> *)blacklistDomains {
-    
-    [self setDomainsList:blacklistDomains forName:APS_BLACKLIST_DOAMINS];
-}
-
-+(NSDictionary<NSString *,ABECService *> *)loadTrackerslistDomainsAndCacheResult:(BOOL)cacheResult {
-    
-    NSDictionary* result = _trackerslistDomains;
-    
-    if(!result){
-        result = [self domainsListWithName:APS_TRACKERS_DOMAINS];
-        
-        if(cacheResult)
-            _trackerslistDomains = result;
-    }
-    
-    return result;
-}
-
-+(void)saveTrackerslistDomains:(NSDictionary<NSString *,ABECService *> *)trackerslistDomains {
-    
-    _trackerslistDomains = trackerslistDomains;
-    [self setDomainsList:trackerslistDomains forName:APS_TRACKERS_DOMAINS];
-}
-
-+ (ABECService *)serviceByDomain:(NSString*) domain {
-    
-    NSDictionary<NSString*, ABECService*>* hosts = [self loadTrackerslistDomainsAndCacheResult:YES];
-    
-    //fullmatch
-    __block ABECService *service = hosts[domain];
-    
-    // mask search
-    if(!service) {
-        
-        [hosts enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, ABECService * _Nonnull obj, BOOL * _Nonnull stop) {
-            
-            if([domain hasSuffix:key]) {
-                
-                service = obj;
-                *stop = YES;
-            }
-        }];
-    }
-    
-    return service;
-}
-
-+ (NSDictionary<NSString *,NSString *> *)hosts {
-    
-    return [self domainsListWithName:APS_HOSTS_DOMAINS];
-}
-
-+ (void)setHosts:(NSDictionary<NSString *,NSString *> *)hosts {
-    
-    [self setDomainsList:hosts forName:APS_HOSTS_DOMAINS];
-}
-
-+ (NSArray <APDnsLogRecord *> *)readDnsLog{
+- (NSArray <DnsLogRecord *> *)readDnsLog{
     
     [self initReadDnsLogHandler];
     
@@ -179,7 +96,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
     return nil;
 }
 
-+ (BOOL)removeDnsLog{
+- (BOOL)removeDnsLog{
     
     [self initWriteDnsLogHandler];
     
@@ -195,7 +112,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
     return result;
 }
 
-+ (void)writeToDnsLogRecords:(NSArray<APDnsLogRecord *> *)logRecords {
+- (void)writeToDnsLogRecords:(NSArray<DnsLogRecord *> *)logRecords {
     
     [self initWriteDnsLogHandler];
 
@@ -209,7 +126,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 
         ADBTable *table = [[ADBTable alloc] initWithRowClass:[row class] db:db];
 
-        for (APDnsLogRecord *item in logRecords) {
+        for (DnsLogRecord *item in logRecords) {
 
             row.record = item;
             [table insertOrReplace:NO fromRowObject:row];
@@ -220,7 +137,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 
-+ (void)initWriteDnsLogHandler {
+- (void)initWriteDnsLogHandler {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -236,7 +153,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
     });
 }
 
-+ (void)initReadDnsLogHandler {
+- (void)initReadDnsLogHandler {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -244,7 +161,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
     });
 }
 
-+ (void)createDnsLogTable:(FMDatabase *)db {
+- (void)createDnsLogTable:(FMDatabase *)db {
     
     BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS APDnsLogTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, record BLOB)"];
     if (result) {
@@ -252,7 +169,7 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
     }
 }
 
-+ (void)purgeDnsLog{
+- (void)purgeDnsLog{
     
     NSTimeInterval now = NSDate.date.timeIntervalSince1970;
     if(now - lastPurgeTime > PURGE_TIME_INTERVAL) {
@@ -264,70 +181,6 @@ static NSDictionary <NSString *, ABECService*> *_trackerslistDomains;
             [db executeUpdate:@"DELETE FROM APDnsLogTable WHERE timeStamp > 0 ORDER BY timeStamp DESC LIMIT -1 OFFSET ?", @(LOG_RECORDS_LIMIT)];
         }];
     }
-}
-
-+ (id)domainsListWithName:(NSString *)name {
-
-    AESharedResources *resources = [AESharedResources new];
-    NSData *data = [resources loadDataFromFileRelativePath:name];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-+ (void)setDomainsList:(id)domainsList forName:(NSString *)name {
-    
-    AESharedResources *resources = [AESharedResources new];
-    if (domainsList == nil) {
-        [resources saveData:[NSData data] toFileRelativePath:name];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:domainsList];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [resources saveData:data toFileRelativePath:name];
-    }
-}
-
-+ (void)setSubscriptionsData:(NSData *)subscriptionsData {
-    
-    AESharedResources *resources = [AESharedResources new];
-    
-    if(!subscriptionsData) {
-        subscriptionsData = [NSData data];
-    }
-    
-    [resources saveData:subscriptionsData toFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
-}
-
-+ (NSData *)subscriptionsData {
-    AESharedResources *resources = [AESharedResources new];
-    
-    return [resources loadDataFromFileRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
-}
-
-+ (NSString *)pathForSubscriptionsData {
-    
-    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_FILE];
-}
-
-+ (NSString *)pathForSubscriptionsMeta {
-    
-    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_META_FILE];
-}
-
-+ (NSString *)pathForSubscriptionsHosts {
-    
-    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_HOSTS_FILE];
-}
-
-+ (NSString *)pathForSubscriptionsRules {
-    
-    return [[AESharedResources new] pathForRelativePath:BLOCKING_SUBSCRIPTIONS_RULES_FILE];
 }
 
 

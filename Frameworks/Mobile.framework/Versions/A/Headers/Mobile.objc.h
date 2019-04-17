@@ -13,10 +13,17 @@
 
 @class MobileConfig;
 @class MobileDNSProxy;
+@class MobileDNSRequestProcessedEvent;
 @class MobileDNSStamp;
 @class MobileLogWriterAdapter;
+@protocol MobileDNSRequestProcessedListener;
+@class MobileDNSRequestProcessedListener;
 @protocol MobileLogWriter;
 @class MobileLogWriter;
+
+@protocol MobileDNSRequestProcessedListener <NSObject>
+- (void)dnsRequestProcessed:(MobileDNSRequestProcessedEvent*)e;
+@end
 
 @protocol MobileLogWriter <NSObject>
 - (void)write:(NSString*)s;
@@ -38,7 +45,11 @@ In Java API this structure becomes an object that needs to be configured and set
 @property (nonatomic) NSString* fallbacks;
 @property (nonatomic) NSString* upstreams;
 @property (nonatomic) long timeout;
+@property (nonatomic) long cacheSize;
 @property (nonatomic) BOOL allServers;
+@property (nonatomic) long maxGoroutines;
+@property (nonatomic) NSString* systemResolvers;
+@property (nonatomic) BOOL detectDNS64Prefix;
 @end
 
 /**
@@ -63,6 +74,12 @@ In Java API this structure becomes an object that needs to be configured and set
 
 - (void)rUnlock;
 /**
+ * Resolve resolves the specified DNS request using the configured (and started) dns proxy
+packet - DNS query bytes
+returns response or error
+ */
+- (NSData*)resolve:(NSData*)packet error:(NSError**)error;
+/**
  * Start starts the DNS proxy
  */
 - (BOOL)start:(NSError**)error;
@@ -71,6 +88,26 @@ In Java API this structure becomes an object that needs to be configured and set
  */
 - (BOOL)stop:(NSError**)error;
 - (void)unlock;
+@end
+
+/**
+ * DNSRequestProcessedEvent represents DNS processed event
+ */
+@interface MobileDNSRequestProcessedEvent : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (instancetype)init;
+@property (nonatomic) NSString* domain;
+@property (nonatomic) NSString* type;
+@property (nonatomic) int64_t startTime;
+@property (nonatomic) long elapsed;
+@property (nonatomic) NSString* answer;
+@property (nonatomic) NSString* upstreamAddr;
+@property (nonatomic) long bytesSent;
+@property (nonatomic) long bytesReceived;
+@property (nonatomic) NSString* error;
 @end
 
 /**
@@ -101,6 +138,11 @@ In Java API this structure becomes an object that needs to be configured and set
 @end
 
 /**
+ * ConfigureDNSRequestProcessedListener configures a global listener for the DNSRequestProcessedEvent events
+ */
+FOUNDATION_EXPORT void MobileConfigureDNSRequestProcessedListener(id<MobileDNSRequestProcessedListener> l);
+
+/**
  * ConfigureLogger function is called from mobile API to write dnsproxy log into mobile log
 You need to create object that implements LogWriter interface and set it as argument of this function
  */
@@ -120,7 +162,20 @@ If it is, no error is returned. Otherwise this method returns an error with an e
  */
 FOUNDATION_EXPORT BOOL MobileTestUpstream(NSString* address, NSString* bootstrap, long timeout, NSError** error);
 
+@class MobileDNSRequestProcessedListener;
+
 @class MobileLogWriter;
+
+/**
+ * DNSRequestProcessedListener is a callback interface that can be configured from by the client library
+ */
+@interface MobileDNSRequestProcessedListener : NSObject <goSeqRefInterface, MobileDNSRequestProcessedListener> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (void)dnsRequestProcessed:(MobileDNSRequestProcessedEvent*)e;
+@end
 
 /**
  * LogWriter interface should be implemented inside project that will use dnsproxy mobile API to write dnsproxy log into mobile log

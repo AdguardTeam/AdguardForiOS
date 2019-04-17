@@ -18,7 +18,6 @@
 
 #import <Foundation/Foundation.h>
 #import "APSharedResources.h"
-#import "ApDnsLogRecord.h"
 
 @class  ASDFilterRule, APDnsServerObject, DnsProviderInfo, DnsServerInfo;
 
@@ -145,7 +144,7 @@ extern NSString* __nonnull APVpnChangedNotification;
  Obtains DNS requests logging records,
  and calls `completionBlock` with appropriate parameter.
  */
-- (void)obtainDnsLogRecords:(nonnull void (^)( NSArray <APDnsLogRecord *>* _Nullable records))completionBlock;
+- (void)obtainDnsLogRecords:(nonnull void (^)( NSArray <DnsLogRecord *>* _Nullable records))completionBlock;
 
 /**
  checks if this provider is active
