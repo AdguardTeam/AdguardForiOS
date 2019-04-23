@@ -18,8 +18,7 @@ class FilterGroupId: NSObject {
 class EnabledFilterGroups: NSObject {
     @objc static let groupIds: Set<Int> = [FilterGroupId.ads,
                                           FilterGroupId.privacy,
-                                          FilterGroupId.languageSpecific,
-                                          FilterGroupId.other]
+                                          FilterGroupId.languageSpecific]
 }
 
 
