@@ -258,7 +258,7 @@
         <!--License-->
         <scene sceneID="9v9-9v-ByE">
             <objects>
-                <viewController id="gVb-oh-MXP" customClass="GetProController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetProController" id="gVb-oh-MXP" customClass="GetProController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xAN-CY-VAv"/>
                         <viewControllerLayoutGuide type="bottom" id="7QO-OD-IpH"/>

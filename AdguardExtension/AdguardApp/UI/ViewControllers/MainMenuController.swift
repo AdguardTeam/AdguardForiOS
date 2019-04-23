@@ -24,6 +24,7 @@ class MainMenuController: UITableViewController {
     let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     static let BUGREPORT_URL = "http://agrd.io/report_ios_bug"
     
@@ -32,11 +33,19 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var whitelistCaption: ThemableLabel!
     @IBOutlet weak var filtersDescription: ThemableLabel!
     @IBOutlet weak var dnsServer: ThemableLabel!
+    @IBOutlet weak var getProButton: RoundRectButton!
+    @IBOutlet weak var dnsCell: UITableViewCell!
+    
     
     private var filtersCoutObservation: Any?
     private var activeFiltersCoutObservation: Any?
     private var dnsServerObservetion: Any?
     
+    private var configurationObservation: NSKeyValueObservation?
+    
+    private let dnsCellRow = 1
+    private let getProSegue = "getProSegue"
+    private let showDnsSettingsSegue = "showDnsSettingsSegue"
     
     // MARK: - view controler life cycle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,6 +98,18 @@ class MainMenuController: UITableViewController {
             }
         }
         
+        let updateStatus = { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.getProButton.isHidden = sSelf.configuration.proStatus
+            sSelf.dnsCell.accessoryType = sSelf.configuration.proStatus ? UITableViewCell.AccessoryType.disclosureIndicator :  UITableViewCell.AccessoryType.none
+        }
+        
+        updateStatus()
+        
+        configurationObservation = configuration.observe(\.proStatus) { (_, _) in
+            updateStatus()
+        }
+        
         updateFilters()
     }
     
@@ -130,6 +151,17 @@ class MainMenuController: UITableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == dnsCellRow {
+            if configuration.proStatus {
+                performSegue(withIdentifier: showDnsSettingsSegue, sender: self)
+            }
+            else {
+                performSegue(withIdentifier: getProSegue, sender: self)
+            }
+        }
     }
     
     // MARK: - private methods
