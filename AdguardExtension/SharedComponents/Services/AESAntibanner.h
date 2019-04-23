@@ -192,6 +192,12 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (nonnull NSArray<ASDFilterRule*> *)rulesForFilter:(nonnull NSNumber *)filterId;
 
 /**
+ Calculates rules count for filter.
+ @return rules count
+ */
+- (int )rulesCountForFilter:(nonnull NSNumber *)filterId;
+
+/**
  Set status of antibanner filter.
  
  @param filterId     Identificator of filter (filter Id).

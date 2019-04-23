@@ -57,7 +57,14 @@ class CustomFilterInfoInfoController: UIViewController {
         
         name.text = filter?.name
         rulesCount.text = "\(filter?.rulesCount ?? 0)"
-        homepage.text = filter?.homepage
+        
+        if let homepageUrl = filter?.homepage, homepageUrl.count > 0 {
+            homepage.text = homepageUrl
+        }
+        else {
+            homepage.isHidden = true
+            homepageCaption.isHidden = true
+        }
         
         updateTheme()
     }

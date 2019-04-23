@@ -495,7 +495,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.version = filterMeta.version
                 filter.enabled = group.enabled && filterMeta.enabled.boolValue
                 filter.homepage = filterMeta.homepage
-                //filter.rulesCount = filterMeta.rulesCount.intValue
+                
+                if filter.groupId == FilterGroupId.custom {
+                    filter.rulesCount = Int(antibanner.rulesCount(forFilter: NSNumber(value: filter.filterId)))
+                }
                 
                 var tags = [String]()
                 var langs = [String]()

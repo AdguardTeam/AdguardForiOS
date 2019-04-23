@@ -491,6 +491,17 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return rules;
 }
 
+- (int)rulesCountForFilter:(NSNumber *)filterId {
+    
+    __block int rulesCount;
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        rulesCount = [self rulesCountFromDb:db filterId:filterId];
+    }];
+    
+    return rulesCount;
+}
+
 - (void)setFilter:(NSNumber *)filterId enabled:(BOOL)enabled fromUI:(BOOL)fromUI{
     
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
@@ -2338,6 +2349,20 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
     
     return rules;
+}
+
+- (int) rulesCountFromDb:(FMDatabase *)db filterId:(NSNumber *)filterId{
+    
+    int count = 0;
+    
+    if (!(db && filterId))
+        return 0;
+    
+    @autoreleasepool {
+        count = [db intForQuery:@"select count(*) from filter_rules where filter_id = ?", filterId];
+    }
+    
+    return count;
 }
 
 - (NSArray *)disabledRuleTextsForDb:(FMDatabase *)db filterId:(NSNumber *)filterId{

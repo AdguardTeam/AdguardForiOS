@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B60-Yq-lgJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B60-Yq-lgJ">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -551,8 +551,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homepage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kU0-S1-WIL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="81" width="89" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Homepage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kU0-S1-WIL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="81" width="359" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -563,8 +563,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-PU-hFK">
-                                        <rect key="frame" x="119" y="91.5" width="0.0" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-PU-hFK">
+                                        <rect key="frame" x="389" y="91.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -631,7 +631,7 @@
                                     <constraint firstItem="RJU-32-r8h" firstAttribute="top" secondItem="NsT-wt-1hd" secondAttribute="bottom" constant="27" id="ewZ-hh-CEe"/>
                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="top" secondItem="itk-Te-oOF" secondAttribute="bottom" constant="8" id="flB-HU-7YI"/>
                                     <constraint firstAttribute="bottom" secondItem="5UL-Te-xQC" secondAttribute="bottom" constant="59.5" id="gJf-MP-3kg"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t8x-PU-hFK" secondAttribute="trailing" constant="25" id="gOu-lu-xrJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="t8x-PU-hFK" secondAttribute="trailing" constant="25" id="gOu-lu-xrJ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tDs-5f-dGf" secondAttribute="trailing" constant="25" id="kxi-JN-Rty"/>
                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="25" id="m8G-1h-1n1"/>
                                     <constraint firstAttribute="trailing" secondItem="NsT-wt-1hd" secondAttribute="trailing" constant="25" id="nIU-CU-8SU"/>
