@@ -124,6 +124,7 @@ class DnsProvidersController: UITableViewController {
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderContainerController
             controller.provider = providerToShow
+            controller.defaultDnsServer = defaultServer(providerToShow!)
         }
     }
     
@@ -131,7 +132,8 @@ class DnsProvidersController: UITableViewController {
     
     @IBAction func selectProviderAction(_ sender: UIButton) {
         let provider = providers[sender.tag]
-        guard let server = provider.servers?.first else { return }
+        
+        guard let server = defaultServer(provider) else { return }
         
         // select first server in provider
         vpnManager.activeDnsServer = server
@@ -146,5 +148,38 @@ class DnsProvidersController: UITableViewController {
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+    }
+    
+    private func defaultServer(_ provider: DnsProviderInfo)->DnsServerInfo? {
+        
+        let dot = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dot
+        }
+        
+        if dot != nil {
+            return dot
+        }
+        
+        let doh = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.doh
+        }
+        
+        if doh != nil {
+            return doh
+        }
+        
+        let dnsCrypt = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dnsCrypt
+        }
+        
+        if dnsCrypt != nil {
+            return dnsCrypt
+        }
+        
+        let regular = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dns
+        }
+        
+        return regular
     }
 }

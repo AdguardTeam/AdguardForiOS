@@ -23,6 +23,7 @@ class DnsProviderContainerController : UIViewController {
     // MARK: - public fields
 
     var provider: DnsProviderInfo?
+    var defaultDnsServer: DnsServerInfo?
     
     // MARK: - IB Outlets
 
@@ -36,6 +37,7 @@ class DnsProviderContainerController : UIViewController {
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    
 
     // MARK: - view controller life cycle
 
@@ -60,6 +62,19 @@ class DnsProviderContainerController : UIViewController {
         if segue.identifier == "providerDetailsEmbedSegue" {
             guard let controller = segue.destination as? DnsProviderDetailsController else { return }
             controller.provider = provider
+            
+            var server: DnsServerInfo?
+            
+            if vpnManager.isActiveProvider(provider!) {
+                server = vpnManager.activeDnsServer
+            }
+            else {
+                server = defaultDnsServer
+            }
+            
+            if let dnsProtocol = server?.dnsProtocol {
+                controller.selectedProtocol = dnsProtocol
+            }
         }
     }
 
@@ -67,7 +82,7 @@ class DnsProviderContainerController : UIViewController {
 
     @IBAction func useServerAction(_ sender: Any) {
         
-        vpnManager.activeDnsServer = provider?.servers?.first
+        vpnManager.activeDnsServer = defaultDnsServer
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -26,7 +26,7 @@ class ChooseProtocolController: BottomAlertController {
     
     // MARK: - public variables
     
-    var selectedProtocol = DnsProtocol.dns
+    var selectedProtocol: DnsProtocol?
     var provider: DnsProviderInfo?
     var delegate: ChooseProtocolControllerDelegate?
     
@@ -84,12 +84,16 @@ class ChooseProtocolController: BottomAlertController {
     
     func setupChecks() {
         
+        guard let dnsProtocol = selectedProtocol else {
+            return
+        }
+        
         regularCheck.isHidden = true
         dnsCryptCheck.isHidden = true
         dohCheck.isHidden = true
         dotCheck.isHidden = true
         
-        switch selectedProtocol {
+        switch dnsProtocol {
         case .dns:
             regularCheck.isHidden = false
         case .dnsCrypt:
