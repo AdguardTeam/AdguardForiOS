@@ -82,7 +82,7 @@ class FiltersServiceTest: XCTestCase {
         service.setGroup(service.groups[0], enabled: true)
         
         XCTAssertTrue(service.groups[0].enabled)
-        XCTAssertTrue(service.groups[0].filters[0].enabled)
+        XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
     }
     
@@ -117,7 +117,7 @@ class FiltersServiceTest: XCTestCase {
         
         XCTAssertFalse(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
-        XCTAssertFalse(service.groups[0].filters[1].enabled)
+        XCTAssertTrue(service.groups[0].filters[1].enabled)
     }
     
     func testEnableMultipleGroups() {
@@ -135,7 +135,7 @@ class FiltersServiceTest: XCTestCase {
         // check only first group became enabled
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[1].enabled)
-        XCTAssertTrue(service.groups[0].filters[0].enabled)
+        XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[1].filters[0].enabled)
     }
     

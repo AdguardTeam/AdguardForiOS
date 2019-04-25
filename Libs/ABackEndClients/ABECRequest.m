@@ -67,6 +67,23 @@
     }
 }
 
++ (NSURLRequest *)postRequestForURL:(NSURL *)theURL json:(NSString *)jsonString {
+    @autoreleasepool {
+        
+        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:ABEC_BACKEND_READ_TIMEOUT];
+        
+        if (request) {
+            
+            [request setHTTPMethod:@"POST"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+           
+            [request setHTTPBody: [jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        return request;
+    }
+}
+
 + (id)getRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
     
     @autoreleasepool {

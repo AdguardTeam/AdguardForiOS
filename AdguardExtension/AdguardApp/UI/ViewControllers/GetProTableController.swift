@@ -43,7 +43,9 @@ class GetProTableController: UITableViewController {
         updateTheme()
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            self?.updateTheme()
+            DispatchQueue.main.async {
+                self?.updateTheme()
+            }
         }
     }
     

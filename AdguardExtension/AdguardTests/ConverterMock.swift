@@ -2,7 +2,7 @@
 import Foundation
 
 class ConverterMock: NSObject, AESFilterConverterProtocol {
-    func json(fromRules rules: [Any]!, upTo limit: UInt, optimize: Bool) -> [AnyHashable : Any]! {
+    func json(fromRules rules: [Any], upTo limit: UInt, optimize: Bool) -> [AnyHashable : Any]? {
         
         var json = "["
         for ruleAny in rules {

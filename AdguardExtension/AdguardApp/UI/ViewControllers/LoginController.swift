@@ -71,7 +71,7 @@ class LoginController: BottomAlertController {
         if  let name = nameEdit.text,
             let password = passwordEdit.text {
             
-            purchaseService.login(withName: name, password: password, onSuccess: nil)
+            purchaseService.login(withName: name, password: password)
         }
     }
     

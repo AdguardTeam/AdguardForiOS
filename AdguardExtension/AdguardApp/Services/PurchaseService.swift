@@ -28,7 +28,11 @@ protocol PurchaseServiceProtocol {
     var period: String {get}
     
     func start()
-    func login(withName name: String, password: String, onSuccess success: ((Bool)->Void )?)
+    
+    /*  login on backend server and check licens information
+        the results will be posted through notification center
+     */
+    func login(withName name: String, password: String)
     func logout()->Bool
     func requestPurchase()
     func requestRestore()
@@ -64,6 +68,7 @@ extension PurchaseService {
     static let AEPurchaseErrorDomain = "AEPurchaseErrorDomain"
     
     static let AEPurchaseErrorAuthFailed = -1
+    static let AEConfirmReceiptError = -2
 }
 
 // MARK: - service implementation -
@@ -73,48 +78,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // store kit constants
     private let kGetProProductID = "com.adguard.AdguardExtension.GetProSubscriptionTest"
     
-    // keychain constants
-    private let LOGIN_SERVER = "http://testmobile.adtidy.org"
     
-    private let LOGIN_URL = "http://testmobile.adtidy.org/api/2.0/auth"
-    private let LOGIN_EMAIL_PARAM = "email"
-    private let LOGIN_PASSWORD_PARAM = "password"
-    private let LOGIN_APP_NAME_PARAM = "app_name"
+    // ios_validate_receipt request
     
-    private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
-    
-    // login response params
-    
-    // params
-    private let LOGIN_AUTH_STATUS_PARAM = "auth_status"
-    private let LOGIN_PREMIUM_STATUS_PARAM = "premium_status"
-    private let LOGIN_EXPIRATION_DATE_PARAM = "expiration_date"
-    private let LICENSE_INFO_PARAM = "license_info"
-    
-    // licenses info params
-    private let LICENSES_PARAM = "licenses"
-    private let BEST_LICENSE_ID_PARAM = "license"
-    
-    // one license info params
-    private let LICENSE_KEY_PARAM = "license_key"
-    private let LICENSE_STATUS_PARAM = "license_status"
-    private let LICENSE_TYPE_PARAM = "license_type"
-    private let LICENSE_EXPIRATION_DATE_PARAM = "expiration_date"
-    private let LICENSE_COMPUTERS_PARAM = "license_computers_count"
-    private let LICENSE_MAX_COMPUTERS_PARAM = "license_max_computers_count"
-    private let SUBSCRIPTION_PARAM = "subscription"
-    
-    // subscription params
-    private let SUBSCRIPTION_STATUS_PARAM = "status"
-    private let SUBSCRIPTION_NEXT_BILL_DATE_PARAM = "next_bill_date"
-    
-    // auth status values
-    private let AUTH_SUCCESS = "SUCCESS"
-    private let AUTH_BAD_CREDINTIALS = "BAD_CREDENTIALS"
-    
-    // premium values
-    private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
-    private let PREMIUM_STATUS_FREE = "FREE"
+    private let RECEIPT_DATA_PARAM = "receipt_data"
+    private let VALIDATE_RECEIPT_URL = "http://testmobile.adtidy.org/api/1.0/ios_validate_receipt"
     
     // license status
     private let LICENSE_STATUS_NOT_EXISTS = "NOT_EXISTS"
@@ -128,14 +96,25 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let SIBSCRIPTION_STATUS_PAST_DUE = "PAST_DUE"
     private let SIBSCRIPTION_STATUS_DELETED = "DELETED"
     
+    // premium values
+    private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
+    private let PREMIUM_STATUS_FREE = "FREE"
+    
+    // validate receipt params
+    
+    private let PRODUCTS_PARAM = "products"
+    private let PRODUCT_ID_PARAM = "product_id"
+    private let PREMIUM_STATUS_PARAM = "premium_status"
+    private let EXPIRATION_DATE_PARAM = "expiration_date"
+    
     // MARK: - private properties
     private let network: ACNNetworkingProtocol
     private let resources: AESharedResourcesProtocol
     private var productRequest: SKProductsRequest?
     private var product: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
-    
-    private var expired: Bool = false
+
+    private let loginService: LoginService
     
     private var purchasedThroughInApp: Bool {
         get {
@@ -154,16 +133,14 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     var purchasedThroughLogin: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
-        }
-        set {
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
+            return loginService.loggedIn
         }
     }
     
     @objc dynamic var isProPurchasedInternal: Bool {
         get {
-            return purchasedThroughInApp || (purchasedThroughLogin && !expired);
+            return (purchasedThroughInApp) ||
+                (loginService.loggedIn && loginService.hasPremiumLicense && loginService.active);
         }
     }
     
@@ -210,7 +187,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
         self.network = network
         self.resources = resources
+        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: KeychainService())
+        
         super.init()
+        
+        loginService.activeChanged = { [weak self] in
+            self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
+        }
     }
     
     func start() {
@@ -219,69 +202,96 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         checkPremiumExpired()
     }
     
-    func login(withName name: String, password: String, onSuccess success:((Bool)->Void)?) {
+    func login(withName name: String, password: String) {
         
-        let params = [LOGIN_EMAIL_PARAM: name, LOGIN_PASSWORD_PARAM: password, LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE]
-        guard let url = URL(string: LOGIN_URL) else  {
-            success?(false)
-            DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
+        loginService.login(name: name, password: password) { [weak self] (error) in
+            guard let sSelf = self else { return }
+            
+            if error != nil {
+                sSelf.postNotification(PurchaseService.kPSNotificationLoginFailure, error)
+                return
+            }
+            
+            // check state
+            if !sSelf.loginService.hasPremiumLicense {
+                sSelf.postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
+                return
+            }
+            
+            if !sSelf.loginService.active {
+                let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
+                                PurchaseService.kPSNotificationLoginPremiumExpired: true] as [String : Any]
+                
+                NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+                
+                return
+            }
+        }
+        
+    }
+    
+    func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
+        
+        // get receipt
+        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL,
+            let data = try? Data(contentsOf: receiptUrlStr)
+        else {
+            complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
             return
         }
         
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params)
+        let base64Str = data.base64EncodedString()
+        
+        // post receipt to our backend
+        
+        let jsonToSend = "{\"\(RECEIPT_DATA_PARAM)\":\"\(base64Str)\"}"
+        
+        guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
+            
+            DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, json: jsonToSend)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in
-            
             guard let strongSelf = self else {
                 return
             }
             
-            guard error == nil else {
-                strongSelf.processLoginError(error: error)
+            if error != nil {
+                complete(error!)
                 return
             }
             
             guard let data = dataOrNil  else{
-                strongSelf.processLoginError(error: nil)
+                complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
                 return
             }
             
             do {
                 let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 
-                let loginSuccess = strongSelf.processLoginResponce(json: jsonResponce)
+                let validateSuccess = strongSelf.processValidateResponce(json: jsonResponce)
                 
-                if !loginSuccess {
-                    success?(false)
+                if !validateSuccess {
+                    complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
                     return
                 }
-                
-                if(!strongSelf.saveToKeychain(login: name, password: password)){
-                    success?(false)
-                    return
-                }
-                
-                strongSelf.purchasedThroughLogin = true;
-                let expired = strongSelf.checkExpired()
-                
+
+                strongSelf.purchasedThroughInApp = strongSelf.isRenewableSubscriptionActive()
+
                 strongSelf.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
-                
-                success?(!expired)
+                complete(nil)
             }
             catch {
-                self?.processLoginError(error: error)
-                success?(false)
+                complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
             }
         }
     }
     
     func logout()->Bool {
-        if !deleteLoginFromKeychain() {
-            return false
-        }
-        
-        purchasedThroughLogin = false
-        return true
+        return loginService.logout()
     }
     
     func requestPurchase() {
@@ -322,6 +332,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
+        var restored = false
+        var purchased = false
+        
         for transaction in transactions {
             if(transaction.payment.productIdentifier != kGetProProductID) { continue }
             
@@ -332,20 +345,32 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             case .failed:
                 postNotification(PurchaseService.kPSNotificationPurchaseFailure, transaction.error)
                 
-            case .purchased, .restored:
-                
-                purchasedThroughInApp = true
-                
-                let result = transaction.transactionState == .purchased ? PurchaseService.kPSNotificationPurchaseSuccess : PurchaseService.kPSNotificationRestorePurchaseSuccess
-                
-                postNotification(result)
-                
-                postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
-                
+            case .purchased:
+                purchased = true
+                SKPaymentQueue.default().finishTransaction(transaction)
+                    
+            case .restored:
+                restored = true
                 SKPaymentQueue.default().finishTransaction(transaction)
                 
             default:
                 break
+            }
+        }
+        
+        if purchased || restored {
+            validateReceipt { [weak self](error) in
+                guard let sSelf = self else { return }
+                
+                if error == nil && sSelf.purchasedThroughInApp {
+                    let result = purchased ? PurchaseService.kPSNotificationPurchaseSuccess : PurchaseService.kPSNotificationRestorePurchaseSuccess
+                    
+                    sSelf.postNotification(result)
+                }
+                
+                if error == nil && !sSelf.purchasedThroughInApp {
+                    sSelf.postNotification(PurchaseService.kPSNotificationRestorePurchaseNothingToRestore)
+                }
             }
         }
     }
@@ -373,170 +398,61 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         postNotification(PurchaseService.kPSNotificationRestorePurchaseFailure, error)
     }
     
-    // MARK: - keychain access
-    internal func loadAuthFromKeychain()->(login: String, password: String)? {
-        
-        let query = [kSecClass as String:             kSecClassInternetPassword,
-                     kSecAttrServer as String:        LOGIN_SERVER as Any,
-                     kSecMatchLimit as String:        kSecMatchLimitOne,
-                     kSecReturnAttributes as String:  true,
-                     kSecReturnData as String:        true]
-        
-        var attributes: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &attributes)
-        
-        if status != errSecSuccess {
-            return nil
-        }
-        
-        guard let resultDict = attributes as! [String: Any]?  else {
-            return nil
-        }
-        
-        guard   let email = resultDict[kSecAttrAccount as String],
-                let passData = resultDict[kSecValueData as String] else {
-            return nil
-        }
-        
-        guard let password = String(data: passData as! Data, encoding: .utf8) else {
-            return nil
-        }
-        
-        return (email as! String, password)
-    }
-    
-    internal func saveToKeychain(login: String, password: String) -> Bool {
-        
-        _ = deleteLoginFromKeychain()
-        
-        guard let passData = password.data(using: String.Encoding.utf8) else {
-            return false
-        }
-        
-        let query = [kSecClass as String:             kSecClassInternetPassword,
-                     kSecAttrServer as String:        LOGIN_SERVER as Any,
-                     kSecAttrAccount as String:       login,
-                     kSecValueData as String:         passData]
-        
-        var result: CFTypeRef?
-        let status = SecItemAdd(query as CFDictionary, &result)
-        
-        return status == errSecSuccess
-    }
-    
-    internal func deleteLoginFromKeychain() ->Bool {
-        
-        // read login(s) from keychain
-        
-        let query = [kSecClass as String:             kSecClassInternetPassword,
-                     kSecAttrServer as String:        LOGIN_SERVER as Any,
-                     kSecMatchLimit as String:        kSecMatchLimitAll,
-                     kSecReturnAttributes as String:  true,
-                     kSecReturnData as String:        true]
-        
-        var attributes: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &attributes)
-        if(status != errSecSuccess) { return false }
-        
-        guard let logins = attributes as? [[String: Any]] else { return false }
-        
-        for login in logins {
-            let email = login[kSecAttrAccount as String]
-            
-            let deleteQuery = [kSecClass as String:             kSecClassInternetPassword,
-                               kSecAttrServer as String:        LOGIN_SERVER as Any,
-                               kSecAttrAccount as String:       email as! String]
-            
-            let status = SecItemDelete(deleteQuery as CFDictionary)
-            if status != errSecSuccess {return false}
-        }
-        
-        return true
-    }
-        
+     
     // MARK: helper methods
     private func checkPremiumExpired() {
-        if(isPremiumExpired()) {
-            
-            tryToRelogin {[weak self] (success) in
-                self?.expired = !success
-                if(!success) {
+        if(purchasedThroughInApp && !isRenewableSubscriptionActive()) {
+            validateReceipt { [weak self] (error) in
+                if self?.isRenewableSubscriptionActive() ?? false {
                     self?.notifyPremiumExpired()
                 }
             }
         }
-        else {
-            self.expired = false;
+        
+        if(loginService.loggedIn && loginService.hasPremiumLicense && !loginService.active) {
+            
+            loginService.relogin() { [weak self] (error) in
+                if error != nil || !(self?.loginService.active ?? false) {
+                    self?.notifyPremiumExpired()
+                }
+            }
         }
     }
     
-    private func isPremiumExpired()->Bool {
-        if let expirationDate = resources.sharedDefaults().object(forKey: AEDefaultsPremiumExpirationDate) as? Date {
+    private func isRenewableSubscriptionActive()->Bool {
+        
+        if let expirationDate = resources.sharedDefaults().object(forKey: AEDefaultsRenewableSubscriptionExpirationDate) as? Date {
             return expirationDate > Date()
         }
+        
         return false
     }
     
-    private func tryToRelogin(onSuccess success: @escaping (_ success: Bool)->Void){
+    private func processValidateResponce(json: [String: Any])->Bool {
         
-        if let (email, password) = loadAuthFromKeychain() {
-            login(withName: email, password: password, onSuccess: success)
+        guard let products = json[PRODUCTS_PARAM] as? [[String: Any]] else { return false }
+        
+        for product in products {
+            let status = product[PREMIUM_STATUS_PARAM] as? String
+            guard let expirationDate = product[EXPIRATION_DATE_PARAM] as? Double else { continue }
+            
+            if status == PREMIUM_STATUS_ACTIVE {
+                if (expirationDate / 1000) > Date().timeIntervalSince1970 {
+                    
+                    let date = Date(timeIntervalSince1970: expirationDate / 1000)
+                    resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
+                    
+                    break
+                }
+            }
         }
-        else {
-            success(false)
-        }
-    }
-    
-    private func processLoginError(error errorOrNil: Error?) {
-        
-        postNotification(PurchaseService.kPSNotificationLoginFailure, errorOrNil)
-    }
-    
-    private func processLoginResponce(json: [String: Any]) -> Bool {
-        
-        guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
-            processLoginError(error: nil)
-            return false
-        }
-        
-        let premium = json[LOGIN_PREMIUM_STATUS_PARAM] as? String?
-        let expirationTimestampAny = json[LOGIN_EXPIRATION_DATE_PARAM]
-        
-        var expirationTimestamp: Double?
-        
-        switch expirationTimestampAny {
-        case let strValue as String:
-            expirationTimestamp = Double(strValue)
-        case let doubleValue as Double:
-            expirationTimestamp = doubleValue
-        default:
-            break
-        }
-        
-        if status == AUTH_BAD_CREDINTIALS {
-            let error = NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEPurchaseErrorAuthFailed, userInfo: nil)
-            processLoginError(error: error)
-            return false
-        }
-        
-        // process premium
-        if premium != PREMIUM_STATUS_ACTIVE {
-            let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginNotPremiumAccount]
-            NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                            object: self, userInfo: userInfo)
-            return false
-        }
-        
-        // save expiration date in user defaults
-        let expirationDate = Date(timeIntervalSince1970: expirationTimestamp ?? 0 / 1000)
-        resources.sharedDefaults().set(expirationDate, forKey: AEDefaultsPremiumExpirationDate)
         
         return true
     }
     
     private func checkExpired() -> Bool{
         
-        let expired = isPremiumExpired();
+        let expired = !loginService.active;
         
         let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
                         PurchaseService.kPSNotificationLoginPremiumExpired: expired] as [String : Any]
@@ -547,9 +463,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     private func notifyPremiumExpired() {
-        if(purchasedThroughInApp) {
-            return;
-        }
+        
         postNotification(PurchaseService.kPSNotificationPremiumExpired)
     }
     

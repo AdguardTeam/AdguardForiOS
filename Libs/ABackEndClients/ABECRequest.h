@@ -39,6 +39,12 @@
 + (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary *)parameters;
 
 /**
+ Create request object with POST method^ Content-Type = application/json
+ @param jsonString - jaon to send
+ */
++ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL json:(nonnull NSString*) jsonString;
+
+/**
     Create request object with GET method.
     @param parameters   May be nil.
  */

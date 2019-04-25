@@ -143,6 +143,15 @@ extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughLogin;
 extern NSString* _Nonnull AEDefaultsPremiumExpirationDate;
 
 /**
+ User defaults key, wich defines tha user has premium license */
+extern NSString* _Nonnull AEDefaultsHasPremiumLicense;
+
+
+/**
+ User defaults key, wich contains In app purchase subscription expiration date (NSDate) */
+extern NSString* _Nonnull AEDefaultsRenewableSubscriptionExpirationDate;
+
+/**
  User defaults key, wich defines that "pro expired" message showed */
 extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 

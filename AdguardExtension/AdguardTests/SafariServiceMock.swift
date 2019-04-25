@@ -14,8 +14,8 @@ class SafariServiceMock: NSObject, SafariServiceProtocol {
         jsons[type] = json
     }
     
-    func readJson(forType type: Int) -> Data {
-        return jsons[type] ?? Data()
+    func readJson(forType type: Int) -> Data? {
+        return jsons[type]
     }
     
     func allBlockingContentRules() -> [String : Data] {
