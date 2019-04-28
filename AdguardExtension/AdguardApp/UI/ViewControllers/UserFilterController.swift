@@ -107,8 +107,8 @@ class UserFilterController : UIViewController {
         updateBottomBar()
     }
     
-    @IBAction func exportAction(_ sender: Any) {
-        fileShare.exportFile(parentController: self, filename: whitelist ? ( inverted ? "adguard_inverted_whitelist.txt" : "adguard_whitelist.txt") : "adguard_user_filter.txt", text: model.plainText()) { (message) in
+    @IBAction func exportAction(_ sender: UIView) {
+        fileShare.exportFile(parentController: self, sourceView: sender, sourceRect: sender.bounds, filename: whitelist ? ( inverted ? "adguard_inverted_whitelist.txt" : "adguard_whitelist.txt") : "adguard_user_filter.txt", text: model.plainText()) { (message) in
             
         }
     }

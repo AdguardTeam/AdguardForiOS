@@ -25,7 +25,7 @@ protocol FileShareServiceProtocol {
     /**
      exports @text to Files App with @filename
     */
-    func exportFile(parentController: UIViewController, filename: String, text: String, completionHandler:(_ error: String?)->Void)
+    func exportFile(parentController: UIViewController, sourceView: UIView, sourceRect: CGRect, filename: String, text: String, completionHandler:(_ error: String?)->Void)
     
     /**
      imports text from Files App. Returns @text of imported file as a string in callback
@@ -37,7 +37,7 @@ class FileShareService : NSObject, UIDocumentPickerDelegate, FileShareServicePro
 
     private var importCompletionHandler: ( (String, String?) -> Void)?
     
-    func exportFile(parentController: UIViewController, filename: String, text: String, completionHandler: (String?) -> Void) {
+    func exportFile(parentController: UIViewController, sourceView: UIView, sourceRect: CGRect, filename: String, text: String, completionHandler: (String?) -> Void) {
         
         let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
 
@@ -47,6 +47,9 @@ class FileShareService : NSObject, UIDocumentPickerDelegate, FileShareServicePro
             let activityItem = path
             let objectsToShare = [activityItem]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = sourceView
+            activityVC.popoverPresentationController?.sourceRect = sourceRect
+            
             parentController.present(activityVC, animated: true, completion: nil)
         }
         catch  {
