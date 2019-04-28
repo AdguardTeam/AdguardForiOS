@@ -1649,6 +1649,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         [parser parseFromUrl:url completion:^(AASCustomFilterParserResult *result, NSError *error) {
             
             if (!result || error) {
+                dispatch_group_leave(parseGroup);
                 return;
             }
             
