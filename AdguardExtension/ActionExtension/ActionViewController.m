@@ -42,6 +42,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     AESharedResources *_sharedResources;
     AEService *_aeService;
     SafariService *_safariService;
+    ContentBlockerService *_contentBlockerService;
     
     NSURL *_url;
     BOOL _injectScriptSupported;
@@ -117,112 +118,106 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     return nil;
 }
 
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Public Methods
 /////////////////////////////////////////////////////////////////////
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    [self startProcessing];
 
     // Get the item[s] we're handling from the extension context.
-    
+
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    
+
     _sharedResources = [AESharedResources new];
     _safariService = [[SafariService alloc] initWithResources:_sharedResources];
-    ContentBlockerService* contentBlockerService = [[ContentBlockerService alloc] initWithResources:_sharedResources safariService:_safariService];
-    _aeService = [[AEService alloc] initWithContentBlocker:contentBlockerService resources:_sharedResources];
-    
+    _contentBlockerService = [[ContentBlockerService alloc] initWithResources:_sharedResources safariService:_safariService];
+    _aeService = [[AEService alloc] initWithContentBlocker:_contentBlockerService resources:_sharedResources];
+
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
-    
+
     __block NSString *errorMessage = ACLocalizedString(@"support_error_safari_extension", @"(Action Extension - ActionViewController) Some errors when starting.");
-    
+
     NSExtensionItem *item = self.extensionContext.inputItems.firstObject;
     NSItemProvider *itemProvider = item.attachments.firstObject;
+
+    ASSIGN_WEAK(self);
+
     if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePropertyList]) {
         [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypePropertyList options:nil completionHandler:^(NSDictionary *results, NSError *error) {
-            
+
+            ASSIGN_STRONG(self);
+
             NSDictionary *theDict = results[NSExtensionJavaScriptPreprocessingResultsKey];
             NSString *urlString = theDict[@"urlString"];
             if (urlString) {
-                _url = [NSURL URLWithString:urlString];
+                USE_STRONG(self)->_url = [NSURL URLWithString:urlString];
             }
-            _host = [_url hostWithPort];
+            USE_STRONG(self)->_host = [USE_STRONG(self)->_url hostWithPort];
             //            _host = url.host;x
-            
-            _injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
-            
+
+            USE_STRONG(self)->_injectScriptSupported = [theDict[@"injectScriptSupported"] boolValue];
+
             if (error) {
-                
+
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari:\n%@", [error localizedDescription]);
             }
             else if ([NSString isNullOrEmpty:_host]) {
-                
+
                 DDLogError(@"(ActionViewController) Error of obtaining page url from Safari: url is empty.");
                 errorMessage = ACLocalizedString(@"hostname_obtaining_error", @"(Action Extension - ActionViewController) Can't obtain hostname when starting.");
             }
             else {
-                
-                NSError *error = [self prepareDataModel];
+
+                NSError *error = [USE_STRONG(self) prepareDataModel];
                 if (error) {
-                    
+
                     if (error.code == AE_ACTION_ERROR_NODB) {
                         errorMessage = error.localizedDescription;
                     }
                 }
                 else {
-                    [_aeService onReady:^{
-                        
+                    
+                    [USE_STRONG(self)->_aeService onReady:^{
+
                         // Add observers for application notifications
-                        _observerObjects = [NSMutableArray arrayWithCapacity:2];
-                        
-                        id observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-                            
-                            [_mainController.navigationController setViewControllers:@[self] animated:NO];
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                                         (int64_t)(USER_FRIENDLY_DELAY * NSEC_PER_SEC)),
-                                           dispatch_get_main_queue(), ^{
-                                               
-                                               [self startProcessing];
-                                           });
-                            
-                        }];
-                        if (observerObject) {
-                            [_observerObjects addObject:observerObject];
-                        }
-                        
-                        observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-                            
+                        USE_STRONG(self)->_observerObjects = [NSMutableArray arrayWithCapacity:2];
+
+                        id observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+
                             [AESharedResources synchronizeSharedDefaults];
                         }];
                         if (observerObject) {
-                            [_observerObjects addObject:observerObject];
+                            [USE_STRONG(self)->_observerObjects addObject:observerObject];
                         }
                         observerObject = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-                            
+
                             [AESharedResources synchronizeSharedDefaults];
                         }];
                         if (observerObject) {
-                            [_observerObjects addObject:observerObject];
+                            [USE_STRONG(self)->_observerObjects addObject:observerObject];
                         }
                         //--------------------------------------------
-                        
-                        _iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/favicon.ico", _url.scheme, [_url hostWithPort]]];
-                        
-                        [self startProcessing];
-                        
+
+                        USE_STRONG(self)->_iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/favicon.ico", USE_STRONG(self)->_url.scheme, [USE_STRONG(self)->_url hostWithPort]]];
+
+                        [USE_STRONG(self) startProcessing];
+
                     }];
-                    
+
                     return;
                 }
             }
             //done on error
-            [self stopProcessingWithMessage:errorMessage];
+            [USE_STRONG(self) stopProcessingWithMessage:errorMessage];
         }];
-        
+
         return;
     }
-    
+
     //done on error
     [self stopProcessingWithMessage:errorMessage];
 }
@@ -241,15 +236,6 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
 }
-
-- (IBAction)done {
-    // Return any edited content to the host app.
-    // This template doesn't do anything, so we just echo the passed in items.
-    NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
-    extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"needReload":@(0)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
-    [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];
-}
-
 
 - (NSError *)prepareDataModel{
     
@@ -295,7 +281,10 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
                                           }];
     }
     
+    ASSIGN_WEAK(self);
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        ASSIGN_STRONG(self);
         
         //------------ Checking DB status -----------------------------
         ASDatabase *dbService = [ASDatabase singleton];
@@ -305,11 +294,11 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         }
         else if (!dbService.ready){
             
-            [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+            [dbService addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
         }
         //--------------------- Start Services ---------------------------
         else
-            [_aeService start];
+            [USE_STRONG(self)->_aeService start];
         
     });
     
@@ -328,6 +317,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         
         _mainController.resources = _sharedResources;
         _mainController.safariService = _safariService;
+        _mainController.contentBlocker = _contentBlockerService;
         
         _mainController.domainName = _host;
         _mainController.url = _url;
@@ -401,8 +391,10 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         _enabled = [ActionViewController domainObjectIfExistsFromContentBlockingWhitelistFor:_host] == nil;
     }
     
+    ASSIGN_WEAK(self);
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+        ASSIGN_STRONG(self);
+        [USE_STRONG(self).actionButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     });
     
 }

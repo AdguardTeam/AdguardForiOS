@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RcZ-aB-avh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RcZ-aB-avh">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Main-->
         <scene sceneID="2kv-8o-U02">
             <objects>
+                <tapGestureRecognizer id="ZgV-66-sgJ" userLabel="Block Element Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="clickBlockElement:" destination="SAS-BZ-Yxb" id="WYD-Fc-GIT"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Lut-eZ-XLW" userLabel="Missed Ad Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="clickMissedAd:" destination="SAS-BZ-Yxb" id="f1f-Fe-nMG"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g2E-tM-9C8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="DKJ-8O-wiY">
+                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="toggleStatus:" destination="SAS-BZ-Yxb" eventType="valueChanged" id="Gfa-At-nFd"/>
+                    </connections>
+                </switch>
                 <tableViewController id="SAS-BZ-Yxb" userLabel="Main" customClass="AEAUIMainController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="5fk-OQ-Taf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -187,10 +205,11 @@
                     <navigationItem key="navigationItem" id="QU1-5t-Sf2">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="g6K-wN-CqM">
                             <connections>
-                                <action selector="done:" destination="SAS-BZ-Yxb" id="TMg-zq-egv"/>
+                                <action selector="done:" destination="SAS-BZ-Yxb" id="BvA-Kf-DZ5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="domainLabel" destination="4wF-ey-uyv" id="1AS-xd-CNC"/>
                         <outlet property="enabledSwitch" destination="DKJ-8O-wiY" id="l9Y-Yh-qMf"/>
@@ -202,26 +221,8 @@
                         <outletCollection property="themableLabels" destination="Wrl-xu-3kv" id="uOo-ag-L4m"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g2E-tM-9C8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="DKJ-8O-wiY">
-                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <action selector="toggleStatus:" destination="SAS-BZ-Yxb" eventType="valueChanged" id="Gfa-At-nFd"/>
-                    </connections>
-                </switch>
-                <tapGestureRecognizer id="Lut-eZ-XLW" userLabel="Missed Ad Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="clickMissedAd:" destination="SAS-BZ-Yxb" id="f1f-Fe-nMG"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="ZgV-66-sgJ" userLabel="Block Element Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="clickBlockElement:" destination="SAS-BZ-Yxb" id="WYD-Fc-GIT"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2918" y="458"/>
+            <point key="canvasLocation" x="2917" y="462"/>
         </scene>
         <!--Main Loader-->
         <scene sceneID="H48-ka-Utz">
@@ -269,13 +270,7 @@
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="centerX" secondItem="Wqh-ks-max" secondAttribute="centerX" id="ycC-7M-jYJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Slh-lt-JH2">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="uIy-RG-qWe">
-                            <connections>
-                                <action selector="done" destination="tQP-Ou-q2c" id="79m-z5-MHd"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Slh-lt-JH2"/>
                     <connections>
                         <outlet property="actionButton" destination="iva-rc-H8x" id="OfA-mi-FB5"/>
                         <outlet property="loadIndicator" destination="vSc-6z-Tyo" id="UFv-Q8-BUz"/>

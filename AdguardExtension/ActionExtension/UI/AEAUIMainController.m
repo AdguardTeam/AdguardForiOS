@@ -64,7 +64,6 @@
 
 @property BOOL enabledHolder;
 @property id<ThemeServiceProtocol> theme;
-@property ContentBlockerService* contentBlocker;
 
 @property IBOutlet UISwitch *enabledSwitch;
 @property IBOutlet ThemableLabel *domainLabel;
@@ -82,8 +81,6 @@
     self.resources = [AESharedResources new];
     SimpleConfiguration* configuration = [[SimpleConfiguration alloc] initWithResources:self.resources];
     self.theme = [[ThemeService alloc] init:configuration];
-    self.safariService = [[SafariService alloc] initWithResources:self.resources];
-    self.contentBlocker = [[ContentBlockerService alloc] initWithResources:_resources safariService:_safariService];
     
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
     
@@ -250,9 +247,7 @@
         [self.enabledSwitch setOn:self.domainEnabled animated:YES];
     }
 }
-
 - (IBAction)done:(id)sender {
-    
     NSExtensionItem *extensionItem = [[NSExtensionItem alloc] init];
     extensionItem.attachments = @[[[NSItemProvider alloc] initWithItem: @{NSExtensionJavaScriptFinalizeArgumentKey: @{@"needReload":@(_enabledHolder != self.domainEnabled)}} typeIdentifier:(NSString *)kUTTypePropertyList]];
     [self.extensionContext completeRequestReturningItems:@[extensionItem] completionHandler:nil];

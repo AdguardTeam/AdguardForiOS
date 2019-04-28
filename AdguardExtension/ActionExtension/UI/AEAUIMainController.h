@@ -28,6 +28,7 @@
 
 @property id<AESharedResourcesProtocol> resources;
 @property id<SafariServiceProtocol> safariService;
+@property ContentBlockerService *contentBlocker;
 
 @property (nonatomic) NSString *domainName;
 @property (nonatomic) NSURL *url;
