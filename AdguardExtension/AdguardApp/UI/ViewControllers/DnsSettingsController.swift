@@ -47,6 +47,15 @@ class DnsSettingsController : UITableViewController{
             }
         }
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+            [weak self] (notification) in
+            guard let sSelf = self else { return }
+            sSelf.enabledSwitch.isOn = sSelf.vpnManager.enabled
+            if sSelf.vpnManager.lastError != nil {
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: sSelf.vpnManager.lastError?.localizedDescription)
+            }
+        }
+        
         self.updateUI()
         
         updateTheme()
