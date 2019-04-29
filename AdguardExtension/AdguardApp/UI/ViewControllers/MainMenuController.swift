@@ -100,8 +100,10 @@ class MainMenuController: UITableViewController {
         
         let updateStatus = { [weak self] in
             guard let sSelf = self else { return }
-            sSelf.getProButton.isHidden = sSelf.configuration.proStatus
-            sSelf.dnsCell.accessoryType = sSelf.configuration.proStatus ? UITableViewCell.AccessoryType.disclosureIndicator :  UITableViewCell.AccessoryType.none
+            DispatchQueue.main.async {
+                sSelf.getProButton.isHidden = sSelf.configuration.proStatus
+                sSelf.dnsCell.accessoryType = sSelf.configuration.proStatus ? UITableViewCell.AccessoryType.disclosureIndicator :  UITableViewCell.AccessoryType.none
+            }
         }
         
         updateStatus()

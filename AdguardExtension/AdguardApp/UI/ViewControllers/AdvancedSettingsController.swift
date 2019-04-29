@@ -32,6 +32,16 @@ class AdvancedSettingsController: UITableViewController {
   
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
+    
+    @IBOutlet weak var getProButton: RoundRectButton!
+    
+    var proObservation: NSKeyValueObservation?
+    
+    private let wifiOnlyRow = 0
+    private let simplifiedRow = 1
+    private let invertWhitelistRow = 2
+    private let darkModeRow = 3
+    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
@@ -41,7 +51,14 @@ class AdvancedSettingsController: UITableViewController {
         invertedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
         wifiUpdateSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsWifiOnlyUpdates)
         simplifiedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
-        darkModeSwitch.isOn = configuration.darkTheme
+        
+        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
+            DispatchQueue.main.async {
+                self?.updateUI()
+            }
+        }
+        
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,18 +69,23 @@ class AdvancedSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
-        case 0:
+        case wifiOnlyRow:
             wifiUpdateSwitch.setOn(!wifiUpdateSwitch!.isOn, animated: true)
             toggleWifiOnly(wifiUpdateSwitch)
-        case 1:
+        case simplifiedRow:
             simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
             toggleSimplified(simplifiedSwitch)
-        case 2:
+        case invertWhitelistRow:
             invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
             toggleInverted(invertedSwitch)
-        case 3:
-            darkModeSwitch.setOn(!darkModeSwitch!.isOn, animated: true)
-            toggleDarkMode(darkModeSwitch)
+        case darkModeRow:
+            if configuration.proStatus {
+                darkModeSwitch.setOn(!darkModeSwitch!.isOn, animated: true)
+                toggleDarkMode(darkModeSwitch)
+            }
+            else {
+                performSegue(withIdentifier: "getProSegue", sender: self)
+            }
             
         default:
             break
@@ -130,5 +152,19 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupSwitch(simplifiedSwitch)
         theme.setupSwitch(darkModeSwitch)
         theme.setupSwitch(wifiUpdateSwitch)
+    }
+    
+    private func updateUI() {
+        
+        if configuration.proStatus {
+            getProButton.isHidden = true
+            darkModeSwitch.isHidden = false
+        }
+        else {
+            getProButton.isHidden = false
+            darkModeSwitch.isHidden = true
+        }
+        
+        darkModeSwitch.isOn = configuration.darkTheme
     }
 }
