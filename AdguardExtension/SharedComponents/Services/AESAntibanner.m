@@ -1229,11 +1229,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSDate *)filtersLastUpdateTime {
     
     __block NSDate* date = nil;
-    [[ASDatabase singleton] queryDefaultDB:^(FMDatabase* db) {
-        
-        FMResultSet *result = [db executeQuery:@"select MAX(last_update_time) from filters where is_enabled = 1"];
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *result = [db executeQuery:@"select max(last_update_time) from filters where is_enabled = 1"];
         if([result next]) {
-            NSString* dateString = result[@"MAX(last_update_time)"];
+            NSString* dateString = result[@"max(last_update_time)"];
             date = [NSDate dateWithSQliteString:dateString];
         }
         
@@ -1795,8 +1794,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             [theDB exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 BOOL result = [self insertMetadataIntoDb:db groups:metadata.groups];
+                result = result && [self insertMetadataIntoDb:db filters:metadata.filters];
                 if (filtersMetadataUpdateOnly.count && result) {
-                    result = [self insertMetadataIntoDb:db filters:filtersMetadataUpdateOnly];
+                    result = result && [self insertMetadataIntoDb:db filters:filtersMetadataUpdateOnly];
                     metadataUpdated = result;
                 }
                 
