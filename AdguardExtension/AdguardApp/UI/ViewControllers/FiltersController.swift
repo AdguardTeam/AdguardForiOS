@@ -126,7 +126,12 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel?.filtersChangedCallback = { [weak self] in self?.tableView.reloadData() }
+        viewModel?.filtersChangedCallback = { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+            sSelf.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            sSelf.tableView.setContentOffset(.zero, animated: false)
+        }
         viewModel?.searchChangedCallback = { [weak self] in self?.updateBarButtons() }
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
