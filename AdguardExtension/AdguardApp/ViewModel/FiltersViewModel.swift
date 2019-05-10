@@ -237,8 +237,10 @@ class FiltersViewModel: FiltersViewModelProtocol {
         isSearchActive = true
         
         var newSearchString = ""
-        if searchString.contains(name) {
-            newSearchString = searchString.replacingOccurrences(of: name, with: "")
+        
+        let pattern = "(^|\\s)(\(name))\\s?"
+        if searchString.range(of: pattern, options: .regularExpression) != nil {
+            newSearchString = searchString.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
             newSearchString = newSearchString.trimmingCharacters(in: .whitespaces)
         }
         else {
