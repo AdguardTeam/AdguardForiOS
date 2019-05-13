@@ -62,7 +62,9 @@ class StartupService : NSObject{
         ServiceLocator.shared.addService(service: themeService)
         
         let filtersService: FiltersServiceProtocol = FiltersService(antibanner: aeService.antibanner(), configuration: configuration, contentBlocker: contentBlockerService)
-        filtersService.load(refresh: false) {}
+        aeService.onReady {
+            filtersService.load(refresh: false) {}
+        }
         ServiceLocator.shared.addService(service: filtersService)
         
         let vpnManager: APVPNManager = APVPNManager(resources: sharedResources)
