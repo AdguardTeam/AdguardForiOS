@@ -218,14 +218,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 return
             }
             
-            if !sSelf.loginService.active {
-                let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
-                                PurchaseService.kPSNotificationLoginPremiumExpired: true] as [String : Any]
-                
-                NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
-                
-                return
-            }
+            let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
+                            PurchaseService.kPSNotificationLoginPremiumExpired: !sSelf.loginService.active] as [String : Any]
+            
+            NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+            
+            return
         }
         
     }
