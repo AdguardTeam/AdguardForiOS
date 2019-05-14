@@ -82,7 +82,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // ios_validate_receipt request
     
     private let RECEIPT_DATA_PARAM = "receipt_data"
-    private let VALIDATE_RECEIPT_URL = "http://testmobile.adtidy.org/api/1.0/ios_validate_receipt"
+    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
     
     // license status
     private let LICENSE_STATUS_NOT_EXISTS = "NOT_EXISTS"

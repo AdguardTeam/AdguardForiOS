@@ -47,11 +47,11 @@ class LoginService: LoginServiceProtocol {
     static let loginBadCredentials = -2
     
     // keychain constants
-    private let LOGIN_SERVER = "http://testmobile.adtidy.org"
+    private let LOGIN_SERVER = "https://mobile-api.adguard.com"
     
     
     // login request
-    private let LOGIN_URL = "http://testmobile.adtidy.org/api/2.0/auth"
+    private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
