@@ -23,7 +23,6 @@ class AboutTableController : UITableViewController {
     private let homeAction = "home"
     private let forumAction = "forum"
     private let acknowledgmentsAction = "acknowledgments"
-    private let moreAction = "other_products"
     
     private let openUrlFrom = "about"
     
@@ -55,11 +54,6 @@ class AboutTableController : UITableViewController {
     @IBAction func thanksAction(_ sender: Any) {
         UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
     }
-    @IBAction func moreAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: moreAction, from: openUrlFrom)
-    }
-    
-    
     
     private func updateTheme() {
         theme.setupLabels(themableLabels)
