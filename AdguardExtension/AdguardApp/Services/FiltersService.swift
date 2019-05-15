@@ -32,6 +32,7 @@ class Filter: NSObject {
     var langs:[(name: String, heighlighted: Bool)]?
     var rulesCount: Int?
     var groupId: Int
+    var displayNumber: Int?
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId
@@ -434,40 +435,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         if filterMetas.count == 0 || groupMetas.count == 0 {return nil}
         
-        let sortedFilterMetas = filterMetas.sorted(by: { (meta1, meta2) -> Bool in
-            
-            let recommended1 = meta1.tags?.contains(where: {$0.type == ASDFilterTagTypeRecommended})
-            let recommended2 = meta2.tags?.contains(where: {$0.type == ASDFilterTagTypeRecommended})
-            switch (recommended1, recommended2){
-            case (true, false):
-                return true
-            case (false, true):
-                return false
-            default:
-                break
-            }
-            
-            let bad1 = meta1.tags?.contains(where: { $0.type == ASDFilterTagTypeObsolete || $0.type == ASDFilterTagTypeProblematic})
-            let bad2 = meta2.tags?.contains(where: { $0.type == ASDFilterTagTypeObsolete || $0.type == ASDFilterTagTypeProblematic})
-            
-            switch (bad1, bad2) {
-            case (true, false):
-                return false
-            case (false, true):
-                return true
-            default:
-                break
-            }
-            
-            if meta1.displayNumber.intValue == meta2.displayNumber.intValue {
-                return meta1.displayNumber.intValue < meta2.displayNumber.intValue
-            }
-            else {
-                return meta1.name < meta2.name
-            }
-        })
-        
-        let filterByGroupId = sortedFilterMetas.reduce(into: [Int: [ASDFilterMetadata]]()) { (dict, filter) in
+        let filterByGroupId = filterMetas.reduce(into: [Int: [ASDFilterMetadata]]()) { (dict, filter) in
             let groupId = filter.groupId.intValue
             if (dict[groupId] == nil) {
                 dict[groupId] = [ASDFilterMetadata]()
@@ -495,6 +463,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.version = filterMeta.version
                 filter.enabled = group.enabled && filterMeta.enabled.boolValue
                 filter.homepage = filterMeta.homepage
+                filter.displayNumber = filterMeta.displayNumber.intValue
                 
                 if filter.groupId == FilterGroupId.custom {
                     filter.rulesCount = Int(antibanner.rulesCount(forFilter: NSNumber(value: filter.filterId)))

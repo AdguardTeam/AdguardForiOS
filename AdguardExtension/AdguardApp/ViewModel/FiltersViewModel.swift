@@ -98,14 +98,11 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     // MARK: - private properties
     
+    private var allFilters: [Filter]
+    
     private let filtersService: FiltersServiceProtocol
     
     private var filterMetas: [ASDFilterMetadata] = [ASDFilterMetadata]()
-    private var allFilters: [Filter] {
-        get {
-            return group.filters
-        }
-    }
     private var searchFilters: [Filter] = [Filter]()
     
     // MARK: - init
@@ -115,6 +112,27 @@ class FiltersViewModel: FiltersViewModelProtocol {
         self.filtersService = filtersService
         self.customGroup = group.groupId == FilterGroupId.custom
         self.group = group
+        self.allFilters = group.filters.sorted { (filter1, filter2) -> Bool in
+            
+            let enabled1 = filter1.enabled
+            let enabled2 = filter2.enabled
+
+            switch (enabled1, enabled2) {
+            case (true, false):
+                return true
+            case (false, true):
+                return false
+            default:
+                break
+            }
+
+            if filter1.displayNumber != filter2.displayNumber {
+                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
+            }
+            else {
+                return filter1.name ?? "" < filter2.name ?? ""
+            }
+        }
     }
     
     // MARK: - public methods
