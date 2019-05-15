@@ -1871,7 +1871,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     });
 }
 
-- (BOOL) setDefaultEnabledGroups {
+- (BOOL) enableGroupsWithEnabledFilters {
     
     __block BOOL result = NO;
     ASDatabase *theDB = [ASDatabase singleton];
@@ -1883,7 +1883,21 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         [theDB exec:^(FMDatabase *db, BOOL *rollback) {
-            for(NSNumber* groupId in EnabledFilterGroups.groupIds) {
+            
+            NSMutableSet *groupsToEnable = [NSMutableSet new];
+            
+            FMResultSet *queryResult = [db executeQuery:@"select group_id from filters where is_enabled = 1"];
+            
+            while ([queryResult next]) {
+                
+                NSNumber *groupId = queryResult[0];
+                
+                [groupsToEnable addObject:groupId];
+            }
+            
+            [queryResult close];
+            
+            for(NSNumber* groupId in groupsToEnable) {
                 if (![self setGroupEnabled:db enabled:YES groupId:groupId]) {
                     return;
                 }
@@ -1891,6 +1905,13 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             result = YES;
         }];
     });
+    
+    if (result) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+        });
+    }
     
     return result;
 }

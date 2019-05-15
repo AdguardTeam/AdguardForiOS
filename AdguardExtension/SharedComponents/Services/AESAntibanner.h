@@ -355,7 +355,10 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  */
 - (nullable NSNumber*) customFilterIdByUrl: (nonnull NSString*) url;
 
-- (BOOL) setDefaultEnabledGroups;
+/**
+ enable groups wich contain enabled filters
+ */
+- (BOOL) enableGroupsWithEnabledFilters;
 
 @end
 

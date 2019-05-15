@@ -92,7 +92,7 @@
         id<AEServiceProtocol> aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         AESAntibanner* antibanner = [aeService antibanner];
         
-        result = [antibanner setDefaultEnabledGroups];
+        result = [antibanner enableGroupsWithEnabledFilters];
     }
     
     return result;
