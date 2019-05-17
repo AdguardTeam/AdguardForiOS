@@ -95,7 +95,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x5-4j-Va4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="c5a-s3-YPd" userLabel="Select Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="c5a-s3-YPd" userLabel="Select Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -115,7 +115,7 @@
                         <action selector="selectAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="uJd-Ef-SXr"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9th-UM-Uaj" userLabel="Cancel Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="9th-UM-Uaj" userLabel="Cancel Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -135,7 +135,7 @@
                         <action selector="cancelSelectionAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="mJv-Hc-7Qo"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iuK-dC-RKf" userLabel="Delete Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="iuK-dC-RKf" userLabel="Delete Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -155,7 +155,7 @@
                         <action selector="deleteAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="Cqh-aC-aH0"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DLT-c2-7eC" userLabel="Select All Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="DLT-c2-7eC" userLabel="Select All Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -175,7 +175,7 @@
                         <action selector="selectAllAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="I6W-zb-n7B"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0hZ-wq-AdR" userLabel="Export Whitelist Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="0hZ-wq-AdR" userLabel="Export Whitelist Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -195,7 +195,7 @@
                         <action selector="exportAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="7xN-gW-9AH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IHN-jy-NyP" userLabel="Import Whitelist Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="IHN-jy-NyP" userLabel="Import Whitelist Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -227,7 +227,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="WwG-Ye-eyy">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="WwG-Ye-eyy">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -255,7 +255,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWO-Gy-M8A" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="28" width="552" height="0.0"/>
+                                            <rect key="frame" x="24" y="28" width="366" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>

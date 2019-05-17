@@ -327,6 +327,10 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
         let row = sender.tag
         guard let filter = viewModel?.filters[row] else { return }
         viewModel?.set(filter: filter, enabled: sender.isOn)
+        
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [IndexPath(row: 0, section: groupSection)], with: .automatic)
+        tableView.endUpdates()
     }
     
     @IBAction func showSiteAction(_ sender: UIButton) {

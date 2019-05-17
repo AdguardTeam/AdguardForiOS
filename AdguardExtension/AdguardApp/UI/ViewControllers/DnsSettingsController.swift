@@ -26,7 +26,6 @@ class DnsSettingsController : UITableViewController{
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var tunnelDescription: ThemableLabel!
     
-    @IBOutlet weak var headerSeparator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     // MARK: - services
@@ -118,6 +117,5 @@ class DnsSettingsController : UITableViewController{
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
-        headerSeparator.backgroundColor =  theme.separatorColor
     }
 }

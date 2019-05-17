@@ -35,6 +35,9 @@ class AdvancedSettingsController: UITableViewController {
     
     @IBOutlet weak var getProButton: RoundRectButton!
     
+    @IBOutlet weak var darkModeTrailingConstraint: NSLayoutConstraint!
+    
+    
     var proObservation: NSKeyValueObservation?
     
     private let wifiOnlyRow = 0
@@ -159,10 +162,12 @@ class AdvancedSettingsController: UITableViewController {
         if configuration.proStatus {
             getProButton.isHidden = true
             darkModeSwitch.isHidden = false
+            darkModeTrailingConstraint.constant = darkModeSwitch.frame.width + 10
         }
         else {
             getProButton.isHidden = false
             darkModeSwitch.isHidden = true
+            darkModeTrailingConstraint.constant = getProButton.frame.width + 10
         }
         
         darkModeSwitch.isOn = configuration.darkTheme
