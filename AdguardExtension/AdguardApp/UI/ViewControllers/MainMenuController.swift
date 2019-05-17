@@ -181,6 +181,9 @@ class MainMenuController: UITableViewController {
         if !configuration.proStatus {
             dnsServer.text = ""
         }
+        else if vpnManager.isCustomServerActive() {
+            dnsServer.text = vpnManager.activeDnsServer!.name
+        }
         else if vpnManager.activeDnsServer?.dnsProtocol == nil {
             dnsServer.text = ACLocalizedString("no_dns_server_selected", nil)
         }

@@ -90,7 +90,10 @@ class DnsSettingsController : UITableViewController{
     private func updateUI() {
         enabledSwitch.isOn = vpnManager.enabled
         
-        if vpnManager.activeDnsServer?.dnsProtocol == nil {
+        if vpnManager.isCustomServerActive() {
+            serverName.text = vpnManager.activeDnsServer!.name
+        }
+        else if vpnManager.activeDnsServer?.dnsProtocol == nil {
             serverName.text = ACLocalizedString("no_dns_server_selected", nil)
         }
         else {

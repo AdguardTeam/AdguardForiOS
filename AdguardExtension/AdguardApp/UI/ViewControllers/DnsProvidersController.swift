@@ -89,6 +89,9 @@ class DnsProvidersController: UITableViewController {
         if provider.summary != nil {
             cell.descriptionLabel.text = ACLocalizedString(provider.summary!, nil)
         }
+        else if vpnManager.isCustomProvider(provider) {
+            cell.descriptionLabel.text = ACLocalizedString("custom_dns_description", nil)
+        }
         else {
             cell.descriptionLabel.text = ""
         }
