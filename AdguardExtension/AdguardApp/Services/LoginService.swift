@@ -136,6 +136,10 @@ class LoginService: LoginServiceProtocol {
         }
         set {
             defaults.set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
+            
+            if let callback = activeChanged {
+                callback()
+            }
         }
     }
     
@@ -201,6 +205,8 @@ class LoginService: LoginServiceProtocol {
                 callback(nil)
             }
             catch {
+                let responseString = String(data: data, encoding: .utf8)
+                DDLogError("(LoginService) login error. Wrong json: \(responseString ?? "")")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
             }
         }
@@ -235,6 +241,7 @@ class LoginService: LoginServiceProtocol {
         
         guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
+            DDLogError("(LoginService) login error - json does not contain status param." )
             return (false, false, nil, error)
         }
         
@@ -253,6 +260,8 @@ class LoginService: LoginServiceProtocol {
         }
         
         if status == AUTH_BAD_CREDINTIALS {
+            
+            DDLogInfo("(LoginService) login error - bad credintials" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             return (false, false, nil, error)
         }

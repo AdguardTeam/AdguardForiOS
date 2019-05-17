@@ -30,6 +30,11 @@ import Foundation
                                                            "doh": .doh,
                                                            "dot": .dot]
     
+    static let stringIdByProtocol: [DnsProtocol: String] = [.dns: "regular_dns_protocol",
+                                                            .dnsCrypt: "dns_crypt_protocol",
+                                                            .doh: "doh_protocol",
+                                                            .dot: "dot_protocol"]
+    
 }
 
 struct DnsProviderFeature {

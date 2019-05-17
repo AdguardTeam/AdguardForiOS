@@ -89,7 +89,15 @@ class DnsSettingsController : UITableViewController{
     
     private func updateUI() {
         enabledSwitch.isOn = vpnManager.enabled
-        serverName.text = vpnManager.activeDnsServer?.name
+        
+        if vpnManager.activeDnsServer?.dnsProtocol == nil {
+            serverName.text = ACLocalizedString("no_dns_server_selected", nil)
+        }
+        else {
+            let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
+            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
+            serverName.text = "\(server) (\(protocolName))"
+        }
         
         switch (vpnManager.tunnelMode) {
         case APVpnManagerTunnelModeSplit:

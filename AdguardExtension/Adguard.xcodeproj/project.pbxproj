@@ -1780,6 +1780,29 @@
 		D096D94A1F28C0D70081004D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D096D9521F28C2BD0081004D /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
+		D099DADE228D812E007987F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DADF228D813E007987F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE0228D8141007987F8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE1228D8143007987F8 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE2228D8145007987F8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE3228D8148007987F8 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		D099DAE4228D8149007987F8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE5228D814B007987F8 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE6228D814D007987F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		D099DAE7228D814F007987F8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE8228D8152007987F8 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAE9228D8155007987F8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		D099DAEA228D8157007987F8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		D099DAEB228D8159007987F8 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAEC228D815B007987F8 /* et-EE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "et-EE"; path = "et-EE.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		D099DAED228D815E007987F8 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAEE228D8160007987F8 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAEF228D8162007987F8 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAF0228D8164007987F8 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAF1228D8166007987F8 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAF2228D8168007987F8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAF3228D816C007987F8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D099DAF4228D816E007987F8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogController.swift; sourceTree = "<group>"; };
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
@@ -5439,6 +5462,29 @@
 			isa = PBXVariantGroup;
 			children = (
 				D07BC7CD223BBF2400C6B48C /* Base */,
+				D099DADE228D812E007987F8 /* en */,
+				D099DADF228D813E007987F8 /* ru */,
+				D099DAE0228D8141007987F8 /* de */,
+				D099DAE1228D8143007987F8 /* pl */,
+				D099DAE2228D8145007987F8 /* it */,
+				D099DAE3228D8148007987F8 /* sr-Latn */,
+				D099DAE4228D8149007987F8 /* ko */,
+				D099DAE5228D814B007987F8 /* tr */,
+				D099DAE6228D814D007987F8 /* zh-Hans */,
+				D099DAE7228D814F007987F8 /* uk */,
+				D099DAE8228D8152007987F8 /* fi */,
+				D099DAE9228D8155007987F8 /* zh-Hant */,
+				D099DAEA228D8157007987F8 /* pt-BR */,
+				D099DAEB228D8159007987F8 /* bg */,
+				D099DAEC228D815B007987F8 /* et-EE */,
+				D099DAED228D815E007987F8 /* hu */,
+				D099DAEE228D8160007987F8 /* hr */,
+				D099DAEF228D8162007987F8 /* fa */,
+				D099DAF0228D8164007987F8 /* da */,
+				D099DAF1228D8166007987F8 /* nb */,
+				D099DAF2228D8168007987F8 /* fr */,
+				D099DAF3228D816C007987F8 /* ja */,
+				D099DAF4228D816E007987F8 /* es */,
 			);
 			name = DnsSettings.storyboard;
 			sourceTree = "<group>";

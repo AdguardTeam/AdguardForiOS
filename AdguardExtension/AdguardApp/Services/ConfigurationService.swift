@@ -43,7 +43,13 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
             [weak self](notification) in
             guard let sSelf = self else { return }
             if notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String == PurchaseService.kPSNotificationPremiumStatusChanged {
-                    sSelf.darkTheme = sSelf.proStatus
+                
+                    if !sSelf.proStatus {
+                        sSelf.willChangeValue(for: \.darkTheme)
+                        sSelf.darkTheme = false
+                        sSelf.didChangeValue(for: \.darkTheme)
+                    }
+                
                     sSelf.willChangeValue(for: \.proStatus)
                     sSelf.didChangeValue(for: \.proStatus)
                 }

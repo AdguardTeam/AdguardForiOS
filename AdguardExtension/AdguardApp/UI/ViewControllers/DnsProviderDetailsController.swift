@@ -107,12 +107,7 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
             let serverCell = tableView.dequeueReusableCell(withIdentifier: "serverCell") as! DnsProviderServerCell
             cell = serverCell
             
-            let protocolStringId: [DnsProtocol: String] = [         .dns: "regular_dns_protocol",
-                                                                    .dnsCrypt: "dns_crypt_protocol",
-                                                                    .doh: "doh_protocol",
-                                                                    .dot: "dot_protocol"]
-            
-            let dnsProtocolStringId = protocolStringId[selectedProtocol]
+            let dnsProtocolStringId = DnsProtocol.stringIdByProtocol[selectedProtocol]
             
             serverCell.server.text = ACLocalizedString(dnsProtocolStringId, nil)
             

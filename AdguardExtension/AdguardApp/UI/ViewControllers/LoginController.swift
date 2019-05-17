@@ -132,7 +132,7 @@ class LoginController: BottomAlertController {
     }
     
     private func loginFailure(error: NSError?) {
-        if error != nil && error!.domain == PurchaseService.AEPurchaseErrorDomain && error!.code == PurchaseService.AEPurchaseErrorAuthFailed {
+        if error != nil && error!.domain == LoginService.loginErrorDomain && error!.code == LoginService.loginBadCredentials {
             showRetryAlert(message: ACLocalizedString("wrong_login_credintals_message", nil), restoreLogin: true)
         }
         else {

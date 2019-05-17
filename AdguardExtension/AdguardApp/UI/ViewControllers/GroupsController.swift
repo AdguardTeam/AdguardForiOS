@@ -103,15 +103,21 @@ class GroupsController: UITableViewController {
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
+        var trailingConstraint: CGFloat = 0
         if group?.proOnly ?? false {
             cell.enabledSwitch.isHidden = true
             cell.getPremiumButton.isHidden = false
             cell.icon.tintColor = disabledColor
+            trailingConstraint = cell.getPremiumButton.frame.width + 10
         }else {
             cell.enabledSwitch.isHidden = false
             cell.getPremiumButton.isHidden = true
             cell.icon.tintColor = enabledColor
+            trailingConstraint = cell.enabledSwitch.frame.width + 10
         }
+        
+        cell.descriptionTrailingConstraint.constant = trailingConstraint
+        cell.nameTrailingConstraint.constant = trailingConstraint
 
         theme.setupLabels(cell.themableLabels)
         theme.setupTableCell(cell)

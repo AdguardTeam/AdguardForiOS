@@ -84,6 +84,7 @@ class DnsRequestLogViewModel {
             guard let sSelf = self else { return }
             sSelf.allRecords = [LogRecord]()
             guard let logRecords = logRecordsOpt else {
+                sSelf.recordsObserver?(sSelf.records)
                 return
             }
             

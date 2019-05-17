@@ -35,7 +35,8 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var dnsServer: ThemableLabel!
     @IBOutlet weak var getProButton: RoundRectButton!
     @IBOutlet weak var dnsCell: UITableViewCell!
-    
+
+    @IBOutlet weak var dnsTrailingConstrint: NSLayoutConstraint!
     
     private var filtersCoutObservation: Any?
     private var activeFiltersCoutObservation: Any?
@@ -76,8 +77,6 @@ class MainMenuController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dnsServer.text = vpnManager.activeDnsServer?.name ?? ACLocalizedString("no_dns_server_selected", nil)
-
         let updateFilters: ()->Void = { [weak self] in
             guard let sSelf = self else { return }
             let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), sSelf.filtersService.activeFiltersCount, sSelf.filtersService.filtersCount)
@@ -94,7 +93,7 @@ class MainMenuController: UITableViewController {
         
         dnsServerObservetion = vpnManager.observe(\.activeDnsServer) { [weak self] (_, _) in
             DispatchQueue.main.async {
-                self?.dnsServer.text = self?.vpnManager.activeDnsServer?.name ?? ACLocalizedString("no_dns_server_selected", nil)
+                self?.setDnsName()
             }
         }
         
@@ -103,6 +102,7 @@ class MainMenuController: UITableViewController {
             DispatchQueue.main.async {
                 sSelf.getProButton.isHidden = sSelf.configuration.proStatus
                 sSelf.dnsCell.accessoryType = sSelf.configuration.proStatus ? UITableViewCell.AccessoryType.disclosureIndicator :  UITableViewCell.AccessoryType.none
+                sSelf.setDnsName()
             }
         }
         
@@ -168,12 +168,29 @@ class MainMenuController: UITableViewController {
     
     // MARK: - private methods
     
-    func updateTheme() {
+    private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
+        tableView.reloadData()
+    }
+    
+    private func setDnsName() {
+        if !configuration.proStatus {
+            dnsServer.text = ""
+        }
+        else if vpnManager.activeDnsServer?.dnsProtocol == nil {
+            dnsServer.text = ACLocalizedString("no_dns_server_selected", nil)
+        }
+        else {
+            let serverName = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
+            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
+            dnsServer.text = "\(serverName) (\(protocolName))"
+        }
+        
+        dnsTrailingConstrint.constant = configuration.proStatus ? 10 : getProButton.frame.width + 10
         tableView.reloadData()
     }
 }

@@ -67,6 +67,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
                     self?.processNotification(info: info)
                     self?.enableButtons(true)
                     self?.updateViews()
+                    self?.updateTheme()
                 }
             }
         }
@@ -216,6 +217,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         separator1.backgroundColor = theme.separatorColor
         separator2.backgroundColor = theme.separatorColor
         theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
     private func updateViews() {

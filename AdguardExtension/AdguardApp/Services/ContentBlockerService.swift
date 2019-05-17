@@ -48,9 +48,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     let groupsByContentBlocker: [ContentBlockerType: [Int]] =
             [.general:                      [FilterGroupId.ads, FilterGroupId.languageSpecific, FilterGroupId.user],
-             .privacy:                      [FilterGroupId.privacy, FilterGroupId.security, FilterGroupId.user],
+             .privacy:                      [FilterGroupId.privacy, FilterGroupId.user],
              .socialWidgetsAndAnnoyances:   [FilterGroupId.socialWidgets, FilterGroupId.annoyances, FilterGroupId.user],
-             .other:                        [FilterGroupId.other, FilterGroupId.user],
+             .other:                        [FilterGroupId.other, FilterGroupId.security, FilterGroupId.user],
              .custom:                       [FilterGroupId.custom, FilterGroupId.user]]
     
     // MARK: - init
