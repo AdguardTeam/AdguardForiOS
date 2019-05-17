@@ -31,11 +31,12 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var typeLabel: ThemableLabel!
     @IBOutlet weak var domainLabel: ThemableLabel!
     @IBOutlet weak var serverLabel: ThemableLabel!
+    @IBOutlet weak var addressLabel: ThemableLabel!
     @IBOutlet weak var responsesLabel: ThemableLabel!
     
     // MARK: - constants
     
-    private let responsesRow = 4
+    private let responsesRow = 5
     
     // MARK: - services
     
@@ -49,6 +50,7 @@ class DnsRequestDetailsController : UITableViewController {
         typeLabel.text = logRecord?.type
         domainLabel.text = logRecord?.name
         serverLabel.text = logRecord?.serverName
+        addressLabel.text = logRecord?.upstreamAddr
         responsesLabel.text = logRecord?.answer
         
         updateTheme()

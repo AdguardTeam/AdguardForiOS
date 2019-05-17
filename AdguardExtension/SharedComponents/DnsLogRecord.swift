@@ -26,14 +26,16 @@ class DnsLogRecord: NSObject, NSCoding {
     let type: String
     let answer: String
     let server: String
+    let upstreamAddr: String?
     
-    init(domain: String, date: Date, type: String, answer: String, server: String) {
+    init(domain: String, date: Date, type: String, answer: String, server: String, upstreamAddr: String) {
         
         self.domain = domain
         self.date = date
         self.type = type
         self.answer = answer
         self.server = server
+        self.upstreamAddr = upstreamAddr
         
         super.init()
     }
@@ -46,6 +48,7 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(type, forKey: "type")
         aCoder.encode(answer, forKey: "answer")
         aCoder.encode(server, forKey: "server")
+        aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,6 +57,9 @@ class DnsLogRecord: NSObject, NSCoding {
         self.type = aDecoder.decodeObject(forKey: "type") as! String
         self.answer = aDecoder.decodeObject(forKey: "answer") as! String
         self.server = aDecoder.decodeObject(forKey: "server") as! String
+        
+        // This is a new field so it can be nil for the old log records
+        self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
     }
     
 }

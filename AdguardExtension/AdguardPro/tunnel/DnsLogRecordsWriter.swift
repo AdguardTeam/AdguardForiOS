@@ -42,7 +42,7 @@ class DnsLogRecordsWriter: NSObject, MobileDNSRequestProcessedListenerProtocol {
     }
     
     func dnsRequestProcessed(_ event: MobileDNSRequestProcessedEvent!) {
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), type: event.type, answer: event.answer, server: server)
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr)
         addRecord(record: record, flush: false)
     }
     
