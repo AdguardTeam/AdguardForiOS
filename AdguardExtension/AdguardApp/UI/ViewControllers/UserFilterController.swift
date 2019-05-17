@@ -37,8 +37,6 @@ class UserFilterController : UIViewController {
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
         return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner())}()
     
-    private var observation: NSKeyValueObservation?
-    
     // MARK: IB outlets
     
     @IBOutlet weak var rightButtonView: UIView!

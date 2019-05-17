@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - custom cells
 class NewRuleCell: UITableViewCell {
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addLabel: UILabel!
 }
 
 class RuleCell: UITableViewCell {
@@ -98,6 +98,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         updateTheme()
     }
     
+    deinit {
+        observation = nil
+    }
+    
     // MARK: - public methds
     
     func setCustomEditing(_ editing: Bool) {
@@ -128,7 +132,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewRuleCellID") as! NewRuleCell
             updateUI()
-            cell.addButton.setTitle(model?.addRuleTitle(), for: .normal)
+            cell.addLabel.text = model?.addRuleTitle()
             theme.setupTableCell(cell)
             return cell
         }
@@ -311,7 +315,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                 tableView.tableHeaderView = headerView
             }
             
-            parent?.navigationItem.rightBarButtonItems = [addButton, searchButton]
+            parent?.navigationItem.rightBarButtonItems = [searchButton]
         }
     }
     
