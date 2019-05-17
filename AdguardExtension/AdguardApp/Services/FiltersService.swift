@@ -180,7 +180,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         
         proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
-            self?.updateProStatus()
+            self?.notifyChange()
         }
     }
     
@@ -350,6 +350,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             newFilter.homepage = filter.meta!.homepage
             newFilter.version = filter.meta!.version
             newFilter.enabled = true
+            newFilter.rulesCount = filter.rules.count
             
             group.filters = [newFilter] + group.filters
 
@@ -451,7 +452,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             let groupLocalization = i18n.groups?.localization(for: groupMeta)
             group.name = groupLocalization?.name
             group.enabled = groupMeta.enabled.boolValue
-            group.proOnly = !configuration.proStatus && proGroups.contains(group.groupId)
+            group.proOnly = proGroups.contains(group.groupId)
             
             let filterMetas = filterByGroupId[groupMeta.groupId.intValue] ?? []
             for filterMeta in filterMetas {
@@ -542,14 +543,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.subtitle = ACLocalizedString("filters_group_disabled", nil)
         }
     }
-    
-    private func updateProStatus() {
-        for group in groups {
-            group.proOnly = !configuration.proStatus && proGroups.contains(group.groupId)
-        }
-        notifyChange()
-    }
-    
     
     private func update(filterId:Int, enabled: Bool) {
 

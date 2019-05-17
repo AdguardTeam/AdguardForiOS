@@ -98,7 +98,7 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     // MARK: - private properties
     
-    private var allFilters: [Filter]
+    private var allFilters: [Filter] = []
     
     private let filtersService: FiltersServiceProtocol
     
@@ -112,27 +112,7 @@ class FiltersViewModel: FiltersViewModelProtocol {
         self.filtersService = filtersService
         self.customGroup = group.groupId == FilterGroupId.custom
         self.group = group
-        self.allFilters = group.filters.sorted { (filter1, filter2) -> Bool in
-            
-            let enabled1 = filter1.enabled
-            let enabled2 = filter2.enabled
-
-            switch (enabled1, enabled2) {
-            case (true, false):
-                return true
-            case (false, true):
-                return false
-            default:
-                break
-            }
-
-            if filter1.displayNumber != filter2.displayNumber {
-                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
-            }
-            else {
-                return filter1.name ?? "" < filter2.name ?? ""
-            }
-        }
+        updateFilters()
     }
     
     // MARK: - public methods
@@ -149,11 +129,13 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void) {
         filtersService.addCustomFilter(filter, overwriteExisted: overwriteExisted)
+        updateFilters()
         completion(true)
     }
     
     func deleteCustomFilter(filter: Filter, completion: @escaping (Bool) -> Void) {
         filtersService.deleteCustomFilter(filter)
+        updateFilters()
         completion(true)
     }
     
@@ -280,6 +262,30 @@ class FiltersViewModel: FiltersViewModelProtocol {
             
             for i in 0..<filter.langs!.count {
                 filter.langs![i].heighlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+            }
+        }
+    }
+    
+    private func updateFilters() {
+        allFilters = group.filters.sorted { (filter1, filter2) -> Bool in
+            
+            let enabled1 = filter1.enabled
+            let enabled2 = filter2.enabled
+            
+            switch (enabled1, enabled2) {
+            case (true, false):
+                return true
+            case (false, true):
+                return false
+            default:
+                break
+            }
+            
+            if filter1.displayNumber != filter2.displayNumber {
+                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
+            }
+            else {
+                return filter1.name ?? "" < filter2.name ?? ""
             }
         }
     }

@@ -37,6 +37,7 @@ class GroupsController: UITableViewController {
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - lifecycle
     required init?(coder aDecoder: NSCoder) {
@@ -90,21 +91,21 @@ class GroupsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let group = viewModel.groups?[indexPath.row]
+        guard let group = viewModel.groups?[indexPath.row] else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as! GroupCell
         
-        cell.nameLabel.text = group?.name
-        cell.descriptionLabel.text = group?.subtitle
+        cell.nameLabel.text = group.name
+        cell.descriptionLabel.text = group.subtitle
         
-        cell.enabledSwitch.isOn = (group?.enabled ?? false)
+        cell.enabledSwitch.isOn = group.enabled
         
-        cell.icon.image = UIImage(named: group?.iconName ?? "")
+        cell.icon.image = UIImage(named: group.iconName ?? "")
         cell.enabledSwitch.tag = indexPath.row
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
         var trailingConstraint: CGFloat = 0
-        if group?.proOnly ?? false {
+        if group.proOnly && !configuration.proStatus {
             cell.enabledSwitch.isHidden = true
             cell.getPremiumButton.isHidden = false
             cell.icon.tintColor = disabledColor
@@ -129,7 +130,7 @@ class GroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         let group = viewModel.groups![selectedIndex!]
-        if group.proOnly {
+        if group.proOnly && !configuration.proStatus {
             performSegue(withIdentifier: getProSegueID, sender: self)
         }
         else if group.groupId == FilterGroupId.custom {
