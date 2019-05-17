@@ -246,7 +246,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 let group = ASDFilterGroup()
                 group.groupId = NSNumber(integerLiteral: FilterGroupId.custom)
                 group.name = ACLocalizedString("custom_group_name", nil);
-                group.enabled = NSNumber(value: false)
+                group.enabled = NSNumber(value: true)
                 
                 groups.append(group)
             }
