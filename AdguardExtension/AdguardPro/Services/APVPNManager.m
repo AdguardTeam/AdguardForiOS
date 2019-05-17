@@ -241,11 +241,27 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 - (BOOL)isCustomProvider:(DnsProviderInfo *)provider {
     for (DnsProviderInfo* customProvider in _customDnsProviders) {
-        if (provider.servers.firstObject.serverId == customProvider.servers.firstObject.serverId) {
+        if ([provider.servers.firstObject.serverId isEqual: customProvider.servers.firstObject.serverId]) {
             return YES;
         }
     }
     return NO;
+}
+
+- (BOOL) isCustomServer:(DnsServerInfo *) server {
+    for (DnsProviderInfo* provider in _customDnsProviders) {
+        for (DnsServerInfo* customServer in provider.servers) {
+            if ([customServer.serverId isEqual: server.serverId]) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+- (BOOL) isCustomServerActive {
+    return [self isCustomServer:_activeDnsServer];
 }
 
 - (DnsServerInfo *)activeDnsServer {
