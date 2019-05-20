@@ -162,4 +162,13 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     func setDefaultEnabledGroups() -> Bool {
         return true
     }
+    
+    func rulesCount(forFilter filterId: NSNumber) -> Int32 {
+        return Int32(rules.count)
+    }
+    
+    func enableGroupsWithEnabledFilters() -> Bool {
+        return true
+    }
+    
 }

@@ -32,7 +32,7 @@ protocol PurchaseServiceProtocol {
     /*  login on backend server and check licens information
         the results will be posted through notification center
      */
-    func login(withName name: String, password: String)
+    func login(withName name: String?, password: String)
     func logout()->Bool
     func requestPurchase()
     func requestRestore()
@@ -202,7 +202,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         checkPremiumExpired()
     }
     
-    func login(withName name: String, password: String) {
+    func login(withName name: String?, password: String) {
         
         loginService.login(name: name, password: password) { [weak self] (error) in
             guard let sSelf = self else { return }

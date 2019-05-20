@@ -166,18 +166,47 @@ class LoginServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
-//    var loggedIn: Bool { get }
-//    var hasPremiumLicense: Bool { get }
-//    // not expired
-//    var active: Bool { get }
-//
-//
-//    var loggedInChanged: (()->Void)? { get set }
-//    var activeChanged: (()->Void)? { get set }
-//
-//    func login(name: String, password: String, callback: @escaping  (_: Error?)->Void)
-//    func relogin(callback: @escaping (_ error: Error?)->Void)
-//    func logout()->Bool
+    func testActiveteKey() {
+        let expectation = XCTestExpectation(description: "Login request")
+        
+        network.returnString = """
+        {
+        "auth_status": "SUCCESS",
+        "premium_status": "ACTIVE",
+        "expiration_date": 99999999999999999999,
+        "license_info": {
+        "licenses": [
+        {
+        "license_key": "ABCDE12345",
+        "license_status": "VALID",
+        "license_type": "MOBILE",
+        "expiration_date": 99999999999999999999,
+        "license_computers_count": 0,
+        "license_max_computers_count": 3,
+        "subscription": {
+        "status": "ACTIVE",
+        "next_bill_date": 99999999999999999999
+        }
+        }
+        ],
+        
+        "license": "ABCDE12345"
+        }
+        }
+        """
+        
+        loginService.login(name:nil, password: "licenseKey") { (error) in
+            
+            XCTAssertNil(error)
+            XCTAssert(self.loginService.loggedIn)
+            XCTAssert(self.loginService.hasPremiumLicense)
+            XCTAssert(self.loginService.active)
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
 
 class NetworkMock: ACNNetworkingProtocol {
@@ -209,7 +238,9 @@ class NetworkMock: ACNNetworkingProtocol {
 }
 
 class KeychainMock: KeychainServiceProtocol {
+    
     var appId: String?
+    var licenseKey: String?
     
     var auth: (String, String)?
     func loadAuth(server: String) -> (login: String, password: String)? {
@@ -226,5 +257,18 @@ class KeychainMock: KeychainServiceProtocol {
         return true
     }
     
+    func saveLicenseKey(server: String, key: String) -> Bool {
+        licenseKey = key
+        return true
+    }
+    
+    func loadLiceseKey(server: String) -> String? {
+        return licenseKey
+    }
+    
+    func deleteLicenseKey(server: String) -> Bool {
+        licenseKey = nil
+        return true
+    }
     
 }

@@ -161,7 +161,7 @@ class LoginController: BottomAlertController {
     }
     
     private func updateLoginButton() {
-        loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0 && passwordEdit.text?.count ?? 0 > 0
+        loginButton.isEnabled = passwordEdit.text?.count ?? 0 > 0
     }
     
     private func updateTheme() {

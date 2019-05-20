@@ -25,11 +25,11 @@ protocol LoginServiceProtocol {
     // not expired
     var active: Bool { get }
     
-    func login(name: String, password: String, callback: @escaping  (_: Error?)->Void)
+    func login(name: String?, password: String, callback: @escaping  (_: Error?)->Void)
     func relogin(callback: @escaping (_ error: Error?)->Void)
     func logout()->Bool
     
-    var activeChanged: (() -> Void)? { get set } 
+    var activeChanged: (() -> Void)? { get set }
 }
 
 class LoginService: LoginServiceProtocol {
@@ -56,6 +56,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
     private let LOGIN_APP_ID_PARAM = "app_id"
+    private let LOGIN_LICENSE_KEY_PARAM = "license_key"
     
     private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
     
@@ -152,7 +153,16 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    func login(name: String, password: String, callback: @escaping (Error?) -> Void) {
+    func login(name: String?, password: String, callback: @escaping (Error?) -> Void) {
+        if name != nil && name!.count > 0 {
+            loginInternal(name: name!, password: password, callback: callback)
+        }
+        else {
+            useLicenseKey(password, callback: callback)
+        }
+    }
+    
+    private func loginInternal(name: String, password: String, callback: @escaping (Error?) -> Void) {
         
         let params = [LOGIN_EMAIL_PARAM: name,
                       LOGIN_PASSWORD_PARAM: password,
@@ -212,19 +222,79 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
+    private func useLicenseKey(_ key: String, callback: @escaping (Error?) -> Void) {
+        let params = [LOGIN_LICENSE_KEY_PARAM: key,
+                      LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+                      LOGIN_APP_ID_PARAM: keychain.appId ?? ""]
+        
+        guard let url = URL(string: LOGIN_URL) else  {
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params)
+        
+        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
+            
+            guard let sSelf = self else {
+                return
+            }
+            
+            guard error == nil else {
+                callback(error!)
+                return
+            }
+            
+            guard let data = dataOrNil  else{
+                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                return
+            }
+            
+            do {
+                let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                
+                let (loggedIn, premium, expirationDate, error) = sSelf.processLoginResponce(json: jsonResponce)
+                
+                sSelf.loggedIn = loggedIn
+                sSelf.expirationDate = expirationDate
+                sSelf.hasPremiumLicense = premium
+                
+                if error != nil {
+                    callback(error!)
+                    return
+                }
+                
+                if !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: key ) {
+                    callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                    return
+                }
+                
+                callback(nil)
+            }
+            catch {
+                let responseString = String(data: data, encoding: .utf8)
+                DDLogError("(LoginService) login error. Wrong json: \(responseString ?? "")")
+                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            }
+        }
+    }
+    
     func relogin(callback: @escaping (_ error: Error?)->Void){
         
         if let (email, password) = keychain.loadAuth(server: LOGIN_SERVER) {
             login(name: email, password: password, callback: callback)
+        }
+        else if let key = keychain.loadLiceseKey(server: LOGIN_SERVER) {
+            useLicenseKey(key, callback: callback)
         }
         else {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
         }
     }
     
-    
     func logout()->Bool {
-        if !keychain.deleteAuth(server: LOGIN_SERVER) {
+        if !keychain.deleteAuth(server: LOGIN_SERVER) && !keychain.deleteLicenseKey(server: LOGIN_SERVER) {
             return false
         }
         

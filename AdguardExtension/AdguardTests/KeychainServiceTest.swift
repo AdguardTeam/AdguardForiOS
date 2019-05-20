@@ -70,4 +70,27 @@ class KeychainServiceTest: XCTestCase {
         
         XCTAssertNotEqual(appId, appId2)
     }
+    
+    func testSaveLicenseKey() {
+        let keychain = KeychainService()
+        
+        XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
+     
+        let key = keychain.loadLiceseKey(server: "test.server")
+        
+        XCTAssertNotNil(key)
+        XCTAssertEqual(key, "test key")
+    }
+    
+    func testDeleteLicenseKey() {
+        let keychain = KeychainService()
+        
+        XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
+        
+        XCTAssert(keychain.deleteLicenseKey(server: "test.server"))
+        
+        let key = keychain.loadLiceseKey(server: "test.server")
+        
+        XCTAssertNil(key)
+    }
 }

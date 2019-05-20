@@ -24,12 +24,16 @@ protocol KeychainServiceProtocol {
     func loadAuth(server: String)->(login: String, password: String)?
     func saveAuth(server: String, login: String, password: String) -> Bool
     func deleteAuth(server: String) ->Bool
+    func saveLicenseKey(server: String, key: String) -> Bool
+    func loadLiceseKey(server: String) -> String?
+    func deleteLicenseKey(server: String) -> Bool
 }
 
 class KeychainService : KeychainServiceProtocol {
     
     let appIdService = "deviceInfo"
     let appIdKey = "AppId"
+    let licenseKeyLogin = "license"
     
     var appId: String? {
         get {
@@ -120,6 +124,64 @@ class KeychainService : KeychainServiceProtocol {
             let status = SecItemDelete(deleteQuery as CFDictionary)
             if status != errSecSuccess {return false}
         }
+        
+        return true
+    }
+    
+    func saveLicenseKey(server: String, key: String) -> Bool {
+        
+        _ = deleteLicenseKey(server: server)
+        
+        guard let keyData = key.data(using: String.Encoding.utf8) else {
+            return false
+        }
+        
+        let query = [kSecClass as String:             kSecClassInternetPassword,
+                     kSecAttrServer as String:        server as Any,
+                     kSecAttrAccount as String:       licenseKeyLogin,
+                     kSecValueData as String:         keyData]
+        
+        var result: CFTypeRef?
+        let status = SecItemAdd(query as CFDictionary, &result)
+        
+        return status == errSecSuccess
+    }
+    
+    func loadLiceseKey(server: String) -> String? {
+        
+        let query = [kSecClass as String:             kSecClassInternetPassword,
+                     kSecAttrServer as String:        server as Any,
+                     kSecMatchLimit as String:        kSecMatchLimitOne,
+                     kSecReturnAttributes as String:  true,
+                     kSecReturnData as String:        true]
+        
+        var attributes: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &attributes)
+        
+        if status != errSecSuccess {
+            return nil
+        }
+        
+        guard let resultDict = attributes as! [String: Any]?  else {
+            return nil
+        }
+        
+        guard let keyData = resultDict[kSecValueData as String] else {
+                return nil
+        }
+        
+        let key = String(data: keyData as! Data, encoding: .utf8)
+        return key
+    }
+    
+    func deleteLicenseKey(server: String) -> Bool {
+        
+        let deleteQuery = [kSecClass as String:             kSecClassInternetPassword,
+                           kSecAttrServer as String:        server as Any,
+                           kSecAttrAccount as String:       licenseKeyLogin]
+        
+        let status = SecItemDelete(deleteQuery as CFDictionary)
+        if status != errSecSuccess { return false }
         
         return true
     }
