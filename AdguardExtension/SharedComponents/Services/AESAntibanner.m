@@ -1131,9 +1131,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         *rollback = YES;
         
+        [self deleteFilter:filterId fromDb:db];
+        
         FMResultSet *result = [db executeQuery:@"select removable from filters where filter_id = ?", filterId];
         if ([result next] && [result[0] isKindOfClass:[NSNumber class]] && [result[0] boolValue]){
             
+            [result close];
             removed = [self deleteFilter:filterId fromDb:db];
             if (removed){
                 
@@ -1148,13 +1151,13 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             }
         }
         else{
-            
+            [result close];
             DDLogError(@"Error of removing antibanner filter (filterId=%@): Can't remove stable filter.", filterId);
             DDLogErrorTrace();
         }
-        [result close];
+
     }];
-    
+        
     return removed;
 }
 
@@ -1638,6 +1641,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_group_t parseGroup = dispatch_group_create();
     
+    NSMutableArray<AASCustomFilterParserResult*> * parseResults = [NSMutableArray new];
+    
     for (ASDFilterMetadata * filter in filtersToUpdate) {
         
         AASFilterSubscriptionParser* parser = [AASFilterSubscriptionParser new];
@@ -1654,15 +1659,20 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             result.meta.name = filter.name;
             result.meta.groupId = filter.groupId;
-            [self unsubscribeFilterInternal: filter.filterId];
-            
-            [self subscribeCustomFilterFromResultInternal:result completion:nil];
+            result.meta.filterId = filter.filterId;
+
+            [parseResults addObject:result];
             
             dispatch_group_leave(parseGroup);
         }];
     }
     
     dispatch_group_wait(parseGroup, DISPATCH_TIME_FOREVER);
+    
+    for (AASCustomFilterParserResult* parseResult in parseResults) {
+        
+        [self subscribeCustomFilterFromResultInternal:parseResult completion:nil];
+    }
 }
 
 - (void)startUpdateInBackgroundModeWithMetadataForUpdate:(NSSet *)metadataForUpdate {
@@ -2405,6 +2415,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return ruleTexts;
     
 }
+
 - (BOOL)deleteFilter:(NSNumber *)filterId fromDb:(FMDatabase *)db{
     
     if (!filterId)
