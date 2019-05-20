@@ -238,19 +238,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
             
             disabledFilters.forEach({$0.enabled = false})
-            
-            // add custom group
-            let savedCustomGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom })
-            
-            if savedCustomGroup == nil {
-                let group = ASDFilterGroup()
-                group.groupId = NSNumber(integerLiteral: FilterGroupId.custom)
-                group.name = ACLocalizedString("custom_group_name", nil);
-                group.enabled = NSNumber(value: true)
-                
-                groups.append(group)
-            }
-            
+                        
             let groupInfos = strongSelf.obtainGroupsFromMetadatas(filterMetas: filters, groupMetas: groups, i18n: i18n)
             
             // set real enabled statuses

@@ -1964,6 +1964,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     [self setServiceToReady];
             }];
             
+            [self addCustomGroupIfNeeded];
             [self updateUserfilterMetadata];
         }
         else if (!observingDbStatus){
@@ -2414,6 +2415,41 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     [db executeUpdate:@"delete from filters where filter_id = ?", filterId];
     
     return YES;
+}
+
+- (BOOL)insertCustomGroup {
+    __block BOOL result = NO;
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback)  {
+        result = [self insertCustomGroupInDb:db];
+        *rollback = !result;
+    }];
+    
+    return result;
+}
+
+ - (BOOL)insertCustomGroupInDb: (FMDatabase*) db {
+    
+    ASDFilterGroup *customGroup = [ASDFilterGroup new];
+    customGroup.groupId = [NSNumber numberWithInteger: FilterGroupId.custom];
+    customGroup.name = ACLocalizedString(@"custom_group_name", nil);
+    customGroup.enabled = [NSNumber numberWithBool:YES];
+    
+    return [self insertMetadataIntoDb:db groups:@[customGroup]];
+}
+
+- (BOOL) addCustomGroupIfNeeded {
+    
+    __block BOOL groupExists = NO;
+    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(FilterGroupId.custom)];
+        groupExists = [result next];
+    }];
+    
+    if (groupExists) {
+        return YES;
+    }
+    
+    return [self insertCustomGroup];
 }
 
 - (BOOL)updateUserfilterMetadata {
