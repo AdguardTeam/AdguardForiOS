@@ -184,6 +184,11 @@ class DnsProvidersController: UITableViewController {
             return dns.dnsProtocol == DnsProtocol.dns
         }
         
-        return regular
+        if regular != nil {
+            return regular
+        }
+        
+        
+        return provider.servers?.first
     }
 }
