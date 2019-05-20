@@ -24,6 +24,13 @@ extension UIApplication {
     
     func openAdguardUrl(action: String, from: String) {
         
+        let urlString = adguardUrl(action: action, from: from)
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func adguardUrl(action: String, from: String)->String {
         var params: Dictionary<String, String> = [:]
         
         params["app"] = "ios"
@@ -33,10 +40,6 @@ extension UIApplication {
         
         let paramsString = ABECRequest.createString(fromParameters: params)
         
-        let urlString = UIApplication.adguardUrl + "?" + paramsString
-        
-        if let url = URL(string: urlString) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+        return UIApplication.adguardUrl + "?" + paramsString
     }
 }

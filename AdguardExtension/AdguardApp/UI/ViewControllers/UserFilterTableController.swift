@@ -31,13 +31,17 @@ class RuleCell: UITableViewCell {
 // MARK: - UserFilterTableController
 class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    
-    let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     var model: UserFilterViewModel?
     
-    let fileShare = FileShareService()
+    private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
+    private let fileShare = FileShareService()
+    
+    // forward url params
+    private let filterRulesAction = "filter_rules"
+    private let openUrlFrom = "user_filter"
     
     @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -69,7 +73,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         switch (model!.type) {
         case (.blacklist):
             title = ACLocalizedString("blacklist_title", nil)
-            let htmlString = ACLocalizedString("blacklist_text", nil)
+            let htmlStringFormat = ACLocalizedString("blacklist_text_format", nil)
+            let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+            let htmlString = String(format: htmlStringFormat, urlString)
             if let headerText = htmlString.attributedStringFromHtml() {
                 headerText.alignCenter()
                 headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor, range: NSRange(location: 0, length: headerText.length))

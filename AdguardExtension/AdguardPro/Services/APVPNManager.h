@@ -159,7 +159,7 @@ extern NSString* __nonnull APVpnChangedNotification;
 /**
  checks if this server is custom
  */
-- (BOOL) isCustomServer:(DnsServerInfo *) server;
+- (BOOL) isCustomServer:(nonnull DnsServerInfo *) server;
 
 /**
  checks if active dns server is custom
