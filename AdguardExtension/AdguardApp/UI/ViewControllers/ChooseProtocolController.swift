@@ -62,25 +62,28 @@ class ChooseProtocolController: BottomAlertController {
     // MARK: - Actions
     
     @IBAction func regualrAction(_ sender: Any) {
-        vpnManager.activeDnsServer = provider?.serverByProtocol(dnsProtocol: .dns)
-        dismiss(animated: true, completion: nil)
+        activateServer(provider?.serverByProtocol(dnsProtocol: .dns))
     }
     
     @IBAction func dnsCryptAction(_ sender: Any) {
-        vpnManager.activeDnsServer = provider?.serverByProtocol(dnsProtocol: .dnsCrypt)
-        dismiss(animated: true, completion: nil)
+        activateServer(provider?.serverByProtocol(dnsProtocol: .dnsCrypt))
     }
     
     @IBAction func dohAction(_ sender: Any) {
-        vpnManager.activeDnsServer = provider?.serverByProtocol(dnsProtocol: .doh)
-        dismiss(animated: true, completion: nil)
+        activateServer(provider?.serverByProtocol(dnsProtocol: .doh))
     }
     
     @IBAction func dotAction(_ sender: Any) {
-        vpnManager.activeDnsServer = provider?.serverByProtocol(dnsProtocol: .dot)
+        activateServer(provider?.serverByProtocol(dnsProtocol: .dot))
+    }
+    
+    // MARK: - Private methods
+    
+    private func activateServer(_ server: DnsServerInfo?) {
+        vpnManager.activeDnsServer = server
+        vpnManager.enabled = server != nil
         dismiss(animated: true, completion: nil)
     }
-    // MARK: - Private methods
     
     func setupChecks() {
         

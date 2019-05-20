@@ -140,6 +140,7 @@ class DnsProvidersController: UITableViewController {
         
         // select first server in provider
         vpnManager.activeDnsServer = server
+        vpnManager.enabled = true;
         
         selectedCellRow = sender.tag
         

@@ -83,6 +83,7 @@ class DnsProviderContainerController : UIViewController {
     @IBAction func useServerAction(_ sender: Any) {
         
         vpnManager.activeDnsServer = defaultDnsServer
+        vpnManager.enabled = true;
         self.navigationController?.popViewController(animated: true)
     }
     
