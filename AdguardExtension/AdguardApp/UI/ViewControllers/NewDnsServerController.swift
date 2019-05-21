@@ -56,6 +56,7 @@ class NewDnsServerController: BottomAlertController {
         
         nameField.becomeFirstResponder()
         updateTheme()
+        updateSaveButton()
     }
     
     // MARK: - Actions
@@ -86,6 +87,12 @@ class NewDnsServerController: BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - textfield delegate methods
+    
+    @IBAction func editingChanged(_ sender: Any) {
+        updateSaveButton()
+    }
+    
     // MARK: - private methods
     
     private func updateTheme() {
@@ -93,8 +100,15 @@ class NewDnsServerController: BottomAlertController {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
+        
         for separator in separators {
             separator.backgroundColor = theme.separatorColor
         }
+    }
+    
+    private func updateSaveButton() {
+        let enabled = (nameField.text?.count ?? 0) > 0 && (upstreamsField.text?.count ?? 0) > 0
+        addButton?.isEnabled = enabled
+        saveButton?.isEnabled = enabled
     }
 }
