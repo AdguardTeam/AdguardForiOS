@@ -56,9 +56,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
 #define V_DNS_IPV6_ADDRESS                      @"2001:ad00:ad00::ad00"
+#define V_DNS_IPV6_FALLBACK                     @"2001:4860:4860::8888"
 
-// todo: use normal ip address
-#define V_DNS_IPV4_ADDRESS                      @"121.121.121.121"
+#define V_DNS_IPV4_ADDRESS                      @"121.122.123.124"
+#define V_DNS_IPV4_FALLBACK                     @"8.8.8.8"
 
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
 #define V_DNSPROXY_LOCAL_ADDDRESS_IPV6          @"::1"
@@ -641,15 +642,15 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         DDLogError(@"(PacketTunnelProvider) - startDnsProxy error. There is no system dns servers");
         return NO;
     }
-    
-    // TODO: Temporary fixing recursion
+
     // Check if DNS servers found are actually our addresses
-    // And replace them with Google DNS
+    // If for some reason we detect our own fake address instead of the system DNS,
+    // fallback to some default DNS addresses in order avoid recursion
     for (int i = 0; i < allSystemDnsIps.count; i++) {
         if ([allSystemDnsIps[i]  isEqual: V_DNS_IPV4_ADDRESS]) {
-            allSystemDnsIps[i] = @"8.8.8.8";
+            allSystemDnsIps[i] = V_DNS_IPV4_FALLBACK;
         } else if ([allSystemDnsIps[i]  isEqual: V_DNS_IPV6_ADDRESS]) {
-            allSystemDnsIps[i] = @"2001:4860:4860::8888";
+            allSystemDnsIps[i] = V_DNS_IPV6_FALLBACK;
         }
     }
     
