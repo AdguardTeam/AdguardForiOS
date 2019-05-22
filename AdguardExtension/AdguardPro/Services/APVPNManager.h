@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import "APSharedResources.h"
 
-@class  ASDFilterRule, APDnsServerObject, DnsProviderInfo, DnsServerInfo;
+@class  ASDFilterRule, DnsProviderInfo, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
