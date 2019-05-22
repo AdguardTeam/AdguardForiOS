@@ -66,7 +66,10 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
                                                         (endFrame?.size.height ?? 0.0) - 34
             }
             
-            self.keyboardHeightLayoutConstraint?.constant = bottomConstraint
+            // during rotations, we get one extra message with the wrong coordinates. Skip it
+            if self.view.frame.size.width == endFrame?.width {
+                self.keyboardHeightLayoutConstraint?.constant = bottomConstraint
+            }
             
             UIView.animate(withDuration: duration,
                            delay: TimeInterval(0),
