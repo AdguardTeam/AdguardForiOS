@@ -72,6 +72,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
     AESharedResources *_sharedResources;
     id<SafariServiceProtocol> _safariService;
     id<AEServiceProtocol> _aeService;
+    APVPNManager *_vpnManager;
 }
 
 @end
@@ -113,6 +114,7 @@ static AESSupport *singletonSupport;
         _sharedResources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
         _safariService = [ServiceLocator.shared getSetviceWithTypeName:@"SafariService"];
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
+        _vpnManager = [ServiceLocator.shared getSetviceWithTypeName:@"APVPNManager"];
     }
     
     return self;
@@ -231,16 +233,14 @@ static AESSupport *singletonSupport;
     
     params[REPORT_PARAM_SIMPLIFIED] =  [[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
     
-#ifdef PRO
-    
     NSString* dnsServerParam = nil;
     BOOL custom = NO;
     
-    APDnsServerObject * dnsServer = [APVPNManager.singleton loadActiveRemoteDnsServer];
-    if([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguard]) {
+    DnsServerInfo * dnsServer = _vpnManager.activeDnsServer;
+    if([DnsServerInfo.adguardDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD;
     }
-    else if ([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguardFamily]) {
+    else if ([DnsServerInfo.adguardFamilyDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
     }
     else if(dnsServer) {
@@ -252,11 +252,9 @@ static AESSupport *singletonSupport;
         params[REPORT_PARAM_DNS] = dnsServerParam;
         
         if(custom) {
-            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.serverName;
+            params[REPORT_PARAM_CUSTOM_DNS] = _vpnManager.activeDnsProvider.name;
         }
     }
-    
-#endif
     
     params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
     

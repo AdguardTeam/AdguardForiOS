@@ -47,11 +47,15 @@ struct DnsProviderFeature {
 @objc(DnsServerInfo)
 @objcMembers
 class DnsServerInfo : ACObject {
+    
     var dnsProtocol: DnsProtocol?
     var serverId: String
     var name: String
     var upstreams: [String]
     var anycast: Bool?
+    
+    @objc static let adguardDnsIds: Set<String> = ["adguard-dns", "adguard-doh", "adguard-dot", "adguard-dnscrypt"]
+    @objc static let adguardFamilyDnsIds: Set<String> = ["adguard-dns-family", "adguard-family-doh", "adguard-family-dot", "adguard-family-dnscrypt"]
     
     // MARK: - initializers and NSCoding methods
     

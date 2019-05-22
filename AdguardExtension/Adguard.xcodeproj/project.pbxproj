@@ -555,6 +555,7 @@
 		D0218FBB22674593002BE017 /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */; };
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
+		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080121BEAA2100796714 /* FiltersServiceTest.swift */; };
 		D02C080321BEAA7000796714 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
@@ -4628,6 +4629,7 @@
 				65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				D031A177219EFC99002C17D9 /* DDFileLogger.m in Sources */,
+				D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */,
 				65EC9CA31BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				65C12EEF1BD4D29F00FFC71C /* AEService.m in Sources */,

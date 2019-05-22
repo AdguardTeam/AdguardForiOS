@@ -57,7 +57,7 @@
         {
           "protocol": "doh",
           "anycast": true,
-          "id": "google",
+          "id": "google-doh",
           "name": "google",
           "upstreams":[
             "https://dns.google.com/experimental"
@@ -66,7 +66,7 @@
         {
           "protocol": "dot",
           "anycast": true,
-          "id": "google",
+          "id": "google-dot",
           "name": "google",
           "upstreams":[
             "tls://dns.google"
@@ -258,7 +258,7 @@
             {
                 "protocol": "dnscrypt",
                 "anycast": true,
-                "id": "adguard-dns",
+                "id": "adguard-dnscrypt",
                 "name": "adguard-dns",
                 "upstreams": [
                     "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20"
@@ -315,7 +315,7 @@
             {
                 "protocol": "dnscrypt",
                 "anycast": true,
-                "id": "adguard-dns-family",
+                "id": "adguard-family-dnscrypt",
                 "name": "adguard-dns-family",
                 "upstreams": [
                     "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMjo1NDQzILgxXdexS27jIKRw3C7Wsao5jMnlhvhdRUXWuMm1AFq6ITIuZG5zY3J5cHQuZmFtaWx5Lm5zMS5hZGd1YXJkLmNvbQ"

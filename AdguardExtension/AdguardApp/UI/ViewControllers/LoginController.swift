@@ -36,10 +36,11 @@ class LoginController: BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
-    // MARK: - pribate properties
+    // MARK: - private properties
     
     private let enabledColor = UIColor.init(hexString: "D8D8D8")
     private let disabledColor = UIColor.init(hexString: "4D4D4D")
+    
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
