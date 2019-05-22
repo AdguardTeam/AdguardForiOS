@@ -372,10 +372,32 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var error: Error?
             var modified = false
             
+            var savedDatas:[ContentBlockerType: Data] = [:]
+            var savedRules:[ASDFilterRule] = []
+            
+            var rollback: ()->Void = {
+                for (_, obj) in savedDatas.enumerated() {
+                    sSelf.safariService.save(json: obj.value, type: obj.key.rawValue)
+                    sSelf.resources.whitelistContentBlockingRules = (savedRules as NSArray).mutableCopy() as? NSMutableArray
+                }
+            }
+            
             defer {
-                
-                if error == nil && modified {
-                    sSelf.safariService.invalidateBlockingJsons(completion: completion)
+            
+                if error != nil {
+                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+                    rollback()
+                }
+                else if error == nil && modified {
+                    sSelf.safariService.invalidateBlockingJsons { (error) in
+                        sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+                        
+                        if error != nil {
+                            rollback()
+                            sSelf.safariService.invalidateBlockingJsons { (error) in
+                            }
+                        }
+                    }
                 }
                 else {
                     sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
@@ -388,6 +410,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             }
             
             var whitelistRules = sSelf.resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
+            savedRules = Array(whitelistRules)
             var succeded = false
             (whitelistRules, succeded) = processRules(whitelistRules)
             
@@ -420,6 +443,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                savedDatas[type] = data
                 var jsonData = NSMutableData(data: data)
                 jsonData = processData(jsonData, jsonRuleData)
                 
@@ -439,16 +463,37 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var error: Error?
             var modified = false
             
-            defer {
-                
-                if error == nil && modified {
-                    sSelf.safariService.invalidateBlockingJsons(completion: completion)
+            var savedDatas:[ContentBlockerType: Data] = [:]
+            let invertedObject = sSelf.resources.invertedWhitelistContentBlockingObject
+            
+            var rollback: ()->Void = {
+                for (_, obj) in savedDatas.enumerated() {
+                    sSelf.safariService.save(json: obj.value, type: obj.key.rawValue)
+                    sSelf.resources.invertedWhitelistContentBlockingObject = invertedObject
                 }
-                
-                sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
             }
             
-            let invertedObject = sSelf.resources.invertedWhitelistContentBlockingObject
+            defer {
+                
+                if error != nil {
+                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+                    rollback()
+                }
+                else if error == nil && modified {
+                    sSelf.safariService.invalidateBlockingJsons { (error) in
+                        sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+                        
+                        if error != nil {
+                            rollback()
+                            sSelf.safariService.invalidateBlockingJsons { (error) in
+                            }
+                        }
+                    }
+                }
+                else {
+                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+                }
+            }
             
             let oldInvertedRule = invertedObject?.rule
             var domains = invertedObject?.domains ?? [String]()
@@ -513,6 +558,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                savedDatas[type] = data
                 var jsonData = NSMutableData(data: data)
                 jsonData = processData(jsonData, jsonOldRuleData, jsonNewRuleData)
                 

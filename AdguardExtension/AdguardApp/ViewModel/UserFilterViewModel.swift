@@ -267,22 +267,40 @@ class UserFilterViewModel: NSObject {
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
         let domainObject = AEWhitelistDomainObject(domain: ruleText)
-        guard let rule = domainObject?.rule else { return }
+        guard let ruleObject = domainObject?.rule else { return }
         
-        self.allRules.append(RuleInfo(ruleText, false))
+        let rulesCopy = allRules
+        let objectsCopy = ruleObjects
         
-        contentBlockerService.addWhitelistRule(rule) { [weak self] (error) in
-            DispatchQueue.main.async {
-                if error == nil {
-                    self?.ruleObjects.append(rule)
-                    completionHandler()
+        let newRules = allRules + [RuleInfo(ruleText, false)]
+        let newRuleObjects = ruleObjects + [ruleObject]
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.willChangeValue(for: \.rules)
+            
+            strongSelf.allRules = newRules
+            strongSelf.ruleObjects = newRuleObjects
+            
+            strongSelf.didChangeValue(for: \.rules)
+        
+            strongSelf.contentBlockerService.addWhitelistRule(ruleObject) { [weak self] (error) in
+                DispatchQueue.main.async {
+                    if error == nil {
+                        completionHandler()
+                    }
+                    else {
+            
+                        self?.willChangeValue(for: \.rules)
+                        self?.allRules = rulesCopy
+                        self?.ruleObjects = objectsCopy
+                        self?.didChangeValue(for: \.rules)
+                       
+                        errorHandler(error!.localizedDescription)
+                    }
+                    
+                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 }
-                else {
-                    self?.allRules.removeLast()
-                    errorHandler(error!.localizedDescription)
-                }
-                
-                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
     }
@@ -345,61 +363,65 @@ class UserFilterViewModel: NSObject {
     }
     
     func setNewRules(_ newRuleObjects: [ASDFilterRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
-        
-        let rulesCopy = allRules
-        let objectsCopy = ruleObjects
-        
-        willChangeValue(for: \.rules)
-        
-        allRules = ruleInfos
-        ruleObjects = newRuleObjects
-        
-        didChangeValue(for: \.rules)
-        
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        
-        DispatchQueue.global().async { [weak self] in
+    
+        DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             
-            switch (strongSelf.type) {
-            case .blacklist:
-                if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
-                    DispatchQueue.main.async {
-                        strongSelf.willChangeValue(for: \.rules)
-                        strongSelf.allRules = rulesCopy
-                        strongSelf.ruleObjects = objectsCopy
-                        strongSelf.didChangeValue(for: \.rules)
-                        errorHandler(error.localizedDescription)
-                    }
-                    return
-                }
-            case .whitelist:
-                strongSelf.resources.whitelistContentBlockingRules = (strongSelf.ruleObjects as NSArray).mutableCopy() as? NSMutableArray
-            case .invertedWhitelist:
-                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: strongSelf.allRules.map({ $0.rule }))
-                strongSelf.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
-            }
+            let rulesCopy = strongSelf.allRules
+            let objectsCopy = strongSelf.ruleObjects
             
-            completionHandler()
+            strongSelf.willChangeValue(for: \.rules)
             
-            strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+            strongSelf.allRules = ruleInfos
+            strongSelf.ruleObjects = newRuleObjects
+            
+            strongSelf.didChangeValue(for: \.rules)
+        
+            let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+            
+            DispatchQueue.global().async { [weak self] in
+                guard let strongSelf = self else { return }
                 
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                
-                if error != nil {
-                    DispatchQueue.main.async {
-                        errorHandler(error?.localizedDescription ?? ACLocalizedString("safari_filters_loading_error", nil))
-                        
-                        // rolback changes
-                        let _ = strongSelf.contentBlockerService.replaceUserFilter(objectsCopy)
-                        strongSelf.willChangeValue(for: \.rules)
-                        strongSelf.allRules = rulesCopy
-                        strongSelf.ruleObjects = objectsCopy
-                        strongSelf.didChangeValue(for: \.rules)
+                switch (strongSelf.type) {
+                case .blacklist:
+                    if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
+                        DispatchQueue.main.async {
+                            strongSelf.willChangeValue(for: \.rules)
+                            strongSelf.allRules = rulesCopy
+                            strongSelf.ruleObjects = objectsCopy
+                            strongSelf.didChangeValue(for: \.rules)
+                            errorHandler(error.localizedDescription)
+                        }
+                        return
                     }
+                case .whitelist:
+                    strongSelf.resources.whitelistContentBlockingRules = (strongSelf.ruleObjects as NSArray).mutableCopy() as? NSMutableArray
+                case .invertedWhitelist:
+                    let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: strongSelf.allRules.map({ $0.rule }))
+                    strongSelf.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
                 }
-                else {
                 
+                completionHandler()
+                
+                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                    
+                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
+                    
+                    if error != nil {
+                        DispatchQueue.main.async {
+                            errorHandler(error?.localizedDescription ?? ACLocalizedString("safari_filters_loading_error", nil))
+                            
+                            // rolback changes
+                            let _ = strongSelf.contentBlockerService.replaceUserFilter(objectsCopy)
+                            strongSelf.willChangeValue(for: \.rules)
+                            strongSelf.allRules = rulesCopy
+                            strongSelf.ruleObjects = objectsCopy
+                            strongSelf.didChangeValue(for: \.rules)
+                        }
+                    }
+                    else {
+                    
+                    }
                 }
             }
         }
