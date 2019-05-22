@@ -37,7 +37,8 @@ protocol DnsProxyServiceProtocol : NSObjectProtocol {
 
 class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
-    private let timeout = 5000
+    // set it to 3000 to make sure we will quickly fallback if needed
+    private let timeout = 3000
     private var proxy: MobileDNSProxy?
     private var queues: [DispatchQueue] = []
     private var lastQueue = 0
@@ -46,6 +47,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     @objc
     init(resources: APSharedResources) {
+        DDLogInfo("(DnsProxyService) initializing")
         self.resources = resources
         dnsRecordsWriter = DnsLogRecordsWriter(resources: resources)
         
@@ -69,7 +71,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         
         dnsRecordsWriter.server = serverName
         
-        DDLogInfo("(DnsProxyService) start with upstrams: \(upstreams) listen at: \(listenAddr) bootstrap: \(bootstrapDns) fallback: \(fallback)")
+        DDLogInfo("(DnsProxyService) start with upstreams: \(upstreams) listen at: \(listenAddr) bootstrap: \(bootstrapDns) fallback: \(fallback)")
         let upstreamsStr = upstreams.joined(separator: "\n")
         
         guard let config = MobileConfig() else {

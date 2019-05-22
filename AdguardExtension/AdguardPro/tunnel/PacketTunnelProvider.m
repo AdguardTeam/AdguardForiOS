@@ -642,12 +642,23 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         return NO;
     }
     
+    // TODO: Temporary fixing recursion
+    // Check if DNS servers found are actually our addresses
+    // And replace them with Google DNS
+    for (int i = 0; i < allSystemDnsIps.count; i++) {
+        if ([allSystemDnsIps[i]  isEqual: V_DNS_IPV4_ADDRESS]) {
+            allSystemDnsIps[i] = @"8.8.8.8";
+        } else if ([allSystemDnsIps[i]  isEqual: V_DNS_IPV6_ADDRESS]) {
+            allSystemDnsIps[i] = @"2001:4860:4860::8888";
+        }
+    }
+    
     NSString* systemDns = [allSystemDnsIps componentsJoinedByString:@"\n"];
     
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
     
     BOOL ipv4Available = [ACNIPUtils isIpv4Available];
-    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns maxQueues: 2 serverName: _currentServer.name];
+    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns maxQueues: 5 serverName: _currentServer.name];
 }
 
 @end

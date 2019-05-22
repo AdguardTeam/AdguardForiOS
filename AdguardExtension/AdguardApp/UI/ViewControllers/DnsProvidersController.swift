@@ -153,14 +153,6 @@ class DnsProvidersController: UITableViewController {
     
     private func defaultServer(_ provider: DnsProviderInfo)->DnsServerInfo? {
         
-        let dot = provider.servers?.first { (dns) -> Bool in
-            return dns.dnsProtocol == DnsProtocol.dot
-        }
-        
-        if dot != nil {
-            return dot
-        }
-        
         let doh = provider.servers?.first { (dns) -> Bool in
             return dns.dnsProtocol == DnsProtocol.doh
         }
@@ -175,6 +167,14 @@ class DnsProvidersController: UITableViewController {
         
         if dnsCrypt != nil {
             return dnsCrypt
+        }
+
+        let dot = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dot
+        }
+
+        if dot != nil {
+            return dot
         }
         
         let regular = provider.servers?.first { (dns) -> Bool in
