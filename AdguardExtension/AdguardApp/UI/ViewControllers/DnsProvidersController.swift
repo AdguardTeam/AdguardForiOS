@@ -21,7 +21,7 @@ import Foundation
 class DnsProviderCell : UITableViewCell {
     
     @IBOutlet weak var nameLabel: ThemableLabel!
-    @IBOutlet weak var descriptionLabel: ThemableLabel!
+    @IBOutlet weak var descriptionLabel: ThemableLabel?
     @IBOutlet weak var selectedButton: UIButton!
 }
 
@@ -81,19 +81,14 @@ class DnsProvidersController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DnsServerCell") as! DnsProviderCell
-        
         let provider = providers[indexPath.row]
+        let custom = vpnManager.isCustomProvider(provider)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: custom ? "CustomDnsServerCell" :"DnsServerCell") as! DnsProviderCell
         
         cell.nameLabel.text = provider.name
         if provider.summary != nil {
-            cell.descriptionLabel.text = ACLocalizedString(provider.summary!, nil)
-        }
-        else if vpnManager.isCustomProvider(provider) {
-            cell.descriptionLabel.text = ACLocalizedString("custom_dns_description", nil)
-        }
-        else {
-            cell.descriptionLabel.text = ""
+            cell.descriptionLabel?.text = ACLocalizedString(provider.summary!, nil)
         }
         
         cell.selectedButton.isSelected = selectedCellRow == indexPath.row
@@ -101,7 +96,9 @@ class DnsProvidersController: UITableViewController {
         
         theme.setupTableCell(cell)
         theme.setupLabel(cell.nameLabel)
-        theme.setupLabel(cell.descriptionLabel)
+        if cell.descriptionLabel != nil {
+            theme.setupLabel(cell.descriptionLabel!)
+        }
         
         return cell
     }
