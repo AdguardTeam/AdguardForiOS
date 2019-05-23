@@ -35,7 +35,7 @@
 #endif
 
 
-NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
+NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 #define SUPPORT_ADDRESS         @"support@adguard.com"
 
@@ -131,7 +131,7 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"action_bug_report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
