@@ -34,6 +34,9 @@ import Foundation
     var separatorColor: UIColor { get }
     var selectedCellColor: UIColor { get }
     
+    var logBlockedCellColor: UIColor { get }
+    var logSelectedCellColor: UIColor { get }
+    
     func setupImage(_ imageView: ThemeableImageView)
     func setupLabel(_ label: ThemableLabel)
     func setupLabels(_ labels: [ThemableLabel])
@@ -46,6 +49,7 @@ import Foundation
     func setupTextField(_ textField: UITextField)
     func setupTable(_ table: UITableView)
     func setupTableCell(_ cell: UITableViewCell)
+    func setupLogTableCell(_ cell: UITableViewCell, blocked: Bool)
     func statusbarStyle()->UIStatusBarStyle
     func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
@@ -96,6 +100,14 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var selectedCellColor: UIColor {
          return configuration.darkTheme ?  UIColor(hexString: "#0E1911") : UIColor.init(hexString: "#F3F3F3")
+    }
+    
+    var logBlockedCellColor: UIColor {
+        return UIColor(hexString: "#33DF3812")
+    }
+    
+    var logSelectedCellColor: UIColor {
+        return UIColor(hexString: "#4DDF3812")
     }
     
     func setupTagButton(_ button: RoundRectButton) {
@@ -181,6 +193,19 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         cell.selectedBackgroundView = bgColorView
         cell.contentView.backgroundColor = .clear
         cell.backgroundColor = .clear
+    }
+    
+    func setupLogTableCell(_ cell: UITableViewCell, blocked: Bool) {
+        if (!blocked) {
+            setupTableCell(cell)
+            return
+        }
+
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = logSelectedCellColor
+        cell.selectedBackgroundView = bgColorView
+        cell.contentView.backgroundColor = .clear
+        cell.backgroundColor = logBlockedCellColor
     }
     
     func textColor() -> UIColor {

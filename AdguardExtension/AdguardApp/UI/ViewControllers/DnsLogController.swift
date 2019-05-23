@@ -21,8 +21,7 @@ import UIKit
 
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
-    @IBOutlet weak var time: ThemableLabel!
-    
+    @IBOutlet weak var details: ThemableLabel!
 }
 
 class DnsLogController: UITableViewController, UISearchBarDelegate {
@@ -63,12 +62,18 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
         
+        var detailsString = String(format: "%@, type: %@", record.type!, record.time!)
+        if record.answer == nil || record.answer == "" {
+            detailsString += ", NXDOMAIN"
+        }
+
         cell.domain.text = record.name
-        cell.time.text = record.time
-        theme.setupTableCell(cell)
-        theme.setupLabel(cell.domain)
-        theme.setupLabel(cell.time)
+        cell.details.text = detailsString
         
+        theme.setupLogTableCell(cell, blocked: isBlocked(record))
+        theme.setupLabel(cell.domain)
+        theme.setupLabel(cell.details)
+
         return cell
     }
     
@@ -104,5 +109,18 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     @objc private func refresh() {
         model.obtainRecords()
+    }
+    
+    private func isBlocked(_ logRecord: LogRecord) -> Bool {
+        if logRecord.answer == nil || logRecord.answer == "" {
+            // Mark all NXDOMAIN responses as blocked
+            return true
+        }
+
+        if logRecord.answer!.contains("0.0.0.0") || logRecord.answer!.contains("127.0.0.1") {
+            return true
+        }
+
+        return false
     }
 }

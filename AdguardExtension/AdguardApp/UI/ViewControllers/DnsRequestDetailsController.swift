@@ -28,6 +28,7 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     @IBOutlet weak var timeLabel: ThemableLabel!
+    @IBOutlet weak var elapsedLabel: ThemableLabel!
     @IBOutlet weak var typeLabel: ThemableLabel!
     @IBOutlet weak var domainLabel: ThemableLabel!
     @IBOutlet weak var serverLabel: ThemableLabel!
@@ -36,7 +37,7 @@ class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - constants
     
-    private let responsesRow = 5
+    private let responsesRow = 6
     
     // MARK: - services
     
@@ -47,12 +48,13 @@ class DnsRequestDetailsController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timeLabel.text = logRecord?.time
+        elapsedLabel.text = String(format: "%d ms", logRecord!.elapsed)
         typeLabel.text = logRecord?.type
         domainLabel.text = logRecord?.name
         serverLabel.text = logRecord?.serverName
         addressLabel.text = logRecord?.upstreamAddr
         responsesLabel.text = logRecord?.answer
-        
+
         updateTheme()
     }
     
@@ -90,5 +92,4 @@ class DnsRequestDetailsController : UITableViewController {
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
     }
-    
 }

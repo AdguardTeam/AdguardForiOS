@@ -104,6 +104,7 @@ returns response or error
 @property (nonatomic) int64_t startTime;
 @property (nonatomic) long elapsed;
 @property (nonatomic) NSString* answer;
+@property (nonatomic) NSString* ns;
 @property (nonatomic) NSString* upstreamAddr;
 @property (nonatomic) long bytesSent;
 @property (nonatomic) long bytesReceived;

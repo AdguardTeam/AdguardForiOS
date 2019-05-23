@@ -23,17 +23,21 @@ class DnsLogRecord: NSObject, NSCoding {
     
     let domain: String
     let date: Date
+    let elapsed: Int
     let type: String
     let answer: String
     let server: String
+    let ns: String?
     let upstreamAddr: String?
     
-    init(domain: String, date: Date, type: String, answer: String, server: String, upstreamAddr: String) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, ns: String, server: String, upstreamAddr: String) {
         
         self.domain = domain
         self.date = date
+        self.elapsed = elapsed
         self.type = type
         self.answer = answer
+        self.ns = ns
         self.server = server
         self.upstreamAddr = upstreamAddr
         
@@ -45,8 +49,10 @@ class DnsLogRecord: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(domain, forKey: "domain")
         aCoder.encode(date, forKey: "date")
+        aCoder.encode(elapsed, forKey: "elapsed")
         aCoder.encode(type, forKey: "type")
         aCoder.encode(answer, forKey: "answer")
+        aCoder.encode(ns, forKey: "ns")
         aCoder.encode(server, forKey: "server")
         aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
     }
@@ -54,12 +60,13 @@ class DnsLogRecord: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.domain = aDecoder.decodeObject(forKey: "domain") as! String
         self.date = aDecoder.decodeObject(forKey: "date") as! Date
+        self.elapsed = aDecoder.decodeInteger(forKey: "elapsed")
         self.type = aDecoder.decodeObject(forKey: "type") as! String
         self.answer = aDecoder.decodeObject(forKey: "answer") as! String
         self.server = aDecoder.decodeObject(forKey: "server") as! String
         
-        // This is a new field so it can be nil for the old log records
+        // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
+        self.ns = aDecoder.decodeObject(forKey: "ns") as? String
     }
-    
 }
