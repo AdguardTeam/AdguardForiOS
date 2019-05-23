@@ -1131,8 +1131,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         *rollback = YES;
         
-        [self deleteFilter:filterId fromDb:db];
-        
         FMResultSet *result = [db executeQuery:@"select removable from filters where filter_id = ?", filterId];
         if ([result next] && [result[0] isKindOfClass:[NSNumber class]] && [result[0] boolValue]){
             
