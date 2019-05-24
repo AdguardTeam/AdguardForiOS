@@ -47,6 +47,7 @@ import Foundation
     func setupNavigationBar(_ navBar: UINavigationBar?)
     func setupSearchBar(_ searchBar: UISearchBar)
     func setupTextField(_ textField: UITextField)
+    func setupTextView(_ textView: UITextView)
     func setupTable(_ table: UITableView)
     func setupTableCell(_ cell: UITableViewCell)
     func setupLogTableCell(_ cell: UITableViewCell, blocked: Bool)
@@ -180,6 +181,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupTextField(_ textField: UITextField) {
         textField.textColor = configuration.darkTheme ? .white : .darkGray
+    }
+    
+    func setupTextView(_ textView: UITextView) {
+        textView.textColor = configuration.darkTheme ? .white : .darkGray
     }
     
     func setupTable(_ table: UITableView) {

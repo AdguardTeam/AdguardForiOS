@@ -23,15 +23,15 @@ protocol AddRuleControllerDelegate {
     func importRules()
 }
 
-class AddRuleController: UIViewController {
+class AddRuleController: UIViewController, UITextViewDelegate {
     
     var delegate : AddRuleControllerDelegate?
     var blacklist = false
     
     @IBOutlet weak var contentView: RoundrectView!
     
-    @IBOutlet weak var ruleTextField: UITextField!
-    
+    @IBOutlet weak var ruleTextView: UITextView!
+    @IBOutlet weak var rulePlaceholderLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editCaption: UILabel!
     
@@ -53,6 +53,9 @@ class AddRuleController: UIViewController {
         titleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_title" : "add_whitelist_domain_title", "")
         editCaption.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
         
+        ruleTextView.textContainer.lineFragmentPadding = 0
+        ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        
         setupTheme()
     }
     
@@ -62,10 +65,8 @@ class AddRuleController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        ruleTextField.becomeFirstResponder()
-        let placeholder = NSMutableAttributedString(string: ACLocalizedString(blacklist ? "add_blacklist_rule_placeholder" : "add_whitelist_domain_placeholder", ""))
-        placeholder.addAttribute(.foregroundColor, value: theme.placeholderTextColor, range: NSRange(location: 0, length: placeholder.length))
-        ruleTextField.attributedPlaceholder = placeholder
+        ruleTextView.becomeFirstResponder()
+        rulePlaceholderLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_placeholder" : "add_whitelist_domain_placeholder", "")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -102,7 +103,7 @@ class AddRuleController: UIViewController {
     // MARK: - Actions
     
     @IBAction func saveAction(_ sender: Any) {
-        delegate?.addRule(rule: ruleTextField.text!)
+        delegate?.addRule(rule: ruleTextView.text!)
         dismiss(animated: true, completion: nil)
     }
     
@@ -112,12 +113,18 @@ class AddRuleController: UIViewController {
         }
     }
     
+    // MARK: - TextViewDelegateMethods
+
+    func textViewDidChange(_ textView: UITextView) {
+        rulePlaceholderLabel.isHidden = textView.text != ""
+    }
+
     // MARK: - privat methods
     
     private func setupTheme() {
-        self.contentView.backgroundColor = theme.popupBackgroundColor
-        
+        contentView.backgroundColor = theme.popupBackgroundColor
+        rulePlaceholderLabel.textColor = theme.placeholderTextColor
         theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(ruleTextField)
+        theme.setupTextView(ruleTextView)
     }
 }
