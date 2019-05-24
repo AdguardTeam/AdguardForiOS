@@ -181,7 +181,18 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         
         proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
-            self?.notifyChange()
+            guard let sSelf = self else { return }
+            
+            // enable/disable pro groups
+            let proEnabled = configuration.proStatus
+            
+            for group in sSelf.groups {
+                if sSelf.proGroups.contains(group.groupId) {
+                    sSelf.setGroup(group, enabled: proEnabled)
+                }
+            }
+            
+            sSelf.processUpdate()
         }
     }
     
