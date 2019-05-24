@@ -134,6 +134,9 @@ class AdvancedSettingsController: UITableViewController {
         
         if oldValue != newValue {
             resources.sharedDefaults().set(newValue, forKey: key)
+            
+            let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+            
             contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
                 if error != nil {
                     self?.resources.sharedDefaults().set(oldValue, forKey: key)
@@ -141,6 +144,8 @@ class AdvancedSettingsController: UITableViewController {
                         senderSwitch.setOn(oldValue, animated: true)
                     }
                 }
+                
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
     }

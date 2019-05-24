@@ -322,6 +322,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
         
+        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
+        
         if overwriteExisted {
             if let existedFilterId = antibanner.customFilterId(byUrl: filter.meta.subscriptionUrl) {
                 deleteCustomFilterWithId(existedFilterId)
@@ -353,7 +355,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
        
         antibanner.subscribeCustomFilter(from: filter) {
             [weak self] in
-            self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in }
+            self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            }
         }
     }
     
@@ -362,6 +366,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     }
     
     func deleteCustomFilterWithId(_ filterId: NSNumber) {
+        
+        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
         
         antibanner.unsubscribeFilter(filterId as NSNumber)
         
@@ -375,6 +381,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
             
             notifyChange()
+            
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
         }
     }
     
@@ -546,13 +554,15 @@ class FiltersService: NSObject, FiltersServiceProtocol {
 
         let filter = group.filters.first(where: {$0.filterId == filterId})
         filter?.enabled = enabled
+        
+        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
 
         if enabled {
             if !group.enabled {
                 group.enabled = true
                 antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
                 contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-
+                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
                 }
             }
         }
@@ -564,7 +574,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
 
                     antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
                     contentBlocker.reloadJsons(backgroundUpdate: false)  { (error) in
-
+                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
                     }
                 }
             }

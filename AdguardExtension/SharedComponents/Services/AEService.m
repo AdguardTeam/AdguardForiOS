@@ -193,6 +193,10 @@ typedef enum {
         
         DDLogDebug(@"(AEService) ASAntibannerInstalledNotification received");
         
+#ifndef APP_EXTENSION
+        UIBackgroundTaskIdentifier backroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+#endif
+            
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:NO completion:^(NSError * _Nullable error) {
             
             // If error then disable all installed filters
@@ -212,6 +216,10 @@ typedef enum {
                     else{
                         [self checkForServiceReady:RFAntibannerInstalledType];
                     }
+                    
+#ifndef APP_EXTENSION
+                    [[UIApplication sharedApplication] endBackgroundTask:backroundTaskID];
+#endif
                 }];
                 
                 return;
