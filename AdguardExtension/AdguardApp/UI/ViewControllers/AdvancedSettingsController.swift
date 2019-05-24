@@ -52,8 +52,10 @@ class AdvancedSettingsController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         
         invertedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-        wifiUpdateSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsWifiOnlyUpdates)
         simplifiedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
+        let wifiOnlyObject = resources.sharedDefaults().object(forKey: AEDefaultsWifiOnlyUpdates) as? NSNumber
+        let wifiOnly = wifiOnlyObject?.boolValue ?? true
+        wifiUpdateSwitch.isOn = wifiOnly
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
