@@ -49,6 +49,7 @@ class Group {
     var subtitle: String?
     var enabled: Bool = false
     var iconName: String?
+    var disabledIconName: String?
     var proOnly: Bool = false
     
     var filters: [Filter] = [Filter]()
@@ -503,10 +504,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 group.iconName = "language-group-icon"
             case FilterGroupId.security:
                 group.iconName = "security-group-icon"
+                group.disabledIconName = "security-group-icon-disabled"
             case FilterGroupId.custom:
                 group.iconName = "custom-group-icon"
+                group.disabledIconName = "custom-group-icon-disabled"
             case FilterGroupId.other:
-                group.iconName = "social-group-icon"
+                group.iconName = "other-group-icon"
             case FilterGroupId.privacy:
                 group.iconName = "prvacy-group-icon"
                 

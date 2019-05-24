@@ -99,7 +99,6 @@ class GroupsController: UITableViewController {
         
         cell.enabledSwitch.isOn = group.enabled
         
-        cell.icon.image = UIImage(named: group.iconName ?? "")
         cell.enabledSwitch.tag = indexPath.row
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
@@ -108,12 +107,12 @@ class GroupsController: UITableViewController {
         if group.proOnly && !configuration.proStatus {
             cell.enabledSwitch.isHidden = true
             cell.getPremiumButton.isHidden = false
-            cell.icon.tintColor = disabledColor
+            cell.icon.image = UIImage(named: group.disabledIconName ?? (group.iconName ?? ""))
             trailingConstraint = cell.getPremiumButton.frame.width + 10
         }else {
             cell.enabledSwitch.isHidden = false
             cell.getPremiumButton.isHidden = true
-            cell.icon.tintColor = enabledColor
+            cell.icon.image = UIImage(named: group.iconName ?? "")
             trailingConstraint = cell.enabledSwitch.frame.width + 10
         }
         
