@@ -6,7 +6,7 @@ protocol RuleDetailsControllerDelegate {
     func changeRule(rule: RuleInfo, newText: String)
 }
 
-class RuleDetailsController : BottomAlertController {
+class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -19,7 +19,7 @@ class RuleDetailsController : BottomAlertController {
     
     // MARK: IB outlets
     
-    @IBOutlet weak var domainTextField: UITextField!
+    @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -29,25 +29,21 @@ class RuleDetailsController : BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        domainTextField.text = rule?.rule
-        domainTextField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        ruleTextView.text = rule?.rule
         saveButton.isEnabled = false
         
-        updateTheme()
-    }
-    
-    // MARK: - UITextField
-    
-    @IBAction func editingChanged(_ sender: UITextField) {
+        ruleTextView.textContainer.lineFragmentPadding = 0
+        ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
-        saveButton.isEnabled = sender.text != rule?.rule
+        updateTheme()
     }
     
     // MARK: - Actions
     @IBAction func saveAction(_ sender: Any) {
         
-        rule!.rule = domainTextField.text ?? ""
-        delegate?.changeRule(rule: rule!, newText: domainTextField.text ?? "")
+        let ruleText = ruleTextView.text ?? ""
+        rule!.rule = ruleText
+        delegate?.changeRule(rule: rule!, newText: ruleText)
         dismiss(animated: true, completion: nil)
     }
     
@@ -61,17 +57,21 @@ class RuleDetailsController : BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - UITExtViewDelegate
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateButtons()
+    }
+    
     // MARK: - private methods
     
     func updateButtons() {
-        
-        textUnderline.backgroundColor = domainTextField.isEditing ? enabledLineColor : disabledLineColor
-        saveButton.isEnabled = !(domainTextField.text?.isEmpty ?? true) && domainTextField.text != rule?.rule
+        saveButton.isEnabled = !(ruleTextView.text?.isEmpty ?? true) && ruleTextView.text != rule?.rule
     }
     
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(domainTextField)
+        theme.setupTextView(ruleTextView)
     }
 }
