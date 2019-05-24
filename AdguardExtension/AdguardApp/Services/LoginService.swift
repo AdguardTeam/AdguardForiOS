@@ -198,9 +198,9 @@ class LoginService: LoginServiceProtocol {
                 
                 let (loggedIn, premium, expirationDate, error) = sSelf.processLoginResponce(json: jsonResponce)
                 
-                sSelf.loggedIn = loggedIn
                 sSelf.expirationDate = expirationDate
                 sSelf.hasPremiumLicense = premium
+                sSelf.loggedIn = loggedIn
                 
                 if error != nil {
                     callback(error!)
