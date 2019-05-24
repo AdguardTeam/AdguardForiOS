@@ -1746,7 +1746,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             // set enabled state for groups
             NSMutableSet <NSNumber*> *enabledGroups = [NSMutableSet new];
             for(ASDFilterGroup* group in self.groups) {
-                if(group.enabled)
+                if(group.enabled.boolValue)
                     [enabledGroups addObject:group.groupId];
             }
             
