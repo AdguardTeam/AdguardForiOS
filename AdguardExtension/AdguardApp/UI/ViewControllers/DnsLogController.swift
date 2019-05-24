@@ -62,7 +62,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
         
-        var detailsString = String(format: "%@, type: %@", record.type!, record.time!)
+        var detailsString = String(format: "%@, type: %@", record.time!, record.type!)
         if record.answer == nil || record.answer == "" {
             detailsString += ", NXDOMAIN"
         }

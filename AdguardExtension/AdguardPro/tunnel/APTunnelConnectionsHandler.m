@@ -139,16 +139,16 @@
         APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
         if (udpPacket) {
             [_dnsProxy resolveWithDnsRequest:udpPacket.payload callback:^(NSData * _Nonnull dnsResponse) {
-                
-                APUDPPacket* reverseUdpPacket = [[APUDPPacket alloc] initWithAF:udpPacket.aFamily];
-                reverseUdpPacket.dstAddress = udpPacket.srcAddress;
-                reverseUdpPacket.srcAddress = udpPacket.dstAddress;
-                reverseUdpPacket.dstPort = udpPacket.srcPort;
-                reverseUdpPacket.srcPort = udpPacket.dstPort;
-                
-                reverseUdpPacket.payload = dnsResponse;
-                
-                [_provider.packetFlow writePackets:@[reverseUdpPacket.packet] withProtocols:@[udpPacket.aFamily]];
+                if (dnsResponse.length > 0) {
+                    APUDPPacket* reverseUdpPacket = [[APUDPPacket alloc] initWithAF:udpPacket.aFamily];
+                    reverseUdpPacket.dstAddress = udpPacket.srcAddress;
+                    reverseUdpPacket.srcAddress = udpPacket.dstAddress;
+                    reverseUdpPacket.dstPort = udpPacket.srcPort;
+                    reverseUdpPacket.srcPort = udpPacket.dstPort;
+                    reverseUdpPacket.payload = dnsResponse;
+                    
+                    [_provider.packetFlow writePackets:@[reverseUdpPacket.packet] withProtocols:@[udpPacket.aFamily]];
+                }
             }];
         }
     }];
