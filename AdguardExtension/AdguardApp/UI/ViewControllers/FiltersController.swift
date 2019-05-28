@@ -216,16 +216,16 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             cell.collectionView.delegate = nil
             cell.collectionView.tag = indexPath.row
             cell.collectionView.delegate = self
+            cell.collectionView.dataSource = self
+            
+            cell.collectionTopConstraint.constant = (cell.filterDescription.text?.count ?? 0) > 0 ? 10 : 0
+            cell.collectionHeightConstraint.constant = filter?.tags?.count == 0 && filter?.langs?.count == 0 ? 0 : 45
             
             UIView.animate(withDuration: 0.0) {
                 cell.collectionView.performBatchUpdates({
                     cell.collectionView.reloadSections(IndexSet(integer: 0))
                 }, completion: { (_) in
                     cell.collectionView.layoutSubviews()
-                    cell.collectionHeightConstraint.constant = cell.collectionView.contentSize.height
-                    cell.collectionTopConstraint.constant = (cell.filterDescription.text?.count ?? 0) > 0 ? 19 : 0
-                    
-                    cell.layoutSubviews()
                 })
             }
             
