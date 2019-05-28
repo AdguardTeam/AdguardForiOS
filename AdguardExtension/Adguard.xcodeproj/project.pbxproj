@@ -1017,6 +1017,7 @@
 		D0B27BC62074BBE20073E13C /* APPacketTunnelMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */; };
 		D0B27BC72074BBE20073E13C /* APPacketTunnelMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC52074BBE20073E13C /* APPacketTunnelMigration.m */; };
 		D0B27BC92074C1E60073E13C /* APPacketTunnelMigrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC82074C1E60073E13C /* APPacketTunnelMigrationTest.m */; };
+		D0B6B756229D690600D6E84E /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = D005096A2201DA2F006BC10C /* providers.json */; };
 		D0B8EB8F2248E54A0066C5AC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */; };
 		D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0B8EB922248E5950066C5AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
@@ -3862,6 +3863,7 @@
 				6517EE761C86F46E00E055D2 /* ActionExtension.entitlements in Resources */,
 				65B40D341BDE635200A9C595 /* JSConverter.js in Resources */,
 				65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */,
+				D0B6B756229D690600D6E84E /* providers.json in Resources */,
 				655AACDC1D423B7400E316EA /* Assets.xcassets in Resources */,
 				65C52B3D1B906105003AF42F /* MainInterface.storyboard in Resources */,
 				D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */,

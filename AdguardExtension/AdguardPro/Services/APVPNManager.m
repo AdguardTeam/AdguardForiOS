@@ -676,6 +676,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _activeDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: self.defaultServer;
         [self didChangeValueForKey:@"activeDnsServer"];
         
+        _resources.activeDnsServer = _activeDnsServer;
+        
         [self willChangeValueForKey:@"tunnelMode"];
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;

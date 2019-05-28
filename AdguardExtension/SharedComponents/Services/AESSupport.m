@@ -72,7 +72,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     AESharedResources *_sharedResources;
     id<SafariServiceProtocol> _safariService;
     id<AEServiceProtocol> _aeService;
-    APVPNManager *_vpnManager;
 }
 
 @end
@@ -84,37 +83,17 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 @implementation AESSupport
 
-static AESSupport *singletonSupport;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-+ (AESSupport *)singleton{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        singletonSupport = [AESSupport alloc];
-        singletonSupport = [singletonSupport init];
-    });
-    
-    return singletonSupport;
-    
-}
-
-- (id)init{
-    
-    if (singletonSupport != self) {
-        return nil;
-    }
+- (id)initWithResources:(id)resources safariSevice:(id)safariService aeService:(id)aeService {
     
     self = [super init];
     if (self) {
-        _sharedResources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
-        _safariService = [ServiceLocator.shared getSetviceWithTypeName:@"SafariService"];
-        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
-        _vpnManager = [ServiceLocator.shared getSetviceWithTypeName:@"APVPNManager"];
+        _sharedResources = resources;
+        _safariService = safariService;
+        _aeService = aeService;
     }
     
     return self;
@@ -236,7 +215,7 @@ static AESSupport *singletonSupport;
     NSString* dnsServerParam = nil;
     BOOL custom = NO;
     
-    DnsServerInfo * dnsServer = _vpnManager.activeDnsServer;
+    DnsServerInfo * dnsServer = _sharedResources.activeDnsServer;
     if([DnsServerInfo.adguardDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD;
     }
@@ -252,7 +231,7 @@ static AESSupport *singletonSupport;
         params[REPORT_PARAM_DNS] = dnsServerParam;
         
         if(custom) {
-            params[REPORT_PARAM_CUSTOM_DNS] = _vpnManager.activeDnsProvider.name;
+            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.name;
         }
     }
     

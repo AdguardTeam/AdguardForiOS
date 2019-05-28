@@ -20,14 +20,22 @@
 
 extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@interface AESSupport : NSObject <MFMailComposeViewControllerDelegate>
+@protocol AESharedResourcesProtocol, SafariServiceProtocol, AEServiceProtocol;
 
-+ (nonnull AESSupport *)singleton;
+@protocol AESSupportProtocol <NSObject>
 
 - (void)sendMailBugReportWithParentController:(nonnull UIViewController *)parent;
 
 - (void)sendSimpleMailWithParentController:(nonnull UIViewController *)parent subject:(nonnull NSString *)subject body:(nonnull NSString *)body;
 
 - (nullable NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
+
+@end
+
+@interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>
+
+- (nonnull instancetype) initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
+                      safariSevice: (nonnull id<SafariServiceProtocol>) safariService
+                         aeService: (nonnull id<AEServiceProtocol>) aeService;
 
 @end

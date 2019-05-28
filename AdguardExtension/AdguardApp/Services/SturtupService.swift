@@ -70,5 +70,8 @@ class StartupService : NSObject{
         let vpnManager: APVPNManager = APVPNManager(resources: sharedResources)
         ServiceLocator.shared.addService(service: vpnManager)
         
+        let supportService: AESSupportProtocol = AESSupport(resources: sharedResources, safariSevice: safariService, aeService: aeService)
+        
+        ServiceLocator.shared.addService(service: supportService)
     }
 }
