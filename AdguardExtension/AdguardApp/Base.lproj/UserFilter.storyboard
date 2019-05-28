@@ -27,17 +27,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7v-GH-btE" userLabel="bottom bar">
                                 <rect key="frame" x="0.0" y="822" width="414" height="80"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-0N-ZOQ" userLabel="Left Buttons Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="285" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-0N-ZOQ" userLabel="Left Buttons Stack">
+                                        <rect key="frame" x="8" y="0.0" width="388" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="xvv-zm-SbZ"/>
                                         </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="0.0" bottom="8" trailing="0.0"/>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9T-DJ-2at" userLabel="Right Button View">
-                                        <rect key="frame" x="334" y="0.0" width="80" height="40"/>
+                                        <rect key="frame" x="406" y="0.0" width="0.0" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="LBS-vf-SX0"/>
+                                            <constraint firstAttribute="width" id="WgH-bS-vm2"/>
                                             <constraint firstAttribute="height" constant="40" id="rca-Iz-bcX"/>
                                         </constraints>
                                     </view>
@@ -51,11 +52,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="p9T-DJ-2at" firstAttribute="trailing" secondItem="FMo-f1-ogq" secondAttribute="trailing" id="06L-8q-XTX"/>
-                                    <constraint firstItem="Evi-0N-ZOQ" firstAttribute="leading" secondItem="w7v-GH-btE" secondAttribute="leading" id="3R8-Nr-vVo"/>
-                                    <constraint firstItem="p9T-DJ-2at" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Evi-0N-ZOQ" secondAttribute="trailing" constant="10" id="Bzr-V1-ax8"/>
+                                    <constraint firstItem="Evi-0N-ZOQ" firstAttribute="leading" secondItem="w7v-GH-btE" secondAttribute="leading" constant="8" id="3R8-Nr-vVo"/>
+                                    <constraint firstItem="p9T-DJ-2at" firstAttribute="leading" secondItem="Evi-0N-ZOQ" secondAttribute="trailing" constant="10" id="Bzr-V1-ax8"/>
                                     <constraint firstItem="FMo-f1-ogq" firstAttribute="top" secondItem="Evi-0N-ZOQ" secondAttribute="top" id="LkH-Ge-5Qz"/>
                                     <constraint firstItem="FMo-f1-ogq" firstAttribute="trailing" secondItem="pma-aK-ghd" secondAttribute="trailing" id="eaz-08-IG3"/>
+                                    <constraint firstAttribute="trailing" secondItem="p9T-DJ-2at" secondAttribute="trailing" constant="8" id="fzv-da-vof"/>
                                     <constraint firstItem="p9T-DJ-2at" firstAttribute="top" secondItem="FMo-f1-ogq" secondAttribute="top" id="h4l-N1-BWe"/>
                                     <constraint firstAttribute="height" constant="80" id="jSv-xb-e1J"/>
                                     <constraint firstItem="pma-aK-ghd" firstAttribute="leading" secondItem="FMo-f1-ogq" secondAttribute="leading" id="oWu-Yy-JXi"/>
@@ -85,6 +86,7 @@
                         <outlet property="importButton" destination="IHN-jy-NyP" id="qx9-KC-dNF"/>
                         <outlet property="leftButtonStack" destination="Evi-0N-ZOQ" id="hrP-zE-Wpq"/>
                         <outlet property="rightButtonView" destination="p9T-DJ-2at" id="Grj-06-6CR"/>
+                        <outlet property="rigthButtonViewWidthConstraint" destination="WgH-bS-vm2" id="AMW-ak-eQY"/>
                         <outlet property="selectAllButton" destination="DLT-c2-7eC" id="WgK-fq-T97"/>
                         <outlet property="selectButton" destination="c5a-s3-YPd" id="d3I-RS-hgt"/>
                         <outletCollection property="bottomBarButtons" destination="c5a-s3-YPd" collectionClass="NSMutableArray" id="AOH-sc-e8n"/>
@@ -96,10 +98,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x5-4j-Va4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="c5a-s3-YPd" userLabel="Select Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal" title="Select">
                         <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -119,7 +121,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -139,7 +141,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -159,7 +161,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal" title="Select all">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -179,7 +181,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -199,7 +201,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                     <state key="normal">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
