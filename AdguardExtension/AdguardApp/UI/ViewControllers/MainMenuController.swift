@@ -25,6 +25,7 @@ class MainMenuController: UITableViewController {
     let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    let support: AESSupportProtocol = ServiceLocator.shared.getService()!
     
     static let BUGREPORT_URL = "http://agrd.io/report_ios_bug"
     
@@ -123,7 +124,7 @@ class MainMenuController: UITableViewController {
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         
         let incorrectAction = UIAlertAction(title: ACLocalizedString("incorrect_blocking_report", nil), style: .default) { (action) in
-            guard let reportUrl = AESSupport.singleton().composeWebReportUrl(forSite: nil) else { return }
+            guard let reportUrl = self.support.composeWebReportUrl(forSite: nil) else { return }
             UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
         }
         
@@ -133,7 +134,7 @@ class MainMenuController: UITableViewController {
         
         let contactSupportAction = UIAlertAction(title: ACLocalizedString("action_contact_support", nil), style: .default) { (action) in
             
-            AESSupport.singleton().sendMailBugReport(withParentController: self)
+            self.support.sendMailBugReport(withParentController: self)
         }
         
         actionSheet.addAction(cancelAction)

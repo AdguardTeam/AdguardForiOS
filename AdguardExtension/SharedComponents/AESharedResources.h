@@ -17,7 +17,7 @@
 */
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization;
+@class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -270,6 +270,8 @@ extern NSString*  _Nonnull AEDefaultsAppRated;
  We need it because filter update process is performed in two steps.
  */
 @property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
+
+@property (nullable) DnsServerInfo* activeDnsServer;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 

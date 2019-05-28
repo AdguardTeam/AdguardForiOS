@@ -43,6 +43,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     AEService *_aeService;
     SafariService *_safariService;
     ContentBlockerService *_contentBlockerService;
+    AESSupport *_support;
     
     NSURL *_url;
     BOOL _injectScriptSupported;
@@ -136,6 +137,8 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     _safariService = [[SafariService alloc] initWithResources:_sharedResources];
     _contentBlockerService = [[ContentBlockerService alloc] initWithResources:_sharedResources safariService:_safariService];
     _aeService = [[AEService alloc] initWithContentBlocker:_contentBlockerService resources:_sharedResources];
+    
+    _support = [[AESSupport alloc] initWithResources:_sharedResources safariSevice:_safariService aeService:_aeService];
 
     self.title = LocalizationNotNeeded(AE_PRODUCT_NAME);
 
@@ -318,6 +321,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
         _mainController.resources = _sharedResources;
         _mainController.safariService = _safariService;
         _mainController.contentBlocker = _contentBlockerService;
+        _mainController.support = _support;
         
         _mainController.domainName = _host;
         _mainController.url = _url;

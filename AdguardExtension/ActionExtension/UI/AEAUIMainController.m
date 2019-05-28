@@ -205,7 +205,7 @@
 
 - (IBAction)clickMissedAd:(id)sender {
     
-    NSURL *url = [AESSupport.singleton composeWebReportUrlForSite:self.url];
+    NSURL *url = [self.support composeWebReportUrlForSite:self.url];
     [self openUrl:url];
 }
 
