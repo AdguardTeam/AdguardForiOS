@@ -52,6 +52,10 @@ class UserFilterController : UIViewController {
     @IBOutlet var bottomBarButtons: [RoundRectButton]!
     @IBOutlet weak var bottomBarSeparator: UIView!
     
+    @IBOutlet weak var rigthButtonViewWidthConstraint: NSLayoutConstraint!
+    
+    private let buttonSpacing: CGFloat = 8.0
+    
     enum BootomBarState {
         case normal
         case select
@@ -161,16 +165,26 @@ class UserFilterController : UIViewController {
             view.removeFromSuperview()
         }
         
+        var rightButton = cancelButton!
         switch barState {
         case .normal:
-            rightButtonView.addSubview(selectButton)
+            rightButton = selectButton
+            
             leftButtonStack.addArrangedSubview(exportButton)
             leftButtonStack.addArrangedSubview(importButton)
+            
         case .select:
-            rightButtonView.addSubview(cancelButton)
+            
             leftButtonStack.addArrangedSubview(deleteButton)
             leftButtonStack.addArrangedSubview(selectAllButton)
         }
+        
+        rightButtonView.addSubview(rightButton)
+        
+        rightButton.sizeToFit()
+        rigthButtonViewWidthConstraint.constant = rightButton.frame.size.width
+        bottomBar.layoutSubviews()
+        rightButton.frame = rightButtonView.bounds
         
         selectedRulesChanged()
     }

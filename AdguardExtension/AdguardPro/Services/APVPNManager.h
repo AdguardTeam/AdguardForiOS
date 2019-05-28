@@ -180,6 +180,6 @@ extern NSString* __nonnull APVpnChangedNotification;
 /////////////////////////////////////////////////////////////////////
 
 - (nonnull id)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
-                  configuration: (ConfigurationService *) configuration;
+                  configuration: (nonnull ConfigurationService *) configuration;
 
 @end
