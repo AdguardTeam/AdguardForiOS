@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import "APSharedResources.h"
 
-@class  ASDFilterRule, DnsProviderInfo, DnsServerInfo;
+@class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
@@ -179,6 +179,7 @@ extern NSString* __nonnull APVpnChangedNotification;
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (nonnull id)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources;
+- (nonnull id)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
+                  configuration: (ConfigurationService *) configuration;
 
 @end

@@ -67,7 +67,7 @@ class StartupService : NSObject{
         }
         ServiceLocator.shared.addService(service: filtersService)
         
-        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources)
+        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
         ServiceLocator.shared.addService(service: vpnManager)
         
     }
