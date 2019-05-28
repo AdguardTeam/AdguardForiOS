@@ -118,7 +118,8 @@ class UserFilterViewModel: NSObject {
         
         switch type {
         case .blacklist:
-            addBlacklistRules(ruleTexts: [ruleText], completionHandler: completionHandler, errorHandler: errorHandler)
+            let rules = ruleText.components(separatedBy: .whitespacesAndNewlines)
+            addBlacklistRules(ruleTexts: rules, completionHandler: completionHandler, errorHandler: errorHandler)
         case .whitelist:
             addWhitelistRule(ruleText: ruleText, completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedWhitelist:
