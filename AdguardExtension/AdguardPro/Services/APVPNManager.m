@@ -71,6 +71,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     DnsProvidersService * _providersService;
     
     APSharedResources *_resources;
+    ConfigurationService *_configuration;
 }
 
 @synthesize connectionStatus = _connectionStatus;
@@ -79,16 +80,20 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
 
-- (id)initWithResources: (nonnull APSharedResources*) resources {
+- (id)initWithResources: (nonnull APSharedResources*) resources
+          configuration: (ConfigurationService *) configuration {
     
     self = [super init];
     if (self) {
         
         _resources = resources;
+        _configuration = configuration;
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
         _notificationQueue = [NSOperationQueue new];
         _notificationQueue.underlyingQueue = workingQueue;
         _notificationQueue.name = @"APVPNManager notification";
+        
+        [_configuration addObserver:self forKeyPath:@"proStatus" options:NSKeyValueObservingOptionNew context:nil];
         
         // set delayed notify
         _delayedSendNotify = [[ACLExecuteBlockDelayed alloc]
@@ -147,6 +152,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     for (id observer in _observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
+    
+    [_configuration removeObserver:self forKeyPath:@"proStatus"];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -457,6 +464,17 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 }
 
 /////////////////////////////////////////////////////////////////////
+#pragma mark Key Value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:@"proStatus"] && !_configuration.proStatus) {
+        [self removeVpnConfiguration];
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 
 //must be called on workingQueue
@@ -659,6 +677,43 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                   (self.activeDnsServer.name ?: @"None"));
         
         [self loadConfiguration];
+    }];
+}
+
+- (void)removeVpnConfiguration {
+    
+    [_busyLock lock];
+    _busy = YES;
+    [_busyLock unlock];
+    
+    [NETunnelProviderManager loadAllFromPreferencesWithCompletionHandler:^(NSArray<NETunnelProviderManager *> * _Nullable managers, NSError * _Nullable error) {
+        if (error){
+            
+            DDLogError(@"(APVPNManager) removeVpnConfiguration - Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
+            _lastError = _standartError;
+        }
+        else {
+            
+            if (managers.count) {
+                for (NETunnelProviderManager *item in managers) {
+                    [item removeFromPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
+                        if(error) {
+                            DDLogError(@"(APVPNManager) Error. Manager removing failed with error: %@", error.localizedDescription);
+                        }
+                        else {
+                            DDLogInfo(@"(APVPNManager) Error. Manager successfully removed");
+                        }
+                    }];
+                }
+                
+                _manager = nil;
+                _protocolConfiguration = nil;
+            }
+        }
+        
+        [_busyLock lock];
+        _busy = NO;
+        [_busyLock unlock];
     }];
 }
 
