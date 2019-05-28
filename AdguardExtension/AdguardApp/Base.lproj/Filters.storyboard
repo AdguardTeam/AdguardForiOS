@@ -213,7 +213,7 @@
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QP5-8R-PLv">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QP5-8R-PLv">
                                             <rect key="frame" x="25" y="246.5" width="369" height="45"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -305,7 +305,7 @@
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="top" secondItem="MxA-VX-Amb" secondAttribute="bottom" id="F7w-Tw-gkF"/>
                                         <constraint firstItem="cTL-ax-aZV" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="15" id="HxN-vb-Wro"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="SbE-rx-EaN" secondAttribute="trailing" constant="10" id="J0h-cu-UwH"/>
-                                        <constraint firstAttribute="bottom" secondItem="QP5-8R-PLv" secondAttribute="bottom" priority="750" constant="8" id="P3u-W6-Dj6"/>
+                                        <constraint firstAttribute="bottom" secondItem="QP5-8R-PLv" secondAttribute="bottom" priority="750" constant="15" id="P3u-W6-Dj6"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="5N0-s5-SVS" secondAttribute="trailing" constant="15" id="Pfx-nx-ZB2"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="12" id="UAU-qQ-dXV"/>
                                         <constraint firstItem="QP5-8R-PLv" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="VS3-Er-eTZ"/>
