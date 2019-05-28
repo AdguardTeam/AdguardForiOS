@@ -116,14 +116,28 @@ class UserFilterViewModel: NSObject {
     func addRule(ruleText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) {
         if ruleText.count == 0 { return }
         
+        let components = ruleText.components(separatedBy: .whitespacesAndNewlines)
+        
+        var rules: [String] = []
+        
+        for component in components {
+            let trimmed = component.trimmingCharacters(in: .whitespaces)
+            if trimmed.count > 0 && !trimmed.starts(with: "!") {
+                rules.append(trimmed)
+            }
+        }
+        
+        if rules.count == 0 {
+            return
+        }
+        
         switch type {
         case .blacklist:
-            let rules = ruleText.components(separatedBy: .whitespacesAndNewlines)
             addBlacklistRules(ruleTexts: rules, completionHandler: completionHandler, errorHandler: errorHandler)
         case .whitelist:
-            addWhitelistRule(ruleText: ruleText, completionHandler: completionHandler, errorHandler: errorHandler)
+            addWhitelistRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedWhitelist:
-            addInvertedWhitelstRule(ruleText: ruleText, completionHandler: completionHandler, errorHandler: errorHandler)
+            addInvertedWhitelstRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
         }
     }
     
