@@ -207,17 +207,17 @@
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-rx-EaN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbE-rx-EaN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="25" y="241.5" width="312" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QP5-8R-PLv">
-                                            <rect key="frame" x="25" y="251.5" width="369" height="34"/>
+                                            <rect key="frame" x="25" y="246.5" width="369" height="45"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="34" id="Pre-Wp-nua"/>
+                                                <constraint firstAttribute="height" constant="45" id="Pre-Wp-nua"/>
                                             </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="bRL-TH-ZCN">
                                                 <size key="itemSize" width="50" height="20"/>
@@ -305,13 +305,13 @@
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="top" secondItem="MxA-VX-Amb" secondAttribute="bottom" id="F7w-Tw-gkF"/>
                                         <constraint firstItem="cTL-ax-aZV" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="15" id="HxN-vb-Wro"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="SbE-rx-EaN" secondAttribute="trailing" constant="10" id="J0h-cu-UwH"/>
-                                        <constraint firstAttribute="bottom" secondItem="QP5-8R-PLv" secondAttribute="bottom" constant="14" id="P3u-W6-Dj6"/>
+                                        <constraint firstAttribute="bottom" secondItem="QP5-8R-PLv" secondAttribute="bottom" priority="750" constant="8" id="P3u-W6-Dj6"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="5N0-s5-SVS" secondAttribute="trailing" constant="15" id="Pfx-nx-ZB2"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="12" id="UAU-qQ-dXV"/>
                                         <constraint firstItem="QP5-8R-PLv" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="VS3-Er-eTZ"/>
                                         <constraint firstItem="SbE-rx-EaN" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" constant="19" id="Zt2-Vh-jUK"/>
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="am7-aW-gBz"/>
-                                        <constraint firstItem="QP5-8R-PLv" firstAttribute="top" secondItem="SbE-rx-EaN" secondAttribute="bottom" constant="10" id="b8T-Cd-3c1"/>
+                                        <constraint firstItem="QP5-8R-PLv" firstAttribute="top" secondItem="SbE-rx-EaN" secondAttribute="bottom" constant="5" id="b8T-Cd-3c1"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="MxA-VX-Amb" secondAttribute="trailing" constant="10" id="bMT-Xd-6qz"/>
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="cr8-IR-pLt"/>
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="top" secondItem="cTL-ax-aZV" secondAttribute="bottom" constant="3" id="kPe-qj-mkN"/>
