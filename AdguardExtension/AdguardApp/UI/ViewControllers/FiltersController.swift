@@ -219,7 +219,7 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             cell.collectionView.dataSource = self
             
             cell.collectionTopConstraint.constant = (cell.filterDescription.text?.count ?? 0) > 0 ? 10 : 0
-            cell.collectionHeightConstraint.constant = filter?.tags?.count == 0 && filter?.langs?.count == 0 ? 0 : 45
+            cell.collectionHeightConstraint.constant = filter?.tags?.count == 0 && filter?.langs?.count == 0 ? 0 : 22
             
             UIView.animate(withDuration: 0.0) {
                 cell.collectionView.performBatchUpdates({
