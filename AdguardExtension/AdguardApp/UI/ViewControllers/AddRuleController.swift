@@ -53,6 +53,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         titleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_title" : "add_whitelist_domain_title", "")
         editCaption.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
         
+        ruleTextView.keyboardType = blacklist ? .default : .URL
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         

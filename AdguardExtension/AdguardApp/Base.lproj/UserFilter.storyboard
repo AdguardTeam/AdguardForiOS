@@ -27,7 +27,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7v-GH-btE" userLabel="bottom bar">
                                 <rect key="frame" x="0.0" y="822" width="414" height="80"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-0N-ZOQ" userLabel="Left Buttons Stack">
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" ambiguous="YES" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-0N-ZOQ" userLabel="Left Buttons Stack">
                                         <rect key="frame" x="8" y="0.0" width="388" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="xvv-zm-SbZ"/>
@@ -53,7 +53,7 @@
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Evi-0N-ZOQ" firstAttribute="leading" secondItem="w7v-GH-btE" secondAttribute="leading" constant="8" id="3R8-Nr-vVo"/>
-                                    <constraint firstItem="p9T-DJ-2at" firstAttribute="leading" secondItem="Evi-0N-ZOQ" secondAttribute="trailing" constant="10" id="Bzr-V1-ax8"/>
+                                    <constraint firstItem="p9T-DJ-2at" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Evi-0N-ZOQ" secondAttribute="trailing" constant="10" id="Bzr-V1-ax8"/>
                                     <constraint firstItem="FMo-f1-ogq" firstAttribute="top" secondItem="Evi-0N-ZOQ" secondAttribute="top" id="LkH-Ge-5Qz"/>
                                     <constraint firstItem="FMo-f1-ogq" firstAttribute="trailing" secondItem="pma-aK-ghd" secondAttribute="trailing" id="eaz-08-IG3"/>
                                     <constraint firstAttribute="trailing" secondItem="p9T-DJ-2at" secondAttribute="trailing" constant="8" id="fzv-da-vof"/>
@@ -121,7 +121,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="25" maxX="8" maxY="0.0"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

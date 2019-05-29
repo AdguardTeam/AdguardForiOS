@@ -183,10 +183,12 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupTextField(_ textField: UITextField) {
         textField.textColor = configuration.darkTheme ? .white : .darkGray
+        textField.keyboardAppearance = configuration.darkTheme ? .dark : .default
     }
     
     func setupTextView(_ textView: UITextView) {
         textView.textColor = configuration.darkTheme ? .white : .darkGray
+        textView.keyboardAppearance = configuration.darkTheme ? .dark : .default
     }
     
     func setupTable(_ table: UITableView) {
