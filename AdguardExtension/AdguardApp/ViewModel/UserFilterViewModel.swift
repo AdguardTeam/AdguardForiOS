@@ -116,7 +116,7 @@ class UserFilterViewModel: NSObject {
     func addRule(ruleText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) {
         if ruleText.count == 0 { return }
         
-        let components = ruleText.components(separatedBy: .whitespacesAndNewlines)
+        let components = ruleText.components(separatedBy: .newlines)
         
         var rules: [String] = []
         
