@@ -76,7 +76,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     // MARK: constants -
     // store kit constants
-    private let kGetProProductID = "com.adguard.AdguardExtension.GetProSubscriptionTest"
+    private let kGetProProductID = "com.adguard.AdguardExtension.Premium"
     
     
     // ios_validate_receipt request
