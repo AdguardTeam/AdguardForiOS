@@ -46,9 +46,15 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet weak var dohCheck: UIImageView!
     @IBOutlet weak var dotCheck: UIImageView!
     
+    @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet var buttons: [RoundRectButton]!
+    @IBOutlet var separators: [UIView]!
+    
+    
     // MARK: - services
     
     let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - viewcontroller lifecycle
     
@@ -57,6 +63,7 @@ class ChooseProtocolController: BottomAlertController {
         
         setupAvailibleProtocols()
         setupChecks()
+        updateTheme()
     }
     
     // MARK: - Actions
@@ -129,5 +136,13 @@ class ChooseProtocolController: BottomAlertController {
                 dotHeightConstraint.constant = cellHeight
             }
         }
+    }
+    
+    private func updateTheme() {
+        
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupPopupButtons(buttons)
+        theme.setupSeparators(separators)
     }
 }

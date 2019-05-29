@@ -55,6 +55,8 @@ import Foundation
     func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
     func setupSwitch(_ switch: UISwitch)
+    func setupSeparator(_ separator: UIView)
+    func setupSeparators(_ separators: [UIView])
 }
 
 class ThemeService : NSObject, ThemeServiceProtocol {
@@ -227,6 +229,16 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupSwitch(_ switchControl: UISwitch) {
         switchControl.tintColor = configuration.darkTheme ? UIColor(hexString: "#4D4D4D") : nil
+    }
+    
+    func setupSeparator(_ separator: UIView) {
+        separator.backgroundColor = separatorColor
+    }
+    
+    func setupSeparators(_ separators: [UIView]) {
+        for separator in separators {
+            setupSeparator(separator)
+        }
     }
 
 }
