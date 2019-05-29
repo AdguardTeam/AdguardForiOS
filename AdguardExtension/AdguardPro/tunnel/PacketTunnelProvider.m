@@ -58,7 +58,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNS_IPV6_ADDRESS                      @"2001:ad00:ad00::ad00"
 #define V_DNS_IPV6_FALLBACK                     @"2001:4860:4860::8888"
 
-#define V_DNS_IPV4_ADDRESS                      @"121.122.123.124"
+#define V_DNS_IPV4_ADDRESS                      @"198.18.0.1"
 #define V_DNS_IPV4_FALLBACK                     @"8.8.8.8"
 
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
@@ -321,8 +321,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 }
 
 - (void) updateTunnelSettingsInternalWithCompletionHandler:(nonnull void (^)( NSError * __nullable error))completionHandler {
-    
-    DDLogInfo(@"(PacketTunnelProvider) update Tunnel Settings");
+    DDLogInfo(@"(PacketTunnelProvider) Update Tunnel Settings");
     
     //create empty tunnel settings
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
@@ -331,11 +330,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     // Check configuration
     if(!_currentServer.upstreams.firstObject.length) {
-    
         DDLogError(@"(PacketTunnelProvider) Can't obtain DNS addresses from protocol configuration.");
     }
     else {
-        
         BOOL full = NO;
         BOOL withoutIcon = NO;
         
@@ -555,7 +552,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     // include routes
     
     if(fullTunnel) {
-        
         ipv4.includedRoutes = @[[NEIPv4Route defaultRoute]];
         ipv6.includedRoutes = @[[NEIPv6Route defaultRoute]];
         
@@ -566,7 +562,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         ipv6.excludedRoutes = [self ipv6ExcludedRoutesWithoutVPNIcon:withoutVPNIcon];
     }
     else {
-        
         if (ipv4Available) {
             NEIPv4Route* dnsProxyIpv4Route = [[NEIPv4Route alloc]
                                               initWithDestinationAddress:V_DNS_IPV4_ADDRESS subnetMask:V_INTERFACE_IPV4_FULL_MASK];
