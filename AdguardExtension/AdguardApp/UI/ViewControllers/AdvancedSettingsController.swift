@@ -131,13 +131,14 @@ class AdvancedSettingsController: UITableViewController {
     // MARK: - private methods
     
     func change(senderSwitch: UISwitch, forKey key: String) {
+        
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+        
         let oldValue = resources.sharedDefaults().bool(forKey: key)
         let newValue = senderSwitch.isOn
         
         if oldValue != newValue {
             resources.sharedDefaults().set(newValue, forKey: key)
-            
-            let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
             
             contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
                 if error != nil {

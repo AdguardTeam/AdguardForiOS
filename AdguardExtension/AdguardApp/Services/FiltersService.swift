@@ -613,10 +613,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             return
         }
         
+        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
+        
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
-            
-            let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
         
             let diff = sSelf.getDiff()
             
