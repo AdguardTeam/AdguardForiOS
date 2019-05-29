@@ -749,6 +749,98 @@
             </objects>
             <point key="canvasLocation" x="1668" y="0.0"/>
         </scene>
+        <!--Rule Added Controller-->
+        <scene sceneID="S6p-xY-1g1">
+            <objects>
+                <viewController storyboardIdentifier="RuleAddedController" id="bu5-D3-w6D" customClass="RuleAddedController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5bx-dv-RDg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Std-34-cUz" customClass="RoundrectView" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="707" width="414" height="209"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The rule has been added to the user filter." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfI-YN-iXe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="23" width="364" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-Bo-7tE">
+                                        <rect key="frame" x="0.0" y="94" width="414" height="0.5"/>
+                                        <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="LV2-QH-197"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRm-I7-37E" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="94.5" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="vt4-hJ-CdT"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
+                                        <state key="normal" title="OK">
+                                            <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="okAction:" destination="bu5-D3-w6D" eventType="touchUpInside" id="BoG-bI-yuK"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCC-li-ZR0">
+                                        <rect key="frame" x="0.0" y="154.5" width="414" height="0.5"/>
+                                        <color key="backgroundColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="yQl-0L-998"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QCC-li-ZR0" secondAttribute="bottom" constant="54" id="5eB-OA-HeH"/>
+                                    <constraint firstItem="QCC-li-ZR0" firstAttribute="top" secondItem="zRm-I7-37E" secondAttribute="bottom" id="Ku2-Fc-Xqs"/>
+                                    <constraint firstItem="zRm-I7-37E" firstAttribute="top" secondItem="gXl-Bo-7tE" secondAttribute="bottom" id="MM4-ny-0dT"/>
+                                    <constraint firstItem="gXl-Bo-7tE" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" id="Ouz-To-NHV"/>
+                                    <constraint firstAttribute="trailing" secondItem="gXl-Bo-7tE" secondAttribute="trailing" id="TF8-ef-WfQ"/>
+                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" constant="25" id="aGw-64-FvN"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfI-YN-iXe" secondAttribute="trailing" constant="25" id="iWP-hT-alb"/>
+                                    <constraint firstAttribute="trailing" secondItem="zRm-I7-37E" secondAttribute="trailing" id="k9j-pd-6H4"/>
+                                    <constraint firstItem="gXl-Bo-7tE" firstAttribute="top" secondItem="BfI-YN-iXe" secondAttribute="bottom" constant="23" id="qKl-08-Exi"/>
+                                    <constraint firstItem="zRm-I7-37E" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" id="u7C-8s-jbj"/>
+                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="top" secondItem="Std-34-cUz" secondAttribute="top" constant="23" id="vWo-qv-dHd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rAO-Mk-gd3" firstAttribute="trailing" secondItem="QCC-li-ZR0" secondAttribute="trailing" id="BWc-B4-HHZ"/>
+                            <constraint firstItem="rAO-Mk-gd3" firstAttribute="trailing" secondItem="Std-34-cUz" secondAttribute="trailing" id="E2q-cW-m4I"/>
+                            <constraint firstItem="QCC-li-ZR0" firstAttribute="leading" secondItem="rAO-Mk-gd3" secondAttribute="leading" id="S8K-Yb-QEc"/>
+                            <constraint firstItem="rAO-Mk-gd3" firstAttribute="bottom" secondItem="Std-34-cUz" secondAttribute="bottom" constant="-54" id="ijW-UC-jyg"/>
+                            <constraint firstItem="Std-34-cUz" firstAttribute="leading" secondItem="rAO-Mk-gd3" secondAttribute="leading" id="kdP-HM-HhX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rAO-Mk-gd3"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="Std-34-cUz" id="Ypc-T2-fiH"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="ijW-UC-jyg" id="wP1-iR-TVS"/>
+                        <outletCollection property="themableLabels" destination="BfI-YN-iXe" collectionClass="NSMutableArray" id="9zy-YI-eWc"/>
+                        <outletCollection property="themableButtons" destination="zRm-I7-37E" collectionClass="NSMutableArray" id="cov-pR-Iqv"/>
+                        <outletCollection property="separators" destination="gXl-Bo-7tE" collectionClass="NSMutableArray" id="Hsx-VI-X1K"/>
+                        <outletCollection property="separators" destination="QCC-li-ZR0" collectionClass="NSMutableArray" id="G6c-Wf-mF2"/>
+                        <outletCollection property="themableButtons" destination="zRm-I7-37E" collectionClass="NSMutableArray" id="7Oq-wd-gV4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y2m-vh-YiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3184" y="0.0"/>
+        </scene>
     </scenes>
     <resources>
         <image name="plus" width="26" height="26"/>

@@ -18,7 +18,7 @@
 
 import Foundation
 
-class UserFilterController : UIViewController {
+class UserFilterController : UIViewController, UIViewControllerTransitioningDelegate {
     
     var whitelist = false
     @objc var newRuleText: String?
@@ -70,6 +70,7 @@ class UserFilterController : UIViewController {
         
         if newRuleText != nil && newRuleText!.count > 0 {
             tableController?.addRule(rule: newRuleText!)
+            showRuleAddedDialog()
         }
         
         if whitelist {
@@ -153,6 +154,13 @@ class UserFilterController : UIViewController {
         selectedRulesChanged()
     }
     
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
+    
     // MARK: - private methods
     
     private func updateBottomBar() {
@@ -199,5 +207,13 @@ class UserFilterController : UIViewController {
     private func updateButtonStates() {
         deleteButton.isEnabled = model.rules.contains { $0.selected }
         selectAllButton.isEnabled = model.rules.contains { !$0.selected }
+    }
+    
+    private func showRuleAddedDialog() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleAddedController") as? RuleAddedController else { return }
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = self
+        
+        present(controller, animated: true, completion: nil)
     }
 }
