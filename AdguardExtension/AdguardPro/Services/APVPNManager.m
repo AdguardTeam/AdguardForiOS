@@ -139,7 +139,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _providersService = [DnsProvidersService new];
         
         // don't restart by default
-        _restartByReachability = NO;
+        _restartByReachability = YES;
         
         [self loadConfiguration];
     }
@@ -741,7 +741,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         //-------------
         
         _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
+        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : YES; // NO by default
         
         NSString *connectionStatusReason = @"Unknown";
         
