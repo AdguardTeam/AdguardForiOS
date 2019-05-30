@@ -32,7 +32,7 @@ protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
     func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, maxQueues: Int, serverName: String) -> Bool
     func stop()
-    func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data)->Void);
+    func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
 
 class DnsProxyService : NSObject, DnsProxyServiceProtocol {
@@ -112,6 +112,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         DDLogInfo("(DnsProxyService) - stop")
         do {
             try self.proxy?.stop()
+            self.proxy = nil
         }
         catch {
             DDLogError("(DnsProxyService) Error on stop proxy: \(error) ")
@@ -120,13 +121,13 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         return
     }
     
-    @objc func resolve(dnsRequest: Data, callback: @escaping (Data) -> Void) {
+    @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
         
         lastQueue = (lastQueue + 1) % queues.count
         let queue = queues[lastQueue]
         queue.async {
             do {
-                let dnsResponse = try self.proxy!.resolve(dnsRequest)
+                let dnsResponse = try self.proxy?.resolve(dnsRequest)
                 callback(dnsResponse)
             }
             catch {

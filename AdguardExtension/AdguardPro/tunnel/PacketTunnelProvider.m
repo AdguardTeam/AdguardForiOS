@@ -393,7 +393,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
     
     NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
-    _restartByRechability = restartValue ? [restartValue boolValue] : NO;
+    _restartByRechability = restartValue ? [restartValue boolValue] : YES;
     
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@", _currentServer.name);
 }
@@ -428,6 +428,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
         [_dnsProxy stop];
+        [self cancelTunnelWithError: nil];
     }
     else {
         
