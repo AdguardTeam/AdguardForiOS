@@ -379,6 +379,8 @@ class UserFilterViewModel: NSObject {
     
     func setNewRules(_ newRuleObjects: [ASDFilterRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
     
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+        
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -391,8 +393,6 @@ class UserFilterViewModel: NSObject {
             strongSelf.ruleObjects = newRuleObjects
             
             strongSelf.didChangeValue(for: \.rules)
-        
-            let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
             
             DispatchQueue.global().async { [weak self] in
                 guard let strongSelf = self else { return }
