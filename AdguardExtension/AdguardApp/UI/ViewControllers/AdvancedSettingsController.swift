@@ -20,16 +20,18 @@ import Foundation
 
 class AdvancedSettingsController: UITableViewController {
     
-    private var configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private var theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private var contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var simplifiedSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
-  
+    @IBOutlet weak var restartTunnelSwitch: UISwitch!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
@@ -56,10 +58,12 @@ class AdvancedSettingsController: UITableViewController {
         let wifiOnlyObject = resources.sharedDefaults().object(forKey: AEDefaultsWifiOnlyUpdates) as? NSNumber
         let wifiOnly = wifiOnlyObject?.boolValue ?? true
         wifiUpdateSwitch.isOn = wifiOnly
+        restartTunnelSwitch.isOn = vpnManager.restartByReachability
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
                 self?.updateUI()
+                self?.tableView.reloadData()
             }
         }
         
@@ -120,12 +124,23 @@ class AdvancedSettingsController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func toggleRestartTunnel(_ sender: UISwitch) {
+        vpnManager.restartByReachability = sender.isOn
+    }
+    
     // MARK: - table view cells
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = super.tableView(tableView, numberOfRowsInSection: section)
+        
+        // hide last cell("restart when network changes") in free version
+        return configuration.proStatus ? count : (count - 1)
     }
     
     // MARK: - private methods

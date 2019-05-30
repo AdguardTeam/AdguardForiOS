@@ -138,7 +138,7 @@
 
         APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
         if (udpPacket) {
-            [_dnsProxy resolveWithDnsRequest:udpPacket.payload callback:^(NSData * _Nonnull dnsResponse) {
+            [_dnsProxy resolveWithDnsRequest:udpPacket.payload callback:^(NSData * _Nullable dnsResponse) {
                 if (dnsResponse.length > 0) {
                     APUDPPacket* reverseUdpPacket = [[APUDPPacket alloc] initWithAF:udpPacket.aFamily];
                     reverseUdpPacket.dstAddress = udpPacket.srcAddress;

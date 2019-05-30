@@ -428,6 +428,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
         [_dnsProxy stop];
+        [self cancelTunnelWithError: nil];
     }
     else {
         
