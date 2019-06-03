@@ -18,11 +18,22 @@
 
 import Foundation
 
+protocol GetProTableControllerDelegate  {
+    
+    func subscribeAction()
+    func restorePurchasesAction()
+}
+
 class GetProTableController: UITableViewController {
     
     // MARK: - IB outlets
     
-    @IBOutlet weak var logo: ThemeableImageView!
+    @IBOutlet weak var upgradeButton: RoundRectButton!
+    @IBOutlet weak var restoreButton: RoundRectButton!
+    @IBOutlet weak var priceLabel: ThemableLabel!
+    @IBOutlet weak var periodLabel: ThemableLabel!
+    @IBOutlet weak var purchaseDescriptionTextView: UITextView!
+    
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -30,10 +41,19 @@ class GetProTableController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     
     // MARK: - private fields
     
+    var delegate: GetProTableControllerDelegate?
+    
     var proObservation: NSKeyValueObservation?
+    
+    private let securityRow = 0
+    private let privacyRow = 1
+    private let customRow = 2
+    private let subscribedRow = 3
+    private let purchaseRow = 4
     
     // MARK: - View controller livecycle
     
@@ -42,19 +62,20 @@ class GetProTableController: UITableViewController {
         
         updateTheme()
         
+        upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
+        
+        setPrice()
+        setPurchaseDescription()
+        
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
                 self?.updateTheme()
+                self?.tableView.reloadData()
             }
         }
     }
     
     // MARK: - table view delegate methods
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-        return configuration.proStatus ? 4 : 3
-    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -64,14 +85,77 @@ class GetProTableController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        // hide "you are subscribed" row
+        
+        if indexPath.row == subscribedRow && !configuration.proStatus {
+            return 0
+        }
+        
+        // hide purchase row for premium users
+        if indexPath.row == purchaseRow && configuration.proStatus {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+    // MARK: - public methods
+    
+    func enablePurchaseButtons(_ enable: Bool) {
+        upgradeButton.isEnabled = enable
+        restoreButton.isEnabled = enable
+    }
+    
+    func setPrice() {
+        
+        if purchaseService.ready {
+            priceLabel.text = purchaseService.price
+            periodLabel.text = purchaseService.period
+            upgradeButton.isEnabled = true
+        }
+        else {
+            priceLabel.text = ""
+            periodLabel.text = ""
+            upgradeButton.isEnabled = false
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func upgradeAction(_ sender: Any) {
+        enablePurchaseButtons(false)
+        purchaseService.requestPurchase()
+    }
+    
+    @IBAction func restoreAction(_ sender: Any) {
+        enablePurchaseButtons(false)
+        purchaseService.requestRestore()
+    }
+    
     // MARK: - private methods
     
     private func updateTheme() {
         
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
-        theme.setupImage(logo)
+        setPurchaseDescription()
     }
     
+    private func setPurchaseDescription() {
+        let format = ACLocalizedString("purchase_description_format", nil)
+        let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license")
+        let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
+        
+        let htmlString = String(format: format, privacy, eula)
+        guard let data = htmlString.data(using: .unicode) else { return }
+        guard let attributedString = try? NSMutableAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return }
+        
+        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: theme.lightGrayTextColor], range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], range: NSRange(location: 0, length: attributedString.length))
+        
+        purchaseDescriptionTextView.attributedText = attributedString
+    }
     
 }
