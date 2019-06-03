@@ -18,8 +18,7 @@
 
 import Foundation
 
-
-class GetProController: UIViewController, UIViewControllerTransitioningDelegate {
+class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate {
     
     // MARK: - properties
     var notificationObserver: Any?
@@ -29,25 +28,16 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets
-    @IBOutlet weak var upgradeButton: RoundRectButton!
-    @IBOutlet weak var restoreButton: RoundRectButton!
-    @IBOutlet weak var price: ThemableLabel!
-    @IBOutlet weak var subscriptionPeriod: ThemableLabel!
-    
-    @IBOutlet weak var purchaseView: UIView!
     @IBOutlet weak var accountView: UIView!
     
     @IBOutlet weak var separator1: UIView!
     @IBOutlet weak var separator2: UIView!
     
-    @IBOutlet var themableLabels: [ThemableLabel]!
-    
     @IBOutlet var loginBarButton: UIBarButtonItem!
     @IBOutlet var logoutBarButton: UIBarButtonItem!
+    @IBOutlet weak var goToMyAccountHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var priceLabel: ThemableLabel!
-    @IBOutlet weak var periodLabel: ThemableLabel!
-    
+    var tableController: GetProTableController?
     
     // MARK: - constants
     
@@ -65,14 +55,12 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
             DispatchQueue.main.async {
                 if let info = notification.userInfo {
                     self?.processNotification(info: info)
-                    self?.enableButtons(true)
                     self?.updateViews()
                     self?.updateTheme()
                 }
             }
         }
         
-        setUpgrateButtonTitle()
         updateViews()
         updateTheme()
     }
@@ -85,6 +73,15 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         super.viewWillDisappear(animated)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "" {
+            guard let controller = segue.destination as? GetProTableController else { return }
+            tableController = controller
+            tableController?.delegate = self
+        }
+    }
+    
     deinit {
         if let observer = notificationObserver {
             NotificationCenter.default.removeObserver(observer)
@@ -92,16 +89,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
     }
     
     // MARK: - actions
-    
-    @IBAction func upgradeAction(_ sender: Any) {
-        enableButtons(false)
-        purchaseService.requestPurchase()
-    }
-    
-    @IBAction func restorePurchasesAction(_ sender: Any) {
-        enableButtons(false)
-        purchaseService.requestRestore()
-    }
     
     @IBAction func accountAction(_ sender: Any) {
         UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
@@ -132,6 +119,15 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         self.present(alert, animated: true, completion: nil)
     }
     
+    // MARK: - GetProTableControllerDelegate methods
+    
+    func subscribeAction() {
+        purchaseService.requestPurchase()
+    }
+    func restorePurchasesAction() {
+         purchaseService.requestRestore()
+    }
+    
     // MARK: - Presentation delegate methods
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -157,7 +153,8 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         case PurchaseService.kPSNotificationRestorePurchaseFailure:
             restoreFailed(error: error)
         case PurchaseService.kPSNotificationReadyToPurchase:
-            setUpgrateButtonTitle()
+            tableController?.enablePurchaseButtons(true)
+            tableController?.setPrice()
             
         default:
             break
@@ -188,35 +185,11 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
     }
     
-    private func setUpgrateButtonTitle() {
-        
-        upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
-        
-        if purchaseService.ready {
-            priceLabel.text = purchaseService.price
-            periodLabel.text = purchaseService.period
-            upgradeButton.isEnabled = true
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        }
-        else {
-            priceLabel.text = ""
-            periodLabel.text = ""
-            upgradeButton.isEnabled = false
-            navigationItem.rightBarButtonItem?.isEnabled = false
-        }
-    }
-    
-    private func enableButtons(_ enable: Bool) {
-        upgradeButton.isEnabled = enable
-        restoreButton.isEnabled = enable
-    }
-    
     private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
         separator1.backgroundColor = theme.separatorColor
         separator2.backgroundColor = theme.separatorColor
-        theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
@@ -224,16 +197,13 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate 
         
         switch (configurationService.proStatus, configurationService.purchasedThroughLogin) {
         case (false, _):
-            purchaseView.isHidden = false
-            accountView.isHidden = true
+            goToMyAccountHeight.constant = 0
             navigationItem.rightBarButtonItems = [loginBarButton]
         case (true, false):
-            purchaseView.isHidden = true
-            accountView.isHidden = true
+            goToMyAccountHeight.constant = 0
             navigationItem.rightBarButtonItems = [loginBarButton]
         case (true, true):
-            purchaseView.isHidden = true
-            accountView.isHidden = false
+            goToMyAccountHeight.constant = 60
             navigationItem.rightBarButtonItems = [logoutBarButton]
         }
         
