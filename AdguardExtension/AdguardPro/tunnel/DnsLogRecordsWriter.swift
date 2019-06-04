@@ -19,7 +19,7 @@
 import Foundation
 import Mobile
 
-class DnsLogRecordsWriter: NSObject, MobileDNSRequestProcessedListenerProtocol {
+class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     var server = ""
     
@@ -31,7 +31,7 @@ class DnsLogRecordsWriter: NSObject, MobileDNSRequestProcessedListenerProtocol {
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
     
-    init(resources: APSharedResources) {
+    @objc init(resources: APSharedResources) {
         self.resources = resources
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
