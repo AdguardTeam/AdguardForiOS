@@ -36,6 +36,9 @@ static NSMutableDictionary *_propertyNamesForClasses;
     
     @autoreleasepool {
         
+        if (!_propertyNamesForClasses)
+            _propertyNamesForClasses = [NSMutableDictionary dictionary];
+        
         // obtainning typies of object properties
         unsigned int count = 0;
         objc_property_t *properties = class_copyPropertyList( self, &count );
@@ -64,9 +67,6 @@ static NSMutableDictionary *_propertyNamesForClasses;
         }
         
         if (pNames.count) {
-            
-            if (!_propertyNamesForClasses)
-                _propertyNamesForClasses = [NSMutableDictionary dictionary];
             
             NSString *className = NSStringFromClass(self);
             NSMutableSet *propertyNames = _propertyNamesForClasses[className];

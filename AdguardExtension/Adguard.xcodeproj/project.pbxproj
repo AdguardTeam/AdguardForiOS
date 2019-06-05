@@ -6210,6 +6210,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = ActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-DAPP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).ActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6230,6 +6231,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = ActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-DAPP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).ActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

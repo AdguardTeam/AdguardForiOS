@@ -65,16 +65,26 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     @objc
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void) {
         
+#if !APP_EXTENSION
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+#endif
+        
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
             
             if let error = sSelf.updateContentBlockers() {
+#if !APP_EXTENSION
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+#endif
                 completion(error)
                 return
             }
             
             sSelf.safariService.invalidateBlockingJsons(completion: { (error) in
                 sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+#if !APP_EXTENSION
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+#endif
             })
         }
     }
