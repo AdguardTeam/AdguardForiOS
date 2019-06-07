@@ -64,6 +64,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
 #define V_DNSPROXY_LOCAL_ADDDRESS_IPV6          @"::1"
 
+#define DNS_PROXY_MAX_QUEUES 5
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
 
@@ -150,7 +152,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        _dnsProxy = [[DnsProxyService alloc] initWithResources:_resources];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
+        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter maxQueues: DNS_PROXY_MAX_QUEUES];
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }
@@ -247,9 +250,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     [_reachabilityHandler stopNotifier];
     
     [self logNetworkInterfaces];
-    [_dnsProxy stop];
-    
-    completionHandler();
+    [_dnsProxy stopWithCallback:^{
+        completionHandler();
+    }];
 }
 
 - (void)sleepWithCompletionHandler:(void (^)(void))completionHandler
@@ -314,9 +317,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         
         [USE_STRONG(self) readProtocolConfiguration];
         
-        [USE_STRONG(self)->_dnsProxy stop];
-        [USE_STRONG(self) startDnsProxy];
-        [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+        [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
+            [USE_STRONG(self) startDnsProxy];
+            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+        }];
     }];
 }
 
@@ -427,8 +431,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if(_restartByRechability) {
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
-        [_dnsProxy stop];
-        [self cancelTunnelWithError: nil];
+        [_dnsProxy stopWithCallback:^{
+            [self cancelTunnelWithError: nil];
+        }];
     }
     else {
         
@@ -452,9 +457,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }];
     };
     
-    [_dnsProxy stop];
-    [self startDnsProxy];
-    updateTunnelSettingsBlock();
+    [_dnsProxy stopWithCallback:^{
+        [self startDnsProxy];
+        updateTunnelSettingsBlock();
+    }];
 }
 
 /**
@@ -655,7 +661,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
     
     BOOL ipv4Available = [ACNIPUtils isIpv4Available];
-    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns maxQueues: 5 serverName: _currentServer.name];
+    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name];
 }
 
 @end

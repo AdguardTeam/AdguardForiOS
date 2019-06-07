@@ -1461,6 +1461,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         @autoreleasepool {
             
+#ifndef APP_EXTENSION
+            UIBackgroundTaskIdentifier backgroundTaskIdentifier = [UIApplication.sharedApplication beginBackgroundTaskWithExpirationHandler:nil];
+#endif
+            
             // Notifying to all, that filter rules may be obtained
             if (!serviceReady){
                 
@@ -1526,6 +1530,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerDidntStartUpdateNotification object:self];
                 });
             }
+#ifndef APP_EXTENSION
+            [UIApplication.sharedApplication endBackgroundTask:backgroundTaskIdentifier];
+#endif
         }
     }
     else if (!observingDbStatus){
@@ -1696,10 +1703,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
     
     DDLogDebug(@"(AESAntibanner) -updateAntibannerForced metadata/i18n requested");
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdatePartCompletedNotification object:self];
-//    });
 }
 
 - (void)finishUpdateInBackgroundMode {
@@ -1957,11 +1960,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         DDLogError(@"Can't install filters metadata into DB.");
                         DDLogErrorTrace();
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            
+                            self.enabled = NO;
                             [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:self];
                         });
                         
-                        self.enabled = NO;
                         return;
                     }
                 }

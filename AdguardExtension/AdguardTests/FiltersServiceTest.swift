@@ -58,7 +58,7 @@ class FiltersServiceTest: XCTestCase {
         
         let service = initService(groups: [(123, false)], filters: [(321, 123, false)])
         
-        XCTAssertTrue(service.groups.count == 2)
+        XCTAssertTrue(service.groups.count == 1)
         XCTAssertTrue(service.groups[0].filters.count == 1)
         XCTAssertTrue(service.groups[0].groupId == 123)
         XCTAssertTrue(service.groups[0].filters[0].filterId == 321)
@@ -72,7 +72,7 @@ class FiltersServiceTest: XCTestCase {
         
         let service = initService(groups: [(123, false)], filters: [(321, 123, true), (456, 123, false)])
         
-        XCTAssertTrue(service.groups.count == 2)
+        XCTAssertTrue(service.groups.count == 1)
         XCTAssertTrue(service.groups[0].filters.count == 2)
         
         XCTAssertFalse(service.groups[0].enabled)
