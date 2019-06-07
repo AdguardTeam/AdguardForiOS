@@ -528,7 +528,7 @@
         <!--License-->
         <scene sceneID="TGu-hF-lYs">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="License" id="j2c-WR-Kkk" userLabel="License" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="GetPro" id="j2c-WR-Kkk" userLabel="License" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKw-tJ-pye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="771" y="478"/>
