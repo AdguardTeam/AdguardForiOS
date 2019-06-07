@@ -137,7 +137,9 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                 DDLogError("(DnsProxyService) Error on stop proxy: \(error) ")
             }
             
-            callback()
+            DispatchQueue.main.async {
+                callback()
+            }
         }
         
         return
