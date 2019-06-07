@@ -364,10 +364,10 @@
             </objects>
             <point key="canvasLocation" x="1063" y="-177"/>
         </scene>
-        <!--License-->
+        <!--GetPro-->
         <scene sceneID="wcA-DJ-Qv7">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="License" id="9so-Cz-Wye" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="GetPro" id="9so-Cz-Wye" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5I7-Zs-Kic" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1068" y="-118"/>

@@ -349,7 +349,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Tqh-1M-1oz">
-                                            <rect key="frame" x="26" y="11" width="20" height="21"/>
+                                            <rect key="frame" x="26" y="11.5" width="20" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="5fR-5S-u4i"/>
                                                 <constraint firstAttribute="height" constant="21" id="zDB-S0-NaM"/>
@@ -510,10 +510,10 @@
             </objects>
             <point key="canvasLocation" x="1012" y="71.674876847290648"/>
         </scene>
-        <!--License-->
+        <!--GetPro-->
         <scene sceneID="868-Cx-006">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="License" id="2G0-bK-cL2" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="License.storyboard" storyboardName="GetPro" id="2G0-bK-cL2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Rc-Ca-gCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="486" y="590"/>

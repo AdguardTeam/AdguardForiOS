@@ -6301,6 +6301,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AdguardApp/UI/Adguard-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
+				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Debug;
@@ -6358,6 +6359,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Release;
