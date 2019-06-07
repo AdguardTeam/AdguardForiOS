@@ -38,7 +38,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="filters-icon" translatesAutoresizingMaskIntoConstraints="NO" id="8sr-b9-zBV">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="filters-icon" translatesAutoresizingMaskIntoConstraints="NO" id="8sr-b9-zBV">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="2CM-YC-UI7"/>
@@ -94,7 +94,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="dns-icon" translatesAutoresizingMaskIntoConstraints="NO" id="od6-CX-Vc9">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="dns-icon" translatesAutoresizingMaskIntoConstraints="NO" id="od6-CX-Vc9">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="Lt4-gG-95i"/>
@@ -122,8 +122,8 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQi-XH-gdb" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="283" y="10.5" width="83" height="28"/>
+                                                <button verifyAmbiguity="off" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQi-XH-gdb" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="283" y="11" width="83" height="28"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -154,6 +154,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eOO-zl-SDf" secondAttribute="bottom" constant="15" id="Nga-fk-W0D"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lbr-3S-fZX" secondAttribute="trailing" constant="20" id="QQv-v7-Laj"/>
                                                 <constraint firstAttribute="trailing" secondItem="VQi-XH-gdb" secondAttribute="trailing" constant="10" id="RWp-mo-GbM"/>
+                                                <constraint firstItem="VQi-XH-gdb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="crH-7V-WOT" secondAttribute="leading" id="Sai-SY-9Ft"/>
                                                 <constraint firstItem="VQi-XH-gdb" firstAttribute="centerY" secondItem="crH-7V-WOT" secondAttribute="centerY" id="StC-d6-aCm"/>
                                                 <constraint firstItem="lbr-3S-fZX" firstAttribute="top" secondItem="crH-7V-WOT" secondAttribute="top" constant="15" id="e74-Wj-wTZ"/>
                                                 <constraint firstItem="od6-CX-Vc9" firstAttribute="leading" secondItem="crH-7V-WOT" secondAttribute="leading" constant="25" id="fTN-lR-cWs"/>
@@ -171,7 +172,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="whitelist-icon" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WD-dOs">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="whitelist-icon" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-WD-dOs">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="gL1-Yq-6bR"/>
@@ -224,7 +225,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="custom-filter-icon" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-J0-r3J">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="custom-filter-icon" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-J0-r3J">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="N4h-uc-8x4"/>
@@ -280,7 +281,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="advanced-settings-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dP4-UL-loK">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="advanced-settings-icon" translatesAutoresizingMaskIntoConstraints="NO" id="dP4-UL-loK">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="GDF-2c-fvC"/>
@@ -336,7 +337,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="support-icon" translatesAutoresizingMaskIntoConstraints="NO" id="v5X-s7-AJu">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="support-icon" translatesAutoresizingMaskIntoConstraints="NO" id="v5X-s7-AJu">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="7AL-BM-rub"/>
@@ -389,7 +390,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="about-icon" translatesAutoresizingMaskIntoConstraints="NO" id="vW2-J2-528">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="about-icon" translatesAutoresizingMaskIntoConstraints="NO" id="vW2-J2-528">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="d0C-Ma-aoU"/>

@@ -2763,6 +2763,7 @@
 				6531533F1CF98E9600C92A73 /* Supporting Files */,
 				652F587A1E106DF10012353C /* AdguardLogSender */,
 				D096D9431F28C0D70081004D /* TodayExtension */,
+				658237341D07FE6700B824F4 /* Tunnel */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
@@ -2800,7 +2801,6 @@
 				D067D8CF213ED55100ECDE6D /* ViewModel */,
 				D0F9117421303E00006DF0D3 /* Services */,
 				652F89EE1B92E064002E0601 /* UI */,
-				658237341D07FE6700B824F4 /* Tunnel */,
 				65F398711B7C9C5000ABCD39 /* Adguard.entitlements */,
 				65F398171B7B684700ABCD39 /* AppDelegate.h */,
 				65F398181B7B684700ABCD39 /* AppDelegate.m */,
@@ -5924,6 +5924,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5947,7 +5948,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -5975,7 +5976,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -6300,7 +6301,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AdguardApp/UI/Adguard-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
-				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Debug;
@@ -6358,7 +6358,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Release;
@@ -6490,7 +6489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -6524,7 +6523,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/AdguardPro/tunnel/tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
