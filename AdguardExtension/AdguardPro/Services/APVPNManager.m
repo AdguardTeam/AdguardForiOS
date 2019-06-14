@@ -633,6 +633,10 @@ static APVPNManager *singletonVPNManager;
     return NO;
 }
 
+- (BOOL)vpnInstalled {
+    return _manager != nil;
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (Private)
 

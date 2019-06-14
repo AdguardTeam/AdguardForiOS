@@ -197,4 +197,10 @@ extern NSString *APVpnChangedNotification;
  */
 - (void) removeCustomRemoteServersDuplicates;
 
+/**
+ this flag indicates that vpn configuration allready installed
+ */
+@property (readonly) BOOL vpnInstalled;
+
+
 @end

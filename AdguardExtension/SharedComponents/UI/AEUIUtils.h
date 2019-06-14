@@ -90,4 +90,6 @@
  */
 + (UITableViewCell*) createCellByTemplate:(UITableViewCell*) templateCell style:(UITableViewCellStyle)style;
 
++ (void) showConfirmVpnAlert: (UIViewController*)parentController yesAction: (void (^)())yesAction noAction: (void (^)())noAction;
+
 @end

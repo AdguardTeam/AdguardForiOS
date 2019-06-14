@@ -331,8 +331,18 @@
 - (IBAction)toggleStatus:(id)sender {
     
     BOOL enabled = [(UISwitch *)sender isOn];
-    [[APVPNManager singleton] setEnabled:enabled];
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
+    
+    if (enabled && !APVPNManager.singleton.vpnInstalled ) {
+        [AEUIUtils showConfirmVpnAlert:self yesAction:^{
+            [[APVPNManager singleton] setEnabled:enabled];
+        } noAction:^{
+            [sender setOn:!enabled animated:YES];
+        }];
+    }
+    else {
+        [[APVPNManager singleton] setEnabled:enabled];
+    }
 }
 #endif
 
@@ -399,8 +409,21 @@
 - (void)setProStatus:(BOOL)enabled {
     
     DDLogInfo(@"(AEUIMainController) PRO status set to:%@", (enabled ? @"YES" : @"NO"));
-    [[APVPNManager singleton] setEnabled:enabled];
-    self.proStatusSwitch.on = enabled;
+    
+    if (enabled && !APVPNManager.singleton.vpnInstalled ) {
+        ASSIGN_WEAK(self);
+        [AEUIUtils showConfirmVpnAlert:self yesAction:^{
+            ASSIGN_STRONG(self);
+            [[APVPNManager singleton] setEnabled:enabled];
+            USE_STRONG(self).proStatusSwitch.on = enabled;
+        } noAction:^{
+            
+        }];
+    }
+    else {
+        [[APVPNManager singleton] setEnabled:enabled];
+        self.proStatusSwitch.on = enabled;
+    }
 }
 
 #endif

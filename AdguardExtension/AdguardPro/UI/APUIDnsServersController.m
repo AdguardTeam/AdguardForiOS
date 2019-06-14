@@ -277,12 +277,25 @@
         
         if (selectedServer) {
             
-            APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
             DDLogInfo(@"(APUIDnsServersController) Set Active Remote DNS Server to: %@", selectedServer.serverName);
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self selectActiveDnsServer:selectedServer];
-                APVPNManager.singleton.enabled = YES;
+                if (!APVPNManager.singleton.vpnInstalled ) {
+                    ASSIGN_WEAK(self);
+                    [AEUIUtils showConfirmVpnAlert:self yesAction:^{
+                        ASSIGN_STRONG(self);
+                        APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+                        [USE_STRONG(self) selectActiveDnsServer:selectedServer];
+                        APVPNManager.singleton.enabled = USE_STRONG(self);
+                    } noAction:^{
+                        
+                    }];
+                }
+                else {
+                    APVPNManager.singleton.activeRemoteDnsServer = selectedServer;
+                    [self selectActiveDnsServer:selectedServer];
+                    APVPNManager.singleton.enabled = YES;
+                }
             });
         }
     }

@@ -23,6 +23,8 @@
 #import "AESAntibanner.h"
 #import "AEFilterRuleSyntaxConstants.h"
 
+#define PRIVACY_URL @"https://adguard.com/privacy/ios.html"
+
 @implementation AEUIUtils
 
 + (void)invalidateJsonWithController:(UIViewController *)controller completionBlock:(dispatch_block_t)completionBlock rollbackBlock:(dispatch_block_t)rollbackBlock{
@@ -169,6 +171,41 @@
     newCell.detailTextLabel.autoresizingMask = templateCell.detailTextLabel.autoresizingMask;
     
     return newCell;
+}
+
++ (void)showConfirmVpnAlert:(UIViewController *)parentController yesAction:(void (^)())yesAction noAction:(void (^)())noAction{
+    
+    NSString* title = ACLocalizedString(@"vpn_confirm_title", nil);
+    NSString* message = ACLocalizedString(@"vpn_confirm_message", nil);
+    NSString* okTitle = ACLocalizedString(@"common_action_ok", nil);
+    NSString* cancelTitle = ACLocalizedString(@"common_action_cancel", nil);
+    NSString* privacyTitle = ACLocalizedString(@"privacy_policy_action", nil);
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* action =  [UIAlertAction actionWithTitle:okTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        yesAction();
+    }];
+    
+    UIAlertAction* cancelAction =  [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        noAction();
+    }];
+    
+    UIAlertAction* privacyAction =  [UIAlertAction actionWithTitle:privacyTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+#ifndef APP_EXTENSION
+        NSURL* url = [NSURL URLWithString: PRIVACY_URL];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+#endif
+        
+        noAction();
+    }];
+    
+    [alert addAction:action];
+    [alert addAction:privacyAction];
+    [alert addAction:cancelAction];
+    alert.preferredAction = action;
+    
+    [parentController presentViewController:alert animated:YES completion:nil];
 }
 
 
