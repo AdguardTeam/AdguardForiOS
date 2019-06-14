@@ -232,14 +232,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dh-nx-QQn">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="10 баксов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJq-gd-DaY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                            <rect key="frame" x="72" y="0.0" width="135" height="34"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJq-gd-DaY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="72" y="0.0" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="в год" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Sq-PWa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                            <rect key="frame" x="215" y="8.5" width="105" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhA-Sq-PWa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="80" y="0.0" width="240" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
