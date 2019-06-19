@@ -1049,6 +1049,8 @@
 		D0EC406A214FB39E00365DB7 /* UserFilterTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC4069214FB39E00365DB7 /* UserFilterTableController.swift */; };
 		D0EDE45722A92D9A00086C00 /* APIPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B61D2CF97900CF8C11 /* APIPPacket.m */; };
 		D0EDE45822A92E7300086C00 /* APUDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B621131D2E4F8F0047248F /* APUDPPacket.m */; };
+		D0EFBF5922BA62E800D2D391 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
+		D0EFBF5C22BA63B100D2D391 /* SharedResourcesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */; };
 		D0F36294220C009E0065BE8E /* Dns64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */; };
 		D0F36295220C09760065BE8E /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
 		D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
@@ -2012,6 +2014,7 @@
 		D0E6077A1F45918700B4D72B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0E6077B1F45918800B4D72B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0EC4069214FB39E00365DB7 /* UserFilterTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterTableController.swift; sourceTree = "<group>"; };
+		D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResourcesMock.swift; sourceTree = "<group>"; };
 		D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEInvertedWhitelistDomainsObject.h; sourceTree = "<group>"; };
 		D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEInvertedWhitelistDomainsObject.m; sourceTree = "<group>"; };
 		D0F7F0C72268946700592B1E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
@@ -2353,8 +2356,8 @@
 				655AACB51D3CD38000E316EA /* ACObject.m */,
 				658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */,
 				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
-				D0CDAEA42191C9540028001B /* String+Utils.swift */,
 				D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */,
+				D0CDAEA42191C9540028001B /* String+Utils.swift */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -2827,6 +2830,7 @@
 		65F3982D1B7B684700ABCD39 /* AdguardTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0EFBF5A22BA638F00D2D391 /* Mocks */,
 				D0F911912136DA5A006DF0D3 /* PurchaseServiceTest.swift */,
 				65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
@@ -2836,11 +2840,6 @@
 				D0F9117B2134414A006DF0D3 /* AdguardTests-Bridging-Header.h */,
 				D093718721AEA770004A24F1 /* ContentBlockerTest.swift */,
 				D02C080121BEAA2100796714 /* FiltersServiceTest.swift */,
-				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
-				D02C080721BEAB5C00796714 /* AntibannerMock.swift */,
-				D02C080921BEAB8300796714 /* ConverterMock.swift */,
-				D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */,
-				D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */,
 				D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */,
 				D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */,
 				D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */,
@@ -3105,6 +3104,19 @@
 				D07AA0622207A5B10065779F /* NewDnsServerController.swift */,
 			);
 			path = DnsSettings;
+			sourceTree = "<group>";
+		};
+		D0EFBF5A22BA638F00D2D391 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
+				D02C080721BEAB5C00796714 /* AntibannerMock.swift */,
+				D02C080921BEAB8300796714 /* ConverterMock.swift */,
+				D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */,
+				D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */,
+				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		D0F91161212EDD51006DF0D3 /* Views */ = {
@@ -4843,6 +4855,8 @@
 				D0F7F0CD2268979600592B1E /* KeychainService.swift in Sources */,
 				D02C080321BEAA7000796714 /* FiltersService.swift in Sources */,
 				D0F911922136DA5A006DF0D3 /* PurchaseServiceTest.swift in Sources */,
+				D0EFBF5C22BA63B100D2D391 /* SharedResourcesMock.swift in Sources */,
+				D0EFBF5922BA62E800D2D391 /* String+Utils.swift in Sources */,
 				65EC9CA11BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE51BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				65EC9CAD1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,

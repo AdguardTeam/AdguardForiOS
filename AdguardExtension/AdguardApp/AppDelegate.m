@@ -71,6 +71,7 @@ typedef enum : NSUInteger {
     AESharedResources *_resources;
     AEService * _aeService;
     ContentBlockerService* _contentBlockerService;
+    PurchaseService* _purchaseService;
     
     BOOL _activateWithOpenUrl;
 }
@@ -96,6 +97,7 @@ typedef enum : NSUInteger {
         _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
 
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
@@ -381,9 +383,10 @@ typedef enum : NSUInteger {
                 @autoreleasepool {
                     
                     NSString *command = url.host;
-                    NSString *path = [url.path substringFromIndex:1];
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+                        
+                        NSString *path = [url.path substringFromIndex:1];
                         
                         UINavigationController *nav = [self getNavigationController];
                         if (nav.viewControllers.count) {
@@ -405,6 +408,19 @@ typedef enum : NSUInteger {
                                 DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
                             }
                         }
+                    }
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
+                        NSString* fragment = url.fragment;
+                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
+                        
+                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
+                        
+                        if (accessToken.length == 0) {
+                            // todo: show error
+                            return;
+                        }
+                        [_purchaseService loginWithAccessToken:accessToken];
                     }
                 }
                 //

@@ -26,6 +26,7 @@ protocol LoginServiceProtocol {
     var active: Bool { get }
     
     func login(name: String?, password: String, callback: @escaping  (_: Error?)->Void)
+    func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
     func relogin(callback: @escaping (_ error: Error?)->Void)
     func logout()->Bool
     
@@ -51,12 +52,14 @@ class LoginService: LoginServiceProtocol {
     
     
     // login request
-    private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
+    private let LOGIN_URL = "https://testmobile.adtidy.org/api/2.0/auth"
+    private let AUTH_TOKEN_URL = "https://testmobile.adtidy.org/api/2.0/auth_token"
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
     private let LOGIN_APP_ID_PARAM = "app_id"
     private let LOGIN_LICENSE_KEY_PARAM = "license_key"
+    private let LOGIN_ACCESS_TOKEN_PARAM = "access_token"
     
     private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
     
@@ -155,27 +158,42 @@ class LoginService: LoginServiceProtocol {
     
     func login(name: String?, password: String, callback: @escaping (Error?) -> Void) {
         if name != nil && name!.count > 0 {
-            loginInternal(name: name!, password: password, callback: callback)
+            loginInternal(name: name!, password: password, accessToken: nil,  callback: callback)
         }
         else {
             useLicenseKey(password, callback: callback)
         }
     }
     
-    private func loginInternal(name: String, password: String, callback: @escaping (Error?) -> Void) {
+    func login(accessToken: String, callback: @escaping  (_: Error?)->Void) {
+        loginInternal(name: nil, password: nil, accessToken: accessToken, callback: callback)
+    }
+    
+    private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (Error?) -> Void) {
         
-        let params = [LOGIN_EMAIL_PARAM: name,
-                      LOGIN_PASSWORD_PARAM: password,
-                      LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+        let loginByToken = accessToken != nil
+        
+        var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: keychain.appId ?? ""]
         
-        guard let url = URL(string: LOGIN_URL) else  {
+        if !loginByToken {
+            params[LOGIN_EMAIL_PARAM] = name
+            params[LOGIN_PASSWORD_PARAM] = password
+        }
+        
+        guard let url = URL(string: loginByToken ? AUTH_TOKEN_URL : LOGIN_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
             DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
             return
         }
         
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params)
+        var headers: [String : String] = [:]
+        
+        if loginByToken {
+            headers["Authorization"] = "Bearer \(accessToken!)"
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: headers)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in
             
@@ -196,7 +214,7 @@ class LoginService: LoginServiceProtocol {
             do {
                 let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 
-                let (loggedIn, premium, expirationDate, error) = sSelf.processLoginResponce(json: jsonResponce)
+                let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.processLoginResponce(json: jsonResponce)
                 
                 sSelf.expirationDate = expirationDate
                 sSelf.hasPremiumLicense = premium
@@ -207,7 +225,7 @@ class LoginService: LoginServiceProtocol {
                     return
                 }
                 
-                if(!sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: name, password: password)){
+                if licenseKey == nil || !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: licenseKey!) {
                     callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                     return
                 }
@@ -233,7 +251,7 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params)
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in
             
@@ -254,7 +272,7 @@ class LoginService: LoginServiceProtocol {
             do {
                 let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 
-                let (loggedIn, premium, expirationDate, error) = sSelf.processLoginResponce(json: jsonResponce)
+                let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.processLoginResponce(json: jsonResponce)
                 
                 sSelf.loggedIn = loggedIn
                 sSelf.expirationDate = expirationDate
@@ -265,7 +283,7 @@ class LoginService: LoginServiceProtocol {
                     return
                 }
                 
-                if !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: key ) {
+                if licenseKey == nil || !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: licenseKey! ) {
                     callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                     return
                 }
@@ -304,15 +322,14 @@ class LoginService: LoginServiceProtocol {
         return true
     }
     
-
     // MARK: - private methods
     
-    private func processLoginResponce(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, Error?) {
+    private func processLoginResponce(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, liceneKey: String?, Error?) {
         
         guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
             DDLogError("(LoginService) login error - json does not contain status param." )
-            return (false, false, nil, error)
+            return (false, false, nil, nil, error)
         }
         
         let premium = json[LOGIN_PREMIUM_STATUS_PARAM] as? String?
@@ -329,22 +346,28 @@ class LoginService: LoginServiceProtocol {
             break
         }
         
+        var licenseKey: String?
+        
+        if let licenseInfo = json[LICENSE_INFO_PARAM] as? [String : Any] {
+            licenseKey = licenseInfo[BEST_LICENSE_ID_PARAM] as? String
+        }
+    
         if status == AUTH_BAD_CREDINTIALS {
             
             DDLogInfo("(LoginService) login error - bad credintials" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
-            return (false, false, nil, error)
+            return (false, false, nil, nil, error)
         }
         
         // process premium
         if premium != PREMIUM_STATUS_ACTIVE {
-            return (true, false, nil, nil)
+            return (true, false, nil, licenseKey, nil)
         }
         
         // save expiration date in user defaults
         let expirationDate = Date(timeIntervalSince1970: (expirationTimestamp ?? 0) / 1000)
         
-        return (true, true, expirationDate, nil)
+        return (true, true, expirationDate, licenseKey, nil)
     }
     
     private func setExpirationTimer() {

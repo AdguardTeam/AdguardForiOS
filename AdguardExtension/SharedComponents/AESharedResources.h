@@ -33,6 +33,9 @@
 
 #define AE_URLSCHEME                        @ADGUARD_URL_SCHEME
 #define AE_URLSCHEME_COMMAND_ADD            @"add"
+#define AE_URLSCHEME_COMMAND_AUTH           @"auth"
+
+#define AE_URLSCHEME_AUTH_PARAM_TOKEN       @"access_token"
 
 /**
  User Defaults key that defines enable/disable filtration.

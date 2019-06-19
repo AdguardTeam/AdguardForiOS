@@ -18,6 +18,7 @@
 
 import Foundation
 import StoreKit
+import CommonCrypto
 
 // MARK:  service protocol -
 protocol PurchaseServiceProtocol {
@@ -33,9 +34,13 @@ protocol PurchaseServiceProtocol {
         the results will be posted through notification center
      */
     func login(withName name: String?, password: String)
+    func login(withLicenseKey key: String)
+    func login(withAccessToken token: String)
     func logout()->Bool
     func requestPurchase()
     func requestRestore()
+    
+    func encryptName(name: String)->String?
 }
 
 // MARK: - public constants -
@@ -202,30 +207,47 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         checkPremiumExpired()
     }
     
+    private func processLoginResult(_ error: Error?) {
+        if error != nil {
+            postNotification(PurchaseService.kPSNotificationLoginFailure, error)
+            return
+        }
+        
+        // check state
+        if !loginService.hasPremiumLicense {
+            postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
+            return
+        }
+        
+        let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
+                        PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
+        
+        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+    }
+    
     func login(withName name: String?, password: String) {
         
         loginService.login(name: name, password: password) { [weak self] (error) in
             guard let sSelf = self else { return }
             
-            if error != nil {
-                sSelf.postNotification(PurchaseService.kPSNotificationLoginFailure, error)
-                return
-            }
-            
-            // check state
-            if !sSelf.loginService.hasPremiumLicense {
-                sSelf.postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
-                return
-            }
-            
-            let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
-                            PurchaseService.kPSNotificationLoginPremiumExpired: !sSelf.loginService.active] as [String : Any]
-            
-            NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+            sSelf.processLoginResult(error)
             
             return
         }
         
+    }
+    
+    func login(withLicenseKey key: String) {
+        login(withName: nil, password: key)
+    }
+    
+    @objc
+    func login(withAccessToken token: String) {
+        loginService.login(accessToken: token) { [weak self]  (error) in
+            guard let sSelf = self else { return }
+            
+            sSelf.processLoginResult(error)
+        }
     }
     
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
@@ -314,6 +336,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         let encReceipt = receiptData.base64EncodedString()
         
         return encReceipt
+    }
+    
+    func encryptName(name: String)->String? {
+        let stringToEncrypt = "email=\(name)"
+        guard   let dataToEncrypt = stringToEncrypt.data(using: .utf8)
+            else { return nil }
+        
+        let keyData = "87502E2BDC2382C048FBD2B1986A0561".dataFromHex()
+        guard let encryptedData = crypt(data: dataToEncrypt, keyData: keyData, operation: kCCEncrypt) else { return nil }
+        
+        let encryptedBase64String = encryptedData.base64EncodedString()
+        
+        return encryptedBase64String
     }
     
     // MARK: - private methods
@@ -472,5 +507,40 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
         
         NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+    }
+    
+    func crypt(data:Data, keyData:Data, operation:Int) -> Data? {
+        let cryptLength  = size_t(data.count + kCCBlockSizeAES128)
+        var cryptData = Data(count:cryptLength)
+        
+        
+        let keyLength = size_t(kCCKeySizeAES128)
+        let options = CCOptions(kCCOptionPKCS7Padding)
+        
+        
+        var numBytesEncrypted :size_t = 0
+        
+        let cryptStatus = cryptData.withUnsafeMutableBytes {cryptBytes in
+            data.withUnsafeBytes {dataBytes in
+                keyData.withUnsafeBytes {keyBytes in
+                    CCCrypt(CCOperation(operation),
+                            CCAlgorithm(kCCAlgorithmAES),
+                            options,
+                            keyBytes, keyLength,
+                            nil,
+                            dataBytes, data.count,
+                            cryptBytes, cryptLength,
+                            &numBytesEncrypted)
+                }
+            }
+        }
+        
+        if UInt32(cryptStatus) == UInt32(kCCSuccess) {
+            cryptData.removeSubrange(numBytesEncrypted..<cryptData.count)
+        } else {
+            return nil
+        }
+        
+        return cryptData;
     }
 }

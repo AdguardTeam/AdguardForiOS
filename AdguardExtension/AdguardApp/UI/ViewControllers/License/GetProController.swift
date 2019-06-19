@@ -17,8 +17,9 @@
  */
 
 import Foundation
+import SafariServices
 
-class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate {
+class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate, LoginControllerDelegate {
     
     // MARK: - properties
     var notificationObserver: Any?
@@ -43,6 +44,8 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private let accountAction = "account"
     private let from = "license"
+    
+    private let authUrl = "https://testauth.adguard.com/oauth/authorize"
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -134,30 +137,47 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         return CustomAnimatedTransitioning()
     }
     
+    // MARK: - LoginControllerDelegate methods
+    
+    func loginAction(name: String) {
+        webAuthWithName(name: name)
+    }
+    
     // MARK: - private methods
     
     private func processNotification(info: [AnyHashable: Any]) {
         
-        let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-        let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-        
-        switch type {
-        case PurchaseService.kPSNotificationPurchaseSuccess:
-            purchaseSuccess()
-        case PurchaseService.kPSNotificationPurchaseFailure:
-            purchaseFailure(error: error)
-        case PurchaseService.kPSNotificationRestorePurchaseSuccess:
-            restoreSucess()
-        case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
-            nothingToRestore()
-        case PurchaseService.kPSNotificationRestorePurchaseFailure:
-            restoreFailed(error: error)
-        case PurchaseService.kPSNotificationReadyToPurchase:
-            tableController?.enablePurchaseButtons(true)
-            tableController?.setPrice()
+        DispatchQueue.main.async { [weak self] in
+            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
             
-        default:
-            break
+            switch type {
+            case PurchaseService.kPSNotificationPurchaseSuccess:
+                self?.purchaseSuccess()
+            case PurchaseService.kPSNotificationPurchaseFailure:
+                self?.purchaseFailure(error: error)
+            case PurchaseService.kPSNotificationRestorePurchaseSuccess:
+                self?.restoreSucess()
+            case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
+                self?.nothingToRestore()
+            case PurchaseService.kPSNotificationRestorePurchaseFailure:
+                self?.restoreFailed(error: error)
+            case PurchaseService.kPSNotificationReadyToPurchase:
+                self?.tableController?.enablePurchaseButtons(true)
+                self?.tableController?.setPrice()
+                
+            case PurchaseService.kPSNotificationLoginSuccess:
+                self?.loginSuccess()
+            case PurchaseService.kPSNotificationLoginFailure:
+                self?.loginFailure(error: error)
+            case PurchaseService.kPSNotificationLoginPremiumExpired:
+                self?.premiumExpired()
+            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+                self?.notPremium()
+                
+            default:
+                break
+            }
         }
     }
     
@@ -183,6 +203,40 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private func restoreFailed(error: NSError?) {
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
+    }
+    
+    
+    private func loginSuccess(){
+        dismissSafariController {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil))
+        }
+    }
+    
+    private func loginFailure(error: NSError?) {
+        dismissSafariController {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil))
+        }
+    }
+    
+    private func premiumExpired() {
+        dismissSafariController {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil))
+        }
+    }
+    
+    private func notPremium() {
+        dismissSafariController {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil))
+        }
+    }
+    
+    private func dismissSafariController(completion:@escaping ()->Void) {
+        if self.presentedViewController != nil {
+            self.presentedViewController?.dismiss(animated: true, completion: completion)
+        }
+        else {
+            completion()
+        }
     }
     
     private func updateTheme() {
@@ -214,8 +268,29 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "LoginController") as? LoginController else { return }
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = self
+        controller.delegate = self
         
         present(controller, animated: true, completion: nil)
     }
     
+    private func webAuthWithName(name: String){
+        
+        guard let dataParam = purchaseService.encryptName(name: name) else { return }
+        
+        let params = ["response_type"   : "token",
+                      "client_id"       : "adguard-ios",
+                      "redirect_uri"    : "adguard://auth",
+                      "scope"           : "trust",
+                      "state"           : "123456", // todo: generate state
+                      "data"            : dataParam
+                      ]
+        
+        let paramsString = ACNUrlUtils.createString(fromParameters: params, xmlStrict: false)
+        
+        let urlString = "\(authUrl)?\(paramsString)"
+        guard let url = URL(string: urlString) else { return }
+        
+        let safariController = SFSafariViewController(url: url)
+        present(safariController, animated: true, completion: nil)
+    }
 }
