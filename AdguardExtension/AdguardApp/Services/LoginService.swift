@@ -132,9 +132,8 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    // deprecated
     func login(licenseKey: String, callback: @escaping (Error?) -> Void) {
-        useLicenseKey(licenseKey, callback: callback)
+        requestStatus(licenseKey: licenseKey, callback: callback)
     }
     
     func login(accessToken: String, callback: @escaping  (_: Error?)->Void) {
@@ -189,22 +188,24 @@ class LoginService: LoginServiceProtocol {
             
             sSelf.loggedIn = loggedIn
             
-            if licenseKey == nil {
-                sSelf.checkStatus(callback: callback)
-            }
-            else {
-                sSelf.useLicenseKey(licenseKey!, callback: callback)
-            }
+            sSelf.requestStatus(licenseKey: licenseKey, callback: callback)
         }
     }
     
-    func checkStatus( callback: @escaping (Error?)->Void ) {
+    func checkStatus(callback: @escaping (Error?) -> Void) {
+        requestStatus(licenseKey: nil, callback: callback)
+    }
+    
+    private func requestStatus(licenseKey: String?, callback: @escaping (Error?)->Void ) {
         
-        let params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+        var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: keychain.appId ?? "",
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
                       ]
+        if licenseKey != nil {
+            params[LOGIN_LICENSE_KEY_PARAM] = licenseKey
+        }
         
         guard let url = URL(string: STATUS_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
@@ -271,64 +272,6 @@ class LoginService: LoginServiceProtocol {
             callback(nil)
         }
     }
-    
-    private func useLicenseKey(_ key: String, callback: @escaping (Error?) -> Void) {
-        let params = [LOGIN_LICENSE_KEY_PARAM: key,
-                      LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
-                      LOGIN_APP_ID_PARAM: keychain.appId ?? ""]
-        
-        guard let url = URL(string: LOGIN_URL) else  {
-            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) useLicenseKey error. Can not make URL from String \(LOGIN_URL)")
-            return
-        }
-        
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
-        
-        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
-            guard let sSelf = self else { return }
-            
-            guard error == nil else {
-                callback(error!)
-                return
-            }
-            
-            guard let data = dataOrNil  else{
-                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-                return
-            }
-            
-            let (loggedIn, _, _, _, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
-            
-            if error != nil {
-                
-                if let nsError = error as NSError? {
-                    if nsError.domain == LoginService.loginErrorDomain && nsError.code == LoginService.loginBadCredentials {
-                        sSelf.loggedIn = false
-                    }
-                }
-                callback(error!)
-                return
-            }
-            
-            sSelf.loggedIn = loggedIn
-            
-            sSelf.checkStatus(callback: callback)
-        }
-    }
-    
-//    func relogin(callback: @escaping (_ error: Error?)->Void){
-//
-//        if let (email, password) = keychain.loadAuth(server: LOGIN_SERVER) {
-//            login(name: email, password: password, callback: callback)
-//        }
-//        else if let key = keychain.loadLicenseKey(server: LOGIN_SERVER) {
-//            useLicenseKey(key, callback: callback)
-//        }
-//        else {
-//            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-//        }
-//    }
     
     func logout()->Bool {
         
