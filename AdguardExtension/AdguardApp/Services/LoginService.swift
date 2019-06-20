@@ -179,14 +179,12 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            let (loggedIn, _, _, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
+            let (_, _, _, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
             
             if error != nil {
                 callback(error!)
                 return
             }
-            
-            sSelf.loggedIn = loggedIn
             
             sSelf.requestStatus(licenseKey: licenseKey, callback: callback)
         }
