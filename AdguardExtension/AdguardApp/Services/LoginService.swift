@@ -25,10 +25,12 @@ protocol LoginServiceProtocol {
     // not expired
     var active: Bool { get }
     
-    func login(name: String?, password: String, callback: @escaping  (_: Error?)->Void)
-    func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
-    func relogin(callback: @escaping (_ error: Error?)->Void)
+    func checkStatus( callback: @escaping (Error?)->Void )
     func logout()->Bool
+    
+    func login(licenseKey: String, callback: @escaping  (_: Error?)->Void)
+    func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
+//    func relogin(callback: @escaping (_ error: Error?)->Void)
     
     var activeChanged: (() -> Void)? { get set }
 }
@@ -41,6 +43,8 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
+    var loginResponseParser: LoginResponseParserProtocol = LoginResponseParser()
+    
     // errors
     static let loginErrorDomain = "loginErrorDomain"
     
@@ -52,49 +56,18 @@ class LoginService: LoginServiceProtocol {
     
     
     // login request
-    private let LOGIN_URL = "https://testmobile.adtidy.org/api/2.0/auth"
-    private let AUTH_TOKEN_URL = "https://testmobile.adtidy.org/api/2.0/auth_token"
+    private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
+    private let STATUS_URL = "https://mobile-api.adguard.com/api/1.0/status.html"
+    private let AUTH_TOKEN_URL = "https://mobile-api.adguard.com/api/2.0/auth_token"
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
     private let LOGIN_APP_ID_PARAM = "app_id"
     private let LOGIN_LICENSE_KEY_PARAM = "license_key"
     private let LOGIN_ACCESS_TOKEN_PARAM = "access_token"
+    private let LOGIN_APP_VERSION_PARAM = "app_version"
     
     private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
-    
-    // login response params
-    
-    // params
-    private let LOGIN_AUTH_STATUS_PARAM = "auth_status"
-    private let LOGIN_PREMIUM_STATUS_PARAM = "premium_status"
-    private let LOGIN_EXPIRATION_DATE_PARAM = "expiration_date"
-    private let LICENSE_INFO_PARAM = "license_info"
-    
-    // licenses info params
-    private let LICENSES_PARAM = "licenses"
-    private let BEST_LICENSE_ID_PARAM = "license"
-    
-    // one license info params
-    private let LICENSE_KEY_PARAM = "license_key"
-    private let LICENSE_STATUS_PARAM = "license_status"
-    private let LICENSE_TYPE_PARAM = "license_type"
-    private let LICENSE_EXPIRATION_DATE_PARAM = "expiration_date"
-    private let LICENSE_COMPUTERS_PARAM = "license_computers_count"
-    private let LICENSE_MAX_COMPUTERS_PARAM = "license_max_computers_count"
-    private let SUBSCRIPTION_PARAM = "subscription"
-    
-    // subscription params
-    private let SUBSCRIPTION_STATUS_PARAM = "status"
-    private let SUBSCRIPTION_NEXT_BILL_DATE_PARAM = "next_bill_date"
-    
-    // auth status values
-    private let AUTH_SUCCESS = "SUCCESS"
-    private let AUTH_BAD_CREDINTIALS = "BAD_CREDENTIALS"
-    
-    // premium values
-    private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
-    private let PREMIUM_STATUS_FREE = "FREE"
     
     private var defaults: UserDefaults
     private var network: ACNNetworkingProtocol
@@ -139,10 +112,13 @@ class LoginService: LoginServiceProtocol {
             return defaults.bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
         }
         set {
+            let oldValue = defaults.bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
             defaults.set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
             
-            if let callback = activeChanged {
-                callback()
+            if newValue != oldValue {
+                if let callback = activeChanged {
+                    callback()
+                }
             }
         }
     }
@@ -156,13 +132,9 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    func login(name: String?, password: String, callback: @escaping (Error?) -> Void) {
-        if name != nil && name!.count > 0 {
-            loginInternal(name: name!, password: password, accessToken: nil,  callback: callback)
-        }
-        else {
-            useLicenseKey(password, callback: callback)
-        }
+    // deprecated
+    func login(licenseKey: String, callback: @escaping (Error?) -> Void) {
+        useLicenseKey(licenseKey, callback: callback)
     }
     
     func login(accessToken: String, callback: @escaping  (_: Error?)->Void) {
@@ -196,10 +168,7 @@ class LoginService: LoginServiceProtocol {
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: headers)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in
-            
-            guard let sSelf = self else {
-                return
-            }
+            guard let sSelf = self else { return }
             
             guard error == nil else {
                 callback(error!)
@@ -211,32 +180,84 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            do {
-                let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-                
-                let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.processLoginResponce(json: jsonResponce)
-                
-                sSelf.expirationDate = expirationDate
-                sSelf.hasPremiumLicense = premium
-                sSelf.loggedIn = loggedIn
-                
-                if error != nil {
-                    callback(error!)
-                    return
-                }
-                
-                if licenseKey == nil || !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: licenseKey!) {
-                    callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-                    return
-                }
-                
-                callback(nil)
+            let (loggedIn, _, _, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
+            
+            if error != nil {
+                callback(error!)
+                return
             }
-            catch {
-                let responseString = String(data: data, encoding: .utf8)
-                DDLogError("(LoginService) login error. Wrong json: \(responseString ?? "")")
+            
+            sSelf.loggedIn = loggedIn
+            
+            if licenseKey == nil {
+                sSelf.checkStatus(callback: callback)
+            }
+            else {
+                sSelf.useLicenseKey(licenseKey!, callback: callback)
+            }
+        }
+    }
+    
+    func checkStatus( callback: @escaping (Error?)->Void ) {
+        
+        let params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+                      LOGIN_APP_ID_PARAM: keychain.appId ?? "",
+                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
+                      "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
+                      ]
+        
+        guard let url = URL(string: STATUS_URL) else  {
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            DDLogError("(PurchaseService) checkStatus error. Can not make URL from String \(STATUS_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        
+        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
+            guard let sSelf = self else { return }
+            
+            guard error == nil else {
+                callback(error!)
+                return
+            }
+            
+            guard let data = dataOrNil  else{
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                return
             }
+            
+            let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
+            
+            if error != nil {
+                callback(error!)
+                return
+            }
+            
+            sSelf.expirationDate = expirationDate
+            sSelf.hasPremiumLicense = premium
+            sSelf.loggedIn = true
+            
+
+            // migrate from 3.0.0 ---------------------
+            
+            let oldAuth = sSelf.keychain.loadAuth(server: sSelf.LOGIN_SERVER)
+            let oldLicenseKey = sSelf.keychain.loadLicenseKey(server: sSelf.LOGIN_SERVER)
+            
+            if !premium && oldAuth != nil || oldLicenseKey != nil {
+                
+                // delete saved in 3.0.0 logins
+                _ = sSelf.keychain.deleteAuth(server: sSelf.LOGIN_SERVER)
+                _ = sSelf.keychain.deleteLicenseKey(server: sSelf.LOGIN_SERVER)
+                
+                self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: oldLicenseKey, callback: callback)
+                
+                return
+            }
+            
+            // -----------------------------------------
+            
+            callback(nil)
         }
     }
     
@@ -247,17 +268,14 @@ class LoginService: LoginServiceProtocol {
         
         guard let url = URL(string: LOGIN_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
+            DDLogError("(PurchaseService) useLicenseKey error. Can not make URL from String \(LOGIN_URL)")
             return
         }
         
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
         
         network.data(with: request) { [weak self] (dataOrNil, responce, error) in
-            
-            guard let sSelf = self else {
-                return
-            }
+            guard let sSelf = self else { return }
             
             guard error == nil else {
                 callback(error!)
@@ -269,52 +287,33 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            do {
-                let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-                
-                let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.processLoginResponce(json: jsonResponce)
-                
-                sSelf.loggedIn = loggedIn
-                sSelf.expirationDate = expirationDate
-                sSelf.hasPremiumLicense = premium
-                
-                if error != nil {
-                    callback(error!)
-                    return
-                }
-                
-                if licenseKey == nil || !sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: licenseKey! ) {
-                    callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-                    return
-                }
-                
-                callback(nil)
+            let (loggedIn, _, _, _, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
+            
+            if error != nil {
+                callback(error!)
+                return
             }
-            catch {
-                let responseString = String(data: data, encoding: .utf8)
-                DDLogError("(LoginService) login error. Wrong json: \(responseString ?? "")")
-                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            }
+            
+            sSelf.loggedIn = loggedIn
+            
+            sSelf.checkStatus(callback: callback)
         }
     }
     
-    func relogin(callback: @escaping (_ error: Error?)->Void){
-        
-        if let (email, password) = keychain.loadAuth(server: LOGIN_SERVER) {
-            login(name: email, password: password, callback: callback)
-        }
-        else if let key = keychain.loadLiceseKey(server: LOGIN_SERVER) {
-            useLicenseKey(key, callback: callback)
-        }
-        else {
-            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-        }
-    }
+//    func relogin(callback: @escaping (_ error: Error?)->Void){
+//
+//        if let (email, password) = keychain.loadAuth(server: LOGIN_SERVER) {
+//            login(name: email, password: password, callback: callback)
+//        }
+//        else if let key = keychain.loadLicenseKey(server: LOGIN_SERVER) {
+//            useLicenseKey(key, callback: callback)
+//        }
+//        else {
+//            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+//        }
+//    }
     
     func logout()->Bool {
-        if !keychain.deleteAuth(server: LOGIN_SERVER) && !keychain.deleteLicenseKey(server: LOGIN_SERVER) {
-            return false
-        }
         
         loggedIn = false
         expirationDate = nil
@@ -323,52 +322,6 @@ class LoginService: LoginServiceProtocol {
     }
     
     // MARK: - private methods
-    
-    private func processLoginResponce(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, liceneKey: String?, Error?) {
-        
-        guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
-            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
-            DDLogError("(LoginService) login error - json does not contain status param." )
-            return (false, false, nil, nil, error)
-        }
-        
-        let premium = json[LOGIN_PREMIUM_STATUS_PARAM] as? String?
-        let expirationTimestampAny = json[LOGIN_EXPIRATION_DATE_PARAM]
-        
-        var expirationTimestamp: Double?
-        
-        switch expirationTimestampAny {
-        case let strValue as String:
-            expirationTimestamp = Double(strValue)
-        case let doubleValue as Double:
-            expirationTimestamp = doubleValue
-        default:
-            break
-        }
-        
-        var licenseKey: String?
-        
-        if let licenseInfo = json[LICENSE_INFO_PARAM] as? [String : Any] {
-            licenseKey = licenseInfo[BEST_LICENSE_ID_PARAM] as? String
-        }
-    
-        if status == AUTH_BAD_CREDINTIALS {
-            
-            DDLogInfo("(LoginService) login error - bad credintials" )
-            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
-            return (false, false, nil, nil, error)
-        }
-        
-        // process premium
-        if premium != PREMIUM_STATUS_ACTIVE {
-            return (true, false, nil, licenseKey, nil)
-        }
-        
-        // save expiration date in user defaults
-        let expirationDate = Date(timeIntervalSince1970: (expirationTimestamp ?? 0) / 1000)
-        
-        return (true, true, expirationDate, licenseKey, nil)
-    }
     
     private func setExpirationTimer() {
         

@@ -45,7 +45,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     private let accountAction = "account"
     private let from = "license"
     
-    private let authUrl = "https://testauth.adguard.com/oauth/authorize"
+    private let authUrl = "https://auth.adguard.com/oauth/authorize"
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {

@@ -33,10 +33,11 @@ protocol PurchaseServiceProtocol {
     /*  login on backend server and check licens information
         the results will be posted through notification center
      */
-    func login(withName name: String?, password: String)
     func login(withLicenseKey key: String)
     func login(withAccessToken token: String)
+    func checkLicenseStatus()
     func logout()->Bool
+    func checkPremiumExpired()
     func requestPurchase()
     func requestRestore()
     
@@ -204,41 +205,18 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func start() {
         setObserver()
         requestProduct()
-        checkPremiumExpired()
     }
     
-    private func processLoginResult(_ error: Error?) {
-        if error != nil {
-            postNotification(PurchaseService.kPSNotificationLoginFailure, error)
-            return
+    func checkLicenseStatus() {
+        loginService.checkStatus { [weak self] (error) in
+            self?.processLoginResult(error)
         }
-        
-        // check state
-        if !loginService.hasPremiumLicense {
-            postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
-            return
-        }
-        
-        let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
-                        PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
-        
-        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
-    }
-    
-    func login(withName name: String?, password: String) {
-        
-        loginService.login(name: name, password: password) { [weak self] (error) in
-            guard let sSelf = self else { return }
-            
-            sSelf.processLoginResult(error)
-            
-            return
-        }
-        
     }
     
     func login(withLicenseKey key: String) {
-        login(withName: nil, password: key)
+        loginService.login(licenseKey: key){ [weak self] (error) in
+            self?.processLoginResult(error)
+        }
     }
     
     @objc
@@ -351,6 +329,26 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return encryptedBase64String
     }
     
+    @objc
+    func checkPremiumExpired() {
+        if(purchasedThroughInApp && !isRenewableSubscriptionActive()) {
+            validateReceipt { [weak self] (error) in
+                if self?.isRenewableSubscriptionActive() ?? false {
+                    self?.notifyPremiumExpired()
+                }
+            }
+        }
+        
+        if(loginService.loggedIn && loginService.hasPremiumLicense) {
+            
+            loginService.checkStatus { [weak self] (error) in
+                if error != nil || !(self?.loginService.active ?? false) {
+                    self?.notifyPremiumExpired()
+                }
+            }
+        }
+    }
+    
     // MARK: - private methods
     // MARK: storekit
     private func setObserver() {
@@ -433,23 +431,23 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
      
     // MARK: helper methods
-    private func checkPremiumExpired() {
-        if(purchasedThroughInApp && !isRenewableSubscriptionActive()) {
-            validateReceipt { [weak self] (error) in
-                if self?.isRenewableSubscriptionActive() ?? false {
-                    self?.notifyPremiumExpired()
-                }
-            }
+    
+    private func processLoginResult(_ error: Error?) {
+        if error != nil {
+            postNotification(PurchaseService.kPSNotificationLoginFailure, error)
+            return
         }
         
-        if(loginService.loggedIn && loginService.hasPremiumLicense && !loginService.active) {
-            
-            loginService.relogin() { [weak self] (error) in
-                if error != nil || !(self?.loginService.active ?? false) {
-                    self?.notifyPremiumExpired()
-                }
-            }
+        // check state
+        if !loginService.hasPremiumLicense {
+            postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
+            return
         }
+        
+        let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
+                        PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
+        
+        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
     }
     
     private func isRenewableSubscriptionActive()->Bool {
@@ -481,18 +479,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
         
         return true
-    }
-    
-    private func checkExpired() -> Bool{
-        
-        let expired = !loginService.active;
-        
-        let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
-                        PurchaseService.kPSNotificationLoginPremiumExpired: expired] as [String : Any]
-        
-        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
-        
-        return !expired;
     }
     
     private func notifyPremiumExpired() {

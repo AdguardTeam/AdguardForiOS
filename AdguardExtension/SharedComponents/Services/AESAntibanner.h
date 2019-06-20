@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import "ABackEndClients/ABECFilter.h"
 
-#define AS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
+#define AS_EXECUTION_PERIOD_TIME                           5 // 1 hours
 #define AS_EXECUTION_LEEWAY                                5 // 5 seconds
 #define AS_EXECUTION_DELAY                                 2 // 2 seconds
 

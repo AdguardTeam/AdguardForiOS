@@ -126,6 +126,10 @@ typedef enum : NSUInteger {
         pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
+        if (application.applicationState != UIApplicationStateBackground) {
+            [_purchaseService checkPremiumExpired];
+        }
+        
         if ([_aeService firstRunInProgress]) {
             
             [_aeService onReady:^{
@@ -345,6 +349,8 @@ typedef enum : NSUInteger {
                     [self antibanerUpdateFinished:AEUpdateFailed];
                 }
             }];
+            
+            [_purchaseService checkPremiumExpired];
         }];
     }
 }

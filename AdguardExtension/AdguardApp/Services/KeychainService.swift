@@ -25,7 +25,7 @@ protocol KeychainServiceProtocol {
     func saveAuth(server: String, login: String, password: String) -> Bool
     func deleteAuth(server: String) ->Bool
     func saveLicenseKey(server: String, key: String) -> Bool
-    func loadLiceseKey(server: String) -> String?
+    func loadLicenseKey(server: String) -> String?
     func deleteLicenseKey(server: String) -> Bool
 }
 
@@ -67,16 +67,20 @@ class KeychainService : KeychainServiceProtocol {
             return nil
         }
         
-        guard   let email = resultDict[kSecAttrAccount as String],
+        guard   let email = resultDict[kSecAttrAccount as String] as? String,
             let passData = resultDict[kSecValueData as String] else {
                 return nil
+        }
+        
+        if email.isEqual(licenseKeyLogin) {
+            return nil
         }
         
         guard let password = String(data: passData as! Data, encoding: .utf8) else {
             return nil
         }
         
-        return (email as! String, password)
+        return (email, password)
     }
     
     func saveAuth(server: String, login: String, password: String) -> Bool {
@@ -147,7 +151,7 @@ class KeychainService : KeychainServiceProtocol {
         return status == errSecSuccess
     }
     
-    func loadLiceseKey(server: String) -> String? {
+    func loadLicenseKey(server: String) -> String? {
         
         let query = [kSecClass as String:             kSecClassInternetPassword,
                      kSecAttrServer as String:        server as Any,

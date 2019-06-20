@@ -66,7 +66,9 @@ class LoginServiceTest: XCTestCase {
         {
             "auth_status": "SUCCESS",
             "premium_status": "FREE",
-            "license_info": { }
+            "license_info": {
+                "license" : "ABCDE12345"
+            }
         }
         """
         
@@ -145,7 +147,17 @@ class LoginServiceTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Login request")
         
         let expirationDate = Date().addingTimeInterval(2.0).timeIntervalSince1970 * 1000
-        network.returnString = "{\"auth_status\": \"SUCCESS\",\"premium_status\": \"ACTIVE\",\"expiration_date\": \(expirationDate)}"
+        network.returnString = """
+        {
+            "auth_status": "SUCCESS",
+            "premium_status": "ACTIVE",
+            "expiration_date": \(expirationDate),
+            "license_info": {
+                "license": "ABCDE12345"
+            }
+        }
+        """
+        
         
         loginService.login(name: "name", password: "password") { (error) in
             
@@ -262,7 +274,7 @@ class KeychainMock: KeychainServiceProtocol {
         return true
     }
     
-    func loadLiceseKey(server: String) -> String? {
+    func loadLicenseKey(server: String) -> String? {
         return licenseKey
     }
     
