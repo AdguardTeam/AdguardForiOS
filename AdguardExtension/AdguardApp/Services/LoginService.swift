@@ -75,7 +75,7 @@ class LoginService: LoginServiceProtocol {
     
     private var timer: Timer?
     
-    private var expirationDate: Date? {
+    var expirationDate: Date? {
         get {
             return defaults.object(forKey: AEDefaultsPremiumExpirationDate) as? Date
         }
@@ -234,11 +234,6 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            sSelf.expirationDate = expirationDate
-            sSelf.hasPremiumLicense = premium
-            sSelf.loggedIn = true
-            
-
             // migrate from 3.0.0 ---------------------
             
             let oldAuth = sSelf.keychain.loadAuth(server: sSelf.LOGIN_SERVER)
@@ -250,12 +245,28 @@ class LoginService: LoginServiceProtocol {
                 _ = sSelf.keychain.deleteAuth(server: sSelf.LOGIN_SERVER)
                 _ = sSelf.keychain.deleteLicenseKey(server: sSelf.LOGIN_SERVER)
                 
-                self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: oldLicenseKey, callback: callback)
+                self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: oldLicenseKey) {(error) in
+                    if error != nil {
+                        // rollback
+                        if oldAuth != nil {
+                            _ = sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: oldAuth!.login, password: oldAuth!.password)
+                        }
+                        else if oldLicenseKey != nil {
+                            _ = sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: oldLicenseKey!)
+                        }
+                    }
+                    
+                    callback(error)
+                }
                 
                 return
             }
             
             // -----------------------------------------
+            
+            sSelf.expirationDate = expirationDate
+            sSelf.hasPremiumLicense = premium
+            sSelf.loggedIn = premium && sSelf.active
             
             callback(nil)
         }
@@ -290,6 +301,12 @@ class LoginService: LoginServiceProtocol {
             let (loggedIn, _, _, _, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
             
             if error != nil {
+                
+                if let nsError = error as NSError? {
+                    if nsError.domain == LoginService.loginErrorDomain && nsError.code == LoginService.loginBadCredentials {
+                        sSelf.loggedIn = false
+                    }
+                }
                 callback(error!)
                 return
             }

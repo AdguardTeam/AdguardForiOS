@@ -19,7 +19,7 @@
 import Foundation
 
 protocol LoginResponseParserProtocol {
-    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, liceneKey: String?, Error?)
+    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?)
     
     func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, Error?)
 }
@@ -70,7 +70,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     private let STATUS_RESPONSE_STATUS_PREMIUM = "PREMIUM"
     private let STATUS_RESPONSE_STATUS_EXPIRED = "EXPIRED"
     
-    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, liceneKey: String?, Error?) {
+    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
         
         do {
             let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
@@ -101,7 +101,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     }
     
     
-    private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, liceneKey: String?, Error?) {
+    private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
         
         guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
