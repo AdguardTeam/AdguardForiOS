@@ -157,7 +157,9 @@ class KeychainService : KeychainServiceProtocol {
                      kSecAttrServer as String:        server as Any,
                      kSecMatchLimit as String:        kSecMatchLimitOne,
                      kSecReturnAttributes as String:  true,
-                     kSecReturnData as String:        true]
+                     kSecReturnData as String:        true,
+                     kSecAttrAccount as String:       licenseKeyLogin
+        ]
         
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)

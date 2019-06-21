@@ -244,18 +244,25 @@ class LoginService: LoginServiceProtocol {
                 _ = sSelf.keychain.deleteAuth(server: sSelf.LOGIN_SERVER)
                 _ = sSelf.keychain.deleteLicenseKey(server: sSelf.LOGIN_SERVER)
                 
-                self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: oldLicenseKey) {(error) in
-                    if error != nil {
-                        // rollback
-                        if oldAuth != nil {
-                            _ = sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: oldAuth!.login, password: oldAuth!.password)
-                        }
-                        else if oldLicenseKey != nil {
+                if oldLicenseKey != nil {
+                    self?.requestStatus(licenseKey: licenseKey) { (error) in
+                        if error != nil {
+                            // rollback
                             _ = sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: oldLicenseKey!)
                         }
+                        
+                        callback(error)
                     }
+                }
+                else {
+                    self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: nil) { (error) in
+                        if error != nil {
+                            // rollback
+                            _ = sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: oldAuth!.login, password: oldAuth!.password)
+                        }
                     
-                    callback(error)
+                        callback(error)
+                    }
                 }
                 
                 return
@@ -275,6 +282,10 @@ class LoginService: LoginServiceProtocol {
         
         loggedIn = false
         expirationDate = nil
+        
+        // for logged in 3.0.0 users
+        _ = keychain.deleteAuth(server: LOGIN_SERVER)
+        _ = keychain.deleteLicenseKey(server: LOGIN_SERVER)
         
         return true
     }
