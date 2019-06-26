@@ -72,15 +72,7 @@ class LoginController: BottomAlertController {
     
     // MARK: - Actions
     @IBAction func loginAction(_ sender: Any) {
-        
-        if let name = nameEdit.text {
-            if isLicenseKey(text: name) {
-                purchaseService.login(withLicenseKey: name)
-            }
-            else {
-                webAuth()
-            }
-        }
+        login()
     }
     
     @IBAction func editingChanged(_ sender: Any) {
@@ -93,6 +85,10 @@ class LoginController: BottomAlertController {
     
     
     // MARK: - text field delegate methods
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        login()
+        return true
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         updateLines()
@@ -190,6 +186,17 @@ class LoginController: BottomAlertController {
         if let name = nameEdit.text {
             dismiss(animated: true) { [weak self] in
                 self?.delegate?.loginAction(name: name)
+            }
+        }
+    }
+    
+    private func login(){
+        if let name = nameEdit.text {
+            if isLicenseKey(text: name) {
+                purchaseService.login(withLicenseKey: name)
+            }
+            else {
+                webAuth()
             }
         }
     }
