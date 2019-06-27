@@ -18,6 +18,9 @@
 
 import Foundation
 
+/**
+ LoginService - this service is responsible for working with adguard logins and licenses
+ */
 protocol LoginServiceProtocol {
     
     var loggedIn: Bool { get }
@@ -28,9 +31,15 @@ protocol LoginServiceProtocol {
     func checkStatus( callback: @escaping (Error?)->Void )
     func logout()->Bool
     
-    func login(licenseKey: String, callback: @escaping  (_: Error?)->Void)
+    /*  login on backend server and check license information
+     the results will be posted through notification center
+     
+     we can use adguard license in two ways
+     1) login throuh oauth in safari and get access_tolken. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
+     2) login directly with license key. In this case we immediately send status request with this license key
+     */
     func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
-//    func relogin(callback: @escaping (_ error: Error?)->Void)
+    func login(licenseKey: String, callback: @escaping  (_: Error?)->Void)
     
     var activeChanged: (() -> Void)? { get set }
 }
@@ -140,9 +149,12 @@ class LoginService: LoginServiceProtocol {
         loginInternal(name: nil, password: nil, accessToken: accessToken, callback: callback)
     }
     
+    // todo: name/password are deprecated and must be removed in feature versions, when all 3.0.0 user will be migrated to new authorization scheme
     private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (Error?) -> Void) {
         
         let loginByToken = accessToken != nil
+        
+        DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
         
         var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: keychain.appId ?? ""]
@@ -154,7 +166,7 @@ class LoginService: LoginServiceProtocol {
         
         guard let url = URL(string: loginByToken ? AUTH_TOKEN_URL : LOGIN_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) login error. Can not make URL from String \(LOGIN_URL)")
+            DDLogError("(LoginService) login error. Can not make URL from String \(LOGIN_URL)")
             return
         }
         
@@ -166,22 +178,27 @@ class LoginService: LoginServiceProtocol {
         
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: headers)
         
-        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
+        network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let sSelf = self else { return }
             
             guard error == nil else {
+                DDLogError("(LoginService) loginInternal - got error \(error?.localizedDescription)")
                 callback(error!)
                 return
             }
             
             guard let data = dataOrNil  else{
+                DDLogError("(LoginService) loginInternal - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
             
-            let (_, _, _, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
+            let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
+            
+            DDLogInfo("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn) premium = \(premium) expirationDate = \(expirationDate)")
             
             if error != nil {
+                DDLogError("(LoginService) loginInternal - processLoginResponse error: \(error?.localizedDescription)")
                 callback(error!)
                 return
             }
@@ -195,6 +212,8 @@ class LoginService: LoginServiceProtocol {
     }
     
     private func requestStatus(licenseKey: String?, callback: @escaping (Error?)->Void ) {
+        
+        DDLogInfo("(LoginService) requestStatus " + (licenseKey == nil ? "without license key" : "with license key"))
         
         var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: keychain.appId ?? "",
@@ -213,62 +232,36 @@ class LoginService: LoginServiceProtocol {
         
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
         
-        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
+        network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let sSelf = self else { return }
             
             guard error == nil else {
+                DDLogError("(LoginService) checkStatus - got error \(error?.localizedDescription)")
                 callback(error!)
                 return
             }
             
-            guard let data = dataOrNil  else{
+            guard let data = dataOrNil  else {
+                DDLogError("(LoginService) checkStatus - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
             
             let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
             
+            DDLogInfo("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
+            
+            
             if error != nil {
+                DDLogError("(LoginService) checkStatus - processStatusResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
             
-            // migrate from 3.0.0 ---------------------
-            
-            let oldAuth = sSelf.keychain.loadAuth(server: sSelf.LOGIN_SERVER)
-            let oldLicenseKey = sSelf.keychain.loadLicenseKey(server: sSelf.LOGIN_SERVER)
-            
-            if !premium && oldAuth != nil || oldLicenseKey != nil {
-                
-                // delete saved in 3.0.0 logins
-                _ = sSelf.keychain.deleteAuth(server: sSelf.LOGIN_SERVER)
-                _ = sSelf.keychain.deleteLicenseKey(server: sSelf.LOGIN_SERVER)
-                
-                if oldLicenseKey != nil {
-                    self?.requestStatus(licenseKey: licenseKey) { (error) in
-                        if error != nil {
-                            // rollback
-                            _ = sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: oldLicenseKey!)
-                        }
-                        
-                        callback(error)
-                    }
-                }
-                else {
-                    self?.loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: nil) { (error) in
-                        if error != nil {
-                            // rollback
-                            _ = sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: oldAuth!.login, password: oldAuth!.password)
-                        }
-                    
-                        callback(error)
-                    }
-                }
-                
+            // todo: remove this in feature
+            if sSelf.migrateFrom3_0_0IfNeeded(premium: premium, licenseKey: licenseKey, callback: callback) {
                 return
             }
-            
-            // -----------------------------------------
             
             sSelf.expirationDate = expirationDate
             sSelf.hasPremiumLicense = premium
@@ -303,6 +296,9 @@ class LoginService: LoginServiceProtocol {
         
         timer = Timer(fire: time, interval: 0, repeats: false) { [weak self] (timer) in
             guard let sSelf = self else { return }
+            
+            DDLogInfo("(LoginService) expiration timer fired")
+                
             if let callback = sSelf.activeChanged {
                 callback()
             }
@@ -310,5 +306,60 @@ class LoginService: LoginServiceProtocol {
         }
         
         RunLoop.main.add(timer!, forMode: .common)
+    }
+    
+    // todo: remove this in feature
+    private func migrateFrom3_0_0IfNeeded (premium: Bool, licenseKey:String?, callback: @escaping (Error?)->Void)->Bool {
+        
+        let oldAuth = keychain.loadAuth(server: LOGIN_SERVER)
+        let oldLicenseKey = keychain.loadLicenseKey(server: LOGIN_SERVER)
+        
+        if !premium && oldAuth != nil || oldLicenseKey != nil {
+            
+            DDLogInfo("(LoginService) - start migration from 3.0.0")
+            
+            // delete saved in 3.0.0 logins
+            _ = keychain.deleteAuth(server: LOGIN_SERVER)
+            _ = keychain.deleteLicenseKey(server: LOGIN_SERVER)
+            
+            if oldLicenseKey != nil {
+                
+                DDLogInfo("(LoginService) - migrate with license key")
+                
+                requestStatus(licenseKey: licenseKey) { [weak self] (error) in
+                    guard let sSelf = self else { return }
+                    if error != nil {
+                        // rollback
+                        DDLogError("(LoginService) - migration failed with error: \(error!.localizedDescription)")
+                        _ = sSelf.keychain.saveLicenseKey(server: sSelf.LOGIN_SERVER, key: oldLicenseKey!)
+                    }
+                    else {
+                        DDLogError("(LoginService) - migration succeeded")
+                    }
+                    
+                    callback(error)
+                }
+            }
+            else {
+                
+                DDLogInfo("(LoginService) - migrate with login/password")
+                loginInternal(name: oldAuth?.login, password: oldAuth?.password, accessToken: nil) { [weak self] (error) in
+                    guard let sSelf = self else { return }
+                    if error != nil {
+                        // rollback
+                        DDLogError("(LoginService) - migration failed with error: \(error!.localizedDescription)")
+                        _ = sSelf.keychain.saveAuth(server: sSelf.LOGIN_SERVER, login: oldAuth!.login, password: oldAuth!.password)
+                    } else {
+                        DDLogError("(LoginService) - migration succeeded")
+                    }
+                    
+                    callback(error)
+                }
+            }
+            
+            return true
+        }
+        
+        return false
     }
 }

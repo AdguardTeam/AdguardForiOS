@@ -73,9 +73,9 @@ class LoginResponseParser: LoginResponseParserProtocol {
     func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
         
         do {
-            let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
             
-            return processLoginResponseJson(json: jsonResponce)
+            return processLoginResponseJson(json: jsonResponse)
         }
         catch {
             let responseString = String(data: data, encoding: .utf8)
@@ -88,9 +88,9 @@ class LoginResponseParser: LoginResponseParserProtocol {
     func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, Error?) {
         
         do {
-            let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
             
-            return processStatusResponseJson(json: jsonResponce)
+            return processStatusResponseJson(json: jsonResponse)
         }
         catch {
             let responseString = String(data: data, encoding: .utf8)

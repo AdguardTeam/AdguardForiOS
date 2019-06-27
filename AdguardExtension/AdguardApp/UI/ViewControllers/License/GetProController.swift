@@ -273,6 +273,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private func webAuthWithName(name: String){
         
+        DDLogInfo("(GetProController) - webAuth")
         guard let url = purchaseService.authUrlWithName(name: name) else { return }
         let safariController = SFSafariViewController(url: url)
         present(safariController, animated: true, completion: nil)

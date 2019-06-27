@@ -21,26 +21,78 @@ import StoreKit
 import CommonCrypto
 
 // MARK:  service protocol -
+/**
+ PurchaseService is a service responsible for all purchases.
+ The user can get professional status through renewable subscriptions(in-app purchases) or through an Adguard license.
+ In-app purchases are carried out directly in this service.
+ Work with Adguard Licenses is delegated to LoginController
+ */
 protocol PurchaseServiceProtocol {
+    
+   
+    /**
+     returns true if user has valid renewable subscription or valid adguard license
+     */
     var isProPurchased: Bool {get}
+    
+    /**
+     returns true if user has been logged in through login
+     */
     var purchasedThroughLogin: Bool {get}
+    
+    /**
+     returns true if premium expired. It works both for in-app purchases and for adguard licenses
+     */
+    func checkPremiumExpired()
+    
+    /**
+     retuns true if service ready to request purchases through app store
+     */
     var ready: Bool {get}
+    
+    /**
+     renewable subscription price
+     */
     var price: String {get}
+    
+    /**
+     renewable subscription period
+     */
     var period: String {get}
     
-    func start()
-    
-    /*  login on backend server and check licens information
+    /*  login on backend server and check license information
         the results will be posted through notification center
+     
+        we can use adguard license in two ways
+        1) login throuh oauth in safari and get access_tolken. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
+        2) login directly with license key. In this case we immediately send status request with this license key
      */
-    func login(withLicenseKey key: String)
     func login(withAccessToken token: String?, state: String?)
+    func login(withLicenseKey key: String)
+    
+    /**
+     checks the status of adguard license
+     */
     func checkLicenseStatus()
+    
+    /**
+     deletes all login information
+     */
     func logout()->Bool
-    func checkPremiumExpired()
+    
+    /**
+     requests an in-app purchase
+     */
     func requestPurchase()
+    
+    /**
+     requests restore in-app purchases
+     */
     func requestRestore()
     
+    /**
+     returns url for oauth athorisation
+     */
     func authUrlWithName(name: String)->URL?
 }
 
@@ -199,6 +251,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         super.init()
         
+        start()
+        
         loginService.activeChanged = { [weak self] in
             self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
         }
@@ -227,6 +281,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         let expectedState = resources.sharedDefaults().string(forKey: AEDefaultsAuthStateString)
         
         if token == nil || state == nil || expectedState == nil || state! != expectedState! {
+            DDLogError("(PurchaseService) login with access token failed " + (token == nil ? "token == nil" : "") + (state == nil ? "state == nil" : "") + (expectedState == nil ? "expectedState == nil" : "") + (state != expectedState ? "state != expectedState" : ""))
             postNotification(PurchaseService.kPSNotificationLoginFailure, nil)
             return
         }
@@ -262,7 +317,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         let request: URLRequest = ABECRequest.post(for: url, json: jsonToSend)
         
-        network.data(with: request) { [weak self] (dataOrNil, responce, error) in
+        network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -278,9 +333,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
             
             do {
-                let jsonResponce = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                 
-                let validateSuccess = strongSelf.processValidateResponce(json: jsonResponce)
+                let validateSuccess = strongSelf.processValidateResponse(json: jsonResponse)
                 
                 if !validateSuccess {
                     complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
@@ -362,7 +417,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     @objc
     func checkPremiumExpired() {
+        
+        DDLogInfo("(PurchaseService) checkPremiumExpired")
         if(purchasedThroughInApp && !isRenewableSubscriptionActive()) {
+            
+            DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
             validateReceipt { [weak self] (error) in
                 if self?.isRenewableSubscriptionActive() ?? false {
                     self?.notifyPremiumExpired()
@@ -372,6 +431,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         if(loginService.loggedIn && loginService.hasPremiumLicense) {
             
+            DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {
                     self?.notifyPremiumExpired()
@@ -464,7 +524,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // MARK: helper methods
     
     private func processLoginResult(_ error: Error?) {
+        
+        DDLogInfo("(PurchaseService) processLoginResult")
         if error != nil {
+            
+            DDLogError("(PurchaseService) processLoginResult error \(error!.localizedDescription)")
             postNotification(PurchaseService.kPSNotificationLoginFailure, error)
             return
         }
@@ -482,7 +546,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     private func isRenewableSubscriptionActive()->Bool {
-        
+
         if let expirationDate = resources.sharedDefaults().object(forKey: AEDefaultsRenewableSubscriptionExpirationDate) as? Date {
             return expirationDate > Date()
         }
@@ -490,7 +554,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return false
     }
     
-    private func processValidateResponce(json: [String: Any])->Bool {
+    private func processValidateResponse(json: [String: Any])->Bool {
         
         guard let products = json[PRODUCTS_PARAM] as? [[String: Any]] else { return false }
         

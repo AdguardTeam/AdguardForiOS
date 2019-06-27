@@ -417,6 +417,8 @@ typedef enum : NSUInteger {
                     }
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
+                        
+                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
                         NSString* fragment = url.fragment;
                         NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
                         
