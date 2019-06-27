@@ -163,6 +163,14 @@ extern NSString*  _Nonnull AEDefaultsDarkTheme;
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
 
+/**
+ User defaults keys, wich contains number of rules for each content blocker*/
+extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

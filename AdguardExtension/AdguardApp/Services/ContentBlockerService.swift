@@ -53,6 +53,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
              .other:                        [FilterGroupId.other, FilterGroupId.security, FilterGroupId.user],
              .custom:                       [FilterGroupId.custom, FilterGroupId.user]]
     
+    let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
+        .general:                       AEDefaultsGeneralContentBlockerRulesCount,
+        .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
+        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
+        .other:                         AEDefaultsOtherContentBlockerRulesCount,
+        .custom:                        AEDefaultsCustomContentBlockerRulesCount
+    ]
+    
     // MARK: - init
     @objc
     init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
@@ -101,10 +109,44 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         processWhitelistRule(rule, completion: completion, processRules: {(rules) in
             return (rules + [rule], true)
-        }, processData: { (jsonData, jsonRuleData) in
+        }, processData: { [weak self] (jsonData, jsonRuleData, contentBlocker) in
+            guard let sSelf = self else { return NSMutableData() }
             
-            // add whitelist rule
             if jsonData.length > 1 {
+                
+                let converted = sSelf.resources.sharedDefaults().integer(forKey: sSelf.defaultsCountKeyByBlocker[contentBlocker]!)
+                let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+                if converted == limit {
+                    // remove last blocking rule from data
+                    
+                    if let json = try? JSONSerialization.jsonObject(with: jsonData as Data, options: []) {
+                        if var jsonArray = (json as? Array<Any>) {
+                            
+                            var indexToDelete: Int?
+                            
+                            for i in (0..<jsonArray.count).reversed() {
+                                guard let rule = jsonArray[i] as? Dictionary<String, Any> else { continue }
+                                guard let action = rule["action"] as? Dictionary<String, Any> else { continue }
+                                guard let type = action["type"] as? String else { continue }
+                                
+                                if type == "block" {
+                                    indexToDelete = i
+                                    break;
+                                }
+                            }
+                            
+                            if indexToDelete != nil {
+                                jsonArray.remove(at: indexToDelete!)
+                                if let newData = try? JSONSerialization.data(withJSONObject: jsonArray, options: []) {
+                                    jsonData.setData(newData)
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                }
+                
                 // must bes at least 2 symbols
                 jsonData.replaceBytes(in: NSRange(location: jsonData.length - 1, length: 1), withBytes:",")
                 jsonRuleData.withUnsafeBytes { dataBytes in
@@ -134,7 +176,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return true
             }
             return (resultRules, found)
-        }, processData: { (jsonData, ruleData) in
+        }, processData: { (jsonData, ruleData, _) in
             
             var jsonRuleData: NSData?
             
@@ -169,7 +211,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return testRule
             }
             return (resultRules, found)
-        }, processData: { (jsonData, ruleData) in
+        }, processData: { (jsonData, ruleData, _) in
             
             let (convertResult, _) = self.convertOneRule(newRule, optimize: false)
             
@@ -338,9 +380,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var resultData = Data()
         var resultError: Error?
         if rules.count != 0 {
-            // todo: save counters in shared preferences
-            let (jsonData, _, _, _, error) = convertRulesToJson(rules)
+            let (jsonData, converted, _, _, error) = convertRulesToJson(rules)
             if jsonData != nil { resultData = jsonData! }
+            
+            resources.sharedDefaults().set(converted, forKey: defaultsCountKeyByBlocker[contentBlocker]!)
             resultError = error
         }
         
@@ -374,7 +417,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         return filterByGroup
     }
     
-    private func processWhitelistRule(_ rule: ASDFilterRule, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: NSMutableData, _ ruleData: Data)->NSMutableData) {
+    private func processWhitelistRule(_ rule: ASDFilterRule, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: NSMutableData, _ ruleData: Data, _ contentBlocker: ContentBlockerType)->NSMutableData) {
         
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
@@ -455,7 +498,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
                 savedDatas[type] = data
                 var jsonData = NSMutableData(data: data)
-                jsonData = processData(jsonData, jsonRuleData)
+                jsonData = processData(jsonData, jsonRuleData, type)
                 
                 sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
             }
