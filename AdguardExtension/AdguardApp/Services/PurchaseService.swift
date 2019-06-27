@@ -34,14 +34,14 @@ protocol PurchaseServiceProtocol {
         the results will be posted through notification center
      */
     func login(withLicenseKey key: String)
-    func login(withAccessToken token: String)
+    func login(withAccessToken token: String?, state: String?)
     func checkLicenseStatus()
     func logout()->Bool
     func checkPremiumExpired()
     func requestPurchase()
     func requestRestore()
     
-    func encryptName(name: String)->String?
+    func authUrlWithName(name: String)->URL?
 }
 
 // MARK: - public constants -
@@ -112,6 +112,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let PRODUCT_ID_PARAM = "product_id"
     private let PREMIUM_STATUS_PARAM = "premium_status"
     private let EXPIRATION_DATE_PARAM = "expiration_date"
+    
+    private let authUrl = "https://auth.adguard.com/oauth/authorize"
     
     // MARK: - private properties
     private let network: ACNNetworkingProtocol
@@ -220,8 +222,16 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     @objc
-    func login(withAccessToken token: String) {
-        loginService.login(accessToken: token) { [weak self]  (error) in
+    func login(withAccessToken token: String?, state: String?) {
+        
+        let expectedState = resources.sharedDefaults().string(forKey: AEDefaultsAuthStateString)
+        
+        if token == nil || state == nil || expectedState == nil || state! != expectedState! {
+            postNotification(PurchaseService.kPSNotificationLoginFailure, nil)
+            return
+        }
+        
+        loginService.login(accessToken: token!) { [weak self]  (error) in
             guard let sSelf = self else { return }
             
             sSelf.processLoginResult(error)
@@ -316,7 +326,28 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return encReceipt
     }
     
-    func encryptName(name: String)->String? {
+    func authUrlWithName(name: String) -> URL? {
+        
+        guard let dataParam = encryptName(name: name) else { return nil }
+        
+        let state =  String.randomString(length: 10)
+        resources.sharedDefaults().set(state, forKey: AEDefaultsAuthStateString)
+        
+        let params = ["response_type"   : "token",
+                      "client_id"       : "adguard-ios",
+                      "redirect_uri"    : "adguard://auth",
+                      "scope"           : "trust",
+                      "state"           : state,
+                      "data"            : dataParam
+        ]
+        
+        let paramsString = ACNUrlUtils.createString(fromParameters: params, xmlStrict: false)
+        
+        let urlString = "\(authUrl)?\(paramsString)"
+        return URL(string: urlString)
+    }
+    
+    private func encryptName(name: String)->String? {
         let stringToEncrypt = "email=\(name)"
         guard   let dataToEncrypt = stringToEncrypt.data(using: .utf8)
             else { return nil }

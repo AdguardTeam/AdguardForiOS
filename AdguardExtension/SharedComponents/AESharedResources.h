@@ -36,6 +36,7 @@
 #define AE_URLSCHEME_COMMAND_AUTH           @"auth"
 
 #define AE_URLSCHEME_AUTH_PARAM_TOKEN       @"access_token"
+#define AE_URLSCHEME_AUTH_PARAM_STATE       @"state"
 
 /**
  User Defaults key that defines enable/disable filtration.
@@ -165,6 +166,10 @@ extern NSString*  _Nonnull AEDefaultsDarkTheme;
 /**
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
+
+/**
+ User defaults key, wich defines dark theme is on */
+extern NSString*  _Nonnull AEDefaultsAuthStateString;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

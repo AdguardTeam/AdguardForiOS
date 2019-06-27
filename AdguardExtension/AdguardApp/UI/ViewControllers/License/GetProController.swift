@@ -45,8 +45,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     private let accountAction = "account"
     private let from = "license"
     
-    private let authUrl = "https://auth.adguard.com/oauth/authorize"
-    
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -275,21 +273,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private func webAuthWithName(name: String){
         
-        guard let dataParam = purchaseService.encryptName(name: name) else { return }
-        
-        let params = ["response_type"   : "token",
-                      "client_id"       : "adguard-ios",
-                      "redirect_uri"    : "adguard://auth",
-                      "scope"           : "trust",
-                      "state"           : "123456", // todo: generate state
-                      "data"            : dataParam
-                      ]
-        
-        let paramsString = ACNUrlUtils.createString(fromParameters: params, xmlStrict: false)
-        
-        let urlString = "\(authUrl)?\(paramsString)"
-        guard let url = URL(string: urlString) else { return }
-        
+        guard let url = purchaseService.authUrlWithName(name: name) else { return }
         let safariController = SFSafariViewController(url: url)
         present(safariController, animated: true, completion: nil)
     }

@@ -46,7 +46,7 @@ NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableS
 NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
-
+NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"

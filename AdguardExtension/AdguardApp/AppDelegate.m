@@ -420,16 +420,12 @@ typedef enum : NSUInteger {
                         NSString* fragment = url.fragment;
                         NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
                         
+                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
                         NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
                         
-                        if (accessToken.length == 0) {
-                            // todo: show error
-                            return;
-                        }
-                        [_purchaseService loginWithAccessToken:accessToken];
+                        [_purchaseService loginWithAccessToken:accessToken state: state];
                     }
                 }
-                //
             });
         }];
         
