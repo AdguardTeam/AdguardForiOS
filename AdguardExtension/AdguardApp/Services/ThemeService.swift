@@ -163,6 +163,8 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     func setupNavigationBar(_ navBarOrNil: UINavigationBar?) {
         guard let navBar = navBarOrNil else { return }
         let dark = configuration.darkTheme
+        let textAttributes = [NSAttributedString.Key.foregroundColor: dark ? UIColor.white : .black]
+        navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = dark ? .clear : .white
         navBar.barStyle = dark ? .black : .default
     }
@@ -178,7 +180,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func statusbarStyle() -> UIStatusBarStyle {
-        return configuration.darkTheme ? .lightContent : .default
+        if #available(iOS 13.0, *) {
+            return configuration.darkTheme ? .lightContent : .darkContent
+        } else {
+            return configuration.darkTheme ? .lightContent : .default
+        }
     }
     
     func setupTextField(_ textField: UITextField) {
