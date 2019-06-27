@@ -72,13 +72,11 @@ class DnsSettingsController : UITableViewController{
         let enabled = sender.isOn
         
         if enabled && !vpnManager.vpnInstalled {
-            ACSSystemUtils.showSimpleAlert(for: self,
-                                           withTitle: ACLocalizedString("vpn_alert_title", nil),
-                                           message: ACLocalizedString("vpn_alert_message", nil)){
-                self.vpnManager.enabled = enabled
+            showConfirmVpnAlert{ [weak self] in
+                guard let sSelf = self else { return }
+                sSelf.vpnManager.enabled = enabled
             }
-        }
-        else {
+        }else {
             self.vpnManager.enabled = enabled
         }
     }
@@ -117,5 +115,36 @@ class DnsSettingsController : UITableViewController{
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
+    }
+    
+    private func showConfirmVpnAlert(yesAction: @escaping ()->()){
+        let title: String = ACLocalizedString("vpn_confirm_title", nil)
+        let message: String = ACLocalizedString("vpn_confirm_message", nil)
+        let okTitle: String = ACLocalizedString("common_action_ok", nil)
+        let cancelTitle: String = ACLocalizedString("common_action_cancel", nil)
+        let privacyTitle: String = ACLocalizedString("privacy_policy_action", nil)
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
+            yesAction()
+        }
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) {[weak self] (alert) in
+            guard let sSelf = self else { return }
+            sSelf.enabledSwitch.isOn = false
+        }
+        let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { [weak self] (alert) in
+            guard let sSelf = self else { return }
+            UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
+            sSelf.enabledSwitch.isOn = false
+        }
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addAction(privacyAction)
+        
+        alert.preferredAction = okAction
+        
+        present(alert, animated: true, completion: nil)
     }
 }
