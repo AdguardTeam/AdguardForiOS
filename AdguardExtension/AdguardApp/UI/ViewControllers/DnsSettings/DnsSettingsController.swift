@@ -129,19 +129,19 @@ class DnsSettingsController : UITableViewController{
         let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
             yesAction()
         }
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) {[weak self] (alert) in
-            guard let sSelf = self else { return }
-            sSelf.enabledSwitch.isOn = false
-        }
         let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { [weak self] (alert) in
             guard let sSelf = self else { return }
             UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
             sSelf.enabledSwitch.isOn = false
         }
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) {[weak self] (alert) in
+            guard let sSelf = self else { return }
+            sSelf.enabledSwitch.isOn = false
+        }
         
         alert.addAction(okAction)
-        alert.addAction(cancelAction)
         alert.addAction(privacyAction)
+        alert.addAction(cancelAction)
         
         alert.preferredAction = okAction
         
