@@ -150,7 +150,7 @@ class LoginService: LoginServiceProtocol {
         loginInternal(name: nil, password: nil, accessToken: accessToken, callback: callback)
     }
     
-    // todo: name/password are deprecated and must be removed in feature versions, when all 3.0.0 user will be migrated to new authorization scheme
+    // todo: name/password are deprecated and must be removed in future versions, when all 3.0.0 user will be migrated to new authorization scheme
     private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (Error?) -> Void) {
         
         guard let appId = keychain.appId else {
@@ -272,7 +272,7 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            // todo: remove this in feature
+            // todo: remove this in future
             if sSelf.migrateFrom3_0_0IfNeeded(premium: premium, licenseKey: licenseKey, callback: callback) {
                 return
             }
@@ -322,7 +322,7 @@ class LoginService: LoginServiceProtocol {
         RunLoop.main.add(timer!, forMode: .common)
     }
     
-    // todo: remove this in feature
+    // todo: remove this in future
     private func migrateFrom3_0_0IfNeeded (premium: Bool, licenseKey:String?, callback: @escaping (Error?)->Void)->Bool {
         
         let oldAuth = keychain.loadAuth(server: LOGIN_SERVER)
