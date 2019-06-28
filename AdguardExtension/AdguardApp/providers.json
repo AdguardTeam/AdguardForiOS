@@ -60,7 +60,7 @@
           "id": "google-doh",
           "name": "google",
           "upstreams":[
-            "https://dns.google.com/experimental"
+            "https://dns.google/dns-query"
             ]
         },
         {
