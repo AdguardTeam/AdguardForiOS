@@ -35,17 +35,33 @@ class KeychainService : KeychainServiceProtocol {
     let appIdKey = "AppId"
     let licenseKeyLogin = "license"
     
+    private let resources: AESharedResourcesProtocol
+    
+    init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
+    }
+    
     var appId: String? {
         get {
-            var storedId = getStoredAppId()
-            if storedId == nil {
-                storedId = generateAppId()
-                if !save(appId: storedId!) {
-                    return nil
-                }
+            let (storedId, notFound) = getStoredAppId()
+            
+            migrate3_0_0appIdIfNeeded(storedId)
+            
+            if storedId != nil {
+                return storedId
             }
             
-            return storedId
+            if notFound {
+                let newAppId = generateAppId()
+                
+                if !save(appId: newAppId) {
+                    return nil
+                }
+                
+                return newAppId
+            }
+            
+            return nil
         }
     }
     
@@ -94,7 +110,9 @@ class KeychainService : KeychainServiceProtocol {
         let query = [kSecClass as String:             kSecClassInternetPassword,
                      kSecAttrServer as String:        server as Any,
                      kSecAttrAccount as String:       login,
-                     kSecValueData as String:         passData]
+                     kSecValueData as String:         passData,
+                     kSecAttrAccessible as String:    kSecAttrAccessibleAfterFirstUnlock
+        ]
         
         var result: CFTypeRef?
         let status = SecItemAdd(query as CFDictionary, &result)
@@ -143,6 +161,7 @@ class KeychainService : KeychainServiceProtocol {
         let query = [kSecClass as String:             kSecClassInternetPassword,
                      kSecAttrServer as String:        server as Any,
                      kSecAttrAccount as String:       licenseKeyLogin,
+                     kSecAttrAccessible as String:    kSecAttrAccessibleAfterFirstUnlock,
                      kSecValueData as String:         keyData]
         
         var result: CFTypeRef?
@@ -194,7 +213,7 @@ class KeychainService : KeychainServiceProtocol {
     
     // MARK: - private methods
     
-    private func getStoredAppId()->String? {
+    private func getStoredAppId()->(appId: String?, notFound: Bool) {
         let query = [kSecClass as String:             kSecClassGenericPassword,
                      kSecAttrService as String:        appIdService as Any,
                      kSecMatchLimit as String:        kSecMatchLimitOne,
@@ -204,28 +223,31 @@ class KeychainService : KeychainServiceProtocol {
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
         
+        if status == errSecItemNotFound {
+            return (nil, true)
+        }
         if status != errSecSuccess {
-            return nil
+            return (nil, false)
         }
         
         guard let resultDict = attributes as! [String: Any]?  else {
-            return nil
+            return (nil, false)
         }
         
         guard   let key = resultDict[kSecAttrAccount as String] as? String,
                 let value = resultDict[kSecValueData as String] else {
-                return nil
+                return (nil, false)
         }
         
         guard let valueString = String(data: value as! Data, encoding: .utf8) else {
-            return nil
+            return (nil, false)
         }
         
         if key != appIdKey {
-            return nil
+            return (nil, false)
         }
         
-        return valueString
+        return (valueString, false)
     }
     
     private func generateAppId()->String {
@@ -241,40 +263,65 @@ class KeychainService : KeychainServiceProtocol {
         let query = [kSecClass as String:             kSecClassGenericPassword,
                      kSecAttrService as String:       appIdService as Any,
                      kSecAttrAccount as String:       appIdKey as Any,
+                     kSecAttrAccessible as String:    kSecAttrAccessibleAfterFirstUnlock,
                      kSecValueData as String:         appIdData]
         
         var result: CFTypeRef?
         let status = SecItemAdd(query as CFDictionary, &result)
         
-        return status == errSecSuccess
+        let success = status == errSecSuccess
+        
+        if success {
+            // explanation in func migrate3_0_0appIdIfNeeded
+            // todo: remove in future
+            resources.sharedDefaults().set(true, forKey: AEDefaultsAppIdSavedWithAccessRights)
+        }
+        
+        return success
     }
     
     internal func deleteAppId()-> Bool {
         
-        // read login(s) from keychain
+        // read app id from keychain
         
         let query = [kSecClass as String:             kSecClassGenericPassword,
-                     kSecAttrService as String:        appIdService as Any,
+                     kSecAttrService as String:       appIdService as Any,
                      kSecMatchLimit as String:        kSecMatchLimitAll,
                      kSecReturnAttributes as String:  true,
                      kSecReturnData as String:        true]
-        
+
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
         if(status != errSecSuccess) { return false }
         
-        guard let accounts = attributes as? [[String: Any]] else { return false }
+        let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
+                           kSecAttrService as String:        appIdService as Any,
+                           kSecAttrAccount as String:       appIdKey]
         
-        for _ in accounts {
-            
-            let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
-                               kSecAttrService as String:        appIdService as Any,
-                               kSecAttrAccount as String:       appIdKey]
-            
-            let status = SecItemDelete(deleteQuery as CFDictionary)
-            if status != errSecSuccess {return false}
-        }
+        let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
+        if deleteStatus != errSecSuccess {return false}
         
         return true
+    }
+    
+    // todo: remove this in future
+    /*
+     in v 3.0.0 we saved appId with default access rights and it was not been accessible when device was locked with PIN-code
+     Here we remove old keychain record and make new with kSecAttrAccessibleAfterFirstUnlock access rights (if it needed)
+     */
+    private func migrate3_0_0appIdIfNeeded(_ appId: String?) {
+        
+        if appId == nil {
+            return
+        }
+        
+        let allreadyMigrated = resources.sharedDefaults().bool(forKey: AEDefaultsAppIdSavedWithAccessRights)
+        if allreadyMigrated {
+            return
+        }
+        
+        if deleteAppId() {
+            _ = save(appId: appId!)
+        }
     }
 }

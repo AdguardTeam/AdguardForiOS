@@ -75,6 +75,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_LICENSE_KEY_PARAM = "license_key"
     private let LOGIN_ACCESS_TOKEN_PARAM = "access_token"
     private let LOGIN_APP_VERSION_PARAM = "app_version"
+    private let STATUS_DEVICE_NAME_PARAM = "device_name"
     
     private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
     
@@ -152,12 +153,18 @@ class LoginService: LoginServiceProtocol {
     // todo: name/password are deprecated and must be removed in feature versions, when all 3.0.0 user will be migrated to new authorization scheme
     private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (Error?) -> Void) {
         
+        guard let appId = keychain.appId else {
+            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
+            return
+        }
+        
         let loginByToken = accessToken != nil
         
         DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
         
         var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
-                      LOGIN_APP_ID_PARAM: keychain.appId ?? ""]
+                      LOGIN_APP_ID_PARAM: appId]
         
         if !loginByToken {
             params[LOGIN_EMAIL_PARAM] = name
@@ -182,7 +189,7 @@ class LoginService: LoginServiceProtocol {
             guard let sSelf = self else { return }
             
             guard error == nil else {
-                DDLogError("(LoginService) loginInternal - got error \(error?.localizedDescription)")
+                DDLogError("(LoginService) loginInternal - got error \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
@@ -195,10 +202,10 @@ class LoginService: LoginServiceProtocol {
             
             let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
             
-            DDLogInfo("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn) premium = \(premium) expirationDate = \(expirationDate)")
+            DDLogInfo("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn ? "true" : "false") premium = \(premium) expirationDate = " + (expirationDate == nil ? "nil" : expirationDate!.description))
             
             if error != nil {
-                DDLogError("(LoginService) loginInternal - processLoginResponse error: \(error?.localizedDescription)")
+                DDLogError("(LoginService) loginInternal - processLoginResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
@@ -215,9 +222,16 @@ class LoginService: LoginServiceProtocol {
         
         DDLogInfo("(LoginService) requestStatus " + (licenseKey == nil ? "without license key" : "with license key"))
         
+        guard let appId = keychain.appId else {
+            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
+            return
+        }
+        
         var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
-                      LOGIN_APP_ID_PARAM: keychain.appId ?? "",
+                      LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
+                      STATUS_DEVICE_NAME_PARAM: UIDevice.current.name,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
                       ]
         if licenseKey != nil {
@@ -236,7 +250,7 @@ class LoginService: LoginServiceProtocol {
             guard let sSelf = self else { return }
             
             guard error == nil else {
-                DDLogError("(LoginService) checkStatus - got error \(error?.localizedDescription)")
+                DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
                 callback(error!)
                 return
             }

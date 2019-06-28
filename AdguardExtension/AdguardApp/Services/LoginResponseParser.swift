@@ -151,8 +151,6 @@ class LoginResponseParser: LoginResponseParserProtocol {
     private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, Error?) {
         
         let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String?
-//        let keyStatus = json[STATUS_RESPONSE_KEY_STATUS_PARAM] as? String?
-//        let key = json[STATUS_RESPONSE_KEY_PARAM] as? String?
         let expirationTimestampAny = json[STATUS_RESPONSE_EXPIRATION_DATE_PARAM]
         
         var expirationTimestamp: Double?

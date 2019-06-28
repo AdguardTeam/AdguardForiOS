@@ -247,7 +247,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
         self.network = network
         self.resources = resources
-        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: KeychainService())
+        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: KeychainService(resources: resources))
         
         super.init()
         

@@ -47,6 +47,7 @@ NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMess
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
+NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"

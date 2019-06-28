@@ -171,6 +171,12 @@ extern NSString*  _Nonnull AEDefaultsAppRated;
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAuthStateString;
 
+/**
+ User defaults key, wich defines that appId allready saved with right access rights.
+ */
+// todo: remove this in future
+extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
