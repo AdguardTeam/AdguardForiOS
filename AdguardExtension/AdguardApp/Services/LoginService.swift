@@ -328,7 +328,7 @@ class LoginService: LoginServiceProtocol {
         let oldAuth = keychain.loadAuth(server: LOGIN_SERVER)
         let oldLicenseKey = keychain.loadLicenseKey(server: LOGIN_SERVER)
         
-        if !premium && oldAuth != nil || oldLicenseKey != nil {
+        if !premium && (oldAuth != nil || oldLicenseKey != nil) {
             
             DDLogInfo("(LoginService) - start migration from 3.0.0")
             
