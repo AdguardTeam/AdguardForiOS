@@ -31,10 +31,10 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func removeLoading() {
+    func removeLoading(completion: (()->Void)? ) {
         DispatchQueue.main.async {
             if let vc = self.presentedViewController, vc is UIAlertController {
-                vc.dismiss(animated: false, completion: nil)
+                vc.dismiss(animated: false, completion: completion)
             }
         }
     }

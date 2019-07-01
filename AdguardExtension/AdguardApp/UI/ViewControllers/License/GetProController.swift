@@ -216,24 +216,25 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     
     private func loginSuccess(){
-        loginCompleteWithMessage(message: "login_success_message")
+        loginCompleteWithMessage(message: ACLocalizedString("login_success_message", nil))
     }
     
     private func loginFailure(error: NSError?) {
-        loginCompleteWithMessage(message: "login_error_message")
+        loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
     }
     
     private func premiumExpired() {
-        loginCompleteWithMessage(message: "login_premium_expired_message")
+        loginCompleteWithMessage(message: ACLocalizedString("login_premium_expired_message", nil))
     }
     
     private func notPremium() {
-        loginCompleteWithMessage(message: "not_premium_message")
+        loginCompleteWithMessage(message: ACLocalizedString("not_premium_message", nil))
     }
     
     private func loginCompleteWithMessage(message: String) {
-        removeLoading()
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
+        removeLoading() {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
+        }
     }
     
     private func updateTheme() {
