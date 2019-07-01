@@ -92,8 +92,9 @@
     [_safariService checkStatusWithCompletion:^(BOOL enabled) {
         
         if(!enabled) {
-            
-            [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_warning_title", @"(Action Extension - AEAUIMainController) Warning tile") message:ACLocalizedString(@"content_blocker_disabled_format", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ACSSystemUtils showSimpleAlertForController:self withTitle:ACLocalizedString(@"common_warning_title", @"(Action Extension - AEAUIMainController) Warning tile") message:ACLocalizedString(@"content_blocker_disabled_format", @"(Action Extension - AEAUIMainController) error occurs when content blocker is disabled.")];
+            });
         }
     }];
     
