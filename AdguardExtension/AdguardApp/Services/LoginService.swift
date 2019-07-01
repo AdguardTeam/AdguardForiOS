@@ -65,6 +65,7 @@ class LoginService: LoginServiceProtocol {
     
     
     // login request
+    // todo: remove auth srequest in future builds
     private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
     private let STATUS_URL = "https://mobile-api.adguard.com/api/1.0/status.html"
     private let AUTH_TOKEN_URL = "https://mobile-api.adguard.com/api/2.0/auth_token"

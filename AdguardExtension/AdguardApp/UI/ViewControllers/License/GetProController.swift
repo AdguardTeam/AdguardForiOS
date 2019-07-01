@@ -89,6 +89,14 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         }
     }
     
+    func authSucceeded() {
+        if self.presentedViewController != nil {
+            self.presentedViewController?.dismiss(animated: true) { [weak self] in
+                self?.showLoading()
+            }
+        }
+    }
+    
     // MARK: - actions
     
     @IBAction func accountAction(_ sender: Any) {
@@ -173,6 +181,9 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
             case PurchaseService.kPSNotificationLoginNotPremiumAccount:
                 self?.notPremium()
                 
+            case PurchaseService.kPSNotificationOauthSucceeded:
+                self?.authSucceeded()
+                
             default:
                 break
             }
@@ -205,36 +216,24 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     
     private func loginSuccess(){
-        dismissSafariController {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil))
-        }
+        loginCompleteWithMessage(message: "login_success_message")
     }
     
     private func loginFailure(error: NSError?) {
-        dismissSafariController {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil))
-        }
+        loginCompleteWithMessage(message: "login_error_message")
     }
     
     private func premiumExpired() {
-        dismissSafariController {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil))
-        }
+        loginCompleteWithMessage(message: "login_premium_expired_message")
     }
     
     private func notPremium() {
-        dismissSafariController {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil))
-        }
+        loginCompleteWithMessage(message: "not_premium_message")
     }
     
-    private func dismissSafariController(completion:@escaping ()->Void) {
-        if self.presentedViewController != nil {
-            self.presentedViewController?.dismiss(animated: true, completion: completion)
-        }
-        else {
-            completion()
-        }
+    private func loginCompleteWithMessage(message: String) {
+        removeLoading()
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
     }
     
     private func updateTheme() {

@@ -122,6 +122,8 @@ extension PurchaseService {
     
     static let kPSNotificationPremiumStatusChanged = "kPSNotificationPremiumStatusChanged"
     
+    static let kPSNotificationOauthSucceeded = "kPSNotificationOauthSucceeded"
+    
     /// errors
     static let AEPurchaseErrorDomain = "AEPurchaseErrorDomain"
     
@@ -285,6 +287,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             postNotification(PurchaseService.kPSNotificationLoginFailure, nil)
             return
         }
+        
+        postNotification(PurchaseService.kPSNotificationOauthSucceeded, nil)
         
         loginService.login(accessToken: token!) { [weak self]  (error) in
             guard let sSelf = self else { return }
