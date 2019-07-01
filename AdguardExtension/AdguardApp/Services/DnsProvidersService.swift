@@ -89,6 +89,7 @@ class DnsServerInfo : ACObject {
 @objcMembers class DnsProviderInfo : ACObject {
     var name: String
     var logo: String?
+    var logoDark: String?
     var summary: String?
     var protocols: [DnsProtocol]?
     var features: [DnsProviderFeature]?
@@ -210,7 +211,10 @@ protocol DnsProvidersServiceProtocol {
                 let servers = self.serversFromArray(serversJson)
                 
                 let provider = DnsProviderInfo(name: name)
+                let logoDark = logo + "_white"
+                
                 provider.logo = logo
+                provider.logoDark = logoDark
                 provider.summary = summary
                 provider.protocols = protocols
                 provider.features = features
