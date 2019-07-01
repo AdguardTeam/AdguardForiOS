@@ -90,18 +90,21 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
             cell = headerCell
             
             let logoImage = UIImage(named: provider?.logo ?? "")
+            let logoImageDark = UIImage(named: provider?.logoDark ?? "")
             
-            if logoImage == nil {
+            if logoImage == nil, logoImageDark == nil {
                 headerCell.logoHeightConstraint.constant = 0
             }
             else {
                 headerCell.logoHeightConstraint.constant = 31
-                headerCell.logo.image = logoImage
+                headerCell.logo.lightThemeImage = logoImage
+                headerCell.logo.darkThemeImage = logoImageDark
             }
             
             headerCell.summary.text = ACLocalizedString(provider?.summary, nil)
             
             theme.setupLabel(headerCell.summary)
+            theme.setupImage(headerCell.logo)
         
         case (buttonsSection, serverRow) :
             let serverCell = tableView.dequeueReusableCell(withIdentifier: "serverCell") as! DnsProviderServerCell
