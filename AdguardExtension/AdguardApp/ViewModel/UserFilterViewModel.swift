@@ -424,7 +424,8 @@ class UserFilterViewModel: NSObject {
                     
                     if error != nil {
                         DispatchQueue.main.async {
-                            errorHandler(error?.localizedDescription ?? ACLocalizedString("safari_filters_loading_error", nil))
+                            DDLogError("(UserFilterViewModel) setNewRules failed: \(error!.localizedDescription)")
+                            errorHandler(ACLocalizedString("safari_filters_loading_error", nil))
                             
                             // rolback changes
                             let _ = strongSelf.contentBlockerService.replaceUserFilter(objectsCopy)

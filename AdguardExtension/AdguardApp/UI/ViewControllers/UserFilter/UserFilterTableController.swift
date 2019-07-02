@@ -238,7 +238,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         model?.addRule(ruleText: rule, errorHandler: { [weak self] (error) in
                         guard let strongSelf = self else { return }
                         ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: error.description)
-                        strongSelf.tableView.reloadData()
             },
                       completionHandler: { [weak self] in
                         DispatchQueue.main.async {
@@ -299,7 +298,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         model?.changeRule(rule: rule, newText: newText, errorHandler: { (error) in
             
         }, completionHandler: { [weak self] in
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         })
     }
     
