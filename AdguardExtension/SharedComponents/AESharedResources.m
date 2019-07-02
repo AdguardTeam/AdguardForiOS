@@ -46,6 +46,9 @@ NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableS
 NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
+NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
+NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
+
 NSString* AEDefaultsGeneralContentBlockerRulesCount = @"AEDefaultsGeneralContentBlockerRulesCount";
 NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContentBlockerRulesCount";
 NSString* AEDefaultsSocialContentBlockerRulesCount = @"AEDefaultsSocialContentBlockerRulesCount";

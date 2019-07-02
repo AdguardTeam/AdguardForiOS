@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FYq-iX-rgs">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FYq-iX-rgs">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +22,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="yxk-NN-DTg">
-                            <rect key="frame" x="0.0" y="760" width="414" height="1"/>
+                            <rect key="frame" x="0.0" y="816" width="414" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -32,10 +30,10 @@
                             <tableViewSection id="Pwl-BB-Gr9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BSv-GN-pXf">
-                                        <rect key="frame" x="0.0" y="10" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="38" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BSv-GN-pXf" id="qhi-Q0-6WS">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-update over Wi-Fi only" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKW-Q2-yFQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -79,10 +77,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SU4-Xv-rWT">
-                                        <rect key="frame" x="0.0" y="160" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="188" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SU4-Xv-rWT" id="fZu-X2-un3">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use simplified filters" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-ja-aYP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -127,10 +125,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="og9-E2-1MY">
-                                        <rect key="frame" x="0.0" y="310" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="338" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="og9-E2-1MY" id="e0Q-ey-bQ0">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invert whitelist" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvM-Ob-XQB" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -174,14 +172,14 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8B5-tj-nea">
-                                        <rect key="frame" x="0.0" y="460" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="488" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8B5-tj-nea" id="SqD-sD-9fH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark mode" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NX6-c7-Wn7" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="390" height="18"/>
+                                                    <rect key="frame" x="24" y="15" width="303" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -199,51 +197,20 @@
                                                         <action selector="toggleDarkMode:" destination="FYq-iX-rgs" eventType="valueChanged" id="UoC-4R-2uJ"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only for premium users" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-l3-3Fu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="390" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch to dark theme" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-l3-3Fu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="38" width="303" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWy-xy-tGQ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="313" y="10" width="83" height="28"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="28" id="BeM-xF-mdP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Get Premium">
-                                                        <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="0.5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="14"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <segue destination="ghI-hG-n5C" kind="show" id="6lq-A3-8Bh"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qWy-xy-tGQ" firstAttribute="centerY" secondItem="G2Z-6Q-U6M" secondAttribute="centerY" id="3Od-U7-9Xh"/>
                                                 <constraint firstItem="G2Z-6Q-U6M" firstAttribute="centerY" secondItem="NX6-c7-Wn7" secondAttribute="centerY" id="5gr-4C-42C"/>
                                                 <constraint firstItem="NX6-c7-Wn7" firstAttribute="top" secondItem="SqD-sD-9fH" secondAttribute="top" constant="15" id="6sD-PJ-ejr"/>
                                                 <constraint firstAttribute="trailing" secondItem="G2Z-6Q-U6M" secondAttribute="trailing" constant="18" id="C3s-JB-8qt"/>
                                                 <constraint firstItem="aCH-l3-3Fu" firstAttribute="trailing" secondItem="NX6-c7-Wn7" secondAttribute="trailing" id="Mev-UC-jp2"/>
-                                                <constraint firstItem="qWy-xy-tGQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SqD-sD-9fH" secondAttribute="leading" constant="25" id="P3q-dh-Rt1"/>
                                                 <constraint firstItem="aCH-l3-3Fu" firstAttribute="leading" secondItem="NX6-c7-Wn7" secondAttribute="leading" id="PbT-CL-riN"/>
-                                                <constraint firstAttribute="trailing" secondItem="NX6-c7-Wn7" secondAttribute="trailing" id="V9H-4l-6oM"/>
-                                                <constraint firstItem="qWy-xy-tGQ" firstAttribute="trailing" secondItem="G2Z-6Q-U6M" secondAttribute="trailing" id="dxl-7y-RUy"/>
+                                                <constraint firstItem="G2Z-6Q-U6M" firstAttribute="leading" secondItem="NX6-c7-Wn7" secondAttribute="trailing" constant="20" id="SyD-nv-gSt"/>
                                                 <constraint firstItem="NX6-c7-Wn7" firstAttribute="leading" secondItem="SqD-sD-9fH" secondAttribute="leading" constant="24" id="h2j-Cb-F8i"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aCH-l3-3Fu" secondAttribute="bottom" constant="20" id="oxX-A7-STM"/>
                                                 <constraint firstItem="aCH-l3-3Fu" firstAttribute="top" secondItem="NX6-c7-Wn7" secondAttribute="bottom" constant="5" id="rOJ-V2-beC"/>
@@ -253,10 +220,10 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yWW-SW-LHp">
-                                        <rect key="frame" x="0.0" y="610" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="638" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yWW-SW-LHp" id="b2k-m4-IlT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restart when network changes" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNY-Id-vsG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -302,8 +269,6 @@
                     <navigationItem key="navigationItem" title="Advanced Settings" id="79B-on-yfa"/>
                     <connections>
                         <outlet property="darkModeSwitch" destination="G2Z-6Q-U6M" id="WKo-uV-Agz"/>
-                        <outlet property="darkModeTrailingConstraint" destination="V9H-4l-6oM" id="rkD-n1-YgM"/>
-                        <outlet property="getProButton" destination="qWy-xy-tGQ" id="zS8-kt-LO4"/>
                         <outlet property="invertedSwitch" destination="pGH-d3-vDl" id="QXy-hZ-Fh1"/>
                         <outlet property="restartTunnelSwitch" destination="luV-dd-cDv" id="qL8-Q4-enr"/>
                         <outlet property="simplifiedSwitch" destination="kFS-uJ-3No" id="Dhe-gk-xwG"/>
@@ -334,7 +299,4 @@
             <point key="canvasLocation" x="236" y="-325"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="uhd-MD-ao9"/>
-    </inferredMetricsTieBreakers>
 </document>

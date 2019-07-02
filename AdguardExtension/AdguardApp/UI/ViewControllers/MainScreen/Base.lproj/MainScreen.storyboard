@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HLF-WM-Asa">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HLF-WM-Asa">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="tg5-C5-U6Z">
             <objects>
-                <navigationController storyboardIdentifier="mainNavigationController" navigationBarHidden="YES" id="HLF-WM-Asa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavigationController" navigationBarHidden="YES" id="HLF-WM-Asa" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="d9z-rs-be4">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,13 +36,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Rnx-mv-CPR">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bS-Py-Z4b" userLabel="Header" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adguard-header" highlightedImage="adguard-header-disabled" translatesAutoresizingMaskIntoConstraints="NO" id="xVP-0T-sAu" customClass="ThemeableImageView" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="89" y="54" width="142" height="32"/>
+                                                <rect key="frame" x="89" y="83" width="142" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="142" id="4Up-Ij-7z7"/>
                                                     <constraint firstAttribute="height" constant="32" id="XDT-84-7r7"/>
@@ -88,7 +86,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="100" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="miQ-hh-0UY" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="40" y="94" width="240" height="11"/>
+                                        <rect key="frame" x="40" y="123" width="240" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="intrinsicHeight">
@@ -97,7 +95,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-Z9-kwj" userLabel="Enabled" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="113" width="320" height="89"/>
+                                        <rect key="frame" x="0.0" y="152" width="320" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="1" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="277.5" placeholderIntrinsicHeight="30" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atw-MM-BN4">
                                                 <rect key="frame" x="10" y="0.0" width="300" height="20"/>
@@ -162,7 +160,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalCompressionResistancePriority="100" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="boV-WT-wZm" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="210" width="320" height="11"/>
+                                        <rect key="frame" x="0.0" y="240" width="320" height="20.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="intrinsicHeight">
@@ -171,10 +169,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y48-RT-v7n" userLabel="Content" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="229" width="320" height="184.5"/>
+                                        <rect key="frame" x="0.0" y="268.5" width="320" height="247"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sk8-rZ-X4e">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="184.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalCompressionResistancePriority="249" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="60" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eow-nj-Hky" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="60" y="-8" width="200" height="60"/>
@@ -191,15 +189,15 @@ with Safari</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="260" placeholderIntrinsicHeight="115" translatesAutoresizingMaskIntoConstraints="NO" id="lCV-vq-wvF" userLabel="VideoView">
-                                                        <rect key="frame" x="61" y="67" width="198" height="115"/>
+                                                        <rect key="frame" x="61" y="67" width="198" height="170"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" fixedFrame="YES" placeholderIntrinsicWidth="220" placeholderIntrinsicHeight="115" image="play-button" translatesAutoresizingMaskIntoConstraints="NO" id="UHG-f3-JSz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="198" height="115"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="198" height="170"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrM-Ag-oJU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="198" height="115"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="198" height="170"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <connections>
                                                                     <segue destination="Hh0-dV-8Se" kind="show" id="hEd-SQ-Zqv"/>
@@ -220,11 +218,11 @@ with Safari</string>
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SkS-Kt-3Ib">
-                                                <rect key="frame" x="0.0" y="-44" width="320" height="184"/>
+                                                <rect key="frame" x="0.0" y="-44" width="320" height="246.5"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="adguard-man" translatesAutoresizingMaskIntoConstraints="NO" id="TBC-HI-cYs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="245.5"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
                                                 </subviews>
@@ -325,7 +323,7 @@ with Safari</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalCompressionResistancePriority="100" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="JYq-UQ-e2K" userLabel="Share" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="421.5" width="320" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="523.5" width="320" height="44.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUY-sd-0Xf">
                                                 <rect key="frame" x="0.0" y="-18" width="320" height="70"/>
@@ -398,13 +396,13 @@ with Safari</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="73t-jO-Trp" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="455" width="320" height="93"/>
+                                    <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="73t-jO-Trp" customClass="StackElementView" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="572" width="320" height="93"/>
                                         <subviews>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODO-S4-du5">
                                                 <rect key="frame" x="77" y="0.0" width="255" height="73"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger with PREMIUM!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gda-ty-BWn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger with PREMIUM!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gda-ty-BWn" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="6" width="189" height="42"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="DUa-Ag-4Da"/>
@@ -489,7 +487,7 @@ with Safari</string>
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8E0-q1-n37">
-                                <rect key="frame" x="40" y="179" width="23" height="70"/>
+                                <rect key="frame" x="40" y="198.5" width="23" height="70"/>
                             </imageView>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man" translatesAutoresizingMaskIntoConstraints="NO" id="zqp-eO-Zja">
                                 <rect key="frame" x="-65" y="423" width="200" height="200"/>
@@ -526,6 +524,7 @@ with Safari</string>
                         <outlet property="getProView" destination="73t-jO-Trp" id="e4H-fI-ahE"/>
                         <outlet property="headerImage" destination="xVP-0T-sAu" id="NV5-b4-GXX"/>
                         <outlet property="manImage" destination="zqp-eO-Zja" id="4AE-A2-fmh"/>
+                        <outlet property="premiumLabel" destination="gda-ty-BWn" id="Vtp-Ed-mn0"/>
                         <outlet property="rateView" destination="ou4-7N-dEE" id="Bgp-ZP-5nk"/>
                         <outlet property="roundArrow" destination="8E0-q1-n37" id="QuZ-tl-Pot"/>
                         <outlet property="shareView" destination="TUY-sd-0Xf" id="fHF-YU-lYe"/>

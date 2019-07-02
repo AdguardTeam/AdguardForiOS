@@ -71,6 +71,7 @@ typedef enum : NSUInteger {
     AESharedResources *_resources;
     AEService * _aeService;
     ContentBlockerService* _contentBlockerService;
+    PurchaseService* _purchaseService;
     
     BOOL _activateWithOpenUrl;
 }
@@ -96,6 +97,7 @@ typedef enum : NSUInteger {
         _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
 
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
@@ -123,6 +125,10 @@ typedef enum : NSUInteger {
         pageControl.backgroundColor = [UIColor blackColor];
         pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+        
+        if (application.applicationState != UIApplicationStateBackground) {
+            [_purchaseService checkPremiumExpired];
+        }
         
         if ([_aeService firstRunInProgress]) {
             
@@ -343,6 +349,8 @@ typedef enum : NSUInteger {
                     [self antibanerUpdateFinished:AEUpdateFailed];
                 }
             }];
+            
+            [_purchaseService checkPremiumExpired];
         }];
     }
 }
@@ -381,9 +389,10 @@ typedef enum : NSUInteger {
                 @autoreleasepool {
                     
                     NSString *command = url.host;
-                    NSString *path = [url.path substringFromIndex:1];
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+                        
+                        NSString *path = [url.path substringFromIndex:1];
                         
                         UINavigationController *nav = [self getNavigationController];
                         if (nav.viewControllers.count) {
@@ -406,8 +415,19 @@ typedef enum : NSUInteger {
                             }
                         }
                     }
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
+                        
+                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
+                        NSString* fragment = url.fragment;
+                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
+                        
+                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
+                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
+                        
+                        [_purchaseService loginWithAccessToken:accessToken state: state];
+                    }
                 }
-                //
             });
         }];
         

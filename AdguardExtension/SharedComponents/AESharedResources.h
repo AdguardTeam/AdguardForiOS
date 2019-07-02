@@ -33,6 +33,10 @@
 
 #define AE_URLSCHEME                        @ADGUARD_URL_SCHEME
 #define AE_URLSCHEME_COMMAND_ADD            @"add"
+#define AE_URLSCHEME_COMMAND_AUTH           @"auth"
+
+#define AE_URLSCHEME_AUTH_PARAM_TOKEN       @"access_token"
+#define AE_URLSCHEME_AUTH_PARAM_STATE       @"state"
 
 /**
  User Defaults key that defines enable/disable filtration.
@@ -162,6 +166,16 @@ extern NSString*  _Nonnull AEDefaultsDarkTheme;
 /**
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
+
+/**
+ User defaults key, wich defines dark theme is on */
+extern NSString*  _Nonnull AEDefaultsAuthStateString;
+
+/**
+ User defaults key, wich defines that appId allready saved with right access rights.
+ */
+// todo: remove this in future
+extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
  User defaults keys, wich contains number of rules for each content blocker*/

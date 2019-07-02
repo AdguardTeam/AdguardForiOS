@@ -14,126 +14,154 @@ class LoginServiceTest: XCTestCase {
     override func tearDown() {
         UserDefaults.standard.removeSuite(named: "test_defaults")
     }
-
-    func testLoginActive() {
+    
+    func test300_301migration() {
         
-        let expectation = XCTestExpectation(description: "Login request")
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
         
-        network.returnString = """
-        {
-            "auth_status": "SUCCESS",
-            "premium_status": "ACTIVE",
-            "expiration_date": 99999999999999999999,
-            "license_info": {
-                "licenses": [
-                    {
-                        "license_key": "ABCDE12345",
-                        "license_status": "VALID",
-                        "license_type": "MOBILE",
-                        "expiration_date": 99999999999999999999,
-                        "license_computers_count": 0,
-                        "license_max_computers_count": 3,
-                        "subscription": {
-                            "status": "ACTIVE",
-                            "next_bill_date": 99999999999999999999
-                        }
-                    }
-                ],
-
-                "license": "ABCDE12345"
-            }
-        }
-"""
+        // user was logged in by name/password in v3.0.0
+        keychain.auth = ("name", "password")
         
-        loginService.login(name: "name", password: "password") { (error) in
+        parser.statusResults = [ (false, nil, nil), // app_id was not bound yet
+                                 (true, Date(timeIntervalSinceNow: 1000), nil)
+            ]
         
+        parser.loginResult = (true, true, Date(timeIntervalSinceNow: 1000), "LICENSE_KEY", nil)
+        
+        let expectation = XCTestExpectation(description: "status expectation")
+        
+        loginService.checkStatus { (error) in
             XCTAssertNil(error)
             XCTAssert(self.loginService.loggedIn)
             XCTAssert(self.loginService.hasPremiumLicense)
             XCTAssert(self.loginService.active)
-            
+            XCTAssertNil(self.keychain.auth)
             expectation.fulfill()
         }
         
         wait(for: [expectation], timeout: 5.0)
     }
     
-    func testLoginNoPremium() {
+    func test300_301migration2() {
         
-        let expectation = XCTestExpectation(description: "Login request")
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
         
-        network.returnString = """
-        {
-            "auth_status": "SUCCESS",
-            "premium_status": "FREE",
-            "license_info": { }
-        }
-        """
+        // user was logged in by name/password in v3.0.0
+        keychain.licenseKey = "LICENSE_KEY"
         
-        loginService.login(name: "name", password: "password") { (error) in
-            
-            XCTAssertNil(error)
-            XCTAssert(self.loginService.loggedIn)
-            XCTAssertFalse(self.loginService.hasPremiumLicense)
-            XCTAssertFalse(self.loginService.active)
-            
-            expectation.fulfill()
-        }
+        parser.statusResults = [ (false, nil, nil), // app_id was not bound yet
+            (true, Date(timeIntervalSinceNow: 1000), nil)
+        ]
         
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
-    func testLoginBadCredentials() {
+        parser.loginResult = (true, true, Date(timeIntervalSinceNow: 1000), "LICENSE_KEY", nil)
         
-        let expectation = XCTestExpectation(description: "Login request")
+        let expectation = XCTestExpectation(description: "status expectation")
         
-        network.returnString = """
-        {
-        "auth_status": "BAD_CREDENTIALS"
-        }
-        """
-        
-        loginService.login(name: "name", password: "password") { (error) in
-            
-            XCTAssertNotNil(error)
-            XCTAssertFalse(self.loginService.loggedIn)
-            XCTAssertFalse(self.loginService.hasPremiumLicense)
-            XCTAssertFalse(self.loginService.active)
-            XCTAssertEqual((error! as NSError).code, LoginService.loginBadCredentials)
-            
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
-    func testExpired() {
-        let expectation = XCTestExpectation(description: "Login request")
-        
-        network.returnString = """
-        {
-            "auth_status": "SUCCESS",
-            "premium_status": "ACTIVE",
-            "expiration_date": 100000,
-            "license_info": {
-                "licenses": [
-                    {
-                    "license_status": "VALID",
-                    "expiration_date": 100000,
-                    }
-                ],
-        
-                "license": "ABCDE12345"
-            }
-        }
-        """
-        
-        loginService.login(name: "name", password: "password") { (error) in
-            
+        loginService.checkStatus { (error) in
             XCTAssertNil(error)
             XCTAssert(self.loginService.loggedIn)
             XCTAssert(self.loginService.hasPremiumLicense)
-            XCTAssertFalse(self.loginService.active)
+            XCTAssert(self.loginService.active)
+            XCTAssertNil(self.keychain.auth)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    // test error on first status request
+    // in this case we must not change login status
+    func test300_301migrationFailed() {
+        
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
+        loginService.hasPremiumLicense = true
+        loginService.expirationDate = Date(timeIntervalSinceNow: 1000);
+        
+        // user was logged in by name/password in v3.0.0
+        keychain.licenseKey = "LICENSE_KEY"
+        loginService.loggedIn = true
+        
+        parser.statusResults = [ (false, nil, NSError(domain: "error", code: -100, userInfo: nil)) ] // error here
+        
+        parser.loginResult = (true, true, Date(timeIntervalSinceNow: 1000), "LICENSE_KEY", nil)
+        
+        let expectation = XCTestExpectation(description: "status expectation")
+        
+        loginService.checkStatus { (error) in
+            XCTAssertNotNil(error)
+            XCTAssert(self.loginService.loggedIn)
+            XCTAssert(self.loginService.hasPremiumLicense)
+            XCTAssert(self.loginService.active)
+            XCTAssertNil(self.keychain.auth)
+            XCTAssertNotNil(self.keychain.licenseKey)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    // test error on login after succedded status request
+    // in this case we must not change login status
+    func test300_301migrationFailed2() {
+        
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
+        loginService.hasPremiumLicense = true
+        loginService.expirationDate = Date(timeIntervalSinceNow: 1000);
+        
+        // user was logged in by name/password in v3.0.0
+        keychain.licenseKey = "LICENSE_KEY"
+        loginService.loggedIn = true
+        
+        parser.statusResults = [ (false, nil, nil) ]
+        
+        parser.loginResult = (false, false, nil, nil, NSError(domain: "error", code: -100, userInfo: nil)) // error here
+        
+        let expectation = XCTestExpectation(description: "status expectation")
+        
+        loginService.checkStatus { (error) in
+            XCTAssertNotNil(error)
+            XCTAssert(self.loginService.loggedIn)
+            XCTAssert(self.loginService.hasPremiumLicense)
+            XCTAssert(self.loginService.active)
+            XCTAssertNil(self.keychain.auth)
+            XCTAssertNotNil(self.keychain.licenseKey)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    // test error on second status request
+    // in this case we must not change login status
+    func test300_301migrationFailed3() {
+        
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
+        loginService.hasPremiumLicense = true
+        loginService.expirationDate = Date(timeIntervalSinceNow: 1000);
+        
+        // user was logged in by name/password in v3.0.0
+        keychain.licenseKey = "LICENSE_KEY"
+        loginService.loggedIn = true
+        
+        parser.statusResults = [ (false, nil, nil),
+                                 (false, nil,  NSError(domain: "error", code: -100, userInfo: nil))   ] // error here
+        
+        parser.loginResult = (true, true,  Date(timeIntervalSinceNow: 1000), "LICENSE_KEY", nil) // error here
+        
+        let expectation = XCTestExpectation(description: "status expectation")
+        
+        loginService.checkStatus { (error) in
+            XCTAssertNotNil(error)
+            XCTAssert(self.loginService.loggedIn)
+            XCTAssert(self.loginService.hasPremiumLicense)
+            XCTAssert(self.loginService.active)
+            XCTAssertNil(self.keychain.auth)
+            XCTAssertNotNil(self.keychain.licenseKey)
             
             expectation.fulfill()
         }
@@ -142,71 +170,34 @@ class LoginServiceTest: XCTestCase {
     }
     
     func testWillExpired() {
+        
+        let parser = ParserMock()
+        loginService.loginResponseParser = parser
+        loginService.hasPremiumLicense = true
+        loginService.loggedIn = true
+        loginService.expirationDate = Date(timeIntervalSinceNow: 1000);
+        
+        keychain.auth = nil
+        keychain.licenseKey = nil
+        
         let expectation = XCTestExpectation(description: "Login request")
         
-        let expirationDate = Date().addingTimeInterval(2.0).timeIntervalSince1970 * 1000
-        network.returnString = "{\"auth_status\": \"SUCCESS\",\"premium_status\": \"ACTIVE\",\"expiration_date\": \(expirationDate)}"
-        
-        loginService.login(name: "name", password: "password") { (error) in
-            
-            XCTAssertNil(error)
-            XCTAssert(self.loginService.loggedIn)
-            XCTAssert(self.loginService.hasPremiumLicense)
-            XCTAssert(self.loginService.active)
-            
-            self.loginService.activeChanged = {
-                XCTAssert(self.loginService.loggedIn)
-                XCTAssert(self.loginService.hasPremiumLicense)
-                XCTAssertFalse(self.loginService.active)
-                
-                expectation.fulfill()
-            }
-        }
-        
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
-    func testActiveteKey() {
-        let expectation = XCTestExpectation(description: "Login request")
-        
-        network.returnString = """
-        {
-        "auth_status": "SUCCESS",
-        "premium_status": "ACTIVE",
-        "expiration_date": 99999999999999999999,
-        "license_info": {
-        "licenses": [
-        {
-        "license_key": "ABCDE12345",
-        "license_status": "VALID",
-        "license_type": "MOBILE",
-        "expiration_date": 99999999999999999999,
-        "license_computers_count": 0,
-        "license_max_computers_count": 3,
-        "subscription": {
-        "status": "ACTIVE",
-        "next_bill_date": 99999999999999999999
-        }
-        }
-        ],
-        
-        "license": "ABCDE12345"
-        }
-        }
-        """
-        
-        loginService.login(name:nil, password: "licenseKey") { (error) in
-            
-            XCTAssertNil(error)
-            XCTAssert(self.loginService.loggedIn)
-            XCTAssert(self.loginService.hasPremiumLicense)
-            XCTAssert(self.loginService.active)
+        self.loginService.activeChanged = {
+            XCTAssertFalse(self.loginService.loggedIn)
+            XCTAssertFalse(self.loginService.hasPremiumLicense)
+            XCTAssertFalse(self.loginService.active)
             
             expectation.fulfill()
         }
         
+        parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil)]
+        
+        loginService.checkStatus { (error) in
+        }
+        
         wait(for: [expectation], timeout: 5.0)
     }
+
 }
 
 class NetworkMock: ACNNetworkingProtocol {
@@ -233,8 +224,6 @@ class NetworkMock: ACNNetworkingProtocol {
             completionHandler(self.returnString.data(using: .utf8), nil, nil)
         }
     }
-    
-    
 }
 
 class KeychainMock: KeychainServiceProtocol {
@@ -262,7 +251,7 @@ class KeychainMock: KeychainServiceProtocol {
         return true
     }
     
-    func loadLiceseKey(server: String) -> String? {
+    func loadLicenseKey(server: String) -> String? {
         return licenseKey
     }
     
@@ -271,4 +260,23 @@ class KeychainMock: KeychainServiceProtocol {
         return true
     }
     
+}
+
+class ParserMock: LoginResponseParser {
+    
+    var statusResults: [(premium: Bool, expirationDate: Date?, Error?)] = [(true, nil, nil)]
+    var loginResult: (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, Error?) = (true, true, nil, nil, nil)
+    var currentStatusResultIndex = 0
+    
+    override func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, Error?) {
+        
+        let result = statusResults[currentStatusResultIndex]
+        currentStatusResultIndex += 1;
+        
+        return result;
+    }
+    
+    override func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, Error?) {
+        return loginResult
+    }
 }

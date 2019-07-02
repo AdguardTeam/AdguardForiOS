@@ -18,20 +18,25 @@
 
 import Foundation
 
+protocol LoginControllerDelegate {
+    
+    func loginAction(name: String)
+}
+
 class LoginController: BottomAlertController {
     
     // MARK: - properties
-    let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    var delegate: LoginControllerDelegate?
+    
+    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationObserver: Any?
     
     // MARK: - IB outlets
     @IBOutlet weak var nameEdit: UITextField!
-    @IBOutlet weak var passwordEdit: UITextField!
     @IBOutlet weak var loginButton: RoundRectButton!
     @IBOutlet weak var nameLine: UIView!
-    @IBOutlet weak var passwordLine: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -55,7 +60,6 @@ class LoginController: BottomAlertController {
         }
         
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
-        passwordEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
         
         updateTheme()
@@ -68,12 +72,7 @@ class LoginController: BottomAlertController {
     
     // MARK: - Actions
     @IBAction func loginAction(_ sender: Any) {
-        
-        if  let name = nameEdit.text,
-            let password = passwordEdit.text {
-            
-            purchaseService.login(withName: name, password: password)
-        }
+        login()
     }
     
     @IBAction func editingChanged(_ sender: Any) {
@@ -86,6 +85,10 @@ class LoginController: BottomAlertController {
     
     
     // MARK: - text field delegate methods
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        login()
+        return true
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         updateLines()
@@ -99,7 +102,6 @@ class LoginController: BottomAlertController {
     
     func updateLines() {
         nameLine.backgroundColor = nameEdit.isEditing ? enabledColor : disabledColor
-        passwordLine.backgroundColor = passwordEdit.isEditing ? enabledColor : disabledColor
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
@@ -134,7 +136,7 @@ class LoginController: BottomAlertController {
     
     private func loginFailure(error: NSError?) {
         if error != nil && error!.domain == LoginService.loginErrorDomain && error!.code == LoginService.loginBadCredentials {
-            showRetryAlert(message: ACLocalizedString("wrong_login_credintals_message", nil), restoreLogin: true)
+            webAuth()
         }
         else {
             showRetryAlert(message: ACLocalizedString("login_error_message", nil), restoreLogin: true)
@@ -162,7 +164,7 @@ class LoginController: BottomAlertController {
     }
     
     private func updateLoginButton() {
-        loginButton.isEnabled = passwordEdit.text?.count ?? 0 > 0
+        loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
     }
     
     private func updateTheme() {
@@ -170,10 +172,32 @@ class LoginController: BottomAlertController {
         contentView.backgroundColor = theme.bottomBarBackgroundColor
         
         theme.setupTextField(nameEdit)
-        theme.setupTextField(passwordEdit)
         
         separators.forEach { $0.backgroundColor = theme.separatorColor }
         
         theme.setupLabels(themableLabels)
+    }
+    
+    private func isLicenseKey(text: String)->Bool {
+        return !text.isEmpty && text.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+    
+    private func webAuth(){
+        if let name = nameEdit.text {
+            dismiss(animated: true) { [weak self] in
+                self?.delegate?.loginAction(name: name)
+            }
+        }
+    }
+    
+    private func login(){
+        if let name = nameEdit.text {
+            if isLicenseKey(text: name) {
+                purchaseService.login(withLicenseKey: name)
+            }
+            else {
+                webAuth()
+            }
+        }
     }
 }

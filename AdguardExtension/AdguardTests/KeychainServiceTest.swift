@@ -76,7 +76,7 @@ class KeychainServiceTest: XCTestCase {
         
         XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
      
-        let key = keychain.loadLiceseKey(server: "test.server")
+        let key = keychain.loadLicenseKey(server: "test.server")
         
         XCTAssertNotNil(key)
         XCTAssertEqual(key, "test key")
@@ -89,8 +89,19 @@ class KeychainServiceTest: XCTestCase {
         
         XCTAssert(keychain.deleteLicenseKey(server: "test.server"))
         
-        let key = keychain.loadLiceseKey(server: "test.server")
+        let key = keychain.loadLicenseKey(server: "test.server")
         
         XCTAssertNil(key)
+    }
+    
+    func testStoreLicenseReadLogin() {
+        let keychain = KeychainService()
+        
+        XCTAssert(keychain.deleteAuth(server: "test.server"))
+        XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
+        
+        let login = keychain.loadAuth(server: "test.server")
+        
+        XCTAssertNil(login)
     }
 }

@@ -31,7 +31,6 @@
  */
 + (NSDate *)dateWithSQliteString:(NSString *)sqliteTimeStamp;
 
-
 /**
     Convert NSDate object to string that conforms to ISO 8601 specification, example - 2014-04-15T20:01:25.873+04:00.
  */

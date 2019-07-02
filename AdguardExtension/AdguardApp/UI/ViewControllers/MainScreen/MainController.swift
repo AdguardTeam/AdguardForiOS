@@ -62,6 +62,8 @@ class MainController: UIViewController {
     @IBOutlet weak var manImage: UIImageView!
     @IBOutlet weak var vikingImage: UIImageView!
     
+    @IBOutlet weak var premiumLabel: ThemableLabel!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     // MARK: - properties
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -233,9 +235,12 @@ class MainController: UIViewController {
                 sSelf.getProHeight.constant = 0
             }
             else {
-                sSelf.getProView.isHidden = false
-                sSelf.manImage.isHidden = false
-                sSelf.getProHeight.constant = 93
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                    sSelf.getProView.isHidden = false
+                    sSelf.manImage.isHidden = false
+                }, completion: { (success) in
+                    sSelf.getProHeight.constant = 93
+                })
             }
         }
     }
@@ -262,5 +267,8 @@ class MainController: UIViewController {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         vikingImage.image = UIImage(named: configuration.darkTheme ? "man" : "adguard-man")
+        
+        getProView.backgroundColor = theme.invertedBackgroundColor
+        theme.setupLabelInverted(premiumLabel)
     }
 }

@@ -74,6 +74,25 @@ static NSMutableCharacterSet *urlQueryParameterAllowedCharset;
     
 }
 
++ (NSDictionary<NSString*, NSString*> *)parametersFromQueryString:(NSString *)query {
+    NSMutableDictionary<NSString*, NSString*> *params = [NSMutableDictionary new];
+    
+    NSArray<NSString*> *pairs = [query componentsSeparatedByString:@"&"];
+    for (NSString* pair in pairs) {
+        
+        NSArray<NSString*>* values = [pair componentsSeparatedByString:@"="];
+        if (values.count == 2) {
+            params[values[0]] = values[1];
+        }
+        
+        if (values.count == 1) {
+            params[values[0]] = @"";
+        }
+    }
+    
+    return params.copy;
+}
+
 /// Gets host name
 + (NSString *)host:(NSString *)url {
     if ([NSString isNullOrEmpty:url])

@@ -25,6 +25,7 @@ import Foundation
 @objc protocol ThemeServiceProtocol : NSObjectProtocol {
     
     var backgroundColor: UIColor { get }
+    var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
     var bottomBarBackgroundColor: UIColor { get }
     var blackTextColor: UIColor { get }
@@ -39,6 +40,7 @@ import Foundation
     
     func setupImage(_ imageView: ThemeableImageView)
     func setupLabel(_ label: ThemableLabel)
+    func setupLabelInverted(_ label: ThemableLabel)
     func setupLabels(_ labels: [ThemableLabel])
     func setupPopupLabel(_ label: ThemableLabel)
     func setupPopupLabels(_ labels: [ThemableLabel])
@@ -71,6 +73,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var backgroundColor: UIColor {
         return configuration.darkTheme ? .black : .white
+    }
+    
+    var invertedBackgroundColor: UIColor {
+        return configuration.darkTheme ? .white : .black
     }
     
     var popupBackgroundColor: UIColor {
@@ -127,6 +133,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         label.textColor = label.greyText ? grayTextColor : label.lightGreyText ? lightGrayTextColor : blackTextColor
     }
     
+    func setupLabelInverted(_ label: ThemableLabel) {
+        if configuration.darkTheme {
+            label.textColor = UIColor.init(hexString: "#4A4A4A")
+        }
+        else {
+            label.textColor = .white
+        }
+    }
+    
     func setupLabels(_ labels: [ThemableLabel]) {
         for label in labels {
             setupLabel(label)
@@ -163,6 +178,8 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     func setupNavigationBar(_ navBarOrNil: UINavigationBar?) {
         guard let navBar = navBarOrNil else { return }
         let dark = configuration.darkTheme
+        let textAttributes = [NSAttributedString.Key.foregroundColor: dark ? UIColor.white : .black]
+        navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = dark ? .clear : .white
         navBar.barStyle = dark ? .black : .default
     }
@@ -178,7 +195,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func statusbarStyle() -> UIStatusBarStyle {
-        return configuration.darkTheme ? .lightContent : .default
+        if #available(iOS 13.0, *) {
+            return configuration.darkTheme ? .lightContent : .darkContent
+        } else {
+            return configuration.darkTheme ? .lightContent : .default
+        }
     }
     
     func setupTextField(_ textField: UITextField) {

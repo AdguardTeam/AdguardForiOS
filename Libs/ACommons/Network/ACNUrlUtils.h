@@ -29,7 +29,7 @@
 /// Escapes characters, which not allowed for url.
 /// Method uses UTF8 encoding for input string
 /// and also escapes ?/+= characters.
-+ (NSString *)percentEncodeUrlParameter:(NSString *)parameter;
++ (nonnull NSString *)percentEncodeUrlParameter:(nonnull NSString *)parameter;
 
 /**
  Create parameter string from dictionary.
@@ -37,45 +37,50 @@
  
  @param xmlStrict   If YES then parameters are concatenated through '&amp;'
  */
-+ (NSString *)createStringFromParameters:(NSDictionary *)parameters xmlStrict:(BOOL)xmlStrict;
++ (nonnull NSString *)createStringFromParameters:(nonnull NSDictionary *)parameters xmlStrict:(BOOL)xmlStrict;
+
+/**
+ Creates parameter dictionary from query string.
+ */
++ (nonnull NSDictionary<NSString*, NSString*> *)parametersFromQueryString:(nonnull NSString*) query;
 
 /// Converts url string to NSURL object with escaping characters,
 /// which not conforms.
-+ (NSURL *)URLWithString:(NSString *)URLString;
++ (nullable NSURL *)URLWithString:(nonnull NSString *)URLString;
 
 /// Converts url string, relatively of base url string to NSURL object with escaping characters,
 /// which not conforms.
-+ (NSURL *)URLWithString:(NSString *)URLString relativeToURL:(NSURL *)baseURL;
++ (nullable NSURL *)URLWithString:(nonnull NSString *)URLString relativeToURL:(nonnull NSURL *)baseURL;
 
 /// Gets host name
-+ (NSString *)host:(NSString *)url;
++ (nullable NSString *)host:(nonnull NSString *)url;
 
 /// Gets port or default port for url scheme
-+ (int16_t)port:(NSString *)url;
++ (int16_t)port:(nonnull NSString *)url;
 
 /// Gets port or default port for url scheme
-+ (int16_t)portForUrl:(NSURL *)url;
++ (int16_t)portForUrl:(nonnull NSURL *)url;
 
 /// Gets domain name from the url
-+ (NSString *)domainNameFor:(NSString *)url cropWWW:(BOOL)cropWWW;
++ (nullable NSString *)domainNameFor:(nonnull NSString *)url cropWWW:(BOOL)cropWWW;
 
 /// Checks "candidate" that it contains IPv4 address
-+ (BOOL)isIPv4:(NSString *)candidate;
++ (BOOL)isIPv4:(nonnull NSString *)candidate;
 
 /// Checks "candidate" that it contains IPv6 address
 /// @warning May work incorrectly because it taken from internet
-+ (BOOL)isIPv6:(NSString *)candidate;
++ (BOOL)isIPv6:(nonnull NSString *)candidate;
 
-+ (BOOL) checkIpv6WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port;
++ (BOOL) checkIpv6WithPort:(nonnull NSString*) candidate ip:(NSString *  _Nonnull * _Nullable)ip port: (NSString *  _Nonnull * _Nullable)port;
 
-+ (BOOL) checkIpv4WithPort:(NSString*) candidate ip:(NSString**)ip port:(NSString**)port;
++ (BOOL) checkIpv4WithPort:(nonnull NSString*) candidate ip:(NSString *  _Nonnull * _Nullable)ip port:(NSString *  _Nonnull * _Nullable)port;
 
-+ (BOOL) checkHostsLine:(NSString*) candidate ip:(NSString**)ip domain:(NSString**)domain;
++ (BOOL) checkHostsLine:(nonnull NSString*) candidate ip:(NSString *  _Nonnull * _Nullable)ip domain:(NSString *  _Nonnull * _Nullable)domain;
 
-+ (BOOL) isValidIpWithPort:(NSString*) candidate;
++ (BOOL) isValidIpWithPort:(nonnull NSString*) candidate;
 
-+ (BOOL) isValidUrl:(NSString*)candidate;
++ (BOOL) isValidUrl:(nonnull NSString*)candidate;
 
-+ (NSString*) ipv4StringFromIP:(uint32_t)ip;
++ (nonnull NSString*) ipv4StringFromIP:(uint32_t)ip;
 
 @end
