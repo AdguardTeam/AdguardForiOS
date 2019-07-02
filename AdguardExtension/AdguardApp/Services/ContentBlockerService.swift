@@ -355,7 +355,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         let userRules = antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
         
-        rules += userRules
+        rules = userRules + rules
         
         // add whitelist rules
         

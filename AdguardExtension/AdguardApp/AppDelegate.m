@@ -379,10 +379,7 @@ typedef enum : NSUInteger {
     
     _activateWithOpenUrl = YES;
     
-    NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-    if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
-         || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
-        && [url.scheme isEqualToString:AE_URLSCHEME]) {
+    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [_aeService onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{
