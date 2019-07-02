@@ -17,8 +17,9 @@
  */
 
 import Foundation
+import SafariServices
 
-class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate {
+class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate, LoginControllerDelegate {
     
     // MARK: - properties
     var notificationObserver: Any?
@@ -88,6 +89,14 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         }
     }
     
+    func authSucceeded() {
+        if self.presentedViewController != nil {
+            self.presentedViewController?.dismiss(animated: true) { [weak self] in
+                self?.showLoading()
+            }
+        }
+    }
+    
     // MARK: - actions
     
     @IBAction func accountAction(_ sender: Any) {
@@ -134,30 +143,50 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         return CustomAnimatedTransitioning()
     }
     
+    // MARK: - LoginControllerDelegate methods
+    
+    func loginAction(name: String) {
+        webAuthWithName(name: name)
+    }
+    
     // MARK: - private methods
     
     private func processNotification(info: [AnyHashable: Any]) {
         
-        let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-        let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-        
-        switch type {
-        case PurchaseService.kPSNotificationPurchaseSuccess:
-            purchaseSuccess()
-        case PurchaseService.kPSNotificationPurchaseFailure:
-            purchaseFailure(error: error)
-        case PurchaseService.kPSNotificationRestorePurchaseSuccess:
-            restoreSucess()
-        case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
-            nothingToRestore()
-        case PurchaseService.kPSNotificationRestorePurchaseFailure:
-            restoreFailed(error: error)
-        case PurchaseService.kPSNotificationReadyToPurchase:
-            tableController?.enablePurchaseButtons(true)
-            tableController?.setPrice()
+        DispatchQueue.main.async { [weak self] in
+            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
             
-        default:
-            break
+            switch type {
+            case PurchaseService.kPSNotificationPurchaseSuccess:
+                self?.purchaseSuccess()
+            case PurchaseService.kPSNotificationPurchaseFailure:
+                self?.purchaseFailure(error: error)
+            case PurchaseService.kPSNotificationRestorePurchaseSuccess:
+                self?.restoreSucess()
+            case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
+                self?.nothingToRestore()
+            case PurchaseService.kPSNotificationRestorePurchaseFailure:
+                self?.restoreFailed(error: error)
+            case PurchaseService.kPSNotificationReadyToPurchase:
+                self?.tableController?.enablePurchaseButtons(true)
+                self?.tableController?.setPrice()
+                
+            case PurchaseService.kPSNotificationLoginSuccess:
+                self?.loginSuccess()
+            case PurchaseService.kPSNotificationLoginFailure:
+                self?.loginFailure(error: error)
+            case PurchaseService.kPSNotificationLoginPremiumExpired:
+                self?.premiumExpired()
+            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+                self?.notPremium()
+                
+            case PurchaseService.kPSNotificationOauthSucceeded:
+                self?.authSucceeded()
+                
+            default:
+                break
+            }
         }
     }
     
@@ -183,6 +212,29 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private func restoreFailed(error: NSError?) {
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
+    }
+    
+    
+    private func loginSuccess(){
+        loginCompleteWithMessage(message: ACLocalizedString("login_success_message", nil))
+    }
+    
+    private func loginFailure(error: NSError?) {
+        loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
+    }
+    
+    private func premiumExpired() {
+        loginCompleteWithMessage(message: ACLocalizedString("login_premium_expired_message", nil))
+    }
+    
+    private func notPremium() {
+        loginCompleteWithMessage(message: ACLocalizedString("not_premium_message", nil))
+    }
+    
+    private func loginCompleteWithMessage(message: String) {
+        removeLoading() {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
+        }
     }
     
     private func updateTheme() {
@@ -214,8 +266,16 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "LoginController") as? LoginController else { return }
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = self
+        controller.delegate = self
         
         present(controller, animated: true, completion: nil)
     }
     
+    private func webAuthWithName(name: String){
+        
+        DDLogInfo("(GetProController) - webAuth")
+        guard let url = purchaseService.authUrlWithName(name: name) else { return }
+        let safariController = SFSafariViewController(url: url)
+        present(safariController, animated: true, completion: nil)
+    }
 }

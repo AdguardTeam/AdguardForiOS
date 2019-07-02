@@ -12,7 +12,6 @@
 #import "AEService.h"
 #import "ACSSystemUtils.h"
 #import "AEInvertedWhitelistDomainsObject.h"
-#import "AEUIUtils.h"
 #import "AEInvertedWhitelistDomainsObject.h"
 #import "AEWhitelistDomainObject.h"
 #import "AESSupport.h"
@@ -22,7 +21,8 @@
 #import "AEWhitelistDomainObject.h"
 #import "AESFilterConverter.h"
 #import "APSharedResources.h"
-
 #import "APVPNManager.h"
 #import "ACDnsUtils.h"
 #import "DDLogMacros.h"
+#import "ACNUrlUtils.h"
+

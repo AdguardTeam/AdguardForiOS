@@ -36,7 +36,7 @@
     Create request object with POST method.
     @param parameters   May be nil.
  */
-+ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary *)parameters;
++ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary<NSString*, NSString*> *)parameters headers:(nullable NSDictionary<NSString*, NSString*>*) headers;
 
 /**
  Create request object with POST method^ Content-Type = application/json

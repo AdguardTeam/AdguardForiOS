@@ -46,7 +46,7 @@
     return self;
 }
 
-+ (NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
++ (NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters headers:(nullable NSDictionary<NSString *,NSString *> *)headers{
     
     @autoreleasepool {
         
@@ -60,6 +60,9 @@
                 
                 [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
                 [request setHTTPBody:[[ABECRequest createStringFromParameters:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
+                for(NSString* key in headers.allKeys) {
+                    [request setValue:headers[key] forHTTPHeaderField:key];
+                }
             }
         }
         
