@@ -35,8 +35,6 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
-    @IBOutlet weak var getProButton: RoundRectButton!
-    
     @IBOutlet weak var darkModeTrailingConstraint: NSLayoutConstraint!
     
     
@@ -88,13 +86,8 @@ class AdvancedSettingsController: UITableViewController {
             invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
             toggleInverted(invertedSwitch)
         case darkModeRow:
-            if configuration.proStatus {
-                darkModeSwitch.setOn(!darkModeSwitch!.isOn, animated: true)
-                toggleDarkMode(darkModeSwitch)
-            }
-            else {
-                performSegue(withIdentifier: "getProSegue", sender: self)
-            }
+            darkModeSwitch.setOn(!darkModeSwitch!.isOn, animated: true)
+            toggleDarkMode(darkModeSwitch)
             
         default:
             break
@@ -182,17 +175,6 @@ class AdvancedSettingsController: UITableViewController {
     
     private func updateUI() {
         
-        if configuration.proStatus {
-            getProButton.isHidden = true
-            darkModeSwitch.isHidden = false
-            darkModeTrailingConstraint.constant = darkModeSwitch.frame.width + 10
-        }
-        else {
-            getProButton.isHidden = false
-            darkModeSwitch.isHidden = true
-            darkModeTrailingConstraint.constant = getProButton.frame.width + 10
-        }
-        
-        darkModeSwitch.isOn = configuration.darkTheme
+       darkModeSwitch.isOn = configuration.darkTheme
     }
 }

@@ -62,6 +62,8 @@ class MainController: UIViewController {
     @IBOutlet weak var manImage: UIImageView!
     @IBOutlet weak var vikingImage: UIImageView!
     
+    @IBOutlet weak var premiumLabel: ThemableLabel!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     // MARK: - properties
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -265,5 +267,8 @@ class MainController: UIViewController {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         vikingImage.image = UIImage(named: configuration.darkTheme ? "man" : "adguard-man")
+        
+        getProView.backgroundColor = theme.invertedBackgroundColor
+        theme.setupLabelInverted(premiumLabel)
     }
 }

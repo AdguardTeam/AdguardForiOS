@@ -402,7 +402,7 @@ with Safari</string>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODO-S4-du5">
                                                 <rect key="frame" x="77" y="0.0" width="255" height="73"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger with PREMIUM!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gda-ty-BWn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger with PREMIUM!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gda-ty-BWn" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="36" y="6" width="189" height="42"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="DUa-Ag-4Da"/>
@@ -524,6 +524,7 @@ with Safari</string>
                         <outlet property="getProView" destination="73t-jO-Trp" id="e4H-fI-ahE"/>
                         <outlet property="headerImage" destination="xVP-0T-sAu" id="NV5-b4-GXX"/>
                         <outlet property="manImage" destination="zqp-eO-Zja" id="4AE-A2-fmh"/>
+                        <outlet property="premiumLabel" destination="gda-ty-BWn" id="Vtp-Ed-mn0"/>
                         <outlet property="rateView" destination="ou4-7N-dEE" id="Bgp-ZP-5nk"/>
                         <outlet property="roundArrow" destination="8E0-q1-n37" id="QuZ-tl-Pot"/>
                         <outlet property="shareView" destination="TUY-sd-0Xf" id="fHF-YU-lYe"/>
