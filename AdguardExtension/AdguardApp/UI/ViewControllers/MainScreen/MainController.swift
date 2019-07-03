@@ -44,6 +44,8 @@ class MainController: UIViewController {
     @IBOutlet weak var enabledLabel: UILabel!
     
     @IBOutlet weak var filtersVersionLabel: UILabel!
+    @IBOutlet weak var updateFiltersGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var refreshIcon: UIImageView!
     
     @IBOutlet weak var tutorialVideoView: UIView!
     @IBOutlet weak var adguardManView: UIView!
@@ -182,21 +184,52 @@ class MainController: UIViewController {
     
     @IBAction func updateFiltersAction(_ sender: Any) {
         viewModel?.updateFilters(start: { [weak self] in
+            self?.updateStarted()
             self?.filtersVersionLabel.text = ACLocalizedString("update_filter_start_message", nil)
         }, finish: { [weak self] (message) in
-            self?.filtersVersionLabel.text = message
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
+                self?.filtersVersionLabel.text = message
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: {
                 self?.setFiltersTime()
+                self?.updateEnded()
             })
         }, error: { [weak self] (message) in
-            self?.filtersVersionLabel.text = message
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
+                self?.filtersVersionLabel.text = message
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: {
                 self?.setFiltersTime()
+                self?.updateEnded()
             })
         })
     }
     
     // MARK: - private methods
+    private func updateStarted(){
+        self.updateFiltersGestureRecognizer.isEnabled = false
+        self.rotateRefreshIcon(isNedeed: true)
+    }
+    
+    private func updateEnded(){
+        self.updateFiltersGestureRecognizer.isEnabled = true
+        self.rotateRefreshIcon(isNedeed: false)
+    }
+    
+    private func rotateRefreshIcon(isNedeed: Bool){
+        switch isNedeed {
+        case true:
+            let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
+            rotationAnimation.duration = 0.9;
+            rotationAnimation.isCumulative = true;
+            rotationAnimation.repeatCount = .infinity;
+            self.refreshIcon.layer.add(rotationAnimation, forKey: "rotationAnimation")
+        default:
+            self.refreshIcon.layer.removeAnimation(forKey: "rotationAnimation")
+        }
+    }
+    
     private func updateUI() {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
