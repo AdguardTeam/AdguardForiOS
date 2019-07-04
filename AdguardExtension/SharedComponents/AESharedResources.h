@@ -177,6 +177,14 @@ extern NSString*  _Nonnull AEDefaultsAuthStateString;
 // todo: remove this in future
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
+/**
+ User defaults keys, wich contains number of rules for each content blocker*/
+extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
