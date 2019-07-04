@@ -1,4 +1,4 @@
-/*! AdGuard Assistant - v4.3.13 - 2019-06-03
+/*! AdGuard Assistant - v4.3.15 - 2019-07-04
 * https://github.com/AdguardTeam/AdguardAssistant
 * Copyright (c) 2019; Licensed LGPL 3.0 */
 
@@ -22,7 +22,7 @@ var HTML = {
     'settings_menu': "<div class=\"main\"><div class=\"close\"></div><div class=\"head\"><div i18n=\"assistant_settings\" class=\"head_title\"></div><div i18n=\"settings_choose_size_and_position\" class=\"head_text head_text--mobile-h\"></div></div><div class=\"content\"><div class=\"settings settings__horizontal\"><div class=\"settings_fieldset\"><div i18n=\"settings_position_save\" class=\"settings_fieldset_lbl\"></div><div class=\"settings_fieldset_val\"><div class=\"position-save\"><div class=\"position-save_group\"><div class=\"position-save_field\"><input class=\"form-ui-control\" id=\"all-site\" type=\"radio\" name=\"position-save\"> <label class=\"form-ui\" for=\"all-site\"><span i18n=\"settings_position_save_all\" class=\"form-ui-txt\"></span></label></div><div class=\"position-save_field\"><input class=\"form-ui-control\" id=\"this-site\" type=\"radio\" name=\"position-save\"> <label class=\"form-ui\" for=\"this-site\"><span i18n=\"settings_position_save_this\" class=\"form-ui-txt\"></span></label></div></div></div></div></div><div class=\"settings_fieldset\"><div i18n=\"settings_icon_size\" class=\"settings_fieldset_lbl\"></div><div class=\"settings_fieldset_val\"><div class=\"choice-size\"><div class=\"choice-size_group\"><div class=\"choice-size_field\"><input class=\"choice-size_input form-ui-control\" id=\"size-small\" type=\"radio\" name=\"radio\"> <label class=\"form-ui\" for=\"size-small\"><span i18n=\"settings_small\" class=\"form-ui-txt\"></span></label><div class=\"adguard-assistant-button-main-logo choice-size_logo logo__small\"></div></div><div class=\"choice-size_field\"><input class=\"choice-size_input form-ui-control\" id=\"size-big\" type=\"radio\" name=\"radio\"> <label class=\"form-ui\" for=\"size-big\"><span i18n=\"settings_big\" class=\"form-ui-txt\"></span></label><div class=\"adguard-assistant-button-main-logo choice-size_logo\"></div></div></div></div></div></div><div class=\"settings_fieldset\"><div i18n=\"settings_position\" class=\"settings_fieldset_lbl settings_fieldset_lbl__pos\"></div><div class=\"settings_fieldset_val\"><div class=\"change-position\"><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-top-left\"> <label class=\"change-position_label\" for=\"position-top-left\"><span class=\"s-position-arr-top-left\"></span></label><div i18n=\"settings_left_top\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-top-right\"> <label class=\"change-position_label\" for=\"position-top-right\"><span class=\"s-position-arr-top-right\"></span></label><div i18n=\"settings_right_top\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-bottom-left\"> <label class=\"change-position_label\" for=\"position-bottom-left\"><span class=\"s-position-arr-bottom-left\"></span></label><div i18n=\"settings_left_bottom\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-bottom-right\"> <label class=\"change-position_label\" for=\"position-bottom-right\"><span class=\"s-position-arr-bottom-right\"></span></label><div i18n=\"settings_right_bottom\" class=\"change-position_val\"></div></div></div></div></div></div></div><div class=\"foot\"><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"settings_cancel\" class=\"btn btn-default\" type=\"button\" id=\"cancel\"></button> <button i18n=\"settings_save\" class=\"btn btn-primary\" type=\"button\" id=\"save-settings\"></button></div></div><div class=\"cf\"></div></div></div>",
     'slider_menu': "<div class=\"main\"><div class=\"close adg-close\"></div><div class=\"head head--slider\"><div class=\"head_in head_in--slider\"><div i18n=\"assistant_block_element\" class=\"head_title head_title--slider\" id=\"head_title\"></div><div class=\"element-rule_more element-rule_more--mobile\"><span class=\"element-rule_expand-link\" id=\"ExtendedSettingsText\"></span> <button i18n=\"assistant_block\" type=\"button\" class=\"btn btn-cancel\" id=\"adg-accept\"></button> <button i18n=\"assistant_another_element\" type=\"button\" class=\"btn btn-default\" id=\"adg-cancel\"></button></div></div><div class=\"adg-slide-btns\"><div class=\"adg-slide-btn adg-slide-btn--minus\"></div><div class=\"adg-slide-btn adg-slide-btn--plus\"></div></div><div i18n=\"assistant_block_element_explain\" class=\"head_text head_text--mobile-h\" id=\"head_text\"></div></div><div class=\"content\" id=\"slider-area\"><div class=\"element-rule element-rule--slider\"><div i18n=\"assistant_slider_explain\" class=\"element-rule_text element-rule_text--slider\"></div><div class=\"element-rule_slider\"><div class=\"adg-slide\" id=\"slider\"><div i18n=\"assistant_slider_max\" class=\"adg-slide-clue-max\"></div><div i18n=\"assistant_slider_min\" class=\"adg-slide-clue-min\"></div></div></div><div class=\"element-rule_more\"><span class=\"element-rule_expand-link\" id=\"ExtendedSettingsText\"><span i18n=\"assistant_extended_settings\" class=\"element-rule_expand-link_txt\"></span> <span class=\"element-rule_expand-link_arr\"></span></span></div><div class=\"element-rule_form\" id=\"advanced-settings\"><div class=\"element-rule_form-cont\"><div class=\"element-rule_fieldset\" id=\"one-domain-checkbox-block\"><input class=\"form-ui-control\" id=\"one-domain-checkbox\" type=\"checkbox\"> <label for=\"one-domain-checkbox\" class=\"form-ui\"><span i18n=\"assistant_apply_rule_to_all_sites\" class=\"form-ui-txt\"></span></label></div><div style=\"display:none\" class=\"element-rule_fieldset\" id=\"block-by-url-checkbox-block\"><input class=\"form-ui-control\" id=\"block-by-url-checkbox\" type=\"checkbox\"> <label for=\"block-by-url-checkbox\" class=\"form-ui\"><span i18n=\"assistant_block_by_reference\" class=\"form-ui-txt\"></span></label></div><div style=\"display:none\" class=\"element-rule_fieldset\" id=\"block-similar-checkbox-block\"><input class=\"form-ui-control\" id=\"block-similar-checkbox\" type=\"checkbox\"> <label for=\"block-similar-checkbox\" class=\"form-ui\"><span i18n=\"assistant_block_similar\" class=\"form-ui-txt\"></span></label></div><div class=\"element-rule_fieldset\"><input class=\"form-control\" id=\"filter-rule\" type=\"text\"></div></div></div></div></div><div class=\"foot foot--slider\"><button i18n=\"assistant_another_element\" type=\"button\" class=\"btn btn-default btn-another-el\" id=\"adg-cancel\"></button><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"assistant_preview\" type=\"button\" class=\"btn btn-primary\" id=\"adg-preview\"></button> <button i18n=\"assistant_block\" type=\"button\" class=\"btn btn-cancel\" id=\"adg-accept\"></button></div></div></div></div>",
     'preview': "<div class=\"main\"><div class=\"close\"></div><div class=\"head\"><div i18n=\"assistant_preview_header\" class=\"head_title\"></div><div i18n=\"assistant_preview_header_info\" class=\"head_text\"></div></div><div class=\"foot\"><button i18n=\"assistant_another_element\" class=\"btn btn-default\" id=\"select-another-element\" type=\"button\"></button><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"assistant_preview_end\" class=\"btn btn-primary\" id=\"end-preview\" type=\"button\"></button> <button i18n=\"assistant_block\" class=\"btn btn-cancel\" id=\"block-element\" type=\"button\"></button></div></div></div></div>",
-    'popup': "<div class=\"main mobile main-popup\"><div class=\"main-popup__logo adguard-assistant-button-main-logo\"></div><h2 class=\"mobile-title main-popup__title\" i18n=\"assistant_select_element\"></h2><div class=\"content main-popup__content\" i18n=\"assistant_select_element_text\"></div><div class=\"footer\"><button i18n=\"assistant_select_element_start\" class=\"btn btn-active start-select-mode main-popup__btn main-popup__btn--green\"></button> <button i18n=\"assistant_select_element_cancel\" class=\"btn cancel-select-mode main-popup__btn\"></button></div><i class=\"main-version\">v4.3.13</i></div>",
+    'popup': "<div class=\"main mobile main-popup\"><div class=\"main-popup__logo adguard-assistant-button-main-logo\"></div><h2 class=\"mobile-title main-popup__title\" i18n=\"assistant_select_element\"></h2><div class=\"content main-popup__content\" i18n=\"assistant_select_element_text\"></div><div class=\"footer\"><button i18n=\"assistant_select_element_start\" class=\"btn btn-active start-select-mode main-popup__btn main-popup__btn--green\"></button> <button i18n=\"assistant_select_element_cancel\" class=\"btn cancel-select-mode main-popup__btn\"></button></div><i class=\"main-version\">v4.3.15</i></div>",
     'mobile_menu': "<div class=\"main mobile main-menu\"><button i18n-title=\"assistant_block\" class=\"adg-accept main-menu__btn main-menu__btn--accept\">accept</button> <button i18n-title=\"assistant_preview\" class=\"adg-preview main-menu__btn main-menu__btn--preview\">preview</button> <button i18n-title=\"plus\" class=\"adg-plus main-menu__btn main-menu__btn--plus\">plus</button> <button i18n-title=\"minus\" class=\"adg-minus main-menu__btn main-menu__btn--minus\">minus</button> <button i18n-title=\"close\" class=\"adg-close main-menu__btn main-menu__btn--close\">close</button></div>"
 };
 
@@ -834,7 +834,7 @@ var zh_TW = {
         "message": "\u65bc\u8a72\u7db2\u7ad9\u4e0a\u4e4b\u904e\u6ffe"
     },
     "menu_do_not_filter_30_sec": {
-        "message": "\u8a0830\u79d2\u4e0d\u904e\u6ffe"
+        "message": "\u8a08 30 \u79d2\u4e0d\u904e\u6ffe"
     },
     "menu_block_ad_on_site": {
         "message": "\u5c01\u9396\u65bc\u8a72\u7db2\u7ad9\u4e0a\u4e4b\u5ee3\u544a"
@@ -909,19 +909,19 @@ var zh_TW = {
         "message": "\u8a72\u7db2\u7ad9\u7684\u4fe1\u8b7d\u672a\u88ab $1 \u754c\u5b9a"
     },
     "wot_bad_description": {
-        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u975e\u5e38\u58de\u7684\u4fe1\u8b7d"
+        "message": "\u6839\u64da $1\uff0c\n\u8a72\u7db2\u7ad9\u6709\u975e\u5e38\u58de\u7684\u4fe1\u8b7d"
     },
     "wot_poor_description": {
-        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u58de\u7684\u4fe1\u8b7d"
+        "message": "\u6839\u64da $1\uff0c\n\u8a72\u7db2\u7ad9\u6709\u58de\u7684\u4fe1\u8b7d"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u4e0d\u597d\u7684\u4fe1\u8b7d"
+        "message": "\u6839\u64da $1\uff0c\n\u8a72\u7db2\u7ad9\u6709\u4e0d\u597d\u7684\u4fe1\u8b7d"
     },
     "wot_good_description": {
-        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u597d\u7684\u4fe1\u8b7d"
+        "message": "\u6839\u64da $1\uff0c\n\u8a72\u7db2\u7ad9\u6709\u597d\u7684\u4fe1\u8b7d"
     },
     "wot_excellent_description": {
-        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u6975\u597d\u7684\u4fe1\u8b7d"
+        "message": "\u6839\u64da $1\uff0c\n\u8a72\u7db2\u7ad9\u6709\u6975\u597d\u7684\u4fe1\u8b7d"
     },
     "settings_choose_size_and_position": {
         "message": "\u8abf\u6574 AdGuard \u52a9\u7406 \u5c3a\u5bf8\u548c\u4f4d\u7f6e"
@@ -1456,7 +1456,7 @@ var tr = {
         "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\nm\u00fckemmel bir itibara sahip"
     },
     "settings_choose_size_and_position": {
-        "message": "AdGuard Assistant'\u0131n boyut ve konumunu ayarla"
+        "message": "AdGuard Assistant'\u0131n eklentisi boyut ve konumunu ayarla"
     },
     "settings_icon_size": {
         "message": "Simge boyutu:"
@@ -1949,7 +1949,7 @@ var pt_PT = {
         "message": "Bloquear semelhante"
     },
     "assistant_another_element": {
-        "message": "Seleccionar outro elemento"
+        "message": "Seleccionar um elemento diferente"
     },
     "assistant_preview": {
         "message": "Previsualiza\u00e7\u00e3o"
@@ -2026,7 +2026,7 @@ var ar = {
     "settings_position_save_all": "\u0643\u0627\u0641\u0629 \u0645\u0648\u0627\u0642\u0639 \u0627\u0644\u0648\u064a\u0628",
     "settings_position_save_this": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639",
     "assistant_select_element_start": "\u0628\u062f\u0621",
-    "assistant_select_element_text": "\u0627\u062e\u062a\u0631 \u0639\u0646\u0635\u0631\u0627 \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0644\u062d\u0638\u0631\u0642\u0645 \u0628\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0627\u0644\u063a\u0627\u0621 \u0648\u0636\u0639 \u062d\u0638\u0631 \u0627\u0644\u0639\u0646\u0635\u0631.",
+    "assistant_select_element_text": "\u0627\u062e\u062a\u0631 \u0639\u0646\u0635\u0631\u0627 \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0644\u062d\u0638\u0631\u0642\u0645 \u0628\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0627\u0644\u063a\u0627\u0621 \u0648\u0636\u0639 \u062d\u0638\u0631 \u0627\u0644\u0639\u0646\u0635\u0631",
     "menu_filtration_status": {
         "message": "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0641\u0644\u062a\u0631\u0629\u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639"
     },
@@ -2082,7 +2082,7 @@ var ar = {
         "message": "\u062d\u0638\u0631 \u0639\u0646\u0635\u0631 \u0645\u0645\u0627 \u062b\u0644"
     },
     "assistant_another_element": {
-        "message": "\u062a\u062d\u062f\u064a\u062f \u0639\u0646\u0635\u0631 \u0622\u062e\u0631"
+        "message": "\u062d\u062f\u062f \u0639\u0646\u0635\u0631\u064b\u0627 \u0645\u062e\u062a\u0644\u0641\u064b\u0627"
     },
     "assistant_preview": {
         "message": "\u0627\u0644\u0645\u0639\u0627\u064a\u0646\u0647"
@@ -2103,28 +2103,28 @@ var ar = {
         "message": "\u0625\u0646\u0647\u0627\u0621 \u0627\u0644\u0645\u0639\u0627\u064a\u0646\u0629"
     },
     "wot_unknown_description": {
-        "message": "\u0644\u0645 \u064a\u062a\u0645 \u062a\u0639\u0631\u064a\u0641 \u0627\u0644\u0633\u0645\u0639\u0629"
+        "message": "$1 \u0644\u0645 \u064a\u062a\u0645 \u062a\u0639\u0631\u064a\u0641 \u0633\u0645\u0639\u0647 \u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0645\u0646 \u0642\u0628\u0644"
     },
     "wot_bad_description": {
-        "message": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629 \u0644\u0644\u063a\u0627\u064a\u0629 \n\u0648\u0641\u0642\u0627 \u0644 "
+        "message": "$1\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629 \u0644\u0644\u063a\u0627\u064a\u0629 \n\u0648\u0641\u0642\u0627\u064b \u0644\u0640"
     },
     "wot_poor_description": {
-        "message": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629 \n\u0648\u0641\u0642\u0627 \u0644 "
+        "message": "$1 \u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629 \n\u0648\u0641\u0642\u0627 \u0644\u0640"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629 \n\u0648\u0641\u0642\u0627 \u0644 "
+        "message": "$1\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u0647 \u0633\u0645\u0639\u0629 \u0633\u064a\u0626\u0629\n\u0648\u0641\u0642\u0627 \u0644\u0640"
     },
     "wot_good_description": {
-        "message": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u062c\u064a\u062f\u0629 \n\u0648\u0641\u0642\u0627 \u0644 "
+        "message": "$1\u064a\u062a\u0645\u062a\u0639 \u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0628\u0633\u0645\u0639\u0629 \u0637\u064a\u0628\u0629\n\u0648\u0641\u0642\u0627 \u0644\u0640"
     },
     "wot_excellent_description": {
-        "message": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062f\u064a\u0647 \u0633\u0645\u0639\u0629 \u0645\u0645\u062a\u0627\u0632\u0629 \n\u0648\u0641\u0642\u0627 \u0644 "
+        "message": "$1\u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u064a\u062a\u0645\u062a\u0639 \u0628\u0633\u0645\u0639\u0629 \u0645\u0645\u062a\u0627\u0632\u0629\n\u0648\u0641\u0642\u0627\u064b \u0644\u0640"
     },
     "settings_choose_size_and_position": {
-        "message": "\u0636\u0628\u0637 \u062d\u062c\u0645 \u0645\u0633\u0627\u0639\u062f AdGuard \u0648\u0645\u0648\u0636\u0639\u0647"
+        "message": "\u0648\u0645\u0648\u0636\u0639\u0647 AdGuard \u0636\u0628\u0637 \u062d\u062c\u0645 \u0645\u0633\u0627\u0639\u062f"
     },
     "settings_icon_size": {
-        "message": "\u062d\u062c\u0645 \u0627\u0644\u0631\u0645\u0632:"
+        "message": ":\u062d\u062c\u0645 \u0627\u0644\u0631\u0645\u0632"
     },
     "settings_small": {
         "message": "\u0635\u063a\u064a\u0631"
@@ -3391,7 +3391,7 @@ var sl_SI = {
         "message": "Prilagodite pravilo za blokiranju elementa"
     },
     "assistant_slider_explain": {
-        "message": "Premaknite drsnik, da spremenite velikost okvira, za katerega bo delovalo novo pravilo:"
+        "message": "Premaknite drsnik, da spremenite velikost okvirja, za katerega bo delovalo novo pravilo:"
     },
     "assistant_slider_min": {
         "message": "NAJM"
@@ -3412,7 +3412,7 @@ var sl_SI = {
         "message": "Blokiraj podobno"
     },
     "assistant_another_element": {
-        "message": "Izberi drugi element"
+        "message": "Izberi drug element"
     },
     "assistant_preview": {
         "message": "Predogled"
@@ -3433,25 +3433,25 @@ var sl_SI = {
         "message": "Zapusti predogled"
     },
     "wot_unknown_description": {
-        "message": "Ugled te spletne strani ni opredeljen"
+        "message": "Ugled te spletne strani ni opredeljen z $1"
     },
     "wot_bad_description": {
         "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_poor_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
+        "message": "Ta spletna stran ima slab ugled\nglede na $1"
     },
     "wot_unsatisfactory_description": {
         "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_good_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
+        "message": "Ta spletna stran ima dober ugled\nglede na $1"
     },
     "wot_excellent_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
+        "message": "Ta spletna stran ima odli\u010den ugled\nglede na $1"
     },
     "settings_choose_size_and_position": {
-        "message": "Prilagodi velikost in polo\u017eaj AdGuard Assistanta"
+        "message": "Prilagodi velikost in polo\u017eaj AdGuard Pomo\u010dnika"
     },
     "settings_icon_size": {
         "message": "Velikost ikone:"
@@ -8585,8 +8585,8 @@ var IframeControllerMobile = function ($, log, selector, localization, protected
             margin: 'auto',
             'border-radius': '2px',
             'background': 'transparent',
-            width: '55vw',
-            height: '56vw',
+            width: '40vmax',
+            height: '40vmax',
         };
 
         showMenuItem('mobilePopup.html', mobilePopupButtonsInit(), null, styles);
