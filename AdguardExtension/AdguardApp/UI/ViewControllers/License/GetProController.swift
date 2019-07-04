@@ -28,6 +28,9 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
+    var showAlertBlock: (()->Void)?
+    var canShowAlert = false
+    
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
     
@@ -44,6 +47,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     private let accountAction = "account"
     private let from = "license"
+
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -91,8 +95,11 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     
     func authSucceeded() {
         if self.presentedViewController != nil {
+            
             self.presentedViewController?.dismiss(animated: true) { [weak self] in
-                self?.showLoading()
+                guard let sSelf = self else { return }
+                sSelf.canShowAlert = true
+                sSelf.showAlertIfPossible()
             }
         }
     }
@@ -232,9 +239,15 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     }
     
     private func loginCompleteWithMessage(message: String) {
-        removeLoading() {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
+        
+        showAlertBlock = { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.removeLoading() {
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: message)
+            }
         }
+        
+        showAlertIfPossible()
     }
     
     private func updateTheme() {
@@ -277,5 +290,13 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         guard let url = purchaseService.authUrlWithName(name: name) else { return }
         let safariController = SFSafariViewController(url: url)
         present(safariController, animated: true, completion: nil)
+        canShowAlert = false
+    }
+    
+    private func showAlertIfPossible() {
+        if canShowAlert && showAlertBlock != nil {
+            showAlertBlock!()
+            showAlertBlock = nil
+        }
     }
 }
