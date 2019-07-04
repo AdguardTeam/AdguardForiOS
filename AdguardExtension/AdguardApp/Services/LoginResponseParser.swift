@@ -69,6 +69,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     // status response status values
     private let STATUS_RESPONSE_STATUS_PREMIUM = "PREMIUM"
     private let STATUS_RESPONSE_STATUS_EXPIRED = "EXPIRED"
+    private let STATUS_RESPONSE_STATUS_ERROR = "ERROR"
     
     func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
         
@@ -150,7 +151,19 @@ class LoginResponseParser: LoginResponseParserProtocol {
     
     private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, Error?) {
         
-        let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String?
+        guard let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String else {
+            DDLogInfo("(LoginService) processStatusResponseJson error - json does not contain status" )
+            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            return (false, nil, error)
+        }
+        
+        if status == STATUS_RESPONSE_STATUS_ERROR {
+            let licenseKeyStatus = (json["licenseKeyStatus"] as? String) ?? ""
+            DDLogInfo("(LoginService) processStatusResponseJson error - status = ERROR licenseKeyStatus: \(licenseKeyStatus)")
+            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            return (false, nil, error)
+        }
+        
         let expirationTimestampAny = json[STATUS_RESPONSE_EXPIRATION_DATE_PARAM]
         
         var expirationTimestamp: Double?
@@ -166,7 +179,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         
         let expirationDate = Date(timeIntervalSince1970: (expirationTimestamp ?? 0) / 1000)
         
-        let premium = status != nil && status == STATUS_RESPONSE_STATUS_PREMIUM
+        let premium = status == STATUS_RESPONSE_STATUS_PREMIUM
         
         return (premium, expirationDate, nil)
     }
