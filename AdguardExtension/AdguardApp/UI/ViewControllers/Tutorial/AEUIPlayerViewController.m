@@ -228,7 +228,6 @@ preparation before navigation
             [self.player play];
         }
     }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 
