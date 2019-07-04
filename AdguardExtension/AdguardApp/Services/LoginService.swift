@@ -69,6 +69,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
     private let STATUS_URL = "https://mobile-api.adguard.com/api/1.0/status.html"
     private let AUTH_TOKEN_URL = "https://mobile-api.adguard.com/api/2.0/auth_token"
+    private let RESET_LICENSE_URL = "https://mobile-api.adguard.com/api/1.0/resetlicense.html"
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
@@ -148,7 +149,16 @@ class LoginService: LoginServiceProtocol {
     }
     
     func login(accessToken: String, callback: @escaping  (_: Error?)->Void) {
-        loginInternal(name: nil, password: nil, accessToken: accessToken, callback: callback)
+        
+        // we must reset license before login to unbind previously attached license key
+        resetLicense { [weak self] (error) in
+            if error != nil {
+                callback(error)
+            }
+            else {
+                self?.loginInternal(name: nil, password: nil, accessToken: accessToken, callback: callback)
+            }
+        }
     }
     
     // todo: name/password are deprecated and must be removed in future versions, when all 3.0.0 user will be migrated to new authorization scheme
@@ -165,7 +175,8 @@ class LoginService: LoginServiceProtocol {
         DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
         
         var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
-                      LOGIN_APP_ID_PARAM: appId]
+                      LOGIN_APP_ID_PARAM: appId,
+                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!]
         
         if !loginByToken {
             params[LOGIN_EMAIL_PARAM] = name
@@ -286,6 +297,44 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
+    private func resetLicense(callback: @escaping (Error?)->Void) {
+        
+        DDLogInfo("(LoginService) resetLicense")
+        
+        guard let appId = keychain.appId else {
+            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
+            return
+        }
+        
+        let params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+                      LOGIN_APP_ID_PARAM: appId,
+                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
+                      "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
+        ]
+        
+        guard let url = URL(string: RESET_LICENSE_URL) else  {
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            DDLogError("(PurchaseService) checkStatus error. Can not make URL from String \(RESET_LICENSE_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        
+        network.data(with: request) { (dataOrNil, response, error) in
+            
+            guard error == nil else {
+                DDLogError("(LoginService) resetLicense - got error \(error!.localizedDescription)")
+                callback(error!)
+                return
+            }
+            
+            DDLogInfo("(LoginService) resetLicense succedded")
+            
+            callback(nil)
+        }
+    }
+    
     func logout()->Bool {
         
         loggedIn = false
@@ -294,6 +343,8 @@ class LoginService: LoginServiceProtocol {
         // for logged in 3.0.0 users
         _ = keychain.deleteAuth(server: LOGIN_SERVER)
         _ = keychain.deleteLicenseKey(server: LOGIN_SERVER)
+        
+        resetLicense() { _ in }
         
         return true
     }

@@ -36,6 +36,9 @@ extension UIViewController {
             if let vc = self.presentedViewController, vc is UIAlertController {
                 vc.dismiss(animated: false, completion: completion)
             }
+            else {
+                completion?()
+            }
         }
     }
 }
