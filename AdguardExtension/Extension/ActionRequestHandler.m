@@ -58,23 +58,28 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
         SafariService* safariService = [[SafariService alloc] initWithResources:resources];
         NSString* filename = [safariService filenameById: NSBundle.mainBundle.bundleIdentifier];
+        NSString* path = [resources pathForRelativePath:filename];
+        NSURL* fileUrl = [NSURL fileURLWithPath:path];
         
         if (jsonURL) {
             
             NSLog(@"ActionRequestHandler: JSON URL \"%@\"", jsonURL);
             
-            NSData *jsonData;
-            if (filteringEnabled) {
-                jsonData = [resources loadDataFromFileRelativePath:filename];
+            long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil][NSFileSize] longLongValue];
+            
+            BOOL succedded = NO;
+            
+            if ( !(filteringEnabled && fileSize >= MINIMUM_JSON_LENGTH) ) {
+                NSData* jsonData = [AEFakeBlockinRule dataUsingEncoding:NSUTF8StringEncoding];
+                succedded = [jsonData writeToURL:jsonURL atomically:YES];
+            }
+            else {
+                NSError* error;
+                [[NSFileManager defaultManager] removeItemAtURL:jsonURL error:&error];
+                succedded = [[NSFileManager defaultManager] copyItemAtURL:fileUrl toURL:jsonURL error:&error];
             }
             
-            if ( !(filteringEnabled && jsonData.length >= MINIMUM_JSON_LENGTH) ) {
-                jsonData = [AEFakeBlockinRule dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            
-            if ([jsonData writeToURL:jsonURL atomically:YES]) {
-                
-                NSLog(@"ActionRequestHandler: JSON saved with length in bytes: %lu", jsonData.length);
+            if (succedded) {
                 
                 NSItemProvider *attachment =
                     [[NSItemProvider alloc] initWithContentsOfURL:jsonURL];
@@ -89,7 +94,6 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
 
                     items = @[item];
                 }
-
                 
                 [context completeRequestReturningItems:items
                                      completionHandler:nil];
