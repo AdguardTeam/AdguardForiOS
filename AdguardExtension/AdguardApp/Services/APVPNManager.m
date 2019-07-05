@@ -816,6 +816,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                     // When VPN configuration is changed
                     [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
                         if(!error) {
+                            DDLogInfo(@"(APVPNManager) Notify that vpn configuration changed.");
+
                             [self setStatuses];
                         } else {
                             DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
@@ -834,6 +836,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                         // When connection status is changed
                         [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
                             if(!error) {
+                                DDLogInfo(@"(APVPNManager) Notify that vpn connection status changed.");
+
                                 [self setStatuses];
                             } else {
                                 DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
