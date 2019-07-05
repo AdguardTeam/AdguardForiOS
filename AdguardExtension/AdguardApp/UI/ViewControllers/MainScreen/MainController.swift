@@ -187,18 +187,18 @@ class MainController: UIViewController {
             self?.updateStarted()
             self?.filtersVersionLabel.text = ACLocalizedString("update_filter_start_message", nil)
         }, finish: { [weak self] (message) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.filtersVersionLabel.text = message
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
                 self?.setFiltersTime()
                 self?.updateEnded()
             })
         }, error: { [weak self] (message) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.filtersVersionLabel.text = message
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {
                 self?.setFiltersTime()
                 self?.updateEnded()
             })
