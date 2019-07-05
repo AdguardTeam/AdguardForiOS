@@ -525,6 +525,7 @@ with Safari</string>
                         <outlet property="manImage" destination="zqp-eO-Zja" id="4AE-A2-fmh"/>
                         <outlet property="premiumLabel" destination="gda-ty-BWn" id="Vtp-Ed-mn0"/>
                         <outlet property="rateView" destination="ou4-7N-dEE" id="Bgp-ZP-5nk"/>
+                        <outlet property="refreshIcon" destination="9uG-88-NC4" id="Jtl-jj-HPt"/>
                         <outlet property="roundArrow" destination="8E0-q1-n37" id="QuZ-tl-Pot"/>
                         <outlet property="shareView" destination="TUY-sd-0Xf" id="fHF-YU-lYe"/>
                         <outlet property="star1" destination="LKN-gv-hBf" id="xvV-TZ-dsg"/>
@@ -533,6 +534,7 @@ with Safari</string>
                         <outlet property="star4" destination="jRL-4k-532" id="72B-22-WRz"/>
                         <outlet property="star5" destination="ajd-oN-WSw" id="CXx-GP-gXD"/>
                         <outlet property="tutorialVideoView" destination="Sk8-rZ-X4e" id="bLm-Ij-sqv"/>
+                        <outlet property="updateFiltersGestureRecognizer" destination="DEt-Hi-EkO" id="KS7-q9-ZiJ"/>
                         <outlet property="vikingImage" destination="TBC-HI-cYs" id="zhT-UW-VlD"/>
                         <outletCollection property="themableLabels" destination="eow-nj-Hky" collectionClass="NSMutableArray" id="E2L-bo-4cr"/>
                         <outletCollection property="themableLabels" destination="PAL-ww-Rbi" collectionClass="NSMutableArray" id="Gd3-1b-z70"/>
