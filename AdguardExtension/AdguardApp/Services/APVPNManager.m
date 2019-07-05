@@ -813,11 +813,17 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                    object: nil //_manager
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
-                       
-                       // When configuration is changed
-                       DDLogInfo(@"(APVPNManager) Notify that vpn configuration changed.");
-                       [self loadConfiguration];
+                    // When VPN configuration is changed
+                    [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
+                        if(!error) {
+                            DDLogInfo(@"(APVPNManager) Notify that vpn configuration changed.");
 
+                            [self setStatuses];
+                        } else {
+                            DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
+                            _lastError = _standartError;
+                        }
+                    }];
                    }];
     
     [_observers addObject:observer];
@@ -827,11 +833,17 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 object: nil //_manager.connection
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
-                       
-                       // When connection status is changed
-                       DDLogInfo(@"(APVPNManager) Notify that vpn connection status changed.");
-                       [self setStatuses];
-                       [self sendNotificationForced:NO];
+                        // When connection status is changed
+                        [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
+                            if(!error) {
+                                DDLogInfo(@"(APVPNManager) Notify that vpn connection status changed.");
+
+                                [self setStatuses];
+                            } else {
+                                DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
+                                _lastError = _standartError;
+                            }
+                        }];
                    }];
     
     [_observers addObject:observer];
