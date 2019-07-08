@@ -37,7 +37,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-+ (void)upgrade {
++ (void)upgradeWithAntibanner:(id)antibanner {
     
     AESharedResources *resources = [AESharedResources new];
     NSNumber *currentSchemaVersion = [resources.sharedDefaults objectForKey:AEDefaultsProductSchemaVersion];
@@ -64,7 +64,7 @@
     
     if(![lastBuildVersion isEqual:build]) {
         
-        if([self onMinorUpgrade])
+        if([self onMinorUpgradeWithAntibanner:antibanner])
             [resources.sharedDefaults setObject:build forKey:AEDefaultsProductBuildVersion];
     }
 }
@@ -103,7 +103,9 @@
     return YES;
 }
 
-+ (BOOL)onMinorUpgrade {
++ (BOOL)onMinorUpgradeWithAntibanner:(AESAntibanner*) antibanner {
+    
+    [self removeMalwareFilterWithAntibanner:antibanner];
     
     return YES;
 }
@@ -111,5 +113,9 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (private)
 
+
++ (void) removeMalwareFilterWithAntibanner:(AESAntibanner*) antibanner {
+    [antibanner unsubscribeFilter:@(208)];
+}
 
 @end
