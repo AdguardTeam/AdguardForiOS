@@ -206,6 +206,11 @@
               ABECFilterClientLocalization *i18n = [[[AEService singleton] antibanner] i18nForSubscribe:refresh];
               
               NSMutableArray <ASDFilterMetadata *> *filters = [metadata.filters mutableCopy];
+              
+              // remove "Malware Domains" filter from filters list.
+              // Apple rejects binary with word 'malware' within
+              [filters filterUsingPredicate: [NSPredicate predicateWithFormat:@"filterId != 208"] ];
+              
               NSArray *installedFilters =
                   [[[AEService singleton] antibanner] filters];
               ASDFilterMetadata *meta;
