@@ -196,7 +196,9 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func statusbarStyle() -> UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            return configuration.darkTheme ? .lightContent : .darkContent
+            // (UIStatusBarStyle(rawValue: 3) - we use it instead of using .dark to prevent compile time error in xcode v. < 11.0
+            // todo: we must remove this hack, when xcode 11 will be released
+            return configuration.darkTheme ? .lightContent : (UIStatusBarStyle(rawValue: 3) ?? .default)
         } else {
             return configuration.darkTheme ? .lightContent : .default
         }
