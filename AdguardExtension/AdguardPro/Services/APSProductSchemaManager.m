@@ -84,6 +84,8 @@
     
     BOOL saveSubscriptionsResult = [APBlockingSubscriptionsManager saveHostsAndRulesForSubscriptions];
     
+    [self removeMalwareFilter];
+    
     return result && installTrackersResult && saveSubscriptionsResult;
 }
 
@@ -166,4 +168,10 @@
     }
 
 }
+
++ (void) removeMalwareFilter {
+    AESAntibanner *antibanner = [[AEService singleton] antibanner];
+    [antibanner unsubscribeFilter:@(208)];
+}
+
 @end
