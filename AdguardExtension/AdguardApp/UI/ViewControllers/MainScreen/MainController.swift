@@ -284,7 +284,10 @@ class MainController: UIViewController {
             guard let filtersDate = self?.aeService.antibanner().filtersLastUpdateTime() else { return }
             DispatchQueue.main.async {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd.MM.yy"
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .none
+                let id = Locale.current.identifier
+                dateFormatter.locale = Locale(identifier: id)
                 let dateString = dateFormatter.string(from: filtersDate)
                 
                 let filterDateString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
