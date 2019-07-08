@@ -49,6 +49,7 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var buttons: [RoundRectButton]!
     @IBOutlet var separators: [UIView]!
+    @IBOutlet weak var scrollContentView: UIView!
     
     
     // MARK: - services
@@ -140,7 +141,7 @@ class ChooseProtocolController: BottomAlertController {
     
     private func updateTheme() {
         
-        contentView.backgroundColor = theme.popupBackgroundColor
+        scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
