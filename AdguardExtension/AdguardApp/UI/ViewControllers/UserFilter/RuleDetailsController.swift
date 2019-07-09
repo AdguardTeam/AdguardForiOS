@@ -23,12 +23,16 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        domainOrRuleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
 
+        
         ruleTextView.text = rule?.rule
         saveButton.isEnabled = false
         
