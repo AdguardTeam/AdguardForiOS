@@ -192,6 +192,10 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             theme.setupTableCell(cell)
             theme.setupSwitch(cell.enabledSwitch)
             cell.separator.backgroundColor = theme.separatorColor
+            // Check, if it is first row then hide top separator
+            if indexPath.row == 0{
+                cell.separator.isHidden = true
+            }
             
             return cell
             
