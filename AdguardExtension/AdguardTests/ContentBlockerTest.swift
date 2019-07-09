@@ -146,7 +146,90 @@ class ContentBlockerTest: XCTestCase {
     func testRemoveInvertedDomain2() {
         changeInvertedDomainList(oldDomains: ["google.com", "amazon.com"], domain: "google.com", jsonText: "[rule,\n@@||*$document,domain=~google.com|~amazon.com]", expectedResult: "[rule,\n@@||*$document,domain=~amazon.com]", action: .remove)
     }
-
+    
+    func testAffinityBlocks(rules: [ASDFilterRule], expectedJsonGeneral: String, expectedJsonOther: String) {
+        let resources = SharedResourcesMock()
+        let safari = SafariServiceMock()
+        
+        let contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
+        contentBlocker.createConverter = {
+            return (ConverterMock(), nil)
+        }
+        
+        let antibanner = AntibannerMock()
+        contentBlocker.antibanner = antibanner
+    
+        XCTAssertNil(contentBlocker.replaceUserFilter([]))
+        
+        XCTAssertTrue(antibanner.import(rules, filterId: ASDF_ENGLISH_FILTER_ID as NSNumber))
+        XCTAssertEqual(antibanner.activeRules(forFilter: ASDF_ENGLISH_FILTER_ID as NSNumber), rules)
+        
+        let expectation = XCTestExpectation(description: "reload jsons")
+        
+        contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+            XCTAssertNil(error)
+            
+            let dataGeneral = safari.jsons[ContentBlockerType.general.rawValue]
+            let jsonString = String(data: dataGeneral!, encoding:.utf8)
+            let dataOther = safari.jsons[ContentBlockerType.other.rawValue]
+            let jsonStringOther = String(data: dataOther!, encoding:.utf8)
+            
+            XCTAssertTrue(jsonString == expectedJsonGeneral)
+            XCTAssertTrue(jsonStringOther == expectedJsonOther)
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testAffinityBlocks1() {
+        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general)", enabled: true),
+                     ASDFilterRule(text: "@@||example.org^", enabled: true),
+                     ASDFilterRule(text: "example.org##banner", enabled: true),
+                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        
+        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonOther = "";
+        
+        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
+    }
+    
+    func testAffinityBlocks2() {
+        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general, other)", enabled: true),
+                     ASDFilterRule(text: "@@||example.org^", enabled: true),
+                     ASDFilterRule(text: "example.org##banner", enabled: true),
+                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        
+        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
+        
+        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
+    }
+    
+    func testAffinityBlocks3() {
+        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(all)", enabled: true),
+                     ASDFilterRule(text: "@@||example.org^", enabled: true),
+                     ASDFilterRule(text: "example.org##banner", enabled: true),
+                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        
+        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
+        
+        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
+    }
+    
+    func testAffinityBlocks4() {
+        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general, invalid)", enabled: true),
+                     ASDFilterRule(text: "@@||example.org^", enabled: true),
+                     ASDFilterRule(text: "example.org##banner", enabled: true),
+                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        
+        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonOther = "";
+        
+        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

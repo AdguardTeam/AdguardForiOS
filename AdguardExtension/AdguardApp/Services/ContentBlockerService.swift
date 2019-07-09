@@ -321,7 +321,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // get map of rules by content blocker
         var rulesByContentBlocker = [ContentBlockerType: [ASDFilterRule]]()
-        for (contenBlocker, groups) in groupsByContentBlocker {
+        var rulesByAffinityBlocks = [ContentBlockerType: [ASDFilterRule]]()
+        for (contentBlocker, groups) in groupsByContentBlocker {
             var contentBlockerRules = [ASDFilterRule]()
             for groupID in groups {
                 
@@ -329,11 +330,18 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 for filterID in filters {
                     
                     guard let filterRules = rulesByFilter[filterID] else { continue }
-                    contentBlockerRules.append(contentsOf: filterRules as [ASDFilterRule])
+                    sortWithAffinityBlocks(filterRules: filterRules, contentBlockerRules: &contentBlockerRules, rulesByAffinityBlocks: &rulesByAffinityBlocks)
                 }
             }
             
-            rulesByContentBlocker[contenBlocker] = contentBlockerRules
+            rulesByContentBlocker[contentBlocker] = contentBlockerRules
+        }
+        
+        for type in ContentBlockerType.allCases {
+            if rulesByContentBlocker[type] == nil {
+                rulesByContentBlocker[type] = [ASDFilterRule]()
+            }
+            rulesByContentBlocker[type]?.append(contentsOf: rulesByAffinityBlocks[type] ?? [])
         }
         
         var resultError: Error?
@@ -345,6 +353,55 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         resultError = updateJson(blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
         
         return resultError
+    }
+    
+    private func sortWithAffinityBlocks(filterRules: [ASDFilterRule], contentBlockerRules: inout [ASDFilterRule], rulesByAffinityBlocks: inout [ContentBlockerType: [ASDFilterRule]]) {
+        
+        var currentBlockTypes = [ContentBlockerType]();
+        for rule in filterRules {
+            let ruleText = rule.ruleText
+            
+            if ruleText.starts(with: AFFINITY_DIRECTIVE_START) {
+                currentBlockTypes = parseContentBlockerTypes(ruleText: ruleText)
+            } else if ruleText.starts(with: AFFINITY_DIRECTIVE) {
+                currentBlockTypes = [ContentBlockerType]();
+            } else if !currentBlockTypes.isEmpty {
+                for type in currentBlockTypes {
+                    if rulesByAffinityBlocks[type] == nil {
+                        rulesByAffinityBlocks[type] = [ASDFilterRule]()
+                    }
+                    rulesByAffinityBlocks[type]?.append(rule)
+                }
+            } else {
+                contentBlockerRules.append(rule)
+            }
+        }
+    }
+    
+    private let AFFINITY_DIRECTIVE: String = "!#safari_cb_affinity"
+    private let AFFINITY_DIRECTIVE_START: String = "!#safari_cb_affinity(";
+    
+    private let contenBlockerTypeByAffinityList: [String: [ContentBlockerType]] =
+        ["general" : [.general],
+         "privacy" : [.privacy],
+         "social" : [.socialWidgetsAndAnnoyances],
+         "other" : [.other],
+         "custom": [.custom],
+         "all": [.general, .privacy, .socialWidgetsAndAnnoyances, .other, .custom]]
+    
+    private func parseContentBlockerTypes(ruleText: String)->[ContentBlockerType] {
+        
+        var result = [ContentBlockerType]()
+        
+        let startIndex = AFFINITY_DIRECTIVE.count + 1;
+        let stripped = ruleText.dropFirst(startIndex).dropLast(1);
+        let list = stripped.split(separator: ",");
+        for affinityBlock in list {
+            let block = affinityBlock.trimmingCharacters(in: .whitespacesAndNewlines)
+            result.append(contentsOf: contenBlockerTypeByAffinityList[String(block)] ?? [])
+        }
+        
+        return result
     }
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
