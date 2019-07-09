@@ -22,9 +22,17 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var contentView: RoundrectView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentViewHeightLayoutConstraint: NSLayoutConstraint?
+    
+    private var statusBarHeight: CGFloat {
+        return UIApplication.shared.statusBarFrame.height
+    }
+    private var initialHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialHeight = contentViewHeightLayoutConstraint?.constant ?? 0
+        contentView.layer.masksToBounds = true
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardNotification(notification:)),
                                                name:
@@ -43,6 +51,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardNotification(notification: NSNotification) {
+        
         if let userInfo = notification.userInfo {
             let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
             let endFrameY = endFrame?.origin.y ?? 0
@@ -50,8 +59,9 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
             let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
             let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            
+            let keyboardHeight = endFrame?.height
             var bottomSafeArea: CGFloat
+           
             if #available(iOS 11.0, *) {
                 bottomSafeArea = view.safeAreaInsets.bottom
             } else {
@@ -62,12 +72,14 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
             if endFrameY >= UIScreen.main.bounds.size.height {
                 bottomConstraint = -34
             } else {
+                calculateContentViewHeight(keyboardHeight: keyboardHeight ?? 0)
                 bottomConstraint = bottomSafeArea > 0 ? (endFrame?.size.height ?? 0.0) - 68 :
                                                         (endFrame?.size.height ?? 0.0) - 34
             }
             
             // during rotations, we get one extra message with the wrong coordinates. Skip it
             if self.view.frame.size.width == endFrame?.width {
+                calculateContentViewHeight(keyboardHeight: keyboardHeight ?? 0)
                 self.keyboardHeightLayoutConstraint?.constant = bottomConstraint
             }
             
@@ -83,5 +95,14 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         
         textField.resignFirstResponder()
         return true
+    }
+    
+    private func calculateContentViewHeight(keyboardHeight: CGFloat){
+        guard let calculatedHeight = contentViewHeightLayoutConstraint else {
+            return
+        }
+        let height = self.view.frame.height
+        let calculatedContentViewHeight = height - keyboardHeight - statusBarHeight
+        calculatedHeight.constant = calculatedContentViewHeight < initialHeight ? calculatedContentViewHeight : initialHeight
     }
 }

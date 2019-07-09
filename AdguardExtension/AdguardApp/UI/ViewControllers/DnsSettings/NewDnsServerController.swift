@@ -36,6 +36,7 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var upstreamsField: UITextField!
     
     @IBOutlet var separators: [UIView]!
+    @IBOutlet weak var scrollContentView: UIView!
     
     
     // MARK: - services
@@ -96,7 +97,7 @@ class NewDnsServerController: BottomAlertController {
     // MARK: - private methods
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
+        scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
