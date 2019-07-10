@@ -1,53 +1,89 @@
+// Software License Agreement (BSD License)
+//
+// Copyright (c) 2010-2018, Deusty, LLC
+// All rights reserved.
+//
+// Redistribution and use of this software in source and binary forms,
+// with or without modification, are permitted provided that the following conditions are met:
+//
+// * Redistributions of source code must retain the above copyright notice,
+//   this list of conditions and the following disclaimer.
+//
+// * Neither the name of Deusty nor the names of its contributors may be used
+//   to endorse or promote products derived from this software without specific
+//   prior written permission of Deusty, LLC.
+
 #import "DDDispatchQueueLogFormatter.h"
-#import <libkern/OSAtomic.h>
+#import <pthread/pthread.h>
+#import <objc/runtime.h>
 
-/**
- * Welcome to Cocoa Lumberjack!
- * 
- * The project page has a wealth of documentation if you have any questions.
- * https://github.com/CocoaLumberjack/CocoaLumberjack
- * 
- * If you're new to the project you may wish to read the "Getting Started" wiki.
- * https://github.com/CocoaLumberjack/CocoaLumberjack/wiki/GettingStarted
-**/
-
-#if ! __has_feature(objc_arc)
-#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#if !__has_feature(objc_arc)
+#error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
+#pragma mark - DDDispatchQueueLogFormatter
 
-@implementation DDDispatchQueueLogFormatter
-{
-    int32_t atomicLoggerCount;
-    NSDateFormatter *threadUnsafeDateFormatter; // Use [self stringFromDate]
+@interface DDDispatchQueueLogFormatter () {
+    DDDispatchQueueLogFormatterMode _mode;
+    NSString *_dateFormatterKey;
+    DDAtomicCounter *_atomicLoggerCounter;
+    NSDateFormatter *_threadUnsafeDateFormatter; // Use [self stringFromDate]
     
-    OSSpinLock lock;
+    pthread_mutex_t _mutex;
     
     NSUInteger _minQueueLength;           // _prefix == Only access via atomic property
     NSUInteger _maxQueueLength;           // _prefix == Only access via atomic property
     NSMutableDictionary *_replacements;   // _prefix == Only access from within spinlock
 }
 
-- (id)init
-{
-    if ((self = [super init]))
-    {
-        dateFormatString = @"yyyy-MM-dd HH:mm:ss:SSS";
-        
-        atomicLoggerCount = 0;
-        threadUnsafeDateFormatter = nil;
-        
+@end
+
+
+@implementation DDDispatchQueueLogFormatter
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        _mode = DDDispatchQueueLogFormatterModeShareble;
+
+        // We need to carefully pick the name for storing in thread dictionary to not
+        // use a formatter configured by subclass and avoid surprises.
+        Class cls = [self class];
+        Class superClass = class_getSuperclass(cls);
+        SEL configMethodName = @selector(configureDateFormatter:);
+        Method configMethod = class_getInstanceMethod(cls, configMethodName);
+        while (class_getInstanceMethod(superClass, configMethodName) == configMethod) {
+            cls = superClass;
+            superClass = class_getSuperclass(cls);
+        }
+        // now `cls` is the class that provides implementation for `configureDateFormatter:`
+        _dateFormatterKey = [NSString stringWithFormat:@"%s_NSDateFormatter", class_getName(cls)];
+
+        _atomicLoggerCounter = [[DDAtomicCounter alloc] initWithDefaultValue:0];
+        _threadUnsafeDateFormatter = nil;
+
         _minQueueLength = 0;
         _maxQueueLength = 0;
+        pthread_mutex_init(&_mutex, NULL);
         _replacements = [[NSMutableDictionary alloc] init];
-        
+
         // Set default replacements:
-        
+
         _replacements[@"com.apple.main-thread"] = @"main";
+    }
+
+    return self;
+}
+
+- (instancetype)initWithMode:(DDDispatchQueueLogFormatterMode)mode {
+    if ((self = [self init])) {
+        _mode = mode;
     }
     return self;
 }
 
+- (void)dealloc {
+    pthread_mutex_destroy(&_mutex);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Configuration
@@ -56,203 +92,239 @@
 @synthesize minQueueLength = _minQueueLength;
 @synthesize maxQueueLength = _maxQueueLength;
 
-- (NSString *)replacementStringForQueueLabel:(NSString *)longLabel
-{
+- (NSString *)replacementStringForQueueLabel:(NSString *)longLabel {
     NSString *result = nil;
-    
-    OSSpinLockLock(&lock);
+
+    pthread_mutex_lock(&_mutex);
     {
         result = _replacements[longLabel];
     }
-    OSSpinLockUnlock(&lock);
-    
+    pthread_mutex_unlock(&_mutex);
+
     return result;
 }
 
-- (void)setReplacementString:(NSString *)shortLabel forQueueLabel:(NSString *)longLabel
-{
-    OSSpinLockLock(&lock);
+- (void)setReplacementString:(NSString *)shortLabel forQueueLabel:(NSString *)longLabel {
+    pthread_mutex_lock(&_mutex);
     {
-        if (shortLabel)
+        if (shortLabel) {
             _replacements[longLabel] = shortLabel;
-        else
+        } else {
             [_replacements removeObjectForKey:longLabel];
+        }
     }
-    OSSpinLockUnlock(&lock);
+    pthread_mutex_unlock(&_mutex);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark DDLogFormatter
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (NSString *)stringFromDate:(NSDate *)date
-{
-    int32_t loggerCount = OSAtomicAdd32(0, &atomicLoggerCount);
-    
-    if (loggerCount <= 1)
-    {
-        // Single-threaded mode.
-        
-        if (threadUnsafeDateFormatter == nil)
-        {
-            threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];
-            [threadUnsafeDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-            [threadUnsafeDateFormatter setDateFormat:dateFormatString];
-        }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
-        [threadUnsafeDateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
-        return [threadUnsafeDateFormatter stringFromDate:date];
-#pragma clang diagnostic pop
-    }
-    else
-    {
-        // Multi-threaded mode.
-        // NSDateFormatter is NOT thread-safe.
-        
-        NSString *key = @"DispatchQueueLogFormatter_NSDateFormatter";
-        
-        NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
-        NSDateFormatter *dateFormatter = threadDictionary[key];
-        
-        if (dateFormatter == nil)
-        {
-            dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-            [dateFormatter setDateFormat:dateFormatString];
-            
-            threadDictionary[key] = dateFormatter;
-        }
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
-        [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
-        return [dateFormatter stringFromDate:date];
-#pragma clang diagnostic pop
-    }
+- (NSDateFormatter *)createDateFormatter {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [self configureDateFormatter:formatter];
+    return formatter;
 }
 
-- (NSString *)queueThreadLabelForLogMessage:(DDLogMessage *)logMessage
-{
+- (void)configureDateFormatter:(NSDateFormatter *)dateFormatter {
+    [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS"];
+    [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+
+    NSString *calendarIdentifier = NSCalendarIdentifierGregorian;
+
+    [dateFormatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:calendarIdentifier]];
+}
+
+- (NSString *)stringFromDate:(NSDate *)date {
+
+    NSDateFormatter *dateFormatter = nil;
+    if (_mode == DDDispatchQueueLogFormatterModeNonShareble) {
+        // Single-threaded mode.
+
+        dateFormatter = _threadUnsafeDateFormatter;
+        if (dateFormatter == nil) {
+            dateFormatter = [self createDateFormatter];
+            _threadUnsafeDateFormatter = dateFormatter;
+        }
+    } else {
+        // Multi-threaded mode.
+        // NSDateFormatter is NOT thread-safe.
+
+        NSString *key = _dateFormatterKey;
+
+        NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+        dateFormatter = threadDictionary[key];
+
+        if (dateFormatter == nil) {
+            dateFormatter = [self createDateFormatter];
+            threadDictionary[key] = dateFormatter;
+        }
+    }
+
+    return [dateFormatter stringFromDate:date];
+}
+
+- (NSString *)queueThreadLabelForLogMessage:(DDLogMessage *)logMessage {
     // As per the DDLogFormatter contract, this method is always invoked on the same thread/dispatch_queue
-    
+
     NSUInteger minQueueLength = self.minQueueLength;
     NSUInteger maxQueueLength = self.maxQueueLength;
-    
+
     // Get the name of the queue, thread, or machID (whichever we are to use).
-    
+
     NSString *queueThreadLabel = nil;
-    
+
     BOOL useQueueLabel = YES;
     BOOL useThreadName = NO;
-    
-    if (logMessage->queueLabel)
-    {
+
+    if (logMessage->_queueLabel) {
         // If you manually create a thread, it's dispatch_queue will have one of the thread names below.
         // Since all such threads have the same name, we'd prefer to use the threadName or the machThreadID.
-        
-        char *names[] = { "com.apple.root.low-priority",
-                          "com.apple.root.default-priority",
-                          "com.apple.root.high-priority",
-                          "com.apple.root.low-overcommit-priority",
-                          "com.apple.root.default-overcommit-priority",
-                          "com.apple.root.high-overcommit-priority"     };
-        
-        int length = sizeof(names) / sizeof(char *);
-        
-        int i;
-        for (i = 0; i < length; i++)
-        {
-            if (strcmp(logMessage->queueLabel, names[i]) == 0)
-            {
+
+        NSArray *names = @[
+            @"com.apple.root.low-priority",
+            @"com.apple.root.default-priority",
+            @"com.apple.root.high-priority",
+            @"com.apple.root.low-overcommit-priority",
+            @"com.apple.root.default-overcommit-priority",
+            @"com.apple.root.high-overcommit-priority",
+            @"com.apple.root.default-qos.overcommit"
+        ];
+
+        for (NSString * name in names) {
+            if ([logMessage->_queueLabel isEqualToString:name]) {
                 useQueueLabel = NO;
-                useThreadName = [logMessage->threadName length] > 0;
+                useThreadName = [logMessage->_threadName length] > 0;
                 break;
             }
         }
-    }
-    else
-    {
+    } else {
         useQueueLabel = NO;
-        useThreadName = [logMessage->threadName length] > 0;
+        useThreadName = [logMessage->_threadName length] > 0;
     }
-    
-    if (useQueueLabel || useThreadName)
-    {
+
+    if (useQueueLabel || useThreadName) {
         NSString *fullLabel;
         NSString *abrvLabel;
-        
-        if (useQueueLabel)
-            fullLabel = @(logMessage->queueLabel);
-        else
-            fullLabel = logMessage->threadName;
-        
-        OSSpinLockLock(&lock);
+
+        if (useQueueLabel) {
+            fullLabel = logMessage->_queueLabel;
+        } else {
+            fullLabel = logMessage->_threadName;
+        }
+
+        pthread_mutex_lock(&_mutex);
         {
             abrvLabel = _replacements[fullLabel];
         }
-        OSSpinLockUnlock(&lock);
-        
-        if (abrvLabel)
+        pthread_mutex_unlock(&_mutex);
+
+        if (abrvLabel) {
             queueThreadLabel = abrvLabel;
-        else
+        } else {
             queueThreadLabel = fullLabel;
+        }
+    } else {
+        queueThreadLabel = logMessage->_threadID;
     }
-    else
-    {
-        queueThreadLabel = [NSString stringWithFormat:@"%x", logMessage->machThreadID];
-    }
-    
+
     // Now use the thread label in the output
-    
+
     NSUInteger labelLength = [queueThreadLabel length];
-    
+
     // labelLength > maxQueueLength : truncate
     // labelLength < minQueueLength : padding
     //                              : exact
-    
-    if ((maxQueueLength > 0) && (labelLength > maxQueueLength))
-    {
+
+    if ((maxQueueLength > 0) && (labelLength > maxQueueLength)) {
         // Truncate
-        
+
         return [queueThreadLabel substringToIndex:maxQueueLength];
-    }
-    else if (labelLength < minQueueLength)
-    {
+    } else if (labelLength < minQueueLength) {
         // Padding
-        
+
         NSUInteger numSpaces = minQueueLength - labelLength;
-        
+
         char spaces[numSpaces + 1];
         memset(spaces, ' ', numSpaces);
         spaces[numSpaces] = '\0';
-        
+
         return [NSString stringWithFormat:@"%@%s", queueThreadLabel, spaces];
-    }
-    else
-    {
+    } else {
         // Exact
-        
+
         return queueThreadLabel;
     }
 }
 
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
-{
-    NSString *timestamp = [self stringFromDate:(logMessage->timestamp)];
+- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
+    NSString *timestamp = [self stringFromDate:(logMessage->_timestamp)];
     NSString *queueThreadLabel = [self queueThreadLabelForLogMessage:logMessage];
-    
-    return [NSString stringWithFormat:@"%@ [%@] %@", timestamp, queueThreadLabel, logMessage->logMsg];
+
+    return [NSString stringWithFormat:@"%@ [%@] %@", timestamp, queueThreadLabel, logMessage->_message];
 }
 
-- (void)didAddToLogger:(id <DDLogger>)logger
-{
-    OSAtomicIncrement32(&atomicLoggerCount);
+- (void)didAddToLogger:(id <DDLogger>  __attribute__((unused)))logger {
+    NSAssert([_atomicLoggerCounter increment] <= 1 || _mode == DDDispatchQueueLogFormatterModeShareble, @"Can't reuse formatter with multiple loggers in non-shareable mode.");
 }
 
-- (void)willRemoveFromLogger:(id <DDLogger>)logger
-{
-    OSAtomicDecrement32(&atomicLoggerCount);
+- (void)willRemoveFromLogger:(id <DDLogger> __attribute__((unused)))logger {
+    [_atomicLoggerCounter decrement];
 }
+
+@end
+
+#pragma mark - DDAtomicCounter
+
+#define DD_OSATOMIC_API_DEPRECATED (TARGET_OS_OSX && MAC_OS_X_VERSION_MIN_REQUIRED >= 101200) || (TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (TARGET_OS_WATCH && __WATCH_OS_VERSION_MIN_REQUIRED >= 30000) || (TARGET_OS_TV && __TV_OS_VERSION_MIN_REQUIRED >= 100000)
+
+#if DD_OSATOMIC_API_DEPRECATED
+#import <stdatomic.h>
+#else
+#import <libkern/OSAtomic.h>
+#endif
+
+@interface DDAtomicCounter() {
+#if DD_OSATOMIC_API_DEPRECATED
+    _Atomic(int32_t) _value;
+#else
+    int32_t _value;
+#endif
+}
+@end
+
+@implementation DDAtomicCounter
+
+- (instancetype)initWithDefaultValue:(int32_t)defaultValue {
+    if ((self = [super init])) {
+        _value = defaultValue;
+    }
+    return self;
+}
+
+- (int32_t)value {
+    return _value;
+}
+
+#if DD_OSATOMIC_API_DEPRECATED
+- (int32_t)increment {
+    atomic_fetch_add_explicit(&_value, 1, memory_order_relaxed);
+    return _value;
+}
+
+- (int32_t)decrement {
+    atomic_fetch_sub_explicit(&_value, 1, memory_order_relaxed);
+    return _value;
+}
+#else
+- (int32_t)increment {
+    return OSAtomicIncrement32(&_value);
+}
+
+- (int32_t)decrement {
+    return OSAtomicDecrement32(&_value);
+}
+#endif
 
 @end

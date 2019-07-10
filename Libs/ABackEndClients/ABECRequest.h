@@ -36,19 +36,25 @@
     Create request object with POST method.
     @param parameters   May be nil.
  */
-+ (id)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
++ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary<NSString*, NSString*> *)parameters headers:(nullable NSDictionary<NSString*, NSString*>*) headers;
+
+/**
+ Create request object with POST method^ Content-Type = application/json
+ @param jsonString - jaon to send
+ */
++ (nonnull NSURLRequest*) postRequestForURL:(nonnull NSURL *)theURL json:(nonnull NSString*) jsonString;
 
 /**
     Create request object with GET method.
     @param parameters   May be nil.
  */
-+ (id)getRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters;
++ (nonnull id) getRequestForURL:(nonnull NSURL *)theURL parameters:(nullable NSDictionary *)parameters;
 
 /**
     Create parameter string from dictionary.
     Parameters values is converted using percent escaping.
  */
-+ (NSString *)createStringFromParameters:(NSDictionary *)parameters;
++ (nonnull NSString *) createStringFromParameters:(nonnull NSDictionary *)parameters;
 
 @end
 

@@ -18,16 +18,24 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 
-extern NSString *AESSupportSubjectPrefixFormat;
+extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@interface AESSupport : NSObject <MFMailComposeViewControllerDelegate>
+@protocol AESharedResourcesProtocol, SafariServiceProtocol, AEServiceProtocol;
 
-+ (AESSupport *)singleton;
+@protocol AESSupportProtocol <NSObject>
 
-- (void)sendMailBugReportWithParentController:(UIViewController *)parent;
+- (void)sendMailBugReportWithParentController:(nonnull UIViewController *)parent;
 
-- (void)sendSimpleMailWithParentController:(UIViewController *)parent subject:(NSString *)subject body:(NSString *)body;
+- (void)sendSimpleMailWithParentController:(nonnull UIViewController *)parent subject:(nonnull NSString *)subject body:(nonnull NSString *)body;
 
-- (NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
+- (nullable NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
+
+@end
+
+@interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>
+
+- (nonnull instancetype) initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
+                      safariSevice: (nonnull id<SafariServiceProtocol>) safariService
+                         aeService: (nonnull id<AEServiceProtocol>) aeService;
 
 @end

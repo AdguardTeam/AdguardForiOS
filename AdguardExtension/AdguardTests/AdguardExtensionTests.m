@@ -34,16 +34,6 @@
     [super tearDown];
 }
 
-- (void)testSharedResourcesBlockingRules {
-
-    NSString *testString = @"Test string";
-    AESharedResources *res = [AESharedResources new];
-    res.blockingContentRules = [testString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    XCTAssert([[[NSString alloc] initWithData:res.blockingContentRules encoding:NSUTF8StringEncoding] isEqualToString:testString]);
-
-}
-
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{

@@ -27,14 +27,19 @@ NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
 #pragma mark - ACNNetworking
 /////////////////////////////////////////////////////////////////////
 
+@interface ACNNetworking() {
+
+    NSURLSessionConfiguration *_defaultConfigObject;
+    NSURLSession *_defaultSession;
+}
+
+@end
+
 @implementation ACNNetworking
 
-static NSURLSessionConfiguration *_defaultConfigObject;
-static NSURLSession *_defaultSession;
-
-+ (void)initialize{
+- (instancetype)init{
     
-    if (self == [ACNNetworking class]) {
+    if (self == [super init]) {
         
         _defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
         
@@ -65,13 +70,15 @@ static NSURLSession *_defaultSession;
         /* Create a session. */
         _defaultSession = [NSURLSession sessionWithConfiguration: _defaultConfigObject delegate:nil delegateQueue:nil] ;
     }
+    
+    return self;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Class methods
 /////////////////////////////////////////////////////////////////////
 
-+ (void)dataWithURL:(NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
+- (void)dataWithURL:(NSURL *)url timeoutInterval:(NSTimeInterval)timeoutInterval
       completionHandler:(void (^)(NSData *data,
                                   NSURLResponse *response,
                                   NSError *error))completionHandler{
@@ -91,13 +98,19 @@ static NSURLSession *_defaultSession;
     [[_defaultSession dataTaskWithRequest:request completionHandler:completionHandler] resume];
 }
 
-+ (void)dataWithURL:(NSURL *)url
+- (void)dataWithURL:(NSURL *)url
   completionHandler:(void (^)(NSData *data,
                               NSURLResponse *response,
                               NSError *error))completionHandler{
 
  
-    [ACNNetworking dataWithURL:url timeoutInterval:ACN_DEFAULT_READ_TIMEOUT completionHandler:completionHandler];
+    [self dataWithURL:url timeoutInterval:ACN_DEFAULT_READ_TIMEOUT completionHandler:completionHandler];
 }
+
+- (void)dataWithURLRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData *, NSURLResponse *, NSError *))completionHandler {
+    
+    [[_defaultSession dataTaskWithRequest:request completionHandler:completionHandler] resume];
+}
+
 
 @end

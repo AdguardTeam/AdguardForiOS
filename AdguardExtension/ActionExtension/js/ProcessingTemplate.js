@@ -22,7 +22,7 @@ function Assistant(){
     /* At this point we include all libraries, because action extension script doesn't allow loading local resources. */
     /*LOAD_LIBRARY_HERE*/
 
-   adguardAssistant.start(function(ruleText) {
+   adguardAssistant().start(null, function(ruleText){
                           
                           settings = window.AdguardAssistant_settings;
                           acceptUrlScheme = (typeof settings !== 'undefined' && typeof settings.urlScheme !== 'undefined') ? settings.urlScheme : "adguard";

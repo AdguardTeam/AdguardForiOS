@@ -18,8 +18,12 @@
 #import "ADomain/ADomain.h"
 #import "ActionRequestHandler.h"
 #import "AESharedResources.h"
+#import "Adguard-Swift.h"
 
 #define AE_BLOCKLIST_NAME       @"blockerList.json"
+
+// minimum json file length. In some cases we get json containing "[]" or "[\t\n]". We must process it as empty file
+#define MINIMUM_JSON_LENGTH     5
 
 NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]";
 
@@ -38,40 +42,44 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         // Registering standart Defaults
         NSString *appPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"../../"];
         NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleWithPath:appPath] pathForResource:@"defaults" ofType:@"plist"]];
+        
+        AESharedResources* resources = [AESharedResources new];
+        
         if (defs){
             
             NSLog(@"ActionRequestHandler: default.plist loaded!");
 
-            [[AESharedResources sharedDefaults] registerDefaults:defs];
+            [[resources sharedDefaults] registerDefaults:defs];
         }
         //-------------------------------
         
-        BOOL filtrationEnabled = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled];
+        BOOL filteringEnabled = [[resources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled];
         
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
+        SafariService* safariService = [[SafariService alloc] initWithResources:resources];
+        NSString* filename = [safariService filenameById: NSBundle.mainBundle.bundleIdentifier];
+        NSString* path = [resources pathForRelativePath:filename];
+        NSURL* fileUrl = [NSURL fileURLWithPath:path];
         
         if (jsonURL) {
             
             NSLog(@"ActionRequestHandler: JSON URL \"%@\"", jsonURL);
             
-            NSData *jsonData;
-            if (filtrationEnabled) {
-                jsonData = [[AESharedResources new] blockingContentRules];
+            long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil][NSFileSize] longLongValue];
+            
+            BOOL succedded = NO;
+            
+            if ( !(filteringEnabled && fileSize >= MINIMUM_JSON_LENGTH) ) {
+                NSData* jsonData = [AEFakeBlockinRule dataUsingEncoding:NSUTF8StringEncoding];
+                succedded = [jsonData writeToURL:jsonURL atomically:YES];
+            }
+            else {
+                NSError* error;
+                [[NSFileManager defaultManager] removeItemAtURL:jsonURL error:&error];
+                succedded = [[NSFileManager defaultManager] copyItemAtURL:fileUrl toURL:jsonURL error:&error];
             }
             
-            if ( !(filtrationEnabled && jsonData.length) ) {
-                jsonData = [AEFakeBlockinRule dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            
-            if ([jsonData writeToURL:jsonURL atomically:YES]) {
-                
-                NSLog(@"ActionRequestHandler: JSON saved with length in bytes: %lu", jsonData.length);
-
-                //TODO: delete this
-//                NSUInteger length = jsonData.length < 1000 ? jsonData.length : 1000;
-//                NSString *jsonContent = [[NSString alloc] initWithBytes:jsonData.bytes length:length encoding:NSUTF8StringEncoding];
-//                NSLog(@"ActionRequestHandler: JSON content^ up to 1000 bytes:\n%@", jsonContent);
-                //------------------
+            if (succedded) {
                 
                 NSItemProvider *attachment =
                     [[NSItemProvider alloc] initWithContentsOfURL:jsonURL];
@@ -86,14 +94,12 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
 
                     items = @[item];
                 }
-
                 
                 [context completeRequestReturningItems:items
                                      completionHandler:nil];
                 return;
             }
         }
-        
         
         [context completeRequestReturningItems:nil completionHandler:nil];
         return;

@@ -38,9 +38,23 @@ NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
+NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
+NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
+NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
+NSString *AEDefaultsHasPremiumLicense = @"AEDefaultsHasPremiumLicense";
+NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableSubscriptionExpirationDate";
+NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
+NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
+NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
+NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
+NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 
+NSString* AEDefaultsGeneralContentBlockerRulesCount = @"AEDefaultsGeneralContentBlockerRulesCount";
+NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContentBlockerRulesCount";
+NSString* AEDefaultsSocialContentBlockerRulesCount = @"AEDefaultsSocialContentBlockerRulesCount";
+NSString* AEDefaultsOtherContentBlockerRulesCount = @"AEDefaultsOtherContentBlockerRulesCount";
+NSString* AEDefaultsCustomContentBlockerRulesCount = @"AEDefaultsCustomContentBlockerRulesCount";
 
-#define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
@@ -49,6 +63,7 @@ NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
 #define AES_SAFARI_INVERTED_WHITELIST_RULES     @"safari-inverdet-whitelist-rules.data"
 #define AES_FILTERS_META_CACHE                  @"metadata-cache.data"
 #define AES_FILTERS_I18_CACHE                   @"i18-cache.data"
+#define AES_ACTIVE_DNS_SERVER                   @"active-dns-server.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -67,7 +82,8 @@ static NSUserDefaults *_sharedUserDefaults;
     
     if (self == [AESharedResources class]) {
         
-        _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AE_SHARED_RESOURCES_GROUP];
+        NSString* groupId = AE_SHARED_RESOURCES_GROUP;
+        _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
         _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AE_SHARED_RESOURCES_GROUP];
     }
 }
@@ -96,16 +112,6 @@ static NSUserDefaults *_sharedUserDefaults;
 + (NSURL *)sharedLogsURL{
     
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
-}
-
-- (NSData *)blockingContentRules{
-    
-    return [self loadDataFromFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
-}
-
-- (void)setBlockingContentRules:(NSData *)blockingContentRules{
-
-    [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
 }
 
 - (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
@@ -284,7 +290,7 @@ static NSUserDefaults *_sharedUserDefaults;
     }
 }
 
-+ (NSUserDefaults *)sharedDefaults{
+- (NSUserDefaults *)sharedDefaults{
     
     return _sharedUserDefaults;
 }
@@ -351,6 +357,25 @@ static NSUserDefaults *_sharedUserDefaults;
             }
         }
     }
+}
+
+- (void)setActiveDnsServer:(DnsServerInfo *)activeDnsServer {
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:activeDnsServer];
+    if (!data) {
+        data = [NSData data];
+    }
+    
+    [self saveData:data toFileRelativePath:AES_ACTIVE_DNS_SERVER];
+}
+
+- (DnsServerInfo *)activeDnsServer {
+    NSData *data = [self loadDataFromFileRelativePath:AES_ACTIVE_DNS_SERVER];
+    
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
 }
 
 /////////////////////////////////////////////////////////////////////

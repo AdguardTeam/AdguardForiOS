@@ -25,7 +25,9 @@
 /////////////////////////////////////////////////////////////////////
 
 @interface ABECFilterMetadata : ASDFilterMetadata
+
 @end
+
 @implementation ABECFilterMetadata
 
 #pragma mark Supporting set object from dictionary
@@ -54,6 +56,8 @@
     else if ([key isEqualToString:@"languages"]){
         
         self.langs = value;
+    }
+    else if ([key isEqualToString:@"languages"]){
     }
     else
         [super setValue:value forKey:key];
@@ -89,6 +93,8 @@
     
     NSMutableArray <ASDFilterMetadata *> *_filterMetadataList;
     NSMutableArray <ASDFilterGroup *> *_groupList;
+    
+    NSDictionary<NSString*, NSNumber*> *_tagTypes;
 }
 
 
@@ -99,6 +105,15 @@
         
         _filterMetadataList = [NSMutableArray array];
         _groupList = [NSMutableArray array];
+        _tagTypes = @{@"purpose": @(ASDFilterTagTypePurpose),
+                      @"lang": @(ASDFilterTagTypeLang),
+                      @"reference": @(ASDFilterTagTypeReference),
+                      @"recommended": @(ASDFilterTagTypeRecommended),
+                      @"platform": @(ASDFilterTagTypePlatform),
+                      @"problematic": @(ASDFilterTagTypeProblematic),
+                      @"obsolete":@(ASDFilterTagTypeObsolete),
+                      @"platform":@(ASDFilterTagTypePlatform)
+                      };
     }
     
     return self;
@@ -134,7 +149,7 @@
         return NO;
     }
     
-    if (!([metaDict isKindOfClass:[NSDictionary class]] && metaDict[@"filters"] && metaDict[@"groups"])) {
+    if (!([metaDict isKindOfClass:[NSDictionary class]] && metaDict[@"filters"] && metaDict[@"groups"] && metaDict[@"tags"])) {
         
         DDLogError(@"(ABECFilterParsers) Error when parsing groups/filters metadata "
                    @"JSON:\nReturned object is not valid dictionary.");
@@ -142,10 +157,42 @@
         return NO;
     }
     
+    NSMutableDictionary<NSNumber*, ASDFilterTagMeta*>* tagMetas = [NSMutableDictionary new];
+    for (NSDictionary * item in metaDict[@"tags"]) {
+        NSNumber* tagId = item[@"tagId"];
+        NSString* keyword = item[@"keyword"];
+        NSArray *params = [keyword componentsSeparatedByString:@":"];
+        
+        if(!(tagId && [tagId isKindOfClass:NSNumber.class] && params.count))
+            continue;
+        
+        ASDFilterTagMeta* tag = [ASDFilterTagMeta new];
+        tag.tagId = tagId.intValue;
+        tag.type = _tagTypes[params[0]].intValue;
+        
+        if(params.count == 2) {
+            tag.name = params[1];
+        }
+        else {
+            tag.name = params[0];
+        }
+        
+        tagMetas[tagId] = tag;
+    }
+    
     for (NSDictionary *item in metaDict[@"filters"]) {
         
         ASDFilterMetadata *meta = [ABECFilterMetadata new];
         [meta setValuesForKeysWithDictionary:item];
+        NSMutableArray<ASDFilterTagMeta*>* tags = [NSMutableArray new];
+        for(NSNumber* tagId in item[@"tags"]) {
+            ASDFilterTagMeta* tagMeta = tagMetas[tagId];
+            if(tagMeta) {
+                [tags addObject:tagMeta];
+            }
+        }
+        
+        meta.tags = tags;
         
         [_filterMetadataList addObject:meta];
     }
@@ -219,8 +266,10 @@
     }
     
     NSDictionary *filters = dataDict[@"filters"];
+    ASSIGN_WEAK(self);
     [filters enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        ASSIGN_STRONG(self);
         NSNumber *filterId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -237,12 +286,13 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        _filtersI18nDict[filterId] = [targetLangs copy];
+        USE_STRONG(self)->_filtersI18nDict[filterId] = [targetLangs copy];
     }];
     
     NSDictionary *groups = dataDict[@"groups"];
     [groups enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        ASSIGN_STRONG(self);
         NSNumber *groupId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -258,7 +308,7 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        _groupsI18nDict[groupId] = [targetLangs copy];
+        USE_STRONG(self)->_groupsI18nDict[groupId] = [targetLangs copy];
     }];
     
     return YES;

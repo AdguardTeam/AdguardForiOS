@@ -6,6 +6,9 @@
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wimplicit-retain-self"
+
 #import "FMDatabasePool.h"
 #import "FMDatabase.h"
 
@@ -271,3 +274,5 @@
 #endif
 
 @end
+
+#pragma clang diagnostic pop

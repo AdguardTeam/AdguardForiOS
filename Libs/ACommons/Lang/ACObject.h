@@ -34,5 +34,6 @@
 /////////////////////////////////////////////////////////////////////
 
 + (NSArray *)propertyNamesArray;
+- (id)initWithCoder:(NSCoder *)aDecoder;
 
 @end

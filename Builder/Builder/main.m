@@ -124,7 +124,7 @@ int main(int argc, const char * argv[])
                 
                 for (ASDFilterGroup *item in metadata.groups) {
                     
-                    [db executeUpdate:@"insert into filter_groups (group_id, name, display_number) values (?, ?, ?)", item.groupId, item.name, item.displayNumber];
+                    [db executeUpdate:@"insert into filter_groups (group_id, name, display_number, is_enabled) values (?, ?, ?, ?)", item.groupId, item.name, item.displayNumber, @0];
                     
                 }
                 for (ASDFilterGroupLocalization *locale in i18n.groups.localizations) {
@@ -135,11 +135,19 @@ int main(int argc, const char * argv[])
                 
                 for (ASDFilterMetadata *meta in metadata.filters) {
                     
+                    if([meta.filterId isEqualToNumber:@(208)]) {
+                        continue;
+                    }
+                    
                     [db executeUpdate:@"insert into filters (filter_id, group_id, version, display_number, name, description, homepage, expires, subscriptionUrl) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                      meta.filterId, meta.groupId, meta.version, meta.displayNumber, meta.name, meta.descr, meta.homepage, meta.expires, meta.subscriptionUrl];
                     
                     for (NSString *lang in meta.langs)
                         [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
+                    
+                    for (ASDFilterTagMeta *tag in meta.tags){
+                        [db executeUpdate:@"insert into filter_tags (filter_id, tag_id, type, name) values (?, ?, ?, ?)", meta.filterId, @(tag.tagId), @(tag.type), tag.name];
+                    }
                     
                 }
                 for (ASDFilterLocalization *locale in i18n.filters.localizations)

@@ -26,8 +26,6 @@
 #import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
-#import "AEUIWelcomePagerDataSource.h"
-#import "AEUIMainController.h"
 
 #import "AESharedResources.h"
 
@@ -39,6 +37,10 @@
 #else
 #import "AESProductSchemaManager.h"
 #endif
+
+#import "Adguard-Swift.h"
+
+#import "ACDnsUtils.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
@@ -53,15 +55,29 @@ NSString *OpenDnsSettingsSegue = @"dns_settings";
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
 
+typedef enum : NSUInteger {
+    AEUpdateNotStarted,
+    AEUpdateStarted,
+    AEUpdateNewData,
+    AEUpdateFailed,
+    AEUpdateNoData
+} AEUpdateResult;
+
 @interface AppDelegate (){
     
     AETFetchCompletionBlock _fetchCompletion;
     AEDownloadsCompletionBlock _downloadCompletion;
-    AEUIWelcomePagerDataSource *_welcomePageSource;
     NSArray *_updatedFilters;
+    AESharedResources *_resources;
+    AEService * _aeService;
+    ContentBlockerService* _contentBlockerService;
+    PurchaseService* _purchaseService;
     
     BOOL _activateWithOpenUrl;
 }
+
+@property AEUpdateResult antibanerUpdateResult;
+@property AEUpdateResult blockingSubscriptionsUpdateResult;
 
 @end
 
@@ -77,11 +93,12 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         //------------- Preparing for start application. Stage 1. -----------------
         
-        // Registering standart Defaults
-        NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]];
-        if (defs)
-            [[AESharedResources sharedDefaults] registerDefaults:defs];
-        
+        [StartupService start];
+        _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
+        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
+        _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
         
@@ -109,32 +126,30 @@ typedef void (^AEDownloadsCompletionBlock)();
         pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
         pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
-        //----------- Set main navigation controller -----------------------
-        if ([[AEService singleton] firstRunInProgress]) {
+        if (application.applicationState != UIApplicationStateBackground) {
+            [_purchaseService checkPremiumExpired];
+        }
+        
+        if ([_aeService firstRunInProgress]) {
             
-            [[AEService singleton] onReady:^{
+            [_aeService onReady:^{
                 
 #ifdef PRO
                 [APSProductSchemaManager install];
 #else
                 [AESProductSchemaManager install];
 #endif
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self loadMainNavigationController];
-                });
             }];
         }
         else{
             
-            [[AEService singleton] onReady:^{
+            [_aeService onReady:^{
 #ifdef PRO
                 [APSProductSchemaManager upgrade];
 #else
-                [AESProductSchemaManager upgrade];
+                [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
 #endif
             }];
-            [self loadMainNavigationController];
         }
         
         return YES;
@@ -170,7 +185,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     //--------------------- Start Services ---------------------------
     else{
         
-        [[AEService singleton] start];
+        [_aeService start];
         DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
     
@@ -188,6 +203,7 @@ typedef void (^AEDownloadsCompletionBlock)();
     
     return YES;
 }
+
 
 - (void)setPeriodForCheckingFilters{
     
@@ -225,14 +241,8 @@ typedef void (^AEDownloadsCompletionBlock)();
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
     
-    UINavigationController *nav = [self getNavigationController];
-    
-    AEUIMainController *main = nav.viewControllers.firstObject;
-    
-    if ([main isKindOfClass:[AEUIMainController class]]) {
-        
-        [main checkContentBlockerStatus];
-    }
+    ConfigurationService* configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
+    [configuration checkContentBlockerEnabled];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -240,9 +250,9 @@ typedef void (^AEDownloadsCompletionBlock)();
     
     DDLogInfo(@"(AppDelegate) applicationDidBecomeActive.");
     
-    [[AEService singleton] onReady:^{
+    [_aeService onReady:^{
         
-        [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
+        [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
             
             if (_activateWithOpenUrl) {
                 _activateWithOpenUrl = NO;
@@ -250,7 +260,7 @@ typedef void (^AEDownloadsCompletionBlock)();
                 return;
             }
             
-            if (AEService.singleton.antibanner.updatesRightNow) {
+            if (_aeService.antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
             }
@@ -295,15 +305,20 @@ typedef void (^AEDownloadsCompletionBlock)();
             
             if (!checkResult) {
                 DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch subscriptions. App settings permit updates only over WiFi.");
+                self.blockingSubscriptionsUpdateResult = AEUpdateNoData;
             }
             else {
+                
+                self.blockingSubscriptionsUpdateResult = AEUpdateStarted;
+                
                 [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
                     
                     [APVPNManager.singleton sendReloadSystemWideDomainLists];
-                    completionHandler(UIBackgroundFetchResultNewData);
+                    [self blockingSubscriptionsUpdateFinished:AEUpdateNewData];
+                    
                 } errorBlock:^(NSError * error) {
                     
-                    completionHandler(UIBackgroundFetchResultFailed);
+                    [self blockingSubscriptionsUpdateFinished:AEUpdateFailed];
                 } completionBlock:nil];
             }
         }
@@ -312,33 +327,30 @@ typedef void (^AEDownloadsCompletionBlock)();
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
             
-            [[[AEService singleton] antibanner] repairUpdateStateWithCompletionBlock:^{
+            [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
                 
-                if (AEService.singleton.antibanner.updatesRightNow) {
+                if (_aeService.antibanner.updatesRightNow) {
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
                 
                 if (!checkResult) {
                     DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.");
+                    self.antibanerUpdateResult = UIBackgroundFetchResultNoData;
+                }
+                else {
+                    self.antibanerUpdateResult = AEUpdateStarted;
                 }
                 
                 if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
                     
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                    
-                        if (_fetchCompletion) {
-                            
-                            DDLogInfo(@"(AppDelegate - Background Fetch) Call fetch Completion with result: failed.");
-                            
-                            _fetchCompletion(UIBackgroundFetchResultFailed);
-                            _fetchCompletion = nil;
-                        }
-                    });
+                    [self antibanerUpdateFinished:AEUpdateFailed];
                 }
             }];
+            
+            [_purchaseService checkPremiumExpired];
         }];
     }
 }
@@ -349,10 +361,10 @@ typedef void (^AEDownloadsCompletionBlock)();
 
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
 
             _downloadCompletion = completionHandler;
-            [[[AEService singleton] antibanner] repairUpdateStateForBackground];
+            [[_aeService antibanner] repairUpdateStateForBackground];
         }];
     }
     else{
@@ -367,26 +379,32 @@ typedef void (^AEDownloadsCompletionBlock)();
     
     _activateWithOpenUrl = YES;
     
-    NSString *appBundleId = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-    if (([appBundleId isEqualToString:SAFARI_BUNDLE_ID]
-         || [appBundleId isEqualToString:SAFARI_VC_BUNDLE_ID])
-        && [url.scheme isEqualToString:AE_URLSCHEME]) {
+    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
         
-        [[AEService singleton] onReady:^{
+        [_aeService onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 @autoreleasepool {
                     
                     NSString *command = url.host;
-                    NSString *path = [url.path substringFromIndex:1];
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
                         
+                        NSString *path = [url.path substringFromIndex:1];
+                        
                         UINavigationController *nav = [self getNavigationController];
                         if (nav.viewControllers.count) {
-                            AEUIMainController *main = nav.viewControllers.firstObject;
-                            if ([main isKindOfClass:[AEUIMainController class]]) {
+                            MainController *main = nav.viewControllers.firstObject;
+                            if ([main isKindOfClass:[MainController class]]) {
                                 
-                                [main addRuleToUserFilter:path];
+                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
+                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
+                                
+                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
+                                UserFilterController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
+                                
+                                userFilterController.newRuleText = path;
+                                
+                                nav.viewControllers = @[main, mainMenuController, userFilterController];
                             }
                             else{
                                 
@@ -394,8 +412,19 @@ typedef void (^AEDownloadsCompletionBlock)();
                             }
                         }
                     }
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
+                        
+                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
+                        NSString* fragment = url.fragment;
+                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
+                        
+                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
+                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
+                        
+                        [_purchaseService loginWithAccessToken:accessToken state: state];
+                    }
                 }
-                //
             });
         }];
         
@@ -445,8 +474,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         // Begin update process (Downloading step)
         
-        NSDate *lastCheck = [[AESharedResources sharedDefaults]
-                             objectForKey:AEDefaultsCheckFiltersLastDate];
+        NSDate *lastCheck = [_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
         if (fromUI || !lastCheck ||
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
@@ -458,14 +486,14 @@ typedef void (^AEDownloadsCompletionBlock)();
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
             
-            [[[AEService singleton] antibanner] beginTransaction];
+            [[_aeService antibanner] beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
-            BOOL result = [[[AEService singleton] antibanner] startUpdatingForced:fromUI interactive:interactive];
+            BOOL result = [[_aeService antibanner] startUpdatingForced:fromUI interactive:interactive];
             
             if (! result) {
                 DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                [[[AEService singleton] antibanner] rollbackTransaction];
+                [[_aeService antibanner] rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
             }
 
@@ -494,7 +522,7 @@ typedef void (^AEDownloadsCompletionBlock)();
         [dbService removeObserver:self forKeyPath:@"ready"];
         
         //--------------------- Start Services ---------------------------
-        [[AEService singleton] start];
+        [_aeService start];
         DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
         
         return;
@@ -514,11 +542,11 @@ typedef void (^AEDownloadsCompletionBlock)();
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
         
         BOOL background = (_fetchCompletion || _downloadCompletion);
-        [[AEService singleton] reloadContentBlockingJsonASyncWithBackgroundUpdate:background completionBlock:^(NSError *error) {
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
             
             if (error) {
                 
-                [[[AEService singleton] antibanner] rollbackTransaction];
+                [[_aeService antibanner] rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFailuredNotify];
@@ -535,9 +563,9 @@ typedef void (^AEDownloadsCompletionBlock)();
                 
                 // Success antibanner updated from backend
                 
-                [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
                 
-                [[[AEService singleton] antibanner] endTransaction];
+                [[_aeService antibanner] endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFinishedNotify];
@@ -556,14 +584,14 @@ typedef void (^AEDownloadsCompletionBlock)();
     else if ([notification.name
               isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
         
-        if ([[[AEService singleton] antibanner] inTransaction]) {
+        if ([[_aeService antibanner] inTransaction]) {
             
-            [[[AEService singleton] antibanner] rollbackTransaction];
+            [[_aeService antibanner] rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
         }
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self antibanerUpdateFinished:AEUpdateFailed];
     }
     // Update performed
     else if ([notification.name
@@ -571,12 +599,12 @@ typedef void (^AEDownloadsCompletionBlock)();
         
         _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
         
-        [[AEService singleton] onReloadContentBlockingJsonComplete:^{
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
             
-            if ([[[AEService singleton] antibanner] inTransaction]) {
+            if ([[_aeService antibanner] inTransaction]) {
                 // Success antibanner updated from backend
-                [[AESharedResources sharedDefaults] setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [[[AEService singleton] antibanner] endTransaction];
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [[_aeService antibanner] endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
                 
                 [self updateFinishedNotify];
@@ -584,7 +612,7 @@ typedef void (^AEDownloadsCompletionBlock)();
             
             
             // Special update case (in background).
-            [self callCompletionHandler:UIBackgroundFetchResultNewData];
+            [self antibanerUpdateFinished:AEUpdateNewData];
         }];
         
         // turn off network activity indicator
@@ -594,16 +622,16 @@ typedef void (^AEDownloadsCompletionBlock)();
     else if ([notification.name
               isEqualToString:ASAntibannerFailuredUpdateNotification]) {
         
-        if ([[[AEService singleton] antibanner] inTransaction]) {
+        if ([[_aeService antibanner] inTransaction]) {
             
-            [[[AEService singleton] antibanner] rollbackTransaction];
+            [[_aeService antibanner] rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
         
         [self updateFailuredNotify];
         
         // Special update case.
-        [self callCompletionHandler:UIBackgroundFetchResultFailed];
+        [self antibanerUpdateFinished:AEUpdateFailed];
         
         // turn off network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -612,7 +640,7 @@ typedef void (^AEDownloadsCompletionBlock)();
               isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
         
         DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
-        [self callCompletionHandler:UIBackgroundFetchResultNewData];
+        [self antibanerUpdateFinished:AEUpdateNewData];
     }
 }
 
@@ -657,6 +685,50 @@ typedef void (^AEDownloadsCompletionBlock)();
     }];
 }
 
+/**
+ helper method for logs
+ */
+- (NSString*) resultDescription:(AEUpdateResult)result {
+    NSArray<NSString*> *names = @[@"AEUpdateNotStarted",
+                                  @"AEUpdateStarted",
+                                  @"AEUpdateNewData",
+                                  @"AEUpdateFailed",
+                                  @"AEUpdateNoData"];
+    
+    return names[result];
+}
+
+- (void)antibanerUpdateFinished:(AEUpdateResult)result {
+    DDLogDebug(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
+    self.antibanerUpdateResult = result;
+    [self updateFinished];
+}
+
+- (void)blockingSubscriptionsUpdateFinished:(AEUpdateResult)result {
+    DDLogDebug(@"(AppDelegate) blockingSubscriptionsUpdateFinished with result: %@", [self resultDescription:result]);
+    self.blockingSubscriptionsUpdateResult = result;
+    [self updateFinished];
+}
+
+- (void)updateFinished {
+    
+    DDLogDebug(@"(AppDelegate) updateFinished");
+    
+    if(self.antibanerUpdateResult == AEUpdateStarted || self.blockingSubscriptionsUpdateResult == AEUpdateStarted)
+        return;
+    
+    UIBackgroundFetchResult result;
+    
+    if(self.antibanerUpdateResult == AEUpdateNewData || self.blockingSubscriptionsUpdateResult == AEUpdateNewData)
+        result = UIBackgroundFetchResultNewData;
+    else if(self.antibanerUpdateResult == AEUpdateNoData && self.blockingSubscriptionsUpdateResult == AEUpdateNoData)
+        result = UIBackgroundFetchResultNoData;
+    else
+        result = UIBackgroundFetchResultFailed;
+    
+    [self callCompletionHandler:result];
+}
+
 - (void)callCompletionHandler:(UIBackgroundFetchResult)result{
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -685,26 +757,6 @@ typedef void (^AEDownloadsCompletionBlock)();
 #pragma mark Helpper Methods (private)
 /////////////////////////////////////////////////////////////////////
 
-- (void)loadMainNavigationController {
-    
-    UIViewController *nav = [[self mainStoryborad]
-                             instantiateViewControllerWithIdentifier:@"mainNavigationController"];
-    
-    if (nav) {
-        
-        [UIView transitionWithView:self.window
-                          duration:0.3
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.window.rootViewController = nav;
-                        }
-                        completion:nil];
-        return;
-    }
-    
-    DDLogError(@"(AppDelegate) Can't load main navigation controller");
-}
-
 - (UIStoryboard *)mainStoryborad{
     
     NSBundle *bundle = [NSBundle mainBundle];
@@ -716,7 +768,7 @@ typedef void (^AEDownloadsCompletionBlock)();
 
     BOOL result = YES;
     
-    NSNumber* wifiOnlyObject = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsWifiOnlyUpdates];
+    NSNumber* wifiOnlyObject = [_resources.sharedDefaults objectForKey:AEDefaultsWifiOnlyUpdates];
     BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
     
     if (wifiOnly) {

@@ -50,7 +50,7 @@ NSString *AESFConverterError = @"AESFConverterError";
 /////////////////////////////////////////////////////////////////////
 
 
-- (AESFilterConverter *)init{
+- (null_unspecified AESFilterConverter *)init{
     
     self = [super init];
     if (self) {
