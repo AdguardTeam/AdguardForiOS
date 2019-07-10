@@ -38,5 +38,6 @@
 
 @property (nonnull) NSString* ip;
 @property (nullable) NSString* port;
+@property (nonnull, readonly) NSString* upstream;
 
 @end

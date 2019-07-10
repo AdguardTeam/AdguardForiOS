@@ -18,10 +18,10 @@
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/2.1/%@/%@.mp4"
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/3.0/%@/%@.mp4"
 
 #define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
-#define HIDE_NAVIGATION_DELAY 2 // seconds
+#define HIDE_NAVIGATION_DELAY 4 // seconds
 
 @interface AEUIPlayerViewController ()
 
@@ -31,6 +31,9 @@
 
     UITapGestureRecognizer *_gesture;
     BOOL _statusBarHidden;
+    
+//    AVPlayer* _player;
+//    AVPlayerLayer* _playerLayer;
 }
 
 - (void)viewDidLoad {
@@ -50,19 +53,24 @@
                     action:@selector(handleGesture:)];
         _gesture.delegate = self;
 
-        self.showsPlaybackControls = NO;
-        self.allowsPictureInPicturePlayback = NO;
+//        self.showsPlaybackControls = NO;
+//        self.allowsPictureInPicturePlayback = NO;
+        
+        
+        [self.view addGestureRecognizer: _gesture];
 
         [self createPlayerForUrl:videoURL];
+        
+        
         
         dispatch_after(
             dispatch_time(DISPATCH_TIME_NOW,
                           (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
             dispatch_get_main_queue(), ^{
-              [self.view addGestureRecognizer:_gesture];
-              [[self navigationController] setNavigationBarHidden:YES
+                [self.view addGestureRecognizer:_gesture];
+                [[self navigationController] setNavigationBarHidden:YES
                                                          animated:YES];
-              [self hideStatusBar:YES];
+                [self hideStatusBar:YES];
 
             });
     }
@@ -125,20 +133,24 @@ preparation before navigation
     return YES;
 }
 
-- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer;
+- (void)showControls {
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self hideStatusBar:NO];
+    dispatch_after(
+                   dispatch_time(DISPATCH_TIME_NOW,
+                                 (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(), ^{
+                       [[self navigationController] setNavigationBarHidden:YES
+                                                                  animated:YES];
+                       [self hideStatusBar:YES];
+                   });
+}
+
+- (void)    handleGesture:(UIGestureRecognizer *)gestureRecognizer;
 {
 
     if (gestureRecognizer.numberOfTouches == 1) {
-        [[self navigationController] setNavigationBarHidden:NO animated:YES];
-        [self hideStatusBar:NO];
-        dispatch_after(
-            dispatch_time(DISPATCH_TIME_NOW,
-                          (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
-            dispatch_get_main_queue(), ^{
-              [[self navigationController] setNavigationBarHidden:YES
-                                                         animated:YES];
-              [self hideStatusBar:YES];
-            });
+        [self showControls];
     }
 }
 
@@ -170,17 +182,26 @@ preparation before navigation
     
     self.player = player;
     
+//    _player = player;
+//
+//    _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+//    [_playerLayer setFrame:self.view.bounds];
+//    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//    [self.view.layer addSublayer:_playerLayer];
+    
     if (player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
-        
         [self.player play];
+//        [_player play];
     }
 }
 
 - (void)removePlayer {
     
+//    [_playerLayer removeFromSuperlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
-    
+
     [self.player.currentItem removeObserver:self forKeyPath:@"status"];
+    
 
 }
 
@@ -188,13 +209,13 @@ preparation before navigation
     
     // if error occurs, we attempt replace locale specific video on default video
     if ([object isEqual:self.player.currentItem] && [keyPath isEqualToString:@"status"]) {
-        
+
         AVPlayerStatus status = [change[NSKeyValueChangeNewKey] intValue];
-        
+
         if (status == AVPlayerItemStatusFailed) {
-            
+
             NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, ADL_DEFAULT_LANG, self.videoName]];
-            
+
             if (videoURL) {
 
                 [self removePlayer];
@@ -203,11 +224,11 @@ preparation before navigation
 
         }
         else if (status == AVPlayerItemStatusReadyToPlay) {
-            
+
             [self.player play];
         }
     }
-//    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 

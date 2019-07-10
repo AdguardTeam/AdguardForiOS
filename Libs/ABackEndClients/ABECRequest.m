@@ -46,7 +46,7 @@
     return self;
 }
 
-+ (id)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
++ (NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
     
     @autoreleasepool {
         
@@ -61,6 +61,23 @@
                 [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
                 [request setHTTPBody:[[ABECRequest createStringFromParameters:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
             }
+        }
+        
+        return request;
+    }
+}
+
++ (NSURLRequest *)postRequestForURL:(NSURL *)theURL json:(NSString *)jsonString {
+    @autoreleasepool {
+        
+        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:ABEC_BACKEND_READ_TIMEOUT];
+        
+        if (request) {
+            
+            [request setHTTPMethod:@"POST"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+           
+            [request setHTTPBody: [jsonString dataUsingEncoding:NSUTF8StringEncoding]];
         }
         
         return request;
@@ -105,10 +122,7 @@
     NSMutableArray *parametersArray = [NSMutableArray arrayWithCapacity:parameters.count];
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         
-        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];
-//        NSString *value = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[obj description], NULL, (CFStringRef)@"/+=&", kCFStringEncodingUTF8));
-
-        
+        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];      
         [parametersArray addObject:[NSString stringWithFormat:@"%@=%@", [key description], value]];
     }];
     

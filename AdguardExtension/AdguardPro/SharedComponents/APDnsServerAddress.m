@@ -51,4 +51,8 @@
     return [NSString stringWithFormat:@"%@#%@", self.ip, self.port];
 }
 
+- (NSString *)upstream {
+    return [self description];
+}
+
 @end

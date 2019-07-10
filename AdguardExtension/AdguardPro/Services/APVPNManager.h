@@ -17,8 +17,9 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "APSharedResources.h"
 
-@class  APDnsLogRecord, ASDFilterRule, APDnsServerObject;
+@class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
@@ -45,7 +46,7 @@ typedef enum : NSUInteger {
 /**
  This notification arises when state or mode of the vpn is changed.
  */
-extern NSString *APVpnChangedNotification;
+extern NSString* __nonnull APVpnChangedNotification;
 
 #define APVPN_MANAGER_ERROR_STANDART                100
 #define APVPN_MANAGER_ERROR_NODNSCONFIGURATION      200
@@ -53,63 +54,29 @@ extern NSString *APVpnChangedNotification;
 #define APVPN_MANAGER_ERROR_BADCONFIGURATION        400
 #define APVPN_MANAGER_ERROR_INSTALL_FILTER          500
 
-
-#define APVPN_MANAGER_DEFAULT_DNS_SERVER_INDEX              0
-#define APVPN_MANAGER_DEFAULT_LOCAL_FILTERING               NO
-
-#define APVPN_MANAGER_DEFAULT_REMOTE_DNS_SERVER_INDEX       1
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager
 
-/**
- Class controls VPN configuration and controls status of the connection. 
- */
-@interface APVPNManager  : NSObject
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Initialize
-/////////////////////////////////////////////////////////////////////
-
-/**
-    Returns singleton object.
- */
-@property (class, readonly) APVPNManager *singleton;
-
-/**
- List of the app defined DNS servers.
- */
-@property (class, readonly) NSMutableArray <APDnsServerObject *> *predefinedDnsServers;
-
-/**
- List of the app defined DNS Crypt servers.
- */
-@property (nonatomic, readonly) NSArray <APDnsServerObject *> *predefinedDnsCryptServers;
+@protocol APVPNManagerProtocol <NSObject>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
-@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsServers;
+/**
+ DNS providers <DnsProviderInfo>
+ */
+@property (nonnull, readonly) NSArray<DnsProviderInfo*> *providers;
 
 /**
- remote DNS Crypt serevrs
+ active remote DNS server
  */
-@property (readonly, nonatomic) NSArray <APDnsServerObject *> *remoteDnsCryptServers;
+@property (nullable) DnsServerInfo* activeDnsServer;
 
 /**
- Defines state of the filtering using "Simplified domain names filter" filter rules.
+ serches and returns DNS Provider for activeDnsServer
  */
-//@property BOOL localFiltering;
-/**
- Active DNS server.
- */
-@property APDnsServerObject *activeRemoteDnsServer;
-
-/**
- Maximum count of DNS servers.
- */
-@property (readonly, nonatomic) NSUInteger maxCountOfRemoteDnsServers;
+@property (nullable, readonly) DnsProviderInfo* activeDnsProvider;
 
 /**
  Contains current connection status of the vpn.
@@ -118,19 +85,14 @@ extern NSString *APVpnChangedNotification;
 /**
  If last operation led to error, property contains this error.
  */
-@property (readonly) NSError *lastError;
-
-/**
- Defines, turned on/off logging of the DNS requests. 
- */
-@property BOOL dnsRequestsLogging;
+@property (nullable, readonly) NSError *lastError;
 
 /**
  Switch on/off of the fake vpn.
  */
 @property BOOL enabled;
 
-/** 
+/**
  tunnel mode full/split/auto
  */
 @property APVpnManagerTunnelMode tunnelMode;
@@ -141,36 +103,40 @@ extern NSString *APVpnChangedNotification;
 @property BOOL restartByReachability;
 
 /**
- Adds custom (editable) DNS server.
+ this flag indicates that vpn configuration allready installed
+ */
+@property (readonly) BOOL vpnInstalled;
 
+/**
+ Adds custom (editable) DNS server.
+ 
  @param server Server instance. It must be editable.
  @return YES on success.
  */
-- (BOOL)addRemoteDnsServer:(APDnsServerObject *)server;
+- (BOOL) addRemoteDnsServer:(nonnull NSString*) name upstreams:(nonnull NSArray<NSString*>*) upstreams;
 
 /**
  Removes custom (editable) DNS server
-
- @param server Server instance. It must be editable.
  @return YES on success.
  */
-- (BOOL)removeRemoteDnsServer:(APDnsServerObject *)server;
+- (BOOL) deleteCustomDnsProvider: (nonnull DnsProviderInfo*) provider;
 
 /**
  Changes properties of the custom (editable) DNS server.
  When you create new server object, this object obtains uuid.
  This uuid is used for identification of the object.
  And you can change all properties of the server object.
-
+ 
  @param server Server instance. It must be editable.
  @return YES on success.
  */
-- (BOOL)resetRemoteDnsServer:(APDnsServerObject *)server;
+
+- (BOOL)resetCustomDnsProvider:(nonnull DnsProviderInfo*)provider;
 
 /**
  Clears DNS Activity Log.
  
- @return Returns YES on success. 
+ @return Returns YES on success.
  */
 - (BOOL)clearDnsRequestsLog;
 
@@ -178,23 +144,42 @@ extern NSString *APVpnChangedNotification;
  Obtains DNS requests logging records,
  and calls `completionBlock` with appropriate parameter.
  */
-- (void)obtainDnsLogRecords:(void (^)(NSArray <APDnsLogRecord *> *records))completionBlock;
+- (void)obtainDnsLogRecords:(nonnull void (^)( NSArray <DnsLogRecord *>* _Nullable records))completionBlock;
 
 /**
- Sends message to tunnel extension,
- which notifies that extension needs reload whitelist/blacklist of the domains.
+ checks if this provider is active
  */
-- (void)sendReloadSystemWideDomainLists;
+- (BOOL) isActiveProvider: (nonnull DnsProviderInfo*) provider;
 
 /**
- Loads active DNS server from deafults. It used by action extension for bug reporting.
+ checks if this provider is custom
  */
-- (APDnsServerObject*) loadActiveRemoteDnsServer;
+- (BOOL) isCustomProvider: (nonnull DnsProviderInfo*) provider;
 
 /**
- Removes duplicates of predefined servers from the list of custom servers.
- https://github.com/AdguardTeam/AdguardForiOS/issues/639
+ checks if this server is custom
  */
-- (void) removeCustomRemoteServersDuplicates;
+- (BOOL) isCustomServer:(nonnull DnsServerInfo *) server;
+
+/**
+ checks if active dns server is custom
+ */
+- (BOOL) isCustomServerActive;
+
+- (nonnull DnsServerInfo*) defaultServer;
+
+@end
+
+/**
+ Class controls VPN configuration and controls status of the connection. 
+ */
+@interface APVPNManager  : NSObject<APVPNManagerProtocol>
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Initialize
+/////////////////////////////////////////////////////////////////////
+
+- (nonnull id)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
+                  configuration: (nonnull ConfigurationService *) configuration;
 
 @end

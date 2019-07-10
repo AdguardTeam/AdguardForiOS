@@ -124,7 +124,7 @@ int main(int argc, const char * argv[])
                 
                 for (ASDFilterGroup *item in metadata.groups) {
                     
-                    [db executeUpdate:@"insert into filter_groups (group_id, name, display_number) values (?, ?, ?)", item.groupId, item.name, item.displayNumber];
+                    [db executeUpdate:@"insert into filter_groups (group_id, name, display_number, is_enabled) values (?, ?, ?, ?)", item.groupId, item.name, item.displayNumber, @0];
                     
                 }
                 for (ASDFilterGroupLocalization *locale in i18n.groups.localizations) {
@@ -140,6 +140,10 @@ int main(int argc, const char * argv[])
                     
                     for (NSString *lang in meta.langs)
                         [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
+                    
+                    for (ASDFilterTagMeta *tag in meta.tags){
+                        [db executeUpdate:@"insert into filter_tags (filter_id, tag_id, type, name) values (?, ?, ?, ?)", meta.filterId, @(tag.tagId), @(tag.type), tag.name];
+                    }
                     
                 }
                 for (ASDFilterLocalization *locale in i18n.filters.localizations)

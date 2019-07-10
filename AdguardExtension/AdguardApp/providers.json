@@ -1,0 +1,345 @@
+{
+  "features": [
+    {
+      "name": "ad_blocking",
+      "title": "dns_provider_ad_blocking_tag",
+      "summary": "dns_provider_ad_blocking_summary",
+      "icon_id": "ic_ad_blocking"
+    },
+    {
+      "name": "secure",
+      "title": "dns_provider_secure_tag",
+      "summary": "dns_provider_secure_summary",
+      "icon_id": "ic_adguard"
+    },
+    {
+      "name": "no_logs",
+      "title": "dns_provider_no_logs_tag",
+      "summary": "dns_provider_no_logs_summary",
+      "icon_id": "ic_privacy"
+    },
+    {
+      "name": "safe_search",
+      "title": "dns_provider_safe_search_tag",
+      "summary": "dns_provider_safe_search_summary",
+      "icon_id": "ic_search_green"
+    },
+    {
+      "name": "adult",
+      "title": "dns_provider_adult_tag",
+      "summary": "dns_provider_adult_summary",
+      "icon_id": "ic_adult"
+    }
+  ],
+  "dnsProviders": [
+    {
+      "name": "Google DNS",
+      "logo": "ic_google_provider_logo",
+      "summary": "google_dns_description",
+      "protocols": [
+        "dns",
+        "doh",
+        "dot"
+      ],
+      "features": [
+      ],
+      "website": "https://developers.google.com/speed/public-dns/",
+      "servers": [
+        {
+          "protocol": "dns",
+          "id": "google-dns",
+          "name": "Google DNS",
+          "upstreams": [
+            "8.8.8.8",
+            "8.8.4.4"
+            ]
+        },
+        {
+          "protocol": "doh",
+          "anycast": true,
+          "id": "google-doh",
+          "name": "google",
+          "upstreams":[
+            "https://dns.google.com/experimental"
+            ]
+        },
+        {
+          "protocol": "dot",
+          "anycast": true,
+          "id": "google-dot",
+          "name": "google",
+          "upstreams":[
+            "tls://dns.google"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cloudflare DNS",
+      "logo": "ic_cloudflare_provider_logo",
+      "summary": "cloudflare_public_dns_description",
+      "protocols": [
+        "dns",
+        "doh",
+        "dot"
+      ],
+      "features": [
+        "secure",
+        "no_logs"
+      ],
+      "website": "https://www.cloudflare.com/dns/",
+      "servers": [
+        {
+          "protocol": "dns",
+          "id": "cloudflare-dns",
+          "name": "Cloudflare",
+          "upstreams":[
+            "1.1.1.1",
+            "1.0.0.1"
+          ]
+        },
+        {
+          "protocol": "doh",
+          "anycast": true,
+          "id": "cloudflare",
+          "name": "cloudflare",
+          "upstreams":[
+            "https://dns.cloudflare.com/dns-query"
+          ]
+        },
+        {
+          "protocol": "dot",
+          "anycast": true,
+          "id": "cloudflare-dot",
+          "name": "cloudflare-dot",
+          "upstreams":[
+            "tls://1.1.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cisco OpenDNS",
+      "logo": "ic_open_dns_provider_logo",
+      "summary": "open_dns_description",
+      "protocols": [
+        "dns",
+        "dnscrypt"
+      ],
+      "features": [
+        "secure"
+      ],
+      "website": "https://www.opendns.com/",
+      "servers": [
+        {
+          "protocol": "dns",
+          "id": "open-dns",
+          "name": "Cisco OpenDNS",
+          "upstreams":[
+            "208.67.222.222",
+            "208.67.220.220"
+          ]
+        },
+        {
+          "protocol": "dnscrypt",
+          "anycast": true,
+          "id": "cisco",
+          "name": "cisco",
+          "upstreams":[
+            "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cisco OpenDNS with Family Shield",
+      "logo": "ic_open_dns_provider_family_logo",
+      "summary": "open_dns_familyshield_description",
+      "protocols": [
+        "dns",
+        "dnscrypt"
+      ],
+      "features": [
+        "secure",
+        "safe_search",
+        "adult"
+      ],
+      "website": "https://www.opendns.com/",
+      "servers": [
+        {
+          "protocol": "dns",
+          "id": "open-familyshield-dns",
+          "name": "Cisco OpenDNS with Family Shield",
+          "upstreams":[
+            "208.67.222.123",
+            "208.67.220.123"
+          ]
+        },
+        {
+          "protocol": "dnscrypt",
+          "anycast": true,
+          "id": "cisco-familyshield",
+          "name": "cisco-familyshield",
+          "upstreams":[
+            "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMTIzILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quad9",
+      "logo": "ic_quad9_provider_logo",
+      "summary": "quad_nine_dns_description",
+      "protocols": [
+        "dns",
+        "dnscrypt",
+        "doh"
+      ],
+      "features": [
+        "secure"
+      ],
+      "website": "http://quad9.net/",
+      "servers": [
+        {
+          "protocol": "dns",
+          "id": "quad9-dns",
+          "name": "Quad9",
+          "upstreams":[
+            "9.9.9.9",
+            "149.112.112.112"
+          ]
+        },
+        {
+          "protocol": "dnscrypt",
+          "anycast": false,
+          "id": "quad9-dnscryptfilter-pri",
+          "name": "quad9-dnscrypt-ipv4-filter-pri",
+          "upstreams":[
+            "sdns://AQMAAAAAAAAADDkuOS45Ljk6ODQ0MyBnyEe4yHWM0SAkVUO-dWdG3zTfHYTAC4xHA2jfgh2GPhkyLmRuc2NyeXB0LWNlcnQucXVhZDkubmV0"
+          ]
+        },
+        {
+          "protocol": "doh",
+          "anycast": false,
+          "id": "quad9-doh-filter-pri",
+          "name": "quad9-doh-ipv4-filter-pri",
+          "upstreams":[
+            "https://dns9.quad9.net:443/dns-query"
+          ]
+        }
+      ]
+    },
+    {
+        "name": "AdGuard DNS",
+        "logo": "ic_about_logo",
+        "summary": "adguard_dns_description",
+        "protocols": [
+            "dns",
+            "dnscrypt",
+            "doh",
+            "dot"
+        ],
+        "features": [
+            "ad_blocking",
+            "secure",
+            "no_logs"
+        ],
+        "website": "https://adguard.com/adguard-dns/overview.html",
+        "servers": [
+            {
+                "protocol": "dns",
+                "id": "adguard-dns",
+                "name": "AdGuard DNS",
+                "upstreams":[
+                    "176.103.130.130",
+                    "176.103.130.131"
+                ]
+            },
+            {
+                "protocol": "dnscrypt",
+                "anycast": true,
+                "id": "adguard-dnscrypt",
+                "name": "adguard-dns",
+                "upstreams": [
+                    "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20"
+                ]
+            },
+            {
+                "protocol": "doh",
+                "anycast": true,
+                "id": "adguard-doh",
+                "name": "adguard-doh",
+                "upstreams": [
+                    "https://dns.adguard.com/dns-query"
+                ]
+            },
+            {
+                "protocol": "dot",
+                "anycast": true,
+                "id": "adguard-dot",
+                "name": "adguard-dot",
+                "upstreams": [
+                    "tls://dns.adguard.com"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "AdGuard DNS Family Protection",
+        "logo": "ic_adguard_family_provider_logo",
+        "summary": "adguard_family_dns_description",
+        "protocols": [
+            "dns",
+            "dnscrypt",
+            "doh",
+            "dot"
+        ],
+        "features": [
+            "ad_blocking",
+            "secure",
+            "no_logs",
+            "adult",
+            "safe_search"
+        ],
+        "website": "https://adguard.com/adguard-dns/overview.html",
+        "servers": [
+            {
+                "protocol": "dns",
+                "id": "adguard-dns-family",
+                "name": "AdGuard Family DNS",
+                "upstreams":[
+                    "176.103.130.132",
+                    "176.103.130.134"
+                ]
+            },
+            {
+                "protocol": "dnscrypt",
+                "anycast": true,
+                "id": "adguard-family-dnscrypt",
+                "name": "adguard-dns-family",
+                "upstreams": [
+                    "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMjo1NDQzILgxXdexS27jIKRw3C7Wsao5jMnlhvhdRUXWuMm1AFq6ITIuZG5zY3J5cHQuZmFtaWx5Lm5zMS5hZGd1YXJkLmNvbQ"
+                ]
+            },
+            {
+                "protocol": "doh",
+                "anycast": true,
+                "id": "adguard-family-doh",
+                "name": "adguard-family-doh",
+                "upstreams": [
+                    "https://dns-family.adguard.com/dns-query"
+                ]
+            },
+            {
+                "protocol": "dot",
+                "anycast": true,
+                "id": "adguard-family-dot",
+                "name": "adguard-family-dot",
+                "upstreams": [
+                    "tls://dns-family.adguard.com"
+                ]
+            }
+        ]
+    },
+  ]
+}

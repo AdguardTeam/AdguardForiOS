@@ -18,9 +18,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AEService.h"
+#import "AESharedResources.h"
+#import "Adguard-Swift.h"
+
 @class AEAUIDomainCell, AEWhitelistDomainObject;
 
 @interface AEAUIMainController : UITableViewController <UITableViewDelegate>
+
+@property id<AESharedResourcesProtocol> resources;
+@property id<SafariServiceProtocol> safariService;
+@property ContentBlockerService *contentBlocker;
+@property id<AESSupportProtocol> support;
 
 @property (nonatomic) NSString *domainName;
 @property (nonatomic) NSURL *url;
@@ -28,20 +37,5 @@
 @property BOOL enableChangeDomainFilteringStatus;
 @property BOOL domainEnabled;
 @property BOOL injectScriptSupported;
-
-@property (weak, nonatomic) IBOutlet UISwitch *statusButton;
-
-@property (weak, nonatomic) IBOutlet UIImageView *iconView;
-@property (weak, nonatomic) IBOutlet AEAUIDomainCell *nameCell;
-@property (weak, nonatomic) IBOutlet UILabel *blockElementLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *enableOnCell;
-
-- (IBAction)toggleStatus:(id)sender;
-- (IBAction)clickMissedAd:(id)sender;
-- (IBAction)clickIncorrectBlocking:(id)sender;
-- (IBAction)clickBlockElement:(id)sender;
-
-- (IBAction)done:(id)sender;
-
 
 @end

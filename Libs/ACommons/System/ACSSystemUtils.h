@@ -42,7 +42,12 @@
 /**
  Display simple alert with one button (Ok)
  */
-+ (void)showSimpleAlertForController:(UIViewController *)controller withTitle:(NSString *)title message:(NSString *)message;
++ (void)showSimpleAlertForController:(nonnull UIViewController *)controller withTitle:(nullable NSString *)title message:(nullable NSString *)message;
+
+/**
+ Display simple alert with one button (Ok) with completionHandler
+ */
++ (void)showSimpleAlertForController:(nonnull UIViewController *)controller withTitle:(nullable NSString *)title message:(nullable NSString *)message completion:(nullable void (^)(void))completion;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Only OS X code here
@@ -61,7 +66,7 @@
     @param arguments array with NSString objects, may be nil.
     @param outputData returning parameter. Set to NULL if we do not need it.
  */
-+ (int)cliUtil:(NSString *)utilPath arguments:(NSArray *)arguments outputData:(NSData **)outputData;
++ (int)cliUtil:(nonnull NSString *)utilPath arguments:(nullable NSArray *)arguments outputData:(NSData * _Nullable * _Nullable )outputData;
 
 /**
     Launches command line utility.
@@ -69,7 +74,7 @@
     @param arguments array with NSString objects, may be nil.
     @param output returning parameter. Set to NULL if we do not need it.
  */
-+ (int)cliUtil:(NSString *)utilPath arguments:(NSArray *)arguments output:(NSString **)output;
++ (int)cliUtil:(nonnull NSString *)utilPath arguments:(nullable NSArray *)arguments output:(NSString * _Nullable * _Nonnull)output;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Common code here
@@ -79,13 +84,13 @@
 /**
     Returns UUID (GUID).
  */
-+ (NSString *)createUUID;
++ (nonnull NSString *)createUUID;
 
 /**
  Execute block on main queue synchronously.
 
  @param block Block of a code.
  */
-+ (void)callOnMainQueue:(dispatch_block_t)block;
++ (void)callOnMainQueue:(nonnull dispatch_block_t)block;
 
 @end

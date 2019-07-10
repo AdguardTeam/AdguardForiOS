@@ -26,6 +26,8 @@
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "ABECRequest.h"
+#import "AESharedResources.h"
+#import "Adguard-Swift.h"
 #ifdef PRO
 #import "APVPNManager.h"
 #import "APDnsServerObject.h"
@@ -33,7 +35,7 @@
 #endif
 
 
-NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
+NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 #define SUPPORT_ADDRESS         @"support@adguard.com"
 
@@ -66,39 +68,32 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] %@";
 #define REPORT_DNS_OTHER @"Other"
 
 
+@interface AESSupport() {
+    AESharedResources *_sharedResources;
+    id<SafariServiceProtocol> _safariService;
+    id<AEServiceProtocol> _aeService;
+}
+
+@end
+
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESSupport
 /////////////////////////////////////////////////////////////////////
 
 @implementation AESSupport
 
-static AESSupport *singletonSupport;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-+ (AESSupport *)singleton{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        singletonSupport = [AESSupport alloc];
-        singletonSupport = [singletonSupport init];
-    });
-    
-    return singletonSupport;
-    
-}
-
-- (id)init{
-    
-    if (singletonSupport != self) {
-        return nil;
-    }
+- (id)initWithResources:(id)resources safariSevice:(id)safariService aeService:(id)aeService {
     
     self = [super init];
     if (self) {
+        _sharedResources = resources;
+        _safariService = safariService;
+        _aeService = aeService;
     }
     
     return self;
@@ -115,15 +110,15 @@ static AESSupport *singletonSupport;
             
             MFMailComposeViewController *compose = [MFMailComposeViewController new];
             [compose setMessageBody:@"" isHTML:NO];
-            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME, ACLocalizedString(@"action_bug_report", @"(AEUIAboutController) Subject field for mail bug report")]];
+            [compose setSubject:[NSString stringWithFormat:AESSupportSubjectPrefixFormat, AE_PRODUCT_NAME]];
             NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
             }
-            NSData *jsonData = [self compressedJson];
-            if (jsonData) {
-                [compose addAttachmentData:jsonData mimeType:@"application/x-gzip" fileName:@"filter.gz"];
-            }
+            NSDictionary<NSString*, NSData*> *jsonDatas = [self compressedJsons];
+            [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull filename, NSData * _Nonnull data, BOOL * _Nonnull stop) {
+                [compose addAttachmentData:data mimeType:@"application/x-gzip" fileName:filename];
+            }];
             
             // Flush Logs
             [[ACLLogger singleton] flush];
@@ -131,10 +126,18 @@ static AESSupport *singletonSupport;
             
             for (NSURL *item in [self appLogsUrls]) {
                 
+                
                 NSData *logData = [self applicationLogFromURL:item];
-                if (logData) {
+                if (logData.length) {
                     NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
                     [compose addAttachmentData:logData mimeType:@"application/x-gzip" fileName:fileName];
+                }
+                else {
+                    NSData* content = [NSData dataWithContentsOfURL:item];
+                    if (content) {
+                        NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+                        [compose addAttachmentData:content mimeType:@"application/x-gzip" fileName:fileName];
+                    }
                 }
             }
             [compose setToRecipients:@[SUPPORT_ADDRESS]];
@@ -164,10 +167,10 @@ static AESSupport *singletonSupport;
             if (stateData) {
                 [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
             }
-            NSData *jsonData = [self compressedJson];
-            if (jsonData) {
-                [compose addAttachmentData:jsonData mimeType:@"application/x-gzip" fileName:@"filter.gz"];
-            }
+            NSDictionary<NSString*, NSData*> *jsonDatas = [self compressedJsons];
+            [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull filename, NSData * _Nonnull data, BOOL * _Nonnull stop) {
+                [compose addAttachmentData:data mimeType:@"application/x-gzip" fileName:filename];
+            }];
             
             [compose setToRecipients:@[SUPPORT_ADDRESS]];
             compose.mailComposeDelegate = self;
@@ -197,7 +200,7 @@ static AESSupport *singletonSupport;
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = [AESAntibanner new];
+    AESAntibanner* antibaner = _aeService.antibanner;
     NSArray* filterIDs = antibaner.activeFilterIDs;
     
     for (NSNumber *filterId in filterIDs) {
@@ -207,18 +210,16 @@ static AESSupport *singletonSupport;
     }
     params[REPORT_PARAM_FILTERS] = filtersString.copy;
     
-    params[REPORT_PARAM_SIMPLIFIED] =  [[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
-    
-#ifdef PRO
+    params[REPORT_PARAM_SIMPLIFIED] =  [[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
     
     NSString* dnsServerParam = nil;
     BOOL custom = NO;
     
-    APDnsServerObject * dnsServer = [APVPNManager.singleton loadActiveRemoteDnsServer];
-    if([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguard]) {
+    DnsServerInfo * dnsServer = _sharedResources.activeDnsServer;
+    if([DnsServerInfo.adguardDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD;
     }
-    else if ([dnsServer.uuid isEqualToString:APDnsServerUUIDAdguardFamily]) {
+    else if ([DnsServerInfo.adguardFamilyDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
     }
     else if(dnsServer) {
@@ -230,11 +231,9 @@ static AESSupport *singletonSupport;
         params[REPORT_PARAM_DNS] = dnsServerParam;
         
         if(custom) {
-            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.serverName;
+            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.name;
         }
     }
-    
-#endif
     
     params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
     
@@ -278,14 +277,14 @@ static AESSupport *singletonSupport;
         [sb appendFormat:@"\r\n\r\nLocale: %@", [ADLocales lang]];
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
-        [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
+        [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
         
-        NSNumber *rulesCount = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-        NSNumber *totalRulesCount = [[AESharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion];
+        NSNumber *rulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
+        NSNumber *totalRulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion];
         [sb appendFormat:@"\r\nRules converted: %@ from: %@.", rulesCount, totalRulesCount];
 
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
-        NSArray *filters = [[[AEService singleton] antibanner] filters];
+        NSArray *filters = [[_aeService antibanner] activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
@@ -295,6 +294,8 @@ static AESSupport *singletonSupport;
          //(APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
          (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
          APVPNManager.singleton.activeRemoteDnsServer.serverName];
+        
+        [sb appendFormat:@"\r\nRestart when network changes: %@", APVPNManager.singleton.restartByReachability ? @"YES" : @"NO"];
         
         if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
             
@@ -328,7 +329,7 @@ static AESSupport *singletonSupport;
     
     @autoreleasepool {
         
-        DDLogFileManagerDefault *manager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:[url path]];
+        DDLogFileManagerDefault *manager = [[ACLLogFileManagerDefault alloc] initWithLogsDirectory:[url path]];
         NSArray *logFileInfos = [manager sortedLogFileInfos];
         
         NSMutableData *logData = [NSMutableData dataWithCapacity:ACL_MAX_LOG_FILE_SIZE];
@@ -369,12 +370,17 @@ static AESSupport *singletonSupport;
     return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:logs includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 error:NULL];
 }
 
-- (NSData *)compressedJson{
+- (NSDictionary<NSString*, NSData *>*)compressedJsons{
     
+    NSMutableDictionary* datas = [NSMutableDictionary new];
     
-    NSData *json = [[AESharedResources new] blockingContentRules];
-    
-    return [json gzippedData];
+    NSDictionary* jsonDatas = [_safariService allBlockingContentRules];
+    [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSData* _Nonnull data, BOOL * _Nonnull stop) {
+        NSString *filename = [key replace:@"json" to:@"zip"];
+        datas[filename] = [data gzippedData];
+    }];
+
+    return datas;
 }
 
 

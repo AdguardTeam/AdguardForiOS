@@ -40,21 +40,11 @@ extern NSString *APTunnelProviderErrorDomain;
 /**
  Returns current DNS server description object.
  */
-- (APDnsServerObject *)currentDnsServer;
-/**
- Returns local filtering flag.
- */
-- (BOOL)localFiltering;
-
-/**
- Returns YES if configuration contains remote DNS server.
- */
-- (BOOL)isRemoteServer;
+- (DnsServerInfo *)currentDnsServer;
 
 /**
  Returns tunnel mode
  */
-
 - (APVpnManagerTunnelMode)tunnelMode;
 
 @end

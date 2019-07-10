@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -45,6 +45,16 @@
                BlueprintIdentifier = "65F398341B7B684700ABCD39"
                BuildableName = "AdguardUITests.xctest"
                BlueprintName = "AdguardUITests"
+               ReferencedContainer = "container:Adguard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0F911832136D2DC006DF0D3"
+               BuildableName = "AdguardSwiftTests.xctest"
+               BlueprintName = "AdguardSwiftTests"
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </TestableReference>

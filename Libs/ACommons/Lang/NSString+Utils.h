@@ -27,29 +27,29 @@
 /** 
  Gets encoding from the encoding name. If not found - returns default
 */
-+ (NSStringEncoding)encodingFromString:(NSString *)encodingName default:(NSStringEncoding)defaultEncoding;
++ (NSStringEncoding)encodingFromString:(nonnull NSString *)encodingName default:(NSStringEncoding)defaultEncoding;
 
 
 //////////////////////////////////////////////////////////////
 #pragma mark - C# and other sugar
 //////////////////////////////////////////////////////////////
-+ (BOOL)isNullOrEmpty:(NSString *)str;
-+ (BOOL)isNullOrWhiteSpace:(NSString *)str;
-+ (NSString *)stringByTrim:(NSString *)str;
++ (BOOL)isNullOrEmpty:(nullable NSString *)str;
++ (BOOL)isNullOrWhiteSpace:(nullable NSString *)str;
++ (nullable NSString *)stringByTrim:(nullable NSString *)str;
 
 /// Returns NSString object, which contains hex representation of data.
-+ (NSString * )hexStringFromData:(NSData *)data;
++ (nonnull NSString * )hexStringFromData:(nonnull NSData *)data;
 
-- (NSString *)replace:(NSString *)from to:(NSString *)to;
+- (nonnull NSString *)replace:(nonnull NSString *)from to:(nonnull NSString *)to;
 
 /** 
  @return index of string into receiver, or -1 if not found
 */
-- (NSInteger)indexOf:(NSString *)string fromIndex:(NSUInteger)index;
+- (NSInteger)indexOf:(nonnull NSString *)string fromIndex:(NSUInteger)index;
 /**
  @return index of string into receiver, or -1 if not found
  */
-- (NSInteger)indexOf:(NSString *)string;
+- (NSInteger)indexOf:(nonnull NSString *)string;
 
 /** Returns a string array that contains the substrings in this string that are delimited by elements of a specified string array. Parameters specify the maximum number of substrings to return and whether to return empty array elements.
 
@@ -60,13 +60,13 @@
  @param omitEmpty Set YES to omit empty array elements from the array returned.
  
  */
-- (NSArray *)splitByArray:(NSArray *)strings count:(NSUInteger)count omitEmpty:(BOOL)omitEmpty;
+- (nonnull NSArray *)splitByArray:(nonnull NSArray *)strings count:(NSUInteger)count omitEmpty:(BOOL)omitEmpty;
 
-- (BOOL)contains:(NSString *)str;
+- (BOOL)contains:(nullable NSString *)str;
 
-- (BOOL)contains:(NSString *)str caseSensitive:(BOOL)sensitive;
+- (BOOL)contains:(nullable NSString *)str caseSensitive:(BOOL)sensitive;
 
-- (BOOL)asciiContains:(NSString *)string ignoreCase:(BOOL)ignoreCase;
+- (BOOL)asciiContains:(nullable NSString *)string ignoreCase:(BOOL)ignoreCase;
 
 
 /**
@@ -90,7 +90,7 @@
  XCTAssert([test isEqualToArray:[@"str\\,, ,\\st\\,r" asciiSplitByDelimiter:',' escapeCharacter:'\\']]);
  
  */
-- (NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
+- (nonnull NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
 
 /**
  *  Find any string from string array as substring in receiver.
@@ -99,7 +99,7 @@
  *
  *  @return YES if receiver contains any string from string array, otherwise NO.
  */
-- (BOOL)containsAny:(NSArray *)strings;
+- (BOOL)containsAny:(nonnull NSArray *)strings;
 
 /**
  *  Find any string from string array as substring in receiver.
@@ -108,7 +108,7 @@
  *
  *  @return Range of first occurence of any string from string array, otherwise range where range.location equals NSNotFound.
  */
-- (NSRange)rangeOfAny:(NSArray *)strings;
+- (NSRange)rangeOfAny:(nonnull NSArray *)strings;
 
 /**
     Find any string from string array as substring in receiver.
@@ -118,28 +118,31 @@
  
     @return Range of first occurence of any string from string array, otherwise range where range.location equals NSNotFound.
  */
-- (NSRange)rangeOfAny:(NSArray *)strings from:(NSUInteger)startIndex;
+- (NSRange)rangeOfAny:(nonnull NSArray *)strings from:(NSUInteger)startIndex;
 
 /// Searches a source string for substrings delimited by a start and end string.
 /// Example [@"<a>123</a>" substringsBetween:@"<a>" and:@"</a>" ignoreCase:YES] --> @[@"123"]
 /// @return All matching substrings in an list
-- (NSArray *)substringsBetween:(NSString *)start and:(NSString *)end ignoreCase:(BOOL)ignoreCase;
+- (nonnull NSArray *)substringsBetween:(nonnull NSString *)start and:(nonnull NSString *)end ignoreCase:(BOOL)ignoreCase;
 /// Searches a source string for substrings delimited by a start and end string.
 /// Example [@"<a>123</a>" substringsBetween:@"<a>" and:@"</a>"] --> @[@"123"]
 /// @return All matching substrings in an list
-- (NSArray *)substringsBetween:(NSString *)start and:(NSString *)end;
+- (nonnull NSArray *)substringsBetween:(nonnull NSString *)start and:(nonnull NSString *)end;
 
 /// Gets MD5 digest, max string length 4GB.
-- (NSString *)md5Digest;
+- (nonnull NSString *)md5Digest;
 
 /// Gets SHA256 digest, max string length 4GB.
-- (NSString *)sha256Digest;
+- (nonnull NSString *)sha256Digest;
 
 /// returns count of occurances of substring in string
-- (NSUInteger) countOccurencesOfString:(NSString*)string;
+- (NSUInteger) countOccurencesOfString:(nonnull NSString*)string;
 
 /// Repeat a String repeat times to form a new String, with a String separator injected each time.
-+ (NSString*) repeat:(NSString*)string separator:(NSString*) separator repeat:(NSInteger)repeat;
++ (nonnull NSString*) repeat:(nonnull NSString*)string separator:(nonnull NSString*) separator repeat:(NSInteger)repeat;
+
+/// converts html string to attributed string
+- (nullable NSMutableAttributedString*) attributedStringFromHtml;
 
 @end
 
@@ -147,7 +150,7 @@
  just returns its input but is annotated to return a localized string
  */
 __attribute__((annotate("returns_localized_nsstring")))
-static inline NSString *LocalizationNotNeeded(NSString *s) {
+static inline NSString* _Nonnull LocalizationNotNeeded(NSString* _Nonnull s) {
     return s;
 }
 
@@ -155,5 +158,5 @@ static inline NSString *LocalizationNotNeeded(NSString *s) {
  returns localized string by key. If string not found in preffered language, rerurns english string -
  NSLocalizedString() returns key in this case
  */
-NSString* ACLocalizedString(NSString* key, NSString* comment);
+NSString* _Nonnull ACLocalizedString(NSString* _Nullable key, NSString* _Nullable comment);
 

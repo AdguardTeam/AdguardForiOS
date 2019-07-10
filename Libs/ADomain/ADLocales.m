@@ -24,11 +24,15 @@
 #define RESOURCE_FEEDBACK_SUBJECTS                              @"FeedbackSubjects"
 #define RESOURCE_DAY_NUMBER_VARIANTS                            @"DayNumberVariants"
 
-static NSDictionary *stringUIResources;
+@interface ADLocales()
 
-void loadStringUIResources();
++ (void) loadStringUIResources;
+
+@end
 
 @implementation ADLocales
+
+static NSDictionary *stringUIResources;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Class methods
@@ -61,7 +65,7 @@ void loadStringUIResources();
 
 + (NSArray *)filtersDescription{
 
-    loadStringUIResources();
+    [self loadStringUIResources];
     
     NSArray *filtersDescription = stringUIResources[RESOURCE_FILTERS_DESCRIPTION];
     if (!filtersDescription)
@@ -72,7 +76,7 @@ void loadStringUIResources();
 
 + (NSDictionary *)defaultProcessesDescription{
     
-    loadStringUIResources();
+    [self loadStringUIResources];
     
     NSDictionary *processesDescription = stringUIResources[RESOURCE_DEFAULT_PROCESS_FOR_FILTERING_DESCRIPTION];
     if (!processesDescription)
@@ -116,7 +120,7 @@ void loadStringUIResources();
 
 + (NSArray *)localizedFeedbackSubjects{
     
-    loadStringUIResources();
+    [self loadStringUIResources];
     
     NSArray *subjects = stringUIResources[RESOURCE_FEEDBACK_SUBJECTS];
     if (!subjects)
@@ -126,9 +130,7 @@ void loadStringUIResources();
     
 }
 
-@end
-
-void loadStringUIResources(){
++ (void) loadStringUIResources {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -140,3 +142,6 @@ void loadStringUIResources(){
             [[NSException appResourceUnavailableException:[RESOURCE_FILE_NAME stringByAppendingString:@".plist"]] raise];
     });
 }
+
+
+@end
