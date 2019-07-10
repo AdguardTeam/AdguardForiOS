@@ -135,6 +135,10 @@ int main(int argc, const char * argv[])
                 
                 for (ASDFilterMetadata *meta in metadata.filters) {
                     
+                    if([meta.filterId isEqualToNumber:@(208)]) {
+                        continue;
+                    }
+                    
                     [db executeUpdate:@"insert into filters (filter_id, group_id, version, display_number, name, description, homepage, expires, subscriptionUrl) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                      meta.filterId, meta.groupId, meta.version, meta.displayNumber, meta.name, meta.descr, meta.homepage, meta.expires, meta.subscriptionUrl];
                     
