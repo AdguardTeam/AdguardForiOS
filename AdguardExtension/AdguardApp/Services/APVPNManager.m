@@ -732,6 +732,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         [self didChangeValueForKey:@"activeDnsServer"];
         
         _resources.activeDnsServer = _activeDnsServer;
+        _resources.vpnEnabled = _enabled;
+        _resources.vpnTunnelMode = _tunnelMode;
         
         [self willChangeValueForKey:@"tunnelMode"];
         _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
@@ -742,6 +744,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
         [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
+        
+        _resources.restartByReachability = _restartByReachability;
         
         NSString *connectionStatusReason = @"Unknown";
         

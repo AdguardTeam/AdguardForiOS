@@ -28,11 +28,6 @@
 #import "ABECRequest.h"
 #import "AESharedResources.h"
 #import "Adguard-Swift.h"
-#ifdef PRO
-#import "APVPNManager.h"
-#import "APDnsServerObject.h"
-#import "APBlockingSubscriptionsManager.h"
-#endif
 
 
 NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
@@ -278,47 +273,36 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
         [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
+    
+        [sb appendFormat:@"\r\n\r\nAEDefaultsGeneralContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsGeneralContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsPrivacyContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsPrivacyContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsSocialContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSocialContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsOtherContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsOtherContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsCustomContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsCustomContentBlockerRulesCount]];
         
-        NSNumber *rulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-        NSNumber *totalRulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion];
-        [sb appendFormat:@"\r\nRules converted: %@ from: %@.", rulesCount, totalRulesCount];
-
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
         NSArray *filters = [[_aeService antibanner] activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
-#ifdef PRO
+        BOOL proStatus = _configurationService.proStatus;
+        
+        
+        DnsServerInfo *dnsServerInfo = _sharedResources.activeDnsServer;
         [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nTunnel mode %@\r\nDNS server: %@",
-         (APVPNManager.singleton.enabled ? @"ENABLED" : @"DISABLED"),
-         //(APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
-         (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
-         APVPNManager.singleton.activeRemoteDnsServer.serverName];
+         (proStatus ? @"ENABLED" : @"DISABLED"),
+         (_sharedResources.vpnTunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
+         dnsServerInfo.name];
         
-        [sb appendFormat:@"\r\nRestart when network changes: %@", APVPNManager.singleton.restartByReachability ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nRestart when network changes: %@", _sharedResources.restartByReachability ? @"YES" : @"NO"];
         
-        if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
-            
-            [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
-            
-            [sb appendFormat:@"\r\nDnsCrypt: %@", APVPNManager.singleton.activeRemoteDnsServer.isDnsCrypt];
+        
+        [sb appendFormat:@"\r\nDns server id: %@",dnsServerInfo.serverId];
+        
+        for (NSString *upstream in dnsServerInfo.upstreams){
+            [sb appendFormat:@"\r\nDns upstream: %@",upstream];
         }
-        
-        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
-        
-        if(subscriptions.count) {
-            [sb appendFormat:@"\r\n\r\nSystem wide blocking subscriptions: "];
-            
-            for(APBlockingSubscription* subscription in subscriptions) {
-                
-                NSString* updateDate = [NSDateFormatter
-                                        localizedStringFromDate: subscription.updateDate
-                                        dateStyle: NSDateFormatterShortStyle
-                                        timeStyle: NSDateFormatterShortStyle];
-                [sb appendFormat:@"\r\nname: %@ url: %@ last update: %@", subscription.name, subscription.url, updateDate];
-            }
-        }
-#endif
+
         return sb;
     }
 }

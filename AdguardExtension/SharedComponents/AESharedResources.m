@@ -64,6 +64,9 @@ NSString* AEDefaultsCustomContentBlockerRulesCount = @"AEDefaultsCustomContentBl
 #define AES_FILTERS_META_CACHE                  @"metadata-cache.data"
 #define AES_FILTERS_I18_CACHE                   @"i18-cache.data"
 #define AES_ACTIVE_DNS_SERVER                   @"active-dns-server.data"
+#define AES_VPN_IS_ENABLED                      @"vpn-is-enabled.data"
+#define VPN_MANAGER_TUNNELMODE                  @"vpn-manager-tunnelMode"
+#define VPN_MANAGER_RESTART_BY_REACHABILITY     @"vpn-manager-restart-by-reachability"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -378,6 +381,63 @@ static NSUserDefaults *_sharedUserDefaults;
     return nil;
 }
 
+-(void)setVpnEnabled:(BOOL)vpnEnabled{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: [NSNumber numberWithBool:vpnEnabled]];
+    if (!data) {
+        data = [NSData data];
+    }
+
+    [self saveData:data toFileRelativePath:AES_VPN_IS_ENABLED];
+}
+
+
+- (BOOL)vpnEnabled {
+    NSData *data = [self loadDataFromFileRelativePath:AES_VPN_IS_ENABLED];
+
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setRestartByReachability:(BOOL)restartByReachability{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: [NSNumber numberWithBool:restartByReachability]];
+    if (!data) {
+        data = [NSData data];
+    }
+    
+    [self saveData:data toFileRelativePath:VPN_MANAGER_RESTART_BY_REACHABILITY];
+}
+
+- (BOOL)restartByReachability{
+    NSData *data = [self loadDataFromFileRelativePath:VPN_MANAGER_RESTART_BY_REACHABILITY];
+    
+    if (data.length) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)setVpnTunnelMode:(APVpnManagerTunnelMode)vpnTunnelMode{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: @(vpnTunnelMode)];
+    if (!data) {
+        data = [NSData data];
+    }
+
+    [self saveData:data toFileRelativePath:VPN_MANAGER_TUNNELMODE];
+}
+
+-(APVpnManagerTunnelMode)vpnTunnelMode{
+    NSData *data = [self loadDataFromFileRelativePath:VPN_MANAGER_TUNNELMODE];
+
+    if (data.length) {
+        NSObject* obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if ([obj isKindOfClass:[NSNumber class]]){
+            return [(NSNumber*)obj intValue];
+        }
+    }
+    return APVpnManagerTunnelModeSplit;
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark Storage methods (private)
 /////////////////////////////////////////////////////////////////////

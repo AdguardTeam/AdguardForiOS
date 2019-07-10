@@ -17,6 +17,13 @@
 */
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    
+    APVpnManagerTunnelModeSplit = 0,
+    APVpnManagerTunnelModeFull,
+    APVpnManagerTunnelModeFullWithoutVPNIcon,
+} APVpnManagerTunnelMode;
+
 @class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
@@ -294,6 +301,12 @@ extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
 @property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
 @property (nullable) DnsServerInfo* activeDnsServer;
+
+@property BOOL vpnEnabled;
+
+@property BOOL restartByReachability;
+
+@property APVpnManagerTunnelMode vpnTunnelMode;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
