@@ -515,6 +515,44 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E4D203622D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */; };
+		7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */; };
+		7E4D203822D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */; };
+		7E4D203922D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */; };
+		7E4D203A22D71A5B003B0E75 /* mz_strm_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201822D71A5B003B0E75 /* mz_strm_zlib.c */; };
+		7E4D203B22D71A5B003B0E75 /* mz_strm_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201822D71A5B003B0E75 /* mz_strm_zlib.c */; };
+		7E4D203C22D71A5B003B0E75 /* mz_zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201922D71A5B003B0E75 /* mz_zip.c */; };
+		7E4D203D22D71A5B003B0E75 /* mz_zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201922D71A5B003B0E75 /* mz_zip.c */; };
+		7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7E4D201B22D71A5B003B0E75 /* LICENSE */; };
+		7E4D203F22D71A5B003B0E75 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7E4D201B22D71A5B003B0E75 /* LICENSE */; };
+		7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201C22D71A5B003B0E75 /* mz_zip_rw.c */; };
+		7E4D204122D71A5B003B0E75 /* mz_zip_rw.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201C22D71A5B003B0E75 /* mz_zip_rw.c */; };
+		7E4D204222D71A5B003B0E75 /* mz_crypt_apple.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201F22D71A5B003B0E75 /* mz_crypt_apple.c */; };
+		7E4D204322D71A5B003B0E75 /* mz_crypt_apple.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201F22D71A5B003B0E75 /* mz_crypt_apple.c */; };
+		7E4D204422D71A5B003B0E75 /* mz_strm_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202122D71A5B003B0E75 /* mz_strm_mem.c */; };
+		7E4D204522D71A5B003B0E75 /* mz_strm_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202122D71A5B003B0E75 /* mz_strm_mem.c */; };
+		7E4D204622D71A5B003B0E75 /* mz_crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202222D71A5B003B0E75 /* mz_crypt.c */; };
+		7E4D204722D71A5B003B0E75 /* mz_crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202222D71A5B003B0E75 /* mz_crypt.c */; };
+		7E4D204822D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202322D71A5B003B0E75 /* mz_strm_wzaes.c */; };
+		7E4D204922D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202322D71A5B003B0E75 /* mz_strm_wzaes.c */; };
+		7E4D204A22D71A5B003B0E75 /* mz_compat.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202522D71A5B003B0E75 /* mz_compat.c */; };
+		7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202522D71A5B003B0E75 /* mz_compat.c */; };
+		7E4D204C22D71A5B003B0E75 /* mz_os.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202822D71A5B003B0E75 /* mz_os.c */; };
+		7E4D204D22D71A5B003B0E75 /* mz_os.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202822D71A5B003B0E75 /* mz_os.c */; };
+		7E4D204E22D71A5B003B0E75 /* mz_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202A22D71A5B003B0E75 /* mz_os_posix.c */; };
+		7E4D204F22D71A5B003B0E75 /* mz_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202A22D71A5B003B0E75 /* mz_os_posix.c */; };
+		7E4D205022D71A5B003B0E75 /* mz_strm_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202C22D71A5B003B0E75 /* mz_strm_buf.c */; };
+		7E4D205122D71A5B003B0E75 /* mz_strm_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202C22D71A5B003B0E75 /* mz_strm_buf.c */; };
+		7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202D22D71A5B003B0E75 /* mz_strm_split.c */; };
+		7E4D205322D71A5B003B0E75 /* mz_strm_split.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D202D22D71A5B003B0E75 /* mz_strm_split.c */; };
+		7E4D205422D71A5B003B0E75 /* mz_strm.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D203022D71A5B003B0E75 /* mz_strm.c */; };
+		7E4D205522D71A5B003B0E75 /* mz_strm.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D203022D71A5B003B0E75 /* mz_strm.c */; };
+		7E4D205622D71A5B003B0E75 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D203422D71A5B003B0E75 /* SSZipArchive.m */; };
+		7E4D205722D71A5B003B0E75 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D203422D71A5B003B0E75 /* SSZipArchive.m */; };
+		7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
+		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
+		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -1589,6 +1627,42 @@
 		65F398651B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionGeneral.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		7E4D201222D71A5B003B0E75 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_os_posix.c; sourceTree = "<group>"; };
+		7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_pkcrypt.c; sourceTree = "<group>"; };
+		7E4D201622D71A5B003B0E75 /* mz_strm_wzaes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_wzaes.h; sourceTree = "<group>"; };
+		7E4D201722D71A5B003B0E75 /* mz_compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_compat.h; sourceTree = "<group>"; };
+		7E4D201822D71A5B003B0E75 /* mz_strm_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_zlib.c; sourceTree = "<group>"; };
+		7E4D201922D71A5B003B0E75 /* mz_zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_zip.c; sourceTree = "<group>"; };
+		7E4D201A22D71A5B003B0E75 /* mz_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_os.h; sourceTree = "<group>"; };
+		7E4D201B22D71A5B003B0E75 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7E4D201C22D71A5B003B0E75 /* mz_zip_rw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_zip_rw.c; sourceTree = "<group>"; };
+		7E4D201D22D71A5B003B0E75 /* mz_strm_split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_split.h; sourceTree = "<group>"; };
+		7E4D201E22D71A5B003B0E75 /* mz_strm_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_buf.h; sourceTree = "<group>"; };
+		7E4D201F22D71A5B003B0E75 /* mz_crypt_apple.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_crypt_apple.c; sourceTree = "<group>"; };
+		7E4D202022D71A5B003B0E75 /* mz_strm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm.h; sourceTree = "<group>"; };
+		7E4D202122D71A5B003B0E75 /* mz_strm_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_mem.c; sourceTree = "<group>"; };
+		7E4D202222D71A5B003B0E75 /* mz_crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_crypt.c; sourceTree = "<group>"; };
+		7E4D202322D71A5B003B0E75 /* mz_strm_wzaes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_wzaes.c; sourceTree = "<group>"; };
+		7E4D202422D71A5B003B0E75 /* mz_strm_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_zlib.h; sourceTree = "<group>"; };
+		7E4D202522D71A5B003B0E75 /* mz_compat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_compat.c; sourceTree = "<group>"; };
+		7E4D202622D71A5B003B0E75 /* mz_strm_pkcrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_pkcrypt.h; sourceTree = "<group>"; };
+		7E4D202722D71A5B003B0E75 /* mz_zip_rw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_zip_rw.h; sourceTree = "<group>"; };
+		7E4D202822D71A5B003B0E75 /* mz_os.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_os.c; sourceTree = "<group>"; };
+		7E4D202922D71A5B003B0E75 /* mz_zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_zip.h; sourceTree = "<group>"; };
+		7E4D202A22D71A5B003B0E75 /* mz_os_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_os_posix.c; sourceTree = "<group>"; };
+		7E4D202B22D71A5B003B0E75 /* mz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz.h; sourceTree = "<group>"; };
+		7E4D202C22D71A5B003B0E75 /* mz_strm_buf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_buf.c; sourceTree = "<group>"; };
+		7E4D202D22D71A5B003B0E75 /* mz_strm_split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_split.c; sourceTree = "<group>"; };
+		7E4D202E22D71A5B003B0E75 /* mz_crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_crypt.h; sourceTree = "<group>"; };
+		7E4D202F22D71A5B003B0E75 /* mz_strm_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_mem.h; sourceTree = "<group>"; };
+		7E4D203022D71A5B003B0E75 /* mz_strm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm.c; sourceTree = "<group>"; };
+		7E4D203122D71A5B003B0E75 /* mz_strm_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_os.h; sourceTree = "<group>"; };
+		7E4D203222D71A5B003B0E75 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		7E4D203322D71A5B003B0E75 /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
+		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -2103,7 +2177,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */,
 				65C12EF61BD7B01D00FFC71C /* JavaScriptCore.framework in Frameworks */,
+				7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */,
 				65C12EF51BD7B01700FFC71C /* SafariServices.framework in Frameworks */,
 				65C12EF41BD7B00E00FFC71C /* libsqlite3.tbd in Frameworks */,
 				65C12EF31BD7B00200FFC71C /* libz.tbd in Frameworks */,
@@ -2120,6 +2196,8 @@
 				656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */,
 				65E5A09A1B8632F600319AA3 /* libz.tbd in Frameworks */,
 				D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */,
+				7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */,
+				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
 				D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */,
 				65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
@@ -2608,6 +2686,8 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E4D205D22D71B2A003B0E75 /* libiconv.tbd */,
+				7E4D205A22D71AE8003B0E75 /* Security.framework */,
 				D020B28821FA02170075BB8D /* Mobile.framework */,
 				65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */,
 				D096D9411F28C0D70081004D /* NotificationCenter.framework */,
@@ -2690,6 +2770,7 @@
 		65EC9AD91BB9824C00F53F3B /* vendors */ = {
 			isa = PBXGroup;
 			children = (
+				7E4D201122D71A5B003B0E75 /* SSZipArchive */,
 				D0B038391FB4877C00A5EA3F /* CsvParser */,
 				65EC9ADA1BB9824C00F53F3B /* fmdb */,
 			);
@@ -2858,6 +2939,55 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		7E4D201122D71A5B003B0E75 /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				7E4D201222D71A5B003B0E75 /* ZipArchive.h */,
+				7E4D201322D71A5B003B0E75 /* minizip */,
+				7E4D203222D71A5B003B0E75 /* SSZipArchive.h */,
+				7E4D203322D71A5B003B0E75 /* SSZipCommon.h */,
+				7E4D203422D71A5B003B0E75 /* SSZipArchive.m */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		7E4D201322D71A5B003B0E75 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */,
+				7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */,
+				7E4D201622D71A5B003B0E75 /* mz_strm_wzaes.h */,
+				7E4D201722D71A5B003B0E75 /* mz_compat.h */,
+				7E4D201822D71A5B003B0E75 /* mz_strm_zlib.c */,
+				7E4D201922D71A5B003B0E75 /* mz_zip.c */,
+				7E4D201A22D71A5B003B0E75 /* mz_os.h */,
+				7E4D201B22D71A5B003B0E75 /* LICENSE */,
+				7E4D201C22D71A5B003B0E75 /* mz_zip_rw.c */,
+				7E4D201D22D71A5B003B0E75 /* mz_strm_split.h */,
+				7E4D201E22D71A5B003B0E75 /* mz_strm_buf.h */,
+				7E4D201F22D71A5B003B0E75 /* mz_crypt_apple.c */,
+				7E4D202022D71A5B003B0E75 /* mz_strm.h */,
+				7E4D202122D71A5B003B0E75 /* mz_strm_mem.c */,
+				7E4D202222D71A5B003B0E75 /* mz_crypt.c */,
+				7E4D202322D71A5B003B0E75 /* mz_strm_wzaes.c */,
+				7E4D202422D71A5B003B0E75 /* mz_strm_zlib.h */,
+				7E4D202522D71A5B003B0E75 /* mz_compat.c */,
+				7E4D202622D71A5B003B0E75 /* mz_strm_pkcrypt.h */,
+				7E4D202722D71A5B003B0E75 /* mz_zip_rw.h */,
+				7E4D202822D71A5B003B0E75 /* mz_os.c */,
+				7E4D202922D71A5B003B0E75 /* mz_zip.h */,
+				7E4D202A22D71A5B003B0E75 /* mz_os_posix.c */,
+				7E4D202B22D71A5B003B0E75 /* mz.h */,
+				7E4D202C22D71A5B003B0E75 /* mz_strm_buf.c */,
+				7E4D202D22D71A5B003B0E75 /* mz_strm_split.c */,
+				7E4D202E22D71A5B003B0E75 /* mz_crypt.h */,
+				7E4D202F22D71A5B003B0E75 /* mz_strm_mem.h */,
+				7E4D203022D71A5B003B0E75 /* mz_strm.c */,
+				7E4D203122D71A5B003B0E75 /* mz_strm_os.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		D031A0A6219EFC99002C17D9 /* Lumberjack */ = {
@@ -3881,6 +4011,7 @@
 				65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */,
 				D0B6B756229D690600D6E84E /* providers.json in Resources */,
 				655AACDC1D423B7400E316EA /* Assets.xcassets in Resources */,
+				7E4D203F22D71A5B003B0E75 /* LICENSE in Resources */,
 				65C52B3D1B906105003AF42F /* MainInterface.storyboard in Resources */,
 				D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */,
 			);
@@ -3901,6 +4032,7 @@
 				D0D6B9FC21A6AF57007360BC /* GetPro.storyboard in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
+				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				D005096B2201DA2F006BC10C /* providers.json in Resources */,
 				D0D6B9FF21A6AF5B007360BC /* MainMenu.storyboard in Resources */,
@@ -4584,13 +4716,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9C9B1BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
+				7E4D203922D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */,
+				7E4D205722D71A5B003B0E75 /* SSZipArchive.m in Sources */,
 				653E46711C1ED93100C09E60 /* AESSupport.m in Sources */,
 				65EC9CAB1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				65EC9BCB1BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D031A131219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				65C12EF11BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
+				7E4D204522D71A5B003B0E75 /* mz_strm_mem.c in Sources */,
 				D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
+				7E4D205122D71A5B003B0E75 /* mz_strm_buf.c in Sources */,
 				655A023C1C6B7686000F00D7 /* ACLJobController.m in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				D03E533121B6A49000C62152 /* RoundRectButton.swift in Sources */,
@@ -4600,13 +4736,17 @@
 				65EC9AF71BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D03E532F21B6A47E00C62152 /* ThemeableImageView.swift in Sources */,
 				655A02331C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
+				7E4D204922D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */,
+				7E4D205322D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				65EC9CAF1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
+				7E4D204322D71A5B003B0E75 /* mz_crypt_apple.c in Sources */,
 				651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02361C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				65B40D381BDE7D1800A9C595 /* AEAUILoaderSegue.m in Sources */,
 				65EC9BDB1BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				655A023F1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				65CB60341D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
+				7E4D204122D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				65C12EF71BD7B05D00FFC71C /* AESharedResources.m in Sources */,
 				65EC9AF31BB9824C00F53F3B /* ABECFilter.m in Sources */,
 				D031A13F219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -4617,6 +4757,8 @@
 				659FBCF21BDE3F03007A87FE /* AEAUIDomainCell.m in Sources */,
 				D031A0DD219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
+				7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */,
+				7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
 				D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */,
 				D031A0CF219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				65EC9C931BB9824C00F53F3B /* FMDatabase.m in Sources */,
@@ -4628,6 +4770,7 @@
 				655A02301C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				65EC9C9F1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				655A02A51C6B7686000F00D7 /* Reachability.m in Sources */,
+				7E4D205522D71A5B003B0E75 /* mz_strm.c in Sources */,
 				655A027B1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				65EC9BD31BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
@@ -4636,10 +4779,15 @@
 				655A02931C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				65E9E7B51BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				655A02901C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
+				7E4D204D22D71A5B003B0E75 /* mz_os.c in Sources */,
 				D031A177219EFC99002C17D9 /* DDFileLogger.m in Sources */,
+				7E4D203D22D71A5B003B0E75 /* mz_zip.c in Sources */,
 				D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */,
+				7E4D204722D71A5B003B0E75 /* mz_crypt.c in Sources */,
+				7E4D204F22D71A5B003B0E75 /* mz_os_posix.c in Sources */,
 				65EC9CA31BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
+				7E4D203B22D71A5B003B0E75 /* mz_strm_zlib.c in Sources */,
 				65C12EEF1BD4D29F00FFC71C /* AEService.m in Sources */,
 				D093718C21B0557C004A24F1 /* SafariService.swift in Sources */,
 				D03E532E21B6A42D00C62152 /* ConfigurationServiceProtocol.swift in Sources */,
@@ -4680,11 +4828,13 @@
 				65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				D0DB1B062148DB35006EB991 /* AdvancedSettingsController.swift in Sources */,
+				7E4D204422D71A5B003B0E75 /* mz_strm_mem.c in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
+				7E4D203622D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
 				D0569E4921F1F11300985DA9 /* ADBTableRow.m in Sources */,
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */,
@@ -4692,6 +4842,7 @@
 				658E43A81E8934A4008DAA59 /* AERDomainFilterRule.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				65E9E7B21BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
+				7E4D205422D71A5B003B0E75 /* mz_strm.c in Sources */,
 				D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */,
 				D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */,
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
@@ -4703,6 +4854,7 @@
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
+				7E4D203A22D71A5B003B0E75 /* mz_strm_zlib.c in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
@@ -4711,8 +4863,11 @@
 				D0EFBF5F22BB6BD000D2D391 /* LoginResponseParser.swift in Sources */,
 				D0569E4421F1EBF200985DA9 /* DnsSettingsController.swift in Sources */,
 				D031A10F219EFC99002C17D9 /* CocoaLumberjack.swift in Sources */,
+				7E4D204222D71A5B003B0E75 /* mz_crypt_apple.c in Sources */,
 				D031A0D7219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
+				7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
+				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				D0F91178213044AD006DF0D3 /* SturtupService.swift in Sources */,
@@ -4720,6 +4875,7 @@
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
+				7E4D203822D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */,
 				6562800A1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */,
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
@@ -4739,6 +4895,7 @@
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */,
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
+				7E4D204C22D71A5B003B0E75 /* mz_os.c in Sources */,
 				D031A11D219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D08187CA2264C89400E961B5 /* LoginService.swift in Sources */,
@@ -4746,10 +4903,14 @@
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
 				D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				7E4D205622D71A5B003B0E75 /* SSZipArchive.m in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */,
+				7E4D204E22D71A5B003B0E75 /* mz_os_posix.c in Sources */,
+				7E4D204622D71A5B003B0E75 /* mz_crypt.c in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
+				7E4D204A22D71A5B003B0E75 /* mz_compat.c in Sources */,
 				D07AA061220490EC0065779F /* DnsProvidersContainerController.swift in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
@@ -4766,13 +4927,16 @@
 				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				D047C2E52191E6CD000B0364 /* UserFilterController.swift in Sources */,
 				D031A139219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
+				7E4D203C22D71A5B003B0E75 /* mz_zip.c in Sources */,
 				D09C9D8B21F5FFD400F3D988 /* DnsLogController.swift in Sources */,
 				65C12EF01BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				7E4D204822D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */,
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
 				D005096D2202F5EB006BC10C /* DnsProviderDetailsController.swift in Sources */,
 				D0CB3478212DCE21003B650E /* MainController.swift in Sources */,
 				D0CDAEA3218C83E00028001B /* CustomFilterInfoInfoController.swift in Sources */,
+				7E4D205022D71A5B003B0E75 /* mz_strm_buf.c in Sources */,
 				D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
 				D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */,
@@ -6276,6 +6440,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(PREPROCESSOR_MACRO)",
+					MZ_ZIP_NO_SIGNING,
+					HAVE_ZLIB,
+					HAVE_WZAES,
+					HAVE_STDINT_H,
+					HAVE_PKCRYPT,
+					HAVE_INTTYPES_H,
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -6335,7 +6505,15 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(PREPROCESSOR_MACRO)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(PREPROCESSOR_MACRO)",
+					MZ_ZIP_NO_SIGNING,
+					HAVE_ZLIB,
+					HAVE_WZAES,
+					HAVE_STDINT_H,
+					HAVE_PKCRYPT,
+					HAVE_INTTYPES_H,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

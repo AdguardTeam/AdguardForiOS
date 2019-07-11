@@ -139,6 +139,7 @@ class MainMenuController: UITableViewController {
         
         let exportLogsAction = UIAlertAction(title: ACLocalizedString("action_export_logs", nil), style: .default) { (action) in
             
+            self.support.exportLogs(withParentController: self, sourceView: self.bugreportCell, sourceRect: self.bugreportCell.bounds);
         }
         
         actionSheet.addAction(cancelAction)

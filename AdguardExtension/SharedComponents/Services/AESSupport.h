@@ -30,6 +30,8 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
 - (nullable NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
 
+- (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (nonnull UIView*)sourceView sourceRect:(CGRect)sourceRect;
+
 @end
 
 @interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>

@@ -28,7 +28,7 @@
 #import "ABECRequest.h"
 #import "AESharedResources.h"
 #import "Adguard-Swift.h"
-
+#import "vendors/SSZipArchive/SSZipArchive.h"
 
 NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
@@ -61,7 +61,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #define REPORT_DNS_ADGUARD @"Default"
 #define REPORT_DNS_ADGUARD_FAMILY @"Family"
 #define REPORT_DNS_OTHER @"Other"
-
+#define TEMP NSTemporaryDirectory()
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
@@ -97,6 +97,17 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
+- (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (UIView*)sourceView sourceRect:(CGRect) sourceRect{
+    NSURL *url = [self createArchivedLogs];
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[url] applicationActivities:nil];
+    
+    [parent presentViewController:activityController animated:YES completion:nil];
+    if (activityController.popoverPresentationController){
+        activityController.popoverPresentationController.sourceView = sourceView;
+        activityController.popoverPresentationController.sourceRect = sourceRect;
+    }
+}
 
 - (void)sendMailBugReportWithParentController:(UIViewController *)parent{
     
@@ -367,5 +378,60 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     return datas;
 }
 
+-(NSURL *)createArchivedLogs{
+    // Create archive name with date stamp
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"DDMMYYYYHHMISS"];
+    NSDate *currentDate = [NSDate date];
+    NSString *dateString = [formatter stringFromDate:currentDate];
+    
+    // Directory path and archive path
+    NSString *baseUrl = [TEMP stringByAppendingString:@"logs/"];
+    NSString *archiveName = [@"adguardforios_logs_" stringByAppendingString:dateString];
+    archiveName = [TEMP stringByAppendingString:archiveName];
+    archiveName = [archiveName stringByAppendingString:@".zip"];
+    // Create directory with path
+    [[NSFileManager defaultManager] createDirectoryAtPath:baseUrl
+                              withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    __block NSURL *fileUrl = [NSURL new];
+    // Append jsondatas to archive
+    NSDictionary<NSString*, NSData*> *jsonDatas = [self compressedJsons];
+    [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull filename, NSData * _Nonnull data, BOOL * _Nonnull stop) {
+        // Append file to directory
+        fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString:filename]];
+        [data writeToURL:fileUrl atomically:NO];
+    }];
+    // Append application state to archive
+    NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
+    fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString:@"state.txt"]];
+    [stateData writeToURL:fileUrl atomically:NO];
+    
+    // Flush Logs
+    [[ACLLogger singleton] flush];
+    //
+    // Append flush logs
+    for (NSURL *item in [self appLogsUrls]) {
+        NSData *logData = [self applicationLogFromURL:item];
+        if (logData.length) {
+            NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+            fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString: fileName]];
+            [logData writeToURL:fileUrl atomically:NO];
+        }
+        else {
+            NSData* content = [NSData dataWithContentsOfURL:item];
+            if (content) {
+                NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+                fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString: fileName]];
+                [content writeToURL:fileUrl atomically:NO];
+            }
+        }
+    }
+    
+    // Archive directory
+    [SSZipArchive createZipFileAtPath:archiveName withContentsOfDirectory: baseUrl];
+    // return archive url
+    return [NSURL fileURLWithPath:archiveName];
+}
 
 @end
