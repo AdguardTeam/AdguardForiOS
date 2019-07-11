@@ -171,6 +171,7 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupSwitch(simplifiedSwitch)
         theme.setupSwitch(darkModeSwitch)
         theme.setupSwitch(wifiUpdateSwitch)
+        theme.setupSwitch(restartTunnelSwitch)
     }
     
     private func updateUI() {

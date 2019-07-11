@@ -215,6 +215,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     return
             }
             
+            // remove "Malware Domains" filter from filters list.
+            // Apple rejects binary with word 'malware' within
+            filters = filters.filter { (filter) in
+                filter.filterId != 208
+            }
+            
             let installedFilters = strongSelf.antibanner.filters() 
             
             var groups = strongSelf.antibanner.groups()

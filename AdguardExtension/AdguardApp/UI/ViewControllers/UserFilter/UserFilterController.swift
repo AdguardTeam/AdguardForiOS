@@ -131,11 +131,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     }
     
     @IBAction func cancelSelectionAction(_ sender: Any) {
-        tableController?.setCustomEditing(false)
-        barState = .normal
-        model.selectAllRules(false)
-        updateBottomBar()
-        selectedRulesChanged()
+        cancelAction()
     }
     
     @IBAction func deleteAction(_ sender: Any) {
@@ -146,6 +142,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         }) { (message) in
     
         }
+        cancelAction()
     }
     
     @IBAction func selectAllAction(_ sender: Any) {
@@ -162,6 +159,13 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     
     // MARK: - private methods
+    private func cancelAction(){
+        tableController?.setCustomEditing(false)
+        barState = .normal
+        model.selectAllRules(false)
+        updateBottomBar()
+        selectedRulesChanged()
+    }
     
     private func updateBottomBar() {
         for subview in rightButtonView.subviews {

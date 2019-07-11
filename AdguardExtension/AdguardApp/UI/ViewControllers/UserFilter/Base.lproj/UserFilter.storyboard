@@ -578,6 +578,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="FNd-Na-vMx" id="pIF-Kf-grV"/>
+                        <outlet property="domainOrRuleLabel" destination="x7r-Ln-XiZ" id="LiX-rj-Qot"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="cxf-2W-sCj" id="Sjz-Rw-nuM"/>
                         <outlet property="ruleTextView" destination="P3J-h6-fpx" id="cFZ-5y-1Fc"/>
                         <outlet property="saveButton" destination="Bvs-mI-vEr" id="Gki-zo-1J8"/>

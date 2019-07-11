@@ -45,7 +45,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     ACLExecuteBlockDelayed *_delayedSendNotify;
     
     NETunnelProviderManager *_manager;
-    NETunnelProviderProtocol *_protocolConfiguration;
     NSMutableArray *_observers;
     
     BOOL        _enabled;
@@ -572,12 +571,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                     }
                     
                     _manager = nil;
-                    _protocolConfiguration = nil;
                 }
                 else {
                     
                     _manager = managers[0];
-                    _protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
                 }
             }
         }
@@ -615,14 +612,11 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         remoteServer = self.defaultServer;
     }
     
-    NETunnelProviderProtocol *protocol;
+    NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
     NETunnelProviderManager *newManager;
     
-    if (_protocolConfiguration) {
-        protocol = _protocolConfiguration;
-    }
-    else{
-        
+    if (!protocol)
+    {
         protocol = [NETunnelProviderProtocol new];
         protocol.providerBundleIdentifier =  AP_TUNNEL_ID;
     }
@@ -707,7 +701,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 }
                 
                 _manager = nil;
-                _protocolConfiguration = nil;
             }
         }
         
@@ -723,7 +716,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     if (_manager) {
         
-        NSData *remoteDnsServerData = _protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
+        NETunnelProviderProtocol * protocolConfiguration = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
+        NSData *remoteDnsServerData = protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
         
         // Getting current settings from configuration.
         //If settings are incorrect, then we assign default values.
@@ -735,14 +729,14 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _resources.vpnTunnelMode = _tunnelMode;
         
         [self willChangeValueForKey:@"tunnelMode"];
-        _tunnelMode = _protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
+        _tunnelMode = protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
+        [protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         
         [self didChangeValueForKey:@"tunnelMode"];
         //-------------
         
-        _restartByReachability = _protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
-        [_protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
+        _restartByReachability = protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
+        [protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
         
         _resources.restartByReachability = _restartByReachability;
         
@@ -821,7 +815,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                         if(!error) {
                             DDLogInfo(@"(APVPNManager) Notify that vpn configuration changed.");
 
-                            [self setStatuses];
+                            dispatch_sync(workingQueue, ^{
+                                [self setStatuses];
+                            });
                         } else {
                             DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
                             _lastError = _standartError;
@@ -841,7 +837,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                             if(!error) {
                                 DDLogInfo(@"(APVPNManager) Notify that vpn connection status changed.");
 
-                                [self setStatuses];
+                                dispatch_sync(workingQueue, ^{
+                                    [self setStatuses];
+                                });
                             } else {
                                 DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
                                 _lastError = _standartError;

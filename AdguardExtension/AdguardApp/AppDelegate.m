@@ -147,7 +147,7 @@ typedef enum : NSUInteger {
 #ifdef PRO
                 [APSProductSchemaManager upgrade];
 #else
-                [AESProductSchemaManager upgrade];
+                [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
 #endif
             }];
         }
