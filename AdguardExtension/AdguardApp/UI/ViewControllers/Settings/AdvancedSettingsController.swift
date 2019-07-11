@@ -125,9 +125,6 @@ class AdvancedSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        if indexPath.row == 3{
-            cell.separatorInset.left = 20
-        }
         theme.setupTableCell(cell)
         return cell
     }
