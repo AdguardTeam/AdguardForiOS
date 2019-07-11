@@ -357,52 +357,33 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private func sortWithAffinityBlocks(filterRules: [ASDFilterRule], contentBlockerRules: inout [ASDFilterRule], rulesByAffinityBlocks: inout [ContentBlockerType: [ASDFilterRule]]) {
         
-        var currentBlockTypes = [ContentBlockerType]();
         for rule in filterRules {
-            let ruleText = rule.ruleText
-            
-            if ruleText.starts(with: AFFINITY_DIRECTIVE_START) {
-                currentBlockTypes = parseContentBlockerTypes(ruleText: ruleText)
-            } else if ruleText.starts(with: AFFINITY_DIRECTIVE) {
-                currentBlockTypes = [ContentBlockerType]();
-            } else if !currentBlockTypes.isEmpty {
-                for type in currentBlockTypes {
-                    if rulesByAffinityBlocks[type] == nil {
-                        rulesByAffinityBlocks[type] = [ASDFilterRule]()
+            if Int(truncating: rule.affinity) > 0 {
+                
+                for type in ContentBlockerType.allCases {
+                    let affinity = affinityMaskByContentBlockerType[type]
+                    if (affinity != nil) {
+                        if (Affinity(rawValue: UInt8(truncating: rule.affinity)).contains(affinity!)) {
+                            if rulesByAffinityBlocks[type] == nil {
+                                rulesByAffinityBlocks[type] = [ASDFilterRule]()
+                            }
+                            rulesByAffinityBlocks[type]?.append(rule)
+                        }
                     }
-                    rulesByAffinityBlocks[type]?.append(rule)
                 }
+                
             } else {
                 contentBlockerRules.append(rule)
             }
         }
     }
     
-    private let AFFINITY_DIRECTIVE: String = "!#safari_cb_affinity"
-    private let AFFINITY_DIRECTIVE_START: String = "!#safari_cb_affinity(";
-    
-    private let contenBlockerTypeByAffinityList: [String: [ContentBlockerType]] =
-        ["general" : [.general],
-         "privacy" : [.privacy],
-         "social" : [.socialWidgetsAndAnnoyances],
-         "other" : [.other],
-         "custom": [.custom],
-         "all": [.general, .privacy, .socialWidgetsAndAnnoyances, .other, .custom]]
-    
-    private func parseContentBlockerTypes(ruleText: String)->[ContentBlockerType] {
-        
-        var result = [ContentBlockerType]()
-        
-        let startIndex = AFFINITY_DIRECTIVE.count + 1;
-        let stripped = ruleText.dropFirst(startIndex).dropLast(1);
-        let list = stripped.split(separator: ",");
-        for affinityBlock in list {
-            let block = affinityBlock.trimmingCharacters(in: .whitespacesAndNewlines)
-            result.append(contentsOf: contenBlockerTypeByAffinityList[String(block)] ?? [])
-        }
-        
-        return result
-    }
+    private let affinityMaskByContentBlockerType: [ContentBlockerType: Affinity] =
+        [.general: Affinity.general,
+         .privacy: Affinity.privacy,
+         .socialWidgetsAndAnnoyances: Affinity.socialWidgetsAndAnnoyances,
+         .other: Affinity.other,
+         .custom: Affinity.custom]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         

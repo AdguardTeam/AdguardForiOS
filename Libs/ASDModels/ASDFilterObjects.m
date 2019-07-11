@@ -646,6 +646,7 @@
         _ruleId = @(0);
         _ruleText = @"";
         _isEnabled = @(0);
+        _affinity = @(0);
     }
     
     return self;
@@ -660,6 +661,22 @@
         _ruleId = @(0);
         _ruleText = ruleText ?: [NSString string];
         _isEnabled = @(enabled);
+        _affinity = @(0);
+    }
+    
+    return self;
+}
+
+- (id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled affinity:(int)affinity{
+    
+    self = [super init];
+    if (self){
+        
+        _filterId = @(ASDF_USER_FILTER_ID);
+        _ruleId = @(0);
+        _ruleText = ruleText ?: [NSString string];
+        _isEnabled = @(enabled);
+        _affinity = @(affinity);
     }
     
     return self;
@@ -667,7 +684,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[filterId=%lu, ruleId=%lu, ruleText=\"%@\", enabled=%@]", [self.filterId unsignedIntegerValue], [self.ruleId unsignedIntegerValue], self.ruleText, ([self.isEnabled boolValue] ? @"YES" : @"NO")];
+    return [NSString stringWithFormat:@"[filterId=%lu, ruleId=%lu, ruleText=\"%@\", enabled=%@, affinity=%lu]", [self.filterId unsignedIntegerValue], [self.ruleId unsignedIntegerValue], self.ruleText, ([self.isEnabled boolValue] ? @"YES" : @"NO"), [self.affinity unsignedIntegerValue]];
 }
 
 - (id)initFromDbResult:(FMResultSet *)result{
@@ -698,6 +715,12 @@
         value = result[@"is_enabled"];
         if (value)
             _isEnabled = value;
+        else
+            return nil;
+        
+        value = result[@"affinity"];
+        if (value)
+            _affinity = value;
         else
             return nil;
     }

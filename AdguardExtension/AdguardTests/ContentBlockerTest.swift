@@ -184,10 +184,8 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks1() {
-        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general)", enabled: true),
-                     ASDFilterRule(text: "@@||example.org^", enabled: true),
-                     ASDFilterRule(text: "example.org##banner", enabled: true),
-                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        let rules: [ASDFilterRule] = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.general.rawValue),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: Affinity.general.rawValue)]
         
         let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
         let jsonOther = "";
@@ -196,10 +194,8 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks2() {
-        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general, other)", enabled: true),
-                     ASDFilterRule(text: "@@||example.org^", enabled: true),
-                     ASDFilterRule(text: "example.org##banner", enabled: true),
-                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue)),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue))]
         
         let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
         let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
@@ -208,25 +204,11 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks3() {
-        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(all)", enabled: true),
-                     ASDFilterRule(text: "@@||example.org^", enabled: true),
-                     ASDFilterRule(text: "example.org##banner", enabled: true),
-                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
+        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.other.rawValue),
+                     ASDFilterRule(text: "example.org##banner", enabled: true)]
         
-        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
-        let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
-        
-        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
-    }
-    
-    func testAffinityBlocks4() {
-        let rules = [ASDFilterRule(text: "!#safari_cb_affinity(general, invalid)", enabled: true),
-                     ASDFilterRule(text: "@@||example.org^", enabled: true),
-                     ASDFilterRule(text: "example.org##banner", enabled: true),
-                     ASDFilterRule(text: "!#safari_cb_affinity", enabled: true)]
-        
-        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
-        let jsonOther = "";
+        let jsonGeneral = "[example.org##banner\n]";
+        let jsonOther = "[@@||example.org^\n]";
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }

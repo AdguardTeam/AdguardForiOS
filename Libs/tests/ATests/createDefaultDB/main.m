@@ -155,7 +155,7 @@ int main(int argc, const char * argv[])
                     
                     if (filterData && filterData.rules.count)
                         for (ASDFilterRule *rule in filterData.rules)
-                            [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text) values (?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText];
+                            [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, affinity) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.affinity];
                     
                 }
                 

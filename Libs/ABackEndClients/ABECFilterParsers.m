@@ -343,19 +343,66 @@
     [stream open];
     
     NSString *line;
+    int affinityMask = 0;
     while ((line = [ACIOUtils readLine:(id<ACIOUtilReadProtocol>)stream
                               encoding:NSUTF8StringEncoding])) {
         
-        ASDFilterRule *rule = [ASDFilterRule new];
-        rule.filterId = filter.filterId;
-        rule.ruleId = @(++ruleCounter);
-        rule.ruleText = line;
-        rule.isEnabled = @(1);
-        [rules addObject:rule];
+        if ([line hasPrefix:@"!#safari_cb_affinity("]) {
+            affinityMask = [self parseContentBlockerTypes:line];
+        } else if ([line hasPrefix:@"!#safari_cb_affinity"]) {
+            affinityMask = 0;
+        } else {
+            
+            ASDFilterRule *rule = [ASDFilterRule new];
+            rule.filterId = filter.filterId;
+            rule.ruleId = @(++ruleCounter);
+            rule.ruleText = line;
+            rule.isEnabled = @(1);
+            rule.affinity = @(affinityMask);
+            
+            [rules addObject:rule];
+        }
+        
     }
     [stream close];
     
     return YES;
+}
+
+- (int) parseContentBlockerTypes:(NSString *) ruleText {
+    int result = 0;
+    
+    u_long startIndex = @"!#safari_cb_affinity".length + 1;
+    NSString *stripped = [ruleText substringFromIndex:startIndex];
+    stripped = [stripped substringToIndex:[stripped length] - 1];
+    NSArray *list = [stripped componentsSeparatedByString:@","];
+    
+    for (id item in list) {
+        NSString *trimmed = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        result += [self getAffinityFromString:trimmed];
+    }
+    
+    return result;
+}
+
+- (int) getAffinityFromString:(NSString *) item {
+    
+    // Should correspond to SafariServices.Affinity
+    NSDictionary *stringToNumber = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"general",1 << 0,
+                                    @"privacy",1 << 1,
+                                    @"social",1 << 2,
+                                    @"other",1 << 3,
+                                    @"custom",1 << 4,
+                                    @"all",(1 << 0) + (1 << 1) + (1 << 2) + (1 << 3) + (1 << 4),
+                                    nil];
+    
+    NSNumber *number = [stringToNumber objectForKey:item];
+    if (number) {
+        return [number intValue];
+    } else {
+        return 0;
+    }
 }
 
 - (ASDFilter *)filter{
