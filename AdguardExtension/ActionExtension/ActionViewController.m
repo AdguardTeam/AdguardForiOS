@@ -44,7 +44,6 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     SafariService *_safariService;
     ContentBlockerService *_contentBlockerService;
     AESSupport *_support;
-    ConfigurationService *_configurationService;
     
     NSURL *_url;
     BOOL _injectScriptSupported;

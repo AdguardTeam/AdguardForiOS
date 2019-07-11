@@ -300,10 +300,23 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         
         
         DnsServerInfo *dnsServerInfo = _sharedResources.activeDnsServer;
-        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nTunnel mode %@\r\nDNS server: %@",
-         (proStatus ? @"ENABLED" : @"DISABLED"),
-         (_sharedResources.vpnTunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
-         dnsServerInfo.name];
+        NSString* tunnelMode = [NSString new];
+        switch (_sharedResources.vpnTunnelMode) {
+            case APVpnManagerTunnelModeFull:
+                tunnelMode = @"FULL";
+                break;
+            case APVpnManagerTunnelModeSplit:
+                tunnelMode = @"SPLIT";
+            case APVpnManagerTunnelModeFullWithoutVPNIcon:
+                tunnelMode = @"WITHOUT_VPN_ICON";
+            default:
+                tunnelMode = @"UNDEFINED";
+                break;
+        }
+        
+        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\n\r\nVPN is %s\r\nTunnel mode %@\r\nDNS server: %@",
+         (proStatus ? @"ENABLED" : @"DISABLED"), (_sharedResources.vpnEnabled ? "ENABLED" : "DISABLED"),
+         tunnelMode, dnsServerInfo.name];
         
         [sb appendFormat:@"\r\nRestart when network changes: %@", _sharedResources.restartByReachability ? @"YES" : @"NO"];
         

@@ -732,7 +732,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         [self didChangeValueForKey:@"activeDnsServer"];
         
         _resources.activeDnsServer = _activeDnsServer;
-        _resources.vpnEnabled = _enabled;
         _resources.vpnTunnelMode = _tunnelMode;
         
         [self willChangeValueForKey:@"tunnelMode"];
@@ -803,7 +802,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
     }
-    
+    _resources.vpnEnabled = _enabled;
     // start delayed
     [self startDelayedOperationsIfNeedIt];
 }
