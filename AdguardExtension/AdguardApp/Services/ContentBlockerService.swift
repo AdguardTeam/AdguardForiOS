@@ -358,12 +358,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func sortWithAffinityBlocks(filterRules: [ASDFilterRule], contentBlockerRules: inout [ASDFilterRule], rulesByAffinityBlocks: inout [ContentBlockerType: [ASDFilterRule]]) {
         
         for rule in filterRules {
-            if Int(truncating: rule.affinity) > 0 {
+            if rule.affinity != nil {
                 
                 for type in ContentBlockerType.allCases {
                     let affinity = affinityMaskByContentBlockerType[type]
                     if (affinity != nil) {
-                        if (Affinity(rawValue: UInt8(truncating: rule.affinity)).contains(affinity!)) {
+                        if (rule.affinity == 0 || Affinity(rawValue: UInt8(truncating: rule.affinity!)).contains(affinity!)) {
                             if rulesByAffinityBlocks[type] == nil {
                                 rulesByAffinityBlocks[type] = [ASDFilterRule]()
                             }

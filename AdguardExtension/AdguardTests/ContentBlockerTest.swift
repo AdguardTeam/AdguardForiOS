@@ -184,8 +184,8 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks1() {
-        let rules: [ASDFilterRule] = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.general.rawValue),
-                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: Affinity.general.rawValue)]
+        let rules: [ASDFilterRule] = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.general.rawValue as NSNumber),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: Affinity.general.rawValue as NSNumber)]
         
         let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
         let jsonOther = "";
@@ -194,8 +194,8 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks2() {
-        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue)),
-                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue))]
+        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber)]
         
         let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
         let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
@@ -204,10 +204,20 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks3() {
-        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.other.rawValue),
-                     ASDFilterRule(text: "example.org##banner", enabled: true)]
+        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.other.rawValue as NSNumber),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: nil)]
         
         let jsonGeneral = "[example.org##banner\n]";
+        let jsonOther = "[@@||example.org^\n]";
+        
+        testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
+    }
+    
+    func testAffinityBlocks4() {
+        let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: 0 as NSNumber),
+                     ASDFilterRule(text: "example.org##banner", enabled: true, affinity: nil)]
+        
+        let jsonGeneral = "[example.org##banner\n@@||example.org^\n]";
         let jsonOther = "[@@||example.org^\n]";
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);

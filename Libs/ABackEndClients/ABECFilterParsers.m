@@ -343,14 +343,14 @@
     [stream open];
     
     NSString *line;
-    int affinityMask = 0;
+    NSNumber *affinityMask = NULL;
     while ((line = [ACIOUtils readLine:(id<ACIOUtilReadProtocol>)stream
                               encoding:NSUTF8StringEncoding])) {
         
         if ([line hasPrefix:@"!#safari_cb_affinity("]) {
             affinityMask = [self parseContentBlockerTypes:line];
         } else if ([line hasPrefix:@"!#safari_cb_affinity"]) {
-            affinityMask = 0;
+            affinityMask = NULL;
         } else {
             
             ASDFilterRule *rule = [ASDFilterRule new];
@@ -358,7 +358,7 @@
             rule.ruleId = @(++ruleCounter);
             rule.ruleText = line;
             rule.isEnabled = @(1);
-            rule.affinity = @(affinityMask);
+            rule.affinity = affinityMask;
             
             [rules addObject:rule];
         }
@@ -369,8 +369,8 @@
     return YES;
 }
 
-- (int) parseContentBlockerTypes:(NSString *) ruleText {
-    int result = 0;
+- (NSNumber *) parseContentBlockerTypes:(NSString *) ruleText {
+    NSNumber *result = NULL;
     
     u_long startIndex = @"!#safari_cb_affinity".length + 1;
     NSString *stripped = [ruleText substringFromIndex:startIndex];
@@ -379,13 +379,16 @@
     
     for (id item in list) {
         NSString *trimmed = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        result += [self getAffinityFromString:trimmed];
+        NSNumber *affinity = [self getAffinityFromString:trimmed];
+        if (affinity != NULL) {
+            result = [NSNumber numberWithInteger: [result intValue] + [affinity intValue]];
+        }
     }
     
     return result;
 }
 
-- (int) getAffinityFromString:(NSString *) item {
+- (NSNumber *) getAffinityFromString:(NSString *) item {
     
     // Should correspond to SafariServices.Affinity
     NSDictionary *stringToNumber = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -394,14 +397,14 @@
                                     @"social",1 << 2,
                                     @"other",1 << 3,
                                     @"custom",1 << 4,
-                                    @"all",(1 << 0) + (1 << 1) + (1 << 2) + (1 << 3) + (1 << 4),
+                                    @"all",0,
                                     nil];
     
     NSNumber *number = [stringToNumber objectForKey:item];
-    if (number) {
-        return [number intValue];
+    if (number != nil) {
+        return number;
     } else {
-        return 0;
+        return NULL;
     }
 }
 

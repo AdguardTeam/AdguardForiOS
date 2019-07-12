@@ -63,6 +63,6 @@ CREATE TABLE [filter_rules] (
 [rule_id] INTEGER NOT NULL,
 [rule_text] TEXT NOT NULL,
 [is_enabled] BOOLEAN NOT NULL DEFAULT 1,
-[affinity] INTEGER NOT NULL DEFAULT 0,
+[affinity] INTEGER,
 CONSTRAINT [filter_rules_pkey] PRIMARY KEY ([filter_id], [rule_id])
 );

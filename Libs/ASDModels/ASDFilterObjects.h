@@ -337,18 +337,18 @@ typedef enum : NSUInteger {
  
  @param ruleText Text of the rule
  @param enabled isEnabled value
- @param affinity isEnabled value
+ @param affinity affinity value
  
  @return Initialized instance.
  If ruleText is nil, then object.ruleText is empty string.
  */
-- (nonnull id)initWithText:(nonnull NSString *)ruleText enabled:(BOOL)enabled affinity:(UInt8)affinity;
+- (nonnull id)initWithText:(nonnull NSString *)ruleText enabled:(BOOL)enabled affinity:(NSNumber *)affinity;
 
 @property (nonatomic, nonnull) NSNumber *filterId;
 @property (nonatomic, nonnull) NSNumber *ruleId;
 @property (nonatomic, nonnull) NSString *ruleText;
 @property (nonatomic, nonnull) NSNumber *isEnabled;
-@property (nonatomic, nonnull) NSNumber *affinity;
+@property (nonatomic, nullable) NSNumber *affinity;
 
 /**
  Checks object if it is kind of ASDFilterRule class, 

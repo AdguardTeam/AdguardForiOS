@@ -667,7 +667,7 @@
     return self;
 }
 
-- (id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled affinity:(int)affinity{
+- (id)initWithText:(NSString *)ruleText enabled:(BOOL)enabled affinity:(NSNumber *)affinity{
     
     self = [super init];
     if (self){
@@ -676,7 +676,7 @@
         _ruleId = @(0);
         _ruleText = ruleText ?: [NSString string];
         _isEnabled = @(enabled);
-        _affinity = @(affinity);
+        _affinity = affinity;
     }
     
     return self;
