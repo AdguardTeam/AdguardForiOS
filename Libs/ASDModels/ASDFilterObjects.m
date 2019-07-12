@@ -661,7 +661,7 @@
         _ruleId = @(0);
         _ruleText = ruleText ?: [NSString string];
         _isEnabled = @(enabled);
-        _affinity = @(0);
+        _affinity = nil;
     }
     
     return self;
