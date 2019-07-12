@@ -646,7 +646,7 @@
         _ruleId = @(0);
         _ruleText = @"";
         _isEnabled = @(0);
-        _affinity = @(0);
+        _affinity = nil;
     }
     
     return self;
@@ -721,8 +721,6 @@
         value = result[@"affinity"];
         if (value)
             _affinity = value;
-        else
-            return nil;
     }
     
     return self;
