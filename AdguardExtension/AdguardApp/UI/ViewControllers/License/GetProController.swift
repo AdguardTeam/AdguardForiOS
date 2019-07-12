@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class GetProController: UIViewController, UIViewControllerTransitioningDelegate, GetProTableControllerDelegate, LoginControllerDelegate {
+class GetProController: UIViewController, UIViewControllerTransitioningDelegate, LoginControllerDelegate {
     
     // MARK: - properties
     var notificationObserver: Any?
@@ -78,15 +78,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         super.viewWillDisappear(animated)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "" {
-            guard let controller = segue.destination as? GetProTableController else { return }
-            tableController = controller
-            tableController?.delegate = self
-        }
-    }
-    
     deinit {
         if let observer = notificationObserver {
             NotificationCenter.default.removeObserver(observer)
@@ -135,15 +126,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - GetProTableControllerDelegate methods
-    
-    func subscribeAction() {
-        purchaseService.requestPurchase()
-    }
-    func restorePurchasesAction() {
-         purchaseService.requestRestore()
-    }
-    
     // MARK: - Presentation delegate methods
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -170,7 +152,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
             case PurchaseService.kPSNotificationPurchaseFailure:
                 self?.purchaseFailure(error: error)
             case PurchaseService.kPSNotificationRestorePurchaseSuccess:
-                self?.restoreSucess()
+                self?.restoreSuccess()
             case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
                 self?.nothingToRestore()
             case PurchaseService.kPSNotificationRestorePurchaseFailure:
@@ -207,7 +189,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("purchase_failure_message", nil))
     }
     
-    private func restoreSucess(){
+    private func restoreSuccess(){
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_success_message", nil)) {
             self.navigationController?.popViewController(animated: true)
         }

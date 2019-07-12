@@ -43,6 +43,7 @@ NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThrou
 NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
 NSString *AEDefaultsHasPremiumLicense = @"AEDefaultsHasPremiumLicense";
 NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableSubscriptionExpirationDate";
+NSString* AEDefaultsNonConsumableItemPurchased = @"AEDefaultsNonConsumableItemPurchased";
 NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";

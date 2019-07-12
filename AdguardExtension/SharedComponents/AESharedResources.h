@@ -143,36 +143,40 @@ extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughLogin;
 
 /**
- User defaults key, wich contains premium account expiration date (NSDate) */
+ User defaults key, which contains premium account expiration date (NSDate) */
 extern NSString* _Nonnull AEDefaultsPremiumExpirationDate;
 
 /**
- User defaults key, wich defines tha user has premium license */
+ User defaults key, which defines tha user has premium license */
 extern NSString* _Nonnull AEDefaultsHasPremiumLicense;
 
 
 /**
- User defaults key, wich contains In app purchase subscription expiration date (NSDate) */
+ User defaults key, which contains In app purchase subscription expiration date (NSDate) */
 extern NSString* _Nonnull AEDefaultsRenewableSubscriptionExpirationDate;
 
 /**
- User defaults key, wich defines that "pro expired" message showed */
+ User defaults key, which defines that non consumable item has been purchased */
+extern NSString* _Nonnull AEDefaultsNonConsumableItemPurchased;
+
+/**
+ User defaults key, which defines that "pro expired" message showed */
 extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 
 /**
- User defaults key, wich defines dark theme is on */
+ User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
 /**
- User defaults key, wich defines dark theme is on */
+ User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
 
 /**
- User defaults key, wich defines dark theme is on */
+ User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAuthStateString;
 
 /**
- User defaults key, wich defines that appId allready saved with right access rights.
+ User defaults key, which defines that appId allready saved with right access rights.
  */
 // todo: remove this in future
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
