@@ -4,7 +4,7 @@
   </p>
 <h3 align="center">The most advanced Safari content blocker and privacy keeper for iOS</h3>
 <p align="center">
-  All-round protection from all kinds of online ads, tracking and malvertising.
+  Top-notch ad blocking in Safari, anti-tracking protection and DNS privacy.
 </p>
   
   <p align="center">
@@ -60,7 +60,7 @@ Here is a [dedicated page](https://adguard.com/contribute.html) for those who ar
 <a id="beta-tester"></a>
 ### How to become a beta tester?
 
-You can submit an application to participate in AdGuard for iOS and AdGuard Pro for iOS beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
+You can submit an application to participate in AdGuard for iOS beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
 
 <a id="our-plans"></a>
 ## Our plans
