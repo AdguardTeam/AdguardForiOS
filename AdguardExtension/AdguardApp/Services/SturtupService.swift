@@ -20,7 +20,7 @@ import Foundation
 import Accounts
 
 /**
- this service initialize all shared services and put them into ServiceLocator
+ this service initializes all shared services and put them into ServiceLocator
  */
 class StartupService : NSObject{
     
@@ -32,7 +32,7 @@ class StartupService : NSObject{
         let sharedResources: AESharedResourcesProtocol = APSharedResources()
         ServiceLocator.shared.addService(service: sharedResources)
         
-        // Registering standart Defaults
+        // Registering standard Defaults
         if  let path = Bundle.main.path(forResource: "defaults", ofType: "plist"),
             let defs = NSDictionary(contentsOfFile: path)  as? [String : Any] {
             sharedResources.sharedDefaults().register(defaults: defs)
@@ -73,5 +73,8 @@ class StartupService : NSObject{
         let supportService: AESSupportProtocol = AESSupport(resources: sharedResources, safariSevice: safariService, aeService: aeService)
         
         ServiceLocator.shared.addService(service: supportService)
+        
+        let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
+        ServiceLocator.shared.addService(service: userNotificationService)
     }
 }

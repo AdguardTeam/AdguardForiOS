@@ -511,6 +511,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {
+                    self?.loginService.hasPremiumLicense = false
                     self?.notifyPremiumExpired()
                 }
             }
