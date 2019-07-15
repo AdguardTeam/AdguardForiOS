@@ -13,10 +13,10 @@
     <a href="https://twitter.com/AdGuard">Twitter</a> |
     <a href="https://t.me/adguard_en">Telegram</a>
     <br /><br />
-    <a
-    </a>
-    <a href="https://github.com/AdguardTeam/AdGuardforiOS/releases">
+    
+<a href="https://github.com/AdguardTeam/AdGuardforiOS/releases">
         <img src="https://img.shields.io/badge/release-v3.0-green.svg" alt="Latest release" />
+    </a>
 
 
 * [Contribution](#contribution)
@@ -60,7 +60,7 @@ Here is a [dedicated page](https://adguard.com/contribute.html) for those who ar
 <a id="beta-tester"></a>
 ### How to become a beta tester?
 
-You can submit an application to participate in AdGuard for iOS beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
+You can submit an application to participate in AdGuard for beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
 
 <a id="our-plans"></a>
 ## Our plans
