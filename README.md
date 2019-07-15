@@ -18,7 +18,6 @@
         <img src="https://img.shields.io/badge/release-v3.0-green.svg" alt="Latest release" />
     </a>
 
-
 * [Contribution](#contribution)
   * [How to report an issue](#issue)
   * [Translating AdGuard](#contribution-translating)
