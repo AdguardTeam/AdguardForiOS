@@ -20,7 +20,7 @@
 
 extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@protocol AESharedResourcesProtocol, SafariServiceProtocol, AEServiceProtocol;
+@protocol AESharedResourcesProtocol, SafariServiceProtocol, AEServiceProtocol, ConfigurationServiceProtocol;
 
 @protocol AESSupportProtocol <NSObject>
 
@@ -30,10 +30,12 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
 - (nullable NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
 
+- (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (nonnull UIView*)sourceView sourceRect:(CGRect)sourceRect;
+
 @end
 
 @interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>
-
+@property (nullable) id<ConfigurationServiceProtocol> configurationService;
 - (nonnull instancetype) initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
                       safariSevice: (nonnull id<SafariServiceProtocol>) safariService
                          aeService: (nonnull id<AEServiceProtocol>) aeService;

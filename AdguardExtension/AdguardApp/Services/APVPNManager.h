@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import "APSharedResources.h"
 
+
+
 @class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService;
 
 /////////////////////////////////////////////////////////////////////
@@ -35,12 +37,6 @@ typedef enum {
     APVpnConnectionStatusInvalid
 } APVpnConnectionStatus;
 
-typedef enum : NSUInteger {
-    
-    APVpnManagerTunnelModeSplit = 0,
-    APVpnManagerTunnelModeFull,
-    APVpnManagerTunnelModeFullWithoutVPNIcon,
-} APVpnManagerTunnelMode;
 
 
 /**

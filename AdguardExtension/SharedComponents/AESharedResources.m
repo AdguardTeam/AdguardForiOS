@@ -55,6 +55,10 @@ NSString* AEDefaultsSocialContentBlockerRulesCount = @"AEDefaultsSocialContentBl
 NSString* AEDefaultsOtherContentBlockerRulesCount = @"AEDefaultsOtherContentBlockerRulesCount";
 NSString* AEDefaultsCustomContentBlockerRulesCount = @"AEDefaultsCustomContentBlockerRulesCount";
 
+NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
+NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
+NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
+
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
