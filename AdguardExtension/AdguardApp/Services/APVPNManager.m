@@ -726,7 +726,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         [self didChangeValueForKey:@"activeDnsServer"];
         
         _resources.activeDnsServer = _activeDnsServer;
-        _resources.vpnTunnelMode = _tunnelMode;
+        [_resources.sharedDefaults setInteger: _tunnelMode forKey:AEDefaultsVPNTunnelMode];
         
         [self willChangeValueForKey:@"tunnelMode"];
         _tunnelMode = protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
@@ -737,8 +737,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         _restartByReachability = protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
         [protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
-        
-        _resources.restartByReachability = _restartByReachability;
+        // Save to user defaults
+        [_resources.sharedDefaults setBool:_restartByReachability forKey:AEDefaultsRestartByReachability];
         
         NSString *connectionStatusReason = @"Unknown";
         
@@ -796,7 +796,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
     }
-    _resources.vpnEnabled = _enabled;
+    [_resources.sharedDefaults setBool:_enabled forKey:AEDefaultsVPNEnabled];
     // start delayed
     [self startDelayedOperationsIfNeedIt];
 }

@@ -61,7 +61,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #define REPORT_DNS_ADGUARD @"Default"
 #define REPORT_DNS_ADGUARD_FAMILY @"Family"
 #define REPORT_DNS_OTHER @"Other"
-#define TEMP NSTemporaryDirectory()
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
@@ -98,14 +97,21 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 - (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (UIView*)sourceView sourceRect:(CGRect) sourceRect{
-    NSURL *url = [self createArchivedLogs];
+    NSString *stringUrl = [[NSString alloc] initWithString:[self createArchivedLogs]];
+    NSURL *url = [NSURL fileURLWithPath:stringUrl];
     
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[url] applicationActivities:nil];
-    
-    [parent presentViewController:activityController animated:YES completion:nil];
-    if (activityController.popoverPresentationController){
-        activityController.popoverPresentationController.sourceView = sourceView;
-        activityController.popoverPresentationController.sourceRect = sourceRect;
+    if (url) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[url] applicationActivities:nil];
+        
+        [parent presentViewController:activityController animated:YES completion:nil];
+        activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+            [[NSFileManager defaultManager] removeItemAtPath:stringUrl error:nil];
+        };
+        
+        if (activityController.popoverPresentationController){
+            activityController.popoverPresentationController.sourceView = sourceView;
+            activityController.popoverPresentationController.sourceRect = sourceRect;
+        }
     }
 }
 
@@ -298,27 +304,26 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         
         BOOL proStatus = _configurationService.proStatus;
         
-        
         DnsServerInfo *dnsServerInfo = _sharedResources.activeDnsServer;
-        NSString* tunnelMode = [NSString new];
-        switch (_sharedResources.vpnTunnelMode) {
+        NSString *tunnelMode = [NSString new];
+        NSInteger tunnel = [_sharedResources.sharedDefaults integerForKey:AEDefaultsVPNTunnelMode];
+        switch (tunnel) {
+            case APVpnManagerTunnelModeSplit:
+                tunnelMode = @"SPLIT";
+                break;
             case APVpnManagerTunnelModeFull:
                 tunnelMode = @"FULL";
                 break;
-            case APVpnManagerTunnelModeSplit:
-                tunnelMode = @"SPLIT";
             case APVpnManagerTunnelModeFullWithoutVPNIcon:
                 tunnelMode = @"WITHOUT_VPN_ICON";
-            default:
-                tunnelMode = @"UNDEFINED";
                 break;
         }
         
         [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\n\r\nVPN is %s\r\nTunnel mode %@\r\nDNS server: %@",
-         (proStatus ? @"ENABLED" : @"DISABLED"), (_sharedResources.vpnEnabled ? "ENABLED" : "DISABLED"),
+         (proStatus ? @"ENABLED" : @"DISABLED"), ([_sharedResources.sharedDefaults boolForKey:AEDefaultsVPNEnabled] ? "ENABLED" : "DISABLED"),
          tunnelMode, dnsServerInfo.name];
         
-        [sb appendFormat:@"\r\nRestart when network changes: %@", _sharedResources.restartByReachability ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nRestart when network changes: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsRestartByReachability] ? @"YES" : @"NO"];
         
         
         [sb appendFormat:@"\r\nDns server id: %@",dnsServerInfo.serverId];
@@ -391,7 +396,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     return datas;
 }
 
--(NSURL *)createArchivedLogs{
+-(NSString *)createArchivedLogs{
     // Create archive name with date stamp
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"DDMMYYYYHHMISS"];
@@ -399,9 +404,9 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     NSString *dateString = [formatter stringFromDate:currentDate];
     
     // Directory path and archive path
-    NSString *baseUrl = [TEMP stringByAppendingString:@"logs/"];
+    NSString *baseUrl = [NSTemporaryDirectory() stringByAppendingString:@"logs/"];
     NSString *archiveName = [@"adguardforios_logs_" stringByAppendingString:dateString];
-    archiveName = [TEMP stringByAppendingString:archiveName];
+    archiveName = [NSTemporaryDirectory() stringByAppendingString:archiveName];
     archiveName = [archiveName stringByAppendingString:@".zip"];
     // Create directory with path
     [[NSFileManager defaultManager] createDirectoryAtPath:baseUrl
@@ -442,9 +447,12 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     }
     
     // Archive directory
-    [SSZipArchive createZipFileAtPath:archiveName withContentsOfDirectory: baseUrl];
+    if ([SSZipArchive createZipFileAtPath:archiveName withContentsOfDirectory: baseUrl]) {
+        [[NSFileManager defaultManager] removeItemAtPath:baseUrl error:nil];
+        return archiveName;
+    }
     // return archive url
-    return [NSURL fileURLWithPath:archiveName];
+    return nil;
 }
 
 @end
