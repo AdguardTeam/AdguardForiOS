@@ -60,7 +60,9 @@ class ChooseProtocolController: BottomAlertController {
     // MARK: - viewcontroller lifecycle
     
     override func viewDidLoad() {
-         super.viewDidLoad()
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
         
         setupAvailibleProtocols()
         setupChecks()
@@ -139,7 +141,7 @@ class ChooseProtocolController: BottomAlertController {
         }
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         
         scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)

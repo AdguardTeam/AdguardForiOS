@@ -30,6 +30,8 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         domainOrRuleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
 
         
@@ -75,7 +77,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         saveButton.isEnabled = !(ruleTextView.text?.isEmpty ?? true) && ruleTextView.text != rule?.rule
     }
     
-    func updateTheme() {
+    @objc func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)

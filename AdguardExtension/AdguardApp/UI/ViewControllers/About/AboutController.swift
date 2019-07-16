@@ -35,6 +35,8 @@ class AboutController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         versionLabel.text = ADProductInfo.versionWithBuildNumber()
     }
     
@@ -53,8 +55,7 @@ class AboutController : UIViewController {
     }
     
     // MARK: - private methods
-    
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupLabels(themableLabels)

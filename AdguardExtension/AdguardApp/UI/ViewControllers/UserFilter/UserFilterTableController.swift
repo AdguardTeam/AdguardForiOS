@@ -61,6 +61,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         updateUI()
         
         observation = model?.observe(\.rules) {[weak self](_, _) in
@@ -326,11 +329,15 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         }
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupSearchBar(searchBar)
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func configureCell(_ cell: RuleCell, selected: Bool) {

@@ -78,6 +78,8 @@ class MainMenuController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         let updateFilters: ()->Void = { [weak self] in
             guard let sSelf = self else { return }
             let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), sSelf.filtersService.activeFiltersCount, sSelf.filtersService.filtersCount)
@@ -169,13 +171,16 @@ class MainMenuController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func setDnsName() {

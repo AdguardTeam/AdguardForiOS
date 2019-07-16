@@ -48,6 +48,8 @@ class GroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         viewModel.load() {[weak self] () in
             self?.tableView.reloadData()
         }
@@ -159,10 +161,13 @@ class GroupsController: UITableViewController {
         }
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
 }

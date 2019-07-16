@@ -44,6 +44,8 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         model.recordsObserver = { [weak self] (records) in
             self?.tableView.reloadData()
             self?.refreshControl?.endRefreshing()
@@ -101,9 +103,13 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
         theme.setupSearchBar(searchBar)
     }
     

@@ -36,6 +36,8 @@ class CustomFiltersController: UITableViewController, UIViewControllerTransition
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,9 +107,13 @@ class CustomFiltersController: UITableViewController, UIViewControllerTransition
     
     // MARK: - Private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
 }

@@ -164,6 +164,14 @@ extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
 /**
+ User defaults key, wich defines theme mode */
+extern NSString* _Nonnull AEDefaultsUserThemeMode;
+
+/**
+ User defaults key, wich defines system appearence style */
+extern NSString* _Nonnull AEDefaultsSystemAppearenceStyle;
+
+/**
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
 

@@ -28,6 +28,9 @@ class RuleAddedController: BottomAlertController {
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         super.viewDidLoad()
         updateTheme()
     }
@@ -36,7 +39,7 @@ class RuleAddedController: BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(themableButtons)

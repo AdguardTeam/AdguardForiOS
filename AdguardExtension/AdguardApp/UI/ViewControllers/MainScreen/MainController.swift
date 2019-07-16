@@ -79,6 +79,8 @@ class MainController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         let ratedObservation = configuration.observe(\.appRated) {[weak self](_, _) in
             self?.updateUI()
         }
@@ -296,7 +298,7 @@ class MainController: UIViewController {
         }
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         navigationController?.view.backgroundColor = theme.backgroundColor
         theme.setupImage(headerImage)

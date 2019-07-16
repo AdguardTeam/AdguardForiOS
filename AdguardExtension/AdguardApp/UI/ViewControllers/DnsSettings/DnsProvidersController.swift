@@ -45,6 +45,8 @@ class DnsProvidersController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         tableView.rowHeight = UITableView.automaticDimension
         
         let selectCellFunc = { [weak self] in
@@ -146,9 +148,13 @@ class DnsProvidersController: UITableViewController {
     
     // MARK: private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func defaultServer(_ provider: DnsProviderInfo)->DnsServerInfo? {

@@ -60,6 +60,8 @@ class GetProTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         updateTheme()
         
         upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
@@ -136,9 +138,12 @@ class GetProTableController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        
+    @objc private func updateTheme() {
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
         theme.setupLabels(themableLabels)
         setPurchaseDescription()
     }

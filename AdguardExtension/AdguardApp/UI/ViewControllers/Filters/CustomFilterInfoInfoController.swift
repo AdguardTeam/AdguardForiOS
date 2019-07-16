@@ -55,6 +55,8 @@ class CustomFilterInfoInfoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         name.text = filter?.name
         rulesCount.text = "\(filter?.rulesCount ?? 0)"
         
@@ -89,7 +91,7 @@ class CustomFilterInfoInfoController: UIViewController {
     
     // MARK: - private methods
     
-    func updateTheme() {
+    @objc func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
     }

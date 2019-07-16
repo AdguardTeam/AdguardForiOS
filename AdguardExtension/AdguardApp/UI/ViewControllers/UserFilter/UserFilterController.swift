@@ -68,6 +68,8 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         if newRuleText != nil && newRuleText!.count > 0 {
             tableController?.addRule(rule: newRuleText!)
             showRuleAddedDialog()
@@ -201,7 +203,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         selectedRulesChanged()
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor

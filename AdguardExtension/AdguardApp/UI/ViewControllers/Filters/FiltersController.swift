@@ -126,6 +126,8 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         viewModel?.filtersChangedCallback = { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
@@ -403,10 +405,14 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     
     // MARK: - private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
         theme.setupSearchBar(searchBar)
         theme.setubBarButtonItem(searchButton)
         theme.setupLabels(themableLabels)

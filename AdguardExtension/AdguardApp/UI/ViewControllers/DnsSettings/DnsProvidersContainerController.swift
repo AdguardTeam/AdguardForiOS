@@ -37,6 +37,9 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         updateTheme()
     }
     
@@ -67,7 +70,7 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
     
     // MARK: - private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         addProviderButton.customBackgroundColor = theme.popupBackgroundColor
         

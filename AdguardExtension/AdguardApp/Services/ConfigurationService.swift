@@ -27,6 +27,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     private var purchaseService : PurchaseServiceProtocol
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
+    @objc static let themeChangeNotification = "themeChangeNotification"
     var notificationObserver: Any?
     
     // MARK: - init
@@ -43,13 +44,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
             [weak self](notification) in
             guard let sSelf = self else { return }
             if notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String == PurchaseService.kPSNotificationPremiumStatusChanged {
-                
-                    if !sSelf.proStatus {
-                        sSelf.willChangeValue(for: \.darkTheme)
-                        sSelf.darkTheme = false
-                        sSelf.didChangeValue(for: \.darkTheme)
-                    }
-                
+                                
                     sSelf.willChangeValue(for: \.proStatus)
                     sSelf.didChangeValue(for: \.proStatus)
                 }
@@ -95,11 +90,43 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
      dark or light theme of app UI
     */
     @objc dynamic var darkTheme: Bool {
+        switch userThemeMode {
+        case AESystemDefaultThemeMode:
+            return systemAppearenceIsDark
+        case AELightThemeMode:
+            return false
+        case AEDarkThemeMode:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    /**
+     user theme mode of app UI
+     */
+    @objc dynamic var userThemeMode: AEThemeMode {
         set {
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsDarkTheme)
+            resources.sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsUserThemeMode)
         }
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsDarkTheme)
+            guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsUserThemeMode) as? UInt else {
+                return AELightThemeMode
+            }
+            return AEThemeMode.init(themeMode)
+        }
+    }
+    
+    /**
+     system appearence style
+     */
+    @objc dynamic var systemAppearenceIsDark: Bool {
+        set {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsSystemAppearenceStyle)
+            NotificationCenter.default.post(name: Notification.Name(ConfigurationService.themeChangeNotification), object: self)
+        }
+        get {
+            return resources.sharedDefaults().bool(forKey: AEDefaultsSystemAppearenceStyle)
         }
     }
     
@@ -113,3 +140,5 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         }
     }
 }
+
+

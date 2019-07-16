@@ -53,6 +53,8 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                object: nil, queue: nil)
         { [weak self](notification) in
@@ -250,7 +252,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         showAlertIfPossible()
     }
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
         separator1.backgroundColor = theme.separatorColor

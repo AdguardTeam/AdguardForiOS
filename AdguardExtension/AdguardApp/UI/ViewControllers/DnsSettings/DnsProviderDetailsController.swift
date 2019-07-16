@@ -51,6 +51,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        
         updateProtocol()
         
         dnsServerObservetion = vpnManager.observe(\.activeDnsServer) { [weak self] (_, _) in
@@ -206,9 +208,13 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     
     // MARK: - private methods
     
-    private func updateTheme() {
+    @objc private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func updateProtocol() {
