@@ -511,6 +511,7 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
 		7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBAD22D88F1900027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBBC22DDC25000027E93 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
@@ -1098,7 +1099,6 @@
 		D0F91169212EE214006DF0D3 /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91168212EE214006DF0D3 /* GroupsController.swift */; };
 		D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */; };
-		D0F91178213044AD006DF0D3 /* SturtupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91177213044AD006DF0D3 /* SturtupService.swift */; };
 		D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D0F9117E213568DF006DF0D3 /* AEBlacklistDomainObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE81DA5050400B1FF54 /* AEBlacklistDomainObjectTest.m */; };
 		D0F911922136DA5A006DF0D3 /* PurchaseServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F911912136DA5A006DF0D3 /* PurchaseServiceTest.swift */; };
@@ -1627,6 +1627,7 @@
 		65F398651B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionGeneral.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
 		7E49DBBA22DDC25000027E93 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -2093,7 +2094,6 @@
 		D0F91168212EE214006DF0D3 /* GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsController.swift; sourceTree = "<group>"; };
 		D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorUtils.swift; sourceTree = "<group>"; };
 		D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		D0F91177213044AD006DF0D3 /* SturtupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SturtupService.swift; sourceTree = "<group>"; };
 		D0F91179213422E1006DF0D3 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		D0F9117B2134414A006DF0D3 /* AdguardTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdguardTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0F911912136DA5A006DF0D3 /* PurchaseServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseServiceTest.swift; sourceTree = "<group>"; };
@@ -3299,8 +3299,8 @@
 			children = (
 				D0CB347A212DD1AB003B650E /* ConfigurationService.swift */,
 				D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */,
-				D0F91177213044AD006DF0D3 /* SturtupService.swift */,
 				D0F91179213422E1006DF0D3 /* PurchaseService.swift */,
+				7E1104F822DE27C700720501 /* StartupService.swift */,
 				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
 				D09E9643216CB14A00313AB1 /* ThemeService.swift */,
 				D0702B3E2188859D0051669A /* FileShareService.swift */,
@@ -4842,6 +4842,7 @@
 				D06ACB6F2146AF1700D2A37D /* LongLabelCell.swift in Sources */,
 				65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
+				7E1104F922DE27C700720501 /* StartupService.swift in Sources */,
 				D0DB1B062148DB35006EB991 /* AdvancedSettingsController.swift in Sources */,
 				7E4D204422D71A5B003B0E75 /* mz_strm_mem.c in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
@@ -4885,7 +4886,6 @@
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
-				D0F91178213044AD006DF0D3 /* SturtupService.swift in Sources */,
 				65FAB3371D6C569500A0706B /* ACObject.m in Sources */,
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
