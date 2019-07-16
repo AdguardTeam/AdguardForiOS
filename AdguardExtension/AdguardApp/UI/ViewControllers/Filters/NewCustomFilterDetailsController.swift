@@ -45,6 +45,10 @@ class NewCustomFilterDetailsController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         name.text = filter?.meta.name
         let count: Int = filter?.rules.count ?? 0
         rulesCount.text = String(count)
@@ -82,7 +86,7 @@ class NewCustomFilterDetailsController : UIViewController {
     
     // MARK: - private methods
     
-    func updateTheme() {
+    private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
     }

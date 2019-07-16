@@ -79,6 +79,10 @@ class MainController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         let ratedObservation = configuration.observe(\.appRated) {[weak self](_, _) in
             self?.updateUI()
         }

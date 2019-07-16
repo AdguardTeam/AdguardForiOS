@@ -68,6 +68,10 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         if newRuleText != nil && newRuleText!.count > 0 {
             tableController?.addRule(rule: newRuleText!)
             showRuleAddedDialog()

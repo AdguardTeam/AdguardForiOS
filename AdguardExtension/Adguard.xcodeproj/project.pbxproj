@@ -330,9 +330,7 @@
 		659887061CF83580003ECD1C /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
 		659887091CF83580003ECD1C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		6598870B1CF83580003ECD1C /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
-		6598870C1CF83580003ECD1C /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
 		6598870D1CF83580003ECD1C /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
-		6598870E1CF83580003ECD1C /* AEAUIDomainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */; };
 		6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
 		659887101CF83580003ECD1C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEA1BB9824C00F53F3B /* FMSQLStatementSplitter.m */; };
@@ -389,8 +387,6 @@
 		659887721CF83CE7003ECD1C /* ProActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598873D1CF83580003ECD1C /* ProActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659887751CF83CF3003ECD1C /* ProBlockingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6598876E1CF83947003ECD1C /* ProBlockingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		659E59771BC6D82700FA2384 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
-		659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */; };
-		659FBCF21BDE3F03007A87FE /* AEAUIDomainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */; };
 		65A6AC9A1BE123AF006A86E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65A6AC981BE123AF006A86E5 /* Localizable.strings */; };
 		65A82BBC1EC9AD66004B0140 /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
 		65A82BBD1EC9AD91004B0140 /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
@@ -515,6 +511,10 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
+		7E49DBAD22D88F1900027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
+		7E49DBBC22DDC25000027E93 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
+		7E49DBBD22DDC25000027E93 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
 		7E4D203622D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */; };
 		7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */; };
 		7E4D203822D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */; };
@@ -1627,6 +1627,10 @@
 		65F398651B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionGeneral.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
+		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
+		7E49DBBA22DDC25000027E93 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		7E49DBBB22DDC25000027E93 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		7E4D201222D71A5B003B0E75 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		7E4D201422D71A5B003B0E75 /* mz_strm_os_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_os_posix.c; sourceTree = "<group>"; };
 		7E4D201522D71A5B003B0E75 /* mz_strm_pkcrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_pkcrypt.c; sourceTree = "<group>"; };
@@ -2666,6 +2670,7 @@
 				65C52B391B906105003AF42F /* ActionViewController.m */,
 				65D04F781C872B92001A9A02 /* js */,
 				659FBCEC1BDE31B4007A87FE /* UI */,
+				7E49DBA722D88D9C00027E93 /* Swift UI */,
 				65C52B3B1B906105003AF42F /* MainInterface.storyboard */,
 				65A6AC971BE12280006A86E5 /* Supporting Files */,
 			);
@@ -2939,6 +2944,16 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		7E49DBA722D88D9C00027E93 /* Swift UI */ = {
+			isa = PBXGroup;
+			children = (
+				7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */,
+				7E49DBBA22DDC25000027E93 /* Constants.h */,
+				7E49DBBB22DDC25000027E93 /* Constants.m */,
+			);
+			path = "Swift UI";
 			sourceTree = "<group>";
 		};
 		7E4D201122D71A5B003B0E75 /* SSZipArchive */ = {
@@ -3297,6 +3312,7 @@
 				653153601CFC63C000C92A73 /* APVPNManager.h */,
 				653153611CFC63C000C92A73 /* APVPNManager.m */,
 				D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */,
+				7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -4586,6 +4602,7 @@
 				659886FB1CF83580003ECD1C /* ACLJobController.m in Sources */,
 				659886FD1CF83580003ECD1C /* ACIOUtils.m in Sources */,
 				659886FF1CF83580003ECD1C /* ACLWildcard.m in Sources */,
+				7E49DBAD22D88F1900027E93 /* ActionExtensionMainController.swift in Sources */,
 				6518BD881DABBE9100FDD1F3 /* APVPNManager.m in Sources */,
 				659887001CF83580003ECD1C /* ABECRequest.m in Sources */,
 				659887011CF83580003ECD1C /* ACLFileLocker.m in Sources */,
@@ -4604,10 +4621,8 @@
 				6518BD871DABBE6D00FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				6598870B1CF83580003ECD1C /* ABECFilter.m in Sources */,
 				D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */,
-				6598870C1CF83580003ECD1C /* AEAUIMainController.m in Sources */,
 				D031A16B219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				6598870D1CF83580003ECD1C /* NSString+Utils.m in Sources */,
-				6598870E1CF83580003ECD1C /* AEAUIDomainCell.m in Sources */,
 				6598870F1CF83580003ECD1C /* ACIOStream.m in Sources */,
 				D0F60DB41F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D04D1B7E201F3F4900D53073 /* AERDomainFilterRule.m in Sources */,
@@ -4749,18 +4764,18 @@
 				7E4D204122D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				65C12EF71BD7B05D00FFC71C /* AESharedResources.m in Sources */,
 				65EC9AF31BB9824C00F53F3B /* ABECFilter.m in Sources */,
+				7E49DBBD22DDC25000027E93 /* Constants.m in Sources */,
 				D031A13F219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
-				659FBCEF1BDE3229007A87FE /* AEAUIMainController.m in Sources */,
 				655A02811C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */,
 				D031A123219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
-				659FBCF21BDE3F03007A87FE /* AEAUIDomainCell.m in Sources */,
 				D031A0DD219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */,
 				7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
 				D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */,
 				D031A0CF219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
+				7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */,
 				65EC9C931BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				D077D5ED2137EE2400D3D5B3 /* ServiceLocator.swift in Sources */,
 				65EC9CA71BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
@@ -4887,6 +4902,7 @@
 				658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */,
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				D031A101219EFC99002C17D9 /* CLIColor.m in Sources */,
+				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
@@ -6193,6 +6209,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6214,6 +6231,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

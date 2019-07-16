@@ -37,6 +37,11 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         updateTheme()
     }
     
