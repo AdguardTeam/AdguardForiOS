@@ -1,27 +1,47 @@
-//
-//  AEUEMainController.swift
-//  ActionExtension
-//
-//  Created by Илья Ковальчук on 12.07.2019.
-//  Copyright © 2019 Performiks. All rights reserved.
-//
+/**
+    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+    Copyright © Adguard Software Limited. All rights reserved.
+ 
+    Adguard for iOS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Adguard for iOS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import UIKit
 import CoreServices
 
 class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var userThemeMode: AEThemeMode {
-        return AELightThemeMode
+        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsUserThemeMode) as? UInt else {
+            return AELightThemeMode
+        }
+        return AEThemeMode.init(themeMode)
     }
     
-    var systemAppearenceIsDark: Bool {
-        return true
-    }
+    var systemAppearenceIsDark: Bool
     
     var resources: AESharedResourcesProtocol
     
     var darkTheme: Bool {
-        return self.resources.sharedDefaults().bool(forKey: AEDefaultsDarkTheme)
+        switch userThemeMode {
+        case AESystemDefaultThemeMode:
+            return systemAppearenceIsDark
+        case AELightThemeMode:
+            return false
+        case AEDarkThemeMode:
+            return true
+        default:
+            return false
+        }
     }
     
     var proStatus: Bool {
@@ -31,9 +51,10 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var purchasedThroughLogin: Bool {
         return false
     }
-
-    init(withResources resources: AESharedResourcesProtocol) {
+    
+    init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
         self.resources = resources
+        self.systemAppearenceIsDark = systemAppearenceIsDark
     }
 }
 
@@ -58,8 +79,24 @@ class ActionExtensionMainController: UITableViewController {
     var contentBlockerService: ContentBlockerService? = nil
     var support: AESSupportProtocol? = nil
     var theme: ThemeServiceProtocol?
+    var configuration: SimpleConfigurationSwift?
     
     var enabledHolder: Bool?
+    
+    var systemStyleIsDark: Bool {
+        if #available(iOSApplicationExtension 13.0, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .light:
+                return false
+            case .dark:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
@@ -67,9 +104,8 @@ class ActionExtensionMainController: UITableViewController {
         
         title = LocalizationNotNeeded(Constants.aeProductName())
         
-        let resources = AESharedResources()
-        let configuration: SimpleConfigurationSwift = SimpleConfigurationSwift(withResources: resources)
-        self.theme = ThemeService(configuration)
+        configuration = SimpleConfigurationSwift(withResources: resources!, systemAppearenceIsDark: systemStyleIsDark)
+        self.theme = ThemeService(configuration!)
         
         enabledSwitch.isOn = domainEnabled
         enabledHolder = domainEnabled
@@ -83,15 +119,8 @@ class ActionExtensionMainController: UITableViewController {
                 }
             }
         }
-        
-        resources.sharedDefaults().set(true, forKey: AEDefaultsActionExtensionUsed)
 
-        theme?.setupTable(tableView)
-        theme?.setupSwitch(enabledSwitch)
-        theme?.setupNavigationBar(navigationController?.navigationBar)
-        theme?.setupLabels(themableLabels)
-        view.backgroundColor = theme?.backgroundColor
-        
+        updateTheme()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,6 +130,11 @@ class ActionExtensionMainController: UITableViewController {
     
     deinit {
         DDLogDebug("(AEAUIMainController) run deinit.")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        configuration?.systemAppearenceIsDark = systemStyleIsDark
+        updateTheme()
     }
     
     @IBAction func toggleStatus(_ sender: UISwitch) {
@@ -180,8 +214,7 @@ class ActionExtensionMainController: UITableViewController {
             
             let obj: NSItemProvider = NSItemProvider(item:
                  [ NSExtensionJavaScriptFinalizeArgumentKey  : [
-                    "blockElement": NSNumber(value: 1),
-                    "settings": ""
+                    "blockElement": NSNumber(value: 1)
                 ]] as NSSecureCoding, typeIdentifier: String(kUTTypePropertyList))
            
             extensionItem.attachments = [obj]
@@ -226,6 +259,18 @@ class ActionExtensionMainController: UITableViewController {
                 responder?.perform(Selector("openURL:"), with: Url)
             }
             responder = responder?.next
+        }
+    }
+    
+    @objc private func updateTheme() {
+        theme?.setupTable(tableView)
+        theme?.setupSwitch(enabledSwitch)
+        theme?.setupNavigationBar(navigationController?.navigationBar)
+        theme?.setupLabels(themableLabels)
+        view.backgroundColor = theme?.backgroundColor
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
         }
     }
 }

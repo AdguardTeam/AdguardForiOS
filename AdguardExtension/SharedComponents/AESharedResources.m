@@ -37,7 +37,6 @@ NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
 NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
-NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
 NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";

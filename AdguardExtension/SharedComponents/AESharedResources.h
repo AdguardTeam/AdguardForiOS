@@ -128,11 +128,6 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
- User Defaults key, which defines that action extension was used. Used for show Rate me allert.
- */
-extern NSString * _Nonnull AEDefaultsActionExtensionUsed;
-
-/**
  User Defaults key, which defines that pro feature is purchased.
  */
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
