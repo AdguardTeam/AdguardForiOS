@@ -44,7 +44,6 @@ NSString *AEDefaultsHasPremiumLicense = @"AEDefaultsHasPremiumLicense";
 NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableSubscriptionExpirationDate";
 NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
-NSString* AEDefaultsUserThemeMode = @"AEDefaultsUserThemeMode";
 NSString* AEDefaultsSystemAppearenceStyle = @"AEDefaultsSystemAppearenceStyle";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";

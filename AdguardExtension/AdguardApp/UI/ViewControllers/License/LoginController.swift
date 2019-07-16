@@ -51,7 +51,9 @@ class LoginController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                                       object: nil, queue: nil)
@@ -169,7 +171,7 @@ class LoginController: BottomAlertController {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
     }
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         
         contentView.backgroundColor = theme.bottomBarBackgroundColor
         

@@ -40,7 +40,9 @@ class DnsSettingsController : UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         observation = vpnManager.observe(\.tunnelMode) { [weak self] (mode, change) in
             DispatchQueue.main.async {
@@ -115,7 +117,7 @@ class DnsSettingsController : UITableViewController{
         }
     }
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)

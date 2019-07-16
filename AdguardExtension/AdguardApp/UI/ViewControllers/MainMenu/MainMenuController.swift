@@ -78,7 +78,9 @@ class MainMenuController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         let updateFilters: ()->Void = { [weak self] in
             guard let sSelf = self else { return }
@@ -171,7 +173,7 @@ class MainMenuController: UITableViewController {
     
     // MARK: - private methods
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)

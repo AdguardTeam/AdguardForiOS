@@ -38,6 +38,12 @@ class AdvancedSettingsController: UITableViewController {
     
     var proObservation: NSKeyValueObservation?
     
+    // Sections
+    private let themeSection = 0
+    private let otherSection = 1
+    private let advancedSection = 2
+    
+    // Raws
     private let systemDefault = 0
     private let dark = 1
     private let light = 2
@@ -53,7 +59,9 @@ class AdvancedSettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
@@ -83,35 +91,29 @@ class AdvancedSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        switch indexPath.section {
-        case 0:
+        switch (indexPath.section, indexPath.row) {
+        // Theme section
+        case (themeSection, _):
             setTheme(withButtonTag: indexPath.row)
-        case 1:
-            switch indexPath.row {
-            case wifiOnlyRow:
-                wifiUpdateSwitch.setOn(!wifiUpdateSwitch!.isOn, animated: true)
-                toggleWifiOnly(wifiUpdateSwitch)
-            case invertWhitelistRow:
-                invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
-                toggleInverted(invertedSwitch)
-            default:
-                break
-            }
-            
-        case 2:
-            switch indexPath.row {
-            case simplifiedRow:
-                simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
-                toggleSimplified(simplifiedSwitch)
-            case restartRow:
-                restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
-                toggleRestartTunnel(restartTunnelSwitch)
-            default:
-                break
-            }
+        
+        // Other section
+        case (otherSection, wifiOnlyRow):
+            wifiUpdateSwitch.setOn(!wifiUpdateSwitch!.isOn, animated: true)
+            toggleWifiOnly(wifiUpdateSwitch)
+        case (otherSection, invertWhitelistRow):
+            invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
+            toggleInverted(invertedSwitch)
+        
+        // Advanced section
+        case (advancedSection, simplifiedRow):
+            simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
+            toggleSimplified(simplifiedSwitch)
+        case (advancedSection, restartRow):
+            restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
+            toggleRestartTunnel(restartTunnelSwitch)
             
         default:
-            break
+            break;
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -204,7 +206,7 @@ class AdvancedSettingsController: UITableViewController {
         }
     }
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         tableFooterView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
@@ -240,7 +242,7 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     private func calculateHeaderHeight(section: Int) -> CGFloat{
-        return (section == 0) ? 48.0 : 64.0
+        return (section == themeSection) ? 48.0 : 64.0
     }
     
     private func setTheme(withButtonTag tag: Int){

@@ -51,7 +51,9 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         updateProtocol()
         
@@ -208,7 +210,7 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     
     // MARK: - private methods
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in

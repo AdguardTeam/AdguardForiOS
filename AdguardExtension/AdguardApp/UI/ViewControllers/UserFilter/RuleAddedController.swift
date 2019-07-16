@@ -29,7 +29,9 @@ class RuleAddedController: BottomAlertController {
     
     override func viewDidLoad() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         super.viewDidLoad()
         updateTheme()
@@ -39,7 +41,7 @@ class RuleAddedController: BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(themableButtons)

@@ -44,7 +44,9 @@ class DnsProviderContainerController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         if provider == nil { return }
         
@@ -92,7 +94,7 @@ class DnsProviderContainerController : UIViewController {
 
     // MARK: - private methods
 
-    @objc private func updateTheme() {
+    private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         separator.backgroundColor = theme.separatorColor
         topSeparator.backgroundColor = theme.separatorColor

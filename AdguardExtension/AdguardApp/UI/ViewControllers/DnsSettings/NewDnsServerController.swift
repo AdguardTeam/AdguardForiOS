@@ -50,7 +50,9 @@ class NewDnsServerController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         if provider != nil {
             nameField.text = provider?.name
@@ -98,7 +100,7 @@ class NewDnsServerController: BottomAlertController {
     
     // MARK: - private methods
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)

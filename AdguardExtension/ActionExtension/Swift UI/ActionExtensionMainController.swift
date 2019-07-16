@@ -21,7 +21,7 @@ import CoreServices
 
 class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var userThemeMode: AEThemeMode {
-        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsUserThemeMode) as? UInt else {
+        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
             return AELightThemeMode
         }
         return AEThemeMode.init(themeMode)
@@ -262,7 +262,7 @@ class ActionExtensionMainController: UITableViewController {
         }
     }
     
-    @objc private func updateTheme() {
+    private func updateTheme() {
         theme?.setupTable(tableView)
         theme?.setupSwitch(enabledSwitch)
         theme?.setupNavigationBar(navigationController?.navigationBar)

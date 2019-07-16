@@ -23,11 +23,12 @@ import Foundation
  */
 class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     
+    @objc static let themeChangeNotification = "themeChangeNotification"
+    
     // MARK: - private fields
     private var purchaseService : PurchaseServiceProtocol
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
-    @objc static let themeChangeNotification = "themeChangeNotification"
     var notificationObserver: Any?
     
     // MARK: - init
@@ -107,10 +108,10 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
      */
     @objc dynamic var userThemeMode: AEThemeMode {
         set {
-            resources.sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsUserThemeMode)
+            resources.sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsDarkTheme)
         }
         get {
-            guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsUserThemeMode) as? UInt else {
+            guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
                 return AELightThemeMode
             }
             return AEThemeMode.init(themeMode)

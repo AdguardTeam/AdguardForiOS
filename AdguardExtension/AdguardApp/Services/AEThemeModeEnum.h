@@ -20,9 +20,9 @@
 #define AEThemeModeEnum_h
 
 typedef enum : NSUInteger {
-    AESystemDefaultThemeMode,
-    AEDarkThemeMode,
-    AELightThemeMode
+    AELightThemeMode = 0,
+    AEDarkThemeMode = 1,
+    AESystemDefaultThemeMode = 2
 } AEThemeMode;
 
 #endif /* AEThemeModeEnum_h */

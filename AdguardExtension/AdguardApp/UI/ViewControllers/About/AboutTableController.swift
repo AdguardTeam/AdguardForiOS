@@ -34,7 +34,9 @@ class AboutTableController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: Notification.Name(ConfigurationService.themeChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +62,7 @@ class AboutTableController : UITableViewController {
         UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
     }
     
-   @objc private func updateTheme() {
+   private func updateTheme() {
         theme.setupLabels(themableLabels)
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
