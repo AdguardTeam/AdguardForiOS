@@ -65,7 +65,6 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     let configuration: ConfigurationServiceProtocol
     
-    @objc
     init(_ configuration: ConfigurationServiceProtocol) {
         self.configuration = configuration
         super.init()

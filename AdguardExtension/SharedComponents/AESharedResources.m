@@ -37,7 +37,6 @@ NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
 NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
-NSString *AEDefaultsActionExtensionUsed = @"AEDefaultsActionExtensionUsed";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
 NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
@@ -46,6 +45,7 @@ NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableS
 NSString* AEDefaultsNonConsumableItemPurchased = @"AEDefaultsNonConsumableItemPurchased";
 NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
+NSString* AEDefaultsSystemAppearenceStyle = @"AEDefaultsSystemAppearenceStyle";
 NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
@@ -55,6 +55,10 @@ NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContent
 NSString* AEDefaultsSocialContentBlockerRulesCount = @"AEDefaultsSocialContentBlockerRulesCount";
 NSString* AEDefaultsOtherContentBlockerRulesCount = @"AEDefaultsOtherContentBlockerRulesCount";
 NSString* AEDefaultsCustomContentBlockerRulesCount = @"AEDefaultsCustomContentBlockerRulesCount";
+
+NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
+NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
+NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"

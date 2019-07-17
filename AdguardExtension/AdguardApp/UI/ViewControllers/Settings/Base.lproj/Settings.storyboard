@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FYq-iX-rgs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oKf-oS-AAR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -7,305 +7,358 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Advanced Settings-->
-        <scene sceneID="es8-23-EPF">
-            <objects>
-                <tableViewController id="FYq-iX-rgs" customClass="AdvancedSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QTC-vM-yri">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="GZw-Yd-jAP">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="10"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="yxk-NN-DTg">
-                            <rect key="frame" x="0.0" y="816" width="414" height="1"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <sections>
-                            <tableViewSection id="Pwl-BB-Gr9">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BSv-GN-pXf">
-                                        <rect key="frame" x="0.0" y="38" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BSv-GN-pXf" id="qhi-Q0-6WS">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-update over Wi-Fi only" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKW-Q2-yFQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="318" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hao-TQ-VAr">
-                                                    <rect key="frame" x="347" y="8.5" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="4eN-IC-RtG"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleWifiOnly:" destination="FYq-iX-rgs" eventType="valueChanged" id="HtM-rX-9jj"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If this option is enabled, AdGuard will use only Wi-Fi for background filter updates." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oK4-hl-ySQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="318" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="MKW-Q2-yFQ" firstAttribute="top" secondItem="qhi-Q0-6WS" secondAttribute="top" constant="15" id="E8G-6U-bgU"/>
-                                                <constraint firstItem="MKW-Q2-yFQ" firstAttribute="leading" secondItem="qhi-Q0-6WS" secondAttribute="leading" constant="24" id="JEe-HC-cRB"/>
-                                                <constraint firstAttribute="trailing" secondItem="hao-TQ-VAr" secondAttribute="trailing" constant="18" id="Mvv-P3-cd7"/>
-                                                <constraint firstItem="hao-TQ-VAr" firstAttribute="centerY" secondItem="MKW-Q2-yFQ" secondAttribute="centerY" id="WeK-Iz-8Lc"/>
-                                                <constraint firstItem="oK4-hl-ySQ" firstAttribute="leading" secondItem="MKW-Q2-yFQ" secondAttribute="leading" id="hQu-mD-sIy"/>
-                                                <constraint firstItem="oK4-hl-ySQ" firstAttribute="trailing" secondItem="MKW-Q2-yFQ" secondAttribute="trailing" id="l2a-Nf-fLY"/>
-                                                <constraint firstItem="oK4-hl-ySQ" firstAttribute="top" secondItem="MKW-Q2-yFQ" secondAttribute="bottom" constant="5" id="r9k-n8-lpm"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oK4-hl-ySQ" secondAttribute="bottom" constant="20" id="xCD-Up-QRL"/>
-                                                <constraint firstItem="hao-TQ-VAr" firstAttribute="leading" secondItem="MKW-Q2-yFQ" secondAttribute="trailing" constant="5" id="z0b-jd-uC9"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SU4-Xv-rWT">
-                                        <rect key="frame" x="0.0" y="188" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SU4-Xv-rWT" id="fZu-X2-un3">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use simplified filters" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-ja-aYP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="318" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFS-uJ-3No">
-                                                    <rect key="frame" x="347" y="8.5" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="Ho2-FW-QjF"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleSimplified:" destination="FYq-iX-rgs" eventType="valueChanged" id="Dc9-qF-uuv"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPL-ng-gmY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="318" height="43"/>
-                                                    <string key="text">If this option is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages loading in exchange of filtering quality.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="4Tx-ja-aYP" firstAttribute="top" secondItem="fZu-X2-un3" secondAttribute="top" constant="15" id="8mG-It-4n0"/>
-                                                <constraint firstItem="kFS-uJ-3No" firstAttribute="centerY" secondItem="4Tx-ja-aYP" secondAttribute="centerY" id="Hbd-c7-I9S"/>
-                                                <constraint firstItem="4Tx-ja-aYP" firstAttribute="leading" secondItem="fZu-X2-un3" secondAttribute="leading" constant="24" id="Ok9-Je-Hrn"/>
-                                                <constraint firstItem="kFS-uJ-3No" firstAttribute="leading" secondItem="4Tx-ja-aYP" secondAttribute="trailing" constant="5" id="PLp-xl-Cx3"/>
-                                                <constraint firstAttribute="trailing" secondItem="kFS-uJ-3No" secondAttribute="trailing" constant="18" id="PXl-PB-AoZ"/>
-                                                <constraint firstItem="jPL-ng-gmY" firstAttribute="top" secondItem="4Tx-ja-aYP" secondAttribute="bottom" constant="5" id="Pyy-8u-4Ji"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jPL-ng-gmY" secondAttribute="bottom" constant="20" id="WcL-CJ-kjB"/>
-                                                <constraint firstItem="jPL-ng-gmY" firstAttribute="leading" secondItem="4Tx-ja-aYP" secondAttribute="leading" id="mIr-Tc-aw8"/>
-                                                <constraint firstItem="jPL-ng-gmY" firstAttribute="trailing" secondItem="4Tx-ja-aYP" secondAttribute="trailing" id="pOb-o2-eqw"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="og9-E2-1MY">
-                                        <rect key="frame" x="0.0" y="338" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="og9-E2-1MY" id="e0Q-ey-bQ0">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invert whitelist" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvM-Ob-XQB" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="318" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-d3-vDl">
-                                                    <rect key="frame" x="347" y="8.5" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="atc-WI-miG"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleInverted:" destination="FYq-iX-rgs" eventType="valueChanged" id="yqR-zI-aqd"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unblock ads everywhere except for the websites from this list." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppj-g1-ukN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="318" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ppj-g1-ukN" firstAttribute="top" secondItem="cvM-Ob-XQB" secondAttribute="bottom" constant="5" id="IXc-EK-DSG"/>
-                                                <constraint firstItem="pGH-d3-vDl" firstAttribute="leading" secondItem="cvM-Ob-XQB" secondAttribute="trailing" constant="5" id="M3i-RA-hMj"/>
-                                                <constraint firstAttribute="trailing" secondItem="pGH-d3-vDl" secondAttribute="trailing" constant="18" id="PY9-j1-RpA"/>
-                                                <constraint firstItem="cvM-Ob-XQB" firstAttribute="top" secondItem="e0Q-ey-bQ0" secondAttribute="top" constant="15" id="Vl1-jh-BVY"/>
-                                                <constraint firstItem="ppj-g1-ukN" firstAttribute="trailing" secondItem="cvM-Ob-XQB" secondAttribute="trailing" id="X40-5v-83a"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ppj-g1-ukN" secondAttribute="bottom" constant="20" id="d4G-gK-bLj"/>
-                                                <constraint firstItem="pGH-d3-vDl" firstAttribute="centerY" secondItem="cvM-Ob-XQB" secondAttribute="centerY" id="hoH-m6-Z8N"/>
-                                                <constraint firstItem="ppj-g1-ukN" firstAttribute="leading" secondItem="cvM-Ob-XQB" secondAttribute="leading" id="j9D-jP-h8w"/>
-                                                <constraint firstItem="cvM-Ob-XQB" firstAttribute="leading" secondItem="e0Q-ey-bQ0" secondAttribute="leading" constant="24" id="yfm-6m-vKI"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8B5-tj-nea">
-                                        <rect key="frame" x="0.0" y="488" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8B5-tj-nea" id="SqD-sD-9fH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark mode" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NX6-c7-Wn7" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="303" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2Z-6Q-U6M">
-                                                    <rect key="frame" x="347" y="8.5" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="IyA-39-FHf"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleDarkMode:" destination="FYq-iX-rgs" eventType="valueChanged" id="UoC-4R-2uJ"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch to dark theme" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-l3-3Fu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="303" height="14.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="G2Z-6Q-U6M" firstAttribute="centerY" secondItem="NX6-c7-Wn7" secondAttribute="centerY" id="5gr-4C-42C"/>
-                                                <constraint firstItem="NX6-c7-Wn7" firstAttribute="top" secondItem="SqD-sD-9fH" secondAttribute="top" constant="15" id="6sD-PJ-ejr"/>
-                                                <constraint firstAttribute="trailing" secondItem="G2Z-6Q-U6M" secondAttribute="trailing" constant="18" id="C3s-JB-8qt"/>
-                                                <constraint firstItem="aCH-l3-3Fu" firstAttribute="trailing" secondItem="NX6-c7-Wn7" secondAttribute="trailing" id="Mev-UC-jp2"/>
-                                                <constraint firstItem="aCH-l3-3Fu" firstAttribute="leading" secondItem="NX6-c7-Wn7" secondAttribute="leading" id="PbT-CL-riN"/>
-                                                <constraint firstItem="G2Z-6Q-U6M" firstAttribute="leading" secondItem="NX6-c7-Wn7" secondAttribute="trailing" constant="20" id="SyD-nv-gSt"/>
-                                                <constraint firstItem="NX6-c7-Wn7" firstAttribute="leading" secondItem="SqD-sD-9fH" secondAttribute="leading" constant="24" id="h2j-Cb-F8i"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aCH-l3-3Fu" secondAttribute="bottom" constant="20" id="oxX-A7-STM"/>
-                                                <constraint firstItem="aCH-l3-3Fu" firstAttribute="top" secondItem="NX6-c7-Wn7" secondAttribute="bottom" constant="5" id="rOJ-V2-beC"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yWW-SW-LHp">
-                                        <rect key="frame" x="0.0" y="638" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yWW-SW-LHp" id="b2k-m4-IlT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restart when network changes" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNY-Id-vsG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="15" width="303" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="luV-dd-cDv">
-                                                    <rect key="frame" x="347" y="8.5" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="Mrc-Ik-hoS"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleRestartTunnel:" destination="FYq-iX-rgs" eventType="valueChanged" id="RyD-qw-4hg"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable this option if you experience issues with internet connection while AdGuard is working" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bio-g0-63v" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="38" width="303" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="pNY-Id-vsG" firstAttribute="leading" secondItem="b2k-m4-IlT" secondAttribute="leading" constant="24" id="32a-fe-RzW"/>
-                                                <constraint firstItem="bio-g0-63v" firstAttribute="leading" secondItem="pNY-Id-vsG" secondAttribute="leading" id="JZ0-Gv-VS3"/>
-                                                <constraint firstItem="luV-dd-cDv" firstAttribute="leading" secondItem="pNY-Id-vsG" secondAttribute="trailing" constant="20" id="LUs-wT-3Qq"/>
-                                                <constraint firstAttribute="trailing" secondItem="luV-dd-cDv" secondAttribute="trailing" constant="18" id="NfS-JH-IhX"/>
-                                                <constraint firstItem="bio-g0-63v" firstAttribute="trailing" secondItem="pNY-Id-vsG" secondAttribute="trailing" id="Ov3-BW-4iC"/>
-                                                <constraint firstItem="luV-dd-cDv" firstAttribute="centerY" secondItem="pNY-Id-vsG" secondAttribute="centerY" id="X3d-ne-tTI"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bio-g0-63v" secondAttribute="bottom" constant="20" id="oWM-yy-Oy7"/>
-                                                <constraint firstItem="bio-g0-63v" firstAttribute="top" secondItem="pNY-Id-vsG" secondAttribute="bottom" constant="5" id="owC-xR-IRR"/>
-                                                <constraint firstItem="pNY-Id-vsG" firstAttribute="top" secondItem="b2k-m4-IlT" secondAttribute="top" constant="15" id="sf4-WM-nx7"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="FYq-iX-rgs" id="eGF-S9-Ezs"/>
-                            <outlet property="delegate" destination="FYq-iX-rgs" id="h23-TL-tdc"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Advanced Settings" id="79B-on-yfa"/>
-                    <connections>
-                        <outlet property="darkModeSwitch" destination="G2Z-6Q-U6M" id="WKo-uV-Agz"/>
-                        <outlet property="invertedSwitch" destination="pGH-d3-vDl" id="QXy-hZ-Fh1"/>
-                        <outlet property="restartTunnelSwitch" destination="luV-dd-cDv" id="qL8-Q4-enr"/>
-                        <outlet property="simplifiedSwitch" destination="kFS-uJ-3No" id="Dhe-gk-xwG"/>
-                        <outlet property="tableFooterView" destination="yxk-NN-DTg" id="ozw-HC-j6e"/>
-                        <outlet property="wifiUpdateSwitch" destination="hao-TQ-VAr" id="ICB-vf-LMP"/>
-                        <outletCollection property="themableLabels" destination="MKW-Q2-yFQ" collectionClass="NSMutableArray" id="wuX-Un-ZOg"/>
-                        <outletCollection property="themableLabels" destination="oK4-hl-ySQ" collectionClass="NSMutableArray" id="nXm-3D-C2o"/>
-                        <outletCollection property="themableLabels" destination="4Tx-ja-aYP" collectionClass="NSMutableArray" id="C7Y-hm-Xzy"/>
-                        <outletCollection property="themableLabels" destination="jPL-ng-gmY" collectionClass="NSMutableArray" id="GQa-sm-epM"/>
-                        <outletCollection property="themableLabels" destination="cvM-Ob-XQB" collectionClass="NSMutableArray" id="zLZ-X0-d58"/>
-                        <outletCollection property="themableLabels" destination="ppj-g1-ukN" collectionClass="NSMutableArray" id="LP1-Sv-FZ4"/>
-                        <outletCollection property="themableLabels" destination="NX6-c7-Wn7" collectionClass="NSMutableArray" id="ALi-Mw-9PJ"/>
-                        <outletCollection property="themableLabels" destination="aCH-l3-3Fu" collectionClass="NSMutableArray" id="cY9-Gk-GHh"/>
-                        <outletCollection property="themableLabels" destination="pNY-Id-vsG" collectionClass="NSMutableArray" id="pV4-5x-Zcm"/>
-                        <outletCollection property="themableLabels" destination="bio-g0-63v" collectionClass="NSMutableArray" id="29k-c8-a9G"/>
-                        <segue destination="ghI-hG-n5C" kind="show" identifier="getProSegue" id="uhd-MD-ao9"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2fH-xF-C0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-410.39999999999998" y="-325.18740629685158"/>
-        </scene>
         <!--GetPro-->
         <scene sceneID="F5s-54-o9K">
             <objects>
                 <viewControllerPlaceholder storyboardName="GetPro" id="ghI-hG-n5C" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pdr-lH-hoE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236" y="-325"/>
+            <point key="canvasLocation" x="336" y="-333"/>
+        </scene>
+        <!--Advanced Settings Controller-->
+        <scene sceneID="Shu-SB-yFL">
+            <objects>
+                <tableViewController id="oKf-oS-AAR" customClass="AdvancedSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="28" id="pFi-uK-8SF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="tYn-YC-2ub" userLabel="Table Footer View">
+                            <rect key="frame" x="0.0" y="476" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
+                        <sections>
+                            <tableViewSection headerTitle="Theme" id="Vtx-vp-WIV">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="D7C-Gr-mcg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D7C-Gr-mcg" id="KqX-Dw-KGq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rk5-eV-CGX">
+                                                    <rect key="frame" x="26" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="vHb-84-yu9"/>
+                                                        <constraint firstAttribute="height" constant="20" id="wio-Yk-VK4"/>
+                                                    </constraints>
+                                                    <state key="normal" image="bulletnone"/>
+                                                    <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="systemDefaultTheme:" destination="oKf-oS-AAR" eventType="touchUpInside" id="Oqe-P8-WbK"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TX9-Md-Qzr" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="64" y="12.5" width="105.5" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="A2Y-VA-RWS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TX9-Md-Qzr" firstAttribute="leading" secondItem="rk5-eV-CGX" secondAttribute="trailing" constant="18" id="6Ob-ti-gaQ"/>
+                                                <constraint firstItem="TX9-Md-Qzr" firstAttribute="centerY" secondItem="rk5-eV-CGX" secondAttribute="centerY" id="lpR-WW-VLa"/>
+                                                <constraint firstItem="rk5-eV-CGX" firstAttribute="centerY" secondItem="KqX-Dw-KGq" secondAttribute="centerY" id="oK3-TR-M3g"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TX9-Md-Qzr" secondAttribute="trailing" constant="20" id="pmA-mk-lSa"/>
+                                                <constraint firstItem="rk5-eV-CGX" firstAttribute="leading" secondItem="KqX-Dw-KGq" secondAttribute="leading" constant="26" id="xiE-HW-TQR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="26" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3gU-aB-PTN">
+                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3gU-aB-PTN" id="fvI-c8-VQ3">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6R8-B1-Duc">
+                                                    <rect key="frame" x="26" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="5ES-eY-2FP"/>
+                                                        <constraint firstAttribute="width" constant="20" id="gRl-iy-6cO"/>
+                                                    </constraints>
+                                                    <state key="normal" image="bulletnone"/>
+                                                    <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="darkTheme:" destination="oKf-oS-AAR" eventType="touchUpInside" id="Rge-s9-CGs"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzS-e3-CK1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="64" y="12.5" width="33" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="Eqi-ew-lgc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6R8-B1-Duc" firstAttribute="leading" secondItem="fvI-c8-VQ3" secondAttribute="leading" constant="26" id="1A2-hG-aSA"/>
+                                                <constraint firstItem="FzS-e3-CK1" firstAttribute="centerY" secondItem="6R8-B1-Duc" secondAttribute="centerY" id="4zy-Sd-hoP"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FzS-e3-CK1" secondAttribute="trailing" constant="20" id="MMp-2v-AVw"/>
+                                                <constraint firstItem="6R8-B1-Duc" firstAttribute="centerY" secondItem="fvI-c8-VQ3" secondAttribute="centerY" id="dEp-YF-jPW"/>
+                                                <constraint firstItem="FzS-e3-CK1" firstAttribute="leading" secondItem="6R8-B1-Duc" secondAttribute="trailing" constant="18" id="yfa-jC-7qk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="26" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PYV-7W-ht8">
+                                        <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PYV-7W-ht8" id="RMv-Uf-Knc">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEl-dL-mT7">
+                                                    <rect key="frame" x="26" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="XSR-2G-Vvw"/>
+                                                        <constraint firstAttribute="width" constant="20" id="sMI-tK-PQe"/>
+                                                    </constraints>
+                                                    <state key="normal" image="bulletnone"/>
+                                                    <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="lightTheme:" destination="oKf-oS-AAR" eventType="touchUpInside" id="0EZ-lj-SzG"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Light" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocH-QT-NRZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="64" y="12.5" width="36" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="4Ya-Fv-JTi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nEl-dL-mT7" firstAttribute="leading" secondItem="RMv-Uf-Knc" secondAttribute="leading" constant="26" id="31g-Dz-We1"/>
+                                                <constraint firstItem="ocH-QT-NRZ" firstAttribute="centerY" secondItem="nEl-dL-mT7" secondAttribute="centerY" id="Bre-05-zHn"/>
+                                                <constraint firstItem="ocH-QT-NRZ" firstAttribute="leading" secondItem="nEl-dL-mT7" secondAttribute="trailing" constant="18" id="DTO-uB-mJL"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ocH-QT-NRZ" secondAttribute="trailing" constant="20" id="bTJ-I3-8QJ"/>
+                                                <constraint firstItem="nEl-dL-mT7" firstAttribute="centerY" secondItem="RMv-Uf-Knc" secondAttribute="centerY" id="fzh-pd-QQW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Other" id="nL4-Vl-Gcz">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="1cZ-me-IFu">
+                                        <rect key="frame" x="0.0" y="216" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1cZ-me-IFu" id="NjK-Gc-Fjo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Auto-update over Wi-Fi only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0A-gU-hzf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="16" width="312" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EgE-ep-1Y8">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleWifiOnly:" destination="oKf-oS-AAR" eventType="valueChanged" id="yxL-ZG-NYP"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTY-BW-QcN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="37" width="312" height="51"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="X0A-gU-hzf" firstAttribute="top" secondItem="NjK-Gc-Fjo" secondAttribute="top" constant="16" id="AFa-ho-KkA"/>
+                                                <constraint firstItem="EgE-ep-1Y8" firstAttribute="leading" secondItem="X0A-gU-hzf" secondAttribute="trailing" constant="13" id="G9g-rv-Q0O"/>
+                                                <constraint firstItem="tTY-BW-QcN" firstAttribute="trailing" secondItem="X0A-gU-hzf" secondAttribute="trailing" id="NuC-1g-dwa"/>
+                                                <constraint firstItem="X0A-gU-hzf" firstAttribute="leading" secondItem="NjK-Gc-Fjo" secondAttribute="leading" constant="24" id="Opd-xO-yql"/>
+                                                <constraint firstAttribute="bottom" secondItem="tTY-BW-QcN" secondAttribute="bottom" constant="16" id="ci0-Kg-PL4"/>
+                                                <constraint firstItem="tTY-BW-QcN" firstAttribute="leading" secondItem="X0A-gU-hzf" secondAttribute="leading" id="fz4-j0-iKo"/>
+                                                <constraint firstItem="EgE-ep-1Y8" firstAttribute="top" secondItem="NjK-Gc-Fjo" secondAttribute="top" constant="16" id="je4-8q-ptV"/>
+                                                <constraint firstItem="tTY-BW-QcN" firstAttribute="top" secondItem="X0A-gU-hzf" secondAttribute="bottom" constant="3" id="qTa-Nx-37H"/>
+                                                <constraint firstAttribute="trailing" secondItem="EgE-ep-1Y8" secondAttribute="trailing" constant="16" id="uW4-Th-hU6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="C6v-Fd-kqk">
+                                        <rect key="frame" x="0.0" y="260" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C6v-Fd-kqk" id="RfX-U3-arx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Invert whitelist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVh-Of-Oxm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="16" width="312" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zb-UJ-iLt">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleInverted:" destination="oKf-oS-AAR" eventType="valueChanged" id="1lv-qY-KTu"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Unblock ads everywhere exept the websites from this list" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q05-UZ-zAB" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="37" width="312" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6zb-UJ-iLt" firstAttribute="leading" secondItem="bVh-Of-Oxm" secondAttribute="trailing" constant="13" id="0BR-CV-xBP"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="q05-UZ-zAB" secondAttribute="bottom" constant="16" id="Jvq-pF-qSk"/>
+                                                <constraint firstItem="q05-UZ-zAB" firstAttribute="trailing" secondItem="bVh-Of-Oxm" secondAttribute="trailing" id="Qoz-mr-fnx"/>
+                                                <constraint firstAttribute="trailing" secondItem="6zb-UJ-iLt" secondAttribute="trailing" constant="16" id="VnL-RK-Fr1"/>
+                                                <constraint firstItem="q05-UZ-zAB" firstAttribute="top" secondItem="bVh-Of-Oxm" secondAttribute="bottom" constant="3" id="aNm-Nq-sPp"/>
+                                                <constraint firstItem="6zb-UJ-iLt" firstAttribute="top" secondItem="RfX-U3-arx" secondAttribute="top" constant="16" id="fa3-5o-R4w"/>
+                                                <constraint firstItem="bVh-Of-Oxm" firstAttribute="top" secondItem="RfX-U3-arx" secondAttribute="top" constant="16" id="lma-cN-6Dk"/>
+                                                <constraint firstItem="q05-UZ-zAB" firstAttribute="leading" secondItem="bVh-Of-Oxm" secondAttribute="leading" id="pkB-54-bpj"/>
+                                                <constraint firstItem="bVh-Of-Oxm" firstAttribute="leading" secondItem="RfX-U3-arx" secondAttribute="leading" constant="24" id="va2-iu-R4N"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Advanced" id="crJ-Vv-yrm">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rDW-Ku-O04">
+                                        <rect key="frame" x="0.0" y="360" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rDW-Ku-O04" id="u8B-fn-79P">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Use simplified filters" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCQ-IQ-R5g" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="16" width="310" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ztM-u8-OJb">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleSimplified:" destination="oKf-oS-AAR" eventType="valueChanged" id="1ih-yJ-scT"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyT-Id-Sle" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="37" width="310" height="43"/>
+                                                    <string key="text">If this setting is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages rendering in exchange of filtering. quality</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TCQ-IQ-R5g" firstAttribute="leading" secondItem="u8B-fn-79P" secondAttribute="leading" constant="26" id="5wC-P4-pjB"/>
+                                                <constraint firstAttribute="trailing" secondItem="ztM-u8-OJb" secondAttribute="trailing" constant="16" id="Ka9-QI-xce"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PyT-Id-Sle" secondAttribute="bottom" constant="16" id="N1M-re-htz"/>
+                                                <constraint firstItem="PyT-Id-Sle" firstAttribute="top" secondItem="TCQ-IQ-R5g" secondAttribute="bottom" constant="3" id="OgS-Ct-lpS"/>
+                                                <constraint firstItem="ztM-u8-OJb" firstAttribute="leading" secondItem="TCQ-IQ-R5g" secondAttribute="trailing" constant="13" id="R2K-tp-dqG"/>
+                                                <constraint firstItem="TCQ-IQ-R5g" firstAttribute="top" secondItem="u8B-fn-79P" secondAttribute="top" constant="16" id="Tm4-C9-lvD"/>
+                                                <constraint firstItem="PyT-Id-Sle" firstAttribute="leading" secondItem="TCQ-IQ-R5g" secondAttribute="leading" id="nq4-of-6gB"/>
+                                                <constraint firstItem="ztM-u8-OJb" firstAttribute="top" secondItem="u8B-fn-79P" secondAttribute="top" constant="16" id="s5V-9L-MBK"/>
+                                                <constraint firstItem="PyT-Id-Sle" firstAttribute="trailing" secondItem="TCQ-IQ-R5g" secondAttribute="trailing" id="y7I-x1-i32"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="aEc-Wb-W4Z">
+                                        <rect key="frame" x="0.0" y="404" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aEc-Wb-W4Z" id="2CE-Ag-Vcp">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Restart when network changes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-bF-pnp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="16" width="310" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Enable this option if you experience issues with internet connection while AdGuard is working" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mta-fv-reE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="37" width="310" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQX-5H-KQ8">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleRestartTunnel:" destination="oKf-oS-AAR" eventType="valueChanged" id="JWY-fI-GKa"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="IQX-5H-KQ8" secondAttribute="trailing" constant="16" id="5Tu-4C-Roa"/>
+                                                <constraint firstItem="IQX-5H-KQ8" firstAttribute="top" secondItem="2CE-Ag-Vcp" secondAttribute="top" constant="16" id="8Zl-uk-Yly"/>
+                                                <constraint firstItem="mta-fv-reE" firstAttribute="leading" secondItem="nvD-bF-pnp" secondAttribute="leading" id="FIC-WZ-Q8y"/>
+                                                <constraint firstItem="mta-fv-reE" firstAttribute="top" secondItem="nvD-bF-pnp" secondAttribute="bottom" constant="3" id="QEZ-lS-4E2"/>
+                                                <constraint firstItem="nvD-bF-pnp" firstAttribute="leading" secondItem="2CE-Ag-Vcp" secondAttribute="leading" constant="26" id="ST3-pQ-QcH"/>
+                                                <constraint firstItem="mta-fv-reE" firstAttribute="trailing" secondItem="nvD-bF-pnp" secondAttribute="trailing" id="W0k-9H-DmI"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mta-fv-reE" secondAttribute="bottom" constant="16" id="Zz6-j3-n6z"/>
+                                                <constraint firstItem="IQX-5H-KQ8" firstAttribute="leading" secondItem="nvD-bF-pnp" secondAttribute="trailing" constant="13" id="b4Y-gy-S7B"/>
+                                                <constraint firstItem="nvD-bF-pnp" firstAttribute="top" secondItem="2CE-Ag-Vcp" secondAttribute="top" constant="16" id="yXN-Bx-V3j"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="oKf-oS-AAR" id="cab-mr-yAi"/>
+                            <outlet property="delegate" destination="oKf-oS-AAR" id="8pU-qP-5Ve"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="invertedSwitch" destination="6zb-UJ-iLt" id="eWG-a7-6q9"/>
+                        <outlet property="restartTunnelSwitch" destination="IQX-5H-KQ8" id="CM4-Xn-HWQ"/>
+                        <outlet property="simplifiedSwitch" destination="ztM-u8-OJb" id="Bra-1u-yM2"/>
+                        <outlet property="tableFooterView" destination="tYn-YC-2ub" id="R2q-p7-d5m"/>
+                        <outlet property="wifiUpdateSwitch" destination="EgE-ep-1Y8" id="QIp-Vb-EIe"/>
+                        <outletCollection property="themableLabels" destination="X0A-gU-hzf" collectionClass="NSMutableArray" id="jKh-Xh-JxO"/>
+                        <outletCollection property="themableLabels" destination="tTY-BW-QcN" collectionClass="NSMutableArray" id="txX-hR-hkW"/>
+                        <outletCollection property="themableLabels" destination="bVh-Of-Oxm" collectionClass="NSMutableArray" id="p23-g2-5p3"/>
+                        <outletCollection property="themableLabels" destination="q05-UZ-zAB" collectionClass="NSMutableArray" id="7NB-Qd-1pi"/>
+                        <outletCollection property="themableLabels" destination="ocH-QT-NRZ" collectionClass="NSMutableArray" id="nwM-X3-Hea"/>
+                        <outletCollection property="themableLabels" destination="FzS-e3-CK1" collectionClass="NSMutableArray" id="OUU-E4-iTw"/>
+                        <outletCollection property="themableLabels" destination="TX9-Md-Qzr" collectionClass="NSMutableArray" id="te1-jp-klR"/>
+                        <outletCollection property="themableLabels" destination="TCQ-IQ-R5g" collectionClass="NSMutableArray" id="dQ5-34-oyP"/>
+                        <outletCollection property="themableLabels" destination="PyT-Id-Sle" collectionClass="NSMutableArray" id="fZE-Wc-9MX"/>
+                        <outletCollection property="themableLabels" destination="nvD-bF-pnp" collectionClass="NSMutableArray" id="Rju-n1-Bak"/>
+                        <outletCollection property="themableLabels" destination="mta-fv-reE" collectionClass="NSMutableArray" id="Chx-se-eRR"/>
+                        <outletCollection property="themeButtons" destination="rk5-eV-CGX" collectionClass="NSMutableArray" id="9aM-LH-a4u"/>
+                        <outletCollection property="themeButtons" destination="6R8-B1-Duc" collectionClass="NSMutableArray" id="R2p-Da-g7m"/>
+                        <outletCollection property="themeButtons" destination="nEl-dL-mT7" collectionClass="NSMutableArray" id="asx-Sa-v6H"/>
+                        <segue destination="ghI-hG-n5C" kind="show" identifier="getProSegue" id="vDS-G6-Vcq"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rud-IB-zWN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-457" y="-333"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bullet" width="24" height="24"/>
+        <image name="bulletnone" width="24" height="24"/>
+    </resources>
 </document>

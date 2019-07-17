@@ -47,6 +47,11 @@ class DnsRequestDetailsController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         timeLabel.text = logRecord?.time
         elapsedLabel.text = String(format: "%d ms", logRecord!.elapsed)
         typeLabel.text = logRecord?.type
@@ -90,6 +95,10 @@ class DnsRequestDetailsController : UITableViewController {
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
         theme.setupLabels(themableLabels)
     }
 }

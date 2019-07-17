@@ -260,6 +260,9 @@ typedef enum : NSUInteger {
     
     [helper applicationDidBecomeActive: application];
     
+    // If theme mode is System Default gets current style
+    [self setAppInterfaceStyle];
+    
     [_aeService onReady:^{
         
         [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
@@ -797,6 +800,24 @@ typedef enum : NSUInteger {
     }
     
     return nav;
+}
+
+-(void)setAppInterfaceStyle {
+    ConfigurationService *configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
+    if (@available(iOS 13.0, *)) {
+        switch (self.window.traitCollection.userInterfaceStyle) {
+            case UIUserInterfaceStyleDark:
+                configuration.systemAppearenceIsDark = YES;
+                break;
+        
+            default:
+                configuration.systemAppearenceIsDark = NO;
+                break;
+        }
+    } else {
+        configuration.systemAppearenceIsDark = NO;
+    }
+
 }
 
 @end

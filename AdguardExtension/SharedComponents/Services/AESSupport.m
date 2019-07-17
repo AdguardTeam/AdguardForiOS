@@ -28,12 +28,7 @@
 #import "ABECRequest.h"
 #import "AESharedResources.h"
 #import "Adguard-Swift.h"
-#ifdef PRO
-#import "APVPNManager.h"
-#import "APDnsServerObject.h"
-#import "APBlockingSubscriptionsManager.h"
-#endif
-
+#import "vendors/SSZipArchive/SSZipArchive.h"
 
 NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
@@ -66,7 +61,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #define REPORT_DNS_ADGUARD @"Default"
 #define REPORT_DNS_ADGUARD_FAMILY @"Family"
 #define REPORT_DNS_OTHER @"Other"
-
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
@@ -102,6 +96,24 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
+- (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (UIView*)sourceView sourceRect:(CGRect) sourceRect{
+    NSString *stringUrl = [[NSString alloc] initWithString:[self createArchivedLogs]];
+    NSURL *url = [NSURL fileURLWithPath:stringUrl];
+    
+    if (url) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[url] applicationActivities:nil];
+        
+        [parent presentViewController:activityController animated:YES completion:nil];
+        activityController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+            [[NSFileManager defaultManager] removeItemAtPath:stringUrl error:nil];
+        };
+        
+        if (activityController.popoverPresentationController){
+            activityController.popoverPresentationController.sourceView = sourceView;
+            activityController.popoverPresentationController.sourceRect = sourceRect;
+        }
+    }
+}
 
 - (void)sendMailBugReportWithParentController:(UIViewController *)parent{
     
@@ -278,47 +290,48 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
         [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
+    
+        [sb appendFormat:@"\r\n\r\nAEDefaultsGeneralContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsGeneralContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsPrivacyContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsPrivacyContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsSocialContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSocialContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsOtherContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsOtherContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsCustomContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsCustomContentBlockerRulesCount]];
         
-        NSNumber *rulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONConvertedRules];
-        NSNumber *totalRulesCount = [[_sharedResources sharedDefaults] objectForKey:AEDefaultsJSONRulesForConvertion];
-        [sb appendFormat:@"\r\nRules converted: %@ from: %@.", rulesCount, totalRulesCount];
-
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
         NSArray *filters = [[_aeService antibanner] activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
-#ifdef PRO
-        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\nTunnel mode %@\r\nDNS server: %@",
-         (APVPNManager.singleton.enabled ? @"ENABLED" : @"DISABLED"),
-         //(APVPNManager.singleton.localFiltering ? @"ENABLED" : @"DISABLED"),
-         (APVPNManager.singleton.tunnelMode == APVpnManagerTunnelModeFull ? @"FULL" : @"SPLIT"),
-         APVPNManager.singleton.activeRemoteDnsServer.serverName];
+        BOOL proStatus = _configurationService.proStatus;
         
-        [sb appendFormat:@"\r\nRestart when network changes: %@", APVPNManager.singleton.restartByReachability ? @"YES" : @"NO"];
-        
-        if (! [APVPNManager.singleton.activeRemoteDnsServer.tag isEqualToString:APDnsServerTagLocal]) {
-            
-            [sb appendFormat:@"\r\n\%@", APVPNManager.singleton.activeRemoteDnsServer.ipAddressesAsString];
-            
-            [sb appendFormat:@"\r\nDnsCrypt: %@", APVPNManager.singleton.activeRemoteDnsServer.isDnsCrypt];
+        DnsServerInfo *dnsServerInfo = _sharedResources.activeDnsServer;
+        NSString *tunnelMode = [NSString new];
+        NSInteger tunnel = [_sharedResources.sharedDefaults integerForKey:AEDefaultsVPNTunnelMode];
+        switch (tunnel) {
+            case APVpnManagerTunnelModeSplit:
+                tunnelMode = @"SPLIT";
+                break;
+            case APVpnManagerTunnelModeFull:
+                tunnelMode = @"FULL";
+                break;
+            case APVpnManagerTunnelModeFullWithoutVPNIcon:
+                tunnelMode = @"WITHOUT_VPN_ICON";
+                break;
         }
         
-        NSArray<APBlockingSubscription*> *subscriptions = APBlockingSubscriptionsManager.subscriptionsMeta;
+        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\n\r\nVPN is %s\r\nTunnel mode %@\r\nDNS server: %@",
+         (proStatus ? @"ENABLED" : @"DISABLED"), ([_sharedResources.sharedDefaults boolForKey:AEDefaultsVPNEnabled] ? "ENABLED" : "DISABLED"),
+         tunnelMode, dnsServerInfo.name];
         
-        if(subscriptions.count) {
-            [sb appendFormat:@"\r\n\r\nSystem wide blocking subscriptions: "];
-            
-            for(APBlockingSubscription* subscription in subscriptions) {
-                
-                NSString* updateDate = [NSDateFormatter
-                                        localizedStringFromDate: subscription.updateDate
-                                        dateStyle: NSDateFormatterShortStyle
-                                        timeStyle: NSDateFormatterShortStyle];
-                [sb appendFormat:@"\r\nname: %@ url: %@ last update: %@", subscription.name, subscription.url, updateDate];
-            }
+        [sb appendFormat:@"\r\nRestart when network changes: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsRestartByReachability] ? @"YES" : @"NO"];
+        
+        
+        [sb appendFormat:@"\r\nDns server id: %@",dnsServerInfo.serverId];
+        
+        for (NSString *upstream in dnsServerInfo.upstreams){
+            [sb appendFormat:@"\r\nDns upstream: %@",upstream];
         }
-#endif
+
         return sb;
     }
 }
@@ -383,5 +396,63 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     return datas;
 }
 
+-(NSString *)createArchivedLogs{
+    // Create archive name with date stamp
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"DDMMYYYYHHMISS"];
+    NSDate *currentDate = [NSDate date];
+    NSString *dateString = [formatter stringFromDate:currentDate];
+    
+    // Directory path and archive path
+    NSString *baseUrl = [NSTemporaryDirectory() stringByAppendingString:@"logs/"];
+    NSString *archiveName = [@"adguardforios_logs_" stringByAppendingString:dateString];
+    archiveName = [NSTemporaryDirectory() stringByAppendingString:archiveName];
+    archiveName = [archiveName stringByAppendingString:@".zip"];
+    // Create directory with path
+    [[NSFileManager defaultManager] createDirectoryAtPath:baseUrl
+                              withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    __block NSURL *fileUrl = [NSURL new];
+    // Append jsondatas to archive
+    NSDictionary<NSString*, NSData*> *jsonDatas = [self compressedJsons];
+    [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull filename, NSData * _Nonnull data, BOOL * _Nonnull stop) {
+        // Append file to directory
+        fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString:filename]];
+        [data writeToURL:fileUrl atomically:NO];
+    }];
+    // Append application state to archive
+    NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
+    fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString:@"state.txt"]];
+    [stateData writeToURL:fileUrl atomically:NO];
+    
+    // Flush Logs
+    [[ACLLogger singleton] flush];
+    //
+    // Append flush logs
+    for (NSURL *item in [self appLogsUrls]) {
+        NSData *logData = [self applicationLogFromURL:item];
+        if (logData.length) {
+            NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+            fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString: fileName]];
+            [logData writeToURL:fileUrl atomically:NO];
+        }
+        else {
+            NSData* content = [NSData dataWithContentsOfURL:item];
+            if (content) {
+                NSString *fileName = [NSString stringWithFormat:@"%@.gz", [item lastPathComponent]];
+                fileUrl = [NSURL fileURLWithPath: [baseUrl stringByAppendingString: fileName]];
+                [content writeToURL:fileUrl atomically:NO];
+            }
+        }
+    }
+    
+    // Archive directory
+    if ([SSZipArchive createZipFileAtPath:archiveName withContentsOfDirectory: baseUrl]) {
+        [[NSFileManager defaultManager] removeItemAtPath:baseUrl error:nil];
+        return archiveName;
+    }
+    // return archive url
+    return nil;
+}
 
 @end
