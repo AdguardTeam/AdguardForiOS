@@ -24,7 +24,6 @@
 #import "AESharedResources.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
-#import "AEAUIMainController.h"
 #import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 #import "AEInvertedWhitelistDomainsObject.h"
