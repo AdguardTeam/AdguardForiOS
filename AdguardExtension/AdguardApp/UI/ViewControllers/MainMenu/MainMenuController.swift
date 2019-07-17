@@ -78,6 +78,10 @@ class MainMenuController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         let updateFilters: ()->Void = { [weak self] in
             guard let sSelf = self else { return }
             let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), sSelf.filtersService.activeFiltersCount, sSelf.filtersService.filtersCount)
@@ -137,10 +141,16 @@ class MainMenuController: UITableViewController {
             self.support.sendMailBugReport(withParentController: self)
         }
         
+        let exportLogsAction = UIAlertAction(title: ACLocalizedString("action_export_logs", nil), style: .default) { (action) in
+            
+            self.support.exportLogs(withParentController: self, sourceView: self.bugreportCell, sourceRect: self.bugreportCell.bounds);
+        }
+        
         actionSheet.addAction(cancelAction)
         actionSheet.addAction(incorrectAction)
         actionSheet.addAction(bugReportAction)
         actionSheet.addAction(contactSupportAction)
+        actionSheet.addAction(exportLogsAction)
         
         let popController = actionSheet.popoverPresentationController
         popController?.sourceView = self.bugreportCell
@@ -175,7 +185,10 @@ class MainMenuController: UITableViewController {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func setDnsName() {

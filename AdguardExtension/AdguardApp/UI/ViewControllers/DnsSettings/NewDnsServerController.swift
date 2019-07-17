@@ -50,6 +50,10 @@ class NewDnsServerController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         if provider != nil {
             nameField.text = provider?.name
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""

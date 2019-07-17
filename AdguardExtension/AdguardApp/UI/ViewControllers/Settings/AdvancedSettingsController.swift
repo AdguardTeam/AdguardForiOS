@@ -29,26 +29,42 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var simplifiedSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
-    @IBOutlet weak var darkModeSwitch: UISwitch!
     @IBOutlet weak var restartTunnelSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
-    @IBOutlet weak var darkModeTrailingConstraint: NSLayoutConstraint!
-    
+    @IBOutlet var themeButtons: [UIButton]!
     
     var proObservation: NSKeyValueObservation?
     
+    // Sections
+    private let themeSection = 0
+    private let otherSection = 1
+    private let advancedSection = 2
+    
+    // Raws
+    private let systemDefault = 0
+    private let dark = 1
+    private let light = 2
     private let wifiOnlyRow = 0
-    private let simplifiedRow = 1
-    private let invertWhitelistRow = 2
-    private let darkModeRow = 3
+    private let invertWhitelistRow = 1
+    private let simplifiedRow = 0
+    private let restartRow = 1
+    
+    private var headersTitles: [String] = []
     
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
+        fillHeaderTitles()
+        tableView.sectionHeaderHeight = 40
         tableView.rowHeight = UITableView.automaticDimension
         
         invertedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
@@ -74,23 +90,30 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch (indexPath.section, indexPath.row) {
+        // Theme section
+        case (themeSection, _):
+            setTheme(withButtonTag: indexPath.row)
         
-        switch indexPath.row {
-        case wifiOnlyRow:
+        // Other section
+        case (otherSection, wifiOnlyRow):
             wifiUpdateSwitch.setOn(!wifiUpdateSwitch!.isOn, animated: true)
             toggleWifiOnly(wifiUpdateSwitch)
-        case simplifiedRow:
-            simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
-            toggleSimplified(simplifiedSwitch)
-        case invertWhitelistRow:
+        case (otherSection, invertWhitelistRow):
             invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
             toggleInverted(invertedSwitch)
-        case darkModeRow:
-            darkModeSwitch.setOn(!darkModeSwitch!.isOn, animated: true)
-            toggleDarkMode(darkModeSwitch)
+        
+        // Advanced section
+        case (advancedSection, simplifiedRow):
+            simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
+            toggleSimplified(simplifiedSwitch)
+        case (advancedSection, restartRow):
+            restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
+            toggleRestartTunnel(restartTunnelSwitch)
             
         default:
-            break
+            break;
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -111,15 +134,23 @@ class AdvancedSettingsController: UITableViewController {
         change(senderSwitch: sender, forKey: AEDefaultsInvertedWhitelist)
     }
     
-    @IBAction func toggleDarkMode(_ sender: UISwitch) {
-        configuration.darkTheme = sender.isOn
-        updateTheme()
-        tableView.reloadData()
-    }
-    
     @IBAction func toggleRestartTunnel(_ sender: UISwitch) {
         vpnManager.restartByReachability = sender.isOn
     }
+    
+    @IBAction func systemDefaultTheme(_ sender: UIButton) {
+        setTheme(withButtonTag: sender.tag)
+    }
+    
+    @IBAction func darkTheme(_ sender: UIButton) {
+        setTheme(withButtonTag: sender.tag)
+    }
+    
+    @IBAction func lightTheme(_ sender: UIButton) {
+        setTheme(withButtonTag: sender.tag)
+    }
+    
+    
     
     // MARK: - table view cells
     
@@ -129,11 +160,25 @@ class AdvancedSettingsController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = super.tableView(tableView, numberOfRowsInSection: section)
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        // hide last cell("restart when network changes") in free version
-        return configuration.proStatus ? count : (count - 1)
+        let height = calculateHeaderHeight(section: section)
+        
+        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: height))
+        view.backgroundColor = theme.backgroundColor
+        
+        let label = ThemableLabel(frame: CGRect(x: 24.0, y: height - 32, width: self.view.frame.width - 24.0, height: 24.0))
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.text = headersTitles[section]
+        label.textAlignment = .left
+        theme.setupLabel(label)
+        
+        view.addSubview(label)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return calculateHeaderHeight(section: section)
     }
     
     // MARK: - private methods
@@ -169,13 +214,51 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupTable(tableView)
         theme.setupSwitch(invertedSwitch)
         theme.setupSwitch(simplifiedSwitch)
-        theme.setupSwitch(darkModeSwitch)
         theme.setupSwitch(wifiUpdateSwitch)
         theme.setupSwitch(restartTunnelSwitch)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
     
     private func updateUI() {
-        
-       darkModeSwitch.isOn = configuration.darkTheme
+        switch configuration.userThemeMode {
+        case AESystemDefaultThemeMode:
+            themeButtons[systemDefault].isSelected = true
+        case AELightThemeMode:
+            themeButtons[light].isSelected = true
+        case AEDarkThemeMode:
+            themeButtons[dark].isSelected = true
+        default:
+            themeButtons[light].isSelected = true
+        }
+    }
+    
+    private func fillHeaderTitles(){
+        headersTitles.append(ACLocalizedString("theme_header_title", nil))
+        headersTitles.append(ACLocalizedString("other_header_title", nil))
+        headersTitles.append(ACLocalizedString("advanced_header_title", nil))
+    }
+    
+    private func calculateHeaderHeight(section: Int) -> CGFloat{
+        return (section == themeSection) ? 48.0 : 64.0
+    }
+    
+    private func setTheme(withButtonTag tag: Int){
+        guard let button = themeButtons?.first(where: {$0.tag == tag}) else { return }
+        themeButtons.forEach({$0.isSelected = false})
+        button.isSelected = true
+        switch tag {
+        case systemDefault:
+            configuration.userThemeMode = AESystemDefaultThemeMode
+        case dark:
+            configuration.userThemeMode = AEDarkThemeMode
+        case light:
+            configuration.userThemeMode = AELightThemeMode
+        default:
+            configuration.userThemeMode = AELightThemeMode
+        }
+        updateTheme()
     }
 }

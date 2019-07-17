@@ -28,6 +28,11 @@ class RuleAddedController: BottomAlertController {
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         super.viewDidLoad()
         updateTheme()
     }

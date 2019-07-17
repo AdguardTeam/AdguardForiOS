@@ -17,6 +17,13 @@
 */
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    
+    APVpnManagerTunnelModeSplit = 0,
+    APVpnManagerTunnelModeFull = 1,
+    APVpnManagerTunnelModeFullWithoutVPNIcon = 2,
+} APVpnManagerTunnelMode;
+
 @class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
@@ -128,11 +135,6 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
- User Defaults key, which defines that action extension was used. Used for show Rate me allert.
- */
-extern NSString * _Nonnull AEDefaultsActionExtensionUsed;
-
-/**
  User Defaults key, which defines that pro feature is purchased.
  */
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
@@ -168,6 +170,10 @@ extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
 /**
+ User defaults key, which defines system appearence style */
+extern NSString* _Nonnull AEDefaultsSystemAppearenceStyle;
+
+/**
  User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAppRated;
 
@@ -188,6 +194,18 @@ extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
+
+/**
+ User defaults key, wich defines, whether vpn is enabled */
+extern NSString* _Nonnull AEDefaultsVPNEnabled;
+
+/**
+ User defaults key, wich defines, whether restart by reachability is enabled */
+extern NSString* _Nonnull AEDefaultsRestartByReachability;
+
+/**
+ User defaults key, wich defines vpn tunnel mode */
+extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

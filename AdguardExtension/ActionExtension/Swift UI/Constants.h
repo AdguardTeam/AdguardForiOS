@@ -16,26 +16,14 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-#import "AEService.h"
-#import "AESharedResources.h"
-#import "Adguard-Swift.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@class AEAUIDomainCell, AEWhitelistDomainObject;
+@interface Constants : NSObject
 
-@interface AEAUIMainController : UITableViewController <UITableViewDelegate>
-
-@property id<AESharedResourcesProtocol> resources;
-@property id<SafariServiceProtocol> safariService;
-@property ContentBlockerService *contentBlocker;
-@property id<AESSupportProtocol> support;
-
-@property (nonatomic) NSString *domainName;
-@property (nonatomic) NSURL *url;
-@property (nonatomic) NSURL *iconUrl;
-@property BOOL enableChangeDomainFilteringStatus;
-@property BOOL domainEnabled;
-@property BOOL injectScriptSupported;
++(NSString *)AEProductName;
 
 @end
+
+NS_ASSUME_NONNULL_END

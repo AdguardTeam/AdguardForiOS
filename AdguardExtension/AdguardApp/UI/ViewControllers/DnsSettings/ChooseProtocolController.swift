@@ -60,7 +60,11 @@ class ChooseProtocolController: BottomAlertController {
     // MARK: - viewcontroller lifecycle
     
     override func viewDidLoad() {
-         super.viewDidLoad()
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         setupAvailibleProtocols()
         setupChecks()

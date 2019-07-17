@@ -24,7 +24,6 @@
 #import "AESharedResources.h"
 #import "AEService.h"
 #import "AESAntibanner.h"
-#import "AEAUIMainController.h"
 #import "AEWhitelistDomainObject.h"
 #import "ASDFilterObjects.h"
 #import "AEInvertedWhitelistDomainsObject.h"
@@ -51,7 +50,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     NSURL *_iconUrl;
     BOOL _enabled;
     NSMutableArray *_observerObjects;
-    AEAUIMainController __weak *_mainController;
+    ActionExtensionMainController __weak *_mainController;
 }
 
 //@property(strong,nonatomic) IBOutlet UIImageView *imageView;
@@ -316,11 +315,11 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     
     if ([segue.identifier isEqualToString:@"loader"]) {
         
-        _mainController = (AEAUIMainController *)segue.destinationViewController;
+        _mainController = (ActionExtensionMainController *)segue.destinationViewController;
         
         _mainController.resources = _sharedResources;
         _mainController.safariService = _safariService;
-        _mainController.contentBlocker = _contentBlockerService;
+        _mainController.contentBlockerService = _contentBlockerService;
         _mainController.support = _support;
         
         _mainController.domainName = _host;
