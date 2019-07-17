@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RcZ-aB-avh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RcZ-aB-avh">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14790.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Main-->
         <scene sceneID="2kv-8o-U02">
             <objects>
-                <tableViewController id="SAS-BZ-Yxb" userLabel="Main" customClass="AEAUIMainController" sceneMemberID="viewController">
+                <tableViewController id="SAS-BZ-Yxb" userLabel="Main" customClass="ActionExtensionMainController" customModule="ActionExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="5fk-OQ-Taf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,7 +31,7 @@
                             <tableViewSection id="4f1-9c-LL1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hwd-6I-qxa">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hwd-6I-qxa" id="ATd-XG-7T8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -71,7 +73,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dL6-zD-jX0">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dL6-zD-jX0" id="5li-5h-NUq">
                                             <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
@@ -94,7 +96,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Znm-Yl-fWN" customClass="ThemableLabel" customModule="ActionExtension" customModuleProvider="target">
-                                                    <rect key="frame" x="64" y="40" width="478" height="29"/>
+                                                    <rect key="frame" x="64" y="40" width="294.5" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -122,7 +124,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mnh-bJ-cf7">
-                                        <rect key="frame" x="0.0" y="116" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mnh-bJ-cf7" id="tWJ-Dx-nJP">
                                             <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
@@ -145,7 +147,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Contact support" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wrl-xu-3kv" customClass="ThemableLabel" customModule="ActionExtension" customModuleProvider="target">
-                                                    <rect key="frame" x="64" y="40" width="93" height="15"/>
+                                                    <rect key="frame" x="64" y="40" width="93" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -183,38 +185,38 @@
                     <navigationItem key="navigationItem" id="QU1-5t-Sf2">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="g6K-wN-CqM">
                             <connections>
-                                <action selector="done:" destination="SAS-BZ-Yxb" id="BvA-Kf-DZ5"/>
+                                <action selector="done:" destination="SAS-BZ-Yxb" id="obK-zC-mLQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="domainLabel" destination="4wF-ey-uyv" id="1AS-xd-CNC"/>
+                        <outlet property="domainLabel" destination="4wF-ey-uyv" id="lWr-UU-AS1"/>
                         <outlet property="enabledSwitch" destination="DKJ-8O-wiY" id="l9Y-Yh-qMf"/>
-                        <outletCollection property="themableLabels" destination="eVN-fj-ATQ" id="YLI-CA-sCk"/>
-                        <outletCollection property="themableLabels" destination="4wF-ey-uyv" id="Tv6-sk-qnb"/>
-                        <outletCollection property="themableLabels" destination="0yx-Eh-Ah4" id="SrU-JX-xnv"/>
-                        <outletCollection property="themableLabels" destination="Znm-Yl-fWN" id="4Lq-cc-a19"/>
-                        <outletCollection property="themableLabels" destination="kuu-kI-Ott" id="4S1-h1-oaW"/>
-                        <outletCollection property="themableLabels" destination="Wrl-xu-3kv" id="uOo-ag-L4m"/>
+                        <outletCollection property="themableLabels" destination="eVN-fj-ATQ" collectionClass="NSMutableArray" id="YLI-CA-sCk"/>
+                        <outletCollection property="themableLabels" destination="4wF-ey-uyv" collectionClass="NSMutableArray" id="Tv6-sk-qnb"/>
+                        <outletCollection property="themableLabels" destination="0yx-Eh-Ah4" collectionClass="NSMutableArray" id="SrU-JX-xnv"/>
+                        <outletCollection property="themableLabels" destination="Znm-Yl-fWN" collectionClass="NSMutableArray" id="4Lq-cc-a19"/>
+                        <outletCollection property="themableLabels" destination="kuu-kI-Ott" collectionClass="NSMutableArray" id="4S1-h1-oaW"/>
+                        <outletCollection property="themableLabels" destination="Wrl-xu-3kv" collectionClass="NSMutableArray" id="uOo-ag-L4m"/>
                     </connections>
                 </tableViewController>
                 <tapGestureRecognizer id="ZgV-66-sgJ" userLabel="Block Element Tap Gesture Recognizer">
                     <connections>
-                        <action selector="clickBlockElement:" destination="SAS-BZ-Yxb" id="WYD-Fc-GIT"/>
+                        <action selector="clickedBlockElement:" destination="SAS-BZ-Yxb" id="25v-Md-92K"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="Lut-eZ-XLW" userLabel="Missed Ad Tap Gesture Recognizer">
                     <connections>
-                        <action selector="clickMissedAd:" destination="SAS-BZ-Yxb" id="f1f-Fe-nMG"/>
+                        <action selector="clickedMissedAd:" destination="SAS-BZ-Yxb" id="54d-Ty-9ir"/>
                     </connections>
                 </tapGestureRecognizer>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2E-tM-9C8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="DKJ-8O-wiY">
-                    <rect key="frame" x="0.0" y="0.0" width="49" height="31"/>
+                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
-                        <action selector="toggleStatus:" destination="SAS-BZ-Yxb" eventType="valueChanged" id="Gfa-At-nFd"/>
+                        <action selector="toggleStatus:" destination="SAS-BZ-Yxb" eventType="valueChanged" id="qwO-TI-Iin"/>
                     </connections>
                 </switch>
             </objects>
@@ -229,11 +231,11 @@
                         <viewControllerLayoutGuide type="bottom" id="d0T-2N-Ccf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Wqh-ks-max">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vSc-6z-Tyo">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="sU7-Ml-5r9"/>
                                     <constraint firstAttribute="height" constant="20" id="wc7-MJ-oQD"/>
@@ -250,7 +252,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-Bz-7dZ">
-                                <rect key="frame" x="20" y="300" width="560" height="0.0"/>
+                                <rect key="frame" x="20" y="448" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -286,20 +288,20 @@
                         <viewControllerLayoutGuide type="bottom" id="5cE-FB-9KP"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Ucw-Qt-9du">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WZq-0B-Ygj">
-                                <rect key="frame" x="263" y="276" width="75" height="49"/>
+                                <rect key="frame" x="169.5" y="424" width="75" height="48.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-IO-BlQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fvV-Ai-6Wh">
-                                        <rect key="frame" x="27" y="29" width="20" height="20"/>
+                                        <rect key="frame" x="27.5" y="28.5" width="20" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                 </subviews>

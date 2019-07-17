@@ -36,6 +36,11 @@ class AddCustomFilterController: BottomAlertController {
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
         urlTextField.becomeFirstResponder()
         updateTheme()
     }
@@ -98,7 +103,7 @@ class AddCustomFilterController: BottomAlertController {
     
     // MARK: - private method
     
-    func updateTheme() {
+    private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)

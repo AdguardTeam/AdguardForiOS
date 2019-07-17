@@ -32,6 +32,13 @@ class AboutTableController : UITableViewController {
     
     // MARK: - view controller life cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
@@ -55,9 +62,13 @@ class AboutTableController : UITableViewController {
         UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
     }
     
-    private func updateTheme() {
+   private func updateTheme() {
         theme.setupLabels(themableLabels)
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
 }

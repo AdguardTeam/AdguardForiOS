@@ -135,11 +135,6 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
- User Defaults key, which defines that action extension was used. Used for show Rate me allert.
- */
-extern NSString * _Nonnull AEDefaultsActionExtensionUsed;
-
-/**
  User Defaults key, which defines that pro feature is purchased.
  */
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
@@ -169,6 +164,10 @@ extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
 /**
  User defaults key, wich defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
+
+/**
+ User defaults key, wich defines system appearence style */
+extern NSString* _Nonnull AEDefaultsSystemAppearenceStyle;
 
 /**
  User defaults key, wich defines dark theme is on */
