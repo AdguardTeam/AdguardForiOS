@@ -46,25 +46,35 @@ protocol PurchaseServiceProtocol {
     func checkPremiumExpired()
     
     /**
-     retuns true if service ready to request purchases through app store
+     returns true if service ready to request purchases through app store
      */
     var ready: Bool {get}
     
     /**
      renewable subscription price
      */
-    var price: String {get}
+    var subscriptionPrice: String {get}
+    
+    /**
+     non-consumable price
+     */
+    var nonConsumablePrice: String {get}
     
     /**
      renewable subscription period
      */
-    var period: String {get}
+    var subscriptionPeriod: String {get}
+    
+    /**
+     trial subscription period
+     */
+    var trialPeriod: String {get}
     
     /*  login on backend server and check license information
         the results will be posted through notification center
      
         we can use adguard license in two ways
-        1) login throuh oauth in safari and get access_tolken. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
+        1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
         2) login directly with license key. In this case we immediately send status request with this license key
      */
     func login(withAccessToken token: String?, state: String?)
@@ -81,9 +91,14 @@ protocol PurchaseServiceProtocol {
     func logout()->Bool
     
     /**
-     requests an in-app purchase
+     requests an renewable subscription purchase
      */
-    func requestPurchase()
+    func requestSubscriptionPurchase()
+    
+    /**
+     requests an non-consumable purchase
+     */
+    func requestNonConsumablePurchase()
     
     /**
      requests restore in-app purchases
@@ -91,7 +106,7 @@ protocol PurchaseServiceProtocol {
     func requestRestore()
     
     /**
-     returns url for oauth athorisation
+     returns url for oauth authorization
      */
     func authUrlWithName(name: String)->URL?
 }
@@ -136,12 +151,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     // MARK: constants -
     // store kit constants
-    private let kGetProProductID = "com.adguard.AdguardExtension.Premium"
     
+    // product id for renewable subscription
+    private let kRenewableSubscriptionProductID = "com.adguard.AdguardExtension.ProProTrial"
+    
+    // product id for non-consumable in app purchase
+    private let kNonConsumableProductID = "com.adguard.AdguardExtension.GetProFeature5"
     
     // ios_validate_receipt request
     
     private let RECEIPT_DATA_PARAM = "receipt_data"
+    private let APP_ID_PARAM = "app_id"
+    private let APP_VERSION_PARAM = "app_version"
+    private let APP_NAME_PARAM = "app_name"
     private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
     
     // license status
@@ -152,9 +174,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let LICENSE_STATUS_VALID = "VALID"
     
     // subscription status
-    private let SIBSCRIPTION_STATUS_ACTIVE = "ACTIVE"
-    private let SIBSCRIPTION_STATUS_PAST_DUE = "PAST_DUE"
-    private let SIBSCRIPTION_STATUS_DELETED = "DELETED"
+    private let SUBSCRIPTION_STATUS_ACTIVE = "ACTIVE"
+    private let SUBSCRIPTION_STATUS_PAST_DUE = "PAST_DUE"
+    private let SUBSCRIPTION_STATUS_DELETED = "DELETED"
     
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
@@ -172,8 +194,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // MARK: - private properties
     private let network: ACNNetworkingProtocol
     private let resources: AESharedResourcesProtocol
+    private let keychain: KeychainServiceProtocol
     private var productRequest: SKProductsRequest?
-    private var product: SKProduct?
+    private var subscriptionProduct: SKProduct?
+    private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
     private let loginService: LoginService
@@ -206,10 +230,20 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
-    var ready: Bool { return product != nil }
-    var price: String {
-        guard let product = self.product else { return "" }
+    var ready: Bool { return subscriptionProduct != nil && nonConsumableProduct != nil }
+    var subscriptionPrice: String {
+        guard let product = self.subscriptionProduct else { return "" }
         
+        return priceOfProduct(product)
+    }
+    
+    var nonConsumablePrice: String {
+        guard let product = self.nonConsumableProduct else { return "" }
+        
+        return priceOfProduct(product)
+    }
+    
+    private func priceOfProduct(_ product: SKProduct)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = product.priceLocale
@@ -217,39 +251,57 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return formatter.string(from: product.price) ?? ""
     }
     
-    var period: String {
-        guard let product = self.product else { return "" }
+    var subscriptionPeriod: String {
         
+        guard let product = self.subscriptionProduct else { return "" }
         
         if #available(iOS 11.2, *) {
-            guard let periodUnit = product.subscriptionPeriod?.unit,
-                let numberOfUnits = product.subscriptionPeriod?.numberOfUnits else { return "" }
-            
-            var unitString = ""
-            switch periodUnit {
-            case .day:
-                unitString = ACLocalizedString("day_period", nil)
-            case .week:
-                unitString = ACLocalizedString("week_period", nil)
-            case .month:
-                unitString = ACLocalizedString("month_period", nil)
-            case .year:
-                unitString = ACLocalizedString("year_period", nil)
-            }
-            
-            let format = ACLocalizedString("period_format", nil)
-            
-            return String(format: format, numberOfUnits, unitString)
+            return stringForPeriod(product.subscriptionPeriod)
         } else {
             return ""
         }
+    }
+    
+    var trialPeriod: String {
+        
+        guard let product = self.subscriptionProduct else { return "" }
+        
+        if #available(iOS 11.2, *) {
+            return stringForPeriod(product.introductoryPrice?.subscriptionPeriod)
+        } else {
+            return ""
+        }
+    }
+    
+    @available(iOS 11.2, *)
+    private func stringForPeriod(_ period: SKProductSubscriptionPeriod?)->String {
+        
+        guard let periodUnit = period?.unit,
+            let numberOfUnits = period?.numberOfUnits else { return "" }
+        
+        var unitString = ""
+        switch periodUnit {
+        case .day:
+            unitString = ACLocalizedString("day_period", nil)
+        case .week:
+            unitString = ACLocalizedString("week_period", nil)
+        case .month:
+            unitString = ACLocalizedString("month_period", nil)
+        case .year:
+            unitString = ACLocalizedString("year_period", nil)
+        }
+        
+        let format = ACLocalizedString("period_format", nil)
+        
+        return String(format: format, numberOfUnits, unitString)
     }
     
     // MARK: - public methods
     init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
         self.network = network
         self.resources = resources
-        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: KeychainService(resources: resources))
+        self.keychain = KeychainService(resources: resources)
+        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: keychain)
         
         super.init()
         
@@ -262,7 +314,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     func start() {
         setObserver()
-        requestProduct()
+        requestProducts()
     }
     
     func checkLicenseStatus() {
@@ -311,7 +363,20 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         // post receipt to our backend
         
-        let jsonToSend = "{\"\(RECEIPT_DATA_PARAM)\":\"\(base64Str)\"}"
+        guard let appId = keychain.appId else {
+            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: [:]))
+            return
+        }
+        
+        let jsonToSend = """
+        {
+        "\(APP_ID_PARAM)":"\(appId)",
+        "\(APP_VERSION_PARAM)":"\(ADProductInfo.version()!)",
+        "\(APP_NAME_PARAM)":"\(loginService.APP_NAME_VALUE)",
+        "\(RECEIPT_DATA_PARAM)":"\(base64Str)"
+        }
+        """
         
         guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
             
@@ -320,7 +385,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
         
         let request: URLRequest = ABECRequest.post(for: url, json: jsonToSend)
-        
+            
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let strongSelf = self else {
                 return
@@ -346,7 +411,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                     return
                 }
 
-                strongSelf.purchasedThroughInApp = strongSelf.isRenewableSubscriptionActive()
+                strongSelf.purchasedThroughInApp = strongSelf.isInAppPurchaseActive()
 
                 strongSelf.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
                 complete(nil)
@@ -361,7 +426,15 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return loginService.logout()
     }
     
-    func requestPurchase() {
+    func requestSubscriptionPurchase() {
+        requestPurchase(product: subscriptionProduct)
+    }
+    
+    func requestNonConsumablePurchase() {
+        requestPurchase(product: nonConsumableProduct)
+    }
+    
+    private func requestPurchase(product: SKProduct?) {
         if product == nil {
             postNotification(PurchaseService.kPSNotificationPurchaseFailure)
         }
@@ -423,11 +496,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func checkPremiumExpired() {
         
         DDLogInfo("(PurchaseService) checkPremiumExpired")
-        if(purchasedThroughInApp && !isRenewableSubscriptionActive()) {
+        if(purchasedThroughInApp && !isInAppPurchaseActive()) {
             
             DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
             validateReceipt { [weak self] (error) in
-                if self?.isRenewableSubscriptionActive() ?? false {
+                if self?.isInAppPurchaseActive() ?? false {
                     self?.notifyPremiumExpired()
                 }
             }
@@ -450,8 +523,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         SKPaymentQueue.default().add(self)
     }
     
-    private func requestProduct() {
-        productRequest = SKProductsRequest(productIdentifiers: [kGetProProductID])
+    private func requestProducts() {
+        productRequest = SKProductsRequest(productIdentifiers: [kRenewableSubscriptionProductID, kNonConsumableProductID])
         productRequest?.delegate = self
         productRequest?.start()
     }
@@ -462,7 +535,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         var purchased = false
         
         for transaction in transactions {
-            if(transaction.payment.productIdentifier != kGetProProductID) { continue }
+            if(transaction.payment.productIdentifier != kRenewableSubscriptionProductID &&
+                transaction.payment.productIdentifier != kNonConsumableProductID) { continue }
             
             switch transaction.transactionState {
             case .purchasing, .deferred:
@@ -502,8 +576,20 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        product = response.products.first
-        postNotification(PurchaseService.kPSNotificationReadyToPurchase)
+        for product in response.products {
+            switch (product.productIdentifier) {
+            case kRenewableSubscriptionProductID:
+                subscriptionProduct = product
+            case kNonConsumableProductID:
+                nonConsumableProduct = product
+            default:
+                break
+            }
+        }
+        
+        if ready {
+            postNotification(PurchaseService.kPSNotificationReadyToPurchase)
+        }
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
@@ -513,7 +599,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         
         for transaction in queue.transactions {
-            if transaction.payment.productIdentifier == kGetProProductID { return }
+            if  transaction.payment.productIdentifier == kRenewableSubscriptionProductID  ||
+                transaction.payment.productIdentifier == kNonConsumableProductID  {
+                    return
+                }
         }
         
         // nothing to restore
@@ -549,10 +638,18 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
     }
     
-    private func isRenewableSubscriptionActive()->Bool {
+    private func isInAppPurchaseActive()->Bool {
 
+        // check subscription
         if let expirationDate = resources.sharedDefaults().object(forKey: AEDefaultsRenewableSubscriptionExpirationDate) as? Date {
-            return expirationDate > Date()
+            if expirationDate > Date() {
+                return true
+            }
+        }
+        
+        // check non-consumable purchase
+        if let purchased = resources.sharedDefaults().object(forKey: AEDefaultsNonConsumableItemPurchased) as? Bool {
+            return purchased
         }
         
         return false
@@ -564,15 +661,24 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         for product in products {
             let status = product[PREMIUM_STATUS_PARAM] as? String
-            guard let expirationDate = product[EXPIRATION_DATE_PARAM] as? Double else { continue }
+            let expirationDate = product[EXPIRATION_DATE_PARAM] as? Double
+            guard let productId = product[PRODUCT_ID_PARAM] as? String else { continue }
             
             if status == PREMIUM_STATUS_ACTIVE {
-                if (expirationDate / 1000) > Date().timeIntervalSince1970 {
+                
+                if productId == kRenewableSubscriptionProductID {
                     
-                    let date = Date(timeIntervalSince1970: expirationDate / 1000)
-                    resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
+                    if expirationDate == nil { continue }
+                
+                    if (expirationDate! / 1000) > Date().timeIntervalSince1970 {
                     
-                    break
+                        let date = Date(timeIntervalSince1970: expirationDate! / 1000)
+                        resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
+                    }
+                }
+                
+                if productId == kNonConsumableProductID {
+                    resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
                 }
             }
         }

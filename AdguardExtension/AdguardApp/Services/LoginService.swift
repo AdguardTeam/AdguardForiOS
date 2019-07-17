@@ -35,7 +35,7 @@ protocol LoginServiceProtocol {
      the results will be posted through notification center
      
      we can use adguard license in two ways
-     1) login throuh oauth in safari and get access_tolken. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
+     1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
      2) login directly with license key. In this case we immediately send status request with this license key
      */
     func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
@@ -65,7 +65,7 @@ class LoginService: LoginServiceProtocol {
     
     
     // login request
-    // todo: remove auth srequest in future builds
+    // todo: remove auth request in future builds
     private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
     private let STATUS_URL = "https://mobile-api.adguard.com/api/1.0/status.html"
     private let AUTH_TOKEN_URL = "https://mobile-api.adguard.com/api/2.0/auth_token"
@@ -79,7 +79,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_APP_VERSION_PARAM = "app_version"
     private let STATUS_DEVICE_NAME_PARAM = "device_name"
     
-    private let LOGIN_APP_NAME_VALUE = "adguard_ios_pro"
+    let APP_NAME_VALUE = "adguard_ios_pro"
     
     private var defaults: UserDefaults
     private var network: ACNNetworkingProtocol
@@ -174,7 +174,7 @@ class LoginService: LoginServiceProtocol {
         
         DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
         
-        var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+        var params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!]
         
@@ -240,7 +240,7 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        var params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+        var params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
                       STATUS_DEVICE_NAME_PARAM: UIDevice.current.name,
@@ -307,7 +307,7 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        let params = [LOGIN_APP_NAME_PARAM: LOGIN_APP_NAME_VALUE,
+        let params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
@@ -329,7 +329,7 @@ class LoginService: LoginServiceProtocol {
                 return
             }
             
-            DDLogInfo("(LoginService) resetLicense succedded")
+            DDLogInfo("(LoginService) resetLicense succeeded")
             
             callback(nil)
         }

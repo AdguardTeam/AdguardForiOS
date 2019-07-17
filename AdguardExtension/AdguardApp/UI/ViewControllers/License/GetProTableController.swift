@@ -18,25 +18,25 @@
 
 import Foundation
 
-protocol GetProTableControllerDelegate  {
-    
-    func subscribeAction()
-    func restorePurchasesAction()
-}
-
 class GetProTableController: UITableViewController {
     
     // MARK: - IB outlets
     
     @IBOutlet weak var upgradeButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
-    @IBOutlet weak var priceLabel: ThemableLabel!
-    @IBOutlet weak var periodLabel: ThemableLabel!
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
+    @IBOutlet weak var trialLabel: ThemableLabel!
     
+    @IBOutlet weak var subscriptionPeriodLabel: ThemableLabel!
+    @IBOutlet weak var subscriptionPriceLabel: ThemableLabel!
+    @IBOutlet weak var permanentPriceLabel: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
+    @IBOutlet weak var permanentCheck: UIImageView!
+    @IBOutlet weak var subscriptionCheck: UIImageView!
+    
+    @IBOutlet weak var separator: UIView!
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -45,17 +45,26 @@ class GetProTableController: UITableViewController {
     
     // MARK: - private fields
     
-    var delegate: GetProTableControllerDelegate?
-    
     var proObservation: NSKeyValueObservation?
     
     private let securityRow = 0
     private let privacyRow = 1
     private let customRow = 2
     private let subscribedRow = 3
-    private let purchaseRow = 4
+    private let trialRow = 4
+    private let purchaseRow = 5
     
-    // MARK: - View controller livecycle
+    private var subscriptionSelected: Bool {
+        get {
+            return subscriptionCheck.isHighlighted
+        }
+        set {
+            subscriptionCheck.isHighlighted = newValue
+            permanentCheck.isHighlighted = !newValue
+        }
+    }
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +72,8 @@ class GetProTableController: UITableViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        subscriptionSelected = true
         
         updateTheme()
         
@@ -102,11 +113,16 @@ class GetProTableController: UITableViewController {
             return 0
         }
         
+        // hide trial row for premium users
+        if indexPath.row == trialRow && configuration.proStatus {
+            return 0
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - public methods
-    
+
     func enablePurchaseButtons(_ enable: Bool) {
         upgradeButton.isEnabled = enable
         restoreButton.isEnabled = enable
@@ -115,13 +131,17 @@ class GetProTableController: UITableViewController {
     func setPrice() {
         
         if purchaseService.ready {
-            priceLabel.text = purchaseService.price
-            periodLabel.text = purchaseService.period
+            subscriptionPriceLabel.text = purchaseService.subscriptionPrice
+            subscriptionPeriodLabel.text = purchaseService.subscriptionPeriod
+            trialLabel.text = String(format: ACLocalizedString("trial_format", nil), purchaseService.trialPeriod)
+            permanentPriceLabel.text = purchaseService.nonConsumablePrice
             upgradeButton.isEnabled = true
         }
         else {
-            priceLabel.text = ""
-            periodLabel.text = ""
+            subscriptionPriceLabel.text = ""
+            subscriptionPeriodLabel.text = ""
+            trialLabel.text = ""
+            permanentPriceLabel.text = ""
             upgradeButton.isEnabled = false
         }
     }
@@ -130,12 +150,26 @@ class GetProTableController: UITableViewController {
     
     @IBAction func upgradeAction(_ sender: Any) {
         enablePurchaseButtons(false)
-        purchaseService.requestPurchase()
+        
+        if subscriptionSelected {
+            purchaseService.requestSubscriptionPurchase()
+        }
+        else {
+            purchaseService.requestNonConsumablePurchase()
+        }
     }
     
     @IBAction func restoreAction(_ sender: Any) {
         enablePurchaseButtons(false)
         purchaseService.requestRestore()
+    }
+    
+    @IBAction func selectSubscribeAction(_ sender: Any) {
+        subscriptionSelected = true
+    }
+    
+    @IBAction func selectPurchaseAction(_ sender: Any) {
+        subscriptionSelected = false
     }
     
     // MARK: - private methods
@@ -148,6 +182,7 @@ class GetProTableController: UITableViewController {
         }
         theme.setupLabels(themableLabels)
         setPurchaseDescription()
+        theme.setupSeparator(separator)
     }
     
     private func setPurchaseDescription() {
@@ -164,5 +199,6 @@ class GetProTableController: UITableViewController {
         
         purchaseDescriptionTextView.attributedText = attributedString
     }
+    
     
 }
