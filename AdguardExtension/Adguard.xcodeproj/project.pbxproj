@@ -1509,8 +1509,6 @@
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
 		659E59781BC6D86D00FA2384 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		659E59791BC6D87000FA2384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		659FBCED1BDE3229007A87FE /* AEAUIMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AEAUIMainController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AEAUIMainController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		659FBCF01BDE3F03007A87FE /* AEAUIDomainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAUIDomainCell.h; sourceTree = "<group>"; };
 		659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAUIDomainCell.m; sourceTree = "<group>"; };
 		65A6AC9B1BE123C7006A86E5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2573,8 +2571,6 @@
 		659FBCEC1BDE31B4007A87FE /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				659FBCED1BDE3229007A87FE /* AEAUIMainController.h */,
-				659FBCEE1BDE3229007A87FE /* AEAUIMainController.m */,
 				659FBCF01BDE3F03007A87FE /* AEAUIDomainCell.h */,
 				659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */,
 				65B40D361BDE7D1800A9C595 /* AEAUILoaderSegue.h */,
