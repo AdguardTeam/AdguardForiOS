@@ -343,19 +343,69 @@
     [stream open];
     
     NSString *line;
+    NSNumber *affinityMask = NULL;
     while ((line = [ACIOUtils readLine:(id<ACIOUtilReadProtocol>)stream
                               encoding:NSUTF8StringEncoding])) {
         
-        ASDFilterRule *rule = [ASDFilterRule new];
-        rule.filterId = filter.filterId;
-        rule.ruleId = @(++ruleCounter);
-        rule.ruleText = line;
-        rule.isEnabled = @(1);
-        [rules addObject:rule];
+        if ([line hasPrefix:@"!#safari_cb_affinity("]) {
+            affinityMask = [self parseContentBlockerTypes:line];
+        } else if ([line hasPrefix:@"!#safari_cb_affinity"]) {
+            affinityMask = NULL;
+        } else {
+            
+            ASDFilterRule *rule = [ASDFilterRule new];
+            rule.filterId = filter.filterId;
+            rule.ruleId = @(++ruleCounter);
+            rule.ruleText = line;
+            rule.isEnabled = @(1);
+            rule.affinity = affinityMask;
+            
+            [rules addObject:rule];
+        }
+        
     }
     [stream close];
     
     return YES;
+}
+
+- (NSNumber *) parseContentBlockerTypes:(NSString *) ruleText {
+    NSNumber *result = NULL;
+    
+    u_long startIndex = @"!#safari_cb_affinity".length + 1;
+    NSString *stripped = [ruleText substringFromIndex:startIndex];
+    stripped = [stripped substringToIndex:[stripped length] - 1];
+    NSArray *list = [stripped componentsSeparatedByString:@","];
+    
+    for (id item in list) {
+        NSString *trimmed = [item stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSNumber *affinity = [self getAffinityFromString:trimmed];
+        if (affinity != NULL) {
+            result = [NSNumber numberWithInteger: [result intValue] + [affinity intValue]];
+        }
+    }
+    
+    return result;
+}
+
+- (NSNumber *) getAffinityFromString:(NSString *) item {
+    
+    // Should correspond to SafariServices.Affinity
+    NSDictionary *stringToNumber = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"general",1 << 0,
+                                    @"privacy",1 << 1,
+                                    @"social",1 << 2,
+                                    @"other",1 << 3,
+                                    @"custom",1 << 4,
+                                    @"all",0,
+                                    nil];
+    
+    NSNumber *number = [stringToNumber objectForKey:item];
+    if (number != nil) {
+        return number;
+    } else {
+        return NULL;
+    }
 }
 
 - (ASDFilter *)filter{

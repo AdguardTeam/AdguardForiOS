@@ -613,7 +613,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     else
                         ruleId = @(1);
                     
-                    added = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, ruleId, rule.ruleText, rule.isEnabled];
+                    added = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)", rule.filterId, ruleId, rule.ruleText, rule.isEnabled, rule.affinity];
                     
                     if (added)
                         added = [db executeUpdate:@"update filters set last_update_time = datetime(?) where filter_id = ?", [[NSDate date] iso8601String], rule.filterId];
@@ -718,7 +718,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                             continue;
                         }
                         count++;
-                        [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", filterId, @(count), rule.ruleText, rule.isEnabled];
+                        [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)", filterId, @(count), rule.ruleText, rule.isEnabled, rule.affinity];
                     }
                     
                     imported = [db executeUpdate:@"update filters set last_update_time = datetime(?) where filter_id = ?", [[NSDate date] iso8601String], filterId];
@@ -1100,7 +1100,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 rule.filterId = filter.filterId;
                 if ([disabledRuleTexts containsObject:rule.ruleText])
                     rule.isEnabled = @(0);
-                [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+                [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled, rule.affinity];
             }
         
         *rollback = NO;
@@ -1787,7 +1787,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                                 
                                 if ([disabledRuleTexts containsObject:rule.ruleText])
                                     rule.isEnabled = @(0);
-                                [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled];
+                                
+                                [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.isEnabled, rule.affinity];
                             }
                         
                         *rollback = NO;
@@ -2202,8 +2203,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         BOOL result = YES;
         for (ASDFilterRule *item in rules) {
             
-            result = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled) values (?, ?, ?, ?)",
-                      item.filterId, item.ruleId, item.ruleText, item.isEnabled];
+            result = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)",
+                      item.filterId, item.ruleId, item.ruleText, item.isEnabled, item.affinity];
             if (!result)
                 DDLogError(@"Error install filter rules from default DB: %@", [[db lastError] localizedDescription]);
         }

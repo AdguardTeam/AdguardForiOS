@@ -27,7 +27,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func activeRules(forFilter filterId: NSNumber) -> [ASDFilterRule] {
-        return rules[filterId]!
+        return rules[filterId] ?? [ASDFilterRule]()
     }
     
     func groups() -> [ASDFilterGroup] {
@@ -63,11 +63,11 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func activeGroupIDs() -> [NSNumber] {
-        return []
+        return [1 as NSNumber]
     }
     
     func activeFilterIDs(byGroupID groupID: NSNumber) -> [NSNumber] {
-        return []
+        return groupID == 1 ? [ASDF_ENGLISH_FILTER_ID as NSNumber] : []
     }
     
     func filtersI18n() -> ASDFiltersI18n {

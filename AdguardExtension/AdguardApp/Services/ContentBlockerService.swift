@@ -321,7 +321,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // get map of rules by content blocker
         var rulesByContentBlocker = [ContentBlockerType: [ASDFilterRule]]()
-        for (contenBlocker, groups) in groupsByContentBlocker {
+        var rulesByAffinityBlocks = [ContentBlockerType: [ASDFilterRule]]()
+        for (contentBlocker, groups) in groupsByContentBlocker {
             var contentBlockerRules = [ASDFilterRule]()
             for groupID in groups {
                 
@@ -329,11 +330,18 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 for filterID in filters {
                     
                     guard let filterRules = rulesByFilter[filterID] else { continue }
-                    contentBlockerRules.append(contentsOf: filterRules as [ASDFilterRule])
+                    sortWithAffinityBlocks(filterRules: filterRules, contentBlockerRules: &contentBlockerRules, rulesByAffinityBlocks: &rulesByAffinityBlocks)
                 }
             }
             
-            rulesByContentBlocker[contenBlocker] = contentBlockerRules
+            rulesByContentBlocker[contentBlocker] = contentBlockerRules
+        }
+        
+        for type in ContentBlockerType.allCases {
+            if rulesByContentBlocker[type] == nil {
+                rulesByContentBlocker[type] = [ASDFilterRule]()
+            }
+            rulesByContentBlocker[type]?.append(contentsOf: rulesByAffinityBlocks[type] ?? [])
         }
         
         var resultError: Error?
@@ -346,6 +354,36 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         return resultError
     }
+    
+    private func sortWithAffinityBlocks(filterRules: [ASDFilterRule], contentBlockerRules: inout [ASDFilterRule], rulesByAffinityBlocks: inout [ContentBlockerType: [ASDFilterRule]]) {
+        
+        for rule in filterRules {
+            if rule.affinity != nil {
+                
+                for type in ContentBlockerType.allCases {
+                    let affinity = affinityMaskByContentBlockerType[type]
+                    if (affinity != nil) {
+                        if (rule.affinity == 0 || Affinity(rawValue: UInt8(truncating: rule.affinity!)).contains(affinity!)) {
+                            if rulesByAffinityBlocks[type] == nil {
+                                rulesByAffinityBlocks[type] = [ASDFilterRule]()
+                            }
+                            rulesByAffinityBlocks[type]?.append(rule)
+                        }
+                    }
+                }
+                
+            } else {
+                contentBlockerRules.append(rule)
+            }
+        }
+    }
+    
+    private let affinityMaskByContentBlockerType: [ContentBlockerType: Affinity] =
+        [.general: Affinity.general,
+         .privacy: Affinity.privacy,
+         .socialWidgetsAndAnnoyances: Affinity.socialWidgetsAndAnnoyances,
+         .other: Affinity.other,
+         .custom: Affinity.custom]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         
