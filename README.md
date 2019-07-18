@@ -13,9 +13,9 @@
     <a href="https://twitter.com/AdGuard">Twitter</a> |
     <a href="https://t.me/adguard_en">Telegram</a>
     <br/><br/>
-    
-  <a href="https://github.com/AdguardTeam/AdGuardforiOS/releases">
-    <img src="https://img.shields.io/badge/release-v3.0-green.svg" alt="Latest release" />
+
+  <a href="https://github.com/AdguardTeam/AdguardForiOS/releases">
+      <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForiOS/all.svg" alt="Latest release" />
   </a>
   <a href="https://agrd.io/ios">
     <img alt="iTunes App Store" src="https://img.shields.io/itunes/v/1047223162.svg">
