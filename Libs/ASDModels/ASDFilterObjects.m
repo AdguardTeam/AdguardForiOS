@@ -719,7 +719,7 @@
             return nil;
         
         value = result[@"affinity"];
-        if (value)
+        if (value && [value isKindOfClass:NSNumber.class]) // we get [NSNull null] here after app update from 3.0.0-3.0.1
             _affinity = value;
     }
     
