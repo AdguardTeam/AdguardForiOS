@@ -188,7 +188,7 @@ extern NSString*  _Nonnull AEDefaultsAuthStateString;
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
- User defaults keys, wich contains number of rules for each content blocker*/
+ User defaults keys, which contains number of rules for each content blocker*/
 extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
@@ -196,15 +196,15 @@ extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
 
 /**
- User defaults key, wich defines, whether vpn is enabled */
+ User defaults key, which defines, whether vpn is enabled */
 extern NSString* _Nonnull AEDefaultsVPNEnabled;
 
 /**
- User defaults key, wich defines, whether restart by reachability is enabled */
+ User defaults key, which defines, whether restart by reachability is enabled */
 extern NSString* _Nonnull AEDefaultsRestartByReachability;
 
 /**
- User defaults key, wich defines vpn tunnel mode */
+ User defaults key, which defines vpn tunnel mode */
 extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
 
 /////////////////////////////////////////////////////////////////////

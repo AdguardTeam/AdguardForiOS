@@ -74,6 +74,8 @@ typedef enum : NSUInteger {
     PurchaseService* _purchaseService;
     
     BOOL _activateWithOpenUrl;
+    
+    AppDelegateHelper* helper;
 }
 
 @property AEUpdateResult antibanerUpdateResult;
@@ -87,6 +89,13 @@ typedef enum : NSUInteger {
 #pragma mark Application Init
 /////////////////////////////////////////////////////////////////////
 
+- (instancetype)init {
+    self = [super init];
+    helper = [AppDelegateHelper new];
+    
+    return self;
+}
+
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(nullable NSDictionary *)launchOptions{
     
     @autoreleasepool {
@@ -98,6 +107,8 @@ typedef enum : NSUInteger {
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
         _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+        
+        BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
@@ -120,11 +131,6 @@ typedef enum : NSUInteger {
         
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
-        
-        UIPageControl *pageControl = [UIPageControl appearance];
-        pageControl.backgroundColor = [UIColor blackColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:69.0/255.0 green:194.0/255.0 blue:94.0/255.0 alpha:1.0];
-        pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
             [_purchaseService checkPremiumExpired];
@@ -152,11 +158,13 @@ typedef enum : NSUInteger {
             }];
         }
         
-        return YES;
+        return succeeded;
     }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [helper applicationDidFinishLaunching:application];
     
     //------------- Preparing for start application. Stage 2. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 2.");
@@ -249,6 +257,8 @@ typedef enum : NSUInteger {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     DDLogInfo(@"(AppDelegate) applicationDidBecomeActive.");
+    
+    [helper applicationDidBecomeActive: application];
     
     // If theme mode is System Default gets current style
     [self setAppInterfaceStyle];
@@ -759,13 +769,6 @@ typedef enum : NSUInteger {
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helpper Methods (private)
 /////////////////////////////////////////////////////////////////////
-
-- (UIStoryboard *)mainStoryborad{
-    
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *storyboardName = [bundle objectForInfoDictionaryKey:@"UIMainStoryboardFile"];
-    return [UIStoryboard storyboardWithName:storyboardName bundle:bundle];
-}
 
 - (BOOL)checkAutoUpdateConditions {
 
