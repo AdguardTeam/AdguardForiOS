@@ -12,11 +12,15 @@
     <a href="https://reddit.com/r/Adguard">Reddit</a> |
     <a href="https://twitter.com/AdGuard">Twitter</a> |
     <a href="https://t.me/adguard_en">Telegram</a>
-    <br /><br />
+    <br/><br/>
     
-<a href="https://github.com/AdguardTeam/AdGuardforiOS/releases">
-        <img src="https://img.shields.io/badge/release-v3.0-green.svg" alt="Latest release" />
-    </a>
+  <a href="https://github.com/AdguardTeam/AdGuardforiOS/releases">
+    <img src="https://img.shields.io/badge/release-v3.0-green.svg" alt="Latest release" />
+  </a>
+  <a href="https://agrd.io/ios">
+    <img alt="iTunes App Store" src="https://img.shields.io/itunes/v/1047223162.svg">
+  </a>
+  </p>
 
 * [Contribution](#contribution)
   * [How to report an issue](#issue)
