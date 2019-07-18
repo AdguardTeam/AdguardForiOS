@@ -25,11 +25,9 @@
   * [How to become a Beta tester](#beta-tester)
 * [Our plans](#our-plans)
 
-AdGuard for iOS is a free app that blocks ads in Safari browser at exceptional level, but also provides additional Premium features like configurable DNS settings and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
+AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
- <img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS2.png" width="280">
- <img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS3.png" width="280">
- <img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOSD.png" width="280">
+ <img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS2.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS3.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOSD.png" width="280">
 
 <a id="contribution"></a>
 ## Contribution
