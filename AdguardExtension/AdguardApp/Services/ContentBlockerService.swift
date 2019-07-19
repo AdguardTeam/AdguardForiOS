@@ -46,19 +46,27 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
-    let groupsByContentBlocker: [ContentBlockerType: [Int]] =
+    static let groupsByContentBlocker: [ContentBlockerType: [Int]] =
             [.general:                      [FilterGroupId.ads, FilterGroupId.languageSpecific, FilterGroupId.user],
              .privacy:                      [FilterGroupId.privacy, FilterGroupId.user],
              .socialWidgetsAndAnnoyances:   [FilterGroupId.socialWidgets, FilterGroupId.annoyances, FilterGroupId.user],
              .other:                        [FilterGroupId.other, FilterGroupId.security, FilterGroupId.user],
              .custom:                       [FilterGroupId.custom, FilterGroupId.user]]
     
-    let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
+    static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
         .general:                       AEDefaultsGeneralContentBlockerRulesCount,
         .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
         .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
         .other:                         AEDefaultsOtherContentBlockerRulesCount,
         .custom:                        AEDefaultsCustomContentBlockerRulesCount
+    ]
+    
+    static let defaultsOverLimitCountKeyByBlocker: [ContentBlockerType: String] = [
+        .general:                       AEDefaultsGeneralContentBlockerRulesOverLimitCount,
+        .privacy:                       AEDefaultsPrivacyContentBlockerRulesOverLimitCount,
+        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesOverLimitCount,
+        .other:                         AEDefaultsOtherContentBlockerRulesOverLimitCount,
+        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount
     ]
     
     // MARK: - init
@@ -114,7 +122,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             if jsonData.length > 1 {
                 
-                let converted = sSelf.resources.sharedDefaults().integer(forKey: sSelf.defaultsCountKeyByBlocker[contentBlocker]!)
+                let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
                 if converted == limit {
                     // remove last blocking rule from data
@@ -322,7 +330,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         // get map of rules by content blocker
         var rulesByContentBlocker = [ContentBlockerType: [ASDFilterRule]]()
         var rulesByAffinityBlocks = [ContentBlockerType: [ASDFilterRule]]()
-        for (contentBlocker, groups) in groupsByContentBlocker {
+        for (contenBlocker, groups) in ContentBlockerService.groupsByContentBlocker {
             var contentBlockerRules = [ASDFilterRule]()
             for groupID in groups {
                 
@@ -346,11 +354,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         var resultError: Error?
         
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.general]!, forContentBlocker: .general) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.privacy]!, forContentBlocker: .privacy) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
+        resultError = updateJson(contentBlockerType: .general, blockerRules: rulesByContentBlocker[.general]!, forContentBlocker: .general) ?? resultError
+        resultError = updateJson(contentBlockerType: .privacy, blockerRules: rulesByContentBlocker[.privacy]!, forContentBlocker: .privacy) ?? resultError
+        resultError = updateJson(contentBlockerType: .socialWidgetsAndAnnoyances, blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
+        resultError = updateJson(contentBlockerType: .other, blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
+        resultError = updateJson(contentBlockerType: .custom, blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
         
         return resultError
     }
@@ -418,10 +426,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var resultData = Data()
         var resultError: Error?
         if rules.count != 0 {
-            let (jsonData, converted, _, _, error) = convertRulesToJson(rules)
+            let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
+
+            resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlockerType]!)
+
             if jsonData != nil { resultData = jsonData! }
             
-            resources.sharedDefaults().set(converted, forKey: defaultsCountKeyByBlocker[contentBlocker]!)
+            resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
             resultError = error
         }
         
