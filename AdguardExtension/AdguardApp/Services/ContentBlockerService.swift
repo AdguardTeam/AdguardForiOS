@@ -330,7 +330,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         // get map of rules by content blocker
         var rulesByContentBlocker = [ContentBlockerType: [ASDFilterRule]]()
         var rulesByAffinityBlocks = [ContentBlockerType: [ASDFilterRule]]()
-        for (contenBlocker, groups) in ContentBlockerService.groupsByContentBlocker {
+        
+        for (contentBlocker, groups) in ContentBlockerService.groupsByContentBlocker {
             var contentBlockerRules = [ASDFilterRule]()
             for groupID in groups {
                 
@@ -354,11 +355,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         var resultError: Error?
         
-        resultError = updateJson(contentBlockerType: .general, blockerRules: rulesByContentBlocker[.general]!, forContentBlocker: .general) ?? resultError
-        resultError = updateJson(contentBlockerType: .privacy, blockerRules: rulesByContentBlocker[.privacy]!, forContentBlocker: .privacy) ?? resultError
-        resultError = updateJson(contentBlockerType: .socialWidgetsAndAnnoyances, blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
-        resultError = updateJson(contentBlockerType: .other, blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
-        resultError = updateJson(contentBlockerType: .custom, blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.general]!, forContentBlocker: .general) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.privacy]!, forContentBlocker: .privacy) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
         
         return resultError
     }
@@ -428,7 +429,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         if rules.count != 0 {
             let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
 
-            resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlockerType]!)
+            resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
 
             if jsonData != nil { resultData = jsonData! }
             
