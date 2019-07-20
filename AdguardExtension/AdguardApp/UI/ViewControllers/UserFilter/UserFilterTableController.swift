@@ -28,6 +28,15 @@ class RuleCell: UITableViewCell {
     @IBOutlet var themableLabels: [ThemableLabel]!
 }
 
+class HelpCell : UITableViewCell {
+    
+    @IBOutlet weak var helpLabel: ThemableLabel!
+}
+
+class FilterEnabledCell: UITableViewCell {
+    @IBOutlet weak var enabledSwitch: UISwitch!
+}
+
 // MARK: - UserFilterTableController
 class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
     
@@ -51,11 +60,19 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     @IBOutlet var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var searchButtonView: UIView!
+    @IBOutlet var plusButtonView: UIView!
     @IBOutlet weak var headerTextView: UITextView!
     
+    @IBOutlet weak var enabledSwitch: UISwitch!
     var observation: NSKeyValueObservation?
     
     private var isCustomEditing = false
+    
+    private let enabledSection = 0
+    private let helpSection = 1
+    private let rulesSection = 2
+    
+    private var enableSwitch: UISwitch?
     
     // MARK: - View controller lifecycle
     
@@ -66,6 +83,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             self?.updateTheme()
         }
         
+        searchButton.customView = searchButtonView
+        addButton.customView = plusButtonView
+            
         updateUI()
         
         observation = model?.observe(\.rules) {[weak self](_, _) in
@@ -73,35 +93,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                 self?.tableView.reloadData()
             }
         }
-        
-        var title: String?
-        switch (model!.type) {
-        case (.blacklist):
-            title = ACLocalizedString("blacklist_title", nil)
-            let htmlStringFormat = ACLocalizedString("blacklist_text_format", nil)
-            let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
-            let htmlString = String(format: htmlStringFormat, urlString)
-            if let headerText = htmlString.attributedStringFromHtml() {
-                headerText.alignCenter()
-                headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor, range: NSRange(location: 0, length: headerText.length))
-                headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 0, length: headerText.length))
-                headerTextView.attributedText = headerText
-            }
-        case(.whitelist):
-            title = ACLocalizedString("whitelist_title", nil)
-            headerTextView.text = ACLocalizedString("whitelist_text", nil)
-            headerTextView.textColor = theme.lightGrayTextColor
-            headerTextView.textAlignment = .center
-        case (.invertedWhitelist):
-            title = ACLocalizedString("inverted_whitelist_title", nil)
-            headerTextView.text = ACLocalizedString("inverted_whitelist_text", nil)
-            headerTextView.textColor = theme.lightGrayTextColor
-            headerTextView.textAlignment = .center
-        }
-        
-        self.navigationItem.title = title
-        
-        searchButton.customView = searchButtonView
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,37 +121,60 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     // MARK: - UITableView
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
+        if section == rulesSection {
+            return model?.rules.count ?? 0
         }
         else {
-            return model?.rules.count ?? 0
+            return 1
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NewRuleCellID") as! NewRuleCell
-            updateUI()
-            cell.addLabel.text = model?.addRuleTitle()
-            theme.setupTableCell(cell)
+        switch indexPath.section {
+        case enabledSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EnabledCellID") as! FilterEnabledCell
+            self.enabledSwitch = cell.enabledSwitch
+            self.enabledSwitch.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
-        }
-        else {
+        case helpSection:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
+            
+            switch (model!.type) {
+            case (.blacklist):
+                title = ACLocalizedString("blacklist_title", nil)
+                let htmlStringFormat = ACLocalizedString("blacklist_text_format", nil)
+                let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+                let htmlString = String(format: htmlStringFormat, urlString)
+                if let headerText = htmlString.attributedStringFromHtml() {
+                    headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor, range: NSRange(location: 0, length: headerText.length))
+                    headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 0, length: headerText.length))
+                    cell.helpLabel.attributedText = headerText
+                }
+            case(.whitelist):
+                cell.helpLabel.text = ACLocalizedString("whitelist_title", nil)
+                
+            case (.invertedWhitelist):
+                cell.helpLabel.text = ACLocalizedString("inverted_whitelist_title", nil)
+            }
+            
+            return cell
+            
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RuleCellID") as! RuleCell
             let rule = model!.rules[indexPath.row]
             cell.ruleLabel.text = rule.rule
-            theme.setupLabels(cell.themableLabels)
+            cell.ruleLabel.textColor = rule.textColor
+            cell.ruleLabel.font = rule.font
             
             let selected = rule.selected
             configureCell(cell, selected: selected)
             
-            theme.setupLabel(cell.ruleLabel)
             theme.setupTableCell(cell)
             
             return cell
@@ -165,10 +183,15 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
-            addRuleButtonAction(self)
-        }
-        else {
+        switch (indexPath.section) {
+        
+        case enabledSection:
+            enabledSwitch.setOn(!enabledSwitch.isOn, animated: true)
+            
+        case helpSection:
+            UIApplication.shared.openAdguardUrl(action: filterRulesAction, from: openUrlFrom)
+            
+        case rulesSection:
             guard let rule = model?.rules[indexPath.row] else { return }
             if isCustomEditing {
                 if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
@@ -179,6 +202,8 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             else {
                 showRuleDetails(rule)
             }
+        default:
+            break
         }
     }
     
@@ -215,7 +240,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         updateUI()
     }
     
-    @IBAction func addRuleButtonAction(_ sender: Any) {
+    @IBAction func c(_ sender: Any) {
         searchBar.text = ""
         model?.searchString = nil
         
@@ -228,6 +253,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         controller.blacklist = model!.type == .blacklist
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func toggleEnabled(_ sender: Any) {
+        
     }
     
     // MARK: - Presentation delegate methods
@@ -309,6 +338,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         })
     }
     
+    public func updateNavBarButtons() {
+        updateUI()
+    }
+    
     // MARK: - private methods
     private func updateUI() {
         
@@ -327,7 +360,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                 tableView.tableHeaderView = headerView
             }
             
-            parent?.navigationItem.rightBarButtonItems = [searchButton]
+            parent?.navigationItem.rightBarButtonItems = [addButton, searchButton]
         }
     }
     
