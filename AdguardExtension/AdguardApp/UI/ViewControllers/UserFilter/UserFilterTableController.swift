@@ -147,7 +147,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             
             switch (model!.type) {
             case (.blacklist):
-                title = ACLocalizedString("blacklist_title", nil)
                 let htmlStringFormat = ACLocalizedString("blacklist_text_format", nil)
                 let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
                 let htmlString = String(format: htmlStringFormat, urlString)
@@ -157,10 +156,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                     cell.helpLabel.attributedText = headerText
                 }
             case(.whitelist):
-                cell.helpLabel.text = ACLocalizedString("whitelist_title", nil)
+                cell.helpLabel.text = ACLocalizedString("whitelist_text", nil)
+                theme.setupLabel(cell.helpLabel)
                 
             case (.invertedWhitelist):
-                cell.helpLabel.text = ACLocalizedString("inverted_whitelist_title", nil)
+                cell.helpLabel.text = ACLocalizedString("inverted_whitelist_text", nil)
+                theme.setupLabel(cell.helpLabel)
             }
             
             return cell
@@ -189,7 +190,10 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             enabledSwitch.setOn(!enabledSwitch.isOn, animated: true)
             
         case helpSection:
-            UIApplication.shared.openAdguardUrl(action: filterRulesAction, from: openUrlFrom)
+            if model!.type == .blacklist
+            {
+                UIApplication.shared.openAdguardUrl(action: filterRulesAction, from: openUrlFrom)
+            }
             
         case rulesSection:
             guard let rule = model?.rules[indexPath.row] else { return }
