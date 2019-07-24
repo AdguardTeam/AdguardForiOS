@@ -287,15 +287,7 @@ class MainController: UIViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let filtersDate = self?.aeService.antibanner().filtersLastUpdateTime() else { return }
             DispatchQueue.main.async {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                dateFormatter.timeStyle = .none
-                let id = Locale.current.identifier
-                dateFormatter.locale = Locale(identifier: id)
-                let dateString = dateFormatter.string(from: filtersDate)
-                
-                let filterDateString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
-                self?.filtersVersionLabel.text = filterDateString
+                self?.filtersVersionLabel.text = filtersDate.formatedString()
             }
         }
     }
