@@ -1825,6 +1825,7 @@
 		D08187C92264C89400E961B5 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		D08C96CD1FE3C459002456B3 /* ABECSubscription.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECSubscription.h; sourceTree = "<group>"; };
 		D08C96CE1FE3C459002456B3 /* ABECSubscription.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECSubscription.m; sourceTree = "<group>"; };
+		D09137D922E8559500A8F541 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/GetPro.strings"; sourceTree = "<group>"; };
 		D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dns64Utils.swift; sourceTree = "<group>"; };
 		D093718721AEA770004A24F1 /* ContentBlockerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerTest.swift; sourceTree = "<group>"; };
 		D093718A21B0414A004A24F1 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
@@ -1958,7 +1959,6 @@
 		D0D6BA7B21A6B047007360BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GetPro.strings"; sourceTree = "<group>"; };
 		D0D6BA7D21A6B048007360BC /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/GetPro.strings; sourceTree = "<group>"; };
 		D0D6BA7F21A6B049007360BC /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/GetPro.strings; sourceTree = "<group>"; };
-		D0D6BA8121A6B04B007360BC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Fix.strings"; sourceTree = "<group>"; };
 		D0D6BA8321A6B04C007360BC /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/GetPro.strings"; sourceTree = "<group>"; };
 		D0D6BA8521A6B04E007360BC /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/GetPro.strings; sourceTree = "<group>"; };
 		D0D6BA8721A6B04F007360BC /* et-EE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "et-EE"; path = "et-EE.lproj/GetPro.strings"; sourceTree = "<group>"; };
@@ -5798,7 +5798,6 @@
 				D0D6BA7B21A6B047007360BC /* zh-Hans */,
 				D0D6BA7D21A6B048007360BC /* uk */,
 				D0D6BA7F21A6B049007360BC /* fi */,
-				D0D6BA8121A6B04B007360BC /* zh-Hant */,
 				D0D6BA8321A6B04C007360BC /* pt-BR */,
 				D0D6BA8521A6B04E007360BC /* bg */,
 				D0D6BA8721A6B04F007360BC /* et-EE */,
@@ -5810,6 +5809,7 @@
 				D0D6BA9321A6B055007360BC /* fr */,
 				D0D6BA9521A6B056007360BC /* ja */,
 				D0D6BA9721A6B057007360BC /* es */,
+				D09137D922E8559500A8F541 /* zh-Hant */,
 			);
 			name = GetPro.storyboard;
 			sourceTree = "<group>";
