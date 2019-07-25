@@ -28,8 +28,7 @@ extension Date{
         dateFormatter.locale = Locale(identifier: id)
         let dateString = dateFormatter.string(from: self)
         
-        let filterDateString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
-        return filterDateString
+        return dateString
     }
     
     // return formated and localized string from date
@@ -41,7 +40,6 @@ extension Date{
             dateFormatter.locale = Locale(identifier: id)
             let dateString = dateFormatter.string(from: self)
             
-            let filterDateString = String(format: ACLocalizedString("filters_date_format", nil), dateString)
-            return filterDateString
+            return dateString
         }
 }

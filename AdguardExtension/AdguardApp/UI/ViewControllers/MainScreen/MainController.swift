@@ -287,7 +287,8 @@ class MainController: UIViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let filtersDate = self?.aeService.antibanner().filtersLastUpdateTime() else { return }
             DispatchQueue.main.async {
-                self?.filtersVersionLabel.text = filtersDate.formatedString()
+                let dateString = filtersDate.formatedString() ?? ""
+                self?.filtersVersionLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             }
         }
     }

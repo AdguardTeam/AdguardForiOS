@@ -557,8 +557,8 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
-		7E5121AF22E750BF005EC6F6 /* FilterTagsViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsViewProtocols.swift */; };
-		7E7222F322E6FA66009F2B0E /* FilterTagsViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsViewProtocols.swift */; };
+		7E5121AF22E750BF005EC6F6 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
+		7E7222F322E6FA66009F2B0E /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -1675,7 +1675,7 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		7E7222F222E6FA66009F2B0E /* FilterTagsViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTagsViewProtocols.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardApp/UI/ViewControllers/Filters/FilterTagsViewProtocols.swift"; sourceTree = "<group>"; };
+		7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTagsButtons.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardApp/UI/ViewControllers/Filters/FilterTagsButtons.swift"; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -3160,7 +3160,7 @@
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
 				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
-				7E7222F222E6FA66009F2B0E /* FilterTagsViewProtocols.swift */,
+				7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */,
 				7E385CD922E7876B00AC0605 /* FilterTagsView.swift */,
 			);
 			path = Filters;
@@ -4963,7 +4963,7 @@
 				7E4D203C22D71A5B003B0E75 /* mz_zip.c in Sources */,
 				D09C9D8B21F5FFD400F3D988 /* DnsLogController.swift in Sources */,
 				65C12EF01BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
-				7E7222F322E6FA66009F2B0E /* FilterTagsViewProtocols.swift in Sources */,
+				7E7222F322E6FA66009F2B0E /* FilterTagsButtons.swift in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7E4D204822D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */,
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
@@ -5058,7 +5058,7 @@
 				D0C37ECD22A687980004337D /* DnsLogRecordsWriterProtocol.swift in Sources */,
 				65F3982F1B7B684700ABCD39 /* AdguardExtensionTests.m in Sources */,
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
-				7E5121AF22E750BF005EC6F6 /* FilterTagsViewProtocols.swift in Sources */,
+				7E5121AF22E750BF005EC6F6 /* FilterTagsButtons.swift in Sources */,
 				D093718821AEA770004A24F1 /* ContentBlockerTest.swift in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				D02C080621BEAB2900796714 /* SafariServiceMock.swift in Sources */,

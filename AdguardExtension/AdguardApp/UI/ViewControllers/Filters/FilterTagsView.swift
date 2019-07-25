@@ -24,17 +24,14 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private var viewHeight: NSLayoutConstraint?
-    weak var cell: FilterCell?
     
     var filter: Filter?{
         didSet{
-            subviews.forEach({$0.removeFromSuperview()})
-            leftInset = 0.0
-            currentYposition = 0.0
-            height = 0.0
             setupUI()
+            layoutIfNeeded()
         }
     }
+    
     
     private var leftInset: CGFloat = 0.0
     private var currentYposition: CGFloat = 0.0
@@ -42,22 +39,53 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
     
-    override func awakeFromNib() {
-        translatesAutoresizingMaskIntoConstraints = false
-        viewHeight = heightAnchor.constraint(equalToConstant: height)
-        viewHeight?.isActive = true
-        cell?.topSpaceToDate.constant = 0.0
+    init() {
+        super.init(frame: .zero)
+        customInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        customInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        customInit()
     }
     
     override func layoutSubviews() {
+        
+        leftInset = 0.0
+        currentYposition = 0.0
+        height = 0.0
+        
+        guard let filter = self.filter else { return }
+        
+        guard let langs = filter.langs else { return }
+        guard let tags = filter.tags else { return }
+        
+        if (langs.count > 0 || tags.count > 0) {
+            height += 32.0
+            currentYposition += 10.0
+        }
+        
+        for view in subviews{
+            if let button = view as? UIButton {
+                replaceButton(button)
+            }
+        }
         viewHeight?.constant = height
     }
     
-    func setupUI(){
+    private func customInit(){
+        translatesAutoresizingMaskIntoConstraints = false
+        viewHeight = heightAnchor.constraint(equalToConstant: height)
+        viewHeight?.isActive = true
+    }
+    
+    private func setupUI(){
+        subviews.forEach({ $0.removeFromSuperview() })
         
         width = frame.width
         
@@ -68,10 +96,6 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         guard let langs = filter.langs else { return }
         guard let tags = filter.tags else { return }
         
-        if (langs.count > 0 || tags.count > 0) {
-            height += 32.0
-            cell?.topSpaceToDate.constant = 10.0
-        }
         
         for lang in langs {
             setupLangButton(lang: lang)
@@ -80,7 +104,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
             setupTagButton(tag: tag)
         }
         
-        layoutIfNeeded()
+        setNeedsLayout()
     }
     
     private func setupLangButton(lang: (name: String, heighlighted: Bool)){
@@ -96,16 +120,6 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         
         langButton.frame.size.height = 22.0
         langButton.frame.size.width = 30.0
-        
-        if (leftInset + langButton.frame.size.width) > width {
-            height += langButton.frame.size.height + inset
-            currentYposition += langButton.frame.size.height + inset
-            leftInset = 0.0
-        }
-        
-        langButton.frame.origin = CGPoint(x: leftInset, y: currentYposition)
-        
-        leftInset += langButton.frame.size.width + inset
         
         addSubview(langButton)
     }
@@ -131,18 +145,19 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         size.height = tagButton.frame.size.height
         tagButton.frame.size = size
         
-        if (leftInset + tagButton.frame.size.width) > width {
-            height += tagButton.frame.size.height + inset
-            currentYposition += tagButton.frame.size.height + inset
+        addSubview(tagButton)
+    }
+    
+    private func replaceButton(_ sender: UIButton) {
+        if (leftInset + sender.frame.size.width) > width {
+            height += sender.frame.size.height + inset
+            currentYposition += sender.frame.size.height + inset
             leftInset = 0.0
         }
         
-        tagButton.frame.origin = CGPoint(x: leftInset, y: currentYposition)
-        
-        leftInset += tagButton.frame.size.width + inset
-
-        
-        addSubview(tagButton)
+        sender.frame.origin = CGPoint(x: leftInset, y: currentYposition)
+                
+        leftInset += sender.frame.size.width + inset
     }
 }
 

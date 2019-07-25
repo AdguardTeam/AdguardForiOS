@@ -153,16 +153,16 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="y72-YS-n7u" customClass="FilterCell">
-                            <rect key="frame" x="0.0" y="187.5" width="414" height="1"/>
+                            <rect key="frame" x="0.0" y="182.5" width="414" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCellID" id="6UD-Ve-Yap" customClass="FilterCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="38.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6UD-Ve-Yap" id="zu1-Zn-lNt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTL-ax-aZV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -208,7 +208,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXN-1M-Lry" customClass="FilterTagsView" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="33" width="312" height="0.5"/>
+                                            <rect key="frame" x="25" y="23" width="312" height="0.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
@@ -218,14 +218,14 @@
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="top" secondItem="MxA-VX-Amb" secondAttribute="bottom" id="F7w-Tw-gkF"/>
                                         <constraint firstItem="cTL-ax-aZV" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="15" id="HxN-vb-Wro"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="5N0-s5-SVS" secondAttribute="trailing" constant="15" id="Pfx-nx-ZB2"/>
-                                        <constraint firstAttribute="bottom" secondItem="VXN-1M-Lry" secondAttribute="bottom" constant="10" id="Szg-8L-V0p"/>
+                                        <constraint firstAttribute="bottom" secondItem="VXN-1M-Lry" secondAttribute="bottom" constant="15" id="Szg-8L-V0p"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="12" id="UAU-qQ-dXV"/>
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="am7-aW-gBz"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="MxA-VX-Amb" secondAttribute="trailing" constant="10" id="bMT-Xd-6qz"/>
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="cr8-IR-pLt"/>
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="top" secondItem="cTL-ax-aZV" secondAttribute="bottom" constant="8" id="kPe-qj-mkN"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="Vp3-Lp-AiW" secondAttribute="trailing" constant="10" id="nNR-Lp-9Ts"/>
-                                        <constraint firstItem="VXN-1M-Lry" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" constant="10" id="oPX-FE-FNk"/>
+                                        <constraint firstItem="VXN-1M-Lry" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" id="oPX-FE-FNk"/>
                                         <constraint firstAttribute="trailing" secondItem="eni-il-6g8" secondAttribute="trailing" constant="20" id="vyP-Wt-DqK"/>
                                         <constraint firstItem="5N0-s5-SVS" firstAttribute="leading" secondItem="cTL-ax-aZV" secondAttribute="trailing" constant="15" id="w6T-iD-jTx"/>
                                         <constraint firstItem="5N0-s5-SVS" firstAttribute="centerY" secondItem="cTL-ax-aZV" secondAttribute="centerY" id="wpm-hy-KqW"/>
@@ -238,7 +238,6 @@
                                     <outlet property="filterTagsView" destination="VXN-1M-Lry" id="w9B-Ze-YxB"/>
                                     <outlet property="homepageButton" destination="5N0-s5-SVS" id="nQS-Xe-7sN"/>
                                     <outlet property="name" destination="cTL-ax-aZV" id="oqy-8u-SIH"/>
-                                    <outlet property="topSpaceToDate" destination="oPX-FE-FNk" id="btj-Tt-ugt"/>
                                     <outlet property="updateDate" destination="Vp3-Lp-AiW" id="1PQ-yR-Ocx"/>
                                     <outlet property="version" destination="MxA-VX-Amb" id="CHS-7F-7kG"/>
                                     <outletCollection property="themableLabels" destination="cTL-ax-aZV" collectionClass="NSMutableArray" id="gYn-iO-Qdn"/>
@@ -247,7 +246,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="newCustomFilterReuseID" rowHeight="44" id="1h8-5X-ov6">
-                                <rect key="frame" x="0.0" y="71.5" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="66.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1h8-5X-ov6" id="ywi-jM-i0K">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -278,7 +277,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupCellReuseID" rowHeight="44" id="NBA-gE-kKe" customClass="GroupCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="110.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NBA-gE-kKe" id="JUC-Be-uKf">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

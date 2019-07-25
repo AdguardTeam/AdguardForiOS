@@ -29,9 +29,4 @@ class FilterCell: UITableViewCell {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var filterTagsView: FilterTagsView!
     
-    @IBOutlet weak var topSpaceToDate: NSLayoutConstraint!
-    
-    override func awakeFromNib() {
-        filterTagsView.cell = self
-    }
 }
