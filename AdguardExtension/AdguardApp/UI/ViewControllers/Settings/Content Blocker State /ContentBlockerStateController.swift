@@ -19,15 +19,14 @@
 import UIKit
 
 class ContentBlockerStateController: UITableViewController {
-    // Поправить init в dataSource
-    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let contentBlockersDataSource = ContentBlockersDataSource()
     
+    var theme: ThemeServiceProtocol? = nil
+    
+    var contentBlockersDataSource: ContentBlockersDataSource? = nil
     
     private let reuseIdentifier = "contentBlockerStateCell"
     
-    private let groupsByIntAndContentBlockerType : [Int : ContentBlockerType] = [
+    private let typeByRow : [Int : ContentBlockerType] = [
         0 : .general,
         1 : .privacy,
         2 : .custom,
@@ -35,7 +34,7 @@ class ContentBlockerStateController: UITableViewController {
         4 : .other
     ]
     
-    private let groupsByContentBlockerTypeAndInt : [ContentBlockerType : Int] = [
+    private let rowByType : [ContentBlockerType : Int] = [
         .general : 0,
         .privacy : 1,
         .custom : 2,
@@ -63,18 +62,18 @@ class ContentBlockerStateController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentBlockersDataSource.contentBlockers.count
+        return contentBlockersDataSource!.contentBlockers.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ContentBlockerStateCell {
             
-            theme.setupTableCell(cell)
-            theme.setupLabels(cell.themableLabels)
+            theme!.setupTableCell(cell)
+            theme!.setupLabels(cell.themableLabels)
             
-            guard let type = groupsByIntAndContentBlockerType[indexPath.row] else { return UITableViewCell() }
-            cell.layoutSubviews()
-            cell.blockerState = contentBlockersDataSource.contentBlockers[type]!
+            guard let type = typeByRow[indexPath.row] else { return UITableViewCell() }
+            cell.layoutIfNeeded()
+            cell.blockerState = contentBlockersDataSource!.contentBlockers[type]!
             return cell
         }else{
            return UITableViewCell()
@@ -84,11 +83,10 @@ class ContentBlockerStateController: UITableViewController {
     // MARK: - private methods
     
     private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        tableFooterView.backgroundColor = theme.backgroundColor
-        //theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
+        view.backgroundColor = theme!.backgroundColor
+        tableFooterView.backgroundColor = theme!.backgroundColor
+        theme!.setupNavigationBar(navigationController?.navigationBar)
+        theme!.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
@@ -103,38 +101,42 @@ class ContentBlockerStateController: UITableViewController {
         // Start of filter update observing
         NotificationCenter.default.addObserver(forName: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             
-            guard let type = notification.userInfo?["contentBlockerType"] as! ContentBlockerType? else { return }
-            self?.contentBlockersDataSource.contentBlockers[type]?.currentState = .updating
+            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
+            self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .updating
             self?.reloadRaw(with: type)
         }
         
         // Finish of filter update observer
         NotificationCenter.default.addObserver(forName: SafariService.filterFinishedUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             
-            guard let type = notification.userInfo?["contentBlockerType"] as! ContentBlockerType? else { return }
+            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
             
-            guard let success = notification.userInfo?["success"] as? Bool else { return }
+            guard let success = notification.userInfo?[SafariService.successString] as? Bool else { return }
             if !success {
-                self?.contentBlockersDataSource.contentBlockers[type]?.currentState = .failedUpdating
+                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .failedUpdating
                 self?.reloadRaw(with: type)
             } else {
-                let blocker = self?.contentBlockersDataSource.contentBlockers[type]
-                self?.contentBlockersDataSource.contentBlockers[type]?.currentState = (blocker?.numberOfOverlimitedRules == nil) ? (blocker?.enabled ?? false ? .enabled : .disabled) : .overLimited
+                let blocker = self?.contentBlockersDataSource!.contentBlockers[type]
+                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = (blocker?.numberOfOverlimitedRules == 0) ? (blocker?.enabled ?? false ? .enabled : .disabled) : .overLimited
                 self?.reloadRaw(with: type)
             }
         }
         
-        // App did become active observer
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            self?.contentBlockersDataSource.updateContentBlockersArray()
-            self?.tableView.reloadData()
+        // Content blockers checked observer
+        NotificationCenter.default.addObserver(forName: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+            self?.contentBlockersDataSource!.updateContentBlockersArray()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         }
     }
     
     private func reloadRaw(with type: ContentBlockerType){
-        let raw = groupsByContentBlockerTypeAndInt[type]!
+        let raw = rowByType[type]!
         let indexPath = IndexPath(row: raw, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .fade)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
     }
     
     private func setupTableView(){

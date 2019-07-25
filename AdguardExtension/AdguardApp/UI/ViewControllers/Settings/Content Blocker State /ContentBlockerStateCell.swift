@@ -63,7 +63,7 @@ class ContentBlockerStateCell: UITableViewCell {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    var filterState: ContentBlockerFilterState = .disabled
+    var filterState: ContentBlockerState = .disabled
     
     override func awakeFromNib() {
         super.awakeFromNib()

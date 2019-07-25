@@ -25,6 +25,8 @@ class AdvancedSettingsController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let safariService: SafariService = ServiceLocator.shared.getService()!
+    private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var simplifiedSwitch: UISwitch!
@@ -37,6 +39,8 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet var themeButtons: [UIButton]!
     
     var proObservation: NSKeyValueObservation?
+    
+    private let segueIdentifier = "contentBlockersScreen"
     
     // Sections
     private let themeSection = 0
@@ -117,7 +121,7 @@ class AdvancedSettingsController: UITableViewController {
             restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
             toggleRestartTunnel(restartTunnelSwitch)
         case (advancedSection, contentBlockersRow):
-            break
+            performSegue(withIdentifier: segueIdentifier, sender: self)
         default:
             break
         }
@@ -156,7 +160,16 @@ class AdvancedSettingsController: UITableViewController {
         setTheme(withButtonTag: sender.tag)
     }
     
+    // MARK: - Prepare for segue
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueIdentifier{
+            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService)
+            let destinationVC = segue.destination as? ContentBlockerStateController
+            destinationVC?.contentBlockersDataSource = contentBlockersDataSource
+            destinationVC?.theme = theme
+        }
+    }
     
     // MARK: - table view cells
     

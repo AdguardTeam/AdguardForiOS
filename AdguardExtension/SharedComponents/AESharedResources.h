@@ -195,6 +195,8 @@ extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
 
+/**
+ User defaults keys, which contains number of over limited rules for each content blocker*/
 extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesOverLimitCount;

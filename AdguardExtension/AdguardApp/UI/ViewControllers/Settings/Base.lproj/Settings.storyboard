@@ -385,9 +385,6 @@
                                             <constraint firstAttribute="trailing" secondItem="c1p-jc-Itq" secondAttribute="trailing" constant="80" id="bwO-gw-Ijc"/>
                                         </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <segue destination="uQx-bh-2Ni" kind="show" id="B2G-za-7Cn"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -424,6 +421,7 @@
                         <outletCollection property="themeButtons" destination="nEl-dL-mT7" collectionClass="NSMutableArray" id="asx-Sa-v6H"/>
                         <outletCollection property="themableLabels" destination="c1p-jc-Itq" collectionClass="NSMutableArray" id="gaM-qg-b2q"/>
                         <outletCollection property="themableLabels" destination="wMR-5F-GaE" collectionClass="NSMutableArray" id="Ufh-LJ-mR5"/>
+                        <segue destination="uQx-bh-2Ni" kind="show" identifier="contentBlockersScreen" id="0FG-l3-hii"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rud-IB-zWN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

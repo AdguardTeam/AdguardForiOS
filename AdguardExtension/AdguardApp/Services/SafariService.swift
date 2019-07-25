@@ -41,20 +41,6 @@ struct Affinity: OptionSet {
     static let custom       = Affinity(rawValue: 1 << 4)
 }
 
-@objc
-class ContentBlockersEnabled: NSObject {
-    
-    var generalContentBlockerEnabled: Bool?
-    
-    var privacyContentBlockerEnabled: Bool?
-    
-    var customContentBlockerEnabled: Bool?
-    
-    var socialContentBlockerEnabled: Bool?
-    
-    var otherContentBlockerEnabled: Bool?
-}
-
 // MARK: - protocol -
 
 /**
@@ -113,6 +99,9 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     static let filterBeganUpdating = Notification.Name("filterBeganUpdating")
     static let filterFinishedUpdating = Notification.Name("filterFinishedUpdating")
+    static let contentBlcokersChecked = Notification.Name("contentBlcokersChecked")
+    static let contentBlockerTypeString = "contentBlockerType"
+    static let successString = "success"
     
     private var contentBlockersEnabled = [ContentBlockerType : Bool]()
     
@@ -140,7 +129,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                     
                     group.enter()
                     // Notify that filter began updating
-                    NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: ["contentBlockerType" : blocker])
+                    NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
                     
                     sSelf.invalidateJson(contentBlockerType: blocker, completion: { (error) in
                         if error != nil {
@@ -150,7 +139,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                         }
                         let sError = (error != nil) ? false : true
                         // Notify that filter finished updating
-                        NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: ["success" : sError, "contentBlockerType" : blocker])
+                        NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
                 }
@@ -221,8 +210,8 @@ class SafariService: NSObject, SafariServiceProtocol {
                     group.leave()
                 })
             }
-            
             group.wait()
+            NotificationCenter.default.post(name: SafariService.contentBlcokersChecked, object: self)
             completion(allEnabled)
         }
     }

@@ -18,24 +18,24 @@
 
 import Foundation
 
-enum ContentBlockerFilterState {
+enum ContentBlockerState {
     case disabled, enabled, updating, overLimited, failedUpdating
 }
 
 protocol ContentBlockerStateProtocol {
     var contentBlockerType: ContentBlockerType? { get }
-    var currentState: ContentBlockerFilterState? { get set }
+    var currentState: ContentBlockerState? { get set }
     var numberOfRules: Int { get }
-    var numberOfOverlimitedRules: Int? { get }
+    var numberOfOverlimitedRules: Int { get }
     var filters: String { get }
     var enabled: Bool { get }
 }
 
 class ContentBlocker: ContentBlockerStateProtocol {
     
-    private lazy var safariService: SafariService = { ServiceLocator.shared.getService()! }()
-    private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var filterService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private let safariService: SafariService
+    private let resources: AESharedResourcesProtocol
+    private let filterService: FiltersServiceProtocol
     
     var enabled: Bool {
         get {
@@ -46,7 +46,7 @@ class ContentBlocker: ContentBlockerStateProtocol {
     
     var contentBlockerType: ContentBlockerType?
 
-    var currentState: ContentBlockerFilterState?
+    var currentState: ContentBlockerState?
     
     var numberOfRules: Int {
         get {
@@ -56,10 +56,10 @@ class ContentBlocker: ContentBlockerStateProtocol {
         }
     }
     
-    var numberOfOverlimitedRules: Int? {
+    var numberOfOverlimitedRules: Int {
         get {
             let number = resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlockerType!]!)
-            return (number == 0) ? nil : number
+            return number
         }
     }
     
@@ -79,24 +79,34 @@ class ContentBlocker: ContentBlockerStateProtocol {
             return returnString
         }
     }
-    init(contentBlockerType: ContentBlockerType?) {
+    init(contentBlockerType: ContentBlockerType?, safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol) {
         self.contentBlockerType = contentBlockerType
-        self.currentState = (self.numberOfOverlimitedRules == nil) ? (enabled ? .enabled : .disabled) : .overLimited
+        self.safariService = safariService
+        self.resources = resources
+        self.filterService = filterService
+        self.currentState = (self.numberOfOverlimitedRules == 0) ? (enabled ? .enabled : .disabled) : .overLimited
     }
 
 }
 
 class ContentBlockersDataSource {
     
+    private let safariService: SafariService
+    private let resources: AESharedResourcesProtocol
+    private let filterService: FiltersServiceProtocol
+    
     var contentBlockers = [ContentBlockerType : ContentBlocker]()
     
-    init() {
+    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol) {
+        self.safariService = safariService
+        self.resources = resources
+        self.filterService = filterService
         self.updateContentBlockersArray()
     }
     
     func updateContentBlockersArray(){
         for type in ContentBlockerType.allCases {
-            let contentBlocker = ContentBlocker(contentBlockerType: type)
+            let contentBlocker = ContentBlocker(contentBlockerType: type, safariService: safariService, resources: resources, filterService: filterService)
             self.contentBlockers[type] = contentBlocker
         }
     }
