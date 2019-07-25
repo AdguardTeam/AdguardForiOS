@@ -17,16 +17,29 @@
  */
 
 import Foundation
-import UIKit
 
-class FilterCell: UITableViewCell {
+extension Date{
+    // return formated and localized string from date
+    public func formatedString() -> String?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        let id = Locale.current.identifier
+        dateFormatter.locale = Locale(identifier: id)
+        let dateString = dateFormatter.string(from: self)
+        
+        return dateString
+    }
     
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var version: UILabel!
-    @IBOutlet weak var updateDate: UILabel!
-    @IBOutlet weak var enableSwitch: UISwitch!
-    @IBOutlet weak var homepageButton: UIButton!
-    @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var filterTagsView: FilterTagsView!
-    
+    // return formated and localized string from date
+        public func formatedStringWithHoursAndMinutes() -> String?{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
+            let id = Locale.current.identifier
+            dateFormatter.locale = Locale(identifier: id)
+            let dateString = dateFormatter.string(from: self)
+            
+            return dateString
+        }
 }
