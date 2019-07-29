@@ -92,6 +92,9 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         
         editMode(false)
         
+        textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 24, bottom: 16, right: 24)
+        
         updateTheme()
     }
     

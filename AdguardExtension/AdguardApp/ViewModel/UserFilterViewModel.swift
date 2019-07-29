@@ -40,15 +40,15 @@ class RuleInfo: NSObject {
     var textColor: UIColor!
     var font: UIFont!
     
-    private let whitelitPrefix = "@@"
+    private let whitelistPrefix = "@@"
     private let commentPrefix = "!"
     
-    private let cssMarkers = ["##", "#@#", "#?#", "#@?#"]
-    private let cssExceptionMarkers = ["#$#", "#@$#", "#$?#", "#@$?#"]
+    private let elemhideMarkers = ["##", "#@#", "#?#", "#@?#"]
+    private let cssMarkers = ["#$#", "#@$#", "#$?#", "#@$?#"]
     
     private let whitelistColor = UIColor(hexString: "35605F")
-    private let cssColor = UIColor(hexString: "5586C0")
-    private let cssExceptionColor = UIColor(hexString: "3A669C")
+    private let elemhodeColor = UIColor(hexString: "5586C0")
+    private let cssColor = UIColor(hexString: "3A669C")
     private let commentColor = UIColor(hexString: "6D6D6D")
     
     init(_ rule: String, _ selected: Bool, _ themeService: ThemeServiceProtocol) {
@@ -66,9 +66,9 @@ class RuleInfo: NSObject {
         case .whitelist:
             color = whitelistColor
         case .css:
-            color = cssColor
+            color = elemhodeColor
         case .cssException:
-            color = cssExceptionColor
+            color = cssColor
         case .comment:
             color = commentColor
         default:
@@ -80,19 +80,23 @@ class RuleInfo: NSObject {
     
     private func type(_ rule: String)->RuleType {
         
+        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#comments
         if rule.starts(with: commentPrefix) {
             return .comment
         }
         
-        if rule.starts(with: whitelitPrefix) {
+        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
+        if rule.starts(with: whitelistPrefix) {
             return .whitelist
         }
         
-        if cssMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
+        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-elemhide-rules
+        if elemhideMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .css
         }
         
-        if cssExceptionMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
+        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-css-rules
+        if cssMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .cssException
         }
         
