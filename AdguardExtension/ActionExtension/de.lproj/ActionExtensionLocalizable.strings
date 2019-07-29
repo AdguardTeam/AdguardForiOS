@@ -1,0 +1,62 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Akzeptieren";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Ein unerwarteter Fehler ist aufgetreten. Wenden Sie sich bitte an das Support-Team.";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Bevor diese Safari-Aktionserweiterung verwendet werden kann, muss %1$@ eine Erstkonfiguration durchführen. Starten Sie die %2$@ Hauptanwendung, um dies zu tun.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Regeln können nicht konvertiert werden. Ein unerwarteter Fehler ist aufgetreten. Bitte kontaktieren Sie das Support-Team.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Konverter kann ins JSON-Format nicht initialisiert werden.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Die Nachricht kann nicht an das Support-Team gesendet werden, weil Sie auf diesem Gerät kein E-Mail-Konto konfiguriert haben.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Abbrechen";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "Filterregel kann nicht konvertiert werden. Der Text von Regel ist ungültig.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Benutzerfilter-Regeln können nicht konvertiert werden.";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "Filterung auf %@ aktivieren";
+
+/* Alert title. On error. */
+"common_error_title" = "Fehler";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filter können nicht in Safari geladen werden. Die letzten Änderungen konnten daher nicht übernommen werden.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Inkorrekte Blockierung auf der Seite:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Filter werden in Safari geladen. Schließen Sie AdGuard bitte nicht. Der Vorgang wird nicht länger als 30 Sekunden dauern...";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Beachten Sie, dass der Inhaltsblocker deaktiviert ist. Dies bedeutet, dass die Anzeigen unabhängig von den AdGuard-Einstellungen nicht gefiltert werden. Aktivieren Sie bitte den AdGuard-Inhaltsblocker in den Safari-Einstellungen, um die Filterung zu starten.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Vorschau";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Der Hostname ist nicht enthalten. Vermutlich ist die Seite noch nicht geladen.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Die Sicherheitsrichtlinie dieser Webseite verbietet das Starten von AdGuard-Assistenten.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Ein unbekannter Fehler ist beim Initialisieren der Safari-Aktionserweiterung aufgetreten. Bitte wenden Sie sich an den AdGuard-Support, sollte dies erneut auftreten.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Warnung";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Die Maximalanzahl für Regeln wurde überschritten.";

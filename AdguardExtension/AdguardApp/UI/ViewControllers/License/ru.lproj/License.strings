@@ -1,0 +1,62 @@
+/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
+"0Zf-Ng-gYi.title" = "AdGuard Premium";
+
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "DNS-приватность";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Выход";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
+"7Sy-Te-Eh3.text" = "Вы подписаны";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "8Bh-Uf-UEr"; Note = "(AddCustomFilterController) cancel button"; */
+"8Bh-Uf-UEr.normalTitle" = "Отмена";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "Установите собственные правила";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "Ahp-CV-z02"; */
+"Ahp-CV-z02.text" = "E-mail";
+
+/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
+"DEh-4x-Hnt.title" = "Вход в систему";
+
+/* Class = "UITextField"; placeholder = "Enter your e-mail here"; ObjectID = "K4d-TK-Ban"; Note = "(Add Custom Filter) url hint"; */
+"K4d-TK-Ban.placeholder" = "Введите ваш e-mail ";
+
+/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
+"K5r-9l-kKl.text" = "У вас есть лицензия";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "Зайдите в свой аккаунт";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "Блокируйте фишинг и другие угрозы";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Войти";
+
+/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
+"UbO-jW-NNO.normalTitle" = "Улучшить";
+
+/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
+"ZMu-UP-PI3.text" = "Цените ваши личные данные";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "eyq-0X-qrl"; */
+"eyq-0X-qrl.normalTitle" = "Логин";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Восстановить покупку";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "Фильтры безопасности";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "Собственные фильтры";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "vE7-wt-qaG"; */
+"vE7-wt-qaG.text" = "Логин";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
+"wPC-tc-ETw.title" = "Войти";

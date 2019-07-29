@@ -1,0 +1,62 @@
+/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
+"0Zf-Ng-gYi.title" = "AdGuard Premium";
+
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "立即更新过滤器";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "注销";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
+"7Sy-Te-Eh3.text" = "您已订阅";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "8Bh-Uf-UEr"; Note = "(AddCustomFilterController) cancel button"; */
+"8Bh-Uf-UEr.normalTitle" = "取消";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "更多过滤器";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "Ahp-CV-z02"; */
+"Ahp-CV-z02.text" = "电子邮件";
+
+/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
+"DEh-4x-Hnt.title" = "登录";
+
+/* Class = "UITextField"; placeholder = "Enter your e-mail here"; ObjectID = "K4d-TK-Ban"; Note = "(Add Custom Filter) url hint"; */
+"K4d-TK-Ban.placeholder" = "在此输入电子邮件";
+
+/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
+"K5r-9l-kKl.text" = "你有一个许可";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "前往我的账户";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "拦截网络钓鱼与其它威胁";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "登录";
+
+/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
+"UbO-jW-NNO.normalTitle" = "升级";
+
+/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
+"ZMu-UP-PI3.text" = "无处不在";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "eyq-0X-qrl"; */
+"eyq-0X-qrl.normalTitle" = "登录";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "恢复购买";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "安全过滤器";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "自定义过滤器";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "vE7-wt-qaG"; */
+"vE7-wt-qaG.text" = "登录";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
+"wPC-tc-ETw.title" = "登录";

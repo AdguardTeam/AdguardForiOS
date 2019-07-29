@@ -1,0 +1,50 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Elfogad";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Váratlan hiba történt. Kérem, lépjen kapcsolatba a támogatással.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Nem lehet átalakítani a szabályt. Váratlan hiba történt. Kérem, lépjen kapcsolatba a támogatással.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Nem lehet inicializálni a konvertert JSON formátumra.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Nem lehet elküldeni az üzenetet, mert nincs beállítva email cím.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Mégsem";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "Szűrők bekapcsolva a %@-ból";
+
+/* Alert title. On error. */
+"common_error_title" = "Hiba";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Nem lehetett betölteni a szűrőket a Safariba. Ezért a változások nem léptek életbe.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Érvénytelen szűrés ezen az oldalon:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Szűrők betöltése a Safariba. Kérem, ne kapcsolja ki az AdGuardot, a folyamat nem tarthat tovább 30 másodpercnél.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Előnézet";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "A gazdagép neve nem érhető el. Lehet, hogy az oldalt még nem töltötték be.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Ez a webhely biztonsági házirendje nem teszi lehetővé az AdGuard Assistant indítását.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Váratlan hiba történt a Safari művelet kiterjesztésének inicializálása közben. Kérjük, lépjen kapcsolatba az AdGuard támogatással, ha ez ismét megtörténik.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Figyelem";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Meghaladta a szűrési szabályok maximális számát.";
