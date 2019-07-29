@@ -1,0 +1,62 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Accepter";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "En uventet fejl opstod. Kontakt venligst supportteamet.";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Før at du kan bruge denne action extension, skal %1$@ udføre en indledningsvis konfiguration. Start den primære %2$@ app for at lade den gøre det.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Kan ikke konvertere regler. En uventet fejl opstod. Kontakt venligst supportteamet.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Kan ikke initialisere konverteringen til JSON format.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Kan ikke sende en besked til supportteamet. Du har ikke konfigureret din e-mailkonto endnu.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Annuller";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "Kan ikke konvertere filterreglen. Regel teksten er ugyldig.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Kan ikke konvertere bruger filterreglerne.";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "Aktiver filtrering på %@";
+
+/* Alert title. On error. */
+"common_error_title" = "Fejl";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filtre kan ikke indlæses i Safari. Derfor blev dine seneste ændringer ikke anvendt.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Ukorrekt blokering på siden:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Indlæser filtre til Safari. Sluk venligst ikke AdGuard. Processen vil ikke tage mere end 30 sekunder...";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Bemærk, at Indholdsblokeringen er deaktiveret. Det betyder, at annoncer ikke filtreres uanset AdGuard indstillinger. Aktiver venligst AdGuard Indholdsblokker i indstillingerne i Safari for at starte filtreringen.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Forhåndsvisning";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Værtsnavnet er ikke opnået. Måske er siden ikke blevet indlæst endnu.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Websidens sikkerhedspolitik tillader ikke at starte AdGuard Assistent.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Der opstod en uventet fejl under initialisering af Safari handlingsudvidelsen. Kontakt venligst AdGuard Support, hvis dette sker igen.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Advarsel";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Du har oversteget det maksimale antal filterregler.";

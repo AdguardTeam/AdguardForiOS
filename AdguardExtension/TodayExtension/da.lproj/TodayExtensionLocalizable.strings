@@ -1,0 +1,11 @@
+/* Today widget - text when remote DNS is enabled */
+"connected_to_server_format" = "Forbundet til \"%@\"";
+
+/* Today widget - text when remote DNS is disabled */
+"dns_filtering_disabled" = "DNS filtrering er deaktiveret";
+
+/* Today widget - hint text */
+"disable_dns_filtering" = "Tryk for at deaktivere DNS filtrering";
+
+/* Today widget - hint text */
+"enable_dns_filtering" = "Tryk for at aktivere DNS filtrering";

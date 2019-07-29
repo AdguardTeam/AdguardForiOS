@@ -33,6 +33,7 @@ class Filter: NSObject {
     var rulesCount: Int?
     var groupId: Int
     var displayNumber: Int?
+    var updateDate: Date?
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId
@@ -477,6 +478,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.name = filterLocalization?.name
                 filter.desc = filterLocalization?.descr
                 filter.version = filterMeta.version
+                filter.updateDate = filterMeta.updateDate
                 filter.enabled = group.enabled && filterMeta.enabled.boolValue
                 filter.homepage = filterMeta.homepage
                 filter.displayNumber = filterMeta.displayNumber.intValue
