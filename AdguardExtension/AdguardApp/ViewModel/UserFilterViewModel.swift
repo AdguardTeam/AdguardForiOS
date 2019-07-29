@@ -40,10 +40,17 @@ class RuleInfo: NSObject {
     var textColor: UIColor!
     var font: UIFont!
     
+    // we define the type of rule by special makers that we look for in the text of rule
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
     private let whitelistPrefix = "@@"
+    
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#comments
     private let commentPrefix = "!"
     
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-elemhide-rules
     private let elemhideMarkers = ["##", "#@#", "#?#", "#@?#"]
+    
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-css-rules
     private let cssMarkers = ["#$#", "#@$#", "#$?#", "#@$?#"]
     
     private let whitelistColor = UIColor(hexString: "35605F")
@@ -80,22 +87,17 @@ class RuleInfo: NSObject {
     
     private func type(_ rule: String)->RuleType {
         
-        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#comments
         if rule.starts(with: commentPrefix) {
             return .comment
         }
         
-        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
         if rule.starts(with: whitelistPrefix) {
             return .whitelist
         }
-        
-        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-elemhide-rules
         if elemhideMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .css
         }
         
-        // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-css-rules
         if cssMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .cssException
         }
