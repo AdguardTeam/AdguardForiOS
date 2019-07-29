@@ -580,6 +580,9 @@
 		D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */; };
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
 		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
+		D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
+		D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550222EED5020039BC48 /* FilterTagsButtons.swift */; };
+		D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550322EED5030039BC48 /* FilterTagsView.swift */; };
 		D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080121BEAA2100796714 /* FiltersServiceTest.swift */; };
 		D02C080321BEAA7000796714 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
@@ -1724,6 +1727,9 @@
 		D020B28C21FA11F80075BB8D /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterViewModel.swift; sourceTree = "<group>"; };
 		D028DB8821550615002E4E8E /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		D02B550022EED4AE0039BC48 /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
+		D02B550222EED5020039BC48 /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
+		D02B550322EED5030039BC48 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
 		D02C080121BEAA2100796714 /* FiltersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceTest.swift; sourceTree = "<group>"; };
 		D02C080521BEAB2900796714 /* SafariServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceMock.swift; sourceTree = "<group>"; };
 		D02C080721BEAB5C00796714 /* AntibannerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerMock.swift; sourceTree = "<group>"; };
@@ -2419,6 +2425,7 @@
 				655A01CD1C6B7686000F00D7 /* Logger */,
 				655A01EB1C6B7686000F00D7 /* NSDate+Utils.h */,
 				655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */,
+				D02B550022EED4AE0039BC48 /* Date+Utils.swift */,
 				655A01ED1C6B7686000F00D7 /* NSException+Utils.h */,
 				655A01EE1C6B7686000F00D7 /* NSException+Utils.m */,
 				655A01F11C6B7686000F00D7 /* NSString+Utils.h */,
@@ -3149,6 +3156,8 @@
 				D0CDAEA2218C83E00028001B /* CustomFilterInfoInfoController.swift */,
 				D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */,
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
+				D02B550222EED5020039BC48 /* FilterTagsButtons.swift */,
+				D02B550322EED5030039BC48 /* FilterTagsView.swift */,
 				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
 			);
@@ -4889,6 +4898,7 @@
 				7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
+				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				65FAB3371D6C569500A0706B /* ACObject.m in Sources */,
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
@@ -4907,6 +4917,7 @@
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				D031A101219EFC99002C17D9 /* CLIColor.m in Sources */,
 				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
+				D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
@@ -4977,6 +4988,7 @@
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
+				D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
 				D044AF70218069D000CD9E06 /* FiltersViewModel.swift in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gVb-oh-MXP">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gVb-oh-MXP">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14790.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +22,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Wum-GM-vP3">
-                            <rect key="frame" x="0.0" y="264" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="736" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -378,7 +376,7 @@
                                                             <constraints>
                                                                 <constraint firstItem="RdJ-DN-f1l" firstAttribute="centerY" secondItem="hhd-Kf-EdS" secondAttribute="centerY" id="14z-pm-Xzb"/>
                                                                 <constraint firstItem="hhd-Kf-EdS" firstAttribute="leading" secondItem="gxg-uu-55M" secondAttribute="leading" constant="24" id="5lf-v4-sck"/>
-                                                                <constraint firstAttribute="trailing" secondItem="O92-gS-UNi" secondAttribute="trailing" constant="24" id="Et5-En-JSX"/>
+                                                                <constraint firstAttribute="trailing" secondItem="O92-gS-UNi" secondAttribute="trailing" constant="28" id="Et5-En-JSX"/>
                                                                 <constraint firstItem="RdJ-DN-f1l" firstAttribute="leading" secondItem="hhd-Kf-EdS" secondAttribute="trailing" constant="14" id="Is8-c6-dKX"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hhd-Kf-EdS" secondAttribute="bottom" constant="20" id="Yf3-0g-6TI"/>
                                                                 <constraint firstItem="O92-gS-UNi" firstAttribute="centerY" secondItem="hhd-Kf-EdS" secondAttribute="centerY" id="ZK4-bL-kEO"/>
@@ -542,7 +540,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYI-ri-KlB">
-                                <rect key="frame" x="0.0" y="20" width="414" height="656"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="676"/>
                                 <connections>
                                     <segue destination="y2N-tV-Unf" kind="embed" id="Q8U-k1-9gS"/>
                                 </connections>
