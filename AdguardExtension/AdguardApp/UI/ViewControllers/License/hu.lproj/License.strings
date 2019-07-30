@@ -1,0 +1,26 @@
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "Instant szűrő frissítések";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "További szűrők";
+
+/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
+"DEh-4x-Hnt.title" = "Bejelentkezés";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "Adathalászat és más fenyegetések blokkolása";
+
+/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
+"UbO-jW-NNO.normalTitle" = "Frissítés";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Vásárlás visszaállítása";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "Biztonsági szűrők";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "Egyéni szűrők";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
+"wPC-tc-ETw.title" = "Bejelentkezés";

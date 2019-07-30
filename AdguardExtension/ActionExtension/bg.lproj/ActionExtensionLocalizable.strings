@@ -1,0 +1,50 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Приложи";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Не може да конвертираме правилата. Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Не мога да инициализирам конвертора за JSON формата";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Не може да изпратим доклад за грешка, защото нямате конфигуриран и-мейл акаунт.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Откажи";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "не може да се преобразува правилото за филтриране. Текстът на правилото е невалиден.";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "Включи филтрирането на %@";
+
+/* Alert title. On error. */
+"common_error_title" = "Грешка";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Филтрите не могат да бъдат заредени в Сафари. Поради това новите промени не са приложени.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Неправилно блокиране на страница:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Зареждане на филтрите в Сафари. Моля не изключвайте AdGuard, операцията ще отнеме не повече от 30 секунди...";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Преглед";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Името на хоста не е получено. Може би страницата още не е заредена.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Политиката за сигурност на този уебсайт не позволява зареждането на асистента на AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Възникна неочаквана грешка по време на зареждане на разширенито за действие на Сафари. Моля, свържете се с поддръжката на AdGuard ако това се случи отново.";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Вие превишихте максималния брой на правила за филтриране.";

@@ -1,0 +1,62 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "می پذیرم";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "یک خطای غیرمنتظره رخ داده است.لطفا با تیم پشتیبانی تماس بگیرید.";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "قبل از استفاده شما از این اقدام افزونه، %1$@ پیکربندی اولیه را اِجرا می کند. برای انجان آن برنامه اصلی %2$@ را اجرا کنید.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "دستورات را نمیتوان تبدیل کرد.خطای غیر منتظره رخ داد.لطفا با تیم پشتیبانی تماس بگیرید.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "تبدیلگر به جی فرمت اِس اُ اِن را نمیتوان مقدار دهی اولیه کرد!";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "پیام را نمیتوان به تیم پشتیبانی ارسال کرد چون شما اکانت ایمیل پیکربندی نکرده اید";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "لغو";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "دستور فیلتر را نمیتوان تبدیل کرد.دستور متن نامعتبر است.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "دستورات فیلتر کاربر را نمیتوان فیلتر کرد.یکی از دستورات حاوی خطا است.دستور بعدی در موقعیت فعلی مکان نما را بررسی کنید.";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "فعالسازی فیلترینگ در %@";
+
+/* Alert title. On error. */
+"common_error_title" = "خطا";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "مسدودسازی اشتباه در صفحه:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "بارگیری فیلترها در سافاری.لطفا AdGuard را غیرفعال نکنید،فرآیند بیش از 30 ثانیه طول نمی کشد...";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "توجه کنید که مسدودساز محتوا غیرفعال شده است. این یعنی صرف نظر از تنظیمات AdGuard چیزی فیلتر نخواهد شد. لطفا مسدودساز محتوای AdGuard را در تنظیمات سافاری برای شروع فیلترینگ فعال کنید.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "پیش نمایش";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "نام میزبان گرفته نشد.شاید صفحه هنوز بارگیری نشده است.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "سیاست امنیتی این وبسایت اجازه اِجرای دستیار AdGuard را نمی دهد.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "خطای غیر منتظره حین مقدار دهی اولیه اقدام افزونه سافاری رخ داد.لطفا اگر دوباره رخ داد با تیم پشتیبانی AdGuard تماس بگیرید.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "هشدار";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "شما از حداکثر تعداد دستورات فیلتر تخطی کرده اید.";

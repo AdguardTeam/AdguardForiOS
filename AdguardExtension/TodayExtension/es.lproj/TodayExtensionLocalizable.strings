@@ -1,0 +1,11 @@
+/* Today widget - text when remote DNS is enabled */
+"connected_to_server_format" = "Conectado a \"%@\"";
+
+/* Today widget - text when remote DNS is disabled */
+"dns_filtering_disabled" = "El filtrado DNS está desactivado";
+
+/* Today widget - hint text */
+"disable_dns_filtering" = "Toca para desactivar el filtrado DNS";
+
+/* Today widget - hint text */
+"enable_dns_filtering" = "Toca para activar el filtrado DNS";
