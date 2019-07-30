@@ -554,6 +554,10 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7E5121AF22E750BF005EC6F6 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
+		7E7222F322E6FA66009F2B0E /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
+		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
+		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -1671,6 +1675,9 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTagsButtons.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardApp/UI/ViewControllers/Filters/FilterTagsButtons.swift"; sourceTree = "<group>"; };
+		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
+		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -3013,6 +3020,16 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		7EE7E1DD22E9DB2C00B2799A /* Filters Group Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */,
+				7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */,
+				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
+			);
+			path = "Filters Group Controller";
+			sourceTree = "<group>";
+		};
 		D031A0A6219EFC99002C17D9 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -3156,10 +3173,10 @@
 				D0CDAEA2218C83E00028001B /* CustomFilterInfoInfoController.swift */,
 				D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */,
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
-				D02B550222EED5020039BC48 /* FilterTagsButtons.swift */,
-				D02B550322EED5030039BC48 /* FilterTagsView.swift */,
-				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
+				7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */,
+				7E385CD922E7876B00AC0605 /* FilterTagsView.swift */,
+				7EE7E1DD22E9DB2C00B2799A /* Filters Group Controller */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -4884,6 +4901,7 @@
 				D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				7E4D203A22D71A5B003B0E75 /* mz_strm_zlib.c in Sources */,
+				7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
@@ -4980,6 +4998,7 @@
 				D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */,
 				D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */,
 				D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */,
+				7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */,
 				D05538062161D8190020993A /* AboutController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,

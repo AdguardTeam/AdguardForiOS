@@ -50,4 +50,20 @@ extension String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
+    
+    /* Func used in Filters to highlight search string */
+    func highlight(search string: String?) -> NSAttributedString? {
+        guard let searchString = string?.lowercased() else { return nil }
+        guard let range = self.lowercased().range(of: searchString) else { return nil }
+        let nsRange = NSRange(range, in: self)
+        
+        if nsRange.location > self.count{
+            return nil
+        }
+        
+        let highlightColor = UIColor(hexString: "#67b279")
+        let attributedString = NSMutableAttributedString(string: self)
+        attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: nsRange)
+        return attributedString
+    }
 }

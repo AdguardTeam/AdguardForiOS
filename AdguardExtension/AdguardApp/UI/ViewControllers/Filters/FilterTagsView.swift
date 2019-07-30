@@ -108,7 +108,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     }
     
     private func setupLangButton(lang: (name: String, heighlighted: Bool)){
-        let langButton = LangButton()
+        let langButton = TagButton()
         langButton.delegate = self.delegate
         
         langButton.name = lang.name

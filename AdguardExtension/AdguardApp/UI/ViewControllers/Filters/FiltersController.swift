@@ -32,8 +32,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let newFilterCellId = "newCustomFilterReuseID"
     private let filterCellId = "filterCellID"
     private let groupCellId = "GroupCellReuseID"
-    private let tagCellId = "tagCellId"
-    private let langCellId = "langCellId"
     
     private var selectedIndex: Int?
     
@@ -83,6 +81,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel?.cancelSearch()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,29 +143,17 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             return cell!
             
         case filtersSection:
-            let filter = viewModel?.filters[indexPath.row]
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
+            let filter = viewModel?.filters[indexPath.row]
+            let group = viewModel?.group
+
+            // Cell setup
             cell.filterTagsView.delegate = self
-            cell.filterTagsView.filter = filter
             
-            cell.name.text = filter?.name ?? ""
-            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            cell.updateDate.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
-            
-            if let version = filter?.version {
-                cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)
-            }
-
-            cell.enableSwitch.tag  = indexPath.row
-            cell.enableSwitch.isOn = filter?.enabled ?? false
+            cell.filter = filter
+            cell.group = group
+            cell.enableSwitch.row = indexPath.row
             cell.homepageButton.tag = indexPath.row
-
-            
-            let groupEnabled = viewModel?.group.enabled ?? false
-            cell.enableSwitch.isEnabled = groupEnabled
-            cell.enableSwitch.isUserInteractionEnabled = groupEnabled
-            cell.contentView.alpha = groupEnabled ? 1.0 : 0.5
             
             theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
@@ -212,8 +203,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     // MARK: - Actions
     
-    @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
-        let row = sender.tag
+    @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
+        guard let row = sender.row else { return }
         guard let filter = viewModel?.filters[row] else { return }
         viewModel?.set(filter: filter, enabled: sender.isOn)
         
@@ -243,11 +234,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         self.updateBarButtons()
     }
     
-    @IBAction func tagAction(_ sender: TagButton) {
-        viewModel?.switchTag(name: sender.name ?? "")
-    }
-    
-    @objc func langAction(_ sender: LangButton) {
+    private func tagAction(_ sender: TagButton) {
         viewModel?.switchTag(name: sender.name ?? "")
     }
     
@@ -270,8 +257,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     // MARK: - FilterInfo delegate methods
     
     func deleteFilter(filter: Filter) {
-        viewModel?.deleteCustomFilter(filter: filter, completion: { (succes) in
-            self.tableView.reloadData()
+        viewModel?.deleteCustomFilter(filter: filter, completion: {[weak self] (succes) in
+            self?.tableView.reloadData()
         })
     }
     
@@ -283,12 +270,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     // MARK: - Tag Button Tapped delegate method
-    func tagButtonTapped(_ sender: UIButton?) {
-        if let lang = sender as? LangButton {
-            langAction(lang)
-        } else if let tag = sender as? TagButton{
-            tagAction(tag)
-        }
+    func tagButtonTapped(_ sender: TagButton) {
+        tagAction(sender)
     }
     
     // MARK: - private methods
