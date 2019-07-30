@@ -23,7 +23,8 @@ class ContentBlockerStateCell: UITableViewCell {
     var blockerState: ContentBlockerStateProtocol? {
         didSet {
             var name = ""
-            switch self.blockerState?.contentBlockerType {
+            guard let state = blockerState?.contentBlockerType else { return }
+            switch  state{
             case .general:
                 name = "AdGuard — General"
             case .privacy:
@@ -70,8 +71,8 @@ class ContentBlockerStateCell: UITableViewCell {
     }
     
     private func gotState(){
-        
-        switch self.blockerState?.currentState {
+        guard let state = blockerState?.currentState else { return }
+        switch  state{
         case .enabled:
             enabledUISetup()
         case .disabled:
@@ -82,8 +83,6 @@ class ContentBlockerStateCell: UITableViewCell {
             overLimitedUISetup()
         case .failedUpdating:
             failedUpdatingUISetup()
-        default:
-            break
         }
     }
     

@@ -124,17 +124,17 @@ class ContentBlockerStateController: UITableViewController {
         
         // Content blockers checked observer
         NotificationCenter.default.addObserver(forName: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            self?.contentBlockersDataSource!.updateContentBlockersArray()
             DispatchQueue.main.async {
+                self?.contentBlockersDataSource!.updateContentBlockersArray()
                 self?.tableView.reloadData()
             }
         }
     }
     
     private func reloadRaw(with type: ContentBlockerType){
-        let raw = rowByType[type]!
-        let indexPath = IndexPath(row: raw, section: 0)
         DispatchQueue.main.async {[weak self] in
+            guard let raw = self?.rowByType[type] else { return }
+            let indexPath = IndexPath(row: raw, section: 0)
             self?.tableView.reloadRows(at: [indexPath], with: .fade)
         }
     }
