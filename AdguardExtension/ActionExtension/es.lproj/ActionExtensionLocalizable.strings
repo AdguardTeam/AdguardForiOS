@@ -1,0 +1,62 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Aceptar";
+
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Ha ocurrido un error inesperado. Por favor, contacta con el equipo de soporte.";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Antes de que puedas añadir esta extensión de acción, %1$@ tiene que llevar a cabo una configuración inicial. Abre la app principal de %2$@ y llévala a cabo.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "No se pueden convertir las reglas ya que ocurrió un error inesperado. Por favor, contacta con el equipo de soporte.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "¡No se puede iniciar el conversor al formato JSON!";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "No se puede enviar el mensaje al equipo de soporte porque no tienes configurada una cuenta de correo.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Cancelar";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "No se puede convertir la regla del filtro. El texto de la regla no es válido.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "No se pueden convertir las reglas de filtrado del usuario. Una de las reglas contiene un error. Comprueba la regla junto al cursor.";
+
+/* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
+"enable_filtering_format" = "Activar filtrado en %@";
+
+/* Alert title. On error. */
+"common_error_title" = "Error";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Los filtros no pueden ser cargados en Safari. Tus últimos cambios no se aplicaron.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Bloqueo incorrecto en la página:\n%@ ";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Cargando filtros a Safari. Por favor, no apagues AdGuard, el proceso no llevará más de 30 segundos...";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Ten en cuenta que el bloqueador de contenido está desactivado. Eso significa que los anuncios no se filtrarán independientemente de los ajustes de AdGuard. Por favor, activa el bloqueador de contenido de AdGuard en los ajustes de Safari para iniciar el filtrado.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Previsualizar";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "El hostname no se ha obtenido. Quizás la página no se haya cargado todavía.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "La política de seguridad de este sitio web no permite ejecutar el Asistente de AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Ocurrió un error inesperado mientras se iniciaba la extensión de Safari. Por favor, contact con el Soporte de AdGuard si ocurre de nuevo.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Advertencia";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Has excedido el número máximo de reglas de filtrado.";

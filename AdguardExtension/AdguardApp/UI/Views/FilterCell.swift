@@ -24,18 +24,9 @@ class FilterCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var updateDate: UILabel!
-    @IBOutlet weak var filterDescription: UILabel!
     @IBOutlet weak var enableSwitch: UISwitch!
     @IBOutlet weak var homepageButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var collectionTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var filterTagsView: FilterTagsView!
     
-    override func awakeFromNib() {
-        let layout = LeftAlignedCollectionViewFlowLayout()
-        layout.estimatedItemSize = CGSize(width: 10, height: 30)
-        collectionView.setCollectionViewLayout(layout, animated: false)
-    }
 }

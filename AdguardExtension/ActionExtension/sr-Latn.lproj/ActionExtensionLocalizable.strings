@@ -1,0 +1,35 @@
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
+"accept_caption" = "Prihvati";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Ne mogu da pretvorim filtere. Dogodila se neočekivana greška. Molimo vas da kontaktirate tim podrške.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Ne možete poslati poruku timu za podršku, jer nemate nijedan konfigurisan nalog e-pošte.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Otkaži";
+
+/* Alert title. On error. */
+"common_error_title" = "Greška";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filteri ne mogu da se učitaju u Safari, tako da vaša pravila nisu primenjena.";
+
+/* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
+"incorrect_blocking_page_format" = "Nepravilno blokiranje na stranici:\n%@";
+
+/* (AEUILoadingModal) Standard message when filter conversion is performed. */
+"safari_filters_loading" = "Učitavam filtere u Safari. Molimo vas da ne isključujete AdGuard. Proces neće trajati više od 30 sekundi.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
+"preview_caption" = "Prikaz";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Politika bezbednosti ovog sajta ne dozvoljava pokretanje AdGuard-ovog pomoćnika.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Dogodila se neočekivana greška prilikom pokretanja Safari dodatka. Molimo vas da kontaktirate podršku ako se ovo dogodi ponovo.";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Ne mogu da dodam domen na belu listu. Dostigli ste najveći dozvoljeni broj u pravilu.";

@@ -19,77 +19,9 @@
 import Foundation
 import UIKit
 
-// MARK: custom views
 
-class LangView: UIButton {
-    var name: String?
-}
-
-class TagView: RoundRectButton {
-    var name: String?
-}
-
-class TagCell: UICollectionViewCell {
-    
-    
-    @IBOutlet weak var button: TagView!
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        
-        var size = button.sizeThatFits(CGSize(width: 1000, height: button.frame.height))
-        size.width = size.width + 6
-        size.height = 22
-        var newFrame = layoutAttributes.frame
-        newFrame.size = size
-        layoutAttributes.frame = newFrame
-        
-        return layoutAttributes
-    }
-    
-}
-
-class LangCell: UICollectionViewCell {
- 
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var button: LangView!
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        
-        let size = CGSize(width: 25, height: 22)
-        var newFrame = layoutAttributes.frame
-        newFrame.size = size
-        layoutAttributes.frame = newFrame
-        
-        return layoutAttributes
-    }
-}
-
-class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let attributes = super.layoutAttributesForElements(in: rect)
-        
-        var leftMargin = sectionInset.left
-        var maxY: CGFloat = -1.0
-        attributes?.forEach { layoutAttribute in
-            if layoutAttribute.frame.origin.y >= maxY {
-                leftMargin = sectionInset.left
-            }
-            
-            layoutAttribute.frame.origin.x = leftMargin
-            
-            leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-            maxY = max(layoutAttribute.frame.maxY , maxY)
-        }
-        
-        return attributes
-    }
-    
-    
-}
-
-// MARK: - FiltersController -
-class FiltersController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UIViewControllerTransitioningDelegate, CustomFilterInfoInfoDelegate, NewCustomFilterDetailsDelegate {
+// MARK: - FiltersController
+class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, CustomFilterInfoInfoDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersViewModelProtocol?
     
@@ -125,6 +57,9 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 118
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -201,13 +136,19 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             
         case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
+            cell?.isHidden = (viewModel?.customGroup ?? false) ? false : true
             return cell!
             
         case filtersSection:
             let filter = viewModel?.filters[indexPath.row]
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
+            cell.filterTagsView.delegate = self
+            cell.filterTagsView.filter = filter
+            
             cell.name.text = filter?.name ?? ""
-            cell.filterDescription.text = filter?.desc ?? ""
+            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
+            cell.updateDate.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             
             if let version = filter?.version {
                 cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)
@@ -216,23 +157,7 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
             cell.enableSwitch.tag  = indexPath.row
             cell.enableSwitch.isOn = filter?.enabled ?? false
             cell.homepageButton.tag = indexPath.row
-            
-            cell.collectionView.delegate = nil
-            cell.collectionView.tag = indexPath.row
-            cell.collectionView.delegate = self
-            cell.collectionView.dataSource = self
-            
-            cell.collectionTopConstraint.constant = (cell.filterDescription.text?.count ?? 0) > 0 ? 10 : 0
-            cell.collectionHeightConstraint.constant = filter?.tags?.count == 0 && filter?.langs?.count == 0 ? 0 : 22
-            cell.collectionTopConstraint.constant = filter?.tags?.count == 0 && filter?.langs?.count == 0 ? 0 : 10
-            
-            UIView.animate(withDuration: 0.0) {
-                cell.collectionView.performBatchUpdates({
-                    cell.collectionView.reloadSections(IndexSet(integer: 0))
-                }, completion: { (_) in
-                    cell.collectionView.layoutSubviews()
-                })
-            }
+
             
             let groupEnabled = viewModel?.group.enabled ?? false
             cell.enableSwitch.isEnabled = groupEnabled
@@ -285,54 +210,6 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
         }
     }
     
-    // MARK: - CollectionView data source
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let filterIndex = collectionView.tag
-        let filter = viewModel?.filters[filterIndex]
-        
-        let tagsCount = filter?.tags?.count ?? 0
-        let langsCount = filter?.langs?.count ?? 0
-        return langsCount + tagsCount
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
-        let filterIndex = collectionView.tag
-        if let filter = viewModel?.filters[filterIndex]{
-            
-            let langsCount = filter.langs?.count ?? 0
-            
-            if indexPath.row < langsCount {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: langCellId, for: indexPath) as! LangCell
-                let lang = filter.langs![indexPath.row]
-                cell.image.image = UIImage(named: lang.name)
-                cell.image.alpha = lang.heighlighted ? 0.3 : 1.0
-                cell.button.name = lang.name
-                cell.button.removeTarget(self, action: #selector(langAction(_:)), for: .touchUpInside)
-                cell.button.addTarget(self, action: #selector(langAction(_:)), for: .touchUpInside)
-                
-                return cell
-            }
-            else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tagCellId, for: indexPath) as! TagCell
-                let tag = filter.tags![indexPath.row - langsCount]
-                cell.button.setTitle(tag.name, for: .normal)
-                cell.button.alpha = tag.heighlighted ? 0.3 : 1.0
-                cell.button.name = tag.name
-                theme.setupTagButton(cell.button)
-                return cell
-            }
-        }
-        
-        return UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
     // MARK: - Actions
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
@@ -366,11 +243,11 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
         self.updateBarButtons()
     }
     
-    @IBAction func tagAction(_ sender: TagView) {
+    @IBAction func tagAction(_ sender: TagButton) {
         viewModel?.switchTag(name: sender.name ?? "")
     }
     
-    @objc func langAction(_ sender: LangView) {
+    @objc func langAction(_ sender: LangButton) {
         viewModel?.switchTag(name: sender.name ?? "")
     }
     
@@ -403,6 +280,15 @@ class FiltersController: UITableViewController, UICollectionViewDataSource, UICo
         viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in
             self.tableView.reloadData()
         })
+    }
+    
+    // MARK: - Tag Button Tapped delegate method
+    func tagButtonTapped(_ sender: UIButton?) {
+        if let lang = sender as? LangButton {
+            langAction(lang)
+        } else if let tag = sender as? TagButton{
+            tagAction(tag)
+        }
     }
     
     // MARK: - private methods
