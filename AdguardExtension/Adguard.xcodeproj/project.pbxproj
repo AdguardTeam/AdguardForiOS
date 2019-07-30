@@ -552,9 +552,8 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */; };
 		7EFA495E22E1EE69004B8EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		7EFA496022E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */; };
-		7EFA496122E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -1670,7 +1669,7 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImageView+Utils.swift"; path = "../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/Libs/ACommons/Lang/UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -2410,6 +2409,7 @@
 		655A01B41C6B7686000F00D7 /* Lang */ = {
 			isa = PBXGroup;
 			children = (
+				7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */,
 				655A01B71C6B7686000F00D7 /* ACLExecuteBlockDelayed.h */,
 				655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */,
 				655A01B91C6B7686000F00D7 /* ACLFileLocker.h */,
@@ -2438,7 +2438,6 @@
 				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
 				D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */,
 				D0CDAEA42191C9540028001B /* String+Utils.swift */,
-				7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -4139,7 +4138,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */,
 				D0E607531F45909700B4D72B /* TodayExtensionLocalizable.strings in Resources */,
 				D096D9491F28C0D70081004D /* TodayExtensionMainInterface.storyboard in Resources */,
 			);
@@ -4833,7 +4831,6 @@
 				D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				65EC9C971BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D031A107219EFC99002C17D9 /* CLIColor.m in Sources */,
-				7EFA496122E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */,
 				D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4884,6 +4881,7 @@
 				D0BB18932161DC5E00CCAA76 /* AboutTableController.swift in Sources */,
 				D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */,
 				D031A171219EFC99002C17D9 /* DDFileLogger.m in Sources */,
+				7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */,
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */,
@@ -4939,7 +4937,6 @@
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
 				D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
-				7EFA496022E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */,
 				7E4D205622D71A5B003B0E75 /* SSZipArchive.m in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */,
