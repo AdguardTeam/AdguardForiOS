@@ -38,6 +38,8 @@ import Foundation
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
     
+    var ruleTextColor: UIColor { get }
+    
     func setupImage(_ imageView: ThemeableImageView)
     func setupLabel(_ label: ThemableLabel)
     func setupLabelInverted(_ label: ThemableLabel)
@@ -116,6 +118,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var logSelectedCellColor: UIColor {
         return UIColor(hexString: "#4DDF3812")
+    }
+    
+    var ruleTextColor: UIColor {
+        return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#434343")
     }
     
     func setupTagButton(_ button: RoundRectButton) {

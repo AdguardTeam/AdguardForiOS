@@ -580,6 +580,7 @@
 		D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */; };
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
 		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
+		D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
 		D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
 		D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550222EED5020039BC48 /* FilterTagsButtons.swift */; };
 		D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550322EED5030039BC48 /* FilterTagsView.swift */; };
@@ -862,7 +863,7 @@
 		D05CA8761F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D05CA8771F3B656C006DFD7F /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D05CA8781F3B666E006DFD7F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
-		D0667BCD22DC67430099C090 /* UserNotiificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0667BCC22DC67430099C090 /* UserNotiificationService.swift */; };
+		D0667BCD22DC67430099C090 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0667BCC22DC67430099C090 /* UserNotificationService.swift */; };
 		D0667BCF22DC72FD0099C090 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0667BCE22DC72FD0099C090 /* AppDelegateHelper.swift */; };
 		D067D8D3213ED8E400ECDE6D /* FilterGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D2213ED8E400ECDE6D /* FilterGroupViewModel.swift */; };
 		D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D42140020A00ECDE6D /* GroupCell.swift */; };
@@ -1727,6 +1728,7 @@
 		D020B28C21FA11F80075BB8D /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterViewModel.swift; sourceTree = "<group>"; };
 		D028DB8821550615002E4E8E /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		D02B550722EED8740039BC48 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		D02B550022EED4AE0039BC48 /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		D02B550222EED5020039BC48 /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		D02B550322EED5030039BC48 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
@@ -1799,7 +1801,7 @@
 		D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersController.swift; sourceTree = "<group>"; };
 		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
 		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
-		D0667BCC22DC67430099C090 /* UserNotiificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotiificationService.swift; sourceTree = "<group>"; };
+		D0667BCC22DC67430099C090 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		D0667BCE22DC72FD0099C090 /* AppDelegateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateHelper.swift; sourceTree = "<group>"; };
 		D067D8D2213ED8E400ECDE6D /* FilterGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGroupViewModel.swift; sourceTree = "<group>"; };
 		D067D8D42140020A00ECDE6D /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
@@ -3123,6 +3125,7 @@
 		D0CB3465212C31CC003B650E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D02B550722EED8740039BC48 /* PTMono-Regular.ttf */,
 				D005096A2201DA2F006BC10C /* providers.json */,
 				65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */,
 			);
@@ -3323,7 +3326,7 @@
 				653153611CFC63C000C92A73 /* APVPNManager.m */,
 				D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */,
 				7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */,
-				D0667BCC22DC67430099C090 /* UserNotiificationService.swift */,
+				D0667BCC22DC67430099C090 /* UserNotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -4054,6 +4057,7 @@
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
 				D03D0FDF22427B7A00ECF6DF /* ToastView.xib in Resources */,
+				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
@@ -4859,7 +4863,7 @@
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
-				D0667BCD22DC67430099C090 /* UserNotiificationService.swift in Sources */,
+				D0667BCD22DC67430099C090 /* UserNotificationService.swift in Sources */,
 				D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				7E4D203622D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
