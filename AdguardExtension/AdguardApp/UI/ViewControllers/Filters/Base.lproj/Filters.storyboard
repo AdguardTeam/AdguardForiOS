@@ -109,11 +109,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBi-dZ-EUJ">
-<<<<<<< HEAD
-                                            <rect key="frame" x="384" y="0.0" width="30" height="72"/>
-=======
                                             <rect key="frame" x="384" y="0.0" width="30" height="72.333333333333329"/>
->>>>>>> enhancement/1126
                                             <connections>
                                                 <action selector="switchTap:" destination="B60-Yq-lgJ" eventType="touchUpInside" id="CiF-bA-9OB"/>
                                             </connections>
@@ -207,13 +203,8 @@
         <scene sceneID="AfJ-Ey-Jpw">
             <objects>
                 <tableViewController id="Llu-1A-iPX" customClass="FiltersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-<<<<<<< HEAD
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gAd-oR-0a7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-=======
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gAd-oR-0a7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
->>>>>>> enhancement/1126
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -388,11 +379,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6C7-Us-DNU">
-<<<<<<< HEAD
-                                            <rect key="frame" x="0.0" y="43" width="414" height="0.5"/>
-=======
                                             <rect key="frame" x="0.0" y="43.666666666666664" width="414" height="0.3333333333333357"/>
->>>>>>> enhancement/1126
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="0.5" id="Emm-Ty-m7t"/>
@@ -469,11 +456,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your custom filters are here." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAd-RZ-bHN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-<<<<<<< HEAD
-                            <rect key="frame" x="15" y="27.5" width="210" height="15"/>
-=======
                             <rect key="frame" x="15" y="44.666666666666664" width="210" height="15"/>
->>>>>>> enhancement/1126
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>

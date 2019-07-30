@@ -554,10 +554,10 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
-		7E5121AF22E750BF005EC6F6 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
-		7E7222F322E6FA66009F2B0E /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
 		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
+		7EF9189022F05F5700427A61 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
+		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -585,8 +585,6 @@
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
 		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
-		D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550222EED5020039BC48 /* FilterTagsButtons.swift */; };
-		D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550322EED5030039BC48 /* FilterTagsView.swift */; };
 		D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080121BEAA2100796714 /* FiltersServiceTest.swift */; };
 		D02C080321BEAA7000796714 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
@@ -1678,6 +1676,7 @@
 		7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTagsButtons.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardApp/UI/ViewControllers/Filters/FilterTagsButtons.swift"; sourceTree = "<group>"; };
 		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
 		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
+		7EF9189122F05F8A00427A61 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -2852,6 +2851,7 @@
 				658237341D07FE6700B824F4 /* Tunnel */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
+				7EF9188F22F05E7500427A61 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3030,6 +3030,15 @@
 			path = "Filters Group Controller";
 			sourceTree = "<group>";
 		};
+		7EF9188F22F05E7500427A61 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				D02B550222EED5020039BC48 /* FilterTagsButtons.swift */,
+				D02B550322EED5030039BC48 /* FilterTagsView.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		D031A0A6219EFC99002C17D9 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -3174,8 +3183,8 @@
 				D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */,
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
+				7EF9189122F05F8A00427A61 /* FilterTagsView.swift */,
 				7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */,
-				7E385CD922E7876B00AC0605 /* FilterTagsView.swift */,
 				7EE7E1DD22E9DB2C00B2799A /* Filters Group Controller */,
 			);
 			path = Filters;
@@ -4855,6 +4864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */,
+				7EF9189022F05F5700427A61 /* FilterTagsButtons.swift in Sources */,
 				D0BDDD23215A76F5000C85F1 /* CustomFiltersController.swift in Sources */,
 				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
@@ -4863,6 +4873,7 @@
 				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
+				7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9BC81BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0EC406A214FB39E00365DB7 /* UserFilterTableController.swift in Sources */,
@@ -4935,7 +4946,6 @@
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				D031A101219EFC99002C17D9 /* CLIColor.m in Sources */,
 				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
-				D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
@@ -5007,7 +5017,6 @@
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
-				D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
 				D044AF70218069D000CD9E06 /* FiltersViewModel.swift in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
