@@ -20,6 +20,7 @@ import Foundation
 import SafariServices
 
 // MARK: - data types -
+@objc
 enum ContentBlockerType: Int, CaseIterable {
     case general
     case privacy
@@ -63,10 +64,14 @@ protocol SafariServiceProtocol : NSObjectProtocol {
      */
     func allBlockingContentRules()->[String : Data]
     
-    /** chaecks enabled status of all safari content blockers
+    /** checks enabled status of all safari content blockers
      returns true in callback if all content blockers are enabled in safari settings
      */
     func checkStatus(completion: @escaping (_ enabled: Bool)->Void)
+    
+    /** returns state of content blocker ( on / off )
+     */
+    func getContentBlockerEnabled(type: ContentBlockerType) -> Bool
 }
 
 // MARK: - SafariService -
@@ -75,7 +80,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     private var resources: AESharedResourcesProtocol
     
-    private let contenBlockerBundleIdByType: [ContentBlockerType: String] =
+    static private let contenBlockerBundleIdByType: [ContentBlockerType: String] =
         [.general : "com.adguard.AdguardExtension.extension",
          .privacy: "com.adguard.AdguardExtension.extensionPrivacy",
          .socialWidgetsAndAnnoyances: "com.adguard.AdguardExtension.extensionAnnoyances",
@@ -90,9 +95,15 @@ class SafariService: NSObject, SafariServiceProtocol {
         .custom: "cb_custom.json"
     ]
     
-    private lazy var contenBlockerBundleIds: [String] = { self.contenBlockerBundleIdByType.map({ $0.1 }) } ()
-    
     private let workQueue = DispatchQueue(label: "safari_service")
+    
+    static let filterBeganUpdating = Notification.Name("filterBeganUpdating")
+    static let filterFinishedUpdating = Notification.Name("filterFinishedUpdating")
+    static let contentBlcokersChecked = Notification.Name("contentBlcokersChecked")
+    static let contentBlockerTypeString = "contentBlockerType"
+    static let successString = "success"
+    
+    private var contentBlockersEnabled = [ContentBlockerType : Bool]()
     
     // MARK: - initializers
     
@@ -114,14 +125,21 @@ class SafariService: NSObject, SafariServiceProtocol {
                 let group = DispatchGroup()
                 var resultError: Error?
                 
-                for blockerBundleId in sSelf.contenBlockerBundleIds {
+                for blocker in ContentBlockerType.allCases {
                     
                     group.enter()
-                    sSelf.invalidateJson(bundleId: blockerBundleId, completion: { (error) in
+                    // Notify that filter began updating
+                    NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
+                    
+                    sSelf.invalidateJson(contentBlockerType: blocker, completion: { (error) in
                         if error != nil {
-                            DDLogError("(SafariService) invalidateBlockingJsons - Failed to reload json for content blocker: \(blockerBundleId)")
+                            let bundleId = SafariService.contenBlockerBundleIdByType[blocker]!
+                            DDLogError("(SafariService) invalidateBlockingJsons - Failed to reload json for content blocker: \(bundleId)")
                             resultError = error
                         }
+                        let sError = (error != nil) ? false : true
+                        // Notify that filter finished updating
+                        NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
                 }
@@ -136,7 +154,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     @objc
     func filenameById(_ contentBlockerId: String) -> String? {
         
-        for (type, blockerId) in contenBlockerBundleIdByType {
+        for (type, blockerId) in SafariService.contenBlockerBundleIdByType {
             if blockerId == contentBlockerId {
                 return fileNames[type]
             }
@@ -177,37 +195,46 @@ class SafariService: NSObject, SafariServiceProtocol {
     func checkStatus(completion:@escaping (_ enabled: Bool)->Void) {
         let checkQueue = DispatchQueue(label: "safari_check", attributes: DispatchQueue.Attributes.concurrent)
         
-        checkQueue.async { [weak self] in
-            guard let sSelf = self else { return }
+        checkQueue.async {
             
             var allEnabled = true
             
             let group = DispatchGroup()
             
-            for blockerBundleId in sSelf.contenBlockerBundleIds {
+            for blocker in ContentBlockerType.allCases {
                 
                 group.enter()
-                sSelf.chekStatusOfContentBlocker(bundleId: blockerBundleId, callback: { (enabled) in
+                self.chekStatusOfContentBlocker(contentBlockerType: blocker, callback: {[weak self] (enabled) in
                     allEnabled = allEnabled && enabled
+                    self?.contentBlockersEnabled[blocker] = enabled
                     group.leave()
                 })
             }
-            
             group.wait()
+            NotificationCenter.default.post(name: SafariService.contentBlcokersChecked, object: self)
             completion(allEnabled)
         }
     }
     
-    func chekStatusOfContentBlocker(bundleId: String, callback: @escaping (_ enabled: Bool)->Void)->Void {
+    private func chekStatusOfContentBlocker(contentBlockerType: ContentBlockerType, callback: @escaping (_ enabled: Bool)->Void)->Void {
+        let bundleId = SafariService.contenBlockerBundleIdByType[contentBlockerType]!
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: bundleId) { (state, _) in
             callback(state?.isEnabled ?? false)
         }
     }
     
+    func getContentBlockerEnabled(type: ContentBlockerType) -> Bool {
+        if let enabled = contentBlockersEnabled[type] {
+            return enabled
+        } else {
+            return false
+        }
+    }
+    
     // MARK: - private methods
     
-    private func invalidateJson(bundleId: String, completion: @escaping (Error?)->Void) {
-        
+    private func invalidateJson(contentBlockerType: ContentBlockerType, completion: @escaping (Error?)->Void) {
+        let bundleId = SafariService.contenBlockerBundleIdByType[contentBlockerType]!
         DDLogInfo("(SafariService) Starting notify Safari - invalidateJson. BundleId = \(bundleId)");
         
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) { (error) in

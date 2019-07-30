@@ -51,3 +51,15 @@ extension String {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
 }
+
+extension String {
+    // Adds space every 3 symbols
+    // Use for formatting numbers
+    static func formatSringNumber(number: Int) -> String{
+        let stringNumber = String(number)
+        var str = String(stringNumber.reversed())
+        str = String(str.enumerated().map { $0 > 0 && $0 % 3 == 0 ? [" ", $1] : [$1]}.joined())
+        str = String(str.reversed())
+        return str
+    }
+}
