@@ -19,12 +19,45 @@
 import Foundation
 import UIKit
 
+class FilterCellUISwitch: UISwitch {
+    var section: Int?
+    var row: Int?
+}
+
 class FilterCell: UITableViewCell {
+    
+    var filter: Filter? {
+        didSet{
+            filterTagsView.filter = filter
+            if filter?.searchAttributedString != nil {
+                name.attributedText = filter?.searchAttributedString
+            } else {
+                name.text = filter?.name
+            }
+            if let versionString = filter?.version {
+                version.text = String(format: ACLocalizedString("filter_version_format", nil), versionString)
+            }
+            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
+            updateDate.text = String(format: ACLocalizedString("filters_date_format", nil), dateString)
+            enableSwitch.isOn = filter?.enabled ?? false
+            
+        }
+    }
+    
+    var group: Group? {
+        didSet{
+            let groupEnabled = group?.enabled ?? false
+                enableSwitch.isEnabled = groupEnabled
+                enableSwitch.isUserInteractionEnabled = groupEnabled
+                contentView.alpha = groupEnabled ? 1.0 : 0.5
+        }
+    }
+    
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var updateDate: UILabel!
-    @IBOutlet weak var enableSwitch: UISwitch!
+    @IBOutlet weak var enableSwitch: FilterCellUISwitch!
     @IBOutlet weak var homepageButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var filterTagsView: FilterTagsView!

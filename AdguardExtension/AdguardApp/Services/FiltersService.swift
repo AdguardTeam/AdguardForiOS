@@ -19,7 +19,7 @@
 import Foundation
 
 // MARK: - data types -
-class Filter: NSObject {
+class Filter: NSObject, NSCopying {
     
     let filterId: Int
     
@@ -34,15 +34,36 @@ class Filter: NSObject {
     var groupId: Int
     var displayNumber: Int?
     var updateDate: Date?
+    var searchAttributedString: NSAttributedString?
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId
         self.groupId = groupId
         super.init()
     }
+    
+    // MARK: - NSCopying protocol
+    /* Creates copy of a class with another reference */
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Filter(filterId: filterId, groupId: groupId)
+        
+        copy.name = name
+        copy.desc = desc
+        copy.version = version
+        copy.enabled = enabled
+        copy.homepage = homepage
+        copy.tags = tags
+        copy.langs = langs
+        copy.rulesCount = rulesCount
+        copy.displayNumber = displayNumber
+        copy.updateDate = updateDate
+        copy.searchAttributedString = searchAttributedString
+        
+        return copy
+    }
 }
 
-class Group {
+class Group: Hashable, NSCopying {
     
     let groupId: Int
     
@@ -58,6 +79,30 @@ class Group {
     init(_ groupId: Int) {
         self.groupId = groupId
     }
+    
+    // MARK: - Hashable protocol
+    static func == (lhs: Group, rhs: Group) -> Bool {
+        return lhs.groupId == rhs.groupId
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(groupId)
+    }
+
+    // MARK: - NSCopying protocol
+    /* Creates copy of a class with another reference */
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Group(groupId)
+        copy.name = name
+        copy.subtitle = subtitle
+        copy.enabled = enabled
+        copy.iconName = iconName
+        copy.disabledIconName = disabledIconName
+        copy.proOnly = proOnly
+        copy.filters = filters
+        return copy
+    }
+    
 }
 
 // MARK: - service protocol -

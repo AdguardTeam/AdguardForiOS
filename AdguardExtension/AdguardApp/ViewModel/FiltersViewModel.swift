@@ -146,6 +146,7 @@ class FiltersViewModel: FiltersViewModelProtocol {
         searchFilters = [Filter]()
         
         if query.count == 0 {
+            allFilters.forEach({ $0.searchAttributedString = nil })
             searchFilters = allFilters
             heighlightTags([])
         }
@@ -165,7 +166,9 @@ class FiltersViewModel: FiltersViewModelProtocol {
                 var componentIsTag = false
                 
                 allFilters.forEach { (filter) in
-
+                    
+                    filter.searchAttributedString = filter.name?.highlight(search: query.lowercased())
+                    
                     var tagFound = false
                     for tag in filter.tags!{
                         if tag.name == component {
@@ -173,11 +176,6 @@ class FiltersViewModel: FiltersViewModelProtocol {
                             selectedTags.insert(tag.name)
                             tagFound = true
                         }
-                    }
-                    
-                    if tagFound {
-                        componentIsTag = true
-                        return
                     }
                     
                     for lang in filter.langs! {
@@ -226,6 +224,7 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     func cancelSearch() {
         isSearchActive = false
+        allFilters.forEach({ $0.searchAttributedString = nil })
         searchString = ""
         heighlightTags([])
         searchFilters = [Filter]()
