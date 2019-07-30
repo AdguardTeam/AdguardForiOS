@@ -206,12 +206,6 @@
 		655AACCD1D3E46D700E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		655AACCF1D3E46F600E316EA /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 655AACD41D4233A000E316EA /* ProLaunchScreen.storyboard */; };
-		655AACDB1D423B7200E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		655AACDC1D423B7400E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		655AACDD1D423B7900E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		655AACDE1D423B7A00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		655AACDF1D423B7B00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
-		655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		655B4E2D1E2E456900894C06 /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
 		655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655E94921BBEADD500286FBE /* AVKit.framework */; };
 		655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */; };
@@ -512,6 +506,10 @@
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
+		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
+		7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
+		7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */; };
+		7E15720C22DF4C25007060D7 /* ContentBlockerStateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */; };
 		7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBAD22D88F1900027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBBC22DDC25000027E93 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
@@ -554,6 +552,9 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7EFA495E22E1EE69004B8EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
+		7EFA496022E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */; };
+		7EFA496122E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -835,7 +836,6 @@
 		D0569E2521F1C0A800985DA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D0569E2621F1C0A800985DA9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		D0569E2721F1C0A800985DA9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
-		D0569E2921F1C0A800985DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
 		D0569E3921F1C7C400985DA9 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		D0569E3D21F1CD9E00985DA9 /* Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0569E2F21F1C0A800985DA9 /* Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -892,7 +892,6 @@
 		D067D8FE21428AA900ECDE6D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D067D8FF21428AA900ECDE6D /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D067D90221428AA900ECDE6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
-		D067D90521428AA900ECDE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D067D90621428AA900ECDE6D /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		D067D91121428B4600ECDE6D /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		D067D91421428B4600ECDE6D /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
@@ -919,7 +918,6 @@
 		D067D92F21428B4600ECDE6D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D067D93021428B4600ECDE6D /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D067D93321428B4600ECDE6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
-		D067D93621428B4600ECDE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D067D93721428B4600ECDE6D /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		D067D94221428B9100ECDE6D /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		D067D94521428B9100ECDE6D /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
@@ -946,7 +944,6 @@
 		D067D96021428B9100ECDE6D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D067D96121428B9100ECDE6D /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D067D96421428B9100ECDE6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
-		D067D96721428B9100ECDE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D067D96821428B9100ECDE6D /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		D067D97321428BB500ECDE6D /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		D067D97621428BB500ECDE6D /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
@@ -973,7 +970,6 @@
 		D067D99121428BB500ECDE6D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D067D99221428BB500ECDE6D /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		D067D99521428BB500ECDE6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
-		D067D99821428BB500ECDE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D067D99921428BB500ECDE6D /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		D067D9A82142A20000ECDE6D /* AdguardBlockingExtensionPrivacy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D90B21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D067D9A92142A20000ECDE6D /* AdguardBlockingExtensionAnnoyances.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1110,7 +1106,6 @@
 		D0F911932136DAB0006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D0FA1A002269D0F90047B558 /* AESFilterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */; };
 		D0FA1A012269D12B0047B558 /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
-		D0FBB52A1F3C61300097595B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1631,6 +1626,10 @@
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
+		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
+		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
+		7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentBlockerStateCell.xib; sourceTree = "<group>"; };
+		7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateDataSource.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
 		7E49DBBA22DDC25000027E93 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -1671,6 +1670,7 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImageView+Utils.swift"; path = "../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/Libs/ACommons/Lang/UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -2438,6 +2438,7 @@
 				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
 				D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */,
 				D0CDAEA42191C9540028001B /* String+Utils.swift */,
+				7EFA495F22E21579004B8EC3 /* UIImageView+Utils.swift */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -2954,6 +2955,17 @@
 			name = "Linked Frameworks/Libraries";
 			sourceTree = "<group>";
 		};
+		7E15720622DF32B7007060D7 /* Content Blocker State  */ = {
+			isa = PBXGroup;
+			children = (
+				7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */,
+				7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */,
+				7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */,
+				7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */,
+			);
+			path = "Content Blocker State ";
+			sourceTree = "<group>";
+		};
 		7E49DBA722D88D9C00027E93 /* Swift UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -3199,6 +3211,7 @@
 			children = (
 				D0D6BA0721A6AF63007360BC /* Settings.storyboard */,
 				D0DB1B052148DB35006EB991 /* AdvancedSettingsController.swift */,
+				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3972,7 +3985,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655AACE01D423B7C00E316EA /* Assets.xcassets in Resources */,
 				658237421D08004B00B824F4 /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3993,7 +4005,6 @@
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */,
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
-				655AACDD1D423B7900E316EA /* Assets.xcassets in Resources */,
 				659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
 			);
@@ -4007,7 +4018,6 @@
 				659887331CF83580003ECD1C /* JSConverter.js in Resources */,
 				659887341CF83580003ECD1C /* stringUIResources.plist in Resources */,
 				659887351CF83580003ECD1C /* MainInterface.storyboard in Resources */,
-				655AACDE1D423B7A00E316EA /* Assets.xcassets in Resources */,
 				653153451CF9935D00C92A73 /* ProActionExtension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4017,7 +4027,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				653153471CF9939300C92A73 /* ProBlockingExtension.entitlements in Resources */,
-				655AACDF1D423B7B00E316EA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4037,9 +4046,9 @@
 				65B40D341BDE635200A9C595 /* JSConverter.js in Resources */,
 				65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */,
 				D0B6B756229D690600D6E84E /* providers.json in Resources */,
-				655AACDC1D423B7400E316EA /* Assets.xcassets in Resources */,
 				7E4D203F22D71A5B003B0E75 /* LICENSE in Resources */,
 				65C52B3D1B906105003AF42F /* MainInterface.storyboard in Resources */,
+				7EFA495E22E1EE69004B8EC3 /* Assets.xcassets in Resources */,
 				D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4062,6 +4071,7 @@
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				D005096B2201DA2F006BC10C /* providers.json in Resources */,
+				7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */,
 				D0D6B9FF21A6AF5B007360BC /* MainMenu.storyboard in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
@@ -4081,7 +4091,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655AACDB1D423B7200E316EA /* Assets.xcassets in Resources */,
 				6517EE751C86F46400E055D2 /* Extension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4090,7 +4099,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0569E2921F1C0A800985DA9 /* Assets.xcassets in Resources */,
 				D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4099,7 +4107,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D067D90521428AA900ECDE6D /* Assets.xcassets in Resources */,
 				D067D90621428AA900ECDE6D /* Extension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4108,7 +4115,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D067D93621428B4600ECDE6D /* Assets.xcassets in Resources */,
 				D067D93721428B4600ECDE6D /* Extension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4117,7 +4123,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D067D96721428B9100ECDE6D /* Assets.xcassets in Resources */,
 				D067D96821428B9100ECDE6D /* Extension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4126,7 +4131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D067D99821428BB500ECDE6D /* Assets.xcassets in Resources */,
 				D067D99921428BB500ECDE6D /* Extension.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4829,6 +4833,7 @@
 				D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				65EC9C971BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D031A107219EFC99002C17D9 /* CLIColor.m in Sources */,
+				7EFA496122E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */,
 				D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4934,6 +4939,7 @@
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
 				D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				7EFA496022E2157A004B8EC3 /* UIImageView+Utils.swift in Sources */,
 				7E4D205622D71A5B003B0E75 /* SSZipArchive.m in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */,
@@ -4945,6 +4951,8 @@
 				D07AA061220490EC0065779F /* DnsProvidersContainerController.swift in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
+				7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */,
+				7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */,
 				D04CD26422007433000B0331 /* DnsRequestDetailsController.swift in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,
 				D031A0C9219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
@@ -4980,6 +4988,7 @@
 				D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */,
 				D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */,
 				D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */,
+				7E15720C22DF4C25007060D7 /* ContentBlockerStateDataSource.swift in Sources */,
 				D05538062161D8190020993A /* AboutController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,
@@ -6696,10 +6705,10 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
