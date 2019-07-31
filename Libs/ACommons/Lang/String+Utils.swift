@@ -60,10 +60,10 @@ extension String {
         
         for string in searchStrings {
             guard let searchString = string else { continue }
-            guard let range = self.lowercased().range(of: searchString) else { continue }
-            let nsRange = NSRange(range, in: self)
-                    
-            if nsRange.location > self.count{
+            let nsString = self.lowercased() as NSString
+            let nsRange = nsString.localizedStandardRange(of: searchString)
+
+            if nsRange.location + nsRange.length > self.count{
                 continue
             }
             
