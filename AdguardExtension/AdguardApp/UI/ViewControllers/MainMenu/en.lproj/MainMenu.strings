@@ -13,9 +13,6 @@
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "What is AdGuard?";
 
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Noy-Yh-fmr"; */
-"Noy-Yh-fmr.title" = " ";
-
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "VQi-XH-gdb"; */
 "VQi-XH-gdb.normalTitle" = "Get Premium";
 

@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Dark";
 
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages rendering in exchange of filtering. quality"; ObjectID = "PyT-Id-Sle"; */
-"PyT-Id-Sle.text" = "If this setting is enabled, AdGuard will ignore generic "cosmetic" rules. This will speed up pages rendering in exchange for filtering quality";
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
+"PyT-Id-Sle.text" = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality";
 
 /* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
 "TCQ-IQ-R5g.text" = "Use simplified filters";
@@ -28,7 +28,7 @@
 /* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
 "crJ-Vv-yrm.headerTitle" = "Advanced";
 
-/* Class = "UILabel"; text = "Enable this option if you experience issues with internet connection while AdGuard is working"; ObjectID = "mta-fv-reE"; */
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running."; ObjectID = "mta-fv-reE"; */
 "mta-fv-reE.text" = "Enable this option if you experience issues with the internet connection while AdGuard is running.";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
@@ -40,14 +40,11 @@
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Light";
 
-/* Class = "UILabel"; text = "Unblock ads everywhere exept the websites from this list"; ObjectID = "q05-UZ-zAB"; */
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
 "q05-UZ-zAB.text" = "Unblock ads everywhere except for the websites from this list";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of one can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
 "wMR-5F-GaE.text" = "You have 5 content blockers, each of them can contain 50,000 rules";
-
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "zUN-7L-alD"; */
-"zUN-7L-alD.title" = " ";

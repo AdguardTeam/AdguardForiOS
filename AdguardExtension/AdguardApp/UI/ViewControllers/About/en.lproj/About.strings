@@ -13,9 +13,6 @@
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "Ywt-W9-axs"; */
 "Ywt-W9-axs.title" = "About";
 
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "cWy-pj-mdt"; */
-"cWy-pj-mdt.title" = " ";
-
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
 "ncc-Hk-ota.title" = "About";
 

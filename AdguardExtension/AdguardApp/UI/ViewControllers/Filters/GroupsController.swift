@@ -59,6 +59,8 @@ class GroupsController: UITableViewController {
         viewModel.bind { [weak self] (Int) in
             self?.tableView.reloadData()
         }
+        
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

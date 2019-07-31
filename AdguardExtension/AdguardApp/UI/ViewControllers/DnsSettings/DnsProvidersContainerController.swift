@@ -42,6 +42,7 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
             self?.updateTheme()
         }
         
+        setupBackButton()
         updateTheme()
     }
     

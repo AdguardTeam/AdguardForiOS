@@ -70,9 +70,6 @@
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
 "TTc-NW-AJa.text" = "Full-Tunnel";
 
-/* Class = "UIBarButtonItem"; title = "   "; ObjectID = "U8K-az-4so"; */
-"U8K-az-4so.title" = "   ";
-
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
 "VxP-fd-4kT.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity";
 
@@ -147,9 +144,6 @@
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
 "ve4-Qn-Yj6.title" = "DNS request details";
-
-/* Class = "UIBarButtonItem"; title = "      "; ObjectID = "xc8-Uu-bpx"; */
-"xc8-Uu-bpx.title" = "      ";
 
 /* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
 "xe9-vq-pF6.text" = "Elapsed";

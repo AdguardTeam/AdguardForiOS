@@ -70,6 +70,7 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
             }
         }
         
+        setupBackButton()
         updateViews()
         updateTheme()
     }
