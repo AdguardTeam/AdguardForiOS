@@ -34,9 +34,12 @@ import Foundation
     var grayTextColor: UIColor { get }
     var separatorColor: UIColor { get }
     var selectedCellColor: UIColor { get }
+    var errorRedColor: UIColor { get }
     
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
+    
+    var ruleTextColor: UIColor { get }
     
     func setupImage(_ imageView: ThemeableImageView)
     func setupLabel(_ label: ThemableLabel)
@@ -110,12 +113,20 @@ class ThemeService : NSObject, ThemeServiceProtocol {
          return configuration.darkTheme ?  UIColor(hexString: "#0E1911") : UIColor.init(hexString: "#F3F3F3")
     }
     
+    var errorRedColor: UIColor {
+        return UIColor(hexString: "#df3812")
+    }
+    
     var logBlockedCellColor: UIColor {
         return UIColor(hexString: "#33DF3812")
     }
     
     var logSelectedCellColor: UIColor {
         return UIColor(hexString: "#4DDF3812")
+    }
+    
+    var ruleTextColor: UIColor {
+        return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#434343")
     }
     
     func setupTagButton(_ button: RoundRectButton) {
@@ -177,7 +188,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     func setupNavigationBar(_ navBarOrNil: UINavigationBar?) {
         guard let navBar = navBarOrNil else { return }
         let dark = configuration.darkTheme
-        let textAttributes = [NSAttributedString.Key.foregroundColor: dark ? UIColor.white : .black]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: dark ? UIColor.white : UIColor(hexString: "4D4D4D")]
         navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = dark ? .clear : .white
         navBar.barStyle = dark ? .black : .default

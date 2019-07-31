@@ -25,6 +25,8 @@ class AdvancedSettingsController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let safariService: SafariService = ServiceLocator.shared.getService()!
+    private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var simplifiedSwitch: UISwitch!
@@ -38,6 +40,8 @@ class AdvancedSettingsController: UITableViewController {
     
     var proObservation: NSKeyValueObservation?
     
+    private let segueIdentifier = "contentBlockersScreen"
+    
     // Sections
     private let themeSection = 0
     private let otherSection = 1
@@ -47,10 +51,13 @@ class AdvancedSettingsController: UITableViewController {
     private let systemDefault = 0
     private let dark = 1
     private let light = 2
+    
     private let wifiOnlyRow = 0
     private let invertWhitelistRow = 1
+    
     private let simplifiedRow = 0
     private let restartRow = 1
+    private let contentBlockersRow = 2
     
     private var headersTitles: [String] = []
     
@@ -58,6 +65,8 @@ class AdvancedSettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = ACLocalizedString("general_settings_title", nil)
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -111,9 +120,10 @@ class AdvancedSettingsController: UITableViewController {
         case (advancedSection, restartRow):
             restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
             toggleRestartTunnel(restartTunnelSwitch)
-            
+        case (advancedSection, contentBlockersRow):
+            performSegue(withIdentifier: segueIdentifier, sender: self)
         default:
-            break;
+            break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -150,7 +160,16 @@ class AdvancedSettingsController: UITableViewController {
         setTheme(withButtonTag: sender.tag)
     }
     
+    // MARK: - Prepare for segue
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueIdentifier{
+            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService)
+            let destinationVC = segue.destination as? ContentBlockerStateController
+            destinationVC?.contentBlockersDataSource = contentBlockersDataSource
+            destinationVC?.theme = theme
+        }
+    }
     
     // MARK: - table view cells
     
@@ -168,6 +187,7 @@ class AdvancedSettingsController: UITableViewController {
         view.backgroundColor = theme.backgroundColor
         
         let label = ThemableLabel(frame: CGRect(x: 24.0, y: height - 32, width: self.view.frame.width - 24.0, height: 24.0))
+        label.greyText = true
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.text = headersTitles[section]
         label.textAlignment = .left

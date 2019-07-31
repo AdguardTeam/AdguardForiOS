@@ -35,7 +35,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     lazy var model: UserFilterViewModel = {
         let type: UserFilterType = self.whitelist ? (inverted ? .invertedWhitelist : .whitelist) : .blacklist
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-        return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner())}()
+        return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)}()
     
     // MARK: IB outlets
     
@@ -43,14 +43,18 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var leftButtonStack: UIStackView!
 
     @IBOutlet var selectButton: UIButton!
+    @IBOutlet var editButton: RoundRectButton!
     @IBOutlet var exportButton: UIButton!
     @IBOutlet var importButton: UIButton!
     @IBOutlet var deleteButton: RoundRectButton!
     @IBOutlet var selectAllButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var saveButton: RoundRectButton!
     @IBOutlet weak var bottomBar: UIView!
     @IBOutlet var bottomBarButtons: [RoundRectButton]!
     @IBOutlet weak var bottomBarSeparator: UIView!
+    
+    @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var rigthButtonViewWidthConstraint: NSLayoutConstraint!
     
@@ -59,6 +63,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     enum BootomBarState {
         case normal
         case select
+        case edit
     }
     
     private var barState: BootomBarState = .normal
@@ -84,6 +89,11 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         else {
             self.navigationItem.title = ACLocalizedString("user_filter_title", "")
         }
+        
+        editMode(false)
+        
+        textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 24, bottom: 16, right: 24)
         
         updateTheme()
     }
@@ -111,6 +121,13 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     @IBAction func selectAction(_ sender: Any) {
         tableController?.setCustomEditing(true)
         barState = .select
+        updateBottomBar()
+    }
+    
+    @IBAction func editAction(_ sender: Any) {
+        textView.text = model.rules.map { $0.rule }.joined(separator: "\n")
+        editMode(true)
+        barState = .edit
         updateBottomBar()
     }
     
@@ -155,6 +172,15 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         selectedRulesChanged()
     }
     
+    @IBAction func saveAction(_ sender: Any) {
+        model.importRules(textView.text) { (error) in
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error)
+        }
+        editMode(false)
+        barState = .normal
+        updateBottomBar()
+    }
+    
     // MARK: - Presentation delegate methods
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -169,6 +195,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         model.selectAllRules(false)
         updateBottomBar()
         selectedRulesChanged()
+        editMode(false)
     }
     
     private func updateBottomBar() {
@@ -184,7 +211,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         var rightButton = cancelButton!
         switch barState {
         case .normal:
-            rightButton = selectButton
+            rightButton = editButton
             
             leftButtonStack.addArrangedSubview(exportButton)
             leftButtonStack.addArrangedSubview(importButton)
@@ -193,6 +220,10 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
             
             leftButtonStack.addArrangedSubview(deleteButton)
             leftButtonStack.addArrangedSubview(selectAllButton)
+            
+        case .edit:
+            rightButton = cancelButton
+            leftButtonStack.addArrangedSubview(saveButton)
         }
         
         rightButtonView.addSubview(rightButton)
@@ -210,6 +241,8 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor
         deleteButton.customHighlightedBackgroundColor = theme.selectedCellColor
+        theme.setupTextView(textView)
+        textView.backgroundColor = theme.backgroundColor
     }
     
     private func updateButtonStates() {
@@ -223,5 +256,15 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         controller.transitioningDelegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func editMode(_ edit: Bool) {
+        textView.isHidden = !edit
+        if edit {
+            navigationItem.rightBarButtonItems = []
+        }
+        else {
+            tableController?.updateNavBarButtons()
+        }
     }
 }
