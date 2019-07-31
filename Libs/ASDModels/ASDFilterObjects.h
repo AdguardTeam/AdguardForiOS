@@ -342,7 +342,7 @@ typedef enum : NSUInteger {
  @return Initialized instance.
  If ruleText is nil, then object.ruleText is empty string.
  */
-- (nonnull id)initWithText:(nonnull NSString *)ruleText enabled:(BOOL)enabled affinity:(NSNumber *)affinity;
+- (nonnull id)initWithText:(nonnull NSString *)ruleText enabled:(BOOL)enabled affinity:(nullable NSNumber *)affinity;
 
 @property (nonatomic, nonnull) NSNumber *filterId;
 @property (nonatomic, nonnull) NSNumber *ruleId;
