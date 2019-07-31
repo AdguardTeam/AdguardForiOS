@@ -26,14 +26,83 @@ enum UserFilterType {
     case invertedWhitelist
 }
 
+enum RuleType {
+    case blacklist
+    case whitelist
+    case comment
+    case css
+    case cssException
+}
+
 class RuleInfo: NSObject {
     var rule: String
     var selected: Bool
+    var textColor: UIColor!
+    var font: UIFont!
     
-    init(_ rule: String, _ selected: Bool) {
+    // we define the type of rule by special makers that we look for in the text of rule
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
+    private let whitelistPrefix = "@@"
+    
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#comments
+    private let commentPrefix = "!"
+    
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-elemhide-rules
+    private let elemhideMarkers = ["##", "#@#", "#?#", "#@?#"]
+    
+    // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-css-rules
+    private let cssMarkers = ["#$#", "#@$#", "#$?#", "#@$?#"]
+    
+    private let whitelistColor = UIColor(hexString: "35605F")
+    private let elemhodeColor = UIColor(hexString: "5586C0")
+    private let cssColor = UIColor(hexString: "3A669C")
+    private let commentColor = UIColor(hexString: "6D6D6D")
+    
+    init(_ rule: String, _ selected: Bool, _ themeService: ThemeServiceProtocol) {
         self.rule = rule
         self.selected = selected
+        
         super.init()
+        
+        let ruleType = self.type(rule)
+        
+        let font = ruleType == .comment ? UIFont.italicSystemFont(ofSize: 15.0) : (UIFont(name: "PT Mono", size: 15.0) ?? UIFont.systemFont(ofSize: 15.0))
+        
+        var color: UIColor?
+        switch ruleType {
+        case .whitelist:
+            color = whitelistColor
+        case .css:
+            color = elemhodeColor
+        case .cssException:
+            color = cssColor
+        case .comment:
+            color = commentColor
+        default:
+            color = themeService.ruleTextColor
+        }
+        self.textColor = color!
+        self.font = font
+    }
+    
+    private func type(_ rule: String)->RuleType {
+        
+        if rule.starts(with: commentPrefix) {
+            return .comment
+        }
+        
+        if rule.starts(with: whitelistPrefix) {
+            return .whitelist
+        }
+        if elemhideMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
+            return .css
+        }
+        
+        if cssMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
+            return .cssException
+        }
+        
+        return .blacklist
     }
 }
 
@@ -71,40 +140,42 @@ class UserFilterViewModel: NSObject {
         }
     }
     
-    private var resources: AESharedResourcesProtocol
-    private var contentBlockerService: ContentBlockerService
-    private var antibanner: AESAntibannerProtocol
+    private let resources: AESharedResourcesProtocol
+    private let contentBlockerService: ContentBlockerService
+    private let antibanner: AESAntibannerProtocol
+    private let themeService: ThemeServiceProtocol
     
     private var ruleObjects = [ASDFilterRule]()
     private var invertedWhitelistObject: AEInvertedWhitelistDomainsObject?
     
     // MARK: - init
     
-    init(_ type: UserFilterType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol) {
+    init(_ type: UserFilterType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol) {
         
         self.type = type
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
+        self.themeService = theme
         
         super.init()
         
         switch type {
         case .blacklist:
             ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-            allRules = ruleObjects.map({ RuleInfo($0.ruleText, false) })
+            allRules = ruleObjects.map({ RuleInfo($0.ruleText, false, themeService) })
             
         case .whitelist:
             ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
             allRules = ruleObjects.map({
                 let domainObject = AEWhitelistDomainObject(rule: $0)
-                return RuleInfo(domainObject?.domain ?? "", false)
+                return RuleInfo(domainObject?.domain ?? "", false, themeService)
             })
             
         case .invertedWhitelist:
             invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
             allRules = invertedWhitelistObject?.domains.map({ (rule) -> RuleInfo in
-                RuleInfo(rule, false)
+                RuleInfo(rule, false, themeService)
             }) ?? [RuleInfo]()
         }
     }
@@ -122,7 +193,7 @@ class UserFilterViewModel: NSObject {
         
         for component in components {
             let trimmed = component.trimmingCharacters(in: .whitespaces)
-            if trimmed.count > 0 && !trimmed.starts(with: "!") {
+            if trimmed.count > 0 {
                 rules.append(trimmed)
             }
         }
@@ -262,7 +333,7 @@ class UserFilterViewModel: NSObject {
             
             guard let ruleObject = ruleObjectOpt else { continue }
             
-            let ruleInfo = RuleInfo(trimmedRuleString, false)
+            let ruleInfo = RuleInfo(trimmedRuleString, false, themeService)
             
             newRuleObjects.append(ruleObject)
             newRuleInfos.append(ruleInfo)
@@ -287,7 +358,7 @@ class UserFilterViewModel: NSObject {
         let rulesCopy = allRules
         let objectsCopy = ruleObjects
         
-        let newRules = allRules + [RuleInfo(ruleText, false)]
+        let newRules = allRules + [RuleInfo(ruleText, false, themeService)]
         let newRuleObjects = ruleObjects + [ruleObject]
         
         DispatchQueue.main.async { [weak self] in
@@ -345,7 +416,7 @@ class UserFilterViewModel: NSObject {
             var newRuleObjects = Array(strongSelf.ruleObjects)
             var newRuleInfos = Array(strongSelf.allRules)
             
-            newRuleInfos.append(contentsOf: ruleTextsToAdd.map({ (rule) -> RuleInfo in RuleInfo(rule, false) }))
+            newRuleInfos.append(contentsOf: ruleTextsToAdd.map({ (rule) -> RuleInfo in RuleInfo(rule, false, strongSelf.themeService) }))
             newRuleObjects.append(contentsOf: rulesToAdd)
             
             strongSelf.setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: completionHandler, errorHandler: errorHandler)
@@ -357,7 +428,7 @@ class UserFilterViewModel: NSObject {
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
         var domains = allRules
-        domains.append(RuleInfo(ruleText, false))
+        domains.append(RuleInfo(ruleText, false, themeService))
         
         contentBlockerService.addInvertedWhitelistDomain(ruleText) { (error) in
             DispatchQueue.main.async {
@@ -542,7 +613,7 @@ class UserFilterViewModel: NSObject {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        var domains = allRules
+        let domains = allRules
         domains[index].rule = text
         
         let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: domains.map({ $0.rule }))
