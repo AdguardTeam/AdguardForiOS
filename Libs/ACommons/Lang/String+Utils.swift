@@ -52,18 +52,24 @@ extension String {
     }
     
     /* Func used in Filters to highlight search string */
-    func highlight(search string: String?) -> NSAttributedString? {
-        guard let searchString = string?.lowercased() else { return nil }
-        guard let range = self.lowercased().range(of: searchString) else { return nil }
-        let nsRange = NSRange(range, in: self)
+    func highlight(search strings: [String?]?) -> NSAttributedString? {
+        guard let searchStrings = strings else { return nil }
         
-        if nsRange.location > self.count{
-            return nil
+        let attributedString = NSMutableAttributedString(string: self)
+        let highlightColor = UIColor(hexString: "#67b279")
+        
+        for string in searchStrings {
+            guard let searchString = string else { continue }
+            guard let range = self.lowercased().range(of: searchString) else { continue }
+            let nsRange = NSRange(range, in: self)
+                    
+            if nsRange.location > self.count{
+                continue
+            }
+            
+            attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: nsRange)
         }
         
-        let highlightColor = UIColor(hexString: "#67b279")
-        let attributedString = NSMutableAttributedString(string: self)
-        attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: nsRange)
         return attributedString
     }
 }

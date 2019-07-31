@@ -141,13 +141,16 @@ class FilterGroupViewModel: NSObject, FilterGroupViewModelProtocol {
                 
                 var hasNotagText = false
                 
+                var searchStrings: [String?] = []
+                
                 for component in components {
                     
+                    searchStrings.append(String(component))
                     var componentIsTag = false
                     
                     group.filters.forEach { (filter) in
                         
-                        filter.searchAttributedString = filter.name?.highlight(search: query.lowercased())
+                        filter.searchAttributedString = filter.name?.highlight(search: searchStrings)
                         
                         var tagFound = false
                         for tag in filter.tags!{

@@ -554,9 +554,9 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
 		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
-		7EF9189022F05F5700427A61 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */; };
 		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D004F1FB1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
@@ -1673,7 +1673,7 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTagsButtons.swift; path = "../../../../../../../../../System/Volumes/Data/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardApp/UI/ViewControllers/Filters/FilterTagsButtons.swift"; sourceTree = "<group>"; };
+		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
 		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
 		7EF9189122F05F8A00427A61 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
@@ -3184,7 +3184,7 @@
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
 				7EF9189122F05F8A00427A61 /* FilterTagsView.swift */,
-				7E7222F222E6FA66009F2B0E /* FilterTagsButtons.swift */,
+				7E50493222F07FFA0095181C /* FilterTagsButtons.swift */,
 				7EE7E1DD22E9DB2C00B2799A /* Filters Group Controller */,
 			);
 			path = Filters;
@@ -4864,7 +4864,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */,
-				7EF9189022F05F5700427A61 /* FilterTagsButtons.swift in Sources */,
 				D0BDDD23215A76F5000C85F1 /* CustomFiltersController.swift in Sources */,
 				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
@@ -4928,6 +4927,7 @@
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
+				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				65FAB3371D6C569500A0706B /* ACObject.m in Sources */,
 				655A02851C6B7686000F00D7 /* NSURL+Utils.m in Sources */,

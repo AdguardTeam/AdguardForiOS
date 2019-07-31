@@ -286,6 +286,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         }
         theme.setupSearchBar(searchBar)
         theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
         theme.setupLabels(themableLabels)
     }
     

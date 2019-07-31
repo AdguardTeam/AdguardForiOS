@@ -161,13 +161,16 @@ class FiltersViewModel: FiltersViewModelProtocol {
             
             var hasNotagText = false
             
+            var searchStrings: [String?] = []
+            
             for component in components {
 
                 var componentIsTag = false
+                searchStrings.append(String(component))
                 
                 allFilters.forEach { (filter) in
                     
-                    filter.searchAttributedString = filter.name?.highlight(search: query.lowercased())
+                    filter.searchAttributedString = filter.name?.highlight(search: searchStrings)
                     
                     var tagFound = false
                     for tag in filter.tags!{
