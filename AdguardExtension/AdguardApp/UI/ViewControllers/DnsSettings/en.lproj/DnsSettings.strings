@@ -70,6 +70,9 @@
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
 "TTc-NW-AJa.text" = "Full-Tunnel";
 
+/* Class = "UIBarButtonItem"; title = "   "; ObjectID = "U8K-az-4so"; */
+"U8K-az-4so.title" = "   ";
+
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
 "VxP-fd-4kT.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity";
 
@@ -92,7 +95,7 @@
 "d69-Gd-SZp.text" = "Full-Tunnel (without VPN icon)";
 
 /* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "dW3-zk-BPr"; */
-"dW3-zk-BPr.text" = "DNS server address";
+"dW3-zk-BPr.text" = "Enter DNS upstreams";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "Server name";
@@ -137,13 +140,16 @@
 "pzP-ns-QSS.text" = "Server name";
 
 /* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "DNS server address";
+"seX-mS-3mU.text" = "Enter DNS upstreams";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Select protocol";
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
 "ve4-Qn-Yj6.title" = "DNS request details";
+
+/* Class = "UIBarButtonItem"; title = "      "; ObjectID = "xc8-Uu-bpx"; */
+"xc8-Uu-bpx.title" = "      ";
 
 /* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
 "xe9-vq-pF6.text" = "Elapsed";

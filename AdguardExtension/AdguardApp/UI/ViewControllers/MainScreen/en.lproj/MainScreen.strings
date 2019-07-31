@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Share this app"; ObjectID = "ZvU-OY-k27"; */
 "ZvU-OY-k27.text" = "Share this app";
 
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "d3H-9g-dhW"; */
+"d3H-9g-dhW.title" = " ";
+
 /* Class = "UILabel"; text = "How to use AdGuard\nwith Safari"; ObjectID = "eow-nj-Hky"; */
 "eow-nj-Hky.text" = "How to use AdGuard\nwith Safari";
 

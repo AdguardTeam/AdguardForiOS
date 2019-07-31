@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Rules count: ";
 
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "YOj-83-cvG"; */
+"YOj-83-cvG.title" = " ";
+
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Yyf-bK-igr"; */
 "Yyf-bK-igr.normalTitle" = "DELETE";
 

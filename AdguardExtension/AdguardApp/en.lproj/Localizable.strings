@@ -364,3 +364,24 @@
 
 /* (LicenseController) format for trial period*/
 "trial_format" = "Free trial for %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Content blockers";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "General settings";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_state_label" = "%@ of 50 000 used";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Disabled in Safari settings";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Checking for updates...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "%1$@ of 50 000 used %2$@ disabled";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filters have not been updated";
