@@ -57,7 +57,8 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         tableView.tableHeaderView = searchView
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
+     
+        setupBackButton()
         updateTheme()
     }
     

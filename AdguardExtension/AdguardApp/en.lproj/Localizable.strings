@@ -161,7 +161,7 @@
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Scanning...";
+"update_filter_start_message" = "Updating...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Add a rule";
@@ -384,4 +384,4 @@
 "over_limit_current_state_label" = "%1$@ of 50 000 used %2$@ disabled";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
-"failed_updating_current_state_label" = "Filters weren’t updated";
+"failed_updating_current_state_label" = "Filters have not been updated";

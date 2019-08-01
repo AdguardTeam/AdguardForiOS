@@ -76,6 +76,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         if viewModel?.customGroup ?? false {
             tableView.tableHeaderView = headerView
         }
+        
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

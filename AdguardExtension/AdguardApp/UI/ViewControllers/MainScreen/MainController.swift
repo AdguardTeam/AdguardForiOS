@@ -102,6 +102,7 @@ class MainController: UIViewController {
         configuration.checkContentBlockerEnabled()
         
         viewModel = MainViewModel(antibanner: aeService.antibanner())
+        setupBackButton()
         
         self.updateUI()
     }
