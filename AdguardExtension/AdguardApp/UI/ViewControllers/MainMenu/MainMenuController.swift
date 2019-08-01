@@ -118,6 +118,8 @@ class MainMenuController: UITableViewController {
         }
         
         updateFilters()
+        
+        setupBackButton()
     }
     
     // MARK: - Actions

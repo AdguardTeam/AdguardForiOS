@@ -90,6 +90,8 @@ class AdvancedSettingsController: UITableViewController {
             }
         }
         
+        setupBackButton()
+        
         updateUI()
     }
     
