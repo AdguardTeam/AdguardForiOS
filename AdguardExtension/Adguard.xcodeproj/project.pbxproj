@@ -580,10 +580,10 @@
 		D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */; };
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
 		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
-		D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
 		D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
 		D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550222EED5020039BC48 /* FilterTagsButtons.swift */; };
 		D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550322EED5030039BC48 /* FilterTagsView.swift */; };
+		D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
 		D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080121BEAA2100796714 /* FiltersServiceTest.swift */; };
 		D02C080321BEAA7000796714 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
@@ -1099,6 +1099,7 @@
 		D0F7F0CD2268979600592B1E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
 		D0F7F0CE22689C7A00592B1E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
 		D0F7F0D022689CEC00592B1E /* LoginServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */; };
+		D0F8F6B422F1CCC40044DCFA /* FilterDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */; };
 		D0F9115C212DDCD3006DF0D3 /* StackElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */; };
 		D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91163212EDD71006DF0D3 /* FilterCell.swift */; };
 		D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91166212EDE7C006DF0D3 /* FiltersController.swift */; };
@@ -1728,10 +1729,10 @@
 		D020B28C21FA11F80075BB8D /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterViewModel.swift; sourceTree = "<group>"; };
 		D028DB8821550615002E4E8E /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
-		D02B550722EED8740039BC48 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		D02B550022EED4AE0039BC48 /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		D02B550222EED5020039BC48 /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		D02B550322EED5030039BC48 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
+		D02B550722EED8740039BC48 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		D02C080121BEAA2100796714 /* FiltersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceTest.swift; sourceTree = "<group>"; };
 		D02C080521BEAB2900796714 /* SafariServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceMock.swift; sourceTree = "<group>"; };
 		D02C080721BEAB5C00796714 /* AntibannerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerMock.swift; sourceTree = "<group>"; };
@@ -2098,6 +2099,7 @@
 		D0F7F0C72268946700592B1E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTest.swift; sourceTree = "<group>"; };
 		D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTest.swift; sourceTree = "<group>"; };
+		D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsController.swift; sourceTree = "<group>"; };
 		D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackElementView.swift; sourceTree = "<group>"; };
 		D0F91163212EDD71006DF0D3 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		D0F91166212EDE7C006DF0D3 /* FiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersController.swift; sourceTree = "<group>"; };
@@ -3163,6 +3165,7 @@
 				D02B550322EED5030039BC48 /* FilterTagsView.swift */,
 				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
+				D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -4901,6 +4904,7 @@
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
 				7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
+				D0F8F6B422F1CCC40044DCFA /* FilterDetailsController.swift in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,

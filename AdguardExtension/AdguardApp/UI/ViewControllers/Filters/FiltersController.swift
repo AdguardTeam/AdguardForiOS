@@ -34,6 +34,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let groupCellId = "GroupCellReuseID"
     private let tagCellId = "tagCellId"
     private let langCellId = "langCellId"
+    private let showFilterDetailsSegue = "showFilterDetailsSegue"
     
     private var selectedIndex: Int?
     
@@ -86,8 +87,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddCustomFilterSegue" {
+        if segue.identifier == showFilterDetailsSegue {
             
+            guard let detailsController = segue.destination as? FilterDetailsController else {
+                assertionFailure("unexpected destination controller")
+                return
+            }
+            guard let selectedIndex = tableView.indexPathForSelectedRow else {
+                assertionFailure("cell not selected")
+                return
+            }
+            
+            let filter = viewModel?.filters[selectedIndex.row]
+            
+            detailsController.filter = filter
+            detailsController.isCustom = viewModel?.customGroup ?? false
         }
     }
     
@@ -182,17 +196,17 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case addFilterSection:
             showAddFilterDialog()
         case filtersSection:
-            if viewModel?.customGroup ?? false {
-                selectedIndex = indexPath.row
-                showCustomFilterInfoDialog()
-            }
-            else {
-                let cell = tableView.cellForRow(at: indexPath) as! FilterCell
-                if cell.enableSwitch.isEnabled {
-                    cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
-                    toggleEnableSwitch(cell.enableSwitch)
-                }
-            }
+            performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
+//                selectedIndex = indexPath.row
+//                showCustomFilterInfoDialog()
+//            }
+//            else {
+//                let cell = tableView.cellForRow(at: indexPath) as! FilterCell
+//                if cell.enableSwitch.isEnabled {
+//                    cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
+//                    toggleEnableSwitch(cell.enableSwitch)
+//                }
+//            }
             
         default:
             break

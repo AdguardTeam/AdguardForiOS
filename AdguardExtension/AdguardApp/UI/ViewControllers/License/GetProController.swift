@@ -213,7 +213,12 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     }
     
     private func loginFailure(error: NSError?) {
-        loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
+        if error?.domain == LoginService.loginErrorDomain && error?.code == LoginService.loginMaxComputersExceed {
+            loginCompleteWithMessage(message: ACLocalizedString("login_max_computers_exceed", nil))
+        }
+        else {
+            loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
+        }
     }
     
     private func premiumExpired() {

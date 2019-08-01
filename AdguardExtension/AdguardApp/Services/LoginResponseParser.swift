@@ -55,6 +55,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     // auth status values
     private let AUTH_SUCCESS = "SUCCESS"
     private let AUTH_BAD_CREDINTIALS = "BAD_CREDENTIALS"
+    private let AUTH_MAX_COMPUTERS_EXCEED = "MAX_COMPUTERS_EXCEED"
     
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
@@ -160,7 +161,16 @@ class LoginResponseParser: LoginResponseParserProtocol {
         if status == STATUS_RESPONSE_STATUS_ERROR {
             let licenseKeyStatus = (json["licenseKeyStatus"] as? String) ?? ""
             DDLogInfo("(LoginService) processStatusResponseJson error - status = ERROR licenseKeyStatus: \(licenseKeyStatus)")
-            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            
+            var error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
+            
+            if licenseKeyStatus == AUTH_BAD_CREDINTIALS {
+                error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            }
+            
+            if licenseKeyStatus == AUTH_MAX_COMPUTERS_EXCEED {
+                error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginMaxComputersExceed, userInfo: nil)
+            }
             return (false, nil, error)
         }
         

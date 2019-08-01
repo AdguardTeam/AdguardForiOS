@@ -364,3 +364,6 @@
 
 /* (LicenseController) format for trial period*/
 "trial_format" = "Free trial for %@";
+
+/* (GetProController) text of error alert*/
+"login_max_computers_exceed" = "maximum number of devices is exceeded";
