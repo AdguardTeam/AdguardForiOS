@@ -1,0 +1,20 @@
+/* Class = "UILabel"; text = "License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
+"5Xe-d5-8tj.text" = "Licence";
+
+/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
+"8KQ-Ga-zhs.text" = "Poděkování";
+
+/* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
+"KkR-EM-giI.text" = "Fórum";
+
+/* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
+"NVi-wQ-2Pn.text" = "Jak používat";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "Ywt-W9-axs"; */
+"Ywt-W9-axs.title" = "O aplikaci";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
+"ncc-Hk-ota.title" = "O aplikaci";
+
+/* Class = "UILabel"; text = "Site"; ObjectID = "xMf-b0-Cfp"; */
+"xMf-b0-Cfp.text" = "Stránka";
