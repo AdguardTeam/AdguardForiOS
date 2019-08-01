@@ -1,24 +1,20 @@
-
 /* Class = "UILabel"; text = "License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
-"5Xe-d5-8tj.text" = "License";
+"5Xe-d5-8tj.text" = "Licencia";
 
 /* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
-"8KQ-Ga-zhs.text" = "Acknowledgments";
+"8KQ-Ga-zhs.text" = "Poďakovanie";
 
 /* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
-"KkR-EM-giI.text" = "Forum";
+"KkR-EM-giI.text" = "Fórum";
 
 /* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "How to use";
+"NVi-wQ-2Pn.text" = "Ako používať";
 
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "Ywt-W9-axs"; */
-"Ywt-W9-axs.title" = "About";
-
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "cWy-pj-mdt"; */
-"cWy-pj-mdt.title" = " ";
+"Ywt-W9-axs.title" = "O programe";
 
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
-"ncc-Hk-ota.title" = "About";
+"ncc-Hk-ota.title" = "O AdGuard";
 
 /* Class = "UILabel"; text = "Site"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "Site";
+"xMf-b0-Cfp.text" = "Stránka";

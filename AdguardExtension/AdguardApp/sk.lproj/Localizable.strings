@@ -1,173 +1,170 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "An unexpected error occurred. Please contact the support team.";
+"support_unexpected_error" = "Objavila sa neočakávaná chyba. Kontaktujte prosím tím podpory.";
 
 /* (AEService) Service errors descriptions */
-"rule_converting_message" = "Attempted to convert rules to JSON before the service started.";
+"rule_converting_message" = "Došlo k pokusu premeniť pravidlá na JSON skôr, ako bola služba spustená.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Cannot convert rules. An unexpected error occurred. Please contact the support team.";
+"support_rule_converting_error" = "Pravidlá sa nedajú konvertovať. Objavila sa neočakávaná chyba. Kontaktujte prosím tím podpory.";
 
 /* (AEService) Service errors descriptions */
-"json_converting_error" = "Cannot initialize converter to JSON format.";
+"json_converting_error" = "Konvertor na formát JSON sa nedá inicializovať!";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
-"common_action_cancel" = "Cancel";
+"common_action_cancel" = "Zrušiť";
 
 /* (AEService) Service errors descriptions */
-"rule_converting_error" = "Cannot convert the filter rule. Rule text is invalid.";
+"rule_converting_error" = "Filtračné pravidlo sa nedá konvertovať. Text pravidla je neplatný.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Cannot convert the user filter rules.";
+"filter_rules_converting_error" = "Pravidlá používateľského filtra sa nedajú konvertovať.";
 
 
 /* Alert title. On error. */
-"common_error_title" = "Error";
+"common_error_title" = "Chyba";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
+"safari_filters_loading_error" = "Filtre nie je možné načítať do Safari. Preto Vaše posledné zmeny nebudú použité.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the whitelist, or change the set of used filters.";
+"load_to_safari_error" = "Filtre sa nedajú načítať do Safari. Skúste vymazať Vaše pravidlá a biel listinu, alebo zmeňte nastavenia použitých filtrov.";
 
 
 /* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Loading filters to Safari. Please do not turn off AdGuard. The process will take no more than 30 seconds.";
+"safari_filters_loading" = "Načítavajú sa filtre do Safari. Prosím nevypínajte AdGuard. Proces nezaberie viac ako 30 sekúnd.";
 
 
 /* NO Button caption in alert */
-"common_action_no" = "NO";
+"common_action_no" = "NIE";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (inverted)";
+"inverted_whitelist_title" = "Biela listina (invertovaná)";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Biela listina";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "User Filter";
+"user_filter_title" = "Používateľský filter";
 
 /* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
+"yandex_dns_family_name" = "Yandex DNS Rodina";
 
 /* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
+"yandex_dns_name" = "Yandex DNS Bezpečnosť";
 
 
 /* YES Button caption in alert */
-"common_action_yes" = "YES";
+"common_action_yes" = "ÁNO";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Protection is enabled";
+"protection_enabled_caption" = "Ochrana je zapnutá";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Protection is disabled";
+"protection_disabled_caption" = "Ochrana je vypnutá";
 
 /* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Failed to restore purchases ";
+"restore_purchases_failure" = "Obnova nákupov zlyhala";
 
 /* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Get PRO";
+"get_pro_button_title" = "Získať PRO";
 
 /* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Sign in";
+"action_login" = "Prihlásiť sa";
 
 /* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Sign in";
+"login_title" = "Prihlásiť sa";
 
 /* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Enter your email address and password";
+"login_message" = "Zadajte Vašu email adresu a heslo";
 
 /* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "Email address";
+"login_name" = "Email adresa";
 
 /* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Password";
+"login_password" = "Heslo";
 
 /* (AEUIGetProViewController) upgrade button title */
-"upgrade_button_title" = "Get subscription";
+"upgrade_button_title" = "Získať predplatné";
 
 /* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "The email/password you have entered is incorrect.";
+"wrong_login_credintals_message" = "Zadaná dvojica email/heslo nie je platná.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
-"premium_expired_message" = "Your Premium account has expired";
-
-/* (AEUIGetProViewController) title of the message that appears if the account has expired */
-"premium_expired_title" = "Attention";
+"premium_expired_message" = "Váš Premium účet vypršal";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "You have successfully logged in to your AdGuard account, but there are no license keys that allow you to activate the premium version.";
+"not_premium_message" = "Úspešne ste sa prihlásili do Vášho účtu AdGuard, ale nie sú k dispozícii žiadne licenčné kľúče, ktoré by Vám umožnili aktiváciu prémiovej verzie.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "You have successfully logged in to your AdGuard account! The premium version of AdGuard for iOS has been activated.";
+"login_success_message" = "Úspešne ste sa prihlásili do Vášho účtu AdGuard! Prémiová verzia programu AdGuard pre iOS bola aktivovaná.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "You have successfully logged in to your AdGuard account, but the license keys that allow you to activate the premium version have expired.";
+"login_premium_expired_message" = "Úspešne ste sa prihlásili do Vášho účtu AdGuard, ale všetky licenčné kľúče, ktoré by Vám umožnili aktiváciu prémiovej verzie, už vypršali.";
 
 /* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Try again";
+"action_retry_login" = "Skúste znova";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
-"restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
+"restore_purchases_failure_message" = "Pri pokuse o obnovu nákupu nastala chyba.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "The purchase has been restored! The premium version of AdGuard for iOS has been activated.";
+"restore_success_message" = "Nákup bol obnovený! Prémiová verzia AdGuard pre iOS bola aktivovaná.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
-"nothing_to_restore_message" = "No purchases to restore";
+"nothing_to_restore_message" = "Nedajú sa obnoviť žiadne nákupy";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "The purchase has been successfully completed! The premium version of AdGuard for iOS has been activated.";
+"purchase_success_message" = "Nákup bol úspešne dokončený! Prémiová verzia programu AdGuard pre iOS bola aktivovaná.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
-"purchase_failure_message" = "An error occurred while processing your purchase.";
+"purchase_failure_message" = "Počas spracovania nákupu sa vyskytla chyba.";
 
 /* (GroupsController) Custom filter group name */
-"custom_group_name" = "Custom";
+"custom_group_name" = "Vlastný";
 
 /* (GroupsController) ads filter group description */
-"ads_group_description" = "Ad blocking";
+"ads_group_description" = "Blokovanie reklamy";
 
 /* (GroupsController) social widgets filter group description */
-"social_group_description" = "Removing social widgets";
+"social_group_description" = "Odstránenie prvkov sociálnych sietí";
 
 /* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Annoyances";
+"annoyances_group_description" = "Obťažujúce reklamy";
 
 /* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Language-specific";
+"language_group_description" = "Jazykovo špecifické";
 
 /* (GroupsController) Security filter group description */
-"security_group_description" = "Premium only";
+"security_group_description" = "Len Premium";
 
 /* (GroupsController) Custom filter group description */
-"custom_group_description" = "Premium only";
+"custom_group_description" = "Len Premium";
 
 /* (GroupsController) Filter group filter count format */
-"filter_group_filters_count_format" = "Enabled filters: %d/%d";
+"filter_group_filters_count_format" = "Zapnutých filtrov: %d/%d";
 
 /* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Disabled";
+"filters_group_disabled" = "Vypnuté";
 
-"filter_date_format" = "Filters updated: %@";
+"filter_date_format" = "Filtre boli aktualizované: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Enter your custom rules here<br>Read this <a href=\"%@\">note about rule syntax</a>.";
+"blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
+"whitelist_text" = "Sem zadajte názvy domén. AdGuard vypne filtráciu na týchto webových stránkach v Safari";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
+"inverted_whitelist_text" = "Sem zadajte názvy domén. AdGuard zapne filtráciu len na týchto webových stránkach v Safari";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Scanning...";
+"update_filter_start_message" = "Skenovanie...";
 
 /* (UserFilterController) add blacklist rule button title */
-"add_blacklist_rule_title" = "Add a rule";
+"add_blacklist_rule_title" = "Pridať pravidlo";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Add a domain";
+"add_whitelist_domain_title" = "Pridať doménu";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -176,10 +173,10 @@
 "add_whitelist_domain_placeholder" = "example.org";
 
 /* (UserFilterController) add blacklist rule caption */
-"add_blacklist_rule_caption" = "Rule:";
+"add_blacklist_rule_caption" = "Pravidlo:";
 
 /* (UserFilterController) add whitelist domain caption */
-"add_whitelist_domain_caption" = "Domain:";
+"add_whitelist_domain_caption" = "Doména:";
 
 /* (UserFilterController) import whitelist button title */
 "import_whitelist_title" = "Import";
@@ -194,107 +191,107 @@
 "export_blacklist_title" = "Export";
 
 /* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "This rule was added to the user filter. ";
+"blacklist_rule_note" = "Toto pravidlo bolo pridané do používateľského filtra. ";
 
 /* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "This domain was added to the whitelist. AdGuard will not filter anything on this website.";
+"whitelist_rule_note" = "Táto doména bola pridaná do bielej listiny. AdGuard už nebude filtrovať nič na tejto stránke.";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Report Incorrect Blocking";
+"incorrect_blocking_report" = "Nahlásenie nesprávneho blokovania";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Report a bug on GitHub";
+"action_bug_report" = "Hlásenie chyby na GitHub";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contact Support";
+"action_contact_support" = "Kontaktovať podporu";
 
 /* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Export logs";
+"action_export_logs" = "Exportovať denníky";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Cannot send a bug report. You may not have set up an email on your device.";
+"bug_report_sending_error" = "Správa o chybe sa nedá odoslať, lebo pravdepodobne na Vašom zariadení nie je nastavený žiaden email.";
 
 /* (MainController) Error on check filter uspdates */
-"filter_updates_error" = "Filter update error";
+"filter_updates_error" = "Chyba aktualizácie filtra";
 
 /* (MainController) Message on main screen during update */
-"filters_noUpdates" = "No updates found";
+"filters_noUpdates" = "Neboli nájdené žiadne aktualizácie";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "filters updated: %lu ";
+"filters_updated_format" = "aktualizované filtre: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "version %@";
+"filter_version_format" = "verzia %@";
 
 /* (FiltersController) Filter update date format */
-"filter_last_update_format" = "updated %@";
+"filter_last_update_format" = "aktualizované %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Split-Tunnel, compatible with “Personal VPN” apps";
+"tunnel_mode_split_description" = "Delený tunel, kompatibilný s aplikáciami \"Personal VPN”";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel, incompatible with other VPN apps";
+"tunnel_mode_full_description" = "Plný tunel, nekompatibilný s inými VPN aplikáciami";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
+"tunnel_mode_full_without_icon_description" = "Plný tunel (bez ikony VPN), nekompatibilný s inými VPN aplikáciami, menej stabilný";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
+"adguard_dns_description" = "AdGuard DNS je alternatívny spôsob ochrany Vášho súkromia pred rôznymi počítadlami, analytickými systémami a podvodnými webovými stránkami";
 /* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch and adult content blocking";
+"adguard_family_dns_description" = "AdGuard DNS + bezpečné vyhľadávanie a blokovanie obsahu pre dospelých";
 /* Google DNS server description */
-"google_dns_description" = "Free alternative DNS service by Google";
+"google_dns_description" = "Bezplatná alternatíva služby DNS od Google";
 /* Open DNS server description */
-"open_dns_description" = "DNS server that protects your device from online threats";
+"open_dns_description" = "DNS server, ktorý ochraňuje Vaše zariadenie pred online hrozbami";
 /* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server with adult content blocking";
+"open_dns_familyshield_description" = "OpenDNS server s blokovaním obsahu pre dospelých";
 /* Quad9 DNS server description */
-"quad_nine_dns_description" = "Free alternative DNS service with protection from phishing and spyware";
+"quad_nine_dns_description" = "Bezplatná alternatívna služba DNS s ochranou pred podvodom a špehovaním";
 /* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Free DNS service by Cloudflare";
+"cloudflare_public_dns_description" = "Bezplatná DNS služba od Cloudflare";
 /* Safe DNS server description */
-"safe_dns_description" = "DNS service by SafeDNS";
+"safe_dns_description" = "DNS služba od SafeDNS";
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "Encryption";
+"dns_provider_encryption_tag" = "Šifrovanie";
 /* Dns Feature Name */
-"dns_provider_secure_tag" = "Security";
+"dns_provider_secure_tag" = "Bezpečnosť";
 /* Dns Feature Name */
-"dns_provider_adult_tag" = "Adult content blocking";
+"dns_provider_adult_tag" = "Blokovanie obsahu pre dospelých";
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "No logging policy";
+"dns_provider_no_logs_tag" = "Žiadne pravidlá protokolovania";
 /* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Safe Search";
+"dns_provider_safe_search_tag" = "Bezpečné vyhľadávanie";
 /* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Ad Blocking";
+"dns_provider_ad_blocking_tag" = "Blokovanie reklamy";
 /* Dns Feature description */
-"dns_provider_encryption_summary" = "Does not let third parties spy on your browsing activity";
+"dns_provider_encryption_summary" = "Nedovoľuje, aby tretie strany špehovali Vašu aktivitu prehliadania";
 /* Dns Feature description */
-"dns_provider_secure_summary" = "Blocks known phishing and other dangerous domains";
+"dns_provider_secure_summary" = "Blokuje známe podvodné domény";
 /* Dns Feature description */
-"dns_provider_adult_summary" = "Blocks websites with adult content";
+"dns_provider_adult_summary" = "Blokuje stránky s obsahom pre dospelých";
 /* Dns Feature description */
-"dns_provider_no_logs_summary" = "Does not store your DNS query logs";
+"dns_provider_no_logs_summary" = "Neuchováva denníky DNS dopytov";
 /* Dns Feature description */
-"dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
+"dns_provider_safe_search_summary" = "Keď je to možné, v prehliadačoch sa vynucuje bezpečné vyhľadávanie";
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocks ads and tracking servers";
+"dns_provider_ad_blocking_summary" = "Blokuje reklamy a sledovacie servery";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "A VPN will be created";
+"vpn_alert_title" = "Bude vytvorená VPN";
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN is required to set up custom DNS settings. The created VPN is local, which means your traffic will not be routed through any servers.";
+"vpn_alert_message" = "Ma nastavenie vlastných nastavení DNS sa vyžaduje VPN. Vytvorená VPN je lokálna, čo znamená, že Vaša prevádzka nebude smerovaná cez žiadne iné servery.";
 
 /* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "No server selected";
+"no_dns_server_selected" = "Nebol zvolený žiaden server";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "Enabled %1$d out of %2$d";
+"filters_description_format" = "Povolených  %1$d z %2$d";
 
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Copied to clipboard";
+"text_copied" = "Skopírované do pamäťovej schránky";
 
 /* DnsProviderDetailsController - regular dns protocol */
-"regular_dns_protocol" = "Regular";
+"regular_dns_protocol" = "Štandardný";
 
 /* DnsProviderDetailsController - dns crypt protocol */
 "dns_crypt_protocol" = "DNSCrypt";
@@ -306,82 +303,61 @@
 "dot_protocol" = "DNS-over-TLS";
 
 /* GetProController - confirm logout text */
-"confirm_logout_text" = "Are you sure you want to log out?";
+"confirm_logout_text" = "Naozaj sa chcete odhlásiť?";
 
 /* GetProController - subscription period day */
-"day_period" = "day";
+"day_period" = "deň";
 
 /* GetProController - subscription period week */
-"week_period" = "week";
+"week_period" = "týždeň";
 
 /* GetProController - subscription period month */
-"month_period" = "month";
+"month_period" = "mesiac";
 
 /* GetProController - subscription period year */
-"year_period" = "year";
+"year_period" = "rok";
 
 /* GetProController - subscription period year */
 "period_format" = "%1$d %2$@";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "There was a problem with VPN configuration, please contact our support team.";
+"support_vpn_configuration_problem" = "Vyskytol sa problém s konfiguráciou VPN, kontaktujte náš tím podpory.";
 
 /* login error message */
-"login_error_message" = "An error occurred while logging in";
+"login_error_message" = "Počas prihlasovania sa vyskytla chyba";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Premium is a paid annual service with subscription cost $2.99/year (price may vary by region). Payment will be charged to iTunes Account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period. Account will be charged for renewal within 24-hours prior to the end of the current period. Your subscriptions may be managed and your auto-renewal may be turned off by going to your iTunes Account Settings after purchasing a subscription.<br><br><a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
+"purchase_description_format" = "AdGuard Premium je platená ročná služba s predplateným 2,99 USD za rok (cena sa môže líšiť podľa regiónu). Platba bude účtovaná na účet iTunes pri potvrdení nákupu. Predplatné sa automaticky obnoví, pokiaľ nie je automatické obnovenie vypnuté aspoň 24 hodín pred koncom aktuálneho obdobia. Obnovenie predplatného bude účtované do 24 hodín pred koncom aktuálneho obdobia. Vaše odbery môžu byť spravované a Vaše automatické obnovenie môže byť vypnuté tak, že prejdete na nastavenia účtu iTunes po zakúpení predplatného.<br><br><a href=%1$@>Zásady ochrany osobných údajov</a> <br><br><a href=%2$@>Zmluvné podmienky</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"privacy_policy_action" = "Privacy Policy";
+"privacy_policy_action" = "Pravidlá ochrany súkromia";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_confirm_title" = "A VPN will be created";
+"vpn_confirm_title" = "Bude vytvorená VPN";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "VPN is required to set up custom DNS settings. The created VPN is local, which means your traffic will not be routed through any servers.\nWe do not collect any data when you use this VPN profile.";
+"vpn_confirm_message" = "Pre vlastné nastavenia DNS sa vyžaduje VPN. Vytvorená VPN je lokálna, čo znamená, že Vaša prevádzka nebude smerovaná cez žiadne servery.\nPri používaní VPN profilu nezhromažďujeme žiadne údaje.";
 
 /* this message is shown during the login on the license screen */
-"loading_message" = "Please wait...";
+"loading_message" = "Čakajte prosím…";
 
 /* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "I've just installed AdGuard AdBlocker for iOS.";
+"share_mail_body_text" = "Práve bol nainštalovaný AdGuard blokovač reklamy pre iOS.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "If you want to surf the web ad-free as I do, check it out:";
+"share_mail_body_subtext" = "Ak chcete surfovať bez reklám na webe, pozrite si toto:";
 
 /* (AdvancedSettingsController) "Theme" header view title*/
-"theme_header_title" = "Theme";
+"theme_header_title" = "Téma";
 
 /* (AdvancedSettingsController) "Other" header view title*/
-"other_header_title" = "Other";
+"other_header_title" = "Iné";
 
 /* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Advanced";
+"advanced_header_title" = "Pokročilé";
 
 /* (LicenseController) format for trial period*/
-"trial_format" = "Free trial for %@";
-
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Content blockers";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "General settings";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
-"enabled_current_state_label" = "%@ of 50 000 used";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
-"disabled_current_state_label" = "Disabled in Safari settings";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Checking for updates...";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
-"over_limit_current_state_label" = "%1$@ of 50 000 used %2$@ disabled";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
-"failed_updating_current_state_label" = "Filters weren’t updated";
+"trial_format" = "Bezplatná skúšobná verzia pre %@";

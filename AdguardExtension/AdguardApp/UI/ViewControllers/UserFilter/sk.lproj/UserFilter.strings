@@ -1,60 +1,50 @@
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "CANCEL";
+"5eU-q4-Xed.normalTitle" = "ZRUŠIŤ";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
-"8G3-AL-tRu.title" = "Cancel";
+"8G3-AL-tRu.title" = "Zrušiť";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
-"9th-UM-Uaj.normalTitle" = "Cancel";
+"9th-UM-Uaj.normalTitle" = "Zrušiť";
 
 /* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "The rule has been added to the user filter.";
+"BfI-YN-iXe.text" = "Pravidlo bolo pridané do používateľského filtra";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "SAVE";
+"Bvs-mI-vEr.normalTitle" = "ULOŽIŤ";
 
 /* Class = "UIButton"; normalTitle = "Select all"; ObjectID = "DLT-c2-7eC"; */
-"DLT-c2-7eC.normalTitle" = "Select all";
+"DLT-c2-7eC.normalTitle" = "Vybrať všetko";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
-"EH6-Zr-YRP.text" = "Edit";
-
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
-"HB0-zK-xj2.normalTitle" = "Save";
+"EH6-Zr-YRP.text" = "Upraviť";
 
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "HN7-vG-wig"; */
-"HN7-vG-wig.title" = "Item";
-
-/* Class = "UILabel"; text = "ENABLED"; ObjectID = "MDJ-Z7-xIE"; */
-"MDJ-Z7-xIE.text" = "ENABLED";
+"HN7-vG-wig.title" = "položka";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RgN-vL-2ju"; */
-"RgN-vL-2ju.normalTitle" = "Button";
+"RgN-vL-2ju.normalTitle" = "Tlačidlo";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "REMOVE";
+"Tei-uI-6Gr.normalTitle" = "ODSTRÁNIŤ";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "CANCEL";
+"U2P-9b-f6k.normalTitle" = "ZRUŠIŤ";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "Yym-ps-FzM"; */
-"Yym-ps-FzM.title" = "Title";
+"Yym-ps-FzM.title" = "Názov";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
-"c5a-s3-YPd.normalTitle" = "Select";
+"c5a-s3-YPd.normalTitle" = "Vybrať";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "ADD";
+"fCd-gA-rXS.normalTitle" = "PRIDAŤ";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
-"iuK-dC-RKf.normalTitle" = "Delete";
-
-/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
-"lE1-GD-Qr5.normalTitle" = "Edit";
+"iuK-dC-RKf.normalTitle" = "Vymazať";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
-"x7r-Ln-XiZ.text" = "Domain:";
+"x7r-Ln-XiZ.text" = "Doména:";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
 "zRm-I7-37E.normalTitle" = "OK";

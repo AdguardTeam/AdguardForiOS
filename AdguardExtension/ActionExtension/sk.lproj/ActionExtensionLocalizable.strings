@@ -1,62 +1,62 @@
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'Adguard icon' button */
-"accept_caption" = "Accept";
+"accept_caption" = "Akceptovať";
 
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "An unexpected error occurred. Please contact the support team.";
+"support_unexpected_error" = "Objavila sa neočakávaná chyba. Kontaktujte prosím tím podpory.";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "Before you can use this action extension, %1$@ has to perform an initial configuration. Launch the main %2$@ app to let it do so.";
+"action_extension_no_configuration_message_format" = "Predtým ako použijete toto rozšírenie akcie, %1$@ musí vykonať úvodnú konfiguráciu. Spustite hlavnú aplikáciu  %2$@ a nechajte ju to vykonať.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Cannot convert rules. An unexpected error occurred. Please contact the support team.";
+"support_rule_converting_error" = "Pravidlá sa nedajú konvertovať. Objavila sa neočakávaná chyba. Kontaktujte prosím tím podpory.";
 
 /* (AEService) Service errors descriptions */
-"json_converting_error" = "Cannot initialize converter to JSON format.";
+"json_converting_error" = "Konvertor na formát JSON sa nedá inicializovať!";
 
 /* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "Cannot send a message to the support team. You have not configured your email account yet.";
+"support_message_sending_error" = "Správa tímu podpory sa nedá odoslať, lebo ste doposiaľ nekonfigurovali žiaden email účet.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
-"common_action_cancel" = "Cancel";
+"common_action_cancel" = "Zrušiť";
 
 /* (AEService) Service errors descriptions */
-"rule_converting_error" = "Cannot convert the filter rule. Rule text is invalid.";
+"rule_converting_error" = "Filtračné pravidlo sa nedá konvertovať. Text pravidla je neplatný.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Cannot convert the user filter rules.";
+"filter_rules_converting_error" = "Pravidlá používateľského filtra sa nedajú konvertovať.";
 
 /* (Action Extension - AEAUIMainController) Label on switcher. Example: 'Enable filtering on www.github.com' */
-"enable_filtering_format" = "Enable filtering on %@";
+"enable_filtering_format" = "Zapnúť filtráciu na %@";
 
 /* Alert title. On error. */
-"common_error_title" = "Error";
+"common_error_title" = "Chyba";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
+"safari_filters_loading_error" = "Filtre nie je možné načítať do Safari. Preto Vaše posledné zmeny nebudú použité.";
 
 /* (Action Extension - AEAUIMainController) Mail body to support team about incorrect blocking */
-"incorrect_blocking_page_format" = "Incorrect blocking on page:\n%@";
+"incorrect_blocking_page_format" = "Nesprávne blokovanie na stránke:\n%@";
 
 /* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Loading filters to Safari. Please do not turn off AdGuard. The process will take no more than 30 seconds.";
+"safari_filters_loading" = "Načítavajú sa filtre do Safari. Prosím nevypínajte AdGuard. Proces nezaberie viac ako 30 sekúnd.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
-"content_blocker_disabled_format" = "Note that Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.";
+"content_blocker_disabled_format" = "Blokovač obsahu je zakázaný. To znamená, že reklamy nebudú filtrované bez ohľadu na nastavenia AdGuard. Ak chcete spustiť filtráciu, povoľte blokovanie obsahu AdGuard v nastaveniach Safari.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'eye icon' button */
-"preview_caption" = "Preview";
+"preview_caption" = "Náhľad";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "The hostname is not obtained. Perhaps the page has not been loaded yet.";
+"hostname_obtaining_error" = "Názov hostiteľa sa nezískal. Pravdepodobne stránka zatiaľ nebola načítaná.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
-"assistant_launching_unable" = "This website's security policy does not allow launching AdGuard Assistant.";
+"assistant_launching_unable" = "Bezpečnostná politika tejto webovej stránky neumožňuje spustenie nástroja AdGuard Assistant.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "An unexpected error occurred while initializing Safari action extension. Please contact AdGuard Support if this happens again.";
+"support_error_safari_extension" = "Počas inicializácie rozšírenia Safari sa vyskytla neočakávaná chyba. Ak sa to stane znova, obráťte sa na podporu služby AdGuard.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
-"common_warning_title" = "Warning";
+"common_warning_title" = "Varovanie";
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
-"filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
+"filter_rules_maximum" = "Prekročili ste maximálny počet pravidiel filtra.";

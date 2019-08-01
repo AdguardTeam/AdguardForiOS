@@ -1,57 +1,50 @@
-
 /* Class = "UILabel"; text = "Overwrite existing"; ObjectID = "0Qe-BO-Cvv"; Note = "(Add Custom Filter) overwrite checkbox hint"; */
-"0Qe-BO-Cvv.text" = "Overwrite existing";
+"0Qe-BO-Cvv.text" = "Prepísať existujúce";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
-"2wy-vg-qvr.text" = "Add a filter";
+"2wy-vg-qvr.text" = "Pridať filter";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
-"3WM-jW-br8.text" = "Add a filter";
+"3WM-jW-br8.text" = "Pridať filter";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dej-iC-mAk"; Note = "(CustomFilterInfoInfoController) cancel button"; */
-"Dej-iC-mAk.normalTitle" = "CANCEL";
+"Dej-iC-mAk.normalTitle" = "ZRUŠIŤ";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
-"E3e-Mc-RhD.title" = "Filters";
-
-/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
-"Fwl-LI-5Fu.placeholder" = "https://example.com";
+"E3e-Mc-RhD.title" = "Filtre";
 
 /* Class = "UILabel"; text = "Homepage:"; ObjectID = "N6y-E3-e9F"; Note = "(Edit Custom Filter) homapage caption"; */
-"N6y-E3-e9F.text" = "Homepage:";
+"N6y-E3-e9F.text" = "Domovská stránka:";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "CANCEL";
+"OpB-AR-Og7.normalTitle" = "ZRUŠIŤ";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Rules count: ";
-
-/* Class = "UIBarButtonItem"; title = " "; ObjectID = "YOj-83-cvG"; */
-"YOj-83-cvG.title" = " ";
+"RJU-32-r8h.text" = "Počet pravidiel: ";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Yyf-bK-igr"; */
-"Yyf-bK-igr.normalTitle" = "DELETE";
+"Yyf-bK-igr.normalTitle" = "VYMAZAŤ";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
-"Z16-OR-tjl.text" = "Filter URL:";
+"Z16-OR-tjl.text" = "URL adresa filtra:";
 
 /* Class = "UILabel"; text = "Your custom filters are here."; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Your custom filters are here.";
+"eAd-RZ-bHN.text" = "Vaše vlastné filtre sú tu.";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
-"kCb-lJ-BLL.normalTitle" = "ADD";
+"kCb-lJ-BLL.normalTitle" = "PRIDAŤ";
 
 /* Class = "UILabel"; text = "Homepage:"; ObjectID = "kU0-S1-WIL"; Note = "(New Custom Filter) homapage caption"; */
-"kU0-S1-WIL.text" = "Homepage:";
+"kU0-S1-WIL.text" = "Domovská stránka:";
 
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Get Premium";
+"lFg-x8-C9b.normalTitle" = "Získať verziu Premium";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "CANCEL";
+"mEm-ll-QZR.normalTitle" = "ZRUŠIŤ";
 
 /* Class = "UIButton"; normalTitle = "CONTINUE"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "CONTINUE";
+"nch-wu-mKC.normalTitle" = "POKRAČOVAŤ";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "tTY-kJ-YFX"; Note = "(Edit Custom Filter) rules count caption"; */
-"tTY-kJ-YFX.text" = "Rules count: ";
+"tTY-kJ-YFX.text" = "Počet pravidiel: ";
