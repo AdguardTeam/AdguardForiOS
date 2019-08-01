@@ -1,0 +1,69 @@
+
+/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
+"0Zf-Ng-gYi.title" = "AdGuard Premium";
+
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "DNS Privacy";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Logout";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
+"7Sy-Te-Eh3.text" = "You are subscribed";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "8Bh-Uf-UEr"; Note = "(AddCustomFilterController) cancel button"; */
+"8Bh-Uf-UEr.normalTitle" = "CANCEL";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "Set your own rules";
+
+/* Class = "UILabel"; text = "E-mail"; ObjectID = "Ahp-CV-z02"; */
+"Ahp-CV-z02.text" = "E-mail";
+
+/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
+"DEh-4x-Hnt.title" = "Sign in";
+
+/* Class = "UITextField"; placeholder = "Enter your e-mail here"; ObjectID = "K4d-TK-Ban"; Note = "(Add Custom Filter) url hint"; */
+"K4d-TK-Ban.placeholder" = "Enter your e-mail here";
+
+/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
+"K5r-9l-kKl.text" = "You have a license";
+
+/* Class = "UILabel"; text = "Permanent"; ObjectID = "RdJ-DN-f1l"; */
+"RdJ-DN-f1l.text" = "Permanent";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "Block phishing and other threats";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
+"UbO-jW-NNO.normalTitle" = "Upgrade";
+
+/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
+"ZMu-UP-PI3.text" = "Value your private data";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "eyq-0X-qrl"; */
+"eyq-0X-qrl.normalTitle" = "LOGIN";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Restore purchase";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "Security filters";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "Custom filters";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "vE7-wt-qaG"; */
+"vE7-wt-qaG.text" = "Login";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
+"wPC-tc-ETw.title" = "Login";
+
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "Check out our Premium features for free";

@@ -1,0 +1,48 @@
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "62j-Ib-Td5"; Note = "Main Menu header"; */
+"62j-Ib-Td5.title" = "Settings";
+
+/* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
+"6Z2-0N-PSp.text" = "Send feedback";
+
+/* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
+"Em7-2h-SKs.text" = "Help us make AdGuard better";
+
+/* Class = "UILabel"; text = "General settings"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "General settings";
+
+/* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
+"NQS-fl-oOe.text" = "What is AdGuard?";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Noy-Yh-fmr"; */
+"Noy-Yh-fmr.title" = " ";
+
+/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "VQi-XH-gdb"; */
+"VQi-XH-gdb.normalTitle" = "Get Premium";
+
+/* Class = "UILabel"; text = "Choose from a variety of filters"; ObjectID = "YRx-VR-yid"; */
+"YRx-VR-yid.text" = "Choose from a variety of filters";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
+"bEE-nS-r3u.title" = "Settings";
+
+/* Class = "UILabel"; text = "User filter"; ObjectID = "bVe-ys-rO9"; Note = "(MainMenuController) user filter caption"; */
+"bVe-ys-rO9.text" = "User filter";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "e0H-m9-qlc"; Note = "(Main Menu) filters caption"; */
+"e0H-m9-qlc.text" = "Filters";
+
+/* Class = "UILabel"; text = "The list of websites you trust"; ObjectID = "f0z-YA-nbz"; */
+"f0z-YA-nbz.text" = "The list of websites you trust";
+
+/* Class = "UILabel"; text = "DNS privacy"; ObjectID = "lbr-3S-fZX"; */
+"lbr-3S-fZX.text" = "DNS privacy";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
+"x8F-Jr-rGi.text" = "About";
+
+/* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
+"xb2-Gf-9h7.text" = "Other settings";
+
+/* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
+"zO5-hl-j78.text" = "Contains custom filtering rules";
