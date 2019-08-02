@@ -93,6 +93,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.text = group.name
         label.textAlignment = .left
+        label.greyText = true
         theme.setupLabel(label)
             
         view.addSubview(label)
