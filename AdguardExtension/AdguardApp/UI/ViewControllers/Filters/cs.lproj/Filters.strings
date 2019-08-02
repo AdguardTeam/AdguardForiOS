@@ -1,0 +1,50 @@
+/* Class = "UILabel"; text = "Overwrite existing"; ObjectID = "0Qe-BO-Cvv"; Note = "(Add Custom Filter) overwrite checkbox hint"; */
+"0Qe-BO-Cvv.text" = "Přepsat existující";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
+"2wy-vg-qvr.text" = "Přidat filtr";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
+"3WM-jW-br8.text" = "Přidat filtr";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dej-iC-mAk"; Note = "(CustomFilterInfoInfoController) cancel button"; */
+"Dej-iC-mAk.normalTitle" = "ZRUŠIT";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
+"E3e-Mc-RhD.title" = "Filtry";
+
+/* Class = "UILabel"; text = "Homepage:"; ObjectID = "N6y-E3-e9F"; Note = "(Edit Custom Filter) homapage caption"; */
+"N6y-E3-e9F.text" = "Domovská stránka:";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "ZRUŠIT";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Počet pravidel: ";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Yyf-bK-igr"; */
+"Yyf-bK-igr.normalTitle" = "VYMAZAT";
+
+/* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
+"Z16-OR-tjl.text" = "URL filtru:";
+
+/* Class = "UILabel"; text = "Your custom filters are here."; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Zde jsou vaše vlastní filtry.";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "PŘIDAT";
+
+/* Class = "UILabel"; text = "Homepage:"; ObjectID = "kU0-S1-WIL"; Note = "(New Custom Filter) homapage caption"; */
+"kU0-S1-WIL.text" = "Domovská stránka:";
+
+/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
+"lFg-x8-C9b.normalTitle" = "Získat verzi Premium";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "ZRUŠIT";
+
+/* Class = "UIButton"; normalTitle = "CONTINUE"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "POKRAČOVAT";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "tTY-kJ-YFX"; Note = "(Edit Custom Filter) rules count caption"; */
+"tTY-kJ-YFX.text" = "Počet pravidel: ";

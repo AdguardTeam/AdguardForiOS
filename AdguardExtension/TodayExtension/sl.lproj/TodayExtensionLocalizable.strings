@@ -1,0 +1,11 @@
+/* Today widget - text when remote DNS is enabled */
+"connected_to_server_format" = "Povezan z \"%@\"";
+
+/* Today widget - text when remote DNS is disabled */
+"dns_filtering_disabled" = "Filtriranje DNS je onemogočeno";
+
+/* Today widget - hint text */
+"disable_dns_filtering" = "Dotaknite se, da onemogočite filtriranje DNS";
+
+/* Today widget - hint text */
+"enable_dns_filtering" = "Dotaknite se, da omogočite filtriranje DNS";
