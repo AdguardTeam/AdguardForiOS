@@ -21,7 +21,7 @@ import UIKit
 
 
 // MARK: - FiltersController
-class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, CustomFilterInfoInfoDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
+class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersViewModelProtocol?
     
@@ -270,14 +270,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         return CustomAnimatedTransitioning()
     }
     
-    // MARK: - FilterInfo delegate methods
-    
-    func deleteFilter(filter: Filter) {
-        viewModel?.deleteCustomFilter(filter: filter, completion: { (succes) in
-            self.tableView.reloadData()
-        })
-    }
-    
     // MARK: - NewCustomFilter delegate
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
         viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in
@@ -328,16 +320,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         controller.transitioningDelegate = self
         
         (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func showCustomFilterInfoDialog() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "CustomFilterInfoController") as? CustomFilterInfoInfoController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        controller.filter = viewModel?.filters[selectedIndex!]
-        controller.delegate = self
         
         present(controller, animated: true, completion: nil)
     }
