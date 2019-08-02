@@ -197,17 +197,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             showAddFilterDialog()
         case filtersSection:
             performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
-//                selectedIndex = indexPath.row
-//                showCustomFilterInfoDialog()
-//            }
-//            else {
-//                let cell = tableView.cellForRow(at: indexPath) as! FilterCell
-//                if cell.enableSwitch.isEnabled {
-//                    cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
-//                    toggleEnableSwitch(cell.enableSwitch)
-//                }
-//            }
-            
         default:
             break
         }
