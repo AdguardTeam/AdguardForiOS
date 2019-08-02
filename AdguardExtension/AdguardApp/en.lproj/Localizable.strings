@@ -161,6 +161,7 @@
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
 
 /* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Updating...";
 "update_filter_start_message" = "Scanning...";
 
 /* (UserFilterController) add blacklist rule button title */
@@ -365,5 +366,23 @@
 /* (LicenseController) format for trial period*/
 "trial_format" = "Free trial for %@";
 
-/* (GetProController) text of error alert*/
-"login_max_computers_exceed" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Content blockers";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "General settings";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_state_label" = "%@ of 50 000 used";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Disabled in Safari settings";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Checking for updates...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "%1$@ of 50 000 used %2$@ disabled";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filters have not been updated";

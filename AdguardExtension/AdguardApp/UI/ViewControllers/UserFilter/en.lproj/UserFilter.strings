@@ -19,8 +19,14 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Edit";
 
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
+"HB0-zK-xj2.normalTitle" = "Save";
+
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "HN7-vG-wig"; */
 "HN7-vG-wig.title" = "Item";
+
+/* Class = "UILabel"; text = "ENABLED"; ObjectID = "MDJ-Z7-xIE"; */
+"MDJ-Z7-xIE.text" = "ENABLED";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RgN-vL-2ju"; */
 "RgN-vL-2ju.normalTitle" = "Button";
@@ -31,9 +37,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "CANCEL";
 
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Yym-ps-FzM"; */
-"Yym-ps-FzM.title" = "Title";
-
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
 "c5a-s3-YPd.normalTitle" = "Select";
 
@@ -42,6 +45,9 @@
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
 "iuK-dC-RKf.normalTitle" = "Delete";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
+"lE1-GD-Qr5.normalTitle" = "Edit";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";

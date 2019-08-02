@@ -28,6 +28,9 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "You have a license";
 
+/* Class = "UILabel"; text = "Permanent"; ObjectID = "RdJ-DN-f1l"; */
+"RdJ-DN-f1l.text" = "Permanent";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
 
@@ -60,3 +63,6 @@
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
 "wPC-tc-ETw.title" = "Login";
+
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "Check out our Premium features for free";

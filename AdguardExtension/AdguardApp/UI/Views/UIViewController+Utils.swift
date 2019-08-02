@@ -41,4 +41,8 @@ extension UIViewController {
             }
         }
     }
+    
+    func setupBackButton() {
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .done, target: nil, action: nil)
+    }
 }

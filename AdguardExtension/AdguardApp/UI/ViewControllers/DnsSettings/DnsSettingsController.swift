@@ -62,7 +62,7 @@ class DnsSettingsController : UITableViewController{
         }
         
         self.updateUI()
-        
+        setupBackButton()
         updateTheme()
     }
     

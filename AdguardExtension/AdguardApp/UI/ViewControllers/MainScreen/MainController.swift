@@ -102,6 +102,7 @@ class MainController: UIViewController {
         configuration.checkContentBlockerEnabled()
         
         viewModel = MainViewModel(antibanner: aeService.antibanner())
+        setupBackButton()
         
         self.updateUI()
     }
@@ -212,26 +213,12 @@ class MainController: UIViewController {
     // MARK: - private methods
     private func updateStarted(){
         self.updateFiltersGestureRecognizer.isEnabled = false
-        self.rotateRefreshIcon(isNedeed: true)
+        refreshIcon.rotateImage(isNedeed: true)
     }
     
     private func updateEnded(){
         self.updateFiltersGestureRecognizer.isEnabled = true
-        self.rotateRefreshIcon(isNedeed: false)
-    }
-    
-    private func rotateRefreshIcon(isNedeed: Bool){
-        switch isNedeed {
-        case true:
-            let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-            rotationAnimation.toValue = NSNumber(value: .pi * 2.0)
-            rotationAnimation.duration = 0.9;
-            rotationAnimation.isCumulative = true;
-            rotationAnimation.repeatCount = .infinity;
-            self.refreshIcon.layer.add(rotationAnimation, forKey: "rotationAnimation")
-        default:
-            self.refreshIcon.layer.removeAnimation(forKey: "rotationAnimation")
-        }
+        refreshIcon.rotateImage(isNedeed: false)
     }
     
     private func updateUI() {

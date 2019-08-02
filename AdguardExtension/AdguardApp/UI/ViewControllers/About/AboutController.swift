@@ -40,6 +40,7 @@ class AboutController : UIViewController {
         }
         
         versionLabel.text = ADProductInfo.versionWithBuildNumber()
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
