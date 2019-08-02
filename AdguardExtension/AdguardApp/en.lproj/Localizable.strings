@@ -366,4 +366,4 @@
 "trial_format" = "Free trial for %@";
 
 /* (GetProController) text of error alert*/
-"login_max_computers_exceed" = "maximum number of devices is exceeded";
+"login_max_computers_exceed" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
