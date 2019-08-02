@@ -263,11 +263,11 @@ class FiltersViewModel: FiltersViewModelProtocol {
     
     private func heighlightTags(_ tags: Set<String>) {
         for filter in allFilters {
-            for i in 0..<filter.tags!.count {
+            for i in 0..<(filter.tags?.count ?? 0) {
                 filter.tags![i].heighlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
             }
             
-            for i in 0..<filter.langs!.count {
+            for i in 0..<(filter.langs?.count ?? 0) {
                 filter.langs![i].heighlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
             }
         }
