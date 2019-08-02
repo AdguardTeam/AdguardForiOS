@@ -20,24 +20,60 @@ import Foundation
 
 class BottomAlertController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var contentView: RoundrectView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var contentViewHeightLayoutConstraint: NSLayoutConstraint?
     
     private var statusBarHeight: CGFloat {
         return UIApplication.shared.statusBarFrame.height
     }
-    private var initialHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialHeight = contentViewHeightLayoutConstraint?.constant ?? 0
+        layoutSubviews()
         contentView.layer.masksToBounds = true
+        
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               selector: #selector(keyboardNotification(notification:)),
                                                name:
             UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func layoutSubviews() {
+        
+        let corners: CACornerMask = [ .layerMinXMinYCorner, .layerMaxXMinYCorner]
+        let radius: CGFloat = 10.0
+        if #available(iOS 11, *) {
+            contentView.layer.cornerRadius = radius
+            
+            contentView.layer.maskedCorners = corners
+        } else {
+            var cornerMask = UIRectCorner()
+            if(corners.contains(.layerMinXMinYCorner)){
+                cornerMask.insert(.topLeft)
+            }
+            if(corners.contains(.layerMaxXMinYCorner)){
+                cornerMask.insert(.topRight)
+            }
+            if(corners.contains(.layerMinXMaxYCorner)){
+                cornerMask.insert(.bottomLeft)
+            }
+            if(corners.contains(.layerMaxXMaxYCorner)){
+                cornerMask.insert(.bottomRight)
+            }
+            let path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: cornerMask, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            contentView.layer.mask = mask
+        }
+        
+        contentView.layer.cornerRadius = 10
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        contentView.layer.shadowRadius = 3
+        contentView.layer.shadowOpacity = 1
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,58 +87,26 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardNotification(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            
+        let keyboardHeight = keyboardFrame.height
+        keyboardHeightLayoutConstraint.constant = keyboardHeight
         
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let endFrameY = endFrame?.origin.y ?? 0
-            let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            let keyboardHeight = endFrame?.height
-            var bottomSafeArea: CGFloat
-           
-            if #available(iOS 11.0, *) {
-                bottomSafeArea = view.safeAreaInsets.bottom
-            } else {
-                bottomSafeArea = bottomLayoutGuide.length
-            }
-            
-            var bottomConstraint: CGFloat
-            if endFrameY >= UIScreen.main.bounds.size.height {
-                bottomConstraint = -34
-            } else {
-                calculateContentViewHeight(keyboardHeight: keyboardHeight ?? 0)
-                bottomConstraint = bottomSafeArea > 0 ? (endFrame?.size.height ?? 0.0) - 68 :
-                                                        (endFrame?.size.height ?? 0.0) - 34
-            }
-            
-            // during rotations, we get one extra message with the wrong coordinates. Skip it
-            if self.view.frame.size.width == endFrame?.width {
-                calculateContentViewHeight(keyboardHeight: keyboardHeight ?? 0)
-                self.keyboardHeightLayoutConstraint?.constant = bottomConstraint
-            }
-            
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
-        }
+        UIView.animate(withDuration: 0.5,
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        keyboardHeightLayoutConstraint.constant = 0.0
+        UIView.animate(withDuration: 0.5,
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-    }
-    
-    private func calculateContentViewHeight(keyboardHeight: CGFloat){
-        guard let calculatedHeight = contentViewHeightLayoutConstraint else {
-            return
-        }
-        let height = self.view.frame.height
-        let calculatedContentViewHeight = height - keyboardHeight - statusBarHeight
-        calculatedHeight.constant = calculatedContentViewHeight < initialHeight ? calculatedContentViewHeight : initialHeight
     }
 }

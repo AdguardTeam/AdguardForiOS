@@ -40,6 +40,8 @@ class CustomFilterInfoInfoController: UIViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
+    @IBOutlet weak var hideHomePageConstraint: NSLayoutConstraint!
+    
     
     // MARK: - view controller methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,9 +65,11 @@ class CustomFilterInfoInfoController: UIViewController {
         rulesCount.text = "\(filter?.rulesCount ?? 0)"
         
         if let homepageUrl = filter?.homepage, homepageUrl.count > 0 {
+            hideHomePageConstraint.constant = 52.0
             homepage.text = homepageUrl
         }
         else {
+            hideHomePageConstraint.constant = 23.0
             homepage.isHidden = true
             homepageCaption.isHidden = true
         }

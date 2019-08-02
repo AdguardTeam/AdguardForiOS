@@ -75,9 +75,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
         navigationItem.title = viewModel?.group.name
-        if viewModel?.customGroup ?? false {
-            tableView.tableHeaderView = headerView
-        }
         
         setupBackButton()
     }
@@ -118,9 +115,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         switch indexPath.section {
         case groupSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
-            cell.nameLabel.text = viewModel?.group.name
-            cell.descriptionLabel.text = viewModel?.group.subtitle
-            cell.icon.image = UIImage(named: viewModel?.group.iconName ?? "")
             
             let enabled = viewModel?.group.enabled ?? false
             if cell.enabledSwitch.isOn != enabled {
@@ -129,7 +123,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
             cell.enabledSwitch.addTarget(self, action: #selector(toogleGroupEnable(_:)), for: .valueChanged)
             
-            theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
             theme.setupSwitch(cell.enabledSwitch)
             cell.separator.backgroundColor = theme.separatorColor
@@ -159,6 +152,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             cell.enableSwitch.tag  = indexPath.row
             cell.enableSwitch.isOn = filter?.enabled ?? false
             cell.homepageButton.tag = indexPath.row
+            cell.homepageButton.isHidden = viewModel?.customGroup ?? true ? true : false
 
             
             let groupEnabled = viewModel?.group.enabled ?? false
@@ -210,6 +204,20 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if !(viewModel?.customGroup ?? false) {
+            return nil
+        }
+        return section == addFilterSection ? headerView : nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !(viewModel?.customGroup ?? false) {
+            return 0.0
+        }
+        return section == addFilterSection ? 72.0 : 0.0
     }
     
     // MARK: - Actions
