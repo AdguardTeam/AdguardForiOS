@@ -32,12 +32,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let newFilterCellId = "newCustomFilterReuseID"
     private let filterCellId = "filterCellID"
     private let groupCellId = "GroupCellReuseID"
-<<<<<<< HEAD
-=======
-    private let tagCellId = "tagCellId"
-    private let langCellId = "langCellId"
+
     private let showFilterDetailsSegue = "showFilterDetailsSegue"
->>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
+
     
     private var selectedIndex: Int?
     
@@ -171,22 +168,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             // Cell setup
             cell.filterTagsView.delegate = self
             
-<<<<<<< HEAD
             cell.filter = filter
             cell.group = group
             cell.enableSwitch.row = indexPath.row
-=======
-            cell.name.text = filter?.name ?? ""
-            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            cell.updateDate.text = String(format: ACLocalizedString("filter_last_update_format", nil), dateString)
-            
-            if let version = filter?.version {
-                cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)
-            }
 
-            cell.enableSwitch.tag  = indexPath.row
-            cell.enableSwitch.isOn = filter?.enabled ?? false
->>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
             cell.homepageButton.tag = indexPath.row
             
             theme.setupLabels(cell.themableLabels)
@@ -277,7 +262,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         return CustomAnimatedTransitioning()
     }
     
-<<<<<<< HEAD
     // MARK: - FilterInfo delegate methods
     
     func deleteFilter(filter: Filter) {
@@ -285,9 +269,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             self?.tableView.reloadData()
         })
     }
-    
-=======
->>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
+
     // MARK: - NewCustomFilter delegate
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
         viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in

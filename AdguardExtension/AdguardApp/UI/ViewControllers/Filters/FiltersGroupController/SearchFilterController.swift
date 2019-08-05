@@ -18,7 +18,7 @@
 
 import UIKit
 
-class SearchFilterController: UITableViewController, UISearchBarDelegate, TagButtonTappedDelegate, UIViewControllerTransitioningDelegate, CustomFilterInfoInfoDelegate, FilterMasterControllerDelegate {
+class SearchFilterController: UITableViewController, UISearchBarDelegate, TagButtonTappedDelegate, UIViewControllerTransitioningDelegate, FilterMasterControllerDelegate {
     
 
     @IBOutlet var searchView: UIView!
@@ -28,6 +28,9 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     var viewModel: FilterGroupViewModelProtocol? = nil
     
     private let filterCellId = "filterCellID"
+    private let showFilterDetailsSegue = "showFilterDetails"
+    
+    private var selectedFilter: (section: Int, row: Int) = (0,0)
     
     // MARK: - View Controller life cycle
     
@@ -119,17 +122,9 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let group = viewModel?.groups?[indexPath.section] else { return }
-        if group.groupId == FilterGroupId.custom {
-            let selectedRow = indexPath.row
-            showCustomFilterInfoDialog(for: selectedRow)
-        } else {
-            let cell = tableView.cellForRow(at: indexPath) as! FilterCell
-            if cell.enableSwitch.isEnabled {
-                cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
-                toggleEnableSwitch(cell.enableSwitch)
-            }
-        }
+        selectedFilter = (indexPath.section, indexPath.row)
+        performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -197,16 +192,17 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         viewModel?.switchTag(name: sender.name ?? "")
     }
     
-    private func showCustomFilterInfoDialog(for filterIndex: Int) {
-        guard let group = viewModel?.groups?.filter({ $0.groupId == FilterGroupId.custom }).first else { return }
-        let filters = group.filters
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "CustomFilterInfoController") as? CustomFilterInfoInfoController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        controller.filter = filters[filterIndex]
-        controller.delegate = self
-            
-        present(controller, animated: true, completion: nil)
+    // MARK: - prepare for segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showFilterDetailsSegue{
+            if let destinationVC = segue.destination as? FilterDetailsController {
+                guard let group = viewModel?.groups?[selectedFilter.section] else { return }
+                let filter = group.filters[selectedFilter.row]
+                destinationVC.filter = filter
+                destinationVC.isCustom = group.groupId == FilterGroupId.custom ? true : false
+            }
+        }
     }
 }
 
