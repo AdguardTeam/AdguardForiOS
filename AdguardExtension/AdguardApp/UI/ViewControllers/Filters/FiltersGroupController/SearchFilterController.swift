@@ -25,17 +25,11 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     @IBOutlet weak var searchBar: UISearchBar!
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private var viewModel: FilterGroupViewModelProtocol
+    var viewModel: FilterGroupViewModelProtocol? = nil
     
     private let filterCellId = "filterCellID"
     
     // MARK: - View Controller life cycle
-    
-    required init?(coder aDecoder: NSCoder) {
-        viewModel = FilterGroupViewModel(filtersService: filtersService)
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +44,13 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         
         self.searchBar.delegate = self
 
-        viewModel.filtersChangedCallback = { [weak self] in
+        viewModel?.filtersChangedCallback = { [weak self] in
             self?.tableView.reloadData()
             if self?.tableView.numberOfSections ?? 0 > 0 {
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
             self?.tableView.setContentOffset(.zero, animated: false)
-            self?.searchBar.text = self?.viewModel.searchString
+            self?.searchBar.text = self?.viewModel?.searchString
         }
     }
     
@@ -67,22 +61,22 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel.cancelSearch()
+        viewModel?.cancelSearch()
     }
 
     // MARK: -Table View Delegate and Data Source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.groups?.count ?? 0
+        return viewModel?.groups?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.groups?[section].filters.count ?? 0
+        return viewModel?.groups?[section].filters.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let group = viewModel.groups?[section] else { return UIView() }
+        guard let group = viewModel?.groups?[section] else { return UIView() }
         let height: CGFloat = 72.0
         let width: CGFloat = self.view.frame.width
         
@@ -106,7 +100,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
-        guard let group = viewModel.groups?[indexPath.section] else { return UITableViewCell() }
+        guard let group = viewModel?.groups?[indexPath.section] else { return UITableViewCell() }
         let filters = group.filters
         let filter = filters[indexPath.row]
         
@@ -125,7 +119,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let group = viewModel.groups?[indexPath.section] else { return }
+        guard let group = viewModel?.groups?[indexPath.section] else { return }
         if group.groupId == FilterGroupId.custom {
             let selectedRow = indexPath.row
             showCustomFilterInfoDialog(for: selectedRow)
@@ -143,9 +137,9 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
-            viewModel.cancelSearch()
+            viewModel?.cancelSearch()
         }
-        viewModel.searchFilter(query: searchBar.text ?? "")
+        viewModel?.searchFilter(query: searchBar.text ?? "")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -155,7 +149,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     // MARK: - Custom filter info delegate methods
     
     func deleteFilter(filter: Filter) {
-        viewModel.deleteCustomFilter(filter: filter, completion: {[weak self] (succes) in
+        viewModel?.deleteCustomFilter(filter: filter, completion: {[weak self] (succes) in
             self?.tableView.reloadData()
         })
     }
@@ -163,7 +157,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     // MARK: - Master view controller delegate
     
     func cancelButtonTapped() {
-        viewModel.cancelSearch()
+        viewModel?.cancelSearch()
     }
     
     func searchButtonTapped() {
@@ -177,8 +171,8 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         guard let row = sender.row else { return }
         guard let section = sender.section else { return }
         
-        guard let filter = viewModel.groups?[section].filters[row] else { return }
-        viewModel.setFilter(filter: filter, enabled: sender.isOn)
+        guard let filter = viewModel?.groups?[section].filters[row] else { return }
+        viewModel?.set(filter: filter, enabled: sender.isOn)
         
         tableView.beginUpdates()
         tableView.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
@@ -200,11 +194,11 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     func tagButtonTapped(_ sender: TagButton) {
-        viewModel.switchTag(name: sender.name ?? "")
+        viewModel?.switchTag(name: sender.name ?? "")
     }
     
     private func showCustomFilterInfoDialog(for filterIndex: Int) {
-        guard let group = viewModel.groups?.filter({ $0.groupId == FilterGroupId.custom }).first else { return }
+        guard let group = viewModel?.groups?.filter({ $0.groupId == FilterGroupId.custom }).first else { return }
         let filters = group.filters
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "CustomFilterInfoController") as? CustomFilterInfoInfoController else { return }
         controller.modalPresentationStyle = .custom

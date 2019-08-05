@@ -27,9 +27,12 @@ class FiltersMasterController: UIViewController {
     
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+
+    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     weak var delegate: FilterMasterControllerDelegate?
     private let searchFiltersSegue = "searchFilterSegue"
+    private let groupsControllerSegue = "groupsControllerSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +65,17 @@ class FiltersMasterController: UIViewController {
     //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let helper: IFiltersAndGroupsViewModelHelper = FiltersAndGroupsViewModelHelper()
+        let viewModel: FilterGroupViewModelProtocol = FilterGroupViewModel(filtersService: filtersService, helper: helper)
+        
         if segue.identifier == searchFiltersSegue {
             if let destinationVC = segue.destination as? SearchFilterController{
                 delegate = destinationVC
+                destinationVC.viewModel = viewModel
+            }
+        } else if segue.identifier == groupsControllerSegue {
+            if let destinationVC = segue.destination as? GroupsController{
+                destinationVC.viewModel = viewModel
             }
         }
     }
