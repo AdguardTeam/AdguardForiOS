@@ -186,6 +186,8 @@
 		D031A18E219F0811002C17D9 /* DDLoggerNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoggerNames.m; sourceTree = "<group>"; };
 		D067D8CD213EC8A900ECDE6D /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
+		D070CAAC22F489910061D9FC /* schema0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
+		D070CAAD22F489910061D9FC /* update0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -516,6 +518,8 @@
 				659C60D31B8B50200081EBE3 /* schema.sql */,
 				65D59F8C1BC2FBBB00E7B8BF /* schema0.100.sql */,
 				65D59F8E1BC2FE5700E7B8BF /* update0.100.sql */,
+				D070CAAC22F489910061D9FC /* schema0.102.sql */,
+				D070CAAD22F489910061D9FC /* update0.102.sql */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
