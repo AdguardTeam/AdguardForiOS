@@ -166,18 +166,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let APP_NAME_PARAM = "app_name"
     private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
     
-    // license status
-    private let LICENSE_STATUS_NOT_EXISTS = "NOT_EXISTS"
-    private let LICENSE_STATUS_EXPIRED = "EXPIRED"
-    private let LICENSE_STATUS_MAX_COMPUTERS_EXCEED = "MAX_COMPUTERS_EXCEED"
-    private let LICENSE_STATUS_BLOCKED = "BLOCKED"
-    private let LICENSE_STATUS_VALID = "VALID"
-    
-    // subscription status
-    private let SUBSCRIPTION_STATUS_ACTIVE = "ACTIVE"
-    private let SUBSCRIPTION_STATUS_PAST_DUE = "PAST_DUE"
-    private let SUBSCRIPTION_STATUS_DELETED = "DELETED"
-    
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
     private let PREMIUM_STATUS_FREE = "FREE"

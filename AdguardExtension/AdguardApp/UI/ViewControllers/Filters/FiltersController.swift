@@ -21,7 +21,7 @@ import UIKit
 
 
 // MARK: - FiltersController
-class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, CustomFilterInfoInfoDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
+class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersViewModelProtocol?
     
@@ -32,6 +32,12 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let newFilterCellId = "newCustomFilterReuseID"
     private let filterCellId = "filterCellID"
     private let groupCellId = "GroupCellReuseID"
+<<<<<<< HEAD
+=======
+    private let tagCellId = "tagCellId"
+    private let langCellId = "langCellId"
+    private let showFilterDetailsSegue = "showFilterDetailsSegue"
+>>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
     
     private var selectedIndex: Int?
     
@@ -91,8 +97,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddCustomFilterSegue" {
+        if segue.identifier == showFilterDetailsSegue {
             
+            guard let detailsController = segue.destination as? FilterDetailsController else {
+                assertionFailure("unexpected destination controller")
+                return
+            }
+            guard let selectedIndex = tableView.indexPathForSelectedRow else {
+                assertionFailure("cell not selected")
+                return
+            }
+            
+            let filter = viewModel?.filters[selectedIndex.row]
+            
+            detailsController.filter = filter
+            detailsController.isCustom = viewModel?.customGroup ?? false
         }
     }
     
@@ -152,9 +171,22 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             // Cell setup
             cell.filterTagsView.delegate = self
             
+<<<<<<< HEAD
             cell.filter = filter
             cell.group = group
             cell.enableSwitch.row = indexPath.row
+=======
+            cell.name.text = filter?.name ?? ""
+            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
+            cell.updateDate.text = String(format: ACLocalizedString("filter_last_update_format", nil), dateString)
+            
+            if let version = filter?.version {
+                cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)
+            }
+
+            cell.enableSwitch.tag  = indexPath.row
+            cell.enableSwitch.isOn = filter?.enabled ?? false
+>>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
             cell.homepageButton.tag = indexPath.row
             
             theme.setupLabels(cell.themableLabels)
@@ -175,18 +207,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case addFilterSection:
             showAddFilterDialog()
         case filtersSection:
-            if viewModel?.customGroup ?? false {
-                selectedIndex = indexPath.row
-                showCustomFilterInfoDialog()
-            }
-            else {
-                let cell = tableView.cellForRow(at: indexPath) as! FilterCell
-                if cell.enableSwitch.isEnabled {
-                    cell.enableSwitch.setOn(!cell.enableSwitch.isOn, animated: true)
-                    toggleEnableSwitch(cell.enableSwitch)
-                }
-            }
-            
+            performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
         default:
             break
         }
@@ -256,6 +277,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         return CustomAnimatedTransitioning()
     }
     
+<<<<<<< HEAD
     // MARK: - FilterInfo delegate methods
     
     func deleteFilter(filter: Filter) {
@@ -264,6 +286,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         })
     }
     
+=======
+>>>>>>> a3c65ed2f0823439ec90a0c3ad2402e2b29a7cf0
     // MARK: - NewCustomFilter delegate
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
         viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in
@@ -311,16 +335,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         controller.transitioningDelegate = self
         
         (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func showCustomFilterInfoDialog() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "CustomFilterInfoController") as? CustomFilterInfoInfoController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        controller.filter = viewModel?.filters[selectedIndex!]
-        controller.delegate = self
         
         present(controller, animated: true, completion: nil)
     }

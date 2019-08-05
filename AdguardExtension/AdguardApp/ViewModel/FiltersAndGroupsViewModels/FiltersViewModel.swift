@@ -117,6 +117,13 @@ class FiltersViewModel: FiltersViewModelProtocol {
         self.filtersService = filtersService
         self.customGroup = group.groupId == FilterGroupId.custom
         self.group = group
+        
+        NotificationCenter.default.addObserver(forName: self.filtersService.updateNotification, object: nil, queue: nil) {
+            [weak self] (notification) in
+            self?.updateFilters()
+            self?.filtersChangedCallback?()
+        }
+        
         updateFilters()
     }
     
