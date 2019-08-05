@@ -580,10 +580,10 @@
 		D028DB8721515FC6002E4E8E /* UserFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */; };
 		D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D028DB8821550615002E4E8E /* MainMenuController.swift */; };
 		D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
-		D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
 		D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
 		D02B550422EED5030039BC48 /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550222EED5020039BC48 /* FilterTagsButtons.swift */; };
 		D02B550522EED5030039BC48 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550322EED5030039BC48 /* FilterTagsView.swift */; };
+		D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
 		D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080121BEAA2100796714 /* FiltersServiceTest.swift */; };
 		D02C080321BEAA7000796714 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
@@ -1047,7 +1047,6 @@
 		D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA620F224A8547005CF278 /* GetProTableController.swift */; };
 		D0BB18932161DC5E00CCAA76 /* AboutTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BB18922161DC5E00CCAA76 /* AboutTableController.swift */; };
 		D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
-		D0BDDD23215A76F5000C85F1 /* CustomFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */; };
 		D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */; };
 		D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */; };
 		D0C37EB422A66BBF0004337D /* DnsProxyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */; };
@@ -1060,7 +1059,6 @@
 		D0CA61812203489A005CAAA4 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D0CB3478212DCE21003B650E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB3477212DCE21003B650E /* MainController.swift */; };
 		D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
-		D0CDAEA3218C83E00028001B /* CustomFilterInfoInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA2218C83E00028001B /* CustomFilterInfoInfoController.swift */; };
 		D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6B9F821A6AF40007360BC /* About.storyboard */; };
 		D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6B9FB21A6AF4F007360BC /* Filters.storyboard */; };
@@ -1094,6 +1092,7 @@
 		D0F7F0CD2268979600592B1E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
 		D0F7F0CE22689C7A00592B1E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
 		D0F7F0D022689CEC00592B1E /* LoginServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */; };
+		D0F8F6B422F1CCC40044DCFA /* FilterDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */; };
 		D0F9115C212DDCD3006DF0D3 /* StackElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */; };
 		D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91163212EDD71006DF0D3 /* FilterCell.swift */; };
 		D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91166212EDE7C006DF0D3 /* FiltersController.swift */; };
@@ -1671,6 +1670,45 @@
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
+		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
+		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		7EDAC08322F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Filters.strings; sourceTree = "<group>"; };
+		7EDAC08422F1DF5300F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/License.strings; sourceTree = "<group>"; };
+		7EDAC08522F1DF5300F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		7EDAC08622F1DF5300F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainScreen.strings; sourceTree = "<group>"; };
+		7EDAC08722F1DF5300F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Settings.strings; sourceTree = "<group>"; };
+		7EDAC08922F1DF5400F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/UserFilter.strings; sourceTree = "<group>"; };
+		7EDAC08A22F1DF5400F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		7EDAC08C22F1DF5400F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
+		7EDAC08D22F1DF5400F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7EDAC08E22F1DF5400F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/ActionExtensionLocalizable.strings; sourceTree = "<group>"; };
+		7EDAC08F22F1DF5500F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/TodayExtensionLocalizable.strings; sourceTree = "<group>"; };
+		7EDAC09022F1DF8300F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/About.strings; sourceTree = "<group>"; };
+		7EDAC09122F1DF8300F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		7EDAC09222F1DF8300F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Filters.strings; sourceTree = "<group>"; };
+		7EDAC09322F1DF8300F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/License.strings; sourceTree = "<group>"; };
+		7EDAC09422F1DF8300F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		7EDAC09522F1DF8400F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainScreen.strings; sourceTree = "<group>"; };
+		7EDAC09622F1DF8400F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Settings.strings; sourceTree = "<group>"; };
+		7EDAC09822F1DF8400F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/UserFilter.strings; sourceTree = "<group>"; };
+		7EDAC09922F1DF8400F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		7EDAC09B22F1DF8400F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
+		7EDAC09C22F1DF8500F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7EDAC09D22F1DF8500F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/ActionExtensionLocalizable.strings; sourceTree = "<group>"; };
+		7EDAC09E22F1DF8500F3924D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/TodayExtensionLocalizable.strings; sourceTree = "<group>"; };
+		7EDAC09F22F1DFCD00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/About.strings; sourceTree = "<group>"; };
+		7EDAC0A022F1DFCE00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		7EDAC0A122F1DFCE00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Filters.strings; sourceTree = "<group>"; };
+		7EDAC0A222F1DFCE00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/License.strings; sourceTree = "<group>"; };
+		7EDAC0A322F1DFCE00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		7EDAC0A422F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainScreen.strings; sourceTree = "<group>"; };
+		7EDAC0A522F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Settings.strings; sourceTree = "<group>"; };
+		7EDAC0A722F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/UserFilter.strings; sourceTree = "<group>"; };
+		7EDAC0A822F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		7EDAC0AA22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/TodayExtensionMainInterface.strings; sourceTree = "<group>"; };
+		7EDAC0AB22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7EDAC0AC22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/ActionExtensionLocalizable.strings; sourceTree = "<group>"; };
+		7EDAC0AD22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/TodayExtensionLocalizable.strings; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -1727,10 +1765,10 @@
 		D020B28C21FA11F80075BB8D /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D028DB8621515FC6002E4E8E /* UserFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterViewModel.swift; sourceTree = "<group>"; };
 		D028DB8821550615002E4E8E /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
-		D02B550722EED8740039BC48 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		D02B550022EED4AE0039BC48 /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		D02B550222EED5020039BC48 /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		D02B550322EED5030039BC48 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
+		D02B550722EED8740039BC48 /* PTMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PTMono-Regular.ttf"; sourceTree = "<group>"; };
 		D02C080121BEAA2100796714 /* FiltersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceTest.swift; sourceTree = "<group>"; };
 		D02C080521BEAB2900796714 /* SafariServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceMock.swift; sourceTree = "<group>"; };
 		D02C080721BEAB5C00796714 /* AntibannerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerMock.swift; sourceTree = "<group>"; };
@@ -1890,7 +1928,6 @@
 		D0BB18922161DC5E00CCAA76 /* AboutTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableController.swift; sourceTree = "<group>"; };
 		D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASFilterSubscriptionParser.h; sourceTree = "<group>"; };
 		D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASFilterSubscriptionParser.m; sourceTree = "<group>"; };
-		D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFiltersController.swift; sourceTree = "<group>"; };
 		D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilterCell.swift; sourceTree = "<group>"; };
 		D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomFilterController.swift; sourceTree = "<group>"; };
 		D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
@@ -1899,7 +1936,6 @@
 		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0CB3477212DCE21003B650E /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		D0CB347A212DD1AB003B650E /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
-		D0CDAEA2218C83E00028001B /* CustomFilterInfoInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilterInfoInfoController.swift; sourceTree = "<group>"; };
 		D0CDAEA42191C9540028001B /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		D0D6B9F721A6AF40007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		D0D6B9FA21A6AF4F007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Filters.storyboard; sourceTree = "<group>"; };
@@ -2097,6 +2133,7 @@
 		D0F7F0C72268946700592B1E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTest.swift; sourceTree = "<group>"; };
 		D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTest.swift; sourceTree = "<group>"; };
+		D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsController.swift; sourceTree = "<group>"; };
 		D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackElementView.swift; sourceTree = "<group>"; };
 		D0F91163212EDD71006DF0D3 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		D0F91166212EDE7C006DF0D3 /* FiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersController.swift; sourceTree = "<group>"; };
@@ -3167,13 +3204,12 @@
 			children = (
 				D0D6B9FB21A6AF4F007360BC /* Filters.storyboard */,
 				D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */,
-				D0CDAEA2218C83E00028001B /* CustomFilterInfoInfoController.swift */,
-				D0BDDD22215A76F5000C85F1 /* CustomFiltersController.swift */,
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
 				D02B550222EED5020039BC48 /* FilterTagsButtons.swift */,
 				D02B550322EED5030039BC48 /* FilterTagsView.swift */,
 				D0F91168212EE214006DF0D3 /* GroupsController.swift */,
 				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
+				D0F8F6B322F1CCC40044DCFA /* FilterDetailsController.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -3930,6 +3966,9 @@
 				fr,
 				ja,
 				es,
+				cs,
+				sk,
+				sl,
 			);
 			mainGroup = 65F398081B7B684700ABCD39;
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -4844,7 +4883,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */,
-				D0BDDD23215A76F5000C85F1 /* CustomFiltersController.swift in Sources */,
 				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
@@ -4904,6 +4942,7 @@
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
 				7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
+				D0F8F6B422F1CCC40044DCFA /* FilterDetailsController.swift in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
@@ -4975,7 +5014,6 @@
 				65EC9CA41BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
 				D005096D2202F5EB006BC10C /* DnsProviderDetailsController.swift in Sources */,
 				D0CB3478212DCE21003B650E /* MainController.swift in Sources */,
-				D0CDAEA3218C83E00028001B /* CustomFilterInfoInfoController.swift in Sources */,
 				7E4D205022D71A5B003B0E75 /* mz_strm_buf.c in Sources */,
 				D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
@@ -5608,6 +5646,9 @@
 				D01315192045967E00556382 /* fr */,
 				D0183BB920C93FD200813714 /* ja */,
 				D0183BC920CBF2C500813714 /* es */,
+				7EDAC08D22F1DF5400F3924D /* cs */,
+				7EDAC09C22F1DF8500F3924D /* sk */,
+				7EDAC0AB22F1DFD000F3924D /* sl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5638,6 +5679,9 @@
 				D013151A2045967E00556382 /* fr */,
 				D0183BBA20C93FD200813714 /* ja */,
 				D0183BCA20CBF2C500813714 /* es */,
+				7EDAC08E22F1DF5400F3924D /* cs */,
+				7EDAC09D22F1DF8500F3924D /* sk */,
+				7EDAC0AC22F1DFD000F3924D /* sl */,
 			);
 			name = ActionExtensionLocalizable.strings;
 			sourceTree = "<group>";
@@ -5669,6 +5713,9 @@
 				D01315172045967E00556382 /* fr */,
 				D0183BB720C93FD200813714 /* ja */,
 				D0183BC720CBF2C400813714 /* es */,
+				7EDAC08A22F1DF5400F3924D /* cs */,
+				7EDAC09922F1DF8400F3924D /* sk */,
+				7EDAC0A822F1DFCF00F3924D /* sl */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -5708,6 +5755,9 @@
 				D099DAF2228D8168007987F8 /* fr */,
 				D099DAF3228D816C007987F8 /* ja */,
 				D099DAF4228D816E007987F8 /* es */,
+				7EDAC08222F1DF5200F3924D /* cs */,
+				7EDAC09122F1DF8300F3924D /* sk */,
+				7EDAC0A022F1DFCE00F3924D /* sl */,
 			);
 			name = DnsSettings.storyboard;
 			sourceTree = "<group>";
@@ -5739,6 +5789,9 @@
 				D01315182045967E00556382 /* fr */,
 				D0183BB820C93FD200813714 /* ja */,
 				D0183BC820CBF2C400813714 /* es */,
+				7EDAC08C22F1DF5400F3924D /* cs */,
+				7EDAC09B22F1DF8400F3924D /* sk */,
+				7EDAC0AA22F1DFD000F3924D /* sl */,
 			);
 			name = TodayExtensionMainInterface.storyboard;
 			sourceTree = "<group>";
@@ -5770,6 +5823,9 @@
 				D0D6BA3721A6AFA6007360BC /* fr */,
 				D0D6BA3921A6AFA7007360BC /* ja */,
 				D0D6BA3B21A6AFA8007360BC /* es */,
+				7EDAC08122F1DF5200F3924D /* cs */,
+				7EDAC09022F1DF8300F3924D /* sk */,
+				7EDAC09F22F1DFCD00F3924D /* sl */,
 			);
 			name = About.storyboard;
 			sourceTree = "<group>";
@@ -5801,6 +5857,9 @@
 				D0D6BA6521A6B031007360BC /* fr */,
 				D0D6BA6721A6B032007360BC /* ja */,
 				D0D6BA6921A6B034007360BC /* es */,
+				7EDAC08322F1DF5200F3924D /* cs */,
+				7EDAC09222F1DF8300F3924D /* sk */,
+				7EDAC0A122F1DFCE00F3924D /* sl */,
 			);
 			name = Filters.storyboard;
 			sourceTree = "<group>";
@@ -5832,6 +5891,9 @@
 				D0D6BA9521A6B056007360BC /* ja */,
 				D0D6BA9721A6B057007360BC /* es */,
 				D09137D922E8559500A8F541 /* zh-Hant */,
+				7EDAC08422F1DF5300F3924D /* cs */,
+				7EDAC09322F1DF8300F3924D /* sk */,
+				7EDAC0A222F1DFCE00F3924D /* sl */,
 			);
 			name = License.storyboard;
 			sourceTree = "<group>";
@@ -5863,6 +5925,9 @@
 				D0D6BAC121A6B073007360BC /* fr */,
 				D0D6BAC321A6B074007360BC /* ja */,
 				D0D6BAC521A6B075007360BC /* es */,
+				7EDAC08522F1DF5300F3924D /* cs */,
+				7EDAC09422F1DF8300F3924D /* sk */,
+				7EDAC0A322F1DFCE00F3924D /* sl */,
 			);
 			name = MainMenu.storyboard;
 			sourceTree = "<group>";
@@ -5894,6 +5959,9 @@
 				D0D6BAEF21A6B097007360BC /* fr */,
 				D0D6BAF121A6B098007360BC /* ja */,
 				D0D6BAF321A6B09A007360BC /* es */,
+				7EDAC08622F1DF5300F3924D /* cs */,
+				7EDAC09522F1DF8400F3924D /* sk */,
+				7EDAC0A422F1DFCF00F3924D /* sl */,
 			);
 			name = MainScreen.storyboard;
 			sourceTree = "<group>";
@@ -5925,6 +5993,9 @@
 				D0D6BB1D21A6B0B7007360BC /* fr */,
 				D0D6BB1F21A6B0B9007360BC /* ja */,
 				D0D6BB2121A6B0BA007360BC /* es */,
+				7EDAC08722F1DF5300F3924D /* cs */,
+				7EDAC09622F1DF8400F3924D /* sk */,
+				7EDAC0A522F1DFCF00F3924D /* sl */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -5964,6 +6035,9 @@
 				D0D6BB4B21A6B0F3007360BC /* fr */,
 				D0D6BB4D21A6B0F5007360BC /* ja */,
 				D0D6BB4F21A6B0F6007360BC /* es */,
+				7EDAC08922F1DF5400F3924D /* cs */,
+				7EDAC09822F1DF8400F3924D /* sk */,
+				7EDAC0A722F1DFCF00F3924D /* sl */,
 			);
 			name = UserFilter.storyboard;
 			sourceTree = "<group>";
@@ -5994,6 +6068,9 @@
 				D013151B2045967E00556382 /* fr */,
 				D0183BBB20C93FD300813714 /* ja */,
 				D0183BCB20CBF2C500813714 /* es */,
+				7EDAC08F22F1DF5500F3924D /* cs */,
+				7EDAC09E22F1DF8500F3924D /* sk */,
+				7EDAC0AD22F1DFD000F3924D /* sl */,
 			);
 			name = TodayExtensionLocalizable.strings;
 			path = ..;

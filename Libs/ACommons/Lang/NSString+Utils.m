@@ -909,6 +909,8 @@ NSString* ACLocalizedString(NSString* key, NSString* comment) {
         NSString * path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
         NSBundle * languageBundle = [NSBundle bundleWithPath:path];
         localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
+        
+        NSCAssert(![localizedString isEqualToString:key], @"there is no localizable string for key: %@", key);
     }
     return localizedString;
 }

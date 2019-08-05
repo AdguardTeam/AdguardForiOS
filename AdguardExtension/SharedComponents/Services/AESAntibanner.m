@@ -2443,7 +2443,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     ASDFilterGroup *customGroup = [ASDFilterGroup new];
     customGroup.groupId = [NSNumber numberWithInteger: FilterGroupId.custom];
-    customGroup.name = ACLocalizedString(@"custom_group_name", nil);
     customGroup.enabled = [NSNumber numberWithBool:YES];
     
     return [self insertMetadataIntoDb:db groups:@[customGroup]];

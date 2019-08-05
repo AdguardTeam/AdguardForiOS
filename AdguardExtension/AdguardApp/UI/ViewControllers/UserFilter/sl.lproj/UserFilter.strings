@@ -1,0 +1,50 @@
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "PREKLIČI";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
+"8G3-AL-tRu.title" = "Prekliči";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
+"9th-UM-Uaj.normalTitle" = "Prekliči";
+
+/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "Pravilo je bilo dodano uporabniškemu filtru.";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "SHRANI";
+
+/* Class = "UIButton"; normalTitle = "Select all"; ObjectID = "DLT-c2-7eC"; */
+"DLT-c2-7eC.normalTitle" = "Izberi vse";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
+"EH6-Zr-YRP.text" = "Uredi";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "HN7-vG-wig"; */
+"HN7-vG-wig.title" = "Vnos";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RgN-vL-2ju"; */
+"RgN-vL-2ju.normalTitle" = "Gumb";
+
+/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "ODSTRANI";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
+"U2P-9b-f6k.normalTitle" = "PREKLIČI";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Yym-ps-FzM"; */
+"Yym-ps-FzM.title" = "Naslov";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
+"c5a-s3-YPd.normalTitle" = "Izberi";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "DODAJ";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
+"iuK-dC-RKf.normalTitle" = "Izbriši";
+
+/* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
+"x7r-Ln-XiZ.text" = "Domena:";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "Vredu";
