@@ -59,7 +59,7 @@ class LoginService: LoginServiceProtocol {
     
     static let loginError = -1
     static let loginBadCredentials = -2
-    static let loginMaxComputersExceed = -2
+    static let loginMaxComputersExceeded = -2
     
     // keychain constants
     private let LOGIN_SERVER = "https://mobile-api.adguard.com"

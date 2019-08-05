@@ -55,7 +55,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     // auth status values
     private let AUTH_SUCCESS = "SUCCESS"
     private let AUTH_BAD_CREDINTIALS = "BAD_CREDENTIALS"
-    private let AUTH_MAX_COMPUTERS_EXCEED = "MAX_COMPUTERS_EXCEED"
+    private let AUTH_MAX_COMPUTERS_EXCEEDED = "MAX_COMPUTERS_EXCEED"
     
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
@@ -168,8 +168,8 @@ class LoginResponseParser: LoginResponseParserProtocol {
                 error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             }
             
-            if licenseKeyStatus == AUTH_MAX_COMPUTERS_EXCEED {
-                error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginMaxComputersExceed, userInfo: nil)
+            if licenseKeyStatus == AUTH_MAX_COMPUTERS_EXCEEDED {
+                error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginMaxComputersExceeded, userInfo: nil)
             }
             return (false, nil, error)
         }

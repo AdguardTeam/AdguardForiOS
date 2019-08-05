@@ -162,7 +162,6 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Updating...";
-"update_filter_start_message" = "Scanning...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Add a rule";
@@ -386,3 +385,6 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
 "failed_updating_current_state_label" = "Filters have not been updated";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
