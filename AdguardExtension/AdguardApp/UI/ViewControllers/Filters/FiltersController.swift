@@ -150,7 +150,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             
             cell.name.text = filter?.name ?? ""
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            cell.updateDate.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            cell.updateDate.text = String(format: ACLocalizedString("filter_last_update_format", nil), dateString)
             
             if let version = filter?.version {
                 cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)

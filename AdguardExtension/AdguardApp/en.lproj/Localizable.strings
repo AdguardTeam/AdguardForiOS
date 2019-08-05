@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "An unexpected error occurred. Please contact the support team.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Attempted to convert rules to JSON before the service started.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Cannot convert rules. An unexpected error occurred. Please contact the support team.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Cannot convert the user filter rules.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Error";
 
@@ -33,7 +29,6 @@
 /* (AEUILoadingModal) Standard message when filter conversion is performed. */
 "safari_filters_loading" = "Loading filters to Safari. Please do not turn off AdGuard. The process will take no more than 30 seconds.";
 
-
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
@@ -45,13 +40,6 @@
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User Filter";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
 
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
@@ -65,25 +53,7 @@
 /* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
 "restore_purchases_failure" = "Failed to restore purchases ";
 
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Get PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Sign in";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Sign in";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Enter your email address and password";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "Email address";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Password";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Get subscription";
 
 /* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
@@ -104,9 +74,6 @@
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "You have successfully logged in to your AdGuard account, but the license keys that allow you to activate the premium version have expired.";
 
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Try again";
-
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
 
@@ -124,24 +91,6 @@
 
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Custom";
-
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Ad blocking";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Removing social widgets";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Annoyances";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Language-specific";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Premium only";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Premium only";
 
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Enabled filters: %d/%d";
@@ -193,12 +142,6 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Export";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "This rule was added to the user filter. ";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "This domain was added to the whitelist. AdGuard will not filter anything on this website.";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Report Incorrect Blocking";
 
@@ -240,49 +183,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + SafeSearch and adult content blocking";
+
 /* Google DNS server description */
 "google_dns_description" = "Free alternative DNS service by Google";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS server that protects your device from online threats";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS server with adult content blocking";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Free alternative DNS service with protection from phishing and spyware";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Free DNS service by Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS service by SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Encryption";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Security";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Adult content blocking";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "No logging policy";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Safe Search";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Ad Blocking";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Does not let third parties spy on your browsing activity";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blocks known phishing and other dangerous domains";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Blocks websites with adult content";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Does not store your DNS query logs";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blocks ads and tracking servers";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "A VPN will be created";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN is required to set up custom DNS settings. The created VPN is local, which means your traffic will not be routed through any servers.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "No server selected";
