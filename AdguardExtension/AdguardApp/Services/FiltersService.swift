@@ -226,6 +226,11 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             var groups = strongSelf.antibanner.groups()
             
+            // set localized name for custom group. We don't store it in database
+            if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
+                customGroup.name = ACLocalizedString("custom_group_name", nil);
+            }
+            
             // remove user group
             groups = groups.filter({ (group) -> Bool in
                 return group.groupId.intValue != FilterGroupId.user
