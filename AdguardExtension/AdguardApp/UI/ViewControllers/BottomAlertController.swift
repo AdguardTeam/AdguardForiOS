@@ -29,8 +29,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        layoutSubviews()
-        contentView.layer.masksToBounds = true
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardNotification(notification:)),
@@ -41,39 +39,9 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func layoutSubviews() {
-        
-        let corners: CACornerMask = [ .layerMinXMinYCorner, .layerMaxXMinYCorner]
-        let radius: CGFloat = 10.0
-        if #available(iOS 11, *) {
-            contentView.layer.cornerRadius = radius
-            
-            contentView.layer.maskedCorners = corners
-        } else {
-            var cornerMask = UIRectCorner()
-            if(corners.contains(.layerMinXMinYCorner)){
-                cornerMask.insert(.topLeft)
-            }
-            if(corners.contains(.layerMaxXMinYCorner)){
-                cornerMask.insert(.topRight)
-            }
-            if(corners.contains(.layerMinXMaxYCorner)){
-                cornerMask.insert(.bottomLeft)
-            }
-            if(corners.contains(.layerMaxXMaxYCorner)){
-                cornerMask.insert(.bottomRight)
-            }
-            let path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: cornerMask, cornerRadii: CGSize(width: radius, height: radius))
-            let mask = CAShapeLayer()
-            mask.path = path.cgPath
-            contentView.layer.mask = mask
-        }
-        
-        contentView.layer.cornerRadius = 10
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        contentView.layer.shadowRadius = 3
-        contentView.layer.shadowOpacity = 1
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        makeRoundCorners()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -108,5 +76,15 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    private func makeRoundCorners(){
+        contentView.clipsToBounds = true
+        let path = UIBezierPath(roundedRect: contentView.bounds,
+                                byRoundingCorners: [.topRight, .topLeft],
+                                cornerRadii: CGSize(width: 10, height: 10))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        contentView.layer.mask = maskLayer
     }
 }
