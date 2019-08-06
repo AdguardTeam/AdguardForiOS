@@ -38,7 +38,6 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
     
-    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
