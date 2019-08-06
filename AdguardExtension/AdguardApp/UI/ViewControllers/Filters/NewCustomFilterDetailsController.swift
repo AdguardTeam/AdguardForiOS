@@ -22,7 +22,7 @@ protocol NewCustomFilterDetailsDelegate {
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool)
 }
 
-class NewCustomFilterDetailsController : UIViewController {
+class NewCustomFilterDetailsController : BottomAlertController {
     
     let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
@@ -32,14 +32,14 @@ class NewCustomFilterDetailsController : UIViewController {
     var overwriteExisted = false
     
     // MARK: - IB Outlets
-    @IBOutlet weak var contentView: RoundrectView!
-    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rulesCount: UILabel!
     @IBOutlet weak var homepage: UILabel!
     @IBOutlet weak var homepageCaption: UILabel!
-    
+    @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
+    
+    @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -55,10 +55,12 @@ class NewCustomFilterDetailsController : UIViewController {
         
         if let homepageUrl = filter?.meta.homepage, homepageUrl.count > 0 {
             homepage.text = homepageUrl
+            homepageTopConstraint.constant = 52.0
         }
         else {
             homepageCaption.isHidden = true
             homepage.isHidden = true
+            homepageTopConstraint.constant = 23.0
         }
         
         updateTheme()
@@ -76,6 +78,7 @@ class NewCustomFilterDetailsController : UIViewController {
     
     // MARK: - Actions
     @IBAction func AddAction(_ sender: Any) {
+        filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
         delegate?.addCustomFilter(filter: filter!, overwriteExisted: overwriteExisted)
         navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -88,6 +91,7 @@ class NewCustomFilterDetailsController : UIViewController {
     
     private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
     }
 }

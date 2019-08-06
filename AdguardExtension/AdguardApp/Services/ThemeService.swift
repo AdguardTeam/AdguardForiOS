@@ -264,6 +264,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupSwitch(_ switchControl: UISwitch) {
         switchControl.tintColor = configuration.darkTheme ? UIColor(hexString: "#4D4D4D") : nil
+        switchControl.onTintColor = UIColor(hexString: "#67b279")
     }
     
     func setupSeparator(_ separator: UIView) {

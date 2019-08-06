@@ -23,7 +23,6 @@ class AddCustomFilterController: BottomAlertController {
     let detailsSegueId = "showFilterDetailsSegue"
     
     @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var overwriteSwitch: UIButton!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -54,7 +53,6 @@ class AddCustomFilterController: BottomAlertController {
             let controller = segue.destination as! NewCustomFilterDetailsController
             controller.filter = filter
             controller.delegate = delegate
-            controller.overwriteExisted = overwriteSwitch.isSelected
         }
     }
     
@@ -95,10 +93,6 @@ class AddCustomFilterController: BottomAlertController {
     
     @IBAction func cancelAction(_ sender: Any) {
         navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func toggleOverwrite(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
     }
     
     // MARK: - private method
