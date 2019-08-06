@@ -690,6 +690,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var error: Error?
         var converted = 0
         var overLimit = 0
+        var overLimitBoolFlag = 0
         var totalConverted = 0
         var rulesData: Data?
         
@@ -714,9 +715,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         error = converterResult?[AESFConvertedErrorKey] as? Error
         if error != nil { return (nil, 0, 0, 0, error) }
         
-        overLimit = converterResult?[AESFCOverLimitKey] as? Int ?? 0
+        overLimitBoolFlag = converterResult?[AESFCOverLimitKey] as? Int ?? 0
         converted = converterResult?[AESFConvertedCountKey] as? Int ?? 0
         totalConverted = converterResult?[AESFTotalConvertedCountKey] as? Int ?? 0
+        overLimit = totalConverted - converted
         
         // obtain rules
         let jsonString = converterResult?[AESFConvertedRulesKey] as? String
