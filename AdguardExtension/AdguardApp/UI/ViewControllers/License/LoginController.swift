@@ -23,7 +23,7 @@ protocol LoginControllerDelegate {
     func loginAction(name: String)
 }
 
-class LoginController: BottomAlertController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
     var delegate: LoginControllerDelegate?
@@ -35,22 +35,26 @@ class LoginController: BottomAlertController {
     
     // MARK: - IB outlets
     @IBOutlet weak var nameEdit: UITextField!
-    @IBOutlet weak var loginButton: RoundRectButton!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var nameLine: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     // MARK: - private properties
     
     private let enabledColor = UIColor.init(hexString: "D8D8D8")
     private let disabledColor = UIColor.init(hexString: "4D4D4D")
+    
+    private var keyboardMover: KeyboardMover!
     
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -66,12 +70,20 @@ class LoginController: BottomAlertController {
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
         
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         updateTheme()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         nameEdit.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
     }
     
     // MARK: - Actions
@@ -83,13 +95,8 @@ class LoginController: BottomAlertController {
         updateLoginButton()
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
     // MARK: - text field delegate methods
-    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         login()
         return true
     }
@@ -173,7 +180,7 @@ class LoginController: BottomAlertController {
     
     private func updateTheme() {
         
-        contentView.backgroundColor = theme.bottomBarBackgroundColor
+        view.backgroundColor = theme.bottomBarBackgroundColor
         
         theme.setupTextField(nameEdit)
         
@@ -188,6 +195,7 @@ class LoginController: BottomAlertController {
     
     private func webAuth(){
         if let name = nameEdit.text {
+            
             dismiss(animated: true) { [weak self] in
                 self?.delegate?.loginAction(name: name)
             }
