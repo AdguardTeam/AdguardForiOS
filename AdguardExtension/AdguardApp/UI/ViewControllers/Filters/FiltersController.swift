@@ -23,7 +23,15 @@ import UIKit
 // MARK: - FiltersController
 class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
-    var viewModel: FiltersViewModelProtocol?
+    var viewModel: IFiltersAndGroupsViewModel?
+    var group: Group? {
+        get {
+            if viewModel?.isSearchActive ?? false && viewModel?.groups?.count ?? 0 > 0{
+                return viewModel?.groups?[0]
+            }
+            return viewModel?.currentGroup
+        }
+    }
     
     // MARK:  private properties
     
@@ -75,19 +83,15 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         viewModel?.searchChangedCallback = { [weak self] in self?.updateBarButtons() }
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
-        navigationItem.title = viewModel?.group.name
+        navigationItem.title = group?.name ?? ""
         
         setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.updateCurrentGroup()
         updateTheme()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        viewModel?.cancelSearch()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -102,10 +106,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
                 return
             }
             
-            let filter = viewModel?.filters[selectedIndex.row]
+            let filter = group?.filters[selectedIndex.row]
             
             detailsController.filter = filter
-            detailsController.isCustom = viewModel?.customGroup ?? false
+            detailsController.isCustom = group?.groupId == FilterGroupId.custom ? true : false
         }
     }
     
@@ -121,7 +125,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection, addFilterSection:
             return 1
         case filtersSection:
-            return viewModel?.filters.count ?? 0
+            return group?.filters.count ?? 0
         default:
             return 0
         }
@@ -135,7 +139,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
             
-            let enabled = viewModel?.group.enabled ?? false
+            let enabled = group?.enabled ?? false
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
@@ -150,13 +154,12 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             
         case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
-            cell?.isHidden = (viewModel?.customGroup ?? false) ? false : true
+            cell?.isHidden = group?.groupId == FilterGroupId.custom ? false : true
             return cell!
             
         case filtersSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
-            let filter = viewModel?.filters[indexPath.row]
-            let group = viewModel?.group
+            let filter = group?.filters[indexPath.row]
 
             // Cell setup
             cell.filterTagsView.delegate = self
@@ -196,21 +199,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection:
             return 72
         case addFilterSection:
-            return (viewModel?.customGroup ?? false) ? 60 : 0
+            return group?.groupId == FilterGroupId.custom ? 60 : 0
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !(viewModel?.customGroup ?? false) {
+        if !(group?.groupId == FilterGroupId.custom) {
             return nil
         }
         return section == addFilterSection ? headerView : nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !(viewModel?.customGroup ?? false) {
+        if !(group?.groupId == FilterGroupId.custom) {
             return 0.0
         }
         return section == addFilterSection ? 72.0 : 0.0
@@ -220,7 +223,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
         guard let row = sender.row else { return }
-        guard let filter = viewModel?.filters[row] else { return }
+        guard let filter = group?.filters[row] else { return }
         viewModel?.set(filter: filter, enabled: sender.isOn)
         
         tableView.beginUpdates()
@@ -230,7 +233,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     @IBAction func showSiteAction(_ sender: UIButton) {
         let row = sender.tag
-        let filter = viewModel?.filters[row]
+        let filter = group?.filters[row]
         guard   let homepage = filter?.homepage,
                 let url = URL(string: homepage) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -254,7 +257,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
-        viewModel?.setGroup(enabled: sender.isOn)
+        guard let sGroup = group else { return }
+        viewModel?.set(group: sGroup, enabled: sender.isOn)
     }
     
     // MARK: - searchbar methods
@@ -269,14 +273,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         return CustomAnimatedTransitioning()
     }
     
-    // MARK: - FilterInfo delegate methods
-    
-    func deleteFilter(filter: Filter) {
-        viewModel?.deleteCustomFilter(filter: filter, completion: {[weak self] (succes) in
-            self?.tableView.reloadData()
-        })
-    }
-
     // MARK: - NewCustomFilter delegate
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
         viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in

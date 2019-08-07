@@ -29,7 +29,7 @@ class GroupsController: UITableViewController {
     let getProSegueID = "getProSegue"
     
     // MARK: - properties
-    var viewModel: FilterGroupViewModelProtocol? = nil
+    var viewModel: IFiltersAndGroupsViewModel? = nil
     var selectedIndex: Int?
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
@@ -61,28 +61,19 @@ class GroupsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.updateAllGroups()
+        viewModel?.cancelSearch()
         updateTheme()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let group = viewModel?.groups?[selectedIndex ?? 0] else { return }
+        guard let selectedGroup = viewModel?.groups?[selectedIndex ?? 0] else { return }
+        viewModel?.currentGroup = selectedGroup
         
-        let filtersModel = FiltersViewModel(filtersService: filtersService, group: group, helper: viewModel?.helper)
-        
-        switch segue.identifier {
-        case filtersSegueID:
+        if segue.identifier == filtersSegueID {
             let controller = segue.destination as! FiltersController
-            
-            controller.viewModel = filtersModel
-        case customFiltersSegueID:
-            
-            let controller = segue.destination as! FiltersController
-            controller.viewModel = filtersModel
-            
-            break;
-        default:
-            break;
+            controller.viewModel = viewModel
         }
     }
     
@@ -134,11 +125,7 @@ class GroupsController: UITableViewController {
         if group.proOnly && !configuration.proStatus {
             performSegue(withIdentifier: getProSegueID, sender: self)
         }
-        else if group.groupId == FilterGroupId.custom {
-            performSegue(withIdentifier: "showCustomFiltersSegue", sender: self)}
-        else {
-            performSegue(withIdentifier: "showFiltersSegue", sender: self)
-        }
+        performSegue(withIdentifier: "showFiltersSegue", sender: self)
     }
     
     @IBAction func switchTap(_ sender: UIView) {
@@ -156,9 +143,7 @@ class GroupsController: UITableViewController {
     @objc func enabledChanged(_ enableSwitch: UISwitch) {
         let row = enableSwitch.tag
         guard let group = viewModel?.groups?[row] else { return }
-        
-        viewModel?.set(group: group, enabled: enableSwitch.isOn) { (success) in
-        }
+            viewModel?.set(group: group, enabled: enableSwitch.isOn)
     }
     
     private func updateTheme() {

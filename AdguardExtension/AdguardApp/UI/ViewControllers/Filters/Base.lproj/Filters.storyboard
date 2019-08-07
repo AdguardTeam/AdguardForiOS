@@ -191,7 +191,6 @@
                     <connections>
                         <segue destination="Llu-1A-iPX" kind="show" identifier="showFiltersSegue" id="3B2-aA-sGN"/>
                         <segue destination="2G0-bK-cL2" kind="show" identifier="getProSegue" id="CG6-qH-Zv4"/>
-                        <segue destination="Llu-1A-iPX" kind="show" identifier="showCustomFiltersSegue" id="OEn-zb-z7R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6NH-fh-Bob" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -474,17 +473,17 @@
             <objects>
                 <viewController id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l8F-zH-yJh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXi-08-oyM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="739"/>
                                 <connections>
                                     <segue destination="TuY-uw-gTS" kind="embed" identifier="embedTableSegue" id="isf-qw-rRC"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXe-eu-cfH">
-                                <rect key="frame" x="0.0" y="705" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="739" width="414" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Rdo-NW-cIS"/>
                                 </constraints>
@@ -498,7 +497,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-sn-odz">
-                                <rect key="frame" x="0.0" y="764" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="798" width="414" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HVv-NU-SJI"/>
@@ -1353,7 +1352,6 @@
         <image name="plus" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u0d-JL-uIG"/>
-        <segue reference="3B2-aA-sGN"/>
+        <segue reference="pVj-4Q-eLU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,7 +25,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     @IBOutlet weak var searchBar: UISearchBar!
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    var viewModel: FilterGroupViewModelProtocol? = nil
+    var viewModel: IFiltersAndGroupsViewModel? = nil
     
     private let filterCellId = "filterCellID"
     private let showFilterDetailsSegue = "showFilterDetails"
@@ -59,6 +59,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.cancelSearch()
         updateTheme()
     }
     
@@ -67,7 +68,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         viewModel?.cancelSearch()
     }
 
-    // MARK: -Table View Delegate and Data Source
+    // MARK: - Table View Delegate and Data Source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel?.groups?.count ?? 0
@@ -139,14 +140,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
-    }
-    
-    // MARK: - Custom filter info delegate methods
-    
-    func deleteFilter(filter: Filter) {
-        viewModel?.deleteCustomFilter(filter: filter, completion: {[weak self] (succes) in
-            self?.tableView.reloadData()
-        })
     }
     
     // MARK: - Master view controller delegate
