@@ -194,6 +194,7 @@ extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesCount;
+extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesCount;
 
 /**
  User defaults keys, which contains number of over limited rules for each content blocker*/
@@ -202,6 +203,7 @@ extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSocialContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsOtherContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesOverLimitCount;
+extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 
 /**
  User defaults key, which defines, whether vpn is enabled */

@@ -397,6 +397,7 @@
                                     @"social",1 << 2,
                                     @"other",1 << 3,
                                     @"custom",1 << 4,
+                                    @"security",1 << 5,
                                     @"all",0,
                                     nil];
     

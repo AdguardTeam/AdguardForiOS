@@ -296,6 +296,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nAEDefaultsSocialContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSocialContentBlockerRulesCount]];
         [sb appendFormat:@"\r\nAEDefaultsOtherContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsOtherContentBlockerRulesCount]];
         [sb appendFormat:@"\r\nAEDefaultsCustomContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsCustomContentBlockerRulesCount]];
+        [sb appendFormat:@"\r\nAEDefaultsSecurityContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSecurityContentBlockerRulesCount]];
         
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
         NSArray *filters = [[_aeService antibanner] activeFilters];
