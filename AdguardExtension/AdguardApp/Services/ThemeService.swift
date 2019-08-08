@@ -202,6 +202,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         searchBar.barTintColor = .clear
         textField?.backgroundColor = configuration.darkTheme ? UIColor.init(hexString: "#131313") : UIColor.init(hexString: "#F3F3F3")
         searchBar.backgroundImage = UIImage()
+        searchBar.setImage(UIImage(named: "search-icon"), for: .search, state: .normal)
     }
     
     func statusbarStyle() -> UIStatusBarStyle {

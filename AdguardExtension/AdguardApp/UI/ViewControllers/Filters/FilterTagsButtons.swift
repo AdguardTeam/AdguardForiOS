@@ -19,7 +19,7 @@
 import UIKit
 
 protocol TagButtonTappedDelegate: class {
-    func tagButtonTapped(_ sender: UIButton?)
+    func tagButtonTapped(_ sender: TagButton)
 }
 
 protocol FilterTagsViewModel: class {
@@ -28,27 +28,7 @@ protocol FilterTagsViewModel: class {
 
 protocol SendTagNameButtonProtocol: FilterTagsViewModel {
     var name: String? { get set }
-    func sendName(_ sender: UIButton)
-}
-
-class LangButton: UIButton, SendTagNameButtonProtocol{
-    
-    init() {
-        super.init(frame: .zero)
-        addTarget(self, action: #selector(self.sendName(_:)), for: .touchUpInside)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    weak var delegate: TagButtonTappedDelegate?
-    
-    var name: String?
-    
-    @objc func sendName(_ sender: UIButton) {
-        delegate?.tagButtonTapped(sender)
-    }
+    func sendName(_ sender: TagButton)
 }
 
 class TagButton: RoundRectButton, SendTagNameButtonProtocol{
@@ -60,14 +40,13 @@ class TagButton: RoundRectButton, SendTagNameButtonProtocol{
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        fatalError("init(coder:) has not been implemented")
     }
     
     weak var delegate: TagButtonTappedDelegate?
     
     var name: String?
     
-    @objc func sendName(_ sender: UIButton) {
+    @objc func sendName(_ sender: TagButton) {
         delegate?.tagButtonTapped(sender)
     }
 }

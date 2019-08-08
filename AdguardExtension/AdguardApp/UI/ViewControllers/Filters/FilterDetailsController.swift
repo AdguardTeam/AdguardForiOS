@@ -104,6 +104,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         updatedLabel.text = filter.updateDate?.formatedString()
         rulesCountLabel.text = "\(filter.rulesCount ?? 0)"
         
+        tagsView.highlightIsOn = false
         tagsView.filter = filter
         
         updateTheme()
