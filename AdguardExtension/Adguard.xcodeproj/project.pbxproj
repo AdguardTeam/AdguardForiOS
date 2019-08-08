@@ -1684,17 +1684,8 @@
 		7E06B63622FB0313006859AC /* AdguardBlockingExtensionOther.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionOther.plist; sourceTree = "<group>"; };
 		7E06B63722FB0313006859AC /* AdguardBlockingExtensionAnnoyances.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionAnnoyances.plist; sourceTree = "<group>"; };
 		7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionPrivacy.plist; sourceTree = "<group>"; };
-		7E06B63F22FB044D006859AC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		7E06B64122FB044D006859AC /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
-		7E06B64322FB044D006859AC /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
-		7E06B64522FB044D006859AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E06B65222FB0465006859AC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		7E06B65422FB0465006859AC /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
-		7E06B65622FB0465006859AC /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
-		7E06B65822FB0465006859AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionSecurity.plist; sourceTree = "<group>"; };
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E06B69422FB1606006859AC /* AdguardBlockingExtensionCustom copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AdguardBlockingExtensionCustom copy-Info.plist"; path = "/Users/kovalcuk/Desktop/adguard-ios/AdguardExtension/AdguardBlockingExtensionCustom copy-Info.plist"; sourceTree = "<absolute>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
@@ -2957,11 +2948,8 @@
 				652F587A1E106DF10012353C /* AdguardLogSender */,
 				D096D9431F28C0D70081004D /* TodayExtension */,
 				658237341D07FE6700B824F4 /* Tunnel */,
-				7E06B63E22FB044D006859AC /* AdguardBlockingExtensionSecurity */,
-				7E06B65122FB0465006859AC /* AdguardBlockingExtensionSecurity */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
-				7E06B69422FB1606006859AC /* AdguardBlockingExtensionCustom copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3071,28 +3059,6 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
-			sourceTree = "<group>";
-		};
-		7E06B63E22FB044D006859AC /* AdguardBlockingExtensionSecurity */ = {
-			isa = PBXGroup;
-			children = (
-				7E06B63F22FB044D006859AC /* Media.xcassets */,
-				7E06B64122FB044D006859AC /* ActionRequestHandler.swift */,
-				7E06B64322FB044D006859AC /* Action.js */,
-				7E06B64522FB044D006859AC /* Info.plist */,
-			);
-			path = AdguardBlockingExtensionSecurity;
-			sourceTree = "<group>";
-		};
-		7E06B65122FB0465006859AC /* AdguardBlockingExtensionSecurity */ = {
-			isa = PBXGroup;
-			children = (
-				7E06B65222FB0465006859AC /* Media.xcassets */,
-				7E06B65422FB0465006859AC /* ActionRequestHandler.swift */,
-				7E06B65622FB0465006859AC /* Action.js */,
-				7E06B65822FB0465006859AC /* Info.plist */,
-			);
-			path = AdguardBlockingExtensionSecurity;
 			sourceTree = "<group>";
 		};
 		7E15720622DF32B7007060D7 /* Content Blocker State  */ = {
