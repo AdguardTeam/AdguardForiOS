@@ -899,8 +899,6 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 
 NSString* ACLocalizedString(NSString* key, NSString* comment) {
     
-    
-    
     if (!key) {
         return @"";
     }
@@ -912,7 +910,7 @@ NSString* ACLocalizedString(NSString* key, NSString* comment) {
         NSBundle * languageBundle = [NSBundle bundleWithPath:path];
         localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
         
-//        NSCAssert(![localizedString isEqualToString:key], @"there is no localizable string for key: %@", key);
+        NSCAssert(![localizedString isEqualToString:key], @"there is no localizable string for key: %@", key);
     }
     return localizedString;
 }
