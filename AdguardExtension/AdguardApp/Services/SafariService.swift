@@ -27,6 +27,7 @@ enum ContentBlockerType: Int, CaseIterable {
     case socialWidgetsAndAnnoyances
     case other
     case custom
+    case security
 }
 
 // Affinity lists bitmasks
@@ -34,11 +35,12 @@ struct Affinity: OptionSet {
     
     let rawValue: UInt8
     
-    static let general       = Affinity(rawValue: 1 << 0)
-    static let privacy      = Affinity(rawValue: 1 << 1)
-    static let socialWidgetsAndAnnoyances    = Affinity(rawValue: 1 << 2)
-    static let other     = Affinity(rawValue: 1 << 3)
-    static let custom       = Affinity(rawValue: 1 << 4)
+    static let general = Affinity(rawValue: 1 << 0)
+    static let privacy = Affinity(rawValue: 1 << 1)
+    static let socialWidgetsAndAnnoyances = Affinity(rawValue: 1 << 2)
+    static let other = Affinity(rawValue: 1 << 3)
+    static let custom = Affinity(rawValue: 1 << 4)
+    static let security = Affinity(rawValue: 1 << 5)
 }
 
 // MARK: - protocol -
@@ -85,14 +87,16 @@ class SafariService: NSObject, SafariServiceProtocol {
          .privacy: "com.adguard.AdguardExtension.extensionPrivacy",
          .socialWidgetsAndAnnoyances: "com.adguard.AdguardExtension.extensionAnnoyances",
          .other: "com.adguard.AdguardExtension.extensionOther",
-         .custom: "com.adguard.AdguardExtension.extensionCustom"]
+         .custom: "com.adguard.AdguardExtension.extensionCustom",
+         .security: "com.adguard.AdguardExtension.extensionSecurity"]
     
     private let fileNames: [ContentBlockerType: String] = [
         .general: "cb_general.json",
         .privacy: "cb_privacy.json",
         .socialWidgetsAndAnnoyances: "cb_annoyances.json",
         .other: "cb_other.json",
-        .custom: "cb_custom.json"
+        .custom: "cb_custom.json",
+        .security: "cb_security.json"
     ]
     
     private let workQueue = DispatchQueue(label: "safari_service")

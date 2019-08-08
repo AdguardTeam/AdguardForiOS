@@ -35,6 +35,8 @@ class ContentBlockerStateCell: UITableViewCell {
                 name = "AdGuard — Other"
             case .custom:
                 name = "AdGuard — Custom"
+            case .security:
+                name = "AdGuard — Security"
             default:
                 name = ""
             }

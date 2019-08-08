@@ -51,14 +51,17 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
              .privacy:                      [FilterGroupId.privacy, FilterGroupId.user],
              .socialWidgetsAndAnnoyances:   [FilterGroupId.socialWidgets, FilterGroupId.annoyances, FilterGroupId.user],
              .other:                        [FilterGroupId.other, FilterGroupId.security, FilterGroupId.user],
-             .custom:                       [FilterGroupId.custom, FilterGroupId.user]]
+             .custom:                       [FilterGroupId.custom, FilterGroupId.user],
+             .security:                     [FilterGroupId.security, FilterGroupId.user]
+            ]
     
     static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
         .general:                       AEDefaultsGeneralContentBlockerRulesCount,
         .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
         .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
         .other:                         AEDefaultsOtherContentBlockerRulesCount,
-        .custom:                        AEDefaultsCustomContentBlockerRulesCount
+        .custom:                        AEDefaultsCustomContentBlockerRulesCount,
+        .security:                      AEDefaultsSecurityContentBlockerRulesCount
     ]
     
     static let defaultsOverLimitCountKeyByBlocker: [ContentBlockerType: String] = [
@@ -66,7 +69,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         .privacy:                       AEDefaultsPrivacyContentBlockerRulesOverLimitCount,
         .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesOverLimitCount,
         .other:                         AEDefaultsOtherContentBlockerRulesOverLimitCount,
-        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount
+        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount,
+        .security:                      AEDefaultsSecurityContentBlockerRulesOverLimitCount
     ]
     
     // MARK: - init
@@ -360,6 +364,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         resultError = updateJson(blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
         resultError = updateJson(blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
         resultError = updateJson(blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
+        resultError = updateJson(blockerRules: rulesByContentBlocker[.security]!, forContentBlocker: .security) ?? resultError
         
         return resultError
     }
@@ -392,7 +397,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .privacy: Affinity.privacy,
          .socialWidgetsAndAnnoyances: Affinity.socialWidgetsAndAnnoyances,
          .other: Affinity.other,
-         .custom: Affinity.custom]
+         .custom: Affinity.custom,
+         .security: Affinity.security ]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         

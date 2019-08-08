@@ -505,6 +505,47 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E06B66522FB1606006859AC /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E06B66622FB1606006859AC /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
+		7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B8219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m */; };
+		7E06B66822FB1606006859AC /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
+		7E06B66922FB1606006859AC /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
+		7E06B66A22FB1606006859AC /* ActionRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F398631B7B6A5300ABCD39 /* ActionRequestHandler.m */; };
+		7E06B66B22FB1606006859AC /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A7219EFC99002C17D9 /* DDTTYLogger.m */; };
+		7E06B66C22FB1606006859AC /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
+		7E06B66D22FB1606006859AC /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		7E06B66E22FB1606006859AC /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
+		7E06B66F22FB1606006859AC /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01CC1C6B7686000F00D7 /* ACLWildcard.m */; };
+		7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
+		7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B81C6B7686000F00D7 /* ACLExecuteBlockDelayed.m */; };
+		7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
+		7E06B67322FB1606006859AC /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
+		7E06B67422FB1606006859AC /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C4219EFC99002C17D9 /* DDLoggerNames.m */; };
+		7E06B67522FB1606006859AC /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
+		7E06B67622FB1606006859AC /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
+		7E06B67722FB1606006859AC /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B7219EFC99002C17D9 /* DDContextFilterLogFormatter.m */; };
+		7E06B67822FB1606006859AC /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
+		7E06B67922FB1606006859AC /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AA219EFC99002C17D9 /* DDOSLogger.m */; };
+		7E06B67A22FB1606006859AC /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
+		7E06B67B22FB1606006859AC /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
+		7E06B67C22FB1606006859AC /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
+		7E06B67D22FB1606006859AC /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BB219EFC99002C17D9 /* DDMultiFormatter.m */; };
+		7E06B67E22FB1606006859AC /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
+		7E06B67F22FB1606006859AC /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
+		7E06B68022FB1606006859AC /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
+		7E06B68122FB1606006859AC /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
+		7E06B68222FB1606006859AC /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C01C6B7686000F00D7 /* ACLJobController.m */; };
+		7E06B68322FB1606006859AC /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
+		7E06B68422FB1606006859AC /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
+		7E06B68522FB1606006859AC /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
+		7E06B68622FB1606006859AC /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B2219EFC99002C17D9 /* CLIColor.m */; };
+		7E06B68722FB1606006859AC /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C5219EFC99002C17D9 /* DDAbstractDatabaseLogger.m */; };
+		7E06B68822FB1606006859AC /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
+		7E06B68922FB1606006859AC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		7E06B68A22FB1606006859AC /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
+		7E06B68C22FB1606006859AC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
+		7E06B68E22FB1606006859AC /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
+		7E06B69B22FB1955006859AC /* AdguardBlockingExtensionSecurity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
 		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
 		7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
@@ -1249,6 +1290,20 @@
 			remoteGlobalIDString = 65423D951C89B7C900DD1224;
 			remoteInfo = "Clean Script";
 		};
+		7E06B66322FB1606006859AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65423D951C89B7C900DD1224;
+			remoteInfo = "Clean Script";
+		};
+		7E06B69922FB193C006859AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E06B66122FB1606006859AC;
+			remoteInfo = AdguardBlockingExtensionSecurity;
+		};
 		D0569E3E21F1CDBE00985DA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -1342,6 +1397,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				7E06B69B22FB1955006859AC /* AdguardBlockingExtensionSecurity.appex in Embed App Extensions */,
 				D0569E3D21F1CD9E00985DA9 /* Tunnel.appex in Embed App Extensions */,
 				D067D9A82142A20000ECDE6D /* AdguardBlockingExtensionPrivacy.appex in Embed App Extensions */,
 				D067D9A92142A20000ECDE6D /* AdguardBlockingExtensionAnnoyances.appex in Embed App Extensions */,
@@ -1625,6 +1681,12 @@
 		65F398651B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionGeneral.plist; sourceTree = "<group>"; };
 		65F3986D1B7C894000ABCD39 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		65F398711B7C9C5000ABCD39 /* Adguard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Adguard.entitlements; path = ../Adguard.entitlements; sourceTree = "<group>"; };
+		7E06B63522FB0313006859AC /* AdguardBlockingExtensionCustom.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionCustom.plist; sourceTree = "<group>"; };
+		7E06B63622FB0313006859AC /* AdguardBlockingExtensionOther.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionOther.plist; sourceTree = "<group>"; };
+		7E06B63722FB0313006859AC /* AdguardBlockingExtensionAnnoyances.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionAnnoyances.plist; sourceTree = "<group>"; };
+		7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionPrivacy.plist; sourceTree = "<group>"; };
+		7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionSecurity.plist; sourceTree = "<group>"; };
+		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
@@ -1848,13 +1910,9 @@
 		D067D8D42140020A00ECDE6D /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerService.swift; sourceTree = "<group>"; };
 		D067D90B21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionPrivacy.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067D90C21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AdguardBlockingExtensionPrivacy.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Extension/AdguardBlockingExtensionPrivacy.plist; sourceTree = "<absolute>"; };
 		D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionAnnoyances.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067D93D21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AdguardBlockingExtensionAnnoyances.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Extension/AdguardBlockingExtensionAnnoyances.plist; sourceTree = "<absolute>"; };
 		D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionOther.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067D96E21428B9100ECDE6D /* AdguardBlockingExtensionOther.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AdguardBlockingExtensionOther.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Extension/AdguardBlockingExtensionOther.plist; sourceTree = "<absolute>"; };
 		D067D99E21428BB500ECDE6D /* AdguardBlockingExtensionCustom.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionCustom.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067D99F21428BB600ECDE6D /* AdguardBlockingExtensionCustom.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AdguardBlockingExtensionCustom.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Extension/AdguardBlockingExtensionCustom.plist; sourceTree = "<absolute>"; };
 		D067D9AC214693E200ECDE6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongLabelCell.swift; sourceTree = "<group>"; };
 		D0702B3E2188859D0051669A /* FileShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareService.swift; sourceTree = "<group>"; };
@@ -2272,6 +2330,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E06B68B22FB1606006859AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E06B68C22FB1606006859AC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2913,6 +2979,7 @@
 				D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */,
 				D067D99E21428BB500ECDE6D /* AdguardBlockingExtensionCustom.appex */,
 				D0569E2F21F1C0A800985DA9 /* Tunnel.appex */,
+				7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2975,10 +3042,11 @@
 				65F398621B7B6A5300ABCD39 /* ActionRequestHandler.h */,
 				65F398631B7B6A5300ABCD39 /* ActionRequestHandler.m */,
 				65F398651B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.plist */,
-				D067D90C21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.plist */,
-				D067D93D21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.plist */,
-				D067D96E21428B9100ECDE6D /* AdguardBlockingExtensionOther.plist */,
-				D067D99F21428BB600ECDE6D /* AdguardBlockingExtensionCustom.plist */,
+				7E06B63722FB0313006859AC /* AdguardBlockingExtensionAnnoyances.plist */,
+				7E06B63522FB0313006859AC /* AdguardBlockingExtensionCustom.plist */,
+				7E06B63622FB0313006859AC /* AdguardBlockingExtensionOther.plist */,
+				7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */,
+				7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3636,6 +3704,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7E06B69A22FB193C006859AC /* PBXTargetDependency */,
 				D0569E3F21F1CDBE00985DA9 /* PBXTargetDependency */,
 				D067D9A12142A1DC00ECDE6D /* PBXTargetDependency */,
 				65F398671B7B6A5300ABCD39 /* PBXTargetDependency */,
@@ -3686,6 +3755,25 @@
 			name = AdguardBlockingExtensionGeneral;
 			productName = extension;
 			productReference = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		7E06B66122FB1606006859AC /* AdguardBlockingExtensionSecurity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E06B69022FB1606006859AC /* Build configuration list for PBXNativeTarget "AdguardBlockingExtensionSecurity" */;
+			buildPhases = (
+				7E06B66422FB1606006859AC /* Sources */,
+				7E06B68B22FB1606006859AC /* Frameworks */,
+				7E06B68D22FB1606006859AC /* Resources */,
+				7E06B68F22FB1606006859AC /* Setting Required device capabilities */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E06B66222FB1606006859AC /* PBXTargetDependency */,
+			);
+			name = AdguardBlockingExtensionSecurity;
+			productName = extension;
+			productReference = 7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		D0569D2E21F1C0A800985DA9 /* Tunnel */ = {
@@ -3804,7 +3892,7 @@
 		65F398091B7B684700ABCD39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
@@ -3922,6 +4010,9 @@
 							};
 						};
 					};
+					7E06B66122FB1606006859AC = {
+						DevelopmentTeam = N33TQXN8C7;
+					};
 					D0569D2E21F1C0A800985DA9 = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
@@ -4005,6 +4096,7 @@
 				D067D90D21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances */,
 				D067D93E21428B9100ECDE6D /* AdguardBlockingExtensionOther */,
 				D067D96F21428BB500ECDE6D /* AdguardBlockingExtensionCustom */,
+				7E06B66122FB1606006859AC /* AdguardBlockingExtensionSecurity */,
 				65C52B351B906105003AF42F /* ActionExtension */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
 				65423D951C89B7C900DD1224 /* Clean Script */,
@@ -4160,6 +4252,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E06B68D22FB1606006859AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E06B68E22FB1606006859AC /* Extension.entitlements in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0569E2821F1C0A800985DA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4297,6 +4397,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "RESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\nLibsFile=\"${SRCROOT}/ActionExtension/js/ExternalLibsSources.js\"\nTempFile=\"${ACTION_RESOURCES_DIR}/tempfile001\"\n\nmkdir -p \"${ACTION_RESOURCES_DIR}\"\n\nsed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${ACTION_JAVASCRIPT_ASSISTANT}\"\n) ${ACTION_JAVASCRIPT_PROCESSING_TEMPLATE} | sed -e '/\\/\\*LOAD_LIBRARY_HERE\\*\\//r '<(cat \"${LibsFile}\"\n) > \"${TempFile}\"\n\nsed -e '/\\/\\*LOAD_CSS_HERE\\*\\//r '<(tr '\\r\\n' ' ' <\"${ACTION_SELECTOR_CSS_FILE}\" | sed 's/\\/\\*.*\\*\\///' | sed 's/$/\\\\/') \"${TempFile}\" >\"${RESOURCES}/${ACTION_EXTENSION_PREPROCESSING_FILENAME}.js\"\n";
+		};
+		7E06B68F22FB1606006859AC /* Setting Required device capabilities */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Setting Required device capabilities";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D067D90721428AA900ECDE6D /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5186,6 +5301,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E06B66422FB1606006859AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E06B66522FB1606006859AC /* ACObject.m in Sources */,
+				7E06B66622FB1606006859AC /* ASDFilterObjects.m in Sources */,
+				7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */,
+				7E06B66822FB1606006859AC /* ACIOUtils.m in Sources */,
+				7E06B66922FB1606006859AC /* ADProductInfo.m in Sources */,
+				7E06B66A22FB1606006859AC /* ActionRequestHandler.m in Sources */,
+				7E06B66B22FB1606006859AC /* DDTTYLogger.m in Sources */,
+				7E06B66C22FB1606006859AC /* ACSSystemUtils.m in Sources */,
+				7E06B66D22FB1606006859AC /* NSString+Utils.m in Sources */,
+				7E06B66E22FB1606006859AC /* DDFileLogger.m in Sources */,
+				7E06B66F22FB1606006859AC /* ACLWildcard.m in Sources */,
+				7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */,
+				7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */,
+				7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */,
+				7E06B67322FB1606006859AC /* ACNNetworking.m in Sources */,
+				7E06B67422FB1606006859AC /* DDLoggerNames.m in Sources */,
+				7E06B67522FB1606006859AC /* ACLFileLocker.m in Sources */,
+				7E06B67622FB1606006859AC /* ACFFileUtils.m in Sources */,
+				7E06B67722FB1606006859AC /* DDContextFilterLogFormatter.m in Sources */,
+				7E06B67822FB1606006859AC /* SafariService.swift in Sources */,
+				7E06B67922FB1606006859AC /* DDOSLogger.m in Sources */,
+				7E06B67A22FB1606006859AC /* ACIOStream.m in Sources */,
+				7E06B67B22FB1606006859AC /* NSURL+Utils.m in Sources */,
+				7E06B67C22FB1606006859AC /* APCommonSharedResources.m in Sources */,
+				7E06B67D22FB1606006859AC /* DDMultiFormatter.m in Sources */,
+				7E06B67E22FB1606006859AC /* DDLog.m in Sources */,
+				7E06B67F22FB1606006859AC /* ADLocations.m in Sources */,
+				7E06B68022FB1606006859AC /* NSDate+Utils.m in Sources */,
+				7E06B68122FB1606006859AC /* ACLLogger.m in Sources */,
+				7E06B68222FB1606006859AC /* ACLJobController.m in Sources */,
+				7E06B68322FB1606006859AC /* AESharedResources.m in Sources */,
+				7E06B68422FB1606006859AC /* CocoaLumberjack.swift in Sources */,
+				7E06B68522FB1606006859AC /* ACNHttpUtils.m in Sources */,
+				7E06B68622FB1606006859AC /* CLIColor.m in Sources */,
+				7E06B68722FB1606006859AC /* DDAbstractDatabaseLogger.m in Sources */,
+				7E06B68822FB1606006859AC /* ADLocales.m in Sources */,
+				7E06B68922FB1606006859AC /* Reachability.m in Sources */,
+				7E06B68A22FB1606006859AC /* ACNUrlUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0569D3321F1C0A800985DA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5566,6 +5726,16 @@
 			isa = PBXTargetDependency;
 			target = 65423D951C89B7C900DD1224 /* Clean Script */;
 			targetProxy = 65FAB3421D6F2BA500A0706B /* PBXContainerItemProxy */;
+		};
+		7E06B66222FB1606006859AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65423D951C89B7C900DD1224 /* Clean Script */;
+			targetProxy = 7E06B66322FB1606006859AC /* PBXContainerItemProxy */;
+		};
+		7E06B69A22FB193C006859AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E06B66122FB1606006859AC /* AdguardBlockingExtensionSecurity */;
+			targetProxy = 7E06B69922FB193C006859AC /* PBXContainerItemProxy */;
 		};
 		D0569E3F21F1CDBE00985DA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -6798,6 +6968,46 @@
 			};
 			name = Release;
 		};
+		7E06B69122FB1606006859AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionSecurity.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionSecurity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		7E06B69222FB1606006859AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionSecurity.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionSecurity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		D0569E2D21F1C0A800985DA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
@@ -7224,6 +7434,15 @@
 			buildConfigurations = (
 				65F3986A1B7B6A5300ABCD39 /* Debug */,
 				65F3986B1B7B6A5300ABCD39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E06B69022FB1606006859AC /* Build configuration list for PBXNativeTarget "AdguardBlockingExtensionSecurity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E06B69122FB1606006859AC /* Debug */,
+				7E06B69222FB1606006859AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
