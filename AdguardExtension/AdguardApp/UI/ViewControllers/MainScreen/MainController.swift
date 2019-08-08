@@ -225,7 +225,7 @@ class MainController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             
-            let enabled = sSelf.configuration.contentBlockerEnabled
+            let optionalEnabled = sSelf.configuration.contentBlockerEnabled
             
             sSelf.tutorialVideoView.isHidden = true
             sSelf.adguardManView.isHidden = true
@@ -233,17 +233,24 @@ class MainController: UIViewController {
             sSelf.roundArrow.isHidden = true
             sSelf.shareView.isHidden = true
             
+            guard let enabled = optionalEnabled as? Bool else {
+                return
+            }
+            
             if(!enabled) {
                 sSelf.tutorialVideoView.isHidden = false
                 sSelf.roundArrow.isHidden = false
+                sSelf.refreshIcon.isHidden = false
             }
             else if(sSelf.configuration.appRated) {
                 sSelf.adguardManView.isHidden = false
                 sSelf.shareView.isHidden = false
+                sSelf.refreshIcon.isHidden = false
             }
             else {
                 sSelf.rateView.isHidden = false
                 sSelf.shareView.isHidden = false
+                sSelf.refreshIcon.isHidden = false
             }
             
             sSelf.enabledLabel.text = enabled ? ACLocalizedString("protection_enabled_caption", nil) : ACLocalizedString("protection_disabled_caption", nil)
