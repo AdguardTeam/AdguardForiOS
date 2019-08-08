@@ -29,7 +29,7 @@ class GroupsController: UITableViewController {
     let getProSegueID = "getProSegue"
     
     // MARK: - properties
-    var viewModel: IFiltersAndGroupsViewModel? = nil
+    var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     var selectedIndex: Int?
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()

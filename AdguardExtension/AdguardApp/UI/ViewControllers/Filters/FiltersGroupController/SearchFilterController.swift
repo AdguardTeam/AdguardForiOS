@@ -25,7 +25,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     @IBOutlet weak var searchBar: UISearchBar!
     
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    var viewModel: IFiltersAndGroupsViewModel? = nil
+    var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     
     private let filterCellId = "filterCellID"
     private let showFilterDetailsSegue = "showFilterDetails"

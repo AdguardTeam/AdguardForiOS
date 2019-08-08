@@ -23,7 +23,7 @@ import UIKit
 // MARK: - FiltersController
 class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
-    var viewModel: IFiltersAndGroupsViewModel?
+    var viewModel: FiltersAndGroupsViewModelProtocol?
     var group: Group? {
         get {
             if viewModel?.isSearchActive ?? false && viewModel?.groups?.count ?? 0 > 0{

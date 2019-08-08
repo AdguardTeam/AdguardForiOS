@@ -65,7 +65,7 @@ class FiltersMasterController: UIViewController {
     //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewModel: IFiltersAndGroupsViewModel = FiltersAndGroupsViewModel(filtersService: filtersService)
+        let viewModel: FiltersAndGroupsViewModelProtocol = FiltersAndGroupsViewModel(filtersService: filtersService)
         
         if segue.identifier == searchFiltersSegue {
             if let destinationVC = segue.destination as? SearchFilterController{

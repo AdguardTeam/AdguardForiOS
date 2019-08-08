@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol IFiltersAndGroupsViewModel {
+protocol FiltersAndGroupsViewModelProtocol {
     
     /* Indicates whether you need to work only with single group, otherwise it is nil */
     var currentGroup: Group? { get set }
@@ -55,7 +55,7 @@ protocol IFiltersAndGroupsViewModel {
     
     func updateCurrentGroup()
     
-    func setAllGroups()
+    func updateAllGroups()
     
     /* adds custom filter to database and reloads safari content blockers
     returns @success result in callback */
@@ -66,7 +66,7 @@ protocol IFiltersAndGroupsViewModel {
     var searchChangedCallback:(()->Void)? { get set }
 }
 
-final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
+final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtocol {
 
     // MARK: - Public properties
     
@@ -105,7 +105,7 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
         self.filtersService = filtersService
         super.init()
         
-        setAllGroups()
+        updateAllGroups()
         NotificationCenter.default.addObserver(forName: self.filtersService.updateNotification, object: nil, queue: nil) {
             [weak self] (notification) in
             self?.groupsObserver?(0)
@@ -132,8 +132,6 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
             let searchSet = Set(components.map({ String($0) }))
             let searchStrings = Array(searchSet)
             
-            var allSelectedTagsSet = Set<String>()
-            
             for group in groupsToSearchIn{
                 
                 var foundFiltersSet = Set<Filter>()
@@ -152,7 +150,7 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
                     let langsAndTagsUnion = tagsSet.union(langsSet)
                     let selectedTagsForFilterSet = searchSet.intersection(langsAndTagsUnion)
                     
-                    allSelectedTagsSet = allSelectedTagsSet.union(selectedTagsForFilterSet)
+                    highlight(filter: filter, tags: selectedTagsForFilterSet)
                     
                     let filterNameSatisfies = checkFilter(filter: filter, components: components)
                     
@@ -167,8 +165,6 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
                     searchGroups.append(searchGroup)
                 }
             }
-            
-            highlightTags(allSelectedTagsSet)
         }
         filtersChangedCallback?()
     }
@@ -219,7 +215,7 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
     
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void) {
         filtersService.addCustomFilter(filter, overwriteExisted: overwriteExisted)
-        setAllGroups()
+        updateAllGroups()
         completion(true)
         filtersChangedCallback?()
     }
@@ -236,7 +232,7 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
         }
     }
     
-    func setAllGroups(){
+    func updateAllGroups(){
         let groups = filtersService.groups
         let sortedGroups = groups.sorted(by: { $0.groupId < $1.groupId })
         for group in sortedGroups {
@@ -268,6 +264,14 @@ final class FiltersAndGroupsViewModel: NSObject, IFiltersAndGroupsViewModel {
     
     
     // MARK: - Private methods
+    private func highlight(filter: Filter, tags: Set<String>){
+        for i in 0..<(filter.tags?.count ?? 0) {
+            filter.tags![i].heighlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
+        }
+        for i in 0..<(filter.langs?.count ?? 0) {
+            filter.langs![i].heighlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+        }
+    }
     
     private func highlightTags(_ tags: Set<String>){
         for group in allGroups{
