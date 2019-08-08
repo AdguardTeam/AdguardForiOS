@@ -20,11 +20,15 @@ import Foundation
 
 class TrialController: UIViewController {
     
+    let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        setupBackButton()
     }
 }

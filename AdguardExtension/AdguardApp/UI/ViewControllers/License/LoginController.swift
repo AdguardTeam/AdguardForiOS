@@ -17,16 +17,11 @@
  */
 
 import Foundation
-
-protocol LoginControllerDelegate {
-    
-    func loginAction(name: String)
-}
+import SafariServices
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
-    var delegate: LoginControllerDelegate?
     
     private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -48,6 +43,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private let disabledColor = UIColor.init(hexString: "4D4D4D")
     
     private var keyboardMover: KeyboardMover!
+    
+    var showAlertBlock: (()->Void)?
+    var canShowAlert = false
     
     // MARK: - VC lifecycle
     
@@ -133,33 +131,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
             case PurchaseService.kPSNotificationLoginNotPremiumAccount:
                self?.notPremium()
                 
+            case PurchaseService.kPSNotificationOauthSucceeded:
+                            self?.authSucceeded()
+                
             default:
                 break
             }
         }
-    }
-    
-    private func loginSuccess(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) {
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    private func loginFailure(error: NSError?) {
-        if error != nil && error!.domain == LoginService.loginErrorDomain && error!.code == LoginService.loginBadCredentials {
-            webAuth()
-        }
-        else {
-            showRetryAlert(message: ACLocalizedString("login_error_message", nil), restoreLogin: true)
-        }
-    }
-    
-    private func premiumExpired() {
-        showRetryAlert(message: ACLocalizedString("login_premium_expired_message", nil), restoreLogin: true)
-    }
-    
-    private func notPremium() {
-        showRetryAlert(message: ACLocalizedString("not_premium_message", nil), restoreLogin: true)
     }
     
     private func showRetryAlert(message: String, restoreLogin: Bool) {
@@ -196,9 +174,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private func webAuth(){
         if let name = nameEdit.text {
             
-            dismiss(animated: true) { [weak self] in
-                self?.delegate?.loginAction(name: name)
-            }
+            webAuthWithName(name: name)
         }
     }
     
@@ -212,4 +188,70 @@ class LoginController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    private func webAuthWithName(name: String){
+           
+           DDLogInfo("(GetProController) - webAuth")
+           guard let url = purchaseService.authUrlWithName(name: name) else { return }
+           let safariController = SFSafariViewController(url: url)
+           present(safariController, animated: true, completion: nil)
+           canShowAlert = false
+       }
+       
+   private func showAlertIfPossible() {
+       if canShowAlert && showAlertBlock != nil {
+           showAlertBlock!()
+           showAlertBlock = nil
+       }
+   }
+    
+    func authSucceeded() {
+        if self.presentedViewController != nil {
+            
+            self.presentedViewController?.dismiss(animated: true) { [weak self] in
+                guard let sSelf = self else { return }
+                sSelf.canShowAlert = true
+                sSelf.showAlertIfPossible()
+            }
+        }
+    }
+    
+    private func loginCompleteWithMessage(message: String) {
+            
+        showAlertBlock = { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.removeLoading() {
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: message) {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        
+        showAlertIfPossible()
+    }
+    
+    private func loginSuccess(){
+        loginCompleteWithMessage(message: ACLocalizedString("login_success_message", nil))
+    }
+    
+    private func loginFailure(error: NSError?) {
+        if error != nil && error!.domain == LoginService.loginErrorDomain && error!.code == LoginService.loginBadCredentials {
+                   webAuth()
+        }
+        else if error?.domain == LoginService.loginErrorDomain && error?.code == LoginService.loginMaxComputersExceeded {
+            loginCompleteWithMessage(message: ACLocalizedString("login_max_computers_exceeded", nil))
+        }
+        else {
+            loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
+        }
+    }
+    
+    private func premiumExpired() {
+        loginCompleteWithMessage(message: ACLocalizedString("login_premium_expired_message", nil))
+    }
+    
+    private func notPremium() {
+        loginCompleteWithMessage(message: ACLocalizedString("not_premium_message", nil))
+    }
+        
 }

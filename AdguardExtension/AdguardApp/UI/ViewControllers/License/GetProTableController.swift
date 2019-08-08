@@ -27,16 +27,20 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
     @IBOutlet weak var trialLabel: ThemableLabel!
     
-    @IBOutlet weak var subscriptionPeriodLabel: ThemableLabel!
-    @IBOutlet weak var subscriptionPriceLabel: ThemableLabel!
-    @IBOutlet weak var permanentPriceLabel: ThemableLabel!
-    
     @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var logoImage: ThemeableImageView!
     
-    @IBOutlet weak var permanentCheck: UIImageView!
-    @IBOutlet weak var subscriptionCheck: UIImageView!
+    @IBOutlet weak var notPurchasedLogoCell: UITableViewCell!
+    @IBOutlet weak var purchasedLogoCell: UITableViewCell!
+    @IBOutlet weak var purchaseCell: UITableViewCell!
+    @IBOutlet weak var trialCell: UITableViewCell!
+    @IBOutlet weak var descriptionCell: UITableViewCell!
     
-    @IBOutlet weak var separator: UIView!
+    @IBOutlet weak var periodLabel: ThemableLabel!
+    @IBOutlet weak var priceLabel: ThemableLabel!
+    @IBOutlet weak var startTrialTitleLable: ThemableLabel!
+    @IBOutlet weak var startTrialDescriptionLabel: ThemableLabel!
+    
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -47,22 +51,17 @@ class GetProTableController: UITableViewController {
     
     var proObservation: NSKeyValueObservation?
     
-    private let securityRow = 0
-    private let privacyRow = 1
-    private let customRow = 2
-    private let subscribedRow = 3
-    private let trialRow = 4
-    private let purchaseRow = 5
+    private let notPurchasedLogoRow = 0
+    private let purchasedLogoRow = 1
+    private let purchaseRow = 2
+    private let securityRow = 3
+    private let privacyRow = 4
+    private let customRow = 5
+    private let subscribedRow = 6
+    private let trialRow = 7
+    private let descriptionRow = 8
     
-    private var subscriptionSelected: Bool {
-        get {
-            return subscriptionCheck.isHighlighted
-        }
-        set {
-            subscriptionCheck.isHighlighted = newValue
-            permanentCheck.isHighlighted = !newValue
-        }
-    }
+    var permanentSubscription = false
     
     // MARK: - View controller lifecycle
     
@@ -73,18 +72,22 @@ class GetProTableController: UITableViewController {
             self?.updateTheme()
         }
         
-        subscriptionSelected = true
-        
         updateTheme()
         
         upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
         
         setPrice()
         setPurchaseDescription()
+        setCellsVisibility()
+        
+        let trialDescriptionFormat = ACLocalizedString("trial_description_format", nil)
+        let trialDescriptionText = String(format: trialDescriptionFormat, purchaseService.subscriptionPrice, purchaseService.subscriptionPeriod)
+        startTrialDescriptionLabel.text = trialDescriptionText
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
                 self?.updateTheme()
+                self?.setCellsVisibility()
                 self?.tableView.reloadData()
             }
         }
@@ -118,6 +121,21 @@ class GetProTableController: UITableViewController {
             return 0
         }
         
+        // hide notPurchased logo for premium users
+        if indexPath.row == notPurchasedLogoRow && configuration.proStatus {
+            return 0
+        }
+        
+        // hide Purchased logo for not a premium users
+        if indexPath.row == purchasedLogoRow && !configuration.proStatus {
+            return 0
+        }
+        
+        // hide description for premium users
+        if indexPath.row == descriptionRow && configuration.proStatus {
+            return 0
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -131,17 +149,21 @@ class GetProTableController: UITableViewController {
     func setPrice() {
         
         if purchaseService.ready {
-            subscriptionPriceLabel.text = purchaseService.subscriptionPrice
-            subscriptionPeriodLabel.text = purchaseService.subscriptionPeriod
             trialLabel.text = String(format: ACLocalizedString("trial_format", nil), purchaseService.trialPeriod)
-            permanentPriceLabel.text = purchaseService.nonConsumablePrice
+            
+            if permanentSubscription {
+                periodLabel.text = ACLocalizedString("permanent_subscription_title", nil)
+                priceLabel.text = purchaseService.nonConsumablePrice
+            }
+            else {
+                periodLabel.text = purchaseService.subscriptionPeriod
+                priceLabel.text = purchaseService.subscriptionPrice
+            }
+            
             upgradeButton.isEnabled = true
         }
         else {
-            subscriptionPriceLabel.text = ""
-            subscriptionPeriodLabel.text = ""
             trialLabel.text = ""
-            permanentPriceLabel.text = ""
             upgradeButton.isEnabled = false
         }
     }
@@ -151,11 +173,11 @@ class GetProTableController: UITableViewController {
     @IBAction func upgradeAction(_ sender: Any) {
         enablePurchaseButtons(false)
         
-        if subscriptionSelected {
-            purchaseService.requestSubscriptionPurchase()
+        if permanentSubscription {
+            purchaseService.requestNonConsumablePurchase()
         }
         else {
-            purchaseService.requestNonConsumablePurchase()
+            purchaseService.requestSubscriptionPurchase()
         }
     }
     
@@ -164,13 +186,28 @@ class GetProTableController: UITableViewController {
         purchaseService.requestRestore()
     }
     
-    @IBAction func selectSubscribeAction(_ sender: Any) {
-        subscriptionSelected = true
+    @IBAction func choosePeriodAction(_ sender: Any) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let subsriptionTitle = "\(purchaseService.subscriptionPeriod) - \(purchaseService.subscriptionPrice)"
+        let subscribeAction = UIAlertAction(title: subsriptionTitle , style: .default) { [weak self] (_) in
+            self?.permanentSubscription = false
+            self?.setPrice()
+        }
+            
+        actionSheet.addAction(subscribeAction)
+        
+        let permanentTitle = "\(ACLocalizedString("permanent_subscription_title", nil)) - \(purchaseService.nonConsumablePrice)"
+        let permanentAction = UIAlertAction(title: permanentTitle , style: .default) { [weak self] (_) in
+            self?.permanentSubscription = true
+            self?.setPrice()
+        }
+        
+        actionSheet.addAction(permanentAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
-    @IBAction func selectPurchaseAction(_ sender: Any) {
-        subscriptionSelected = false
-    }
     
     // MARK: - private methods
     
@@ -182,7 +219,7 @@ class GetProTableController: UITableViewController {
         }
         theme.setupLabels(themableLabels)
         setPurchaseDescription()
-        theme.setupSeparator(separator)
+        theme.setupImage(logoImage)
     }
     
     private func setPurchaseDescription() {
@@ -200,5 +237,12 @@ class GetProTableController: UITableViewController {
         purchaseDescriptionTextView.attributedText = attributedString
     }
     
-    
+    private func setCellsVisibility() {
+        let pro = configuration.proStatus
+        notPurchasedLogoCell.isHidden = pro
+        purchasedLogoCell.isHidden = !pro
+        trialCell.isHidden = pro
+        purchaseCell.isHidden = pro
+        descriptionCell.isHidden = pro
+    }
 }
