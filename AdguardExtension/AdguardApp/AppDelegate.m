@@ -396,22 +396,19 @@ typedef enum : NSUInteger {
     UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
     UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
-    UIWindow *launchWindow = [[UIWindow alloc] initWithFrame: self.window.frame];
-    launchWindow.rootViewController = launchScreenController;
-    [launchWindow makeKeyAndVisible];
-    
-    UIWindow *loadedWindow = self.window;
+    NSString *command = url.host;
     
     UINavigationController *nav = [self getNavigationController];
-    self.window = launchWindow;
+    
+    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+        self.window.rootViewController = launchScreenController;
+    }
 
     if ([url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [_aeService onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 @autoreleasepool {
-                    
-                    NSString *command = url.host;
                     
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
                         
@@ -436,10 +433,9 @@ typedef enum : NSUInteger {
                                 [mainMenuController view];
                                 [userFilterController view];
 
-                                self.window = loadedWindow;
+                                self.window.rootViewController = nav;
                             }
                             else{
-                                
                                 DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
                             }
                         }

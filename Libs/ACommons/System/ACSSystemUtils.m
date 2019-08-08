@@ -46,7 +46,7 @@
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"OK", @"OK Button caption in alerts") style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"common_action_ok", @"OK Button caption in alerts") style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               
                                                               if(completion)
