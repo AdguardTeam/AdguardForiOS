@@ -23,7 +23,15 @@ import UIKit
 // MARK: - FiltersController
 class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
     
-    var viewModel: FiltersViewModelProtocol?
+    var viewModel: FiltersAndGroupsViewModelProtocol?
+    var group: Group? {
+        get {
+            if viewModel?.isSearchActive ?? false && viewModel?.groups?.count ?? 0 > 0{
+                return viewModel?.groups?[0]
+            }
+            return viewModel?.currentGroup
+        }
+    }
     
     // MARK:  private properties
     
@@ -32,9 +40,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let newFilterCellId = "newCustomFilterReuseID"
     private let filterCellId = "filterCellID"
     private let groupCellId = "GroupCellReuseID"
-    private let tagCellId = "tagCellId"
-    private let langCellId = "langCellId"
+
     private let showFilterDetailsSegue = "showFilterDetailsSegue"
+
     
     private var selectedIndex: Int?
     
@@ -75,13 +83,14 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         viewModel?.searchChangedCallback = { [weak self] in self?.updateBarButtons() }
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
-        navigationItem.title = viewModel?.group.name
+        navigationItem.title = group?.name ?? ""
         
         setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel?.updateCurrentGroup()
         updateTheme()
     }
     
@@ -97,10 +106,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
                 return
             }
             
-            let filter = viewModel?.filters[selectedIndex.row]
+            let filter = group?.filters[selectedIndex.row]
             
             detailsController.filter = filter
-            detailsController.isCustom = viewModel?.customGroup ?? false
+            detailsController.isCustom = group?.groupId == FilterGroupId.custom ? true : false
         }
     }
     
@@ -116,7 +125,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection, addFilterSection:
             return 1
         case filtersSection:
-            return viewModel?.filters.count ?? 0
+            return group?.filters.count ?? 0
         default:
             return 0
         }
@@ -130,7 +139,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
             
-            let enabled = viewModel?.group.enabled ?? false
+            let enabled = group?.enabled ?? false
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
@@ -145,34 +154,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             
         case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
-            cell?.isHidden = (viewModel?.customGroup ?? false) ? false : true
+            cell?.isHidden = group?.groupId == FilterGroupId.custom ? false : true
             return cell!
             
         case filtersSection:
-            let filter = viewModel?.filters[indexPath.row]
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: filterCellId) as! FilterCell
+            let filter = group?.filters[indexPath.row]
+
+            // Cell setup
             cell.filterTagsView.delegate = self
-            cell.filterTagsView.filter = filter
             
-            cell.name.text = filter?.name ?? ""
-            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            cell.updateDate.text = String(format: ACLocalizedString("filter_last_update_format", nil), dateString)
-            
-            if let version = filter?.version {
-                cell.version.text = String(format: ACLocalizedString("filter_version_format", nil), version)
-            }
+            cell.filter = filter
+            cell.group = group
+            cell.enableSwitch.row = indexPath.row
 
-            cell.enableSwitch.tag  = indexPath.row
-            cell.enableSwitch.isOn = filter?.enabled ?? false
             cell.homepageButton.tag = indexPath.row
-            cell.homepageButton.isHidden = viewModel?.customGroup ?? true ? true : false
-
-            
-            let groupEnabled = viewModel?.group.enabled ?? false
-            cell.enableSwitch.isEnabled = groupEnabled
-            cell.enableSwitch.isUserInteractionEnabled = groupEnabled
-            cell.contentView.alpha = groupEnabled ? 1.0 : 0.5
             
             theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
@@ -203,21 +199,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection:
             return 72
         case addFilterSection:
-            return (viewModel?.customGroup ?? false) ? 60 : 0
+            return group?.groupId == FilterGroupId.custom ? 60 : 0
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !(viewModel?.customGroup ?? false) {
+        if !(group?.groupId == FilterGroupId.custom) {
             return nil
         }
         return section == addFilterSection ? headerView : nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !(viewModel?.customGroup ?? false) {
+        if !(group?.groupId == FilterGroupId.custom) {
             return 0.0
         }
         return section == addFilterSection ? 72.0 : 0.0
@@ -225,9 +221,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     // MARK: - Actions
     
-    @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
-        let row = sender.tag
-        guard let filter = viewModel?.filters[row] else { return }
+    @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
+        guard let row = sender.row else { return }
+        guard let filter = group?.filters[row] else { return }
         viewModel?.set(filter: filter, enabled: sender.isOn)
         
         tableView.beginUpdates()
@@ -237,7 +233,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     @IBAction func showSiteAction(_ sender: UIButton) {
         let row = sender.tag
-        let filter = viewModel?.filters[row]
+        let filter = group?.filters[row]
         guard   let homepage = filter?.homepage,
                 let url = URL(string: homepage) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -256,16 +252,13 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         self.updateBarButtons()
     }
     
-    @IBAction func tagAction(_ sender: TagButton) {
-        viewModel?.switchTag(name: sender.name ?? "")
-    }
-    
-    @objc func langAction(_ sender: LangButton) {
+    private func tagAction(_ sender: TagButton) {
         viewModel?.switchTag(name: sender.name ?? "")
     }
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
-        viewModel?.setGroup(enabled: sender.isOn)
+        guard let sGroup = group else { return }
+        viewModel?.set(group: sGroup, enabled: sender.isOn)
     }
     
     // MARK: - searchbar methods
@@ -288,12 +281,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     // MARK: - Tag Button Tapped delegate method
-    func tagButtonTapped(_ sender: UIButton?) {
-        if let lang = sender as? LangButton {
-            langAction(lang)
-        } else if let tag = sender as? TagButton{
-            tagAction(tag)
-        }
+    func tagButtonTapped(_ sender: TagButton) {
+        tagAction(sender)
     }
     
     // MARK: - private methods
@@ -308,6 +297,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         }
         theme.setupSearchBar(searchBar)
         theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
         theme.setupLabels(themableLabels)
     }
     

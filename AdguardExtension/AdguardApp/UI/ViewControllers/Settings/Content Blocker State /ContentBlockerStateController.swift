@@ -31,7 +31,8 @@ class ContentBlockerStateController: UITableViewController {
         1 : .privacy,
         2 : .custom,
         3 : .socialWidgetsAndAnnoyances,
-        4 : .other
+        4 : .other,
+        5 : .security
     ]
     
     private let rowByType : [ContentBlockerType : Int] = [
@@ -39,7 +40,8 @@ class ContentBlockerStateController: UITableViewController {
         .privacy : 1,
         .custom : 2,
         .socialWidgetsAndAnnoyances : 3,
-        .other : 4
+        .other : 4,
+        .security : 5
     ]
     
     @IBOutlet weak var tableFooterView: UIView!

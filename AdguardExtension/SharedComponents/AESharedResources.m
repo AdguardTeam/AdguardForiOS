@@ -55,12 +55,14 @@ NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContent
 NSString* AEDefaultsSocialContentBlockerRulesCount = @"AEDefaultsSocialContentBlockerRulesCount";
 NSString* AEDefaultsOtherContentBlockerRulesCount = @"AEDefaultsOtherContentBlockerRulesCount";
 NSString* AEDefaultsCustomContentBlockerRulesCount = @"AEDefaultsCustomContentBlockerRulesCount";
+NSString* AEDefaultsSecurityContentBlockerRulesCount = @"AEDefaultsSecurityContentBlockerRulesCount";
 
 NSString* AEDefaultsGeneralContentBlockerRulesOverLimitCount = @"AEDefaultsGeneralContentBlockerRulesOverLimitCount";
 NSString* AEDefaultsPrivacyContentBlockerRulesOverLimitCount = @"AEDefaultsPrivacyContentBlockerRulesOverLimitCount";
 NSString* AEDefaultsSocialContentBlockerRulesOverLimitCount = @"AEDefaultsSocialContentBlockerRulesOverLimitCount";
 NSString* AEDefaultsOtherContentBlockerRulesOverLimitCount = @"AEDefaultsOtherContentBlockerRulesOverLimitCount";
 NSString* AEDefaultsCustomContentBlockerRulesOverLimitCount = @"AEDefaultsCustomContentBlockerRulesOverLimitCount";
+NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecurityContentBlockerRulesOverLimitCount";
 
 NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";

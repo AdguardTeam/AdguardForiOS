@@ -20,6 +20,8 @@ import UIKit
 
 class FilterTagsView: UIView, FilterTagsViewModel {
     
+    var highlightIsOn = true
+    
     weak var delegate: TagButtonTappedDelegate?
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -108,13 +110,15 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     }
     
     private func setupLangButton(lang: (name: String, heighlighted: Bool)){
-        let langButton = LangButton()
+        let langButton = TagButton()
         langButton.delegate = self.delegate
         
         langButton.name = lang.name
         langButton.setImage(UIImage(named: lang.name), for: .normal)
         langButton.imageView?.contentMode = .scaleAspectFill
-        langButton.alpha = lang.heighlighted ? 0.3 : 1.0
+        if highlightIsOn{
+            langButton.alpha = lang.heighlighted ? 0.3 : 1.0
+        }
         langButton.layer.cornerRadius = 3.0
         langButton.layer.masksToBounds = true
         
@@ -135,7 +139,9 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         tagButton.setTitle(tag.name, for: .normal)
         tagButton.titleLabel?.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         tagButton.layer.cornerRadius = 3.0
-        tagButton.alpha = tag.heighlighted ? 0.3 : 1.0
+        if highlightIsOn{
+            tagButton.alpha = tag.heighlighted ? 0.3 : 1.0
+        }
         tagButton.name = tag.name
         theme.setupTagButton(tagButton)
         
