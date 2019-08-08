@@ -391,7 +391,20 @@ typedef enum : NSUInteger {
     DDLogError(@"(AppDelegate) application Open URL.");
     
     _activateWithOpenUrl = YES;
+ 
+
+    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
+    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
+    UIWindow *launchWindow = [[UIWindow alloc] initWithFrame: self.window.frame];
+    launchWindow.rootViewController = launchScreenController;
+    [launchWindow makeKeyAndVisible];
+    
+    UIWindow *loadedWindow = self.window;
+    
+    UINavigationController *nav = [self getNavigationController];
+    self.window = launchWindow;
+
     if ([url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [_aeService onReady:^{
@@ -404,7 +417,7 @@ typedef enum : NSUInteger {
                         
                         NSString *path = [url.path substringFromIndex:1];
                         
-                        UINavigationController *nav = [self getNavigationController];
+                        
                         if (nav.viewControllers.count) {
                             MainController *main = nav.viewControllers.firstObject;
                             if ([main isKindOfClass:[MainController class]]) {
@@ -418,6 +431,12 @@ typedef enum : NSUInteger {
                                 userFilterController.newRuleText = path;
                                 
                                 nav.viewControllers = @[main, mainMenuController, userFilterController];
+                                
+                                [main view];
+                                [mainMenuController view];
+                                [userFilterController view];
+
+                                self.window = loadedWindow;
                             }
                             else{
                                 
