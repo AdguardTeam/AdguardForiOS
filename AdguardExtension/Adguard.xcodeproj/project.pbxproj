@@ -799,6 +799,7 @@
 		D031A17D219EFC99002C17D9 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D031A17E219EFC99002C17D9 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
+		D039336922FD62CB00ADEBEB /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */; };
 		D03D0FDF22427B7A00ECF6DF /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03D0FDE22427B7A00ECF6DF /* ToastView.xib */; };
 		D03E532921B412FA00C62152 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
@@ -1882,6 +1883,7 @@
 		D031A0C7219EFC99002C17D9 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
 		D031A0C8219EFC99002C17D9 /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
+		D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		D03D0FDE22427B7A00ECF6DF /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
 		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
@@ -3216,6 +3218,7 @@
 			isa = PBXGroup;
 			children = (
 				D044AF7221820ABE00CD9E06 /* CustomAnimatedTransitioning.swift */,
+				D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -5067,6 +5070,7 @@
 				D031A171219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */,
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
+				D039336922FD62CB00ADEBEB /* ReplaceSegue.swift in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,

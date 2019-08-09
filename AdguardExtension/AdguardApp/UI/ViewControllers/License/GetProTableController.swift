@@ -24,6 +24,7 @@ class GetProTableController: UITableViewController {
     
     @IBOutlet weak var upgradeButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
+    @IBOutlet weak var periodButton: RoundRectButton!
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
     @IBOutlet weak var trialLabel: ThemableLabel!
     
@@ -204,6 +205,12 @@ class GetProTableController: UITableViewController {
         }
         
         actionSheet.addAction(permanentAction)
+        
+        let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        
+        actionSheet.popoverPresentationController?.sourceView = periodButton
+        actionSheet.popoverPresentationController?.sourceRect = periodButton.bounds
         
         self.present(actionSheet, animated: true, completion: nil)
     }

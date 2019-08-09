@@ -31,4 +31,20 @@ class TrialController: UIViewController {
         
         setupBackButton()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        guard let nav = self.navigationController as? MainNavigationController else { return }
+        nav.customStatusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        guard let nav = self.navigationController as? MainNavigationController else { return }
+        nav.customStatusBarStyle = nil
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
