@@ -329,7 +329,7 @@
 "general_settings_title" = "General settings";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
-"enabled_current_state_label" = "%@ out of 50 000 rules are being used";
+"enabled_current_state_label" = "%1$@ out of %2$@ rules are being used";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Disabled in Safari settings";
@@ -338,7 +338,7 @@
 "update_current_state_label" = "Checking for updates...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
-"over_limit_current_state_label" = "The limit of 50 000 rules is reached. The app may not work correctly. Please disable the extra rules. Currently 50 000 out of %1$@ rules are being used; %2$@ rules are disabled.";
+"over_limit_current_state_label" = "The limit of %1$@ rules is reached. The app may not work correctly. Please disable the extra rules. Currently %2$@ out of %3$@ rules are being used; %4$@ rules are disabled.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
 "failed_updating_current_state_label" = "Filters have not been updated";
