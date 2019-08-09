@@ -345,3 +345,39 @@
 
 /* (GetProController) login error message text */
 "login_max_computers_exceeded" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Before you can use this action extension, %1$@ has to perform an initial configuration. Launch the main %2$@ app to let it do so.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Cannot send a message to the support team. You have not configured your email account yet.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Note that Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "The hostname is not obtained. Perhaps the page has not been loaded yet.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "This website's security policy does not allow launching AdGuard Assistant.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "An unexpected error occurred while initializing Safari action extension. Please contact AdGuard Support if this happens again.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Warning";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
+
+/* Today widget - text when remote DNS is enabled */
+"connected_to_server_format" = "Connected to \"%@\"";
+
+/* Today widget - text when remote DNS is disabled */
+"dns_filtering_disabled" = "DNS filtering is disabled";
+
+/* Today widget - hint text */
+"disable_dns_filtering" = "Touch to disable DNS filtering";
+
+/* Today widget - hint text */
+"enable_dns_filtering" = "Touch to enable DNS filtering";
