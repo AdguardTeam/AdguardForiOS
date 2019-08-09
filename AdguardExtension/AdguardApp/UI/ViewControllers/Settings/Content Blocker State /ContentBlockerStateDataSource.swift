@@ -37,6 +37,8 @@ class ContentBlocker: ContentBlockerStateProtocol {
     private let resources: AESharedResourcesProtocol
     private let filterService: FiltersServiceProtocol
     
+    var userFilterString: String?
+    
     var enabled: Bool {
         get {
             guard let type = contentBlockerType else { return false }
@@ -68,17 +70,22 @@ class ContentBlocker: ContentBlockerStateProtocol {
             var returnString = ""
             let groupIds = ContentBlockerService.groupsByContentBlocker[contentBlockerType!]
             let groups = filterService.groups.filter({ groupIds!.contains($0.groupId) })
-            for group in groups {
+            let enabledGroups = groups.filter({ $0.enabled })
+            for group in enabledGroups {
                 let filters = group.filters.filter({ $0.enabled == true })
                 let filterNames = filters.map({ $0.name })
                 filterNames.forEach({ returnString += $0! + "\n"})
             }
+            
+            returnString += userFilterString ?? ""
+            
             if returnString.count > 0{
                 returnString.removeLast(1)
             }
             return returnString
         }
     }
+    
     init(contentBlockerType: ContentBlockerType?, safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol) {
         self.contentBlockerType = contentBlockerType
         self.safariService = safariService
@@ -94,20 +101,39 @@ class ContentBlockersDataSource {
     private let safariService: SafariService
     private let resources: AESharedResourcesProtocol
     private let filterService: FiltersServiceProtocol
+    private let antibanner: AESAntibannerProtocol
     
     var contentBlockers = [ContentBlockerType : ContentBlocker]()
     
-    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol) {
+    lazy var userFilterString: String = {
+       return getUserFilterStringIfNedeed()
+    }()
+    
+    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibanner: AESAntibannerProtocol) {
         self.safariService = safariService
         self.resources = resources
         self.filterService = filterService
+        self.antibanner = antibanner
         self.updateContentBlockersArray()
     }
     
     func updateContentBlockersArray(){
         for type in ContentBlockerType.allCases {
             let contentBlocker = ContentBlocker(contentBlockerType: type, safariService: safariService, resources: resources, filterService: filterService)
+            contentBlocker.userFilterString = userFilterString
             self.contentBlockers[type] = contentBlocker
         }
+    }
+    
+    private func getUserFilterStringIfNedeed() -> String {
+        let userTitleString = ACLocalizedString("user_filter_title", nil)
+        let blacklistRuleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+        let whitelistRuleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        
+        if !blacklistRuleObjects.isEmpty || !whitelistRuleObjects.isEmpty {
+            return userTitleString + "\n"
+        }
+        
+        return ""
     }
 }
