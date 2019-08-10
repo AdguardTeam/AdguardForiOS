@@ -58,7 +58,6 @@ class FilterCell: UITableViewCell {
     @IBOutlet weak var version: UILabel!
     @IBOutlet weak var updateDate: UILabel!
     @IBOutlet weak var enableSwitch: FilterCellUISwitch!
-    @IBOutlet weak var homepageButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var filterTagsView: FilterTagsView!
     
