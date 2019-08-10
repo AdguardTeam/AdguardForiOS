@@ -351,3 +351,6 @@
 
 /* (FiltersController) OFF state in groups section */
 "off_state" = "OFF";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Homepage:";
