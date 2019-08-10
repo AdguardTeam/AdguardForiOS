@@ -127,10 +127,9 @@ class ContentBlockersDataSource {
     
     private func getUserFilterStringIfNedeed() -> String {
         let userTitleString = ACLocalizedString("user_filter_title", nil)
-        let blacklistRuleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-        let whitelistRuleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        let rulesCount = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
         
-        if !blacklistRuleObjects.isEmpty || !whitelistRuleObjects.isEmpty {
+        if rulesCount != 0 {
             return userTitleString + "\n"
         }
         
