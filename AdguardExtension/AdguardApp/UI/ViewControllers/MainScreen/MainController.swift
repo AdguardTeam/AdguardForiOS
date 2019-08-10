@@ -225,6 +225,23 @@ class MainController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             
+            func showProIfNeedeed(){
+                sSelf.setFiltersTime()
+                if sSelf.configuration.proStatus {
+                    sSelf.getProView.isHidden = true
+                    sSelf.manImage.isHidden = true
+                    sSelf.getProHeight.constant = 0
+                }
+                else {
+                    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                        sSelf.getProView.isHidden = false
+                        sSelf.manImage.isHidden = false
+                    }, completion: { (success) in
+                        sSelf.getProHeight.constant = 93
+                    })
+                }
+            }
+            
             let optionalEnabled = sSelf.configuration.contentBlockerEnabled
             
             sSelf.tutorialVideoView.isHidden = true
@@ -234,6 +251,7 @@ class MainController: UIViewController {
             sSelf.shareView.isHidden = true
             
             guard let enabled = optionalEnabled as? Bool else {
+                showProIfNeedeed()
                 return
             }
             
@@ -258,21 +276,7 @@ class MainController: UIViewController {
             
             sSelf.headerImage.isHighlighted = !enabled
             
-            sSelf.setFiltersTime()
-            
-            if sSelf.configuration.proStatus {
-                sSelf.getProView.isHidden = true
-                sSelf.manImage.isHidden = true
-                sSelf.getProHeight.constant = 0
-            }
-            else {
-                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                    sSelf.getProView.isHidden = false
-                    sSelf.manImage.isHidden = false
-                }, completion: { (success) in
-                    sSelf.getProHeight.constant = 93
-                })
-            }
+            showProIfNeedeed()
         }
     }
     

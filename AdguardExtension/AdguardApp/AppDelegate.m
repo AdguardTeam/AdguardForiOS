@@ -392,7 +392,10 @@ typedef enum : NSUInteger {
     
     _activateWithOpenUrl = YES;
  
-
+    /*
+     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
+     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
+    */
     UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
     UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
