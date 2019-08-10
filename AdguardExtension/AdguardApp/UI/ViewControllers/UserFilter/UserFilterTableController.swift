@@ -35,6 +35,7 @@ class HelpCell : UITableViewCell {
 
 class FilterEnabledCell: UITableViewCell {
     @IBOutlet weak var enabledSwitch: UISwitch!
+    @IBOutlet weak var enabledLabel: ThemableLabel!
 }
 
 // MARK: - UserFilterTableController
@@ -139,6 +140,8 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         case enabledSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnabledCellID") as! FilterEnabledCell
             self.enabledSwitch = cell.enabledSwitch
+            // NEEDS TO FIX
+            //cell.enabledLabel.text = false ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
             self.enabledSwitch.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
         case helpSection:
