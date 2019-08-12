@@ -799,6 +799,7 @@
 		D031A17D219EFC99002C17D9 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D031A17E219EFC99002C17D9 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
+		D039336922FD62CB00ADEBEB /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */; };
 		D03D0FDF22427B7A00ECF6DF /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03D0FDE22427B7A00ECF6DF /* ToastView.xib */; };
 		D03E532921B412FA00C62152 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
@@ -1069,6 +1070,7 @@
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
 		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
+		D0A1AA1C22FB08ED00E3BDBF /* TrialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1AA1B22FB08ED00E3BDBF /* TrialController.swift */; };
 		D0ABE0D42230FD5500771635 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D0B035591FD972AB00AB8F9D /* ABECService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B035581FD972AB00AB8F9D /* ABECService.m */; };
 		D0B0355A1FD972AB00AB8F9D /* ABECService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B035581FD972AB00AB8F9D /* ABECService.m */; };
@@ -1849,6 +1851,7 @@
 		D031A0C7219EFC99002C17D9 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
 		D031A0C8219EFC99002C17D9 /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
+		D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		D03D0FDE22427B7A00ECF6DF /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
 		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
@@ -1937,6 +1940,7 @@
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
+		D0A1AA1B22FB08ED00E3BDBF /* TrialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialController.swift; sourceTree = "<group>"; };
 		D0B035571FD972AB00AB8F9D /* ABECService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECService.h; sourceTree = "<group>"; };
 		D0B035581FD972AB00AB8F9D /* ABECService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECService.m; sourceTree = "<group>"; };
 		D0B0383A1FB487BA00A5EA3F /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
@@ -3160,6 +3164,7 @@
 			isa = PBXGroup;
 			children = (
 				D044AF7221820ABE00CD9E06 /* CustomAnimatedTransitioning.swift */,
+				D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -3257,6 +3262,7 @@
 				D067D9AC214693E200ECDE6D /* LoginController.swift */,
 				D077D5F0213974FC00D3D5B3 /* GetProController.swift */,
 				D0BA620F224A8547005CF278 /* GetProTableController.swift */,
+				D0A1AA1B22FB08ED00E3BDBF /* TrialController.swift */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -5008,6 +5014,7 @@
 				D031A171219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */,
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
+				D039336922FD62CB00ADEBEB /* ReplaceSegue.swift in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0F91164212EDD71006DF0D3 /* FilterCell.swift in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
@@ -5119,6 +5126,7 @@
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */,
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
+				D0A1AA1C22FB08ED00E3BDBF /* TrialController.swift in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,

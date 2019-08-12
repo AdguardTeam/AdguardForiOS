@@ -26,7 +26,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     var viewModel: FiltersAndGroupsViewModelProtocol?
     var group: Group? {
         get {
-            if viewModel?.isSearchActive ?? false && viewModel?.groups?.count ?? 0 > 0{
+            if viewModel?.isSearchActive ?? false {
+                if viewModel?.groups?.count == 0{
+                    return nil
+                }
                 return viewModel?.groups?[0]
             }
             return viewModel?.currentGroup
@@ -143,6 +146,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
+            cell.nameLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
             cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
             cell.enabledSwitch.addTarget(self, action: #selector(toogleGroupEnable(_:)), for: .valueChanged)
             
@@ -167,8 +171,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             cell.filter = filter
             cell.group = group
             cell.enableSwitch.row = indexPath.row
-
-            cell.homepageButton.tag = indexPath.row
             
             theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
@@ -231,14 +233,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.endUpdates()
     }
     
-    @IBAction func showSiteAction(_ sender: UIButton) {
-        let row = sender.tag
-        let filter = group?.filters[row]
-        guard   let homepage = filter?.homepage,
-                let url = URL(string: homepage) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
     @IBAction func searchAction(_ sender: Any) {
         
         viewModel?.searchFilter(query: "")
@@ -258,7 +252,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
         guard let sGroup = group else { return }
-        viewModel?.set(group: sGroup, enabled: sender.isOn)
+        viewModel?.set(groupId: sGroup.groupId, enabled: sender.isOn)
     }
     
     // MARK: - searchbar methods

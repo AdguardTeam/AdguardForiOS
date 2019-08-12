@@ -17,9 +17,8 @@
  */
 
 import Foundation
-import SafariServices
 
-class GetProController: UIViewController, UIViewControllerTransitioningDelegate, LoginControllerDelegate {
+class GetProController: UIViewController {
     
     // MARK: - properties
     var notificationObserver: Any?
@@ -27,9 +26,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
     let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    var showAlertBlock: (()->Void)?
-    var canShowAlert = false
     
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
@@ -89,26 +85,10 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         }
     }
     
-    func authSucceeded() {
-        if self.presentedViewController != nil {
-            
-            self.presentedViewController?.dismiss(animated: true) { [weak self] in
-                guard let sSelf = self else { return }
-                sSelf.canShowAlert = true
-                sSelf.showAlertIfPossible()
-            }
-        }
-    }
-    
     // MARK: - actions
     
     @IBAction func accountAction(_ sender: Any) {
         UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
-    }
-    
-    @IBAction func loginAction(_ sender: Any) {
-        
-        showLoginDialog()
     }
     
     @IBAction func logoutAction(_ sender: Any) {
@@ -129,18 +109,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         alert.addAction(okAction)
         
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
-    // MARK: - LoginControllerDelegate methods
-    
-    func loginAction(name: String) {
-        webAuthWithName(name: name)
     }
     
     // MARK: - private methods
@@ -165,18 +133,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
             case PurchaseService.kPSNotificationReadyToPurchase:
                 self?.tableController?.enablePurchaseButtons(true)
                 self?.tableController?.setPrice()
-                
-            case PurchaseService.kPSNotificationLoginSuccess:
-                self?.loginSuccess()
-            case PurchaseService.kPSNotificationLoginFailure:
-                self?.loginFailure(error: error)
-            case PurchaseService.kPSNotificationLoginPremiumExpired:
-                self?.premiumExpired()
-            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
-                self?.notPremium()
-                
-            case PurchaseService.kPSNotificationOauthSucceeded:
-                self?.authSucceeded()
                 
             default:
                 break
@@ -208,40 +164,6 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
     }
     
-    
-    private func loginSuccess(){
-        loginCompleteWithMessage(message: ACLocalizedString("login_success_message", nil))
-    }
-    
-    private func loginFailure(error: NSError?) {
-        if error?.domain == LoginService.loginErrorDomain && error?.code == LoginService.loginMaxComputersExceeded {
-            loginCompleteWithMessage(message: ACLocalizedString("login_max_computers_exceeded", nil))
-        }
-        else {
-            loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
-        }
-    }
-    
-    private func premiumExpired() {
-        loginCompleteWithMessage(message: ACLocalizedString("login_premium_expired_message", nil))
-    }
-    
-    private func notPremium() {
-        loginCompleteWithMessage(message: ACLocalizedString("not_premium_message", nil))
-    }
-    
-    private func loginCompleteWithMessage(message: String) {
-        
-        showAlertBlock = { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.removeLoading() {
-                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: message)
-            }
-        }
-        
-        showAlertIfPossible()
-    }
-    
     private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
@@ -265,30 +187,5 @@ class GetProController: UIViewController, UIViewControllerTransitioningDelegate,
         }
         
         (children.first as? UITableViewController)?.tableView.reloadData()
-    }
-    
-    private func showLoginDialog() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "LoginController") as? LoginController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        controller.delegate = self
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func webAuthWithName(name: String){
-        
-        DDLogInfo("(GetProController) - webAuth")
-        guard let url = purchaseService.authUrlWithName(name: name) else { return }
-        let safariController = SFSafariViewController(url: url)
-        present(safariController, animated: true, completion: nil)
-        canShowAlert = false
-    }
-    
-    private func showAlertIfPossible() {
-        if canShowAlert && showAlertBlock != nil {
-            showAlertBlock!()
-            showAlertBlock = nil
-        }
     }
 }

@@ -25,7 +25,6 @@ class GroupsController: UITableViewController {
     let disabledColor = UIColor.init(hexString: "D8D8D8")
     
     let filtersSegueID = "showFiltersSegue"
-    let customFiltersSegueID = "showCustomFiltersSegue"
     let getProSegueID = "getProSegue"
     
     // MARK: - properties
@@ -49,7 +48,10 @@ class GroupsController: UITableViewController {
         }
         
         viewModel?.load() {[weak self] () in
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.viewModel?.updateAllGroups()
+                self?.tableView.reloadData()
+            }
         }
         
         viewModel?.bind { [weak self] (Int) in
@@ -125,7 +127,9 @@ class GroupsController: UITableViewController {
         if group.proOnly && !configuration.proStatus {
             performSegue(withIdentifier: getProSegueID, sender: self)
         }
-        performSegue(withIdentifier: "showFiltersSegue", sender: self)
+        else {
+            performSegue(withIdentifier: filtersSegueID, sender: self)
+        }
     }
     
     @IBAction func switchTap(_ sender: UIView) {
@@ -143,7 +147,7 @@ class GroupsController: UITableViewController {
     @objc func enabledChanged(_ enableSwitch: UISwitch) {
         let row = enableSwitch.tag
         guard let group = viewModel?.groups?[row] else { return }
-            viewModel?.set(group: group, enabled: enableSwitch.isOn)
+        viewModel?.set(groupId: group.groupId, enabled: enableSwitch.isOn)
     }
     
     private func updateTheme() {
