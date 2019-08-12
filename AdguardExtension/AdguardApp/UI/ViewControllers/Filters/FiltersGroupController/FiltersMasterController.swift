@@ -43,6 +43,7 @@ class FiltersMasterController: UIViewController {
         }
         
         searchContainerView.alpha = 0.0
+        setupBackButton()
         showGroupsContainerView()
     }
     

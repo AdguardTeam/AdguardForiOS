@@ -80,7 +80,7 @@ extension String {
     static func formatSringNumber(number: Int) -> String{
         let stringNumber = String(number)
         var str = String(stringNumber.reversed())
-        str = String(str.enumerated().map { $0 > 0 && $0 % 3 == 0 ? [" ", $1] : [$1]}.joined())
+        str = String(str.enumerated().map { $0 > 0 && $0 % 3 == 0 ? [",", $1] : [$1]}.joined())
         str = String(str.reversed())
         return str
     }

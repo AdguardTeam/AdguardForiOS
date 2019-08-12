@@ -30,7 +30,6 @@ class GetProController: UIViewController {
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
     
-    @IBOutlet weak var separator1: UIView!
     @IBOutlet weak var separator2: UIView!
     
     @IBOutlet var loginBarButton: UIBarButtonItem!
@@ -44,6 +43,8 @@ class GetProController: UIViewController {
     private let accountAction = "account"
     private let from = "license"
 
+    private let getProSegueIdentifier = "getProSegue"
+    private var getProTableController: GetProTableController? = nil
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -111,6 +112,18 @@ class GetProController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    // MARK: - prepare for segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == getProSegueIdentifier {
+            if let destinationVC = segue.destination as? GetProTableController {
+                getProTableController = destinationVC
+            }
+        }
+    }
+    
+    
     // MARK: - private methods
     
     private func processNotification(info: [AnyHashable: Any]) {
@@ -162,12 +175,12 @@ class GetProController: UIViewController {
     
     private func restoreFailed(error: NSError?) {
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
+        getProTableController?.enablePurchaseButtons(true)
     }
     
     private func updateTheme() {
         
         view.backgroundColor = theme.backgroundColor
-        separator1.backgroundColor = theme.separatorColor
         separator2.backgroundColor = theme.separatorColor
         theme.setupNavigationBar(navigationController?.navigationBar)
     }

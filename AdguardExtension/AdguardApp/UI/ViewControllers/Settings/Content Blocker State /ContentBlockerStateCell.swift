@@ -47,7 +47,8 @@ class ContentBlockerStateCell: UITableViewCell {
         }
     }
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     private let disabledImage = UIImage(named: "attention")
     private let enabledImage = UIImage(named: "logocheck")
@@ -92,8 +93,9 @@ class ContentBlockerStateCell: UITableViewCell {
         self.stateImage.image = enabledImage
         
         let numberOfRules = String.formatSringNumber(number: blockerState?.numberOfRules ?? 0)
+        let limit = String.formatSringNumber(number: resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
 
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_state_label", nil), numberOfRules)
+        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_state_label", nil), numberOfRules, limit)
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -131,7 +133,9 @@ class ContentBlockerStateCell: UITableViewCell {
         let firstString = String.formatSringNumber(number: rules + overLimitRules)
         let secondString = String.formatSringNumber(number: overLimitRules)
         
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("over_limit_current_state_label", nil), firstString, secondString)
+        let limit = String.formatSringNumber(number: resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
+        
+        self.currentFilterStateLabel.text = String(format: ACLocalizedString("over_limit_current_state_label", nil), limit, limit, firstString, secondString)
         self.currentFilterStateLabel.textColor = theme.errorRedColor
         
         hideFilterListIfNeeded()

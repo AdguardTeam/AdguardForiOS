@@ -38,7 +38,7 @@ class AboutController : UIViewController {
             self?.updateTheme()
         }
         
-        versionLabel.text = ADProductInfo.versionWithBuildNumber()
+        versionLabel.text = ACLocalizedString("about_version", nil) + " " +  ADProductInfo.versionWithBuildNumber()
         setupBackButton()
     }
     
