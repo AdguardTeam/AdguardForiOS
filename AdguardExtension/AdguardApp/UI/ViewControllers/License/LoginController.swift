@@ -158,7 +158,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private func updateTheme() {
         
-        view.backgroundColor = theme.bottomBarBackgroundColor
+        view.backgroundColor = theme.backgroundColor
         
         theme.setupTextField(nameEdit)
         

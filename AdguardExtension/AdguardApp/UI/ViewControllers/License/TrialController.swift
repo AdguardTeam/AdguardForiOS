@@ -25,7 +25,6 @@ class TrialController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -35,6 +34,7 @@ class TrialController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        navigationController?.navigationBar.isTranslucent = true
         guard let nav = self.navigationController as? MainNavigationController else { return }
         nav.customStatusBarStyle = .lightContent
         setNeedsStatusBarAppearanceUpdate()
@@ -43,6 +43,7 @@ class TrialController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
+        navigationController?.navigationBar.isTranslucent = false
         guard let nav = self.navigationController as? MainNavigationController else { return }
         nav.customStatusBarStyle = nil
         setNeedsStatusBarAppearanceUpdate()
