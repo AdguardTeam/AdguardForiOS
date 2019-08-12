@@ -407,7 +407,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             // add user rules
             
-            let userRules = antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+            let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
+            let userRules = userFilterEnabled ? antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
             
             rules = userRules + rules
             
@@ -415,19 +416,23 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
             
-            if inverted {
-                
-                if resources.invertedWhitelistContentBlockingObject == nil {
-                    resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(domains: [])
+            let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsWhitelistEnabled) as? Bool ?? true
+            
+            if whitelistEnabled {
+                if inverted {
+                    
+                    if resources.invertedWhitelistContentBlockingObject == nil {
+                        resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(domains: [])
+                    }
+                    
+                    if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
+                        rules.append(innvertedRule)
+                    }
                 }
-                
-                if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                    rules.append(innvertedRule)
-                }
-            }
-            else {
-                if let whitelistRules = resources.whitelistContentBlockingRules {
-                    rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
+                else {
+                    if let whitelistRules = resources.whitelistContentBlockingRules {
+                        rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
+                    }
                 }
             }
             

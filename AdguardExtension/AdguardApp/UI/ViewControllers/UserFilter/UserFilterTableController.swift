@@ -30,7 +30,7 @@ class RuleCell: UITableViewCell {
 
 class HelpCell : UITableViewCell {
     
-    @IBOutlet weak var helpLabel: ThemableLabel!
+    @IBOutlet weak var helpTextView: UITextView!
 }
 
 class FilterEnabledCell: UITableViewCell {
@@ -41,7 +41,7 @@ class FilterEnabledCell: UITableViewCell {
 // MARK: - UserFilterTableController
 class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
     
-    var model: UserFilterViewModel?
+    var model: UserFilterViewModel!
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
@@ -64,7 +64,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     @IBOutlet var plusButtonView: UIView!
     @IBOutlet weak var headerTextView: UITextView!
     
-    @IBOutlet weak var enabledSwitch: UISwitch!
+    var enabledSwitch: UISwitch!
     var observation: NSKeyValueObservation?
     
     private var isCustomEditing = false
@@ -72,8 +72,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     private let enabledSection = 0
     private let helpSection = 1
     private let rulesSection = 2
-    
-    private var enableSwitch: UISwitch?
     
     // MARK: - View controller lifecycle
     
@@ -139,11 +137,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         switch indexPath.section {
         case enabledSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnabledCellID") as! FilterEnabledCell
-            self.enabledSwitch = cell.enabledSwitch
-            // NEEDS TO FIX
-            //cell.enabledLabel.text = false ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
-            self.enabledSwitch.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
+            enabledSwitch = cell.enabledSwitch
+            cell.enabledLabel.text = model.userFilterEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+            enabledSwitch.isOn = model.userFilterEnabled
+            enabledSwitch?.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
+            
         case helpSection:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
@@ -156,15 +155,15 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                 if let headerText = htmlString.attributedStringFromHtml() {
                     headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor, range: NSRange(location: 0, length: headerText.length))
                     headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 0, length: headerText.length))
-                    cell.helpLabel.attributedText = headerText
+                    cell.helpTextView.attributedText = headerText
                 }
             case(.whitelist):
-                cell.helpLabel.text = ACLocalizedString("whitelist_text", nil)
-                theme.setupLabel(cell.helpLabel)
+                cell.helpTextView.text = ACLocalizedString("whitelist_text", nil)
+                cell.helpTextView.textColor = theme.lightGrayTextColor
                 
             case (.invertedWhitelist):
-                cell.helpLabel.text = ACLocalizedString("inverted_whitelist_text", nil)
-                theme.setupLabel(cell.helpLabel)
+                cell.helpTextView.text = ACLocalizedString("inverted_whitelist_text", nil)
+                cell.helpTextView.textColor = theme.lightGrayTextColor
             }
             
             return cell
@@ -262,8 +261,8 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         present(controller, animated: true, completion: nil)
     }
     
-    @IBAction func toggleEnabled(_ sender: Any) {
-        
+    @IBAction func toggleEnabled(_ sender: UISwitch) {
+        model?.userFilterEnabled = sender.isOn
     }
     
     // MARK: - Presentation delegate methods

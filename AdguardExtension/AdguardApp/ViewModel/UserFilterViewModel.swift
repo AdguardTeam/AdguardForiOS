@@ -318,9 +318,6 @@ class UserFilterViewModel: NSObject {
         var newRuleObjects = [ASDFilterRule]()
         var newRuleInfos = [RuleInfo]()
         for ruleString in ruleStrings {
-            if ruleString.starts(with: "!") {
-                continue
-            }
             
             let trimmedRuleString = ruleString.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmedRuleString.count == 0 {
@@ -343,6 +340,21 @@ class UserFilterViewModel: NSObject {
             
         }) { (message) in
             errorHandler(message)
+        }
+    }
+    
+    var userFilterEnabled: Bool {
+        get {
+            let key = type == .blacklist ? AEDefaultsUserFilterEnabled : AEDefaultsWhitelistEnabled
+            return resources.sharedDefaults().object(forKey: key) as? Bool ?? true
+        }
+        
+        set {
+            if userFilterEnabled != newValue {
+                let key = type == .blacklist ? AEDefaultsUserFilterEnabled : AEDefaultsWhitelistEnabled
+                resources.sharedDefaults().set(newValue, forKey: key)
+                contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
+            }
         }
     }
     
