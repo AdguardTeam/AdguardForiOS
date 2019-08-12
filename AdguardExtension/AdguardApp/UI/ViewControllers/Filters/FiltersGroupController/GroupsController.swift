@@ -25,7 +25,6 @@ class GroupsController: UITableViewController {
     let disabledColor = UIColor.init(hexString: "D8D8D8")
     
     let filtersSegueID = "showFiltersSegue"
-    let customFiltersSegueID = "showCustomFiltersSegue"
     let getProSegueID = "getProSegue"
     
     // MARK: - properties
@@ -125,7 +124,9 @@ class GroupsController: UITableViewController {
         if group.proOnly && !configuration.proStatus {
             performSegue(withIdentifier: getProSegueID, sender: self)
         }
-        performSegue(withIdentifier: "showFiltersSegue", sender: self)
+        else {
+            performSegue(withIdentifier: filtersSegueID, sender: self)
+        }
     }
     
     @IBAction func switchTap(_ sender: UIView) {

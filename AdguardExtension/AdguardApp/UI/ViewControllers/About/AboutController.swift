@@ -20,15 +20,14 @@ import Foundation
 
 class AboutController : UIViewController {
     
-    let otherPlatformsAction = "http://agrd.io/ios_adguard_products"
+    private let otherPlatformsAction = "http://agrd.io/ios_adguard_products"
     
     @IBOutlet weak var versionLabel: UILabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var logoImage: ThemeableImageView!
     
-     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    
+    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // UIViewController life cycle
     
@@ -49,7 +48,6 @@ class AboutController : UIViewController {
     }
     
     // MARK: - Actions
-    
     
     @IBAction func otherPlatformsAction(_ sender: Any) {
         if let url = URL(string : otherPlatformsAction) {

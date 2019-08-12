@@ -26,9 +26,13 @@ class AboutTableController : UITableViewController {
     
     private let openUrlFrom = "about"
     
+    private let licenseSegue = "licenseSegue"
+    private let trialSegue = "trialSegue"
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - view controller life cycle
     
@@ -44,12 +48,14 @@ class AboutTableController : UITableViewController {
         updateTheme()
     }
     
+    // MARK: - tableview delegate methods
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
     }
-
+    
     // MARK: - Actions
  
     @IBAction func siteAction(_ sender: Any) {
@@ -62,7 +68,13 @@ class AboutTableController : UITableViewController {
         UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
     }
     
-   private func updateTheme() {
+    @IBAction func licenseAction(_ sender: Any) {
+        let segueId = configuration.proStatus ? licenseSegue : trialSegue
+        performSegue(withIdentifier: segueId, sender: self)
+    }
+    
+    // MARK: - private methods
+    private func updateTheme() {
         theme.setupLabels(themableLabels)
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
