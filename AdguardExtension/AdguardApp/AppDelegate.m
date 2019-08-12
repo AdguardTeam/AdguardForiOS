@@ -391,20 +391,33 @@ typedef enum : NSUInteger {
     DDLogError(@"(AppDelegate) application Open URL.");
     
     _activateWithOpenUrl = YES;
+ 
+    /*
+     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
+     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
+    */
+    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
+    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
+    NSString *command = url.host;
+    
+    UINavigationController *nav = [self getNavigationController];
+    
+    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+        self.window.rootViewController = launchScreenController;
+    }
+
     if ([url.scheme isEqualToString:AE_URLSCHEME]) {
         
         [_aeService onReady:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 @autoreleasepool {
                     
-                    NSString *command = url.host;
-                    
                     if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
                         
                         NSString *path = [url.path substringFromIndex:1];
                         
-                        UINavigationController *nav = [self getNavigationController];
+                        
                         if (nav.viewControllers.count) {
                             MainController *main = nav.viewControllers.firstObject;
                             if ([main isKindOfClass:[MainController class]]) {
@@ -418,9 +431,14 @@ typedef enum : NSUInteger {
                                 userFilterController.newRuleText = path;
                                 
                                 nav.viewControllers = @[main, mainMenuController, userFilterController];
+                                
+                                [main view];
+                                [mainMenuController view];
+                                [userFilterController view];
+
+                                self.window.rootViewController = nav;
                             }
                             else{
-                                
                                 DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
                             }
                         }
