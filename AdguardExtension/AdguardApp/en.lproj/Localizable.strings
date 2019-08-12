@@ -360,3 +360,6 @@
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Homepage:";
+
+/* (AboutController) current app version string */
+"about_version" = "Version";
