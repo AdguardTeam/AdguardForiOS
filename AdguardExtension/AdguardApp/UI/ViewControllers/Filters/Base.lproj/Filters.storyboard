@@ -225,7 +225,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTL-ax-aZV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="15" width="268" height="0.0"/>
+                                            <rect key="frame" x="25" y="15" width="312" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -233,17 +233,6 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5N0-s5-SVS">
-                                            <rect key="frame" x="308" y="3" width="24" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="HVh-Wi-zsS"/>
-                                                <constraint firstAttribute="width" constant="24" id="aAB-Fr-Emq"/>
-                                            </constraints>
-                                            <state key="normal" image="link-icon"/>
-                                            <connections>
-                                                <action selector="showSiteAction:" destination="Llu-1A-iPX" eventType="touchUpInside" id="Sox-Qq-1AN"/>
-                                            </connections>
-                                        </button>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eni-il-6g8" customClass="FilterCellUISwitch" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="347" y="12" width="49" height="31"/>
                                             <constraints>
@@ -282,7 +271,7 @@
                                         <constraint firstItem="cTL-ax-aZV" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="BAt-d5-lXy"/>
                                         <constraint firstItem="Vp3-Lp-AiW" firstAttribute="top" secondItem="MxA-VX-Amb" secondAttribute="bottom" id="F7w-Tw-gkF"/>
                                         <constraint firstItem="cTL-ax-aZV" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="15" id="HxN-vb-Wro"/>
-                                        <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="5N0-s5-SVS" secondAttribute="trailing" constant="15" id="Pfx-nx-ZB2"/>
+                                        <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="cTL-ax-aZV" secondAttribute="trailing" constant="10" id="MNz-lP-uqC"/>
                                         <constraint firstAttribute="bottom" secondItem="VXN-1M-Lry" secondAttribute="bottom" constant="15" id="Szg-8L-V0p"/>
                                         <constraint firstItem="eni-il-6g8" firstAttribute="top" secondItem="zu1-Zn-lNt" secondAttribute="top" constant="12" id="UAU-qQ-dXV"/>
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="leading" secondItem="zu1-Zn-lNt" secondAttribute="leading" constant="25" id="am7-aW-gBz"/>
@@ -292,8 +281,6 @@
                                         <constraint firstItem="eni-il-6g8" firstAttribute="leading" secondItem="Vp3-Lp-AiW" secondAttribute="trailing" constant="10" id="nNR-Lp-9Ts"/>
                                         <constraint firstItem="VXN-1M-Lry" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" id="oPX-FE-FNk"/>
                                         <constraint firstAttribute="trailing" secondItem="eni-il-6g8" secondAttribute="trailing" constant="20" id="vyP-Wt-DqK"/>
-                                        <constraint firstItem="5N0-s5-SVS" firstAttribute="leading" secondItem="cTL-ax-aZV" secondAttribute="trailing" constant="15" id="w6T-iD-jTx"/>
-                                        <constraint firstItem="5N0-s5-SVS" firstAttribute="centerY" secondItem="cTL-ax-aZV" secondAttribute="centerY" id="wpm-hy-KqW"/>
                                         <constraint firstItem="VXN-1M-Lry" firstAttribute="trailing" secondItem="Vp3-Lp-AiW" secondAttribute="trailing" id="y3b-PQ-6CH"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -301,7 +288,6 @@
                                 <connections>
                                     <outlet property="enableSwitch" destination="eni-il-6g8" id="o9y-Lg-jqK"/>
                                     <outlet property="filterTagsView" destination="VXN-1M-Lry" id="w9B-Ze-YxB"/>
-                                    <outlet property="homepageButton" destination="5N0-s5-SVS" id="nQS-Xe-7sN"/>
                                     <outlet property="name" destination="cTL-ax-aZV" id="oqy-8u-SIH"/>
                                     <outlet property="updateDate" destination="Vp3-Lp-AiW" id="1PQ-yR-Ocx"/>
                                     <outlet property="version" destination="MxA-VX-Amb" id="CHS-7F-7kG"/>
@@ -319,6 +305,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Tqh-1M-1oz">
                                             <rect key="frame" x="24" y="19" width="20" height="21"/>
+                                            <color key="tintColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="5fR-5S-u4i"/>
                                                 <constraint firstAttribute="height" constant="21" id="zDB-S0-NaM"/>
@@ -1346,7 +1333,6 @@
     </scenes>
     <resources>
         <image name="filters-icon" width="24" height="24"/>
-        <image name="link-icon" width="24" height="24"/>
         <image name="plus" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>

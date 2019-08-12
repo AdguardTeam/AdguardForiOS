@@ -168,8 +168,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             cell.filter = filter
             cell.group = group
             cell.enableSwitch.row = indexPath.row
-
-            cell.homepageButton.tag = indexPath.row
             
             theme.setupLabels(cell.themableLabels)
             theme.setupTableCell(cell)
@@ -230,14 +228,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.beginUpdates()
         tableView.reloadRows(at: [IndexPath(row: 0, section: groupSection)], with: .automatic)
         tableView.endUpdates()
-    }
-    
-    @IBAction func showSiteAction(_ sender: UIButton) {
-        let row = sender.tag
-        let filter = group?.filters[row]
-        guard   let homepage = filter?.homepage,
-                let url = URL(string: homepage) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func searchAction(_ sender: Any) {
