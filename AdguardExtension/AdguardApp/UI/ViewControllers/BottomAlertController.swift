@@ -75,12 +75,9 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         makeRoundCorners()
+
+        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -99,12 +96,29 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     }
     
     private func makeRoundCorners(){
-        contentView.clipsToBounds = true
-        let path = UIBezierPath(roundedRect: contentView.bounds,
-                                byRoundingCorners: [.topRight, .topLeft],
-                                cornerRadii: CGSize(width: 10, height: 10))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        contentView.layer.mask = maskLayer
+        
+        let corners: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        let radius: CGFloat = 10.0
+        
+        if #available(iOS 11, *) {
+            contentView.layer.cornerRadius = radius
+            contentView.layer.maskedCorners = corners
+        } else {
+            var cornerMask = UIRectCorner()
+            
+            cornerMask.insert(.topLeft)
+            cornerMask.insert(.topRight)
+            
+            let path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: cornerMask, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            contentView.layer.mask = mask
+        }
+        
+        contentView.layer.cornerRadius = 10
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        contentView.layer.shadowRadius = 3
+        contentView.layer.shadowOpacity = 1
     }
 }
