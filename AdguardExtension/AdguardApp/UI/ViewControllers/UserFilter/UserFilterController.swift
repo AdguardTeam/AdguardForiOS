@@ -57,6 +57,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var rigthButtonViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     private let buttonSpacing: CGFloat = 8.0
     
@@ -68,11 +69,14 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     private var barState: BootomBarState = .normal
     
+    private var keyboardMover: KeyboardMover?
+    
     // MARK: - Viecontroller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -197,6 +201,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         updateBottomBar()
         selectedRulesChanged()
         editMode(false)
+        textView.resignFirstResponder()
     }
     
     private func updateBottomBar() {

@@ -45,7 +45,7 @@ class MainMenuController: UITableViewController {
     
     private var configurationObservation: NSKeyValueObservation?
     
-    private let dnsCellRow = 1
+    private let dnsCellRow = 2
     private let getProSegue = "getProSegue"
     private let showDnsSettingsSegue = "showDnsSettingsSegue"
     

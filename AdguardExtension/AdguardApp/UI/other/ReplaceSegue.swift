@@ -16,26 +16,13 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import UIKit
+import Foundation
 
-class MainNavigationController: UINavigationController {
-    
-    var customStatusBarStyle: UIStatusBarStyle?
-    
-    private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+class ReplaceSegue: UIStoryboardSegue {
+    override func perform() {
+        guard let navigationController = source.navigationController else { return }
+        navigationController.pushViewController(destination, animated: true)
+        // remove source view controller from navigation stack
+        navigationController.viewControllers.remove(at: navigationController.viewControllers.count - 2)
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        if customStatusBarStyle != nil {
-            return customStatusBarStyle!
-        }
-        else {
-            return theme.statusbarStyle()
-        }
-    }
-
 }

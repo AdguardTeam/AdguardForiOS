@@ -18,10 +18,55 @@
 
 import Foundation
 
+class KeyboardMover {
+    
+    private weak var constraint: NSLayoutConstraint!
+    private weak var view: UIView!
+    private var initialValue: CGFloat!
+    
+    init(bottomConstraint: NSLayoutConstraint, view: UIView) {
+        self.constraint = bottomConstraint
+        self.view = view
+        self.initialValue = bottomConstraint.constant
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardNotification(notification:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+                
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardNotification(notification: NSNotification) {
+            guard let userInfo = notification.userInfo else { return }
+            guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                
+            let keyboardHeight = keyboardFrame.height
+            constraint.constant = keyboardHeight + initialValue
+            
+            UIView.animate(withDuration: 0.5,
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+        
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
+        constraint.constant = initialValue
+        UIView.animate(withDuration: 0.5,
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
+    }
+}
+
 class BottomAlertController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
+    
+    private var keyboardMover: KeyboardMover!
     
     private var statusBarHeight: CGFloat {
         return UIApplication.shared.statusBarFrame.height
@@ -31,14 +76,8 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         makeRoundCorners()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardNotification(notification:)),
-                                               name:
-            UIResponder.keyboardWillChangeFrameNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,25 +88,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         else {
             super.touchesBegan(touches, with: event)
         }
-    }
-    
-    @objc func keyboardNotification(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-            
-        let keyboardHeight = keyboardFrame.height
-        keyboardHeightLayoutConstraint.constant = keyboardHeight
-        
-        UIView.animate(withDuration: 0.5,
-                       animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        keyboardHeightLayoutConstraint.constant = 0.0
-        UIView.animate(withDuration: 0.5,
-                       animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

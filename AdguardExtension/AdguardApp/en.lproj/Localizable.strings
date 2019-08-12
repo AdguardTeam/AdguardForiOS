@@ -346,6 +346,12 @@
 /* (GetProController) login error message text */
 "login_max_computers_exceeded" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
 
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanent";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Then %1$@ per %2$@";
+
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";
 

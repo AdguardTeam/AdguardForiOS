@@ -16,26 +16,35 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import UIKit
+import Foundation
 
-class MainNavigationController: UINavigationController {
+class TrialController: UIViewController {
     
-    var customStatusBarStyle: UIStatusBarStyle?
-    
-    private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
+    let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        setupBackButton()
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        if customStatusBarStyle != nil {
-            return customStatusBarStyle!
-        }
-        else {
-            return theme.statusbarStyle()
-        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        guard let nav = self.navigationController as? MainNavigationController else { return }
+        nav.customStatusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        guard let nav = self.navigationController as? MainNavigationController else { return }
+        nav.customStatusBarStyle = nil
+        setNeedsStatusBarAppearanceUpdate()
+    }
 }
