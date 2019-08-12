@@ -26,7 +26,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     var viewModel: FiltersAndGroupsViewModelProtocol?
     var group: Group? {
         get {
-            if viewModel?.isSearchActive ?? false && viewModel?.groups?.count ?? 0 > 0{
+            if viewModel?.isSearchActive ?? false {
+                if viewModel?.groups?.count == 0{
+                    return nil
+                }
                 return viewModel?.groups?[0]
             }
             return viewModel?.currentGroup
