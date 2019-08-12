@@ -72,6 +72,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     @IBOutlet weak var rulesCountLabel: ThemableLabel!
     @IBOutlet weak var websiteLabel: ThemableLabel!
     @IBOutlet weak var tagsView: FilterTagsView!
+    @IBOutlet weak var enabledLabel: ThemableLabel!
     
     var filter: Filter!
     
@@ -99,6 +100,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         super.viewDidLoad()
         
         enabledSwitch.isOn = filter.enabled
+        enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         descriptionLabel.text = filter.desc
         versionLabel.text = filter.version
         updatedLabel.text = filter.updateDate?.formatedString()

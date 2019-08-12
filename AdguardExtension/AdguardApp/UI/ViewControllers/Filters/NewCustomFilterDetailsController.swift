@@ -30,11 +30,11 @@ class NewCustomFilterDetailsController : BottomAlertController {
     var filter : AASCustomFilterParserResult?
     var delegate : NewCustomFilterDetailsDelegate?
     var overwriteExisted = false
+    private var homepageLink: String?
     
     // MARK: - IB Outlets
     @IBOutlet weak var rulesCount: UILabel!
     @IBOutlet weak var homepage: UILabel!
-    @IBOutlet weak var homepageCaption: UILabel!
     @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -54,11 +54,11 @@ class NewCustomFilterDetailsController : BottomAlertController {
         rulesCount.text = String(count)
         
         if let homepageUrl = filter?.meta.homepage, homepageUrl.count > 0 {
-            homepage.text = homepageUrl
+            homepageLink = homepageUrl
+            homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
         }
         else {
-            homepageCaption.isHidden = true
             homepage.isHidden = true
             homepageTopConstraint.constant = 23.0
         }
@@ -87,11 +87,39 @@ class NewCustomFilterDetailsController : BottomAlertController {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func redirectToSafariAction(_ sender: UIButton) {
+        guard let link = homepageLink else { return }
+        guard let url = URL(string: link) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    
     // MARK: - private methods
     
     private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
+    }
+    
+    private func makeAttributedLink(with url: String) -> NSAttributedString {
+        let homepageString = ACLocalizedString("homepage_title", nil) + "  "
+        
+        let homepageAttributedString = NSAttributedString(string: homepageString)
+        let urlAttributedString = NSMutableAttributedString(string: url)
+        
+        let urlStringRange = NSRange(location: 0, length: url.count)
+        
+        let highlightColor = UIColor(hexString: "#67b279")
+        
+        urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
+        urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)
+        urlAttributedString.addAttribute(.foregroundColor, value: highlightColor, range: urlStringRange)
+        
+        let returnString = NSMutableAttributedString()
+        returnString.append(homepageAttributedString)
+        returnString.append(urlAttributedString)
+        
+        return returnString
     }
 }

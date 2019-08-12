@@ -422,6 +422,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="enabledLabel" destination="MDJ-Z7-xIE" id="0x6-VJ-2bz"/>
                                     <outlet property="enabledSwitch" destination="wAC-JO-Xkv" id="mmk-Zm-oYD"/>
                                 </connections>
                             </tableViewCell>

@@ -47,7 +47,7 @@
 "mEm-ll-QZR.normalTitle" = "CANCEL";
 
 /* Class = "UIButton"; normalTitle = "CONTINUE"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "CONTINUE";
+"nch-wu-mKC.normalTitle" = "NEXT";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "tTY-kJ-YFX"; Note = "(Edit Custom Filter) rules count caption"; */
 "tTY-kJ-YFX.text" = "Rules count: ";

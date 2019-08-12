@@ -351,3 +351,12 @@
 
 /* (GetProController) description for subscription trial period */
 "trial_description_format" = "Then %1$@ per %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ON";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "OFF";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Homepage:";

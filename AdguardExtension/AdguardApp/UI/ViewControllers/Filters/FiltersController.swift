@@ -146,6 +146,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
+            cell.nameLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
             cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
             cell.enabledSwitch.addTarget(self, action: #selector(toogleGroupEnable(_:)), for: .valueChanged)
             
