@@ -30,6 +30,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     var filter : AASCustomFilterParserResult?
     var delegate : NewCustomFilterDetailsDelegate?
     var overwriteExisted = false
+    private var homepageLink: String?
     
     // MARK: - IB Outlets
     @IBOutlet weak var rulesCount: UILabel!
@@ -53,6 +54,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
         rulesCount.text = String(count)
         
         if let homepageUrl = filter?.meta.homepage, homepageUrl.count > 0 {
+            homepageLink = homepageUrl
             homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
         }
@@ -84,6 +86,13 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBAction func cancelAction(_ sender: Any) {
         navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func redirectToSafariAction(_ sender: UIButton) {
+        guard let link = homepageLink else { return }
+        guard let url = URL(string: link) else { return }
+        UIApplication.shared.open(url)
+    }
+    
     
     // MARK: - private methods
     
