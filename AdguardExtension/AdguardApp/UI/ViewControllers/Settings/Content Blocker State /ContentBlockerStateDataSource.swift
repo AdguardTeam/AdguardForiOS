@@ -91,7 +91,7 @@ class ContentBlocker: ContentBlockerStateProtocol {
         self.safariService = safariService
         self.resources = resources
         self.filterService = filterService
-        self.currentState = (self.numberOfOverlimitedRules == 0) ? (enabled ? .enabled : .disabled) : .overLimited
+        self.currentState = enabled ? (self.numberOfOverlimitedRules == 0 ? .enabled : .overLimited) : .disabled
     }
 
 }
