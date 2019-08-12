@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e5e-kw-UL4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e5e-kw-UL4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -565,19 +565,12 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYI-ri-KlB">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="748"/>
                                 <connections>
-                                    <segue destination="y2N-tV-Unf" kind="embed" id="Q8U-k1-9gS"/>
+                                    <segue destination="y2N-tV-Unf" kind="embed" identifier="getProSegue" id="Q8U-k1-9gS"/>
                                 </connections>
                             </containerView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZG-h1-909" userLabel="AccountView">
                                 <rect key="frame" x="0.0" y="748" width="414" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEa-Hk-cp1">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="0.5" id="ku1-N3-oxn"/>
-                                        </constraints>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxf-sg-Wfk" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -604,10 +597,7 @@
                                     <constraint firstAttribute="bottom" secondItem="K0N-Xb-cev" secondAttribute="bottom" id="GQ5-eu-psF"/>
                                     <constraint firstItem="Rxf-sg-Wfk" firstAttribute="top" secondItem="YZG-h1-909" secondAttribute="top" id="IY9-Ms-1CX"/>
                                     <constraint firstAttribute="bottom" secondItem="Rxf-sg-Wfk" secondAttribute="bottom" id="Nqo-Fa-vhY"/>
-                                    <constraint firstItem="PEa-Hk-cp1" firstAttribute="top" secondItem="YZG-h1-909" secondAttribute="top" id="Qci-dL-e7Q"/>
                                     <constraint firstAttribute="trailing" secondItem="K0N-Xb-cev" secondAttribute="trailing" id="ejR-UC-O0D"/>
-                                    <constraint firstItem="PEa-Hk-cp1" firstAttribute="leading" secondItem="YZG-h1-909" secondAttribute="leading" id="k1G-ep-PFZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="PEa-Hk-cp1" secondAttribute="trailing" id="mEy-6L-4p4"/>
                                     <constraint firstItem="K0N-Xb-cev" firstAttribute="leading" secondItem="YZG-h1-909" secondAttribute="leading" id="oSv-Vd-Whh"/>
                                     <constraint firstItem="Rxf-sg-Wfk" firstAttribute="leading" secondItem="YZG-h1-909" secondAttribute="leading" id="rRs-iy-fzi"/>
                                 </constraints>
@@ -633,7 +623,6 @@
                         <outlet property="goToMyAccountHeight" destination="ENZ-fq-jz2" id="EUh-4k-evW"/>
                         <outlet property="loginBarButton" destination="UaA-JQ-kV4" id="4kD-dX-9HF"/>
                         <outlet property="logoutBarButton" destination="70b-CS-wqh" id="bgv-ye-bwg"/>
-                        <outlet property="separator1" destination="PEa-Hk-cp1" id="3vp-gb-VIf"/>
                         <outlet property="separator2" destination="K0N-Xb-cev" id="HO0-2a-bca"/>
                     </connections>
                 </viewController>
@@ -646,7 +635,7 @@
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Logout" id="70b-CS-wqh">
-                    <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="logoutAction:" destination="gVb-oh-MXP" id="SbG-5H-Bix"/>
                     </connections>
@@ -684,14 +673,14 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpa-Ei-nKp">
-                                <rect key="frame" x="21" y="74" width="371" height="1"/>
+                                <rect key="frame" x="21" y="74" width="371" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Tjp-zc-fJp"/>
+                                    <constraint firstAttribute="height" constant="2" id="Tjp-zc-fJp"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must enter your password to authorize on adguard.com" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Q-j1-fN4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="87" width="366" height="14.5"/>
+                                <rect key="frame" x="24" y="88" width="366" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -759,21 +748,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4eK-dt-Mlp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2825" y="4706"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="35r-Ck-vqN">
-            <objects>
-                <viewController id="rln-nm-ju2" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zob-XP-dp3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="yEr-sx-ddf"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4x1-mU-hkg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-259" y="3944"/>
         </scene>
         <!--Trial Controller-->
         <scene sceneID="mdg-YI-mpb">
@@ -874,6 +848,6 @@
         <image name="widget-logo" width="70" height="73"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x9H-U4-xhh"/>
+        <segue reference="XHd-Jk-4yR"/>
     </inferredMetricsTieBreakers>
 </document>

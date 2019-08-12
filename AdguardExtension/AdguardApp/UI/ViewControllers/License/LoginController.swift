@@ -39,8 +39,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     // MARK: - private properties
     
-    private let enabledColor = UIColor.init(hexString: "D8D8D8")
-    private let disabledColor = UIColor.init(hexString: "4D4D4D")
+    private let enabledColor = UIColor.init(hexString: "4D4D4D")
+    private let disabledColor = UIColor.init(hexString: "D8D8D8")
     
     private var keyboardMover: KeyboardMover!
     
