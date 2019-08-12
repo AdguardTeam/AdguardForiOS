@@ -45,7 +45,7 @@ protocol FiltersAndGroupsViewModelProtocol {
     func set(filter: Filter, enabled: Bool)
     
     /* enable/disable group */
-    func set(group: Group, enabled: Bool)
+    func set(groupId: Int, enabled: Bool)
     
     /* loads filters list */
     func load(_ completion: @escaping ()->Void)
@@ -200,9 +200,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         filtersService.setFilter(filter, enabled: enabled)
     }
     
-    func set(group: Group, enabled: Bool) {
-        filtersService.setGroup(group, enabled: enabled)
-        filtersChangedCallback?()
+    func set(groupId: Int, enabled: Bool) {
+        filtersService.setGroup(groupId, enabled: enabled)
     }
 
     func load(_ completion: @escaping () -> Void) {

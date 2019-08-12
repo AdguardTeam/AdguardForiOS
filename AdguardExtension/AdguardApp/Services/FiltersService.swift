@@ -118,7 +118,7 @@ protocol FiltersServiceProtocol {
     
     /** enable/disable group of filters
      */
-    func setGroup(_ group: Group, enabled: Bool)
+    func setGroup(_ groupId: Int, enabled: Bool)
     
     /** enable/disable filter
      */
@@ -235,7 +235,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             for group in sSelf.groups {
                 if sSelf.proGroups.contains(group.groupId) {
-                    sSelf.setGroup(group, enabled: proEnabled)
+                    sSelf.setGroup(group.groupId, enabled: proEnabled)
                 }
             }
             
@@ -340,8 +340,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
     }
     
-    func setGroup(_ group: Group, enabled: Bool) {
+    func setGroup(_ groupId: Int, enabled: Bool) {
         
+        guard let group = getGroup(groupId) else { return }
         group.enabled = enabled
         
         updateGroupSubtitle(group)
@@ -371,8 +372,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 
                 setFilter(filterToDisable, enabled: false)
             }
-            
-            setGroup(group, enabled: true)
+            setGroup(group.groupId, enabled: true)
         }
         else if group.enabled {
             var allFiltersDisabled = true
@@ -384,7 +384,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
             
             if allFiltersDisabled {
-                setGroup(group, enabled: false)
+                setGroup(group.groupId, enabled: false)
             }
         }
     }
@@ -415,7 +415,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.filters = [newFilter] + group.filters
 
             if !group.enabled {
-                setGroup(group, enabled: true)
+                setGroup(group.groupId, enabled: true)
             }
             
             updateGroupSubtitle(group)
@@ -446,7 +446,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
             
             if group.enabled && group.filters.count == 0 {
-                setGroup(group, enabled: false)
+                setGroup(group.groupId, enabled: false)
             }
             
             notifyChange()

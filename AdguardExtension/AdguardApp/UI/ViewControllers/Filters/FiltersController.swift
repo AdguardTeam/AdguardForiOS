@@ -252,7 +252,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
         guard let sGroup = group else { return }
-        viewModel?.set(group: sGroup, enabled: sender.isOn)
+        viewModel?.set(groupId: sGroup.groupId, enabled: sender.isOn)
     }
     
     // MARK: - searchbar methods

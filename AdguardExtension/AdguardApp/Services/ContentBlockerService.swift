@@ -50,7 +50,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             [.general:                      [FilterGroupId.ads, FilterGroupId.languageSpecific, FilterGroupId.user],
              .privacy:                      [FilterGroupId.privacy, FilterGroupId.user],
              .socialWidgetsAndAnnoyances:   [FilterGroupId.socialWidgets, FilterGroupId.annoyances, FilterGroupId.user],
-             .other:                        [FilterGroupId.other, FilterGroupId.security, FilterGroupId.user],
+             .other:                        [FilterGroupId.other, FilterGroupId.user],
              .custom:                       [FilterGroupId.custom, FilterGroupId.user],
              .security:                     [FilterGroupId.security, FilterGroupId.user]
             ]
@@ -442,6 +442,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 resultError = error
+            } else {
+                resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+                resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
             }
             
             safariService.save(json: resultData, type: contentBlocker.rawValue)

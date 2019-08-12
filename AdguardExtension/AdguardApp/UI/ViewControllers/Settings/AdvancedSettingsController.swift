@@ -27,6 +27,7 @@ class AdvancedSettingsController: UITableViewController {
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let safariService: SafariService = ServiceLocator.shared.getService()!
     private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var simplifiedSwitch: UISwitch!
@@ -166,7 +167,7 @@ class AdvancedSettingsController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier{
-            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService)
+            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService, antibanner: aeService.antibanner())
             let destinationVC = segue.destination as? ContentBlockerStateController
             destinationVC?.contentBlockersDataSource = contentBlockersDataSource
             destinationVC?.theme = theme
