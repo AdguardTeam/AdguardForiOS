@@ -188,6 +188,14 @@ extern NSString*  _Nonnull AEDefaultsAuthStateString;
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
+ User defaults key, which defines user filter is enabled */
+extern NSString*  _Nonnull AEDefaultsUserFilterEnabled;
+
+/**
+ User defaults key, which defines user filter is enabled */
+extern NSString*  _Nonnull AEDefaultsWhitelistEnabled;
+
+/**
  User defaults keys, which contains number of rules for each content blocker*/
 extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
 extern NSString*  _Nonnull AEDefaultsPrivacyContentBlockerRulesCount;

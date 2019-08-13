@@ -184,6 +184,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         editMode(false)
         barState = .normal
         updateBottomBar()
+        textView.resignFirstResponder()
     }
     
     // MARK: - Presentation delegate methods

@@ -279,6 +279,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="778"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="WwG-Ye-eyy">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
@@ -286,7 +287,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="F6t-Fl-m3p">
-                            <rect key="frame" x="0.0" y="215" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="248" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -298,7 +299,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="14.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWO-Gy-M8A" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWO-Gy-M8A" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="7" width="366" height="0.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -360,36 +361,35 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HelpCellID" id="DoI-ZS-4zl" customClass="HelpCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.5" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="98.5" width="414" height="65.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DoI-ZS-4zl" id="H23-cW-zsh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="32.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7Y-cA-wxY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="16" width="370" height="0.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwH-4Z-Vqg">
+                                            <rect key="frame" x="24" y="16" width="366" height="33.5"/>
+                                            <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="textColor" xcode11CocoaTouchSystemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
+                                    <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="j7Y-cA-wxY" secondAttribute="bottom" constant="16" id="Jg4-SG-cT9"/>
-                                        <constraint firstAttribute="trailing" secondItem="j7Y-cA-wxY" secondAttribute="trailing" constant="20" id="K44-s1-v2y"/>
-                                        <constraint firstItem="j7Y-cA-wxY" firstAttribute="top" secondItem="H23-cW-zsh" secondAttribute="top" constant="16" id="Zxp-qL-a5T"/>
-                                        <constraint firstItem="j7Y-cA-wxY" firstAttribute="leading" secondItem="H23-cW-zsh" secondAttribute="leading" constant="24" id="erz-XB-QYz"/>
+                                        <constraint firstAttribute="trailing" secondItem="RwH-4Z-Vqg" secondAttribute="trailing" constant="24" id="OrF-lA-8uD"/>
+                                        <constraint firstItem="RwH-4Z-Vqg" firstAttribute="top" secondItem="H23-cW-zsh" secondAttribute="top" constant="16" id="Qp1-rJ-fNJ"/>
+                                        <constraint firstItem="RwH-4Z-Vqg" firstAttribute="leading" secondItem="H23-cW-zsh" secondAttribute="leading" constant="24" id="cEb-5r-Jk9"/>
+                                        <constraint firstAttribute="bottom" secondItem="RwH-4Z-Vqg" secondAttribute="bottom" constant="16" id="xqQ-mX-Ruc"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="helpLabel" destination="j7Y-cA-wxY" id="xzB-x6-c8v"/>
+                                    <outlet property="helpTextView" destination="RwH-4Z-Vqg" id="MNG-cu-oIp"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnabledCellID" rowHeight="56" id="5Ea-aD-x6j" customClass="FilterEnabledCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="131" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Ea-aD-x6j" id="H4a-en-6sn">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
