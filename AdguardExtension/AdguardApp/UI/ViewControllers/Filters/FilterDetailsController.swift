@@ -58,6 +58,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         if segue.identifier == embedTableSegue {
             guard let tableController = segue.destination as? FilterDetailsTableCotroller else { return }
             tableController.animationDelegate = self
+            tableController.tableViewDelegate = self
             tableController.filter = filter
         }
     }
@@ -69,8 +70,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     private func updateTheme () {
         deleteButton.backgroundColor = theme.backgroundColor
-        setupDeleteButton()
-        view.setNeedsLayout()
+        guard let deleteButtonShadowAlpha = deleteButton.layer.shadowColor?.alpha else { return }
+        deleteButton.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(deleteButtonShadowAlpha).cgColor : UIColor.black.withAlphaComponent(deleteButtonShadowAlpha).cgColor
     }
     
     private func setupDeleteButton(){
@@ -95,7 +96,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         UIView.animate(withDuration: 0.3) { [weak self] in
             DispatchQueue.main.async {
                 guard let color = self?.deleteButton.layer.shadowColor else { return }
-                self?.deleteButton.layer.shadowColor = color.copy(alpha: 1.0)
+                self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.5)
             }
         }
     }
@@ -245,6 +246,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         filtersService.setFilter(filter, enabled: sender.isOn)
+        enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
     }
     
     // MARK: - private methods
