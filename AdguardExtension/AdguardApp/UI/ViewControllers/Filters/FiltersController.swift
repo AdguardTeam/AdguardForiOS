@@ -151,6 +151,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             cell.enabledSwitch.addTarget(self, action: #selector(toogleGroupEnable(_:)), for: .valueChanged)
             
             theme.setupTableCell(cell)
+            theme.setupLabels(cell.themableLabels)
             theme.setupSwitch(cell.enabledSwitch)
             cell.separator.backgroundColor = theme.separatorColor
             
