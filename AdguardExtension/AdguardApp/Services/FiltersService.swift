@@ -603,29 +603,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
 
-        if enabled {
-            if !group.enabled {
-                group.enabled = true
-                antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
-                contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
-                }
-            }
-        }
-        else {
-            let enabledExists = group.filters.contains { $0.enabled }
-            if !enabledExists {
-                if group.enabled {
-                    group.enabled = false
-
-                    antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
-                    contentBlocker.reloadJsons(backgroundUpdate: false)  { (error) in
-                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
-                    }
-                }
-            }
-        }
-
         updateGroupSubtitle(group)
         
         notifyChange()
