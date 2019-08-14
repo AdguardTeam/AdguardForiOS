@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KSi-tR-JOw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KSi-tR-JOw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -506,6 +506,7 @@
                         <viewLayoutGuide key="safeArea" id="NYf-tJ-qCn"/>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="RXi-08-oyM" id="SUS-3Z-4ke"/>
                         <outlet property="deleteButton" destination="mXe-eu-cfH" id="hmc-g3-gQU"/>
                         <outlet property="deleteButtonHeightConstraint" destination="Rdo-NW-cIS" id="OoT-op-mW6"/>
                     </connections>
@@ -543,7 +544,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YF-9b-NN6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="44" y="31" width="32" height="20.5"/>
+                                                    <rect key="frame" x="24" y="31" width="32" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -573,8 +574,8 @@
                                                 <constraint firstItem="pqR-bN-Obz" firstAttribute="centerY" secondItem="VLK-vk-SDB" secondAttribute="centerY" id="LId-PV-10C"/>
                                                 <constraint firstItem="5YF-9b-NN6" firstAttribute="top" secondItem="VLK-vk-SDB" secondAttribute="topMargin" constant="20" id="Me3-Rs-LeU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="pqR-bN-Obz" secondAttribute="trailing" constant="16" id="WbX-QB-is2"/>
-                                                <constraint firstItem="5YF-9b-NN6" firstAttribute="leading" secondItem="VLK-vk-SDB" secondAttribute="leadingMargin" constant="24" id="Zui-Lc-ENj"/>
                                                 <constraint firstItem="K9N-xP-Zms" firstAttribute="bottom" secondItem="VLK-vk-SDB" secondAttribute="bottomMargin" id="owV-KO-tEV"/>
+                                                <constraint firstItem="5YF-9b-NN6" firstAttribute="leading" secondItem="VLK-vk-SDB" secondAttribute="leading" constant="24" id="rgz-io-zEC"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="5YF-9b-NN6" secondAttribute="bottom" constant="20" id="sMH-iT-dCb"/>
                                             </constraints>
                                         </tableViewCellContentView>
