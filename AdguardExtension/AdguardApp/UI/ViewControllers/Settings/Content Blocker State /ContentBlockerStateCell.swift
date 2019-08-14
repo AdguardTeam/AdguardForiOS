@@ -93,9 +93,8 @@ class ContentBlockerStateCell: UITableViewCell {
         self.stateImage.image = enabledImage
         
         let numberOfRules = String.formatSringNumber(number: blockerState?.numberOfRules ?? 0)
-        let limit = String.formatSringNumber(number: resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
 
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_state_label", nil), numberOfRules, limit)
+        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_content_blocker_state_label", nil), numberOfRules)
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()

@@ -329,7 +329,7 @@
 "general_settings_title" = "General settings";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
-"enabled_current_state_label" = "%1$@ out of %2$@ rules are being used";
+"enabled_current_content_blocker_state_label" = "%@ rules are being used";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Disabled in Safari settings";
