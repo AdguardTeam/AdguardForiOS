@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KSi-tR-JOw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KSi-tR-JOw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -339,7 +339,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ON" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPn-Jl-yZU" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="20" width="305" height="18.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                            <color key="textColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
@@ -474,7 +474,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Rdo-NW-cIS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="DELETE">
                                     <color key="titleColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -506,6 +506,7 @@
                         <viewLayoutGuide key="safeArea" id="NYf-tJ-qCn"/>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="RXi-08-oyM" id="SUS-3Z-4ke"/>
                         <outlet property="deleteButton" destination="mXe-eu-cfH" id="hmc-g3-gQU"/>
                         <outlet property="deleteButtonHeightConstraint" destination="Rdo-NW-cIS" id="OoT-op-mW6"/>
                     </connections>
@@ -543,8 +544,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YF-9b-NN6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="44" y="31" width="32" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <rect key="frame" x="24" y="31" width="28.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
@@ -573,8 +574,8 @@
                                                 <constraint firstItem="pqR-bN-Obz" firstAttribute="centerY" secondItem="VLK-vk-SDB" secondAttribute="centerY" id="LId-PV-10C"/>
                                                 <constraint firstItem="5YF-9b-NN6" firstAttribute="top" secondItem="VLK-vk-SDB" secondAttribute="topMargin" constant="20" id="Me3-Rs-LeU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="pqR-bN-Obz" secondAttribute="trailing" constant="16" id="WbX-QB-is2"/>
-                                                <constraint firstItem="5YF-9b-NN6" firstAttribute="leading" secondItem="VLK-vk-SDB" secondAttribute="leadingMargin" constant="24" id="Zui-Lc-ENj"/>
                                                 <constraint firstItem="K9N-xP-Zms" firstAttribute="bottom" secondItem="VLK-vk-SDB" secondAttribute="bottomMargin" id="owV-KO-tEV"/>
+                                                <constraint firstItem="5YF-9b-NN6" firstAttribute="leading" secondItem="VLK-vk-SDB" secondAttribute="leading" constant="24" id="rgz-io-zEC"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="5YF-9b-NN6" secondAttribute="bottom" constant="20" id="sMH-iT-dCb"/>
                                             </constraints>
                                         </tableViewCellContentView>

@@ -18,11 +18,21 @@
 
 import Foundation
 
-class FilterDetailsController : UIViewController {
+protocol FilterDetailsControllerAnimationDelegate {
+    func scrolledToBottom()
+    func isScrolling()
+}
+
+protocol FilterDetailsControllerTableViewDelegate {
+    func tableViewWasLoaded(with contentSizeHeight: CGFloat)
+}
+
+class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
     
     var filter: Filter!
     var isCustom: Bool!
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var deleteButtonHeightConstraint: NSLayoutConstraint!
     
@@ -35,6 +45,7 @@ class FilterDetailsController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = filter.name
         deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
         updateTheme()
         
@@ -42,10 +53,12 @@ class FilterDetailsController : UIViewController {
             self?.updateTheme()
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == embedTableSegue {
             guard let tableController = segue.destination as? FilterDetailsTableCotroller else { return }
+            tableController.animationDelegate = self
+            tableController.tableViewDelegate = self
             tableController.filter = filter
         }
     }
@@ -57,7 +70,53 @@ class FilterDetailsController : UIViewController {
     
     private func updateTheme () {
         deleteButton.backgroundColor = theme.backgroundColor
+        guard let deleteButtonShadowAlpha = deleteButton.layer.shadowColor?.alpha else { return }
+        deleteButton.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(deleteButtonShadowAlpha).cgColor : UIColor.black.withAlphaComponent(deleteButtonShadowAlpha).cgColor
     }
+    
+    private func setupDeleteButton(){
+        let color: UIColor = configuration.darkTheme ? .white : .black
+        deleteButton.layer.shadowColor = color.withAlphaComponent(0.25).cgColor
+        deleteButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        deleteButton.layer.shadowOpacity = 1.0
+        deleteButton.layer.shadowRadius = 10.0
+        deleteButton.layer.masksToBounds = false
+    }
+    
+    private func animateHidingOfShadow(){
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            DispatchQueue.main.async {
+                guard let color = self?.deleteButton.layer.shadowColor else { return }
+                self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.0)
+            }
+        }
+    }
+    
+    private func animateAppearingOfShadow(){
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            DispatchQueue.main.async {
+                guard let color = self?.deleteButton.layer.shadowColor else { return }
+                self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.5)
+            }
+        }
+    }
+    
+    // MARK: - FilterDetailsControllerAnimationDelegate
+    
+    func scrolledToBottom() {
+        animateHidingOfShadow()
+    }
+    
+    func isScrolling() {
+        animateAppearingOfShadow()
+    }
+    
+    func tableViewWasLoaded(with contentSizeHeight: CGFloat) {
+        if containerView.frame.height <= contentSizeHeight {
+            setupDeleteButton()
+        }
+    }
+    
 }
 
 class FilterDetailsTableCotroller : UITableViewController {
@@ -79,6 +138,8 @@ class FilterDetailsTableCotroller : UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
+    var animationDelegate: FilterDetailsControllerAnimationDelegate?
+    var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
     
     // MARK: - constants
     
@@ -114,6 +175,11 @@ class FilterDetailsTableCotroller : UITableViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        tableViewDelegate?.tableViewWasLoaded(with: tableView.contentSize.height)
+        tableViewDelegate = nil
     }
     
     // MARK: - table view delegate and datasource methods
@@ -167,8 +233,20 @@ class FilterDetailsTableCotroller : UITableViewController {
         }
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+                let contentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        if maximumOffset - contentOffset < 5.0 {
+            animationDelegate?.scrolledToBottom()
+        } else {
+            animationDelegate?.isScrolling()
+        }
+    }
+    
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         filtersService.setFilter(filter, enabled: sender.isOn)
+        enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
     }
     
     // MARK: - private methods

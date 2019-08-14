@@ -139,6 +139,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnabledCellID") as! FilterEnabledCell
             enabledSwitch = cell.enabledSwitch
             cell.enabledLabel.text = model.userFilterEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+            theme.setupLabel(cell.enabledLabel)
             enabledSwitch.isOn = model.userFilterEnabled
             enabledSwitch?.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
@@ -263,6 +264,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     @IBAction func toggleEnabled(_ sender: UISwitch) {
         model?.userFilterEnabled = sender.isOn
+        tableView.reloadSections([enabledSection], with: .automatic)
     }
     
     // MARK: - Presentation delegate methods
