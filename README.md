@@ -28,6 +28,7 @@
   * [Other options](#contribution-other)
   * [How to become a Beta tester](#beta-tester)
 * [Our plans](#our-plans)
+* [How to build](#how-to-build)
 
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
@@ -63,3 +64,39 @@ You can submit an application to participate in AdGuard for beta-testing program
 ## Our plans
 
 To see the 'big picture', to watch current progress and to get an idea of approximate dates for upcoming AdGuard for iOS releases, see this page: https://github.com/AdguardTeam/AdguardForIos/milestones
+
+<a id="how-to-build"></a>
+## How to build
+
+Prepare and install Ruby bundler:
+```
+sudo gem install bundler
+```
+
+Then you can run Fastlane using a command like this:
+```
+bundle exec fastlane [lane]
+```
+
+### Prepare
+
+Prepare development certificates:
+```
+bundle exec fastlane match development
+```
+
+Prepare appstore certificates:
+```
+bundle exec fastlane match appstore
+```
+
+Pass the following list when fastlane asks you to enter the bundle identifiers:
+```
+com.adguard.AdguardExtension,com.adguard.AdguardExtension.extension,com.adguard.AdguardExtension.extensionPrivacy,com.adguard.AdguardExtension.extensionAnnoyances,com.adguard.AdguardExtension.extensionOther,com.adguard.AdguardExtension.extensionCustom,com.adguard.AdguardExtension.extensionSecurity,com.adguard.AdguardExtension.ActionExtension,com.adguard.AdguardPro.ActionExtension,com.adguard.AdguardExtension.tunnel
+```
+
+### Run tests
+
+```
+bundle exec fastlane tests
+```

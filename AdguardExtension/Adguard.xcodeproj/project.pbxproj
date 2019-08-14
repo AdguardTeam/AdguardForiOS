@@ -3918,6 +3918,7 @@
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3928,6 +3929,7 @@
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3949,12 +3951,14 @@
 					65F398291B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 65F398101B7B684700ABCD39;
 					};
 					65F3985D1B7B6A5300ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3963,11 +3967,12 @@
 					};
 					7E06B66122FB1606006859AC = {
 						DevelopmentTeam = N33TQXN8C7;
+						ProvisioningStyle = Manual;
 					};
 					D0569D2E21F1C0A800985DA9 = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3977,18 +3982,22 @@
 					D067D8DC21428AA900ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 					};
 					D067D90D21428B4600ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 					};
 					D067D93E21428B9100ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 					};
 					D067D96F21428BB500ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 					};
 					D096D93F1F28C0D70081004D = {
 						CreatedOnToolsVersion = 9.0;
@@ -6563,7 +6572,9 @@
 				CODE_SIGN_ENTITLEMENTS = ActionExtension/ActionExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = ActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -6571,6 +6582,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).ActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.ActionExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6583,8 +6595,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionExtensionIcon;
 				CODE_SIGN_ENTITLEMENTS = ActionExtension/ActionExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
 				INFOPLIST_FILE = ActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -6592,6 +6606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID).ActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.ActionExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6744,6 +6759,8 @@
 				CODE_SIGN_ENTITLEMENTS = Adguard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -6751,6 +6768,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID)";
 				PRODUCT_NAME = Adguard;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -6765,8 +6783,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Adguard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -6774,6 +6794,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ADGUARD_BUNDLE_ID)";
 				PRODUCT_NAME = Adguard;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				USER_HEADER_SEARCH_PATHS = $inherited;
@@ -6786,10 +6807,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AdguardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtensionTests;
 				PRODUCT_NAME = AdguardTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -6804,10 +6829,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AdguardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtensionTests;
 				PRODUCT_NAME = AdguardTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 4.2;
@@ -6822,11 +6851,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionGeneral.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6839,13 +6871,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionGeneral.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6860,12 +6895,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionSecurity.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionSecurity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionSecurity";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6878,14 +6915,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionSecurity.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionSecurity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionSecurity";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6902,10 +6941,10 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -6917,7 +6956,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Libs/vendors/DnsCrypt\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6936,9 +6975,9 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Tunnel/tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
@@ -6947,7 +6986,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Libs/vendors/DnsCrypt\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6963,12 +7002,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionPrivacy.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionPrivacy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionPrivacy";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -6981,14 +7022,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionPrivacy.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionPrivacy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionPrivacy";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7003,12 +7046,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionAnnoyances.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionAnnoyances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionAnnoyances";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7021,14 +7066,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionAnnoyances.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionAnnoyances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionAnnoyances";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7043,12 +7090,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionOther.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionOther;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionOther";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7061,14 +7110,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionOther.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionOther;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionOther";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7083,12 +7134,14 @@
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionCustom.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionCustom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionCustom";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
@@ -7101,14 +7154,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				INFOPLIST_FILE = "$(SRCROOT)/Extension/AdguardBlockingExtensionCustom.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.extensionCustom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionCustom";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
