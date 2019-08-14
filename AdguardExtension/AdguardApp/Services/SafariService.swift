@@ -69,7 +69,7 @@ protocol SafariServiceProtocol : NSObjectProtocol {
     /** checks enabled status of all safari content blockers
      returns true in callback if all content blockers are enabled in safari settings
      */
-    func checkStatus(completion: @escaping (_ enabled: Bool)->Void)
+    func checkStatus(completion: @escaping (_ enabled: [NSNumber : Bool])->Void)
     
     /** returns state of content blocker ( on / off )
      */
@@ -196,12 +196,10 @@ class SafariService: NSObject, SafariServiceProtocol {
     // MARK: - safari content blocker status
     
     @objc
-    func checkStatus(completion:@escaping (_ enabled: Bool)->Void) {
+    func checkStatus(completion:@escaping (_ enabled: [NSNumber : Bool])->Void) {
         let checkQueue = DispatchQueue(label: "safari_check", attributes: DispatchQueue.Attributes.concurrent)
         
         checkQueue.async {
-            
-            var allEnabled = true
             
             let group = DispatchGroup()
             
@@ -209,15 +207,17 @@ class SafariService: NSObject, SafariServiceProtocol {
                 
                 group.enter()
                 self.chekStatusOfContentBlocker(contentBlockerType: blocker, callback: {[weak self] (enabled) in
-                    allEnabled = allEnabled && enabled
                     self?.contentBlockersEnabled[blocker] = enabled
                     group.leave()
                 })
             }
             group.wait()
+            let objcContentBlockersEnabled = ObjcToSwiftAndBackAdapter.fromSwiftToObjc(dict: self.contentBlockersEnabled)
+            
+            completion(objcContentBlockersEnabled)
             NotificationCenter.default.post(name: SafariService.contentBlcokersChecked, object: self)
-            completion(allEnabled)
         }
+        
     }
     
     private func chekStatusOfContentBlocker(contentBlockerType: ContentBlockerType, callback: @escaping (_ enabled: Bool)->Void)->Void {
@@ -259,3 +259,22 @@ class SafariService: NSObject, SafariServiceProtocol {
     }
 }
 
+class ObjcToSwiftAndBackAdapter {
+    static func fromSwiftToObjc(dict: [ContentBlockerType : Bool]) -> [NSNumber : Bool] {
+        var returnDict: [NSNumber : Bool] = [:]
+        for d in dict {
+            let key = d.key.rawValue as NSNumber
+            returnDict[key] = d.value
+        }
+        return returnDict
+    }
+    
+    static func fromObjcToSwift(dict: [NSNumber : Bool]) -> [ContentBlockerType : Bool] {
+        var returnDict: [ContentBlockerType : Bool] = [:]
+        for d in dict {
+            guard let key = ContentBlockerType(rawValue: Int(truncating: d.key)) else { return [:] }
+            returnDict[key] = d.value
+        }
+        return returnDict
+    }
+}

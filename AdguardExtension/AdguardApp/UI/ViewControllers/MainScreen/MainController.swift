@@ -29,6 +29,7 @@ class MainController: UIViewController {
     // MARK: - constants
     let enabledColor = UIColor(hexString: "#68BC71")
     let disabledColor = UIColor(hexString: "#DF3812")
+    let partlyEnabledColor = UIColor(hexString: "#DC9839")
     
     let RATE_APP_URL_FORMAT = "itms-apps://itunes.apple.com/us/app/itunes-u/id%@?action=write-review"
     #if PRO
@@ -250,12 +251,20 @@ class MainController: UIViewController {
             sSelf.roundArrow.isHidden = true
             sSelf.shareView.isHidden = true
             
-            guard let enabled = optionalEnabled as? Bool else {
+            guard let enabled = optionalEnabled else {
                 showProIfNeedeed()
                 return
             }
             
-            if(!enabled) {
+            var allEnabled = true
+            var someEnabled = false
+            
+            for d in enabled {
+                allEnabled = allEnabled && d.value
+                someEnabled = someEnabled || d.value
+            }
+            
+            if(!allEnabled || someEnabled) {
                 sSelf.tutorialVideoView.isHidden = false
                 sSelf.roundArrow.isHidden = false
                 sSelf.refreshIcon.isHidden = false
@@ -271,10 +280,21 @@ class MainController: UIViewController {
                 sSelf.refreshIcon.isHidden = false
             }
             
-            sSelf.enabledLabel.text = enabled ? ACLocalizedString("protection_enabled_caption", nil) : ACLocalizedString("protection_disabled_caption", nil)
-            sSelf.enabledLabel.textColor = enabled ? sSelf.enabledColor : sSelf.disabledColor
+            switch (allEnabled, someEnabled) {
+            case (false, true):
+                sSelf.enabledLabel.text = ACLocalizedString("protection_partly_enabled_caption", nil)
+                sSelf.enabledLabel.textColor = sSelf.partlyEnabledColor
+            case (false, false):
+                sSelf.enabledLabel.text = ACLocalizedString("protection_disabled_caption", nil)
+                sSelf.enabledLabel.textColor = sSelf.disabledColor
+            case (true, true):
+                sSelf.enabledLabel.text = ACLocalizedString("protection_enabled_caption", nil)
+                sSelf.enabledLabel.textColor = sSelf.enabledColor
+            default:
+                break
+            }
             
-            sSelf.headerImage.isHighlighted = !enabled
+            sSelf.headerImage.isHighlighted = !allEnabled
             
             showProIfNeedeed()
         }
