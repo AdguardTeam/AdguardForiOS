@@ -666,7 +666,7 @@
                                     <constraint firstAttribute="height" constant="16" id="pNP-oN-fyq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                 <connections>
                                     <action selector="editingChanged:" destination="YAD-0P-paW" eventType="editingChanged" id="VQF-RS-Qx1"/>
                                     <outlet property="delegate" destination="YAD-0P-paW" id="H8Y-eM-9Ky"/>

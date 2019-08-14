@@ -26,13 +26,25 @@ class FiltersMasterController: UIViewController {
     @IBOutlet var searchButton: UIBarButtonItem!
     
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     
-    weak var delegate: FilterMasterControllerDelegate?
+    weak var searchDelegate: FilterMasterControllerDelegate?
+    weak var groupsDelegate: FilterMasterControllerDelegate?
+    
     private let searchFiltersSegue = "searchFilterSegue"
     private let groupsControllerSegue = "groupsControllerSegue"
+    private var viewModel: FiltersAndGroupsViewModelProtocol? = nil
+    
+    
+    // MARK: - Initializer
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        viewModel = FiltersAndGroupsViewModel(filtersService: filtersService, configurationService: configurationService)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,28 +65,30 @@ class FiltersMasterController: UIViewController {
     }
     
     @IBAction func searchButtonTapped(_ sender: Any) {
+        searchDelegate?.searchButtonTapped()
+        groupsDelegate?.searchButtonTapped()
         showSearchContainerView()
-        delegate?.searchButtonTapped()
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        searchDelegate?.cancelButtonTapped()
+        groupsDelegate?.cancelButtonTapped()
         showGroupsContainerView()
-        delegate?.cancelButtonTapped()
         view.endEditing(true)
     }
     
     //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewModel: FiltersAndGroupsViewModelProtocol = FiltersAndGroupsViewModel(filtersService: filtersService)
         
         if segue.identifier == searchFiltersSegue {
             if let destinationVC = segue.destination as? SearchFilterController{
-                delegate = destinationVC
+                searchDelegate = destinationVC
                 destinationVC.viewModel = viewModel
             }
         } else if segue.identifier == groupsControllerSegue {
             if let destinationVC = segue.destination as? GroupsController{
+                groupsDelegate = destinationVC
                 destinationVC.viewModel = viewModel
             }
         }

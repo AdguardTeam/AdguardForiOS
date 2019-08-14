@@ -363,30 +363,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         updateGroupSubtitle(group)
         notifyChange()
         processUpdate()
-        
-        if !group.enabled && enabled {
-            for filterToDisable in group.filters {
-                if (filterToDisable == filter) || !(enabledFilters[filterToDisable.filterId] ?? false) {
-                    continue
-                }
-                
-                setFilter(filterToDisable, enabled: false)
-            }
-            setGroup(group.groupId, enabled: true)
-        }
-        else if group.enabled {
-            var allFiltersDisabled = true
-            for filter in group.filters {
-                if filter.enabled {
-                    allFiltersDisabled = false
-                    break;
-                }
-            }
-            
-            if allFiltersDisabled {
-                setGroup(group.groupId, enabled: false)
-            }
-        }
     }
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool) {

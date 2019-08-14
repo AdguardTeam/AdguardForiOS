@@ -18,13 +18,15 @@
 
 import Foundation
 
-protocol FiltersAndGroupsViewModelProtocol {
+protocol FiltersAndGroupsViewModelProtocol: class {
     
     /* Indicates whether you need to work only with single group, otherwise it is nil */
     var currentGroup: Group? { get set }
     
     /* Returns array of groups to display */
     var groups: [Group]? { get }
+    
+    var constantAllGroups: [Group] { get }
     
     /* contains search query string */
     var searchString: String { get }
@@ -61,8 +63,9 @@ protocol FiltersAndGroupsViewModelProtocol {
     returns @success result in callback */
     func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void)
     
-    // MARK - callbacks
-    var filtersChangedCallback:(()->Void)? { get set }
+    // MARK - callbacks methods
+    func add(_ callback: @escaping ()->(), with key: String)
+    func removeCallback(with key: String)
     var searchChangedCallback:(()->Void)? { get set }
 }
 
@@ -87,21 +90,22 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     private var searchGroups: [Group] = []
     private var allGroups: [Group] = []
+    var constantAllGroups: [Group] = []
     
     private var groupsObserver: ((_ index: Int)->Void)?
     private var filtersService: FiltersServiceProtocol
+    private var configurationService: ConfigurationService
     
     
     // MARK: - Callbacks
     
-    var filtersChangedCallback: (() -> Void)?
-    
+    private var callbacksByKey: [ String : ()->() ] = [:]
     var searchChangedCallback: (() -> Void)?
-    
     
     // MARK: - initializers
     
-    init(filtersService: FiltersServiceProtocol) {
+    init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService) {
+        self.configurationService = configurationService
         self.filtersService = filtersService
         super.init()
         
@@ -166,7 +170,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
                 }
             }
         }
-        filtersChangedCallback?()
+        callAllCallbacks()
     }
     
     func cancelSearch() {
@@ -176,7 +180,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         highlightTags([])
         searchGroups = [Group]()
             
-        filtersChangedCallback?()
+        callAllCallbacks()
     }
     
     func switchTag(name: String) {
@@ -202,6 +206,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     func set(groupId: Int, enabled: Bool) {
         filtersService.setGroup(groupId, enabled: enabled)
+        guard let group = getGroupFromSearchGroups(by: groupId) else { return }
+        group.enabled = enabled
     }
 
     func load(_ completion: @escaping () -> Void) {
@@ -216,7 +222,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         filtersService.addCustomFilter(filter, overwriteExisted: overwriteExisted)
         updateAllGroups()
         completion(true)
-        filtersChangedCallback?()
+        callAllCallbacks()
     }
     
     func updateCurrentGroup(){
@@ -232,37 +238,37 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func updateAllGroups(){
-        let groups = filtersService.groups
+        constantAllGroups = filtersService.groups
+        let proStatus = configurationService.proStatus
+        let groups = filtersService.groups.filter { (group) -> Bool in
+            if proStatus {
+                return true
+            }
+            return !group.proOnly
+        }
+        
         let sortedGroups = groups.sorted(by: { $0.groupId < $1.groupId })
         for group in sortedGroups {
-            let filters = group.filters
-            group.filters = filters.sorted { (filter1, filter2) -> Bool in
-            
-                let enabled1 = filter1.enabled
-                let enabled2 = filter2.enabled
-                    
-                switch (enabled1, enabled2) {
-                case (true, false):
-                    return true
-                case (false, true):
-                    return false
-                default:
-                    break
-                }
-                        
-                if filter1.displayNumber != filter2.displayNumber {
-                    return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
-                }
-                else {
-                    return filter1.name ?? "" < filter2.name ?? ""
-                }
-            }
+            sortFilters(in: group)
         }
-        self.allGroups = sortedGroups
+        allGroups = sortedGroups
+    }
+    
+    func add(_ callback: @escaping () -> (), with key: String) {
+        callbacksByKey[key] = callback
+    }
+    
+    func removeCallback( with key: String) {
+        callbacksByKey.removeValue(forKey: key)
     }
     
     
     // MARK: - Private methods
+    
+    private func callAllCallbacks(){
+        callbacksByKey.forEach({ $0.value() })
+    }
+    
     private func highlight(filter: Filter, tags: Set<String>){
         for i in 0..<(filter.tags?.count ?? 0) {
             filter.tags![i].heighlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
@@ -296,5 +302,34 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
             }
         }
         return false
+    }
+    
+    private func sortFilters(in group: Group){
+        let filters = group.filters
+        group.filters = filters.sorted { (filter1, filter2) -> Bool in
+        
+            let enabled1 = filter1.enabled
+            let enabled2 = filter2.enabled
+                
+            switch (enabled1, enabled2) {
+            case (true, false):
+                return true
+            case (false, true):
+                return false
+            default:
+                break
+            }
+                    
+            if filter1.displayNumber != filter2.displayNumber {
+                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
+            }
+            else {
+                return filter1.name ?? "" < filter2.name ?? ""
+            }
+        }
+    }
+    
+    private func getGroupFromSearchGroups(by groupId: Int) -> Group? {
+        return searchGroups.first {$0.groupId == groupId }
     }
 }

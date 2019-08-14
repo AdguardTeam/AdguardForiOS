@@ -45,6 +45,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     private let groupCellId = "GroupCellReuseID"
 
     private let showFilterDetailsSegue = "showFilterDetailsSegue"
+    private let filtersControllerKey = "filtersControllerKey"
 
     
     private var selectedIndex: Int?
@@ -71,19 +72,23 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         super.viewDidLoad()
         
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 118
+        tableView.estimatedRowHeight = 118.0
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        viewModel?.filtersChangedCallback = { [weak self] in
+        // Add callback to viewModel
+        let filtersChangedCallback = { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
             sSelf.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             sSelf.tableView.setContentOffset(.zero, animated: false)
         }
+        viewModel?.add(filtersChangedCallback, with: filtersControllerKey)
+        
         viewModel?.searchChangedCallback = { [weak self] in self?.updateBarButtons() }
+
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
         navigationItem.title = group?.name ?? ""
@@ -93,8 +98,14 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let searchString = viewModel?.searchString else { return }
+        viewModel?.searchFilter(query: searchString)
         viewModel?.updateCurrentGroup()
         updateTheme()
+    }
+    
+    deinit {
+        viewModel?.removeCallback(with: filtersControllerKey)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,8 +262,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
-        guard let sGroup = group else { return }
+        guard let sGroup = viewModel?.currentGroup else { return }
         viewModel?.set(groupId: sGroup.groupId, enabled: sender.isOn)
+        tableView.reloadData()
     }
     
     // MARK: - searchbar methods
