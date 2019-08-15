@@ -80,7 +80,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_APP_VERSION_PARAM = "app_version"
     private let STATUS_DEVICE_NAME_PARAM = "device_name"
     
-    let APP_NAME_VALUE = "adguard_ios_pro"
+    static let APP_NAME_VALUE = "adguard_ios_pro"
     
     private var defaults: UserDefaults
     private var network: ACNNetworkingProtocol
@@ -175,7 +175,7 @@ class LoginService: LoginServiceProtocol {
         
         DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
         
-        var params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
+        var params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!]
         
@@ -241,7 +241,7 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        var params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
+        var params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
                       STATUS_DEVICE_NAME_PARAM: UIDevice.current.name,
@@ -308,7 +308,7 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        let params = [LOGIN_APP_NAME_PARAM: APP_NAME_VALUE,
+        let params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction

@@ -188,7 +188,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
-    private let loginService: LoginService
+    private var loginService: LoginServiceProtocol
     
     private var purchasedThroughInApp: Bool {
         get {
@@ -361,7 +361,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         {
         "\(APP_ID_PARAM)":"\(appId)",
         "\(APP_VERSION_PARAM)":"\(ADProductInfo.version()!)",
-        "\(APP_NAME_PARAM)":"\(loginService.APP_NAME_VALUE)",
+        "\(APP_NAME_PARAM)":"\(LoginService.APP_NAME_VALUE)",
         "\(RECEIPT_DATA_PARAM)":"\(base64Str)"
         }
         """
@@ -499,8 +499,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {
-                    self?.loginService.hasPremiumLicense = false
-                    self?.notifyPremiumExpired()
+                    if !(self?.loginService.hasPremiumLicense ?? true) {
+                        self?.notifyPremiumExpired()
+                    }
                 }
             }
         }
