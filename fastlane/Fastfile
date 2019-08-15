@@ -123,8 +123,23 @@ platform :ios do
 end
 
 lane :prepare do
-  get_certificates(development: true, platform: "macos")
-  get_certificates(development: false, platform: "macos")
+  get_certificates(
+    development: true,
+    platform: "macos",
+    username: "apple-dev@adguard.com",
+    team_id: "N33TQXN8C7",
+    output_path: "./build"
+  )
+  get_certificates(
+    development: false,
+    platform: "macos",
+    username: "apple-dev@adguard.com",
+    team_id: "N33TQXN8C7",
+    output_path: "./build"
+  )
+
+  # get_certificates creates .p12 and .cer files in the build directory
+
   match(type: "development", readonly: true, platform: "ios")
   match(type: "appstore", readonly: true, platform: "ios")
   match(type: "adhoc", readonly: true, platform: "ios")
