@@ -1,0 +1,11 @@
+AdguardExtension/AdguardApp
+AdguardExtension/ActionExtension
+AdguardExtension/TodayExtension
+AdguardExtension/AdguardApp/UI/ViewControllers/About
+AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings
+AdguardExtension/AdguardApp/UI/ViewControllers/Filters
+AdguardExtension/AdguardApp/UI/ViewControllers/License
+AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu
+AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen
+AdguardExtension/AdguardApp/UI/ViewControllers/Settings
+AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter
