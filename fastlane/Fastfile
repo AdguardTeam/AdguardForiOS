@@ -55,6 +55,7 @@ end
 platform :ios do
   desc "Runs unit tests"
   lane :tests do
+    match(type: "development", readonly: true)
     run_tests(scheme: BUILD_SCHEME)
   end
 
