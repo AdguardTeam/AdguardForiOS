@@ -601,8 +601,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         let filter = group.filters.first(where: {$0.filterId == filterId})
         filter?.enabled = enabled
         
-        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-
         updateGroupSubtitle(group)
         
         notifyChange()
