@@ -236,6 +236,7 @@
                                             <rect key="frame" x="345" y="12" width="51" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="9qA-VP-LTI"/>
+                                                <constraint firstAttribute="width" constant="49" id="AWj-O4-Kdj"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="toggleEnableSwitch:" destination="Llu-1A-iPX" eventType="valueChanged" id="Cot-p2-7Lu"/>
@@ -519,7 +520,7 @@
             <objects>
                 <tableViewController id="TuY-uw-gTS" customClass="FilterDetailsTableCotroller" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xpg-59-RQJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="705"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="xEe-LL-fHG">
@@ -1065,6 +1066,7 @@
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFy-wS-wjP" customClass="FilterCellUISwitch" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="349" y="16" width="51" height="31"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="NbY-9p-dKJ"/>
                                                 <constraint firstAttribute="height" constant="31" id="lhZ-6d-kc8"/>
                                             </constraints>
                                             <connections>
@@ -1100,11 +1102,11 @@
                                         <constraint firstItem="xS8-f2-3yC" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="15" id="96e-Gn-HA2"/>
                                         <constraint firstItem="xS8-f2-3yC" firstAttribute="leading" secondItem="gnA-Kf-bfZ" secondAttribute="leading" constant="26" id="BtA-Bc-sPe"/>
                                         <constraint firstItem="uFy-wS-wjP" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="trailing" constant="13" id="D0c-IH-0qI"/>
-                                        <constraint firstAttribute="trailing" secondItem="uFy-wS-wjP" secondAttribute="trailing" constant="16" id="JB4-iq-A9W"/>
                                         <constraint firstAttribute="bottom" secondItem="GiY-N7-EtV" secondAttribute="bottom" constant="15" id="LMP-kU-aXp"/>
                                         <constraint firstItem="GiY-N7-EtV" firstAttribute="top" secondItem="x93-x6-7Fw" secondAttribute="bottom" id="MFl-xD-hAD"/>
                                         <constraint firstItem="uFy-wS-wjP" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="16" id="ZOG-Fs-4Hq"/>
                                         <constraint firstItem="x93-x6-7Fw" firstAttribute="trailing" secondItem="kab-Sc-THo" secondAttribute="trailing" id="cGx-Ms-ijj"/>
+                                        <constraint firstAttribute="trailing" secondItem="uFy-wS-wjP" secondAttribute="trailing" constant="16" id="fwT-WS-a2h"/>
                                         <constraint firstItem="GiY-N7-EtV" firstAttribute="trailing" secondItem="xS8-f2-3yC" secondAttribute="trailing" id="kLx-Sb-Whc"/>
                                         <constraint firstItem="kab-Sc-THo" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="leading" id="l8s-nR-EgF"/>
                                         <constraint firstItem="x93-x6-7Fw" firstAttribute="top" secondItem="kab-Sc-THo" secondAttribute="bottom" id="oeK-EH-bkv"/>
@@ -1335,7 +1337,7 @@
         <image name="plus" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Ap-Zj-DX8"/>
+        <segue reference="u0d-JL-uIG"/>
         <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
 </document>
