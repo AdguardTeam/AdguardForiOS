@@ -322,14 +322,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     strongSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
                 }
             }
-            else {
-                groupInfos?.forEach({ (group) in
-                    for filter in group.filters {
-                        filter.enabled = strongSelf.enabledFilters[filter.filterId] ?? false
-                    }
-                    strongSelf.updateGroupSubtitle(group)
-                })
-            }
+            
+            groupInfos?.forEach({ (group) in
+                for filter in group.filters {
+                    filter.enabled = strongSelf.enabledFilters[filter.filterId] ?? false
+                }
+                strongSelf.updateGroupSubtitle(group)
+            })
             
             DispatchQueue.main.async {
                 strongSelf.groups = groupInfos ?? [Group]()
