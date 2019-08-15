@@ -1,13 +1,9 @@
 git_url("ssh://git@bit.adguard.com:7999/adguard-ios/certificates.git")
-
 storage_mode("git")
-
-type("development") # The default type, can be: appstore, adhoc, enterprise or development
-
-# app_identifier(["tools.fastlane.app", "tools.fastlane.app2"])
-# username("user@fastlane.tools") # Your Apple Developer Portal username
-
-# For all available options run `fastlane match --help`
-# Remove the # in the beginning of the line to enable the other options
-
-# The docs are available on https://docs.fastlane.tools/actions/match
+type("development")
+app_identifier(["com.adguard.AdguardExtension", "com.adguard.AdguardExtension.extension",
+                "com.adguard.AdguardExtension.extensionPrivacy", "com.adguard.AdguardExtension.extensionAnnoyances",
+                "com.adguard.AdguardExtension.extensionOther", "com.adguard.AdguardExtension.extensionCustom",
+                "com.adguard.AdguardExtension.extensionSecurity", "com.adguard.AdguardExtension.ActionExtension",
+                "com.adguard.AdguardPro.ActionExtension", "com.adguard.AdguardExtension.tunnel"])
+username("apple-dev@adguard.com")
