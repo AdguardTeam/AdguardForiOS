@@ -121,3 +121,11 @@ platform :ios do
     )
   end
 end
+
+lane :prepare do
+  get_certificates(development: true, platform: "macos")
+  get_certificates(development: false, platform: "macos")
+  match(type: "development", readonly: true, platform: "ios")
+  match(type: "appstore", readonly: true, platform: "ios")
+  match(type: "adhoc", readonly: true, platform: "ios")
+end

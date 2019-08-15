@@ -1,7 +1,7 @@
 module Fastlane # rubocop:disable FrozenStringLiteralComment
   module Actions
     module SharedValues # rubocop:disable Documentation
-      BUILD_NUMBER ||= :BUILD_NUMBER
+      NEW_BUILD_NUMBER ||= :NEW_BUILD_NUMBER
     end
 
     # Action implementation
@@ -53,7 +53,7 @@ module Fastlane # rubocop:disable FrozenStringLiteralComment
 
         File.write(file_path, xcconfig_content)
         UI.message("New build number has been written to #{file_path}")
-        Actions.lane_context[SharedValues::BUILD_NUMBER] = new_build_number
+        Actions.lane_context[SharedValues::NEW_BUILD_NUMBER] = new_build_number
       end
 
       #####################################################
@@ -89,7 +89,7 @@ module Fastlane # rubocop:disable FrozenStringLiteralComment
       def self.output
         # Define the shared values you are going to provide
         [
-          ['BUILD_NUMBER', 'The new build number']
+          ['NEW_BUILD_NUMBER', 'The new build number']
         ]
       end
 

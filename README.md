@@ -103,22 +103,9 @@ bundle exec fastlane [lane]
 
 ### Codesigning
 
-Prepare development certificates:
-
+Run this command to get proper codesigning certificates: 
 ```
-MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match development
-```
-
-Prepare appstore certificates:
-
-```
-MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match appstore
-```
-
-Prepare adhoc certificates:
-
-```
-MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match adhoc
+MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane prepare
 ```
 
 ### Actions

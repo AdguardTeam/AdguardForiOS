@@ -15,6 +15,14 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### prepare
+```
+fastlane prepare
+```
+
+
+----
+
 ## iOS
 ### ios tests
 ```
@@ -40,7 +48,7 @@ Increments the build number and commits to the repo
 ```
 fastlane ios testflight_beta
 ```
-Uploads the build with
+Uploads the build to testflight
 
 ----
 
