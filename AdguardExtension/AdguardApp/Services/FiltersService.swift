@@ -363,30 +363,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         updateGroupSubtitle(group)
         notifyChange()
         processUpdate()
-        
-        if !group.enabled && enabled {
-            for filterToDisable in group.filters {
-                if (filterToDisable == filter) || !(enabledFilters[filterToDisable.filterId] ?? false) {
-                    continue
-                }
-                
-                setFilter(filterToDisable, enabled: false)
-            }
-            setGroup(group.groupId, enabled: true)
-        }
-        else if group.enabled {
-            var allFiltersDisabled = true
-            for filter in group.filters {
-                if filter.enabled {
-                    allFiltersDisabled = false
-                    break;
-                }
-            }
-            
-            if allFiltersDisabled {
-                setGroup(group.groupId, enabled: false)
-            }
-        }
     }
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
@@ -625,31 +601,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         let filter = group.filters.first(where: {$0.filterId == filterId})
         filter?.enabled = enabled
         
-        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-
-        if enabled {
-            if !group.enabled {
-                group.enabled = true
-                antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
-                contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
-                }
-            }
-        }
-        else {
-            let enabledExists = group.filters.contains { $0.enabled }
-            if !enabledExists {
-                if group.enabled {
-                    group.enabled = false
-
-                    antibanner.setFiltersGroup(group.groupId as NSNumber, enabled: enabled)
-                    contentBlocker.reloadJsons(backgroundUpdate: false)  { (error) in
-                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
-                    }
-                }
-            }
-        }
-
         updateGroupSubtitle(group)
         
         notifyChange()

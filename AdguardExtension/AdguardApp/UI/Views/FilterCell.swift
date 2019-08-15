@@ -47,9 +47,8 @@ class FilterCell: UITableViewCell {
     var group: Group? {
         didSet{
             let groupEnabled = group?.enabled ?? false
-                enableSwitch.isEnabled = groupEnabled
-                enableSwitch.isUserInteractionEnabled = groupEnabled
-                contentView.alpha = groupEnabled ? 1.0 : 0.5
+            contentView.isUserInteractionEnabled = groupEnabled
+            contentView.alpha = groupEnabled ? 1.0 : 0.5
         }
     }
     

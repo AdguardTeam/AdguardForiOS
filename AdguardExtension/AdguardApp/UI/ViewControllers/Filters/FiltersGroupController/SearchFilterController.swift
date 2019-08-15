@@ -28,9 +28,13 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     
     private let filterCellId = "filterCellID"
-    private let showFilterDetailsSegue = "showFilterDetails"
+    private let showGroupSegue = "showGroupSegue"
+    private let showFilterDetailsSegue = "showFilterDetailsSegue"
     
-    private var selectedFilter: (section: Int, row: Int) = (0,0)
+    private let searchFilterControllerKey = "searchFilterControllerKey"
+    
+    private var selectedGroup: Int = 0
+    private var selectedFilter: Int = 0
     
     // MARK: - View Controller life cycle
     
@@ -47,7 +51,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         
         self.searchBar.delegate = self
 
-        viewModel?.filtersChangedCallback = { [weak self] in
+        let filtersChangedCallback = { [weak self] in
             self?.tableView.reloadData()
             if self?.tableView.numberOfSections ?? 0 > 0 {
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -55,17 +59,20 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
             self?.tableView.setContentOffset(.zero, animated: false)
             self?.searchBar.text = self?.viewModel?.searchString
         }
+        viewModel?.add(filtersChangedCallback, with: searchFilterControllerKey)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.cancelSearch()
+
+        viewModel?.currentGroup = nil
+        guard let searchString = viewModel?.searchString else { return }
+        viewModel?.searchFilter(query: searchString)
         updateTheme()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        viewModel?.cancelSearch()
+    deinit {
+        viewModel?.removeCallback(with: searchFilterControllerKey)
     }
 
     // MARK: - Table View Delegate and Data Source
@@ -87,7 +94,12 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
         view.backgroundColor = theme.backgroundColor
             
-        let label = ThemableLabel(frame: CGRect(x: 24.0, y: height - 32, width: width - 24.0, height: 24.0))
+        let label = ThemableLabel(frame: CGRect(x: 26.0, y: height - 32.0, width: width - 24.0, height: 24.0))
+        let segueButton = UIButton(frame: view.frame)
+        segueButton.backgroundColor = .clear
+        segueButton.tag = section
+        segueButton.addTarget(self, action: #selector(segueButtonTapped(_:)), for: .touchUpInside)
+        
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.text = group.name
         label.textAlignment = .left
@@ -95,6 +107,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         theme.setupLabel(label)
             
         view.addSubview(label)
+        view.addSubview(segueButton)
         return view
     }
     
@@ -123,8 +136,14 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedFilter = (indexPath.section, indexPath.row)
-        performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
+        selectedGroup = indexPath.section
+        selectedFilter = indexPath.row
+        guard let group = viewModel?.groups?[selectedGroup] else { return }
+        if group.enabled {
+            performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
+        } else {
+            performSegue(withIdentifier: showGroupSegue, sender: self)
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -149,6 +168,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     func searchButtonTapped() {
+        tableView.reloadData()
         searchBar.becomeFirstResponder()
     }
     
@@ -175,11 +195,17 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
+            self?.tableView.reloadData()
         }
         theme.setupSearchBar(searchBar)
     }
+    
+    @objc private func segueButtonTapped(_ sender: UIButton){
+        selectedGroup = sender.tag
+        performSegue(withIdentifier: showGroupSegue, sender: self)
+    }
+    
+    // MARK: - TagButtonTapped Delegate
     
     func tagButtonTapped(_ sender: TagButton) {
         viewModel?.switchTag(name: sender.name ?? "")
@@ -188,12 +214,18 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     // MARK: - prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showFilterDetailsSegue{
+        guard let group = viewModel?.groups?[selectedGroup] else { return }
+        viewModel?.currentGroup = group
+        
+        if segue.identifier == showGroupSegue{
+            if let destinationVC = segue.destination as? FiltersController {
+                destinationVC.viewModel = viewModel
+            }
+        } else if segue.identifier == showFilterDetailsSegue {
             if let destinationVC = segue.destination as? FilterDetailsController {
-                guard let group = viewModel?.groups?[selectedFilter.section] else { return }
-                let filter = group.filters[selectedFilter.row]
+                let filter = group.filters[selectedFilter]
                 destinationVC.filter = filter
-                destinationVC.isCustom = group.groupId == FilterGroupId.custom ? true : false
+                destinationVC.isCustom = filter.groupId == FilterGroupId.custom
             }
         }
     }

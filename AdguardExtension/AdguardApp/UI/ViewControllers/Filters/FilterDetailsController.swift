@@ -257,6 +257,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
         theme.setupSeparators(separators)
+        theme.setupSwitch(enabledSwitch)
         
         if filter.homepage != nil {
             let homepage = NSAttributedString(string: filter.homepage!, attributes:
