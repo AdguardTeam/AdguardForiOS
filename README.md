@@ -90,13 +90,14 @@ Prepare appstore certificates:
 bundle exec fastlane match appstore
 ```
 
-Pass the following list when fastlane asks you to enter the bundle identifiers:
+Prepare adhoc certificates:
 ```
-com.adguard.AdguardExtension,com.adguard.AdguardExtension.extension,com.adguard.AdguardExtension.extensionPrivacy,com.adguard.AdguardExtension.extensionAnnoyances,com.adguard.AdguardExtension.extensionOther,com.adguard.AdguardExtension.extensionCustom,com.adguard.AdguardExtension.extensionSecurity,com.adguard.AdguardExtension.ActionExtension,com.adguard.AdguardPro.ActionExtension,com.adguard.AdguardExtension.tunnel
+bundle exec fastlane match adhoc
 ```
 
-### Run tests
+### Actions
 
-```
-bundle exec fastlane tests
-```
+* `bundle exec fastlane tests` -- run tests
+* `bundle exec fastlane build` -- build version for appstore
+* `bundle exec fastlane adhoc` -- build adhoc version (for inner testing)
+* `bundle exec fastlane testflight_beta` -- upload previously built version to testflight, increment build number, commit it.

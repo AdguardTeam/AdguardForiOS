@@ -16,26 +16,26 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios custom_lane
-```
-fastlane ios custom_lane
-```
-Description of what the lane does
 ### ios tests
 ```
 fastlane ios tests
 ```
-
-### ios beta
+Runs unit tests
+### ios build
 ```
-fastlane ios beta
+fastlane ios build
 ```
-
-### ios devbeta
+Builds app for appstore
+### ios adhoc
 ```
-fastlane ios devbeta
+fastlane ios adhoc
 ```
-
+Builds adhoc build for inner testing
+### ios testflight_beta
+```
+fastlane ios testflight_beta
+```
+Builds an app store version, uploads it to testflight, increments build number
 
 ----
 

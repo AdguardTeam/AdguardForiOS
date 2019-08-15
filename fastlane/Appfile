@@ -1,5 +1,5 @@
-# app_identifier("[[APP_IDENTIFIER]]") # The bundle identifier of your app
-# apple_id("[[APPLE_ID]]") # Your Apple email address
+app_identifier("com.adguard.AdguardExtension,com.adguard.AdguardExtension.extension,com.adguard.AdguardExtension.extensionPrivacy,com.adguard.AdguardExtension.extensionAnnoyances,com.adguard.AdguardExtension.extensionOther,com.adguard.AdguardExtension.extensionCustom,com.adguard.AdguardExtension.extensionSecurity,com.adguard.AdguardExtension.ActionExtension,com.adguard.AdguardPro.ActionExtension,com.adguard.AdguardExtension.tunnel") # The bundle identifier of your app
+apple_id("apple-dev@adguard.com") # Your Apple email address
 
 
 # For more information about the Appfile, see:

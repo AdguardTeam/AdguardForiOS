@@ -12,21 +12,80 @@
 
 default_platform(:ios)
 
+# Configuration
+COMMIT_MESSAGE = "skipci: Automatic version increment"
+BUILD_SCHEME = "AdguardExtension"
+OUTPUT_DIRECTORY = "./build"
+XCCONFIG_PATH = "AdguardExtension/Adguard-Config.xcconfig"
+IPA_NAME = "Adguard.ipa"
+
+def commit_ag_build_bump()
+  FastlaneCore::CommandExecutor.execute(command: "git add ..",
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run git add: #{error_output}")
+                                        end)
+  FastlaneCore::CommandExecutor.execute(command: "git commit -m '#{COMMIT_MESSAGE}'",
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run git commit: #{error_output}")
+                                        end)
+end
+
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
-  end
-
+  desc "Runs unit tests"
   lane :tests do
-    run_tests(scheme: "AdguardExtension")
+    run_tests(scheme: BUILD_SCHEME)
   end
 
-  lane :beta do
-    build_app(scheme: "AdguardExtension")
+  desc "Builds app for appstore"
+  lane :build do
+    match(type: "appstore", readonly: true)
+    build_app(
+      scheme: BUILD_SCHEME,
+      output_directory: OUTPUT_DIRECTORY,
+      include_bitcode: false,
+      include_symbols: true,
+    )
+    write_build_info(
+      xcconfig: XCCONFIG_PATH,
+      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+    )
   end
 
-  lane :devbeta do
-    build_app(scheme: "AdguardExtension")
+  desc "Builds adhoc build for inner testing"
+  lane :adhoc do
+    match(type: "adhoc", readonly: true)
+    build_app(
+      scheme: BUILD_SCHEME,
+      output_directory: OUTPUT_DIRECTORY,
+      include_bitcode: false,
+      include_symbols: true,
+    )
+    write_build_info(
+      xcconfig: XCCONFIG_PATH,
+      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+    )
+  end
+
+  desc "Builds an app store version, uploads it to testflight, increments build number"
+  lane :testflight_beta do
+    # Ensure that your git status is not dirty
+    ensure_git_status_clean
+
+    # Build appstore version
+    build
+
+    # Increment the build number (not the version number)
+    increment_ag_build(xcconfig: XCCONFIG_PATH)
+
+    # Commit
+    commit_ag_build_bump()
+
+    # Uploads the build without actually submitting it
+    upload_to_testflight(
+      skip_submission: true,
+      ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}",
+    )
   end
 end
