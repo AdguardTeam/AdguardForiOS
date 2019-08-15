@@ -58,6 +58,8 @@ platform :ios do
     run_tests(
       scheme: BUILD_SCHEME,
       output_types: "junit",
+      clean: true,
+      code_coverage: true,
     )
   end
 
