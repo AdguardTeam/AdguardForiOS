@@ -11,7 +11,7 @@ class KeychainServiceTest: XCTestCase {
 
     func testSave() {
         
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.saveAuth(server: "test.com", login: "login", password: "pass"))
         
@@ -23,7 +23,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testDelete() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.saveAuth(server: "test.com", login: "login", password: "pass"))
         XCTAssert(keychain.deleteAuth(server: "test.com"))
@@ -32,7 +32,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testOverwrite() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.saveAuth(server: "test.com", login: "login", password: "pass"))
         XCTAssert(keychain.saveAuth(server: "test.com", login: "login2", password: "pass2"))
@@ -44,7 +44,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testStoreId() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         XCTAssert(keychain.deleteAppId())
         
         let appId = keychain.appId
@@ -57,7 +57,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testDeleteId() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         XCTAssert(keychain.deleteAppId())
         
         let appId = keychain.appId
@@ -72,7 +72,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testSaveLicenseKey() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
      
@@ -83,7 +83,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testDeleteLicenseKey() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
         
@@ -95,7 +95,7 @@ class KeychainServiceTest: XCTestCase {
     }
     
     func testStoreLicenseReadLogin() {
-        let keychain = KeychainService()
+        let keychain = KeychainService(resources: SharedResourcesMock())
         
         XCTAssert(keychain.deleteAuth(server: "test.server"))
         XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
