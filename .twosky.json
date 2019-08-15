@@ -44,13 +44,11 @@
       "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen/en.lproj/MainScreen.strings",
       "AdguardExtension/AdguardApp/UI/ViewControllers/Settings/en.lproj/Settings.strings",
       "AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter/en.lproj/UserFilter.strings",
-      "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings",
-      "AdguardExtension/TodayExtension/en.lproj/TodayExtensionMainInterface.strings"
+      "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings"
     ],
     "storyboard_dirs": [
       "AdguardExtension/AdguardApp",
       "AdguardExtension/ActionExtension",
-      "AdguardExtension/TodayExtension",
       "AdguardExtension/AdguardApp/UI/ViewControllers/About",
       "AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings",
       "AdguardExtension/AdguardApp/UI/ViewControllers/Filters",

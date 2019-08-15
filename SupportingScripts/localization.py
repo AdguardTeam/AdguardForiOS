@@ -62,8 +62,8 @@ for path in TWOSKY_CONFIG["storyboard_dirs"]:
 
         # check files exists
         if not os.path.isfile(stringsFilePath):
-            print("WARNING. There is no .strings file for {0}", xibFilePath)
-            print("Expected file {0}", stringsFilePath)
+            print("WARNING. There is no .strings file for {0}".format(xibFilePath))
+            print("Expected file {0}".format(stringsFilePath))
             continue
 
         STORYBOARD_STRINGS[xibFilePath] = stringsFilePath
@@ -74,10 +74,9 @@ for path in TWOSKY_CONFIG["storyboard_dirs"]:
 LOCALIZABLE_FILES = []
 
 for path in TWOSKY_CONFIG["localizable_files"]:
-    targetPath = os.path.join("../", path)
+    targetPath = os.path.join(CURRENT_DIR, BASE_PATH, path)
     LOCALIZABLE_FILES.append(targetPath)
-    os.chdir(CURRENT_DIR)
-
+    
     #check files exists
     if not os.path.isfile(targetPath):
         raise FileNotFoundError("Localizable file {0} not found".format(targetPath))
@@ -86,12 +85,13 @@ for path in TWOSKY_CONFIG["localizable_files"]:
 DRY_RUN = False
 
 def changeEncoding(file):
+    print("change encoding of file {0} from utf-16 to utf-8".format(file))
     """ Changes encoding of file from UTF-16 to UTF-8 
     """
-    with open(file, "r") as f:
-        with open("temp.strings", "w") as f2:
-            content = f.read().decode("UTF-16")
-            f2.write(content.lstrip().encode('UTF-8')) 
+    with open(file, "rb") as f:
+        with open("temp.strings", "wb") as f2:
+            content = f.read().decode('utf-16')
+            f2.write(content.lstrip().encode('utf-8')) 
     os.rename("temp.strings", file)
 
 
@@ -113,6 +113,7 @@ def upload_file(path, format, language, file_name):
     }
 
     print("Uploading {0}/{1} to the translation system".format(language, file_name))
+    print("file path {0}".format(path))
 
     if DRY_RUN:
         return
@@ -140,12 +141,13 @@ def download_file(file_name, language, format, path):
     path -- destination path where the file is to be written
     """
     print("Downloading {0}/{1} from the translation system".format(language, file_name))
+    print("save to {0}".format(path))
 
     if DRY_RUN:
         return
 
     params = {
-        "filename": file_name,
+        "filename": path,
         "format": format,
         "project": TWOSKY_CONFIG["project_id"],
         "language": language
@@ -169,6 +171,16 @@ def download_file(file_name, language, format, path):
 def xib_to_strings(xib_path, strings_path):
     """Generates a strings file from the specified xib"""
     print("Generating {0} file from {1}".format(strings_path, xib_path))
+
+    # check both files exist
+    # it is not a error. Just skip it
+    if not os.path.isfile(strings_path):
+        print("file {0} does not exist. Skip it.".format(strings_path))
+        return
+
+    if not os.path.isfile(xib_path):
+        print("file {0} does not exist. Skip it.".format(xib_path))
+        return
 
     if DRY_RUN:
         return
@@ -202,6 +214,16 @@ def strings_to_xib(strings_path, xib_path):
     """Imports strings from the .strings file to the specified .xib"""
     print("Importing strings from {0} to {1}".format(strings_path, xib_path))
 
+    # check both files exist
+    # it is not a error. Just skip it
+    if not os.path.isfile(strings_path):
+        print("file {0} does not exist. Skip it.".format(strings_path))
+        return
+
+    if not os.path.isfile(xib_path):
+        print("file {0} does not exist. Skip it.".format(xib_path))
+        return
+    
     if DRY_RUN:
         return
 
@@ -230,40 +252,43 @@ def strings_to_xib(strings_path, xib_path):
 
 def export_localizable_file(path, locale):
     """Uploads the specified localizable file to the translation system"""
-    print("Exporting {0}".format(path))
-
-    if not os.path.exists(path):
-        raise FileNotFoundError(path)
-
+    
     file_name = os.path.basename(path)
     file_ext = os.path.splitext(file_name)[1][1:]
+    localized_file = path.replace("en.lproj", "{0}.lproj".format(locale))
 
+    print("Exporting {0}".format(localized_file))
+
+    if not os.path.exists(localized_file):
+        raise FileNotFoundError(localized_file)
+    
     # Now upload the file
-    upload_file(path, file_ext, locale, file_name)
+    upload_file(localized_file, file_ext, locale, file_name)
     return
 
 
 def import_localizable_file(path, locale):
     """Imports the specified localizable file from the translation system"""
-    print("Importing {0}".format(path))
-
     file_name = os.path.basename(path)
     file_ext = os.path.splitext(file_name)[1][1:]
 
+    localized_file = path.replace("en.lproj", "{0}.lproj".format(locale))
+
+    print("Importing {0}".format(localized_file))
+
     # Download the file
-    download_file(file_name, locale, file_ext, path)
+    download_file(file_name, locale, file_ext, localized_file)
     return
 
 
-def get_xib_translation_path(path, locale):
+def get_translation_path(base_path, locale):
     """Gets path to the XIB file translation given it's relative path
 
     For example, if path is 'ProgramLog/Base.lproj/AAProgramLog.xib' and locale is 'de',
     the translation path will be 'ProgramLog/de.lproj/AAProgramLog.strings'
     """
 
-    path = path.replace("Base.lproj", "{0}.lproj".format(locale))
-    path = os.path.splitext(path)[0] + ".strings"
+    path = base_path.replace("Base.lproj", "{0}.lproj".format(locale))
     return path
 
 
@@ -272,8 +297,7 @@ def export_localizations():
     print("Start exporting localizations")
 
     for path in LOCALIZABLE_FILES:
-        file_path = os.path.join(BASE_PATH, path)
-        export_localizable_file(file_path, TWOSKY_CONFIG["base_locale"])
+        export_localizable_file(path, TWOSKY_CONFIG["base_locale"])
 
     print("Finished exporting localizations")
     return
@@ -282,11 +306,10 @@ def export_localizations():
 def export_translations(locale):
     """Exports all existing translations to the specified locale
     to the translation system."""
-    print("Start exporting translations to {0}".format(locale))
+    print("Start exporting translations for locale {0}".format(locale))
 
     for path in LOCALIZABLE_FILES:
-        file_path = os.path.join(CURRENT_DIR, BASE_PATH, "{0}.lproj".format(locale), path)
-        export_localizable_file(file_path, locale)
+        export_localizable_file(path, locale)
 
     print("Finished exporting translations to {0}".format(locale))
     return
@@ -317,9 +340,6 @@ def import_localization(locale):
 def import_localizations():
     """Entry point for the importing localizations process"""
 
-    if lang != 'all':
-        return import_localization(lang)
-
     print("Start importing localizations")
     for language in TWOSKY_CONFIG["languages"]:
         print("Start importing {0} translations".format(TWOSKY_CONFIG["languages"][language]))
@@ -332,10 +352,9 @@ def update_strings():
     """Entry point for the updating strings from xibs process"""
     print("Start updating .strings files")
 
-    for path in STRINGS_FILES:
-        strings_rel_path = get_xib_translation_path(path, TWOSKY_CONFIG["base_locale"])
-        strings_path = os.path.join(CURRENT_DIR, BASE_PATH, strings_rel_path)
-        xib_path = os.path.join(CURRENT_DIR, BASE_PATH, path)
+    for index, (xib_path, strings_path) in enumerate(STORYBOARD_STRINGS.items()):
+        strings_path = os.path.join(CURRENT_DIR, strings_path)
+        xib_path = os.path.join(CURRENT_DIR, xib_path)
         xib_to_strings(xib_path, strings_path)
 
     print("Finished updating .strings files")
@@ -346,10 +365,9 @@ def update_xibs():
     """Entry point for the updating xibs from strings process"""
     print("Start updating .xib files")
 
-    for path in STRINGS_FILES:
-        strings_rel_path = get_xib_translation_path(path, TWOSKY_CONFIG["base_locale"])
-        strings_path = os.path.join(CURRENT_DIR, BASE_PATH, strings_rel_path)
-        xib_path = os.path.join(CURRENT_DIR, BASE_PATH, path)
+    for index, (xib_path, strings_path) in enumerate(STORYBOARD_STRINGS.items()):
+        strings_path = os.path.join(CURRENT_DIR, strings_path)
+        xib_path = os.path.join(CURRENT_DIR, xib_path)
         strings_to_xib(strings_path, xib_path)
 
     print("Finished updating .xib files")
@@ -388,7 +406,7 @@ def main():
 
     if options.importMode == True:
         if options.lang == 'all':
-            import_Localizations()
+            import_localizations()
         else:
             import_localization(options.lang)
 
