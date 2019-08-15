@@ -22,82 +22,108 @@
   </a>
   </p>
 
-* [Contribution](#contribution)
-  * [How to report an issue](#issue)
-  * [Translating AdGuard](#contribution-translating)
-  * [Other options](#contribution-other)
-  * [How to become a Beta tester](#beta-tester)
-* [Our plans](#our-plans)
-* [How to build](#how-to-build)
+- [Contribution](#contribution)
+  - [How to report an issue](#issue)
+  - [Translating AdGuard](#contribution-translating)
+  - [Other options](#contribution-other)
+  - [How to become a Beta tester](#beta-tester)
+- [Our plans](#our-plans)
+- [How to build](#how-to-build)
 
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
- <img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS2.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS3.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOSD.png" width="280">
+<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS2.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS3.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOSD.png" width="280">
 
 <a id="contribution"></a>
+
 ## Contribution
 
 <a id="issue"></a>
+
 ### How to report an issue?
 
-GitHub can be used to report a bug or to submit a feature request. To do so, go to [this page](https://github.com/AdguardTeam/AdGuardforiOS/issues) and click the *New issue* button.
+GitHub can be used to report a bug or to submit a feature request. To do so, go to [this page](https://github.com/AdguardTeam/AdGuardforiOS/issues) and click the _New issue_ button.
 
->**Note:** for the filter-related issues (missed ads, false positives etc.) use our [reporting tool](https://reports.adguard.com/new_issue.html).
+> **Note:** for the filter-related issues (missed ads, false positives etc.) use our [reporting tool](https://reports.adguard.com/new_issue.html).
 
 <a id="contribution-translating"></a>
+
 ### Translating AdGuard
 
 If you want to help with AdGuard translations, please learn more about translating our products here: https://kb.adguard.com/en/general/adguard-translations
 
 <a id="contribution-other"></a>
+
 ### Other options
 
 Here is a [dedicated page](https://adguard.com/contribute.html) for those who are willing to contribute.
 
-
 <a id="beta-tester"></a>
+
 ### How to become a beta tester?
 
 You can submit an application to participate in AdGuard for beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
 
 <a id="our-plans"></a>
+
 ## Our plans
 
 To see the 'big picture', to watch current progress and to get an idea of approximate dates for upcoming AdGuard for iOS releases, see this page: https://github.com/AdguardTeam/AdguardForIos/milestones
 
 <a id="how-to-build"></a>
+
 ## How to build
 
+### (optional) Install a newer ruby version:
+
+```
+brew install ruby
+```
+
+Add to your `~/.bash_profile`
+
+```
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+```
+
+### Prepare
+
 Prepare and install Ruby bundler:
+
 ```
 sudo gem install bundler
 ```
 
 Then you can run Fastlane using a command like this:
+
 ```
 bundle exec fastlane [lane]
 ```
 
-### Prepare
+### Codesigning
 
 Prepare development certificates:
+
 ```
 bundle exec fastlane match development
 ```
 
 Prepare appstore certificates:
+
 ```
 bundle exec fastlane match appstore
 ```
 
 Prepare adhoc certificates:
+
 ```
 bundle exec fastlane match adhoc
 ```
 
 ### Actions
 
-* `bundle exec fastlane tests` -- run tests
-* `bundle exec fastlane build` -- build version for appstore
-* `bundle exec fastlane adhoc` -- build adhoc version (for inner testing)
-* `bundle exec fastlane testflight_beta` -- upload previously built version to testflight, increment build number, commit it.
+- `bundle exec fastlane tests` -- run tests
+- `bundle exec fastlane build` -- build version for appstore
+- `bundle exec fastlane adhoc` -- build adhoc version (for inner testing)
+- `bundle exec fastlane testflight_beta` -- upload previously built version to testflight, increment build number, commit it.
