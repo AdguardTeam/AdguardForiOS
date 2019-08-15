@@ -73,11 +73,11 @@ platform :ios do
     # Ensure that your git status is not dirty
     ensure_git_status_clean
 
-    # Build appstore version
-    build
-
     # Increment the build number (not the version number)
     increment_ag_build(xcconfig: XCCONFIG_PATH)
+
+    # Build appstore version
+    build
 
     # Commit
     commit_ag_build_bump()
