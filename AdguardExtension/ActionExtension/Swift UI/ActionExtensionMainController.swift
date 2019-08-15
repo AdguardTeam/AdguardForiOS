@@ -111,7 +111,11 @@ class ActionExtensionMainController: UITableViewController {
         enabledHolder = domainEnabled
         domainLabel.text = domainName
         
-        safariService!.checkStatus { [weak self] (enabled) in
+        safariService!.checkStatus { [weak self] (enabledDict) in
+            var enabled = true
+            for d in enabledDict {
+                enabled = enabled && d.value
+            }
             if (!enabled){
                 DispatchQueue.main.async{[weak self] in
                     guard let sSelf = self else { return }
