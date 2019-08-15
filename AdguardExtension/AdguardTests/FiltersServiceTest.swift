@@ -65,7 +65,7 @@ class FiltersServiceTest: XCTestCase {
         
         XCTAssertFalse(service.groups[0].enabled)
         service.setFilter(service.groups[0].filters[0], enabled: true)
-        XCTAssertTrue(service.groups[0].enabled)
+        XCTAssertFalse(service.groups[0].enabled)
     }
     
     func testEnableGroup() {
@@ -76,13 +76,13 @@ class FiltersServiceTest: XCTestCase {
         XCTAssertTrue(service.groups[0].filters.count == 2)
         
         XCTAssertFalse(service.groups[0].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
         
-        service.setGroup(service.groups[0], enabled: true)
+        service.setGroup(service.groups[0].groupId, enabled: true)
         
         XCTAssertTrue(service.groups[0].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
     }
     
@@ -98,7 +98,7 @@ class FiltersServiceTest: XCTestCase {
         
         sleep(1)
         
-        XCTAssertFalse(service.groups[0].enabled)
+        XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
     }
@@ -111,7 +111,7 @@ class FiltersServiceTest: XCTestCase {
         XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertTrue(service.groups[0].filters[1].enabled)
         
-        service.setGroup(service.groups[0], enabled: false)
+        service.setGroup(service.groups[0].groupId, enabled: false)
         
         sleep(1)
         
@@ -124,37 +124,36 @@ class FiltersServiceTest: XCTestCase {
         let service = initService(groups: [(123, false), (124, false)],
                                   filters: [(321, 123, true), (456, 124, true)])
         
-        // all disabled before
         XCTAssertFalse(service.groups[0].enabled)
         XCTAssertFalse(service.groups[1].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
-        XCTAssertFalse(service.groups[1].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[1].filters[0].enabled)
         
-        service.setGroup(service.groups[0], enabled: true)
+        service.setGroup(service.groups[0].groupId, enabled: true)
         
         // check only first group became enabled
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[1].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
-        XCTAssertFalse(service.groups[1].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[1].filters[0].enabled)
     }
     
     func testEnableFilter2() {
         // disabled group with one enabled and one disabled filters
-        // all filters showed to user as disabled
-        // after enabling second( true disabled) filter first filter must become disabled
+        // all filters are showed to user as disabled
+        // after enabling second filter first filter must stay enabled
         let service = initService(groups: [(123, false)], filters: [(321, 123, true), (456, 123, false)])
         
         XCTAssertFalse(service.groups[0].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
         
         service.setFilter(service.groups[0].filters[1], enabled: true)
         
         sleep(1)
         
-        XCTAssertTrue(service.groups[0].enabled)
-        XCTAssertFalse(service.groups[0].filters[0].enabled)
+        XCTAssertFalse(service.groups[0].enabled)
+        XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertTrue(service.groups[0].filters[1].enabled)
     }
 }

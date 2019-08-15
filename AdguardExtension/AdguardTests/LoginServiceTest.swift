@@ -116,17 +116,16 @@ class LoginServiceTest: XCTestCase {
         keychain.licenseKey = "LICENSE_KEY"
         loginService.loggedIn = true
         
-        parser.statusResults = [ (false, nil, nil) ]
-        
-        parser.loginResult = (false, false, nil, nil, NSError(domain: "error", code: -100, userInfo: nil)) // error here
+        parser.statusResults = [ (false, nil, nil),
+                                 (false, nil, NSError(domain: "error", code: -100, userInfo: nil))] // error here
         
         let expectation = XCTestExpectation(description: "status expectation")
         
         loginService.checkStatus { (error) in
             XCTAssertNotNil(error)
-            XCTAssert(self.loginService.loggedIn)
-            XCTAssert(self.loginService.hasPremiumLicense)
-            XCTAssert(self.loginService.active)
+            XCTAssertTrue(self.loginService.loggedIn)
+            XCTAssertTrue(self.loginService.hasPremiumLicense)
+            XCTAssertTrue(self.loginService.active)
             XCTAssertNil(self.keychain.auth)
             XCTAssertNotNil(self.keychain.licenseKey)
             expectation.fulfill()
@@ -190,7 +189,7 @@ class LoginServiceTest: XCTestCase {
             expectation.fulfill()
         }
         
-        parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil)]
+        parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil), (false, Date(timeIntervalSinceNow: -1), nil)]
         
         loginService.checkStatus { (error) in
         }
@@ -228,7 +227,7 @@ class NetworkMock: ACNNetworkingProtocol {
 
 class KeychainMock: KeychainServiceProtocol {
     
-    var appId: String?
+    var appId: String? = "123"
     var licenseKey: String?
     
     var auth: (String, String)?
