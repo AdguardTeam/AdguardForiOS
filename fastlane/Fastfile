@@ -55,8 +55,10 @@ end
 platform :ios do
   desc "Runs unit tests"
   lane :tests do
-    match(type: "development", readonly: true)
-    run_tests(scheme: BUILD_SCHEME)
+    run_tests(
+      scheme: BUILD_SCHEME,
+      output_types: "junit",
+    )
   end
 
   desc "Builds app for appstore"
@@ -129,14 +131,14 @@ lane :prepare do
     platform: "macos",
     username: "apple-dev@adguard.com",
     team_id: "N33TQXN8C7",
-    output_path: "./build"
+    output_path: "./build",
   )
   get_certificates(
     development: false,
     platform: "macos",
     username: "apple-dev@adguard.com",
     team_id: "N33TQXN8C7",
-    output_path: "./build"
+    output_path: "./build",
   )
 
   # get_certificates creates .p12 and .cer files in the build directory
