@@ -125,5 +125,9 @@ bundle exec fastlane match adhoc
 
 - `bundle exec fastlane tests` -- run tests
 - `bundle exec fastlane build` -- build version for appstore
+
+Actions below are supposed to be used from CI only:
+
 - `bundle exec fastlane adhoc` -- build adhoc version (for inner testing)
-- `bundle exec fastlane testflight_beta` -- upload previously built version to testflight, increment build number, commit it.
+- `bundle exec fastlane increment` -- increments build number, commits it to git
+- `bundle exec fastlane testflight_beta` -- upload previously built version to testflight

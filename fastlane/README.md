@@ -31,11 +31,16 @@ Builds app for appstore
 fastlane ios adhoc
 ```
 Builds adhoc build for inner testing
+### ios increment
+```
+fastlane ios increment
+```
+Increments the build number and commits to the repo
 ### ios testflight_beta
 ```
 fastlane ios testflight_beta
 ```
-Builds an app store version, uploads it to testflight, increments build number
+Uploads the build with
 
 ----
 
