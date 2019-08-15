@@ -106,19 +106,19 @@ bundle exec fastlane [lane]
 Prepare development certificates:
 
 ```
-bundle exec fastlane match development
+MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match development
 ```
 
 Prepare appstore certificates:
 
 ```
-bundle exec fastlane match appstore
+MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match appstore
 ```
 
 Prepare adhoc certificates:
 
 ```
-bundle exec fastlane match adhoc
+MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane match adhoc
 ```
 
 ### Actions
