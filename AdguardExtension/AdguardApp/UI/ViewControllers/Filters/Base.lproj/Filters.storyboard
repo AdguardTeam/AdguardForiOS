@@ -201,7 +201,7 @@
             <objects>
                 <tableViewController id="Llu-1A-iPX" customClass="FiltersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gAd-oR-0a7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -224,7 +224,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTL-ax-aZV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="15" width="312" height="0.0"/>
+                                            <rect key="frame" x="25" y="15" width="310" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -233,9 +233,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eni-il-6g8" customClass="FilterCellUISwitch" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="347" y="12" width="49" height="31"/>
+                                            <rect key="frame" x="345" y="12" width="51" height="31"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="47" id="3Qb-Yj-FN7"/>
                                                 <constraint firstAttribute="height" constant="31" id="9qA-VP-LTI"/>
                                             </constraints>
                                             <connections>
@@ -243,7 +242,7 @@
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxA-VX-Amb" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="23" width="312" height="0.0"/>
+                                            <rect key="frame" x="25" y="23" width="310" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -252,7 +251,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp3-Lp-AiW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="23" width="312" height="0.0"/>
+                                            <rect key="frame" x="25" y="23" width="310" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -261,8 +260,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXN-1M-Lry" customClass="FilterTagsView" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="23" width="312" height="130"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <rect key="frame" x="25" y="23" width="310" height="130"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <constraints>
@@ -444,7 +443,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="1011.5942028985507" y="71.651785714285708"/>
+            <point key="canvasLocation" x="1022" y="83"/>
         </scene>
         <!--License-->
         <scene sceneID="868-Cx-006">
@@ -459,17 +458,17 @@
             <objects>
                 <viewController id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l8F-zH-yJh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXi-08-oyM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="739"/>
                                 <connections>
                                     <segue destination="TuY-uw-gTS" kind="embed" identifier="embedTableSegue" id="isf-qw-rRC"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXe-eu-cfH">
-                                <rect key="frame" x="0.0" y="705" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="739" width="414" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Rdo-NW-cIS"/>
                                 </constraints>
@@ -483,7 +482,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-sn-odz">
-                                <rect key="frame" x="0.0" y="764" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="798" width="414" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HVv-NU-SJI"/>
@@ -1018,7 +1017,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POO-7t-6Dz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4060.8695652173915" y="99.776785714285708"/>
+            <point key="canvasLocation" x="743" y="1011"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uAn-1B-U5U">
@@ -1035,7 +1034,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcC-Zj-y2w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="100"/>
+            <point key="canvasLocation" x="-1255" y="1011"/>
         </scene>
         <!--Search Filter Controller-->
         <scene sceneID="NEL-nA-zWH">
@@ -1055,7 +1054,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xS8-f2-3yC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="26" y="15" width="312" height="18"/>
+                                            <rect key="frame" x="26" y="15" width="310" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1064,17 +1063,16 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFy-wS-wjP" customClass="FilterCellUISwitch" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="351" y="16" width="49" height="31"/>
+                                            <rect key="frame" x="349" y="16" width="51" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="lhZ-6d-kc8"/>
-                                                <constraint firstAttribute="width" constant="47" id="vbT-wo-GjK"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="toggleEnableSwitch:" destination="cR0-oA-0lb" eventType="valueChanged" id="KI7-nW-gle"/>
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kab-Sc-THo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="26" y="41" width="312" height="14.5"/>
+                                            <rect key="frame" x="26" y="41" width="310" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1083,7 +1081,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x93-x6-7Fw" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="26" y="55.5" width="312" height="14.5"/>
+                                            <rect key="frame" x="26" y="55.5" width="310" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1092,8 +1090,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GiY-N7-EtV" customClass="FilterTagsView" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="26" y="70" width="312" height="66"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <rect key="frame" x="26" y="70" width="310" height="66"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <constraints>
@@ -1134,7 +1132,8 @@
                     <connections>
                         <outlet property="searchBar" destination="7CS-Bk-Mly" id="dXm-3o-bTX"/>
                         <outlet property="searchView" destination="nNW-kt-mlH" id="wmT-4F-ahd"/>
-                        <segue destination="Uro-s5-baq" kind="show" identifier="showFilterDetails" id="pVj-4Q-eLU"/>
+                        <segue destination="Llu-1A-iPX" kind="show" identifier="showGroupSegue" id="3mI-tN-g7J"/>
+                        <segue destination="Uro-s5-baq" kind="show" identifier="showFilterDetailsSegue" id="6Ap-Zj-DX8"/>
                     </connections>
                 </tableViewController>
                 <view contentMode="scaleToFill" id="nNW-kt-mlH" userLabel="search view">
@@ -1144,7 +1143,7 @@
                         <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CS-Bk-Mly">
                             <rect key="frame" x="20" y="0.0" width="200" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <outlet property="delegate" destination="Llu-1A-iPX" id="hDn-hT-rq4"/>
                             </connections>
@@ -1328,7 +1327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCV-It-Dcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3032" y="99"/>
+            <point key="canvasLocation" x="-286" y="1010"/>
         </scene>
     </scenes>
     <resources>
@@ -1336,6 +1335,7 @@
         <image name="plus" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u0d-JL-uIG"/>
+        <segue reference="6Ap-Zj-DX8"/>
+        <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
 </document>

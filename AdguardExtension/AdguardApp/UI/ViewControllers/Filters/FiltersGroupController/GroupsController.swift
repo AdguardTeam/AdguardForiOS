@@ -19,7 +19,7 @@
 import Foundation
 import UIKit
 
-class GroupsController: UITableViewController {
+class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
     let enabledColor = UIColor.init(hexString: "67B279")
     let disabledColor = UIColor.init(hexString: "D8D8D8")
@@ -37,6 +37,7 @@ class GroupsController: UITableViewController {
     let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    
     
     // MARK: - lifecycle
     
@@ -64,14 +65,15 @@ class GroupsController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.updateAllGroups()
-        viewModel?.cancelSearch()
         updateTheme()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let selectedGroup = viewModel?.groups?[selectedIndex ?? 0] else { return }
+        guard let selectedGroup = viewModel?.constantAllGroups[selectedIndex ?? 0] else { return }
         viewModel?.currentGroup = selectedGroup
+        
+        viewModel?.cancelSearch()
         
         if segue.identifier == filtersSegueID {
             let controller = segue.destination as! FiltersController
@@ -82,11 +84,11 @@ class GroupsController: UITableViewController {
     // MARK: - table view
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.groups?.count ?? 0
+        return viewModel?.constantAllGroups.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let group = viewModel?.groups?[indexPath.row] else { return UITableViewCell() }
+        guard let group = viewModel?.constantAllGroups[indexPath.row] else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as! GroupCell
         
         cell.nameLabel.text = group.name
@@ -123,7 +125,7 @@ class GroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        guard let group = viewModel?.groups![selectedIndex!] else { return }
+        guard let group = viewModel?.constantAllGroups[selectedIndex!] else { return }
         if group.proOnly && !configuration.proStatus {
             performSegue(withIdentifier: getProSegueID, sender: self)
         }
@@ -142,11 +144,23 @@ class GroupsController: UITableViewController {
         }
     }
     
+    
+    // MARK: - Master view controller delegate
+    
+    func cancelButtonTapped() {
+        tableView.reloadData()
+    }
+    
+    func searchButtonTapped() {
+        
+    }
+    
+    
     // MARK: - private methods
     
     @objc func enabledChanged(_ enableSwitch: UISwitch) {
         let row = enableSwitch.tag
-        guard let group = viewModel?.groups?[row] else { return }
+        guard let group = viewModel?.constantAllGroups[row] else { return }
         viewModel?.set(groupId: group.groupId, enabled: enableSwitch.isOn)
     }
     

@@ -44,7 +44,7 @@
 "UbO-jW-NNO.normalTitle" = "Upgrade";
 
 /* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Value your private data";
+"ZMu-UP-PI3.text" = "Protect your personal data";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "eyq-0X-qrl"; */
 "eyq-0X-qrl.normalTitle" = "LOGIN";
