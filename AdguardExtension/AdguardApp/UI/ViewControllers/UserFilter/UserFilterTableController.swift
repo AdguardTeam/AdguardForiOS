@@ -140,6 +140,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             enabledSwitch = cell.enabledSwitch
             cell.enabledLabel.text = model.userFilterEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
             theme.setupLabel(cell.enabledLabel)
+            theme.setupSwitch(cell.enabledSwitch)
             enabledSwitch.isOn = model.userFilterEnabled
             enabledSwitch?.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
@@ -166,6 +167,8 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                 cell.helpTextView.text = ACLocalizedString("inverted_whitelist_text", nil)
                 cell.helpTextView.textColor = theme.lightGrayTextColor
             }
+            cell.helpTextView.backgroundColor = theme.backgroundColor
+            theme.setupTextView(cell.helpTextView)
             
             return cell
             
