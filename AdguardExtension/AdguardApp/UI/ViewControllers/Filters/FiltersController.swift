@@ -153,7 +153,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         case groupSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
             
-            let enabled = group?.enabled ?? false
+            let enabled = viewModel?.currentGroup?.enabled ?? false
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
