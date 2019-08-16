@@ -12,21 +12,140 @@
 
 default_platform(:ios)
 
+# Configuration
+COMMIT_MESSAGE = "skipci: Automatic version increment"
+BUILD_SCHEME = "AdguardExtension"
+OUTPUT_DIRECTORY = "./build"
+XCCONFIG_PATH = "AdguardExtension/Adguard-Config.xcconfig"
+IPA_NAME = "Adguard.ipa"
+ARCHIVE_NAME = "Adguard.xcarchive"
+
+def commit_ag_build_bump()
+  FastlaneCore::CommandExecutor.execute(command: "git add ..",
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run git add: #{error_output}")
+                                        end)
+  FastlaneCore::CommandExecutor.execute(command: "git commit -m '#{COMMIT_MESSAGE}'",
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run git commit: #{error_output}")
+                                        end)
+end
+
+def zip_archive()
+  archive_path = "../#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}"
+  command = "/usr/bin/ditto -c -k --keepParent \"#{archive_path}\" \"#{archive_path}.zip\""
+
+  FastlaneCore::CommandExecutor.execute(command: command,
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run zip_archive: #{error_output}")
+                                        end)
+end
+
+def clean()
+  FastlaneCore::CommandExecutor.execute(command: "rm -rf ../#{OUTPUT_DIRECTORY}",
+                                        print_all: true,
+                                        error: proc do |error_output|
+                                          UI.error("Failed to run clean: #{error_output}")
+                                        end)
+end
+
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
-  end
-
+  desc "Runs unit tests"
   lane :tests do
-    run_tests(scheme: "AdguardExtension")
+    run_tests(
+      scheme: BUILD_SCHEME,
+      output_types: "junit",
+      clean: true,
+      code_coverage: true,
+    )
   end
 
-  lane :beta do
-    build_app(scheme: "AdguardExtension")
+  desc "Builds app for appstore"
+  lane :build do
+    clean()
+
+    match(type: "appstore", readonly: true)
+    build_app(
+      scheme: BUILD_SCHEME,
+      output_directory: OUTPUT_DIRECTORY,
+      include_bitcode: false,
+      include_symbols: true,
+      archive_path: "#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}",
+    )
+    write_build_info(
+      xcconfig: XCCONFIG_PATH,
+      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+    )
+    zip_archive()
   end
 
-  lane :devbeta do
-    build_app(scheme: "AdguardExtension")
+  desc "Builds adhoc build for inner testing"
+  lane :adhoc do
+    clean()
+
+    match(type: "adhoc", readonly: true)
+    build_app(
+      scheme: BUILD_SCHEME,
+      output_directory: OUTPUT_DIRECTORY,
+      include_bitcode: false,
+      include_symbols: true,
+      archive_path: "#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}",
+    )
+    write_build_info(
+      xcconfig: XCCONFIG_PATH,
+      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+    )
+    zip_archive()
   end
+
+  desc "Increments the build number and commits to the repo"
+  lane :increment do
+    # Ensure that your git status is not dirty
+    ensure_git_status_clean
+
+    # Increment the build number (not the version number)
+    increment_ag_build(xcconfig: XCCONFIG_PATH)
+
+    # Commit
+    commit_ag_build_bump()
+
+    # Push the new commit and tag back to your git remote
+    push_to_git_remote
+  end
+
+  desc "Uploads the build to testflight"
+  lane :testflight_beta do
+    # Uploads the build without actually submitting it
+    upload_to_testflight(
+      skip_submission: true,
+      skip_waiting_for_build_processing: true,
+      ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}",
+    )
+  end
+end
+
+lane :prepare do
+  get_certificates(
+    development: true,
+    platform: "macos",
+    username: "apple-dev@adguard.com",
+    team_id: "N33TQXN8C7",
+    output_path: "./build",
+  )
+  get_certificates(
+    development: false,
+    platform: "macos",
+    username: "apple-dev@adguard.com",
+    team_id: "N33TQXN8C7",
+    output_path: "./build",
+  )
+
+  # get_certificates creates .p12 and .cer files in the build directory
+
+  match(type: "development", readonly: true, platform: "ios")
+  match(type: "appstore", readonly: true, platform: "ios")
+  match(type: "adhoc", readonly: true, platform: "ios")
 end

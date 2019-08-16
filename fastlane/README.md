@@ -15,27 +15,40 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### prepare
+```
+fastlane prepare
+```
+
+
+----
+
 ## iOS
-### ios custom_lane
-```
-fastlane ios custom_lane
-```
-Description of what the lane does
 ### ios tests
 ```
 fastlane ios tests
 ```
-
-### ios beta
+Runs unit tests
+### ios build
 ```
-fastlane ios beta
+fastlane ios build
 ```
-
-### ios devbeta
+Builds app for appstore
+### ios adhoc
 ```
-fastlane ios devbeta
+fastlane ios adhoc
 ```
-
+Builds adhoc build for inner testing
+### ios increment
+```
+fastlane ios increment
+```
+Increments the build number and commits to the repo
+### ios testflight_beta
+```
+fastlane ios testflight_beta
+```
+Uploads the build to testflight
 
 ----
 
