@@ -184,6 +184,9 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
 
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "disabled";
+
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
 
