@@ -203,6 +203,10 @@ class MainMenuController: UITableViewController {
         else if vpnManager.activeDnsServer?.dnsProtocol == nil {
             dnsServer.text = ACLocalizedString("no_dns_server_selected", nil)
         }
+        else if !vpnManager.enabled {
+            let dnsServerName = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
+            dnsServer.text = "\(dnsServerName) (\(ACLocalizedString("dns_server_disabled", nil)))"
+        }
         else {
             let serverName = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
             let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)

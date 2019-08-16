@@ -121,6 +121,7 @@ class DnsSettingsController : UITableViewController{
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
+        theme.setupSwitch(enabledSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
