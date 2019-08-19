@@ -118,3 +118,18 @@ Actions below are supposed to be used from CI only:
 - `bundle exec fastlane adhoc` -- build adhoc version (for inner testing)
 - `bundle exec fastlane increment` -- increments build number, commits it to git
 - `bundle exec fastlane testflight_beta` -- upload previously built version to testflight
+
+
+
+### Acknowledgments
+
+This software wouldn't have been possible without:
+
+ * [Go](https://golang.org/dl/) and it's library:
+   * [dnsproxy](https://github.com/AdguardTeam/dnsproxy) v0.18.2
+ * [StaticDataTableViewController](https://github.com/peterpaulis/StaticDataTableViewController) by peterpaulis
+ * [GZIP](https://github.com/nicklockwood/GZIP) by nicklockwood
+ * [Reachability component](https://github.com/tonymillion/Reachability) by Tony Million
+ * [Fmdb](https://github.com/ccgus/fmdb) by August «Gus» Mueller
+ * [NSStringPunycodeAdditions](https://github.com/Wevah/Punycode-Cocoa) by Nate Weaver
+ * [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by Sam Soffes, Joshua Hudson and Antoine Cœur
