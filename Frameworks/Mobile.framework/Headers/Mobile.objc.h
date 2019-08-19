@@ -46,7 +46,7 @@ In Java API this structure becomes an object that needs to be configured and set
 @property (nonatomic) NSString* fallbacks;
 @property (nonatomic) NSString* upstreams;
 @property (nonatomic) long timeout;
-@property (nonatomic) long cacheSizeBytes;
+@property (nonatomic) long cacheSize;
 @property (nonatomic) BOOL allServers;
 @property (nonatomic) long maxGoroutines;
 @property (nonatomic) NSString* systemResolvers;
