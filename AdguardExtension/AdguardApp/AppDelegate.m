@@ -298,6 +298,7 @@ typedef enum : NSUInteger {
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
     @autoreleasepool {
         
+        [helper performFetch];
         DDLogInfo(@"(AppDelegate) application perform Fetch.");
         
         if (_fetchCompletion) {
@@ -312,30 +313,6 @@ typedef enum : NSUInteger {
         }
         
         BOOL checkResult = [self checkAutoUpdateConditions];
-        
-#ifdef PRO
-        if(APBlockingSubscriptionsManager.needUpdateSubscriptions) {
-            
-            if (!checkResult) {
-                DDLogInfo(@"(AppDelegate - Background Fetch) Cancel fetch subscriptions. App settings permit updates only over WiFi.");
-                self.blockingSubscriptionsUpdateResult = AEUpdateNoData;
-            }
-            else {
-                
-                self.blockingSubscriptionsUpdateResult = AEUpdateStarted;
-                
-                [APBlockingSubscriptionsManager updateSubscriptionsWithSuccessBlock:^{
-                    
-                    [APVPNManager.singleton sendReloadSystemWideDomainLists];
-                    [self blockingSubscriptionsUpdateFinished:AEUpdateNewData];
-                    
-                } errorBlock:^(NSError * error) {
-                    
-                    [self blockingSubscriptionsUpdateFinished:AEUpdateFailed];
-                } completionBlock:nil];
-            }
-        }
-#endif
         
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
@@ -582,13 +559,14 @@ typedef enum : NSUInteger {
                 
                 [self updateFailuredNotify];
                 
-                if (self.navigation.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UINavigationController* nav = [self getNavigationController];
+                    if (nav.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+                            
+                            [ACSSystemUtils showSimpleAlertForController:nav.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
                         
-                        [ACSSystemUtils showSimpleAlertForController:self.navigation.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
-                    });
-                }
+                    }
+                });
             }
             else{
                 

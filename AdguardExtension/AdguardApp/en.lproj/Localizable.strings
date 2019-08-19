@@ -25,10 +25,6 @@
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the whitelist, or change the set of used filters.";
 
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Loading filters to Safari. Please do not turn off AdGuard. The process will take no more than 30 seconds.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
@@ -59,14 +55,8 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection is disabled";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Failed to restore purchases ";
-
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Get subscription";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "The email/password you have entered is incorrect.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
@@ -381,18 +371,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
-
-/* Today widget - text when remote DNS is enabled */
-"connected_to_server_format" = "Connected to \"%@\"";
-
-/* Today widget - text when remote DNS is disabled */
-"dns_filtering_disabled" = "DNS filtering is disabled";
-
-/* Today widget - hint text */
-"disable_dns_filtering" = "Touch to disable DNS filtering";
-
-/* Today widget - hint text */
-"enable_dns_filtering" = "Touch to enable DNS filtering";
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanent";

@@ -250,7 +250,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         updateUI()
     }
     
-    @IBAction func c(_ sender: Any) {
+    @IBAction func addAction(_ sender: Any) {
         searchBar.text = ""
         model?.searchString = nil
         
@@ -282,7 +282,11 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         
         model?.addRule(ruleText: rule, errorHandler: { [weak self] (error) in
                         guard let strongSelf = self else { return }
-                        ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: error.description)
+                        DispatchQueue.main.async {
+                            ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: error.description)
+                            self?.tableView.reloadData()
+                            self?.notifyParent()
+                        }
             },
                       completionHandler: { [weak self] in
                         DispatchQueue.main.async {
