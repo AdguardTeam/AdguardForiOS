@@ -20,7 +20,17 @@ import Foundation
 
 class TrialController: UIViewController {
     
+    @IBOutlet weak var trialLabel: UILabel!
+    @IBOutlet weak var trialDescriptionLabel: UILabel!
+    @IBOutlet weak var tryButton: RoundRectButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    
+    private let mobileImage = UIImage(named: "trial-mobile") ?? UIImage()
+    private let ipadImage = UIImage(named: "trial-ipad") ?? UIImage()
+    private let ipadLandScape = UIImage(named: "trial-ipad-landscape") ?? UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,5 +57,39 @@ class TrialController: UIViewController {
         guard let nav = self.navigationController as? MainNavigationController else { return }
         nav.customStatusBarStyle = nil
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        backgroundImageView.image = getBackgroundImage()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        initialSetups()
+    }
+    
+    private func getBackgroundImage() -> UIImage {
+        if UIDevice.current.userInterfaceIdiom == .phone || traitCollection.horizontalSizeClass == .compact{
+            return mobileImage
+        } else {
+            return UIDevice.current.orientation.isLandscape ? ipadLandScape : ipadImage
+        }
+    }
+    
+    private func initialSetups(){
+        backgroundImageView.image = getBackgroundImage()
+        
+        if traitCollection.horizontalSizeClass == .regular  {
+            trialLabel.font = trialLabel.font.withSize(48.0)
+            trialDescriptionLabel.font = trialDescriptionLabel.font.withSize(24.0)
+            tryButton.layer.cornerRadius = 30.0
+            tryButton.titleLabel?.font = tryButton.titleLabel?.font.withSize(22.0)
+            loginButton.titleLabel?.font = loginButton.titleLabel?.font.withSize(22.0)
+        } else {
+            trialLabel.font = trialLabel.font.withSize(32.0)
+            trialDescriptionLabel.font = trialDescriptionLabel.font.withSize(15.0)
+            tryButton.layer.cornerRadius = 20.0
+            tryButton.titleLabel?.font = tryButton.titleLabel?.font.withSize(17.0)
+            loginButton.titleLabel?.font = loginButton.titleLabel?.font.withSize(14.0)
+        }
     }
 }
