@@ -18,7 +18,9 @@
 
 import Foundation
 
-class UserFilterController : UIViewController, UIViewControllerTransitioningDelegate {
+class UserFilterController : UIViewController, UIViewControllerTransitioningDelegate, UITextViewDelegate {
+    
+    @IBOutlet var helperLabel: ThemableLabel!
     
     var whitelist = false
     @objc var newRuleText: String?
@@ -36,6 +38,10 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         let type: UserFilterType = self.whitelist ? (inverted ? .invertedWhitelist : .whitelist) : .blacklist
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
         return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)}()
+    
+    private var textViewIsEditing = false
+    private var userFilterText = ACLocalizedString("user_filter_helper", nil)
+    private var whitelistText = ACLocalizedString("whitelist_helper", nil)
     
     // MARK: IB outlets
     
@@ -89,15 +95,18 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         if whitelist {
             let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
             self.navigationItem.title = ACLocalizedString(inverted ? "inverted_whitelist_title" : "whitelist_title", "")
+            helperLabel.text = whitelistText
         }
         else {
             self.navigationItem.title = ACLocalizedString("user_filter_title", "")
+            helperLabel.text = userFilterText
         }
         
         editMode(false)
         
         textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 24, bottom: 16, right: 24)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16.0, bottom: 16, right: 16.0)
+        textView.textContainer.lineFragmentPadding = 0.0
         
         setupBackButton()
         updateTheme()
@@ -193,6 +202,12 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         return CustomAnimatedTransitioning()
     }
     
+    // MARK: - TextView delegate methods
+    
+    func textViewDidChange(_ textView: UITextView) {
+        helperLabel.isHidden = !(textView.text.count == 0 && textViewIsEditing)
+    }
+    
     
     // MARK: - private methods
     private func cancelAction(){
@@ -249,6 +264,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         bottomBarSeparator.backgroundColor = theme.separatorColor
         deleteButton.customHighlightedBackgroundColor = theme.selectedCellColor
         theme.setupTextView(textView)
+        theme.setupLabel(helperLabel)
         textView.backgroundColor = theme.backgroundColor
     }
     
@@ -266,8 +282,11 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     }
     
     private func editMode(_ edit: Bool) {
+        textViewIsEditing = edit
+        helperLabel.isHidden = !(textView.text.count == 0 && textViewIsEditing)
         textView.isHidden = !edit
         if edit {
+            textView.becomeFirstResponder()
             navigationItem.rightBarButtonItems = []
         }
         else {

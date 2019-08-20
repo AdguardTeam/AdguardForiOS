@@ -86,7 +86,7 @@ platform :ios do
   lane :adhoc do
     clean()
 
-    match(type: "adhoc", readonly: true)
+    match(type: "adhoc", force_for_new_devices: true)
     build_app(
       scheme: BUILD_SCHEME,
       output_directory: OUTPUT_DIRECTORY,

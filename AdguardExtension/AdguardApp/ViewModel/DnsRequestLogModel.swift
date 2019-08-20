@@ -26,7 +26,6 @@ struct LogRecord {
     var type: String?
     var serverName: String?
     var answer: String?
-    var ns: String?
     var upstreamAddr: String?
 }
 
@@ -92,7 +91,7 @@ class DnsRequestLogViewModel {
             }
             
             for logRecord in logRecords.reversed() {
-                let record = LogRecord(name: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, ns: logRecord.ns, upstreamAddr: logRecord.upstreamAddr)
+                let record = LogRecord(name: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr)
                 sSelf.allRecords.append(record)
             }
             

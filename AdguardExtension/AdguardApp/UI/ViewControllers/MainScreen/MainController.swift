@@ -264,7 +264,7 @@ class MainController: UIViewController {
                 someEnabled = someEnabled || d.value
             }
             
-            if(!allEnabled || someEnabled) {
+            if(!allEnabled || (someEnabled && !allEnabled)) {
                 sSelf.tutorialVideoView.isHidden = false
                 sSelf.roundArrow.isHidden = false
                 sSelf.refreshIcon.isHidden = false

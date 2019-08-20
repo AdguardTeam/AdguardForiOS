@@ -27,17 +27,15 @@ class DnsLogRecord: NSObject, NSCoding {
     let type: String
     let answer: String
     let server: String
-    let ns: String?
     let upstreamAddr: String?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, ns: String, server: String, upstreamAddr: String) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String) {
         
         self.domain = domain
         self.date = date
         self.elapsed = elapsed
         self.type = type
         self.answer = answer
-        self.ns = ns
         self.server = server
         self.upstreamAddr = upstreamAddr
         
@@ -52,7 +50,6 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(elapsed, forKey: "elapsed")
         aCoder.encode(type, forKey: "type")
         aCoder.encode(answer, forKey: "answer")
-        aCoder.encode(ns, forKey: "ns")
         aCoder.encode(server, forKey: "server")
         aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
     }
@@ -67,6 +64,5 @@ class DnsLogRecord: NSObject, NSCoding {
         
         // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
-        self.ns = aDecoder.decodeObject(forKey: "ns") as? String
     }
 }
