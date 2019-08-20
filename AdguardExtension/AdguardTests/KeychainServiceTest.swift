@@ -45,7 +45,7 @@ class KeychainServiceTest: XCTestCase {
     
     func testStoreId() {
         let keychain = KeychainService(resources: SharedResourcesMock())
-        XCTAssert(keychain.deleteAppId())
+        _ = keychain.deleteAppId()
         
         let appId = keychain.appId
         XCTAssertNotNil(appId)
@@ -58,7 +58,9 @@ class KeychainServiceTest: XCTestCase {
     
     func testDeleteId() {
         let keychain = KeychainService(resources: SharedResourcesMock())
-        XCTAssert(keychain.deleteAppId())
+        
+        // delete app id from previous tests
+        _ = keychain.deleteAppId()
         
         let appId = keychain.appId
         XCTAssertNotNil(appId)
