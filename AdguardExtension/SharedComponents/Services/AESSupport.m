@@ -166,39 +166,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     }
 }
 
-- (void)sendSimpleMailWithParentController:(UIViewController *)parent subject:(NSString *)subject body:(NSString *)body{
-    
-    if ([MFMailComposeViewController canSendMail]) {
-        @autoreleasepool {
-            
-            MFMailComposeViewController *compose = [MFMailComposeViewController new];
-            [compose setMessageBody:body isHTML:NO];
-            [compose setSubject:subject];
-
-            NSData *stateData = [[self applicationState] dataUsingEncoding:NSUTF8StringEncoding];
-            if (stateData) {
-                [compose addAttachmentData:stateData mimeType:@"text/plain" fileName:@"state.txt"];
-            }
-            NSDictionary<NSString*, NSData*> *jsonDatas = [self compressedJsons];
-            [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull filename, NSData * _Nonnull data, BOOL * _Nonnull stop) {
-                [compose addAttachmentData:data mimeType:@"application/x-gzip" fileName:filename];
-            }];
-            
-            [compose setToRecipients:@[SUPPORT_ADDRESS]];
-            compose.mailComposeDelegate = self;
-            
-            [parent presentViewController:compose animated:YES completion:nil];
-        }
-        
-    }
-    else{
-        
-        [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
-                                             message:ACLocalizedString(@"support_message_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
-    }
-
-}
-
 - (NSURL *)composeWebReportUrlForSite:(nullable NSURL *)siteUrl {
     
     NSMutableDictionary *params = [NSMutableDictionary new];

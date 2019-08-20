@@ -440,13 +440,15 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var resultError: Error?
             if rules.count != 0 {
                 let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
-
-                resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-
-                if jsonData != nil { resultData = jsonData! }
+                if error != nil {
+                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+                }
                 
+                if jsonData != nil { resultData = jsonData! }
                 resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+                
                 resultError = error
+                
             } else {
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
@@ -714,7 +716,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         
         let (converter, converterError) = createConverter()
-        if error != nil { return (nil, 0, 0, 0, converterError) }
+        if converterError != nil { return (nil, 0, 0, 0, converterError) }
         
         if converter == nil {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,

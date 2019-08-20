@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Nastala neočekávaná chyba. Kontaktujte tým podpory.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Pokus o převedení pravidel na JSON před spuštěním služby.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Nelze převést pravidla. Nastala neočekávaná chyba. Kontaktujte tým podpory.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Nelze převést pravidla uživatelského filtru.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Chyba";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtry nelze načíst do Safari. Zkuste vymazat pravidla a seznam povolených nebo změnit sadu použitých filtrů.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Načítání filtrů do Safari. Prosím nevypínejte AdGuard. Nepotrvá to déle než 30 sekund.";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "NE";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uživatelský filtr";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Rodina";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Bezpečí";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "ANO";
 
@@ -62,32 +46,8 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Ochrana je vypnuta";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Obnovení nákupů selhalo ";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Získat PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Přihlásit se";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Přihlásit se";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Zadejte vaší e-mailovou adresu a heslo";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "E-mailová adresa";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Heslo";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Získat předplatné";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "E-mail/heslo, které jste zadali nejsou správné.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš prémiový účet vypršel";
@@ -100,9 +60,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Úspěšně jste se přihlásili k účtu AdGuard, ale platnost licenčních klíčů umožňující aktivovat prémiovou verzi vypršela.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Zkusit znovu";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Při pokusu o obnovení nákupu došlo k chybě.";
@@ -122,24 +79,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Vlastní";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Blokování reklam";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Odstranění sociálních widgetů";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Obtěžování";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Jazykově specifické";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Pouze Premium";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Pouze Premium";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Povolené filtry: %d/%d";
 
@@ -148,17 +87,11 @@
 
 "filter_date_format" = "Filtry byly aktualizovány: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Zde zadejte vlastní pravidla<br>Přečtěte si <a href=\"%@\">poznámku o syntaxi pravidla</a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Zde zadejte názvy domén. AdGuard zakáže filtrování těchto webových stránek v Safari.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Zde zadejte názvy domén. AdGuard povolí filtrování pouze těchto webových stránek v Safari.";
-
-/* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Aktualizuji...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Přidat pravidlo";
@@ -190,20 +123,8 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Exportovat";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "Toto pravidlo bylo přidáno do uživatelského filtru. ";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Tato doména byla přidána do seznamu povolených. AdGuard nebude na tomto webu nic filtrovat.";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Nahlásit nekorektní blokování";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Nahlásit chybu na GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontaktovat podporu";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Exportovat protokoly";
@@ -237,49 +158,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS je alternativní způsob ochrany vašeho soukromí před různými čítači, analytickými systémy a podvodnými stránkami";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + bezpečné vyhledávání a blokování obsahu pro dospělé";
+
 /* Google DNS server description */
 "google_dns_description" = "Volná alternativní DNS služba poskytovaná společností Google";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS servery, které chrání vaše zařízení před online hrozbami";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS servery s blokováním obsahu pro dospělé";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Volně dostupná alternativa pro DNS službu s ochranou před podvodnými weby a škodlivým software";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Volně dostupná alternativa DNS od Cloudfare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS od SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Šifrování";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Bezpečnost";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Blokování obsahu pro dospělé";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "Žádné zásady protokolování";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Bezpečné vyhledávání";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Blokování reklam";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Zamezit třetím stranám špehovat aktivitu Vašeho prohlížeče";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokuje nebezpečné a podvodné domény";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Blokuje weby s obsahem pro dospělé";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Neukládá záznam Vašich DNS požadavků";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Pokud je to možné, je v prohlížeči vynuceno bezpečné vyhledávání";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokuje reklamy a sledovací servery";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "Bude vytvořena VPN";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "Pro nastavení vlastní konfigurace DNS je vyžadována VPN. Vytvořená VPN je místní, což znamená, že váš provoz nebude směrován přes žádné servery.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Nebyl vybrán žádný server";

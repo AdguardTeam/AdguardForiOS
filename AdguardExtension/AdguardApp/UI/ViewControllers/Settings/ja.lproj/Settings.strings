@@ -1,29 +1,48 @@
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "4Tx-ja-aYP"; */
-"4Tx-ja-aYP.text" = "シンプル化されたフィルタを使用する";
 
-/* Class = "UINavigationItem"; title = "Advanced Settings"; ObjectID = "79B-on-yfa"; */
-"79B-on-yfa.title" = "詳細設定";
+/* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
+"FzS-e3-CK1.text" = "ダーク（暗い）";
 
-/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "MKW-Q2-yFQ"; */
-"MKW-Q2-yFQ.text" = "Wi-Fi接続時のみフィルタを自動更新";
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
+"PyT-Id-Sle.text" = "この設定を有効にすると、AdGuardは汎用の“整形”ルールを無視します。フィルタリングの質と引き換えにページの読み込みを高速化します。";
 
-/* Class = "UILabel"; text = "Dark mode"; ObjectID = "NX6-c7-Wn7"; */
-"NX6-c7-Wn7.text" = "ダークテーマ";
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
+"TCQ-IQ-R5g.text" = "シンプル化されたフィルタを使用する";
 
-/* Class = "UILabel"; text = "Switch to dark theme"; ObjectID = "aCH-l3-3Fu"; */
-"aCH-l3-3Fu.text" = "カラーデザインをダークテーマに切り替える";
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "システム・デフォルト";
 
-/* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "cvM-Ob-XQB"; */
-"cvM-Ob-XQB.text" = "ホワイトリストを逆転する";
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "テーマ";
 
-/* Class = "UILabel"; text = "If this option is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages loading in exchange of filtering quality."; ObjectID = "jPL-ng-gmY"; */
-"jPL-ng-gmY.text" = "この設定を有効にすると、AdGuardは汎用の“整形的な”ルールを無視します。フィルタリングの質と引き換えにページの読み込みを高速化します。";
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Wi-Fi接続時のみフィルタを自動更新";
 
-/* Class = "UILabel"; text = "If this option is enabled, AdGuard will use only Wi-Fi for background filter updates."; ObjectID = "oK4-hl-ySQ"; */
-"oK4-hl-ySQ.text" = "この設定を有効にすると、AdGuardはバックグラウンドフィルタ更新をWi-Fiのみで行います。";
+/* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "bVh-Of-Oxm"; */
+"bVh-Of-Oxm.text" = "ホワイトリストを逆転させる";
 
-/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "pNY-Id-vsG"; */
-"pNY-Id-vsG.text" = "ネットワーク変更時に再起動する";
+/* Class = "UILabel"; text = "Content Blockers"; ObjectID = "c1p-jc-Itq"; */
+"c1p-jc-Itq.text" = "コンテンツブロッカー";
 
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list."; ObjectID = "ppj-g1-ukN"; */
-"ppj-g1-ukN.text" = "このリストのウェブサイト以外のすべての広告をブロックしないようにします。";
+/* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
+"crJ-Vv-yrm.headerTitle" = "詳細設定";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running."; ObjectID = "mta-fv-reE"; */
+"mta-fv-reE.text" = "AdGuard実行中にインターネット接続の問題が発生した場合は、このオプションをONにしてください。";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "その他";
+
+/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "nvD-bF-pnp"; */
+"nvD-bF-pnp.text" = "ネットワーク変更時に再起動する";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "ライト（明るい）";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
+"q05-UZ-zAB.text" = "このリスト以外のウェブサイトで広告をブロックしないようにします。";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "この設定をONにすると、AdGuardはバックグラウンドでのフィルタ更新をWi-Fiのみで行います（モバイル通信を使いません）。";
+
+/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "コンテンツブロッカーは5つあり、それぞれに50000本までのルールを含めることができます（計25万本）";

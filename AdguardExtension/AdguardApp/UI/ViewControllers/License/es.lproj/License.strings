@@ -1,20 +1,11 @@
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
-"5iB-q7-5l8.text" = "Actualización de filtros instantanea";
+/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
+"0Zf-Ng-gYi.title" = "AdGuard Premium";
 
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
-"A4T-Kw-foN.text" = "Más filtros";
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Cerrar sesión";
 
-/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
-"DEh-4x-Hnt.title" = "Iniciar sesión";
-
-/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
-"SKX-L4-odW.text" = "Bloquear phishing y otras amenazas";
-
-/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
-"UbO-jW-NNO.normalTitle" = "Mejorar";
-
-/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Se primero en todas partes";
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "IR A MI CUENTA";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restaurar compra";
@@ -24,6 +15,3 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Filtros personalizados";
-
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
-"wPC-tc-ETw.title" = "Inicio de sesión";

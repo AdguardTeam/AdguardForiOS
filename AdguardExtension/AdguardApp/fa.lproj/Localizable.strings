@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "یک خطای غیرمنتظره رخ داده است.لطفا با تیم پشتیبانی تماس بگیرید.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "سعی در تبدیل دستورات به جی اِس اُ اِن در حالی که سرویس اِجرا نشده است.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "دستورات را نمیتوان تبدیل کرد.خطای غیر منتظره رخ داد.لطفا با تیم پشتیبانی تماس بگیرید.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "دستورات فیلتر کاربر را نمیتوان فیلتر کرد.یکی از دستورات حاوی خطا است.دستور بعدی در موقعیت فعلی مکان نما را بررسی کنید.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.سعی کنید دستورات خود را پاکسازی کرده،و در لیست سفید قرار دهید یا گروه فیلترهای بکار رفته را تغییر دهید.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "بارگیری فیلترها در سافاری.لطفا AdGuard را غیرفعال نکنید،فرآیند بیش از 30 ثانیه طول نمی کشد...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "فیلتر کاربر";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "دی اِن اِس خانواده یاندکس";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "دی اِن اِس اَمن یاندکس";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "بله";
 
@@ -62,32 +46,8 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "حفاظت غيرفعال شده است";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "موفق به بازگرداندن خرید نشد ";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "دریافت حرفه ای";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "ورود";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "ورود";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "آدرس ایمیل و رمزعبور را وارد کنید";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "آدرس ایمیل";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "رمزعبور";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "دریافت اشتراک";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "آدرس/ایمیل وارد شده صحیح نیست";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
@@ -100,9 +60,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "شما با موفقیت وارد اکانت AdGuard شده اید اما کلیدهای مجوز نسخه پریمیوم منقضی شده اند.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "امتحان دوباره";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "یک خطا حین بازگرداندن خرید رخ داده است.";
@@ -122,24 +79,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "دستي";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "مسدودسازی تبلیغ";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "حذف ویدجت رسانه اجتماعی";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "نارضایتی";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "زبان-محور";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "فقط پریمیوم";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "فقط پریمیوم";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "فیلترهای فعال شده: %d/%d";
 
@@ -148,17 +87,11 @@
 
 "filter_date_format" = "فیلتر بروز رسانی شده  : %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
-
-/* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "در حال اسکن....";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "افزودن یک دستور";
@@ -190,20 +123,8 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "خروجیگیری لیست سیاه";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "این دستور به فیلتر کاربر اضافه شد. ";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "این دامنه به لیست سفید اضافه شد.AdGuard هیچ چیز در این وبسایت را فیلتر نمی کند.";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "گزارش مسدودسازی اشتباه";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "گزارش مشکل";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "تماس با پشتیبانی";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "گزارش مشکل را نمیتوان ارسال کرد چون ایمیل بدرستی در دستگاه شما پیکربندی نشده است.";
@@ -234,45 +155,57 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "مسدودساز تبلیغ،وبسایت های رَدیاب و فیشینگ";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "مسدودسازی همه در بالا و وبسایت های غیراخلاقی";
+
 /* Google DNS server description */
 "google_dns_description" = "سرویس حل دی اِن اِس سراسری ارائه شده توسط گوگل";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "سرور OpenDNS با مسدودسازی محتوای بزرگسال";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "سرویس DNS جایگزین رایگان برای حفاظت در برابر فیشینگ و جاسوس افزار";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "سرویس DNS رایگان با Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "سرویس DNS با SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "رمزگُذاری";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "امنیتی";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "مسدودسازی محتوای غیر اخلاقی";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "سیاست عدم ذخیره وقایع";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "جستجوی اَمن";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "مسدودسازی تبلیغات";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "به اشخاص  ثالث ها اجازه جاسوسی در فعالیت وبگردی خود ندهید";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "مسدودسازی وبسایت های محتوای غیراخلاقی";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "وقایع جستار DNS شما را ذخیره نمی کند";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "هر گاه امکان داشت،جستجوی اَمن در مرورگرها اعمال میشود";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "مسدودسازی تبلیغ و سرورهای رَدیاب";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "یک وی پی اِن ایجاد خواهد شد";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "برای راه اندازی DNS دستی VPN نیاز است.VPN ایجاد شده محلی هست،که یعنی ترافیک شما توسط هیچ سرور دیگری تغییر مسیر داده نمیشود.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "سروری انتخاب نشده است";

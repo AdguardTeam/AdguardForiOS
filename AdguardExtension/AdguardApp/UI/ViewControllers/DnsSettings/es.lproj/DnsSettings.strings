@@ -2,7 +2,7 @@
 "03E-rd-Slw.normalTitle" = "Regular";
 
 /* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "Elige Servidor";
+"1tX-ii-cOK.title" = "Elegir servidor";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Nombre";
@@ -32,7 +32,10 @@
 "D3X-CK-RSY.title" = "PRIVACIDAD DNS";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
-"DrO-hc-ilW.normalTitle" = "DNS-por-HTTPS";
+"DrO-hc-ilW.normalTitle" = "DNS mediante HTTPS";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
+"EkI-hK-XDG.text" = "Dirección";
 
 /* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
 "IVH-4P-uIk.text" = "Dominio";
@@ -88,8 +91,8 @@
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
 "d69-Gd-SZp.text" = "Full-Tunnel (sin el ícono de VPN)";
 
-/* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "dW3-zk-BPr"; */
-"dW3-zk-BPr.text" = "Introduce servidores de DNS";
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
+"dW3-zk-BPr.text" = "Dirección del servidor DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "Nombre del servidor";
@@ -133,11 +136,14 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nombre del servidor";
 
-/* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "Ingrese Servidores DNS";
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
+"seX-mS-3mU.text" = "Dirección del servidor DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Seleccione un protocolo";
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
 "ve4-Qn-Yj6.title" = "Detalles de la solicitud DNS";
+
+/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
+"xe9-vq-pF6.text" = "Transcurrido";

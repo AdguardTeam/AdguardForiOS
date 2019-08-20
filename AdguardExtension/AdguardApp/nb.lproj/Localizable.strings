@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "En uventet feil oppstod. Vennligst ta kontakt med brukerstøtten.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Forsøkte å konvertere regler til JSON mens tjenesten ikke er startet.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Kan ikke konvertere regler. En uventet feil oppstod. Vennligst ta kontakt med brukerstøtten.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Kan ikke konvertere brukerfilterregler. En av reglene inneholder en feil. Kontroller regelen ved siden av gjeldende museposisjon.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Feil";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtrene kan ikke lastes inn i Safari. Prøv å tømme reglene og hvitelisten, eller endre settet av brukte filtre.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Laster Safari-filtre. Vennligst ikke slå av AdGuard. Prosessen tar ikke mer enn 30 sekunder...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
@@ -46,24 +37,11 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "JA";
 
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Feil blokkering / annonse ikke blokkert";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Rapporter feil";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontakt brukerstøtte";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Kan ikke sende feilrapport fordi det muligens ikke er konfigurert en e-postkonto på enheten din.";
@@ -76,10 +54,13 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokkerer annonser, sporinger og nettfisking";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "blokkerer alt over og voksne nettsider";
+
 /* Google DNS server description */
 "google_dns_description" = "global dns-oppløsningstjeneste levert av Google";
+
 /* Open DNS server description */
 "open_dns_description" = "egendefinert filtrering og beskyttelse mot identitetstyveri";
 

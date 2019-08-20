@@ -1,2 +1,14 @@
-/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCa-IO-BlQ"; */
-"cCa-IO-BlQ.text" = "Laadimine...";
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "Blokeeri sellel lehel olev element";
+
+/* Class = "UILabel"; text = "Contact support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "Kontakteeru tehnilise toega";
+
+/* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
+"Znm-Yl-fWN.text" = "Vajuta siia, et avada tööriist, millega saad sel lehel blokeerimata reklaami või elemente eemaldada";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "Luba sellel lehel";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "Teavita probleemist";

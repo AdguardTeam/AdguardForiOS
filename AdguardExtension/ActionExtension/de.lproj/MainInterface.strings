@@ -7,9 +7,6 @@
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
 "Znm-Yl-fWN.text" = "Tippen Sie hier, um das Tool zum Entfernen von verpassten Anzeigen oder von jedem Element zu verwenden, das Sie nicht auf der Seite sehen möchten.";
 
-/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCa-IO-BlQ"; */
-"cCa-IO-BlQ.text" = "Wird geladen...";
-
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Auf dieser Seite aktivieren";
 

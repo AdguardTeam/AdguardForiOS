@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Возникла неожиданная ошибка. Обратитесь в службу поддержки.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Попытка сконвертировать фильтры при незапущенном сервисе.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Невозможно сконвертировать правила. Возникла непредвиденная ошибка. Пожалуйста, обратитесь в службу поддержки.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Не удается обработать пользовательские правила.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Ошибка";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Фильтры не загрузились в Safari. Попробуйте очистить свои правила и белый список, или изменить набор используемых фильтров";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Идет загрузка фильтров в Safari. Пожалуйста, не отключайте AdGuard, процесс займет не больше 30 секунд...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "НЕТ";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательский фильтр";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "ДА";
 
@@ -62,35 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Защита отключена";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Не удалось восстановить покупки";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Получить PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Войти";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Вход в систему";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Введите ваш электронный адрес и пароль";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "Электронный адрес";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Пароль";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Получить подписку";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "Введенный вами e-mail/пароль некорректный.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Внимание";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Вы успешно вошли в свой аккаунт AdGuard, но нет лицензионных ключей, позволяющих вам активировать Премиум-версию.";
@@ -100,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Вы успешно вошли в аккаунт AdGuard, но срок действия лицензионных ключей, позволяющих активировать Премиум-версию, истек.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Попробовать снова";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Произошла ошибка при попытке восстановить покупку.";
@@ -122,24 +82,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Собственные фильтры";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Блокировка рекламы";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Удаление виджетов социальных сетей";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Раздражители";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Языковые";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Только Премиум";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Только Премиум";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Включенные фильтры: %d/%d";
 
@@ -148,9 +90,6 @@
 
 "filter_date_format" = "Фильтры обновлены: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Введите ваши собственные правила здесь<br>Прочтите эту <a href=\"%@\">заметку о синтаксисе правил</a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Введите доменные имена здесь. AdGuard отключит фильтрацию в Safari для этих сайтов.";
 
@@ -158,7 +97,7 @@
 "inverted_whitelist_text" = "Введите доменные имена здесь. AdGuard включит фильтрацию в Safari только для этих сайтов.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Сканирование...";
+"update_filter_start_message" = "Обновление...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Добавить правило";
@@ -190,12 +129,6 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Экспортировать";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "Это правило было добавлено в пользовательский фильтр.";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Этот домен был добавлен в белый список. AdGuard ничего не будет фильтровать на этом сайте.";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Пропущенная реклама";
 
@@ -204,6 +137,9 @@
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "Сообщить в поддержку";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Экспортировать логи";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Невозможно отправить отчет об ошибке. Возможно, в вашем устройстве не настроена электронная почта.";
@@ -234,49 +170,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS - альтернативный способ защиты вашей конфиденциальности от всевозможных онлайн счетчиков и систем сбора данных, опасных и фишинговых сайтов";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + безопасный поиск и блокировка контента для взрослых";
+
 /* Google DNS server description */
 "google_dns_description" = "Бесплатный альтернативный DNS-сервис от Google";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS-сервер, защищающий устройство от сетевых угроз";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Сервер OpenDNS с блокировкой контента для взрослых";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Бесплатный альтернативный DNS сервис с защитой от фишинга и шпионских программ";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Бесплатный DNS сервис от Сloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS сервис от SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Шифрование";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Безопасность";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Блокировка контента для взрослых";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "Без логгирования";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Безопасный поиск";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Блокировка рекламы";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Не позволяет третьим лицам шпионить за вашей деятельностью в интернете";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Блокирует известные фишинговые и другие опасные домены";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Блокирует сайты с контентом для взрослых";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Не хранит журналы DNS запросов";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Когда это возможно, безопасный поиск применяется в браузерах";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Блокирует рекламу и отслеживание серверов";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "Добавление VPN-профиля";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN требуется для настройки пользовательских параметров DNS. Созданный VPN является локальным, что означает, что ваш трафик не будет маршрутизироваться через какие-либо серверы.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Сервер не выбран";
@@ -346,3 +296,75 @@
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Советую попробовать:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Тема";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Прочее";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Дополнительно";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "Бесплатный пробный период %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Блокировщики контента";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Отключено в настройках Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Проверка обновлений...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Превышен лимит в %1$@ правил. Приложение может работать некорректно. Пожалуйста, отключите лишние правила. В настоящий момент используются %2$@ из %3$@ правил; %4$@ правил отключены.\n";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Фильтры не обновились";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Данная лицензия активирована на максимальном количестве устройств.\nВы можете отвязать лицензию от неиспользуемых устройств в вашем персональном аккаунте на нашем сайте: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Перед использованием этого расширения, %1$@ должен выполнить первичную настройку. Запустите основное приложение %2$@.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Невозможно отправить сообщение в службу поддержки. Вы еще не настроили вашу учетную запись.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Обратите внимание на то, что Блокировщик контента отключен. Это означает, что реклама не будет фильтроваться вне зависимости от настроек AdGuard. Пожалуйста, включите Блокировщик контента AdGuard в настройках Safari, чтобы начать фильтрацию.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Имя хоста не получено. Возможно, страница еще не загружена.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Политика безопасности этого сайта не позволяет запустить Помощник AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Произошла неожиданная ошибка при инициализации расширения Safari. Пожалуйста, свяжитесь со службой поддержки AdGuard, если ситуация повторится.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Предупреждение";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Вы превысили максимальное количество правил фильтрации.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Вечная";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Далее %1$@ за %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ВКЛ";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "ВЫКЛ";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Домашняя страница:";
+
+/* (AboutController) current app version string */
+"about_version" = "Версия";

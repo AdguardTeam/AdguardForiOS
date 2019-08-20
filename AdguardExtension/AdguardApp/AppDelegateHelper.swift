@@ -26,6 +26,9 @@ import Foundation
 @objcMembers
 class AppDelegateHelper: NSObject {
     
+    lazy var userNotificationService: UserNotificationServiceProtocol =  { ServiceLocator.shared.getService()! }()
+    var purchaseObservation: Any?
+    
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
     }
@@ -33,23 +36,31 @@ class AppDelegateHelper: NSObject {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // request permission for user notifications posting
-        let userNotificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
         userNotificationService.requestPermissions()
         
-        // obseve NotificationCenter notifications
-        NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
-            
-            guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-            
-            if type == PurchaseService.kPSNotificationPremiumExpired {
-                userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil))
-            }
-        }
+        addPurchaseStatusObserver()
         
         return true;
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
+    }
+    
+    func performFetch() {
+        addPurchaseStatusObserver()
+    }
+    
+    private func addPurchaseStatusObserver() {
+        if purchaseObservation == nil {
+            purchaseObservation = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
+                        
+                        guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
+                        
+                        if type == PurchaseService.kPSNotificationPremiumExpired {
+                            self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil))
+                        }
+                    }
+        }
     }
 }

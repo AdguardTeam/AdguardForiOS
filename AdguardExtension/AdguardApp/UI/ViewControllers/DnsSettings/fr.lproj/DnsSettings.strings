@@ -91,8 +91,8 @@
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
 "d69-Gd-SZp.text" = "Full-tunnel (sans icône VPN)";
 
-/* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "dW3-zk-BPr"; */
-"dW3-zk-BPr.text" = "Saisissez les upstreams DNS";
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
+"dW3-zk-BPr.text" = "Adresse du serveur DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "Nom du serveur";
@@ -136,8 +136,8 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nom du serveur";
 
-/* Class = "UILabel"; text = "Enter DNS upstreams"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "Saisir les upstreams du DNS";
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
+"seX-mS-3mU.text" = "Adresse du serveur DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Sélectionnez le protocole";

@@ -25,10 +25,6 @@
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the whitelist, or change the set of used filters.";
 
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Loading filters to Safari. Please do not turn off AdGuard. The process will take no more than 30 seconds.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
@@ -59,14 +55,8 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection is disabled";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Failed to restore purchases ";
-
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Get subscription";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "The email/password you have entered is incorrect.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
@@ -110,7 +100,7 @@
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add custom rules here<br>Read this <a href=\"%@\">note about rule syntax</a>.";
+"blacklist_text_format" = "You can add custom rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
@@ -152,13 +142,13 @@
 "export_blacklist_title" = "Export";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Report Incorrect Blocking";
+"incorrect_blocking_report" = "Report incorrect blocking";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Report a bug on GitHub";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contact Support";
+"action_contact_support" = "Contact support";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Export logs";
@@ -381,18 +371,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
-
-/* Today widget - text when remote DNS is enabled */
-"connected_to_server_format" = "Connected to \"%@\"";
-
-/* Today widget - text when remote DNS is disabled */
-"dns_filtering_disabled" = "DNS filtering is disabled";
-
-/* Today widget - hint text */
-"disable_dns_filtering" = "Touch to disable DNS filtering";
-
-/* Today widget - hint text */
-"enable_dns_filtering" = "Touch to enable DNS filtering";
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanent";

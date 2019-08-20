@@ -26,8 +26,6 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
 - (void)sendMailBugReportWithParentController:(nonnull UIViewController *)parent;
 
-- (void)sendSimpleMailWithParentController:(nonnull UIViewController *)parent subject:(nonnull NSString *)subject body:(nonnull NSString *)body;
-
 - (nullable NSURL*) composeWebReportUrlForSite:(nullable NSURL*)siteUrl;
 
 - (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (nonnull UIView*)sourceView sourceRect:(CGRect)sourceRect;
