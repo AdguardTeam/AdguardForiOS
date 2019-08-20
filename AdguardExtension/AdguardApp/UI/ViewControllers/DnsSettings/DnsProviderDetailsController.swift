@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SafariServices
 
 class DnsProviderDetailsController : UITableViewController, UIViewControllerTransitioningDelegate,  ChooseProtocolControllerDelegate {
     
@@ -172,7 +173,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
             selectServer()
         case (buttonsSection, websiteRow):
             if let url = URL(string: provider?.website ?? "") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let safariController = SFSafariViewController(url: url)
+                present(safariController, animated: true, completion: nil)
             }
         default:
             break
