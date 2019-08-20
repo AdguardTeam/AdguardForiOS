@@ -196,7 +196,7 @@ class LoginServiceTest: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
-
+    
 }
 
 class NetworkMock: ACNNetworkingProtocol {
@@ -263,11 +263,11 @@ class KeychainMock: KeychainServiceProtocol {
 
 class ParserMock: LoginResponseParser {
     
-    var statusResults: [(premium: Bool, expirationDate: Date?, Error?)] = [(true, nil, nil)]
-    var loginResult: (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, Error?) = (true, true, nil, nil, nil)
+    var statusResults: [(premium: Bool, expirationDate: Date?, NSError?)] = [(true, nil, nil)]
+    var loginResult: (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) = (true, true, nil, nil, nil)
     var currentStatusResultIndex = 0
     
-    override func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, Error?) {
+    override func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, NSError?) {
         
         let result = statusResults[currentStatusResultIndex]
         currentStatusResultIndex += 1;
@@ -275,7 +275,7 @@ class ParserMock: LoginResponseParser {
         return result;
     }
     
-    override func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, Error?) {
+    override func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) {
         return loginResult
     }
 }

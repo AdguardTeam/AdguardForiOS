@@ -1057,6 +1057,7 @@
 		D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
 		D07AA06E22098C630065779F /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */; };
+		D07C58A3230C1FF5002CD427 /* LoginResponseParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07C58A2230C1FF5002CD427 /* LoginResponseParserTest.swift */; };
 		D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D41D021FF1F6400B03872 /* DnsModeController.swift */; };
 		D08187C02260A69200E961B5 /* DnsLogRecordsWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187BE2260A5E300E961B5 /* DnsLogRecordsWriter.swift */; };
 		D08187C32260ACE300E961B5 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
@@ -1930,6 +1931,7 @@
 		D07AA06B220833A10065779F /* ACDnsUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACDnsUtils.h; sourceTree = "<group>"; };
 		D07AA06C220833A10065779F /* ACDnsUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACDnsUtils.m; sourceTree = "<group>"; };
 		D07BC7CD223BBF2400C6B48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DnsSettings.storyboard; sourceTree = "<group>"; };
+		D07C58A2230C1FF5002CD427 /* LoginResponseParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseParserTest.swift; sourceTree = "<group>"; };
 		D07D41D021FF1F6400B03872 /* DnsModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsModeController.swift; sourceTree = "<group>"; };
 		D08187BE2260A5E300E961B5 /* DnsLogRecordsWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriter.swift; sourceTree = "<group>"; };
 		D08187C12260ABD600E961B5 /* DnsLogRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecord.swift; sourceTree = "<group>"; };
@@ -3025,6 +3027,7 @@
 				D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */,
 				D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */,
 				D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */,
+				D07C58A2230C1FF5002CD427 /* LoginResponseParserTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -5271,6 +5274,7 @@
 				D0EFBF5C22BA63B100D2D391 /* SharedResourcesMock.swift in Sources */,
 				D0EFBF5922BA62E800D2D391 /* String+Utils.swift in Sources */,
 				65EC9CA11BB9824C00F53F3B /* FMResultSet.m in Sources */,
+				D07C58A3230C1FF5002CD427 /* LoginResponseParserTest.swift in Sources */,
 				65EC9BE51BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				65EC9CAD1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				D0288F3C2306991F00A4EBEF /* NSString+Utils.m in Sources */,

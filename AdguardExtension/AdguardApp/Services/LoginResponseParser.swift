@@ -19,9 +19,9 @@
 import Foundation
 
 protocol LoginResponseParserProtocol {
-    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?)
+    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
     
-    func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, Error?)
+    func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
 }
 
 
@@ -72,7 +72,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     private let STATUS_RESPONSE_STATUS_EXPIRED = "EXPIRED"
     private let STATUS_RESPONSE_STATUS_ERROR = "ERROR"
     
-    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
+    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
         
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
@@ -87,7 +87,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
     }
     
-    func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, Error?) {
+    func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, NSError?) {
         
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
@@ -103,7 +103,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     }
     
     
-    private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, Error?) {
+    private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
         
         guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
@@ -150,7 +150,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     }
     
     
-    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, Error?) {
+    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, NSError?) {
         
         guard let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String else {
             DDLogInfo("(LoginService) processStatusResponseJson error - json does not contain status" )
