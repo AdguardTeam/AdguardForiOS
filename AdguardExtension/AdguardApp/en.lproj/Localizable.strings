@@ -100,7 +100,7 @@
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add custom rules here<br>Read this <a href=\"%@\">note about rule syntax</a>.";
+"blacklist_text_format" = "You can add custom rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
@@ -142,13 +142,13 @@
 "export_blacklist_title" = "Export";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Report Incorrect Blocking";
+"incorrect_blocking_report" = "Report incorrect blocking";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Report a bug on GitHub";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contact Support";
+"action_contact_support" = "Contact support";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Export logs";
