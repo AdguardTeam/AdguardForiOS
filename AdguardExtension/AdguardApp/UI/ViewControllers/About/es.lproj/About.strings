@@ -1,5 +1,8 @@
+/* Class = "UILabel"; text = "License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
+"5Xe-d5-8tj.text" = "Licencia";
+
 /* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
-"8KQ-Ga-zhs.text" = "Reconocimientos";
+"8KQ-Ga-zhs.text" = "Agradecimientos";
 
 /* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
 "KkR-EM-giI.text" = "Foro";

@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
 "NVi-wQ-2Pn.text" = "Nasıl kullanılır";
 
-/* Class = "UINavigationItem"; title = "About"; ObjectID = "Ywt-W9-axs"; */
-"Ywt-W9-axs.title" = "Hakkında";
-
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
 "ncc-Hk-ota.title" = "Hakkında";
 

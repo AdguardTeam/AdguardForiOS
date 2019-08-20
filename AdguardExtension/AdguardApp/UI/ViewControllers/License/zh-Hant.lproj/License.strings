@@ -10,20 +10,8 @@
 /* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
 "7Sy-Te-Eh3.text" = "您已訂閱";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "8Bh-Uf-UEr"; Note = "(AddCustomFilterController) cancel button"; */
-"8Bh-Uf-UEr.normalTitle" = "取消";
-
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
 "A4T-Kw-foN.text" = "設定您自己的規則";
-
-/* Class = "UILabel"; text = "E-mail"; ObjectID = "Ahp-CV-z02"; */
-"Ahp-CV-z02.text" = "電子郵件地址";
-
-/* Class = "UINavigationItem"; title = "Sign in"; ObjectID = "DEh-4x-Hnt"; Note = "(Get Pro) screen title"; */
-"DEh-4x-Hnt.title" = "登入";
-
-/* Class = "UITextField"; placeholder = "Enter your e-mail here"; ObjectID = "K4d-TK-Ban"; Note = "(Add Custom Filter) url hint"; */
-"K4d-TK-Ban.placeholder" = "於此輸入您的電子郵件地址";
 
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "您有一個授權";
@@ -34,17 +22,8 @@
 /* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "封鎖網路釣魚和其它的威脅";
 
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "登入";
-
-/* Class = "UIButton"; normalTitle = "Upgrade"; ObjectID = "UbO-jW-NNO"; */
-"UbO-jW-NNO.normalTitle" = "升級";
-
 /* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "珍視您私人的資料";
-
-/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "eyq-0X-qrl"; */
-"eyq-0X-qrl.normalTitle" = "登入";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "恢復購買";
@@ -55,8 +34,5 @@
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "自訂的過濾器";
 
-/* Class = "UILabel"; text = "Login"; ObjectID = "vE7-wt-qaG"; */
-"vE7-wt-qaG.text" = "登入";
-
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "wPC-tc-ETw"; Note = "(Login Screen) Get Pro->Login->\"Login\" navigatio bar button title"; */
-"wPC-tc-ETw.title" = "登入";
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "免費地試試我們的高級版功能";

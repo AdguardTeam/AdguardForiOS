@@ -19,20 +19,14 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "編輯";
 
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "HN7-vG-wig"; */
-"HN7-vG-wig.title" = "項目";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RgN-vL-2ju"; */
-"RgN-vL-2ju.normalTitle" = "按鈕";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
+"HB0-zK-xj2.normalTitle" = "儲存";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "移除";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "取消";
-
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Yym-ps-FzM"; */
-"Yym-ps-FzM.title" = "標題";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
 "c5a-s3-YPd.normalTitle" = "選擇";
@@ -42,6 +36,9 @@
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
 "iuK-dC-RKf.normalTitle" = "刪除";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
+"lE1-GD-Qr5.normalTitle" = "編輯";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "網域：";

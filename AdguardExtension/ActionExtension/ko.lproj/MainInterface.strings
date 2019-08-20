@@ -1,2 +1,14 @@
-/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCa-IO-BlQ"; */
-"cCa-IO-BlQ.text" = "로딩 중...";
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "이 페이지의 요소를 차단";
+
+/* Class = "UILabel"; text = "Contact support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "고객 지원";
+
+/* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
+"Znm-Yl-fWN.text" = "이 곳을 클릭하여 놓친 광고나 이 페이지에서 보고 싶지 않은 요소들을 제거하는 도구 사용";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "이 페이지에서 활성화";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "이 페이지의 문제 신고";

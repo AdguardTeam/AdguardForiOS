@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Odottamaton virhe tapahtui. Ota yhteyttä tukitiimiimme.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Yritys muuttaa sääntöjä JSON-muotoon palvelun ollessa pois päältä. ";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Ei voida muuttaa sääntöjä. Odottamaton virhe. Ota yhteyttä tukeen.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Ei voida muuntaa käyttäjäsuodatinsääntöjä. Jokin säännöistä on virheellinen. Tarkista sääntö nykyisen kohdistimen sijainnin vierestä.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Virhe";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Suodattimia ei voida ladata Safariin. Tyhjennä säännöt sekä sallittujen lista, tai muuta valittuja suodattimia.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Ladataan suodattimia Safariin. Älä sulje AdGuardia, prosessin ei pitäisi kestä 30-sekuntia pidempään...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "EI";
@@ -46,24 +37,11 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Käyttäjäsuodatin";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Perhe";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Turvallinen";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "KYLLÄ";
 
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Virheellinen Estäminen / Mainos Jätetty Huomioimatta";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Virheraportti";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Ota Yhteyttä Tukeen";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Ei voida lähettää virheraporttia, koska et ole määrittänyt sähköpostitiliä laitteessasi.";
@@ -76,10 +54,13 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "estää mainokset, seuranta- ja verkkohuijaussivustot";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "estää kaikki ylläolevat ja aikuisviihdesivustot";
+
 /* Google DNS server description */
 "google_dns_description" = "yleinen DNS-ratkaisupalvelu on Googlen tarjoama";
+
 /* Open DNS server description */
 "open_dns_description" = "mukautettu suodatus ja suojaus identiteetivarkauksilta";
 
