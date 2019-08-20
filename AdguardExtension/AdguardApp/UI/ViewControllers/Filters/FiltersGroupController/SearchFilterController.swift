@@ -53,8 +53,9 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
 
         let filtersChangedCallback = { [weak self] in
             self?.tableView.reloadData()
-            if self?.tableView.numberOfSections ?? 0 > 0 {
-                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            let indexPath = IndexPath(row: 0, section: 0)
+            if let _ = self?.tableView.cellForRow(at: indexPath){
+                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
             self?.tableView.setContentOffset(.zero, animated: false)
             self?.searchBar.text = self?.viewModel?.searchString

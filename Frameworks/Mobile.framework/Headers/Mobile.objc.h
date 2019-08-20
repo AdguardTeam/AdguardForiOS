@@ -15,6 +15,7 @@
 @class MobileDNSProxy;
 @class MobileDNSRequestProcessedEvent;
 @class MobileDNSStamp;
+@class MobileFilteringConfig;
 @class MobileLogWriterAdapter;
 @protocol MobileDNSRequestProcessedListener;
 @class MobileDNSRequestProcessedListener;
@@ -31,7 +32,7 @@
 
 /**
  * Config is the DNS proxy configuration which uses only the subset of types that is supported by gomobile
-In Java API this structure becomes an object that needs to be configured and setted as field of DNSProxy
+In Java API this structure becomes an object that needs to be configured and set as field of DNSProxy
  */
 @interface MobileConfig : NSObject <goSeqRefInterface> {
 }
@@ -62,6 +63,7 @@ In Java API this structure becomes an object that needs to be configured and set
 - (instancetype)initWithRef:(id)ref;
 - (instancetype)init;
 @property (nonatomic) MobileConfig* config;
+@property (nonatomic) MobileFilteringConfig* filteringConfig;
 // skipped field DNSProxy.RWMutex with unsupported type: sync.RWMutex
 
 /**
@@ -79,6 +81,10 @@ packet - DNS query bytes
 returns response or error
  */
 - (NSData*)resolve:(NSData*)packet error:(NSError**)error;
+/**
+ * Restart proxy with new configuration without filteringEngine recreation
+ */
+- (BOOL)restart:(MobileConfig*)config error:(NSError**)error;
 /**
  * Start starts the DNS proxy
  */
@@ -104,10 +110,12 @@ returns response or error
 @property (nonatomic) int64_t startTime;
 @property (nonatomic) long elapsed;
 @property (nonatomic) NSString* answer;
-@property (nonatomic) NSString* ns;
 @property (nonatomic) NSString* upstreamAddr;
 @property (nonatomic) long bytesSent;
 @property (nonatomic) long bytesReceived;
+@property (nonatomic) NSString* filteringRule;
+@property (nonatomic) long filterListID;
+@property (nonatomic) BOOL whitelist;
 @property (nonatomic) NSString* error;
 @end
 
@@ -127,6 +135,20 @@ returns response or error
 @end
 
 /**
+ * FilteringConfig is the filteringEngine configuration
+ */
+@interface MobileFilteringConfig : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (instancetype)init;
+@property (nonatomic) NSString* filteringRulesFilesJSON;
+@property (nonatomic) NSString* filteringRulesStringsJSON;
+@property (nonatomic) long blockType;
+@end
+
+/**
  * LogWriterAdapter between go log and LogWriter
  */
 @interface MobileLogWriterAdapter : NSObject <goSeqRefInterface> {
@@ -137,6 +159,10 @@ returns response or error
 - (instancetype)init;
 - (BOOL)write:(NSData*)p0 n:(long*)n error:(NSError**)error;
 @end
+
+FOUNDATION_EXPORT const int64_t MobileBlockTypeNXDomain;
+FOUNDATION_EXPORT const int64_t MobileBlockTypeRule;
+FOUNDATION_EXPORT const int64_t MobileBlockTypeUnspecifiedIP;
 
 /**
  * ConfigureDNSRequestProcessedListener configures a global listener for the DNSRequestProcessedEvent events
@@ -153,6 +179,11 @@ FOUNDATION_EXPORT BOOL MobileConfigureLogger(BOOL verbose, NSString* stderrRedir
  * ParseDNSStamp parses a DNS stamp string and returns a stamp instance or an error
  */
 FOUNDATION_EXPORT MobileDNSStamp* MobileParseDNSStamp(NSString* stampStr, NSError** error);
+
+/**
+ * SetLogLevel function is called from mobile API and changes log level without LogWriter and srderrRedirect reconfiguration
+ */
+FOUNDATION_EXPORT void MobileSetLogLevel(BOOL verbose);
 
 /**
  * TestUpstream checks if upstream is valid and available
