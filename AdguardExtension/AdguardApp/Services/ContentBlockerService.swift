@@ -442,12 +442,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
                 if error != nil {
                     resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-
-                    if jsonData != nil { resultData = jsonData! }
-                    
-                    resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 }
+                
+                if jsonData != nil { resultData = jsonData! }
+                resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+                
                 resultError = error
+                
             } else {
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
