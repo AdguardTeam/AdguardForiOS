@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
 "NVi-wQ-2Pn.text" = "使い方";
 
-/* Class = "UINavigationItem"; title = "About"; ObjectID = "Ywt-W9-axs"; */
-"Ywt-W9-axs.title" = "このアプリについて";
-
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
 "ncc-Hk-ota.title" = "このアプリについて";
 

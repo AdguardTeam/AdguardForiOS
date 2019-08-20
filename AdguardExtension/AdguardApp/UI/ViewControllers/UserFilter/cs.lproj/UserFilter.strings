@@ -19,20 +19,11 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Upravit";
 
-/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "HN7-vG-wig"; */
-"HN7-vG-wig.title" = "Položka";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "RgN-vL-2ju"; */
-"RgN-vL-2ju.normalTitle" = "Tlačítko";
-
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "ODSTRANIT";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "ZRUŠIT";
-
-/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Yym-ps-FzM"; */
-"Yym-ps-FzM.title" = "Název";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
 "c5a-s3-YPd.normalTitle" = "Vybrat";

@@ -54,7 +54,6 @@ extern NSString *OpenDnsSettingsSegue;
 @property (strong, nonatomic) UIWindow *window;
 
 @property BOOL userDefaultsInitialized;
-@property (weak) UINavigationController *navigation;
 
 /**
  If interval between last update and current time more then update period,

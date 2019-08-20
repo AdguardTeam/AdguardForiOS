@@ -139,8 +139,8 @@
                                                                 <constraint firstAttribute="height" constant="6" id="efa-Of-HiS"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yearly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fro-u8-sGn" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                            <rect key="frame" x="49" y="11" width="42" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fro-u8-sGn" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="49" y="20" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -182,7 +182,7 @@
                                                         <constraint firstAttribute="height" constant="40" id="zM6-Ew-g7K"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="START TRIAL">
+                                                    <state key="normal">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
@@ -629,7 +629,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3T-TH-fYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <barButtonItem title="Login" id="UaA-JQ-kV4">
+                <barButtonItem title="Log in" id="UaA-JQ-kV4">
                     <color key="tintColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="loginAction:" destination="gVb-oh-MXP" id="kO5-dl-Y2g"/>
@@ -697,7 +697,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="LOGIN">
+                                <state key="normal" title="LOG IN">
                                     <color key="titleColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>

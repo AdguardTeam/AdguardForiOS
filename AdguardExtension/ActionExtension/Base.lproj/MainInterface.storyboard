@@ -145,7 +145,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Contact support" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wrl-xu-3kv" customClass="ThemableLabel" customModule="ActionExtension" customModuleProvider="target">
-                                                    <rect key="frame" x="64" y="40" width="93" height="15"/>
+                                                    <rect key="frame" x="64" y="40" width="93" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -276,52 +276,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETC-0I-fs7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2088" y="462"/>
-        </scene>
-        <!--Loading Modal Controller-->
-        <scene sceneID="Hb4-bi-GB2">
-            <objects>
-                <viewController storyboardIdentifier="loadingModal" id="325-Cn-Jqz" customClass="AEUILoadingModalController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Dd-Cf-PO4"/>
-                        <viewControllerLayoutGuide type="bottom" id="5cE-FB-9KP"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Ucw-Qt-9du">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WZq-0B-Ygj">
-                                <rect key="frame" x="263" y="276" width="75" height="49"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-IO-BlQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fvV-Ai-6Wh">
-                                        <rect key="frame" x="27" y="29" width="20" height="20"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="5cE-FB-9KP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WZq-0B-Ygj" secondAttribute="bottom" id="9z8-iH-JxR"/>
-                            <constraint firstItem="WZq-0B-Ygj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ucw-Qt-9du" secondAttribute="leadingMargin" id="H8i-QL-Bp3"/>
-                            <constraint firstItem="WZq-0B-Ygj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0Dd-Cf-PO4" secondAttribute="bottom" id="hHG-BD-3ht"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="WZq-0B-Ygj" secondAttribute="trailing" id="kP7-lr-BQR"/>
-                            <constraint firstItem="WZq-0B-Ygj" firstAttribute="centerY" secondItem="Ucw-Qt-9du" secondAttribute="centerY" id="r9W-21-3eS"/>
-                            <constraint firstItem="WZq-0B-Ygj" firstAttribute="centerX" secondItem="Ucw-Qt-9du" secondAttribute="centerX" id="yG5-wa-bMV"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="loadingMessage" destination="cCa-IO-BlQ" id="9XM-wI-V78"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T9C-0e-ber" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1207" y="-691"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cE1-9l-2JE">

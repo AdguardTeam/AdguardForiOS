@@ -1,12 +1,9 @@
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Pokušavaj da pretvoriš pravila u JSON kada usluga nije pokrenuta.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Ne mogu da pretvorim filtere. Dogodila se neočekivana greška. Molimo vas da kontaktirate tim podrške.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Otkaži";
-
 
 /* Alert title. On error. */
 "common_error_title" = "Greška";
@@ -16,10 +13,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filteri ne mogu da budu učitani u Safari. Pokušajte da očistite vaša pravila ili belu listu, ili promenite skup korišćenih filtera.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Učitavam filtere u Safari. Molimo vas da ne isključujete AdGuard. Proces neće trajati više od 30 sekundi.";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Izveštaj o grešci";

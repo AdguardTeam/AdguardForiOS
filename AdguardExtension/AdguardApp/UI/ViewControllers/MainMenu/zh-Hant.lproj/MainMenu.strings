@@ -7,17 +7,11 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "幫助我們使 AdGuard 更好";
 
-/* Class = "UILabel"; text = "Advanced"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
-"L2l-pO-K3q.text" = "進階的";
-
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard 是什麼？";
 
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "VQi-XH-gdb"; */
 "VQi-XH-gdb.normalTitle" = "取得高級版";
-
-/* Class = "UILabel"; text = "Choose from a variety of filters"; ObjectID = "YRx-VR-yid"; */
-"YRx-VR-yid.text" = "從各種各樣的過濾器中選擇";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "設定";
@@ -36,9 +30,6 @@
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "關於";
-
-/* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
-"xb2-Gf-9h7.text" = "其它的設定";
 
 /* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
 "zO5-hl-j78.text" = "包含自訂的過濾規則";

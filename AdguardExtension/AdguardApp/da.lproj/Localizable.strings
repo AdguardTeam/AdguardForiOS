@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "En uventet fejl opstod. Kontakt venligst supportteamet.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Forsøgte at konvertere reglerne til JSON før tjenesten startede.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Kan ikke konvertere regler. En uventet fejl opstod. Kontakt venligst supportteamet.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Kan ikke konvertere bruger filterreglerne.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Fejl";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtre kan ikke indlæses i Safari. Prøv at rydde dine regler og whitelisten eller ændre mængden af brugte filtre.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Indlæser filtre til Safari. Sluk venligst ikke AdGuard. Processen vil ikke tage mere end 30 sekunder...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "NEJ";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerfilter";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "JA";
 
@@ -62,35 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Beskyttelsen er deaktiveret";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Kunne ikke gendanne køb ";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Få PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Log ind";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Log ind";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Indtast din e-mailadresse og adgangskode";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "E-mailadresse";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Adgangskode";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Få abonnement";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "Den e-mail/adgangskode du har indtastet er forkert.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Din Premium konto er udløbet";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Vær opmærksom";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Du har logget ind på din AdGuard konto, men der er ingen licensnøgler, der giver dig mulighed for at aktivere premiumversionen.";
@@ -100,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Du har logget ind på din AdGuard konto, men licensnøglerne, der giver dig mulighed for at aktivere premiumversionen, er udløbet.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Prøv igen";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Der opstod en fejl under forsøget på at gendanne købet.";
@@ -122,24 +82,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Brugerdefineret";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Annonceblokering";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Fjerner sociale widgets";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Irritationer";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Sprog-specifik";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Kun Premium";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Kun Premium";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Aktiveret filtre: %d/%d";
 
@@ -148,9 +90,6 @@
 
 "filter_date_format" = "Filtre opdateret: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Indtast dine brugerdefinerede regler her<br>Læs denne <a href=\"%@\">note om regelsyntaks</a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Indtast domænenavnene her. AdGuard vil deaktivere filtrering i Safari for disse hjemmesider.";
 
@@ -158,7 +97,7 @@
 "inverted_whitelist_text" = "Indtast domænenavnene her. AdGuard vil kun aktivere filtrering i Safari for disse hjemmesider.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Skanner...";
+"update_filter_start_message" = "Opdaterer...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Tilføj en regel";
@@ -190,20 +129,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Eksporter";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "Denne regel blev tilføjet til brugerfiltret. ";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Dette domæne blev tilføjet til hvidlisten. AdGuard vil ikke filtrere noget på denne hjemmeside.";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Rapporter Fejlagtig Blokering";
+"incorrect_blocking_report" = "Rapporter fejlagtig blokering";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Rapporter en fejl på GitHub";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontakt Support";
+"action_contact_support" = "Kontakt support";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Eksporter logs";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Kan ikke sende fejlrapport. Du har måske ikke oprettet en e-mail på din enhed.";
@@ -234,49 +170,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS er en alternativ måde at beskytte dit privatliv på mod forskellige counters, analytiske systemer og phishing hjemmesider";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + Beskyttet søgning og voksent indholdsblokering";
+
 /* Google DNS server description */
 "google_dns_description" = "Gratis alternativ DNS tjeneste af Google";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS-server der beskytter din enhed mod online-trusler";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS server med voksent indholdsblokering";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Gratis alternativ DNS-tjeneste med beskyttelse mod phishing og spyware";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Gratis DNS-tjeneste af Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS-tjeneste af SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Kryptering";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Sikkerhed";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Blokering af voksenindhold";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "No logging politik";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Sikker søgning";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Annonceblokering";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Lader ikke tredjeparter udspionere din browseraktivitet";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokerer kendte phishing domæner";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Blokerer hjemmesider med voksenindhold";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Gemmer ikke logs for dine DNS-forespørgsler";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Når det er muligt, håndhæves Sikker søgning i browserne";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokerer annoncer og sporingsservere";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "En VPN vil blive oprettet";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN er forpligtet til at oprette brugerdefinerede DNS-indstillinger. Den oprettede VPN er lokal, hvilket betyder, at din trafik ikke bliver ledt gennem nogen servere.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Ingen server valgt";
@@ -326,8 +276,95 @@
 /* purchase secription format */
 "purchase_description_format" = "AdGuard Premium er en årlig betalt service med en abonnementspris på $2,99/år (prisen kan variere efter land). Betaling vil blive opkrævet fra din iTunes-konto ved købsbekræftelse. Abonnementet fornyes automatisk, medmindre autofornyelse er deaktiveret mindst 24 timer inden udgangen af den aktuelle periode. Kontoen vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Dine abonnementer kan administreres, og din automatiske fornyelse kan slåes fra ved at gå til dine iTunes-kontoindstillinger efter at have købt et abonnement.<br><br><a href=%1$@>Privatlivspolitik</a> <br><br><a href=%2$@>Vilkår for Brug</a>";
 
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "OK";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Privatlivspolitik";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "En VPN vil blive oprettet";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "VPN kræves for at kunne oprette brugerdefinerede DNS-indstillinger. Den oprettede VPN er lokal, hvilket betyder, at din trafik ikke vil blive ledt gennem nogen servere.\nVi indsamler ikke nogen data, når du bruger denne VPN-profil.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Vent venligst...";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Jeg har lige installeret AdGuard ad blocker til iOS.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Hvis du vil surfe på internettet annoncefri, som jeg gør, skal du tjekke det ud:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Andre";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Avanceret";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "Gratis prøveperiode for %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Indholdsblockere";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Deaktiveret i Safaris indstillinger";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Søger efter opdateringer...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Grænsen på %1$@ regler er nået. Appen vil muligvis ikke fungere korrekt. Deaktiver venligst de ekstra regler. I øjeblikket bruges %2$@ ud af %3$@ regler: %4$@ regler er deaktiveret.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtre er ikke blevet opdateret";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Denne licens er blevet aktiveret på det maksimale antal enheder.\nDu kan fjerne licenstilknytningen fra ubrugte enheder i din personlige konto på hjemmesiden: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Før du kan bruge denne handlingsudvidelse, skal %1$@ udføre en indledningsvis konfiguration. Start den primære %2$@ app for at lade den gøre det.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Kan ikke sende en besked til supportteamet. Du har ikke konfigureret din e-mailkonto endnu.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Bemærk, at Indholdsblockeren er deaktiveret. Det betyder, at annoncer ikke filtreres uanset AdGuards indstillinger. Aktiver venligst AdGuard Indholdsblocker i indstillingerne i Safari for at starte filtreringen.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Værtsnavnet blev ikke opnået. Måske er siden ikke blevet indlæst endnu.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Websidens sikkerhedspolitik tillader ikke at starte AdGuard Assistent.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Der opstod en uventet fejl under initialisering af Safari handlingsudvidelsen. Kontakt venligst AdGuard Support, hvis dette sker igen.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Advarsel";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Du har overskredet det maksimale antal filterregler.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanent";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Derefter %1$@ per %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "TÆNDT";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "SLUKKET";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Hjemmeside:";
+
+/* (AboutController) current app version string */
+"about_version" = "Version";

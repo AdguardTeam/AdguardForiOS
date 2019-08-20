@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "非預期性的錯誤已發生。請與支援團隊聯繫。";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "在該服務啟動之前，已試圖轉換規則為 JSON。";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "無法轉換規則。非預期性的錯誤已發生。請與支援團隊聯繫。";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "無法轉換使用者過濾器規則。";
 
-
 /* Alert title. On error. */
 "common_error_title" = "錯誤";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和白名單，或更改已使用的過濾器之設定。";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "正在載入過濾器到 Safari。請不要關掉 AdGuard。該過程將不會花費超過 30 秒...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者過濾器";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS 家庭";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS 安全";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "是";
 
@@ -62,35 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "防護被禁用";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "未能恢復購買";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "取得專業版";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "登入";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "登入";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "輸入您的電子郵件地址和密碼";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "電子郵件地址";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "密碼";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "取得訂閱";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "您已輸入之電子郵件地址/密碼為不正確的。";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "注意";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "您已成功地登入您的 AdGuard 帳戶，但沒有允許您啟動該高級版之授權金鑰。";
@@ -100,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "您已成功地登入您的 AdGuard 帳戶，但允許您啟動該高級版之授權金鑰已到期。";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "再次嘗試";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "當試圖恢復該購買時，錯誤已發生。";
@@ -122,34 +82,13 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "自訂的";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "廣告封鎖";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "正在移除社群小工具";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "惱人的事物";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "特定語言的";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "僅高級版";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "僅高級版";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "已啟用過濾器：%d/%d";
 
 /* (GroupsController) Disabled filter group subtitle */
 "filters_group_disabled" = "已禁用";
 
-"filter_date_format" = "過濾器已於 %@ 更新";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "於此輸入您自訂的規則<br>閱讀這個<a href=\"%@\">關於規則語法之說明</a>。";
+"filter_date_format" = "過濾器被更新：%@";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站禁用過濾。";
@@ -158,7 +97,7 @@
 "inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "正在掃描...";
+"update_filter_start_message" = "正在更新…";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "增加規則";
@@ -190,12 +129,6 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "匯出";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "該規則已被加至使用者過濾器中。";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "該網域已被加至白名單中。AdGuard 將不過濾於該網站上之任何事物。";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "報告不正確的封鎖";
 
@@ -204,6 +137,9 @@
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "與支援聯繫";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "匯出記錄";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "無法傳送程式錯誤報告。您可能尚未於您的裝置上設置電子郵件帳號。";
@@ -215,7 +151,7 @@
 "filters_noUpdates" = "無已發現的更新";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "過濾器已更新：%lu";
+"filters_updated_format" = "已更新的過濾器：%lu";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "版本 %@";
@@ -234,58 +170,72 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS 是一種保護您的隱私免於不同的計數器、分析的系統及網路釣魚的網站之替代的方式";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + 安全搜尋和成人內容封鎖";
+
 /* Google DNS server description */
-"google_dns_description" = "透過 Google 之免費替代的 DNS 服務";
+"google_dns_description" = "由 Google 提供之免費替代的 DNS 服務";
+
 /* Open DNS server description */
 "open_dns_description" = "保護您的裝置免於線上威脅之 DNS 伺服器";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "有成人內容封鎖的 OpenDNS 伺服器";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "有免於網路釣魚和間諜軟體的防護之免費替代的 DNS 服務";
+
 /* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "透過 Cloudflare 之免費的 DNS 服務";
+"cloudflare_public_dns_description" = "由 Cloudflare 提供之免費的 DNS 服務";
+
 /* Safe DNS server description */
-"safe_dns_description" = "透過 SafeDNS 之 DNS 服務";
+"safe_dns_description" = "由 SafeDNS 提供之 DNS 服務";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "加密";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "安全性";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "成人內容封鎖";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "無記錄政策";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "安全搜尋";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "廣告封鎖";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "不讓第三方監視您的瀏覽活動";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "封鎖已知的網路釣魚和其它危險的網域";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "封鎖有成人內容之網站";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "不儲存您的 DNS 查詢記錄";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "無論何時盡可能，安全搜尋在瀏覽器中被強制執行";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "封鎖廣告和追蹤伺服器";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "VPN 將被創建";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "為了設置自訂的 DNS 設定，VPN 是必須的。該被創建的 VPN 為本機的，這表示您的流量將不被路由通過任何的伺服器。";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "無已選擇的伺服器";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "從 %2$d 當中，已啟用 %1$d";
+"filters_description_format" = "已啟用 %2$d 當中的 %1$d";
 
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "已被複製到剪貼簿";
+"text_copied" = "被拷貝到剪貼板";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "一般的";
@@ -339,10 +289,82 @@
 "vpn_confirm_message" = "為了設置自訂的 DNS 設定，VPN 是必須的。該被創建的 VPN 為本機的，這表示您的流量將不被路由通過任何的伺服器。\n當您使用此 VPN 設定檔時，我們不收集任何的資料。";
 
 /* this message is shown during the login on the license screen */
-"loading_message" = "請稍候...";
+"loading_message" = "請稍候…";
 
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "我剛已為 iOS 安裝 AdGuard 廣告封鎖器。";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "如果您想要如我瀏覽無廣告的網路，購買它：";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "主題";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "其它的";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "進階的";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "計 %@ 之免費的試用";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "內容阻擋器";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "在 Safari 設定裡被禁用";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "正在檢查更新…";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "%1$@ 規則的限制被達到。該應用程式可能無法正常地運作。請禁用額外的規則。目前 %3$@ 規則當中的 %2$@ 規則正被使用；%4$@ 規則被禁用。";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "過濾器尚未被更新";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "此授權已被啟動處於裝置之最大數量的狀態。\n您可於網站：adguard.com 上在您個人的帳戶中由未使用的裝置解除綁定此授權";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "無法傳送訊息給支援團隊。您尚未配置您的電子郵件帳號。";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "注意，內容阻擋器被禁用。那表示不管 AdGuard 設定如何，廣告將不被過濾。請在 Safari 設定中啟用 AdGuard 內容阻擋器以開始過濾。";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "該主機名稱未被獲得。也許該頁面尚未被載入。";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "該網站的安全性政策不允許發動 AdGuard 助理。";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "當初始 Safari 動作延伸功能時，非預期性的錯誤已發生。如果這個再次發生，請與 AdGuard 支援聯繫。";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "警告";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "您已超出過濾器規則之最大數量。";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "永久的";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "然後每 %2$@ %1$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "開著";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "關著";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "首頁：";
+
+/* (AboutController) current app version string */
+"about_version" = "版本";

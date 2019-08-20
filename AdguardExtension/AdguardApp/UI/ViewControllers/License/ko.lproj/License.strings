@@ -1,2 +1,38 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
-"0Zf-Ng-gYi.title" = "AdGuard Premium";
+"0Zf-Ng-gYi.title" = "AdGuard 프리미엄";
+
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "DNS 보호";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "로그아웃";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
+"7Sy-Te-Eh3.text" = "이미 구독하셨습니다";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "나만의 규칙을 설정하기";
+
+/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
+"K5r-9l-kKl.text" = "라이선스를 가지고 있습니다";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "피싱을 포함한 다른 위협들을 차단";
+
+/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
+"ZMu-UP-PI3.text" = "당신의 개인 정보의 중요함";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "구매 내역 복구";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "시큐리티 필터";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "사용자 정의 필터";
+
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "무료로 프리미엄 기능들을 살펴보세요";

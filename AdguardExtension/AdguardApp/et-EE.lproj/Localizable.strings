@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Ilmnes viga. Pöördu meie tehnilise toe poole.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Üritati konventeerida reegleid JSON'iks, aga teenus ei töötanud.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Reegleid ei õnnestu konventeerida. Ilmnes ootamatu viga. Kontakteeru meie tugiteenusega. ";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Kasutaja reegleid ei õnnestu konvertida. Ühes reeglis on viga. Vaata üle reegel, mis jääb praeguse kursori positsiooni juurde.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Viga";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtreid ei õnnestu Safarisse laadida. Proovi oma reegleid ja valget listi puhastada. Lisaks vaata üle kasutatavad filtrid.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Filtrite laadimine Safarisse. Palun ära sulge AdGuardi. See protsess võtab umbes 30 sekundit...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "EI";
@@ -46,24 +37,109 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kasutaja filter";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "JAh";
 
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Kaitse on sisselülitatud";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Kaitse on peatatud";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Uus tellimus";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "Premium konto on aegunud";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Tähelepanu";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "Oled edukalt oma AdGuardi kontosse loginud. Siiski ei leia me sinu kontolt ühtegi litsentsivõtit, millega preemium versiooni aktiveerida.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "Oled edukalt oma AdGuardi kontosse loginud! AdGuard for iOS preemium versioon on nüüd aktiveeritud.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "Oled edukalt oma AdGuardi kontosse loginud. Küll aga on kontoga seotud võti aegunud ning sellega ei saa preemium versiooni aktiveerida.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "Ostu taastamisel ilmnes viga.";
+
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Sinu litsents on taastatud! AdGuard for iOS preemium versioon on nüüd aktiveeritud.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "Pole oste, mida taastada";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Oled edukalt meie toote ostnud! AdGuard for iOS Preemium versioon on nüüd aktiveeritud.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "Ostu töötlemisel ilmes viga.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "Kohandatud";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "Lubatud filtrid: %d / %d";
+
+/* (GroupsController) Disabled filter group subtitle */
+"filters_group_disabled" = "Väljalülitatud";
+
+"filter_date_format" = "Uuendatud filtrid: %@";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Sisesta domeeni nimed siia. AdGuard ei filtreeri Safaris nende lehekülgede sisu.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "Sisesta domeeni nimed siia. AdGuard filtreerib Safaris ainult nende lehekülgede sisu.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Uuendamine...";
+
+/* (UserFilterController) add blacklist rule button title */
+"add_blacklist_rule_title" = "Lisa reegel";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Lisa domeen";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||example.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "Reegel:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "Domeen:";
+
+/* (UserFilterController) import whitelist button title */
+"import_whitelist_title" = "Impordi";
+
+/* (UserFilterController) import blacklist button title */
+"import_blacklist_title" = "Impordi";
+
+/* (UserFilterController) export whitelist button title */
+"export_whitelist_title" = "Ekspordi";
+
+/* (UserFilterController) export blacklist button title */
+"export_blacklist_title" = "Ekspordi";
+
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Vale blokeering / Blokkimata reklaam";
+"incorrect_blocking_report" = "Teavita valest blokeeringust";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Vearaport";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "Kontakteeru tehnilise toega";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Ekspordi logid";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Ei saa vearaportit saata, kuna eeldatavasti pole seadmes e-posti ülesse seatud.";
@@ -74,20 +150,221 @@
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "Uuendusi ei leitud";
 
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "uuendatud filtrid: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "versioon %@";
+
+/* (FiltersController) Filter update date format */
+"filter_last_update_format" = "uuendatud %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "Split-Tunnel, ühildub “Personaalsete VPN” rakendustega";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "Full-Tunnel, ei ühildu teiste VPN rakendustega";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (ilma VPN ikoonita), ei ühildu teiste VPN äppidega, ebastabiilsem";
+
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokeerib reklaami, jälitajaid ja õngevõtmise veebilehti";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "blokeerib kõik ülaltoodu + täiskasvanu sisu";
+
 /* Google DNS server description */
 "google_dns_description" = "Globaalne DNS teenus Google'ilt";
+
 /* Open DNS server description */
 "open_dns_description" = "valikuline filtreerimine ning identiteedivarguse kaitse";
 
+/* Open Family DNS server description */
+"open_dns_familyshield_description" = "OpenDNS server koos täiskasvanutele sisu blokeerimisega";
+
+/* Quad9 DNS server description */
+"quad_nine_dns_description" = "Tasuta alternatiivne DNS teenus, mis kaitseb õngevõtmise ja nuhkvara vastu";
+
+/* Cloudfare DNS server description */
+"cloudflare_public_dns_description" = "Tasuta DNS teenus Cloudflare'lt";
+
+/* Safe DNS server description */
+"safe_dns_description" = "DNS teenus SafeDNS'ilt";
+
+/* Dns Feature Name */
+"dns_provider_encryption_tag" = "Krüpteering";
+
+/* Dns Feature Name */
+"dns_provider_secure_tag" = "Turvalisus";
+
+/* Dns Feature Name */
+"dns_provider_adult_tag" = "Täiskasvanute sisu blokeerimine";
+
+/* Dns Feature Name */
+"dns_provider_no_logs_tag" = "Logisid ei talletata";
+
+/* Dns Feature Name */
+"dns_provider_safe_search_tag" = "Turvaline otsing";
+
+/* Dns Feature Name */
+"dns_provider_ad_blocking_tag" = "Reklaami blokeerimine";
+
+/* Dns Feature description */
+"dns_provider_encryption_summary" = "Ei lase kolmandatel osapooltel sinu interneti sirvimise ajaloos tuhnida";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "Blokeerib õngevõtmist ja teisi ohtlikke veebilehti";
+
+/* Dns Feature description */
+"dns_provider_adult_summary" = "Blokeerin täiskasvanutele mõeldud lehti";
+
+/* Dns Feature description */
+"dns_provider_no_logs_summary" = "Ei säilita sinu DNS päringute logi";
+
+/* Dns Feature description */
+"dns_provider_safe_search_summary" = "Kui võimalik, jõustatakse brauserites Turvalist otsingut";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Blokeerib reklaame ja jälitajaid";
+
+/* MainMenuController - dns privacy menu description */
+"no_dns_server_selected" = "Serverit pole valitud";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "Sisselülitatud %1$d & %2$d -st";
+
+/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
+"text_copied" = "Kopeeritud lõikelauale";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Tavaline";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-üle-HTTPS-i";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-üle-TLS-i";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "Soovid kindlasti välja logida?";
+
+/* GetProController - subscription period day */
+"day_period" = "päev";
+
+/* GetProController - subscription period week */
+"week_period" = "nädal";
+
+/* GetProController - subscription period month */
+"month_period" = "kuu";
+
+/* GetProController - subscription period year */
+"year_period" = "aasta";
+
+/* GetProController - subscription period year */
+"period_format" = "%1$d %2$@";
+
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPNi konfigureerimisel ilmnes probleem. Võta meie tehnilise toega ühendust.";
+
+/* login error message */
+"login_error_message" = "Sisselogimisel ilmnes viga";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium on tasuline, aasta kaupa makstav teenus, mille hind on $2.99/aasta (hind võib olenevalt regioonist erineda). Makse lisatakse pärast tellimuse kinnitamist iTunes kontole. Tellimust uuendatakse iga aasta automaatselt. Seda välja arvatud juhul, kui automaatne tellimuse pikendamine on vähemalt 24 tundi enne selle toimumist tühistatud. Makse toimub läbi iTunesi konto 24 tunni jooksul enne käimasoleva perioodi lõppu. Pärast ostu saab tellimust ning automaatset pikendust hallata läbi oma iTunes konto seadete.<br><br><a href=%1$@>Privaatsuspoliitika</a> <br><br><a href=%2$@>Kasutustingimused</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "OK";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Privaatsuspoliitika";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Luuakse VPN ühendus";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "Kohandatud DNS serveri kasutamiseks on vaja VPN-i. Loodud VPN on lokaalne, mistõttu ei suunata liiklust läbi ühegi serveri. Kinnitame, et ei kogu mistahes andmeid ajal, mil VPN profiil on sisselülitatud.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Palun oota...";
 
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Installisin just iOS'ile mõeldud AdGuardi reklaamiblokeerija.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Kui tahad sama reklaamivabalt surfata, vaata seda:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Teema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Muu";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Edasijõudnule";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "Tasuta prooviperiood %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Sisu blokeerijad";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Safari seadetes väljalülitatud";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Uuenduste otsimine...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Reeglite limiit %1$@ on saavutatud. Rakendus ei pruugi korrektselt töötada. Palun lülita lisareeglid välja. Praegu on kasutusel %2$@ / %3$@ reeglist; %4$@ reeglit on väljalülitatud.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtreid ei uuendatud";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "See litsents on aktiveeritud maksimaalses arvus seadmetes.\nSoovi korral saad mittekasutatavast seadmest litsentsi eemaldada. Saad seda teha oma AdGuardi kontol, külastades veebilehte: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Enne, kui seda lisa kasutada saad, peab %1$@ sooritama esmase konfigureerimise. Käivita %2$@ põhiline äpp ja lase see ära teha.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Tugiteenusele ei saa sõnumit saata, sest e-posti konto pole üles seatud.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Pane tähele, et Sisu blokeerija on väljas. See tähendab, et reklaame ei filtreerita (olenemata AdGuardi seadistustest). Filtreerimise võimaldamiseks lülita palun Safari seadetes AdGuardi Sisu blokeerija sisse.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Hosti nime ei suudeta hankida. Ehk pole lehekülg veel täielikult laaditud.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Selle lehe turvapoliitika ei luba AdGuardi abimehel käivituda.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Ilmnes ootamatu viga Safari tegevuslisa käivitamisel. Kui see juhtub veel, siis palun kontakteeru AdGuardi tugiteenusega.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Hoiatus";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Oled ületanud maksimum arvu filtrite reegleid.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Alatine";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Seejärel %1$@ / %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "SEES";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "VÄLJAS";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Koduleht:";
+
+/* (AboutController) current app version string */
+"about_version" = "Versioon";

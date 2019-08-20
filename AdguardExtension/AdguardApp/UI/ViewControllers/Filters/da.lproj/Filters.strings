@@ -1,20 +1,17 @@
-/* Class = "UILabel"; text = "Overwrite existing"; ObjectID = "0Qe-BO-Cvv"; Note = "(Add Custom Filter) overwrite checkbox hint"; */
-"0Qe-BO-Cvv.text" = "Overskriv eksisterende";
-
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
 "2wy-vg-qvr.text" = "Tilføj et filter";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "Tilføj et filter";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dej-iC-mAk"; Note = "(CustomFilterInfoInfoController) cancel button"; */
-"Dej-iC-mAk.normalTitle" = "ANNULLER";
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
+"Cyn-cw-Zrm.text" = "Navn:";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
 "E3e-Mc-RhD.title" = "Filtre";
 
-/* Class = "UILabel"; text = "Homepage:"; ObjectID = "N6y-E3-e9F"; Note = "(Edit Custom Filter) homapage caption"; */
-"N6y-E3-e9F.text" = "Hjemmeside:";
+/* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
+"NsT-wt-1hd.text" = "Nyt brugerdefineret filter";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "ANNULLER";
@@ -22,20 +19,29 @@
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Antal regler: ";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Yyf-bK-igr"; */
-"Yyf-bK-igr.normalTitle" = "SLET";
+/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
+"UR2-d4-zYf.text" = "Opdateret";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
+"Ve5-DF-RNB.text" = "Hjemmeside";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "Filter URL:";
 
-/* Class = "UILabel"; text = "Your custom filters are here."; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Dine brugerdefinerede filtre er her.";
+/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
+"cTI-39-Vwx.text" = "Version";
+
+/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Brug dine brugerdefinerede filtre her";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
+"gbf-TL-LXR.title" = "Filtre";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "TILFØJ";
 
-/* Class = "UILabel"; text = "Homepage:"; ObjectID = "kU0-S1-WIL"; Note = "(New Custom Filter) homapage caption"; */
-"kU0-S1-WIL.text" = "Hjemmeside:";
+/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
+"kab-Sc-THo.text" = "Version";
 
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
 "lFg-x8-C9b.normalTitle" = "Få Premium";
@@ -43,8 +49,23 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ANNULLER";
 
-/* Class = "UIButton"; normalTitle = "CONTINUE"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "FORTSÆT";
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
+"mXe-eu-cfH.normalTitle" = "SLET";
 
-/* Class = "UILabel"; text = "Rules count: "; ObjectID = "tTY-kJ-YFX"; Note = "(Edit Custom Filter) rules count caption"; */
-"tTY-kJ-YFX.text" = "Antal regler: ";
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "NÆSTE";
+
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "Hjemmeside: ";
+
+/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
+"wzJ-ge-NyI.text" = "Antal regler:";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
+"x93-x6-7Fw.text" = "Dato";
+
+/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
+"xS8-f2-3yC.text" = "Filternavn";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Indtast filternavn:";

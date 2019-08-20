@@ -7,9 +7,6 @@
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
 "Znm-Yl-fWN.text" = "点击此处以使用移除楼拦截的广告或您不想要在页面上看到的常规元素的工具。";
 
-/* Class = "UILabel"; text = "Loading..."; ObjectID = "cCa-IO-BlQ"; */
-"cCa-IO-BlQ.text" = "加载中...\n\n\n";
-
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "在此页上启用";
 
