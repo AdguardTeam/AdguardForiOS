@@ -81,6 +81,7 @@ class ContentBlocker: ContentBlockerStateProtocol {
             
             if returnString.count > 0{
                 returnString.removeLast(1)
+                returnString = ACLocalizedString("content_blocker_filters", nil) + "\n" + returnString
             }
             return returnString
         }
