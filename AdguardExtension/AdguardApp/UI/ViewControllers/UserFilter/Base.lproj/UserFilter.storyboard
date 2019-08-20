@@ -71,7 +71,7 @@
                                 </connections>
                             </textView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyc-Ez-Dak" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="194" width="414" height="0.0"/>
+                                <rect key="frame" x="24" y="194" width="366" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="trailing" secondItem="w7v-GH-btE" secondAttribute="trailing" id="0Ol-Ch-QuR"/>
                             <constraint firstItem="pyc-Ez-Dak" firstAttribute="top" secondItem="E1l-ms-0lE" secondAttribute="top" constant="150" id="6CV-OU-9tT"/>
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="trailing" secondItem="hZA-R9-iCe" secondAttribute="trailing" id="7Fs-ht-scN"/>
-                            <constraint firstItem="pyc-Ez-Dak" firstAttribute="leading" secondItem="E1l-ms-0lE" secondAttribute="leading" id="BEq-hk-bJa"/>
+                            <constraint firstItem="pyc-Ez-Dak" firstAttribute="leading" secondItem="E1l-ms-0lE" secondAttribute="leading" constant="24" id="BEq-hk-bJa"/>
                             <constraint firstItem="hZA-R9-iCe" firstAttribute="leading" secondItem="E1l-ms-0lE" secondAttribute="leading" id="IVp-s3-agb"/>
                             <constraint firstItem="w7v-GH-btE" firstAttribute="leading" secondItem="E1l-ms-0lE" secondAttribute="leading" id="N0X-mn-nBY"/>
                             <constraint firstItem="i7b-H1-GYN" firstAttribute="leading" secondItem="E1l-ms-0lE" secondAttribute="leading" id="UNy-Wn-6qn"/>
@@ -93,7 +93,7 @@
                             <constraint firstItem="w7v-GH-btE" firstAttribute="top" secondItem="i7b-H1-GYN" secondAttribute="bottom" id="XCc-Nm-Ay3"/>
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="bottom" secondItem="hZA-R9-iCe" secondAttribute="bottom" constant="40" id="dqQ-kF-GQZ"/>
                             <constraint firstItem="pyc-Ez-Dak" firstAttribute="centerX" secondItem="E1l-ms-0lE" secondAttribute="centerX" id="h0t-Cl-J2q"/>
-                            <constraint firstItem="E1l-ms-0lE" firstAttribute="trailing" secondItem="pyc-Ez-Dak" secondAttribute="trailing" id="mTw-r3-vRD"/>
+                            <constraint firstItem="E1l-ms-0lE" firstAttribute="trailing" secondItem="pyc-Ez-Dak" secondAttribute="trailing" constant="24" id="mTw-r3-vRD"/>
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="top" secondItem="hZA-R9-iCe" secondAttribute="top" id="ma8-JY-Dp2"/>
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="bottom" secondItem="w7v-GH-btE" secondAttribute="bottom" constant="-40" id="qkD-K2-9QH"/>
                             <constraint firstItem="E1l-ms-0lE" firstAttribute="trailing" secondItem="i7b-H1-GYN" secondAttribute="trailing" id="vNj-KA-nJg"/>
