@@ -206,7 +206,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             if isCustomEditing {
                 if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
                     toggleCellSelection(cell: cell, rule: rule)
-                    tableView.deselectRow(at: indexPath, animated: true)
                 }
             }
             else {
@@ -215,6 +214,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - searchbar delegate methods
