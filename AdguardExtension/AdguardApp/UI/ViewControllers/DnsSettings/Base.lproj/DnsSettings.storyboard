@@ -1204,24 +1204,12 @@
                         <viewLayoutGuide key="safeArea" id="nMy-ss-FYc"/>
                     </view>
                     <connections>
-                        <outlet property="barButtonUseServer" destination="lAE-IK-Pyv" id="Q9q-yS-f7U"/>
                         <outlet property="buttonView" destination="snA-Zs-KK1" id="VaF-PC-yLS"/>
                         <outlet property="separator" destination="hZp-L2-ceH" id="mao-9B-T8a"/>
                         <outlet property="topSeparator" destination="W3S-O7-hnb" id="P54-cG-y9Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Kz-BC-zFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lAE-IK-Pyv" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="Select this server">
-                        <color key="titleColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="useServerAction:" destination="6wJ-yl-17c" eventType="touchUpInside" id="yB4-sb-yzp"/>
-                    </connections>
-                </button>
             </objects>
             <point key="canvasLocation" x="2303" y="-13"/>
         </scene>
@@ -1239,20 +1227,20 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="i5P-kp-fK8">
-                            <rect key="frame" x="0.0" y="281" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="305" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="headerCell" id="2O3-wj-hG7" customClass="DnsProviderHeaderCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="99"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="123"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2O3-wj-hG7" id="wFP-w6-PSb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="123"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_about_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RU3-RA-9vM" customClass="ThemeableImageView" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="25" y="5" width="312" height="56"/>
+                                            <rect key="frame" x="51" y="21" width="312" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="312" id="NdZ-LP-WDf"/>
                                                 <constraint firstAttribute="height" constant="56" id="YyX-h2-eA8"/>
@@ -1262,8 +1250,8 @@
                                                 <userDefinedRuntimeAttribute type="image" keyPath="darkThemeImage" value="ic_about_logo_white"/>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7c-RK-yzZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="83" width="366" height="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7c-RK-yzZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="91" width="366" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1273,11 +1261,11 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="RU3-RA-9vM" firstAttribute="leading" secondItem="wFP-w6-PSb" secondAttribute="leading" constant="25" id="1dj-4C-EMi"/>
-                                        <constraint firstItem="s7c-RK-yzZ" firstAttribute="top" secondItem="RU3-RA-9vM" secondAttribute="bottom" constant="22" id="7o4-fb-Jgg"/>
-                                        <constraint firstItem="RU3-RA-9vM" firstAttribute="top" secondItem="wFP-w6-PSb" secondAttribute="top" constant="5" id="Bek-49-opN"/>
-                                        <constraint firstAttribute="bottom" secondItem="s7c-RK-yzZ" secondAttribute="bottom" constant="16" id="VWa-R5-CXY"/>
+                                        <constraint firstItem="s7c-RK-yzZ" firstAttribute="top" secondItem="RU3-RA-9vM" secondAttribute="bottom" constant="14" id="7o4-fb-Jgg"/>
+                                        <constraint firstItem="RU3-RA-9vM" firstAttribute="top" secondItem="wFP-w6-PSb" secondAttribute="top" constant="21" id="Bek-49-opN"/>
+                                        <constraint firstAttribute="bottom" secondItem="s7c-RK-yzZ" secondAttribute="bottom" constant="32" id="VWa-R5-CXY"/>
                                         <constraint firstAttribute="trailing" secondItem="s7c-RK-yzZ" secondAttribute="trailing" constant="24" id="g4i-JK-7PD"/>
+                                        <constraint firstItem="RU3-RA-9vM" firstAttribute="centerX" secondItem="wFP-w6-PSb" secondAttribute="centerX" id="sis-8Q-K7g"/>
                                         <constraint firstItem="s7c-RK-yzZ" firstAttribute="leading" secondItem="wFP-w6-PSb" secondAttribute="leading" constant="24" id="ysa-o2-EXN"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -1288,7 +1276,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="serverCell" id="nz3-ke-sDs" customClass="DnsProviderServerCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="127" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="151" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nz3-ke-sDs" id="5jj-38-qlF">
                                     <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
@@ -1341,7 +1329,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="websiteCell" id="ElP-5v-R4u" customClass="DnsProviderWebsiteCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="171" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="195" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ElP-5v-R4u" id="RJ5-HM-vxE">
                                     <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
@@ -1381,7 +1369,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="featureCell" id="E4J-Fh-hGm" customClass="DnsFeatureCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="215" width="414" height="38"/>
+                                <rect key="frame" x="0.0" y="239" width="414" height="38"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E4J-Fh-hGm" id="ZcZ-0e-GBl">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="38"/>

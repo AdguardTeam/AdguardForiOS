@@ -27,7 +27,6 @@ class DnsProviderContainerController : UIViewController {
     
     // MARK: - IB Outlets
 
-    @IBOutlet var barButtonUseServer: RoundRectButton!
     @IBOutlet weak var separator: UIView!
     @IBOutlet weak var topSeparator: UIView!
     @IBOutlet weak var buttonView: UIView!
@@ -49,13 +48,6 @@ class DnsProviderContainerController : UIViewController {
         }
         
         if provider == nil { return }
-        
-        if vpnManager.isActiveProvider(provider!) {
-            buttonView.isHidden = true
-        }
-        else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: barButtonUseServer)
-        }
         
         navigationItem.title = provider?.name
         
