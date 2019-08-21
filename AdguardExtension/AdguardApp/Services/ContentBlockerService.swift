@@ -27,6 +27,8 @@ protocol ContentBlockerServiceProtocol {
      recompile all content blocker files and reloads it to safari
     */
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void)
+    
+    func validateRule(_ ruleText: String)->Bool
 }
 
 @objc
@@ -107,6 +109,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
 #endif
             })
         }
+    }
+    
+    func validateRule(_ ruleText: String) -> Bool {
+        return AERDomainFilterRule.isValidRuleText(ruleText)
     }
 
     // MARK: - whitelist operations
@@ -225,7 +231,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             return (resultRules, found)
         }, processData: { (jsonData, ruleData, _) in
             
-            let (convertResult, _) = self.convertOneRule(newRule, optimize: false)
+            let (convertResult, _) = self.convertOneRule(newRule)
             
             guard let jsonNewRule = convertResult![AESFConvertedRulesKey] as? String else {
                 return jsonData
@@ -440,9 +446,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var resultError: Error?
             if rules.count != 0 {
                 let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
-                if error != nil {
-                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-                }
+                resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                 
                 if jsonData != nil { resultData = jsonData! }
                 resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
@@ -544,8 +548,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             sSelf.resources.whitelistContentBlockingRules = (whitelistRules as NSArray).mutableCopy() as? NSMutableArray
             
-            let optimize = sSelf.resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
-            let (convertResult, convertError) = sSelf.convertOneRule(rule, optimize: optimize)
+            let (convertResult, convertError) = sSelf.convertOneRule(rule)
             
             if convertError != nil {
                 error = convertError
@@ -635,7 +638,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             newInvertedObject = AEInvertedWhitelistDomainsObject(domains: domains)
         
             let optimize = sSelf.resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
-            let (newConvertResult, newConvertError) = sSelf.convertOneRule(newInvertedObject!.rule, optimize: optimize)
+            let (newConvertResult, newConvertError) = sSelf.convertOneRule(newInvertedObject!.rule)
             
             if newConvertError != nil {
                 error = newConvertError
@@ -658,7 +661,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var jsonOldRuleData: Data?
             if oldInvertedRule != nil {
                 
-                let (oldConvertResult, oldConvertError) = sSelf.convertOneRule(oldInvertedRule!, optimize: false)
+                let (oldConvertResult, oldConvertError) = sSelf.convertOneRule(oldInvertedRule!)
                 
                 if oldConvertError != nil {
                     error = oldConvertError
@@ -759,8 +762,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                        userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
     }
     
-    func convertOneRule(_ rule: ASDFilterRule, optimize: Bool)->([String: Any]?, Error?) {
+    func convertOneRule(_ rule: ASDFilterRule)->([String: Any]?, Error?) {
         
+        let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
+                    
         var convertResult: [String: Any]?
         
         let (converter, converterError) = createConverter()

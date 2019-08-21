@@ -362,9 +362,15 @@ class UserFilterViewModel: NSObject {
     
     func addWhitelistRule(ruleText: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        
         let domainObject = AEWhitelistDomainObject(domain: ruleText)
+                
+        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
+           errorHandler(ACLocalizedString("rule_converting_error", nil))
+           return
+        }
+        
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+                        
         guard let ruleObject = domainObject?.rule else { return }
         
         let rulesCopy = allRules
@@ -410,11 +416,17 @@ class UserFilterViewModel: NSObject {
             
             var rulesToAdd = [ASDFilterRule]()
             var ruleTextsToAdd = [String]()
-            ruleTexts.forEach({ (ruteText) in
-                let rule = ASDFilterRule(text: ruteText, enabled: true)
+            for ruleText in ruleTexts {
+            
+                if !strongSelf.contentBlockerService.validateRule(ruleText) {
+                   errorHandler(ACLocalizedString("rule_converting_error", nil))
+                   return
+                }
+                let rule = ASDFilterRule(text: ruleText, enabled: true)
+                
                 rulesToAdd.append(rule)
-                ruleTextsToAdd.append(ruteText)
-            })
+                ruleTextsToAdd.append(ruleText)
+            }
             
             if rulesToAdd.count == 0 {
                 
@@ -436,6 +448,13 @@ class UserFilterViewModel: NSObject {
     }
     
     func addInvertedWhitelstRule(ruleText: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void){
+        
+        let domainObject = AEWhitelistDomainObject(domain: ruleText)
+                        
+        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
+           errorHandler(ACLocalizedString("rule_converting_error", nil))
+           return
+        }
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
@@ -503,24 +522,10 @@ class UserFilterViewModel: NSObject {
                 
                 strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
                     
+                    DDLogError("(UserFilterViewModel) Error occured during content blocker reloading.")
+                    // do not rollback changes and do not show any alert to user in this case
+                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                    
-                    if error != nil {
-                        DispatchQueue.main.async {
-                            DDLogError("(UserFilterViewModel) setNewRules failed: \(error!.localizedDescription)")
-                            errorHandler(ACLocalizedString("safari_filters_loading_error", nil))
-                            
-                            // rolback changes
-                            let _ = strongSelf.contentBlockerService.replaceUserFilter(objectsCopy)
-                            strongSelf.willChangeValue(for: \.rules)
-                            strongSelf.allRules = rulesCopy
-                            strongSelf.ruleObjects = objectsCopy
-                            strongSelf.didChangeValue(for: \.rules)
-                        }
-                    }
-                    else {
-                    
-                    }
                 }
             }
         }
@@ -589,6 +594,11 @@ class UserFilterViewModel: NSObject {
     
     func changeBlacklistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
+        if !contentBlockerService.validateRule(text) {
+           errorHandler(ACLocalizedString("rule_converting_error", nil))
+           return
+        }
+        
         let ruleObject = ruleObjects[index]
         let rule = allRules[index]
         
@@ -599,6 +609,13 @@ class UserFilterViewModel: NSObject {
     }
     
     func changeWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+        
+        let domainObject = AEWhitelistDomainObject(domain: text)
+                                
+        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
+           errorHandler(ACLocalizedString("rule_converting_error", nil))
+           return
+        }
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
@@ -623,6 +640,13 @@ class UserFilterViewModel: NSObject {
     
     func changeInvertedWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
+        let domainObject = AEWhitelistDomainObject(domain: text)
+                                        
+        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
+           errorHandler(ACLocalizedString("rule_converting_error", nil))
+           return
+        }
+        
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let domains = allRules
@@ -641,7 +665,10 @@ class UserFilterViewModel: NSObject {
                     self?.didChangeValue(for: \.rules)
                 }
                 else {
-                    errorHandler(error?.localizedDescription ?? "")
+                    DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading.")
+                    // do not rollback changes and do not show any alert to user in this case
+                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    completionHandler()
                 }
                 
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
