@@ -45,7 +45,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private var keyboardMover: KeyboardMover!
     
     var showAlertBlock: (()->Void)?
-    var canShowAlert = false
+    var canShowAlert = true
     
     // MARK: - VC lifecycle
     
