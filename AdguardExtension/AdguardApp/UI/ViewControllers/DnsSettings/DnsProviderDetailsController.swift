@@ -101,7 +101,7 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
                 headerCell.logoHeightConstraint.constant = 0
             }
             else {
-                headerCell.logoHeightConstraint.constant = 31
+                headerCell.logoHeightConstraint.constant = 56.0
                 headerCell.logo.lightThemeImage = logoImage
                 headerCell.logo.darkThemeImage = logoImageDark
             }
