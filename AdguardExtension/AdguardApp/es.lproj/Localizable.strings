@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Ha ocurrido un error inesperado. Por favor, contacta con el equipo de soporte.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Se ha intentado convertir reglas a JSON sin haberse iniciado el servicio.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "No se pueden convertir las reglas ya que ocurrió un error inesperado. Por favor, contacta con el equipo de soporte.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "No se pueden convertir las reglas de filtrado del usuario. Una de las reglas contiene un error. Comprueba la regla junto al cursor.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Error";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Los filtros no se pueden cargar en Safari. Intenta limpiar tus reglas y lista blanca o cambia los filtros usados.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Cargando filtros a Safari. Por favor, no apagues AdGuard, el proceso no llevará más de 30 segundos...";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Filtro del usuario";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "SÍ";
 
@@ -62,32 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "La protección esta desabilitada";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Error al restaurar compras";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Conseguir PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Iniciar sesión";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Iniciar sesión";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Ingrese su correo electrónico y contraseña";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "Direccion de correo electrónico";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Contraseña";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "El correo electrónico/contraseña introducido es incorrecto";
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Obtener suscripción";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "La licencia Premium ha expirado";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Atención";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Ha iniciado sesión correctamente en su cuenta de AdGuard, pero no hay claves de licencia que le permitan activar la versión premium.";
@@ -97,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Ha iniciado sesión correctamente en su cuenta de AdGuard, pero las claves de licencia que le permiten activar la versión premium han caducado.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Volver a intentar";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Se ha producido un error al intentar restaurar la compra.";
@@ -119,24 +82,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Personalizado";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Bloqueo de anuncios";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Eliminar widgets de redes sociales";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Molestias";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Lengua específica";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Solo Premium";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Solo Premium";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Filtros activados: %d/%d";
 
@@ -149,13 +94,19 @@
 "inverted_whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Escaneando...";
+"update_filter_start_message" = "Actualizando...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Agregar una regla";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Agregar un dominio";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||ejemplo.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "ejemplo.org";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Regla: ";
@@ -175,20 +126,11 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Exportar";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "Esta regla fue agregada al filtro del usuario.";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Este dominio fue agregado a la lista blanca. AdGuard no filtrará nada en este sitio web.";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Bloqueo incorrecto / Anuncio no bloqueado";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Informar de un problema";
 
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Soporte técnico";
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Exportar registros";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "No se puede enviar tu informe de errores porque no tienes configurada una cuenta de correo.";
@@ -198,6 +140,9 @@
 
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "No se encontraron actualizaciones";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "filtros actualizados: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versión %@";
@@ -216,49 +161,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "bloquea anuncios, rastreadores y sitios web de suplantación de identidad";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "bloquea todo lo anterior y sitios web para adultos";
+
 /* Google DNS server description */
 "google_dns_description" = "servicio de dns global ofrecido por Google";
+
 /* Open DNS server description */
 "open_dns_description" = "filtrado personalizado y protección contra el robo de identidad";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Servidor OpenDNS con bloqueo de contenido para adultos";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Servicio DNS gratis alternativo con protección de phishing y spyware";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Servicio DNS gratis de Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "Servicio DNS de SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Encriptación";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Seguridad";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Bloqueo de contenido para adultos";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "Norma de no guardar tus datos";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Búsqueda Segura";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Bloqueo de Anuncios";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "No deja a terceros espiar en la actividad de tu navegador";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Bloquea los dominos de phishing";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Bloquea sitios web con contenido para adultos";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "No guarda tus datos DNS";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Siempre que sea posible, Safe Search es activado en los navegadores";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Bloquea anuncios y servidores de rastreo";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "Una VPN será creada";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "Se requiere una VPN para activar ajustes personalizados de DNS. La VPN creada es local, lo que significa que tu tráfico no será mandado por ningún servidor";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Ningún servidor seleccionado";
@@ -269,11 +228,80 @@
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
 "text_copied" = "Copiado al portapapeles";
 
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Regular";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS mediante HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS mediante TLS";
+
+/* GetProController - subscription period day */
+"day_period" = "día";
+
+/* GetProController - subscription period week */
+"week_period" = "semana";
+
+/* GetProController - subscription period month */
+"month_period" = "mes";
+
+/* GetProController - subscription period year */
+"year_period" = "año";
+
+/* GetProController - subscription period year */
+"period_format" = "%1$d %2$@";
+
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "Aceptar";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Política de privacidad";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Por favor espere...";
 
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Acabo de instalar AdGuard para iOS.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Si quieres navegar sin anuncios como yo, echa un vistazo aquí:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Otro";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Avanzado";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "Prueba gratuita por %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Bloqueadores de contenido";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Buscando actualizaciones...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Los filtros no se han actualizado";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Esta licencia se ha activado en la cantidad máxima de dispositivos.\nPuede desvincular la licencia de los dispositivos no utilizados en su cuenta personal en el sitio web: adguard.com";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanente";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Página de inicio:";
+
+/* (AboutController) current app version string */
+"about_version" = "Versión";

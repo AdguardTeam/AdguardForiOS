@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "예기치 못한 오류가 발생하였습니다. 지원 부서에 연락해 주세요.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "서비스가 시작되지 않은 상태에서 규칙을 JSON으로 변환하려 시도하였습니다.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "규칙을 변환할 수 없습니다. 예기치 못한 오류가 발생하였습니다. 지원 부서에 연락해 주세요.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "사용자 필터 규칙을 변환할 수 없습니다. 규칙 중 하나에서 오류가 발생하였습니다. 현재 커서 위치 다음 규칙을 확인하세요.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "오류";
 
@@ -29,26 +25,121 @@
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "사파리에 필터를 로드할 수 없습니다. 사용자 규칙과 화이트리스트 목록을 비우거나, 사용하는 필터를 바꾸어 보세요.";
 
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "사파리에 필터를 로드하고 있습니다. 이 작업은 최대 30초 걸릴 수 있습니다. AdGuard를 종료하지 마세요...";
-
-
 /* NO Button caption in alert */
 "common_action_no" = "아니요";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "예외 목록 (반전)";
+
+/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
+"whitelist_title" = "예외 목록";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 필터";
 
-
 /* YES Button caption in alert */
 "common_action_yes" = "예";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "보호가 활성화 되었습니다.";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "보호가 비활성화 되었습니다.";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "구독 신청";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "주의";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "AdGuard 계정에 성공적으로 로그인 하였으나 프리미엄 버전을 활성화 시킬 수 있는 라이선스 키가 없습니다.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "AdGuard 계정에 성공적으로 로그인하였습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "AdGuard 계정에 성공적으로 로그인 하였으나, 프리미엄 버전을 활성화 할 수 있는 라이선스 키가 만료되었습니다.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "구매 내역을 복구하던 중 오류가 발생하였습니다.";
+
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "구매 내역이 복구되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "복구할 구매 내역이 없습니다";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "구매가 완료되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "구매 도중 오류가 발생하였습니다.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "사용자 정의";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "활성화된 필터: %d / %d";
+
+/* (GroupsController) Disabled filter group subtitle */
+"filters_group_disabled" = "비활성화 됨";
+
+"filter_date_format" = "필터가 업데이트 되었습니다: %@";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서의 필터링을 비활성화할 것입니다.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서만 필터링을 활성화할 것입니다.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "업데이트 중...";
+
+/* (UserFilterController) add blacklist rule button title */
+"add_blacklist_rule_title" = "규칙 추가";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "도메인 추가";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||example.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "규칙:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "도메인:";
+
+/* (UserFilterController) import whitelist button title */
+"import_whitelist_title" = "불러오기";
+
+/* (UserFilterController) import blacklist button title */
+"import_blacklist_title" = "불러오기";
+
+/* (UserFilterController) export whitelist button title */
+"export_whitelist_title" = "내보내기";
+
+/* (UserFilterController) export blacklist button title */
+"export_blacklist_title" = "내보내기";
+
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "옳지 않은 차단 신고";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "버그 제보";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "고객 지원";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "로그 내보내기";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "버그 제보를 전송할 수 없습니다. 귀하의 기기에 이메일이 설정되지 않았기 때문일 수 있습니다.";
@@ -59,20 +150,221 @@
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "업데이트 없음";
 
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "필터가 업데이트 되었습니다: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "버전 %@";
+
+/* (FiltersController) Filter update date format */
+"filter_last_update_format" = "%@ 업데이트 됨";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "분할 터널, \"개인용 VPN\" 어플리케이션과 호환됨";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "전체 터널, 다른 VPN 어플리케이션과 호환되지 않음";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 어플리케이션과 호환되지 않음, 불안정함";
+
 /* Adguard DNS server description */
 "adguard_dns_description" = "광고, 트래커, 피싱 웹사이트 차단";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "성인용 웹사이트도 차단";
+
 /* Google DNS server description */
 "google_dns_description" = "구글이 제공하는 글로벌 DNS 서비스";
+
 /* Open DNS server description */
 "open_dns_description" = "사용자 정의 필터링과 개인 정보 도용 보호";
 
+/* Open Family DNS server description */
+"open_dns_familyshield_description" = "성인 콘텐츠를 차단해주는 OpenDNS 서버";
+
+/* Quad9 DNS server description */
+"quad_nine_dns_description" = "피싱과 스파이웨어로부터 보호해 주는 무료 DNS 서비스 대체재";
+
+/* Cloudfare DNS server description */
+"cloudflare_public_dns_description" = "Cloudflare에 의해 제공된 무료 DNS 서비스";
+
+/* Safe DNS server description */
+"safe_dns_description" = "SafeDNS로부터 제공된 DNS 서비스";
+
+/* Dns Feature Name */
+"dns_provider_encryption_tag" = "암호화";
+
+/* Dns Feature Name */
+"dns_provider_secure_tag" = "보안";
+
+/* Dns Feature Name */
+"dns_provider_adult_tag" = "성인 콘텐츠 차단";
+
+/* Dns Feature Name */
+"dns_provider_no_logs_tag" = "로깅 정책 없음";
+
+/* Dns Feature Name */
+"dns_provider_safe_search_tag" = "세이프서치";
+
+/* Dns Feature Name */
+"dns_provider_ad_blocking_tag" = "광고 차단";
+
+/* Dns Feature description */
+"dns_provider_encryption_summary" = "제 3자가 당신의 브라우징 활동을 몰래 볼 수 있게 하지 마십시오.";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "알려진 피싱 사이트와 위험한 도메인들을 차단합니다";
+
+/* Dns Feature description */
+"dns_provider_adult_summary" = "성인 콘텐츠가 포함된 웹사이트를 차단합니다";
+
+/* Dns Feature description */
+"dns_provider_no_logs_summary" = "사용자의 DNS 쿼리 로그를 저장하지 않습니다.";
+
+/* Dns Feature description */
+"dns_provider_safe_search_summary" = "가능하다면 언제나 세이프 서치를 브라우저에 강제로 적용시킵니다";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "광고와 트래킹 서버를 차단";
+
+/* MainMenuController - dns privacy menu description */
+"no_dns_server_selected" = "지정된 서버 없음";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "%2$d가지 중 %1$d가지가 활성화 됨";
+
+/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
+"text_copied" = "클립보드에 복사되었습니다.";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "일반";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "정말 로그아웃 하시겠습니까?";
+
+/* GetProController - subscription period day */
+"day_period" = "일";
+
+/* GetProController - subscription period week */
+"week_period" = "주";
+
+/* GetProController - subscription period month */
+"month_period" = "달";
+
+/* GetProController - subscription period year */
+"year_period" = "년";
+
+/* GetProController - subscription period year */
+"period_format" = "%1$d %2$@";
+
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPN을 구성하는 도중 문제가 발생했습니다. 고객 지원 부서에 연락해주세요.";
+
+/* login error message */
+"login_error_message" = "로그인 중 오류가 발생했습니다.";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard 프리미엄은 유료 (1년에 $2.99, 지역에 따라 가격이 다를 수 있음) 연간 구독 서비스입니다. 결제는 구입 확인 시 아이튠즈 계정을 통해 이루어집니다. 구독 서비스는 자동 갱신이 비활성화 되지 않는 한 구독 기간이 종료되기 24시간 전에 자동으로 갱신됩니다. 당신은 구독을 관리할 수 있으며, 자동 갱신은 구독 후 아이튠즈 계정 설정에서 비활성화 할 수 있습니다. <br><br><a href=%1$@>개인 정보 처리 방침</a><br><br><a href=%2$@>이용 약관</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "확인";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "개인 정보 처리 방침";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "VPN이 생성됩니다.";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "사용자 정의 DNS 설정을 사용하기 위해서는 VPN이 필요합니다. 생성된 VPN은 현지 지역에 대한 것이며, 귀하의 연결이 어떠한 서버로부터도 전송되지 않을 것을 의미합니다.\n저희는 귀하가 이 VPN 프로필을 사용하고 있을 때 어떠한 데이터도 수집하지 않습니다.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "잠시만 기다려주세요...";
 
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "막 AdGuard 광고차단 앱을 설치했어요.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "저 처럼 인터넷을 광고 없이 즐기려면, 한번 살펴보세요:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "테마";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "기타";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "고급";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "%@ 동안의 무료 체험판";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "콘텐츠 차단기";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "사파리 설정에서 비활성화 됨";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "업데이트 확인 중...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "최대 %1$@가지의 규칙만을 사용하실 수 있습니다. 초과될 경우 앱이 정상적으로 작동하지 않을 수 있습니다. 초과된 규칙들을 비활성화 하십시오. 현재 %3$@가지의 규칙 중 %2$@가지의 규칙이 사용중이며, %4$@가지의 규칙이 비활성화 되어있습니다.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "필터가 업데이트 되지 않았습니다.";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "이 사용권은 최대 활성화 가능 횟수를 초과했습니다.\n당신은 adguard.com 웹사이트의 개인 계정에 로그인한 후 사용하지 않는 디바이스에서 사용권을 회수할 수 있습니다.";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "이 확장 프로그램을 사용하기 위해서는 %1$@가 초기 환경설정을 수행해야 합니다. %2$@ 앱을 실행하여 초기 환경설정을 수행할 수 있도록 하십시오.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "이메일 계정을 설정하지 않아서 지원 팀에게 메시지를 보낼 수 없습니다.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "콘텐츠 차단기가 비활성화 되었습니다. 이는 AdGuard 설정에 상관 없이 광고가 필터링 되지 않을 것을 의미합니다. 사파리 설정에서 AdGuard Content Blocker을 활성화 하여 필터링을 활성화 하십시오.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "호스트 이름을 알 수 없습니다. 페이지가 아직 로딩되지 않았을 수도 있습니다.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "웹사이트의 보안 정책으로 인해 AdGuard Assistant를 실행할 수 없습니다.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "사파리 확장 프로그램을 초기화 하는 중에 예기치 않은 오류가 발생했습니다. 이 문제가 지속될 경우 AdGuard 기술 지원 부서에 연락해 주세요.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "경고";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "필터 규칙의 최대 갯수를 초과했습니다.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "영구";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "%2$@ 하나 당 %1$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "켜기";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "끄기";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "홈페이지:";
+
+/* (AboutController) current app version string */
+"about_version" = "버전";

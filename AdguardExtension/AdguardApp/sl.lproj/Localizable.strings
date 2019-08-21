@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Poskus pretvorbe pravil v JSON pred začetkom storitve.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Pravil ni mogoče pretvoriti. Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Pravil uporabniškega filtrra ni mogoče pretvoriti.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Napaka";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "V Safariju ni mogoče naložiti filtrov. Poskusite izbrisati pravila in seznam dovoljenih ali spremeniti nabor uporabljenih filtrov.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Nalaganje filtrov v Safari. Prosim, ne izklopite AdGuard. Postopek traja največ 30 sekund.";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "NE";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uporabniški filter";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Družina Yandex DNS";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Varen Yandex DNS";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "DA";
 
@@ -62,32 +46,8 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Zaščita je onemogočena";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Nakupov ni bilo mogoče obnoviti ";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Dobite PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Prijava";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Prijava";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Vnesite svoj e-poštni naslov in geslo";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "E-poštni naslov";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Geslo";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Pridobite naročnino";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "E-pošta/geslo, ki ste ju vnesli, sta napačna.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je potekel";
@@ -100,9 +60,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Uspešno ste se prijavili v svoj račun AdGuard, vendar so licenčni ključi, ki omogočajo aktiviranje Premium različice, potekli.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Poskusi ponovno";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Prišlo je do napake pri poskusu obnovitve nakupa.";
@@ -122,24 +79,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Po meri";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Blokiranje oglasov";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Odstranjevanje družbenih pripomočkov";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Nadlegovanje";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Specifično za jezik";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Samo Premium";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Samo Premium";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Omogočeni filtri: %d/%d";
 
@@ -148,17 +87,11 @@
 
 "filter_date_format" = "Posodobljeni filtri: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Tukaj vnesite pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo onemogočil filtriranje v Safariju za te spletne strani.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
-
-/* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Pregled....";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Dodaj pravilo";
@@ -190,20 +123,8 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Izvozi";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "To pravilo je bilo dodano uporabniškemu filtru. ";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Ta domena je bila dodana na seznam dovoljenih. AdGuard ne bo nič filtriral na tej spletni strani.";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Prijavi napačno blokiranje";
-
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Prijavi napako na GitHubu";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Obrni se na podporo";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Poročila o napaki ni mogoče poslati. V napravi morda niste nastavili e-pošte.";
@@ -234,49 +155,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS je nadomestni način za varovanje vaše zasebnosti pred različnimi števci, analitičnimi sistemi in lažnimi spletnimi stranmi";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + Varno iskanje in blokiranje vsebin za odrasle";
+
 /* Google DNS server description */
 "google_dns_description" = "Google brezplačnA alternativna DNS storitev";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS strežnik, ki varuje vašo napravo pred spletnimi grožnjami";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Odprt DNS strežnik z blokiranjem vsebin za odrasle";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Brezplačna alternativna storitev DNS z varovanje pred lažnim predstavljanjem in vohunskimi programi";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Brezplačna DNS storitev podjetja Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS storitev podjetja SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Šifriranje";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Varnost";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Blokiranje vsebin za odrasle";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "Ni politike vodenja dnevnika";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Varno iskanje";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Blokiranje oglasov";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Tretjim stranem ne dovolite, da bi vohunile za vašo dejavnostjo brskanja";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokira znane domene lažnega predstavljanja";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Blokira spletne strani z vsebinami za odrasle";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Ne shranjuje vaših Dnevnikov poizvedb DNS";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Varno iskanje se uveljavlja v brskalnikih, kadarkoli je to mogoče";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokira oglase in sledilne strežnike";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "Ustvarjen bo VPN";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN je potreben za nastavitev nastavitev DNS po meri. Ustvarjen VPN je lokalni, kar pomeni, da vaš promet ne bo preusmerjen prek nobenega strežnika.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Strežnik ni izbran";

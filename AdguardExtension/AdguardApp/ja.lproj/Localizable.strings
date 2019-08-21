@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "予期しないエラーが発生しました。 サポートチームにお問い合わせください。";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "サービスが開始される前にルールをJSONに変換しようとしました。";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "ルールを変換できません。予期しないエラーが発生しました。サポートチームにお問い合わせください。";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "ユーザーフィルタルールを変換できません。";
 
-
 /* Alert title. On error. */
 "common_error_title" = "エラー";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "フィルタをSafariにロードすることができません。 ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりしてみて下さい。";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Safariにフィルタを読み込ませています。 AdGuardをオフにしないでください。本プロセスは30秒以内に終わります。";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "いいえ";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Family";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Safe";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "はい";
 
@@ -62,35 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "保護は無効です。";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "購入を復元できません。";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "PRO版にアップグレード";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "ログイン";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "ログイン";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "メールアドレスとパスワードを入力";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "メールアドレス";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "パスワード";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "サブスクリプションを購入";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "メールアドレスまたはパスワードが間違っています。";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "注意";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "AdGuardアカウントのログインできましたが、プレミアム版のライセンスキーがありません。";
@@ -100,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "AdGuardアカウントのログインできましたが、プレミアム版用のライセンスキーが有効期限切れです。";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "再試行";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "購入を復元中にエラーが発生しました。";
@@ -122,24 +82,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "カスタム";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "広告ブロック";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "SNSボタンをブロック";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "迷惑";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "言語別";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "プレミアム版限定";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "プレミアム版限定";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "有効なフィルタ　%d/%d";
 
@@ -148,9 +90,6 @@
 
 "filter_date_format" = "フィルターアップデート　: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "独自のカスタムルールをここで入力してください<br> <a href=\"%@\">ルール構文に関する通知</a>をお読みください";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "ドメイン名を入力して、そこでの広告ブロックを無効化。";
 
@@ -158,7 +97,7 @@
 "inverted_whitelist_text" = "ドメイン名を入力して、それだけで広告をブロック。";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "スキャン中";
+"update_filter_start_message" = "アップデート中…";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "ルールを追加";
@@ -190,20 +129,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "エクスポート（書き出し）";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "このルールはユーザーフィルタに追加されました。";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "このドメインはホワイトリストに追加されました。AdGuardはこのウェブサイトをフィルタリングしません。";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "不適切なブロックを報告";
+"incorrect_blocking_report" = "不適切なブロックを報告する";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "GitHubでバグを報告";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "サポート・お問合せ";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "ログをエクスポート";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "バグ報告を送信できません。恐らく、あなたのデバイスにEメールが設定されていないことが原因です。";
@@ -234,49 +170,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNSは、さまざまなカウンタ、分析システム、フィッシングWebサイトからあなたのプライバシーを保護するための代替手段です。";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + セーフサーチ + アダルトコンテンツブロック";
+
 /* Google DNS server description */
 "google_dns_description" = "Google提供の無料代替DNSサービス";
+
 /* Open DNS server description */
 "open_dns_description" = "お使いのデバイスをオンライン脅威から保護するDNSサーバー";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "アダルトコンテンツブロッキング搭載のOpenDNSサーバー";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "フィッシングやスパイウェアからの保護付き無料の代替DNSサービス";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Cloudflareによる無料の代替DNSサービス";
+
 /* Safe DNS server description */
 "safe_dns_description" = "SafeDNS提供のDNSサービス";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "暗号化";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "セキュリティ";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "アダルトコンテンツのブロック";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "ログなしポリシー";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "セーフサーチ";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "広告ブロック";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "第三者がブラウジング行為を詮索することを防ぎます";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "既知のフィッシングとその他の危険ドメインをブロック";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "アダルトコンテンツを含むサイトをブロック";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "DNSクエリのログを保存しない";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "可能な限り、セーフサーチはブラウザに適用されます。";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "広告と追跡サーバーをブロック";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "VPNが作成されます";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPNは、カスタムDNS設定をセットアップするために必要です。 作成されたVPNはローカルです。つまり、トラフィックはどのサーバーも経由することはありません。";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "サーバーが選択されていません";
@@ -346,3 +296,75 @@
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "私のように広告ナシでウェブサーフィンしたいのであれば、是非こちらをチェックしてみて下さい：";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "テーマ";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "その他";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "詳細設定";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "%@無料お試し";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "コンテンツブロッカー";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Safari設定でOFFになっています";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "アップデートを確認中...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "ルール数上限%1$@を達成しました。アプリの動作に不具合発生の可能性があります。余分なルールを無効にしてください。現在使用ルール数：%2$@/%3$@（%4$@本無効）";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "フィルタ更新できませんでした。";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "本ライセンスは、アクティブなデバイス数の上限に達しています。\nウェブサイトadguard.comのマイ・アカウントで、未使用のデバイスからライセンスのバインドを解除し、新デバイスにバインドし直すことができます。";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "このアクション拡張機能を使用できる前に、%1$@は初期設定を実行する必要があります。それを許可するには、メイン%2$@アプリを起動してください。";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Eメールアカウントが設定されていないため、サポートチームにメッセージを送信できません。";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "コンテンツブロッカーは無効になっています。広告はAdGuardの設定に関わらず、フィルタリングされません。 フィルタリングを開始するには、Safariの設定でAdGuardコンテンツブロッカーを有効にしてください。";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "ホスト名が取得されていません。ページがまだ読み込まれていない可能性があります。";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "本ウェブサイトのセキュリティポリシーにより、AdGuardアシスタントの起動は許可されていません。";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Safari拡張機能を設定中に予期しないエラーが発生しました。 再度この問題が発生した場合は、AdGuardサポートにお問い合わせください。";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "警告";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "使用可能なフィルタルール数の上限を越えました。";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "永続版";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "試用期間終了後は定額料%1$@/%2$@になります";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ON";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "OFF";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "ホームページ：";
+
+/* (AboutController) current app version string */
+"about_version" = "バージョン";

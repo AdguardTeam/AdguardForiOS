@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Опитахме се да конвертираме правилата за \"JSON\" докато услугата не е стартирана.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Не може да конвертираме правилата. Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
 
@@ -16,7 +13,6 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "не може да се преобразува правилото за филтриране. Текстът на правилото е невалиден.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Грешка";
 
@@ -25,10 +21,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Филтрите не могат да бъдат заредени в Сафари. Опитайте се да изчистите вашите правила и белия списък или променете настройките на използваните филтри.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Зареждане на филтрите в Сафари. Моля не изключвайте AdGuard, операцията ще отнеме не повече от 30 секунди...";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Доклад за грешка";
@@ -44,8 +36,10 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "блокира реклами, тракери и фишинг уебсайтове";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "блокира всичко по-горе и уеб сайтове за възрастни";
+
 /* Open DNS server description */
 "open_dns_description" = "персонализирано филтриране и защита срещу кражба на самоличност";
 

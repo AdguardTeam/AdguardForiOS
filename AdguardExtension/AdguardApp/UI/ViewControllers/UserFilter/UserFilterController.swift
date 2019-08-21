@@ -105,7 +105,8 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         editMode(false)
         
         textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 24, bottom: 16, right: 24)
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16.0, bottom: 16, right: 16.0)
+        textView.textContainer.lineFragmentPadding = 0.0
         
         setupBackButton()
         updateTheme()

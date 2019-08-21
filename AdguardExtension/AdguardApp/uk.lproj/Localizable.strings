@@ -1,9 +1,6 @@
 /* (AEService) The default message for an unknown error. */
 "support_unexpected_error" = "Сталася неочікувана помилка. Будь ласка, зверніться в службу підтримки.";
 
-/* (AEService) Service errors descriptions */
-"rule_converting_message" = "Спроба перетворити правила в формат JSON перед запуском служби.";
-
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Неможливо конвертувати правила. Сталася неочікувана помилка. Будь ласка, зв'яжіться з командою підтримки.";
 
@@ -19,7 +16,6 @@
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Неможливо конвертувати правила користувацького фільтру.";
 
-
 /* Alert title. On error. */
 "common_error_title" = "Помилка";
 
@@ -28,11 +24,6 @@
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити власні правила та білий список, або змінити набір використовуваних фільтрів.";
-
-
-/* (AEUILoadingModal) Standard message when filter conversion is performed. */
-"safari_filters_loading" = "Завантаження фільтрів у Safari. Не вимикайте AdGuard. Процес триватиме не більше 30 секунд.";
-
 
 /* NO Button caption in alert */
 "common_action_no" = "НІ";
@@ -46,13 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Фільтр користувача";
 
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Family. */
-"yandex_dns_family_name" = "Yandex DNS Сімейний";
-
-/* (APVPNManager) PRO version. On the DNS Filtering screen. It is the title of the mode that requires fake VPN and uses Yandex DNS Safe. */
-"yandex_dns_name" = "Yandex DNS Безпечний";
-
-
 /* YES Button caption in alert */
 "common_action_yes" = "ТАК";
 
@@ -62,35 +46,14 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Захист вимкнено";
 
-/* (AEUIGetProControllerViewController) this message showes when restore purchases failed */
-"restore_purchases_failure" = "Не вдалося відновити покупки ";
-
-/* (AEUIMainController) title of get pro button on main screen */
-"get_pro_button_title" = "Отримати PRO";
-
-/* (AEUIGetProViewController) title of login button in login dialog */
-"action_login" = "Увійти";
-
-/* (AEUIGetProViewController) title of login dialog */
-"login_title" = "Увійти";
-
-/* (AEUIGetProViewController) message in login dialog */
-"login_message" = "Введіть адресу е-пошти і пароль";
-
-/* (AEUIGetProViewController) hint for email(name) in login dialog */
-"login_name" = "Е-пошта";
-
-/* (AEUIGetProViewController) hint for password in login dialog */
-"login_password" = "Пароль";
-
-/* (AEUIGetProViewController) upgrade button title */
+/* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Отримати підписку";
-
-/* (AEUIGetProViewController) message is displayed if the user has entered the wrong email */
-"wrong_login_credintals_message" = "Введена е-пошта чи пароль неправильні.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Термін дії Преміум завершився";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Увага";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Ви успішно увійшли до облікового запису AdGuard, але там немає ліцензійних ключів, що дозволяють вам активувати преміум-версію.";
@@ -100,9 +63,6 @@
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "Ви успішно увійшли в обліковий запис AdGuard, але термін дії ліцензійних ключів, що дозволили б активувати преміум-версію, завершився.";
-
-/* (AEUIGetProViewController) try again action title */
-"action_retry_login" = "Спробувати знову";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "При спробі відновити покупки сталася помилка.";
@@ -122,24 +82,6 @@
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Власний";
 
-/* (GroupsController) ads filter group description */
-"ads_group_description" = "Блокування реклами";
-
-/* (GroupsController) social widgets filter group description */
-"social_group_description" = "Вилучення соціальних віджетів";
-
-/* (GroupsController) Annoyances filter group description */
-"annoyances_group_description" = "Подразники";
-
-/* (GroupsController) Language-specific filter group description */
-"language_group_description" = "Для певної мови";
-
-/* (GroupsController) Security filter group description */
-"security_group_description" = "Преміум";
-
-/* (GroupsController) Custom filter group description */
-"custom_group_description" = "Преміум";
-
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Увімкнені фільтри: %d/%d";
 
@@ -148,9 +90,6 @@
 
 "filter_date_format" = "Фільтри оновлено: %@";
 
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Додавайте власні правила тут<br>Прочитайте цю <a href=\"%@\">примітку про синтаксис правил</a>.";
-
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Додавайте домени тут. AdGuard вимкне фільтрування в Safari для цих веб-сайтів.";
 
@@ -158,7 +97,7 @@
 "inverted_whitelist_text" = "Додавайте домени тут. AdGuard увімкне фільтрування в Safari лише для цих веб-сайтів.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Сканування...";
+"update_filter_start_message" = "Оновлення...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Додати правило";
@@ -190,20 +129,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Експорт";
 
-/* (UserFilterController) blacklist rule note, that showed in alert when user chose a rule */
-"blacklist_rule_note" = "Це правило додано до користувацького фільтра.";
-
-/* (UserFilterController) whitelist domain note, that showed in alert when user chose a domain */
-"whitelist_rule_note" = "Цей домен було додано в білий список. AdGuard не фільтруватиме нічого на цьому веб-сайті.";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Повідомити про некоректне блокування";
+"incorrect_blocking_report" = "Звіт про неправильне блокування";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Повідомити про помилку на GitHub";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Зв'язок з підтримкою";
+"action_contact_support" = "Зв'язатися з підтримкою";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Експорт журналів";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Неможливо надіслати звіт про помилку. Схоже, що ви не налаштували електронну пошту.";
@@ -234,49 +170,63 @@
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS - це альтернативний спосіб захисту приватності від різних лічильників, аналітичних систем i шахрайських веб-сайтів";
+
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + безпечний пошук і блокування вмісту для дорослих";
+
 /* Google DNS server description */
 "google_dns_description" = "Безплатний альтернативний сервіс DNS від Google";
+
 /* Open DNS server description */
 "open_dns_description" = "DNS-сервер, що захищає ваш пристрій від онлайн-загроз";
+
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS сервер із блокуванням вмісту для дорослих";
+
 /* Quad9 DNS server description */
 "quad_nine_dns_description" = "Безплатний альтернативний DNS із захистом від шахрайства і зловмисних програм";
+
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Безплатний DNS від Cloudflare";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS від SafeDNS";
+
 /* Dns Feature Name */
 "dns_provider_encryption_tag" = "Шифрування";
+
 /* Dns Feature Name */
 "dns_provider_secure_tag" = "Безпека";
+
 /* Dns Feature Name */
 "dns_provider_adult_tag" = "Блокування вмісту для дорослих";
+
 /* Dns Feature Name */
 "dns_provider_no_logs_tag" = "Не зберігати журнал";
+
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Безпечний пошук";
+
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Блокування реклами";
+
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "Не дозволяє стороннім елементам стежити за вашою діяльністю";
+
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Блокує відомі зловмисні та шахрайські домени";
+
 /* Dns Feature description */
 "dns_provider_adult_summary" = "Блокує веб-сайти з вмістом для дорослих";
+
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Не зберігати журнали ваших DNS-запитів";
+
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Примусовий безпечний пошук в браузерах, коли це можливо";
+
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Блокує рекламу і сервери стеження";
-
-/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_alert_title" = "Буде створено VPN";
-/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_alert_message" = "VPN необхідний для встановлення власних налаштувань DNS. Створений VPN є локальним, отже ваш трафік не передаватиметься через будь-які сервери.";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "Не обрано жодного сервера";
@@ -326,8 +276,95 @@
 /* purchase secription format */
 "purchase_description_format" = "AdGuard Premium - це річна передплата послуги вартістю $2.99 за рік (ціна може залежати від регіону). Платіж буде стягнуто з облікового запису iTunes при підтвердженні покупки. Передплата автоматично поновлюється, доки ви її не скасуєте принаймні за 24 години до завершення поточного періоду. Плату за наступний період буде стягнуто за 24 години до завершення поточного періоду. Ви можете керувати своєю передплатою або скасувати її в налаштуваннях вашого облікового запису iTunes після покупки.<br><br><a href=%1$@>Політика приватності</a> <br><br><a href=%2$@>Умови користування</a>";
 
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "ОК";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Політика приватності";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Буде створено VPN";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "VPN необхідний для встановлення власних налаштувань DNS. Створений VPN є локальним, отже ваш трафік не передаватиметься через будь-які сервери.\nМи не збираємо жодних даних при використанні цього профілю VPN.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Будь ласка, зачекайте...";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Тільки що я встановив блокувальник реклами AdGuard для iOS.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Раджу спробувати:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Тема";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Інші";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Розширені";
+
+/* (LicenseController) format for trial period*/
+"trial_format" = "Безкоштовний пробний період на %@";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Блокувальники вмісту";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Вимкнено в параметрах Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Перевірка оновлень...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Додаток може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Фільтри не були оновлені";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Цю ліцензію було активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з невикористовуваних пристроїв у своєму особистому кабінеті на: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Перед тим, як використовувати це розширення, %1$@ повинен виконати початкову конфігурацію. Відкрийте основний додаток %2$@, щоб дозволити йому зробити це.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Неможливо надіслати повідомлення команді підтримки. Ви ще не налаштували свій обліковий запис електронної пошти.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Зверніть увагу, що блокувальник вмісту вимкнено. Це означає, що реклама не буде фільтруватися незалежно від налаштувань AdGuard. Щоб почати фільтрування, увімкніть блокувальник вмісту для AdGuard в налаштуваннях Safari.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не була завантажена.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Політика безпеки цього сайту не дозволяє запускати помічника AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Сталася неочікувана помилка при ініціалізації розширення Safari. Зв'яжіться зі службою підтримки AdGuard, якщо це повториться.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Попередження";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Ви перевищили обмеження кількості правил фільтрування.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Постійний";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Потім %1$@ за %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "УВІМКНЕНО";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "ВИМКНЕНО";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Домівка:";
+
+/* (AboutController) current app version string */
+"about_version" = "Версія";

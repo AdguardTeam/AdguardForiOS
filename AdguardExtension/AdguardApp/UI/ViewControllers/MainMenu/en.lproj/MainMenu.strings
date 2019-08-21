@@ -16,9 +16,6 @@
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "VQi-XH-gdb"; */
 "VQi-XH-gdb.normalTitle" = "Get Premium";
 
-/* Class = "UILabel"; text = "Choose from a variety of filters"; ObjectID = "YRx-VR-yid"; */
-"YRx-VR-yid.text" = "Choose from a variety of filters";
-
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Settings";
 
@@ -41,4 +38,4 @@
 "xb2-Gf-9h7.text" = "Other settings";
 
 /* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "Add custom filtering rules";
+"zO5-hl-j78.text" = "Contains custom filtering rules";
