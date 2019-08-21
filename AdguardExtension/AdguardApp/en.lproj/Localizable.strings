@@ -327,6 +327,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Content blockers";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filters:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "General settings";
 

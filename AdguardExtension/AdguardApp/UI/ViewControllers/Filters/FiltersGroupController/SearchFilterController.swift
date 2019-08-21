@@ -184,7 +184,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         viewModel?.set(filter: filter, enabled: sender.isOn)
         
         tableView.beginUpdates()
-        tableView.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
+        tableView.reloadRows(at: [IndexPath(row: row, section: section)], with: .none)
         tableView.endUpdates()
     }
     

@@ -38,7 +38,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
 
         
         ruleTextView.text = rule?.rule
-        saveButton.isEnabled = false
         
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)

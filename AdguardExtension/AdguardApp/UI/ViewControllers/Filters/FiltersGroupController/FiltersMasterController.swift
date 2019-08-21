@@ -65,12 +65,14 @@ class FiltersMasterController: UIViewController {
     }
     
     @IBAction func searchButtonTapped(_ sender: Any) {
+        navigationItem.setHidesBackButton(true, animated:true)
         searchDelegate?.searchButtonTapped()
         groupsDelegate?.searchButtonTapped()
         showSearchContainerView()
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        navigationItem.setHidesBackButton(false, animated:true)
         searchDelegate?.cancelButtonTapped()
         groupsDelegate?.cancelButtonTapped()
         showGroupsContainerView()

@@ -135,6 +135,9 @@ extension PurchaseService {
     static let kPSNotificationReadyToPurchase = "kPSNotificationReadyToPurchase"
     static let kPSNotificationPremiumExpired = "kPSNotificationPremiumExpired"
     
+    /// Cancel button tapped notification
+    static let kPSNotificationCanceled = "kPSNotificationCanceled"
+    
     static let kPSNotificationPremiumStatusChanged = "kPSNotificationPremiumStatusChanged"
     
     static let kPSNotificationOauthSucceeded = "kPSNotificationOauthSucceeded"
@@ -525,6 +528,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         var purchased = false
         
         for transaction in transactions {
+            let error = transaction.error as NSError?
+            
             if(transaction.payment.productIdentifier != kRenewableSubscriptionProductID &&
                 transaction.payment.productIdentifier != kNonConsumableProductID) { continue }
             
@@ -533,6 +538,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 break
                 
             case .failed:
+                if error?.code == SKError.paymentCancelled.rawValue {
+                    postNotification(PurchaseService.kPSNotificationCanceled, nil)
+                    break
+                }
                 postNotification(PurchaseService.kPSNotificationPurchaseFailure, transaction.error)
                 
             case .purchased:
@@ -600,6 +609,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        let nsError = error as NSError
+        if nsError.code == SKError.paymentCancelled.rawValue {
+            postNotification(PurchaseService.kPSNotificationCanceled, nil)
+            return
+        }
         postNotification(PurchaseService.kPSNotificationRestorePurchaseFailure, error)
     }
     
