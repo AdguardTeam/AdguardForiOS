@@ -36,6 +36,7 @@ enum RuleType {
 
 class RuleInfo: NSObject {
     var rule: String
+    var attributedString: NSAttributedString?
     var selected: Bool
     var textColor: UIColor!
     var font: UIFont!
@@ -134,6 +135,7 @@ class UserFilterViewModel: NSObject {
         didSet {
             willChangeValue(for: \.rules)
             searchRules = allRules.filter({ (ruleInfo) -> Bool in
+                ruleInfo.attributedString = ruleInfo.rule.lowercased().highlight(search: [searchString?.lowercased()])
                 return ruleInfo.rule.lowercased().contains(searchString?.lowercased())
             })
             didChangeValue(for: \.rules)

@@ -175,7 +175,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RuleCellID") as! RuleCell
             let rule = model!.rules[indexPath.row]
-            cell.ruleLabel.text = rule.rule
+            if rule.attributedString == nil {
+                cell.ruleLabel.text = rule.rule
+            } else {
+                cell.ruleLabel.attributedText = rule.attributedString
+            }
+            
             cell.ruleLabel.textColor = rule.textColor
             cell.ruleLabel.font = rule.font
             
