@@ -376,13 +376,13 @@ def update_xibs():
 
 def print_usage():
     print("Usage:")
-    print("python localization.py command arguments")
+    print("python3 localization.py command arguments")
     print("commands:")
     print(" -e --export - export strings")
     print(" -i --import - import strings")
     print(" -s --generate-strings - generate strings filtes from .xib or .storyboard files")
     print(" -x --update-xibs - update .storyboard or .xib files with strings from .strings files")
-    print("argumants:")
+    print("arguments:")
     print("-l --lang - language for export or import. Can be 'en', 'ru', etc for single locale or 'all' for all locales. Default value is 'en'. NOTE: use '-export -lang all' only if you really understand what you want.")
     print("--dry-run - test only. Do not export/import any files end do not change .strings and .xib files")
 
