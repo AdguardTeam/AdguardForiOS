@@ -267,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Are you sure you want to log out?";
 
-/* GetProController - subscription period day */
-"day_period" = "day";
-
-/* GetProController - subscription period week */
-"week_period" = "week";
-
-/* GetProController - subscription period month */
-"month_period" = "month";
-
-/* GetProController - subscription period year */
-"year_period" = "year";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "There was a problem with VPN configuration, please contact our support team.";
 
@@ -320,9 +305,6 @@
 
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Advanced";
-
-/* (LicenseController) format for trial period*/
-"trial_format" = "Free trial for %@";
 
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Content blockers";

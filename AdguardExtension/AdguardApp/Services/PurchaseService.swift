@@ -20,6 +20,12 @@ import Foundation
 import StoreKit
 import CommonCrypto
 
+typealias Period = (unit: PurchasePeriod, numberOfUnits: Int)
+
+enum PurchasePeriod {
+    case day, week, month, year
+}
+
 // MARK:  service protocol -
 /**
  PurchaseService is a service responsible for all purchases.
@@ -63,12 +69,12 @@ protocol PurchaseServiceProtocol {
     /**
      renewable subscription period
      */
-    var subscriptionPeriod: String {get}
+    var subscriptionPeriod: Period {get}
     
     /**
      trial subscription period
      */
-    var trialPeriod: String {get}
+    var trialPeriod: Period {get}
     
     /*  login on backend server and check license information
         the results will be posted through notification center
@@ -147,7 +153,7 @@ extension PurchaseService {
 }
 
 // MARK: - service implementation -
-class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate{
+class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {
     
     // MARK: constants -
     // store kit constants
@@ -199,6 +205,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
+    private var standartPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
+    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -239,49 +247,48 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return formatter.string(from: product.price) ?? ""
     }
     
-    var subscriptionPeriod: String {
+    var subscriptionPeriod: Period {
         
-        guard let product = self.subscriptionProduct else { return "" }
+        guard let product = self.subscriptionProduct else { return standartPeriod }
         
         if #available(iOS 11.2, *) {
-            return stringForPeriod(product.subscriptionPeriod)
+            return getPeriod(product.subscriptionPeriod)
         } else {
-            return ""
+           return standartPeriod
         }
     }
     
-    var trialPeriod: String {
+    var trialPeriod: Period {
         
-        guard let product = self.subscriptionProduct else { return "" }
+        guard let product = self.subscriptionProduct else { return standartPeriod }
         
         if #available(iOS 11.2, *) {
-            return stringForPeriod(product.introductoryPrice?.subscriptionPeriod)
+            return getPeriod(product.introductoryPrice?.subscriptionPeriod)
         } else {
-            return ""
+            return standartPeriod
         }
     }
     
     @available(iOS 11.2, *)
-    private func stringForPeriod(_ period: SKProductSubscriptionPeriod?)->String {
+    private func getPeriod(_ period: SKProductSubscriptionPeriod?)-> Period {
         
-        guard let periodUnit = period?.unit,
-            let numberOfUnits = period?.numberOfUnits else { return "" }
+        guard let periodUnit = period?.unit else { return standartPeriod }
+        var returnPeriodUnit: PurchasePeriod = .day
         
-        var unitString = ""
         switch periodUnit {
         case .day:
-            unitString = ACLocalizedString("day_period", nil)
+            returnPeriodUnit = .day
         case .week:
-            unitString = ACLocalizedString("week_period", nil)
+            returnPeriodUnit = .week
         case .month:
-            unitString = ACLocalizedString("month_period", nil)
+            returnPeriodUnit = .month
         case .year:
-            unitString = ACLocalizedString("year_period", nil)
+            returnPeriodUnit = .year
         }
         
-        let format = ACLocalizedString("period_format", nil)
+        guard let numberOfUnits = period?.numberOfUnits else { return standartPeriod }
         
-        return String(format: format, numberOfUnits, unitString)
+        return (unit: returnPeriodUnit, numberOfUnits: numberOfUnits)
     }
     
     // MARK: - public methods

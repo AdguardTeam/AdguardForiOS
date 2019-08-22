@@ -27,6 +27,7 @@ class TrialController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     
     private let mobileImage = UIImage(named: "trial-mobile") ?? UIImage()
     private let ipadImage = UIImage(named: "trial-ipad") ?? UIImage()
@@ -38,6 +39,7 @@ class TrialController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        trialLabel.text = getTrialString(period: purchaseService.trialPeriod)
         setupBackButton()
     }
     
@@ -91,5 +93,28 @@ class TrialController: UIViewController {
             tryButton.titleLabel?.font = tryButton.titleLabel?.font.withSize(17.0)
             loginButton.titleLabel?.font = loginButton.titleLabel?.font.withSize(14.0)
         }
+    }
+    
+    private func getTrialString(period: Period) -> String {
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("trial screen days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial screen days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("trial screen weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("trial screen months", nil)
+        case .year:
+            formatString = ACLocalizedString("trial screen years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
+        
+        return resultString
     }
 }
