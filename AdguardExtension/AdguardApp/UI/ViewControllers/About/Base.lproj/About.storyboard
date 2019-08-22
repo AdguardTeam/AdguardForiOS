@@ -146,7 +146,7 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="XdU-fK-afN">
                             <rect key="frame" x="0.0" y="280" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         </view>
                         <sections>
                             <tableViewSection id="y8N-NC-U3D">

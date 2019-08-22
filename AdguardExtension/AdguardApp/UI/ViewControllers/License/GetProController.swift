@@ -36,8 +36,6 @@ class GetProController: UIViewController {
     @IBOutlet var logoutBarButton: UIBarButtonItem!
     @IBOutlet weak var goToMyAccountHeight: NSLayoutConstraint!
     
-    var tableController: GetProTableController?
-    
     // MARK: - constants
     
     private let accountAction = "account"
@@ -136,17 +134,21 @@ class GetProController: UIViewController {
             case PurchaseService.kPSNotificationPurchaseSuccess:
                 self?.purchaseSuccess()
             case PurchaseService.kPSNotificationPurchaseFailure:
+                self?.getProTableController?.enablePurchaseButtons(true)
                 self?.purchaseFailure(error: error)
             case PurchaseService.kPSNotificationRestorePurchaseSuccess:
                 self?.restoreSuccess()
             case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
+                self?.getProTableController?.enablePurchaseButtons(true)
                 self?.nothingToRestore()
             case PurchaseService.kPSNotificationRestorePurchaseFailure:
+                self?.getProTableController?.enablePurchaseButtons(true)
                 self?.restoreFailed(error: error)
             case PurchaseService.kPSNotificationReadyToPurchase:
-                self?.tableController?.enablePurchaseButtons(true)
-                self?.tableController?.setPrice()
-                
+                self?.getProTableController?.enablePurchaseButtons(true)
+                self?.getProTableController?.setPrice()
+            case PurchaseService.kPSNotificationCanceled:
+                self?.getProTableController?.enablePurchaseButtons(true)
             default:
                 break
             }
