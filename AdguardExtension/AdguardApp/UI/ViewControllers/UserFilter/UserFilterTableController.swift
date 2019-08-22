@@ -175,7 +175,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RuleCellID") as! RuleCell
             let rule = model!.rules[indexPath.row]
-            cell.ruleLabel.text = rule.rule
+            if rule.attributedString == nil {
+                cell.ruleLabel.text = rule.rule
+            } else {
+                cell.ruleLabel.attributedText = rule.attributedString
+            }
+            
             cell.ruleLabel.textColor = rule.textColor
             cell.ruleLabel.font = rule.font
             
@@ -206,7 +211,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             if isCustomEditing {
                 if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
                     toggleCellSelection(cell: cell, rule: rule)
-                    tableView.deselectRow(at: indexPath, animated: true)
                 }
             }
             else {
@@ -215,6 +219,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - searchbar delegate methods
