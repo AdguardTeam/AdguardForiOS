@@ -147,7 +147,7 @@ def download_file(file_name, language, format, path):
         return
 
     params = {
-        "filename": path,
+        "filename": file_name,
         "format": format,
         "project": TWOSKY_CONFIG["project_id"],
         "language": language
