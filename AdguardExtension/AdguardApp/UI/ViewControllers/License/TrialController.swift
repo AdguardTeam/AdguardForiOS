@@ -100,17 +100,17 @@ class TrialController: UIViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial screen days", nil)
+            formatString = ACLocalizedString("trial_screen_days", nil)
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial screen days", nil)
+                formatString = ACLocalizedString("trial_screen_days", nil)
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial screen weeks", nil)
+            formatString = ACLocalizedString("trial_screen_weeks", nil)
         case .month:
-            formatString = ACLocalizedString("trial screen months", nil)
+            formatString = ACLocalizedString("trial_screen_months", nil)
         case .year:
-            formatString = ACLocalizedString("trial screen years", nil)
+            formatString = ACLocalizedString("trial_screen_years", nil)
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)

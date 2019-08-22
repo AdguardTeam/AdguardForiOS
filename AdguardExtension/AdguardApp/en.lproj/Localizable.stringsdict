@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>trial screen days</key>
+	<key>trial_screen_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@days@</string>
@@ -18,7 +18,7 @@
 			<string>%d DAYS FREE TRIAL FULL ACCESS</string>
 		</dict>
 	</dict>
-	<key>trial screen weeks</key>
+	<key>trial_screen_weeks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@weeks@</string>
@@ -34,7 +34,7 @@
 			<string>%d WEEKS FREE TRIAL FULL ACCESS</string>
 		</dict>
 	</dict>
-	<key>trial screen months</key>
+	<key>trial_screen_months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@months@</string>
@@ -50,7 +50,7 @@
 			<string>%d MONTHS FREE TRIAL FULL ACCESS</string>
 		</dict>
 	</dict>
-	<key>trial screen years</key>
+	<key>trial_screen_years</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@years@</string>
@@ -66,7 +66,7 @@
 			<string>%d YEARS FREE TRIAL FULL ACCESS</string>
 		</dict>
 	</dict>
-	<key>getPro screen days</key>
+	<key>getPro_screen_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@days@</string>
@@ -82,7 +82,7 @@
 			<string>Start your first %d days free trial.</string>
 		</dict>
 	</dict>
-	<key>getPro screen weeks</key>
+	<key>getPro_screen_weeks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@weeks@</string>
@@ -98,7 +98,7 @@
 			<string>Start your first %d weeks free trial.</string>
 		</dict>
 	</dict>
-	<key>getPro screen months</key>
+	<key>getPro_screen_months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@months@</string>
@@ -114,7 +114,7 @@
 			<string>Start your first %d months free trial.</string>
 		</dict>
 	</dict>
-	<key>getPro screen years</key>
+	<key>getPro_screen_years</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@years@</string>
@@ -130,7 +130,7 @@
 			<string>Start your first %d years free trial.</string>
 		</dict>
 	</dict>
-	<key>trial label days</key>
+	<key>trial_label_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@days@</string>
@@ -146,7 +146,7 @@
 			<string>Free trial for %d days</string>
 		</dict>
 	</dict>
-	<key>trial label weeks</key>
+	<key>trial_label_weeks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@weeks@</string>
@@ -162,7 +162,7 @@
 			<string>Free trial for %d weeks</string>
 		</dict>
 	</dict>
-	<key>trial label months</key>
+	<key>trial_label_months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@months@</string>
@@ -178,7 +178,7 @@
 			<string>Free trial for %d months</string>
 		</dict>
 	</dict>
-	<key>trial label years</key>
+	<key>trial_label_years</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@years@</string>
@@ -194,7 +194,7 @@
 			<string>Free trial for %d years</string>
 		</dict>
 	</dict>
-	<key>trial description label days</key>
+	<key>trial_description_label_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@price@%#@days@</string>
@@ -219,7 +219,7 @@
 			<string>Then %1$@ per %2$d days</string>
 		</dict>
 	</dict>
-	<key>trial description label weeks</key>
+	<key>trial_description_label_weeks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@price@%#@weeks@</string>
@@ -244,7 +244,7 @@
 			<string>Then %1$@ per %2$d weeks</string>
 		</dict>
 	</dict>
-	<key>trial description label months</key>
+	<key>trial_description_label_months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@price@%#@months@</string>
@@ -269,7 +269,7 @@
 			<string>Then %1$@ per %2$d months</string>
 		</dict>
 	</dict>
-	<key>trial description label years</key>
+	<key>trial_description_label_years</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@price@%#@years@</string>
@@ -294,7 +294,7 @@
 			<string>Then %1$@ per %2$d years</string>
 		</dict>
 	</dict>
-	<key>trial period days</key>
+	<key>trial_period_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@days@</string>
@@ -310,7 +310,7 @@
 			<string>%d days</string>
 		</dict>
 	</dict>
-	<key>trial period weeks</key>
+	<key>trial_period_weeks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@weeks@</string>
@@ -326,7 +326,7 @@
 			<string>%d weeks</string>
 		</dict>
 	</dict>
-	<key>trial period months</key>
+	<key>trial_period_months</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@months@</string>
@@ -342,7 +342,7 @@
 			<string>%d months</string>
 		</dict>
 	</dict>
-	<key>trial period years</key>
+	<key>trial_period_years</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@years@</string>

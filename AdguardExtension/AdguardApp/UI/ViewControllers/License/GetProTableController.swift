@@ -260,17 +260,17 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial description label days", nil)
+            formatString = ACLocalizedString("trial_description_label_days", nil)
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial description label days", nil)
+                formatString = ACLocalizedString("trial_description_label_days", nil)
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial description label weeks", nil)
+            formatString = ACLocalizedString("trial_description_label_weeks", nil)
         case .month:
-            formatString = ACLocalizedString("trial description label months", nil)
+            formatString = ACLocalizedString("trial_description_label_months", nil)
         case .year:
-            formatString = ACLocalizedString("trial description label years", nil)
+            formatString = ACLocalizedString("trial_description_label_years", nil)
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, price,  period.numberOfUnits)
@@ -284,17 +284,17 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("getPro screen days", nil)
+            formatString = ACLocalizedString("getPro_screen_days", nil)
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("getPro screen days", nil)
+                formatString = ACLocalizedString("getPro_screen_days", nil)
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("getPro screen weeks", nil)
+            formatString = ACLocalizedString("getPro_screen_weeks", nil)
         case .month:
-            formatString = ACLocalizedString("getPro screen months", nil)
+            formatString = ACLocalizedString("getPro_screen_months", nil)
         case .year:
-            formatString = ACLocalizedString("getPro screen years", nil)
+            formatString = ACLocalizedString("getPro_screen_years", nil)
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
@@ -308,17 +308,17 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial label days", nil)
+            formatString = ACLocalizedString("trial_label_days", nil)
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial label days", nil)
+                formatString = ACLocalizedString("trial_label_days", nil)
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial label weeks", nil)
+            formatString = ACLocalizedString("trial_label_weeks", nil)
         case .month:
-            formatString = ACLocalizedString("trial label months", nil)
+            formatString = ACLocalizedString("trial_label_months", nil)
         case .year:
-            formatString = ACLocalizedString("trial label years", nil)
+            formatString = ACLocalizedString("trial_label_years", nil)
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
@@ -333,21 +333,21 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial period days", nil)
+            formatString = ACLocalizedString("trial_period_days", nil)
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial period days", nil)
+                formatString = ACLocalizedString("trial_period_days", nil)
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial period weeks", nil)
+            formatString = ACLocalizedString("trial_period_weeks", nil)
         case .month:
-            formatString = ACLocalizedString("trial period months", nil)
+            formatString = ACLocalizedString("trial_period_months", nil)
         case .year:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial period months", nil)
+                formatString = ACLocalizedString("trial_period_months", nil)
                 return String.localizedStringWithFormat(formatString, 12)
             }
-            formatString = ACLocalizedString("trial period years", nil)
+            formatString = ACLocalizedString("trial_period_years", nil)
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
