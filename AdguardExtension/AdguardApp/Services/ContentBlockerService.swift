@@ -28,6 +28,10 @@ protocol ContentBlockerServiceProtocol {
     */
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void)
     
+    /**
+     validates rule text
+     It returns true if rule can be converted to safari content blocker rule by converter, false for unsupported rules
+     */
     func validateRule(_ ruleText: String)->Bool
 }
 
