@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>ONE DAY FREE TRIAL FULL ACCESS</string>
+			<string>ONE DAY FULL ACCESS FREE TRIAL</string>
 			<key>other</key>
-			<string>%d DAYS FREE TRIAL FULL ACCESS</string>
+			<string>%d DAYS FULL ACCESS FREE TRIAL</string>
 		</dict>
 	</dict>
 	<key>trial_screen_weeks</key>
@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>ONE WEEK FREE TRIAL FULL ACCESS</string>
+			<string>ONE WEEK FULL ACCESS FREE TRIAL</string>
 			<key>other</key>
-			<string>%d WEEKS FREE TRIAL FULL ACCESS</string>
+			<string>%d WEEKS FULL ACCESS FREE TRIAL</string>
 		</dict>
 	</dict>
 	<key>trial_screen_months</key>
@@ -45,9 +45,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>ONE MONTH FREE TRIAL FULL ACCESS</string>
+			<string>ONE MONTH FULL ACCESS FREE TRIAL</string>
 			<key>other</key>
-			<string>%d MONTHS FREE TRIAL FULL ACCESS</string>
+			<string>%d MONTHS FULL ACCESS FREE TRIAL</string>
 		</dict>
 	</dict>
 	<key>trial_screen_years</key>
@@ -61,9 +61,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>ONE YEAR FREE TRIAL FULL ACCESS</string>
+			<string>ONE YEAR FULL ACCESS FREE TRIAL</string>
 			<key>other</key>
-			<string>%d YEARS FREE TRIAL FULL ACCESS</string>
+			<string>%d YEARS FULL ACCESS FREE TRIAL</string>
 		</dict>
 	</dict>
 	<key>getPro_screen_days</key>
