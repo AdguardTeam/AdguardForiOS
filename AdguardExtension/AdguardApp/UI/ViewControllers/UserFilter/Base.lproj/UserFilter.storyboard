@@ -326,7 +326,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="F6t-Fl-m3p">
-                            <rect key="frame" x="0.0" y="248" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="248" width="600" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>

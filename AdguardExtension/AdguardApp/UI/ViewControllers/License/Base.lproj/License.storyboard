@@ -799,7 +799,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adguard-premium-logo-dark" translatesAutoresizingMaskIntoConstraints="NO" id="tts-0w-NGZ">
-                                <rect key="frame" x="85" y="136" width="409.5" height="130"/>
+                                <rect key="frame" x="85" y="174" width="409.5" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="lGE-Hb-H3r"/>
                                 </constraints>

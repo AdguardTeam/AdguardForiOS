@@ -81,9 +81,9 @@ class GetProTableController: UITableViewController {
         setPurchaseDescription()
         setCellsVisibility()
         
-        let trialDescriptionFormat = ACLocalizedString("trial_description_format", nil)
-        let trialDescriptionText = String(format: trialDescriptionFormat, purchaseService.subscriptionPrice, purchaseService.subscriptionPeriod)
-        startTrialDescriptionLabel.text = trialDescriptionText
+        startTrialTitleLable.text = getStartTrialTitleLabelString()
+
+        startTrialDescriptionLabel.text = getStartTrialDescriptionLabelString()
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
@@ -150,14 +150,14 @@ class GetProTableController: UITableViewController {
     func setPrice() {
         
         if purchaseService.ready {
-            trialLabel.text = String(format: ACLocalizedString("trial_format", nil), purchaseService.trialPeriod)
+            trialLabel.text = getStringForTrialLabel()
             
             if permanentSubscription {
                 periodLabel.text = ACLocalizedString("permanent_subscription_title", nil)
                 priceLabel.text = purchaseService.nonConsumablePrice
             }
             else {
-                periodLabel.text = purchaseService.subscriptionPeriod
+                periodLabel.text = getPeriodString()
                 priceLabel.text = purchaseService.subscriptionPrice
             }
             
@@ -190,7 +190,7 @@ class GetProTableController: UITableViewController {
     @IBAction func choosePeriodAction(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let subsriptionTitle = "\(purchaseService.subscriptionPeriod) - \(purchaseService.subscriptionPrice)"
+        let subsriptionTitle = "\(getPeriodString()) - \(purchaseService.subscriptionPrice)"
         let subscribeAction = UIAlertAction(title: subsriptionTitle , style: .default) { [weak self] (_) in
             self?.permanentSubscription = false
             self?.setPrice()
@@ -251,5 +251,107 @@ class GetProTableController: UITableViewController {
         trialCell.isHidden = pro
         purchaseCell.isHidden = pro
         descriptionCell.isHidden = pro
+    }
+    
+    private func getStartTrialDescriptionLabelString() -> String {
+        let period = purchaseService.subscriptionPeriod
+        let price = purchaseService.subscriptionPrice
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("trial_description_label_days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial_description_label_days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("trial_description_label_weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("trial_description_label_months", nil)
+        case .year:
+            formatString = ACLocalizedString("trial_description_label_years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, price,  period.numberOfUnits)
+        
+        return resultString
+    }
+    
+    private func getStartTrialTitleLabelString() -> String {
+        let period = purchaseService.trialPeriod
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("getPro_screen_days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("getPro_screen_days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("getPro_screen_weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("getPro_screen_months", nil)
+        case .year:
+            formatString = ACLocalizedString("getPro_screen_years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
+        
+        return resultString
+    }
+    
+    private func getStringForTrialLabel() -> String {
+        let period = purchaseService.trialPeriod
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("trial_label_days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial_label_days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("trial_label_weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("trial_label_months", nil)
+        case .year:
+            formatString = ACLocalizedString("trial_label_years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
+        
+        return resultString
+    }
+    
+    private func getPeriodString() -> String {
+        let period = purchaseService.subscriptionPeriod
+        
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("trial_period_days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial_period_days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("trial_period_weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("trial_period_months", nil)
+        case .year:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial_period_months", nil)
+                return String.localizedStringWithFormat(formatString, 12)
+            }
+            formatString = ACLocalizedString("trial_period_years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
+        
+        return resultString
     }
 }
