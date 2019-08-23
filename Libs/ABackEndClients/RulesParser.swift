@@ -32,10 +32,11 @@ class RulesParser: NSObject {
     
     /**
      convert array of plain strings to array of ASDFilterRule
-     fill ruleText, ruleId and affinity properties
+     fill ruleText, ruleId,filterId and affinity properties
      set enabled to true
+    
      */
-    func parseStrings(_ strings: [String])->[ASDFilterRule] {
+    func parseStrings(_ strings: [String], filterId: NSNumber)->[ASDFilterRule] {
         var rules = [ASDFilterRule]()
         
         var firstLine = true
@@ -66,6 +67,7 @@ class RulesParser: NSObject {
             } else {
                 rule.ruleText = line;
                 rule.isEnabled = true;
+                rule.filterId = filterId;
                 rule.affinity =  affinityMask?.rawValue as NSNumber?
                 
                 rules.append(rule)

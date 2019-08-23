@@ -386,7 +386,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     NSArray<NSString*> *lines = [content componentsSeparatedByCharactersInSet: NSCharacterSet.newlineCharacterSet];
     RulesParser* rulesParse = [RulesParser new];
     
-    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines]];
+    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines filterId:@(0)]];
 }
 
 /**

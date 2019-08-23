@@ -349,7 +349,7 @@
     [stream close];
     
     RulesParser* rulesParser = [RulesParser new];
-    filter.rules = [rulesParser parseStrings:ruleStrings];
+    filter.rules = [rulesParser parseStrings:ruleStrings filterId: self.filterId];
     
     return YES;
 }
