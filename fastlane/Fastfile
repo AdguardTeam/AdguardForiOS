@@ -122,8 +122,7 @@ platform :ios do
     upload_to_testflight(
       skip_submission: true,
       skip_waiting_for_build_processing: true,
-      ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}",
-      team_id: "N33TQXN8C7"
+      ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}"
     )
   end
 end
