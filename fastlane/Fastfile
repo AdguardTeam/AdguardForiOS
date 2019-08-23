@@ -123,6 +123,7 @@ platform :ios do
       skip_submission: true,
       skip_waiting_for_build_processing: true,
       ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}",
+      team_id: "N33TQXN8C7"
     )
   end
 end
@@ -145,7 +146,7 @@ lane :prepare do
 
   # get_certificates creates .p12 and .cer files in the build directory
 
-  match(type: "development", readonly: true, platform: "ios")
-  match(type: "appstore", readonly: true, platform: "ios")
-  match(type: "adhoc", readonly: true, platform: "ios")
+  match(type: "development", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "appstore", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "adhoc", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
 end
