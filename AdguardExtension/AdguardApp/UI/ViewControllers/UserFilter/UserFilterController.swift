@@ -56,6 +56,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     @IBOutlet var selectAllButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var saveButton: RoundRectButton!
+    @IBOutlet var clearButton: RoundRectButton!
     @IBOutlet weak var bottomBar: UIView!
     @IBOutlet var bottomBarButtons: [RoundRectButton]!
     @IBOutlet weak var bottomBarSeparator: UIView!
@@ -196,6 +197,10 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         textView.resignFirstResponder()
     }
     
+    @IBAction func clearAction(_ sender: Any) {
+        textView.text = ""
+    }
+    
     // MARK: - Presentation delegate methods
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -246,6 +251,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         case .edit:
             rightButton = cancelButton
             leftButtonStack.addArrangedSubview(saveButton)
+            leftButtonStack.addArrangedSubview(clearButton)
         }
         
         rightButtonView.addSubview(rightButton)
