@@ -19,8 +19,8 @@
 /* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Enter your e-mail here";
 
-/* Class = "UILabel"; text = "You must enter your password to authorize on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "You must enter your password to authorize on adguard.com";
+/* Class = "UILabel"; text = "You must enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
+"Q7Q-j1-fN4.text" = "You must enter your password to log in on adguard.com";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
@@ -52,17 +52,11 @@
 /* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
 "mpR-bB-C6U.text" = "Security filters";
 
-/* Class = "UILabel"; text = "7-DAY FREE TRIAL FULL ACCESS"; ObjectID = "nv4-t3-h64"; */
-"nv4-t3-h64.text" = "7-DAY FREE TRIAL FULL ACCESS";
-
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Custom filters";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "log in";
-
-/* Class = "UILabel"; text = "Start your first 7 days free trial."; ObjectID = "y8E-wT-cRk"; */
-"y8E-wT-cRk.text" = "Start your first 7 days free trial.";
 
 /* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
 "zFg-Ls-ea6.text" = "Check out our Premium features for free";
