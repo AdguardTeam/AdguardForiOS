@@ -91,17 +91,20 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     ASDGroupsI18n *_dbGroupsI18nCache;
     
     UIBackgroundTaskIdentifier _transactionBackroundTaskID;
+    
+    id<ACNNetworkingProtocol> _networking;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-- (id)init{
+- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking{
     
     self = [super init];
     if (self) {
         
+        _networking = networking;
         observingReachabilityStatus = observingDbStatus = NO;
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
@@ -1650,7 +1653,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     for (ASDFilterMetadata * filter in filtersToUpdate) {
         
-        AASFilterSubscriptionParser* parser = [AASFilterSubscriptionParser new];
+        AASFilterSubscriptionParser* parser = [[AASFilterSubscriptionParser alloc] initWithNetworking: _networking];
         NSURL* url = [NSURL URLWithString:filter.subscriptionUrl];
         
         dispatch_group_enter(parseGroup);

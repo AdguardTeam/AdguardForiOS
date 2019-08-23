@@ -68,6 +68,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
 @class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed;
 @class AASCustomFilterParserResult;
+@protocol ACNNetworkingProtocol;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - ASAntibanner
@@ -364,6 +365,11 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
 
 @interface AESAntibanner : NSObject <AESAntibannerProtocol, ABECFilterAsyncDelegateProtocol>
+
+/**
+ init
+ */
+- (nonnull instancetype) initWithNetworking:(nonnull id<ACNNetworkingProtocol>) networking;
 
 /**
  Indicator that metadata and count of filters are out of date.

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class ASDFilterMetadata, ASDFilterRule;
+@protocol ACNNetworkingProtocol;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AASCustomFilterParserResult
@@ -18,8 +19,8 @@
  */
 @interface AASCustomFilterParserResult : NSObject
 
-@property (nonatomic) ASDFilterMetadata *meta;
-@property (nonatomic) NSMutableArray <ASDFilterRule *> *rules;
+@property (nonatomic, nonnull) ASDFilterMetadata *meta;
+@property (nonatomic, nonnull) NSMutableArray <ASDFilterRule *> *rules;
 
 @end
 
@@ -29,9 +30,9 @@
 /**
  This parser instance already is used.
  */
-extern NSString *AASFilterSubscriptionParserExceptionInUse;
+extern NSString * _Nonnull AASFilterSubscriptionParserExceptionInUse;
 
-extern NSString *AASFilterSubscriptionParserErrorDomain;
+extern NSString * _Nonnull AASFilterSubscriptionParserErrorDomain;
 
 #define AASFilterSubscriptionParserErrorConvertToString                             100
 #define AASFilterSubscriptionParserErrorNotValidContent                             200
@@ -46,6 +47,11 @@ extern NSString *AASFilterSubscriptionParserErrorDomain;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
+/**
+ init parser
+ */
+- (nonnull instancetype) initWithNetworking:(nonnull id<ACNNetworkingProtocol>) networking;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
@@ -57,8 +63,8 @@ extern NSString *AASFilterSubscriptionParserErrorDomain;
  If parsing completed successful, `result` parameter contains parsing result and `error` is nil.
  Otherwise, `error` parameter contains corresponding error.
  */
-- (void)parseFromUrl:(NSURL *)url
-          completion:(void (^)(AASCustomFilterParserResult *result, NSError *error))completion;
+- (void)parseFromUrl:(nonnull NSURL *)url
+          completion:(nullable void (^)(AASCustomFilterParserResult * _Nullable result, NSError * _Nullable error))completion;
 
 /**
  Parsing custom filter from url.
@@ -67,7 +73,7 @@ extern NSString *AASFilterSubscriptionParserErrorDomain;
  @param error On error returns error object.
  @return Result of nil if error occurs.
  */
-- (AASCustomFilterParserResult *)parseFromUrl:(NSURL *)url error:(NSError **)error;
+- (nullable AASCustomFilterParserResult *)parseFromUrl:(NSURL * _Nonnull)url error:(NSError *_Nullable * _Nonnull)error;
 
 /**
  Cancels the asynchronous parsing.
