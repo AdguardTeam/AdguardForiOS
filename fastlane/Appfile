@@ -1,7 +1,7 @@
 app_identifier("com.adguard.AdguardExtension") # The bundle identifier of your app
 apple_id("apple-dev@adguard.com") # Your Apple email address
 team_id("N33TQXN8C7") # Developer Portal Team ID
-itc_team_id("N33TQXN8C7") # App Store Connect Team ID
+itc_team_id("31050800") # App Store Connect Team ID
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
