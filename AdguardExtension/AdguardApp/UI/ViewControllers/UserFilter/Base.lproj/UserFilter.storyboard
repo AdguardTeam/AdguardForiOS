@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vbh-T5-B9K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vbh-T5-B9K">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -105,6 +105,7 @@
                         <outlet property="bottomBarSeparator" destination="pma-aK-ghd" id="Cfr-Nx-SyX"/>
                         <outlet property="bottomConstraint" destination="qkD-K2-9QH" id="ZIJ-HV-JTZ"/>
                         <outlet property="cancelButton" destination="9th-UM-Uaj" id="Gwy-FL-SQh"/>
+                        <outlet property="clearButton" destination="cce-mi-paP" id="mlK-Y1-cWt"/>
                         <outlet property="deleteButton" destination="iuK-dC-RKf" id="chY-XA-A62"/>
                         <outlet property="editButton" destination="lE1-GD-Qr5" id="ovA-KE-h48"/>
                         <outlet property="exportButton" destination="0hZ-wq-AdR" id="yvn-2o-TCo"/>
@@ -122,6 +123,7 @@
                         <outletCollection property="bottomBarButtons" destination="DLT-c2-7eC" collectionClass="NSMutableArray" id="834-S8-680"/>
                         <outletCollection property="bottomBarButtons" destination="0hZ-wq-AdR" collectionClass="NSMutableArray" id="dB8-GH-6ef"/>
                         <outletCollection property="bottomBarButtons" destination="IHN-jy-NyP" collectionClass="NSMutableArray" id="BA2-os-RdG"/>
+                        <outletCollection property="bottomBarButtons" destination="cce-mi-paP" collectionClass="NSMutableArray" id="t6l-Mr-5jk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x5-4j-Va4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,6 +287,26 @@
                         <action selector="importAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="0ri-II-Df4"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="cce-mi-paP" userLabel="Clear Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                    <state key="normal" title="Clear">
+                        <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="disabled">
+                        <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
+                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clearAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="3JY-H6-E2W"/>
+                    </connections>
+                </button>
             </objects>
             <point key="canvasLocation" x="-63" y="0.0"/>
         </scene>
@@ -299,7 +321,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="WwG-Ye-eyy">
-                            <rect key="frame" x="0.0" y="0.0" width="228" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>

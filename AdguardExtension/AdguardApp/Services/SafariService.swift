@@ -146,9 +146,11 @@ class SafariService: NSObject, SafariServiceProtocol {
                         NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
+                    
+                    // reload one content blocker at a time
+                    group.wait()
                 }
                 
-                group.wait()
                 completion(resultError)
             }
         }

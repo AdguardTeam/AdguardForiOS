@@ -1,0 +1,62 @@
+[
+  {
+    "project_id": "ios",
+    "base_locale": "en",
+    "languages": {
+      "en": "English",
+      "bg": "Bulgarian",
+      "zh-Hans": "Chinese Simplified (mainland China)",
+      "zh-Hant": "Chinese Traditional (Taiwan)",
+      "hr": "Croatian",
+      "cs": "Czech",
+      "et-EE": "Estonian",
+      "da": "Danish",
+      "de": "German",
+      "es": "Spanish",
+      "fi": "Finnish",
+      "fr": "French",
+      "de": "German",
+      "hu": "Hungarian",
+      "it": "Italian",
+      "ja": "Japanese",
+      "ko": "Korean",
+      "nb": "Norwegian bokmål",
+      "hy": "Armenian",
+      "id": "Indonesian",
+      "it": "Italian",
+      "fa": "Persian",
+      "pl": "Polish",
+      "pt-BR": "Portuguese (Brazil)",
+      "ru": "Russian",
+      "sr-Latn": "Serbian (Latin)",
+      "sk": "Slovak",
+      "sl": "Slovenian",
+      "tr": "Turkish",
+      "uk": "Ukrainian"
+    },
+    "localizable_files": [
+      "AdguardExtension/AdguardApp/en.lproj/Localizable.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/About/en.lproj/About.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings/en.lproj/DnsSettings.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/Filters/en.lproj/Filters.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/License/en.lproj/License.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu/en.lproj/MainMenu.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen/en.lproj/MainScreen.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/Settings/en.lproj/Settings.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter/en.lproj/UserFilter.strings",
+      "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings"
+    ],
+    "storyboard_dirs": [
+      "AdguardExtension/AdguardApp",
+      "AdguardExtension/ActionExtension",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/About",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/Filters",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/License",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/Settings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter"
+    ]
+  }
+]
