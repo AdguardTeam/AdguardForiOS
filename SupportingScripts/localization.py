@@ -22,7 +22,6 @@ CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 #
 API_UPLOAD_URL = "https://twosky.adtidy.org/api/v1/upload"
 API_DOWNLOAD_URL = "https://twosky.adtidy.org/api/v1/download"
-API_BASEDIR = "app"
 # Root directory of the project files (relative to this script)
 BASE_PATH = "../"
 
@@ -108,7 +107,7 @@ def upload_file(path, format, language, file_name):
     values = {
         "format": format,
         "language": language,
-        "filename": "{0}/{1}".format(API_BASEDIR, file_name),
+        "filename": file_name,
         "project": TWOSKY_CONFIG["project_id"]
     }
 
