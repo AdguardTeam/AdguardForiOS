@@ -19,8 +19,8 @@
 /* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Enter your e-mail here";
 
-/* Class = "UILabel"; text = "You must enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "You must enter your password to log in on adguard.com";
+/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
+"Q7Q-j1-fN4.text" = "You will have to enter your password to log in on adguard.com";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";

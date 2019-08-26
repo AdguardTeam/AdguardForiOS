@@ -46,5 +46,5 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "You have 5 content blockers, each of them can contain 50,000 rules";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "You have 6 content blockers, each of them can contain 50,000 rules";
