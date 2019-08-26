@@ -16,14 +16,32 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "라이선스를 가지고 있습니다";
 
+/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "이메일 주소를 입력하세요";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
 
 /* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "피싱을 포함한 다른 위협들을 차단";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "로그인";
+
 /* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "당신의 개인 정보의 중요함";
+
+/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "로그인";
+
+/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
+"dcW-zZ-VlL.title" = "로그인";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
+"fU2-3b-5Lf.text" = "보안 필터, DNS 보호, 사용자 필터, 기타.";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
+"jUb-cY-Qt7.normalTitle" = "무료로 사용해보세요";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "구매 내역 복구";
@@ -33,6 +51,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "사용자 정의 필터";
+
+/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
+"wLZ-TG-e9w.normalTitle" = "로그인";
 
 /* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
 "zFg-Ls-ea6.text" = "무료로 프리미엄 기능들을 살펴보세요";

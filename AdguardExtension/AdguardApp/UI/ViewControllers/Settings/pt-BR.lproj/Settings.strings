@@ -1,3 +1,5 @@
+/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
+"ChK-gV-7pc.title" = "Configurações gerais";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Escuro";
@@ -44,5 +46,5 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Se esta opção estiver ativada, o AdGuard só vai utilizar o Wi-Fi para atualizações de filtros em segundo plano";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "Você tem 5 bloqueadores de conteúdo, cada um deles pode conter 50.000 regras";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "Você tem 6 bloqueadores de conteúdo, cada um deles pode conter 50.000 regras";

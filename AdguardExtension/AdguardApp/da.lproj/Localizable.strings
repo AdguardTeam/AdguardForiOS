@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerfilter";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Indtast dine tilpassede regler her, adskilt af linjeskift";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Indtast domænenavnene her adskilt med linjeskift, som AdGuard vil deaktivere Safari-filtrering for.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "JA";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "Beskyttelsen er aktiveret";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Nogle indholdsblockere er deaktiverede";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Beskyttelsen er deaktiveret";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Deaktiveret";
 
 "filter_date_format" = "Filtre opdateret: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Du kan tilføje dine brugerdefinerede regler her<br>Læs denne <a href=\"%@\">note om regelsyntaks</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Indtast domænenavnene her. AdGuard vil deaktivere filtrering i Safari for disse hjemmesider.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (uden VPN-ikon), inkompatibel med andre VPN-apps, mindre stabil";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "deaktiveret";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS er en alternativ måde at beskytte dit privatliv på mod forskellige counters, analytiske systemer og phishing hjemmesider";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Er du sikker på, at du vil logge ud?";
 
-/* GetProController - subscription period day */
-"day_period" = "dag";
-
-/* GetProController - subscription period week */
-"week_period" = "uge";
-
-/* GetProController - subscription period month */
-"month_period" = "måned";
-
-/* GetProController - subscription period year */
-"year_period" = "år";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Der var et problem med VPN konfigurationen, kontakt venligst vores support team.";
 
@@ -306,11 +306,17 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Avanceret";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Gratis prøveperiode for %@";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Indholdsblockere";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtre:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Generelle indstillinger";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ regler bruges";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Deaktiveret i Safaris indstillinger";

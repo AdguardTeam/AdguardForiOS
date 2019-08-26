@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Filtro de Usuário";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Digite aqui suas regras personalizadas, separadas por quebras de linha";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Digite aqui os nomes de domínio separados por quebras de linha, para os quais o AdGuard irá desativar a filtragem do Safari.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "SIM";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "A proteção está ativada";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Alguns bloqueadores de conteúdo estão desativados";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "A proteção está desativada";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Desativado";
 
 "filter_date_format" = "Filtros atualizados: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Insira suas regras personalizadas aqui<br>Leia essa<a href=\"%@\">nota sobre a sintaxe de regras</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Digite aqui os nomes de domínio. O AdGuard irá desativar a filtragem no Safari para estes sites.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (sem o ícone VPN), incompatível com outros aplicativos VPN (instável)";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "desativado";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "O AdGuard DNS é uma forma alternativa de proteger a sua privacidade de diferentes contadores, sistemas analíticos, sites de phishing";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Você tem certeza que deseja encerrar a sessão?";
 
-/* GetProController - subscription period day */
-"day_period" = "dia";
-
-/* GetProController - subscription period week */
-"week_period" = "semana";
-
-/* GetProController - subscription period month */
-"month_period" = "mês";
-
-/* GetProController - subscription period year */
-"year_period" = "ano";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Houve um problema na configuração da conexão VPN, entre em contato com nossa equipe de suporte.";
 
@@ -306,11 +306,14 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Avançado";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Período de avaliação de %@";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Bloqueadores de conteúdo";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Configurações gerais";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ regras estão sendo usadas";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Desativado nas configurações do Safari";

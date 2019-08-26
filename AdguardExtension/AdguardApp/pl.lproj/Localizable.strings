@@ -237,21 +237,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Czy na pewno chcesz się wylogować?";
 
-/* GetProController - subscription period day */
-"day_period" = "dzień";
-
-/* GetProController - subscription period week */
-"week_period" = "tydzień";
-
-/* GetProController - subscription period month */
-"month_period" = "miesiąc";
-
-/* GetProController - subscription period year */
-"year_period" = "rok";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Wystąpił problem z konfiguracją VPN. Proszę skontaktować się z naszym działem pomocy technicznej.";
 

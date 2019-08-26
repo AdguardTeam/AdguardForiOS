@@ -22,6 +22,9 @@
 /* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "Bloquez l'hameçonnage et les autres menaces";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Connexion";
+
 /* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "Protégez vos données personnelles";
 

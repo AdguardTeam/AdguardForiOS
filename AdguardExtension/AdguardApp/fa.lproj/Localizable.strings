@@ -231,21 +231,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "آیا واقعا میخواهید خارج شوید؟";
 
-/* GetProController - subscription period day */
-"day_period" = "روز";
-
-/* GetProController - subscription period week */
-"week_period" = "هفته";
-
-/* GetProController - subscription period month */
-"month_period" = "ماه";
-
-/* GetProController - subscription period year */
-"year_period" = "سال";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "مشکلی با پیکربندی وی پی اِن وجود دارد.لطفا با تیم پشتیبانی تماس بگیرید.";
 

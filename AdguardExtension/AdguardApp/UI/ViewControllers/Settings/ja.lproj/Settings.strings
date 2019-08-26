@@ -44,5 +44,5 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "この設定をONにすると、AdGuardはバックグラウンドでのフィルタ更新をWi-Fiのみで行います（モバイル通信を使いません）。";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "コンテンツブロッカーは5つあり、それぞれに50000本までのルールを含めることができます（計25万本）";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "コンテンツブロッカーは6つあり、それぞれに50000本までのルールを含めることができます（計25万本）";

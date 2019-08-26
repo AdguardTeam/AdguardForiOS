@@ -1,0 +1,74 @@
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
+"2wy-vg-qvr.text" = "필터 추가";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
+"3WM-jW-br8.text" = "필터 추가";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
+"Cyn-cw-Zrm.text" = "이름:";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
+"E3e-Mc-RhD.title" = "필터";
+
+/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
+"Fwl-LI-5Fu.placeholder" = "https://example.com";
+
+/* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
+"NsT-wt-1hd.text" = "새 사용자 정의 필터";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "취소";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "규칙 개수: ";
+
+/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
+"UR2-d4-zYf.text" = "업데이트 됨";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
+"Ve5-DF-RNB.text" = "웹사이트";
+
+/* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
+"Z16-OR-tjl.text" = "필터 주소:";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
+"cTI-39-Vwx.text" = "버전";
+
+/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "여기에 내 사용자 정의 필터를 사용";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
+"gbf-TL-LXR.title" = "필터";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "추가";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
+"kab-Sc-THo.text" = "버전";
+
+/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
+"lFg-x8-C9b.normalTitle" = "프리미엄 구매";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "취소";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
+"mXe-eu-cfH.normalTitle" = "삭제";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "다음";
+
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "홈페이지: ";
+
+/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
+"wzJ-ge-NyI.text" = "규칙 개수:";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
+"x93-x6-7Fw.text" = "날짜";
+
+/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
+"xS8-f2-3yC.text" = "필터 이름";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "필터 이름 입력:";

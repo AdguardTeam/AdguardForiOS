@@ -1,0 +1,50 @@
+/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
+"ChK-gV-7pc.title" = "일반";
+
+/* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
+"FzS-e3-CK1.text" = "다크";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
+"PyT-Id-Sle.text" = "이 설정이 활성화 되어 있는 경우 AdGuard는 일반적인 \"코스메틱\" 규칙을 무시합니다. 이것은 필터링 품질을 대가로 페이지 렌더링 속도를 향상합니다.";
+
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
+"TCQ-IQ-R5g.text" = "간략화 된 필터 사용";
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "시스템 기본 설정";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "테마";
+
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Wi-Fi 환경에서만 자동 업데이트";
+
+/* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "bVh-Of-Oxm"; */
+"bVh-Of-Oxm.text" = "예외 목록 반전";
+
+/* Class = "UILabel"; text = "Content Blockers"; ObjectID = "c1p-jc-Itq"; */
+"c1p-jc-Itq.text" = "콘텐츠 차단기";
+
+/* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
+"crJ-Vv-yrm.headerTitle" = "고급";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running."; ObjectID = "mta-fv-reE"; */
+"mta-fv-reE.text" = "AdGuard가 실행중인 동안에 인터넷 연결에 문제가 있다면 이 옵션을 활성화하세요.";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "기타";
+
+/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "nvD-bF-pnp"; */
+"nvD-bF-pnp.text" = "네트워크 변경 시 재시작";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "라이트";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
+"q05-UZ-zAB.text" = "이 목록에 있는 웹사이트를 제외한 모든 곳의 광고를 차단 해제";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "이 설정이 활성화 되어 있을 경우, AdGuard는 백그라운드 필터 업데이트를 Wi-Fi 환경에서만 실행합니다";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "각각 60,000개의 규칙을 포함하는 5개의 콘텐츠 차단기가 있습니다";

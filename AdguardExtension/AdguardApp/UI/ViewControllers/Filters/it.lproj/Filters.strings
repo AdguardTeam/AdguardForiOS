@@ -1,0 +1,71 @@
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
+"2wy-vg-qvr.text" = "Aggiungi un filtro";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
+"3WM-jW-br8.text" = "Aggiungi un filtro";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
+"Cyn-cw-Zrm.text" = "Nome:";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
+"E3e-Mc-RhD.title" = "Filtri";
+
+/* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
+"NsT-wt-1hd.text" = "Nuovo filtro personalizzato";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "ANNULLA";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Conteggio Regole: ";
+
+/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
+"UR2-d4-zYf.text" = "Aggiornato";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
+"Ve5-DF-RNB.text" = "Sito web";
+
+/* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
+"Z16-OR-tjl.text" = "Filtro URL:";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
+"cTI-39-Vwx.text" = "Versione";
+
+/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Utilizza i filtri personali qui";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
+"gbf-TL-LXR.title" = "Filtri";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "AGGIUNGI";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
+"kab-Sc-THo.text" = "Versione";
+
+/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
+"lFg-x8-C9b.normalTitle" = "Ottieni la versione Premium";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "ANNULLA";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
+"mXe-eu-cfH.normalTitle" = "ELIMINA";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "PROSSIMO";
+
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "Pagina iniziale: ";
+
+/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
+"wzJ-ge-NyI.text" = "Quantità di regole:";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
+"x93-x6-7Fw.text" = "Data";
+
+/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
+"xS8-f2-3yC.text" = "Nome filtro";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Inserisci il nome di filtro:";

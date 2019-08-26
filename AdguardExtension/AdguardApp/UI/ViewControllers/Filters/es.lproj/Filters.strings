@@ -66,3 +66,6 @@
 
 /* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
 "xS8-f2-3yC.text" = "Nombre del filtro";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Ingrese el nombre del filtro:";
