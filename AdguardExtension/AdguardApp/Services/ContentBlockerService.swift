@@ -116,7 +116,21 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     }
     
     func validateRule(_ ruleText: String) -> Bool {
-        return AERDomainFilterRule.isValidRuleText(ruleText)
+        
+        let trimmedRule = ruleText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedRule.count == 0 {
+            return false
+        }
+        
+        if  trimmedRule.contains(OLD_INJECT_RULES) ||
+            trimmedRule.contains(MASK_CONTENT_RULE) ||
+            trimmedRule.contains(MASK_CONTENT_EXCEPTION_RULE) ||
+            trimmedRule.contains(MASK_JS_RULE) ||
+            trimmedRule.contains(MASK_FILTER_UNSUPPORTED_RULE){
+            return false
+        }
+        
+        return true
     }
 
     // MARK: - whitelist operations
