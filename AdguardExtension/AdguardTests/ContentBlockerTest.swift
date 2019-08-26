@@ -2,9 +2,23 @@
 import XCTest
 
 class ContentBlockerTest: XCTestCase {
-
+    
+    var resources: SharedResourcesMock!
+    var safari: SafariServiceMock!
+    var contentBlocker: ContentBlockerService!
+    var antibanner: AntibannerMock!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        resources = SharedResourcesMock()
+        safari = SafariServiceMock()
+        
+        contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
+        contentBlocker.createConverter = {
+            return (ConverterMock(), nil)
+        }
+        
+        antibanner = AntibannerMock()
+        contentBlocker.antibanner = antibanner
     }
 
     override func tearDown() {
@@ -12,17 +26,6 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAddUserRule() {
-        
-        let resources = SharedResourcesMock()
-        let safari = SafariServiceMock()
-        
-        let contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
-        contentBlocker.createConverter = {
-            return (ConverterMock(), nil)
-        }
-        
-        let antibanner = AntibannerMock()
-        contentBlocker.antibanner = antibanner
         
         let rule = ASDFilterRule(text: "||google.com^", enabled: true)
     
@@ -40,16 +43,6 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func addToWhitelist(ruleText: String, jsonText: String, expectedResult: String) {
-        let resources = SharedResourcesMock()
-        let safari = SafariServiceMock()
-        
-        let contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
-        contentBlocker.createConverter = {
-            return (ConverterMock(), nil)
-        }
-        
-        let antibanner = AntibannerMock()
-        contentBlocker.antibanner = antibanner
         
         let rule = ASDFilterRule(text: ruleText, enabled: true)
         
@@ -62,7 +55,7 @@ class ContentBlockerTest: XCTestCase {
         contentBlocker.addWhitelistRule(rule) { (error) in
             XCTAssertNil(error)
             
-            let data = safari.jsons[ContentBlockerType.general.rawValue]
+            let data = self.safari.jsons[ContentBlockerType.general.rawValue]
             let jsonString = String(data: data!, encoding:.utf8)
             
             XCTAssertTrue(jsonString == expectedResult)
@@ -88,17 +81,6 @@ class ContentBlockerTest: XCTestCase {
     
     func changeInvertedDomainList(oldDomains: [String], domain: String, jsonText: String, expectedResult: String, action:invertedDomainAction) {
         
-        let resources = SharedResourcesMock()
-        let safari = SafariServiceMock()
-        
-        let contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
-        contentBlocker.createConverter = {
-            return (ConverterMock(), nil)
-        }
-        
-        let antibanner = AntibannerMock()
-        contentBlocker.antibanner = antibanner
-        
         let expectation = XCTestExpectation(description: "reload jsons")
         
         let data = jsonText.data(using: .utf8)
@@ -113,7 +95,7 @@ class ContentBlockerTest: XCTestCase {
             
             XCTAssertNil(error)
             
-            let data = safari.jsons[ContentBlockerType.general.rawValue]
+            let data = self.safari.jsons[ContentBlockerType.general.rawValue]
             let jsonString = String(data: data!, encoding:.utf8)
             
             XCTAssertTrue(jsonString == expectedResult)
@@ -148,17 +130,7 @@ class ContentBlockerTest: XCTestCase {
     }
     
     func testAffinityBlocks(rules: [ASDFilterRule], expectedJsonGeneral: String, expectedJsonOther: String) {
-        let resources = SharedResourcesMock()
-        let safari = SafariServiceMock()
         
-        let contentBlocker = ContentBlockerService(resources: resources, safariService: safari)
-        contentBlocker.createConverter = {
-            return (ConverterMock(), nil)
-        }
-        
-        let antibanner = AntibannerMock()
-        contentBlocker.antibanner = antibanner
-    
         XCTAssertNil(contentBlocker.replaceUserFilter([]))
         
         XCTAssertTrue(antibanner.import(rules, filterId: ASDF_ENGLISH_FILTER_ID as NSNumber))
@@ -169,9 +141,9 @@ class ContentBlockerTest: XCTestCase {
         contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
             XCTAssertNil(error)
             
-            let dataGeneral = safari.jsons[ContentBlockerType.general.rawValue]
+            let dataGeneral = self.safari.jsons[ContentBlockerType.general.rawValue]
             let jsonString = String(data: dataGeneral!, encoding:.utf8)
-            let dataOther = safari.jsons[ContentBlockerType.other.rawValue]
+            let dataOther = self.safari.jsons[ContentBlockerType.other.rawValue]
             let jsonStringOther = String(data: dataOther!, encoding:.utf8)
             
             XCTAssertTrue(jsonString == expectedJsonGeneral)
@@ -222,11 +194,31 @@ class ContentBlockerTest: XCTestCase {
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testRuleValidation() {
+        
+        let validRules = [
+            "!comment",
+            "||blacklist.rule^",
+            "@@whitelist.rule^",
+            "example.com###abc",
+        ]
+        
+        let invalidRules = [
+            "   ",
+            "example.com###adg_start_style_inject { display: none!important; } #footer>a { visibility: hidden!important; } #adg_end_style_inject",
+            "example.com$$div",
+            "example.com$@$script[tag-content=\"banner\"]",
+            "example.com%%js",
+            "example.com##^abc"
+        ]
+        
+        for rule in validRules {
+            XCTAssertTrue(contentBlocker.validateRule(rule))
+        }
+        
+        for rule in invalidRules {
+            XCTAssertFalse(contentBlocker.validateRule(rule))
         }
     }
 
