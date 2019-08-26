@@ -11,7 +11,7 @@
 "3b3-d2-03o.text" = "несумісний з іншими VPN додатками";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Використовувати власні налаштування DNS";
+"3lB-T7-fSO.text" = "Встановити власні параметри DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// або tls://";
@@ -98,7 +98,7 @@
 "e4h-eF-AOa.text" = "Ім'я сервера";
 
 /* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Редагувати параметри власного DNS";
+"f57-S8-QfF.text" = "Редагувати власні параметри DNS";
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
@@ -111,9 +111,6 @@
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "СКАСУВАТИ";
-
-/* Class = "UIButton"; normalTitle = "Select this server"; ObjectID = "lAE-IK-Pyv"; */
-"lAE-IK-Pyv.normalTitle" = "Обрати цей сервер";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Назва";

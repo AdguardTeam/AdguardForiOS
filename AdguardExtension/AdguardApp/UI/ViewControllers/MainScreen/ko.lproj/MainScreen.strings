@@ -1,0 +1,14 @@
+/* Class = "UILabel"; text = "Rate this app"; ObjectID = "PAL-ww-Rbi"; */
+"PAL-ww-Rbi.text" = "앱을 평가해주세요!";
+
+/* Class = "UIButton"; normalTitle = "MORE"; ObjectID = "SGw-yx-EDQ"; Note = "(Main Screen)Get Pro button title"; */
+"SGw-yx-EDQ.normalTitle" = "더보기";
+
+/* Class = "UILabel"; text = "Share this app"; ObjectID = "ZvU-OY-k27"; */
+"ZvU-OY-k27.text" = "앱 공유하기";
+
+/* Class = "UILabel"; text = "How to use AdGuard\nwith Safari"; ObjectID = "eow-nj-Hky"; */
+"eow-nj-Hky.text" = "Safari와 함께 AdGuard를 사용하는 법";
+
+/* Class = "UILabel"; text = "Be stronger with PREMIUM!"; ObjectID = "gda-ty-BWn"; */
+"gda-ty-BWn.text" = "프리미엄 버전 사용으로 강력한 기능을 만나보세요!";

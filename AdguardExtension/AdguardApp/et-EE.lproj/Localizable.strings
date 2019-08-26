@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kasutaja filter";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Siia saad kohandatud reegleid lisada, eraldades need uue reaga";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Siia saad sisestada domeenid (eraldi reale). Neid domeene AdGuard Safari filtri põhjal ei filtreeri.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "JAh";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "Kaitse on sisselülitatud";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Mõned sisublokeerijad on väljalülitatud";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Kaitse on peatatud";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Väljalülitatud";
 
 "filter_date_format" = "Uuendatud filtrid: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Sisesta kohandatud reeglid siia<br>Loe seda <a href=\"%@\">märkust reeglite süntaksi kohta</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Sisesta domeeni nimed siia. AdGuard ei filtreeri Safaris nende lehekülgede sisu.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (ilma VPN ikoonita), ei ühildu teiste VPN äppidega, ebastabiilsem";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "väljalülitatud";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokeerib reklaami, jälitajaid ja õngevõtmise veebilehti";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Soovid kindlasti välja logida?";
 
-/* GetProController - subscription period day */
-"day_period" = "päev";
-
-/* GetProController - subscription period week */
-"week_period" = "nädal";
-
-/* GetProController - subscription period month */
-"month_period" = "kuu";
-
-/* GetProController - subscription period year */
-"year_period" = "aasta";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPNi konfigureerimisel ilmnes probleem. Võta meie tehnilise toega ühendust.";
 
@@ -306,11 +306,14 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Edasijõudnule";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Tasuta prooviperiood %@";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Sisu blokeerijad";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Üldised seaded";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "Kasutusel on %@ reeglit";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Safari seadetes väljalülitatud";

@@ -240,21 +240,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Naozaj sa chcete odhlásiť?";
 
-/* GetProController - subscription period day */
-"day_period" = "deň";
-
-/* GetProController - subscription period week */
-"week_period" = "týždeň";
-
-/* GetProController - subscription period month */
-"month_period" = "mesiac";
-
-/* GetProController - subscription period year */
-"year_period" = "rok";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Vyskytol sa problém s konfiguráciou VPN, kontaktujte náš tím podpory.";
 
@@ -293,6 +278,3 @@
 
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Pokročilé";
-
-/* (LicenseController) format for trial period*/
-"trial_format" = "Bezplatná skúšobná verzia pre %@";

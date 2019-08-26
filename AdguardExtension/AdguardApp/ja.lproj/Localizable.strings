@@ -252,21 +252,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "ログアウトをしてもよろしいですか？";
 
-/* GetProController - subscription period day */
-"day_period" = "日間";
-
-/* GetProController - subscription period week */
-"week_period" = "週間";
-
-/* GetProController - subscription period month */
-"month_period" = "ヶ月";
-
-/* GetProController - subscription period year */
-"year_period" = "年間";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPN設定に問題がありました。サポートチームにお問い合わせください。";
 
@@ -305,9 +290,6 @@
 
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "詳細設定";
-
-/* (LicenseController) format for trial period*/
-"trial_format" = "%@無料お試し";
 
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "コンテンツブロッカー";

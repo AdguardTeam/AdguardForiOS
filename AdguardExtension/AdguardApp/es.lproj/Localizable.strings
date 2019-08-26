@@ -44,7 +44,7 @@
 "protection_enabled_caption" = "La protección esta habilitada";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "La protección esta desabilitada";
+"protection_disabled_caption" = "La protección esta deshabilitada";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Obtener suscripción";
@@ -84,6 +84,9 @@
 
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Filtros activados: %d/%d";
+
+/* (GroupsController) Disabled filter group subtitle */
+"filters_group_disabled" = "Deshabilitado";
 
 "filter_date_format" = "Filtros actualizados: %@";
 
@@ -158,6 +161,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Túnel completo (sin icono de VPN), incompatible con otras apps de VPN, menos estable";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "deshabilitado";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "bloquea anuncios, rastreadores y sitios web de suplantación de identidad";
@@ -240,21 +246,6 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS mediante TLS";
 
-/* GetProController - subscription period day */
-"day_period" = "día";
-
-/* GetProController - subscription period week */
-"week_period" = "semana";
-
-/* GetProController - subscription period month */
-"month_period" = "mes";
-
-/* GetProController - subscription period year */
-"year_period" = "año";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
 
@@ -282,11 +273,11 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Avanzado";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Prueba gratuita por %@";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Bloqueadores de contenido";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Configuración general";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Buscando actualizaciones...";
@@ -296,6 +287,9 @@
 
 /* (GetProController) login error message text */
 "login_max_computers_exceeded" = "Esta licencia se ha activado en la cantidad máxima de dispositivos.\nPuede desvincular la licencia de los dispositivos no utilizados en su cuenta personal en el sitio web: adguard.com";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Tenga en cuenta que el bloqueador de contenido está deshabilitado. Eso significa que los anuncios no se filtrarán independientemente de la configuración de AdGuard. Habilite el bloqueador de contenido de AdGuard en la configuración de Safari para comenzar a filtrar.";
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanente";

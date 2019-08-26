@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者過濾器";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "於此輸入您自訂的規則，被換行分隔";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "於此輸入被換行分隔之域名，AdGuard 將對於那些禁用 Safari 過濾。";
+
 /* YES Button caption in alert */
 "common_action_yes" = "是";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "防護被啟用";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "某些內容阻擋器被禁用";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "防護被禁用";
@@ -65,13 +74,13 @@
 "login_premium_expired_message" = "您已成功地登入您的 AdGuard 帳戶，但允許您啟動該高級版之授權金鑰已到期。";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
-"restore_purchases_failure_message" = "當試圖恢復該購買時，錯誤已發生。";
+"restore_purchases_failure_message" = "當試圖回復該購買時，錯誤已發生。";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "該購買已被恢復！AdGuard for iOS 的高級版已被啟動。";
+"restore_success_message" = "該購買已被回復！AdGuard for iOS 的高級版已被啟動。";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
-"nothing_to_restore_message" = "無購買以恢復";
+"nothing_to_restore_message" = "無購買以回復";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
 "purchase_success_message" = "該購買已被成功地完成！AdGuard for iOS 的高級版已被啟動。";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "已禁用";
 
 "filter_date_format" = "過濾器被更新：%@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "於此您可增加自訂的規則<br>閱讀這個<a href=\"%@\">關於規則語法之說明</a>。";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站禁用過濾。";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖示），與其它的 VPN 應用程式不相容，較不穩定的";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "已禁用";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS 是一種保護您的隱私免於不同的計數器、分析的系統及網路釣魚的網站之替代的方式";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "您確定您想要登出嗎？";
 
-/* GetProController - subscription period day */
-"day_period" = "日";
-
-/* GetProController - subscription period week */
-"week_period" = "週";
-
-/* GetProController - subscription period month */
-"month_period" = "月";
-
-/* GetProController - subscription period year */
-"year_period" = "年";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "有 VPN 配置的問題，請與我們的支援團隊聯繫。";
 
@@ -306,11 +306,17 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "進階的";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "計 %@ 之免費的試用";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "內容阻擋器";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "過濾器：";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "一般的設定";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ 規則正被使用";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "在 Safari 設定裡被禁用";

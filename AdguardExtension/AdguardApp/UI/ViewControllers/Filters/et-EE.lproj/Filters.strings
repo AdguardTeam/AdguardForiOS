@@ -1,0 +1,71 @@
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
+"2wy-vg-qvr.text" = "Lisa filter";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
+"3WM-jW-br8.text" = "Lisa filter";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
+"Cyn-cw-Zrm.text" = "Nimi:";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
+"E3e-Mc-RhD.title" = "Filtrid";
+
+/* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
+"NsT-wt-1hd.text" = "Uus kohandatud filter";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "KATKESTA";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Reeglite hulk: ";
+
+/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
+"UR2-d4-zYf.text" = "Uuendatud";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
+"Ve5-DF-RNB.text" = "Veebileht";
+
+/* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
+"Z16-OR-tjl.text" = "Filtri URL:";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
+"cTI-39-Vwx.text" = "Versioon";
+
+/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Kasuta oma kohandatud filtreid siin";
+
+/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
+"gbf-TL-LXR.title" = "Filtrid";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "LISA";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
+"kab-Sc-THo.text" = "Versioon";
+
+/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
+"lFg-x8-C9b.normalTitle" = "Hangi Premium";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "KATKESTA";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
+"mXe-eu-cfH.normalTitle" = "KUSTUTA";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "JÄRGMINE";
+
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "Koduleht: ";
+
+/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
+"wzJ-ge-NyI.text" = "Reeglite hulk:";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
+"x93-x6-7Fw.text" = "Kuupäev";
+
+/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
+"xS8-f2-3yC.text" = "Filtri nimi";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Sisesta filtri nimi:";

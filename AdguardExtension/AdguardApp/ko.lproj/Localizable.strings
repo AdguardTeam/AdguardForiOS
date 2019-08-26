@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 필터";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "여기에 사용자 규칙을 줄 바꿈으로 나눠 입력하세요";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "여기에 AdGuard가 비활성화 시킬 Safari 필터 도메인명을 줄 바꿈으로 나눠 입력하세요";
+
 /* YES Button caption in alert */
 "common_action_yes" = "예";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "보호가 활성화 되었습니다.";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "몇몇의 콘텐츠 차단기가 비활성화 됨";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "보호가 비활성화 되었습니다.";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "비활성화 됨";
 
 "filter_date_format" = "필터가 업데이트 되었습니다: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "이곳에 당신의 사용자 정의 규칙을 추가하세요<br><a href=\"%@\">규칙 문법에 대한</a> 내용을 읽어보세요.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서의 필터링을 비활성화할 것입니다.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 어플리케이션과 호환되지 않음, 불안정함";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "비활성화 됨";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "광고, 트래커, 피싱 웹사이트 차단";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "정말 로그아웃 하시겠습니까?";
 
-/* GetProController - subscription period day */
-"day_period" = "일";
-
-/* GetProController - subscription period week */
-"week_period" = "주";
-
-/* GetProController - subscription period month */
-"month_period" = "달";
-
-/* GetProController - subscription period year */
-"year_period" = "년";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPN을 구성하는 도중 문제가 발생했습니다. 고객 지원 부서에 연락해주세요.";
 
@@ -306,11 +306,14 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "고급";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "%@ 동안의 무료 체험판";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "콘텐츠 차단기";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "일반 설정";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@개의 규칙이 사용되는 중";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "사파리 설정에서 비활성화 됨";

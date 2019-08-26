@@ -52,6 +52,9 @@
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš prémiový účet vypršel";
 
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Pozor";
+
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Úspěšně jste se přihlásili k účtu AdGuard, ale nejsou zde žádné licenční klíče, které vám umožní aktivovat prémiovou verzi.";
 
@@ -87,11 +90,17 @@
 
 "filter_date_format" = "Filtry byly aktualizovány: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Zde zadejte vlastní pravidla<br>Přečtěte si <a href=\"%@\">poznámku o syntaxi pravidla</a>.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Zde zadejte názvy domén. AdGuard zakáže filtrování těchto webových stránek v Safari.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Zde zadejte názvy domén. AdGuard povolí filtrování pouze těchto webových stránek v Safari.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Aktualizuji...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Přidat pravidlo";
@@ -123,8 +132,14 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Exportovat";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "Nahlásit nekorektní blokování";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Nahlásit chybu na GitHub";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Kontaktovat podporu";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Exportovat protokoly";
@@ -155,6 +170,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (bez ikony VPN), nekompatibilní s jinými aplikacemi VPN, méně stabilní";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "vypnuto";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS je alternativní způsob ochrany vašeho soukromí před různými čítači, analytickými systémy a podvodnými stránkami";
@@ -240,21 +258,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Opravdu se chcete odhlásit?";
 
-/* GetProController - subscription period day */
-"day_period" = "den";
-
-/* GetProController - subscription period week */
-"week_period" = "týden";
-
-/* GetProController - subscription period month */
-"month_period" = "měsíc";
-
-/* GetProController - subscription period year */
-"year_period" = "rok";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Při konfiguraci VPN došlo k chybě. Obraťte se na náš tým podpory.";
 
@@ -294,5 +297,50 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Pokročilé";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Zkušební verze na %@";
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Blokátory obsahu";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Obecná nastavení";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Kontroluji aktualizace...";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Než použijete toto rozšíření akce, musí %1$@ provést počáteční konfiguraci. Spusťte hlavní aplikaci %2$@ a nechte ji tak učinit.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Nelze odeslat zprávu týmu podpory. Nemáte nakonfigurovaný emailový účet.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Upozorňujeme, že blokování obsahu je vypnuto. To znamená, že reklamy nebudou filtrovány bez ohledu na nastavení služby AdGuard. K aktivaci blokování obsahu AdGuard spusťte filtrování v nastavení Safari.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Není získán název hostitele. Možná, že stránka dosud nebyla načtena.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Bezpečnostní politika této stránky neumožňuje spuštění AdGuard asistenta.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Nastala neočekávaná chyba při iniciaci akce doplňku pro Safari. Pokud toto nastane opakovaně, kontaktuje prosím podporu AdGuardu.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Varování";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Překročili jste maximální počet pravidel filtrování.";
+
+/* (GetProController) description for subscription trial period */
+"trial_description_format" = "Potom %1$@ za %2$@";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ZAPNUTO";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "VYPNUTO";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Domovská stránka:";
+
+/* (AboutController) current app version string */
+"about_version" = "Verze";

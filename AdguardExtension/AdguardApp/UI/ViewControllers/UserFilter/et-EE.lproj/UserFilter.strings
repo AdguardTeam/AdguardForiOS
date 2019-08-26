@@ -1,0 +1,47 @@
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "KATKESTA";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
+"8G3-AL-tRu.title" = "Katkesta";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
+"9th-UM-Uaj.normalTitle" = "Katkesta";
+
+/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "Reegel lisati kasutaja filtrisse.";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "SALVESTA";
+
+/* Class = "UIButton"; normalTitle = "Select all"; ObjectID = "DLT-c2-7eC"; */
+"DLT-c2-7eC.normalTitle" = "Vali kõik";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
+"EH6-Zr-YRP.text" = "Muuda";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
+"HB0-zK-xj2.normalTitle" = "Salvesta";
+
+/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "EEMALDA";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
+"U2P-9b-f6k.normalTitle" = "KATKESTA";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
+"c5a-s3-YPd.normalTitle" = "Vali";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "LISA";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
+"iuK-dC-RKf.normalTitle" = "Kustuta";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
+"lE1-GD-Qr5.normalTitle" = "Muuda";
+
+/* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
+"x7r-Ln-XiZ.text" = "Domeen:";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "OK";

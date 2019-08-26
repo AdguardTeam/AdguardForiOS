@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Reportar errores, envía tus comentarios y sugerencias.";
 
+/* Class = "UILabel"; text = "General settings"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "Configuración general";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "¿Qué es AdGuard?                 ";
 

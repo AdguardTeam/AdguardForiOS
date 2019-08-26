@@ -1,3 +1,5 @@
+/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
+"ChK-gV-7pc.title" = "一般的設定";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "深色";
@@ -44,5 +46,5 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "如果此設定被啟用，AdGuard 於背景過濾器更新將只使用 Wi-Fi";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "您有 5 個內容阻擋器，它們每個可包含 50,000 項規則";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "您有 6 個內容阻擋器，它們每個可包含 50,000 項規則";

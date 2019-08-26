@@ -1,0 +1,59 @@
+/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
+"0Zf-Ng-gYi.title" = "AdGuard Premium";
+
+/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
+"5iB-q7-5l8.text" = "DNS Privaatsus";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Logi välja";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
+"7Sy-Te-Eh3.text" = "Oled nüüd tellija";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
+"A4T-Kw-foN.text" = "Määra oma reeglid";
+
+/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
+"K5r-9l-kKl.text" = "Sul on litsents";
+
+/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "Sisesta oma e-posti aadress siia";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "AVA MINU KONTO";
+
+/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+"SKX-L4-odW.text" = "Blokeeri õngevõtmist ja teisi ohte";
+
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Logi sisse";
+
+/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
+"ZMu-UP-PI3.text" = "Kaitse oma privaatseid andmeid";
+
+/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "LOGI SISSE";
+
+/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
+"dcW-zZ-VlL.title" = "Logi sisse";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
+"fU2-3b-5Lf.text" = "Turvafiltrid, DNS privaatsus, kohandatud filtrid jne. ";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
+"jUb-cY-Qt7.normalTitle" = "PROOVI TASUTA";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Taasta ost";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
+"mpR-bB-C6U.text" = "Turvalisuse filtrid";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
+"oxc-z7-F6Z.text" = "Kohandatud filtrid";
+
+/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
+"wLZ-TG-e9w.normalTitle" = "logi sisse";
+
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "Tutvu meie Premium funktsioonidega tasuta";

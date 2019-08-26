@@ -16,14 +16,32 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "Hai una licenza";
 
+/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "Inserisci la tua email qui";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "VAI AL MIO ACCOUNT";
 
 /* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "Blocca il phishing e altre minacce";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Accedere";
+
 /* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "Valuta i tuoi dati privati";
+
+/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "ACCEDERE";
+
+/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
+"dcW-zZ-VlL.title" = "Login";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
+"fU2-3b-5Lf.text" = "Filtri di sicurezza, privacy DNS, filtri personalizzati, ecc. ";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
+"jUb-cY-Qt7.normalTitle" = "PROVA GRATIS";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Ripristina acquisto";
@@ -33,3 +51,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Filtri personalizzati";
+
+/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
+"wLZ-TG-e9w.normalTitle" = "accedere";
+
+/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
+"zFg-Ls-ea6.text" = "Scopri le nostre funzioni Premium gratis";

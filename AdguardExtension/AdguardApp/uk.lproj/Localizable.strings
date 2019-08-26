@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Фільтр користувача";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Вводьте власні правила тут - кожне правило в новому рядку";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Вводьте назви доменів тут - кожен домен в новому рядку. Для них AdGuard вимкне фільтрування в Safari.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "ТАК";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "Захист увімкнено";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Деякі блокувальники вмісту вимкнено";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Захист вимкнено";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Вимкнено";
 
 "filter_date_format" = "Фільтри оновлено: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Тут ви можете додавати власні правила<br>Ознайомтеся із <a href=\"%@\">синтаксисом правил</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Додавайте домени тут. AdGuard вимкне фільтрування в Safari для цих веб-сайтів.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN). Несумісний з іншими VPN-додатками, менш стабільний";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "вимкнено";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS - це альтернативний спосіб захисту приватності від різних лічильників, аналітичних систем i шахрайських веб-сайтів";
@@ -252,21 +267,6 @@
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Ви впевнені, що хочете вийти?";
 
-/* GetProController - subscription period day */
-"day_period" = "день";
-
-/* GetProController - subscription period week */
-"week_period" = "тиждень";
-
-/* GetProController - subscription period month */
-"month_period" = "місяць";
-
-/* GetProController - subscription period year */
-"year_period" = "рік";
-
-/* GetProController - subscription period year */
-"period_format" = "%1$d %2$@";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Проблема з конфігурацією VPN. Будь ласка, зв'яжіться з нашою службою підтримки.";
 
@@ -306,11 +306,14 @@
 /* (AdvancedSettingsController) "Advanced" header view title*/
 "advanced_header_title" = "Розширені";
 
-/* (LicenseController) format for trial period*/
-"trial_format" = "Безкоштовний пробний період на %@";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Блокувальники вмісту";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Загальні налаштування";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ правил використовуються";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Вимкнено в параметрах Safari";

@@ -109,9 +109,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ANULUJ";
 
-/* Class = "UIButton"; normalTitle = "Select this server"; ObjectID = "lAE-IK-Pyv"; */
-"lAE-IK-Pyv.normalTitle" = "Wybierz ten serwer";
-
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Nazwa";
 

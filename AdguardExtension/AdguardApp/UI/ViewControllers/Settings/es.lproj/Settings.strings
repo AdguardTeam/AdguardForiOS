@@ -1,3 +1,5 @@
+/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
+"ChK-gV-7pc.title" = "Configuración general";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Oscuro";
@@ -7,6 +9,9 @@
 
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
+
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Actualizar automáticamente solo por Wi-Fi";
 
 /* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "bVh-Of-Oxm"; */
 "bVh-Of-Oxm.text" = "Invertir lista blanca";
@@ -26,5 +31,5 @@
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Claro";
 
-/* Class = "UILabel"; text = "You have 5 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "Tienes 5 bloqueadores de contenido, cada uno de ellos puede contener 50,000 reglas";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
+"wMR-5F-GaE.text" = "Tienes 6 bloqueadores de contenido, cada uno de ellos puede contener 50,000 reglas";
