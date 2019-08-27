@@ -60,17 +60,32 @@ class LoginService: LoginServiceProtocol {
     static let loginError = -1
     static let loginBadCredentials = -2
     static let loginMaxComputersExceeded = -3
+    static let auth2FaRequired = -4
+    static let accountIdDisabled = -5
+    static let outh2FAInvalid = -6
+    static let emptyEmailOrPassword = -7
+    static let invalidEmailOrPassword = -8
+    static let toShortPassword = -9
+    static let compromissedPassword = -10
+    static let emailAllreadyUsed = -11
+    
+    static let errorDescription = "error_description"
     
     // keychain constants
     private let LOGIN_SERVER = "https://mobile-api.adguard.com"
     
+    private let AUTH_SERVER = "https://testauth.adguard.com"
     
     // login request
     // todo: remove auth request in future builds
-    private let LOGIN_URL = "https://mobile-api.adguard.com/api/2.0/auth"
-    private let STATUS_URL = "https://mobile-api.adguard.com/api/1.0/status.html"
-    private let AUTH_TOKEN_URL = "https://mobile-api.adguard.com/api/2.0/auth_token"
-    private let RESET_LICENSE_URL = "https://mobile-api.adguard.com/api/1.0/resetlicense.html"
+    lazy private var LOGIN_URL = { "\(LOGIN_SERVER)/api/2.0/auth" }()
+    lazy private var STATUS_URL = { "\(LOGIN_SERVER)/api/1.0/status.html" }()
+    lazy private var AUTH_TOKEN_URL = { "\(LOGIN_SERVER)/api/2.0/auth_token" }()
+    lazy private var RESET_LICENSE_URL = { "\(LOGIN_SERVER)/api/1.0/resetlicense.html" }()
+    lazy private var OAUTH_TOKEN_URL = { "\(AUTH_SERVER)/oauth/token" } ()
+    lazy private var REGISTRATION_URL = { "\(AUTH_SERVER)/api/1.0/registration" } ()
+    
+    // - request fileds
     private let LOGIN_EMAIL_PARAM = "email"
     private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
@@ -348,6 +363,91 @@ class LoginService: LoginServiceProtocol {
         resetLicense() { _ in }
         
         return true
+    }
+    
+    func getOauthToken(username: String, password: String, twoFactorToken: String?, callback: @escaping (Error?)->Void) {
+        DDLogInfo("(LoginService) getOauthToken ")
+        
+        var params = ["username" : username,
+                      "password" : password,
+                      "client_id" : "adguard-ios",
+                      "grant_type" : "password_2fa",
+                      "scope" : "trust",
+        ]
+        
+        if twoFactorToken != nil {
+            params["2fa_token"] = twoFactorToken!
+        }
+        
+        guard let url = URL(string: OAUTH_TOKEN_URL) else  {
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            DDLogError("(PurchaseService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        
+        network.data(with: request) { [weak self] (dataOrNil, response, error) in
+            guard let sSelf = self else { return }
+            guard error == nil else {
+                DDLogError("(LoginService) getOauthToken - got error \(error!.localizedDescription)")
+                callback(error!)
+                return
+            }
+            
+            guard let data = dataOrNil else {
+                DDLogError("(LoginService) getOauthToken - response data is nil")
+                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                return
+            }
+            
+            DDLogInfo("(LoginService) getOauthToken get response")
+            
+            let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
+            
+            // todo: do something with result
+            
+            callback(nil)
+        }
+    }
+    
+    func registerUser(email: String, password: String, callback: @escaping (Error?)->Void) {
+        DDLogInfo("(LoginService) registerUser ")
+        
+        var params = ["email" : email,
+                      "password" : password,
+        ]
+        
+        guard let url = URL(string: REGISTRATION_URL) else  {
+            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            DDLogError("(PurchaseService) registerUser error. Can not make URL from String \(REGISTRATION_URL)")
+            return
+        }
+        
+        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        
+        network.data(with: request) { [weak self] (dataOrNil, response, error) in
+            guard let sSelf = self else { return }
+            guard error == nil else {
+                DDLogError("(LoginService) registerUser - got error \(error!.localizedDescription)")
+                callback(error!)
+                return
+            }
+            
+            guard let data = dataOrNil else {
+                DDLogError("(LoginService) registerUser - response data is nil")
+                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                return
+            }
+            
+            DDLogInfo("(LoginService) getOauthToken get response")
+            
+            let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
+            
+            // todo: do something with result
+            
+            callback(nil)
+        }
     }
     
     // MARK: - private methods

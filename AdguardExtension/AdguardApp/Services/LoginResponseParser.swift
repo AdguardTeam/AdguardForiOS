@@ -22,6 +22,10 @@ protocol LoginResponseParserProtocol {
     func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
     
     func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
+    
+    func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, NSError?)
+    
+    func processRegisterResponse(data: Data)->(success: Bool, error: NSError?)
 }
 
 
@@ -102,6 +106,35 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
     }
     
+    func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, NSError?) {
+        do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+            
+            return processOauthResponseJson(jsonResponse)
+        }
+        catch {
+            let responseString = String(data: data, encoding: .utf8)
+            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
+            return (nil, nil, error)
+        }
+    }
+    
+    func processRegisterResponse(data: Data) -> (success: Bool, error: NSError?) {
+        do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+            
+            return processRegisterResponseJson(jsonResponse)
+        }
+        catch {
+            let responseString = String(data: data, encoding: .utf8)
+            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
+            return (false, error)
+        }
+    }
+    
+    // MARK: -private methods
     
     private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
         
@@ -192,5 +225,74 @@ class LoginResponseParser: LoginResponseParserProtocol {
         let premium = status == STATUS_RESPONSE_STATUS_PREMIUM
         
         return (premium, expirationDate, nil)
+    }
+    
+    private func processOauthResponseJson(_ json : [String: Any])->(accessToken: String?, expirationDate: Date?, NSError?) {
+        let token = json["access_token"] as? String
+        let expires = json["expires_in"] as? Int // in seconds. from now
+        
+        if token != nil && expires != nil {
+            let expirationDate = Date(timeIntervalSinceNow: TimeInterval(expires!))
+            return (token, expirationDate, nil)
+        }
+        
+        let error = json["error"] as? String
+        let errorDescription = json["error_description"] as? String
+        
+        var resultError: NSError?
+        switch (error, errorDescription) {
+            
+        case (.some("2fa_required"), _):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.auth2FaRequired, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("Sorry, unrecognized username or password")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("Account is disabled")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIdDisabled, userInfo: nil)
+            
+        case (.some("2fa_invalid"), _):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.outh2FAInvalid, userInfo: nil)
+            
+        default:
+            let userInfo = errorDescription == nil ? nil : [LoginService.errorDescription: errorDescription!]
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: userInfo)
+        }
+        
+        return (nil, nil, resultError)
+    }
+    
+    func processRegisterResponseJson(_ json : [String: Any])->(success: Bool, error: NSError?) {
+        let error = json["error"] as? String
+        let field = json["field"] as? String
+        
+        if error == nil {
+            return (true, nil)
+        }
+        
+        var errorCode = LoginService.loginError
+        var userInfo: [String: String]?
+        
+        switch (error!, field) {
+        case ("validation.not_empty", _):
+            errorCode = LoginService.emptyEmailOrPassword
+        case ("validation.not_valid", _):
+            errorCode = LoginService.invalidEmailOrPassword
+        case ("validation.min_length", .some("password")):
+            errorCode = LoginService.toShortPassword
+        case ("validation.compromised.password", _):
+            errorCode = LoginService.compromissedPassword
+        case ("validation.unique_constraint", "email"):
+            errorCode = LoginService.emailAllreadyUsed
+        default:
+            if let errorMessage = json["errorMessage"] as? String {
+                userInfo = [LoginService.errorDescription: errorMessage]
+            }
+            errorCode = LoginService.loginError
+        }
+        
+        var resultError = NSError(domain: LoginService.loginErrorDomain, code: errorCode, userInfo: userInfo)
+        
+        return (false, resultError)
     }
 }

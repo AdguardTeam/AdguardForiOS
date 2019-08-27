@@ -52,11 +52,222 @@ class LoginResponseParserTest: XCTestCase {
         
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testGetOuathTokenSuccess() {
+        let responseString = """
+                               {
+                                 "access_token" : "123-321",
+                                 "token_type" : "bearer",
+                                 "expires_in" : 100,
+                                 "scope" : "trust"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertEqual(token, "123-321")
+        XCTAssertNotNil(expiration)
+        XCTAssertTrue(expiration! > Date(timeIntervalSinceNow: 0))
+        XCTAssertNil(error)
     }
     
+    func testGetToken2FARequired() {
+        let responseString = """
+                               {
+                                 "error" : "2fa_required",
+                                 "error_description" : "2FA is required"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.auth2FaRequired)
+    }
+    
+    func testGetTokenBadCredentials() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Sorry, unrecognized username or password"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.loginBadCredentials)
+    }
+    
+    func testGetTokenDisabled() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Account is disabled"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.accountIdDisabled)
+    }
+    
+    func testGetTokenInvalide2FAToken() {
+        let responseString = """
+                               {
+                                 "error" : "2fa_invalid",
+                                 "error_description" : "Invalid token"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.outh2FAInvalid)
+    }
+    
+    func testGetTokenUnknownError() {
+        let responseString = """
+                               {
+                                 "error" : "unknown",
+                                 "error_description" : "Some Error"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.loginError)
+        XCTAssertNotNil(error?.userInfo)
+        XCTAssertEqual(error?.userInfo[LoginService.errorDescription] as? String, "Some Error")
+    }
+    
+    func testRegisterSuccess() {
+        let responseString = """
+                               { }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (success, error) = parser.processRegisterResponse(data: data)
+        
+        XCTAssertTrue(success)
+        XCTAssertNil(error)
+    }
+    
+    func testRegisterEmptyEmail() {
+       
+        let responseString = """
+                               {
+                                 "error" : "validation.not_empty",
+                                 "errorMessage" : "Must not be empty",
+                                 "field" : "email"
+                               }
+                             """
+        
+        registerCheckError(responseString, LoginService.emptyEmailOrPassword)
+    }
+    
+    func testRegisterNotValid() {
+        let responseString = """
+                               {
+                                 "error" : "validation.not_valid",
+                                 "errorMessage" : "This value is not valid",
+                                 "field" : "email"
+                               }
+                             """
+        
+        registerCheckError(responseString, LoginService.invalidEmailOrPassword)
+    }
+    
+    func testRegisterPasswordLength() {
+        let responseString = """
+                               {
+                                 "error" : "validation.min_length",
+                                 "errorMessage" : "This value is too short. It should have 8 characters or more.",
+                                 "field" : "password"
+                               }
+                             """
+        
+        registerCheckError(responseString, LoginService.toShortPassword)
+    }
+    
+    func testRegisterCompromissedPassword() {
+        let responseString = """
+                               {
+                                 "error" : "validation.compromised.password",
+                                 "errorMessage" : "compromissed password",
+                                 "field" : "password"
+                               }
+                             """
+        
+        registerCheckError(responseString, LoginService.compromissedPassword)
+    }
+    
+    func testRegisterUsedEmail() {
+        let responseString = """
+                               {
+                                 "error" : "validation.unique_constraint",
+                                 "errorMessage" : "This value is already used",
+                                 "field" : "email"
+                               }
+                             """
+        
+        registerCheckError(responseString, LoginService.emailAllreadyUsed)
+    }
+    
+    func testRegisterUnknownError() {
+        let responseString = """
+                               {
+                                 "error" : "unknown error",
+                                 "errorMessage" : "It can be new error type",
+                                 "field" : "some field"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (success, error) = parser.processRegisterResponse(data: data)
+        
+        XCTAssertFalse(success)
+        XCTAssertEqual(error?.code, LoginService.loginError)
+        XCTAssertEqual(error?.userInfo[LoginService.errorDescription] as? String, "It can be new error type")
+    }
+    
+    func registerCheckError(_ response: String,_ expectedErrorCode: Int) {
+        
+        guard let data = response.data(using: .utf8) else { return XCTFail() }
+        
+        let (success, error) = parser.processRegisterResponse(data: data)
+        
+        XCTAssertFalse(success)
+        XCTAssertEqual(error?.code, expectedErrorCode)
+    }
 }
