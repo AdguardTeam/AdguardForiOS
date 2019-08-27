@@ -171,32 +171,41 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return !text.isEmpty && text.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
     }
     
-    private func webAuth(){
-        if let name = nameEdit.text {
-            
-            webAuthWithName(name: name)
-        }
-    }
+//    private func webAuth(){
+//        if let name = nameEdit.text {
+//
+//            webAuthWithName(name: name)
+//        }
+//    }
     
     private func login(){
+        
+        let name = nameEdit.text
+        let password: String? = "Kyvedu560" // todo: get password from textfield
+        
+        if (name?.count ?? 0) > 0 &&
+            (password?.count ?? 0) > 0 {
+            purchaseService.li
+        }
+        
         if let name = nameEdit.text {
             if isLicenseKey(text: name) {
                 purchaseService.login(withLicenseKey: name)
             }
             else {
-                webAuth()
+//                webAuth()
             }
         }
     }
     
-    private func webAuthWithName(name: String){
-           
-           DDLogInfo("(GetProController) - webAuth")
-           guard let url = purchaseService.authUrlWithName(name: name) else { return }
-           let safariController = SFSafariViewController(url: url)
-           present(safariController, animated: true, completion: nil)
-           canShowAlert = false
-       }
+//    private func webAuthWithName(name: String){
+//
+//           DDLogInfo("(GetProController) - webAuth")
+//           guard let url = purchaseService.authUrlWithName(name: name) else { return }
+//           let safariController = SFSafariViewController(url: url)
+//           present(safariController, animated: true, completion: nil)
+//           canShowAlert = false
+//       }
        
    private func showAlertIfPossible() {
        if canShowAlert && showAlertBlock != nil {

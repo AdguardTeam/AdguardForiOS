@@ -87,6 +87,11 @@ protocol PurchaseServiceProtocol {
     func login(withLicenseKey key: String)
     
     /**
+     Log with name and password
+     */
+    func login(name: String, password: String)
+    
+    /**
      checks the status of adguard license
      */
     func checkLicenseStatus()
