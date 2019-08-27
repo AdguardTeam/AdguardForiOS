@@ -38,7 +38,7 @@
 "user_filter_title" = "User Filter";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Enter your user-made rules here, separated by line breaks";
+"user_filter_helper" = "Enter your own rules here, separated by line breaks";
 
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will disable Safari filtering.";
