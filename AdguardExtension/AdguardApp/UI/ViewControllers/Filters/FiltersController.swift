@@ -313,8 +313,10 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             navigationItem.rightBarButtonItems = [cancelButton]
             tableView.tableHeaderView = searchView
             searchBar.text = viewModel?.searchString
+            navigationItem.setHidesBackButton(true, animated:true)
         }
         else {
+            navigationItem.setHidesBackButton(false, animated:true)
             navigationItem.rightBarButtonItems = [searchButton]
             tableView.tableHeaderView = nil
             searchBar.text = viewModel?.searchString
