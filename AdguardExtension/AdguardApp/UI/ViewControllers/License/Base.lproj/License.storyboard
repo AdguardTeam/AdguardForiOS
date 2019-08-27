@@ -43,19 +43,26 @@
                                                         <constraint firstAttribute="height" constant="48" id="JCV-TR-nbo"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOCK MORE  ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-RH-NgY">
+                                                    <rect key="frame" x="24" y="92" width="366" height="67"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8E-wT-cRk" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="92" width="314" height="0.0"/>
+                                                    <rect key="frame" x="50" y="175" width="314" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8i-IF-fYV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="96" width="314" height="0.0"/>
+                                                    <rect key="frame" x="50" y="179" width="314" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
@@ -65,11 +72,14 @@
                                             <constraints>
                                                 <constraint firstItem="K8i-IF-fYV" firstAttribute="top" secondItem="y8E-wT-cRk" secondAttribute="bottom" constant="4" id="FBH-er-0ck"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="K8i-IF-fYV" secondAttribute="bottom" constant="20" id="JhN-kp-eI4"/>
+                                                <constraint firstAttribute="trailing" secondItem="NlM-RH-NgY" secondAttribute="trailing" constant="24" id="LJX-d0-EqW"/>
                                                 <constraint firstItem="K8i-IF-fYV" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leadingMargin" constant="30" id="Nwf-bS-BKu"/>
-                                                <constraint firstItem="y8E-wT-cRk" firstAttribute="top" secondItem="Zf4-Fs-SKf" secondAttribute="bottom" constant="16" id="Rvh-4K-B9N"/>
                                                 <constraint firstItem="Zf4-Fs-SKf" firstAttribute="top" secondItem="MJx-iD-eXa" secondAttribute="top" constant="28" id="SGB-ab-Xn0"/>
+                                                <constraint firstItem="y8E-wT-cRk" firstAttribute="top" secondItem="NlM-RH-NgY" secondAttribute="bottom" constant="16" id="W9o-4g-rhy"/>
+                                                <constraint firstItem="NlM-RH-NgY" firstAttribute="top" secondItem="Zf4-Fs-SKf" secondAttribute="bottom" constant="16" id="fWl-aL-VQd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="y8E-wT-cRk" secondAttribute="trailing" constant="30" id="mte-bm-y7z"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="K8i-IF-fYV" secondAttribute="trailing" constant="30" id="nqF-ga-sh6"/>
+                                                <constraint firstItem="NlM-RH-NgY" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leading" constant="24" id="t1M-lG-E0V"/>
                                                 <constraint firstItem="y8E-wT-cRk" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leadingMargin" constant="30" id="udP-VK-odX"/>
                                                 <constraint firstItem="Zf4-Fs-SKf" firstAttribute="centerX" secondItem="MJx-iD-eXa" secondAttribute="centerX" id="wvd-zz-xbB"/>
                                             </constraints>
@@ -214,7 +224,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="Restore purchase">
-                                                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
@@ -1020,6 +1030,6 @@
         <image name="widget-logo" width="70" height="73"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x9H-U4-xhh"/>
+        <segue reference="XHd-Jk-4yR"/>
     </inferredMetricsTieBreakers>
 </document>
