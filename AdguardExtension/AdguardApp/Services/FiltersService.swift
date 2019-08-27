@@ -374,16 +374,16 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
         }
 
-        filter.meta!.filterId = antibanner.nextCustomFilterId() as NSNumber
+        filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
         for group in groups {
             if group.groupId != FilterGroupId.custom { continue }
             
-            let newFilter = Filter(filterId: filter.meta!.filterId as! Int, groupId: FilterGroupId.custom)
-            newFilter.name = filter.meta!.name
-            newFilter.desc = filter.meta!.descr
-            newFilter.homepage = filter.meta!.homepage
-            newFilter.version = filter.meta!.version
+            let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
+            newFilter.name = filter.meta.name
+            newFilter.desc = filter.meta.descr
+            newFilter.homepage = filter.meta.homepage
+            newFilter.version = filter.meta.version
             newFilter.enabled = true
             newFilter.rulesCount = filter.rules.count
             

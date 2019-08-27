@@ -202,25 +202,26 @@ class LoginServiceTest: XCTestCase {
 class NetworkMock: ACNNetworkingProtocol {
     
     var returnString = ""
+    var response = URLResponse()
     
     func data(with url: URL, completionHandler: ((Data?, URLResponse?, Error?) -> Void)? = nil) {
         
-        DispatchQueue.main.async {
-            completionHandler?(self.returnString.data(using: .utf8), nil, nil)
+        DispatchQueue(label: "NetworkMock queue").async {
+            completionHandler?(self.returnString.data(using: .utf8), self.response, nil)
         }
     }
     
     func data(with url: URL, timeoutInterval: TimeInterval, completionHandler: ((Data?, URLResponse?, Error?) -> Void)? = nil) {
         
-        DispatchQueue.main.async {
-            completionHandler?(self.returnString.data(using: .utf8), nil, nil)
+        DispatchQueue(label: "NetworkMock queue").async {
+            completionHandler?(self.returnString.data(using: .utf8), self.response, nil)
         }
     }
     
     func data(with URLrequest: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         
-        DispatchQueue.main.async {
-            completionHandler(self.returnString.data(using: .utf8), nil, nil)
+        DispatchQueue(label: "NetworkMock queue").async {
+            completionHandler(self.returnString.data(using: .utf8), self.response, nil)
         }
     }
 }
