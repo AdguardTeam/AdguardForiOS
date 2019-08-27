@@ -11,6 +11,8 @@
 #import "ACommons/ACNetwork.h"
 #import "ASDFilterObjects.h"
 #import "ACNNetworking.h"
+#import "ACIOUtils.h"
+#import "Adguard-Swift.h"
 
 #define AAS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
 #define AAS_EXECUTION_LEEWAY                                5 // 5 seconds
@@ -65,6 +67,7 @@ typedef void (^ParserActionType)(ParsingContext *context, NSString *tag, NSStrin
 @implementation AASFilterSubscriptionParser {
     //NSURLSessionDataTask *_currentLoadingTask;
     BOOL _canceled;
+    id<ACNNetworkingProtocol> _networking;
 }
 
 static NSDictionary <NSString *, ParserActionType> *_parserActions;
@@ -96,10 +99,11 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                           };
     }
 }
-- (instancetype)init {
+- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking {
     self = [super init];
     if (self) {
         _canceled = NO;
+        _networking = networking;
     }
     return self;
 }
@@ -121,13 +125,9 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
             if (completion) {
                 completion(nil, nil);
             }
-//            _currentLoadingTask = nil;
             return;
         }
 
-//        if (_currentLoadingTask) {
-//            [NSException raise:AASFilterSubscriptionParserExceptionInUse format:@"This parser instance already is used."];
-//        }
         DDLogInfo(@"(AASFilterSubscriptionParser) Begin parse custom filter for url:\n %@", url);
         ParsingContext *context = [ParsingContext new];
         context.redirect = NO;
@@ -139,9 +139,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                                    @"(AASFilterSubscriptionParser) Error while processing the custom filter file.");
         
         
-//        _currentLoadingTask =
-//
-        [[ACNNetworking new] dataWithURL:url
+        [_networking dataWithURL:url
                  completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
                      do {
@@ -249,7 +247,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                          if (completion) {
                              completion(nil, error);
                          }
-//                         _currentLoadingTask = nil;
                      }
                      return;
                  }
@@ -385,25 +382,11 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 }
 
 - (void)parseRulesWithContext:(ParsingContext *)context content:(NSString *)content {
-    __block BOOL firstLine = YES;
-    __block NSUInteger count = 0;
-    [content enumerateLinesUsingBlock:^(NSString * _Nonnull line, BOOL * _Nonnull stop) {
-        if (firstLine) {
-            firstLine = NO;
-            if ([line contains:ADBLOCK_FIRST_LINE caseSensitive:NO]) {
-                return;
-            }
-        }
-        if ([NSString isNullOrWhiteSpace:line]) {
-            return;
-        }
-        count++;
-        ASDFilterRule *rule = [[ASDFilterRule alloc] initWithText:line enabled:YES];
-        if (rule) {
-            rule.ruleId = @(count);
-            [context.result.rules addObject:rule];
-        }
-    }];
+    
+    NSArray<NSString*> *lines = [content componentsSeparatedByCharactersInSet: NSCharacterSet.newlineCharacterSet];
+    RulesParser* rulesParse = [RulesParser new];
+    
+    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines filterId:@(0)]];
 }
 
 /**

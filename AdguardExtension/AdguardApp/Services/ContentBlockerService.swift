@@ -655,7 +655,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             newInvertedObject = AEInvertedWhitelistDomainsObject(domains: domains)
         
-            let optimize = sSelf.resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
             let (newConvertResult, newConvertError) = sSelf.convertOneRule(newInvertedObject!.rule)
             
             if newConvertError != nil {

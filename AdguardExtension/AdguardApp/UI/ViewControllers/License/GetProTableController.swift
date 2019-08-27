@@ -264,7 +264,7 @@ class GetProTableController: UITableViewController {
         case .week:
             if period.numberOfUnits == 1 {
                 formatString = ACLocalizedString("trial_description_label_days", nil)
-                return String.localizedStringWithFormat(formatString, 7)
+                return String.localizedStringWithFormat(formatString, 7, price)
             }
             formatString = ACLocalizedString("trial_description_label_weeks", nil)
         case .month:
@@ -273,7 +273,7 @@ class GetProTableController: UITableViewController {
             formatString = ACLocalizedString("trial_description_label_years", nil)
         }
         
-        let resultString : String = String.localizedStringWithFormat(formatString, price,  period.numberOfUnits)
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits, price)
         
         return resultString
     }

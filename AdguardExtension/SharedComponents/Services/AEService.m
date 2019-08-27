@@ -77,7 +77,10 @@ typedef enum {
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService resources:(id<AESharedResourcesProtocol>)resources {
+- (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService
+                   resources:(id<AESharedResourcesProtocol>)resources
+                  networking:(id)networking{
+    
     
     self = [super init];
     if (self) {
@@ -98,7 +101,7 @@ typedef enum {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibanNotify:) name:ASAntibannerNotInstalledNotification object:nil];
         
         
-        antibanner = [AESAntibanner new];
+        antibanner = [[AESAntibanner alloc] initWithNetworking: networking];
         _readyLock = [NSLock new];
         _reloadContentBlockingJsonLock = [NSLock new];
         _reloadContentBlockingJsonComplete = YES;

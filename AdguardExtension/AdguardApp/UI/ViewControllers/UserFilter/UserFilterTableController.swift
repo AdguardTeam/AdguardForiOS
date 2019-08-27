@@ -43,11 +43,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     var model: UserFilterViewModel!
     
-    private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     private let fileShare = FileShareService()
+    private let networking: ACNNetworking = ServiceLocator.shared.getService()!
     
     // forward url params
     private let filterRulesAction = "filter_rules"
@@ -311,10 +312,16 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     // MARK: - ImportRulesControllerDelegate
     
-    func loadRules(url: String, completion: @escaping (Bool) -> Void) {
+    func loadRules(url urlString: String, completion: @escaping (Bool) -> Void) {
         
-        let parser = AASFilterSubscriptionParser()
-        parser.parse(from: URL(string: url)) { [weak self]  (result, error) in
+        guard let url = URL(string: urlString) else {
+            DDLogError("(UserFilterTablecontroller) loadRules error. wrong url format: \(urlString)")
+            completion(false)
+            return
+        }
+        
+        let parser = AASFilterSubscriptionParser(networking: networking)
+        parser.parse(from: url) { [weak self]  (result, error) in
             
             guard let strongSelf = self else {return}
             if let parserError = error {

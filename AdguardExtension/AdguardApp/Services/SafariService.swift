@@ -30,19 +30,6 @@ enum ContentBlockerType: Int, CaseIterable {
     case security
 }
 
-// Affinity lists bitmasks
-struct Affinity: OptionSet {
-    
-    let rawValue: UInt8
-    
-    static let general = Affinity(rawValue: 1 << 0)
-    static let privacy = Affinity(rawValue: 1 << 1)
-    static let socialWidgetsAndAnnoyances = Affinity(rawValue: 1 << 2)
-    static let other = Affinity(rawValue: 1 << 3)
-    static let custom = Affinity(rawValue: 1 << 4)
-    static let security = Affinity(rawValue: 1 << 5)
-}
-
 // MARK: - protocol -
 
 /**

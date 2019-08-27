@@ -26,6 +26,7 @@ class AddCustomFilterController: BottomAlertController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    let networking: ACNNetworking = ServiceLocator.shared.getService()!
     
     var filter : AASCustomFilterParserResult?
     var delegate: NewCustomFilterDetailsDelegate?
@@ -70,9 +71,10 @@ class AddCustomFilterController: BottomAlertController {
     
     @IBAction func continueAction(_ sender: Any) {
         
-        guard let url = urlTextField?.text else { return }
-        let parser = AASFilterSubscriptionParser()
-        parser.parse(from: URL(string: url)) { [weak self]  (result, error) in
+        guard let urlString = urlTextField?.text else { return }
+        guard let url = URL(string: urlString) else { return }
+        let parser = AASFilterSubscriptionParser(networking: networking)
+        parser.parse(from: url) { [weak self]  (result, error) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {return}
                 if let parserError = error {

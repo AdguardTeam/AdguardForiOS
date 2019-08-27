@@ -40,7 +40,7 @@ extern NSString *AESUserInfoRuleObject;
 /////////////////////////////////////////////////////////////////////
 
 @class AESAntibanner, ASDFilterRule, AEService, ContentBlockerService;
-@protocol AESharedResourcesProtocol;
+@protocol AESharedResourcesProtocol, ACNNetworkingProtocol;
 
 @protocol AEServiceProtocol <NSObject>
 
@@ -73,6 +73,8 @@ extern NSString *AESUserInfoRuleObject;
 
 @interface AEService : NSObject<AEServiceProtocol>
 
-- (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService resources:(id<AESharedResourcesProtocol>)resources;
+- (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService
+                   resources:(id<AESharedResourcesProtocol>)resources
+                  networking:(id<ACNNetworkingProtocol>) networking;
 
 @end

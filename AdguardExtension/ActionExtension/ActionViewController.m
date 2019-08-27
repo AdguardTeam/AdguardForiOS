@@ -28,6 +28,7 @@
 #import "ASDFilterObjects.h"
 #import "AEInvertedWhitelistDomainsObject.h"
 #import "Adguard-Swift.h"
+#import "ACNetwork.h"
 
 #define USER_FRIENDLY_DELAY     0.5
 
@@ -42,6 +43,7 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     AEService *_aeService;
     SafariService *_safariService;
     ContentBlockerService *_contentBlockerService;
+    id<ACNNetworkingProtocol> _networking;
     AESSupport *_support;
     
     NSURL *_url;
@@ -135,7 +137,11 @@ NSString *AEActionErrorDomain = @"AEActionErrorDomain";
     _sharedResources = [AESharedResources new];
     _safariService = [[SafariService alloc] initWithResources:_sharedResources];
     _contentBlockerService = [[ContentBlockerService alloc] initWithResources:_sharedResources safariService:_safariService];
-    _aeService = [[AEService alloc] initWithContentBlocker:_contentBlockerService resources:_sharedResources];
+    _networking = [ACNNetworking new];
+    
+    _aeService = [[AEService alloc] initWithContentBlocker:_contentBlockerService
+                                                 resources:_sharedResources
+                                                networking:_networking];
     
     _support = [[AESSupport alloc] initWithResources:_sharedResources safariSevice:_safariService aeService:_aeService];
 
