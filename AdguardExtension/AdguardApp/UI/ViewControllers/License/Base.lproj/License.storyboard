@@ -313,7 +313,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value your private data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMu-UP-PI3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protect your personal data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMu-UP-PI3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="29" width="496" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -913,19 +913,19 @@
                                 <exclude reference="tts-0w-NGZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ZLC-yA-9aU"/>
-                                <exclude reference="sbO-cn-haE"/>
                                 <exclude reference="bHc-9H-23v"/>
                                 <exclude reference="eaq-v9-eDp"/>
                                 <exclude reference="rQ8-fT-luw"/>
                                 <exclude reference="rTH-f4-164"/>
                                 <exclude reference="wEw-pB-Kdo"/>
-                                <exclude reference="ZjF-2H-eJe"/>
-                                <exclude reference="vx3-7G-xed"/>
                                 <exclude reference="Ehp-k5-9Yt"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <exclude reference="VX1-2p-7HK"/>
                                 <exclude reference="X0h-5C-1SY"/>
+                                <exclude reference="ZLC-yA-9aU"/>
+                                <exclude reference="sbO-cn-haE"/>
+                                <exclude reference="ZjF-2H-eJe"/>
+                                <exclude reference="vx3-7G-xed"/>
                                 <exclude reference="brS-gY-SAT"/>
                                 <exclude reference="cgv-Yb-gHi"/>
                                 <exclude reference="pdp-dh-1iq"/>
@@ -952,8 +952,8 @@
                                 <include reference="rQ8-fT-luw"/>
                                 <include reference="rTH-f4-164"/>
                                 <include reference="wEw-pB-Kdo"/>
-                                <include reference="vx3-7G-xed"/>
                                 <include reference="VX1-2p-7HK"/>
+                                <include reference="vx3-7G-xed"/>
                                 <include reference="brS-gY-SAT"/>
                                 <include reference="pdp-dh-1iq"/>
                                 <include reference="Ie2-Wh-PC5"/>
@@ -971,15 +971,15 @@
                                 <include reference="tts-0w-NGZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ZLC-yA-9aU"/>
-                                <include reference="sbO-cn-haE"/>
                                 <include reference="bHc-9H-23v"/>
                                 <include reference="eaq-v9-eDp"/>
                                 <exclude reference="wEw-pB-Kdo"/>
-                                <include reference="ZjF-2H-eJe"/>
                                 <include reference="Ehp-k5-9Yt"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <include reference="X0h-5C-1SY"/>
+                                <include reference="ZLC-yA-9aU"/>
+                                <include reference="sbO-cn-haE"/>
+                                <include reference="ZjF-2H-eJe"/>
                                 <include reference="cgv-Yb-gHi"/>
                                 <include reference="7fB-tj-raI"/>
                                 <include reference="QCK-8y-IhP"/>
