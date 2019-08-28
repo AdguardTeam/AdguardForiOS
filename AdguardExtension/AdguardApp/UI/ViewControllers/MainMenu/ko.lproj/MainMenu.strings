@@ -7,7 +7,7 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "더 나은 AdGuard를 위해 도와주세요";
 
-/* Class = "UILabel"; text = "General settings"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "일반";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
@@ -34,5 +34,8 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "정보";
 
-/* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
+/* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "외관 및 기타";
+
+/* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
+"zO5-hl-j78.text" = "사용자 정의 필터링 규칙 포함";

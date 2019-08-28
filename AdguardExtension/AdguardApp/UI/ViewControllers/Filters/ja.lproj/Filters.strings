@@ -40,9 +40,6 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "追加";
 
-/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
-"kab-Sc-THo.text" = "バージョン";
-
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
 "lFg-x8-C9b.normalTitle" = "プレミアム版を入手";
 

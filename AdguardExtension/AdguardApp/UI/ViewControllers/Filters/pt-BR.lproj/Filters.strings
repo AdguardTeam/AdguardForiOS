@@ -43,9 +43,6 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "ADICIONAR";
 
-/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
-"kab-Sc-THo.text" = "Versão";
-
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
 "lFg-x8-C9b.normalTitle" = "Comprar Premium";
 
@@ -63,9 +60,6 @@
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Quantidade de regras:";
-
-/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
-"x93-x6-7Fw.text" = "Data";
 
 /* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
 "xS8-f2-3yC.text" = "Nome do filtro";

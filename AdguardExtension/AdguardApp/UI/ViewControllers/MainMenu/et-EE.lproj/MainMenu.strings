@@ -7,8 +7,8 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Aita meil AdGuardi paremaks muuta";
 
-/* Class = "UILabel"; text = "General settings"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
-"L2l-pO-K3q.text" = "Üldised seaded";
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "Üldine";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Mis on AdGuard?";
@@ -34,5 +34,8 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "Teave";
 
-/* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
-"xb2-Gf-9h7.text" = "Muud seaded";
+/* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
+"xb2-Gf-9h7.text" = "Välimus ja muu";
+
+/* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
+"zO5-hl-j78.text" = "Sisaldab kohandatud filtreerimis reegleid";

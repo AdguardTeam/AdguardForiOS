@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Filtre Utilisateur";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Saisissez vos règles personnalisées ici, en les séparant par des sauts de ligne";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Saisissez ici les noms de domaine en les séparant par des retours à la ligne, pour lesquels AdGuard désactivera le filtrage Safari.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "OUI";
 
@@ -44,7 +50,13 @@
 "protection_enabled_caption" = "La protection est activée";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Certains bloqueurs de contenu sont désactivés";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection désactivée";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "COMMENCER L'ESSAI";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Votre compte Premium à expiré";
@@ -86,6 +98,9 @@
 "filters_group_disabled" = "Désactivé";
 
 "filter_date_format" = "Filtres mis à jour: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Saisissez vos règles personnelles ici<br>Lisez cette <a href=\"%@\">note sur la syntaxe des règles</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Entrez le nom de domaine ici. AdGuard désactivera le filtrage dans Safari pour ces sites Web.";
@@ -164,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-tunnel (sans icône VPN), incompatible avec d'autres applications VPN, moins stable";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "désactivé";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS est un moyen alternatif de protéger votre confidentialité des différents compteurs, systèmes d'analyse et des sites d'hameçonnage.";
@@ -291,6 +309,15 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Bloqueurs de contenus";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtres :";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Paramètres généraux";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ règles sont en cours d'utilisation";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Désactivé dans les paramètres de Safari";
 
@@ -329,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Vous avez dépassé le nombre maximal de règles de filtrage.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanent";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";

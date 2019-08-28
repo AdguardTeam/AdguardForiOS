@@ -46,6 +46,9 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Ochrana je vypnuta";
 
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Získat předplatné";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš prémiový účet vypršel";
 

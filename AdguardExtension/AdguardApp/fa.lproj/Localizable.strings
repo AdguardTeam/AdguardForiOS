@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "فیلتر کاربر";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "دستورات دستی خود را اینجا وارد کنید، با شکستن خط از هم جدا میشوند";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "نام دامنه ها را که با شکستن خط از هم جدا شده اند اینجا وارد کنید، که AdGuard فیلترینگ سافاری را غیرفعال می کند.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "بله";
 
@@ -44,10 +50,19 @@
 "protection_enabled_caption" = "حفاظت فعال شده است";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "برخی مسدودسازی های محتوا غیرفعال شده اند";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "حفاظت غيرفعال شده است";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "دریافت اشتراک";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "توجه";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "شما با موفقیت وارد اکانت AdGuard شده اید اما کلید مجوزی که اجازه فعالسازی نسخه پریمیوم را بدهد وجود ندارد";
@@ -84,11 +99,17 @@
 
 "filter_date_format" = "فیلتر بروز رسانی شده  : %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "بروز رسانی...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "افزودن یک دستور";
@@ -120,8 +141,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "خروجیگیری لیست سیاه";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "گزارش مسدودسازی اشتباه";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "گزارش مشکل";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "تماس با پشتیبانی";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "خروجیگیری وقایع";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "گزارش مشکل را نمیتوان ارسال کرد چون ایمیل بدرستی در دستگاه شما پیکربندی نشده است.";
@@ -150,6 +180,9 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "تونل-کامل(بدون آیکون VPN)،ناسازگار با سایر برنامه های VPN،کمتر پایدار";
 
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "غير فعال شده";
+
 /* Adguard DNS server description */
 "adguard_dns_description" = "مسدودساز تبلیغ،وبسایت های رَدیاب و فیشینگ";
 
@@ -158,6 +191,9 @@
 
 /* Google DNS server description */
 "google_dns_description" = "سرویس حل دی اِن اِس سراسری ارائه شده توسط گوگل";
+
+/* Open DNS server description */
+"open_dns_description" = "DNS سروری که دستگاه شما را از تهدیدات آنلاین حفاظت می کند";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "سرور OpenDNS با مسدودسازی محتوای بزرگسال";
@@ -191,6 +227,9 @@
 
 /* Dns Feature description */
 "dns_provider_encryption_summary" = "به اشخاص  ثالث ها اجازه جاسوسی در فعالیت وبگردی خود ندهید";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "مسدودساز دامنه های فیشینگ و سایر دامنه های خطرناک";
 
 /* Dns Feature description */
 "dns_provider_adult_summary" = "مسدودسازی وبسایت های محتوای غیراخلاقی";
@@ -231,8 +270,104 @@
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "مشکلی با پیکربندی وی پی اِن وجود دارد.لطفا با تیم پشتیبانی تماس بگیرید.";
 
+/* login error message */
+"login_error_message" = "یک خطا حین ورود رخ داده است";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium یک سرویس پولی سالانه با هزینه اشتراک $2.99/سال (قیمت در هر منطقه میتواند متفاوت باشد) هست. هزینه در حساب iTunes در حین تایید خرید کسر میشود. اشتراک خودکار تمدید میشود مگر اینکه تمدید خودکار حداقل 24 ساعت قبل از پایان دوره فعلی خاموش شده باشد. حساب خودکار به مدت 24 ساعت قبل از پایان دوره فعلی کسر می شود. اشتراک های شما میتواند مدیریت شود و تمدید خودکار میتواند با رفتن به تنظیمات iTunes بعد از خرید اشتراک غیرفعال شود.<br><br><a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "تأیید";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "سیاست حریم خصوصی";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "یک VPN ایجاد خواهد شد";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "برای راه اندازی تنظیم DNS دستی، VPN نیاز است. VPN ایجاد شده محلی هست،یعنی ترافیک شما توسط هیچ سرور دیگری وقتی از این پروفایل VPN استفاده می کنید تغیییر مسیر داده نمی شود. ما هیچ داده ای جمع آوری نمی کنیم.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "منتظر بمانید...";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "من فقط مسدودساز تبلیغ AdGuard را برای آی اُ اِس نصب کردم";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "اگر شما هم میخواهید وب را بدون تبلیغ مثل من مرور کنید،این را بررسی کن:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "پوسته";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "ساير";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "پیشرفته";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "مسدودساز محتوا";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "فيلترها:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "تنظیمات عمومی";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ دستور در حال استفاده است";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "در تنظیمات سافاری غیرفعال شده است";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "بررسی برای بروز رسانی...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "محدودیت %1$@ دستور به سر رسید. برنامه امکان دارد درست کار نکند. لطفا دستورات اضافه را غیرفعال کنید. اکنون %2$@ از %3$@ دستور در حال استفاده است; %4$@ دستور غیرفعال است.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "فیلترها بروز رسانی نشده است";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "این مجوز در حداکثر تعداد دستگاه مجاز فعال شده است. شما میتوانید مجوز را از دستگاه های استفاده نشده در حساب شخصی در وبسایت adguard.com جدا کنید";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "قبل از استفاده شما از این اقدام افزونه، %1$@ پیکربندی اولیه را اِجرا می کند. برای انجام آن برنامه اصلی %2$@ را اجرا کنید.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "پیام را نمیتوان به تیم پشتیبانی ارسال کرد. چون شما ایمیل حساب را پیکربندی نکرده اید.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "توجه کنید که مسدودساز محتوا غیرفعال شده است. این یعنی صرف نظر از تنظیمات AdGuard چیزی فیلتر نخواهد شد. لطفا AdGuard Content blocker را در تنظیمات سافاری برای شروع فیلترینگ فعال کنید.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "نام میزبان گرفته نشد. شاید صفحه هنوز بارگیری نشده است.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "سیاست امنیتی این وبسایت اجازه اِجرای AdGuard Assistant را نمی دهد.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "خطای غیر منتظره حین مقدار دهی اولیه اقدام افزونه سافاری رخ داد. لطفا اگر دوباره رخ داد با تیم پشتیبانی AdGuard تماس بگیرید.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "هشدار";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "شما از حداکثر تعداد دستورات فیلتر تخطی کرده اید.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "دائمی";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "روشن";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "خاموش";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "صفحه خانگي:";
+
+/* (AboutController) current app version string */
+"about_version" = "نسخه";

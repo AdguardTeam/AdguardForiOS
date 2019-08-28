@@ -4,8 +4,14 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Oscuro";
 
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
+"PyT-Id-Sle.text" = "Si esta opción está habilitada, AdGuard ignorará las reglas \"cosméticas\" genéricas. Esto acelerará la carga de páginas a cambio de la calidad de filtrado";
+
 /* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
 "TCQ-IQ-R5g.text" = "Usar filtros simplificados";
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "Sistema por defecto";
 
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
@@ -28,8 +34,17 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Otro";
 
+/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "nvD-bF-pnp"; */
+"nvD-bF-pnp.text" = "Reiniciar cuando la red cambie";
+
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Claro";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
+"q05-UZ-zAB.text" = "Desbloquea anuncios excepto los de los sitios de esta lista";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "Si esta opción está activada, AdGuard solo usará WiFi para las actualizaciones de filtros en segundo plano";
 
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
 "wMR-5F-GaE.text" = "Tienes 6 bloqueadores de contenido, cada uno de ellos puede contener 50,000 reglas";

@@ -46,6 +46,9 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Ochrana je vypnutá";
 
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Získať predplatné";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš Premium účet vypršal";
 
@@ -83,6 +86,9 @@
 "filters_group_disabled" = "Vypnuté";
 
 "filter_date_format" = "Filtre boli aktualizované: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Sem zadajte názvy domén. AdGuard vypne filtráciu na týchto webových stránkach v Safari";
