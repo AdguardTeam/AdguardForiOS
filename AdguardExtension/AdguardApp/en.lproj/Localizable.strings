@@ -56,7 +56,7 @@
 "protection_disabled_caption" = "Protection is disabled";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Get subscription";
+"upgrade_button_title" = "START TRIAL";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
@@ -358,10 +358,7 @@
 "filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
 
 /* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanent";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Then %1$@ per %2$@";
+"permanent_subscription_title" = "Lifetime";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";

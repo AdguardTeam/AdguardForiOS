@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,22 +19,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo-free" translatesAutoresizingMaskIntoConstraints="NO" id="1rs-Oe-zfG">
-                                <rect key="frame" x="110.5" y="297.5" width="193" height="201"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="oDH-UV-5ci">
+                                <rect key="frame" x="175" y="416" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="193" id="Anr-dB-FrN">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="289"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="201" id="FuT-XZ-R51">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="301"/>
-                                    </constraint>
+                                    <constraint firstAttribute="width" constant="64" id="IoQ-Aq-oU7"/>
+                                    <constraint firstAttribute="height" constant="64" id="N9z-Ru-TVp"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1rs-Oe-zfG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="7XT-Ph-njJ"/>
-                            <constraint firstItem="1rs-Oe-zfG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fpg-6Z-MA5"/>
+                            <constraint firstItem="oDH-UV-5ci" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KwS-42-4tM"/>
+                            <constraint firstItem="oDH-UV-5ci" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="W4y-hf-Ia6"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -45,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-logo-free" width="382" height="331"/>
+        <image name="LoadScreen" width="64" height="64"/>
     </resources>
 </document>
