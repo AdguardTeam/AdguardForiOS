@@ -34,6 +34,9 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
+/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
+"EkI-hK-XDG.text" = "地址";
+
 /* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
 "IVH-4P-uIk.text" = "域";
 
@@ -88,6 +91,9 @@
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
 "d69-Gd-SZp.text" = "完全隧道（不显示 VPN 图标）";
 
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
+"dW3-zk-BPr.text" = "DNS 服务器地址";
+
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "服务器名称";
 
@@ -127,8 +133,14 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "服务器名称";
 
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
+"seX-mS-3mU.text" = "DNS 服务器地址";
+
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "选择协议";
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
 "ve4-Qn-Yj6.title" = "DNS 请求详情";
+
+/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
+"xe9-vq-pF6.text" = "已用";

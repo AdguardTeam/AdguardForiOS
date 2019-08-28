@@ -83,7 +83,7 @@
 "ZgC-4d-Peb.placeholder" = "IP 주소, sdns://, https:// 또는 tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
-"Zn0-J3-lVl.normalTitle" = "TLS를 통한 DNS 통신";
+"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "서버";

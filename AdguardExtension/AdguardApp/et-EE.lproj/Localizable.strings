@@ -37,6 +37,9 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kasutaja filter";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Siia saad kohandatud reegleid lisada, eraldades need uue reaga";
+
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Siia saad sisestada domeenid (eraldi reale). Neid domeene AdGuard Safari filtri põhjal ei filtreeri.";
 
@@ -51,6 +54,9 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Kaitse on peatatud";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Uus tellimus";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium konto on aegunud";
@@ -303,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Sisu blokeerijad";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtrid:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Üldised seaded";
 
@@ -347,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Oled ületanud maksimum arvu filtrite reegleid.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Alatine";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "SEES";

@@ -55,6 +55,9 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Beskyttelsen er deaktiveret";
 
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "START PRØVEPERIODE";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Din Premium konto er udløbet";
 
@@ -353,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Du har overskredet det maksimale antal filterregler.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Resten af livet";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "TÆNDT";

@@ -22,8 +22,14 @@
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Филтрите не могат да бъдат заредени в Сафари. Опитайте се да изчистите вашите правила и белия списък или променете настройките на използваните филтри.";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "Доклад за неправилно блокиране";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Доклад за грешка";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Свържете се с еподдръжката";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Не може да изпратим доклад за грешка, защото нямате създаден и-мейл на вашето устройство.";

@@ -37,6 +37,9 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Filtro Utente";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Inserisci qui le tue regole personalizzate, separate da interruzioni di riga";
+
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Inserisci qui i nomi di dominio separati da interruzioni di riga, per i quali AdGuard disabiliterà il filtraggio di Safari.";
 
@@ -51,6 +54,9 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protezione disabilitata";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "INIZIA LA PROVA";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Il tuo account Premium è scaduto";
@@ -94,7 +100,7 @@
 "filter_date_format" = "Filtri aggiornati: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Inserisci le tue regole personalizzate qui<br>Leggi queste <a href=\"%@\">note sulla sintassi delle regole</a>";
+"blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti Web.";
@@ -303,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Blocchi di contenuto";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtri:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Impostazioni generali";
 
@@ -347,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Hai superato il numero massimo delle regole del filtraggio.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanente";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ATTIVO";

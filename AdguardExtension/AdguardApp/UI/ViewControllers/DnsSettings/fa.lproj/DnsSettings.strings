@@ -34,6 +34,9 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
+/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
+"EkI-hK-XDG.text" = "آدرس";
+
 /* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
 "IVH-4P-uIk.text" = "دامنه";
 
@@ -88,6 +91,9 @@
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
 "d69-Gd-SZp.text" = "تونل-کامل (بدون آیکون VPN)";
 
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
+"dW3-zk-BPr.text" = "آدرس DNS سرور";
+
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "نام سرور";
 
@@ -127,8 +133,14 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "نام سرور";
 
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
+"seX-mS-3mU.text" = "آدرس DNS سرور";
+
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "انتخاب پروتکل";
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
 "ve4-Qn-Yj6.title" = "جزئیات درخواست DNS";
+
+/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
+"xe9-vq-pF6.text" = "سپری شده";

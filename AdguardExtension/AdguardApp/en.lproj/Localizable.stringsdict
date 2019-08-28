@@ -78,9 +78,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one day free trial.</string>
+        <string>Start your first one day free trial</string>
         <key>other</key>
-        <string>Start your first %d days free trial.</string>
+        <string>Start your first %d days free trial</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -94,9 +94,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one week free trial.</string>
+        <string>Start your first one week free trial</string>
         <key>other</key>
-        <string>Start your first %d weeks free trial.</string>
+        <string>Start your first %d weeks free trial</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -110,9 +110,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one month free trial.</string>
+        <string>Start your first one month free trial</string>
         <key>other</key>
-        <string>Start your first %d months free trial.</string>
+        <string>Start your first %d months free trial</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -126,9 +126,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one year free trial.</string>
+        <string>Start your first one year free trial</string>
         <key>other</key>
-        <string>Start your first %d years free trial.</string>
+        <string>Start your first %d years free trial</string>
       </dict>
     </dict>
     <key>trial_label_days</key>

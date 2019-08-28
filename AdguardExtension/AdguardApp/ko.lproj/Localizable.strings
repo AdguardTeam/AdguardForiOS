@@ -37,6 +37,9 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 필터";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "여기에 사용자 규칙을 줄 바꿈으로 나눠 입력하세요";
+
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "여기에 AdGuard가 비활성화 시킬 Safari 필터 도메인명을 줄 바꿈으로 나눠 입력하세요";
 
@@ -51,6 +54,9 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "보호가 비활성화 되었습니다.";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "평가판 시작";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
@@ -303,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "콘텐츠 차단기";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "필터:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "일반 설정";
 
@@ -347,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "필터 규칙의 최대 갯수를 초과했습니다.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "영구";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "켜기";

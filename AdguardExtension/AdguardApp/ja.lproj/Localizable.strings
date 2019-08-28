@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "ここでは独自のルールを改行で区切って入力してください。";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "ここに改行で区切ってドメイン名を入力できます。入力されたドメイン名に対しAdGuardはSafariフィルタリングを無効にします。";
+
 /* YES Button caption in alert */
 "common_action_yes" = "はい";
 
@@ -44,7 +50,13 @@
 "protection_enabled_caption" = "保護は有効です。";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "コンテンツブロッカーの一部がオフになっています。";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "保護は無効です。";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "無料お試しスタート";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
@@ -86,6 +98,9 @@
 "filters_group_disabled" = "無効";
 
 "filter_date_format" = "フィルターアップデート　: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "ここでは独自のルールを入力し追加できます。<br> ルール構文に関する通知は<a href=\"%@\">こちら</a>でご覧になれます。";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "ドメイン名を入力して、そこでの広告ブロックを無効化。";
@@ -164,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (VPNアイコンなし)、他のVPNアプリと互換性なし、安定度:低い";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "無効";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNSは、さまざまなカウンタ、分析システム、フィッシングWebサイトからあなたのプライバシーを保護するための代替手段です。";
@@ -291,6 +309,15 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "コンテンツブロッカー";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "フィルタ：";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "一般設定";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "使用ルール数：%@";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Safari設定でOFFになっています";
 
@@ -329,6 +356,9 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "使用可能なフィルタルール数の上限を越えました。";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "永続版";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";

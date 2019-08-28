@@ -195,5 +195,117 @@
         <string>Tasuta %d aastane prooviperiood</string>
       </dict>
     </dict>
+    <key>trial_period_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Üks päev</string>
+        <key>other</key>
+        <string>%d päeva</string>
+      </dict>
+    </dict>
+    <key>trial_period_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Üks nädal</string>
+        <key>other</key>
+        <string>%d nädalat</string>
+      </dict>
+    </dict>
+    <key>trial_period_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Üks kuu</string>
+        <key>other</key>
+        <string>%d kuud</string>
+      </dict>
+    </dict>
+    <key>trial_period_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Üks aasta</string>
+        <key>other</key>
+        <string>%d aastat</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Seejärel %1$@ päeva kohta</string>
+        <key>other</key>
+        <string>Seejärel %1$@ / %2$d päeva kohta</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Seejärel %1$@ nädala kohta</string>
+        <key>other</key>
+        <string>Seejärel %1$@ / %2$d nädala kohta</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Seejärel %1$@ aasta kohta</string>
+        <key>other</key>
+        <string>Seejärel %1$@ / %2$d aasta kohta</string>
+      </dict>
+    </dict>
   </dict>
 </plist>

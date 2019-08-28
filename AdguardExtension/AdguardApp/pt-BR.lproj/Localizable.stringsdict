@@ -195,5 +195,133 @@
         <string>Avaliação gratuita por %d anos</string>
       </dict>
     </dict>
+    <key>trial_period_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Um dia</string>
+        <key>other</key>
+        <string>%d dias</string>
+      </dict>
+    </dict>
+    <key>trial_period_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Uma semana</string>
+        <key>other</key>
+        <string>%d semanas</string>
+      </dict>
+    </dict>
+    <key>trial_period_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Um mês</string>
+        <key>other</key>
+        <string>%d meses</string>
+      </dict>
+    </dict>
+    <key>trial_period_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Um ano</string>
+        <key>other</key>
+        <string>%d anos</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Então %1$@ por dia</string>
+        <key>other</key>
+        <string>Então %1$@ por %2$d dias</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Então %1$@ por semana</string>
+        <key>other</key>
+        <string>Então %1$@ por %2$d semanas</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Então %1$@ por mês</string>
+        <key>other</key>
+        <string>Então %1$@ por %2$d meses</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Então %1$@ por ano</string>
+        <key>other</key>
+        <string>Então %1$@ por %2$d anos</string>
+      </dict>
+    </dict>
   </dict>
 </plist>
