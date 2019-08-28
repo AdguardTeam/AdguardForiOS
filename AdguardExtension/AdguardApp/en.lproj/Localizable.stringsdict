@@ -197,67 +197,67 @@
     </dict>
     <key>trial_period_days</key>
     <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@days@</string>
-        <key>days</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>one</key>
-            <string>One day</string>
-            <key>other</key>
-            <string>%d days</string>
-        </dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>One day</string>
+        <key>other</key>
+        <string>%d days</string>
+      </dict>
     </dict>
     <key>trial_period_weeks</key>
     <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@weeks@</string>
-        <key>weeks</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>one</key>
-            <string>One week</string>
-            <key>other</key>
-            <string>%d weeks</string>
-        </dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>One week</string>
+        <key>other</key>
+        <string>%d weeks</string>
+      </dict>
     </dict>
     <key>trial_period_months</key>
     <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@months@</string>
-        <key>months</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>one</key>
-            <string>One month</string>
-            <key>other</key>
-            <string>%d months</string>
-        </dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>One month</string>
+        <key>other</key>
+        <string>%d months</string>
+      </dict>
     </dict>
     <key>trial_period_years</key>
     <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@years@</string>
-        <key>years</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>d</string>
-            <key>one</key>
-            <string>One year</string>
-            <key>other</key>
-            <string>%d years</string>
-        </dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>One year</string>
+        <key>other</key>
+        <string>%d years</string>
+      </dict>
     </dict>
     <key>trial_description_label_days</key>
     <dict>
