@@ -234,6 +234,9 @@ class SafariService: NSObject, SafariServiceProtocol {
             DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson.");
             if error != nil {
                 DDLogError("(SafariService) \(bundleId) Error occured: \(error!.localizedDescription)")
+                if let userInfo = (error as NSError?)?.userInfo {
+                    DDLogError("(SafariService) userInfo: \(userInfo)")
+                }
                 let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
                 let error =  NSError(domain: "SafariServiceDomain", code: Int(AES_ERROR_SAFARI_EXCEPTION), userInfo: [NSLocalizedDescriptionKey: errorDescription])
                 
