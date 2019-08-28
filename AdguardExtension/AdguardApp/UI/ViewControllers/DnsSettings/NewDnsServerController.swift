@@ -35,6 +35,8 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var upstreamsField: UITextField!
     
+    @IBOutlet weak var dnsSeparator: UIView!
+    
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
     
@@ -59,8 +61,8 @@ class NewDnsServerController: BottomAlertController {
         }
         
         nameField.becomeFirstResponder()
-        updateTheme()
         updateSaveButton()
+        updateTheme()
     }
     
     // MARK: - Actions
@@ -111,7 +113,17 @@ class NewDnsServerController: BottomAlertController {
     }
     
     private func updateSaveButton() {
-        let enabled = (nameField.text?.count ?? 0) > 0 && (upstreamsField.text?.count ?? 0) > 0
+        let dnsName = nameField.text ?? ""
+        let dnsUrl = upstreamsField.text ?? ""
+        let correctDns = dnsUrl.checkIfValidDnsServer()
+        let enabled = dnsName.count > 0 && correctDns
+        
+        if !correctDns {
+            dnsSeparator.backgroundColor = UIColor(hexString: "#df3812")
+        } else {
+            dnsSeparator.backgroundColor = UIColor.lightGray
+        }
+        
         addButton?.isEnabled = enabled
         saveButton?.isEnabled = enabled
     }
