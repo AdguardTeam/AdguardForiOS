@@ -35,6 +35,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             return viewModel?.currentGroup
         }
     }
+    var isFromSearch = false
     
     // MARK:  private properties
     
@@ -211,7 +212,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case groupSection:
-            return 72
+            return isFromSearch ? 0.0 : 72.0
         case addFilterSection:
             return group?.groupId == FilterGroupId.custom ? 60 : 0
         default:

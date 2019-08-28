@@ -78,6 +78,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         if segue.identifier == filtersSegueID {
             let controller = segue.destination as! FiltersController
             controller.viewModel = viewModel
+            controller.isFromSearch = false
         }
     }
     
