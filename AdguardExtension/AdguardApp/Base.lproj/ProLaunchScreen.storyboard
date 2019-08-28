@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,22 +19,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-Lt-vE2">
-                                <rect key="frame" x="91" y="183" width="193" height="201"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-Lt-vE2">
+                                <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="193" id="d8Z-Jo-cHE">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="289"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="201" id="oj2-Pu-PDx">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="301"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="64" id="4bs-fk-XtG"/>
+                                    <constraint firstAttribute="width" constant="64" id="941-s1-0I7"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="A6b-hV-YXq"/>
-                            <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="anu-Zl-ten"/>
+                            <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XE8-hc-09o"/>
+                            <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yhW-Eu-CE6"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -47,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-logo" width="382" height="331"/>
+        <image name="LoadScreen" width="64" height="64"/>
     </resources>
 </document>

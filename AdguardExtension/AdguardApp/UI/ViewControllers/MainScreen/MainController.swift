@@ -76,6 +76,9 @@ class MainController: UIViewController {
     
     var viewModel: MainViewModel?
     
+    private var darkThemeLogoImage = UIImage(named: "ahduard-header-disabled-dark") ?? UIImage()
+    private var lightThemeLogoImage = UIImage(named: "adguard-header-disabled") ?? UIImage()
+    
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -312,6 +315,8 @@ class MainController: UIViewController {
     }
     
     private func updateTheme() {
+        headerImage.highlightedImage = configuration.darkTheme ? darkThemeLogoImage : lightThemeLogoImage
+        
         view.backgroundColor = theme.backgroundColor
         navigationController?.view.backgroundColor = theme.backgroundColor
         theme.setupImage(headerImage)

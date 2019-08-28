@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="So5-wP-aAQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="So5-wP-aAQ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1684,6 +1686,7 @@
                         <outlet property="addButton" destination="B2l-7z-M2N" id="2C5-9g-9I3"/>
                         <outlet property="cancelButton" destination="ZdD-yx-6ph" id="tcB-Ju-cvA"/>
                         <outlet property="contentView" destination="171-Wh-xGb" id="MId-VC-IVL"/>
+                        <outlet property="dnsSeparator" destination="Ko3-HW-YZi" id="oiu-Ef-Weu"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="NXO-8B-smN" id="wkd-Pv-VwC"/>
                         <outlet property="nameField" destination="3BA-9g-I6J" id="OkL-FE-VKE"/>
                         <outlet property="scrollContentView" destination="5bW-bv-vhg" id="CYN-VV-ves"/>

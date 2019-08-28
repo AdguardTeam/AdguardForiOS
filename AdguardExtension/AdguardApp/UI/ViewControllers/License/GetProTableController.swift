@@ -343,10 +343,6 @@ class GetProTableController: UITableViewController {
         case .month:
             formatString = ACLocalizedString("trial_period_months", nil)
         case .year:
-            if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial_period_months", nil)
-                return String.localizedStringWithFormat(formatString, 12)
-            }
             formatString = ACLocalizedString("trial_period_years", nil)
         }
         
