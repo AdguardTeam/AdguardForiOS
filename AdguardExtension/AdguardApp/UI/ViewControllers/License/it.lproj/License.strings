@@ -28,9 +28,6 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Accedere";
 
-/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Valuta i tuoi dati privati";
-
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ACCEDERE";
 

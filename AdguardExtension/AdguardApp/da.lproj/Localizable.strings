@@ -38,7 +38,7 @@
 "user_filter_title" = "Brugerfilter";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Indtast dine tilpassede regler her, adskilt af linjeskift";
+"user_filter_helper" = "Indtast dine egne regler her, adskilt af linjeskift";
 
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Indtast domænenavnene her adskilt med linjeskift, som AdGuard vil deaktivere Safari-filtrering for.";
@@ -54,9 +54,6 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Beskyttelsen er deaktiveret";
-
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Få abonnement";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Din Premium konto er udløbet";
@@ -356,12 +353,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Du har overskredet det maksimale antal filterregler.";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanent";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Derefter %1$@ per %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "TÆNDT";

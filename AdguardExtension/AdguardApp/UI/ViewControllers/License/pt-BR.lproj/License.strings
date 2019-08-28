@@ -19,6 +19,9 @@
 /* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Digite o seu e-mail aqui";
 
+/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
+"Q7Q-j1-fN4.text" = "Você terá que digitar sua senha para entrar no adguard.com";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "IR PARA MINHA CONTA";
 
@@ -27,9 +30,6 @@
 
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Iniciar sessão";
-
-/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Valorize seus dados pessoais privados";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ENTRAR";

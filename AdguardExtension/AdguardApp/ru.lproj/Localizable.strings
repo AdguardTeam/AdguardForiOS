@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Защита отключена";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Получить подписку";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
 
@@ -332,12 +329,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Вы превысили максимальное количество правил фильтрации.";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Вечная";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Далее %1$@ за %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ВКЛ";

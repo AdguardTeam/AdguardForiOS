@@ -30,6 +30,3 @@
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "O programie";
-
-/* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "Ogranicz dostęp do witryn";

@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "La protección esta deshabilitada";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Obtener suscripción";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "La licencia Premium ha expirado";
 
@@ -290,9 +287,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Tenga en cuenta que el bloqueador de contenido está deshabilitado. Eso significa que los anuncios no se filtrarán independientemente de la configuración de AdGuard. Habilite el bloqueador de contenido de AdGuard en la configuración de Safari para comenzar a filtrar.";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanente";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Página de inicio:";

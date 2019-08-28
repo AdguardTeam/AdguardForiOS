@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "保护已禁用";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "订阅";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高级版账户已经过期";
 

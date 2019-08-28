@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Ochrona jest wyłączona";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Uzyskaj subskrypcję";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Twoje konto Premium wygasło";
 

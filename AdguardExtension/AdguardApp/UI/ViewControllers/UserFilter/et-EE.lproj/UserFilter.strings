@@ -31,6 +31,9 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
 "c5a-s3-YPd.normalTitle" = "Vali";
 
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
+"cce-mi-paP.normalTitle" = "Nulli";
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "LISA";
 

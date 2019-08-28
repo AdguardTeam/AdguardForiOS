@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "حفاظت غيرفعال شده است";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "دریافت اشتراک";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
 
