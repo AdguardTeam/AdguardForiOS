@@ -91,7 +91,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
 
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
-        navigationItem.title = group?.name ?? ""
+        navigationItem.title = viewModel?.currentGroup?.name ?? ""
         
         setupBackButton()
     }
