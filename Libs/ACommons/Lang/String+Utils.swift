@@ -72,9 +72,7 @@ extension String {
         
         return attributedString
     }
-}
-
-extension String {
+    
     // Adds space every 3 symbols
     // Use for formatting numbers
     static func formatSringNumber(number: Int) -> String{
@@ -83,5 +81,11 @@ extension String {
         str = String(str.enumerated().map { $0 > 0 && $0 % 3 == 0 ? [",", $1] : [$1]}.joined())
         str = String(str.reversed())
         return str
+    }
+    
+    func checkIfValidDnsServer() -> Bool {
+        let charSet = CharacterSet(charactersIn: self)
+        let validCharsSet = CharacterSet.urlPathAllowed
+        return charSet.isSubset(of: validCharsSet) && self.count > 0
     }
 }
