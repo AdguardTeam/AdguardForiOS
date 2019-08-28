@@ -37,9 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Фільтр користувача";
 
-/* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Вводьте власні правила тут - кожне правило в новому рядку";
-
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Вводьте назви доменів тут - кожен домен в новому рядку. Для них AdGuard вимкне фільтрування в Safari.";
 
@@ -54,9 +51,6 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Захист вимкнено";
-
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Отримати підписку";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Термін дії Преміум завершився";
@@ -353,12 +347,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Ви перевищили обмеження кількості правил фільтрування.";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Постійний";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Потім %1$@ за %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "УВІМКНЕНО";

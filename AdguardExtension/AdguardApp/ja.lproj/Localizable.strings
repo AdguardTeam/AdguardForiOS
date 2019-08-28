@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "保護は無効です。";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "サブスクリプションを購入";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
 
@@ -332,12 +329,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "使用可能なフィルタルール数の上限を越えました。";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "永続版";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "試用期間終了後は定額料%1$@/%2$@になります";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";

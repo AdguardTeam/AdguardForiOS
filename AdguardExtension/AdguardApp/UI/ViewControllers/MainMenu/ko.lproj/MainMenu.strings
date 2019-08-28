@@ -36,6 +36,3 @@
 
 /* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "외관 및 기타";
-
-/* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "사용자 정의 필터링 규칙 포함";

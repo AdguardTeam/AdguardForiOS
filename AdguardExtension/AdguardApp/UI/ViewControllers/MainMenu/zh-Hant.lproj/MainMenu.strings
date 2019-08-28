@@ -37,5 +37,5 @@
 /* Class = "UILabel"; text = "Other settings"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "其它的設定";
 
-/* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "包含自訂的過濾規則";
+/* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
+"zO5-hl-j78.text" = "增加您自己的過濾規則";

@@ -46,9 +46,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Zaščita je onemogočena";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Pridobite naročnino";
-
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je potekel";
 

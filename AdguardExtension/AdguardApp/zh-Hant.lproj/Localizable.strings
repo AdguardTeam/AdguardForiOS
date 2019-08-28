@@ -38,7 +38,7 @@
 "user_filter_title" = "使用者過濾器";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "於此輸入您自訂的規則，被換行分隔";
+"user_filter_helper" = "於此輸入您自己的規則，被換行分隔";
 
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "於此輸入被換行分隔之域名，AdGuard 將對於那些禁用 Safari 過濾。";
@@ -54,9 +54,6 @@
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "防護被禁用";
-
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "取得訂閱";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
@@ -356,12 +353,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "您已超出過濾器規則之最大數量。";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "永久的";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "然後每 %2$@ %1$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "開著";

@@ -25,9 +25,6 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Connexion";
 
-/* Class = "UILabel"; text = "Value your private data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Protégez vos données personnelles";
-
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restaurer l' achat";
 
