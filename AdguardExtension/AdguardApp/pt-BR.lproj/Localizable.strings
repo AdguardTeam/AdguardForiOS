@@ -38,7 +38,7 @@
 "user_filter_title" = "Filtro de Usuário";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Digite aqui suas regras personalizadas, separadas por quebras de linha";
+"user_filter_helper" = "Insira suas regras personalizadas aqui, separadas por quebras de linha";
 
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Digite aqui os nomes de domínio separados por quebras de linha, para os quais o AdGuard irá desativar a filtragem do Safari.";
@@ -309,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Bloqueadores de conteúdo";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtros:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Configurações gerais";
 
@@ -356,9 +359,6 @@
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanente";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Então %1$@ por %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "Ligado";

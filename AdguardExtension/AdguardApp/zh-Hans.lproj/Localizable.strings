@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "用户过滤器";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "在此输入您的自定义规则，以换行符分隔";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "在此输入由换行符分隔的域名，对于它们 AdGuard 将禁用 Safari 过滤。";
+
 /* YES Button caption in alert */
 "common_action_yes" = "是";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "保护已启用";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "某些内容拦截器已被禁用";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "保护已禁用";
@@ -51,6 +60,9 @@
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高级版账户已经过期";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "注意";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "您已经成功登录到 AdGuard 帐户, 但是没有允许您激活高级版本的许可证密钥.";
@@ -87,11 +99,17 @@
 
 "filter_date_format" = "过滤器已更新：%@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "输入您的自定义规则于此<br>阅读此<a href=\"%@\">注意事项以获规则语法</a>。";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "在这里输入域名。AdGuard 将在 Safari 中禁用这些网站的过滤。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "在这里输入域名。AdGuard将仅在Safari中对这些网站进行过滤。";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "更新...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "添加规则";
@@ -123,8 +141,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "导出";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "报告错误拦截";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "在 GitHub 上报告错误";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "联系支持";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "导出日志";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "无法发送错误报告。您可能没有在设备上设置电子邮件。";
@@ -152,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全隧道（不显示 VPN 图标），与其他 VPN 应用程序不兼容，不太稳定";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "已禁用";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS 是又一种可以保护您的隐私免受各类计数器、跟踪系统与钓鱼网站侵害的替代方案";
@@ -240,8 +270,104 @@
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "配置 VPN 时有问题，请联系我们的支持团队。";
 
+/* login error message */
+"login_error_message" = "登录时发生错误";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium 是一种年度付费服务，每年的订阅价格为 $2.99（定价可能会因区域不同而有所不同）。在购买确认时，款项会充值到 iTunes 账号。订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。当前订阅期结束前的 24 小时内，款项会自动充值到账号。您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。<br><br><a href=%1$@>隐私策略</a> <br><br><a href=%2$@>使用条款</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "确定";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "隐私策略";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "这将创建 VPN";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "VPN 是设置自定义 DNS 设置所需的。这会创建本地 VPN，即您的流量不会路由到任何服务器上。\n使用此 VPN 配置时，我们不收集任何数据。";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "请稍候...";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "我刚安装了用于 iOS 的广告拦截程序 AdGuard。 ";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "如果您要享受无广告的网络世界，请检查：";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "主题";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "其它";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "高级";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "内容拦截器";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "过滤器：";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "常规设置";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ 条规则正被使用";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "在 Safari 设置内已禁用";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "检查更新...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "已达到 %1$@ 条规则的限制。该应用可能无法正常工作。请禁用额外规则。目前正在使用 %3$@ 条规则中的 %2$@ 条； %4$@ 条规则已禁用。";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "过滤器未更新";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "此许可证已在最大数量的设备上激活。\n您可以从以下网站（adguard.com）上的个人帐户中未使用的设备取消绑定许可";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "在您使用此动作扩展之前，%1$@ 必须先执行初始化配置。请启动主 %2$@ 应用以允许其执行此动作。";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "无法向支持团队发送消息。您尚未配置电子邮件帐户。";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "请注意，内容拦截器已禁用。 这意味着无论 AdGuard 设置如何，都不会过滤广告。 请在 Safari 设置中启用 AdGuard 内容拦截器以开始过滤。";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "未获取主机名。也许页面尚未加载。";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "此网站的安全策略不允许启动 AdGuard Assistant。";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "初始化 Safari 动作扩展时发生意外错误。如果再次发生这种情况，请联系 AdGuard 支持。";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "警告";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "过滤器规则数量已超过上限。";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "永久";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "启用中";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "禁用中";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "主页：";
+
+/* (AboutController) current app version string */
+"about_version" = "版本";

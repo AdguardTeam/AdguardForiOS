@@ -309,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Sisu blokeerijad";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtrid:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Üldised seaded";
 
@@ -356,9 +359,6 @@
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Alatine";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Seejärel %1$@ / %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "SEES";

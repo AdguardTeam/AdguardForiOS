@@ -87,6 +87,9 @@
 
 "filter_date_format" = "Posodobljeni filtri: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Tukaj vnesite pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo onemogočil filtriranje v Safariju za te spletne strani.";
 

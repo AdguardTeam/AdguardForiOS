@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Benutzerfilter";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Hier Ihre eigenen Regeln (getrennt durch Zeilenumbrüche) eingeben";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Geben Sie hier die Domainnamen (getrennt durch Zeilenumbrüche) ein, für die AdGuard die Safari-Filterung deaktivieren soll.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "Ja";
 
@@ -44,10 +50,13 @@
 "protection_enabled_caption" = "Schutz ist aktiviert";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Einige Inhaltsblocker sind deaktiviert";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Schutz ist deaktiviert";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Abonnement erhalten";
+"upgrade_button_title" = "Testversion starten";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Ihr Premiumaccount ist abgelaufen";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Deaktiviert";
 
 "filter_date_format" = "Filter aktualisiert: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird die Filterung in Safari für diese Webseiten deaktivieren.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (ohne VPN-Symbol), inkompatibel mit anderen VPN-Apps, weniger stabil ";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "deaktiviert";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS ist eine alternative Möglichkeit, Ihre Privatsphäre vor verschiedenen Trackern, Analysesystemen und Phishing-Webseiten zu schützen.";
@@ -294,6 +309,15 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Inhaltsblocker";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filter:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Allgemeine Einstellungen";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ Regeln werden verwendet";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Deaktiviert in Safari-Einstellungen";
 
@@ -335,9 +359,6 @@
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Lebenslang";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Dann %1$@ per %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "EIN";

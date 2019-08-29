@@ -40,9 +40,6 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "LISA";
 
-/* Class = "UILabel"; text = "Version"; ObjectID = "kab-Sc-THo"; */
-"kab-Sc-THo.text" = "Versioon";
-
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
 "lFg-x8-C9b.normalTitle" = "Hangi Premium";
 
@@ -60,9 +57,6 @@
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Reeglite hulk:";
-
-/* Class = "UILabel"; text = "Date"; ObjectID = "x93-x6-7Fw"; */
-"x93-x6-7Fw.text" = "Kuupäev";
 
 /* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
 "xS8-f2-3yC.text" = "Filtri nimi";

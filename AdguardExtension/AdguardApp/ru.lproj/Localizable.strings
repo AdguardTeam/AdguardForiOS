@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательский фильтр";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Введите здесь свои собственные правила, по одному в строке";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Введите здесь по одному в строке доменные имена, для которых AdGuard отключит фильтрацию в Safari";
+
 /* YES Button caption in alert */
 "common_action_yes" = "ДА";
 
@@ -44,10 +50,13 @@
 "protection_enabled_caption" = "Защита включена";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Некоторые блокировщики контента отключены";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Защита отключена";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Получить подписку";
+"upgrade_button_title" = "ПРОБНЫЙ ПЕРИОД";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
@@ -89,6 +98,9 @@
 "filters_group_disabled" = "Отключены";
 
 "filter_date_format" = "Фильтры обновлены: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Введите ваши собственные правила здесь<br>Прочтите эту <a href=\"%@\">заметку о синтаксисе правил</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Введите доменные имена здесь. AdGuard отключит фильтрацию в Safari для этих сайтов.";
@@ -167,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без значка VPN), несовместим с другими VPN приложениями, менее стабильный";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "отключен";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS - альтернативный способ защиты вашей конфиденциальности от всевозможных онлайн счетчиков и систем сбора данных, опасных и фишинговых сайтов";
@@ -294,6 +309,15 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Блокировщики контента";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Фильтры:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Основные настройки";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ правил используются";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Отключено в настройках Safari";
 
@@ -335,9 +359,6 @@
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Вечная";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Далее %1$@ за %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ВКЛ";

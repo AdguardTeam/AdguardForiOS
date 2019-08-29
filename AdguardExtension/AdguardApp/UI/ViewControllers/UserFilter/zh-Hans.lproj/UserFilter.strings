@@ -7,6 +7,9 @@
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
 "9th-UM-Uaj.normalTitle" = "取消";
 
+/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "此规则已添加到用户过滤器。";
+
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "保存";
 
@@ -15,6 +18,9 @@
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "编辑";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
+"HB0-zK-xj2.normalTitle" = "保存";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "移除";
@@ -25,11 +31,20 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
 "c5a-s3-YPd.normalTitle" = "选择";
 
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
+"cce-mi-paP.normalTitle" = "清除";
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "添加";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
 "iuK-dC-RKf.normalTitle" = "删除";
 
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
+"lE1-GD-Qr5.normalTitle" = "编辑";
+
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "域";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "确定";

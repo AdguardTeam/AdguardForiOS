@@ -357,9 +357,6 @@
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Постійний";
 
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Потім %1$@ за %2$@";
-
 /* (FiltersController) ON state in groups section */
 "on_state" = "УВІМКНЕНО";
 

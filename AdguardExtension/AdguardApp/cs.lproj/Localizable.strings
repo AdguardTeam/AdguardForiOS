@@ -330,9 +330,6 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Překročili jste maximální počet pravidel filtrování.";
 
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Potom %1$@ za %2$@";
-
 /* (FiltersController) ON state in groups section */
 "on_state" = "ZAPNUTO";
 

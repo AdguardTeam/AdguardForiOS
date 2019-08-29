@@ -2230,6 +2230,7 @@
                         <outlet property="cancelButton" destination="ks4-fm-Ctr" id="YTk-T2-LAU"/>
                         <outlet property="contentView" destination="596-lg-yqi" id="ekr-Xs-lcT"/>
                         <outlet property="deleteButton" destination="oSP-2V-qCA" id="Jcg-ML-kxJ"/>
+                        <outlet property="dnsSeparator" destination="elc-gn-3jn" id="Mym-Q2-BDy"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="hx7-Xk-ZLq" id="k2i-zZ-ldO"/>
                         <outlet property="nameField" destination="mBR-7g-DjT" id="LEp-rB-OjV"/>
                         <outlet property="saveButton" destination="6e9-sP-YMb" id="JLp-uK-pwG"/>

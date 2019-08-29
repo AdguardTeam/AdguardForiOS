@@ -56,7 +56,7 @@
 "protection_disabled_caption" = "Protezione disabilitata";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Ottieni abbonamento";
+"upgrade_button_title" = "INIZIA LA PROVA";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Il tuo account Premium è scaduto";
@@ -100,7 +100,7 @@
 "filter_date_format" = "Filtri aggiornati: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Inserisci le tue regole personalizzate qui<br>Leggi queste <a href=\"%@\">note sulla sintassi delle regole</a>";
+"blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti Web.";
@@ -309,6 +309,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Blocchi di contenuto";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtri:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Impostazioni generali";
 
@@ -356,9 +359,6 @@
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanente";
-
-/* (GetProController) description for subscription trial period */
-"trial_description_format" = "Poi il pagamento sarà %1$@ per %2$@";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ATTIVO";

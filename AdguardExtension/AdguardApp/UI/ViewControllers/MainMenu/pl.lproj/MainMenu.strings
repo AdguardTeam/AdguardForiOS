@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Zgłoś błędy, wyślij swoje komentarze i sugestie";
 
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "Główne";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Czym jest AdGuard";
 
@@ -31,5 +34,8 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "O programie";
 
-/* Class = "UILabel"; text = "Contains custom filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "Ogranicz dostęp do witryn";
+/* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
+"xb2-Gf-9h7.text" = "Wygląd i inne";
+
+/* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
+"zO5-hl-j78.text" = "Dodaj własne reguły filtrowania";

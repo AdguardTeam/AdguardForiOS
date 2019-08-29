@@ -37,6 +37,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı Filtresi";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Özel kurallarınızı satır sonları ile ayırarak buraya girin";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Buraya, AdGuard'ın Safari filtrelemesini devre dışı bırakacağı, satır sonları ile ayrılmış alan adlarını girin.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "EVET";
 
@@ -44,13 +50,19 @@
 "protection_enabled_caption" = "Koruma etkinleştirildi";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Bazı içerik engelleyiciler devre dışı";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Koruma devre dışı";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Abonelik al";
+"upgrade_button_title" = "DENEMEYİ BAŞLAT";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium hesabınızın süresi doldu";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Dikkat";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü etkinleştirmenize izin veren lisans anahtarı yok.";
@@ -87,11 +99,17 @@
 
 "filter_date_format" = "Filtreler güncellendi: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Özel kurallarınızı buraya girin <a href=\"%@\">Kural söz dizimi hakkında</a>bu notu okuyun.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Alan adlarını buraya girin.AdGuard bu web siteleri için Safari’de filtrelemeyi devre dışı bırakacaktır.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard yalnızca bu web siteleri için Safari’de filtrelemeyi etkinleştirir.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Güncelleniyor...";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Bir kural ekle";
@@ -123,8 +141,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Dışa aktar";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "Yanlış engellemeyi bildirin";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "GitHub'da bir hata bildirin";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Destek ile iletişime geçin";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Kayıtları dışa aktar";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Hata raporu gönderilemiyor. Cihazınıza bir e-posta kurulumu yapmamış olabilirsiniz.";
@@ -152,6 +179,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Tam-Tünel (VPN simgesi olmadan), diğer VPN uygulamalarıyla uyumsuz, daha az stabil";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "devre dışı";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS gizliliğinizi çeşitli sayaçlardan ve analitik sistemlerden, kimlik avı web sitelerinden korumak için alternatif bir yoldur";
@@ -249,8 +279,95 @@
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Tamam";
 
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Gizlilik Politikası";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Bir VPN oluşturulacak";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "Özel DNS ayarlarını kurmak için VPN gerekmektedir. Oluşturulan VPN yereldir, bu trafiğinizin hiçbir sunucu vasıtasıyla yönlendirilmeyeceği anlamına gelir. Bu VPN profilini kullandığınızda herhangi bir veri toplamayız.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Lütfen bekleyin...";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "iOS için AdGuard Reklam Engelleyici'yi kurdum.";
 
 /* (MainController) Share this app initial text on Mail Body (before link row) */
 "share_mail_body_subtext" = "Eğer sende benim gibi internette reklamsız gezinmek istiyorsan, sende dene:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Diğer";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Gelişmiş";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "İçerik engelleyicileri";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtreler:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Genel ayarlar";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ kural kullanılıyor";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Safari ayarlarında devre dışı bırakılmış";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Güncellemeler yoklanıyor...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "%1$@ kurallarının üst sınırına ulaşıldı. Uygulama düzgün çalışmayabilir. Lütfen ek kuralları devre dışı edin. Şu anda %3$@ kurallarından %2$@ kullanılıyor; %4$@ kuralları devre dışı bırakılır.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtreler güncellenmedi";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Bu lisans, maksimum sayıda cihazda etkinleştirilmiştir.\nWeb sitesindeki kişisel hesabınızdaki kullanılmayan cihazlardan lisansı çıkarabilirsiniz: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Bu işlem uzantısını kullanabilmeniz için önce, %1$@ ilk yapılandırmayı gerçekleştirmek zorundadır. Bunu yapmak için ana %2$@ uygulamasını başlatın.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Destek ekibine mesaj gönderilemiyor. Henüz e-posta hesabınızı yapılandırmadınız.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "İçerik engelleyicinin devre dışı bırakıldığını unutmayın. Bu, reklamların AdGuard ayarlarına bakılmaksızın filtrelenmeyeceği anlamına gelir. Filtrelemeye başlamak için lütfen Safari ayarlarından AdGuard İçerik Engelleyiciyi etkinleştirin.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Ana bilgisayar adı temin edilemedi. Sayfa henüz yüklenmemiş olabilir.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Bu sitenin güvenlik politikası AdGuard Assistant'ı başlatmanıza izin vermiyor.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Safari eylem eklentisi başlatılırken beklenmeyen bir hata oluştu. Bu tekrar olursa lütfen AdGuard Destek ile iletişime geçin.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Uyarı";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Azami filtre kuralı miktarını aştınız.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Kalıcı";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "AÇIK";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "KAPALI";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Ana sayfa:";
+
+/* (AboutController) current app version string */
+"about_version" = "Versiyon";

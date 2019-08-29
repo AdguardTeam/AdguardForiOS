@@ -87,6 +87,9 @@
 
 "filter_date_format" = "Filtre boli aktualizované: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Sem zadajte názvy domén. AdGuard vypne filtráciu na týchto webových stránkach v Safari";
 

@@ -100,7 +100,7 @@
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add custom rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
+"blacklist_text_format" = "You can add your own rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";

@@ -37,11 +37,20 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Filtro del usuario";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Introduzca sus reglas personalizadas aquí, separadas por saltos de línea";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Introduzca aquí los nombres de dominio separados por saltos de línea, para lo cual AdGuard desactivará el filtrado de Safari.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "SÍ";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "La protección esta habilitada";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Algunos bloqueadores de contenido están desactivados";
 
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "La protección esta deshabilitada";
@@ -90,6 +99,9 @@
 
 "filter_date_format" = "Filtros actualizados: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Usted puede añadir sus reglas personalizadas aquí<br>Lea esta <a href=\"%@\">nota acerca de la sintaxis de las reglas</a>.";
+
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard deshabilitará el filtrado en Safari para estos sitios web.";
 
@@ -129,8 +141,14 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Exportar";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "Informar de bloqueo incorrecto";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Informar de un problema";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Contactar asistencia técnica";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Exportar registros";
@@ -246,14 +264,29 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS mediante TLS";
 
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "¿Está seguro que quiere cerrar la sesión?";
+
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
+
+/* login error message */
+"login_error_message" = "Ocurrió un error mientras se iniciaba la sesión";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium es un servicio de pago anual con un costo de suscripción de $2.99/año (el precio puede varíar por región). El pago será cobrado a la cuenta de iTunes al confirmar la compra. La suscripción se renueva automáticamente a menos que la opción de auto renovación se desactive 24 horas antes del término del período actual. Tus suscripciones pueden ser administradas y tu auto renovación puede desactivarse en los ajustes de tu cuenta iTunes después de comprar una suscripción. <br><br><a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Aceptar";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Política de privacidad";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Una VPN será creada";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "Se requiere una VPN para activar ajustes personalizados de DNS. La VPN creada es local, lo que significa que tu tráfico no será mandado por ningún servidor. \nNo recopilamos ningún dato cuando se usa este perfil VPN.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Por favor espere...";
@@ -279,8 +312,17 @@
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Configuración general";
 
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ reglas se están utilizando";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Desactivado en configuración de Safari";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Buscando actualizaciones...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Se alcanza el límite de %1$@ reglas. Es posible que la aplicación no funcione correctamente. Por favor desactive las reglas adicionales. Actualmente se están utilizando %2$@ de %3$@ reglas; %4$@ reglas están desactivadas.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
 "failed_updating_current_state_label" = "Los filtros no se han actualizado";
@@ -288,11 +330,38 @@
 /* (GetProController) login error message text */
 "login_max_computers_exceeded" = "Esta licencia se ha activado en la cantidad máxima de dispositivos.\nPuede desvincular la licencia de los dispositivos no utilizados en su cuenta personal en el sitio web: adguard.com";
 
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Antes de que usted puede añadir esta extensión de acción, %1$@ tiene que llevar a cabo una configuración inicial. Abra la app principal de %2$@ para que lo haga.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "No se puede enviar un mensaje al equipo de soporte. Aún no ha configurado tu cuenta de correo electrónico.";
+
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Tenga en cuenta que el bloqueador de contenido está deshabilitado. Eso significa que los anuncios no se filtrarán independientemente de la configuración de AdGuard. Habilite el bloqueador de contenido de AdGuard en la configuración de Safari para comenzar a filtrar.";
 
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "El nombre de host no se obtiene. Quizás la página no haya sido cargada todavía.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "La política de seguridad de este sitio web no permite ejecutar el Asistente de AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Se produjo un error inesperado al iniciar la extensión de acción de Safari. Póngase en contacto con el servicio de asistencia de AdGuard si esto vuelve a suceder.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Cuidado";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Ha excedido el número máximo de reglas de filtrado.";
+
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Permanente";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ACTIVADO";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "DESACTIVADO";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Página de inicio:";
