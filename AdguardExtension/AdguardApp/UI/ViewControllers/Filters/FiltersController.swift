@@ -102,7 +102,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         
         if searchString.count > 0 {
             viewModel?.searchFilter(query: searchString)
-            searchBar.searchTextField.becomeFirstResponder()
+            searchBar.becomeFirstResponder()
         }
         
         viewModel?.updateCurrentGroup()
