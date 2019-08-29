@@ -35,7 +35,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             return viewModel?.currentGroup
         }
     }
-    var isFromSearch = false
     
     // MARK:  private properties
     
@@ -100,7 +99,12 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let searchString = viewModel?.searchString else { return }
-        viewModel?.searchFilter(query: searchString)
+        
+        if searchString.count > 0 {
+            viewModel?.searchFilter(query: searchString)
+            searchBar.searchTextField.becomeFirstResponder()
+        }
+        
         viewModel?.updateCurrentGroup()
         updateTheme()
     }
@@ -212,7 +216,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case groupSection:
-            return isFromSearch ? 0.0 : 72.0
+            return viewModel?.isSearchActive ?? true ? 0.0 : 72.0
         case addFilterSection:
             return group?.groupId == FilterGroupId.custom ? 60 : 0
         default:

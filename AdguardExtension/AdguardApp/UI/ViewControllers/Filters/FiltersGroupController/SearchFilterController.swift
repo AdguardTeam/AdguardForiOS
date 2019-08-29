@@ -221,7 +221,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         if segue.identifier == showGroupSegue{
             if let destinationVC = segue.destination as? FiltersController {
                 destinationVC.viewModel = viewModel
-                destinationVC.isFromSearch = true
             }
         } else if segue.identifier == showFilterDetailsSegue {
             if let destinationVC = segue.destination as? FilterDetailsController {
