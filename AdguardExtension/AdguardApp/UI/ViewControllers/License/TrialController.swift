@@ -39,7 +39,13 @@ class TrialController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        trialLabel.text = getTrialString(period: purchaseService.trialPeriod)
+        let products = purchaseService.products
+        for product in products {
+            if product.type == .subscription && product.trialPeriod != nil {
+                trialLabel.text = getTrialString(period: product.trialPeriod!)
+                break
+            }
+        }
         setupBackButton()
     }
     
