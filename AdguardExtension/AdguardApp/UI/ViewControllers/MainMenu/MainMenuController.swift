@@ -38,6 +38,7 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var dnsCell: UITableViewCell!
 
     @IBOutlet weak var dnsTrailingConstrint: NSLayoutConstraint!
+    @IBOutlet weak var dnsArrow: UIImageView!
     
     private var filtersCoutObservation: Any?
     private var activeFiltersCoutObservation: Any?
@@ -106,7 +107,7 @@ class MainMenuController: UITableViewController {
             guard let sSelf = self else { return }
             DispatchQueue.main.async {
                 sSelf.getProButton.isHidden = sSelf.configuration.proStatus
-                sSelf.dnsCell.accessoryType = sSelf.configuration.proStatus ? UITableViewCell.AccessoryType.disclosureIndicator :  UITableViewCell.AccessoryType.none
+                sSelf.dnsArrow.isHidden = !sSelf.configuration.proStatus
                 sSelf.setDnsName()
             }
         }
