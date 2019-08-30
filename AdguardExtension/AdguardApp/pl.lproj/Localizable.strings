@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "Wystąpił błąd podczas logowania";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium to płatna usługa roczna z kosztem subskrypcji 2,99 USD/rok (cena może się różnić w zależności od regionu). Płatność zostanie pobrana z konta iTunes po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia się, chyba że automatyczne odnowienie jest wyłączone co najmniej 24 godziny przed końcem bieżącego okresu. Konto zostanie obciążone kosztami odnowienia w ciągu 24 godzin przed końcem bieżącego okresu. Twoje subskrypcje mogą być zarządzane, a automatyczne odnawianie może zostać wyłączone, przechodząc do ustawień konta iTunes po zakupie subskrypcji.<br><br><a href=%1$@>Polityka prywatności</a> <br><br><a href=%2$@>Warunki korzystania</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 

@@ -249,9 +249,6 @@
 /* login error message */
 "login_error_message" = "Počas prihlasovania sa vyskytla chyba";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium je platená ročná služba s predplateným 2,99 USD za rok (cena sa môže líšiť podľa regiónu). Platba bude účtovaná na účet iTunes pri potvrdení nákupu. Predplatné sa automaticky obnoví, pokiaľ nie je automatické obnovenie vypnuté aspoň 24 hodín pred koncom aktuálneho obdobia. Obnovenie predplatného bude účtované do 24 hodín pred koncom aktuálneho obdobia. Vaše odbery môžu byť spravované a Vaše automatické obnovenie môže byť vypnuté tak, že prejdete na nastavenia účtu iTunes po zakúpení predplatného.<br><br><a href=%1$@>Zásady ochrany osobných údajov</a> <br><br><a href=%2$@>Zmluvné podmienky</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 

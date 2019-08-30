@@ -56,7 +56,7 @@
 "protection_disabled_caption" = "防護被禁用";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "取得訂閱";
+"upgrade_button_title" = "開始試用";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
@@ -100,7 +100,7 @@
 "filter_date_format" = "過濾器被更新：%@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "於此您可增加自訂的規則<br>閱讀這個<a href=\"%@\">關於規則語法之說明</a>。";
+"blacklist_text_format" = "於此您可增加您自己的規則<br>閱讀這個<a href=\"%@\">關於規則語法之說明</a>。";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站禁用過濾。";
@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "當登入時，錯誤已發生。";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard 高級版是一項訂閱費用為美金 $2.99/年（價格可能因地區而異）之每年付費的服務。付款將在購買確認時被記在 iTunes 帳戶上。除非在現行的週期結束前至少 24 小時自動續訂被關掉，否則訂閱會自動地續訂。帳戶將在現行的週期結束前 24 小時內因續訂而被收費。您的訂閱可被管理，且在購買續訂後，您的自動續訂透過前往您的 iTunes 帳戶設定可被關掉。<br><br><a href=%1$@>隱私政策</a> <br><br><a href=%2$@>使用條款</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "確定";
 
@@ -358,7 +355,7 @@
 "filter_rules_maximum" = "您已超出過濾器規則之最大數量。";
 
 /* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "永久的";
+"permanent_subscription_title" = "終身";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "開著";

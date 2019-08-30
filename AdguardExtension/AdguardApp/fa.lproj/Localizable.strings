@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "یک خطا حین ورود رخ داده است";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium یک سرویس پولی سالانه با هزینه اشتراک $2.99/سال (قیمت در هر منطقه میتواند متفاوت باشد) هست. هزینه در حساب iTunes در حین تایید خرید کسر میشود. اشتراک خودکار تمدید میشود مگر اینکه تمدید خودکار حداقل 24 ساعت قبل از پایان دوره فعلی خاموش شده باشد. حساب خودکار به مدت 24 ساعت قبل از پایان دوره فعلی کسر می شود. اشتراک های شما میتواند مدیریت شود و تمدید خودکار میتواند با رفتن به تنظیمات iTunes بعد از خرید اشتراک غیرفعال شود.<br><br><a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "تأیید";
 
