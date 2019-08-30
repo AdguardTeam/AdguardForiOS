@@ -145,8 +145,9 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
                 for filter in filters{
                     filter.searchAttributedString = filter.name?.highlight(search: searchStrings)
                     
-                    let tags = filter.tags?.map({$0.name}) ?? []
-                    let langs = filter.langs?.map({$0.name}) ?? []
+                    // Adding "#" symbol to satisfy search string
+                    let tags = filter.tags?.map({"#" + $0.name}) ?? []
+                    let langs = filter.langs?.map({"#" + $0.name}) ?? []
                     
                     let tagsSet = Set(tags)
                     let langsSet = Set(langs)
@@ -154,7 +155,14 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
                     let langsAndTagsUnion = tagsSet.union(langsSet)
                     let selectedTagsForFilterSet = searchSet.intersection(langsAndTagsUnion)
                     
-                    highlight(filter: filter, tags: selectedTagsForFilterSet)
+                    // Remove "#" for tags, because filter names do not contain "#" symbol
+                    var untaggedTags: Set<String> = []
+                    
+                    for tag in selectedTagsForFilterSet {
+                        untaggedTags.insert(String(tag.dropFirst()))
+                    }
+                    
+                    highlight(filter: filter, tags: untaggedTags)
                     
                     let filterNameSatisfies = checkFilter(filter: filter, components: components)
                     
@@ -193,7 +201,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
             newSearchString = searchString.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
             newSearchString = newSearchString.trimmingCharacters(in: .whitespaces)
         } else {
-            newSearchString = name + " " + searchString
+            // "#" symbol added only when we tap on tag-buttons
+            newSearchString = "#" + name + " " + searchString
         }
         
         searchFilter(query: newSearchString)

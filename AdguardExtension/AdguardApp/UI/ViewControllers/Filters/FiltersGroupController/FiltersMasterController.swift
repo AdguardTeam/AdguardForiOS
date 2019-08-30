@@ -76,6 +76,7 @@ class FiltersMasterController: UIViewController {
         searchDelegate?.cancelButtonTapped()
         groupsDelegate?.cancelButtonTapped()
         showGroupsContainerView()
+        viewModel?.cancelSearch()
         view.endEditing(true)
     }
     
