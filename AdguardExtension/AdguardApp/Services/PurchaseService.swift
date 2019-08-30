@@ -462,16 +462,16 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func checkPremiumExpired() {
         
         DDLogInfo("(PurchaseService) checkPremiumExpired")
-        if(purchasedThroughInApp && !isInAppPurchaseActive()) {
             
-            DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
-            validateReceipt { [weak self] (error) in
-                if self?.isInAppPurchaseActive() ?? false {
-                    self?.notifyPremiumExpired()
-                }
+        // we must validate receipts not only to check the expiration of the subscription,
+        // but also for restoring purchases after reinstalling the application
+        DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
+        validateReceipt { [weak self] (error) in
+            if self?.isInAppPurchaseActive() ?? false {
+                self?.notifyPremiumExpired()
             }
         }
-        
+    
         if(loginService.loggedIn && loginService.hasPremiumLicense) {
             
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
