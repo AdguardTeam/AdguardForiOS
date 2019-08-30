@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "登录时发生错误";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium 是一种年度付费服务，每年的订阅价格为 $2.99（定价可能会因区域不同而有所不同）。在购买确认时，款项会充值到 iTunes 账号。订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。当前订阅期结束前的 24 小时内，款项会自动充值到账号。您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。<br><br><a href=%1$@>隐私策略</a> <br><br><a href=%2$@>使用条款</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "确定";
 

@@ -40,9 +40,6 @@
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Açık";
 
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "Bu listedeki web siteler hariç her yerde reklamların engelini kaldırın";
-
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Bu ayar devrede ise Adguard arka plandaki filtre güncellemeleri için sadece Wi-Fi'yı kullanacak";
 

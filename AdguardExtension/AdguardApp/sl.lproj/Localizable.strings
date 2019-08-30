@@ -245,6 +245,3 @@
 
 /* login error message */
 "login_error_message" = "Prišlo do napake pri prijavi v";
-
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium je plačana letna storitev z naročnino 2.99 USD/leto (cena se lahko razlikuje glede na regijo). Plačilo se zaračuna v računu iTunes ob potrditvi nakupa. Naročnina se samodejno obnovi, razen če se samodejno podaljšanje izklopi vsaj 24 ur pred koncem trenutnega obdobja. Račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Vašo naročnino lahko upravljate in samodejno podaljšanje lahko izklopite tako, da po nakupu naročnine odprete nastavitve računa iTunes.<br><br><a href=%1$@>Politika zasebnosti</a> <br><br><a href=%2$@>Pogoji uporabe</a>";
