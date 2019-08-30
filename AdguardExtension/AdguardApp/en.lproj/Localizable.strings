@@ -382,4 +382,4 @@
 "about_version" = "Version";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pay one time and use AdGuard Premium features on all your devices!";
+"getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your devices!";
