@@ -153,7 +153,7 @@
                         <sections>
                             <tableViewSection id="y8N-NC-U3D">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="OqV-RL-CBm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="OqV-RL-CBm">
                                         <rect key="frame" x="0.0" y="28" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OqV-RL-CBm" id="sFZ-hi-jet">
@@ -172,11 +172,20 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="yLQ-lp-jkp">
+                                                    <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="0u9-a1-rdu"/>
+                                                        <constraint firstAttribute="height" constant="24" id="cYp-Sl-B7z"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="NVi-wQ-2Pn" secondAttribute="bottom" constant="21" id="6xS-O3-wI6"/>
                                                 <constraint firstItem="NVi-wQ-2Pn" firstAttribute="leading" secondItem="sFZ-hi-jet" secondAttribute="leading" constant="24" id="AY5-Eo-aap"/>
                                                 <constraint firstItem="NVi-wQ-2Pn" firstAttribute="top" secondItem="sFZ-hi-jet" secondAttribute="top" constant="16" id="Hvh-yC-PuB"/>
+                                                <constraint firstAttribute="trailing" secondItem="yLQ-lp-jkp" secondAttribute="trailing" constant="16" id="LMN-OK-AY2"/>
+                                                <constraint firstItem="yLQ-lp-jkp" firstAttribute="centerY" secondItem="sFZ-hi-jet" secondAttribute="centerY" id="mK9-b1-ieq"/>
                                                 <constraint firstAttribute="trailing" secondItem="NVi-wQ-2Pn" secondAttribute="trailing" constant="20" id="wdN-Ky-iay"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -185,7 +194,7 @@
                                             <outletCollection property="gestureRecognizers" destination="74H-Xz-46y" appends="YES" id="lZg-GU-zWf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="vV7-JN-7rg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="vV7-JN-7rg">
                                         <rect key="frame" x="0.0" y="84" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vV7-JN-7rg" id="dOW-Nh-gT6">
@@ -201,12 +210,21 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-Vf-CRh">
+                                                    <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="1uf-mj-6sV"/>
+                                                        <constraint firstAttribute="height" constant="24" id="Yub-G0-CCL"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xMf-b0-Cfp" firstAttribute="leading" secondItem="dOW-Nh-gT6" secondAttribute="leading" constant="24" id="JT8-io-lPf"/>
                                                 <constraint firstItem="xMf-b0-Cfp" firstAttribute="top" secondItem="dOW-Nh-gT6" secondAttribute="top" constant="16" id="KD4-Iy-do9"/>
                                                 <constraint firstAttribute="bottom" secondItem="xMf-b0-Cfp" secondAttribute="bottom" constant="21" id="USE-oD-fA7"/>
+                                                <constraint firstItem="pv6-Vf-CRh" firstAttribute="centerY" secondItem="dOW-Nh-gT6" secondAttribute="centerY" id="saC-u1-dDB"/>
                                                 <constraint firstAttribute="trailing" secondItem="xMf-b0-Cfp" secondAttribute="trailing" constant="20" id="vjC-2R-3T4"/>
+                                                <constraint firstAttribute="trailing" secondItem="pv6-Vf-CRh" secondAttribute="trailing" constant="16" id="wrF-NH-YNG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -214,7 +232,7 @@
                                             <outletCollection property="gestureRecognizers" destination="WDb-dI-3qM" appends="YES" id="UXb-Ie-vWq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="PJ4-Ub-WTy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="PJ4-Ub-WTy">
                                         <rect key="frame" x="0.0" y="140" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PJ4-Ub-WTy" id="HL5-QT-pGu">
@@ -230,11 +248,20 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="E9V-p4-eNH">
+                                                    <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="4u8-Id-TWR"/>
+                                                        <constraint firstAttribute="height" constant="24" id="Czo-0J-IEQ"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="KkR-EM-giI" firstAttribute="top" secondItem="HL5-QT-pGu" secondAttribute="top" constant="16" id="A5B-mQ-VyZ"/>
+                                                <constraint firstItem="E9V-p4-eNH" firstAttribute="centerY" secondItem="HL5-QT-pGu" secondAttribute="centerY" id="OZC-DT-rKK"/>
                                                 <constraint firstItem="KkR-EM-giI" firstAttribute="leading" secondItem="HL5-QT-pGu" secondAttribute="leading" constant="24" id="W7o-S7-uLg"/>
                                                 <constraint firstAttribute="trailing" secondItem="KkR-EM-giI" secondAttribute="trailing" constant="20" id="aWa-Xy-Xid"/>
+                                                <constraint firstAttribute="trailing" secondItem="E9V-p4-eNH" secondAttribute="trailing" constant="16" id="bJA-Ee-jPs"/>
                                                 <constraint firstAttribute="bottom" secondItem="KkR-EM-giI" secondAttribute="bottom" constant="21" id="lE1-Em-42R"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -243,7 +270,7 @@
                                             <outletCollection property="gestureRecognizers" destination="Bju-Q4-44f" appends="YES" id="y3x-V1-U4E"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="k1i-Pe-enu">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="k1i-Pe-enu">
                                         <rect key="frame" x="0.0" y="196" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k1i-Pe-enu" id="Wcf-WN-od8">
@@ -259,9 +286,18 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="mow-Zt-eyA">
+                                                    <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="6j1-z5-TCm"/>
+                                                        <constraint firstAttribute="height" constant="24" id="V3p-Z8-VDr"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8KQ-Ga-zhs" firstAttribute="top" secondItem="Wcf-WN-od8" secondAttribute="top" constant="16" id="1Pz-BG-fS6"/>
+                                                <constraint firstAttribute="trailing" secondItem="mow-Zt-eyA" secondAttribute="trailing" constant="16" id="97m-Xw-RBD"/>
+                                                <constraint firstItem="mow-Zt-eyA" firstAttribute="centerY" secondItem="Wcf-WN-od8" secondAttribute="centerY" id="Ka3-qN-4Xl"/>
                                                 <constraint firstItem="8KQ-Ga-zhs" firstAttribute="leading" secondItem="Wcf-WN-od8" secondAttribute="leading" constant="24" id="LTM-Kj-b2r"/>
                                                 <constraint firstAttribute="trailing" secondItem="8KQ-Ga-zhs" secondAttribute="trailing" constant="20" id="mIv-aA-XuI"/>
                                                 <constraint firstAttribute="bottom" secondItem="8KQ-Ga-zhs" secondAttribute="bottom" constant="21" id="qfB-B1-coV"/>
@@ -272,7 +308,7 @@
                                             <outletCollection property="gestureRecognizers" destination="Y0N-GJ-tu0" appends="YES" id="DmL-nR-rO5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Zf3-Nn-wSi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Zf3-Nn-wSi">
                                         <rect key="frame" x="0.0" y="252" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zf3-Nn-wSi" id="kSj-sa-evd">
@@ -291,11 +327,20 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="Mw2-6Z-Gof">
+                                                    <rect key="frame" x="374" y="16" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="Mdq-KN-6D5"/>
+                                                        <constraint firstAttribute="height" constant="24" id="yB4-HP-C2d"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="5Xe-d5-8tj" secondAttribute="trailing" constant="20" id="Tk0-9I-dLV"/>
+                                                <constraint firstItem="Mw2-6Z-Gof" firstAttribute="centerY" secondItem="kSj-sa-evd" secondAttribute="centerY" id="b4d-v6-Cvr"/>
                                                 <constraint firstAttribute="bottom" secondItem="5Xe-d5-8tj" secondAttribute="bottom" constant="21" id="b89-F5-9yi"/>
                                                 <constraint firstItem="5Xe-d5-8tj" firstAttribute="leading" secondItem="kSj-sa-evd" secondAttribute="leading" constant="24" id="ctQ-Uq-Hw0"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mw2-6Z-Gof" secondAttribute="trailing" constant="16" id="kS2-mM-DGX"/>
                                                 <constraint firstItem="5Xe-d5-8tj" firstAttribute="top" secondItem="kSj-sa-evd" secondAttribute="top" constant="16" id="l00-Kd-ggL"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -384,5 +429,6 @@
     <resources>
         <image name="adguard-header" width="143" height="31"/>
         <image name="adguard-header-light" width="142" height="31"/>
+        <image name="arrow_right" width="24" height="24"/>
     </resources>
 </document>
