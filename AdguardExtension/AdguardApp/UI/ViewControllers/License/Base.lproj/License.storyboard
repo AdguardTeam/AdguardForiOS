@@ -787,14 +787,14 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-t3-h64">
-                                <rect key="frame" x="24" y="453" width="366" height="0.0"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-t3-h64">
+                                <rect key="frame" x="24" y="284" width="272" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security filters, DNS privacy, custom filters etc. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU2-3b-5Lf">
-                                <rect key="frame" x="24" y="477" width="366" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security filters, DNS privacy, custom filters etc. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fU2-3b-5Lf">
+                                <rect key="frame" x="24" y="308" width="272" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -820,7 +820,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fWH-av-unH"/>
                                     <constraint firstAttribute="height" constant="60" id="oKh-9C-Lal"/>
-                                    <constraint firstAttribute="width" constant="250" id="vKk-I2-Xc1"/>
+                                    <constraint firstAttribute="width" constant="350" id="vKk-I2-Xc1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <state key="normal" title="TRY FOR FREE">
@@ -862,6 +862,7 @@
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="centerX" secondItem="C3z-6d-A4W" secondAttribute="centerX" id="59B-Pq-uMI"/>
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="centerX" secondItem="fU2-3b-5Lf" secondAttribute="centerX" id="7dO-Kx-N2I"/>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="trailing" secondItem="nv4-t3-h64" secondAttribute="trailing" id="7fB-tj-raI"/>
+                            <constraint firstItem="jUb-cY-Qt7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fU2-3b-5Lf" secondAttribute="bottom" constant="20" id="9qG-Hs-oo1"/>
                             <constraint firstItem="nv4-t3-h64" firstAttribute="leading" secondItem="tts-0w-NGZ" secondAttribute="leading" id="Ehp-k5-9Yt"/>
                             <constraint firstItem="nv4-t3-h64" firstAttribute="top" secondItem="tts-0w-NGZ" secondAttribute="bottom" constant="60" id="HfB-jj-lEO"/>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="top" secondItem="nv4-t3-h64" secondAttribute="bottom" constant="24" id="Ie2-Wh-PC5"/>
@@ -905,7 +906,7 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="leading" secondItem="C3z-6d-A4W" secondAttribute="leading" constant="147" id="f0b-6f-EsT">
-                                <variation key="heightClass=regular-widthClass=compact" constant="35"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                             </constraint>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="leading" secondItem="nv4-t3-h64" secondAttribute="leading" id="iyr-dX-eZT"/>
                             <constraint firstItem="wLZ-TG-e9w" firstAttribute="trailing" secondItem="jUb-cY-Qt7" secondAttribute="trailing" id="jwF-1c-rTZ"/>
@@ -936,6 +937,7 @@
                                 <exclude reference="ZjF-2H-eJe"/>
                                 <exclude reference="vx3-7G-xed"/>
                                 <exclude reference="Ehp-k5-9Yt"/>
+                                <exclude reference="HfB-jj-lEO"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <exclude reference="VX1-2p-7HK"/>
                                 <exclude reference="X0h-5C-1SY"/>
@@ -991,6 +993,7 @@
                                 <exclude reference="wEw-pB-Kdo"/>
                                 <include reference="ZjF-2H-eJe"/>
                                 <include reference="Ehp-k5-9Yt"/>
+                                <include reference="HfB-jj-lEO"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <include reference="X0h-5C-1SY"/>
                                 <include reference="cgv-Yb-gHi"/>
@@ -1031,6 +1034,6 @@
         <image name="widget-logo" width="70" height="73"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XHd-Jk-4yR"/>
+        <segue reference="x9H-U4-xhh"/>
     </inferredMetricsTieBreakers>
 </document>
