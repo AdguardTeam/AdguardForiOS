@@ -404,8 +404,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwH-4Z-Vqg">
-                                            <rect key="frame" x="20" y="16" width="556" height="33"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwH-4Z-Vqg">
+                                            <rect key="frame" x="20" y="16" width="370" height="33.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
