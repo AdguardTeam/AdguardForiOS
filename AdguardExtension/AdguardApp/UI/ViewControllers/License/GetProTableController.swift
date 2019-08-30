@@ -76,8 +76,6 @@ class GetProTableController: UITableViewController {
         
         updateTheme()
         
-        upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
-       
         selectedProduct = purchaseService.products.first
               
         setPrice()
@@ -147,6 +145,8 @@ class GetProTableController: UITableViewController {
     
     func setPrice() {
         
+        let lifetime = selectedProduct?.type == .some(.lifetime)
+        
         trialLabel.text = getStringForTrialLabel(product: selectedProduct)
         periodLabel.text = getPeriodString(product: selectedProduct)
         priceLabel.text = selectedProduct?.price
@@ -154,8 +154,10 @@ class GetProTableController: UITableViewController {
         startTrialTitleLable.text = getStartTrialTitleLabelString(product: selectedProduct)
         startTrialDescriptionLabel.text = getStartTrialDescriptionLabelString(product: selectedProduct)
         
-        trialCellDescriptionLabel.isHidden = selectedProduct?.type == .some(.lifetime)
+        trialCellDescriptionLabel.isHidden = lifetime
         setPurchaseDescription()
+        
+        upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
 
         tableView.reloadData()
     }

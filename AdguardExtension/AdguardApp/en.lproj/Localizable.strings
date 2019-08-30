@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "START TRIAL";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "PURCHASE";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
 
