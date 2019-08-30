@@ -26,6 +26,12 @@ enum PurchasePeriod {
     case day, week, month, year
 }
 
+enum ProductType {
+    case subscription, lifetime
+}
+
+typealias Product = (type: ProductType, price: String, period: Period?, trialPeriod: Period?, productId: String)
+
 // MARK:  service protocol -
 /**
  PurchaseService is a service responsible for all purchases.
@@ -54,27 +60,12 @@ protocol PurchaseServiceProtocol {
     /**
      returns true if service ready to request purchases through app store
      */
-    var ready: Bool {get}
+//    var ready: Bool {get}
     
     /**
-     renewable subscription price
+     return array of products
      */
-    var subscriptionPrice: String {get}
-    
-    /**
-     non-consumable price
-     */
-    var nonConsumablePrice: String {get}
-    
-    /**
-     renewable subscription period
-     */
-    var subscriptionPeriod: Period {get}
-    
-    /**
-     trial subscription period
-     */
-    var trialPeriod: Period {get}
+    var products: [Product] { get }
     
     /*  login on backend server and check license information
         the results will be posted through notification center
@@ -97,14 +88,9 @@ protocol PurchaseServiceProtocol {
     func logout()->Bool
     
     /**
-     requests an renewable subscription purchase
+     requests an renewable or non-consumable subscription purchase
      */
-    func requestSubscriptionPurchase()
-    
-    /**
-     requests an non-consumable purchase
-     */
-    func requestNonConsumablePurchase()
+    func requestPurchase(productId: String)
     
     /**
      requests restore in-app purchases
@@ -161,11 +147,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // MARK: constants -
     // store kit constants
     
-    // product id for renewable subscription
-    private let kRenewableSubscriptionProductID = "com.adguard.AdguardExtension.ProProTrial"
+    // product id for renewable annual subscription
+    private let annualSubscriptionProductID = "com.adguard.annual"
+    
+    // product id for renewable monthly subscription
+    private let monthlySubscriptionProductID = "com.adguard.monthly"
     
     // product id for non-consumable in app purchase
-    private let kNonConsumableProductID = "com.adguard.AdguardExtension.GetProFeature5"
+    private let lifetimeProductID = "com.adguard.lifetimePurchase"
+    
+    // product id for alternate non-consumable in app purchase. We use it for rub or uah currency
+    private let lifetimeAlternateProductID = "com.adguard.lifetimeAlternate"
+    
+    private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID] }()
     
     // ios_validate_receipt request
     
@@ -193,7 +187,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let resources: AESharedResourcesProtocol
     private let keychain: KeychainServiceProtocol
     private var productRequest: SKProductsRequest?
-    private var subscriptionProduct: SKProduct?
+    private var productsToPurchase = [SKProduct]()
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
@@ -208,7 +202,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
-    private var standartPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
+    private var standardPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
     
     // MARK: - public properties
     
@@ -229,71 +223,65 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
-    var ready: Bool { return subscriptionProduct != nil && nonConsumableProduct != nil }
-    var subscriptionPrice: String {
-        guard let product = self.subscriptionProduct else { return "" }
-        
-        return priceOfProduct(product)
-    }
-    
-    var nonConsumablePrice: String {
-        guard let product = self.nonConsumableProduct else { return "" }
-        
-        return priceOfProduct(product)
-    }
-    
-    private func priceOfProduct(_ product: SKProduct)->String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = product.priceLocale
-        
-        return formatter.string(from: product.price) ?? ""
-    }
-    
-    var subscriptionPeriod: Period {
-        
-        guard let product = self.subscriptionProduct else { return standartPeriod }
-        
-        if #available(iOS 11.2, *) {
-            return getPeriod(product.subscriptionPeriod)
-        } else {
-           return standartPeriod
-        }
-    }
-    
-    var trialPeriod: Period {
-        
-        guard let product = self.subscriptionProduct else { return standartPeriod }
-        
-        if #available(iOS 11.2, *) {
-            return getPeriod(product.introductoryPrice?.subscriptionPeriod)
-        } else {
-            return standartPeriod
-        }
-    }
-    
-    @available(iOS 11.2, *)
-    private func getPeriod(_ period: SKProductSubscriptionPeriod?)-> Period {
-        
-        guard let periodUnit = period?.unit else { return standartPeriod }
-        var returnPeriodUnit: PurchasePeriod = .day
-        
-        switch periodUnit {
-        case .day:
-            returnPeriodUnit = .day
-        case .week:
-            returnPeriodUnit = .week
-        case .month:
-            returnPeriodUnit = .month
-        case .year:
-            returnPeriodUnit = .year
+    var products: [Product] {
+        var products = [Product]()
+        for product in productsToPurchase {
+            var type: ProductType!
+            
+            switch product.productIdentifier {
+            case annualSubscriptionProductID, monthlySubscriptionProductID:
+                type = .subscription
+            case lifetimeProductID, lifetimeAlternateProductID:
+                type = .lifetime
+            default:
+                DDLogError("(PurchaseService) error, product with unknown product id: \(product.productIdentifier)")
+                assertionFailure("product with unknown product id: \(product.productIdentifier)")
+                continue
+            }
+            
+            let price = priceOfProduct(product)
+            let period = periodOfProduct(product)
+            let trialPeriod = trialPeriodOfProduct(product)
+            
+            products.append((type: type, price:price, period: period, trialPeriod: trialPeriod, productId: product.productIdentifier))
         }
         
-        guard let numberOfUnits = period?.numberOfUnits else { return standartPeriod }
+        products = products.sorted(by: { (product1, product2) -> Bool in
+            switch (product1.type, product2.type) {
+            case (.subscription, .lifetime):
+                return true
+            case (.lifetime, .subscription):
+                return false
+            default:
+                break
+            }
+
+            // compare two subscriptions
+            guard let period1 = product1.period?.unit, let period2 = product2.period?.unit else { return true }
+            switch (period1, period2) {
+            case (.week, .month):
+                return true
+            case (.week, .year):
+                return true
+            case (.month, .year):
+                return true
+            default:
+                return false
+            }
+        })
         
-        return (unit: returnPeriodUnit, numberOfUnits: numberOfUnits)
+        return products
     }
     
+    func requestPurchase(productId: String) {
+        for product in productsToPurchase {
+            if product.productIdentifier == productId {
+                requestPurchase(product: product)
+                return
+            }
+        }
+    }
+
     // MARK: - public methods
     init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
         self.network = network
@@ -424,25 +412,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return loginService.logout()
     }
     
-    func requestSubscriptionPurchase() {
-        requestPurchase(product: subscriptionProduct)
-    }
-    
-    func requestNonConsumablePurchase() {
-        requestPurchase(product: nonConsumableProduct)
-    }
-    
-    private func requestPurchase(product: SKProduct?) {
-        if product == nil {
-            postNotification(PurchaseService.kPSNotificationPurchaseFailure)
-        }
-        else  {
-            let payment = SKMutablePayment(product: product!)
-            payment.quantity = 1
-            SKPaymentQueue.default().add(payment)
-        }
-    }
-    
     func requestRestore() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
@@ -494,16 +463,16 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func checkPremiumExpired() {
         
         DDLogInfo("(PurchaseService) checkPremiumExpired")
-        if(purchasedThroughInApp && !isInAppPurchaseActive()) {
             
-            DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
-            validateReceipt { [weak self] (error) in
-                if self?.isInAppPurchaseActive() ?? false {
-                    self?.notifyPremiumExpired()
-                }
+        // we must validate receipts not only to check the expiration of the subscription,
+        // but also for restoring purchases after reinstalling the application
+        DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
+        validateReceipt { [weak self] (error) in
+            if self?.isInAppPurchaseActive() ?? false {
+                self?.notifyPremiumExpired()
             }
         }
-        
+    
         if(loginService.loggedIn && loginService.hasPremiumLicense) {
             
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
@@ -524,7 +493,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     private func requestProducts() {
-        productRequest = SKProductsRequest(productIdentifiers: [kRenewableSubscriptionProductID, kNonConsumableProductID])
+        productRequest = SKProductsRequest(productIdentifiers: allProducts)
         productRequest?.delegate = self
         productRequest?.start()
     }
@@ -537,8 +506,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         for transaction in transactions {
             let error = transaction.error as NSError?
             
-            if(transaction.payment.productIdentifier != kRenewableSubscriptionProductID &&
-                transaction.payment.productIdentifier != kNonConsumableProductID) { continue }
+            if !allProducts.contains(transaction.payment.productIdentifier) { continue }
             
             switch transaction.transactionState {
             case .purchasing, .deferred:
@@ -582,18 +550,29 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        productsToPurchase.removeAll()
+        
         for product in response.products {
-            switch (product.productIdentifier) {
-            case kRenewableSubscriptionProductID:
-                subscriptionProduct = product
-            case kNonConsumableProductID:
-                nonConsumableProduct = product
+            
+            switch product.productIdentifier {
+            case annualSubscriptionProductID, monthlySubscriptionProductID:
+                productsToPurchase.append(product)
+            case lifetimeProductID:
+                // chose what product use for lifetime license.
+                if !isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
+                    productsToPurchase.append(product)
+                }
+            case lifetimeAlternateProductID:
+                if isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
+                    productsToPurchase.append(product)
+                }
             default:
-                break
+                DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
+                assertionFailure("Unknown productId \(product.productIdentifier)")
             }
         }
         
-        if ready {
+        if productsToPurchase.count > 0 {
             postNotification(PurchaseService.kPSNotificationReadyToPurchase)
         }
     }
@@ -605,10 +584,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         
         for transaction in queue.transactions {
-            if  transaction.payment.productIdentifier == kRenewableSubscriptionProductID  ||
-                transaction.payment.productIdentifier == kNonConsumableProductID  {
-                    return
-                }
+            if allProducts.contains(transaction.payment.productIdentifier)  {
+                return
+            }
         }
         
         // nothing to restore
@@ -677,19 +655,32 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             
             if status == PREMIUM_STATUS_ACTIVE {
                 
-                if productId == kRenewableSubscriptionProductID {
-                    
+                switch productId {
+                case annualSubscriptionProductID, monthlySubscriptionProductID:
                     if expirationDate == nil { continue }
-                
-                    if (expirationDate! / 1000) > Date().timeIntervalSince1970 {
                     
+                    if (expirationDate! / 1000) > Date().timeIntervalSince1970 {
+                        
                         let date = Date(timeIntervalSince1970: expirationDate! / 1000)
                         resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
                     }
-                }
-                
-                if productId == kNonConsumableProductID {
+                case lifetimeProductID, lifetimeAlternateProductID:
                     resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
+                    
+                default:
+                    DDLogInfo("(PurchaseService) processValidateResponse - error. Unknown product ID: \(productId)")
+                    // It is not an error. There we can recieve old product identifiers
+                    
+                    if expirationDate == nil {
+                        resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
+                        continue
+                    }
+                    
+                    if (expirationDate! / 1000) > Date().timeIntervalSince1970 {
+                        
+                        let date = Date(timeIntervalSince1970: expirationDate! / 1000)
+                        resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
+                    }
                 }
             }
         }
@@ -744,5 +735,68 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
         
         return cryptData;
+    }
+    
+    private func priceOfProduct(_ product: SKProduct)->String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = product.priceLocale
+        
+        return formatter.string(from: product.price) ?? ""
+    }
+    
+    func periodOfProduct(_ product: SKProduct)->Period {
+        
+        if #available(iOS 11.2, *) {
+            return getPeriod(product.subscriptionPeriod)
+        } else {
+            return standardPeriod
+        }
+    }
+    
+    func trialPeriodOfProduct(_ product: SKProduct)->Period {
+        
+        if #available(iOS 11.2, *) {
+            return getPeriod(product.introductoryPrice?.subscriptionPeriod)
+        } else {
+            return standardPeriod
+        }
+    }
+    
+    @available(iOS 11.2, *)
+    private func getPeriod(_ period: SKProductSubscriptionPeriod?)-> Period {
+        
+        guard let periodUnit = period?.unit else { return standardPeriod }
+        var returnPeriodUnit: PurchasePeriod = .day
+        
+        switch periodUnit {
+        case .day:
+            returnPeriodUnit = .day
+        case .week:
+            returnPeriodUnit = .week
+        case .month:
+            returnPeriodUnit = .month
+        case .year:
+            returnPeriodUnit = .year
+        }
+        
+        guard let numberOfUnits = period?.numberOfUnits else { return standardPeriod }
+        
+        return (unit: returnPeriodUnit, numberOfUnits: numberOfUnits)
+    }
+    
+    private func requestPurchase(product: SKProduct?) {
+        if product == nil {
+            postNotification(PurchaseService.kPSNotificationPurchaseFailure)
+        }
+        else  {
+            let payment = SKMutablePayment(product: product!)
+            payment.quantity = 1
+            SKPaymentQueue.default().add(payment)
+        }
+    }
+    
+    private func isDiscountCurrencyLocale(locale: String)->Bool {
+        return locale.contains("_RU") || locale.contains("_UA")
     }
 }
