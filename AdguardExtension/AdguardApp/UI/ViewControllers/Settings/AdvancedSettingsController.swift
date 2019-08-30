@@ -73,6 +73,17 @@ class AdvancedSettingsController: UITableViewController {
             self?.updateTheme()
         }
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+            [weak self] (notification) in
+            guard let sSelf = self else { return }
+            DispatchQueue.main.async{
+                sSelf.restartTunnelSwitch.isOn = sSelf.vpnManager.enabled
+            }
+            if sSelf.vpnManager.lastError != nil {
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
+            }
+        }
+        
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
         tableView.rowHeight = UITableView.automaticDimension
