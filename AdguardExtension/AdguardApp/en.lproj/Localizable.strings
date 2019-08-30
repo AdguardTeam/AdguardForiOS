@@ -277,7 +277,7 @@
 "login_error_message" = "An error occurred while logging in";
 
 /* purchase secription format */
-"purchase_description_format" = "About AdGuard Subscription:<br><br>▪ Payment will be charged to your iTunes Account at confirmation of purchase.<br>▪ Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period.<br>▪ Account will be charged for renewal within 24-hours prior to the end of the current period. Your subscriptions may be managed and your auto-renewal may be turned off by going to your iTunes Account Settings after purchasing a subscription.<br><br><a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
+"purchase_description_format" = "About AdGuard Subscription:<br><br>▪ Payment will be charged to your iTunes Account at confirmation of purchase.<br>▪ The subscription is automatically renewed unless auto-renew is turned off at least 24-hours before the end of the current period.<br>▪ The subscription renewal fee will be charged within 24-hours prior to the end of the current period. Your subscriptions may be managed and your auto-renewal may be turned off in your iTunes Account Settings after purchasing a subscription.<br><br><a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
@@ -379,4 +379,4 @@
 "about_version" = "Version";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pay one time and use AdGuard premium features on all your devices!";
+"getPro_screen_lifetime_text" = "Pay one time and use AdGuard Premium features on all your devices!";

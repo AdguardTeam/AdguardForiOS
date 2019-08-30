@@ -257,7 +257,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
 
             // compare two subscriptions
-            switch (product1.period?.unit, product2.period?.unit) {
+            guard let period1 = product1.period?.unit, let period2 = product2.period?.unit else { return true }
+            switch (period1, period2) {
             case (.week, .month):
                 return true
             case (.week, .year):
