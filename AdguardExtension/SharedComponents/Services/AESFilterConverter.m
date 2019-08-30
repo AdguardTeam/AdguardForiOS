@@ -125,7 +125,7 @@ NSString *AESFConverterError = @"AESFConverterError";
             }
         }
 
-        JSValue *result = [_converterFunc callWithArguments:@[ _rules, @(limit), @(optimize)]];
+        JSValue *result = [_converterFunc callWithArguments:@[ _rules, @(limit), @(optimize), @"false"]];
 
         NSDictionary *dictResult = [result toDictionary];
         return [self checkResultDictionary:dictResult];
