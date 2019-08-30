@@ -79,13 +79,11 @@ class GetProTableController: UITableViewController {
         selectedProduct = purchaseService.products.first
               
         setPrice()
-        setCellsVisibility()
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
                 self?.updateTheme()
-                self?.setCellsVisibility()
-                self?.tableView.reloadData()
+                self?.setPrice()
             }
         }
     }
@@ -133,6 +131,10 @@ class GetProTableController: UITableViewController {
             return 0
         }
         
+        if indexPath.row == trialRow && selectedProduct?.type == .some(.lifetime) {
+            return 0
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -159,6 +161,8 @@ class GetProTableController: UITableViewController {
         
         upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
 
+        setCellsVisibility()
+        
         tableView.reloadData()
     }
     
@@ -232,7 +236,7 @@ class GetProTableController: UITableViewController {
         let pro = configuration.proStatus
         notPurchasedLogoCell.isHidden = pro
         purchasedLogoCell.isHidden = !pro
-        trialCell.isHidden = pro
+        trialCell.isHidden = pro || (selectedProduct?.type == .some(.lifetime))
         purchaseCell.isHidden = pro
         descriptionCell.isHidden = pro
     }
@@ -269,7 +273,7 @@ class GetProTableController: UITableViewController {
     private func getStartTrialTitleLabelString(product: Product?) -> String {
         
         if product?.type == .some(.lifetime) {
-            return ""
+            return ACLocalizedString("getPro_screen_lifetime_text", nil)
         }
         
         guard let period = product?.trialPeriod else {return ""}
@@ -298,7 +302,7 @@ class GetProTableController: UITableViewController {
     private func getStringForTrialLabel(product: Product?) -> String {
         
         if product?.type == .some(.lifetime) {
-            return ACLocalizedString("getPro_screen_lifetime_text", nil)
+            return ""
         }
         
         guard let period = product?.trialPeriod else { return "" }
