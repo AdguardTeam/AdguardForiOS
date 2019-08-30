@@ -159,9 +159,13 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     // MARK: - private methods
     
     @objc func enabledChanged(_ enableSwitch: UISwitch) {
-        let row = enableSwitch.tag
-        guard let group = viewModel?.constantAllGroups[row] else { return }
-        viewModel?.set(groupId: group.groupId, enabled: enableSwitch.isOn)
+        // Waiting when UISwitch animation is finished
+        // Using this hack, because needed function is changed in IOS 13 and later
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            let row = enableSwitch.tag
+            guard let group = self?.viewModel?.constantAllGroups[row] else { return }
+            self?.viewModel?.set(groupId: group.groupId, enabled: enableSwitch.isOn)
+        }
     }
     
     private func updateTheme() {
