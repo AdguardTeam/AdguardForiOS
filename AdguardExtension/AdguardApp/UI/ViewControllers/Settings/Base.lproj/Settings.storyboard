@@ -416,6 +416,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invertedSwitch" destination="6zb-UJ-iLt" id="eWG-a7-6q9"/>
+                        <outlet property="restartCell" destination="aEc-Wb-W4Z" id="24P-AR-p9B"/>
                         <outlet property="restartTunnelSwitch" destination="IQX-5H-KQ8" id="CM4-Xn-HWQ"/>
                         <outlet property="simplifiedSwitch" destination="ztM-u8-OJb" id="Bra-1u-yM2"/>
                         <outlet property="tableFooterView" destination="tYn-YC-2ub" id="R2q-p7-d5m"/>

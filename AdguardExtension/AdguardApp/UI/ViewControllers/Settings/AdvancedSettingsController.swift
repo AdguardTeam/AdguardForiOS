@@ -34,6 +34,8 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var restartTunnelSwitch: UISwitch!
     
+    @IBOutlet weak var restartCell: UITableViewCell!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
@@ -215,6 +217,15 @@ class AdvancedSettingsController: UITableViewController {
         return calculateHeaderHeight(section: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == advancedSection && indexPath.row == restartRow && !configuration.proStatus{
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
     // MARK: - private methods
     
     func change(senderSwitch: UISwitch, forKey key: String) {
@@ -267,6 +278,8 @@ class AdvancedSettingsController: UITableViewController {
         default:
             themeButtons[light].isSelected = true
         }
+        
+        restartCell.isHidden = !configuration.proStatus
     }
     
     private func fillHeaderTitles(){
