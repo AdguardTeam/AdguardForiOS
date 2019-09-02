@@ -241,13 +241,13 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     // MARK: - Actions
     
     @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
-        guard let row = sender.row else { return }
-        guard let filter = group?.filters[row] else { return }
-        viewModel?.set(filter: filter, enabled: sender.isOn)
-        
-        tableView.beginUpdates()
-        tableView.reloadRows(at: [IndexPath(row: 0, section: groupSection)], with: .automatic)
-        tableView.endUpdates()
+        // Waiting when UISwitch animation is finished
+        // Using this hack, because needed function is changed in IOS 13 and later
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let row = sender.row else { return }
+            guard let filter = self?.group?.filters[row] else { return }
+            self?.viewModel?.set(filter: filter, enabled: sender.isOn)
+        }
     }
     
     @IBAction func searchAction(_ sender: Any) {
@@ -268,9 +268,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     @objc func toogleGroupEnable(_ sender: UISwitch) {
-        guard let sGroup = viewModel?.currentGroup else { return }
-        viewModel?.set(groupId: sGroup.groupId, enabled: sender.isOn)
-        tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
+            guard let sGroup = self?.viewModel?.currentGroup else { return }
+            self?.viewModel?.set(groupId: sGroup.groupId, enabled: sender.isOn)
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - searchbar methods

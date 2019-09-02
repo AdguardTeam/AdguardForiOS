@@ -273,7 +273,12 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     @IBAction func toggleEnabled(_ sender: UISwitch) {
         model?.userFilterEnabled = sender.isOn
-        tableView.reloadSections([enabledSection], with: .automatic)
+        
+        // Waiting when UISwitch animation is finished
+        // Using this hack, because needed function is changed in IOS 13 and later
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+            self?.tableView.reloadSections([self?.enabledSection ?? 0], with: .none)
+        }
     }
     
     // MARK: - Presentation delegate methods

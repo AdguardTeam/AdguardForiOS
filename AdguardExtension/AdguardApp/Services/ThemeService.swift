@@ -264,11 +264,8 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupSwitch(_ switchControl: UISwitch) {
-        switchControl.tintColor = UIColor(hexString: "#888888")
         switchControl.onTintColor = UIColor(hexString: "#67b279")
-        
         switchControl.layer.cornerRadius = switchControl.frame.height / 2
-        switchControl.backgroundColor = UIColor(hexString: "#888888")
     }
     
     func setupSeparator(_ separator: UIView) {
