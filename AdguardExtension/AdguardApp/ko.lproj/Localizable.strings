@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "로그인 중 오류가 발생했습니다.";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard 프리미엄은 유료 (1년에 $2.99, 지역에 따라 가격이 다를 수 있음) 연간 구독 서비스입니다. 결제는 구입 확인 시 아이튠즈 계정을 통해 이루어집니다. 구독 서비스는 자동 갱신이 비활성화 되지 않는 한 구독 기간이 종료되기 24시간 전에 자동으로 갱신됩니다. 당신은 구독을 관리할 수 있으며, 자동 갱신은 구독 후 아이튠즈 계정 설정에서 비활성화 할 수 있습니다. <br><br><a href=%1$@>개인 정보 처리 방침</a><br><br><a href=%2$@>이용 약관</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "확인";
 

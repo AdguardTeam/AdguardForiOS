@@ -19,6 +19,9 @@
 /* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "於此輸入您的電子郵件地址";
 
+/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "封鎖更多的廣告 & 追蹤器";
+
 /* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
 "Q7Q-j1-fN4.text" = "您將必須輸入您的密碼以於 adguard.com 上登入";
 

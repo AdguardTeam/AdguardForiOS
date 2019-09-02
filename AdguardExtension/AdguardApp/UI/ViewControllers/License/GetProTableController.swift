@@ -41,6 +41,7 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var priceLabel: ThemableLabel!
     @IBOutlet weak var startTrialTitleLable: ThemableLabel!
     @IBOutlet weak var startTrialDescriptionLabel: ThemableLabel!
+    @IBOutlet weak var trialCellDescriptionLabel: ThemableLabel!
     
     // MARK: - services
     
@@ -62,7 +63,7 @@ class GetProTableController: UITableViewController {
     private let trialRow = 7
     private let descriptionRow = 8
     
-    var permanentSubscription = false
+    var selectedProduct: Product?
     
     // MARK: - View controller lifecycle
     
@@ -75,21 +76,14 @@ class GetProTableController: UITableViewController {
         
         updateTheme()
         
-        upgradeButton.setTitle(ACLocalizedString("upgrade_button_title", nil), for: .normal)
-        
+        selectedProduct = purchaseService.products.first
+              
         setPrice()
-        setPurchaseDescription()
-        setCellsVisibility()
-        
-        startTrialTitleLable.text = getStartTrialTitleLabelString()
-
-        startTrialDescriptionLabel.text = getStartTrialDescriptionLabelString()
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             DispatchQueue.main.async {
                 self?.updateTheme()
-                self?.setCellsVisibility()
-                self?.tableView.reloadData()
+                self?.setPrice()
             }
         }
     }
@@ -137,6 +131,10 @@ class GetProTableController: UITableViewController {
             return 0
         }
         
+        if indexPath.row == trialRow && selectedProduct?.type == .some(.lifetime) {
+            return 0
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -149,24 +147,23 @@ class GetProTableController: UITableViewController {
     
     func setPrice() {
         
-        if purchaseService.ready {
-            trialLabel.text = getStringForTrialLabel()
-            
-            if permanentSubscription {
-                periodLabel.text = ACLocalizedString("permanent_subscription_title", nil)
-                priceLabel.text = purchaseService.nonConsumablePrice
-            }
-            else {
-                periodLabel.text = getPeriodString()
-                priceLabel.text = purchaseService.subscriptionPrice
-            }
-            
-            upgradeButton.isEnabled = true
-        }
-        else {
-            trialLabel.text = ""
-            upgradeButton.isEnabled = false
-        }
+        let lifetime = selectedProduct?.type == .some(.lifetime)
+        
+        trialLabel.text = getStringForTrialLabel(product: selectedProduct)
+        periodLabel.text = getPeriodString(product: selectedProduct)
+        priceLabel.text = selectedProduct?.price
+        upgradeButton.isEnabled = selectedProduct != nil
+        startTrialTitleLable.text = getStartTrialTitleLabelString(product: selectedProduct)
+        startTrialDescriptionLabel.text = getStartTrialDescriptionLabelString(product: selectedProduct)
+        
+        trialCellDescriptionLabel.isHidden = lifetime
+        setPurchaseDescription()
+        
+        upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
+
+        setCellsVisibility()
+        
+        tableView.reloadData()
     }
     
     // MARK: - Actions
@@ -174,11 +171,8 @@ class GetProTableController: UITableViewController {
     @IBAction func upgradeAction(_ sender: Any) {
         enablePurchaseButtons(false)
         
-        if permanentSubscription {
-            purchaseService.requestNonConsumablePurchase()
-        }
-        else {
-            purchaseService.requestSubscriptionPurchase()
+        if selectedProduct != nil {
+            purchaseService.requestPurchase(productId: selectedProduct!.productId)
         }
     }
     
@@ -190,21 +184,14 @@ class GetProTableController: UITableViewController {
     @IBAction func choosePeriodAction(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let subsriptionTitle = "\(getPeriodString()) - \(purchaseService.subscriptionPrice)"
-        let subscribeAction = UIAlertAction(title: subsriptionTitle , style: .default) { [weak self] (_) in
-            self?.permanentSubscription = false
-            self?.setPrice()
+        for product in purchaseService.products {
+            let title = "\(getPeriodString(product: product)) - \(product.price)"
+            let action = UIAlertAction(title: title, style: .default) { [weak self] (_) in
+                self?.selectedProduct = product
+                self?.setPrice()
+            }
+            actionSheet.addAction(action)
         }
-            
-        actionSheet.addAction(subscribeAction)
-        
-        let permanentTitle = "\(ACLocalizedString("permanent_subscription_title", nil)) - \(purchaseService.nonConsumablePrice)"
-        let permanentAction = UIAlertAction(title: permanentTitle , style: .default) { [weak self] (_) in
-            self?.permanentSubscription = true
-            self?.setPrice()
-        }
-        
-        actionSheet.addAction(permanentAction)
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
@@ -225,12 +212,13 @@ class GetProTableController: UITableViewController {
             sSelf.tableView.reloadData()
         }
         theme.setupLabels(themableLabels)
-        setPurchaseDescription()
         theme.setupImage(logoImage)
     }
     
     private func setPurchaseDescription() {
-        let format = ACLocalizedString("purchase_description_format", nil)
+        
+        let stringKey = selectedProduct?.type == .some(.lifetime) ? "lifetime_purchase_description_format" : "purchase_description_format"
+        let format = ACLocalizedString(stringKey, nil)
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license")
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
         
@@ -248,14 +236,18 @@ class GetProTableController: UITableViewController {
         let pro = configuration.proStatus
         notPurchasedLogoCell.isHidden = pro
         purchasedLogoCell.isHidden = !pro
-        trialCell.isHidden = pro
+        trialCell.isHidden = pro || (selectedProduct?.type == .some(.lifetime))
         purchaseCell.isHidden = pro
         descriptionCell.isHidden = pro
     }
     
-    private func getStartTrialDescriptionLabelString() -> String {
-        let period = purchaseService.subscriptionPeriod
-        let price = purchaseService.subscriptionPrice
+    private func getStartTrialDescriptionLabelString(product: Product?) -> String {
+        
+        if product?.type == .some(.lifetime) {
+            return ""
+        }
+        
+        guard let period = product?.period, let price = product?.price else { return "" }
         var formatString : String = ""
         
         switch period.unit {
@@ -278,8 +270,13 @@ class GetProTableController: UITableViewController {
         return resultString
     }
     
-    private func getStartTrialTitleLabelString() -> String {
-        let period = purchaseService.trialPeriod
+    private func getStartTrialTitleLabelString(product: Product?) -> String {
+        
+        if product?.type == .some(.lifetime) {
+            return ACLocalizedString("getPro_screen_lifetime_text", nil)
+        }
+        
+        guard let period = product?.trialPeriod else {return ""}
         var formatString : String = ""
         
         switch period.unit {
@@ -302,8 +299,13 @@ class GetProTableController: UITableViewController {
         return resultString
     }
     
-    private func getStringForTrialLabel() -> String {
-        let period = purchaseService.trialPeriod
+    private func getStringForTrialLabel(product: Product?) -> String {
+        
+        if product?.type == .some(.lifetime) {
+            return ""
+        }
+        
+        guard let period = product?.trialPeriod else { return "" }
         var formatString : String = ""
         
         switch period.unit {
@@ -326,8 +328,13 @@ class GetProTableController: UITableViewController {
         return resultString
     }
     
-    private func getPeriodString() -> String {
-        let period = purchaseService.subscriptionPeriod
+    private func getPeriodString(product: Product?) -> String {
+        
+        if product == nil || product!.type == .lifetime {
+            return ACLocalizedString("permanent_subscription_title", nil)
+        }
+        
+        guard let period = product?.period else { return "" }
         
         var formatString : String = ""
         

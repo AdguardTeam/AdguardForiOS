@@ -34,6 +34,8 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var restartTunnelSwitch: UISwitch!
     
+    @IBOutlet weak var restartCell: UITableViewCell!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
@@ -71,6 +73,17 @@ class AdvancedSettingsController: UITableViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+            [weak self] (notification) in
+            guard let sSelf = self else { return }
+            DispatchQueue.main.async{
+                sSelf.restartTunnelSwitch.isOn = sSelf.vpnManager.enabled
+            }
+            if sSelf.vpnManager.lastError != nil {
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
+            }
         }
         
         fillHeaderTitles()
@@ -204,6 +217,15 @@ class AdvancedSettingsController: UITableViewController {
         return calculateHeaderHeight(section: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == advancedSection && indexPath.row == restartRow && !configuration.proStatus{
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
     // MARK: - private methods
     
     func change(senderSwitch: UISwitch, forKey key: String) {
@@ -256,6 +278,8 @@ class AdvancedSettingsController: UITableViewController {
         default:
             themeButtons[light].isSelected = true
         }
+        
+        restartCell.isHidden = !configuration.proStatus
     }
     
     private func fillHeaderTitles(){

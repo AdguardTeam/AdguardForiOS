@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "ログイン中にエラーが発生しました";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuardプレミアムは、年間サブスクリプション料が¥350/年の年間有料サービスです（地域によって料金が異なる場合があります）。支払いは購入の確認時にiTunesアカウントに請求されます。サブスクリプション自動更新が現在の期間の終了の少なくとも24時間前に無効にされない限り、サブスクリプションは自動的に更新されます。アカウントには、現在の期間が終了する前の24時間以内に更新料が請求されます。サブスクリプションを購入したら、iTunesアカウント設定においてサブスクリプション管理が可能になり、そこで自動更新も無効にすることができます。<br><br><a href=%1$@>プライバシーポリシー</a> <br><br><a href=%2$@>利用契約</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 

@@ -43,8 +43,7 @@
                                                         <constraint firstAttribute="height" constant="48" id="JCV-TR-nbo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOCK MORE 
-ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-RH-NgY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOCK MORE  ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-RH-NgY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="92" width="366" height="67"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -538,6 +537,7 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                         <outlet property="startTrialDescriptionLabel" destination="K8i-IF-fYV" id="d8x-rA-awc"/>
                         <outlet property="startTrialTitleLable" destination="y8E-wT-cRk" id="4Bt-uI-biN"/>
                         <outlet property="trialCell" destination="1gn-6F-LTQ" id="eLM-6D-9c8"/>
+                        <outlet property="trialCellDescriptionLabel" destination="zFg-Ls-ea6" id="63Y-xf-gVQ"/>
                         <outlet property="trialLabel" destination="7yr-6d-0ev" id="fv8-7K-Ves"/>
                         <outlet property="upgradeButton" destination="UbO-jW-NNO" id="fad-2o-KLY"/>
                         <outletCollection property="themableLabels" destination="mpR-bB-C6U" collectionClass="NSMutableArray" id="thf-z2-zpn"/>
@@ -555,6 +555,7 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                         <outletCollection property="themableLabels" destination="fro-u8-sGn" collectionClass="NSMutableArray" id="mpB-AU-PAE"/>
                         <outletCollection property="themableLabels" destination="fro-u8-sGn" collectionClass="NSMutableArray" id="qjF-bS-ke0"/>
                         <outletCollection property="themableLabels" destination="22t-pS-PjD" collectionClass="NSMutableArray" id="oaw-Qi-6LU"/>
+                        <outletCollection property="themableLabels" destination="NlM-RH-NgY" collectionClass="NSMutableArray" id="1wP-r0-f9v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mle-ng-eR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -787,14 +788,14 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-t3-h64">
-                                <rect key="frame" x="24" y="453" width="366" height="0.0"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-t3-h64">
+                                <rect key="frame" x="24" y="284" width="272" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security filters, DNS privacy, custom filters etc. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU2-3b-5Lf">
-                                <rect key="frame" x="24" y="477" width="366" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security filters, DNS privacy, custom filters etc. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fU2-3b-5Lf">
+                                <rect key="frame" x="24" y="308" width="272" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -820,7 +821,7 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="fWH-av-unH"/>
                                     <constraint firstAttribute="height" constant="60" id="oKh-9C-Lal"/>
-                                    <constraint firstAttribute="width" constant="250" id="vKk-I2-Xc1"/>
+                                    <constraint firstAttribute="width" constant="350" id="vKk-I2-Xc1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <state key="normal" title="TRY FOR FREE">
@@ -862,6 +863,7 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="centerX" secondItem="C3z-6d-A4W" secondAttribute="centerX" id="59B-Pq-uMI"/>
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="centerX" secondItem="fU2-3b-5Lf" secondAttribute="centerX" id="7dO-Kx-N2I"/>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="trailing" secondItem="nv4-t3-h64" secondAttribute="trailing" id="7fB-tj-raI"/>
+                            <constraint firstItem="jUb-cY-Qt7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fU2-3b-5Lf" secondAttribute="bottom" constant="20" id="9qG-Hs-oo1"/>
                             <constraint firstItem="nv4-t3-h64" firstAttribute="leading" secondItem="tts-0w-NGZ" secondAttribute="leading" id="Ehp-k5-9Yt"/>
                             <constraint firstItem="nv4-t3-h64" firstAttribute="top" secondItem="tts-0w-NGZ" secondAttribute="bottom" constant="60" id="HfB-jj-lEO"/>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="top" secondItem="nv4-t3-h64" secondAttribute="bottom" constant="24" id="Ie2-Wh-PC5"/>
@@ -905,7 +907,7 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="jUb-cY-Qt7" firstAttribute="leading" secondItem="C3z-6d-A4W" secondAttribute="leading" constant="147" id="f0b-6f-EsT">
-                                <variation key="heightClass=regular-widthClass=compact" constant="35"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                             </constraint>
                             <constraint firstItem="fU2-3b-5Lf" firstAttribute="leading" secondItem="nv4-t3-h64" secondAttribute="leading" id="iyr-dX-eZT"/>
                             <constraint firstItem="wLZ-TG-e9w" firstAttribute="trailing" secondItem="jUb-cY-Qt7" secondAttribute="trailing" id="jwF-1c-rTZ"/>
@@ -926,19 +928,20 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                 <exclude reference="tts-0w-NGZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ZLC-yA-9aU"/>
+                                <exclude reference="sbO-cn-haE"/>
                                 <exclude reference="bHc-9H-23v"/>
                                 <exclude reference="eaq-v9-eDp"/>
                                 <exclude reference="rQ8-fT-luw"/>
                                 <exclude reference="rTH-f4-164"/>
                                 <exclude reference="wEw-pB-Kdo"/>
+                                <exclude reference="ZjF-2H-eJe"/>
+                                <exclude reference="vx3-7G-xed"/>
                                 <exclude reference="Ehp-k5-9Yt"/>
+                                <exclude reference="HfB-jj-lEO"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <exclude reference="VX1-2p-7HK"/>
                                 <exclude reference="X0h-5C-1SY"/>
-                                <exclude reference="ZLC-yA-9aU"/>
-                                <exclude reference="sbO-cn-haE"/>
-                                <exclude reference="ZjF-2H-eJe"/>
-                                <exclude reference="vx3-7G-xed"/>
                                 <exclude reference="brS-gY-SAT"/>
                                 <exclude reference="cgv-Yb-gHi"/>
                                 <exclude reference="pdp-dh-1iq"/>
@@ -965,8 +968,8 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                 <include reference="rQ8-fT-luw"/>
                                 <include reference="rTH-f4-164"/>
                                 <include reference="wEw-pB-Kdo"/>
-                                <include reference="VX1-2p-7HK"/>
                                 <include reference="vx3-7G-xed"/>
+                                <include reference="VX1-2p-7HK"/>
                                 <include reference="brS-gY-SAT"/>
                                 <include reference="pdp-dh-1iq"/>
                                 <include reference="Ie2-Wh-PC5"/>
@@ -984,15 +987,16 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
                                 <include reference="tts-0w-NGZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ZLC-yA-9aU"/>
+                                <include reference="sbO-cn-haE"/>
                                 <include reference="bHc-9H-23v"/>
                                 <include reference="eaq-v9-eDp"/>
                                 <exclude reference="wEw-pB-Kdo"/>
+                                <include reference="ZjF-2H-eJe"/>
                                 <include reference="Ehp-k5-9Yt"/>
+                                <include reference="HfB-jj-lEO"/>
                                 <exclude reference="PHt-gA-799"/>
                                 <include reference="X0h-5C-1SY"/>
-                                <include reference="ZLC-yA-9aU"/>
-                                <include reference="sbO-cn-haE"/>
-                                <include reference="ZjF-2H-eJe"/>
                                 <include reference="cgv-Yb-gHi"/>
                                 <include reference="7fB-tj-raI"/>
                                 <include reference="QCK-8y-IhP"/>
@@ -1031,6 +1035,6 @@ ADS &amp; TRACKERS" textAlignment="center" lineBreakMode="tailTruncation" number
         <image name="widget-logo" width="70" height="73"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XHd-Jk-4yR"/>
+        <segue reference="x9H-U4-xhh"/>
     </inferredMetricsTieBreakers>
 </document>

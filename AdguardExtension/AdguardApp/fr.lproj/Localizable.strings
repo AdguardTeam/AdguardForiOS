@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "Une erreur s'est produite pendant la connexion";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium est un service annuel payant dont l'abonnement coûte 2,99 $ par an (le prix peut varier selon les régions). Le paiement sera débité du compte iTunes au moment de la confirmation d'achat. L'abonnement se renouvelle automatiquement à moins que le renouvellement automatique ne soit désactivé au moins 24 heures avant la fin de la période en cours. Le renouvellement du compte sera facturé dans les 24 heures précédant la fin de la période en cours. Vos abonnements peuvent être gérés et votre renouvellement automatique peut être désactivé dans les paramètres de votre compte iTunes après l’abonnement.<br><br><a href=%1$@>Politique de confidentialité</a> <br><br><a href=%2$@>Conditions d'utilisation</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 

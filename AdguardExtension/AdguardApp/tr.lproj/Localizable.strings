@@ -37,9 +37,6 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı Filtresi";
 
-/* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Özel kurallarınızı satır sonları ile ayırarak buraya girin";
-
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Buraya, AdGuard'ın Safari filtrelemesini devre dışı bırakacağı, satır sonları ile ayrılmış alan adlarını girin.";
 
@@ -272,9 +269,6 @@
 
 /* login error message */
 "login_error_message" = "Giriş yaparken bir hata oluştu";
-
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium, yıllık 2.99 $ / yıl abonelik ücreti ile ödeme yapılan bir hizmettir (fiyat bölgeye göre değişebilir). Satın alma onayı ile ödeme iTunes Hesabına tahsil edilecektir. Otomatik yenileme, geçerli dönemin sona ermesinden en az 24 saat önce kapatılmadığı sürece abonelik otomatik olarak yenilenir. Cari dönemin bitiminden 24 saat önce hesabınızdan yenileme ücreti alınacaktır. Bir abonelik satın aldıktan sonra abonelikleriniz yönetilebilir ve otomatik yenileme işleminiz iTunes Hesap Ayarlarına giderek kapatılabilir. <br> <br> <a href=%1$@> Gizlilik politikası </a> <br> <br> <a href=%2$@> Kullanım Şartları </a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Tamam";

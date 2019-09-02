@@ -43,6 +43,13 @@ extension UIViewController {
     }
     
     func setupBackButton() {
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .done, target: nil, action: nil)
+        let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
+        
+        navigationController?.navigationBar.backIndicatorImage = imgBackArrow
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBackArrow
+
+        navigationItem.leftItemsSupplementBackButton = true
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: nil, action: nil)
     }
 }

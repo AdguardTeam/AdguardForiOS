@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Efetuar assinatura";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "COMPRAR";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Sua conta premium expirou";
 
@@ -273,8 +276,8 @@
 /* login error message */
 "login_error_message" = "Ocorreu um erro ao iniciar a sessão";
 
-/* purchase secription format */
-"purchase_description_format" = "O AdGuard Premium é um serviço anual pago com valor da assinatura de US $2,99/ano (o preço pode variar de acordo com a região). Ao efetuar a confirmação da compra o pagamento será cobrado em sua conta do iTunes. A assinatura será renovada automaticamente, a menos que a renovação automática seja desativada pelo menos 24 horas antes de acabar. O valor de renovação será cobrado dentro de 24 horas antes da sua assinatura terminar. Após ter efetuado a compra, suas assinaturas podem ser gerenciadas e a renovação automática pode ser desativada nas configurações da conta do iTunes.<br><br><a href=%1$@>Política de privacidade</a><br><br><a href=%2$@>Termos de Uso</a>";
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Política de privacidade</a> <br><br><a href=%2$@>Termos de uso</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
@@ -314,6 +317,9 @@
 
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Configurações gerais";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Você precisa ativar a VPN primeiro";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ regras estão sendo usadas";
@@ -371,3 +377,6 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Versão";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Pague uma vez e use os recursos do AdGuard Premium em todos os seus dispositivos!";

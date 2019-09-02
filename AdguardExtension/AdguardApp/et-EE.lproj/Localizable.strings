@@ -273,9 +273,6 @@
 /* login error message */
 "login_error_message" = "Sisselogimisel ilmnes viga";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium on tasuline, aasta kaupa makstav teenus, mille hind on $2.99/aasta (hind võib olenevalt regioonist erineda). Makse lisatakse pärast tellimuse kinnitamist iTunes kontole. Tellimust uuendatakse iga aasta automaatselt. Seda välja arvatud juhul, kui automaatne tellimuse pikendamine on vähemalt 24 tundi enne selle toimumist tühistatud. Makse toimub läbi iTunesi konto 24 tunni jooksul enne käimasoleva perioodi lõppu. Pärast ostu saab tellimust ning automaatset pikendust hallata läbi oma iTunes konto seadete.<br><br><a href=%1$@>Privaatsuspoliitika</a> <br><br><a href=%2$@>Kasutustingimused</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 

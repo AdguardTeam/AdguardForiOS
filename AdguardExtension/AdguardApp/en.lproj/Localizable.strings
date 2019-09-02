@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "START TRIAL";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "PURCHASE";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
 
@@ -274,7 +277,10 @@
 "login_error_message" = "An error occurred while logging in";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Premium is a paid annual service with subscription cost $2.99/year (price may vary by region). Payment will be charged to iTunes Account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period. Account will be charged for renewal within 24-hours prior to the end of the current period. Your subscriptions may be managed and your auto-renewal may be turned off by going to your iTunes Account Settings after purchasing a subscription.<br><br><a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
+"purchase_description_format" = "About AdGuard Subscription:<br><br>• Payment will be charged to your iTunes Account at confirmation of purchase.<br>• The subscription is automatically renewed unless auto-renew is turned off at least 24-hours before the end of the current period.<br>• The subscription renewal fee will be charged within 24-hours prior to the end of the current period. Your subscriptions may be managed and your auto-renewal may be turned off in your iTunes Account Settings after purchasing a subscription.<br><br><a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Terms of Use</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
@@ -314,6 +320,9 @@
 
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "General settings";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "You need to enable VPN first";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ rules are being used";
@@ -371,3 +380,6 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Version";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your devices!";

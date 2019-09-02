@@ -19,6 +19,9 @@
 /* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Zde zadejte svůj email";
 
+/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "ZABLOKUJTE VÍCE REKLAM A SLÍDIČŮ";
+
 /* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
 "Q7Q-j1-fN4.text" = "K autorizaci musíte zadat své heslo na adrese adguard.com";
 

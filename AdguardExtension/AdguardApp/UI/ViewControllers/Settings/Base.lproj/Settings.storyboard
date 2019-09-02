@@ -356,8 +356,8 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Gg5-W9-I2z">
-                                        <rect key="frame" x="0.0" y="448" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Gg5-W9-I2z">
+                                        <rect key="frame" x="0.0" y="448" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gg5-W9-I2z" id="Sjd-9D-MUf">
                                             <rect key="frame" x="0.0" y="0.0" width="562" height="43"/>
@@ -381,19 +381,26 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="7Pf-UR-Gom">
+                                                    <rect key="frame" x="374" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="8bt-su-oqL"/>
+                                                        <constraint firstAttribute="width" constant="24" id="HwU-7D-hv3"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="c1p-jc-Itq" firstAttribute="top" secondItem="Sjd-9D-MUf" secondAttribute="top" constant="16" id="1Ic-OD-IQV"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wMR-5F-GaE" secondAttribute="bottom" constant="16" id="CBh-vZ-QSu"/>
                                                 <constraint firstItem="wMR-5F-GaE" firstAttribute="trailing" secondItem="c1p-jc-Itq" secondAttribute="trailing" id="OPw-2Q-rzj"/>
                                                 <constraint firstItem="wMR-5F-GaE" firstAttribute="top" secondItem="c1p-jc-Itq" secondAttribute="bottom" constant="3" id="PxR-cC-j5h"/>
+                                                <constraint firstItem="7Pf-UR-Gom" firstAttribute="leading" secondItem="c1p-jc-Itq" secondAttribute="trailing" constant="38" id="Y4c-I3-NHv"/>
                                                 <constraint firstItem="c1p-jc-Itq" firstAttribute="leading" secondItem="Sjd-9D-MUf" secondAttribute="leading" constant="26" id="Yyo-Xh-hO3"/>
                                                 <constraint firstItem="wMR-5F-GaE" firstAttribute="leading" secondItem="c1p-jc-Itq" secondAttribute="leading" id="jVg-qC-mCa"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Pf-UR-Gom" secondAttribute="trailing" constant="16" id="lKH-E6-QZ0"/>
+                                                <constraint firstItem="7Pf-UR-Gom" firstAttribute="centerY" secondItem="Sjd-9D-MUf" secondAttribute="centerY" id="rOi-bo-cG3"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="c1p-jc-Itq" secondAttribute="trailing" constant="80" id="bwO-gw-Ijc"/>
-                                        </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
@@ -409,6 +416,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invertedSwitch" destination="6zb-UJ-iLt" id="eWG-a7-6q9"/>
+                        <outlet property="restartCell" destination="aEc-Wb-W4Z" id="24P-AR-p9B"/>
                         <outlet property="restartTunnelSwitch" destination="IQX-5H-KQ8" id="CM4-Xn-HWQ"/>
                         <outlet property="simplifiedSwitch" destination="ztM-u8-OJb" id="Bra-1u-yM2"/>
                         <outlet property="tableFooterView" destination="tYn-YC-2ub" id="R2q-p7-d5m"/>
@@ -465,6 +473,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_right" width="24" height="24"/>
         <image name="bullet" width="24" height="24"/>
         <image name="bulletnone" width="24" height="24"/>
     </resources>

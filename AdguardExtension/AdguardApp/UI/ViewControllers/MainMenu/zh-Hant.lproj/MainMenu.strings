@@ -8,7 +8,7 @@
 "Em7-2h-SKs.text" = "幫助我們使 AdGuard 更好";
 
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
-"L2l-pO-K3q.text" = "一般的設定";
+"L2l-pO-K3q.text" = "一般的";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard 是什麼？";
@@ -35,7 +35,7 @@
 "x8F-Jr-rGi.text" = "關於";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
-"xb2-Gf-9h7.text" = "其它的設定";
+"xb2-Gf-9h7.text" = "外觀和其它的";
 
 /* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
 "zO5-hl-j78.text" = "增加您自己的過濾規則";

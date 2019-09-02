@@ -14,13 +14,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ДЕНЬ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ДЕНЬ</string>
         <key>few</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЯ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЯ</string>
         <key>many</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
         <key>other</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
       </dict>
     </dict>
     <key>trial_screen_weeks</key>
@@ -34,13 +34,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДНУ НЕДЕЛЮ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДНУ НЕДЕЛЮ</string>
         <key>few</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛИ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛИ</string>
         <key>many</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
         <key>other</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
       </dict>
     </dict>
     <key>trial_screen_months</key>
@@ -54,13 +54,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН МЕСЯЦ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН МЕСЯЦ</string>
         <key>few</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦА</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦА</string>
         <key>many</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
         <key>other</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
       </dict>
     </dict>
     <key>trial_screen_years</key>
@@ -74,13 +74,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ГОД</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ГОД</string>
         <key>few</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ГОДА</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ГОДА</string>
         <key>many</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
         <key>other</key>
-        <string>БЕСПЛАТНЫЙ ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
+        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
