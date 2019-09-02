@@ -241,13 +241,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     // MARK: - Actions
     
     @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
-        guard let row = sender.row else { return }
-        guard let filter = group?.filters[row] else { return }
-        viewModel?.set(filter: filter, enabled: sender.isOn)
-        
-        tableView.beginUpdates()
-        tableView.reloadRows(at: [IndexPath(row: 0, section: groupSection)], with: .automatic)
-        tableView.endUpdates()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let row = sender.row else { return }
+            guard let filter = self?.group?.filters[row] else { return }
+            self?.viewModel?.set(filter: filter, enabled: sender.isOn)
+        }
     }
     
     @IBAction func searchAction(_ sender: Any) {
