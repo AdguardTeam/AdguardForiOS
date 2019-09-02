@@ -67,7 +67,6 @@ class DnsProvidersController: UITableViewController {
         
         activeProviderObservation = vpnManager.observe(\.activeDnsServer) {[weak self]  (server, change)  in
             DispatchQueue.main.async {
-                selectCellFunc()
                 self?.tableView.reloadData()
             }
         }
@@ -121,6 +120,8 @@ class DnsProvidersController: UITableViewController {
             providerToShow = providers[indexPath.row]
             performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,8 +145,6 @@ class DnsProvidersController: UITableViewController {
         vpnManager.enabled = true;
         
         selectedCellRow = sender.tag
-        
-        tableView.reloadData()
     }
     
     // MARK: private methods
