@@ -241,6 +241,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     // MARK: - Actions
     
     @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {
+        // Waiting when UISwitch animation is finished
+        // Using this hack, because needed function is changed in IOS 13 and later
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             guard let row = sender.row else { return }
             guard let filter = self?.group?.filters[row] else { return }
