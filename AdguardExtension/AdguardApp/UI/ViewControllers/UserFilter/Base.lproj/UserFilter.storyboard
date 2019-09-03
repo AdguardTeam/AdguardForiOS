@@ -104,7 +104,6 @@
                         <outlet property="bottomConstraint" destination="qkD-K2-9QH" id="ZIJ-HV-JTZ"/>
                         <outlet property="cancelButton" destination="9th-UM-Uaj" id="Gwy-FL-SQh"/>
                         <outlet property="clearButton" destination="cce-mi-paP" id="mlK-Y1-cWt"/>
-                        <outlet property="deleteButton" destination="iuK-dC-RKf" id="chY-XA-A62"/>
                         <outlet property="editButton" destination="lE1-GD-Qr5" id="ovA-KE-h48"/>
                         <outlet property="exportButton" destination="0hZ-wq-AdR" id="yvn-2o-TCo"/>
                         <outlet property="helperLabel" destination="pyc-Ez-Dak" id="ezo-mv-yGf"/>
@@ -113,38 +112,16 @@
                         <outlet property="rightButtonView" destination="p9T-DJ-2at" id="Grj-06-6CR"/>
                         <outlet property="rigthButtonViewWidthConstraint" destination="WgH-bS-vm2" id="AMW-ak-eQY"/>
                         <outlet property="saveButton" destination="HB0-zK-xj2" id="hxZ-y0-pvr"/>
-                        <outlet property="selectAllButton" destination="DLT-c2-7eC" id="WgK-fq-T97"/>
-                        <outlet property="selectButton" destination="c5a-s3-YPd" id="d3I-RS-hgt"/>
                         <outlet property="textView" destination="i7b-H1-GYN" id="qGv-AT-bUi"/>
-                        <outletCollection property="bottomBarButtons" destination="c5a-s3-YPd" collectionClass="NSMutableArray" id="AOH-sc-e8n"/>
                         <outletCollection property="bottomBarButtons" destination="9th-UM-Uaj" collectionClass="NSMutableArray" id="y41-lw-rnj"/>
-                        <outletCollection property="bottomBarButtons" destination="DLT-c2-7eC" collectionClass="NSMutableArray" id="834-S8-680"/>
                         <outletCollection property="bottomBarButtons" destination="0hZ-wq-AdR" collectionClass="NSMutableArray" id="dB8-GH-6ef"/>
                         <outletCollection property="bottomBarButtons" destination="IHN-jy-NyP" collectionClass="NSMutableArray" id="BA2-os-RdG"/>
                         <outletCollection property="bottomBarButtons" destination="cce-mi-paP" collectionClass="NSMutableArray" id="t6l-Mr-5jk"/>
+                        <outletCollection property="bottomBarButtons" destination="lE1-GD-Qr5" collectionClass="NSMutableArray" id="ijA-IC-t0Q"/>
+                        <outletCollection property="bottomBarButtons" destination="HB0-zK-xj2" collectionClass="NSMutableArray" id="6O4-ev-EkQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7x5-4j-Va4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="c5a-s3-YPd" userLabel="Select Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                    <state key="normal" title="Select">
-                        <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="selectAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="uJd-Ef-SXr"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="lE1-GD-Qr5" userLabel="Edit Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -156,11 +133,6 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="editAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="orW-Fg-t1U"/>
                     </connections>
@@ -176,53 +148,8 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="cancelSelectionAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="mJv-Hc-7Qo"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="iuK-dC-RKf" userLabel="Delete Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                    <state key="normal" title="Delete">
-                        <color key="titleColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="deleteAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="Cqh-aC-aH0"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="DLT-c2-7eC" userLabel="Select All Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                    <state key="normal" title="Select all">
-                        <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="selectAllAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="I6W-zb-n7B"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="HB0-zK-xj2" userLabel="Save Button" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
@@ -236,11 +163,6 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="saveAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="teB-OE-IY4"/>
                     </connections>
@@ -256,11 +178,6 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="exportAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="7xN-gW-9AH"/>
                     </connections>
@@ -276,11 +193,6 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="importAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="0ri-II-Df4"/>
                     </connections>
@@ -296,11 +208,6 @@
                     <state key="disabled">
                         <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                            <color key="value" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="clearAction:" destination="vbh-T5-B9K" eventType="touchUpInside" id="3JY-H6-E2W"/>
                     </connections>
