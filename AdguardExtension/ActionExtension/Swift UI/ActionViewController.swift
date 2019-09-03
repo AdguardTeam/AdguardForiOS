@@ -318,5 +318,6 @@ class ActionViewController: UIViewController {
     
     private func updateTheme() {
         view.backgroundColor = theme?.backgroundColor
+        theme?.setupNavigationBar(navigationController?.navigationBar)
     }
 }
