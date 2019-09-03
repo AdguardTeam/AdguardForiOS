@@ -238,7 +238,6 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         }) {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
-                self?.notifyParent()
             }
         }
     }
@@ -296,13 +295,11 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                         DispatchQueue.main.async {
                             ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: error.description)
                             self?.tableView.reloadData()
-                            self?.notifyParent()
                         }
             },
                       completionHandler: { [weak self] in
                         DispatchQueue.main.async {
                             self?.tableView.reloadData()
-                            self?.notifyParent()
                         }
         })
         
@@ -442,10 +439,5 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         let selected = !rule.selected
         rule.selected = selected
         configureCell(cell, selected: selected)
-        notifyParent()
-    }
-    
-    private func notifyParent() {
-        (parent as! UserFilterController).selectedRulesChanged()
     }
 }
