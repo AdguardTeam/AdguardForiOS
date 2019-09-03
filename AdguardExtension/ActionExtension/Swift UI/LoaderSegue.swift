@@ -15,16 +15,16 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import <UIKit/UIKit.h>
 
-@class AEWhitelistDomainObject;
 
-@interface ActionViewController : UIViewController
+import UIKit
 
-@property (weak, nonatomic) IBOutlet UIButton *actionButton;
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadIndicator;
+class LoaderSegue: UIStoryboardSegue {
 
-+ (AEWhitelistDomainObject *)domainObjectIfExistsFromContentBlockingWhitelistFor:(NSString *)host;
-
-@end
+    override func perform() {
+        if source.navigationController?.topViewController == source {
+            source.navigationController?.setViewControllers([destination], animated: true)
+        }
+    }
+    
+}
