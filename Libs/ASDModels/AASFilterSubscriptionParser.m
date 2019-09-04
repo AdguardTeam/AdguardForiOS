@@ -348,7 +348,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     }
     // Parse next comment line after `Title` tag as description, if it is not a parsed tag.
     if (context.afterTitleParsed) {
-        context.result.meta.descr = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *value = [splited[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        context.result.meta.descr = value;
         context.afterTitleParsed = NO;
     }
 }
