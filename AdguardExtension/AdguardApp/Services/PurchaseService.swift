@@ -80,7 +80,7 @@ protocol PurchaseServiceProtocol {
     /**
      Log with name and password
      */
-    func login(name: String, password: String)
+    func login(name: String, password: String, code2fa: String?)
     
     /**
      checks the status of adguard license
@@ -312,7 +312,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         loginService.checkStatus { [weak self] (error) in
             self?.processLoginResult(error)
         }
-    }
+    }   
     
     func login(withLicenseKey key: String) {
         loginService.login(licenseKey: key){ [weak self] (error) in
@@ -337,6 +337,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             guard let sSelf = self else { return }
             
             sSelf.processLoginResult(error)
+        }
+    }
+    
+    func login(name: String, password: String, code2fa: String?) {
+        loginService.login(name: name, password: password, code2fa: code2fa) { [weak self] (error) in
+            self?.processLoginResult(error)
         }
     }
     

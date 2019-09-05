@@ -383,3 +383,10 @@
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your devices!";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Incorrect email or password";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Account is disabled";
+

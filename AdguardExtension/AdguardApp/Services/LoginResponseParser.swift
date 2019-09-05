@@ -23,7 +23,7 @@ protocol LoginResponseParserProtocol {
     
     func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
     
-    func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, NSError?)
+    func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
     
     func processRegisterResponse(data: Data)->(success: Bool, error: NSError?)
 }
@@ -106,7 +106,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
     }
     
-    func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, NSError?) {
+    func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, error: NSError?) {
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
             

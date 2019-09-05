@@ -38,8 +38,10 @@ protocol LoginServiceProtocol {
      1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
      2) login directly with license key. In this case we immediately send status request with this license key
      */
-    func login(accessToken: String, callback: @escaping  (_: Error?)->Void)
-    func login(licenseKey: String, callback: @escaping  (_: Error?)->Void)
+    func login(accessToken: String, callback: @escaping  (_: NSError?)->Void)
+    func login(licenseKey: String, callback: @escaping  (_: NSError?)->Void)
+    
+    func login(name:String, password: String, code2fa: String?, callback: @escaping  ( _: NSError?)->Void)
     
     var activeChanged: (() -> Void)? { get set }
 }
@@ -72,7 +74,7 @@ class LoginService: LoginServiceProtocol {
     static let errorDescription = "error_description"
     
     // keychain constants
-    private let LOGIN_SERVER = "https://mobile-api.adguard.com"
+    private let LOGIN_SERVER = "http://testmobile.adtidy.org" //https://mobile-api.adguard.com
     
     private let AUTH_SERVER = "https://testauth.adguard.com"
     
@@ -160,11 +162,11 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    func login(licenseKey: String, callback: @escaping (Error?) -> Void) {
+    func login(licenseKey: String, callback: @escaping (NSError?) -> Void) {
         requestStatus(licenseKey: licenseKey, callback: callback)
     }
     
-    func login(accessToken: String, callback: @escaping  (_: Error?)->Void) {
+    func login(accessToken: String, callback: @escaping  (_: NSError?)->Void) {
         
         // we must reset license before login to unbind previously attached license key
         resetLicense { [weak self] (error) in
@@ -178,7 +180,7 @@ class LoginService: LoginServiceProtocol {
     }
     
     // todo: name/password are deprecated and must be removed in future versions, when all 3.0.0 user will be migrated to new authorization scheme
-    private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (Error?) -> Void) {
+    private func loginInternal(name: String?, password: String?, accessToken: String?, callback: @escaping (NSError?) -> Void) {
         
         guard let appId = keychain.appId else {
             DDLogError("(LoginService) loginInternal error - can not obtain appId)")
@@ -218,7 +220,7 @@ class LoginService: LoginServiceProtocol {
             
             guard error == nil else {
                 DDLogError("(LoginService) loginInternal - got error \(error!.localizedDescription)")
-                callback(error!)
+                callback(error! as NSError)
                 return
             }
             
@@ -246,7 +248,7 @@ class LoginService: LoginServiceProtocol {
         requestStatus(licenseKey: nil, callback: callback)
     }
     
-    private func requestStatus(licenseKey: String?, callback: @escaping (Error?)->Void ) {
+    private func requestStatus(licenseKey: String?, callback: @escaping (NSError?)->Void ) {
         
         DDLogInfo("(LoginService) requestStatus " + (licenseKey == nil ? "without license key" : "with license key"))
         
@@ -279,7 +281,7 @@ class LoginService: LoginServiceProtocol {
             
             guard error == nil else {
                 DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
-                callback(error!)
+                callback(error! as NSError)
                 return
             }
             
@@ -313,7 +315,7 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    private func resetLicense(callback: @escaping (Error?)->Void) {
+    private func resetLicense(callback: @escaping (NSError?)->Void) {
         
         DDLogInfo("(LoginService) resetLicense")
         
@@ -341,7 +343,7 @@ class LoginService: LoginServiceProtocol {
             
             guard error == nil else {
                 DDLogError("(LoginService) resetLicense - got error \(error!.localizedDescription)")
-                callback(error!)
+                callback(error! as NSError)
                 return
             }
             
@@ -365,7 +367,7 @@ class LoginService: LoginServiceProtocol {
         return true
     }
     
-    func getOauthToken(username: String, password: String, twoFactorToken: String?, callback: @escaping (Error?)->Void) {
+    func getOauthToken(username: String, password: String, twoFactorToken: String?, callback: @escaping (_ token: String?, _ error: NSError?)->Void) {
         DDLogInfo("(LoginService) getOauthToken ")
         
         var params = ["username" : username,
@@ -380,7 +382,7 @@ class LoginService: LoginServiceProtocol {
         }
         
         guard let url = URL(string: OAUTH_TOKEN_URL) else  {
-            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+            callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
             DDLogError("(PurchaseService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
             return
         }
@@ -391,13 +393,13 @@ class LoginService: LoginServiceProtocol {
             guard let sSelf = self else { return }
             guard error == nil else {
                 DDLogError("(LoginService) getOauthToken - got error \(error!.localizedDescription)")
-                callback(error!)
+                callback(nil, error as NSError?)
                 return
             }
             
             guard let data = dataOrNil else {
                 DDLogError("(LoginService) getOauthToken - response data is nil")
-                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
+                callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
             
@@ -405,9 +407,7 @@ class LoginService: LoginServiceProtocol {
             
             let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
             
-            // todo: do something with result
-            
-            callback(nil)
+            callback(result.accessToken, result.error)
         }
     }
     
@@ -450,6 +450,28 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
+    func login(name: String, password: String, code2fa: String?, callback: @escaping (NSError?) -> Void) {
+        
+        self.getOauthToken(username: name, password: password, twoFactorToken: code2fa) { [weak self] (token, error) in
+            
+            if error == nil && token != nil {
+                self?.login(accessToken: token!) { (error) in
+                    if error == nil {
+                        callback(nil)
+                    }
+                    else {
+                        callback(error)
+                    }
+                }
+            }
+            else {
+                if error != nil {
+                    callback(error)
+                }
+            }
+        }
+    }
+    
     // MARK: - private methods
     
     private func setExpirationTimer() {
@@ -476,7 +498,7 @@ class LoginService: LoginServiceProtocol {
     }
     
     // todo: remove this in future
-    private func migrateFrom3_0_0IfNeeded (premium: Bool, licenseKey:String?, callback: @escaping (Error?)->Void)->Bool {
+    private func migrateFrom3_0_0IfNeeded (premium: Bool, licenseKey:String?, callback: @escaping (NSError?)->Void)->Bool {
         
         let oldAuth = keychain.loadAuth(server: LOGIN_SERVER)
         let oldLicenseKey = keychain.loadLicenseKey(server: LOGIN_SERVER)

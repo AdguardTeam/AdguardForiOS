@@ -32,17 +32,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameEdit: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var nameLine: UIView!
+    @IBOutlet weak var passwordEdit: UITextField!
+    @IBOutlet weak var passwordLine: UIView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     // MARK: - private properties
     
     private let enabledColor = UIColor.init(hexString: "4D4D4D")
     private let disabledColor = UIColor.init(hexString: "D8D8D8")
     
-    private var keyboardMover: KeyboardMover!
+    private let confirm2faSegue = "confirm2faSegue"
     
     var showAlertBlock: (()->Void)?
     var canShowAlert = true
@@ -52,17 +54,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()
-        }
-        
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: nil)
-        { [weak self](notification) in
-            if let info = notification.userInfo {
-                self?.processNotification(info: info)
-            }
         }
         
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
@@ -71,6 +64,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
+        
+        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+                                                                      object: nil, queue: nil)
+        { [weak self](notification) in
+            if let info = notification.userInfo {
+                self?.processNotification(info: info)
+            }
+        }
         
         updateTheme()
     }
@@ -113,45 +114,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         nameLine.backgroundColor = nameEdit.isEditing ? enabledColor : disabledColor
     }
     
-    private func processNotification(info: [AnyHashable: Any]) {
-        
-        DispatchQueue.main.async { [weak self] in
-            
-            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-            
-            switch type {
-            
-            case PurchaseService.kPSNotificationLoginSuccess:
-                self?.loginSuccess()
-            case PurchaseService.kPSNotificationLoginFailure:
-                self?.loginFailure(error: error)
-            case PurchaseService.kPSNotificationLoginPremiumExpired:
-                self?.premiumExpired()
-            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
-               self?.notPremium()
-                
-            case PurchaseService.kPSNotificationOauthSucceeded:
-                            self?.authSucceeded()
-                
-            default:
-                break
-            }
-        }
-    }
-    
-    private func showRetryAlert(message: String, restoreLogin: Bool) {
-        
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            
-            let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-   
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
     private func updateLoginButton() {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
     }
@@ -161,6 +123,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = theme.backgroundColor
         
         theme.setupTextField(nameEdit)
+        theme.setupTextField(passwordEdit)
         
         separators.forEach { $0.backgroundColor = theme.separatorColor }
         
@@ -171,96 +134,100 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return !text.isEmpty && text.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
     }
     
-//    private func webAuth(){
-//        if let name = nameEdit.text {
-//
-//            webAuthWithName(name: name)
-//        }
-//    }
-    
     private func login(){
         
         let name = nameEdit.text
-        let password: String? = "Kyvedu560" // todo: get password from textfield
+        let password = passwordEdit.text
         
         if (name?.count ?? 0) > 0 &&
             (password?.count ?? 0) > 0 {
-            purchaseService.li
+            purchaseService.login(name: name!, password: password!, code2fa: nil)
         }
+        else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
+            purchaseService.login(withLicenseKey: name!)
+        }
+    }
+    
+    private func processNotification(info: [AnyHashable: Any]) {
         
-        if let name = nameEdit.text {
-            if isLicenseKey(text: name) {
-                purchaseService.login(withLicenseKey: name)
-            }
-            else {
-//                webAuth()
-            }
-        }
-    }
-    
-//    private func webAuthWithName(name: String){
-//
-//           DDLogInfo("(GetProController) - webAuth")
-//           guard let url = purchaseService.authUrlWithName(name: name) else { return }
-//           let safariController = SFSafariViewController(url: url)
-//           present(safariController, animated: true, completion: nil)
-//           canShowAlert = false
-//       }
-       
-   private func showAlertIfPossible() {
-       if canShowAlert && showAlertBlock != nil {
-           showAlertBlock!()
-           showAlertBlock = nil
-       }
-   }
-    
-    func authSucceeded() {
-        if self.presentedViewController != nil {
+        DispatchQueue.main.async { [weak self] in
             
-            self.presentedViewController?.dismiss(animated: true) { [weak self] in
-                guard let sSelf = self else { return }
-                sSelf.canShowAlert = true
-                sSelf.showAlertIfPossible()
-            }
-        }
-    }
-    
-    private func loginCompleteWithMessage(message: String) {
+            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
             
-        showAlertBlock = { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.removeLoading() {
-                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: message) {
-                    self?.navigationController?.popViewController(animated: true)
-                }
+            switch type {
+                
+            case PurchaseService.kPSNotificationLoginSuccess:
+                self?.loginSuccess()
+            case PurchaseService.kPSNotificationLoginFailure:
+                self?.loginFailure(error)
+            case PurchaseService.kPSNotificationLoginPremiumExpired:
+                self?.premiumExpired()
+            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+                self?.notPremium()
+                
+            default:
+                break
             }
         }
-        
-        showAlertIfPossible()
     }
-    
-    private func loginSuccess(){
-        loginCompleteWithMessage(message: ACLocalizedString("login_success_message", nil))
-    }
-    
-    private func loginFailure(error: NSError?) {
-        if error != nil && error!.domain == LoginService.loginErrorDomain && error!.code == LoginService.loginBadCredentials {
-                   webAuth()
-        }
-        else if error?.domain == LoginService.loginErrorDomain && error?.code == LoginService.loginMaxComputersExceeded {
-            loginCompleteWithMessage(message: ACLocalizedString("login_max_computers_exceeded", nil))
-        }
-        else {
-            loginCompleteWithMessage(message: ACLocalizedString("login_error_message", nil))
+
+    private func loginSuccess() {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     
     private func premiumExpired() {
-        loginCompleteWithMessage(message: ACLocalizedString("login_premium_expired_message", nil))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil), completion: nil)
     }
     
     private func notPremium() {
-        loginCompleteWithMessage(message: ACLocalizedString("not_premium_message", nil))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil), completion: nil)
     }
+    
+    private func loginFailure(_ error: NSError?) {
         
+        if error == nil || error!.domain != LoginService.loginErrorDomain {
+            // unknown error
+            let errorDescription = error?.localizedDescription ?? "nil"
+            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
+            let message = ACLocalizedString("login_error_message", nil)
+            
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message, completion: nil)
+        }
+        
+        // some errors we show as red text below password text field, some in alert dialog
+        var errorMessage: String?
+        var alertMessage: String?
+        
+        switch error!.code {
+            
+        // errors to be shown in red label
+        case LoginService.loginBadCredentials:
+            errorMessage = ACLocalizedString("bad_credentials_error", nil)
+        case LoginService.accountIdDisabled:
+            errorMessage = ACLocalizedString("account_is_disabled_error", nil)
+        
+        // errors to be show as alert
+        case LoginService.loginMaxComputersExceeded:
+            alertMessage = ACLocalizedString("login_max_computers_exceeded", nil)
+        case LoginService.loginError:
+            alertMessage = ACLocalizedString("login_error_message", nil)
+        
+        // 2fa required
+        case LoginService.auth2FaRequired:
+            performSegue(withIdentifier: confirm2faSegue, sender: self)
+            
+        default:
+            alertMessage = ACLocalizedString("login_error_message", nil)
+        }
+        
+        if alertMessage != nil {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
+        }
+        
+        errorLabel.text = errorMessage
+    }
+    
 }
