@@ -257,6 +257,7 @@ class SafariService: NSObject, SafariServiceProtocol {
         }
     }
     
+    // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
     private func tryToReload(contentBlockerWith bundleId: String, completion: @escaping (Error?) -> Void) {
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) { (error) in
             DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson. ( 2-nd try )");
