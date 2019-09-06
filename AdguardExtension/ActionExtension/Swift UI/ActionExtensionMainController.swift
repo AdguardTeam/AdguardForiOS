@@ -19,45 +19,6 @@
 import UIKit
 import CoreServices
 
-class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
-    var userThemeMode: AEThemeMode {
-        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
-            return AELightThemeMode
-        }
-        return AEThemeMode.init(themeMode)
-    }
-    
-    var systemAppearenceIsDark: Bool
-    
-    var resources: AESharedResourcesProtocol
-    
-    var darkTheme: Bool {
-        switch userThemeMode {
-        case AESystemDefaultThemeMode:
-            return systemAppearenceIsDark
-        case AELightThemeMode:
-            return false
-        case AEDarkThemeMode:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    var proStatus: Bool {
-        return false
-    }
-    
-    var purchasedThroughLogin: Bool {
-        return false
-    }
-    
-    init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
-        self.resources = resources
-        self.systemAppearenceIsDark = systemAppearenceIsDark
-    }
-}
-
 @objcMembers
 class ActionExtensionMainController: UITableViewController {
     

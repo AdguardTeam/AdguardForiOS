@@ -342,7 +342,6 @@
 		659887221CF83580003ECD1C /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		659887231CF83580003ECD1C /* AEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE81BD4D29F00FFC71C /* AEService.m */; };
 		659887241CF83580003ECD1C /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
-		659887261CF83580003ECD1C /* ActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C52B391B906105003AF42F /* ActionViewController.m */; };
 		659887271CF83580003ECD1C /* ACSSystemUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02091C6B7686000F00D7 /* ACSSystemUtils.m */; };
 		659887281CF83580003ECD1C /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
 		659887291CF83580003ECD1C /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
@@ -418,7 +417,6 @@
 		65C12EF51BD7B01700FFC71C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
 		65C12EF61BD7B01D00FFC71C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		65C12EF71BD7B05D00FFC71C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
-		65C52B3A1B906105003AF42F /* ActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C52B391B906105003AF42F /* ActionViewController.m */; };
 		65C52B3D1B906105003AF42F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65C52B3B1B906105003AF42F /* MainInterface.storyboard */; };
 		65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -549,6 +547,12 @@
 		7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
 		7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */; };
 		7E15720C22DF4C25007060D7 /* ContentBlockerStateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */; };
+		7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407994231E7A52007EFB26 /* ActionViewController.swift */; };
+		7E407997231E7A87007EFB26 /* LoaderSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407996231E7A87007EFB26 /* LoaderSegue.swift */; };
+		7E407999231E7CA3007EFB26 /* SimpleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */; };
+		7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E40799D231E7E8C007EFB26 /* CoreServices.framework */; };
+		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBAD22D88F1900027E93 /* ActionExtensionMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */; };
 		7E49DBBC22DDC25000027E93 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
@@ -1601,8 +1605,6 @@
 		65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESFilterConverter.m; sourceTree = "<group>"; };
 		65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65C52B361B906105003AF42F /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		65C52B381B906105003AF42F /* ActionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ActionViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		65C52B391B906105003AF42F /* ActionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ActionViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65C52B3C1B906105003AF42F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		65C52B3E1B906105003AF42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65C672F31DF5A06C001BE6C5 /* APTunnelConnectionHandlerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APTunnelConnectionHandlerTest.m; sourceTree = "<group>"; };
@@ -1691,6 +1693,11 @@
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
 		7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentBlockerStateCell.xib; sourceTree = "<group>"; };
 		7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateDataSource.swift; sourceTree = "<group>"; };
+		7E407994231E7A52007EFB26 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		7E407996231E7A87007EFB26 /* LoaderSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSegue.swift; sourceTree = "<group>"; };
+		7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConfiguration.swift; sourceTree = "<group>"; };
+		7E40799A231E7E4E007EFB26 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
+		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
 		7E49DBBA22DDC25000027E93 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -2263,6 +2270,7 @@
 				7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */,
 				65C12EF51BD7B01700FFC71C /* SafariServices.framework in Frameworks */,
 				65C12EF41BD7B00E00FFC71C /* libsqlite3.tbd in Frameworks */,
+				7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */,
 				65C12EF31BD7B00200FFC71C /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2514,6 +2522,7 @@
 				658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */,
 				D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */,
 				D0CDAEA42191C9540028001B /* String+Utils.swift */,
+				7E40799A231E7E4E007EFB26 /* URL+Utils.swift */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -2748,8 +2757,6 @@
 			isa = PBXGroup;
 			children = (
 				651D67931BB02B44007F00FA /* ActionExtension.entitlements */,
-				65C52B381B906105003AF42F /* ActionViewController.h */,
-				65C52B391B906105003AF42F /* ActionViewController.m */,
 				65D04F781C872B92001A9A02 /* js */,
 				659FBCEC1BDE31B4007A87FE /* UI */,
 				7E49DBA722D88D9C00027E93 /* Swift UI */,
@@ -2773,6 +2780,7 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E40799D231E7E8C007EFB26 /* CoreServices.framework */,
 				7E4D205D22D71B2A003B0E75 /* libiconv.tbd */,
 				7E4D205A22D71AE8003B0E75 /* Security.framework */,
 				D020B28821FA02170075BB8D /* Mobile.framework */,
@@ -3052,7 +3060,10 @@
 		7E49DBA722D88D9C00027E93 /* Swift UI */ = {
 			isa = PBXGroup;
 			children = (
+				7E407996231E7A87007EFB26 /* LoaderSegue.swift */,
+				7E407994231E7A52007EFB26 /* ActionViewController.swift */,
 				7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */,
+				7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */,
 				7E49DBBA22DDC25000027E93 /* Constants.h */,
 				7E49DBBB22DDC25000027E93 /* Constants.m */,
 			);
@@ -4816,7 +4827,6 @@
 				659887231CF83580003ECD1C /* AEService.m in Sources */,
 				659887241CF83580003ECD1C /* AESAntibanner.m in Sources */,
 				6518BD8A1DABBEE900FDD1F3 /* ADBTable.m in Sources */,
-				659887261CF83580003ECD1C /* ActionViewController.m in Sources */,
 				659887271CF83580003ECD1C /* ACSSystemUtils.m in Sources */,
 				659887281CF83580003ECD1C /* ADLocations.m in Sources */,
 				659887291CF83580003ECD1C /* NSURL+Utils.m in Sources */,
@@ -4892,6 +4902,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E407999231E7CA3007EFB26 /* SimpleConfiguration.swift in Sources */,
 				65EC9C9B1BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				7E4D203922D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */,
 				7E4D205722D71A5B003B0E75 /* SSZipArchive.m in Sources */,
@@ -4909,6 +4920,7 @@
 				655A023C1C6B7686000F00D7 /* ACLJobController.m in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				D03E533121B6A49000C62152 /* RoundRectButton.swift in Sources */,
+				7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */,
 				D031A14D219EFC99002C17D9 /* DDLog.m in Sources */,
 				655A024E1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D031A169219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -4937,6 +4949,7 @@
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */,
 				7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
+				7E407997231E7A87007EFB26 /* LoaderSegue.swift in Sources */,
 				D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */,
 				D031A0CF219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */,
@@ -4963,6 +4976,7 @@
 				7E4D203D22D71A5B003B0E75 /* mz_zip.c in Sources */,
 				D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */,
 				7E4D204722D71A5B003B0E75 /* mz_crypt.c in Sources */,
+				7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */,
 				7E4D204F22D71A5B003B0E75 /* mz_os_posix.c in Sources */,
 				65EC9CA31BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65EC9BE71BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
@@ -4975,7 +4989,6 @@
 				6574ADE41EA511A20054DC7E /* NSData+GZIP.m in Sources */,
 				65C12EED1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				D03E533021B6A48800C62152 /* ThemableLabel.swift in Sources */,
-				65C52B3A1B906105003AF42F /* ActionViewController.m in Sources */,
 				655A029F1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				65EC9BCF1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				D05F4C5F230D964F000EAE2D /* AERDomainFilterRule.m in Sources */,
@@ -5087,6 +5100,7 @@
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				7E4D204C22D71A5B003B0E75 /* mz_os.c in Sources */,
 				D031A11D219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
+				7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D08187CA2264C89400E961B5 /* LoginService.swift in Sources */,
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,

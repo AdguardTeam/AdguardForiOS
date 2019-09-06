@@ -28,3 +28,4 @@
 #import "Constants.h"
 #import "AdguardApp/Services/AEThemeModeEnum.h"
 #import "AERDomainFilterRule.h"
+#import "ASDatabase.h"
