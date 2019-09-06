@@ -318,9 +318,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func startProductRequest() {
-        let prodRequest = SKProductsRequest(productIdentifiers: allProducts)
-        prodRequest.delegate = self
-        prodRequest.start()
+        if productRequest != nil {
+            productRequest?.cancel()
+            
+        }
+        productRequest = SKProductsRequest(productIdentifiers: allProducts)
+        productRequest?.delegate = self
+        productRequest?.start()
     }
     
     @objc
@@ -600,7 +604,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        productRequest?.cancel()
+        productRequest = nil
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {

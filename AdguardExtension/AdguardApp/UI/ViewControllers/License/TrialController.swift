@@ -41,7 +41,6 @@ class TrialController: UIViewController {
         checkConnection()
         addObservers()
         displayProduct()
-        reach?.startNotifier()
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -134,15 +133,12 @@ class TrialController: UIViewController {
         if !products.isEmpty {
             tryButton.isEnabled = true
             displayProduct()
-            return
         } else if products.isEmpty && !reachable {
             tryButton.isEnabled = false
             showAlert()
-            purchaseService.startProductRequest()
         }
         else {
             tryButton.isEnabled = false
-            purchaseService.startProductRequest()
         }
     }
     
@@ -170,16 +166,6 @@ class TrialController: UIViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
-            guard let sSelf = self else { return }
-            guard let reach = notification.object as? Reachability else { return }
-            
-            if reach.isReachable() {
-                sSelf.purchaseService.startProductRequest()
-                sSelf.reach?.stopNotifier()
-            }
-        }
-        
         NotificationCenter.default.addObserver(forName: NSNotification.Name( PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) {[weak self] (notification) in
             guard let sSelf = self else { return }
             sSelf.displayProduct()
