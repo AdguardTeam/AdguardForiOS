@@ -217,7 +217,7 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // This code needs to be removed after 10th of september
+        
         if indexPath.section == themeSection && indexPath.row == systemDefault {
             if #available(iOS 13.0, *){ } else {
                 tableView.cellForRow(at: indexPath)?.isHidden = true
