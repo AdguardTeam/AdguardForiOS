@@ -1,6 +1,12 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
+/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Code from authentification app:";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
+"5Ay-kq-RuV.text" = "Don't have an account?";
+
 /* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
 "5iB-q7-5l8.text" = "DNS Privacy";
 
@@ -16,14 +22,14 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "You have a license";
 
-/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "BLOCK MORE  ADS & TRACKERS";
 
-/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "You will have to enter your password to log in on adguard.com";
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "Password:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
@@ -37,6 +43,9 @@
 /* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "Protect your personal data";
 
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
+"aDc-NB-78y.normalTitle" = "REGISTER";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "LOG IN";
 
@@ -49,6 +58,9 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "TRY FOR FREE";
 
+/* Class = "UIButton"; normalTitle = "Lost it?"; ObjectID = "ltL-YJ-ZeT"; */
+"ltL-YJ-ZeT.normalTitle" = "Lost it?";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restore purchase";
 
@@ -57,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Custom filters";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "CONFIRM";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "log in";
