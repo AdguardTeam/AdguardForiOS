@@ -33,19 +33,20 @@ class TrialController: UIViewController {
     private let ipadImage = UIImage(named: "trial-ipad") ?? UIImage()
     private let ipadLandScape = UIImage(named: "trial-ipad-landscape") ?? UIImage()
     
+    private var reach = Reachability.forInternetConnection()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkConnection()
+        addObservers()
+        displayProduct()
+        reach?.startNotifier()
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        let products = purchaseService.products
-        for product in products {
-            if product.type == .subscription && product.trialPeriod != nil {
-                trialLabel.text = getTrialString(period: product.trialPeriod!)
-                break
-            }
-        }
+        
         setupBackButton()
     }
     
@@ -74,6 +75,8 @@ class TrialController: UIViewController {
     override func viewWillLayoutSubviews() {
         initialSetups()
     }
+    
+    // MARK: - Private methods
     
     private func getBackgroundImage() -> UIImage {
         if UIDevice.current.userInterfaceIdiom == .phone || traitCollection.horizontalSizeClass == .compact{
@@ -122,5 +125,64 @@ class TrialController: UIViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
         
         return resultString
+    }
+    
+    private func checkConnection(){
+        guard let reachable = reach?.isReachable() else { return }
+        let products = purchaseService.products
+        
+        if !products.isEmpty {
+            tryButton.isEnabled = true
+            displayProduct()
+            return
+        } else if products.isEmpty && !reachable {
+            tryButton.isEnabled = false
+            showAlert()
+            purchaseService.startProductRequest()
+        }
+        else {
+            tryButton.isEnabled = false
+            purchaseService.startProductRequest()
+        }
+    }
+    
+    private func showAlert(){
+        let alert = UIAlertController(title: ACLocalizedString("no_internet", nil), message: ACLocalizedString("no_internet_message", nil), preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: ACLocalizedString("common_action_ok", nil), style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+
+        self.present(alert, animated: true)
+    }
+    
+    private func displayProduct(){
+        DispatchQueue.main.async {[weak self] in
+            let products = self?.purchaseService.products
+            for product in products ?? [] {
+                if product.type == .subscription && product.trialPeriod != nil {
+                    self?.tryButton.isEnabled = true
+                    self?.trialLabel.text = self?.getTrialString(period: product.trialPeriod!)
+                    break
+                }
+            }
+        }
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
+            guard let sSelf = self else { return }
+            guard let reach = notification.object as? Reachability else { return }
+            
+            if reach.isReachable() {
+                sSelf.purchaseService.startProductRequest()
+                sSelf.reach?.stopNotifier()
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name( PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) {[weak self] (notification) in
+            guard let sSelf = self else { return }
+            sSelf.displayProduct()
+        }
     }
 }
