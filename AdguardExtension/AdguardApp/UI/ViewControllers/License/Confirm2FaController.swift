@@ -40,9 +40,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     // MARK: - private properties
     
-    private let enabledColor = UIColor.init(hexString: "4D4D4D")
-    private let disabledColor = UIColor.init(hexString: "D8D8D8")
-    
     private var notificationObserver: Any?
  
     // MARK: - VC lifecycle
@@ -50,7 +47,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: nil)
+                                                                      object: nil, queue: OperationQueue.main)
         { [weak self](notification) in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -67,11 +64,24 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        codeTextField.becomeFirstResponder()
+        super.viewDidAppear(animated)
+    }
+    
     // MARK: - textView methods
     @IBAction func editingChange(_ sender: Any) {
-        confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
-        codeLine.backgroundColor = codeTextField.isEditing ? enabledColor : disabledColor
+        updateControls()
     }
+    
+    @IBAction func startEditing(_ sender: Any) {
+        updateControls()
+    }
+    
+    @IBAction func endEditing(_ sender: Any) {
+        updateControls()
+    }
+    
     
     // MARK: - actions
     @IBAction func confirmAction(_ sender: Any) {
@@ -91,6 +101,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         theme.setupTextField(codeTextField)
         theme.setupSeparator(codeLine)
         view.backgroundColor = theme.backgroundColor
+        updateControls()
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
@@ -182,11 +193,16 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         
         if errorMessage != nil {
             errorLabel.text = errorMessage
-            codeLine.backgroundColor = UIColor(hexString: "#df3812")
+            codeLine.backgroundColor = theme.errorRedColor
         }
         else {
             errorLabel.text = ""
-            codeLine.backgroundColor = theme.separatorColor
+            codeLine.backgroundColor = theme.editLineColor
         }
+    }
+    
+    private func updateControls() {
+        confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
+        codeLine.backgroundColor = codeTextField.isEditing ? theme.editLineSelectedColor : theme.editLineColor
     }
 }

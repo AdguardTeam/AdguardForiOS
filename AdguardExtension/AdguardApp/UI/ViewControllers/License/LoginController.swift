@@ -44,9 +44,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - private properties
     
-    private let enabledColor = UIColor.init(hexString: "4D4D4D")
-    private let disabledColor = UIColor.init(hexString: "D8D8D8")
-    
     private let confirm2faSegue = "confirm2faSegue"
     
     private var keyboardMover: KeyboardMover!
@@ -69,7 +66,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isTranslucent = true
         
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: nil)
+                                                                      object: nil, queue: OperationQueue.main)
         { [weak self](notification) in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -125,6 +122,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         UIApplication.shared.openAdguardUrl(action: "registration", from: "login")
     }
     
+    @IBAction func recoverAction(_ sender: Any) {
+        UIApplication.shared.openAdguardUrl(action: "recovery_password", from: "login")
+    }
+    
     // MARK: - text field delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         login()
@@ -142,8 +143,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     // MARK: - private methods
     
     func updateLines() {
-        nameLine.backgroundColor = nameEdit.isEditing ? enabledColor : disabledColor
-        passwordLine.backgroundColor = passwordEdit.isEditing ? enabledColor : disabledColor
+        nameLine.backgroundColor = nameEdit.isEditing ? theme.editLineSelectedColor : theme.editLineColor
+        passwordLine.backgroundColor = passwordEdit.isEditing ? theme.editLineSelectedColor : theme.editLineColor
     }
     
     private func updateLoginButton() {
@@ -161,6 +162,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         theme.setupLabels(themableLabels)
         theme.setupTextView(termsText)
+        
+        updateLines()
     }
     
     private func isLicenseKey(text: String)->Bool {
@@ -267,8 +270,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         if errorMessage != nil {
             errorLabel.text = errorMessage
-            nameLine.backgroundColor = UIColor(hexString: "#df3812")
-            passwordLine.backgroundColor = UIColor(hexString: "#df3812")
+            nameLine.backgroundColor = theme.errorRedColor
+            passwordLine.backgroundColor = theme.errorRedColor
         }
         else {
             errorLabel.text = ""
