@@ -270,9 +270,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Danach %1$@ pro Tag</string>
+        <string>Danach %2$@ pro Tag</string>
         <key>other</key>
-        <string>Danach %1$@ für %2$d Tage</string>
+        <string>Danach %2$@ für %1$d Tage</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -286,9 +286,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Danach %1$@ pro Woche</string>
+        <string>Danach %2$@ pro Woche</string>
         <key>other</key>
-        <string>Danach %1$@ für %2$d Wochen</string>
+        <string>Danach %2$@ für %1$d Wochen</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -302,9 +302,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Danach %1$@ pro Monat</string>
+        <string>Danach %2$@ pro Monat</string>
         <key>other</key>
-        <string>Danach %1$@ für %2$d Monate</string>
+        <string>Danach %2$@ für %1$d Monate</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -318,9 +318,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Danach %1$@ pro Jahr</string>
+        <string>Danach %2$@ pro Jahr</string>
         <key>other</key>
-        <string>Danach %1$@ für %2$d Jahre</string>
+        <string>Danach %2$@ für %1$d Jahre</string>
       </dict>
     </dict>
   </dict>
