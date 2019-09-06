@@ -174,8 +174,10 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         // errors to be shown in red label
         case LoginService.outh2FAInvalid:
             errorMessage = ACLocalizedString("invalid_2fa_code_error", nil)
-        case LoginService.accountIdDisabled:
+        case LoginService.accountIsDisabled:
             errorMessage = ACLocalizedString("account_is_disabled_error", nil)
+        case LoginService.accountIsLocked:
+            errorMessage = ACLocalizedString("account_is_locked_error", nil)
             
         // errors to be show as alert
         case LoginService.loginMaxComputersExceeded:

@@ -221,23 +221,26 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
         
         let error = json["error"] as? String
+        let errorCode = json["error_code"] as? String
         let errorDescription = json["error_description"] as? String
         
         var resultError: NSError?
-        switch (error, errorDescription) {
+        switch (error, errorCode) {
             
-        case (.some("2fa_required"), _):
+        case (.some("unauthorized"), .some("2fa_required")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.auth2FaRequired, userInfo: nil)
             
-        case (.some("unauthorized"), .some("Sorry, unrecognized username or password")):
+        case (.some("unauthorized"), .some("bad_credentials")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             
-        case (.some("unauthorized"), .some("Account is disabled")):
-            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIdDisabled, userInfo: nil)
+        case (.some("unauthorized"), .some("account_disabled")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsDisabled, userInfo: nil)
             
-        case (.some("2fa_invalid"), _):
+        case (.some("unauthorized"), .some("account_locked")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsLocked, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("2fa_invalid")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.outh2FAInvalid, userInfo: nil)
-            
         default:
             let userInfo = errorDescription == nil ? nil : [LoginService.errorDescription: errorDescription!]
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: userInfo)

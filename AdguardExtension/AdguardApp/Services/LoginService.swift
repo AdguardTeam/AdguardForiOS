@@ -63,13 +63,14 @@ class LoginService: LoginServiceProtocol {
     static let loginBadCredentials = -2
     static let loginMaxComputersExceeded = -3
     static let auth2FaRequired = -4
-    static let accountIdDisabled = -5
+    static let accountIsDisabled = -5
     static let outh2FAInvalid = -6
     static let emptyEmailOrPassword = -7
     static let invalidEmailOrPassword = -8
     static let toShortPassword = -9
     static let compromissedPassword = -10
     static let emailAllreadyUsed = -11
+    static let accountIsLocked = -12
     
     static let errorDescription = "error_description"
     

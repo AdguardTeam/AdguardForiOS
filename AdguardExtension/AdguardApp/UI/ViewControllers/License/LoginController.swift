@@ -247,8 +247,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         // errors to be shown in red label
         case LoginService.loginBadCredentials:
             errorMessage = ACLocalizedString("bad_credentials_error", nil)
-        case LoginService.accountIdDisabled:
+        case LoginService.accountIsDisabled:
             errorMessage = ACLocalizedString("account_is_disabled_error", nil)
+        case LoginService.accountIsLocked:
+            errorMessage = ACLocalizedString("account_is_locked_error", nil)
         
         // errors to be show as alert
         case LoginService.loginMaxComputersExceeded:
