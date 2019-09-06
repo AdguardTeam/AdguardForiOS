@@ -35,6 +35,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordEdit: UITextField!
     @IBOutlet weak var passwordLine: UIView!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var termsText: UITextView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -46,14 +49,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private let confirm2faSegue = "confirm2faSegue"
     
-    var showAlertBlock: (()->Void)?
-    var canShowAlert = true
+    private var keyboardMover: KeyboardMover!
     
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView)
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()
         }
@@ -73,6 +76,22 @@ class LoginController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        let termsFormat = ACLocalizedString("login_terms_string", nil)
+        let termsUrl = UIApplication.shared.adguardUrl(action: "privacy", from: "login")
+        let eulaUrl = UIApplication.shared.adguardUrl(action: "eula", from: "login")
+        if let termsString = String(format: termsFormat, termsUrl, eulaUrl).attributedStringFromHtml() {
+            let range = NSRange(location: 0, length: termsString.length)
+            termsString.addAttribute(.foregroundColor, value: theme.grayTextColor, range: range)
+            
+            let style = NSMutableParagraphStyle()
+            style.alignment = .center
+            termsString.addAttribute(.paragraphStyle, value: style, range: range)
+        
+            termsText.attributedText = termsString
+        }
+        
+        termsText.tintColor = theme.grayTextColor
+        
         updateTheme()
     }
     
@@ -85,6 +104,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == confirm2faSegue {
+            guard let controller = segue.destination as? Confirm2FaController else { return }
+            guard let name = nameEdit.text, let password = passwordEdit.text else { return }
+            controller.credentials = (name, password)
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func loginAction(_ sender: Any) {
         login()
@@ -92,6 +119,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBAction func editingChanged(_ sender: Any) {
         updateLoginButton()
+    }
+    
+    @IBAction func registerAction(_ sender: Any) {
+        UIApplication.shared.openAdguardUrl(action: "registration", from: "login")
     }
     
     // MARK: - text field delegate methods
@@ -112,6 +143,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func updateLines() {
         nameLine.backgroundColor = nameEdit.isEditing ? enabledColor : disabledColor
+        passwordLine.backgroundColor = passwordEdit.isEditing ? enabledColor : disabledColor
     }
     
     private func updateLoginButton() {
@@ -128,6 +160,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         separators.forEach { $0.backgroundColor = theme.separatorColor }
         
         theme.setupLabels(themableLabels)
+        theme.setupTextView(termsText)
     }
     
     private func isLicenseKey(text: String)->Bool {
@@ -149,6 +182,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
+        
+        // skip notification if this controler is not placed on top of navigation stack
+        if self.navigationController?.viewControllers.last != self {
+            return
+        }
         
         DispatchQueue.main.async { [weak self] in
             
@@ -227,7 +265,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
         }
         
-        errorLabel.text = errorMessage
+        if errorMessage != nil {
+            errorLabel.text = errorMessage
+            nameLine.backgroundColor = UIColor(hexString: "#df3812")
+            passwordLine.backgroundColor = UIColor(hexString: "#df3812")
+        }
+        else {
+            errorLabel.text = ""
+            nameLine.backgroundColor = theme.separatorColor
+            passwordLine.backgroundColor = theme.separatorColor
+        }
     }
-    
 }

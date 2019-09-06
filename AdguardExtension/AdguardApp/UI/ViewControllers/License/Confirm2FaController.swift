@@ -19,7 +19,7 @@
 import Foundation
 
 
-class Confirm2FaController : UIViewController {
+class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     // MARK: - public properties
     
@@ -36,27 +36,24 @@ class Confirm2FaController : UIViewController {
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var codeLine: UIView!
     @IBOutlet weak var confirmButton: RoundRectButton!
+    @IBOutlet weak var errorLabel: UILabel!
     
     // MARK: - private properties
     
-    var notificationHandler: LoginNotificationHandler?
+    private let enabledColor = UIColor.init(hexString: "4D4D4D")
+    private let disabledColor = UIColor.init(hexString: "D8D8D8")
+    
+    private var notificationObserver: Any?
  
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
         
-        notificationHandler = LoginNotificationHandler(parentController: self) { [weak self] in
-            guard let sSelf = self else { return }
-            var toController: UIViewController?
-            for controller in sSelf.navigationController!.viewControllers {
-                if controller.isKind(of: LoginController.self) || controller.isKind(of: Confirm2FaController.self) {
-                    break;
-                }
-                toController = controller
-            }
-            
-            if toController != nil {
-                self?.navigationController?.popToViewController(toController!, animated: true)
+        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+                                                                      object: nil, queue: nil)
+        { [weak self](notification) in
+            if let info = notification.userInfo {
+                self?.processNotification(info: info)
             }
         }
         
@@ -68,6 +65,12 @@ class Confirm2FaController : UIViewController {
         }
         
         super.viewDidLoad()
+    }
+    
+    // MARK: - textView methods
+    @IBAction func editingChange(_ sender: Any) {
+        confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
+        codeLine.backgroundColor = codeTextField.isEditing ? enabledColor : disabledColor
     }
     
     // MARK: - actions
@@ -88,5 +91,102 @@ class Confirm2FaController : UIViewController {
         theme.setupTextField(codeTextField)
         theme.setupSeparator(codeLine)
         view.backgroundColor = theme.backgroundColor
+    }
+    
+    private func processNotification(info: [AnyHashable: Any]) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+            
+            switch type {
+                
+            case PurchaseService.kPSNotificationLoginSuccess:
+                self?.loginSuccess()
+            case PurchaseService.kPSNotificationLoginFailure:
+                self?.loginFailure(error)
+            case PurchaseService.kPSNotificationLoginPremiumExpired:
+                self?.premiumExpired()
+            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+                self?.notPremium()
+                
+            default:
+                break
+            }
+        }
+    }
+    
+    private func loginSuccess() {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) { [weak self] in
+            
+            guard let sSelf = self else { return }
+            var toController: UIViewController?
+            for controller in sSelf.navigationController!.viewControllers {
+                if controller.isKind(of: LoginController.self) || controller.isKind(of: Confirm2FaController.self) {
+                    break;
+                }
+                toController = controller
+            }
+            
+            if toController != nil {
+                self?.navigationController?.popToViewController(toController!, animated: true)
+            }
+        }
+    }
+    
+    private func premiumExpired() {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil), completion: nil)
+    }
+    
+    private func notPremium() {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil), completion: nil)
+    }
+    
+    private func loginFailure(_ error: NSError?) {
+        
+        if error == nil || error!.domain != LoginService.loginErrorDomain {
+            // unknown error
+            let errorDescription = error?.localizedDescription ?? "nil"
+            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
+            let message = ACLocalizedString("login_error_message", nil)
+            
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message, completion: nil)
+        }
+        
+        // some errors we show as red text below password text field, some in alert dialog
+        var errorMessage: String?
+        var alertMessage: String?
+        
+        switch error!.code {
+            
+        // errors to be shown in red label
+        case LoginService.outh2FAInvalid:
+            errorMessage = ACLocalizedString("invalid_2fa_code_error", nil)
+        case LoginService.accountIdDisabled:
+            errorMessage = ACLocalizedString("account_is_disabled_error", nil)
+            
+        // errors to be show as alert
+        case LoginService.loginMaxComputersExceeded:
+            alertMessage = ACLocalizedString("login_max_computers_exceeded", nil)
+        case LoginService.loginError:
+            alertMessage = ACLocalizedString("login_error_message", nil)
+        
+        default:
+            alertMessage = ACLocalizedString("login_error_message", nil)
+        }
+        
+        if alertMessage != nil {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
+        }
+        
+        if errorMessage != nil {
+            errorLabel.text = errorMessage
+            codeLine.backgroundColor = UIColor(hexString: "#df3812")
+        }
+        else {
+            errorLabel.text = ""
+            codeLine.backgroundColor = theme.separatorColor
+        }
     }
 }

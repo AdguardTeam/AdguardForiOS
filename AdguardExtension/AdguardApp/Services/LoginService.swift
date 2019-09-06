@@ -411,45 +411,6 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    func registerUser(email: String, password: String, callback: @escaping (Error?)->Void) {
-        DDLogInfo("(LoginService) registerUser ")
-        
-        var params = ["email" : email,
-                      "password" : password,
-        ]
-        
-        guard let url = URL(string: REGISTRATION_URL) else  {
-            callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) registerUser error. Can not make URL from String \(REGISTRATION_URL)")
-            return
-        }
-        
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
-        
-        network.data(with: request) { [weak self] (dataOrNil, response, error) in
-            guard let sSelf = self else { return }
-            guard error == nil else {
-                DDLogError("(LoginService) registerUser - got error \(error!.localizedDescription)")
-                callback(error!)
-                return
-            }
-            
-            guard let data = dataOrNil else {
-                DDLogError("(LoginService) registerUser - response data is nil")
-                callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-                return
-            }
-            
-            DDLogInfo("(LoginService) getOauthToken get response")
-            
-            let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
-            
-            // todo: do something with result
-            
-            callback(nil)
-        }
-    }
-    
     func login(name: String, password: String, code2fa: String?, callback: @escaping (NSError?) -> Void) {
         
         self.getOauthToken(username: name, password: password, twoFactorToken: code2fa) { [weak self] (token, error) in
