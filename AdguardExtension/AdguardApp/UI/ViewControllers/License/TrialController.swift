@@ -136,9 +136,11 @@ class TrialController: UIViewController {
         } else if products.isEmpty && !reachable {
             tryButton.isEnabled = false
             showAlert()
+            purchaseService.startProductRequest()
         }
         else {
             tryButton.isEnabled = false
+            purchaseService.startProductRequest()
         }
     }
     
