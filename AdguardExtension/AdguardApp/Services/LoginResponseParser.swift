@@ -24,8 +24,6 @@ protocol LoginResponseParserProtocol {
     func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
     
     func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
-    
-    func processRegisterResponse(data: Data)->(success: Bool, error: NSError?)
 }
 
 
@@ -117,20 +115,6 @@ class LoginResponseParser: LoginResponseParserProtocol {
             DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
             return (nil, nil, error)
-        }
-    }
-    
-    func processRegisterResponse(data: Data) -> (success: Bool, error: NSError?) {
-        do {
-            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-            
-            return processRegisterResponseJson(jsonResponse)
-        }
-        catch {
-            let responseString = String(data: data, encoding: .utf8)
-            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
-            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
-            return (false, error)
         }
     }
     
@@ -260,39 +244,5 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
         
         return (nil, nil, resultError)
-    }
-    
-    func processRegisterResponseJson(_ json : [String: Any])->(success: Bool, error: NSError?) {
-        let error = json["error"] as? String
-        let field = json["field"] as? String
-        
-        if error == nil {
-            return (true, nil)
-        }
-        
-        var errorCode = LoginService.loginError
-        var userInfo: [String: String]?
-        
-        switch (error!, field) {
-        case ("validation.not_empty", _):
-            errorCode = LoginService.emptyEmailOrPassword
-        case ("validation.not_valid", _):
-            errorCode = LoginService.invalidEmailOrPassword
-        case ("validation.min_length", .some("password")):
-            errorCode = LoginService.toShortPassword
-        case ("validation.compromised.password", _):
-            errorCode = LoginService.compromissedPassword
-        case ("validation.unique_constraint", "email"):
-            errorCode = LoginService.emailAllreadyUsed
-        default:
-            if let errorMessage = json["errorMessage"] as? String {
-                userInfo = [LoginService.errorDescription: errorMessage]
-            }
-            errorCode = LoginService.loginError
-        }
-        
-        var resultError = NSError(domain: LoginService.loginErrorDomain, code: errorCode, userInfo: userInfo)
-        
-        return (false, resultError)
     }
 }

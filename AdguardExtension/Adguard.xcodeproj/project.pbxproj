@@ -1069,7 +1069,6 @@
 		D093719821B056BB004A24F1 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
 		D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
-		D0953E7D231FFAC200AE80DB /* LoginNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7C231FFAC200AE80DB /* LoginNotificationHandler.swift */; };
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
@@ -1928,7 +1927,6 @@
 		D093718721AEA770004A24F1 /* ContentBlockerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerTest.swift; sourceTree = "<group>"; };
 		D093718A21B0414A004A24F1 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
 		D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2FaController.swift; sourceTree = "<group>"; };
-		D0953E7C231FFAC200AE80DB /* LoginNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNotificationHandler.swift; sourceTree = "<group>"; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
 		D099DADE228D812E007987F8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -3277,7 +3275,6 @@
 				D0BA620F224A8547005CF278 /* GetProTableController.swift */,
 				D0A1AA1B22FB08ED00E3BDBF /* TrialController.swift */,
 				D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */,
-				D0953E7C231FFAC200AE80DB /* LoginNotificationHandler.swift */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -4999,7 +4996,6 @@
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				D044AF7321820ABE00CD9E06 /* CustomAnimatedTransitioning.swift in Sources */,
-				D0953E7D231FFAC200AE80DB /* LoginNotificationHandler.swift in Sources */,
 				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
