@@ -331,7 +331,7 @@
 "disabled_current_state_label" = "Disabled in Safari settings";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Checking for updates...";
+"update_current_state_label" = "Loading into Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "The limit of %1$@ rules is reached. The app may not work correctly. Please disable the extra rules. Currently %2$@ out of %3$@ rules are being used; %4$@ rules are disabled.";
