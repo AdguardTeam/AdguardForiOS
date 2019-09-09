@@ -75,9 +75,9 @@ class LoginService: LoginServiceProtocol {
     static let errorDescription = "error_description"
     
     // keychain constants
-    private let LOGIN_SERVER = "http://testmobile.adtidy.org" //https://mobile-api.adguard.com
+    private let LOGIN_SERVER = "https://mobile-api.adguard.com"
     
-    private let AUTH_SERVER = "https://testauth.adguard.com"
+    private let AUTH_SERVER = "https://auth.adguard.com"
     
     // login request
     // todo: remove auth request in future builds
