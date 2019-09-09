@@ -143,7 +143,6 @@ class AdvancedSettingsController: UITableViewController {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-
     }
     
     // MARK: - Actions
@@ -219,8 +218,15 @@ class AdvancedSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        if indexPath.section == themeSection && indexPath.row == systemDefault {
+            if #available(iOS 13.0, *){ } else {
+                tableView.cellForRow(at: indexPath)?.isHidden = true
+                return 0.0
+            }
+        }
+        
         if indexPath.section == advancedSection && indexPath.row == restartRow && !configuration.proStatus{
-            return 0
+            return 0.0
         }
         
         return super.tableView(tableView, heightForRowAt: indexPath)
