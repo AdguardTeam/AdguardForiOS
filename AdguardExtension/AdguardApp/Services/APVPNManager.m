@@ -721,9 +721,12 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         // Getting current settings from configuration.
         //If settings are incorrect, then we assign default values.
-        [self willChangeValueForKey:@"activeDnsServer"];
-        _activeDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: self.defaultServer;
-        [self didChangeValueForKey:@"activeDnsServer"];
+        DnsServerInfo *remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
+        if (_activeDnsServer.serverId != remoteServer.serverId) {
+            [self willChangeValueForKey:@"activeDnsServer"];
+            _activeDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: self.defaultServer;
+            [self didChangeValueForKey:@"activeDnsServer"];
+        }
         
         _resources.activeDnsServer = _activeDnsServer;
         [_resources.sharedDefaults setInteger: _tunnelMode forKey:AEDefaultsVPNTunnelMode];

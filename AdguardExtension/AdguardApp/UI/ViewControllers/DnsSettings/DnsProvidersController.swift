@@ -67,6 +67,7 @@ class DnsProvidersController: UITableViewController {
         
         activeProviderObservation = vpnManager.observe(\.activeDnsServer) {[weak self]  (server, change)  in
             DispatchQueue.main.async {
+                selectCellFunc()
                 self?.tableView.reloadData()
             }
         }
