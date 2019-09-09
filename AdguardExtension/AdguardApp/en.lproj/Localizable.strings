@@ -384,6 +384,12 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your devices!";
 
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "No Internet";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Please connect to the Internet to start your free trial";
+
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Incorrect email or password";
 
