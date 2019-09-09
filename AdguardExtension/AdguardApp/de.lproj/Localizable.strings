@@ -318,9 +318,6 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Deaktiviert in Safari-Einstellungen";
 
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Nach Updates suchen...";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Die Obergrenze von %1$@ Regeln ist erreicht. Die App funktioniert möglicherweise nicht richtig. Bitte deaktivieren Sie die zusätzlichen Regeln. Derzeit werden %2$@ aus %3$@ Regeln verwendet; %4$@ Regeln sind deaktiviert.";
 
