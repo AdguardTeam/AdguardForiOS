@@ -58,10 +58,6 @@ typedef enum {
     ReadyFlagType _readyFlags;
     NSLock *_readyLock;
     
-    NSMutableArray *_onReloadContentBlockingJsonBlocks;
-    BOOL _reloadContentBlockingJsonComplete;
-    NSLock *_reloadContentBlockingJsonLock;
-    
     BOOL started;
     
     NSString *_unexpectedErrorMessage;
@@ -103,8 +99,6 @@ typedef enum {
         
         antibanner = [[AESAntibanner alloc] initWithNetworking: networking];
         _readyLock = [NSLock new];
-        _reloadContentBlockingJsonLock = [NSLock new];
-        _reloadContentBlockingJsonComplete = YES;
         _contentBlockerService.antibanner = antibanner;
     }
     
@@ -192,44 +186,20 @@ typedef enum {
 - (void)antibanNotify:(NSNotification *)notification{
     
     // Success antibanner installed (first run)
-    if ([notification.name isEqualToString:ASAntibannerInstalledNotification]){
+    if ([notification.name isEqualToString:ASAntibannerInstalledNotification] && _firstRunInProgress){
         
         DDLogDebug(@"(AEService) ASAntibannerInstalledNotification received");
         
 #ifndef APP_EXTENSION
         UIBackgroundTaskIdentifier backroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 #endif
-            
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:NO completion:^(NSError * _Nullable error) {
             
-            // If error then disable all installed filters
-            if (error) {
-
-                for (ASDFilterMetadata *item in [antibanner filters]) {
-                    if ([item.filterId integerValue] != ASDF_USER_FILTER_ID && [item.enabled boolValue]) {
-                        [antibanner setFilter:item.filterId enabled:NO fromUI:NO];
-                    }
-                }
-
-                [_contentBlockerService reloadJsonsWithBackgroundUpdate:NO completion:^(NSError * _Nullable error) {
-                    // we hope that no errors in this place. :)
-                    if (error){
-                        [antibanner rollbackTransaction];
-                    }
-                    else{
-                        [self checkForServiceReady:RFAntibannerInstalledType];
-                    }
-                    
-#ifndef APP_EXTENSION
-                    [[UIApplication sharedApplication] endBackgroundTask:backroundTaskID];
-#endif
-                }];
-                
-                return;
-            }
-
-            // If no errors
             [self checkForServiceReady:RFAntibannerInstalledType];
+            
+#ifndef APP_EXTENSION
+            [[UIApplication sharedApplication] endBackgroundTask:backroundTaskID];
+#endif
         }];
     }
     // Antibanner ready
