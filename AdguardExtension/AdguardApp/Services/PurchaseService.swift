@@ -204,6 +204,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private var standardPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
     
+    private let reachability = Reachability.forInternetConnection()
+    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -313,6 +315,16 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         loginService.login(licenseKey: key){ [weak self] (error) in
             self?.processLoginResult(error)
         }
+    }
+    
+    func startProductRequest() {
+        if productRequest != nil {
+            productRequest?.cancel()
+            
+        }
+        productRequest = SKProductsRequest(productIdentifiers: allProducts)
+        productRequest?.delegate = self
+        productRequest?.start()
     }
     
     @objc
@@ -496,6 +508,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         productRequest = SKProductsRequest(productIdentifiers: allProducts)
         productRequest?.delegate = self
         productRequest?.start()
+        if reachability?.isReachable() ?? false{
+            startProductRequest()
+        } else {
+            NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
+                guard let sSelf = self else { return }
+                guard let reach = notification.object as? Reachability else { return }
+                if reach.isReachable() {
+                    sSelf.startProductRequest()
+                    sSelf.reachability?.stopNotifier()
+                }
+            }
+            reachability?.startNotifier()
+        }
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -574,6 +599,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         if productsToPurchase.count > 0 {
             postNotification(PurchaseService.kPSNotificationReadyToPurchase)
+            productRequest = nil
         }
     }
     
