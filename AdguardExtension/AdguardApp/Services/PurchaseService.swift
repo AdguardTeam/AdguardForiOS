@@ -305,6 +305,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         requestProducts()
     }
     
+    @objc
     func checkLicenseStatus() {
         loginService.checkStatus { [weak self] (error) in
             self?.processLoginResult(error)
