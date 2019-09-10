@@ -707,9 +707,9 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltL-YJ-ZeT">
-                                                <rect key="frame" x="351" y="140.5" width="42" height="27"/>
+                                                <rect key="frame" x="305" y="140.5" width="88" height="27"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <state key="normal" title="Lost it?">
+                                                <state key="normal" title="Lost password?">
                                                     <color key="titleColor" red="0.92156862745098034" green="0.57647058823529407" blue="0.0" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>

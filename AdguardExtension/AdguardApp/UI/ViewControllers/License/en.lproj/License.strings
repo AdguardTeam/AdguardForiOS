@@ -58,8 +58,8 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "TRY FOR FREE";
 
-/* Class = "UIButton"; normalTitle = "Lost it?"; ObjectID = "ltL-YJ-ZeT"; */
-"ltL-YJ-ZeT.normalTitle" = "Lost it?";
+/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
+"ltL-YJ-ZeT.normalTitle" = "Lost password?";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restore purchase";
