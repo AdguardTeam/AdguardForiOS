@@ -208,7 +208,7 @@ class UserFilterViewModel: NSObject {
         case .blacklist:
             addBlacklistRules(ruleTexts: rules, completionHandler: completionHandler, errorHandler: errorHandler)
         case .whitelist:
-            addWhitelistRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
+            addWhitelistDomain(domain: ruleText, completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedWhitelist:
             addInvertedWhitelstRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
         }
@@ -326,11 +326,9 @@ class UserFilterViewModel: NSObject {
                 continue
             }
             
-            let ruleObjectOpt = type == .blacklist ?
+            let ruleObject = type == .blacklist ?
                                         ASDFilterRule(text: trimmedRuleString, enabled: true) :
-                                        AEWhitelistDomainObject(domain: trimmedRuleString)?.rule
-            
-            guard let ruleObject = ruleObjectOpt else { continue }
+                                        AEWhitelistDomainObject(domain: trimmedRuleString).rule
             
             let ruleInfo = RuleInfo(trimmedRuleString, false, themeService)
             
@@ -362,24 +360,15 @@ class UserFilterViewModel: NSObject {
     
     // MARK: - private methods
     
-    func addWhitelistRule(ruleText: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
-        
-        let domainObject = AEWhitelistDomainObject(domain: ruleText)
-                
-        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
-           errorHandler(ACLocalizedString("rule_converting_error", nil))
-           return
-        }
+    func addWhitelistDomain(domain: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
                         
-        guard let ruleObject = domainObject?.rule else { return }
-        
         let rulesCopy = allRules
         let objectsCopy = ruleObjects
         
-        let newRules = allRules + [RuleInfo(ruleText, false, themeService)]
-        let newRuleObjects = ruleObjects + [ruleObject]
+        let newRules = allRules + [RuleInfo(domain, false, themeService)]
+        let newRuleObjects = ruleObjects + [AEWhitelistDomainObject(domain: domain).rule]
         
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
@@ -390,7 +379,7 @@ class UserFilterViewModel: NSObject {
             
             strongSelf.didChangeValue(for: \.rules)
         
-            strongSelf.contentBlockerService.addWhitelistRule(ruleObject) { [weak self] (error) in
+            strongSelf.contentBlockerService.addWhitelistDomain(domain) { [weak self] (error) in
                 DispatchQueue.main.async {
                     if error == nil {
                         completionHandler()
@@ -453,7 +442,7 @@ class UserFilterViewModel: NSObject {
         
         let domainObject = AEWhitelistDomainObject(domain: ruleText)
                         
-        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
+        if !contentBlockerService.validateRule(domainObject.rule.ruleText) {
            errorHandler(ACLocalizedString("rule_converting_error", nil))
            return
         }
@@ -462,6 +451,10 @@ class UserFilterViewModel: NSObject {
         
         var domains = allRules
         domains.append(RuleInfo(ruleText, false, themeService))
+        
+        willChangeValue(for: \.rules)
+        allRules = domains
+        didChangeValue(for: \.rules)
         
         contentBlockerService.addInvertedWhitelistDomain(ruleText) { (error) in
             DispatchQueue.main.async {
@@ -548,19 +541,27 @@ class UserFilterViewModel: NSObject {
     
     func deleteWhitelistRule(index: Int, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void){
         
+        let oldRules = allRules
+        let oldRuleObjects = ruleObjects
+        
+        willChangeValue(for: \.rules)
+        allRules.remove(at: index)
+        ruleObjects.remove(at: index)
+        didChangeValue(for: \.rules)
+        
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        contentBlockerService.removeWhitelistRule(ruleObjects[index]) { (error) in
+        contentBlockerService.removeWhitelistDomain(rules[index].rule) { (error) in
             
             DispatchQueue.main.async {
                 if error == nil {
-                    self.willChangeValue(for: \.rules)
-                    self.allRules.remove(at: index)
-                    self.ruleObjects.remove(at: index)
-                    self.didChangeValue(for: \.rules)
                     completionHandler()
                 }
                 else {
+                    self.willChangeValue(for: \.rules)
+                    self.allRules = oldRules
+                    self.ruleObjects = oldRuleObjects
+                    self.didChangeValue(for: \.rules)
                     errorHandler(error?.localizedDescription ?? "")
                 }
                 
@@ -576,16 +577,22 @@ class UserFilterViewModel: NSObject {
         var newAllRules = allRules
         let rule = newAllRules.remove(at: index)
         
+        let oldRules = allRules
+        
+        willChangeValue(for: \.rules)
+        allRules = newAllRules
+        didChangeValue(for: \.rules)
+        
         contentBlockerService.removeInvertedWhitelistDomain(rule.rule) { (error) in
             DispatchQueue.main.async {
                 [weak self] in
                 if error == nil {
                     completionHandler()
-                    self?.willChangeValue(for: \.rules)
-                    self?.allRules = newAllRules
-                    self?.didChangeValue(for: \.rules)
                 }
                 else {
+                    self?.willChangeValue(for: \.rules)
+                    self?.allRules = oldRules
+                    self?.didChangeValue(for: \.rules)
                     errorHandler(error?.localizedDescription ?? "")
                 }
                 
@@ -612,26 +619,12 @@ class UserFilterViewModel: NSObject {
     
     func changeWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
-        let domainObject = AEWhitelistDomainObject(domain: text)
-                                
-        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
-           errorHandler(ACLocalizedString("rule_converting_error", nil))
-           return
-        }
-        
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let oldRuleObject = ruleObjects[index]
         let oldRule = allRules[index]
         
-        let newDomainObject = AEWhitelistDomainObject(domain: text)
-        guard let newRuleObject = newDomainObject?.rule else {
-            errorHandler(ACLocalizedString("whitelist_rule_creation_failure", nil))
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
-            return
-        }
-        
-        contentBlockerService.replaceWhitelistRule(oldRuleObject, with: newRuleObject) { (error) in
+        contentBlockerService.replaceWhitelistDomain(rules[index].rule, with: text) { (error) in
             oldRule.rule = text
             oldRuleObject.ruleText = text
             
@@ -642,17 +635,14 @@ class UserFilterViewModel: NSObject {
     
     func changeInvertedWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
-        let domainObject = AEWhitelistDomainObject(domain: text)
-                                        
-        if domainObject == nil || !contentBlockerService.validateRule(domainObject!.rule.ruleText) {
-           errorHandler(ACLocalizedString("rule_converting_error", nil))
-           return
-        }
-        
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let domains = allRules
         domains[index].rule = text
+        
+        willChangeValue(for: \.rules)
+        allRules = domains
+        didChangeValue(for: \.rules)
         
         let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: domains.map({ $0.rule }))
         resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
@@ -662,9 +652,6 @@ class UserFilterViewModel: NSObject {
             DispatchQueue.main.async {
                 if error == nil {
                     completionHandler()
-                    self?.willChangeValue(for: \.rules)
-                    self?.allRules = domains
-                    self?.didChangeValue(for: \.rules)
                 }
                 else {
                     DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading.")
