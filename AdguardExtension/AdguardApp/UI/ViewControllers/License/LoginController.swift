@@ -182,9 +182,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
             purchaseService.login(withLicenseKey: name!)
         }
+        
+        loginButton.isEnabled = false
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
+        
+        loginButton.isEnabled = true
         
         // skip notification if this controler is not placed on top of navigation stack
         if self.navigationController?.viewControllers.last != self {

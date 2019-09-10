@@ -86,6 +86,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     // MARK: - actions
     @IBAction func confirmAction(_ sender: Any) {
         if credentials != nil {
+            confirmButton.isEnabled = false
             purchaseService.login(name: credentials!.name, password: credentials!.password, code2fa: codeTextField.text)
         }
     }
@@ -105,6 +106,8 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
+        
+        confirmButton.isEnabled = true
         
         DispatchQueue.main.async { [weak self] in
             
