@@ -159,13 +159,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     [self stopObservingReachabilityStatus];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    @try {
+
+    if (observingDbStatus) {
         [[ASDatabase singleton] removeObserver:self forKeyPath:@"ready"];
+        observingDbStatus = NO;
     }
-    @catch (NSException *exception) {
-        // Silent
-    }
-    
+
 #if !OS_OBJECT_USE_OBJC
     if (workQueue) dispatch_release(workQueue);
 #endif
@@ -1938,7 +1937,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     ASDatabase *theDB = [ASDatabase singleton];
     
+    ASSIGN_WEAK(self);
+    
     dispatch_async(workQueue, ^{ @autoreleasepool {
+        
+        ASSIGN_STRONG(self);
         
         if (theDB.ready){
             
@@ -1950,12 +1953,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (![result next]) {
                     
                     // install default filters
-                    if ([self installFiltersIntoDb:db])
+                    if ([USE_STRONG(self) installFiltersIntoDb:db])
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             DDLogDebug(@"(ASAntibanner) ASAntibannerInstalledNotification");
                             
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:self];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
                         });
                     
                     else{
@@ -1964,8 +1967,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         DDLogError(@"Can't install filters metadata into DB.");
                         DDLogErrorTrace();
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            self.enabled = NO;
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:self];
+                            USE_STRONG(self).enabled = NO;
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:USE_STRONG(self)];
                         });
                         
                         return;
@@ -1976,24 +1979,24 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                                                
                        DDLogDebug(@"(ASAntibanner) antibanner has been allready installed. Post ASAntibannerInstalledNotification");
                        
-                       [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:self];
+                       [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
                    });
                 }
                 
                 [result close];
-                serviceInstalled = YES;
+                USE_STRONG(self)->serviceInstalled = YES;
                 *rollback = NO;
-                if (serviceEnabled)
-                    [self setServiceToReady];
+                if (USE_STRONG(self)->serviceEnabled)
+                    [USE_STRONG(self) setServiceToReady];
             }];
             
-            [self addCustomGroupIfNeeded];
-            [self updateUserfilterMetadata];
+            [USE_STRONG(self) addCustomGroupIfNeeded];
+            [USE_STRONG(self) updateUserfilterMetadata];
         }
         else if (!observingDbStatus){
             
-            observingDbStatus = YES;
-            [theDB addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+            USE_STRONG(self)->observingDbStatus = YES;
+            [theDB addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
             
         }
         
