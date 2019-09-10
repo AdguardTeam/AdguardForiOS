@@ -126,7 +126,7 @@ protocol FiltersServiceProtocol {
     
     /** add custom filter
      */
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool)
+    func addCustomFilter(_ filter: AASCustomFilterParserResult)
     
     /** delete custom filter
      */
@@ -364,15 +364,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         processUpdate()
     }
     
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
+    func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-        
-        if overwriteExisted {
-            if let existedFilterId = antibanner.customFilterId(byUrl: filter.meta.subscriptionUrl) {
-                deleteCustomFilterWithId(existedFilterId)
-            }
-        }
 
         filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
