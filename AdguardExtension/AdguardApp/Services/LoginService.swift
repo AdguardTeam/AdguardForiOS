@@ -80,7 +80,7 @@ class LoginService: LoginServiceProtocol {
     private let LOGIN_APP_VERSION_PARAM = "app_version"
     private let STATUS_DEVICE_NAME_PARAM = "device_name"
     
-    static let APP_NAME_VALUE = "adguard_ios_pro"
+    static let APP_NAME_VALUE = "adguard_ios"
     
     private var defaults: UserDefaults
     private var network: ACNNetworkingProtocol
