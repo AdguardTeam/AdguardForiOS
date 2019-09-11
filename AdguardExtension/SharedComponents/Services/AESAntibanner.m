@@ -515,6 +515,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
+            DDLogInfo(@"Filter with filterId = %@ , and expected enabled state = %d, was added to db with result = %d", filterId, (int)enabled, (int)result);
             
             [NSNotificationCenter.defaultCenter postNotificationName:ASAntibannerFilterEnabledNotification object:nil userInfo:@{@"filter_id":filterId, @"enabled":@(enabled)}];
         }];
@@ -2241,7 +2242,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while ([result next]) {
             
             groupMetadata = [[ASDFilterGroup alloc] initFromDbResult:result];
-            
+            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %d", groupMetadata.groupId, (int)groupMetadata.enabled);
             [groups addObject:groupMetadata];
         }
         [result close];
