@@ -397,7 +397,7 @@
 "account_is_disabled_error" = "Account is blocked";
 
 /* (LoginController) locked account mesage */
-"account_is_locked_error" = "Account is temporary locked";
+"account_is_locked_error" = "Account is temporarily locked";
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Invalid 2FA token";
