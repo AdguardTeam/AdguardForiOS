@@ -61,7 +61,7 @@ protocol FiltersAndGroupsViewModelProtocol: class {
     
     /* adds custom filter to database and reloads safari content blockers
     returns @success result in callback */
-    func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void)
+    func addCustomFilter(filter: AASCustomFilterParserResult, completion: @escaping (Bool) -> Void)
     
     // MARK - callbacks methods
     func add(_ callback: @escaping ()->(), with key: String)
@@ -227,8 +227,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         groupsObserver = groupChanged
     }
     
-    func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool, completion: @escaping (Bool) -> Void) {
-        filtersService.addCustomFilter(filter, overwriteExisted: overwriteExisted)
+    func addCustomFilter(filter: AASCustomFilterParserResult, completion: @escaping (Bool) -> Void) {
+        filtersService.addCustomFilter(filter)
         updateAllGroups()
         completion(true)
         callAllCallbacks()

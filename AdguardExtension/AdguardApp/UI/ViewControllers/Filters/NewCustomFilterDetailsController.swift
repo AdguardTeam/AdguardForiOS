@@ -19,7 +19,7 @@
 import Foundation
 
 protocol NewCustomFilterDetailsDelegate {
-    func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool)
+    func addCustomFilter(filter: AASCustomFilterParserResult)
 }
 
 class NewCustomFilterDetailsController : BottomAlertController {
@@ -29,7 +29,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     var filter : AASCustomFilterParserResult?
     var delegate : NewCustomFilterDetailsDelegate?
-    var overwriteExisted = false
     private var homepageLink: String?
     
     // MARK: - IB Outlets
@@ -79,7 +78,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - Actions
     @IBAction func AddAction(_ sender: Any) {
         filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
-        delegate?.addCustomFilter(filter: filter!, overwriteExisted: overwriteExisted)
+        delegate?.addCustomFilter(filter: filter!)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

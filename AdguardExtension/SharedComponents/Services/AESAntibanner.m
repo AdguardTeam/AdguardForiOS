@@ -1667,6 +1667,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             result.meta.name = filter.name;
             result.meta.groupId = filter.groupId;
             result.meta.filterId = filter.filterId;
+            result.meta.enabled = filter.enabled;
 
             [parseResults addObject:result];
             
