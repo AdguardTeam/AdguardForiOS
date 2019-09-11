@@ -291,6 +291,22 @@
         <string>Seejärel %1$@ / %2$d nädala kohta</string>
       </dict>
     </dict>
+    <key>trial_description_label_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Seejärel %1$@ kuu kohta</string>
+        <key>other</key>
+        <string>Seejärel %1$@ / %2$d kuu kohta</string>
+      </dict>
+    </dict>
     <key>trial_description_label_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>

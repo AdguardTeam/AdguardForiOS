@@ -10,9 +10,6 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "Mentés";
 
-/* Class = "UIButton"; normalTitle = "Select all"; ObjectID = "DLT-c2-7eC"; */
-"DLT-c2-7eC.normalTitle" = "Összes kiválasztása";
-
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Szerkesztés";
 
@@ -22,14 +19,8 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "MÉGSEM";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
-"c5a-s3-YPd.normalTitle" = "Kiválasztás";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "Hozzáad";
-
-/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
-"iuK-dC-RKf.normalTitle" = "Törlés";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";

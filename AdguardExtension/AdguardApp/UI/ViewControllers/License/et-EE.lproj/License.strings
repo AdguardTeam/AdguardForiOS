@@ -16,14 +16,8 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "Sul on litsents";
 
-/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "Sisesta oma e-posti aadress siia";
-
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "BLOKI ROHKEM REKLAAMI JA JÄLGITAJAID";
-
-/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "Autoriseerimiseks pead sisestama oma parooli lehel adguard.com";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "AVA MINU KONTO";

@@ -315,9 +315,6 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Safari ayarlarında devre dışı bırakılmış";
 
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Güncellemeler yoklanıyor...";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "%1$@ kurallarının üst sınırına ulaşıldı. Uygulama düzgün çalışmayabilir. Lütfen ek kuralları devre dışı edin. Şu anda %3$@ kurallarından %2$@ kullanılıyor; %4$@ kuralları devre dışı bırakılır.";
 
@@ -350,9 +347,6 @@
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Azami filtre kuralı miktarını aştınız.";
-
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Kalıcı";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "AÇIK";

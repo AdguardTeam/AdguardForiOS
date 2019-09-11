@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "평가판 시작";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "구매";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
 
@@ -273,6 +276,12 @@
 /* login error message */
 "login_error_message" = "로그인 중 오류가 발생했습니다.";
 
+/* purchase secription format */
+"purchase_description_format" = "AdGuard 구독 서비스에 대하여:<br><br>• 결제는 구입 확인 시 iTunes 계정을 통해 이루어집니다.<br>• 구독 서비스는 자동 갱신이 종료되기 24시간 전에 비활성화하지 않는 한 자동으로 갱신됩니다.<br>• 구독 갱신 수수료는 갱신되기 24시간 전에 청구됩니다. 고객님은 구독을 직접 관리할 수 있으며, 자동 갱신은 구독 후 iTunes 계정 설정에서 비활성화 할 수 있습니다.<br><br><a href=%1$@>개인 정보 처리 방침</a> <br><br><a href=%2$@>이용 약관</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>개인 정보 처리 방침</a> <br><br><a href=%2$@>이용 약관</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "확인";
 
@@ -311,6 +320,9 @@
 
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "일반 설정";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "VPN 을 먼저 활성화해야합니다";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@개의 규칙이 사용되는 중";
@@ -368,3 +380,27 @@
 
 /* (AboutController) current app version string */
 "about_version" = "버전";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "한 번 구매하여 AdGuard 프리미엄 특전을 모든 기기에서 누려보세요!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "인터넷을 연결할 수 없습니다";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "무료 평가판을 시작하려면 인터넷에 연결하세요";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "이메일 주소 또는 비밀번호가 올바르지 않습니다";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "계정이 차단됨";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "계정이 일시적으로 잠겼습니다";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "잘못된 2FA 토큰";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "계속하면 <a href=\"%@\"> 이용 약관 </a> 및 <a href=\"%@\"> EULA </a>에 동의하게 됩니다.";

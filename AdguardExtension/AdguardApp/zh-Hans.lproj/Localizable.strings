@@ -318,9 +318,6 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "在 Safari 设置内已禁用";
 
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "检查更新...";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "已达到 %1$@ 条规则的限制。该应用可能无法正常工作。请禁用额外规则。目前正在使用 %3$@ 条规则中的 %2$@ 条； %4$@ 条规则已禁用。";
 
