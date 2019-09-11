@@ -52,11 +52,145 @@ class LoginResponseParserTest: XCTestCase {
         
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testGetOuathTokenSuccess() {
+        let responseString = """
+                               {
+                                 "access_token" : "123-321",
+                                 "token_type" : "bearer",
+                                 "expires_in" : 100,
+                                 "scope" : "trust"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertEqual(token, "123-321")
+        XCTAssertNotNil(expiration)
+        XCTAssertTrue(expiration! > Date(timeIntervalSinceNow: 0))
+        XCTAssertNil(error)
+    }
+    
+    func testGetToken2FARequired() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "2FA is required",
+                                 "error_code" : "2fa_required"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.auth2FaRequired)
+    }
+    
+    func testGetTokenBadCredentials() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Sorry, unrecognized username or password",
+                                 "error_code" : "bad_credentials"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.loginBadCredentials)
+    }
+    
+    func testGetTokenLocked() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Account is locked for 15 minutes",
+                                 "error_code" : "account_locked"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.accountIsLocked)
+    }
+    
+    func testGetTokenDisabled() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Account is disabled",
+                                 "error_code" : "account_disabled"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.accountIsDisabled)
+    }
+    
+    func testGetTokenInvalide2FAToken() {
+        let responseString = """
+                               {
+                                 "error" : "unauthorized",
+                                 "error_description" : "Invalid token",
+                                 "error_code" : "2fa_invalid"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.outh2FAInvalid)
+    }
+    
+    func testGetTokenUnknownError() {
+        let responseString = """
+                               {
+                                 "error" : "unknown",
+                                 "error_description" : "Some Error"
+                               }
+                             """
+        
+        guard let data = responseString.data(using: .utf8) else { return XCTFail() }
+        
+        let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
+        
+        XCTAssertNil(token)
+        XCTAssertNil(expiration)
+        XCTAssertNotNil(error)
+        XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
+        XCTAssertEqual(error?.code, LoginService.loginError)
+        XCTAssertNotNil(error?.userInfo)
+        XCTAssertEqual(error?.userInfo[LoginService.errorDescription] as? String, "Some Error")
     }
     
 }
