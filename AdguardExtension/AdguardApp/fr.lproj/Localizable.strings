@@ -318,9 +318,6 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Désactivé dans les paramètres de Safari";
 
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Vérification des mises à jour...";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "La limite de %1$@ règles est atteinte. L'application peut ne pas fonctionner correctement. Veuillez désactiver les règles en excès. Actuellement %2$@ sur %3$@ règles sont utilisées ; %4$@ règles sont désactivées.";
 

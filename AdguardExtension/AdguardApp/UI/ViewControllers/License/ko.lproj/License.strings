@@ -1,6 +1,12 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard 프리미엄";
 
+/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "인증 앱의 코드:";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
+"5Ay-kq-RuV.text" = "계정이 없나요?";
+
 /* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
 "5iB-q7-5l8.text" = "DNS 보호";
 
@@ -16,14 +22,14 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "라이선스를 가지고 있습니다";
 
-/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "이메일 주소를 입력하세요";
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "이메일:";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "트래커 및 광고 차단";
 
-/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "adguard.com 로그인에 사용할 비밀번호를 입력해주세요.";
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "비밀번호:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
@@ -37,6 +43,9 @@
 /* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "당신의 개인 정보의 중요함";
 
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
+"aDc-NB-78y.normalTitle" = "등록";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "로그인";
 
@@ -49,6 +58,9 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "무료로 사용해보세요";
 
+/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
+"ltL-YJ-ZeT.normalTitle" = "비밀번호를 잊어버렸나요?";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "구매 내역 복구";
 
@@ -57,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "사용자 정의 필터";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "확인";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "로그인";

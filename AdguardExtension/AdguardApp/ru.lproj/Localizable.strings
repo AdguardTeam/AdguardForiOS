@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "ПРОБНЫЙ ПЕРИОД";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "КУПИТЬ";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
 
@@ -273,6 +276,9 @@
 /* login error message */
 "login_error_message" = "При входе в систему произошла ошибка";
 
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Премиум — это платный сервис с ежегодной подпиской. Средства спишутся с вашего аккаунта iTunes после подтверждения покупки. <br>• Подписка обновляется автоматически (и происходит списывание средств), если не будет отменена по крайней мере за 24 часа до окончания текущего периода. <br>• Управлять подписками и отменить автоматическое продление можно, перейдя в ваш аккаунт iTunes после приобретения подписки.<br><br><a href=%1$@>Политика конфиденциальности</a> <br><br><a href=%2$@>Условия использования</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "ОК";
 
@@ -312,14 +318,14 @@
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Основные настройки";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Вам необходимо сначала включить VPN";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ правил используются";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Отключено в настройках Safari";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Проверка обновлений...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Превышен лимит в %1$@ правил. Приложение может работать некорректно. Пожалуйста, отключите лишние правила. В настоящий момент используются %2$@ из %3$@ правил; %4$@ правил отключены.\n";
@@ -368,3 +374,12 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Версия";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих устройствах!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "Нет соединения с интернетом";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Пожалуйста, подключитесь к интернету, чтобы начать пробный период";

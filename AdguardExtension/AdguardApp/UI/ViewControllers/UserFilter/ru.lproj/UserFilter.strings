@@ -13,9 +13,6 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "СОХРАНИТЬ";
 
-/* Class = "UIButton"; normalTitle = "Select all"; ObjectID = "DLT-c2-7eC"; */
-"DLT-c2-7eC.normalTitle" = "Выбрать все";
-
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Редактировать";
 
@@ -28,17 +25,11 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "ОТМЕНА";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "c5a-s3-YPd"; */
-"c5a-s3-YPd.normalTitle" = "Выбрать";
-
 /* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
 "cce-mi-paP.normalTitle" = "Очистить";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "ДОБАВИТЬ";
-
-/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "iuK-dC-RKf"; */
-"iuK-dC-RKf.normalTitle" = "Удалить";
 
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
 "lE1-GD-Qr5.normalTitle" = "Редактировать";

@@ -1,6 +1,12 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard 高級版";
 
+/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "來自驗證應用程式的代碼：";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
+"5Ay-kq-RuV.text" = "沒有一個帳戶嗎？";
+
 /* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
 "5iB-q7-5l8.text" = "DNS 隱私";
 
@@ -16,14 +22,14 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "您有一個授權";
 
-/* Class = "UILabel"; text = "Enter your e-mail here"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "於此輸入您的電子郵件地址";
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "電子郵件地址：";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "封鎖更多的廣告 & 追蹤器";
 
-/* Class = "UILabel"; text = "You will have to enter your password to log in on adguard.com"; ObjectID = "Q7Q-j1-fN4"; */
-"Q7Q-j1-fN4.text" = "您將必須輸入您的密碼以於 adguard.com 上登入";
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "密碼：";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "至我的帳戶";
@@ -37,6 +43,9 @@
 /* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "保護您個人的資料";
 
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
+"aDc-NB-78y.normalTitle" = "註冊";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "登入";
 
@@ -49,6 +58,9 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "免費地試用";
 
+/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
+"ltL-YJ-ZeT.normalTitle" = "弄丟密碼了嗎？";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "回復購買";
 
@@ -57,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "自訂的過濾器";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "確認";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "登入";
