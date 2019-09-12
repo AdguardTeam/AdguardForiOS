@@ -2283,8 +2283,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray *filters = [NSMutableArray array];
     
-    if (!db)
+    if (!db){
+        DDLogError(@"NULL was passed instead of db property, filtersFromDb function in AESAntibanner");
         return filters;
+    }
     
     @autoreleasepool {
         
@@ -2471,6 +2473,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
         FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(FilterGroupId.custom)];
         groupExists = [result next];
+        [result close];
     }];
     
     if (groupExists) {
