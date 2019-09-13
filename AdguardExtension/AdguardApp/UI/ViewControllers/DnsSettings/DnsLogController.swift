@@ -126,7 +126,9 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
             return true
         }
 
-        if logRecord.answer!.contains("0.0.0.0") || logRecord.answer!.contains("127.0.0.1") {
+        if logRecord.answer!.contains("0.0.0.0") ||
+            logRecord.answer!.contains("127.0.0.1") ||
+            logRecord.answer!.contains("[::]")  {
             return true
         }
 
