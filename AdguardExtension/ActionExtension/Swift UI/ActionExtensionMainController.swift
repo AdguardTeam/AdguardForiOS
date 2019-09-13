@@ -138,9 +138,7 @@ class ActionExtensionMainController: UITableViewController {
         }
         // disable filtering (add to whitelist)
         else if domainEnabled{
-            let domainObject = AEWhitelistDomainObject(domain: domainName!)
-            guard let domObj = domainObject else { return }
-            contentBlockerService!.addWhitelistRule(domObj.rule) { [weak self] (error) in
+            contentBlockerService!.addWhitelistDomain(domainName!) { [weak self] (error) in
                 guard let sSelf = self else { return }
                 if error != nil {
                     sSelf.enabledSwitch.isOn = sSelf.domainEnabled
@@ -151,13 +149,7 @@ class ActionExtensionMainController: UITableViewController {
         }
         // enable filtering (remove from whitelist)
         else {
-            let domainObject = AEWhitelistDomainObject(domain: domainName!)
- 
-            guard let domObj = domainObject else {
-                self.enabledSwitch.isOn = self.domainEnabled
-                return
-            }
-            self.contentBlockerService!.removeWhitelistRule(domObj.rule) {[weak self] (error) in
+            self.contentBlockerService!.removeWhitelistDomain(domainName!) {[weak self] (error) in
                 guard let sSelf = self else { return }
                 if error != nil {
                     sSelf.enabledSwitch.isOn = sSelf.domainEnabled
