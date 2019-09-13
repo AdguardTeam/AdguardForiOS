@@ -43,7 +43,7 @@ class SafariRule: Equatable {
     // create new rule
     init(domains: [String], action:Action) {
         self.action = action
-        self.domains = domains.map { "*\($0)" }
+        self.domains = domains.map { "*\($0)".lowercased().punycodeEncoded() }
     }
     
     // parse rule from Dictionary
@@ -111,14 +111,14 @@ class SafariRule: Equatable {
         if domains == nil {
             domains = [String]()
         }
-        domains?.append("*\(domain)")
+        domains?.append("*\(domain)".lowercased().punycodeEncoded())
     }
     
     func removeDomain(_ domain: String)->Bool{
         
         if domains == nil { return false }
         var indexToRemove: Int?
-        let searchDomain = "*\(domain)"
+        let searchDomain = "*\(domain)".lowercased().punycodeEncoded()
         for (index, currentDomain) in domains!.enumerated() {
             if searchDomain == currentDomain {
                 indexToRemove = index

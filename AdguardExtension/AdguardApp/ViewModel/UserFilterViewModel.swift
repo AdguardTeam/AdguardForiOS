@@ -544,6 +544,7 @@ class UserFilterViewModel: NSObject {
         let oldRules = allRules
         let oldRuleObjects = ruleObjects
         
+        let domain = rules[index].rule
         willChangeValue(for: \.rules)
         allRules.remove(at: index)
         ruleObjects.remove(at: index)
@@ -551,7 +552,7 @@ class UserFilterViewModel: NSObject {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        contentBlockerService.removeWhitelistDomain(rules[index].rule) { (error) in
+        contentBlockerService.removeWhitelistDomain(domain) { (error) in
             
             DispatchQueue.main.async {
                 if error == nil {
