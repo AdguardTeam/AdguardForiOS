@@ -19,6 +19,10 @@
 #import <objc/runtime.h>
 #import "NSString+Utils.h"
 #import "ACObject.h"
+#import "DDLog.h"
+#import "ACommons/ACLang.h"
+#import "ACommons/ACIO.h"
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ACDObject
@@ -105,10 +109,14 @@ static NSMutableDictionary *_propertyNamesForClasses;
             NSMutableDictionary *propertiesDict = [NSMutableDictionary dictionary];
             id obj;
             for (NSString *key in [self propertyNames]) {
+                @try {
+                    obj = [aDecoder decodeObjectForKey:key];
+                    if (obj)
+                        propertiesDict[key] = obj;
+                } @catch (NSException *exception) {
+                    DDLogError(@"An error occurred, while decoding object (initWithCoder initializer,  ACObject class), exception : %@", exception);
+                }
                 
-                obj = [aDecoder decodeObjectForKey:key];
-                if (obj)
-                    propertiesDict[key] = obj;
             }
             if ([propertiesDict count])
                 [self setValuesForKeysWithDictionary:propertiesDict];
