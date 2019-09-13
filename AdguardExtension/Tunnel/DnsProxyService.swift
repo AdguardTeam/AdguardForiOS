@@ -37,11 +37,12 @@ protocol DnsProxyServiceProtocol : NSObjectProtocol {
 
 class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
-    // set it to 3000 to make sure we will quickly fallback if needed
-    private let timeout = 3000
+    // set it to 2000 to make sure we will quickly fallback if needed
+    private let timeout = 2000
     private var proxy: MobileDNSProxy?
     private var queues: [DispatchQueue] = []
     private var lastQueue = 0
+    private var queued = 0
     private let dnsRecordsWriter: DnsLogRecordsWriterProtocol;
     
     private let workingQueue = DispatchQueue(label: "dns proxy service working queue")
@@ -124,9 +125,10 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         
         workingQueue.async { [weak self] in
             
+            DDLogInfo("(DnsProxyService) - queue size is \(self?.queued ?? 0)")
             self?.stopped = true
-            
-            // wait until allready started tasks will be ended
+
+            // wait until already started tasks will be ended
             self?.resolveGroup.wait()
             
             do {
@@ -160,12 +162,13 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             sSelf.resolveGroup.enter()
             
             sSelf.lastQueue = (sSelf.lastQueue + 1) % sSelf.queues.count
+            sSelf.queued += 1
             let queue = sSelf.queues[sSelf.lastQueue]
-            
+
             queue.async {
-                
                 defer {
                     sSelf.resolveGroup.leave()
+                    sSelf.queued -= 1
                 }
                 
                 do {
@@ -178,7 +181,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                     }
                 }
                 catch {
-                    DDLogError("(DnsProxy) resolve error: \(error) ")
+                    DDLogError("(DnsProxyService) resolve error: \(error) ")
+                    DDLogInfo("(DnsProxyService) - queue size is \(sSelf.queued)")
                 }
             }
         }

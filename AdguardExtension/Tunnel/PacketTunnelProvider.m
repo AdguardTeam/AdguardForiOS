@@ -64,7 +64,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
 #define V_DNSPROXY_LOCAL_ADDDRESS_IPV6          @"::1"
 
-#define DNS_PROXY_MAX_QUEUES 5
+#define DNS_PROXY_MAX_QUEUES 10
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
