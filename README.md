@@ -126,7 +126,7 @@ Actions below are supposed to be used from CI only:
 This software wouldn't have been possible without:
 
  * [Go](https://golang.org/dl/) and it's library:
-   * [dnsproxy](https://github.com/AdguardTeam/dnsproxy) v0.18.2
+   * [dnsproxy](https://github.com/AdguardTeam/dnsproxy) v0.19.3
  * [StaticDataTableViewController](https://github.com/peterpaulis/StaticDataTableViewController) by peterpaulis
  * [GZIP](https://github.com/nicklockwood/GZIP) by nicklockwood
  * [Reachability component](https://github.com/tonymillion/Reachability) by Tony Million
