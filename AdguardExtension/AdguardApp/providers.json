@@ -84,7 +84,6 @@
         "dot"
       ],
       "features": [
-        "secure",
         "no_logs"
       ],
       "website": "https://www.cloudflare.com/dns/",
