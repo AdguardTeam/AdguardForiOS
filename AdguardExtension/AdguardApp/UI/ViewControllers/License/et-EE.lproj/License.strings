@@ -1,6 +1,12 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
+/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Autoriseerimisäpi kood:";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
+"5Ay-kq-RuV.text" = "Pole veel kontot?";
+
 /* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
 "5iB-q7-5l8.text" = "DNS Privaatsus";
 
@@ -16,8 +22,14 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "Sul on litsents";
 
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "E-post:";
+
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "BLOKI ROHKEM REKLAAMI JA JÄLGITAJAID";
+
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "Parool:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "AVA MINU KONTO";
@@ -31,6 +43,9 @@
 /* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "Kaitse oma privaatseid andmeid";
 
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
+"aDc-NB-78y.normalTitle" = "REGISTREERU";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "LOGI SISSE";
 
@@ -43,6 +58,9 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "PROOVI TASUTA";
 
+/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
+"ltL-YJ-ZeT.normalTitle" = "Unustasid parooli?";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Taasta ost";
 
@@ -51,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Kohandatud filtrid";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "KINNITA";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "logi sisse";
