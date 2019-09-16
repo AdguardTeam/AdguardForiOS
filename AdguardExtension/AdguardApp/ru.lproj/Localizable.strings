@@ -279,6 +279,9 @@
 /* purchase secription format */
 "purchase_description_format" = "AdGuard Премиум — это платный сервис с ежегодной подпиской. Средства спишутся с вашего аккаунта iTunes после подтверждения покупки. <br>• Подписка обновляется автоматически (и происходит списывание средств), если не будет отменена по крайней мере за 24 часа до окончания текущего периода. <br>• Управлять подписками и отменить автоматическое продление можно, перейдя в ваш аккаунт iTunes после приобретения подписки.<br><br><a href=%1$@>Политика конфиденциальности</a> <br><br><a href=%2$@>Условия использования</a>";
 
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Политика конфиденциальности</a> <br><br><a href=%2$@>Условия использования</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "ОК";
 
@@ -326,6 +329,9 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Отключено в настройках Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Проверка обновлений...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Превышен лимит в %1$@ правил. Приложение может работать некорректно. Пожалуйста, отключите лишние правила. В настоящий момент используются %2$@ из %3$@ правил; %4$@ правил отключены.\n";
@@ -383,3 +389,18 @@
 
 /* (TrialController) alert text message if there is no internet */
 "no_internet_message" = "Пожалуйста, подключитесь к интернету, чтобы начать пробный период";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Неверный адрес почты или пароль";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Личный кабинет заблокирован";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Личный кабинет временно недоступен";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Неверный токен 2FA";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "Продолжая использование, вы принимаете <a href=“%@“>Условия использования</a> и <a href=“%@“>Лицензионное соглашение</a>.";
