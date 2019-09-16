@@ -57,23 +57,19 @@ class MainViewModel {
         self.error = error
         
         antibanner.beginTransaction()
-        let result = antibanner.startUpdatingForced(true, interactive: true)
-        
-        if (!result) {
-            antibanner.rollbackTransaction()
-        }
+        antibanner.startUpdatingForced(true, interactive: true)
     }
     
     // MARK: - private functions
     
     private func observeAntibanerState(){
-        let observer1 = NotificationCenter.default.addObserver(forName: NSNotification.Name.ASAntibannerStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer1 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
             self?.start?()
         }
         observers.append(observer1)
-        let observer2 = NotificationCenter.default.addObserver(forName: NSNotification.Name.ASAntibannerFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer2 = NotificationCenter.default.addObserver(forName: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
             
-            let updatedMetas: Array<Any>? = (note.userInfo?[ASAntibannerUpdatedFiltersKey]) as! Array<Any>?
+            let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as! Array<Any>?
             
             var message: String?
             if updatedMetas != nil && updatedMetas!.count > 0 {
@@ -87,7 +83,7 @@ class MainViewModel {
             self?.finish?(message!)
         }
         observers.append(observer2)
-        let observer3 = NotificationCenter.default.addObserver(forName: NSNotification.Name.ASAntibannerFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer3 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
             
             if self?.antibanner.inTransaction() ?? false {
                 self?.antibanner.rollbackTransaction()
