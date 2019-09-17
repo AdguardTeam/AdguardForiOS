@@ -41,6 +41,9 @@ class StartupService : NSObject{
         let networkService = ACNNetworking()
         ServiceLocator.shared.addService(service: networkService)
         
+        let asDataBase = ASDatabase()
+        ServiceLocator.shared.addService(service: asDataBase)
+        
         let purchaseService = PurchaseService(network: networkService, resources: sharedResources)
         purchaseService.start()
         ServiceLocator.shared.addService(service: purchaseService)

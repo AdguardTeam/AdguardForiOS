@@ -72,6 +72,7 @@ typedef enum : NSUInteger {
     AEService * _aeService;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
+    ASDatabase* _asDataBase;
     
     BOOL _activateWithOpenUrl;
     
@@ -107,6 +108,8 @@ typedef enum : NSUInteger {
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
         _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+        _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
+        
         
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
@@ -127,7 +130,7 @@ typedef enum : NSUInteger {
         self.userDefaultsInitialized = NO;
         
         // Init database
-        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
+        [_asDataBase initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
         
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
@@ -179,16 +182,15 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     
     //------------ Checking DB status -----------------------------
-    ASDatabase *dbService = [ASDatabase singleton];
     if (dbService.error) {
         
         DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
         //        [self dbFailure];
     }
-    else if (!dbService.ready){
+    else if (!_asDataBase.ready){
         
         DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
-        [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+        [_asDataBase addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
     }
     //--------------------- Start Services ---------------------------
     else{
@@ -522,12 +524,11 @@ typedef enum : NSUInteger {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
     // DB DELAYED READY
-    ASDatabase * dbService = [ASDatabase singleton];
     if ([object isEqual:dbService]
         && [keyPath isEqualToString:@"ready"]
         && dbService.ready) {
         
-        [dbService removeObserver:self forKeyPath:@"ready"];
+        [_asDataBase removeObserver:self forKeyPath:@"ready"];
         
         //--------------------- Start Services ---------------------------
         [_aeService start];
