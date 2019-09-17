@@ -66,7 +66,7 @@ extern NSString * _Nonnull ASAntibannerUpdateFilterFromUINotification;
 /// When filter enable status did change
 extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
-@class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed;
+@class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed, ASDatabase;
 @class AASCustomFilterParserResult;
 @protocol ACNNetworkingProtocol;
 
@@ -369,7 +369,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  init
  */
-- (nonnull instancetype) initWithNetworking:(nonnull id<ACNNetworkingProtocol>) networking;
+- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking asDataBase: (nonnull ASDatabase *)asDatabase;
 
 /**
  Indicator that metadata and count of filters are out of date.

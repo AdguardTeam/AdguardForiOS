@@ -93,18 +93,21 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     UIBackgroundTaskIdentifier _transactionBackroundTaskID;
     
     id<ACNNetworkingProtocol> _networking;
+    
+    ASDatabase *_asDataBase;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking{
+- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking asDataBase: (ASDatabase *)asDatabase {
     
     self = [super init];
     if (self) {
         
         _networking = networking;
+        _asDataBase = asDatabase;
         observingReachabilityStatus = observingDbStatus = NO;
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
@@ -161,7 +164,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     if (observingDbStatus) {
-        [[ASDatabase singleton] removeObserver:self forKeyPath:@"ready"];
+        [_asDataBase removeObserver:self forKeyPath:@"ready"];
         observingDbStatus = NO;
     }
 
@@ -210,7 +213,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     if (serviceEnabled) {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
             
@@ -247,7 +250,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray *filterIDs = [NSMutableArray array];
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
         
@@ -269,7 +272,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray *filterIDs = [NSMutableArray array];
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         FMResultSet *result = [db executeQuery:@"select group_id from filter_groups where is_enabled = 1"];
         
@@ -300,7 +303,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSArray<NSNumber*> *)activeGroupIDs {
     NSMutableArray *groupIDs = [NSMutableArray array];
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         FMResultSet *result = [db executeQuery:@"select group_id from filter_groups where is_enabled = 1"];
         
@@ -317,7 +320,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSArray<NSNumber*> *)activeFilterIDsByGroupID:(NSNumber*)groupID {
     NSMutableArray *filterIDs = [NSMutableArray array];
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         FMResultSet *result = [db executeQuery: [NSString stringWithFormat: @"select filter_id from filters where is_enabled = 1 and group_id = %@", groupID]];
         
@@ -340,7 +343,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     if (serviceEnabled) {
         
         __block BOOL checkResult = NO;
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             FMResultSet *result = [db executeQuery:@"select * from filters where filter_id = ? limit 1", filterId];
             
@@ -363,7 +366,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     if (serviceEnabled) {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             FMResultSet *result = [db executeQuery:@"select filter_id from filters where filter_id = ? and is_enabled = 1", filterId];
             if ([result next]){
@@ -382,7 +385,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     __block NSArray *groups;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         groups = [self groupsFromDb:db];
     }];
@@ -395,7 +398,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     __block ASDGroupsI18n *i18n = _dbGroupsI18nCache;
     if (!i18n) {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             if (!_dbGroupsI18nCache) {
                 _dbGroupsI18nCache = [self groupsI18nFromDb:db];
@@ -411,7 +414,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     __block NSArray *filters;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         filters = [self filtersFromDb:db];
     }];
@@ -423,14 +426,14 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     __block NSArray *filters;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         filters = [self filtersFromDb:db];
     }];
     
     __block NSArray *groups;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
 
         groups = [self groupsFromDb:db];
     }];
@@ -458,7 +461,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSArray<ASDFilterMetadata *> *)filtersForGroup:(NSNumber *)groupId {
     __block NSArray *filters;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         filters = [self filtersFromDb:db groupId:groupId];
     }];
@@ -471,7 +474,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     __block ASDFiltersI18n *i18n = _dbFiltersI18nCache;
     if (!i18n) {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             if (!_dbFiltersI18nCache) {
                 _dbFiltersI18nCache = [self filtersI18nFromDb:db];
             }
@@ -485,7 +488,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSArray<ASDFilterRule*> *)rulesForFilter:(NSNumber *)filterId{
     
     __block NSArray *rules;
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         rules = [self rulesFromDb:db filterId:filterId];
     }];
@@ -496,7 +499,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (int)rulesCountForFilter:(NSNumber *)filterId {
     
     __block int rulesCount;
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         rulesCount = [self rulesCountFromDb:db filterId:filterId];
     }];
@@ -511,7 +514,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_sync(workQueue, ^{
         
         __block BOOL result = NO;
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
@@ -527,7 +530,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_async(workQueue, ^{
         
         __block BOOL result = NO;
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
@@ -552,7 +555,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = NO;
             [self setGroupEnabled:db enabled:enabled groupId:groupId];
@@ -572,7 +575,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while (len && count >= (index + len)) {
             
             ruleIdsSegment = [ruleIds objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, len)]];
-            [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+            [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 *rollback = NO;
                 NSString *queryString = [NSString stringWithFormat:@"update filter_rules set is_enabled = %i where filter_id = %@ and rule_id in (%@)", enabled, filterId, [ruleIdsSegment componentsJoinedByString:@", "]];
@@ -598,7 +601,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{ @autoreleasepool {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = YES;
             FMResultSet *result = [db executeQuery:@"select editable from filters where filter_id = ?", rule.filterId];
@@ -654,7 +657,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{ @autoreleasepool {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = YES;
             FMResultSet *result = [db executeQuery:@"select editable from filters where filter_id = ?", rule.filterId];
@@ -705,7 +708,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{ @autoreleasepool {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = YES;
             FMResultSet *result = [db executeQuery:@"select editable from filters where filter_id = ?", filterId];
@@ -753,7 +756,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     dispatch_sync(workQueue, ^{ @autoreleasepool {
         
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             *rollback = YES;
             FMResultSet *result = [db executeQuery:@"select editable from filters where filter_id = ?", filterId];
@@ -837,7 +840,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             // Trying obtain filters metadata from default DB.
             ABECFilterClientMetadata *metadata = [ABECFilterClientMetadata new];
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+            [_asDataBase queryDefaultDB:^(FMDatabase *db) {
                 
                 metadata.filters = [self filtersFromDb:db];
                 metadata.groups = [self groupsFromDb:db];
@@ -883,7 +886,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             // Trying obtain filters metadata from default DB.
             ABECFilterClientLocalization *i18n = [ABECFilterClientLocalization new];
-            [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+            [_asDataBase queryDefaultDB:^(FMDatabase *db) {
                 
                 i18n.filters = [self filtersI18nFromDb:db];
                 i18n.groups = [self groupsI18nFromDb:db];
@@ -928,12 +931,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
                 __block NSArray *defaultDbFilters;
                 
-                [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+                [_asDataBase queryDefaultDB:^(FMDatabase *db) {
                     
                     defaultDbFilters = [self filtersFromDb:db];
                 }];
                 
-                [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+                [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                     
                     *rollback = YES;
                     
@@ -1017,9 +1020,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSNumber*) nextCustomFilterId {
     __block NSInteger filterId = ASDF_BASE_CUSTOM_FILTER_ID;
     dispatch_sync(workQueue, ^{
-    
-        ASDatabase *theDB = [ASDatabase singleton];
-        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             FMResultSet *result = [db executeQuery:@"select max(filter_id) from filters;"];
             if ([result next]) {
                 NSInteger value = [result longLongIntForColumnIndex:0];
@@ -1051,8 +1052,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         completionBlock();
     }
     
-    ASDatabase *theDB = [ASDatabase singleton];
-    if ([self updateFilter:parserResult.meta rules:parserResult.rules db:theDB]) {
+    if ([self updateFilter:parserResult.meta rules:parserResult.rules db:_asDataBase]) {
         // Notifying to all, that filter rules were updated
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -1067,9 +1067,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     __block NSNumber *filterId = nil;
     
     dispatch_sync(workQueue, ^{
-        ASDatabase *theDB = [ASDatabase singleton];
         
-        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             FMResultSet *result = [db executeQuery:@"select filter_id from filters where subscriptionUrl = ?", url];
             if ([result next]) {
                 filterId = [NSNumber numberWithInteger: [result longLongIntForColumnIndex:0]];
@@ -1130,7 +1129,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     __block BOOL removed = NO;
     
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         *rollback = YES;
         
@@ -1233,7 +1232,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (NSDate *)filtersLastUpdateTime {
     
     __block NSDate* date = nil;
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         FMResultSet *result = [db executeQuery:@"select max(last_update_time) from filters where is_enabled = 1"];
         if([result next]) {
             NSString* dateString = result[@"max(last_update_time)"];
@@ -1253,8 +1252,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (void)beginTransaction{
     
-    [[ASDatabase singleton] isolateQueue:workQueue];
-    [[ASDatabase singleton] readUncommited:YES];
+    [_asDataBase isolateQueue:workQueue];
+    [_asDataBase readUncommited:YES];
     dispatch_sync(workQueue, ^{
         
         if (_inTransaction) {
@@ -1266,7 +1265,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             [self rollbackTransactionInternal:YES];
         }];
         
-        [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
+        [_asDataBase rawExec:^(FMDatabase *db) {
             [db beginDeferredTransaction];
         }];
         
@@ -1279,7 +1278,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_sync(workQueue, ^{
         if (_inTransaction) {
             
-            [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
+            [_asDataBase rawExec:^(FMDatabase *db) {
                 
                 [db commit];
             }];
@@ -1291,8 +1290,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         _inTransaction = NO;
     });
-    [[ASDatabase singleton] readUncommited:NO];
-    [[ASDatabase singleton] resetIsolationQueue:workQueue];
+    [_asDataBase readUncommited:NO];
+    [_asDataBase resetIsolationQueue:workQueue];
     
 }
 
@@ -1306,7 +1305,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_sync(workQueue, ^{
         
         if (_inTransaction) {
-            [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
+            [_asDataBase rawExec:^(FMDatabase *db) {
                 
                 [db rollback];
             }];
@@ -1319,8 +1318,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         _inTransaction = NO;
     });
-    [[ASDatabase singleton] readUncommited:NO];
-    [[ASDatabase singleton] resetIsolationQueue:workQueue];
+    [_asDataBase readUncommited:NO];
+    [_asDataBase resetIsolationQueue:workQueue];
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -1419,7 +1418,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         dispatch_sync(workQueue, ^{
             
-            [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+            [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 BOOL result = [self insertI18nIntoDb:db filters:i18n.filters groups:i18n.groups];
                 if (result) {
@@ -1457,10 +1456,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     // return if no antibanner filters in DB
     if (!(serviceInstalled && serviceEnabled))
         return;
-    
-    ASDatabase *theDB = [ASDatabase singleton];
-    
-    if (theDB.ready){
+
+    if (_asDataBase.ready){
         
         @autoreleasepool {
             
@@ -1541,15 +1538,14 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     else if (!observingDbStatus){
         
         observingDbStatus = YES;
-        [theDB addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+        [_asDataBase addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
     }
 }
 
 - (void)updateInInteractiveModeWithMetadataForUpdate:(NSSet *)metadataForUpdate {
     
     @autoreleasepool {
-        
-        ASDatabase *theDB = [ASDatabase singleton];
+    
         ABECFilterClient *filterClient = [ABECFilterClient singleton];
         
         ASDFilterMetadata *filterMeta;
@@ -1559,7 +1555,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         ABECFilterClientLocalization *i18n = [filterClient loadI18nWithTimeoutInterval:nil];
         if (i18n) {
             
-            [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 BOOL result = [self insertI18nIntoDb:db filters:i18n.filters groups:i18n.groups];
                 if (result) {
@@ -1624,13 +1620,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray<ASDFilterMetadata *>* filtersToUpdate = [NSMutableArray new];
     
-    ASDatabase *theDB = [ASDatabase singleton];
-    
-    if (!theDB.ready) {
+    if (!_asDataBase.ready) {
         return;
     }
     
-    [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
         FMResultSet *result = [db executeQuery: @"select * from filters where group_id = ?" , @(FilterGroupId.custom)];
         
@@ -1741,8 +1735,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         @autoreleasepool {
             
-            ASDatabase *theDB = [ASDatabase singleton];
-            
             NSMutableArray *filtersMetadataUpdateOnly = [NSMutableArray arrayWithCapacity:metadata.filters.count];
             
             __block BOOL rulesUpdated = NO;
@@ -1772,7 +1764,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         continue;
                     }
                     // needs update filter (metadata and rules)
-                    [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+                    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                         
                         *rollback = YES;
                         
@@ -1807,7 +1799,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             }
             
             //update metadata
-            [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 BOOL result = [self insertMetadataIntoDb:db groups:metadata.groups];
                 result = result && [self insertMetadataIntoDb:db filters:metadata.filters];
@@ -1890,15 +1882,14 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (BOOL) enableGroupsWithEnabledFilters {
     
     __block BOOL result = NO;
-    ASDatabase *theDB = [ASDatabase singleton];
     
     dispatch_sync(workQueue, ^{
         
-        if (!theDB.ready) {
+        if (!_asDataBase.ready) {
             return;
         }
         
-        [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             NSMutableSet *groupsToEnable = [NSMutableSet new];
             
@@ -1937,17 +1928,15 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     if (serviceInstalled)
         return YES;
     
-    ASDatabase *theDB = [ASDatabase singleton];
-    
     ASSIGN_WEAK(self);
     
     dispatch_async(workQueue, ^{ @autoreleasepool {
         
         ASSIGN_STRONG(self);
         
-        if (theDB.ready){
+        if (_asDataBase.ready){
             
-            [theDB exec:^(FMDatabase *db, BOOL *rollback) {
+            [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 *rollback = YES;
                 
@@ -1998,7 +1987,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         else if (!observingDbStatus){
             
             USE_STRONG(self)->observingDbStatus = YES;
-            [theDB addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+            [_asDataBase addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
             
         }
         
@@ -2017,7 +2006,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         __block NSArray *groups = nil;
         __block ASDGroupsI18n *groupsI18n = nil;
         // Trying obtain objects from default DB.
-        [[ASDatabase singleton] queryDefaultDB:^(FMDatabase* db) {
+        [_asDataBase queryDefaultDB:^(FMDatabase* db) {
             
             filters = [self filtersFromDb:db];
             filtersI18n = [self filtersI18nFromDb:db];
@@ -2163,7 +2152,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     __block NSArray *rules;
     
     // Trying obtain filter rules from default DB
-    [[ASDatabase singleton] queryDefaultDB:^(FMDatabase *db) {
+    [_asDataBase queryDefaultDB:^(FMDatabase *db) {
         FMResultSet *resultSet = [db executeQuery:@"select * from filter_rules where filter_id = ?", filterId];
         if (resultSet) {
             
@@ -2450,7 +2439,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (BOOL)insertCustomGroup {
     __block BOOL result = NO;
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback)  {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback)  {
         result = [self insertCustomGroupInDb:db];
         *rollback = !result;
     }];
@@ -2470,7 +2459,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (BOOL) addCustomGroupIfNeeded {
     
     __block BOOL groupExists = NO;
-    [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(FilterGroupId.custom)];
         groupExists = [result next];
         [result close];
@@ -2551,7 +2540,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         // update production DB
         __block BOOL result = NO;
-        [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
             BOOL result = [self insertI18nIntoDb:db filters:[[ASDFiltersI18n alloc] initWithLocalizations:localizations] groups:nil];
             
@@ -2594,7 +2583,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (void)setServiceToReady{
     
     // Notifying to all, that filter rules may be obtained
-    if (!serviceReady && [[ASDatabase singleton] ready]){
+    if (!serviceReady && [_asDataBase ready]){
         
         serviceReady = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -2661,14 +2650,13 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
     // DB DELAYED READY
-    ASDatabase * dbService = [ASDatabase singleton];
-    if ([object isEqual: dbService]
+    if ([object isEqual: _asDataBase]
         && [keyPath isEqualToString:@"ready"]
-        && dbService.ready) {
+        && _asDataBase.ready) {
         
         dispatch_async(workQueue, ^{
             
-            [dbService removeObserver:self forKeyPath:@"ready"];
+            [_asDataBase removeObserver:self forKeyPath:@"ready"];
             observingDbStatus = NO;
             
             if (serviceInstalled)

@@ -53,6 +53,7 @@ typedef enum {
     AESAntibanner *antibanner;
     id<AESharedResourcesProtocol> _sharedResources;
     ContentBlockerService *_contentBlockerService;
+    ASDatabase *_asDataBase;
     
     NSMutableArray *_onReadyBlocks;
     ReadyFlagType _readyFlags;
@@ -75,7 +76,8 @@ typedef enum {
 
 - (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService
                    resources:(id<AESharedResourcesProtocol>)resources
-                  networking:(id)networking{
+                  networking:(id)networking
+                  asDataBase: (ASDatabase *) asDataBase{
     
     
     self = [super init];
@@ -96,8 +98,8 @@ typedef enum {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibanNotify:) name:ASAntibannerInstalledNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibanNotify:) name:ASAntibannerNotInstalledNotification object:nil];
         
-        
-        antibanner = [[AESAntibanner alloc] initWithNetworking: networking];
+        _asDataBase = asDataBase;
+        antibanner = [[AESAntibanner alloc] initWithNetworking:networking asDataBase:asDataBase];
         _readyLock = [NSLock new];
         _contentBlockerService.antibanner = antibanner;
     }
