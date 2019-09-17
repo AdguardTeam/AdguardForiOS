@@ -69,6 +69,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     private func updateTheme () {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
         deleteButton.backgroundColor = theme.backgroundColor
         guard let deleteButtonShadowAlpha = deleteButton.layer.shadowColor?.alpha else { return }
         deleteButton.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(deleteButtonShadowAlpha).cgColor : UIColor.black.withAlphaComponent(deleteButtonShadowAlpha).cgColor

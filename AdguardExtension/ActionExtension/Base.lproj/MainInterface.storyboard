@@ -223,7 +223,7 @@
         <!--Main Loader-->
         <scene sceneID="H48-ka-Utz">
             <objects>
-                <viewController id="tQP-Ou-q2c" userLabel="Main Loader" customClass="ActionViewController" sceneMemberID="viewController">
+                <viewController id="tQP-Ou-q2c" userLabel="Main Loader" customClass="ActionViewController" customModule="ActionExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7bn-px-7jS"/>
                         <viewControllerLayoutGuide type="bottom" id="d0T-2N-Ccf"/>
@@ -232,45 +232,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vSc-6z-Tyo">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vSc-6z-Tyo">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="sU7-Ml-5r9"/>
                                     <constraint firstAttribute="height" constant="20" id="wc7-MJ-oQD"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iva-rc-H8x">
-                                <rect key="frame" x="137" y="321" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="SAS-BZ-Yxb" kind="custom" identifier="loader" customClass="AEAUILoaderSegue" id="odh-fO-Szs"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7D-Bz-7dZ">
                                 <rect key="frame" x="20" y="300" width="560" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxW-Cr-iPW">
+                                <rect key="frame" x="50" y="548" width="314" height="30"/>
+                                <state key="normal" title="CLOSE">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeAction:" destination="tQP-Ou-q2c" eventType="touchUpInside" id="zJF-UI-ubP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fxW-Cr-iPW" firstAttribute="top" secondItem="x7D-Bz-7dZ" secondAttribute="bottom" constant="100" id="1tJ-qB-ejX"/>
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="centerY" secondItem="Wqh-ks-max" secondAttribute="centerY" id="5eT-lC-Bt9"/>
                             <constraint firstItem="vSc-6z-Tyo" firstAttribute="centerY" secondItem="Wqh-ks-max" secondAttribute="centerY" id="Cum-xm-lja"/>
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="leading" secondItem="Wqh-ks-max" secondAttribute="leadingMargin" id="MRi-jv-w3q"/>
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="trailing" secondItem="Wqh-ks-max" secondAttribute="trailingMargin" id="VDM-1L-OS5"/>
+                            <constraint firstAttribute="trailing" secondItem="fxW-Cr-iPW" secondAttribute="trailing" constant="50" id="eUI-cw-J3j"/>
                             <constraint firstItem="vSc-6z-Tyo" firstAttribute="centerX" secondItem="Wqh-ks-max" secondAttribute="centerX" id="q7H-kH-dR1"/>
+                            <constraint firstItem="fxW-Cr-iPW" firstAttribute="centerX" secondItem="Wqh-ks-max" secondAttribute="centerX" id="vBY-PG-aBw"/>
                             <constraint firstItem="x7D-Bz-7dZ" firstAttribute="centerX" secondItem="Wqh-ks-max" secondAttribute="centerX" id="ycC-7M-jYJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Slh-lt-JH2"/>
                     <connections>
-                        <outlet property="actionButton" destination="iva-rc-H8x" id="OfA-mi-FB5"/>
                         <outlet property="loadIndicator" destination="vSc-6z-Tyo" id="UFv-Q8-BUz"/>
-                        <outlet property="messageLabel" destination="x7D-Bz-7dZ" id="SeU-0w-uhK"/>
+                        <outlet property="messageLabel" destination="x7D-Bz-7dZ" id="Yyp-kI-kJd"/>
+                        <segue destination="SAS-BZ-Yxb" kind="custom" identifier="loader" customClass="LoaderSegue" customModule="ActionExtension" customModuleProvider="target" id="QVc-FQ-0dT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETC-0I-fs7" userLabel="First Responder" sceneMemberID="firstResponder"/>

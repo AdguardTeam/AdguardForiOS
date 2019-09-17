@@ -87,7 +87,7 @@
     
     BOOL result = YES;
     
-    if ([to isEqualToNumber:@(3)]) {
+    if ([from compare:@(3)] == NSOrderedAscending)  {
         
         id<AEServiceProtocol> aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         AESAntibanner* antibanner = [aeService antibanner];

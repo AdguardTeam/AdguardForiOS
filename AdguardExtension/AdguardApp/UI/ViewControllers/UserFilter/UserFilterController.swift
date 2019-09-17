@@ -48,12 +48,9 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var rightButtonView: UIView!
     @IBOutlet weak var leftButtonStack: UIStackView!
 
-    @IBOutlet var selectButton: UIButton!
     @IBOutlet var editButton: RoundRectButton!
     @IBOutlet var exportButton: UIButton!
     @IBOutlet var importButton: UIButton!
-    @IBOutlet var deleteButton: RoundRectButton!
-    @IBOutlet var selectAllButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var saveButton: RoundRectButton!
     @IBOutlet var clearButton: RoundRectButton!
@@ -70,7 +67,6 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     enum BootomBarState {
         case normal
-        case select
         case edit
     }
     
@@ -124,21 +120,9 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
             updateBottomBar()
         }
     }
-    
-    // MARK: - pubilc methods
-    
-    func selectedRulesChanged() {
-        updateButtonStates()
-    }
-    
+
     // MARK: - Actions
-    
-    @IBAction func selectAction(_ sender: Any) {
-        tableController?.setCustomEditing(true)
-        barState = .select
-        updateBottomBar()
-    }
-    
+
     @IBAction func editAction(_ sender: Any) {
         textView.text = model.rules.map { $0.rule }.joined(separator: "\n")
         editMode(true)
@@ -168,23 +152,6 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     @IBAction func cancelSelectionAction(_ sender: Any) {
         cancelAction()
-    }
-    
-    @IBAction func deleteAction(_ sender: Any) {
-        model.deleteSelected(completionHandler: { [weak self] in
-            DispatchQueue.main.async {
-                self?.selectedRulesChanged()
-            }
-        }) { (message) in
-    
-        }
-        cancelAction()
-    }
-    
-    @IBAction func selectAllAction(_ sender: Any) {
-        model.selectAllRules(true)
-        tableController?.tableView.reloadData()
-        selectedRulesChanged()
     }
     
     @IBAction func saveAction(_ sender: Any) {
@@ -220,7 +187,6 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         barState = .normal
         model.selectAllRules(false)
         updateBottomBar()
-        selectedRulesChanged()
         editMode(false)
         textView.resignFirstResponder()
     }
@@ -242,12 +208,6 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
             
             leftButtonStack.addArrangedSubview(exportButton)
             leftButtonStack.addArrangedSubview(importButton)
-            
-        case .select:
-            
-            leftButtonStack.addArrangedSubview(deleteButton)
-            leftButtonStack.addArrangedSubview(selectAllButton)
-            
         case .edit:
             rightButton = cancelButton
             leftButtonStack.addArrangedSubview(saveButton)
@@ -260,25 +220,17 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         rigthButtonViewWidthConstraint.constant = rightButton.frame.size.width
         bottomBar.layoutSubviews()
         rightButton.frame = rightButtonView.bounds
-        
-        selectedRulesChanged()
     }
     
     private func updateTheme() {
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor
-        deleteButton.customHighlightedBackgroundColor = theme.selectedCellColor
         theme.setupTextView(textView)
         theme.setupLabel(helperLabel)
         textView.backgroundColor = theme.backgroundColor
     }
-    
-    private func updateButtonStates() {
-        deleteButton.isEnabled = model.rules.contains { $0.selected }
-        selectAllButton.isEnabled = model.rules.contains { !$0.selected }
-    }
-    
+
     private func showRuleAddedDialog() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleAddedController") as? RuleAddedController else { return }
         controller.modalPresentationStyle = .custom

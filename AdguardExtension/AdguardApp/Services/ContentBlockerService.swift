@@ -49,6 +49,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     // MARK: - private properties
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
+    private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
@@ -80,7 +81,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    @objc
     init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
         self.resources = resources
         self.safariService = safariService
@@ -136,74 +136,35 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     // MARK: - whitelist operations
     
     /**
-     Adds whitelist rule, modifies content blocking JSONs
+     Adds whitelist domain, modifies content blocking JSONs
      and replaces these JSONs in shared resources asynchronously.
      Method performs completionBlock when done on service working queue.
      */
-    @objc
-    func addWhitelistRule(_ rule: ASDFilterRule, completion: @escaping (Error?)->Void) {
+    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
-        processWhitelistRule(rule, completion: completion, processRules: {(rules) in
+        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
+            let rule = AEWhitelistDomainObject(domain: domain).rule
             return (rules + [rule], true)
         }, processData: { [weak self] (jsonData, jsonRuleData, contentBlocker) in
-            guard let sSelf = self else { return NSMutableData() }
+            guard let sSelf = self else { return Data() }
             
-            if jsonData.length > 1 {
+            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+            let overlimit = converted == limit
                 
-                let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-                let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-                if converted == limit {
-                    // remove last blocking rule from data
-                    
-                    if let json = try? JSONSerialization.jsonObject(with: jsonData as Data, options: []) {
-                        if var jsonArray = (json as? Array<Any>) {
-                            
-                            var indexToDelete: Int?
-                            
-                            for i in (0..<jsonArray.count).reversed() {
-                                guard let rule = jsonArray[i] as? Dictionary<String, Any> else { continue }
-                                guard let action = rule["action"] as? Dictionary<String, Any> else { continue }
-                                guard let type = action["type"] as? String else { continue }
-                                
-                                if type == "block" {
-                                    indexToDelete = i
-                                    break;
-                                }
-                            }
-                            
-                            if indexToDelete != nil {
-                                jsonArray.remove(at: indexToDelete!)
-                                if let newData = try? JSONSerialization.data(withJSONObject: jsonArray, options: []) {
-                                    jsonData.setData(newData)
-                                }
-                            }
-                        }
-                    }
-                    
-                    
-                }
-                
-                // must bes at least 2 symbols
-                jsonData.replaceBytes(in: NSRange(location: jsonData.length - 1, length: 1), withBytes:",")
-                jsonRuleData.withUnsafeBytes { dataBytes in
-                    jsonData.append(dataBytes + 1, length: jsonRuleData.count - 1)
-                }
-            }
-            else {
-                return NSMutableData(data: jsonRuleData)
-            }
+            let (resultData, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: domain, jsonData: jsonData as Data, overlimit: overlimit)
             
-            return jsonData
+            return resultData ?? Data()
         })
     }
     
     
     
-    @objc
-    func removeWhitelistRule(_ rule: ASDFilterRule, completion: @escaping (Error?)->Void) {
+    func removeWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
-        processWhitelistRule(rule, completion: completion, processRules: {(rules) in
+        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
             var found = false
+            let rule = AEWhitelistDomainObject(domain: domain).rule
             let resultRules = rules.filter() { (testRule) in
                 if rule.isEqualRuleText(testRule) {
                     found = true
@@ -212,53 +173,35 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return true
             }
             return (resultRules, found)
-        }, processData: { (jsonData, ruleData, _) in
+        }, processData: { [weak self] (jsonData, domain, _) in
+            guard let sSelf = self else { return Data() }
             
-            var jsonRuleData: NSData?
+            let (resultJsonData, _) = sSelf.rulesProcessor.removeWhitelistDomain(domain: domain, jsonData: jsonData)
             
-            ruleData.withUnsafeBytes { dataBytes in
-                jsonRuleData = NSData(bytes: dataBytes + 2, length: ruleData.count - 4)
-            }
-            
-            var loc = jsonData.range(of: jsonRuleData! as Data, options: .backwards, in: NSRange(location: 0, length: jsonData.length))
-            
-            if loc.location != NSNotFound {
-                // delete 2 chars before
-                if loc.location > 8 {
-                    loc.location -= 2
-                    loc.length += 2
-                }
-                
-                jsonData.replaceBytes(in: loc, withBytes: nil, length: 0)
-            }
-            
-            return jsonData
+            return resultJsonData ?? Data()
         })
     }
     
-    func replaceWhitelistRule(_ rule: ASDFilterRule, with newRule: ASDFilterRule, completion: @escaping (Error?)->Void) {
-        processWhitelistRule(rule, completion: completion, processRules: {(rules) in
+    func replaceWhitelistDomain(_ domain: String, with newDomain: String, completion: @escaping (Error?)->Void) {
+        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
             var found = false
+            let rule = AEWhitelistDomainObject(domain: domain).rule
             let resultRules = rules.map() { (testRule)->ASDFilterRule in
                 if rule.isEqualRuleText(testRule) {
                     found = true
-                    return newRule
+                    return AEWhitelistDomainObject(domain: newDomain).rule
                 }
                 return testRule
             }
             return (resultRules, found)
-        }, processData: { (jsonData, ruleData, _) in
+        }, processData: { [weak self] (jsonData, ruleData, _) in
+            guard let sSelf = self else { return jsonData }
             
-            let (convertResult, _) = self.convertOneRule(newRule)
+            let (removed, _) = sSelf.rulesProcessor.removeWhitelistDomain(domain: domain, jsonData: jsonData)
             
-            guard let jsonNewRule = convertResult![AESFConvertedRulesKey] as? String else {
-                return jsonData
-            }
-            let jsonNewRuleData = jsonNewRule.data(using: .utf8)!
+            let (result, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: newDomain, jsonData: removed ?? Data(), overlimit: false)
             
-            self.replaceJsonData(jsonData: jsonData, oldRuleData: ruleData, newRuleData: jsonNewRuleData)
-            
-            return jsonData
+            return result ?? Data()
         })
     }
     
@@ -308,40 +251,38 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - inverted whitelist rules
     
-    @objc
     func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
         processInvertedWhitelistDomain(processDomains: { (domains) -> ([String], Bool) in
             return (domains + [domain], true)
-        }, processData: { (jsonData, oldRuleData, newRuleData) -> NSMutableData in
+        }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
+            guard let sSelf = self else { return Data() }
+            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+            let overlimit = converted == limit
             
-            if jsonData.length > 1 {
-                self.replaceJsonData(jsonData: jsonData, oldRuleData: oldRuleData, newRuleData: newRuleData)
-                return jsonData
-            }
-            else {
-                return NSMutableData(data: newRuleData ?? Data())
-            }
+            let (data, _) = sSelf.rulesProcessor.addDomainToInvertedWhitelist(domain: domain, jsonData: jsonData, overlimit: overlimit)
+            
+            return data ?? Data()
+            
         }) { (error) in
             completion(error)
         }
     }
     
-    @objc func removeInvertedWhitelistDomain(_ domainToRemove: String, completion: @escaping (Error?)->Void) {
+    func removeInvertedWhitelistDomain(_ domainToRemove: String, completion: @escaping (Error?)->Void) {
     
         processInvertedWhitelistDomain(processDomains: { (domains) -> ([String], Bool) in
             let filteredDomains = domains.filter({ (domain) -> Bool in
                 return domainToRemove != domain
             })
             return(filteredDomains, true)
-        }, processData: { (jsonData, oldRuleData, newRuleData) -> NSMutableData in
-            if jsonData.length > 1 {
-                self.replaceJsonData(jsonData: jsonData, oldRuleData: oldRuleData, newRuleData: newRuleData)
-                return jsonData
-            }
-            else {
-                return NSMutableData(data: newRuleData ?? Data())
-            }
+        }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
+            guard let sSelf = self else { return Data() }
+            
+            let (data, _) = sSelf.rulesProcessor.removeInvertedWhitelistDomain(domain: domainToRemove, jsonData: jsonData)
+            
+            return data ?? Data()
         }) { (error) in
             completion(error)
         }
@@ -507,7 +448,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         return filterByGroup
     }
     
-    private func processWhitelistRule(_ rule: ASDFilterRule, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: NSMutableData, _ ruleData: Data, _ contentBlocker: ContentBlockerType)->NSMutableData) {
+    private func processWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ domain: String, _ contentBlocker: ContentBlockerType)->Data) {
         
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
@@ -547,11 +488,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 }
             }
             
-            if AEWhitelistDomainObject(rule: rule) == nil {
-                error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: Int(AES_ERROR_ARGUMENT), userInfo: nil)
-                return
-            }
-            
             var whitelistRules = sSelf.resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
             savedRules = Array(whitelistRules)
             var succeded = false
@@ -566,28 +502,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             sSelf.resources.whitelistContentBlockingRules = (whitelistRules as NSArray).mutableCopy() as? NSMutableArray
             
-            let (convertResult, convertError) = sSelf.convertOneRule(rule)
-            
-            if convertError != nil {
-                error = convertError
-                return
-            }
-            
-            guard let jsonRule = convertResult![AESFConvertedRulesKey] as? String else {
-                error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: ContentBlockerService.contentBlockerConverterErrorCode,
-                                userInfo: [:])
-                return
-            }
-            
-            let jsonRuleData = jsonRule.data(using: .utf8)!
-            
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
                 savedDatas[type] = data
-                var jsonData = NSMutableData(data: data)
-                jsonData = processData(jsonData, jsonRuleData, type)
+                let jsonData = processData(data, domain, type)
                 
                 sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
             }
@@ -597,7 +516,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    private func processInvertedWhitelistDomain(processDomains: @escaping(_ domains: [String])->([String], Bool), processData: @escaping(_ jsonData: NSMutableData, _ oldRuleData: Data?, _ newRuleData: Data?)->NSMutableData, completion: @escaping (Error?)->Void) {
+    private func processInvertedWhitelistDomain(processDomains: @escaping(_ domains: [String])->([String], Bool), processData: @escaping(_ jsonData: Data, _ contentBlocker: ContentBlockerType)->Data, completion: @escaping (Error?)->Void) {
         
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
@@ -624,12 +543,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 else if error == nil && modified {
                     sSelf.safariService.invalidateBlockingJsons { (error) in
                         sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                        
-                        if error != nil {
-                            rollback()
-                            sSelf.safariService.invalidateBlockingJsons { (error) in
-                            }
-                        }
                     }
                 }
                 else {
@@ -637,7 +550,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 }
             }
             
-            let oldInvertedRule = invertedObject?.rule
             var domains = invertedObject?.domains ?? [String]()
         
             var succeded = false
@@ -651,59 +563,19 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             }
             
             var newInvertedObject: AEInvertedWhitelistDomainsObject? = nil
-            var jsonNewRule: String? = nil
             
             newInvertedObject = AEInvertedWhitelistDomainsObject(domains: domains)
         
-            let (newConvertResult, newConvertError) = sSelf.convertOneRule(newInvertedObject!.rule)
-            
-            if newConvertError != nil {
-                error = newConvertError
-                return
-            }
-            
-            jsonNewRule = newConvertResult![AESFConvertedRulesKey] as? String
-            if jsonNewRule == nil
-            {
-                    error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                    code: ContentBlockerService.contentBlockerConverterErrorCode,
-                                    userInfo: [:])
-                    return
-            }
-
             sSelf.resources.invertedWhitelistContentBlockingObject = newInvertedObject
-            
-            let jsonNewRuleData = jsonNewRule?.data(using: .utf8)!
-            
-            var jsonOldRuleData: Data?
-            if oldInvertedRule != nil {
-                
-                let (oldConvertResult, oldConvertError) = sSelf.convertOneRule(oldInvertedRule!)
-                
-                if oldConvertError != nil {
-                    error = oldConvertError
-                    return
-                }
-                
-                guard  let jsonOldRule = oldConvertResult![AESFConvertedRulesKey] as? String
-                    else {
-                        error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                        code: ContentBlockerService.contentBlockerConverterErrorCode,
-                                        userInfo: [:])
-                        return
-                }
-                
-                jsonOldRuleData = jsonOldRule.data(using: .utf8)!
-            }
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
                 savedDatas[type] = data
-                var jsonData = NSMutableData(data: data)
-                jsonData = processData(jsonData, jsonOldRuleData, jsonNewRuleData)
                 
-                sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
+                let jsonData = processData(data, type)
+                
+                sSelf.safariService.save(json: jsonData, type: type.rawValue)
             }
             
             modified = true

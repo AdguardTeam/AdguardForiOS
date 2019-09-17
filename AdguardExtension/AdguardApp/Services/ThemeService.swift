@@ -35,6 +35,8 @@ import Foundation
     var separatorColor: UIColor { get }
     var selectedCellColor: UIColor { get }
     var errorRedColor: UIColor { get }
+    var editLineColor: UIColor { get }
+    var editLineSelectedColor: UIColor { get }
     
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
@@ -115,6 +117,14 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var errorRedColor: UIColor {
         return UIColor(hexString: "#df3812")
+    }
+    
+    var editLineColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#d8d8d8")
+    }
+    
+    var editLineSelectedColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#d8d8d8") : UIColor(hexString: "#4d4d4d")
     }
     
     var logBlockedCellColor: UIColor {

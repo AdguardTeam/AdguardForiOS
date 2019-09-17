@@ -306,6 +306,9 @@
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Блокувальники вмісту";
 
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Фільтри:";
+
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Загальні налаштування";
 
@@ -314,9 +317,6 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Вимкнено в параметрах Safari";
-
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Перевірка оновлень...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Додаток може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
@@ -365,3 +365,9 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Версія";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Невірна електронна пошта або пароль";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Обліковий запис заблоковано";

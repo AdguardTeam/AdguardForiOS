@@ -78,6 +78,11 @@ protocol PurchaseServiceProtocol {
     func login(withLicenseKey key: String)
     
     /**
+     Log with name and password
+     */
+    func login(name: String, password: String, code2fa: String?)
+    
+    /**
      checks the status of adguard license
      */
     func checkLicenseStatus()
@@ -204,6 +209,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private var standardPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
     
+    private let reachability = Reachability.forInternetConnection()
+    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -303,16 +310,27 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         requestProducts()
     }
     
+    @objc
     func checkLicenseStatus() {
         loginService.checkStatus { [weak self] (error) in
             self?.processLoginResult(error)
         }
-    }
+    }   
     
     func login(withLicenseKey key: String) {
         loginService.login(licenseKey: key){ [weak self] (error) in
             self?.processLoginResult(error)
         }
+    }
+    
+    func startProductRequest() {
+        if productRequest != nil {
+            productRequest?.cancel()
+            
+        }
+        productRequest = SKProductsRequest(productIdentifiers: allProducts)
+        productRequest?.delegate = self
+        productRequest?.start()
     }
     
     @objc
@@ -332,6 +350,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             guard let sSelf = self else { return }
             
             sSelf.processLoginResult(error)
+        }
+    }
+    
+    func login(name: String, password: String, code2fa: String?) {
+        loginService.login(name: name, password: password, code2fa: code2fa) { [weak self] (error) in
+            self?.processLoginResult(error)
         }
     }
     
@@ -496,6 +520,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         productRequest = SKProductsRequest(productIdentifiers: allProducts)
         productRequest?.delegate = self
         productRequest?.start()
+        if reachability?.isReachable() ?? false{
+            startProductRequest()
+        } else {
+            NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
+                guard let sSelf = self else { return }
+                guard let reach = notification.object as? Reachability else { return }
+                if reach.isReachable() {
+                    sSelf.startProductRequest()
+                    sSelf.reachability?.stopNotifier()
+                }
+            }
+            reachability?.startNotifier()
+        }
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -574,6 +611,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         
         if productsToPurchase.count > 0 {
             postNotification(PurchaseService.kPSNotificationReadyToPurchase)
+            productRequest = nil
         }
     }
     

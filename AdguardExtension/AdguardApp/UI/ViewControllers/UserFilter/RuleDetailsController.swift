@@ -51,7 +51,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBAction func saveAction(_ sender: Any) {
         
         let ruleText = ruleTextView.text ?? ""
-        rule!.rule = ruleText
         delegate?.changeRule(rule: rule!, newText: ruleText)
         dismiss(animated: true, completion: nil)
     }

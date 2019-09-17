@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "Güncellendi";
 
-/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
-"Ve5-DF-RNB.text" = "Web site";
-
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "Filtre URL'si:";
 

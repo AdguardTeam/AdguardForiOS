@@ -126,7 +126,7 @@ protocol FiltersServiceProtocol {
     
     /** add custom filter
      */
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool)
+    func addCustomFilter(_ filter: AASCustomFilterParserResult)
     
     /** delete custom filter
      */
@@ -364,15 +364,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         processUpdate()
     }
     
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
+    func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-        
-        if overwriteExisted {
-            if let existedFilterId = antibanner.customFilterId(byUrl: filter.meta.subscriptionUrl) {
-                deleteCustomFilterWithId(existedFilterId)
-            }
-        }
 
         filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
@@ -638,6 +632,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             diff.groups.forEach({ (groupId: Int, enabled: Bool) in
                 sSelf.antibanner.setFiltersGroup(groupId as NSNumber, enabled: enabled)
+                DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
             })
             
             sSelf.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
@@ -670,9 +665,14 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private func antibannerSetFilter(filterId: Int, enabled: Bool) {
         
         if !antibanner.checkIfFilterInstalled(filterId as NSNumber) {
-            guard let filterMeta = (filterMetas.first { $0.filterId.intValue == filterId }) else { return }
+            guard let filterMeta = (filterMetas.first { $0.filterId.intValue == filterId }) else {
+                DDLogInfo("Failed to find meta for filter with filterId = \(filterId)")
+                return
+            }
             filterMeta.enabled = true
             antibanner.subscribeFilters([filterMeta], jobController: nil)
+        } else {
+            DDLogInfo("Filter with filterId = \(filterId) is not installed")
         }
 
         antibanner.setFilter(filterId as NSNumber, enabled: enabled, fromUI: true)

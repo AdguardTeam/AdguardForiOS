@@ -331,7 +331,7 @@
 "disabled_current_state_label" = "在 Safari 設定裡被禁用";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "正在檢查更新…";
+"update_current_state_label" = "正在載進 Safari…";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "%1$@ 規則的限制被達到。該應用程式可能無法正常地運作。請禁用額外的規則。目前 %3$@ 規則當中的 %2$@ 規則正被使用；%4$@ 規則被禁用。";
@@ -343,7 +343,7 @@
 "login_max_computers_exceeded" = "此授權已被啟動處於裝置之最大數量的狀態。\n您可於網站：adguard.com 上在您個人的帳戶中由未使用的裝置解除綁定此授權";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
+"action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始的配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
 
 /* (AEUIAboutController) Alert message if user have no e-mail account on device */
 "support_message_sending_error" = "無法傳送訊息給支援團隊。您尚未配置您的電子郵件帳號。";
@@ -383,3 +383,24 @@
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "付一次費用，然後於所有您的裝置上使用 AdGuard 高級版功能！";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "無網際網路";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "請連線到網際網路以開始您的免費試用";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "不正確的電子郵件地址或密碼";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "帳戶被封鎖";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "帳戶被暫時地鎖上";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "無效的雙因素驗證（2FA）權杖";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "透過繼續，您接受該<a href=\"%@\">條款和條件</a>及<a href=\"%@\">終端用戶授權協定</a>。";

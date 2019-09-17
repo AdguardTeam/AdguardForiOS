@@ -159,13 +159,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     [self stopObservingReachabilityStatus];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    @try {
+
+    if (observingDbStatus) {
         [[ASDatabase singleton] removeObserver:self forKeyPath:@"ready"];
+        observingDbStatus = NO;
     }
-    @catch (NSException *exception) {
-        // Silent
-    }
-    
+
 #if !OS_OBJECT_USE_OBJC
     if (workQueue) dispatch_release(workQueue);
 #endif
@@ -516,6 +515,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
+            DDLogInfo(@"Filter with filterId = %@ , and expected enabled state = %d, was added to db with result = %d", filterId, (int)enabled, (int)result);
             
             [NSNotificationCenter.defaultCenter postNotificationName:ASAntibannerFilterEnabledNotification object:nil userInfo:@{@"filter_id":filterId, @"enabled":@(enabled)}];
         }];
@@ -1668,6 +1668,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             result.meta.name = filter.name;
             result.meta.groupId = filter.groupId;
             result.meta.filterId = filter.filterId;
+            result.meta.enabled = filter.enabled;
 
             [parseResults addObject:result];
             
@@ -1938,7 +1939,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     ASDatabase *theDB = [ASDatabase singleton];
     
+    ASSIGN_WEAK(self);
+    
     dispatch_async(workQueue, ^{ @autoreleasepool {
+        
+        ASSIGN_STRONG(self);
         
         if (theDB.ready){
             
@@ -1950,12 +1955,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (![result next]) {
                     
                     // install default filters
-                    if ([self installFiltersIntoDb:db])
+                    if ([USE_STRONG(self) installFiltersIntoDb:db])
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
                             DDLogDebug(@"(ASAntibanner) ASAntibannerInstalledNotification");
                             
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:self];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
                         });
                     
                     else{
@@ -1964,8 +1969,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         DDLogError(@"Can't install filters metadata into DB.");
                         DDLogErrorTrace();
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            self.enabled = NO;
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:self];
+                            USE_STRONG(self).enabled = NO;
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:USE_STRONG(self)];
                         });
                         
                         return;
@@ -1976,24 +1981,24 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                                                
                        DDLogDebug(@"(ASAntibanner) antibanner has been allready installed. Post ASAntibannerInstalledNotification");
                        
-                       [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:self];
+                       [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
                    });
                 }
                 
                 [result close];
-                serviceInstalled = YES;
+                USE_STRONG(self)->serviceInstalled = YES;
                 *rollback = NO;
-                if (serviceEnabled)
-                    [self setServiceToReady];
+                if (USE_STRONG(self)->serviceEnabled)
+                    [USE_STRONG(self) setServiceToReady];
             }];
             
-            [self addCustomGroupIfNeeded];
-            [self updateUserfilterMetadata];
+            [USE_STRONG(self) addCustomGroupIfNeeded];
+            [USE_STRONG(self) updateUserfilterMetadata];
         }
         else if (!observingDbStatus){
             
-            observingDbStatus = YES;
-            [theDB addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+            USE_STRONG(self)->observingDbStatus = YES;
+            [theDB addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
             
         }
         
@@ -2238,7 +2243,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while ([result next]) {
             
             groupMetadata = [[ASDFilterGroup alloc] initFromDbResult:result];
-            
+            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %d", groupMetadata.groupId, (int)groupMetadata.enabled);
             [groups addObject:groupMetadata];
         }
         [result close];
@@ -2278,8 +2283,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray *filters = [NSMutableArray array];
     
-    if (!db)
+    if (!db){
+        DDLogError(@"NULL was passed instead of db property, filtersFromDb function in AESAntibanner");
         return filters;
+    }
     
     @autoreleasepool {
         
@@ -2466,6 +2473,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     [[ASDatabase singleton] exec:^(FMDatabase *db, BOOL *rollback) {
         FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(FilterGroupId.custom)];
         groupExists = [result next];
+        [result close];
     }];
     
     if (groupExists) {
