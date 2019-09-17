@@ -39,7 +39,7 @@ extern NSString *AESUserInfoRuleObject;
 #pragma mark - AEServices
 /////////////////////////////////////////////////////////////////////
 
-@class AESAntibanner, ASDFilterRule, AEService, ContentBlockerService;
+@class AESAntibanner, ASDFilterRule, AEService, ContentBlockerService, ASDatabase;
 @protocol AESharedResourcesProtocol, ACNNetworkingProtocol;
 
 @protocol AEServiceProtocol <NSObject>
@@ -74,7 +74,8 @@ extern NSString *AESUserInfoRuleObject;
 @interface AEService : NSObject<AEServiceProtocol>
 
 - (id)initWithContentBlocker: (ContentBlockerService*) contentBlockerService
-                   resources:(id<AESharedResourcesProtocol>)resources
-                  networking:(id<ACNNetworkingProtocol>) networking;
+ resources:(id<AESharedResourcesProtocol>)resources
+networking:(id)networking
+                  asDataBase: (ASDatabase *) asDataBase;
 
 @end

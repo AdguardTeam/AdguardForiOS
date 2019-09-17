@@ -175,7 +175,7 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     
     //------------ Checking DB status -----------------------------
-    if (dbService.error) {
+    if (_asDataBase.error) {
         
         DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
         //        [self dbFailure];
@@ -517,9 +517,9 @@ typedef enum : NSUInteger {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
     // DB DELAYED READY
-    if ([object isEqual:dbService]
+    if ([object isEqual:_asDataBase]
         && [keyPath isEqualToString:@"ready"]
-        && dbService.ready) {
+        && _asDataBase.ready) {
         
         [_asDataBase removeObserver:self forKeyPath:@"ready"];
         

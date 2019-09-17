@@ -56,7 +56,7 @@ class StartupService : NSObject{
         
         let aeService: AEServiceProtocol = AEService(contentBlocker: contentBlockerService,
                                                      resources: sharedResources,
-                                                     networking: networkService)
+                                                     networking: networkService, asDataBase: asDataBase)
         
         ServiceLocator.shared.addService(service: aeService)
         
