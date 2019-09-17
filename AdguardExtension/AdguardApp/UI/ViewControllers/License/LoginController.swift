@@ -83,6 +83,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             let style = NSMutableParagraphStyle()
             style.alignment = .center
             termsString.addAttribute(.paragraphStyle, value: style, range: range)
+            termsString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12.0), range: range)
         
             termsText.attributedText = termsString
         }
