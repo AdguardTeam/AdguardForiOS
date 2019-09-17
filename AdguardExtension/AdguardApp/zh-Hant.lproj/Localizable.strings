@@ -343,7 +343,7 @@
 "login_max_computers_exceeded" = "此授權已被啟動處於裝置之最大數量的狀態。\n您可於網站：adguard.com 上在您個人的帳戶中由未使用的裝置解除綁定此授權";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
+"action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始的配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
 
 /* (AEUIAboutController) Alert message if user have no e-mail account on device */
 "support_message_sending_error" = "無法傳送訊息給支援團隊。您尚未配置您的電子郵件帳號。";

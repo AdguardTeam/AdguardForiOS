@@ -14,7 +14,8 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d日間フルアクセス\n無料お試し版</string>
+        <string>%d日間フルアクセス
+無料お試し版</string>
       </dict>
     </dict>
     <key>trial_screen_weeks</key>
@@ -28,7 +29,8 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d週間フルアクセス\n無料お試し版</string>
+        <string>%d週間フルアクセス
+無料お試し版</string>
       </dict>
     </dict>
     <key>trial_screen_months</key>
@@ -42,7 +44,8 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%dヵ月間フルアクセス\n無料お試し版</string>
+        <string>%dヵ月間フルアクセス
+無料お試し版</string>
       </dict>
     </dict>
     <key>trial_screen_years</key>
@@ -56,7 +59,8 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d年間フルアクセス\n無料お試し版</string>
+        <string>%d年間フルアクセス
+無料お試し版</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
