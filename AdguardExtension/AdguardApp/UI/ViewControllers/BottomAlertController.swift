@@ -41,16 +41,19 @@ class KeyboardMover {
     
     @objc
     func keyboardNotification(notification: NSNotification) {
-            guard let userInfo = notification.userInfo else { return }
-            guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-                
-            let keyboardHeight = keyboardFrame.height
-            constraint.constant = keyboardHeight + initialValue
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        guard let belongsToApp = userInfo[UIResponder.keyboardIsLocalUserInfoKey] as? Bool else { return }
             
-            UIView.animate(withDuration: 0.5,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
+        let keyboardHeight = keyboardFrame.height
+        if belongsToApp {
+            constraint.constant = keyboardHeight + initialValue
         }
+            
+        UIView.animate(withDuration: 0.5,
+                        animations: { self.view.layoutIfNeeded() },
+                        completion: nil)
+    }
         
     @objc
     func keyboardWillHide(notification: NSNotification) {
