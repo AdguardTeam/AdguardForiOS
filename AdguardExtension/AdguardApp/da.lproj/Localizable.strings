@@ -276,6 +276,9 @@
 /* login error message */
 "login_error_message" = "Der opstod en fejl, da du loggede ind";
 
+/* purchase secription format */
+"purchase_description_format" = "Om AdGuard Abonnement:<br><br>▪ Betaling vil blive opkrævet fra din iTunes-konto ved købsbekræftelse.<br>▪ Abonnementet fornyes automatisk, medmindre autofornyelse er deaktiveret mindst 24 timer inden udgangen af den aktuelle periode.<br>▪ Betalingen for abonnementsfornyelse vil blive opkrævet inden for 24 timer inden udgangen af den aktuelle periode. Dine abonnementer kan administreres, og din automatiske fornyelse kan blive slået fra ved at gå til dine iTunes-kontoindstillinger efter at have købt et abonnement.<br><br><a href=%1$@>Privatlivspolitik</a> <br><br><a href=%2$@>Vilkår for Brug</a>";
+
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Privatlivspolitik</a> <br><br><a href=%2$@>Betingelser for brug</a>";
 
@@ -328,7 +331,7 @@
 "disabled_current_state_label" = "Deaktiveret i Safaris indstillinger";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Søger efter opdateringer...";
+"update_current_state_label" = "Indlæser ind i Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Grænsen på %1$@ regler er nået. Appen vil muligvis ikke fungere korrekt. Deaktiver venligst de ekstra regler. I øjeblikket bruges %2$@ ud af %3$@ regler: %4$@ regler er deaktiveret.";
@@ -380,3 +383,24 @@
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Betal en gang, og brug AdGuard Premium-funktionerne på alle dine enheder!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "Intet internet";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Forbind til internettet for at starte din gratis prøveperiode";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Forkert e-mail eller adgangskode";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Konto er blokeret";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Kontoen er midlertidigt låst";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Ugyldig 2FA-token";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "Ved at fortsætte accepterer du <a href=\"%@\">Vilkår og Betingelser</a> og <a href=\"%@\">EULA</a>.";

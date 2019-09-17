@@ -26,10 +26,10 @@
     
 }
 
-- (id)initWithDomain:(NSString *)domain;
-- (id)initWithRule:(ASDFilterRule *)rule;
+- (nonnull id)initWithDomain:(nonnull NSString *)domain;
+- (nullable id)initWithRule:(nonnull ASDFilterRule *)rule;
 
-@property NSString *domain;
-@property ASDFilterRule *rule;
+@property (nonnull) NSString * domain;
+@property (nonnull) ASDFilterRule * rule;
 
 @end

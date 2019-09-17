@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Obtener suscripción";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "COMPRAR";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "La licencia Premium ha expirado";
 
@@ -273,6 +276,9 @@
 /* login error message */
 "login_error_message" = "Ocurrió un error mientras se iniciaba la sesión";
 
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Aceptar";
 
@@ -312,6 +318,9 @@
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Configuración general";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Necesita habilitar VPN primero";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ reglas se están utilizando";
 
@@ -319,7 +328,7 @@
 "disabled_current_state_label" = "Desactivado en configuración de Safari";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Buscando actualizaciones...";
+"update_current_state_label" = "Cargando en Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Se alcanza el límite de %1$@ reglas. Es posible que la aplicación no funcione correctamente. Por favor desactive las reglas adicionales. Actualmente se están utilizando %2$@ de %3$@ reglas; %4$@ reglas están desactivadas.";
@@ -368,3 +377,27 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Versión";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "¡Paga una vez y utiliza las características de AdGuard Premium en todos tus dispositivos!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "No hay Internet";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Por favor, conéctese a Internet para iniciar su prueba gratuita";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Correo electrónico o contraseña incorrectos";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "La cuenta está bloqueada";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "La cuenta está temporalmente bloqueada";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Token 2FA no válido";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "Al continuar, aceptas los <a href=\"%@\">términos y condiciones</a> y el <a href=\"%@\">acuerdo de licencia</a>.";

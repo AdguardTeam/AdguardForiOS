@@ -58,6 +58,9 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "無料お試しスタート";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "購入";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
 
@@ -273,6 +276,12 @@
 /* login error message */
 "login_error_message" = "ログイン中にエラーが発生しました";
 
+/* purchase secription format */
+"purchase_description_format" = "【AdGuardサブスクリプションについて】<br><br>・支払いは購入の確認時にiTunesアカウントに請求されます。<br>・サブスクリプションは、現在のサブスクリプション期間が終了する少なくとも24時間前に自動更新がオフにされない限り、自動的に更新されます。<br>・サブスクリプション更新料金は、現在の期間の終了前の24時間以内に請求されます。サブスクリプション購入後、iTunesアカウント設定においてサブスクリプション管理が可能になり、自動更新もそちらで無効にすることができます。<br><br><a href=%1$@>プライバシーポリシー</a><br><br><a href=%2$@>利用規約</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>プライバシーポリシー</a> <br><br><a href=%2$@>利用規約</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
@@ -312,6 +321,9 @@
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "一般設定";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "先にVPNを有効にする必要があります";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "使用ルール数：%@";
 
@@ -319,7 +331,7 @@
 "disabled_current_state_label" = "Safari設定でOFFになっています";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "アップデートを確認中...";
+"update_current_state_label" = "Safariへ読み込み中...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "ルール数上限%1$@を達成しました。アプリの動作に不具合発生の可能性があります。余分なルールを無効にしてください。現在使用ルール数：%2$@/%3$@（%4$@本無効）";
@@ -368,3 +380,27 @@
 
 /* (AboutController) current app version string */
 "about_version" = "バージョン";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "一度限りのお支払いで、すべてのデバイスでAdGuardプレミアム機能をご利用できます！";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "インターネット未接続";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "無料お試しを始めるには、インターネットに接続してください。";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "メールアドレスもしくはパスワードが間違っています";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "アカウントがブロックされています";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "アカウントが一時的にロックされています";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "2段階認証トークンが無効です";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "続行することで<a href=\"%@\">規約と条件</a>および<a href=\"%@\">エンドユーザー使用許諾契約書 (EULA)</a>に同意したことになります。";

@@ -195,7 +195,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6NH-fh-Bob" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="221.59999999999999" y="71.674876847290648"/>
+            <point key="canvasLocation" x="13" y="82"/>
         </scene>
         <!--Filters Controller-->
         <scene sceneID="AfJ-Ey-Jpw">
@@ -483,26 +483,16 @@
                                     <action selector="deleteAction:" destination="Uro-s5-baq" eventType="touchUpInside" id="RoK-eq-8J9"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-sn-odz">
-                                <rect key="frame" x="0.0" y="600" width="600" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="HVv-NU-SJI"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="RXi-08-oyM" secondAttribute="trailing" id="81b-Co-XyN"/>
                             <constraint firstItem="RXi-08-oyM" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="BZE-on-Wkz"/>
+                            <constraint firstItem="mXe-eu-cfH" firstAttribute="bottom" secondItem="NYf-tJ-qCn" secondAttribute="bottom" id="F5U-MG-YdV"/>
                             <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="mXe-eu-cfH" secondAttribute="trailing" id="HdQ-Wf-UK0"/>
-                            <constraint firstItem="ezg-sn-odz" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="IJR-im-z5q"/>
                             <constraint firstItem="mXe-eu-cfH" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="LMR-F0-CBU"/>
                             <constraint firstItem="RXi-08-oyM" firstAttribute="top" secondItem="NYf-tJ-qCn" secondAttribute="top" id="PrB-xw-hIy"/>
                             <constraint firstItem="mXe-eu-cfH" firstAttribute="top" secondItem="RXi-08-oyM" secondAttribute="bottom" id="oog-nw-bxO"/>
-                            <constraint firstItem="mXe-eu-cfH" firstAttribute="bottom" secondItem="ezg-sn-odz" secondAttribute="bottom" id="phR-He-PdI"/>
-                            <constraint firstItem="NYf-tJ-qCn" firstAttribute="bottom" secondItem="ezg-sn-odz" secondAttribute="bottom" constant="-1" id="rJa-fy-sPB"/>
-                            <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="ezg-sn-odz" secondAttribute="trailing" id="x62-5g-f1U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NYf-tJ-qCn"/>
                     </view>
@@ -1027,7 +1017,6 @@
                 <navigationController storyboardIdentifier="NewCustomFilterInfoController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="nW1-fZ-XZV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3jV-Hp-MGa">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

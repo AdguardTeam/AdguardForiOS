@@ -29,3 +29,5 @@
 #import "AdguardApp/Services/AEThemeModeEnum.h"
 #import "AERDomainFilterRule.h"
 #import "ASDatabase.h"
+#import "Reachability.h"
+#import "AppDelegate.h"

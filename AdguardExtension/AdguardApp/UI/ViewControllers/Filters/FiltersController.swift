@@ -288,8 +288,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     // MARK: - NewCustomFilter delegate
-    func addCustomFilter(filter: AASCustomFilterParserResult, overwriteExisted: Bool) {
-        viewModel?.addCustomFilter(filter: filter, overwriteExisted: overwriteExisted, completion: { (success) in
+    func addCustomFilter(filter: AASCustomFilterParserResult) {
+        viewModel?.addCustomFilter(filter: filter, completion: { (success) in
             self.tableView.reloadData()
         })
     }

@@ -83,5 +83,325 @@
         <string>%d LET ZKUŠEBNÍ DOBA ZDARMA</string>
       </dict>
     </dict>
+    <key>getPro_screen_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začněte Vaši první zkušební jednodenní dobu zdarma</string>
+        <key>few</key>
+        <string>Začněte Vaši první zkušební %d-denní dobu zdarma</string>
+        <key>many</key>
+        <string>Začněte Vaši první zkušební %d-denní dobu zdarma</string>
+        <key>other</key>
+        <string>Začněte Vaši první zkušební %d-denní dobu zdarma</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začněte Vaši první zkušební týdenní dobu zdarma</string>
+        <key>few</key>
+        <string>Začněte Vaši první zkušební %d-týdenní dobu zdarma</string>
+        <key>many</key>
+        <string>Začněte Vaši první zkušební %d-týdenní dobu zdarma</string>
+        <key>other</key>
+        <string>Začněte Vaši první zkušební %d-týdenní dobu zdarma</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začněte Vaši první zkušební měsíční dobu zdarma</string>
+        <key>few</key>
+        <string>Začněte Vaši první zkušební %d-měsíční dobu zdarma</string>
+        <key>many</key>
+        <string>Začněte Vaši první zkušební %d-měsíční dobu zdarma</string>
+        <key>other</key>
+        <string>Začněte Vaši první zkušební %d-měsíční dobu zdarma</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začněte Vaši první zkušební roční dobu zdarma</string>
+        <key>few</key>
+        <string>Začněte Vaši první zkušební %d-roční dobu zdarma</string>
+        <key>many</key>
+        <string>Začněte Vaši první zkušební %d-roční dobu zdarma</string>
+        <key>other</key>
+        <string>Začněte Vaši první zkušební %d-roční dobu zdarma</string>
+      </dict>
+    </dict>
+    <key>trial_label_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Zkušební doba na 1 den</string>
+        <key>few</key>
+        <string>Zkušební doba na %d dny</string>
+        <key>many</key>
+        <string>Zkušební doba na %d dnů</string>
+        <key>other</key>
+        <string>Zkušební doba na %d dnů</string>
+      </dict>
+    </dict>
+    <key>trial_label_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Zkušební doba na 1 týden</string>
+        <key>few</key>
+        <string>Zkušební doba na %d týdny</string>
+        <key>many</key>
+        <string>Zkušební doba na %d týdnů</string>
+        <key>other</key>
+        <string>Zkušební doba na %d týdnů</string>
+      </dict>
+    </dict>
+    <key>trial_label_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Zkušební doba na 1 měsíc</string>
+        <key>few</key>
+        <string>Zkušební doba na %d měsíce</string>
+        <key>many</key>
+        <string>Zkušební doba na %d měsíců</string>
+        <key>other</key>
+        <string>Zkušební doba na %d měsíců</string>
+      </dict>
+    </dict>
+    <key>trial_label_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Zkušební doba na 1 rok</string>
+        <key>few</key>
+        <string>Zkušební doba na %d roky</string>
+        <key>many</key>
+        <string>Zkušební doba na %d let</string>
+        <key>other</key>
+        <string>Zkušební doba na %d let</string>
+      </dict>
+    </dict>
+    <key>trial_period_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 den</string>
+        <key>few</key>
+        <string>%d dny</string>
+        <key>many</key>
+        <string>%d dnů</string>
+        <key>other</key>
+        <string>%d dnů</string>
+      </dict>
+    </dict>
+    <key>trial_period_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 týden</string>
+        <key>few</key>
+        <string>%d týdny</string>
+        <key>many</key>
+        <string>%d týdnů</string>
+        <key>other</key>
+        <string>%d týdnů</string>
+      </dict>
+    </dict>
+    <key>trial_period_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 měsíc</string>
+        <key>few</key>
+        <string>%d měsíce</string>
+        <key>many</key>
+        <string>%d měsíců</string>
+        <key>other</key>
+        <string>%d měsíců</string>
+      </dict>
+    </dict>
+    <key>trial_period_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 rok</string>
+        <key>few</key>
+        <string>%d roky</string>
+        <key>many</key>
+        <string>%d let</string>
+        <key>other</key>
+        <string>%d let</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Potom %2$@ za den</string>
+        <key>few</key>
+        <string>Potom %2$@ za %1$d dny</string>
+        <key>many</key>
+        <string>Potom %2$@ za %1$d dnů</string>
+        <key>other</key>
+        <string>Potom %2$@ za %1$d dnů</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Potom %2$@ za týden</string>
+        <key>few</key>
+        <string>Potom %2$@ za %1$d týdny</string>
+        <key>many</key>
+        <string>Potom %2$@ za %1$d týdnů</string>
+        <key>other</key>
+        <string>Potom %2$@ za %1$d týdnů</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Potom %2$@ za měsíc</string>
+        <key>few</key>
+        <string>Potom %2$@ za %1$d měsíce</string>
+        <key>many</key>
+        <string>Potom %2$@ za %1$d měsíců</string>
+        <key>other</key>
+        <string>Potom %2$@ za %1$d měsíců</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Potom %2$@ za rok</string>
+        <key>few</key>
+        <string>Potom %2$@ za %1$d roky</string>
+        <key>many</key>
+        <string>Potom %2$@ za %1$d let</string>
+        <key>other</key>
+        <string>Potom %2$@ za %1$d let</string>
+      </dict>
+    </dict>
   </dict>
 </plist>

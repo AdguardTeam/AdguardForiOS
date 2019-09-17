@@ -318,9 +318,6 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "در تنظیمات سافاری غیرفعال شده است";
 
-/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "بررسی برای بروز رسانی...";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "محدودیت %1$@ دستور به سر رسید. برنامه امکان دارد درست کار نکند. لطفا دستورات اضافه را غیرفعال کنید. اکنون %2$@ از %3$@ دستور در حال استفاده است; %4$@ دستور غیرفعال است.";
 

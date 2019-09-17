@@ -22,6 +22,8 @@ protocol LoginResponseParserProtocol {
     func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
     
     func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
+    
+    func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
 }
 
 
@@ -102,6 +104,21 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
     }
     
+    func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, error: NSError?) {
+        do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+            
+            return processOauthResponseJson(jsonResponse)
+        }
+        catch {
+            let responseString = String(data: data, encoding: .utf8)
+            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
+            return (nil, nil, error)
+        }
+    }
+    
+    // MARK: -private methods
     
     private func processLoginResponseJson(json: [String: Any]) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
         
@@ -192,5 +209,43 @@ class LoginResponseParser: LoginResponseParserProtocol {
         let premium = status == STATUS_RESPONSE_STATUS_PREMIUM
         
         return (premium, expirationDate, nil)
+    }
+    
+    private func processOauthResponseJson(_ json : [String: Any])->(accessToken: String?, expirationDate: Date?, NSError?) {
+        let token = json["access_token"] as? String
+        let expires = json["expires_in"] as? Int // in seconds. from now
+        
+        if token != nil && expires != nil {
+            let expirationDate = Date(timeIntervalSinceNow: TimeInterval(expires!))
+            return (token, expirationDate, nil)
+        }
+        
+        let error = json["error"] as? String
+        let errorCode = json["error_code"] as? String
+        let errorDescription = json["error_description"] as? String
+        
+        var resultError: NSError?
+        switch (error, errorCode) {
+            
+        case (.some("unauthorized"), .some("2fa_required")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.auth2FaRequired, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("bad_credentials")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("account_disabled")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsDisabled, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("account_locked")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsLocked, userInfo: nil)
+            
+        case (.some("unauthorized"), .some("2fa_invalid")):
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.outh2FAInvalid, userInfo: nil)
+        default:
+            let userInfo = errorDescription == nil ? nil : [LoginService.errorDescription: errorDescription!]
+            resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: userInfo)
+        }
+        
+        return (nil, nil, resultError)
     }
 }

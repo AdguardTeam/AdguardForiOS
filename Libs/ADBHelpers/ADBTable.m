@@ -89,6 +89,7 @@
             
             [rows addObject:[[_objectClass alloc] initWithDbResult:result]];
         }
+        [result close];
         
         return rows;
     }
@@ -350,6 +351,8 @@
             [names addObject:name];
             types[name] = [result stringForColumnIndex:2];
         }
+        
+        [result close];
         
         if ([names count]) {
             

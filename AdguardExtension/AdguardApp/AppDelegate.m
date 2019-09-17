@@ -142,22 +142,15 @@ typedef enum : NSUInteger {
         if ([_aeService firstRunInProgress]) {
             
             [_aeService onReady:^{
-                
-#ifdef PRO
-                [APSProductSchemaManager install];
-#else
                 [AESProductSchemaManager install];
-#endif
+                
+                [_purchaseService checkLicenseStatus];
             }];
         }
         else{
             
             [_aeService onReady:^{
-#ifdef PRO
-                [APSProductSchemaManager upgrade];
-#else
                 [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
-#endif
             }];
         }
         

@@ -124,7 +124,7 @@ static NSUInteger adapt(unsigned delta, unsigned numpoints, BOOL firsttime) {
 	NSUInteger b;
 	NSUInteger h = b = outLen;
 	
-	if (b > 0)
+	if (b > 0 && h < input_length)
 		[ret appendFormat:@"%C", (unichar)delimiter];
 	
 	/* Main encoding loop: */
