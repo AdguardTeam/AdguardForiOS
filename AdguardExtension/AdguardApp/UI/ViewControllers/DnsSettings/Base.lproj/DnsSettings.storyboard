@@ -1441,8 +1441,8 @@
                                     <outletCollection property="themableLabels" destination="yVd-Du-ZRc" collectionClass="NSMutableArray" id="g7B-GT-Hhg"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="featureCell" id="E4J-Fh-hGm" customClass="DnsFeatureCell" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="239" width="600" height="38"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="featureCell" id="E4J-Fh-hGm" customClass="DnsFeatureCell" customModule="Adguard" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E4J-Fh-hGm" id="ZcZ-0e-GBl">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="38"/>
