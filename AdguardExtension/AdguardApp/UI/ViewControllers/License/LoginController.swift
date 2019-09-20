@@ -42,6 +42,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
+    @IBOutlet weak var lostPasswordButton: UIButton!
+    
     // MARK: - private properties
     
     private let confirm2faSegue = "confirm2faSegue"
@@ -60,6 +62,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         // setup activity indicator in login button
         loginButton.indicatorStyle = .white
+        
+        // setup lost password button
+        setupLostPasswordButton()
         
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
@@ -289,5 +294,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
             nameLine.backgroundColor = theme.separatorColor
             passwordLine.backgroundColor = theme.separatorColor
         }
+    }
+    
+    private func setupLostPasswordButton(){
+        let title = ACLocalizedString("lost_password", nil)
+        let color = UIColor(hexString: "#888888")
+        let nsRange = NSRange(location: 0, length: title.count)
+        
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttribute(.foregroundColor, value: color, range: nsRange)
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsRange)
+        attributedString.addAttribute(.underlineColor, value: color, range: nsRange)
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12.0), range: nsRange)
+        
+        lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
     }
 }
