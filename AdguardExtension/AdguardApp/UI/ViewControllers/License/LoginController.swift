@@ -182,6 +182,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private func login(){
         loginButton.startIndicator()
+        loginButton.isEnabled = false
         
         let name = nameEdit.text
         let password = passwordEdit.text
@@ -193,8 +194,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
             purchaseService.login(withLicenseKey: name!)
         }
-        
-        loginButton.isEnabled = false
+        else {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil), completion: nil)
+            loginButton.stopIndicator()
+            loginButton.isEnabled = true
+        }
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
