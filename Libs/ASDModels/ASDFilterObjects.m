@@ -326,15 +326,13 @@
             _version = value;
         
         value = result[@"last_check_time"];
-        if (![NSString isNullOrEmpty:value]){
-            
+        if ([value isKindOfClass:NSString.class] && ![NSString isNullOrEmpty:value]){
             _checkDateString = value;
             _checkDate = [NSDate dateWithSQliteString:_checkDateString];
         }
         
         value = result[@"last_update_time"];
-        if (![NSString isNullOrEmpty:value]){
-            
+        if ([value isKindOfClass:NSString.class] && ![NSString isNullOrEmpty:value]){
             _updateDateString = value;
             _updateDate = [NSDate dateWithSQliteString:_updateDateString];
         }
