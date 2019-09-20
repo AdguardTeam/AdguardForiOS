@@ -229,6 +229,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
         theme.setupTextView(textView)
         theme.setupLabel(helperLabel)
         textView.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
 
     private func showRuleAddedDialog() {

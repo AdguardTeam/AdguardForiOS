@@ -49,6 +49,7 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
+NSString *AppDelegateLoginResult = @"AppDelegateLoginResult";
 
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
@@ -170,6 +171,7 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginResultNotification:) name:AppDelegateLoginResult object:nil];
     
     //------------ Checking DB status -----------------------------
     ASDatabase *dbService = [ASDatabase singleton];
@@ -807,6 +809,18 @@ typedef enum : NSUInteger {
         configuration.systemAppearenceIsDark = NO;
     }
 
+}
+
+- (void)loginResultNotification:(NSNotification *)notification {
+    NSString *body = notification.userInfo[UserNotificationService.notificationBody];
+    ASSIGN_WEAK(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ASSIGN_STRONG(self);
+        UINavigationController *nav = [USE_STRONG(self) getNavigationController];
+        UIViewController *vc = [nav topViewController];
+        
+        [ACSSystemUtils showSimpleAlertForController:vc withTitle:@"" message:body];
+    });
 }
 
 @end

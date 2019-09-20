@@ -25,6 +25,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationObserver: Any?
     
@@ -228,17 +229,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
 
     private func loginSuccess() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
+        let body = ACLocalizedString("login_success_message", nil)
+        navigationController?.popViewController(animated: true)
+        notificationService.notifyAboutLoginResult(body: body)
     }
     
     private func premiumExpired() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil), completion: nil)
+        let body = ACLocalizedString("login_premium_expired_message", nil)
+        notificationService.notifyAboutLoginResult(body: body)
     }
     
     private func notPremium() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil), completion: nil)
+        let body = ACLocalizedString("not_premium_message", nil)
+        notificationService.notifyAboutLoginResult(body: body)
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -249,7 +252,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
             let message = ACLocalizedString("login_error_message", nil)
             
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message, completion: nil)
+            notificationService.notifyAboutLoginResult(body: message)
         }
         
         // some errors we show as red text below password text field, some in alert dialog

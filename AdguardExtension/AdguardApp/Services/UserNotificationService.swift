@@ -24,9 +24,12 @@ protocol UserNotificationServiceProtocol {
     func requestPermissions()
     func postNotification(title: String, body: String)
     func removeNotifications()
+    func notifyAboutLoginResult(body: String)
 }
 
-class UserNotificationService: UserNotificationServiceProtocol {
+class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUserNotificationCenterDelegate {
+    
+    @objc static let notificationBody = "loginBody"
     
     func requestPermissions() {
         let center = UNUserNotificationCenter.current()
@@ -37,7 +40,7 @@ class UserNotificationService: UserNotificationServiceProtocol {
     
     func postNotification(title: String, body: String) {
         let center = UNUserNotificationCenter.current()
-        
+    
         center.getNotificationSettings { [weak self] (settings) in
             
             if settings.authorizationStatus != .authorized {
@@ -58,10 +61,8 @@ class UserNotificationService: UserNotificationServiceProtocol {
     private func alertNotification(title: String?, body: String?) {
         let content = UNMutableNotificationContent()
         
-        if body != nil && title != nil {
-            content.title = title!
-            content.body = body!
-        }
+        content.title = title ?? ""
+        content.body = body ?? ""
         
         content.badge = 1
         
@@ -71,6 +72,7 @@ class UserNotificationService: UserNotificationServiceProtocol {
         let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
+        center.delegate = self
         
         center.add(request) { (error) in
             if error != nil { DDLogError("(UserNotificationService) - alertNotification error : \(error!)") }
@@ -84,5 +86,23 @@ class UserNotificationService: UserNotificationServiceProtocol {
     func removeNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func notifyAboutLoginResult(body: String) {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings {[weak self] (settings) in
+            if settings.authorizationStatus == .authorized && settings.alertSetting == .enabled {
+                self?.alertNotification(title: "", body: body)
+            } else {
+                let userInfo = [UserNotificationService.notificationBody : body]
+                NotificationCenter.default.post(name: Notification.Name(AppDelegateLoginResult), object: nil, userInfo: userInfo)
+            }
+        }
     }
 }
