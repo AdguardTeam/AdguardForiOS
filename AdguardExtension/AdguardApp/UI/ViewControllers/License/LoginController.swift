@@ -235,17 +235,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private func loginSuccess() {
         let body = ACLocalizedString("login_success_message", nil)
         navigationController?.popViewController(animated: true)
-        notificationService.notifyAboutLoginResult(body: body)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func premiumExpired() {
         let body = ACLocalizedString("login_premium_expired_message", nil)
-        notificationService.notifyAboutLoginResult(body: body)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func notPremium() {
         let body = ACLocalizedString("not_premium_message", nil)
-        notificationService.notifyAboutLoginResult(body: body)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -256,7 +256,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
             let message = ACLocalizedString("login_error_message", nil)
             
-            notificationService.notifyAboutLoginResult(body: message)
+            notificationService.postNotificationInForeground(body: message, title: "")
         }
         
         // some errors we show as red text below password text field, some in alert dialog

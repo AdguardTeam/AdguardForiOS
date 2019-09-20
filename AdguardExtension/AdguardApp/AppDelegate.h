@@ -46,9 +46,9 @@ extern NSString *AppDelegateUpdatedFiltersKey;
 extern NSString *OpenDnsSettingsSegue;
 
 /**
- Notification when user tryes to log in
+ Notify user through app
  */
-extern NSString *AppDelegateLoginResult;
+extern NSString *ShowCommonAlertNotification;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate

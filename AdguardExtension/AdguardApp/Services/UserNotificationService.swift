@@ -22,14 +22,23 @@ import UserNotifications
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()
+    
+    /*
+     Method to post notifications which come while app is in background
+     **/
     func postNotification(title: String, body: String)
     func removeNotifications()
-    func notifyAboutLoginResult(body: String)
+    
+    /*
+     Method to post notifications which come while app is in foreground
+     **/
+    func postNotificationInForeground(body: String, title: String)
 }
 
 class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUserNotificationCenterDelegate {
     
-    @objc static let notificationBody = "loginBody"
+    @objc static let notificationBody = "notificationBody"
+    @objc static let notificationTitle = "notificationTitle"
     
     func requestPermissions() {
         let center = UNUserNotificationCenter.current()
@@ -93,15 +102,17 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         completionHandler([.alert, .badge, .sound])
     }
     
-    func notifyAboutLoginResult(body: String) {
+    
+    func postNotificationInForeground(body: String, title: String) {
         let center = UNUserNotificationCenter.current()
 
         center.getNotificationSettings {[weak self] (settings) in
             if settings.authorizationStatus == .authorized && settings.alertSetting == .enabled {
-                self?.alertNotification(title: "", body: body)
+                self?.alertNotification(title: title, body: body)
             } else {
-                let userInfo = [UserNotificationService.notificationBody : body]
-                NotificationCenter.default.post(name: Notification.Name(AppDelegateLoginResult), object: nil, userInfo: userInfo)
+                let userInfo = [UserNotificationService.notificationBody : body,
+                                UserNotificationService.notificationTitle : title]
+                NotificationCenter.default.post(name: NSNotification.Name.ShowCommonAlert, object: nil, userInfo: userInfo)
             }
         }
     }
