@@ -71,6 +71,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     APSharedResources *_resources;
     ConfigurationService *_configuration;
+    NEVPNStatus _lastVpnStatus;
 }
 
 @synthesize connectionStatus = _connectionStatus;
@@ -91,6 +92,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _notificationQueue = [NSOperationQueue new];
         _notificationQueue.underlyingQueue = workingQueue;
         _notificationQueue.name = @"APVPNManager notification";
+        _lastVpnStatus = -1;
         
         [_configuration addObserver:self forKeyPath:@"proStatus" options:NSKeyValueObservingOptionNew context:nil];
         
@@ -813,6 +815,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                    object: nil //_manager
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
+                    
+                    DDLogInfo(@"(APVPNManager) NEVPNConfigurationChangeNotification received");
+        
                     // When VPN configuration is changed
                     [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
                         if(!error) {
@@ -835,6 +840,20 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 object: nil //_manager.connection
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
+                        
+                        DDLogInfo(@"(APVPNManager) NEVPNStatusDidChangeNotification received");
+                        NEVPNConnection* connection = note.object;
+                        if(connection != nil) {
+                            // skip a lot of reccuring "connecting" and "disconnecting" status notifications
+                            if (connection.status == _lastVpnStatus) {
+                                DDLogInfo(@"(APVPNManager) skip NEVPNStatusDidChangeNotification. Connection status = %ld", connection.status);
+                                return;
+                            }
+                            else {
+                                _lastVpnStatus = connection.status;
+                            }
+                        }
+                        
                         // When connection status is changed
                         [_manager loadFromPreferencesWithCompletionHandler:^(NSError *error) {
                             if(!error) {
@@ -862,6 +881,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         if (_lastError) {
             _delayedSetEnabled = nil;
             _delayedSetActiveDnsServer = nil;
+            _delayedSetTunnelMode = nil;
         }
         
         int localValue = 0;
