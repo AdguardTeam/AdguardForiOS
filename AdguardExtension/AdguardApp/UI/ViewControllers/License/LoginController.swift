@@ -30,7 +30,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IB outlets
     @IBOutlet weak var nameEdit: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: RoundRectButton!
     @IBOutlet weak var nameLine: UIView!
     @IBOutlet weak var passwordEdit: UITextField!
     @IBOutlet weak var passwordLine: UIView!
@@ -57,6 +57,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()
         }
+        
+        // setup activity indicator in login button
+        loginButton.indicatorStyle = .white
         
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
@@ -172,6 +175,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     private func login(){
+        loginButton.startIndicator()
         
         let name = nameEdit.text
         let password = passwordEdit.text
@@ -188,7 +192,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
-        
+        loginButton.stopIndicator()
         loginButton.isEnabled = true
         
         // skip notification if this controler is not placed on top of navigation stack

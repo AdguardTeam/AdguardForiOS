@@ -771,6 +771,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="needsToDisplayIndicator" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="loginAction:" destination="YAD-0P-paW" eventType="touchUpInside" id="iVN-iN-ZPI"/>
@@ -870,7 +871,7 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="Ehl-aQ-a9m" id="Obe-DT-hTZ"/>
                         <outlet property="errorLabel" destination="2g1-8V-xSB" id="74V-h1-lYG"/>
-                        <outlet property="loginButton" destination="bUa-fF-AXO" id="lw2-CZ-if3"/>
+                        <outlet property="loginButton" destination="bUa-fF-AXO" id="H65-DZ-3gc"/>
                         <outlet property="nameEdit" destination="3iu-SA-2Ay" id="Ui2-DF-JL7"/>
                         <outlet property="nameLine" destination="Mpa-Ei-nKp" id="se3-65-ZjM"/>
                         <outlet property="passwordEdit" destination="kyL-RQ-Vt7" id="xPy-t4-DjN"/>
