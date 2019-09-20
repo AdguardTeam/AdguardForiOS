@@ -46,7 +46,9 @@ class KeyboardMover {
         guard let belongsToApp = userInfo[UIResponder.keyboardIsLocalUserInfoKey] as? Bool else { return }
             
         let keyboardHeight = keyboardFrame.height
-        if belongsToApp {
+        let stateIsActive = UIApplication.shared.applicationState == .active
+        
+        if belongsToApp && stateIsActive {
             constraint.constant = keyboardHeight + initialValue
         }
             
