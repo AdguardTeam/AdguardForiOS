@@ -224,6 +224,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     private func updateTheme() {
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
+        view.backgroundColor = theme.backgroundColor
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor
         theme.setupTextView(textView)
