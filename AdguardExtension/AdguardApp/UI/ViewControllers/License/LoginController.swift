@@ -25,12 +25,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationObserver: Any?
     
     // MARK: - IB outlets
     @IBOutlet weak var nameEdit: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: RoundRectButton!
     @IBOutlet weak var nameLine: UIView!
     @IBOutlet weak var passwordEdit: UITextField!
     @IBOutlet weak var passwordLine: UIView!
@@ -41,6 +42,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
+    
+    @IBOutlet weak var lostPasswordButton: UIButton!
     
     // MARK: - private properties
     
@@ -57,6 +60,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()
         }
+        
+        // setup activity indicator in login button
+        loginButton.indicatorStyle = .white
+        
+        // setup lost password button
+        setupLostPasswordButton()
         
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
@@ -172,6 +181,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     private func login(){
+        loginButton.startIndicator()
+        loginButton.isEnabled = false
         
         let name = nameEdit.text
         let password = passwordEdit.text
@@ -183,12 +194,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
         else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
             purchaseService.login(withLicenseKey: name!)
         }
-        
-        loginButton.isEnabled = false
+        else {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil), completion: nil)
+            loginButton.stopIndicator()
+            loginButton.isEnabled = true
+        }
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
-        
+        loginButton.stopIndicator()
         loginButton.isEnabled = true
         
         // skip notification if this controler is not placed on top of navigation stack
@@ -219,17 +233,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
 
     private func loginSuccess() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
+        let body = ACLocalizedString("login_success_message", nil)
+        navigationController?.popViewController(animated: true)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func premiumExpired() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil), completion: nil)
+        let body = ACLocalizedString("login_premium_expired_message", nil)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func notPremium() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil), completion: nil)
+        let body = ACLocalizedString("not_premium_message", nil)
+        notificationService.postNotificationInForeground(body: body, title: "")
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -240,7 +256,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
             let message = ACLocalizedString("login_error_message", nil)
             
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message, completion: nil)
+            notificationService.postNotificationInForeground(body: message, title: "")
         }
         
         // some errors we show as red text below password text field, some in alert dialog
@@ -285,5 +301,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
             nameLine.backgroundColor = theme.separatorColor
             passwordLine.backgroundColor = theme.separatorColor
         }
+    }
+    
+    private func setupLostPasswordButton(){
+        let title = ACLocalizedString("lost_password", nil)
+        let color = UIColor(hexString: "#888888")
+        let nsRange = NSRange(location: 0, length: title.count)
+        
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttribute(.foregroundColor, value: color, range: nsRange)
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsRange)
+        attributedString.addAttribute(.underlineColor, value: color, range: nsRange)
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12.0), range: nsRange)
+        
+        lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
     }
 }
