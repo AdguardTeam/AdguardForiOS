@@ -366,9 +366,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .security: Affinity.security ]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
-        let safariProtectionEnabled = resources.sharedDefaults().bool(forKey: SafariProtectionState)
+        let safariProtectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
         
-        if safariProtectionEnabled {
+        if safariProtectionEnabled ?? true{
             return autoreleasepool {
                 var rules = blockerRules
                 

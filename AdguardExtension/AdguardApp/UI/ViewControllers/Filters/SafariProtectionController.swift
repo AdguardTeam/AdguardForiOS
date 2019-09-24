@@ -90,8 +90,8 @@ class SafariProtectionController: UITableViewController {
             self?.updateTheme()
         }
         
-        let protectionEnabled = resources.sharedDefaults().bool(forKey: SafariProtectionState)
-        protectionStateSwitch.isOn = protectionEnabled
+        let protectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
+        protectionStateSwitch.isOn = protectionEnabled ?? true
         
         updateFilters()
     }
