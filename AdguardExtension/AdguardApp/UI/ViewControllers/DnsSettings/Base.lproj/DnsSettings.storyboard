@@ -264,7 +264,7 @@
             </objects>
             <point key="canvasLocation" x="11" y="-815"/>
         </scene>
-        <!--DNS Privacy-->
+        <!--System protection-->
         <scene sceneID="Q9V-mP-4MB">
             <objects>
                 <tableViewController id="So5-wP-aAQ" customClass="DnsSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">

@@ -46,33 +46,14 @@ class MainMenuController: UITableViewController {
     
     private var configurationObservation: NSKeyValueObservation?
     
-    private let dnsCellRow = 2
+    private let systemProtectionRow = 1
     private let getProSegue = "getProSegue"
     private let showDnsSettingsSegue = "showDnsSettingsSegue"
     
     // MARK: - view controler life cycle
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        switch segue.identifier {
-        case "showBlacklistSegue":
-            let controller = segue.destination as! UserFilterController
-            controller.whitelist = false
-            
-        case "showWhitelistSegue":
-            let controller = segue.destination as! UserFilterController
-            controller.whitelist = true
-            
-        default:
-            break
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-        whitelistCaption.text = ACLocalizedString(inverted ? "inverted_whitelist_title" : "whitelist_title", "")
-        
         updateTheme()
     }
     
@@ -170,7 +151,7 @@ class MainMenuController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == dnsCellRow {
+        if indexPath.row == systemProtectionRow {
             if configuration.proStatus {
                 performSegue(withIdentifier: showDnsSettingsSegue, sender: self)
             }

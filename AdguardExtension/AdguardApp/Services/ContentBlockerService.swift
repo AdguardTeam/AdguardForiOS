@@ -366,60 +366,66 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .security: Affinity.security ]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
+        let safariProtectionEnabled = resources.sharedDefaults().bool(forKey: SafariProtectionState)
         
-        return autoreleasepool {
-            var rules = blockerRules
-            
-            // add user rules
-            
-            let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
-            let userRules = userFilterEnabled ? antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
-            
-            rules = userRules + rules
-            
-            // add whitelist rules
-            
-            let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-            
-            let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsWhitelistEnabled) as? Bool ?? true
-            
-            if whitelistEnabled {
-                if inverted {
-                    
-                    if resources.invertedWhitelistContentBlockingObject == nil {
-                        resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(domains: [])
+        if safariProtectionEnabled {
+            return autoreleasepool {
+                var rules = blockerRules
+                
+                // add user rules
+                
+                let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
+                let userRules = userFilterEnabled ? antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+                
+                rules = userRules + rules
+                
+                // add whitelist rules
+                
+                let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+                
+                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsWhitelistEnabled) as? Bool ?? true
+                
+                if whitelistEnabled {
+                    if inverted {
+                        
+                        if resources.invertedWhitelistContentBlockingObject == nil {
+                            resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(domains: [])
+                        }
+                        
+                        if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
+                            rules.append(innvertedRule)
+                        }
                     }
-                    
-                    if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                        rules.append(innvertedRule)
+                    else {
+                        if let whitelistRules = resources.whitelistContentBlockingRules {
+                            rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
+                        }
                     }
                 }
-                else {
-                    if let whitelistRules = resources.whitelistContentBlockingRules {
-                        rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
-                    }
+                
+                var resultData = Data()
+                var resultError: Error?
+                if rules.count != 0 {
+                    let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
+                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+                    
+                    if jsonData != nil { resultData = jsonData! }
+                    resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+                    
+                    resultError = error
+                    
+                } else {
+                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 }
+                
+                safariService.save(json: resultData, type: contentBlocker.rawValue)
+                
+                return resultError
             }
-            
-            var resultData = Data()
-            var resultError: Error?
-            if rules.count != 0 {
-                let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
-                resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-                
-                if jsonData != nil { resultData = jsonData! }
-                resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-                
-                resultError = error
-                
-            } else {
-                resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-                resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-            }
-            
-            safariService.save(json: resultData, type: contentBlocker.rawValue)
-            
-            return resultError
+        } else {
+            safariService.save(json: Data(), type: contentBlocker.rawValue)
+            return nil
         }
     }
     
