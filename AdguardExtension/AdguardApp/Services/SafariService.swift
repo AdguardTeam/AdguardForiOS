@@ -105,13 +105,14 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: public methods
     
+    let updateQueue = DispatchQueue(label: "safari_update")
+    
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
+        
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
             
-            let updateQueue = DispatchQueue(label: "safari_update", attributes: DispatchQueue.Attributes.concurrent)
-            
-            updateQueue.async {
+            sSelf.updateQueue.async {
                 
                 let group = DispatchGroup()
                 var resultError: Error?
@@ -129,14 +130,14 @@ class SafariService: NSObject, SafariServiceProtocol {
                             resultError = error
                         }
                         let sError = (error != nil) ? false : true
+                        
                         // Notify that filter finished updating
                         NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
-                    
-                    // reload one content blocker at a time
-                    group.wait()
                 }
+                
+                group.wait()
                 
                 completion(resultError)
             }
@@ -240,7 +241,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                 }
                 
                 DDLogInfo("(SafariService) Notify Safari fihished.")
-                
+                completion(error)
                 // If content blocker failed to load in safari - we try to reload it second time
                 sSelf.tryToReload(contentBlockerWith: bundleId) { (error) in
                     if error != nil {
@@ -251,7 +252,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                 }
             }
             else {
-                DDLogError("(SafariService)  \(bundleId) reload successeded")
+                DDLogInfo("(SafariService)  \(bundleId) reload successeded")
                 completion(nil)
             }
         }
