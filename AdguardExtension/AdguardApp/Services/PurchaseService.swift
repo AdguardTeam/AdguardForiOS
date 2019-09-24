@@ -124,6 +124,7 @@ extension PurchaseService {
     static let kPSNotificationPurchaseFailure = "kPSNotificationPurchaseFailure"
     static let kPSNotificationRestorePurchaseSuccess = "kPSNotificationRestorePurchaseSuccess"
     static let kPSNotificationRestorePurchaseFailure = "kPSNotificationRestorePurchaseFailure"
+    static let kPSNotificationSilentRestoreSuccess = "kPSNotificationSilentRestoreSuccess"
     static let kPSNotificationRestorePurchaseNothingToRestore = "kPSNotificationRestorePurchaseNothingToRestore"
     static let kPSNotificationLoginSuccess = "kPSNotificationLoginSuccess"
     static let kPSNotificationLoginFailure = "kPSNotificationLoginFailure"
@@ -491,9 +492,14 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         // we must validate receipts not only to check the expiration of the subscription,
         // but also for restoring purchases after reinstalling the application
         DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
+        let wasActive = self.isInAppPurchaseActive()
         validateReceipt { [weak self] (error) in
-            if self?.isInAppPurchaseActive() ?? false {
-                self?.notifyPremiumExpired()
+            guard let sSelf = self else { return }
+            if wasActive && !sSelf.isInAppPurchaseActive() {
+                sSelf.postNotification(PurchaseService.kPSNotificationPremiumExpired)
+            }
+            else if !wasActive && sSelf.isInAppPurchaseActive() {
+                sSelf.postNotification(PurchaseService.kPSNotificationSilentRestoreSuccess)
             }
         }
     
@@ -503,7 +509,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {
                     if !(self?.loginService.hasPremiumLicense ?? true) {
-                        self?.notifyPremiumExpired()
+                        self?.postNotification(PurchaseService.kPSNotificationPremiumExpired)
                     }
                 }
             }
@@ -724,11 +730,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
         
         return true
-    }
-    
-    private func notifyPremiumExpired() {
-        
-        postNotification(PurchaseService.kPSNotificationPremiumExpired)
     }
     
     private func postNotification(_ type: String,_ error: Any? = nil) {

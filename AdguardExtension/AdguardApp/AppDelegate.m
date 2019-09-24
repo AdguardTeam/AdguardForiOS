@@ -134,7 +134,9 @@ typedef enum : NSUInteger {
         self.window.backgroundColor = [UIColor whiteColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
-            [_purchaseService checkPremiumExpired];
+            [_aeService onReady:^{
+                [_purchaseService checkPremiumExpired];
+            }];
         }
         
         if ([_aeService firstRunInProgress]) {
