@@ -55,7 +55,7 @@ protocol PurchaseServiceProtocol {
     /**
      returns true if premium expired. It works both for in-app purchases and for adguard licenses
      */
-    func checkPremiumExpired()
+    func checkPremiumStatusChanged()
     
     /**
      returns true if service ready to request purchases through app store
@@ -485,7 +485,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     @objc
-    func checkPremiumExpired() {
+    func checkPremiumStatusChanged() {
         
         DDLogInfo("(PurchaseService) checkPremiumExpired")
             

@@ -135,7 +135,7 @@ typedef enum : NSUInteger {
         
         if (application.applicationState != UIApplicationStateBackground) {
             [_aeService onReady:^{
-                [_purchaseService checkPremiumExpired];
+                [_purchaseService checkPremiumStatusChanged];
             }];
         }
         
@@ -337,7 +337,7 @@ typedef enum : NSUInteger {
                 }
             }];
             
-            [_purchaseService checkPremiumExpired];
+            [_purchaseService checkPremiumStatusChanged];
         }];
     }
 }
