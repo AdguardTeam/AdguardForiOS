@@ -64,7 +64,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
-    id<SafariServiceProtocol> _safariService;
+    SafariService *_safariService;
     id<AEServiceProtocol> _aeService;
 }
 
