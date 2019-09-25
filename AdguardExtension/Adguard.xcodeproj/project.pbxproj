@@ -1138,7 +1138,7 @@
 		D0D6BA0221A6AF5F007360BC /* MainScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6BA0421A6AF5F007360BC /* MainScreen.storyboard */; };
 		D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6BA0721A6AF63007360BC /* Settings.storyboard */; };
 		D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6BA0D21A6AF6C007360BC /* UserFilter.storyboard */; };
-		D0DB1B062148DB35006EB991 /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DB1B052148DB35006EB991 /* AdvancedSettingsController.swift */; };
+		D0DB1B062148DB35006EB991 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DB1B052148DB35006EB991 /* SettingsController.swift */; };
 		D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0E3A85B1F94EC5900F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
@@ -2174,7 +2174,7 @@
 		D0D6BB4D21A6B0F5007360BC /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/UserFilter.strings; sourceTree = "<group>"; };
 		D0D6BB4F21A6B0F6007360BC /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UserFilter.strings; sourceTree = "<group>"; };
 		D0D6BB5121A6C62B007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D0DB1B052148DB35006EB991 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
+		D0DB1B052148DB35006EB991 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesProcessor.swift; sourceTree = "<group>"; };
 		D0E8B165232939CA00476BC3 /* RulesProcessorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesProcessorTest.swift; sourceTree = "<group>"; };
 		D0EC4069214FB39E00365DB7 /* UserFilterTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterTableController.swift; sourceTree = "<group>"; };
@@ -3336,7 +3336,7 @@
 			isa = PBXGroup;
 			children = (
 				D0D6BA0721A6AF63007360BC /* Settings.storyboard */,
-				D0DB1B052148DB35006EB991 /* AdvancedSettingsController.swift */,
+				D0DB1B052148DB35006EB991 /* SettingsController.swift */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
 			path = Settings;
@@ -5049,7 +5049,7 @@
 				65D9A25F1C0328E6004DA210 /* AESSupport.m in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				7E1104F922DE27C700720501 /* StartupService.swift in Sources */,
-				D0DB1B062148DB35006EB991 /* AdvancedSettingsController.swift in Sources */,
+				D0DB1B062148DB35006EB991 /* SettingsController.swift in Sources */,
 				7E4D204422D71A5B003B0E75 /* mz_strm_mem.c in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,

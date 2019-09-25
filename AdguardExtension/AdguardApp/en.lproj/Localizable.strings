@@ -318,9 +318,6 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filters:";
 
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "General settings";
-
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "You need to enable VPN first";
 

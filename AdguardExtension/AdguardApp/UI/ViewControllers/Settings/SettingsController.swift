@@ -18,7 +18,7 @@
 
 import Foundation
 
-class AdvancedSettingsController: UITableViewController {
+class SettingsController: UITableViewController {
     
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -68,9 +68,7 @@ class AdvancedSettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = ACLocalizedString("general_settings_title", nil)
-        
+    
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
