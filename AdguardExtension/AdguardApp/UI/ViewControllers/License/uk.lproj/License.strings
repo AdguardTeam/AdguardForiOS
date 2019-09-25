@@ -1,8 +1,8 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
-/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Код з програми аутентифікації:";
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Код з програми авторизації:";
 
 /* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
 "5Ay-kq-RuV.text" = "У вас немає облікового запису?";
@@ -21,6 +21,9 @@
 
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "У вас є ліцензія";
+
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "Е-пошта:";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "ЗАБЛОКУВАТИ БІЛЬШЕ РЕКЛАМИ ТА ТРЕКЕРІВ";
@@ -54,9 +57,6 @@
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "СПРОБУВАТИ БЕЗПЛАТНО";
-
-/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
-"ltL-YJ-ZeT.normalTitle" = "Забули пароль?";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Відновити покупку";

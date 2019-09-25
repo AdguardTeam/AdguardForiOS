@@ -61,6 +61,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "КУПИТЬ";
 
+/* (LoginController) lost password button title */
+"lost_password" = "Забыли пароль?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
 
@@ -187,7 +190,7 @@
 "dns_server_disabled" = "отключен";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS - альтернативный способ защиты вашей конфиденциальности от всевозможных онлайн счетчиков и систем сбора данных, опасных и фишинговых сайтов";
+"adguard_dns_description" = "AdGuard DNS – альтернативный способ защиты вашей конфиденциальности от всевозможных онлайн счетчиков и систем сбора данных, опасных и фишинговых сайтов";
 
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + безопасный поиск и блокировка контента для взрослых";
@@ -397,7 +400,7 @@
 "account_is_disabled_error" = "Личный кабинет заблокирован";
 
 /* (LoginController) locked account mesage */
-"account_is_locked_error" = "Личный кабинет временно недоступен";
+"account_is_locked_error" = "Аккаунт временно заблокирован";
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Неверный токен 2FA";

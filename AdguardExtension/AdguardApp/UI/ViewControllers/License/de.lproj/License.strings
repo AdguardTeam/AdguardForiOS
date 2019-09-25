@@ -1,8 +1,8 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
-/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Schlüssel der Authentifizierungs-App:";
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Schlüssel aus der Authentifizierungs-App:";
 
 /* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
 "5Ay-kq-RuV.text" = "Sie haben noch kein Konto?";
@@ -57,9 +57,6 @@
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "Kostenlos ausprobieren";
-
-/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
-"ltL-YJ-ZeT.normalTitle" = "Passwort vergessen?";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Einkäufe wiederherstellen";
