@@ -4,9 +4,6 @@
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Pravil ni mogoče pretvoriti. Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
-/* (AEService) Service errors descriptions */
-"json_converting_error" = "Pretvornika ni mogoče inicializirati v format JSON.";
-
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Prekliči";
 
@@ -37,6 +34,12 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uporabniški filter";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Tukaj vnesite svoja pravila, ločena s prelomi vrstic";
+
+/* (User Filter Screen) Whitelist input helper */
+"whitelist_helper" = "Tu vnesite imena domen, ločena s prelomi vrstic, za katere bo AdGuard onemogočil filtriranje Safarija.";
+
 /* YES Button caption in alert */
 "common_action_yes" = "DA";
 
@@ -44,13 +47,25 @@
 "protection_enabled_caption" = "Zaščita je omogočena";
 
 /* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Nekateri zaviralci vsebine so onemogočeni";
+
+/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Zaščita je onemogočena";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Pridobite naročnino";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "NAKUP";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Izgubljeno geslo?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je potekel";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Pozor";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "Uspešno ste se prijavili v svoj račun AdGuard, vendar ni licenčnih ključev, ki bi vam dovolili aktiviranje premijske različice.";
@@ -96,6 +111,9 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
 
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Posodabljanje...";
+
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Dodaj pravilo";
 
@@ -126,8 +144,17 @@
 /* (UserFilterController) export blacklist button title */
 "export_blacklist_title" = "Izvozi";
 
+/* (Main Menu) Mail subject to support team about incorrect blocking */
+"incorrect_blocking_report" = "Prijavi nepravilno zaviranje";
+
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Prijavi napako na GitHubu";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Obrnite se na podporo";
+
+/* (Main Menu) Subject field for export logs */
+"action_export_logs" = "Izvozi dnevnike";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Poročila o napaki ni mogoče poslati. V napravi morda niste nastavili e-pošte.";
@@ -155,6 +182,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Poln-Tunel (brez ikone VPN), ki ni združljiv z drugimi aplikacijami VPN, manj stabilen";
+
+/* (MainMenuController) DNS server disabled state */
+"dns_server_disabled" = "onemogočeno";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS je nadomestni način za varovanje vaše zasebnosti pred različnimi števci, analitičnimi sistemi in lažnimi spletnimi stranmi";
@@ -245,3 +275,132 @@
 
 /* login error message */
 "login_error_message" = "Prišlo do napake pri prijavi v";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium je plačana letna storitev z naročnino 2.99 USD/leto (cena se lahko razlikuje glede na regijo). Plačilo se zaračuna v računu iTunes ob potrditvi nakupa. Naročnina se samodejno obnovi, razen če se samodejno podaljšanje izklopi vsaj 24 ur pred koncem trenutnega obdobja. Račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Vašo naročnino lahko upravljate in samodejno podaljšanje lahko izklopite tako, da po nakupu naročnine odprete nastavitve računa iTunes.<br><br><a href=%1$@>Politika zasebnosti</a> <br><br><a href=%2$@>Pogoji uporabe</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Politika zasebnosti</a> <br><br><a href=%2$@>Pogoji uporabe</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "Vredu";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Politika zasebnosti";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Ustvarjen bo VPN";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "Za nastavitev poljubnih nastavitev DNS je potreben VPN. Ustvarjen VPN je lokalni, kar pomeni, da vaš promet ne bo usmerjen prek nobenega strežnika.\nKo uporabljate ta profil VPN, mi ne zbiramo nobenih podatkov.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Prosimo, počakajte...";
+
+/* (MainController) Share this app initial text on Mail Body (text row) */
+"share_mail_body_text" = "Pravkar sem namestil AdGuard AdBlocker za iOS.";
+
+/* (MainController) Share this app initial text on Mail Body (before link row) */
+"share_mail_body_subtext" = "Če želite brskati po spletu brez oglasov kot jaz, poglejte:";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Ostalo";
+
+/* (AdvancedSettingsController) "Advanced" header view title*/
+"advanced_header_title" = "Napredno";
+
+/* (ContentBlockerStateController) "Content Blockers" title */
+"content_blockers_title" = "Zaviralci vsebine";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtri:";
+
+/* (AdvancedSettingsController) "General Settings" title */
+"general_settings_title" = "Splošne nastavitve";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Najprej omogočite VPN";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "Uporablja se %@ pravil";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Onemogočeno v nastavitvah Safarija";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Nalaganje v Safari...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Dosežena je omejitev %1$@ pravil. Aplikacija morda ne deluje pravilno. Izključite dodatna pravila. Trenutno se uporablja %2$@ od %3$@ pravil; Onemogočenih je %4$@ pravil.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtri niso posodobljeni";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Ta licenca je aktivirana na največjem številu naprav.\nLicenco lahko odvežete iz neuporabljenih naprav v osebnem računu na spletnem mestu: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Preden lahko uporabite to akcijo razširitve, %1$@ mora opraviti začetno konfiguracijo. Zaženite glavno aplikacijo %2$@ naj to stori.";
+
+/* (AEUIAboutController) Alert message if user have no e-mail account on device */
+"support_message_sending_error" = "Ni mogoče poslati sporočila skupini za podporo. Niste še nastavili E-poštnega računa.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Upoštevajte, da je Zaviralec vsebine onemogočen. To pomeni, da oglasi ne bodo filtrirani ne glede na nastavitve AdGuarda. Za začetek filtriranja omogočite Zaviralca vsebine AdGuard v nastavitvah Safarija.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Ime gostitelja ni pridobljeno. Morda stran še ni bila naložena.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Varnostna politika te spletne strani ne dovoljuje zagon programa AdGuard Pomočnik.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Prišlo je do nepričakovane napake med inicializiranjem akcije Safari razširitve. Če se to znova zgodi, se obrnite na AdGuardovo Podporo.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Opozorilo";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Presegli ste največje število pravil za filtriranje.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Doživljensko";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "VKL";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "IZKL";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Domača stran:";
+
+/* (AboutController) current app version string */
+"about_version" = "Različica";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Plačajte enkrat in uporabite funkcije AdGuard Premium v vseh svojih napravah!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "Brez interneta";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Če želite zagnati svojo brezplačno preizkusno različico, se povežite z internetom";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Nepravilen e-poštni naslov ali geslo";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Račun je blokiran";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Račun je začasno blokiran";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Neveljaven žeton 2FA";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "Z nadaljevanjem sprejemate <a href=\"%@\">Pogoje in določila</a> in <a href=\"%@\">Licenco za končnega uporabnika</a>.";

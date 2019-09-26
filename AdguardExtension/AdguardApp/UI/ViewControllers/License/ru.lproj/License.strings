@@ -32,7 +32,7 @@
 "P6N-OK-fHG.text" = "Пароль:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "ЗАЙТИ В МОЙ АККУАНТ";
+"Rxf-sg-Wfk.normalTitle" = "ЗАЙТИ В МОЙ АККАУНТ";
 
 /* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "Блокируйте фишинг и другие угрозы";
