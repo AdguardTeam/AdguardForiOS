@@ -14,11 +14,11 @@ class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
 
 class DnsProxyTest: XCTestCase {
     
-    var proxyService = DnsProxyService(logWriter: LogWriterMock(), maxQueues: 5);
+    var proxyService = DnsProxyService(logWriter: LogWriterMock());
     let request = Data(base64Encoded: "3H4BAAABAAAAAAAAB2dhdGV3YXkCZmUJYXBwbGUtZG5zA25ldAAAHAAB")
 
     override func setUp() {
-        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], listenAddr: "127.0.0.1", bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare"))
+        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], listenAddr: "127.0.0.1", bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", maxQueues: 5))
     }
 
     override func tearDown() {
@@ -50,7 +50,7 @@ class DnsProxyTest: XCTestCase {
         wait(for: [expectation], timeout: 15)
         
         proxyService.stop() {}
-        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], listenAddr: "127.0.0.1", bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare"))
+        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], listenAddr: "127.0.0.1", bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", maxQueues: 5))
         
         let expectation2 = XCTestExpectation(description: "expectation2")
         
