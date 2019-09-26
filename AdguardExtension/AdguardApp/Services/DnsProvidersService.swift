@@ -48,7 +48,7 @@ struct DnsProviderFeature {
 @objcMembers
 class DnsServerInfo : ACObject {
     
-    var dnsProtocol: DnsProtocol?
+    var dnsProtocol: DnsProtocol
     var serverId: String
     var name: String
     var upstreams: [String]
@@ -59,7 +59,7 @@ class DnsServerInfo : ACObject {
     
     // MARK: - initializers and NSCoding methods
     
-    init(dnsProtocol: DnsProtocol?, serverId: String, name: String, upstreams: [String], anycast: Bool?) {
+    init(dnsProtocol: DnsProtocol, serverId: String, name: String, upstreams: [String], anycast: Bool?) {
         self.serverId = serverId
         self.dnsProtocol = dnsProtocol
         self.name = name
@@ -72,7 +72,7 @@ class DnsServerInfo : ACObject {
         serverId = aDecoder.decodeObject(forKey: "server_id") as! String
         name = aDecoder.decodeObject(forKey: "name") as! String
         upstreams = aDecoder.decodeObject(forKey: "upstreams") as! [String]
-        dnsProtocol = DnsProtocol(rawValue: aDecoder.decodeInteger(forKey: "dns_protocol"))
+        dnsProtocol = DnsProtocol(rawValue: aDecoder.decodeInteger(forKey: "dns_protocol")) ?? .dns
         super.init(coder: aDecoder)
     }
     
@@ -82,7 +82,7 @@ class DnsServerInfo : ACObject {
         aCoder.encode(serverId, forKey: "server_id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(upstreams, forKey: "upstreams")
-        aCoder.encode(dnsProtocol?.rawValue ?? DnsProtocol.dns.rawValue, forKey: "dns_protocol")
+        aCoder.encode(dnsProtocol.rawValue, forKey: "dns_protocol")
     }
 }
 
@@ -153,7 +153,7 @@ protocol DnsProvidersServiceProtocol {
     @objc func createProvider(name: String, upstreams: [String]) -> DnsProviderInfo {
         let provider = DnsProviderInfo(name: name)
         
-        let server = DnsServerInfo(dnsProtocol: nil, serverId: UUID().uuidString, name: name, upstreams: upstreams, anycast: nil)
+        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: upstreams, anycast: nil)
         
         provider.servers = [server]
         

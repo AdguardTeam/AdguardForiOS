@@ -504,11 +504,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
-                guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
-                savedDatas[type] = data
-                let jsonData = processData(data, domain, type)
-                
-                sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
+                autoreleasepool {
+                    guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                    savedDatas[type] = data
+                    let jsonData = processData(data, domain, type)
+                    
+                    sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
+                }
             }
             
             modified = true
@@ -570,12 +572,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
-                guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
-                savedDatas[type] = data
-                
-                let jsonData = processData(data, type)
-                
-                sSelf.safariService.save(json: jsonData, type: type.rawValue)
+                autoreleasepool {
+                    guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                    savedDatas[type] = data
+                    
+                    let jsonData = processData(data, type)
+                    
+                    sSelf.safariService.save(json: jsonData, type: type.rawValue)
+                }
             }
             
             modified = true

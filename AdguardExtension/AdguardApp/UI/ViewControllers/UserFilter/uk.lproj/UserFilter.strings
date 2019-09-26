@@ -25,6 +25,9 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "СКАСУВАТИ";
 
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
+"cce-mi-paP.normalTitle" = "Очистити";
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "ДОДАТИ";
 

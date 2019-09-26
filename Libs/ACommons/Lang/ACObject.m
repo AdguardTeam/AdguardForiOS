@@ -28,7 +28,7 @@
 #pragma mark - ACDObject
 /////////////////////////////////////////////////////////////////////
 
-static NSMutableDictionary *_propertyNamesForClasses;
+static NSDictionary *_propertyNamesForClasses;
 
 @implementation ACObject
 
@@ -41,7 +41,7 @@ static NSMutableDictionary *_propertyNamesForClasses;
     @autoreleasepool {
         
         if (!_propertyNamesForClasses)
-            _propertyNamesForClasses = [NSMutableDictionary dictionary];
+            _propertyNamesForClasses = [NSDictionary dictionary];
         
         // obtainning typies of object properties
         unsigned int count = 0;
@@ -76,8 +76,13 @@ static NSMutableDictionary *_propertyNamesForClasses;
             NSMutableSet *propertyNames = _propertyNamesForClasses[className];
             
             if (!propertyNames) {
+                NSMutableDictionary *newPropertyNamesForClasses = [NSMutableDictionary dictionaryWithDictionary:_propertyNamesForClasses];
                 propertyNames = [NSMutableSet set];
-                _propertyNamesForClasses[className] = propertyNames;
+                newPropertyNamesForClasses[className] = propertyNames;
+                
+                // _propertyNamesForClasses field can be read in another thread
+                // we use immutable dictianary to prevent crashes
+                _propertyNamesForClasses = [newPropertyNamesForClasses copy];
             }
             
             [propertyNames addObjectsFromArray:pNames];
