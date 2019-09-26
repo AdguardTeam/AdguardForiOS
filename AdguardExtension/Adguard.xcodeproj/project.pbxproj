@@ -598,6 +598,8 @@
 		7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */; };
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
+		7EB3094B233B4E5E006C6EC1 /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */; };
+		7EB3094C233B7C60006C6EC1 /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -1751,6 +1753,7 @@
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
+		7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -2310,6 +2313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB3094C233B7C60006C6EC1 /* Mobile.framework in Frameworks */,
 				65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */,
 				65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */,
 			);
@@ -3337,6 +3341,8 @@
 			children = (
 				D0D6BA0721A6AF63007360BC /* Settings.storyboard */,
 				D0DB1B052148DB35006EB991 /* SettingsController.swift */,
+				7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */,
+				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
 			path = Settings;
@@ -3372,7 +3378,6 @@
 				D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */,
 				D07AA066220823670065779F /* ChooseProtocolController.swift */,
 				D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */,
-				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
 				D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */,
 				D005096C2202F5EB006BC10C /* DnsProviderDetailsController.swift */,
 				D07AA060220490EC0065779F /* DnsProvidersContainerController.swift */,
@@ -5200,6 +5205,7 @@
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				D031A12B219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
+				7EB3094B233B4E5E006C6EC1 /* AdvancedSettingsController.swift in Sources */,
 				65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */,
 				655A023A1C6B7686000F00D7 /* ACLJobController.m in Sources */,

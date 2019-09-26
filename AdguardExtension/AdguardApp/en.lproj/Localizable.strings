@@ -309,9 +309,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Other";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Advanced";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Content blockers";
 

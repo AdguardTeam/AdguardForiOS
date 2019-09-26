@@ -69,6 +69,8 @@ NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecu
 NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
+NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
+NSString* AEDefaultsShowProgressBar = @"AEDefaultsShowProgressBar";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"

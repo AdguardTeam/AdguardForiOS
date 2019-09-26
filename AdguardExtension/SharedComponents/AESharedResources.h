@@ -225,6 +225,14 @@ extern NSString* _Nonnull AEDefaultsRestartByReachability;
  User defaults key, which defines vpn tunnel mode */
 extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
 
+/**
+ User defaults key, which defines whether developer mode is enabled */
+extern NSString* _Nonnull AEDefaultsDeveloperMode;
+
+/**
+ User defaults key, which defines whether show progress bar is enabled */
+extern NSString* _Nonnull AEDefaultsShowProgressBar;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

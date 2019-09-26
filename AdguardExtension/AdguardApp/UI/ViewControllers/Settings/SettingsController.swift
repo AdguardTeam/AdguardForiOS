@@ -24,31 +24,19 @@ class SettingsController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
-    private let safariService: SafariService = ServiceLocator.shared.getService()!
-    private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
-    @IBOutlet weak var simplifiedSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
-    @IBOutlet weak var restartTunnelSwitch: UISwitch!
-    
-    @IBOutlet weak var restartCell: UITableViewCell!
+    @IBOutlet weak var developerModeSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
     
     @IBOutlet var themeButtons: [UIButton]!
     
-    var proObservation: NSKeyValueObservation?
-    
-    private let segueIdentifier = "contentBlockersScreen"
-    
     // Sections
     private let themeSection = 0
     private let otherSection = 1
-    private let advancedSection = 2
     
     // Raws
     private let systemDefault = 0
@@ -57,10 +45,8 @@ class SettingsController: UITableViewController {
     
     private let wifiOnlyRow = 0
     private let invertWhitelistRow = 1
-    
-    private let simplifiedRow = 0
-    private let restartRow = 1
-    private let contentBlockersRow = 2
+    private let developerModeRow = 2
+    private let advancedSettingsRow = 3
     
     private var headersTitles: [String] = []
     
@@ -72,35 +58,18 @@ class SettingsController: UITableViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
-            [weak self] (notification) in
-            guard let sSelf = self else { return }
-            DispatchQueue.main.async{
-                sSelf.restartTunnelSwitch.isOn = sSelf.vpnManager.enabled
-            }
-            if sSelf.vpnManager.lastError != nil {
-                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
-            }
-        }
-        
+
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
         tableView.rowHeight = UITableView.automaticDimension
         
         invertedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-        simplifiedSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
+        
         let wifiOnlyObject = resources.sharedDefaults().object(forKey: AEDefaultsWifiOnlyUpdates) as? NSNumber
         let wifiOnly = wifiOnlyObject?.boolValue ?? true
         wifiUpdateSwitch.isOn = wifiOnly
-        restartTunnelSwitch.isOn = vpnManager.restartByReachability
         
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.updateUI()
-                self?.tableView.reloadData()
-            }
-        }
+        developerModeSwitch.isOn = configuration.developerMode
         
         setupBackButton()
         
@@ -126,16 +95,9 @@ class SettingsController: UITableViewController {
         case (otherSection, invertWhitelistRow):
             invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
             toggleInverted(invertedSwitch)
-        
-        // Advanced section
-        case (advancedSection, simplifiedRow):
-            simplifiedSwitch.setOn(!simplifiedSwitch!.isOn, animated: true)
-            toggleSimplified(simplifiedSwitch)
-        case (advancedSection, restartRow):
-            restartTunnelSwitch.setOn(!restartTunnelSwitch!.isOn, animated: true)
-            toggleRestartTunnel(restartTunnelSwitch)
-        case (advancedSection, contentBlockersRow):
-            performSegue(withIdentifier: segueIdentifier, sender: self)
+        case (otherSection, developerModeRow):
+            developerModeSwitch.setOn(!developerModeSwitch!.isOn, animated: true)
+            developerModeAction(developerModeSwitch)
         default:
             break
         }
@@ -149,16 +111,12 @@ class SettingsController: UITableViewController {
         resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsWifiOnlyUpdates)
     }
     
-    @IBAction func toggleSimplified(_ sender: UISwitch) {
-        change(senderSwitch: sender, forKey: AEDefaultsJSONConverterOptimize)
-    }
-    
     @IBAction func toggleInverted(_ sender: UISwitch) {
         change(senderSwitch: sender, forKey: AEDefaultsInvertedWhitelist)
     }
     
-    @IBAction func toggleRestartTunnel(_ sender: UISwitch) {
-        vpnManager.restartByReachability = sender.isOn
+    @IBAction func developerModeAction(_ sender: UISwitch) {
+        configuration.developerMode = sender.isOn
     }
     
     @IBAction func systemDefaultTheme(_ sender: UIButton) {
@@ -171,17 +129,6 @@ class SettingsController: UITableViewController {
     
     @IBAction func lightTheme(_ sender: UIButton) {
         setTheme(withButtonTag: sender.tag)
-    }
-    
-    // MARK: - Prepare for segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdentifier{
-            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService, antibanner: aeService.antibanner())
-            let destinationVC = segue.destination as? ContentBlockerStateController
-            destinationVC?.contentBlockersDataSource = contentBlockersDataSource
-            destinationVC?.theme = theme
-        }
     }
     
     // MARK: - table view cells
@@ -223,16 +170,12 @@ class SettingsController: UITableViewController {
             }
         }
         
-        if indexPath.section == advancedSection && indexPath.row == restartRow && !configuration.proStatus{
-            return 0.0
-        }
-        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - private methods
     
-    func change(senderSwitch: UISwitch, forKey key: String) {
+    private func change(senderSwitch: UISwitch, forKey key: String) {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
@@ -262,9 +205,7 @@ class SettingsController: UITableViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSwitch(invertedSwitch)
-        theme.setupSwitch(simplifiedSwitch)
         theme.setupSwitch(wifiUpdateSwitch)
-        theme.setupSwitch(restartTunnelSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
@@ -282,14 +223,11 @@ class SettingsController: UITableViewController {
         default:
             themeButtons[light].isSelected = true
         }
-        
-        restartCell.isHidden = !configuration.proStatus
     }
     
     private func fillHeaderTitles(){
         headersTitles.append(ACLocalizedString("theme_header_title", nil))
         headersTitles.append(ACLocalizedString("other_header_title", nil))
-        headersTitles.append(ACLocalizedString("advanced_header_title", nil))
     }
     
     private func calculateHeaderHeight(section: Int) -> CGFloat{

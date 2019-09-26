@@ -24,7 +24,6 @@ class DnsSettingsController : UITableViewController{
     
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
-    @IBOutlet weak var tunnelDescription: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -103,17 +102,6 @@ class DnsSettingsController : UITableViewController{
             let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
             let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
             serverName.text = "\(server) (\(protocolName))"
-        }
-        
-        switch (vpnManager.tunnelMode) {
-        case APVpnManagerTunnelModeSplit:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_split_description", nil)
-        case APVpnManagerTunnelModeFull:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_full_description", nil)
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_full_without_icon_description", nil)
-        default:
-            break
         }
     }
     
