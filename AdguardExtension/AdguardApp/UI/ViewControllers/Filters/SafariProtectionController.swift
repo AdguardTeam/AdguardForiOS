@@ -32,8 +32,8 @@ class SafariProtectionController: UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     
-    private var filtersCoutObservation: Any?
-    private var activeFiltersCoutObservation: Any?
+    private var filtersCountObservation: Any?
+    private var activeFiltersCountObservation: Any?
     
     private let descriptionSection = 0
     private let descriptionCell = 0
@@ -78,11 +78,11 @@ class SafariProtectionController: UITableViewController {
             sSelf.numberOfFiltersLabel.text = filtersDescriptionText
         }
         
-        filtersCoutObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
+        filtersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
             updateFilters()
         }
         
-        activeFiltersCoutObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
+        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
             updateFilters()
         }
         
@@ -122,21 +122,6 @@ class SafariProtectionController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5.0
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case descriptionSection:
-            return 1
-        case contentSection:
-            return 4
-        default:
-            return 0
-        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

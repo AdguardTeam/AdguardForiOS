@@ -409,6 +409,7 @@ typedef enum : NSUInteger {
                                 
                                 [main view];
                                 [mainMenuController view];
+                                [safariProtectionController view];
                                 [userFilterController view];
 
                                 self.window.rootViewController = nav;
