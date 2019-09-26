@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "Sistemska privzeta";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "Tema";
+
+/* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
+"crJ-Vv-yrm.headerTitle" = "Napredno";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "Drugo";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "Svetla";
