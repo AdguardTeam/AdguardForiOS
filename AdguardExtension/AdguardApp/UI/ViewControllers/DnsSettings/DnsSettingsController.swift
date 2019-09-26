@@ -23,7 +23,10 @@ class DnsSettingsController : UITableViewController{
     //MARK: - IB Outlets
     
     @IBOutlet weak var enabledSwitch: UISwitch!
+    @IBOutlet weak var requestBlockingSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
+    @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
+    @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -31,6 +34,7 @@ class DnsSettingsController : UITableViewController{
     
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
     
@@ -45,7 +49,7 @@ class DnsSettingsController : UITableViewController{
         
         observation = vpnManager.observe(\.tunnelMode) { [weak self] (mode, change) in
             DispatchQueue.main.async {
-                self?.updateUI()
+                self?.updateVpnState()
             }
         }
         
@@ -60,13 +64,25 @@ class DnsSettingsController : UITableViewController{
             }
         }
         
-        self.updateUI()
+        self.updateVpnState()
         setupBackButton()
         updateTheme()
+        
+        requestBlockingSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
+        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled_state", nil) : ACLocalizedString("disabled_state", nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let contentSection = 1
+        let requestBlockingRow = 0
+        
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+       
+        if indexPath.section == contentSection {
+            cell.contentView.alpha = vpnManager.enabled ? 1.0 : 0.5
+            cell.isUserInteractionEnabled = vpnManager.enabled
+        }
+        
         theme.setupTableCell(cell)
         return cell
     }
@@ -86,11 +102,16 @@ class DnsSettingsController : UITableViewController{
         }
     }
 
+    @IBAction func requestBlockingAction(_ sender: UISwitch) {
+        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsDNSRequestsBlocking)
+        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled_state", nil) : ACLocalizedString("disabled_state", nil)
+    }
     
     // MARK: private methods
     
-    private func updateUI() {
+    private func updateVpnState() {
         enabledSwitch.isOn = vpnManager.enabled
+        systemProtectionStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         if vpnManager.isCustomServerActive() {
             serverName.text = vpnManager.activeDnsServer!.name
@@ -103,6 +124,10 @@ class DnsSettingsController : UITableViewController{
             let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
             serverName.text = "\(server) (\(protocolName))"
         }
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     private func updateTheme() {
@@ -110,6 +135,7 @@ class DnsSettingsController : UITableViewController{
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
+        theme.setupSwitch(requestBlockingSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

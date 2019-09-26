@@ -32,9 +32,6 @@ NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
-NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
-NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
-NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
@@ -71,6 +68,7 @@ NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
 NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowProgressBar = @"AEDefaultsShowProgressBar";
+NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"

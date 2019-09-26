@@ -107,7 +107,7 @@
 "hoU-PM-icY.text" = "Monitor all DNS requests on your device and manage them";
 
 /* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "DNS Requests Log";
+"jdk-AZ-MK8.title" = "Filtering log";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCEL";
@@ -128,7 +128,7 @@
 "pPC-fU-UPD.text" = "Tunnel Mode";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "Server";
+"pbu-cZ-0Vd.text" = "DNS server";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Server name";

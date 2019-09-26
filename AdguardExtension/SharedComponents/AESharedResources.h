@@ -111,20 +111,6 @@ extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
 extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 
 /**
- User Defaults key, which defines total request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsCount;
-
-/**
- User Defaults key, which defines total request time.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsTime;
-/**
- User Defaults key, which defines total trackers request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalTrackersCount;
-
-/**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
  */
 extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
@@ -232,6 +218,10 @@ extern NSString* _Nonnull AEDefaultsDeveloperMode;
 /**
  User defaults key, which defines whether show progress bar is enabled */
 extern NSString* _Nonnull AEDefaultsShowProgressBar;
+
+/**
+ User defaults key, which defines whether DNS request blocking is enabled */
+extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
