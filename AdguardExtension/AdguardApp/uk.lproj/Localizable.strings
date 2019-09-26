@@ -58,6 +58,12 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Отримати підписку";
 
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "КУПИТИ";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Забули пароль?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Термін дії Преміум завершився";
 
@@ -273,6 +279,12 @@
 /* login error message */
 "login_error_message" = "Під час входу сталася помилка";
 
+/* purchase secription format */
+"purchase_description_format" = "Про передплату AdGuard:<br><br>• Платіж буде стягнуто з вашого облікового запису iTunes при підтвердженні покупки.<br>• Передплата автоматично продовжується, доки не буде вимкнена принаймні за 24 години до завершення поточного періоду.<br>• Оплата за продовження буде стягнута впродовж 24 годин до завершення поточного періоду. Ви можете керувати своїми передплатами та вимкнути автоматичне продовження в налаштуваннях свого облікового запису iTunes після придбання передплати.<br><br><a href=%1$@>Політика приватності</a> <br><br><a href=%2$@>Умови користування</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Політика приватності</a> <br><br><a href=%2$@>Умови користування</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "ОК";
 
@@ -312,11 +324,17 @@
 /* (AdvancedSettingsController) "General Settings" title */
 "general_settings_title" = "Загальні налаштування";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Спочатку потрібно ввімкнути VPN";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ правил використовуються";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Вимкнено в параметрах Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Завантаження в Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Додаток може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
@@ -366,8 +384,26 @@
 /* (AboutController) current app version string */
 "about_version" = "Версія";
 
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Сплачуйте один раз і користуйтесь функціями AdGuard Premium на всіх своїх пристроях!";
+
+/* (TrialController) alert text title if there is no internet */
+"no_internet" = "Немає з'єднання з Інтернетом";
+
+/* (TrialController) alert text message if there is no internet */
+"no_internet_message" = "Під’єднайтесь до Інтернету, щоб почати безкоштовне пробне користування";
+
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Невірна електронна пошта або пароль";
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "Обліковий запис заблоковано";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Обліковий запис тимчасово заблоковано";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Недійсний маркер 2FA";
+
+/* (LoginController) terms and eula text */
+"login_terms_string" = "Продовжуючи, ви приймаєте <a href=\"%@\">Умови користування</a> та <a href=\"%@\">Ліцензійну угоду кінцевого користувача</a>.";
