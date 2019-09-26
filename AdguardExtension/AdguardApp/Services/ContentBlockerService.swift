@@ -417,7 +417,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
             }
             
-            safariService.save(json: resultData, type: contentBlocker.rawValue)
+            safariService.save(json: resultData, type: contentBlocker)
             
             return resultError
         }
@@ -461,7 +461,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             var rollback: ()->Void = {
                 for (_, obj) in savedDatas.enumerated() {
-                    sSelf.safariService.save(json: obj.value, type: obj.key.rawValue)
+                    sSelf.safariService.save(json: obj.value, type: obj.key)
                     sSelf.resources.whitelistContentBlockingRules = (savedRules as NSArray).mutableCopy() as? NSMutableArray
                 }
             }
@@ -505,11 +505,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 autoreleasepool {
-                    guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                    guard let data = sSelf.safariService.readJson(forType: type) else { return }
                     savedDatas[type] = data
                     let jsonData = processData(data, domain, type)
                     
-                    sSelf.safariService.save(json: jsonData as Data, type: type.rawValue)
+                    sSelf.safariService.save(json: jsonData as Data, type: type)
                 }
             }
             
@@ -531,7 +531,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             var rollback: ()->Void = {
                 for (_, obj) in savedDatas.enumerated() {
-                    sSelf.safariService.save(json: obj.value, type: obj.key.rawValue)
+                    sSelf.safariService.save(json: obj.value, type: obj.key)
                     sSelf.resources.invertedWhitelistContentBlockingObject = invertedObject
                 }
             }
@@ -573,12 +573,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
                 autoreleasepool {
-                    guard let data = sSelf.safariService.readJson(forType: type.rawValue) else { return }
+                    guard let data = sSelf.safariService.readJson(forType: type) else { return }
                     savedDatas[type] = data
                     
                     let jsonData = processData(data, type)
                     
-                    sSelf.safariService.save(json: jsonData, type: type.rawValue)
+                    sSelf.safariService.save(json: jsonData, type: type)
                 }
             }
             

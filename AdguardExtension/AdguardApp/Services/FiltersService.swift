@@ -623,6 +623,11 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
             let diff = sSelf.getDiff()
             
+            if diff.filters.count == 0 && diff.groups.count == 0 {
+                sSelf.endUpdate(taskId: backgroundTaskID)
+                return
+            }
+            
             DDLogInfo("DIFF: \(diff)")
             
             diff.filters.forEach({ (filterId: Int, enabled: Bool) in
@@ -636,19 +641,24 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             })
             
             sSelf.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
-                sSelf.updateQueue.async {
-                    
-                    sSelf.updateInProcess = false
-                    
-                    if sSelf.needUpdate {
-                        DispatchQueue.main.async {
-                            sSelf.processUpdate()
-                        }
-                    }
-                    
-                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
-                }
+                sSelf.endUpdate(taskId: backgroundTaskID)
             })
+        }
+    }
+    
+    private func endUpdate(taskId: UIBackgroundTaskIdentifier) {
+        updateQueue.async { [weak self] in
+            guard let sSelf = self else { return }
+            
+            sSelf.updateInProcess = false
+            
+            if sSelf.needUpdate {
+                DispatchQueue.main.async {
+                    self?.processUpdate()
+                }
+            }
+            
+            UIApplication.shared.endBackgroundTask(taskId)
         }
     }
     
