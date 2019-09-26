@@ -44,7 +44,7 @@
 "kCb-lJ-BLL.normalTitle" = "ДОБАВИТЬ";
 
 /* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Получить Premium";
+"lFg-x8-C9b.normalTitle" = "Получить Премиум";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ОТМЕНА";
