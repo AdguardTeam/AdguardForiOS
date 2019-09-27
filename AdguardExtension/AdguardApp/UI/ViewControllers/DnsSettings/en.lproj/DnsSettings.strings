@@ -28,8 +28,8 @@
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "SAVE AND SELECT";
 
-/* Class = "UINavigationItem"; title = "DNS Privacy"; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "DNS Privacy";
+/* Class = "UINavigationItem"; title = "System protection"; ObjectID = "D3X-CK-RSY"; */
+"D3X-CK-RSY.title" = "System protection";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";

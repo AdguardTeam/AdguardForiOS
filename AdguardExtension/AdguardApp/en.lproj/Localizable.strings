@@ -404,3 +404,9 @@
 
 /* (LoginController) terms and eula text */
 "login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
+
+/* (SafariProtectionController) userFilter enabled state label */
+"enabled" = "Enabled";
+
+/* (SafariProtectionController) userFilter disabled state label */
+"disabled" = "Disabled";
