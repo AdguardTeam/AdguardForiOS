@@ -67,14 +67,16 @@ class DnsSettingsController : UITableViewController{
         self.updateVpnState()
         setupBackButton()
         updateTheme()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         requestBlockingSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
         requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled_state", nil) : ACLocalizedString("disabled_state", nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let contentSection = 1
-        let requestBlockingRow = 0
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
        

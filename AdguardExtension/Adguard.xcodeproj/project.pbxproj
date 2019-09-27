@@ -604,6 +604,7 @@
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
 		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
+		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
 		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
 		7EFA495E22E1EE69004B8EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
@@ -1788,6 +1789,7 @@
 		7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UtilsTest.swift"; sourceTree = "<group>"; };
 		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
 		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
+		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
 		7EF9189122F05F8A00427A61 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
@@ -3385,6 +3387,7 @@
 				D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */,
 				D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */,
 				D07AA0622207A5B10065779F /* NewDnsServerController.swift */,
+				7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */,
 			);
 			path = DnsSettings;
 			sourceTree = "<group>";
@@ -5101,6 +5104,7 @@
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
 				7E4D204022D71A5B003B0E75 /* mz_zip_rw.c in Sources */,
 				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
+				7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */,
 				D0F8F6B422F1CCC40044DCFA /* FilterDetailsController.swift in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D07427F3232B97040019AAF4 /* SafariRule.swift in Sources */,
