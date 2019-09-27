@@ -600,6 +600,9 @@
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
 		7E6BE2A6233A77D400389EDD /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
+		7E9AA373233E1DAA00A083D2 /* ListOfRules.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9AA372233E1DAA00A083D2 /* ListOfRules.storyboard */; };
+		7E9AA375233E1DBE00A083D2 /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9AA374233E1DBE00A083D2 /* ListOfRulesTableController.swift */; };
+		7E9AA377233E1DDC00A083D2 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9AA376233E1DDC00A083D2 /* ListOfRulesController.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -1755,6 +1758,9 @@
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
+		7E9AA372233E1DAA00A083D2 /* ListOfRules.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListOfRules.storyboard; sourceTree = "<group>"; };
+		7E9AA374233E1DBE00A083D2 /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
+		7E9AA376233E1DDC00A083D2 /* ListOfRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesController.swift; sourceTree = "<group>"; };
 		7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
@@ -3139,6 +3145,16 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		7E9AA371233E1D6000A083D2 /* ListOfRules */ = {
+			isa = PBXGroup;
+			children = (
+				7E9AA372233E1DAA00A083D2 /* ListOfRules.storyboard */,
+				7E9AA374233E1DBE00A083D2 /* ListOfRulesTableController.swift */,
+				7E9AA376233E1DDC00A083D2 /* ListOfRulesController.swift */,
+			);
+			path = ListOfRules;
+			sourceTree = "<group>";
+		};
 		7EE7E1DD22E9DB2C00B2799A /* FiltersGroupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3431,6 +3447,7 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7E9AA371233E1D6000A083D2 /* ListOfRules */,
 				D0EDE44E22A927A500086C00 /* About */,
 				D0EDE45622A928F300086C00 /* DnsSettings */,
 				D0EDE44F22A927D700086C00 /* Filters */,
@@ -4238,6 +4255,7 @@
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
+				7E9AA373233E1DAA00A083D2 /* ListOfRules.storyboard in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
@@ -5050,6 +5068,7 @@
 				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
+				7E9AA377233E1DDC00A083D2 /* ListOfRulesController.swift in Sources */,
 				7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9BC81BB9824C00F53F3B /* ADLocales.m in Sources */,
@@ -5208,11 +5227,11 @@
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				D0A1AA1C22FB08ED00E3BDBF /* TrialController.swift in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
+				7E9AA375233E1DBE00A083D2 /* ListOfRulesTableController.swift in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				D031A12B219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
-				7EB3094B233B4E5E006C6EC1 /* AdvancedSettingsController.swift in Sources */,
 				65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */,
 				655A023A1C6B7686000F00D7 /* ACLJobController.m in Sources */,
