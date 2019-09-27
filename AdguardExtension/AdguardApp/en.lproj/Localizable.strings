@@ -399,8 +399,8 @@
 /* (LoginController) terms and eula text */
 "login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
 
-/* (DNSSettingsController) DNS requests blocking enabled title */
-"enabled_state" = "Enabled";
+/* (SafariProtectionController) userFilter enabled state label */
+"enabled" = "Enabled";
 
-/* (DNSSettingsController) DNS requests blocking disabled title */
-"disabled_state" = "Disabled";
+/* (SafariProtectionController) userFilter disabled state label */
+"disabled" = "Disabled";

@@ -200,6 +200,10 @@ extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 
 /**
+ User default key, which indicates whether safari protaction is enabled*/
+extern NSString* _Nonnull SafariProtectionState;
+
+/**
  User defaults key, which defines, whether vpn is enabled */
 extern NSString* _Nonnull AEDefaultsVPNEnabled;
 

@@ -400,12 +400,16 @@ typedef enum : NSUInteger {
                                 UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
                                 UserFilterController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
                                 
+                                UIStoryboard *filtersStoryBoard = [UIStoryboard storyboardWithName:@"Filters" bundle:[NSBundle mainBundle]];
+                                SafariProtectionController* safariProtectionController = [filtersStoryBoard instantiateViewControllerWithIdentifier:@"SafariProtectionController"];
+                                
                                 userFilterController.newRuleText = path;
                                 
-                                nav.viewControllers = @[main, mainMenuController, userFilterController];
+                                nav.viewControllers = @[main, mainMenuController, safariProtectionController, userFilterController];
                                 
                                 [main view];
                                 [mainMenuController view];
+                                [safariProtectionController view];
                                 [userFilterController view];
 
                                 self.window.rootViewController = nav;
