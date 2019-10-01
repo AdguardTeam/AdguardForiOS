@@ -2243,7 +2243,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while ([result next]) {
             
             groupMetadata = [[ASDFilterGroup alloc] initFromDbResult:result];
-            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %d", groupMetadata.groupId, (int)groupMetadata.enabled);
+            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %@", groupMetadata.groupId, groupMetadata.enabled.boolValue ? @"enabled" : @"disabled");
             [groups addObject:groupMetadata];
         }
         [result close];
