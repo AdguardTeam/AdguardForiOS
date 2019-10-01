@@ -47,7 +47,10 @@ NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
-NSString* AEDefaultsWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsSafariWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsWifiExceptionsEnabled = @"AEDefaultsWifiExceptionsEnabled";
+NSString* AEDefaultsDnsWhitelistEnabled = @"AEDefaultsDnsWhitelistEnabled";
+NSString* AEDefaultsDnsBlacklistEnabled = @"AEDefaultsDnsBlacklistEnabled";
 
 NSString* AEDefaultsGeneralContentBlockerRulesCount = @"AEDefaultsGeneralContentBlockerRulesCount";
 NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContentBlockerRulesCount";

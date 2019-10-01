@@ -13,9 +13,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     let enabledLineColor = UIColor(hexString: "#4D4D4D")
     let disabledLineColor = UIColor(hexString: "#D8D8D8")
 
-    var blacklist = false
     var rule: RuleInfo?
     var delegate : RuleDetailsControllerDelegate?
+    
+    var type: ListOfRulesType = .safariUserFilter
     
     // MARK: IB outlets
     
@@ -34,7 +35,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
             self?.updateTheme()
         }
         
-        domainOrRuleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
+        domainOrRuleLabel.text = getEditCaptionText()
 
         
         ruleTextView.text = rule?.rule
@@ -42,7 +43,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
-        ruleTextView.keyboardType = blacklist ? .default : .URL
+        ruleTextView.keyboardType = type == .safariUserFilter ? .default : .URL
         
         updateTheme()
     }
@@ -81,5 +82,22 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
+    }
+    
+    private func getEditCaptionText() -> String {
+        switch type {
+        case .safariUserFilter:
+            return ACLocalizedString("add_blacklist_rule_caption", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_caption", nil)
+        case .dnsBlackList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .dnsWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .safariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .invertedSafariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        }
     }
 }

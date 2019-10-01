@@ -179,7 +179,19 @@ extern NSString*  _Nonnull AEDefaultsUserFilterEnabled;
 
 /**
  User defaults key, which defines user filter is enabled */
-extern NSString*  _Nonnull AEDefaultsWhitelistEnabled;
+extern NSString*  _Nonnull AEDefaultsSafariWhitelistEnabled;
+
+/**
+ User defaults key, which defines wifi exceptions is enabled */
+extern NSString*  _Nonnull AEDefaultsWifiExceptionsEnabled;
+
+/**
+ User defaults key, which defines dns whitelist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsWhitelistEnabled;
+
+/**
+ User defaults key, which defines dns  blacklist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsBlacklistEnabled;
 
 /**
  User defaults keys, which contains number of rules for each content blocker*/

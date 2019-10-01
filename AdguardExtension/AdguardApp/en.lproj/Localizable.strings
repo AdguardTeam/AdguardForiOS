@@ -43,6 +43,15 @@
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will disable Safari filtering.";
 
+/* (User Filter Screen) dns blacklist input helper */
+"dns_blacklist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will block connection";
+
+/* (User Filter Screen) dns whitelist input helper */
+"dns_whitelist_helper" = "Enter here the domain names separated by line breaks, which will be allowed to connect";
+
+/* (User Filter Screen) wifi exceptions input helper */
+"wifi_exceptions_helper" = "Enter here the Wi-Fi names separated by line breaks, for which AdGuard will disable DNS";
+
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
 
@@ -97,9 +106,6 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Enabled filters: %d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Disabled";
-
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
@@ -111,6 +117,15 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
 
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "AdGuard won't block these domains";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text" = "AdGuard will block these domains";
+
+/* (UserFilterController) wifi exceptions description */
+"wifi_exceptions_text" = "Enter the Wi-Fi names here. AdGuard will disable DNS for these networks.";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Updating...";
 
@@ -120,11 +135,18 @@
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Add a domain";
 
+/* (UserFilterController) add wifi exception name button title */
+"add_wifi_name_title" = "Add a name";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "your Wi-Fi name";
+
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Rule:";
@@ -132,17 +154,8 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domain:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Import";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Import";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Export";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Export";
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Name:";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Report incorrect blocking";
@@ -399,8 +412,41 @@
 /* (LoginController) terms and eula text */
 "login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
 
-/* (SafariProtectionController) userFilter enabled state label */
+/* (ListOfRulesModel) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi exceptions";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "Whitelist";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "Blacklist";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari user filter";
+
+/* (ListOfRulesModel) title for inverted safari whiteList */
+"inverted_whitelist_title" = "Whitelist (inverted)";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Export";
+
+/* (ListOfRulesModel) title for export dns and safari white list*/
+"export_whitelist" = "Export whitelist";
+
+/* (ListOfRulesModel) title for export dns black list */
+"export_blacklist_title" = "Export blacklist";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Import";
+
+/* (ListOfRulesModel) title for import dns and safari white list*/
+"import_whitelist" = "Import whitelist";
+
+/* (ListOfRulesModel) title for import dns black list */
+"import_blacklist_title" = "Import blacklist";
+
+/* "Enabled" title */
 "enabled" = "Enabled";
 
-/* (SafariProtectionController) userFilter disabled state label */
+/* "Disabled" title */
 "disabled" = "Disabled";

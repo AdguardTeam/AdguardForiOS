@@ -149,9 +149,8 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Incompatible with other VPN apps, 
-unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y8-H6-3Rj" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="64" y="26" width="516" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Incompatible with other VPN apps,  unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y8-H6-3Rj" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="64" y="26" width="330" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -265,7 +264,7 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
             </objects>
             <point key="canvasLocation" x="11" y="-815"/>
         </scene>
-        <!--System protection-->
+        <!--DNS Privacy-->
         <scene sceneID="Q9V-mP-4MB">
             <objects>
                 <tableViewController id="So5-wP-aAQ" customClass="DnsSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -579,6 +578,9 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="m0U-wC-ci8" kind="show" identifier="wifiExceptionSegue" id="p1D-b0-AcR"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -840,6 +842,9 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
                                                 <constraint firstItem="cxk-WO-v4N" firstAttribute="centerY" secondItem="3iO-7B-KIS" secondAttribute="centerY" id="sjP-j1-yxM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="m0U-wC-ci8" kind="show" identifier="dnsBlacklistSegue" id="5mX-Yl-NLK"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iI3-sy-nfa">
                                         <rect key="frame" x="0.0" y="336" width="414" height="94"/>
@@ -895,6 +900,9 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
                                                 <constraint firstItem="NOn-Jw-xUm" firstAttribute="leading" secondItem="Wml-J6-ced" secondAttribute="trailing" constant="24" id="rGk-Au-InU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="m0U-wC-ci8" kind="show" identifier="dnsWhitelistSegue" id="FZs-v2-XaS"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -919,6 +927,16 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSY-14-hFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="815.94202898550736" y="-788.16964285714278"/>
+        </scene>
+        <!--UserFilter-->
+        <scene sceneID="Gkt-PZ-ORu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserFilter" id="m0U-wC-ci8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ghu-tn-8x3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t8w-fU-0wa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1697" y="-861"/>
         </scene>
         <!--Choose Server-->
         <scene sceneID="7zB-M9-0y6">
@@ -2619,4 +2637,7 @@ unstable" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" bas
         <image name="whitelist-icon" width="24" height="24"/>
         <image name="wi-fi" width="22" height="17"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="p1D-b0-AcR"/>
+    </inferredMetricsTieBreakers>
 </document>

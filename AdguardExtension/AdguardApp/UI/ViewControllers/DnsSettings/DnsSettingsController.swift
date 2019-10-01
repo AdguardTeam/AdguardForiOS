@@ -35,10 +35,22 @@ class DnsSettingsController : UITableViewController{
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
+    private let wifiExceptionSegue = "wifiExceptionSegue"
     
     // MARK: - view controller life cycle
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == wifiExceptionSegue {
+            if let controller = segue.destination as? ListOfRulesController {
+                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                controller.model = model
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +84,10 @@ class DnsSettingsController : UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestBlockingSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
-        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled_state", nil) : ACLocalizedString("disabled_state", nil)
+        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled", nil) : ACLocalizedString("disabled", nil)
     }
+    
+    // MARK: - Table view delegate methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let contentSection = 1
@@ -106,7 +120,7 @@ class DnsSettingsController : UITableViewController{
 
     @IBAction func requestBlockingAction(_ sender: UISwitch) {
         resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsDNSRequestsBlocking)
-        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled_state", nil) : ACLocalizedString("disabled_state", nil)
+        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled", nil) : ACLocalizedString("disabled", nil)
     }
     
     // MARK: private methods

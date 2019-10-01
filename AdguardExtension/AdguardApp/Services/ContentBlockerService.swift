@@ -383,7 +383,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
                 
-                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsWhitelistEnabled) as? Bool ?? true
+                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsSafariWhitelistEnabled) as? Bool ?? true
                 
                 if whitelistEnabled {
                     if inverted {
