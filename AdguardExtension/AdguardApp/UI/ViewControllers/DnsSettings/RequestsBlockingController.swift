@@ -22,6 +22,7 @@ class RequestsBlockingController: UITableViewController {
 
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
+    @IBOutlet weak var filtersLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
