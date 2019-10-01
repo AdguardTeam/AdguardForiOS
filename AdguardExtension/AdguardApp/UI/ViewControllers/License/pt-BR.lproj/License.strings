@@ -34,7 +34,7 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "IR PARA MINHA CONTA";
 
-/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "Bloqueio de phishing e outras ameaças";
 
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */

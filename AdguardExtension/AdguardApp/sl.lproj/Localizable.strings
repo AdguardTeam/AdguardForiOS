@@ -196,7 +196,7 @@
 "google_dns_description" = "Google brezplačnA alternativna DNS storitev";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS strežnik, ki varuje vašo napravo pred spletnimi grožnjami";
+"open_dns_description" = "Strežnik DNS, ki varuje vašo napravo pred lažnim predstavljanjem in prevarami";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Odprt DNS strežnik z blokiranjem vsebin za odrasle";

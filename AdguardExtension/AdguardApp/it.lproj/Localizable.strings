@@ -196,7 +196,7 @@
 "google_dns_description" = "servizio di risoluzione dns globale fornito da Google";
 
 /* Open DNS server description */
-"open_dns_description" = "filtraggio personalizzato e protezione da furti di identità";
+"open_dns_description" = "Server DNS che protegge il tuo dispositivo da phishing e truffe";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Server OpenDNS con blocco dei contenuti per adulti";

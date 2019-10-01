@@ -196,7 +196,7 @@
 "google_dns_description" = "Gratis alternativ DNS tjeneste af Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS-server der beskytter din enhed mod online-trusler";
+"open_dns_description" = "DNS-server der beskytter din enhed mod phishing og svindel";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS server med voksent indholdsblokering";

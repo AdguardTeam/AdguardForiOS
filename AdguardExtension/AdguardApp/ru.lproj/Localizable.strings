@@ -199,7 +199,7 @@
 "google_dns_description" = "Бесплатный альтернативный DNS-сервис от Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS-сервер, защищающий устройство от сетевых угроз";
+"open_dns_description" = "DNS-сервер, защищающий устройство от фишинга и мошенничества";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Сервер OpenDNS с блокировкой контента для взрослых";

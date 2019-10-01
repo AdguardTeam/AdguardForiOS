@@ -199,7 +199,7 @@
 "google_dns_description" = "由 Google 提供之免費替代的 DNS 服務";
 
 /* Open DNS server description */
-"open_dns_description" = "保護您的裝置免於線上威脅之 DNS 伺服器";
+"open_dns_description" = "保護您的裝置免於網路釣魚和詐騙之 DNS 伺服器";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "有成人內容封鎖的 OpenDNS 伺服器";
