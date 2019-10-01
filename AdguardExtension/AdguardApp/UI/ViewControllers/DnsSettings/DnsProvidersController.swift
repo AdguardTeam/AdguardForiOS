@@ -25,6 +25,10 @@ class DnsProviderCell : UITableViewCell {
     @IBOutlet weak var selectedButton: UIButton!
 }
 
+class descriptionCell: UITableViewCell {
+    @IBOutlet weak var descriptionLabel: ThemableLabel!
+}
+
 class DnsProvidersController: UITableViewController {
     //MARK: - IB Outlets
     
@@ -84,49 +88,63 @@ class DnsProvidersController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let provider = providers[indexPath.row]
-        let custom = vpnManager.isCustomProvider(provider)
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: custom ? "CustomDnsServerCell" :"DnsServerCell") as! DnsProviderCell
-        
-        cell.nameLabel.text = provider.name
-        if provider.summary != nil {
-            cell.descriptionLabel?.text = ACLocalizedString(provider.summary!, nil)
+        if indexPath.section == 1 {
+            let provider = providers[indexPath.row]
+            let custom = vpnManager.isCustomProvider(provider)
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: custom ? "CustomDnsServerCell" :"DnsServerCell") as! DnsProviderCell
+            
+            cell.nameLabel.text = provider.name
+            if provider.summary != nil {
+                cell.descriptionLabel?.text = ACLocalizedString(provider.summary!, nil)
+            }
+            
+            cell.selectedButton.isSelected = selectedCellRow == indexPath.row
+            cell.selectedButton.tag = indexPath.row
+            
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.nameLabel)
+            if cell.descriptionLabel != nil {
+                theme.setupLabel(cell.descriptionLabel!)
+            }
+            
+            return cell
+        } else {
+            let reuseId = "descriptionCell"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? descriptionCell else { return UITableViewCell() }
+            theme.setupLabel(cell.descriptionLabel)
+            return cell
         }
-        
-        cell.selectedButton.isSelected = selectedCellRow == indexPath.row
-        cell.selectedButton.tag = indexPath.row
-        
-        theme.setupTableCell(cell)
-        theme.setupLabel(cell.nameLabel)
-        if cell.descriptionLabel != nil {
-            theme.setupLabel(cell.descriptionLabel!)
-        }
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return providers.count
+        return section == 0 ? 1 : providers.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if vpnManager.isCustomProvider(providers[indexPath.row]) {
-            guard let parentController = self.parent as? DnsProvidersContainerController else { return }
-            parentController.editProvider(providers[indexPath.row])
+        if indexPath.section == 1{
+            if vpnManager.isCustomProvider(providers[indexPath.row]) {
+                guard let parentController = self.parent as? DnsProvidersContainerController else { return }
+                parentController.editProvider(providers[indexPath.row])
+            }
+            else {
+                providerToShow = providers[indexPath.row]
+                performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
+            }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        else {
-            providerToShow = providers[indexPath.row]
-            performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderContainerController
             controller.provider = providerToShow

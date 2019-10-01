@@ -1127,7 +1127,7 @@
             </objects>
             <point key="canvasLocation" x="1697" y="-861"/>
         </scene>
-        <!--Choose Server-->
+        <!--DNS server-->
         <scene sceneID="7zB-M9-0y6">
             <objects>
                 <viewController id="Das-Gb-UPp" customClass="DnsProvidersContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -1198,7 +1198,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FQI-dl-UA9"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose Server" id="1tX-ii-cOK"/>
+                    <navigationItem key="navigationItem" title="DNS server" id="1tX-ii-cOK"/>
                     <connections>
                         <outlet property="addProviderButton" destination="mBx-dq-oa2" id="pPv-Jg-gCO"/>
                         <outlet property="buttonBottomSeparator" destination="dqE-di-rOz" id="kPA-WR-gjm"/>
@@ -1218,19 +1218,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Cnx-RO-Yib">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="a2t-rG-DMO">
-                            <rect key="frame" x="0.0" y="200.5" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="276" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" id="kut-tt-B6F" customClass="descriptionCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="75.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kut-tt-B6F" id="PX7-cd-BCS">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="75.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-tk-ohH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="16" width="366" height="43.5"/>
+                                            <string key="text">DNS (Domain Name System) is Internet's equivalent of a phone book. They maintain a directory of domain names and translate them to IP adresses</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="iaJ-tk-ohH" secondAttribute="trailing" constant="24" id="ApF-cn-A0A"/>
+                                        <constraint firstItem="iaJ-tk-ohH" firstAttribute="top" secondItem="PX7-cd-BCS" secondAttribute="top" constant="16" id="crR-nh-8uG"/>
+                                        <constraint firstItem="iaJ-tk-ohH" firstAttribute="leading" secondItem="PX7-cd-BCS" secondAttribute="leading" constant="24" id="d4l-Bl-iO8"/>
+                                        <constraint firstAttribute="bottom" secondItem="iaJ-tk-ohH" secondAttribute="bottom" constant="16" id="nPP-3e-9re"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="iaJ-tk-ohH" id="Oug-va-qMb"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DnsServerCell" rowHeight="100" id="WN0-Hx-Q2Q" customClass="DnsProviderCell" customModule="Adguard">
-                                <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="103.5" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WN0-Hx-Q2Q" id="wQZ-AW-xXH">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
