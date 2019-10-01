@@ -199,7 +199,7 @@
 "google_dns_description" = "구글이 제공하는 글로벌 DNS 서비스";
 
 /* Open DNS server description */
-"open_dns_description" = "사용자 정의 필터링과 개인 정보 도용 보호";
+"open_dns_description" = "피싱 및 사기로부터 장치를 보호하는 DNS 서버입니다.";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "성인 콘텐츠를 차단해주는 OpenDNS 서버";

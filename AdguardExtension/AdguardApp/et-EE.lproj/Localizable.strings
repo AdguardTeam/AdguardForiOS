@@ -196,7 +196,7 @@
 "google_dns_description" = "Globaalne DNS teenus Google'ilt";
 
 /* Open DNS server description */
-"open_dns_description" = "valikuline filtreerimine ning identiteedivarguse kaitse";
+"open_dns_description" = "DNS server koos kohandatud filtreerimisega. Kaitseb seadet pahavara vastu";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS server koos täiskasvanutele sisu blokeerimisega";

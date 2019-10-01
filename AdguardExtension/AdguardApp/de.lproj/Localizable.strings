@@ -199,7 +199,7 @@
 "google_dns_description" = "Freier alternativer DNS-Service von Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS-Server, der Ihr Gerät vor Online-Bedrohungen schützt";
+"open_dns_description" = "DNS-Server, der Ihr Gerät vor Phishing und Online-Betrug schützt";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS-Server mit Blockierung von Inhalten für Erwachsene";

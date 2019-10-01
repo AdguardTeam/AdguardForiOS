@@ -196,7 +196,7 @@
 "google_dns_description" = "Service de DNS gratuit de Google";
 
 /* Open DNS server description */
-"open_dns_description" = "Serveur DNS qui protège votre appareil des menaces en ligne";
+"open_dns_description" = "Serveur DNS qui protège votre appareil de l'hameçonnage et des escrocs";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Serveur OpenDNS avec blocage du contenu réservé aux adultes";

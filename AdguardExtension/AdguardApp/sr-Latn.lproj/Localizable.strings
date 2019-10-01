@@ -26,6 +26,9 @@
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "Ažuriranja nisu pronađena.";
 
+/* Open DNS server description */
+"open_dns_description" = "DNS server sa prilagođenim filtriranjem koji štiti vaš uređaj od štetnog softvera";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Kupite naše slonove kroz iMessage";
 

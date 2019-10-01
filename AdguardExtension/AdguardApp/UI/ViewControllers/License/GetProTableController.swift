@@ -56,9 +56,9 @@ class GetProTableController: UITableViewController {
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
     private let purchaseRow = 2
-    private let securityRow = 3
+    private let customRow = 3
     private let privacyRow = 4
-    private let customRow = 5
+    private let securityRow = 5
     private let subscribedRow = 6
     private let trialRow = 7
     private let descriptionRow = 8
