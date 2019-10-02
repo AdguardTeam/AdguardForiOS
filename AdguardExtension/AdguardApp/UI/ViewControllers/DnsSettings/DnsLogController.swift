@@ -25,7 +25,7 @@ class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
-class DnsLogController: UITableViewController, UISearchBarDelegate {
+class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol {
     //MARK: - IB Outlets
     
     @IBOutlet var searchView: UIView!
@@ -33,17 +33,19 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
-    var selectedRecord: LogRecord?
+    private var selectedRecord: LogRecord?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        model.delegate = self
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -104,10 +106,22 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Actions
     
+    @IBAction func clearAction(_ sender: UIBarButtonItem) {
+        model.clearRecords()
+    }
+    
     // MARK: - searchbar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         model.searchString = searchText
+    }
+    
+    // MARK: - dns requests delegate
+    
+    func requestsCleared() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - private methods

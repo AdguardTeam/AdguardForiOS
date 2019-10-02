@@ -29,6 +29,10 @@ struct LogRecord {
     var upstreamAddr: String?
 }
 
+protocol DnsRequestsDelegateProtocol {
+    func requestsCleared()
+}
+
 // MARK: - DnsRequestLogModel -
 /**
  view model for DnsLogController
@@ -60,6 +64,8 @@ class DnsRequestLogViewModel {
             recordsObserver?(self.records)
         }
     }
+    
+    var delegate: DnsRequestsDelegateProtocol? = nil
     
     // MARK: - private fields
     
@@ -99,9 +105,16 @@ class DnsRequestLogViewModel {
         }
     }
     
+    func clearRecords(){
+        vpnManager.clearDnsRequestsLog()
+        allRecords = []
+        searchRecords = []
+        delegate?.requestsCleared()
+    }
+    
     // MARK: - private methods
     
-    func dateFromRecord (_ record: DnsLogRecord) -> String {
+    private func dateFromRecord (_ record: DnsLogRecord) -> String {
         dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: record.date)
     }

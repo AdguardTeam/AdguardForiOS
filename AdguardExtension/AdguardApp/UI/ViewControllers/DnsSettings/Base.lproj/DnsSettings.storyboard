@@ -624,6 +624,9 @@
                     <navigationItem key="navigationItem" title="DNS Requests Log" id="jdk-AZ-MK8">
                         <barButtonItem key="rightBarButtonItem" title="Clear" style="plain" id="Z98-CD-iDK">
                             <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="clearAction:" destination="9dz-HN-Ala" id="cOh-r4-bGl"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="q6c-oe-jSW">
