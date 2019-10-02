@@ -634,7 +634,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // obtain rules
         let jsonString = converterResult?[AESFConvertedRulesKey] as? String
-        if jsonString == nil || jsonString! == "undefined" || jsonString! == "[]" {
+        if jsonString == nil || jsonString! == "undefined" {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)
