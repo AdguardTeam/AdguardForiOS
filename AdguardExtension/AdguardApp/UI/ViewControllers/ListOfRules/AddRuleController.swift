@@ -26,7 +26,7 @@ protocol AddRuleControllerDelegate {
 class AddRuleController: UIViewController, UITextViewDelegate {
     
     var delegate : AddRuleControllerDelegate?
-    var blacklist = false
+    var type: ListOfRulesType = .safariUserFilter
     
     @IBOutlet weak var contentView: RoundrectView!
     
@@ -50,10 +50,10 @@ class AddRuleController: UIViewController, UITextViewDelegate {
             UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
         
-        titleLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_title" : "add_whitelist_domain_title", "")
-        editCaption.text = ACLocalizedString(blacklist ? "add_blacklist_rule_caption" : "add_whitelist_domain_caption", "")
+        titleLabel.text = getTitleText()
+        editCaption.text = getEditCaptionText()
         
-        ruleTextView.keyboardType = blacklist ? .default : .URL
+        ruleTextView.keyboardType = type == .safariUserFilter ? .default : .URL
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
@@ -67,7 +67,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ruleTextView.becomeFirstResponder()
-        rulePlaceholderLabel.text = ACLocalizedString(blacklist ? "add_blacklist_rule_placeholder" : "add_whitelist_domain_placeholder", "")
+        rulePlaceholderLabel.text = getPlaceholderText()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -127,5 +127,56 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         rulePlaceholderLabel.textColor = theme.placeholderTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
+    }
+    
+    private func getTitleText() -> String {
+        switch type {
+        case .safariUserFilter:
+            return ACLocalizedString("add_blacklist_rule_title", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_title", nil)
+        case .dnsBlackList:
+            return ACLocalizedString("add_whitelist_domain_title", nil)
+        case .dnsWhiteList:
+            return ACLocalizedString("add_whitelist_domain_title", nil)
+        case .safariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_title", nil)
+        case .invertedSafariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_title", nil)
+        }
+    }
+    
+    private func getEditCaptionText() -> String {
+        switch type {
+        case .safariUserFilter:
+            return ACLocalizedString("add_blacklist_rule_caption", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_caption", nil)
+        case .dnsBlackList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .dnsWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .safariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .invertedSafariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_caption", nil)
+        }
+    }
+    
+    private func getPlaceholderText() -> String {
+        switch type {
+        case .safariUserFilter:
+            return ACLocalizedString("add_blacklist_rule_placeholder", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_placeholder", nil)
+        case .dnsBlackList:
+            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
+        case .dnsWhiteList:
+            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
+        case .safariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
+        case .invertedSafariWhiteList:
+            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
+        }
     }
 }

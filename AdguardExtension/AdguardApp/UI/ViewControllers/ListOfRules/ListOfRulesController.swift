@@ -18,30 +18,23 @@
 
 import Foundation
 
-class UserFilterController : UIViewController, UIViewControllerTransitioningDelegate, UITextViewDelegate {
+class ListOfRulesController : UIViewController, UIViewControllerTransitioningDelegate, UITextViewDelegate {
     
     @IBOutlet var helperLabel: ThemableLabel!
-    
-    var whitelist = false
+
     @objc var newRuleText: String?
     
     let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    let fileShare: FileShareServiceProtocol = FileShareService()
     lazy var inverted: Bool = { self.resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist) }()
     
-    var tableController : UserFilterTableController?
+    var tableController : ListOfRulesTableController?
     
-    lazy var model: UserFilterViewModel = {
-        let type: UserFilterType = self.whitelist ? (inverted ? .invertedWhitelist : .whitelist) : .blacklist
-        let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-        return UserFilterViewModel(type, resources: self.resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)}()
+    var model: ListOfRulesModel?
     
     private var textViewIsEditing = false
-    private var userFilterText = ACLocalizedString("user_filter_helper", nil)
-    private var whitelistText = ACLocalizedString("whitelist_helper", nil)
+    
     
     // MARK: IB outlets
     
@@ -89,20 +82,16 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
             showRuleAddedDialog()
         }
         
-        if whitelist {
-            let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-            self.navigationItem.title = ACLocalizedString(inverted ? "inverted_whitelist_title" : "whitelist_title", "")
-            helperLabel.text = whitelistText
-        }
-        else {
-            self.navigationItem.title = ACLocalizedString("user_filter_title", "")
-            helperLabel.text = userFilterText
-        }
+        navigationItem.title = model?.title
+        helperLabel.text = model?.helperLabelText
+        
+        exportButton.isHidden = model?.listType == .wifiExceptions
+        importButton.isHidden = model?.listType == .wifiExceptions
         
         editMode(false)
         
         textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16.0, bottom: 16, right: 16.0)
+        textView.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         textView.textContainer.lineFragmentPadding = 0.0
         
         setupBackButton()
@@ -111,12 +100,12 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userFilterTableSegue" {
-            let controller = segue.destination as! UserFilterTableController
+            let controller = segue.destination as! ListOfRulesTableController
             controller.model = model
             tableController = controller
             
-            importButton.setTitle(ACLocalizedString(whitelist ? "import_whitelist_title" : "import_blacklist_title", ""), for: .normal)
-            exportButton.setTitle(ACLocalizedString(whitelist ? "export_whitelist_title" : "export_blacklist_title", ""), for: .normal)
+            importButton.setTitle(model?.importTitle, for: .normal)
+            exportButton.setTitle(model?.exportTitle, for: .normal)
             updateBottomBar()
         }
     }
@@ -124,30 +113,18 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     // MARK: - Actions
 
     @IBAction func editAction(_ sender: Any) {
-        textView.text = model.rules.map { $0.rule }.joined(separator: "\n")
+        textView.text = model?.listOfRules.map { $0.rule }.joined(separator: "\n")
         editMode(true)
         barState = .edit
         updateBottomBar()
     }
     
     @IBAction func exportAction(_ sender: UIView) {
-        fileShare.exportFile(parentController: self, sourceView: sender, sourceRect: sender.bounds, filename: whitelist ? ( inverted ? "adguard_inverted_whitelist.txt" : "adguard_whitelist.txt") : "adguard_user_filter.txt", text: model.plainText()) { (message) in
-            
-        }
+        model?.exportList(parentController: self, sourceView: sender, sourceRect: sender.bounds)
     }
     
     @IBAction func importAction(_ sender: Any) {
-        fileShare.importFile(parentController: self) { [weak self] (text, errorMessage) in
-            guard let strongSelf = self else { return }
-            if errorMessage != nil {
-                ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: errorMessage)
-            }
-            else {
-                self?.model.importRules(text) { errorMessage in
-                    ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: errorMessage)
-                }
-            }
-        }
+        model?.importList(parentController: self)
     }
     
     @IBAction func cancelSelectionAction(_ sender: Any) {
@@ -155,7 +132,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     }
     
     @IBAction func saveAction(_ sender: Any) {
-        model.importRules(textView.text) { (error) in
+        model?.importRules(textView.text) { (error) in
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error)
         }
         editMode(false)
@@ -185,7 +162,7 @@ class UserFilterController : UIViewController, UIViewControllerTransitioningDele
     private func cancelAction(){
         tableController?.setCustomEditing(false)
         barState = .normal
-        model.selectAllRules(false)
+        model?.selectAllRules(false)
         updateBottomBar()
         editMode(false)
         textView.resignFirstResponder()

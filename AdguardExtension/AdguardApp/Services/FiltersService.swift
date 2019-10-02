@@ -584,7 +584,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.subtitle = String(format: ACLocalizedString("filter_group_filters_count_format", nil), enabledCount, group.filters.count)
         }
         else {
-            group.subtitle = ACLocalizedString("filters_group_disabled", nil)
+            group.subtitle = ACLocalizedString("disabled", nil)
         }
     }
     
