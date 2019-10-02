@@ -52,8 +52,6 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     private let dnsCellReuseId = "DnsFilterCell"
     private let addFilterCellReuseId = "AddFilterCell"
     
-    private let addFilterCell = 0
-    
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -67,11 +65,15 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Table view delegate methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.filters.count + 1
+        return section == 0 ? 1 : model.filters.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == addFilterCell{
+        if indexPath.section == 0{
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
                 // Hide cell
                 cell.frame.size.height = 0.0
@@ -82,7 +84,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: dnsCellReuseId) as? DnsFilterCell {
-                cell.filter = model.filters[indexPath.row - 1]
+                cell.filter = model.filters[indexPath.row]
                 
                 theme.setupLabels(cell.themableLabels)
                 theme.setupSwitch(cell.filterSwitch)
@@ -94,7 +96,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == addFilterCell {
+        if indexPath.section == 0 {
             // Add filter
         } else {
             
