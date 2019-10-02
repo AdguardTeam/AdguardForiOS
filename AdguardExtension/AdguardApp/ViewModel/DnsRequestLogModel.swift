@@ -102,6 +102,7 @@ class DnsRequestLogViewModel {
     // MARK: - private methods
     
     func dateFromRecord (_ record: DnsLogRecord) -> String {
+        dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: record.date)
     }
     

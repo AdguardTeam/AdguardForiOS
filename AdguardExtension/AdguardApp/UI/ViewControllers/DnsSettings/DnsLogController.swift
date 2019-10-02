@@ -22,6 +22,7 @@ import UIKit
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
     @IBOutlet weak var details: ThemableLabel!
+    @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
 class DnsLogController: UITableViewController, UISearchBarDelegate {
@@ -67,17 +68,22 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
         
-        var detailsString = String(format: "%@, type: %@", record.time!, record.type!)
+        // Change to category description
+        var detailsString = String(format: "type: %@", record.type!)
+        let timeString = record.time ?? ""
+        
         if record.answer == nil || record.answer == "" {
             detailsString += ", NXDOMAIN"
         }
 
         cell.domain.text = record.name
         cell.details.text = detailsString
+        cell.timeLabel.text = timeString
         
         theme.setupLogTableCell(cell, blocked: isBlocked(record))
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
+        theme.setupLabel(cell.timeLabel)
 
         return cell
     }
