@@ -507,3 +507,6 @@
 
 /*(LogCategory) extensions category*/
 "extensions" = "Extensions";
+
+/* Default DNS filter name */
+"default_dns_filter_name" = "DNS Filter";

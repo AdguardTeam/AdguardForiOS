@@ -45,7 +45,10 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let model: DnsFiltersModel = DnsFiltersModel()
+    lazy private var model: DnsFiltersModel = {
+        let filtersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+        return DnsFiltersModel(filtersService: filtersService)
+    }()
     
     private var themeObservation: Any? = nil
     

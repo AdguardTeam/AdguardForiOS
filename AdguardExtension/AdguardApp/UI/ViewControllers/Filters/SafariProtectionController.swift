@@ -51,18 +51,20 @@ class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        let dnsFiltersService: DnsFiltersServiceProtocol! = ServiceLocator.shared.getService()!
+        
         switch segue.identifier {
         case whiteListSegue:
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
                 let type: ListOfRulesType = inverted ? .invertedSafariWhiteList : .safariWhiteList
-                let model = ListOfRulesModel(listOfRulesType: type, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let model = ListOfRulesModel(listOfRulesType: type, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme, dnsFiltersService: dnsFiltersService)
                 controller.model = model
             }
             
         case blackListSegue:
             if let controller = segue.destination as? ListOfRulesController{
-                let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme, dnsFiltersService: dnsFiltersService)
                 controller.model = model
             }
             

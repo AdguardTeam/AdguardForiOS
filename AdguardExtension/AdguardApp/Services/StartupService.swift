@@ -85,6 +85,8 @@ class StartupService : NSObject{
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         ServiceLocator.shared.addService(service: userNotificationService)
-
+        
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources)
+        ServiceLocator.shared.addService(service: dnsFiltersService)
     }
 }

@@ -45,7 +45,8 @@ class DnsSettingsController : UITableViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == wifiExceptionSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme, dnsFiltersService: dnsFiltersService)
                 controller.model = model
             }
         }
