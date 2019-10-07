@@ -90,7 +90,7 @@ struct LogRecord {
     
     private func removeDomainFromDnsWhitelist() -> BottomShadowButton {
         let button = BottomShadowButton()
-        button.title = "REMOVE FROM WHITELIST"
+        button.title = ACLocalizedString("remove_from_whitelist", nil)
         button.titleColor = UIColor(hexString: "#eb9300")
         button.buttonAction {
             print(button.title)
@@ -101,7 +101,7 @@ struct LogRecord {
     
     private func removeDomainFromDnsBlacklistButton() -> BottomShadowButton {
         let button = BottomShadowButton()
-        button.title = "REMOVE FROM BLACKLIST"
+        button.title = ACLocalizedString("remove_from_blacklist", nil)
         button.titleColor = UIColor(hexString: "#eb9300")
         button.buttonAction {
             print(button.title)
@@ -112,7 +112,7 @@ struct LogRecord {
 
     private func addDomainToDnsWhitelistButton() -> BottomShadowButton {
         let button = BottomShadowButton()
-        button.title = "ADD TO WHITELIST"
+        button.title = ACLocalizedString("add_to_whitelist", nil)
         button.titleColor = UIColor(hexString: "#67b279")
         button.buttonAction {
             print(button.title)
@@ -123,7 +123,7 @@ struct LogRecord {
     
     private func addDomainToDnsBlacklistButton() -> BottomShadowButton {
         let button = BottomShadowButton()
-        button.title = "ADD TO BLACKLIST"
+        button.title = ACLocalizedString("add_to_blacklist", nil)
         button.titleColor = UIColor(hexString: "#df3812")
         button.buttonAction {
             print(button.title)

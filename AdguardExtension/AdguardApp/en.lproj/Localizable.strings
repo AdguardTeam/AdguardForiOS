@@ -450,3 +450,15 @@
 
 /* "Disabled" title */
 "disabled" = "Disabled";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "REMOVE FROM WHITELIST";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "REMOVE FROM BLACKLIST";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "ADD TO WHITELIST";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "ADD TO BLACKLIST";
