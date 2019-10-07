@@ -221,35 +221,6 @@ typedef enum {
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////////
 
-- (void)savePermanentlyCountersOfConversion{
-
-    //Permanently save current converted rules in user defaults
-    
-    DDLogInfo(@"(AEService) Permanently saving current converted rules in user defaults.");
-    NSNumber *value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONConvertedRules];
-    if (value) {
-        [[_sharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONConvertedRules];
-        DDLogInfo(@"Rules: %@", value);
-    }
-    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesForConvertion];
-    if (value) {
-        [[_sharedResources sharedDefaults] setObject:value forKey:AEDefaultsJSONRulesForConvertion];
-        DDLogInfo(@"From rules: %@", value);
-    }
-    
-    value = [AESharedResources sharedDefaultsValueOfTempKey:AEDefaultsJSONRulesOverlimitReached];
-    if (value) {
-        [[_sharedResources sharedDefaults] setBool:[value boolValue] forKey:AEDefaultsJSONRulesOverlimitReached ];
-    }
-}
-
-- (void)removeTempCountersOfConversion {
-    
-    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONConvertedRules];
-    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesForConvertion];
-    [AESharedResources sharedDefaultsRemoveTempKey:AEDefaultsJSONRulesOverlimitReached];
-}
-
 - (void)checkForServiceReady:(ReadyFlagType)readyFlag{
 
     [_readyLock lock];
@@ -294,19 +265,6 @@ typedef enum {
             _firstRunInProgress = YES;
         }
     }
-}
-
-- (AESFilterConverter *)createConverterToJsonWithError:(NSError **)error {
-    
-    AESFilterConverter *converterToJSON = [AESFilterConverter new];
-    if (!converterToJSON) {
-        DDLogError(@"(AEService) Can't initialize converter to JSON format!");
-        NSString *errorDescription = ACLocalizedString(@"json_converting_error", @"(AEService) Service errors descriptions");
-        if (error != nil) {
-            *error = [NSError errorWithDomain:AEServiceErrorDomain code:AES_ERROR_UNSUPPORTED_RULE userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
-        }
-    }
-    return converterToJSON;
 }
 
 @end

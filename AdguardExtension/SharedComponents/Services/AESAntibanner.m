@@ -60,21 +60,13 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 @implementation AESAntibanner {
     
     dispatch_queue_t  workQueue;
-    dispatch_source_t updateTimer;
-    ACLExecuteBlockDelayed *updateFilterFromUI;
     
     BOOL    observingDbStatus;
     
     Reachability    *reach;
-    BOOL    observingReachabilityStatus;
     
-    BOOL    serviceEnabled;
     BOOL    serviceReady;
     BOOL    serviceInstalled; // true if at least one antibanner filter installed in DB
-    
-    NSArray *filtersMetadataCache;
-    NSDate *filterMetaCacheLastUpdated;
-    NSArray *groupsMetadataCache;
     
     BOOL _updatesRightNow;
     BOOL _inTransaction;
@@ -108,51 +100,19 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         _networking = networking;
         _asDataBase = asDatabase;
-        observingReachabilityStatus = observingDbStatus = NO;
+        observingDbStatus = NO;
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
         
-        __typeof__(self) __weak wSelf = self;
-        
-        updateFilterFromUI =
-        [[ACLExecuteBlockDelayed alloc]
-         initWithTimeout:AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY
-         leeway:AS_CHECK_FILTERS_UPDATES_LEEWAY
-         queue:workQueue
-         block:^{
-             
-             __typeof__(self) sSelf = wSelf;
-             
-             if (!sSelf->serviceEnabled)
-                 return;
-             
-             dispatch_async(sSelf->workQueue, ^{
-                 
-                 [sSelf updateAntibannerForced:NO interactive:YES];
-             });
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 
-                 [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
-             });
-             
-         }];
-        
         // set Reachability
         reach = [Reachability reachabilityWithHostname:[ABECFilterClient reachabilityHost]];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reachabilityChanged:)
-                                                     name:kReachabilityChangedNotification
-                                                   object:reach];
         
-        serviceEnabled = NO;
         serviceReady = NO;
         serviceInstalled = NO;
         
         _metadataForSubscribeOutdated = YES;
         _updatesRightNow = NO;
         _inTransaction = NO;
-        
     }
     
     return self;
@@ -160,18 +120,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (void)dealloc{
     
-    [self stopObservingReachabilityStatus];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
     if (observingDbStatus) {
         [_asDataBase removeObserver:self forKeyPath:@"ready"];
         observingDbStatus = NO;
     }
-
-#if !OS_OBJECT_USE_OBJC
-    if (workQueue) dispatch_release(workQueue);
-#endif
-    
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -180,29 +132,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 @synthesize updatesRightNow = _updatesRightNow;
 
-- (BOOL)enabled{
-    return serviceEnabled;
-}
-
-- (void)setEnabled:(BOOL)enabled{
+- (void)start{
     
     dispatch_sync(workQueue, ^{
-        
-        if (enabled != serviceEnabled){
-            
-            serviceEnabled = enabled;
-            if (serviceEnabled) {
-                
-                if ([self checkInstalledFiltersInDB]){
-                    
-                    [self setServiceToReady];
-                }
-            }
-            else{
-                
-                [self stopObservingReachabilityStatus];
-                serviceReady = NO;
-            }
+        if ([self checkInstalledFiltersInDB]){
+            [self setServiceToReady];
         }
     });
 }
@@ -211,37 +145,35 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     NSMutableArray *rules = [NSMutableArray array];
     
-    if (serviceEnabled) {
         
-        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
+        
+        FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
+        
+        BOOL userFilterEnabled = NO;
+        
+        while ([result next]) {
             
-            FMResultSet *result = [db executeQuery:@"select filter_id from filters where is_enabled = 1"];
+            NSNumber *filterId = result[0];
             
-            BOOL userFilterEnabled = NO;
+            // Make sure that user filter rules are loaded after other filters
+            // https://github.com/AdguardTeam/AdguardForMac/issues/41
+            // https://github.com/AdguardTeam/AdguardForiOS/issues/64
             
-            while ([result next]) {
-                
-                NSNumber *filterId = result[0];
-                
-                // Make sure that user filter rules are loaded after other filters
-                // https://github.com/AdguardTeam/AdguardForMac/issues/41
-                // https://github.com/AdguardTeam/AdguardForiOS/issues/64
-                
-                if ([filterId integerValue] == ASDF_USER_FILTER_ID) {
-                    userFilterEnabled = YES;
-                }
-                else{
-                    [self addActiveRulesFromDb:db forFilter:filterId to:rules];
-                }
+            if ([filterId integerValue] == ASDF_USER_FILTER_ID) {
+                userFilterEnabled = YES;
             }
-            [result close];
-            
-            if (userFilterEnabled) {
-                
-                [self addActiveRulesFromDb:db forFilter:@(ASDF_USER_FILTER_ID) to:rules];
+            else{
+                [self addActiveRulesFromDb:db forFilter:filterId to:rules];
             }
-        }];
-    }
+        }
+        [result close];
+        
+        if (userFilterEnabled) {
+            
+            [self addActiveRulesFromDb:db forFilter:@(ASDF_USER_FILTER_ID) to:rules];
+        }
+    }];
     
     return rules;
 }
@@ -340,21 +272,16 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     if (!filterId)
         [[NSException argumentException:@"filterId"] raise];
     
-    if (serviceEnabled) {
+    __block BOOL checkResult = NO;
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
-        __block BOOL checkResult = NO;
-        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
-            
-            FMResultSet *result = [db executeQuery:@"select * from filters where filter_id = ? limit 1", filterId];
-            
-            checkResult = [result next];
-            [result close];
-        }];
+        FMResultSet *result = [db executeQuery:@"select * from filters where filter_id = ? limit 1", filterId];
         
-        return checkResult;
-    }
+        checkResult = [result next];
+        [result close];
+    }];
     
-    return NO;
+    return checkResult;
 }
 
 - (NSArray<ASDFilterRule*> *)activeRulesForFilter:(NSNumber *)filterId{
@@ -364,19 +291,16 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     if (!filterId)
         [[NSException argumentException:@"filterId"] raise];
     
-    if (serviceEnabled) {
+    [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
-        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
+        FMResultSet *result = [db executeQuery:@"select filter_id from filters where filter_id = ? and is_enabled = 1", filterId];
+        if ([result next]){
             
-            FMResultSet *result = [db executeQuery:@"select filter_id from filters where filter_id = ? and is_enabled = 1", filterId];
-            if ([result next]){
-                
-                [self addActiveRulesFromDb:db forFilter:filterId to:rules];
-            }
-            
-            [result close];
-        }];
-    }
+            [self addActiveRulesFromDb:db forFilter:filterId to:rules];
+        }
+        
+        [result close];
+    }];
     
     return rules;
 }
@@ -509,8 +433,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (void)setFilter:(NSNumber *)filterId enabled:(BOOL)enabled fromUI:(BOOL)fromUI{
     
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-    
     dispatch_sync(workQueue, ^{
         
         __block BOOL result = NO;
@@ -524,27 +446,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }];
         
     });
-    
-#elif TARGET_OS_MAC
-    
-    dispatch_async(workQueue, ^{
-        
-        __block BOOL result = NO;
-        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
-            
-            *rollback = NO;
-            result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
-        }];
-        
-        if (fromUI && result && serviceEnabled){
-            
-            [updateFilterFromUI executeOnceAfterCalm];
-        }
-        
-    });
-    
-#endif
-    
 }
 
 - (BOOL)setGroupEnabled:(FMDatabase *)db enabled:(BOOL)enabled groupId:(NSNumber *)groupId {
@@ -1059,7 +960,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
         });
     }
-    
 }
 
 - (NSNumber *)customFilterIdByUrl:(NSString *)url {
@@ -1141,8 +1041,19 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             if (removed){
                 
                 *rollback = NO;
-                if (serviceEnabled)
-                    [updateFilterFromUI executeOnceAfterCalm];
+                
+                __weak __typeof__(self) wSelf = self;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), workQueue, ^{
+                    __typeof__(self) sSelf = wSelf;
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
+                    });
+                    
+                    [sSelf updateAntibannerForced:NO interactive:YES];
+                });
+                
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -1164,7 +1075,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive{
     
-    if (serviceEnabled && !self.updatesRightNow) {
+    if (!self.updatesRightNow) {
         
         dispatch_async(workQueue, ^{
             
@@ -1371,10 +1282,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 res.lastUpdateFilterIds = filterIds;
                 
                 DDLogDebug(@"(AESAntibanner) -filterClient: filters requested");
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdatePartCompletedNotification object:self];
-//                });
             }
         }
         else {
@@ -1454,7 +1361,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (void)updateAntibannerForced:(BOOL)forced interactive:(BOOL)interactive{
     
     // return if no antibanner filters in DB
-    if (!(serviceInstalled && serviceEnabled))
+    if (!serviceInstalled)
         return;
 
     if (_asDataBase.ready){
@@ -1958,7 +1865,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         DDLogError(@"Can't install filters metadata into DB.");
                         DDLogErrorTrace();
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            USE_STRONG(self).enabled = NO;
                             [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:USE_STRONG(self)];
                         });
                         
@@ -1977,8 +1883,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 [result close];
                 USE_STRONG(self)->serviceInstalled = YES;
                 *rollback = NO;
-                if (USE_STRONG(self)->serviceEnabled)
-                    [USE_STRONG(self) setServiceToReady];
+                [USE_STRONG(self) setServiceToReady];
             }];
             
             [USE_STRONG(self) addCustomGroupIfNeeded];
@@ -2559,15 +2464,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
 }
 
-- (void)stopObservingReachabilityStatus{
-    
-    if (observingReachabilityStatus){
-        
-        [reach stopNotifier];
-        observingReachabilityStatus = NO;
-    }
-}
-
 - (void)addActiveRulesFromDb:(FMDatabase *)db forFilter:(NSNumber *)filterId to:(NSMutableArray *)rules{
     
     FMResultSet *ruleResult;
@@ -2667,15 +2563,4 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
 }
 
--(void)reachabilityChanged:(NSNotification*)note
-{
-    dispatch_async(workQueue, ^{
-        
-        if([reach isReachable])
-            [self updateAntibannerForced:YES interactive:YES];
-    });
-}
-
-
 @end
-

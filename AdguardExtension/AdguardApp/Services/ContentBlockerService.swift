@@ -38,8 +38,7 @@ protocol ContentBlockerServiceProtocol {
 @objc
 class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
-    @objc
-    var antibanner: AESAntibannerProtocol?
+    var antibannerController: AntibannerControllerProtocol
     
     // MARK: - error constants
     static let contentBlockerServiceErrorDomain = "ContentBlockerServiceErrorDomain"
@@ -81,9 +80,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibannerController: AntibannerControllerProtocol) {
         self.resources = resources
         self.safariService = safariService
+        self.antibannerController = antibannerController
         super.init()
     }
     
@@ -375,9 +375,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 // add user rules
                 
                 let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
-                let userRules = userFilterEnabled ? antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
                 
-                rules = userRules + rules
+                antibannerController.exec { (antibanner) in
+                    let userRules = userFilterEnabled ? antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+                    
+                    rules = userRules + rules
+                }
                 
                 // add whitelist rules
                 
@@ -433,9 +436,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func rules(forFilters filterIDs: [NSNumber]) -> [NSNumber: [ASDFilterRule]] {
         var rulesByFilter = [NSNumber: [ASDFilterRule]]()
         
-        for filterID in filterIDs {
-            let rules = antibanner?.activeRules(forFilter: filterID)
-            rulesByFilter[filterID] = rules
+        antibannerController.exec { (antibanner) in
+            for filterID in filterIDs {
+                rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
+            }
         }
         
         return rulesByFilter
@@ -444,11 +448,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     /** returns map [groupId: [filterId]] */
     private func activeGroups()->[NSNumber: [NSNumber]] {
         var filterByGroup = [NSNumber:[NSNumber]]()
-        let groupIDs = antibanner!.activeGroupIDs()
         
-        for groupID in groupIDs {
-            let filterIDs = antibanner!.activeFilterIDs(byGroupID: groupID)
-            filterByGroup[groupID] = filterIDs
+        antibannerController.exec { (antibanner) in
+            let groupIDs = antibanner.activeGroupIDs()
+            
+            for groupID in groupIDs {
+                let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
+                filterByGroup[groupID] = filterIDs
+            }
         }
         
         return filterByGroup
@@ -652,11 +659,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
         
-        if antibanner?.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber) ?? false {
-            return nil
+        var success = false
+        
+        antibannerController.exec { (antibanner) in
+            success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
         }
         
-        return NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
+        return success ? nil : NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                        code: ContentBlockerService.contentBlockerDBErrorCode,
                        userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
     }
@@ -680,8 +689,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         if convertedCount == 0 || errorsCount ?? 0 > 0 {
             let errorDescription = ACLocalizedString("rule_converting_error", nil)
             let error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                            code: Int(AES_ERROR_UNSUPPORTED_RULE),
-                            userInfo: [NSLocalizedDescriptionKey: errorDescription, AESUserInfoRuleObject: rule])
+                                code: ContentBlockerService.contentBlockerConverterErrorCode,
+                            userInfo: [NSLocalizedDescriptionKey: errorDescription])
             return(nil, error)
         }
         
@@ -694,7 +703,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             DDLogError("(ContentBlockerService) Can't initialize converter to JSON format!")
             let errorDescription = ACLocalizedString("json_converting_error", nil)
             let error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: Int(AES_ERROR_UNSUPPORTED_RULE),
+                                code: ContentBlockerService.contentBlockerConverterErrorCode,
                                 userInfo: [NSLocalizedDescriptionKey: errorDescription])
             return (nil, error)
         }

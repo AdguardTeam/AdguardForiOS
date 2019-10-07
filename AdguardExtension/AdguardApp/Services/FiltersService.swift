@@ -149,7 +149,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     var groups = [Group]()
     
-    private var antibanner: AESAntibannerProtocol
+    private var antibannerController: AntibannerControllerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
     
@@ -210,8 +210,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibanner: AESAntibannerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
-        self.antibanner = antibanner
+    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
+        self.antibannerController = antibannerController
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         
@@ -247,6 +247,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             sSelf.processUpdate()
         }
+        
+        antibannerController.onReady { [weak self] (antibanner) in
+            self?.load(refresh: false){}
+        }
     }
     
     deinit {
@@ -258,89 +262,91 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     func load(refresh: Bool, _ completion: @escaping () -> Void){
         
         DispatchQueue(label: "load_filter_grops_queue").async { [weak self] in
-            guard let strongSelf = self else { return }
-            
-            guard   let metadata = strongSelf.antibanner.metadata(forSubscribe: refresh),
-                let i18n = strongSelf.antibanner.i18n(forSubscribe: refresh),
-                var filters = metadata.filters else {
+            self?.antibannerController.exec { (antibanner) in
+                guard let strongSelf = self else { return }
+                
+                guard   let metadata = antibanner.metadata(forSubscribe: refresh),
+                    let i18n = antibanner.i18n(forSubscribe: refresh),
+                    var filters = metadata.filters else {
+                        completion()
+                        return
+                }
+                
+                // remove "Malware Domains" filter from filters list.
+                // Apple rejects binary with word 'malware' within
+                filters = filters.filter { (filter) in
+                    filter.filterId != 208
+                }
+                
+                let installedFilters = antibanner.filters()
+                
+                var groups = antibanner.groups()
+                
+                // set localized name for custom group. We don't store it in database
+                if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
+                    customGroup.name = ACLocalizedString("custom_group_name", nil);
+                }
+                
+                // remove user group
+                groups = groups.filter({ (group) -> Bool in
+                    return group.groupId.intValue != FilterGroupId.user
+                })
+                
+                var meta: ASDFilterMetadata
+                for item in installedFilters {
+                    let index = filters.firstIndex(of: item)
+                    if index != nil {
+                        meta = filters[index!]
+                        let values = item.dictionaryWithValues(forKeys: [
+                            "updateDate",
+                            "updateDateString",
+                            "checkDate",
+                            "checkDateString",
+                            "version",
+                            "enabled"])
+                        meta.setValuesForKeys(values)
+                    }
+                    else if item.filterId.int32Value != ASDF_USER_FILTER_ID{
+                        filters.append(item)
+                    }
+                }
+                
+                let installedFilterIDs = installedFilters.map { $0.filterId }
+                
+                let predicate = NSPredicate(format: "NOT (filterId IN %@)", installedFilterIDs)
+                let disabledFilters = filters.filter(){
+                    predicate.evaluate(with: $0)
+                }
+                
+                disabledFilters.forEach({$0.enabled = false})
+                            
+                let groupInfos = strongSelf.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
+                
+                // set real enabled statuses
+                groupInfos?.forEach({ (group) in
+                    guard let storedGroup = (strongSelf.groups.first { $0.groupId == group.groupId }) else { return }
+                    group.enabled = storedGroup.enabled
+                })
+                
+                if strongSelf.enabledFilters.count == 0 {
+                    for filterMeta in installedFilters {
+                        strongSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
+                    }
+                }
+                
+                groupInfos?.forEach({ (group) in
+                    for filter in group.filters {
+                        filter.enabled = strongSelf.enabledFilters[filter.filterId] ?? false
+                    }
+                    strongSelf.updateGroupSubtitle(group)
+                })
+                
+                DispatchQueue.main.async {
+                    strongSelf.groups = groupInfos ?? [Group]()
+                    strongSelf.filterMetas = filters
+                    strongSelf.notifyChange()
                     completion()
-                    return
-            }
-            
-            // remove "Malware Domains" filter from filters list.
-            // Apple rejects binary with word 'malware' within
-            filters = filters.filter { (filter) in
-                filter.filterId != 208
-            }
-            
-            let installedFilters = strongSelf.antibanner.filters() 
-            
-            var groups = strongSelf.antibanner.groups()
-            
-            // set localized name for custom group. We don't store it in database
-            if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
-                customGroup.name = ACLocalizedString("custom_group_name", nil);
-            }
-            
-            // remove user group
-            groups = groups.filter({ (group) -> Bool in
-                return group.groupId.intValue != FilterGroupId.user
-            })
-            
-            var meta: ASDFilterMetadata
-            for item in installedFilters {
-                let index = filters.firstIndex(of: item)
-                if index != nil {
-                    meta = filters[index!]
-                    let values = item.dictionaryWithValues(forKeys: [
-                        "updateDate",
-                        "updateDateString",
-                        "checkDate",
-                        "checkDateString",
-                        "version",
-                        "enabled"])
-                    meta.setValuesForKeys(values)
                 }
-                else if item.filterId.int32Value != ASDF_USER_FILTER_ID{
-                    filters.append(item)
-                }
-            }
-            
-            let installedFilterIDs = installedFilters.map { $0.filterId }
-            
-            let predicate = NSPredicate(format: "NOT (filterId IN %@)", installedFilterIDs)
-            let disabledFilters = filters.filter(){
-                predicate.evaluate(with: $0)
-            }
-            
-            disabledFilters.forEach({$0.enabled = false})
-                        
-            let groupInfos = strongSelf.obtainGroupsFromMetadatas(filterMetas: filters, groupMetas: groups, i18n: i18n)
-            
-            // set real enabled statuses
-            groupInfos?.forEach({ (group) in
-                guard let storedGroup = (strongSelf.groups.first { $0.groupId == group.groupId }) else { return }
-                group.enabled = storedGroup.enabled
-            })
-            
-            if strongSelf.enabledFilters.count == 0 {
-                for filterMeta in installedFilters {
-                    strongSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
-                }
-            }
-            
-            groupInfos?.forEach({ (group) in
-                for filter in group.filters {
-                    filter.enabled = strongSelf.enabledFilters[filter.filterId] ?? false
-                }
-                strongSelf.updateGroupSubtitle(group)
-            })
-            
-            DispatchQueue.main.async {
-                strongSelf.groups = groupInfos ?? [Group]()
-                strongSelf.filterMetas = filters
-                strongSelf.notifyChange()
-                completion()
             }
         }
     }
@@ -373,34 +379,37 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-
-        filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
-        for group in groups {
-            if group.groupId != FilterGroupId.custom { continue }
+        antibannerController.exec { [weak self] (antibanner) in
+            guard let sSelf = self else { return }
+            filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
             
-            let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
-            newFilter.name = filter.meta.name
-            newFilter.desc = filter.meta.descr
-            newFilter.homepage = filter.meta.homepage
-            newFilter.version = filter.meta.version
-            newFilter.enabled = true
-            newFilter.rulesCount = filter.rules.count
-            
-            group.filters = [newFilter] + group.filters
+            for group in sSelf.groups {
+                if group.groupId != FilterGroupId.custom { continue }
+                
+                let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
+                newFilter.name = filter.meta.name
+                newFilter.desc = filter.meta.descr
+                newFilter.homepage = filter.meta.homepage
+                newFilter.version = filter.meta.version
+                newFilter.enabled = true
+                newFilter.rulesCount = filter.rules.count
+                
+                group.filters = [newFilter] + group.filters
 
-            if !group.enabled {
-                setGroup(group.groupId, enabled: true)
+                if !group.enabled {
+                    sSelf.setGroup(group.groupId, enabled: true)
+                }
+                
+                sSelf.updateGroupSubtitle(group)
+                sSelf.notifyChange()
             }
             
-            updateGroupSubtitle(group)
-            notifyChange()
-        }
-       
-        antibanner.subscribeCustomFilter(from: filter) {
-            [weak self] in
-            self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-                UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            antibanner.subscribeCustomFilter(from: filter) {
+                [weak self] in
+                self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
+                }
             }
         }
     }
@@ -411,22 +420,20 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     func deleteCustomFilterWithId(_ filterId: NSNumber) {
         
-        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-        
-        antibanner.unsubscribeFilter(filterId as NSNumber)
-        
-        for group in groups {
-            if group.groupId != FilterGroupId.custom { continue }
+        antibannerController.exec { [weak self] (antibanner)  in
+            guard let sSelf = self else { return }
+            antibanner.unsubscribeFilter(filterId as NSNumber)
             
-            group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
-            
-            if group.enabled && group.filters.count == 0 {
-                setGroup(group.groupId, enabled: false)
+            for group in sSelf.groups {
+                if group.groupId != FilterGroupId.custom { continue }
+                
+                group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
+                
+                if group.enabled && group.filters.count == 0 {
+                    sSelf.setGroup(group.groupId, enabled: false)
+                }
+                sSelf.notifyChange()
             }
-            
-            notifyChange()
-            
-            UIApplication.shared.endBackgroundTask(backgroundTaskID)
         }
     }
     
@@ -440,7 +447,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         var filterIds = [Int: Bool]()
         var groupIds = [Int: Bool]()
         
-        let groupMetas = self.antibanner.groups()
+        var groupMetas: [ASDFilterGroup] = []
+        antibannerController.exec { (antibanner) in
+            groupMetas = antibanner.groups()
+        }
         
         var storedGroupStatuses = [Int: Bool]()
         groupMetas.forEach { storedGroupStatuses[$0.groupId.intValue] = $0.enabled.boolValue }
@@ -473,7 +483,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         return (filterIds, groupIds)
     }
     
-    private func obtainGroupsFromMetadatas(filterMetas: [ASDFilterMetadata], groupMetas: [ASDFilterGroup], i18n:ABECFilterClientLocalization) -> [Group]?{
+    private func obtainGroupsFromMetadatas(antibanner: AESAntibannerProtocol,filterMetas: [ASDFilterMetadata], groupMetas: [ASDFilterGroup], i18n:ABECFilterClientLocalization) -> [Group]?{
         
         if filterMetas.count == 0 || groupMetas.count == 0 {return nil}
         
@@ -641,10 +651,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 DDLogInfo("Process update filter: \(filterId) enabled: \(enabled)")
             })
             
-            diff.groups.forEach({ (groupId: Int, enabled: Bool) in
-                sSelf.antibanner.setFiltersGroup(groupId as NSNumber, enabled: enabled)
-                DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
-            })
+            sSelf.antibannerController.exec { (antibanner) in
+                diff.groups.forEach{ (groupId: Int, enabled: Bool) in
+                    antibanner.setFiltersGroup(groupId as NSNumber, enabled: enabled)
+                    DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
+                }
+            }
             
             sSelf.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
                 sSelf.endUpdate(taskId: backgroundTaskID)
@@ -679,18 +691,20 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     }
     
     private func antibannerSetFilter(filterId: Int, enabled: Bool) {
-        
-        if !antibanner.checkIfFilterInstalled(filterId as NSNumber) {
-            guard let filterMeta = (filterMetas.first { $0.filterId.intValue == filterId }) else {
-                DDLogInfo("Failed to find meta for filter with filterId = \(filterId)")
-                return
+        self.antibannerController.exec { [weak self] (antibanner) in
+            guard let sSelf = self else { return }
+            if !antibanner.checkIfFilterInstalled(filterId as NSNumber) {
+                guard let filterMeta = (sSelf.filterMetas.first { $0.filterId.intValue == filterId }) else {
+                    DDLogInfo("Failed to find meta for filter with filterId = \(filterId)")
+                    return
+                }
+                filterMeta.enabled = true
+                antibanner.subscribeFilters([filterMeta], jobController: nil)
+            } else {
+                DDLogInfo("Filter with filterId = \(filterId) is not installed")
             }
-            filterMeta.enabled = true
-            antibanner.subscribeFilters([filterMeta], jobController: nil)
-        } else {
-            DDLogInfo("Filter with filterId = \(filterId) is not installed")
-        }
 
-        antibanner.setFilter(filterId as NSNumber, enabled: enabled, fromUI: true)
+            antibanner.setFilter(filterId as NSNumber, enabled: enabled, fromUI: true)
+        }
     }
 }

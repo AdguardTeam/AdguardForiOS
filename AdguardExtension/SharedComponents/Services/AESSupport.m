@@ -22,7 +22,6 @@
 #import "ACommons/ACFiles.h"
 #import "AESharedResources.h"
 #import "NSData+GZIP.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "ABECRequest.h"
@@ -64,8 +63,8 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
-    SafariService *_safariService;
-    id<AEServiceProtocol> _aeService;
+    id<SafariServiceProtocol> _safariService;
+    id<AntibannerControllerProtocol> _antibannerController;
 }
 
 @end
@@ -81,13 +80,13 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithResources:(id)resources safariSevice:(id)safariService aeService:(id)aeService {
+- (id)initWithResources:(id)resources safariSevice:(id)safariService antibannerController:(id)antibannerController {
     
     self = [super init];
     if (self) {
         _sharedResources = resources;
         _safariService = safariService;
-        _aeService = aeService;
+        _antibannerController = antibannerController;
     }
     
     return self;
@@ -179,8 +178,10 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = _aeService.antibanner;
-    NSArray* filterIDs = antibaner.activeFilterIDs;
+    __block NSArray* filterIDs;
+    [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+        filterIDs = antibanner.activeFilterIDs;
+    }];
     
     for (NSNumber *filterId in filterIDs) {
         
@@ -266,7 +267,10 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nAEDefaultsSecurityContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSecurityContentBlockerRulesCount]];
         
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
-        NSArray *filters = [[_aeService antibanner] activeFilters];
+        __block NSArray *filters;
+        [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+            filters = [antibanner activeFilters];
+        }];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         

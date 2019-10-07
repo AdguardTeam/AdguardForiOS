@@ -36,6 +36,25 @@ class AppDelegateHelper: NSObject {
     lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     var purchaseObservation: Any?
+    let antibannerController: AntibannerControllerProtocol
+    let resources: AESharedResourcesProtocol
+    let purchaseService: PurchaseServiceProtocol
+    
+    private var firstRun: Bool {
+        get {
+            resources.sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
+        }
+        set {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsFirstRunKey)
+        }
+    }
+    @objc
+    init(antibannerController: AntibannerControllerProtocol, resources: AESharedResourcesProtocol, purchaseService: PurchaseService) {
+        self.antibannerController = antibannerController
+        self.resources = resources
+        self.purchaseService = purchaseService
+        super.init()
+    }
     
     init(appDelegate: AppDelegate) {
         self.appDelegate = appDelegate
@@ -53,8 +72,18 @@ class AppDelegateHelper: NSObject {
         
         addPurchaseStatusObserver()
         
+        antibannerController.exec { [weak self] (antibanner) in
+            guard let sSelf = self else { return }
+            if (sSelf.firstRun) {
+                AESProductSchemaManager.install()
+                sSelf.purchaseService.checkLicenseStatus()
+            } else {
+                AESProductSchemaManager.upgrade(withAntibanner: antibanner)
+            }
+        }
         return true;
     }
+    
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
@@ -63,6 +92,8 @@ class AppDelegateHelper: NSObject {
     func performFetch() {
         addPurchaseStatusObserver()
     }
+    
+    // MARK: - private methods
     
     private func getNavigationController()->UINavigationController? {
         return appDelegate.window.rootViewController as? UINavigationController

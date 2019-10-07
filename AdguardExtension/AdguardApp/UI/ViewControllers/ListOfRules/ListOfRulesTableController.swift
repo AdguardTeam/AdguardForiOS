@@ -47,7 +47,6 @@ class ListOfRulesTableController: UITableViewController, UISearchBarDelegate, UI
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     private let fileShare = FileShareService()
     private let networking: ACNNetworking = ServiceLocator.shared.getService()!
     

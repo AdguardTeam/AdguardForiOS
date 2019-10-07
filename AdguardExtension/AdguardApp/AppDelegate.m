@@ -70,7 +70,7 @@ typedef enum : NSUInteger {
     AEDownloadsCompletionBlock _downloadCompletion;
     NSArray *_updatedFilters;
     AESharedResources *_resources;
-    AEService * _aeService;
+    id<AntibannerControllerProtocol> _antibannerController;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
     ASDatabase* _asDataBase;
@@ -93,6 +93,14 @@ typedef enum : NSUInteger {
 
 - (instancetype)init {
     self = [super init];
+    
+    [StartupService start];
+    _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
+    _antibannerController = [ServiceLocator.shared getSetviceWithTypeName:@"AntibannerControllerProtocol"];
+    _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+    _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+    _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
+    
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
     return self;
@@ -103,14 +111,6 @@ typedef enum : NSUInteger {
     @autoreleasepool {
         
         //------------- Preparing for start application. Stage 1. -----------------
-        
-        [StartupService start];
-        _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
-        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
-        _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
-        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
-        _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
-        
         
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
@@ -137,24 +137,7 @@ typedef enum : NSUInteger {
         self.window.backgroundColor = [UIColor whiteColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
-            [_aeService onReady:^{
-                [_purchaseService checkPremiumStatusChanged];
-            }];
-        }
-        
-        if ([_aeService firstRunInProgress]) {
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager install];
-                
-                [_purchaseService checkLicenseStatus];
-            }];
-        }
-        else{
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
-            }];
+            [_purchaseService checkPremiumStatusChanged];
         }
         
         return succeeded;
@@ -192,7 +175,7 @@ typedef enum : NSUInteger {
     //--------------------- Start Services ---------------------------
     else{
         
-        [_aeService start];
+        [_antibannerController start];
         DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
     
@@ -254,9 +237,8 @@ typedef enum : NSUInteger {
     // If theme mode is System Default gets current style
     [self setAppInterfaceStyle];
     
-    [_aeService onReady:^{
-        
-        [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+    [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+        [antibanner repairUpdateStateWithCompletionBlock:^{
             
             if (_activateWithOpenUrl) {
                 _activateWithOpenUrl = NO;
@@ -264,7 +246,7 @@ typedef enum : NSUInteger {
                 return;
             }
             
-            if (_aeService.antibanner.updatesRightNow) {
+            if (antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
             }
@@ -308,11 +290,11 @@ typedef enum : NSUInteger {
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        [_aeService onReady:^{
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             
-            [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+            [antibanner repairUpdateStateWithCompletionBlock:^{
                 
-                if (_aeService.antibanner.updatesRightNow) {
+                if (antibanner.updatesRightNow) {
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
@@ -342,10 +324,9 @@ typedef enum : NSUInteger {
 
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
-        [_aeService onReady:^{
-
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             _downloadCompletion = completionHandler;
-            [[_aeService antibanner] repairUpdateStateForBackground];
+            [antibanner repairUpdateStateForBackground];
         }];
     }
     else{
@@ -360,7 +341,111 @@ typedef enum : NSUInteger {
     
     _activateWithOpenUrl = YES;
  
-    return [helper application:app open:url options:options];
+    /*
+     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
+     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
+    */
+    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
+    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
+    
+    NSString *command = url.host;
+    
+    UINavigationController *nav = [self getNavigationController];
+    
+    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+        self.window.rootViewController = launchScreenController;
+    }
+
+    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
+        
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @autoreleasepool {
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
+                        
+                        NSString *path = [url.path substringFromIndex:1];
+                        
+                        
+                        if (nav.viewControllers.count) {
+                            MainController *main = nav.viewControllers.firstObject;
+                            if ([main isKindOfClass:[MainController class]]) {
+                                
+                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
+                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
+                                
+                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
+                                ListOfRulesController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
+                                
+                                UIStoryboard *filtersStoryBoard = [UIStoryboard storyboardWithName:@"Filters" bundle:[NSBundle mainBundle]];
+                                SafariProtectionController* safariProtectionController = [filtersStoryBoard instantiateViewControllerWithIdentifier:@"SafariProtectionController"];
+                                
+                                userFilterController.newRuleText = path;
+                                
+                                nav.viewControllers = @[main, mainMenuController, safariProtectionController, userFilterController];
+                                
+                                [main view];
+                                [mainMenuController view];
+                                [safariProtectionController view];
+                                [userFilterController view];
+
+                                self.window.rootViewController = nav;
+                            }
+                            else{
+                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
+                            }
+                        }
+                    }
+                    
+                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
+                        
+                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
+                        NSString* fragment = url.fragment;
+                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
+                        
+                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
+                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
+                        
+                        [_purchaseService loginWithAccessToken:accessToken state: state];
+                    }
+                }
+            });
+        }];
+        
+        return YES;
+    }
+#ifdef PRO
+    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
+        
+        NSString *command = url.host;
+        
+        UINavigationController *nav = [self getNavigationController];
+        
+        AEUIMainController *main = nav.viewControllers.firstObject;
+        
+        if(!main){
+            return NO;
+        }
+        
+        [nav popToRootViewControllerAnimated:NO];
+        
+        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
+            
+            [main setProStatus:YES];
+        }
+        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
+            
+            [main setProStatus:NO];
+        }
+        else {
+            return NO;
+        }
+        
+        return YES;
+    }
+#endif
+
+    return NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -385,16 +470,21 @@ typedef enum : NSUInteger {
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
             
-            [[_aeService antibanner] beginTransaction];
-            DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
+            __block BOOL result = NO;
             
-            BOOL result = [[_aeService antibanner] startUpdatingForced:fromUI interactive:interactive];
-            
-            if (! result) {
-                DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                [[_aeService antibanner] rollbackTransaction];
-                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
-            }
+            [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+                
+                [antibanner beginTransaction];
+                DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
+                
+                result = [antibanner startUpdatingForced:fromUI interactive:interactive];
+                
+                if (! result) {
+                    DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
+                    [antibanner rollbackTransaction];
+                    DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+                }
+            }];
 
             return result;
         }
@@ -420,7 +510,7 @@ typedef enum : NSUInteger {
         [_asDataBase removeObserver:self forKeyPath:@"ready"];
         
         //--------------------- Start Services ---------------------------
-        [_aeService start];
+        [_antibannerController start];
         DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
         
         return;
@@ -436,111 +526,112 @@ typedef enum : NSUInteger {
 
 - (void)antibannerNotify:(NSNotification *)notification {
     
-    // Update filter rule
-    if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
-        
-        BOOL background = (_fetchCompletion || _downloadCompletion);
-        [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
+    [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+    
+        // Update filter rule
+        if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
             
-            if (error) {
+            BOOL background = (_fetchCompletion || _downloadCompletion);
+            [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
                 
-                [[_aeService antibanner] rollbackTransaction];
-                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
-                
-                [self updateFailuredNotify];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UINavigationController* nav = [self getNavigationController];
-                    if (nav.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+                if (error) {
+                    [antibanner rollbackTransaction];
+                    DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
+                    
+                    [self updateFailuredNotify];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UINavigationController* nav = [self getNavigationController];
+                        if (nav.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+                                
+                                [ACSSystemUtils showSimpleAlertForController:nav.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
                             
-                            [ACSSystemUtils showSimpleAlertForController:nav.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
-                        
-                    }
-                });
-            }
-            else{
-                
-                // Success antibanner updated from backend
-                
-                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                
-                [[_aeService antibanner] endTransaction];
-                DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
-                
-                [self updateFinishedNotify];
-            }
-        }];
-    }
-    // Update started
-    else if ([notification.name
-              isEqualToString:ASAntibannerStartedUpdateNotification]) {
-        
-        // turn on network activity indicator
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        [self updateStartedNotify];
-    }
-    // Update did not start
-    else if ([notification.name
-              isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
-        
-        if ([[_aeService antibanner] inTransaction]) {
-            
-            [[_aeService antibanner] rollbackTransaction];
-            DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+                        }
+                    });
+                }
+                else{
+                    
+                    // Success antibanner updated from backend
+                    
+                    [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                    [antibanner endTransaction];
+                    DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
+                    
+                    [self updateFinishedNotify];
+                }
+            }];
         }
-        
-        // Special update case.
-        [self antibanerUpdateFinished:AEUpdateFailed];
-    }
-    // Update performed
-    else if ([notification.name
-              isEqualToString:ASAntibannerFinishedUpdateNotification]) {
-        
-        _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
-        
-        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
+        // Update started
+        else if ([notification.name
+                  isEqualToString:ASAntibannerStartedUpdateNotification]) {
             
-            if ([[_aeService antibanner] inTransaction]) {
-                // Success antibanner updated from backend
-                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [[_aeService antibanner] endTransaction];
-                DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
+            // turn on network activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            [self updateStartedNotify];
+        }
+        // Update did not start
+        else if ([notification.name
+                  isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
+            
+            if ([antibanner inTransaction]) {
                 
-                [self updateFinishedNotify];
+                [antibanner rollbackTransaction];
+                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
             }
             
+            // Special update case.
+            [self antibanerUpdateFinished:AEUpdateFailed];
+        }
+        // Update performed
+        else if ([notification.name
+                  isEqualToString:ASAntibannerFinishedUpdateNotification]) {
             
-            // Special update case (in background).
+            _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
+            
+            [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
+                
+                if ([antibanner inTransaction]) {
+                    // Success antibanner updated from backend
+                    [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                    [antibanner endTransaction];
+                    DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
+                    
+                    [self updateFinishedNotify];
+                }
+                
+                
+                // Special update case (in background).
+                [self antibanerUpdateFinished:AEUpdateNewData];
+            }];
+            
+            // turn off network activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        }
+        // Update failed
+        else if ([notification.name
+                  isEqualToString:ASAntibannerFailuredUpdateNotification]) {
+            
+            if ([antibanner inTransaction]) {
+                
+                [antibanner rollbackTransaction];
+                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
+            }
+            
+            [self updateFailuredNotify];
+            
+            // Special update case.
+            [self antibanerUpdateFinished:AEUpdateFailed];
+            
+            // turn off network activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        }
+        else if ([notification.name
+                  isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
+            
+            DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
             [self antibanerUpdateFinished:AEUpdateNewData];
-        }];
-        
-        // turn off network activity indicator
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }
-    // Update failed
-    else if ([notification.name
-              isEqualToString:ASAntibannerFailuredUpdateNotification]) {
-        
-        if ([[_aeService antibanner] inTransaction]) {
-            
-            [[_aeService antibanner] rollbackTransaction];
-            DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
-        
-        [self updateFailuredNotify];
-        
-        // Special update case.
-        [self antibanerUpdateFinished:AEUpdateFailed];
-        
-        // turn off network activity indicator
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }
-    else if ([notification.name
-              isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
-        
-        DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
-        [self antibanerUpdateFinished:AEUpdateNewData];
-    }
+    }];
 }
 
 /////////////////////////////////////////////////////////////////////

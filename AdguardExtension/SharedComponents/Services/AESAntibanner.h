@@ -86,14 +86,12 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /////////////////////////////////////////////////////////////////////////
 
 /**
- Enable/Disable periodical processes, like updates or autodetect.
- */
-@property BOOL enabled;
-
-/**
  Indicates that antibanner updates of filters right now.
  */
 @property (readonly) BOOL updatesRightNow;
+
+/** start sevice */
+- (void) start;
 
 /**
  Obtain rules for active (enabled) filters.

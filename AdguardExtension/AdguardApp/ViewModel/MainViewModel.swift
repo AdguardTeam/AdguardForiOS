@@ -24,15 +24,15 @@ class MainViewModel {
     
     // MARK: - private members
     
-    private let antibanner: AESAntibannerProtocol
+    private let antibannerController: AntibannerControllerProtocol
     private var start : (()->Void)?
     private var finish: ((String)->Void)?
     private var error: ((String)->Void)?
     private var observers = [NSObjectProtocol]()
     
     // MARK: - init
-    init(antibanner: AESAntibannerProtocol) {
-        self.antibanner = antibanner
+    init(antibannerController: AntibannerControllerProtocol) {
+        self.antibannerController = antibannerController
         
         self.observeAntibanerState()
     }
@@ -56,8 +56,10 @@ class MainViewModel {
         self.finish = finish
         self.error = error
         
-        antibanner.beginTransaction()
-        antibanner.startUpdatingForced(true, interactive: true)
+        antibannerController.exec { (antibanner) in
+            antibanner.beginTransaction()
+            antibanner.startUpdatingForced(true, interactive: true)
+        }
     }
     
     // MARK: - private functions
@@ -85,8 +87,10 @@ class MainViewModel {
         observers.append(observer2)
         let observer3 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
             
-            if self?.antibanner.inTransaction() ?? false {
-                self?.antibanner.rollbackTransaction()
+            self?.antibannerController.exec { (antibanner) in
+                if antibanner.inTransaction() {
+                    antibanner.rollbackTransaction()
+                }
             }
             
             self?.error?(ACLocalizedString("filter_updates_error", nil))

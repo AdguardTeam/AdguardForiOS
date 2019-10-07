@@ -39,6 +39,7 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  In-app purchases are carried out directly in this service.
  Work with Adguard Licenses is delegated to LoginController
  */
+
 protocol PurchaseServiceProtocol {
     
    

@@ -50,7 +50,6 @@ class ListOfRulesModel: NSObject {
     
     private let resources: AESharedResourcesProtocol
     private let contentBlockerService: ContentBlockerService
-    private let antibanner: AESAntibannerProtocol
     private let themeService: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
     private var dnsFiltersService: DnsFiltersServiceProtocol
@@ -99,18 +98,19 @@ class ListOfRulesModel: NSObject {
         }
     }
 
-    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
+    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibannerController: AntibannerControllerProtocol, theme: ThemeServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         
         self.listOfRulesType = listOfRulesType
         self.resources = resources
         self.contentBlockerService = contentBlockerService
-        self.antibanner = antibanner
         self.themeService = theme
         self.dnsFiltersService = dnsFiltersService
         
         super.init()
         
-        self.obtainRules()
+        antibannerController.exec { [weak self] (antibanner) in
+            self?.obtainRules(antibanner: antibanner)
+        }
     }
     
     // MARK: - public methods
@@ -882,7 +882,7 @@ extension ListOfRulesModel {
         }
     }
     
-    private func obtainRules() {
+    private func obtainRules(antibanner: AESAntibannerProtocol) {
         switch listOfRulesType {
         case .safariUserFilter:
             ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)

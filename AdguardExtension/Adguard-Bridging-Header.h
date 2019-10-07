@@ -31,3 +31,4 @@
 #import "ASDatabase.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import "AESProductSchemaManager.h"
