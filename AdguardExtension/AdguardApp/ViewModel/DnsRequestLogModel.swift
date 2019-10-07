@@ -20,9 +20,9 @@ import Foundation
 
 // MARK: - data types -
 struct LogRecord {
-    var category: DnsLogCategory = .announces
+    var category: String?
     var status: DnsLogStatus = .processed
-    var name: String = "name"
+    var name: String?
     var company: String = "company"
     var domain: String?
     var time: String?
@@ -33,16 +33,6 @@ struct LogRecord {
     var upstreamAddr: String?
     var bytesSent: Int
     var bytesReceived: Int
-     
-    enum DnsLogCategory: String {
-        case tracker = "Tracker"
-        case announces = "Announces"
-        case dnsRequest = "DNS request"
-        
-        func category() -> String {
-            return self.rawValue
-        }
-    }
     
     enum DnsLogStatus: String {
         case processed = "Processed"
@@ -199,9 +189,16 @@ class DnsRequestLogViewModel {
                 sSelf.recordsObserver?(sSelf.records)
                 return
             }
-            
+            let dnsTrackerService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
             for logRecord in logRecords.reversed() {
-                let record = LogRecord(domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived)
+                let info = dnsTrackerService.getCategoryAndName(by: logRecord.domain)
+                let name = info.name
+                var categoryName: String? = nil
+                if let categoryKey = info.categoryKey {
+                    categoryName = ACLocalizedString(categoryKey, nil)
+                }
+                
+                let record = LogRecord(category: categoryName, name: name, domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived)
                 sSelf.allRecords.append(record)
             }
             
