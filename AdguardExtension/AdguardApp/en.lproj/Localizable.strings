@@ -253,7 +253,7 @@
 "filters_description_format" = "Enabled %1$d out of %2$d";
 
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Copied to clipboard";
+"text_copied" = "Copied";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Regular";

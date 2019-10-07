@@ -600,6 +600,8 @@
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
 		7E6BE2A6233A77D400389EDD /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
+		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
+		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -825,7 +827,6 @@
 		D032D175232BA9A1001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
 		D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
 		D039336922FD62CB00ADEBEB /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */; };
-		D03D0FDF22427B7A00ECF6DF /* ToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03D0FDE22427B7A00ECF6DF /* ToastView.xib */; };
 		D03E532921B412FA00C62152 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D03E532B21B6A16C00C62152 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
@@ -845,7 +846,6 @@
 		D04CD26422007433000B0331 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */; };
 		D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D04D1B7E201F3F4900D53073 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
-		D0508E6E22280C9C00E07600 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0508E6D22280C9C00E07600 /* ToastView.swift */; };
 		D051B05C233101C6008A9A0F /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
 		D05538062161D8190020993A /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05538052161D8190020993A /* AboutController.swift */; };
 		D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
@@ -1754,6 +1754,8 @@
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
+		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
+		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -1868,7 +1870,6 @@
 		D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotEcapingJsonSerialization.swift; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		D039336822FD62CB00ADEBEB /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
-		D03D0FDE22427B7A00ECF6DF /* ToastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastView.xib; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
 		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
 		D0427C761F434129002FB018 /* APDnsServerAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsServerAddress.h; sourceTree = "<group>"; };
@@ -1881,7 +1882,6 @@
 		D04B8CB32031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
-		D0508E6D22280C9C00E07600 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		D05538052161D8190020993A /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		D0569E2F21F1C0A800985DA9 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569E3021F1C0A800985DA9 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Tunnel.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Tunnel.plist; sourceTree = "<absolute>"; };
@@ -3385,6 +3385,7 @@
 				D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */,
 				D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */,
 				D07AA0622207A5B10065779F /* NewDnsServerController.swift */,
+				7EB638DF23462E5600260A3C /* DnsContainerController.swift */,
 			);
 			path = DnsSettings;
 			sourceTree = "<group>";
@@ -3405,7 +3406,6 @@
 		D0F91161212EDD51006DF0D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D03D0FDE22427B7A00ECF6DF /* ToastView.xib */,
 				D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */,
 				D0F91163212EDD71006DF0D3 /* FilterCell.swift */,
 				D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */,
@@ -3415,10 +3415,10 @@
 				D07A164121678EA5008BB432 /* RoundrectView.swift */,
 				D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */,
 				D09E9647216CE5E400313AB1 /* ThemableLabel.swift */,
-				D0508E6D22280C9C00E07600 /* ToastView.swift */,
 				65EBC24F1BC2D25E00788D98 /* AEUILongLabelViewCell.h */,
 				65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */,
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
+				7EC3318C234738E400229194 /* BottomShadowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4227,7 +4227,6 @@
 				D0D6BA0221A6AF5F007360BC /* MainScreen.storyboard in Resources */,
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
-				D03D0FDF22427B7A00ECF6DF /* ToastView.xib in Resources */,
 				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
@@ -5196,9 +5195,11 @@
 				7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */,
 				D05538062161D8190020993A /* AboutController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
+				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */,
+				7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */,
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				D0A1AA1C22FB08ED00E3BDBF /* TrialController.swift in Sources */,
 				65C12EEE1BD4D29F00FFC71C /* AEService.m in Sources */,
@@ -5217,7 +5218,6 @@
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */,
 				D031A155219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
-				D0508E6E22280C9C00E07600 /* ToastView.swift in Sources */,
 				D044AF3421775C4800CD9E06 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

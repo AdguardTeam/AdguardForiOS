@@ -35,7 +35,7 @@
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
-"EkI-hK-XDG.text" = "Address";
+"EkI-hK-XDG.text" = "DNS upstream";
 
 /* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
 "IVH-4P-uIk.text" = "Domain";
@@ -53,7 +53,7 @@
 "LTC-71-V9S.text" = "Server";
 
 /* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
-"Mni-fx-xGW.text" = "Time";
+"Mni-fx-xGW.text" = "Category";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "OJU-gT-SmT"; */
 "OJU-gT-SmT.text" = "Split-Tunnel";

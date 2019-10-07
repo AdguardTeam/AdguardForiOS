@@ -78,7 +78,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
             detailsString += ", NXDOMAIN"
         }
 
-        cell.domain.text = record.name
+        cell.domain.text = record.domain
         cell.details.text = detailsString
         cell.timeLabel.text = timeString
         
@@ -96,11 +96,11 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRecord = model.records[indexPath.row]
-        performSegue(withIdentifier: "requestDetailsSegue", sender: self)
+        performSegue(withIdentifier: "showDnsContainer", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as? DnsRequestDetailsController
+        let controller = segue.destination as? DnsContainerController
         controller?.logRecord = selectedRecord
     }
     

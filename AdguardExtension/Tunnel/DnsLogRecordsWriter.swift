@@ -47,7 +47,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
 
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr)
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: event.bytesSent, bytesReceived: event.bytesReceived)
         addRecord(record: record, flush: false)
     }
     

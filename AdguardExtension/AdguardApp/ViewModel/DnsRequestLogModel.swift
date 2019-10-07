@@ -18,15 +18,119 @@
 
 import Foundation
 
-// MARK: - dta types -
+// MARK: - data types -
 struct LogRecord {
-    var name: String?
+    var category: DnsLogCategory = .announces
+    var status: DnsLogStatus = .processed
+    var name: String = "name"
+    var company: String = "company"
+    var domain: String?
     var time: String?
     var elapsed: Int
     var type: String?
     var serverName: String?
     var answer: String?
     var upstreamAddr: String?
+    var bytesSent: Int
+    var bytesReceived: Int
+     
+    enum DnsLogCategory: String {
+        case tracker = "Tracker"
+        case announces = "Announces"
+        case dnsRequest = "DNS request"
+        
+        func category() -> String {
+            return self.rawValue
+        }
+    }
+    
+    enum DnsLogStatus: String {
+        case processed = "Processed"
+        case blockedWithDns = "Blocked with DNS"
+        case blockedWithDnsFilter = "Blocked with DNS filter"
+        case blockedWithDnsBlacklist = "Blocked with DNS blacklist"
+        case whitelisted = "Whitelisted"
+        
+        func status() -> String {
+            return self.rawValue
+        }
+        
+        func color() -> UIColor {
+            switch self {
+            case .processed:
+                return UIColor(hexString: "#eb9300")
+            case .whitelisted:
+                return UIColor(hexString: "#67b279")
+            default:
+                return UIColor(hexString: "#df3812")
+            }
+        }
+    }
+    
+    func getButtons() -> [BottomShadowButton] {
+        switch status {
+        case .blockedWithDns:
+            let button1 = addDomainToDnsWhitelistButton()
+            return [button1]
+        case .blockedWithDnsFilter:
+            let button1 = addDomainToDnsWhitelistButton()
+            return [button1]
+        case .blockedWithDnsBlacklist:
+            let button1 = removeDomainFromDnsBlacklistButton()
+            return [button1]
+        case .whitelisted:
+            let button1 = removeDomainFromDnsWhitelist()
+            return [button1]
+        case .processed:
+            let button1 = addDomainToDnsWhitelistButton()
+            let button2 = addDomainToDnsBlacklistButton()
+            return [button1, button2]
+        }
+    }
+    
+    private func removeDomainFromDnsWhitelist() -> BottomShadowButton {
+        let button = BottomShadowButton()
+        button.title = "REMOVE FROM WHITELIST"
+        button.titleColor = UIColor(hexString: "#eb9300")
+        button.buttonAction {
+            print(button.title)
+        }
+        
+        return button
+    }
+    
+    private func removeDomainFromDnsBlacklistButton() -> BottomShadowButton {
+        let button = BottomShadowButton()
+        button.title = "REMOVE FROM BLACKLIST"
+        button.titleColor = UIColor(hexString: "#eb9300")
+        button.buttonAction {
+            print(button.title)
+        }
+        
+        return button
+    }
+
+    private func addDomainToDnsWhitelistButton() -> BottomShadowButton {
+        let button = BottomShadowButton()
+        button.title = "ADD TO WHITELIST"
+        button.titleColor = UIColor(hexString: "#67b279")
+        button.buttonAction {
+            print(button.title)
+        }
+        
+        return button
+    }
+    
+    private func addDomainToDnsBlacklistButton() -> BottomShadowButton {
+        let button = BottomShadowButton()
+        button.title = "ADD TO BLACKLIST"
+        button.titleColor = UIColor(hexString: "#df3812")
+        button.buttonAction {
+            print(button.title)
+        }
+        
+        return button
+    }
 }
 
 protocol DnsRequestsDelegateProtocol {
@@ -60,7 +164,7 @@ class DnsRequestLogViewModel {
     var searchString: String {
         didSet {
             let searchLowercased = searchString.lowercased()
-            searchRecords = allRecords.filter({ $0.name?.lowercased().contains( searchLowercased ) ?? false })
+            searchRecords = allRecords.filter({ $0.domain?.lowercased().contains( searchLowercased ) ?? false })
             recordsObserver?(self.records)
         }
     }
@@ -97,7 +201,7 @@ class DnsRequestLogViewModel {
             }
             
             for logRecord in logRecords.reversed() {
-                let record = LogRecord(name: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr)
+                let record = LogRecord(domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived)
                 sSelf.allRecords.append(record)
             }
             
