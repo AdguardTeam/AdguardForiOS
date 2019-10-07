@@ -40,7 +40,7 @@ struct Tracker: Codable {
 }
 
 protocol DnsTrackerServiceProtocol {
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?)
+    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?)
 }
 
 class DnsTrackerService: DnsTrackerServiceProtocol {
@@ -48,11 +48,11 @@ class DnsTrackerService: DnsTrackerServiceProtocol {
     private var dnsTrackers: DnsTrackers?
     
     init() {
-        ininitalizeDnsTrackers()
+        initializeDnsTrackers()
     }
     
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?) {
-        let nilReturn: (categoryKey: String?, name: String?) = (nil, nil)
+    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?) {
+        let nilReturn: (categoryKey: String?, name: String?, isTracked: Bool?) = (nil, nil, nil)
         
         let trackerDomains = dnsTrackers?.trackerDomains
         
@@ -64,20 +64,21 @@ class DnsTrackerService: DnsTrackerServiceProtocol {
         
         let categories = dnsTrackers?.categories
         
-        let categoryId = String(info.categoryId)
-        guard let categoryKey = categories?[categoryId] else { return nilReturn }
-            
-        return (categoryKey, info.name)
+        let categoryId = info.categoryId
+        guard let categoryKey = categories?[String(categoryId)] else { return nilReturn }
+        
+        let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
+        
+        return (categoryKey, info.name, isTracked)
     }
     
     // MARK: - Initialization of dns trackers object
     
-    private func ininitalizeDnsTrackers(){
+    private func initializeDnsTrackers(){
         guard let path = Bundle.main.path(forResource: "whotracksme", ofType: "json") else { return }
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
             dnsTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
-            print()
         } catch {
             DDLogError("Failed to decode whotracksme.json")
         }

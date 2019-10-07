@@ -487,11 +487,11 @@
 /*(LogCategory) social media category*/
 "social_media" = "Social media";
 
-/*(LogCategory) misc category*/
-"misc" = "Misc";
+/*(LogCategory) miscellaneous category*/
+"misc" = "Miscellaneous";
 
-/*(LogCategory) cdn category*/
-"cdn" = "Cdn";
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
