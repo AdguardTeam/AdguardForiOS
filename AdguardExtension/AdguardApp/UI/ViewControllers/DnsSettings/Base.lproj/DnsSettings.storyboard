@@ -723,7 +723,7 @@
             </objects>
             <point key="canvasLocation" x="10.144927536231885" y="937.5"/>
         </scene>
-        <!--Dns Container Controller-->
+        <!--Request details-->
         <scene sceneID="pH2-wX-hVe">
             <objects>
                 <viewController id="z3y-qT-GVF" customClass="DnsContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -751,7 +751,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="JeC-Yx-IYc" firstAttribute="top" secondItem="Uaa-5t-Ngw" secondAttribute="top" id="LWH-nc-Qdu"/>
-                            <constraint firstItem="Uaa-5t-Ngw" firstAttribute="bottom" secondItem="p2f-Gi-p7H" secondAttribute="bottom" id="M8e-iF-MCX"/>
+                            <constraint firstAttribute="bottom" secondItem="p2f-Gi-p7H" secondAttribute="bottom" id="M8e-iF-MCX"/>
                             <constraint firstItem="Uaa-5t-Ngw" firstAttribute="trailing" secondItem="p2f-Gi-p7H" secondAttribute="trailing" id="PhV-0g-H1x"/>
                             <constraint firstItem="p2f-Gi-p7H" firstAttribute="top" secondItem="JeC-Yx-IYc" secondAttribute="bottom" id="i4l-wQ-fai"/>
                             <constraint firstItem="p2f-Gi-p7H" firstAttribute="leading" secondItem="Uaa-5t-Ngw" secondAttribute="leading" id="rsg-1h-dAE"/>
@@ -760,7 +760,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uaa-5t-Ngw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="JME-39-nzx"/>
+                    <navigationItem key="navigationItem" title="Request details" id="JME-39-nzx"/>
                     <connections>
                         <outlet property="containerView" destination="JeC-Yx-IYc" id="fA5-RM-7rn"/>
                         <outlet property="shadowView" destination="p2f-Gi-p7H" id="xwg-zi-NaO"/>

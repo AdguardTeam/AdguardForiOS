@@ -49,6 +49,8 @@ class DnsContainerController: UIViewController {
         if let buttons = logRecord?.getButtons(){
             shadowView.buttons = buttons
         }
+        
+        updateTheme()
     }
     
     // MARK: - private methods
