@@ -22,9 +22,10 @@ import UIKit
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
     @IBOutlet weak var details: ThemableLabel!
+    @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
-class DnsLogController: UITableViewController, UISearchBarDelegate {
+class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol {
     //MARK: - IB Outlets
     
     @IBOutlet var searchView: UIView!
@@ -32,17 +33,19 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
-    var selectedRecord: LogRecord?
+    private var selectedRecord: LogRecord?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        model.delegate = self
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -67,17 +70,22 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
         
-        var detailsString = String(format: "%@, type: %@", record.time!, record.type!)
+        // Change to category description
+        var detailsString = String(format: "type: %@", record.type!)
+        let timeString = record.time ?? ""
+        
         if record.answer == nil || record.answer == "" {
             detailsString += ", NXDOMAIN"
         }
 
-        cell.domain.text = record.name
+        cell.domain.text = record.domain
         cell.details.text = detailsString
+        cell.timeLabel.text = timeString
         
         theme.setupLogTableCell(cell, blocked: isBlocked(record))
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
+        theme.setupLabel(cell.timeLabel)
 
         return cell
     }
@@ -88,20 +96,32 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRecord = model.records[indexPath.row]
-        performSegue(withIdentifier: "requestDetailsSegue", sender: self)
+        performSegue(withIdentifier: "showDnsContainer", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as? DnsRequestDetailsController
+        let controller = segue.destination as? DnsContainerController
         controller?.logRecord = selectedRecord
     }
     
     // MARK: - Actions
     
+    @IBAction func clearAction(_ sender: UIBarButtonItem) {
+        model.clearRecords()
+    }
+    
     // MARK: - searchbar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         model.searchString = searchText
+    }
+    
+    // MARK: - dns requests delegate
+    
+    func requestsCleared() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - private methods
