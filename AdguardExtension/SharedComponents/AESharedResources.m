@@ -32,9 +32,6 @@ NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
-NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
-NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
-NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
@@ -50,7 +47,10 @@ NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
-NSString* AEDefaultsWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsSafariWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsWifiExceptionsEnabled = @"AEDefaultsWifiExceptionsEnabled";
+NSString* AEDefaultsDnsWhitelistEnabled = @"AEDefaultsDnsWhitelistEnabled";
+NSString* AEDefaultsDnsBlacklistEnabled = @"AEDefaultsDnsBlacklistEnabled";
 
 NSString* AEDefaultsGeneralContentBlockerRulesCount = @"AEDefaultsGeneralContentBlockerRulesCount";
 NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContentBlockerRulesCount";
@@ -69,6 +69,9 @@ NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecu
 NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
+NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
+NSString* AEDefaultsShowProgressBar = @"AEDefaultsShowProgressBar";
+NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 NSString* SafariProtectionState = @"SafariProtectionState";
 

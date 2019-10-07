@@ -39,9 +39,10 @@ class FilterEnabledCell: UITableViewCell {
 }
 
 // MARK: - UserFilterTableController
-class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
+class ListOfRulesTableController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, ImportRulesControllerDelegate, RuleDetailsControllerDelegate {
     
-    var model: UserFilterViewModel!
+    //var model: UserFilterViewModel!
+    var model: ListOfRulesModel?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -88,7 +89,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             
         updateUI()
         
-        observation = model?.observe(\.rules) {[weak self](_, _) in
+        observation = model?.observe(\.listOfRules) {[weak self](_, _) in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -126,7 +127,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == rulesSection {
-            return model?.rules.count ?? 0
+            return model?.listOfRules.count ?? 0
         }
         else {
             return 1
@@ -139,10 +140,11 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         case enabledSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EnabledCellID") as! FilterEnabledCell
             enabledSwitch = cell.enabledSwitch
-            cell.enabledLabel.text = model.userFilterEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+            let listEnabled = model?.listOfRulesEnabled ?? false
+            cell.enabledLabel.text = listEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
             theme.setupLabel(cell.enabledLabel)
             theme.setupSwitch(cell.enabledSwitch)
-            enabledSwitch.isOn = model.userFilterEnabled
+            enabledSwitch.isOn = listEnabled
             enabledSwitch?.addTarget(self, action: #selector(toggleEnabled(_:)), for: .valueChanged)
             return cell
             
@@ -150,9 +152,9 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "HelpCellID") as! HelpCell
             
-            switch (model!.type) {
-            case (.blacklist):
-                let htmlStringFormat = ACLocalizedString("blacklist_text_format", nil)
+            switch (model!.listType) {
+            case (.safariUserFilter):
+                let htmlStringFormat = model?.descriptionTitle ?? ""
                 let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
                 let htmlString = String(format: htmlStringFormat, urlString)
                 if let headerText = htmlString.attributedStringFromHtml() {
@@ -160,12 +162,8 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
                     headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 0, length: headerText.length))
                     cell.helpTextView.attributedText = headerText
                 }
-            case(.whitelist):
-                cell.helpTextView.text = ACLocalizedString("whitelist_text", nil)
-                cell.helpTextView.textColor = theme.lightGrayTextColor
-                
-            case (.invertedWhitelist):
-                cell.helpTextView.text = ACLocalizedString("inverted_whitelist_text", nil)
+            default:
+                cell.helpTextView.text = model?.descriptionTitle
                 cell.helpTextView.textColor = theme.lightGrayTextColor
             }
             cell.helpTextView.backgroundColor = theme.backgroundColor
@@ -175,7 +173,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RuleCellID") as! RuleCell
-            let rule = model!.rules[indexPath.row]
+            let rule = model!.listOfRules[indexPath.row]
             if rule.attributedString == nil {
                 cell.ruleLabel.text = rule.rule
             } else {
@@ -202,13 +200,13 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
             enabledSwitch.setOn(!enabledSwitch.isOn, animated: true)
             
         case helpSection:
-            if model!.type == .blacklist
+            if model!.listType == .safariUserFilter
             {
                 UIApplication.shared.openAdguardUrl(action: filterRulesAction, from: openUrlFrom)
             }
             
         case rulesSection:
-            guard let rule = model?.rules[indexPath.row] else { return }
+            guard let rule = model?.listOfRules[indexPath.row] else { return }
             if isCustomEditing {
                 if let cell = tableView.cellForRow(at: indexPath) as? RuleCell {
                     toggleCellSelection(cell: cell, rule: rule)
@@ -265,13 +263,13 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = self
         controller.delegate = self
-        controller.blacklist = model!.type == .blacklist
+        controller.type = model!.listType
         
         present(controller, animated: true, completion: nil)
     }
     
     @IBAction func toggleEnabled(_ sender: UISwitch) {
-        model?.userFilterEnabled = sender.isOn
+        model?.listOfRulesEnabled = sender.isOn
         
         // Waiting when UISwitch animation is finished
         // Using this hack, because needed function is changed in IOS 13 and later
@@ -309,7 +307,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
     }
     
     func importRules() {
-        (parent as! UserFilterController).importAction(self)
+        (parent as! ListOfRulesController).importAction(self)
     }
     
     // MARK: - ImportRulesControllerDelegate
@@ -430,7 +428,7 @@ class UserFilterTableController: UITableViewController, UISearchBarDelegate, UIV
         
         controller.delegate = self
         controller.rule = rule
-        controller.blacklist = model?.type == .blacklist
+        controller.type = model!.listType
         
         present(controller, animated: true, completion: nil)
     }

@@ -2,7 +2,7 @@
 "03E-rd-Slw.normalTitle" = "Regular";
 
 /* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "Choose Server";
+"1tX-ii-cOK.title" = "DNS server";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Name";
@@ -50,7 +50,7 @@
 "J1Z-V3-gS6.normalTitle" = "SELECT";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Server";
+"LTC-71-V9S.text" = "DNS server";
 
 /* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
 "Mni-fx-xGW.text" = "Category";
@@ -74,7 +74,7 @@
 "VxP-fd-4kT.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity";
 
 /* Class = "UILabel"; text = "DNS Requests Log"; ObjectID = "WsR-6Z-pxB"; */
-"WsR-6Z-pxB.text" = "DNS Requests Log";
+"WsR-6Z-pxB.text" = "Filtering log";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "CANCEL";
@@ -107,7 +107,7 @@
 "hoU-PM-icY.text" = "Monitor all DNS requests on your device and manage them";
 
 /* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "DNS Requests Log";
+"jdk-AZ-MK8.title" = "Filtering log";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCEL";
@@ -128,7 +128,7 @@
 "pPC-fU-UPD.text" = "Tunnel Mode";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "Server";
+"pbu-cZ-0Vd.text" = "DNS server";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Server name";

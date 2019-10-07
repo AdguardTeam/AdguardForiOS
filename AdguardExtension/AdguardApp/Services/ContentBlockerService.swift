@@ -383,7 +383,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
                 
-                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsWhitelistEnabled) as? Bool ?? true
+                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsSafariWhitelistEnabled) as? Bool ?? true
                 
                 if whitelistEnabled {
                     if inverted {
@@ -634,7 +634,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // obtain rules
         let jsonString = converterResult?[AESFConvertedRulesKey] as? String
-        if jsonString == nil || jsonString! == "undefined" || jsonString! == "[]" {
+        if jsonString == nil || jsonString! == "undefined" {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)

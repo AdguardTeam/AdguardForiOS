@@ -39,7 +39,7 @@
       "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu/en.lproj/MainMenu.strings",
       "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen/en.lproj/MainScreen.strings",
       "AdguardExtension/AdguardApp/UI/ViewControllers/Settings/en.lproj/Settings.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter/en.lproj/UserFilter.strings",
+      "AdguardExtension/AdguardApp/UI/ViewControllers/ListOfRules/en.lproj/UserFilter.strings",
       "AdguardExtension/AdguardApp/en.lproj/Localizable.stringsdict",
       "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings"
     ],
@@ -53,7 +53,7 @@
       "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu",
       "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen",
       "AdguardExtension/AdguardApp/UI/ViewControllers/Settings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/UserFilter"
+      "AdguardExtension/AdguardApp/UI/ViewControllers/ListOfRules"
     ]
   }
 ]

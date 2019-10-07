@@ -398,7 +398,7 @@ typedef enum : NSUInteger {
                                 MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
                                 
                                 UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
-                                UserFilterController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
+                                ListOfRulesController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
                                 
                                 UIStoryboard *filtersStoryBoard = [UIStoryboard storyboardWithName:@"Filters" bundle:[NSBundle mainBundle]];
                                 SafariProtectionController* safariProtectionController = [filtersStoryBoard instantiateViewControllerWithIdentifier:@"SafariProtectionController"];

@@ -111,20 +111,6 @@ extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
 extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 
 /**
- User Defaults key, which defines total request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsCount;
-
-/**
- User Defaults key, which defines total request time.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsTime;
-/**
- User Defaults key, which defines total trackers request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalTrackersCount;
-
-/**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
  */
 extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
@@ -193,7 +179,19 @@ extern NSString*  _Nonnull AEDefaultsUserFilterEnabled;
 
 /**
  User defaults key, which defines user filter is enabled */
-extern NSString*  _Nonnull AEDefaultsWhitelistEnabled;
+extern NSString*  _Nonnull AEDefaultsSafariWhitelistEnabled;
+
+/**
+ User defaults key, which defines wifi exceptions is enabled */
+extern NSString*  _Nonnull AEDefaultsWifiExceptionsEnabled;
+
+/**
+ User defaults key, which defines dns whitelist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsWhitelistEnabled;
+
+/**
+ User defaults key, which defines dns  blacklist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsBlacklistEnabled;
 
 /**
  User defaults keys, which contains number of rules for each content blocker*/
@@ -228,6 +226,18 @@ extern NSString* _Nonnull AEDefaultsRestartByReachability;
 /**
  User defaults key, which defines vpn tunnel mode */
 extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
+
+/**
+ User defaults key, which defines whether developer mode is enabled */
+extern NSString* _Nonnull AEDefaultsDeveloperMode;
+
+/**
+ User defaults key, which defines whether show progress bar is enabled */
+extern NSString* _Nonnull AEDefaultsShowProgressBar;
+
+/**
+ User defaults key, which defines whether DNS request blocking is enabled */
+extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

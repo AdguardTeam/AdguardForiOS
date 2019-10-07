@@ -232,6 +232,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             // enable/disable pro groups
             let proEnabled = configuration.proStatus
+        
+            // If we've turned off pro groups we don't need them to turn on while background fetches are checking license status
+            //https://github.com/AdguardTeam/AdguardForiOS/issues/1263
+            if proEnabled {
+                return
+            }
             
             for group in sSelf.groups {
                 if sSelf.proGroups.contains(group.groupId) {
@@ -578,7 +584,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.subtitle = String(format: ACLocalizedString("filter_group_filters_count_format", nil), enabledCount, group.filters.count)
         }
         else {
-            group.subtitle = ACLocalizedString("filters_group_disabled", nil)
+            group.subtitle = ACLocalizedString("disabled", nil)
         }
     }
     

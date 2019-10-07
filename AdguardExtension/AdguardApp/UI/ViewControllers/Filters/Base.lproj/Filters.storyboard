@@ -79,7 +79,6 @@
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="20" id="fTS-hT-PlP"/>
                                                 <constraint firstAttribute="trailing" secondItem="T8x-Ho-7mV" secondAttribute="trailing" constant="22" id="nWX-Y8-45R"/>
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="centerY" secondItem="T8x-Ho-7mV" secondAttribute="centerY" id="scz-5Z-1hm"/>
-                                                <constraint firstItem="T8x-Ho-7mV" firstAttribute="leading" secondItem="8zX-PY-5pt" secondAttribute="trailing" constant="300" id="xjw-tj-bUO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -213,8 +212,8 @@
                                                         <constraint firstAttribute="width" constant="24" id="bTK-Gu-g2s"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari white list" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="16" width="107.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari whitelist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="103.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
