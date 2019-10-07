@@ -602,11 +602,11 @@
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
 		7E6BE2A6233A77D400389EDD /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
-		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
-		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7EAA63972341E1200040F3A0 /* ListOfRulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63962341E1200040F3A0 /* ListOfRulesModel.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
+		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
+		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -1760,12 +1760,12 @@
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
-		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
-		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
 		7EAA63962341E1200040F3A0 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
 		7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
+		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
+		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
