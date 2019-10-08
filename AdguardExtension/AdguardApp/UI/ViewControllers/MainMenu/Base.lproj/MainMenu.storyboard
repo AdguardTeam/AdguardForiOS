@@ -34,7 +34,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ads-group-icon" translatesAutoresizingMaskIntoConstraints="NO" id="8sr-b9-zBV">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="safari" translatesAutoresizingMaskIntoConstraints="NO" id="8sr-b9-zBV">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="2CM-YC-UI7"/>
@@ -99,7 +99,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="dns-icon" translatesAutoresizingMaskIntoConstraints="NO" id="od6-CX-Vc9">
+                                                <imageView verifyAmbiguity="off" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="adguard-small-icon" translatesAutoresizingMaskIntoConstraints="NO" id="od6-CX-Vc9">
                                                     <rect key="frame" x="25" y="11.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="Lt4-gG-95i"/>
@@ -455,10 +455,10 @@
     </scenes>
     <resources>
         <image name="about-icon" width="24" height="24"/>
-        <image name="ads-group-icon" width="24" height="24"/>
+        <image name="adguard-small-icon" width="24" height="24"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
-        <image name="dns-icon" width="24" height="24"/>
+        <image name="safari" width="24" height="24"/>
         <image name="support-icon" width="24" height="24"/>
     </resources>
 </document>

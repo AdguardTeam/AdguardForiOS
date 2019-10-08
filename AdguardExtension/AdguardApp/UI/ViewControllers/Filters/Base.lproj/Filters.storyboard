@@ -18,45 +18,37 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
-                            <tableViewSection id="LI0-v4-v0u">
+                            <tableViewSection id="4Ld-Y3-nD6">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="51" id="sF1-7p-Fmr">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="51"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="6hx-cE-8fk">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sF1-7p-Fmr" id="j3O-vK-XxH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6hx-cE-8fk" id="1gT-I7-liG">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This AdGuard module remove ads, trackers and other threats from sites in Safari" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aR1-cZ-dZU" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="8" width="366" height="35"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T8x-Ho-7mV">
+                                                    <rect key="frame" x="341" y="18" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="protectionSwitchAction:" destination="Gbg-cv-RVg" eventType="valueChanged" id="va2-iL-zxa"/>
+                                                    </connections>
+                                                </switch>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safari" translatesAutoresizingMaskIntoConstraints="NO" id="mfl-rt-Doa">
+                                                    <rect key="frame" x="24" y="21.5" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="3ga-se-d2h"/>
+                                                        <constraint firstAttribute="width" constant="24" id="WXL-wA-PTU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This AdGuard module remove ads, trackers and other threats from sites in Safari" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHZ-sJ-wTL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="65" width="366" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="aR1-cZ-dZU" firstAttribute="top" secondItem="j3O-vK-XxH" secondAttribute="top" constant="8" id="Vic-3w-612"/>
-                                                <constraint firstAttribute="bottom" secondItem="aR1-cZ-dZU" secondAttribute="bottom" constant="8" id="gtZ-iT-NN9"/>
-                                                <constraint firstItem="aR1-cZ-dZU" firstAttribute="leading" secondItem="j3O-vK-XxH" secondAttribute="leading" constant="24" id="r9d-bg-Jwa"/>
-                                                <constraint firstAttribute="trailing" secondItem="aR1-cZ-dZU" secondAttribute="trailing" constant="24" id="sx5-LP-EwU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="4Ld-Y3-nD6">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="6hx-cE-8fk">
-                                        <rect key="frame" x="0.0" y="135" width="414" height="67"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6hx-cE-8fk" id="1gT-I7-liG">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zX-PY-5pt" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="13" width="23" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
@@ -66,19 +58,18 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T8x-Ho-7mV">
-                                                    <rect key="frame" x="343" y="18" width="51" height="8"/>
-                                                    <connections>
-                                                        <action selector="protectionSwitchAction:" destination="Gbg-cv-RVg" eventType="valueChanged" id="va2-iL-zxa"/>
-                                                    </connections>
-                                                </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="centerY" secondItem="T8x-Ho-7mV" secondAttribute="centerY" id="2ko-KA-JhP"/>
+                                                <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="34" id="6t0-x0-I7q"/>
+                                                <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
+                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
                                                 <constraint firstItem="T8x-Ho-7mV" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="18" id="YBD-y2-G2K"/>
-                                                <constraint firstAttribute="bottom" secondItem="T8x-Ho-7mV" secondAttribute="bottom" constant="18" id="YcN-Ph-jUW"/>
-                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="20" id="fTS-hT-PlP"/>
-                                                <constraint firstAttribute="trailing" secondItem="T8x-Ho-7mV" secondAttribute="trailing" constant="22" id="nWX-Y8-45R"/>
-                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="centerY" secondItem="T8x-Ho-7mV" secondAttribute="centerY" id="scz-5Z-1hm"/>
+                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="mfl-rt-Doa" secondAttribute="trailing" constant="16" id="hJN-AN-Y5H"/>
+                                                <constraint firstAttribute="trailing" secondItem="T8x-Ho-7mV" secondAttribute="trailing" constant="24" id="nWX-Y8-45R"/>
+                                                <constraint firstItem="mfl-rt-Doa" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="srQ-3W-tNt"/>
+                                                <constraint firstItem="mfl-rt-Doa" firstAttribute="centerY" secondItem="8zX-PY-5pt" secondAttribute="centerY" id="zGr-Hy-vlz"/>
+                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="T8x-Ho-7mV" secondAttribute="bottom" constant="16" id="zgR-cY-7OI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -89,8 +80,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ads-group-icon" translatesAutoresizingMaskIntoConstraints="NO" id="g6L-S7-okS">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="custom-group-icon" translatesAutoresizingMaskIntoConstraints="NO" id="g6L-S7-okS">
                                                     <rect key="frame" x="16" y="41" width="24" height="24"/>
+                                                    <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="2U2-Ku-8aB"/>
                                                         <constraint firstAttribute="height" constant="24" id="nvG-hZ-M8a"/>
@@ -277,7 +269,7 @@
                         <outletCollection property="themableLabels" destination="f3z-Yh-zY2" collectionClass="NSMutableArray" id="JgQ-zY-wEy"/>
                         <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
                         <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
-                        <outletCollection property="themableLabels" destination="aR1-cZ-dZU" collectionClass="NSMutableArray" id="FCK-7E-R4o"/>
+                        <outletCollection property="themableLabels" destination="QHZ-sJ-wTL" collectionClass="NSMutableArray" id="LU2-A3-0gX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npH-7c-pqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1610,10 +1602,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ads-group-icon" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
+        <image name="custom-group-icon" width="24" height="24"/>
         <image name="filters-icon" width="24" height="24"/>
         <image name="plus" width="26" height="26"/>
+        <image name="safari" width="24" height="24"/>
         <image name="thumbsup" width="18" height="21"/>
         <image name="user" width="22" height="19"/>
     </resources>
