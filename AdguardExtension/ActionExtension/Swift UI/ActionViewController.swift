@@ -165,6 +165,7 @@ class ActionViewController: UIViewController {
             mainVC.domainEnabled = enabled
             mainVC.injectScriptSupported = injectScriptSupported
             mainVC.enableChangeDomainFilteringStatus = true
+            mainVC.url = url
         }
     }
     
