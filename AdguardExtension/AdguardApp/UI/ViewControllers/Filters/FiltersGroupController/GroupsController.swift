@@ -100,23 +100,28 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
+        cell.icon.image = UIImage(named: group.iconName ?? "")
+        
+        theme.setupLabels(cell.themableLabels)
+        
         var trailingConstraint: CGFloat = 0
         if group.proOnly && !configuration.proStatus {
             cell.enabledSwitch.isHidden = true
             cell.getPremiumButton.isHidden = false
-            cell.icon.image = UIImage(named: group.disabledIconName ?? (group.iconName ?? ""))
+            cell.descriptionLabel.text = group.groupId == FilterGroupId.security ? ACLocalizedString("security_description", nil) : ACLocalizedString("custom_description", nil)
+            cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
+            cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
             trailingConstraint = cell.getPremiumButton.frame.width + 10
         }else {
             cell.enabledSwitch.isHidden = false
             cell.getPremiumButton.isHidden = true
-            cell.icon.image = UIImage(named: group.iconName ?? "")
+            cell.icon.tintColor = UIColor(hexString: "#67b279")
             trailingConstraint = cell.enabledSwitch.frame.width + 10
         }
         
         cell.descriptionTrailingConstraint.constant = trailingConstraint
         cell.nameTrailingConstraint.constant = trailingConstraint
 
-        theme.setupLabels(cell.themableLabels)
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
         

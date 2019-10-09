@@ -23,7 +23,6 @@ class DnsSettingsController : UITableViewController{
     //MARK: - IB Outlets
     
     @IBOutlet weak var enabledSwitch: UISwitch!
-    @IBOutlet weak var requestBlockingSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
@@ -81,20 +80,12 @@ class DnsSettingsController : UITableViewController{
         updateTheme()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        requestBlockingSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
-        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled", nil) : ACLocalizedString("disabled", nil)
-    }
-    
     // MARK: - Table view delegate methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let contentSection = 1
-        
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
        
-        if indexPath.section == contentSection {
+        if indexPath.row != 0{
             cell.contentView.alpha = vpnManager.enabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = vpnManager.enabled
         }
@@ -116,11 +107,6 @@ class DnsSettingsController : UITableViewController{
         }else {
             self.vpnManager.enabled = enabled
         }
-    }
-
-    @IBAction func requestBlockingAction(_ sender: UISwitch) {
-        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsDNSRequestsBlocking)
-        requestBlockingStateLabel.text = requestBlockingSwitch.isOn ? ACLocalizedString("enabled", nil) : ACLocalizedString("disabled", nil)
     }
     
     // MARK: private methods
@@ -151,7 +137,6 @@ class DnsSettingsController : UITableViewController{
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
-        theme.setupSwitch(requestBlockingSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

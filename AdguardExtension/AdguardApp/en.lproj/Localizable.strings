@@ -463,6 +463,12 @@
 /*(LogRecord) "ADD TO BLACKLIST" button title */
 "add_to_blacklist" = "ADD TO BLACKLIST";
 
+/*(GroupsController) Security description without premium  */
+"security_description" = "Allow to block phishing sites and other dangerous domains. Available for Premium users";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Allow to use outside filters. Available for Premium users";
+
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "Audio and video players";
 
