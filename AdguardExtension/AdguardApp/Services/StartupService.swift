@@ -38,6 +38,9 @@ class StartupService : NSObject{
             sharedResources.sharedDefaults().register(defaults: defs)
         }
         
+        let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
+        ServiceLocator.shared.addService(service: dnsTrackerService)
+        
         let networkService = ACNNetworking()
         ServiceLocator.shared.addService(service: networkService)
         

@@ -91,7 +91,7 @@ class DnsRequestDetailsController : UITableViewController {
         serverLabel.text = logRecord?.serverName
         addressLabel.text = logRecord?.upstreamAddr
         responsesLabel.text = logRecord?.answer
-        categoryLabel.text = logRecord?.category.category()
+        categoryLabel.text = logRecord?.category
         statusLabel.text = logRecord?.status.status()
         statusLabel.textColor = logRecord?.status.color()
         
@@ -116,18 +116,42 @@ class DnsRequestDetailsController : UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if indexPath.row == LogCells.category.rawValue {
+            if logRecord?.category == nil{
+                cell.isHidden = true
+            }
+        } else if indexPath.row == LogCells.name.rawValue {
+            if logRecord?.name == nil {
+                cell.isHidden = true
+            }
+        }
+
         theme.setupTableCell(cell)
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == LogCells.category.rawValue {
+            if logRecord?.category == nil{
+                return 0.0
+            }
+        } else if indexPath.row == LogCells.name.rawValue {
+            if logRecord?.name == nil {
+                return 0.0
+            }
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var copiedString = ""
-        let logCell = logCells(rawValue: indexPath.row)
+        let logCell = LogCells(rawValue: indexPath.row)
         
         switch logCell {
         case .category:
-            copiedString = logRecord?.category.category() ?? ""
+            copiedString = logRecord?.category ?? ""
         case .status:
             copiedString = logRecord?.status.status() ?? ""
         case .name:
@@ -179,7 +203,7 @@ class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - private methods
     
-    private enum logCells: Int{
+    private enum LogCells: Int{
         case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer
     }
     
@@ -193,7 +217,7 @@ class DnsRequestDetailsController : UITableViewController {
         theme.setupLabels(themableLabels)
     }
     
-    private func showCopiedLabel(row: logCells){
+    private func showCopiedLabel(row: LogCells){
         var labelToHide = UILabel()
         var copiedLabel = UIButton()
         

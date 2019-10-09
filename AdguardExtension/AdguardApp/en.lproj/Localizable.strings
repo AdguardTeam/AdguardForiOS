@@ -468,3 +468,42 @@
 
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Allow to use outside filters. Available for premium users";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Audio and video players";
+
+/*(LogCategory) comments category*/
+"comments" = "Comments";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Customer interaction";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornvertising";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Advertising";
+
+/*(LogCategory) essential category*/
+"essential" = "Essential";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Site analytics";
+
+/*(LogCategory) social media category*/
+"social_media" = "Social media";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Miscellaneous";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Unknown";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Extensions";

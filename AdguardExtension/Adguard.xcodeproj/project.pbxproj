@@ -612,6 +612,8 @@
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
 		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
 		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
+		7EF75A6B234B6000006ED3E5 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF75A6A234B6000006ED3E5 /* whotracksme.json */; };
+		7EF75A6D234B6010006ED3E5 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
 		7EFA495E22E1EE69004B8EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
@@ -1801,6 +1803,8 @@
 		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
 		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
 		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
+		7EF75A6A234B6000006ED3E5 /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
+		7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerService.swift; sourceTree = "<group>"; };
 		7EF9189122F05F8A00427A61 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
@@ -3156,6 +3160,15 @@
 			path = FiltersGroupController;
 			sourceTree = "<group>";
 		};
+		7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */ = {
+			isa = PBXGroup;
+			children = (
+				7EF75A6A234B6000006ED3E5 /* whotracksme.json */,
+				7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */,
+			);
+			path = DnsTrackerService;
+			sourceTree = "<group>";
+		};
 		7EF9188F22F05E7500427A61 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -3466,6 +3479,7 @@
 		D0F9117421303E00006DF0D3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */,
 				D07427F1232B96CB0019AAF4 /* Utils */,
 				D0CB347A212DD1AB003B650E /* ConfigurationService.swift */,
 				D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */,
@@ -4257,6 +4271,7 @@
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
 				D0B8EB922248E5950066C5AC /* Assets.xcassets in Resources */,
+				7EF75A6B234B6000006ED3E5 /* whotracksme.json in Resources */,
 				D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5142,6 +5157,7 @@
 				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
 				7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
+				7EF75A6D234B6010006ED3E5 /* DnsTrackerService.swift in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */,
