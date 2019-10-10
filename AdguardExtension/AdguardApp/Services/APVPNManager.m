@@ -60,6 +60,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     NSNumber          *_delayedSetTunnelMode;
     
     BOOL          _delayedRestartByReachability;
+    BOOL          _delayedRestartTunnel;
     
     NSError     *_standartError;
     
@@ -180,7 +181,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 _delayedSetEnabled = @(enabled);
             } else {
                 
-                [self internalSetEnabled:enabled];
+                [self internalSetEnabled:enabled force:NO];
             }
         });
     }
@@ -445,6 +446,38 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     return result;
 }
 
+- (void)restartTunnel {
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        
+        _delayedSetEnabled = @(YES);
+    }
+    else{
+        dispatch_async(workingQueue, ^{
+            
+            if(_busy) {
+                
+                _delayedRestartTunnel = YES;
+            } else {
+                [self internalRestartTunnel];
+            }
+        });
+    }
+    
+    [_busyLock unlock];
+}
+
+- (void) internalRestartTunnel {
+    dispatch_async(workingQueue, ^{
+        _delayedRestartTunnel = NO;
+        _delayedSetEnabled = @(YES);
+        [self internalSetEnabled:NO force:YES];
+    });
+}
+
 - (void) addCustomProvider: (DnsProviderInfo*) provider {
     
     dispatch_sync(workingQueue, ^{
@@ -477,9 +510,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 #pragma mark Helper Methods (Private)
 
 //must be called on workingQueue
-- (void)internalSetEnabled:(BOOL)enabled{
+- (void)internalSetEnabled:(BOOL)enabled force:(BOOL)force{
     
-    if (enabled != _enabled) {
+    if (force || enabled != _enabled) {
         
         if (_activeDnsServer == nil) {
             // if we have initial state, when vpn configuration still was not loaded.
@@ -878,7 +911,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             localValue = [_delayedSetEnabled boolValue];
             _delayedSetEnabled = nil;
             dispatch_async(workingQueue, ^{
-                [self internalSetEnabled:localValue];
+                [self internalSetEnabled:localValue force:NO];
             });
         }
         else if (_delayedSetTunnelMode) {
@@ -887,6 +920,11 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             _delayedSetTunnelMode = nil;
             dispatch_async(workingQueue, ^{
                 [self internalSetTunnelMode:mode];
+            });
+        }
+        else if (_delayedRestartTunnel) {
+            dispatch_async(workingQueue, ^{
+                [self restartTunnel];
             });
         }
     }

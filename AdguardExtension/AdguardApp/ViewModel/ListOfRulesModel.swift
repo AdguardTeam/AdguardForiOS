@@ -110,33 +110,7 @@ class ListOfRulesModel: NSObject {
         
         super.init()
         
-        switch listOfRulesType {
-        case .safariUserFilter:
-            ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-            allRules = ruleObjects.map { RuleInfo($0.ruleText, false, themeService) }
-        
-        case .safariWhiteList:
-            ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
-            allRules = ruleObjects.map{
-                let domainObject = AEWhitelistDomainObject(rule: $0)
-                return RuleInfo(domainObject?.domain ?? "", false, themeService)
-            }
-        
-        case .invertedSafariWhiteList:
-            invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
-            allRules = invertedWhitelistObject?.domains.map{ (rule) -> RuleInfo in
-                RuleInfo(rule, false, themeService)
-            } ?? [RuleInfo]()
-            
-        case .dnsBlackList:
-            allRules = dnsFiltersService.userRules.map { RuleInfo($0, false, themeService) }
-            
-        case .dnsWhiteList:
-            allRules = dnsFiltersService.whitelistDomains.map { RuleInfo($0, false, themeService) }
-            
-        case .wifiExceptions:
-            allRules = [] // todo: get wifi exceptions
-        }
+        self.obtainRules()
     }
     
     // MARK: - public methods
@@ -169,9 +143,9 @@ class ListOfRulesModel: NSObject {
         case .invertedSafariWhiteList:
             addInvertedSafariWhitelistRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
         case .dnsBlackList:
-            dnsFiltersService.userRules = rules
+            addDnsRules(rules)
         case .dnsWhiteList:
-            dnsFiltersService.whitelistDomains = rules
+            addDnsRules(rules)
         case .wifiExceptions:
             break // todo: save wifi exceptions
         }
@@ -323,8 +297,10 @@ class ListOfRulesModel: NSObject {
         
         case .dnsBlackList:
             dnsFiltersService.userRules = dnsAndWifiRules
+            allRules = dnsAndWifiRules.map { RuleInfo($0, false, themeService) }
         case .dnsWhiteList:
             dnsFiltersService.whitelistDomains = dnsAndWifiRules
+            allRules = dnsAndWifiRules.map { RuleInfo($0, false, themeService) }
         case .wifiExceptions:
             break // todo save wi-fi exceptions
         }
@@ -526,6 +502,19 @@ class ListOfRulesModel: NSObject {
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
+    }
+    
+    private func addDnsRules(_ rules:[String]) {
+        
+        if listOfRulesType == .dnsBlackList {
+            dnsFiltersService.userRules.append(contentsOf: rules)
+        }
+        
+        if listOfRulesType == .dnsWhiteList {
+            dnsFiltersService.whitelistDomains.append(contentsOf: rules)
+        }
+        
+        allRules.append(contentsOf: rules.map { RuleInfo($0, false, themeService) })
     }
     
     // MARK: - Methods to work with files
@@ -890,6 +879,36 @@ extension ListOfRulesModel {
 
             case .invertedSafariWhiteList:
             return ACLocalizedString("inverted_whitelist_text", nil)
+        }
+    }
+    
+    private func obtainRules() {
+        switch listOfRulesType {
+        case .safariUserFilter:
+            ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+            allRules = ruleObjects.map { RuleInfo($0.ruleText, false, themeService) }
+        
+        case .safariWhiteList:
+            ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+            allRules = ruleObjects.map{
+                let domainObject = AEWhitelistDomainObject(rule: $0)
+                return RuleInfo(domainObject?.domain ?? "", false, themeService)
+            }
+        
+        case .invertedSafariWhiteList:
+            invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
+            allRules = invertedWhitelistObject?.domains.map{ (rule) -> RuleInfo in
+                RuleInfo(rule, false, themeService)
+            } ?? [RuleInfo]()
+            
+        case .dnsBlackList:
+            allRules = dnsFiltersService.userRules.map { RuleInfo($0, false, themeService) }
+            
+        case .dnsWhiteList:
+            allRules = dnsFiltersService.whitelistDomains.map { RuleInfo($0, false, themeService) }
+            
+        case .wifiExceptions:
+            allRules = [] // todo: get wifi exceptions
         }
     }
 }

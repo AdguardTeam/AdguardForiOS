@@ -55,6 +55,9 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     private let dnsCellReuseId = "DnsFilterCell"
     private let addFilterCellReuseId = "AddFilterCell"
     
+    private let addFilterSection = 0
+    private let filtersSection = 1
+    
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -68,7 +71,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Table view delegate methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : model.filters.count
+        return section == addFilterSection ? 1 : model.filters.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,7 +79,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0{
+        if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
                 // Hide cell
                 cell.frame.size.height = 0.0
@@ -85,13 +88,15 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
                 theme.setupTableCell(cell)
                 return cell
             }
-        } else {
+        } else if indexPath.section == filtersSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: dnsCellReuseId) as? DnsFilterCell {
                 cell.filter = model.filters[indexPath.row]
                 
                 theme.setupLabels(cell.themableLabels)
                 theme.setupSwitch(cell.filterSwitch)
                 theme.setupTableCell(cell)
+                
+                cell.filterSwitch.tag = indexPath.row
                 return cell
             }
         }
@@ -116,5 +121,6 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     @IBAction func filterStateAction(_ sender: UISwitch) {
+        model.setFilter(index: sender.tag, enabled: sender.isOn)
     }
 }

@@ -28,10 +28,16 @@ protocol DnsFiltersServiceProtocol {
     var filtersJson: String { get }
     
     // dns whitelist rules
+    // autoaticaly updates vpn settings when changed
     var whitelistDomains: [String] { get set }
     
     // dns user filter rules
+    // autoaticaly updates vpn settings when changed
     var userRules: [String] { get set }
+    
+    // enable or disable filter with id
+    // autoaticaly updates vpn settings when changed
+    func setFilter(filterId: Int, enabled: Bool)
 }
 
 
@@ -41,7 +47,7 @@ class DnsFilter: NSObject, NSCoding {
     let id: Int
     let name: String
     let date: Date
-    let enabled: Bool
+    var enabled: Bool
     
     init(id: Int, name: String, date: Date, enabled: Bool) {
         self.id = id
@@ -76,16 +82,21 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let kSharedDefaultsDnsFiltersMetaKey = "kSharedDefaultsDnsFiltersMetaKey"
     
     let resources: AESharedResourcesProtocol
+    let vpnManager: APVPNManagerProtocol?
     
-    init(resources: AESharedResourcesProtocol) {
+    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?) {
         self.resources = resources
+        self.vpnManager = vpnManager
+        
         super.init()
         readFiltersMeta()
     }
     
     var filtersJson: String  {
         get {
-            var json = filters.map({ (filter) -> [String:Any] in
+            
+            let filtersToAdd = filters.filter { $0.enabled }
+            var json = filtersToAdd.map({ (filter) -> [String:Any] in
                 return ["id":filter.id, "path":filterPath(filterId: filter.id)]
             })
             
@@ -125,13 +136,15 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         set {
             if let data = newValue.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
+                vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
+                
             }
             else {
                 DDLogError("(DnsFiltersService) error - can not save whitelist to file")
             }
         }
     }
-    
+        
     var userRules: [String] {
         get {
             guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: userFilterId)) else {
@@ -149,6 +162,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         set {
             if let data = newValue.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
+                vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
             }
             else {
                 DDLogError("(DnsFiltersService) error - can not save user filter to file")
@@ -156,9 +170,20 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
     }
     
+    func setFilter(filterId: Int, enabled: Bool) {
+        filters.forEach { (filter) in
+            if filter.id == filterId {
+                filter.enabled = enabled
+            }
+        }
+        
+        saveFiltersMeta()
+        vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
+    }
+    
     // MARK: - private methods
     
-    func readFiltersMeta() {
+    private func readFiltersMeta() {
         let savedData = resources.sharedDefaults().object(forKey: kSharedDefaultsDnsFiltersMetaKey) as? [Data] ?? []
         filters = savedData.map {
             let obj = NSKeyedUnarchiver.unarchiveObject(with: $0)
@@ -171,12 +196,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
     }
     
-    func saveFiltersMeta() {
+    private func saveFiltersMeta() {
         let dataToSave = filters.map { NSKeyedArchiver.archivedData(withRootObject: $0) }
         resources.sharedDefaults().set(dataToSave, forKey: kSharedDefaultsDnsFiltersMetaKey)
     }
     
-    func addDefaultFilter() {
+    private func addDefaultFilter() {
         let defaultFilter = DnsFilter(id: defaultFilterId, name: String.localizedString("default_dns_filter_name"), date: Date(), enabled: true)
         
         filters.insert(defaultFilter, at: 0)
@@ -192,11 +217,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         resources.save(data, toFileRelativePath: filterFileName(filterId: defaultFilterId))
     }
     
-    func filterFileName(filterId: Int)->String {
+    private func filterFileName(filterId: Int)->String {
         return "dns_filter_\(filterId).txt"
     }
     
-    func filterPath(filterId: Int)->String {
+    private func filterPath(filterId: Int)->String {
         return resources.path(forRelativePath: filterFileName(filterId: filterId))
     }
 }

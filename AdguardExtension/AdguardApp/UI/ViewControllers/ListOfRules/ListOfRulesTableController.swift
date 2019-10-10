@@ -351,7 +351,9 @@ class ListOfRulesTableController: UITableViewController, UISearchBarDelegate, UI
         model?.deleteRule(rule, errorHandler: { (message) in
             
         }, completionHandler: {
-            
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         })
     }
     

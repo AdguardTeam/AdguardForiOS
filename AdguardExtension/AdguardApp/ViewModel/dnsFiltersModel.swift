@@ -27,6 +27,11 @@ class DnsFiltersModel {
         fillFilters()
     }
     
+    func setFilter(index: Int, enabled: Bool) {
+        let filter = filters[index]
+        filtersService.setFilter(filterId: filter.id, enabled: enabled)
+    }
+    
     private func fillFilters(){
         filters = filtersService.filters
     }
