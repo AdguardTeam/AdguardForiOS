@@ -512,7 +512,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 //must be called on workingQueue
 - (void)internalSetEnabled:(BOOL)enabled force:(BOOL)force{
     
-    if (force || enabled != _enabled) {
+    if (force || (enabled != _enabled)) {
         
         if (_activeDnsServer == nil) {
             // if we have initial state, when vpn configuration still was not loaded.
