@@ -53,6 +53,7 @@ class ListOfRulesModel: NSObject {
     private let antibanner: AESAntibannerProtocol
     private let themeService: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
+    private var dnsFiltersService: DnsFiltersServiceProtocol
     
     private var ruleObjects = [ASDFilterRule]()
     private var invertedWhitelistObject: AEInvertedWhitelistDomainsObject?
@@ -98,37 +99,18 @@ class ListOfRulesModel: NSObject {
         }
     }
 
-    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol) {
+    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         
         self.listOfRulesType = listOfRulesType
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.themeService = theme
+        self.dnsFiltersService = dnsFiltersService
         
         super.init()
         
-        switch listOfRulesType {
-        case .safariUserFilter:
-            ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-            allRules = ruleObjects.map({ RuleInfo($0.ruleText, false, themeService) })
-        
-        case .safariWhiteList:
-            ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
-            allRules = ruleObjects.map({
-                let domainObject = AEWhitelistDomainObject(rule: $0)
-                return RuleInfo(domainObject?.domain ?? "", false, themeService)
-            })
-        
-        case .invertedSafariWhiteList:
-            invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
-            allRules = invertedWhitelistObject?.domains.map({ (rule) -> RuleInfo in
-                RuleInfo(rule, false, themeService)
-            }) ?? [RuleInfo]()
-        default:
-            guard let path = getPathByType() else { return }
-            initWith(path: path)
-        }
+        self.obtainRules()
     }
     
     // MARK: - public methods
@@ -160,8 +142,12 @@ class ListOfRulesModel: NSObject {
             addSafariWhitelistDomain(domain: ruleText, completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedSafariWhiteList:
             addInvertedSafariWhitelistRule(ruleText: rules.first ?? "", completionHandler: completionHandler, errorHandler: errorHandler)
-        default:
-            save(rule: ruleText)
+        case .dnsBlackList:
+            addDnsRules(rules)
+        case .dnsWhiteList:
+            addDnsRules(rules)
+        case .wifiExceptions:
+            break // todo: save wifi exceptions
         }
     }
     
@@ -181,8 +167,13 @@ class ListOfRulesModel: NSObject {
             changeSafariWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedSafariWhiteList:
             changeInvertedSafariWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
-        default:
-            return
+        case .dnsBlackList:
+            changeDnsBlacklistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        case .dnsWhiteList:
+            changeDnsWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+            
+        case .wifiExceptions:
+            return // todo: change wifi exception
             
         }
 
@@ -208,8 +199,12 @@ class ListOfRulesModel: NSObject {
             deleteSafariWhitelistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
         case .invertedSafariWhiteList:
             deleteInvertedSafariWhitelistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
-        default:
-            return
+        case .dnsBlackList:
+            deleteDnsBlacklistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
+        case .dnsWhiteList:
+            deleteDnsWhitelistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
+        case .wifiExceptions:
+            break // todo: delete wifi exeption
         }
     }
     
@@ -291,14 +286,23 @@ class ListOfRulesModel: NSObject {
             newRuleObjects.append(object)
             newRuleInfos.append(ruleInfo)
         }
-        if (listOfRulesType == .dnsBlackList || listOfRulesType == .dnsWhiteList || listOfRulesType == .wifiExceptions){
-            save(strings: dnsAndWifiRules)
-        } else {
+        
+        switch listOfRulesType {
+        case .safariUserFilter, .safariWhiteList, .invertedSafariWhiteList:
             setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {
                 
             }) { (message) in
                 errorHandler(message)
             }
+        
+        case .dnsBlackList:
+            dnsFiltersService.userRules = dnsAndWifiRules
+            allRules = dnsAndWifiRules.map { RuleInfo($0, false, themeService) }
+        case .dnsWhiteList:
+            dnsFiltersService.whitelistDomains = dnsAndWifiRules
+            allRules = dnsAndWifiRules.map { RuleInfo($0, false, themeService) }
+        case .wifiExceptions:
+            break // todo save wi-fi exceptions
         }
     }
     
@@ -500,33 +504,20 @@ class ListOfRulesModel: NSObject {
         }
     }
     
+    private func addDnsRules(_ rules:[String]) {
+        
+        if listOfRulesType == .dnsBlackList {
+            dnsFiltersService.userRules.append(contentsOf: rules)
+        }
+        
+        if listOfRulesType == .dnsWhiteList {
+            dnsFiltersService.whitelistDomains.append(contentsOf: rules)
+        }
+        
+        allRules.append(contentsOf: rules.map { RuleInfo($0, false, themeService) })
+    }
+    
     // MARK: - Methods to work with files
-    
-    private func save(rule: String){
-        guard let path = getPathByType() else { return }
-        if var rules = getStringFrom(path: path) {
-            rules += (rule + "\n")
-            let rule = RuleInfo(rule, false, themeService)
-            allRules.append(rule)
-            saveStringTo(path: path, string: rules)
-        }
-    }
-    
-    private func save(strings: [String]){
-        guard let path = getPathByType() else { return }
-        var rules = ""
-        willChangeValue(for: \.listOfRules)
-        allRules = []
-        didChangeValue(for: \.listOfRules)
-        for string in strings {
-            rules += (string + "\n")
-            let rule = RuleInfo(string, false, themeService)
-            willChangeValue(for: \.listOfRules)
-            allRules.append(rule)
-            didChangeValue(for: \.listOfRules)
-        }
-        saveStringTo(path: path, string: rules)
-    }
     
     private func getStringFrom(path: URL) -> String? {
         do {
@@ -743,31 +734,36 @@ class ListOfRulesModel: NSObject {
         }
     }
     
-    private func initWith(path: URL){
-        if let domains = getStringFrom(path: path){
-            let components = domains.components(separatedBy: .newlines)
-            for component in components {
-                if component.count > 0{
-                    let rule = RuleInfo(component, false, themeService)
-                    allRules.append(rule)
-                }
-            }
-        } else {
-            allRules = []
-        }
+    private func changeDnsBlacklistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+        
+        allRules[index].rule = text
+        dnsFiltersService.userRules = allRules.map { $0.rule }
+        
+        completionHandler()
     }
     
-    private func getPathByType() -> URL? {
-        switch listOfRulesType {
-        case .dnsBlackList:
-            return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(dnsBlacklistPath)
-        case .dnsWhiteList:
-            return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(dnsWhitelistPath)
-        case .wifiExceptions:
-            return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(wifiExceptionsPath)
-        default:
-            return nil
-        }
+    private func changeDnsWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+        
+        allRules[index].rule = text
+        dnsFiltersService.whitelistDomains = allRules.map { $0.rule }
+        
+        completionHandler()
+    }
+    
+    private func deleteDnsBlacklistRule(index: Int, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+        
+        allRules.remove(at: index)
+        dnsFiltersService.userRules = allRules.map { $0.rule }
+        
+        completionHandler()
+    }
+    
+    private func deleteDnsWhitelistRule(index: Int, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+        
+        allRules.remove(at: index)
+        dnsFiltersService.whitelistDomains = allRules.map { $0.rule }
+        
+        completionHandler()
     }
 }
 
@@ -883,6 +879,36 @@ extension ListOfRulesModel {
 
             case .invertedSafariWhiteList:
             return ACLocalizedString("inverted_whitelist_text", nil)
+        }
+    }
+    
+    private func obtainRules() {
+        switch listOfRulesType {
+        case .safariUserFilter:
+            ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+            allRules = ruleObjects.map { RuleInfo($0.ruleText, false, themeService) }
+        
+        case .safariWhiteList:
+            ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+            allRules = ruleObjects.map{
+                let domainObject = AEWhitelistDomainObject(rule: $0)
+                return RuleInfo(domainObject?.domain ?? "", false, themeService)
+            }
+        
+        case .invertedSafariWhiteList:
+            invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
+            allRules = invertedWhitelistObject?.domains.map{ (rule) -> RuleInfo in
+                RuleInfo(rule, false, themeService)
+            } ?? [RuleInfo]()
+            
+        case .dnsBlackList:
+            allRules = dnsFiltersService.userRules.map { RuleInfo($0, false, themeService) }
+            
+        case .dnsWhiteList:
+            allRules = dnsFiltersService.whitelistDomains.map { RuleInfo($0, false, themeService) }
+            
+        case .wifiExceptions:
+            allRules = [] // todo: get wifi exceptions
         }
     }
 }

@@ -130,6 +130,11 @@ extern NSString* __nonnull APVpnChangedNotification;
 - (BOOL)resetCustomDnsProvider:(nonnull DnsProviderInfo*)provider;
 
 /**
+ restarts tunnel& Automaticaly enable it if needed
+ */
+- (void)restartTunnel;
+
+/**
  Clears DNS Activity Log.
  
  @return Returns YES on success.

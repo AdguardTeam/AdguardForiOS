@@ -139,6 +139,7 @@ class ListOfRulesController : UIViewController, UIViewControllerTransitioningDel
         barState = .normal
         updateBottomBar()
         textView.resignFirstResponder()
+        tableController?.tableView.reloadData()
     }
     
     @IBAction func clearAction(_ sender: Any) {
