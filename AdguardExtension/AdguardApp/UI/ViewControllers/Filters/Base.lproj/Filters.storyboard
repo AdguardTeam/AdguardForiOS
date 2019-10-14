@@ -262,6 +262,7 @@
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
                         <outlet property="safariProtectionStateLabel" destination="8zX-PY-5pt" id="Guq-xi-sgj"/>
                         <outlet property="userFilterStateLabel" destination="uVg-Gj-40a" id="k23-YF-rGL"/>
+                        <outlet property="whitelistLabel" destination="f3z-Yh-zY2" id="0rh-cw-y5t"/>
                         <outletCollection property="themableLabels" destination="Lq2-mi-McV" collectionClass="NSMutableArray" id="fHH-Wa-bgn"/>
                         <outletCollection property="themableLabels" destination="2kF-Mk-dHf" collectionClass="NSMutableArray" id="eIo-nl-QOp"/>
                         <outletCollection property="themableLabels" destination="VCK-db-aeg" collectionClass="NSMutableArray" id="FJK-BI-DZV"/>

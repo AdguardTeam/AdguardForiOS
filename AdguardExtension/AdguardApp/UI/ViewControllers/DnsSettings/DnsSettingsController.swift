@@ -41,12 +41,11 @@ class DnsSettingsController : UITableViewController{
     private let wifiExceptionSegue = "wifiExceptionSegue"
     
     // MARK: - view controller life cycle
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == wifiExceptionSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
-                controller.model = model
+                // CHANGE AFTER MERGE
             }
         }
     }

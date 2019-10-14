@@ -20,13 +20,12 @@ import Foundation
 
 protocol AddRuleControllerDelegate {
     func addRule(rule: String)
-    func importRules()
 }
 
 class AddRuleController: UIViewController, UITextViewDelegate {
     
     var delegate : AddRuleControllerDelegate?
-    var type: ListOfRulesType = .safariUserFilter
+    var type: RulesType = .safariUserfilter
     
     @IBOutlet weak var contentView: RoundrectView!
     
@@ -53,7 +52,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         titleLabel.text = getTitleText()
         editCaption.text = getEditCaptionText()
         
-        ruleTextView.keyboardType = type == .safariUserFilter ? .default : .URL
+        ruleTextView.keyboardType = type == .safariUserfilter ? .default : .URL
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
@@ -110,8 +109,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     
     @IBAction func cancelAction(_ sender: Any) {
         
-        dismiss(animated: true) {
-        }
+        dismiss(animated: true) {}
     }
     
     // MARK: - TextViewDelegateMethods
@@ -131,51 +129,45 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     
     private func getTitleText() -> String {
         switch type {
-        case .safariUserFilter:
+        case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_title", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_title", nil)
-        case .dnsBlackList:
+        case .systemBlacklist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .dnsWhiteList:
+        case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .safariWhiteList:
+        case .safariWhitelist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .invertedSafariWhiteList:
+        case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
         }
     }
     
     private func getEditCaptionText() -> String {
         switch type {
-        case .safariUserFilter:
+        case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_caption", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_caption", nil)
-        case .dnsBlackList:
+        case .systemBlacklist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .dnsWhiteList:
+        case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .safariWhiteList:
+        case .safariWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .invertedSafariWhiteList:
+        case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
         }
     }
     
     private func getPlaceholderText() -> String {
         switch type {
-        case .safariUserFilter:
+        case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_placeholder", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_placeholder", nil)
-        case .dnsBlackList:
+        case .systemBlacklist:
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .dnsWhiteList:
+        case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .safariWhiteList:
+        case .safariWhitelist:
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .invertedSafariWhiteList:
+        case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
         }
     }

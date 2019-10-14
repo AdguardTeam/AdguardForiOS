@@ -38,12 +38,11 @@ class RequestsBlockingController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .dnsBlackList, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
-                controller.model = model
+                // CHANGE AFTER MERGE
             }
         } else if segue.identifier == dnsWhitelistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .dnsWhiteList, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let model: ListOfRulesModelProtocol = SystemWhitelistModel(resources: resources)
                 controller.model = model
             }
         }

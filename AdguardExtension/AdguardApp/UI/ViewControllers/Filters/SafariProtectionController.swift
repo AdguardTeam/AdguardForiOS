@@ -23,6 +23,7 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var numberOfFiltersLabel: UILabel!
     @IBOutlet weak var userFilterStateLabel: UILabel!
     @IBOutlet weak var protectionStateSwitch: UISwitch!
+    @IBOutlet weak var whitelistLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
@@ -49,25 +50,19 @@ class SafariProtectionController: UITableViewController {
     private let blackListSegue = "blackListSegue"
     
     // MARK: - view controler life cycle
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        switch segue.identifier {
-        case whiteListSegue:
+        if segue.identifier == whiteListSegue {
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let type: ListOfRulesType = inverted ? .invertedSafariWhiteList : .safariWhiteList
-                let model = ListOfRulesModel(listOfRulesType: type, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
                 controller.model = model
             }
-            
-        case blackListSegue:
+        } else if segue.identifier == blackListSegue {
             if let controller = segue.destination as? ListOfRulesController{
-                let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
+                let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: aeService.antibanner(), theme: theme)
                 controller.model = model
             }
-            
-        default:
-            break
         }
     }
     
@@ -76,6 +71,9 @@ class SafariProtectionController: UITableViewController {
         
         setupBackButton()
         updateTheme()
+        
+        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        whitelistLabel.text = inverted ? ACLocalizedString("inverted_whitelist_title", nil) : ACLocalizedString("whitelist_title", nil)
         
         let updateFilters: ()->() = { [weak self] in
             guard let sSelf = self else { return }

@@ -29,10 +29,10 @@
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (inverted)";
+"inverted_whitelist_title" = "Safari whitelist (inverted)";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Safari whitelist";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User Filter";
@@ -424,9 +424,6 @@
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari user filter";
 
-/* (ListOfRulesModel) title for inverted safari whiteList */
-"inverted_whitelist_title" = "Whitelist (inverted)";
-
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
@@ -435,6 +432,12 @@
 
 /* (ListOfRulesModel) title for export dns black list */
 "export_blacklist_title" = "Export blacklist";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Clear";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Save";
 
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
@@ -507,3 +510,21 @@
 
 /*(LogCategory) extensions category*/
 "extensions" = "Extensions";
+
+/*(ListOfRules) Select title */
+"common_select" = "Select";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Edit";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Delete";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Select all";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Add a domain";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Add a new rule";

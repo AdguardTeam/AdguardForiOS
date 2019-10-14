@@ -32,6 +32,7 @@ class RuleInfo: NSObject {
     var selected: Bool
     var textColor: UIColor!
     var font: UIFont!
+    var enabled: Bool
     
     // we define the type of rule by special makers that we look for in the text of rule
     // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
@@ -51,9 +52,10 @@ class RuleInfo: NSObject {
     private let cssColor = UIColor(hexString: "3A669C")
     private let commentColor = UIColor(hexString: "6D6D6D")
     
-    init(_ rule: String, _ selected: Bool, _ themeService: ThemeServiceProtocol) {
+    init(_ rule: String, _ selected: Bool, _ enabled: Bool, _ themeService: ThemeServiceProtocol) {
         self.rule = rule
         self.selected = selected
+        self.enabled = enabled
         
         super.init()
         
