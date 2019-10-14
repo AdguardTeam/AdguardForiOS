@@ -61,6 +61,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "KAUFEN";
 
+/* (LoginController) lost password button title */
+"lost_password" = "Passwort vergessen?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Ihr Premiumaccount ist abgelaufen";
 
@@ -196,7 +199,7 @@
 "google_dns_description" = "Freier alternativer DNS-Service von Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS-Server, der Ihr Gerät vor Online-Bedrohungen schützt";
+"open_dns_description" = "DNS-Server, der Ihr Gerät vor Phishing und Online-Betrug schützt";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS-Server mit Blockierung von Inhalten für Erwachsene";
@@ -275,6 +278,9 @@
 
 /* login error message */
 "login_error_message" = "Beim Anmelden ist ein Fehler aufgetreten";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium ist ein kostenpflichtiger jährlicher Service mit Abonnementkosten von 2,99 USD pro Jahr (Preis kann je nach Region variieren). Nach der Kaufbestätigung wird dein iTunes-Konto mit dem Betrag belastet. Das Abonnement verlängert sich jährlich automatisch. Um eine Verlängerung zu vermeiden, müssen Sie die automatische Verlängerung mindestens 24 Stunden vor Ablauf Ihres Abonnements deaktivieren. Die Verlängerung des Kontos wird innerhalb von 24 Stunden vor dem Ende des aktuellen Zeitraums abgebucht. Nach dem Kauf des Abonnements können Sie die automatische Verlängerung jederzeit in den Einstellungen Ihres iTunes-Kontos deaktivieren.<br><br><a href=%1$@>Datenschutzerklärung</a> <br><br><a href=%2$@>Nutzungsbedingungen</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Datenschutzerklärung</a> <br><br><a href=%2$@>Nutzungsbedingungen</a>";

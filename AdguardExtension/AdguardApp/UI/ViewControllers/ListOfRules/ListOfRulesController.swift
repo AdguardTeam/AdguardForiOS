@@ -202,11 +202,13 @@ class ListOfRulesController : UIViewController, UIViewControllerTransitioningDel
     
     private func updateTheme() {
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
+        view.backgroundColor = theme.backgroundColor
         theme.setupPopupButtons(bottomBarButtons)
         bottomBarSeparator.backgroundColor = theme.separatorColor
         theme.setupTextView(textView)
         theme.setupLabel(helperLabel)
         textView.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
 
     private func showRuleAddedDialog() {

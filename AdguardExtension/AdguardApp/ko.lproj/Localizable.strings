@@ -61,6 +61,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "구매";
 
+/* (LoginController) lost password button title */
+"lost_password" = "비밀번호를 잊어버렸나요?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
 
@@ -196,7 +199,7 @@
 "google_dns_description" = "구글이 제공하는 글로벌 DNS 서비스";
 
 /* Open DNS server description */
-"open_dns_description" = "사용자 정의 필터링과 개인 정보 도용 보호";
+"open_dns_description" = "피싱 및 사기로부터 장치를 보호하는 DNS 서버입니다.";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "성인 콘텐츠를 차단해주는 OpenDNS 서버";

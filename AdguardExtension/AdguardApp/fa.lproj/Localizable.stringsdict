@@ -270,9 +270,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>سپس %1$@ در روز</string>
+        <string>سپس %2$@ در روز</string>
         <key>other</key>
-        <string>سپس %1$@ در %2$d روز</string>
+        <string>سپس %2$@ در %1$d روز</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -286,9 +286,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>سپس %1$@ در هفته</string>
+        <string>سپس %2$@ در هفته</string>
         <key>other</key>
-        <string>سپس %1$@ در %2$d هفته</string>
+        <string>سپس %2$@ در %1$d هفته</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -302,9 +302,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>سپس %1$@ در ماه</string>
+        <string>سپس %2$@ در ماه</string>
         <key>other</key>
-        <string>سپس %1$@ در %2$d ماه</string>
+        <string>سپس %2$@ در %1$d ماه</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -318,9 +318,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>سپس %1$@ در سال</string>
+        <string>سپس %2$@ در سال</string>
         <key>other</key>
-        <string>سپس %1$@ در %2$d سال</string>
+        <string>سپس %2$@ در %1$d سال</string>
       </dict>
     </dict>
   </dict>

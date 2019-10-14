@@ -110,6 +110,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     }
     
     deinit {
+        viewModel?.currentGroup = nil
         viewModel?.removeCallback(with: filtersControllerKey)
     }
     

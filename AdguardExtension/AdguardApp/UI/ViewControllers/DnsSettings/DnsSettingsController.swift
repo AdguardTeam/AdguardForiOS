@@ -124,7 +124,7 @@ class DnsSettingsController : UITableViewController{
         }
         else {
             let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
-            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
+            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol], nil)
             serverName.text = "\(server) (\(protocolName))"
         }
         
