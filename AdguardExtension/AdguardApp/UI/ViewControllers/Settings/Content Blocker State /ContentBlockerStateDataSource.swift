@@ -102,7 +102,7 @@ class ContentBlockersDataSource {
     private let safariService: SafariService
     private let resources: AESharedResourcesProtocol
     private let filterService: FiltersServiceProtocol
-    private let antibannerController: AntibannerControllerProtocol
+    private let antibanner: AESAntibannerProtocol
     
     var contentBlockers = [ContentBlockerType : ContentBlocker]()
     
@@ -110,11 +110,11 @@ class ContentBlockersDataSource {
        return getUserFilterStringIfNedeed()
     }()
     
-    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibannerController: AntibannerControllerProtocol) {
+    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibanner: AESAntibannerProtocol) {
         self.safariService = safariService
         self.resources = resources
         self.filterService = filterService
-        self.antibannerController = antibannerController
+        self.antibanner = antibanner
         self.updateContentBlockersArray()
     }
     
@@ -128,15 +128,12 @@ class ContentBlockersDataSource {
     
     private func getUserFilterStringIfNedeed() -> String {
         var result = ""
-        antibannerController.exec { [weak self] (antibanner) in
-            guard let sSelf = self else { return }
-            let userTitleString = ACLocalizedString("user_filter_title", nil)
-            let blacklistRuleObjects = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-            let whitelistRuleObjects = sSelf.resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
-            
-            if blacklistRuleObjects != 0 || !whitelistRuleObjects.isEmpty {
-                result = userTitleString + "\n"
-            }
+        let userTitleString = ACLocalizedString("user_filter_title", nil)
+        let blacklistRuleObjects = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+        let whitelistRuleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        
+        if blacklistRuleObjects != 0 || !whitelistRuleObjects.isEmpty {
+            result = userTitleString + "\n"
         }
         return result
     }

@@ -35,7 +35,7 @@ class DnsSettingsController : UITableViewController{
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
+    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
     private let wifiExceptionSegue = "wifiExceptionSegue"
@@ -46,7 +46,7 @@ class DnsSettingsController : UITableViewController{
         if segue.identifier == wifiExceptionSegue {
             if let controller = segue.destination as? ListOfRulesController {
                 let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibannerController: antibannerController, theme: theme, dnsFiltersService: dnsFiltersService)
+                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
                 controller.model = model
             }
         }

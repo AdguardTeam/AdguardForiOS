@@ -38,7 +38,7 @@ protocol ContentBlockerServiceProtocol {
 @objc
 class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
-    var antibannerController: AntibannerControllerProtocol
+    var antibanner: AESAntibannerProtocol
     
     // MARK: - error constants
     static let contentBlockerServiceErrorDomain = "ContentBlockerServiceErrorDomain"
@@ -80,10 +80,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibannerController: AntibannerControllerProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol) {
         self.resources = resources
         self.safariService = safariService
-        self.antibannerController = antibannerController
+        self.antibanner = antibanner
         super.init()
     }
     
@@ -376,11 +376,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
                 
-                antibannerController.exec { (antibanner) in
-                    let userRules = userFilterEnabled ? antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
-                    
-                    rules = userRules + rules
-                }
+                let userRules = userFilterEnabled ? antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+                
+                rules = userRules + rules
                 
                 // add whitelist rules
                 
@@ -436,10 +434,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func rules(forFilters filterIDs: [NSNumber]) -> [NSNumber: [ASDFilterRule]] {
         var rulesByFilter = [NSNumber: [ASDFilterRule]]()
         
-        antibannerController.exec { (antibanner) in
-            for filterID in filterIDs {
-                rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
-            }
+        for filterID in filterIDs {
+            rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
         }
         
         return rulesByFilter
@@ -449,13 +445,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func activeGroups()->[NSNumber: [NSNumber]] {
         var filterByGroup = [NSNumber:[NSNumber]]()
         
-        antibannerController.exec { (antibanner) in
-            let groupIDs = antibanner.activeGroupIDs()
-            
-            for groupID in groupIDs {
-                let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
-                filterByGroup[groupID] = filterIDs
-            }
+        let groupIDs = antibanner.activeGroupIDs()
+        
+        for groupID in groupIDs {
+            let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
+            filterByGroup[groupID] = filterIDs
         }
         
         return filterByGroup
@@ -659,11 +653,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
         
-        var success = false
-        
-        antibannerController.exec { (antibanner) in
-            success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
-        }
+        let success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
         
         return success ? nil : NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                        code: ContentBlockerService.contentBlockerDBErrorCode,

@@ -98,7 +98,7 @@ class ListOfRulesModel: NSObject {
         }
     }
 
-    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibannerController: AntibannerControllerProtocol, theme: ThemeServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
+    init(listOfRulesType: ListOfRulesType, resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         
         self.listOfRulesType = listOfRulesType
         self.resources = resources
@@ -108,9 +108,7 @@ class ListOfRulesModel: NSObject {
         
         super.init()
         
-        antibannerController.exec { [weak self] (antibanner) in
-            self?.obtainRules(antibanner: antibanner)
-        }
+        self.obtainRules(antibanner: antibanner)
     }
     
     // MARK: - public methods

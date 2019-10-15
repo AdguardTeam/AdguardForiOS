@@ -20,7 +20,7 @@
 
 extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@protocol AESharedResourcesProtocol, SafariServiceProtocol, AntibannerControllerProtocol, ConfigurationServiceProtocol;
+@protocol AESharedResourcesProtocol, SafariServiceProtocol, AESAntibannerProtocol, ConfigurationServiceProtocol;
 
 @protocol AESSupportProtocol <NSObject>
 
@@ -36,6 +36,6 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 @property (nullable) id<ConfigurationServiceProtocol> configurationService;
 - (nonnull instancetype) initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
                       safariSevice: (nonnull id<SafariServiceProtocol>) safariService
-                         antibannerController: (nonnull id<AntibannerControllerProtocol>) antibannerController;
+                         antibanner: (nonnull id<AESAntibannerProtocol>) antibanner;
 
 @end

@@ -36,7 +36,7 @@ class AppDelegateHelper: NSObject {
     lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     var purchaseObservation: Any?
-    let antibannerController: AntibannerControllerProtocol
+    let antibanner: AESAntibannerProtocol
     let resources: AESharedResourcesProtocol
     let purchaseService: PurchaseServiceProtocol
     
@@ -49,8 +49,8 @@ class AppDelegateHelper: NSObject {
         }
     }
     @objc
-    init(antibannerController: AntibannerControllerProtocol, resources: AESharedResourcesProtocol, purchaseService: PurchaseService) {
-        self.antibannerController = antibannerController
+    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, purchaseService: PurchaseService) {
+        self.antibanner = antibanner
         self.resources = resources
         self.purchaseService = purchaseService
         super.init()
@@ -72,15 +72,13 @@ class AppDelegateHelper: NSObject {
         
         addPurchaseStatusObserver()
         
-        antibannerController.exec { [weak self] (antibanner) in
-            guard let sSelf = self else { return }
-            if (sSelf.firstRun) {
-                AESProductSchemaManager.install()
-                sSelf.purchaseService.checkLicenseStatus()
-            } else {
-                AESProductSchemaManager.upgrade(withAntibanner: antibanner)
-            }
+        if (firstRun) {
+            AESProductSchemaManager.install()
+            purchaseService.checkLicenseStatus()
+        } else {
+            AESProductSchemaManager.upgrade(withAntibanner: antibanner)
         }
+        
         return true;
     }
     

@@ -71,6 +71,7 @@ typedef enum : NSUInteger {
     NSArray *_updatedFilters;
     AESharedResources *_resources;
     id<AntibannerControllerProtocol> _antibannerController;
+    id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
     ASDatabase* _asDataBase;
@@ -100,6 +101,7 @@ typedef enum : NSUInteger {
     _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
     _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
     _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
+    _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -472,20 +474,17 @@ typedef enum : NSUInteger {
             
             __block BOOL result = NO;
             
-            [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
-                
-                [antibanner beginTransaction];
-                DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
-                
-                result = [antibanner startUpdatingForced:fromUI interactive:interactive];
-                
-                if (! result) {
-                    DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                    [antibanner rollbackTransaction];
-                    DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
-                }
-            }];
-
+            [_antibanner beginTransaction];
+            DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
+            
+            result = [_antibanner startUpdatingForced:fromUI interactive:interactive];
+            
+            if (! result) {
+                DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
+                [_antibanner rollbackTransaction];
+                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+            }
+            
             return result;
         }
         
@@ -526,112 +525,109 @@ typedef enum : NSUInteger {
 
 - (void)antibannerNotify:(NSNotification *)notification {
     
-    [_antibannerController exec:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
-    
-        // Update filter rule
-        if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
+    // Update filter rule
+    if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
+        
+        BOOL background = (_fetchCompletion || _downloadCompletion);
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
             
-            BOOL background = (_fetchCompletion || _downloadCompletion);
-            [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
+            if (error) {
+                [_antibanner rollbackTransaction];
+                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
-                if (error) {
-                    [antibanner rollbackTransaction];
-                    DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
-                    
-                    [self updateFailuredNotify];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        UINavigationController* nav = [self getNavigationController];
-                        if (nav.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
-                                
-                                [ACSSystemUtils showSimpleAlertForController:nav.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
+                [self updateFailuredNotify];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UINavigationController* nav = [self getNavigationController];
+                    if (nav.topViewController && [[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
                             
-                        }
-                    });
-                }
-                else{
-                    
-                    // Success antibanner updated from backend
-                    
-                    [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                    [antibanner endTransaction];
-                    DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
-                    
-                    [self updateFinishedNotify];
-                }
-            }];
-        }
-        // Update started
-        else if ([notification.name
-                  isEqualToString:ASAntibannerStartedUpdateNotification]) {
-            
-            // turn on network activity indicator
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-            [self updateStartedNotify];
-        }
-        // Update did not start
-        else if ([notification.name
-                  isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
-            
-            if ([antibanner inTransaction]) {
+                            [ACSSystemUtils showSimpleAlertForController:nav.topViewController withTitle: ACLocalizedString(@"common_error_title", @"(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating.") message:ACLocalizedString(@"load_to_safari_error", @"(AppDegelate) Alert message. When converting rules process finished in foreground updating.")];
+                        
+                    }
+                });
+            }
+            else{
                 
-                [antibanner rollbackTransaction];
-                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+                // Success antibanner updated from backend
+                
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [_antibanner endTransaction];
+                DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
+                
+                [self updateFinishedNotify];
+            }
+        }];
+    }
+    // Update started
+    else if ([notification.name
+              isEqualToString:ASAntibannerStartedUpdateNotification]) {
+        
+        // turn on network activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [self updateStartedNotify];
+    }
+    // Update did not start
+    else if ([notification.name
+              isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
+        
+        if ([_antibanner inTransaction]) {
+            
+            [_antibanner rollbackTransaction];
+            DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
+        }
+        
+        // Special update case.
+        [self antibanerUpdateFinished:AEUpdateFailed];
+    }
+    // Update performed
+    else if ([notification.name
+              isEqualToString:ASAntibannerFinishedUpdateNotification]) {
+        
+        _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
+        
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
+            
+            if ([_antibanner inTransaction]) {
+                // Success antibanner updated from backend
+                [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
+                [_antibanner endTransaction];
+                DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
+                
+                [self updateFinishedNotify];
             }
             
-            // Special update case.
-            [self antibanerUpdateFinished:AEUpdateFailed];
-        }
-        // Update performed
-        else if ([notification.name
-                  isEqualToString:ASAntibannerFinishedUpdateNotification]) {
             
-            _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
-            
-            [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
-                
-                if ([antibanner inTransaction]) {
-                    // Success antibanner updated from backend
-                    [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                    [antibanner endTransaction];
-                    DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
-                    
-                    [self updateFinishedNotify];
-                }
-                
-                
-                // Special update case (in background).
-                [self antibanerUpdateFinished:AEUpdateNewData];
-            }];
-            
-            // turn off network activity indicator
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        }
-        // Update failed
-        else if ([notification.name
-                  isEqualToString:ASAntibannerFailuredUpdateNotification]) {
-            
-            if ([antibanner inTransaction]) {
-                
-                [antibanner rollbackTransaction];
-                DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
-            }
-            
-            [self updateFailuredNotify];
-            
-            // Special update case.
-            [self antibanerUpdateFinished:AEUpdateFailed];
-            
-            // turn off network activity indicator
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        }
-        else if ([notification.name
-                  isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
-            
-            DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
+            // Special update case (in background).
             [self antibanerUpdateFinished:AEUpdateNewData];
+        }];
+        
+        // turn off network activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
+    // Update failed
+    else if ([notification.name
+              isEqualToString:ASAntibannerFailuredUpdateNotification]) {
+        
+        if ([_antibanner inTransaction]) {
+            
+            [_antibanner rollbackTransaction];
+            DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
-    }];
+        
+        [self updateFailuredNotify];
+        
+        // Special update case.
+        [self antibanerUpdateFinished:AEUpdateFailed];
+        
+        // turn off network activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
+    else if ([notification.name
+              isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
+        
+        DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
+        [self antibanerUpdateFinished:AEUpdateNewData];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////

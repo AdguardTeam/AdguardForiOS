@@ -67,7 +67,7 @@ class StartupService : NSObject{
         let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner)
         locator.addService(service: antibannerController)
         
-        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibannerController: antibannerController)
+        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
         locator.addService(service: contentBlockerService)
         
         let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)
@@ -77,7 +77,7 @@ class StartupService : NSObject{
         let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
         locator.addService(service: vpnManager)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibannerController: antibannerController)
+        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         
         supportService.configurationService = configuration;
         

@@ -65,7 +65,7 @@ class ActionViewController: UIViewController {
     private let safariService: SafariService
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
-    private let antibanerController: AntibannerControllerProtocol
+    private let antibannerController: AntibannerControllerProtocol
     private let support: AESSupport
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
@@ -75,9 +75,9 @@ class ActionViewController: UIViewController {
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
         let antibanner = AESAntibanner()
-        antibanerController = AntibannerController(antibanner: antibanner)
-        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibannerController: antibanerController)
-        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibannerController: antibanerController)
+        self.antibannerController = AntibannerController(antibanner: antibanner)
+        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
+        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         
         super.init(coder: coder)
     }
@@ -128,7 +128,7 @@ class ActionViewController: UIViewController {
                             errorMessage = error?.localizedDescription ?? ""
                         }
                     } else {
-                        sSelf.antibanerController.onReady { (antibanner) in
+                        sSelf.antibannerController.onReady { (antibanner) in
                             // Add observers for application notifications
                             sSelf.addObservers()
                             
@@ -306,13 +306,13 @@ class ActionViewController: UIViewController {
             } else if !sSelf.asDataBase.ready {
                 sSelf.dbObserver = sSelf.asDataBase.observe(\.ready, options: .new, changeHandler: { (db, change) in
                     if sSelf.asDataBase.ready{
-                        sSelf.antibanerController.start()
+                        sSelf.antibannerController.start()
                     }
                 })
             }
             //--------------------- Start Services ---------------------------
             else {
-                sSelf.antibanerController.start()
+                sSelf.antibannerController.start()
             }
         }
         return nil

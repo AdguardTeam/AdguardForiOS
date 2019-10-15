@@ -29,12 +29,6 @@ protocol AntibannerControllerProtocol {
     // We must block the gui until the anti-banner is initialized.
     // Otherwise, we display incorrect information on some screens.
     func onReady(_ block: @escaping  (_ antibanner: AESAntibannerProtocol)->Void)
-    
-    // This block wraps with beginBackgroundTask-endBackgroundTask.
-    // Еhis is done in order to finish working with database files even if the application goes to the background.
-    // If this is not done, then iOS kills the application after a while.
-    // The block is called syncronously
-    func exec(_ block: @escaping  (_ antibanner: AESAntibannerProtocol)->Void)
 }
 
 struct ReadyFlag: OptionSet {
@@ -82,17 +76,6 @@ class AntibannerController: AntibannerControllerProtocol {
         }
     }
     
-    func exec(_ block: @escaping (AESAntibannerProtocol) -> Void) {
-        #if !APP_EXTENSION
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        #endif
-        block(antibanner)
-        #if !APP_EXTENSION
-        UIApplication.shared.endBackgroundTask(backgroundTaskId)
-        #endif
-    }
-    
-    
     func onReady(_ block: @escaping (_ antibanner: AESAntibannerProtocol) -> Void) {
         
         readyQueue.async { [weak self] in
@@ -112,7 +95,8 @@ class AntibannerController: AntibannerControllerProtocol {
 
         for block in onReadyBlocks {
             workQueue.async { [weak self] in
-                self?.exec(block)
+                guard let sSelf = self else { return }
+                block(sSelf.antibanner)
             }
         }
         onReadyBlocks.removeAll()

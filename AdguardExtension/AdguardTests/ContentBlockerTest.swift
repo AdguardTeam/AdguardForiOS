@@ -6,16 +6,14 @@ class ContentBlockerTest: XCTestCase {
     var resources: SharedResourcesMock!
     var safari: SafariServiceMock!
     var contentBlocker: ContentBlockerService!
-    var antibannerController: AntibannerControllerProtocol!
     var antibanner: AntibannerMock!
     
     override func setUp() {
         resources = SharedResourcesMock()
         safari = SafariServiceMock()
         antibanner = AntibannerMock()
-        antibannerController = AntibannerControllerMock(antibanner)
         
-        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibannerController: antibannerController)
+        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner)
         contentBlocker.createConverter = {
             return (ConverterMock(), nil)
         }
