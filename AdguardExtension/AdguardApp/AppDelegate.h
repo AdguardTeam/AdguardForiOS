@@ -45,6 +45,11 @@ extern NSString *AppDelegateUpdatedFiltersKey;
  */
 extern NSString *OpenDnsSettingsSegue;
 
+/**
+ Notify user through app
+ */
+extern NSString *ShowCommonAlertNotification;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate
 /////////////////////////////////////////////////////////////////////

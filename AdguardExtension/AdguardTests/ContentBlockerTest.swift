@@ -54,9 +54,9 @@ class ContentBlockerTest: XCTestCase {
         contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
             XCTAssertNil(error)
             
-            let dataGeneral = self.safari.jsons[ContentBlockerType.general.rawValue]
+            let dataGeneral = self.safari.jsons[ContentBlockerType.general]
             let jsonString = String(data: dataGeneral!, encoding:.utf8)
-            let dataOther = self.safari.jsons[ContentBlockerType.other.rawValue]
+            let dataOther = self.safari.jsons[ContentBlockerType.other]
             let jsonStringOther = String(data: dataOther!, encoding:.utf8)
             
             XCTAssertTrue(jsonString == expectedJsonGeneral)

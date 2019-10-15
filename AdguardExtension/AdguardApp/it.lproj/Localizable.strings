@@ -196,7 +196,7 @@
 "google_dns_description" = "servizio di risoluzione dns globale fornito da Google";
 
 /* Open DNS server description */
-"open_dns_description" = "filtraggio personalizzato e protezione da furti di identità";
+"open_dns_description" = "Server DNS che protegge il tuo dispositivo da phishing e truffe";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Server OpenDNS con blocco dei contenuti per adulti";
@@ -395,9 +395,6 @@
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "L'account è bloccato";
-
-/* (LoginController) locked account mesage */
-"account_is_locked_error" = "L'account è temporaneamente bloccato";
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Token 2FA non valido";

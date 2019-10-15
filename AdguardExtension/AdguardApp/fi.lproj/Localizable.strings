@@ -61,9 +61,6 @@
 /* Google DNS server description */
 "google_dns_description" = "yleinen DNS-ratkaisupalvelu on Googlen tarjoama";
 
-/* Open DNS server description */
-"open_dns_description" = "mukautettu suodatus ja suojaus identiteetivarkauksilta";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "VPN-määrityksessä oli ongelma, ota yhteyttä tukitiimiimme.";
 

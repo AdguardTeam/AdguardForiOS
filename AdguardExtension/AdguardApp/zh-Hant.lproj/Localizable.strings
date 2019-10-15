@@ -61,6 +61,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "購買";
 
+/* (LoginController) lost password button title */
+"lost_password" = "弄丟了密碼嗎？";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
 
@@ -181,7 +184,7 @@
 "tunnel_mode_full_description" = "完全的隧道，與其它的 VPN 應用程式不相容";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖示），與其它的 VPN 應用程式不相容，較不穩定的";
+"tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖像），與其它的 VPN 應用程式不相容，較不穩定的";
 
 /* (MainMenuController) DNS server disabled state */
 "dns_server_disabled" = "已禁用";
@@ -196,7 +199,7 @@
 "google_dns_description" = "由 Google 提供之免費替代的 DNS 服務";
 
 /* Open DNS server description */
-"open_dns_description" = "保護您的裝置免於線上威脅之 DNS 伺服器";
+"open_dns_description" = "保護您的裝置免於網路釣魚和詐騙之 DNS 伺服器";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "有成人內容封鎖的 OpenDNS 伺服器";

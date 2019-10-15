@@ -1,7 +1,7 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuardプレミアム";
 
-/* Class = "UILabel"; text = "Code from authentification app:"; ObjectID = "53G-qY-SZ5"; */
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "認証アプリからのコード：";
 
 /* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
@@ -34,7 +34,7 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "マイ・アカウントへ行く";
 
-/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "フィッシングやその他の脅威をブロック";
 
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
@@ -57,9 +57,6 @@
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
 "jUb-cY-Qt7.normalTitle" = "無料で試す";
-
-/* Class = "UIButton"; normalTitle = "Lost password?"; ObjectID = "ltL-YJ-ZeT"; */
-"ltL-YJ-ZeT.normalTitle" = "パスワードをお忘れですか？";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "購入を復元";

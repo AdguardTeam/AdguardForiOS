@@ -1,6 +1,12 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Código de autenticação do aplicativo:";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
+"5Ay-kq-RuV.text" = "Não tem uma conta?";
+
 /* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
 "5iB-q7-5l8.text" = "Privacidade de DNS";
 
@@ -16,13 +22,19 @@
 /* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
 "K5r-9l-kKl.text" = "Você tem uma licença";
 
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "E-mail:";
+
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "BLOQUEIE MAIS ANÚNCIOS E RASTREADORES";
+
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "Senha:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "IR PARA MINHA CONTA";
 
-/* Class = "UILabel"; text = "Block phishing and other threats"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
 "SKX-L4-odW.text" = "Bloqueio de phishing e outras ameaças";
 
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
@@ -30,6 +42,9 @@
 
 /* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
 "ZMu-UP-PI3.text" = "Valorize seus dados pessoais privados";
+
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
+"aDc-NB-78y.normalTitle" = "REGISTRAR";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ENTRAR";
@@ -51,6 +66,9 @@
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
 "oxc-z7-F6Z.text" = "Filtros personalizados";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "CONFIRMAR";
 
 /* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
 "wLZ-TG-e9w.normalTitle" = "entrar";

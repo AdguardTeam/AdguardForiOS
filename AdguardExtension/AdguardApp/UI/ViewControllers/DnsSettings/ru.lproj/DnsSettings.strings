@@ -14,7 +14,7 @@
 "3lB-T7-fSO.text" = "Настроить свои параметры DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
+"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// или tls://";
 
 /* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "6db-7F-O0d"; */
 "6db-7F-O0d.title" = "Туннельный режим";
@@ -80,7 +80,7 @@
 "ZdD-yx-6ph.normalTitle" = "ОТМЕНА";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
-"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// or tls://";
+"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// или tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";

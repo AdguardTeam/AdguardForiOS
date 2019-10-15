@@ -20,7 +20,6 @@ import Foundation
 import SafariServices
 
 // MARK: - data types -
-@objc
 enum ContentBlockerType: Int, CaseIterable {
     case general
     case privacy
@@ -35,7 +34,6 @@ enum ContentBlockerType: Int, CaseIterable {
 /**
  SafariService is responsible for save/load content blocker rules files and for invalidating safari content blockers
  */
-@objc
 protocol SafariServiceProtocol : NSObjectProtocol {
     /** invalidates all content blockers
      */
@@ -43,11 +41,11 @@ protocol SafariServiceProtocol : NSObjectProtocol {
     
     /** saves json for content blocker with @type
     */
-    func save(json: Data, type: Int)
+    func save(json: Data, type: ContentBlockerType)
     
     /** read json for content blocker with @type
      */
-    func readJson(forType type: Int)->Data?
+    func readJson(forType type: ContentBlockerType)->Data?
     
     /** returns all content blockers jsons in dictionary [filename: data]
      */
@@ -56,7 +54,7 @@ protocol SafariServiceProtocol : NSObjectProtocol {
     /** checks enabled status of all safari content blockers
      returns true in callback if all content blockers are enabled in safari settings
      */
-    func checkStatus(completion: @escaping (_ enabled: [NSNumber : Bool])->Void)
+    func checkStatus(completion: @escaping (_ enabled: [ContentBlockerType : Bool])->Void)
     
     /** returns state of content blocker ( on / off )
      */
@@ -97,7 +95,6 @@ class SafariService: NSObject, SafariServiceProtocol {
     private var contentBlockersEnabled = [ContentBlockerType : Bool]()
     
     // MARK: - initializers
-    
     @objc
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
@@ -105,13 +102,14 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: public methods
     
+    let updateQueue = DispatchQueue(label: "safari_update")
+    
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
+    
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
             
-            let updateQueue = DispatchQueue(label: "safari_update", attributes: DispatchQueue.Attributes.concurrent)
-            
-            updateQueue.async {
+            sSelf.updateQueue.async {
                 
                 let group = DispatchGroup()
                 var resultError: Error?
@@ -129,12 +127,12 @@ class SafariService: NSObject, SafariServiceProtocol {
                             resultError = error
                         }
                         let sError = (error != nil) ? false : true
+                        
                         // Notify that filter finished updating
                         NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
                     
-                    // reload one content blocker at a time
                     group.wait()
                 }
                 
@@ -142,7 +140,6 @@ class SafariService: NSObject, SafariServiceProtocol {
             }
         }
     }
-    
     
     @objc
     func filenameById(_ contentBlockerId: String) -> String? {
@@ -158,14 +155,14 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: save/load files
     
-    func save(json: Data, type: Int) {
-        if let fileName = fileNames[ContentBlockerType(rawValue: type)!] {
+    func save(json: Data, type: ContentBlockerType) {
+        if let fileName = fileNames[type] {
             resources.save(json, toFileRelativePath: fileName)
         }
     }
     
-    func readJson(forType type: Int) -> Data? {
-        if let fileName = fileNames[ContentBlockerType(rawValue: type)!] {
+    func readJson(forType type: ContentBlockerType) -> Data? {
+        if let fileName = fileNames[type] {
             return resources.loadData(fromFileRelativePath: fileName)
         }
         
@@ -176,7 +173,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     func allBlockingContentRules()->[String : Data] {
         var datas = [String : Data]()
         ContentBlockerType.allCases.forEach { (type) in
-            let data = self.readJson(forType: type.rawValue)
+            let data = self.readJson(forType: type)
             datas[fileNames[type]!] = data
         }
         return datas
@@ -184,8 +181,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: - safari content blocker status
     
-    @objc
-    func checkStatus(completion:@escaping (_ enabled: [NSNumber : Bool])->Void) {
+    func checkStatus(completion:@escaping (_ enabled: [ContentBlockerType : Bool])->Void) {
         let checkQueue = DispatchQueue(label: "safari_check", attributes: DispatchQueue.Attributes.concurrent)
         
         checkQueue.async {
@@ -201,9 +197,8 @@ class SafariService: NSObject, SafariServiceProtocol {
                 })
             }
             group.wait()
-            let objcContentBlockersEnabled = ObjcToSwiftAndBackAdapter.fromSwiftToObjc(dict: self.contentBlockersEnabled)
             
-            completion(objcContentBlockersEnabled)
+            completion(self.contentBlockersEnabled)
             NotificationCenter.default.post(name: SafariService.contentBlcokersChecked, object: self)
         }
         
@@ -251,7 +246,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                 }
             }
             else {
-                DDLogError("(SafariService)  \(bundleId) reload successeded")
+                DDLogInfo("(SafariService)  \(bundleId) reload successeded")
                 completion(nil)
             }
         }
@@ -277,25 +272,5 @@ class SafariService: NSObject, SafariServiceProtocol {
                 completion(nil)
             }
         }
-    }
-}
-
-class ObjcToSwiftAndBackAdapter {
-    static func fromSwiftToObjc(dict: [ContentBlockerType : Bool]) -> [NSNumber : Bool] {
-        var returnDict: [NSNumber : Bool] = [:]
-        for d in dict {
-            let key = d.key.rawValue as NSNumber
-            returnDict[key] = d.value
-        }
-        return returnDict
-    }
-    
-    static func fromObjcToSwift(dict: [NSNumber : Bool]) -> [ContentBlockerType : Bool] {
-        var returnDict: [ContentBlockerType : Bool] = [:]
-        for d in dict {
-            guard let key = ContentBlockerType(rawValue: Int(truncating: d.key)) else { return [:] }
-            returnDict[key] = d.value
-        }
-        return returnDict
     }
 }

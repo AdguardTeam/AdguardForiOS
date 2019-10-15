@@ -22,11 +22,23 @@ import UserNotifications
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()
+    
+    /*
+     Method to post notifications which come while app is in background
+     **/
     func postNotification(title: String, body: String)
     func removeNotifications()
+    
+    /*
+     Method to post notifications which come while app is in foreground
+     **/
+    func postNotificationInForeground(body: String, title: String)
 }
 
-class UserNotificationService: UserNotificationServiceProtocol {
+class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUserNotificationCenterDelegate {
+    
+    @objc static let notificationBody = "notificationBody"
+    @objc static let notificationTitle = "notificationTitle"
     
     func requestPermissions() {
         let center = UNUserNotificationCenter.current()
@@ -37,7 +49,7 @@ class UserNotificationService: UserNotificationServiceProtocol {
     
     func postNotification(title: String, body: String) {
         let center = UNUserNotificationCenter.current()
-        
+    
         center.getNotificationSettings { [weak self] (settings) in
             
             if settings.authorizationStatus != .authorized {
@@ -58,10 +70,8 @@ class UserNotificationService: UserNotificationServiceProtocol {
     private func alertNotification(title: String?, body: String?) {
         let content = UNMutableNotificationContent()
         
-        if body != nil && title != nil {
-            content.title = title!
-            content.body = body!
-        }
+        content.title = title ?? ""
+        content.body = body ?? ""
         
         content.badge = 1
         
@@ -71,6 +81,7 @@ class UserNotificationService: UserNotificationServiceProtocol {
         let request = UNNotificationRequest(identifier: uuid, content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
+        center.delegate = self
         
         center.add(request) { (error) in
             if error != nil { DDLogError("(UserNotificationService) - alertNotification error : \(error!)") }
@@ -84,5 +95,25 @@ class UserNotificationService: UserNotificationServiceProtocol {
     func removeNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    
+    func postNotificationInForeground(body: String, title: String) {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings {[weak self] (settings) in
+            if settings.authorizationStatus == .authorized && settings.alertSetting == .enabled {
+                self?.alertNotification(title: title, body: body)
+            } else {
+                let userInfo = [UserNotificationService.notificationBody : body,
+                                UserNotificationService.notificationTitle : title]
+                NotificationCenter.default.post(name: NSNotification.Name.ShowCommonAlert, object: nil, userInfo: userInfo)
+            }
+        }
     }
 }

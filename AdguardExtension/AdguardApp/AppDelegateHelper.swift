@@ -26,8 +26,21 @@ import Foundation
 @objcMembers
 class AppDelegateHelper: NSObject {
     
+    let appDelegate: AppDelegate
     lazy var userNotificationService: UserNotificationServiceProtocol =  { ServiceLocator.shared.getService()! }()
+    
+    lazy var aeService: AEServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var themeService: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var contentBlockerService: ContentBlockerService = { ServiceLocator.shared.getService()! }()
+    lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
     var purchaseObservation: Any?
+    
+    init(appDelegate: AppDelegate) {
+        self.appDelegate = appDelegate
+        super.init()
+    }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
@@ -49,6 +62,75 @@ class AppDelegateHelper: NSObject {
     
     func performFetch() {
         addPurchaseStatusObserver()
+    }
+    
+    private func getNavigationController()->UINavigationController? {
+        return appDelegate.window.rootViewController as? UINavigationController
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        DDLogError("(AppDelegate) application Open URL.");
+            
+        /*
+        When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
+        https://github.com/AdguardTeam/AdguardForiOS/issues/1135
+        */
+        
+        let command = url.host
+        
+        guard let nav = self.getNavigationController() else {
+            DDLogError("(AppDeegate) application open url error. There is no nav controller")
+            return false
+        }
+        
+        if nav.viewControllers.count == 0 {
+            return false
+        }
+        
+        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
+        if command == AE_URLSCHEME_COMMAND_ADD {
+            appDelegate.window.rootViewController = launchScreenController
+        }
+     
+        if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
+            aeService.onReady {
+                DispatchQueue.main.async {
+                        
+                    let path = String(url.path.suffix(url.path.count - 1))
+                    
+                    let main = nav.viewControllers[0]
+                    if main.isKind(of: MainController.self) {
+                        let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
+                        let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
+                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
+                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
+                        
+                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.aeService.antibanner(), theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
+                        
+                        userFilterController.model = model
+                        userFilterController.newRuleText = path
+                        
+                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
+                        
+                        nav.viewControllers = [main, menuController, safariProtectionController, userFilterController]
+                        
+                        main.loadViewIfNeeded()
+                        menuController.loadViewIfNeeded()
+                        safariProtectionController.loadViewIfNeeded()
+                        userFilterController.loadViewIfNeeded()
+                        
+                        self.appDelegate.window.rootViewController = nav
+                    }
+                    else{
+                        DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
+                    }
+                }
+            }
+            return true
+        }
+        return false
     }
     
     private func addPurchaseStatusObserver() {

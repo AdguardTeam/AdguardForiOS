@@ -51,7 +51,7 @@ class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let dnsFiltersService: DnsFiltersServiceProtocol! = ServiceLocator.shared.getService()!
+        let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         
         switch segue.identifier {
         case whiteListSegue:

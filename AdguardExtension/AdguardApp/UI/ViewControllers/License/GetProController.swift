@@ -196,7 +196,7 @@ class GetProController: UIViewController {
             navigationItem.rightBarButtonItems = [loginBarButton]
         case (true, false):
             goToMyAccountHeight.constant = 0
-            navigationItem.rightBarButtonItems = [loginBarButton]
+            navigationItem.rightBarButtonItems = []
         case (true, true):
             goToMyAccountHeight.constant = 60
             navigationItem.rightBarButtonItems = [logoutBarButton]
