@@ -96,6 +96,8 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
             return ACLocalizedString("add_whitelist_domain_caption", nil)
         case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_caption", nil)
         }
     }
 }

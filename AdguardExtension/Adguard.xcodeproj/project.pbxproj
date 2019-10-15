@@ -604,6 +604,10 @@
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */; };
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
+		7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */; };
+		7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */; };
+		7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */; };
+		7E5101962355D10B00935FE9 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
@@ -1771,6 +1775,10 @@
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
+		7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsTableController.swift; sourceTree = "<group>"; };
+		7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsCells.swift; sourceTree = "<group>"; };
+		7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsModel.swift; sourceTree = "<group>"; };
+		7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsService.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
@@ -3174,6 +3182,15 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		7E51018D2355A66B00935FE9 /* NetworkSettings */ = {
+			isa = PBXGroup;
+			children = (
+				7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */,
+				7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */,
+			);
+			path = NetworkSettings;
+			sourceTree = "<group>";
+		};
 		7E5FC204234F812F008E383D /* Container's controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -3434,6 +3451,7 @@
 		D0EDE45622A928F300086C00 /* DnsSettings */ = {
 			isa = PBXGroup;
 			children = (
+				7E51018D2355A66B00935FE9 /* NetworkSettings */,
 				D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */,
 				D07AA066220823670065779F /* ChooseProtocolController.swift */,
 				D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */,
@@ -3481,6 +3499,7 @@
 				65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */,
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
+				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3516,6 +3535,7 @@
 				7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */,
 				D07427F1232B96CB0019AAF4 /* Utils */,
 				D0CB347A212DD1AB003B650E /* ConfigurationService.swift */,
+				7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */,
 				D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */,
 				D0F91179213422E1006DF0D3 /* PurchaseService.swift */,
 				7E1104F822DE27C700720501 /* StartupService.swift */,
@@ -5118,6 +5138,7 @@
 				7E1104F922DE27C700720501 /* StartupService.swift in Sources */,
 				D0DB1B062148DB35006EB991 /* SettingsController.swift in Sources */,
 				7E4D204422D71A5B003B0E75 /* mz_strm_mem.c in Sources */,
+				7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
@@ -5254,6 +5275,7 @@
 				7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */,
 				D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
+				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
 				D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
@@ -5271,6 +5293,7 @@
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,
+				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */,
 				7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */,
@@ -5284,6 +5307,7 @@
 				65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */,
 				7E1C583B234F5A9500D8F419 /* NewListOfRulesModel.swift in Sources */,
+				7E5101962355D10B00935FE9 /* NetworkSettingsService.swift in Sources */,
 				655A023A1C6B7686000F00D7 /* ACLJobController.m in Sources */,
 				D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */,
 				D0F91169212EE214006DF0D3 /* GroupsController.swift in Sources */,

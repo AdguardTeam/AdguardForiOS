@@ -139,6 +139,8 @@ class AddRuleController: UIViewController, UITextViewDelegate {
             return ACLocalizedString("add_whitelist_domain_title", nil)
         case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_placeholder", nil)
         }
     }
     
@@ -154,6 +156,8 @@ class AddRuleController: UIViewController, UITextViewDelegate {
             return ACLocalizedString("add_whitelist_domain_caption", nil)
         case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_caption", nil)
         }
     }
     
@@ -169,6 +173,8 @@ class AddRuleController: UIViewController, UITextViewDelegate {
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
         case .invertedSafariWhitelist:
             return ACLocalizedString("add_whitelist_domain_placeholder", nil)
+        case .wifiExceptions:
+            return ACLocalizedString("add_wifi_name_placeholder", nil)
         }
     }
 }

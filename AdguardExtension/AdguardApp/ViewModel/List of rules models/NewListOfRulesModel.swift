@@ -19,7 +19,7 @@
 import Foundation
 
 enum RulesType{
-    case safariWhitelist, invertedSafariWhitelist, systemWhitelist, systemBlacklist, safariUserfilter
+    case safariWhitelist, invertedSafariWhitelist, systemWhitelist, systemBlacklist, safariUserfilter, wifiExceptions
 }
 
 protocol ListOfRulesModelDelegate: class{

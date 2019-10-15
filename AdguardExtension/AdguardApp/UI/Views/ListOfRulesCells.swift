@@ -56,6 +56,8 @@ class EnableListOfRulesCell: UITableViewCell {
                 image = UIImage(named: "thumbsup") ?? UIImage()
             case .systemBlacklist:
                 image = UIImage(named: "blacklist-icon") ?? UIImage()
+            case .wifiExceptions:
+                image = UIImage()
             case .none:
                 image = UIImage()
             }

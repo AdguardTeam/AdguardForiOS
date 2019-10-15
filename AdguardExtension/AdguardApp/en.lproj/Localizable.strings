@@ -412,8 +412,26 @@
 /* (LoginController) terms and eula text */
 "login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
 
-/* (ListOfRulesModel) title for wifi exceptions */
+/* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi exceptions";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "System protection will not be used in Wi-Fi networks below";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Add an exception";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filter mobile data";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filter wi-fi data";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Trackers, counters";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Trackers, counters";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
