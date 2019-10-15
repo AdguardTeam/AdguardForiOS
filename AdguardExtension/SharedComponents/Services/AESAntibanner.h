@@ -66,7 +66,7 @@ extern NSString * _Nonnull ASAntibannerUpdateFilterFromUINotification;
 /// When filter enable status did change
 extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
-@class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed, ASDatabase;
+@class Reachability, ASDFilterRule, ACLExecuteBlockDelayed, ASDatabase;
 @class AASCustomFilterParserResult;
 @protocol ACNNetworkingProtocol;
 
@@ -296,10 +296,8 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  or tries to obtain the rules from backend server.
  
  @param filters         List of the ASDFilterMetadata objects, which will be save into DB.
- @param jobController   Because the subscription process is long,
- you may use this parameter for cancellation.
  */
-- (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters jobController:(nullable ACLJobController *)jobController;
+- (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters;
 
 /**
  Removes filter data from production DB.

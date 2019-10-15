@@ -4,6 +4,7 @@ import Foundation
 
 class AntibannerMock: NSObject, AESAntibannerProtocol {
     
+    
     var enabled = true
     var updatesRightNow = false
     
@@ -12,6 +13,9 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     var metadata = ABECFilterClientMetadata()
     var storedGroups = [ASDFilterGroup]()
     var storedFilters = [ASDFilterMetadata]()
+    
+    func start() {
+    }
     
     func rules(forFilter filterId: NSNumber) -> [ASDFilterRule] {
         return rules[filterId]!
@@ -107,7 +111,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
         return ABECFilterClientLocalization()
     }
     
-    func subscribeFilters(_ filters: [ASDFilterMetadata], jobController: ACLJobController?) -> Bool {
+    func subscribeFilters(_ filters: [ASDFilterMetadata]) -> Bool {
         return true
     }
     

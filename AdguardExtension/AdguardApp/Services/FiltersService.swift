@@ -699,7 +699,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     return
                 }
                 filterMeta.enabled = true
-                antibanner.subscribeFilters([filterMeta], jobController: nil)
+                antibanner.subscribeFilters([filterMeta])
             } else {
                 DDLogInfo("Filter with filterId = \(filterId) is not installed")
             }

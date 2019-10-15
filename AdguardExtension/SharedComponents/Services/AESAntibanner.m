@@ -87,19 +87,21 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     id<ACNNetworkingProtocol> _networking;
     
     ASDatabase *_asDataBase;
+    id <AESharedResourcesProtocol> _resources;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking asDataBase: (ASDatabase *)asDatabase {
+- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking asDataBase: (ASDatabase *)asDatabase resources: (id<AESharedResourcesProtocol>) resources {
     
     self = [super init];
     if (self) {
         
         _networking = networking;
         _asDataBase = asDatabase;
+        _resources = resources;
         observingDbStatus = NO;
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
@@ -127,13 +129,14 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 }
 
 /////////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
+#pragma mark - Properties and public methods
 /////////////////////////////////////////////////////////////////////////
 
 @synthesize updatesRightNow = _updatesRightNow;
 
+#pragma mark database initializing methods
 - (void)start{
-    
+
     dispatch_sync(workQueue, ^{
         if ([self checkInstalledFiltersInDB]){
             [self setServiceToReady];
@@ -141,10 +144,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     });
 }
 
+#pragma mark db access methods
 - (NSMutableArray *)activeRules{
     
     NSMutableArray *rules = [NSMutableArray array];
-    
         
     [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
         
@@ -711,7 +714,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     @autoreleasepool {
         
         if(!_metadataCacheForFilterSubscription) {
-            _metadataCacheForFilterSubscription = [AESharedResources new].filtersMetadataCache;
+            _metadataCacheForFilterSubscription = _resources.filtersMetadataCache;
         }
         
         if (! _metadataCacheForFilterSubscription
@@ -724,7 +727,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (metadata) {
                     
                     _metadataCacheForFilterSubscription = metadata;
-                    [AESharedResources new].filtersMetadataCache = _metadataCacheForFilterSubscription;
+                    _resources.filtersMetadataCache = _metadataCacheForFilterSubscription;
                     _metaCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -757,7 +760,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     @autoreleasepool {
         
         if(!_i18nCacheForFilterSubscription) {
-            _i18nCacheForFilterSubscription = [AESharedResources new].i18nCacheForFilterSubscription;
+            _i18nCacheForFilterSubscription = _resources.i18nCacheForFilterSubscription;
         }
         
         if (! _i18nCacheForFilterSubscription
@@ -770,7 +773,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (i18n) {
                     
                     _i18nCacheForFilterSubscription = i18n;
-                    [AESharedResources new].i18nCacheForFilterSubscription = _i18nCacheForFilterSubscription;
+                    _resources.i18nCacheForFilterSubscription = _i18nCacheForFilterSubscription;
                     _i18nCacheLastUpdated = [NSDate date];
                 }
                 _metadataForSubscribeOutdated = NO;
@@ -798,7 +801,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
 }
 
-- (BOOL)subscribeFilters:(NSArray<ASDFilterMetadata*> *)filters jobController:(ACLJobController *)jobController{
+- (BOOL)subscribeFilters:(NSArray<ASDFilterMetadata*> *)filters{
     
     if (!filters) {
         
@@ -841,15 +844,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     
                     *rollback = YES;
                     
-                    if (_metadataCacheForFilterSubscription) {
-                        // If were loaded metadata of groups from backend,
-                        // updating the DB.
-//                        result = [self insertMetadataIntoDb:db groups:_metadataCacheForFilterSubscription.groups];
-//                        if (!result) {
-//
-//                            return;
-//                        }
-                    }
                     if (_i18nCacheForFilterSubscription) {
                         
                         // If were loaded i18n from backend,
@@ -867,12 +861,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     
                     NSMutableArray *filtersMetaForSave = [NSMutableArray new];
                     for (ASDFilterMetadata *filter in filters) {
-                        
-                        if (jobController && jobController.state != ACLJCExecuteState) {
-                            
-                            result = NO;
-                            return;
-                        }
                         
                         if ([self installRulesFromBackendWithFilterId:filter.filterId db:db]) {
                             
@@ -897,12 +885,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                                 }
                             }
                         }
-                    }
-                    
-                    if (jobController && jobController.state != ACLJCExecuteState) {
-                        
-                        result = NO;
-                        return;
                     }
                     
                     result = [self insertMetadataIntoDb:db filters:filtersMetaForSave];
@@ -1050,13 +1032,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                         
                         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterFromUINotification object:sSelf];
                     });
-                    
-                    [sSelf updateAntibannerForced:NO interactive:YES];
                 });
                 
-                
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
                 });
             }
@@ -1072,6 +1050,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return removed;
 }
 
+#pragma mark update filters
 
 - (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive{
     
@@ -1155,6 +1134,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     return date;
 }
+
+#pragma mark transactions
 
 - (BOOL)inTransaction{
     
@@ -1247,9 +1228,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             return;
         }
 
-        AESharedResources *res = [AESharedResources new];
-
-        NSSet *metadataForUpdate = [NSSet setWithArray:res.lastUpdateFilterMetadata.filters];
+        NSSet *metadataForUpdate = [NSSet setWithArray:_resources.lastUpdateFilterMetadata.filters];
         
         // get metadata only for filters, which must be updated
         metadata.filters = [metadata.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId IN %@", [[metadataForUpdate allObjects] valueForKey:@"filterId"]]];
@@ -1278,8 +1257,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             }
             else {
                 
-                res.lastUpdateFilterMetadata = metadata;
-                res.lastUpdateFilterIds = filterIds;
+                _resources.lastUpdateFilterMetadata = metadata;
+                _resources.lastUpdateFilterIds = filterIds;
                 
                 DDLogDebug(@"(AESAntibanner) -filterClient: filters requested");
             }
@@ -1589,11 +1568,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     // Get filters data from backend
     
     
-    AESharedResources *res = [AESharedResources new];
     ABECFilterClientMetadata *metadata = [ABECFilterClientMetadata new];
     metadata.filters = [metadataForUpdate allObjects];
     //Temporary save metadata, which should be updated.
-    res.lastUpdateFilterMetadata = metadata;
+    _resources.lastUpdateFilterMetadata = metadata;
 
     NSError *error = [[ABECFilterClient singleton] i18nRequest];
     if (error) {
@@ -1612,8 +1590,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 
 - (void)finishUpdateInBackgroundMode {
     
-    AESharedResources *res = [AESharedResources new];
-    
     [self beginTransaction];
     DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
 
@@ -1622,11 +1598,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     });
     
     // update fiters in DB
-    [self updateMetadata:res.lastUpdateFilterMetadata filters:res.lastUpdateFilters];
+    [self updateMetadata:_resources.lastUpdateFilterMetadata filters:_resources.lastUpdateFilters];
     
-    res.lastUpdateFilterMetadata = nil;
-    res.lastUpdateFilters = nil;
-    res.lastUpdateFilterIds = nil;
+    _resources.lastUpdateFilterMetadata = nil;
+    _resources.lastUpdateFilters = nil;
+    _resources.lastUpdateFilterIds = nil;
     _lastUpdateFilterIds = nil;
     _lastUpdateFilters = nil;
     _lastUpdateFilterIds = nil;
@@ -2494,18 +2470,17 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (void)setLastUpdateFilters {
 
     DDLogDebugTrace();
-    AESharedResources *res = [AESharedResources new];
     //repair filters dictionary from disk
     if (!_lastUpdateFilters) {
         
-        _lastUpdateFilters = [res.lastUpdateFilters mutableCopy];
+        _lastUpdateFilters = [_resources.lastUpdateFilters mutableCopy];
         if (!_lastUpdateFilters) {
             _lastUpdateFilters = [NSMutableDictionary dictionary];
         }
     }
     //repair filter ids from disk
     if (!_lastUpdateFilterIds) {
-        _lastUpdateFilterIds = res.lastUpdateFilterIds;
+        _lastUpdateFilterIds = _resources.lastUpdateFilterIds;
     }
 
 }
@@ -2515,7 +2490,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     toMeta.enabled = [fromMeta.enabled copy];
     toMeta.editable = [fromMeta.editable copy];
     toMeta.removable = [fromMeta.removable copy];
-
 }
 
 - (void) beginBackgroundTaskWithExpirationHandler:(void (^)(void))expirationBlock {
