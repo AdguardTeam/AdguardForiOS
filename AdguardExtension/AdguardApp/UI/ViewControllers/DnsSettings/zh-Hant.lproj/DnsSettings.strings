@@ -89,7 +89,7 @@
 "csw-3H-3tU.text" = "伺服器";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
-"d69-Gd-SZp.text" = "完全的隧道（無 VPN 圖示）";
+"d69-Gd-SZp.text" = "完全的隧道（無 VPN 圖像）";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 伺服器位址";

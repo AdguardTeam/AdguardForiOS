@@ -270,9 +270,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Então %1$@ por dia</string>
+        <string>Então %2$@ por dia</string>
         <key>other</key>
-        <string>Então %1$@ por %2$d dias</string>
+        <string>Então %2$@ por %1$d dias</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -286,9 +286,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Então %1$@ por semana</string>
+        <string>Então %2$@ por semana</string>
         <key>other</key>
-        <string>Então %1$@ por %2$d semanas</string>
+        <string>Então %2$@ por %1$d semanas</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -302,9 +302,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Então %1$@ por mês</string>
+        <string>Então %2$@ por mês</string>
         <key>other</key>
-        <string>Então %1$@ por %2$d meses</string>
+        <string>Então %2$@ por %1$d meses</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -318,9 +318,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Então %1$@ por ano</string>
+        <string>Então %2$@ por ano</string>
         <key>other</key>
-        <string>Então %1$@ por %2$d anos</string>
+        <string>Então %2$@ por %1$d anos</string>
       </dict>
     </dict>
   </dict>

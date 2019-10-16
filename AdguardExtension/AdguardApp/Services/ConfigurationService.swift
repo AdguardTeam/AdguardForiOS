@@ -85,7 +85,8 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     /**
      this flag indicates that all safari content blockers are enabled in safari settings
      */
-    @objc dynamic var contentBlockerEnabled: [NSNumber : Bool]?
+    @objc
+    dynamic var contentBlockerEnabled: [Int : Bool]?
     
     /**
      dark or light theme of app UI
@@ -150,7 +151,11 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     */
     @objc func checkContentBlockerEnabled() {
         safariService.checkStatus() { (enabledDict) in
-            self.contentBlockerEnabled = enabledDict
+            var mappedDict = [Int: Bool]()
+            enabledDict.forEach { (key, value) in
+                mappedDict[key.rawValue] = value
+            }
+            self.contentBlockerEnabled = mappedDict
         }
     }
 }

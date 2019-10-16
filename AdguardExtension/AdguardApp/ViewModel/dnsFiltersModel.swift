@@ -18,30 +18,21 @@
 
 import Foundation
 
-class DnsFilter {
-    let name: String
-    let date: Date
-    let enabled: Bool
-    
-    init(name: String, date: Date, enabled: Bool) {
-        self.name = name
-        self.date = date
-        self.enabled = enabled
-    }
-}
-
 class DnsFiltersModel {
+    var filtersService: DnsFiltersServiceProtocol
     var filters: [DnsFilter] = []
     
-    init() {
+    init(filtersService: DnsFiltersServiceProtocol) {
+        self.filtersService = filtersService;
         fillFilters()
     }
     
+    func setFilter(index: Int, enabled: Bool) {
+        let filter = filters[index]
+        filtersService.setFilter(filterId: filter.id, enabled: enabled)
+    }
+    
     private func fillFilters(){
-        let filter1 = DnsFilter(name: "AdGuard Simplified domain names filter", date: Date(), enabled: true)
-        let filter2 = DnsFilter(name: "DNS User filter", date: Date(), enabled: true)
-        
-        filters.append(filter1)
-        filters.append(filter2)
+        filters = filtersService.filters
     }
 }

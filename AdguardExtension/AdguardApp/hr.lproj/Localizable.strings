@@ -26,6 +26,9 @@
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "Nisu pronađena ažuriranja";
 
+/* Open DNS server description */
+"open_dns_description" = "DNS poslužitelj s prilagođenim filtriranjem koji štiti vaš uređaj od malwarea";
+
 /* (MainController) Share this app initial text on Mail Body (text row) */
 "share_mail_body_text" = "Upravo sam instalirao AdGuard zaštitu od oglasa za iOS.";
 

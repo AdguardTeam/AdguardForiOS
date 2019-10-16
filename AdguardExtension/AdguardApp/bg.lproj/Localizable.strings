@@ -46,9 +46,6 @@
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "блокира всичко по-горе и уеб сайтове за възрастни";
 
-/* Open DNS server description */
-"open_dns_description" = "персонализирано филтриране и защита срещу кражба на самоличност";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Имаше проблем с конфигурацията на ВЧМ, моля свържете се с нашия екип за поддръжка.";
 

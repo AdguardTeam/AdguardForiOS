@@ -30,7 +30,7 @@ class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
-    func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String) -> Bool
+    func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -51,7 +51,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     var resolveGroup = DispatchGroup()
     
     @objc
-    init(logWriter: DnsLogRecordsWriterProtocol, maxQueues: Int) {
+    init(logWriter: DnsLogRecordsWriterProtocol) {
         DDLogInfo("(DnsProxyService) initializing")
         dnsRecordsWriter = logWriter
         
@@ -64,13 +64,15 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         if error != nil {
             DDLogError("(DnsProxyService) - configure logger error: \(error!.localizedDescription)")
         }
+    }
+    
+    @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int) -> Bool {
+        
+        queues.removeAll()
         
         for i in 0..<maxQueues {
             queues.append(DispatchQueue(label: "Dns Proxy resolve queue \(i)"))
         }
-    }
-    
-    @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String) -> Bool {
         
         var result = true
         
@@ -103,6 +105,10 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             }
             
             proxy.config = config
+            
+            let filteringConfig = MobileFilteringConfig()
+            filteringConfig?.filteringRulesFilesJSON = filtersJson
+            proxy.filteringConfig = filteringConfig
             
             do{
                 try proxy.start()

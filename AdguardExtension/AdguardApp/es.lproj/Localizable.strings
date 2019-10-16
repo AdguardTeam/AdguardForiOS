@@ -61,6 +61,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "COMPRAR";
 
+/* (LoginController) lost password button title */
+"lost_password" = "¿Olvidaste tu contraseña?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "La licencia Premium ha expirado";
 
@@ -196,7 +199,7 @@
 "google_dns_description" = "servicio de dns global ofrecido por Google";
 
 /* Open DNS server description */
-"open_dns_description" = "filtrado personalizado y protección contra el robo de identidad";
+"open_dns_description" = "Servidor DNS que protege to dispositivo de amenazas en línea";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Servidor OpenDNS con bloqueo de contenido para adultos";

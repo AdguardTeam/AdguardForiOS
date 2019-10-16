@@ -191,7 +191,7 @@ class MainMenuController: UITableViewController {
         }
         else {
             let serverName = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
-            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol!], nil)
+            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol], nil)
             dnsServer.text = "\(serverName) (\(protocolName))"
         }
         

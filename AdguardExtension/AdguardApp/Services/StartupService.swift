@@ -89,5 +89,8 @@ class StartupService : NSObject{
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)
 
+        
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager)
+        ServiceLocator.shared.addService(service: dnsFiltersService)
     }
 }

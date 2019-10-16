@@ -66,9 +66,11 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.currentGroup = nil
         guard let searchString = viewModel?.searchString else { return }
         viewModel?.searchFilter(query: searchString)
+        if viewModel?.searchString.count == 0 {
+            viewModel?.cancelSearch()
+        }
         updateTheme()
     }
     
@@ -169,6 +171,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     func searchButtonTapped() {
+        viewModel?.currentGroup = nil
         tableView.reloadData()
         searchBar.becomeFirstResponder()
     }

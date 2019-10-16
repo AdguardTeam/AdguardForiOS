@@ -242,7 +242,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>その後は%2$@/%1$d日</string>
+        <string>その後は%2$@/日</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -256,7 +256,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>その後は%2$@/%1$d週</string>
+        <string>その後は%2$@/週</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -270,7 +270,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>その後は%2$@/%1$d月</string>
+        <string>その後は%2$@/月</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -284,7 +284,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>その後は%2$@/%1$d年</string>
+        <string>その後は%2$@/年</string>
       </dict>
     </dict>
   </dict>

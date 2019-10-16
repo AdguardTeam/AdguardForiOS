@@ -299,6 +299,8 @@ class MainController: UIViewController {
             
             sSelf.headerImage.isHighlighted = !allEnabled
             
+            sSelf.vikingImage.image = UIImage(named: sSelf.configuration.proStatus ? "man" : "adguard-man")
+            
             showProIfNeedeed()
         }
     }
@@ -322,7 +324,6 @@ class MainController: UIViewController {
         theme.setupImage(headerImage)
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
-        vikingImage.image = UIImage(named: configuration.darkTheme ? "man" : "adguard-man")
         
         getProView.backgroundColor = theme.invertedBackgroundColor
         theme.setupLabelInverted(premiumLabel)

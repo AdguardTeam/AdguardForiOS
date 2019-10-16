@@ -36,6 +36,8 @@ class RequestsBlockingController: UITableViewController {
     // MARK: - View controller life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
                 // CHANGE AFTER MERGE

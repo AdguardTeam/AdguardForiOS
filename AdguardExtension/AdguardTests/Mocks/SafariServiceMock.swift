@@ -4,24 +4,24 @@ import Foundation
 
 class SafariServiceMock: NSObject, SafariServiceProtocol {
     
-    func checkStatus(completion: @escaping ([NSNumber : Bool]) -> Void) {
+    func checkStatus(completion: @escaping ([ContentBlockerType : Bool]) -> Void) {
     }
     
     func getContentBlockerEnabled(type: ContentBlockerType) -> Bool {
         return true
     }
     
-    var jsons = [Int: Data]()
+    var jsons = [ContentBlockerType: Data]()
     
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
     
-    func save(json: Data, type: Int) {
+    func save(json: Data, type: ContentBlockerType) {
         jsons[type] = json
     }
     
-    func readJson(forType type: Int) -> Data? {
+    func readJson(forType type: ContentBlockerType) -> Data? {
         return jsons[type]
     }
     

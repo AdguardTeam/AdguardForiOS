@@ -70,6 +70,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "PURCHASE";
 
+/* (LoginController) lost password button title */
+"lost_password" = "Lost password?";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
 
@@ -209,7 +212,7 @@
 "google_dns_description" = "Free alternative DNS service by Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS server that protects your device from online threats";
+"open_dns_description" = "DNS server that protects your device from phishing and scam";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "OpenDNS server with adult content blocking";
@@ -546,3 +549,6 @@
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Add a new rule";
+
+/* Default DNS filter name */
+"default_dns_filter_name" = "DNS Filter";

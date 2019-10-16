@@ -49,6 +49,7 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
+NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
 
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
@@ -92,7 +93,7 @@ typedef enum : NSUInteger {
 
 - (instancetype)init {
     self = [super init];
-    helper = [AppDelegateHelper new];
+    helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
     return self;
 }
@@ -136,7 +137,9 @@ typedef enum : NSUInteger {
         self.window.backgroundColor = [UIColor whiteColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
-            [_purchaseService checkPremiumExpired];
+            [_aeService onReady:^{
+                [_purchaseService checkPremiumStatusChanged];
+            }];
         }
         
         if ([_aeService firstRunInProgress]) {
@@ -173,6 +176,7 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
     
     //------------ Checking DB status -----------------------------
     if (_asDataBase.error) {
@@ -191,14 +195,6 @@ typedef enum : NSUInteger {
         [_aeService start];
         DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
     }
-    
-    //--------------------- Processing User Notification Action ---------
-    //        NSUserNotification *userNotification =
-    //        aNotification.userInfo[NSApplicationLaunchUserNotificationKey];
-    //        if (userNotification) {
-    //            [self userNotificationCenter:nil
-    //                 didActivateNotification:userNotification];
-    //        }
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
@@ -335,7 +331,7 @@ typedef enum : NSUInteger {
                 }
             }];
             
-            [_purchaseService checkPremiumExpired];
+            [_purchaseService checkPremiumStatusChanged];
         }];
     }
 }
@@ -364,111 +360,7 @@ typedef enum : NSUInteger {
     
     _activateWithOpenUrl = YES;
  
-    /*
-     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
-     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
-    */
-    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
-    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
-    
-    NSString *command = url.host;
-    
-    UINavigationController *nav = [self getNavigationController];
-    
-    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-        self.window.rootViewController = launchScreenController;
-    }
-
-    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
-        
-        [_aeService onReady:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                @autoreleasepool {
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-                        
-                        NSString *path = [url.path substringFromIndex:1];
-                        
-                        
-                        if (nav.viewControllers.count) {
-                            MainController *main = nav.viewControllers.firstObject;
-                            if ([main isKindOfClass:[MainController class]]) {
-                                
-                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
-                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
-                                
-                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
-                                ListOfRulesController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
-                                
-                                UIStoryboard *filtersStoryBoard = [UIStoryboard storyboardWithName:@"Filters" bundle:[NSBundle mainBundle]];
-                                SafariProtectionController* safariProtectionController = [filtersStoryBoard instantiateViewControllerWithIdentifier:@"SafariProtectionController"];
-                                
-                                userFilterController.newRuleText = path;
-                                
-                                nav.viewControllers = @[main, mainMenuController, safariProtectionController, userFilterController];
-                                
-                                [main view];
-                                [mainMenuController view];
-                                [safariProtectionController view];
-                                [userFilterController view];
-
-                                self.window.rootViewController = nav;
-                            }
-                            else{
-                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
-                            }
-                        }
-                    }
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
-                        
-                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
-                        NSString* fragment = url.fragment;
-                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
-                        
-                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
-                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
-                        
-                        [_purchaseService loginWithAccessToken:accessToken state: state];
-                    }
-                }
-            });
-        }];
-        
-        return YES;
-    }
-#ifdef PRO
-    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
-        
-        NSString *command = url.host;
-        
-        UINavigationController *nav = [self getNavigationController];
-        
-        AEUIMainController *main = nav.viewControllers.firstObject;
-        
-        if(!main){
-            return NO;
-        }
-        
-        [nav popToRootViewControllerAnimated:NO];
-        
-        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
-            
-            [main setProStatus:YES];
-        }
-        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
-            
-            [main setProStatus:NO];
-        }
-        else {
-            return NO;
-        }
-        
-        return YES;
-    }
-#endif
-
-    return NO;
+    return [helper application:app open:url options:options];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -812,6 +704,19 @@ typedef enum : NSUInteger {
         configuration.systemAppearenceIsDark = NO;
     }
 
+}
+
+- (void)showAlertNotification:(NSNotification *)notification {
+    NSString *body = notification.userInfo[UserNotificationService.notificationBody];
+    NSString *title = notification.userInfo[UserNotificationService.notificationTitle];
+    ASSIGN_WEAK(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ASSIGN_STRONG(self);
+        UINavigationController *nav = [USE_STRONG(self) getNavigationController];
+        UIViewController *vc = [nav topViewController];
+        
+        [ACSSystemUtils showSimpleAlertForController:vc withTitle:title message:body];
+    });
 }
 
 @end

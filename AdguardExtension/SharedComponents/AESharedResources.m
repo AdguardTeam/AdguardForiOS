@@ -19,6 +19,9 @@
 #import "ACommons/ACLang.h"
 #import "ABECFilter.h"
 
+NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
+NSString *AE_URLSCHEME_COMMAND_ADD = @"add";
+
 NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";

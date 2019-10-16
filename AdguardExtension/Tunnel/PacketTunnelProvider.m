@@ -64,7 +64,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
 #define V_DNSPROXY_LOCAL_ADDDRESS_IPV6          @"::1"
 
+// we chnge maximum threads for prevent tunnel crashes due to lack of memory
 #define DNS_PROXY_MAX_QUEUES 10
+// doh and dot encryption require more memory
+#define DOH_DOT_PROXY_MAX_QUEUES 5
+#define DOH_DOT_CLOUDFLARE_PROXY_MAX_QUEUES 3
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
@@ -153,7 +157,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
         id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
-        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter maxQueues: DNS_PROXY_MAX_QUEUES];
+        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }
@@ -661,7 +665,20 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
     
     BOOL ipv4Available = [ACNIPUtils isIpv4Available];
-    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name];
+    NSString* filtersJson = [[[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil] filtersJson];
+
+    int queues = DOH_DOT_PROXY_MAX_QUEUES;
+    
+    if (_currentServer.dnsProtocol == DnsProtocolDoh || _currentServer.dnsProtocol == DnsProtocolDot) {
+        if ([_currentServer.serverId isEqualToString:@"cloudflare"] || [_currentServer.serverId isEqualToString:@"cloudflare-dot"]) {
+            queues = DOH_DOT_CLOUDFLARE_PROXY_MAX_QUEUES;
+        }
+        else {
+            queues = DOH_DOT_PROXY_MAX_QUEUES;
+        }
+    }
+    
+    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues];
 }
 
 @end
