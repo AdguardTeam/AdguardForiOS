@@ -26,10 +26,14 @@ class AboutController : UIViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var logoImage: ThemeableImageView!
+    @IBOutlet var loginButton: UIBarButtonItem!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     
-    // UIViewController life cycle
+    var proStatusObservation: Any?
+    
+    // MARK: - UIViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,17 @@ class AboutController : UIViewController {
         }
         
         versionLabel.text = ACLocalizedString("about_version", nil) + " " +  ADProductInfo.versionWithBuildNumber()
+        
+        if !configurationService.proStatus {
+            navigationItem.rightBarButtonItems = [loginButton]
+        }
+        
+        proStatusObservation = self.configurationService.observe(\.proStatus) {[weak self] (_, _) in
+            guard let sSelf = self else { return }
+            
+            sSelf.navigationItem.rightBarButtonItems = sSelf.configurationService.proStatus ? [] : [sSelf.loginButton]
+        }
+        
         setupBackButton()
     }
     

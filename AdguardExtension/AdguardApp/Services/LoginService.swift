@@ -271,7 +271,7 @@ class LoginService: LoginServiceProtocol {
         
         guard let url = URL(string: STATUS_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) checkStatus error. Can not make URL from String \(STATUS_URL)")
+            DDLogError("(LoginService) checkStatus error. Can not make URL from String \(STATUS_URL)")
             return
         }
         
@@ -334,7 +334,7 @@ class LoginService: LoginServiceProtocol {
         
         guard let url = URL(string: RESET_LICENSE_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) checkStatus error. Can not make URL from String \(RESET_LICENSE_URL)")
+            DDLogError("(LoginService) checkStatus error. Can not make URL from String \(RESET_LICENSE_URL)")
             return
         }
         
@@ -384,7 +384,7 @@ class LoginService: LoginServiceProtocol {
         
         guard let url = URL(string: OAUTH_TOKEN_URL) else  {
             callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(PurchaseService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
+            DDLogError("(LoginService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
             return
         }
         
