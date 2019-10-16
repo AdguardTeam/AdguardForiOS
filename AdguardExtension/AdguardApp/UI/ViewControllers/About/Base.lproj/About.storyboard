@@ -120,6 +120,7 @@
                         </attributedString>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButton" destination="CqW-k3-vqO" id="Utv-aP-gy6"/>
                         <outlet property="logoImage" destination="bmK-Ui-iQN" id="wHm-xp-Z8I"/>
                         <outlet property="versionLabel" destination="lQd-HP-eaU" id="T2l-7d-bwZ"/>
                         <outlet property="view" destination="ohk-0N-CA7" id="10O-xU-bUl"/>
@@ -128,8 +129,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKg-Ri-2Dy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="B1T-jC-cGr"/>
+                <barButtonItem title="Log in" id="CqW-k3-vqO" userLabel="Login Button">
+                    <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <segue destination="SYE-m6-gvf" kind="show" id="FOI-qn-4Lk"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-370.39999999999998" y="-175.86206896551727"/>
+        </scene>
+        <!--LoginScene-->
+        <scene sceneID="Wkd-Xt-0vn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="License" referencedIdentifier="LoginScene" id="SYE-m6-gvf" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xRd-nb-bhS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HBo-Zo-dFY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="169" y="-461"/>
         </scene>
         <!--About Table Controller-->
         <scene sceneID="VOx-ny-b7U">

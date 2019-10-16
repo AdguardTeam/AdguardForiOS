@@ -27,7 +27,7 @@ class TrialController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     private let mobileImage = UIImage(named: "trial-mobile") ?? UIImage()
     private let ipadImage = UIImage(named: "trial-ipad") ?? UIImage()

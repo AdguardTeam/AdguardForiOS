@@ -107,7 +107,7 @@ typedef enum : NSUInteger {
         _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
         _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
         _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
-        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
         
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 

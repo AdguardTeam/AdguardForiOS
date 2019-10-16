@@ -47,7 +47,7 @@ class GetProTableController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - private fields
     

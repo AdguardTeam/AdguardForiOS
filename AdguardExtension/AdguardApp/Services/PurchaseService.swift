@@ -41,6 +41,10 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  */
 protocol PurchaseServiceProtocol {
     
+    /*
+     start servise. It requests SKProducts at start
+     */
+    func start()
    
     /**
      returns true if user has valid renewable subscription or valid adguard license
@@ -91,6 +95,11 @@ protocol PurchaseServiceProtocol {
      deletes all login information
      */
     func logout()->Bool
+    
+    /*
+     start product request. Usualy this request is called when the service starts. But if this request has fails, then it can be directly initiated by this method.
+     */
+    func startProductRequest()
     
     /**
      requests an renewable or non-consumable subscription purchase

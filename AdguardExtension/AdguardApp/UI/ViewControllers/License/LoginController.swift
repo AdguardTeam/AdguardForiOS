@@ -23,7 +23,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
     
-    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     
