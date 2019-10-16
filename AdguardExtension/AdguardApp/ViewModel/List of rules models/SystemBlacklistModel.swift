@@ -18,11 +18,11 @@
 
 import Foundation
 
-class SystemWhitelistModel: ListOfRulesModelProtocol {
-
+class SystemBlacklistModel: ListOfRulesModelProtocol {
+    
     // MARK: - Variables
     
-    weak var delegate: ListOfRulesModelDelegate?
+    var delegate: ListOfRulesModelDelegate?
     
     var rules: [RuleInfo] {
         get {
@@ -31,38 +31,38 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         }
     }
     
-    var searchString: String?
-    
-    var type: RulesType = .systemWhitelist
+    var type: RulesType = .systemBlacklist
     
     var enabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsDnsWhitelistEnabled)
+            return resources.sharedDefaults().bool(forKey: AEDefaultsDnsBlacklistEnabled)
         }
         set{
-            if enabled != newValue{
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsDnsWhitelistEnabled)
+            if enabled != newValue {
+                resources.sharedDefaults().set(newValue, forKey: AEDefaultsDnsBlacklistEnabled)
             }
         }
     }
     
-    // MARK: - Titles variables
+    var searchString: String?
+    
+    // MARK: - Titles
     
     var title: String {
         get {
-            return ACLocalizedString("whitelist_title", nil)
+            return ACLocalizedString("dns_blacklist_title", nil)
         }
     }
-
+    
     var exportTitle: String {
         get {
-            return ACLocalizedString("export", nil)
+            return ACLocalizedString("export_blacklist_title", nil)
         }
     }
-
+    
     var importTitle: String {
         get {
-            return ACLocalizedString("import", nil)
+            return ACLocalizedString("import_blacklist_title", nil)
         }
     }
     
@@ -71,22 +71,22 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             return ACLocalizedString("common_delete", nil)
         }
     }
-       
+    
     var middleButtonTitle: String {
         get {
             return ACLocalizedString("common_select_all", nil)
         }
     }
-
+    
     var helperLabelText: String {
         get {
-            return ACLocalizedString("dns_whitelist_helper", nil)
+            return ACLocalizedString("dns_blacklist_helper", nil)
         }
     }
     
     var descriptionTitle: String {
         get {
-            return ACLocalizedString("dns_whitelist_text", nil)
+            return ACLocalizedString("blacklist_text", nil)
         }
     }
     
@@ -99,22 +99,22 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private let fileShare: FileShareServiceProtocol = FileShareService()
     
     /* Variables */
-    private let fileName = "dns_whitelist"
+    private let fileName = "dns_blacklist"
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
     
     // MARK: - Initializer
     
-    init(dnsFiltersService: DnsFiltersServiceProtocol, resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol) {
-        self.dnsFiltersService = dnsFiltersService
+    init(resources: AESharedResourcesProtocol, dnsFiltersService: DnsFiltersServiceProtocol, theme: ThemeServiceProtocol) {
         self.resources = resources
+        self.dnsFiltersService = dnsFiltersService
         self.theme = theme
         
         // Needs to be changed
         // dnsFiltersService must store rules as [RuleInfo] because we need to know their state
         // for now it is always initialized with true
-        allRules = dnsFiltersService.whitelistDomains.map { RuleInfo($0, false, true, theme) }
+        allRules = dnsFiltersService.userRules.map { RuleInfo($0, false, true, theme) }
     }
     
     // MARK: - Main functions
@@ -138,7 +138,6 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         }
     }
     
-    
     func addRule(ruleText: String, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
         if ruleText.count == 0 { return }
         
@@ -157,26 +156,13 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             return
         }
         
-        dnsFiltersService.whitelistDomains.append(contentsOf: rules)
+        dnsFiltersService.userRules.append(contentsOf: rules)
         
         allRules.append(contentsOf: rules.map { RuleInfo($0, false, true, theme) })
-            
+        
         delegate?.listOfRulesChanged()
     }
     
-    func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
-        guard let index = allRules.firstIndex(of: rule) else {
-            DDLogError("(UserFilterViewModel) change rule failed - rule not found")
-            return
-        }
-    
-        allRules[index].rule = newText
-        dnsFiltersService.whitelistDomains = allRules.map { $0.rule }
-           
-        completionHandler()
-        delegate?.listOfRulesChanged()
-    }
-
     func selectAllRules() {
         allRules.forEach({ $0.selected = true })
     }
@@ -189,7 +175,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             }
         }
         allRules = newRules
-        dnsFiltersService.whitelistDomains = allRules.map({ $0.rule })
+        dnsFiltersService.userRules = allRules.map({ $0.rule })
         
         delegate?.listOfRulesChanged()
     }
@@ -199,10 +185,24 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         guard let index = allRules.firstIndex(of: rule) else { return }
         
         allRules.remove(at: index)
-        dnsFiltersService.whitelistDomains = allRules.map { $0.rule }
+        dnsFiltersService.userRules = allRules.map { $0.rule }
         
         delegate?.listOfRulesChanged()
         completionHandler()
+    }
+    
+    func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
+        
+        guard let index = allRules.firstIndex(of: rule) else {
+            DDLogError("(UserFilterViewModel) change rule failed - rule not found")
+            return
+        }
+        
+        allRules[index].rule = newText
+        dnsFiltersService.userRules = allRules.map { $0.rule }
+        
+        completionHandler()
+        delegate?.listOfRulesChanged()
     }
     
     func processRulesFromString(_ string: String, errorHandler: @escaping (String) -> Void) {
@@ -210,7 +210,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     }
     
     // MARK: - Private methods
-    
+        
     /**
      retuns all rules from list of rules as a plain text
      */
@@ -236,8 +236,10 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             
             newRules.append(trimmedRuleString)
         }
-        dnsFiltersService.whitelistDomains = newRules
+        
+        dnsFiltersService.userRules = newRules
         allRules = newRules.map { RuleInfo($0, false, true, theme) }
+        
         delegate?.listOfRulesChanged()
     }
 }

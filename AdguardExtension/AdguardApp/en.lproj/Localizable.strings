@@ -112,10 +112,10 @@
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add your own rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
+"blacklist_text" = "Enter here the domain names. AdGuard will prevent loading of these domains.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
+"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains, ignoring all other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";

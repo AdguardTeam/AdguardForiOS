@@ -40,11 +40,12 @@ class RequestsBlockingController: UITableViewController {
         let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                // CHANGE AFTER MERGE
+                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme)
+                controller.model = model
             }
         } else if segue.identifier == dnsWhitelistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemWhitelistModel(resources: resources)
+                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme)
                 controller.model = model
             }
         }

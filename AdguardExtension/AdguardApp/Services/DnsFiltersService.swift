@@ -131,7 +131,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return []
             }
             
-            return string.components(separatedBy: .newlines)
+            return string.isEmpty ? [] : string.components(separatedBy: .newlines)
         }
         set {
             if let data = newValue.joined(separator: "\n").data(using: .utf8) {
@@ -157,7 +157,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return []
             }
             
-            return string.components(separatedBy: .newlines)
+            return string.isEmpty ? [] : string.components(separatedBy: .newlines)
         }
         set {
             if let data = newValue.joined(separator: "\n").data(using: .utf8) {
