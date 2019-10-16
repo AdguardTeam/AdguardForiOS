@@ -262,7 +262,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydJ-d5-MyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="-815"/>
+            <point key="canvasLocation" x="4386" y="-137"/>
         </scene>
         <!--DNS Privacy-->
         <scene sceneID="Q9V-mP-4MB">
@@ -606,7 +606,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wY8-my-bWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-243.47826086956525" y="-29.464285714285712"/>
+            <point key="canvasLocation" x="-1665" y="-13"/>
         </scene>
         <!--DNS Requests Log-->
         <scene sceneID="133-9r-z1f">
@@ -716,7 +716,7 @@
                     <viewLayoutGuide key="safeArea" id="j0L-nJ-4EM"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-243" y="1349"/>
+            <point key="canvasLocation" x="9" y="1157"/>
         </scene>
         <!--Network settings-->
         <scene sceneID="iFQ-F6-2Bo">
@@ -945,7 +945,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Txh-42-O0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815.94202898550736" y="657.58928571428567"/>
+            <point key="canvasLocation" x="9" y="344"/>
         </scene>
         <!--Request details-->
         <scene sceneID="pH2-wX-hVe">
@@ -992,7 +992,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Rj-WL-Yei" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="938"/>
+            <point key="canvasLocation" x="1338" y="1156"/>
         </scene>
         <!--DNS requests blocking-->
         <scene sceneID="sFK-bL-qGm">
@@ -1152,7 +1152,7 @@
                                                         <constraint firstAttribute="width" constant="24" id="aYl-zz-CrE"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blacklist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihd-7R-RfE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="System blacklist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihd-7R-RfE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="286" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -1210,7 +1210,7 @@
                                                         <constraint firstAttribute="width" constant="24" id="yrm-Lr-PXN"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Whitelist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-J6-ced" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="System whitelist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-J6-ced" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="286" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -1272,7 +1272,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSY-14-hFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="946" y="-816"/>
+            <point key="canvasLocation" x="9" y="-1266"/>
         </scene>
         <!--DNS Filters-->
         <scene sceneID="4k1-hs-ki2">
@@ -1400,7 +1400,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJc-U5-LUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005.7971014492755" y="-816.29464285714278"/>
+            <point key="canvasLocation" x="1339" y="-1266"/>
         </scene>
         <!--UserFilter-->
         <scene sceneID="Gkt-PZ-ORu">
@@ -1410,7 +1410,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t8w-fU-0wa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697" y="-861"/>
+            <point key="canvasLocation" x="1288" y="-1877"/>
         </scene>
         <!--DNS server-->
         <scene sceneID="7zB-M9-0y6">
@@ -1492,7 +1492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ux-nH-3dJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="-29"/>
+            <point key="canvasLocation" x="9" y="-470"/>
         </scene>
         <!--Dns Providers Controller-->
         <scene sceneID="dNS-fY-mTh">
@@ -1678,7 +1678,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fs-Mf-BMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594" y="-15"/>
+            <point key="canvasLocation" x="1336" y="-471"/>
         </scene>
         <!--DNS request details-->
         <scene sceneID="XPH-Sm-H0R">
@@ -2437,7 +2437,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhd-V3-W9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2143.4782608695655" y="937.5"/>
+            <point key="canvasLocation" x="2200" y="1156"/>
         </scene>
         <!--Dns Provider Container Controller-->
         <scene sceneID="XJi-NU-3jG">
@@ -2520,7 +2520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Kz-BC-zFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2303" y="-13"/>
+            <point key="canvasLocation" x="2046" y="-469"/>
         </scene>
         <!--Dns Provider Details Controller-->
         <scene sceneID="vjE-jp-Ycf">
@@ -2779,7 +2779,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAp-UD-x2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3129" y="-12"/>
+            <point key="canvasLocation" x="2872" y="-468"/>
         </scene>
         <!--New Dns Server Controller-->
         <scene sceneID="jVE-mD-6Ik">
@@ -3028,7 +3028,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqV-df-Uiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="860"/>
+            <point key="canvasLocation" x="4386" y="734"/>
         </scene>
         <!--Choose Protocol Controller-->
         <scene sceneID="qKx-CD-b3r">
@@ -3289,7 +3289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehj-Jx-SeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3008.6956521739135" y="859.82142857142856"/>
+            <point key="canvasLocation" x="5632" y="-137"/>
         </scene>
         <!--New Dns Server Controller-->
         <scene sceneID="mWe-nU-eSS">
@@ -3581,7 +3581,7 @@
                     </connections>
                 </switch>
             </objects>
-            <point key="canvasLocation" x="4045" y="1349"/>
+            <point key="canvasLocation" x="5632" y="734"/>
         </scene>
     </scenes>
     <resources>

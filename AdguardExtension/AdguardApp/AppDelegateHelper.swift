@@ -106,7 +106,7 @@ class AppDelegateHelper: NSObject {
                         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
                         guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
                         
-                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.aeService.antibanner(), theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
+                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.aeService.antibanner(), theme: self.themeService)
                         
                         userFilterController.model = model
                         userFilterController.newRuleText = path
