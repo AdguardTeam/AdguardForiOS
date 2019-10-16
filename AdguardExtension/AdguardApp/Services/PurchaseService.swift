@@ -646,6 +646,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         postNotification(PurchaseService.kPSNotificationRestorePurchaseFailure, error)
     }
     
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+    }
      
     // MARK: helper methods
     
