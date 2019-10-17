@@ -86,7 +86,7 @@ class StartupService : NSObject{
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         ServiceLocator.shared.addService(service: userNotificationService)
         
-        let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
+        let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources, vpnManager: vpnManager)
         ServiceLocator.shared.addService(service: networkSettingsService)
 
         

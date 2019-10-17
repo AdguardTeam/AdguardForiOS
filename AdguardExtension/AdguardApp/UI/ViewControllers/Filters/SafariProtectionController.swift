@@ -24,6 +24,7 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var userFilterStateLabel: UILabel!
     @IBOutlet weak var protectionStateSwitch: UISwitch!
     @IBOutlet weak var whitelistLabel: ThemableLabel!
+    @IBOutlet weak var topSeparator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
@@ -113,18 +114,11 @@ class SafariProtectionController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let width = tableView.frame.width
-        let height: CGFloat = 5.0
-        let frame = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        let view = UIView(frame: frame)
-        view.backgroundColor = configuration.darkTheme ? .black : .white
-        
-        return view
+        return UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return section == 0 ? 32.0 : 0.1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,6 +147,7 @@ class SafariProtectionController: UITableViewController {
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
+        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

@@ -70,9 +70,11 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     /* Services */
     private let resources: AESharedResourcesProtocol
+    private let vpnManager: APVPNManagerProtocol
     
-    init(resources: AESharedResourcesProtocol) {
+    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol) {
         self.resources = resources
+        self.vpnManager = vpnManager
         
         exceptions = getExceptionsFromFile()
     }
@@ -133,5 +135,15 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         saveExceptionsToFile()
         exceptions = getExceptionsFromFile()
         delegate?.settingsChanged()
+    }
+    
+    // MARK: - Methods for interaction with wifi and mobile data settings
+    
+    private func enableFiltering() {
+        
+    }
+    
+    private func disableFiltering() {
+        
     }
 }

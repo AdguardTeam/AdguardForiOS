@@ -58,21 +58,35 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-Zd-dnG">
+                                                    <rect key="frame" x="0.0" y="135" width="414" height="0.5"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="zK1-Dz-zFz"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="centerY" secondItem="T8x-Ho-7mV" secondAttribute="centerY" id="2ko-KA-JhP"/>
-                                                <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="34" id="6t0-x0-I7q"/>
+                                                <constraint firstItem="Hr4-Zd-dnG" firstAttribute="top" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="34" id="D6k-By-1vX"/>
                                                 <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hr4-Zd-dnG" secondAttribute="bottom" id="OKH-R2-ihh"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
                                                 <constraint firstItem="T8x-Ho-7mV" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="18" id="YBD-y2-G2K"/>
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="mfl-rt-Doa" secondAttribute="trailing" constant="16" id="hJN-AN-Y5H"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hr4-Zd-dnG" secondAttribute="trailing" id="kgR-jJ-SJo"/>
                                                 <constraint firstAttribute="trailing" secondItem="T8x-Ho-7mV" secondAttribute="trailing" constant="24" id="nWX-Y8-45R"/>
+                                                <constraint firstItem="Hr4-Zd-dnG" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" id="pic-II-VAP"/>
                                                 <constraint firstItem="mfl-rt-Doa" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="srQ-3W-tNt"/>
                                                 <constraint firstItem="mfl-rt-Doa" firstAttribute="centerY" secondItem="8zX-PY-5pt" secondAttribute="centerY" id="zGr-Hy-vlz"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="T8x-Ho-7mV" secondAttribute="bottom" constant="16" id="zgR-cY-7OI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="hYA-DJ-Ae0">
+                                <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PQS-fN-CXR">
                                         <rect key="frame" x="0.0" y="202" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -116,7 +130,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2kF-Mk-dHf" firstAttribute="leading" secondItem="Lq2-mi-McV" secondAttribute="leading" id="2Sf-Cv-o57"/>
-                                                <constraint firstItem="Lq2-mi-McV" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="34" id="7iS-1W-c8y"/>
+                                                <constraint firstItem="Lq2-mi-McV" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="16" id="7iS-1W-c8y"/>
                                                 <constraint firstItem="g6L-S7-okS" firstAttribute="centerY" secondItem="Hjj-nz-Di8" secondAttribute="centerY" id="97F-cy-hs0"/>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lq2-mi-McV" secondAttribute="trailing" constant="16" id="DCJ-Oa-wgI"/>
                                                 <constraint firstAttribute="bottom" secondItem="Hjj-nz-Di8" secondAttribute="bottom" constant="23" id="JAt-o5-3vr"/>
@@ -124,7 +138,7 @@
                                                 <constraint firstItem="Lq2-mi-McV" firstAttribute="leading" secondItem="g6L-S7-okS" secondAttribute="trailing" constant="16" id="b4d-oo-EoZ"/>
                                                 <constraint firstItem="g6L-S7-okS" firstAttribute="leading" secondItem="7ry-ou-jFL" secondAttribute="leading" constant="16" id="g9g-v2-7bA"/>
                                                 <constraint firstItem="2kF-Mk-dHf" firstAttribute="top" secondItem="Lq2-mi-McV" secondAttribute="bottom" constant="4" id="hdV-wL-Af4"/>
-                                                <constraint firstItem="Hjj-nz-Di8" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="41" id="hpx-ib-Eng"/>
+                                                <constraint firstItem="Hjj-nz-Di8" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="23" id="hpx-ib-Eng"/>
                                                 <constraint firstAttribute="trailing" secondItem="Hjj-nz-Di8" secondAttribute="trailing" constant="16" id="nMr-99-AWj"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -261,16 +275,17 @@
                         <outlet property="numberOfFiltersLabel" destination="2kF-Mk-dHf" id="Yn1-hr-EjL"/>
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
                         <outlet property="safariProtectionStateLabel" destination="8zX-PY-5pt" id="Guq-xi-sgj"/>
+                        <outlet property="topSeparator" destination="Hr4-Zd-dnG" id="wzk-fp-yBW"/>
                         <outlet property="userFilterStateLabel" destination="uVg-Gj-40a" id="k23-YF-rGL"/>
                         <outlet property="whitelistLabel" destination="f3z-Yh-zY2" id="0rh-cw-y5t"/>
-                        <outletCollection property="themableLabels" destination="Lq2-mi-McV" collectionClass="NSMutableArray" id="fHH-Wa-bgn"/>
-                        <outletCollection property="themableLabels" destination="2kF-Mk-dHf" collectionClass="NSMutableArray" id="eIo-nl-QOp"/>
-                        <outletCollection property="themableLabels" destination="VCK-db-aeg" collectionClass="NSMutableArray" id="FJK-BI-DZV"/>
-                        <outletCollection property="themableLabels" destination="uVg-Gj-40a" collectionClass="NSMutableArray" id="QEf-E9-AaP"/>
-                        <outletCollection property="themableLabels" destination="f3z-Yh-zY2" collectionClass="NSMutableArray" id="JgQ-zY-wEy"/>
-                        <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
                         <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
                         <outletCollection property="themableLabels" destination="QHZ-sJ-wTL" collectionClass="NSMutableArray" id="LU2-A3-0gX"/>
+                        <outletCollection property="themableLabels" destination="Lq2-mi-McV" collectionClass="NSMutableArray" id="fHH-Wa-bgn"/>
+                        <outletCollection property="themableLabels" destination="2kF-Mk-dHf" collectionClass="NSMutableArray" id="eIo-nl-QOp"/>
+                        <outletCollection property="themableLabels" destination="uVg-Gj-40a" collectionClass="NSMutableArray" id="QEf-E9-AaP"/>
+                        <outletCollection property="themableLabels" destination="VCK-db-aeg" collectionClass="NSMutableArray" id="FJK-BI-DZV"/>
+                        <outletCollection property="themableLabels" destination="f3z-Yh-zY2" collectionClass="NSMutableArray" id="JgQ-zY-wEy"/>
+                        <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npH-7c-pqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

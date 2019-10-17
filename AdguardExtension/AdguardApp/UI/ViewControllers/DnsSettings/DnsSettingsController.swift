@@ -26,6 +26,7 @@ class DnsSettingsController : UITableViewController{
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
+    @IBOutlet weak var topSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -34,21 +35,10 @@ class DnsSettingsController : UITableViewController{
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
-    private let wifiExceptionSegue = "wifiExceptionSegue"
     
     // MARK: - view controller life cycle
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == wifiExceptionSegue {
-            if let controller = segue.destination as? ListOfRulesController {
-                // CHANGE AFTER MERGE
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +81,14 @@ class DnsSettingsController : UITableViewController{
         
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 32.0 : 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     // MARK: Actions
@@ -136,6 +134,7 @@ class DnsSettingsController : UITableViewController{
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
+        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
