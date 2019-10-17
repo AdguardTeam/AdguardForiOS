@@ -52,16 +52,18 @@ class AntibannerController: AntibannerControllerProtocol {
     private var started = false
     private var readyFlag = ReadyFlag.notReady
     private var onReadyBlocks:[(AESAntibannerProtocol)->Void] = []
+    private var readyObservation: Any?
+    private var installedObservation: Any?
     
     init(antibanner: AESAntibannerProtocol) {
         self.antibanner = antibanner
         
         // Subscribing to Antibanner notifications
-        NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerReady, object: self, queue: nil) { [weak self] (notification) in
+        readyObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerReady, object: nil, queue: nil) { [weak self] (notification) in
             self?.checkForServiceReady(readyFlag: .databaseReady)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerInstalled, object: self, queue: nil) { [weak self] (notification) in
+        installedObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerInstalled, object: nil, queue: nil) { [weak self] (notification) in
             self?.checkForServiceReady(readyFlag: .installed)
         }
     }

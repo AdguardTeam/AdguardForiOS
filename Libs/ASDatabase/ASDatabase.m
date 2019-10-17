@@ -15,6 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+#import <UIKit/UIKit.h>
 #import "ASDatabase.h"
 #import "ACommons/ACLang.h"
 #import "ADomain/ADomain.h"
@@ -305,6 +306,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
     
+    UIBackgroundTaskIdentifier identifier = [self beginBackgroundTask];
+    
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
@@ -320,10 +323,13 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)rawExec:(void (^)(FMDatabase *db))block{
     
+    UIBackgroundTaskIdentifier identifier = [self beginBackgroundTask];
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
@@ -339,14 +345,20 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)queryDefaultDB:(void (^)(FMDatabase *db))block{
+    
+    UIBackgroundTaskIdentifier identifier = [self beginBackgroundTask];
     
     if (self.ready)
         [defaultDbQueue inDatabase:block];
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (BOOL)isolateQueue:(dispatch_queue_t)theQueue{
@@ -488,6 +500,19 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     
     return YES;
+}
+
+- (UIBackgroundTaskIdentifier) beginBackgroundTask {
+#ifndef APP_EXTENSION
+    return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+#endif
+    return 0;
+}
+
+- (void) endBackgroubdTaskWithId: (UIBackgroundTaskIdentifier) identifier {
+    #ifndef APP_EXTENSION
+        return [[UIApplication sharedApplication] endBackgroundTask:identifier];
+    #endif
 }
 
 #pragma clang diagnostic pop

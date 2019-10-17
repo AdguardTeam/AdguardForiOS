@@ -68,7 +68,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
 @class Reachability, ASDFilterRule, ACLExecuteBlockDelayed, ASDatabase;
 @class AASCustomFilterParserResult;
-@protocol ACNNetworkingProtocol;
+@protocol ACNNetworkingProtocol, AESharedResourcesProtocol;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - ASAntibanner
@@ -365,7 +365,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  init
  */
-- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking asDataBase: (nonnull ASDatabase *)asDatabase;
+- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking asDataBase: (nonnull ASDatabase *)asDatabase resources: (nonnull id<AESharedResourcesProtocol>) resources;
 
 /**
  Indicator that metadata and count of filters are out of date.

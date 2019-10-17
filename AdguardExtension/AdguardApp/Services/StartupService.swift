@@ -62,7 +62,8 @@ class StartupService : NSObject{
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
-        let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, asDataBase: asDataBase)
+        let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, asDataBase: asDataBase, resources: sharedResources)
+        locator.addService(service: antibanner)
         
         let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner)
         locator.addService(service: antibannerController)
