@@ -42,7 +42,7 @@ struct ReadyFlag: OptionSet {
     static let ready = installed.union(databaseReady)
 }
 
-class AntibannerController: AntibannerControllerProtocol {
+class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     private let startQueue = DispatchQueue(label: "antibanner controller start")
     private let readyQueue = DispatchQueue(label: "antibanner controller ready")
@@ -55,17 +55,20 @@ class AntibannerController: AntibannerControllerProtocol {
     private var readyObservation: Any?
     private var installedObservation: Any?
     
+    private var database: ASDatabase
+    
     init(antibanner: AESAntibannerProtocol) {
         self.antibanner = antibanner
+        self.database = ASDatabase()
         
-        // Subscribing to Antibanner notifications
-        readyObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerReady, object: nil, queue: nil) { [weak self] (notification) in
-            self?.checkForServiceReady(readyFlag: .databaseReady)
-        }
+        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
+        self.database.initDb(with: url, upgradeDefaultDb: true)
         
-        installedObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerInstalled, object: nil, queue: nil) { [weak self] (notification) in
-            self?.checkForServiceReady(readyFlag: .installed)
-        }
+        self.antibanner.setDatabase(self.database)
+        
+        super.init()
+        
+        self.setupAntibannerObserver()
     }
     
     func start() {
@@ -73,8 +76,14 @@ class AntibannerController: AntibannerControllerProtocol {
             guard let sSelf = self else { return }
             if sSelf.started { return }
             
-            sSelf.antibanner.start()
-            sSelf.started = true
+            if sSelf.database.ready {
+                sSelf.antibanner.start()
+                sSelf.started = true
+                DDLogInfo("(AntibannerController) DB service ready. Antibanner service started.");
+            }
+            else {
+                sSelf.setupDatabaseObserver()
+            }
         }
     }
     
@@ -91,7 +100,40 @@ class AntibannerController: AntibannerControllerProtocol {
         }
     }
     
+    // MARK: - observe
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if object as? ASDatabase == database && keyPath == "ready" && database.ready {
+            
+            database.removeObserver(self, forKeyPath: "ready")
+            
+            startQueue.async { [weak self] in
+                self?.antibanner.start()
+                self?.started = true
+                DDLogInfo("(AntibannerController) DB service ready. Antibanner service started.");
+            }
+            
+            return
+        }
+        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+    }
+    
     // MARK: - private methods
+    
+    private func setupDatabaseObserver() {
+        database.addObserver(self, forKeyPath: "ready", options: .new, context: nil)
+    }
+    
+    private func setupAntibannerObserver() {
+        readyObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerReady, object: nil, queue: nil) { [weak self] (notification) in
+            self?.checkForServiceReady(readyFlag: .databaseReady)
+        }
+        
+        installedObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerInstalled, object: nil, queue: nil) { [weak self] (notification) in
+            self?.checkForServiceReady(readyFlag: .installed)
+        }
+    }
     
     private func pushReadyBlocksToWorkingQueue() {
 

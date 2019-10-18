@@ -94,13 +94,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
-- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking asDataBase: (ASDatabase *)asDatabase resources: (id<AESharedResourcesProtocol>) resources {
+- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking resources: (id<AESharedResourcesProtocol>) resources {
     
     self = [super init];
     if (self) {
         
         _networking = networking;
-        _asDataBase = asDatabase;
         _resources = resources;
         observingDbStatus = NO;
         
@@ -135,6 +134,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 @synthesize updatesRightNow = _updatesRightNow;
 
 #pragma mark database initializing methods
+
+- (void)setDatabase:(ASDatabase *)db {
+    _asDataBase = db;
+}
+
 - (void)start{
 
     dispatch_sync(workQueue, ^{

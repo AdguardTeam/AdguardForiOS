@@ -90,6 +90,9 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  */
 @property (readonly) BOOL updatesRightNow;
 
+/** set database to work with it */
+- (void) setDatabase:(ASDatabase*) db;
+
 /** start sevice */
 - (void) start;
 
@@ -365,7 +368,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  init
  */
-- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking asDataBase: (nonnull ASDatabase *)asDatabase resources: (nonnull id<AESharedResourcesProtocol>) resources;
+- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking resources: (nonnull id<AESharedResourcesProtocol>) resources;
 
 /**
  Indicator that metadata and count of filters are out of date.

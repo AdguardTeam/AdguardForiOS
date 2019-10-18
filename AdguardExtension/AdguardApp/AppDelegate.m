@@ -22,8 +22,6 @@
 #import "ACommons/ACNetwork.h"
 #import "ADomain/ADomain.h"
 #import "AppDelegate.h"
-#import "ASDatabase/ASDatabase.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 
@@ -53,8 +51,6 @@ NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
 
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
-static int global = 100;
-
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
 
@@ -76,7 +72,6 @@ typedef enum : NSUInteger {
     id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
-    ASDatabase* _asDataBase;
     
     BOOL _activateWithOpenUrl;
     
@@ -102,7 +97,6 @@ typedef enum : NSUInteger {
     _antibannerController = [ServiceLocator.shared getSetviceWithTypeName:@"AntibannerControllerProtocol"];
     _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
     _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
-    _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
     _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
@@ -134,9 +128,6 @@ typedef enum : NSUInteger {
         _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
-        // Init database
-        [_asDataBase initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
-        
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
         
@@ -165,27 +156,8 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
     
-    //------------ Checking DB status -----------------------------
-    if (_asDataBase.error) {
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
-        //        [self dbFailure];
-    }
-    else if (!_asDataBase.ready){
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
-        [_asDataBase addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
-    }
-    //--------------------- Start Services ---------------------------
-    else{
-        
-        [_antibannerController start];
-        DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
-    }
-    
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
-    DDLogInfo(@"(AppDelegate) Stage 2 completed.");
     
     return YES;
 }
@@ -393,29 +365,6 @@ typedef enum : NSUInteger {
     }
 }
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Observing notifications
-/////////////////////////////////////////////////////////////////////
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    // DB DELAYED READY
-    if ([object isEqual:_asDataBase]
-        && [keyPath isEqualToString:@"ready"]
-        && _asDataBase.ready) {
-        
-        [_asDataBase removeObserver:self forKeyPath:@"ready"];
-        
-        //--------------------- Start Services ---------------------------
-        [_antibannerController start];
-        DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
-        
-        return;
-    }
-    
-    // Default processing
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Notifications observers

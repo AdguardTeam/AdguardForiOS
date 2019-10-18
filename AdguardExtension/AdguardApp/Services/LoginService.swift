@@ -86,7 +86,6 @@ class LoginService: LoginServiceProtocol {
     lazy private var AUTH_TOKEN_URL = { "\(LOGIN_SERVER)/api/2.0/auth_token" }()
     lazy private var RESET_LICENSE_URL = { "\(LOGIN_SERVER)/api/1.0/resetlicense.html" }()
     lazy private var OAUTH_TOKEN_URL = { "\(AUTH_SERVER)/oauth/token" } ()
-    lazy private var REGISTRATION_URL = { "\(AUTH_SERVER)/api/1.0/registration" } ()
     
     // - request fileds
     private let LOGIN_EMAIL_PARAM = "email"

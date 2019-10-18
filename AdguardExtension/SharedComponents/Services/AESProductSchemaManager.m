@@ -22,7 +22,6 @@
 #import "AESharedResources.h"
 #import "ADProductInfo.h"
 #import "AESAntibanner.h"
-#import "AEService.h"
 
 #import "Adguard-Swift.h"
 

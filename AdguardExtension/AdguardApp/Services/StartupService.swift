@@ -46,9 +46,6 @@ class StartupService : NSObject{
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
         
-        let asDataBase = ASDatabase()
-        locator.addService(service: asDataBase)
-        
         let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources)
         purchaseService.start()
         locator.addService(service: purchaseService)
@@ -62,7 +59,7 @@ class StartupService : NSObject{
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
-        let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, asDataBase: asDataBase, resources: sharedResources)
+        let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, resources: sharedResources)
         locator.addService(service: antibanner)
         
         let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner)

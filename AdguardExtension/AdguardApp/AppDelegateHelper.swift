@@ -60,6 +60,8 @@ class AppDelegateHelper: NSObject {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        antibannerController.start()
+        
         // request permission for user notifications posting
         userNotificationService.requestPermissions()
         
