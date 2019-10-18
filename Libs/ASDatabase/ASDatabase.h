@@ -15,6 +15,11 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+//#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+//#endif
+
 #import <Foundation/Foundation.h>
 #import "vendors/fmdb/FMDB.h"
 

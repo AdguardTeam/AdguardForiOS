@@ -29,16 +29,15 @@ class AppDelegateHelper: NSObject {
     let appDelegate: AppDelegate
     lazy var userNotificationService: UserNotificationServiceProtocol =  { ServiceLocator.shared.getService()! }()
     
-    lazy var aeService: AEServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     lazy var themeService: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var contentBlockerService: ContentBlockerService = { ServiceLocator.shared.getService()! }()
     lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var antibannerController: AntibannerControllerProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var purchaseService: PurchaseServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     var purchaseObservation: Any?
-    let antibanner: AESAntibannerProtocol
-    let resources: AESharedResourcesProtocol
-    let purchaseService: PurchaseServiceProtocol
     
     private var firstRun: Bool {
         get {
@@ -48,14 +47,8 @@ class AppDelegateHelper: NSObject {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsFirstRunKey)
         }
     }
-    @objc
-    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, purchaseService: PurchaseService) {
-        self.antibanner = antibanner
-        self.resources = resources
-        self.purchaseService = purchaseService
-        super.init()
-    }
     
+    @objc
     init(appDelegate: AppDelegate) {
         self.appDelegate = appDelegate
         super.init()
@@ -123,7 +116,7 @@ class AppDelegateHelper: NSObject {
         }
      
         if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
-            aeService.onReady {
+            antibannerController.onReady { (antibanner) in
                 DispatchQueue.main.async {
                         
                     let path = String(url.path.suffix(url.path.count - 1))
@@ -135,7 +128,7 @@ class AppDelegateHelper: NSObject {
                         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
                         guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
                         
-                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.aeService.antibanner(), theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
+                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: antibanner, theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
                         
                         userFilterController.model = model
                         userFilterController.newRuleText = path

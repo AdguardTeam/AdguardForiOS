@@ -49,7 +49,7 @@ class StartupService : NSObject{
         let asDataBase = ASDatabase()
         locator.addService(service: asDataBase)
         
-        let purchaseService = PurchaseService(network: networkService, resources: sharedResources)
+        let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources)
         purchaseService.start()
         locator.addService(service: purchaseService)
         

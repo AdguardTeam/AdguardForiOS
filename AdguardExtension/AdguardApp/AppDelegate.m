@@ -53,6 +53,8 @@ NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
 
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
+static int global = 100;
+
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
 typedef void (^AEDownloadsCompletionBlock)();
 
@@ -99,7 +101,7 @@ typedef enum : NSUInteger {
     _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
     _antibannerController = [ServiceLocator.shared getSetviceWithTypeName:@"AntibannerControllerProtocol"];
     _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
-    _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
+    _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
     _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
     _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
     
@@ -342,112 +344,8 @@ typedef enum : NSUInteger {
     DDLogError(@"(AppDelegate) application Open URL.");
     
     _activateWithOpenUrl = YES;
- 
-    /*
-     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
-     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
-    */
-    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
-    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
-    NSString *command = url.host;
-    
-    UINavigationController *nav = [self getNavigationController];
-    
-    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-        self.window.rootViewController = launchScreenController;
-    }
-
-    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
-        
-        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                @autoreleasepool {
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-                        
-                        NSString *path = [url.path substringFromIndex:1];
-                        
-                        
-                        if (nav.viewControllers.count) {
-                            MainController *main = nav.viewControllers.firstObject;
-                            if ([main isKindOfClass:[MainController class]]) {
-                                
-                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
-                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
-                                
-                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
-                                ListOfRulesController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
-                                
-                                UIStoryboard *filtersStoryBoard = [UIStoryboard storyboardWithName:@"Filters" bundle:[NSBundle mainBundle]];
-                                SafariProtectionController* safariProtectionController = [filtersStoryBoard instantiateViewControllerWithIdentifier:@"SafariProtectionController"];
-                                
-                                userFilterController.newRuleText = path;
-                                
-                                nav.viewControllers = @[main, mainMenuController, safariProtectionController, userFilterController];
-                                
-                                [main view];
-                                [mainMenuController view];
-                                [safariProtectionController view];
-                                [userFilterController view];
-
-                                self.window.rootViewController = nav;
-                            }
-                            else{
-                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
-                            }
-                        }
-                    }
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
-                        
-                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
-                        NSString* fragment = url.fragment;
-                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
-                        
-                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
-                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
-                        
-                        [_purchaseService loginWithAccessToken:accessToken state: state];
-                    }
-                }
-            });
-        }];
-        
-        return YES;
-    }
-#ifdef PRO
-    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
-        
-        NSString *command = url.host;
-        
-        UINavigationController *nav = [self getNavigationController];
-        
-        AEUIMainController *main = nav.viewControllers.firstObject;
-        
-        if(!main){
-            return NO;
-        }
-        
-        [nav popToRootViewControllerAnimated:NO];
-        
-        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
-            
-            [main setProStatus:YES];
-        }
-        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
-            
-            [main setProStatus:NO];
-        }
-        else {
-            return NO;
-        }
-        
-        return YES;
-    }
-#endif
-
-    return NO;
+    return [helper application:app open:url options:options];
 }
 
 /////////////////////////////////////////////////////////////////////

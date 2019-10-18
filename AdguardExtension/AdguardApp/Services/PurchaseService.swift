@@ -42,6 +42,11 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
 
 protocol PurchaseServiceProtocol {
     
+    /* star service. It request SKProducts  */
+    func start()
+    
+    /* request SKProducts. If SKProducts failed on start we must repeat this request  */
+    func startProductRequest()
    
     /**
      returns true if user has valid renewable subscription or valid adguard license

@@ -353,7 +353,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     
     NSMutableDictionary* datas = [NSMutableDictionary new];
     
-    NSDictionary* jsonDatas = [_safariService allBlockingContentRules];
+    NSDictionary* jsonDatas = [(SafariService*)_safariService allBlockingContentRules];
     [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSData* _Nonnull data, BOOL * _Nonnull stop) {
         NSString *filename = [key replace:@"json" to:@"zip"];
         datas[filename] = [data gzippedData];
