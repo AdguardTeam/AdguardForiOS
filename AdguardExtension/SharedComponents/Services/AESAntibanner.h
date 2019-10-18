@@ -96,6 +96,9 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /** start sevice */
 - (void) start;
 
+/** stop service */
+- (void) stop;
+
 /**
  Obtain rules for active (enabled) filters.
  Rules from USER filter will be returned last in list.

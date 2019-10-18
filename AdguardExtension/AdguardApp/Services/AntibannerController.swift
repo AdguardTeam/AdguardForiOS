@@ -29,6 +29,9 @@ protocol AntibannerControllerProtocol {
     // We must block the gui until the anti-banner is initialized.
     // Otherwise, we display incorrect information on some screens.
     func onReady(_ block: @escaping  (_ antibanner: AESAntibannerProtocol)->Void)
+    
+    // drops database and reinit antibanner with new one
+    func reset()
 }
 
 struct ReadyFlag: OptionSet {
@@ -60,14 +63,9 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     init(antibanner: AESAntibannerProtocol) {
         self.antibanner = antibanner
         self.database = ASDatabase()
-        
-        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
-        self.database.initDb(with: url, upgradeDefaultDb: true)
-        
-        self.antibanner.setDatabase(self.database)
-        
         super.init()
         
+        self.initDatabase()
         self.setupAntibannerObserver()
     }
     
@@ -100,6 +98,22 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
         }
     }
     
+    func reset() {
+        
+        self.started = false
+        
+        database.stop()
+        antibanner.stop()
+        // delete database file
+        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
+        try? FileManager.default.removeItem(atPath: url.path)
+        
+        self.database = ASDatabase()
+        self.initDatabase()
+
+        self.start()
+    }
+    
     // MARK: - observe
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -120,6 +134,12 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     }
     
     // MARK: - private methods
+    
+    private func initDatabase() {
+        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
+        self.antibanner.setDatabase(self.database)
+        self.database.initDb(with: url, upgradeDefaultDb: true)
+    }
     
     private func setupDatabaseObserver() {
         database.addObserver(self, forKeyPath: "ready", options: .new, context: nil)

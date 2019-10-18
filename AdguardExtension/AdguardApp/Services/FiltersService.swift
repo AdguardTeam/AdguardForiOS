@@ -137,6 +137,9 @@ protocol FiltersServiceProtocol {
      */
     func load(refresh: Bool, _ completion: @escaping () -> Void)
     
+    /** reser service*/
+    func reset()
+    
     func getGroup(_ groupId: Int)->Group?
     
     /** FiltersService sends updateNotification via NotificationCenter when filters changes */
@@ -347,6 +350,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 completion()
             }
         }
+    }
+    
+    func reset() {
+        groups = [Group]()
+        filterMetas = [ASDFilterMetadata]()
+        enabledFilters = [Int: Bool]()
     }
     
     func setGroup(_ groupId: Int, enabled: Bool) {

@@ -108,15 +108,18 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         // set Reachability
         reach = [Reachability reachabilityWithHostname:[ABECFilterClient reachabilityHost]];
         
-        serviceReady = NO;
-        serviceInstalled = NO;
-        
-        _metadataForSubscribeOutdated = YES;
-        _updatesRightNow = NO;
-        _inTransaction = NO;
+        [self initParams];
     }
     
     return self;
+}
+
+- (void) initParams {
+    serviceReady = NO;
+    serviceInstalled = NO;
+    _metadataForSubscribeOutdated = YES;
+    _updatesRightNow = NO;
+    _inTransaction = NO;
 }
 
 - (void)dealloc{
@@ -145,6 +148,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         if ([self checkInstalledFiltersInDB]){
             [self setServiceToReady];
         }
+    });
+}
+
+- (void)stop {
+    dispatch_sync(workQueue, ^{
+        [self initParams];
     });
 }
 

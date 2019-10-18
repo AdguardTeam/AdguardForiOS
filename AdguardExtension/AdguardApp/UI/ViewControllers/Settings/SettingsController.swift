@@ -131,6 +131,14 @@ class SettingsController: UITableViewController {
         setTheme(withButtonTag: sender.tag)
     }
     
+    @IBAction func resetAction(_ sender: UIBarButtonItem) {
+        
+        let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+        let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
+        filtersService.reset()
+        antibannerController.reset()
+    }
+    
     // MARK: - table view cells
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

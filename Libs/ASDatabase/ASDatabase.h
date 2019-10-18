@@ -131,4 +131,7 @@
  */
 - (BOOL)updateDB:(FMDatabase *)db fromVersion:(NSString *)version toVersion:(NSString *)toVersion resourcePath:(NSString *)resourcePath;
 
+/** stop database working. Requests will no longer be executed */
+- (void) stop;
+
 @end

@@ -80,7 +80,7 @@ class AdvancedSettingsController: UITableViewController {
         }
     }
     
-    // MARK: - Switch actions
+    // MARK: - actions
     
     @IBAction func useSimplifiedFiltersAction(_ sender: UISwitch) {
         change(senderSwitch: sender, forKey: AEDefaultsJSONConverterOptimize)
@@ -93,7 +93,6 @@ class AdvancedSettingsController: UITableViewController {
         vpnManager.restartByReachability = sender.isOn
     }
     
-
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
