@@ -36,6 +36,9 @@ class AppDelegateHelper: NSObject {
     lazy var antibannerController: AntibannerControllerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var purchaseService: PurchaseServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
+    lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
+    
     
     var purchaseObservation: Any?
     
@@ -86,19 +89,20 @@ class AppDelegateHelper: NSObject {
         addPurchaseStatusObserver()
     }
     
+    /** resets all settings. It removes database and reinit it from default database.
+     Also it removes vpn profile. And reomves all keys from keychain (reset authorisation) */
     func resetAllSettings() {
-        let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-        let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
-        let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
-        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+        
+        DDLogInfo("(AppDelegate) resetAllSettings")
+
         filtersService.reset()
         antibannerController.reset()
         vpnManager.removeVpnConfiguration()
         resources.reset()
         purchaseService.reset()
         
-        filtersService.load(refresh: true) {
-        }
+        // force load filters to fill database
+        filtersService.load(refresh: true) {}
         
         let nav = self.getNavigationController()
         nav?.popToRootViewController(animated: true)

@@ -315,6 +315,8 @@ static NSUserDefaults *_sharedUserDefaults;
 
 - (void)reset {
     // clear user defaults
+    DDLogInfo(@"(AESharedResources) reset settings");
+    
     for (NSString* key in _sharedUserDefaults.dictionaryRepresentation.allKeys) {
         [_sharedUserDefaults removeObjectForKey:key];
     }
@@ -330,7 +332,7 @@ static NSUserDefaults *_sharedUserDefaults;
         if ([file contains:@".db"]) continue;
         BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
         if (!success || error) {
-            // it failed.
+            DDLogError(@"(AEsharedResources) reset. Error - can not delete file. Error: %@", error.localizedDescription);
         }
     }
 }
