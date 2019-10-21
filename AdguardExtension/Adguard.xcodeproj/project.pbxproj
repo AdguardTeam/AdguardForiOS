@@ -7218,7 +7218,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Libs/vendors/DnsCrypt\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.tunnel 1571312611";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.tunnel";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
