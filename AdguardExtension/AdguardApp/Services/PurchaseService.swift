@@ -112,6 +112,9 @@ protocol PurchaseServiceProtocol {
      returns url for oauth authorization
      */
     func authUrlWithName(name: String)->URL?
+    
+    /** resets all login data */
+    func reset()
 }
 
 // MARK: - public constants -
@@ -294,6 +297,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 return
             }
         }
+    }
+    
+    func reset() {
+        loginService.reset()
     }
 
     // MARK: - public methods

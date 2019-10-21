@@ -27,6 +27,9 @@ protocol KeychainServiceProtocol {
     func saveLicenseKey(server: String, key: String) -> Bool
     func loadLicenseKey(server: String) -> String?
     func deleteLicenseKey(server: String) -> Bool
+    
+    /** removes all keys assotiated with application */
+    func reset()
 }
 
 class KeychainService : KeychainServiceProtocol {
@@ -209,6 +212,14 @@ class KeychainService : KeychainServiceProtocol {
         if status != errSecSuccess { return false }
         
         return true
+    }
+    
+    func reset() {
+        let secItemClasses =  [kSecClassGenericPassword, kSecClassInternetPassword]
+        for itemClass in secItemClasses {
+            let spec: NSDictionary = [kSecClass: itemClass]
+            SecItemDelete(spec)
+        }
     }
     
     // MARK: - private methods

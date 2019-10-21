@@ -44,6 +44,9 @@ protocol LoginServiceProtocol {
     func login(name:String, password: String, code2fa: String?, callback: @escaping  ( _: NSError?)->Void)
     
     var activeChanged: (() -> Void)? { get set }
+    
+    /** resets all login data */
+    func reset()
 }
 
 class LoginService: LoginServiceProtocol {
@@ -430,6 +433,13 @@ class LoginService: LoginServiceProtocol {
                     callback(error)
                 }
             }
+        }
+    }
+    
+    func reset() {
+        keychain.reset()
+        if let callback = activeChanged {
+            callback()
         }
     }
     
