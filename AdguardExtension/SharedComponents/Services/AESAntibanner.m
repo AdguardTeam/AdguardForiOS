@@ -2378,7 +2378,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         userFilter.version = @"1.0.0.0";
         userFilter.checkDate = [NSDate distantFuture];
         userFilter.checkDateString = [userFilter.checkDate iso8601String];
-        userFilter.updateDate = [NSDate date];
         userFilter.updateDateString = [userFilter.updateDate iso8601String];
         userFilter.groupId = @(0);
         userFilter.editable = @(1);
