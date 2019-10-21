@@ -61,7 +61,7 @@ class AdvancedSettingsController: UITableViewController {
             [weak self] (notification) in
             guard let sSelf = self else { return }
             DispatchQueue.main.async{
-                sSelf.restartProtectionSwitch.isOn = sSelf.vpnManager.enabled
+                sSelf.restartProtectionSwitch.isOn = sSelf.vpnManager.restartByReachability
             }
             if sSelf.vpnManager.lastError != nil {
                 ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))

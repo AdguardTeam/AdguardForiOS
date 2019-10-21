@@ -18,8 +18,18 @@
 
 import Foundation
 
-struct WifiExceptions: Codable {
-    var exceptions: [WifiException]
+@objcMembers class WifiException: NSObject, Codable {
+    @objc var rule: String
+    @objc var enabled: Bool
+    
+    init(rule: String, enabled: Bool) {
+        self.rule = rule
+        self.enabled = enabled
+    }
+    
+    static func == (lhs: WifiException, rhs: WifiException) -> Bool {
+        return lhs.rule == rhs.rule
+    }
 }
 
 protocol NetworkSettingsChangedDelegate {
@@ -27,7 +37,7 @@ protocol NetworkSettingsChangedDelegate {
 }
 
 protocol NetworkSettingsServiceProtocol {
-    var exceptions: WifiExceptions { get }
+    var exceptions: [WifiException] { get }
     var filterWifiDataEnabled: Bool { get set }
     var filterMobileDataEnabled: Bool { get set }
     var delegate: NetworkSettingsChangedDelegate? { get set }
@@ -41,7 +51,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var delegate: NetworkSettingsChangedDelegate?
     
-    var exceptions: WifiExceptions = WifiExceptions(exceptions: [])
+    var exceptions: [WifiException] = []
     
     var filterWifiDataEnabled: Bool {
         get {
@@ -49,6 +59,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
         set {
             if filterWifiDataEnabled != newValue {
+                vpnManager.filteringWifiDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterWifiEnabled)
             }
         }
@@ -60,12 +71,15 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
         set {
             if filterMobileDataEnabled != newValue {
+                vpnManager.filteringMobileDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
             }
         }
     }
     
     /* Variables */
+    
+    // File name is also stored in PacketTunnelProvider
     private let filePath = "NetworkSettings"
     
     /* Services */
@@ -80,25 +94,32 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     }
     
     func add(exception: WifiException){
-        if !exceptions.exceptions.contains(exception){
-            exceptions.exceptions.append(exception)
+        if !exceptions.contains(exception){
+            exceptions.append(exception)
+            
+            vpnManager.restartTunnel()
             
             reloadArray()
         }
     }
     
     func delete(exception: WifiException) {
-        if let index = exceptions.exceptions.firstIndex(of: exception){
-            exceptions.exceptions.remove(at: index)
+        if let index = exceptions.firstIndex(of: exception){
+            exceptions.remove(at: index)
+            
+            vpnManager.restartTunnel()
             
             reloadArray()
         }
     }
     
     func change(oldException: WifiException, newException: WifiException) {
-        if let index = exceptions.exceptions.firstIndex(of: oldException){
-            exceptions.exceptions[index].enabled = newException.enabled
-            exceptions.exceptions[index].rule = newException.rule
+        if let index = exceptions.firstIndex(of: oldException){
+            let ex = exceptions[index]
+            ex.enabled = newException.enabled
+            ex.rule = newException.rule
+            
+            vpnManager.restartTunnel()
             
             reloadArray()
         }
@@ -106,19 +127,19 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     // MARK: - Private methods
     
-    private func getExceptionsFromFile() -> WifiExceptions {
+    private func getExceptionsFromFile() -> [WifiException] {
         guard let data = resources.loadData(fromFileRelativePath: filePath) else {
             DDLogError("Failed to load Wifi exceptions from file")
-            return WifiExceptions(exceptions: [])
+            return []
         }
         let decoder = JSONDecoder()
         do {
-            let exceptions = try decoder.decode(WifiExceptions.self, from: data)
+            let exceptions = try decoder.decode([WifiException].self, from: data)
             return exceptions
         } catch {
             DDLogError("Failed to decode Wifi exceptions from data")
         }
-        return WifiExceptions(exceptions: [])
+        return []
     }
     
     private func saveExceptionsToFile() {
@@ -135,15 +156,5 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         saveExceptionsToFile()
         exceptions = getExceptionsFromFile()
         delegate?.settingsChanged()
-    }
-    
-    // MARK: - Methods for interaction with wifi and mobile data settings
-    
-    private func enableFiltering() {
-        
-    }
-    
-    private func disableFiltering() {
-        
     }
 }

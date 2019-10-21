@@ -74,11 +74,11 @@ class DnsSettingsController : UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
        
-        if indexPath.row != 0{
+        if indexPath.section != 0 {
             cell.contentView.alpha = vpnManager.enabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = vpnManager.enabled
         }
-        
+
         theme.setupTableCell(cell)
         return cell
     }

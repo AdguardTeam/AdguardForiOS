@@ -31,3 +31,5 @@ NSString *APVpnManagerParameterTunnelMode = @"APVpnManagerParameterTunnelMode";
 NSString *APVpnManagerErrorDomain = @"APVpnManagerErrorDomain";
 NSString *APVpnManagerRestartByReachability = @"APVpnManagerRestartByReachability";
 
+NSString *APVpnManagerFilteringMobileDataEnabled = @"APVpnManagerFilteringMobileDataEnabled";
+NSString *APVpnManagerFilteringWifiDataEnabled = @"APVpnManagerFilteringWifiDataEnabled";

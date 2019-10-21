@@ -55,6 +55,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         themeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
                 self?.updateTheme()
         }
+        updateTheme()
     }
     
     // MARK: - Actions
@@ -165,8 +166,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         })
     }
     
-    // MARK: - UIViewControllerTransitioningDelegate method
-    
     // MARK: - RuleDetailsControllerDelegate methods
     
     func removeRule(rule: RuleInfo) {
@@ -189,6 +188,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     private func updateTheme(){
         theme.setupTable(tableView)
+        tableView.backgroundColor = theme.backgroundColor
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }

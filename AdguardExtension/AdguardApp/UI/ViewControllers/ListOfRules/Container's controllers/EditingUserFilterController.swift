@@ -58,6 +58,7 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
     
     private func updateTheme(){
         textView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
         theme.setupTextView(textView)
         theme.setupLabel(helperLabel)
     }

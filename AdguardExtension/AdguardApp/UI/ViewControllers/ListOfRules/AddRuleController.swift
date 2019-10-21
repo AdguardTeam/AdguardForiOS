@@ -52,7 +52,10 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         titleLabel.text = getTitleText()
         editCaption.text = getEditCaptionText()
         
-        ruleTextView.keyboardType = type == .safariUserfilter ? .default : .URL
+        if (type == .safariWhitelist || type == .invertedSafariWhitelist || type == .systemWhitelist){
+            ruleTextView.keyboardType = .URL
+        }
+        
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         

@@ -18,15 +18,6 @@
 
 import Foundation
 
-struct WifiException: Codable, Equatable {
-    var rule: String
-    var enabled: Bool
-    
-    static func == (lhs: WifiException, rhs: WifiException) -> Bool {
-        return lhs.rule == rhs.rule
-    }
-}
-
 protocol NetworkSettingsModelProtocol {
     /* Variables */
     var exceptions: [WifiException] { get }
@@ -70,7 +61,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     
     var exceptions: [WifiException] {
         get {
-            networkSettingsService.exceptions.exceptions
+            networkSettingsService.exceptions
         }
     }
     

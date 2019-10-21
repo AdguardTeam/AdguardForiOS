@@ -20,7 +20,6 @@
 #import "APSharedResources.h"
 
 
-
 @class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService;
 
 /////////////////////////////////////////////////////////////////////
@@ -102,6 +101,16 @@ extern NSString* __nonnull APVpnChangedNotification;
  this flag indicates that vpn configuration allready installed
  */
 @property (readonly) BOOL vpnInstalled;
+
+/**
+this flag indicates that filtering of Wi-Fi data is on/off
+*/
+@property BOOL filteringWifiDataEnabled;
+
+/**
+this flag indicates that filtering of mobile data is on/off
+*/
+@property BOOL filteringMobileDataEnabled;
 
 /**
  Adds custom (editable) DNS server.
