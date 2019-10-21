@@ -616,6 +616,7 @@
 		7E6BE2A6233A77D400389EDD /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
+		7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
 		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
@@ -5081,6 +5082,7 @@
 				7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */,
 				7E4D203722D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
 				7E407997231E7A87007EFB26 /* LoaderSegue.swift in Sources */,
+				7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */,
 				D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */,
 				D031A0CF219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				7E49DBA922D88ECB00027E93 /* ActionExtensionMainController.swift in Sources */,

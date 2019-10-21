@@ -292,9 +292,22 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
          tunnelMode, dnsServerInfo.name];
         
         [sb appendFormat:@"\r\nRestart when network changes: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsRestartByReachability] ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nFilter mobile data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterMobileEnabled] ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nFilter wi-fi data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterWifiEnabled] ? @"YES" : @"NO"];
         
         
-        [sb appendFormat:@"\r\nDns server id: %@",dnsServerInfo.serverId];
+        [sb appendFormat:@"\r\n\r\nDns server id: %@",dnsServerInfo.serverId];
+        
+        NSArray<WifiException*>* exceptions = [self getExceptions];
+        
+        if (exceptions)
+            [sb appendString:@"\r\n\r\nWi-Fi exceptions:"];
+        
+        for (NSDictionary *exception in exceptions){
+            NSString *rule = exception[@"rule"];
+            NSNumber *enabled = exception[@"enabled"];
+            [sb appendFormat:@"\r\nWi-Fi name=\"%@\" Enabled=%@", rule, [enabled boolValue] ? @"YES" : @"NO"];
+        }
         
         for (NSString *upstream in dnsServerInfo.upstreams){
             [sb appendFormat:@"\r\nDns upstream: %@",upstream];
@@ -420,6 +433,18 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         return archiveName;
     }
     // return archive url
+    return nil;
+}
+
+-(NSArray<WifiException*>*)getExceptions {
+    NSString *fileName = @"NetworkSettings";
+    NSData *data = [_sharedResources loadDataFromFileRelativePath:fileName];
+    if (data) {
+        NSError *error = nil;
+        NSMutableArray<WifiException*>* exceptions =
+        [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        return exceptions;
+    }
     return nil;
 }
 

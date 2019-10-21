@@ -739,8 +739,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NSString* wifiName = [self getCurrentWifiName];
     for (NSDictionary *exception in _exceptions){
         NSString *rule = exception[@"rule"];
-        BOOL enabled = exception[@"enabled"];
-        if ([rule isEqualToString:wifiName] && enabled){
+        NSNumber *enabled = exception[@"enabled"];
+        if ([rule isEqualToString:wifiName] && [enabled boolValue]){
             return YES;
         }
     }

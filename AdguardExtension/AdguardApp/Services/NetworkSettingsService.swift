@@ -79,7 +79,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     /* Variables */
     
-    // File name is also stored in PacketTunnelProvider
+    // File name is also stored in PacketTunnelProvider and AESSupport
     private let filePath = "NetworkSettings"
     
     /* Services */
