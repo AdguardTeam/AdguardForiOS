@@ -86,6 +86,24 @@ class AppDelegateHelper: NSObject {
         addPurchaseStatusObserver()
     }
     
+    func resetAllSettings() {
+        let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+        let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
+        let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+        filtersService.reset()
+        antibannerController.reset()
+        vpnManager.removeVpnConfiguration()
+        resources.reset()
+        purchaseService.reset()
+        
+        filtersService.load(refresh: true) {
+        }
+        
+        let nav = self.getNavigationController()
+        nav?.popToRootViewController(animated: true)
+    }
+    
     // MARK: - private methods
     
     private func getNavigationController()->UINavigationController? {

@@ -72,6 +72,8 @@ extern NSString *ShowCommonAlertNotification;
  */
 - (BOOL)invalidateAntibanner:(BOOL)fromUI interactive:(BOOL)interactive;
 
+- (void) resetAllSettings;
+
 
 @end
 

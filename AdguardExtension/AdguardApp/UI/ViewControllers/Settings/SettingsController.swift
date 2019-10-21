@@ -132,16 +132,7 @@ class SettingsController: UITableViewController {
     }
     
     @IBAction func resetAction(_ sender: UIBarButtonItem) {
-        
-        let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-        let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
-        let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
-        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-        filtersService.reset()
-        antibannerController.reset()
-        vpnManager.removeVpnConfiguration()
-        resources.reset()
-        purchaseService.reset()
+        (UIApplication.shared.delegate as? AppDelegate)?.resetAllSettings()
     }
     
     // MARK: - table view cells

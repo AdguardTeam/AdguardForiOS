@@ -365,6 +365,9 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)resetAllSettings {
+    [helper resetAllSettings];
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Notifications observers
