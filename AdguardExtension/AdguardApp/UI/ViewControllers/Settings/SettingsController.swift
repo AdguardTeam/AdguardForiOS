@@ -135,8 +135,12 @@ class SettingsController: UITableViewController {
         
         let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
         let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
+        let vpnManager: APVPNManagerProtocol = ServiceLocator.shared.getService()!
         filtersService.reset()
         antibannerController.reset()
+        vpnManager.removeVpnConfiguration()
+        
+        resources.reset()
     }
     
     // MARK: - table view cells

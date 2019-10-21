@@ -269,6 +269,11 @@ extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 - (nonnull NSUserDefaults *)sharedDefaults;
 
 /**
+ reset user defaults to initial state
+ */
+- (void) reset;
+
+/**
  Saves defaults value in NSArgumentDomain.
  This lets to use defaults value in current process, 
  but this value did not save on disk (permanent domain).

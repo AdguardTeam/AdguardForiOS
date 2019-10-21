@@ -169,6 +169,9 @@ extern NSString* __nonnull APVpnChangedNotification;
 
 - (nonnull DnsServerInfo*) defaultServer;
 
+/**remove vpn configuration from system settings*/
+- (void)removeVpnConfiguration;
+
 @end
 
 /**
