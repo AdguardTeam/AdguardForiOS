@@ -506,14 +506,14 @@ static void isolateQueueReleaseFunc(void *dQueue){
 }
 
 - (UInt32) beginBackgroundTask {
-#if !APP_EXTENSION// && (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS)
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
     return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 #endif
     return 0;
 }
 
 - (void) endBackgroubdTaskWithId: (UInt32) identifier {
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS) && !APP_EXTENSION
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
     return [[UIApplication sharedApplication] endBackgroundTask:identifier];
 #endif
 }

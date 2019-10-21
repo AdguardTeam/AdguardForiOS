@@ -16,9 +16,12 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_OSX
 #import <UIKit/UIKit.h>
-//#endif
+#endif
+
 
 #import <Foundation/Foundation.h>
 #import "vendors/fmdb/FMDB.h"
