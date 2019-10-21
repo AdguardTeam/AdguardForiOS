@@ -130,8 +130,11 @@ class ContentBlockersDataSource {
         let userTitleString = ACLocalizedString("user_filter_title", nil)
         let blacklistRuleObjects = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
         let whitelistRuleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
+        let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsSafariWhitelistEnabled) as? Bool ?? true
         
-        if blacklistRuleObjects != 0 || !whitelistRuleObjects.isEmpty {
+        
+        if (userFilterEnabled && blacklistRuleObjects != 0) || (whitelistEnabled && !whitelistRuleObjects.isEmpty) {
             return userTitleString + "\n"
         }
         
