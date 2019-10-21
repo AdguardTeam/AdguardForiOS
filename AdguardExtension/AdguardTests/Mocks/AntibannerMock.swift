@@ -4,7 +4,6 @@ import Foundation
 
 class AntibannerMock: NSObject, AESAntibannerProtocol {
     
-    
     var enabled = true
     var updatesRightNow = false
     
@@ -15,6 +14,14 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     var storedFilters = [ASDFilterMetadata]()
     
     func start() {
+    }
+    
+    func setDatabase(_ db: ASDatabase!) {
+        
+    }
+    
+    func stop() {
+        
     }
     
     func rules(forFilter filterId: NSNumber) -> [ASDFilterRule] {

@@ -2,7 +2,7 @@
 import Foundation
 
 class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
-    
+
     lazy var userDefaults: UserDefaults = {
         let userDefaults = UserDefaults(suiteName: "TestDefaults")
         userDefaults?.removePersistentDomain(forName: "TestDefaults")
@@ -11,6 +11,8 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
     } ()
     
     var files = [String: Data]()
+    
+    func reset() {}
     
     static func sharedResuorcesURL() -> URL { return URL(string: "")!}
     

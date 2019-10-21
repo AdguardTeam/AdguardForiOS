@@ -15,4 +15,6 @@ class AntibannerControllerMock: AntibannerControllerProtocol {
     func onReady(_ block: @escaping (AESAntibannerProtocol) -> Void) {
         block(antibanner)
     }
+    
+    func reset() {}
 }
