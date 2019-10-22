@@ -84,11 +84,11 @@ class MainViewModel {
         }
         observers.append(observer2)
         let observer3 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
-            
-            if self?.antibanner.inTransaction() ?? false {
-                self?.antibanner.rollbackTransaction()
+            guard let sSelf = self else { return }
+            if sSelf.antibanner.inTransaction() {
+                sSelf.antibanner.rollbackTransaction()
             }
-            
+        
             self?.error?(ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)

@@ -23,7 +23,7 @@ class GetProController: UIViewController {
     // MARK: - properties
     var notificationObserver: Any?
     
-    let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     

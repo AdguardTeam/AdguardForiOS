@@ -29,14 +29,29 @@ class AppDelegateHelper: NSObject {
     let appDelegate: AppDelegate
     lazy var userNotificationService: UserNotificationServiceProtocol =  { ServiceLocator.shared.getService()! }()
     
-    lazy var aeService: AEServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     lazy var themeService: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var contentBlockerService: ContentBlockerService = { ServiceLocator.shared.getService()! }()
     lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var antibannerController: AntibannerControllerProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var purchaseService: PurchaseServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
+    lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
+    
     
     var purchaseObservation: Any?
     
+    private var firstRun: Bool {
+        get {
+            resources.sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
+        }
+        set {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsFirstRunKey)
+        }
+    }
+    
+    @objc
     init(appDelegate: AppDelegate) {
         self.appDelegate = appDelegate
         super.init()
@@ -48,13 +63,23 @@ class AppDelegateHelper: NSObject {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        antibannerController.start()
+        
         // request permission for user notifications posting
         userNotificationService.requestPermissions()
         
         addPurchaseStatusObserver()
         
+        if (firstRun) {
+            AESProductSchemaManager.install()
+            purchaseService.checkLicenseStatus()
+        } else {
+            AESProductSchemaManager.upgrade(withAntibanner: antibanner)
+        }
+        
         return true;
     }
+    
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
@@ -63,6 +88,27 @@ class AppDelegateHelper: NSObject {
     func performFetch() {
         addPurchaseStatusObserver()
     }
+    
+    /** resets all settings. It removes database and reinit it from default database.
+     Also it removes vpn profile. And reomves all keys from keychain (reset authorisation) */
+    func resetAllSettings() {
+        
+        DDLogInfo("(AppDelegate) resetAllSettings")
+
+        filtersService.reset()
+        antibannerController.reset()
+        vpnManager.removeVpnConfiguration()
+        resources.reset()
+        purchaseService.reset()
+        
+        // force load filters to fill database
+        filtersService.load(refresh: true) {}
+        
+        let nav = self.getNavigationController()
+        nav?.popToRootViewController(animated: true)
+    }
+    
+    // MARK: - private methods
     
     private func getNavigationController()->UINavigationController? {
         return appDelegate.window.rootViewController as? UINavigationController
@@ -94,7 +140,7 @@ class AppDelegateHelper: NSObject {
         }
      
         if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
-            aeService.onReady {
+            antibannerController.onReady { (antibanner) in
                 DispatchQueue.main.async {
                         
                     let path = String(url.path.suffix(url.path.count - 1))
@@ -106,7 +152,7 @@ class AppDelegateHelper: NSObject {
                         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
                         guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
                         
-                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.aeService.antibanner(), theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
+                        let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: antibanner, theme: self.themeService, dnsFiltersService: self.dnsFiltersService)
                         
                         userFilterController.model = model
                         userFilterController.newRuleText = path

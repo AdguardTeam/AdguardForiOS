@@ -65,6 +65,9 @@ protocol SafariServiceProtocol : NSObjectProtocol {
 
 class SafariService: NSObject, SafariServiceProtocol {
     
+    static let safariServiceErrorDomain = "SafariServiceErrorDomain"
+    static let safariServiceErrorCode = -1
+    
     private var resources: AESharedResourcesProtocol
     
     static private let contenBlockerBundleIdByType: [ContentBlockerType: String] =
@@ -262,7 +265,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                     DDLogError("(SafariService) userInfo for 2-nd try: \(userInfo)")
                 }
                 let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
-                let error =  NSError(domain: "SafariServiceDomain", code: Int(AES_ERROR_SAFARI_EXCEPTION), userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                let error =  NSError(domain: SafariService.safariServiceErrorDomain, code: SafariService.safariServiceErrorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
                 
                 DDLogInfo("(SafariService) Notify Safari fihished. ( 2-nd try )")
                 completion(error)

@@ -33,7 +33,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     
     // MARK: - init
 
-    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, aeService: AEServiceProtocol, safariService: SafariServiceProtocol) {
+    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
         self.purchaseService = purchaseService
         self.resources = resources
         self.safariService = safariService

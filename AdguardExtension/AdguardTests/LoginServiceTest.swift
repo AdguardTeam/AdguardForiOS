@@ -260,6 +260,7 @@ class KeychainMock: KeychainServiceProtocol {
         return true
     }
     
+    func reset() {}
 }
 
 class ParserMock: LoginResponseParser {

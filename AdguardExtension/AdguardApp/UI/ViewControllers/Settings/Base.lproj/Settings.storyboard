@@ -361,7 +361,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="never" id="ChK-gV-7pc"/>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="never" id="ChK-gV-7pc">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" style="plain" id="2s7-mz-LlB">
+                            <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="resetAction:" destination="oKf-oS-AAR" id="WpE-iM-xZc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="developerModeSwitch" destination="JuF-bI-rjJ" id="9Xw-88-Tfh"/>

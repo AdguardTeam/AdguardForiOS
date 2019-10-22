@@ -158,18 +158,6 @@
             XCTAssertFalse([resultingRange contains:excludedRange]);
         }
     }
-
-    // todo: add bigint library and check ip numbers
-//    BigInteger ipsNum = numberOfIps(resultingRanges);
-//    BigInteger ipsNumExc = numberOfIps(excludedRanges);
-//    BigInteger ipsNumWithExc = ipsNum.add(ipsNumExc);
-//
-//    System.out.println(String.format("Number of IPs in original ranges:               %32x", numberOfIps(originalRanges)));
-//    System.out.println(String.format("Number of IPs in excluded ranges:               %32x", ipsNumExc));
-//    System.out.println(String.format("Number of IPs in resulting ranges:              %32x", ipsNum));
-//    System.out.println(String.format("Number of IPs in excluded and resulting ranges: %32x", ipsNumWithExc));
-//
-//    assertEquals(numberOfIps(originalRanges), ipsNumWithExc);
 }
 
 - (void) testExcludeIpv4 {

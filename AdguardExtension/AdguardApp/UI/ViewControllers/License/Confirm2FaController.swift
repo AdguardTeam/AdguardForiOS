@@ -27,7 +27,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     // MARK: - services
     
-    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets

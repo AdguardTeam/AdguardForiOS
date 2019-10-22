@@ -27,10 +27,12 @@ class StartupService : NSObject{
     @objc
     static func start() {
         
+        let locator = ServiceLocator.shared
+        
         // init services
         
         let sharedResources: AESharedResourcesProtocol = APSharedResources()
-        ServiceLocator.shared.addService(service: sharedResources)
+        locator.addService(service: sharedResources)
         
         // Registering standard Defaults
         if  let path = Bundle.main.path(forResource: "defaults", ofType: "plist"),
@@ -42,51 +44,47 @@ class StartupService : NSObject{
         ServiceLocator.shared.addService(service: dnsTrackerService)
         
         let networkService = ACNNetworking()
-        ServiceLocator.shared.addService(service: networkService)
+        locator.addService(service: networkService)
         
-        let asDataBase = ASDatabase()
-        ServiceLocator.shared.addService(service: asDataBase)
-        
-        let purchaseService = PurchaseService(network: networkService, resources: sharedResources)
+        let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources)
         purchaseService.start()
-        ServiceLocator.shared.addService(service: purchaseService)
+        locator.addService(service: purchaseService)
         
         let safariService = SafariService(resources: sharedResources)
-        ServiceLocator.shared.addService(service: safariService)
+        locator.addService(service: safariService)
         
-        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService)
-        ServiceLocator.shared.addService(service: contentBlockerService)
-        
-        let aeService: AEServiceProtocol = AEService(contentBlocker: contentBlockerService,
-                                                     resources: sharedResources,
-                                                     networking: networkService, asDataBase: asDataBase)
-        
-        ServiceLocator.shared.addService(service: aeService)
-        
-        let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, aeService: aeService, safariService: safariService)
-        ServiceLocator.shared.addService(service: configuration)
+        let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
+        locator.addService(service: configuration)
         
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
-        ServiceLocator.shared.addService(service: themeService)
+        locator.addService(service: themeService)
         
-        let filtersService: FiltersServiceProtocol = FiltersService(antibanner: aeService.antibanner(), configuration: configuration, contentBlocker: contentBlockerService)
-        aeService.onReady {
-            filtersService.load(refresh: false) {}
-        }
-        ServiceLocator.shared.addService(service: filtersService)
+        let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, resources: sharedResources)
+        locator.addService(service: antibanner)
+        
+        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner)
+        locator.addService(service: antibannerController)
+        
+        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
+        locator.addService(service: contentBlockerService)
+        
+        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)
+        
+        locator.addService(service: filtersService)
         
         let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
-        ServiceLocator.shared.addService(service: vpnManager)
+        locator.addService(service: vpnManager)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, aeService: aeService)
+        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
+        
         supportService.configurationService = configuration;
         
-        ServiceLocator.shared.addService(service: supportService as AESSupportProtocol)
+        locator.addService(service: supportService as AESSupportProtocol)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
-        ServiceLocator.shared.addService(service: userNotificationService)
+        locator.addService(service: userNotificationService)
         
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager)
-        ServiceLocator.shared.addService(service: dnsFiltersService)
+        locator.addService(service: dnsFiltersService)
     }
 }

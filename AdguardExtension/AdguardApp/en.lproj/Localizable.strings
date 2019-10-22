@@ -513,3 +513,6 @@
 
 /* Default DNS filter name */
 "default_dns_filter_name" = "DNS Filter";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";

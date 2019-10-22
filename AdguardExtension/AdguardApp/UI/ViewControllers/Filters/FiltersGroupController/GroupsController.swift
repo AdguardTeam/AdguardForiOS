@@ -34,7 +34,6 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
