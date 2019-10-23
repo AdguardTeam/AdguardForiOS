@@ -35,10 +35,22 @@ class DnsSettingsController : UITableViewController{
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
     
     // MARK: - view controller life cycle
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == wifiExceptionSegue {
+            if let controller = segue.destination as? ListOfRulesController {
+                let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
+                controller.model = model
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

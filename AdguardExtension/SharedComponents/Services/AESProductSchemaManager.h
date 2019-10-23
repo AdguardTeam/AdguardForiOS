@@ -18,17 +18,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class AESAntibanner;
+@protocol AESAntibannerProtocol;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESProductSchemaManager
-
 @interface AESProductSchemaManager  : NSObject
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-+ (void)upgradeWithAntibanner: (AESAntibanner*) antibanner;
++ (void)upgradeWithAntibanner: (id<AESAntibannerProtocol>) antibanner;
 + (void)install;
 
 /////////////////////////////////////////////////////////////////////
@@ -41,7 +40,7 @@
 
 @interface AESProductSchemaManager (protected)
 
-+ (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to;
++ (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to antibanner: (id<AESAntibannerProtocol>) antibanner;
 
 + (BOOL)onInstall;
 

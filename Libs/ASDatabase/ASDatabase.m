@@ -305,6 +305,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
     
+    UInt32 identifier = [self beginBackgroundTask];
+    
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
@@ -320,10 +322,13 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)rawExec:(void (^)(FMDatabase *db))block{
     
+    UInt32 identifier = [self beginBackgroundTask];
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
@@ -339,14 +344,20 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)queryDefaultDB:(void (^)(FMDatabase *db))block{
+    
+    UInt32 identifier = [self beginBackgroundTask];
     
     if (self.ready)
         [defaultDbQueue inDatabase:block];
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (BOOL)isolateQueue:(dispatch_queue_t)theQueue{
@@ -388,6 +399,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     
     return;
+}
+
+- (void)stop {
+    self.ready = NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -488,6 +503,19 @@ static void isolateQueueReleaseFunc(void *dQueue){
     }
     
     return YES;
+}
+
+- (UInt32) beginBackgroundTask {
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
+    return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+#endif
+    return 0;
+}
+
+- (void) endBackgroubdTaskWithId: (UInt32) identifier {
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
+    return [[UIApplication sharedApplication] endBackgroundTask:identifier];
+#endif
 }
 
 #pragma clang diagnostic pop

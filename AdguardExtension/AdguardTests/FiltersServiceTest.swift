@@ -11,10 +11,11 @@ class FiltersServiceTest: XCTestCase {
     
     func initService(groups:[(groupId: Int, enabled: Bool)], filters: [(filterId: Int, groupId: Int, enabled: Bool)])->FiltersService {
         let antibanner = AntibannerMock()
+        let antibannerController = AntibannerControllerMock(antibanner)
         let contentBlocker = ContentBlockerServiceMock()
         let configuration = ConfigurationServiceMock()
         
-        let service = FiltersService(antibanner: antibanner, configuration: configuration, contentBlocker: contentBlocker)
+        let service = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker)
         
         var groupMetas = [ASDFilterGroup]()
         

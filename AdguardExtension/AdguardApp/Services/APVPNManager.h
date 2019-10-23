@@ -178,6 +178,9 @@ this flag indicates that filtering of mobile data is on/off
 
 - (nonnull DnsServerInfo*) defaultServer;
 
+/**remove vpn configuration from system settings*/
+- (void)removeVpnConfiguration;
+
 @end
 
 /**

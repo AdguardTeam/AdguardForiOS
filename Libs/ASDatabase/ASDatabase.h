@@ -15,6 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_OSX
+#import <UIKit/UIKit.h>
+#endif
+
+
 #import <Foundation/Foundation.h>
 #import "vendors/fmdb/FMDB.h"
 
@@ -125,5 +133,8 @@
  @param resourcePath Path where is update scripts.
  */
 - (BOOL)updateDB:(FMDatabase *)db fromVersion:(NSString *)version toVersion:(NSString *)toVersion resourcePath:(NSString *)resourcePath;
+
+/** stop database working. Requests will no longer be executed */
+- (void) stop;
 
 @end

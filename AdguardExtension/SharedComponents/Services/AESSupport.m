@@ -22,7 +22,6 @@
 #import "ACommons/ACFiles.h"
 #import "AESharedResources.h"
 #import "NSData+GZIP.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "ABECRequest.h"
@@ -64,8 +63,8 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
-    SafariService *_safariService;
-    id<AEServiceProtocol> _aeService;
+    id<SafariServiceProtocol> _safariService;
+    id<AESAntibannerProtocol> _antibanner;
 }
 
 @end
@@ -81,13 +80,13 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithResources:(id)resources safariSevice:(id)safariService aeService:(id)aeService {
+- (id)initWithResources:(id)resources safariSevice:(id)safariService antibanner:(id<AESAntibannerProtocol>)antibanner {
     
     self = [super init];
     if (self) {
         _sharedResources = resources;
         _safariService = safariService;
-        _aeService = aeService;
+        _antibanner = antibanner;
     }
     
     return self;
@@ -179,8 +178,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = _aeService.antibanner;
-    NSArray* filterIDs = antibaner.activeFilterIDs;
+    NSArray* filterIDs = _antibanner.activeFilterIDs;
     
     for (NSNumber *filterId in filterIDs) {
         
@@ -266,7 +264,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nAEDefaultsSecurityContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSecurityContentBlockerRulesCount]];
         
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
-        NSArray *filters = [[_aeService antibanner] activeFilters];
+        NSArray *filters = [_antibanner activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
@@ -368,7 +366,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     
     NSMutableDictionary* datas = [NSMutableDictionary new];
     
-    NSDictionary* jsonDatas = [_safariService allBlockingContentRules];
+    NSDictionary* jsonDatas = [(SafariService*)_safariService allBlockingContentRules];
     [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSData* _Nonnull data, BOOL * _Nonnull stop) {
         NSString *filename = [key replace:@"json" to:@"zip"];
         datas[filename] = [data gzippedData];

@@ -24,7 +24,6 @@ protocol NewCustomFilterDetailsDelegate {
 
 class NewCustomFilterDetailsController : BottomAlertController {
     
-    let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     var filter : AASCustomFilterParserResult?

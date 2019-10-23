@@ -22,8 +22,6 @@
 #import "ACommons/ACNetwork.h"
 #import "ADomain/ADomain.h"
 #import "AppDelegate.h"
-#import "ASDatabase/ASDatabase.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 
@@ -70,10 +68,10 @@ typedef enum : NSUInteger {
     AEDownloadsCompletionBlock _downloadCompletion;
     NSArray *_updatedFilters;
     AESharedResources *_resources;
-    AEService * _aeService;
+    id<AntibannerControllerProtocol> _antibannerController;
+    id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
-    ASDatabase* _asDataBase;
     
     BOOL _activateWithOpenUrl;
     
@@ -93,6 +91,14 @@ typedef enum : NSUInteger {
 
 - (instancetype)init {
     self = [super init];
+    
+    [StartupService start];
+    _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
+    _antibannerController = [ServiceLocator.shared getSetviceWithTypeName:@"AntibannerControllerProtocol"];
+    _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+    _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
+    _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
+    
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
     return self;
@@ -103,14 +109,6 @@ typedef enum : NSUInteger {
     @autoreleasepool {
         
         //------------- Preparing for start application. Stage 1. -----------------
-        
-        [StartupService start];
-        _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
-        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
-        _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
-        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseService"];
-        _asDataBase = [ServiceLocator.shared getSetviceWithTypeName:@"ASDatabase"];
-        
         
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
@@ -130,31 +128,11 @@ typedef enum : NSUInteger {
         _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
-        // Init database
-        [_asDataBase initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
-        
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
-            [_aeService onReady:^{
-                [_purchaseService checkPremiumStatusChanged];
-            }];
-        }
-        
-        if ([_aeService firstRunInProgress]) {
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager install];
-                
-                [_purchaseService checkLicenseStatus];
-            }];
-        }
-        else{
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
-            }];
+            [_purchaseService checkPremiumStatusChanged];
         }
         
         return succeeded;
@@ -178,27 +156,8 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
     
-    //------------ Checking DB status -----------------------------
-    if (_asDataBase.error) {
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
-        //        [self dbFailure];
-    }
-    else if (!_asDataBase.ready){
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
-        [_asDataBase addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
-    }
-    //--------------------- Start Services ---------------------------
-    else{
-        
-        [_aeService start];
-        DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
-    }
-    
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
-    DDLogInfo(@"(AppDelegate) Stage 2 completed.");
     
     return YES;
 }
@@ -254,9 +213,8 @@ typedef enum : NSUInteger {
     // If theme mode is System Default gets current style
     [self setAppInterfaceStyle];
     
-    [_aeService onReady:^{
-        
-        [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+    [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+        [antibanner repairUpdateStateWithCompletionBlock:^{
             
             if (_activateWithOpenUrl) {
                 _activateWithOpenUrl = NO;
@@ -264,7 +222,7 @@ typedef enum : NSUInteger {
                 return;
             }
             
-            if (_aeService.antibanner.updatesRightNow) {
+            if (antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
             }
@@ -308,11 +266,11 @@ typedef enum : NSUInteger {
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        [_aeService onReady:^{
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             
-            [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+            [antibanner repairUpdateStateWithCompletionBlock:^{
                 
-                if (_aeService.antibanner.updatesRightNow) {
+                if (antibanner.updatesRightNow) {
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
@@ -342,10 +300,9 @@ typedef enum : NSUInteger {
 
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
-        [_aeService onReady:^{
-
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             _downloadCompletion = completionHandler;
-            [[_aeService antibanner] repairUpdateStateForBackground];
+            [antibanner repairUpdateStateForBackground];
         }];
     }
     else{
@@ -359,7 +316,7 @@ typedef enum : NSUInteger {
     DDLogError(@"(AppDelegate) application Open URL.");
     
     _activateWithOpenUrl = YES;
- 
+    
     return [helper application:app open:url options:options];
 }
 
@@ -385,17 +342,19 @@ typedef enum : NSUInteger {
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
             
-            [[_aeService antibanner] beginTransaction];
+            __block BOOL result = NO;
+            
+            [_antibanner beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
-            BOOL result = [[_aeService antibanner] startUpdatingForced:fromUI interactive:interactive];
+            result = [_antibanner startUpdatingForced:fromUI interactive:interactive];
             
             if (! result) {
                 DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                [[_aeService antibanner] rollbackTransaction];
+                [_antibanner rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
             }
-
+            
             return result;
         }
         
@@ -406,28 +365,8 @@ typedef enum : NSUInteger {
     }
 }
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Observing notifications
-/////////////////////////////////////////////////////////////////////
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    // DB DELAYED READY
-    if ([object isEqual:_asDataBase]
-        && [keyPath isEqualToString:@"ready"]
-        && _asDataBase.ready) {
-        
-        [_asDataBase removeObserver:self forKeyPath:@"ready"];
-        
-        //--------------------- Start Services ---------------------------
-        [_aeService start];
-        DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
-        
-        return;
-    }
-    
-    // Default processing
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+- (void)resetAllSettings {
+    [helper resetAllSettings];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -443,8 +382,7 @@ typedef enum : NSUInteger {
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
             
             if (error) {
-                
-                [[_aeService antibanner] rollbackTransaction];
+                [_antibanner rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFailuredNotify];
@@ -463,8 +401,7 @@ typedef enum : NSUInteger {
                 // Success antibanner updated from backend
                 
                 [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                
-                [[_aeService antibanner] endTransaction];
+                [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFinishedNotify];
@@ -483,9 +420,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
         
-        if ([[_aeService antibanner] inTransaction]) {
+        if ([_antibanner inTransaction]) {
             
-            [[_aeService antibanner] rollbackTransaction];
+            [_antibanner rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
         }
         
@@ -500,10 +437,10 @@ typedef enum : NSUInteger {
         
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
             
-            if ([[_aeService antibanner] inTransaction]) {
+            if ([_antibanner inTransaction]) {
                 // Success antibanner updated from backend
                 [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [[_aeService antibanner] endTransaction];
+                [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
                 
                 [self updateFinishedNotify];
@@ -521,9 +458,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerFailuredUpdateNotification]) {
         
-        if ([[_aeService antibanner] inTransaction]) {
+        if ([_antibanner inTransaction]) {
             
-            [[_aeService antibanner] rollbackTransaction];
+            [_antibanner rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
         

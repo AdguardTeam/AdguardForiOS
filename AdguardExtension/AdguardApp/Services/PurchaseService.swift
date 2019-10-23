@@ -39,8 +39,14 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  In-app purchases are carried out directly in this service.
  Work with Adguard Licenses is delegated to LoginController
  */
+
 protocol PurchaseServiceProtocol {
     
+    /* star service. It request SKProducts  */
+    func start()
+    
+    /* request SKProducts. If SKProducts failed on start we must repeat this request  */
+    func startProductRequest()
    
     /**
      returns true if user has valid renewable subscription or valid adguard license
@@ -106,6 +112,9 @@ protocol PurchaseServiceProtocol {
      returns url for oauth authorization
      */
     func authUrlWithName(name: String)->URL?
+    
+    /** resets all login data */
+    func reset()
 }
 
 // MARK: - public constants -
@@ -288,6 +297,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 return
             }
         }
+    }
+    
+    func reset() {
+        loginService.reset()
     }
 
     // MARK: - public methods
