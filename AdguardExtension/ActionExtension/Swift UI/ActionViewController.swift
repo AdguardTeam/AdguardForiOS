@@ -74,7 +74,7 @@ class ActionViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
-        let antibanner = AESAntibanner()
+        let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
         self.antibannerController = AntibannerController(antibanner: antibanner)
         contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
         support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
