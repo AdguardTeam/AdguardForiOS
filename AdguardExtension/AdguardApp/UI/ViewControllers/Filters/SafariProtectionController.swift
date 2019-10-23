@@ -96,6 +96,7 @@ class SafariProtectionController: UITableViewController {
         
         let protectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
         protectionStateSwitch.isOn = protectionEnabled ?? true
+        safariProtectionStateLabel.text = protectionEnabled ?? true ? String.localizedString("on_state") : String.localizedString("off_state")
         
         updateFilters()
     }
@@ -131,6 +132,8 @@ class SafariProtectionController: UITableViewController {
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
         resources.sharedDefaults().set(enabled, forKey: SafariProtectionState)
+        safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        
         contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
             if error != nil {
                 DDLogError("Safari protection was switched to \(enabled) state with error : \(String(describing: error?.localizedDescription))")

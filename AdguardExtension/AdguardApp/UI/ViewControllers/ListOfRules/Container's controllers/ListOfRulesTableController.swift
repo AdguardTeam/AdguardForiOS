@@ -76,6 +76,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     @IBAction func listOfRulesStateAction(_ sender: UISwitch) {
         model?.enabled = sender.isOn
+        tableView.reloadRows(at: [IndexPath(row: 0, section: enableListOfRulesSection)], with: .fade)
     }
     
     @IBAction func changeRuleStateAction(_ sender: UIButton) {
@@ -265,7 +266,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
                 cell.ruleNameLabel.attributedText = rule.attributedString
             } else {
                 cell.ruleNameLabel.attributedText = nil
-                cell.ruleName = rule.rule
+                cell.rule = rule
+                cell.type = model?.type
             }
             
             cell.ruleState = rule.enabled

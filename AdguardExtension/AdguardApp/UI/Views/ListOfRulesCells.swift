@@ -159,9 +159,17 @@ class NormalRuleCell: UITableViewCell {
         }
     }
     
-    var ruleName: String? {
+    var rule: RuleInfo? {
         didSet{
-            ruleNameLabel.text = ruleName
+            ruleNameLabel.text = rule?.rule
+        }
+    }
+    
+    var type: RulesType? {
+        didSet{
+            if type == .safariUserfilter || type == .systemBlacklist {
+                ruleNameLabel.textColor = rule?.textColor
+            }
         }
     }
     
