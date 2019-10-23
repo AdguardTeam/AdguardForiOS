@@ -48,6 +48,8 @@ NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNot
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
 NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
+NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
+NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 

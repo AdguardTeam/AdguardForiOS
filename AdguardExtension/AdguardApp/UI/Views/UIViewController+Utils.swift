@@ -19,28 +19,6 @@
 import Foundation
 
 extension UIViewController {
-    func showLoading() {
-        let alert = UIAlertController(title: nil, message: ACLocalizedString("loading_message", nil), preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func removeLoading(completion: (()->Void)? ) {
-        DispatchQueue.main.async {
-            if let vc = self.presentedViewController, vc is UIAlertController {
-                vc.dismiss(animated: false, completion: completion)
-            }
-            else {
-                completion?()
-            }
-        }
-    }
     
     func setupBackButton() {
         let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
@@ -51,5 +29,17 @@ extension UIViewController {
         navigationItem.leftItemsSupplementBackButton = true
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: nil, action: nil)
+    }
+    
+    func addStatusView(){
+        let statusViewHeight: CGFloat = 16.0
+        let statusViewWidth = self.view.frame.width
+        let statusViewY = self.view.frame.height - statusViewHeight
+        
+        let frame = CGRect(x: 0, y: statusViewY, width: statusViewWidth, height: statusViewHeight)
+        
+        let statusView = StatusView(frame: frame)
+        
+        view.addSubview(statusView)
     }
 }

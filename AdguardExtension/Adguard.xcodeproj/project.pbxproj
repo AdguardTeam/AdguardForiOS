@@ -583,6 +583,7 @@
 		7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */; };
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
+		7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D790236056ED00E7ABA4 /* StatusView.swift */; };
 		7E6BE2A6233A77D400389EDD /* Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D020B28821FA02170075BB8D /* Mobile.framework */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7EAA63972341E1200040F3A0 /* ListOfRulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63962341E1200040F3A0 /* ListOfRulesModel.swift */; };
@@ -1743,6 +1744,7 @@
 		7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
+		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
 		7EAA63962341E1200040F3A0 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
@@ -3428,6 +3430,7 @@
 				65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */,
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
+				7E59D790236056ED00E7ABA4 /* StatusView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5162,6 +5165,7 @@
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,
 				7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */,
+				7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */,
 				7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */,
 				D04CD26422007433000B0331 /* DnsRequestDetailsController.swift in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,

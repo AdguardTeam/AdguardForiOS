@@ -83,6 +83,8 @@ class MainController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addStatusView()
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -192,6 +194,9 @@ class MainController: UIViewController {
     }
     
     @IBAction func updateFiltersAction(_ sender: Any) {
+        
+        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
+        
         viewModel?.updateFilters(start: { [weak self] in
             self?.updateStarted()
             self?.filtersVersionLabel.text = ACLocalizedString("update_filter_start_message", nil)
@@ -223,6 +228,8 @@ class MainController: UIViewController {
     private func updateEnded(){
         self.updateFiltersGestureRecognizer.isEnabled = true
         refreshIcon.rotateImage(isNedeed: false)
+        
+        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
     }
     
     private func updateUI() {
