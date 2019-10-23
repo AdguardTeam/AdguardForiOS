@@ -42,16 +42,6 @@ class DnsSettingsController : UITableViewController{
     
     // MARK: - view controller life cycle
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == wifiExceptionSegue {
-            if let controller = segue.destination as? ListOfRulesController {
-                let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
-                controller.model = model
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

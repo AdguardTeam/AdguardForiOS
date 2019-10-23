@@ -28,7 +28,7 @@ class RequestsBlockingController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibanner = ServiceLocator.shared.getService()!
+    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
@@ -40,12 +40,12 @@ class RequestsBlockingController: UITableViewController {
         let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .dnsBlackList, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFilterService)
+                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme)
                 controller.model = model
             }
         } else if segue.identifier == dnsWhitelistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model = ListOfRulesModel(listOfRulesType: .dnsWhiteList, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFilterService)
+                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme)
                 controller.model = model
             }
         }
