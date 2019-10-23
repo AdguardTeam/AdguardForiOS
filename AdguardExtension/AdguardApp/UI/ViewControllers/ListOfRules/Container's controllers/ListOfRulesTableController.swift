@@ -18,8 +18,11 @@
 
 import UIKit
 
-class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, UIViewControllerTransitioningDelegate, RuleDetailsControllerDelegate {
+class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, UIViewControllerTransitioningDelegate, RuleDetailsControllerDelegate, UISearchBarDelegate {
 
+    @IBOutlet var searchView: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     /* Services */
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -38,13 +41,24 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     var model: ListOfRulesModelProtocol? = nil
     
-    var isEditingg: Bool = false {
-        didSet{
-            if !isEditingg {
-                model?.rules.forEach({ $0.selected = false })
-            }
-            DispatchQueue.main.async {[weak self] in
-                self?.tableView.reloadData()
+    var state: ControllerState {
+        get {
+            return model?.state ?? .normal
+        }
+        set {
+            model?.rules.forEach({ $0.selected = false })
+            
+            if newValue == .searching && state == .normal{
+                model?.state = newValue
+                deleteSections()
+            } else if newValue == .normal && state == .searching {
+                model?.state = newValue
+                insertSections()
+            } else {
+                model?.state = newValue
+                DispatchQueue.main.async {[weak self] in
+                    self?.tableView.reloadData()
+                }
             }
         }
     }
@@ -68,21 +82,30 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         guard let rule = model?.rules[sender.tag] else { return }
         rule.enabled = !rule.enabled
         
-        let indexPath = IndexPath(row: sender.tag, section: rulesSection)
+        let section = state == .searching ? 0 : rulesSection
+        
+        let indexPath = IndexPath(row: sender.tag, section: section)
         tableView.reloadRows(at: [indexPath], with: .none)
     }
     
-
+    // MARK: - Searchbar delegate methods
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        model?.searchString = searchText
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return isEditingg ? 1 : 3
+        return state == .normal ? 3 : 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isEditingg {
-            return model?.rules.count ?? 0
-        } else {
+        if state == .normal {
             switch section {
             case enableListOfRulesSection:
                 return 1
@@ -93,13 +116,13 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             default:
                 return 0
             }
+        } else {
+            return model?.rules.count ?? 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isEditingg {
-            return setupSelectedRuleCell(row: indexPath.row)
-        } else {
+        if state == .normal {
             switch indexPath.section {
             case enableListOfRulesSection:
                 return setupEnableListOfRulesCell()
@@ -110,13 +133,16 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             default:
                 return UITableViewCell()
             }
+        } else if state == .searching {
+            return setupNormalRuleCell(row: indexPath.row)
+        } else {
+            return setupSelectedRuleCell(row: indexPath.row)
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isEditingg{
-            selectRule(indexPath: indexPath)
-        } else {
+
+        if state == .normal {
             switch indexPath.section {
             case enableListOfRulesSection:
                 break
@@ -127,14 +153,21 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             default:
                 break
             }
+        } else if state == .editing {
+            selectRule(indexPath: indexPath)
+        } else {
+            showRuleDetails(indexPath: indexPath)
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - ListOfRulesModelDelegate method
     
     func listOfRulesChanged() {
-        tableView.reloadData()
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     // MARK: - AddRuleController delegate
     
@@ -176,9 +209,15 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         model?.changeRule(rule: rule, newText: newText, errorHandler: {[weak self] (error) in
             guard let sSelf = self else { return }
             ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: error)
-        }, completionHandler: {
-            DispatchQueue.main.async {[weak self] in
-                self?.tableView.reloadData()
+        }, completionHandler: {[weak self] in
+            guard let sSelf = self else { return }
+            DispatchQueue.main.async {
+                if sSelf.state == .searching {
+                    let string = sSelf.model?.searchString
+                    sSelf.model?.searchString = string
+                } else {
+                    sSelf.tableView.reloadData()
+                }
             }
         })
     }
@@ -189,6 +228,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private func updateTheme(){
         theme.setupTable(tableView)
         tableView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
+        theme.setupSearchBar(searchBar)
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
@@ -217,10 +258,17 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     }
     
     private func setupNormalRuleCell(row: Int) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ruleReuseId) as? NormalRuleCell{
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ruleReuseId) as? NormalRuleCell, let rule = model?.rules[row]{
             cell.theme = theme
-            cell.ruleName = model?.rules[row].rule
-            cell.ruleState = model?.rules[row].enabled
+            
+            if state == .searching && (rule.attributedString != nil) {
+                cell.ruleNameLabel.attributedText = rule.attributedString
+            } else {
+                cell.ruleNameLabel.attributedText = nil
+                cell.ruleName = rule.rule
+            }
+            
+            cell.ruleState = rule.enabled
             cell.changeRuleStateButton.tag = row
             cell.separatorView.isHidden = row + 1 == model?.rules.count
             return cell
@@ -241,10 +289,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     /* Calls AddRuleController */
     private func addRule(){
-//        searchBar.text = ""
-//        model?.searchString = nil
-        
-//        updateUI()
         
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
         controller.modalPresentationStyle = .custom
@@ -273,5 +317,36 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         guard let rule = model?.rules[indexPath.row] else { return }
         rule.selected = !rule.selected
         tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
+    private func deleteSections(){
+        searchView.alpha = 0.0
+        searchBar.alpha = 0.0
+        tableView.tableHeaderView = searchView
+        
+        DispatchQueue.main.async {[weak self] in
+            UIView.animate(withDuration: 0.5){
+                self?.tableView.deleteSections([0,1], with: .top)
+                self?.searchView.alpha = 1.0
+                self?.searchBar.alpha = 1.0
+                self?.searchBar.becomeFirstResponder()
+            }
+        }
+    }
+    
+    private func insertSections(){
+        DispatchQueue.main.async {[weak self] in
+
+            self?.searchBar.resignFirstResponder()
+            self?.searchBar.text = nil
+            self?.tableView.tableHeaderView = nil
+            
+            UIView.animate(withDuration: 0.5){
+                self?.tableView.beginUpdates()
+                self?.tableView.reloadSections([0], with: .right)
+                self?.tableView.insertSections([0,1], with: .right)
+                self?.tableView.endUpdates()
+            }
+        }
     }
 }

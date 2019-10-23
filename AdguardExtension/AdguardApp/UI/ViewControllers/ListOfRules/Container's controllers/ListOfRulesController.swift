@@ -30,6 +30,10 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var rightButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet var searchButton: UIBarButtonItem!
+    @IBOutlet var cancelButton: UIBarButtonItem!
+    
+    var model: ListOfRulesModelProtocol? = nil
     
     /* Services */
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -44,16 +48,18 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     private var tableController: ListOfRulesTableController?
     private var textViewController: EditingUserFilterController?
     private var keyboardMover: KeyboardMover?
+
+    private var state: ControllerState {
+        get {
+            return model?.state ?? .normal
+        }
+        set {
+            tableController?.state = newValue
     
-    var model: ListOfRulesModelProtocol? = nil
-    
-    private var isEditingg: Bool = false {
-        didSet {
-            if model?.type == .safariUserfilter {
+            if model?.type == .safariUserfilter  {
                 changeScreen()
             }
             changeState()
-            tableController?.isEditingg = isEditingg
         }
     }
     
@@ -87,6 +93,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
         
         title = model?.title
+        navigationItem.rightBarButtonItems = [searchButton]
         
         changeRightButtton()
         changeMiddleButton()
@@ -101,11 +108,17 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     // MARK: - Actions
     
     @IBAction func rightButtonAction(_ sender: UIButton) {
-        isEditingg = !isEditingg
+        if state == .normal {
+            state = .editing
+            navigationItem.rightBarButtonItems = []
+        } else {
+            state = .normal
+            navigationItem.rightBarButtonItems = [searchButton]
+        }
     }
     
     @IBAction func middleButtonAction(_ sender: UIButton) {
-        if isEditingg{
+        if state == .editing {
             if model?.type == .safariUserfilter{
                 saveAction()
             } else {
@@ -117,7 +130,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     }
     
     @IBAction func leftButtonAction(_ sender: UIButton) {
-        if isEditingg{
+        if state == .editing {
             if model?.type == .safariUserfilter{
                 clearAction()
             } else {
@@ -126,6 +139,20 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         } else {
             exportAction(sender: sender)
         }
+    }
+    
+    @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
+        navigationItem.setHidesBackButton(true, animated:true)
+        navigationItem.rightBarButtonItems = [cancelButton]
+        
+        state = .searching
+    }
+    
+    @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
+        navigationItem.setHidesBackButton(false, animated:true)
+        navigationItem.rightBarButtonItems = [searchButton]
+        
+        state = .normal
     }
     
     // MARK: - Private methods -
@@ -143,7 +170,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     // MARK: - Change main screen
     
     private func changeScreen(){
-        if isEditingg {
+        if state == .editing  {
             textViewController?.textView.text = model?.rules.map { $0.rule }.joined(separator: "\n")
             textViewController?.helperLabel.isHidden = !(textViewController?.textView.text == "")
             showSafariUserFilterScreen()
@@ -166,7 +193,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     // MARK: - Change buttons titles, colors and actions
     
     private func changeLeftButton(){
-        if isEditingg {
+        if state == .editing {
             leftButton.setTitle(model?.leftButtonTitle, for: .normal)
             leftButton.setTitleColor(theme.errorRedColor, for: .normal)
         } else {
@@ -176,7 +203,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     }
     
     private func changeMiddleButton(){
-        if isEditingg {
+        if state == .editing {
             middleButton.setTitle(model?.middleButtonTitle, for: .normal)
             middleButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         } else {
@@ -186,7 +213,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     }
     
     private func changeRightButtton(){
-        if isEditingg {
+        if state == .editing {
             rightButton.setTitle(ACLocalizedString("common_action_cancel", nil), for: .normal)
             rightButton.setTitleColor(theme.errorRedColor, for: .normal)
         } else {
@@ -202,6 +229,14 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     }
     
     private func changeState(){
+        
+        if state == .searching {
+            bottomBar.isHidden = true
+            return
+        } else {
+            bottomBar.isHidden = false
+        }
+        
         leftButton.alpha = 0.0
         middleButton.alpha = 0.0
         rightButton.alpha = 0.0
@@ -243,7 +278,9 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             guard let sSelf = self else { return }
             ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: error)
         })
-        isEditingg = false
+        
+        navigationItem.rightBarButtonItems = [searchButton]
+        state = .normal
     }
     
     private func deleteAction(){

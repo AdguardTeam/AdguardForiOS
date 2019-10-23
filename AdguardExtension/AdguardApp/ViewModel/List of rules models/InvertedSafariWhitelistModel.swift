@@ -21,16 +21,30 @@ import Foundation
 class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Variables
+    
+    /* State of model */
+    var state: ControllerState = .normal {
+        didSet {
+            allRules.forEach({ $0.attributedString = nil })
+            if state == .searching {
+                searchRules = allRules
+            }
+        }
+    }
+    
     weak var delegate: ListOfRulesModelDelegate?
     
     var rules: [RuleInfo] {
         get {
-            return (searchString == nil || searchString!.count == 0) ?
-            allRules : searchRules
+            return (state == .searching) ? searchRules : allRules
         }
     }
     
-    var searchString: String?
+    var searchString: String? {
+        didSet {
+            searchRule()
+        }
+    }
     
     var type: RulesType = .invertedSafariWhitelist
     
@@ -181,7 +195,10 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     func delete(rule: RuleInfo, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
         guard let index = allRules.firstIndex(of: rule) else { return }
-        
+        if let indexWhileSearching = searchRules.firstIndex(of: rule){
+            searchRules.remove(at: indexWhileSearching)
+        }
+
         deleteInvertedSafariWhitelistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
@@ -353,5 +370,39 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
+    }
+    
+    private func searchRule(){
+        searchRules = []
+        allRules.forEach({ $0.attributedString = nil })
+        
+        if searchString == nil || (searchString?.isEmpty ?? true) {
+            searchRules = allRules
+            delegate?.listOfRulesChanged()
+            return
+        }
+        
+        guard let components = searchString?.lowercased().split(separator: " ") else { return }
+        let searchStrings = components.map({ String($0) })
+        
+        for rule in allRules {
+            if checkRule(rule: rule, components: components) {
+                rule.attributedString = rule.rule.highlight(search: searchStrings)
+                searchRules.append(rule)
+            }
+        }
+        
+        delegate?.listOfRulesChanged()
+    }
+    
+    private func checkRule(rule: RuleInfo, components: [Substring]) -> Bool {
+        let name = rule.rule
+        for component in components {
+            let range = name.range(of: component, options: .caseInsensitive)
+            if range != nil {
+                return true
+            }
+        }
+        return false
     }
 }

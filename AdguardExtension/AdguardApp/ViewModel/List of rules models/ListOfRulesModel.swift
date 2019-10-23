@@ -22,11 +22,19 @@ enum RulesType{
     case safariWhitelist, invertedSafariWhitelist, systemWhitelist, systemBlacklist, safariUserfilter, wifiExceptions
 }
 
+enum ControllerState {
+    case normal, editing, searching
+}
+
 protocol ListOfRulesModelDelegate: class{
     func listOfRulesChanged()
 }
 
 protocol ListOfRulesModelProtocol {
+    
+    /* State of model */
+    var state: ControllerState { get set }
+    
     /* Delegate, to be notified about rules changes */
     var delegate: ListOfRulesModelDelegate? { get set }
     

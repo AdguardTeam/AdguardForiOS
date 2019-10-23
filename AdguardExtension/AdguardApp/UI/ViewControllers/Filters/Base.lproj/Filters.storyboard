@@ -72,6 +72,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
                                                 <constraint firstAttribute="bottom" secondItem="Hr4-Zd-dnG" secondAttribute="bottom" id="OKH-R2-ihh"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
+                                                <constraint firstItem="T8x-Ho-7mV" firstAttribute="leading" secondItem="8zX-PY-5pt" secondAttribute="trailing" constant="13" id="RQJ-1C-f2x"/>
                                                 <constraint firstItem="T8x-Ho-7mV" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="18" id="YBD-y2-G2K"/>
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="mfl-rt-Doa" secondAttribute="trailing" constant="16" id="hJN-AN-Y5H"/>
                                                 <constraint firstAttribute="trailing" secondItem="Hr4-Zd-dnG" secondAttribute="trailing" id="kgR-jJ-SJo"/>
@@ -1633,7 +1634,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="u0d-JL-uIG"/>
-        <segue reference="3B2-aA-sGN"/>
+        <segue reference="6Ap-Zj-DX8"/>
+        <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
 </document>

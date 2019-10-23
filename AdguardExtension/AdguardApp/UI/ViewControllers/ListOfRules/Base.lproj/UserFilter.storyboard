@@ -110,14 +110,26 @@
                         <outlet property="bottomBar" destination="5hm-p5-6SQ" id="IRo-g6-OJb"/>
                         <outlet property="bottomBarSeparator" destination="E7u-XK-bdb" id="iba-0w-f0q"/>
                         <outlet property="bottomConstraint" destination="f1n-cF-R7R" id="OgO-dl-uRb"/>
+                        <outlet property="cancelButton" destination="xY2-X9-IlM" id="1jR-PB-vE4"/>
                         <outlet property="leftButton" destination="hDf-xU-s8J" id="uc6-fZ-s2g"/>
                         <outlet property="listOfRulesContainer" destination="JST-ig-0lQ" id="T1w-Dq-Hns"/>
                         <outlet property="middleButton" destination="hra-ph-PFq" id="CYU-GW-cff"/>
                         <outlet property="rightButton" destination="HFf-Yp-hjB" id="HKi-hy-FBm"/>
                         <outlet property="rightButtonWidth" destination="iJx-rG-Ibs" id="rbf-Tc-Xf3"/>
+                        <outlet property="searchButton" destination="RZ2-7G-zqH" id="tcv-Fq-Gks"/>
                         <outlet property="tableViewContainer" destination="2Df-iK-5pG" id="E3e-QF-2I9"/>
                     </connections>
                 </viewController>
+                <barButtonItem style="plain" systemItem="search" id="RZ2-7G-zqH" userLabel="search button">
+                    <connections>
+                        <action selector="searchButtonAction:" destination="8bh-Q8-Ndu" id="xYi-dr-53U"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="cancel" id="xY2-X9-IlM" userLabel="cancel button">
+                    <connections>
+                        <action selector="cancelButtonAction:" destination="8bh-Q8-Ndu" id="cbH-fy-9cV"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SvI-Zp-cZu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-251" y="-41"/>
@@ -337,6 +349,7 @@
                                         <constraint firstItem="EJx-7k-odt" firstAttribute="leading" secondItem="48Q-t1-gm1" secondAttribute="trailing" constant="16" id="GBF-f1-MtG"/>
                                         <constraint firstAttribute="bottom" secondItem="L90-6M-LE5" secondAttribute="bottom" id="NwH-8X-paO"/>
                                         <constraint firstItem="EJx-7k-odt" firstAttribute="top" secondItem="rUH-5t-kVC" secondAttribute="top" constant="16" id="ig2-98-nxq"/>
+                                        <constraint firstAttribute="trailing" secondItem="EJx-7k-odt" secondAttribute="trailing" constant="24" id="mkr-6b-i8R"/>
                                         <constraint firstAttribute="bottom" secondItem="EJx-7k-odt" secondAttribute="bottom" constant="16" id="rZS-Os-AYF"/>
                                         <constraint firstItem="48Q-t1-gm1" firstAttribute="centerY" secondItem="rUH-5t-kVC" secondAttribute="centerY" id="v4S-vj-UbB"/>
                                         <constraint firstItem="L90-6M-LE5" firstAttribute="leading" secondItem="rUH-5t-kVC" secondAttribute="leading" id="zkW-xP-caR"/>
@@ -354,7 +367,27 @@
                             <outlet property="delegate" destination="Ety-nu-n9X" id="b3u-I8-omJ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="W8i-mx-H2u" id="SEz-lT-rDv"/>
+                        <outlet property="searchView" destination="IGf-nj-pjM" id="lrw-Vl-o13"/>
+                    </connections>
                 </tableViewController>
+                <view contentMode="scaleToFill" id="IGf-nj-pjM" userLabel="search view">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8i-mx-H2u">
+                            <rect key="frame" x="20" y="0.0" width="200" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <outlet property="delegate" destination="Ety-nu-n9X" id="JJf-nj-2MK"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="xIz-89-oy9"/>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40A-3g-MYS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="686" y="-338"/>
