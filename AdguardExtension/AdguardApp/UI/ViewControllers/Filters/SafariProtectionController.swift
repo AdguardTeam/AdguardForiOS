@@ -48,6 +48,8 @@ class SafariProtectionController: UITableViewController {
     private let whiteListSegue = "whiteListSegue"
     private let blackListSegue = "blackListSegue"
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - view controler life cycle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -93,7 +95,7 @@ class SafariProtectionController: UITableViewController {
             updateFilters()
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

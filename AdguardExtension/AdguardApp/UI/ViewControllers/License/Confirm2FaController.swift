@@ -40,13 +40,14 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     // MARK: - private properties
     
-    private var notificationObserver: Any?
+    private var purchaseObserver: NotificationToken?
+    private var configurationObserver: NotificationToken?
  
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
         
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                                       object: nil, queue: OperationQueue.main)
         { [weak self](notification) in
             if let info = notification.userInfo {
@@ -57,7 +58,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         updateUI()
         updateTheme()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

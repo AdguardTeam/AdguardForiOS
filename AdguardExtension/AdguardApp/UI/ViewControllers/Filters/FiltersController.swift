@@ -64,7 +64,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     @IBOutlet weak var headerLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    
+    private var notificationToken: NotificationToken?
     
     // MARK: - ViewController life cycle
     
@@ -74,7 +74,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 118.0
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

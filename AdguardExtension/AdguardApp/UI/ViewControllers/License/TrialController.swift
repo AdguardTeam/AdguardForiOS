@@ -34,6 +34,7 @@ class TrialController: UIViewController {
     private let ipadLandScape = UIImage(named: "trial-ipad-landscape") ?? UIImage()
     
     private var reach = Reachability.forInternetConnection()
+    private var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,7 +169,7 @@ class TrialController: UIViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) {[weak self] (notification) in
             guard let sSelf = self else { return }
             sSelf.displayProduct()
         }

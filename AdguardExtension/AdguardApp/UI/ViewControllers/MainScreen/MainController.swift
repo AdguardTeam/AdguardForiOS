@@ -79,11 +79,13 @@ class MainController: UIViewController {
     private var darkThemeLogoImage = UIImage(named: "ahduard-header-disabled-dark") ?? UIImage()
     private var lightThemeLogoImage = UIImage(named: "adguard-header-disabled") ?? UIImage()
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

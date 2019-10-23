@@ -39,7 +39,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         self.safariService = safariService
         super.init()
         
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        notificationObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                                       object: nil, queue: nil)
         {
             [weak self](notification) in
