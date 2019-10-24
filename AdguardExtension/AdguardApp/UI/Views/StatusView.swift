@@ -24,32 +24,24 @@ class StatusView: UIView {
         super.init(frame: frame)
         setupView()
         setupLabel()
-        addStatusViewNotification()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
         setupLabel()
-        addStatusViewNotification()
+    }
+    
+    var text: String? {
+        didSet {
+            textLabel.text = text
+        }
     }
     
     private let textLabel: UILabel = UILabel()
     
-    private func addStatusViewNotification(){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.ShowStatusView, object: nil, queue: nil) {[weak self] (notification) in
-            guard let sSelf = self else { return }
-            sSelf.show()
-        }
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.HideStatusView, object: nil, queue: nil) {[weak self] (notification) in
-            guard let sSelf = self else { return }
-            sSelf.hide()
-        }
-    }
-    
     private func setupView(){
-        frame.size.height = 0.0
+        frame.size.height = 16.0
         backgroundColor = UIColor(hexString: "#d8d8d8")
     }
     
@@ -58,26 +50,9 @@ class StatusView: UIView {
         textLabel.textColor = UIColor(hexString: "#4d4d4d")
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 1
-        
-        // CHANGE THEN
-        textLabel.text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        
+    
         addSubview(textLabel)
         
-        textLabel.frame = CGRect(x: 0.0, y: 0.0, width: frame.width, height: frame.height)
-    }
-    
-    private func show(){
-        UIView.animate(withDuration: 0.5){ [weak self] in
-            self?.frame.size.height = 16.0
-            self?.textLabel.frame.size.height = 16.0
-        }
-    }
-    
-    private func hide(){
-        UIView.animate(withDuration: 0.5){ [weak self] in
-            self?.frame.size.height = 0.0
-            self?.textLabel.frame.size.height = 0.0
-        }
+        textLabel.frame = CGRect(x: 0.0, y: 0.0, width: frame.width, height: 16.0)
     }
 }
