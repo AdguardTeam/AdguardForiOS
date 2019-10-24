@@ -42,6 +42,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
+    private var notificationToken: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +51,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
         updateTheme()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
     }
@@ -143,6 +145,8 @@ class FilterDetailsTableCotroller : UITableViewController {
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - constants
     
     // rows
@@ -174,7 +178,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         
         updateTheme()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
     }

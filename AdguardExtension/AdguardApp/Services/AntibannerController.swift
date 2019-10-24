@@ -146,11 +146,11 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     }
     
     private func setupAntibannerObserver() {
-        readyObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerReady, object: nil, queue: nil) { [weak self] (notification) in
+        readyObservation = NotificationCenter.default.observe(name: Notification.Name.ASAntibannerReady, object: nil, queue: nil) { [weak self] (notification) in
             self?.checkForServiceReady(readyFlag: .databaseReady)
         }
         
-        installedObservation = NotificationCenter.default.addObserver(forName: Notification.Name.ASAntibannerInstalled, object: nil, queue: nil) { [weak self] (notification) in
+        installedObservation = NotificationCenter.default.observe(name: Notification.Name.ASAntibannerInstalled, object: nil, queue: nil) { [weak self] (notification) in
             self?.checkForServiceReady(readyFlag: .installed)
         }
     }

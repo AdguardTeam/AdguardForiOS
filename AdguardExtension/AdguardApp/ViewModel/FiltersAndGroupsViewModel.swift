@@ -102,6 +102,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     private var callbacksByKey: [ String : ()->() ] = [:]
     var searchChangedCallback: (() -> Void)?
     
+    var notificationToken: NotificationToken?
+    
     // MARK: - initializers
     
     init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService) {
@@ -110,7 +112,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         super.init()
         
         updateAllGroups()
-        NotificationCenter.default.addObserver(forName: self.filtersService.updateNotification, object: nil, queue: nil) {
+        notificationToken = NotificationCenter.default.observe(name: self.filtersService.updateNotification, object: nil, queue: nil) {
             [weak self] (notification) in
             self?.groupsObserver?(0)
         }

@@ -42,7 +42,8 @@ class AdvancedSettingsController: UITableViewController {
     private let showProgressRow = 1
     private let restartProtectionRow = 2
     
-    private var proObservation: NSKeyValueObservation?
+    private var themeObservation: NotificationToken?
+    private var vpnObservation: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +54,11 @@ class AdvancedSettingsController: UITableViewController {
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         restartProtectionSwitch.isOn = vpnManager.restartByReachability
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+        vpnObservation = NotificationCenter.default.observe(name: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
             [weak self] (notification) in
             guard let sSelf = self else { return }
             DispatchQueue.main.async{
