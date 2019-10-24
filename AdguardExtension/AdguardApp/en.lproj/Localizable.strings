@@ -516,3 +516,6 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Content blockers are updating ...";

@@ -117,9 +117,15 @@ class SafariService: NSObject, SafariServiceProtocol {
                 let group = DispatchGroup()
                 var resultError: Error?
                 
+                // Posts notification to show status bar with text
+                // Remove then
+                // JUST FOR TEST
+                NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_content_blockers", nil)])
+                
                 for blocker in ContentBlockerType.allCases {
                     
                     group.enter()
+                    
                     // Notify that filter began updating
                     NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
                     
@@ -135,8 +141,14 @@ class SafariService: NSObject, SafariServiceProtocol {
                         NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                         group.leave()
                     })
-                    
                     group.wait()
+                }
+                
+                // Posts notification to hide status bar with text
+                // Remove then
+                // JUST FOR TEST
+                DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
+                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
                 
                 completion(resultError)

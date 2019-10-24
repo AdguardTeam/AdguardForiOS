@@ -30,16 +30,4 @@ extension UIViewController {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: nil, action: nil)
     }
-    
-    func addStatusView(){
-        let statusViewHeight: CGFloat = 16.0
-        let statusViewWidth = self.view.frame.width
-        let statusViewY = self.view.frame.height - statusViewHeight
-        
-        let frame = CGRect(x: 0, y: statusViewY, width: statusViewWidth, height: statusViewHeight)
-        
-        let statusView = StatusView(frame: frame)
-        
-        view.addSubview(statusView)
-    }
 }

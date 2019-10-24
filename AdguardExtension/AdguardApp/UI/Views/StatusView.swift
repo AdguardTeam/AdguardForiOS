@@ -53,6 +53,11 @@ class StatusView: UIView {
     
         addSubview(textLabel)
         
-        textLabel.frame = CGRect(x: 0.0, y: 0.0, width: frame.width, height: 16.0)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        textLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        textLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        textLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+        
     }
 }

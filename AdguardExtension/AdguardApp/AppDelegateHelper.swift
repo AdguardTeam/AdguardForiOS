@@ -39,12 +39,15 @@ class AppDelegateHelper: NSObject {
     lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
     lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
     
-    private var showStatusBarNotification: NSObjectProtocol?
-    private var hideStatusBarNotification: NSObjectProtocol?
-    private var orientationChangeNotification: NSObjectProtocol?
+    private var showStatusBarNotification: NotificationToken?
+    private var hideStatusBarNotification: NotificationToken?
+    private var orientationChangeNotification: NotificationToken?
+    private var keyboardChangeNotification: NotificationToken?
     
     private var statusBarWindow: UIWindow?
     private var bottomSafeAreaInset: CGFloat = 0.0
+    private var statusBarIsShown = false
+    private let statusView = StatusView()
     
     var purchaseObservation: Any?
     
@@ -89,17 +92,42 @@ class AppDelegateHelper: NSObject {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
-        
-        showStatusBarNotification = NotificationCenter.default.addObserver(forName: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
-            self?.showStatusView()
+        createStatusBarWindow()
+                
+        showStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
+            guard let sSelf = self else { return }
+            if !sSelf.statusBarIsShown{
+                sSelf.statusBarIsShown = true
+                guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
+                DispatchQueue.main.async {
+                    sSelf.showStatusView(with: text)
+                }
+            }
         })
         
-        hideStatusBarNotification = NotificationCenter.default.addObserver(forName: NSNotification.Name.HideStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
-            self?.hideStatusView()
+        hideStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.HideStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
+            guard let sSelf = self else { return }
+            if sSelf.statusBarIsShown{
+                DispatchQueue.main.async {
+                    self?.hideStatusView()
+                }
+            }
         })
         
-        orientationChangeNotification = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
-            self?.changeOrientation()
+        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            DispatchQueue.main.async {
+                self?.changeOrientation()
+            }
+        })
+        
+        keyboardChangeNotification = NotificationCenter.default.observe(name: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            guard let sSelf = self else { return }
+            
+            if sSelf.statusBarIsShown{
+                guard let userInfo = notification.userInfo else { return }
+                guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                sSelf.keyboardChanged(minY: keyboardFrame.minY)
+            }
         })
     }
     
@@ -212,7 +240,7 @@ class AppDelegateHelper: NSObject {
     
     // MARK: - Methods to deal with statusViewBar
     
-    private func createStatusBarWindow(text: String?){
+    private func createStatusBarWindow(){
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
         
         if #available(iOS 11.0, *) {
@@ -220,9 +248,6 @@ class AppDelegateHelper: NSObject {
         }
                 
         let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
-            
-        let statusView = StatusView(frame: CGRect(x: 0.0, y: 0.0, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset))
-        statusView.text = text
         
         let bannerWindow = UIWindow(frame: frame)
         bannerWindow.backgroundColor = UIColor(hexString: "#d8d8d8")
@@ -230,15 +255,24 @@ class AppDelegateHelper: NSObject {
         bannerWindow.addSubview(statusView)
         bannerWindow.isHidden = false
         
+        statusView.translatesAutoresizingMaskIntoConstraints = false
+        statusView.topAnchor.constraint(equalTo: bannerWindow.topAnchor).isActive = true
+        statusView.leftAnchor.constraint(equalTo: bannerWindow.leftAnchor).isActive = true
+        statusView.rightAnchor.constraint(equalTo: bannerWindow.rightAnchor).isActive = true
+        statusView.bottomAnchor.constraint(equalTo: bannerWindow.bottomAnchor).isActive = true
+        
         statusBarWindow = bannerWindow
     }
     
     private func showStatusView(with text: String?){
-        if statusBarWindow == nil {
-            createStatusBarWindow(text: text)
-        }
+        
+        guard let keyWindow = UIApplication.shared.keyWindow else { return }
+        statusBarWindow?.frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+        statusBarWindow?.isHidden = false
+        
         UIView.animate(withDuration: 0.5) {[weak self] in
             guard let sSelf = self else { return }
+            sSelf.statusView.text = text
             UIApplication.shared.keyWindow?.frame.size.height -= sSelf.statusBarWindow?.frame.height ?? 0.0
             sSelf.statusBarWindow?.frame.origin.y -= sSelf.statusBarWindow?.frame.height ?? 0.0
         }
@@ -250,14 +284,42 @@ class AppDelegateHelper: NSObject {
             UIApplication.shared.keyWindow?.frame.size.height += sSelf.statusBarWindow?.frame.height ?? 0.0
             sSelf.statusBarWindow?.frame.origin.y += sSelf.statusBarWindow?.frame.height ?? 0.0
         }) {[weak self] (success) in
-            self?.statusBarWindow = nil
+            self?.statusBarIsShown = false
+            UIApplication.shared.keyWindow?.frame = UIScreen.main.bounds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
+                self?.statusBarWindow?.isHidden = true
+            }
         }
     }
     
     private func changeOrientation(){
+        UIView.animate(withDuration: 0.5) {[weak self] in
+            guard let sSelf = self else { return }
+            if !sSelf.statusBarIsShown {
+               UIApplication.shared.keyWindow?.frame = UIScreen.main.bounds
+            } else {
+                sSelf.resizeStatusViewWindow()
+            }
+        }
+    }
+    
+    private func resizeStatusViewWindow(){
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
         keyWindow.frame = UIScreen.main.bounds
-        statusBarWindow?.isHidden = true
-        statusBarWindow = nil
+        
+        bottomSafeAreaInset = 0.0
+        if #available(iOS 11.0, *) {
+            bottomSafeAreaInset = keyWindow.safeAreaInsets.bottom / 2
+        }
+        
+        keyWindow.frame.size.height -= (16.0 + bottomSafeAreaInset)
+        
+        let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+        statusBarWindow?.frame = frame
+    }
+    
+    private func keyboardChanged(minY: CGFloat){
+        guard let keyWindow = UIApplication.shared.keyWindow else { return }
+        statusBarWindow?.frame = CGRect(x: 0.0, y: minY - 16.0 - bottomSafeAreaInset, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
     }
 }

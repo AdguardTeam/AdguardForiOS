@@ -76,6 +76,10 @@ NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowProgressBar = @"AEDefaultsShowProgressBar";
 NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
+NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
+NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
+NSString *HideStatusViewNotification = @"HideStatusViewNotification";
+
 NSString* SafariProtectionState = @"SafariProtectionState";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"

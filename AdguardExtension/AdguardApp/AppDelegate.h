@@ -50,16 +50,6 @@ extern NSString *OpenDnsSettingsSegue;
  */
 extern NSString *ShowCommonAlertNotification;
 
-/**
- Notify to show status view
- */
-extern NSString *ShowStatusViewNotification;
-
-/**
- Hide status view
- */
-extern NSString *HideStatusViewNotification;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate
 /////////////////////////////////////////////////////////////////////
