@@ -199,7 +199,7 @@ class AppDelegateHelper: NSObject {
     
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {
-            purchaseObservation = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
+            purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
                         
                         guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
                         

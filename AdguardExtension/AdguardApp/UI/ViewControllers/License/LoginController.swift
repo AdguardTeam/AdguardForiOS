@@ -51,13 +51,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private var keyboardMover: KeyboardMover!
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()
         }
         

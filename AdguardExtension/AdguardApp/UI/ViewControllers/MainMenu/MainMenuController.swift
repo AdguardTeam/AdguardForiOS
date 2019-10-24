@@ -50,6 +50,8 @@ class MainMenuController: UITableViewController {
     private let getProSegue = "getProSegue"
     private let showDnsSettingsSegue = "showDnsSettingsSegue"
     
+    private var themeObserver: NotificationToken?
+    
     // MARK: - view controler life cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +62,7 @@ class MainMenuController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
