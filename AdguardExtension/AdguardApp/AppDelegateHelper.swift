@@ -43,6 +43,11 @@ class AppDelegateHelper: NSObject {
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
     private var keyboardChangeNotification: NotificationToken?
+    private var keyboardAppearsNotification: NotificationToken?
+    private var keyboardDisappearsNotification: NotificationToken?
+    
+    private var keyboardIsShown = false
+    private var keyboardMinY: CGFloat = 0.0
     
     private var statusBarWindow: UIWindow?
     private var bottomSafeAreaInset: CGFloat = 0.0
@@ -122,12 +127,21 @@ class AppDelegateHelper: NSObject {
         
         keyboardChangeNotification = NotificationCenter.default.observe(name: UIResponder.keyboardWillChangeFrameNotification, object: nil, queue: nil, using: {[weak self] (notification) in
             guard let sSelf = self else { return }
+            guard let userInfo = notification.userInfo else { return }
+            guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
             
+            sSelf.keyboardMinY = keyboardFrame.minY
             if sSelf.statusBarIsShown{
-                guard let userInfo = notification.userInfo else { return }
-                guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                 sSelf.keyboardChanged(minY: keyboardFrame.minY)
             }
+        })
+        
+        keyboardAppearsNotification = NotificationCenter.default.observe(name: UIResponder.keyboardDidShowNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            self?.keyboardIsShown = true
+        })
+        
+        keyboardDisappearsNotification = NotificationCenter.default.observe(name: UIResponder.keyboardDidHideNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            self?.keyboardIsShown = false
         })
     }
     
@@ -265,15 +279,20 @@ class AppDelegateHelper: NSObject {
     }
     
     private func showStatusView(with text: String?){
-        
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
-        statusBarWindow?.frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+        
+        if keyboardIsShown {
+            statusBarWindow?.frame = CGRect(x: 0.0, y: keyboardMinY - bottomSafeAreaInset, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+        } else {
+            statusBarWindow?.frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+        }
+        
         statusBarWindow?.isHidden = false
         
         UIView.animate(withDuration: 0.5) {[weak self] in
             guard let sSelf = self else { return }
             sSelf.statusView.text = text
-            UIApplication.shared.keyWindow?.frame.size.height -= sSelf.statusBarWindow?.frame.height ?? 0.0
+            keyWindow.frame.size.height -= sSelf.statusBarWindow?.frame.height ?? 0.0
             sSelf.statusBarWindow?.frame.origin.y -= sSelf.statusBarWindow?.frame.height ?? 0.0
         }
     }
