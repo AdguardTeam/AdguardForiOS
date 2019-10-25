@@ -51,6 +51,7 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
     
+    private var notificationToken: NotificationToken?
     
     // MARK: - services
     
@@ -62,7 +63,7 @@ class ChooseProtocolController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

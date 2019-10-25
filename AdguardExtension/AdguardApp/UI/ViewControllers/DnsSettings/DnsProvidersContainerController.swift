@@ -29,6 +29,9 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
     
     @IBOutlet weak var buttonBottomSeparator: UIView!
     @IBOutlet weak var buttonTopSeparator: UIView!
+    
+    private var notificationToken: NotificationToken?
+    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -38,7 +41,7 @@ class DnsProvidersContainerController: UIViewController, UIViewControllerTransit
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

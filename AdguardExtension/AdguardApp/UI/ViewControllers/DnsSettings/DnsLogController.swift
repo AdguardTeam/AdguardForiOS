@@ -39,6 +39,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - private fields
     
     private var selectedRecord: LogRecord?
+    private var notificationToken: NotificationToken?
     
     // MARK: - view controller life cycle
     
@@ -47,7 +48,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         
         model.delegate = self
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

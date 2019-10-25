@@ -40,12 +40,15 @@ class DnsSettingsController : UITableViewController{
     
     private var observation: NSKeyValueObservation?
     
+    private var themeObserver: NotificationToken?
+    private var vpnObserver: NotificationToken?
+    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -55,7 +58,7 @@ class DnsSettingsController : UITableViewController{
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+        vpnObserver = NotificationCenter.default.observe(name: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
             [weak self] (notification) in
             guard let sSelf = self else { return }
             DispatchQueue.main.async{

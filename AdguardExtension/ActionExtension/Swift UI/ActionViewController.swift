@@ -70,11 +70,14 @@ class ActionViewController: UIViewController {
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
     
+    private var notificationToken1: NotificationToken?
+    private var notificationToken2: NotificationToken?
+    
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
-        let antibanner = AESAntibanner()
+        let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
         self.antibannerController = AntibannerController(antibanner: antibanner)
         contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
         support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
@@ -213,10 +216,10 @@ class ActionViewController: UIViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) {(notification) in
+        notificationToken1 = NotificationCenter.default.observe(name: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) {(notification) in
             AESharedResources.synchronizeSharedDefaults()
         }
-        NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: nil) {(notification) in
+        notificationToken2 = NotificationCenter.default.observe(name: UIApplication.willTerminateNotification, object: nil, queue: nil) {(notification) in
             AESharedResources.synchronizeSharedDefaults()
         }
     }

@@ -33,6 +33,8 @@ class RequestsBlockingController: UITableViewController {
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - View controller life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,7 +58,7 @@ class RequestsBlockingController: UITableViewController {
         
         updateTheme()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

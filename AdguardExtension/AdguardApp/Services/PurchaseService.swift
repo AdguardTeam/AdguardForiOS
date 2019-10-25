@@ -221,6 +221,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private let reachability = Reachability.forInternetConnection()
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -542,7 +544,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         if reachability?.isReachable() ?? false{
             startProductRequest()
         } else {
-            NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
+            notificationToken = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
                 guard let sSelf = self else { return }
                 guard let reach = notification.object as? Reachability else { return }
                 if reach.isReachable() {
@@ -552,6 +554,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
             reachability?.startNotifier()
         }
+        
+        reachability?.startNotifier()
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {

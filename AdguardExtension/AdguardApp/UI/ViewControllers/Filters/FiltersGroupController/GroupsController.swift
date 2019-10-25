@@ -37,13 +37,14 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
+    private var notificationToken: NotificationToken?
     
     // MARK: - lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
