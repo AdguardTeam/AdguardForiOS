@@ -282,7 +282,7 @@ class AppDelegateHelper: NSObject {
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
         
         if keyboardIsShown {
-            statusBarWindow?.frame = CGRect(x: 0.0, y: keyboardMinY - bottomSafeAreaInset, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+            statusBarWindow?.frame = CGRect(x: 0.0, y: keyboardMinY, width: keyWindow.frame.width, height: 16.0)
         } else {
             statusBarWindow?.frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
         }
