@@ -99,8 +99,8 @@ class FiltersServiceTest: XCTestCase {
 
         sleep(1)
 
-//        XCTAssertTrue(service.groups[0].enabled)
-//        XCTAssertFalse(service.groups[0].filters[0].enabled)
+        XCTAssertTrue(service.groups[0].enabled)
+        XCTAssertFalse(service.groups[0].filters[0].enabled)
 //        XCTAssertFalse(service.groups[0].filters[1].enabled)
     }
     
