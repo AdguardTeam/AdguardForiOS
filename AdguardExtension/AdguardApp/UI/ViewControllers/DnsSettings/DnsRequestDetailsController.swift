@@ -76,6 +76,7 @@ class DnsRequestDetailsController : UITableViewController {
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - view controller life cycle
     
@@ -135,16 +136,28 @@ class DnsRequestDetailsController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == LogCells.category.rawValue {
+        
+        let defaultHeight = super.tableView(tableView, heightForRowAt: indexPath)
+        
+        guard let cellType = LogCells(rawValue: indexPath.row) else {
+            return defaultHeight
+        }
+        
+        if cellType == .category {
             if logRecord?.category == nil{
                 return 0.0
             }
-        } else if indexPath.row == LogCells.name.rawValue {
+        } else if cellType == .name {
             if logRecord?.name == nil {
                 return 0.0
             }
         }
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        
+        if !configuration.developerMode && !userCells.contains(cellType) {
+            return 0.0
+        }
+        
+        return defaultHeight
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -208,6 +221,8 @@ class DnsRequestDetailsController : UITableViewController {
     private enum LogCells: Int{
         case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer
     }
+    
+    private let userCells:[LogCells] = [.name, .status, .time, .domain]
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
