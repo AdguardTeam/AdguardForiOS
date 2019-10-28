@@ -26,6 +26,7 @@ class DnsSettingsController : UITableViewController{
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
+    @IBOutlet weak var topSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -38,22 +39,11 @@ class DnsSettingsController : UITableViewController{
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
-    private let wifiExceptionSegue = "wifiExceptionSegue"
     
     private var themeObserver: NotificationToken?
     private var vpnObserver: NotificationToken?
     
     // MARK: - view controller life cycle
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == wifiExceptionSegue {
-            if let controller = segue.destination as? ListOfRulesController {
-                let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-                let model = ListOfRulesModel(listOfRulesType: .wifiExceptions, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
-                controller.model = model
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,13 +79,21 @@ class DnsSettingsController : UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
        
-        if indexPath.row != 0{
+        if indexPath.section != 0 {
             cell.contentView.alpha = vpnManager.enabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = vpnManager.enabled
         }
-        
+
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 32.0 : 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     // MARK: Actions
@@ -141,6 +139,7 @@ class DnsSettingsController : UITableViewController{
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
+        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

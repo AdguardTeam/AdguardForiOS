@@ -31,6 +31,7 @@
 #import "APDnsServerAddress.h"
 #import "ACNCidrRange.h"
 #import "ACDnsUtils.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 #import "Adguard-Swift.h"
 
@@ -64,7 +65,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #define V_DNSPROXY_LOCAL_ADDDRESS               @"127.0.0.1"
 #define V_DNSPROXY_LOCAL_ADDDRESS_IPV6          @"::1"
 
-// we chnge maximum threads for prevent tunnel crashes due to lack of memory
+// we change maximum number of threads to prevent tunnel crashes due to lack of memory
 #define DNS_PROXY_MAX_QUEUES 10
 // doh and dot encryption require more memory
 #define DOH_DOT_PROXY_MAX_QUEUES 5
@@ -118,7 +119,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     DnsServerInfo *_currentServer;
     APVpnManagerTunnelMode _tunnelMode;
+    
     BOOL _restartByRechability;
+    BOOL _filteringMobileDataEnabled;
+    BOOL _filteringWifiDataEnabled;
+    
+    NSMutableArray<WifiException*>* _exceptions;
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
@@ -279,7 +285,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #pragma mark Properties and public methods
 
 - (DnsServerInfo *)currentDnsServer {
-    
     return _currentServer;
 }
 
@@ -334,6 +339,26 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     //create empty tunnel settings
     NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
     
+    BOOL needsToSendEmptySettings = [self needsToSendEmptySettings];
+    
+    if (needsToSendEmptySettings){
+        // SETs network settings
+        ASSIGN_WEAK(self);
+        [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
+            
+            ASSIGN_STRONG(self);
+            
+            if(error)
+                DDLogInfo(@"(PacketTunnelProvider) set empty tunnel settings error : %@", error.localizedDescription);
+            
+            DDLogInfo(@"(PacketTunnelProvider) update Tunnel with empty settings ");
+            completionHandler(error);
+            
+            [USE_STRONG(self) logNetworkInterfaces];
+        }];
+        return;
+    }
+    
     DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
     
     // Check configuration
@@ -384,6 +409,9 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void) readProtocolConfiguration {
     
+    // Getting wifi exceptions
+    [self getExceptions];
+    
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
     
@@ -401,7 +429,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
     
     NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
+    NSNumber* wifiFilteringEnabled = protocol.providerConfiguration[APVpnManagerFilteringWifiDataEnabled];
+    NSNumber* mobileFilteringEnabled = protocol.providerConfiguration[APVpnManagerFilteringMobileDataEnabled];
+    
     _restartByRechability = restartValue ? [restartValue boolValue] : NO;
+    _filteringWifiDataEnabled = wifiFilteringEnabled ? [wifiFilteringEnabled boolValue] : NO;
+    _filteringMobileDataEnabled = mobileFilteringEnabled ? [mobileFilteringEnabled boolValue] : NO;
     
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@", _currentServer.name);
 }
@@ -679,6 +712,60 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     }
     
     return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues];
+}
+
+-(NSString *)getCurrentWifiName {
+    NSArray *interFaceNames = (__bridge_transfer id)CNCopySupportedInterfaces();
+    for (NSString *name in interFaceNames)
+    {
+        NSDictionary *info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)name);
+        return info[@"SSID"];
+    }
+    return nil;
+}
+
+-(void)getExceptions {
+    NSString *fileName = @"NetworkSettings";
+    NSData *data = [_resources loadDataFromFileRelativePath:fileName];
+    if (data) {
+        NSError *error = nil;
+        NSMutableArray<WifiException*>* exceptions =
+        [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        _exceptions = exceptions;
+    }
+}
+
+-(BOOL)isConnectedToSsidFromExceptions {
+    NSString* wifiName = [self getCurrentWifiName];
+    for (NSDictionary *exception in _exceptions){
+        NSString *rule = exception[@"rule"];
+        NSNumber *enabled = exception[@"enabled"];
+        if ([rule isEqualToString:wifiName] && [enabled boolValue]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)needsToSendEmptySettings{
+    
+    if (_reachabilityHandler.isReachableViaWiFi){
+        BOOL isConnected = [self isConnectedToSsidFromExceptions];
+        if (isConnected){
+            DDLogInfo(@"Connected to ssid from list of exceptions, sending empty settings");
+            return YES;
+        }
+        if (!_filteringWifiDataEnabled) {
+            DDLogInfo(@"Connected via Wi-Fi, Wi-Fi filtering disabled, sending empty settings");
+            return YES;
+        }
+    }
+    if ((_reachabilityHandler.isReachableViaWWAN) && !_filteringMobileDataEnabled){
+        DDLogInfo(@"Connected via WWAN, mobile data filtering is disabled, sending empty settings");
+        return YES;
+    }
+    DDLogInfo(@"Sending not empty settings");
+    return NO;
 }
 
 @end
