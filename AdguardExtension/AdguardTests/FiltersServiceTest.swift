@@ -101,7 +101,7 @@ class FiltersServiceTest: XCTestCase {
 
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
-//        XCTAssertFalse(service.groups[0].filters[1].enabled)
+        XCTAssertFalse(service.groups[0].filters[1].enabled)
     }
     
     func testDisableGroup() {
