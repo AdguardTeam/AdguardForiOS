@@ -29,10 +29,10 @@
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (inverted)";
+"inverted_whitelist_title" = "Safari whitelist (inverted)";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Safari whitelist";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User Filter";
@@ -111,11 +111,14 @@
 
 "filter_date_format" = "Filters updated: %@";
 
+/* (UserFilterController) System blacklist description */
+"blacklist_text" = "Enter here the domain names. AdGuard will prevent loading of these domains.";
+
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "You can add your own rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
+"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains, ignoring all other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
@@ -415,8 +418,26 @@
 /* (LoginController) terms and eula text */
 "login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
 
-/* (ListOfRulesModel) title for wifi exceptions */
+/* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi exceptions";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "System protection will not be used in Wi-Fi networks below";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Add an exception";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filter mobile data";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filter wi-fi data";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Trackers, counters";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Trackers, counters";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
@@ -427,9 +448,6 @@
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari user filter";
 
-/* (ListOfRulesModel) title for inverted safari whiteList */
-"inverted_whitelist_title" = "Whitelist (inverted)";
-
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
@@ -438,6 +456,12 @@
 
 /* (ListOfRulesModel) title for export dns black list */
 "export_blacklist_title" = "Export blacklist";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Clear";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Save";
 
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
@@ -510,6 +534,24 @@
 
 /*(LogCategory) extensions category*/
 "extensions" = "Extensions";
+
+/*(ListOfRules) Select title */
+"common_select" = "Select";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Edit";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Delete";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Select all";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Add a domain";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Add a new rule";
 
 /* Default DNS filter name */
 "default_dns_filter_name" = "DNS Filter";

@@ -23,6 +23,8 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var numberOfFiltersLabel: UILabel!
     @IBOutlet weak var userFilterStateLabel: UILabel!
     @IBOutlet weak var protectionStateSwitch: UISwitch!
+    @IBOutlet weak var whitelistLabel: ThemableLabel!
+    @IBOutlet weak var topSeparator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
@@ -51,27 +53,19 @@ class SafariProtectionController: UITableViewController {
     private var notificationToken: NotificationToken?
     
     // MARK: - view controler life cycle
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-        
-        switch segue.identifier {
-        case whiteListSegue:
+        if segue.identifier == whiteListSegue {
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let type: ListOfRulesType = inverted ? .invertedSafariWhiteList : .safariWhiteList
-                let model = ListOfRulesModel(listOfRulesType: type, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
+                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
                 controller.model = model
             }
-            
-        case blackListSegue:
+        } else if segue.identifier == blackListSegue {
             if let controller = segue.destination as? ListOfRulesController{
-                let model = ListOfRulesModel(listOfRulesType: .safariUserFilter, resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, dnsFiltersService: dnsFiltersService)
+                let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
                 controller.model = model
             }
-            
-        default:
-            break
         }
     }
     
@@ -80,6 +74,9 @@ class SafariProtectionController: UITableViewController {
         
         setupBackButton()
         updateTheme()
+        
+        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        whitelistLabel.text = inverted ? ACLocalizedString("inverted_whitelist_title", nil) : ACLocalizedString("whitelist_title", nil)
         
         let updateFilters: ()->() = { [weak self] in
             guard let sSelf = self else { return }
@@ -101,6 +98,7 @@ class SafariProtectionController: UITableViewController {
         
         let protectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
         protectionStateSwitch.isOn = protectionEnabled ?? true
+        safariProtectionStateLabel.text = protectionEnabled ?? true ? String.localizedString("on_state") : String.localizedString("off_state")
         
         updateFilters()
     }
@@ -119,18 +117,11 @@ class SafariProtectionController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let width = tableView.frame.width
-        let height: CGFloat = 5.0
-        let frame = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        let view = UIView(frame: frame)
-        view.backgroundColor = configuration.darkTheme ? .black : .white
-        
-        return view
+        return UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return section == 0 ? 32.0 : 0.1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,6 +134,8 @@ class SafariProtectionController: UITableViewController {
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
         resources.sharedDefaults().set(enabled, forKey: SafariProtectionState)
+        safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        
         contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
             if error != nil {
                 DDLogError("Safari protection was switched to \(enabled) state with error : \(String(describing: error?.localizedDescription))")
@@ -159,6 +152,7 @@ class SafariProtectionController: UITableViewController {
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
+        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

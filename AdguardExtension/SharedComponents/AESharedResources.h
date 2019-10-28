@@ -179,7 +179,11 @@ extern NSString*  _Nonnull AEDefaultsSafariWhitelistEnabled;
 
 /**
  User defaults key, which defines wifi exceptions is enabled */
-extern NSString*  _Nonnull AEDefaultsWifiExceptionsEnabled;
+extern NSString*  _Nonnull AEDefaultsFilterWifiEnabled;
+
+/**
+ User defaults key, which defines mobile data filtering is enabled */
+extern NSString*  _Nonnull AEDefaultsFilterMobileEnabled;
 
 /**
  User defaults key, which defines dns whitelist is enabled */
