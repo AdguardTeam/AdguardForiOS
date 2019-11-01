@@ -119,6 +119,7 @@ class SettingsController: UITableViewController {
     
     @IBAction func developerModeAction(_ sender: UISwitch) {
         configuration.developerMode = sender.isOn
+        tableView.reloadData()
     }
     
     @IBAction func systemDefaultTheme(_ sender: UIButton) {
@@ -189,6 +190,11 @@ class SettingsController: UITableViewController {
                 tableView.cellForRow(at: indexPath)?.isHidden = true
                 return 0.0
             }
+        }
+        
+        if !configuration.developerMode && indexPath.section == otherSection && indexPath.row == advancedSettingsRow {
+            tableView.cellForRow(at: indexPath)?.isHidden = true
+            return 0.0
         }
         
         return super.tableView(tableView, heightForRowAt: indexPath)

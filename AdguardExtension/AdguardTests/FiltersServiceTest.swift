@@ -90,15 +90,15 @@ class FiltersServiceTest: XCTestCase {
     func testDisableFilter(){
        
         let service = initService(groups: [(123, true)], filters: [(321, 123, false), (456, 123, true)])
-        
+
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertTrue(service.groups[0].filters[1].enabled)
-        
+
         service.setFilter(service.groups[0].filters[1], enabled: false)
-        
+
         sleep(1)
-        
+
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
         XCTAssertFalse(service.groups[0].filters[1].enabled)
