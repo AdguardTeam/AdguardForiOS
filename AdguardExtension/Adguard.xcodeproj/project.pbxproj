@@ -600,6 +600,8 @@
 		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
 		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
+		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
+		7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC152371A0B600FA651F /* ChartViewController.swift */; };
 		7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -1777,6 +1779,8 @@
 		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
 		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		7ECCCC152371A0B600FA651F /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		7EDAC08322F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Filters.strings; sourceTree = "<group>"; };
@@ -3483,6 +3487,8 @@
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
+				7ECCCC13237194B200FA651F /* ChartView.swift */,
+				7ECCCC152371A0B600FA651F /* ChartViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5117,6 +5123,7 @@
 				7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,
+				7ECCCC14237194B200FA651F /* ChartView.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */,
 				D0667BCD22DC67430099C090 /* UserNotificationService.swift in Sources */,
@@ -5271,6 +5278,7 @@
 				7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */,
 				7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */,
 				D05538062161D8190020993A /* AboutController.swift in Sources */,
+				7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,
