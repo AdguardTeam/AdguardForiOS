@@ -657,7 +657,7 @@
                     <navigationItem key="navigationItem" title="Advanced settings" id="Ll9-il-kpC"/>
                     <connections>
                         <outlet property="restartProtectionSwitch" destination="hAq-Ld-n9T" id="fk9-u4-IVQ"/>
-                        <outlet property="showProgressbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
+                        <outlet property="showStatusbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
                         <outlet property="useSimplifiedFiltersSwitch" destination="RDS-1r-fn1" id="MOR-mK-vpF"/>
                         <outletCollection property="themableLabels" destination="W6u-T8-UVZ" collectionClass="NSMutableArray" id="v7G-Zv-ltp"/>
                         <outletCollection property="themableLabels" destination="PV8-kf-b2c" collectionClass="NSMutableArray" id="lhL-mi-PJ3"/>

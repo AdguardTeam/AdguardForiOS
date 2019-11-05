@@ -560,4 +560,11 @@
 "confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers are updating ...";
+"loading_content_blockers" = "Content blockers are being updated ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Loading filters ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Rules are being converted  ...";
+

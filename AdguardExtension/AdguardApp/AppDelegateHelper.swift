@@ -48,6 +48,9 @@ class AppDelegateHelper: NSObject {
     
     private var keyboardIsShown = false
     private var keyboardMinY: CGFloat = 0.0
+    private var showStatusBarIsEnabled: Bool {
+        return resources.sharedDefaults().bool(forKey: AEDefaultsShowStatusBar)
+    }
     
     private var statusBarWindow: UIWindow?
     private var bottomSafeAreaInset: CGFloat = 0.0
@@ -101,12 +104,20 @@ class AppDelegateHelper: NSObject {
                 
         showStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
             guard let sSelf = self else { return }
+            
+            if !sSelf.showStatusBarIsEnabled {
+                return
+            }
+            
+            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
+            
             if !sSelf.statusBarIsShown{
                 sSelf.statusBarIsShown = true
-                guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
                 DispatchQueue.main.async {
                     sSelf.showStatusView(with: text)
                 }
+            } else {
+                sSelf.changeTextForStatusView(text: text)
             }
         })
         
@@ -340,5 +351,11 @@ class AppDelegateHelper: NSObject {
     private func keyboardChanged(minY: CGFloat){
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
         statusBarWindow?.frame = CGRect(x: 0.0, y: minY - 16.0 - bottomSafeAreaInset, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
+    }
+    
+    private func changeTextForStatusView(text: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.statusView.text = text
+        }
     }
 }

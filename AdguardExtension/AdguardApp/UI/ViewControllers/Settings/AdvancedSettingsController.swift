@@ -22,7 +22,7 @@ import UIKit
 class AdvancedSettingsController: UITableViewController {
 
     @IBOutlet weak var useSimplifiedFiltersSwitch: UISwitch!
-    @IBOutlet weak var showProgressbarSwitch: UISwitch!
+    @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -39,7 +39,7 @@ class AdvancedSettingsController: UITableViewController {
     private let segueIdentifier = "contentBlockersScreen"
     
     private let useSimplifiedRow = 0
-    private let showProgressRow = 1
+    private let showStatusbarRow = 1
     private let restartProtectionRow = 2
     
     private var themeObservation: NotificationToken?
@@ -53,6 +53,7 @@ class AdvancedSettingsController: UITableViewController {
         
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         restartProtectionSwitch.isOn = vpnManager.restartByReachability
+        showStatusbarSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsShowStatusBar)
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -88,6 +89,10 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     @IBAction func showProgressbarAction(_ sender: UISwitch) {
+        if !sender.isOn {
+           NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+        }
+        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsShowStatusBar)
     }
     
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
@@ -112,9 +117,9 @@ class AdvancedSettingsController: UITableViewController {
         case useSimplifiedRow:
             useSimplifiedFiltersSwitch.setOn(!useSimplifiedFiltersSwitch.isOn, animated: true)
             useSimplifiedFiltersAction(useSimplifiedFiltersSwitch)
-        case showProgressRow:
-            showProgressbarSwitch.setOn(!showProgressbarSwitch.isOn, animated: true)
-            showProgressbarAction(showProgressbarSwitch)
+        case showStatusbarRow:
+            showStatusbarSwitch.setOn(!showStatusbarSwitch.isOn, animated: true)
+            showProgressbarAction(showStatusbarSwitch)
         case restartProtectionRow:
             restartProtectionSwitch.setOn(!restartProtectionSwitch.isOn, animated: true)
             restartProtectionAction(restartProtectionSwitch)
@@ -160,7 +165,7 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSwitch(useSimplifiedFiltersSwitch)
-        theme.setupSwitch(showProgressbarSwitch)
+        theme.setupSwitch(showStatusbarSwitch)
         theme.setupSwitch(restartProtectionSwitch)
 
         DispatchQueue.main.async { [weak self] in
