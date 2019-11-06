@@ -27,19 +27,21 @@ class ChartView: UIView {
     
     var chartPoints: [Point] = [] {
         didSet {
+            chartPoints.append(Point(x: 0.0, y: 0.0))
+            chartPoints.sort(by: { $0.x < $1.x })
             maxXelement = chartPoints.map({ $0.x }).max() ?? 0.0
             maxYelement = chartPoints.map({ $0.y }).max() ?? 0.0
             setNeedsDisplay()
         }
     }
     
-    var lineColor: UIColor = .red {
+    var lineColor: UIColor = UIColor(hexString: "ff67b279") {
         didSet{
             setNeedsDisplay()
         }
     }
     
-    var shadowColor: UIColor = .blue {
+    var shadowColor: UIColor = UIColor(hexString: "8f67b279") {
         didSet{
             setNeedsDisplay()
         }
@@ -68,7 +70,7 @@ class ChartView: UIView {
     override func draw(_ rect: CGRect) {
         drawVerticalGridLines()
         drawHorizontalGridLines()
-        drawPoints()
+        drawGraphic()
     }
     
     // MARK: - Private methods -
@@ -119,17 +121,39 @@ class ChartView: UIView {
     
     // MARK: - Methods for points
     
-    private func drawPoints(){
+    private func drawGraphic(){
+        
         let points = convertPoints()
-        for point in points {
-            drawPoint(point: point)
+        let cubicCurveAlgorithm = CubicBezierCurveAlgorithm()
+        
+        let controlPoints = cubicCurveAlgorithm.controlPointsFromPoints(dataPoints: points)
+            
+            
+        let linePath = UIBezierPath()
+            
+        for i in 0..<points.count {
+            let point = points[i];
+            
+            if i==0 {
+                linePath.move(to: point)
+            } else {
+                let segment = controlPoints[i-1]
+                linePath.addCurve(to: point, controlPoint1: segment.controlPoint1, controlPoint2: segment.controlPoint2)
+            }
         }
-    }
-    
-    private func drawPoint(point: CGPoint){
-        let rect = UIView(frame: CGRect(x: point.x, y: point.y, width: 5.0, height: 5.0))
-        rect.backgroundColor = lineColor
-        addSubview(rect)
+            
+        let lineLayer = CAShapeLayer()
+        lineLayer.path = linePath.cgPath
+        lineLayer.fillColor = UIColor.clear.cgColor
+        lineLayer.strokeColor = lineColor.cgColor
+        lineLayer.lineWidth = 2.0
+            
+        lineLayer.shadowColor = shadowColor.cgColor
+        lineLayer.shadowOffset = CGSize(width: 0, height: 8)
+        lineLayer.shadowOpacity = 0.5
+        lineLayer.shadowRadius = 4.0
+            
+        layer.addSublayer(lineLayer)
     }
     
     private func convertPoints() -> [CGPoint] {
@@ -137,13 +161,12 @@ class ChartView: UIView {
                 
         for point in chartPoints {
             let ratioX: CGFloat = point.x / maxXelement
-            let ratioY: CGFloat = point.y / maxYelement
+            let ratioY: CGFloat = (point.y / maxYelement) * 0.7
             
             let newX = frame.width * ratioX
-            let newY = frame.height * ratioY
+            let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
             points.append(CGPoint(x: newX, y: newY))
         }
-        
         return points
     }
 }

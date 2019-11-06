@@ -602,6 +602,7 @@
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC152371A0B600FA651F /* ChartViewController.swift */; };
+		7ECCCC192372B2CC00FA651F /* CubicBezierCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */; };
 		7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
@@ -1781,6 +1782,7 @@
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC152371A0B600FA651F /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicBezierCurve.swift; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		7EDAC08322F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Filters.strings; sourceTree = "<group>"; };
@@ -3185,6 +3187,16 @@
 			path = "Container's controllers";
 			sourceTree = "<group>";
 		};
+		7ECCCC172372B2AF00FA651F /* Chart view */ = {
+			isa = PBXGroup;
+			children = (
+				7ECCCC13237194B200FA651F /* ChartView.swift */,
+				7ECCCC152371A0B600FA651F /* ChartViewController.swift */,
+				7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */,
+			);
+			path = "Chart view";
+			sourceTree = "<group>";
+		};
 		7EE7E1DD22E9DB2C00B2799A /* FiltersGroupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3487,8 +3499,7 @@
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
-				7ECCCC13237194B200FA651F /* ChartView.swift */,
-				7ECCCC152371A0B600FA651F /* ChartViewController.swift */,
+				7ECCCC172372B2AF00FA651F /* Chart view */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5143,6 +5154,7 @@
 				D0667BCF22DC72FD0099C090 /* AppDelegateHelper.swift in Sources */,
 				D0D33BBA23102C94009082CE /* Affinity.swift in Sources */,
 				D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */,
+				7ECCCC192372B2CC00FA651F /* CubicBezierCurve.swift in Sources */,
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
 				D02C493A21CA7E1800770AB0 /* Constants.swift in Sources */,
 				D0BB18932161DC5E00CCAA76 /* AboutTableController.swift in Sources */,
