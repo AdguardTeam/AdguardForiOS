@@ -267,14 +267,16 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         DispatchQueue(label: "load_filter_grops_queue").async { [weak self] in
             guard let sSelf = self, let antibanner = self?.antibanner else { return }
             
-            NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
+            }
             
             guard let metadata = antibanner.metadata(forSubscribe: refresh),
                 let i18n = antibanner.i18n(forSubscribe: refresh),
                 var filters = metadata.filters else {
-                   
-                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-                    
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                    }
                     completion()
                     return
             }
@@ -353,7 +355,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 sSelf.filterMetas = filters
                 sSelf.notifyChange()
                 completion()
-                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                }
             }
         }
     }
