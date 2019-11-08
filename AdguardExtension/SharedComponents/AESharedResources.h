@@ -233,11 +233,26 @@ extern NSString* _Nonnull AEDefaultsDeveloperMode;
 
 /**
  User defaults key, which defines whether show progress bar is enabled */
-extern NSString* _Nonnull AEDefaultsShowProgressBar;
+extern NSString* _Nonnull AEDefaultsShowStatusBar;
 
 /**
  User defaults key, which defines whether DNS request blocking is enabled */
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
+
+/**
+ String to send notifications for StatusView
+ */
+extern NSString* _Nonnull AEDefaultsShowStatusViewInfo;
+
+/**
+ Notify to show status view
+ */
+extern NSString* _Nonnull ShowStatusViewNotification;
+
+/**
+ Hide status view
+ */
+extern NSString* _Nonnull HideStatusViewNotification;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

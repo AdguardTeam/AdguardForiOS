@@ -606,32 +606,44 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private func convertRulesToJson(_ rules: [ASDFilterRule])->(data: Data?, converted: Int, overlimit: Int, totalConverted: Int, error: Error?) {
         
+        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("converting_rules", nil)])
+        
         var error: Error?
         var converted = 0
         var overLimit = 0
         var totalConverted = 0
         var rulesData: Data?
         
-        if rules.count == 0 { return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:])) }
+        if rules.count == 0 {
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
+        }
         
         // run converter
         let limit = UInt(resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
         let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         
         let (converter, converterError) = createConverter()
-        if converterError != nil { return (nil, 0, 0, 0, converterError) }
+        if converterError != nil {
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            return (nil, 0, 0, 0, converterError)
+        }
         
         if converter == nil {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, error)
         }
         
         let converterResult = converter!.json(fromRules: rules, upTo: limit, optimize: optimize) as? [String: Any]
         
         error = converterResult?[AESFConvertedErrorKey] as? Error
-        if error != nil { return (nil, 0, 0, 0, error) }
+        if error != nil {
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            return (nil, 0, 0, 0, error)
+        }
         
         converted = converterResult?[AESFConvertedCountKey] as? Int ?? 0
         totalConverted = converterResult?[AESFTotalConvertedCountKey] as? Int ?? 0
@@ -643,6 +655,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, error)
         }
         

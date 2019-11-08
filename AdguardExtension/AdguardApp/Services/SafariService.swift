@@ -117,12 +117,15 @@ class SafariService: NSObject, SafariServiceProtocol {
                 let group = DispatchGroup()
                 var resultError: Error?
                 
+                NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_content_blockers", nil)])
+                
                 for blocker in ContentBlockerType.allCases {
                     
                     group.enter()
+                    
                     // Notify that filter began updating
                     NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
-                    
+                                        
                     sSelf.invalidateJson(contentBlockerType: blocker, completion: { (error) in
                         if error != nil {
                             let bundleId = SafariService.contenBlockerBundleIdByType[blocker]!
@@ -133,12 +136,14 @@ class SafariService: NSObject, SafariServiceProtocol {
                         
                         // Notify that filter finished updating
                         NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
+                        
                         group.leave()
                     })
-                    
                     group.wait()
                 }
-                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                }
                 completion(resultError)
             }
         }
