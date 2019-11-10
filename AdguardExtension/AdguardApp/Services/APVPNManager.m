@@ -412,7 +412,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     NSArray <DnsLogRecord *> *records = [_resources readDnsLog];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         completionBlock(records);
     });
 }

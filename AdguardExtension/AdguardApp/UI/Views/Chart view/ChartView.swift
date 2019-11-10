@@ -27,36 +27,35 @@ class ChartView: UIView {
     
     var chartPoints: [Point] = [] {
         didSet {
-            chartPoints.append(Point(x: 0.0, y: 0.0))
             chartPoints.sort(by: { $0.x < $1.x })
             maxXelement = chartPoints.map({ $0.x }).max() ?? 0.0
             maxYelement = chartPoints.map({ $0.y }).max() ?? 0.0
-            setNeedsDisplay()
+            
+            drawGraphic()
         }
     }
     
     var lineColor: UIColor = UIColor(hexString: "ff67b279") {
         didSet{
-            setNeedsDisplay()
+            drawGraphic()
         }
     }
     
-    var shadowColor: UIColor = UIColor(hexString: "8f67b279") {
+    var shadowColor: UIColor = UIColor(hexString: "67b279") {
         didSet{
-            setNeedsDisplay()
+            drawGraphic()
         }
     }
     
     var gridColor: UIColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.2) {
         didSet{
-            setNeedsDisplay()
+            drawGraphic()
         }
     }
 
     var themeService: ThemeServiceProtocol? {
         didSet{
             backgroundColor = themeService?.backgroundColor
-            setNeedsDisplay()
         }
     }
     
@@ -67,10 +66,12 @@ class ChartView: UIView {
     private var maxXelement: CGFloat = 0.0
     private var maxYelement: CGFloat = 0.0
     
+    private let lineLayer = CAShapeLayer()
+    
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
         drawVerticalGridLines()
         drawHorizontalGridLines()
-        drawGraphic()
     }
     
     // MARK: - Private methods -
@@ -106,29 +107,47 @@ class ChartView: UIView {
     }
     
     private func drawLine(from: CGPoint, to: CGPoint){
-        let path = UIBezierPath()
     
-        path.lineWidth = gridLineWidth
+        let gridPath = UIBezierPath()
+    
+        gridPath.lineWidth = gridLineWidth
         
-        path.move(to: from)
-        path.addLine(to: to)
-        path.close()
+        gridPath.move(to: from)
+        gridPath.addLine(to: to)
+        gridPath.close()
         
         gridColor.set()
-        path.stroke()
-        path.fill()
+        gridPath.stroke()
+        gridPath.fill()
     }
     
     // MARK: - Methods for points
     
     private func drawGraphic(){
+        lineLayer.removeFromSuperlayer()
         
-        let points = convertPoints()
+        var points = convertPoints()
+        
+        if points.isEmpty {
+            let minPoint = CGPoint(x: 0.0, y: frame.height / 2)
+            let maxPoint = CGPoint(x: frame.width, y: frame.height / 2)
+            
+            points.append(minPoint)
+            points.append(maxPoint)
+        } else if points.count == 1 {
+            let minPoint = CGPoint(x: 0.0, y: frame.height)
+            let maxPoint = CGPoint(x: frame.width, y: frame.height)
+            
+            points.append(minPoint)
+            points.append(maxPoint)
+            
+            points.sort(by: { $0.x < $1.x })
+        }
+        
         let cubicCurveAlgorithm = CubicBezierCurveAlgorithm()
         
         let controlPoints = cubicCurveAlgorithm.controlPointsFromPoints(dataPoints: points)
-            
-            
+
         let linePath = UIBezierPath()
             
         for i in 0..<points.count {
@@ -142,14 +161,13 @@ class ChartView: UIView {
             }
         }
             
-        let lineLayer = CAShapeLayer()
         lineLayer.path = linePath.cgPath
         lineLayer.fillColor = UIColor.clear.cgColor
         lineLayer.strokeColor = lineColor.cgColor
-        lineLayer.lineWidth = 2.0
+        lineLayer.lineWidth = 3.0
             
         lineLayer.shadowColor = shadowColor.cgColor
-        lineLayer.shadowOffset = CGSize(width: 0, height: 8)
+        lineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         lineLayer.shadowOpacity = 0.5
         lineLayer.shadowRadius = 4.0
             

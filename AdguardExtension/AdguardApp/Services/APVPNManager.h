@@ -186,7 +186,7 @@ this flag indicates that filtering of mobile data is on/off
 /**
  Class controls VPN configuration and controls status of the connection. 
  */
-@interface APVPNManager  : NSObject<APVPNManagerProtocol>
+@interface APVPNManager : NSObject<APVPNManagerProtocol>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize

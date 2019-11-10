@@ -53,6 +53,7 @@ extern NSString * _Nonnull ASAntibannerUpdatePartCompletedNotification;
 
 /// When anitbanner finished update process
 extern NSString * _Nonnull ASAntibannerFinishedUpdateNotification;
+
 /// Key for userInfo of ASAntibannerFinishedUpdateNotification that defines
 /// array of metadata objects of updated filters.
 extern NSString * _Nonnull ASAntibannerUpdatedFiltersKey;

@@ -25,14 +25,16 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let resources: APSharedResources
     private var records = [DnsLogRecord]()
+    private let dnsTrackerService: DnsTrackerServiceProtocol
     
     private let saveRecordsMinimumTime = 3.0 // seconds
     private var nextSaveTime: Double
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
     
-    @objc init(resources: APSharedResources) {
+    @objc init(resources: APSharedResources, dnsTrackerService: DnsTrackerServiceProtocol) {
         self.resources = resources
+        self.dnsTrackerService = dnsTrackerService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
     }
@@ -46,8 +48,25 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             // Ignore errors
             return
         }
+        
+        let info = dnsTrackerService.getCategoryAndName(by: event?.domain)
+        let type = isBlocked(event.answer, isTracked: info?.isTracked)
+        
+        let number = resources.defaultRequestsNumber.intValue
+        resources.defaultRequestsNumber = NSNumber(integerLiteral: number + 1)
+        
+        switch type {
+        case .blocked:
+            let number = resources.blockedRequestsNumber.intValue
+            resources.blockedRequestsNumber = NSNumber(integerLiteral: number + 1)
+        case .tracked:
+            let number = resources.countersRequestsNumber.intValue
+            resources.countersRequestsNumber = NSNumber(integerLiteral: number + 1)
+        default:
+            break
+        }
 
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: event.bytesSent, bytesReceived: event.bytesReceived)
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: event.bytesSent, bytesReceived: event.bytesReceived, blockRecordType: type, name: info?.name, company: info?.company, category: info?.categoryKey)
         addRecord(record: record, flush: false)
     }
     
@@ -77,5 +96,24 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     private func save() {
         resources.write(to: records)
         records.removeAll()
+    }
+    
+    private func isBlocked(_ answer: String?, isTracked: Bool?) -> BlockedRecordType {
+        if answer == nil || answer == "" {
+            // Mark all NXDOMAIN responses as blocked
+            return .blocked
+        }
+
+        if answer!.contains("0.0.0.0") ||
+            answer!.contains("127.0.0.1") ||
+            answer!.contains("[::]")  {
+            return .blocked
+        }
+
+        if isTracked ?? false {
+            return .tracked
+        }
+        
+        return .normal
     }
 }

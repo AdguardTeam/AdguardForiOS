@@ -18,6 +18,10 @@
 
 import Foundation
 
+@objc enum BlockedRecordType: Int{
+    case blocked = 0, whitelisted, tracked, normal
+}
+
 @objc(DnsLogRecord)
 class DnsLogRecord: NSObject, NSCoding {
     
@@ -30,8 +34,12 @@ class DnsLogRecord: NSObject, NSCoding {
     let upstreamAddr: String?
     let bytesSent: Int
     let bytesReceived: Int
+    var blockRecordType: BlockedRecordType
+    var name: String?
+    var company: String? = "company"
+    var category: String?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, blockRecordType: BlockedRecordType, name: String?, company: String?, category: String?) {
         
         self.domain = domain
         self.date = date
@@ -42,6 +50,10 @@ class DnsLogRecord: NSObject, NSCoding {
         self.upstreamAddr = upstreamAddr
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
+        self.blockRecordType = blockRecordType
+        self.name = name
+        self.company = company
+        self.category = category
         
         super.init()
     }
@@ -58,6 +70,7 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
         aCoder.encode(bytesSent, forKey: "bytesSent")
         aCoder.encode(bytesReceived, forKey: "bytesReceived")
+        aCoder.encode(blockRecordType.rawValue, forKey: "blockRecordType")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,6 +82,9 @@ class DnsLogRecord: NSObject, NSCoding {
         self.server = aDecoder.decodeObject(forKey: "server") as! String
         self.bytesSent = aDecoder.decodeInteger(forKey: "bytesSent")
         self.bytesReceived = aDecoder.decodeInteger(forKey: "bytesReceived")
+        
+        let type = aDecoder.decodeInteger(forKey: "blockRecordType")
+        self.blockRecordType = BlockedRecordType.init(rawValue: type) ?? .normal
         
         // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String

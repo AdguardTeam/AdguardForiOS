@@ -23,7 +23,7 @@ struct LogRecord {
     var category: String?
     var status: DnsLogStatus = .processed
     var name: String?
-    var company: String = "company"
+    var company: String?
     var domain: String?
     var time: String?
     var elapsed: Int
@@ -33,7 +33,7 @@ struct LogRecord {
     var upstreamAddr: String?
     var bytesSent: Int
     var bytesReceived: Int
-    var isTracked: Bool?
+    var blockRecordType: BlockedRecordType
     
     enum DnsLogStatus: String {
         case processed = "Processed"
@@ -190,18 +190,14 @@ class DnsRequestLogViewModel {
                 sSelf.recordsObserver?(sSelf.records)
                 return
             }
-            let dnsTrackerService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
             for logRecord in logRecords.reversed() {
-                let info = dnsTrackerService.getCategoryAndName(by: logRecord.domain)
-                let name = info.name
-                let isTracked = info.isTracked
                 
                 var categoryName: String? = nil
-                if let categoryKey = info.categoryKey {
+                if let categoryKey = logRecord.category {
                     categoryName = ACLocalizedString(categoryKey, nil)
                 }
                 
-                let record = LogRecord(category: categoryName, name: name, domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked)
+                let record = LogRecord(category: categoryName, name: logRecord.name, company: logRecord.company, domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, blockRecordType: logRecord.blockRecordType)
                 sSelf.allRecords.append(record)
             }
             
@@ -221,6 +217,25 @@ class DnsRequestLogViewModel {
     private func dateFromRecord (_ record: DnsLogRecord) -> String {
         dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: record.date)
+    }
+    
+    private func isBlocked(_ answer: String?, isTracked: Bool?) -> BlockedRecordType {
+        if answer == nil || answer == "" {
+            // Mark all NXDOMAIN responses as blocked
+            return .blocked
+        }
+
+        if answer!.contains("0.0.0.0") ||
+            answer!.contains("127.0.0.1") ||
+            answer!.contains("[::]")  {
+            return .blocked
+        }
+
+        if isTracked ?? false {
+            return .tracked
+        }
+        
+        return .normal
     }
     
 }

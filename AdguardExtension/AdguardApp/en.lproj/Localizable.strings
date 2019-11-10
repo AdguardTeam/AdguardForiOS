@@ -558,3 +558,27 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+
+/*(MainScreen) request type button */
+"chart_requests" = "%d \n requests";
+
+/*(MainScreen) blocker type button */
+"chart_blockers" = "%d \n blocked";
+
+/*(MainScreen) counter type button */
+"chart_counters" = "%d \n counters";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 hours";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Today";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 days";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 days";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "All time";

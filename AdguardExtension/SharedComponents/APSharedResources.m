@@ -56,6 +56,12 @@ static NSTimeInterval lastPurgeTime;
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
 
+NSString *DefaultRequestsNumberChangedNotification = @"DefaultRequestsNumberChangedNotification";
+
+NSString *BlockedRequestsNumberChangedNotification = @"BlockedRequestsNumberChangedNotification";
+
+NSString *CountersRequestsNumberChangedNotification = @"CountersRequestsNumberChangedNotification";
+
 @implementation APSharedResources
 
 /////////////////////////////////////////////////////////////////////
@@ -132,6 +138,36 @@ static FMDatabaseQueue *_writeDnsLogHandler;
             [table insertOrReplace:NO fromRowObject:row];
         }
     }];
+}
+
+- (void)setDefaultRequestsNumber:(NSNumber *)defaultRequestsNumber{
+    [self.sharedDefaults setObject:defaultRequestsNumber forKey:AEDefaultsRequests];
+    [NSNotificationCenter.defaultCenter postNotificationName:DefaultRequestsNumberChangedNotification object:self];
+}
+
+- (NSNumber *)defaultRequestsNumber{
+    NSNumber *returnValue = [self.sharedDefaults objectForKey:AEDefaultsRequests];
+    return returnValue;
+}
+
+- (void)setBlockedRequestsNumber:(NSNumber *)blockedRequestsNumber{
+    [self.sharedDefaults setObject:blockedRequestsNumber forKey:AEDefaultsBlockedRequests];
+    [NSNotificationCenter.defaultCenter postNotificationName:BlockedRequestsNumberChangedNotification object:self];
+}
+
+- (NSNumber *)blockedRequestsNumber{
+    NSNumber *returnValue = [self.sharedDefaults objectForKey:AEDefaultsBlockedRequests];
+    return returnValue;
+}
+
+- (void)setCountersRequestsNumber:(NSNumber *)countersRequestsNumber{
+    [self.sharedDefaults setObject:countersRequestsNumber forKey:AEDefaultsCountersRequests];
+    [NSNotificationCenter.defaultCenter postNotificationName:CountersRequestsNumberChangedNotification object:self];
+}
+
+- (NSNumber *)countersRequestsNumber{
+    NSNumber *returnValue = [self.sharedDefaults objectForKey:AEDefaultsCountersRequests];
+    return returnValue;
 }
 
 /////////////////////////////////////////////////////////////////////

@@ -39,20 +39,32 @@ struct Tracker: Codable {
     }
 }
 
-protocol DnsTrackerServiceProtocol {
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?)
+@objc protocol DnsTrackerServiceProtocol {
+    func getCategoryAndName(by domain: String?) -> DnsTrackerInfo?
 }
 
-class DnsTrackerService: DnsTrackerServiceProtocol {
+@objc class DnsTrackerInfo: NSObject {
+    let categoryKey: String?
+    let name: String?
+    let isTracked: Bool?
+    let company: String?
+    
+    init(categoryKey: String?, name: String?, isTracked: Bool?, company: String?) {
+        self.categoryKey = categoryKey
+        self.name = name
+        self.isTracked = isTracked
+        self.company = company
+    }
+}
+
+@objc class DnsTrackerService: NSObject, DnsTrackerServiceProtocol {
     
     private var dnsTrackers: DnsTrackers?
     
-    init() {
+    func getCategoryAndName(by domain: String?) -> DnsTrackerInfo? {
         initializeDnsTrackers()
-    }
-    
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?) {
-        let nilReturn: (categoryKey: String?, name: String?, isTracked: Bool?) = (nil, nil, nil)
+        
+        let nilReturn = DnsTrackerInfo(categoryKey: nil, name: nil, isTracked: nil, company: nil)
         
         let trackerDomains = dnsTrackers?.trackerDomains
         
@@ -69,7 +81,8 @@ class DnsTrackerService: DnsTrackerServiceProtocol {
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
-        return (categoryKey, info.name, isTracked)
+        // TODO: Change company
+        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked,company: "company")
     }
     
     // MARK: - Initialization of dns trackers object

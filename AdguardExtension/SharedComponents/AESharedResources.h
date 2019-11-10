@@ -239,6 +239,18 @@ extern NSString* _Nonnull AEDefaultsShowProgressBar;
  User defaults key, which defines whether DNS request blocking is enabled */
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
+/**
+ User defaults key, which defines number of requests */
+extern NSString* _Nonnull AEDefaultsRequests;
+
+/**
+ User defaults key, which defines number of blocked requests */
+extern NSString* _Nonnull AEDefaultsBlockedRequests;
+
+/**
+ User defaults key, which defines number of counters requests */
+extern NSString* _Nonnull AEDefaultsCountersRequests;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
