@@ -174,7 +174,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         "da":"dk",
         "he":"il",
         "cs":"cz",
-        "sv":"se"
+        "sv":"se",
+        "ar":"sa",
     ]
     
     private let updateQueue = DispatchQueue(label: "filter_service_update")
