@@ -59,6 +59,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             self?.tableView.reloadData()
         }
         
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
         setupBackButton()
     }
     
@@ -180,6 +182,15 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
+        }
+    }
+    
+    @objc private func refresh() {
+        viewModel?.refresh { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            }
         }
     }
 }

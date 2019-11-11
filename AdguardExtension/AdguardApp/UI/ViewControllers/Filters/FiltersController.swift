@@ -93,6 +93,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         updateBarButtons()
         navigationItem.title = viewModel?.currentGroup?.name ?? ""
         
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
+        
         setupBackButton()
     }
     
@@ -339,5 +342,14 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    @objc private func refresh() {
+        viewModel?.refresh { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
 }
