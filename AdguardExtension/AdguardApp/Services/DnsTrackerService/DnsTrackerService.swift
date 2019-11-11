@@ -40,7 +40,7 @@ struct Tracker: Codable {
 }
 
 @objc protocol DnsTrackerServiceProtocol {
-    func getCategoryAndName(by domain: String?) -> DnsTrackerInfo?
+    func getCategoryAndName(by domain: String) -> DnsTrackerInfo?
 }
 
 @objc class DnsTrackerInfo: NSObject {
@@ -61,14 +61,17 @@ struct Tracker: Codable {
     
     private var dnsTrackers: DnsTrackers?
     
-    func getCategoryAndName(by domain: String?) -> DnsTrackerInfo? {
+    override init() {
+        super.init()
         initializeDnsTrackers()
+    }
+    
+    func getCategoryAndName(by domain: String) -> DnsTrackerInfo? {
         
         let nilReturn = DnsTrackerInfo(categoryKey: nil, name: nil, isTracked: nil, company: nil)
         
         let trackerDomains = dnsTrackers?.trackerDomains
         
-        guard let domain = domain else { return nilReturn }
         guard let domainKey = trackerDomains?[domain] else { return nilReturn }
         
         let trackers = dnsTrackers?.trackers

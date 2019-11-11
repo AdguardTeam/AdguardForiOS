@@ -43,13 +43,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         flush()
     }
     
-    func dnsRequestProcessed(_ event: MobileDNSRequestProcessedEvent!) {
+    func dnsRequestProcessed(_ event: MobileDNSRequestProcessedEvent) {
         if event.error != nil && event.error != "" {
             // Ignore errors
             return
         }
         
-        let info = dnsTrackerService.getCategoryAndName(by: event?.domain)
+        let info = dnsTrackerService.getCategoryAndName(by: event.domain ?? "")
         let type = isBlocked(event.answer, isTracked: info?.isTracked)
         
         let number = resources.defaultRequestsNumber.intValue
