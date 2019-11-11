@@ -49,7 +49,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
         
-        let info = dnsTrackerService.getCategoryAndName(by: event.domain ?? "")
+        let info = dnsTrackerService.getTrackerInfo(by: event.domain ?? "")
         let type = isBlocked(event.answer, isTracked: info?.isTracked)
         
         let number = resources.defaultRequestsNumber.intValue
