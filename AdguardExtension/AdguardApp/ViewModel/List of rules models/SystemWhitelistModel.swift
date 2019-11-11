@@ -112,7 +112,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private let fileShare: FileShareServiceProtocol = FileShareService()
     
     /* Variables */
-    private let fileName = "dns_whitelist"
+    private let fileName = "dns_whitelist.txt"
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
