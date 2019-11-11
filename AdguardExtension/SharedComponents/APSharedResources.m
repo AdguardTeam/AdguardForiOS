@@ -56,12 +56,6 @@ static NSTimeInterval lastPurgeTime;
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
 
-NSString *DefaultRequestsNumberChangedNotification = @"DefaultRequestsNumberChangedNotification";
-
-NSString *BlockedRequestsNumberChangedNotification = @"BlockedRequestsNumberChangedNotification";
-
-NSString *CountersRequestsNumberChangedNotification = @"CountersRequestsNumberChangedNotification";
-
 @implementation APSharedResources
 
 /////////////////////////////////////////////////////////////////////
@@ -142,7 +136,6 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 
 - (void)setDefaultRequestsNumber:(NSNumber *)defaultRequestsNumber{
     [self.sharedDefaults setObject:defaultRequestsNumber forKey:AEDefaultsRequests];
-    [NSNotificationCenter.defaultCenter postNotificationName:DefaultRequestsNumberChangedNotification object:self];
 }
 
 - (NSNumber *)defaultRequestsNumber{
@@ -152,7 +145,6 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 
 - (void)setBlockedRequestsNumber:(NSNumber *)blockedRequestsNumber{
     [self.sharedDefaults setObject:blockedRequestsNumber forKey:AEDefaultsBlockedRequests];
-    [NSNotificationCenter.defaultCenter postNotificationName:BlockedRequestsNumberChangedNotification object:self];
 }
 
 - (NSNumber *)blockedRequestsNumber{
@@ -162,7 +154,6 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 
 - (void)setCountersRequestsNumber:(NSNumber *)countersRequestsNumber{
     [self.sharedDefaults setObject:countersRequestsNumber forKey:AEDefaultsCountersRequests];
-    [NSNotificationCenter.defaultCenter postNotificationName:CountersRequestsNumberChangedNotification object:self];
 }
 
 - (NSNumber *)countersRequestsNumber{

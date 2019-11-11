@@ -49,17 +49,11 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
             self?.changeAllButtonsText()
         }
         
-        requestsObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.DefaultRequestsNumberChanged, object: nil, queue: nil, using: {[weak self] (notification) in
-            
-        })
+        requestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        blockedRequestsObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.BlockedRequestsNumberChanged, object: nil, queue: nil, using: {[weak self] (notification) in
-            
-        })
+        blockedRequestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        countersRequestsObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.CountersRequestsNumberChanged, object: nil, queue: nil, using: {[weak self] (notification) in
-            
-        })
+        countersRequestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
     }
 
     // MARK: - Actions
@@ -107,6 +101,21 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
     
     func chartPointsChanged(points: [Point]) {
         chartView.chartPoints = points
+    }
+
+    // MARK: - Observing Values from User Defaults
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        switch keyPath {
+        case AEDefaultsRequests:
+            changeButtonsText(with: requestsTag)
+        case AEDefaultsBlockedRequests:
+            changeButtonsText(with: blockedTag)
+        case AEDefaultsCountersRequests:
+            changeButtonsText(with: countersTag)
+        default:
+            break
+        }
     }
     
     // MARK: - Private methods

@@ -24,12 +24,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
 
-extern NSString * _Nonnull DefaultRequestsNumberChangedNotification;
-
-extern NSString * _Nonnull BlockedRequestsNumberChangedNotification;
-
-extern NSString * _Nonnull CountersRequestsNumberChangedNotification;
-
 /**
      (PRO) Class, which provides exchanging data between app and extension.
  */
