@@ -38,7 +38,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var termsText: UITextView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -83,24 +82,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 self?.processNotification(info: info)
             }
         }
-        
-        let termsFormat = ACLocalizedString("login_terms_string", nil)
-        let termsUrl = UIApplication.shared.adguardUrl(action: "privacy", from: "login")
-        let eulaUrl = UIApplication.shared.adguardUrl(action: "eula", from: "login")
-        if let termsString = String(format: termsFormat, termsUrl, eulaUrl).attributedStringFromHtml() {
-            let range = NSRange(location: 0, length: termsString.length)
-            termsString.addAttribute(.foregroundColor, value: theme.grayTextColor, range: range)
-            
-            let style = NSMutableParagraphStyle()
-            style.alignment = .center
-            termsString.addAttribute(.paragraphStyle, value: style, range: range)
-            termsString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12.0), range: range)
-        
-            termsText.attributedText = termsString
-        }
-        
-        termsText.tintColor = theme.grayTextColor
-        
         updateTheme()
     }
     
@@ -173,7 +154,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         separators.forEach { $0.backgroundColor = theme.separatorColor }
         
         theme.setupLabels(themableLabels)
-        theme.setupTextView(termsText)
         
         updateLines()
     }
