@@ -470,7 +470,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <segue destination="Das-Gb-UPp" kind="show" id="oDu-UM-j6Y"/>
+                                            <segue destination="5ol-3D-VBk" kind="show" id="toR-Ct-QAP"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eeW-qc-wpC">
@@ -1430,88 +1430,6 @@
             <point key="canvasLocation" x="1288" y="-1877"/>
         </scene>
         <!--DNS server-->
-        <scene sceneID="7zB-M9-0y6">
-            <objects>
-                <viewController id="Das-Gb-UPp" customClass="DnsProvidersContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vmC-0g-aaZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFA-3e-IYJ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="760"/>
-                                <connections>
-                                    <segue destination="5ol-3D-VBk" kind="embed" id="xYI-16-E9I"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBx-dq-oa2" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="760" width="414" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="gkA-2p-jKc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="64" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" title="Add custom DNS server">
-                                    <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="addProviderAction:" destination="Das-Gb-UPp" eventType="touchUpInside" id="oTr-kO-81x"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P78-Jb-PgP">
-                                <rect key="frame" x="0.0" y="759.5" width="414" height="0.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="nSp-Cq-2VT"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqE-di-rOz">
-                                <rect key="frame" x="0.0" y="808.5" width="414" height="0.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="AVe-2f-8Eq"/>
-                                </constraints>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="sV4-Vt-71r">
-                                <rect key="frame" x="24" y="772" width="24" height="24"/>
-                                <color key="tintColor" red="0.29803921568627451" green="0.6470588235294118" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="03v-WT-W9d"/>
-                                    <constraint firstAttribute="width" constant="24" id="1GH-pz-G9M"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="mBx-dq-oa2" firstAttribute="top" secondItem="pFA-3e-IYJ" secondAttribute="bottom" id="16n-ev-vga"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="trailing" secondItem="pFA-3e-IYJ" secondAttribute="trailing" id="8vl-mH-GzR"/>
-                            <constraint firstItem="pFA-3e-IYJ" firstAttribute="leading" secondItem="FQI-dl-UA9" secondAttribute="leading" id="FdA-V7-rgF"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="bottom" secondItem="mBx-dq-oa2" secondAttribute="bottom" id="Hhg-zs-hIV"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="trailing" secondItem="mBx-dq-oa2" secondAttribute="trailing" id="MYh-0F-hPh"/>
-                            <constraint firstItem="dqE-di-rOz" firstAttribute="leading" secondItem="FQI-dl-UA9" secondAttribute="leading" id="R4F-Hg-eLL"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="trailing" secondItem="P78-Jb-PgP" secondAttribute="trailing" id="TLV-xF-dY1"/>
-                            <constraint firstItem="sV4-Vt-71r" firstAttribute="leading" secondItem="FQI-dl-UA9" secondAttribute="leading" constant="24" id="bSR-KV-45T"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="bottom" secondItem="dqE-di-rOz" secondAttribute="bottom" constant="-1" id="lFE-l4-E8k"/>
-                            <constraint firstItem="P78-Jb-PgP" firstAttribute="leading" secondItem="FQI-dl-UA9" secondAttribute="leading" id="nYK-IJ-th8"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="trailing" secondItem="dqE-di-rOz" secondAttribute="trailing" id="pMF-FY-iqy"/>
-                            <constraint firstItem="mBx-dq-oa2" firstAttribute="top" secondItem="P78-Jb-PgP" secondAttribute="bottom" id="uKf-WV-wgd"/>
-                            <constraint firstItem="FQI-dl-UA9" firstAttribute="bottom" secondItem="sV4-Vt-71r" secondAttribute="bottom" constant="12" id="wFv-2M-pwM"/>
-                            <constraint firstItem="mBx-dq-oa2" firstAttribute="leading" secondItem="FQI-dl-UA9" secondAttribute="leading" id="wGz-9u-vUa"/>
-                            <constraint firstItem="pFA-3e-IYJ" firstAttribute="top" secondItem="FQI-dl-UA9" secondAttribute="top" id="zEX-A1-RJ4"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="FQI-dl-UA9"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="DNS server" id="1tX-ii-cOK"/>
-                    <connections>
-                        <outlet property="addProviderButton" destination="mBx-dq-oa2" id="pPv-Jg-gCO"/>
-                        <outlet property="buttonBottomSeparator" destination="dqE-di-rOz" id="kPA-WR-gjm"/>
-                        <outlet property="buttonTopSeparator" destination="P78-Jb-PgP" id="1IW-O5-4qW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ux-nH-3dJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9" y="-470"/>
-        </scene>
-        <!--Dns Providers Controller-->
         <scene sceneID="dNS-fY-mTh">
             <objects>
                 <tableViewController id="5ol-3D-VBk" customClass="DnsProvidersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -1519,6 +1437,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="a2t-rG-DMO">
                             <rect key="frame" x="0.0" y="276" width="414" height="0.0"/>
@@ -1536,7 +1455,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-tk-ohH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="16" width="366" height="43.5"/>
                                             <string key="text">DNS (Domain Name System) is Internet's equivalent of a phone book. They maintain a directory of domain names and translate them to IP adresses</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -1570,7 +1489,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="brp-yc-vqK"/>
                                             </constraints>
-                                            <inset key="contentEdgeInsets" minX="26" minY="26" maxX="0.0" maxY="0.0"/>
+                                            <inset key="contentEdgeInsets" minX="18" minY="26" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="bulletnone"/>
                                             <state key="selected" image="bullet"/>
                                             <connections>
@@ -1579,7 +1498,7 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mna-SN-pS2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="64" y="22" width="288" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -1639,7 +1558,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="HKt-gC-KUw"/>
                                             </constraints>
-                                            <inset key="contentEdgeInsets" minX="26" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="bulletnone"/>
                                             <state key="selected" image="bullet"/>
                                             <connections>
@@ -1648,7 +1567,7 @@
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-TY-che" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="64" y="22" width="288" height="0.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -1683,19 +1602,54 @@
                                     <outlet property="selectedButton" destination="pNI-Gy-HkD" id="XAE-Ol-8Rw"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddServer" id="JQg-e2-CBx">
+                                <rect key="frame" x="0.0" y="259" width="414" height="56.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JQg-e2-CBx" id="TOz-o6-rxt">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-mD-pjg">
+                                            <rect key="frame" x="18" y="16" width="24" height="24.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="CVl-Sa-17f"/>
+                                                <constraint firstAttribute="height" constant="24" id="Hx6-pn-HXe"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add custom DNS server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-rO-z2K">
+                                            <rect key="frame" x="58" y="19.5" width="340" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="ZSp-mD-pjg" secondAttribute="bottom" constant="16" id="3Of-Aj-V25"/>
+                                        <constraint firstAttribute="trailing" secondItem="d1u-rO-z2K" secondAttribute="trailing" constant="16" id="67l-z6-oqI"/>
+                                        <constraint firstItem="d1u-rO-z2K" firstAttribute="leading" secondItem="ZSp-mD-pjg" secondAttribute="trailing" constant="16" id="6ll-fU-YJy"/>
+                                        <constraint firstItem="ZSp-mD-pjg" firstAttribute="leading" secondItem="TOz-o6-rxt" secondAttribute="leading" constant="18" id="7p2-9D-UhK"/>
+                                        <constraint firstItem="ZSp-mD-pjg" firstAttribute="top" secondItem="TOz-o6-rxt" secondAttribute="top" constant="16" id="A4Q-qT-I1L"/>
+                                        <constraint firstItem="d1u-rO-z2K" firstAttribute="centerY" secondItem="ZSp-mD-pjg" secondAttribute="centerY" id="vgH-13-405"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="5ol-3D-VBk" id="yKH-8E-GFX"/>
                             <outlet property="delegate" destination="5ol-3D-VBk" id="BL3-Ul-ACP"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="DNS server" id="4rw-Lb-MJH"/>
                     <connections>
                         <segue destination="6wJ-yl-17c" kind="show" identifier="dnsDetailsSegue" id="6dd-NQ-0zV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fs-Mf-BMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1336" y="-471"/>
+            <point key="canvasLocation" x="9" y="-488"/>
         </scene>
         <!--DNS request details-->
         <scene sceneID="XPH-Sm-H0R">
@@ -2538,7 +2492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Kz-BC-zFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2046" y="-469"/>
+            <point key="canvasLocation" x="719" y="-486"/>
         </scene>
         <!--Dns Provider Details Controller-->
         <scene sceneID="vjE-jp-Ycf">
@@ -2797,7 +2751,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAp-UD-x2m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2872" y="-468"/>
+            <point key="canvasLocation" x="1545" y="-485"/>
         </scene>
         <!--New Dns Server Controller-->
         <scene sceneID="jVE-mD-6Ik">

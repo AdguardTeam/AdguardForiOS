@@ -41,7 +41,7 @@ class CustomAnimatedTransitioning : NSObject, UIViewControllerAnimatedTransition
         
         transitionContext.containerView.layoutIfNeeded()
         
-        transitionContext.containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        transitionContext.containerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         let fromPoint = CGPoint(x: transitionContext.containerView.frame.origin.x, y: transitionContext.containerView.frame.origin.y + 210)//transitionContext.containerView.frame.size.height)
         toView.frame = CGRect(origin: fromPoint, size: transitionContext.containerView.frame.size)
         UIView.animate(withDuration: 0.2) {

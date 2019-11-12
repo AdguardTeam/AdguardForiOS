@@ -208,6 +208,12 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         })
     }
     
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
     // MARK: - RuleDetailsControllerDelegate methods
     
     func removeRule(rule: RuleInfo) {

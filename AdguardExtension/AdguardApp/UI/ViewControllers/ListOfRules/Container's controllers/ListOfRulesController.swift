@@ -105,6 +105,13 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         
         updateTheme()
     }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
     // MARK: - Actions
     
     @IBAction func rightButtonAction(_ sender: UIButton) {

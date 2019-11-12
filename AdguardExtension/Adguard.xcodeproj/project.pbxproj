@@ -1052,7 +1052,6 @@
 		D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */; };
 		D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A164121678EA5008BB432 /* RoundrectView.swift */; };
 		D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */; };
-		D07AA061220490EC0065779F /* DnsProvidersContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA060220490EC0065779F /* DnsProvidersContainerController.swift */; };
 		D07AA0632207A5B10065779F /* NewDnsServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA0622207A5B10065779F /* NewDnsServerController.swift */; };
 		D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA066220823670065779F /* ChooseProtocolController.swift */; };
 		D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
@@ -1931,7 +1930,6 @@
 		D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		D07A164121678EA5008BB432 /* RoundrectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundrectView.swift; sourceTree = "<group>"; };
 		D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomFilterDetailsController.swift; sourceTree = "<group>"; };
-		D07AA060220490EC0065779F /* DnsProvidersContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersContainerController.swift; sourceTree = "<group>"; };
 		D07AA0622207A5B10065779F /* NewDnsServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDnsServerController.swift; sourceTree = "<group>"; };
 		D07AA066220823670065779F /* ChooseProtocolController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseProtocolController.swift; sourceTree = "<group>"; };
 		D07AA06B220833A10065779F /* ACDnsUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACDnsUtils.h; sourceTree = "<group>"; };
@@ -3441,7 +3439,6 @@
 				D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */,
 				D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */,
 				D005096C2202F5EB006BC10C /* DnsProviderDetailsController.swift */,
-				D07AA060220490EC0065779F /* DnsProvidersContainerController.swift */,
 				D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */,
 				D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */,
 				D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */,
@@ -5225,7 +5222,6 @@
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				7E4D204A22D71A5B003B0E75 /* mz_compat.c in Sources */,
-				D07AA061220490EC0065779F /* DnsProvidersContainerController.swift in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,
