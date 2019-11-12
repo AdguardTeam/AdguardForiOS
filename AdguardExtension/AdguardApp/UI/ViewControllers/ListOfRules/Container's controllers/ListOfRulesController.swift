@@ -197,7 +197,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             leftButton.setTitle(model?.leftButtonTitle, for: .normal)
             leftButton.setTitleColor(theme.errorRedColor, for: .normal)
         } else {
-            leftButton.setTitle(model?.exportTitle, for: .normal)
+            leftButton.setTitle(String.localizedString("export"), for: .normal)
             leftButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         }
     }
@@ -207,7 +207,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             middleButton.setTitle(model?.middleButtonTitle, for: .normal)
             middleButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         } else {
-            middleButton.setTitle(model?.importTitle, for: .normal)
+            middleButton.setTitle(String.localizedString("import"), for: .normal)
             middleButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         }
     }

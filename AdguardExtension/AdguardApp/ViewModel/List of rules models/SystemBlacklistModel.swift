@@ -67,18 +67,6 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
         }
     }
     
-    var exportTitle: String {
-        get {
-            return ACLocalizedString("export_blacklist_title", nil)
-        }
-    }
-    
-    var importTitle: String {
-        get {
-            return ACLocalizedString("import_blacklist_title", nil)
-        }
-    }
-    
     var leftButtonTitle: String {
         get {
             return ACLocalizedString("common_delete", nil)

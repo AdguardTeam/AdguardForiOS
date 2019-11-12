@@ -66,18 +66,6 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             return ACLocalizedString("inverted_whitelist_title", nil)
         }
     }
-
-    var exportTitle: String {
-        get {
-            return ACLocalizedString("export_whitelist", nil)
-        }
-    }
-
-    var importTitle: String {
-        get {
-            return ACLocalizedString("import_whitelist", nil)
-        }
-    }
     
     var leftButtonTitle: String {
         get {

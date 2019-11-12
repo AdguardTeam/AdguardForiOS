@@ -451,12 +451,6 @@
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
-/* (ListOfRulesModel) title for export dns and safari white list*/
-"export_whitelist" = "Export whitelist";
-
-/* (ListOfRulesModel) title for export dns black list */
-"export_blacklist_title" = "Export blacklist";
-
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Clear";
 
@@ -465,12 +459,6 @@
 
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
-
-/* (ListOfRulesModel) title for import dns and safari white list*/
-"import_whitelist" = "Import whitelist";
-
-/* (ListOfRulesModel) title for import dns black list */
-"import_blacklist_title" = "Import blacklist";
 
 /* "Enabled" title */
 "enabled" = "Enabled";
