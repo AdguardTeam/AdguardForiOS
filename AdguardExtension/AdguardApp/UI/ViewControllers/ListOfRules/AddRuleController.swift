@@ -56,6 +56,10 @@ class AddRuleController: UIViewController, UITextViewDelegate {
             ruleTextView.keyboardType = .URL
         }
         
+        if type == .safariUserfilter {
+            ruleTextView.font = UIFont(name: "PTMono-Regular", size: 14.0)
+        }
+        
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         

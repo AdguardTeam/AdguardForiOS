@@ -151,7 +151,7 @@
 "add_whitelist_domain_placeholder" = "example.org";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "your Wi-Fi name";
+"add_wifi_name_placeholder" = "Your Wi-Fi name";
 
 
 /* (UserFilterController) add blacklist rule caption */
