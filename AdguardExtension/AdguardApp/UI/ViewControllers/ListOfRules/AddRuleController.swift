@@ -33,6 +33,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var rulePlaceholderLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editCaption: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
     
@@ -51,6 +52,8 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         
         titleLabel.text = getTitleText()
         editCaption.text = getEditCaptionText()
+        
+        addButton.isEnabled = false
         
         if (type == .safariWhitelist || type == .invertedSafariWhitelist || type == .systemWhitelist){
             ruleTextView.keyboardType = .URL
@@ -120,9 +123,10 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     }
     
     // MARK: - TextViewDelegateMethods
-
+    
     func textViewDidChange(_ textView: UITextView) {
-        rulePlaceholderLabel.isHidden = textView.text != ""
+        rulePlaceholderLabel.isHidden = textView.text != nil && textView.text != ""
+        addButton.isEnabled = textView.text != nil && textView.text != ""
     }
 
     // MARK: - privat methods
