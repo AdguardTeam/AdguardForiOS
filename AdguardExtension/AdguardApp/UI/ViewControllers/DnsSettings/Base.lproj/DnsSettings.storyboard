@@ -1683,12 +1683,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKG-G9-DqW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="390" y="16" width="0.0" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Category" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mni-fx-xGW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="16" width="63" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1715,16 +1709,35 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Dg-UD-Noj">
+                                                    <rect key="frame" x="376" y="14" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="SYz-Fu-yyD"/>
+                                                        <constraint firstAttribute="width" constant="20" id="jtc-Bs-qT9"/>
+                                                    </constraints>
+                                                    <state key="normal" image="question"/>
+                                                    <connections>
+                                                        <action selector="whoTracksMeInfo:" destination="As8-wu-UXQ" eventType="touchUpInside" id="8Ea-gO-zeI"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKG-G9-DqW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="366" y="16" width="0.0" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="lKG-G9-DqW" secondAttribute="trailing" constant="24" id="4jY-K9-fiX"/>
                                                 <constraint firstAttribute="bottom" secondItem="lKG-G9-DqW" secondAttribute="bottom" constant="16" id="5EF-NE-w0F"/>
                                                 <constraint firstItem="lKG-G9-DqW" firstAttribute="top" secondItem="lkI-qA-P2j" secondAttribute="top" constant="16" id="63S-EP-Ppk"/>
                                                 <constraint firstItem="Mni-fx-xGW" firstAttribute="leading" secondItem="lkI-qA-P2j" secondAttribute="leading" constant="24" id="72P-VP-8Lt"/>
                                                 <constraint firstItem="3tR-f7-6Rj" firstAttribute="leading" secondItem="lkI-qA-P2j" secondAttribute="leading" constant="14" id="Nap-HC-D5U"/>
+                                                <constraint firstItem="4Dg-UD-Noj" firstAttribute="leading" secondItem="lKG-G9-DqW" secondAttribute="trailing" constant="10" id="PaA-v8-dqG"/>
                                                 <constraint firstItem="lKG-G9-DqW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mni-fx-xGW" secondAttribute="trailing" constant="20" id="QgZ-m4-bkZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="4Dg-UD-Noj" secondAttribute="trailing" constant="18" id="bnY-Pt-PXK"/>
                                                 <constraint firstItem="3tR-f7-6Rj" firstAttribute="centerY" secondItem="Mni-fx-xGW" secondAttribute="centerY" id="iuz-Br-LyX"/>
                                                 <constraint firstItem="Mni-fx-xGW" firstAttribute="top" secondItem="lkI-qA-P2j" secondAttribute="top" constant="16" id="kou-H2-z6s"/>
+                                                <constraint firstItem="4Dg-UD-Noj" firstAttribute="centerY" secondItem="lkI-qA-P2j" secondAttribute="centerY" id="rYS-Uw-c9f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1819,13 +1832,26 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joj-qT-Xm3">
+                                                    <rect key="frame" x="376" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Y66-uy-zaE"/>
+                                                        <constraint firstAttribute="width" constant="20" id="dx5-a1-vL2"/>
+                                                    </constraints>
+                                                    <state key="normal" image="question"/>
+                                                    <connections>
+                                                        <action selector="whoTracksMeInfo:" destination="As8-wu-UXQ" eventType="touchUpInside" id="4aE-QB-tsz"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="joj-qT-Xm3" firstAttribute="centerY" secondItem="oIG-Tv-pU2" secondAttribute="centerY" id="95W-ej-9Ze"/>
+                                                <constraint firstItem="joj-qT-Xm3" firstAttribute="leading" secondItem="tgv-MJ-MGe" secondAttribute="trailing" constant="10" id="BAo-wB-ea7"/>
                                                 <constraint firstItem="9HL-1a-Qbs" firstAttribute="leading" secondItem="oIG-Tv-pU2" secondAttribute="leading" constant="14" id="DC5-ux-bz9"/>
+                                                <constraint firstAttribute="trailing" secondItem="joj-qT-Xm3" secondAttribute="trailing" constant="18" id="J5f-gz-d6v"/>
                                                 <constraint firstItem="9HL-1a-Qbs" firstAttribute="centerY" secondItem="j6R-Qj-Me7" secondAttribute="centerY" id="OSb-Cy-6iS"/>
                                                 <constraint firstItem="j6R-Qj-Me7" firstAttribute="top" secondItem="oIG-Tv-pU2" secondAttribute="top" constant="16" id="bTP-RB-d6g"/>
                                                 <constraint firstItem="tgv-MJ-MGe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j6R-Qj-Me7" secondAttribute="trailing" constant="20" id="dr3-gp-vxH"/>
-                                                <constraint firstAttribute="trailing" secondItem="tgv-MJ-MGe" secondAttribute="trailing" constant="24" id="kJA-WA-oqW"/>
                                                 <constraint firstItem="j6R-Qj-Me7" firstAttribute="leading" secondItem="oIG-Tv-pU2" secondAttribute="leading" constant="24" id="oYW-8Y-es0"/>
                                                 <constraint firstItem="tgv-MJ-MGe" firstAttribute="top" secondItem="oIG-Tv-pU2" secondAttribute="top" constant="16" id="x5s-0y-Afw"/>
                                                 <constraint firstAttribute="bottom" secondItem="tgv-MJ-MGe" secondAttribute="bottom" constant="16" id="ytO-8w-wGa"/>
@@ -1871,15 +1897,28 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vni-b9-RaZ">
+                                                    <rect key="frame" x="376" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="0Cl-5N-l7q"/>
+                                                        <constraint firstAttribute="height" constant="20" id="bjN-UE-tDI"/>
+                                                    </constraints>
+                                                    <state key="normal" image="question"/>
+                                                    <connections>
+                                                        <action selector="whoTracksMeInfo:" destination="As8-wu-UXQ" eventType="touchUpInside" id="9r6-F1-Gr5"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="zoM-KH-4Ir" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sw9-Wt-0w3" secondAttribute="trailing" constant="20" id="0NV-w6-14m"/>
+                                                <constraint firstItem="Vni-b9-RaZ" firstAttribute="leading" secondItem="zoM-KH-4Ir" secondAttribute="trailing" constant="10" id="0fJ-hl-DmF"/>
                                                 <constraint firstItem="sw9-Wt-0w3" firstAttribute="leading" secondItem="wHh-gq-Ktu" secondAttribute="leading" constant="24" id="27N-0g-hrE"/>
                                                 <constraint firstItem="RgY-ZR-7E0" firstAttribute="centerY" secondItem="sw9-Wt-0w3" secondAttribute="centerY" id="7YW-Y3-KpZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="sw9-Wt-0w3" secondAttribute="bottom" constant="16" id="NsM-iR-kui"/>
                                                 <constraint firstAttribute="bottom" secondItem="zoM-KH-4Ir" secondAttribute="bottom" constant="16" id="Pyw-u3-kc8"/>
                                                 <constraint firstItem="sw9-Wt-0w3" firstAttribute="top" secondItem="wHh-gq-Ktu" secondAttribute="top" constant="16" id="TgG-t6-fij"/>
-                                                <constraint firstAttribute="trailing" secondItem="zoM-KH-4Ir" secondAttribute="trailing" constant="24" id="mBa-bL-1Z0"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vni-b9-RaZ" secondAttribute="trailing" constant="18" id="YHn-v4-R4m"/>
+                                                <constraint firstItem="Vni-b9-RaZ" firstAttribute="centerY" secondItem="wHh-gq-Ktu" secondAttribute="centerY" id="nwf-4b-wnT"/>
                                                 <constraint firstItem="RgY-ZR-7E0" firstAttribute="leading" secondItem="wHh-gq-Ktu" secondAttribute="leading" constant="14" id="v2p-uf-dTE"/>
                                                 <constraint firstItem="zoM-KH-4Ir" firstAttribute="top" secondItem="wHh-gq-Ktu" secondAttribute="top" constant="16" id="yJZ-kF-7Ap"/>
                                             </constraints>
@@ -2411,7 +2450,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhd-V3-W9m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2200" y="1156"/>
+            <point key="canvasLocation" x="2198.5507246376815" y="1155.8035714285713"/>
         </scene>
         <!--Dns Provider Container Controller-->
         <scene sceneID="XJi-NU-3jG">
@@ -3554,6 +3593,7 @@
         <image name="log-icon" width="24" height="24"/>
         <image name="logocheck" width="24" height="24"/>
         <image name="plus" width="26" height="26"/>
+        <image name="question" width="20" height="20"/>
         <image name="whitelist-icon" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
