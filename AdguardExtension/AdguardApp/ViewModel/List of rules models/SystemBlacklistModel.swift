@@ -112,7 +112,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     private let fileShare: FileShareServiceProtocol = FileShareService()
     
     /* Variables */
-    private let fileName = "dns_blacklist"
+    private let fileName = "dns_blacklist.txt"
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
