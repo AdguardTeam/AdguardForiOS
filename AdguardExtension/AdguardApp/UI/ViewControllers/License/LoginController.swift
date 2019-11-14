@@ -57,6 +57,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBackButton()
+        
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView)
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             self?.updateTheme()

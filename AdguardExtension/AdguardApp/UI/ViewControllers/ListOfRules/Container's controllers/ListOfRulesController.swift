@@ -32,6 +32,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var cancelButton: UIBarButtonItem!
+    @IBOutlet var backButton: UIBarButtonItem!
     
     var model: ListOfRulesModelProtocol? = nil
     
@@ -90,6 +91,8 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             showRuleAddedDialog()
         }
         
+        setupBackButton(with: #selector(self.backButtonPressed(sender:)))
+    
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
         
         title = model?.title
@@ -159,6 +162,10 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         navigationItem.setHidesBackButton(false, animated:true)
         navigationItem.rightBarButtonItems = [searchButton]
         
+        state = .normal
+    }
+    
+    @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
         state = .normal
     }
     
@@ -308,5 +315,13 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         controller.transitioningDelegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func backButtonPressed(sender: UIBarButtonItem){
+        if state == .normal {
+            navigationController?.popViewController(animated: true)
+        } else {
+            state = .normal
+        }
     }
 }
