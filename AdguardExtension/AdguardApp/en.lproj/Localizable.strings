@@ -554,7 +554,7 @@
 "converting_rules" = "Rules are being converted  ...";
 
 /*(DnsRequestDetailsController) message for info alert  */
-"whotrackme_message" = "This information loaded from WhoTrackMe.com service";
+"whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "More";
