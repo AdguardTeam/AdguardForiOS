@@ -95,6 +95,8 @@ class AppDelegateHelper: NSObject {
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
         createStatusBarWindow()
+        
+        statusBarWindow?.isHidden = true
                 
         showStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
             guard let sSelf = self else { return }

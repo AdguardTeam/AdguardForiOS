@@ -31,14 +31,10 @@
 
     UITapGestureRecognizer *_gesture;
     BOOL _statusBarHidden;
-    
-//    AVPlayer* _player;
-//    AVPlayerLayer* _playerLayer;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     if (!self.videoName) {
         self.videoName = DEFAULT_TUTORIAL_VIDEO;
@@ -52,10 +48,6 @@
             initWithTarget:self
                     action:@selector(handleGesture:)];
         _gesture.delegate = self;
-
-//        self.showsPlaybackControls = NO;
-//        self.allowsPictureInPicturePlayback = NO;
-        
         
         [self.view addGestureRecognizer: _gesture];
 
@@ -74,11 +66,6 @@
 
             });
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc {
@@ -116,17 +103,6 @@
     return _statusBarHidden;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
     shouldRecognizeSimultaneouslyWithGestureRecognizer:
         (UIGestureRecognizer *)otherGestureRecognizer {
@@ -146,7 +122,7 @@ preparation before navigation
                    });
 }
 
-- (void)    handleGesture:(UIGestureRecognizer *)gestureRecognizer;
+- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer;
 {
 
     if (gestureRecognizer.numberOfTouches == 1) {
@@ -182,22 +158,13 @@ preparation before navigation
     
     self.player = player;
     
-//    _player = player;
-//
-//    _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-//    [_playerLayer setFrame:self.view.bounds];
-//    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-//    [self.view.layer addSublayer:_playerLayer];
-    
     if (player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
         [self.player play];
-//        [_player play];
     }
 }
 
 - (void)removePlayer {
     
-//    [_playerLayer removeFromSuperlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
 
     [self.player.currentItem removeObserver:self forKeyPath:@"status"];
@@ -207,7 +174,6 @@ preparation before navigation
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     
-    // if error occurs, we attempt replace locale specific video on default video
     if ([object isEqual:self.player.currentItem] && [keyPath isEqualToString:@"status"]) {
 
         AVPlayerStatus status = [change[NSKeyValueChangeNewKey] intValue];

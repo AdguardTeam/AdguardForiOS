@@ -67,6 +67,8 @@ class MainController: UIViewController {
     
     @IBOutlet weak var premiumLabel: ThemableLabel!
     
+    @IBOutlet weak var blurView: UIView!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     // MARK: - properties
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -80,6 +82,8 @@ class MainController: UIViewController {
     private var lightThemeLogoImage = UIImage(named: "adguard-header-disabled") ?? UIImage()
     
     private var notificationToken: NotificationToken?
+    
+    private let videoTutorialSegueId = "videoTutorialSegue"
     
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
@@ -131,7 +135,24 @@ class MainController: UIViewController {
         return theme.statusbarStyle()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == videoTutorialSegueId {
+            if let vc = segue.destination as? VideoTutorialController {
+                vc.parentController = self
+            }
+        }
+    }
+    
     // MARK: - IB Actions
+    
+    @IBAction func newVideoButton(_ sender: UIButton) {
+        showBlur()
+    }
+    
+    func tutorialWillDisappear(){
+        hideBlur()
+    }
+    
     @IBAction func ratemeAction(_ sender: UITapGestureRecognizer) {
         
         if sender.view is UIImageView {
@@ -321,6 +342,7 @@ class MainController: UIViewController {
     }
     
     private func updateTheme() {
+        blurView.backgroundColor = theme.invertedBackgroundColor.withAlphaComponent(0.5)
         headerImage.highlightedImage = configuration.darkTheme ? darkThemeLogoImage : lightThemeLogoImage
         
         view.backgroundColor = theme.backgroundColor
@@ -331,5 +353,17 @@ class MainController: UIViewController {
         
         getProView.backgroundColor = theme.invertedBackgroundColor
         theme.setupLabelInverted(premiumLabel)
+    }
+    
+    private func showBlur(){
+        UIView.animate(withDuration: 1.0) {[weak self] in
+            self?.blurView.alpha = 1.0
+        }
+    }
+    
+    private func hideBlur(){
+        UIView.animate(withDuration: 1.0) {[weak self] in
+            self?.blurView.alpha = 0.0
+        }
     }
 }
