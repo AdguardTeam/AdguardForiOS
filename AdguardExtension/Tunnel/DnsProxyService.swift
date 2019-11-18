@@ -17,15 +17,15 @@
  */
 
 import Foundation
-import Mobile
+//import Mobile
 
-class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
-    func write(_ message: String!) {
-        if message != nil {
-            DDLogInfo("(DnsProxy) \(message!)")
-        }
-    }
-}
+//class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
+//    func write(_ message: String!) {
+//        if message != nil {
+//            DDLogInfo("(DnsProxy) \(message!)")
+//        }
+//    }
+//}
 
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
@@ -39,115 +39,66 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     // set it to 2000 to make sure we will quickly fallback if needed
     private let timeout = 2000
-    private var proxy: MobileDNSProxy?
-    private var queues: [DispatchQueue] = []
-    private var lastQueue = 0
-    private var queued = 0
     private let dnsRecordsWriter: DnsLogRecordsWriterProtocol;
     
     private let workingQueue = DispatchQueue(label: "dns proxy service working queue")
-    private var stopped = true
+    private let resolveQueue = DispatchQueue(label: "dns proxy resolve queue", attributes: [.concurrent])
     
-    var resolveGroup = DispatchGroup()
+    let events: AGDnsProxyEvents
     
     @objc
     init(logWriter: DnsLogRecordsWriterProtocol) {
         DDLogInfo("(DnsProxyService) initializing")
         dnsRecordsWriter = logWriter
+        events = AGDnsProxyEvents()
         
         super.init()
         
-        var error: NSError?
-        MobileConfigureLogger(true, "", DnsProxyLogWriter(), &error)
-        MobileConfigureDNSRequestProcessedListener(dnsRecordsWriter)
-        
-        if error != nil {
-            DDLogError("(DnsProxyService) - configure logger error: \(error!.localizedDescription)")
+        events.onRequestProcessed = { [weak self] (event) in
+            if event != nil {
+                self?.dnsRecordsWriter.handleEvent(event!)
+            }
         }
+        
+//        MobileConfigureLogger(true, "", DnsProxyLogWriter(), &error)
     }
+    
+    var agproxy: AGDnsProxy?
     
     @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int) -> Bool {
         
-        queues.removeAll()
-        
-        for i in 0..<maxQueues {
-            queues.append(DispatchQueue(label: "Dns Proxy resolve queue \(i)"))
+        let agUpstreams = upstreams.map { (upstream) -> AGDnsUpstream in
+            return AGDnsUpstream(upstream, bootstrap: [bootstrapDns], timeout: 2000)!
         }
         
-        var result = true
-        
-        workingQueue.sync {
-            
-            dnsRecordsWriter.server = serverName
-            
-            DDLogInfo("(DnsProxyService) start with upstreams: \(upstreams) listen at: \(listenAddr) bootstrap: \(bootstrapDns) fallback: \(fallback)")
-            let upstreamsStr = upstreams.joined(separator: "\n")
-            
-            guard let config = MobileConfig() else {
-                DDLogError("(DnsProxyService) start Error - can not create MobileConfig ")
-                result = false
-                return
-            }
-            
-            config.listenAddr = listenAddr
-            config.listenPort = 0
-            config.bootstrapDNS = bootstrapDns
-            config.fallbacks = fallback
-            config.upstreams = upstreamsStr
-            config.timeout = timeout
-            config.systemResolvers = bootstrapDns
-            config.detectDNS64Prefix = true
-            
-            guard let proxy = MobileDNSProxy() else {
-                DDLogError("(DnsProxyService) start Error - can not create MobileDNSProxy ")
-                result = false
-                return
-            }
-            
-            proxy.config = config
-            
-            let filteringConfig = MobileFilteringConfig()
-            filteringConfig?.filteringRulesFilesJSON = filtersJson
-            proxy.filteringConfig = filteringConfig
-            
-            do{
-                try proxy.start()
-            }
-            catch{
-                DDLogError("(DnsProxyService) Error on start proxy: \(error) ")
-                result = false
-                return
-            }
-            
-            self.proxy = proxy
-            stopped = false
+        guard let filterFiles = try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]> else {
+            return false
         }
         
-        return result
+        var filters = [NSNumber:String]()
+        
+        for filter in filterFiles! {
+            
+            let identifier = filter["id"] as! Int
+            let path = filter["path"] as! String
+            
+            let numId = identifier as! NSNumber
+            
+            filters[numId] = path
+        }
+        
+        let config = AGDnsProxyConfig(agUpstreams, filters: filters, blockedResponseTtl: 0)
+        agproxy = AGDnsProxy(config, withHandler: events)
+        
+        return true
     }
     
     @objc func stop(callback:@escaping ()->Void) {
         DDLogInfo("(DnsProxyService) - stop")
         
         workingQueue.async { [weak self] in
-            
-            DDLogInfo("(DnsProxyService) - queue size is \(self?.queued ?? 0)")
-            self?.stopped = true
-
-            // wait until already started tasks will be ended
-            self?.resolveGroup.wait()
-            
-            do {
-                try self?.proxy?.stop()
-                self?.proxy = nil
-            }
-            catch {
-                DDLogError("(DnsProxyService) Error on stop proxy: \(error) ")
-            }
-            
-            DispatchQueue.main.async {
-                callback()
-            }
+            self?.agproxy = nil
+            callback()
         }
         
         return
@@ -155,42 +106,9 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
         
-        workingQueue.async { [weak self] in
-            guard let sSelf = self else {return}
-            
-            if sSelf.stopped {
-                DispatchQueue.main.async {
-                    callback(nil)
-                }
-                return
-            }
-            
-            sSelf.resolveGroup.enter()
-            
-            sSelf.lastQueue = (sSelf.lastQueue + 1) % sSelf.queues.count
-            sSelf.queued += 1
-            let queue = sSelf.queues[sSelf.lastQueue]
-
-            queue.async {
-                defer {
-                    sSelf.resolveGroup.leave()
-                    sSelf.queued -= 1
-                }
-                
-                do {
-                    if sSelf.stopped {
-                        callback(nil)
-                    }
-                    else {
-                        let dnsResponse = try sSelf.proxy?.resolve(dnsRequest)
-                        callback(dnsResponse)
-                    }
-                }
-                catch {
-                    DDLogError("(DnsProxyService) resolve error: \(error) ")
-                    DDLogInfo("(DnsProxyService) - queue size is \(sSelf.queued)")
-                }
-            }
+        resolveQueue.async { [weak self] in
+            let reply = self?.agproxy?.handlePacket(dnsRequest)
+            callback(reply)
         }
     }
 }
