@@ -26,7 +26,7 @@ extension UIViewController {
         let selector: Selector?
         
         if action == nil {
-            selector = #selector(self.standartAction(sender:))
+            selector = #selector(self.standardAction(sender:))
         } else {
             selector = action
         }
@@ -37,7 +37,7 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem = barButtonItem
     }
     
-    @objc private func standartAction(sender: UIBarButtonItem){
+    @objc private func standardAction(sender: UIBarButtonItem){
         navigationController?.popViewController(animated: true)
     }
 }
