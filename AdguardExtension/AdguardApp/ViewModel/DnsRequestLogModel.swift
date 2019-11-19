@@ -20,22 +20,22 @@ import Foundation
 
 // MARK: - data types -
 struct LogRecord {
-    var category: String?
-    var status: DnsLogStatus = .processed
-    var name: String?
-    var company: String = "company"
-    var domain: String?
-    var time: String?
-    var elapsed: Int
-    var type: String?
-    var serverName: String?
-    var answer: String?
-    var upstreamAddr: String?
-    var bytesSent: Int
-    var bytesReceived: Int
-    var isTracked: Bool?
+    let category: String?
+    let status: DnsLogStatus
+    let name: String?
+    let company: String?
+    let domain: String?
+    let time: String?
+    let elapsed: Int
+    let type: String?
+    let serverName: String?
+    let answer: String?
+    let upstreamAddr: String?
+    let bytesSent: Int
+    let bytesReceived: Int
+    let isTracked: Bool?
     
-    enum DnsLogStatus: String {
+    enum DnsLogStatus: String { 
         case processed = "Processed"
         case blockedWithDns = "Blocked with DNS"
         case blockedWithDnsFilter = "Blocked with DNS filter"
@@ -58,70 +58,68 @@ struct LogRecord {
         }
     }
     
-    func getButtons() -> [BottomShadowButton] {
+    enum ButtonType {
+        case removeDomainFromWhitelist, removeDomainFromBlacklist, addDomainToWhitelist, addDomainToBlacklist
+    }
+    
+    func getButtons() -> [ButtonType] {
         switch status {
         case .blockedWithDns:
-            let button1 = addDomainToDnsWhitelistButton()
-            return [button1]
+            return [.addDomainToWhitelist]
         case .blockedWithDnsFilter:
-            let button1 = addDomainToDnsWhitelistButton()
-            return [button1]
+            return [.addDomainToWhitelist]
         case .blockedWithDnsBlacklist:
-            let button1 = removeDomainFromDnsBlacklistButton()
-            return [button1]
+            return [.removeDomainFromBlacklist]
         case .whitelisted:
-            let button1 = removeDomainFromDnsWhitelist()
-            return [button1]
+            return [.removeDomainFromWhitelist]
         case .processed:
-            let button1 = addDomainToDnsWhitelistButton()
-            let button2 = addDomainToDnsBlacklistButton()
-            return [button1, button2]
+            return [.addDomainToWhitelist, .addDomainToBlacklist]
         }
     }
     
-    private func removeDomainFromDnsWhitelist() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("remove_from_whitelist", nil)
-        button.titleColor = UIColor(hexString: "#eb9300")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
-    
-    private func removeDomainFromDnsBlacklistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("remove_from_blacklist", nil)
-        button.titleColor = UIColor(hexString: "#eb9300")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
-
-    private func addDomainToDnsWhitelistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("add_to_whitelist", nil)
-        button.titleColor = UIColor(hexString: "#67b279")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
-    
-    private func addDomainToDnsBlacklistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("add_to_blacklist", nil)
-        button.titleColor = UIColor(hexString: "#df3812")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
+//    private func removeDomainFromDnsWhitelist() -> ButtonType {
+//        let button = BottomShadowButton()
+//        button.title = ACLocalizedString("remove_from_whitelist", nil)
+//        button.titleColor = UIColor(hexString: "#eb9300")
+//        button.buttonAction {
+//            print(button.title)
+//        }
+//
+//        return button
+//    }
+//
+//    private func removeDomainFromDnsBlacklistButton() -> ButtonType {
+//        let button = BottomShadowButton()
+//        button.title = ACLocalizedString("remove_from_blacklist", nil)
+//        button.titleColor = UIColor(hexString: "#eb9300")
+//        button.buttonAction {
+//            print(button.title)
+//        }
+//
+//        return button
+//    }
+//
+//    private func addDomainToDnsWhitelistButton() -> ButtonType {
+//        let button = BottomShadowButton()
+//        button.title = ACLocalizedString("add_to_whitelist", nil)
+//        button.titleColor = UIColor(hexString: "#67b279")
+//        button.buttonAction {
+//            print(button.title)
+//        }
+//
+//        return button
+//    }
+//
+//    private func addDomainToDnsBlacklistButton() -> ButtonType {
+//        let button = BottomShadowButton()
+//        button.title = ACLocalizedString("add_to_blacklist", nil)
+//        button.titleColor = UIColor(hexString: "#df3812")
+//        button.buttonAction {
+//            print(button.title)
+//        }
+//
+//        return button
+//    }
 }
 
 protocol DnsRequestsDelegateProtocol {
@@ -165,14 +163,19 @@ class DnsRequestLogViewModel {
     // MARK: - private fields
     
     private let vpnManager: APVPNManager
+    private let dnsTrackerService: DnsTrackerServiceProtocol
+    private let dnsFiltersService: DnsFiltersServiceProtocol
+    
     private let dateFormatter: DateFormatter
     
     private var allRecords = [LogRecord]()
     private var searchRecords = [LogRecord]()
     
     // MARK: - init
-    init(_ vpnManager: APVPNManager) {
+    init(vpnManager: APVPNManager, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         self.vpnManager = vpnManager
+        self.dnsTrackerService = dnsTrackerService
+        self.dnsFiltersService = dnsFiltersService
         self.dateFormatter = DateFormatter()
         self.dateFormatter.dateFormat = "HH:mm:ss.SSS"
         self.searchString = ""
@@ -190,9 +193,8 @@ class DnsRequestLogViewModel {
                 sSelf.recordsObserver?(sSelf.records)
                 return
             }
-            let dnsTrackerService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
             for logRecord in logRecords.reversed() {
-                let info = dnsTrackerService.getCategoryAndName(by: logRecord.domain)
+                let info = sSelf.dnsTrackerService.getCategoryAndName(by: logRecord.domain)
                 let name = info.name
                 let isTracked = info.isTracked
                 
@@ -201,7 +203,7 @@ class DnsRequestLogViewModel {
                     categoryName = ACLocalizedString(categoryKey, nil)
                 }
                 
-                let record = LogRecord(category: categoryName, name: name, domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked)
+                let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked)
                 sSelf.allRecords.append(record)
             }
             

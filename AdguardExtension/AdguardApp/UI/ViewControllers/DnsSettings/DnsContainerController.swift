@@ -26,6 +26,7 @@ class DnsContainerController: UIViewController {
     var logRecord: LogRecord?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private var dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: Any? = nil
     
@@ -46,9 +47,56 @@ class DnsContainerController: UIViewController {
             self?.updateTheme()
         }
         
-        if let buttons = logRecord?.getButtons(){
-            shadowView.buttons = buttons
+        let buttons = logRecord?.getButtons().map{ [weak self] (type) -> BottomShadowButton in
+            let button = BottomShadowButton()
+            var title: String!
+            var color: UIColor!
+            
+            switch (type) {
+            case .addDomainToBlacklist:
+                title = String.localizedString("remove_from_whitelist")
+                color = UIColor(hexString: "#eb9300")
+                button.action = {
+                    if let domain = self?.logRecord?.domain {
+                        self?.dnsFiltersService.userRules.append(domain)
+                    }
+                }
+                
+            case .removeDomainFromWhitelist:
+                title = String.localizedString("remove_from_blacklist")
+                color = UIColor(hexString: "#eb9300")
+                button.action = {
+                    if let domainToRemove = self?.logRecord?.domain {
+                        self?.dnsFiltersService.whitelistDomains.removeAll { domainToRemove != $0 }
+                    }
+                }
+                
+            case .removeDomainFromBlacklist:
+                title = String.localizedString("add_to_whitelist")
+                color = UIColor(hexString: "#67b279")
+                button.action = {
+                    if let domainToRemove = self?.logRecord?.domain {
+                        self?.dnsFiltersService.userRules.removeAll { domainToRemove != $0 }
+                    }
+                }
+                
+            case .addDomainToWhitelist:
+                title = String.localizedString("add_to_blacklist")
+                color = UIColor(hexString: "#67b279")
+                button.action = {
+                    if let domain = self?.logRecord?.domain {
+                        self?.dnsFiltersService.whitelistDomains.append(domain)
+                    }
+                }
+            }
+            
+            button.title = title
+            button.titleColor = color
+            
+            return button
         }
+        
+        shadowView.buttons = buttons ?? []
         
         updateTheme()
     }
