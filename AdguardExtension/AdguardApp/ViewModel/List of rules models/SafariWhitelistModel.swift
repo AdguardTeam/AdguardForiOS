@@ -313,9 +313,11 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
                 
                 strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
                     
-                    DDLogError("(UserFilterViewModel) Error occured during content blocker reloading.")
-                    // do not rollback changes and do not show any alert to user in this case
-                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    if error != nil {
+                        DDLogError("(SafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+                        // do not rollback changes and do not show any alert to user in this case
+                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    }
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 }
             }
