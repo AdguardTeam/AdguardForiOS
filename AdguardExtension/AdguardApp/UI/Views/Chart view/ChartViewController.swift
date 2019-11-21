@@ -34,10 +34,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
     private let blockedTag = 1
     private let countersTag = 2
     
-    private var requestsObserver: Any?
-    private var blockedRequestsObserver: Any?
-    private var countersRequestsObserver: Any?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,15 +41,21 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
         changeChartTypeButtons[0].titleLabel?.font = UIFont.systemFont(ofSize: 21.0, weight: .bold)
         
         model.chartPointsChangedDelegate = self
-        model.obtainRecords {[weak self] in
-            self?.changeAllButtonsText()
-        }
         
-        requestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        changeAllButtonsText()
+        model.obtainStatistics {}
         
-        blockedRequestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        countersRequestsObserver = resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
+    }
+    
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsCountersRequests, context: nil)
     }
 
     // MARK: - Actions
@@ -116,6 +118,12 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
         default:
             break
         }
+    }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
     
     // MARK: - Private methods

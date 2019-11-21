@@ -178,8 +178,10 @@ static NSDictionary *_propertyNamesForClasses;
     NSMutableArray *properties = [NSMutableArray array];
     id currentClass = [self class];
     while (currentClass != [ACObject class]) {
-        [properties addObjectsFromArray:[_propertyNamesForClasses[NSStringFromClass(currentClass)] allObjects]];
-        currentClass = [currentClass superclass];
+        if (_propertyNamesForClasses) {
+            [properties addObjectsFromArray:[_propertyNamesForClasses[NSStringFromClass(currentClass)] allObjects]];
+            currentClass = [currentClass superclass];
+        }
     }
     
     return properties;

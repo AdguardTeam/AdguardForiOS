@@ -74,6 +74,10 @@ class ChartView: UIView {
         drawHorizontalGridLines()
     }
     
+    override func layoutSubviews() {
+        drawGraphic()
+    }
+    
     // MARK: - Private methods -
     
     // MARK: - Methods for lines
@@ -178,8 +182,12 @@ class ChartView: UIView {
         var points = [CGPoint]()
                 
         for point in chartPoints {
-            let ratioX: CGFloat = point.x / maxXelement
-            let ratioY: CGFloat = (point.y / maxYelement) * 0.7
+            var ratioX: CGFloat = point.x / maxXelement
+            var ratioY: CGFloat = (point.y / maxYelement) * 0.7
+            
+            // There is a devision by zero, when initializing this variables
+            ratioX = ratioX.isNaN ? 0.0 : ratioX
+            ratioY = ratioY.isNaN ? 0.0 : ratioY
             
             let newX = frame.width * ratioX
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15

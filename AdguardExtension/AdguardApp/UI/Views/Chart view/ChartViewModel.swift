@@ -19,17 +19,13 @@
 import Foundation
 
 protocol ChartViewModelProtocol {
-    var requests: [ChartRerord] { get }
-    var blockedRequests: [ChartRerord] { get }
-    var countersRequests: [ChartRerord] { get }
-    
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
     
     var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
     var requestsObserver: (([ChartRerord])->Void)? { get }
     
-    func obtainRecords(completion: @escaping ()->())
+    func obtainStatistics(completion: @escaping ()->())
 }
 
 protocol ChartPointsChangedDelegate: class {
@@ -38,6 +34,47 @@ protocol ChartPointsChangedDelegate: class {
 
 enum ChartDateType {
     case today, day, week, month, alltime
+    
+    func getTimeInterval(requestsDates: [Date]) -> (begin: Date, end: Date){
+        let firstDate: Date = requestsDates.first ?? now()
+        let lastDate: Date = requestsDates.last ?? now()
+        
+        var interval: Double = 0.0
+        
+        let hour = 60.0 * 60.0 // 1 hour
+        let day = 24.0 * hour // 24 hours
+        let week = 7.0 * day
+        let month = 30.0 * day
+        
+        switch self {
+        case .today:
+            let calendar = Calendar.current
+            let hours = Double(calendar.component(.hour, from: lastDate))
+            let minutes = Double(calendar.component(.minute, from: lastDate))
+            
+            interval = hours * hour + minutes * 60.0
+
+        case .day:
+            interval = day
+        case .week:
+            interval = week
+        case .month:
+            interval = month
+        case .alltime:
+            return (firstDate, lastDate)
+        }
+        
+        var endDate = lastDate - interval
+        if endDate < firstDate {
+            endDate = firstDate
+        }
+        
+        return (endDate, lastDate)
+    }
+    
+    private func now() -> Date {
+        return Date()
+    }
 }
 
 enum ChartRequestType {
@@ -60,11 +97,11 @@ class ChartViewModel: ChartViewModelProtocol {
     
     weak var chartPointsChangedDelegate: ChartPointsChangedDelegate?
     
-    var requests: [ChartRerord] = []
+    var requests: [RequestsStatisticsBlock] = []
     
-    var blockedRequests: [ChartRerord] = []
+    var blockedRequests: [RequestsStatisticsBlock] = []
     
-    var countersRequests: [ChartRerord] = []
+    var countersRequests: [RequestsStatisticsBlock] = []
     
     var chartDateType: ChartDateType = .alltime {
         didSet {
@@ -87,38 +124,37 @@ class ChartViewModel: ChartViewModelProtocol {
         self.vpnManager = vpnManager
     }
     
-    // MARK: - private methods
-    /**
-     obtains records array from vpnManager
-    */
-    func obtainRecords(completion: @escaping ()->()) {
-        vpnManager.obtainDnsLogRecords { [weak self] (chartRecordsOpt)  in
+    func obtainStatistics(completion: @escaping ()->()) {
+        vpnManager.obtainDnsLogStatistics {[weak self] (statisticsRecords) in
             guard let sSelf = self else { return }
+            guard let statistics = statisticsRecords else { return }
             sSelf.requests = []
-            guard let chartRecords = chartRecordsOpt else { return }
-            for chartRecord in chartRecords.reversed() {
-
-                let record = ChartRerord(date: chartRecord.date, type: chartRecord.blockRecordType)
-                
-                if chartRecord.blockRecordType == .blocked {
-                    sSelf.blockedRequests.append(record)
+            
+            for (key, value) in statistics {
+                switch key {
+                case APAllRequestsString:
+                    sSelf.requests = value
+                case APBlockedRequestsString:
+                    sSelf.blockedRequests = value
+                case APCountersRequestsString:
+                    sSelf.countersRequests = value
+                default:
+                    break
                 }
-                
-                if chartRecord.blockRecordType == .tracked {
-                    sSelf.countersRequests.append(record)
-                }
-                
-                sSelf.requests.append(record)
             }
+            
             completion()
             sSelf.changeChart()
         }
     }
     
+    // MARK: - private methods
+    
     private func changeChart(){
-        var requests: [ChartRerord] = []
-        let sectorsNumber = 50
+        var requests: [RequestsStatisticsBlock] = []
         var pointsArray: [Point] = []
+        
+        let maximumPointsNumber = 50
         
         switch chartRequestType {
         case .requests:
@@ -128,44 +164,64 @@ class ChartViewModel: ChartViewModelProtocol {
         case .counters:
             requests = countersRequests
         }
-        
-        var requestsDates: [Double] = requests.map({ $0.date.timeIntervalSinceReferenceDate })
-        requestsDates.sort(by: { $0 > $1 })
+                
+        var requestsDates: [Date] = requests.map({ $0.date })
+        requestsDates.sort(by: { $0 < $1 })
         
         if requestsDates.count < 2 {
             chartPointsChangedDelegate?.chartPointsChanged(points: [])
             return
         }
         
-        let firstDate = requestsDates[0]
-        let lastDate = requestsDates.last ?? firstDate
+        let intervalTime = chartDateType.getTimeInterval(requestsDates: requestsDates)
         
-        let diff = (lastDate - firstDate) / Double(sectorsNumber)
-        if diff == 0 {
-            chartPointsChangedDelegate?.chartPointsChanged(points: [Point(x: 5.0, y: CGFloat(integerLiteral: requestsDates.count))])
-            return
-        }
+        let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
+        let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
         
-        var sectorPoints: [Double] = []
-        
-        for i in 0...sectorsNumber {
-            sectorPoints.append(firstDate + Double(i)*diff)
-        }
-        
-        requestsDates.append(contentsOf: sectorPoints)
-        requestsDates.sort(by: {$0 > $1})
-        
-        var previousIndex = 0
-        for (i, sector) in sectorPoints.enumerated() {
-            if let index = requestsDates.firstIndex(of: sector){
-                let y = index - previousIndex
-                previousIndex = index
-                let point = Point(x: CGFloat(integerLiteral: i), y: CGFloat(integerLiteral: y))
+        var xPosition: CGFloat = 0.0
+        for request in requests {
+            let date = request.date.timeIntervalSinceReferenceDate
+            if date > firstDate && date < lastDate {
+                let point = Point(x: xPosition, y: CGFloat(integerLiteral: request.numberOfRequests))
                 pointsArray.append(point)
+                xPosition += 1.0
             }
         }
         
-        chartPointsChangedDelegate?.chartPointsChanged(points: pointsArray)
+        if pointsArray.count > maximumPointsNumber {
+            let points = rearrangePoints(from: pointsArray, max: maximumPointsNumber)
+            chartPointsChangedDelegate?.chartPointsChanged(points: points)
+        } else {
+            chartPointsChangedDelegate?.chartPointsChanged(points: pointsArray)
+        }
+    }
+    
+    private func rearrangePoints(from points: [Point], max: Int) -> [Point] {
+        var ratio: Float = Float(points.count) / Float(max)
+        ratio = ceil(ratio)
+        
+        var copyPoints = points.map({$0.y})
+        
+        let intRatio = Int(ratio)
+        var newPoints = [Point]()
+        var xPosition: CGFloat = 0.0
+        
+        while !copyPoints.isEmpty {
+            let points = copyPoints.prefix(intRatio)
+            let sum = points.reduce(0, +)
+            let point = Point(x: xPosition, y: sum)
+            newPoints.append(point)
+            
+            xPosition += 1.0
+            
+            if copyPoints.count < intRatio {
+                copyPoints.removeAll()
+            } else {
+                copyPoints.removeFirst(intRatio)
+            }
+        }
+        
+        return newPoints
     }
     
 }

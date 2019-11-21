@@ -90,3 +90,33 @@ class DnsLogRecord: NSObject, NSCoding {
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
     }
 }
+
+@objcMembers
+@objc(RequestsStatisticsBlock)
+class RequestsStatisticsBlock: NSObject, NSCoding {
+    
+    @objc var date: Date
+    @objc var numberOfRequests: Int
+    
+    init(date: Date, numberOfRequests: Int) {
+        self.date = date
+        self.numberOfRequests = numberOfRequests
+        super.init()
+    }
+    
+    override var debugDescription: String {
+        return "date = \(self.date) \n seconds = \(self.date.timeIntervalSinceReferenceDate) \n number = \(self.numberOfRequests) \r\n\r\n"
+    }
+    
+    // MARK: - NSCoding methods
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(date, forKey: "date")
+        coder.encode(numberOfRequests, forKey: "numberOfRequests")
+    }
+    
+    required init?(coder: NSCoder) {
+        self.date = coder.decodeObject(forKey: "date") as! Date
+        self.numberOfRequests = coder.decodeInteger(forKey: "numberOfRequests")
+    }
+}

@@ -207,6 +207,7 @@ class DnsRequestLogViewModel {
     
     func clearRecords(){
         vpnManager.clearDnsRequestsLog()
+        vpnManager.clearStatisticsLog()
         allRecords = []
         searchRecords = []
         delegate?.requestsCleared()

@@ -191,7 +191,7 @@
             }
             else{
                 
-                //standant mapping
+                //standard mapping
                 valueObjects[key] = obj;
             }
             

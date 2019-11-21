@@ -151,10 +151,24 @@ this flag indicates that filtering of mobile data is on/off
 - (BOOL)clearDnsRequestsLog;
 
 /**
+Clears Statistics Log.
+
+@return Returns YES on success.
+*/
+- (BOOL)clearStatisticsLog;
+
+/**
  Obtains DNS requests logging records,
  and calls `completionBlock` with appropriate parameter.
  */
 - (void)obtainDnsLogRecords:(nonnull void (^)( NSArray <DnsLogRecord *>* _Nullable records))completionBlock;
+
+/**
+ Obtains DNS requests statistics,
+ and calls `completionBlock` with appropriate parameter.
+ */
+- (void)obtainDnsLogStatistics:(nonnull void (^)(NSDictionary<NSString*, NSArray<RequestsStatisticsBlock *> *> * _Nullable statistics))completionBlock;
+
 
 /**
  checks if this provider is active

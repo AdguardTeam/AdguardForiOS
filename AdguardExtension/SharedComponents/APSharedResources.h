@@ -19,10 +19,14 @@
 #import "APCommonSharedResources.h"
 #import "ABECService.h"
 
-@class DnsLogRecord;
+@class DnsLogRecord, RequestsStatisticsBlock;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
+
+extern NSString*  _Nonnull APAllRequestsString;
+extern NSString*  _Nonnull APBlockedRequestsString;
+extern NSString*  _Nonnull APCountersRequestsString;
 
 /**
      (PRO) Class, which provides exchanging data between app and extension.
@@ -37,6 +41,12 @@
 - (BOOL)removeDnsLog;
 
 - (void)writeToDnsLogRecords:(NSArray <DnsLogRecord *> *)logRecords;
+
+- (NSDictionary<NSString *, NSArray <RequestsStatisticsBlock *> *> *)readStatisticsLog;
+
+- (BOOL)removeStatisticsLog;
+
+- (void)writeToStatisticsRecords:(NSDictionary<NSString*, RequestsStatisticsBlock*> *)statistics;
 
 @property NSNumber *defaultRequestsNumber;
 

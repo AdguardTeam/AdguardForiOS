@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="3" width="138" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="regular"/>
                                         </state>
@@ -47,7 +47,7 @@
                                         <rect key="frame" x="138" y="3" width="138" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="regular"/>
                                         </state>
@@ -63,7 +63,7 @@
                                         <rect key="frame" x="276" y="3" width="138" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="regular"/>
                                         </state>
@@ -89,35 +89,17 @@
                                     <action selector="changeDateTypeAction:" destination="mEg-wB-5oF" eventType="touchUpInside" id="i5Y-m7-xby"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMy-Sc-qUd" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="362.5" y="660.5" width="35.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Sk-sc-Dtv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="660.5" width="35.5" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="jWu-dR-WIz" firstAttribute="trailing" secondItem="zM6-kT-Cwa" secondAttribute="trailing" id="1XO-J5-idj"/>
                             <constraint firstItem="mAT-NE-Z7y" firstAttribute="centerX" secondItem="jWu-dR-WIz" secondAttribute="centerX" id="2mx-ZB-TkT"/>
                             <constraint firstItem="zM6-kT-Cwa" firstAttribute="leading" secondItem="jWu-dR-WIz" secondAttribute="leading" id="4cJ-by-dX3"/>
-                            <constraint firstItem="NMy-Sc-qUd" firstAttribute="leading" secondItem="mAT-NE-Z7y" secondAttribute="trailing" constant="16" id="5od-fL-pPq"/>
                             <constraint firstItem="jWu-dR-WIz" firstAttribute="bottom" secondItem="zM6-kT-Cwa" secondAttribute="bottom" constant="32" id="9wW-YD-yvy"/>
-                            <constraint firstItem="mAT-NE-Z7y" firstAttribute="leading" secondItem="0Sk-sc-Dtv" secondAttribute="trailing" constant="16" id="BNf-EI-RLz"/>
                             <constraint firstItem="15q-o1-Zgx" firstAttribute="leading" secondItem="jWu-dR-WIz" secondAttribute="leading" id="Dt6-eT-q08"/>
-                            <constraint firstItem="0Sk-sc-Dtv" firstAttribute="centerY" secondItem="mAT-NE-Z7y" secondAttribute="centerY" id="Fo6-du-3EL"/>
                             <constraint firstItem="zM6-kT-Cwa" firstAttribute="top" secondItem="15q-o1-Zgx" secondAttribute="bottom" constant="20" id="Gc3-gF-J5E"/>
-                            <constraint firstItem="NMy-Sc-qUd" firstAttribute="centerY" secondItem="mAT-NE-Z7y" secondAttribute="centerY" id="O9v-WP-udG"/>
-                            <constraint firstItem="0Sk-sc-Dtv" firstAttribute="leading" secondItem="jWu-dR-WIz" secondAttribute="leading" constant="16" id="RzI-Xa-lEo"/>
                             <constraint firstItem="jWu-dR-WIz" firstAttribute="trailing" secondItem="15q-o1-Zgx" secondAttribute="trailing" id="cTF-37-pfv"/>
                             <constraint firstItem="15q-o1-Zgx" firstAttribute="top" secondItem="mAT-NE-Z7y" secondAttribute="bottom" constant="12" id="g2Q-g1-y0B"/>
-                            <constraint firstItem="jWu-dR-WIz" firstAttribute="trailing" secondItem="NMy-Sc-qUd" secondAttribute="trailing" constant="16" id="vXY-Yt-oue"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jWu-dR-WIz"/>
                     </view>
@@ -555,34 +537,34 @@ with Safari</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Mse-YF-esU">
-                                                                <rect key="frame" x="217" y="43" width="166" height="23"/>
+                                                                <rect key="frame" x="124" y="43" width="166" height="23"/>
                                                                 <subviews>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="LKN-gv-hBf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="52" height="23"/>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="LKN-gv-hBf">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="26" height="23"/>
                                                                         <connections>
                                                                             <outletCollection property="gestureRecognizers" destination="eMr-rf-WFa" appends="YES" id="lbZ-6x-XkA"/>
                                                                         </connections>
                                                                     </imageView>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="4lG-US-2Nz">
-                                                                        <rect key="frame" x="61" y="0.0" width="52" height="23"/>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="4lG-US-2Nz">
+                                                                        <rect key="frame" x="35" y="0.0" width="26" height="23"/>
                                                                         <connections>
                                                                             <outletCollection property="gestureRecognizers" destination="Fij-aF-agS" appends="YES" id="S0m-zF-bYB"/>
                                                                         </connections>
                                                                     </imageView>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-hr-d27">
-                                                                        <rect key="frame" x="122" y="0.0" width="26" height="23"/>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="ONb-hr-d27">
+                                                                        <rect key="frame" x="70" y="0.0" width="26" height="23"/>
                                                                         <connections>
                                                                             <outletCollection property="gestureRecognizers" destination="WEJ-DE-j14" appends="YES" id="uaK-ji-TCc"/>
                                                                         </connections>
                                                                     </imageView>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-4k-532">
-                                                                        <rect key="frame" x="157" y="0.0" width="0.0" height="23"/>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-4k-532">
+                                                                        <rect key="frame" x="105" y="0.0" width="26" height="23"/>
                                                                         <connections>
                                                                             <outletCollection property="gestureRecognizers" destination="JvN-d4-IrT" appends="YES" id="9eH-En-ehT"/>
                                                                         </connections>
                                                                     </imageView>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="ajd-oN-WSw">
-                                                                        <rect key="frame" x="166" y="0.0" width="0.0" height="23"/>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star_selected" translatesAutoresizingMaskIntoConstraints="NO" id="ajd-oN-WSw">
+                                                                        <rect key="frame" x="140" y="0.0" width="26" height="23"/>
                                                                         <connections>
                                                                             <outletCollection property="gestureRecognizers" destination="f6E-l5-Db4" appends="YES" id="UZp-JT-iSP"/>
                                                                         </connections>
