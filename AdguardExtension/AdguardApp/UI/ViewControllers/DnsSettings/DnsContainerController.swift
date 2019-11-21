@@ -66,8 +66,8 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("remove_from_blacklist")
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
-                    if let domainToRemove = self?.logRecord?.domain {
-                        self?.dnsFiltersService.whitelistDomains.removeAll { domainToRemove != $0 }
+                    if let rules = self?.logRecord?.rules {
+                        self?.dnsFiltersService.whitelistDomains.removeAll { rules.contains($0) }
                     }
                 }
                 
@@ -75,8 +75,8 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("add_to_whitelist")
                 color = UIColor(hexString: "#67b279")
                 button.action = {
-                    if let domainToRemove = self?.logRecord?.domain {
-                        self?.dnsFiltersService.userRules.removeAll { domainToRemove != $0 }
+                    if let rules = self?.logRecord?.rules {
+                        self?.dnsFiltersService.userRules.removeAll { rules.contains($0)  }
                     }
                 }
                 

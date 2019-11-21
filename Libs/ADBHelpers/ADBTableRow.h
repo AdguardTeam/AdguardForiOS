@@ -43,6 +43,8 @@
 + (NSSet *)nsdatePropertyNames;
 + (NSSet *)plistPropertyNames;
 
+@property (nonatomic) NSNumber* rowid;
+
 - (id)initWithDbResult:(FMResultSet *)dbResult;
 
 @end

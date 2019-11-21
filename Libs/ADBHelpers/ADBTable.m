@@ -76,7 +76,7 @@
         
         NSMutableArray *rows = [NSMutableArray array];
         
-        NSString *queryString = [NSString stringWithFormat:@"select * from %@", _tableName];
+        NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
         NSString *whereString = nil;
         
         NSArray *keys = [self validKeysFromKeyFields:keyFields andWhereString:&whereString];

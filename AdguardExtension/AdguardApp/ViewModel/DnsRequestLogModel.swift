@@ -34,6 +34,7 @@ struct LogRecord {
     let bytesSent: Int
     let bytesReceived: Int
     let isTracked: Bool?
+    let rules: [String]?
     
     enum DnsLogStatus: String { 
         case processed = "Processed"
@@ -203,7 +204,7 @@ class DnsRequestLogViewModel {
                     categoryName = ACLocalizedString(categoryKey, nil)
                 }
                 
-                let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked)
+                let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked, rules: logRecord.blockRules)
                 sSelf.allRecords.append(record)
             }
             

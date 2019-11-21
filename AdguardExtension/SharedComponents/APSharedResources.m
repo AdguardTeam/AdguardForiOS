@@ -22,6 +22,7 @@
 #import "ACommons/ACLang.h"
 #import "ADBHelpers/ADBTable.h"
 #import "ADBHelpers/ADBTableRow.h"
+#import "Adguard-Swift.h"
 
 #define DNS_LOG_RECORD_FILE                @"dns-log-records.db"
 
@@ -89,8 +90,13 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     }];
     
     if (result.count) {
-        
-        return [result valueForKey:@"record"];
+        NSMutableArray<DnsLogRecord *>* records = [NSMutableArray new];
+        for (APDnsLogTable* row in result) {
+            DnsLogRecord* record = row.record;
+            record.rowid = row.rowid;
+            [records addObject:record];
+        }
+        return records.copy;
     }
     
     return nil;

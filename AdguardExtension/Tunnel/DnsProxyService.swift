@@ -82,7 +82,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String
             
-            let numId = identifier as! NSNumber
+            let numId = identifier as NSNumber
             
             filters[numId] = path
         }
