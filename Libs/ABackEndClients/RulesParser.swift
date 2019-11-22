@@ -57,8 +57,10 @@ class RulesParser: NSObject {
             
             if line.hasPrefix(affinityPrefix) {
                 affinityMask = parseContentBlockerTypes(line)
+                continue
             } else if line.hasSuffix(affinitySuffix) {
                 affinityMask = nil
+                continue
             } else if line.first == "!"{
                 continue
             }
