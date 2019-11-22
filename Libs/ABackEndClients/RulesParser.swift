@@ -55,23 +55,25 @@ class RulesParser: NSObject {
                 continue
             }
             
+            if line.hasPrefix(affinityPrefix) {
+                affinityMask = parseContentBlockerTypes(line)
+            } else if line.hasSuffix(affinitySuffix) {
+                affinityMask = nil
+            } else if line.first == "!"{
+                continue
+            }
+
             let rule = ASDFilterRule(text: line, enabled: true)
             
             count += 1
             rule.ruleId = count as NSNumber
 
-            if line.hasPrefix(affinityPrefix) {
-                affinityMask = parseContentBlockerTypes(line)
-            } else if line.hasSuffix(affinitySuffix) {
-                affinityMask = nil
-            } else {
-                rule.ruleText = line;
-                rule.isEnabled = true;
-                rule.filterId = filterId;
-                rule.affinity =  affinityMask?.rawValue as NSNumber?
+            rule.ruleText = line
+            rule.isEnabled = true
+            rule.filterId = filterId
+            rule.affinity =  affinityMask?.rawValue as NSNumber?
                 
-                rules.append(rule)
-            }
+            rules.append(rule)
         }
         
         return rules
