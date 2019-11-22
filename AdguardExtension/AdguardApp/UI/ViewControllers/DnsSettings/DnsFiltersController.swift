@@ -81,9 +81,6 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
-                // Hide cell
-                cell.frame.size.height = 0.0
-                cell.isHidden = true
                 
                 theme.setupTableCell(cell)
                 return cell
@@ -107,7 +104,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath.section == 0 {
             // Add filter
         } else {
-            
+           // Show detailed filter screen
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
