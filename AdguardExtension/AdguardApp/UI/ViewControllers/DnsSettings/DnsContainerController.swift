@@ -53,39 +53,39 @@ class DnsContainerController: UIViewController {
             var color: UIColor!
             
             switch (type) {
-            case .addDomainToBlacklist:
-                title = String.localizedString("remove_from_whitelist")
+            case .addRuleToUserFlter:
+                title = String.localizedString("add_to_blacklist")
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
-                    if let domain = self?.logRecord?.domain {
-                        self?.dnsFiltersService.userRules.append(domain)
+                    if let rule = self?.logRecord?.domain {
+                        self?.dnsFiltersService.addBlacklistDomain(rule)
                     }
                 }
                 
             case .removeDomainFromWhitelist:
-                title = String.localizedString("remove_from_blacklist")
+                title = String.localizedString("remove_from_whitelist")
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let rules = self?.logRecord?.rules {
-                        self?.dnsFiltersService.whitelistDomains.removeAll { rules.contains($0) }
+                        self?.dnsFiltersService.removeWhitelistRules(rules)
                     }
                 }
                 
-            case .removeDomainFromBlacklist:
-                title = String.localizedString("add_to_whitelist")
+            case .removeRuleFromUserFilter:
+                title = String.localizedString("remove_from_blacklist")
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let rules = self?.logRecord?.rules {
-                        self?.dnsFiltersService.userRules.removeAll { rules.contains($0)  }
+                        self?.dnsFiltersService.removeUserRules(rules)
                     }
                 }
                 
             case .addDomainToWhitelist:
-                title = String.localizedString("add_to_blacklist")
+                title = String.localizedString("add_to_whitelist")
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let domain = self?.logRecord?.domain {
-                        self?.dnsFiltersService.whitelistDomains.append(domain)
+                        self?.dnsFiltersService.addWhitelistDomain(domain)
                     }
                 }
             }

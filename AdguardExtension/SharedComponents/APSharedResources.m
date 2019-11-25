@@ -41,18 +41,18 @@
 
 static NSTimeInterval lastPurgeTime;
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APDnsLogTable
-
-@interface APDnsLogTable : ADBTableRow
-
-@property (nonatomic) NSDate *timeStamp;
-@property (nonatomic) DnsLogRecord *record;
-
-@end
-
-@implementation APDnsLogTable
-@end
+///////////////////////////////////////////////////////////////////////
+//#pragma mark - APDnsLogTable
+//
+//@interface APDnsLogTable : ADBTableRow
+//
+//@property (nonatomic) NSDate *timeStamp;
+//@property (nonatomic) DnsLogRecord *record;
+//
+//@end
+//
+//@implementation APDnsLogTable
+//@end
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources
@@ -78,17 +78,17 @@ static FMDatabaseQueue *_writeDnsLogHandler;
 #pragma mark public methods
 
 - (NSArray <DnsLogRecord *> *)readDnsLog{
-    
+
     [self initReadDnsLogHandler];
-    
+
     __block NSArray *result;
     [_readDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        
+
         ADBTable *table = [[ADBTable alloc] initWithRowClass:[APDnsLogTable class] db:db];
-        
+
         result = [table selectWithKeys:nil inRowObject:nil];
     }];
-    
+
     if (result.count) {
         NSMutableArray<DnsLogRecord *>* records = [NSMutableArray new];
         for (APDnsLogTable* row in result) {
@@ -98,66 +98,66 @@ static FMDatabaseQueue *_writeDnsLogHandler;
         }
         return records.copy;
     }
-    
+
     return nil;
 }
 
-- (BOOL)removeDnsLog{
-    
-    [self initWriteDnsLogHandler];
-    
-    __block BOOL result = NO;
-    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        
-        ADBTable *table = [[ADBTable alloc] initWithRowClass:[APDnsLogTable class] db:db];
-        
-        result = [table deleteWithKeys:nil inRowObject:nil];
-        *rollback = !result;
-    }];
-    
-    return result;
-}
+//- (BOOL)removeDnsLog{
+//
+//    [self initWriteDnsLogHandler];
+//
+//    __block BOOL result = NO;
+//    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+//
+//        ADBTable *table = [[ADBTable alloc] initWithRowClass:[APDnsLogTable class] db:db];
+//
+//        result = [table deleteWithKeys:nil inRowObject:nil];
+//        *rollback = !result;
+//    }];
+//
+//    return result;
+//}
 
-- (void)writeToDnsLogRecords:(NSArray<DnsLogRecord *> *)logRecords {
-    
-    [self initWriteDnsLogHandler];
-
-    [self purgeDnsLog];
-
-    APDnsLogTable *row = [APDnsLogTable new];
-
-    row.timeStamp = [NSDate date];
-
-    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
-
-        ADBTable *table = [[ADBTable alloc] initWithRowClass:[row class] db:db];
-
-        for (DnsLogRecord *item in logRecords) {
-
-            row.record = item;
-            [table insertOrReplace:NO fromRowObject:row];
-        }
-    }];
-}
+//- (void)writeToDnsLogRecords:(NSArray<DnsLogRecord *> *)logRecords {
+//
+//    [self initWriteDnsLogHandler];
+//
+//    [self purgeDnsLog];
+//
+//    APDnsLogTable *row = [APDnsLogTable new];
+//
+//    row.timeStamp = [NSDate date];
+//
+//    [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+//
+//        ADBTable *table = [[ADBTable alloc] initWithRowClass:[row class] db:db];
+//
+//        for (DnsLogRecord *item in logRecords) {
+//
+//            row.record = item;
+//            [table insertOrReplace:NO fromRowObject:row];
+//        }
+//    }];
+//}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 
-- (void)initWriteDnsLogHandler {
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        _writeDnsLogHandler = [FMDatabaseQueue databaseQueueWithPath:_dnsLogRecordsPath flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)];
-        if (_writeDnsLogHandler){
-            
-            [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
-                
-                [self createDnsLogTable:db];
-            }];
-        }
-    });
-}
+//- (void)initWriteDnsLogHandler {
+//
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        _writeDnsLogHandler = [FMDatabaseQueue databaseQueueWithPath:_dnsLogRecordsPath flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)];
+//        if (_writeDnsLogHandler){
+//
+//            [_writeDnsLogHandler inTransaction:^(FMDatabase *db, BOOL *rollback) {
+//
+//                [self createDnsLogTable:db];
+//            }];
+//        }
+//    });
+//}
 
 - (void)initReadDnsLogHandler {
     

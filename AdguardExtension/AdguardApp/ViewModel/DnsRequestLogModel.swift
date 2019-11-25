@@ -60,7 +60,7 @@ struct LogRecord {
     }
     
     enum ButtonType {
-        case removeDomainFromWhitelist, removeDomainFromBlacklist, addDomainToWhitelist, addDomainToBlacklist
+        case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
     }
     
     func getButtons() -> [ButtonType] {
@@ -70,11 +70,11 @@ struct LogRecord {
         case .blockedWithDnsFilter:
             return [.addDomainToWhitelist]
         case .blockedWithDnsBlacklist:
-            return [.removeDomainFromBlacklist]
+            return [.removeRuleFromUserFilter]
         case .whitelisted:
             return [.removeDomainFromWhitelist]
         case .processed:
-            return [.addDomainToWhitelist, .addDomainToBlacklist]
+            return [.addDomainToWhitelist, .addRuleToUserFlter]
         }
     }
     
