@@ -31,7 +31,7 @@ class StartupService : NSObject{
         
         // init services
         
-        let sharedResources: AESharedResourcesProtocol = APSharedResources()
+        let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
         
         // Registering standard Defaults
@@ -90,5 +90,8 @@ class StartupService : NSObject{
         
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager)
         locator.addService(service: dnsFiltersService)
+        
+        let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
+        locator.addService(service: dnsLogService)
     }
 }

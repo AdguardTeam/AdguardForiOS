@@ -163,7 +163,7 @@ class DnsRequestLogViewModel {
     
     // MARK: - private fields
     
-    private let vpnManager: APVPNManager
+    private let dnsLogService: DnsLogRecordsServiceProtocol
     private let dnsTrackerService: DnsTrackerServiceProtocol
     private let dnsFiltersService: DnsFiltersServiceProtocol
     
@@ -173,8 +173,8 @@ class DnsRequestLogViewModel {
     private var searchRecords = [LogRecord]()
     
     // MARK: - init
-    init(vpnManager: APVPNManager, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
-        self.vpnManager = vpnManager
+    init(dnsLogService: DnsLogRecordsServiceProtocol, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
+        self.dnsLogService = dnsLogService
         self.dnsTrackerService = dnsTrackerService
         self.dnsFiltersService = dnsFiltersService
         self.dateFormatter = DateFormatter()
@@ -187,33 +187,29 @@ class DnsRequestLogViewModel {
      obtains records array from vpnManager
     */
     func obtainRecords() {
-        vpnManager.obtainDnsLogRecords { [weak self] (logRecordsOpt)  in
-            guard let sSelf = self else { return }
-            sSelf.allRecords = [LogRecord]()
-            guard let logRecords = logRecordsOpt else {
-                sSelf.recordsObserver?(sSelf.records)
-                return
-            }
-            for logRecord in logRecords.reversed() {
-                let info = sSelf.dnsTrackerService.getCategoryAndName(by: logRecord.domain)
-                let name = info.name
-                let isTracked = info.isTracked
-                
-                var categoryName: String? = nil
-                if let categoryKey = info.categoryKey {
-                    categoryName = ACLocalizedString(categoryKey, nil)
-                }
-                
-                let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked, rules: logRecord.blockRules)
-                sSelf.allRecords.append(record)
+        let logRecords = dnsLogService.readRecords()
+        
+        allRecords = [LogRecord]()
+        
+        for logRecord in logRecords.reversed() {
+            let info = dnsTrackerService.getCategoryAndName(by: logRecord.domain)
+            let name = info.name
+            let isTracked = info.isTracked
+            
+            var categoryName: String? = nil
+            if let categoryKey = info.categoryKey {
+                categoryName = ACLocalizedString(categoryKey, nil)
             }
             
-            sSelf.recordsObserver?(sSelf.records)
+            let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked, rules: logRecord.blockRules)
+            allRecords.append(record)
         }
+        
+        recordsObserver?(records)
     }
     
     func clearRecords(){
-        vpnManager.clearDnsRequestsLog()
+        dnsLogService.clearLog()
         allRecords = []
         searchRecords = []
         delegate?.requestsCleared()

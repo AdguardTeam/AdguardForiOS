@@ -23,8 +23,7 @@
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
-#import "APSharedResources.h"
-#import "APTunnelConnectionsHandler.h"
+#import "APCommonSharedResources.h"
 
 #import "ASDatabase.h"
 #import "ACNIPUtils.h"
@@ -131,7 +130,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NetworkStatus _lastReachabilityStatus;
     
-    APSharedResources* _resources;
+    AESharedResources* _resources;
     
     DnsProxyService* _dnsProxy;
     
@@ -156,13 +155,14 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     self = [super init];
     if (self) {
         
-        _resources = [APSharedResources new];
+        _resources = [AESharedResources new];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
+        id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithDnsLogService:logService];
         _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];

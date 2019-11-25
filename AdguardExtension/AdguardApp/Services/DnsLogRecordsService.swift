@@ -18,17 +18,20 @@
 
 import Foundation
 
+@objc
 protocol DnsLogRecordsServiceProtocol{
     func writeRecords(_ records: [DnsLogRecord])
     func readRecords()->[DnsLogRecord]
     func updateRecord(_ record: DnsLogRecord)
-    func clarLog()
+    func clearLog()
 }
 
+@objc
 class APDnsLogTable: ADBTableRow {
     let timestamp: TimeInterval
     let record: DnsLogRecord
     
+    @objc
     init(timestamp: TimeInterval, record: DnsLogRecord) {
         self.timestamp = timestamp
         self.record = record
@@ -42,14 +45,15 @@ class APDnsLogTable: ADBTableRow {
     }
 }
 
-class DnsLogRecordsService: DnsLogRecordsServiceProtocol {
+@objc
+class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     
-    private let resources: APSharedResources
+    private let resources: AESharedResourcesProtocol
     
     private var lastPurgeTime = Date().timeIntervalSince1970
     private let purgeTimeInterval: TimeInterval = 60.0      // seconds
      
-    private let path = APSharedResources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db").absoluteString
+    private let path = AESharedResources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db").absoluteString
     
     private lazy var writeHandler: FMDatabaseQueue? = {
         let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
@@ -65,7 +69,8 @@ class DnsLogRecordsService: DnsLogRecordsServiceProtocol {
         return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
     }()
     
-    init(resources: APSharedResources) {
+    @objc
+    init(resources: AESharedResourcesProtocol) {
         self.resources = resources
     }
     
@@ -98,7 +103,7 @@ class DnsLogRecordsService: DnsLogRecordsServiceProtocol {
         return records ?? [DnsLogRecord]();
     }
     
-    func clarLog() {
+    func clearLog() {
         writeHandler?.inTransaction { (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             table?.delete(withKeys: [], inRowObject: [])

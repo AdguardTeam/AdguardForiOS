@@ -22,7 +22,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     var server = ""
     
-    private let resources: APSharedResources
+    private let dnsLogService: DnsLogRecordsServiceProtocol
     private var records = [DnsLogRecord]()
     
     private let saveRecordsMinimumTime = 3.0 // seconds
@@ -30,8 +30,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
     
-    @objc init(resources: APSharedResources) {
-        self.resources = resources
+    @objc init(dnsLogService: DnsLogRecordsServiceProtocol) {
+        self.dnsLogService = dnsLogService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
     }
@@ -79,7 +79,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func save() {
-        resources.write(to: records)
+        dnsLogService.writeRecords(records)
         records.removeAll()
     }
 }

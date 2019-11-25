@@ -34,7 +34,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let model = DnsRequestLogViewModel(vpnManager: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
+    private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
