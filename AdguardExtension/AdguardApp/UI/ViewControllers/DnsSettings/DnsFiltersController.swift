@@ -32,7 +32,7 @@ class DnsFilterCell: UITableViewCell {
         didSet {
             filterNameLabel.text = filter?.name
             
-            let dateString = filter?.date.formatedStringWithHoursAndMinutes() ?? ""
+            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
             updateLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             
             filterSwitch.isOn = filter?.enabled ?? false
@@ -40,7 +40,7 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -51,6 +51,8 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     }()
     
     private var themeObservation: Any? = nil
+    
+    private let filterDetailsControllerId = "FilterDetailsController"
     
     private let dnsCellReuseId = "DnsFilterCell"
     private let addFilterCellReuseId = "AddFilterCell"
@@ -65,6 +67,11 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.updateFilters()
         updateTheme()
     }
     
@@ -101,14 +108,65 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            // Add filter
+        if indexPath.section == addFilterSection {
+            showAddFilterDialog()
         } else {
-           // Show detailed filter screen
+            let filter = model.filters[indexPath.row]
+            showFilterDetailsController(with: filter)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
+    // MARK: - NewCustomFilter delegate
+    
+    func addCustomFilter(filter: AASCustomFilterParserResult) {
+        let meta = filter.meta
+        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: true, desc: meta.descr, version: meta.version, rulesCount: filter.rules.count, homepage: meta.homepage)
+        
+        model.addFilter(dnsFilter)
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 
+    // MARK: - Actions
+    
+    @IBAction func filterStateAction(_ sender: UISwitch) {
+        model.setFilter(index: sender.tag, enabled: sender.isOn)
+    }
+    
+    // MARK: - Private methods
+    
+    private func showAddFilterDialog() {
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "NewCustomFilterInfoController") as? UINavigationController else { return }
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = self
+        
+        (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
+        (controller.viewControllers.first as? AddCustomFilterController)?.type = .dnsCustom
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    private func showFilterDetailsController(with filter: FilterDetailedInterface) {
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
+        
+        controller.filter = filter
+        controller.isCustom = true
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
     private func updateTheme() {
         theme.setupTable(tableView)
         view.backgroundColor = theme.backgroundColor
@@ -116,8 +174,5 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
-    }
-    @IBAction func filterStateAction(_ sender: UISwitch) {
-        model.setFilter(index: sender.tag, enabled: sender.isOn)
     }
 }

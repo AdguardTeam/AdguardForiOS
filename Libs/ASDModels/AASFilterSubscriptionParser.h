@@ -45,14 +45,6 @@ extern NSString * _Nonnull AASFilterSubscriptionParserErrorDomain;
 @interface AASFilterSubscriptionParser  : NSObject
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Init and Class methods
-
-/**
- init parser
- */
-- (nonnull instancetype) initWithNetworking:(nonnull id<ACNNetworkingProtocol>) networking;
-
-/////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
 /**
@@ -64,7 +56,10 @@ extern NSString * _Nonnull AASFilterSubscriptionParserErrorDomain;
  Otherwise, `error` parameter contains corresponding error.
  */
 - (void)parseFromUrl:(nonnull NSURL *)url
+          networking:(_Nonnull id<ACNNetworkingProtocol>)networking
           completion:(nullable void (^)(AASCustomFilterParserResult * _Nullable result, NSError * _Nullable error))completion;
+
+- (AASCustomFilterParserResult * _Nullable )parseFromData:(NSData * _Nonnull )data with: (NSString * _Nonnull )url;
 
 /**
  Parsing custom filter from url.
@@ -73,7 +68,9 @@ extern NSString * _Nonnull AASFilterSubscriptionParserErrorDomain;
  @param error On error returns error object.
  @return Result of nil if error occurs.
  */
-- (nullable AASCustomFilterParserResult *)parseFromUrl:(NSURL * _Nonnull)url error:(NSError *_Nullable * _Nonnull)error;
+- (nullable AASCustomFilterParserResult *)parseFromUrl:(NSURL * _Nonnull)url
+                                          networking:(_Nonnull id<ACNNetworkingProtocol>)networking
+                                          error:(NSError *_Nullable * _Nonnull)error;
 
 /**
  Cancels the asynchronous parsing.

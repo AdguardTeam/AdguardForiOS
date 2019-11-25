@@ -568,3 +568,8 @@
 /*(ContentBlockerService) notification about converting rules  */
 "converting_rules" = "Rules are being converted  ...";
 
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "New custom filter";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "New DNS filter";

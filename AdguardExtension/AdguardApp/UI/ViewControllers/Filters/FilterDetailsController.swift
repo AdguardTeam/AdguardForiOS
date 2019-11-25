@@ -29,7 +29,7 @@ protocol FilterDetailsControllerTableViewDelegate {
 
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
     
-    var filter: Filter!
+    var filter: FilterDetailedInterface!
     var isCustom: Bool!
     
     @IBOutlet weak var containerView: UIView!
@@ -41,6 +41,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationToken: NotificationToken?
     
@@ -49,11 +50,21 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         self.title = filter.name
         deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
+        
+        if let dnsFilter = filter as? DnsFilter {
+            if dnsFilter.id == DnsFilter.defaultFilterId{
+                deleteButton.isHidden = true
+            }
+        }
+        
         updateTheme()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        setupBackButton()
+        navigationController?.navigationBar.items?.forEach({$0.title = ""})
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +77,14 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        filtersService.deleteCustomFilter(filter)
+        if let customFilter = filter as? Filter {
+            filtersService.deleteCustomFilter(customFilter)
+        }
+        
+        if let dnsFilter = filter as? DnsFilter {
+            dnsFiltersService.deleteFilter(dnsFilter)
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -137,10 +155,11 @@ class FilterDetailsTableCotroller : UITableViewController {
     @IBOutlet weak var tagsView: FilterTagsView!
     @IBOutlet weak var enabledLabel: ThemableLabel!
     
-    var filter: Filter!
+    var filter: FilterDetailedInterface!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
@@ -174,13 +193,20 @@ class FilterDetailsTableCotroller : UITableViewController {
         rulesCountLabel.text = "\(filter.rulesCount ?? 0)"
         
         tagsView.highlightIsOn = false
-        tagsView.filter = filter
+        
+        if let safariFilter = filter as? Filter {
+            tagsView.filter = safariFilter
+        } else {
+            tagsView.filter = nil
+        }
         
         updateTheme()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        setupBackButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -204,23 +230,26 @@ class FilterDetailsTableCotroller : UITableViewController {
             return calculatedHeight
         
         case .description:
-            return filter.desc == nil || filter.desc?.count == 0 ? 0 : calculatedHeight
+            return filter.desc == nil || filter.desc?.count == 0 ? 0.0 : calculatedHeight
             
         case .version:
-            return filter.version == nil || filter.version?.count == 0 ? 0 : calculatedHeight
+            return filter.version == nil || filter.version?.count == 0 ? 0.0 : calculatedHeight
             
         case .updated:
-            return filter.updateDate == nil ? 0 : calculatedHeight
+            return filter.updateDate == nil ? 0.0 : calculatedHeight
             
         case .rulesCount:
-            return filter.rulesCount == nil ? 0 : calculatedHeight
+            return filter.rulesCount == nil ? 0.0 : calculatedHeight
             
         case .website:
-            return filter.homepage == nil || filter.homepage?.count == 0 ? 0 : calculatedHeight
+            return filter.homepage == nil || filter.homepage?.count == 0 ? 0.0 : calculatedHeight
             
         case .tags:
-            let tagsCount = (filter.tags?.count ?? 0) + (filter.langs?.count ?? 0)
-            return tagsCount == 0 ? 0 : calculatedHeight
+            if let safariFilter = filter as? Filter {
+                let tagsCount = (safariFilter.tags?.count ?? 0) + (safariFilter.langs?.count ?? 0)
+                return tagsCount == 0 ? 0.0 : calculatedHeight
+            }
+            return 0.0
         }
     }
     
@@ -251,7 +280,12 @@ class FilterDetailsTableCotroller : UITableViewController {
     }
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
-        filtersService.setFilter(filter, enabled: sender.isOn)
+        if let safariFilter = filter as? Filter {
+            filtersService.setFilter(safariFilter, enabled: sender.isOn)
+        }
+        if let dnsFilter = filter as? DnsFilter {
+            dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
+        }
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
     }
     

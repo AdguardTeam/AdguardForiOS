@@ -19,55 +19,107 @@
 import Foundation
 
 /** this class is responsible for retrieving, storing, and modifying DNS filters */
+@objc
 protocol DnsFiltersServiceProtocol {
     
     // list of dns filters
     var filters: [DnsFilter] { get }
     
+    var allFilters: Int { get }
+    
+    var enabledFilters: Int { get }
+    
     // json which can be used in dnsProxy. It contains only enabled filters
     var filtersJson: String { get }
     
     // dns whitelist rules
-    // autoaticaly updates vpn settings when changed
+    // automaticaly updates vpn settings when changed
     var whitelistDomains: [String] { get set }
     
     // dns user filter rules
-    // autoaticaly updates vpn settings when changed
+    // automaticaly updates vpn settings when changed
     var userRules: [String] { get set }
     
+    var filtersAreUpdating: Bool { get }
+    
     // enable or disable filter with id
-    // autoaticaly updates vpn settings when changed
+    // auto,aticaly updates vpn settings when changed
     func setFilter(filterId: Int, enabled: Bool)
+    
+    // adds filter to array of filters
+    // automaticaly updates vpn settings when changed
+    func addFilter(_ filter: DnsFilter)
+    
+    // deletes filter from array of filters
+    // automaticaly updates vpn settings when changed
+    func deleteFilter(_ filter: DnsFilter)
+    
+    func updateFilters(networking: ACNNetworkingProtocol)
 }
 
+protocol FilterDetailedInterface {
+    var name: String? { get set }
+    var enabled: Bool { get set }
+    var desc: String? { get set }
+    var version: String? { get set }
+    var updateDate: Date? { get set }
+    var rulesCount: Int? { get set }
+    var homepage: String? { get set }
+}
 
 @objc(DnsFilter)
-class DnsFilter: NSObject, NSCoding {
+class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     
-    let id: Int
-    let name: String
-    let date: Date
+    static let defaultFilterId = 0
+    
+    var id: Int = 3
+    var subscriptionUrl: String?
+    var name: String?
+    var updateDate: Date?
     var enabled: Bool
+    var desc: String?
+    var version: String?
+    var rulesCount: Int?
+    var homepage: String?
     
-    init(id: Int, name: String, date: Date, enabled: Bool) {
-        self.id = id
+    init(subscriptionUrl: String?, name: String, date: Date, enabled: Bool, desc: String?, version: String?, rulesCount: Int?, homepage: String?) {
+        
+        self.subscriptionUrl = subscriptionUrl
         self.name = name
-        self.date = date
+        self.updateDate = date
         self.enabled = enabled
+        self.desc = desc
+        self.version = version
+        self.rulesCount = rulesCount
+        self.homepage = homepage
+    }
+    
+    override var debugDescription: String {
+        return "\n id = \(self.id) \n name = \(String(describing: self.name)) \n version = \(String(describing: self.version)) \n rulesCount = \(String(describing: self.rulesCount))"
     }
     
     func encode(with coder: NSCoder) {
+        coder.encode(subscriptionUrl, forKey: "subscriptionUrl")
         coder.encode(id, forKey: "id")
         coder.encode(name, forKey: "name")
-        coder.encode(date, forKey: "date")
+        coder.encode(updateDate, forKey: "updateDate")
         coder.encode(enabled, forKey: "enabled")
+        coder.encode(desc, forKey: "desc")
+        coder.encode(version, forKey: "version")
+        coder.encode(rulesCount, forKey: "rulesCount")
+        coder.encode(homepage, forKey: "homepage")
     }
     
     required init?(coder: NSCoder) {
+        self.subscriptionUrl = coder.decodeObject(forKey: "subscriptionUrl") as? String ?? ""
         self.id = coder.decodeInteger(forKey: "id")
         self.name = coder.decodeObject(forKey: "name") as? String ?? ""
-        self.date = coder.decodeObject(forKey: "date") as? Date ?? Date()
+        self.updateDate = coder.decodeObject(forKey: "date") as? Date ?? Date()
         self.enabled = coder.decodeBool(forKey: "enabled")
+        self.desc = coder.decodeObject(forKey: "desc") as? String? ?? ""
+        self.version = coder.decodeObject(forKey: "version") as? String? ?? ""
+        self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int? ?? 0
+        self.homepage = coder.decodeObject(forKey: "homepage") as? String? ?? ""
     }
 }
 
@@ -76,13 +128,34 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var filters = [DnsFilter]()
     
+    var allFilters: Int {
+        get {
+            return filters.count
+        }
+    }
+    
+    var enabledFilters: Int {
+        get {
+            var count = 0
+            filters.forEach { (filter) in
+                if filter.enabled {
+                    count += 1
+                }
+            }
+            return count
+        }
+    }
+    
+    var filtersAreUpdating: Bool = false
+    
     private let defaultFilterId = 0
     private let userFilterId = 1
     private let whitelistFilterId = 2
     private let kSharedDefaultsDnsFiltersMetaKey = "kSharedDefaultsDnsFiltersMetaKey"
     
-    let resources: AESharedResourcesProtocol
-    let vpnManager: APVPNManagerProtocol?
+    private let resources: AESharedResourcesProtocol
+    private let vpnManager: APVPNManagerProtocol?
+    private let parser = AASFilterSubscriptionParser()
     
     init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?) {
         self.resources = resources
@@ -90,6 +163,16 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         super.init()
         readFiltersMeta()
+    }
+    
+    private var idCounter: Int {
+        get {
+            var currentValue = resources.sharedDefaults().integer(forKey: DnsFilterUniqueId)
+            // defaultFilterId = 0, userFilterId = 1, whitelistFilterId = 2 , next available id is 3
+            currentValue = currentValue < 3 ? 3 : currentValue
+            resources.sharedDefaults().set(currentValue + 1, forKey: DnsFilterUniqueId)
+            return currentValue
+        }
     }
     
     var filtersJson: String  {
@@ -174,11 +257,70 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         filters.forEach { (filter) in
             if filter.id == filterId {
                 filter.enabled = enabled
+                return
             }
         }
-        
         saveFiltersMeta()
         vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
+    }
+    
+    func addFilter(_ filter: DnsFilter) {
+        filter.id = idCounter
+        filters.append(filter)
+        
+        let fileName = filterFileName(filterId: filter.id)
+        let data = NSKeyedArchiver.archivedData(withRootObject: filter)
+        resources.save(data, toFileRelativePath: fileName)
+        
+        saveFiltersMeta()
+        vpnManager?.restartTunnel()
+    }
+    
+    func deleteFilter(_ filter: DnsFilter) {
+        let fileName = filterFileName(filterId: filter.id)
+        
+        for (i, filt) in filters.enumerated(){
+            if filt.id == filter.id {
+                filters.remove(at: i)
+                resources.save(Data(), toFileRelativePath: fileName)
+                saveFiltersMeta()
+                return
+            }
+        }
+        vpnManager?.restartTunnel()
+    }
+    
+    func updateFilters(networking: ACNNetworkingProtocol){
+        DispatchQueue(label: "load_dns_filters_queue").async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.filtersAreUpdating = true
+            for (i,filter) in sSelf.filters.enumerated() {
+                if let url = URL(string: filter.subscriptionUrl ?? ""){
+                    sSelf.parser.parse(from: url, networking: networking) {(result, error) in
+                        if let parserError = error {
+                            DDLogError("Failed updating dns filters with error: \(parserError)")
+                            return
+                        }
+                        if let parserResult = result {
+                            let meta = parserResult.meta
+                            let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: meta.descr, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+                            dnsFilter.id = filter.id
+                            
+                            sSelf.filters[i] = dnsFilter
+                            
+                            let fileName = sSelf.filterFileName(filterId: dnsFilter.id)
+                            let data = NSKeyedArchiver.archivedData(withRootObject: dnsFilter)
+
+                            sSelf.resources.save(data, toFileRelativePath: fileName)
+                            sSelf.saveFiltersMeta()
+                                                        
+                            return
+                        }
+                    }
+                }
+            }
+            sSelf.filtersAreUpdating = false
+        }
     }
     
     // MARK: - private methods
@@ -202,19 +344,23 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     private func addDefaultFilter() {
-        let defaultFilter = DnsFilter(id: defaultFilterId, name: String.localizedString("default_dns_filter_name"), date: Date(), enabled: true)
-        
-        filters.insert(defaultFilter, at: 0)
-        
-        // read default filter from bumdle and save it in right place
-        
+        // read default filter from bundle and save it in right place
         guard let path = Bundle.main.path(forResource: "dns_filter", ofType: "txt") else { return }
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
             DDLogError("(DnsFiltersService) addDefaultFilter error - can not read filter from bundle")
             return
         }
         
-        resources.save(data, toFileRelativePath: filterFileName(filterId: defaultFilterId))
+        let filterUrl = "https://filters.adtidy.org/ios/filters/15_optimized.txt"
+        let result = parser.parse(from: data, with: filterUrl)
+        let meta = result?.meta
+        
+        let defaultFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: meta?.name ?? "", date: meta?.updateDate ?? Date(), enabled: true, desc: meta?.descr ?? "", version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        defaultFilter.id = defaultFilterId
+        
+        filters.insert(defaultFilter, at: 0)
+        
+        resources.save(data, toFileRelativePath: filterFileName(filterId: defaultFilter.id))
     }
     
     private func filterFileName(filterId: Int)->String {

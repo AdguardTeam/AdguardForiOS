@@ -29,6 +29,7 @@ class RequestsBlockingController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
+    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
@@ -66,6 +67,13 @@ class RequestsBlockingController: UITableViewController {
         requestBlockingStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         setupBackButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), dnsFiltersService.enabledFilters, dnsFiltersService.allFilters)
+        filtersLabel.text = filtersDescriptionText
     }
     
     // MARK: - Table view delegate methods

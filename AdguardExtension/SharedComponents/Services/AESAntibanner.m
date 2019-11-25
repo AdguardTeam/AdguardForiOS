@@ -1546,12 +1546,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     for (ASDFilterMetadata * filter in filtersToUpdate) {
         
-        AASFilterSubscriptionParser* parser = [[AASFilterSubscriptionParser alloc] initWithNetworking: _networking];
+        AASFilterSubscriptionParser* parser = [AASFilterSubscriptionParser new];
         NSURL* url = [NSURL URLWithString:filter.subscriptionUrl];
         
         dispatch_group_enter(parseGroup);
         
-        [parser parseFromUrl:url completion:^(AASCustomFilterParserResult *result, NSError *error) {
+        [parser parseFromUrl:url networking:_networking completion:^(AASCustomFilterParserResult *result, NSError *error) {
             
             if (!result || error) {
                 dispatch_group_leave(parseGroup);

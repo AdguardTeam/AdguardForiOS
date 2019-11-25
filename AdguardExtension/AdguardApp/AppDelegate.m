@@ -43,6 +43,8 @@
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
+#define DNS_FILTERS_CHECK_LIMIT                 21600 // 6 hours
+
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
@@ -62,6 +64,8 @@ typedef enum : NSUInteger {
     AEUpdateNoData
 } AEUpdateResult;
 
+static NSTimeInterval lastCheckTime;
+
 @interface AppDelegate (){
     
     AETFetchCompletionBlock _fetchCompletion;
@@ -72,6 +76,8 @@ typedef enum : NSUInteger {
     id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
+    id<DnsFiltersServiceProtocol> _dnsFiltersService;
+    id<ACNNetworkingProtocol> _networking;
     
     BOOL _activateWithOpenUrl;
     
@@ -98,6 +104,8 @@ typedef enum : NSUInteger {
     _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
     _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
     _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
+    _dnsFiltersService = [ServiceLocator.shared getSetviceWithTypeName:@"DnsFiltersServiceProtocol"];
+    _networking = [ServiceLocator.shared getSetviceWithTypeName:@"ACNNetworking"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -291,6 +299,12 @@ typedef enum : NSUInteger {
             
             [_purchaseService checkPremiumStatusChanged];
         }];
+        NSTimeInterval now = NSDate.date.timeIntervalSince1970;
+        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult){
+            lastCheckTime = now;
+            [_dnsFiltersService updateFiltersWithNetworking:_networking];
+            DDLogInfo(@"Dns filters were updated");
+        }
     }
 }
 

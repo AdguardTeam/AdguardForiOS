@@ -254,6 +254,11 @@ extern NSString* _Nonnull ShowStatusViewNotification;
  */
 extern NSString* _Nonnull HideStatusViewNotification;
 
+/**
+ Unique id for dns filters
+ */
+extern NSString* _Nonnull DnsFilterUniqueId;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

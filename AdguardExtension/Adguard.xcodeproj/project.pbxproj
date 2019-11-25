@@ -586,6 +586,9 @@
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E50493022F07C4E0095181C /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIImageView+Utils.swift */; };
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
+		7E50FC18238C09F000F11722 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
+		7E50FC19238C0A0300F11722 /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
+		7E50FC1A238C0AB400F11722 /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
 		7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */; };
 		7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */; };
 		7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */; };
@@ -1038,7 +1041,6 @@
 		D067D9AB2142A20000ECDE6D /* AdguardBlockingExtensionCustom.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D99E21428BB500ECDE6D /* AdguardBlockingExtensionCustom.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D067D9AD214693E200ECDE6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D9AC214693E200ECDE6D /* LoginController.swift */; };
 		D06ACB6F2146AF1700D2A37D /* LongLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */; };
-		D06DE0282346289900A70D85 /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
 		D06DE0292346296B00A70D85 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		D06DE02A2346298900A70D85 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
@@ -3183,6 +3185,15 @@
 			path = "Container's controllers";
 			sourceTree = "<group>";
 		};
+		7EC9A06B238815EA007EBB24 /* AddNewCustomFilter */ = {
+			isa = PBXGroup;
+			children = (
+				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
+				D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */,
+			);
+			path = AddNewCustomFilter;
+			sourceTree = "<group>";
+		};
 		7EE7E1DD22E9DB2C00B2799A /* FiltersGroupController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3352,9 +3363,8 @@
 			isa = PBXGroup;
 			children = (
 				D0D6B9FB21A6AF4F007360BC /* Filters.storyboard */,
-				D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */,
+				7EC9A06B238815EA007EBB24 /* AddNewCustomFilter */,
 				D0F91166212EDE7C006DF0D3 /* FiltersController.swift */,
-				D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */,
 				7EF9189122F05F8A00427A61 /* FilterTagsView.swift */,
 				7E50493222F07FFA0095181C /* FilterTagsButtons.swift */,
 				7EE7E1DD22E9DB2C00B2799A /* FiltersGroupController */,
@@ -5352,6 +5362,7 @@
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
 				D0288F31230697C800A4EBEF /* ACLFileLocker.m in Sources */,
 				653B4CEB1DA5051200B1FF54 /* AEBlacklistDomainObject.m in Sources */,
+				7E50FC1A238C0AB400F11722 /* DnsFiltersService.swift in Sources */,
 				65EC9C951BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D0288F2E2306974F00A4EBEF /* DDLog.m in Sources */,
 				D0D033F22355ECAF0056789B /* AntibannerControllerMock.swift in Sources */,
@@ -5501,6 +5512,7 @@
 			files = (
 				D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */,
 				D0569D3921F1C0A800985DA9 /* PacketTunnelProvider.m in Sources */,
+				7E50FC19238C0A0300F11722 /* DnsFiltersService.swift in Sources */,
 				D0F36294220C009E0065BE8E /* Dns64Utils.swift in Sources */,
 				D0569D4721F1C0A800985DA9 /* NSURL+Utils.m in Sources */,
 				D0569D4C21F1C0A800985DA9 /* NSDate+Utils.m in Sources */,
@@ -5536,6 +5548,7 @@
 				D0569DA621F1C0A800985DA9 /* ADLocales.m in Sources */,
 				D0EDE45822A92E7300086C00 /* APUDPPacket.m in Sources */,
 				D0569DAE21F1C0A800985DA9 /* Reachability.m in Sources */,
+				7E50FC18238C09F000F11722 /* AASFilterSubscriptionParser.m in Sources */,
 				D0EDE45722A92D9A00086C00 /* APIPPacket.m in Sources */,
 				D0569DB321F1C0A800985DA9 /* ADBTableRow.m in Sources */,
 				D0569DBF21F1C0A800985DA9 /* FMDatabasePool.m in Sources */,
@@ -5567,7 +5580,6 @@
 				D0569E0E21F1C0A800985DA9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D0569E1221F1C0A800985DA9 /* FMStatementKeywordRecogniser.m in Sources */,
 				D0569E1421F1C0A800985DA9 /* ACNUrlUtils.m in Sources */,
-				D06DE0282346289900A70D85 /* DnsFiltersService.swift in Sources */,
 				D0D33BB723102BBE009082CE /* ABECFilterParsers.m in Sources */,
 				D0569E1521F1C0A800985DA9 /* AERDomainFilter.m in Sources */,
 				D0569E1721F1C0A800985DA9 /* ACSSystemUtils.m in Sources */,

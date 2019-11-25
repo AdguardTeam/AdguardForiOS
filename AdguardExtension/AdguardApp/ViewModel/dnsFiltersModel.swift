@@ -18,13 +18,40 @@
 
 import Foundation
 
-class DnsFiltersModel {
-    var filtersService: DnsFiltersServiceProtocol
+protocol DnsFiltersModelProtocol {
+    var filters: [DnsFilter] { get }
+    func setFilter(index: Int, enabled: Bool)
+    func addFilter(_ filter: DnsFilter)
+    func deleteFilter(_ filter: DnsFilter)
+    
+    func updateFilters()
+}
+
+class DnsFiltersModel: DnsFiltersModelProtocol {
+    
+    private var filtersService: DnsFiltersServiceProtocol
     var filters: [DnsFilter] = []
     
     init(filtersService: DnsFiltersServiceProtocol) {
         self.filtersService = filtersService;
-        fillFilters()
+        updateFilters()
+    }
+    
+    //MARK: - Public methods
+    
+    func addFilter(_ filter: DnsFilter) {
+        filters.append(filter)
+        filtersService.addFilter(filter)
+    }
+    
+    func deleteFilter(_ filter: DnsFilter) {
+        filtersService.deleteFilter(filter)
+        for (i, fil) in filters.enumerated() {
+            if fil.id == filter.id {
+                filters.remove(at: i)
+                return
+            }
+        }
     }
     
     func setFilter(index: Int, enabled: Bool) {
@@ -32,7 +59,7 @@ class DnsFiltersModel {
         filtersService.setFilter(filterId: filter.id, enabled: enabled)
     }
     
-    private func fillFilters(){
+    func updateFilters(){
         filters = filtersService.filters
     }
 }

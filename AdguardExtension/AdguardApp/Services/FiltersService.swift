@@ -19,7 +19,7 @@
 import Foundation
 
 // MARK: - data types -
-class Filter: NSObject, NSCopying {
+class Filter: NSObject, NSCopying, FilterDetailedInterface {
     
     let filterId: Int
     
