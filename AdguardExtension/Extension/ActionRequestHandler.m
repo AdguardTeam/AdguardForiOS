@@ -18,6 +18,7 @@
 #import "ADomain/ADomain.h"
 #import "ActionRequestHandler.h"
 #import "AESharedResources.h"
+#import "ACLLogger.h"
 #import "Adguard-Swift.h"
 
 #define AE_BLOCKLIST_NAME       @"blockerList.json"
@@ -53,7 +54,15 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         }
         //-------------------------------
         
+        // Init Logger
+        [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+    #if DEBUG
+        [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
+    #endif
+
         BOOL filteringEnabled = [[resources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled];
+        
+        DDLogInfo(@"(ActionRequestHandler) start content blocker loading - %@. filteringEnabled = %@", NSBundle.mainBundle.bundleIdentifier, filteringEnabled ? @"TRUE" : @"FALSE");
         
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
         SafariService* safariService = [[SafariService alloc] initWithResources:resources];
@@ -63,20 +72,22 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         
         if (jsonURL) {
             
-            NSLog(@"ActionRequestHandler: JSON URL \"%@\"", jsonURL);
-            
             long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil][NSFileSize] longLongValue];
+            
+            DDLogInfo(@"(ActionRequestHandler) content blocker file size - %lld", fileSize);
             
             BOOL succedded = NO;
             
             if ( !(filteringEnabled && fileSize >= MINIMUM_JSON_LENGTH) ) {
                 NSData* jsonData = [AEFakeBlockinRule dataUsingEncoding:NSUTF8StringEncoding];
                 succedded = [jsonData writeToURL:jsonURL atomically:YES];
+                DDLogInfo(@"(ActionRequestHandler) write fake rule with result: %@", succedded ? @"TRUE" : @"FALSE");
             }
             else {
                 NSError* error;
                 [[NSFileManager defaultManager] removeItemAtURL:jsonURL error:&error];
                 succedded = [[NSFileManager defaultManager] copyItemAtURL:fileUrl toURL:jsonURL error:&error];
+                DDLogInfo(@"(ActionRequestHandler) copy json with result: %@", succedded ? @"TRUE" : @"FALSE");
             }
             
             if (succedded) {
@@ -87,7 +98,7 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
                 NSArray* items = nil;
                 
                 if (attachment) {
-                    NSLog(@"ActionRequestHandler: Attachment initialized!");
+                    DDLogInfo(@"ActionRequestHandler: Attachment is initialized!");
                     
                     NSExtensionItem *item = [[NSExtensionItem alloc] init];
                     item.attachments = @[ attachment ];
@@ -100,7 +111,11 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
                 return;
             }
         }
+        else {
+            DDLogError(@"(ActionRequestHandler) error - can not create jsonURL");
+        }
         
+        DDLogError(@"(ActionRequestHandler) something wrong - return nil");
         [context completeRequestReturningItems:nil completionHandler:nil];
         return;
     }

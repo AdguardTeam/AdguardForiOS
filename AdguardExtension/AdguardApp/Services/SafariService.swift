@@ -108,6 +108,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
+            DDLogInfo("(SafariService) invalidateBlockingJsons")
             
             sSelf.updateQueue.async {
                 
@@ -117,6 +118,9 @@ class SafariService: NSObject, SafariServiceProtocol {
                 for blocker in ContentBlockerType.allCases {
                     
                     group.enter()
+                    
+                    DDLogInfo("(SafariService) invalidateBlockingJsons - \(blocker)")
+
                     // Notify that filter began updating
                     NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
                     
@@ -156,6 +160,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     // MARK: save/load files
     
     func save(json: Data, type: ContentBlockerType) {
+        DDLogInfo("(SafariService) save \(json.count) bytes to \(contentBlockersEnabled) )")
         if let fileName = fileNames[type] {
             resources.save(json, toFileRelativePath: fileName)
         }

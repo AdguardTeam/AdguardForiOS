@@ -91,6 +91,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     @objc
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void) {
         
+        DDLogInfo("(ContentBlockerService) reloadJsons")
+        
 #if !APP_EXTENSION
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
 #endif
@@ -292,6 +294,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private func updateContentBlockers()->Error? {
         
+        DDLogInfo("(ContentBlockerService) updateContentBlockers")
+        
         let filtersByGroup = activeGroups()
         let allFilters = filtersByGroup.flatMap { $0.value }
         let rulesByFilter = rules(forFilters: allFilters)
@@ -367,6 +371,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         
+        DDLogInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
+        
         return autoreleasepool {
             var rules = blockerRules
             
@@ -374,6 +380,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
             let userRules = userFilterEnabled ? antibanner!.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+            
+            DDLogInfo("(ContentBlockerService) updateJson append \(userRules.count) user rules")
             
             rules = userRules + rules
             
@@ -391,11 +399,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                     }
                     
                     if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
+                        DDLogInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
                         rules.append(innvertedRule)
                     }
                 }
                 else {
                     if let whitelistRules = resources.whitelistContentBlockingRules {
+                        DDLogInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) whitelist rules")
                         rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
                     }
                 }
@@ -404,6 +414,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var resultData = Data()
             var resultError: Error?
             if rules.count != 0 {
+                DDLogInfo("(ContentBlockerService) updateJson - convert \(rules.count) rules")
                 let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
                 resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                 
@@ -411,8 +422,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 
                 resultError = error
+                if error != nil {
+                    DDLogError("(ContentBlockerService) updateJson - error converting rules - \(error!.localizedDescription)")
+                }
                 
             } else {
+                DDLogInfo("(ContentBlockerService) updateJson - no rules to convert")
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                 resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
             }
