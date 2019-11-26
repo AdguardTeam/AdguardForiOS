@@ -466,6 +466,7 @@ class UserFilterViewModel: NSObject {
                     self?.didChangeValue(for: \.rules)
                 }
                 else {
+                    DDLogError("(UserFilterViewModel) addInvertedWhitelstRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     errorHandler(error?.localizedDescription ?? "")
                 }
                 
@@ -497,6 +498,7 @@ class UserFilterViewModel: NSObject {
                 switch (strongSelf.type) {
                 case .blacklist:
                     if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
+                        DDLogError("(UserFilterViewModel) setNewRules - Error occured during content blocker reloading - \(error.localizedDescription)")
                         DispatchQueue.main.async {
                             strongSelf.willChangeValue(for: \.rules)
                             strongSelf.allRules = rulesCopy
@@ -559,6 +561,7 @@ class UserFilterViewModel: NSObject {
                     completionHandler()
                 }
                 else {
+                    DDLogError("(UserFilterViewModel) deleteWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     self.willChangeValue(for: \.rules)
                     self.allRules = oldRules
                     self.ruleObjects = oldRuleObjects
@@ -591,6 +594,7 @@ class UserFilterViewModel: NSObject {
                     completionHandler()
                 }
                 else {
+                    DDLogError("(UserFilterViewModel) deleteInvertedWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     self?.willChangeValue(for: \.rules)
                     self?.allRules = oldRules
                     self?.didChangeValue(for: \.rules)
@@ -626,6 +630,9 @@ class UserFilterViewModel: NSObject {
         let oldRule = allRules[index]
         
         contentBlockerService.replaceWhitelistDomain(rules[index].rule, with: text) { (error) in
+            if error != nil {
+                DDLogError("(UserFilterViewModel) changeWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
+            }
             oldRule.rule = text
             oldRuleObject.ruleText = text
             
@@ -655,7 +662,7 @@ class UserFilterViewModel: NSObject {
                     completionHandler()
                 }
                 else {
-                    DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading.")
+                    DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     // do not rollback changes and do not show any alert to user in this case
                     // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
                     completionHandler()

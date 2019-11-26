@@ -319,7 +319,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         NSStringEncoding enc;
         NSString *fileContent;
         
-        for (DDLogFileInfo *info in logFileInfos) {
+        for (DDLogFileInfo *info in logFileInfos.reverseObjectEnumerator) {
             
             fileContent = [NSString stringWithFormat:LOG_DELIMETER_FORMAT, info.fileName];
             
