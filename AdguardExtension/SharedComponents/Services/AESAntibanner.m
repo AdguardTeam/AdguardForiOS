@@ -1262,8 +1262,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         [self beginBackgroundTaskWithExpirationHandler:^{
-            
-            [self rollbackTransactionInternal:YES];
         }];
         
         [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
