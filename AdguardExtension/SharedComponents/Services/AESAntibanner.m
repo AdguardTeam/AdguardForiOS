@@ -1262,6 +1262,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         [self beginBackgroundTaskWithExpirationHandler:^{
+            DDLogError(@"(AESAntibanner) beginTransaction - expiration handler fired");
+            
+            // unlocks database file to prevent crashes
+            [[ASDatabase singleton] resetIsolationQueue:workQueue];
         }];
         
         [[ASDatabase singleton] rawExec:^(FMDatabase *db) {
@@ -1299,8 +1303,14 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     [self rollbackTransactionInternal:NO];
 }
 
+- (void)applicationWillEnterForeground {
+    if (_inTransaction) {
+        [[ASDatabase singleton] resetIsolationQueue:workQueue];
+    }
+}
+
 - (void)rollbackTransactionInternal:(BOOL)backgroundTaskExpired{
-    
+        
     dispatch_sync(workQueue, ^{
         
         if (_inTransaction) {
