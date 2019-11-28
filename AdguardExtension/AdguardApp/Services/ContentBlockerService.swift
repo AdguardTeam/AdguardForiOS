@@ -332,16 +332,18 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             group.enter()
             concurrentQueue.async { [unowned self] in
                 let error = self.updateJson(blockerRules: rulesByContentBlocker[type]!, forContentBlocker: type)
-                resultError = error ?? resultError
                 
                 if error == nil {
                     // immediately update the safari without waiting for the conversion of other jsons
                     self.safariService.invalidateBlockingJson(type: type) { (error) in
-                        resultError = error ?? resultError
+                        if error != nil {
+                            resultError = error
+                        }
                         group.leave()
                     }
                 }
                 else {
+                    resultError = error
                     group.leave()
                 }
             }
