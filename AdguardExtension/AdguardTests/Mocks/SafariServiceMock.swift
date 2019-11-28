@@ -16,9 +16,6 @@ class SafariManagerMock: SFContentBlockerManagerProtocol {
         DispatchQueue(label: "reload").async {
             self.currentCount = self.currentCount + 1
             self.maximumCount = max(self.maximumCount, self.currentCount)
-            if self.maximumCount > 1 {
-                NSLog("AAAAAs")
-            }
             DispatchQueue(label: "completion").asyncAfter(deadline: .now() + self.sleepTime) {
                 self.currentCount = self.currentCount - 1
                 
