@@ -53,9 +53,9 @@ class GetProTableController: UITableViewController {
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
     private let purchaseRow = 5
-    private let customRow = 3
-    private let privacyRow = 2
-    private let securityRow = 4
+    private let customRow = 4
+    private let privacyRow = 3
+    private let securityRow = 2
     private let subscribedRow = 6
     private let descriptionRow = 7
     
@@ -72,7 +72,7 @@ class GetProTableController: UITableViewController {
         
         updateTheme()
         
-        selectedProduct = purchaseService.products[1] // Yearly is by default
+        selectedProduct = purchaseService.standardProduct
               
         setPrice()
         
@@ -286,7 +286,9 @@ class GetProTableController: UITableViewController {
     private func getPeriodString(product: Product?) -> String {
         
         if product == nil || product!.type == .lifetime {
-            return ACLocalizedString("permanent_subscription_title", nil)
+            let formatString = ACLocalizedString("trial_period_years", nil)
+            let resultString : String = String.localizedStringWithFormat(formatString, 1)
+            return resultString
         }
         
         guard let period = product?.period else { return "" }

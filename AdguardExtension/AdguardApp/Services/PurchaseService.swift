@@ -62,9 +62,9 @@ protocol PurchaseServiceProtocol {
     func checkPremiumStatusChanged()
     
     /**
-     returns true if service ready to request purchases through app store
+     returns standart product (currently it is Year subscribtion )
      */
-//    var ready: Bool {get}
+    var standardProduct: Product? { get }
     
     /**
      return array of products
@@ -238,6 +238,11 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             return (purchasedThroughInApp) ||
                 (loginService.loggedIn && loginService.hasPremiumLicense && loginService.active);
         }
+    }
+    
+    var standardProduct: Product? {
+        let pr = products.first(where: { $0.productId == annualSubscriptionProductID })
+        return pr
     }
     
     var products: [Product] {
