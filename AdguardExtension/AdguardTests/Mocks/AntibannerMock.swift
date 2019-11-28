@@ -14,7 +14,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     var storedFilters = [ASDFilterMetadata]()
     
     func rules(forFilter filterId: NSNumber) -> [ASDFilterRule] {
-        return rules[filterId]!
+        return rules[filterId] ?? [ASDFilterRule]()
     }
     
     func metadata(forSubscribe refresh: Bool) -> ABECFilterClientMetadata? {
@@ -171,4 +171,6 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
         return true
     }
     
+    func applicationWillEnterForeground() {
+    }
 }

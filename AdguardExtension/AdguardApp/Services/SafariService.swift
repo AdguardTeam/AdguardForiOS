@@ -39,6 +39,10 @@ protocol SafariServiceProtocol : NSObjectProtocol {
      */
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void)
     
+    /** invalidates all content blockers
+     */
+    func invalidateBlockingJson(type: ContentBlockerType,completion: @escaping (Error?) -> Void)
+    
     /** saves json for content blocker with @type
     */
     func save(json: Data, type: ContentBlockerType)
@@ -59,15 +63,45 @@ protocol SafariServiceProtocol : NSObjectProtocol {
     /** returns state of content blocker ( on / off )
      */
     func getContentBlockerEnabled(type: ContentBlockerType) -> Bool
+    
+    /** SFContentBlockerManager wrapper
+        it is used for testing
+     */
+    var contentBlockerManager: SFContentBlockerManagerProtocol { get set }
+}
+
+/**
+ this protocol is used for testing
+ */
+protocol SFContentBlockerManagerProtocol {
+    func reloadContentBlocker(withIdentifier identifier: String, completionHandler: ((Error?) -> Void)?)
+    func getStateOfContentBlocker(withIdentifier identifier: String, completionHandler: @escaping (SFContentBlockerState?, Error?) -> Void)
 }
 
 // MARK: - SafariService -
 
 class SafariService: NSObject, SafariServiceProtocol {
     
+    /** SFContentBlockerManager wrapper
+       it is used for testing
+    */
+    var contentBlockerManager: SFContentBlockerManagerProtocol = {
+        class Manager: SFContentBlockerManagerProtocol {
+            func getStateOfContentBlocker(withIdentifier identifier: String, completionHandler: @escaping (SFContentBlockerState?, Error?) -> Void) {
+                SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: identifier, completionHandler: completionHandler)
+            }
+            
+            func reloadContentBlocker(withIdentifier identifier: String, completionHandler: ((Error?) -> Void)?) {
+                SFContentBlockerManager.reloadContentBlocker(withIdentifier: identifier, completionHandler: completionHandler)
+            }
+        }
+        
+        return Manager()
+    }()
+    
     private var resources: AESharedResourcesProtocol
     
-    static private let contenBlockerBundleIdByType: [ContentBlockerType: String] =
+    static let contenBlockerBundleIdByType: [ContentBlockerType: String] =
         [.general : "com.adguard.AdguardExtension.extension",
          .privacy: "com.adguard.AdguardExtension.extensionPrivacy",
          .socialWidgetsAndAnnoyances: "com.adguard.AdguardExtension.extensionAnnoyances",
@@ -102,46 +136,40 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: public methods
     
-    let updateQueue = DispatchQueue(label: "safari_update")
+    let updateQueue = DispatchQueue(label: "safari_update", attributes: .concurrent)
     
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
     
-        workQueue.async { [weak self] in
-            guard let sSelf = self else { return }
-            DDLogInfo("(SafariService) invalidateBlockingJsons")
+        updateQueue.async { [unowned self] in
             
-            sSelf.updateQueue.async {
+            DDLogInfo("(SafariService) invalidateBlockingJsons")
                 
-                let group = DispatchGroup()
-                var resultError: Error?
+            let group = DispatchGroup()
+            var resultError: Error?
+            
+            for blocker in ContentBlockerType.allCases {
                 
-                for blocker in ContentBlockerType.allCases {
-                    
-                    group.enter()
-                    
-                    DDLogInfo("(SafariService) invalidateBlockingJsons - \(blocker)")
+                group.enter()
+                
+                DDLogInfo("(SafariService) invalidateBlockingJsons - \(blocker)")
 
-                    // Notify that filter began updating
-                    NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
+                self.invalidateBlockingJson(type: blocker, completion: { (error) in
+                    if error != nil {
+                        DDLogError("(SafariService) invalidateBlockingJsons - Failed to reload json for content blocker: \(blocker)")
+                        resultError = error
+                    }
+                    let sError = (error != nil) ? false : true
                     
-                    sSelf.invalidateJson(contentBlockerType: blocker, completion: { (error) in
-                        if error != nil {
-                            let bundleId = SafariService.contenBlockerBundleIdByType[blocker]!
-                            DDLogError("(SafariService) invalidateBlockingJsons - Failed to reload json for content blocker: \(bundleId)")
-                            resultError = error
-                        }
-                        let sError = (error != nil) ? false : true
-                        
-                        // Notify that filter finished updating
-                        NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
-                        group.leave()
-                    })
+                    // Notify that filter finished updating
+                    NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                     
-                    group.wait()
-                }
-                
-                completion(resultError)
+                    group.leave()
+                })
             }
+            
+            group.wait()
+            
+            completion(resultError)
         }
     }
     
@@ -196,7 +224,7 @@ class SafariService: NSObject, SafariServiceProtocol {
             for blocker in ContentBlockerType.allCases {
                 
                 group.enter()
-                self.chekStatusOfContentBlocker(contentBlockerType: blocker, callback: {[weak self] (enabled) in
+                self.checkStatusOfContentBlocker(contentBlockerType: blocker, callback: {[weak self] (enabled) in
                     self?.contentBlockersEnabled[blocker] = enabled
                     group.leave()
                 })
@@ -209,9 +237,9 @@ class SafariService: NSObject, SafariServiceProtocol {
         
     }
     
-    private func chekStatusOfContentBlocker(contentBlockerType: ContentBlockerType, callback: @escaping (_ enabled: Bool)->Void)->Void {
+    private func checkStatusOfContentBlocker(contentBlockerType: ContentBlockerType, callback: @escaping (_ enabled: Bool)->Void)->Void {
         let bundleId = SafariService.contenBlockerBundleIdByType[contentBlockerType]!
-        SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: bundleId) { (state, _) in
+        contentBlockerManager.getStateOfContentBlocker(withIdentifier: bundleId) { (state, _) in
             callback(state?.isEnabled ?? false)
         }
     }
@@ -226,56 +254,83 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: - private methods
     
-    private func invalidateJson(contentBlockerType: ContentBlockerType, completion: @escaping (Error?)->Void) {
-        let bundleId = SafariService.contenBlockerBundleIdByType[contentBlockerType]!
-        DDLogInfo("(SafariService) Starting notify Safari - invalidateJson. BundleId = \(bundleId)");
+    private let invalidateQueue = DispatchQueue(label: "invalidate queue")
+    
+    func invalidateBlockingJson(type: ContentBlockerType, completion: @escaping (Error?)->Void) {
         
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) {[weak self] (error) in
-            guard let sSelf = self else { return }
-            DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson.");
-            if error != nil {
-                DDLogError("(SafariService) \(bundleId) Error occured: \(error!.localizedDescription)")
-                if let userInfo = (error as NSError?)?.userInfo {
-                    DDLogError("(SafariService) userInfo: \(userInfo)")
-                }
+        invalidateQueue.async { [unowned self] in
+            
+            // Notify that filter began updating
+            NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : type])
+            
+            let group = DispatchGroup()
+            group.enter()
+            
+            let bundleId = SafariService.contenBlockerBundleIdByType[type]!
+            DDLogInfo("(SafariService) Starting notify Safari - invalidateJson. BundleId = \(bundleId)");
+            
+            self.contentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) {[weak self] (error) in
+                guard let sSelf = self else { return }
                 
-                DDLogInfo("(SafariService) Notify Safari fihished.")
-                
-                // If content blocker failed to load in safari - we try to reload it second time
-                sSelf.tryToReload(contentBlockerWith: bundleId) { (error) in
-                    if error != nil {
-                        completion(error)
-                    } else {
-                        completion(nil)
+                DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson.");
+                if error != nil {
+                    DDLogError("(SafariService) \(bundleId) Error occured: \(error!.localizedDescription)")
+                    if let userInfo = (error as NSError?)?.userInfo {
+                        DDLogError("(SafariService) userInfo: \(userInfo)")
                     }
+                    
+                    DDLogInfo("(SafariService) Notify Safari fihished.")
+                    
+                    // If content blocker failed to load in safari - we try to reload it second time
+                    sSelf.tryToReload(contentBlockerWith: bundleId) { (error) in
+                        if error != nil {
+                            completion(error)
+                        } else {
+                            completion(nil)
+                        }
+                    }
+                    group.leave()
+                }
+                else {
+                    DDLogInfo("(SafariService)  \(bundleId) reload successeded")
+                    completion(nil)
+                    group.leave()
                 }
             }
-            else {
-                DDLogInfo("(SafariService)  \(bundleId) reload successeded")
-                completion(nil)
-            }
+            
+            group.wait()
         }
     }
     
     // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
     private func tryToReload(contentBlockerWith bundleId: String, completion: @escaping (Error?) -> Void) {
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) { (error) in
-            DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson. ( 2-nd try )");
-            if error != nil {
-                DDLogError("(SafariService) \(bundleId) Error occured twice: \(error!.localizedDescription)")
-                if let userInfo = (error as NSError?)?.userInfo {
-                    DDLogError("(SafariService) userInfo for 2-nd try: \(userInfo)")
+        invalidateQueue.async {
+            
+            let group = DispatchGroup()
+            group.enter()
+            
+            self.contentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) { (error) in
+                DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson. ( 2-nd try )");
+                if error != nil {
+                    DDLogError("(SafariService) \(bundleId) Error occured twice: \(error!.localizedDescription)")
+                    if let userInfo = (error as NSError?)?.userInfo {
+                        DDLogError("(SafariService) userInfo for 2-nd try: \(userInfo)")
+                    }
+                    let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
+                    let error =  NSError(domain: "SafariServiceDomain", code: Int(AES_ERROR_SAFARI_EXCEPTION), userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                    
+                    DDLogInfo("(SafariService) Notify Safari fihished. ( 2-nd try )")
+                    completion(error)
                 }
-                let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
-                let error =  NSError(domain: "SafariServiceDomain", code: Int(AES_ERROR_SAFARI_EXCEPTION), userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                else {
+                    DDLogError("(SafariService)  \(bundleId) reload successeded with 2-nd try.")
+                    completion(nil)
+                }
                 
-                DDLogInfo("(SafariService) Notify Safari fihished. ( 2-nd try )")
-                completion(error)
+                group.leave()
             }
-            else {
-                DDLogError("(SafariService)  \(bundleId) reload successeded with 2-nd try.")
-                completion(nil)
-            }
+            
+            group.wait()
         }
     }
 }

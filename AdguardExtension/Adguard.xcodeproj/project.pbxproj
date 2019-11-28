@@ -1117,6 +1117,7 @@
 		D0C37ECE22A6879B0004337D /* DnsLogRecordsWriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */; };
 		D0C37ECF22A687B30004337D /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D0C37ED022A687D20004337D /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B28C21FA11F80075BB8D /* DnsProxyService.swift */; };
+		D0C9911A238FDB8700C9123F /* SafariServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C99119238FDB8700C9123F /* SafariServiceTest.swift */; };
 		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */; };
 		D0CA61812203489A005CAAA4 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
@@ -1999,6 +2000,7 @@
 		D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomFilterController.swift; sourceTree = "<group>"; };
 		D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
 		D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriterProtocol.swift; sourceTree = "<group>"; };
+		D0C99119238FDB8700C9123F /* SafariServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceTest.swift; sourceTree = "<group>"; };
 		D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderContainerController.swift; sourceTree = "<group>"; };
 		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0CB3477212DCE21003B650E /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -3010,6 +3012,7 @@
 		65F3982D1B7B684700ABCD39 /* AdguardTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0C99119238FDB8700C9123F /* SafariServiceTest.swift */,
 				D0EFBF5A22BA638F00D2D391 /* Mocks */,
 				65F3982E1B7B684700ABCD39 /* AdguardExtensionTests.m */,
 				65F398301B7B684700ABCD39 /* Info.plist */,
@@ -5294,6 +5297,7 @@
 				65F3982F1B7B684700ABCD39 /* AdguardExtensionTests.m in Sources */,
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D093718821AEA770004A24F1 /* ContentBlockerTest.swift in Sources */,
+				D0C9911A238FDB8700C9123F /* SafariServiceTest.swift in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				D0288F3D2306995800A4EBEF /* ACLLogger.m in Sources */,
 				D02C080621BEAB2900796714 /* SafariServiceMock.swift in Sources */,
