@@ -285,10 +285,14 @@ class GetProTableController: UITableViewController {
     
     private func getPeriodString(product: Product?) -> String {
         
-        if product == nil || product!.type == .lifetime {
+        if product == nil {
             let formatString = ACLocalizedString("trial_period_years", nil)
             let resultString : String = String.localizedStringWithFormat(formatString, 1)
             return resultString
+        }
+        
+        if product!.type == .lifetime {
+            return ACLocalizedString("permanent_subscription_title", nil)
         }
         
         guard let period = product?.period else { return "" }
