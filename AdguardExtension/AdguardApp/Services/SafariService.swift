@@ -140,7 +140,8 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
     
-        updateQueue.async { [unowned self] in
+        updateQueue.async { [weak self] in
+            guard let self = self else { return }
             
             DDLogInfo("(SafariService) invalidateBlockingJsons")
                 
@@ -258,7 +259,8 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     func invalidateBlockingJson(type: ContentBlockerType, completion: @escaping (Error?)->Void) {
         
-        invalidateQueue.async { [unowned self] in
+        invalidateQueue.async { [weak self] in
+            guard let self = self else { return }
             
             // Notify that filter began updating
             NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : type])

@@ -330,7 +330,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         // run conversion to jsons in concurrent queue.
         for type in ContentBlockerType.allCases {
             group.enter()
-            concurrentQueue.async { [unowned self] in
+            concurrentQueue.async { [weak self] in
+                guard let self = self else { return }
                 let error = self.updateJson(blockerRules: rulesByContentBlocker[type]!, forContentBlocker: type)
                 
                 if error == nil {
