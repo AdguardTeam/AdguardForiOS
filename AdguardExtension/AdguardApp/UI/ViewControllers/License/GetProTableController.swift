@@ -26,7 +26,6 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var restoreButton: RoundRectButton!
     @IBOutlet weak var periodButton: RoundRectButton!
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
-    @IBOutlet weak var trialLabel: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var logoImage: ThemeableImageView!
@@ -34,14 +33,12 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var notPurchasedLogoCell: UITableViewCell!
     @IBOutlet weak var purchasedLogoCell: UITableViewCell!
     @IBOutlet weak var purchaseCell: UITableViewCell!
-    @IBOutlet weak var trialCell: UITableViewCell!
     @IBOutlet weak var descriptionCell: UITableViewCell!
     
     @IBOutlet weak var periodLabel: ThemableLabel!
     @IBOutlet weak var priceLabel: ThemableLabel!
     @IBOutlet weak var startTrialTitleLable: ThemableLabel!
     @IBOutlet weak var startTrialDescriptionLabel: ThemableLabel!
-    @IBOutlet weak var trialCellDescriptionLabel: ThemableLabel!
     
     // MARK: - services
     
@@ -55,13 +52,12 @@ class GetProTableController: UITableViewController {
     
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
-    private let purchaseRow = 2
-    private let customRow = 3
-    private let privacyRow = 4
-    private let securityRow = 5
+    private let purchaseRow = 5
+    private let customRow = 4
+    private let privacyRow = 3
+    private let securityRow = 2
     private let subscribedRow = 6
-    private let trialRow = 7
-    private let descriptionRow = 8
+    private let descriptionRow = 7
     
     var selectedProduct: Product?
     
@@ -76,7 +72,7 @@ class GetProTableController: UITableViewController {
         
         updateTheme()
         
-        selectedProduct = purchaseService.products.first
+        selectedProduct = purchaseService.standardProduct
               
         setPrice()
         
@@ -111,11 +107,6 @@ class GetProTableController: UITableViewController {
             return 0
         }
         
-        // hide trial row for premium users
-        if indexPath.row == trialRow && configuration.proStatus {
-            return 0
-        }
-        
         // hide notPurchased logo for premium users
         if indexPath.row == notPurchasedLogoRow && configuration.proStatus {
             return 0
@@ -130,11 +121,7 @@ class GetProTableController: UITableViewController {
         if indexPath.row == descriptionRow && configuration.proStatus {
             return 0
         }
-        
-        if indexPath.row == trialRow && selectedProduct?.type == .some(.lifetime) {
-            return 0
-        }
-        
+
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -149,14 +136,12 @@ class GetProTableController: UITableViewController {
         
         let lifetime = selectedProduct?.type == .some(.lifetime)
         
-        trialLabel.text = getStringForTrialLabel(product: selectedProduct)
         periodLabel.text = getPeriodString(product: selectedProduct)
         priceLabel.text = selectedProduct?.price
         upgradeButton.isEnabled = selectedProduct != nil
         startTrialTitleLable.text = getStartTrialTitleLabelString(product: selectedProduct)
         startTrialDescriptionLabel.text = getStartTrialDescriptionLabelString(product: selectedProduct)
         
-        trialCellDescriptionLabel.isHidden = lifetime
         setPurchaseDescription()
         
         upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
@@ -236,7 +221,6 @@ class GetProTableController: UITableViewController {
         let pro = configuration.proStatus
         notPurchasedLogoCell.isHidden = pro
         purchasedLogoCell.isHidden = !pro
-        trialCell.isHidden = pro || (selectedProduct?.type == .some(.lifetime))
         purchaseCell.isHidden = pro
         descriptionCell.isHidden = pro
     }
@@ -299,38 +283,15 @@ class GetProTableController: UITableViewController {
         return resultString
     }
     
-    private func getStringForTrialLabel(product: Product?) -> String {
-        
-        if product?.type == .some(.lifetime) {
-            return ""
-        }
-        
-        guard let period = product?.trialPeriod else { return "" }
-        var formatString : String = ""
-        
-        switch period.unit {
-        case .day:
-            formatString = ACLocalizedString("trial_label_days", nil)
-        case .week:
-            if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial_label_days", nil)
-                return String.localizedStringWithFormat(formatString, 7)
-            }
-            formatString = ACLocalizedString("trial_label_weeks", nil)
-        case .month:
-            formatString = ACLocalizedString("trial_label_months", nil)
-        case .year:
-            formatString = ACLocalizedString("trial_label_years", nil)
-        }
-        
-        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
-        
-        return resultString
-    }
-    
     private func getPeriodString(product: Product?) -> String {
         
-        if product == nil || product!.type == .lifetime {
+        if product == nil {
+            let formatString = ACLocalizedString("trial_period_years", nil)
+            let resultString : String = String.localizedStringWithFormat(formatString, 1)
+            return resultString
+        }
+        
+        if product!.type == .lifetime {
             return ACLocalizedString("permanent_subscription_title", nil)
         }
         

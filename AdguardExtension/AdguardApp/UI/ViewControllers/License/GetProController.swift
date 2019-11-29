@@ -145,7 +145,7 @@ class GetProController: UIViewController {
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.restoreFailed(error: error)
             case PurchaseService.kPSNotificationReadyToPurchase:
-                self?.getProTableController?.selectedProduct = self?.purchaseService.products.first
+                self?.getProTableController?.selectedProduct = self?.purchaseService.standardProduct
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.getProTableController?.setPrice()
             case PurchaseService.kPSNotificationCanceled:
