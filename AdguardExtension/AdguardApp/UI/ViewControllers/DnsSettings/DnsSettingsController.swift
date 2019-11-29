@@ -39,9 +39,12 @@ class DnsSettingsController : UITableViewController{
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
+    private var vpnInstalledObserver: NSKeyValueObservation?
     
     private var themeObserver: NotificationToken?
     private var vpnObserver: NotificationToken?
+    
+    var stateFromWidget: Bool?
     
     // MARK: - view controller life cycle
     
@@ -68,10 +71,24 @@ class DnsSettingsController : UITableViewController{
                 ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: sSelf.vpnManager.lastError?.localizedDescription)
             }
         }
-        
-        self.updateVpnState()
+    
+        updateVpnState()
         setupBackButton()
         updateTheme()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let turnFromWidget: ()->() = {[weak self] in
+            guard let self = self else { return }
+            self.turnVpnFromWidget()
+        }
+        if vpnManager.managerWasLoaded {
+            turnVpnFromWidget()
+        } else {
+            vpnManager.turnFromWidget = turnFromWidget
+        }
     }
     
     // MARK: - Table view delegate methods
@@ -147,33 +164,45 @@ class DnsSettingsController : UITableViewController{
     }
     
     private func showConfirmVpnAlert(yesAction: @escaping ()->()){
-        let title: String = ACLocalizedString("vpn_confirm_title", nil)
-        let message: String = ACLocalizedString("vpn_confirm_message", nil)
-        let okTitle: String = ACLocalizedString("common_action_ok", nil)
-        let cancelTitle: String = ACLocalizedString("common_action_cancel", nil)
-        let privacyTitle: String = ACLocalizedString("privacy_policy_action", nil)
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
-            yesAction()
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let title: String = ACLocalizedString("vpn_confirm_title", nil)
+            let message: String = ACLocalizedString("vpn_confirm_message", nil)
+            let okTitle: String = ACLocalizedString("common_action_ok", nil)
+            let cancelTitle: String = ACLocalizedString("common_action_cancel", nil)
+            let privacyTitle: String = ACLocalizedString("privacy_policy_action", nil)
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
+                yesAction()
+            }
+            let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { [weak self] (alert) in
+                guard let sSelf = self else { return }
+                UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
+                sSelf.enabledSwitch.isOn = false
+            }
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) {[weak self] (alert) in
+                guard let sSelf = self else { return }
+                sSelf.enabledSwitch.isOn = false
+            }
+            
+            alert.addAction(okAction)
+            alert.addAction(privacyAction)
+            alert.addAction(cancelAction)
+            
+            alert.preferredAction = okAction
+            
+            self.present(alert, animated: true, completion: nil)
         }
-        let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { [weak self] (alert) in
-            guard let sSelf = self else { return }
-            UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
-            sSelf.enabledSwitch.isOn = false
+    }
+    
+    private func turnVpnFromWidget(){
+        if let enabled = stateFromWidget{
+            enabledSwitch.isOn = enabled
+            toggleEnableSwitch(enabledSwitch)
         }
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) {[weak self] (alert) in
-            guard let sSelf = self else { return }
-            sSelf.enabledSwitch.isOn = false
-        }
-        
-        alert.addAction(okAction)
-        alert.addAction(privacyAction)
-        alert.addAction(cancelAction)
-        
-        alert.preferredAction = okAction
-        
-        present(alert, animated: true, completion: nil)
+        stateFromWidget = nil
     }
 }

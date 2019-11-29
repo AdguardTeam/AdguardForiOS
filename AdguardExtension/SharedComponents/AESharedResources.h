@@ -42,11 +42,6 @@ extern NSString *AE_URLSCHEME;
 extern NSString *AE_URLSCHEME_COMMAND_ADD;
 
 /**
- User Defaults key that defines enable/disable filtration.
- */
-extern NSString * _Nonnull AEDefaultsAdguardEnabled;
-
-/**
  User Defaults key that defines app performs first start or not.
  */
 extern NSString * _Nonnull AEDefaultsFirstRunKey;
@@ -212,7 +207,7 @@ extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 
 /**
- User default key, which indicates whether safari protaction is enabled*/
+ User default key, which indicates whether safari protection is enabled*/
 extern NSString* _Nonnull SafariProtectionState;
 
 /**

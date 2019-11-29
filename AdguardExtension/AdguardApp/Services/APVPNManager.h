@@ -181,6 +181,10 @@ this flag indicates that filtering of mobile data is on/off
 /**remove vpn configuration from system settings*/
 - (void)removeVpnConfiguration;
 
+@property (nonatomic, nullable) void (^turnFromWidget)();
+
+@property (nonatomic) BOOL managerWasLoaded;
+
 @end
 
 /**

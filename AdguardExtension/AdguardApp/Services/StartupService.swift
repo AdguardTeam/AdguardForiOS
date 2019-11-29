@@ -56,6 +56,9 @@ class StartupService : NSObject{
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
         
+        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
+        locator.addService(service: vpnManager)
+        
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
@@ -71,9 +74,6 @@ class StartupService : NSObject{
         let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)
         
         locator.addService(service: filtersService)
-        
-        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
-        locator.addService(service: vpnManager)
         
         let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         

@@ -38,4 +38,6 @@
 
 - (void)writeToDnsLogRecords:(NSArray <DnsLogRecord *> *)logRecords;
 
+@property BOOL safariProtectionEnabled;
+
 @end

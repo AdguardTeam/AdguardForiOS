@@ -38,6 +38,7 @@ class AppDelegateHelper: NSObject {
     lazy var purchaseService: PurchaseServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
     lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
+    lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -52,6 +53,9 @@ class AppDelegateHelper: NSObject {
     private let statusView = StatusView()
     
     var purchaseObservation: Any?
+    
+    // MARK: String Constants
+    private let openSystemProtection = "systemProtection"
     
     private var firstRun: Bool {
         get {
@@ -181,7 +185,7 @@ class AppDelegateHelper: NSObject {
         
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD {
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
             appDelegate.window.rootViewController = launchScreenController
         }
      
@@ -221,6 +225,44 @@ class AppDelegateHelper: NSObject {
                 }
             }
             return true
+        }
+        
+        if url.scheme == AE_URLSCHEME && command == openSystemProtection {
+            let enabledString = String(url.path.suffix(url.path.count - 1))
+            let enabled = enabledString == "on"
+            
+            let main = nav.viewControllers[0]
+            if main.isKind(of: MainController.self) {
+                let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
+                let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
+                
+                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
+                
+                let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
+                guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
+                
+                dnsSettingsController.stateFromWidget = enabled
+                
+                let proViewControllers = [main, menuController, dnsSettingsController]
+                let toPurchaseViewControllers = [main, getProController]
+                let proStatus = configuration.proStatus
+                
+                nav.viewControllers = proStatus ? proViewControllers : toPurchaseViewControllers
+                
+                main.loadViewIfNeeded()
+                
+                if proStatus {
+                    menuController.loadViewIfNeeded()
+                    dnsSettingsController.loadViewIfNeeded()
+                } else {
+                    getProController.loadViewIfNeeded()
+                }
+                
+                self.appDelegate.window.rootViewController = nav
+            } else{
+                DDLogError("(AppDelegate) Can't open systemProtection because mainController is not found.")
+            }
         }
         return false
     }

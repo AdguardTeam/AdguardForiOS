@@ -134,6 +134,14 @@ static FMDatabaseQueue *_writeDnsLogHandler;
     }];
 }
 
+- (BOOL)safariProtectionEnabled{
+    return [self.sharedDefaults boolForKey:SafariProtectionState];
+}
+
+- (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
+    [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Private methods
 

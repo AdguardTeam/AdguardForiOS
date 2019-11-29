@@ -80,6 +80,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 @synthesize connectionStatus = _connectionStatus;
 @synthesize lastError = _lastError;
+@synthesize turnFromWidget = _turnFromWidget;
+@synthesize managerWasLoaded = _managerWasLoaded;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
@@ -90,6 +92,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     self = [super init];
     if (self) {
         
+        _managerWasLoaded = NO;
         _resources = resources;
         _configuration = configuration;
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
@@ -168,7 +171,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 #pragma mark Properties and public methods
 
 - (BOOL)enabled {
-    
     return _enabled;
 }
 - (void)setEnabled:(BOOL)enabled{
@@ -658,7 +660,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     [NETunnelProviderManager loadAllFromPreferencesWithCompletionHandler:^(NSArray<NETunnelProviderManager *> * _Nullable managers, NSError * _Nullable error) {
         if (error){
-            
             DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
             _lastError = _standartError;
         }
@@ -709,6 +710,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         }
         
         [self sendNotificationForced:YES];
+        if (_turnFromWidget){
+            _turnFromWidget();
+        }
+        self.managerWasLoaded = YES;
     }];
     
 }
