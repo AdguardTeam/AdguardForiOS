@@ -109,77 +109,83 @@ class ActionExtensionMainController: UITableViewController {
         // make changes one at a time
         let group = DispatchGroup()
         toggleQueue.async { [weak self] in
-            guard let sSelf = self else { return }
-            
-            let newEnabled = sender.isOn
-            
-            if newEnabled == sSelf.domainEnabled {
-                return
-            }
-            //check rule overlimit
-            if !(sSelf.enableChangeDomainFilteringStatus) {
-                DispatchQueue.main.async {
-                    ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: ACLocalizedString("common_error_title", nil), message: ACLocalizedString("filter_rules_maximum", nil))
-                    sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+            ProcessInfo().performExpiringActivity(withReason: "Loading json to content blocker") {[weak self] (expired) in
+                guard let sSelf = self else { return }
+                
+                if (expired) {
+                    return
                 }
-                return
-            }
-            
-            let inverted: Bool = sSelf.resources!.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-            
-            group.enter()
-            // disable filtering == remove from inverted whitelist
-            if inverted && sSelf.domainEnabled{
-                sSelf.contentBlockerService!.removeInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
-                    guard let sSelf = self else { return }
-                    sSelf.safariService!.invalidateBlockingJsons {[weak self] (error) in
-                        guard let sSelf = self else { return }
-                        sSelf.domainEnabled = false
-                        group.leave()
-                    }
+                
+                let newEnabled = sender.isOn
+                
+                if newEnabled == sSelf.domainEnabled {
+                    return
                 }
-            }
-            // enable filtering == add to inverted whitelist
-            else if (inverted && !(sSelf.domainEnabled)) {
-                sSelf.contentBlockerService!.addInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
-                    guard let sSelf = self else { return }
-                    sSelf.safariService!.invalidateBlockingJsons { [weak self] (error) in
-                        guard let sSelf = self else { return }
-                        sSelf.domainEnabled = true
-                        group.leave()
-                    }
-                }
-            }
-            // disable filtering (add to whitelist)
-            else if sSelf.domainEnabled{
-                sSelf.contentBlockerService!.addWhitelistDomain(sSelf.domainName!) { [weak self] (error) in
-                    guard let sSelf = self else { return }
+                //check rule overlimit
+                if !(sSelf.enableChangeDomainFilteringStatus) {
                     DispatchQueue.main.async {
-                        if error != nil {
-                            sSelf.enabledSwitch.isOn = sSelf.domainEnabled
-                        } else {
-                            sSelf.domainEnabled = newEnabled
+                        ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: ACLocalizedString("common_error_title", nil), message: ACLocalizedString("filter_rules_maximum", nil))
+                        sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+                    }
+                    return
+                }
+                
+                let inverted: Bool = sSelf.resources!.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+                
+                group.enter()
+                // disable filtering == remove from inverted whitelist
+                if inverted && sSelf.domainEnabled{
+                    sSelf.contentBlockerService!.removeInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
+                        guard let sSelf = self else { return }
+                        sSelf.safariService!.invalidateBlockingJsons {[weak self] (error) in
+                            guard let sSelf = self else { return }
+                            sSelf.domainEnabled = false
+                            group.leave()
                         }
-                        group.leave()
                     }
                 }
-            }
-            // enable filtering (remove from whitelist)
-            else {
-                sSelf.contentBlockerService!.removeWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
-                    guard let sSelf = self else { return }
-                    DispatchQueue.main.async {
-                        if error != nil {
-                            sSelf.enabledSwitch.isOn = sSelf.domainEnabled
-                        } else {
-                            sSelf.domainEnabled = newEnabled
+                // enable filtering == add to inverted whitelist
+                else if (inverted && !(sSelf.domainEnabled)) {
+                    sSelf.contentBlockerService!.addInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
+                        guard let sSelf = self else { return }
+                        sSelf.safariService!.invalidateBlockingJsons { [weak self] (error) in
+                            guard let sSelf = self else { return }
+                            sSelf.domainEnabled = true
+                            group.leave()
                         }
-                        group.leave()
                     }
                 }
+                // disable filtering (add to whitelist)
+                else if sSelf.domainEnabled{
+                    sSelf.contentBlockerService!.addWhitelistDomain(sSelf.domainName!) { [weak self] (error) in
+                        guard let sSelf = self else { return }
+                        DispatchQueue.main.async {
+                            if error != nil {
+                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+                            } else {
+                                sSelf.domainEnabled = newEnabled
+                            }
+                            group.leave()
+                        }
+                    }
+                }
+                // enable filtering (remove from whitelist)
+                else {
+                    sSelf.contentBlockerService!.removeWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
+                        guard let sSelf = self else { return }
+                        DispatchQueue.main.async {
+                            if error != nil {
+                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+                            } else {
+                                sSelf.domainEnabled = newEnabled
+                            }
+                            group.leave()
+                        }
+                    }
+                }
+                
+                group.wait()
             }
-            
-            group.wait()
         }
     }
     
