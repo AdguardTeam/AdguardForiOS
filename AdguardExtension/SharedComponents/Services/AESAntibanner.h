@@ -340,6 +340,11 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (void)beginTransaction;
 - (void)endTransaction;
 - (void)rollbackTransaction;
+/**
+ When app works in background sometimes we must unlock db file to prevent app suspension by iOS.
+ We should lock it when app returns foreground.
+ */
+- (void)applicationWillEnterForeground;
 
 /**
  returns unique custom filter id

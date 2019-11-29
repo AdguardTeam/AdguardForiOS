@@ -135,4 +135,57 @@ class ContentBlockerTest: XCTestCase {
         }
     }
 
+    func testReloadWithoutErrors() {
+        let expectation = XCTestExpectation(description: "reload jsons")
+        
+        contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testReloadWithErrors() {
+        let expectation = XCTestExpectation(description: "reload jsons")
+        
+        safari.errors = [.general: true]
+        
+        contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+            XCTAssertNotNil(error)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testMultipleReloadWithoutErrors() {
+        let expectation = XCTestExpectation(description: "reload jsons")
+        expectation.expectedFulfillmentCount = 10
+        
+        for _ in 0..<10 {
+            contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                XCTAssertNil(error)
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testMultipleReloadWithErrors() {
+        let expectation = XCTestExpectation(description: "reload jsons")
+        expectation.expectedFulfillmentCount = 10
+        
+        safari.errors = [.general: true]
+        
+        for _ in 0..<10 {
+            contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                XCTAssertNotNil(error)
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
 }

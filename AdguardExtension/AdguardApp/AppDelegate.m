@@ -245,6 +245,7 @@ typedef enum : NSUInteger {
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
+    [_aeService.antibanner applicationWillEnterForeground];
     
     ConfigurationService* configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
     [configuration checkContentBlockerEnabled];

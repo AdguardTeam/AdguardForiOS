@@ -100,20 +100,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
             
-            if let error = sSelf.updateContentBlockers() {
+            let error = sSelf.updateContentBlockers()
 #if !APP_EXTENSION
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+            UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
-                completion(error)
-                return
-            }
-            
-            sSelf.safariService.invalidateBlockingJsons(completion: { (error) in
-                sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-#if !APP_EXTENSION
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
-#endif
-            })
+            completion(error)
+            return            
         }
     }
     
@@ -326,14 +318,42 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             rulesByContentBlocker[type]?.append(contentsOf: rulesByAffinityBlocks[type] ?? [])
         }
         
+        return convertRulesAndInvalidateSafari(rulesByContentBlocker: rulesByContentBlocker)
+    }
+    
+    private func convertRulesAndInvalidateSafari(rulesByContentBlocker: [ContentBlockerType: [ASDFilterRule]])->Error? {
         var resultError: Error?
         
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.general]!, forContentBlocker: .general) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.privacy]!, forContentBlocker: .privacy) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.socialWidgetsAndAnnoyances]!, forContentBlocker: .socialWidgetsAndAnnoyances) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.other]!, forContentBlocker: .other) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.custom]!, forContentBlocker: .custom) ?? resultError
-        resultError = updateJson(blockerRules: rulesByContentBlocker[.security]!, forContentBlocker: .security) ?? resultError
+        let concurrentQueue = DispatchQueue(label: "update_cb", attributes: DispatchQueue.Attributes.concurrent)
+        let group = DispatchGroup()
+        
+        // run conversion to jsons in concurrent queue.
+        for type in ContentBlockerType.allCases {
+            group.enter()
+            concurrentQueue.async { [weak self] in
+                guard let self = self else { return }
+                let error = self.updateJson(blockerRules: rulesByContentBlocker[type]!, forContentBlocker: type)
+                
+                if error == nil {
+                    // immediately update the safari without waiting for the conversion of other jsons
+                    self.safariService.invalidateBlockingJson(type: type) { (error) in
+                        if error != nil {
+                            resultError = error
+                        }
+                        group.leave()
+                    }
+                }
+                else {
+                    resultError = error
+                    group.leave()
+                }
+            }
+        }
+        
+        group.wait()
+        
+        let result = resultError == nil ? "SUCCCESS" : "FAILURE"
+        DDLogInfo("(ContentBlockerService) convertRulesAndInvalidateSafari - all content blockers are updated. Result - \(result)")
         
         return resultError
     }
@@ -433,7 +453,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             }
             
             safariService.save(json: resultData, type: contentBlocker)
-            
+         
             return resultError
         }
     }
