@@ -31,8 +31,8 @@
 #define PURGE_TIME_INTERVAL         60      // seconds
 
 #define STATISTICS_REARRANGE_LIMIT  3600   // 1 hour
-#define STATISTICS_RECORDS_LIMIT    1500   // 1500
-#define STATISTICS_SECTORS_NUMBER   150   // 150
+#define STATISTICS_RECORDS_LIMIT    1500   // 1500 records
+#define STATISTICS_SECTORS_NUMBER   150   // 1500 records -> 150 records
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

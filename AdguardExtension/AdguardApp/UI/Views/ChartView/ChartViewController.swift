@@ -43,7 +43,7 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
         model.chartPointsChangedDelegate = self
         
         changeAllButtonsText()
-        model.obtainStatistics {}
+        model.obtainStatistics()
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         

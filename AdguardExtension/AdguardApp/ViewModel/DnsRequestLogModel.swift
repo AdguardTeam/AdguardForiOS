@@ -219,24 +219,4 @@ class DnsRequestLogViewModel {
         dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: record.date)
     }
-    
-    private func isBlocked(_ answer: String?, isTracked: Bool?) -> BlockedRecordType {
-        if answer == nil || answer == "" {
-            // Mark all NXDOMAIN responses as blocked
-            return .blocked
-        }
-
-        if answer!.contains("0.0.0.0") ||
-            answer!.contains("127.0.0.1") ||
-            answer!.contains("[::]")  {
-            return .blocked
-        }
-
-        if isTracked ?? false {
-            return .tracked
-        }
-        
-        return .normal
-    }
-    
 }

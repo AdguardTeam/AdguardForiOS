@@ -31,25 +31,25 @@ class ChartView: UIView {
             maxXelement = chartPoints.map({ $0.x }).max() ?? 0.0
             maxYelement = chartPoints.map({ $0.y }).max() ?? 0.0
             
-            drawGraphic()
+            drawChart()
         }
     }
     
     var lineColor: UIColor = UIColor(hexString: "ff67b279") {
         didSet{
-            drawGraphic()
+            drawChart()
         }
     }
     
     var shadowColor: UIColor = UIColor(hexString: "67b279") {
         didSet{
-            drawGraphic()
+            drawChart()
         }
     }
     
     var gridColor: UIColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.2) {
         didSet{
-            drawGraphic()
+            drawChart()
         }
     }
 
@@ -75,7 +75,7 @@ class ChartView: UIView {
     }
     
     override func layoutSubviews() {
-        drawGraphic()
+        drawChart()
     }
     
     // MARK: - Private methods -
@@ -127,7 +127,7 @@ class ChartView: UIView {
     
     // MARK: - Methods for points
     
-    private func drawGraphic(){
+    private func drawChart(){
         lineLayer.removeFromSuperlayer()
         
         var points = convertPoints()

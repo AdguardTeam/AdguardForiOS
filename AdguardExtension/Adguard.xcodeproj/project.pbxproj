@@ -3195,7 +3195,7 @@
 			path = "Container's controllers";
 			sourceTree = "<group>";
 		};
-		7ECCCC172372B2AF00FA651F /* Chart view */ = {
+		7ECCCC172372B2AF00FA651F /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
 				7ECCCC13237194B200FA651F /* ChartView.swift */,
@@ -3204,7 +3204,7 @@
 				7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */,
 				7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */,
 			);
-			path = "Chart view";
+			path = ChartView;
 			sourceTree = "<group>";
 		};
 		7EE7E1DD22E9DB2C00B2799A /* FiltersGroupController */ = {
@@ -3509,7 +3509,7 @@
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
-				7ECCCC172372B2AF00FA651F /* Chart view */,
+				7ECCCC172372B2AF00FA651F /* ChartView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

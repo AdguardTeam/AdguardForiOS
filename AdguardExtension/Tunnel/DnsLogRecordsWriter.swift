@@ -60,7 +60,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         }
         
         let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
-        let info = dnsTrackerService.getCategoryAndName(by: event.domain ?? "")
+        let info = dnsTrackerService.getTrackerInfo(by: event.domain ?? "")
         let type = isBlocked(event.answer, isTracked: info?.isTracked)
         
         let number: NSNumber = resources.defaultRequestsNumber ?? 0
@@ -128,9 +128,11 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func reinitializeStatistics(){
-        statistics[APAllRequestsString] = RequestsStatisticsBlock(date: Date(), numberOfRequests: 0)
-        statistics[APBlockedRequestsString] = RequestsStatisticsBlock(date: Date(), numberOfRequests: 0)
-        statistics[APCountersRequestsString] = RequestsStatisticsBlock(date: Date(), numberOfRequests: 0)
+        let date = Date()
+        
+        statistics[APAllRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        statistics[APBlockedRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        statistics[APCountersRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
     }
     
     private func isBlocked(_ answer: String?, isTracked: Bool?) -> BlockedRecordType {

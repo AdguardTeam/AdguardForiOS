@@ -25,7 +25,7 @@ protocol ChartViewModelProtocol {
     var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
     var requestsObserver: (([ChartRerord])->Void)? { get }
     
-    func obtainStatistics(completion: @escaping ()->())
+    func obtainStatistics()
 }
 
 protocol ChartPointsChangedDelegate: class {
@@ -124,7 +124,7 @@ class ChartViewModel: ChartViewModelProtocol {
         self.vpnManager = vpnManager
     }
     
-    func obtainStatistics(completion: @escaping ()->()) {
+    func obtainStatistics() {
         vpnManager.obtainDnsLogStatistics {[weak self] (statisticsRecords) in
             guard let sSelf = self else { return }
             guard let statistics = statisticsRecords else { return }
@@ -142,8 +142,6 @@ class ChartViewModel: ChartViewModelProtocol {
                     break
                 }
             }
-            
-            completion()
             sSelf.changeChart()
         }
     }
