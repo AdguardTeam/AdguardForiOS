@@ -592,6 +592,7 @@
 		7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */; };
 		7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
+		7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D790236056ED00E7ABA4 /* StatusView.swift */; };
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
 		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
@@ -1777,6 +1778,7 @@
 		7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsModel.swift; sourceTree = "<group>"; };
 		7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsService.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
+		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
@@ -3508,6 +3510,7 @@
 				65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */,
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
+				7E59D790236056ED00E7ABA4 /* StatusView.swift */,
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
 				7ECCCC172372B2AF00FA651F /* ChartView */,
 			);
@@ -5261,6 +5264,7 @@
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,
 				7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */,
+				7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */,
 				7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */,
 				D04CD26422007433000B0331 /* DnsRequestDetailsController.swift in Sources */,
 				65EC9AF01BB9824C00F53F3B /* ABECFilter.m in Sources */,

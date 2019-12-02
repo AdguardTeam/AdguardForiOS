@@ -303,9 +303,11 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 completionHandler()
                 
                 strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
-                    DDLogError("(UserFilterViewModel) Error occured during content blocker reloading.")
-                    // do not rollback changes and do not show any alert to user in this case
-                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    if error != nil {
+                        DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+                        // do not rollback changes and do not show any alert to user in this case
+                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    }
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 }
             }
@@ -328,16 +330,13 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         contentBlockerService.reloadJsons(backgroundUpdate: false) {(error)  in
             
             DispatchQueue.main.async {
-                if error == nil {
-                    completionHandler()
-                }
-                else {
-                    DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading.")
+                if error != nil {
+                    DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     // do not rollback changes and do not show any alert to user in this case
                     // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    completionHandler()
                 }
                 
+                completionHandler()
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }

@@ -194,6 +194,7 @@ class MainController: UIViewController {
     }
     
     @IBAction func updateFiltersAction(_ sender: Any) {
+        
         viewModel?.updateFilters(start: { [weak self] in
             self?.updateStarted()
             self?.filtersVersionLabel.text = ACLocalizedString("update_filter_start_message", nil)

@@ -465,7 +465,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show progress bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoV-et-2ku" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show status bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoV-et-2ku" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="16" width="293" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -657,7 +657,7 @@
                     <navigationItem key="navigationItem" title="Advanced settings" id="Ll9-il-kpC"/>
                     <connections>
                         <outlet property="restartProtectionSwitch" destination="hAq-Ld-n9T" id="fk9-u4-IVQ"/>
-                        <outlet property="showProgressbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
+                        <outlet property="showStatusbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
                         <outlet property="useSimplifiedFiltersSwitch" destination="RDS-1r-fn1" id="MOR-mK-vpF"/>
                         <outletCollection property="themableLabels" destination="W6u-T8-UVZ" collectionClass="NSMutableArray" id="v7G-Zv-ltp"/>
                         <outletCollection property="themableLabels" destination="PV8-kf-b2c" collectionClass="NSMutableArray" id="lhL-mi-PJ3"/>

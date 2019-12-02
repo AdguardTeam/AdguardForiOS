@@ -582,3 +582,13 @@
 
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "All time";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Content blockers are being updated ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Loading filters ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Rules are being converted  ...";
+

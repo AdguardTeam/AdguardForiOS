@@ -74,7 +74,7 @@ NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
 NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
-NSString* AEDefaultsShowProgressBar = @"AEDefaultsShowProgressBar";
+NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
 NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
@@ -82,6 +82,10 @@ NSString* AEDefaultsRequests = @"AEDefaultsRequests";
 NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
 
 NSString* AEDefaultsCountersRequests = @"AEDefaultsCountersRequests";
+
+NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
+NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
+NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
 NSString* SafariProtectionState = @"SafariProtectionState";
 
