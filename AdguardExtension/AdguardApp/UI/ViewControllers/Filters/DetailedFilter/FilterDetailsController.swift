@@ -51,11 +51,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         self.title = filter.name
         deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
         
-        if let dnsFilter = filter as? DnsFilter {
-            if dnsFilter.id == DnsFilter.defaultFilterId{
-                deleteButton.isHidden = true
-            }
-        }
+        deleteButton.isHidden = !filter.removable
         
         updateTheme()
         

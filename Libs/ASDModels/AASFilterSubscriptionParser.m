@@ -217,6 +217,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                              //Main return
                              @synchronized(self) {
                                  if (completion) {
+                                     context.result.filtersData = data;
                                      completion(context.result, error);
                                  }
                              }
@@ -258,6 +259,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     context.result = [AASCustomFilterParserResult new];
     context.result.meta = [ASDFilterMetadata new];
     context.result.rules = [NSMutableArray new];
+    context.result.filtersData = data;
     
     [self parseMetaTagsWithContext:context content:content];
     [self parseRulesWithContext:context content:content];

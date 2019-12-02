@@ -129,9 +129,8 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         let meta = filter.meta
         let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: true, desc: meta.descr, version: meta.version, rulesCount: filter.rules.count, homepage: meta.homepage)
         
-        model.addFilter(dnsFilter)
-        
         DispatchQueue.main.async {[weak self] in
+            self?.model.addFilter(dnsFilter, data: filter.filtersData)
             self?.tableView.reloadData()
         }
     }

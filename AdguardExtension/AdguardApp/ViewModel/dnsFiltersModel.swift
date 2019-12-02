@@ -21,7 +21,7 @@ import Foundation
 protocol DnsFiltersModelProtocol {
     var filters: [DnsFilter] { get }
     func setFilter(index: Int, enabled: Bool)
-    func addFilter(_ filter: DnsFilter)
+    func addFilter(_ filter: DnsFilter, data: Data?)
     func deleteFilter(_ filter: DnsFilter)
     
     func updateFilters()
@@ -39,9 +39,9 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     
     //MARK: - Public methods
     
-    func addFilter(_ filter: DnsFilter) {
+    func addFilter(_ filter: DnsFilter, data: Data?) {
         filters.append(filter)
-        filtersService.addFilter(filter)
+        filtersService.addFilter(filter, data: data)
     }
     
     func deleteFilter(_ filter: DnsFilter) {

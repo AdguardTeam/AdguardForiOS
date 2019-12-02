@@ -78,6 +78,7 @@ static NSTimeInterval lastCheckTime;
     PurchaseService* _purchaseService;
     id<DnsFiltersServiceProtocol> _dnsFiltersService;
     id<ACNNetworkingProtocol> _networking;
+    ConfigurationService *_configuration;
     
     BOOL _activateWithOpenUrl;
     
@@ -106,6 +107,7 @@ static NSTimeInterval lastCheckTime;
     _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
     _dnsFiltersService = [ServiceLocator.shared getSetviceWithTypeName:@"DnsFiltersServiceProtocol"];
     _networking = [ServiceLocator.shared getSetviceWithTypeName:@"ACNNetworking"];
+    _configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -299,8 +301,9 @@ static NSTimeInterval lastCheckTime;
             
             [_purchaseService checkPremiumStatusChanged];
         }];
+        
         NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult){
+        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus){
             lastCheckTime = now;
             [_dnsFiltersService updateFiltersWithNetworking:_networking];
             DDLogInfo(@"Dns filters were updated");
