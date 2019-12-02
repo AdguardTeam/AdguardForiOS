@@ -17,15 +17,6 @@
  */
 
 import Foundation
-//import Mobile
-
-//class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
-//    func write(_ message: String!) {
-//        if message != nil {
-//            DDLogInfo("(DnsProxy) \(message!)")
-//        }
-//    }
-//}
 
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
@@ -59,8 +50,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                 self?.dnsRecordsWriter.handleEvent(event!)
             }
         }
-        
-//        MobileConfigureLogger(true, "", DnsProxyLogWriter(), &error)
     }
     
     var agproxy: AGDnsProxy?
