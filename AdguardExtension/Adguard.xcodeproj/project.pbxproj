@@ -685,8 +685,6 @@
 		D02FABF32164F53C00174676 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		D02FABF42164F53D00174676 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		D02FC2292164F4DB008EADB9 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
-		D030CF012394FF3800B792AE /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
-		D030CF022394FFD500B792AE /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D030CF032394FFED00B792AE /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D0319F9E21947633002C17D9 /* RuleDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9D21947633002C17D9 /* RuleDetailsController.swift */; };
 		D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9F21947808002C17D9 /* BottomAlertController.swift */; };
@@ -929,6 +927,7 @@
 		D05CA8741F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D05CA8751F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D05F4C5F230D964F000EAE2D /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		D062598423951B5500AB6E8F /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D0667BCD22DC67430099C090 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0667BCC22DC67430099C090 /* UserNotificationService.swift */; };
 		D0667BCF22DC72FD0099C090 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0667BCE22DC72FD0099C090 /* AppDelegateHelper.swift */; };
 		D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D42140020A00ECDE6D /* GroupCell.swift */; };
@@ -1460,7 +1459,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D030CF022394FFD500B792AE /* AGDnsProxy.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2346,7 +2344,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D030CF012394FF3800B792AE /* AGDnsProxy.xcframework in Frameworks */,
 				655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */,
 				65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */,
 				656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */,
@@ -2365,6 +2362,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D062598423951B5500AB6E8F /* AGDnsProxy.xcframework in Frameworks */,
 				65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */,
 				65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */,
 			);

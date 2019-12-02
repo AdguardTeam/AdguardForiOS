@@ -148,6 +148,12 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
+        
+        [AGLogger setLevel: AGLL_INFO];
+        [AGLogger setCallback:
+            ^(const char *msg, int length) {
+                DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
+            }];
     }
 }
 

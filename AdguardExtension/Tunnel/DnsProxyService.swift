@@ -50,6 +50,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                 self?.dnsRecordsWriter.handleEvent(event!)
             }
         }
+        
+        
     }
     
     var agproxy: AGDnsProxy?
@@ -62,9 +64,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             return AGDnsUpstream(address: upstream, bootstrap: bootstrapDnsArray, timeout: 2000, serverIp: nil)
         }
         
-        guard let filterFiles = try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]> else {
-            return false
-        }
+        let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
         
         var filters = [NSNumber:String]()
         
