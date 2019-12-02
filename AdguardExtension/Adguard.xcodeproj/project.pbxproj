@@ -685,6 +685,9 @@
 		D02FABF32164F53C00174676 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		D02FABF42164F53D00174676 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		D02FC2292164F4DB008EADB9 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
+		D030CF012394FF3800B792AE /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
+		D030CF022394FFD500B792AE /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D030CF032394FFED00B792AE /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D0319F9E21947633002C17D9 /* RuleDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9D21947633002C17D9 /* RuleDetailsController.swift */; };
 		D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9F21947808002C17D9 /* BottomAlertController.swift */; };
 		D031A0C9219EFC99002C17D9 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A7219EFC99002C17D9 /* DDTTYLogger.m */; };
@@ -1457,6 +1460,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D030CF022394FFD500B792AE /* AGDnsProxy.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1466,6 +1470,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D030CF032394FFED00B792AE /* AGDnsProxy.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2341,6 +2346,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D030CF012394FF3800B792AE /* AGDnsProxy.xcframework in Frameworks */,
 				655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */,
 				65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */,
 				656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */,

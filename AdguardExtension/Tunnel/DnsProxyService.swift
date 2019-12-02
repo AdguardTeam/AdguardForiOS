@@ -67,8 +67,10 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int) -> Bool {
         
+        let bootstrapDnsArray = bootstrapDns.components(separatedBy: .whitespacesAndNewlines)
+        
         let agUpstreams = upstreams.map { (upstream) -> AGDnsUpstream in
-            return AGDnsUpstream(upstream, bootstrap: [bootstrapDns], timeout: 2000)!
+            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDnsArray, timeout: 2000, serverIp: nil)
         }
         
         guard let filterFiles = try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]> else {
@@ -82,13 +84,15 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String
             
-            let numId = identifier as! NSNumber
+            let numId = identifier as NSNumber
             
             filters[numId] = path
         }
-        
-        let config = AGDnsProxyConfig(agUpstreams, filters: filters, blockedResponseTtl: 0)
-        agproxy = AGDnsProxy(config, withHandler: events)
+        let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeout: 10000, serverIp: nil)
+
+        let dns64Settings = AGDns64Settings(upstream: upstream, maxTries: 2, waitTime: 10000)
+        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtl: 0, dns64Settings: dns64Settings)
+        agproxy = AGDnsProxy(config: config, handler: events)
         
         return true
     }
