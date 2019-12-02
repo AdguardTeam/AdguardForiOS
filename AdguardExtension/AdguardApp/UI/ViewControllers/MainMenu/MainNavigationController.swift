@@ -26,8 +26,6 @@ class MainNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = .top
-        self.hidesBarsOnSwipe = true
         addCustomTransitioning()
     }
 
