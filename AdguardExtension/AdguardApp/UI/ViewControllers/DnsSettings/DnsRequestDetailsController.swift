@@ -128,6 +128,10 @@ class DnsRequestDetailsController : UITableViewController {
             if logRecord?.name == nil {
                 cell.isHidden = true
             }
+        } else if indexPath.row == LogCells.company.rawValue{
+            if logRecord?.company == nil {
+                cell.isHidden = true
+            }
         }
 
         theme.setupTableCell(cell)
@@ -149,6 +153,10 @@ class DnsRequestDetailsController : UITableViewController {
             }
         } else if cellType == .name {
             if logRecord?.name == nil {
+                return 0.0
+            }
+        } else if cellType == .company {
+            if logRecord?.company == nil {
                 return 0.0
             }
         }

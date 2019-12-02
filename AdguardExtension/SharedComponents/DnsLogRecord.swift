@@ -36,7 +36,7 @@ class DnsLogRecord: NSObject, NSCoding {
     let bytesReceived: Int
     var blockRecordType: BlockedRecordType
     var name: String?
-    var company: String? = "company"
+    var company: String?
     var category: String?
     
     init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, blockRecordType: BlockedRecordType, name: String?, company: String?, category: String?) {
@@ -71,6 +71,10 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(bytesSent, forKey: "bytesSent")
         aCoder.encode(bytesReceived, forKey: "bytesReceived")
         aCoder.encode(blockRecordType.rawValue, forKey: "blockRecordType")
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(company, forKey: "company")
+        aCoder.encode(category, forKey: "category")
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -88,6 +92,10 @@ class DnsLogRecord: NSObject, NSCoding {
         
         // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
+        
+        self.name = aDecoder.decodeObject(forKey: "name") as? String
+        self.company = aDecoder.decodeObject(forKey: "company") as? String
+        self.category = aDecoder.decodeObject(forKey: "category") as? String
     }
 }
 

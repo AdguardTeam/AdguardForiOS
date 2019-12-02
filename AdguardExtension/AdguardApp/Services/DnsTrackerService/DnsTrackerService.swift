@@ -31,16 +31,18 @@ struct Tracker: Codable {
     let name: String
     let categoryId: Int
     let url: String?
+    let company: String?
 
     enum CodingKeys: String, CodingKey {
         case name
         case categoryId
         case url
+        case company
     }
 }
 
 @objc protocol DnsTrackerServiceProtocol {
-    func getCategoryAndName(by domain: String) -> DnsTrackerInfo?
+    func getTrackerInfo(by domain: String) -> DnsTrackerInfo?
 }
 
 @objc class DnsTrackerInfo: NSObject {
@@ -66,7 +68,7 @@ struct Tracker: Codable {
         initializeDnsTrackers()
     }
     
-    func getCategoryAndName(by domain: String) -> DnsTrackerInfo? {
+    func getTrackerInfo(by domain: String) -> DnsTrackerInfo? {
         
         let nilReturn = DnsTrackerInfo(categoryKey: nil, name: nil, isTracked: nil, company: nil)
         
@@ -84,8 +86,7 @@ struct Tracker: Codable {
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
-        // TODO: Change company
-        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked,company: "company")
+        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company)
     }
     
     // MARK: - Initialization of dns trackers object
