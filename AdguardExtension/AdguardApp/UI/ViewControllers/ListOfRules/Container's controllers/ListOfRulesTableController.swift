@@ -83,10 +83,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         guard let rule = model?.rules[sender.tag] else { return }
         rule.enabled = !rule.enabled
         
-        let section = state == .searching ? 0 : rulesSection
+        model?.changeRule(rule: rule, newText: rule.rule, errorHandler: {[weak self] (error) in
+            guard let self = self else { return }
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error)
+        }, completionHandler: {})
         
+        let section = state == .searching ? 0 : rulesSection
         let indexPath = IndexPath(row: sender.tag, section: section)
-        tableView.reloadRows(at: [indexPath], with: .none)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     // MARK: - Searchbar delegate methods

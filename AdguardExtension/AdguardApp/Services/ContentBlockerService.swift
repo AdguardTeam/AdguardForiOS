@@ -380,7 +380,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
                 
-                let userRules = userFilterEnabled ? antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+                let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+                
                 
                 DDLogInfo("(ContentBlockerService) updateJson append \(userRules.count) user rules")
                 

@@ -161,7 +161,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
             return
         }
         
-        changeSafariUserfilterRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        changeSafariUserfilterRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
     /**
@@ -363,7 +363,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func changeSafariUserfilterRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func changeSafariUserfilterRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         if !contentBlockerService.validateRule(text) {
            errorHandler(ACLocalizedString("rule_converting_error", nil))
@@ -374,7 +374,10 @@ class UserFilterModel: ListOfRulesModelProtocol {
         let rule = allRules[index]
         
         rule.rule = text
+        rule.enabled = enabled
+        
         ruleObject.ruleText = text
+        ruleObject.isEnabled = NSNumber(booleanLiteral: enabled)
         
         setNewRules(ruleObjects, ruleInfos: allRules, completionHandler: completionHandler, errorHandler: errorHandler)
     }
