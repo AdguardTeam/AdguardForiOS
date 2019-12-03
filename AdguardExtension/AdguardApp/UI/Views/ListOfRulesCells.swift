@@ -170,6 +170,9 @@ class NormalRuleCell: UITableViewCell {
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
             }
+            if type == .systemWhitelist || type == .systemBlacklist{
+                ruleStateImageView.isHidden = true
+            }
         }
     }
     

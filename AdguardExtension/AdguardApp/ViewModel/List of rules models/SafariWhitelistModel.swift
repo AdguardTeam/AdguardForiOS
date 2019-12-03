@@ -204,7 +204,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
             DDLogError("(UserFilterViewModel) change rule failed - rule not found")
             return
         }
-        changeSafariWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        changeSafariWhitelistRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
     func deleteSelectedRules(completionHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
@@ -361,16 +361,19 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func changeSafariWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func changeSafariWhitelistRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let oldRuleObject = ruleObjects[index]
         let oldRule = allRules[index]
         
-        contentBlockerService.replaceWhitelistDomain(allRules[index].rule, with: text) { (error) in
+        contentBlockerService.replaceWhitelistDomain(allRules[index].rule, with: text, enabled: enabled) { (error) in
             oldRule.rule = text
             oldRuleObject.ruleText = text
+            
+            oldRule.enabled = enabled
+            oldRuleObject.isEnabled = NSNumber(booleanLiteral: enabled)
             
             completionHandler()
             UIApplication.shared.endBackgroundTask(backgroundTaskId)

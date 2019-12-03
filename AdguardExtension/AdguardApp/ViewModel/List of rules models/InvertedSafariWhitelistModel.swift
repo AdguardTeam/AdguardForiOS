@@ -184,7 +184,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             DDLogError("(UserFilterViewModel) change rule failed - rule not found")
             return
         }
-        changeInvertedSafariWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        changeInvertedSafariWhitelistRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
     func selectAllRules() {
@@ -314,12 +314,13 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func changeInvertedSafariWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func changeInvertedSafariWhitelistRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let domains = allRules
         domains[index].rule = text
+        domains[index].enabled = enabled
         
         allRules = domains
         delegate?.listOfRulesChanged()

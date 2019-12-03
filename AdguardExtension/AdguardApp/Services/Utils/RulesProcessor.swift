@@ -28,7 +28,7 @@ protocol RulesProcessorProtocol {
      adds domain to whitelist
      if @overlimit is true it removes last blocklist rule before adding new whitelist rule
      */
-    func addDomainToWhitelist(domain: String, jsonData: Data, overlimit: Bool)->(Data?, NSError?)
+    func addDomainToWhitelist(domain: String, enabled: Bool, jsonData: Data, overlimit: Bool)->(Data?, NSError?)
     
     /**
     remove domain from whitelist
@@ -52,14 +52,16 @@ class RulesProcessor : RulesProcessorProtocol {
     static let errorDomain = "RulesConverterErrorDomain"
     static let errorCode = -1
     
-    func addDomainToWhitelist(domain: String, jsonData: Data, overlimit: Bool)->(Data?, NSError?) {
+    func addDomainToWhitelist(domain: String, enabled: Bool, jsonData: Data, overlimit: Bool)->(Data?, NSError?) {
         
         var (json, error) = prepareJson(jsonData: jsonData, overlimit: overlimit)
         if error != nil { return (nil, error) }
         
         let rule = SafariRule(domains: [domain], action: .whitelist)
-
-        json!.append(rule.json())
+        
+        if enabled {
+            json!.append(rule.json())
+        }
 
         return convertObjectToData(json!)
     }

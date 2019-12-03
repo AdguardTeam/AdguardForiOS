@@ -153,7 +153,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
             let overlimit = converted == limit
                 
-            let (resultData, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: domain, jsonData: jsonData as Data, overlimit: overlimit)
+            let (resultData, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: domain, enabled: true, jsonData: jsonData as Data, overlimit: overlimit)
             
             return resultData ?? Data()
         })
@@ -183,7 +183,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         })
     }
     
-    func replaceWhitelistDomain(_ domain: String, with newDomain: String, completion: @escaping (Error?)->Void) {
+    func replaceWhitelistDomain(_ domain: String, with newDomain: String, enabled: Bool, completion: @escaping (Error?)->Void) {
         processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
             var found = false
             let rule = AEWhitelistDomainObject(domain: domain).rule
@@ -200,7 +200,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             
             let (removed, _) = sSelf.rulesProcessor.removeWhitelistDomain(domain: domain, jsonData: jsonData)
             
-            let (result, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: newDomain, jsonData: removed ?? Data(), overlimit: false)
+            let (result, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: newDomain, enabled: enabled, jsonData: removed ?? Data(), overlimit: false)
             
             return result ?? Data()
         })
