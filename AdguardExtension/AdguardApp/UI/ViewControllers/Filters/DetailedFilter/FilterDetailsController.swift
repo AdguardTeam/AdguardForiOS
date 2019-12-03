@@ -60,7 +60,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
         
         setupBackButton()
-        navigationController?.navigationBar.items?.forEach({$0.title = ""})
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

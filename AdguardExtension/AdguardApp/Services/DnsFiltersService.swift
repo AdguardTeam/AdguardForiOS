@@ -71,6 +71,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var id: Int = 3
     var subscriptionUrl: String?
     var name: String?
+    var attributedString: NSAttributedString? = nil
     var updateDate: Date?
     var enabled: Bool
     var desc: String?

@@ -30,7 +30,11 @@ class DnsFilterCell: UITableViewCell {
     
     var filter: DnsFilter? {
         didSet {
-            filterNameLabel.text = filter?.name
+            if let attrString = filter?.attributedString {
+                filterNameLabel.attributedText = attrString
+            } else {
+                filterNameLabel.text = filter?.name
+            }
             
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
             updateLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
@@ -40,9 +44,15 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate {
+class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, NewCustomFilterDetailsDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet var searchBar: UISearchBar!
+    
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     lazy private var model: DnsFiltersModel = {
@@ -67,6 +77,12 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        navigationItem.rightBarButtonItems = [searchButton]
+        
+        model.delegate = self
+        
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +92,13 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // MARK: - Table view delegate methods
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if model.isSearchActive && indexPath.section == addFilterSection{
+            return 0.0
+        }
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == addFilterSection ? 1 : model.filters.count
@@ -88,8 +111,10 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
-                
                 theme.setupTableCell(cell)
+                if model.isSearchActive {
+                    cell.isHidden = true
+                }
                 return cell
             }
         } else if indexPath.section == filtersSection {
@@ -117,10 +142,55 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // MARK: - Actions
+    
+    @IBAction func searchAction(_ sender: UIBarButtonItem) {
+        model.isSearchActive = true
+        navigationItem.rightBarButtonItems = [cancelButton]
+        navigationItem.setHidesBackButton(true, animated:true)
+        tableView.tableHeaderView = searchView
+        searchBar.becomeFirstResponder()
+        
+        model.searchFilter(by: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        model.isSearchActive = false
+        navigationItem.setHidesBackButton(false, animated:true)
+        navigationItem.rightBarButtonItems = [searchButton]
+        tableView.tableHeaderView = nil
+        searchBar.text = nil
+        
+        model.searchFilter(by: nil)
+    }
+    
+    // MARK: - Search Bar delegate methods
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        model.searchFilter(by: searchBar.text)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        model.searchFilter(by: nil)
+    }
+    
     // MARK: - Presentation delegate methods
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomAnimatedTransitioning()
+    }
+    
+    // MARK: - DnsFiltersChangedProtocol method
+    
+    func filtersChanged() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - NewCustomFilter delegate
@@ -170,6 +240,9 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         theme.setupTable(tableView)
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupSearchBar(searchBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
