@@ -223,7 +223,7 @@
           "id": "quad9-doh-filter-pri",
           "name": "quad9-doh-ipv4-filter-pri",
           "upstreams":[
-            "https://dns9.quad9.net:443/dns-query"
+            "https://dns9.quad9.net/dns-query"
           ]
         }
       ]
