@@ -77,14 +77,7 @@ class RequestsBlockingController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return (section == 0 || section == 2) ? 5.0 : 0.0
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let width = tableView.frame.width
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 5.0))
-        view.backgroundColor = theme.backgroundColor
-        return view
+        return section == 0 ? 0.0 : 0.1
     }
 
     @IBAction func enabledSwitchAction(_ sender: UISwitch) {

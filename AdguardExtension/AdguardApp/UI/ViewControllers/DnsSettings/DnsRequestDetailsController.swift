@@ -78,10 +78,24 @@ class DnsRequestDetailsController : UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
+    // MARK: - private properties
+    
+    private var animator = UIViewPropertyAnimator()
+    
+    private var labelToHide = UILabel()
+    private var copiedLabel = UIButton()
+    
+    private let webPage = "https://whotracks.me"
+    
+    private let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .alert)
+    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createAnimator()
+        createAlert()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -113,6 +127,13 @@ class DnsRequestDetailsController : UITableViewController {
         }
         containerController = nil
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func whoTracksMeInfo(_ sender: UIButton) {
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Table view delegate methods
     
@@ -235,8 +256,13 @@ class DnsRequestDetailsController : UITableViewController {
     }
     
     private func showCopiedLabel(row: LogCells){
-        var labelToHide = UILabel()
-        var copiedLabel = UIButton()
+        
+        animator.stopAnimation(true)
+        
+        createAnimator()
+        
+        labelToHide.alpha = 1.0
+        copiedLabel.alpha = 0.0
         
         switch row {
         case .category:
@@ -277,16 +303,35 @@ class DnsRequestDetailsController : UITableViewController {
             copiedLabel = answerCopied
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
-            labelToHide.alpha = 0.0
-            copiedLabel.alpha = 1.0
-        }, completion: { (success) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                UIView.animate(withDuration: 0.3) {
-                    labelToHide.alpha = 1.0
-                    copiedLabel.alpha = 0.0
+        animator.startAnimation()
+    }
+    
+    private func createAnimator(){
+        animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear, animations: {[weak self] in
+            self?.labelToHide.alpha = 0.0
+            self?.copiedLabel.alpha = 1.0
+        })
+        
+        animator.addCompletion {[weak self] (position) in
+            if position == .end {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    UIView.animate(withDuration: 0.5) {
+                        self?.labelToHide.alpha = 1.0
+                        self?.copiedLabel.alpha = 0.0
+                    }
                 }
             }
-        })
+        }
+    }
+    
+    private func createAlert() {
+        alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
+            guard let sSelf = self else { return }
+            guard let url = URL(string: sSelf.webPage) else { return }
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
     }
 }
