@@ -236,26 +236,28 @@ class AppDelegateHelper: NSObject {
                 let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
                 let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
                 
-                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
-                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
-                
-                let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
-                guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
-                
-                dnsSettingsController.stateFromWidget = enabled
-                
-                let proViewControllers = [main, menuController, dnsSettingsController]
-                let toPurchaseViewControllers = [main, getProController]
                 let proStatus = configuration.proStatus
-                
-                nav.viewControllers = proStatus ? proViewControllers : toPurchaseViewControllers
-                
-                main.loadViewIfNeeded()
-                
+        
                 if proStatus {
+                    let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+                    guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
+            
+                    dnsSettingsController.stateFromWidget = enabled
+                    
+                    let proViewControllers = [main, menuController, dnsSettingsController]
+                    nav.viewControllers = proViewControllers
+                    
+                    main.loadViewIfNeeded()
                     menuController.loadViewIfNeeded()
                     dnsSettingsController.loadViewIfNeeded()
                 } else {
+                    let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
+                    guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
+                    
+                    let toPurchaseViewControllers = [main, getProController]
+                    nav.viewControllers = toPurchaseViewControllers
+                    
+                    main.loadViewIfNeeded()
                     getProController.loadViewIfNeeded()
                 }
                 

@@ -607,7 +607,6 @@
 		7E536C6D238D2AC400A83A79 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E536C6B238D2AC400A83A79 /* MainInterface.storyboard */; };
 		7E536C71238D2AC400A83A79 /* AdGuardTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E536C66238D2AC400A83A79 /* AdGuardTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E536C75238D2BE000A83A79 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
-		7E536C79238D374200A83A79 /* AdguardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E536C78238D374200A83A79 /* AdguardImageView.swift */; };
 		7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D790236056ED00E7ABA4 /* StatusView.swift */; };
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
@@ -1821,7 +1820,6 @@
 		7E536C69238D2AC400A83A79 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		7E536C6C238D2AC400A83A79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		7E536C6E238D2AC400A83A79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E536C78238D374200A83A79 /* AdguardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdguardImageView.swift; sourceTree = "<group>"; };
 		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
@@ -3245,7 +3243,6 @@
 				7E536C69238D2AC400A83A79 /* TodayViewController.swift */,
 				7E536C6B238D2AC400A83A79 /* MainInterface.storyboard */,
 				7E536C6E238D2AC400A83A79 /* Info.plist */,
-				7E536C78238D374200A83A79 /* AdguardImageView.swift */,
 				7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */,
 			);
 			path = AdGuardTodayExtension;
@@ -5619,7 +5616,6 @@
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
 				7ECD9C58238D67890065E88D /* ACLFileLogger.m in Sources */,
 				7ECD9C5C238E676D0065E88D /* ActionRequestHandler.m in Sources */,
-				7E536C79238D374200A83A79 /* AdguardImageView.swift in Sources */,
 				7ECD9C4D238D66780065E88D /* DDOSLogger.m in Sources */,
 				7ECD9C62238E6D630065E88D /* NSString+Utils.m in Sources */,
 				7ECD9C49238D65E30065E88D /* FMResultSet.m in Sources */,

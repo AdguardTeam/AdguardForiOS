@@ -111,6 +111,10 @@ class SafariService: NSObject, SafariServiceProtocol {
             
         ProcessInfo().performExpiringActivity(withReason: "Loading json to content blocker") {[weak self] (expired) in
             
+            if expired {
+                return
+            }
+            
             guard let sSelf = self else { return }
             
             let group = DispatchGroup()

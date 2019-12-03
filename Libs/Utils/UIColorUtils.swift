@@ -36,20 +36,4 @@ extension UIColor {
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
-    
-    @objc class var widgetTextColor: UIColor {
-        if #available(iOS 11.0, *) {
-            return UIColor(named: "widgetTextColor")!
-        } else {
-            return UIColor(hexString: "#515353")
-        }
-    }
-    
-    @objc class var widgetTitleColor: UIColor {
-        if #available(iOS 11.0, *) {
-            return UIColor(named: "widgetTitleColor")!
-        } else {
-            return UIColor(hexString: "#131313")
-        }
-    }
 }

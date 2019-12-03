@@ -27,8 +27,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var safariSwitchOutlet: UISwitch!
     @IBOutlet weak var systemSwitchOutlet: UISwitch!
     
-    @IBOutlet weak var safariImageView: AdguardImageView!
-    @IBOutlet weak var systemImageView: AdguardImageView!
+    @IBOutlet weak var safariImageView: UIImageView!
+    @IBOutlet weak var systemImageView: UIImageView!
     
     @IBOutlet weak var safariTitleLabel: UILabel!{
         didSet{
@@ -94,6 +94,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        initLogger()
         safariService = SafariService(resources: resources)
     }
     
@@ -147,7 +148,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let enabled = sender.isOn
         openSystemProtectionUrl += enabled ? "on" : "off"
         
-        systemImageView.enabled = enabled
+        systemImageView.isHighlighted = !enabled
         systemSwitchOutlet.isOn = enabled
         
         openMainApp()
@@ -158,7 +159,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func updateWidgetSafari(){
         let safariEnabled = resources.safariProtectionEnabled
         
-        safariImageView.enabled = safariEnabled
+        safariImageView.isHighlighted = !safariEnabled
         safariSwitchOutlet.isOn = safariEnabled
     }
     
@@ -168,7 +169,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             
             if error != nil {
                 self.systemSwitchOutlet.isOn = false
-                self.systemImageView.enabled = false
+                self.systemImageView.isHighlighted = true
                 
                 DDLogError("(Today Extension) Error loading vpn configuration: \(String(describing: error?.localizedDescription))")
             } else {
@@ -176,7 +177,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 let vpnEnabled = manager?.isEnabled ?? false
                 
                 self.systemSwitchOutlet.isOn = vpnEnabled
-                self.systemImageView.enabled = vpnEnabled
+                self.systemImageView.isHighlighted = !vpnEnabled
             }
         }
     }
@@ -190,6 +191,33 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             })
         } else {
             DDLogError("Error redirecting to app from Today Extension")
+        }
+    }
+    
+    private func initLogger(){
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
+        
+        #if DEBUG
+        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+        #endif
+    }
+}
+
+extension UIColor {
+    @objc class var widgetTextColor: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "widgetTextColor")!
+        } else {
+            return UIColor(hexString: "#515353")
+        }
+    }
+    
+    @objc class var widgetTitleColor: UIColor {
+        if #available(iOS 11.0, *) {
+            return UIColor(named: "widgetTitleColor")!
+        } else {
+            return UIColor(hexString: "#131313")
         }
     }
 }
