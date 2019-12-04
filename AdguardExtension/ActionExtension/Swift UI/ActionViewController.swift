@@ -226,12 +226,11 @@ class ActionViewController: UIViewController {
     
     private func isHostInInvertedWhitelist(host: String) -> Bool {
         let invertedDomainsObj = sharedResources.invertedWhitelistContentBlockingObject
-        guard let domains = invertedDomainsObj?.domains.enumerated() else { return false }
+        guard let rules = invertedDomainsObj?.rules else { return false }
         
-        for (_, obj) in domains{
-            if obj.caseInsensitiveCompare(host) == ComparisonResult.orderedSame {
+        for rule in rules{
+            if rule.ruleText.caseInsensitiveCompare(host) == ComparisonResult.orderedSame && rule.isEnabled.boolValue {
                 return true
-                
             }
         }
         

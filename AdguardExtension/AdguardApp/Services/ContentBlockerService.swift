@@ -97,9 +97,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
 #endif
         
         workQueue.async { [weak self] in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
-            if let error = sSelf.updateContentBlockers() {
+            if let error = self.updateContentBlockers() {
 #if !APP_EXTENSION
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
@@ -107,8 +107,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return
             }
             
-            sSelf.safariService.invalidateBlockingJsons(completion: { (error) in
-                sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
+            self.safariService.invalidateBlockingJsons(completion: { (error) in
+                self.finishReloadingConetentBlocker(completion: completion, error: error)
 #if !APP_EXTENSION
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
@@ -258,15 +258,17 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
-        processInvertedWhitelistDomain(processDomains: { (domains) -> ([String], Bool) in
-            return (domains + [domain], true)
+        processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
+            var newRules = rules
+            newRules.append(ASDFilterRule(text: domain, enabled: true))
+            return (newRules, true)
         }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
-            guard let sSelf = self else { return Data() }
-            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+            guard let self = self else { return Data() }
+            let converted = self.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+            let limit = self.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
             let overlimit = converted == limit
             
-            let (data, _) = sSelf.rulesProcessor.addDomainToInvertedWhitelist(domain: domain, jsonData: jsonData, overlimit: overlimit)
+            let (data, _) = self.rulesProcessor.addDomainToInvertedWhitelist(rule: domain, jsonData: jsonData, overlimit: overlimit)
             
             return data ?? Data()
             
@@ -275,17 +277,17 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    func removeInvertedWhitelistDomain(_ domainToRemove: String, completion: @escaping (Error?)->Void) {
+    func removeInvertedWhitelistDomain(_ ruleToRemove: String, completion: @escaping (Error?)->Void) {
     
-        processInvertedWhitelistDomain(processDomains: { (domains) -> ([String], Bool) in
-            let filteredDomains = domains.filter({ (domain) -> Bool in
-                return domainToRemove != domain
+        processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
+            let filteredDomains = rules.filter({ (rule) -> Bool in
+                return ruleToRemove != rule.ruleText
             })
             return(filteredDomains, true)
         }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
             guard let sSelf = self else { return Data() }
             
-            let (data, _) = sSelf.rulesProcessor.removeInvertedWhitelistDomain(domain: domainToRemove, jsonData: jsonData)
+            let (data, _) = sSelf.rulesProcessor.removeInvertedWhitelistDomain(rule: ruleToRemove, jsonData: jsonData)
             
             return data ?? Data()
         }) { (error) in
@@ -401,12 +403,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                     if inverted {
                         
                         if resources.invertedWhitelistContentBlockingObject == nil {
-                            resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(domains: [])
+                            resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: [])
                         }
                         
-                        if let innvertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
+                        if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
                             DDLogInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
-                            rules.append(innvertedRule)
+                            rules.append(invertedRule)
                         }
                     }
                     else {
@@ -543,7 +545,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    private func processInvertedWhitelistDomain(processDomains: @escaping(_ domains: [String])->([String], Bool), processData: @escaping(_ jsonData: Data, _ contentBlocker: ContentBlockerType)->Data, completion: @escaping (Error?)->Void) {
+    private func processInvertedWhitelistDomain(processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ contentBlocker: ContentBlockerType)->Data, completion: @escaping (Error?)->Void) {
         
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }
@@ -577,10 +579,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 }
             }
             
-            var domains = invertedObject?.domains ?? [String]()
+            var rules = invertedObject?.rules ?? []
         
             var succeded = false
-            (domains, succeded) = processDomains(domains)
+            (rules, succeded) = processRules(rules)
             
             if !succeded {
                 error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
@@ -589,9 +591,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return
             }
             
-            var newInvertedObject: AEInvertedWhitelistDomainsObject? = nil
-            
-            newInvertedObject = AEInvertedWhitelistDomainsObject(domains: domains)
+            let newInvertedObject = AEInvertedWhitelistDomainsObject(rules: rules)
         
             sSelf.resources.invertedWhitelistContentBlockingObject = newInvertedObject
             

@@ -429,7 +429,7 @@ class RulesProcessorTest: XCTestCase {
         
         let jsonData = json.data(using: .utf8)
         
-        let (resultData, error) = processor.addDomainToWhitelist(domain: domain, jsonData: jsonData!, overlimit: overlimit)
+        let (resultData, error) = processor.addDomainToWhitelist(domain: domain, enabled: true, jsonData: jsonData!, overlimit: overlimit)
         
         XCTAssertNil(error)
         

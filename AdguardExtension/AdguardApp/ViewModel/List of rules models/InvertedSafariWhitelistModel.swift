@@ -125,8 +125,8 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         
         let invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
-        allRules = invertedWhitelistObject?.domains.map({ (rule) -> RuleInfo in
-            RuleInfo(rule, false, true, theme)
+        allRules = invertedWhitelistObject?.rules.map({ (rule) -> RuleInfo in
+            RuleInfo(rule.ruleText, false, rule.isEnabled.boolValue, theme)
         }) ?? [RuleInfo]()
     }
     
@@ -295,14 +295,15 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             strongSelf.delegate?.listOfRulesChanged()
             
             DispatchQueue.global().async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
-                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: strongSelf.allRules.map({ $0.rule }))
-                    strongSelf.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
+                let objects = self.rulesToObjectsConverter(rules: self.allRules)
+                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
+                    self.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
                 
                 completionHandler()
                 
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                self.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
                     if error != nil {
                         DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
                         // do not rollback changes and do not show any alert to user in this case
@@ -325,7 +326,8 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         allRules = domains
         delegate?.listOfRulesChanged()
         
-        let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: domains.map({ $0.rule }))
+        let objects = rulesToObjectsConverter(rules: allRules)
+        let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
         resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
         
         contentBlockerService.reloadJsons(backgroundUpdate: false) {(error)  in
@@ -404,5 +406,14 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             }
         }
         return false
+    }
+    
+    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [ASDFilterRule]{
+        var objects: [ASDFilterRule] = []
+        for rule in rules {
+            let object = ASDFilterRule(text: rule.rule, enabled: rule.enabled)
+            objects.append(object)
+        }
+        return objects
     }
 }
