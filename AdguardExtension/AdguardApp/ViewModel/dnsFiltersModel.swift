@@ -59,6 +59,13 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     //MARK: - Public methods
     
     func addFilter(_ filter: DnsFilter, data: Data?) {
+        // Check if there are no identical filters
+        for filt in allFilters{
+            if filter == filt {
+                return
+            }
+        }
+        
         allFilters.append(filter)
         filtersService.addFilter(filter, data: data)
     }

@@ -84,6 +84,8 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
         }
     }
     
+    // MARK: - Initialization
+    
     init(subscriptionUrl: String?, name: String, date: Date, enabled: Bool, desc: String?, version: String?, rulesCount: Int?, homepage: String?) {
         
         self.subscriptionUrl = subscriptionUrl
@@ -96,9 +98,19 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
         self.homepage = homepage
     }
     
+    // MARK: - Debug description
+    
     override var debugDescription: String {
         return "\n id = \(self.id) \n name = \(String(describing: self.name)) \n version = \(String(describing: self.version)) \n rulesCount = \(String(describing: self.rulesCount))"
     }
+    
+    // MARK: - Equatable protocol method
+    
+    static func == (lhs: DnsFilter, rhs: DnsFilter) -> Bool {
+        return lhs.subscriptionUrl == rhs.subscriptionUrl
+    }
+    
+    // MARK: - NSCoding protocol methods
     
     func encode(with coder: NSCoder) {
         coder.encode(subscriptionUrl, forKey: "subscriptionUrl")
@@ -276,6 +288,13 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     func addFilter(_ filter: DnsFilter, data: Data?) {
+        // Check if there are no identical filters
+        for filt in filters{
+            if filter == filt {
+                return
+            }
+        }
+        
         filter.id = idCounter
         filters.append(filter)
         

@@ -416,7 +416,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 }
 
 /**
- Returns false if first 256 chars of downloaded content is empty or contains some HTML's tags
+ Returns false if first 256 chars of downloaded content is empty or contain some HTML's tags
  */
 - (BOOL)isValidContent:(NSString *)content {
     NSString *beginWith = [content substringToIndex:(content.length > 256 ? 256 : content.length)];
