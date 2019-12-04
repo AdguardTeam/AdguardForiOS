@@ -29,7 +29,7 @@ class descriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
-class DnsProvidersController: UITableViewController {
+class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate {
     //MARK: - IB Outlets
     
     // MARK: - services
@@ -45,6 +45,10 @@ class DnsProvidersController: UITableViewController {
     private var providerToShow: DnsProviderInfo?
     
     private var notificationToken: NotificationToken?
+    
+    private let descriptionSection = 0
+    private let providerSection = 1
+    private let addProviderSection = 2
     
     // MARK: - view controller life cycle
     
@@ -86,11 +90,12 @@ class DnsProvidersController: UITableViewController {
             }
         }
         
+        setupBackButton()
         updateTheme()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
+        if indexPath.section == providerSection {
             let provider = providers[indexPath.row]
             let custom = vpnManager.isCustomProvider(provider)
             
@@ -111,6 +116,11 @@ class DnsProvidersController: UITableViewController {
             }
             
             return cell
+        } else if indexPath.section == addProviderSection{
+            let reuseId = "AddServer"
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) ?? UITableViewCell()
+            theme.setupTableCell(cell)
+            return cell
         } else {
             let reuseId = "descriptionCell"
             guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? descriptionCell else { return UITableViewCell() }
@@ -120,11 +130,20 @@ class DnsProvidersController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : providers.count
+        switch section {
+        case descriptionSection:
+            return 1
+        case providerSection:
+            return providers.count
+        case addProviderSection:
+            return 1
+        default:
+            return 0
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -132,18 +151,22 @@ class DnsProvidersController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1{
+        if indexPath.section == providerSection{
             if vpnManager.isCustomProvider(providers[indexPath.row]) {
-                guard let parentController = self.parent as? DnsProvidersContainerController else { return }
-                parentController.editProvider(providers[indexPath.row])
+                editProvider(providers[indexPath.row])
             }
             else {
                 providerToShow = providers[indexPath.row]
                 performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
             }
+        } else if indexPath.section == addProviderSection {
+            guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
+            controller.modalPresentationStyle = .custom
+            controller.transitioningDelegate = self
             
-            tableView.deselectRow(at: indexPath, animated: true)
+            present(controller, animated: true, completion: nil)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -168,6 +191,12 @@ class DnsProvidersController: UITableViewController {
         selectedCellRow = sender.tag
     }
     
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
     // MARK: private methods
     
     private func updateTheme() {
@@ -177,6 +206,15 @@ class DnsProvidersController: UITableViewController {
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
         }
+    }
+    
+    private func editProvider(_ provider: DnsProviderInfo) {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditDnsServerController") as? NewDnsServerController else { return }
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = self
+        controller.provider = provider
+        
+        present(controller, animated: true, completion: nil)
     }
     
     private func defaultServer(_ provider: DnsProviderInfo)->DnsServerInfo? {

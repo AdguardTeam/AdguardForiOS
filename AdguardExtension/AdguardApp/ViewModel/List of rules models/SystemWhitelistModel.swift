@@ -67,18 +67,6 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             return ACLocalizedString("whitelist_title", nil)
         }
     }
-
-    var exportTitle: String {
-        get {
-            return ACLocalizedString("export", nil)
-        }
-    }
-
-    var importTitle: String {
-        get {
-            return ACLocalizedString("import", nil)
-        }
-    }
     
     var leftButtonTitle: String {
         get {

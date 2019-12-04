@@ -24,6 +24,7 @@ class AddCustomFilterController: BottomAlertController {
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
+    @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -37,8 +38,11 @@ class AddCustomFilterController: BottomAlertController {
     private var notificationToken: NotificationToken?
     
     // MARK: - View Controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nextButton.isEnabled = false
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -71,6 +75,11 @@ class AddCustomFilterController: BottomAlertController {
             super.touchesBegan(touches, with: event)
         }
     }
+    
+    @IBAction func ruleTextChanged(_ sender: UITextField) {
+        nextButton.isEnabled = sender.text != "" && sender.text != nil
+    }
+    
     
     // MARK: - Actions
     

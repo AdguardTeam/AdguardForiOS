@@ -178,6 +178,12 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         searchBar.becomeFirstResponder()
     }
     
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
     // MARK: - Actions
     
     @IBAction func toggleEnableSwitch(_ sender: FilterCellUISwitch) {

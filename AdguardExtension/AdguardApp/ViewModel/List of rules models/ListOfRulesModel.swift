@@ -56,8 +56,6 @@ protocol ListOfRulesModelProtocol {
     
     /* Titles variables */
     var title: String { get }
-    var exportTitle: String { get }
-    var importTitle: String { get }
     var leftButtonTitle: String { get }
     var middleButtonTitle: String { get }
     var helperLabelText: String { get }

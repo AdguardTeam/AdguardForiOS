@@ -158,6 +158,13 @@ class NetworkSettingsTableController: UITableViewController, UIViewControllerTra
         }
     }
     
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
+    
     // MARK: - Private methods -
     
     // MARK: - Cells setups
