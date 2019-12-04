@@ -126,7 +126,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         self.antibanner = antibanner
         self.theme = theme
         
-        ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
         allRules = ruleObjects.map({
             let domainObject = AEWhitelistDomainObject(rule: $0)
             return RuleInfo(domainObject?.domain ?? "", false, domainObject?.rule.isEnabled.boolValue ?? true, theme)

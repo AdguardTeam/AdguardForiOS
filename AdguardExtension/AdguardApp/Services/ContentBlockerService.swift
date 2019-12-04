@@ -143,8 +143,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
      */
     func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
-        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
+        processWhitelistDomain(domain, enabled: true, completion: completion, processRules: {(rules) in
             let rule = AEWhitelistDomainObject(domain: domain).rule
+            rule.isEnabled = NSNumber(booleanLiteral: true)
+            
             return (rules + [rule], true)
         }, processData: { [weak self] (jsonData, jsonRuleData, contentBlocker) in
             guard let sSelf = self else { return Data() }
@@ -163,7 +165,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     func removeWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
-        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
+        processWhitelistDomain(domain, enabled: false, completion: completion, processRules: {(rules) in
             var found = false
             let rule = AEWhitelistDomainObject(domain: domain).rule
             let resultRules = rules.filter() { (testRule) in
@@ -184,13 +186,15 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     }
     
     func replaceWhitelistDomain(_ domain: String, with newDomain: String, enabled: Bool, completion: @escaping (Error?)->Void) {
-        processWhitelistDomain(domain, completion: completion, processRules: {(rules) in
+        processWhitelistDomain(domain, enabled: enabled, completion: completion, processRules: {(rules) in
             var found = false
             let rule = AEWhitelistDomainObject(domain: domain).rule
             let resultRules = rules.map() { (testRule)->ASDFilterRule in
                 if rule.isEqualRuleText(testRule) {
                     found = true
-                    return AEWhitelistDomainObject(domain: newDomain).rule
+                    let newRule = AEWhitelistDomainObject(domain: newDomain).rule
+                    newRule.isEnabled = NSNumber(booleanLiteral: enabled)
+                    return newRule
                 }
                 return testRule
             }
@@ -469,7 +473,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         return filterByGroup
     }
     
-    private func processWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ domain: String, _ contentBlocker: ContentBlockerType)->Data) {
+    private func processWhitelistDomain(_ domain: String, enabled: Bool, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ domain: String, _ contentBlocker: ContentBlockerType)->Data) {
         
         workQueue.async { [weak self] in
             guard let sSelf = self else { return }

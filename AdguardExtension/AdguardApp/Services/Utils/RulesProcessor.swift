@@ -95,8 +95,8 @@ class RulesProcessor : RulesProcessorProtocol {
         }
         
         if foundIndex == nil {
-            DDLogError("(RulesConverter) removeWhitelistRule error. can not find expectedData")
-            return (nil, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
+            DDLogInfo("(RulesConverter) can not find expectedData")
+            return (jsonData, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
         }
         
         DDLogInfo("(RulesConverter) removeWhitelistRule expectedData is found")

@@ -39,7 +39,7 @@
     
     if ([self checkURLRule:rule]) {
         
-        self = [super init]; // [super _init_];
+        self = [super init];
         if (self)
         {
             _rule = rule;
@@ -123,8 +123,7 @@
 - (BOOL)checkURLRule:(ASDFilterRule *)rule{
     
     return ([rule.ruleText hasPrefix:self.ruleDomainPrefix]
-            && [rule.ruleText hasSuffix:self.ruleDomainSufix]
-            && [rule.isEnabled boolValue]);
+            && [rule.ruleText hasSuffix:self.ruleDomainSufix]);
 }
 
 - (NSString *)domainFromRule:(ASDFilterRule *)rule{
