@@ -78,9 +78,9 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             filters[numId] = path
         }
         let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeout: 10000, serverIp: nil)
-
+        
         let dns64Settings = AGDns64Settings(upstream: upstream, maxTries: 2, waitTime: 10000)
-        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtl: 0, dns64Settings: dns64Settings)
+        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtl: 2, dns64Settings: dns64Settings, listeners: nil)
         agproxy = AGDnsProxy(config: config, handler: events)
         
         return true

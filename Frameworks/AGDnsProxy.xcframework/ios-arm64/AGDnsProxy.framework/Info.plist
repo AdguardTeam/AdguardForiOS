@@ -22,5 +22,9 @@
 	<string></string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
 </dict>
 </plist>

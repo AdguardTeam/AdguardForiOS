@@ -14,6 +14,14 @@ typedef NS_ENUM(NSInteger, AGLogLevel) {
     AGLL_ERR,
 };
 
+/**
+ * Listener protocols
+ */
+typedef NS_ENUM(NSInteger, AGListenerProtocol) {
+    AGLP_UDP,
+    AGLP_TCP,
+};
+
 @interface AGLogger : NSObject
 
 /**
@@ -63,7 +71,7 @@ typedef void (^logCallback)(const char *msg, int length);
 - (instancetype) initWithAddress: (NSString *) address
         bootstrap: (NSArray<NSString *> *) bootstrap
         timeout: (NSInteger) timeout
-        serverIp: (NSArray *) serverIp;
+        serverIp: (NSData *) serverIp;
 @end
 
 @interface AGDns64Settings : NSObject
@@ -89,6 +97,41 @@ typedef void (^logCallback)(const char *msg, int length);
 
 @end
 
+@interface AGListenerSettings : NSObject
+
+/**
+ * The address to listen on
+ */
+@property(nonatomic, readonly) NSString *address;
+
+/**
+ * The port to listen on
+ */
+@property(nonatomic, readonly) NSInteger port;
+
+/**
+ * The protocol to listen for
+ */
+@property(nonatomic, readonly) AGListenerProtocol proto;
+
+/**
+ * Don't close the TCP connection after sending the first response
+ */
+@property(nonatomic, readonly) BOOL persistent;
+
+/**
+ * Close the TCP connection this long after the last request received, in milliseconds
+ */
+@property(nonatomic, readonly) NSInteger idleTimeout;
+
+- (instancetype) initWithAddress: (NSString *) address
+                            port: (NSInteger) port
+                           proto: (AGListenerProtocol) proto
+                      persistent: (BOOL) persistent
+                     idleTimeout: (NSInteger) idleTimeout;
+
+@end
+
 @interface AGDnsProxyConfig : NSObject
 /**
  * Upstreams settings
@@ -106,11 +149,16 @@ typedef void (^logCallback)(const char *msg, int length);
  * DNS64 settings. If nil, DNS64 is disabled
  */
 @property(nonatomic, readonly) AGDns64Settings *dns64Settings;
+/**
+ * List of addresses/ports/protocols/etc... to listen on
+ */
+@property(nonatomic, readonly) NSArray<AGListenerSettings *> *listeners;
 
 - (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
         filters: (NSDictionary<NSNumber *,NSString *> *) filters
         blockedResponseTtl: (NSInteger) blockedResponseTtl
-        dns64Settings: (AGDns64Settings *) dns64Settings;
+        dns64Settings: (AGDns64Settings *) dns64Settings
+        listeners: (NSArray<AGListenerSettings *> *) listeners;
 
 /**
  * @brief Get default DNS proxy settings
