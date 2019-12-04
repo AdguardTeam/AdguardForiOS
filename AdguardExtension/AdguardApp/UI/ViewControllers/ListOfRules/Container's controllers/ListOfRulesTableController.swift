@@ -108,6 +108,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     override func numberOfSections(in tableView: UITableView) -> Int {
         return state == .normal ? 3 : 1
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == enableListOfRulesSection ? 20.0 : super.tableView(tableView, heightForFooterInSection: section)
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if state == .normal {
@@ -202,6 +210,12 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
                 self?.tableView.reloadData()
             }
         })
+    }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
     
     // MARK: - RuleDetailsControllerDelegate methods

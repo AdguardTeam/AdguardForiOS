@@ -187,7 +187,6 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         return CustomAnimatedTransitioning()
     }
     
-    
     // MARK: - Actions
     
     func selectServer(){
