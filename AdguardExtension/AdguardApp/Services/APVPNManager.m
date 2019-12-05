@@ -845,6 +845,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         }
         
         _resources.activeDnsServer = _activeDnsServer;
+        DDLogInfo(@"(APVPNManager) active dns server changed. New dns server is: %@", _activeDnsServer.name);
+        
         [_resources.sharedDefaults setInteger: _tunnelMode forKey:AEDefaultsVPNTunnelMode];
         
         [self willChangeValueForKey:@"tunnelMode"];
@@ -921,6 +923,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _connectionStatus = APVpnConnectionStatusDisabled;
         
         DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
+        DDLogInfo(@"(APVPNManager) active dns server changed to default: %@", _activeDnsServer.name);
     }
     [_resources.sharedDefaults setBool:_enabled forKey:AEDefaultsVPNEnabled];
     // start delayed
