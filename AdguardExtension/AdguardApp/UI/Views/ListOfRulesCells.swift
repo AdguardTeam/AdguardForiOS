@@ -132,11 +132,11 @@ class AddRuleCell: UITableViewCell {
     
     private func setupImage(){
         if type == .safariUserfilter{
-            addRuleWidth.constant = 14.0
-            addRuleHeight.constant = 14.0
-        } else {
             addRuleWidth.constant = 20.0
             addRuleHeight.constant = 20.0
+        } else {
+            addRuleWidth.constant = 24.0
+            addRuleHeight.constant = 24.0
         }
     }
     
@@ -152,6 +152,10 @@ class NormalRuleCell: UITableViewCell {
     @IBOutlet weak var ruleStateImageView: UIImageView!
     @IBOutlet weak var changeRuleStateButton: UIButton!
     @IBOutlet weak var separatorView: UIView!
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     
     var theme: ThemeServiceProtocol? {
         didSet{
@@ -169,6 +173,16 @@ class NormalRuleCell: UITableViewCell {
         didSet{
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
+            }
+            
+            if type == .safariUserfilter {
+                ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: 15.0)
+                topConstraint.constant = 6.0
+                bottomConstraint.constant = 6.0
+            } else {
+                ruleNameLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
+                topConstraint.constant = 16.0
+                bottomConstraint.constant = 16.0
             }
         }
     }

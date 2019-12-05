@@ -17,15 +17,6 @@
  */
 
 import Foundation
-//import Mobile
-
-//class DnsProxyLogWriter: NSObject, MobileLogWriterProtocol {
-//    func write(_ message: String!) {
-//        if message != nil {
-//            DDLogInfo("(DnsProxy) \(message!)")
-//        }
-//    }
-//}
 
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
@@ -60,20 +51,20 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             }
         }
         
-//        MobileConfigureLogger(true, "", DnsProxyLogWriter(), &error)
+        
     }
     
     var agproxy: AGDnsProxy?
     
     @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int) -> Bool {
         
+        let bootstrapDnsArray = bootstrapDns.components(separatedBy: .whitespacesAndNewlines)
+        
         let agUpstreams = upstreams.map { (upstream) -> AGDnsUpstream in
-            return AGDnsUpstream(upstream, bootstrap: [bootstrapDns], timeout: 2000)!
+            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDnsArray, timeout: 2000, serverIp: nil)
         }
         
-        guard let filterFiles = try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]> else {
-            return false
-        }
+        let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
         
         var filters = [NSNumber:String]()
         
@@ -86,9 +77,11 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             
             filters[numId] = path
         }
+        let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeout: 10000, serverIp: nil)
         
-        let config = AGDnsProxyConfig(agUpstreams, filters: filters, blockedResponseTtl: 0)
-        agproxy = AGDnsProxy(config, withHandler: events)
+        let dns64Settings = AGDns64Settings(upstream: upstream, maxTries: 2, waitTime: 10000)
+        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtl: 2, dns64Settings: dns64Settings, listeners: nil)
+        agproxy = AGDnsProxy(config: config, handler: events)
         
         return true
     }

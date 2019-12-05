@@ -215,9 +215,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                      && ! response.URL.fileURL
                                      && ! [subscriptionUrl isEqual:response.URL]) {
                                      DDLogInfo(@"(AASFilterSubscriptionParser) Custom filter redirection.");
-                                     @synchronized(self) {
-//                                         _currentLoadingTask = nil;
-                                     }
                                      [self parseFromUrl:subscriptionUrl completion:completion];
                                      return;
                                  }
@@ -231,7 +228,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                  if (completion) {
                                      completion(context.result, error);
                                  }
-//                                 _currentLoadingTask = nil;
                              }
                              DDLogInfo(@"(AASFilterSubscriptionParser) End parse custom filter for url:\n %@", response.URL);
                              return;
