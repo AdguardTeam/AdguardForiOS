@@ -1,7 +1,7 @@
 
 import Foundation
-import Mobile
 
-@objc protocol DnsLogRecordsWriterProtocol: MobileDNSRequestProcessedListenerProtocol {
+@objc protocol DnsLogRecordsWriterProtocol {
     var server: String { get set }
+    func handleEvent(_ event: AGDnsRequestProcessedEvent)
 }

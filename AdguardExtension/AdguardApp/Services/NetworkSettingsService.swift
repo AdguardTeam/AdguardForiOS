@@ -132,6 +132,10 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
             DDLogError("Failed to load Wifi exceptions from file")
             return []
         }
+        if data.count == 0 {
+            DDLogInfo("(NetworkSettingsService) getExceptionsFromFile - file is empty")
+            return []
+        }
         let decoder = JSONDecoder()
         do {
             let exceptions = try decoder.decode([WifiException].self, from: data)
