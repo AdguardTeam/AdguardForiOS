@@ -63,11 +63,11 @@ class MainViewModel {
     // MARK: - private functions
     
     private func observeAntibanerState(){
-        let observer1 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
             self?.start?()
         }
         observers.append(observer1)
-        let observer2 = NotificationCenter.default.addObserver(forName: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
             
             let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as! Array<Any>?
             
@@ -83,12 +83,12 @@ class MainViewModel {
             self?.finish?(message!)
         }
         observers.append(observer2)
-        let observer3 = NotificationCenter.default.addObserver(forName: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
-            
-            if self?.antibanner.inTransaction() ?? false {
-                self?.antibanner.rollbackTransaction()
+        let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
+            guard let sSelf = self else { return }
+            if sSelf.antibanner.inTransaction() {
+                sSelf.antibanner.rollbackTransaction()
             }
-            
+        
             self?.error?(ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)

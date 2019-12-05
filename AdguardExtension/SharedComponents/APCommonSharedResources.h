@@ -56,11 +56,21 @@ extern NSString *APVpnManagerParameterLocalFiltering;
 extern NSString *APVpnManagerErrorDomain;
 
 /**
- Key of the paramenter, which contain APVpnManagerTunnelMode value.
+ Key of the paramenter, which contains APVpnManagerTunnelMode value.
  */
 extern NSString *APVpnManagerParameterTunnelMode;
 
 /**
- Key of the paramenter, which contain APVpnManagerRestartByReachability value.
+ Key of the paramenter, which contains APVpnManagerRestartByReachability value.
  */
 extern NSString *APVpnManagerRestartByReachability;
+
+/**
+ Key of the paramenter, which contains APVpnManagerFilteringMobileDataEnabled  value.
+ */
+extern NSString *APVpnManagerFilteringMobileDataEnabled;
+
+/**
+ Key of the paramenter, which contains APVpnManagerFilteringWifiDataEnabled  value.
+ */
+extern NSString *APVpnManagerFilteringWifiDataEnabled;

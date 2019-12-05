@@ -93,15 +93,19 @@ class ContentBlockerStateController: UITableViewController {
             self?.tableView.reloadData()
         }
     }
+    private var configurationObserver: NotificationToken?
+    private var safariObserver1: NotificationToken?
+    private var safariObserver2: NotificationToken?
+    private var contentBlockerObserver: NotificationToken?
     
     private func addObservers(){
         // User interface style observer
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        configurationObserver =  NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
                    self?.updateTheme()
                }
         
         // Start of filter update observing
-        NotificationCenter.default.addObserver(forName: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+        safariObserver1 = NotificationCenter.default.observe(name: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             
             guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
             self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .updating
@@ -109,7 +113,7 @@ class ContentBlockerStateController: UITableViewController {
         }
         
         // Finish of filter update observer
-        NotificationCenter.default.addObserver(forName: SafariService.filterFinishedUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+        safariObserver2 = NotificationCenter.default.observe(name: SafariService.filterFinishedUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             
             guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
             
@@ -125,7 +129,7 @@ class ContentBlockerStateController: UITableViewController {
         }
         
         // Content blockers checked observer
-        NotificationCenter.default.addObserver(forName: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+        contentBlockerObserver = NotificationCenter.default.observe(name: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
             DispatchQueue.main.async {
                 self?.contentBlockersDataSource!.updateContentBlockersArray()
                 self?.tableView.reloadData()

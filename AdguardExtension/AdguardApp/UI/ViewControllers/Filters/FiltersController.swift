@@ -64,7 +64,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     @IBOutlet weak var headerLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    
+    private var notificationToken: NotificationToken?
     
     // MARK: - ViewController life cycle
     
@@ -74,7 +74,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 118.0
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -92,6 +92,9 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
         navigationItem.title = viewModel?.currentGroup?.name ?? ""
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
         
         setupBackButton()
     }
@@ -339,5 +342,14 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    @objc private func refresh() {
+        viewModel?.refresh { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
 }

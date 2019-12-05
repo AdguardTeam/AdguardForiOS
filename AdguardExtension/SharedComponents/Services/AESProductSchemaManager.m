@@ -22,7 +22,6 @@
 #import "AESharedResources.h"
 #import "ADProductInfo.h"
 #import "AESAntibanner.h"
-#import "AEService.h"
 
 #import "Adguard-Swift.h"
 
@@ -37,7 +36,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-+ (void)upgradeWithAntibanner:(id)antibanner {
++ (void)upgradeWithAntibanner:(id<AESAntibannerProtocol>)antibanner {
     
     AESharedResources *resources = [AESharedResources new];
     NSNumber *currentSchemaVersion = [resources.sharedDefaults objectForKey:AEDefaultsProductSchemaVersion];
@@ -48,7 +47,7 @@
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             
-            if ([self onUpgradeFrom:currentSchemaVersion to:SCHEMA_VERSION]) {
+            if ([self onUpgradeFrom:currentSchemaVersion to:SCHEMA_VERSION antibanner:antibanner]) {
                 
                 [resources.sharedDefaults setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
             }
@@ -83,15 +82,11 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Main Methods (private)
 
-+ (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to {
++ (BOOL)onUpgradeFrom:(NSNumber *)from to:(NSNumber *)to antibanner: (id<AESAntibannerProtocol>) antibanner{
     
     BOOL result = YES;
     
     if ([from compare:@(3)] == NSOrderedAscending)  {
-        
-        id<AEServiceProtocol> aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
-        AESAntibanner* antibanner = [aeService antibanner];
-        
         result = [antibanner enableGroupsWithEnabledFilters];
     }
     
@@ -103,7 +98,7 @@
     return YES;
 }
 
-+ (BOOL)onMinorUpgradeWithAntibanner:(AESAntibanner*) antibanner {
++ (BOOL)onMinorUpgradeWithAntibanner:(id<AESAntibannerProtocol>) antibanner {
     
     [self removeMalwareFilterWithAntibanner:antibanner];
     
@@ -114,7 +109,7 @@
 #pragma mark Helper Methods (private)
 
 
-+ (void) removeMalwareFilterWithAntibanner:(AESAntibanner*) antibanner {
++ (void) removeMalwareFilterWithAntibanner:(id<AESAntibannerProtocol>) antibanner {
     [antibanner unsubscribeFilter:@(208)];
 }
 

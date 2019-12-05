@@ -70,7 +70,7 @@ class MainController: UIViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     // MARK: - properties
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
-    lazy var aeService: AEServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
     
@@ -79,11 +79,13 @@ class MainController: UIViewController {
     private var darkThemeLogoImage = UIImage(named: "ahduard-header-disabled-dark") ?? UIImage()
     private var lightThemeLogoImage = UIImage(named: "adguard-header-disabled") ?? UIImage()
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -105,7 +107,7 @@ class MainController: UIViewController {
         
         configuration.checkContentBlockerEnabled()
         
-        viewModel = MainViewModel(antibanner: aeService.antibanner())
+        viewModel = MainViewModel(antibanner: antibanner)
         setupBackButton()
         
         self.updateUI()
@@ -192,6 +194,7 @@ class MainController: UIViewController {
     }
     
     @IBAction func updateFiltersAction(_ sender: Any) {
+        
         viewModel?.updateFilters(start: { [weak self] in
             self?.updateStarted()
             self?.filtersVersionLabel.text = ACLocalizedString("update_filter_start_message", nil)
@@ -308,10 +311,11 @@ class MainController: UIViewController {
     private func setFiltersTime() {
         
         DispatchQueue.global(qos: .utility).async { [weak self] in
-            guard let filtersDate = self?.aeService.antibanner().filtersLastUpdateTime() else { return }
+            guard let sSelf = self else { return }
+            guard let filtersDate = sSelf.antibanner.filtersLastUpdateTime() else { return }
             DispatchQueue.main.async {
                 let dateString = filtersDate.formatedString() ?? ""
-                self?.filtersVersionLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+                sSelf.filtersVersionLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             }
         }
     }

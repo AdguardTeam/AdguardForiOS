@@ -22,7 +22,6 @@
 #import "ACommons/ACFiles.h"
 #import "AESharedResources.h"
 #import "NSData+GZIP.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "ASDModels/ASDFilterObjects.h"
 #import "ABECRequest.h"
@@ -64,8 +63,8 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
-    SafariService *_safariService;
-    id<AEServiceProtocol> _aeService;
+    id<SafariServiceProtocol> _safariService;
+    id<AESAntibannerProtocol> _antibanner;
 }
 
 @end
@@ -81,13 +80,13 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithResources:(id)resources safariSevice:(id)safariService aeService:(id)aeService {
+- (id)initWithResources:(id)resources safariSevice:(id)safariService antibanner:(id<AESAntibannerProtocol>)antibanner {
     
     self = [super init];
     if (self) {
         _sharedResources = resources;
         _safariService = safariService;
-        _aeService = aeService;
+        _antibanner = antibanner;
     }
     
     return self;
@@ -179,8 +178,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
-    AESAntibanner* antibaner = _aeService.antibanner;
-    NSArray* filterIDs = antibaner.activeFilterIDs;
+    NSArray* filterIDs = _antibanner.activeFilterIDs;
     
     for (NSNumber *filterId in filterIDs) {
         
@@ -266,7 +264,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\nAEDefaultsSecurityContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSecurityContentBlockerRulesCount]];
         
         [sb appendString:@"\r\n\r\nFilters subscriptions:"];
-        NSArray *filters = [[_aeService antibanner] activeFilters];
+        NSArray *filters = [_antibanner activeFilters];
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
@@ -292,9 +290,22 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
          tunnelMode, dnsServerInfo.name];
         
         [sb appendFormat:@"\r\nRestart when network changes: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsRestartByReachability] ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nFilter mobile data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterMobileEnabled] ? @"YES" : @"NO"];
+        [sb appendFormat:@"\r\nFilter wi-fi data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterWifiEnabled] ? @"YES" : @"NO"];
         
         
-        [sb appendFormat:@"\r\nDns server id: %@",dnsServerInfo.serverId];
+        [sb appendFormat:@"\r\n\r\nDns server id: %@",dnsServerInfo.serverId];
+        
+        NSArray<WifiException*>* exceptions = [self getExceptions];
+        
+        if (exceptions)
+            [sb appendString:@"\r\n\r\nWi-Fi exceptions:"];
+        
+        for (NSDictionary *exception in exceptions){
+            NSString *rule = exception[@"rule"];
+            NSNumber *enabled = exception[@"enabled"];
+            [sb appendFormat:@"\r\nWi-Fi name=\"%@\" Enabled=%@", rule, [enabled boolValue] ? @"YES" : @"NO"];
+        }
         
         for (NSString *upstream in dnsServerInfo.upstreams){
             [sb appendFormat:@"\r\nDns upstream: %@",upstream];
@@ -355,7 +366,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     
     NSMutableDictionary* datas = [NSMutableDictionary new];
     
-    NSDictionary* jsonDatas = [_safariService allBlockingContentRules];
+    NSDictionary* jsonDatas = [(SafariService*)_safariService allBlockingContentRules];
     [jsonDatas enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSData* _Nonnull data, BOOL * _Nonnull stop) {
         NSString *filename = [key replace:@"json" to:@"zip"];
         datas[filename] = [data gzippedData];
@@ -420,6 +431,18 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         return archiveName;
     }
     // return archive url
+    return nil;
+}
+
+-(NSArray<WifiException*>*)getExceptions {
+    NSString *fileName = @"NetworkSettings";
+    NSData *data = [_sharedResources loadDataFromFileRelativePath:fileName];
+    if (data) {
+        NSError *error = nil;
+        NSMutableArray<WifiException*>* exceptions =
+        [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        return exceptions;
+    }
     return nil;
 }
 

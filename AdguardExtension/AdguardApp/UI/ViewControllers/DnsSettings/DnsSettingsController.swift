@@ -24,7 +24,9 @@ class DnsSettingsController : UITableViewController{
     
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
-    @IBOutlet weak var tunnelDescription: ThemableLabel!
+    @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
+    @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
+    @IBOutlet weak var topSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -32,25 +34,31 @@ class DnsSettingsController : UITableViewController{
     
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     
     private var observation: NSKeyValueObservation?
+    
+    private var themeObserver: NotificationToken?
+    private var vpnObserver: NotificationToken?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
         observation = vpnManager.observe(\.tunnelMode) { [weak self] (mode, change) in
             DispatchQueue.main.async {
-                self?.updateUI()
+                self?.updateVpnState()
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
+        vpnObserver = NotificationCenter.default.observe(name: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
             [weak self] (notification) in
             guard let sSelf = self else { return }
             DispatchQueue.main.async{
@@ -61,15 +69,31 @@ class DnsSettingsController : UITableViewController{
             }
         }
         
-        self.updateUI()
+        self.updateVpnState()
         setupBackButton()
         updateTheme()
     }
     
+    // MARK: - Table view delegate methods
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+       
+        if indexPath.section != 0 {
+            cell.contentView.alpha = vpnManager.enabled ? 1.0 : 0.5
+            cell.isUserInteractionEnabled = vpnManager.enabled
+        }
+
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 32.0 : 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     // MARK: Actions
@@ -86,12 +110,12 @@ class DnsSettingsController : UITableViewController{
             self.vpnManager.enabled = enabled
         }
     }
-
     
     // MARK: private methods
     
-    private func updateUI() {
+    private func updateVpnState() {
         enabledSwitch.isOn = vpnManager.enabled
+        systemProtectionStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         if vpnManager.isCustomServerActive() {
             serverName.text = vpnManager.activeDnsServer!.name
@@ -105,15 +129,8 @@ class DnsSettingsController : UITableViewController{
             serverName.text = "\(server) (\(protocolName))"
         }
         
-        switch (vpnManager.tunnelMode) {
-        case APVpnManagerTunnelModeSplit:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_split_description", nil)
-        case APVpnManagerTunnelModeFull:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_full_description", nil)
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
-            tunnelDescription.text = ACLocalizedString("tunnel_mode_full_without_icon_description", nil)
-        default:
-            break
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
         }
     }
     
@@ -122,6 +139,7 @@ class DnsSettingsController : UITableViewController{
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
+        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

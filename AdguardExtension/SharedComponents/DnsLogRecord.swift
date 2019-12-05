@@ -28,8 +28,10 @@ class DnsLogRecord: NSObject, NSCoding {
     let answer: String
     let server: String
     let upstreamAddr: String?
+    let bytesSent: Int
+    let bytesReceived: Int
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int) {
         
         self.domain = domain
         self.date = date
@@ -38,6 +40,8 @@ class DnsLogRecord: NSObject, NSCoding {
         self.answer = answer
         self.server = server
         self.upstreamAddr = upstreamAddr
+        self.bytesSent = bytesSent
+        self.bytesReceived = bytesReceived
         
         super.init()
     }
@@ -52,6 +56,8 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(answer, forKey: "answer")
         aCoder.encode(server, forKey: "server")
         aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
+        aCoder.encode(bytesSent, forKey: "bytesSent")
+        aCoder.encode(bytesReceived, forKey: "bytesReceived")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,6 +67,8 @@ class DnsLogRecord: NSObject, NSCoding {
         self.type = aDecoder.decodeObject(forKey: "type") as! String
         self.answer = aDecoder.decodeObject(forKey: "answer") as! String
         self.server = aDecoder.decodeObject(forKey: "server") as! String
+        self.bytesSent = aDecoder.decodeInteger(forKey: "bytesSent")
+        self.bytesReceived = aDecoder.decodeInteger(forKey: "bytesReceived")
         
         // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String

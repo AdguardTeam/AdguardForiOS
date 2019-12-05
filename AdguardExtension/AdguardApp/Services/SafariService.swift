@@ -82,6 +82,9 @@ protocol SFContentBlockerManagerProtocol {
 
 class SafariService: NSObject, SafariServiceProtocol {
     
+    static let safariServiceErrorDomain = "SafariServiceErrorDomain"
+    static let safariServiceErrorCode = -1
+    
     /** SFContentBlockerManager wrapper
        it is used for testing
     */
@@ -147,12 +150,17 @@ class SafariService: NSObject, SafariServiceProtocol {
                 
             let group = DispatchGroup()
             var resultError: Error?
-            
+
+            NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_content_blockers", nil)])
+
             for blocker in ContentBlockerType.allCases {
                 
                 group.enter()
                 
                 DDLogInfo("(SafariService) invalidateBlockingJsons - \(blocker)")
+
+                // Notify that filter began updating
+                NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : blocker])
 
                 self.invalidateBlockingJson(type: blocker, completion: { (error) in
                     if error != nil {
@@ -164,6 +172,9 @@ class SafariService: NSObject, SafariServiceProtocol {
                     // Notify that filter finished updating
                     NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
                     
+                    // Notify that filter finished updating
+                    NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
+
                     group.leave()
                 })
             }
@@ -171,9 +182,13 @@ class SafariService: NSObject, SafariServiceProtocol {
             group.wait()
             
             completion(resultError)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            }
         }
     }
-    
+
     @objc
     func filenameById(_ contentBlockerId: String) -> String? {
         
@@ -319,7 +334,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                         DDLogError("(SafariService) userInfo for 2-nd try: \(userInfo)")
                     }
                     let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
-                    let error =  NSError(domain: "SafariServiceDomain", code: Int(AES_ERROR_SAFARI_EXCEPTION), userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                    let error =  NSError(domain: SafariService.safariServiceErrorDomain, code: SafariService.safariServiceErrorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
                     
                     DDLogInfo("(SafariService) Notify Safari fihished. ( 2-nd try )")
                     completion(error)

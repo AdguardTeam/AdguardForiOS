@@ -33,13 +33,13 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     
     // MARK: - init
 
-    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, aeService: AEServiceProtocol, safariService: SafariServiceProtocol) {
+    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
         self.purchaseService = purchaseService
         self.resources = resources
         self.safariService = safariService
         super.init()
         
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        notificationObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                                       object: nil, queue: nil)
         {
             [weak self](notification) in
@@ -129,6 +129,19 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         }
         get {
             return resources.sharedDefaults().bool(forKey: AEDefaultsSystemAppearenceStyle)
+        }
+    }
+    
+    /**
+     Developer mode state
+     */
+    var developerMode: Bool {
+        set {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
+            //post notification or something else
+        }
+        get {
+            return resources.sharedDefaults().bool(forKey: AEDefaultsDeveloperMode)
         }
     }
     

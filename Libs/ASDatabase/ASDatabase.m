@@ -55,28 +55,9 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 @implementation ASDatabase
 
-static ASDatabase *singletonDB;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
-
-+ (ASDatabase *)singleton{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        singletonDB = [ASDatabase new];
-        singletonDB.ready = NO;
-    });
-    
-    return singletonDB;
-}
-
-+ (void)destroySingleton {
-    
-    singletonDB = nil;
-}
 
 - (void)dealloc{
     
@@ -300,7 +281,7 @@ static ASDatabase *singletonDB;
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
-        @synchronized(singletonDB) {
+        @synchronized(self) {
             execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
         
@@ -324,10 +305,12 @@ static ASDatabase *singletonDB;
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
     
+    UInt32 identifier = [self beginBackgroundTask];
+    
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
-        @synchronized(singletonDB) {
+        @synchronized(self) {
             execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
         
@@ -339,14 +322,17 @@ static ASDatabase *singletonDB;
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)rawExec:(void (^)(FMDatabase *db))block{
     
+    UInt32 identifier = [self beginBackgroundTask];
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
-        @synchronized(singletonDB) {
+        @synchronized(self) {
            execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
         
@@ -358,14 +344,20 @@ static ASDatabase *singletonDB;
     }
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)queryDefaultDB:(void (^)(FMDatabase *db))block{
+    
+    UInt32 identifier = [self beginBackgroundTask];
     
     if (self.ready)
         [defaultDbQueue inDatabase:block];
     else
         DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
+    
+    [self endBackgroubdTaskWithId:identifier];
 }
 
 - (BOOL)isolateQueue:(dispatch_queue_t)theQueue{
@@ -376,7 +368,7 @@ static ASDatabase *singletonDB;
     
     if (self.ready){
 
-        @synchronized(singletonDB) {
+        @synchronized(self) {
 
             FMDatabaseQueue *dQueue = (__bridge id)dispatch_queue_get_specific(theQueue, (kDatabaseQueueSpecificKey));
             if (dQueue) {
@@ -401,12 +393,16 @@ static ASDatabase *singletonDB;
         return;
     }
     
-    @synchronized(singletonDB) {
+    @synchronized(self) {
         
         dispatch_queue_set_specific(theQueue, kDatabaseQueueSpecificKey, NULL, NULL);
     }
     
     return;
+}
+
+- (void)stop {
+    self.ready = NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -507,6 +503,19 @@ static ASDatabase *singletonDB;
     }
     
     return YES;
+}
+
+- (UInt32) beginBackgroundTask {
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
+    return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+#endif
+    return 0;
+}
+
+- (void) endBackgroubdTaskWithId: (UInt32) identifier {
+#if (!APP_EXTENSION) && (!TARGET_OS_OSX)
+    return [[UIApplication sharedApplication] endBackgroundTask:identifier];
+#endif
 }
 
 #pragma clang diagnostic pop

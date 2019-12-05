@@ -38,12 +38,8 @@ typedef enum : NSUInteger {
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
-#define AE_URLSCHEME                        @ADGUARD_URL_SCHEME
-#define AE_URLSCHEME_COMMAND_ADD            @"add"
-#define AE_URLSCHEME_COMMAND_AUTH           @"auth"
-
-#define AE_URLSCHEME_AUTH_PARAM_TOKEN       @"access_token"
-#define AE_URLSCHEME_AUTH_PARAM_STATE       @"state"
+extern NSString *AE_URLSCHEME;
+extern NSString *AE_URLSCHEME_COMMAND_ADD;
 
 /**
  User Defaults key that defines enable/disable filtration.
@@ -109,20 +105,6 @@ extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
  User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
  */
 extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
-
-/**
- User Defaults key, which defines total request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsCount;
-
-/**
- User Defaults key, which defines total request time.
- */
-extern NSString * _Nonnull AEDefaultsTotalRequestsTime;
-/**
- User Defaults key, which defines total trackers request count.
- */
-extern NSString * _Nonnull AEDefaultsTotalTrackersCount;
 
 /**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
@@ -193,7 +175,23 @@ extern NSString*  _Nonnull AEDefaultsUserFilterEnabled;
 
 /**
  User defaults key, which defines user filter is enabled */
-extern NSString*  _Nonnull AEDefaultsWhitelistEnabled;
+extern NSString*  _Nonnull AEDefaultsSafariWhitelistEnabled;
+
+/**
+ User defaults key, which defines wifi exceptions is enabled */
+extern NSString*  _Nonnull AEDefaultsFilterWifiEnabled;
+
+/**
+ User defaults key, which defines mobile data filtering is enabled */
+extern NSString*  _Nonnull AEDefaultsFilterMobileEnabled;
+
+/**
+ User defaults key, which defines dns whitelist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsWhitelistEnabled;
+
+/**
+ User defaults key, which defines dns  blacklist is enabled */
+extern NSString*  _Nonnull AEDefaultsDnsBlacklistEnabled;
 
 /**
  User defaults keys, which contains number of rules for each content blocker*/
@@ -214,6 +212,10 @@ extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 
 /**
+ User default key, which indicates whether safari protaction is enabled*/
+extern NSString* _Nonnull SafariProtectionState;
+
+/**
  User defaults key, which defines, whether vpn is enabled */
 extern NSString* _Nonnull AEDefaultsVPNEnabled;
 
@@ -224,6 +226,33 @@ extern NSString* _Nonnull AEDefaultsRestartByReachability;
 /**
  User defaults key, which defines vpn tunnel mode */
 extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
+
+/**
+ User defaults key, which defines whether developer mode is enabled */
+extern NSString* _Nonnull AEDefaultsDeveloperMode;
+
+/**
+ User defaults key, which defines whether show progress bar is enabled */
+extern NSString* _Nonnull AEDefaultsShowStatusBar;
+
+/**
+ User defaults key, which defines whether DNS request blocking is enabled */
+extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
+
+/**
+ String to send notifications for StatusView
+ */
+extern NSString* _Nonnull AEDefaultsShowStatusViewInfo;
+
+/**
+ Notify to show status view
+ */
+extern NSString* _Nonnull ShowStatusViewNotification;
+
+/**
+ Hide status view
+ */
+extern NSString* _Nonnull HideStatusViewNotification;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -257,6 +286,11 @@ extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
  Returns shared user defaults object.
  */
 - (nonnull NSUserDefaults *)sharedDefaults;
+
+/**
+ reset user defaults to initial state
+ */
+- (void) reset;
 
 /**
  Saves defaults value in NSArgumentDomain.

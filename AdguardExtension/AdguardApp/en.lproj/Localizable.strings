@@ -29,10 +29,10 @@
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (inverted)";
+"inverted_whitelist_title" = "Safari whitelist (inverted)";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Safari whitelist";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User Filter";
@@ -42,6 +42,15 @@
 
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will disable Safari filtering.";
+
+/* (User Filter Screen) dns blacklist input helper */
+"dns_blacklist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will block connection";
+
+/* (User Filter Screen) dns whitelist input helper */
+"dns_whitelist_helper" = "Enter here the domain names separated by line breaks, which will be allowed to connect";
+
+/* (User Filter Screen) wifi exceptions input helper */
+"wifi_exceptions_helper" = "Enter here the Wi-Fi names separated by line breaks, for which AdGuard will disable DNS";
 
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
@@ -100,19 +109,28 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Enabled filters: %d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Disabled";
-
 "filter_date_format" = "Filters updated: %@";
+
+/* (UserFilterController) System blacklist description */
+"blacklist_text" = "Enter here the domain names. AdGuard will prevent loading of these domains.";
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "You can add your own rules here<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter the domain names here. AdGuard will disable filtering in Safari for these websites.";
+"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains, ignoring all other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "AdGuard won't block these domains";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text" = "AdGuard will block these domains";
+
+/* (UserFilterController) wifi exceptions description */
+"wifi_exceptions_text" = "Enter the Wi-Fi names here. AdGuard will disable DNS for these networks.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Updating...";
@@ -123,11 +141,18 @@
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Add a domain";
 
+/* (UserFilterController) add wifi exception name button title */
+"add_wifi_name_title" = "Add a name";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Your Wi-Fi name";
+
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Rule:";
@@ -135,17 +160,8 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domain:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Import";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Import";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Export";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Export";
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Name:";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Report incorrect blocking";
@@ -256,7 +272,7 @@
 "filters_description_format" = "Enabled %1$d out of %2$d";
 
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Copied to clipboard";
+"text_copied" = "Copied";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Regular";
@@ -312,17 +328,11 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Other";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Advanced";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Content blockers";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filters:";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "General settings";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "You need to enable VPN first";
@@ -405,5 +415,146 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Invalid 2FA token";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi exceptions";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "System protection will not be used in Wi-Fi networks below";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Add an exception";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filter mobile data";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filter wi-fi data";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Trackers, counters";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Trackers, counters";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "Whitelist";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "Blacklist";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari user filter";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Export";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Clear";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Save";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Import";
+
+/* "Enabled" title */
+"enabled" = "Enabled";
+
+/* "Disabled" title */
+"disabled" = "Disabled";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "REMOVE FROM WHITELIST";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "REMOVE FROM BLACKLIST";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "ADD TO WHITELIST";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "ADD TO BLACKLIST";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Allow to block phishing sites and other dangerous domains. Available for Premium users";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Allow to use outside filters. Available for Premium users";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Audio and video players";
+
+/*(LogCategory) comments category*/
+"comments" = "Comments";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Customer interaction";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornvertising";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Advertising";
+
+/*(LogCategory) essential category*/
+"essential" = "Essential";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Site analytics";
+
+/*(LogCategory) social media category*/
+"social_media" = "Social media";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Miscellaneous";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Unknown";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Extensions";
+
+/*(ListOfRules) Select title */
+"common_select" = "Select";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Edit";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Delete";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Select all";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Add a domain";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Add a new rule";
+
+/* Default DNS filter name */
+"default_dns_filter_name" = "DNS Filter";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Content blockers are being updated ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Loading filters ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Rules are being converted  ...";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "More";
