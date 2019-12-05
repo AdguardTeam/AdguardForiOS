@@ -53,6 +53,7 @@ class DnsProviderContainerController : UIViewController {
         
         navigationItem.title = provider?.name
         
+        setupBackButton()
         updateTheme()
     }
     

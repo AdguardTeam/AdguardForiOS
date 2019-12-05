@@ -205,8 +205,9 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     // MARK: - ChooseProtocolControllerDelegate methods
     
     func protocolSelected(protocol: DnsProtocol) {
-        
-        tableView.reloadData()
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - private methods
