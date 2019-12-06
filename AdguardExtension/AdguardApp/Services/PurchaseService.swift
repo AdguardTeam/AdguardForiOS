@@ -39,12 +39,14 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  In-app purchases are carried out directly in this service.
  Work with Adguard Licenses is delegated to LoginController
  */
+
 protocol PurchaseServiceProtocol {
     
-    /*
-     start servise. It requests SKProducts at start
-     */
+    /* star service. It request SKProducts  */
     func start()
+    
+    /* request SKProducts. If SKProducts failed on start we must repeat this request  */
+    func startProductRequest()
    
     /**
      returns true if user has valid renewable subscription or valid adguard license
@@ -96,11 +98,6 @@ protocol PurchaseServiceProtocol {
      */
     func logout()->Bool
     
-    /*
-     start product request. Usualy this request is called when the service starts. But if this request has fails, then it can be directly initiated by this method.
-     */
-    func startProductRequest()
-    
     /**
      requests an renewable or non-consumable subscription purchase
      */
@@ -115,6 +112,9 @@ protocol PurchaseServiceProtocol {
      returns url for oauth authorization
      */
     func authUrlWithName(name: String)->URL?
+    
+    /** resets all login data */
+    func reset()
 }
 
 // MARK: - public constants -
@@ -221,6 +221,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private let reachability = Reachability.forInternetConnection()
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -302,6 +304,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 return
             }
         }
+    }
+    
+    func reset() {
+        loginService.reset()
     }
 
     // MARK: - public methods
@@ -543,7 +549,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         if reachability?.isReachable() ?? false{
             startProductRequest()
         } else {
-            NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
+            notificationToken = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
                 guard let sSelf = self else { return }
                 guard let reach = notification.object as? Reachability else { return }
                 if reach.isReachable() {
@@ -553,6 +559,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
             reachability?.startNotifier()
         }
+        
+        reachability?.startNotifier()
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {

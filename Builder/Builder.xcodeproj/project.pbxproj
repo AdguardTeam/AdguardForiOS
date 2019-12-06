@@ -18,7 +18,6 @@
 		655A05941C6B7790000F00D7 /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04CC1C6B7790000F00D7 /* ACLExecuteBlockDelayed.m */; };
 		655A05951C6B7790000F00D7 /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04CE1C6B7790000F00D7 /* ACLFileLocker.m */; };
 		655A05961C6B7790000F00D7 /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04D01C6B7790000F00D7 /* ACLFileLogger.m */; };
-		655A05981C6B7790000F00D7 /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04D41C6B7790000F00D7 /* ACLJobController.m */; };
 		655A05991C6B7790000F00D7 /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04D61C6B7790000F00D7 /* ACLLogger.m */; };
 		655A059E1C6B7790000F00D7 /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E01C6B7790000F00D7 /* ACLWildcard.m */; };
 		655A059F1C6B7790000F00D7 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E51C6B7790000F00D7 /* CLIColor.m */; };
@@ -100,8 +99,6 @@
 		655A04CE1C6B7790000F00D7 /* ACLFileLocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLocker.m; sourceTree = "<group>"; };
 		655A04CF1C6B7790000F00D7 /* ACLFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLogger.h; sourceTree = "<group>"; };
 		655A04D01C6B7790000F00D7 /* ACLFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLogger.m; sourceTree = "<group>"; };
-		655A04D31C6B7790000F00D7 /* ACLJobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLJobController.h; sourceTree = "<group>"; };
-		655A04D41C6B7790000F00D7 /* ACLJobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLJobController.m; sourceTree = "<group>"; };
 		655A04D51C6B7790000F00D7 /* ACLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLLogger.h; sourceTree = "<group>"; };
 		655A04D61C6B7790000F00D7 /* ACLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLLogger.m; sourceTree = "<group>"; };
 		655A04DF1C6B7790000F00D7 /* ACLWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLWildcard.h; sourceTree = "<group>"; };
@@ -298,8 +295,6 @@
 				655A04CE1C6B7790000F00D7 /* ACLFileLocker.m */,
 				655A04CF1C6B7790000F00D7 /* ACLFileLogger.h */,
 				655A04D01C6B7790000F00D7 /* ACLFileLogger.m */,
-				655A04D31C6B7790000F00D7 /* ACLJobController.h */,
-				655A04D41C6B7790000F00D7 /* ACLJobController.m */,
 				655A04D51C6B7790000F00D7 /* ACLLogger.h */,
 				655A04D61C6B7790000F00D7 /* ACLLogger.m */,
 				655A04DF1C6B7790000F00D7 /* ACLWildcard.h */,
@@ -690,7 +685,6 @@
 				655A05A41C6B7790000F00D7 /* DDTTYLogger.m in Sources */,
 				655A05BA1C6B7790000F00D7 /* Reachability.m in Sources */,
 				655A05DE1C6B7790000F00D7 /* FMStatementQuotedRecogniser.m in Sources */,
-				655A05981C6B7790000F00D7 /* ACLJobController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

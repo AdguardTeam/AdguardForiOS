@@ -215,9 +215,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                      && ! response.URL.fileURL
                                      && ! [subscriptionUrl isEqual:response.URL]) {
                                      DDLogInfo(@"(AASFilterSubscriptionParser) Custom filter redirection.");
-                                     @synchronized(self) {
-//                                         _currentLoadingTask = nil;
-                                     }
                                      [self parseFromUrl:subscriptionUrl completion:completion];
                                      return;
                                  }
@@ -231,7 +228,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                  if (completion) {
                                      completion(context.result, error);
                                  }
-//                                 _currentLoadingTask = nil;
                              }
                              DDLogInfo(@"(AASFilterSubscriptionParser) End parse custom filter for url:\n %@", response.URL);
                              return;
@@ -348,7 +344,15 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     }
     // Parse next comment line after `Title` tag as description, if it is not a parsed tag.
     if (context.afterTitleParsed) {
-        context.result.meta.descr = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if (splited.count == 2) {
+            NSString *tagg = [splited[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if ([tagg isEqualToString: @"Description"]) {
+                NSString *value = [splited[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                context.result.meta.descr = value;
+            }
+        } else {
+            context.result.meta.descr = tag;
+        }
         context.afterTitleParsed = NO;
     }
 }

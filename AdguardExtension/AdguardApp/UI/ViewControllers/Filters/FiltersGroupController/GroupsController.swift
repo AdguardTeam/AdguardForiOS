@@ -34,17 +34,17 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    let aeService: AEServiceProtocol = ServiceLocator.shared.getService()!
     let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
+    private var notificationToken: NotificationToken?
     
     // MARK: - lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -59,6 +59,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             self?.tableView.reloadData()
         }
         
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
         setupBackButton()
     }
     
@@ -100,23 +102,28 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
+        cell.icon.image = UIImage(named: group.iconName ?? "")
+        
+        theme.setupLabels(cell.themableLabels)
+        
         var trailingConstraint: CGFloat = 0
         if group.proOnly && !configuration.proStatus {
             cell.enabledSwitch.isHidden = true
             cell.getPremiumButton.isHidden = false
-            cell.icon.image = UIImage(named: group.disabledIconName ?? (group.iconName ?? ""))
-            trailingConstraint = cell.getPremiumButton.frame.width + 10
-        }else {
+            cell.descriptionLabel.text = group.groupId == FilterGroupId.security ? ACLocalizedString("security_description", nil) : ACLocalizedString("custom_description", nil)
+            cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
+            cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
+            trailingConstraint = cell.getPremiumButton.frame.width + 10.0 + 15.0
+        } else {
             cell.enabledSwitch.isHidden = false
             cell.getPremiumButton.isHidden = true
-            cell.icon.image = UIImage(named: group.iconName ?? "")
-            trailingConstraint = cell.enabledSwitch.frame.width + 10
+            cell.icon.tintColor = UIColor(hexString: "#67b279")
+            trailingConstraint = cell.enabledSwitch.frame.width + 10.0 + 15.0
         }
         
         cell.descriptionTrailingConstraint.constant = trailingConstraint
         cell.nameTrailingConstraint.constant = trailingConstraint
 
-        theme.setupLabels(cell.themableLabels)
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
         
@@ -175,6 +182,15 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
+        }
+    }
+    
+    @objc private func refresh() {
+        viewModel?.refresh { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            }
         }
     }
 }

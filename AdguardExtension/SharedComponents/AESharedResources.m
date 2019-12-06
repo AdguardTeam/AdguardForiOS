@@ -19,6 +19,9 @@
 #import "ACommons/ACLang.h"
 #import "ABECFilter.h"
 
+NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
+NSString *AE_URLSCHEME_COMMAND_ADD = @"add";
+
 NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
@@ -32,9 +35,6 @@ NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
-NSString *AEDefaultsTotalRequestsCount = @"AEDefaultsTotalRequestsCount";
-NSString *AEDefaultsTotalRequestsTime = @"AEDefaultsTotalRequestsTime";
-NSString *AEDefaultsTotalTrackersCount = @"AEDefaultsTotalTrackersCount";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
@@ -50,7 +50,11 @@ NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
-NSString* AEDefaultsWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsSafariWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
+NSString* AEDefaultsFilterWifiEnabled = @"AEDefaultsWifiExceptionsEnabled";
+NSString* AEDefaultsFilterMobileEnabled = @"AEDefaultsFilterMobileEnabled";
+NSString* AEDefaultsDnsWhitelistEnabled = @"AEDefaultsDnsWhitelistEnabled";
+NSString* AEDefaultsDnsBlacklistEnabled = @"AEDefaultsDnsBlacklistEnabled";
 
 NSString* AEDefaultsGeneralContentBlockerRulesCount = @"AEDefaultsGeneralContentBlockerRulesCount";
 NSString* AEDefaultsPrivacyContentBlockerRulesCount = @"AEDefaultsPrivacyContentBlockerRulesCount";
@@ -69,6 +73,15 @@ NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecu
 NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
+NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
+NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
+NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
+
+NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
+NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
+NSString *HideStatusViewNotification = @"HideStatusViewNotification";
+
+NSString* SafariProtectionState = @"SafariProtectionState";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
@@ -302,6 +315,30 @@ static NSUserDefaults *_sharedUserDefaults;
         }
         
         [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
+    }
+}
+
+- (void)reset {
+    // clear user defaults
+    DDLogInfo(@"(AESharedResources) reset settings");
+    
+    for (NSString* key in _sharedUserDefaults.dictionaryRepresentation.allKeys) {
+        [_sharedUserDefaults removeObjectForKey:key];
+    }
+    [_sharedUserDefaults synchronize];
+    
+    // remove all files in shared directory
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:_containerFolderUrl.path error:&error]) {
+        
+        if ([file contains:@".db"]) continue;
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
+        if (!success || error) {
+            DDLogError(@"(AEsharedResources) reset. Error - can not delete file. Error: %@", error.localizedDescription);
+        }
     }
 }
 

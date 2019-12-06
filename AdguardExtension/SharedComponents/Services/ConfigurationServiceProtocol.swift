@@ -8,4 +8,5 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var systemAppearenceIsDark: Bool { get }
     var proStatus : Bool { get }
     var purchasedThroughLogin: Bool { get }
+    var developerMode: Bool { get  set }
 }

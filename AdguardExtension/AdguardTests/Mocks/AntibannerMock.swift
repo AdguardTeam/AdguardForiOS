@@ -13,6 +13,17 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     var storedGroups = [ASDFilterGroup]()
     var storedFilters = [ASDFilterMetadata]()
     
+    func start() {
+    }
+    
+    func setDatabase(_ db: ASDatabase!) {
+        
+    }
+    
+    func stop() {
+        
+    }
+    
     func rules(forFilter filterId: NSNumber) -> [ASDFilterRule] {
         return rules[filterId] ?? [ASDFilterRule]()
     }
@@ -107,7 +118,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
         return ABECFilterClientLocalization()
     }
     
-    func subscribeFilters(_ filters: [ASDFilterMetadata], jobController: ACLJobController?) -> Bool {
+    func subscribeFilters(_ filters: [ASDFilterMetadata]) -> Bool {
         return true
     }
     

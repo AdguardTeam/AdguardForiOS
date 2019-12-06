@@ -24,7 +24,6 @@
 #import "AppDelegate.h"
 #import "ACommons/ACNetwork.h"
 #import "ASDFilterObjects.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "Adguard-Swift.h"
 
@@ -59,11 +58,16 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     APVpnManagerTunnelMode _tunnelMode;
     NSNumber          *_delayedSetTunnelMode;
     
-    BOOL          _delayedRestartByReachability;
+    NSNumber          *_delayedRestartByReachability;
+    BOOL              _delayedRestartTunnel;
+    NSNumber          *_delayedFilteringWifiDataEnabled;
+    NSNumber          *_delayedFilteringMobileDataEnabled;
     
     NSError     *_standartError;
     
     BOOL _restartByReachability;
+    BOOL _filteringWifiDataEnabled;
+    BOOL _filteringMobileDataEnabled;
     
     NSMutableArray <DnsProviderInfo *> *_customDnsProviders;
     
@@ -142,6 +146,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         // don't restart by default
         _restartByReachability = NO;
         
+        _filteringMobileDataEnabled = YES;
+        _filteringWifiDataEnabled = YES;
+        
         [self loadConfiguration];
     }
     
@@ -182,7 +189,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 _delayedSetEnabled = @(enabled);
             } else {
                 
-                [self internalSetEnabled:enabled];
+                [self internalSetEnabled:enabled force:NO];
             }
         });
     }
@@ -213,7 +220,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     }
     
     [_busyLock unlock];
-    
 }
 
 - (NSArray<DnsProviderInfo *> *)providers {
@@ -308,6 +314,15 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     return _restartByReachability;
 }
 
+- (BOOL)filteringWifiDataEnabled {
+    return _filteringWifiDataEnabled;
+}
+
+- (BOOL)filteringMobileDataEnabled {
+    return _filteringMobileDataEnabled;
+}
+
+
 - (void)setRestartByReachability:(BOOL)restartByReachability {
     
     _lastError = nil;
@@ -316,16 +331,58 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     if (_busy) {
         
-        _delayedRestartByReachability = restartByReachability;
+        _delayedRestartByReachability = @(restartByReachability);
     } else {
         dispatch_async(workingQueue, ^{
             
             if (_busy) {
                 
-                _delayedRestartByReachability = restartByReachability;
+                _delayedRestartByReachability = @(restartByReachability);
             } else {
                 
                 [self internalSetRestartByReachability:restartByReachability];
+            }
+        });
+    }
+    
+     [_busyLock unlock];
+}
+
+- (void)setFilteringWifiDataEnabled:(BOOL)filteringWifiDataEnabled {
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        _delayedFilteringWifiDataEnabled = @(filteringWifiDataEnabled);
+    } else {
+        dispatch_async(workingQueue, ^{
+            if (_busy) {
+                _delayedFilteringWifiDataEnabled = @(filteringWifiDataEnabled);
+            } else {
+                
+                [self internalSetFilteringWifiDataEnabled:filteringWifiDataEnabled];
+            }
+        });
+    }
+    
+     [_busyLock unlock];
+}
+
+- (void)setFilteringMobileDataEnabled:(BOOL)filteringMobileDataEnabled {
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        _delayedFilteringMobileDataEnabled = @(filteringMobileDataEnabled);
+    } else {
+        dispatch_async(workingQueue, ^{
+            if (_busy) {
+                _delayedFilteringMobileDataEnabled = @(filteringMobileDataEnabled);
+            } else {
+                
+                [self internalSetFilteringMobileDataEnabled:filteringMobileDataEnabled];
             }
         });
     }
@@ -447,6 +504,38 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     return result;
 }
 
+- (void)restartTunnel {
+    _lastError = nil;
+    
+    [_busyLock lock];
+    
+    if (_busy) {
+        
+        _delayedSetEnabled = @(YES);
+    }
+    else{
+        dispatch_async(workingQueue, ^{
+            
+            if(_busy) {
+                
+                _delayedRestartTunnel = YES;
+            } else {
+                [self internalRestartTunnel];
+            }
+        });
+    }
+    
+    [_busyLock unlock];
+}
+
+- (void) internalRestartTunnel {
+    dispatch_async(workingQueue, ^{
+        _delayedRestartTunnel = NO;
+        _delayedSetEnabled = @(YES);
+        [self internalSetEnabled:NO force:YES];
+    });
+}
+
 - (void) addCustomProvider: (DnsProviderInfo*) provider {
     
     dispatch_sync(workingQueue, ^{
@@ -479,18 +568,16 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 #pragma mark Helper Methods (Private)
 
 //must be called on workingQueue
-- (void)internalSetEnabled:(BOOL)enabled{
+- (void)internalSetEnabled:(BOOL)enabled force:(BOOL)force{
     
-    if (enabled != _enabled) {
+    if (force || (enabled != _enabled)) {
         
         if (_activeDnsServer == nil) {
             // if we have initial state, when vpn configuration still was not loaded.
             _delayedSetEnabled = @(enabled);
             return;
         }
-        
-        
-        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:enabled];
+        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:enabled filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
         
         // If do not completely stop the tunnel in full mode, then other VPNs can not start
         if(!enabled && _tunnelMode == APVpnManagerTunnelModeFull) {
@@ -514,7 +601,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForRemoteServer:server tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO];
+        [self updateConfigurationForRemoteServer:server tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
     }
 }
 
@@ -525,7 +612,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:tunnelMode restartByReachability:_restartByReachability enabled:NO];
+        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
     }
 }
 
@@ -537,7 +624,29 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         if (_enabled) {
             _delayedSetEnabled = @(_enabled);
         }
-        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:restart enabled:NO];
+        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:restart enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
+    }
+}
+
+//must be called on workingQueue
+- (void)internalSetFilteringWifiDataEnabled:(BOOL)enabled {
+    
+    if (enabled != _filteringWifiDataEnabled) {
+        if (_enabled) {
+            _delayedSetEnabled = @(_enabled);
+        }
+        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:enabled];
+    }
+}
+
+//must be called on workingQueue
+- (void)internalSetFilteringMobileDataEnabled:(BOOL)enabled {
+    
+    if (enabled != _filteringMobileDataEnabled) {
+        if (_enabled) {
+            _delayedSetEnabled = @(_enabled);
+        }
+        [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:enabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
     }
 }
 
@@ -567,7 +676,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                                 DDLogError(@"(APVPNManager) Error. Manager removing failed with error: %@", error.localizedDescription);
                             }
                             else {
-                                DDLogInfo(@"(APVPNManager) Error. Manager successfully removed");
+                                DDLogInfo(@"(APVPNManager). Manager successfully removed");
                             }
                         }];
                     }
@@ -604,8 +713,11 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
 }
 
-- (void)updateConfigurationForRemoteServer:(DnsServerInfo *)remoteServer tunnelMode:(APVpnManagerTunnelMode) tunnelMode restartByReachability:(BOOL)restartByReachability enabled:(BOOL)enabled{
-    
+- (void)updateConfigurationForRemoteServer:(DnsServerInfo *)remoteServer tunnelMode:(APVpnManagerTunnelMode) tunnelMode restartByReachability:(BOOL)restartByReachability
+    enabled:(BOOL)enabled
+    filteringMobileDataEnabled:(BOOL)filteringMobileDataEnabled
+    filteringWifiDataEnabled:(BOOL)filteringWifiDataEnabled {
+
     [_busyLock lock];
     _busy = YES;
     [_busyLock unlock];
@@ -628,7 +740,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterRemoteDnsServer: remoteServerData,
                                        APVpnManagerParameterTunnelMode: @(tunnelMode),
-                                       APVpnManagerRestartByReachability : @(restartByReachability)
+                                       APVpnManagerRestartByReachability : @(restartByReachability),
+                                       APVpnManagerFilteringMobileDataEnabled: @(filteringMobileDataEnabled),
+                                       APVpnManagerFilteringWifiDataEnabled:@(filteringWifiDataEnabled)
                                        };
     
     if (_manager) {
@@ -662,7 +776,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                 [self setStatuses];
             });
             
-            DDLogInfo(@"(APVPNManager) Updating vpn conviguration failured: %@",
+            DDLogInfo(@"(APVPNManager) Updating vpn conviguration failed: %@",
                       (self.activeDnsServer.name ?: @"None"));
             
             [self sendNotificationForced:NO];
@@ -722,7 +836,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         NSData *remoteDnsServerData = protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
         
         // Getting current settings from configuration.
-        //If settings are incorrect, then we assign default values.
+        // If settings are incorrect, then we assign default values.
         DnsServerInfo *remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
         if (_activeDnsServer.serverId != remoteServer.serverId) {
             [self willChangeValueForKey:@"activeDnsServer"];
@@ -742,8 +856,15 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         
         _restartByReachability = protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?
         [protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] boolValue] : NO; // NO by default
+        
+        _filteringMobileDataEnabled = protocolConfiguration.providerConfiguration[APVpnManagerFilteringMobileDataEnabled] ? [protocolConfiguration.providerConfiguration[APVpnManagerFilteringMobileDataEnabled] boolValue] : YES; // YES by default
+        
+        _filteringWifiDataEnabled = protocolConfiguration.providerConfiguration[APVpnManagerFilteringWifiDataEnabled] ? [protocolConfiguration.providerConfiguration[APVpnManagerFilteringWifiDataEnabled] boolValue] : YES; // YES by default
+        
         // Save to user defaults
         [_resources.sharedDefaults setBool:_restartByReachability forKey:AEDefaultsRestartByReachability];
+        [_resources.sharedDefaults setBool:_filteringMobileDataEnabled forKey:AEDefaultsFilterMobileEnabled];
+        [_resources.sharedDefaults setBool:_filteringWifiDataEnabled forKey:AEDefaultsFilterWifiEnabled];
         
         NSString *connectionStatusReason = @"Unknown";
         
@@ -882,6 +1003,9 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             _delayedSetEnabled = nil;
             _delayedSetActiveDnsServer = nil;
             _delayedSetTunnelMode = nil;
+            _delayedFilteringMobileDataEnabled = nil;
+            _delayedFilteringWifiDataEnabled = nil;
+            _delayedRestartByReachability = nil;
         }
         
         int localValue = 0;
@@ -898,7 +1022,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             localValue = [_delayedSetEnabled boolValue];
             _delayedSetEnabled = nil;
             dispatch_async(workingQueue, ^{
-                [self internalSetEnabled:localValue];
+                [self internalSetEnabled:localValue force:NO];
             });
         }
         else if (_delayedSetTunnelMode) {
@@ -908,6 +1032,32 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             dispatch_async(workingQueue, ^{
                 [self internalSetTunnelMode:mode];
             });
+        }
+        else if (_delayedRestartTunnel) {
+            dispatch_async(workingQueue, ^{
+                [self restartTunnel];
+            });
+        }
+        else if (_delayedFilteringMobileDataEnabled) {
+            BOOL mobileEnabled = [_delayedFilteringMobileDataEnabled boolValue];
+            _delayedFilteringMobileDataEnabled = nil;
+            dispatch_async(workingQueue, ^{
+                 [self internalSetFilteringMobileDataEnabled:mobileEnabled];
+             });
+        }
+        else if (_delayedFilteringWifiDataEnabled) {
+            BOOL wifiEnabled = [_delayedFilteringWifiDataEnabled boolValue];
+            _delayedFilteringWifiDataEnabled = nil;
+            dispatch_async(workingQueue, ^{
+                 [self internalSetFilteringWifiDataEnabled:wifiEnabled];
+             });
+        }
+        else if (_delayedRestartByReachability) {
+            BOOL restartEnabled = [_delayedRestartByReachability boolValue];
+            _delayedRestartByReachability = nil;
+            dispatch_async(workingQueue, ^{
+                 [self internalSetRestartByReachability:restartEnabled];
+             });
         }
     }
     

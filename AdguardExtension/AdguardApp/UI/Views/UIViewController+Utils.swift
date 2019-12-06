@@ -19,37 +19,25 @@
 import Foundation
 
 extension UIViewController {
-    func showLoading() {
-        let alert = UIAlertController(title: nil, message: ACLocalizedString("loading_message", nil), preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
     
-    func removeLoading(completion: (()->Void)? ) {
-        DispatchQueue.main.async {
-            if let vc = self.presentedViewController, vc is UIAlertController {
-                vc.dismiss(animated: false, completion: completion)
-            }
-            else {
-                completion?()
-            }
-        }
-    }
-    
-    func setupBackButton() {
+    func setupBackButton(with action: Selector? = nil) {
         let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
         
-        navigationController?.navigationBar.backIndicatorImage = imgBackArrow
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBackArrow
-
-        navigationItem.leftItemsSupplementBackButton = true
+        let selector: Selector?
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: nil, action: nil)
+        if action == nil {
+            selector = #selector(self.standardAction(sender:))
+        } else {
+            selector = action
+        }
+                
+        let barButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: self, action: selector)
+        barButtonItem.image = imgBackArrow
+        
+        self.navigationItem.leftBarButtonItem = barButtonItem
+    }
+    
+    @objc private func standardAction(sender: UIBarButtonItem){
+        navigationController?.popViewController(animated: true)
     }
 }

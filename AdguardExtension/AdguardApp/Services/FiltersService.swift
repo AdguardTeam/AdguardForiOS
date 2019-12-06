@@ -137,6 +137,9 @@ protocol FiltersServiceProtocol {
      */
     func load(refresh: Bool, _ completion: @escaping () -> Void)
     
+    /** reser service*/
+    func reset()
+    
     func getGroup(_ groupId: Int)->Group?
     
     /** FiltersService sends updateNotification via NotificationCenter when filters changes */
@@ -149,7 +152,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     var groups = [Group]()
     
-    private var antibanner: AESAntibannerProtocol
+    private var antibanner: AESAntibannerProtocol?
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
     
@@ -171,7 +174,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         "da":"dk",
         "he":"il",
         "cs":"cz",
-        "sv":"se"
+        "sv":"se",
+        "ar":"sa",
     ]
     
     private let updateQueue = DispatchQueue(label: "filter_service_update")
@@ -210,8 +214,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibanner: AESAntibannerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
-        self.antibanner = antibanner
+    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         
@@ -232,6 +235,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             // enable/disable pro groups
             let proEnabled = configuration.proStatus
+        
+            // If we've turned off pro groups we don't need them to turn on while background fetches are checking license status
+            //https://github.com/AdguardTeam/AdguardForiOS/issues/1263
+            if proEnabled {
+                return
+            }
             
             for group in sSelf.groups {
                 if sSelf.proGroups.contains(group.groupId) {
@@ -240,6 +249,11 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
             
             sSelf.processUpdate()
+        }
+        
+        antibannerController.onReady { [weak self] (antibanner) in
+            self?.antibanner = antibanner
+            self?.load(refresh: false){}
         }
     }
     
@@ -252,11 +266,18 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     func load(refresh: Bool, _ completion: @escaping () -> Void){
         
         DispatchQueue(label: "load_filter_grops_queue").async { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let sSelf = self, let antibanner = self?.antibanner else { return }
             
-            guard   let metadata = strongSelf.antibanner.metadata(forSubscribe: refresh),
-                let i18n = strongSelf.antibanner.i18n(forSubscribe: refresh),
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
+            }
+            
+            guard let metadata = antibanner.metadata(forSubscribe: refresh),
+                let i18n = antibanner.i18n(forSubscribe: refresh),
                 var filters = metadata.filters else {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                    }
                     completion()
                     return
             }
@@ -267,9 +288,9 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.filterId != 208
             }
             
-            let installedFilters = strongSelf.antibanner.filters() 
+            let installedFilters = antibanner.filters()
             
-            var groups = strongSelf.antibanner.groups()
+            var groups = antibanner.groups()
             
             // set localized name for custom group. We don't store it in database
             if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
@@ -309,34 +330,43 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             disabledFilters.forEach({$0.enabled = false})
                         
-            let groupInfos = strongSelf.obtainGroupsFromMetadatas(filterMetas: filters, groupMetas: groups, i18n: i18n)
+            let groupInfos = sSelf.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
             
             // set real enabled statuses
             groupInfos?.forEach({ (group) in
-                guard let storedGroup = (strongSelf.groups.first { $0.groupId == group.groupId }) else { return }
+                guard let storedGroup = (sSelf.groups.first { $0.groupId == group.groupId }) else { return }
                 group.enabled = storedGroup.enabled
             })
             
-            if strongSelf.enabledFilters.count == 0 {
+            if sSelf.enabledFilters.count == 0 {
                 for filterMeta in installedFilters {
-                    strongSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
+                    sSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
                 }
             }
             
             groupInfos?.forEach({ (group) in
                 for filter in group.filters {
-                    filter.enabled = strongSelf.enabledFilters[filter.filterId] ?? false
+                    filter.enabled = sSelf.enabledFilters[filter.filterId] ?? false
                 }
-                strongSelf.updateGroupSubtitle(group)
+                sSelf.updateGroupSubtitle(group)
             })
             
             DispatchQueue.main.async {
-                strongSelf.groups = groupInfos ?? [Group]()
-                strongSelf.filterMetas = filters
-                strongSelf.notifyChange()
+                sSelf.groups = groupInfos ?? [Group]()
+                sSelf.filterMetas = filters
+                sSelf.notifyChange()
                 completion()
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                }
             }
         }
+    }
+    
+    func reset() {
+        groups = [Group]()
+        filterMetas = [ASDFilterMetadata]()
+        enabledFilters = [Int: Bool]()
     }
     
     func setGroup(_ groupId: Int, enabled: Bool) {
@@ -367,7 +397,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-
+        
+        guard let antibanner = antibanner else { return }
         filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
         for group in groups {
@@ -390,7 +421,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             updateGroupSubtitle(group)
             notifyChange()
         }
-       
+        
         antibanner.subscribeCustomFilter(from: filter) {
             [weak self] in
             self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
@@ -404,9 +435,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     }
     
     func deleteCustomFilterWithId(_ filterId: NSNumber) {
-        
-        let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
-        
+        guard let antibanner = self.antibanner else { return }
+            
         antibanner.unsubscribeFilter(filterId as NSNumber)
         
         for group in groups {
@@ -417,10 +447,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             if group.enabled && group.filters.count == 0 {
                 setGroup(group.groupId, enabled: false)
             }
-            
             notifyChange()
-            
-            UIApplication.shared.endBackgroundTask(backgroundTaskID)
         }
     }
     
@@ -431,10 +458,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     // MARK: - private methods
     
     private func getDiff()->(filters: [Int: Bool], groups: [Int: Bool]) {
+        
+        guard let antibanner = self.antibanner else { return ([:], [:])}
         var filterIds = [Int: Bool]()
         var groupIds = [Int: Bool]()
         
-        let groupMetas = self.antibanner.groups()
+        let groupMetas = antibanner.groups()
         
         var storedGroupStatuses = [Int: Bool]()
         groupMetas.forEach { storedGroupStatuses[$0.groupId.intValue] = $0.enabled.boolValue }
@@ -467,7 +496,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         return (filterIds, groupIds)
     }
     
-    private func obtainGroupsFromMetadatas(filterMetas: [ASDFilterMetadata], groupMetas: [ASDFilterGroup], i18n:ABECFilterClientLocalization) -> [Group]?{
+    private func obtainGroupsFromMetadatas(antibanner: AESAntibannerProtocol,filterMetas: [ASDFilterMetadata], groupMetas: [ASDFilterGroup], i18n:ABECFilterClientLocalization) -> [Group]?{
         
         if filterMetas.count == 0 || groupMetas.count == 0 {return nil}
         
@@ -578,7 +607,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.subtitle = String(format: ACLocalizedString("filter_group_filters_count_format", nil), enabledCount, group.filters.count)
         }
         else {
-            group.subtitle = ACLocalizedString("filters_group_disabled", nil)
+            group.subtitle = ACLocalizedString("disabled", nil)
         }
     }
     
@@ -635,10 +664,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 DDLogInfo("Process update filter: \(filterId) enabled: \(enabled)")
             })
             
-            diff.groups.forEach({ (groupId: Int, enabled: Bool) in
-                sSelf.antibanner.setFiltersGroup(groupId as NSNumber, enabled: enabled)
+            diff.groups.forEach{ (groupId: Int, enabled: Bool) in
+                sSelf.antibanner?.setFiltersGroup(groupId as NSNumber, enabled: enabled)
                 DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
-            })
+            }
             
             sSelf.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
                 sSelf.endUpdate(taskId: backgroundTaskID)
@@ -674,13 +703,14 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     private func antibannerSetFilter(filterId: Int, enabled: Bool) {
         
+        guard let antibanner = self.antibanner else { return }
         if !antibanner.checkIfFilterInstalled(filterId as NSNumber) {
             guard let filterMeta = (filterMetas.first { $0.filterId.intValue == filterId }) else {
                 DDLogInfo("Failed to find meta for filter with filterId = \(filterId)")
                 return
             }
             filterMeta.enabled = true
-            antibanner.subscribeFilters([filterMeta], jobController: nil)
+            antibanner.subscribeFilters([filterMeta])
         } else {
             DDLogInfo("Filter with filterId = \(filterId) is not installed")
         }

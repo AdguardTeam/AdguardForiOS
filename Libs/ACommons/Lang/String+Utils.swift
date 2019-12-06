@@ -88,4 +88,8 @@ extension String {
         let validCharsSet = CharacterSet.urlPathAllowed
         return charSet.isSubset(of: validCharsSet) && self.count > 0
     }
+    
+    static func localizedString(_ key: String)->String {
+        return ACLocalizedString(key, nil)
+    }
 }

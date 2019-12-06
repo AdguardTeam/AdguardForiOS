@@ -22,9 +22,10 @@ import UIKit
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
     @IBOutlet weak var details: ThemableLabel!
+    @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
-class DnsLogController: UITableViewController, UISearchBarDelegate {
+class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol {
     //MARK: - IB Outlets
     
     @IBOutlet var searchView: UIView!
@@ -32,19 +33,22 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
-    var selectedRecord: LogRecord?
+    private var selectedRecord: LogRecord?
+    private var notificationToken: NotificationToken?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        model.delegate = self
+        
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -67,17 +71,24 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
         
-        var detailsString = String(format: "%@, type: %@", record.time!, record.type!)
+        // Change to category description
+        var detailsString = String(format: "type: %@", record.type!)
+        let timeString = record.time ?? ""
+        
         if record.answer == nil || record.answer == "" {
             detailsString += ", NXDOMAIN"
         }
 
-        cell.domain.text = record.name
+        cell.domain.text = record.domain
         cell.details.text = detailsString
+        cell.timeLabel.text = timeString
         
-        theme.setupLogTableCell(cell, blocked: isBlocked(record))
+        let type = isBlocked(record)
+        setupRecordCell(cell: cell, type: type)
+        
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
+        theme.setupLabel(cell.timeLabel)
 
         return cell
     }
@@ -88,20 +99,32 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRecord = model.records[indexPath.row]
-        performSegue(withIdentifier: "requestDetailsSegue", sender: self)
+        performSegue(withIdentifier: "showDnsContainer", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as? DnsRequestDetailsController
+        let controller = segue.destination as? DnsContainerController
         controller?.logRecord = selectedRecord
     }
     
     // MARK: - Actions
     
+    @IBAction func clearAction(_ sender: UIBarButtonItem) {
+        model.clearRecords()
+    }
+    
     // MARK: - searchbar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         model.searchString = searchText
+    }
+    
+    // MARK: - dns requests delegate
+    
+    func requestsCleared() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - private methods
@@ -120,18 +143,55 @@ class DnsLogController: UITableViewController, UISearchBarDelegate {
         model.obtainRecords()
     }
     
-    private func isBlocked(_ logRecord: LogRecord) -> Bool {
+    private func isBlocked(_ logRecord: LogRecord) -> BlockedRecordType {
         if logRecord.answer == nil || logRecord.answer == "" {
             // Mark all NXDOMAIN responses as blocked
-            return true
+            return .blocked
         }
 
         if logRecord.answer!.contains("0.0.0.0") ||
             logRecord.answer!.contains("127.0.0.1") ||
             logRecord.answer!.contains("[::]")  {
-            return true
+            return .blocked
         }
 
-        return false
+        if logRecord.isTracked ?? false {
+            return .tracked
+        }
+        
+        return .normal
+    }
+    
+    private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType){
+        if type == .normal {
+            theme.setupTableCell(cell)
+            return
+        }
+        var logSelectedCellColor: UIColor = .clear
+        var logBlockedCellColor: UIColor = .clear
+        
+        switch type {
+        case .blocked:
+            logSelectedCellColor = UIColor(hexString: "#4DDF3812")
+            logBlockedCellColor = UIColor(hexString: "#33DF3812")
+        case .tracked:
+            logSelectedCellColor = UIColor(hexString: "#4Df5a623")
+            logBlockedCellColor = UIColor(hexString: "#33f5a623")
+        case .whitelisted:
+            logSelectedCellColor = UIColor(hexString: "#4D67b279")
+            logBlockedCellColor = UIColor(hexString: "#3367b279")
+        default:
+            return
+        }
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = logSelectedCellColor
+        cell.selectedBackgroundView = bgColorView
+        cell.contentView.backgroundColor = .clear
+        cell.backgroundColor = logBlockedCellColor
+    }
+    
+    private enum BlockedRecordType{
+        case blocked, whitelisted, tracked, normal
     }
 }

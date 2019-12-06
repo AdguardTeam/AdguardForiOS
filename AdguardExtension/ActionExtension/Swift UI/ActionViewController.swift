@@ -65,17 +65,22 @@ class ActionViewController: UIViewController {
     private let safariService: SafariService
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
-    private let aeService: AEServiceProtocol
+    private let antibannerController: AntibannerControllerProtocol
     private let support: AESSupport
     private var theme: ThemeServiceProtocol?
+    private let asDataBase = ASDatabase()
+    
+    private var notificationToken1: NotificationToken?
+    private var notificationToken2: NotificationToken?
     
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
-        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService)
-        aeService = AEService(contentBlocker: contentBlockerService, resources: sharedResources, networking: networking)
-        support = AESSupport(resources: sharedResources, safariSevice: safariService, aeService: aeService)
+        let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
+        self.antibannerController = AntibannerController(antibanner: antibanner)
+        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
+        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         
         super.init(coder: coder)
     }
@@ -126,7 +131,7 @@ class ActionViewController: UIViewController {
                             errorMessage = error?.localizedDescription ?? ""
                         }
                     } else {
-                        sSelf.aeService.onReady {
+                        sSelf.antibannerController.onReady { (antibanner) in
                             // Add observers for application notifications
                             sSelf.addObservers()
                             
@@ -164,6 +169,7 @@ class ActionViewController: UIViewController {
             mainVC.domainEnabled = enabled
             mainVC.injectScriptSupported = injectScriptSupported
             mainVC.enableChangeDomainFilteringStatus = true
+            mainVC.url = url
         }
     }
     
@@ -210,10 +216,10 @@ class ActionViewController: UIViewController {
     }
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) {(notification) in
+        notificationToken1 = NotificationCenter.default.observe(name: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) {(notification) in
             AESharedResources.synchronizeSharedDefaults()
         }
-        NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: nil) {(notification) in
+        notificationToken2 = NotificationCenter.default.observe(name: UIApplication.willTerminateNotification, object: nil, queue: nil) {(notification) in
             AESharedResources.synchronizeSharedDefaults()
         }
     }
@@ -285,9 +291,9 @@ class ActionViewController: UIViewController {
         
         // Init database
         let dbUrl = AESharedResources.sharedResuorcesURL().appendingPathComponent(aeProductionDb)
-        ASDatabase.singleton()?.initDb(with: dbUrl, upgradeDefaultDb: false)
+        asDataBase.initDb(with: dbUrl, upgradeDefaultDb: false)
         
-        if ASDatabase.singleton()?.error != nil {
+        if asDataBase.error != nil {
             DDLogError("(ActionViewController) production DB was not created before.")
             let messageFormat = ACLocalizedString("action_extension_no_configuration_message_format", nil)
             let formattedString = String(format: messageFormat, Constants.aeProductName(), Constants.aeProductName())
@@ -298,19 +304,18 @@ class ActionViewController: UIViewController {
         DispatchQueue.main.async {[weak self] in
             guard let sSelf = self else { return }
             //------------ Checking DB status -----------------------------
-            let dbService = ASDatabase.singleton()
-            if dbService?.error != nil {
+            if sSelf.asDataBase.error != nil {
                 DDLogError("(ActionViewController) production DB was not created before.")
-            } else if !(dbService?.ready ?? false) {
-                sSelf.dbObserver = dbService?.observe(\.ready, options: .new, changeHandler: { (db, change) in
-                    if dbService?.ready ?? false {
-                        sSelf.aeService.start()
+            } else if !sSelf.asDataBase.ready {
+                sSelf.dbObserver = sSelf.asDataBase.observe(\.ready, options: .new, changeHandler: { (db, change) in
+                    if sSelf.asDataBase.ready{
+                        sSelf.antibannerController.start()
                     }
                 })
             }
             //--------------------- Start Services ---------------------------
             else {
-                sSelf.aeService.start()
+                sSelf.antibannerController.start()
             }
         }
         return nil

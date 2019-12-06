@@ -20,7 +20,6 @@
 #import "APSharedResources.h"
 
 
-
 @class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService;
 
 /////////////////////////////////////////////////////////////////////
@@ -104,6 +103,16 @@ extern NSString* __nonnull APVpnChangedNotification;
 @property (readonly) BOOL vpnInstalled;
 
 /**
+this flag indicates that filtering of Wi-Fi data is on/off
+*/
+@property BOOL filteringWifiDataEnabled;
+
+/**
+this flag indicates that filtering of mobile data is on/off
+*/
+@property BOOL filteringMobileDataEnabled;
+
+/**
  Adds custom (editable) DNS server.
  
  @param server Server instance. It must be editable.
@@ -128,6 +137,11 @@ extern NSString* __nonnull APVpnChangedNotification;
  */
 
 - (BOOL)resetCustomDnsProvider:(nonnull DnsProviderInfo*)provider;
+
+/**
+ restarts tunnel& Automaticaly enable it if needed
+ */
+- (void)restartTunnel;
 
 /**
  Clears DNS Activity Log.
@@ -163,6 +177,9 @@ extern NSString* __nonnull APVpnChangedNotification;
 - (BOOL) isCustomServerActive;
 
 - (nonnull DnsServerInfo*) defaultServer;
+
+/**remove vpn configuration from system settings*/
+- (void)removeVpnConfiguration;
 
 @end
 

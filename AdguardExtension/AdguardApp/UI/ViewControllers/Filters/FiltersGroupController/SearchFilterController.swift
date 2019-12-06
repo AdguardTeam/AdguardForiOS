@@ -36,12 +36,14 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     private var selectedGroup: Int = 0
     private var selectedFilter: Int = 0
     
+    private var notificationToken: NotificationToken?
+    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
                 self?.updateTheme()
             }
         
@@ -174,6 +176,12 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         viewModel?.currentGroup = nil
         tableView.reloadData()
         searchBar.becomeFirstResponder()
+    }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
     
     // MARK: - Actions

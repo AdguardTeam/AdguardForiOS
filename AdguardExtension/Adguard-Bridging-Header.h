@@ -5,11 +5,9 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "AEUIPlayerViewController.h"
-#import "AEService.h"
 #import "AESharedResources.h"
 #import "ABECRequest.h"
 #import "ACNNetworking.h"
-#import "AEService.h"
 #import "ACSSystemUtils.h"
 #import "AEInvertedWhitelistDomainsObject.h"
 #import "AEInvertedWhitelistDomainsObject.h"
@@ -31,3 +29,5 @@
 #import "ASDatabase.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import "AESProductSchemaManager.h"
+#import <AGDnsProxy/AGDnsProxy.h>

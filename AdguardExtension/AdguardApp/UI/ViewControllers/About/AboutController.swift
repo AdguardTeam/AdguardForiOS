@@ -28,6 +28,8 @@ class AboutController : UIViewController {
     @IBOutlet weak var logoImage: ThemeableImageView!
     @IBOutlet var loginButton: UIBarButtonItem!
     
+    var notificationToken: NotificationToken?
+
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     
@@ -38,7 +40,8 @@ class AboutController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {
+            [weak self] (notification) in
             self?.updateTheme()
         }
         

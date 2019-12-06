@@ -35,6 +35,8 @@ int main(int argc, const char * argv[])
     
     @autoreleasepool {
         
+        ASDatabase *asDataBase = [ASDatabase new];
+        
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -80,7 +82,7 @@ int main(int argc, const char * argv[])
                 
                 if ([db open]) {
                     
-                    [[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]];
+                    [asDataBase createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]];
                     FMResultSet *result = [db executeQuery:@"select schema_version from version"];
                     if ([result next])
                         newVersion = [result stringForColumnIndex:0];
@@ -106,7 +108,7 @@ int main(int argc, const char * argv[])
                 exit(1);
             }
             
-            if ([[ASDatabase singleton] createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
+            if ([asDataBase createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
 
 #pragma mark *** Get filters data from backend and insert to DB
                 ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] loadMetadataWithTimeoutInterval:nil];
@@ -236,7 +238,7 @@ int main(int argc, const char * argv[])
                 }];
                 
                 NSString *tempDbPath = [schemes[1] path];
-                if (![[ASDatabase singleton] createDefaultDB:tempDb scriptPath:tempDbPath]){
+                if (![asDataBase createDefaultDB:tempDb scriptPath:tempDbPath]){
                     
                     NSLog(@"Error checking of update sequence for DB: Can't create tables in temporary db.");
                     [tempDb close];
@@ -254,7 +256,7 @@ int main(int argc, const char * argv[])
                     exit(1);
                 }
                 
-                if (![[ASDatabase singleton] updateDB:tempDb fromVersion:version toVersion:defaultVersion resourcePath:productPath]){
+                if (![asDataBase updateDB:tempDb fromVersion:version toVersion:defaultVersion resourcePath:productPath]){
                     
                     [tempDb close];
                     NSLog(@"Error checking of update sequence for DB: Update sequence is invalid.");

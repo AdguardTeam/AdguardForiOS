@@ -52,6 +52,9 @@ protocol FiltersAndGroupsViewModelProtocol: class {
     /* loads filters list */
     func load(_ completion: @escaping ()->Void)
     
+    /* refresh filters list*/
+    func refresh(_ complition: @escaping()->Void)
+    
     /* sets groups change observer */
     func bind(groupChanged: @escaping (_ index: Int)->Void)
     
@@ -102,6 +105,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     private var callbacksByKey: [ String : ()->() ] = [:]
     var searchChangedCallback: (() -> Void)?
     
+    var notificationToken: NotificationToken?
+    
     // MARK: - initializers
     
     init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService) {
@@ -110,7 +115,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         super.init()
         
         updateAllGroups()
-        NotificationCenter.default.addObserver(forName: self.filtersService.updateNotification, object: nil, queue: nil) {
+        notificationToken = NotificationCenter.default.observe(name: self.filtersService.updateNotification, object: nil, queue: nil) {
             [weak self] (notification) in
             self?.groupsObserver?(0)
         }
@@ -221,6 +226,14 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
 
     func load(_ completion: @escaping () -> Void) {
         filtersService.load(refresh: false, completion)
+    }
+    
+    func refresh(_ complition: @escaping () -> Void) {
+        filtersService.load(refresh: true) { [weak self] in
+            self?.updateAllGroups()
+            self?.updateCurrentGroup()
+            complition()
+        }
     }
 
     func bind(groupChanged: @escaping (Int) -> Void) {

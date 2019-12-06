@@ -22,75 +22,228 @@ class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - public fields
     var logRecord: LogRecord?
+    var shadowView: BottomShadowView? = nil
+    var containerController: DnsContainerController? = nil
     
     //MARK: - IB Outlets
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
+    @IBOutlet weak var categoryLabel: ThemableLabel!
+    @IBOutlet weak var statusLabel: ThemableLabel!
+    @IBOutlet weak var nameLabel: ThemableLabel!
     @IBOutlet weak var timeLabel: ThemableLabel!
+    @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var elapsedLabel: ThemableLabel!
     @IBOutlet weak var typeLabel: ThemableLabel!
     @IBOutlet weak var domainLabel: ThemableLabel!
     @IBOutlet weak var serverLabel: ThemableLabel!
     @IBOutlet weak var addressLabel: ThemableLabel!
     @IBOutlet weak var responsesLabel: ThemableLabel!
+    @IBOutlet weak var bytesSentLabel: ThemableLabel!
+    @IBOutlet weak var bytesReceivedLabel: ThemableLabel!
     
-    // MARK: - constants
+    // MARK: - "Copied labels"
+    @IBOutlet weak var categoryCopied: UIButton!
+    @IBOutlet weak var statusCopied: UIButton!
+    @IBOutlet weak var nameCopied: UIButton!
+    @IBOutlet weak var companyCopied: UIButton!
+    @IBOutlet weak var timeCopied: UIButton!
+    @IBOutlet weak var domainCopied: UIButton!
+    @IBOutlet weak var typeCopied: UIButton!
+    @IBOutlet weak var serverCopied: UIButton!
+    @IBOutlet weak var elapsedCopied: UIButton!
+    @IBOutlet weak var sizeCopied: UIButton!
+    @IBOutlet weak var upstreamCopied: UIButton!
+    @IBOutlet weak var answerCopied: UIButton!
     
-    private let responsesRow = 6
+    // MARK: - Title labels
+    @IBOutlet weak var categoryTitleLabel: ThemableLabel!
+    @IBOutlet weak var statusTitleLabel: ThemableLabel!
+    @IBOutlet weak var nameTitleLabel: ThemableLabel!
+    @IBOutlet weak var companyTitleLabel: ThemableLabel!
+    @IBOutlet weak var timeTitleLabel: ThemableLabel!
+    @IBOutlet weak var domainTitleLabel: ThemableLabel!
+    @IBOutlet weak var typeTitleLabel: ThemableLabel!
+    @IBOutlet weak var serverTitleLabel: ThemableLabel!
+    @IBOutlet weak var elapsedTitleLabel: ThemableLabel!
+    @IBOutlet weak var sizeTitleLabel: ThemableLabel!
+    @IBOutlet weak var upstreamTitleLabel: ThemableLabel!
+    @IBOutlet weak var answerTitleLabel: ThemableLabel!
+    
+    private var notificationToken: NotificationToken?
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    
+    // MARK: - private properties
+    
+    private var animator = UIViewPropertyAnimator()
+    
+    private var labelToHide = UILabel()
+    private var copiedLabel = UIButton()
+    
+    private let webPage = "https://whotracks.me"
+    
+    private let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .alert)
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        createAnimator()
+        createAlert()
+        
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
         timeLabel.text = logRecord?.time
-        elapsedLabel.text = String(format: "%d ms", logRecord!.elapsed)
+        elapsedLabel.text = String(format: "%d ms", logRecord?.elapsed ?? 0)
         typeLabel.text = logRecord?.type
-        domainLabel.text = logRecord?.name
+        domainLabel.text = logRecord?.domain
         serverLabel.text = logRecord?.serverName
         addressLabel.text = logRecord?.upstreamAddr
         responsesLabel.text = logRecord?.answer
-
+        categoryLabel.text = logRecord?.category
+        statusLabel.text = logRecord?.status.status()
+        statusLabel.textColor = logRecord?.status.color()
+        
+        nameLabel.text = logRecord?.name
+        companyLabel.text = logRecord?.company
+        bytesSentLabel.text = String(format: "%d B", logRecord?.bytesSent ?? 0)
+        bytesReceivedLabel.text = String(format: "%d B", logRecord?.bytesReceived ?? 0)
+        
         updateTheme()
     }
+    
+    override func viewDidLayoutSubviews() {
+        guard let container = containerController else { return }
+        if container.containerView.frame.height <= tableView.contentSize.height {
+            shadowView?.animateAppearingOfShadow()
+        }
+        containerController = nil
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func whoTracksMeInfo(_ sender: UIButton) {
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Table view delegate methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if indexPath.row == LogCells.category.rawValue {
+            if logRecord?.category == nil{
+                cell.isHidden = true
+            }
+        } else if indexPath.row == LogCells.name.rawValue {
+            if logRecord?.name == nil {
+                cell.isHidden = true
+            }
+        }
+
         theme.setupTableCell(cell)
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == responsesRow {
-            // copy responses to pasteboard
-            if let responsesString = logRecord?.answer {
-                UIPasteboard.general.string = responsesString
-                ToastView.presentinController(self, message: ACLocalizedString("text_copied", nil))
-                tableView.deselectRow(at: indexPath, animated: true)
-            }
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == responsesRow {
-            return UITableView.automaticDimension
+        
+        let defaultHeight = super.tableView(tableView, heightForRowAt: indexPath)
+        
+        guard let cellType = LogCells(rawValue: indexPath.row) else {
+            return defaultHeight
         }
         
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        if cellType == .category {
+            if logRecord?.category == nil{
+                return 0.0
+            }
+        } else if cellType == .name {
+            if logRecord?.name == nil {
+                return 0.0
+            }
+        }
+        
+        if !configuration.developerMode && !userCells.contains(cellType) {
+            return 0.0
+        }
+        
+        return defaultHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var copiedString = ""
+        let logCell = LogCells(rawValue: indexPath.row)
+        
+        switch logCell {
+        case .category:
+            copiedString = logRecord?.category ?? ""
+        case .status:
+            copiedString = logRecord?.status.status() ?? ""
+        case .name:
+            copiedString = logRecord?.name ?? ""
+        case .company:
+            copiedString = logRecord?.company ?? ""
+        case .time:
+            copiedString = logRecord?.time ?? ""
+        case .domain:
+            copiedString = logRecord?.domain ?? ""
+        case .type:
+            copiedString = logRecord?.type ?? ""
+        case .server:
+            copiedString = logRecord?.serverName ?? ""
+        case .elapsed:
+            copiedString = String(format: "%d ms", logRecord?.elapsed ?? 0)
+        case .size:
+            copiedString = String(format: "%d B / %d B", logRecord?.bytesReceived ?? 0, logRecord?.bytesSent ?? 0)
+        case .upstream:
+            copiedString = logRecord?.upstreamAddr ?? ""
+        case .answer:
+            copiedString = logRecord?.answer ?? ""
+        case .none:
+            copiedString = ""
+        }
+        
+        // copy responses to pasteboard
+        UIPasteboard.general.string = copiedString
+        if let row = logCell{
+            showCopiedLabel(row: row)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        if maximumOffset - contentOffset < 5.0 {
+            shadowView?.animateHidingOfShadow()
+        } else {
+            shadowView?.animateAppearingOfShadow()
+        }
     }
     
     // MARK: - private methods
+    
+    private enum LogCells: Int{
+        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer
+    }
+    
+    private let userCells:[LogCells] = [.name, .status, .time, .domain]
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
@@ -100,5 +253,85 @@ class DnsRequestDetailsController : UITableViewController {
             sSelf.tableView.reloadData()
         }
         theme.setupLabels(themableLabels)
+    }
+    
+    private func showCopiedLabel(row: LogCells){
+        
+        animator.stopAnimation(true)
+        
+        createAnimator()
+        
+        labelToHide.alpha = 1.0
+        copiedLabel.alpha = 0.0
+        
+        switch row {
+        case .category:
+            labelToHide = categoryTitleLabel
+            copiedLabel = categoryCopied
+        case .status:
+            labelToHide = statusTitleLabel
+            copiedLabel = statusCopied
+        case .name:
+            labelToHide = nameTitleLabel
+            copiedLabel = nameCopied
+        case .company:
+            labelToHide = companyTitleLabel
+            copiedLabel = companyCopied
+        case .time:
+            labelToHide = timeTitleLabel
+            copiedLabel = timeCopied
+        case .domain:
+            labelToHide = domainTitleLabel
+            copiedLabel = domainCopied
+        case .type:
+            labelToHide = typeTitleLabel
+            copiedLabel = typeCopied
+        case .server:
+            labelToHide = serverTitleLabel
+            copiedLabel = serverCopied
+        case .elapsed:
+            labelToHide = elapsedTitleLabel
+            copiedLabel = elapsedCopied
+        case .size:
+            labelToHide = sizeTitleLabel
+            copiedLabel = sizeCopied
+        case .upstream:
+            labelToHide = upstreamTitleLabel
+            copiedLabel = upstreamCopied
+        case .answer:
+            labelToHide = answerTitleLabel
+            copiedLabel = answerCopied
+        }
+        
+        animator.startAnimation()
+    }
+    
+    private func createAnimator(){
+        animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear, animations: {[weak self] in
+            self?.labelToHide.alpha = 0.0
+            self?.copiedLabel.alpha = 1.0
+        })
+        
+        animator.addCompletion {[weak self] (position) in
+            if position == .end {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    UIView.animate(withDuration: 0.5) {
+                        self?.labelToHide.alpha = 1.0
+                        self?.copiedLabel.alpha = 0.0
+                    }
+                }
+            }
+        }
+    }
+    
+    private func createAlert() {
+        alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
+            guard let sSelf = self else { return }
+            guard let url = URL(string: sSelf.webPage) else { return }
+            
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
     }
 }

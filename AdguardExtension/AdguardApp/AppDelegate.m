@@ -22,8 +22,6 @@
 #import "ACommons/ACNetwork.h"
 #import "ADomain/ADomain.h"
 #import "AppDelegate.h"
-#import "ASDatabase/ASDatabase.h"
-#import "AEService.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 
@@ -70,7 +68,8 @@ typedef enum : NSUInteger {
     AEDownloadsCompletionBlock _downloadCompletion;
     NSArray *_updatedFilters;
     AESharedResources *_resources;
-    AEService * _aeService;
+    id<AntibannerControllerProtocol> _antibannerController;
+    id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
     PurchaseService* _purchaseService;
     
@@ -92,7 +91,15 @@ typedef enum : NSUInteger {
 
 - (instancetype)init {
     self = [super init];
-    helper = [AppDelegateHelper new];
+    
+    [StartupService start];
+    _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
+    _antibannerController = [ServiceLocator.shared getSetviceWithTypeName:@"AntibannerControllerProtocol"];
+    _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
+    _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
+    _antibanner = [ServiceLocator.shared getSetviceWithTypeName:@"AESAntibannerProtocol"];
+    
+    helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
     return self;
 }
@@ -102,12 +109,6 @@ typedef enum : NSUInteger {
     @autoreleasepool {
         
         //------------- Preparing for start application. Stage 1. -----------------
-        
-        [StartupService start];
-        _resources = [ServiceLocator.shared getSetviceWithTypeName:@"AESharedResourcesProtocol"];
-        _aeService = [ServiceLocator.shared getSetviceWithTypeName:@"AEServiceProtocol"];
-        _contentBlockerService = [ServiceLocator.shared getSetviceWithTypeName:@"ContentBlockerService"];
-        _purchaseService = [ServiceLocator.shared getSetviceWithTypeName:@"PurchaseServiceProtocol"];
         
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
@@ -127,31 +128,11 @@ typedef enum : NSUInteger {
         _activateWithOpenUrl = NO;
         self.userDefaultsInitialized = NO;
         
-        // Init database
-        [[ASDatabase singleton] initDbWithURL:[[AESharedResources sharedResuorcesURL] URLByAppendingPathComponent:AE_PRODUCTION_DB] upgradeDefaultDb:YES];
-        
         //------------ Interface Tuning -----------------------------------
         self.window.backgroundColor = [UIColor whiteColor];
         
         if (application.applicationState != UIApplicationStateBackground) {
-            [_aeService onReady:^{
-                [_purchaseService checkPremiumStatusChanged];
-            }];
-        }
-        
-        if ([_aeService firstRunInProgress]) {
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager install];
-                
-                [_purchaseService checkLicenseStatus];
-            }];
-        }
-        else{
-            
-            [_aeService onReady:^{
-                [AESProductSchemaManager upgradeWithAntibanner: _aeService.antibanner];
-            }];
+            [_purchaseService checkPremiumStatusChanged];
         }
         
         return succeeded;
@@ -175,36 +156,8 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
     
-    //------------ Checking DB status -----------------------------
-    ASDatabase *dbService = [ASDatabase singleton];
-    if (dbService.error) {
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB Error. Panic!");
-        //        [self dbFailure];
-    }
-    else if (!dbService.ready){
-        
-        DDLogWarn(@"(AppDelegate) Stage 2. DB not ready.");
-        [dbService addObserver:self forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
-    }
-    //--------------------- Start Services ---------------------------
-    else{
-        
-        [_aeService start];
-        DDLogInfo(@"(AppDelegate) Stage 2. Main service started.");
-    }
-    
-    //--------------------- Processing User Notification Action ---------
-    //        NSUserNotification *userNotification =
-    //        aNotification.userInfo[NSApplicationLaunchUserNotificationKey];
-    //        if (userNotification) {
-    //            [self userNotificationCenter:nil
-    //                 didActivateNotification:userNotification];
-    //        }
-    
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
-    DDLogInfo(@"(AppDelegate) Stage 2 completed.");
     
     return YES;
 }
@@ -245,7 +198,7 @@ typedef enum : NSUInteger {
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     DDLogInfo(@"(AppDelegate) applicationWillEnterForeground.");
-    [_aeService.antibanner applicationWillEnterForeground];
+    [_antibanner applicationWillEnterForeground];
     
     ConfigurationService* configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
     [configuration checkContentBlockerEnabled];
@@ -261,9 +214,8 @@ typedef enum : NSUInteger {
     // If theme mode is System Default gets current style
     [self setAppInterfaceStyle];
     
-    [_aeService onReady:^{
-        
-        [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+    [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
+        [antibanner repairUpdateStateWithCompletionBlock:^{
             
             if (_activateWithOpenUrl) {
                 _activateWithOpenUrl = NO;
@@ -271,7 +223,7 @@ typedef enum : NSUInteger {
                 return;
             }
             
-            if (_aeService.antibanner.updatesRightNow) {
+            if (antibanner.updatesRightNow) {
                 DDLogInfo(@"(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.");
                 return;
             }
@@ -315,11 +267,11 @@ typedef enum : NSUInteger {
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
-        [_aeService onReady:^{
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             
-            [[_aeService antibanner] repairUpdateStateWithCompletionBlock:^{
+            [antibanner repairUpdateStateWithCompletionBlock:^{
                 
-                if (_aeService.antibanner.updatesRightNow) {
+                if (antibanner.updatesRightNow) {
                     DDLogInfo(@"(AppDelegate) Update process did not start because it is performed right now.");
                     return;
                 }
@@ -349,10 +301,9 @@ typedef enum : NSUInteger {
 
     if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
         
-        [_aeService onReady:^{
-
+        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             _downloadCompletion = completionHandler;
-            [[_aeService antibanner] repairUpdateStateForBackground];
+            [antibanner repairUpdateStateForBackground];
         }];
     }
     else{
@@ -366,108 +317,8 @@ typedef enum : NSUInteger {
     DDLogError(@"(AppDelegate) application Open URL.");
     
     _activateWithOpenUrl = YES;
- 
-    /*
-     When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
-     https://github.com/AdguardTeam/AdguardForiOS/issues/1135
-    */
-    UIStoryboard *launchScreenStoryboard = [UIStoryboard storyboardWithName:@"LaunchScreen" bundle:[NSBundle mainBundle]];
-    UIViewController* launchScreenController = [launchScreenStoryboard instantiateViewControllerWithIdentifier:@"LaunchScreen"];
     
-    NSString *command = url.host;
-    
-    UINavigationController *nav = [self getNavigationController];
-    
-    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-        self.window.rootViewController = launchScreenController;
-    }
-
-    if ([url.scheme isEqualToString:AE_URLSCHEME]) {
-        
-        [_aeService onReady:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                @autoreleasepool {
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_ADD]) {
-                        
-                        NSString *path = [url.path substringFromIndex:1];
-                        
-                        
-                        if (nav.viewControllers.count) {
-                            MainController *main = nav.viewControllers.firstObject;
-                            if ([main isKindOfClass:[MainController class]]) {
-                                
-                                UIStoryboard *menuStoryboard = [UIStoryboard storyboardWithName:@"MainMenu" bundle:[NSBundle mainBundle]];
-                                MainMenuController* mainMenuController = [menuStoryboard instantiateViewControllerWithIdentifier:@"MainMenuController"];
-                                
-                                UIStoryboard *userFilterStoryboard = [UIStoryboard storyboardWithName:@"UserFilter" bundle:[NSBundle mainBundle]];
-                                UserFilterController* userFilterController = [userFilterStoryboard instantiateViewControllerWithIdentifier:@"UserFilterController"];
-                                
-                                userFilterController.newRuleText = path;
-                                
-                                nav.viewControllers = @[main, mainMenuController, userFilterController];
-                                
-                                [main view];
-                                [mainMenuController view];
-                                [userFilterController view];
-
-                                self.window.rootViewController = nav;
-                            }
-                            else{
-                                DDLogError(@"(AppDelegate) Can't add rule because mainController is not found.");
-                            }
-                        }
-                    }
-                    
-                    if ([command isEqualToString:AE_URLSCHEME_COMMAND_AUTH]) {
-                        
-                        DDLogInfo(@"(AppDelegate) handle oauth redirect");
-                        NSString* fragment = url.fragment;
-                        NSDictionary<NSString*, NSString*> *params = [ACNUrlUtils parametersFromQueryString:fragment];
-                        
-                        NSString* state = params[AE_URLSCHEME_AUTH_PARAM_STATE];
-                        NSString* accessToken = params[AE_URLSCHEME_AUTH_PARAM_TOKEN];
-                        
-                        [_purchaseService loginWithAccessToken:accessToken state: state];
-                    }
-                }
-            });
-        }];
-        
-        return YES;
-    }
-#ifdef PRO
-    else if([url.scheme isEqualToString:AP_URLSCHEME]) {
-        
-        NSString *command = url.host;
-        
-        UINavigationController *nav = [self getNavigationController];
-        
-        AEUIMainController *main = nav.viewControllers.firstObject;
-        
-        if(!main){
-            return NO;
-        }
-        
-        [nav popToRootViewControllerAnimated:NO];
-        
-        if([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_ON]) {
-            
-            [main setProStatus:YES];
-        }
-        else if ([command isEqualToString:AP_URLSCHEME_COMMAND_STATUS_OFF]) {
-            
-            [main setProStatus:NO];
-        }
-        else {
-            return NO;
-        }
-        
-        return YES;
-    }
-#endif
-
-    return NO;
+    return [helper application:app open:url options:options];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -492,17 +343,19 @@ typedef enum : NSUInteger {
                 DDLogInfo(@"(AppDelegate) Update process started by timer.");
             }
             
-            [[_aeService antibanner] beginTransaction];
+            __block BOOL result = NO;
+            
+            [_antibanner beginTransaction];
             DDLogInfo(@"(AppDelegate) Begin of the Update Transaction from - invalidateAntibanner.");
             
-            BOOL result = [[_aeService antibanner] startUpdatingForced:fromUI interactive:interactive];
+            result = [_antibanner startUpdatingForced:fromUI interactive:interactive];
             
             if (! result) {
                 DDLogInfo(@"(AppDelegate) Update process did not start because [antibanner startUpdatingForced] return NO.");
-                [[_aeService antibanner] rollbackTransaction];
+                [_antibanner rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
             }
-
+            
             return result;
         }
         
@@ -513,29 +366,8 @@ typedef enum : NSUInteger {
     }
 }
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Observing notifications
-/////////////////////////////////////////////////////////////////////
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    // DB DELAYED READY
-    ASDatabase * dbService = [ASDatabase singleton];
-    if ([object isEqual:dbService]
-        && [keyPath isEqualToString:@"ready"]
-        && dbService.ready) {
-        
-        [dbService removeObserver:self forKeyPath:@"ready"];
-        
-        //--------------------- Start Services ---------------------------
-        [_aeService start];
-        DDLogInfo(@"(AppDelegate) DB service ready. Main service started.");
-        
-        return;
-    }
-    
-    // Default processing
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+- (void)resetAllSettings {
+    [helper resetAllSettings];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -551,8 +383,7 @@ typedef enum : NSUInteger {
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
             
             if (error) {
-                
-                [[_aeService antibanner] rollbackTransaction];
+                [_antibanner rollbackTransaction];
                 DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFailuredNotify];
@@ -571,8 +402,7 @@ typedef enum : NSUInteger {
                 // Success antibanner updated from backend
                 
                 [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                
-                [[_aeService antibanner] endTransaction];
+                [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
                 [self updateFinishedNotify];
@@ -591,9 +421,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
         
-        if ([[_aeService antibanner] inTransaction]) {
+        if ([_antibanner inTransaction]) {
             
-            [[_aeService antibanner] rollbackTransaction];
+            [_antibanner rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.");
         }
         
@@ -608,10 +438,10 @@ typedef enum : NSUInteger {
         
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
             
-            if ([[_aeService antibanner] inTransaction]) {
+            if ([_antibanner inTransaction]) {
                 // Success antibanner updated from backend
                 [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [[_aeService antibanner] endTransaction];
+                [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
                 
                 [self updateFinishedNotify];
@@ -629,9 +459,9 @@ typedef enum : NSUInteger {
     else if ([notification.name
               isEqualToString:ASAntibannerFailuredUpdateNotification]) {
         
-        if ([[_aeService antibanner] inTransaction]) {
+        if ([_antibanner inTransaction]) {
             
-            [[_aeService antibanner] rollbackTransaction];
+            [_antibanner rollbackTransaction];
             DDLogInfo(@"(AppDelegate) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.");
         }
         

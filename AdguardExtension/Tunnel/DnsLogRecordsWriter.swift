@@ -17,7 +17,6 @@
  */
 
 import Foundation
-import Mobile
 
 class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
@@ -41,13 +40,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         flush()
     }
     
-    func dnsRequestProcessed(_ event: MobileDNSRequestProcessedEvent!) {
+    func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         if event.error != nil && event.error != "" {
             // Ignore errors
             return
         }
 
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr)
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived))
         addRecord(record: record, flush: false)
     }
     

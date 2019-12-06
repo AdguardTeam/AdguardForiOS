@@ -66,9 +66,9 @@ extern NSString * _Nonnull ASAntibannerUpdateFilterFromUINotification;
 /// When filter enable status did change
 extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
-@class Reachability, ASDFilterRule, ACLJobController, ACLExecuteBlockDelayed;
+@class Reachability, ASDFilterRule, ACLExecuteBlockDelayed, ASDatabase;
 @class AASCustomFilterParserResult;
-@protocol ACNNetworkingProtocol;
+@protocol ACNNetworkingProtocol, AESharedResourcesProtocol;
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark - ASAntibanner
@@ -86,14 +86,18 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /////////////////////////////////////////////////////////////////////////
 
 /**
- Enable/Disable periodical processes, like updates or autodetect.
- */
-@property BOOL enabled;
-
-/**
  Indicates that antibanner updates of filters right now.
  */
 @property (readonly) BOOL updatesRightNow;
+
+/** set database to work with it */
+- (void) setDatabase:(ASDatabase*) db;
+
+/** start sevice */
+- (void) start;
+
+/** stop service */
+- (void) stop;
 
 /**
  Obtain rules for active (enabled) filters.
@@ -298,10 +302,8 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  or tries to obtain the rules from backend server.
  
  @param filters         List of the ASDFilterMetadata objects, which will be save into DB.
- @param jobController   Because the subscription process is long,
- you may use this parameter for cancellation.
  */
-- (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters jobController:(nullable ACLJobController *)jobController;
+- (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters;
 
 /**
  Removes filter data from production DB.
@@ -374,7 +376,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  init
  */
-- (nonnull instancetype) initWithNetworking:(nonnull id<ACNNetworkingProtocol>) networking;
+- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking resources: (nonnull id<AESharedResourcesProtocol>) resources;
 
 /**
  Indicator that metadata and count of filters are out of date.
