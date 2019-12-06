@@ -26,5 +26,7 @@
 	<array>
 		<string>iPhoneOS</string>
 	</array>
+	<key>MinimumOSVersion</key>
+	<string>10.0</string>
 </dict>
 </plist>
