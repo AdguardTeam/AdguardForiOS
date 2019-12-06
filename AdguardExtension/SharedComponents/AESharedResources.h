@@ -249,6 +249,17 @@ extern NSString* _Nonnull ShowStatusViewNotification;
  */
 extern NSString* _Nonnull HideStatusViewNotification;
 
+/**
+ Last state of safari protection
+ */
+extern NSString* _Nonnull SafariProtectionLastState;
+
+/**
+ Last state of system protection
+ */
+extern NSString* _Nonnull SystemProtectionLastState;
+
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -365,6 +376,8 @@ extern NSString* _Nonnull HideStatusViewNotification;
 @property (nullable) DnsServerInfo* activeDnsServer;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
+
+@property BOOL safariProtectionEnabled;
 
 @end
 

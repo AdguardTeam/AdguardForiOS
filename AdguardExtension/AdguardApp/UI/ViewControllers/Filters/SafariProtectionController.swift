@@ -33,8 +33,8 @@ class SafariProtectionController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let safariService: SafariService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
+    private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var filtersCountObservation: Any?
     private var activeFiltersCountObservation: Any?
@@ -146,13 +146,7 @@ class SafariProtectionController: UITableViewController {
         resources.sharedDefaults().set(enabled, forKey: SafariProtectionState)
         safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
         
-        safariService.invalidateBlockingJsons(completion: { (error) in
-            if error != nil {
-                DDLogError("Error invalidating json from main app")
-            } else {
-                DDLogInfo("Successfull invalidating of json from main app")
-            }
-        })
+        complexProtection.switchSafariProtection(state: enabled)
     }
     
     // MARK: - Private methods

@@ -82,6 +82,9 @@ NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
 NSString* SafariProtectionState = @"SafariProtectionState";
 
+NSString *SafariProtectionLastState = @"SafariProtectionLastState";
+NSString *SystemProtectionLastState = @"SystemProtectionLastState";
+
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
@@ -427,6 +430,14 @@ static NSUserDefaults *_sharedUserDefaults;
         return [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     return nil;
+}
+
+- (BOOL)safariProtectionEnabled{
+    return [self.sharedDefaults boolForKey:SafariProtectionState];
+}
+
+- (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
+    [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
 }
 
 /////////////////////////////////////////////////////////////////////

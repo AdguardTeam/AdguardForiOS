@@ -80,7 +80,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 @synthesize connectionStatus = _connectionStatus;
 @synthesize lastError = _lastError;
-@synthesize turnFromWidget = _turnFromWidget;
+@synthesize delayedTurn = _delayedTurn;
 @synthesize managerWasLoaded = _managerWasLoaded;
 
 /////////////////////////////////////////////////////////////////////
@@ -688,6 +688,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                     
                     _manager = managers[0];
                 }
+            } else {
+                _manager = nil;
             }
         }
 
@@ -710,8 +712,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         }
         
         [self sendNotificationForced:YES];
-        if (_turnFromWidget){
-            _turnFromWidget();
+        if (_delayedTurn){
+            _delayedTurn();
         }
         self.managerWasLoaded = YES;
     }];
@@ -784,6 +786,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             DDLogInfo(@"(APVPNManager) Updating vpn conviguration failed: %@",
                       (self.activeDnsServer.name ?: @"None"));
             
+            [self loadConfiguration];
             [self sendNotificationForced:NO];
             return;
         }
@@ -938,7 +941,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     id observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNConfigurationChangeNotification
-                   object: nil //_manager
+                   object: nil
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                     
@@ -963,7 +966,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNStatusDidChangeNotification
-                object: nil //_manager.connection
+                object: nil
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                         
@@ -987,6 +990,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
                                 dispatch_sync(workingQueue, ^{
                                     [self setStatuses];
+                                    [self loadConfiguration];
                                 });
                             } else {
                                 DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);

@@ -15,27 +15,29 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import <Foundation/Foundation.h>
-#import "APCommonSharedResources.h"
-#import "ABECService.h"
 
-@class DnsLogRecord;
+import Foundation
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark - APSharedResources
+protocol VpnServiceNotifierDelegate {
+    
+    func tunnelModeChanged()
+    
+    func vpnConfigurationChanged(with error: Error?)
+    
+    func cancelledAddingVpnConfiguration()
+}
 
-/**
-     (PRO) Class, which provides exchanging data between app and extension.
- */
-@interface APSharedResources : AESharedResources
+protocol TurnSystemProtectionProtocol: class {
+    func turnSystemProtection(to state: Bool, with vc: UIViewController?, completion: @escaping () -> ())
+}
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-
-- (NSArray <DnsLogRecord *> *)readDnsLog;
-
-- (BOOL)removeDnsLog;
-
-- (void)writeToDnsLogRecords:(NSArray <DnsLogRecord *> *)logRecords;
-
-@end
+protocol VpnServiceProtocol: TurnSystemProtectionProtocol {
+    
+    var notifier: VpnServiceNotifierDelegate? { get set }
+    
+    var vpnEnabled: Bool { get }
+    
+    var currentServerName: String { get }
+        
+    func turnSystemProtection(to state: Bool, with vc: UIViewController?, completion: @escaping () -> ())
+}
