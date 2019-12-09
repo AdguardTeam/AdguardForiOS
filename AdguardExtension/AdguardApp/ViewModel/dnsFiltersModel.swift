@@ -25,7 +25,7 @@ protocol DnsFiltersModelProtocol {
     var isSearchActive: Bool { get set }
     
     func setFilter(index: Int, enabled: Bool)
-    func addFilter(_ filter: DnsFilter, data: Data?)
+    func addFilter(_ filter: DnsFilter, data: Data?) -> Bool
     func deleteFilter(_ filter: DnsFilter)
     func searchFilter(by string: String?)
     func updateFilters()
@@ -58,16 +58,17 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     
     //MARK: - Public methods
     
-    func addFilter(_ filter: DnsFilter, data: Data?) {
+    func addFilter(_ filter: DnsFilter, data: Data?) -> Bool {
         // Check if there are no identical filters
         for filt in allFilters{
             if filter == filt {
-                return
+                return true
             }
         }
         
         allFilters.append(filter)
         filtersService.addFilter(filter, data: data)
+        return false
     }
     
     func deleteFilter(_ filter: DnsFilter) {

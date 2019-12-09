@@ -558,8 +558,13 @@
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "New DNS filter";
+
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "More";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "You've tried to add an existing filter. This filter is already on the list.";
+

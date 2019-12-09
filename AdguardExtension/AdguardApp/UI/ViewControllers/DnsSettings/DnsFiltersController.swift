@@ -200,8 +200,12 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: true, desc: meta.descr, version: meta.version, rulesCount: filter.rules.count, homepage: meta.homepage)
         
         DispatchQueue.main.async {[weak self] in
-            self?.model.addFilter(dnsFilter, data: filter.filtersData)
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            let isAlreadyAdded = self.model.addFilter(dnsFilter, data: filter.filtersData)
+            if isAlreadyAdded {
+                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("filter_exists"))
+            }
+            self.tableView.reloadData()
         }
     }
 
