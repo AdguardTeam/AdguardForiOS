@@ -86,8 +86,8 @@ class MainNavigationController: UINavigationController {
     }
     
     private func cancelTransition(gestureRecognizer: UIPanGestureRecognizer, percent: CGFloat){
-        // 40% of screen is needed to make transition finish
-        if percent > 0.4 && gestureRecognizer.state != .cancelled {
+        // 30% of screen is needed to make transition finish
+        if percent > 0.3 && gestureRecognizer.state != .cancelled {
             transitionCoordinatorHelper?.interactionController?.finish()
         } else {
             transitionCoordinatorHelper?.interactionController?.cancel()

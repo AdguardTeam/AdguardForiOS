@@ -19,7 +19,7 @@
 import Foundation
 
 protocol ChooseProtocolControllerDelegate {
-    func protocolSelected(protocol: DnsProtocol)
+    func protocolSelected(chosenProtocol: DnsProtocol)
 }
 
 class ChooseProtocolController: BottomAlertController {
@@ -55,7 +55,6 @@ class ChooseProtocolController: BottomAlertController {
     
     // MARK: - services
     
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - viewcontroller lifecycle
@@ -75,28 +74,26 @@ class ChooseProtocolController: BottomAlertController {
     // MARK: - Actions
     
     @IBAction func regualrAction(_ sender: Any) {
-        activateServer(provider?.serverByProtocol(dnsProtocol: .dns))
+        delegate?.protocolSelected(chosenProtocol: .dns)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func dnsCryptAction(_ sender: Any) {
-        activateServer(provider?.serverByProtocol(dnsProtocol: .dnsCrypt))
+        delegate?.protocolSelected(chosenProtocol: .dnsCrypt)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func dohAction(_ sender: Any) {
-        activateServer(provider?.serverByProtocol(dnsProtocol: .doh))
+        delegate?.protocolSelected(chosenProtocol: .doh)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func dotAction(_ sender: Any) {
-        activateServer(provider?.serverByProtocol(dnsProtocol: .dot))
+        delegate?.protocolSelected(chosenProtocol: .dot)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private methods
-    
-    private func activateServer(_ server: DnsServerInfo?) {
-        vpnManager.activeDnsServer = server
-        vpnManager.enabled = server != nil
-        dismiss(animated: true, completion: nil)
-    }
     
     func setupChecks() {
         

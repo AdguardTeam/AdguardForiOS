@@ -18,12 +18,19 @@
 
 import Foundation
 
+protocol DnsProtocolChangedDelegate: class {
+    func changesWereApplied(_ applied: Bool)
+}
+
 class DnsProviderContainerController : UIViewController {
 
     // MARK: - public fields
 
     var provider: DnsProviderInfo?
     var defaultDnsServer: DnsServerInfo?
+    var chosenProtocol: DnsProtocol?
+    
+    weak var delegate: DnsProtocolChangedDelegate?
     
     // MARK: - IB Outlets
 
@@ -32,6 +39,8 @@ class DnsProviderContainerController : UIViewController {
     @IBOutlet weak var buttonView: UIView!
     
     private var notificationToken: NotificationToken?
+    
+    private var initialProtocol: DnsProtocol?
     
     // MARK: - services
 
@@ -51,16 +60,31 @@ class DnsProviderContainerController : UIViewController {
         
         if provider == nil { return }
         
+        if vpnManager.isActiveProvider(provider!) {
+            chosenProtocol = vpnManager.activeDnsServer?.dnsProtocol
+        }
+        else {
+            chosenProtocol = defaultDnsServer?.dnsProtocol
+        }
+        
+        initialProtocol = chosenProtocol
+        
         navigationItem.title = provider?.name
         
         setupBackButton()
         updateTheme()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.changesWereApplied(chosenProtocol == initialProtocol)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "providerDetailsEmbedSegue" {
             guard let controller = segue.destination as? DnsProviderDetailsController else { return }
             controller.provider = provider
+            controller.containerController = self
             
             var server: DnsServerInfo?
             
@@ -80,10 +104,9 @@ class DnsProviderContainerController : UIViewController {
     // MARK: - Actions
 
     @IBAction func useServerAction(_ sender: Any) {
-        
-        vpnManager.activeDnsServer = defaultDnsServer
-        vpnManager.enabled = true;
-        self.navigationController?.popViewController(animated: true)
+        activateServer(provider?.serverByProtocol(dnsProtocol: chosenProtocol ?? .dns))
+        delegate = nil
+        navigationController?.popViewController(animated: true)
     }
     
 
@@ -93,5 +116,11 @@ class DnsProviderContainerController : UIViewController {
         view.backgroundColor = theme.backgroundColor
         separator.backgroundColor = theme.separatorColor
         topSeparator.backgroundColor = theme.separatorColor
+    }
+    
+    private func activateServer(_ server: DnsServerInfo?) {
+        vpnManager.activeDnsServer = server
+        vpnManager.enabled = server != nil
+        dismiss(animated: true, completion: nil)
     }
 }

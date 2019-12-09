@@ -558,3 +558,6 @@
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "More";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "Changes were not applied.";
