@@ -568,3 +568,23 @@
 /*(ContentBlockerService) notification about converting rules  */
 "converting_rules" = "Rules are being converted  ...";
 
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Protection is disabled";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Protection is enabled";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari and system protection";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari ad blocking";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "All protection modules are off";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "System protection";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d requests, %2$d blocked";

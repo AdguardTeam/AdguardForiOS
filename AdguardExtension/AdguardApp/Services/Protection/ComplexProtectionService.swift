@@ -35,6 +35,9 @@ protocol ComplexProtectionServiceProtocol {
     
     // Checks state of complex protection
     func checkState(completion: @escaping (Bool)->() )
+    
+    // Checks states of all protection modules
+    func getAllStates(completion: @escaping (_ safari: Bool, _ system: Bool, _ complex: Bool)->())
 }
 
 // MARK: - Complex protection class -
@@ -63,6 +66,17 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
     
+    func getAllStates(completion: @escaping (Bool, Bool, Bool) -> ()) {
+        getSystemProtectionState {[weak self] (systemEnabled) in
+            guard let self = self else { return }
+            
+            let safaryEnabled = self.resources.safariProtectionEnabled
+            let systemEnabled = systemEnabled
+            
+            completion(safaryEnabled, systemEnabled, safaryEnabled || systemEnabled)
+        }
+    }
+    
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?) {
         
         if !enabled {
@@ -72,7 +86,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 
                 // Turning off safari and system protection
                 self.switchSafariProtection(state: enabled)
-                self.switchSystemProtection(state: enabled, for: VC)
+                if systemEnabled {
+                    self.switchSystemProtection(state: enabled, for: VC)
+                }
             }
         } else {
             let statesTuple = getLastStates()

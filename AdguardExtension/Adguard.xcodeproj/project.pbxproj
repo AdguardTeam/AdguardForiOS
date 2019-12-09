@@ -626,6 +626,16 @@
 		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
 		7EC34D17239A626A00531E08 /* VpnServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EA7B0239A38DE00A07DE0 /* VpnServiceProtocol.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
+		7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
+		7EC635B4239EB1A0003A5CE4 /* APVPNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 653153611CFC63C000C92A73 /* APVPNManager.m */; };
+		7EC635B5239EB1EA003A5CE4 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
+		7EC635B6239EB29B003A5CE4 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
+		7EC635B7239EB2AD003A5CE4 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
+		7EC635B8239EB2B8003A5CE4 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
+		7EC635B9239EB2C1003A5CE4 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
+		7EC635BA239EB2D2003A5CE4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
+		7EC635BB239EB2E0003A5CE4 /* LoginResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */; };
+		7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
 		7ECD9C41238D5F130065E88D /* APSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACCC1D3E46D700E316EA /* APSharedResources.m */; };
 		7ECD9C42238D65650065E88D /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; };
@@ -5626,17 +5636,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ECD9C44238D65960065E88D /* DDLog.m in Sources */,
+				7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */,
 				7ECD9C48238D65DA0065E88D /* ACObject.m in Sources */,
 				7ECD9C4C238D664D0065E88D /* ACLLogger.m in Sources */,
 				7EC1F9E42391211900210959 /* CocoaLumberjack.swift in Sources */,
 				7E3340272390343D00C39F62 /* ABECRequest.m in Sources */,
 				7ECD9C45238D65A80065E88D /* FMDatabaseQueue.m in Sources */,
 				7E3340212390337600C39F62 /* ASDFilterObjects.m in Sources */,
+				7EC635B8239EB2B8003A5CE4 /* ConfigurationServiceProtocol.swift in Sources */,
+				7EC635B4239EB1A0003A5CE4 /* APVPNManager.m in Sources */,
 				7ECD9C50238D67050065E88D /* DDTTYLogger.m in Sources */,
+				7EC635B9239EB2C1003A5CE4 /* KeychainService.swift in Sources */,
 				7E536C6A238D2AC400A83A79 /* TodayViewController.swift in Sources */,
+				7EC635BB239EB2E0003A5CE4 /* LoginResponseParser.swift in Sources */,
 				7ECD9C41238D5F130065E88D /* APSharedResources.m in Sources */,
 				7E334024239033FB00C39F62 /* Reachability.m in Sources */,
 				7E3340252390340B00C39F62 /* ADProductInfo.m in Sources */,
+				7EC635B5239EB1EA003A5CE4 /* DnsProvidersService.swift in Sources */,
 				7E334029239036D500C39F62 /* APCommonSharedResources.m in Sources */,
 				7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */,
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
@@ -5650,15 +5666,19 @@
 				7E334028239034CB00C39F62 /* ACLExecuteBlockDelayed.m in Sources */,
 				7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */,
 				7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */,
+				7EC635B7239EB2AD003A5CE4 /* PurchaseService.swift in Sources */,
+				7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */,
 				7E33401A2390311B00C39F62 /* String+Utils.swift in Sources */,
 				7ECD9C4A238D65F00065E88D /* ADBTable.m in Sources */,
 				7E33402A23903A4000C39F62 /* ACNNetworking.m in Sources */,
 				7EC34D17239A626A00531E08 /* VpnServiceProtocol.swift in Sources */,
 				7E334023239033E500C39F62 /* ADLocales.m in Sources */,
 				7E334022239033CE00C39F62 /* ACNUrlUtils.m in Sources */,
+				7EC635B6239EB29B003A5CE4 /* ConfigurationService.swift in Sources */,
 				7ECD9C47238D65D10065E88D /* ACLFileLocker.m in Sources */,
 				7E536C75238D2BE000A83A79 /* UIColorUtils.swift in Sources */,
 				7ECD9C42238D65650065E88D /* AESharedResources.m in Sources */,
+				7EC635BA239EB2D2003A5CE4 /* LoginService.swift in Sources */,
 				7ECD9C46238D65BE0065E88D /* ADBTableRow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,7 @@ import UIKit
 import NotificationCenter
 import NetworkExtension
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtectionProtocol {
     
     @IBOutlet weak var height: NSLayoutConstraint!
     
@@ -30,72 +30,51 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var safariImageView: UIImageView!
     @IBOutlet weak var systemImageView: UIImageView!
     
-    @IBOutlet weak var safariTitleLabel: UILabel!{
-        didSet{
-            safariTitleLabel.textColor = .widgetTitleColor
-        }
-    }
+    @IBOutlet weak var safariTitleLabel: UILabel!
     
-    @IBOutlet weak var safariTextLabel: UILabel!{
-        didSet{
-            safariTextLabel.textColor = .widgetTextColor
-        }
-    }
+    @IBOutlet weak var safariTextLabel: UILabel!
     
-    @IBOutlet weak var systemTitleLabel: UILabel!{
-        didSet{
-            systemTitleLabel.textColor = .widgetTitleColor
-        }
-    }
+    @IBOutlet weak var systemTitleLabel: UILabel!
     
-    @IBOutlet weak var systemTextLabel: UILabel!{
-        didSet{
-            systemTextLabel.textColor = .widgetTextColor
-        }
-    }
+    @IBOutlet weak var systemTextLabel: UILabel!
     
-    @IBOutlet weak var allTimeStaisticsLabel: UILabel!{
-        didSet{
-            allTimeStaisticsLabel.textColor = .widgetTitleColor
-        }
-    }
+    @IBOutlet weak var allTimeStaisticsLabel: UILabel!
     
-    @IBOutlet weak var requestsLabel: UILabel!{
-        didSet{
-            requestsLabel.textColor = .widgetTitleColor
-        }
-    }
+    @IBOutlet weak var requestsLabel: UILabel!
     
-    @IBOutlet weak var blockedLabel: UILabel!{
-        didSet{
-            blockedLabel.textColor = .widgetTitleColor
-        }
-    }
+    @IBOutlet weak var blockedLabel: UILabel!
     
-    @IBOutlet weak var countersLabel: UILabel!{
-        didSet{
-            countersLabel.textColor = .widgetTitleColor
-        }
-    }
-    
-    @IBOutlet var labels: [UILabel]!{
-        didSet{
-            labels.forEach({ $0.textColor = .widgetTextColor })
-        }
-    }
+    @IBOutlet var labels: [UILabel]!
 
+    @IBOutlet weak var expandedStackView: UIStackView!
+    @IBOutlet weak var compactView: UIView!
+    
+    @IBOutlet weak var complexSwitchOutlet: UISwitch!
+    @IBOutlet weak var complexProtectionTitle: UILabel!
+    @IBOutlet weak var complexStatusLabel: UILabel!
+    @IBOutlet weak var complexStatisticsLabel: UILabel!
+    
+    
     private let resources: APSharedResources = APSharedResources()
-    private var safariService: SafariServiceProtocol?
-
-    private var openSystemProtectionUrl = AE_URLSCHEME + "://systemProtection/"
+    private var safariService: SafariService
+    private var comlexProtection: ComplexProtectionServiceProtocol?
+    private let networkService = ACNNetworking()
+    private var purchaseService: PurchaseServiceProtocol
+    private var configuration: ConfigurationService
+    private let vpnManager: APVPNManager
     
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
+        safariService = SafariService(resources: resources)
+        purchaseService = PurchaseService(network: networkService, resources: resources)
+        configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
+        vpnManager  = APVPNManager(resources: resources, configuration: configuration)
+        
         super.init(coder: coder)
         
+        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self)
         initLogger()
-        safariService = SafariService(resources: resources)
     }
     
     override func viewDidLoad() {
@@ -109,31 +88,44 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateWidgetComplex()
         updateWidgetSystem()
     }
         
+    // MARK: - NCWidgetProviding methods
+    
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        setColorsToLabels()
         updateWidgetSafari()
         updateWidgetSystem()
+        updateWidgetComplex()
         completionHandler(NCUpdateResult.newData)
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-    
+        
+        updateWidgetComplex()
+        updateWidgetSafari()
+        
         if (activeDisplayMode == .compact) {
+            showForCompactMode()
             preferredContentSize = maxSize
         }
         else {
-            let height:CGFloat = 215.0
+            showForExpandedMode()
+            
+            let height:CGFloat = 225.0
             preferredContentSize = CGSize(width: maxSize.width, height: height)
         }
     }
+    
+    // MARK: - Actions
 
     @IBAction func safariSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         resources.safariProtectionEnabled = enabled
         
-        safariService?.invalidateBlockingJsons(completion: { (error) in
+        safariService.invalidateBlockingJsons(completion: { (error) in
             if error != nil {
                 DDLogError("Error invalidating json from Today Extension")
             } else {
@@ -146,43 +138,30 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        openSystemProtectionUrl += enabled ? "on" : "off"
         
-        systemImageView.isHighlighted = !enabled
+        turnSystemProtection(to: enabled, with: nil, completion: {})
+        
+        let alpha: CGFloat = enabled ? 1.0 : 0.5
+        systemImageView.alpha = alpha
+        systemTextLabel.alpha = alpha
+        systemTitleLabel.alpha = alpha
         systemSwitchOutlet.isOn = enabled
+    }
+    
+    @IBAction func complexSwitch(_ sender: UISwitch) {
+        let enabled = sender.isOn
         
-        openMainApp()
-    }
-    
-    // MARK: Private methods
-    
-    private func updateWidgetSafari(){
-        let safariEnabled = resources.safariProtectionEnabled
+        comlexProtection?.switchComplexProtection(state: enabled, for: nil)
         
-        safariImageView.isHighlighted = !safariEnabled
-        safariSwitchOutlet.isOn = safariEnabled
+        updateWidgetComplex()
     }
     
-    private func updateWidgetSystem(){
-        NETunnelProviderManager.loadAllFromPreferences {[weak self] (managers, error) in
-            guard let self = self else { return }
-            
-            if error != nil {
-                self.systemSwitchOutlet.isOn = false
-                self.systemImageView.isHighlighted = true
-                
-                DDLogError("(Today Extension) Error loading vpn configuration: \(String(describing: error?.localizedDescription))")
-            } else {
-                let manager = managers?.first
-                let vpnEnabled = manager?.isEnabled ?? false
-                
-                self.systemSwitchOutlet.isOn = vpnEnabled
-                self.systemImageView.isHighlighted = !vpnEnabled
-            }
-        }
-    }
+    // MARK: - TurnSystemProtectionProtocol method
     
-    private func openMainApp(){
+    func turnSystemProtection(to state: Bool, with vc: UIViewController?, completion: @escaping () -> ()) {
+        var openSystemProtectionUrl = AE_URLSCHEME + "://systemProtection/"
+        openSystemProtectionUrl += state ? "on" : "off"
+        
         if let url = URL(string: openSystemProtectionUrl){
             extensionContext?.open(url, completionHandler: { (success) in
                 if !success {
@@ -194,6 +173,78 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    // MARK: Private methods
+    
+    private func updateWidgetSafari(){
+        let safariEnabled = resources.safariProtectionEnabled
+        
+        let alpha: CGFloat = safariEnabled ? 1.0 : 0.5
+        safariImageView.alpha = alpha
+        safariTextLabel.alpha = alpha
+        safariTitleLabel.alpha = alpha
+        safariSwitchOutlet.isOn = safariEnabled
+        
+        if let lastUpdateDate = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? Date {
+    
+            let dateString = lastUpdateDate.formatedString() ?? ""
+            safariTextLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+        }
+    }
+    
+    private func updateWidgetSystem(){
+        NETunnelProviderManager.loadAllFromPreferences {[weak self] (managers, error) in
+            guard let self = self else { return }
+            
+            if error != nil {
+                self.systemSwitchOutlet.isOn = false
+                self.systemImageView.alpha = 0.5
+                self.systemTitleLabel.alpha = 0.5
+                self.systemTextLabel.alpha = 0.5
+                
+                DDLogError("(Today Extension) Error loading vpn configuration: \(String(describing: error?.localizedDescription))")
+            } else {
+                let manager = managers?.first
+                let vpnEnabled = manager?.isEnabled ?? false
+                
+                let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
+                self.systemSwitchOutlet.isOn = vpnEnabled
+                self.systemImageView.alpha = alpha
+                self.systemTitleLabel.alpha = alpha
+                self.systemTextLabel.alpha = alpha
+            }
+            
+            self.systemTextLabel.text = self.getServerName()
+        }
+    }
+    
+    private func updateWidgetComplex(){
+        comlexProtection?.getAllStates(completion: { (safariEnabled, systemEnabled, complexEnabled) in
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                
+                let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
+                
+                self.complexSwitchOutlet.isOn = complexEnabled
+                self.complexProtectionTitle.text = enabledText
+                
+                var complexText = ""
+                
+                if safariEnabled && systemEnabled {
+                    complexText = ACLocalizedString("complex_enabled", nil)
+                } else if !complexEnabled{
+                    complexText = ACLocalizedString("complex_disabled", nil)
+                } else if safariEnabled {
+                    complexText = ACLocalizedString("safari_enabled", nil)
+                } else if systemEnabled {
+                    complexText = ACLocalizedString("system_enabled", nil)
+                }
+                self.complexStatusLabel.text = complexText
+                
+                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), 0, 0)
+            }
+        })
+    }
+    
     private func initLogger(){
         // Init Logger
         ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
@@ -201,6 +252,72 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
+    }
+    
+    private func setColorsToLabels(){
+        safariTitleLabel.textColor = .widgetTitleColor
+        safariTextLabel.textColor = .widgetTextColor
+        
+        systemTitleLabel.textColor = .widgetTitleColor
+        systemTextLabel.textColor = .widgetTextColor
+        
+        complexProtectionTitle.textColor = .widgetTitleColor
+        complexStatusLabel.textColor = .widgetTextColor
+        complexStatisticsLabel.textColor = .widgetTextColor
+        
+        allTimeStaisticsLabel.textColor = .widgetTitleColor
+        requestsLabel.textColor = .widgetTitleColor
+        blockedLabel.textColor = .widgetTitleColor
+        
+        labels.forEach({ $0.textColor = .widgetTextColor })
+        
+        safariSwitchOutlet.layer.cornerRadius = safariSwitchOutlet.frame.height / 2
+        systemSwitchOutlet.layer.cornerRadius = systemSwitchOutlet.frame.height / 2
+        complexSwitchOutlet.layer.cornerRadius = complexSwitchOutlet.frame.height / 2
+    }
+    
+    private func showForCompactMode(){
+        compactView.isHidden = false
+        
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
+            guard let self = self else { return }
+            self.expandedStackView.alpha = 0.0
+            self.compactView.alpha = 1.0
+        }) {[weak self] (success) in
+            guard let self = self else { return }
+            if success {
+                self.expandedStackView.isHidden = true
+            }
+        }
+    }
+    
+    private func showForExpandedMode(){
+        expandedStackView.isHidden = false
+        
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
+            guard let self = self else { return }
+            self.expandedStackView.alpha = 1.0
+            self.compactView.alpha = 0.0
+        }) {[weak self] (success) in
+            guard let self = self else { return }
+            if success {
+                self.compactView.isHidden = true
+            }
+        }
+    }
+
+    private func getServerName() -> String {
+        if vpnManager.isCustomServerActive() {
+            return vpnManager.activeDnsServer!.name
+        }
+        else if vpnManager.activeDnsServer?.dnsProtocol == nil {
+            return ACLocalizedString("no_dns_server_selected", nil)
+        }
+        else {
+            let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
+            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol], nil)
+            return "\(server) (\(protocolName))"
+        }
     }
 }
 

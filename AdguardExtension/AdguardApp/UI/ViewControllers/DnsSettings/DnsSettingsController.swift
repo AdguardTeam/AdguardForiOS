@@ -61,10 +61,12 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let enabled = stateFromWidget {
-            vpnService.turnSystemProtection(to: enabled, with: self, completion: {[weak self] in
-                self?.stateFromWidget = nil
-            })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
+            if let enabled = self?.stateFromWidget {
+                self?.vpnService.turnSystemProtection(to: enabled, with: self, completion: {
+                    self?.stateFromWidget = nil
+                })
+            }
         }
     }
     

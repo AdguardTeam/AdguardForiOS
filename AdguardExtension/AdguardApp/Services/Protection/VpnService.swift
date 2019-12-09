@@ -58,7 +58,7 @@ class VpnService: VpnServiceProtocol {
             }else {
                 self.vpnManager.enabled = state
             }
-            
+            self.vpnManager.delayedTurn = nil
             completion()
         }
                
@@ -117,6 +117,7 @@ class VpnService: VpnServiceProtocol {
             let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
                 self.vpnManager.enabled = enabled
             }
+            
             
             let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { [weak self] (alert) in
                 guard let self = self else { return }
