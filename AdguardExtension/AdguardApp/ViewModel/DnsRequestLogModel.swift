@@ -20,8 +20,10 @@ import Foundation
 
 // MARK: - data types -
 struct LogRecord {
+    let rowId: Int
     let category: String?
     let status: DnsLogStatus
+    let userStatus: DnsLogRecordUserStatus
     let name: String?
     let company: String?
     let domain: String?
@@ -36,7 +38,7 @@ struct LogRecord {
     let isTracked: Bool?
     let rules: [String]?
     
-    enum DnsLogStatus: String { 
+    enum DnsLogStatus: String {
         case processed = "Processed"
         case blockedWithDns = "Blocked with DNS"
         case blockedWithDnsFilter = "Blocked with DNS filter"
@@ -77,50 +79,6 @@ struct LogRecord {
             return [.addDomainToWhitelist, .addRuleToUserFlter]
         }
     }
-    
-//    private func removeDomainFromDnsWhitelist() -> ButtonType {
-//        let button = BottomShadowButton()
-//        button.title = ACLocalizedString("remove_from_whitelist", nil)
-//        button.titleColor = UIColor(hexString: "#eb9300")
-//        button.buttonAction {
-//            print(button.title)
-//        }
-//
-//        return button
-//    }
-//
-//    private func removeDomainFromDnsBlacklistButton() -> ButtonType {
-//        let button = BottomShadowButton()
-//        button.title = ACLocalizedString("remove_from_blacklist", nil)
-//        button.titleColor = UIColor(hexString: "#eb9300")
-//        button.buttonAction {
-//            print(button.title)
-//        }
-//
-//        return button
-//    }
-//
-//    private func addDomainToDnsWhitelistButton() -> ButtonType {
-//        let button = BottomShadowButton()
-//        button.title = ACLocalizedString("add_to_whitelist", nil)
-//        button.titleColor = UIColor(hexString: "#67b279")
-//        button.buttonAction {
-//            print(button.title)
-//        }
-//
-//        return button
-//    }
-//
-//    private func addDomainToDnsBlacklistButton() -> ButtonType {
-//        let button = BottomShadowButton()
-//        button.title = ACLocalizedString("add_to_blacklist", nil)
-//        button.titleColor = UIColor(hexString: "#df3812")
-//        button.buttonAction {
-//            print(button.title)
-//        }
-//
-//        return button
-//    }
 }
 
 protocol DnsRequestsDelegateProtocol {
@@ -201,7 +159,19 @@ class DnsRequestLogViewModel {
                 categoryName = ACLocalizedString(categoryKey, nil)
             }
             
-            let record = LogRecord(category: categoryName, status: .processed, name: name, company: "company", domain: logRecord.domain, time: dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked, rules: logRecord.blockRules)
+            var status: LogRecord.DnsLogStatus
+            switch logRecord.status {
+            case .blacklistedByOtherFilter:
+                status = .blockedWithDnsBlacklist
+            case .blacklistedByUserFilter:
+                status = .blockedWithDnsFilter
+            case .whitelisted:
+                status = .whitelisted
+            default:
+                status = .processed
+            }
+            
+            let record = LogRecord(rowId:logRecord.rowid as! Int, category: categoryName, status: status, userStatus: logRecord.userStatus, name: name, company: "company", domain: logRecord.domain, time: dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, isTracked: isTracked, rules: logRecord.blockRules)
             allRecords.append(record)
         }
         

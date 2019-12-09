@@ -22,9 +22,10 @@ import Foundation
 enum DnsLogRecordStatus: Int {
     typealias RawValue = Int
 
-    case processed, blacklisted, whitelisted
+    case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelisted 
 }
 
+@objc(DnsLogRecordUserStatus)
 enum DnsLogRecordUserStatus: Int {
     typealias RawValue = Int
 
@@ -46,7 +47,7 @@ class DnsLogRecord: NSObject, NSCoding {
     let bytesSent: Int
     let bytesReceived: Int
     let status: DnsLogRecordStatus
-    let userStatus: DnsLogRecordUserStatus
+    var userStatus: DnsLogRecordUserStatus
     let blockRules: [String]?
     
     init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?) {

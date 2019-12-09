@@ -129,7 +129,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
 
 - (id)initWithDbResult:(FMResultSet *)dbResult{
  
-    self = [self init];
+    self = [super init];
     if (self) {
         
         if (dbResult) {

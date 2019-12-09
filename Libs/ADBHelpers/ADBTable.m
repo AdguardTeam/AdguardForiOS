@@ -69,10 +69,10 @@
             row = [_objectClass new];
         }
         
-        if (![row isKindOfClass:_objectClass]) {
-            
-            return nil;
-        }
+//        if (![row isKindOfClass:_objectClass]) {
+//            
+//            return nil;
+//        }
         
         NSMutableArray *rows = [NSMutableArray array];
         
@@ -351,6 +351,9 @@
             [names addObject:name];
             types[name] = [result stringForColumnIndex:2];
         }
+        
+        // add implicit "rowid" field
+        [names addObject:@"rowid"];
         
         [result close];
         

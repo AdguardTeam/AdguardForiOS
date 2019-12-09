@@ -119,7 +119,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             
             // todo: do not read all rules to get counter
             if userRules.count > 0 {
-                json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId)])
+                json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
             }
             
             // todo: do not read all rules to get counter

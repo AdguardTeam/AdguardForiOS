@@ -32,3 +32,4 @@
 #import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"
 #import "ADBTable.h"
+#import "APDnsLogTable.h"

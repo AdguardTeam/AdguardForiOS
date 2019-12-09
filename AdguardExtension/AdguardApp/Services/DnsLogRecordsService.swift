@@ -22,27 +22,8 @@ import Foundation
 protocol DnsLogRecordsServiceProtocol{
     func writeRecords(_ records: [DnsLogRecord])
     func readRecords()->[DnsLogRecord]
-    func updateRecord(_ record: DnsLogRecord)
+    func setUserStatus(rowId: Int, status: DnsLogRecordUserStatus)
     func clearLog()
-}
-
-@objc
-class APDnsLogTable: ADBTableRow {
-    let timestamp: TimeInterval
-    let record: DnsLogRecord
-    
-    @objc
-    init(timestamp: TimeInterval, record: DnsLogRecord) {
-        self.timestamp = timestamp
-        self.record = record
-        super.init()
-    }
-    
-    required init!(coder aDecoder: NSCoder!) {
-        timestamp = aDecoder.decodeDouble(forKey: "timestamp")
-        record = aDecoder.decodeObject(forKey: "record") as! DnsLogRecord
-        super.init(coder: aDecoder)
-    }
 }
 
 @objc
@@ -91,7 +72,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         var result: [APDnsLogTable]?
         readHandler?.inTransaction { (db, handler) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
-            result = table?.select(withKeys: [], inRowObject: []) as? [APDnsLogTable]
+            result = table?.select(withKeys: nil, inRowObject: APDnsLogTable.self) as? [APDnsLogTable]
         }
         
         let records = result?.map { (row)->DnsLogRecord in
@@ -110,10 +91,27 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         }
     }
     
-    func updateRecord(_ record: DnsLogRecord) {
+    func setUserStatus(rowId: Int, status: DnsLogRecordUserStatus) {
+        
+        var result: [APDnsLogTable]?
+        readHandler?.inTransaction{ (db, rollback) in
+            let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
+            let t = APDnsLogTable()
+            t.rowid = rowId as NSNumber
+            result = table?.select(withKeys: ["rowid"], inRowObject: t) as? [APDnsLogTable]
+        }
+        
+        if result == nil || result?.count == 0 {
+            DDLogError("(DnsLogRecordService) setUserStatus error - record not found")
+            return
+        }
+        
+        let row = result?.first
+        row?.record.userStatus = status
+        
         writeHandler?.inTransaction { (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
-            table?.insertOrReplace(true, fromRowObject: record)
+            table?.update(withKeys: ["rowid"], fromRowObject: row, updateFields: [], fromRowObject: row)
         }
     }
     

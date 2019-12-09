@@ -20,6 +20,9 @@ import Foundation
 
 class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
+    var userFilterId: NSNumber?
+    var otherFilterIds: [NSNumber]?
+    
     var server = ""
     
     private let dnsLogService: DnsLogRecordsServiceProtocol
@@ -46,11 +49,21 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
         
-        let blacklisted = event.filterListIds.contains(1)
-        let whitelisted = event.whitelist
+        var status: DnsLogRecordStatus
         
-        let status:DnsLogRecordStatus = whitelisted ? .whitelisted : (blacklisted ? .blacklisted : .processed)
-
+        if event.whitelist {
+            status = .whitelisted
+        }
+        else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
+            status = .blacklistedByUserFilter
+        }
+        else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
+            status = .blacklistedByOtherFilter
+        }
+        else {
+            status = .processed
+        }
+        
         let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), status: status, userStatus: .none, blockRules: event.rules)
         addRecord(record: record, flush: false)
     }

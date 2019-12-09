@@ -135,6 +135,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DnsProxyService* _dnsProxy;
     
     DnsProvidersService* _dnsProvidersService;
+    
+    id<DnsLogRecordsWriterProtocol> _logWriter;
 }
 
 + (void)initialize{
@@ -162,8 +164,8 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
         id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithDnsLogService:logService];
-        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
+        _logWriter = [[DnsLogRecordsWriter alloc] initWithDnsLogService:logService];
+        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:_logWriter];
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }
