@@ -1487,6 +1487,7 @@
                                             <fragment content="(Add Custom Filter) url hint"/>
                                         </attributedString>
                                         <connections>
+                                            <action selector="ruleTextChanged:" destination="GjI-Il-1rN" eventType="editingChanged" id="12b-wn-b4B"/>
                                             <outlet property="delegate" destination="GjI-Il-1rN" id="c98-ub-W24"/>
                                         </connections>
                                     </textField>
@@ -1512,6 +1513,9 @@
                                         <inset key="titleEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="NEXT">
                                             <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
@@ -1603,6 +1607,7 @@
                     <connections>
                         <outlet property="contentView" destination="oG1-6A-zBh" id="Kyd-85-mQi"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="1q9-aB-hcK" id="i41-B8-xGP"/>
+                        <outlet property="nextButton" destination="nch-wu-mKC" id="UQb-xc-grG"/>
                         <outlet property="urlTextField" destination="Fwl-LI-5Fu" id="jrV-59-Gt7"/>
                         <outletCollection property="themableLabels" destination="3WM-jW-br8" collectionClass="NSMutableArray" id="ILc-hU-yPk"/>
                         <outletCollection property="themableLabels" destination="Z16-OR-tjl" collectionClass="NSMutableArray" id="bW8-cO-TAQ"/>

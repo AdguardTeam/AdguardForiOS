@@ -34,6 +34,7 @@
                                                         <constraint firstAttribute="width" constant="20" id="vHb-84-yu9"/>
                                                         <constraint firstAttribute="height" constant="20" id="wio-Yk-VK4"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                     <connections>
@@ -76,6 +77,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="5ES-eY-2FP"/>
                                                         <constraint firstAttribute="width" constant="20" id="gRl-iy-6cO"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                     <connections>
@@ -118,6 +120,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="XSR-2G-Vvw"/>
                                                         <constraint firstAttribute="width" constant="20" id="sMI-tK-PQe"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                     <connections>
@@ -771,6 +774,7 @@
                                                         <constraint firstAttribute="width" constant="19.999999999999986" id="OgL-3P-mdR"/>
                                                         <constraint firstAttribute="height" constant="20" id="ydj-lM-2av"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                 </button>
@@ -832,6 +836,7 @@
                                                         <constraint firstAttribute="width" constant="19.999999999999986" id="7pz-jt-fLQ"/>
                                                         <constraint firstAttribute="height" constant="20" id="rBN-rp-62x"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                 </button>
@@ -893,6 +898,7 @@
                                                         <constraint firstAttribute="width" constant="19.999999999999986" id="9Bo-Yf-Opk"/>
                                                         <constraint firstAttribute="height" constant="20" id="QrP-iO-gs9"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
                                                 </button>

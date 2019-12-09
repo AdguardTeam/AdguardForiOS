@@ -1,21 +1,18 @@
 
 import XCTest
-import Mobile
 
 class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
-    
     var server: String = ""
     
-    func dnsRequestProcessed(_ e: MobileDNSRequestProcessedEvent!) {
+    func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         
-//        Thread.sleep(until: Date(timeIntervalSinceNow: 1.0))
     }
 }
 
 class DnsProxyTest: XCTestCase {
     
     var proxyService = DnsProxyService(logWriter: LogWriterMock());
-    let request = Data(base64Encoded: "3H4BAAABAAAAAAAAB2dhdGV3YXkCZmUJYXBwbGUtZG5zA25ldAAAHAAB")
+    let request = Data(base64Encoded: "RQAAQkGPAAD/ETb1rBDRAsYSAAHOlAA1AC47HU+xAQAAAQAAAAAAAAdjbGllbnRzAWwGZ29vZ2xlA2NvbQAAAQAB")
 
     override func setUp() {
         XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], listenAddr: "127.0.0.1", bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", filtersJson: "", maxQueues: 5))
@@ -76,32 +73,6 @@ class DnsProxyTest: XCTestCase {
         
         wait(for: [expectation], timeout: 15)
         
-    }
-    
-    func testStopDuringWork() {
-        
-        var expectations: [XCTestExpectation] = []
-        
-        var count = 0
-        for _ in 0...600 {
-            
-            let expectation = XCTestExpectation(description: "expectation")
-            expectations.append(expectation)
-            proxyService.resolve(dnsRequest: request!) { (response) in
-                
-                if response != nil && response!.count > 0 {
-                    count += 1
-                }
-                expectation.fulfill()
-            }
-        }
-        
-        proxyService.stop() { }
-        
-        wait(for: expectations, timeout: 15)
-        
-        // only first 5(maxQueues) request must be processed
-        XCTAssert(count == 5)
     }
     
     func testResolveAfterStop() {

@@ -151,7 +151,7 @@
 "add_whitelist_domain_placeholder" = "example.org";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "your Wi-Fi name";
+"add_wifi_name_placeholder" = "Your Wi-Fi name";
 
 
 /* (UserFilterController) add blacklist rule caption */
@@ -415,9 +415,6 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Invalid 2FA token";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
-
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi exceptions";
 
@@ -451,12 +448,6 @@
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
-/* (ListOfRulesModel) title for export dns and safari white list*/
-"export_whitelist" = "Export whitelist";
-
-/* (ListOfRulesModel) title for export dns black list */
-"export_blacklist_title" = "Export blacklist";
-
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Clear";
 
@@ -465,12 +456,6 @@
 
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
-
-/* (ListOfRulesModel) title for import dns and safari white list*/
-"import_whitelist" = "Import whitelist";
-
-/* (ListOfRulesModel) title for import dns black list */
-"import_blacklist_title" = "Import blacklist";
 
 /* "Enabled" title */
 "enabled" = "Enabled";
@@ -588,3 +573,8 @@
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requests, %2$d blocked";
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "More";
