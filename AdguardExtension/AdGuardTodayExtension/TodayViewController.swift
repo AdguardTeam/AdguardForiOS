@@ -83,13 +83,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-        updateWidgetSafari()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateWidgetComplex()
-        updateWidgetSystem()
     }
         
     // MARK: - NCWidgetProviding methods
@@ -175,6 +168,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     
     // MARK: Private methods
     
+    /**
+     Updates safari protection view
+     */
     private func updateWidgetSafari(){
         let safariEnabled = resources.safariProtectionEnabled
         
@@ -191,6 +187,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         }
     }
     
+    /**
+     Updates system protection view
+     */
     private func updateWidgetSystem(){
         NETunnelProviderManager.loadAllFromPreferences {[weak self] (managers, error) in
             guard let self = self else { return }
@@ -217,6 +216,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         }
     }
     
+    /**
+     Updates complex protection view
+     */
     private func updateWidgetComplex(){
         comlexProtection?.getAllStates(completion: { (safariEnabled, systemEnabled, complexEnabled) in
             DispatchQueue.main.async {[weak self] in
@@ -245,6 +247,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         })
     }
     
+    /**
+     Inits standard logger
+     */
     private func initLogger(){
         // Init Logger
         ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
@@ -254,6 +259,10 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         #endif
     }
     
+    /**
+     Set text colors and switches backgrounds
+     Must be called from NCWidgetProviding method in ios 13
+     */
     private func setColorsToLabels(){
         safariTitleLabel.textColor = .widgetTitleColor
         safariTextLabel.textColor = .widgetTextColor
@@ -276,6 +285,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         complexSwitchOutlet.layer.cornerRadius = complexSwitchOutlet.frame.height / 2
     }
     
+    /**
+     Animates an appearing of compact mode
+     */
     private func showForCompactMode(){
         compactView.isHidden = false
         
@@ -291,6 +303,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         }
     }
     
+    /**
+     Animates an appearing of expanded mode
+     */
     private func showForExpandedMode(){
         expandedStackView.isHidden = false
         
@@ -306,6 +321,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         }
     }
 
+    /**
+     Gets current server name from vpnManager
+     */
     private func getServerName() -> String {
         if vpnManager.isCustomServerActive() {
             return vpnManager.activeDnsServer!.name
@@ -321,6 +339,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
 }
 
+/**
+ Themable colors for today extension
+ */
 extension UIColor {
     @objc class var widgetTextColor: UIColor {
         if #available(iOS 11.0, *) {
