@@ -32,7 +32,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var cancelButton: UIBarButtonItem!
-    @IBOutlet var backButton: UIBarButtonItem!
     
     var model: ListOfRulesModelProtocol? = nil
     

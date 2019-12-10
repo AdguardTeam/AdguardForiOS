@@ -156,6 +156,8 @@ class NormalRuleCell: UITableViewCell {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    private let crossImage = UIImage(named: "cross") ?? UIImage()
+    private let tickImage = UIImage(named: "logocheck") ?? UIImage()
     
     var theme: ThemeServiceProtocol? {
         didSet{
@@ -194,8 +196,6 @@ class NormalRuleCell: UITableViewCell {
     var ruleState: Bool? {
         didSet{
             let state: Bool = ruleState ?? false
-            let crossImage = UIImage(named: "cross") ?? UIImage()
-            let tickImage = UIImage(named: "logocheck") ?? UIImage()
             
             ruleStateImageView.image = state ? tickImage : crossImage
         }
