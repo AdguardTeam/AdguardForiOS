@@ -40,7 +40,7 @@ class DnsProviderContainerController : UIViewController {
     
     private var notificationToken: NotificationToken?
     
-    private var initialProtocol: DnsProtocol?
+    private var childController: DnsProviderDetailsController?
     
     // MARK: - services
 
@@ -67,8 +67,6 @@ class DnsProviderContainerController : UIViewController {
             chosenProtocol = defaultDnsServer?.dnsProtocol
         }
         
-        initialProtocol = chosenProtocol
-        
         navigationItem.title = provider?.name
         
         setupBackButton()
@@ -77,15 +75,19 @@ class DnsProviderContainerController : UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        delegate?.changesWereApplied(chosenProtocol == initialProtocol)
+        
+        if let protocolChanged = childController?.protocolWasChanged {
+            delegate?.changesWereApplied(!protocolChanged)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "providerDetailsEmbedSegue" {
             guard let controller = segue.destination as? DnsProviderDetailsController else { return }
             controller.provider = provider
-            controller.containerController = self
             
+            childController = controller
+    
             var server: DnsServerInfo?
             
             if vpnManager.isActiveProvider(provider!) {
@@ -104,8 +106,17 @@ class DnsProviderContainerController : UIViewController {
     // MARK: - Actions
 
     @IBAction func useServerAction(_ sender: Any) {
-        activateServer(provider?.serverByProtocol(dnsProtocol: chosenProtocol ?? .dns))
-        delegate = nil
+        /**
+         When we tap "select" button we apply protocol changes
+         */
+        childController?.protocolWasChanged = false
+        if let currentProtocol: DnsProtocol = childController?.selectedProtocol {
+            if let defaultServer = defaultDnsServer {
+                let currentServer: DnsServerInfo = provider?.serverByProtocol(dnsProtocol: currentProtocol) ?? defaultServer
+                activateServer(currentServer)
+            }
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -118,7 +129,7 @@ class DnsProviderContainerController : UIViewController {
         topSeparator.backgroundColor = theme.separatorColor
     }
     
-    private func activateServer(_ server: DnsServerInfo?) {
+    private func activateServer(_ server: DnsServerInfo) {
         vpnManager.activeDnsServer = server
         vpnManager.enabled = server != nil
         dismiss(animated: true, completion: nil)
