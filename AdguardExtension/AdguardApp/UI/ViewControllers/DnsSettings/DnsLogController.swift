@@ -83,8 +83,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         cell.details.text = detailsString
         cell.timeLabel.text = timeString
         
-        let type = isBlocked(record)
-        setupRecordCell(cell: cell, type: type)
+        setupRecordCell(cell: cell, type: record.blockRecordType)
         
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
@@ -142,26 +141,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     @objc private func refresh() {
         model.obtainRecords()
     }
-    
-    private func isBlocked(_ logRecord: LogRecord) -> BlockedRecordType {
-        if logRecord.answer == nil || logRecord.answer == "" {
-            // Mark all NXDOMAIN responses as blocked
-            return .blocked
-        }
-
-        if logRecord.answer!.contains("0.0.0.0") ||
-            logRecord.answer!.contains("127.0.0.1") ||
-            logRecord.answer!.contains("[::]")  {
-            return .blocked
-        }
-
-        if logRecord.isTracked ?? false {
-            return .tracked
-        }
         
-        return .normal
-    }
-    
     private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType){
         if type == .normal {
             theme.setupTableCell(cell)
@@ -189,9 +169,5 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         cell.selectedBackgroundView = bgColorView
         cell.contentView.backgroundColor = .clear
         cell.backgroundColor = logBlockedCellColor
-    }
-    
-    private enum BlockedRecordType{
-        case blocked, whitelisted, tracked, normal
     }
 }
