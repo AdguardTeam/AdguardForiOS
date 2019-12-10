@@ -82,7 +82,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         if !enabled {
             getSystemProtectionState {[weak self] (systemEnabled) in
                 guard let self = self else { return }
-                self.saveLastStates(systemState: systemEnabled)
+                
+                let safaryEnabled = self.resources.safariProtectionEnabled
+                self.saveLastStates(safariState: safaryEnabled, systemState: systemEnabled)
                 
                 // Turning off safari and system protection
                 self.switchSafariProtection(state: enabled)
@@ -145,12 +147,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
     
-    private func saveLastStates(systemState: Bool){
-        let safaryEnabled = resources.safariProtectionEnabled
-        let systemEnabled = systemState
-        
-        resources.sharedDefaults().set(safaryEnabled, forKey: SafariProtectionLastState)
-        resources.sharedDefaults().set(systemEnabled, forKey: SystemProtectionLastState)
+    private func saveLastStates(safariState: Bool, systemState: Bool){
+        resources.sharedDefaults().set(safariState, forKey: SafariProtectionLastState)
+        resources.sharedDefaults().set(systemState, forKey: SystemProtectionLastState)
     }
     
     private func getLastStates() -> (safariEnabled: Bool, systemEnabled: Bool){

@@ -54,7 +54,9 @@ class VpnService: VpnServiceProtocol {
             guard let self = self else { return }
             
             if state && !self.vpnManager.vpnInstalled {
-                self.showConfirmVpnAlert(for: vc, enabled: state)
+                if let VC = vc {
+                    self.showConfirmVpnAlert(for: VC, enabled: state)
+                }
             }else {
                 self.vpnManager.enabled = state
             }
@@ -99,9 +101,7 @@ class VpnService: VpnServiceProtocol {
         }
     }
     
-    private func showConfirmVpnAlert(for vc: UIViewController?, enabled: Bool){
-        
-        if vc == nil { return }
+    private func showConfirmVpnAlert(for vc: UIViewController, enabled: Bool){
         
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
@@ -137,7 +137,7 @@ class VpnService: VpnServiceProtocol {
             
             alert.preferredAction = okAction
             
-            vc?.present(alert, animated: true, completion: nil)
+            vc.present(alert, animated: true, completion: nil)
         }
     }
 }
