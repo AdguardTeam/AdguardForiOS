@@ -131,7 +131,7 @@ class DnsProviderContainerController : UIViewController {
     
     private func activateServer(_ server: DnsServerInfo) {
         vpnManager.activeDnsServer = server
-        vpnManager.enabled = server != nil
+        vpnManager.enabled = true
         dismiss(animated: true, completion: nil)
     }
 }
