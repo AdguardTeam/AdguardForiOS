@@ -324,32 +324,17 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         DDLogFileManagerDefault *manager = [[ACLLogFileManagerDefault alloc] initWithLogsDirectory:[url path]];
         NSArray *logFileInfos = [manager sortedLogFileInfos];
         
-        NSMutableData *logData = [NSMutableData dataWithCapacity:ACL_MAX_LOG_FILE_SIZE];
-        NSUInteger loadSize = ACL_MAX_LOG_FILE_SIZE;
-        NSData *fileData;
-        NSStringEncoding enc;
-        NSString *fileContent;
+        NSMutableData *logData = [NSMutableData new];
         
         for (DDLogFileInfo *info in logFileInfos.reverseObjectEnumerator) {
             
-            fileContent = [NSString stringWithFormat:LOG_DELIMETER_FORMAT, info.fileName];
+            NSString* delimeter = [NSString stringWithFormat:LOG_DELIMETER_FORMAT, info.fileName];
+            [logData appendData:[delimeter dataUsingEncoding:NSUTF8StringEncoding]];
             
-            if (fileContent)
-                [logData appendData:[fileContent dataUsingEncoding:NSUTF8StringEncoding]];
-            
-            loadSize = ACL_MAX_LOG_FILE_SIZE - logData.length;
-            fileContent = [NSString stringWithContentsOfFile:info.filePath usedEncoding:&enc error:nil];
-            if (fileContent) {
-                
-                fileData = [fileContent dataUsingEncoding:NSUTF8StringEncoding];
-                if (fileData.length < loadSize) loadSize = fileData.length;
-                
-                [logData appendBytes:[fileData bytes] length:loadSize];
-                
-                if (logData.length >= ACL_MAX_LOG_FILE_SIZE)
-                    break;
+            NSData *fileData = [NSData dataWithContentsOfFile:info.filePath];
+            if(fileData) {
+                [logData appendData:fileData];
             }
-            
         }
         
         return [logData gzippedData];
