@@ -27,12 +27,12 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-- (id)initWithDomains:(NSArray<NSString *> *)domains {
+- (id)initWithRules:(NSArray<ASDFilterRule *> *)rules {
     
     if(self = [super init]) {
         
-        _domains = domains;
-        _rule = [self ruleFromDomains:domains];
+        _rules = rules;
+        _rule = [self ruleFromRules:rules];
     }
     
     return self;
@@ -46,19 +46,19 @@
     return @"@@||*$document,domain=";
 }
 
-- (ASDFilterRule*) ruleFromDomains:(NSArray<NSString*>*) domains {
+- (ASDFilterRule*) ruleFromRules:(NSArray<ASDFilterRule*>*) rules {
     
     NSMutableString* ruleString = [[self rulePrefix] mutableCopy];
     
-    for(int i = 0; i < domains.count; ++i) {
+    for(int i = 0; i < rules.count; ++i) {
         
-        if(domains[i].length == 0)
+        if(rules[i].ruleText.length == 0 || rules[i].isEnabled.boolValue == NO)
             continue;
         
         if(i > 0)
             [ruleString appendString:@"|"];
         
-        [ruleString appendFormat:@"~%@", domains[i]];
+        [ruleString appendFormat:@"~%@", rules[i].ruleText];
     }
     
     ASDFilterRule *rule = [ASDFilterRule new];
@@ -72,18 +72,12 @@
 
 - (void)addDomain:(NSString *)domain {
     
-    if(!_domains) {
-        _domains = [NSArray new];
+    if(!_rules) {
+        _rules = [NSArray new];
     }
-    
-    _domains = [_domains arrayByAddingObject:domain];
-    _rule = [self ruleFromDomains:_domains];
-}
-
-- (void)setDomains:(NSArray<NSString *> *)domains {
-    
-    _domains = domains;
-    _rule = [self ruleFromDomains:_domains];
+    ASDFilterRule *newRule = [[ASDFilterRule alloc] initWithText:domain enabled:YES];
+    _rules = [_rules arrayByAddingObject: newRule];
+    _rule = [self ruleFromRules: _rules];
 }
 
 @end
