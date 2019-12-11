@@ -22,7 +22,6 @@
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
 NSString *AE_URLSCHEME_COMMAND_ADD = @"add";
 
-NSString *AEDefaultsAdguardEnabled = @"AEDefaultsAdguardEnabled";
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
 NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
@@ -82,6 +81,9 @@ NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
 NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
 NSString* SafariProtectionState = @"SafariProtectionState";
+
+NSString *SafariProtectionLastState = @"SafariProtectionLastState";
+NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
@@ -428,6 +430,14 @@ static NSUserDefaults *_sharedUserDefaults;
         return [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     return nil;
+}
+
+- (BOOL)safariProtectionEnabled{
+    return [self.sharedDefaults boolForKey:SafariProtectionState];
+}
+
+- (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
+    [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
 }
 
 /////////////////////////////////////////////////////////////////////
