@@ -558,3 +558,24 @@
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "More";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blocked";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Processed";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "Whitelisted";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "added to whitelist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "added to blacklist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "removed from whitelist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "removed from blacklist";

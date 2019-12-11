@@ -255,6 +255,10 @@
 
 @implementation ASDFilterTagMeta
 
++ (void)initialize {
+    [super initialize];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     self.type = ((NSNumber*)[aDecoder decodeObjectForKey:@"tagType"]).intValue;

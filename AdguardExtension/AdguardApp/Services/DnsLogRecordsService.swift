@@ -22,7 +22,7 @@ import Foundation
 protocol DnsLogRecordsServiceProtocol{
     func writeRecords(_ records: [DnsLogRecord])
     func readRecords()->[DnsLogRecord]
-    func setUserStatus(rowId: Int, status: DnsLogRecordUserStatus)
+    func setUserStatus(rowId: NSNumber, status: DnsLogRecordUserStatus)
     func clearLog()
 }
 
@@ -91,13 +91,13 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         }
     }
     
-    func setUserStatus(rowId: Int, status: DnsLogRecordUserStatus) {
+    func setUserStatus(rowId: NSNumber, status: DnsLogRecordUserStatus) {
         
         var result: [APDnsLogTable]?
         readHandler?.inTransaction{ (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             let t = APDnsLogTable()
-            t.rowid = rowId as NSNumber
+            t.rowid = rowId
             result = table?.select(withKeys: ["rowid"], inRowObject: t) as? [APDnsLogTable]
         }
         

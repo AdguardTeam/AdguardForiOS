@@ -23,13 +23,15 @@ class DnsContainerController: UIViewController {
     @IBOutlet weak var shadowView: BottomShadowView!
     
     
-    var logRecord: LogRecord!
+    var logRecord: DnsLogRecordExtended!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: Any? = nil
+    
+    private var detailsController: DnsRequestDetailsController?
     
     // MARK: - view controller life cycle
     
@@ -38,6 +40,7 @@ class DnsContainerController: UIViewController {
             destinationVC.logRecord = logRecord
             destinationVC.shadowView = shadowView
             destinationVC.containerController = self
+            detailsController = destinationVC
         }
     }
     
@@ -48,7 +51,28 @@ class DnsContainerController: UIViewController {
             self?.updateTheme()
         }
         
-        let buttons = logRecord!.getButtons().map{ [weak self] (type) -> BottomShadowButton in
+        updateButtons()
+        
+        updateTheme()
+    }
+    
+    // MARK: - private methods
+    
+    private func updateTheme() {
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        view.backgroundColor = theme.backgroundColor
+        shadowView.updateTheme()
+    }
+    
+    private func setUserStatus(_ status: DnsLogRecordUserStatus) {
+        dnsLogService.setUserStatus(rowId: self.logRecord.logRecord.rowid!, status: status)
+        logRecord.logRecord.userStatus = status
+        detailsController?.updateStatusLabel()
+        updateButtons()
+    }
+    
+    private func updateButtons() {
+        let buttons = logRecord!.logRecord.getButtons().map{ [weak self] (type) -> BottomShadowButton in
             guard let self = self else { return BottomShadowButton() }
             let button = BottomShadowButton()
             var title: String!
@@ -59,9 +83,9 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("add_to_blacklist")
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
-                    if let rule = self.logRecord?.domain {
+                    if let rule = self.logRecord?.logRecord.domain {
                         self.dnsFiltersService.addBlacklistDomain(rule)
-                        self.dnsLogService.setUserStatus(rowId: self.logRecord.rowId, status: .movedToBlacklist)
+                        self.setUserStatus(self.logRecord!.logRecord.userStatus == .removedFromBlacklist ? .none : .movedToBlacklist)
                     }
                 }
                 
@@ -69,8 +93,9 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("remove_from_whitelist")
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
-                    if let rules = self.logRecord?.rules {
+                    if let rules = self.logRecord?.logRecord.blockRules {
                         self.dnsFiltersService.removeWhitelistRules(rules)
+                        self.setUserStatus(self.logRecord!.logRecord.userStatus == .movedToWhitelist ? .none : .removedFromWhitelist)
                     }
                 }
                 
@@ -78,8 +103,9 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("remove_from_blacklist")
                 color = UIColor(hexString: "#67b279")
                 button.action = {
-                    if let rules = self.logRecord?.rules {
+                    if let rules = self.logRecord?.logRecord.blockRules {
                         self.dnsFiltersService.removeUserRules(rules)
+                        self.setUserStatus(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .none : .removedFromBlacklist)
                     }
                 }
                 
@@ -87,8 +113,9 @@ class DnsContainerController: UIViewController {
                 title = String.localizedString("add_to_whitelist")
                 color = UIColor(hexString: "#67b279")
                 button.action = {
-                    if let domain = self.logRecord?.domain {
+                    if let domain = self.logRecord?.logRecord.domain {
                         self.dnsFiltersService.addWhitelistDomain(domain)
+                        self.setUserStatus(self.logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist)
                     }
                 }
             }
@@ -100,15 +127,5 @@ class DnsContainerController: UIViewController {
         }
         
         shadowView.buttons = buttons
-        
-        updateTheme()
-    }
-    
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        view.backgroundColor = theme.backgroundColor
-        shadowView.updateTheme()
     }
 }

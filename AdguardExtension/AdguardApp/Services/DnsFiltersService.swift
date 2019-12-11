@@ -138,7 +138,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var whitelistDomains: [String] {
         get {
-            return loadWhitelistRules().map { self.whitelistDomainFromRule($0) }
+            let whitelistRules = loadWhitelistRules()
+            return whitelistRules.map { self.whitelistDomainFromRule($0) }
         }
         set {
             saveWhitlistDomains(domains: newValue)
@@ -279,6 +280,10 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         guard let string = String(data: data, encoding: .utf8) else {
             DDLogError("(DnsFiltersService) error - can not convert whitelist data to string")
+            return []
+        }
+        
+        if string.count == 0 {
             return []
         }
         
