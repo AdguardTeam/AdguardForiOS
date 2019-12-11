@@ -38,7 +38,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch
     
-    @IBOutlet weak var complexProtectionSwitch: UISwitch!
+    @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
     
     
     // MARK: - Statistics elements
@@ -113,6 +113,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateTheme()
         chartModel.obtainStatistics()
         updateTextForButtons()
     }
@@ -158,7 +159,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch action
     
-    @IBAction func complexProtectionState(_ sender: UISwitch) {
+    @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
+        
     }
     
     

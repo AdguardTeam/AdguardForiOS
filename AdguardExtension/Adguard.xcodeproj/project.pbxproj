@@ -600,6 +600,7 @@
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
+		7E9D31C223A11BB60040AE4B /* ComplexProtectionSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */; };
 		7EA4183A239FEBE700CF517C /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
@@ -1808,6 +1809,7 @@
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
+		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
 		7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
@@ -3228,6 +3230,7 @@
 				7E74FCAF239F9C96006C0990 /* MainPageModel.swift */,
 				7E74FCAB239F9BF7006C0990 /* MainPageController.swift */,
 				7E74FCA9239F9BD1006C0990 /* MainPage.storyboard */,
+				7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */,
 			);
 			path = NewMainPage;
 			sourceTree = "<group>";
@@ -5175,6 +5178,7 @@
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */,
+				7E9D31C223A11BB60040AE4B /* ComplexProtectionSwitch.swift in Sources */,
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9BC81BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0569E4721F1F03000985DA9 /* APVPNManager.m in Sources */,

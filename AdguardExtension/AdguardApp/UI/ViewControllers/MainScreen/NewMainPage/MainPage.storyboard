@@ -142,17 +142,22 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-f2-PUd">
                                         <rect key="frame" x="0.0" y="245.33333333333331" width="414" height="245.33333333333331"/>
                                         <subviews>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBm-6a-Sgw">
-                                                <rect key="frame" x="182.66666666666666" y="107.33333333333337" width="51" height="31"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUL-Oa-fId" customClass="ComplexProtectionSwitch" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="167" y="107.66666666666669" width="80" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="bFD-kE-DZ4"/>
+                                                    <constraint firstAttribute="width" constant="80" id="dUl-rk-bzh"/>
+                                                </constraints>
                                                 <connections>
-                                                    <action selector="complexProtectionState:" destination="T6V-s9-cBk" eventType="valueChanged" id="Fab-HA-YGs"/>
+                                                    <action selector="complexProtectionState:" destination="T6V-s9-cBk" eventType="valueChanged" id="kJU-kj-rcf"/>
                                                 </connections>
-                                            </switch>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="KBm-6a-Sgw" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" id="9Dz-ce-oic"/>
-                                            <constraint firstItem="KBm-6a-Sgw" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="GXy-da-coO"/>
+                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" id="3hc-kh-ZxV"/>
+                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="zaa-ea-pZR"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-pN-tdm">
@@ -349,7 +354,7 @@
                         <outlet property="blockedTextLabel" destination="a5U-A8-S8G" id="vGQ-XU-1Ag"/>
                         <outlet property="changeStatisticsDatesButton" destination="kfe-5H-fB1" id="bpY-pU-sXY"/>
                         <outlet property="chartView" destination="aEB-g1-RpB" id="Vwb-3R-zO3"/>
-                        <outlet property="complexProtectionSwitch" destination="KBm-6a-Sgw" id="97b-hD-pgO"/>
+                        <outlet property="complexProtectionSwitch" destination="YUL-Oa-fId" id="jqh-kc-mId"/>
                         <outlet property="getProButton" destination="4Ft-5h-4Jd" id="upu-BZ-SFA"/>
                         <outlet property="getProView" destination="jbE-Rs-Ce2" id="JHN-OU-mFW"/>
                         <outlet property="manDialogText" destination="3qN-uj-pOb" id="Xx6-Hj-Nz6"/>
