@@ -145,10 +145,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         // Init Logger
         [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
 
-        [AGLogger setLevel: AGLL_INFO];
+        [AGLogger setLevel: AGLL_ERR];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
                 DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
+                [DDLog flushLog];
             }];
 
 #if DEBUG
