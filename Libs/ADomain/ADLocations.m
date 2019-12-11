@@ -34,9 +34,6 @@ static NSRecursiveLock *_lock;
 
 static NSURL *_programDataDirectory;
 static NSURL *_sharedProgramDataDirectory;
-//static NSURL *_nfapiConfigurationDirectory;
-//static NSURL *_appIconsCacheDirectory;
-//static NSURL *_rootUtilsDirectory;
 
 + (void)initialize{
     
