@@ -25,14 +25,15 @@ protocol DateTypeChangedProtocol: class {
 class ChartDateTypeController: BottomAlertController {
     
     @IBOutlet weak var periodLabel: ThemableLabel!
+    @IBOutlet weak var content: UIView!
     
-    @IBOutlet weak var todayButton: UIButton!
-    @IBOutlet weak var oneDayButton: UIButton!
-    @IBOutlet weak var weekButton: UIButton!
-    @IBOutlet weak var monthButton: UIButton!
-    @IBOutlet weak var allTimeButton: UIButton!
+    @IBOutlet var buttons: [RoundRectButton]!
+    @IBOutlet var separators: [UIView]!
     
     weak var delegate: DateTypeChangedProtocol?
+    
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private var themeNotificationToken: NotificationToken?
     
     private let todayTag = 0
     private let oneDayTag = 1
@@ -42,6 +43,12 @@ class ChartDateTypeController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateTheme()
+        
+        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
     }
     
     @IBAction func charDataTypeAction(_ sender: UIButton) {
@@ -64,4 +71,12 @@ class ChartDateTypeController: BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
+    private func updateTheme(){
+        content.backgroundColor = theme.popupBackgroundColor
+        theme.setupLabel(periodLabel)
+        theme.setupSeparators(separators)
+        for button in buttons {
+            button.setTitleColor(theme.grayTextColor, for: .normal)
+        }
+    }
 }

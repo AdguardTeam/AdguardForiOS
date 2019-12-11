@@ -107,8 +107,6 @@
                     <connections>
                         <outlet property="changeDateTypeButton" destination="mAT-NE-Z7y" id="EfH-3a-Afn"/>
                         <outlet property="chartView" destination="15q-o1-Zgx" id="GSj-T3-Roe"/>
-                        <outlet property="leftDateLabel" destination="0Sk-sc-Dtv" id="dUc-NI-fK2"/>
-                        <outlet property="rightDateLabel" destination="NMy-Sc-qUd" id="VPP-T7-Dss"/>
                         <outletCollection property="changeChartTypeButtons" destination="N5I-GD-gG1" collectionClass="NSMutableArray" id="D9b-4N-MPu"/>
                         <outletCollection property="changeChartTypeButtons" destination="Lip-VI-Wii" collectionClass="NSMutableArray" id="aBa-Wa-mkD"/>
                         <outletCollection property="changeChartTypeButtons" destination="BK9-Gj-xnx" collectionClass="NSMutableArray" id="VhC-5P-ZJb"/>
@@ -886,7 +884,7 @@ with Safari</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-774.375" y="47.535211267605632"/>
+            <point key="canvasLocation" x="-775.36231884057975" y="46.875"/>
         </scene>
         <!--MainMenu-->
         <scene sceneID="j1i-lf-c2m">

@@ -23,8 +23,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
     @IBOutlet weak var chartView: ChartView!
     @IBOutlet var changeChartTypeButtons: [UIButton]!
     
-    @IBOutlet weak var leftDateLabel: ThemableLabel!
-    @IBOutlet weak var rightDateLabel: ThemableLabel!
     @IBOutlet weak var changeDateTypeButton: UIButton!
 
     private var model: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)

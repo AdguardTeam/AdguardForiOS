@@ -52,12 +52,6 @@ class ChartView: UIView {
             drawChart()
         }
     }
-
-    var themeService: ThemeServiceProtocol? {
-        didSet{
-            backgroundColor = themeService?.backgroundColor
-        }
-    }
     
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2

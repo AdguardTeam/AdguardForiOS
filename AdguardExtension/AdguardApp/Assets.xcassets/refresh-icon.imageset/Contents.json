@@ -10,9 +10,8 @@
     "author" : "xcode"
   },
   "properties" : {
-    "auto-scaling" : "auto",
-    "compression-type" : "gpu-optimized-best",
+    "template-rendering-intent" : "template",
     "preserves-vector-representation" : true,
-    "template-rendering-intent" : "template"
+    "auto-scaling" : "auto"
   }
 }
