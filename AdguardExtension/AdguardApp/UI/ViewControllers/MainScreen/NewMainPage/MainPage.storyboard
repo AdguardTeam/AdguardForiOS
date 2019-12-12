@@ -58,7 +58,7 @@
                                     <action selector="updateFiltersAction:" destination="T6V-s9-cBk" eventType="touchUpInside" id="wzy-IU-SNZ"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kV5-xp-1Np">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kV5-xp-1Np">
                                 <rect key="frame" x="0.0" y="88" width="1024" height="1258"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqG-vP-HUd">

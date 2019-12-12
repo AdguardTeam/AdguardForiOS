@@ -70,6 +70,7 @@ class ComplexProtectionSwitch: UIControl {
     
     private var isAnimating = false
     
+    private let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     // MARK: - Inits
     
@@ -91,8 +92,39 @@ class ComplexProtectionSwitch: UIControl {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
-        animate(on: !isOn)
+        let x = touch.location(in: self).x
+        thumbImageView.isHidden = true
+        
+        print("BEGAN TRACKING: \(x)")
         return true
+    }
+    
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        var x = touch.location(in: self).x
+        
+        x = x > onPoint ? onPoint : x
+        x = x < offPoint ? offPoint : x
+        
+        UIView.animate(withDuration: 0.001) {[weak self] in
+            self?.thumbView.center.x = x
+        }
+        
+        print("CONTINUE TRACKING: \(x)")
+        return true
+    }
+    
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        let x = touch?.location(in: self).x ?? 0.0
+        
+        thumbImageView.isHidden = false
+        
+        if x > width / 2 {
+            animate(on: true)
+        } else {
+            animate(on: false)
+        }
+        
+        print("END TRACKING: \(x)")
     }
     
     // MARK: - private methods
@@ -157,6 +189,7 @@ class ComplexProtectionSwitch: UIControl {
             guard let self = self else { return }
             self.isAnimating = false
             self.sendActions(for: UIControl.Event.valueChanged)
+            self.generator.impactOccurred()
         })
     }
 }
