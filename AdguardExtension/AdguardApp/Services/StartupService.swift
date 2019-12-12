@@ -49,9 +49,18 @@ class StartupService : NSObject{
         
         let safariService = SafariService(resources: sharedResources)
         locator.addService(service: safariService)
-        
+    
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
+        
+        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
+        locator.addService(service: vpnManager)
+        
+        let vpnService: VpnServiceProtocol = VpnService(vpnManager: vpnManager)
+        locator.addService(service: vpnService)
+        
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, systemProtectionProcessor: vpnService)
+        locator.addService(service: complexProtection)
         
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
@@ -69,9 +78,6 @@ class StartupService : NSObject{
         
         locator.addService(service: filtersService)
         
-        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
-        locator.addService(service: vpnManager)
-        
         let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         
         supportService.configurationService = configuration;
@@ -84,7 +90,6 @@ class StartupService : NSObject{
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources, vpnManager: vpnManager)
         ServiceLocator.shared.addService(service: networkSettingsService)
 
-        
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager)
         locator.addService(service: dnsFiltersService)
     }

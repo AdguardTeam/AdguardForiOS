@@ -156,6 +156,8 @@ class NormalRuleCell: UITableViewCell {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    private let crossImage = UIImage(named: "cross") ?? UIImage()
+    private let tickImage = UIImage(named: "logocheck") ?? UIImage()
     
     var theme: ThemeServiceProtocol? {
         didSet{
@@ -174,6 +176,10 @@ class NormalRuleCell: UITableViewCell {
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
             }
+
+            if type == .systemWhitelist || type == .systemBlacklist{
+                ruleStateImageView.isHidden = true
+            }
             
             if type == .safariUserfilter {
                 ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: 15.0)
@@ -190,8 +196,6 @@ class NormalRuleCell: UITableViewCell {
     var ruleState: Bool? {
         didSet{
             let state: Bool = ruleState ?? false
-            let crossImage = UIImage(named: "cross") ?? UIImage()
-            let tickImage = UIImage(named: "logocheck") ?? UIImage()
             
             ruleStateImageView.image = state ? tickImage : crossImage
         }

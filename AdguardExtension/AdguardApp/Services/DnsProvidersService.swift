@@ -146,7 +146,7 @@ protocol DnsProvidersServiceProtocol {
                 self.readServersJson()
             }
             
-            return providersInternal!
+            return providersInternal ?? []
         }
     }
     

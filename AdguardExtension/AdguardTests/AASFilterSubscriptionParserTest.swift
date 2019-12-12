@@ -25,7 +25,7 @@ class AASFilterSubscriptionParserTest: XCTestCase {
 
     override func setUp() {
         networking = NetworkMock()
-        parser = AASFilterSubscriptionParser(networking: networking)
+        parser = AASFilterSubscriptionParser()
     }
 
     override func tearDown() {
@@ -74,7 +74,7 @@ class AASFilterSubscriptionParserTest: XCTestCase {
                                     """
         
         do {
-            let result = try parser.parse(from: URL(string: "test.com")!)
+            let result = try parser.parse(from: URL(string: "test.com")!, networking: networking)
             XCTAssertNotNil(result)
             
             var allUsed = Affinity()

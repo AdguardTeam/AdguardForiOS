@@ -195,6 +195,10 @@ Clears Statistics Log.
 /**remove vpn configuration from system settings*/
 - (void)removeVpnConfiguration;
 
+@property (nonatomic, nullable) void (^delayedTurn)();
+
+@property (nonatomic) BOOL managerWasLoaded;
+
 @end
 
 /**

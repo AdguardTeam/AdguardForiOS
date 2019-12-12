@@ -55,6 +55,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue{
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsDnsWhitelistEnabled)
+                vpnManager.restartTunnel()
             }
         }
     }
@@ -97,6 +98,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private var dnsFiltersService: DnsFiltersServiceProtocol
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
+    private let vpnManager: APVPNManager
     private let fileShare: FileShareServiceProtocol = FileShareService()
     
     /* Variables */
@@ -107,10 +109,11 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(dnsFiltersService: DnsFiltersServiceProtocol, resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol) {
+    init(dnsFiltersService: DnsFiltersServiceProtocol, resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol, vpnManager: APVPNManager) {
         self.dnsFiltersService = dnsFiltersService
         self.resources = resources
         self.theme = theme
+        self.vpnManager = vpnManager
         
         // Needs to be changed
         // dnsFiltersService must store rules as [RuleInfo] because we need to know their state

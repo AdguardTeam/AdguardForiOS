@@ -171,9 +171,6 @@ class SafariService: NSObject, SafariServiceProtocol {
                     
                     // Notify that filter finished updating
                     NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
-                    
-                    // Notify that filter finished updating
-                    NotificationCenter.default.post(name: SafariService.filterFinishedUpdating, object: self, userInfo: [SafariService.successString : sError, SafariService.contentBlockerTypeString : blocker])
 
                     group.leave()
                 })

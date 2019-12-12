@@ -24,7 +24,7 @@ import AdSupport
 /**
  Main Screen View Controller
  */
-class MainController: UIViewController {
+class MainController: UIViewController, VpnServiceNotifierDelegate {
     
     // MARK: - constants
     let enabledColor = UIColor(hexString: "#68BC71")
@@ -68,10 +68,18 @@ class MainController: UIViewController {
     @IBOutlet weak var premiumLabel: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
+    
+    // TEST SWITCH
+    @IBOutlet weak var testSwitch: UISwitch!
+    
+    
     // MARK: - properties
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var vpnService: VpnServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
     var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
     
     var viewModel: MainViewModel?
@@ -80,6 +88,7 @@ class MainController: UIViewController {
     private var lightThemeLogoImage = UIImage(named: "adguard-header-disabled") ?? UIImage()
     
     private var notificationToken: NotificationToken?
+    private var appWillEnterForeground: NotificationToken?
     
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
@@ -88,6 +97,10 @@ class MainController: UIViewController {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            self?.checkComplexProtection()
+        })
         
         let ratedObservation = configuration.observe(\.appRated) {[weak self](_, _) in
             self?.updateUI()
@@ -121,6 +134,10 @@ class MainController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        vpnService.notifier = self
+        
+        checkComplexProtection()
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -215,6 +232,29 @@ class MainController: UIViewController {
                 self?.updateEnded()
             })
         })
+    }
+    // TEST ACTION
+    @IBAction func testAction(_ sender: UISwitch) {
+        let enabled = sender.isOn
+        
+        complexProtection.switchComplexProtection(state: enabled, for: self)
+    }
+    
+    // MARK: - Vpn notifiers
+    
+    func tunnelModeChanged() {
+        checkComplexProtection()
+    }
+    
+    func vpnConfigurationChanged(with error: Error?) {
+        if error != nil {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+            checkComplexProtection()
+        }
+    }
+    
+    func cancelledAddingVpnConfiguration() {
+        checkComplexProtection()
     }
     
     // MARK: - private methods
@@ -331,5 +371,13 @@ class MainController: UIViewController {
         
         getProView.backgroundColor = theme.invertedBackgroundColor
         theme.setupLabelInverted(premiumLabel)
+    }
+    
+    private func checkComplexProtection(){
+        complexProtection.checkState { (enabled) in
+            DispatchQueue.main.async {[weak self] in
+                self?.testSwitch.isOn = enabled
+            }
+        }
     }
 }
