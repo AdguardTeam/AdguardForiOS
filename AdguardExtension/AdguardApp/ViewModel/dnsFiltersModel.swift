@@ -18,13 +18,67 @@
 
 import Foundation
 
-class DnsFiltersModel {
-    var filtersService: DnsFiltersServiceProtocol
-    var filters: [DnsFilter] = []
+protocol DnsFiltersModelProtocol {
+    var delegate: DnsFiltersChangedProtocol? { get set }
+    
+    var filters: [DnsFilter] { get }
+    var isSearchActive: Bool { get set }
+    
+    func setFilter(index: Int, enabled: Bool)
+    func addFilter(_ filter: DnsFilter, data: Data?) -> Bool
+    func deleteFilter(_ filter: DnsFilter)
+    func searchFilter(by string: String?)
+    func updateFilters()
+}
+
+protocol DnsFiltersChangedProtocol {
+    func filtersChanged()
+}
+
+class DnsFiltersModel: DnsFiltersModelProtocol {
+    
+    var delegate: DnsFiltersChangedProtocol?
+    
+    private var filtersService: DnsFiltersServiceProtocol
+    
+    var filters: [DnsFilter] {
+        get {
+            return isSearchActive ? searchFilters : allFilters
+        }
+    }
+    private var allFilters: [DnsFilter] = []
+    private var searchFilters: [DnsFilter] = []
+    
+    var isSearchActive: Bool = false
     
     init(filtersService: DnsFiltersServiceProtocol) {
         self.filtersService = filtersService;
-        fillFilters()
+        updateFilters()
+    }
+    
+    //MARK: - Public methods
+    
+    func addFilter(_ filter: DnsFilter, data: Data?) -> Bool {
+        // Check if there are no identical filters
+        for filt in allFilters{
+            if filter == filt {
+                return true
+            }
+        }
+        
+        allFilters.append(filter)
+        filtersService.addFilter(filter, data: data)
+        return false
+    }
+    
+    func deleteFilter(_ filter: DnsFilter) {
+        filtersService.deleteFilter(filter)
+        for (i, fil) in filters.enumerated() {
+            if fil.id == filter.id {
+                allFilters.remove(at: i)
+                return
+            }
+        }
     }
     
     func setFilter(index: Int, enabled: Bool) {
@@ -32,7 +86,40 @@ class DnsFiltersModel {
         filtersService.setFilter(filterId: filter.id, enabled: enabled)
     }
     
-    private func fillFilters(){
-        filters = filtersService.filters
+    func updateFilters(){
+        allFilters = filtersService.filters
+    }
+    
+    func searchFilter(by string: String?) {
+        searchFilters = []
+        allFilters.forEach({ $0.attributedString = nil })
+        
+        if string == nil || (string?.isEmpty ?? true) {
+            searchFilters = allFilters
+            delegate?.filtersChanged()
+            return
+        }
+        let components = string!.lowercased().split(separator: " ")
+        let searchSet = Set(components.map({ String($0) }))
+        let searchStrings = Array(searchSet)
+        
+        for filter in allFilters {
+            if checkFilter(filter: filter, searchString: searchStrings) {
+                filter.attributedString = filter.name?.highlight(search: searchStrings)
+                searchFilters.append(filter)
+            }
+        }
+        delegate?.filtersChanged()
+    }
+    
+    private func checkFilter(filter: DnsFilter, searchString: [String]) -> Bool{
+        let name = filter.name ?? ""
+        for string in searchString {
+            let range = name.range(of: string, options: .caseInsensitive)
+            if range != nil {
+                return true
+            }
+        }
+        return false
     }
 }

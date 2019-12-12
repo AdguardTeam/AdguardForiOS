@@ -29,8 +29,7 @@ class descriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
-class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate {
-    //MARK: - IB Outlets
+class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate, DnsProtocolChangedDelegate {
     
     // MARK: - services
     
@@ -174,6 +173,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             let controller = segue.destination as! DnsProviderContainerController
             controller.provider = providerToShow
             controller.defaultDnsServer = defaultServer(providerToShow!)
+            controller.delegate = self
         }
     }
     
@@ -195,6 +195,17 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomAnimatedTransitioning()
+    }
+    
+    // MARK: - DnsProtocolChangedDelegate method
+    
+    func changesWereApplied(_ applied: Bool) {
+        if !applied {
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("changes_not_applied"))
+            }
+        }
     }
     
     // MARK: private methods

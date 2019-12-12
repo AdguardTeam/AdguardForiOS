@@ -48,7 +48,7 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
 
         let animations = {
             
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.7) {
                 toView.alpha = 1
                 if self.presenting {
                     fromView.alpha = 0

@@ -60,7 +60,8 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
     #endif
 
-        BOOL filteringEnabled = [[resources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled];
+        NSNumber *safariEnabled = [[resources sharedDefaults] objectForKey:SafariProtectionState];
+        BOOL filteringEnabled = safariEnabled.boolValue;
         
         DDLogInfo(@"(ActionRequestHandler) start content blocker loading - %@. filteringEnabled = %@", NSBundle.mainBundle.bundleIdentifier, filteringEnabled ? @"TRUE" : @"FALSE");
         

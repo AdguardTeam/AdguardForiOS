@@ -94,9 +94,10 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         resolveQueue.sync { [weak self] in
             self?.workingQueue.sync { [weak self] in
                 self?.agproxy = nil
-                callback()
             }
         }
+        
+        callback()
         
         return
     }
