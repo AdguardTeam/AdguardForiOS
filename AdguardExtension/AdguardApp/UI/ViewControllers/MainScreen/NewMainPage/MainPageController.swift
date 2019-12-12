@@ -26,7 +26,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var refreshButton: UIButton!
     
     
-    
     // MARK: - Protection status elements
     
     @IBOutlet weak var safariProtectionButton: UIButton!
@@ -38,6 +37,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch
     
+    @IBOutlet weak var complexProtectionView: UIView!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
     
     
@@ -102,10 +102,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         mainPageModel = MainPageModel(antibanner: antibanner)
         
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         addObservers()
     
         chooseRequest()
-        
+    
         chartModel.chartPointsChangedDelegate = self
         
         changeProtectionStatusLabel()
@@ -114,10 +116,16 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
+        observeProStatus()
         chartModel.obtainStatistics()
         updateTextForButtons()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+        
     deinit {
         removeObservers()
     }
@@ -325,7 +333,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
         
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            // Add pro observation
+            guard let self = self else { return }
+            self.observeProStatus()
         }
         
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
@@ -366,5 +375,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.refreshButton.rotateImage(isNedeed: false)
             self?.changeProtectionStatusLabel()
         })
+    }
+    
+    /**
+     States views by pro status
+     */
+    private func observeProStatus(){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let proStatus = self.configuration.proStatus
+            
+            self.getProView.isHidden = proStatus
+            self.statisticsStackView.isHidden = !proStatus
+            self.changeStatisticsDatesButton.isHidden = !proStatus
+        }
     }
 }

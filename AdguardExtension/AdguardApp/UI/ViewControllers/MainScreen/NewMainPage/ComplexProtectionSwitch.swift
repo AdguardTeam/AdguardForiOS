@@ -37,10 +37,27 @@ class ComplexProtectionSwitch: UIControl {
     
     private let innerShadowView = UIView()
     
-    private let width: CGFloat = 80.0
-    private let height: CGFloat = 30.0
-    private let thumbSide: CGFloat = 50.0
-    private let thumbImageSide: CGFloat = 24.0
+    private var width: CGFloat {
+        get {
+            return frame.width
+        }
+    }
+    private var height: CGFloat {
+        get {
+            return frame.height
+        }
+    }
+    
+    private var thumbSide: CGFloat {
+        get{
+            return height * 5 / 3
+        }
+    }
+    private var thumbImageSide: CGFloat {
+        get {
+            return thumbSide / 2
+        }
+    }
     
     private var onPoint: CGFloat = 0.0
     private var offPoint: CGFloat = 0.0
@@ -66,6 +83,9 @@ class ComplexProtectionSwitch: UIControl {
         customInit()
     }
     
+    override func layoutSubviews() {
+        layoutSwitch()
+    }
     
     // MARK: - UIControl Delegate method
     
@@ -77,35 +97,39 @@ class ComplexProtectionSwitch: UIControl {
     
     // MARK: - private methods
     
-    private func customInit(){
+    private func layoutSwitch(){
         frame.size = CGSize(width: width, height: height)
-        backgroundColor = offColor
         layer.cornerRadius = height / 2
         
-        innerShadowView.isUserInteractionEnabled = false
         innerShadowView.frame = bounds
         innerShadowView.layer.cornerRadius = height / 2
-        innerShadowView.layer.borderWidth = 1.0
-        innerShadowView.layer.borderColor = UIColor(hexString: "#1f1f1f").withAlphaComponent(0.2).cgColor
                         
         thumbView.frame.size = CGSize(width: thumbSide, height: thumbSide)
         thumbView.center = CGPoint(x: bounds.minX + thumbSide / 2, y: bounds.midY)
-        thumbView.backgroundColor = thumbColor
         thumbView.layer.cornerRadius = thumbSide / 2
+    
+        thumbImageView.frame.size = CGSize(width: thumbImageSide, height: thumbImageSide)
+        thumbImageView.center = CGPoint(x: thumbView.bounds.midX, y: thumbView.bounds.midY)
         
+        onPoint = bounds.maxX - thumbSide / 2
+        offPoint = bounds.minX + thumbSide / 2
+    }
+    
+    private func customInit(){
+        backgroundColor = offColor
+        
+        innerShadowView.isUserInteractionEnabled = false
+        innerShadowView.layer.borderWidth = 1.0
+        innerShadowView.layer.borderColor = UIColor(hexString: "#1f1f1f").withAlphaComponent(0.2).cgColor
+        
+        thumbView.backgroundColor = thumbColor
         thumbView.layer.shadowColor = thumbShadowColor.cgColor
         thumbView.layer.shadowOpacity = thumbShadowOppacity
         thumbView.layer.shadowOffset = .zero
         thumbView.layer.shadowRadius = 5
-        
         thumbView.isUserInteractionEnabled = false
-        
-        onPoint = bounds.maxX - thumbSide / 2
-        offPoint = bounds.minX + thumbSide / 2
-        
-        thumbImageView.frame.size = CGSize(width: thumbImageSide, height: thumbImageSide)
+                
         thumbImageView.image = offImage
-        thumbImageView.center = CGPoint(x: bounds.minX + thumbSide / 2, y: bounds.midY + 10.0)
         
         thumbView.addSubview(thumbImageView)
         addSubview(innerShadowView)
