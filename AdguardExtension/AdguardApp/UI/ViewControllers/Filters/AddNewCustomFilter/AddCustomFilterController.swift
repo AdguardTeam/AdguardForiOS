@@ -20,16 +20,19 @@ import Foundation
 
 class AddCustomFilterController: BottomAlertController {
     
-    let detailsSegueId = "showFilterDetailsSegue"
+    var type: NewFilterType = .safariCustom
+    
+    private let detailsSegueId = "showFilterDetailsSegue"
     
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let networking: ACNNetworking = ServiceLocator.shared.getService()!
     
-    var filter : AASCustomFilterParserResult?
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let networking: ACNNetworking = ServiceLocator.shared.getService()!
+    
+    private var filter : AASCustomFilterParserResult?
     var delegate: NewCustomFilterDetailsDelegate?
     
     private var notificationToken: NotificationToken?
@@ -55,9 +58,11 @@ class AddCustomFilterController: BottomAlertController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == detailsSegueId {
-            let controller = segue.destination as! NewCustomFilterDetailsController
-            controller.filter = filter
-            controller.delegate = delegate
+            if let controller = segue.destination as? NewCustomFilterDetailsController {
+                controller.type = type
+                controller.filter = filter
+                controller.delegate = delegate
+            }
         }
     }
     
@@ -82,8 +87,8 @@ class AddCustomFilterController: BottomAlertController {
         
         guard let urlString = urlTextField?.text else { return }
         guard let url = URL(string: urlString) else { return }
-        let parser = AASFilterSubscriptionParser(networking: networking)
-        parser.parse(from: url) { [weak self]  (result, error) in
+        let parser = AASFilterSubscriptionParser()
+        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {return}
                 if let parserError = error {
@@ -112,5 +117,18 @@ class AddCustomFilterController: BottomAlertController {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
+    }
+}
+
+enum NewFilterType {
+    case safariCustom, dnsCustom
+    
+    func getTitleText() -> String {
+        switch self {
+        case .safariCustom:
+            return String.localizedString("new_filter_title")
+        case .dnsCustom:
+            return String.localizedString("new_dns_filter_title")
+        }
     }
 }

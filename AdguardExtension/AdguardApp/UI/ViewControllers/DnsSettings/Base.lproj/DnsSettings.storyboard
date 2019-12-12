@@ -270,7 +270,7 @@
         <!--DNS Privacy-->
         <scene sceneID="Q9V-mP-4MB">
             <objects>
-                <tableViewController id="So5-wP-aAQ" customClass="DnsSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DnsSettingsController" id="So5-wP-aAQ" customClass="DnsSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fIm-0l-mh5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1115,7 +1115,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBI-VP-hHZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBI-VP-hHZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="28" width="286" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -1296,7 +1296,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mTq-3U-N0C">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="YRd-eq-ijG">
                                     <rect key="frame" x="0.0" y="177.5" width="414" height="44"/>
@@ -1304,7 +1304,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddFilterCell" id="boX-iD-QJU" customClass="AddFilterCell" customModule="Adguard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddFilterCell" id="boX-iD-QJU" customClass="AddFilterCell" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="50.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="boX-iD-QJU" id="BqC-6L-7Oq">
@@ -1335,7 +1335,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DnsFilterCell" id="fgI-rz-PCO" customClass="DnsFilterCell" customModule="Adguard" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DnsFilterCell" id="fgI-rz-PCO" customClass="DnsFilterCell" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="78.5" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fgI-rz-PCO" id="4Hh-7q-efE">
@@ -1394,7 +1394,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="fEs-0I-oGu" firstAttribute="bottom" secondItem="mTq-3U-N0C" secondAttribute="bottom" id="GEi-ez-ZgL"/>
                             <constraint firstItem="fEs-0I-oGu" firstAttribute="trailing" secondItem="mTq-3U-N0C" secondAttribute="trailing" id="oIS-hi-VR1"/>
@@ -1403,14 +1402,42 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fEs-0I-oGu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="DNS Filters" id="w0g-Xg-HG0">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="sow-bu-Clq"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="DNS Filters" id="w0g-Xg-HG0"/>
                     <connections>
+                        <outlet property="cancelButton" destination="FUp-wc-lbK" id="Kgj-H4-bDF"/>
+                        <outlet property="searchBar" destination="3s4-VB-Nag" id="AfN-iA-Tcb"/>
+                        <outlet property="searchButton" destination="1VW-uc-EuZ" id="64r-rb-0Nd"/>
+                        <outlet property="searchView" destination="Yj0-pD-K5P" id="Ss8-Zz-wAe"/>
                         <outlet property="tableView" destination="mTq-3U-N0C" id="YaA-6i-Jgq"/>
                     </connections>
                 </viewController>
+                <barButtonItem style="plain" systemItem="cancel" id="FUp-wc-lbK" userLabel="cancel button">
+                    <connections>
+                        <action selector="cancelAction:" destination="8yt-2q-Mtc" id="Pm5-FX-iif"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="search" id="1VW-uc-EuZ" userLabel="search button">
+                    <connections>
+                        <action selector="searchAction:" destination="8yt-2q-Mtc" id="Vtf-2W-fSS"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJc-U5-LUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Yj0-pD-K5P" userLabel="search view">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s4-VB-Nag">
+                            <rect key="frame" x="20" y="0.0" width="200" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="8yt-2q-Mtc" id="R9R-Us-Hoq"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="Jfl-yH-W4Y"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1339" y="-1266"/>
         </scene>

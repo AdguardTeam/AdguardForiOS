@@ -80,6 +80,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 @synthesize connectionStatus = _connectionStatus;
 @synthesize lastError = _lastError;
+@synthesize delayedTurn = _delayedTurn;
+@synthesize managerWasLoaded = _managerWasLoaded;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
@@ -90,6 +92,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     self = [super init];
     if (self) {
         
+        _managerWasLoaded = NO;
         _resources = resources;
         _configuration = configuration;
         workingQueue = dispatch_queue_create("APVPNManager", DISPATCH_QUEUE_SERIAL);
@@ -168,7 +171,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 #pragma mark Properties and public methods
 
 - (BOOL)enabled {
-    
     return _enabled;
 }
 - (void)setEnabled:(BOOL)enabled{
@@ -658,7 +660,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     [NETunnelProviderManager loadAllFromPreferencesWithCompletionHandler:^(NSArray<NETunnelProviderManager *> * _Nullable managers, NSError * _Nullable error) {
         if (error){
-            
             DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
             _lastError = _standartError;
         }
@@ -687,6 +688,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                     
                     _manager = managers[0];
                 }
+            } else {
+                _manager = nil;
             }
         }
 
@@ -709,6 +712,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         }
         
         [self sendNotificationForced:YES];
+        if (_delayedTurn){
+            _delayedTurn();
+        }
+        self.managerWasLoaded = YES;
     }];
     
 }
@@ -779,6 +786,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
             DDLogInfo(@"(APVPNManager) Updating vpn conviguration failed: %@",
                       (self.activeDnsServer.name ?: @"None"));
             
+            [self loadConfiguration];
             [self sendNotificationForced:NO];
             return;
         }
@@ -845,6 +853,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         }
         
         _resources.activeDnsServer = _activeDnsServer;
+        DDLogInfo(@"(APVPNManager) active dns server changed. New dns server is: %@", _activeDnsServer.name);
+        
         [_resources.sharedDefaults setInteger: _tunnelMode forKey:AEDefaultsVPNTunnelMode];
         
         [self willChangeValueForKey:@"tunnelMode"];
@@ -921,6 +931,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _connectionStatus = APVpnConnectionStatusDisabled;
         
         DDLogInfo(@"(APVPNManager) Updated Status:\nNo manager instance.");
+        DDLogInfo(@"(APVPNManager) active dns server changed to default: %@", _activeDnsServer.name);
     }
     [_resources.sharedDefaults setBool:_enabled forKey:AEDefaultsVPNEnabled];
     // start delayed
@@ -933,7 +944,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     id observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNConfigurationChangeNotification
-                   object: nil //_manager
+                   object: nil
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                     
@@ -958,7 +969,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     observer = [[NSNotificationCenter defaultCenter]
                    addObserverForName:NEVPNStatusDidChangeNotification
-                object: nil //_manager.connection
+                object: nil
                    queue:_notificationQueue
                    usingBlock:^(NSNotification *_Nonnull note) {
                         
@@ -982,6 +993,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
                                 dispatch_sync(workingQueue, ^{
                                     [self setStatuses];
+                                    [self loadConfiguration];
                                 });
                             } else {
                                 DDLogError(@"(APVPNManager) Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);

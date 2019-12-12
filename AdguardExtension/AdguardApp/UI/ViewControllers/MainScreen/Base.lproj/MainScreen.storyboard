@@ -12,7 +12,6 @@
             <objects>
                 <navigationController storyboardIdentifier="mainNavigationController" navigationBarHidden="YES" id="HLF-WM-Asa" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="d9z-rs-be4">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,12 +69,20 @@
                                                     <segue destination="Xm1-m3-uqM" kind="show" id="BbW-jj-fUU"/>
                                                 </connections>
                                             </button>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDr-1D-oSF">
+                                                <rect key="frame" x="16" y="13.5" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="testAction:" destination="bds-k9-eYe" eventType="valueChanged" id="Qau-NC-TQN"/>
+                                                </connections>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="zjf-M2-fLO" secondAttribute="trailing" constant="15" id="9qG-l8-cEH"/>
                                             <constraint firstItem="zjf-M2-fLO" firstAttribute="top" secondItem="0bS-Py-Z4b" secondAttribute="top" constant="9" id="CZ4-GO-mza"/>
                                             <constraint firstItem="xVP-0T-sAu" firstAttribute="centerX" secondItem="0bS-Py-Z4b" secondAttribute="centerX" id="Cnv-K7-jFq"/>
+                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="centerY" secondItem="zjf-M2-fLO" secondAttribute="centerY" id="IKN-S7-JZL"/>
+                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="leading" secondItem="0bS-Py-Z4b" secondAttribute="leading" constant="16" id="ZiU-Aa-Mt4"/>
                                             <constraint firstAttribute="bottom" secondItem="xVP-0T-sAu" secondAttribute="bottom" id="aHD-HL-anP"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -531,6 +538,7 @@ with Safari</string>
                         <outlet property="star3" destination="ONb-hr-d27" id="Cn0-9i-XlD"/>
                         <outlet property="star4" destination="jRL-4k-532" id="72B-22-WRz"/>
                         <outlet property="star5" destination="ajd-oN-WSw" id="CXx-GP-gXD"/>
+                        <outlet property="testSwitch" destination="dDr-1D-oSF" id="9Jo-QR-evT"/>
                         <outlet property="tutorialVideoView" destination="Sk8-rZ-X4e" id="bLm-Ij-sqv"/>
                         <outlet property="updateFiltersGestureRecognizer" destination="DEt-Hi-EkO" id="KS7-q9-ZiJ"/>
                         <outlet property="vikingImage" destination="TBC-HI-cYs" id="zhT-UW-VlD"/>

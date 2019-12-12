@@ -24,6 +24,8 @@ protocol NewCustomFilterDetailsDelegate {
 
 class NewCustomFilterDetailsController : BottomAlertController {
     
+    var type: NewFilterType = .safariCustom
+    
     let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     var filter : AASCustomFilterParserResult?
@@ -35,7 +37,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBOutlet weak var homepage: UILabel!
     @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+    @IBOutlet weak var newFilterTitle: ThemableLabel!
     
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
     
@@ -44,6 +46,8 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        newFilterTitle.text = type.getTitleText()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
