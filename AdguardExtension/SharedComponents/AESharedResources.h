@@ -250,6 +250,11 @@ extern NSString* _Nonnull ShowStatusViewNotification;
 extern NSString* _Nonnull HideStatusViewNotification;
 
 /**
+ Unique id for dns filters
+ */
+extern NSString* _Nonnull DnsFilterUniqueId;
+
+/**
  Last state of safari protection
  */
 extern NSString* _Nonnull SafariProtectionLastState;

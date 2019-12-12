@@ -82,6 +82,8 @@ NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
 NSString* SafariProtectionState = @"SafariProtectionState";
 
+NSString* DnsFilterUniqueId = @"DnsFilterUniqueId";
+
 NSString *SafariProtectionLastState = @"SafariProtectionLastState";
 NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 

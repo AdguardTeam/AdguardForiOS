@@ -113,8 +113,8 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kF-Mk-dHf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="56" width="31" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kF-Mk-dHf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="38" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -169,8 +169,8 @@
                                                         <constraint firstAttribute="width" constant="24" id="RxS-nH-cRd"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVg-Gj-40a" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="38" width="31" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVg-Gj-40a" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="38" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -754,7 +754,7 @@
         <!--Filter Details Controller-->
         <scene sceneID="P2a-VB-LUA">
             <objects>
-                <viewController id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterDetailsController" id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l8F-zH-yJh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1298,6 +1298,7 @@
                         <outlet property="homepageTopConstraint" destination="dsH-aw-gew" id="1lS-wJ-Bxe"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="IJW-Zw-R6Y" id="dWj-TY-oGC"/>
                         <outlet property="name" destination="zcB-eh-Ou4" id="jmi-1i-u3J"/>
+                        <outlet property="newFilterTitle" destination="NsT-wt-1hd" id="iin-wz-aeA"/>
                         <outlet property="rulesCount" destination="tDs-5f-dGf" id="lCX-Yz-OIf"/>
                         <outletCollection property="themableLabels" destination="NsT-wt-1hd" collectionClass="NSMutableArray" id="1NW-kD-UfD"/>
                         <outletCollection property="themableLabels" destination="RJU-32-r8h" collectionClass="NSMutableArray" id="bzX-FW-T4D"/>
@@ -1308,10 +1309,10 @@
             </objects>
             <point key="canvasLocation" x="743" y="1011"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--New Custom Filter Navigation Controller-->
         <scene sceneID="uAn-1B-U5U">
             <objects>
-                <navigationController storyboardIdentifier="NewCustomFilterInfoController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="nW1-fZ-XZV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NewCustomFilterInfoController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="nW1-fZ-XZV" customClass="NewCustomFilterNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3jV-Hp-MGa">
                         <autoresizingMask key="autoresizingMask"/>
