@@ -64,11 +64,11 @@ class DnsProxyTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "expectation")
         
-        proxyService.stop() {}
-        
-        proxyService.resolve(dnsRequest: request!) { (response) in
-            XCTAssertNil(response)
-            expectation.fulfill()
+        proxyService.stop() { [weak self] in
+            self!.proxyService.resolve(dnsRequest: self!.request!) { (response) in
+                XCTAssertNil(response)
+                expectation.fulfill()
+            }
         }
         
         wait(for: [expectation], timeout: 15)
