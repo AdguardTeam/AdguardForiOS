@@ -114,7 +114,7 @@ protocol PurchaseServiceProtocol {
     func authUrlWithName(name: String)->URL?
     
     /** resets all login data */
-    func reset()
+    func reset(completion: @escaping ()->Void )
 }
 
 // MARK: - public constants -
@@ -306,8 +306,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         }
     }
     
-    func reset() {
-        loginService.reset()
+    func reset(completion: @escaping () -> Void) {
+        loginService.reset(completion: completion)
     }
 
     // MARK: - public methods

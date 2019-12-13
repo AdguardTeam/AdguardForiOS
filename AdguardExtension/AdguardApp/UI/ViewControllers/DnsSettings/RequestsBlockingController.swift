@@ -64,7 +64,10 @@ class RequestsBlockingController: UITableViewController {
             self?.updateTheme()
         }
         
-        enabledSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
+        let dnsRequestsBlockingEnabledObj = resources.sharedDefaults().object(forKey: AEDefaultsDNSRequestsBlocking)
+        let dnsRequestsBlockingEnabled: Bool = dnsRequestsBlockingEnabledObj as? Bool ?? true
+        
+        enabledSwitch.isOn = dnsRequestsBlockingEnabled
         requestBlockingStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         setupBackButton()
