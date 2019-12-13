@@ -73,6 +73,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
+    // MARK: - Constraints
+    @IBOutlet weak var contentBlockerViewConstraint: NSLayoutConstraint!
+    
+    
     // MARK: - Variables
 
     
@@ -392,7 +396,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-            // Add content blocker observation
+            guard let self = self else { return }
+            let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+            
+            
         }
 
         observations.append(proObservation)
