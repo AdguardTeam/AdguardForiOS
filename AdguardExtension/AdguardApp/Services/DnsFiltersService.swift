@@ -445,8 +445,9 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     private func blacklistRuleFromDomain(_ domain: String)->String {
-        var rule = domain.hasPrefix(blacklistPrefix) ? domain : (blacklistPrefix + domain)
-        rule = domain.hasSuffix(blacklistSuffix) ? rule : (rule + blacklistSuffix)
+        let trimmed = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        var rule = trimmed.hasPrefix(blacklistPrefix) ? trimmed : (blacklistPrefix + trimmed)
+        rule = trimmed.hasSuffix(blacklistSuffix) ? rule : (rule + blacklistSuffix)
         return rule
     }
     
