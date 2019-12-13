@@ -602,13 +602,13 @@
 "dns_request_status_whitelisted" = "Whitelisted";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "added to whitelist";
+"dns_request_user_status_added_to_whitelist" = "added to the Whitelist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "added to blacklist";
+"dns_request_user_status_added_to_blacklist" = "added to the Blacklist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "removed from whitelist";
+"dns_request_user_status_removed_from_whitelist" = "removed from the Whitelist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "removed from blacklist";
+"dns_request_user_status_removed_from_blacklist" = "removed from the Blacklist";
