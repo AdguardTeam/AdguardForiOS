@@ -69,11 +69,6 @@
             row = [_objectClass new];
         }
         
-//        if (![row isKindOfClass:_objectClass]) {
-//            
-//            return nil;
-//        }
-        
         NSMutableArray *rows = [NSMutableArray array];
         
         NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
