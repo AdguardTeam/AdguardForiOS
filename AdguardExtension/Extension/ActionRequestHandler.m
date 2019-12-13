@@ -53,7 +53,8 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         }
         //-------------------------------
         
-        BOOL filteringEnabled = [[resources sharedDefaults] boolForKey:AEDefaultsAdguardEnabled];
+        NSNumber *safariEnabled = [[resources sharedDefaults] objectForKey:SafariProtectionState];
+        BOOL filteringEnabled = safariEnabled.boolValue;
         
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
         SafariService* safariService = [[SafariService alloc] initWithResources:resources];

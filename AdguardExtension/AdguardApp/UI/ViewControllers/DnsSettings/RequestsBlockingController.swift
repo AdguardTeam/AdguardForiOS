@@ -29,6 +29,8 @@ class RequestsBlockingController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
+    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
@@ -42,12 +44,12 @@ class RequestsBlockingController: UITableViewController {
         let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme)
+                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme, vpnManager: vpnManager)
                 controller.model = model
             }
         } else if segue.identifier == dnsWhitelistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme)
+                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme, vpnManager: vpnManager)
                 controller.model = model
             }
         }
@@ -68,6 +70,13 @@ class RequestsBlockingController: UITableViewController {
         setupBackButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), dnsFiltersService.enabledFiltersCount, dnsFiltersService.allFiltersCount)
+        filtersLabel.text = filtersDescriptionText
+    }
+    
     // MARK: - Table view delegate methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,6 +92,8 @@ class RequestsBlockingController: UITableViewController {
     @IBAction func enabledSwitchAction(_ sender: UISwitch) {
         resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsDNSRequestsBlocking)
         requestBlockingStateLabel.text = sender.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+        
+        vpnManager.restartTunnel()
     }
     
     private func updateTheme() {
