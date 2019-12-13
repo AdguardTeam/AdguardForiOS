@@ -58,6 +58,24 @@ class RoundRectButton: UIButton {
         }
     }
     
+    @IBInspectable var onTintColor: UIColor = .clear {
+        didSet {
+            updateTints()
+        }
+    }
+    
+    @IBInspectable var offTintColor: UIColor = .clear {
+        didSet {
+            updateTints()
+        }
+    }
+    
+    var buttonIsOn: Bool = true {
+        didSet{
+            updateTints()
+        }
+    }
+    
     override var isHighlighted: Bool {
         didSet{
             updateBackground()
@@ -143,6 +161,10 @@ class RoundRectButton: UIButton {
         else {
             self.backgroundColor = nil
         }
+    }
+    
+    private func updateTints(){
+        tintColor = buttonIsOn ? onTintColor : offTintColor
     }
     
     private func setupIndicator(){

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate {
 
     // MARK: - Nav bar elements
     
@@ -28,8 +28,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Protection status elements
     
-    @IBOutlet weak var safariProtectionButton: UIButton!
-    @IBOutlet weak var systemProtectionButton: UIButton!
+    @IBOutlet weak var safariProtectionButton: RoundRectButton!
+    @IBOutlet weak var systemProtectionButton: RoundRectButton!
     
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
     @IBOutlet weak var protectionStatusLabel: ThemableLabel!
@@ -74,6 +74,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     
     // MARK: - Variables
+
     
     // MARK: - Services
     
@@ -81,6 +82,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var vpnService: VpnServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     
     // MARK: - View models
@@ -92,6 +95,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Observers
     
     private var themeNotificationToken: NotificationToken?
+    private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     
     
@@ -115,10 +119,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        vpnService.notifier = self
+        complexProtection.delegate = self
         updateTheme()
         observeProStatus()
         chartModel.obtainStatistics()
         updateTextForButtons()
+        checkProtectionStates()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,6 +137,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         removeObservers()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return theme.statusbarStyle()
+    }
     
     // MARK: - Actions
 
@@ -158,17 +168,22 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Protection Status Actions
     
-    @IBAction func changeSafariProtectionState(_ sender: UIButton) {
+    @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
+        safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
+        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn)
     }
     
-    @IBAction func changeSystemProtectionState(_ sender: UIButton) {
+    @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
+        systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
+        complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self)
     }
     
     
     // MARK: - Complex protection switch action
     
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
-        
+        let enabled = sender.isOn
+        complexProtection.switchComplexProtection(state: enabled, for: self)
     }
     
     
@@ -199,6 +214,35 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         changeTextForButton(with: keyPath)
     }
+    
+    
+    // MARK: - Vpn notifiers
+       
+    func tunnelModeChanged() {
+        checkProtectionStates()
+    }
+       
+    func vpnConfigurationChanged(with error: Error?) {
+        if error != nil {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+            checkProtectionStates()
+        }
+    }
+       
+    func cancelledAddingVpnConfiguration() {
+        checkProtectionStates()
+    }
+    
+    
+    // MARK: - Complex protection delegate method
+    
+    func safariProtectionChanged() {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.checkProtectionStates()
+        }
+    }
+    
     
     // MARK: - ChartPointsChangedDelegate method
     
@@ -326,6 +370,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.updateTheme()
         }
         
+        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+            self?.checkProtectionStates()
+        })
+        
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
@@ -389,6 +437,38 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self.getProView.isHidden = proStatus
             self.statisticsStackView.isHidden = !proStatus
             self.changeStatisticsDatesButton.isHidden = !proStatus
+        }
+    }
+    
+    /**
+    Checks state of safari, system and complex protection
+     and updates UI
+    */
+    private func checkProtectionStates(){
+        complexProtection.getAllStates {[weak self] (safariEnabled, systemEnabled, complexEnabled) in
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                self.safariProtectionButton.buttonIsOn = safariEnabled
+                self.systemProtectionButton.buttonIsOn = systemEnabled
+                self.complexProtectionSwitch.setOn(on: complexEnabled)
+                
+                let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
+                self.protectionStateLabel.text = enabledText
+                
+                var complexText = ""
+                
+                if safariEnabled && systemEnabled {
+                    complexText = ACLocalizedString("complex_enabled", nil)
+                } else if !complexEnabled{
+                    complexText = ACLocalizedString("complex_disabled", nil)
+                } else if safariEnabled {
+                    complexText = ACLocalizedString("safari_enabled", nil)
+                } else if systemEnabled {
+                    complexText = ACLocalizedString("system_enabled", nil)
+                }
+                self.protectionStatusLabel.text = complexText
+            }
         }
     }
 }

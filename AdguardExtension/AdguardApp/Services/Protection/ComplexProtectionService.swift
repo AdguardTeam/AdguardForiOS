@@ -23,6 +23,8 @@ import NetworkExtension
 // MARK: - Complex protection Interface -
 
 protocol ComplexProtectionServiceProtocol {
+    // Delegate
+    var delegate: ComplexProtectionDelegate? { get set }
     
     // Turns on/off complex protection
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?)
@@ -40,9 +42,17 @@ protocol ComplexProtectionServiceProtocol {
     func getAllStates(completion: @escaping (_ safari: Bool, _ system: Bool, _ complex: Bool)->())
 }
 
+// MARK: - Complex protection Delegate -
+
+protocol ComplexProtectionDelegate {
+    func safariProtectionChanged()
+}
+
 // MARK: - Complex protection class -
 
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
+    
+    var delegate: ComplexProtectionDelegate?
     
     private let resources: AESharedResourcesProtocol
     private let safariService: SafariService
@@ -118,12 +128,13 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     func switchSafariProtection(state enabled: Bool){
         resources.safariProtectionEnabled = enabled
         
-        safariService.invalidateBlockingJsons(completion: { (error) in
+        safariService.invalidateBlockingJsons(completion: {[weak self] (error) in
             if error != nil {
                 DDLogError("(ComplexProtectionService) Error invalidating json from")
             } else {
                 DDLogInfo("(ComplexProtectionService) Successfull invalidating of json")
             }
+            self?.delegate?.safariProtectionChanged()
         })
     }
     

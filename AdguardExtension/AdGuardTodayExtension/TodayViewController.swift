@@ -145,7 +145,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         let enabled = sender.isOn
         
         comlexProtection?.switchComplexProtection(state: enabled, for: nil)
-        
         updateWidgetComplex()
     }
     

@@ -96,7 +96,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJh-s4-9Wf">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJh-s4-9Wf" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="457" y="269" width="42" height="42"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="34J-F7-rcO">
@@ -111,18 +111,18 @@
                                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" backgroundImage="safari"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="16"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                        <color key="value" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                                                        <color key="value" white="0.5" alpha="0.2008483512" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="offTintColor">
+                                                        <color key="value" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="changeSafariProtectionState:" destination="T6V-s9-cBk" eventType="touchUpInside" id="4Hq-GV-neb"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPP-0X-avj">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPP-0X-avj" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="525" y="269" width="42" height="42"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="2j6-wO-ZJl">
@@ -134,14 +134,14 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="42"/>
                                                     </constraint>
                                                 </constraints>
-                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="ic_adguard"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="16"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                        <color key="value" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                                                        <color key="value" white="0.5" alpha="0.2008483512" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="offTintColor">
+                                                        <color key="value" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -209,10 +209,10 @@
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="lIg-oL-XNY" customClass="GetProDialogView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="293.5" y="105.5" width="424" height="208.5"/>
+                                                        <rect key="frame" x="293.5" y="123.5" width="281.5" height="173"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger  with PREMIUM!д лалалал аллалал аллалал лала" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-uj-pOb" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                <rect key="frame" x="56" y="20" width="344" height="107.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Be stronger  with PREMIUM!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-uj-pOb" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                <rect key="frame" x="56" y="20" width="201.5" height="72"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -227,7 +227,7 @@
                                                                 </variation>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd">
-                                                                <rect key="frame" x="56" y="143.5" width="344" height="45"/>
+                                                                <rect key="frame" x="56" y="108" width="201.5" height="45"/>
                                                                 <color key="backgroundColor" red="0.27058823529411763" green="0.70196078431372544" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="3E7-jt-e9m"/>
@@ -307,9 +307,12 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="512" height="167.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIf-j0-9oP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="61.5" width="480" height="22"/>
+                                                                        <rect key="frame" x="16" y="56.5" width="480" height="32"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="22" id="z4l-xF-SKa"/>
+                                                                            <constraint firstAttribute="height" constant="22" id="z4l-xF-SKa">
+                                                                                <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                                         <nil key="textColor"/>
@@ -318,11 +321,20 @@
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                                        </variation>
+                                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                                        </variation>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btd-nN-zLO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="83.5" width="480" height="20"/>
+                                                                        <rect key="frame" x="16" y="96.5" width="480" height="27"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="20" id="CGq-K7-wAv"/>
+                                                                            <constraint firstAttribute="height" constant="20" id="CGq-K7-wAv">
+                                                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="27"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                                         <nil key="textColor"/>
@@ -330,6 +342,12 @@
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                        </variation>
+                                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                        </variation>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-os-Pis">
                                                                         <rect key="frame" x="0.0" y="0.0" width="512" height="167.5"/>
@@ -358,7 +376,10 @@
                                                                     <constraint firstAttribute="trailing" secondItem="nTP-os-Pis" secondAttribute="trailing" id="FxI-Sh-I5N"/>
                                                                     <constraint firstItem="eIf-j0-9oP" firstAttribute="leading" secondItem="IiS-6i-NUq" secondAttribute="leading" constant="16" id="J70-fm-x2d"/>
                                                                     <constraint firstItem="nTP-os-Pis" firstAttribute="leading" secondItem="IiS-6i-NUq" secondAttribute="leading" id="MYh-U9-2Eq"/>
-                                                                    <constraint firstItem="Btd-nN-zLO" firstAttribute="top" secondItem="eIf-j0-9oP" secondAttribute="bottom" id="PKK-wY-G6Z"/>
+                                                                    <constraint firstItem="Btd-nN-zLO" firstAttribute="top" secondItem="eIf-j0-9oP" secondAttribute="bottom" id="PKK-wY-G6Z">
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                                    </constraint>
                                                                     <constraint firstItem="nTP-os-Pis" firstAttribute="top" secondItem="IiS-6i-NUq" secondAttribute="top" id="mmm-Bi-g3Z"/>
                                                                     <constraint firstItem="Btd-nN-zLO" firstAttribute="leading" secondItem="eIf-j0-9oP" secondAttribute="leading" id="pG0-WC-SEc"/>
                                                                 </constraints>
@@ -367,9 +388,12 @@
                                                                 <rect key="frame" x="512" y="0.0" width="512" height="167.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxe-Kt-6aQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="61.5" width="480" height="22"/>
+                                                                        <rect key="frame" x="16" y="56.5" width="480" height="32"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="22" id="tjw-yK-BJI"/>
+                                                                            <constraint firstAttribute="height" constant="22" id="tjw-yK-BJI">
+                                                                                <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                                         <nil key="textColor"/>
@@ -377,11 +401,20 @@
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                                        </variation>
+                                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                                        </variation>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blocked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="83.5" width="480" height="20"/>
+                                                                        <rect key="frame" x="16" y="96.5" width="480" height="27"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB"/>
+                                                                            <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB">
+                                                                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="27"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                                         <nil key="textColor"/>
@@ -389,6 +422,12 @@
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                        </variation>
+                                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                        </variation>
                                                                     </label>
                                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="561-fR-2DC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="512" height="167.5"/>
@@ -417,7 +456,10 @@
                                                                     <constraint firstItem="Kxe-Kt-6aQ" firstAttribute="leading" secondItem="427-Te-NP9" secondAttribute="leading" constant="16" id="blE-bJ-dn0"/>
                                                                     <constraint firstItem="a5U-A8-S8G" firstAttribute="trailing" secondItem="Kxe-Kt-6aQ" secondAttribute="trailing" id="hv9-q9-g34"/>
                                                                     <constraint firstAttribute="bottom" secondItem="561-fR-2DC" secondAttribute="bottom" id="kkr-rs-ReD"/>
-                                                                    <constraint firstItem="a5U-A8-S8G" firstAttribute="top" secondItem="Kxe-Kt-6aQ" secondAttribute="bottom" id="rqI-MH-Zmw"/>
+                                                                    <constraint firstItem="a5U-A8-S8G" firstAttribute="top" secondItem="Kxe-Kt-6aQ" secondAttribute="bottom" id="rqI-MH-Zmw">
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                                    </constraint>
                                                                     <constraint firstAttribute="trailing" secondItem="561-fR-2DC" secondAttribute="trailing" id="sZy-Xc-9QS"/>
                                                                     <constraint firstItem="Kxe-Kt-6aQ" firstAttribute="centerY" secondItem="427-Te-NP9" secondAttribute="centerY" constant="-11" id="tQP-lb-Icj"/>
                                                                 </constraints>

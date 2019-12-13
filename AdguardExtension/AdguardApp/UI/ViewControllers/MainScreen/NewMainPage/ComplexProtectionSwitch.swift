@@ -20,11 +20,7 @@ import Foundation
 
 class ComplexProtectionSwitch: UIControl {
     
-    var isOn = false {
-        didSet{
-            setOn(on: isOn)
-        }
-    }
+    private(set) var isOn = false
     
     // MARK: - Private variables
     
@@ -70,7 +66,7 @@ class ComplexProtectionSwitch: UIControl {
     
     private var isAnimating = false
     
-    private let generator = UIImpactFeedbackGenerator(style: .heavy)
+    private let generator = UIImpactFeedbackGenerator(style: .medium)
     
     // MARK: - Inits
     
@@ -88,47 +84,85 @@ class ComplexProtectionSwitch: UIControl {
         layoutSwitch()
     }
     
+    // MARK: - Public method
+    
+    func setOn(on: Bool){
+        animate(on: on) {[weak self] in
+            self?.isOn = on
+        }
+    }
+    
     // MARK: - UIControl Delegate method
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
-        let x = touch.location(in: self).x
-        thumbImageView.isHidden = true
+        let color = isOn ? onColor.cgColor : offColor.cgColor
         
-        print("BEGAN TRACKING: \(x)")
+        thumbView.layer.shadowRadius = 25
+        thumbView.layer.shadowOpacity = 1.0
+        thumbView.layer.shadowColor = color
         return true
     }
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        var x = touch.location(in: self).x
+        super.continueTracking(touch, with: event)
         
-        x = x > onPoint ? onPoint : x
-        x = x < offPoint ? offPoint : x
+        let color = isOn ? onColor.cgColor : offColor.cgColor
+        thumbView.layer.shadowColor = color
         
-        UIView.animate(withDuration: 0.001) {[weak self] in
-            self?.thumbView.center.x = x
+        let x = touch.location(in: self).x
+        
+        if x > width / 2 {
+            animate(on: true){ [weak self] in
+                self?.isOn = true
+            }
+        } else {
+            animate(on: false){ [weak self] in
+                self?.isOn = false
+            }
         }
-        
-        print("CONTINUE TRACKING: \(x)")
         return true
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        let x = touch?.location(in: self).x ?? 0.0
-        
-        thumbImageView.isHidden = false
-        
-        if x > width / 2 {
-            animate(on: true)
-        } else {
-            animate(on: false)
+        super.endTracking(touch, with: event)
+        if touch?.tapCount ?? 0 > 0 {
+            animate(on: !isOn){ [weak self] in
+                guard let self = self else { return }
+                self.isOn = !self.isOn
+                self.sendActions(for: UIControl.Event.valueChanged)
+                self.generator.impactOccurred()
+            }
+            setNeutralShadows()
+            return
         }
         
-        print("END TRACKING: \(x)")
+        let x = touch?.location(in: self).x ?? 0.0
+        
+        if x > width / 2 {
+            animate(on: true){ [weak self] in
+                guard let self = self else { return }
+                self.isOn = true
+                self.sendActions(for: UIControl.Event.valueChanged)
+                self.generator.impactOccurred()
+            }
+        } else {
+            animate(on: false){ [weak self] in
+                guard let self = self else { return }
+                self.isOn = false
+                self.sendActions(for: UIControl.Event.valueChanged)
+                self.generator.impactOccurred()
+            }
+        }
+        
+        setNeutralShadows()
     }
     
     // MARK: - private methods
     
+    /**
+     This method is called from "layoutSubviews"
+     */
     private func layoutSwitch(){
         frame.size = CGSize(width: width, height: height)
         layer.cornerRadius = height / 2
@@ -147,6 +181,9 @@ class ComplexProtectionSwitch: UIControl {
         offPoint = bounds.minX + thumbSide / 2
     }
     
+    /**
+     This method is called from initializators
+     */
     private func customInit(){
         backgroundColor = offColor
         
@@ -155,10 +192,8 @@ class ComplexProtectionSwitch: UIControl {
         innerShadowView.layer.borderColor = UIColor(hexString: "#1f1f1f").withAlphaComponent(0.2).cgColor
         
         thumbView.backgroundColor = thumbColor
-        thumbView.layer.shadowColor = thumbShadowColor.cgColor
-        thumbView.layer.shadowOpacity = thumbShadowOppacity
+        setNeutralShadows()
         thumbView.layer.shadowOffset = .zero
-        thumbView.layer.shadowRadius = 5
         thumbView.isUserInteractionEnabled = false
                 
         thumbImageView.image = offImage
@@ -167,29 +202,44 @@ class ComplexProtectionSwitch: UIControl {
         addSubview(innerShadowView)
         addSubview(thumbView)
     }
-    
-    private func setOn(on:Bool) {
-        animate(on: on)
-    }
-    
-    private func animate(on:Bool) {
-        if isAnimating { return }
+
+    /**
+     Animates switch position
+     */
+    private func animate(on:Bool, completion:@escaping () -> ()) {
+        
+        if isAnimating && isOn == on {
+            completion()
+            return
+        }
         
         self.isAnimating = true
         
-        isOn = on != isOn ? on : isOn
-        
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [UIView.AnimationOptions.curveEaseOut, UIView.AnimationOptions.beginFromCurrentState, UIView.AnimationOptions.allowUserInteraction], animations: {[weak self] in
             guard let self = self else { return }
-            
-            self.thumbView.center.x = self.isOn ? self.onPoint : self.offPoint
-            self.backgroundColor = self.isOn ? self.onColor : self.offColor
-            self.thumbImageView.image = self.isOn ? self.onImage : self.offImage
+            self.switchAnimation(on: on)
         }, completion: {[weak self] _ in
             guard let self = self else { return }
             self.isAnimating = false
-            self.sendActions(for: UIControl.Event.valueChanged)
-            self.generator.impactOccurred()
+            completion()
         })
+    }
+    
+    /**
+     Switch position changes that are animated in "animate" function
+     */
+    private func switchAnimation(on: Bool){
+        thumbView.center.x = on ? onPoint : offPoint
+        backgroundColor = on ? onColor : offColor
+        thumbImageView.image = on ? onImage : offImage
+    }
+    
+    /**
+     Sets neutral shadows for thumbView
+     */
+    private func setNeutralShadows(){
+        thumbView.layer.shadowColor = thumbShadowColor.cgColor
+        thumbView.layer.shadowOpacity = thumbShadowOppacity
+        thumbView.layer.shadowRadius = 5
     }
 }
