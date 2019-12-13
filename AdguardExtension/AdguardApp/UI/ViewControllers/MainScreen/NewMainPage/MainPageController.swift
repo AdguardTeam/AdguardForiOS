@@ -115,10 +115,14 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chartModel.chartPointsChangedDelegate = self
         
         changeProtectionStatusLabel()
+        
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         vpnService.notifier = self
         complexProtection.delegate = self
         updateTheme()
@@ -272,9 +276,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Updates theme when notification is observed
      */
     private func updateTheme(){
+        navigationController?.view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        
         chartView.backgroundColor = theme.backgroundColor
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
+        getProView.backgroundColor = theme.backgroundColor
     }
     
     /**
