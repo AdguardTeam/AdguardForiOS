@@ -25,6 +25,14 @@ struct Point {
 
 class ChartView: UIView {
     
+    var isEnabled: Bool = true {
+        didSet{
+            let color = isEnabled ? onColor : offColor
+            lineColor = color
+            shadowColor = color
+        }
+    }
+    
     var chartPoints: [Point] = [] {
         didSet {
             chartPoints.sort(by: { $0.x < $1.x })
@@ -35,7 +43,7 @@ class ChartView: UIView {
         }
     }
     
-    var lineColor: UIColor = UIColor(hexString: "ff67b279") {
+    var lineColor: UIColor = UIColor(hexString: "67b279") {
         didSet{
             drawChart()
         }
@@ -52,6 +60,9 @@ class ChartView: UIView {
             drawChart()
         }
     }
+    
+    private let onColor = UIColor(hexString: "67b279")
+    private let offColor = UIColor(hexString: "#888888")
     
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2

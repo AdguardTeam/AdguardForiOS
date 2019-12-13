@@ -386,8 +386,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
-        
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeProStatus()
@@ -410,8 +408,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
         
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
-        
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsCountersRequests, context: nil)
     }
     
     /**
@@ -459,6 +455,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             DispatchQueue.main.async {
                 self.safariProtectionButton.buttonIsOn = safariEnabled
                 self.systemProtectionButton.buttonIsOn = systemEnabled
+                self.chartView.isEnabled = systemEnabled
                 self.complexProtectionSwitch.setOn(on: complexEnabled)
                 
                 let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
