@@ -804,11 +804,14 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     _busy = YES;
     [_busyLock unlock];
     
+    ASSIGN_WEAK(self);
+    
     [NETunnelProviderManager loadAllFromPreferencesWithCompletionHandler:^(NSArray<NETunnelProviderManager *> * _Nullable managers, NSError * _Nullable error) {
+        ASSIGN_STRONG(self);
         if (error){
             
             DDLogError(@"(APVPNManager) removeVpnConfiguration - Error loading vpn configuration: %@, %ld, %@", error.domain, error.code, error.localizedDescription);
-            _lastError = _standartError;
+            USE_STRONG(self)->_lastError = USE_STRONG(self)->_standartError;
         }
         else {
             
@@ -823,14 +826,15 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
                         }
                     }];
                 }
-                
-                _manager = nil;
             }
         }
         
-        [_busyLock lock];
-        _busy = NO;
-        [_busyLock unlock];
+        USE_STRONG(self)->_manager = nil;
+        USE_STRONG(self)->_enabled = NO;
+
+        [USE_STRONG(self)->_busyLock lock];
+        USE_STRONG(self)->_busy = NO;
+        [USE_STRONG(self)->_busyLock unlock];
     }];
 }
 

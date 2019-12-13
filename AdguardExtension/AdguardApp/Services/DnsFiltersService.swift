@@ -60,6 +60,9 @@ protocol DnsFiltersServiceProtocol {
     
     // Updates filters with new meta
     func updateFilters(networking: ACNNetworkingProtocol)
+    
+    // resets service settings
+    func reset()
 }
 
 @objc(DnsFilter)
@@ -192,7 +195,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     var filtersJson: String  {
         get {
             // If DNS requests blocking option is off, we return empty json
-            let dnsRequestsBlockingEnabled = resources.sharedDefaults().bool(forKey: AEDefaultsDNSRequestsBlocking)
+            let dnsRequestsBlockingEnabledObj = resources.sharedDefaults().object(forKey: AEDefaultsDNSRequestsBlocking)
+            let dnsRequestsBlockingEnabled: Bool = dnsRequestsBlockingEnabledObj as? Bool ?? true
             if !dnsRequestsBlockingEnabled {
                 return "[]"
             }
@@ -353,6 +357,10 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             }
         }
         filtersAreUpdating = false
+    }
+    
+    func reset() {
+        readFiltersMeta()
     }
     
     // MARK: - private methods
