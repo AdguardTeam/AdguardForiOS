@@ -337,8 +337,10 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [USE_STRONG(self) readProtocolConfiguration];
         
         [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
-            [USE_STRONG(self) startDnsProxy];
-            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:completionHandler];
+            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+                [USE_STRONG(self) startDnsProxy];
+                completionHandler(error);
+            }];
         }];
     }];
 }
