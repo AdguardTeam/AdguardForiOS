@@ -84,7 +84,8 @@
                                             <constraint firstItem="zjf-M2-fLO" firstAttribute="leading" secondItem="v1R-YL-QpR" secondAttribute="trailing" constant="5" id="B4l-5a-5aL"/>
                                             <constraint firstItem="zjf-M2-fLO" firstAttribute="top" secondItem="0bS-Py-Z4b" secondAttribute="top" constant="9" id="CZ4-GO-mza"/>
                                             <constraint firstItem="xVP-0T-sAu" firstAttribute="centerX" secondItem="0bS-Py-Z4b" secondAttribute="centerX" id="Cnv-K7-jFq"/>
-                                            <constraint firstItem="v1R-YL-QpR" firstAttribute="centerY" secondItem="zjf-M2-fLO" secondAttribute="centerY" id="TnC-ly-YH5"/>
+                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="centerY" secondItem="zjf-M2-fLO" secondAttribute="centerY" id="IKN-S7-JZL"/>
+                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="leading" secondItem="0bS-Py-Z4b" secondAttribute="leading" constant="16" id="ZiU-Aa-Mt4"/>
                                             <constraint firstAttribute="bottom" secondItem="xVP-0T-sAu" secondAttribute="bottom" id="aHD-HL-anP"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -549,6 +550,7 @@ with Safari</string>
                         <outlet property="star3" destination="ONb-hr-d27" id="Cn0-9i-XlD"/>
                         <outlet property="star4" destination="jRL-4k-532" id="72B-22-WRz"/>
                         <outlet property="star5" destination="ajd-oN-WSw" id="CXx-GP-gXD"/>
+                        <outlet property="testSwitch" destination="dDr-1D-oSF" id="9Jo-QR-evT"/>
                         <outlet property="tutorialVideoView" destination="Sk8-rZ-X4e" id="bLm-Ij-sqv"/>
                         <outlet property="updateFiltersGestureRecognizer" destination="DEt-Hi-EkO" id="KS7-q9-ZiJ"/>
                         <outlet property="vikingImage" destination="TBC-HI-cYs" id="zhT-UW-VlD"/>

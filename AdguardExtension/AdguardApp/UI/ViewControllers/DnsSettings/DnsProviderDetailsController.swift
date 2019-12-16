@@ -26,6 +26,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     var provider: DnsProviderInfo?
     var selectedProtocol: DnsProtocol = .dns
     
+    var protocolWasChanged = false
+    
     //MARK: - IB Outlets
     
     // MARK: - services
@@ -57,14 +59,6 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         }
         
         updateProtocol()
-        
-        dnsServerObservetion = vpnManager.observe(\.activeDnsServer) { [weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.updateProtocol()
-                self?.tableView.reloadData()
-            }
-        }
-        
         updateTheme()
     }
     
@@ -187,7 +181,6 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         return CustomAnimatedTransitioning()
     }
     
-    
     // MARK: - Actions
     
     func selectServer(){
@@ -205,9 +198,12 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     
     // MARK: - ChooseProtocolControllerDelegate methods
     
-    func protocolSelected(protocol: DnsProtocol) {
-        
-        tableView.reloadData()
+    func protocolSelected(chosenProtocol: DnsProtocol) {
+        DispatchQueue.main.async {[weak self] in
+            self?.protocolWasChanged = true
+            self?.selectedProtocol = chosenProtocol
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - private methods

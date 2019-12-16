@@ -20,14 +20,24 @@ import Foundation
 
 extension UIViewController {
     
-    func setupBackButton() {
+    func setupBackButton(with action: Selector? = nil) {
         let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
         
-        navigationController?.navigationBar.backIndicatorImage = imgBackArrow
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBackArrow
-
-        navigationItem.leftItemsSupplementBackButton = true
+        let selector: Selector?
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: nil, action: nil)
+        if action == nil {
+            selector = #selector(self.standardAction(sender:))
+        } else {
+            selector = action
+        }
+                
+        let barButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: self, action: selector)
+        barButtonItem.image = imgBackArrow
+        
+        self.navigationItem.leftBarButtonItem = barButtonItem
+    }
+    
+    @objc private func standardAction(sender: UIBarButtonItem){
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -90,6 +90,8 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             showRuleAddedDialog()
         }
         
+        setupBackButton(with: #selector(self.backButtonPressed(sender:)))
+    
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
         
         title = model?.title
@@ -105,6 +107,13 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         
         updateTheme()
     }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
     // MARK: - Actions
     
     @IBAction func rightButtonAction(_ sender: UIButton) {
@@ -155,6 +164,10 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         state = .normal
     }
     
+    @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
+        state = .normal
+    }
+    
     // MARK: - Private methods -
     
     // MARK: - Update theme
@@ -197,7 +210,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             leftButton.setTitle(model?.leftButtonTitle, for: .normal)
             leftButton.setTitleColor(theme.errorRedColor, for: .normal)
         } else {
-            leftButton.setTitle(model?.exportTitle, for: .normal)
+            leftButton.setTitle(String.localizedString("export"), for: .normal)
             leftButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         }
     }
@@ -207,7 +220,7 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
             middleButton.setTitle(model?.middleButtonTitle, for: .normal)
             middleButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         } else {
-            middleButton.setTitle(model?.importTitle, for: .normal)
+            middleButton.setTitle(String.localizedString("import"), for: .normal)
             middleButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         }
     }
@@ -301,5 +314,13 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         controller.transitioningDelegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func backButtonPressed(sender: UIBarButtonItem){
+        if state == .normal {
+            navigationController?.popViewController(animated: true)
+        } else {
+            state = .normal
+        }
     }
 }

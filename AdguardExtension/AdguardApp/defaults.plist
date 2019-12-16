@@ -4,7 +4,7 @@
 <dict>
 	<key>AEDefaultsFirstRunKey</key>
 	<true/>
-	<key>AEDefaultsAdguardEnabled</key>
+	<key>SafariProtectionState</key>
 	<true/>
 	<key>AEDefaultsJSONMaximumConvertedRules</key>
 	<integer>50000</integer>

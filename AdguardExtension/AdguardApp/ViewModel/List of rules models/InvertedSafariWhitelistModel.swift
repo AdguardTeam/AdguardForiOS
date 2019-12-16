@@ -66,18 +66,6 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             return ACLocalizedString("inverted_whitelist_title", nil)
         }
     }
-
-    var exportTitle: String {
-        get {
-            return ACLocalizedString("export_whitelist", nil)
-        }
-    }
-
-    var importTitle: String {
-        get {
-            return ACLocalizedString("import_whitelist", nil)
-        }
-    }
     
     var leftButtonTitle: String {
         get {
@@ -125,8 +113,8 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         
         let invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
-        allRules = invertedWhitelistObject?.domains.map({ (rule) -> RuleInfo in
-            RuleInfo(rule, false, true, theme)
+        allRules = invertedWhitelistObject?.rules.map({ (rule) -> RuleInfo in
+            RuleInfo(rule.ruleText, false, rule.isEnabled.boolValue, theme)
         }) ?? [RuleInfo]()
     }
     
@@ -184,7 +172,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             DDLogError("(UserFilterViewModel) change rule failed - rule not found")
             return
         }
-        changeInvertedSafariWhitelistRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        changeInvertedSafariWhitelistRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
     func selectAllRules() {
@@ -295,49 +283,51 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             strongSelf.delegate?.listOfRulesChanged()
             
             DispatchQueue.global().async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
-                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: strongSelf.allRules.map({ $0.rule }))
-                    strongSelf.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
+                let objects = self.rulesToObjectsConverter(rules: self.allRules)
+                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
+                    self.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
                 
                 completionHandler()
                 
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
-                    DDLogError("(UserFilterViewModel) Error occured during content blocker reloading.")
-                    // do not rollback changes and do not show any alert to user in this case
-                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                self.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                    if error != nil {
+                        DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+                        // do not rollback changes and do not show any alert to user in this case
+                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    }
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 }
             }
         }
     }
     
-    private func changeInvertedSafariWhitelistRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func changeInvertedSafariWhitelistRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let domains = allRules
         domains[index].rule = text
+        domains[index].enabled = enabled
         
         allRules = domains
         delegate?.listOfRulesChanged()
         
-        let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(domains: domains.map({ $0.rule }))
+        let objects = rulesToObjectsConverter(rules: allRules)
+        let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
         resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
         
         contentBlockerService.reloadJsons(backgroundUpdate: false) {(error)  in
             
             DispatchQueue.main.async {
-                if error == nil {
-                    completionHandler()
-                }
-                else {
-                    DDLogError("(UserFilterViewModel) changeInvertedWhitelistRule - Error occured during content blocker reloading.")
+                if error != nil {
+                    DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
                     // do not rollback changes and do not show any alert to user in this case
                     // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    completionHandler()
                 }
                 
+                completionHandler()
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
@@ -404,5 +394,14 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
             }
         }
         return false
+    }
+    
+    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [ASDFilterRule]{
+        var objects: [ASDFilterRule] = []
+        for rule in rules {
+            let object = ASDFilterRule(text: rule.rule, enabled: rule.enabled)
+            objects.append(object)
+        }
+        return objects
     }
 }

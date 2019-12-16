@@ -66,18 +66,6 @@ class UserFilterModel: ListOfRulesModelProtocol {
             return ACLocalizedString("safari_userfilter_title", nil)
         }
     }
-
-    var exportTitle: String {
-        get {
-            return ACLocalizedString("export", nil)
-        }
-    }
-
-    var importTitle: String {
-        get {
-            return ACLocalizedString("import", nil)
-        }
-    }
     
     var leftButtonTitle: String {
         get {
@@ -161,7 +149,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
             return
         }
         
-        changeSafariUserfilterRule(index: index, text: newText, completionHandler: completionHandler, errorHandler: errorHandler)
+        changeSafariUserfilterRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
     /**
@@ -302,9 +290,11 @@ class UserFilterModel: ListOfRulesModelProtocol {
                 
                 strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
                     
-                    DDLogError("(UserFilterViewModel) Error occured during content blocker reloading.")
-                    // do not rollback changes and do not show any alert to user in this case
-                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    if error != nil {
+                        DDLogError("(UserFilterModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+                        // do not rollback changes and do not show any alert to user in this case
+                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+                    }
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
                 }
             }
@@ -361,7 +351,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func changeSafariUserfilterRule(index: Int, text: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func changeSafariUserfilterRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
         if !contentBlockerService.validateRule(text) {
            errorHandler(ACLocalizedString("rule_converting_error", nil))
@@ -372,7 +362,10 @@ class UserFilterModel: ListOfRulesModelProtocol {
         let rule = allRules[index]
         
         rule.rule = text
+        rule.enabled = enabled
+        
         ruleObject.ruleText = text
+        ruleObject.isEnabled = NSNumber(booleanLiteral: enabled)
         
         setNewRules(ruleObjects, ruleInfos: allRules, completionHandler: completionHandler, errorHandler: errorHandler)
     }

@@ -16,14 +16,16 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-import Mobile
+import Foundation 
 
 class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
+    var userFilterId: NSNumber?
+    var otherFilterIds: [NSNumber]?
+    
     var server = ""
     
-    private let resources: APSharedResources
+    private let dnsLogService: DnsLogRecordsServiceProtocol
     private var records = [DnsLogRecord]()
     
     private let saveRecordsMinimumTime = 3.0 // seconds
@@ -31,8 +33,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
     
-    @objc init(resources: APSharedResources) {
-        self.resources = resources
+    @objc init(dnsLogService: DnsLogRecordsServiceProtocol) {
+        self.dnsLogService = dnsLogService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
     }
@@ -41,13 +43,28 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         flush()
     }
     
-    func dnsRequestProcessed(_ event: MobileDNSRequestProcessedEvent!) {
+    func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         if event.error != nil && event.error != "" {
-            // Ignore errors
+            DDLogError("(DnsLogRecordsWriter) handle event error occured - \(event.error!)")
             return
         }
-
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: event.bytesSent, bytesReceived: event.bytesReceived)
+        
+        var status: DnsLogRecordStatus
+        
+        if event.whitelist {
+            status = .whitelisted
+        }
+        else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
+            status = .blacklistedByUserFilter
+        }
+        else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
+            status = .blacklistedByOtherFilter
+        }
+        else {
+            status = .processed
+        }
+        
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), status: status, userStatus: .none, blockRules: event.rules)
         addRecord(record: record, flush: false)
     }
     
@@ -75,7 +92,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func save() {
-        resources.write(to: records)
+        dnsLogService.writeRecords(records)
         records.removeAll()
     }
 }

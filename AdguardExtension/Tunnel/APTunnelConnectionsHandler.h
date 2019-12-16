@@ -17,7 +17,6 @@
  */
 
 @import NetworkExtension;
-#import "APSharedResources.h"
 
 @class APTUdpProxySession, PacketTunnelProvider;
 @protocol DnsProxyServiceProtocol;

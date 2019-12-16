@@ -76,17 +76,17 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     @IBAction func listOfRulesStateAction(_ sender: UISwitch) {
         model?.enabled = sender.isOn
-        tableView.reloadRows(at: [IndexPath(row: 0, section: enableListOfRulesSection)], with: .fade)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: enableListOfRulesSection)], with: .automatic)
     }
     
     @IBAction func changeRuleStateAction(_ sender: UIButton) {
         guard let rule = model?.rules[sender.tag] else { return }
         rule.enabled = !rule.enabled
         
-        let section = state == .searching ? 0 : rulesSection
-        
-        let indexPath = IndexPath(row: sender.tag, section: section)
-        tableView.reloadRows(at: [indexPath], with: .none)
+        model?.changeRule(rule: rule, newText: rule.rule, errorHandler: {[weak self] (error) in
+            guard let self = self else { return }
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error)
+        }, completionHandler: {})
     }
     
     // MARK: - Searchbar delegate methods
@@ -103,6 +103,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return state == .normal ? 3 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == enableListOfRulesSection ? 20.0 : super.tableView(tableView, heightForFooterInSection: section)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -198,6 +206,12 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
                 self?.tableView.reloadData()
             }
         })
+    }
+    
+    // MARK: - Presentation delegate methods
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
     
     // MARK: - RuleDetailsControllerDelegate methods

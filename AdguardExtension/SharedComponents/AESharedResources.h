@@ -42,11 +42,6 @@ extern NSString *AE_URLSCHEME;
 extern NSString *AE_URLSCHEME_COMMAND_ADD;
 
 /**
- User Defaults key that defines enable/disable filtration.
- */
-extern NSString * _Nonnull AEDefaultsAdguardEnabled;
-
-/**
  User Defaults key that defines app performs first start or not.
  */
 extern NSString * _Nonnull AEDefaultsFirstRunKey;
@@ -212,7 +207,7 @@ extern NSString*  _Nonnull AEDefaultsCustomContentBlockerRulesOverLimitCount;
 extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 
 /**
- User default key, which indicates whether safari protaction is enabled*/
+ User default key, which indicates whether safari protection is enabled*/
 extern NSString* _Nonnull SafariProtectionState;
 
 /**
@@ -253,6 +248,22 @@ extern NSString* _Nonnull ShowStatusViewNotification;
  Hide status view
  */
 extern NSString* _Nonnull HideStatusViewNotification;
+
+/**
+ Unique id for dns filters
+ */
+extern NSString* _Nonnull DnsFilterUniqueId;
+
+/**
+ Last state of safari protection
+ */
+extern NSString* _Nonnull SafariProtectionLastState;
+
+/**
+ Last state of system protection
+ */
+extern NSString* _Nonnull SystemProtectionLastState;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -370,6 +381,8 @@ extern NSString* _Nonnull HideStatusViewNotification;
 @property (nullable) DnsServerInfo* activeDnsServer;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
+
+@property BOOL safariProtectionEnabled;
 
 @end
 

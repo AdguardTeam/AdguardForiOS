@@ -151,7 +151,7 @@
 "add_whitelist_domain_placeholder" = "example.org";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "your Wi-Fi name";
+"add_wifi_name_placeholder" = "Your Wi-Fi name";
 
 
 /* (UserFilterController) add blacklist rule caption */
@@ -415,9 +415,6 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Invalid 2FA token";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "By continuing you accept the <a href=\"%@\">Terms and Conditions</a> and <a href=\"%@\">EULA</a>.";
-
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi exceptions";
 
@@ -451,12 +448,6 @@
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
-/* (ListOfRulesModel) title for export dns and safari white list*/
-"export_whitelist" = "Export whitelist";
-
-/* (ListOfRulesModel) title for export dns black list */
-"export_blacklist_title" = "Export blacklist";
-
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Clear";
 
@@ -465,12 +456,6 @@
 
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
-
-/* (ListOfRulesModel) title for import dns and safari white list*/
-"import_whitelist" = "Import whitelist";
-
-/* (ListOfRulesModel) title for import dns black list */
-"import_blacklist_title" = "Import blacklist";
 
 /* "Enabled" title */
 "enabled" = "Enabled";
@@ -568,3 +553,62 @@
 /*(ContentBlockerService) notification about converting rules  */
 "converting_rules" = "Rules are being converted  ...";
 
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "New custom filter";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "New DNS filter";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Protection is disabled";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Protection is enabled";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari and system protection";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari ad blocking";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "All protection modules are off";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "System protection";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d requests, %2$d blocked";
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "More";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "You've tried to add an existing filter. This filter is already on the list.";
+
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "Changes were not applied.";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blocked";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Processed";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "Whitelisted";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "added to the Whitelist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "added to the Blacklist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "removed from the Whitelist";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "removed from the Blacklist";

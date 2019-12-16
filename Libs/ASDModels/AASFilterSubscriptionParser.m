@@ -67,7 +67,6 @@ typedef void (^ParserActionType)(ParsingContext *context, NSString *tag, NSStrin
 @implementation AASFilterSubscriptionParser {
     //NSURLSessionDataTask *_currentLoadingTask;
     BOOL _canceled;
-    id<ACNNetworkingProtocol> _networking;
 }
 
 static NSDictionary <NSString *, ParserActionType> *_parserActions;
@@ -99,14 +98,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                           };
     }
 }
-- (instancetype)initWithNetworking:(id<ACNNetworkingProtocol>)networking {
-    self = [super init];
-    if (self) {
-        _canceled = NO;
-        _networking = networking;
-    }
-    return self;
-}
 
 - (void)dealloc {
     [self cancel];
@@ -115,7 +106,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 
-- (void)parseFromUrl:(NSURL *)url
+- (void)parseFromUrl:(NSURL *)url networking:(id<ACNNetworkingProtocol>)networking
           completion:(void (^)(AASCustomFilterParserResult *result, NSError *error))completion {
     
     @synchronized(self) {
@@ -139,7 +130,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                                    @"(AASFilterSubscriptionParser) Error while processing the custom filter file.");
         
         
-        [_networking dataWithURL:url
+        [networking dataWithURL:url
                  completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
                      do {
@@ -215,10 +206,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                      && ! response.URL.fileURL
                                      && ! [subscriptionUrl isEqual:response.URL]) {
                                      DDLogInfo(@"(AASFilterSubscriptionParser) Custom filter redirection.");
-                                     @synchronized(self) {
-//                                         _currentLoadingTask = nil;
-                                     }
-                                     [self parseFromUrl:subscriptionUrl completion:completion];
+                                     [self parseFromUrl:subscriptionUrl networking:networking completion:completion];
                                      return;
                                  }
                              }
@@ -229,9 +217,9 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                              //Main return
                              @synchronized(self) {
                                  if (completion) {
+                                     context.result.filtersData = data;
                                      completion(context.result, error);
                                  }
-//                                 _currentLoadingTask = nil;
                              }
                              DDLogInfo(@"(AASFilterSubscriptionParser) End parse custom filter for url:\n %@", response.URL);
                              return;
@@ -254,18 +242,48 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     }
 }
 
-- (AASCustomFilterParserResult *)parseFromUrl:(NSURL *)url error:(NSError **)error {
+- (AASCustomFilterParserResult *)parseFromData:(NSData *)data with: (NSString *)url{
+    if (!data) {
+        return [AASCustomFilterParserResult new];
+    }
+    NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    // Checking content validity
+    if (! [self isValidContent:content]) {
+        DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of invalid filter content.");
+    }
+    
+    //Main work
+    ParsingContext *context = [ParsingContext new];
+    context.redirect = NO;
+    context.result = [AASCustomFilterParserResult new];
+    context.result.meta = [ASDFilterMetadata new];
+    context.result.rules = [NSMutableArray new];
+    context.result.filtersData = data;
+    
+    [self parseMetaTagsWithContext:context content:content];
+    [self parseRulesWithContext:context content:content];
+    [self setPropertiesForContext:context filterPath:url];
+    
+    return context.result;
+}
+
+- (AASCustomFilterParserResult *)parseFromUrl:(NSURL *)url
+                                        networking:(_Nonnull id<ACNNetworkingProtocol>)networking
+                                        error:(NSError **)error {
     NSCondition *theLock = [NSCondition new];
     __block AASCustomFilterParserResult *theResult = nil;
     __block NSError *theError = nil;
     [theLock lock];
-    [self parseFromUrl:url completion:^(AASCustomFilterParserResult *result, NSError *error) {
+
+    [self parseFromUrl:url networking:networking completion:^(AASCustomFilterParserResult *result, NSError *error) {
         [theLock lock];
         theResult = result;
         theError = error;
         [theLock broadcast];
         [theLock unlock];
     }];
+    
     [theLock wait];
     [theLock unlock];
     if (error) {
@@ -276,8 +294,6 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 
 - (void)cancel {
     @synchronized(self) {
-//        [_currentLoadingTask cancel];
-//        _currentLoadingTask = nil;
         _canceled = YES;
     }
 }
@@ -287,6 +303,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 /**
  If Expires more than default time use default
  */
+
+
 + (NSNumber *)convertExpiresFromString:(NSString *)value {
     NSTimeInterval timeToUpdate = AAS_CHECK_CUSTOM_FILTERS_UPDATES_DEFAULT_PERIOD;
     if (! [NSString isNullOrEmpty:value]) {
@@ -398,7 +416,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 }
 
 /**
- Returns false if first 256 chars of downloaded content is empty or contains some HTML's tags
+ Returns false if first 256 chars of downloaded content is empty or contain some HTML's tags
  */
 - (BOOL)isValidContent:(NSString *)content {
     NSString *beginWith = [content substringToIndex:(content.length > 256 ? 256 : content.length)];

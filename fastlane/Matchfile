@@ -5,6 +5,7 @@ app_identifier(["com.adguard.AdguardExtension", "com.adguard.AdguardExtension.ex
                 "com.adguard.AdguardExtension.extensionPrivacy", "com.adguard.AdguardExtension.extensionAnnoyances",
                 "com.adguard.AdguardExtension.extensionOther", "com.adguard.AdguardExtension.extensionCustom",
                 "com.adguard.AdguardExtension.extensionSecurity", "com.adguard.AdguardExtension.ActionExtension",
-                "com.adguard.AdguardPro.ActionExtension", "com.adguard.AdguardExtension.tunnel"])
+                "com.adguard.AdguardPro.ActionExtension", "com.adguard.AdguardExtension.tunnel",
+                "com.adguard.AdguardExtension.todayExtension"])
 username("apple-dev@adguard.com")
 team_id("N33TQXN8C7")

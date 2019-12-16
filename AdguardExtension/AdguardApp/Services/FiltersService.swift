@@ -19,7 +19,7 @@
 import Foundation
 
 // MARK: - data types -
-class Filter: NSObject, NSCopying {
+class Filter: NSObject, NSCopying, FilterDetailedInterface {
     
     let filterId: Int
     
@@ -35,6 +35,7 @@ class Filter: NSObject, NSCopying {
     var displayNumber: Int?
     var updateDate: Date?
     var searchAttributedString: NSAttributedString?
+    var removable: Bool = true
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId

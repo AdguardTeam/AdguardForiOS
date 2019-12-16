@@ -38,7 +38,7 @@
 /**
  init object with list of domaint. Automaticaly generates content blocker rule
  */
-- (nonnull id)initWithDomains:(nonnull NSArray<NSString*> *)domains;
+- (nonnull id)initWithRules:(nonnull NSArray<ASDFilterRule*> *)rules;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -51,7 +51,7 @@
 /**
  list of domains
  */
-@property (nonatomic, nonnull) NSArray<NSString*> *domains;
+@property (nonatomic, nonnull) NSArray<ASDFilterRule*> *rules;
 
 /**
  Content blocker rule

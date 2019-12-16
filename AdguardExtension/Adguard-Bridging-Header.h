@@ -18,7 +18,6 @@
 #import "NSString+Utils.h"
 #import "AEWhitelistDomainObject.h"
 #import "AESFilterConverter.h"
-#import "APSharedResources.h"
 #import "APVPNManager.h"
 #import "ACDnsUtils.h"
 #import "DDLogMacros.h"
@@ -30,3 +29,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "AESProductSchemaManager.h"
+#import <AGDnsProxy/AGDnsProxy.h>
+#import "ADBTableRow.h"
+#import "ADBTable.h"
+#import "APDnsLogTable.h"
