@@ -33,8 +33,23 @@ class BottomShadowButton: UIButton {
     
     var action: (() -> Void)?
     
-    func buttonAction(action: @escaping () -> Void) {
-        self.action = action
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame:frame)
+        commonInit()
+    }
+    
+    private func commonInit() {
         self.addTarget(self, action: #selector(BottomShadowButton.clicked), for: .touchUpInside)
     }
     

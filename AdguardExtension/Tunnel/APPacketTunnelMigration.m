@@ -17,7 +17,6 @@
  */
 
 #import "APPacketTunnelMigration.h"
-#import "APSharedResources.h"
 #import "ACLLogger.h"
 
 @implementation APPacketTunnelMigration

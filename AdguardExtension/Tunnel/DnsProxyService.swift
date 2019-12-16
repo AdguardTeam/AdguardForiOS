@@ -67,16 +67,29 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
         
         var filters = [NSNumber:String]()
+        var userFilterId: Int?
+        var otherFilterIds = [Int]()
         
         for filter in filterFiles! {
             
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String
+            let userFilter = (filter["user_filter"] as? Bool) ?? false
+            
+            if userFilter {
+                userFilterId = identifier
+            } else {
+                otherFilterIds.append(identifier)
+            }
             
             let numId = identifier as NSNumber
             
             filters[numId] = path
         }
+        
+        dnsRecordsWriter.userFilterId = userFilterId as NSNumber?
+        dnsRecordsWriter.otherFilterIds = otherFilterIds as [NSNumber]
+        
         let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeout: 10000, serverIp: nil)
         
         let dns64Settings = AGDns64Settings(upstream: upstream, maxTries: 2, waitTime: 10000)

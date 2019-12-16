@@ -19,6 +19,7 @@
 @import NetworkExtension;
 
 #import "APVPNManager.h"
+#import "AESharedResources.h"
 
 /**
  Error domain for errors from tunnel provider.

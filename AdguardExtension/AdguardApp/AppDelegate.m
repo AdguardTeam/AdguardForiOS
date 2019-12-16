@@ -24,21 +24,11 @@
 #import "AppDelegate.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
-
 #import "AESharedResources.h"
-
-#ifdef PRO
-#import "APSProductSchemaManager.h"
-#import "APSharedResources.h"
-#import "APBlockingSubscriptionsManager.h"
-#import "APVPNManager.h"
-#else
 #import "AESProductSchemaManager.h"
-#endif
+#import "ACDnsUtils.h"
 
 #import "Adguard-Swift.h"
-
-#import "ACDnsUtils.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"

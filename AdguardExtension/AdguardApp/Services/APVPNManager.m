@@ -25,6 +25,7 @@
 #import "ACommons/ACNetwork.h"
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
+#import "APCommonSharedResources.h"
 #import "Adguard-Swift.h"
 
 #define VPN_NAME                            @" VPN"
@@ -73,7 +74,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     DnsProvidersService * _providersService;
     
-    APSharedResources *_resources;
+    AESharedResources *_resources;
     ConfigurationService *_configuration;
     NEVPNStatus _lastVpnStatus;
 }
@@ -86,7 +87,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
 
-- (id)initWithResources: (nonnull APSharedResources*) resources
+- (id)initWithResources: (nonnull AESharedResources*) resources
           configuration: (ConfigurationService *) configuration {
     
     self = [super init];
@@ -394,29 +395,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 - (APVpnManagerTunnelMode)tunnelMode {
     return _tunnelMode;
-}
-
-- (BOOL)clearDnsRequestsLog {
-
-    _lastError = nil;
-
-    return [_resources removeDnsLog];
-}
-
-- (void)obtainDnsLogRecords:(void (^)(NSArray<DnsLogRecord *> *records))completionBlock {
-
-    _lastError = nil;
-    
-    if (completionBlock == nil) {
-        return;
-    }
-    
-    NSArray <DnsLogRecord *> *records = [_resources readDnsLog];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        completionBlock(records);
-    });
 }
 
 - (BOOL)addRemoteDnsServer:(NSString *)name upstreams:(NSArray<NSString*>*) upstreams {

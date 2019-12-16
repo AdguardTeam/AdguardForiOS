@@ -34,11 +34,11 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
+    private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
-    private var selectedRecord: LogRecord?
+    private var selectedRecord: DnsLogRecordExtended?
     private var notificationToken: NotificationToken?
     
     // MARK: - view controller life cycle
@@ -72,18 +72,27 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         let record = model.records[indexPath.row]
         
         // Change to category description
-        var detailsString = String(format: "type: %@", record.type!)
-        let timeString = record.time ?? ""
+        var detailsString = String(format: "type: %@", record.logRecord.type)
+        let timeString = record.logRecord.time()
         
-        if record.answer == nil || record.answer == "" {
+        if record.logRecord.answer == nil || record.logRecord.answer == "" {
             detailsString += ", NXDOMAIN"
         }
 
-        cell.domain.text = record.domain
+        cell.domain.text = record.logRecord.domain
         cell.details.text = detailsString
         cell.timeLabel.text = timeString
         
-        let type = isBlocked(record)
+        let type: BlockedRecordType
+        switch (record.logRecord.status) {
+        case .processed:
+            type = .normal
+        case .whitelisted:
+            type = .whitelisted
+        case .blacklistedByUserFilter, .blacklistedByOtherFilter:
+            type = .blocked
+        }
+        
         setupRecordCell(cell: cell, type: type)
         
         theme.setupLabel(cell.domain)
@@ -141,25 +150,6 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     
     @objc private func refresh() {
         model.obtainRecords()
-    }
-    
-    private func isBlocked(_ logRecord: LogRecord) -> BlockedRecordType {
-        if logRecord.answer == nil || logRecord.answer == "" {
-            // Mark all NXDOMAIN responses as blocked
-            return .blocked
-        }
-
-        if logRecord.answer!.contains("0.0.0.0") ||
-            logRecord.answer!.contains("127.0.0.1") ||
-            logRecord.answer!.contains("[::]")  {
-            return .blocked
-        }
-
-        if logRecord.isTracked ?? false {
-            return .tracked
-        }
-        
-        return .normal
     }
     
     private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType){
