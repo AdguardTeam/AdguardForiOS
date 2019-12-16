@@ -151,8 +151,6 @@ class SafariService: NSObject, SafariServiceProtocol {
             let group = DispatchGroup()
             var resultError: Error?
 
-            NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_content_blockers", nil)])
-
             for blocker in ContentBlockerType.allCases {
                 
                 group.enter()
@@ -179,10 +177,6 @@ class SafariService: NSObject, SafariServiceProtocol {
             group.wait()
             
             completion(resultError)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-            }
         }
     }
 
@@ -274,6 +268,8 @@ class SafariService: NSObject, SafariServiceProtocol {
         invalidateQueue.async { [weak self] in
             guard let self = self else { return }
             
+            NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_content_blockers", nil)])
+            
             // Notify that filter began updating
             NotificationCenter.default.post(name: SafariService.filterBeganUpdating, object: self, userInfo: [SafariService.contentBlockerTypeString : type])
             
@@ -310,9 +306,18 @@ class SafariService: NSObject, SafariServiceProtocol {
                     completion(nil)
                     group.leave()
                 }
+                
+                // Notify that filter finished updating
+                NotificationCenter.default.post(name: SafariService.filterFinishedUpdating,
+                                                object: self,
+                                                userInfo: [SafariService.successString : error == nil, SafariService.contentBlockerTypeString : type])
             }
             
             group.wait()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            }
         }
     }
     
