@@ -37,6 +37,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var complexProtectionView: UIView!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
     
@@ -202,11 +203,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
         complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn)
+        activityIndicator.startAnimating()
     }
     
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self)
+        activityIndicator.startAnimating()
     }
     
     
@@ -215,6 +218,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
         complexProtection.switchComplexProtection(state: enabled, for: self)
+        activityIndicator.startAnimating()
     }
     
     
@@ -335,6 +339,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         contentBlockerViewIpad.backgroundColor = theme.notificationWindowColor
+        
+        activityIndicator.color = theme.invertedBackgroundColor
     }
     
     /**
@@ -527,6 +533,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                     complexText = ACLocalizedString("system_enabled", nil)
                 }
                 self.protectionStatusLabel.text = complexText
+                
+                self.activityIndicator.stopAnimating()
             }
         }
     }

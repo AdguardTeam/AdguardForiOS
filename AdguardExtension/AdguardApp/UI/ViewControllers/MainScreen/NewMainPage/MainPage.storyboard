@@ -199,11 +199,19 @@
                                                     <action selector="complexProtectionState:" destination="T6V-s9-cBk" eventType="valueChanged" id="kJU-kj-rcf"/>
                                                 </connections>
                                             </view>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1Gt-CD-4TS">
+                                                <rect key="frame" x="365.5" y="57" width="37" height="37"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="YUL-Oa-fId" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" id="7bX-vt-w7f"/>
+                                            <constraint firstItem="1Gt-CD-4TS" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="K9n-ny-kNs"/>
                                             <constraint firstItem="YUL-Oa-fId" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="RtM-Pd-CpP"/>
+                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="top" secondItem="1Gt-CD-4TS" secondAttribute="bottom" constant="24" id="b9m-xn-Mqp">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="24"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                            </constraint>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-pN-tdm">
@@ -662,6 +670,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9Of-cK-Wih"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="1Gt-CD-4TS" id="8K0-xX-OSf"/>
                         <outlet property="adguardManImageView" destination="gM8-pc-xzq" id="laM-dL-fYX"/>
                         <outlet property="adguardTitleLabel" destination="VWV-Vg-eUx" id="Y3B-UF-cvP"/>
                         <outlet property="blockedButton" destination="561-fR-2DC" id="28C-6y-DVX"/>
