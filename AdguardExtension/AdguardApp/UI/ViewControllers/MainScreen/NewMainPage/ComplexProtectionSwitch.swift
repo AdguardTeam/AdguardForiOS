@@ -18,9 +18,14 @@
 
 import Foundation
 
+protocol ComplexSwitchDelegate {
+    func beginTracking()
+}
+
 class ComplexProtectionSwitch: UIControl {
     
     private(set) var isOn = false
+    var delegate: ComplexSwitchDelegate?
     
     // MARK: - Private variables
     
@@ -96,6 +101,9 @@ class ComplexProtectionSwitch: UIControl {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
+        
+        delegate?.beginTracking()
+        
         let color = isOn ? onColor.cgColor : offColor.cgColor
         
         thumbView.layer.shadowRadius = 25

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate {
 
     // MARK: - Nav bar elements
     
@@ -68,6 +68,19 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var getProButton: UIButton!
     
     
+    // MARK: - Content blockers view
+    
+    @IBOutlet weak var contentBlockerViewIphone: UIView!
+    @IBOutlet weak var contentBlockerViewIpad: UIView! {
+        didSet {
+            contentBlockerViewIpad.layer.shadowColor = UIColor.black.cgColor
+            contentBlockerViewIpad.layer.shadowRadius = 3.0
+            contentBlockerViewIpad.layer.shadowOpacity = 0.5
+            contentBlockerViewIpad.layer.shadowOffset = .zero
+        }
+    }
+    
+    
     // MARK: - Themable labels
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -78,7 +91,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     
     // MARK: - Variables
-
+    
+    private var getProSegueId = "getProSegue"
+    private var proStatus: Bool {
+        return configuration.proStatus
+    }
     
     // MARK: - Services
     
@@ -117,6 +134,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chooseRequest()
     
         chartModel.chartPointsChangedDelegate = self
+        complexProtectionSwitch.delegate = self
         
         changeProtectionStatusLabel()
         
@@ -131,14 +149,19 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexProtection.delegate = self
         updateTheme()
         observeProStatus()
+        observeContentBlockersState()
         chartModel.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        if let nav = navigationController as? MainNavigationController {
+            nav.addGestureRecognizer()
+        }
     }
         
     deinit {
@@ -217,6 +240,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     
+    // MARK: - Content blockers view actions
+    
+    @IBAction func crossTapped(_ sender: UIButton) {
+        hideContentBlockersInfo()
+    }
+    
+    @IBAction func fixItTapped(_ sender: UIButton) {
+    }
+    
     // MARK: - Observing Values from User Defaults
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -251,6 +283,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
+    func proStatusHandler() {
+        performSegue(withIdentifier: getProSegueId, sender: self)
+    }
+    
     
     // MARK: - ChartPointsChangedDelegate method
     
@@ -264,6 +300,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     func dateTypeChanged(dateType: ChartDateType) {
         changeDateTypeButton(dateType: dateType)
         chartModel.chartDateType = dateType
+    }
+    
+    
+    // MARK: - Complex switch delegate
+    
+    func beginTracking() {
+        if let nav = navigationController as? MainNavigationController {
+            nav.removeGestureRecognizer()
+        }
     }
     
     
@@ -287,6 +332,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         getProView.backgroundColor = theme.backgroundColor
+        
+        contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
+        contentBlockerViewIpad.backgroundColor = theme.notificationWindowColor
     }
     
     /**
@@ -397,9 +445,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
             guard let self = self else { return }
-            let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-            
-            
+            self.observeContentBlockersState()
         }
 
         observations.append(proObservation)
@@ -443,11 +489,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let proStatus = self.configuration.proStatus
-            
-            self.getProView.isHidden = proStatus
-            self.statisticsStackView.isHidden = !proStatus
-            self.changeStatisticsDatesButton.isHidden = !proStatus
+            self.getProView.isHidden = self.proStatus
+            self.statisticsStackView.isHidden = !self.proStatus
+            self.changeStatisticsDatesButton.isHidden = !self.proStatus
+            self.systemProtectionButton.buttonIsOn = self.proStatus
         }
     }
     
@@ -460,6 +505,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             guard let self = self else { return }
 
             DispatchQueue.main.async {
+                
+                
                 self.safariProtectionButton.buttonIsOn = safariEnabled
                 self.systemProtectionButton.buttonIsOn = systemEnabled
                 self.chartView.isEnabled = systemEnabled
@@ -480,6 +527,79 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                     complexText = ACLocalizedString("system_enabled", nil)
                 }
                 self.protectionStatusLabel.text = complexText
+            }
+        }
+    }
+    
+    private func observeContentBlockersState() {
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        
+        let optionalEnabled = configuration.contentBlockerEnabled
+        guard let enabledBlockers = optionalEnabled else {
+            return
+        }
+        
+        var allEnabled = true
+        for blocker in enabledBlockers {
+            allEnabled = allEnabled && blocker.value
+        }
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.contentBlockerViewIphone.isHidden = !isIphone
+            self?.contentBlockerViewIpad.isHidden = isIphone
+        }
+        
+        if !allEnabled {
+            showContentBlockersInfo()
+        } else {
+            hideContentBlockersInfo()
+        }
+    }
+    
+    /**
+     Shows content blockers info in the bottom of the screen
+     */
+    private func showContentBlockersInfo(){
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        
+        if isIphone {
+            DispatchQueue.main.async {[weak self] in
+                self?.contentBlockerViewIphone.isHidden = false
+                UIView.animate(withDuration: 0.5) {
+                    self?.contentBlockerViewConstraint.constant = 64.0
+                }
+            }
+        } else {
+            DispatchQueue.main.async {[weak self] in
+                self?.contentBlockerViewIpad.alpha = 0.0
+                self?.contentBlockerViewIpad.isHidden = false
+                UIView.animate(withDuration: 0.5) {
+                    self?.contentBlockerViewIpad.alpha = 1.0
+                }
+            }
+        }
+    }
+    
+    /**
+     Hides content blockers info in the bottom of the screen
+     */
+    private func hideContentBlockersInfo(){
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        if isIphone {
+            DispatchQueue.main.async {[weak self] in
+                UIView.animate(withDuration: 0.5, animations: {[weak self] in
+                    self?.contentBlockerViewConstraint.constant = 0.0
+                }) {[weak self] (success) in
+                    self?.contentBlockerViewIphone.isHidden = true
+                }
+            }
+        } else {
+            DispatchQueue.main.async {[weak self] in
+                UIView.animate(withDuration: 0.5, animations: {[weak self] in
+                    self?.contentBlockerViewIpad.alpha = 0.0
+                }) {[weak self] (success) in
+                    self?.contentBlockerViewIpad.isHidden = true
+                }
             }
         }
     }

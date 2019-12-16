@@ -38,6 +38,7 @@ import Foundation
     var editLineColor: UIColor { get }
     var editLineSelectedColor: UIColor { get }
     var navigationBarColor: UIColor { get }
+    var notificationWindowColor: UIColor { get }
     
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
@@ -142,6 +143,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var navigationBarColor: UIColor {
         return configuration.darkTheme ? UIColor.white : UIColor(hexString: "4D4D4D")
+    }
+    
+    var notificationWindowColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#f3f3f3")
     }
     
     func setupTagButton(_ button: RoundRectButton) {

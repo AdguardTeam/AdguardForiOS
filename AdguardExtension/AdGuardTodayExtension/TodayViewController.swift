@@ -73,7 +73,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         super.init(coder: coder)
         
-        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self)
+        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self, configuration: configuration)
         initLogger()
     }
     
