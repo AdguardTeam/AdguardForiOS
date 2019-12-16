@@ -143,19 +143,44 @@ class AppDelegateHelper: NSObject {
      Also it removes vpn profile. And reomves all keys from keychain (reset authorisation) */
     func resetAllSettings() {
         
-        DDLogInfo("(AppDelegate) resetAllSettings")
+        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
 
-        filtersService.reset()
-        antibannerController.reset()
-        vpnManager.removeVpnConfiguration()
-        resources.reset()
-        purchaseService.reset()
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        appDelegate.window.rootViewController?.present(alert, animated: true, completion: nil)
         
-        // force load filters to fill database
-        filtersService.load(refresh: true) {}
-        
-        let nav = self.getNavigationController()
-        nav?.popToRootViewController(animated: true)
+        DispatchQueue(label: "reset_queue").async { [weak self] in
+            guard let self = self else { return }
+            DDLogInfo("(AppDelegate) resetAllSettings")
+
+            self.filtersService.reset()
+            self.antibannerController.reset()
+            self.vpnManager.removeVpnConfiguration()
+            self.resources.reset()
+            
+            let group = DispatchGroup()
+            group.enter()
+            
+            self.purchaseService.reset {
+                group.leave()
+            }
+            group.wait()
+            
+            self.dnsFiltersService.reset()
+            
+            // force load filters to fill database
+            self.filtersService.load(refresh: true) {}
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.appDelegate.window.rootViewController?.dismiss(animated: true) {
+                    let nav = self?.getNavigationController()
+                    nav?.popToRootViewController(animated: true)
+                }
+            }
+        }
     }
     
     // MARK: - private methods

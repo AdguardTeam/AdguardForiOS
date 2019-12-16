@@ -46,7 +46,7 @@ protocol LoginServiceProtocol {
     var activeChanged: (() -> Void)? { get set }
     
     /** resets all login data */
-    func reset()
+    func reset(completion:@escaping ()->Void )
 }
 
 class LoginService: LoginServiceProtocol {
@@ -340,7 +340,8 @@ class LoginService: LoginServiceProtocol {
             return
         }
         
-        let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        var request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
+        request.timeoutInterval = 10.0
         
         network.data(with: request) { (dataOrNil, response, error) in
             
@@ -436,10 +437,14 @@ class LoginService: LoginServiceProtocol {
         }
     }
     
-    func reset() {
-        keychain.reset()
-        if let callback = activeChanged {
-            callback()
+    func reset(completion:@escaping ()->Void ) {
+        resetLicense { [weak self] (_) in
+            self?.keychain.reset()
+            if let callback = self?.activeChanged {
+                callback()
+            }
+            
+            completion()
         }
     }
     
