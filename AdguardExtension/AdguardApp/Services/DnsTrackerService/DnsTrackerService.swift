@@ -31,32 +31,49 @@ struct Tracker: Codable {
     let name: String
     let categoryId: Int
     let url: String?
+    let company: String?
 
     enum CodingKeys: String, CodingKey {
         case name
         case categoryId
         case url
+        case company
     }
 }
 
-protocol DnsTrackerServiceProtocol {
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?)
+@objc protocol DnsTrackerServiceProtocol {
+    func getTrackerInfo(by domain: String) -> DnsTrackerInfo?
 }
 
-class DnsTrackerService: DnsTrackerServiceProtocol {
+@objc class DnsTrackerInfo: NSObject {
+    let categoryKey: String?
+    let name: String?
+    let isTracked: Bool?
+    let company: String?
+    
+    init(categoryKey: String?, name: String?, isTracked: Bool?, company: String?) {
+        self.categoryKey = categoryKey
+        self.name = name
+        self.isTracked = isTracked
+        self.company = company
+    }
+}
+
+@objc class DnsTrackerService: NSObject, DnsTrackerServiceProtocol {
     
     private var dnsTrackers: DnsTrackers?
     
-    init() {
+    override init() {
+        super.init()
         initializeDnsTrackers()
     }
     
-    func getCategoryAndName(by domain: String?) -> (categoryKey: String?, name: String?, isTracked: Bool?) {
-        let nilReturn: (categoryKey: String?, name: String?, isTracked: Bool?) = (nil, nil, nil)
+    func getTrackerInfo(by domain: String) -> DnsTrackerInfo? {
+        
+        let nilReturn = DnsTrackerInfo(categoryKey: nil, name: nil, isTracked: nil, company: nil)
         
         let trackerDomains = dnsTrackers?.trackerDomains
         
-        guard let domain = domain else { return nilReturn }
         guard let domainKey = trackerDomains?[domain] else { return nilReturn }
         
         let trackers = dnsTrackers?.trackers
@@ -69,7 +86,7 @@ class DnsTrackerService: DnsTrackerServiceProtocol {
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
-        return (categoryKey, info.name, isTracked)
+        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company)
     }
     
     // MARK: - Initialization of dns trackers object

@@ -23,6 +23,8 @@ import NetworkExtension
 // MARK: - Complex protection Interface -
 
 protocol ComplexProtectionServiceProtocol {
+    // Delegate
+    var delegate: ComplexProtectionDelegate? { get set }
     
     // Turns on/off complex protection
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?)
@@ -40,19 +42,41 @@ protocol ComplexProtectionServiceProtocol {
     func getAllStates(completion: @escaping (_ safari: Bool, _ system: Bool, _ complex: Bool)->())
 }
 
+// MARK: - Complex protection Delegate -
+
+protocol ComplexProtectionDelegate {
+    /**
+     Method is called when safari protection status changes
+     */
+    func safariProtectionChanged()
+    
+    /**
+     Method is called when trying to turn system protection on, and proStatus is false
+     */
+    func proStatusHandler()
+}
+
 // MARK: - Complex protection class -
 
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
+    var delegate: ComplexProtectionDelegate?
+    
     private let resources: AESharedResourcesProtocol
     private let safariService: SafariService
+    private let configuration: ConfigurationService
     
     private let systemProtectionProcessor: TurnSystemProtectionProtocol
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariService, systemProtectionProcessor: TurnSystemProtectionProtocol) {
+    private var proStatus: Bool {
+        return configuration.proStatus
+    }
+    
+    init(resources: AESharedResourcesProtocol, safariService: SafariService, systemProtectionProcessor: TurnSystemProtectionProtocol, configuration: ConfigurationService) {
         self.resources = resources
         self.safariService = safariService
         self.systemProtectionProcessor = systemProtectionProcessor
+        self.configuration = configuration
     }
     
     func checkState(completion: @escaping (Bool)->()){
@@ -105,10 +129,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             if !(safariEnabled || systemEnabled){
                 switchSafariProtection(state: true)
             } else {
-                if safariEnabled {
-                    switchSafariProtection(state: safariEnabled)
+                /**
+                 If last state of system protection was true and proStatus became false while complex protection was off
+                 we turn on safari protection instead
+                 */
+                if safariEnabled || (systemEnabled && !proStatus){
+                    switchSafariProtection(state: true)
                 }
-                if systemEnabled {
+                if systemEnabled && proStatus {
                     switchSystemProtection(state: systemEnabled, for: VC)
                 }
             }
@@ -118,17 +146,22 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     func switchSafariProtection(state enabled: Bool){
         resources.safariProtectionEnabled = enabled
         
-        safariService.invalidateBlockingJsons(completion: { (error) in
+        safariService.invalidateBlockingJsons(completion: {[weak self] (error) in
             if error != nil {
                 DDLogError("(ComplexProtectionService) Error invalidating json from")
             } else {
                 DDLogInfo("(ComplexProtectionService) Successfull invalidating of json")
             }
+            self?.delegate?.safariProtectionChanged()
         })
     }
     
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?) {
-        systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
+        if !proStatus {
+            delegate?.proStatusHandler()
+        } else {
+            systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
+        }
     }
     
     // MARK: - Private methods

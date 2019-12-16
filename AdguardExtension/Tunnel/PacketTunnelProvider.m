@@ -132,6 +132,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     NetworkStatus _lastReachabilityStatus;
     
     APSharedResources* _resources;
+    DnsTrackerService* _dnsTrackerService;
     
     DnsProxyService* _dnsProxy;
     
@@ -165,12 +166,13 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     if (self) {
         
         _resources = [APSharedResources new];
+        _dnsTrackerService = [DnsTrackerService new];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc]initWithResources:_resources dnsTrackerService:_dnsTrackerService];
         _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];

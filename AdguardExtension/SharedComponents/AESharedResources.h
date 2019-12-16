@@ -235,6 +235,18 @@ extern NSString* _Nonnull AEDefaultsShowStatusBar;
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /**
+ User defaults key, which defines number of requests */
+extern NSString* _Nonnull AEDefaultsRequests;
+
+/**
+ User defaults key, which defines number of blocked requests */
+extern NSString* _Nonnull AEDefaultsBlockedRequests;
+
+/**
+ User defaults key, which defines number of counters requests */
+extern NSString* _Nonnull AEDefaultsCountersRequests;
+
+/**
  String to send notifications for StatusView
  */
 extern NSString* _Nonnull AEDefaultsShowStatusViewInfo;

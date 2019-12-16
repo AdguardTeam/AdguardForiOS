@@ -544,6 +544,21 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 hours";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Today";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 days";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 days";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "All time";
+
 /*(SafariService) notification about loading content blockers  */
 "loading_content_blockers" = "Content blockers are being updated ...";
 

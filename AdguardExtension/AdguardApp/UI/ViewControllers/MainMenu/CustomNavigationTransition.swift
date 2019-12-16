@@ -85,11 +85,15 @@ class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDel
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if let _ = toVC as? MainController {
+        if let _ = toVC as? MainPageController {
             navigationController.setNavigationBarHidden(true, animated: true)
         }
 
         if let _ = toVC as? MainMenuController {
+            navigationController.setNavigationBarHidden(false, animated: true)
+        }
+        
+        if let _ = toVC as? GetProController {
             navigationController.setNavigationBarHidden(false, animated: true)
         }
         

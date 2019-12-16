@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension UIImageView {
+extension UIView {
     // Use to animate image rotation
     // if isNedeed = true -> rotates
     // if isNedeed = false -> stops to rotate
