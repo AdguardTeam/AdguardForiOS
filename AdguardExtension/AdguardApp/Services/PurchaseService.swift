@@ -383,9 +383,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
         
         // get receipt
-        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL,
-            let data = try? Data(contentsOf: receiptUrlStr)
-        else {
+        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL else { return }
+        if !FileManager.default.fileExists(atPath: receiptUrlStr.path) { return }
+        guard let data = try? Data(contentsOf: receiptUrlStr) else {
             complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
             return
         }
