@@ -92,6 +92,10 @@ extension DnsLogRecord
             return [.removeRuleFromUserFilter]
         case (_, .movedToWhitelist):
             return [.removeDomainFromWhitelist]
+        case (_, .removedFromWhitelist):
+            return [.addDomainToWhitelist]
+        case (_, .removedFromBlacklist):
+            return [.addRuleToUserFlter]
         case (.blacklistedByUserFilter, _):
             return [.removeRuleFromUserFilter]
         case (.blacklistedByOtherFilter, _):

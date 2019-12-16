@@ -262,10 +262,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return []
             }
             
-            return string.isEmpty ? [] : string.components(separatedBy: .newlines)
+            return string.isEmpty ? [] : string.components(separatedBy: .newlines).filter { !$0.isEmpty }
         }
         set {
-            if let data = newValue.joined(separator: "\n").data(using: .utf8) {
+            var rules = newValue
+            rules.append("") // temporary fix dnslibs bug
+            if let data = rules.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
                 vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
             }
@@ -468,13 +470,15 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         let rules = string.components(separatedBy: .newlines)
         
-        return rules
+        return rules.filter { !$0.isEmpty }
     }
     
     private func saveWhitlistDomains(domains:[String]) {
-        let rules = domains.map { self.whitelistRuleFromDomain($0) }
+        var rules = domains.map { self.whitelistRuleFromDomain($0) }
+        rules.append("") // temporary fix dnslibs bug
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
-            resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
+            resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
+            vpnManager?.restartTunnel()
         }
         else {
             DDLogError("(DnsFiltersService) error - can not save user filter to file")
