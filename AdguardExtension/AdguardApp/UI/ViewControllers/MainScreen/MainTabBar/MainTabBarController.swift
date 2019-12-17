@@ -18,76 +18,80 @@
 
 import Foundation
 
-class MainTabBarController: UITabBarController {
-    private(set) var swipeAnimatedTransitioning = SwipeTransitionAnimator()
-    private(set) var tapAnimatedTransitioning = SwipeTransitionAnimator()
-    private var currentAnimatedTransitioningType = SwipeTransitionAnimator()
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    private var panGestureRecognizer: UIPanGestureRecognizer!
-    
-    private let bottomView = UIView()
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        customInit()
-    }
+    private var bottomView: UIView?
 
-    private func customInit() {
+    private var bottomViewLeftAnchor: NSLayoutConstraint?
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
         delegate = self
-        currentAnimatedTransitioningType = tapAnimatedTransitioning
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerDidPan(_:)))
-        view.addGestureRecognizer(panGestureRecognizer)
-
-        // bottom view setups
-        bottomView.backgroundColor = UIColor(hexString: "#67b279")
-        bottomView.frame.size = CGSize(width: tabBar.itemWidth, height: 4.0)
-        tabBar.addSubview(bottomView)
     }
     
-    @objc private func panGestureRecognizerDidPan(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .ended {
-            currentAnimatedTransitioningType = tapAnimatedTransitioning
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        changeLeftAnchor(for: item)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        createSelectionIndicator()
+        guard let item = tabBar.selectedItem else { return }
+        changeLeftAnchor(for: item)
+    }
+    
+    private func changeLeftAnchor(for item: UITabBarItem){
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let width: CGFloat = tabBar.frame.width / numberOfItems
+        
+        let selectedItem = tabBar.items?.index(of: item) ?? 0
+        
+        bottomViewLeftAnchor?.constant = width / 4 + CGFloat(selectedItem) * width
+        
+        UIView.animate(withDuration: 0.3) {[weak self] in
+            self?.tabBar.layoutIfNeeded()
         }
-
-        if transitionCoordinator != nil {
+    }
+    
+    private func createSelectionIndicator() {
+        var bottomInset: CGFloat = 0.0
+        
+        if #available(iOS 11.0, *) {
+            bottomInset = tabBar.safeAreaInsets.bottom
+        }
+        
+        if bottomView != nil || bottomInset != 0.0 {
             return
         }
         
-        if sender.state == .began {
-            currentAnimatedTransitioningType = swipeAnimatedTransitioning
-        }
-
-        if sender.state == .began || sender.state == .changed {
-            beginInteractiveTransitionIfPossible(sender)
-        }
-    }
-    
-    private func beginInteractiveTransitionIfPossible(_ sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: view)
+        bottomView = UIView()
+        bottomView?.isUserInteractionEnabled = false
+        bottomView?.translatesAutoresizingMaskIntoConstraints = false
+        bottomView?.backgroundColor = UIColor(hexString: "#67b279")
+        tabBar.addSubview(bottomView ?? UIView())
         
-        if translation.x > 0.0 && selectedIndex > 0 {
-            selectedIndex -= 1
-        } else if translation.x < 0.0 && selectedIndex + 1 < viewControllers?.count ?? 0 {
-            selectedIndex += 1
-        } else {
-            if !translation.equalTo(CGPoint.zero) {
-                // There is not a view controller to transition to, force the
-                // gesture recognizer to fail.
-                sender.isEnabled = false
-                sender.isEnabled = true
-            }
-        }
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let lineHeight: CGFloat = 4.0
+        let width: CGFloat = tabBar.frame.width / numberOfItems
         
-        transitionCoordinator?.animate(alongsideTransition: nil) { [unowned self] context in
-            if context.isCancelled && sender.state == .changed {
-                self.beginInteractiveTransitionIfPossible(sender)
-            }
-        }
+        let mult = 1 / (numberOfItems * 2)
+        
+        bottomView?.heightAnchor.constraint(equalToConstant: lineHeight).isActive = true
+        bottomView?.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: mult).isActive = true
+        bottomViewLeftAnchor = bottomView?.leftAnchor.constraint(equalTo: tabBar.leftAnchor, constant: width / 4)
+        bottomViewLeftAnchor?.isActive = true
+        bottomView?.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor).isActive = true
+        
+        let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: lineHeight)
+        let maskPath1 = UIBezierPath(roundedRect: bounds,
+            byRoundingCorners: [.topLeft , .topRight],
+            cornerRadii: CGSize(width: 20, height: 20))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath1.cgPath
+        bottomView?.layer.mask = maskLayer
     }
-}
 
-extension MainTabBarController: UITabBarControllerDelegate {
-    
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let fromVCIndex = tabBarController.viewControllers?.index(of: fromVC),
             let toVCIndex = tabBarController.viewControllers?.index(of: toVC) else {
@@ -95,19 +99,16 @@ extension MainTabBarController: UITabBarControllerDelegate {
         }
         let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left
         
-        currentAnimatedTransitioningType.targetEdge = edge
-        return currentAnimatedTransitioningType
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        if panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed {
-            return SwipeInteractor(gestureRecognizer: panGestureRecognizer, edge: currentAnimatedTransitioningType.targetEdge)
-        } else {
-            return nil
-        }
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        return transitionCoordinator == nil
+        return CustomNavigationTransitionAnimator(presenting: edge == .left)
     }
 }
+
+extension UITabBar {
+    override open var traitCollection: UITraitCollection {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UITraitCollection(horizontalSizeClass: .compact)
+        }
+        return super.traitCollection
+    }
+}
+
