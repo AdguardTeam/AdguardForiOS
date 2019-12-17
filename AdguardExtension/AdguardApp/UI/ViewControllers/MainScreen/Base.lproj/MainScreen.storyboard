@@ -111,10 +111,11 @@
         <scene sceneID="SO7-tD-kTA">
             <objects>
                 <tabBarController id="Tcp-0u-3pG" customClass="MainTabBarController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="fill" id="9ri-jd-2dI">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="fill" id="9ri-jd-2dI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Mlb-9d-wvk" kind="relationship" relationship="viewControllers" id="ZZX-0d-TBZ"/>

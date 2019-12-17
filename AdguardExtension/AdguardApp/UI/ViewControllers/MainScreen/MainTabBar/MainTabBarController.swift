@@ -23,10 +23,20 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     private var bottomView: UIView?
 
     private var bottomViewLeftAnchor: NSLayoutConstraint?
-        
+    
+    private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
+    private var themeToken: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        
+        updateTheme()
+        
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -38,6 +48,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         createSelectionIndicator()
         guard let item = tabBar.selectedItem else { return }
         changeLeftAnchor(for: item)
+    }
+    
+    private func updateTheme(){
+        tabBar.backgroundColor = theme.tabBarColor
     }
     
     private func changeLeftAnchor(for item: UITabBarItem){
