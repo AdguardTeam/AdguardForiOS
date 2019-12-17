@@ -73,7 +73,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         super.init(coder: coder)
         
-        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self)
+        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self, configuration: configuration)
         initLogger()
     }
     
@@ -83,6 +83,21 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        
+        changeTextForButton(with: AEDefaultsRequests)
+        changeTextForButton(with: AEDefaultsBlockedRequests)
+    }
+    
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+            changeTextForButton(with: keyPath)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -145,7 +160,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         let enabled = sender.isOn
         
         comlexProtection?.switchComplexProtection(state: enabled, for: nil)
-        
         updateWidgetComplex()
     }
     
@@ -335,6 +349,19 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
             let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
             let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol], nil)
             return "\(server) (\(protocolName))"
+        }
+    }
+    
+    /**
+     Changes number of requests for specific button
+     */
+    private func changeTextForButton(with keyPath: String?){
+        if keyPath == AEDefaultsRequests {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+            requestsLabel.text = "\(number)"
+        } else if keyPath == AEDefaultsBlockedRequests {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+            blockedLabel.text = "\(number)"
         }
     }
 }

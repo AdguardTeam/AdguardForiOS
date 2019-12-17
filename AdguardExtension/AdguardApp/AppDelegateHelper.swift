@@ -95,6 +95,7 @@ class AppDelegateHelper: NSObject {
         return true;
     }
     
+    var statusViewCounter = 0
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
@@ -106,6 +107,8 @@ class AppDelegateHelper: NSObject {
             if !sSelf.showStatusBarIsEnabled {
                 return
             }
+            
+            sSelf.statusViewCounter += 1
             
             guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
             
@@ -121,7 +124,10 @@ class AppDelegateHelper: NSObject {
         
         hideStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.HideStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
             guard let sSelf = self else { return }
-            if sSelf.statusBarIsShown{
+            
+            sSelf.statusViewCounter -= 1
+            
+            if sSelf.statusBarIsShown && sSelf.statusViewCounter == 0 {
                 DispatchQueue.main.async {
                     self?.hideStatusView()
                 }

@@ -38,6 +38,8 @@ import Foundation
     var editLineColor: UIColor { get }
     var editLineSelectedColor: UIColor { get }
     var tabBarColor: UIColor { get }
+    var navigationBarColor: UIColor { get }
+    var notificationWindowColor: UIColor { get }
     
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
@@ -144,6 +146,14 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#434343")
     }
     
+    var navigationBarColor: UIColor {
+        return configuration.darkTheme ? UIColor.white : UIColor(hexString: "4D4D4D")
+    }
+    
+    var notificationWindowColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#f3f3f3")
+    }
+    
     func setupTagButton(_ button: RoundRectButton) {
         button.customBackgroundColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#4D4D4D")
         button.setTitleColor(configuration.darkTheme ? UIColor.init(hexString: "#4D4D4D") : UIColor.init(hexString: "#D8D8D8"), for: .normal)
@@ -199,11 +209,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
             setupPopupButton(button)
         }
     }
-    
+
     func setupNavigationBar(_ navBarOrNil: UINavigationBar?) {
         guard let navBar = navBarOrNil else { return }
         let dark = configuration.darkTheme
-        let textAttributes = [NSAttributedString.Key.foregroundColor: dark ? UIColor.white : UIColor(hexString: "4D4D4D")]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
         navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = dark ? .clear : .white
         navBar.barStyle = dark ? .black : .default

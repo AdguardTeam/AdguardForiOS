@@ -648,6 +648,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("converting_rules", nil)])
         
+        defer {
+            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+        }
+        
         var error: Error?
         var converted = 0
         var overLimit = 0
@@ -655,7 +659,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var rulesData: Data?
         
         if rules.count == 0 {
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
         }
         
@@ -665,7 +668,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         let (converter, converterError) = createConverter()
         if converterError != nil {
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, converterError)
         }
         
@@ -673,7 +675,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, error)
         }
         
@@ -681,7 +682,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         error = converterResult?[AESFConvertedErrorKey] as? Error
         if error != nil {
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, error)
         }
         
@@ -695,7 +695,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                             code: ContentBlockerService.contentBlockerConverterErrorCode,
                             userInfo: nil)
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             return (nil, 0, 0, 0, error)
         }
         

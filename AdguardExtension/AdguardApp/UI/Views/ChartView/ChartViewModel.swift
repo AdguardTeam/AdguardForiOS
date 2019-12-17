@@ -1,0 +1,225 @@
+/**
+   This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+   Copyright © Adguard Software Limited. All rights reserved.
+
+   Adguard for iOS is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Adguard for iOS is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import Foundation
+
+protocol ChartViewModelProtocol {
+    var chartDateType: ChartDateType { get set }
+    var chartRequestType: ChartRequestType { get set }
+    
+    var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
+    var requestsObserver: (([ChartRerord])->Void)? { get }
+    
+    func obtainStatistics()
+}
+
+protocol ChartPointsChangedDelegate: class {
+    func chartPointsChanged(points: [Point])
+}
+
+enum ChartDateType {
+    case today, day, week, month, alltime
+    
+    func getTimeInterval(requestsDates: [Date]) -> (begin: Date, end: Date){
+        let firstDate: Date = requestsDates.first ?? now()
+        let lastDate: Date = requestsDates.last ?? now()
+        
+        var interval: Double = 0.0
+        
+        let hour = 60.0 * 60.0 // 1 hour
+        let day = 24.0 * hour // 24 hours
+        let week = 7.0 * day
+        let month = 30.0 * day
+        
+        switch self {
+        case .today:
+            let calendar = Calendar.current
+            let hours = Double(calendar.component(.hour, from: lastDate))
+            let minutes = Double(calendar.component(.minute, from: lastDate))
+            
+            interval = hours * hour + minutes * 60.0
+
+        case .day:
+            interval = day
+        case .week:
+            interval = week
+        case .month:
+            interval = month
+        case .alltime:
+            return (firstDate, lastDate)
+        }
+        
+        var endDate = lastDate - interval
+        if endDate < firstDate {
+            endDate = firstDate
+        }
+        
+        return (endDate, lastDate)
+    }
+    
+    private func now() -> Date {
+        return Date()
+    }
+}
+
+enum ChartRequestType {
+    case requests, blocked, counters
+}
+
+class ChartRerord {
+    let date: Date
+    let type: BlockedRecordType
+    
+    init(date: Date, type: BlockedRecordType) {
+        self.date = date
+        self.type = type
+    }
+}
+
+class ChartViewModel: ChartViewModelProtocol {
+    
+    var requestsObserver: (([ChartRerord]) -> Void)?
+    
+    weak var chartPointsChangedDelegate: ChartPointsChangedDelegate?
+    
+    var requests: [RequestsStatisticsBlock] = []
+    
+    var blockedRequests: [RequestsStatisticsBlock] = []
+    
+    var countersRequests: [RequestsStatisticsBlock] = []
+    
+    var chartDateType: ChartDateType = .alltime {
+        didSet {
+            changeChart()
+        }
+    }
+    
+    var chartRequestType: ChartRequestType = .requests {
+        didSet {
+            changeChart()
+        }
+    }
+    
+    private let dateFormatter = DateFormatter()
+    
+    private let vpnManager: APVPNManager
+    
+    // MARK: - init
+    init(_ vpnManager: APVPNManager) {
+        self.vpnManager = vpnManager
+    }
+    
+    func obtainStatistics() {
+        vpnManager.obtainDnsLogStatistics {[weak self] (statisticsRecords) in
+            guard let sSelf = self else { return }
+            guard let statistics = statisticsRecords else { return }
+            sSelf.requests = []
+            
+            for (key, value) in statistics {
+                switch key {
+                case APAllRequestsString:
+                    sSelf.requests = value
+                case APBlockedRequestsString:
+                    sSelf.blockedRequests = value
+                case APCountersRequestsString:
+                    sSelf.countersRequests = value
+                default:
+                    break
+                }
+            }
+            sSelf.changeChart()
+        }
+    }
+    
+    // MARK: - private methods
+    
+    private func changeChart(){
+        var requests: [RequestsStatisticsBlock] = []
+        var pointsArray: [Point] = []
+        
+        let maximumPointsNumber = 50
+        
+        switch chartRequestType {
+        case .requests:
+            requests = self.requests
+        case .blocked:
+            requests = blockedRequests
+        case .counters:
+            requests = countersRequests
+        }
+                
+        var requestsDates: [Date] = requests.map({ $0.date })
+        requestsDates.sort(by: { $0 < $1 })
+        
+        if requestsDates.count < 2 {
+            chartPointsChangedDelegate?.chartPointsChanged(points: [])
+            return
+        }
+        
+        let intervalTime = chartDateType.getTimeInterval(requestsDates: requestsDates)
+        
+        let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
+        let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
+        
+        var xPosition: CGFloat = 0.0
+        for request in requests {
+            let date = request.date.timeIntervalSinceReferenceDate
+            if date > firstDate && date < lastDate {
+                let point = Point(x: xPosition, y: CGFloat(integerLiteral: request.numberOfRequests))
+                pointsArray.append(point)
+                xPosition += 1.0
+            }
+        }
+        
+        if pointsArray.count > maximumPointsNumber {
+            let points = rearrangePoints(from: pointsArray, max: maximumPointsNumber)
+            chartPointsChangedDelegate?.chartPointsChanged(points: points)
+        } else {
+            chartPointsChangedDelegate?.chartPointsChanged(points: pointsArray)
+        }
+    }
+    
+    private func rearrangePoints(from points: [Point], max: Int) -> [Point] {
+        var ratio: Float = Float(points.count) / Float(max)
+        ratio = ceil(ratio)
+        
+        var copyPoints = points.map({$0.y})
+        
+        let intRatio = Int(ratio)
+        var newPoints = [Point]()
+        var xPosition: CGFloat = 0.0
+        
+        while !copyPoints.isEmpty {
+            let points = copyPoints.prefix(intRatio)
+            let sum = points.reduce(0, +)
+            let point = Point(x: xPosition, y: sum)
+            newPoints.append(point)
+            
+            xPosition += 1.0
+            
+            if copyPoints.count < intRatio {
+                copyPoints.removeAll()
+            } else {
+                copyPoints.removeFirst(intRatio)
+            }
+        }
+        
+        return newPoints
+    }
+    
+}

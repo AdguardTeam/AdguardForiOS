@@ -23,6 +23,8 @@ class MainNavigationController: UINavigationController {
     var customStatusBarStyle: UIStatusBarStyle?
     
     private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
+   
+    private let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +42,25 @@ class MainNavigationController: UINavigationController {
     
     static private var coordinatorHelperKey = "UINavigationController.TransitionCoordinatorHelper"
 
-    var transitionCoordinatorHelper: CustomNavigationTransitionCoordinator? {
+    private var transitionCoordinatorHelper: CustomNavigationTransitionCoordinator? {
         return objc_getAssociatedObject(self, &MainNavigationController.coordinatorHelperKey) as? CustomNavigationTransitionCoordinator
     }
 
-    func addCustomTransitioning() {
+    func addGestureRecognizer(){
+        let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        if view.gestureRecognizers?.isEmpty ?? false{
+            view.addGestureRecognizer(edgeSwipeGestureRecognizer)
+        }
+    }
+    
+    func removeGestureRecognizer(){
+        let gestures = view.gestureRecognizers ?? []
+        for gesture in gestures {
+            view.removeGestureRecognizer(gesture)
+        }
+    }
+    
+    private func addCustomTransitioning() {
         var object = objc_getAssociatedObject(self, &MainNavigationController.coordinatorHelperKey)
 
         guard object == nil else {
@@ -56,13 +72,12 @@ class MainNavigationController: UINavigationController {
         objc_setAssociatedObject(self, &MainNavigationController.coordinatorHelperKey, object, nonatomic)
 
         delegate = object as? CustomNavigationTransitionCoordinator
-
-        let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         
+        let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         view.addGestureRecognizer(edgeSwipeGestureRecognizer)
     }
 
-    @objc func handleSwipe(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc private func handleSwipe(_ gestureRecognizer: UIPanGestureRecognizer) {
         
         guard let gestureRecognizerView = gestureRecognizer.view else {
             transitionCoordinatorHelper?.interactionController = nil
