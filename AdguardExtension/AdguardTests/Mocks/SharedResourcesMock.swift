@@ -14,25 +14,28 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
     
     var files = [String: Data]()
     
-    func reset() {}
+    func reset() {
+        do {
+            try FileManager.default.removeItem(at: sharedResuorcesURL())
+        }
+        catch { (error)
+            print(error)
+        }
+        
+        try? FileManager.default.createDirectory(at: sharedResuorcesURL(), withIntermediateDirectories: true, attributes: nil)
+    }
     
-    static func sharedResuorcesURL() -> URL { return URL(string: "")!}
+    func sharedResuorcesURL() -> URL { return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("resources_mock") }
     
-    static func sharedAppLogsURL() -> URL { return URL(string: "")!}
+    func sharedAppLogsURL() -> URL { return URL(string: "")!}
     
-    static func sharedLogsURL() -> URL  { return URL(string: "")!}
+    func sharedLogsURL() -> URL  { return URL(string: "")!}
     
     func sharedDefaults() -> UserDefaults {
         return userDefaults
     }
     
-    static func sharedDefaultsSetTempKey(_ key: String, value: Any) {}
-    
-    static func sharedDefaultsValue(ofTempKey key: String) -> Any? { return NSObject() }
-    
-    static func sharedDefaultsRemoveTempKey(_ key: String) { }
-    
-    static func synchronizeSharedDefaults() { }
+    func synchronizeSharedDefaults() { }
     
     func save(_ data: Data, toFileRelativePath relativePath: String) -> Bool {
         files[relativePath] = data
@@ -63,5 +66,11 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
     
     func path(forRelativePath relativePath: String) -> String {
         return "test_domain\(relativePath)"
+    }
+    
+    
+    override init() {
+        super.init()
+        try? FileManager.default.createDirectory(at: sharedResuorcesURL(), withIntermediateDirectories: true, attributes: nil)
     }
 }

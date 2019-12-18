@@ -43,7 +43,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol) {
         self.resources = resources
-        self.dnsStatisticsService = DnsStatisticsService()
+        self.dnsStatisticsService = DnsStatisticsService(resources: resources)
         self.dnsLogService = dnsLogService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime

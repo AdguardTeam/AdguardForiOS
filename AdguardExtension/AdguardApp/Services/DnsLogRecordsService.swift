@@ -34,7 +34,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     private var lastPurgeTime = Date().timeIntervalSince1970
     private let purgeTimeInterval: TimeInterval = 60.0      // seconds
      
-    private let path = AESharedResources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db").absoluteString
+    private lazy var path = resources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db").absoluteString
     
     private lazy var writeHandler: FMDatabaseQueue? = {
         let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
@@ -87,7 +87,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     func clearLog() {
         writeHandler?.inTransaction { (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
-            table?.delete(withKeys: [], inRowObject: [])
+            table?.delete(withKeys: nil, inRowObject: nil)
         }
     }
     

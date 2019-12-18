@@ -266,7 +266,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      */
     private func initLogger(){
         // Init Logger
-        ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel

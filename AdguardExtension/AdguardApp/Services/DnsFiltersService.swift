@@ -369,7 +369,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     // MARK: - working with user filters
     
     func addWhitelistDomain(_ domain: String) {
-        whitelistDomains.append(domain)
+        let trimmed = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        whitelistDomains.append(trimmed)
     }
     
     func removeWhitelistRules(_ rules: [String]) {

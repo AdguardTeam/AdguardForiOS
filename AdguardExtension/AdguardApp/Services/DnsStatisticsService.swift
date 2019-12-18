@@ -30,12 +30,13 @@ protocol DnsStatisticsServiceProtocol {
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     
-    private let path = AESharedResources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString
+    private let resources: AESharedResourcesProtocol
+    
+    private lazy var path =  { self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
     
     private let statisticsRearrangeLimit:Double = 3600   // 1 hour
     private let statisticsRecordsLimit = 1500   // 1500 records
     private let statisticsSectorsLimit = 150   // 1500 records -> 150 records
-
     
     private lazy var lastStatisticsRearrangeTime: TimeInterval = Date().timeIntervalSince1970 + statisticsRearrangeLimit
     
@@ -52,6 +53,15 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     private lazy var readHandler: FMDatabaseQueue? = {
         return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
     }()
+    
+    // MARK: - init
+    
+    init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
+        super.init()
+    }
+    
+    // MARK: - public methods
     
     func writeStatistics(_ statistics: [DnsStatisticsType : RequestsStatisticsBlock]) {
         

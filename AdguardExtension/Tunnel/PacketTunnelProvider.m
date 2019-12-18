@@ -140,12 +140,15 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     id<DnsLogRecordsWriterProtocol> _logWriter;
 }
 
-+ (void)initialize{
-
-    if (self == [PacketTunnelProvider class]) {
-
+- (id)init {
+    
+    self = [super init];
+    if (self) {
+        
+        _resources = [AESharedResources new];
+        
         // Init Logger
-        [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+        [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
 
         [AGLogger setLevel: AGLL_DEBUG];
         [AGLogger setCallback:
@@ -158,18 +161,11 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
         [AGLogger setLevel: AGLL_DEBUG];
 #endif
-    }
-}
-
-- (id)init {
-    
-    self = [super init];
-    if (self) {
         
-        _resources = [AESharedResources new];
         _dnsTrackerService = [DnsTrackerService new];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
+        
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
