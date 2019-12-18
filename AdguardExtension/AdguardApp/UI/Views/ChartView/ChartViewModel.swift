@@ -23,7 +23,6 @@ protocol ChartViewModelProtocol {
     var chartRequestType: ChartRequestType { get set }
     
     var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
-    var requestsObserver: (([ChartRerord])->Void)? { get }
     
     func obtainStatistics()
 }
@@ -81,19 +80,7 @@ enum ChartRequestType {
     case requests, blocked, counters
 }
 
-class ChartRerord {
-    let date: Date
-//    let type: BlockedRecordType
-    
-    init(date: Date/*, type: BlockedRecordType*/) {
-        self.date = date
-//        self.type = type
-    }
-}
-
 class ChartViewModel: ChartViewModelProtocol {
-    
-    var requestsObserver: (([ChartRerord]) -> Void)?
     
     weak var chartPointsChangedDelegate: ChartPointsChangedDelegate?
     
