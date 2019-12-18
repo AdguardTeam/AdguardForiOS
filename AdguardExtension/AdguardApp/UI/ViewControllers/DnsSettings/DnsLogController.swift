@@ -61,9 +61,12 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         tableView.tableHeaderView = searchView
         
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-     
-        setupBackButton()
+    
         updateTheme()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return theme.statusbarStyle()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,6 +121,10 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         model.searchString = searchText
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
     // MARK: - dns requests delegate
     
     func requestsCleared() {
@@ -130,6 +137,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }

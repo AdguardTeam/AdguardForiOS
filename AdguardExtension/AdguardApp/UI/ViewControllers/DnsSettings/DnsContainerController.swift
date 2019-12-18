@@ -50,6 +50,7 @@ class DnsContainerController: UIViewController {
             shadowView.buttons = buttons
         }
         
+        setupBackButton()
         updateTheme()
     }
     

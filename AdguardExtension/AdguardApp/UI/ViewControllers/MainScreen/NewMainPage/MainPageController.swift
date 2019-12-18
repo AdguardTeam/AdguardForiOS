@@ -139,6 +139,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         changeProtectionStatusLabel()
         
+        observeContentBlockersState()
+        
         setupBackButton()
     }
     
@@ -150,7 +152,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexProtection.delegate = self
         updateTheme()
         observeProStatus()
-        observeContentBlockersState()
         chartModel.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()

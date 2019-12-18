@@ -52,6 +52,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private func updateTheme(){
         tabBar.backgroundColor = theme.tabBarColor
+        tabBar.barTintColor = theme.tabBarColor
     }
     
     private func changeLeftAnchor(for item: UITabBarItem){

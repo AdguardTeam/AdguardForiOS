@@ -47,27 +47,15 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
         toView.frame = CGRect(x: presenting ? toView.frame.width : -toView.frame.width, y: toView.frame.origin.y, width: toView.frame.width, height: toView.frame.height)
 
         let animations = {
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.7) {
-                toView.alpha = 1
-                if self.presenting {
-                    fromView.alpha = 0
-                }
-            }
-
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
                 toView.frame = toViewFrame
                 fromView.frame = CGRect(x: self.presenting ? -fromView.frame.width : fromView.frame.width, y: fromView.frame.origin.y, width: fromView.frame.width, height: fromView.frame.height)
-                if !self.presenting {
-                    fromView.alpha = 0
-                }
             }
-
         }
 
         UIView.animateKeyframes(withDuration: duration,
-                                delay: 0,
-                                options: .calculationModeCubic,
+                                delay: 0.0,
+                                options: .calculationModeLinear,
                                 animations: animations,
                                 completion: { finished in
                                     container.addSubview(toView)

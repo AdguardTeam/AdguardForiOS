@@ -110,6 +110,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     @objc dynamic var userThemeMode: AEThemeMode {
         set {
             resources.sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsDarkTheme)
+            NotificationCenter.default.post(name: Notification.Name(ConfigurationService.themeChangeNotification), object: self)
         }
         get {
             guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {

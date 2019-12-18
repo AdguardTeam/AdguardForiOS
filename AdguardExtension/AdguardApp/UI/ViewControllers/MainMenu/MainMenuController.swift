@@ -31,7 +31,6 @@ class MainMenuController: UITableViewController {
     
     @IBOutlet weak var bugreportCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var whitelistCaption: ThemableLabel!
     @IBOutlet weak var filtersDescription: ThemableLabel!
     @IBOutlet weak var dnsServer: ThemableLabel!
     @IBOutlet weak var getProButton: RoundRectButton!
@@ -102,9 +101,12 @@ class MainMenuController: UITableViewController {
         }
         
         updateFilters()
-        
-        setupBackButton()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return theme.statusbarStyle()
+    }
+
     
     // MARK: - Actions
     @IBAction func contactSupportAction(_ sender: Any) {
@@ -166,7 +168,6 @@ class MainMenuController: UITableViewController {
     // MARK: - private methods
     
     private func updateTheme() {
-        
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)

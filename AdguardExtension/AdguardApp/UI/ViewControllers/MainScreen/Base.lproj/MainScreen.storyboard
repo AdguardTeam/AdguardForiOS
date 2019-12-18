@@ -309,108 +309,6 @@
             </objects>
             <point key="canvasLocation" x="-1793" y="48"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="dSn-6H-HZA">
-            <objects>
-                <viewController id="Br4-Ha-hsp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SBT-aq-Td6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Pm0-2Q-LYU"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="check" id="AsG-vj-jld"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SVL-tL-KMz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-842" y="-1055"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="9zp-p3-Lfc">
-            <objects>
-                <viewController id="AZo-bg-19c" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SKu-tC-rIv">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="xCH-od-3Ie"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="Dnsblocking-1" id="51o-3s-S8I"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="daW-IV-q6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-842" y="-3871"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="e85-W8-dhL">
-            <objects>
-                <viewController id="Jgh-nl-pF7" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EHd-fr-jLf">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="ihr-Vb-d4Y"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="ic_encryption" id="E5E-k2-C5M"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C9m-xL-gdQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-842" y="-3154"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="TC9-Zo-Hh6">
-            <objects>
-                <viewController id="MIC-l6-VUn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="95a-Lo-Zaa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="PO6-AZ-FuO"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="about-icon" id="bvd-8L-642"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I63-BD-yP9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-842" y="-2440"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="1Fv-to-3Ja">
-            <objects>
-                <viewController id="Mlb-9d-wvk" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9nM-Qo-Iad">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Obf-fN-ubF"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="advanced-settings-icon" id="z0n-IT-uxW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1q8-vq-tTR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-842" y="-1772"/>
-        </scene>
-        <!--Main Tab Bar Controller-->
-        <scene sceneID="SO7-tD-kTA">
-            <objects>
-                <tabBarController id="Tcp-0u-3pG" customClass="MainTabBarController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="fill" id="9ri-jd-2dI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Mlb-9d-wvk" kind="relationship" relationship="viewControllers" id="ZZX-0d-TBZ"/>
-                        <segue destination="Br4-Ha-hsp" kind="relationship" relationship="viewControllers" id="RDD-aK-esz"/>
-                        <segue destination="MIC-l6-VUn" kind="relationship" relationship="viewControllers" id="ygW-et-Ves"/>
-                        <segue destination="Jgh-nl-pF7" kind="relationship" relationship="viewControllers" id="2Tt-Vv-BfZ"/>
-                        <segue destination="AZo-bg-19c" kind="relationship" relationship="viewControllers" id="ewN-eQ-Jhs"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cmh-D7-yvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1839" y="-1782"/>
-        </scene>
         <!--Main Controller-->
         <scene sceneID="Usr-tU-dVX">
             <objects>
@@ -460,9 +358,6 @@
                                                         <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="Xm1-m3-uqM" kind="show" id="BbW-jj-fUU"/>
-                                                </connections>
                                             </button>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDr-1D-oSF">
                                                 <rect key="frame" x="16" y="13.5" width="51" height="31"/>
@@ -997,14 +892,6 @@ with Safari</string>
             </objects>
             <point key="canvasLocation" x="-775.36231884057975" y="46.875"/>
         </scene>
-        <!--MainMenu-->
-        <scene sceneID="j1i-lf-c2m">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MainMenu" id="Xm1-m3-uqM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vMP-C2-koW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="78" y="20"/>
-        </scene>
         <!--Tutorial-->
         <scene sceneID="bfO-Uw-sCs">
             <objects>
@@ -1023,16 +910,11 @@ with Safari</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Dnsblocking-1" width="24" height="24"/>
-        <image name="about-icon" width="24" height="24"/>
         <image name="adguard-header" width="143" height="31"/>
         <image name="adguard-header-disabled" width="142" height="31"/>
         <image name="adguard-header-light" width="142" height="31"/>
         <image name="adguard-man" width="320" height="213"/>
-        <image name="advanced-settings-icon" width="24" height="24"/>
-        <image name="check" width="24" height="24"/>
         <image name="facebook-icon" width="24" height="24"/>
-        <image name="ic_encryption" width="24" height="24"/>
         <image name="mail-icon" width="24" height="24"/>
         <image name="man" width="320" height="213"/>
         <image name="nil" width="16" height="16"/>
