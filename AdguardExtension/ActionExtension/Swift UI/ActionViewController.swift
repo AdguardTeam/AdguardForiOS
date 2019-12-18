@@ -78,7 +78,7 @@ class ActionViewController: UIViewController {
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
         let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
-        self.antibannerController = AntibannerController(antibanner: antibanner)
+        self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources)
         contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
         support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
         
@@ -216,11 +216,11 @@ class ActionViewController: UIViewController {
     }
     
     private func addObservers() {
-        notificationToken1 = NotificationCenter.default.observe(name: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) {(notification) in
-            AESharedResources.synchronizeSharedDefaults()
+        notificationToken1 = NotificationCenter.default.observe(name: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
+            self?.sharedResources.synchronizeSharedDefaults()
         }
-        notificationToken2 = NotificationCenter.default.observe(name: UIApplication.willTerminateNotification, object: nil, queue: nil) {(notification) in
-            AESharedResources.synchronizeSharedDefaults()
+        notificationToken2 = NotificationCenter.default.observe(name: UIApplication.willTerminateNotification, object: nil, queue: nil) { [weak self] (notification) in
+            self?.sharedResources.synchronizeSharedDefaults()
         }
     }
     
@@ -266,7 +266,7 @@ class ActionViewController: UIViewController {
     
     private func prepareDataModel() -> NSError? {
         // Init Logger
-        ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
+        ACLLogger.singleton()?.initLogger(sharedResources.sharedAppLogsURL())
         
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
@@ -289,7 +289,7 @@ class ActionViewController: UIViewController {
         //-------------------------------
         
         // Init database
-        let dbUrl = AESharedResources.sharedResuorcesURL().appendingPathComponent(aeProductionDb)
+        let dbUrl = sharedResources.sharedResuorcesURL().appendingPathComponent(aeProductionDb)
         asDataBase.initDb(with: dbUrl, upgradeDefaultDb: false)
         
         if asDataBase.error != nil {

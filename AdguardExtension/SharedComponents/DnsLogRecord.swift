@@ -18,12 +18,24 @@
 
 import Foundation
 
-@objc enum BlockedRecordType: Int{
-    case blocked = 0, whitelisted, tracked, normal
+@objc(DnsLogRecordStatus)
+enum DnsLogRecordStatus: Int {
+    typealias RawValue = Int
+
+    case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelisted 
+}
+
+@objc(DnsLogRecordUserStatus)
+enum DnsLogRecordUserStatus: Int {
+    typealias RawValue = Int
+
+    case none, movedToBlacklist, movedToWhitelist, removedFromBlacklist, removedFromWhitelist
 }
 
 @objc(DnsLogRecord)
 class DnsLogRecord: NSObject, NSCoding {
+    
+    @objc var rowid: NSNumber?
     
     let domain: String
     let date: Date
@@ -34,12 +46,11 @@ class DnsLogRecord: NSObject, NSCoding {
     let upstreamAddr: String?
     let bytesSent: Int
     let bytesReceived: Int
-    var blockRecordType: BlockedRecordType
-    var name: String?
-    var company: String?
-    var category: String?
+    let status: DnsLogRecordStatus
+    var userStatus: DnsLogRecordUserStatus
+    let blockRules: [String]?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, blockRecordType: BlockedRecordType, name: String?, company: String?, category: String?) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?) {
         
         self.domain = domain
         self.date = date
@@ -50,10 +61,10 @@ class DnsLogRecord: NSObject, NSCoding {
         self.upstreamAddr = upstreamAddr
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
-        self.blockRecordType = blockRecordType
-        self.name = name
-        self.company = company
-        self.category = category
+        self.status = status
+        self.userStatus = userStatus
+        self.blockRules = blockRules
+        self.rowid = -1
         
         super.init()
     }
@@ -70,11 +81,9 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(upstreamAddr, forKey: "upstreamAddr")
         aCoder.encode(bytesSent, forKey: "bytesSent")
         aCoder.encode(bytesReceived, forKey: "bytesReceived")
-        aCoder.encode(blockRecordType.rawValue, forKey: "blockRecordType")
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(company, forKey: "company")
-        aCoder.encode(category, forKey: "category")
-        
+        aCoder.encode(status.rawValue, forKey: "status")
+        aCoder.encode(userStatus.rawValue, forKey: "userStatus")
+        aCoder.encode(blockRules, forKey: "blockRules")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,44 +96,11 @@ class DnsLogRecord: NSObject, NSCoding {
         self.bytesSent = aDecoder.decodeInteger(forKey: "bytesSent")
         self.bytesReceived = aDecoder.decodeInteger(forKey: "bytesReceived")
         
-        let type = aDecoder.decodeInteger(forKey: "blockRecordType")
-        self.blockRecordType = BlockedRecordType.init(rawValue: type) ?? .normal
-        
         // These fields can be nil for the old log records
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
-        
-        self.name = aDecoder.decodeObject(forKey: "name") as? String
-        self.company = aDecoder.decodeObject(forKey: "company") as? String
-        self.category = aDecoder.decodeObject(forKey: "category") as? String
-    }
-}
-
-@objcMembers
-@objc(RequestsStatisticsBlock)
-class RequestsStatisticsBlock: NSObject, NSCoding {
-    
-    @objc var date: Date
-    @objc var numberOfRequests: Int
-    
-    init(date: Date, numberOfRequests: Int) {
-        self.date = date
-        self.numberOfRequests = numberOfRequests
-        super.init()
-    }
-    
-    override var debugDescription: String {
-        return "date = \(self.date) \n seconds = \(self.date.timeIntervalSinceReferenceDate) \n number = \(self.numberOfRequests) \r\n\r\n"
-    }
-    
-    // MARK: - NSCoding methods
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(date, forKey: "date")
-        coder.encode(numberOfRequests, forKey: "numberOfRequests")
-    }
-    
-    required init?(coder: NSCoder) {
-        self.date = coder.decodeObject(forKey: "date") as! Date
-        self.numberOfRequests = coder.decodeInteger(forKey: "numberOfRequests")
+        self.status = DnsLogRecordStatus.init(rawValue: aDecoder.decodeInteger(forKey: "status")) ?? .processed
+        self.userStatus = DnsLogRecordUserStatus.init(rawValue: aDecoder.decodeInteger(forKey: "userStatus")) ?? .none
+        self.blockRules = aDecoder.decodeObject(forKey: "blockRules") as? [String]
+        self.rowid = -1
     }
 }

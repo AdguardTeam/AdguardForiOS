@@ -24,21 +24,11 @@
 #import "AppDelegate.h"
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
-
 #import "AESharedResources.h"
-
-#ifdef PRO
-#import "APSProductSchemaManager.h"
-#import "APSharedResources.h"
-#import "APBlockingSubscriptionsManager.h"
-#import "APVPNManager.h"
-#else
 #import "AESProductSchemaManager.h"
-#endif
+#import "ACDnsUtils.h"
 
 #import "Adguard-Swift.h"
-
-#import "ACDnsUtils.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
@@ -123,7 +113,7 @@ static NSTimeInterval lastCheckTime;
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
         // Init Logger
-        [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+        [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
         
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
@@ -202,7 +192,7 @@ static NSTimeInterval lastCheckTime;
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     DDLogInfo(@"(AppDelegate) applicationDidEnterBackground.");
-    [AESharedResources synchronizeSharedDefaults];
+    [_resources synchronizeSharedDefaults];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -252,7 +242,7 @@ static NSTimeInterval lastCheckTime;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     DDLogInfo(@"(AppDelegate) applicationWillTerminate.");
-    [AESharedResources synchronizeSharedDefaults];
+    [_resources synchronizeSharedDefaults];
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{

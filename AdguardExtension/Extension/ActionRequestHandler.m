@@ -55,7 +55,7 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         //-------------------------------
         
         // Init Logger
-        [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+        [[ACLLogger singleton] initLogger:[resources sharedAppLogsURL]];
     #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
     #endif

@@ -1,51 +1,31 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
- 
+
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
- 
+
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
- 
+
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
-@import NetworkExtension;
+#import <Foundation/Foundation.h>
+#import "ADBTableRow.h"
 
-#import "APVPNManager.h"
-#import "AESharedResources.h"
+@class RequestsStatisticsBlock;
 
-/**
- Error domain for errors from tunnel provider.
- */
-extern NSString *APTunnelProviderErrorDomain;
+@interface APStatisticsTable : ADBTableRow
 
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
-
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
-
-@interface PacketTunnelProvider : NEPacketTunnelProvider
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-
-/**
- Returns current DNS server description object.
- */
-- (DnsServerInfo *)currentDnsServer;
-
-/**
- Returns tunnel mode
- */
-- (APVpnManagerTunnelMode)tunnelMode;
+@property (nonatomic) NSDate *timeStamp;
+@property (nonatomic) RequestsStatisticsBlock *allStatisticsBlocks;
+@property (nonatomic) RequestsStatisticsBlock *blockedStatisticsBlocks;
+@property (nonatomic) RequestsStatisticsBlock *countersStatisticsBlocks;
 
 @end

@@ -23,8 +23,7 @@
 #import "ACommons/ACLang.h"
 #import "ACommons/ACNetwork.h"
 #import "APTunnelConnectionsHandler.h"
-#import "APSharedResources.h"
-#import "APTunnelConnectionsHandler.h"
+#import "APCommonSharedResources.h"
 
 #import "ASDatabase.h"
 #import "ACNIPUtils.h"
@@ -131,20 +130,25 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     NetworkStatus _lastReachabilityStatus;
     
-    APSharedResources* _resources;
     DnsTrackerService* _dnsTrackerService;
+    AESharedResources* _resources;
     
     DnsProxyService* _dnsProxy;
     
     DnsProvidersService* _dnsProvidersService;
+    
+    id<DnsLogRecordsWriterProtocol> _logWriter;
 }
 
-+ (void)initialize{
-
-    if (self == [PacketTunnelProvider class]) {
-
+- (id)init {
+    
+    self = [super init];
+    if (self) {
+        
+        _resources = [AESharedResources new];
+        
         // Init Logger
-        [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+        [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
 
         [AGLogger setLevel: AGLL_DEBUG];
         [AGLogger setCallback:
@@ -157,23 +161,18 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
         [AGLogger setLevel: AGLL_DEBUG];
 #endif
-    }
-}
-
-- (id)init {
-    
-    self = [super init];
-    if (self) {
         
-        _resources = [APSharedResources new];
         _dnsTrackerService = [DnsTrackerService new];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc]initWithResources:_resources dnsTrackerService:_dnsTrackerService];
+        id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc]initWithResources:_resources dnsLogService:logService];
         _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
+        
         _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }

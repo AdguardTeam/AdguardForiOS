@@ -59,10 +59,12 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     private var installedObservation: Any?
     
     private var database: ASDatabase
+    private let resources: AESharedResourcesProtocol
     
-    init(antibanner: AESAntibannerProtocol) {
+    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol) {
         self.antibanner = antibanner
         self.database = ASDatabase()
+        self.resources = resources
         super.init()
         
         self.initDatabase()
@@ -105,7 +107,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
         database.stop()
         antibanner.stop()
         // delete database file
-        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
+        let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
         try? FileManager.default.removeItem(atPath: url.path)
         
         self.database = ASDatabase()
@@ -136,7 +138,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     // MARK: - private methods
     
     private func initDatabase() {
-        let url = AESharedResources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
+        let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
         self.antibanner.setDatabase(self.database)
         self.database.initDb(with: url, upgradeDefaultDb: true)
     }
