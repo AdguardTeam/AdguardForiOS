@@ -476,63 +476,6 @@
                                             <segue destination="5ol-3D-VBk" kind="show" id="toR-Ct-QAP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eeW-qc-wpC">
-                                        <rect key="frame" x="0.0" y="364" width="414" height="96"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eeW-qc-wpC" id="JnM-Tt-fsJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log-icon" translatesAutoresizingMaskIntoConstraints="NO" id="oxg-da-y2J">
-                                                    <rect key="frame" x="24" y="10" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="HWh-aB-TpW"/>
-                                                        <constraint firstAttribute="height" constant="24" id="yVN-Tl-SHa"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Filtering log" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsR-6Z-pxB" customClass="ThemableLabel" customModule="Adguard">
-                                                    <rect key="frame" x="64" y="18" width="288" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Monitor all DNS requests on your device and manage them" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoU-PM-icY" customClass="ThemableLabel" customModule="Adguard">
-                                                    <rect key="frame" x="64" y="20" width="288" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="lyu-gI-ENf">
-                                                    <rect key="frame" x="374" y="10" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="K2e-Ps-dX0"/>
-                                                        <constraint firstAttribute="height" constant="24" id="guy-ji-RCG"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="hoU-PM-icY" secondAttribute="bottom" constant="16" id="8vH-Ry-TO2"/>
-                                                <constraint firstItem="WsR-6Z-pxB" firstAttribute="leading" secondItem="oxg-da-y2J" secondAttribute="trailing" constant="16" id="8vJ-ue-zCj"/>
-                                                <constraint firstAttribute="trailing" secondItem="lyu-gI-ENf" secondAttribute="trailing" constant="16" id="PD3-IP-LE8"/>
-                                                <constraint firstItem="hoU-PM-icY" firstAttribute="leading" secondItem="oxg-da-y2J" secondAttribute="trailing" constant="16" id="Rvy-PJ-wJ8"/>
-                                                <constraint firstItem="lyu-gI-ENf" firstAttribute="leading" secondItem="hoU-PM-icY" secondAttribute="trailing" constant="22" id="i9J-Ys-WKE"/>
-                                                <constraint firstItem="lyu-gI-ENf" firstAttribute="centerY" secondItem="JnM-Tt-fsJ" secondAttribute="centerY" id="j6w-JQ-EyW"/>
-                                                <constraint firstItem="WsR-6Z-pxB" firstAttribute="top" secondItem="JnM-Tt-fsJ" secondAttribute="top" constant="16" id="mYF-Lq-zK4"/>
-                                                <constraint firstItem="oxg-da-y2J" firstAttribute="leading" secondItem="JnM-Tt-fsJ" secondAttribute="leading" constant="24" id="nXy-Ji-8hE"/>
-                                                <constraint firstItem="lyu-gI-ENf" firstAttribute="leading" secondItem="WsR-6Z-pxB" secondAttribute="trailing" constant="22" id="rAW-UZ-jkV"/>
-                                                <constraint firstItem="oxg-da-y2J" firstAttribute="centerY" secondItem="JnM-Tt-fsJ" secondAttribute="centerY" id="y7b-aV-8EG"/>
-                                                <constraint firstItem="hoU-PM-icY" firstAttribute="top" secondItem="WsR-6Z-pxB" secondAttribute="bottom" constant="2" id="zPF-B4-eLU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mqk-8k-12F">
                                         <rect key="frame" x="0.0" y="460" width="414" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -614,8 +557,6 @@
                         <outletCollection property="themableLabels" destination="xiD-h8-XrC" collectionClass="NSMutableArray" id="945-hG-3Q8"/>
                         <outletCollection property="themableLabels" destination="LTC-71-V9S" collectionClass="NSMutableArray" id="rMt-hx-VbO"/>
                         <outletCollection property="themableLabels" destination="8xA-VW-b32" collectionClass="NSMutableArray" id="ord-sK-Uwx"/>
-                        <outletCollection property="themableLabels" destination="hoU-PM-icY" collectionClass="NSMutableArray" id="kSu-he-eb9"/>
-                        <outletCollection property="themableLabels" destination="WsR-6Z-pxB" collectionClass="NSMutableArray" id="fxv-xr-IZL"/>
                         <outletCollection property="themableLabels" destination="0ZJ-BI-849" collectionClass="NSMutableArray" id="WiD-OR-nP2"/>
                         <outletCollection property="themableLabels" destination="FUx-XP-SzD" collectionClass="NSMutableArray" id="XYY-Ti-kny"/>
                     </connections>
@@ -2649,7 +2590,6 @@
         <image name="ic_about_logo" width="312" height="56"/>
         <image name="ic_about_logo_white" width="312" height="56"/>
         <image name="language-group-icon" width="24" height="24"/>
-        <image name="log-icon" width="24" height="24"/>
         <image name="logocheck" width="24" height="24"/>
         <image name="plus" width="26" height="26"/>
         <image name="whitelist-icon" width="24" height="24"/>

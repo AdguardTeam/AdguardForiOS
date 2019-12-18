@@ -25,11 +25,13 @@ class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
-class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol {
+class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol, DnsLogContainerControllerDelegate {
     //MARK: - IB Outlets
     
     @IBOutlet var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var refreshView: UIRefreshControl!
     
     // MARK: - services
     
@@ -109,12 +111,6 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         controller?.logRecord = selectedRecord
     }
     
-    // MARK: - Actions
-    
-    @IBAction func clearAction(_ sender: UIBarButtonItem) {
-        model.clearRecords()
-    }
-    
     // MARK: - searchbar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -133,10 +129,17 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         }
     }
     
+    // MARK: - DnsLogContainerControllerDelegate method
+    
+    func clearButtonTapped() {
+        model.clearRecords()
+    }
+    
     // MARK: - private methods
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
+        refreshView.tintColor = theme.invertedBackgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in

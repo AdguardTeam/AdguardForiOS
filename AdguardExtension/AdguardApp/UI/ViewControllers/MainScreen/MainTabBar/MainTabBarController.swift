@@ -34,6 +34,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         updateTheme()
         
+        addTabBarShadow()
+        
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -66,6 +68,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         UIView.animate(withDuration: 0.3) {[weak self] in
             self?.tabBar.layoutIfNeeded()
         }
+    }
+    
+    private func addTabBarShadow(){
+        tabBar.shadowImage = UIImage()
+        tabBar.backgroundImage = UIImage()
+        
+        tabBar.layer.shadowColor = UIColor.black.cgColor
+        tabBar.layer.shadowOpacity = 0.1
+        tabBar.layer.shadowRadius = 2.0
     }
     
     private func createSelectionIndicator() {

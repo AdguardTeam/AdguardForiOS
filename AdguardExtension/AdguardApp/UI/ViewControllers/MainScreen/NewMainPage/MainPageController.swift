@@ -540,6 +540,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
+    /**
+    Checks state of content blockers
+     and updates UI
+    */
     private func observeContentBlockersState() {
         let isIphone = UIDevice.current.userInterfaceIdiom == .phone
         

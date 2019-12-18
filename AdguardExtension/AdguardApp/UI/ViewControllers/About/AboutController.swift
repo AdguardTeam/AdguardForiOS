@@ -53,8 +53,9 @@ class AboutController : UIViewController {
         
         proStatusObservation = self.configurationService.observe(\.proStatus) {[weak self] (_, _) in
             guard let sSelf = self else { return }
-            
-            sSelf.navigationItem.rightBarButtonItems = sSelf.configurationService.proStatus ? [] : [sSelf.loginButton]
+            DispatchQueue.main.async {
+                sSelf.navigationItem.rightBarButtonItems = sSelf.configurationService.proStatus ? [] : [sSelf.loginButton]
+            }
         }
         
         setupBackButton()
