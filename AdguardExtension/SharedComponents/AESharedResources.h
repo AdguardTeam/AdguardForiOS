@@ -316,29 +316,6 @@ extern NSString* _Nonnull SystemProtectionLastState;
 - (void) reset;
 
 /**
- Saves defaults value in NSArgumentDomain.
- This lets to use defaults value in current process, 
- but this value did not save on disk (permanent domain).
- 
- @param key Defaults key
- @param value Devaults value
- */
-//- (void)sharedDefaultsSetTempKey:(nonnull NSString *)key value:(nonnull id)value;
-/**
- Gets defaults value from NSArgumentDomain.
-
- @param key Defaults key.
- @return Defaults value or nil.
- */
-//+ (nullable id)sharedDefaultsValueOfTempKey:(nonnull NSString *)key;
-/**
- Removes defaults value from NSArgumentDomain.
-
- @param key Defaults key.
- */
-//+ (void)sharedDefaultsRemoveTempKey:(nonnull NSString *)key;
-
-/**
  Performs flush of the shared user defaults.
  */
 - (void)synchronizeSharedDefaults;
