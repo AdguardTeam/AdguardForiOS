@@ -26,6 +26,7 @@
 #import "ASDFilterObjects.h"
 #import "AESAntibanner.h"
 #import "Adguard-Swift.h"
+#import "APCommonSharedResources.h"
 
 #define VPN_NAME                            @" VPN"
 #define MAX_COUNT_OF_REMOTE_DNS_SERVERS     20
@@ -73,7 +74,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     
     DnsProvidersService * _providersService;
     
-    APSharedResources *_resources;
+    AESharedResources *_resources;
     ConfigurationService *_configuration;
     NEVPNStatus _lastVpnStatus;
 }
@@ -86,7 +87,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
 
-- (id)initWithResources: (nonnull APSharedResources*) resources
+- (id)initWithResources: (nonnull AESharedResources*) resources
           configuration: (ConfigurationService *) configuration {
     
     self = [super init];
@@ -400,52 +401,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 
 - (APVpnManagerTunnelMode)tunnelMode {
     return _tunnelMode;
-}
-
-- (BOOL)clearDnsRequestsLog {
-
-    _lastError = nil;
-
-    return [_resources removeDnsLog];
-}
-
-- (BOOL)clearStatisticsLog {
-    _lastError = nil;
-    
-    _resources.defaultRequestsNumber = @(0);
-    _resources.countersRequestsNumber = @(0);
-    _resources.blockedRequestsNumber = @(0);
-
-    return [_resources removeStatisticsLog];
-}
-
-- (void)obtainDnsLogRecords:(void (^)(NSArray<DnsLogRecord *> *records))completionBlock {
-
-    _lastError = nil;
-    
-    if (completionBlock == nil) {
-        return;
-    }
-    
-    NSArray <DnsLogRecord *> *records = [_resources readDnsLog];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        completionBlock(records);
-    });
-}
-
-- (void)obtainDnsLogStatistics:(void (^)(NSDictionary<NSString *, NSArray<RequestsStatisticsBlock *> *> *statistics))completionBlock {
-    _lastError = nil;
-    
-    if (completionBlock == nil) {
-        return;
-    }
-    
-    NSDictionary<NSString *, NSArray<RequestsStatisticsBlock *> *> *statistics = [_resources readStatisticsLog];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        completionBlock(statistics);
-    });
 }
 
 - (BOOL)addRemoteDnsServer:(NSString *)name upstreams:(NSArray<NSString*>*) upstreams {

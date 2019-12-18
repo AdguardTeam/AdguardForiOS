@@ -2,6 +2,11 @@
 import XCTest
 
 class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
+    
+    var userFilterId: NSNumber?
+    
+    var otherFilterIds: [NSNumber]?
+    
     var server: String = ""
     
     func handleEvent(_ event: AGDnsRequestProcessedEvent) {

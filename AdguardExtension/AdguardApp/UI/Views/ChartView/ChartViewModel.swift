@@ -83,11 +83,11 @@ enum ChartRequestType {
 
 class ChartRerord {
     let date: Date
-    let type: BlockedRecordType
+//    let type: BlockedRecordType
     
-    init(date: Date, type: BlockedRecordType) {
+    init(date: Date/*, type: BlockedRecordType*/) {
         self.date = date
-        self.type = type
+//        self.type = type
     }
 }
 
@@ -117,33 +117,20 @@ class ChartViewModel: ChartViewModelProtocol {
     
     private let dateFormatter = DateFormatter()
     
-    private let vpnManager: APVPNManager
+    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ vpnManager: APVPNManager) {
-        self.vpnManager = vpnManager
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
+        self.dnsStatisticsService = dnsStatisticsService
     }
     
     func obtainStatistics() {
-        vpnManager.obtainDnsLogStatistics {[weak self] (statisticsRecords) in
-            guard let sSelf = self else { return }
-            guard let statistics = statisticsRecords else { return }
-            sSelf.requests = []
-            
-            for (key, value) in statistics {
-                switch key {
-                case APAllRequestsString:
-                    sSelf.requests = value
-                case APBlockedRequestsString:
-                    sSelf.blockedRequests = value
-                case APCountersRequestsString:
-                    sSelf.countersRequests = value
-                default:
-                    break
-                }
-            }
-            sSelf.changeChart()
-        }
+        let statistics = dnsStatisticsService.readStatistics()
+        
+        requests = statistics[.all] ?? []
+        blockedRequests = statistics[.blocked] ?? []
+        
+        changeChart()
     }
     
     // MARK: - private methods

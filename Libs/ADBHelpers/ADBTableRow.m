@@ -129,7 +129,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
 
 - (id)initWithDbResult:(FMResultSet *)dbResult{
  
-    self = [self init];
+    self = [super init];
     if (self) {
         
         if (dbResult) {
@@ -169,7 +169,12 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                 else{
                     
                     //standant mapping
-                    [self setValue:obj forKey:key];
+                    @try {
+                        [self setValue:obj forKey:key];
+                    }
+                    @catch (NSException *exception) {
+                        
+                    }
                 }
             }];
             
