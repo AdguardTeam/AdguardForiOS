@@ -358,9 +358,6 @@
                                                         <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="Xm1-m3-uqM" kind="show" id="BbW-jj-fUU"/>
-                                                </connections>
                                             </button>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDr-1D-oSF">
                                                 <rect key="frame" x="16" y="13.5" width="51" height="31"/>
@@ -894,14 +891,6 @@ with Safari</string>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-775.36231884057975" y="46.875"/>
-        </scene>
-        <!--MainMenu-->
-        <scene sceneID="j1i-lf-c2m">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MainMenu" id="Xm1-m3-uqM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vMP-C2-koW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="78" y="20"/>
         </scene>
         <!--Tutorial-->
         <scene sceneID="bfO-Uw-sCs">

@@ -43,8 +43,6 @@ class MainMenuController: UITableViewController {
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        setupBackButton()
     }
     
     // MARK: - Actions
@@ -96,7 +94,6 @@ class MainMenuController: UITableViewController {
     // MARK: - private methods
     
     private func updateTheme() {
-        
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)

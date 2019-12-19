@@ -37,6 +37,7 @@ import Foundation
     var errorRedColor: UIColor { get }
     var editLineColor: UIColor { get }
     var editLineSelectedColor: UIColor { get }
+    var tabBarColor: UIColor { get }
     var navigationBarColor: UIColor { get }
     var notificationWindowColor: UIColor { get }
     
@@ -135,6 +136,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var logSelectedCellColor: UIColor {
         return UIColor(hexString: "#4DDF3812")
+    }
+    
+    var tabBarColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#1e1e1e") : .white
     }
     
     var ruleTextColor: UIColor {

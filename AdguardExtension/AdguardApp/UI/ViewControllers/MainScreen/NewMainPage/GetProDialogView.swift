@@ -23,7 +23,7 @@ class GetProDialogView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
                 
-        let cornerRadius: CGFloat = traitCollection.horizontalSizeClass == .regular ? 20.0 : 10.0
+        let cornerRadius: CGFloat = traitCollection.horizontalSizeClass == .regular ? 15.0 : 10.0
         let inset: CGFloat = traitCollection.horizontalSizeClass == .regular ? 32.0 : 16.0
         
         let newRect = CGRect(x: rect.minX + inset, y: rect.minY, width: rect.width - inset, height: rect.height)

@@ -54,6 +54,8 @@ class ContentBlockerStateController: UITableViewController {
         setupTableView()
         addObservers()
         self.title = ACLocalizedString("content_blockers_title", nil)
+        
+        setupBackButton()
         updateTheme()
     }
     
