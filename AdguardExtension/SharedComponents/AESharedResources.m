@@ -107,39 +107,46 @@ NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
 
-@implementation AESharedResources
+@implementation AESharedResources {
+    NSURL *_containerFolderUrl;
+    NSUserDefaults *_sharedUserDefaults;
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-static NSURL *_containerFolderUrl;
-static NSUserDefaults *_sharedUserDefaults;
-
 + (void)initialize{
     
     if (self == [AESharedResources class]) {
-        
-        NSString* groupId = AE_SHARED_RESOURCES_GROUP;
-        _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
-        _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AE_SHARED_RESOURCES_GROUP];
     }
+}
+
+#pragma mark - init
+
+- (instancetype)init {
+    self = [super init];
+    NSString* groupId = AE_SHARED_RESOURCES_GROUP;
+    _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
+    _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AE_SHARED_RESOURCES_GROUP];
+    return self;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
-+ (NSURL *)sharedResuorcesURL{
+
+- (NSURL *)sharedResuorcesURL{
     
     return _containerFolderUrl;
 }
 
-+ (NSURL *)sharedAppLogsURL{
+- (NSURL *)sharedAppLogsURL{
     
     NSString *ident = [[NSBundle bundleForClass:[self class]] bundleIdentifier];
     
-    NSURL *logsUrl = [AESharedResources sharedLogsURL];
+    NSURL *logsUrl = [self sharedLogsURL];
     if (ident) {
         logsUrl = [logsUrl URLByAppendingPathComponent:ident];
     }
@@ -147,7 +154,7 @@ static NSUserDefaults *_sharedUserDefaults;
     return logsUrl;
 }
 
-+ (NSURL *)sharedLogsURL{
+- (NSURL *)sharedLogsURL{
     
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
 }
@@ -357,68 +364,9 @@ static NSUserDefaults *_sharedUserDefaults;
     return _sharedUserDefaults;
 }
 
-+ (void)synchronizeSharedDefaults{
+- (void)synchronizeSharedDefaults{
     
     [_sharedUserDefaults synchronize];
-}
-
-+ (void)sharedDefaultsSetTempKey:(NSString *)key value:(id)value{
-    
-    if (!(key && value)) {
-        [[NSException argumentException:@"key or value - nil"] raise];
-    }
-    
-    @synchronized(_sharedUserDefaults) {
-        @autoreleasepool {
-            
-            NSMutableDictionary *dict = [[_sharedUserDefaults volatileDomainForName:NSArgumentDomain] mutableCopy];
-            if (dict) {
-                
-                dict[key] = value;
-                [_sharedUserDefaults setVolatileDomain:dict forName:NSArgumentDomain];
-            }
-        }
-    }
-    
-}
-
-+ (id)sharedDefaultsValueOfTempKey:(NSString *)key{
-    
-    if (!key) {
-        return nil;
-    }
-    
-    @synchronized(_sharedUserDefaults) {
-        @autoreleasepool {
-            
-            NSDictionary *dict = [_sharedUserDefaults volatileDomainForName:NSArgumentDomain];
-            if (dict) {
-
-                return dict[key];
-            }
-        }
-    }
-    
-    return nil;
-}
-
-+ (void)sharedDefaultsRemoveTempKey:(NSString *)key{
-
-    if (!key) {
-        return;
-    }
-    
-    @synchronized(_sharedUserDefaults) {
-        @autoreleasepool {
-            
-            NSMutableDictionary *dict = [[_sharedUserDefaults volatileDomainForName:NSArgumentDomain] mutableCopy];
-            if (dict) {
-                
-                [dict removeObjectForKey:key];
-                [_sharedUserDefaults setVolatileDomain:dict forName:NSArgumentDomain];
-            }
-        }
-    }
 }
 
 - (void)setActiveDnsServer:(DnsServerInfo *)activeDnsServer {

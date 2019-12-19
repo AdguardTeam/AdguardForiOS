@@ -19,108 +19,98 @@
 import Foundation
 
 // MARK: - data types -
-struct LogRecord {
-    var category: String?
-    var status: DnsLogStatus = .processed
-    var name: String?
-    var company: String?
-    var domain: String?
-    var time: String?
-    var elapsed: Int
-    var type: String?
-    var serverName: String?
-    var answer: String?
-    var upstreamAddr: String?
-    var bytesSent: Int
-    var bytesReceived: Int
-    var blockRecordType: BlockedRecordType
-    
-    enum DnsLogStatus: String {
-        case processed = "Processed"
-        case blockedWithDns = "Blocked with DNS"
-        case blockedWithDnsFilter = "Blocked with DNS filter"
-        case blockedWithDnsBlacklist = "Blocked with DNS blacklist"
-        case whitelisted = "Whitelisted"
-        
-        func status() -> String {
-            return self.rawValue
-        }
-        
-        func color() -> UIColor {
-            switch self {
-            case .processed:
-                return UIColor(hexString: "#eb9300")
-            case .whitelisted:
-                return UIColor(hexString: "#67b279")
-            default:
-                return UIColor(hexString: "#df3812")
-            }
-        }
-    }
-    
-    func getButtons() -> [BottomShadowButton] {
-        switch status {
-        case .blockedWithDns:
-            let button1 = addDomainToDnsWhitelistButton()
-            return [button1]
-        case .blockedWithDnsFilter:
-            let button1 = addDomainToDnsWhitelistButton()
-            return [button1]
-        case .blockedWithDnsBlacklist:
-            let button1 = removeDomainFromDnsBlacklistButton()
-            return [button1]
-        case .whitelisted:
-            let button1 = removeDomainFromDnsWhitelist()
-            return [button1]
-        case .processed:
-            let button1 = addDomainToDnsWhitelistButton()
-            let button2 = addDomainToDnsBlacklistButton()
-            return [button1, button2]
-        }
-    }
-    
-    private func removeDomainFromDnsWhitelist() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("remove_from_whitelist", nil)
-        button.titleColor = UIColor(hexString: "#eb9300")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
-    
-    private func removeDomainFromDnsBlacklistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("remove_from_blacklist", nil)
-        button.titleColor = UIColor(hexString: "#eb9300")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
-    }
 
-    private func addDomainToDnsWhitelistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("add_to_whitelist", nil)
-        button.titleColor = UIColor(hexString: "#67b279")
-        button.buttonAction {
-            print(button.title)
+struct DnsLogRecordCategory{
+    let category: String?
+    let name: String?
+    let isTracked: Bool?
+    let company: String?
+}
+
+class DnsLogRecordExtended {
+    let logRecord: DnsLogRecord
+    let category: DnsLogRecordCategory
+    
+    init(record: DnsLogRecord, category: DnsLogRecordCategory) {
+        self.logRecord = record
+        self.category = category
+    }
+}
+
+// this extension adds ui features to data type
+extension DnsLogRecordStatus {
+    func title()->String {
+        switch self {
+        case .processed:
+            return String.localizedString("dns_request_status_processed")
+        case .whitelisted:
+            return String.localizedString("dns_request_status_whitelisted")
+        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
+            return String.localizedString("dns_request_status_blocked")
         }
+    }
         
-        return button
+    func color() -> UIColor {
+        switch self {
+        case .processed:
+            return UIColor(hexString: "#eb9300")
+        case .whitelisted:
+            return UIColor(hexString: "#67b279")
+        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
+            return UIColor(hexString: "#df3812")
+        }
+    }
+}
+
+// this extension adds ui features to data type
+extension DnsLogRecordUserStatus {
+    func title()-> String {
+        switch self {
+        case .none:
+            return ""
+        case .movedToWhitelist:
+            return String.localizedString("dns_request_user_status_added_to_whitelist")
+        case .movedToBlacklist:
+            return String.localizedString("dns_request_user_status_added_to_blacklist")
+        case .removedFromWhitelist:
+            return String.localizedString("dns_request_user_status_removed_from_whitelist")
+        case .removedFromBlacklist:
+            return String.localizedString("dns_request_user_status_removed_from_blacklist")
+        }
+    }
+}
+    
+enum ButtonType {
+    case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
+}
+ 
+extension DnsLogRecord
+{
+    func getButtons() -> [ButtonType] {
+        switch (status, userStatus) {
+        case (_, .movedToBlacklist):
+            return [.removeRuleFromUserFilter]
+        case (_, .movedToWhitelist):
+            return [.removeDomainFromWhitelist]
+        case (_, .removedFromWhitelist):
+            return [.addDomainToWhitelist]
+        case (_, .removedFromBlacklist):
+            return [.addRuleToUserFlter]
+        case (.blacklistedByUserFilter, _):
+            return [.removeRuleFromUserFilter]
+        case (.blacklistedByOtherFilter, _):
+            return [.addDomainToWhitelist]
+        case (.whitelisted, _):
+            return [.removeDomainFromWhitelist]
+        case (.processed, _):
+            return [.addDomainToWhitelist, .addRuleToUserFlter]
+        }
     }
     
-    private func addDomainToDnsBlacklistButton() -> BottomShadowButton {
-        let button = BottomShadowButton()
-        button.title = ACLocalizedString("add_to_blacklist", nil)
-        button.titleColor = UIColor(hexString: "#df3812")
-        button.buttonAction {
-            print(button.title)
-        }
-        
-        return button
+    func time () -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        return dateFormatter.string(from: self.date)
     }
 }
 
@@ -138,7 +128,7 @@ class DnsRequestLogViewModel {
     /**
      array of log records. If search is active it returns filtered array
      */
-    var records: [LogRecord] {
+    var records: [DnsLogRecordExtended] {
         get {
             return searchString.count > 0 ? searchRecords : allRecords
         }
@@ -147,7 +137,7 @@ class DnsRequestLogViewModel {
     /**
      records changes observer. It calls when records array changes
      */
-    var recordsObserver: (([LogRecord])->Void)?
+    var recordsObserver: (([DnsLogRecordExtended])->Void)?
     
     /**
      search query string
@@ -155,7 +145,7 @@ class DnsRequestLogViewModel {
     var searchString: String {
         didSet {
             let searchLowercased = searchString.lowercased()
-            searchRecords = allRecords.filter({ $0.domain?.lowercased().contains( searchLowercased ) ?? false })
+            searchRecords = allRecords.filter { $0.logRecord.domain.lowercased().contains( searchLowercased ) }
             recordsObserver?(self.records)
         }
     }
@@ -164,17 +154,18 @@ class DnsRequestLogViewModel {
     
     // MARK: - private fields
     
-    private let vpnManager: APVPNManager
-    private let dateFormatter: DateFormatter
+    private let dnsLogService: DnsLogRecordsServiceProtocol
+    private let dnsTrackerService: DnsTrackerServiceProtocol
+    private let dnsFiltersService: DnsFiltersServiceProtocol
     
-    private var allRecords = [LogRecord]()
-    private var searchRecords = [LogRecord]()
+    private var allRecords = [DnsLogRecordExtended]()
+    private var searchRecords = [DnsLogRecordExtended]()
     
     // MARK: - init
-    init(_ vpnManager: APVPNManager) {
-        self.vpnManager = vpnManager
-        self.dateFormatter = DateFormatter()
-        self.dateFormatter.dateFormat = "HH:mm:ss.SSS"
+    init(dnsLogService: DnsLogRecordsServiceProtocol, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
+        self.dnsLogService = dnsLogService
+        self.dnsTrackerService = dnsTrackerService
+        self.dnsFiltersService = dnsFiltersService
         self.searchString = ""
     }
     
@@ -183,40 +174,33 @@ class DnsRequestLogViewModel {
      obtains records array from vpnManager
     */
     func obtainRecords() {
-        vpnManager.obtainDnsLogRecords { [weak self] (logRecordsOpt)  in
-            guard let sSelf = self else { return }
-            sSelf.allRecords = [LogRecord]()
-            guard let logRecords = logRecordsOpt else {
-                sSelf.recordsObserver?(sSelf.records)
-                return
-            }
-            for logRecord in logRecords.reversed() {
-                
-                var categoryName: String? = nil
-                if let categoryKey = logRecord.category {
-                    categoryName = ACLocalizedString(categoryKey, nil)
-                }
-                
-                let record = LogRecord(category: categoryName, name: logRecord.name, company: logRecord.company, domain: logRecord.domain, time: sSelf.dateFromRecord(logRecord), elapsed: logRecord.elapsed, type: logRecord.type, serverName: logRecord.server, answer: logRecord.answer, upstreamAddr: logRecord.upstreamAddr, bytesSent: logRecord.bytesSent, bytesReceived: logRecord.bytesReceived, blockRecordType: logRecord.blockRecordType)
-                sSelf.allRecords.append(record)
+        let logRecords = dnsLogService.readRecords()
+        
+        allRecords = [DnsLogRecordExtended]()
+        
+        for logRecord in logRecords.reversed() {
+            let info = dnsTrackerService.getTrackerInfo(by: logRecord.domain)
+            
+            var categoryName: String? = nil
+            if let categoryKey = info?.categoryKey {
+                categoryName = ACLocalizedString(categoryKey, nil)
             }
             
-            sSelf.recordsObserver?(sSelf.records)
+            let category = DnsLogRecordCategory(category: categoryName, name: info?.name, isTracked: info?.isTracked, company: info?.company)
+            
+            let record = DnsLogRecordExtended(record: logRecord, category: category)
+            allRecords.append(record)
         }
+        
+        recordsObserver?(allRecords)
     }
     
     func clearRecords(){
-        vpnManager.clearDnsRequestsLog()
-        vpnManager.clearStatisticsLog()
+        dnsLogService.clearLog()
         allRecords = []
         searchRecords = []
         delegate?.requestsCleared()
     }
     
-    // MARK: - private methods
     
-    private func dateFromRecord (_ record: DnsLogRecord) -> String {
-        dateFormatter.dateFormat = "HH:mm:ss"
-        return dateFormatter.string(from: record.date)
-    }
 }

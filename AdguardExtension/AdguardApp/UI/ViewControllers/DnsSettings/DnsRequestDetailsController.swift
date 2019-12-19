@@ -21,7 +21,7 @@ import Foundation
 class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - public fields
-    var logRecord: LogRecord?
+    var logRecord: DnsLogRecordExtended?
     var shadowView: BottomShadowView? = nil
     var containerController: DnsContainerController? = nil
     
@@ -101,22 +101,21 @@ class DnsRequestDetailsController : UITableViewController {
             self?.updateTheme()
         }
         
-        timeLabel.text = logRecord?.time
-        elapsedLabel.text = String(format: "%d ms", logRecord?.elapsed ?? 0)
-        typeLabel.text = logRecord?.type
-        domainLabel.text = logRecord?.domain
-        serverLabel.text = logRecord?.serverName
-        addressLabel.text = logRecord?.upstreamAddr
-        responsesLabel.text = logRecord?.answer
-        categoryLabel.text = logRecord?.category
-        statusLabel.text = logRecord?.status.status()
-        statusLabel.textColor = logRecord?.status.color()
+        timeLabel.text = logRecord?.logRecord.time()
+        elapsedLabel.text = String(format: "%d ms", logRecord?.logRecord.elapsed ?? 0)
+        typeLabel.text = logRecord?.logRecord.type
+        domainLabel.text = logRecord?.logRecord.domain
+        serverLabel.text = logRecord?.logRecord.server
+        addressLabel.text = logRecord?.logRecord.upstreamAddr
+        responsesLabel.text = logRecord?.logRecord.answer
+        categoryLabel.text = logRecord?.category.category
         
-        nameLabel.text = logRecord?.name
-        companyLabel.text = logRecord?.company
-        bytesSentLabel.text = String(format: "%d B", logRecord?.bytesSent ?? 0)
-        bytesReceivedLabel.text = String(format: "%d B", logRecord?.bytesReceived ?? 0)
+        nameLabel.text = logRecord?.category.name
+        companyLabel.text = logRecord?.category.company
+        bytesSentLabel.text = String(format: "%d B", logRecord?.logRecord.bytesSent ?? 0)
+        bytesReceivedLabel.text = String(format: "%d B", logRecord?.logRecord.bytesReceived ?? 0)
         
+        updateStatusLabel()
         updateTheme()
     }
     
@@ -126,6 +125,24 @@ class DnsRequestDetailsController : UITableViewController {
             shadowView?.animateAppearingOfShadow()
         }
         containerController = nil
+    }
+    
+    // MARK: - public methods
+    
+    func updateStatusLabel() {
+        
+        guard let record = logRecord else { return }
+        
+        statusLabel.textColor = record.logRecord.status.color()
+        
+        if record.logRecord.userStatus == .none {
+            statusLabel.text = record.logRecord.status.title()
+        }
+        else {
+            statusLabel.text = "\(record.logRecord.status.title())(\(record.logRecord.userStatus.title()))"
+        }
+        
+        statusLabel.superview!.setNeedsLayout()
     }
     
     // MARK: - Actions
@@ -146,11 +163,11 @@ class DnsRequestDetailsController : UITableViewController {
                 cell.isHidden = true
             }
         } else if indexPath.row == LogCells.name.rawValue {
-            if logRecord?.name == nil {
+            if logRecord?.category.name == nil {
                 cell.isHidden = true
             }
         } else if indexPath.row == LogCells.company.rawValue{
-            if logRecord?.company == nil {
+            if logRecord?.category.company == nil {
                 cell.isHidden = true
             }
         }
@@ -169,15 +186,15 @@ class DnsRequestDetailsController : UITableViewController {
         }
         
         if cellType == .category {
-            if logRecord?.category == nil{
+            if logRecord?.category.category == nil{
                 return 0.0
             }
         } else if cellType == .name {
-            if logRecord?.name == nil {
+            if logRecord?.category.name == nil {
                 return 0.0
             }
         } else if cellType == .company {
-            if logRecord?.company == nil {
+            if logRecord?.category.company == nil {
                 return 0.0
             }
         }
@@ -195,29 +212,29 @@ class DnsRequestDetailsController : UITableViewController {
         
         switch logCell {
         case .category:
-            copiedString = logRecord?.category ?? ""
+            copiedString = logRecord?.category.category ?? ""
         case .status:
-            copiedString = logRecord?.status.status() ?? ""
+            copiedString = logRecord?.logRecord.status.title() ?? ""
         case .name:
-            copiedString = logRecord?.name ?? ""
+            copiedString = logRecord?.category.name ?? ""
         case .company:
-            copiedString = logRecord?.company ?? ""
+            copiedString = logRecord?.category.company ?? ""
         case .time:
-            copiedString = logRecord?.time ?? ""
+            copiedString = logRecord?.logRecord.time() ?? ""
         case .domain:
-            copiedString = logRecord?.domain ?? ""
+            copiedString = logRecord?.logRecord.domain ?? ""
         case .type:
-            copiedString = logRecord?.type ?? ""
+            copiedString = logRecord?.logRecord.type ?? ""
         case .server:
-            copiedString = logRecord?.serverName ?? ""
+            copiedString = logRecord?.logRecord.server ?? ""
         case .elapsed:
-            copiedString = String(format: "%d ms", logRecord?.elapsed ?? 0)
+            copiedString = String(format: "%d ms", logRecord?.logRecord.elapsed ?? 0)
         case .size:
-            copiedString = String(format: "%d B / %d B", logRecord?.bytesReceived ?? 0, logRecord?.bytesSent ?? 0)
+            copiedString = String(format: "%d B / %d B", logRecord?.logRecord.bytesReceived ?? 0, logRecord?.logRecord.bytesSent ?? 0)
         case .upstream:
-            copiedString = logRecord?.upstreamAddr ?? ""
+            copiedString = logRecord?.logRecord.upstreamAddr ?? ""
         case .answer:
-            copiedString = logRecord?.answer ?? ""
+            copiedString = logRecord?.logRecord.answer ?? ""
         case .none:
             copiedString = ""
         }

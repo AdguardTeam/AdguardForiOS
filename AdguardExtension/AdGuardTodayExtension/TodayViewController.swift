@@ -55,7 +55,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     @IBOutlet weak var complexStatisticsLabel: UILabel!
     
     
-    private let resources: APSharedResources = APSharedResources()
+    private let resources: AESharedResources = AESharedResources()
     private var safariService: SafariService
     private var comlexProtection: ComplexProtectionServiceProtocol?
     private let networkService = ACNNetworking()
@@ -266,7 +266,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      */
     private func initLogger(){
         // Init Logger
-        ACLLogger.singleton()?.initLogger(AESharedResources.sharedAppLogsURL())
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel

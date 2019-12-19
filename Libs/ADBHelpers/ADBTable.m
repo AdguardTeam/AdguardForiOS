@@ -69,14 +69,9 @@
             row = [_objectClass new];
         }
         
-        if (![row isKindOfClass:_objectClass]) {
-            
-            return nil;
-        }
-        
         NSMutableArray *rows = [NSMutableArray array];
         
-        NSString *queryString = [NSString stringWithFormat:@"select * from %@", _tableName];
+        NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
         NSString *whereString = nil;
         
         NSArray *keys = [self validKeysFromKeyFields:keyFields andWhereString:&whereString];
@@ -351,6 +346,9 @@
             [names addObject:name];
             types[name] = [result stringForColumnIndex:2];
         }
+        
+        // add implicit "rowid" field
+        [names addObject:@"rowid"];
         
         [result close];
         

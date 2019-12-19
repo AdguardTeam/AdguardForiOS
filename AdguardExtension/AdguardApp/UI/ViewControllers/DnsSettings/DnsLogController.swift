@@ -19,6 +19,10 @@
 import Foundation
 import UIKit
 
+enum BlockedRecordType {
+    case normal, whitelisted, blocked, tracked
+}
+
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
     @IBOutlet weak var details: ThemableLabel!
@@ -36,11 +40,11 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let model = DnsRequestLogViewModel(ServiceLocator.shared.getService()!)
+    private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
     // MARK: - private fields
     
-    private var selectedRecord: LogRecord?
+    private var selectedRecord: DnsLogRecordExtended?
     private var notificationToken: NotificationToken?
     
     // MARK: - view controller life cycle
@@ -77,18 +81,30 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         let record = model.records[indexPath.row]
         
         // Change to category description
-        var detailsString = String(format: "type: %@", record.type!)
-        let timeString = record.time ?? ""
+        var detailsString = String(format: "type: %@", record.logRecord.type)
+        let timeString = record.logRecord.time()
         
-        if record.answer == nil || record.answer == "" {
+        if record.logRecord.answer == "" {
             detailsString += ", NXDOMAIN"
         }
 
-        cell.domain.text = record.domain
+        cell.domain.text = record.logRecord.domain
         cell.details.text = detailsString
         cell.timeLabel.text = timeString
         
-        setupRecordCell(cell: cell, type: record.blockRecordType)
+        let type: BlockedRecordType
+        switch (record.logRecord.status, record.category.isTracked) {
+        case (.processed, true):
+            type = .tracked
+        case (.processed, _):
+            type = .normal
+        case (.whitelisted, _):
+            type = .whitelisted
+        case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
+            type = .blocked
+        }
+        
+        setupRecordCell(cell: cell, type: type)
         
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
@@ -152,7 +168,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     @objc private func refresh() {
         model.obtainRecords()
     }
-        
+    
     private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType){
         if type == .normal {
             theme.setupTableCell(cell)

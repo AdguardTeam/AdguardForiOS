@@ -293,17 +293,17 @@ extern NSString* _Nonnull SystemProtectionLastState;
 /**
  Returns URL where is shared resources.
  */
-+ (nonnull NSURL *)sharedResuorcesURL;
+- (nonnull NSURL *)sharedResuorcesURL;
 
 /**
  Returns URL where must be current application logs.
  */
-+ (nonnull NSURL *)sharedAppLogsURL;
+- (nonnull NSURL *)sharedAppLogsURL;
 
 /**
  Returns URL where must be the applications logs.
  */
-+ (nonnull NSURL *)sharedLogsURL;
+- (nonnull NSURL *)sharedLogsURL;
 
 /**
  Returns shared user defaults object.
@@ -316,32 +316,9 @@ extern NSString* _Nonnull SystemProtectionLastState;
 - (void) reset;
 
 /**
- Saves defaults value in NSArgumentDomain.
- This lets to use defaults value in current process, 
- but this value did not save on disk (permanent domain).
- 
- @param key Defaults key
- @param value Devaults value
- */
-+ (void)sharedDefaultsSetTempKey:(nonnull NSString *)key value:(nonnull id)value;
-/**
- Gets defaults value from NSArgumentDomain.
-
- @param key Defaults key.
- @return Defaults value or nil.
- */
-+ (nullable id)sharedDefaultsValueOfTempKey:(nonnull NSString *)key;
-/**
- Removes defaults value from NSArgumentDomain.
-
- @param key Defaults key.
- */
-+ (void)sharedDefaultsRemoveTempKey:(nonnull NSString *)key;
-
-/**
  Performs flush of the shared user defaults.
  */
-+ (void)synchronizeSharedDefaults;
+- (void)synchronizeSharedDefaults;
 
 /**
  saves @data to file with @relativePath

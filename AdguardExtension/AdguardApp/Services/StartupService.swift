@@ -31,7 +31,7 @@ class StartupService : NSObject{
         
         // init services
         
-        let sharedResources: AESharedResourcesProtocol = APSharedResources()
+        let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
         
         // Registering standard Defaults
@@ -68,7 +68,7 @@ class StartupService : NSObject{
         let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, resources: sharedResources)
         locator.addService(service: antibanner)
         
-        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner)
+        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources)
         locator.addService(service: antibannerController)
         
         let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
@@ -92,5 +92,14 @@ class StartupService : NSObject{
 
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager)
         locator.addService(service: dnsFiltersService)
+        
+        let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
+        locator.addService(service: dnsLogService)
+        
+        let dnsStatisticsService: DnsStatisticsServiceProtocol = DnsStatisticsService(resources: sharedResources)
+        locator.addService(service: dnsStatisticsService)
+        
+        let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
+        locator.addService(service: dnsTrackerService)
     }
 }

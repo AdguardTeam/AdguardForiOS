@@ -16,18 +16,23 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import Foundation 
 
 class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
+    var userFilterId: NSNumber?
+    var otherFilterIds: [NSNumber]?
+    
     var server = ""
     
-    private let resources: APSharedResources
+    private let dnsLogService: DnsLogRecordsServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    
+    var dnsStatisticsService: DnsStatisticsServiceProtocol
     
     private var records = [DnsLogRecord]()
-    private var statistics: [String : RequestsStatisticsBlock] = [:]
+    private var statistics: [DnsStatisticsType : RequestsStatisticsBlock] = [:]
     
-    private let dnsTrackerService: DnsTrackerServiceProtocol
     
     private let saveRecordsMinimumTime = 3.0 // seconds
     private let saveStatisticsMinimumTime = 60.0*10.0 // seconds - 10 minutes
@@ -36,12 +41,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
     
-    @objc init(resources: APSharedResources, dnsTrackerService: DnsTrackerServiceProtocol) {
+    @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol) {
         self.resources = resources
-        self.dnsTrackerService = dnsTrackerService
+        self.dnsStatisticsService = DnsStatisticsService(resources: resources)
+        self.dnsLogService = dnsLogService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
-        nextStatisticsSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
+        nextStatisticsSaveTime = Date().timeIntervalSince1970 + saveStatisticsMinimumTime
         
         super.init()
         
@@ -54,33 +60,38 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         if event.error != nil && event.error != "" {
-            // Ignore errors
+            DDLogError("(DnsLogRecordsWriter) handle event error occured - \(event.error!)")
             return
         }
         
-        let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
-        let info = dnsTrackerService.getTrackerInfo(by: event.domain ?? "")
-        let type = isBlocked(event.answer, isTracked: info?.isTracked)
+        var status: DnsLogRecordStatus
         
-        let number: NSNumber = resources.defaultRequestsNumber ?? 0
-        resources.defaultRequestsNumber = NSNumber(integerLiteral: number.intValue + 1)
-        statistics[APAllRequestsString]?.numberOfRequests += 1
-        
-        switch type {
-        case .blocked:
-            let number: NSNumber = resources.blockedRequestsNumber ?? 0
-            resources.blockedRequestsNumber = NSNumber(integerLiteral: number.intValue + 1)
-            statistics[APBlockedRequestsString]?.numberOfRequests += 1
-        case .tracked:
-            let number: NSNumber = resources.countersRequestsNumber ?? 0
-            resources.countersRequestsNumber = NSNumber(integerLiteral: number.intValue + 1)
-            statistics[APCountersRequestsString]?.numberOfRequests += 1
-        default:
-            break
+        if event.whitelist {
+            status = .whitelisted
+        }
+        else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
+            status = .blacklistedByUserFilter
+        }
+        else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
+            status = .blacklistedByOtherFilter
+        }
+        else {
+            status = .processed
         }
         
-        let record = DnsLogRecord(domain: event.domain, date: date, elapsed: event.elapsed, type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), blockRecordType: type, name: info?.name, company: info?.company, category: info?.categoryKey)
-                
+        let totalRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+        resources.sharedDefaults().set(totalRequestsCount + 1, forKey: AEDefaultsRequests)
+        statistics[.all]?.numberOfRequests += 1
+        
+        if (isBlocked(event.answer)) {
+            let blockedRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+            resources.sharedDefaults().set(blockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
+            statistics[.blocked]?.numberOfRequests += 1
+        }
+        
+        
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), status: status, userStatus: .none, blockRules: event.rules)
+        
         addRecord(record: record)
     }
     
@@ -114,13 +125,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func save() {
-        resources.write(to: records)
+        dnsLogService.writeRecords(records)
         records.removeAll()
     }
     
     private func saveStatistics(){
         let now = Date().timeIntervalSince1970
-        resources.write(toStatisticsRecords: statistics)
+        dnsStatisticsService.writeStatistics(statistics)
         statistics.removeAll()
         reinitializeStatistics()
         nextStatisticsSaveTime = now + saveStatisticsMinimumTime
@@ -129,27 +140,22 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     private func reinitializeStatistics(){
         let date = Date()
         
-        statistics[APAllRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
-        statistics[APBlockedRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
-        statistics[APCountersRequestsString] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        statistics[.all] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        statistics[.blocked] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
     }
     
-    private func isBlocked(_ answer: String?, isTracked: Bool?) -> BlockedRecordType {
+    private func isBlocked(_ answer: String?) -> Bool {
         if answer == nil || answer == "" {
             // Mark all NXDOMAIN responses as blocked
-            return .blocked
+            return true
         }
 
         if answer!.contains("0.0.0.0") ||
             answer!.contains("127.0.0.1") ||
             answer!.contains("[::]")  {
-            return .blocked
+            return true
         }
 
-        if isTracked ?? false {
-            return .tracked
-        }
-        
-        return .normal
+        return false
     }
 }

@@ -241,7 +241,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         
         NSMutableString *sb = [NSMutableString stringWithFormat:@"Application version: %@", [ADProductInfo buildVersion]];
         
-        NSURL *supportFolder = [AESharedResources sharedLogsURL];
+        NSURL *supportFolder = [_sharedResources sharedLogsURL];
         if (supportFolder) {
             [sb appendFormat:@"\r\nApplication lifetime: %@", [ACFFileUtils fileCreatedTimeForUrl:supportFolder]];
         }
@@ -343,7 +343,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 
 - (NSArray *)appLogsUrls{
     
-    NSURL *logs = [AESharedResources sharedLogsURL];
+    NSURL *logs = [_sharedResources sharedLogsURL];
     return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:logs includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 error:NULL];
 }
 
