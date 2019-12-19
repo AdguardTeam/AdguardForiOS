@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "1.pdf"
+      "filename" : "Safari.pdf"
     },
     {
       "idiom" : "universal",
-      "filename" : "1-1.pdf",
+      "filename" : "Safari-1.pdf",
       "appearances" : [
         {
           "appearance" : "luminosity",

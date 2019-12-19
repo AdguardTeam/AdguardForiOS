@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "3-1.pdf"
+      "filename" : "System.pdf"
     },
     {
       "idiom" : "universal",
-      "filename" : "3.pdf",
+      "filename" : "System-1.pdf",
       "appearances" : [
         {
           "appearance" : "luminosity",
