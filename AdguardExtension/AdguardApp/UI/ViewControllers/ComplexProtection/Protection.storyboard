@@ -11,6 +11,8 @@
         <scene sceneID="1EG-7s-KUC">
             <objects>
                 <navigationController storyboardIdentifier="mainNavigationController" id="ZyF-up-tEE" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="ic_adguard" id="55D-FD-8K3"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="PKZ-9c-uZm">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
