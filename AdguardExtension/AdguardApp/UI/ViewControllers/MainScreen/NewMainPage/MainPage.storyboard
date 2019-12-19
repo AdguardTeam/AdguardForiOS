@@ -8,6 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Protection-->
+        <scene sceneID="mx0-h3-8Sk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Protection" id="bY3-ke-ljX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="yvk-pg-YMJ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dwp-CN-2wy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1410" y="-475"/>
+        </scene>
         <!--MainMenu-->
         <scene sceneID="c22-tz-GaO">
             <objects>
@@ -156,6 +166,13 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="changeSystemProtectionState:" destination="T6V-s9-cBk" eventType="touchUpInside" id="9Kb-vL-4fV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdM-SY-OJs">
+                                                <rect key="frame" x="20" y="19" width="71" height="30"/>
+                                                <state key="normal" title="protection"/>
+                                                <connections>
+                                                    <segue destination="bY3-ke-ljX" kind="show" id="iqc-yh-drs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -656,7 +673,10 @@
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="top" secondItem="kV5-xp-1Np" secondAttribute="bottom" id="BMN-P6-MQZ"/>
                             <constraint firstItem="IU2-ER-A7n" firstAttribute="leading" secondItem="Rns-k1-o75" secondAttribute="leading" constant="32" id="BW9-le-9vm"/>
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="bottom" secondItem="Rns-k1-o75" secondAttribute="bottom" id="BjP-tl-myc"/>
+                            <constraint firstItem="pdM-SY-OJs" firstAttribute="leading" secondItem="IcD-05-kTE" secondAttribute="leading" id="CKM-Ah-amF"/>
                             <constraint firstItem="Rns-k1-o75" firstAttribute="trailing" secondItem="k8E-Jo-8op" secondAttribute="trailing" id="Vjk-DC-g0h"/>
+                            <constraint firstItem="pdM-SY-OJs" firstAttribute="top" secondItem="IcD-05-kTE" secondAttribute="bottom" constant="16" id="baJ-Bj-PAt"/>
+                            <constraint firstItem="pdM-SY-OJs" firstAttribute="trailing" secondItem="IcD-05-kTE" secondAttribute="trailing" id="bcO-Q5-D1o"/>
                             <constraint firstItem="kV5-xp-1Np" firstAttribute="top" secondItem="FWW-Vd-WCA" secondAttribute="bottom" id="f5v-uU-vbf"/>
                             <constraint firstItem="VWV-Vg-eUx" firstAttribute="centerX" secondItem="Rns-k1-o75" secondAttribute="centerX" id="gn8-AC-q6n"/>
                             <constraint firstItem="Rns-k1-o75" firstAttribute="trailing" secondItem="kV5-xp-1Np" secondAttribute="trailing" id="khe-gs-trE"/>

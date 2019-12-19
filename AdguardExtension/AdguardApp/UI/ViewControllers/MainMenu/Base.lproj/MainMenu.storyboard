@@ -384,24 +384,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bugreportCell" destination="eR8-Ok-i9o" id="XNk-wj-2Rr"/>
-                        <outlet property="dnsArrow" destination="TIb-M0-6LZ" id="xCL-KG-JE1"/>
-                        <outlet property="dnsCell" destination="SDL-hA-qbg" id="6bZ-Ib-li4"/>
-                        <outlet property="dnsServer" destination="eOO-zl-SDf" id="h4S-qC-lOe"/>
-                        <outlet property="dnsTrailingConstrint" destination="QQv-v7-Laj" id="aeD-IG-CxJ"/>
-                        <outlet property="filtersDescription" destination="YRx-VR-yid" id="tNp-ne-Kfy"/>
-                        <outlet property="getProButton" destination="VQi-XH-gdb" id="T1V-TS-WJt"/>
-                        <outletCollection property="themableLabels" destination="e0H-m9-qlc" collectionClass="NSMutableArray" id="6Rr-T8-tbi"/>
-                        <outletCollection property="themableLabels" destination="YRx-VR-yid" collectionClass="NSMutableArray" id="S59-iS-8DF"/>
                         <outletCollection property="themableLabels" destination="L2l-pO-K3q" collectionClass="NSMutableArray" id="zxy-r4-Fof"/>
                         <outletCollection property="themableLabels" destination="xb2-Gf-9h7" collectionClass="NSMutableArray" id="gh6-P1-x2I"/>
                         <outletCollection property="themableLabels" destination="6Z2-0N-PSp" collectionClass="NSMutableArray" id="LGa-GE-W57"/>
                         <outletCollection property="themableLabels" destination="Em7-2h-SKs" collectionClass="NSMutableArray" id="Pzz-qk-h4h"/>
                         <outletCollection property="themableLabels" destination="x8F-Jr-rGi" collectionClass="NSMutableArray" id="Tka-cE-tDL"/>
                         <outletCollection property="themableLabels" destination="NQS-fl-oOe" collectionClass="NSMutableArray" id="MZO-aE-vh8"/>
-                        <outletCollection property="themableLabels" destination="lbr-3S-fZX" collectionClass="NSMutableArray" id="Cxb-Ng-rGS"/>
-                        <outletCollection property="themableLabels" destination="eOO-zl-SDf" collectionClass="NSMutableArray" id="gnr-sz-JMQ"/>
                         <segue destination="j2c-WR-Kkk" kind="show" identifier="getProSegue" id="d91-6g-Krz"/>
-                        <segue destination="lez-JY-0SG" kind="show" identifier="showDnsSettingsSegue" id="A69-60-htW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zd4-eO-74A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -412,14 +401,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-133.33333333333334" y="48.883928571428569"/>
-        </scene>
-        <!--Filters-->
-        <scene sceneID="LSc-al-v4R">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Filters" id="Nsp-q5-Pgr" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nwa-21-sXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="738" y="-212"/>
         </scene>
         <!--About-->
         <scene sceneID="7fW-vk-C72">
@@ -437,14 +418,6 @@
             </objects>
             <point key="canvasLocation" x="740" y="184"/>
         </scene>
-        <!--DnsSettings-->
-        <scene sceneID="PAy-fl-MFX">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DnsSettings" id="lez-JY-0SG" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qZJ-yD-JdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="769" y="336"/>
-        </scene>
         <!--License-->
         <scene sceneID="TGu-hF-lYs">
             <objects>
@@ -456,10 +429,8 @@
     </scenes>
     <resources>
         <image name="about-icon" width="24" height="24"/>
-        <image name="adguard-small-icon" width="24" height="24"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
-        <image name="safari" width="24" height="24"/>
         <image name="support-icon" width="24" height="24"/>
     </resources>
 </document>
