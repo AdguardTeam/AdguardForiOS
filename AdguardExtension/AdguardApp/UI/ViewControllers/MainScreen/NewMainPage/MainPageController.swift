@@ -377,12 +377,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Changes number of requests for specific button
      */
     private func changeTextForButton(with keyPath: String?){
-        if keyPath == AEDefaultsRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            requestsNumberLabel.text = "\(number)"
-        } else if keyPath == AEDefaultsBlockedRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            blockedNumberLabel.text = "\(number)"
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            if keyPath == AEDefaultsRequests {
+                let number = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+                self.requestsNumberLabel.text = "\(number)"
+            } else if keyPath == AEDefaultsBlockedRequests {
+                let number = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+                self.blockedNumberLabel.text = "\(number)"
+            }
         }
     }
     
