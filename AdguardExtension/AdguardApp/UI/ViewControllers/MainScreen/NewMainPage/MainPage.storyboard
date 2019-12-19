@@ -591,10 +591,10 @@
                                             <action selector="fixItTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="eqb-KA-yAD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ">
                                         <rect key="frame" x="16" y="16" width="151" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
@@ -612,7 +612,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="215" id="25D-sA-9Rz"/>
                                     <constraint firstAttribute="trailing" secondItem="QXI-1p-YgS" secondAttribute="trailing" constant="8" id="J4v-2D-Sx8"/>
@@ -627,7 +627,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="4"/>
+                                        <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -638,14 +638,14 @@
                             <constraint firstItem="FWW-Vd-WCA" firstAttribute="centerY" secondItem="VWV-Vg-eUx" secondAttribute="centerY" id="9AV-rj-UbG"/>
                             <constraint firstItem="Rns-k1-o75" firstAttribute="trailing" secondItem="FWW-Vd-WCA" secondAttribute="trailing" constant="16" id="9Af-RO-grb"/>
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="top" secondItem="kV5-xp-1Np" secondAttribute="bottom" id="BMN-P6-MQZ"/>
-                            <constraint firstItem="IU2-ER-A7n" firstAttribute="leading" secondItem="Rns-k1-o75" secondAttribute="leading" constant="32" id="BW9-le-9vm"/>
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="bottom" secondItem="Qnu-x2-MQD" secondAttribute="bottom" id="BjP-tl-myc"/>
+                            <constraint firstItem="IU2-ER-A7n" firstAttribute="centerY" secondItem="lIg-oL-XNY" secondAttribute="centerY" id="FmE-o4-6SI"/>
                             <constraint firstItem="Rns-k1-o75" firstAttribute="trailing" secondItem="k8E-Jo-8op" secondAttribute="trailing" id="Vjk-DC-g0h"/>
+                            <constraint firstItem="IU2-ER-A7n" firstAttribute="leading" secondItem="lIg-oL-XNY" secondAttribute="trailing" constant="32" id="dmd-IS-6yN"/>
                             <constraint firstItem="kV5-xp-1Np" firstAttribute="top" secondItem="FWW-Vd-WCA" secondAttribute="bottom" id="f5v-uU-vbf"/>
                             <constraint firstItem="VWV-Vg-eUx" firstAttribute="centerX" secondItem="Rns-k1-o75" secondAttribute="centerX" id="gn8-AC-q6n"/>
                             <constraint firstItem="Rns-k1-o75" firstAttribute="trailing" secondItem="kV5-xp-1Np" secondAttribute="trailing" id="khe-gs-trE"/>
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="leading" secondItem="Rns-k1-o75" secondAttribute="leading" id="vqE-AB-KfI"/>
-                            <constraint firstItem="Rns-k1-o75" firstAttribute="bottom" secondItem="IU2-ER-A7n" secondAttribute="bottom" constant="32" id="w4H-RQ-1Rx"/>
                             <constraint firstItem="kV5-xp-1Np" firstAttribute="leading" secondItem="Rns-k1-o75" secondAttribute="leading" id="w4m-II-al0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rns-k1-o75"/>
@@ -686,7 +686,6 @@
                         <outletCollection property="themableLabels" destination="a5U-A8-S8G" collectionClass="NSMutableArray" id="7GB-u4-TcQ"/>
                         <outletCollection property="themableLabels" destination="Kxe-Kt-6aQ" collectionClass="NSMutableArray" id="oFM-tb-aDh"/>
                         <outletCollection property="themableLabels" destination="FcP-gP-TsG" collectionClass="NSMutableArray" id="5aQ-ll-5Bp"/>
-                        <outletCollection property="themableLabels" destination="cvv-CS-LMQ" collectionClass="NSMutableArray" id="HWH-ix-Sad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bb-EW-EVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2105,6 +2104,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v5x-rc-dxn"/>
+        <segue reference="Qo1-ti-O1I"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -72,15 +72,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Content blockers view
     
     @IBOutlet weak var contentBlockerViewIphone: UIView!
-    @IBOutlet weak var contentBlockerViewIpad: UIView! {
-        didSet {
-            contentBlockerViewIpad.layer.shadowColor = UIColor.black.cgColor
-            contentBlockerViewIpad.layer.shadowRadius = 3.0
-            contentBlockerViewIpad.layer.shadowOpacity = 0.5
-            contentBlockerViewIpad.layer.shadowOffset = .zero
-        }
-    }
-    
+    @IBOutlet weak var contentBlockerViewIpad: UIView!
+
     
     // MARK: - Themable labels
     
@@ -97,6 +90,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private var proStatus: Bool {
         return configuration.proStatus
     }
+    private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
+    
     
     // MARK: - Services
     
@@ -131,17 +126,18 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         addObservers()
-    
         chooseRequest()
+        changeProtectionStatusLabel()
+        observeContentBlockersState()
+        setupBackButton()
     
         chartModel.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
         
-        changeProtectionStatusLabel()
-        
-        observeContentBlockersState()
-        
-        setupBackButton()
+        contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
+        if let recognizer = contentBlockersGestureRecognizer {
+            contentBlockerViewIpad.addGestureRecognizer(recognizer)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -339,7 +335,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProView.backgroundColor = theme.backgroundColor
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
-        contentBlockerViewIpad.backgroundColor = theme.notificationWindowColor
         
         activityIndicator.color = theme.invertedBackgroundColor
     }
@@ -614,6 +609,23 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                     self?.contentBlockerViewIpad.isHidden = true
                 }
             }
+        }
+    }
+    
+    @objc private func handleContentBlockersView(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translation(in: self.view)
+        let x = translation.x
+        let y = translation.y
+        let gestureViewX = gestureRecognizer.view?.center.x ?? 0.0
+        let gestureViewY = gestureRecognizer.view?.center.y ?? 0.0
+        
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            contentBlockerViewIpad.center = CGPoint(x: gestureViewX + x, y: gestureViewY + y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        }
+        
+        if gestureRecognizer.state == .ended {
+            
         }
     }
 }
