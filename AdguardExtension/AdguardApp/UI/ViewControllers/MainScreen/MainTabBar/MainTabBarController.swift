@@ -21,6 +21,7 @@ import Foundation
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private var bottomView: UIView?
+    private let bottomLineHeight: CGFloat = 4.0
 
     private var bottomViewLeftAnchor: NSLayoutConstraint?
     
@@ -38,7 +39,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         }
         
         updateTheme()
-        
+        createSelectionIndicator()
         addTabBarShadow()
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
@@ -52,8 +53,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        createSelectionIndicator()
         guard let item = tabBar.selectedItem else { return }
+        resizeIndicator()
         changeLeftAnchor(for: item)
     }
     
@@ -102,18 +103,22 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.addSubview(bottomView ?? UIView())
         
         let numberOfItems = CGFloat(tabBar.items!.count)
-        let lineHeight: CGFloat = 4.0
+        
         let width: CGFloat = tabBar.frame.width / numberOfItems
         
         let mult = 1 / (numberOfItems * 2)
         
-        bottomView?.heightAnchor.constraint(equalToConstant: lineHeight).isActive = true
+        bottomView?.heightAnchor.constraint(equalToConstant: bottomLineHeight).isActive = true
         bottomView?.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: mult).isActive = true
         bottomViewLeftAnchor = bottomView?.leftAnchor.constraint(equalTo: tabBar.leftAnchor, constant: width / 4)
         bottomViewLeftAnchor?.isActive = true
         bottomView?.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor).isActive = true
-        
-        let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: lineHeight)
+    }
+    
+    private func resizeIndicator(){
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let width: CGFloat = tabBar.frame.width / numberOfItems
+        let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: bottomLineHeight)
         let maskPath1 = UIBezierPath(roundedRect: bounds,
             byRoundingCorners: [.topLeft , .topRight],
             cornerRadii: CGSize(width: 20, height: 20))

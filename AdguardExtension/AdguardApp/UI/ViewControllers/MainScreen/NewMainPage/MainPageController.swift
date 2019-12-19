@@ -623,9 +623,5 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             contentBlockerViewIpad.center = CGPoint(x: gestureViewX + x, y: gestureViewY + y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
         }
-        
-        if gestureRecognizer.state == .ended {
-            
-        }
     }
 }
