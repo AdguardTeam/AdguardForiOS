@@ -20,6 +20,9 @@ import Foundation
 
 class SystemBlacklistModel: ListOfRulesModelProtocol {
     
+    private let filterRulesAction = "dns_filter_rules"
+    private let openUrlFrom = "dns_user_filter"
+    
     // MARK: - Variables
     
     /* State of model */
@@ -88,7 +91,9 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     
     var descriptionTitle: String {
         get {
-            return ACLocalizedString("blacklist_text", nil)
+            let format = ACLocalizedString("dns_blacklist_text_format", nil)
+            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+            return String(format: format, url)
         }
     }
     

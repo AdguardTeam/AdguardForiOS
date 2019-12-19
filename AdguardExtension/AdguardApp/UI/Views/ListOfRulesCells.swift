@@ -25,9 +25,6 @@ class EnableListOfRulesCell: UITableViewCell {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var separatorView: UIView!
     
-    private let filterRulesAction = "filter_rules"
-    private let openUrlFrom = "user_filter"
-    
     var theme: ThemeServiceProtocol? {
         didSet {
             updateTheme()
@@ -36,8 +33,8 @@ class EnableListOfRulesCell: UITableViewCell {
     
     var rulesDescription: String? {
         didSet{
-            descriptionTextView.text = rulesDescription
             descriptionTextView.textContainer.lineFragmentPadding = 0.0
+            setDescriptionText(rulesDescription!)
         }
     }
     
@@ -63,7 +60,6 @@ class EnableListOfRulesCell: UITableViewCell {
             }
             
             iconImageView.image = image
-            setupDescriptionTextView()
         }
     }
     
@@ -83,20 +79,12 @@ class EnableListOfRulesCell: UITableViewCell {
         separatorView.backgroundColor = theme?.separatorColor
     }
     
-    private func setupDescriptionTextView(){
-        let text = descriptionTextView.text
-        if type == .safariUserfilter{
-            let htmlStringFormat = text ?? ""
-            let urlString = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
-            let htmlString = String(format: htmlStringFormat, urlString)
-            if let headerText = htmlString.attributedStringFromHtml() {
-                descriptionTextView.text = ""
-                headerText.addAttribute(.foregroundColor, value: theme?.lightGrayTextColor ?? .black, range: NSRange(location: 0, length: headerText.length))
-                headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: headerText.length))
-                descriptionTextView.attributedText = headerText
-            }
-        } else {
-            descriptionTextView.textColor = theme?.lightGrayTextColor
+    private func setDescriptionText(_ text: String){
+        if let headerText = text.attributedStringFromHtml() {
+            descriptionTextView.text = ""
+            headerText.addAttribute(.foregroundColor, value: theme?.lightGrayTextColor ?? .black, range: NSRange(location: 0, length: headerText.length))
+            headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: headerText.length))
+            descriptionTextView.attributedText = headerText
         }
     }
 }

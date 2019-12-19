@@ -19,7 +19,10 @@
 import Foundation
 
 class UserFilterModel: ListOfRulesModelProtocol {
-
+    
+    private let filterRulesAction = "filter_rules"
+    private let openUrlFrom = "user_filter"
+    
     // MARK: - Variables
     
     /* State of model */
@@ -87,7 +90,9 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     var descriptionTitle: String {
         get {
-            return ACLocalizedString("blacklist_text_format", nil)
+            let format = ACLocalizedString("blacklist_text_format", nil)
+            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+            return String(format: format, url)
         }
     }
     

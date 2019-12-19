@@ -127,7 +127,7 @@
 "dns_whitelist_text" = "AdGuard won't block these domains";
 
 /* (UserFilterController) dns blacklist description */
-"dns_blacklist_text" = "AdGuard will block these domains";
+"dns_blacklist_text_format" = "Enter here the domain names. AdGuard will prevent any apps and browsers from loading these domains. This blacklist supports <a href=\"%@\">AdGuard's DNS syntax</a>.";
 
 /* (UserFilterController) wifi exceptions description */
 "wifi_exceptions_text" = "Enter the Wi-Fi names here. AdGuard will disable DNS for these networks.";
