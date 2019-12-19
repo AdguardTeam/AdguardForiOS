@@ -67,10 +67,9 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
     
     @IBOutlet weak var premiumLabel: ThemableLabel!
     
-    @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var blurView: UIView!
     
-    // TEST SWITCH
-    @IBOutlet weak var testSwitch: UISwitch!
+    @IBOutlet var themableLabels: [ThemableLabel]!
     
     
     // MARK: - properties
@@ -90,6 +89,8 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
     private var notificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     
+    private let videoTutorialSegueId = "videoTutorialSegue"
+    
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,10 +98,6 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: {[weak self] (notification) in
-            self?.checkComplexProtection()
-        })
         
         let ratedObservation = configuration.observe(\.appRated) {[weak self](_, _) in
             self?.updateUI()
@@ -136,9 +133,7 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
         super.viewWillAppear(animated)
         
         vpnService.notifier = self
-        
-        checkComplexProtection()
-        
+    
         navigationController?.setNavigationBarHidden(true, animated: false)
         
         updateTheme()
@@ -148,7 +143,24 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
         return theme.statusbarStyle()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == videoTutorialSegueId {
+            if let vc = segue.destination as? VideoTutorialController {
+                vc.parentController = self
+            }
+        }
+    }
+    
     // MARK: - IB Actions
+    
+    @IBAction func newVideoButton(_ sender: UIButton) {
+        showBlur()
+    }
+    
+    func tutorialWillDisappear(){
+        hideBlur()
+    }
+    
     @IBAction func ratemeAction(_ sender: UITapGestureRecognizer) {
         
         if sender.view is UIImageView {
@@ -243,18 +255,14 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
     // MARK: - Vpn notifiers
     
     func tunnelModeChanged() {
-        checkComplexProtection()
+      
     }
     
     func vpnConfigurationChanged(with error: Error?) {
-        if error != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
-            checkComplexProtection()
-        }
+
     }
     
     func cancelledAddingVpnConfiguration() {
-        checkComplexProtection()
     }
     
     // MARK: - private methods
@@ -361,6 +369,7 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
     }
     
     private func updateTheme() {
+        blurView.backgroundColor = theme.invertedBackgroundColor.withAlphaComponent(0.5)
         headerImage.highlightedImage = configuration.darkTheme ? darkThemeLogoImage : lightThemeLogoImage
         
         view.backgroundColor = theme.backgroundColor
@@ -373,11 +382,15 @@ class MainController: UIViewController, VpnServiceNotifierDelegate {
         theme.setupLabelInverted(premiumLabel)
     }
     
-    private func checkComplexProtection(){
-        complexProtection.checkState { (enabled) in
-            DispatchQueue.main.async {[weak self] in
-                self?.testSwitch.isOn = enabled
-            }
+    private func showBlur(){
+        UIView.animate(withDuration: 1.0) {[weak self] in
+            self?.blurView.alpha = 1.0
+        }
+    }
+    
+    private func hideBlur(){
+        UIView.animate(withDuration: 1.0) {[weak self] in
+            self?.blurView.alpha = 0.0
         }
     }
 }

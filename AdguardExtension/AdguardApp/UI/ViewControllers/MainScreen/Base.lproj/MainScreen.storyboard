@@ -362,20 +362,23 @@
                                                     <segue destination="Xm1-m3-uqM" kind="show" id="BbW-jj-fUU"/>
                                                 </connections>
                                             </button>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDr-1D-oSF">
-                                                <rect key="frame" x="16" y="13.5" width="51" height="31"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-YL-QpR">
+                                                <rect key="frame" x="308" y="14" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
                                                 <connections>
-                                                    <action selector="testAction:" destination="bds-k9-eYe" eventType="valueChanged" id="Qau-NC-TQN"/>
+                                                    <action selector="newVideoButton:" destination="bds-k9-eYe" eventType="touchUpInside" id="cOA-d5-NxV"/>
+                                                    <segue destination="fix-fy-wRP" kind="presentation" identifier="videoTutorialSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="flipHorizontal" id="kIW-zs-Byf"/>
                                                 </connections>
-                                            </switch>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="zjf-M2-fLO" secondAttribute="trailing" constant="15" id="9qG-l8-cEH"/>
+                                            <constraint firstItem="zjf-M2-fLO" firstAttribute="leading" secondItem="v1R-YL-QpR" secondAttribute="trailing" constant="5" id="B4l-5a-5aL"/>
                                             <constraint firstItem="zjf-M2-fLO" firstAttribute="top" secondItem="0bS-Py-Z4b" secondAttribute="top" constant="9" id="CZ4-GO-mza"/>
                                             <constraint firstItem="xVP-0T-sAu" firstAttribute="centerX" secondItem="0bS-Py-Z4b" secondAttribute="centerX" id="Cnv-K7-jFq"/>
-                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="centerY" secondItem="zjf-M2-fLO" secondAttribute="centerY" id="IKN-S7-JZL"/>
-                                            <constraint firstItem="dDr-1D-oSF" firstAttribute="leading" secondItem="0bS-Py-Z4b" secondAttribute="leading" constant="16" id="ZiU-Aa-Mt4"/>
+                                            <constraint firstAttribute="centerY" secondItem="zjf-M2-fLO" secondAttribute="centerY" id="IKN-S7-JZL"/>
+                                            <constraint firstAttribute="leading" secondItem="0bS-Py-Z4b" secondAttribute="leading" constant="16" id="ZiU-Aa-Mt4"/>
                                             <constraint firstAttribute="bottom" secondItem="xVP-0T-sAu" secondAttribute="bottom" id="aHD-HL-anP"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -798,12 +801,20 @@ with Safari</string>
                                     <outletCollection property="gestureRecognizers" destination="qUQ-fL-yth" appends="YES" id="4Ix-u7-LxW"/>
                                 </connections>
                             </imageView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8U-tv-hVi">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="m8U-tv-hVi" firstAttribute="leading" secondItem="a9p-FL-Ilz" secondAttribute="leading" id="4VG-TY-pzC"/>
+                            <constraint firstAttribute="trailing" secondItem="m8U-tv-hVi" secondAttribute="trailing" id="5nT-1V-FGL"/>
+                            <constraint firstAttribute="bottom" secondItem="m8U-tv-hVi" secondAttribute="bottom" id="BKx-Vq-eIY"/>
                             <constraint firstItem="WLm-Tv-TCw" firstAttribute="leading" secondItem="8E0-q1-n37" secondAttribute="trailing" constant="-63" id="BV1-H1-gDc"/>
                             <constraint firstItem="Rnx-mv-CPR" firstAttribute="leading" secondItem="WLm-Tv-TCw" secondAttribute="leading" id="Rhi-G5-uLh"/>
                             <constraint firstItem="WLm-Tv-TCw" firstAttribute="trailing" secondItem="Rnx-mv-CPR" secondAttribute="trailing" id="cI1-0b-P9M"/>
+                            <constraint firstItem="m8U-tv-hVi" firstAttribute="top" secondItem="a9p-FL-Ilz" secondAttribute="top" id="k9n-ZW-8v2"/>
                             <constraint firstItem="WLm-Tv-TCw" firstAttribute="top" secondItem="Rnx-mv-CPR" secondAttribute="top" id="kev-ez-Piy"/>
                             <constraint firstAttribute="leading" secondItem="zqp-eO-Zja" secondAttribute="leading" constant="65" id="n5H-dX-WZ5"/>
                             <constraint firstAttribute="bottom" secondItem="Rnx-mv-CPR" secondAttribute="bottom" id="oWj-cs-tlp"/>
@@ -815,6 +826,7 @@ with Safari</string>
                     <navigationItem key="navigationItem" id="QIF-uS-7Mg"/>
                     <connections>
                         <outlet property="adguardManView" destination="SkS-Kt-3Ib" id="oVu-bL-Oq8"/>
+                        <outlet property="blurView" destination="m8U-tv-hVi" id="Dp0-0M-Fhj"/>
                         <outlet property="enabledLabel" destination="Atw-MM-BN4" id="dah-5x-1D7"/>
                         <outlet property="filtersVersionLabel" destination="TOQ-Nm-2UK" id="4cN-Nu-CQA"/>
                         <outlet property="getProHeight" destination="pnO-Kp-d5g" id="mnW-t6-QLW"/>
@@ -831,7 +843,6 @@ with Safari</string>
                         <outlet property="star3" destination="ONb-hr-d27" id="Cn0-9i-XlD"/>
                         <outlet property="star4" destination="jRL-4k-532" id="72B-22-WRz"/>
                         <outlet property="star5" destination="ajd-oN-WSw" id="CXx-GP-gXD"/>
-                        <outlet property="testSwitch" destination="dDr-1D-oSF" id="9Jo-QR-evT"/>
                         <outlet property="tutorialVideoView" destination="Sk8-rZ-X4e" id="bLm-Ij-sqv"/>
                         <outlet property="updateFiltersGestureRecognizer" destination="DEt-Hi-EkO" id="KS7-q9-ZiJ"/>
                         <outlet property="vikingImage" destination="TBC-HI-cYs" id="zhT-UW-VlD"/>
@@ -903,13 +914,125 @@ with Safari</string>
             </objects>
             <point key="canvasLocation" x="78" y="20"/>
         </scene>
+        <!--Video Tutorial Controller-->
+        <scene sceneID="8K1-JB-EBs">
+            <objects>
+                <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="overCurrentContext" id="fix-fy-wRP" customClass="VideoTutorialController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kRd-H6-LHo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ApB-dv-rt3">
+                                <rect key="frame" x="30" y="200.5" width="354" height="505"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_background" translatesAutoresizingMaskIntoConstraints="NO" id="Pfz-ry-0fy">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="354"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Pfz-ry-0fy" secondAttribute="height" multiplier="1:1" priority="750" id="kcI-gN-Gs8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" text="Please enable AdGuard in Safari settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EV4-QI-GRG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="378" width="314" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="7V5-Yr-y5S">
+                                        <rect key="frame" x="133" y="133" width="88.5" height="88.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="7V5-Yr-y5S" secondAttribute="height" multiplier="1:1" id="YST-rt-LP1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="For blocking ads in Safari you should switch on all content blockers in settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smy-bm-8A7" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="437" width="314" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to enable AdGuard in Safari settings?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8c-Ta-50c" userLabel="How to enable AdGuard  in Safari settings?">
+                                        <rect key="frame" x="16" y="16" width="314" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.49793903374233128" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iv7-1H-5Ze">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="354"/>
+                                        <connections>
+                                            <segue destination="Hh0-dV-8Se" kind="show" id="edW-Vg-Goh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Pfz-ry-0fy" firstAttribute="leading" secondItem="ApB-dv-rt3" secondAttribute="leading" id="164-VV-szk"/>
+                                    <constraint firstItem="Pfz-ry-0fy" firstAttribute="top" secondItem="ApB-dv-rt3" secondAttribute="top" id="1J2-Mc-m0z"/>
+                                    <constraint firstItem="iv7-1H-5Ze" firstAttribute="leading" secondItem="Pfz-ry-0fy" secondAttribute="leading" id="2Uw-yc-eXC"/>
+                                    <constraint firstItem="7V5-Yr-y5S" firstAttribute="width" secondItem="Pfz-ry-0fy" secondAttribute="width" multiplier="0.25" id="3YQ-hF-pDO"/>
+                                    <constraint firstItem="smy-bm-8A7" firstAttribute="trailing" secondItem="EV4-QI-GRG" secondAttribute="trailing" id="AH7-AI-IaJ"/>
+                                    <constraint firstItem="x8c-Ta-50c" firstAttribute="leading" secondItem="ApB-dv-rt3" secondAttribute="leading" constant="16" id="Def-CA-ChB"/>
+                                    <constraint firstItem="iv7-1H-5Ze" firstAttribute="bottom" secondItem="Pfz-ry-0fy" secondAttribute="bottom" id="G1S-Xs-2oO"/>
+                                    <constraint firstItem="iv7-1H-5Ze" firstAttribute="top" secondItem="Pfz-ry-0fy" secondAttribute="top" id="MgA-pO-esf"/>
+                                    <constraint firstItem="7V5-Yr-y5S" firstAttribute="centerY" secondItem="Pfz-ry-0fy" secondAttribute="centerY" id="OCs-Dr-T8V"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="Opt-uJ-6Uu"/>
+                                    <constraint firstItem="EV4-QI-GRG" firstAttribute="leading" secondItem="ApB-dv-rt3" secondAttribute="leading" constant="20" id="Q4m-oO-fch"/>
+                                    <constraint firstItem="iv7-1H-5Ze" firstAttribute="trailing" secondItem="Pfz-ry-0fy" secondAttribute="trailing" id="Qjt-da-AXV"/>
+                                    <constraint firstAttribute="trailing" secondItem="EV4-QI-GRG" secondAttribute="trailing" constant="20" id="Syn-1R-is3"/>
+                                    <constraint firstAttribute="bottom" secondItem="smy-bm-8A7" secondAttribute="bottom" constant="32" id="Uol-8X-Aj5"/>
+                                    <constraint firstItem="7V5-Yr-y5S" firstAttribute="centerX" secondItem="Pfz-ry-0fy" secondAttribute="centerX" id="YQr-5K-N6O"/>
+                                    <constraint firstItem="EV4-QI-GRG" firstAttribute="top" secondItem="Pfz-ry-0fy" secondAttribute="bottom" constant="24" id="cfF-T2-cbO"/>
+                                    <constraint firstItem="smy-bm-8A7" firstAttribute="top" secondItem="EV4-QI-GRG" secondAttribute="bottom" constant="16" id="iOv-Rp-tjY"/>
+                                    <constraint firstAttribute="trailing" secondItem="x8c-Ta-50c" secondAttribute="trailing" constant="24" id="krX-Nh-gsE"/>
+                                    <constraint firstItem="smy-bm-8A7" firstAttribute="leading" secondItem="EV4-QI-GRG" secondAttribute="leading" id="l9s-F9-UAp"/>
+                                    <constraint firstItem="x8c-Ta-50c" firstAttribute="top" secondItem="ApB-dv-rt3" secondAttribute="top" constant="16" id="o9O-Ii-WdH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pfz-ry-0fy" secondAttribute="trailing" id="qJa-uH-X9a"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="ApB-dv-rt3" firstAttribute="centerX" secondItem="zT9-cE-PH4" secondAttribute="centerX" id="4Pq-LS-dKY"/>
+                            <constraint firstItem="iv7-1H-5Ze" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zT9-cE-PH4" secondAttribute="top" constant="70" id="Inq-cy-IF5"/>
+                            <constraint firstItem="ApB-dv-rt3" firstAttribute="leading" secondItem="zT9-cE-PH4" secondAttribute="leading" priority="750" constant="30" id="NaY-qo-eQQ"/>
+                            <constraint firstItem="zT9-cE-PH4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ApB-dv-rt3" secondAttribute="bottom" constant="70" id="fmj-9E-6Hu"/>
+                            <constraint firstItem="zT9-cE-PH4" firstAttribute="trailing" secondItem="ApB-dv-rt3" secondAttribute="trailing" priority="750" constant="30" id="goq-Oe-NCO"/>
+                            <constraint firstItem="ApB-dv-rt3" firstAttribute="centerY" secondItem="zT9-cE-PH4" secondAttribute="centerY" id="r3n-he-ckn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zT9-cE-PH4"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="S1K-R8-B3x" appends="YES" id="zDn-ny-bDp"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="videoView" destination="ApB-dv-rt3" id="h04-W3-PfV"/>
+                        <outletCollection property="themableLabels" destination="EV4-QI-GRG" collectionClass="NSMutableArray" id="USL-If-2tP"/>
+                        <outletCollection property="themableLabels" destination="smy-bm-8A7" collectionClass="NSMutableArray" id="30u-62-2Uk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jTU-aj-9Xd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="S1K-R8-B3x">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="fix-fy-wRP" id="Re2-Fx-AtO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="310" y="-358"/>
+        </scene>
         <!--Tutorial-->
         <scene sceneID="bfO-Uw-sCs">
             <objects>
-                <viewControllerPlaceholder storyboardName="Tutorial" id="Hh0-dV-8Se" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Tutorial" id="Hh0-dV-8Se" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lgB-Sa-6VP"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUH-jO-dxj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="63" y="71"/>
+            <point key="canvasLocation" x="1147" y="47"/>
         </scene>
         <!--License-->
         <scene sceneID="hLS-4r-fqh">
@@ -929,6 +1052,7 @@ with Safari</string>
         <image name="mail-icon" width="24" height="24"/>
         <image name="man" width="320" height="213"/>
         <image name="nil" width="16" height="16"/>
+        <image name="play" width="74" height="74"/>
         <image name="play-button" width="195" height="119"/>
         <image name="refresh-icon" width="14" height="13"/>
         <image name="round-arrow" width="23" height="70"/>
@@ -936,8 +1060,10 @@ with Safari</string>
         <image name="star" width="26" height="25"/>
         <image name="star_selected" width="24" height="23"/>
         <image name="twitter-icon" width="24" height="24"/>
+        <image name="video_background" width="260" height="260"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fnu-ou-vxl"/>
+        <segue reference="edW-Vg-Goh"/>
     </inferredMetricsTieBreakers>
 </document>
