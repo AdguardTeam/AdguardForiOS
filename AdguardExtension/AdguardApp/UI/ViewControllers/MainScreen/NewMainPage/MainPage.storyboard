@@ -8,16 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Protection-->
-        <scene sceneID="mx0-h3-8Sk">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Protection" id="bY3-ke-ljX" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="yvk-pg-YMJ"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dwp-CN-2wy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1410" y="-475"/>
-        </scene>
         <!--License-->
         <scene sceneID="HwC-aZ-Kxt">
             <objects>
@@ -156,14 +146,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="changeSystemProtectionState:" destination="T6V-s9-cBk" eventType="touchUpInside" id="9Kb-vL-4fV"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdM-SY-OJs">
-                                                <rect key="frame" x="20" y="19" width="71" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="protection"/>
-                                                <connections>
-                                                    <segue destination="bY3-ke-ljX" kind="show" id="iqc-yh-drs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -895,6 +877,16 @@
             </objects>
             <point key="canvasLocation" x="3171" y="-196"/>
         </scene>
+        <!--Protection-->
+        <scene sceneID="7He-RY-59Y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Protection" id="QWQ-2G-7Ow" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="p6l-F4-ASp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XGL-oe-YfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-675" y="-628"/>
+        </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="deN-PW-Mlk">
             <objects>
@@ -926,6 +918,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="V7O-aY-Q6U" kind="relationship" relationship="viewControllers" id="Cs4-n3-Hg1"/>
+                        <segue destination="QWQ-2G-7Ow" kind="relationship" relationship="viewControllers" id="EvD-6B-4bb"/>
                         <segue destination="oBM-uz-5je" kind="relationship" relationship="viewControllers" id="CIh-tx-7ua"/>
                         <segue destination="kEy-qQ-X5z" kind="relationship" relationship="viewControllers" id="GqF-dW-tfv"/>
                     </connections>
