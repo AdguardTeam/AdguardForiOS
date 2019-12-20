@@ -22,7 +22,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
     // MARK: - Nav bar elements
     
-    @IBOutlet weak var adguardTitleLabel: ThemableLabel!
     @IBOutlet weak var refreshButton: UIButton!
     
     
@@ -123,13 +122,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         mainPageModel = MainPageModel(antibanner: antibanner)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         addObservers()
         chooseRequest()
         changeProtectionStatusLabel()
         observeContentBlockersState()
-        setupBackButton()
     
         chartModel.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
@@ -142,8 +138,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
+
         vpnService.notifier = self
         complexProtection.delegate = self
         updateTheme()
@@ -156,7 +151,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
         }
