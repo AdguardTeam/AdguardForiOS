@@ -127,7 +127,7 @@
 "dns_whitelist_text" = "AdGuard won't block these domains";
 
 /* (UserFilterController) dns blacklist description */
-"dns_blacklist_text" = "AdGuard will block these domains";
+"dns_blacklist_text_format" = "Enter here the domain names. AdGuard will prevent any apps and browsers from loading these domains. This blacklist supports <a href=\"%@\">AdGuard's DNS syntax</a>.";
 
 /* (UserFilterController) wifi exceptions description */
 "wifi_exceptions_text" = "Enter the Wi-Fi names here. AdGuard will disable DNS for these networks.";
@@ -139,7 +139,7 @@
 "add_blacklist_rule_title" = "Add a rule";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Add a domain";
+"add_whitelist_domain_title" = "Enter a domain here";
 
 /* (UserFilterController) add wifi exception name button title */
 "add_wifi_name_title" = "Add a name";
@@ -533,7 +533,7 @@
 "common_select_all" = "Select all";
 
 /*(ListOfRules) Add domain title */
-"add_domain" = "Add a domain";
+"add_domain" = "Add domain";
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Add a new rule";
