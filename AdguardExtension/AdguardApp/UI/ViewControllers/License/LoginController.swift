@@ -123,7 +123,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - text field delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        login()
+        if textField == nameEdit {
+            passwordEdit.becomeFirstResponder()
+        }
+        else if (nameEdit.text?.count ?? 0) > 0 &&
+            (passwordEdit.text?.count ?? 0) > 0 {
+            login()
+        }
         return true
     }
     
