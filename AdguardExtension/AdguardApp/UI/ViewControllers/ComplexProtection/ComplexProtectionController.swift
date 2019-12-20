@@ -88,8 +88,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vpnService.notifier = self
-        
+    
         updateTheme()
         updateVpnInfo()
         updateSafariProtectionInfo()
@@ -105,6 +104,11 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        vpnService.notifier = self
     }
     
     deinit {
