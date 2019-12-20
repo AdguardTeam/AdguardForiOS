@@ -338,7 +338,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
                 continue
             }
     
-            let ruleObject = AEWhitelistDomainObject(domain: trimmedRuleString).rule
+            let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
             
             let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
             newRuleObjects.append(ruleObject)
