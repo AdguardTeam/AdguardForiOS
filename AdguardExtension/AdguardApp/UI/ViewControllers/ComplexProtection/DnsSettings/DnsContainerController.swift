@@ -53,6 +53,7 @@ class DnsContainerController: UIViewController {
         
         updateButtons()
         
+        setupBackButton()
         updateTheme()
     }
     

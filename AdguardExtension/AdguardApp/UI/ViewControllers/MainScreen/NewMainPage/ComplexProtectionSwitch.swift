@@ -25,7 +25,10 @@ protocol ComplexSwitchDelegate {
 class ComplexProtectionSwitch: UIControl {
     
     private(set) var isOn = false
+    
     var delegate: ComplexSwitchDelegate?
+    
+    private var initialSwitchState = false
     
     // MARK: - Private variables
     
@@ -102,6 +105,8 @@ class ComplexProtectionSwitch: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
         
+        initialSwitchState = isOn
+        
         delegate?.beginTracking()
         
         let color = isOn ? onColor.cgColor : offColor.cgColor
@@ -151,14 +156,18 @@ class ComplexProtectionSwitch: UIControl {
             animate(on: true){ [weak self] in
                 guard let self = self else { return }
                 self.isOn = true
-                self.sendActions(for: UIControl.Event.valueChanged)
+                if self.initialSwitchState != self.isOn {
+                    self.sendActions(for: UIControl.Event.valueChanged)
+                }
                 self.generator.impactOccurred()
             }
         } else {
             animate(on: false){ [weak self] in
                 guard let self = self else { return }
                 self.isOn = false
-                self.sendActions(for: UIControl.Event.valueChanged)
+                if self.initialSwitchState != self.isOn {
+                    self.sendActions(for: UIControl.Event.valueChanged)
+                }
                 self.generator.impactOccurred()
             }
         }
