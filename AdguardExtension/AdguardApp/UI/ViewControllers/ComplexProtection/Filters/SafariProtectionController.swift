@@ -24,6 +24,7 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var userFilterStateLabel: UILabel!
     @IBOutlet weak var protectionStateSwitch: UISwitch!
     @IBOutlet weak var whitelistLabel: ThemableLabel!
+    @IBOutlet weak var safariIcon: UIImageView!
     @IBOutlet weak var topSeparator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -52,6 +53,9 @@ class SafariProtectionController: UITableViewController {
     private let blackListSegue = "blackListSegue"
     
     private var notificationToken: NotificationToken?
+    
+    private let enabledColor = UIColor(hexString: "#67b279")
+    private let disabledColor = UIColor(hexString: "#888888")
     
     // MARK: - view controler life cycle
     
@@ -164,8 +168,10 @@ class SafariProtectionController: UITableViewController {
     }
     
     private func updateSafariProtectionInfo(){
-        let protectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
-        protectionStateSwitch.isOn = protectionEnabled ?? true
-        safariProtectionStateLabel.text = protectionEnabled ?? true ? String.localizedString("on_state") : String.localizedString("off_state")
+        let protectionEnabled = resources.safariProtectionEnabled
+        protectionStateSwitch.isOn = protectionEnabled
+        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        
+        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
 }
