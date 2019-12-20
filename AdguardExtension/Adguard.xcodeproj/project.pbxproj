@@ -630,6 +630,7 @@
 		7E9A487E23A2815F00B89540 /* Affinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BB923102C94009082CE /* Affinity.swift */; };
 		7E9A487F23A2817900B89540 /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		7E9A488023A2818F00B89540 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
+		7EA887EB237EAE2B00E1043D /* VideoTutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */; };
 		7E9B37F62391761F00053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
 		7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
 		7E9B37F8239176BA00053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
@@ -1908,6 +1909,7 @@
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
+		7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTutorialController.swift; sourceTree = "<group>"; };
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
@@ -3647,6 +3649,7 @@
 				D0D6BA0421A6AF5F007360BC /* MainScreen.storyboard */,
 				D0CB3477212DCE21003B650E /* MainController.swift */,
 				7E74FCB1239F9CA0006C0990 /* NewMainPage */,
+				7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -5591,6 +5594,7 @@
 				7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
+				7EA887EB237EAE2B00E1043D /* VideoTutorialController.swift in Sources */,
 				D093718B21B0414A004A24F1 /* SafariService.swift in Sources */,
 				7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */,
 				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,

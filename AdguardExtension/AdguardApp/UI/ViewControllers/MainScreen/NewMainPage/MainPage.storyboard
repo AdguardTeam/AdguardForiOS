@@ -877,16 +877,6 @@
             </objects>
             <point key="canvasLocation" x="3171" y="-196"/>
         </scene>
-        <!--Protection-->
-        <scene sceneID="7He-RY-59Y">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Protection" id="QWQ-2G-7Ow" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="p6l-F4-ASp"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XGL-oe-YfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-675" y="-628"/>
-        </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="deN-PW-Mlk">
             <objects>
@@ -918,7 +908,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="V7O-aY-Q6U" kind="relationship" relationship="viewControllers" id="Cs4-n3-Hg1"/>
-                        <segue destination="QWQ-2G-7Ow" kind="relationship" relationship="viewControllers" id="EvD-6B-4bb"/>
+                        <segue destination="hin-Y2-xP7" kind="relationship" relationship="viewControllers" id="BLs-77-iUo"/>
                         <segue destination="oBM-uz-5je" kind="relationship" relationship="viewControllers" id="CIh-tx-7ua"/>
                         <segue destination="kEy-qQ-X5z" kind="relationship" relationship="viewControllers" id="GqF-dW-tfv"/>
                     </connections>
@@ -2098,11 +2088,42 @@
             </objects>
             <point key="canvasLocation" x="2089.8550724637685" y="525.33482142857144"/>
         </scene>
+        <!--Main Navigation Controller-->
+        <scene sceneID="ekN-2o-N88">
+            <objects>
+                <navigationController id="hin-Y2-xP7" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="apps" id="z6O-uu-b8f"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="taq-cg-Czj">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tsr-Ud-dhi" kind="relationship" relationship="rootViewController" id="MeT-62-aTh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tO8-0m-sSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162" y="-923"/>
+        </scene>
+        <!--Protection-->
+        <scene sceneID="XIp-Vl-owq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Protection" id="tsr-Ud-dhi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="OaT-wa-xMp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PI5-bZ-F0P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="619" y="-923"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Triangle down" width="20" height="10"/>
         <image name="Triangle up" width="20" height="10"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
+        <image name="apps" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
         <image name="home" width="24" height="24"/>
         <image name="ic_adguard" width="24" height="24"/>
