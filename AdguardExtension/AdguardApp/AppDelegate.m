@@ -69,6 +69,7 @@ static NSTimeInterval lastCheckTime;
     id<DnsFiltersServiceProtocol> _dnsFiltersService;
     id<ACNNetworkingProtocol> _networking;
     ConfigurationService *_configuration;
+    id<ThemeServiceProtocol> _theme;
     
     BOOL _activateWithOpenUrl;
     
@@ -98,6 +99,7 @@ static NSTimeInterval lastCheckTime;
     _dnsFiltersService = [ServiceLocator.shared getSetviceWithTypeName:@"DnsFiltersServiceProtocol"];
     _networking = [ServiceLocator.shared getSetviceWithTypeName:@"ACNNetworking"];
     _configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
+    _theme = [ServiceLocator.shared getSetviceWithTypeName:@"ThemeServiceProtocol"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -129,7 +131,8 @@ static NSTimeInterval lastCheckTime;
         self.userDefaultsInitialized = NO;
         
         //------------ Interface Tuning -----------------------------------
-        self.window.backgroundColor = [UIColor whiteColor];
+        self.window.backgroundColor = [UIColor clearColor];
+        
         
         if (application.applicationState != UIApplicationStateBackground) {
             [_purchaseService checkPremiumStatusChanged];
@@ -158,6 +161,12 @@ static NSTimeInterval lastCheckTime;
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
+    
+    ASSIGN_WEAK(self);
+    [[NSNotificationCenter defaultCenter] addObserverForName: ConfigurationService.themeChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        ASSIGN_STRONG(self);
+        USE_STRONG(self).window.backgroundColor = _theme.backgroundColor;
+    }];
     
     return YES;
 }
