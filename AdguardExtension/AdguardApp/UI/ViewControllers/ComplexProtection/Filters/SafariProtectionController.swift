@@ -25,7 +25,6 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var protectionStateSwitch: UISwitch!
     @IBOutlet weak var whitelistLabel: ThemableLabel!
     @IBOutlet weak var safariIcon: UIImageView!
-    @IBOutlet weak var topSeparator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
@@ -142,6 +141,11 @@ class SafariProtectionController: UITableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         
+        if indexPath.section == descriptionSection {
+            let width = cell.bounds.size.width
+            cell.separatorInset = UIEdgeInsets(top: 0.0, left: width, bottom: 0.0, right: -width)
+        }
+        
         return cell
     }
     
@@ -160,7 +164,6 @@ class SafariProtectionController: UITableViewController {
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
-        topSeparator.backgroundColor = theme.separatorColor
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

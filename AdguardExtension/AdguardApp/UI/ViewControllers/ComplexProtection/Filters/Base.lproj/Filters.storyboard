@@ -36,19 +36,12 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr4-Zd-dnG">
-                                                    <rect key="frame" x="0.0" y="135" width="414" height="0.5"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="zK1-Dz-zFz"/>
-                                                    </constraints>
-                                                </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safari" translatesAutoresizingMaskIntoConstraints="NO" id="rFj-gs-pCq">
-                                                    <rect key="frame" x="187" y="20" width="40" height="40"/>
+                                                    <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="bNp-Kn-77j"/>
-                                                        <constraint firstAttribute="width" constant="40" id="f8g-2b-5Po"/>
+                                                        <constraint firstAttribute="height" constant="48" id="bNp-Kn-77j"/>
+                                                        <constraint firstAttribute="width" constant="48" id="f8g-2b-5Po"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-a0-8YE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -62,17 +55,14 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hr4-Zd-dnG" firstAttribute="top" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="20" id="D6k-By-1vX"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="6WB-a0-8YE" secondAttribute="bottom" constant="12" id="EXC-7v-CiL"/>
                                                 <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
-                                                <constraint firstAttribute="bottom" secondItem="Hr4-Zd-dnG" secondAttribute="bottom" id="OKH-R2-ihh"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
                                                 <constraint firstItem="6WB-a0-8YE" firstAttribute="top" secondItem="rFj-gs-pCq" secondAttribute="bottom" constant="16" id="TID-qP-dkn"/>
                                                 <constraint firstItem="6WB-a0-8YE" firstAttribute="centerX" secondItem="1gT-I7-liG" secondAttribute="centerX" id="WQd-Ei-UIu"/>
                                                 <constraint firstItem="rFj-gs-pCq" firstAttribute="centerX" secondItem="1gT-I7-liG" secondAttribute="centerX" id="Z3I-Tv-cO5"/>
-                                                <constraint firstAttribute="trailing" secondItem="Hr4-Zd-dnG" secondAttribute="trailing" id="kgR-jJ-SJo"/>
-                                                <constraint firstItem="Hr4-Zd-dnG" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" id="pic-II-VAP"/>
-                                                <constraint firstItem="rFj-gs-pCq" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="20" id="ysr-fo-Rh9"/>
+                                                <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="16" id="ghi-gC-FJb"/>
+                                                <constraint firstItem="rFj-gs-pCq" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="8" id="ysr-fo-Rh9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -301,7 +291,6 @@
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
                         <outlet property="safariIcon" destination="rFj-gs-pCq" id="Oih-Wc-JNO"/>
                         <outlet property="safariProtectionStateLabel" destination="8zX-PY-5pt" id="Guq-xi-sgj"/>
-                        <outlet property="topSeparator" destination="Hr4-Zd-dnG" id="wzk-fp-yBW"/>
                         <outlet property="userFilterStateLabel" destination="uVg-Gj-40a" id="k23-YF-rGL"/>
                         <outlet property="whitelistLabel" destination="f3z-Yh-zY2" id="0rh-cw-y5t"/>
                         <outletCollection property="themableLabels" destination="QHZ-sJ-wTL" collectionClass="NSMutableArray" id="LU2-A3-0gX"/>

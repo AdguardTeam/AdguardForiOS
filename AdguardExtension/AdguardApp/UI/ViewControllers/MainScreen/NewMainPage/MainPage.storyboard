@@ -2043,10 +2043,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="width" secondItem="7ml-j3-jSR" secondAttribute="width" multiplier="0.4" id="2Dg-OA-wr7"/>
-                            <constraint firstItem="RpI-S3-amL" firstAttribute="trailing" secondItem="xRH-1C-tC0" secondAttribute="trailing" constant="48" id="Azl-6b-gHO"/>
                             <constraint firstItem="RpI-S3-amL" firstAttribute="trailing" secondItem="xRH-1C-tC0" secondAttribute="trailing" constant="48" id="Etg-uU-kOO"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerX" secondItem="RpI-S3-amL" secondAttribute="centerX" id="TH1-jZ-Wgr"/>
-                            <constraint firstItem="xRH-1C-tC0" firstAttribute="leading" secondItem="RpI-S3-amL" secondAttribute="leading" constant="48" id="f84-EB-Ldx"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerY" secondItem="RpI-S3-amL" secondAttribute="centerY" id="nXN-0h-clU"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="leading" secondItem="RpI-S3-amL" secondAttribute="leading" constant="48" id="qtK-16-RG4"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="width" secondItem="7ml-j3-jSR" secondAttribute="width" multiplier="0.768116" id="tde-Vq-plh"/>
@@ -2054,19 +2052,15 @@
                         <viewLayoutGuide key="safeArea" id="RpI-S3-amL"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Azl-6b-gHO"/>
                                 <exclude reference="Etg-uU-kOO"/>
                                 <exclude reference="2Dg-OA-wr7"/>
                                 <exclude reference="TH1-jZ-Wgr"/>
-                                <exclude reference="f84-EB-Ldx"/>
                                 <exclude reference="qtK-16-RG4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="Azl-6b-gHO"/>
                                 <include reference="Etg-uU-kOO"/>
-                                <include reference="f84-EB-Ldx"/>
                                 <include reference="qtK-16-RG4"/>
                             </mask>
                         </variation>
@@ -2135,6 +2129,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qo1-ti-O1I"/>
+        <segue reference="v5x-rc-dxn"/>
     </inferredMetricsTieBreakers>
 </document>

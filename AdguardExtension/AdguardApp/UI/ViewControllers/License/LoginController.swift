@@ -78,7 +78,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         navigationController?.navigationBar.isTranslucent = true
         
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: OperationQueue.main)
+                                                                      object: nil, queue: nil)
         { [weak self](notification) in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -111,10 +111,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBAction func editingChanged(_ sender: Any) {
         updateLoginButton()
-    }
-    
-    @IBAction func registerAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: "registration", from: "login")
     }
     
     @IBAction func recoverAction(_ sender: Any) {
@@ -192,15 +188,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
-        loginButton.stopIndicator()
-        loginButton.isEnabled = true
-        
-        // skip notification if this controler is not placed on top of navigation stack
-        if self.navigationController?.viewControllers.last != self {
-            return
-        }
         
         DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            // skip notification if this controler is not placed on top of navigation stack
+            if self.navigationController?.viewControllers.last != self {
+                return
+            }
+            
+            self.loginButton.stopIndicator()
+            self.loginButton.isEnabled = true
             
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
@@ -208,13 +206,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
             switch type {
                 
             case PurchaseService.kPSNotificationLoginSuccess:
-                self?.loginSuccess()
+                self.loginSuccess()
             case PurchaseService.kPSNotificationLoginFailure:
-                self?.loginFailure(error)
+                self.loginFailure(error)
             case PurchaseService.kPSNotificationLoginPremiumExpired:
-                self?.premiumExpired()
+                self.premiumExpired()
             case PurchaseService.kPSNotificationLoginNotPremiumAccount:
-                self?.notPremium()
+                self.notPremium()
                 
             default:
                 break
