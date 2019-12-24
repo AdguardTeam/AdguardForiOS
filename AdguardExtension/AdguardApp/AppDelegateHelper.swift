@@ -88,6 +88,7 @@ class AppDelegateHelper: NSObject {
         if (firstRun) {
             AESProductSchemaManager.install()
             purchaseService.checkLicenseStatus()
+            firstRun = false
         } else {
             AESProductSchemaManager.upgrade(withAntibanner: antibanner)
         }

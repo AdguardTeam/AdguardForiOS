@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate {
 
     // MARK: - Nav bar elements
     
@@ -86,7 +86,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Variables
     
-    private var getProSegueId = "getProSegue"
+    private let getProSegueId = "getProSegue"
+    private let showOnboardingSegueId = "showOnboardingSegue"
+    private let videoTutorialSegueId = "videoTutorialSegue"
+    
     private var proStatus: Bool {
         return configuration.proStatus
     }
@@ -153,6 +156,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         checkProtectionStates()
     }
 
+    private var onb = 0
+    override func viewDidAppear(_ animated: Bool) {
+        if !(resources.sharedDefaults().bool(forKey: OnboardingShowed)) {
+            showOnboarding()
+            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
+        }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -168,6 +178,22 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return theme.statusbarStyle()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showOnboardingSegueId {
+            if let controller = segue.destination as? OnboardingController {
+                controller.delegate = self
+            }
+        }
+        if segue.identifier == videoTutorialSegueId {
+            if let controller = segue.destination as? AEUIPlayerViewController {
+                controller.completionBlock = { [weak self] in
+                    guard let self = self else { return }
+                    self.performSegue(withIdentifier: self.showOnboardingSegueId, sender: self)
+                }
+            }
+        }
     }
     
     // MARK: - Actions
@@ -248,6 +274,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     @IBAction func fixItTapped(_ sender: UIButton) {
+        showOnboarding()
     }
     
     // MARK: - Observing Values from User Defaults
@@ -319,6 +346,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         return CustomAnimatedTransitioning()
     }
     
+    // MARK: - OnboardingViewController delegate
+    
+    func showVideoAction(sender: UIViewController) {
+        sender.dismiss(animated: true) {
+            self.performSegue(withIdentifier: self.videoTutorialSegueId, sender: self)
+        }
+    }
     
     // MARK: - Private methods
     
@@ -626,5 +660,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             contentBlockerViewIpad.center = CGPoint(x: gestureViewX + x, y: gestureViewY + y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
         }
+    }
+    
+    private func showOnboarding() {
+        performSegue(withIdentifier: showOnboardingSegueId, sender: self)
     }
 }

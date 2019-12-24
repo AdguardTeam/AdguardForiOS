@@ -27,6 +27,30 @@ extension NSMutableAttributedString {
         let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.paragraphStyle: paragraph]
         self.addAttributes(attributes, range: NSRange(location: 0, length: length))
     }
+    
+    static func fromHtml(_ html: String, fontSize: Int, color: UIColor, attachmentImage: UIImage?)->NSMutableAttributedString? {
+        
+        let format = NSMutableString(string: html)
+        let wrapped = "<span style=\"font-family: -apple-system; font-size: 16; color: \(color.hex())\">\(format)</span>"
+        guard let htmlData = wrapped.data(using: .utf8) else { return nil}
+        
+        guard let resultText = try? NSMutableAttributedString(data: htmlData, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return nil }
+        
+        if attachmentImage != nil {
+            
+            let imageRange = resultText.mutableString.range(of: "%@")
+            resultText.replaceCharacters(in: imageRange, with: "")
+            
+            let attachment = NSTextAttachment()
+            attachment.image = attachmentImage
+            attachment.bounds = CGRect(x: 0, y: 5, width: Double(attachmentImage!.cgImage!.width) / 2.5, height: Double(attachmentImage!.cgImage!.height) / 2.5)
+            
+            let attachmentString = NSAttributedString(attachment: attachment)
+            resultText.insert(attachmentString, at: imageRange.location)
+        }
+                
+        return resultText
+    }
 }
 
 extension String {

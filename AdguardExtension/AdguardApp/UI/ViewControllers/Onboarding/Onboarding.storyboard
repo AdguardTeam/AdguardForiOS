@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eQY-Hl-hIc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding-->
+        <scene sceneID="eKz-TR-MzL">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingController" id="eQY-Hl-hIc" userLabel="Onboarding" customClass="OnboardingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VQc-D7-UHv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZz-Bd-J8m">
+                                <rect key="frame" x="77" y="318.5" width="260" height="153"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use AdGuard in Safari follow a few easy steps:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-MB-LHu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsx-Ce-cc8" userLabel="Settings Label" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="83" width="260" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL3-U7-vA8" userLabel="Safari Label" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="118" width="260" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyJ-Xh-OdS" userLabel="Switch Label" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="153" width="260" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="eyJ-Xh-OdS" secondAttribute="bottom" id="4Nh-6P-G9M"/>
+                                    <constraint firstAttribute="trailing" secondItem="eyJ-Xh-OdS" secondAttribute="trailing" id="8bL-qT-IHs"/>
+                                    <constraint firstItem="QL3-U7-vA8" firstAttribute="top" secondItem="tsx-Ce-cc8" secondAttribute="bottom" constant="35" id="AFG-Za-rxw"/>
+                                    <constraint firstItem="eyJ-Xh-OdS" firstAttribute="leading" secondItem="mZz-Bd-J8m" secondAttribute="leading" id="EPG-hH-N1T"/>
+                                    <constraint firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" id="Kxy-xB-dKS"/>
+                                    <constraint firstItem="QL3-U7-vA8" firstAttribute="leading" secondItem="mZz-Bd-J8m" secondAttribute="leading" id="LVq-vC-L6l"/>
+                                    <constraint firstItem="tsx-Ce-cc8" firstAttribute="top" secondItem="F7O-MB-LHu" secondAttribute="bottom" constant="35" id="OFm-BG-3cb"/>
+                                    <constraint firstAttribute="width" constant="260" id="VJv-dc-IFd"/>
+                                    <constraint firstItem="F7O-MB-LHu" firstAttribute="top" secondItem="mZz-Bd-J8m" secondAttribute="top" id="dA1-Wg-KJa"/>
+                                    <constraint firstItem="tsx-Ce-cc8" firstAttribute="leading" secondItem="mZz-Bd-J8m" secondAttribute="leading" id="sz7-1G-agn"/>
+                                    <constraint firstItem="F7O-MB-LHu" firstAttribute="leading" secondItem="mZz-Bd-J8m" secondAttribute="leading" id="v6a-X6-gwy"/>
+                                    <constraint firstAttribute="trailing" secondItem="QL3-U7-vA8" secondAttribute="trailing" id="vn7-Yz-4BZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="tsx-Ce-cc8" secondAttribute="trailing" id="ylE-P4-gTN"/>
+                                    <constraint firstItem="eyJ-Xh-OdS" firstAttribute="top" secondItem="QL3-U7-vA8" secondAttribute="bottom" constant="35" id="ypO-BL-WCN"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-B8-UIZ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="107" y="516.5" width="200" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="BCW-0s-i4l"/>
+                                    <constraint firstAttribute="height" constant="48" id="oVb-1p-g0o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="WATCH VIDEO MANUAL">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="videoAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="f9m-K2-Ud4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fd3-xK-PyV" userLabel="Close Button">
+                                <rect key="frame" x="361" y="23" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1WR-fo-VGZ"/>
+                                    <constraint firstAttribute="height" constant="40" id="b63-A0-agN"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="wOx-y6-MFr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="centerX" secondItem="VQc-D7-UHv" secondAttribute="centerX" id="3Tn-ra-smk"/>
+                            <constraint firstItem="fd3-xK-PyV" firstAttribute="top" secondItem="VQc-D7-UHv" secondAttribute="top" constant="23" id="6GS-jI-He5"/>
+                            <constraint firstItem="mZz-Bd-J8m" firstAttribute="centerX" secondItem="VQc-D7-UHv" secondAttribute="centerX" id="6yD-ec-ccy"/>
+                            <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="fd3-xK-PyV" secondAttribute="trailing" constant="13" id="coZ-mN-8a6"/>
+                            <constraint firstItem="mZz-Bd-J8m" firstAttribute="centerY" secondItem="VQc-D7-UHv" secondAttribute="centerY" constant="-53" id="m3K-bZ-s3x"/>
+                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="top" secondItem="mZz-Bd-J8m" secondAttribute="bottom" constant="45" id="sb0-g9-X2l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sqA-SS-pYR"/>
+                    </view>
+                    <connections>
+                        <outlet property="safariLabel" destination="QL3-U7-vA8" id="i53-1Y-aRK"/>
+                        <outlet property="settingsLabel" destination="tsx-Ce-cc8" id="oSv-VA-ASX"/>
+                        <outlet property="switchLabel" destination="eyJ-Xh-OdS" id="SUU-NP-2XH"/>
+                        <outlet property="videoButton" destination="3ju-B8-UIZ" id="iEV-8q-6Mi"/>
+                        <outletCollection property="themableLabels" destination="F7O-MB-LHu" collectionClass="NSMutableArray" id="eIt-3Z-pZR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlg-8H-TFe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="48" y="82"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cross" width="24" height="24"/>
+    </resources>
+</document>
