@@ -66,11 +66,11 @@ class OnboardingController: UIViewController {
     // MARK: - private methods
     
     func setupLabels() {
-        settingsLabel.attributedText = NSMutableAttributedString.fromHtml("1. Open the %@ <b>settings</b>", fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "settings"))
+        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "settings"))
         
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml("2. Tap on %@ <b>Safari</b> and chose the <b>\"Content blockers\"</b> menu item", fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "safari_onboarding"))
+        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "safari_onboarding"))
         
-        switchLabel.attributedText = NSMutableAttributedString.fromHtml("3. <b>Switch on %@ all of content blockers</b> and come back to our app!", fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "switch"))   
+        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "switch"))   
     }
     
     func updateTheme() {

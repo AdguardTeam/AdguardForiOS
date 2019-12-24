@@ -627,3 +627,12 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "removed from the Blacklist";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "1. Open the %@ <b>settings</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "2. Tap on %@ <b>Safari</b> and chose the <b>\"Content blockers\"</b> menu item";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "3. <b>Switch on %@ all of content blockers</b> and come back to our app!";

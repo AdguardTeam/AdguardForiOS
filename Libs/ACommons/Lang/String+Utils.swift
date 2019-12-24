@@ -43,7 +43,7 @@ extension NSMutableAttributedString {
             
             let attachment = NSTextAttachment()
             attachment.image = attachmentImage
-            attachment.bounds = CGRect(x: 0, y: 5, width: Double(attachmentImage!.cgImage!.width) / 2.5, height: Double(attachmentImage!.cgImage!.height) / 2.5)
+            attachment.bounds = CGRect(x: 0, y: -5, width: Double(attachmentImage!.cgImage!.width) / 2.5, height: Double(attachmentImage!.cgImage!.height) / 2.5)
             
             let attachmentString = NSAttributedString(attachment: attachment)
             resultText.insert(attachmentString, at: imageRange.location)
