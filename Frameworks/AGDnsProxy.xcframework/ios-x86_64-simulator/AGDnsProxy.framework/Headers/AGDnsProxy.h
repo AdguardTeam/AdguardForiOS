@@ -61,7 +61,7 @@ typedef void (^logCallback)(const char *msg, int length);
  * Default upstream timeout in milliseconds. Also used as a timeout for bootstrap DNS requests.
  * timeout = 0 means infinite timeout.
  */
-@property(nonatomic, readonly) NSInteger timeout;
+@property(nonatomic, readonly) NSInteger timeoutMs;
 /**
  * Resolver's IP address. In the case if it's specified,
  * bootstrap DNS servers won't be used at all.
@@ -70,7 +70,7 @@ typedef void (^logCallback)(const char *msg, int length);
 
 - (instancetype) initWithAddress: (NSString *) address
         bootstrap: (NSArray<NSString *> *) bootstrap
-        timeout: (NSInteger) timeout
+        timeoutMs: (NSInteger) timeoutMs
         serverIp: (NSData *) serverIp;
 @end
 
@@ -89,11 +89,11 @@ typedef void (^logCallback)(const char *msg, int length);
 /**
  * How long to wait before a dns64 prefixes discovery attempt, in milliseconds
  */
-@property(nonatomic, readonly) NSInteger waitTime;
+@property(nonatomic, readonly) NSInteger waitTimeMs;
 
 - (instancetype) initWithUpstream: (AGDnsUpstream *) upstream
             maxTries: (NSInteger) maxTries
-            waitTime: (NSInteger) waitTime;
+            waitTimeMs: (NSInteger) waitTimeMs;
 
 @end
 
@@ -122,13 +122,13 @@ typedef void (^logCallback)(const char *msg, int length);
 /**
  * Close the TCP connection this long after the last request received, in milliseconds
  */
-@property(nonatomic, readonly) NSInteger idleTimeout;
+@property(nonatomic, readonly) NSInteger idleTimeoutMs;
 
 - (instancetype) initWithAddress: (NSString *) address
                             port: (NSInteger) port
                            proto: (AGListenerProtocol) proto
                       persistent: (BOOL) persistent
-                     idleTimeout: (NSInteger) idleTimeout;
+                   idleTimeoutMs: (NSInteger) idleTimeoutMs;
 
 @end
 
@@ -144,7 +144,7 @@ typedef void (^logCallback)(const char *msg, int length);
 /**
  * TTL of the record for the blocked domains (in seconds)
  */
-@property(nonatomic, readonly) NSInteger blockedResponseTtl;
+@property(nonatomic, readonly) NSInteger blockedResponseTtlSecs;
 /**
  * DNS64 settings. If nil, DNS64 is disabled
  */
@@ -153,12 +153,22 @@ typedef void (^logCallback)(const char *msg, int length);
  * List of addresses/ports/protocols/etc... to listen on
  */
 @property(nonatomic, readonly) NSArray<AGListenerSettings *> *listeners;
+/**
+ * If false, bootstrappers will fetch only A records.
+ */
+@property(nonatomic, readonly) BOOL ipv6Available;
+/**
+ * Block AAAA requests.
+ */
+@property(nonatomic, readonly) BOOL blockIpv6;
 
 - (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
         filters: (NSDictionary<NSNumber *,NSString *> *) filters
-        blockedResponseTtl: (NSInteger) blockedResponseTtl
+        blockedResponseTtlSecs: (NSInteger) blockedResponseTtlSecs
         dns64Settings: (AGDns64Settings *) dns64Settings
-        listeners: (NSArray<AGListenerSettings *> *) listeners;
+        listeners: (NSArray<AGListenerSettings *> *) listeners
+        ipv6Available: (BOOL) ipv6Available
+        blockIpv6: (BOOL) blockIpv6;
 
 /**
  * @brief Get default DNS proxy settings
@@ -184,4 +194,11 @@ typedef void (^logCallback)(const char *msg, int length);
  * @return Response packet payload
  */
 - (NSData *) handlePacket: (NSData *) packet;
+
+/**
+* Check if string is a valid rule
+* @param str string to check
+* @return true if string is a valid rule, false otherwise
+*/
++ (BOOL) isValidRule: (NSString *) str;
 @end

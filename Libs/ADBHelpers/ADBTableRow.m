@@ -142,7 +142,9 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                 // sets nil value
                 if (!obj || obj == [NSNull null]) {
                     
-                    [self setValue:nil forKey:key];
+                    if([self respondsToSelector:@selector(key)]) {
+                        [self setValue:nil forKey:key];
+                    }
                     return;
                 }
                 
@@ -169,11 +171,13 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                 else{
                     
                     //standant mapping
-                    @try {
-                        [self setValue:obj forKey:key];
-                    }
-                    @catch (NSException *exception) {
-                        
+                    if([self respondsToSelector:@selector(key)]) {
+                        @try {
+                            [self setValue:obj forKey:key];
+                        }
+                        @catch (NSException *exception) {
+                            
+                        }
                     }
                 }
             }];

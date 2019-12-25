@@ -709,6 +709,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
     
     BOOL ipv4Available = [ACNIPUtils isIpv4Available];
+    BOOL ipv6Available = [ACNIPUtils isIpv6Available];
     NSString* filtersJson = [[[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil] filtersJson];
 
     int queues = DOH_DOT_PROXY_MAX_QUEUES;
@@ -722,7 +723,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
     }
     
-    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues];
+    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues ipv6Available:ipv6Available];
 }
 
 -(NSString *)getCurrentWifiName {

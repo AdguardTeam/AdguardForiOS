@@ -30,11 +30,22 @@ struct DnsLogRecordCategory{
 class DnsLogRecordExtended {
     let logRecord: DnsLogRecord
     let category: DnsLogRecordCategory
+    let dnsFiltersService: DnsFiltersServiceProtocol
     
-    init(record: DnsLogRecord, category: DnsLogRecordCategory) {
+    init(record: DnsLogRecord, category: DnsLogRecordCategory, dnsFiltersService: DnsFiltersServiceProtocol) {
         self.logRecord = record
         self.category = category
+        self.dnsFiltersService = dnsFiltersService
     }
+    
+    lazy var matchedFilters: String? = {
+        let allFilters = dnsFiltersService.filters
+        let filterNames = self.logRecord.matchedFilterIds?.map { (filterId) -> String in
+            let filter = allFilters.first { (filter) in filter.id == 0 }
+            return filter?.name ?? ""
+        }
+        return filterNames?.joined(separator: "\n") ?? nil
+    }()
 }
 
 // this extension adds ui features to data type
@@ -179,7 +190,9 @@ class DnsRequestLogViewModel {
         allRecords = [DnsLogRecordExtended]()
         
         for logRecord in logRecords.reversed() {
-            let info = dnsTrackerService.getTrackerInfo(by: logRecord.domain)
+            
+            let trimmed = logRecord.domain.hasSuffix(".") ? String(logRecord.domain.dropLast()) : logRecord.domain
+            let info = dnsTrackerService.getTrackerInfo(by: trimmed)
             
             var categoryName: String? = nil
             if let categoryKey = info?.categoryKey {
@@ -188,7 +201,7 @@ class DnsRequestLogViewModel {
             
             let category = DnsLogRecordCategory(category: categoryName, name: info?.name, isTracked: info?.isTracked, company: info?.company)
             
-            let record = DnsLogRecordExtended(record: logRecord, category: category)
+            let record = DnsLogRecordExtended(record: logRecord, category: category, dnsFiltersService: dnsFiltersService)
             allRecords.append(record)
         }
         
@@ -201,6 +214,4 @@ class DnsRequestLogViewModel {
         searchRecords = []
         delegate?.requestsCleared()
     }
-    
-    
 }
