@@ -31,10 +31,19 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Nav bar elements
     
-    @IBOutlet weak var adguardTitleLabel: ThemableLabel!
-    @IBOutlet weak var refreshButton: UIButton!
-    
-    
+    @IBOutlet weak var updateButton: UIBarButtonItem! {
+        didSet{
+            let icon = UIImage(named: "refresh-icon")
+            let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
+            let tintColor = UIColor(hexString: "#67b279")
+            iconButton = UIButton(frame: iconSize)
+            iconButton?.setBackgroundImage(icon, for: .normal)
+            iconButton?.tintColor = tintColor
+            updateButton.customView = iconButton
+            iconButton?.addTarget(self, action: #selector(updateFilters(_:)), for: .touchUpInside)
+        }
+    }
+
     // MARK: - Protection status elements
     
     @IBOutlet weak var safariProtectionButton: RoundRectButton!
@@ -95,6 +104,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Variables
     
+    private var iconButton: UIButton? = nil
+    private var complexText = ""
     private let getProSegueId = "getProSegue"
     private let showOnboardingSegueId = "showOnboardingSegue"
     private let videoTutorialSegueId = "videoTutorialSegue"
@@ -135,13 +146,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         mainPageModel = MainPageModel(antibanner: antibanner)
         
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        
         addObservers()
         chooseRequest()
         changeProtectionStatusLabel()
         observeContentBlockersState()
-        setupBackButton()
     
         chartModel.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
@@ -163,8 +171,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
+
         vpnService.notifier = self
         complexProtection.delegate = self
         updateTheme()
@@ -176,7 +183,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
         }
@@ -211,7 +217,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Nav Bar Actions
     
-    @IBAction func updateFiltersAction(_ sender: UIButton) {
+    @objc private func updateFilters(_ sender: Any) {
         mainPageModel?.updateFilters(start: {
             DispatchQueue.main.async { [weak self] in
                 self?.updateStarted()
@@ -229,7 +235,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             }
         })
     }
-    
     
     // MARK: - Protection Status Actions
     
@@ -446,7 +451,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     private func changeProtectionStatusLabel(){
-        protectionStatusLabel.text = "Something is written here"
+        protectionStatusLabel.text = complexText
     }
     
     /**
@@ -521,8 +526,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Starts to rotate refresh button
      */
     private func updateStarted(){
-        refreshButton.isUserInteractionEnabled = false
-        refreshButton.rotateImage(isNedeed: true)
+        iconButton?.isUserInteractionEnabled = false
+        updateButton.customView?.rotateImage(isNedeed: true)
     }
     
     /**
@@ -530,8 +535,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      */
     private func updateEnded(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {[weak self] in
-            self?.refreshButton.isUserInteractionEnabled = true
-            self?.refreshButton.rotateImage(isNedeed: false)
+            self?.iconButton?.isUserInteractionEnabled = true
+            self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.changeProtectionStatusLabel()
         })
     }
@@ -569,18 +574,16 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                 let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
                 self.protectionStateLabel.text = enabledText
                 
-                var complexText = ""
-                
                 if safariEnabled && systemEnabled {
-                    complexText = ACLocalizedString("complex_enabled", nil)
+                    self.complexText = ACLocalizedString("complex_enabled", nil)
                 } else if !complexEnabled{
-                    complexText = ACLocalizedString("complex_disabled", nil)
+                    self.complexText = ACLocalizedString("complex_disabled", nil)
                 } else if safariEnabled {
-                    complexText = ACLocalizedString("safari_enabled", nil)
+                    self.complexText = ACLocalizedString("safari_enabled", nil)
                 } else if systemEnabled {
-                    complexText = ACLocalizedString("system_enabled", nil)
+                    self.complexText = ACLocalizedString("system_enabled", nil)
                 }
-                self.protectionStatusLabel.text = complexText
+                self.protectionStatusLabel.text = self.complexText
                 
                 self.activityIndicator.stopAnimating()
             }

@@ -26,7 +26,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var middleButton: UIButton!
     @IBOutlet weak var bottomBar: UIView!
-    @IBOutlet weak var bottomBarSeparator: UIView!
     @IBOutlet weak var rightButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -92,7 +91,8 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         
         setupBackButton(with: #selector(self.backButtonPressed(sender:)))
     
-        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view)
+        let tabBar = tabBarController?.tabBar
+        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view, tabBar: tabBar)
         
         title = model?.title
         navigationItem.rightBarButtonItems = [searchButton]
@@ -176,7 +176,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         bottomBar.backgroundColor = theme.bottomBarBackgroundColor
-        bottomBarSeparator.backgroundColor = theme.separatorColor
         changeState()
     }
     

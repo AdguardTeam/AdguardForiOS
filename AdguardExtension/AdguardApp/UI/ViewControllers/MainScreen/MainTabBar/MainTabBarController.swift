@@ -86,13 +86,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func createSelectionIndicator() {
-        var bottomInset: CGFloat = 0.0
-        
-        if #available(iOS 11.0, *) {
-            bottomInset = tabBar.safeAreaInsets.bottom
-        }
-        
-        if bottomView != nil || bottomInset != 0.0 {
+        if bottomView != nil {
             return
         }
         
@@ -116,6 +110,17 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func resizeIndicator(){
+        var bottomInset: CGFloat = 0.0
+        
+        if #available(iOS 11.0, *) {
+            bottomInset = tabBar.safeAreaInsets.bottom
+        }
+        
+        if bottomInset != 0.0 {
+            bottomView?.isHidden = true
+            return
+        }
+        
         let numberOfItems = CGFloat(tabBar.items!.count)
         let width: CGFloat = tabBar.frame.width / numberOfItems
         let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: bottomLineHeight)
