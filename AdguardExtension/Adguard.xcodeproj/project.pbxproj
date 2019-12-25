@@ -1169,6 +1169,8 @@
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
 		D09C9D8B21F5FFD400F3D988 /* DnsLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */; };
+		D09CB60323ABB5E7008C9FF7 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D09CB60223ABB5E7008C9FF7 /* Onboarding.storyboard */; };
+		D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
@@ -2150,6 +2152,8 @@
 		D099DAF3228D816C007987F8 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D099DAF4228D816E007987F8 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogController.swift; sourceTree = "<group>"; };
+		D09CB60223ABB5E7008C9FF7 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
@@ -3574,6 +3578,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		D09CB60123ABB5BF008C9FF7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D09CB60223ABB5E7008C9FF7 /* Onboarding.storyboard */,
+				D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		D0B038391FB4877C00A5EA3F /* CsvParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -3757,6 +3770,7 @@
 				D0EDE45022A927EC00086C00 /* License */,
 				D0EDE45122A9284800086C00 /* MainMenu */,
 				D0EDE45222A9285A00086C00 /* MainScreen */,
+				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
 				D0EDE45322A9287600086C00 /* Settings */,
 				D0EDE45422A9288E00086C00 /* Tutorial */,
 				D0EDE45522A928C100086C00 /* ListOfRules */,
@@ -4600,6 +4614,7 @@
 				7E74FCAA239F9BD1006C0990 /* MainPage.storyboard in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
+				D09CB60323ABB5E7008C9FF7 /* Onboarding.storyboard in Resources */,
 				D0CDD56C2344EAA3000584EF /* dns_filter.txt in Resources */,
 				D005096B2201DA2F006BC10C /* providers.json in Resources */,
 				7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */,
@@ -5580,6 +5595,7 @@
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D031A163219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D8D921412D4D00ECDE6D /* ContentBlockerService.swift in Sources */,
+				D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				7E5EA7AC239A38BC00A07DE0 /* VpnService.swift in Sources */,
 				D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */,

@@ -74,20 +74,37 @@ class AppDelegateHelper: NSObject {
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
+        guard let mainTabBar = getMainTabController() else {
+            assertionFailure("there is no MainTabBar")
+            return
+        }
+        
+        guard let firstPageNavController = mainTabBar.viewControllers?.first as? MainNavigationController else {
+            assertionFailure("there is no navigation controller on first page")
+            return
+        }
+        
+        guard let mainPage = firstPageNavController.viewControllers.first as? MainPageController else {
+            assertionFailure("there is no MainPageController on first page")
+            return
+        }
+        
+        mainPage.onReady = { [weak self] in
+            // request permission for user notifications posting
+            self?.userNotificationService.requestPermissions()
+        }
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         antibannerController.start()
         
-        // request permission for user notifications posting
-        userNotificationService.requestPermissions()
-        
         addPurchaseStatusObserver()
         
         if (firstRun) {
             AESProductSchemaManager.install()
             purchaseService.checkLicenseStatus()
+            firstRun = false
         } else {
             AESProductSchemaManager.upgrade(withAntibanner: antibanner)
         }
@@ -184,8 +201,10 @@ class AppDelegateHelper: NSObject {
             
             DispatchQueue.main.async { [weak self] in
                 self?.appDelegate.window.rootViewController?.dismiss(animated: true) {
-                    let nav = self?.getNavigationController()
-                    nav?.popToRootViewController(animated: true)
+                    let tabController = self?.getMainTabController()
+                    let navController = tabController?.viewControllers?.first as? MainNavigationController
+                    tabController?.selectedViewController = navController
+                    navController?.popToRootViewController(animated: true)
                 }
             }
         }
@@ -193,8 +212,8 @@ class AppDelegateHelper: NSObject {
     
     // MARK: - private methods
     
-    private func getNavigationController()->UINavigationController? {
-        return appDelegate.window.rootViewController as? UINavigationController
+    private func getMainTabController()->MainTabBarController? {
+        return appDelegate.window.rootViewController as? MainTabBarController
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -205,100 +224,102 @@ class AppDelegateHelper: NSObject {
         https://github.com/AdguardTeam/AdguardForiOS/issues/1135
         */
         
-        let command = url.host
+        // todo: make app commands work in a new navigation flow
         
-        guard let nav = self.getNavigationController() else {
-            DDLogError("(AppDeegate) application open url error. There is no nav controller")
-            return false
-        }
-        
-        if nav.viewControllers.count == 0 {
-            return false
-        }
-        
-        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
-        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
-            appDelegate.window.rootViewController = launchScreenController
-        }
-     
-        if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
-            antibannerController.onReady { (antibanner) in
-                DispatchQueue.main.async {
-                        
-                    let path = String(url.path.suffix(url.path.count - 1))
-                    
-                    let main = nav.viewControllers[0]
-                    if main.isKind(of: MainController.self) {
-                        let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
-                        let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
-                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
-                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
-                        
-                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService)
-                        
-                        userFilterController.model = model
-                        userFilterController.newRuleText = path
-                        
-                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
-                        
-                        nav.viewControllers = [main, menuController, safariProtectionController, userFilterController]
-                        
-                        main.loadViewIfNeeded()
-                        menuController.loadViewIfNeeded()
-                        safariProtectionController.loadViewIfNeeded()
-                        userFilterController.loadViewIfNeeded()
-                        
-                        self.appDelegate.window.rootViewController = nav
-                    }
-                    else{
-                        DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
-                    }
-                }
-            }
-            return true
-        }
-        
-        if url.scheme == AE_URLSCHEME && command == openSystemProtection {
-            let enabledString = String(url.path.suffix(url.path.count - 1))
-            let enabled = enabledString == "on"
-            
-            let main = nav.viewControllers[0]
-            if main.isKind(of: MainController.self) {
-                let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
-                let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
-                
-                let proStatus = configuration.proStatus
-        
-                if proStatus {
-                    let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
-                    guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
-            
-                    dnsSettingsController.stateFromWidget = enabled
-                    
-                    let proViewControllers = [main, menuController, dnsSettingsController]
-                    nav.viewControllers = proViewControllers
-                    
-                    main.loadViewIfNeeded()
-                    menuController.loadViewIfNeeded()
-                    dnsSettingsController.loadViewIfNeeded()
-                } else {
-                    let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
-                    guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
-                    
-                    let toPurchaseViewControllers = [main, getProController]
-                    nav.viewControllers = toPurchaseViewControllers
-                    
-                    main.loadViewIfNeeded()
-                    getProController.loadViewIfNeeded()
-                }
-                
-                self.appDelegate.window.rootViewController = nav
-            } else{
-                DDLogError("(AppDelegate) Can't open systemProtection because mainController is not found.")
-            }
-        }
+//        let command = url.host
+//
+//        guard let nav = self.getNavigationController() else {
+//            DDLogError("(AppDeegate) application open url error. There is no nav controller")
+//            return false
+//        }
+//
+//        if nav.viewControllers.count == 0 {
+//            return false
+//        }
+//
+//        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+//        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
+//        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
+//            appDelegate.window.rootViewController = launchScreenController
+//        }
+//
+//        if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
+//            antibannerController.onReady { (antibanner) in
+//                DispatchQueue.main.async {
+//
+//                    let path = String(url.path.suffix(url.path.count - 1))
+//
+//                    let main = nav.viewControllers[0]
+//                    if main.isKind(of: MainController.self) {
+//                        let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
+//                        let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
+//                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
+//                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
+//
+//                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService)
+//
+//                        userFilterController.model = model
+//                        userFilterController.newRuleText = path
+//
+//                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+//                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
+//
+//                        nav.viewControllers = [main, menuController, safariProtectionController, userFilterController]
+//
+//                        main.loadViewIfNeeded()
+//                        menuController.loadViewIfNeeded()
+//                        safariProtectionController.loadViewIfNeeded()
+//                        userFilterController.loadViewIfNeeded()
+//
+//                        self.appDelegate.window.rootViewController = nav
+//                    }
+//                    else{
+//                        DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
+//                    }
+//                }
+//            }
+//            return true
+//        }
+//
+//        if url.scheme == AE_URLSCHEME && command == openSystemProtection {
+//            let enabledString = String(url.path.suffix(url.path.count - 1))
+//            let enabled = enabledString == "on"
+//
+//            let main = nav.viewControllers[0]
+//            if main.isKind(of: MainController.self) {
+//                let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
+//                let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
+//
+//                let proStatus = configuration.proStatus
+//
+//                if proStatus {
+//                    let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+//                    guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
+//
+//                    dnsSettingsController.stateFromWidget = enabled
+//
+//                    let proViewControllers = [main, menuController, dnsSettingsController]
+//                    nav.viewControllers = proViewControllers
+//
+//                    main.loadViewIfNeeded()
+//                    menuController.loadViewIfNeeded()
+//                    dnsSettingsController.loadViewIfNeeded()
+//                } else {
+//                    let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
+//                    guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
+//
+//                    let toPurchaseViewControllers = [main, getProController]
+//                    nav.viewControllers = toPurchaseViewControllers
+//
+//                    main.loadViewIfNeeded()
+//                    getProController.loadViewIfNeeded()
+//                }
+//
+//                self.appDelegate.window.rootViewController = nav
+//            } else{
+//                DDLogError("(AppDelegate) Can't open systemProtection because mainController is not found.")
+//            }
+//        }
         return false
     }
     

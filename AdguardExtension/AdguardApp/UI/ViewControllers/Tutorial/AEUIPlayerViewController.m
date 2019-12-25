@@ -82,6 +82,13 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (_completionBlock) {
+        _completionBlock();
+    }
+}
+
 - (void)hideStatusBar:(BOOL)hide {
 
     if (_statusBarHidden != hide) {
@@ -91,11 +98,8 @@
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
-    
-    if(!parent) { // pop view controller
-        if(self.completionBlock)
-            self.completionBlock();
-    }
+    if(self.completionBlock)
+        self.completionBlock();
 }
 
 - (BOOL)prefersStatusBarHidden {

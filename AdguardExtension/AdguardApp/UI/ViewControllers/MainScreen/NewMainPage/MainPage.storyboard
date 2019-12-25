@@ -656,11 +656,29 @@
                         <outletCollection property="themableLabels" destination="a5U-A8-S8G" collectionClass="NSMutableArray" id="7GB-u4-TcQ"/>
                         <outletCollection property="themableLabels" destination="Kxe-Kt-6aQ" collectionClass="NSMutableArray" id="oFM-tb-aDh"/>
                         <outletCollection property="themableLabels" destination="FcP-gP-TsG" collectionClass="NSMutableArray" id="5aQ-ll-5Bp"/>
+                        <segue destination="t6s-y4-WsD" kind="presentation" identifier="showOnboardingSegue" modalPresentationStyle="fullScreen" id="SIK-gU-Bfj"/>
+                        <segue destination="0hL-sO-ffg" kind="presentation" identifier="videoTutorialSegue" id="Sih-7E-4Rs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bb-EW-EVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940.57971014492762" y="-196.20535714285714"/>
+        </scene>
+        <!--Tutorial-->
+        <scene sceneID="gxO-fz-hUh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tutorial" id="0hL-sO-ffg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PwB-5D-KFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1586" y="-406"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="bKG-ij-XYW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="t6s-y4-WsD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WRc-rS-l2D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1604" y="-328"/>
         </scene>
         <!--Chart Date Type Controller-->
         <scene sceneID="47Z-dA-g5p">

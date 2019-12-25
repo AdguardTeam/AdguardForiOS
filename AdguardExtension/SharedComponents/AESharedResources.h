@@ -272,6 +272,12 @@ extern NSString* _Nonnull SafariProtectionLastState;
  */
 extern NSString* _Nonnull SystemProtectionLastState;
 
+/**
+ User defaults key. It contains bool value, which indicates that onboarding was showed before.
+ default value - false
+ */
+extern NSString* _Nonnull OnboardingShowed;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
