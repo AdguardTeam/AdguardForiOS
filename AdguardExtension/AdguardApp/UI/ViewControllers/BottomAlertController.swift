@@ -23,11 +23,13 @@ class KeyboardMover {
     private weak var constraint: NSLayoutConstraint!
     private weak var view: UIView!
     private var initialValue: CGFloat!
+    private var tabBar: UITabBar?
     
-    init(bottomConstraint: NSLayoutConstraint, view: UIView) {
+    init(bottomConstraint: NSLayoutConstraint, view: UIView, tabBar: UITabBar?) {
         self.constraint = bottomConstraint
         self.view = view
         self.initialValue = bottomConstraint.constant
+        self.tabBar = tabBar
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardNotification(notification:)),
@@ -47,9 +49,10 @@ class KeyboardMover {
             
         let keyboardHeight = keyboardFrame.height
         let stateIsActive = UIApplication.shared.applicationState == .active
+        let tabBarHeight = tabBar?.frame.height ?? 0.0
         
         if belongsToApp && stateIsActive {
-            constraint.constant = keyboardHeight + initialValue
+            constraint.constant = keyboardHeight - tabBarHeight + initialValue
         }
             
         UIView.animate(withDuration: 0.5,
@@ -82,7 +85,8 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         
         makeRoundCorners()
 
-        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view)
+        let tabBar = tabBarController?.tabBar
+        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view, tabBar: tabBar)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
