@@ -52,6 +52,10 @@ class RuleInfo: NSObject {
     private let cssColor = UIColor(hexString: "3A669C")
     private let commentColor = UIColor(hexString: "6D6D6D")
     
+    override var debugDescription: String {
+        return "ruleText: \(rule) \nselected: \(selected) \nenabled: \(enabled)"
+    }
+    
     init(_ rule: String, _ selected: Bool, _ enabled: Bool, _ themeService: ThemeServiceProtocol) {
         self.rule = rule
         self.selected = selected

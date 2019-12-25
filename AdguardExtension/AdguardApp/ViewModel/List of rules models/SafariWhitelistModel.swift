@@ -186,8 +186,8 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         deleteRule(index: index, errorHandler: errorHandler, completionHandler: completionHandler)
     }
     
-    // TODO: - add enable/disable state for rules
     func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) {
+        delegate?.listOfRulesChanged()
         guard let index = allRules.firstIndex(of: rule) else {
             DDLogError("(UserFilterViewModel) change rule failed - rule not found")
             return
