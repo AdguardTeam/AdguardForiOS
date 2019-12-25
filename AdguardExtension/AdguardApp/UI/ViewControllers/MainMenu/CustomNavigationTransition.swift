@@ -73,18 +73,6 @@ class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDel
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if let _ = toVC as? MainPageController {
-            navigationController.setNavigationBarHidden(true, animated: true)
-        }
-
-        if let _ = toVC as? MainMenuController {
-            navigationController.setNavigationBarHidden(false, animated: true)
-        }
-        
-        if let _ = toVC as? GetProController {
-            navigationController.setNavigationBarHidden(false, animated: true)
-        }
-        
         switch operation {
         case .push:
             return CustomNavigationTransitionAnimator(presenting: true)
@@ -92,12 +80,6 @@ class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDel
             return CustomNavigationTransitionAnimator(presenting: false)
         default:
             return nil
-        }
-    }
-    
-    func handleTransitionEnd(navigationController: UINavigationController){
-        if let _ = lastFromVc as? MainMenuController, let _ = lastToVc as? MainController {
-            navigationController.setNavigationBarHidden(false, animated: true)
         }
     }
     

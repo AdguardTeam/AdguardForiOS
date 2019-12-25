@@ -90,9 +90,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         super.viewDidLoad()
     
         updateTheme()
-        updateSafariProtectionInfo()
-        observeProStatus()
-    
+
         themeNotification = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -107,6 +105,9 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateVpnInfo()
+        updateSafariProtectionInfo()
+        observeProStatus()
         vpnService.notifier = self
         updateVpnInfo()
     }
