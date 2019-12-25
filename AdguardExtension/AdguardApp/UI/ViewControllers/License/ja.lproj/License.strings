@@ -35,7 +35,7 @@
 "Rxf-sg-Wfk.normalTitle" = "マイ・アカウントへ行く";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
-"SKX-L4-odW.text" = "フィッシングやその他の脅威をブロック";
+"SKX-L4-odW.text" = "オンライン詐欺、フィッシング、クリプトジャッキングをブロック";
 
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "ログイン";

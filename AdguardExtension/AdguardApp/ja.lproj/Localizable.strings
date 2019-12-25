@@ -50,10 +50,10 @@
 "protection_enabled_caption" = "保護は有効です。";
 
 /* (MainController) login status caption on main screen */
-"protection_partly_enabled_caption" = "コンテンツブロッカーの一部がオフ\nになっています。";
+"protection_partly_enabled_caption" = "端末の設定→Safari→コンテンツ\nブロッカーでAdGuardが一部オフ\nになっています。";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "保護は無効です。";
+"protection_disabled_caption" = "端末の設定→Safari→コンテンツ\nブロッカーでAdGuardがオフに\nなっています。";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "無料お試しスタート";

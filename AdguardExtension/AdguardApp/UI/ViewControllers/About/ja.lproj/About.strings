@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
 "8KQ-Ga-zhs.text" = "謝辞";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
+"CqW-k3-vqO.title" = "ログイン";
+
 /* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
 "KkR-EM-giI.text" = "フォーラム";
 
