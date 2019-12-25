@@ -98,9 +98,6 @@
                                         <subviews>
                                             <label opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="1" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="277.5" placeholderIntrinsicHeight="30" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atw-MM-BN4">
                                                 <rect key="frame" x="10" y="0.0" width="580" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="bdG-nF-mny"/>
-                                                </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" red="0.38039215686274508" green="0.69019607843137254" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -151,7 +148,7 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="intrinsicHeight">
-                                                <real key="value" value="70"/>
+                                                <real key="value" value="90"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
