@@ -107,10 +107,10 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
-        
-        confirmButton.isEnabled = true
-        
+                
         DispatchQueue.main.async { [weak self] in
+            
+            self?.confirmButton.isEnabled = true
             
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError

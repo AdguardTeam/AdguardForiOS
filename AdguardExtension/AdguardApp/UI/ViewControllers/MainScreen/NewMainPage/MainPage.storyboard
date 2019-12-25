@@ -2047,19 +2047,15 @@
                         <viewLayoutGuide key="safeArea" id="aMr-h6-eTu"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Azl-6b-gHO"/>
                                 <exclude reference="Etg-uU-kOO"/>
                                 <exclude reference="2Dg-OA-wr7"/>
                                 <exclude reference="TH1-jZ-Wgr"/>
-                                <exclude reference="f84-EB-Ldx"/>
                                 <exclude reference="qtK-16-RG4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="Azl-6b-gHO"/>
                                 <include reference="Etg-uU-kOO"/>
-                                <include reference="f84-EB-Ldx"/>
                                 <include reference="qtK-16-RG4"/>
                             </mask>
                         </variation>
@@ -2127,6 +2123,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qo1-ti-O1I"/>
+        <segue reference="v5x-rc-dxn"/>
     </inferredMetricsTieBreakers>
 </document>

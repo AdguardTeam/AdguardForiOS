@@ -109,6 +109,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         updateSafariProtectionInfo()
         observeProStatus()
         vpnService.notifier = self
+        updateVpnInfo()
     }
     
     deinit {
@@ -189,20 +190,28 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         theme.setupTable(tableView)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupLabels(themableLabels)
+        
+        tableView.reloadData()
     }
     
     /**
      Called when pro status is changed
      */
     private func observeProStatus(){
-        freeTextViewHeight.constant = proStatus ? 0.0 : 18.0
-        premiumTextViewHeight.constant = proStatus ? 0.0 : 18.0
-        
-        freeTextViewSpacing.constant = proStatus ? 0.0 : 12.0
-        premiumTextViewSpacing.constant = proStatus ? 0.0 : 12.0
-        
-        systemProtectionLabel.alpha = proStatus ? 1.0 : 0.5
-        systemDescriptionLabel.alpha = proStatus ? 1.0 : 0.5
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
+            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
+            
+            self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
+            self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
+            
+            self.systemProtectionLabel.alpha = self.proStatus ? 1.0 : 0.5
+            self.systemDescriptionLabel.alpha = self.proStatus ? 1.0 : 0.5
+            
+            self.tableView.reloadData()
+        }
     }
     
     /**
@@ -211,6 +220,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     private func updateVpnInfo(){
         let enabled = vpnService.vpnEnabled
         systemProtectionSwitch.isOn = enabled
+        systemProtectionSwitch.isEnabled = proStatus
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
         tableView.reloadData()
     }
