@@ -80,8 +80,6 @@ NSString* AEDefaultsRequests = @"AEDefaultsRequests";
 
 NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
 
-NSString* AEDefaultsCountersRequests = @"AEDefaultsCountersRequests";
-
 NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
 NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
 NSString *HideStatusViewNotification = @"HideStatusViewNotification";

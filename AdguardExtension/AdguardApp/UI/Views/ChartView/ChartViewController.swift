@@ -30,7 +30,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
     
     private let requestsTag = 0
     private let blockedTag = 1
-    private let countersTag = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +45,11 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsCountersRequests, options: .new, context: nil)
     }
     
     deinit {
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsCountersRequests, context: nil)
     }
 
     // MARK: - Actions
@@ -74,8 +70,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
             model.chartRequestType = .requests
         case blockedTag:
             model.chartRequestType = .blocked
-        case countersTag:
-            model.chartRequestType = .counters
         default:
             break
         }
@@ -111,8 +105,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
             changeButtonsText(with: requestsTag)
         case AEDefaultsBlockedRequests:
             changeButtonsText(with: blockedTag)
-        case AEDefaultsCountersRequests:
-            changeButtonsText(with: countersTag)
         default:
             break
         }
@@ -137,9 +129,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
             case blockedTag:
                 let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
                 button.setTitle(String(format: ACLocalizedString("chart_blockers", nil), number), for: .normal)
-            case countersTag:
-                let number = resources.sharedDefaults().integer(forKey: AEDefaultsCountersRequests)
-                button.setTitle(String(format: ACLocalizedString("chart_counters", nil), number), for: .normal)
             default:
                 break
             }
@@ -155,9 +144,6 @@ class ChartViewController: UIViewController, UIViewControllerTransitioningDelega
         case blockedTag:
             let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             button[0].setTitle(String(format: ACLocalizedString("chart_blockers", nil), number), for: .normal)
-        case countersTag:
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsCountersRequests)
-            button[0].setTitle(String(format: ACLocalizedString("chart_counters", nil), number), for: .normal)
         default:
             break
         }

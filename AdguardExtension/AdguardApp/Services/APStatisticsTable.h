@@ -26,6 +26,5 @@
 @property (nonatomic) NSDate *timeStamp;
 @property (nonatomic) RequestsStatisticsBlock *allStatisticsBlocks;
 @property (nonatomic) RequestsStatisticsBlock *blockedStatisticsBlocks;
-@property (nonatomic) RequestsStatisticsBlock *countersStatisticsBlocks;
 
 @end
