@@ -49,8 +49,9 @@ class DnsLogRecord: NSObject, NSCoding {
     let status: DnsLogRecordStatus
     var userStatus: DnsLogRecordUserStatus
     let blockRules: [String]?
+    let matchedFilterIds: [Int]?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?) {
         
         self.domain = domain
         self.date = date
@@ -64,6 +65,8 @@ class DnsLogRecord: NSObject, NSCoding {
         self.status = status
         self.userStatus = userStatus
         self.blockRules = blockRules
+        self.matchedFilterIds = matchedFilterIds
+        
         self.rowid = -1
         
         super.init()
@@ -84,6 +87,7 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(status.rawValue, forKey: "status")
         aCoder.encode(userStatus.rawValue, forKey: "userStatus")
         aCoder.encode(blockRules, forKey: "blockRules")
+        aCoder.encode(matchedFilterIds,forKey: "matchedFilterIds")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -101,6 +105,7 @@ class DnsLogRecord: NSObject, NSCoding {
         self.status = DnsLogRecordStatus.init(rawValue: aDecoder.decodeInteger(forKey: "status")) ?? .processed
         self.userStatus = DnsLogRecordUserStatus.init(rawValue: aDecoder.decodeInteger(forKey: "userStatus")) ?? .none
         self.blockRules = aDecoder.decodeObject(forKey: "blockRules") as? [String]
+        self.matchedFilterIds = aDecoder.decodeObject(forKey: "matchedFilterIds") as? [Int]
         self.rowid = -1
     }
 }

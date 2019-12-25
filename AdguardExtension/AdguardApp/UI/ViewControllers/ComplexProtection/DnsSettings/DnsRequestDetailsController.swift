@@ -42,6 +42,9 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var responsesLabel: ThemableLabel!
     @IBOutlet weak var bytesSentLabel: ThemableLabel!
     @IBOutlet weak var bytesReceivedLabel: ThemableLabel!
+    @IBOutlet weak var matchedFiltersLabel: ThemableLabel!
+    @IBOutlet weak var matchedRulesLabel: ThemableLabel!
+    
     
     // MARK: - "Copied labels"
     @IBOutlet weak var categoryCopied: UIButton!
@@ -56,6 +59,8 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var sizeCopied: UIButton!
     @IBOutlet weak var upstreamCopied: UIButton!
     @IBOutlet weak var answerCopied: UIButton!
+    @IBOutlet weak var filtersCopied: UIButton!
+    @IBOutlet weak var rulesCopied: UIButton!
     
     // MARK: - Title labels
     @IBOutlet weak var categoryTitleLabel: ThemableLabel!
@@ -70,6 +75,8 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var sizeTitleLabel: ThemableLabel!
     @IBOutlet weak var upstreamTitleLabel: ThemableLabel!
     @IBOutlet weak var answerTitleLabel: ThemableLabel!
+    @IBOutlet weak var matchedFiltersTitleLabel: ThemableLabel!
+    @IBOutlet weak var matchedRulesTitleLabel: ThemableLabel!
     
     private var notificationToken: NotificationToken?
     
@@ -114,6 +121,8 @@ class DnsRequestDetailsController : UITableViewController {
         companyLabel.text = logRecord?.category.company
         bytesSentLabel.text = String(format: "%d B", logRecord?.logRecord.bytesSent ?? 0)
         bytesReceivedLabel.text = String(format: "%d B", logRecord?.logRecord.bytesReceived ?? 0)
+        matchedRulesLabel.text = logRecord?.logRecord.blockRules?.joined(separator: "\n")
+        matchedFiltersLabel.text = logRecord?.matchedFilters
         
         updateStatusLabel()
         updateTheme()
@@ -185,22 +194,57 @@ class DnsRequestDetailsController : UITableViewController {
             return defaultHeight
         }
         
-        if cellType == .category {
+        if !configuration.developerMode && !userCells.contains(cellType) {
+            return 0.0
+        }
+        
+        switch cellType {
+        case .category:
             if logRecord?.category.category == nil{
                 return 0.0
             }
-        } else if cellType == .name {
+            return defaultHeight
+        case .name:
             if logRecord?.category.name == nil {
                 return 0.0
             }
-        } else if cellType == .company {
+        case .company:
             if logRecord?.category.company == nil {
+                    return 0.0
+            }
+            
+        case .domain:
+            if logRecord?.logRecord.domain.count == 0 {
                 return 0.0
             }
-        }
-        
-        if !configuration.developerMode && !userCells.contains(cellType) {
-            return 0.0
+        case .type:
+            if logRecord?.logRecord.type.count == 0 {
+                return 0.0
+            }
+        case .server:
+            if logRecord?.logRecord.server.count == 0 {
+                return 0.0
+            }
+        case .upstream:
+            if logRecord?.logRecord.upstreamAddr?.count == 0 {
+                return 0.0
+            }
+        case .answer:
+            if logRecord?.logRecord.answer.count == 0 {
+                return 0.0
+            }
+        case .matchedFilters:
+            if logRecord?.matchedFilters?.count == 0 {
+                return 0.0
+            }
+        case .matchedRules:
+            if logRecord?.logRecord.blockRules?.joined(separator: "").count == 0  {
+                return 0.0
+            }
+            
+        case .status, .time, .elapsed, .size:
+            break
+            
         }
         
         return defaultHeight
@@ -237,6 +281,10 @@ class DnsRequestDetailsController : UITableViewController {
             copiedString = logRecord?.logRecord.answer ?? ""
         case .none:
             copiedString = ""
+        case .some(.matchedFilters):
+            copiedString = logRecord?.matchedFilters ?? ""
+        case .some(.matchedRules):
+            copiedString = logRecord?.logRecord.blockRules?.joined(separator: "\n") ?? ""
         }
         
         // copy responses to pasteboard
@@ -265,7 +313,7 @@ class DnsRequestDetailsController : UITableViewController {
     // MARK: - private methods
     
     private enum LogCells: Int{
-        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer
+        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer, matchedFilters, matchedRules
     }
     
     private let userCells:[LogCells] = [.name, .status, .time, .domain]
@@ -326,6 +374,12 @@ class DnsRequestDetailsController : UITableViewController {
         case .answer:
             labelToHide = answerTitleLabel
             copiedLabel = answerCopied
+        case .matchedFilters:
+            labelToHide = matchedFiltersTitleLabel
+            copiedLabel = filtersCopied
+        case .matchedRules:
+            labelToHide = matchedRulesTitleLabel
+            copiedLabel = rulesCopied
         }
         
         animator.startAnimation()

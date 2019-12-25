@@ -89,8 +89,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             statistics[.blocked]?.numberOfRequests += 1
         }
         
+        let filterIds = event.filterListIds.map { $0.intValue }
         
-        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), status: status, userStatus: .none, blockRules: event.rules)
+        let record = DnsLogRecord(domain: event.domain, date: Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000)), elapsed: Int(event.elapsed), type: event.type, answer: event.answer, server: server, upstreamAddr: event.upstreamAddr, bytesSent: Int(event.bytesSent), bytesReceived: Int(event.bytesReceived), status: status, userStatus: .none, blockRules: event.rules, matchedFilterIds: filterIds)
         
         addRecord(record: record)
     }
