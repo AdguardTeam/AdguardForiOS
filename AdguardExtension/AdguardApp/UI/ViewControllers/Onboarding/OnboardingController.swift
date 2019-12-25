@@ -20,6 +20,7 @@ import Foundation
 
 protocol OnboardingControllerDelegate {
     func showVideoAction(sender: UIViewController)
+    func onboardingDidFinish()
 }
 
 class OnboardingController: UIViewController {
@@ -61,7 +62,9 @@ class OnboardingController: UIViewController {
     }
     
     @IBAction func closeAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate?.onboardingDidFinish()
+        }
     }
     // MARK: - private methods
     

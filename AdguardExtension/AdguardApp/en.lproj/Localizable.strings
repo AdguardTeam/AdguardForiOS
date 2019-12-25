@@ -635,4 +635,4 @@
 "onboarding_second_step_text" = "2. Tap on %@ <b>Safari</b> and chose the <b>\"Content blockers\"</b> menu item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "3. <b>Switch on %@ all of content blockers</b> and come back to our app!";
+"onboarding_third_step_text" = "3. <b>Switch on %@ all content blockers</b> and come back to our app!";

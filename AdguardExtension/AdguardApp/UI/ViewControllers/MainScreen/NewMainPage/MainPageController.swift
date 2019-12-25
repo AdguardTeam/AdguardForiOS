@@ -19,7 +19,16 @@
 import UIKit
 
 class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate {
-
+    
+    var ready = false
+    var onReady: (()->Void)? {
+        didSet {
+            if ready && onReady != nil {
+                callOnready()
+            }
+        }
+    }
+    
     // MARK: - Nav bar elements
     
     @IBOutlet weak var adguardTitleLabel: ThemableLabel!
@@ -141,6 +150,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if let recognizer = contentBlockersGestureRecognizer {
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
+        
+        if !(resources.sharedDefaults().bool(forKey: OnboardingShowed)) {
+            showOnboarding()
+            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
+        }
+        else {
+            ready = true
+            callOnready()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,14 +172,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chartModel.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()
-    }
-
-    private var onb = 0
-    override func viewDidAppear(_ animated: Bool) {
-        if !(resources.sharedDefaults().bool(forKey: OnboardingShowed)) {
-            showOnboarding()
-            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -352,6 +362,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         sender.dismiss(animated: true) {
             self.performSegue(withIdentifier: self.videoTutorialSegueId, sender: self)
         }
+    }
+    
+    func onboardingDidFinish() {
+        ready = true
+        callOnready()
     }
     
     // MARK: - Private methods
@@ -665,4 +680,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private func showOnboarding() {
         performSegue(withIdentifier: showOnboardingSegueId, sender: self)
     }
+    
+    func callOnready() {
+        onReady?()
+        onReady = nil
+    }
+
 }
