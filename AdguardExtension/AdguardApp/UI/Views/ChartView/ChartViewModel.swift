@@ -77,7 +77,7 @@ enum ChartDateType {
 }
 
 enum ChartRequestType {
-    case requests, blocked, counters
+    case requests, blocked
 }
 
 class ChartViewModel: ChartViewModelProtocol {
@@ -87,8 +87,6 @@ class ChartViewModel: ChartViewModelProtocol {
     var requests: [RequestsStatisticsBlock] = []
     
     var blockedRequests: [RequestsStatisticsBlock] = []
-    
-    var countersRequests: [RequestsStatisticsBlock] = []
     
     var chartDateType: ChartDateType = .alltime {
         didSet {
@@ -133,8 +131,6 @@ class ChartViewModel: ChartViewModelProtocol {
             requests = self.requests
         case .blocked:
             requests = blockedRequests
-        case .counters:
-            requests = countersRequests
         }
                 
         var requestsDates: [Date] = requests.map({ $0.date })
