@@ -55,7 +55,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var complexProtectionView: UIView!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
     
@@ -241,13 +240,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
         complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     
@@ -256,7 +255,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
         complexProtection.switchComplexProtection(state: enabled, for: self)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     
@@ -389,8 +388,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProView.backgroundColor = theme.backgroundColor
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
-        
-        activityIndicator.color = theme.invertedBackgroundColor
     }
     
     /**
@@ -542,6 +539,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     /**
+     Starts indicating that changes are applied
+     */
+    private func applyingChangesStarted(){
+        protectionStatusLabel.text = ACLocalizedString("applying_changes", nil)
+    }
+    
+    /**
+    Stops indicating that changes are applied
+    */
+    private func applyingChangesEnded(){
+        changeProtectionStatusLabel()
+    }
+    
+    /**
      States views by pro status
      */
     private func observeProStatus(){
@@ -585,7 +596,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                 }
                 self.protectionStatusLabel.text = self.complexText
                 
-                self.activityIndicator.stopAnimating()
+                self.applyingChangesEnded()
             }
         }
     }

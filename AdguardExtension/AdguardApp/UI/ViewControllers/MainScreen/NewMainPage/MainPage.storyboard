@@ -158,19 +158,11 @@
                                                     <action selector="complexProtectionState:" destination="T6V-s9-cBk" eventType="valueChanged" id="kJU-kj-rcf"/>
                                                 </connections>
                                             </view>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1Gt-CD-4TS">
-                                                <rect key="frame" x="365.5" y="57" width="37" height="37"/>
-                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="YUL-Oa-fId" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" id="7bX-vt-w7f"/>
-                                            <constraint firstItem="1Gt-CD-4TS" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="K9n-ny-kNs"/>
                                             <constraint firstItem="YUL-Oa-fId" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="RtM-Pd-CpP"/>
-                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="top" secondItem="1Gt-CD-4TS" secondAttribute="bottom" constant="24" id="b9m-xn-Mqp">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="24"/>
-                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                            </constraint>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-pN-tdm">
@@ -624,7 +616,6 @@
                         </attributedString>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="1Gt-CD-4TS" id="8K0-xX-OSf"/>
                         <outlet property="adguardManImageView" destination="gM8-pc-xzq" id="laM-dL-fYX"/>
                         <outlet property="blockedButton" destination="561-fR-2DC" id="28C-6y-DVX"/>
                         <outlet property="blockedNumberLabel" destination="Kxe-Kt-6aQ" id="adZ-O4-B6C"/>
@@ -1589,7 +1580,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Rev-Jv-ICP" userLabel="Server Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Rev-Jv-ICP" userLabel="Server Cell">
                                         <rect key="frame" x="0.0" y="364" width="414" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rev-Jv-ICP" id="4ch-gb-4NJ">
@@ -2237,6 +2228,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v5x-rc-dxn"/>
+        <segue reference="Qo1-ti-O1I"/>
     </inferredMetricsTieBreakers>
 </document>
