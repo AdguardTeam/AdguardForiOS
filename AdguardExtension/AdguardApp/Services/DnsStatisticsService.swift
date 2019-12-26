@@ -96,7 +96,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     
     private func createStatisticsTable(_ db:FMDatabase) {
         
-        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS APStatisticsTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, allStatisticsBlocks BLOB, blockedStatisticsBlocks BLOB", withParameterDictionary: [:])
+        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS APStatisticsTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, allStatisticsBlocks BLOB, blockedStatisticsBlocks BLOB)", withParameterDictionary: [:])
         if result {
             db.executeUpdate("CREATE INDEX IF NOT EXISTS mainIndex ON APStatisticsTable (timeStamp)", withParameterDictionary: [:])
         }
