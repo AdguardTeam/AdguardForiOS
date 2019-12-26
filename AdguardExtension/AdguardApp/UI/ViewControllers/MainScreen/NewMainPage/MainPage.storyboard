@@ -2153,7 +2153,6 @@
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerX" secondItem="aMr-h6-eTu" secondAttribute="centerX" id="TH1-jZ-Wgr"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerY" secondItem="7ml-j3-jSR" secondAttribute="centerY" id="nXN-0h-clU"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="leading" secondItem="aMr-h6-eTu" secondAttribute="leading" constant="48" id="qtK-16-RG4"/>
-                            <constraint firstItem="xRH-1C-tC0" firstAttribute="width" secondItem="7ml-j3-jSR" secondAttribute="width" multiplier="0.768116" id="tde-Vq-plh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aMr-h6-eTu"/>
                         <variation key="default">
@@ -2174,7 +2173,6 @@
                             <mask key="constraints">
                                 <include reference="2Dg-OA-wr7"/>
                                 <include reference="TH1-jZ-Wgr"/>
-                                <exclude reference="tde-Vq-plh"/>
                             </mask>
                         </variation>
                     </view>
@@ -2234,6 +2232,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qo1-ti-O1I"/>
+        <segue reference="v5x-rc-dxn"/>
     </inferredMetricsTieBreakers>
 </document>
