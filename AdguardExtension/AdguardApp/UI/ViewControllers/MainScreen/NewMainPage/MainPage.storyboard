@@ -193,9 +193,6 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" red="0.0" green="0.023529411764705882" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=compact">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                 </variation>
@@ -565,9 +562,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-1p-YgS">
                                         <rect key="frame" x="183" y="9" width="24" height="24"/>
