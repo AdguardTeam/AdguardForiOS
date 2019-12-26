@@ -159,13 +159,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
         
-        if !(resources.sharedDefaults().bool(forKey: OnboardingShowed)) {
-            showOnboarding()
-            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
+        let allContentBlockersEnabled = configuration.allContentBlockersEnabled
+        if allContentBlockersEnabled == true {
+            processOnboarding()
         }
-        else {
+    }
+    
+    func processOnboarding() {
+        if resources.sharedDefaults().bool(forKey: OnboardingShowed) || (configuration.allContentBlockersEnabled ?? false) {
             ready = true
             callOnready()
+        }
+        else {
+            showOnboarding()
+            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
         }
     }
     
@@ -597,25 +604,21 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private func observeContentBlockersState() {
         let isIphone = UIDevice.current.userInterfaceIdiom == .phone
         
-        let optionalEnabled = configuration.contentBlockerEnabled
-        guard let enabledBlockers = optionalEnabled else {
-            return
-        }
-        
-        var allEnabled = true
-        for blocker in enabledBlockers {
-            allEnabled = allEnabled && blocker.value
-        }
-        
         DispatchQueue.main.async {[weak self] in
             self?.contentBlockerViewIphone.isHidden = !isIphone
             self?.contentBlockerViewIpad.isHidden = isIphone
         }
         
-        if !allEnabled {
-            showContentBlockersInfo()
-        } else {
+        guard let allEnabled = configuration.allContentBlockersEnabled else { return }
+        
+        if allEnabled {
             hideContentBlockersInfo()
+        } else {
+            showContentBlockersInfo()
+        }
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.processOnboarding()
         }
     }
     
