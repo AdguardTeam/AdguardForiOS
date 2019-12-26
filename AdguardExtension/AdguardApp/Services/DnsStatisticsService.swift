@@ -26,6 +26,8 @@ protocol DnsStatisticsServiceProtocol {
     func writeStatistics(_ statistics: [DnsStatisticsType: RequestsStatisticsBlock])
     
     func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]]
+    
+    func clearStatistics()
 }
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
@@ -90,6 +92,17 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         }
         
         return statistics;
+    }
+    
+    func clearStatistics() {
+        writeHandler?.inTransaction({[weak self] (db, rollback) in
+            let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
+            let success = table?.delete(withKeys: nil, inRowObject: nil)
+            if success ?? false {
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
+            }
+        })
     }
     
     // MARK: - private methods

@@ -337,6 +337,15 @@
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "You need to enable VPN first";
 
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Reset statistics";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "All statistics will be cleared!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Reset";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ rules are being used";
 
