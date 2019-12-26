@@ -303,10 +303,10 @@ static NSTimeInterval lastCheckTime;
         }];
         
         NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus){
+        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus && checkResult){
             lastCheckTime = now;
             [_dnsFiltersService updateFiltersWithNetworking:_networking];
-            DDLogInfo(@"Dns filters were updated");
+            DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
         }
     }
 }
