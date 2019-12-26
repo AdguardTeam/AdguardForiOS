@@ -24,6 +24,7 @@ class SettingsController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
@@ -47,6 +48,7 @@ class SettingsController: UITableViewController {
     private let invertWhitelistRow = 1
     private let developerModeRow = 2
     private let advancedSettingsRow = 3
+    private let resetStatisticsRow = 4
     
     private var headersTitles: [String] = []
     
@@ -100,6 +102,8 @@ class SettingsController: UITableViewController {
         case (otherSection, developerModeRow):
             developerModeSwitch.setOn(!developerModeSwitch!.isOn, animated: true)
             developerModeAction(developerModeSwitch)
+        case (otherSection, resetStatisticsRow):
+            resetStatistics()
         default:
             break
         }
@@ -140,6 +144,25 @@ class SettingsController: UITableViewController {
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
             alert.dismiss(animated: true, completion: nil)
             (UIApplication.shared.delegate as? AppDelegate)?.resetAllSettings()
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
+
+        self.present(alert, animated: true)
+    }
+    
+    private func resetStatistics(){
+        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
+            alert.dismiss(animated: true, completion: nil)
+            self?.statisticsService.clearStatistics()
         }
         
         alert.addAction(yesAction)

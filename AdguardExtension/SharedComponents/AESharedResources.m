@@ -77,7 +77,6 @@ NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
 NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
-
 NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
 
 NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
