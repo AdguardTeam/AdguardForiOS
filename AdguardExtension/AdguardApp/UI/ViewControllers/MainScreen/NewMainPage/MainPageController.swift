@@ -100,6 +100,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Constraints
     @IBOutlet weak var contentBlockerViewConstraint: NSLayoutConstraint!
     
+    // MARK: - Constraints to change for iphone SE - like devices
+    
+    @IBOutlet weak var safariIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var safariIconWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
+    @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
+    @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
+    
+    @IBOutlet weak var complexSwitchWidth: NSLayoutConstraint!
+    @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
+    
     
     // MARK: - Variables
     
@@ -113,6 +127,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         return configuration.proStatus
     }
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
+    
+    // We change constraints only for iphone SE - like devices
+    private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
     
     
     // MARK: - Services
@@ -184,6 +201,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewWillDisappear(animated)
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if isIphoneSeLike {
+            setupConstraintsForIphoneSe()
         }
     }
         
@@ -695,9 +719,27 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         performSegue(withIdentifier: showOnboardingSegueId, sender: self)
     }
     
-    func callOnready() {
+    private func callOnready() {
         onReady?()
         onReady = nil
     }
 
+    private func setupConstraintsForIphoneSe(){
+        safariIconHeight.constant = 20.0
+        safariIconWidth.constant = 20.0
+        
+        systemIconWidth.constant = 20.0
+        systemIconHeight.constant = 20.0
+        
+        safariIconCenterSpace.constant = -20.0
+        systemIconCenterSpace.constant = 20.0
+        
+        protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)
+        protectionStatusLabel.font = protectionStatusLabel.font.withSize(14.0)
+        
+        complexSwitchWidth.constant = 80.0
+        complexSwitchHeight.constant = 30.0
+        
+        view.layoutIfNeeded()
+    }
 }

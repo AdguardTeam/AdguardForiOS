@@ -624,6 +624,8 @@
                         <outlet property="chartView" destination="aEB-g1-RpB" id="Vwb-3R-zO3"/>
                         <outlet property="complexProtectionSwitch" destination="YUL-Oa-fId" id="jqh-kc-mId"/>
                         <outlet property="complexProtectionView" destination="VfD-f2-PUd" id="fQh-ZI-kul"/>
+                        <outlet property="complexSwitchHeight" destination="2xN-Yv-dyk" id="nSj-st-aZM"/>
+                        <outlet property="complexSwitchWidth" destination="0a5-hf-n2q" id="kto-CC-1eY"/>
                         <outlet property="contentBlockerViewConstraint" destination="eSv-Jc-dfo" id="bbd-3y-nVI"/>
                         <outlet property="contentBlockerViewIpad" destination="IU2-ER-A7n" id="t1x-7D-JNM"/>
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
@@ -636,8 +638,14 @@
                         <outlet property="requestsButton" destination="nTP-os-Pis" id="wog-jc-J3E"/>
                         <outlet property="requestsNumberLabel" destination="eIf-j0-9oP" id="v5s-uG-OZy"/>
                         <outlet property="requestsTextLabel" destination="Btd-nN-zLO" id="HlN-1k-8GQ"/>
+                        <outlet property="safariIconCenterSpace" destination="Wil-zs-PzL" id="7JF-te-B7h"/>
+                        <outlet property="safariIconHeight" destination="34J-F7-rcO" id="Cz7-ix-qf9"/>
+                        <outlet property="safariIconWidth" destination="bab-dY-c7I" id="MXM-Uw-JU5"/>
                         <outlet property="safariProtectionButton" destination="PJh-s4-9Wf" id="Gm9-fV-NM2"/>
                         <outlet property="statisticsStackView" destination="m7T-1D-DMy" id="sf8-hg-Vaw"/>
+                        <outlet property="systemIconCenterSpace" destination="SoA-hb-6d3" id="4sX-ck-7DU"/>
+                        <outlet property="systemIconHeight" destination="lm7-2c-0i9" id="SCH-d3-1mE"/>
+                        <outlet property="systemIconWidth" destination="2j6-wO-ZJl" id="Ets-n2-dCj"/>
                         <outlet property="systemProtectionButton" destination="OPP-0X-avj" id="1dQ-4g-bzx"/>
                         <outlet property="updateButton" destination="mZo-6k-bpe" id="SrB-0p-XgZ"/>
                         <outletCollection property="themableLabels" destination="lYA-et-eyV" collectionClass="NSMutableArray" id="bFH-X3-4x4"/>
@@ -2226,6 +2234,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v5x-rc-dxn"/>
+        <segue reference="Qo1-ti-O1I"/>
     </inferredMetricsTieBreakers>
 </document>
