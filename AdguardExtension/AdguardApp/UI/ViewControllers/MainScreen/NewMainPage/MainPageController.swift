@@ -725,11 +725,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
 
     private func setupConstraintsForIphoneSe(){
-        safariIconHeight.constant = 20.0
-        safariIconWidth.constant = 20.0
+        safariIconHeight.constant = 24.0
+        safariIconWidth.constant = 24.0
         
-        systemIconWidth.constant = 20.0
-        systemIconHeight.constant = 20.0
+        systemIconWidth.constant = 24.0
+        systemIconHeight.constant = 24.0
         
         safariIconCenterSpace.constant = -20.0
         systemIconCenterSpace.constant = 20.0
