@@ -195,8 +195,8 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                 </variation>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd">
-                                                                <rect key="frame" x="56" y="108" width="201.5" height="45"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
+                                                                <rect key="frame" x="56" y="85" width="362.5" height="45"/>
                                                                 <color key="backgroundColor" red="0.27058823529411763" green="0.70196078431372544" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="750" constant="45" id="3E7-jt-e9m"/>
@@ -2101,8 +2101,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mql-uP-urU">
-                                        <rect key="frame" x="22.5" y="108" width="179" height="32"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mql-uP-urU" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="132" width="132" height="38"/>
                                         <color key="backgroundColor" red="0.27058823529999998" green="0.70196078429999997" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
@@ -2141,10 +2141,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="width" secondItem="7ml-j3-jSR" secondAttribute="width" multiplier="0.4" id="2Dg-OA-wr7"/>
-                            <constraint firstItem="aMr-h6-eTu" firstAttribute="trailing" secondItem="xRH-1C-tC0" secondAttribute="trailing" constant="48" id="Azl-6b-gHO"/>
                             <constraint firstItem="aMr-h6-eTu" firstAttribute="trailing" secondItem="xRH-1C-tC0" secondAttribute="trailing" constant="48" id="Etg-uU-kOO"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerX" secondItem="aMr-h6-eTu" secondAttribute="centerX" id="TH1-jZ-Wgr"/>
-                            <constraint firstItem="xRH-1C-tC0" firstAttribute="leading" secondItem="aMr-h6-eTu" secondAttribute="leading" constant="48" id="f84-EB-Ldx"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="centerY" secondItem="7ml-j3-jSR" secondAttribute="centerY" id="nXN-0h-clU"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="leading" secondItem="aMr-h6-eTu" secondAttribute="leading" constant="48" id="qtK-16-RG4"/>
                             <constraint firstItem="xRH-1C-tC0" firstAttribute="width" secondItem="7ml-j3-jSR" secondAttribute="width" multiplier="0.768116" id="tde-Vq-plh"/>
@@ -2228,6 +2226,6 @@
         <image name="safari" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qo1-ti-O1I"/>
+        <segue reference="v5x-rc-dxn"/>
     </inferredMetricsTieBreakers>
 </document>
