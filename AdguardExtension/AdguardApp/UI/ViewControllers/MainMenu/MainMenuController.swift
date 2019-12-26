@@ -18,23 +18,36 @@
 
 import Foundation
 
-class MainMenuController: UITableViewController {
+class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let support: AESSupportProtocol = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
+    private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     static let BUGREPORT_URL = "http://agrd.io/report_ios_bug"
     
+    @IBOutlet weak var safariProtectionLabel: ThemableLabel!
+    @IBOutlet weak var systemProtectionLabel: ThemableLabel!
     @IBOutlet weak var bugreportCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
-
+    
     private var themeObserver: NotificationToken?
+    private var filtersCountObservation: Any?
+    private var activeFiltersCountObservation: Any?
+    
+    private var proStatus: Bool {
+        return configuration.proStatus
+    }
     
     // MARK: - view controler life cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
+        vpnService.notifier = self
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
     }
     
     override func viewDidLoad() {
@@ -43,6 +56,36 @@ class MainMenuController: UITableViewController {
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        let updateFilters: ()->() = { [weak self] in
+            guard let sSelf = self else { return }
+            let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), sSelf.filtersService.activeFiltersCount, sSelf.filtersService.filtersCount)
+            sSelf.safariProtectionLabel.text = filtersDescriptionText
+        }
+        
+        filtersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
+            updateFilters()
+        }
+        
+        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
+            updateFilters()
+        }
+        
+        updateFilters()
+    }
+    
+    // MARK: - VpnServiceNotifierDelegate methods
+    
+    func tunnelModeChanged() {
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+    }
+    
+    func vpnConfigurationChanged(with error: Error?) {
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+    }
+    
+    func cancelledAddingVpnConfiguration() {
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
     }
     
     // MARK: - Actions
