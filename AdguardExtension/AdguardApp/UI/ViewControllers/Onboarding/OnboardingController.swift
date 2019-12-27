@@ -57,10 +57,6 @@ class OnboardingController: UIViewController {
         delegate?.showVideoAction(sender: self)
     }
     
-    @IBAction func settingsAction(_ sender: Any) {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-    }
-    
     @IBAction func closeAction(_ sender: Any) {
         dismiss(animated: true) { [weak self] in
             self?.delegate?.onboardingDidFinish()

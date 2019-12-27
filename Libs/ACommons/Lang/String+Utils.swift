@@ -30,6 +30,9 @@ extension NSMutableAttributedString {
     
     static func fromHtml(_ html: String, fontSize: Int, color: UIColor, attachmentImage: UIImage?)->NSMutableAttributedString? {
         
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        
         let format = NSMutableString(string: html)
         let wrapped = "<span style=\"font-family: -apple-system; font-size: 16; color: \(color.hex())\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
@@ -48,6 +51,8 @@ extension NSMutableAttributedString {
             let attachmentString = NSAttributedString(attachment: attachment)
             resultText.insert(attachmentString, at: imageRange.location)
         }
+        
+        resultText.addAttributes([NSAttributedString.Key.paragraphStyle : style], range: NSRange(location: 0, length: resultText.length))
                 
         return resultText
     }
