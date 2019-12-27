@@ -23,7 +23,7 @@
                         <sections>
                             <tableViewSection id="6bb-iC-TW3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VoQ-Lr-RjM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="VoQ-Lr-RjM">
                                         <rect key="frame" x="0.0" y="28" width="414" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VoQ-Lr-RjM" id="atW-1j-3o5">
@@ -96,11 +96,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <segue destination="Yd4-En-NEY" kind="show" id="Yeu-Lq-oCP"/>
-                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qdI-Qn-GO4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qdI-Qn-GO4">
                                         <rect key="frame" x="0.0" y="157" width="414" height="168"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdI-Qn-GO4" id="rW1-K7-XNG">
@@ -167,9 +164,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="teo-vm-NRJ" secondAttribute="bottom" constant="24" id="zsJ-Mi-jYC"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="d1I-az-Ciy" kind="show" id="NvD-fX-QEf"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -204,26 +198,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHj-J0-uTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-213.04347826086959" y="-137.27678571428569"/>
-        </scene>
-        <!--Filters-->
-        <scene sceneID="15A-C7-SAW">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Filters" id="Yd4-En-NEY" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="fde-Cs-tMu"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lBc-oc-JYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="315" y="-316"/>
-        </scene>
-        <!--DnsSettings-->
-        <scene sceneID="Acc-dF-5in">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DnsSettings" id="d1I-az-Ciy" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="GXs-o8-3Gv"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eJ0-my-aOc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="341" y="-210"/>
         </scene>
     </scenes>
     <resources>
