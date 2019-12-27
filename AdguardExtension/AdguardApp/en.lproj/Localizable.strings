@@ -31,6 +31,9 @@
 /* Main Controller. Inverted whitelist cell caption */
 "inverted_whitelist_title" = "Safari whitelist (inverted)";
 
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Applying changes...";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Safari whitelist";
 

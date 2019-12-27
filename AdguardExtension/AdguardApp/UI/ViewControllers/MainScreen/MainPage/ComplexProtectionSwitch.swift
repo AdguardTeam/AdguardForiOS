@@ -111,7 +111,7 @@ class ComplexProtectionSwitch: UIControl {
         
         let color = isOn ? onColor.cgColor : offColor.cgColor
         
-        thumbView.layer.shadowRadius = 25
+        thumbView.layer.shadowRadius = 10
         thumbView.layer.shadowOpacity = 1.0
         thumbView.layer.shadowColor = color
         return true
@@ -205,8 +205,8 @@ class ComplexProtectionSwitch: UIControl {
         backgroundColor = offColor
         
         innerShadowView.isUserInteractionEnabled = false
-        innerShadowView.layer.borderWidth = 1.0
-        innerShadowView.layer.borderColor = UIColor(hexString: "#1f1f1f").withAlphaComponent(0.2).cgColor
+        innerShadowView.layer.borderWidth = 3.0
+        innerShadowView.layer.borderColor = UIColor(hexString: "#1f1f1f").withAlphaComponent(0.05).cgColor
         
         thumbView.backgroundColor = thumbColor
         setNeutralShadows()

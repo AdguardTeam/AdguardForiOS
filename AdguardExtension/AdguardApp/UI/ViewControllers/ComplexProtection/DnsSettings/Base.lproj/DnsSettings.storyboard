@@ -624,8 +624,8 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                             </variation>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uem-fP-tai">
-                                                            <rect key="frame" x="33.5" y="132" width="267" height="38"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uem-fP-tai" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="32" y="108" width="254" height="32"/>
                                                             <color key="backgroundColor" red="0.27058823529999998" green="0.70196078429999997" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>

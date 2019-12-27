@@ -55,7 +55,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Complex protection switch
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var complexProtectionView: UIView!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
     
@@ -101,6 +100,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Constraints
     @IBOutlet weak var contentBlockerViewConstraint: NSLayoutConstraint!
     
+    // MARK: - Constraints to change for iphone SE - like devices
+    
+    @IBOutlet weak var safariIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var safariIconWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
+    @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
+    @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
+    
+    @IBOutlet weak var complexSwitchWidth: NSLayoutConstraint!
+    @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
+    
     
     // MARK: - Variables
     
@@ -114,6 +127,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         return configuration.proStatus
     }
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
+    
+    // We change constraints only for iphone SE - like devices
+    private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
     
     
     // MARK: - Services
@@ -194,6 +210,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             nav.addGestureRecognizer()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if isIphoneSeLike {
+            setupConstraintsForIphoneSe()
+        }
+    }
         
     deinit {
         removeObservers()
@@ -248,13 +271,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
         complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     
@@ -263,7 +286,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
         complexProtection.switchComplexProtection(state: enabled, for: self)
-        activityIndicator.startAnimating()
+        applyingChangesStarted()
     }
     
     
@@ -396,8 +419,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProView.backgroundColor = theme.backgroundColor
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
-        
-        activityIndicator.color = theme.invertedBackgroundColor
     }
     
     /**
@@ -549,6 +570,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     /**
+     Starts indicating that changes are applied
+     */
+    private func applyingChangesStarted(){
+        protectionStatusLabel.text = ACLocalizedString("applying_changes", nil)
+    }
+    
+    /**
+    Stops indicating that changes are applied
+    */
+    private func applyingChangesEnded(){
+        changeProtectionStatusLabel()
+    }
+    
+    /**
      States views by pro status
      */
     private func observeProStatus(){
@@ -592,7 +627,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                 }
                 self.protectionStatusLabel.text = self.complexText
                 
-                self.activityIndicator.stopAnimating()
+                self.applyingChangesEnded()
             }
         }
     }
@@ -687,9 +722,27 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         performSegue(withIdentifier: showOnboardingSegueId, sender: self)
     }
     
-    func callOnready() {
+    private func callOnready() {
         onReady?()
         onReady = nil
     }
 
+    private func setupConstraintsForIphoneSe(){
+        safariIconHeight.constant = 24.0
+        safariIconWidth.constant = 24.0
+        
+        systemIconWidth.constant = 24.0
+        systemIconHeight.constant = 24.0
+        
+        safariIconCenterSpace.constant = -20.0
+        systemIconCenterSpace.constant = 20.0
+        
+        protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)
+        protectionStatusLabel.font = protectionStatusLabel.font.withSize(14.0)
+        
+        complexSwitchWidth.constant = 80.0
+        complexSwitchHeight.constant = 30.0
+        
+        view.layoutIfNeeded()
+    }
 }
