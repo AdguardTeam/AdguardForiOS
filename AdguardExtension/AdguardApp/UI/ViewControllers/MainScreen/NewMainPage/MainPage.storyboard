@@ -161,7 +161,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" id="7bX-vt-w7f"/>
+                                            <constraint firstItem="YUL-Oa-fId" firstAttribute="centerY" secondItem="VfD-f2-PUd" secondAttribute="centerY" constant="-20" id="7bX-vt-w7f"/>
                                             <constraint firstItem="YUL-Oa-fId" firstAttribute="centerX" secondItem="VfD-f2-PUd" secondAttribute="centerX" id="RtM-Pd-CpP"/>
                                         </constraints>
                                     </view>
