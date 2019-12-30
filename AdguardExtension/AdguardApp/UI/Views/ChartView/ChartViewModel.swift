@@ -75,6 +75,25 @@ enum ChartDateType {
         return (endDate, lastDate)
     }
     
+    func getFormatterString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        
+        switch self {
+        case .today:
+            dateFormatter.dateFormat = "HH:mm"
+        case .day:
+            dateFormatter.dateFormat = "E"
+        case .week:
+            dateFormatter.dateFormat = "E"
+        case .month:
+            dateFormatter.dateFormat = "dd.MM"
+        case .alltime:
+            dateFormatter.dateFormat = "MM.yy"
+        }
+        return dateFormatter.string(from: date)
+    }
+    
     private func now() -> Date {
         return Date()
     }
@@ -148,14 +167,17 @@ class ChartViewModel: ChartViewModelProtocol {
         var requestsDates: [Date] = requests.map({ $0.date })
         requestsDates.sort(by: { $0 < $1 })
         
-        if requestsDates.count < 2 {
-            return ([], 0)
-        }
-        
         let intervalTime = chartDateType.getTimeInterval(requestsDates: requestsDates)
         
         let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
         let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
+        
+        chartView.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
+        chartView.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
+        
+        if requestsDates.count < 2 {
+            return ([], 0)
+        }
         
         var xPosition: CGFloat = 0.0
         for request in requests {

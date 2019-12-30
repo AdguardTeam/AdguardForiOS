@@ -60,6 +60,18 @@ class ChartView: UIView {
         }
     }
     
+    var leftDateLabelText: String? = "" {
+        didSet{
+            leftDateLabel.text = leftDateLabelText
+        }
+    }
+    
+    var rightDateLabelText: String? = "" {
+        didSet{
+            rightDateLabel.text = rightDateLabelText
+        }
+    }
+    
     private var leftDateLabel = UILabel()
     private var rightDateLabel = UILabel()
     
@@ -179,8 +191,6 @@ class ChartView: UIView {
         bottomBorderLabel.textColor = gridColor
         topBorderLabel.textColor = gridColor
         
-        leftDateLabel.text = "Mon"
-        rightDateLabel.text = "Sun"
         bottomBorderLabel.text = "0"
         topBorderLabel.text = "0"
         
