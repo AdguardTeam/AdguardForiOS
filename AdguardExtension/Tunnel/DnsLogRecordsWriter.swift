@@ -79,13 +79,15 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             status = .processed
         }
         
-        let totalRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-        resources.sharedDefaults().set(totalRequestsCount + 1, forKey: AEDefaultsRequests)
+        let tempRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
+        resources.sharedDefaults().set(tempRequestsCount + 1, forKey: AEDefaultsRequestsTemp)
+        
         statistics[.all]?.numberOfRequests += 1
         
         if (isBlocked(event.answer)) {
-            let blockedRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            resources.sharedDefaults().set(blockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
+            let tempBlockedRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
+            resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequestsTemp)
+            
             statistics[.blocked]?.numberOfRequests += 1
         }
         
@@ -122,6 +124,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         recordsQueue.async { [weak self] in
             self?.save()
             self?.saveStatistics()
+            self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequestsTemp)
+            self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequestsTemp)
         }
     }
     
@@ -143,6 +147,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         statistics[.all] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
         statistics[.blocked] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        
+        resources.sharedDefaults().set(0, forKey: AEDefaultsRequestsTemp)
+        resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequestsTemp)
     }
     
     private func isBlocked(_ answer: String?) -> Bool {

@@ -325,7 +325,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Observing Values from User Defaults
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        changeTextForButton(with: keyPath)
+        updateTextForButtons()
     }
     
     
@@ -363,8 +363,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - ChartPointsChangedDelegate method
     
-    func chartPointsChanged(points: [Point]) {
-        chartView.chartPoints = points
+    func chartPointsChanged(requests: [Point], blocked: [Point]) {
+        chartView.chartPoints = (requests, blocked)
+    }
+    
+    func numberOfRequestsChanged(requests: Int, blocked: Int) {
+        updateTextForButtons()
     }
     
     
@@ -413,7 +417,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         navigationController?.view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         
-        chartView.backgroundColor = theme.backgroundColor
+        chartView.updateTheme(theme: theme)
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         getProView.backgroundColor = theme.backgroundColor
@@ -450,32 +454,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_alltime", nil), for: .normal)
         }
     }
-    
-    /**
-     Changes number of requests for specific button
-     */
-    private func changeTextForButton(with keyPath: String?){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            if keyPath == AEDefaultsRequests {
-                let number = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-                self.requestsNumberLabel.text = "\(number)"
-            } else if keyPath == AEDefaultsBlockedRequests {
-                let number = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-                self.blockedNumberLabel.text = "\(number)"
-            }
-        }
-    }
-    
+        
     /**
     Changes number of requests for all buttons
     */
     private func updateTextForButtons(){
-        let requestsNumber = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-        requestsNumberLabel.text = "\(requestsNumber)"
-        
-        let blockedNumber = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-        blockedNumberLabel.text = "\(blockedNumber)"
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
+            self.requestsNumberLabel.text = "\(self.chartModel.requestsCount + requestsNumber)"
+            
+            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
+            self.blockedNumberLabel.text = "\(self.chartModel.blockedCount + blockedNumber)"
+        }
     }
     
     private func changeProtectionStatusLabel(){
@@ -486,6 +478,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Called when "requests" button tapped
      */
     private func chooseRequest(){
+        chartView.activeChart = .requests
         chartModel.chartRequestType = .requests
         
         requestsNumberLabel.alpha = 1.0
@@ -499,6 +492,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     Called when "blocked" button tapped
     */
     private func chooseBlocked(){
+        chartView.activeChart = .blocked
         chartModel.chartRequestType = .blocked
         
         requestsNumberLabel.alpha = 0.5
@@ -521,9 +515,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.checkProtectionStates()
         })
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequestsTemp, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, options: .new, context: nil)
         
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -545,9 +539,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Removes observers from controller
      */
     private func removeObservers(){
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequestsTemp, context: nil)
         
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, context: nil)
     }
     
     /**

@@ -40,6 +40,7 @@ import Foundation
     var tabBarColor: UIColor { get }
     var navigationBarColor: UIColor { get }
     var notificationWindowColor: UIColor { get }
+    var chartViewTextColor: UIColor { get }
     
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
@@ -152,6 +153,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var notificationWindowColor: UIColor {
         return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#f3f3f3")
+    }
+    
+    var chartViewTextColor: UIColor {
+        return configuration.darkTheme ? UIColor(hexString: "#2a2a2a") : UIColor(hexString: "#d8d8d8")
     }
     
     func setupTagButton(_ button: RoundRectButton) {

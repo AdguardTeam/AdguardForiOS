@@ -62,6 +62,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     private var purchaseService: PurchaseServiceProtocol
     private var configuration: ConfigurationService
     private let vpnManager: APVPNManager
+    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: View Controller lifecycle
     
@@ -70,6 +71,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         purchaseService = PurchaseService(network: networkService, resources: resources)
         configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
         vpnManager  = APVPNManager(resources: resources, configuration: configuration)
+        dnsStatisticsService = DnsStatisticsService(resources: resources)
         
         super.init(coder: coder)
         
@@ -84,16 +86,16 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequestsTemp, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, options: .new, context: nil)
         
-        changeTextForButton(with: AEDefaultsRequests)
-        changeTextForButton(with: AEDefaultsBlockedRequests)
+        changeTextForButton(with: AEDefaultsRequestsTemp)
+        changeTextForButton(with: AEDefaultsBlockedRequestsTemp)
     }
     
     deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequestsTemp, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, context: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -356,12 +358,20 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      Changes number of requests for specific button
      */
     private func changeTextForButton(with keyPath: String?){
-        if keyPath == AEDefaultsRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            requestsLabel.text = "\(number)"
-        } else if keyPath == AEDefaultsBlockedRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            blockedLabel.text = "\(number)"
+        let statistics = dnsStatisticsService.readStatistics()
+        
+        var requests = 0
+        var blocked = 0
+        
+        statistics[.all]?.forEach({ requests += $0.numberOfRequests })
+        statistics[.blocked]?.forEach({ blocked += $0.numberOfRequests })
+        
+        if keyPath == AEDefaultsRequestsTemp {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
+            requestsLabel.text = "\(requests + number)"
+        } else if keyPath == AEDefaultsBlockedRequestsTemp {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
+            blockedLabel.text = "\(blocked + number)"
         }
     }
 }

@@ -99,8 +99,8 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
             let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
             let success = table?.delete(withKeys: nil, inRowObject: nil)
             if success ?? false {
-                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
-                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequestsTemp)
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequestsTemp)
             }
         })
     }

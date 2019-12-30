@@ -639,6 +639,9 @@
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EA887EB237EAE2B00E1043D /* VideoTutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
+		7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */; };
+		7EB444BD23B64EC4005E015F /* RequestsStatisticsBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86B623A8C45200EDF107 /* RequestsStatisticsBlock.swift */; };
+		7EB444BE23B64F62005E015F /* APStatisticsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86C423A8D8F800EDF107 /* APStatisticsTable.m */; };
 		7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
 		7EC1F9E32391175600210959 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
@@ -657,7 +660,6 @@
 		7EC635BB239EB2E0003A5CE4 /* LoginResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */; };
 		7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
-		7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC152371A0B600FA651F /* ChartViewController.swift */; };
 		7ECCCC192372B2CC00FA651F /* CubicBezierCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -1925,7 +1927,6 @@
 		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		7ECCCC152371A0B600FA651F /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicBezierCurve.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -3427,7 +3428,6 @@
 			isa = PBXGroup;
 			children = (
 				7ECCCC13237194B200FA651F /* ChartView.swift */,
-				7ECCCC152371A0B600FA651F /* ChartViewController.swift */,
 				7ECCCC182372B2CC00FA651F /* CubicBezierCurve.swift */,
 				7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */,
 				7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */,
@@ -5611,7 +5611,6 @@
 				7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */,
 				7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */,
 				D05538062161D8190020993A /* AboutController.swift in Sources */,
-				7ECCCC162371A0B600FA651F /* ChartViewController.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				7EA887EB237EAE2B00E1043D /* VideoTutorialController.swift in Sources */,
@@ -5862,12 +5861,14 @@
 				7EC635B9239EB2C1003A5CE4 /* KeychainService.swift in Sources */,
 				7E536C6A238D2AC400A83A79 /* TodayViewController.swift in Sources */,
 				7EC635BB239EB2E0003A5CE4 /* LoginResponseParser.swift in Sources */,
+				7EB444BE23B64F62005E015F /* APStatisticsTable.m in Sources */,
 				7E9A488023A2818F00B89540 /* ACNHttpUtils.m in Sources */,
 				7E9A487C23A2814D00B89540 /* ABECFilterParsers.m in Sources */,
 				7E334024239033FB00C39F62 /* Reachability.m in Sources */,
 				7E3340252390340B00C39F62 /* ADProductInfo.m in Sources */,
 				7EC635B5239EB1EA003A5CE4 /* DnsProvidersService.swift in Sources */,
 				7E334029239036D500C39F62 /* APCommonSharedResources.m in Sources */,
+				7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */,
 				7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */,
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
 				7E5EA7AA239A381A00A07DE0 /* ComplexProtectionService.swift in Sources */,
@@ -5879,6 +5880,7 @@
 				7ECD9C61238E6C120065E88D /* SafariService.swift in Sources */,
 				7E334028239034CB00C39F62 /* ACLExecuteBlockDelayed.m in Sources */,
 				7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */,
+				7EB444BD23B64EC4005E015F /* RequestsStatisticsBlock.swift in Sources */,
 				7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */,
 				7EC635B7239EB2AD003A5CE4 /* PurchaseService.swift in Sources */,
 				7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */,

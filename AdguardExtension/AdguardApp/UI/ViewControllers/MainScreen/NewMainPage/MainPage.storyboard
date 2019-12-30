@@ -264,8 +264,8 @@
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="m7T-1D-DMy">
                                                 <rect key="frame" x="0.0" y="65.5" width="768" height="263"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEB-g1-RpB" customClass="ChartView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="768" height="131.5"/>
+                                                    <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="aEB-g1-RpB" customClass="ChartView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="97"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xbW-Q6-fAi">
