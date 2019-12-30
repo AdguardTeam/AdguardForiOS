@@ -244,7 +244,7 @@ class AppDelegateHelper: NSObject {
         // 4-th Navigation Controller is settings tab
         guard let navController = tab.viewControllers?[3] as? MainNavigationController else { return false }
 
-        if let _ = navController.viewControllers.first as? MainMenuController {
+        if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             // Adding new user rule from safari
             if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
                 antibannerController.onReady { (antibanner) in
@@ -261,9 +261,8 @@ class AppDelegateHelper: NSObject {
                         
                         let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
                         let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
-                        
-                        navController.viewControllers.append(safariProtectionController)
-                        navController.viewControllers.append(userFilterController)
+                                                
+                        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
                         
                         tab.selectedViewController = navController
                         self.appDelegate.window.rootViewController = tab
@@ -281,7 +280,7 @@ class AppDelegateHelper: NSObject {
                 
                 dnsSettingsController.stateFromWidget = enabled
                 
-                navController.viewControllers.append(dnsSettingsController)
+                navController.viewControllers = [mainMenuController, dnsSettingsController]
                 
                 tab.selectedViewController = navController
                 self.appDelegate.window.rootViewController = tab
