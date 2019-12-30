@@ -30,7 +30,6 @@ class CustomAnimatedTransitioning : NSObject, UIViewControllerAnimatedTransition
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let toView = transitionContext.view(forKey: .to) else { return }
         
-        
         transitionContext.containerView.addSubview(toView)
         toView.translatesAutoresizingMaskIntoConstraints = false
         toView.leadingAnchor.constraint(equalTo: transitionContext.containerView.leadingAnchor, constant: 0).isActive = true
@@ -42,7 +41,7 @@ class CustomAnimatedTransitioning : NSObject, UIViewControllerAnimatedTransition
         transitionContext.containerView.layoutIfNeeded()
         
         transitionContext.containerView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        let fromPoint = CGPoint(x: transitionContext.containerView.frame.origin.x, y: transitionContext.containerView.frame.origin.y + 210)//transitionContext.containerView.frame.size.height)
+        let fromPoint = CGPoint(x: transitionContext.containerView.frame.origin.x, y: transitionContext.containerView.frame.origin.y + 210)
         toView.frame = CGRect(origin: fromPoint, size: transitionContext.containerView.frame.size)
         UIView.animate(withDuration: 0.2) {
             toView.frame = transitionContext.containerView.frame

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, ChartPointsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -144,7 +144,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - View models
     
-    private var chartModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)
+    private var chartModel: ChartViewModelProtocol?
     private var mainPageModel: MainPageModelProtocol?
     
     
@@ -160,6 +160,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        chartModel = ChartViewModel(ServiceLocator.shared.getService()!, chartView: chartView)
         mainPageModel = MainPageModel(antibanner: antibanner)
         
         addObservers()
@@ -167,7 +168,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         changeProtectionStatusLabel()
         observeContentBlockersState()
     
-        chartModel.chartPointsChangedDelegate = self
+        chartModel?.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
         
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
@@ -199,7 +200,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexProtection.delegate = self
         updateTheme()
         observeProStatus()
-        chartModel.obtainStatistics()
+        chartModel?.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()
     }
@@ -363,10 +364,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - ChartPointsChangedDelegate method
     
-    func chartPointsChanged(requests: [Point], blocked: [Point]) {
-        chartView.chartPoints = (requests, blocked)
-    }
-    
     func numberOfRequestsChanged(requests: Int, blocked: Int) {
         updateTextForButtons()
     }
@@ -376,7 +373,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     func dateTypeChanged(dateType: ChartDateType) {
         changeDateTypeButton(dateType: dateType)
-        chartModel.chartDateType = dateType
+        chartModel?.chartDateType = dateType
     }
     
     
@@ -463,10 +460,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             guard let self = self else { return }
             
             let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
-            self.requestsNumberLabel.text = "\(self.chartModel.requestsCount + requestsNumber)"
+            self.requestsNumberLabel.text = "\(self.chartModel?.requestsCount ?? 0 + requestsNumber)"
             
             let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
-            self.blockedNumberLabel.text = "\(self.chartModel.blockedCount + blockedNumber)"
+            self.blockedNumberLabel.text = "\(self.chartModel?.blockedCount ?? 0 + blockedNumber)"
         }
     }
     
@@ -479,7 +476,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      */
     private func chooseRequest(){
         chartView.activeChart = .requests
-        chartModel.chartRequestType = .requests
+        chartModel?.chartRequestType = .requests
         
         requestsNumberLabel.alpha = 1.0
         blockedNumberLabel.alpha = 0.5
@@ -493,7 +490,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     */
     private func chooseBlocked(){
         chartView.activeChart = .blocked
-        chartModel.chartRequestType = .blocked
+        chartModel?.chartRequestType = .blocked
         
         requestsNumberLabel.alpha = 0.5
         blockedNumberLabel.alpha = 1.0

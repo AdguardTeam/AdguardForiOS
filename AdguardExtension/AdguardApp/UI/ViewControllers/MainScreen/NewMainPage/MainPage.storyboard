@@ -437,10 +437,10 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-5H-fB1">
-                                                <rect key="frame" x="269" y="0.0" width="230" height="65.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="All time">
+                                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-5H-fB1">
+                                                <rect key="frame" x="145" y="0.0" width="124" height="48"/>
+                                                <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="All time" image="arrow_down">
                                                     <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
@@ -2216,6 +2216,7 @@
         <image name="Triangle up" width="20" height="10"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
         <image name="apps" width="24" height="24"/>
+        <image name="arrow_down" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
         <image name="home" width="24" height="24"/>
         <image name="ic_adguard" width="24" height="24"/>

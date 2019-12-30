@@ -26,13 +26,12 @@ protocol ChartViewModelProtocol {
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
     
-    var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
+    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate? { get set }
     
     func obtainStatistics()
 }
 
-protocol ChartPointsChangedDelegate: class {
-    func chartPointsChanged(requests: [Point], blocked: [Point])
+protocol NumberOfRequestsChangedDelegate: class {
     func numberOfRequestsChanged(requests: Int, blocked: Int)
 }
 
@@ -87,11 +86,12 @@ enum ChartRequestType {
 
 class ChartViewModel: ChartViewModelProtocol {
     
+    let chartView: ChartView
+    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
+    
     var requestsCount: Int = 0
     var blockedCount: Int = 0
-    
-    weak var chartPointsChangedDelegate: ChartPointsChangedDelegate?
-    
+        
     var requests: [RequestsStatisticsBlock] = []
     var blockedRequests: [RequestsStatisticsBlock] = []
     
@@ -112,8 +112,9 @@ class ChartViewModel: ChartViewModelProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView) {
         self.dnsStatisticsService = dnsStatisticsService
+        self.chartView = chartView
     }
     
     func obtainStatistics() {
@@ -135,7 +136,7 @@ class ChartViewModel: ChartViewModelProtocol {
         requestsCount = requestsData.number
         blockedCount = blockedData.number
                 
-        chartPointsChangedDelegate?.chartPointsChanged(requests: requestsData.points, blocked: blockedData.points)
+        chartView.chartPoints = (requestsData.points, blockedData.points)
         chartPointsChangedDelegate?.numberOfRequestsChanged(requests: requestsData.number, blocked: blockedData.number)
     }
     
