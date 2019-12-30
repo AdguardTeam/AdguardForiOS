@@ -140,7 +140,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     /**
      Developer mode state
      */
-    var developerMode: Bool {
+    @objc dynamic var developerMode: Bool {
         set {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
             //post notification or something else

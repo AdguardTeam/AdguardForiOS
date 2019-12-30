@@ -977,8 +977,8 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="DL6-iu-4PZ">
                                         <rect key="frame" x="0.0" y="130" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DL6-iu-4PZ" id="kbD-aa-hPc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="119"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DL6-iu-4PZ" id="kbD-aa-hPc">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48I-mw-FrB" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1003,8 +1003,29 @@
                                                         <constraint firstAttribute="width" constant="24" id="Ulm-3x-Cpn"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can choose filters andmake your  rules for DNS requests blocking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-J0-bKs" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="59.5" width="366" height="36"/>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="48I-mw-FrB" firstAttribute="centerY" secondItem="TAx-VA-T5h" secondAttribute="centerY" id="E9c-Rp-9VP"/>
+                                                <constraint firstItem="TAx-VA-T5h" firstAttribute="leading" secondItem="kbD-aa-hPc" secondAttribute="leading" constant="24" id="EhB-MY-Sf2"/>
+                                                <constraint firstAttribute="bottom" secondItem="W55-Kl-AH6" secondAttribute="bottom" constant="18" id="IDq-ar-ha1"/>
+                                                <constraint firstItem="TAx-VA-T5h" firstAttribute="centerY" secondItem="W55-Kl-AH6" secondAttribute="centerY" id="M5m-hE-De3"/>
+                                                <constraint firstItem="W55-Kl-AH6" firstAttribute="top" secondItem="kbD-aa-hPc" secondAttribute="top" constant="16" id="Ydu-SY-r2O"/>
+                                                <constraint firstItem="TKd-J0-bKs" firstAttribute="leading" secondItem="TAx-VA-T5h" secondAttribute="leading" id="ZNm-QE-5oE"/>
+                                                <constraint firstItem="W55-Kl-AH6" firstAttribute="leading" secondItem="48I-mw-FrB" secondAttribute="trailing" constant="24" id="tu0-rT-kvU"/>
+                                                <constraint firstAttribute="trailing" secondItem="W55-Kl-AH6" secondAttribute="trailing" constant="24" id="vyj-S8-sFc"/>
+                                                <constraint firstItem="48I-mw-FrB" firstAttribute="leading" secondItem="TAx-VA-T5h" secondAttribute="trailing" constant="16" id="zV3-mS-vgp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tTQ-ho-kal">
+                                        <rect key="frame" x="0.0" y="93" width="414" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTQ-ho-kal" id="6gQ-9V-p7b">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can choose filters and make your  rules for DNS requests blocking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjN-LB-N3T" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="20" width="366" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1014,17 +1035,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="48I-mw-FrB" firstAttribute="centerY" secondItem="TAx-VA-T5h" secondAttribute="centerY" id="E9c-Rp-9VP"/>
-                                                <constraint firstItem="TAx-VA-T5h" firstAttribute="leading" secondItem="kbD-aa-hPc" secondAttribute="leading" constant="24" id="EhB-MY-Sf2"/>
-                                                <constraint firstItem="TAx-VA-T5h" firstAttribute="centerY" secondItem="W55-Kl-AH6" secondAttribute="centerY" id="M5m-hE-De3"/>
-                                                <constraint firstItem="TKd-J0-bKs" firstAttribute="trailing" secondItem="W55-Kl-AH6" secondAttribute="trailing" id="Qxh-mZ-tc0"/>
-                                                <constraint firstAttribute="bottom" secondItem="TKd-J0-bKs" secondAttribute="bottom" constant="34" id="VdA-0x-OsO"/>
-                                                <constraint firstItem="TKd-J0-bKs" firstAttribute="top" secondItem="TAx-VA-T5h" secondAttribute="bottom" constant="16" id="Wm7-6Z-0J7"/>
-                                                <constraint firstItem="W55-Kl-AH6" firstAttribute="top" secondItem="kbD-aa-hPc" secondAttribute="top" constant="16" id="Ydu-SY-r2O"/>
-                                                <constraint firstItem="TKd-J0-bKs" firstAttribute="leading" secondItem="TAx-VA-T5h" secondAttribute="leading" id="ZNm-QE-5oE"/>
-                                                <constraint firstItem="W55-Kl-AH6" firstAttribute="leading" secondItem="48I-mw-FrB" secondAttribute="trailing" constant="24" id="tu0-rT-kvU"/>
-                                                <constraint firstAttribute="trailing" secondItem="W55-Kl-AH6" secondAttribute="trailing" constant="24" id="vyj-S8-sFc"/>
-                                                <constraint firstItem="48I-mw-FrB" firstAttribute="leading" secondItem="TAx-VA-T5h" secondAttribute="trailing" constant="16" id="zV3-mS-vgp"/>
+                                                <constraint firstItem="qjN-LB-N3T" firstAttribute="top" secondItem="6gQ-9V-p7b" secondAttribute="top" constant="20" id="4EC-SS-xi9"/>
+                                                <constraint firstAttribute="trailing" secondItem="qjN-LB-N3T" secondAttribute="trailing" constant="24" id="5Oa-GQ-wZi"/>
+                                                <constraint firstAttribute="bottom" secondItem="qjN-LB-N3T" secondAttribute="bottom" constant="34" id="Ogu-mb-eZ8"/>
+                                                <constraint firstItem="qjN-LB-N3T" firstAttribute="leading" secondItem="6gQ-9V-p7b" secondAttribute="leading" constant="24" id="WPZ-8R-v1Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1227,7 +1241,7 @@
                         <outletCollection property="themableLabels" destination="48I-mw-FrB" collectionClass="NSMutableArray" id="amp-Kr-OdZ"/>
                         <outletCollection property="themableLabels" destination="zBI-VP-hHZ" collectionClass="NSMutableArray" id="nw7-Bf-wyH"/>
                         <outletCollection property="themableLabels" destination="plc-eu-aXh" collectionClass="NSMutableArray" id="TYZ-19-sbl"/>
-                        <outletCollection property="themableLabels" destination="TKd-J0-bKs" collectionClass="NSMutableArray" id="i9p-rb-NdA"/>
+                        <outletCollection property="themableLabels" destination="qjN-LB-N3T" collectionClass="NSMutableArray" id="1qJ-bb-TSe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSY-14-hFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

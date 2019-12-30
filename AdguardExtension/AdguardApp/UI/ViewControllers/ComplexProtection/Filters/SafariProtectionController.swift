@@ -109,12 +109,8 @@ class SafariProtectionController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let key = AEDefaultsUserFilterEnabled
-        if let userFilterEnabled = resources.sharedDefaults().object(forKey: key) as? Bool {
-            userFilterStateLabel.text = userFilterEnabled ? ACLocalizedString("enabled", nil) : ACLocalizedString("disabled", nil)
-        } else {
-            userFilterStateLabel.text = ACLocalizedString("enabled", nil)
-        }
+        let userFilterEnabled = resources.safariUserFilterEnabled   
+        userFilterStateLabel.text = ACLocalizedString(userFilterEnabled ? "enabled": "disabled", nil)
     }
     
     deinit {
