@@ -220,6 +220,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         theme.setupTable(tableView)
         theme.setupSwitch(enabledSwitch)
         theme.setupSeparators(separators)
+        theme.setupNavigationBar(navigationController?.navigationBar)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()

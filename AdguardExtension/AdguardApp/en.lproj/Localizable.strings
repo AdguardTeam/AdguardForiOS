@@ -58,15 +58,6 @@
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
 
-/* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Protection is enabled";
-
-/* (MainController) login status caption on main screen */
-"protection_partly_enabled_caption" = "Some content blockers are disabled";
-
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Protection is disabled";
-
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "START TRIAL";
 
@@ -318,12 +309,6 @@
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Please wait...";
-
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "I've just installed AdGuard AdBlocker for iOS.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "If you want to surf the web ad-free as I do, check it out:";
 
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "Theme";

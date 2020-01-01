@@ -223,103 +223,72 @@ class AppDelegateHelper: NSObject {
         When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
         https://github.com/AdguardTeam/AdguardForiOS/issues/1135
         */
+                
+        let command = url.host
+
+        guard let tab = self.getMainTabController() else {
+            DDLogError("(AppDeegate) application open url error. There is no tab controller")
+            return false
+        }
+
+        if tab.viewControllers?.count == 0 {
+            return false
+        }
+
+        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
+            appDelegate.window.rootViewController = launchScreenController
+        }
         
-        // todo: make app commands work in a new navigation flow
+        // 4-th Navigation Controller is settings tab
+        guard let navController = tab.viewControllers?[3] as? MainNavigationController else { return false }
+
+        if let mainMenuController = navController.viewControllers.first as? MainMenuController {
+            // Adding new user rule from safari
+            if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
+                antibannerController.onReady { (antibanner) in
+                    DispatchQueue.main.async {
+                        let path = String(url.path.suffix(url.path.count - 1))
+                        
+                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
+                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
+                        
+                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService)
+                        
+                        userFilterController.model = model
+                        userFilterController.newRuleText = path
+                        
+                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
+                                                
+                        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
+                        
+                        tab.selectedViewController = navController
+                        self.appDelegate.window.rootViewController = tab
+                    }
+                }
+            }
+            
+            // Turning on/off system protection from widget
+            if url.scheme == AE_URLSCHEME && command == openSystemProtection {
+                let enabledString = String(url.path.suffix(url.path.count - 1))
+                let enabled = enabledString == "on"
+                
+                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
+                
+                dnsSettingsController.stateFromWidget = enabled
+                
+                navController.viewControllers = [mainMenuController, dnsSettingsController]
+                
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+            }
+        } else {
+            DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
+        }
         
-//        let command = url.host
-//
-//        guard let nav = self.getNavigationController() else {
-//            DDLogError("(AppDeegate) application open url error. There is no nav controller")
-//            return false
-//        }
-//
-//        if nav.viewControllers.count == 0 {
-//            return false
-//        }
-//
-//        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
-//        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-//        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
-//            appDelegate.window.rootViewController = launchScreenController
-//        }
-//
-//        if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
-//            antibannerController.onReady { (antibanner) in
-//                DispatchQueue.main.async {
-//
-//                    let path = String(url.path.suffix(url.path.count - 1))
-//
-//                    let main = nav.viewControllers[0]
-//                    if main.isKind(of: MainController.self) {
-//                        let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
-//                        let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
-//                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
-//                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
-//
-//                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService)
-//
-//                        userFilterController.model = model
-//                        userFilterController.newRuleText = path
-//
-//                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-//                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
-//
-//                        nav.viewControllers = [main, menuController, safariProtectionController, userFilterController]
-//
-//                        main.loadViewIfNeeded()
-//                        menuController.loadViewIfNeeded()
-//                        safariProtectionController.loadViewIfNeeded()
-//                        userFilterController.loadViewIfNeeded()
-//
-//                        self.appDelegate.window.rootViewController = nav
-//                    }
-//                    else{
-//                        DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
-//                    }
-//                }
-//            }
-//            return true
-//        }
-//
-//        if url.scheme == AE_URLSCHEME && command == openSystemProtection {
-//            let enabledString = String(url.path.suffix(url.path.count - 1))
-//            let enabled = enabledString == "on"
-//
-//            let main = nav.viewControllers[0]
-//            if main.isKind(of: MainController.self) {
-//                let menuStoryboard = UIStoryboard(name: "MainMenu", bundle: Bundle.main)
-//                let menuController = menuStoryboard.instantiateViewController(withIdentifier: "MainMenuController")
-//
-//                let proStatus = configuration.proStatus
-//
-//                if proStatus {
-//                    let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
-//                    guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
-//
-//                    dnsSettingsController.stateFromWidget = enabled
-//
-//                    let proViewControllers = [main, menuController, dnsSettingsController]
-//                    nav.viewControllers = proViewControllers
-//
-//                    main.loadViewIfNeeded()
-//                    menuController.loadViewIfNeeded()
-//                    dnsSettingsController.loadViewIfNeeded()
-//                } else {
-//                    let licenseStoryBoard = UIStoryboard(name: "License", bundle: Bundle.main)
-//                    guard let getProController = licenseStoryBoard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else { return false }
-//
-//                    let toPurchaseViewControllers = [main, getProController]
-//                    nav.viewControllers = toPurchaseViewControllers
-//
-//                    main.loadViewIfNeeded()
-//                    getProController.loadViewIfNeeded()
-//                }
-//
-//                self.appDelegate.window.rootViewController = nav
-//            } else{
-//                DDLogError("(AppDelegate) Can't open systemProtection because mainController is not found.")
-//            }
-//        }
         return false
     }
     
