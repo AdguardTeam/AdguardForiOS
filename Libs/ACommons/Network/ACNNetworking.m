@@ -39,7 +39,7 @@ NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
 
 - (instancetype)init{
     
-    if (self == [super init]) {
+    if (self = [super init]) {
         
         _defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
         

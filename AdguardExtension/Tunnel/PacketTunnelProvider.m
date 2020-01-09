@@ -454,7 +454,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)reachNotify:(NSNotification *)note {
     
-    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %ld", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %zd", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
