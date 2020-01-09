@@ -25,19 +25,26 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     /* Services */
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     /* Sections */
     private let enableListOfRulesSection = 0
     private let addRuleSection = 1
     private let rulesSection = 2
     
+    /* Rows */
+    private let enableRow = 0
+    private let descriptionRow = 1
+    
     /* Reuse identifiers */
-    private let enableListReuseId = "enableListOfRulesCell"
+    private let enabledReuseId = "enabledCell"
+    private let descriptionReuseId = "descriptionReuseId"
     private let addRuleReuseId = "addRuleCell"
     private let ruleReuseId = "ruleCell"
     private let selectRuleReuseId = "selectRuleCell"
     
-    private var themeObserver: Any? = nil
+    private var themeObserver: NotificationToken?
+    private var conficurationObservation: NSKeyValueObservation?
     
     var model: ListOfRulesModelProtocol? = nil
     
@@ -66,9 +73,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        themeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
                 self?.updateTheme()
         }
+        
+        conficurationObservation = configuration.observe(\.developerMode) { [weak self] (_, _) in
+            self?.tableView.reloadData()
+        }
+        
         updateTheme()
     }
     
@@ -117,7 +129,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         if state == .normal {
             switch section {
             case enableListOfRulesSection:
-                return 1
+                return 2
             case addRuleSection:
                 return 1
             case rulesSection:
@@ -132,12 +144,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if state == .normal {
-            switch indexPath.section {
-            case enableListOfRulesSection:
+            switch (indexPath.section, indexPath.row) {
+            case (enableListOfRulesSection, enableRow):
                 return setupEnableListOfRulesCell()
-            case addRuleSection:
+            case (enableListOfRulesSection, descriptionRow):
+                return setupDescriptionCell()
+            case (addRuleSection, _):
                 return setupAddRuleCell()
-            case rulesSection:
+            case (rulesSection, _):
                 return setupNormalRuleCell(row: indexPath.row)
             default:
                 return UITableViewCell()
@@ -169,6 +183,15 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+        if (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.developerMode {
+            return 0.0
+        }
+        
+        return tableView.rowHeight
     }
     
     // MARK: - ListOfRulesModelDelegate method
@@ -253,11 +276,19 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     // MARK: - Cells setup functions
     
     private func setupEnableListOfRulesCell() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: enableListReuseId) as? EnableListOfRulesCell{
+        if let cell = tableView.dequeueReusableCell(withIdentifier: enabledReuseId) as? EnableListOfRulesCell{
             cell.theme = theme
-            cell.rulesDescription = model?.descriptionTitle
             cell.type = model?.type
             cell.serviceState = model?.enabled
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    private func setupDescriptionCell() -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: descriptionReuseId) as? DesciptionCell{
+            cell.theme = theme
+            cell.rulesDescription = model?.descriptionTitle
             return cell
         }
         return UITableViewCell()

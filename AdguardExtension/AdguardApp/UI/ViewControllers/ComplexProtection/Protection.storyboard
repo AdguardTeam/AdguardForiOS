@@ -85,11 +85,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="vlx-BS-A2y" secondAttribute="bottom" constant="24" id="UYG-gn-VnA"/>
                                                 <constraint firstItem="X7W-0Y-oFy" firstAttribute="centerY" secondItem="gZs-M6-5s0" secondAttribute="centerY" id="o4V-cI-VPj"/>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7">
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <integer key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </constraint>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="wn5-St-EH0"/>
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="22" id="y78-mB-GKy"/>

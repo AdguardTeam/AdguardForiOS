@@ -50,11 +50,11 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     
     var enabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsDnsWhitelistEnabled)
+            return resources.systemWhitelistEnabled
         }
         set{
             if enabled != newValue{
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsDnsWhitelistEnabled)
+                resources.systemWhitelistEnabled = newValue
                 vpnManager.restartTunnel()
             }
         }

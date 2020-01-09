@@ -31,11 +31,16 @@ class RequestsBlockingController: UITableViewController {
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
     private var notificationToken: NotificationToken?
+    private var configurationToken: NSKeyValueObservation?
+    
+    private let enabledRow = 0
+    private let headerSection = 0
     
     // MARK: - View controller life cycle
     
@@ -64,10 +69,12 @@ class RequestsBlockingController: UITableViewController {
             self?.updateTheme()
         }
         
-        let dnsRequestsBlockingEnabledObj = resources.sharedDefaults().object(forKey: AEDefaultsDNSRequestsBlocking)
-        let dnsRequestsBlockingEnabled: Bool = dnsRequestsBlockingEnabledObj as? Bool ?? true
+        configurationToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
         
-        enabledSwitch.isOn = dnsRequestsBlockingEnabled
+        enabledSwitch.isOn = resources.dnsRequestBlockingEnabled
         requestBlockingStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         setupBackButton()
@@ -88,12 +95,21 @@ class RequestsBlockingController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == headerSection && indexPath.row == enabledRow && !configuration.developerMode {
+            return 0.0
+        }
+        
+        return tableView.rowHeight
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == 0 ? 0.0 : 0.1
     }
 
     @IBAction func enabledSwitchAction(_ sender: UISwitch) {
-        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsDNSRequestsBlocking)
+        resources.dnsRequestBlockingEnabled = sender.isOn
         requestBlockingStateLabel.text = sender.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
         vpnManager.restartTunnel()

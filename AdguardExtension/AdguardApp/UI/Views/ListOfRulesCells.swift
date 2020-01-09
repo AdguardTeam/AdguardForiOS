@@ -22,19 +22,10 @@ class EnableListOfRulesCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var serviceStateLabel: ThemableLabel!
     @IBOutlet weak var serviceStateSwitch: UISwitch!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var separatorView: UIView!
     
     var theme: ThemeServiceProtocol? {
         didSet {
             updateTheme()
-        }
-    }
-    
-    var rulesDescription: String? {
-        didSet{
-            descriptionTextView.textContainer.lineFragmentPadding = 0.0
-            setDescriptionText(rulesDescription!)
         }
     }
     
@@ -73,10 +64,27 @@ class EnableListOfRulesCell: UITableViewCell {
     
     private func updateTheme(){
         theme?.setupLabel(serviceStateLabel)
-        theme?.setupTextView(descriptionTextView)
         theme?.setupSwitch(serviceStateSwitch)
         theme?.setupTableCell(self)
-        separatorView.backgroundColor = theme?.separatorColor
+    }
+}
+
+class DesciptionCell: UITableViewCell {
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var separatorView: UIView!
+    
+    var theme: ThemeServiceProtocol? {
+        didSet {
+            updateTheme()
+        }
+    }
+    
+    var rulesDescription: String? {
+        didSet{
+            descriptionTextView.textContainer.lineFragmentPadding = 0.0
+            setDescriptionText(rulesDescription!)
+        }
     }
     
     private func setDescriptionText(_ text: String){
@@ -86,6 +94,12 @@ class EnableListOfRulesCell: UITableViewCell {
             headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: headerText.length))
             descriptionTextView.attributedText = headerText
         }
+    }
+    
+    private func updateTheme(){
+        theme?.setupTextView(descriptionTextView)
+        theme?.setupTableCell(self)
+        separatorView.backgroundColor = theme?.separatorColor
     }
 }
 

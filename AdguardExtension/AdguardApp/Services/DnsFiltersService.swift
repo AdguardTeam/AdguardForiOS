@@ -212,9 +212,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     var filtersJson: String  {
         get {
             // If DNS requests blocking option is off, we return empty json
-            let dnsRequestsBlockingEnabledObj = resources.sharedDefaults().object(forKey: AEDefaultsDNSRequestsBlocking)
-            let dnsRequestsBlockingEnabled: Bool = dnsRequestsBlockingEnabledObj as? Bool ?? true
-            if !dnsRequestsBlockingEnabled {
+            if !resources.dnsRequestBlockingEnabled {
                 return "[]"
             }
             
@@ -224,13 +222,13 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             })
             
             // todo: do not read all rules to get counter
-            let systemBlackListEnabled = resources.sharedDefaults().bool(forKey: AEDefaultsDnsBlacklistEnabled)
+            let systemBlackListEnabled = resources.safariUserFilterEnabled
             if userRules.count > 0 && systemBlackListEnabled {
                 json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
             }
 
             // todo: do not read all rules to get counter
-            let systemWhiteListEnabled = resources.sharedDefaults().bool(forKey: AEDefaultsDnsWhitelistEnabled)
+            let systemWhiteListEnabled = resources.systemWhitelistEnabled
             if whitelistDomains.count > 0 && systemWhiteListEnabled {
                 json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId)])
             }

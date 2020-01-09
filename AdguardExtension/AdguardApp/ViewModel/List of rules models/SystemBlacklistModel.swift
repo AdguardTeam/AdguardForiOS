@@ -47,11 +47,11 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     
     var enabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsDnsBlacklistEnabled)
+            return resources.systemUserFilterEnabled
         }
         set{
             if enabled != newValue {
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsDnsBlacklistEnabled)
+                resources.systemUserFilterEnabled = newValue
                 vpnManager.restartTunnel()
             }
         }

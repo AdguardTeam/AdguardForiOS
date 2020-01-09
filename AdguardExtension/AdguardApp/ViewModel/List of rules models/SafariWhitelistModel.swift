@@ -50,11 +50,11 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     
     var enabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsSafariWhitelistEnabled)
+            return resources.safariWhitelistEnabled
         }
         set{
             if enabled != newValue {
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsSafariWhitelistEnabled)
+                resources.safariWhitelistEnabled = newValue
                 contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
             }
         }

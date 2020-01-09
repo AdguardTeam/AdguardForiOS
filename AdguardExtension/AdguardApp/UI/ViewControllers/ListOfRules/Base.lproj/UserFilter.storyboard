@@ -130,11 +130,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="enableListOfRulesCell" id="5wZ-Ag-7LO" customClass="EnableListOfRulesCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="122"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="enabledCell" id="TM6-yX-wOg" userLabel="enabledCell" customClass="EnableListOfRulesCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5wZ-Ag-7LO" id="n43-gz-OeB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TM6-yX-wOg" id="7of-2L-ujq">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjj-eo-Yf1">
@@ -144,8 +144,8 @@
                                                 <constraint firstAttribute="width" constant="24" id="hwE-rg-RKF"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgx-D0-lLf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="64" y="11" width="261" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgx-D0-lLf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="64" y="22" width="261" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -156,6 +156,30 @@
                                                 <action selector="listOfRulesStateAction:" destination="Ety-nu-n9X" eventType="valueChanged" id="VaO-Su-K41"/>
                                             </connections>
                                         </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Jgx-D0-lLf" firstAttribute="leading" secondItem="Tjj-eo-Yf1" secondAttribute="trailing" constant="16" id="7In-Sx-N3l"/>
+                                        <constraint firstItem="hYg-k1-Rpw" firstAttribute="leading" secondItem="Jgx-D0-lLf" secondAttribute="trailing" constant="16" id="BKt-Tq-fwj"/>
+                                        <constraint firstItem="Tjj-eo-Yf1" firstAttribute="leading" secondItem="7of-2L-ujq" secondAttribute="leading" constant="24" id="EQv-6a-P1e"/>
+                                        <constraint firstAttribute="trailing" secondItem="hYg-k1-Rpw" secondAttribute="trailing" constant="24" id="N3C-h7-h4E"/>
+                                        <constraint firstItem="Tjj-eo-Yf1" firstAttribute="centerY" secondItem="7of-2L-ujq" secondAttribute="centerY" id="Nx8-gv-Qsx"/>
+                                        <constraint firstItem="hYg-k1-Rpw" firstAttribute="centerY" secondItem="7of-2L-ujq" secondAttribute="centerY" id="Oky-Qg-dPW"/>
+                                        <constraint firstItem="Jgx-D0-lLf" firstAttribute="centerY" secondItem="7of-2L-ujq" secondAttribute="centerY" id="TTX-uE-c8a"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconImageView" destination="Tjj-eo-Yf1" id="wHN-zE-mAD"/>
+                                    <outlet property="serviceStateLabel" destination="Jgx-D0-lLf" id="lG9-En-fNa"/>
+                                    <outlet property="serviceStateSwitch" destination="hYg-k1-Rpw" id="5a2-2K-hsU"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="descriptionReuseId" id="5wZ-Ag-7LO" customClass="DesciptionCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="414" height="81"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5wZ-Ag-7LO" id="n43-gz-OeB">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1E-lI-kfE">
                                             <rect key="frame" x="0.0" y="121" width="414" height="1"/>
                                             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
@@ -173,29 +197,19 @@
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Jgx-D0-lLf" firstAttribute="centerY" secondItem="Tjj-eo-Yf1" secondAttribute="centerY" id="0dq-nv-aQQ"/>
-                                        <constraint firstItem="hYg-k1-Rpw" firstAttribute="top" secondItem="n43-gz-OeB" secondAttribute="top" constant="8" id="1mg-H3-uIn"/>
                                         <constraint firstItem="LbE-Iw-fC1" firstAttribute="leading" secondItem="n43-gz-OeB" secondAttribute="leading" constant="24" id="3W8-7d-lYh"/>
-                                        <constraint firstItem="LbE-Iw-fC1" firstAttribute="top" secondItem="hYg-k1-Rpw" secondAttribute="bottom" constant="16" id="4gf-uv-PZH"/>
-                                        <constraint firstItem="Tjj-eo-Yf1" firstAttribute="top" secondItem="n43-gz-OeB" secondAttribute="top" constant="8" id="BUz-Cf-UXP"/>
-                                        <constraint firstAttribute="trailing" secondItem="hYg-k1-Rpw" secondAttribute="trailing" constant="24" id="BeR-y3-BJt"/>
                                         <constraint firstAttribute="trailing" secondItem="LbE-Iw-fC1" secondAttribute="trailing" constant="24" id="ZpC-zG-GH5"/>
-                                        <constraint firstItem="Jgx-D0-lLf" firstAttribute="leading" secondItem="Tjj-eo-Yf1" secondAttribute="trailing" constant="16" id="h4h-xY-iRs"/>
-                                        <constraint firstItem="Tjj-eo-Yf1" firstAttribute="leading" secondItem="n43-gz-OeB" secondAttribute="leading" constant="24" id="iKM-0j-KN5"/>
                                         <constraint firstItem="V1E-lI-kfE" firstAttribute="leading" secondItem="n43-gz-OeB" secondAttribute="leading" id="laK-Rg-Lb1"/>
+                                        <constraint firstItem="LbE-Iw-fC1" firstAttribute="top" secondItem="n43-gz-OeB" secondAttribute="top" constant="24" id="lbf-Bw-sWO"/>
                                         <constraint firstAttribute="trailing" secondItem="V1E-lI-kfE" secondAttribute="trailing" id="oTM-pz-zG9"/>
                                         <constraint firstAttribute="bottom" secondItem="V1E-lI-kfE" secondAttribute="bottom" id="op8-Zy-GCw"/>
-                                        <constraint firstItem="hYg-k1-Rpw" firstAttribute="leading" secondItem="Jgx-D0-lLf" secondAttribute="trailing" constant="16" id="sgv-1E-VeF"/>
                                         <constraint firstAttribute="bottom" secondItem="LbE-Iw-fC1" secondAttribute="bottom" constant="24" id="wk0-mk-qQO"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="descriptionTextView" destination="LbE-Iw-fC1" id="Iie-Az-lRu"/>
-                                    <outlet property="iconImageView" destination="Tjj-eo-Yf1" id="XnN-tP-2bA"/>
-                                    <outlet property="separatorView" destination="V1E-lI-kfE" id="nCb-xK-Idy"/>
-                                    <outlet property="serviceStateLabel" destination="Jgx-D0-lLf" id="Rdt-6v-NHn"/>
-                                    <outlet property="serviceStateSwitch" destination="hYg-k1-Rpw" id="gW6-f1-0z1"/>
+                                    <outlet property="descriptionTextView" destination="LbE-Iw-fC1" id="yV2-gE-6qg"/>
+                                    <outlet property="separatorView" destination="V1E-lI-kfE" id="kBi-qk-zcR"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addRuleCell" id="s1v-zo-UXC" customClass="AddRuleCell" customModule="Adguard" customModuleProvider="target">

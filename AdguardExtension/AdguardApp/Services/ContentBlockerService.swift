@@ -406,7 +406,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 // add user rules
                 
-                let userFilterEnabled = resources.sharedDefaults().object(forKey: AEDefaultsUserFilterEnabled) as? Bool ?? true
+                let userFilterEnabled = resources.safariUserFilterEnabled
                 
                 let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
                 
@@ -419,7 +419,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
                 
-                let whitelistEnabled = resources.sharedDefaults().object(forKey: AEDefaultsSafariWhitelistEnabled) as? Bool ?? true
+                let whitelistEnabled = resources.safariWhitelistEnabled
                 
                 if whitelistEnabled {
                     if inverted {

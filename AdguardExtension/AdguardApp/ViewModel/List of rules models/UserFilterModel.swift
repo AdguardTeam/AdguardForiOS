@@ -53,11 +53,11 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     var enabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsUserFilterEnabled)
+            return resources.safariUserFilterEnabled
         }
         set{
             if enabled != newValue {
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsUserFilterEnabled)
+                resources.safariUserFilterEnabled = newValue
                 contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
             }
         }

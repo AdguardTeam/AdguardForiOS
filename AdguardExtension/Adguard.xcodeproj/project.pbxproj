@@ -1134,6 +1134,17 @@
 		D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */; };
 		D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A164121678EA5008BB432 /* RoundrectView.swift */; };
 		D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */; };
+		D07A811123B4FBB500181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811223B501CD00181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811323B501CE00181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811423B501CF00181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811523B501D100181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811623B501D200181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811723B501D200181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811823B501D300181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811923B501D300181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811A23B501D400181E54 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		D07A811C23B5036E00181E54 /* SharedResourcesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */; };
 		D07AA0632207A5B10065779F /* NewDnsServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA0622207A5B10065779F /* NewDnsServerController.swift */; };
 		D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07AA066220823670065779F /* ChooseProtocolController.swift */; };
 		D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
@@ -2079,6 +2090,8 @@
 		D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		D07A164121678EA5008BB432 /* RoundrectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundrectView.swift; sourceTree = "<group>"; };
 		D07A16432168AC0A008BB432 /* NewCustomFilterDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomFilterDetailsController.swift; sourceTree = "<group>"; };
+		D07A811023B4FBB500181E54 /* SharedResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResources.swift; sourceTree = "<group>"; };
+		D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResourcesTest.swift; sourceTree = "<group>"; };
 		D07AA0622207A5B10065779F /* NewDnsServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDnsServerController.swift; sourceTree = "<group>"; };
 		D07AA066220823670065779F /* ChooseProtocolController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseProtocolController.swift; sourceTree = "<group>"; };
 		D07AA06B220833A10065779F /* ACDnsUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACDnsUtils.h; sourceTree = "<group>"; };
@@ -2883,6 +2896,7 @@
 				653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */,
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
+				D07A811023B4FBB500181E54 /* SharedResources.swift */,
 				D0427C761F434129002FB018 /* APDnsServerAddress.h */,
 				D0427C771F434129002FB018 /* APDnsServerAddress.m */,
 				D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */,
@@ -3199,6 +3213,7 @@
 				D0E8B165232939CA00476BC3 /* RulesProcessorTest.swift */,
 				D0EC86B223A772BF00EDF107 /* DnsFiltersServiceTest.swift */,
 				D0D5949623AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift */,
+				D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -5338,6 +5353,7 @@
 				D03E533221B6A4B200C62152 /* UIColorUtils.swift in Sources */,
 				D093719821B056BB004A24F1 /* CocoaLumberjack.swift in Sources */,
 				65FAB33B1D6C576900A0706B /* ACObject.m in Sources */,
+				D07A811323B501CE00181E54 /* SharedResources.swift in Sources */,
 				655A02301C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				65EC9C9F1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				655A02A51C6B7686000F00D7 /* Reachability.m in Sources */,
@@ -5481,6 +5497,7 @@
 				D0702B3F2188859D0051669A /* FileShareService.swift in Sources */,
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
+				D07A811123B4FBB500181E54 /* SharedResources.swift in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				D0319F9E21947633002C17D9 /* RuleDetailsController.swift in Sources */,
 				658E43AA1E8934A4008DAA59 /* AERDomainFilter.m in Sources */,
@@ -5623,6 +5640,7 @@
 				D0EC86C823A8E97F00EDF107 /* APDnsLogTable.m in Sources */,
 				D0C37EB422A66BBF0004337D /* DnsProxyTest.swift in Sources */,
 				D0D5949923AA3C330033CAF3 /* DnsLogRecord.swift in Sources */,
+				D07A811223B501CD00181E54 /* SharedResources.swift in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				D0EC86B823A8C45D00EDF107 /* RequestsStatisticsBlock.swift in Sources */,
 				D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */,
@@ -5656,6 +5674,7 @@
 				D0ABE0D42230FD5500771635 /* Constants.swift in Sources */,
 				65EC9CA91BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0288F30230697BA00A4EBEF /* Reachability.m in Sources */,
+				D07A811C23B5036E00181E54 /* SharedResourcesTest.swift in Sources */,
 				65EC9AF51BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
 				D0288F31230697C800A4EBEF /* ACLFileLocker.m in Sources */,
@@ -5734,6 +5753,7 @@
 				655A02351C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				655A022F1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				655A027A1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
+				D07A811523B501D100181E54 /* SharedResources.swift in Sources */,
 				655A02921C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				D031A156219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				655A02321C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
@@ -5778,6 +5798,7 @@
 				7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */,
 				7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */,
 				7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */,
+				D07A811A23B501D400181E54 /* SharedResources.swift in Sources */,
 				7E06B67322FB1606006859AC /* ACNNetworking.m in Sources */,
 				7E06B67422FB1606006859AC /* DDLoggerNames.m in Sources */,
 				7E06B67522FB1606006859AC /* ACLFileLocker.m in Sources */,
@@ -5924,6 +5945,7 @@
 				D0EC86C723A8E96800EDF107 /* APStatisticsTable.m in Sources */,
 				D0569DC721F1C0A800985DA9 /* FMStatementQuotedRecogniser.m in Sources */,
 				D0C37ECE22A6879B0004337D /* DnsLogRecordsWriterProtocol.swift in Sources */,
+				D07A811423B501CF00181E54 /* SharedResources.swift in Sources */,
 				D0569DCC21F1C0A800985DA9 /* ADProductInfo.m in Sources */,
 				D0569DCD21F1C0A800985DA9 /* DDMultiFormatter.m in Sources */,
 				7E9B37F8239176BA00053972 /* FilterDetailedInterface.swift in Sources */,
@@ -5974,6 +5996,7 @@
 				D067D8EA21428AA900ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D8EB21428AA900ECDE6D /* NSException+Utils.m in Sources */,
 				D067D8EC21428AA900ECDE6D /* ACNNetworking.m in Sources */,
+				D07A811623B501D200181E54 /* SharedResources.swift in Sources */,
 				D067D8ED21428AA900ECDE6D /* ACLFileLocker.m in Sources */,
 				D031A157219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D067D8EE21428AA900ECDE6D /* ACFFileUtils.m in Sources */,
@@ -6018,6 +6041,7 @@
 				D067D91A21428B4600ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D91B21428B4600ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D91C21428B4600ECDE6D /* NSException+Utils.m in Sources */,
+				D07A811723B501D200181E54 /* SharedResources.swift in Sources */,
 				D067D91D21428B4600ECDE6D /* ACNNetworking.m in Sources */,
 				D031A158219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D067D91E21428B4600ECDE6D /* ACLFileLocker.m in Sources */,
@@ -6062,6 +6086,7 @@
 				D067D94B21428B9100ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D94C21428B9100ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D94D21428B9100ECDE6D /* NSException+Utils.m in Sources */,
+				D07A811823B501D300181E54 /* SharedResources.swift in Sources */,
 				D067D94E21428B9100ECDE6D /* ACNNetworking.m in Sources */,
 				D031A159219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D067D94F21428B9100ECDE6D /* ACLFileLocker.m in Sources */,
@@ -6106,6 +6131,7 @@
 				D067D97C21428BB500ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D97D21428BB500ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D97E21428BB500ECDE6D /* NSException+Utils.m in Sources */,
+				D07A811923B501D300181E54 /* SharedResources.swift in Sources */,
 				D067D97F21428BB500ECDE6D /* ACNNetworking.m in Sources */,
 				D031A15A219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D067D98021428BB500ECDE6D /* ACLFileLocker.m in Sources */,
