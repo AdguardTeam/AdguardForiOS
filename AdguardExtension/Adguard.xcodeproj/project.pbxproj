@@ -634,7 +634,6 @@
 		7E9D31C223A11BB60040AE4B /* ComplexProtectionSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */; };
 		7EA4183A239FEBE700CF517C /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
-		7EA887EB237EAE2B00E1043D /* VideoTutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
 		7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
@@ -1206,6 +1205,7 @@
 		D0C37ECE22A6879B0004337D /* DnsLogRecordsWriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */; };
 		D0C37ECF22A687B30004337D /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D0C37ED022A687D20004337D /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B28C21FA11F80075BB8D /* DnsProxyService.swift */; };
+		D0C4EF2A23C7532800C57E22 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */; };
 		D0C9911A238FDB8700C9123F /* SafariServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C99119238FDB8700C9123F /* SafariServiceTest.swift */; };
 		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */; };
@@ -1914,7 +1914,6 @@
 		7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
-		7EA887EA237EAE2B00E1043D /* VideoTutorialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTutorialController.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
 		7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsController.swift; sourceTree = "<group>"; };
 		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
@@ -4626,6 +4625,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C4EF2A23C7532800C57E22 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7258,7 +7258,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AdguardApp/UI/Adguard-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "$(VALID_ARCHS)";
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Debug;
@@ -7325,7 +7325,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "$(VALID_ARCHS)";
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Release;
@@ -7644,6 +7644,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "x86_64 arm64";
 			};
 			name = Debug;
 		};
@@ -7676,6 +7677,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "x86_64 arm64";
 			};
 			name = Release;
 		};

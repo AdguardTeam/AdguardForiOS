@@ -187,6 +187,7 @@
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
 		D070CAAC22F489910061D9FC /* schema0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
 		D070CAAD22F489910061D9FC /* update0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
+		D0C4EF2B23C758A600C57E22 /* DDLogMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
 		D0D33BBE23102D63009082CE /* Builder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Builder-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0D33BBF23102D64009082CE /* Affinity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
 		D0D33BC123102DA9009082CE /* RulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesParser.swift; sourceTree = "<group>"; };
@@ -333,6 +334,7 @@
 				655A04E91C6B7790000F00D7 /* DDASLLogger.m */,
 				655A04EA1C6B7790000F00D7 /* DDFileLogger.h */,
 				655A04EB1C6B7790000F00D7 /* DDFileLogger.m */,
+				D0C4EF2B23C758A600C57E22 /* DDLogMacros.h */,
 				655A04EC1C6B7790000F00D7 /* DDLog+LOGV.h */,
 				655A04ED1C6B7790000F00D7 /* DDLog.h */,
 				655A04EE1C6B7790000F00D7 /* DDLog.m */,
@@ -580,7 +582,7 @@
 		659C5FC01B8B4DC90081EBE3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
 					659C5FC71B8B4DC90081EBE3 = {
@@ -596,10 +598,9 @@
 			};
 			buildConfigurationList = 659C5FC31B8B4DC90081EBE3 /* Build configuration list for PBXProject "Builder" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);

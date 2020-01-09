@@ -38,8 +38,8 @@ typedef enum : NSUInteger {
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
-extern NSString *AE_URLSCHEME;
-extern NSString *AE_URLSCHEME_COMMAND_ADD;
+extern NSString * _Nonnull AE_URLSCHEME;
+extern NSString * _Nonnull AE_URLSCHEME_COMMAND_ADD;
 
 /**
  User Defaults key that defines app performs first start or not.

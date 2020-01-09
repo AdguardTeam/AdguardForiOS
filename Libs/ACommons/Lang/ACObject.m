@@ -19,7 +19,7 @@
 #import <objc/runtime.h>
 #import "NSString+Utils.h"
 #import "ACObject.h"
-#import "DDLog.h"
+#import "DDLogMacros.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACIO.h"
 

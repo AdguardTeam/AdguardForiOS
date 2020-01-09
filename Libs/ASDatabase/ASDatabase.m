@@ -305,7 +305,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
     
-    UInt32 identifier = [self beginBackgroundTask];
+    NSUInteger identifier = [self beginBackgroundTask];
     
     if (self.ready){
         
@@ -328,7 +328,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 - (void)rawExec:(void (^)(FMDatabase *db))block{
     
-    UInt32 identifier = [self beginBackgroundTask];
+    NSUInteger identifier = [self beginBackgroundTask];
     if (self.ready){
         
         FMDatabaseQueue *execQueue;
@@ -350,7 +350,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
 - (void)queryDefaultDB:(void (^)(FMDatabase *db))block{
     
-    UInt32 identifier = [self beginBackgroundTask];
+    NSUInteger identifier = [self beginBackgroundTask];
     
     if (self.ready)
         [defaultDbQueue inDatabase:block];
@@ -505,14 +505,14 @@ static void isolateQueueReleaseFunc(void *dQueue){
     return YES;
 }
 
-- (UInt32) beginBackgroundTask {
+- (NSUInteger) beginBackgroundTask {
 #if (!APP_EXTENSION) && (!TARGET_OS_OSX)
     return [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 #endif
     return 0;
 }
 
-- (void) endBackgroubdTaskWithId: (UInt32) identifier {
+- (void) endBackgroubdTaskWithId: (NSUInteger) identifier {
 #if (!APP_EXTENSION) && (!TARGET_OS_OSX)
     return [[UIApplication sharedApplication] endBackgroundTask:identifier];
 #endif
