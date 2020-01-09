@@ -68,7 +68,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         var userFilterId: Int?
         var otherFilterIds = [Int]()
         
-        for filter in filterFiles! {
+        for filter in filterFiles {
             
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String

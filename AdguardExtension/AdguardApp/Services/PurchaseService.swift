@@ -108,11 +108,6 @@ protocol PurchaseServiceProtocol {
      */
     func requestRestore()
     
-    /**
-     returns url for oauth authorization
-     */
-    func authUrlWithName(name: String)->URL?
-    
     /** resets all login data */
     func reset(completion: @escaping ()->Void )
 }
@@ -470,40 +465,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return encReceipt
     }
     
-    func authUrlWithName(name: String) -> URL? {
-        
-        guard let dataParam = encryptName(name: name) else { return nil }
-        
-        let state =  String.randomString(length: 10)
-        resources.sharedDefaults().set(state, forKey: AEDefaultsAuthStateString)
-        
-        let params = ["response_type"   : "token",
-                      "client_id"       : "adguard-ios",
-                      "redirect_uri"    : "adguard://auth",
-                      "scope"           : "trust",
-                      "state"           : state,
-                      "data"            : dataParam
-        ]
-        
-        let paramsString = ACNUrlUtils.createString(fromParameters: params, xmlStrict: false)
-        
-        let urlString = "\(authUrl)?\(paramsString)"
-        return URL(string: urlString)
-    }
-    
-    private func encryptName(name: String)->String? {
-        let stringToEncrypt = "email=\(name)"
-        guard   let dataToEncrypt = stringToEncrypt.data(using: .utf8)
-            else { return nil }
-        
-        let keyData = "87502E2BDC2382C048FBD2B1986A0561".dataFromHex()
-        guard let encryptedData = crypt(data: dataToEncrypt, keyData: keyData, operation: kCCEncrypt) else { return nil }
-        
-        let encryptedBase64String = encryptedData.base64EncodedString()
-        
-        return encryptedBase64String
-    }
-    
     @objc
     func checkPremiumStatusChanged() {
         
@@ -766,41 +727,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
     }
     
-    func crypt(data:Data, keyData:Data, operation:Int) -> Data? {
-        let cryptLength  = size_t(data.count + kCCBlockSizeAES128)
-        var cryptData = Data(count:cryptLength)
-        
-        
-        let keyLength = size_t(kCCKeySizeAES128)
-        let options = CCOptions(kCCOptionPKCS7Padding)
-        
-        
-        var numBytesEncrypted :size_t = 0
-        
-        let cryptStatus = cryptData.withUnsafeMutableBytes {cryptBytes in
-            data.withUnsafeBytes {dataBytes in
-                keyData.withUnsafeBytes {keyBytes in
-                    CCCrypt(CCOperation(operation),
-                            CCAlgorithm(kCCAlgorithmAES),
-                            options,
-                            keyBytes, keyLength,
-                            nil,
-                            dataBytes, data.count,
-                            cryptBytes, cryptLength,
-                            &numBytesEncrypted)
-                }
-            }
-        }
-        
-        if UInt32(cryptStatus) == UInt32(kCCSuccess) {
-            cryptData.removeSubrange(numBytesEncrypted..<cryptData.count)
-        } else {
-            return nil
-        }
-        
-        return cryptData;
-    }
-    
     private func priceOfProduct(_ product: SKProduct)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -842,6 +768,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             returnPeriodUnit = .month
         case .year:
             returnPeriodUnit = .year
+        @unknown default:
+            DDLogError("(PurchaseService) getPeriod - unknown period")
+            returnPeriodUnit = .day
         }
         
         guard let numberOfUnits = period?.numberOfUnits else { return standardPeriod }

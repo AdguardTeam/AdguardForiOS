@@ -67,7 +67,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let numberOfItems = CGFloat(tabBar.items!.count)
         let width: CGFloat = tabBar.frame.width / numberOfItems
         
-        let selectedItem = tabBar.items?.index(of: item) ?? 0
+        let selectedItem = tabBar.items?.firstIndex(of: item) ?? 0
         
         bottomViewLeftAnchor?.constant = width / 4 + CGFloat(selectedItem) * width
         
@@ -134,8 +134,8 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let fromVCIndex = tabBarController.viewControllers?.index(of: fromVC),
-            let toVCIndex = tabBarController.viewControllers?.index(of: toVC) else {
+        guard let fromVCIndex = tabBarController.viewControllers?.firstIndex(of: fromVC),
+            let toVCIndex = tabBarController.viewControllers?.firstIndex(of: toVC) else {
                 return nil
         }
         let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left

@@ -94,7 +94,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         navigationItem.title = viewModel?.currentGroup?.name ?? ""
         
         tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
+        tableView.refreshControl?.addTarget(self, action: #selector(FiltersController.refresh), for: .valueChanged)
         
         setupBackButton()
     }

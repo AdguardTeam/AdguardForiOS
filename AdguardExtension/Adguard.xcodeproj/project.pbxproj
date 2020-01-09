@@ -4300,7 +4300,7 @@
 					65C52B351B906105003AF42F = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -4311,7 +4311,7 @@
 					65F398101B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -4333,15 +4333,14 @@
 					};
 					65F398291B7B684700ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						TestTargetID = D0288F4823069D7200A4EBEF;
 					};
 					65F3985D1B7B6A5300ABCD39 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -4351,12 +4350,13 @@
 					};
 					7E06B66122FB1606006859AC = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 					7E536C65238D2AC400A83A79 = {
 						CreatedOnToolsVersion = 11.2.1;
 						DevelopmentTeam = N33TQXN8C7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 					D0288F4823069D7200A4EBEF = {
@@ -4366,7 +4366,7 @@
 					};
 					D0569D2E21F1C0A800985DA9 = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -4376,22 +4376,22 @@
 					};
 					D067D8DC21428AA900ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 					D067D90D21428B4600ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 					D067D93E21428B9100ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 					D067D96F21428BB500ECDE6D = {
 						DevelopmentTeam = N33TQXN8C7;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -7163,7 +7163,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7189,7 +7189,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7353,7 +7353,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = $inherited;
 			};
 			name = Debug;
@@ -7379,7 +7379,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = $inherited;
 			};
 			name = Release;
@@ -7391,7 +7391,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INFOPLIST_FILE = AdguardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -7405,7 +7405,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHostApp.app/TestHostApp";
 			};
 			name = Debug;
@@ -7430,7 +7430,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestHostApp.app/TestHostApp";
 			};
 			name = Release;
@@ -7455,7 +7455,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7479,7 +7479,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7503,7 +7503,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7527,7 +7527,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7568,7 +7568,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -7604,7 +7604,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -7712,7 +7712,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = (
 					$SRCROOT/../Libs,
 					"\"$(SRCROOT)/../Libs/vendors/DnsCrypt/src/include\"",
@@ -7750,7 +7750,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = (
 					$SRCROOT/../Libs,
 					"\"$(SRCROOT)/../Libs/vendors/DnsCrypt/src/include\"",
@@ -7782,7 +7782,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7806,7 +7806,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7830,7 +7830,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7854,7 +7854,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7878,7 +7878,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7902,7 +7902,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7926,7 +7926,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7950,7 +7950,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -204,50 +204,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         })
     }
     
-    private func replaceJsonData(jsonData: NSMutableData, oldRuleData: Data?, newRuleData: Data?) {
-        
-        var newRuleDataClean: NSData = NSData()
-    
-        // remove emphasizes []
-        newRuleData?.withUnsafeBytes { dataBytes in
-            newRuleDataClean = NSData(bytes: dataBytes + 1, length: newRuleData!.count - 3)
-        }
-        
-        if oldRuleData == nil {
-            // just append new rule data in the end before ]
-            
-            // append coma
-            let comaData = ",\n".data(using: .utf8)!
-            comaData.withUnsafeBytes({ dataBytes in
-                jsonData.replaceBytes(in: NSRange(location: jsonData.length - 1, length: 0), withBytes: dataBytes, length: comaData.count)
-            })
-            
-            jsonData.replaceBytes(in: NSRange(location: jsonData.length - 1, length: 0), withBytes: newRuleDataClean.bytes, length: newRuleDataClean.length)
-        }
-        else {
-        
-            var oldRuleDataClean: NSData?
-            // remove emphasizes []
-            oldRuleData!.withUnsafeBytes { dataBytes in
-                oldRuleDataClean = NSData(bytes: dataBytes + 1, length: oldRuleData!.count - 3)
-            }
-            
-            var loc = jsonData.range(of: oldRuleDataClean! as Data, options: .backwards, in: NSRange(location: 0, length: jsonData.length))
-            
-            if loc.location != NSNotFound {
-                
-                // remove ",\n" from json if we remove a rule
-                if newRuleDataClean.length == 0 {
-                    loc.location -= 2
-                    loc.length += 2
-                }
-                
-                jsonData.replaceBytes(in: loc, withBytes: newRuleDataClean.bytes, length: newRuleDataClean.length)
-            }
-            
-        }
-    }
-    
     // MARK: - inverted whitelist rules
     
     func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
