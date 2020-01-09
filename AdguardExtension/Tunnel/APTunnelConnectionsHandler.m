@@ -20,7 +20,6 @@
 #import "ACommons/ACSystem.h"
 #import "APTunnelConnectionsHandler.h"
 #import "PacketTunnelProvider.h"
-#import "APUDPPacket.h"
 
 #import "Adguard-Swift.h"
 
@@ -73,11 +72,6 @@
         [_provider addObserver:self forKeyPath:@"packetFlow" options:0 context:NULL];
         _packetFlowObserver = YES;
     }
-}
-
-- (void)stopHandlingPackets {
-    
-    _packetHandling = NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -136,11 +130,9 @@
 
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         
-        APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
-        
         [_dnsProxy resolveWithDnsRequest:obj callback:^(NSData * _Nullable reply) {
             if (reply != nil) {
-                [_provider.packetFlow writePackets:@[reply] withProtocols:@[udpPacket.aFamily]];
+                [_provider.packetFlow writePackets:@[reply] withProtocols:@[protocols[idx]]];
             }
         }];
     }];

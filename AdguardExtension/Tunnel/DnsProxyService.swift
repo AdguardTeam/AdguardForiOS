@@ -21,7 +21,7 @@ import Foundation
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
-    func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int, ipv6Available: Bool) -> Bool
+    func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int, ipv6Available: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -56,7 +56,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     var agproxy: AGDnsProxy?
     
-    @objc func start(upstreams: [String], listenAddr: String, bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int, ipv6Available: Bool) -> Bool {
+    @objc func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, maxQueues: Int, ipv6Available: Bool) -> Bool {
         
         let bootstrapDnsArray = bootstrapDns.components(separatedBy: .whitespacesAndNewlines)
         

@@ -44,10 +44,5 @@
  */
 - (void)startHandlingPackets;
 
-/**
- Stop packet handling cycle
- */
-- (void)stopHandlingPackets;
-
 
 @end
