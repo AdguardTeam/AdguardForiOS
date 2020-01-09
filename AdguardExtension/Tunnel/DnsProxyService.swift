@@ -50,8 +50,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                 self?.dnsRecordsWriter.handleEvent(event!)
             }
         }
-        
-        
     }
     
     var agproxy: AGDnsProxy?

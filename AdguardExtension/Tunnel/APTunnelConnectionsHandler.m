@@ -124,8 +124,6 @@
 /// Handle packets coming from the packet flow.
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
 
-    DDLogDebugTrace();
-
     // Work here
 
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {

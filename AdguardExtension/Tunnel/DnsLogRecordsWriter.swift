@@ -64,6 +64,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
         
+        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(event.domain ?? "nil") answer: \(event.answer == nil ? "nil" : "nonnil")")
+        
         var status: DnsLogRecordStatus
         
         if event.whitelist {
