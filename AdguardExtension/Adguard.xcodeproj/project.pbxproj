@@ -7258,7 +7258,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "AdguardApp/UI/Adguard-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
-				VALID_ARCHS = "$(VALID_ARCHS)";
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Debug;
@@ -7325,7 +7324,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "$(VALID_ARCHS)";
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Release;
@@ -7644,7 +7642,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "x86_64 arm64";
 			};
 			name = Debug;
 		};
@@ -7677,7 +7674,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "x86_64 arm64";
 			};
 			name = Release;
 		};
