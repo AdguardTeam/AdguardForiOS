@@ -16,7 +16,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     func start() {
     }
     
-    func setDatabase(_ db: ASDatabase!) {
+    func setDatabase(_ db: ASDatabase) {
         
     }
     

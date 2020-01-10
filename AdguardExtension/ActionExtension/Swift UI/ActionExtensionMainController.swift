@@ -240,9 +240,10 @@ class ActionExtensionMainController: UITableViewController {
     @objc private func openWithUrl(_ url: URL?) {
         guard let Url = url else { return }
         var responder: UIResponder? = self
+        let selector = sel_registerName("openURL:")
         while responder != nil{
-            if responder?.responds(to: Selector("openURL:")) ?? false{
-                responder?.perform(Selector("openURL:"), with: Url)
+            if responder?.responds(to: selector) ?? false{
+                responder?.perform(selector, with: Url)
             }
             responder = responder?.next
         }
