@@ -70,19 +70,29 @@ struct Tracker: Codable {
     
     func getTrackerInfo(by domain: String) -> DnsTrackerInfo? {
         
-        let nilReturn = DnsTrackerInfo(categoryKey: nil, name: nil, isTracked: nil, company: nil)
-        
         let trackerDomains = dnsTrackers?.trackerDomains
         
-        guard let domainKey = trackerDomains?[domain] else { return nilReturn }
+        var cuttedDomain = domain
+        var domainKey: String?
+        while cuttedDomain.count > 0 {
+            domainKey = trackerDomains?[cuttedDomain]
+            if domainKey != nil { break }
+            
+            let splitted = cuttedDomain.split(separator: ".", maxSplits: 1)
+            if splitted.count != 2 { break }
+            
+            cuttedDomain = String(splitted.last!)
+        }
+        
+        if domainKey == nil { return nil }
         
         let trackers = dnsTrackers?.trackers
-        guard let info = trackers?[domainKey] else { return nilReturn }
+        guard let info = trackers?[domainKey!] else { return nil }
         
         let categories = dnsTrackers?.categories
         
         let categoryId = info.categoryId
-        guard let categoryKey = categories?[String(categoryId)] else { return nilReturn }
+        guard let categoryKey = categories?[String(categoryId)] else { return nil }
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
@@ -95,10 +105,13 @@ struct Tracker: Codable {
         guard let path = Bundle.main.path(forResource: "whotracksme", ofType: "json") else { return }
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-            dnsTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
+            try decodeTrackers(data: data)
         } catch {
             DDLogError("Failed to decode whotracksme.json")
         }
     }
     
+    func decodeTrackers(data: Data) throws {
+        dnsTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
+    }
 }
