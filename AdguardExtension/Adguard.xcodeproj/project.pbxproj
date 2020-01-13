@@ -381,9 +381,6 @@
 		65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
 		65B4F0361D5C82BC00893BA0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		65B6210F1D2D3E290047248F /* APIPPacketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B6210E1D2D3E290047248F /* APIPPacketTest.m */; };
-		65B621101D2D41880047248F /* APIPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 657672B61D2CF97900CF8C11 /* APIPPacket.m */; };
-		65B621141D2E4F8F0047248F /* APUDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B621131D2E4F8F0047248F /* APUDPPacket.m */; };
-		65B621151D2E4F8F0047248F /* APUDPPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B621131D2E4F8F0047248F /* APUDPPacket.m */; };
 		65B621171D2E78AD0047248F /* APUDPPacketTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B621161D2E78AD0047248F /* APUDPPacketTest.m */; };
 		65B6211D1D2E962F0047248F /* APTDnsRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B6211C1D2E962F0047248F /* APTDnsRequestTest.m */; };
 		65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
@@ -624,6 +621,7 @@
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E844C3623AA7270009EA1AE /* GetProPageController.swift */; };
 		7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */; };
+		7E902AE123CCB50000215B33 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E902AE023CCB50000215B33 /* Activity.storyboard */; };
 		7E9A487A23A2803E00B89540 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
 		7E9A487B23A2810B00B89540 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
 		7E9A487C23A2814D00B89540 /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
@@ -1918,6 +1916,7 @@
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		7E902AE023CCB50000215B33 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
@@ -3371,8 +3370,20 @@
 			isa = PBXGroup;
 			children = (
 				7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */,
+				7E74FCB1239F9CA0006C0990 /* MainPage */,
+				7EF4285823AB766500948B65 /* ComplexProtection */,
+				7E902ADF23CCB4E700215B33 /* Activity */,
+				D0EDE45122A9284800086C00 /* MainMenu */,
 			);
 			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		7E902ADF23CCB4E700215B33 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				7E902AE023CCB50000215B33 /* Activity.storyboard */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		7E9B37F4239175FD00053972 /* DetailedFilter */ = {
@@ -3621,17 +3632,9 @@
 				4020A90022C3C863009C188F /* MainNavigationController.swift */,
 				D028DB8821550615002E4E8E /* MainMenuController.swift */,
 				7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */,
+				D0EDE45322A9287600086C00 /* Settings */,
 			);
 			path = MainMenu;
-			sourceTree = "<group>";
-		};
-		D0EDE45222A9285A00086C00 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				7E8AC81523A7BF2700669C75 /* MainTabBar */,
-				7E74FCB1239F9CA0006C0990 /* MainPage */,
-			);
-			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		D0EDE45322A9287600086C00 /* Settings */ = {
@@ -3641,6 +3644,9 @@
 				D0DB1B052148DB35006EB991 /* SettingsController.swift */,
 				7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */,
 				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
+				D0EDE45522A928C100086C00 /* ListOfRules */,
+				D0EDE45022A927EC00086C00 /* License */,
+				D0EDE44E22A927A500086C00 /* About */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
 			path = Settings;
@@ -3733,15 +3739,9 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7EF4285823AB766500948B65 /* ComplexProtection */,
-				D0EDE44E22A927A500086C00 /* About */,
-				D0EDE45022A927EC00086C00 /* License */,
-				D0EDE45122A9284800086C00 /* MainMenu */,
-				D0EDE45222A9285A00086C00 /* MainScreen */,
+				7E8AC81523A7BF2700669C75 /* MainTabBar */,
 				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
-				D0EDE45322A9287600086C00 /* Settings */,
 				D0EDE45422A9288E00086C00 /* Tutorial */,
-				D0EDE45522A928C100086C00 /* ListOfRules */,
 				D0319F9F21947808002C17D9 /* BottomAlertController.swift */,
 			);
 			path = ViewControllers;
@@ -4574,6 +4574,7 @@
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
 				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
+				7E902AE123CCB50000215B33 /* Activity.storyboard in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
