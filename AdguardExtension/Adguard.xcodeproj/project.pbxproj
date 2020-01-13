@@ -3633,6 +3633,9 @@
 				D028DB8821550615002E4E8E /* MainMenuController.swift */,
 				7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */,
 				D0EDE45322A9287600086C00 /* Settings */,
+				D0EDE44E22A927A500086C00 /* About */,
+				D0EDE45022A927EC00086C00 /* License */,
+				D0EDE45522A928C100086C00 /* ListOfRules */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -3644,9 +3647,6 @@
 				D0DB1B052148DB35006EB991 /* SettingsController.swift */,
 				7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */,
 				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
-				D0EDE45522A928C100086C00 /* ListOfRules */,
-				D0EDE45022A927EC00086C00 /* License */,
-				D0EDE44E22A927A500086C00 /* About */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
 			path = Settings;
