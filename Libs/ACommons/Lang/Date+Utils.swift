@@ -24,8 +24,7 @@ extension Date{
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        let id = Locale.current.identifier
-        dateFormatter.locale = Locale(identifier: id)
+        dateFormatter.locale = Locale.current
         let dateString = dateFormatter.string(from: self)
         
         return dateString

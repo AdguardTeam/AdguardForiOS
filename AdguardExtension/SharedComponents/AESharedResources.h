@@ -235,11 +235,15 @@ extern NSString* _Nonnull AEDefaultsShowStatusBar;
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /**
- User defaults key, which defines number of requests */
+ User defaults key, which defines number of requests
+ made in period of logs writing
+ */
 extern NSString* _Nonnull AEDefaultsRequests;
 
 /**
- User defaults key, which defines number of blocked requests */
+ User defaults key, which defines number of blocked requests
+ made in period of logs writing
+ */
 extern NSString* _Nonnull AEDefaultsBlockedRequests;
 
 /**

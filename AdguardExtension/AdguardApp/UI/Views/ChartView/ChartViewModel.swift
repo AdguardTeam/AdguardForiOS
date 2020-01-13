@@ -19,16 +19,20 @@
 import Foundation
 
 protocol ChartViewModelProtocol {
+    
+    var requestsCount: Int { get set }
+    var blockedCount: Int { get set }
+    
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
     
-    var chartPointsChangedDelegate: ChartPointsChangedDelegate? { get set }
+    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate? { get set }
     
     func obtainStatistics()
 }
 
-protocol ChartPointsChangedDelegate: class {
-    func chartPointsChanged(points: [Point])
+protocol NumberOfRequestsChangedDelegate: class {
+    func numberOfRequestsChanged(requests: Int, blocked: Int)
 }
 
 enum ChartDateType {
@@ -71,6 +75,25 @@ enum ChartDateType {
         return (endDate, lastDate)
     }
     
+    func getFormatterString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        
+        switch self {
+        case .today:
+            dateFormatter.dateFormat = "HH:mm"
+        case .day:
+            dateFormatter.dateFormat = "E"
+        case .week:
+            dateFormatter.dateFormat = "E"
+        case .month:
+            dateFormatter.dateFormat = "dd.MM"
+        case .alltime:
+            dateFormatter.dateFormat = "MM.yy"
+        }
+        return dateFormatter.string(from: date)
+    }
+    
     private func now() -> Date {
         return Date()
     }
@@ -82,10 +105,13 @@ enum ChartRequestType {
 
 class ChartViewModel: ChartViewModelProtocol {
     
-    weak var chartPointsChangedDelegate: ChartPointsChangedDelegate?
+    let chartView: ChartView
+    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
     
+    var requestsCount: Int = 0
+    var blockedCount: Int = 0
+        
     var requests: [RequestsStatisticsBlock] = []
-    
     var blockedRequests: [RequestsStatisticsBlock] = []
     
     var chartDateType: ChartDateType = .alltime {
@@ -105,8 +131,9 @@ class ChartViewModel: ChartViewModelProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView) {
         self.dnsStatisticsService = dnsStatisticsService
+        self.chartView = chartView
     }
     
     func obtainStatistics() {
@@ -121,36 +148,43 @@ class ChartViewModel: ChartViewModelProtocol {
     // MARK: - private methods
     
     private func changeChart(){
-        var requests: [RequestsStatisticsBlock] = []
-        var pointsArray: [Point] = []
+    
+        let requestsData = getPoints(from: requests)
+        let blockedData = getPoints(from: blockedRequests)
         
+        requestsCount = requestsData.number
+        blockedCount = blockedData.number
+                
+        chartView.chartPoints = (requestsData.points, blockedData.points)
+        chartPointsChangedDelegate?.numberOfRequestsChanged(requests: requestsData.number, blocked: blockedData.number)
+    }
+    
+    private func getPoints(from requests: [RequestsStatisticsBlock]) -> (points: [Point], number: Int){
         let maximumPointsNumber = 50
-        
-        switch chartRequestType {
-        case .requests:
-            requests = self.requests
-        case .blocked:
-            requests = blockedRequests
-        }
+        var pointsArray: [Point] = []
+        var number = 0
                 
         var requestsDates: [Date] = requests.map({ $0.date })
         requestsDates.sort(by: { $0 < $1 })
-        
-        if requestsDates.count < 2 {
-            chartPointsChangedDelegate?.chartPointsChanged(points: [])
-            return
-        }
         
         let intervalTime = chartDateType.getTimeInterval(requestsDates: requestsDates)
         
         let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
         let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
         
+        chartView.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
+        chartView.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
+        
+        if requestsDates.count < 2 {
+            return ([], 0)
+        }
+        
         var xPosition: CGFloat = 0.0
         for request in requests {
             let date = request.date.timeIntervalSinceReferenceDate
-            if date > firstDate && date < lastDate {
+            if (date > firstDate && date < lastDate) || chartDateType == .alltime {
                 let point = Point(x: xPosition, y: CGFloat(integerLiteral: request.numberOfRequests))
+                number += request.numberOfRequests
                 pointsArray.append(point)
                 xPosition += 1.0
             }
@@ -158,9 +192,9 @@ class ChartViewModel: ChartViewModelProtocol {
         
         if pointsArray.count > maximumPointsNumber {
             let points = rearrangePoints(from: pointsArray, max: maximumPointsNumber)
-            chartPointsChangedDelegate?.chartPointsChanged(points: points)
+            return (points, number)
         } else {
-            chartPointsChangedDelegate?.chartPointsChanged(points: pointsArray)
+            return (pointsArray, number)
         }
     }
     

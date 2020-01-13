@@ -62,6 +62,10 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     private var purchaseService: PurchaseServiceProtocol
     private var configuration: ConfigurationService
     private let vpnManager: APVPNManager
+    private let dnsStatisticsService: DnsStatisticsServiceProtocol
+    
+    private var requestNumber = 0
+    private var blockedNumber = 0
     
     // MARK: View Controller lifecycle
     
@@ -70,6 +74,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         purchaseService = PurchaseService(network: networkService, resources: resources)
         configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
         vpnManager  = APVPNManager(resources: resources, configuration: configuration)
+        dnsStatisticsService = DnsStatisticsService(resources: resources)
         
         super.init(coder: coder)
         
@@ -256,7 +261,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
                 }
                 self.complexStatusLabel.text = complexText
                 
-                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), 0, 0)
+                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
             }
         })
     }
@@ -356,12 +361,22 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      Changes number of requests for specific button
      */
     private func changeTextForButton(with keyPath: String?){
+        let statistics = dnsStatisticsService.readStatistics()
+        
+        var requests = 0
+        var blocked = 0
+        
+        statistics[.all]?.forEach({ requests += $0.numberOfRequests })
+        statistics[.blocked]?.forEach({ blocked += $0.numberOfRequests })
+        
         if keyPath == AEDefaultsRequests {
             let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            requestsLabel.text = "\(number)"
+            requestsLabel.text = "\(requests + number)"
+            requestNumber = requests + number
         } else if keyPath == AEDefaultsBlockedRequests {
             let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            blockedLabel.text = "\(number)"
+            blockedLabel.text = "\(blocked + number)"
+            blockedNumber = blocked + number
         }
     }
 }
