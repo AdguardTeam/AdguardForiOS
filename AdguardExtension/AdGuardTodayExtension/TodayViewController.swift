@@ -64,6 +64,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     private let vpnManager: APVPNManager
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
+    private var requestNumber = 0
+    private var blockedNumber = 0
+    
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
@@ -86,16 +89,16 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequestsTemp, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        changeTextForButton(with: AEDefaultsRequestsTemp)
-        changeTextForButton(with: AEDefaultsBlockedRequestsTemp)
+        changeTextForButton(with: AEDefaultsRequests)
+        changeTextForButton(with: AEDefaultsBlockedRequests)
     }
     
     deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequestsTemp, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -258,7 +261,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
                 }
                 self.complexStatusLabel.text = complexText
                 
-                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), 0, 0)
+                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
             }
         })
     }
@@ -366,12 +369,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         statistics[.all]?.forEach({ requests += $0.numberOfRequests })
         statistics[.blocked]?.forEach({ blocked += $0.numberOfRequests })
         
-        if keyPath == AEDefaultsRequestsTemp {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
+        if keyPath == AEDefaultsRequests {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
             requestsLabel.text = "\(requests + number)"
-        } else if keyPath == AEDefaultsBlockedRequestsTemp {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
+            requestNumber = requests + number
+        } else if keyPath == AEDefaultsBlockedRequests {
+            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             blockedLabel.text = "\(blocked + number)"
+            blockedNumber = blocked + number
         }
     }
 }

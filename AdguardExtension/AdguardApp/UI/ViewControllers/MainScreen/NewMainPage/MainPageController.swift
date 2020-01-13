@@ -459,11 +459,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequestsTemp)
-            self.requestsNumberLabel.text = "\(self.chartModel?.requestsCount ?? 0 + requestsNumber)"
+            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+            self.requestsNumberLabel.text = "\((self.chartModel?.requestsCount ?? 0) + requestsNumber)"
             
-            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequestsTemp)
-            self.blockedNumberLabel.text = "\(self.chartModel?.blockedCount ?? 0 + blockedNumber)"
+            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+            self.blockedNumberLabel.text = "\((self.chartModel?.blockedCount ?? 0) + blockedNumber)"
         }
     }
     
@@ -512,9 +512,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.checkProtectionStates()
         })
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequestsTemp, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -536,9 +536,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Removes observers from controller
      */
     private func removeObservers(){
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequestsTemp, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
         
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequestsTemp, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
     }
     
     /**

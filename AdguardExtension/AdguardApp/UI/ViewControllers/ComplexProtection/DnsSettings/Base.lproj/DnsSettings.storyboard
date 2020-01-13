@@ -1887,6 +1887,7 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vci-Ug-Vqo">
                                             <rect key="frame" x="23" y="24" width="24" height="24"/>
+                                            <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="3ZB-0E-c2h"/>
                                                 <constraint firstAttribute="height" constant="24" id="WO0-mo-uDL"/>
