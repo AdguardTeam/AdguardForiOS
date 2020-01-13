@@ -285,7 +285,7 @@ static ABECFilterClient *ABECFilterSingleton;
 
 #ifdef DEBUG
             DDLogDebugTrace();
-            DDLogDebug(@"Task count: %lu", tasks.count);
+            DDLogDebug(@"Task count: %tu", tasks.count);
             NSArray *stateName = @[    @"Running",                     /* The task is currently being serviced by the session */
                                        @"Suspended",
                                        @"Canceling",               /* The task has been told to cancel.  The session will receive a URLSession:task:didCompleteWithError: message. */

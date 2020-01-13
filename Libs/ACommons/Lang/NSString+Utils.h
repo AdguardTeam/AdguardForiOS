@@ -90,7 +90,7 @@
  XCTAssert([test isEqualToArray:[@"str\\,, ,\\st\\,r" asciiSplitByDelimiter:',' escapeCharacter:'\\']]);
  
  */
-- (nonnull NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
+- (nullable NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
 
 /**
  *  Find any string from string array as substring in receiver.

@@ -682,7 +682,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[filterId=%lu, ruleId=%lu, ruleText=\"%@\", enabled=%@, affinity=%lu]", [self.filterId unsignedIntegerValue], [self.ruleId unsignedIntegerValue], self.ruleText, ([self.isEnabled boolValue] ? @"YES" : @"NO"), [self.affinity unsignedIntegerValue]];
+    return [NSString stringWithFormat:@"[filterId=%lu, ruleId=%lu, ruleText=\"%@\", enabled=%@, affinity=%lu]", [self.filterId unsignedLongValue], [self.ruleId unsignedIntegerValue], self.ruleText, ([self.isEnabled boolValue] ? @"YES" : @"NO"), [self.affinity unsignedIntegerValue]];
 }
 
 - (id)initFromDbResult:(FMResultSet *)result{

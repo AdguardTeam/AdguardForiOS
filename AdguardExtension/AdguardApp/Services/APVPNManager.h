@@ -114,7 +114,7 @@ this flag indicates that filtering of mobile data is on/off
 /**
  Adds custom (editable) DNS server.
  
- @param server Server instance. It must be editable.
+ @param name Server name. It must be editable.
  @return YES on success.
  */
 - (BOOL) addRemoteDnsServer:(nonnull NSString*) name upstreams:(nonnull NSArray<NSString*>*) upstreams;
@@ -131,10 +131,9 @@ this flag indicates that filtering of mobile data is on/off
  This uuid is used for identification of the object.
  And you can change all properties of the server object.
  
- @param server Server instance. It must be editable.
+ @param provider DnsProviderInfo instance.
  @return YES on success.
  */
-
 - (BOOL)resetCustomDnsProvider:(nonnull DnsProviderInfo*)provider;
 
 /**
@@ -167,7 +166,7 @@ this flag indicates that filtering of mobile data is on/off
 /**remove vpn configuration from system settings*/
 - (void)removeVpnConfiguration;
 
-@property (nonatomic, nullable) void (^delayedTurn)();
+@property (nonatomic, nullable) void (^delayedTurn)(void);
 
 @property (nonatomic) BOOL managerWasLoaded;
 

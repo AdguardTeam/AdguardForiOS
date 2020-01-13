@@ -20,10 +20,10 @@
 
 @interface APDnsLogTable : ADBTableRow
 
-@property (nonatomic) NSNumber* rowid;
+@property (nonatomic, nonnull) NSNumber* rowid;
 @property NSTimeInterval timeStamp;
 @property (nonnull) DnsLogRecord* record;
 
-- (instancetype) initWithTimestamp: (NSTimeInterval)timestamp record:(DnsLogRecord*)record;
+- (nonnull instancetype) initWithTimestamp: (NSTimeInterval)timestamp record:(nonnull DnsLogRecord*)record;
 
 @end

@@ -150,16 +150,16 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         // Init Logger
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
 
-        [AGLogger setLevel: AGLL_DEBUG];
+        [AGLogger setLevel: AGLL_WARN];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
-                DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
-                [DDLog flushLog];
+                @autoreleasepool {
+                    DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
+                }
             }];
 
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
-        [AGLogger setLevel: AGLL_DEBUG];
 #endif
         
         _dnsTrackerService = [DnsTrackerService new];
@@ -454,7 +454,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
 
 - (void)reachNotify:(NSNotification *)note {
     
-    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %ld", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
+    DDLogInfo(@"(PacketTunnelProvider) reachability Notify. Status: %ld last status: %zd", (long)[_reachabilityHandler currentReachabilityStatus], _lastReachabilityStatus);
     
     // sometimes we recieve reach notify right after the tunnel is started(kSCNetworkReachabilityFlagsIsDirect flag changed). In this case the restart of the tunnel enters an infinite loop.
     if(_lastReachabilityStatus == [_reachabilityHandler currentReachabilityStatus]) {
@@ -708,7 +708,6 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
     
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
     
-    BOOL ipv4Available = [ACNIPUtils isIpv4Available];
     BOOL ipv6Available = [ACNIPUtils isIpv6Available];
     NSString* filtersJson = [[[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil] filtersJson];
 
@@ -723,7 +722,7 @@ NSString *APTunnelProviderErrorDomain = @"APTunnelProviderErrorDomain";
         }
     }
     
-    return [_dnsProxy startWithUpstreams:upstreams listenAddr: ipv4Available ? V_DNSPROXY_LOCAL_ADDDRESS : V_DNSPROXY_LOCAL_ADDDRESS_IPV6 bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues ipv6Available:ipv6Available];
+    return [_dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDns  fallback: systemDns serverName: _currentServer.name filtersJson: filtersJson maxQueues:queues ipv6Available:ipv6Available];
 }
 
 -(NSString *)getCurrentWifiName {

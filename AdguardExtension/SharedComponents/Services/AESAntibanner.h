@@ -92,7 +92,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 @property (readonly) BOOL updatesRightNow;
 
 /** set database to work with it */
-- (void) setDatabase:(ASDatabase*) db;
+- (void) setDatabase:(nonnull ASDatabase*) db;
 
 /** start sevice */
 - (void) start;

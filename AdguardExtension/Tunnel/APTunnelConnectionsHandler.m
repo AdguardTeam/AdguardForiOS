@@ -20,7 +20,6 @@
 #import "ACommons/ACSystem.h"
 #import "APTunnelConnectionsHandler.h"
 #import "PacketTunnelProvider.h"
-#import "APUDPPacket.h"
 
 #import "Adguard-Swift.h"
 
@@ -75,11 +74,6 @@
     }
 }
 
-- (void)stopHandlingPackets {
-    
-    _packetHandling = NO;
-}
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark KVO
 
@@ -130,17 +124,13 @@
 /// Handle packets coming from the packet flow.
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
 
-    DDLogDebugTrace();
-
     // Work here
 
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         
-        APUDPPacket *udpPacket = [[APUDPPacket alloc] initWithData:obj af:protocols[idx]];
-        
         [_dnsProxy resolveWithDnsRequest:obj callback:^(NSData * _Nullable reply) {
             if (reply != nil) {
-                [_provider.packetFlow writePackets:@[reply] withProtocols:@[udpPacket.aFamily]];
+                [_provider.packetFlow writePackets:@[reply] withProtocols:@[protocols[idx]]];
             }
         }];
     }];

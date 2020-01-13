@@ -60,7 +60,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         }
         
         tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: Selector(("refresh")), for: .valueChanged)
+        tableView.refreshControl?.addTarget(self, action: #selector(GroupsController.refresh), for: .valueChanged)
         setupBackButton()
     }
     

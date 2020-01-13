@@ -18,7 +18,7 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
         do {
             try FileManager.default.removeItem(at: sharedResuorcesURL())
         }
-        catch { (error)
+        catch {
             print(error)
         }
         

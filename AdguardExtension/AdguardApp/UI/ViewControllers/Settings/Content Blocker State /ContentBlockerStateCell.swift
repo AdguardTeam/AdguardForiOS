@@ -37,8 +37,6 @@ class ContentBlockerStateCell: UITableViewCell {
                 name = "AdGuard — Custom"
             case .security:
                 name = "AdGuard — Security"
-            default:
-                name = ""
             }
             
             self.filterNameLabel.text = name
