@@ -141,14 +141,11 @@ class AppDelegateHelper: NSObject {
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                if self.statusViewCounter > 0 {
+                if self.statusBarIsShown {
                     self.statusViewCounter -= 1
-                } else {
-                    self.statusViewCounter = 0
-                }
-                
-                if self.statusBarIsShown && self.statusViewCounter == 0 {
-                    self.hideStatusView()
+                    if self.statusViewCounter == 0 {
+                        self.hideStatusView()
+                    }
                 }
             }
         })
