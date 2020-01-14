@@ -1195,7 +1195,7 @@
                                         <constraint firstAttribute="trailing" secondItem="iaJ-tk-ohH" secondAttribute="trailing" constant="24" id="ApF-cn-A0A"/>
                                         <constraint firstItem="iaJ-tk-ohH" firstAttribute="top" secondItem="PX7-cd-BCS" secondAttribute="top" constant="16" id="crR-nh-8uG"/>
                                         <constraint firstItem="iaJ-tk-ohH" firstAttribute="leading" secondItem="PX7-cd-BCS" secondAttribute="leading" constant="24" id="d4l-Bl-iO8"/>
-                                        <constraint firstAttribute="bottom" secondItem="iaJ-tk-ohH" secondAttribute="bottom" constant="16" id="nPP-3e-9re"/>
+                                        <constraint firstAttribute="bottom" secondItem="iaJ-tk-ohH" secondAttribute="bottom" constant="28" id="nPP-3e-9re"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1272,6 +1272,37 @@
                                     <outlet property="descriptionLabel" destination="DgO-WD-iJa" id="htM-3V-DzO"/>
                                     <outlet property="nameLabel" destination="mna-SN-pS2" id="0N8-4B-aC3"/>
                                     <outlet property="selectedButton" destination="DzF-Qn-Xxp" id="y6F-6p-AWc"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecomendedHeaderCell" id="zaY-MP-9zJ" userLabel="RecomendedHeader" customClass="DescriptionCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="177" width="414" height="63.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zaY-MP-9zJ" id="3Y6-eU-pJg">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="63.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended DNS providers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCR-6u-jrf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="32" width="365" height="24.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="leading" secondItem="3Y6-eU-pJg" secondAttribute="leading" constant="24" id="59z-Ws-eHY"/>
+                                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="top" secondItem="3Y6-eU-pJg" secondAttribute="top" constant="32" id="9tS-JG-2AR"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZCR-6u-jrf" secondAttribute="trailing" constant="25" id="FlR-gk-sy3"/>
+                                        <constraint firstAttribute="bottom" secondItem="ZCR-6u-jrf" secondAttribute="bottom" constant="7" id="Q8B-xw-cpi"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="ZCR-6u-jrf" id="bnO-7k-OSO"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomDnsServerCell" id="LFh-Y6-rFS" customClass="DnsProviderCell" customModule="Adguard">
@@ -1372,34 +1403,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="DNS server" id="4rw-Lb-MJH"/>
                     <connections>
-                        <outlet property="recomendedDescriptionLabel" destination="ZCR-6u-jrf" id="fcl-Wi-Jm6"/>
-                        <outlet property="recomendedHeaderView" destination="wc5-6l-m7B" id="E1G-x6-Ppd"/>
                         <segue destination="6wJ-yl-17c" kind="show" identifier="dnsDetailsSegue" id="6dd-NQ-0zV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fs-Mf-BMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="wc5-6l-m7B" userLabel="recomended providers header">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended DNS providers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCR-6u-jrf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                            <rect key="frame" x="24" y="40" width="191" height="48"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="centerY" secondItem="wc5-6l-m7B" secondAttribute="centerY" id="O9C-Ew-7PN"/>
-                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="leading" secondItem="5ff-aK-4Fh" secondAttribute="leading" constant="24" id="p7U-2G-FTm"/>
-                        <constraint firstAttribute="trailing" secondItem="ZCR-6u-jrf" secondAttribute="trailing" constant="25" id="qdm-gx-EoT"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="5ff-aK-4Fh"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="9" y="-488"/>
         </scene>

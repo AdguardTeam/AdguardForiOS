@@ -26,7 +26,7 @@ class DnsProviderCell : UITableViewCell {
     @IBOutlet weak var arrowRight: UIImageView!
 }
 
-class descriptionCell: UITableViewCell {
+class DescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
@@ -48,13 +48,11 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     private let descriptionSection = 0
     private let defaultProviderSection = 1
-    private let providerSection = 2
-    private let addProviderSection = 3
+    private let recomendedDescriptionSection = 2
+    private let providerSection = 3
+    private let addProviderSection = 4
     
     private let defaultProviderTag = -1
-    
-    @IBOutlet var recomendedHeaderView: UIView!
-    @IBOutlet weak var recomendedDescriptionLabel: ThemableLabel!
     
     // MARK: - view controller life cycle
     
@@ -115,8 +113,9 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         switch indexPath.section {
         case descriptionSection:
             let reuseId = "descriptionCell"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? descriptionCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? DescriptionCell else { return UITableViewCell() }
             theme.setupLabel(cell.descriptionLabel)
+            theme.setupTableCell(cell)
             return cell
             
         case defaultProviderSection:
@@ -160,6 +159,11 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             
             return cell
         
+        case recomendedDescriptionSection:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecomendedHeaderCell") as? DescriptionCell else { return UITableViewCell() }
+            theme.setupLabel(cell.descriptionLabel)
+            theme.setupTableCell(cell)
+            return cell
             
         case addProviderSection :
             let reuseId = "AddServer"
@@ -179,6 +183,8 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             return 1
         case defaultProviderSection:
             return 1
+        case recomendedDescriptionSection:
+            return 1
         case providerSection:
             return providers.count
         case addProviderSection:
@@ -189,13 +195,27 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        switch section {
+        case defaultProviderSection, recomendedDescriptionSection:
+            return 0.01 // hide bottom separator
+        default:
+            return 0.0
+        }
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case providerSection:
+            return 0.01 // hide top separator
+        default:
+            return 0.0
+        }
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case defaultProviderSection:
@@ -225,19 +245,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return section == providerSection ? recomendedHeaderView : nil
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == providerSection ? 50 : 0
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return section == defaultProviderSection ? UIView(frame: CGRect(x: 0, y:0, width: 0, height: 0.001)) : nil
-    }
-    
+        
     // MARK: Actions
     
     @IBAction func selectProviderAction(_ sender: UIButton) {
@@ -283,8 +291,6 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
         }
-        
-        theme.setupLabel(recomendedDescriptionLabel)
     }
     
     private func editProvider(_ provider: DnsProviderInfo) {
