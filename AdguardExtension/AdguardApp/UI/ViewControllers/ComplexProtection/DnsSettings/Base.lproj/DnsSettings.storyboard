@@ -760,7 +760,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="tTQ-ho-kal">
                                         <rect key="frame" x="0.0" y="93" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTQ-ho-kal" id="6gQ-9V-p7b">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTQ-ho-kal" id="6gQ-9V-p7b">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -1268,6 +1268,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="arrowRight" destination="eUC-J5-Od5" id="nV1-0A-nUE"/>
                                     <outlet property="descriptionLabel" destination="DgO-WD-iJa" id="htM-3V-DzO"/>
                                     <outlet property="nameLabel" destination="mna-SN-pS2" id="0N8-4B-aC3"/>
                                     <outlet property="selectedButton" destination="DzF-Qn-Xxp" id="y6F-6p-AWc"/>
@@ -1371,10 +1372,34 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="DNS server" id="4rw-Lb-MJH"/>
                     <connections>
+                        <outlet property="recomendedDescriptionLabel" destination="ZCR-6u-jrf" id="fcl-Wi-Jm6"/>
+                        <outlet property="recomendedHeaderView" destination="wc5-6l-m7B" id="E1G-x6-Ppd"/>
                         <segue destination="6wJ-yl-17c" kind="show" identifier="dnsDetailsSegue" id="6dd-NQ-0zV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fs-Mf-BMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="wc5-6l-m7B" userLabel="recomended providers header">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended DNS providers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCR-6u-jrf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                            <rect key="frame" x="24" y="40" width="191" height="48"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="centerY" secondItem="wc5-6l-m7B" secondAttribute="centerY" id="O9C-Ew-7PN"/>
+                        <constraint firstItem="ZCR-6u-jrf" firstAttribute="leading" secondItem="5ff-aK-4Fh" secondAttribute="leading" constant="24" id="p7U-2G-FTm"/>
+                        <constraint firstAttribute="trailing" secondItem="ZCR-6u-jrf" secondAttribute="trailing" constant="25" id="qdm-gx-EoT"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="5ff-aK-4Fh"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="9" y="-488"/>
         </scene>

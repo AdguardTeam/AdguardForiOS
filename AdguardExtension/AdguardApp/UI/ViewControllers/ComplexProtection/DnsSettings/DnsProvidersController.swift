@@ -23,6 +23,7 @@ class DnsProviderCell : UITableViewCell {
     @IBOutlet weak var nameLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel?
     @IBOutlet weak var selectedButton: UIButton!
+    @IBOutlet weak var arrowRight: UIImageView!
 }
 
 class descriptionCell: UITableViewCell {
@@ -38,7 +39,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     // MARK: Private properties
     private lazy var providers = { self.vpnManager.providers } ()
-    private var selectedCellRow = 0
+    private var selectedCellTag = 0
     private var activeProviderObservation: NSKeyValueObservation?
     private var providersObservation: NSKeyValueObservation?
     private var providerToShow: DnsProviderInfo?
@@ -46,8 +47,14 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     private var notificationToken: NotificationToken?
     
     private let descriptionSection = 0
-    private let providerSection = 1
-    private let addProviderSection = 2
+    private let defaultProviderSection = 1
+    private let providerSection = 2
+    private let addProviderSection = 3
+    
+    private let defaultProviderTag = -1
+    
+    @IBOutlet var recomendedHeaderView: UIView!
+    @IBOutlet weak var recomendedDescriptionLabel: ThemableLabel!
     
     // MARK: - view controller life cycle
     
@@ -61,14 +68,14 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         tableView.rowHeight = UITableView.automaticDimension
         
         let selectCellFunc = { [weak self] in
-            guard let sSelf = self else { return }
-            var row = 0
-            for provider in sSelf.providers {
-                if sSelf.vpnManager.isActiveProvider(provider) {
-                    sSelf.selectedCellRow = row
-                    break
-                }
-                row += 1
+            guard let self = self else { return }
+            if self.vpnManager.activeDnsServer == nil {
+                self.selectedCellTag = self.defaultProviderTag
+                return
+            }
+            else {
+                let row = self.providers.firstIndex { self.vpnManager.isActiveProvider($0) }
+                self.selectedCellTag = row ?? 0
             }
         }
         
@@ -93,8 +100,44 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         updateTheme()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "dnsDetailsSegue" {
+            let controller = segue.destination as! DnsProviderContainerController
+            controller.provider = providerToShow
+            controller.defaultDnsServer = defaultServer(providerToShow!)
+            controller.delegate = self
+        }
+    }
+    
+    // MARK: table view methods
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == providerSection {
+        switch indexPath.section {
+        case descriptionSection:
+            let reuseId = "descriptionCell"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? descriptionCell else { return UITableViewCell() }
+            theme.setupLabel(cell.descriptionLabel)
+            return cell
+            
+        case defaultProviderSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DnsServerCell") as! DnsProviderCell
+            
+            cell.nameLabel.text = String.localizedString("default_dns_server_name")
+            cell.descriptionLabel?.text = String.localizedString("default_dns_server_description")
+            
+            cell.selectedButton.isSelected = selectedCellTag == defaultProviderTag
+            cell.selectedButton.tag = defaultProviderTag
+            cell.arrowRight.isHidden = true
+            
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.nameLabel)
+            if cell.descriptionLabel != nil {
+                theme.setupLabel(cell.descriptionLabel!)
+            }
+            
+            return cell
+            
+        case providerSection:
             let provider = providers[indexPath.row]
             let custom = vpnManager.isCustomProvider(provider)
             
@@ -105,8 +148,9 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
                 cell.descriptionLabel?.text = ACLocalizedString(provider.summary!, nil)
             }
             
-            cell.selectedButton.isSelected = selectedCellRow == indexPath.row
+            cell.selectedButton.isSelected = selectedCellTag == indexPath.row
             cell.selectedButton.tag = indexPath.row
+            cell.arrowRight.isHidden = false
             
             theme.setupTableCell(cell)
             theme.setupLabel(cell.nameLabel)
@@ -115,22 +159,25 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             }
             
             return cell
-        } else if indexPath.section == addProviderSection{
+        
+            
+        case addProviderSection :
             let reuseId = "AddServer"
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) ?? UITableViewCell()
             theme.setupTableCell(cell)
             return cell
-        } else {
-            let reuseId = "descriptionCell"
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as? descriptionCell else { return UITableViewCell() }
-            theme.setupLabel(cell.descriptionLabel)
-            return cell
+            
+        default:
+            assertionFailure("unknown tableview section")
+            return UITableViewCell()
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case descriptionSection:
+            return 1
+        case defaultProviderSection:
             return 1
         case providerSection:
             return providers.count
@@ -142,7 +189,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -150,7 +197,13 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == providerSection{
+        switch indexPath.section {
+        case defaultProviderSection:
+            selectedCellTag = defaultProviderTag
+            vpnManager.activeDnsServer = nil
+            vpnManager.enabled = true;
+            
+        case providerSection:
             if vpnManager.isCustomProvider(providers[indexPath.row]) {
                 editProvider(providers[indexPath.row])
             }
@@ -158,37 +211,50 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
                 providerToShow = providers[indexPath.row]
                 performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
             }
-        } else if indexPath.section == addProviderSection {
+       
+        case addProviderSection:
             guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
             controller.modalPresentationStyle = .custom
             controller.transitioningDelegate = self
             
             present(controller, animated: true, completion: nil)
+            
+        default:
+            break
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "dnsDetailsSegue" {
-            let controller = segue.destination as! DnsProviderContainerController
-            controller.provider = providerToShow
-            controller.defaultDnsServer = defaultServer(providerToShow!)
-            controller.delegate = self
-        }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return section == providerSection ? recomendedHeaderView : nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == providerSection ? 50 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return section == defaultProviderSection ? UIView(frame: CGRect(x: 0, y:0, width: 0, height: 0.001)) : nil
     }
     
     // MARK: Actions
     
     @IBAction func selectProviderAction(_ sender: UIButton) {
-        let provider = providers[sender.tag]
+        var server: DnsServerInfo?
         
-        guard let server = defaultServer(provider) else { return }
+        if sender.tag == defaultProviderTag {
+            server = nil
+        }
+        else {
+            let provider = providers[sender.tag]
+            server = defaultServer(provider)
+        }
         
-        // select first server in provider
         vpnManager.activeDnsServer = server
         vpnManager.enabled = true;
         
-        selectedCellRow = sender.tag
+        selectedCellTag = sender.tag
     }
     
     // MARK: - Presentation delegate methods
@@ -217,6 +283,8 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
         }
+        
+        theme.setupLabel(recomendedDescriptionLabel)
     }
     
     private func editProvider(_ provider: DnsProviderInfo) {
