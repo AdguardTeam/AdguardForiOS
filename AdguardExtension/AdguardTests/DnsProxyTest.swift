@@ -20,7 +20,7 @@ class DnsProxyTest: XCTestCase {
     let request = Data(base64Encoded: "RQAAQkGPAAD/ETb1rBDRAsYSAAHOlAA1AC47HU+xAQAAAQAAAAAAAAdjbGllbnRzAWwGZ29vZ2xlA2NvbQAAAQAB")
 
     override func setUp() {
-        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", filtersJson: "", maxQueues: 5, ipv6Available: true))
+        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", filtersJson: "", ipv6Available: true))
     }
 
     override func tearDown() {
@@ -52,7 +52,7 @@ class DnsProxyTest: XCTestCase {
         wait(for: [expectation], timeout: 15)
         
         proxyService.stop() {}
-        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", filtersJson: "", maxQueues: 5, ipv6Available: true))
+        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: "8.8.8.8", fallback: "8.8.8.8", serverName: "cloudflare", filtersJson: "", ipv6Available: true))
         
         let expectation2 = XCTestExpectation(description: "expectation2")
         
