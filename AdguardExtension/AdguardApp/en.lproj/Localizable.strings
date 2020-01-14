@@ -633,3 +633,9 @@
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Switch on %@ all content blockers</b> and come back to our app!";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Block request";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "Whitelist request";
