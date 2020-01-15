@@ -84,14 +84,14 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
         if type == .addDomainToWhitelist {
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
-            logRecord.logRecord.userSubDomain = rule
+            logRecord.logRecord.userRule = rule
             dnsFiltersService.addWhitelistDomain(rule)
-            setUserStatus(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist)
+            set(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist, rule)
         } else if type == .addRuleToUserFlter {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
-            logRecord.logRecord.userSubDomain = rule
+            logRecord.logRecord.userRule = rule
             dnsFiltersService.addBlacklistRule(rule)
-            setUserStatus(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .none : .movedToBlacklist)
+            set(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .none : .movedToBlacklist, rule)
         }
     }
     
@@ -103,8 +103,8 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         shadowView.updateTheme()
     }
     
-    private func setUserStatus(_ status: DnsLogRecordUserStatus) {
-        dnsLogService.setUserStatus(rowId: self.logRecord.logRecord.rowid!, status: status)
+    private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
+        dnsLogService.set(rowId: self.logRecord.logRecord.rowid!, status: status, userRule: rule)
         logRecord.logRecord.userStatus = status
         detailsController?.updateStatusLabel()
         updateButtons()
@@ -119,12 +119,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
             vc.fullDomain = domain
             vc.type = type
             vc.delegate = self
-        }
-        
-        if type == .addDomainToWhitelist {
-            setUserStatus(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist)
-        } else if type == .addRuleToUserFlter {
-            setUserStatus(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .none : .movedToBlacklist)
         }
         
         present(controller, animated: true, completion: nil)
@@ -152,12 +146,12 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
-                        let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userSubDomain ?? "")
+                        let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
                         
                         let rules = record.userStatus != .none ? [userDomain] : record.blockRules
 
                         self.dnsFiltersService.removeWhitelistRules(rules ?? [])
-                        self.setUserStatus(record.userStatus == .movedToWhitelist ? .none : .removedFromWhitelist)
+                        self.set(record.userStatus == .movedToWhitelist ? .none : .removedFromWhitelist)
                     }
                 }
                 
@@ -166,10 +160,10 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
-                        let rules = record.userStatus != .none ? [record.userSubDomain ?? ""] : record.blockRules
+                        let rules = record.userStatus != .none ? [record.userRule ?? ""] : record.blockRules
 
                         self.dnsFiltersService.removeUserRules(rules ?? [])
-                        self.setUserStatus(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .none : .removedFromBlacklist)
+                        self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .none : .removedFromBlacklist)
                     }
                 }
                 

@@ -38,7 +38,7 @@ class DnsLogRecord: NSObject, NSCoding {
     @objc var rowid: NSNumber?
     
     let domain: String
-    var userSubDomain: String?
+    var userRule: String?
     let date: Date
     let elapsed: Int
     let type: String
@@ -77,7 +77,7 @@ class DnsLogRecord: NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(domain, forKey: "domain")
-        aCoder.encode(userSubDomain, forKey: "userSubDomain")
+        aCoder.encode(userRule, forKey: "userSubDomain")
         aCoder.encode(date, forKey: "date")
         aCoder.encode(elapsed, forKey: "elapsed")
         aCoder.encode(type, forKey: "type")
@@ -103,7 +103,7 @@ class DnsLogRecord: NSObject, NSCoding {
         self.bytesReceived = aDecoder.decodeInteger(forKey: "bytesReceived")
         
         // These fields can be nil for the old log records
-        self.userSubDomain = aDecoder.decodeObject(forKey: "userSubDomain") as? String
+        self.userRule = aDecoder.decodeObject(forKey: "userSubDomain") as? String
         self.upstreamAddr = aDecoder.decodeObject(forKey: "upstreamAddr") as? String
         self.status = DnsLogRecordStatus.init(rawValue: aDecoder.decodeInteger(forKey: "status")) ?? .processed
         self.userStatus = DnsLogRecordUserStatus.init(rawValue: aDecoder.decodeInteger(forKey: "userStatus")) ?? .none

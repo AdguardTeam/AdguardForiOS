@@ -86,6 +86,7 @@ class DnsServerInfo : ACObject {
     }
 }
 
+@objc(DnsProviderInfo)
 @objcMembers class DnsProviderInfo : ACObject {
     var name: String
     var logo: String?
