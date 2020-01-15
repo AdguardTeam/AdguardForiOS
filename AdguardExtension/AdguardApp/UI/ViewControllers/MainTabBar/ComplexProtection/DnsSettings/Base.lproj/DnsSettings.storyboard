@@ -1357,6 +1357,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="arrowRight" destination="iYb-Rf-io5" id="9EE-Rf-1FU"/>
                                     <outlet property="nameLabel" destination="bi2-TY-che" id="9bc-fP-C8j"/>
                                     <outlet property="selectedButton" destination="pNI-Gy-HkD" id="XAE-Ol-8Rw"/>
                                 </connections>
