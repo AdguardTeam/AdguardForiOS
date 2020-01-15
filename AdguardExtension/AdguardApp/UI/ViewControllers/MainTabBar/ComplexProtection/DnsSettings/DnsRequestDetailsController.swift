@@ -79,6 +79,7 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var matchedRulesTitleLabel: ThemableLabel!
     
     private var notificationToken: NotificationToken?
+    private var configurationToken: NSKeyValueObservation?
     
     // MARK: - services
     
@@ -106,6 +107,11 @@ class DnsRequestDetailsController : UITableViewController {
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
+        }
+        
+        configurationToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            guard let self = self else { return }
+            self.tableView.reloadData()
         }
         
         timeLabel.text = logRecord?.logRecord.time()

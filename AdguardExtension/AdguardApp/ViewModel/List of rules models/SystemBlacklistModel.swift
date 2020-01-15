@@ -165,7 +165,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
             return
         }
         
-        dnsFiltersService.userRules.append(contentsOf: rules)
+        rules.forEach({ dnsFiltersService.addBlacklistRule($0) })
         
         allRules.append(contentsOf: rules.map { RuleInfo($0, false, true, theme) })
         

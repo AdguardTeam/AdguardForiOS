@@ -150,6 +150,16 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         }
     }
     
+    @objc dynamic var showStatusBar: Bool {
+        get {
+            let showStatusBar: Bool = resources.sharedDefaults().object(forKey: AEDefaultsShowStatusBar) as? Bool ?? true
+            return showStatusBar && developerMode
+        }
+        set{
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsShowStatusBar)
+        }
+    }
+    
     /**
      chacks that all safari content blockers are enabled.
      you need observe @contentBlockerEnabled property to get the result

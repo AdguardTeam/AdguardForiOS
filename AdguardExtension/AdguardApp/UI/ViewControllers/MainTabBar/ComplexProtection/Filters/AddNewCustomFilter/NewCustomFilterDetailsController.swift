@@ -26,8 +26,8 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     var type: NewFilterType = .safariCustom
     
-    let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     var filter : AASCustomFilterParserResult?
     var delegate : NewCustomFilterDetailsDelegate?
     private var homepageLink: String?

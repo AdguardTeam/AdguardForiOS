@@ -123,6 +123,9 @@ class SettingsController: UITableViewController {
     
     @IBAction func developerModeAction(_ sender: UISwitch) {
         configuration.developerMode = sender.isOn
+        if !sender.isOn {
+           NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+        }
         tableView.reloadData()
     }
     

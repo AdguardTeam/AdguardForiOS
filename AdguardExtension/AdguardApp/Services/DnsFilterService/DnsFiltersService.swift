@@ -68,7 +68,7 @@ protocol DnsFiltersServiceProtocol {
     func addWhitelistDomain(_ domain: String)
     
     // adds a domain to user filter and restarts the tunnel
-    func addBlacklistDomain(_ domain: String)
+    func addBlacklistRule(_ rule: String)
     
     // removes rules(!not domains) from whitelist and restarts the tunnel
     func removeWhitelistRules(_ rules: [String])
@@ -185,12 +185,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let resources: AESharedResourcesProtocol
     private let vpnManager: APVPNManagerProtocol?
     private let parser = AASFilterSubscriptionParser()
-    
-    private let whitelistPrefix = "@@||"
-    private let whitelistSuffix = "^|"
-    private let blacklistPrefix = "||"
-    private let blacklistSuffix = "^"
-    
+    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+        
     init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?) {
         self.resources = resources
         self.vpnManager = vpnManager
@@ -222,7 +218,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             })
             
             // todo: do not read all rules to get counter
-            let systemBlackListEnabled = resources.safariUserFilterEnabled
+            let systemBlackListEnabled = resources.systemUserFilterEnabled
             if userRules.count > 0 && systemBlackListEnabled {
                 json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
             }
@@ -244,8 +240,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var whitelistDomains: [String] {
         get {
-            let whitelistRules = loadWhitelistRules()
-            return whitelistRules.map { self.whitelistDomainFromRule($0) }
+            return loadWhitelistRules()
         }
         set {
             saveWhitlistDomains(domains: newValue)
@@ -375,12 +370,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         var allRules = loadWhitelistRules()
         allRules.removeAll { rules.contains($0) }
         willChangeValue(for: \.whitelistDomains)
-        saveWhitlistDomains(domains: allRules.map {whitelistRuleFromDomain($0)})
+        saveWhitlistDomains(domains: allRules)
         didChangeValue(for: \.whitelistDomains)
     }
     
-    func addBlacklistDomain(_ domain: String) {
-        userRules.append(blacklistRuleFromDomain(domain))
+    func addBlacklistRule(_ rule: String) {
+        userRules.append(rule)
     }
     
     func removeUserRules(_ rules: [String]) {
@@ -434,32 +429,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private func filterPath(filterId: Int)->String {
         return resources.path(forRelativePath: filterFileName(filterId: filterId))
     }
-    
-    private func whitelistDomainFromRule(_ rule: String)->String {
-
-        let start = rule.hasPrefix(whitelistPrefix) ? whitelistPrefix.count : 0
-        let end = rule.hasSuffix(whitelistSuffix) ? -whitelistSuffix.count : 0
         
-        let startIndex = rule.index(rule.startIndex, offsetBy: start)
-        let endIndex = rule.index(rule.endIndex, offsetBy: end - 1)
-        
-        let domain = rule[startIndex...endIndex]
-        return String(domain)
-    }
-    
-    private func whitelistRuleFromDomain(_ domain:String)->String {
-        var rule = domain.hasPrefix(whitelistPrefix) ? domain : (whitelistPrefix + domain)
-        rule = domain.hasSuffix(whitelistSuffix) ? rule : (rule + whitelistSuffix)
-        return rule
-    }
-    
-    private func blacklistRuleFromDomain(_ domain: String)->String {
-        let trimmed = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        var rule = trimmed.hasPrefix(blacklistPrefix) ? trimmed : (blacklistPrefix + trimmed)
-        rule = trimmed.hasSuffix(blacklistSuffix) ? rule : (rule + blacklistSuffix)
-        return rule
-    }
-    
     private func loadWhitelistRules()->[String] {
         guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: whitelistFilterId)) else {
             DDLogError("(DnsFiltersService) error - can not read whitelist from file")
@@ -475,13 +445,15 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             return []
         }
         
-        let rules = string.components(separatedBy: .newlines)
+        var rules = string.components(separatedBy: .newlines)
+        rules = rules.filter { !$0.isEmpty }
+        rules = rules.map({ domainsConverter.whitelistRuleFromDomain($0) })
         
-        return rules.filter { !$0.isEmpty }
+        return rules
     }
     
     private func saveWhitlistDomains(domains:[String]) {
-        var rules = domains.map { self.whitelistRuleFromDomain($0) }
+        var rules = domains.map({ domainsConverter.whitelistDomainFromRule($0) })
         rules.append("") // temporary fix dnslibs bug
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
             resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))

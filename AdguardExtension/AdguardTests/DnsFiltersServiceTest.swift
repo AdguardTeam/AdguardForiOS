@@ -32,9 +32,12 @@ class DnsFiltersServiceTest: XCTestCase {
     }
     
     func testAddWhitelistDomain() {
-        filtersService.addWhitelistDomain("google.com")
+        let converter: DomainsConverterProtocol = DomainsConverter()
+        
+        let domainToCheck = converter.whitelistRuleFromDomain("google.com")
+        filtersService.addWhitelistDomain(domainToCheck)
         
         let domains = filtersService.whitelistDomains
-        XCTAssertEqual(domains, ["google.com"])
+        XCTAssertEqual(domains, [domainToCheck])
     }
 }

@@ -68,6 +68,7 @@ class DnsModeController: UITableViewController {
         }
         
         updateButtons()
+        setupBackButton()
         
         updateTheme()
     }
@@ -98,6 +99,8 @@ class DnsModeController: UITableViewController {
         
         selectedCell = indexPath.row
         updateButtons()
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Actions

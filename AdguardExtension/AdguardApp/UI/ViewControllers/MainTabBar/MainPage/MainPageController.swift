@@ -64,7 +64,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var changeStatisticsDatesButton: UIButton!
     @IBOutlet weak var chartView: ChartView!
     
-    
     @IBOutlet weak var statisticsStackView: UIStackView!
     
     @IBOutlet weak var requestsButton: UIButton!
