@@ -72,9 +72,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var blockedNumberLabel: ThemableLabel!
+    @IBOutlet weak var dataSavedNumberLabel: ThemableLabel!
     
     @IBOutlet weak var requestsTextLabel: ThemableLabel!
     @IBOutlet weak var blockedTextLabel: ThemableLabel!
+    @IBOutlet weak var dataSavedTextLabel: ThemableLabel!
     
     
     // MARK: Get Pro elements
@@ -305,6 +307,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chooseBlocked()
     }
     
+    @IBAction func dataSavedTapped(_ sender: UIButton) {
+        chooseDataSaved()
+    }
+    
     
     // MARK: - Get pro action
     
@@ -497,6 +503,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         requestsTextLabel.alpha = 0.5
         blockedTextLabel.alpha = 1.0
+    }
+    
+    /**
+    Called when "data daved" button tapped
+    */
+    private func chooseDataSaved(){
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("saved_data_title"), message: String.localizedString("saved_data_message"))
     }
     
     /**

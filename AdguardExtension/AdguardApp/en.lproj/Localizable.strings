@@ -34,6 +34,12 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applying changes...";
 
+/* (MainPageController) Title for alert about saved data */
+"saved_data_title" = "About Mb";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "A note about counting saved data";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Safari whitelist";
 
