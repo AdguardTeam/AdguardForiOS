@@ -513,7 +513,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     Called when "data daved" button tapped
     */
     private func chooseDataSaved(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("saved_data_title"), message: String.localizedString("saved_data_message"))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("saved_data_message"))
     }
     
     /**

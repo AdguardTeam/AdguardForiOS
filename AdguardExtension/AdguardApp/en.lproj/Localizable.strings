@@ -34,11 +34,8 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applying changes...";
 
-/* (MainPageController) Title for alert about saved data */
-"saved_data_title" = "About Mb";
-
 /* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "A note about counting saved data";
+"saved_data_message" = "This information is based on the number of blocked DNS requests. The statistics are an estimate due to technical impossibility to calculate the exact amount of ads, trackers and other threats that could have been downloaded by the user if the domain had not been initially blocked.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ Kb";
