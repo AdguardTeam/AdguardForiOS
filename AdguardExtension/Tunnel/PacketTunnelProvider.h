@@ -21,31 +21,9 @@
 #import "APVPNManager.h"
 #import "AESharedResources.h"
 
-/**
- Error domain for errors from tunnel provider.
- */
-extern NSString *APTunnelProviderErrorDomain;
-
-#define APTN_ERROR_STANDART                100
-#define APTN_ERROR_CONNECTION_HANDLER      200
-
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider
 
 @interface PacketTunnelProvider : NEPacketTunnelProvider
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-
-/**
- Returns current DNS server description object.
- */
-- (DnsServerInfo *)currentDnsServer;
-
-/**
- Returns tunnel mode
- */
-- (APVpnManagerTunnelMode)tunnelMode;
 
 @end
