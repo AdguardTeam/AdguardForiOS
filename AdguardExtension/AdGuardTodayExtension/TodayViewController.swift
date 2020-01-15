@@ -44,6 +44,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     
     @IBOutlet weak var blockedLabel: UILabel!
     
+    @IBOutlet weak var dataSavedLabel: UILabel!
+    
     @IBOutlet var labels: [UILabel]!
 
     @IBOutlet weak var expandedStackView: UIStackView!
@@ -296,6 +298,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         allTimeStaisticsLabel.textColor = .widgetTitleColor
         requestsLabel.textColor = .widgetTitleColor
         blockedLabel.textColor = .widgetTitleColor
+        dataSavedLabel.textColor = .widgetTitleColor
         
         labels.forEach({ $0.textColor = .widgetTextColor })
         
@@ -365,9 +368,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         var requests = 0
         var blocked = 0
+        var kBytesSaved = 0
         
         statistics[.all]?.forEach({ requests += $0.numberOfRequests })
-        statistics[.blocked]?.forEach({ blocked += $0.numberOfRequests })
+        statistics[.blocked]?.forEach({
+            blocked += $0.numberOfRequests
+            kBytesSaved += $0.savedKbytes
+        })
         
         if keyPath == AEDefaultsRequests {
             let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
@@ -377,6 +384,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
             let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             blockedLabel.text = "\(blocked + number)"
             blockedNumber = blocked + number
+            dataSavedLabel.text = String.dataUnitsConverter(kBytesSaved)
         }
     }
 }

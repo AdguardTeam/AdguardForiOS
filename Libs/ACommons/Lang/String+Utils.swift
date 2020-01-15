@@ -121,4 +121,28 @@ extension String {
     static func localizedString(_ key: String)->String {
         return ACLocalizedString(key, nil)
     }
+    
+    /**
+     Converts kBytes to text and appropriate units
+     */
+    static func dataUnitsConverter(_ kBytes: Int) -> String {
+        
+        let mBytePower = pow(2.0, 10.0) // 2^10 (1024) kBytes in 1 mByte
+        let gBytePower = pow(2.0, 20.0) // 2^20 (1048576) kBytes in 1gByte
+        
+        let gBytes = Double(kBytes) / gBytePower
+        if gBytes > 1 {
+            let gBytesString = String(format: "%.1f", gBytes)
+            return String(format: String.localizedString("gb_unit"), gBytesString)
+        }
+        
+        let mBytes = Double(kBytes) / mBytePower
+        if mBytes > 1 {
+            let mBytesString = String(format: "%.1f", mBytes)
+            return String(format: String.localizedString("mb_unit"), mBytesString)
+        }
+        
+        let kBytesString = String(format: "%.0f", kBytes)
+        return String(format: String.localizedString("kb_unit"), kBytesString)
+    }
 }

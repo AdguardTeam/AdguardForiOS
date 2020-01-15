@@ -23,6 +23,8 @@ protocol ChartViewModelProtocol {
     var requestsCount: Int { get set }
     var blockedCount: Int { get set }
     
+    var blockedSavedKbytes: Int { get set }
+    
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
     
@@ -32,7 +34,7 @@ protocol ChartViewModelProtocol {
 }
 
 protocol NumberOfRequestsChangedDelegate: class {
-    func numberOfRequestsChanged(requests: Int, blocked: Int)
+    func numberOfRequestsChanged()
 }
 
 enum ChartDateType {
@@ -110,6 +112,8 @@ class ChartViewModel: ChartViewModelProtocol {
     
     var requestsCount: Int = 0
     var blockedCount: Int = 0
+    
+    var blockedSavedKbytes: Int = 0
         
     var requests: [RequestsStatisticsBlock] = []
     var blockedRequests: [RequestsStatisticsBlock] = []
@@ -154,14 +158,17 @@ class ChartViewModel: ChartViewModelProtocol {
         
         requestsCount = requestsData.number
         blockedCount = blockedData.number
-                
+        
+        blockedSavedKbytes = blockedData.savedData
+    
         chartView.chartPoints = (requestsData.points, blockedData.points)
-        chartPointsChangedDelegate?.numberOfRequestsChanged(requests: requestsData.number, blocked: blockedData.number)
+        chartPointsChangedDelegate?.numberOfRequestsChanged()
     }
     
-    private func getPoints(from requests: [RequestsStatisticsBlock]) -> (points: [Point], number: Int){
+    private func getPoints(from requests: [RequestsStatisticsBlock]) -> (points: [Point], number: Int, savedData: Int){
         let maximumPointsNumber = 50
         var pointsArray: [Point] = []
+        var savedKbytes = 0
         var number = 0
                 
         var requestsDates: [Date] = requests.map({ $0.date })
@@ -176,7 +183,7 @@ class ChartViewModel: ChartViewModelProtocol {
         chartView.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
         
         if requestsDates.count < 2 {
-            return ([], 0)
+            return ([], 0, 0)
         }
         
         var xPosition: CGFloat = 0.0
@@ -185,6 +192,7 @@ class ChartViewModel: ChartViewModelProtocol {
             if (date > firstDate && date < lastDate) || chartDateType == .alltime {
                 let point = Point(x: xPosition, y: CGFloat(integerLiteral: request.numberOfRequests))
                 number += request.numberOfRequests
+                savedKbytes += request.savedKbytes
                 pointsArray.append(point)
                 xPosition += 1.0
             }
@@ -192,9 +200,9 @@ class ChartViewModel: ChartViewModelProtocol {
         
         if pointsArray.count > maximumPointsNumber {
             let points = rearrangePoints(from: pointsArray, max: maximumPointsNumber)
-            return (points, number)
+            return (points, number, savedKbytes)
         } else {
-            return (pointsArray, number)
+            return (pointsArray, number, savedKbytes)
         }
     }
     

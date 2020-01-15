@@ -75,7 +75,7 @@ class ContentBlockerTest: XCTestCase {
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }
-    
+     
     func testAffinityBlocks2() {
         let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber),
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber)]
