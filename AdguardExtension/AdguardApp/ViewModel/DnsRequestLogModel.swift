@@ -91,13 +91,13 @@ extension DnsLogRecordUserStatus {
     }
 }
     
-enum ButtonType {
+enum DnsLogButtonType {
     case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
 }
  
 extension DnsLogRecord
 {
-    func getButtons() -> [ButtonType] {
+    func getButtons() -> [DnsLogButtonType] {
         switch (status, userStatus) {
         case (_, .movedToBlacklist):
             return [.removeRuleFromUserFilter]

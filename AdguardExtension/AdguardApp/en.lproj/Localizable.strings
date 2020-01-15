@@ -639,3 +639,9 @@
 
 /* (DnsProvidersController) default systen dns server description */
 "default_dns_server_description" = "Use system default DNS servers provided by your Internet server provider";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Block request";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "Whitelist request";
