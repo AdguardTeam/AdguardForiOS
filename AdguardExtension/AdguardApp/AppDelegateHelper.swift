@@ -44,10 +44,6 @@ class AppDelegateHelper: NSObject {
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
     
-    private var showStatusBarIsEnabled: Bool {
-        return resources.sharedDefaults().bool(forKey: AEDefaultsShowStatusBar)
-    }
-    
     private var statusBarWindow: UIWindow?
     private var statusBarIsShown = false
     private let statusView = StatusView()
@@ -121,34 +117,36 @@ class AppDelegateHelper: NSObject {
         statusBarWindow?.isHidden = true
                 
         showStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
-            if !sSelf.showStatusBarIsEnabled {
-                return
-            }
-            
-            sSelf.statusViewCounter += 1
-            
-            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
-            
-            if !sSelf.statusBarIsShown{
-                sSelf.statusBarIsShown = true
-                DispatchQueue.main.async {
-                    sSelf.showStatusView(with: text)
+            DispatchQueue.main.async {
+                self.statusViewCounter += 1
+                
+                if !self.configuration.showStatusBar {
+                    return
                 }
-            } else {
-                sSelf.changeTextForStatusView(text: text)
+        
+                guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
+                    
+                if !self.statusBarIsShown{
+                    self.statusBarIsShown = true
+                    self.showStatusView(with: text)
+                } else {
+                    self.changeTextForStatusView(text: text)
+                }
             }
         })
         
         hideStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.HideStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
-            sSelf.statusViewCounter -= 1
-            
-            if sSelf.statusBarIsShown && sSelf.statusViewCounter == 0 {
-                DispatchQueue.main.async {
-                    self?.hideStatusView()
+            DispatchQueue.main.async {
+                if self.statusViewCounter > 0{
+                    self.statusViewCounter -= 1
+                }
+                
+                if self.statusViewCounter == 0 {
+                    self.hideStatusView()
                 }
             }
         })
@@ -337,15 +335,20 @@ class AppDelegateHelper: NSObject {
         
         UIView.animate(withDuration: 0.5) {[weak self] in
             guard let sSelf = self else { return }
+            guard let keyWindow = UIApplication.shared.keyWindow else { return }
+            
             sSelf.statusView.text = text
-            sSelf.statusBarWindow?.frame.origin.y -= sSelf.statusBarWindow?.frame.height ?? 0.0
+            let height = sSelf.statusBarWindow?.frame.height ?? 0.0
+            sSelf.statusBarWindow?.frame.origin.y = keyWindow.frame.maxY - height
         }
     }
     
     private func hideStatusView(){
         UIView.animate(withDuration: 0.5, animations: {[weak self] in
             guard let sSelf = self else { return }
-            sSelf.statusBarWindow?.frame.origin.y += sSelf.statusBarWindow?.frame.height ?? 0.0
+            guard let keyWindow = UIApplication.shared.keyWindow else { return }
+            
+            sSelf.statusBarWindow?.frame.origin.y = keyWindow.frame.maxY
         }) {[weak self] (success) in
             self?.statusBarIsShown = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in

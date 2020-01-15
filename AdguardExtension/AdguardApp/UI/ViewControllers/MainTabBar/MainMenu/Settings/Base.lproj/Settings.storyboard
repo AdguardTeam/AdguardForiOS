@@ -665,8 +665,8 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Full-Tunnel (without VPN icon), Incompatible with other VPN apps, unstable" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oc-O8-qI9" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="19" width="326" height="9"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oc-O8-qI9" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="28" width="326" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -710,6 +710,7 @@
                     <connections>
                         <outlet property="restartProtectionSwitch" destination="hAq-Ld-n9T" id="fk9-u4-IVQ"/>
                         <outlet property="showStatusbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
+                        <outlet property="tunnelModeDescription" destination="5oc-O8-qI9" id="Wss-rq-fWA"/>
                         <outlet property="useSimplifiedFiltersSwitch" destination="RDS-1r-fn1" id="MOR-mK-vpF"/>
                         <outletCollection property="themableLabels" destination="W6u-T8-UVZ" collectionClass="NSMutableArray" id="v7G-Zv-ltp"/>
                         <outletCollection property="themableLabels" destination="PV8-kf-b2c" collectionClass="NSMutableArray" id="lhL-mi-PJ3"/>

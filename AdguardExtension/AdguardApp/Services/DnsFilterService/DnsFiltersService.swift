@@ -218,7 +218,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             })
             
             // todo: do not read all rules to get counter
-            let systemBlackListEnabled = resources.safariUserFilterEnabled
+            let systemBlackListEnabled = resources.systemUserFilterEnabled
             if userRules.count > 0 && systemBlackListEnabled {
                 json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
             }

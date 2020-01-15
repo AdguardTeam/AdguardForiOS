@@ -24,6 +24,7 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var useSimplifiedFiltersSwitch: UISwitch!
     @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
+    @IBOutlet weak var tunnelModeDescription: ThemableLabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -53,7 +54,7 @@ class AdvancedSettingsController: UITableViewController {
         
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         restartProtectionSwitch.isOn = vpnManager.restartByReachability
-        showStatusbarSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsShowStatusBar)
+        showStatusbarSwitch.isOn = configuration.showStatusBar
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -61,14 +62,17 @@ class AdvancedSettingsController: UITableViewController {
         
         vpnObservation = NotificationCenter.default.observe(name: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
             [weak self] (notification) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             DispatchQueue.main.async{
-                sSelf.restartProtectionSwitch.isOn = sSelf.vpnManager.restartByReachability
+                self.restartProtectionSwitch.isOn = self.vpnManager.restartByReachability
+                self.setTunnelModeDescription()
+                self.tableView.reloadData()
             }
-            if sSelf.vpnManager.lastError != nil {
-                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
+            if self.vpnManager.lastError != nil {
+                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
             }
         }
+        setTunnelModeDescription()
     }
     
     // MARK: - Prepare for segue
@@ -92,7 +96,7 @@ class AdvancedSettingsController: UITableViewController {
         if !sender.isOn {
            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
-        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsShowStatusBar)
+        configuration.showStatusBar = sender.isOn
     }
     
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
@@ -171,6 +175,19 @@ class AdvancedSettingsController: UITableViewController {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
+        }
+    }
+    
+    private func setTunnelModeDescription() {
+        switch vpnManager.tunnelMode {
+        case APVpnManagerTunnelModeSplit:
+            tunnelModeDescription.text = String.localizedString("tunnel_mode_split_description")
+        case APVpnManagerTunnelModeFull:
+            tunnelModeDescription.text = String.localizedString("tunnel_mode_full_description")
+        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+            tunnelModeDescription.text = String.localizedString("tunnel_mode_full_without_icon_description")
+        default:
+            break
         }
     }
 }

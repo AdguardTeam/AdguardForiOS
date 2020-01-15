@@ -565,12 +565,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 - (void)internalSetEnabled:(BOOL)enabled force:(BOOL)force{
     
     if (force || (enabled != _enabled)) {
-        
-        if (_activeDnsServer == nil) {
-            // if we have initial state, when vpn configuration still was not loaded.
-            _delayedSetEnabled = @(enabled);
-            return;
-        }
+       
         [self updateConfigurationForRemoteServer:_activeDnsServer tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:enabled filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
         
         // If do not completely stop the tunnel in full mode, then other VPNs can not start
@@ -584,19 +579,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 //must be called on workingQueue
 - (void)internalSetRemoteServer:(DnsServerInfo *)server{
     
-    if (_activeDnsServer == nil) {
-        // if we have initial state, when vpn configuration still was not loaded.
-        _delayedSetActiveDnsServer = server;
-        return;
+    if (_enabled) {
+        _delayedSetEnabled = @(_enabled);
     }
-    
-    if (server) {
-        
-        if (_enabled) {
-            _delayedSetEnabled = @(_enabled);
-        }
-        [self updateConfigurationForRemoteServer:server tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
-    }
+    [self updateConfigurationForRemoteServer:server tunnelMode:_tunnelMode restartByReachability:_restartByReachability enabled:NO filteringMobileDataEnabled:_filteringMobileDataEnabled filteringWifiDataEnabled:_filteringWifiDataEnabled];
 }
 
 //must be called on workingQueue
@@ -724,10 +710,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     _busy = YES;
     [_busyLock unlock];
     
-    if (remoteServer == nil) {
-        remoteServer = self.defaultServer;
-    }
-    
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)_manager.protocolConfiguration;
     NETunnelProviderManager *newManager;
     
@@ -738,7 +720,8 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     }
     
     NSData *remoteServerData = [NSKeyedArchiver archivedDataWithRootObject:remoteServer];
-    protocol.serverAddress = remoteServer.name;
+    protocol.serverAddress = remoteServer ? remoteServer.name : ACLocalizedString(@"default_dns_server_name", nil);
+    
     protocol.providerConfiguration = @{
                                        APVpnManagerParameterRemoteDnsServer: remoteServerData,
                                        APVpnManagerParameterTunnelMode: @(tunnelMode),
@@ -846,11 +829,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         NSData *remoteDnsServerData = protocolConfiguration.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
         
         // Getting current settings from configuration.
-        // If settings are incorrect, then we assign default values.
         DnsServerInfo *remoteServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
         if (_activeDnsServer.serverId != remoteServer.serverId) {
             [self willChangeValueForKey:@"activeDnsServer"];
-            _activeDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData] ?: self.defaultServer;
+            _activeDnsServer = [NSKeyedUnarchiver unarchiveObjectWithData:remoteDnsServerData];
             [self didChangeValueForKey:@"activeDnsServer"];
         }
         
@@ -863,7 +845,10 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _tunnelMode = protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] ?
         [protocolConfiguration.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntValue] : APVpnManagerTunnelModeSplit;
         
-        [self didChangeValueForKey:@"tunnelMode"];
+        // update it async to prevent deadlocks on NETunnelProvider serial queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self didChangeValueForKey:@"tunnelMode"];
+        });
         //-------------
         
         _restartByReachability = protocolConfiguration.providerConfiguration[APVpnManagerRestartByReachability] ?

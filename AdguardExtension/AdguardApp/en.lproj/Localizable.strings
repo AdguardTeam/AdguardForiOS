@@ -634,6 +634,12 @@
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Switch on %@ all content blockers</b> and come back to our app!";
 
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "System DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Use system default DNS servers provided by your Internet server provider";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Block request";
 
