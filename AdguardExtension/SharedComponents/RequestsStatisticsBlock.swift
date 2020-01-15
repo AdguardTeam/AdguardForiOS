@@ -23,7 +23,12 @@ import Foundation
 class RequestsStatisticsBlock: NSObject, NSCoding {
 
     @objc var date: Date
-    @objc var numberOfRequests: Int
+    @objc var numberOfRequests: Int {
+        didSet {
+            self.savedKbytes = numberOfRequests * Int.random(in: 10..<50)
+        }
+    }
+    @objc var savedKbytes: Int = 0
 
     init(date: Date, numberOfRequests: Int) {
         self.date = date
@@ -40,10 +45,12 @@ class RequestsStatisticsBlock: NSObject, NSCoding {
     func encode(with coder: NSCoder) {
         coder.encode(date, forKey: "date")
         coder.encode(numberOfRequests, forKey: "numberOfRequests")
+        coder.encode(savedKbytes, forKey: "savedKbytes")
     }
 
     required init?(coder: NSCoder) {
         self.date = coder.decodeObject(forKey: "date") as! Date
         self.numberOfRequests = coder.decodeInteger(forKey: "numberOfRequests")
+        self.savedKbytes = coder.decodeInteger(forKey: "savedKbytes")
      }
  }

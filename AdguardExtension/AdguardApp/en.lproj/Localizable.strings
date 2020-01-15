@@ -40,6 +40,16 @@
 /* (MainPageController) Message for alert about saved data */
 "saved_data_message" = "A note about counting saved data";
 
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ Kb";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ Mb";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ Gb";
+
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Safari whitelist";
 

@@ -370,7 +370,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - ChartPointsChangedDelegate method
     
-    func numberOfRequestsChanged(requests: Int, blocked: Int) {
+    func numberOfRequestsChanged() {
         updateTextForButtons()
     }
     
@@ -469,7 +469,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self.requestsNumberLabel.text = "\((self.chartModel?.requestsCount ?? 0) + requestsNumber)"
             
             let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            self.blockedNumberLabel.text = "\((self.chartModel?.blockedCount ?? 0) + blockedNumber)"
+            let blockedCount = (self.chartModel?.blockedCount ?? 0) + blockedNumber
+            let blockedSaved = self.chartModel?.blockedSavedKbytes ?? 0
+            
+            self.blockedNumberLabel.text = "\(blockedCount)"
+            self.dataSavedNumberLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }
     
@@ -731,6 +735,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         onReady = nil
     }
 
+    /**
+     As iPhone SE screen is very small we need different constraints for it
+     */
     private func setupConstraintsForIphoneSe(){
         safariIconHeight.constant = 24.0
         safariIconWidth.constant = 24.0

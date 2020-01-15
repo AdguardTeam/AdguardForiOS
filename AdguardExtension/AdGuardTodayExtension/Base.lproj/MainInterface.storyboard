@@ -220,14 +220,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="data saved*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaJ-er-mJu">
+                                <rect key="frame" x="215" y="242" width="72" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="9LQ-Yl-tVx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2B3-i9-r5F">
+                                <rect key="frame" x="215" y="217" width="72" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="LjK-LT-gUx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wd5-Po-h4x" firstAttribute="top" secondItem="6Gp-mS-9oI" secondAttribute="bottom" id="0mY-vg-kIJ"/>
                             <constraint firstItem="3GI-zA-x7y" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" id="GMC-2m-SeD"/>
+                            <constraint firstItem="2B3-i9-r5F" firstAttribute="top" secondItem="uPl-zG-XAF" secondAttribute="top" id="GO2-kx-D0B"/>
+                            <constraint firstItem="eaJ-er-mJu" firstAttribute="top" secondItem="2B3-i9-r5F" secondAttribute="bottom" id="ITn-e3-ypV"/>
                             <constraint firstItem="3GI-zA-x7y" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="MHf-pK-TRX"/>
                             <constraint firstItem="cva-11-jEA" firstAttribute="top" secondItem="3GI-zA-x7y" secondAttribute="bottom" constant="32" id="Mxz-fk-I0S"/>
                             <constraint firstItem="6Gp-mS-9oI" firstAttribute="top" secondItem="uPl-zG-XAF" secondAttribute="top" id="P1v-tZ-jlT"/>
                             <constraint firstItem="WAp-Xx-eXF" firstAttribute="top" secondItem="uPl-zG-XAF" secondAttribute="bottom" id="PNN-Jj-cJR"/>
+                            <constraint firstItem="eaJ-er-mJu" firstAttribute="leading" secondItem="wd5-Po-h4x" secondAttribute="trailing" constant="45" id="QVo-eI-u4o"/>
                             <constraint firstItem="LDB-v9-R8w" firstAttribute="bottom" secondItem="3GI-zA-x7y" secondAttribute="bottom" id="Tga-JK-IzZ"/>
                             <constraint firstItem="6Gp-mS-9oI" firstAttribute="width" relation="greaterThanOrEqual" secondItem="wd5-Po-h4x" secondAttribute="width" id="WPZ-KH-L4R"/>
                             <constraint firstItem="wd5-Po-h4x" firstAttribute="centerX" secondItem="6Gp-mS-9oI" secondAttribute="centerX" id="cSd-cD-joM"/>
@@ -240,6 +261,8 @@
                             <constraint firstItem="uPl-zG-XAF" firstAttribute="top" secondItem="cva-11-jEA" secondAttribute="bottom" constant="16" id="oQd-WE-Q13"/>
                             <constraint firstItem="LDB-v9-R8w" firstAttribute="trailing" secondItem="3GI-zA-x7y" secondAttribute="trailing" id="oss-l8-g6y"/>
                             <constraint firstItem="cva-11-jEA" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="24" id="qd5-h0-CW4"/>
+                            <constraint firstItem="2B3-i9-r5F" firstAttribute="width" relation="greaterThanOrEqual" secondItem="eaJ-er-mJu" secondAttribute="width" id="sDG-Uz-1Nj"/>
+                            <constraint firstItem="eaJ-er-mJu" firstAttribute="centerX" secondItem="2B3-i9-r5F" secondAttribute="centerX" id="tus-DT-YS7"/>
                             <constraint firstItem="LDB-v9-R8w" firstAttribute="leading" secondItem="3GI-zA-x7y" secondAttribute="leading" id="z7r-wC-MMj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
@@ -254,6 +277,7 @@
                         <outlet property="complexStatisticsLabel" destination="yLB-hW-Q36" id="zQm-Vn-PhS"/>
                         <outlet property="complexStatusLabel" destination="veU-On-v4x" id="anh-df-pnE"/>
                         <outlet property="complexSwitchOutlet" destination="msY-PO-wL6" id="NAc-Ys-Xbq"/>
+                        <outlet property="dataSavedLabel" destination="2B3-i9-r5F" id="pow-3j-c4w"/>
                         <outlet property="expandedStackView" destination="3GI-zA-x7y" id="Y9W-UF-u0U"/>
                         <outlet property="height" destination="bwu-Xo-Mhp" id="mvg-zo-OuL"/>
                         <outlet property="requestsLabel" destination="uPl-zG-XAF" id="cDW-Fg-QFO"/>
@@ -267,6 +291,7 @@
                         <outlet property="systemTitleLabel" destination="box-OA-msa" id="3Y1-Nn-wJ4"/>
                         <outletCollection property="labels" destination="WAp-Xx-eXF" collectionClass="NSMutableArray" id="oYI-uE-5nm"/>
                         <outletCollection property="labels" destination="wd5-Po-h4x" collectionClass="NSMutableArray" id="r47-YM-aJm"/>
+                        <outletCollection property="labels" destination="eaJ-er-mJu" collectionClass="NSMutableArray" id="R6k-4y-6WZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
