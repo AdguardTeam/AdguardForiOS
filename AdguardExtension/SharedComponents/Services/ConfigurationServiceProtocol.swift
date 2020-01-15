@@ -9,4 +9,5 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var proStatus : Bool { get }
     var purchasedThroughLogin: Bool { get }
     var developerMode: Bool { get  set }
+    var showStatusBar: Bool { get set }
 }

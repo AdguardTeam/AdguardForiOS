@@ -53,7 +53,7 @@ class AdvancedSettingsController: UITableViewController {
         
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         restartProtectionSwitch.isOn = vpnManager.restartByReachability
-        showStatusbarSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsShowStatusBar)
+        showStatusbarSwitch.isOn = configuration.showStatusBar
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -92,7 +92,7 @@ class AdvancedSettingsController: UITableViewController {
         if !sender.isOn {
            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
-        resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsShowStatusBar)
+        configuration.showStatusBar = sender.isOn
     }
     
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
