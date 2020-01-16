@@ -23,7 +23,7 @@
                         <sections>
                             <tableViewSection id="6bb-iC-TW3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="VoQ-Lr-RjM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VoQ-Lr-RjM">
                                         <rect key="frame" x="0.0" y="28" width="414" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VoQ-Lr-RjM" id="atW-1j-3o5">
@@ -84,15 +84,14 @@
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="leading" secondItem="X7W-0Y-oFy" secondAttribute="trailing" constant="16" id="RRf-7o-nnI"/>
                                                 <constraint firstAttribute="bottom" secondItem="vlx-BS-A2y" secondAttribute="bottom" constant="24" id="UYG-gn-VnA"/>
                                                 <constraint firstItem="X7W-0Y-oFy" firstAttribute="centerY" secondItem="gZs-M6-5s0" secondAttribute="centerY" id="o4V-cI-VPj"/>
-                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7">
-                                                </constraint>
+                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7"/>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="wn5-St-EH0"/>
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="22" id="y78-mB-GKy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qdI-Qn-GO4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qdI-Qn-GO4">
                                         <rect key="frame" x="0.0" y="157" width="414" height="168"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdI-Qn-GO4" id="rW1-K7-XNG">
@@ -188,11 +187,22 @@
                         <outletCollection property="themableLabels" destination="884-Hm-mb6" collectionClass="NSMutableArray" id="WRG-b1-9GS"/>
                         <outletCollection property="themableLabels" destination="cnF-td-Ba1" collectionClass="NSMutableArray" id="Amt-To-ryK"/>
                         <outletCollection property="themableLabels" destination="teo-vm-NRJ" collectionClass="NSMutableArray" id="c3T-UA-1dF"/>
+                        <segue destination="nr4-0t-luE" kind="show" identifier="showGetProSwgueId" id="i4Z-ZX-QUW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHj-J0-uTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-213.04347826086959" y="-137.27678571428569"/>
+        </scene>
+        <!--License-->
+        <scene sceneID="hQl-2I-GuT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="License" id="nr4-0t-luE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9jf-or-sU8"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sBM-51-doE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="550" y="-137"/>
         </scene>
     </scenes>
     <resources>
