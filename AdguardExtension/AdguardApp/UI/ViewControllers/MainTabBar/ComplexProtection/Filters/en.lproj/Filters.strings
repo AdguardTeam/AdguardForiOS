@@ -35,7 +35,7 @@
 "cTI-39-Vwx.text" = "Version";
 
 /* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Use your custom filters here";
+"eAd-RZ-bHN.text" = "Add custom filter lists here";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filters";

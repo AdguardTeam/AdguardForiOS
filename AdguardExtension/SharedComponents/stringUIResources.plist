@@ -59,9 +59,9 @@
 	<array>
 		<dict>
 			<key>description</key>
-			<string>An ad filter that you create on your own. You can add rules to it manually or using Adguard Asisstant.</string>
+			<string>An ad filter that you create on your own. You can add rules to it manually or using AdGuard Asisstant.</string>
 			<key>name</key>
-			<string>User filter</string>
+			<string>User rules</string>
 		</dict>
 		<dict>
 			<key>description</key>

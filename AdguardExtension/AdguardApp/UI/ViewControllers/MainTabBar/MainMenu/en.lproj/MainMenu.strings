@@ -17,7 +17,7 @@
 "VQi-XH-gdb.normalTitle" = "Get Premium";
 
 /* Class = "UILabel"; text = "User filter"; ObjectID = "bVe-ys-rO9"; Note = "(MainMenuController) user filter caption"; */
-"bVe-ys-rO9.text" = "User filter";
+"bVe-ys-rO9.text" = "User rules";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "e0H-m9-qlc"; Note = "(Main Menu) Safari protection caption"; */
 "e0H-m9-qlc.text" = "Safari protection";

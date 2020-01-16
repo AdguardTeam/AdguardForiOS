@@ -14,7 +14,7 @@
 "rule_converting_error" = "Cannot convert the filter rule. Rule text is invalid.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Cannot convert the user filter rules.";
+"filter_rules_converting_error" = "Cannot convert user rules.";
 
 /* Alert title. On error. */
 "common_error_title" = "Error";
@@ -51,7 +51,7 @@
 "whitelist_title" = "Safari whitelist";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "User Filter";
+"user_filter_title" = "User rules";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "Enter your own rules here, separated by line breaks";
@@ -429,22 +429,22 @@
 "wifi_exceptions_title" = "Wi-Fi exceptions";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "System protection will not be used in Wi-Fi networks below";
+"wifi_exceptions_description" = "System protection will not work in Wi-Fi networks listed below";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Add an exception";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
-"filter_mobile_title" = "Filter mobile data";
+"filter_mobile_title" = "Filter Mobile data";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
-"filter_wifi_title" = "Filter wi-fi data";
+"filter_wifi_title" = "Filter Wi-Fi data";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Trackers, counters";
+"mobile_data_description" = "System protection on Mobile data";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Trackers, counters";
+"wifi_data_description" = "System protection on Wi-Fi data";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
@@ -453,7 +453,7 @@
 "dns_blacklist_title" = "Blacklist";
 
 /* (ListOfRulesModel) title for safari user filter */
-"safari_userfilter_title" = "Safari user filter";
+"safari_userfilter_title" = "Safari user rules";
 
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
@@ -552,7 +552,7 @@
 "default_dns_filter_name" = "DNS Filter";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "All settings, including user filter, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+"confirm_reset_text" = "All settings, including user rules, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 hours";
@@ -591,13 +591,13 @@
 "protection_enabled" = "Protection is enabled";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and system protection";
+"complex_enabled" = "Safari and System protection";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari ad blocking";
+"safari_enabled" = "Safari content blocking";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "All protection modules are off";
+"complex_disabled" = "All protection modules are disabled";
 
 /*(TodayViewController) System protection is enabled text  */
 "system_enabled" = "System protection";

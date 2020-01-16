@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Sw-2h-d5a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Sw-2h-d5a">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,7 +37,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="884-Hm-mb6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="52" width="261" height="18"/>
+                                                    <rect key="frame" x="56" y="22" width="258" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlx-BS-A2y" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="258" height="57.5"/>
-                                                    <string key="text">Enables content blocking in Safari. It blocks ads and trackers and applies cosmetic filtering, like removing empty spaces left behind by blocked elements.</string>
+                                                    <string key="text">This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists in AdGuard settings.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="free" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-hs-4EK">
-                                                    <rect key="frame" x="56" y="22" width="34" height="18"/>
+                                                    <rect key="frame" x="56" y="22" width="34" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="F2d-Jj-88t"/>
                                                     </constraints>
@@ -84,8 +84,7 @@
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="leading" secondItem="X7W-0Y-oFy" secondAttribute="trailing" constant="16" id="RRf-7o-nnI"/>
                                                 <constraint firstAttribute="bottom" secondItem="vlx-BS-A2y" secondAttribute="bottom" constant="24" id="UYG-gn-VnA"/>
                                                 <constraint firstItem="X7W-0Y-oFy" firstAttribute="centerY" secondItem="gZs-M6-5s0" secondAttribute="centerY" id="o4V-cI-VPj"/>
-                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7">
-                                                </constraint>
+                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7"/>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="wn5-St-EH0"/>
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="22" id="y78-mB-GKy"/>
                                             </constraints>
@@ -114,7 +113,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnF-td-Ba1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="52" width="261" height="18"/>
+                                                    <rect key="frame" x="56" y="22" width="135" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -123,8 +122,8 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="42" width="240" height="57.5"/>
-                                                    <string key="text">Enables system-wide protection. It blocks ads and trackers in most other apps and browsers, not only in Safari, but lacks cosmetic filtering.</string>
+                                                    <rect key="frame" x="56" y="42" width="251" height="57.5"/>
+                                                    <string key="text">This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -133,7 +132,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="premium" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-72-GAw">
-                                                    <rect key="frame" x="56" y="22" width="62" height="18"/>
+                                                    <rect key="frame" x="56" y="22" width="62" height="0.0"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="3n8-9r-Ztx"/>
