@@ -99,15 +99,10 @@ class DomainsConverterTest: XCTestCase {
     
     
     // MARK: - Private methods
-    
-    private func randomString(length: Int) -> String {
-      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-      return String((0..<length).map{ _ in letters.randomElement()! })
-    }
 
     private func generateRandomDomain() -> String {
         let domainStringLength = Int.random(in: 1..<5)
-        let randomDomain = randomString(length: domainStringLength)
+        let randomDomain = String.randomString(length: domainStringLength)
         return randomDomain
     }
     
