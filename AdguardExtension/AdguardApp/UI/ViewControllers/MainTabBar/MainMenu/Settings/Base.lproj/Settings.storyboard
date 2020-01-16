@@ -380,23 +380,14 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="yZy-mx-dLq">
-                                                    <rect key="frame" x="374" y="10" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="Pca-hu-pAy"/>
-                                                        <constraint firstAttribute="height" constant="24" id="jmG-dL-BDN"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wYq-g0-5k6" firstAttribute="top" secondItem="QEc-dY-TtB" secondAttribute="bottom" constant="3" id="013-P2-1Cg"/>
                                                 <constraint firstItem="QEc-dY-TtB" firstAttribute="leading" secondItem="xHg-s6-xPV" secondAttribute="leading" constant="24" id="6Tq-AE-hZp"/>
                                                 <constraint firstItem="wYq-g0-5k6" firstAttribute="trailing" secondItem="QEc-dY-TtB" secondAttribute="trailing" id="6gz-02-bNl"/>
-                                                <constraint firstAttribute="trailing" secondItem="yZy-mx-dLq" secondAttribute="trailing" constant="16" id="DPc-EK-Qsj"/>
-                                                <constraint firstItem="yZy-mx-dLq" firstAttribute="leading" secondItem="QEc-dY-TtB" secondAttribute="trailing" constant="13" id="HTe-pw-U7I"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wYq-g0-5k6" secondAttribute="bottom" constant="16" id="Isr-Xc-gJ7"/>
                                                 <constraint firstItem="QEc-dY-TtB" firstAttribute="top" secondItem="xHg-s6-xPV" secondAttribute="top" constant="16" id="YxN-eo-86s"/>
-                                                <constraint firstItem="yZy-mx-dLq" firstAttribute="centerY" secondItem="xHg-s6-xPV" secondAttribute="centerY" id="faZ-aN-jfJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="QEc-dY-TtB" secondAttribute="trailing" constant="25" id="a9Q-Sc-gjs"/>
                                                 <constraint firstItem="wYq-g0-5k6" firstAttribute="leading" secondItem="QEc-dY-TtB" secondAttribute="leading" id="opg-9F-qyK"/>
                                             </constraints>
                                         </tableViewCellContentView>
