@@ -289,10 +289,6 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     return _activeDnsServer;
 }
 
-- (DnsServerInfo *)defaultServer {
-    return self.providers.firstObject.servers.firstObject;
-}
-
 - (void)setTunnelMode:(APVpnManagerTunnelMode)tunnelMode {
     _lastError = nil;
     
@@ -427,7 +423,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         ASSIGN_STRONG(self);
         
         if ([USE_STRONG(self) isActiveProvider:provider]) {
-            USE_STRONG(self).activeDnsServer = USE_STRONG(self).defaultServer;
+            USE_STRONG(self).activeDnsServer = nil;
         }
         
         // search provider by server id.
@@ -912,7 +908,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     }
     else{
         [self willChangeValueForKey:@"activeDnsServer"];
-        _activeDnsServer = self.defaultServer;
+        _activeDnsServer = nil;
         [self didChangeValueForKey:@"activeDnsServer"];
         
         _connectionStatus = APVpnConnectionStatusDisabled;
