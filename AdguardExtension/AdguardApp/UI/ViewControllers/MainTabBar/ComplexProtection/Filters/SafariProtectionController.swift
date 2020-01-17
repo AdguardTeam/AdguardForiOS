@@ -56,7 +56,14 @@ class SafariProtectionController: UITableViewController {
     private let enabledColor = UIColor(hexString: "#67b279")
     private let disabledColor = UIColor(hexString: "#888888")
     
+    private let blacklistModel: ListOfRulesModelProtocol
+    
     // MARK: - view controler life cycle
+    
+    required init?(coder: NSCoder) {
+        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
+        super.init(coder: coder)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == whiteListSegue {
@@ -67,8 +74,7 @@ class SafariProtectionController: UITableViewController {
             }
         } else if segue.identifier == blackListSegue {
             if let controller = segue.destination as? ListOfRulesController{
-                let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
-                controller.model = model
+                controller.model = blacklistModel
             }
         }
     }
@@ -109,8 +115,9 @@ class SafariProtectionController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let userFilterEnabled = resources.safariUserFilterEnabled   
-        userFilterStateLabel.text = ACLocalizedString(userFilterEnabled ? "enabled": "disabled", nil)
+        let userFilterTextFormat = ACLocalizedString("user_rules_format", nil)
+        let userRulesNumber = blacklistModel.rules.count
+        userFilterStateLabel.text = String.localizedStringWithFormat(userFilterTextFormat, userRulesNumber)
     }
     
     deinit {
