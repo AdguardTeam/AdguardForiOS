@@ -21,25 +21,18 @@ import XCTest
 class DomainsConverterTest: XCTestCase {
     let converter: DomainsConverterProtocol = DomainsConverter()
     
-    private let whitelistPrefix = "@@||"
-    private let whitelistSuffix = "^|"
-    
-    private let blacklistPrefix = "||"
-    private let blacklistSuffix = "^"
-    
-    
     // MARK: - Test whitelistDomainFromRule function
     
     func testWhitelistDomainFromRuleWithRule(){
-        let domain = generateRandomDomain()
-        let whitelistRule = generateWhitelistRule(from: domain)
+        let domain = "www.google.com"
+        let whitelistRule = "@@||www.google.com^|"
         let domainToCheck = converter.whitelistDomainFromRule(whitelistRule)
         
         XCTAssertEqual(domain, domainToCheck)
     }
     
     func testWhitelistDomainFromRuleWithDomain(){
-        let domain = generateRandomDomain()
+        let domain = "www.google.com"
         let domainToCheck = converter.whitelistDomainFromRule(domain)
         
         XCTAssertEqual(domain, domainToCheck)
@@ -48,33 +41,24 @@ class DomainsConverterTest: XCTestCase {
     // MARK: - Test blacklistRuleFromDomain function
     
     func testBlacklistRuleFromDomainWithRule(){
-        let domain = generateRandomDomain()
-        let blacklistRule = generateBlacklistRule(from: domain)
+        let domain = "www.google.com"
+        let blacklistRule = "||www.google.com^"
         let ruleToCheck = converter.blacklistRuleFromDomain(domain)
         
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
     
     func testBlacklistRuleFromDomainWithDomain(){
-        let domain = generateRandomDomain()
-        let blacklistRule = generateBlacklistRule(from: domain)
+        let blacklistRule = "||www.google.com^"
         let ruleToCheck = converter.blacklistRuleFromDomain(blacklistRule)
         
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
     
     func testBlacklistRuleFromDomainWithRuleWithDotInTheEnd(){
-        let domain = generateRandomDomain()
-        let blacklistRule = generateBlacklistRule(from: domain)
-        let ruleToCheck = converter.blacklistRuleFromDomain(domain + ".")
-        
-        XCTAssertEqual(blacklistRule, ruleToCheck)
-    }
-    
-    func testBlacklistRuleFromDomainWithDomainWithDotInTheEnd(){
-        let domain = generateRandomDomain()
-        let blacklistRule = generateBlacklistRule(from: domain)
-        let ruleToCheck = converter.blacklistRuleFromDomain(blacklistRule + ".")
+        let domain = "www.google.com."
+        let blacklistRule = "||www.google.com^"
+        let ruleToCheck = converter.blacklistRuleFromDomain(domain)
         
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
@@ -82,35 +66,17 @@ class DomainsConverterTest: XCTestCase {
     // MARK: - Test whitelistRuleFromDomain function
     
     func testWhitelistRuleFromDomainWithRule(){
-        let domain = generateRandomDomain()
-        let whitelistRule = generateWhitelistRule(from: domain)
+        let domain = "www.google.com"
+        let whitelistRule = "@@||www.google.com^|"
         let ruleToCheck = converter.whitelistRuleFromDomain(domain)
         
         XCTAssertEqual(whitelistRule, ruleToCheck)
     }
     
     func testWhitelistRuleFromDomainWithDomain(){
-        let domain = generateRandomDomain()
-        let whitelistRule = generateWhitelistRule(from: domain)
+        let whitelistRule = "@@||www.google.com^|"
         let ruleToCheck = converter.whitelistRuleFromDomain(whitelistRule)
         
         XCTAssertEqual(whitelistRule, ruleToCheck)
-    }
-    
-    
-    // MARK: - Private methods
-
-    private func generateRandomDomain() -> String {
-        let domainStringLength = Int.random(in: 1..<5)
-        let randomDomain = String.randomString(length: domainStringLength)
-        return randomDomain
-    }
-    
-    private func generateWhitelistRule(from domain: String) -> String {
-        return whitelistPrefix + domain + whitelistSuffix
-    }
-    
-    private func generateBlacklistRule(from domain: String) -> String {
-        return blacklistPrefix + domain + blacklistSuffix
     }
 }
