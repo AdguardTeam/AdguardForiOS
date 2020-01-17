@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>user_rules_format</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@rules@</string>
+		<key>rules</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>No rules</string>
+			<key>one</key>
+			<string>One rule</string>
+			<key>other</key>
+			<string>%d rules</string>
+		</dict>
+	</dict>
 	<key>getPro_full_access_days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

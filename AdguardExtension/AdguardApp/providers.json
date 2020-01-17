@@ -33,6 +33,118 @@
   ],
   "dnsProviders": [
     {
+        "name": "AdGuard DNS",
+        "logo": "ic_about_logo",
+        "summary": "adguard_dns_description",
+        "protocols": [
+              "dns",
+              "dnscrypt",
+              "doh",
+              "dot"
+        ],
+        "features": [
+              "ad_blocking",
+              "secure",
+              "no_logs"
+        ],
+        "website": "https://adguard.com/adguard-dns/overview.html",
+        "servers": [
+            {
+                "protocol": "dns",
+                "id": "adguard-dns",
+                "name": "AdGuard DNS",
+                "upstreams":[
+                      "176.103.130.130",
+                      "176.103.130.131"
+                ]
+            },
+            {
+                "protocol": "dnscrypt",
+                "anycast": true,
+                "id": "adguard-dnscrypt",
+                "name": "adguard-dns",
+                "upstreams": [
+                      "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20"
+                ]
+            },
+            {
+                "protocol": "doh",
+                "anycast": true,
+                "id": "adguard-doh",
+                "name": "adguard-doh",
+                "upstreams": [
+                      "https://dns.adguard.com/dns-query"
+                ]
+            },
+            {
+                "protocol": "dot",
+                "anycast": true,
+                "id": "adguard-dot",
+                "name": "adguard-dot",
+                "upstreams": [
+                      "tls://dns.adguard.com"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "AdGuard DNS Family Protection",
+        "logo": "ic_adguard_family_provider_logo",
+        "summary": "adguard_family_dns_description",
+        "protocols": [
+            "dns",
+            "dnscrypt",
+            "doh",
+            "dot"
+        ],
+        "features": [
+            "ad_blocking",
+            "secure",
+            "no_logs",
+            "adult",
+            "safe_search"
+        ],
+        "website": "https://adguard.com/adguard-dns/overview.html",
+        "servers": [
+            {
+                "protocol": "dns",
+                "id": "adguard-dns-family",
+                "name": "AdGuard Family DNS",
+                "upstreams":[
+                      "176.103.130.132",
+                      "176.103.130.134"
+                ]
+            },
+            {
+                "protocol": "dnscrypt",
+                "anycast": true,
+                "id": "adguard-family-dnscrypt",
+                "name": "adguard-dns-family",
+                "upstreams": [
+                      "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMjo1NDQzILgxXdexS27jIKRw3C7Wsao5jMnlhvhdRUXWuMm1AFq6ITIuZG5zY3J5cHQuZmFtaWx5Lm5zMS5hZGd1YXJkLmNvbQ"
+                ]
+            },
+            {
+                "protocol": "doh",
+                "anycast": true,
+                "id": "adguard-family-doh",
+                "name": "adguard-family-doh",
+                "upstreams": [
+                    "https://dns-family.adguard.com/dns-query"
+                ]
+            },
+            {
+                "protocol": "dot",
+                "anycast": true,
+                "id": "adguard-family-dot",
+                "name": "adguard-family-dot",
+                "upstreams": [
+                      "tls://dns-family.adguard.com"
+                ]
+            }
+        ]
+    },
+    {
       "name": "Google DNS",
       "logo": "ic_google_provider_logo",
       "summary": "google_dns_description",
@@ -227,118 +339,6 @@
           ]
         }
       ]
-    },
-    {
-        "name": "AdGuard DNS",
-        "logo": "ic_about_logo",
-        "summary": "adguard_dns_description",
-        "protocols": [
-            "dns",
-            "dnscrypt",
-            "doh",
-            "dot"
-        ],
-        "features": [
-            "ad_blocking",
-            "secure",
-            "no_logs"
-        ],
-        "website": "https://adguard.com/adguard-dns/overview.html",
-        "servers": [
-            {
-                "protocol": "dns",
-                "id": "adguard-dns",
-                "name": "AdGuard DNS",
-                "upstreams":[
-                    "176.103.130.130",
-                    "176.103.130.131"
-                ]
-            },
-            {
-                "protocol": "dnscrypt",
-                "anycast": true,
-                "id": "adguard-dnscrypt",
-                "name": "adguard-dns",
-                "upstreams": [
-                    "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20"
-                ]
-            },
-            {
-                "protocol": "doh",
-                "anycast": true,
-                "id": "adguard-doh",
-                "name": "adguard-doh",
-                "upstreams": [
-                    "https://dns.adguard.com/dns-query"
-                ]
-            },
-            {
-                "protocol": "dot",
-                "anycast": true,
-                "id": "adguard-dot",
-                "name": "adguard-dot",
-                "upstreams": [
-                    "tls://dns.adguard.com"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "AdGuard DNS Family Protection",
-        "logo": "ic_adguard_family_provider_logo",
-        "summary": "adguard_family_dns_description",
-        "protocols": [
-            "dns",
-            "dnscrypt",
-            "doh",
-            "dot"
-        ],
-        "features": [
-            "ad_blocking",
-            "secure",
-            "no_logs",
-            "adult",
-            "safe_search"
-        ],
-        "website": "https://adguard.com/adguard-dns/overview.html",
-        "servers": [
-            {
-                "protocol": "dns",
-                "id": "adguard-dns-family",
-                "name": "AdGuard Family DNS",
-                "upstreams":[
-                    "176.103.130.132",
-                    "176.103.130.134"
-                ]
-            },
-            {
-                "protocol": "dnscrypt",
-                "anycast": true,
-                "id": "adguard-family-dnscrypt",
-                "name": "adguard-dns-family",
-                "upstreams": [
-                    "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMjo1NDQzILgxXdexS27jIKRw3C7Wsao5jMnlhvhdRUXWuMm1AFq6ITIuZG5zY3J5cHQuZmFtaWx5Lm5zMS5hZGd1YXJkLmNvbQ"
-                ]
-            },
-            {
-                "protocol": "doh",
-                "anycast": true,
-                "id": "adguard-family-doh",
-                "name": "adguard-family-doh",
-                "upstreams": [
-                    "https://dns-family.adguard.com/dns-query"
-                ]
-            },
-            {
-                "protocol": "dot",
-                "anycast": true,
-                "id": "adguard-family-dot",
-                "name": "adguard-family-dot",
-                "upstreams": [
-                    "tls://dns-family.adguard.com"
-                ]
-            }
-        ]
-    },
+    }
   ]
 }
