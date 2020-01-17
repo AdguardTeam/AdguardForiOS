@@ -87,6 +87,13 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize and class properties
 
++ (void)initialize {
+    // migration:
+    // in app version 3.1.4 and below we mistakenly used the name Adguard.DnsProviderInfo with namespace
+    // now we use DnsProviderInfo
+    [NSKeyedUnarchiver setClass:DnsProviderInfo.class forClassName:@"Adguard.DnsProviderInfo"];
+}
+
 - (id)initWithResources: (nonnull AESharedResources*) resources
           configuration: (ConfigurationService *) configuration {
     
