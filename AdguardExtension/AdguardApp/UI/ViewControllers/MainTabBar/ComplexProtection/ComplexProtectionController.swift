@@ -84,6 +84,11 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     private let enabledColor = UIColor(hexString: "#67B279")
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
+    private let safariProtectionCell = 0
+    private let systemProtectionCell = 1
+    
+    private let showGetProSwgueId = "showGetProSwgueId"
+    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -165,6 +170,21 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         theme.setupTableCell(cell)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == safariProtectionCell {
+            safariProtectionSwitch.setOn(!safariProtectionSwitch.isOn, animated: true)
+            safariProtectionChanged(safariProtectionSwitch)
+        } else if indexPath.row == systemProtectionCell {
+            if proStatus{
+                systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
+                systemProtectionChanged(systemProtectionSwitch)
+            } else {
+                performSegue(withIdentifier: showGetProSwgueId, sender: self)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Observer
