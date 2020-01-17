@@ -259,6 +259,8 @@ class AppDelegateHelper: NSObject {
                         
                         let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
                         let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
+                        
+                        safariProtectionController.loadViewIfNeeded()
                                                 
                         navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
                         
