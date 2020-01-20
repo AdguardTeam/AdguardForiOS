@@ -58,16 +58,12 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         }
         
         let updateFilters: ()->() = { [weak self] in
-            guard let sSelf = self else { return }
-            let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), sSelf.filtersService.activeFiltersCount, sSelf.filtersService.filtersCount)
-            sSelf.safariProtectionLabel.text = filtersDescriptionText
+            guard let self = self else { return }
+            let safariFiltersTextFormat = String.localizedString("safari_filters_format")
+            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, self.filtersService.activeFiltersCount)
         }
-        
-        filtersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
-            updateFilters()
-        }
-        
-        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.filtersCount) { (_, _) in
+
+        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
             updateFilters()
         }
         
