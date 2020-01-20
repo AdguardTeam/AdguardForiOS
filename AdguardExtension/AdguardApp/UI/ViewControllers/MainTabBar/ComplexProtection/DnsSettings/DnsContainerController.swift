@@ -133,7 +133,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
             
             switch (type) {
             case .addRuleToUserFlter:
-                title = String.localizedString("add_to_blacklist")
+                title = String.localizedString("add_to_blacklist").uppercased()
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let rule = self.logRecord?.logRecord.domain {
@@ -142,7 +142,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 }
                 
             case .removeDomainFromWhitelist:
-                title = String.localizedString("remove_from_whitelist")
+                title = String.localizedString("remove_from_whitelist").uppercased()
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
@@ -156,7 +156,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 }
                 
             case .removeRuleFromUserFilter:
-                title = String.localizedString("remove_from_blacklist")
+                title = String.localizedString("remove_from_blacklist").uppercased()
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
@@ -168,7 +168,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 }
                 
             case .addDomainToWhitelist:
-                title = String.localizedString("add_to_whitelist")
+                title = String.localizedString("add_to_whitelist").uppercased()
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {

@@ -556,9 +556,11 @@
                         <viewLayoutGuide key="safeArea" id="SoH-nC-h5A"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="U2P-9b-f6k" id="rXI-CK-2L3"/>
                         <outlet property="contentView" destination="FNd-Na-vMx" id="pIF-Kf-grV"/>
                         <outlet property="domainOrRuleLabel" destination="x7r-Ln-XiZ" id="LiX-rj-Qot"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="cxf-2W-sCj" id="Sjz-Rw-nuM"/>
+                        <outlet property="removeButton" destination="Tei-uI-6Gr" id="u5B-Lt-A95"/>
                         <outlet property="ruleTextView" destination="P3J-h6-fpx" id="cFZ-5y-1Fc"/>
                         <outlet property="saveButton" destination="Bvs-mI-vEr" id="Gki-zo-1J8"/>
                         <outlet property="textUnderline" destination="qz4-TZ-Jh0" id="c61-9g-6QT"/>
@@ -711,6 +713,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="fCd-gA-rXS" id="B8l-jf-DI7"/>
+                        <outlet property="cancelButton" destination="5eU-q4-Xed" id="r8r-n9-c64"/>
                         <outlet property="contentView" destination="wr2-gy-Jd9" id="fD2-Do-ztZ"/>
                         <outlet property="editCaption" destination="oZN-ZW-fP8" id="wnJ-Lt-15J"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="5Dm-U2-uTK" id="xls-JB-c6c"/>
@@ -806,6 +809,7 @@
                     <connections>
                         <outlet property="contentView" destination="Std-34-cUz" id="Ypc-T2-fiH"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="ijW-UC-jyg" id="wP1-iR-TVS"/>
+                        <outlet property="okButton" destination="zRm-I7-37E" id="yeR-eo-j5p"/>
                         <outletCollection property="themableLabels" destination="BfI-YN-iXe" collectionClass="NSMutableArray" id="9zy-YI-eWc"/>
                         <outletCollection property="themableButtons" destination="zRm-I7-37E" collectionClass="NSMutableArray" id="cov-pR-Iqv"/>
                         <outletCollection property="separators" destination="gXl-Bo-7tE" collectionClass="NSMutableArray" id="Hsx-VI-X1K"/>

@@ -24,6 +24,9 @@ class EditBlockRequestController: BottomAlertController {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var domainNameTextField: UITextField!
     
+    @IBOutlet weak var addButton: RoundRectButton!
+    @IBOutlet weak var backButton: RoundRectButton!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     var type: DnsLogButtonType = .addDomainToWhitelist
@@ -46,6 +49,9 @@ class EditBlockRequestController: BottomAlertController {
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        addButton.makeTitleTextUppercased()
+        backButton.makeTitleTextUppercased()
     }
     
     // MARK: - Actions

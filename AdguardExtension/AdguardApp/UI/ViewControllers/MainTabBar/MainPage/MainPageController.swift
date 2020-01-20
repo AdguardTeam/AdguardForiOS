@@ -181,6 +181,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if allContentBlockersEnabled == true {
             processOnboarding()
         }
+        
+        getProButton.makeTitleTextUppercased()
     }
     
     func processOnboarding() {

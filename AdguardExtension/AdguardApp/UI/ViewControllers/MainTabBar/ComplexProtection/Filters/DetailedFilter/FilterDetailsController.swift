@@ -60,6 +60,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
         
         setupBackButton()
+        
+        deleteButton.makeTitleTextUppercased()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

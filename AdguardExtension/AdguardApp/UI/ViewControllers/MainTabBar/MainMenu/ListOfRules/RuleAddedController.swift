@@ -20,6 +20,7 @@ import Foundation
 
 class RuleAddedController: BottomAlertController {
     
+    @IBOutlet weak var okButton: RoundRectButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     @IBOutlet var themableButtons: [RoundRectButton]!
@@ -37,6 +38,7 @@ class RuleAddedController: BottomAlertController {
         
         super.viewDidLoad()
         updateTheme()
+        okButton.makeTitleTextUppercased()
     }
     
     @IBAction func okAction(_ sender: Any) {
