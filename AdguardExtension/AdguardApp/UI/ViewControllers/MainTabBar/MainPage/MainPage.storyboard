@@ -200,7 +200,7 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                                 <inset key="titleEdgeInsets" minX="8" minY="6" maxX="8" maxY="6"/>
-                                                                <state key="normal" title="Попробовать бесплатно">
+                                                                <state key="normal">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                                 </state>

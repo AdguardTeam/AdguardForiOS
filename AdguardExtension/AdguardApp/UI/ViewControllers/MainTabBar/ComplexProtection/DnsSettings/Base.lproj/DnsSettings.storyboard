@@ -370,7 +370,7 @@
                                                             <color key="backgroundColor" red="0.27058823529999998" green="0.70196078429999997" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                             <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
-                                                            <state key="normal" title="Try for free">
+                                                            <state key="normal">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
@@ -454,6 +454,7 @@
                         <outlet property="systemDescriptionCell" destination="cmQ-es-0Rb" id="naI-2a-Agn"/>
                         <outlet property="systemIcon" destination="HzY-lY-IfE" id="nTs-qq-Hwo"/>
                         <outlet property="systemProtectionStateLabel" destination="sU7-pP-eTN" id="Kur-6X-JSr"/>
+                        <outlet property="tryButton" destination="Uem-fP-tai" id="jNi-YZ-iOG"/>
                         <outletCollection property="themableLabels" destination="PFY-Cq-NFN" collectionClass="NSMutableArray" id="mXp-hf-gmb"/>
                         <outletCollection property="themableLabels" destination="pC4-RU-DaD" collectionClass="NSMutableArray" id="cDo-Pf-qwY"/>
                         <outletCollection property="themableLabels" destination="xiD-h8-XrC" collectionClass="NSMutableArray" id="945-hG-3Q8"/>

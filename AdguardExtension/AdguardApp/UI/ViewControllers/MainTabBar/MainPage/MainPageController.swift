@@ -181,6 +181,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if allContentBlockersEnabled == true {
             processOnboarding()
         }
+        
+        getProButton.setTitle(String.localizedString("try_for_free"), for: .normal)
     }
     
     func processOnboarding() {
