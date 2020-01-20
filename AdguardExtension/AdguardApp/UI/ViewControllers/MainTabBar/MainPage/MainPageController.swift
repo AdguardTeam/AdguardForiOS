@@ -182,7 +182,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             processOnboarding()
         }
         
-        getProButton.makeTitleTextUppercased()
+        getProButton.setTitle(String.localizedString("try_for_free"), for: .normal)
     }
     
     func processOnboarding() {

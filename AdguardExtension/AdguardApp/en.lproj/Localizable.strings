@@ -46,6 +46,8 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ Gb";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free" = "Try for free";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Safari Whitelist";

@@ -199,8 +199,8 @@
                                                                     <constraint firstAttribute="height" priority="750" constant="45" id="3E7-jt-e9m"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                                <inset key="contentEdgeInsets" minX="8" minY="6" maxX="8" maxY="6"/>
-                                                                <state key="normal" title="TRY FOR FREE">
+                                                                <inset key="titleEdgeInsets" minX="8" minY="6" maxX="8" maxY="6"/>
+                                                                <state key="normal">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                                 </state>
