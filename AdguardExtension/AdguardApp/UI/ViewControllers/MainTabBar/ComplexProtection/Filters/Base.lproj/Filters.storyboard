@@ -1492,7 +1492,13 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fwl-LI-5Fu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://example.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg4-4r-K5F">
+                                        <rect key="frame" x="25" y="101" width="364" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fwl-LI-5Fu">
                                         <rect key="frame" x="25" y="101" width="364" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="wNc-Zj-q3H"/>
@@ -1584,6 +1590,9 @@
                                     <constraint firstAttribute="trailing" secondItem="a9a-YH-gJC" secondAttribute="trailing" id="3G3-x4-usa"/>
                                     <constraint firstItem="NsB-Jy-enI" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" id="4OA-Rw-tUl"/>
                                     <constraint firstItem="nch-wu-mKC" firstAttribute="top" secondItem="NsB-Jy-enI" secondAttribute="bottom" id="7vu-Bw-aF7"/>
+                                    <constraint firstItem="bg4-4r-K5F" firstAttribute="bottom" secondItem="Fwl-LI-5Fu" secondAttribute="bottom" id="90H-Ig-ccw"/>
+                                    <constraint firstItem="bg4-4r-K5F" firstAttribute="leading" secondItem="Fwl-LI-5Fu" secondAttribute="leading" id="9zy-iK-rBF"/>
+                                    <constraint firstItem="bg4-4r-K5F" firstAttribute="top" secondItem="Fwl-LI-5Fu" secondAttribute="top" id="AU7-SR-3rW"/>
                                     <constraint firstItem="a9a-YH-gJC" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" id="EZl-Xx-Qt6"/>
                                     <constraint firstAttribute="trailing" secondItem="NsB-Jy-enI" secondAttribute="trailing" id="HFb-om-88L"/>
                                     <constraint firstAttribute="trailing" secondItem="dy9-38-ihi" secondAttribute="trailing" id="JHP-gs-UVg"/>
@@ -1601,6 +1610,7 @@
                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="top" secondItem="3WM-jW-br8" secondAttribute="bottom" constant="25" id="f4E-cb-thf"/>
                                     <constraint firstAttribute="trailing" secondItem="Z16-OR-tjl" secondAttribute="trailing" constant="25" id="kyw-Wv-mld"/>
                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="25" id="maY-Dl-Rzm"/>
+                                    <constraint firstItem="bg4-4r-K5F" firstAttribute="trailing" secondItem="Fwl-LI-5Fu" secondAttribute="trailing" id="oaJ-LM-VOd"/>
                                     <constraint firstAttribute="bottom" secondItem="dy9-38-ihi" secondAttribute="bottom" id="pX0-gW-YZm"/>
                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="trailing" secondItem="3WM-jW-br8" secondAttribute="trailing" id="r0G-KJ-hHg"/>
                                     <constraint firstItem="3WM-jW-br8" firstAttribute="top" secondItem="oG1-6A-zBh" secondAttribute="top" constant="25" id="s4v-dY-Tdf"/>
@@ -1627,6 +1637,7 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="1q9-aB-hcK" id="i41-B8-xGP"/>
                         <outlet property="nextButton" destination="nch-wu-mKC" id="UQb-xc-grG"/>
                         <outlet property="urlTextField" destination="Fwl-LI-5Fu" id="jrV-59-Gt7"/>
+                        <outlet property="urlTextFieldPlaceholder" destination="bg4-4r-K5F" id="wRA-O0-x6E"/>
                         <outletCollection property="themableLabels" destination="3WM-jW-br8" collectionClass="NSMutableArray" id="ILc-hU-yPk"/>
                         <outletCollection property="themableLabels" destination="Z16-OR-tjl" collectionClass="NSMutableArray" id="bW8-cO-TAQ"/>
                         <segue destination="iY4-7b-KHH" kind="show" identifier="showFilterDetailsSegue" animates="NO" id="tTZ-yH-ocr"/>

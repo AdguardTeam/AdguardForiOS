@@ -41,6 +41,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private var notificationToken: NotificationToken?
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
@@ -67,7 +68,11 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
-        setupTheme()
+        updateTheme()
+        
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
         
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
@@ -135,7 +140,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
 
     // MARK: - privat methods
     
-    private func setupTheme() {
+    private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         rulePlaceholderLabel.textColor = theme.placeholderTextColor
         theme.setupPopupLabels(themableLabels)
