@@ -275,9 +275,6 @@
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "No server selected";
 
-/* MainMenuController - filters menu description */
-"filters_description_format" = "Enabled %1$d out of %2$d";
-
 /* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
 "text_copied" = "Copied";
 
