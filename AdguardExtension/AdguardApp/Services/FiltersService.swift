@@ -114,7 +114,6 @@ protocol FiltersServiceProtocol {
     
     // MARK: - public fields
     var groups: [Group] { get }
-    var filtersCount: Int { get }
     var activeFiltersCount: Int { get }
     
     /** enable/disable group of filters
@@ -196,17 +195,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                         }
                     }
                 }
-            }
-            
-            return count
-        }
-    }
-    
-    @objc dynamic var filtersCount: Int  {
-        get {
-            var count = 0
-            for group in groups {
-                count += group.filters.count
             }
             
             return count
@@ -695,8 +683,6 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private func notifyChange() {
         DispatchQueue.main.async {
             NotificationCenter.default.post(Notification(name: self.updateNotification))
-            self.willChangeValue(for: \.filtersCount)
-            self.didChangeValue(for: \.filtersCount)
             self.willChangeValue(for: \.activeFiltersCount)
             self.didChangeValue(for: \.activeFiltersCount)
         }
