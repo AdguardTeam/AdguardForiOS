@@ -1038,6 +1038,110 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bie-K1-r5H" userLabel="Original Answer Cell">
+                                        <rect key="frame" x="0.0" y="644" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bie-K1-r5H" id="aS4-oX-aF4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Original answer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjM-Qn-ufh" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="16" width="106" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jaw-rh-wiX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="390" y="16" width="0.0" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWi-vv-Ca0">
+                                                    <rect key="frame" x="14" y="13" width="61" height="24"/>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.93333333330000001" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="sle-Yd-pUB"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                    <state key="normal" title="Copied">
+                                                        <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Jaw-rh-wiX" firstAttribute="top" secondItem="aS4-oX-aF4" secondAttribute="top" constant="16" id="Hff-lV-gV9"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jaw-rh-wiX" secondAttribute="bottom" constant="16" id="Kf0-VM-ZMc"/>
+                                                <constraint firstItem="dWi-vv-Ca0" firstAttribute="leading" secondItem="aS4-oX-aF4" secondAttribute="leading" constant="14" id="XfP-qf-jjO"/>
+                                                <constraint firstItem="dWi-vv-Ca0" firstAttribute="centerY" secondItem="RjM-Qn-ufh" secondAttribute="centerY" id="ado-Yp-Xwb"/>
+                                                <constraint firstItem="Jaw-rh-wiX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RjM-Qn-ufh" secondAttribute="trailing" constant="20" id="anW-9c-k1h"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jaw-rh-wiX" secondAttribute="trailing" constant="24" id="ocd-ds-i33"/>
+                                                <constraint firstItem="RjM-Qn-ufh" firstAttribute="leading" secondItem="aS4-oX-aF4" secondAttribute="leading" constant="24" id="wpb-kk-1Ft"/>
+                                                <constraint firstItem="RjM-Qn-ufh" firstAttribute="top" secondItem="aS4-oX-aF4" secondAttribute="top" constant="16" id="zx3-SB-Nni"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RT2-hp-QJg" userLabel="Answer Status Cell">
+                                        <rect key="frame" x="0.0" y="688" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RT2-hp-QJg" id="L1U-Jy-Mjc">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="DNS status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4m-2Q-3Ki" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="16" width="77.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJR-bH-YUz" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="390" y="16" width="0.0" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgO-j6-UT3">
+                                                    <rect key="frame" x="14" y="13" width="61" height="24"/>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.93333333330000001" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="DNJ-Iu-gUD"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                    <state key="normal" title="Copied">
+                                                        <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="i4m-2Q-3Ki" firstAttribute="leading" secondItem="L1U-Jy-Mjc" secondAttribute="leading" constant="24" id="G89-ao-9Dx"/>
+                                                <constraint firstItem="LJR-bH-YUz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i4m-2Q-3Ki" secondAttribute="trailing" constant="20" id="Glj-qd-q7j"/>
+                                                <constraint firstAttribute="trailing" secondItem="LJR-bH-YUz" secondAttribute="trailing" constant="24" id="Lso-la-aiF"/>
+                                                <constraint firstItem="HgO-j6-UT3" firstAttribute="leading" secondItem="L1U-Jy-Mjc" secondAttribute="leading" constant="14" id="P6L-Rx-ODp"/>
+                                                <constraint firstItem="i4m-2Q-3Ki" firstAttribute="top" secondItem="L1U-Jy-Mjc" secondAttribute="top" constant="16" id="lHX-rZ-in5"/>
+                                                <constraint firstItem="LJR-bH-YUz" firstAttribute="top" secondItem="L1U-Jy-Mjc" secondAttribute="top" constant="16" id="vV9-8D-r6D"/>
+                                                <constraint firstItem="HgO-j6-UT3" firstAttribute="centerY" secondItem="i4m-2Q-3Ki" secondAttribute="centerY" id="yv4-39-j8w"/>
+                                                <constraint firstAttribute="bottom" secondItem="LJR-bH-YUz" secondAttribute="bottom" constant="16" id="zje-03-bYV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1059,6 +1163,9 @@
                         <outlet property="companyCopied" destination="bKN-2M-LhL" id="Yle-7U-N4X"/>
                         <outlet property="companyLabel" destination="rzW-oN-NU6" id="s0f-sM-epx"/>
                         <outlet property="companyTitleLabel" destination="7xC-qG-2WW" id="ZTw-Xm-6lz"/>
+                        <outlet property="dnsStatusCopied" destination="HgO-j6-UT3" id="mwX-3h-wwj"/>
+                        <outlet property="dnsStatusLabel" destination="LJR-bH-YUz" id="wvS-3c-f50"/>
+                        <outlet property="dnsStatusTitleLabel" destination="i4m-2Q-3Ki" id="55b-Uq-bEF"/>
                         <outlet property="domainCopied" destination="2UK-IJ-AM8" id="B11-Cf-BtU"/>
                         <outlet property="domainLabel" destination="76a-GA-bGa" id="08S-Sn-zG4"/>
                         <outlet property="domainTitleLabel" destination="lfu-1a-cjJ" id="am7-rs-6DK"/>
@@ -1073,6 +1180,9 @@
                         <outlet property="nameCopied" destination="amQ-gv-yFM" id="oqK-Rm-ZQ7"/>
                         <outlet property="nameLabel" destination="VF8-nZ-JdD" id="CrV-1u-DDc"/>
                         <outlet property="nameTitleLabel" destination="O8w-0a-kF9" id="yUz-ES-JTi"/>
+                        <outlet property="originalAnswerCopied" destination="dWi-vv-Ca0" id="6Z2-go-5qK"/>
+                        <outlet property="originalAnswerLabel" destination="Jaw-rh-wiX" id="YaK-KM-Zt4"/>
+                        <outlet property="originalAnswerTitleLabel" destination="RjM-Qn-ufh" id="3oO-Yb-H0F"/>
                         <outlet property="responsesLabel" destination="DvV-mg-yH0" id="uSv-nc-eae"/>
                         <outlet property="rulesCopied" destination="ptt-hU-4Dv" id="Qe4-K5-qaR"/>
                         <outlet property="serverCopied" destination="oE2-h8-ZMZ" id="plM-x6-X7C"/>
@@ -1119,6 +1229,10 @@
                         <outletCollection property="themableLabels" destination="60G-wX-8ph" collectionClass="NSMutableArray" id="fAy-lV-YWx"/>
                         <outletCollection property="themableLabels" destination="fen-B6-KSP" collectionClass="NSMutableArray" id="A2u-iW-C1H"/>
                         <outletCollection property="themableLabels" destination="ym5-85-iM2" collectionClass="NSMutableArray" id="8eE-fm-JS8"/>
+                        <outletCollection property="themableLabels" destination="RjM-Qn-ufh" collectionClass="NSMutableArray" id="B5O-Ff-1p6"/>
+                        <outletCollection property="themableLabels" destination="Jaw-rh-wiX" collectionClass="NSMutableArray" id="5Cw-Ay-ndz"/>
+                        <outletCollection property="themableLabels" destination="i4m-2Q-3Ki" collectionClass="NSMutableArray" id="84y-8D-qeF"/>
+                        <outletCollection property="themableLabels" destination="LJR-bH-YUz" collectionClass="NSMutableArray" id="OSi-Jz-wpj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enE-Bm-0x9" userLabel="First Responder" sceneMemberID="firstResponder"/>

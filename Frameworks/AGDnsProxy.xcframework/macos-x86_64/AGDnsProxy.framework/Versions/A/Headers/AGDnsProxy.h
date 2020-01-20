@@ -22,6 +22,16 @@ typedef NS_ENUM(NSInteger, AGListenerProtocol) {
     AGLP_TCP,
 };
 
+/**
+ * Blocking modes
+ */
+typedef NS_ENUM(NSInteger, AGBlockingMode) {
+    AGBM_DEFAULT, // AdBlock-style filters -> NXDOMAIN, hosts-style filters -> unspecified address
+    AGBM_NXDOMAIN, // Always return NXDOMAIN
+    AGBM_UNSPECIFIED_ADDRESS, // Always return unspecified address
+    AGBM_CUSTOM_ADDRESS, // Always return custom configured IP address (see AGDnsProxyConfig)
+};
+
 @interface AGLogger : NSObject
 
 /**
@@ -79,7 +89,7 @@ typedef void (^logCallback)(const char *msg, int length);
 /**
  * The upstream to use for discovery of DNS64 prefixes
  */
-@property(nonatomic, readonly) AGDnsUpstream *upstream;
+@property(nonatomic, readonly) NSArray<AGDnsUpstream *> *upstreams;
 
 /**
  * How many times, at most, to try DNS64 prefixes discovery before giving up
@@ -91,7 +101,7 @@ typedef void (^logCallback)(const char *msg, int length);
  */
 @property(nonatomic, readonly) NSInteger waitTimeMs;
 
-- (instancetype) initWithUpstream: (AGDnsUpstream *) upstream
+- (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
             maxTries: (NSInteger) maxTries
             waitTimeMs: (NSInteger) waitTimeMs;
 
@@ -161,6 +171,22 @@ typedef void (^logCallback)(const char *msg, int length);
  * Block AAAA requests.
  */
 @property(nonatomic, readonly) BOOL blockIpv6;
+/**
+ * Blocking mode.
+ */
+@property(nonatomic, readonly) AGBlockingMode blockingMode;
+/**
+ * Custom IPv4 address to return for filtered requests
+ */
+@property(nonatomic, readonly) NSString *customBlockingIpv4;
+/**
+ * Custom IPv6 address to return for filtered requests
+ */
+@property(nonatomic, readonly) NSString *customBlockingIpv6;
+/**
+ * Maximum number of cached responses
+ */
+@property(nonatomic, readonly) NSUInteger dnsCacheSize;
 
 - (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
         filters: (NSDictionary<NSNumber *,NSString *> *) filters
@@ -168,7 +194,11 @@ typedef void (^logCallback)(const char *msg, int length);
         dns64Settings: (AGDns64Settings *) dns64Settings
         listeners: (NSArray<AGListenerSettings *> *) listeners
         ipv6Available: (BOOL) ipv6Available
-        blockIpv6: (BOOL) blockIpv6;
+        blockIpv6: (BOOL) blockIpv6
+        blockingMode: (AGBlockingMode) blockingMode
+        customBlockingIpv4: (NSString *) customBlockingIpv4
+        customBlockingIpv6: (NSString *) customBlockingIpv6
+        dnsCacheSize: (NSUInteger) dnsCacheSize;
 
 /**
  * @brief Get default DNS proxy settings

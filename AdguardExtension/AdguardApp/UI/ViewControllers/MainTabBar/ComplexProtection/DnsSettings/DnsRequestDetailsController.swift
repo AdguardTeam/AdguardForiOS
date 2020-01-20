@@ -44,6 +44,8 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var bytesReceivedLabel: ThemableLabel!
     @IBOutlet weak var matchedFiltersLabel: ThemableLabel!
     @IBOutlet weak var matchedRulesLabel: ThemableLabel!
+    @IBOutlet weak var originalAnswerLabel: ThemableLabel!
+    @IBOutlet weak var dnsStatusLabel: ThemableLabel!
     
     
     // MARK: - "Copied labels"
@@ -61,6 +63,8 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var answerCopied: UIButton!
     @IBOutlet weak var filtersCopied: UIButton!
     @IBOutlet weak var rulesCopied: UIButton!
+    @IBOutlet weak var originalAnswerCopied: UIButton!
+    @IBOutlet weak var dnsStatusCopied: UIButton!
     
     // MARK: - Title labels
     @IBOutlet weak var categoryTitleLabel: ThemableLabel!
@@ -77,6 +81,8 @@ class DnsRequestDetailsController : UITableViewController {
     @IBOutlet weak var answerTitleLabel: ThemableLabel!
     @IBOutlet weak var matchedFiltersTitleLabel: ThemableLabel!
     @IBOutlet weak var matchedRulesTitleLabel: ThemableLabel!
+    @IBOutlet weak var originalAnswerTitleLabel: ThemableLabel!
+    @IBOutlet weak var dnsStatusTitleLabel: ThemableLabel!
     
     private var notificationToken: NotificationToken?
     private var configurationToken: NSKeyValueObservation?
@@ -129,6 +135,8 @@ class DnsRequestDetailsController : UITableViewController {
         bytesReceivedLabel.text = String(format: "%d B", logRecord?.logRecord.bytesReceived ?? 0)
         matchedRulesLabel.text = logRecord?.logRecord.blockRules?.joined(separator: "\n")
         matchedFiltersLabel.text = logRecord?.matchedFilters
+        originalAnswerLabel.text = logRecord?.logRecord.originalAnswer
+        dnsStatusLabel.text = logRecord?.logRecord.answerStatus
         
         updateStatusLabel()
         updateTheme()
@@ -247,6 +255,14 @@ class DnsRequestDetailsController : UITableViewController {
             if logRecord?.logRecord.blockRules?.joined(separator: "").count == 0  {
                 return 0.0
             }
+        case .originalAnswer:
+            if logRecord?.logRecord.originalAnswer?.count == 0 {
+                return 0.0
+            }
+        case .dnsStatus:
+            if logRecord?.logRecord.answerStatus?.count == 0 {
+                return 0.0
+            }
             
         case .status, .time, .elapsed, .size:
             break
@@ -291,6 +307,10 @@ class DnsRequestDetailsController : UITableViewController {
             copiedString = logRecord?.matchedFilters ?? ""
         case .some(.matchedRules):
             copiedString = logRecord?.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        case .some(.originalAnswer):
+            copiedString = logRecord?.logRecord.originalAnswer ?? ""
+        case .some(.dnsStatus):
+            copiedString = logRecord?.logRecord.answerStatus ?? ""
         }
         
         // copy responses to pasteboard
@@ -319,7 +339,7 @@ class DnsRequestDetailsController : UITableViewController {
     // MARK: - private methods
     
     private enum LogCells: Int{
-        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer, matchedFilters, matchedRules
+        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer, matchedFilters, matchedRules, originalAnswer, dnsStatus
     }
     
     private let userCells:[LogCells] = [.name, .status, .time, .domain]
@@ -386,6 +406,11 @@ class DnsRequestDetailsController : UITableViewController {
         case .matchedRules:
             labelToHide = matchedRulesTitleLabel
             copiedLabel = rulesCopied
+        case .originalAnswer:
+            labelToHide = originalAnswerTitleLabel
+            copiedLabel = originalAnswerCopied
+        case .dnsStatus:
+            labelToHide = dnsStatusTitleLabel
         }
         
         animator.startAnimation()
