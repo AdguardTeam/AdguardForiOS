@@ -20,11 +20,10 @@ import Foundation
 
 extension UIButton {
     /**
-     Makes button's title uppercased
-     
-     if title string is empty it will make title text nil
+     Makes button's title uppercased for paticular state (default is normal)
      */
-    func makeTitleTextUppercased(){
-        setTitle(titleLabel?.text?.uppercased(), for: state)
+    func makeTitleTextUppercased(for state: UIControl.State = .normal){
+        let buttonTitle = title(for: state)
+        setTitle(buttonTitle?.uppercased(), for: state)
     }
 }

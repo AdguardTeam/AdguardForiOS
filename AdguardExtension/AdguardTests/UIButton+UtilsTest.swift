@@ -37,7 +37,7 @@ class UIButtonUtilsTest: XCTestCase {
     func testMakeTitleTextUppercasedWithEmptyString() {
         let button = UIButton()
         let buttonTitle: String? = ""
-        let uppercasedTitle: String? = nil
+        let uppercasedTitle: String? = ""
         
         button.setTitle(buttonTitle, for: .normal)
         button.makeTitleTextUppercased()
@@ -55,6 +55,30 @@ class UIButtonUtilsTest: XCTestCase {
         button.makeTitleTextUppercased()
         
         let titleToCheck = button.title(for: .normal)
+        XCTAssertEqual(uppercasedTitle, titleToCheck)
+    }
+    
+    func testMakeTitleTextUppercasedWithWrongState() {
+        let button = UIButton()
+        let buttonTitle: String? = "Title"
+        let uppercasedTitle: String? = "TITLE"
+        
+        button.setTitle(buttonTitle, for: .disabled)
+        button.makeTitleTextUppercased()
+        
+        let titleToCheck = button.title(for: .disabled)
+        XCTAssertNotEqual(uppercasedTitle, titleToCheck)
+    }
+    
+    func testMakeTitleTextUppercasedWithRightState() {
+        let button = UIButton()
+        let buttonTitle: String? = "Title"
+        let uppercasedTitle: String? = "TITLE"
+        
+        button.setTitle(buttonTitle, for: .disabled)
+        button.makeTitleTextUppercased(for: .disabled)
+        
+        let titleToCheck = button.title(for: .disabled)
         XCTAssertEqual(uppercasedTitle, titleToCheck)
     }
 }
