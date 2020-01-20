@@ -39,6 +39,9 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
     
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
     
     private var notificationToken: NotificationToken?
@@ -68,6 +71,9 @@ class NewCustomFilterDetailsController : BottomAlertController {
         }
         
         updateTheme()
+        
+        addButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

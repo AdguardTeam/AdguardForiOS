@@ -106,6 +106,9 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        
+        freeTextView.text = freeTextView.text.uppercased()
+        premiumTextView.text = premiumTextView.text.uppercased()
     }
     
     override func viewWillAppear(_ animated: Bool) {

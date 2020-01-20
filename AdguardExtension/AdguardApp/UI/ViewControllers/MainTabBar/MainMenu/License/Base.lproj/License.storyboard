@@ -481,6 +481,7 @@
                         <outlet property="restoreButton" destination="mR4-EU-MFx" id="PnI-t3-9SD"/>
                         <outlet property="startTrialDescriptionLabel" destination="K8i-IF-fYV" id="d8x-rA-awc"/>
                         <outlet property="startTrialTitleLable" destination="y8E-wT-cRk" id="4Bt-uI-biN"/>
+                        <outlet property="titleLabel" destination="NlM-RH-NgY" id="tfp-hk-PQC"/>
                         <outlet property="upgradeButton" destination="UbO-jW-NNO" id="fad-2o-KLY"/>
                         <outletCollection property="themableLabels" destination="mpR-bB-C6U" collectionClass="NSMutableArray" id="thf-z2-zpn"/>
                         <outletCollection property="themableLabels" destination="SKX-L4-odW" collectionClass="NSMutableArray" id="Flt-ve-qS5"/>
@@ -575,6 +576,7 @@
                         <outlet property="goToMyAccountHeight" destination="ENZ-fq-jz2" id="EUh-4k-evW"/>
                         <outlet property="loginBarButton" destination="UaA-JQ-kV4" id="4kD-dX-9HF"/>
                         <outlet property="logoutBarButton" destination="70b-CS-wqh" id="bgv-ye-bwg"/>
+                        <outlet property="myAccountButton" destination="Rxf-sg-Wfk" id="297-yC-FRm"/>
                         <outlet property="separator2" destination="K0N-Xb-cev" id="HO0-2a-bca"/>
                     </connections>
                 </viewController>

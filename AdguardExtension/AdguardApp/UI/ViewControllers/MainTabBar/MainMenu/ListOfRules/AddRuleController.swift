@@ -34,6 +34,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editCaption: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
     
@@ -67,6 +68,9 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
         setupTheme()
+        
+        addButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
     }
     
     deinit {

@@ -1456,8 +1456,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="i3k-Ze-JqX"/>
                     <connections>
+                        <outlet property="addButton" destination="l5B-oj-DnW" id="vDu-3x-ghm"/>
+                        <outlet property="cancelButton" destination="KXe-VX-Rq9" id="ooQ-8Q-CpI"/>
                         <outlet property="contentView" destination="Sdh-OW-4Mg" id="dSJ-D7-zUk"/>
                         <outlet property="descriptionLabel" destination="uj0-U3-Qfx" id="8Sx-GX-xov"/>
+                        <outlet property="editButton" destination="7mk-7J-iLD" id="Mzx-g1-a9s"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="ec3-kk-dgE" id="gJq-CB-Psj"/>
                         <outlet property="tableView" destination="Tb1-ZT-707" id="hyF-Q2-50F"/>
                         <outlet property="tableViewHeight" destination="4XK-CU-bLS" id="UdZ-1n-gA2"/>
@@ -1625,6 +1628,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="PDE-ha-orb"/>
                     <connections>
+                        <outlet property="addButton" destination="1rj-wD-aeH" id="AHm-fk-Okn"/>
+                        <outlet property="backButton" destination="hoI-YR-JcD" id="vrO-tl-isj"/>
                         <outlet property="contentView" destination="dgc-l5-iRo" id="p2L-jd-iOQ"/>
                         <outlet property="descriptionLabel" destination="M4r-q5-RXv" id="MUm-fV-bM4"/>
                         <outlet property="domainNameTextField" destination="ShZ-0e-9AG" id="u9C-mz-uFM"/>
