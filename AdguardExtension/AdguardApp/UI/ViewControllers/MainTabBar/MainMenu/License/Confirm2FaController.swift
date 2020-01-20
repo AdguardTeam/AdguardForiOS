@@ -62,6 +62,8 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
             self?.updateTheme()
         }
         
+        confirmButton.makeTitleTextUppercased()
+        
         super.viewDidLoad()
     }
     

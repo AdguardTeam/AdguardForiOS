@@ -27,10 +27,10 @@ class NewDnsServerController: BottomAlertController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    @IBOutlet weak var addButton: RoundRectButton!
-    @IBOutlet weak var cancelButton: RoundRectButton!
-    @IBOutlet weak var deleteButton: RoundRectButton!
-    @IBOutlet weak var saveButton: RoundRectButton!
+    @IBOutlet weak var addButton: RoundRectButton?
+    @IBOutlet weak var cancelButton: RoundRectButton?
+    @IBOutlet weak var deleteButton: RoundRectButton?
+    @IBOutlet weak var saveButton: RoundRectButton?
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var upstreamsField: UITextField!
@@ -65,6 +65,11 @@ class NewDnsServerController: BottomAlertController {
         nameField.becomeFirstResponder()
         updateSaveButton()
         updateTheme()
+        
+        addButton?.makeTitleTextUppercased()
+        cancelButton?.makeTitleTextUppercased()
+        deleteButton?.makeTitleTextUppercased()
+        saveButton?.makeTitleTextUppercased()
     }
     
     // MARK: - Actions

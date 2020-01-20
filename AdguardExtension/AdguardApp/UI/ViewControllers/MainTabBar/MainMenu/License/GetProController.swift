@@ -30,6 +30,7 @@ class GetProController: UIViewController {
     
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
+    @IBOutlet weak var myAccountButton: RoundRectButton!
     
     @IBOutlet weak var separator2: UIView!
     
@@ -72,6 +73,8 @@ class GetProController: UIViewController {
         setupBackButton()
         updateViews()
         updateTheme()
+        
+        myAccountButton.makeTitleTextUppercased()
     }
     
     override func viewWillAppear(_ animated: Bool) {

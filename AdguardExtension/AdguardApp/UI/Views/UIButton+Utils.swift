@@ -18,26 +18,12 @@
 
 import Foundation
 
-class GradientButton: UIButton {
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradientLayer.frame = bounds
-    }
-
+extension UIButton {
     /**
-     Applies gradient to UIButton
-     First color: #45b3a4
-     Second color: #67b279
+     Makes button's title uppercased for paticular state (default is normal)
      */
-    private lazy var gradientLayer: CAGradientLayer = {
-        let sublayer = CAGradientLayer()
-        sublayer.frame = self.bounds
-        sublayer.colors = [UIColor(hexString: "#45b3a4").cgColor, UIColor(hexString: "#67b279").cgColor]
-        sublayer.startPoint = CGPoint(x: 0, y: 0.5)
-        sublayer.endPoint = CGPoint(x: 1, y: 0.5)
-        sublayer.cornerRadius = self.layer.cornerRadius
-        layer.insertSublayer(sublayer, at: 0)
-        return sublayer
-    }()
+    func makeTitleTextUppercased(for state: UIControl.State = .normal){
+        let buttonTitle = title(for: state)
+        setTitle(buttonTitle?.uppercased(), for: state)
+    }
 }
