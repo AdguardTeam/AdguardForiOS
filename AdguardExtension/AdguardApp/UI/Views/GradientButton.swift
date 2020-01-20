@@ -18,13 +18,35 @@
 
 import Foundation
 
+/**
+ Make class expandable if needed
+ */
+class GradientLabel: UILabel {
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: 4.0, left: 8.0, bottom: 4.0, right: 8.0)
+        super.drawText(in: rect.inset(by: insets))
+    }
+}
+
 class GradientButton: UIButton {
+    
+    private var backLabel: UILabel?
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        backLabel = createBackLabel()
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
     }
 
+    override func setTitle(_ title: String?, for state: UIControl.State) {
+        backLabel?.text = title?.uppercased()
+        layoutIfNeeded()
+    }
+    
     /**
      Applies gradient to UIButton
      First color: #45b3a4
@@ -40,4 +62,26 @@ class GradientButton: UIButton {
         layer.insertSublayer(sublayer, at: 0)
         return sublayer
     }()
+    
+    private func createBackLabel() -> UILabel {
+        let label = GradientLabel()
+        label.textColor = .white
+        label.isUserInteractionEnabled = false
+        label.numberOfLines = 0
+        label.font = titleLabel?.font
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.01
+        label.lineBreakMode = .byClipping
+        addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        
+        return label
+    }
+
 }

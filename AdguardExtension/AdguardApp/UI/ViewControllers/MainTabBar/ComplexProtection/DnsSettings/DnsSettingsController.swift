@@ -22,6 +22,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     
     //MARK: - IB Outlets
     
+    @IBOutlet weak var tryButton: GradientButton!
     @IBOutlet weak var systemIcon: UIImageView!
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
@@ -85,6 +86,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         updateVpnInfo()
         setupBackButton()
         updateTheme()
+        
+        tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

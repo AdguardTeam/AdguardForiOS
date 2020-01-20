@@ -35,9 +35,7 @@ class GetProPageController: UIViewController {
         let product = purchaseService.standardProduct
     
         titleLabel.text = getTitleString(product: product).uppercased()
-        
-        let buttonText = tryButton.titleLabel?.text?.uppercased()
-        tryButton.setTitle(buttonText, for: .normal)
+        tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
         
         updateTheme()
         
