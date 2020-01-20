@@ -684,6 +684,9 @@
 		7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
 		7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7ECF38BB23AA43A300A39094 /* DnsLogContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */; };
+		7ED0D64D23D593D2004D9E7C /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
+		7ED0D64F23D59797004D9E7C /* UIButton+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */; };
+		7ED0D65023D598A1004D9E7C /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
 		7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36D23CCD5480014734A /* BlockRequestController.swift */; };
 		7ED3D37023CCD55C0014734A /* EditBlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */; };
 		7ED712E62375CF0D00EF4492 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF75A6A234B6000006ED3E5 /* whotracksme.json */; };
@@ -1938,6 +1941,8 @@
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7ECD9C59238D6E980065E88D /* AdGuardTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuardTodayExtension.entitlements; sourceTree = "<group>"; };
 		7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogContainerController.swift; sourceTree = "<group>"; };
+		7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
+		7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+UtilsTest.swift"; sourceTree = "<group>"; };
 		7ED3D36D23CCD5480014734A /* BlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRequestController.swift; sourceTree = "<group>"; };
 		7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBlockRequestController.swift; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
@@ -3209,6 +3214,7 @@
 				D0C99119238FDB8700C9123F /* SafariServiceTest.swift */,
 				D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */,
 				7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */,
+				7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */,
 				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 			);
 			path = AdguardTests;
@@ -3754,6 +3760,7 @@
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
 				7ECCCC172372B2AF00FA651F /* ChartView */,
 				7E3064DE23B4B7D000D12AE9 /* GradientButton.swift */,
+				7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5541,6 +5548,7 @@
 				7E4D204E22D71A5B003B0E75 /* mz_os_posix.c in Sources */,
 				7E4D204622D71A5B003B0E75 /* mz_crypt.c in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
+				7ED0D64D23D593D2004D9E7C /* UIButton+Utils.swift in Sources */,
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				7E4D204A22D71A5B003B0E75 /* mz_compat.c in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
@@ -5707,9 +5715,11 @@
 				D0D33BB523102443009082CE /* RulesParser.swift in Sources */,
 				65EC9AF11BB9824C00F53F3B /* ABECFilter.m in Sources */,
 				D0288F3E2306996E00A4EBEF /* DDOSLogger.m in Sources */,
+				7ED0D64F23D59797004D9E7C /* UIButton+UtilsTest.swift in Sources */,
 				65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */,
 				D0EC86B323A772BF00EDF107 /* DnsFiltersServiceTest.swift in Sources */,
 				D0288F382306985000A4EBEF /* ACNCidrRange.m in Sources */,
+				7ED0D65023D598A1004D9E7C /* UIButton+Utils.swift in Sources */,
 				D0288F42230699CF00A4EBEF /* DDLoggerNames.m in Sources */,
 				D0F911932136DAB0006DF0D3 /* PurchaseService.swift in Sources */,
 				D0B27BC3207372CD0073E13C /* ACNUrlUtilsTest.m in Sources */,

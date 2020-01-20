@@ -86,6 +86,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
             }
         }
         updateTheme()
+        
+        loginButton.makeTitleTextUppercased()
     }
     
     override func viewDidAppear(_ animated: Bool) {

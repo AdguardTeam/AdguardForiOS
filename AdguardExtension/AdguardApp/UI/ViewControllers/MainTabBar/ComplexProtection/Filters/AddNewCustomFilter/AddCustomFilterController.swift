@@ -25,6 +25,7 @@ class AddCustomFilterController: BottomAlertController {
     private let detailsSegueId = "showFilterDetailsSegue"
     
     @IBOutlet weak var nextButton: RoundRectButton!
+    @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -43,6 +44,8 @@ class AddCustomFilterController: BottomAlertController {
         super.viewDidLoad()
         
         nextButton.isEnabled = false
+        nextButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()

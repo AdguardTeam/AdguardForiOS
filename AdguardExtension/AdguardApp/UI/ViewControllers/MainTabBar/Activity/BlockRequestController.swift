@@ -59,6 +59,10 @@ class BlockRequestCell: UITableViewCell {
 
 class BlockRequestController: BottomAlertController {
         
+    @IBOutlet weak var addButton: RoundRectButton!
+    @IBOutlet weak var editButton: RoundRectButton!
+    @IBOutlet weak var cancelButton: RoundRectButton!
+    
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     
@@ -99,6 +103,10 @@ class BlockRequestController: BottomAlertController {
         
         tableViewHeight.constant = rowHeight * CGFloat(subDomains.count)
         tableView.layoutIfNeeded()
+        
+        addButton.makeTitleTextUppercased()
+        editButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

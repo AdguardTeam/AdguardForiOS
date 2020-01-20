@@ -23,6 +23,8 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
@@ -52,6 +54,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         }
                 
         updateTheme()
+        
+        saveButton.makeTitleTextUppercased()
+        removeButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
     }
     
     // MARK: - Actions

@@ -22,6 +22,7 @@ class GetProTableController: UITableViewController {
     
     // MARK: - IB outlets
     
+    @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var upgradeButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
     @IBOutlet weak var periodButton: RoundRectButton!
@@ -84,6 +85,9 @@ class GetProTableController: UITableViewController {
                 self?.setPrice()
             }
         }
+        
+        upgradeButton.makeTitleTextUppercased()
+        titleLabel.text = titleLabel.text?.uppercased()
     }
     
     // MARK: - table view delegate methods
