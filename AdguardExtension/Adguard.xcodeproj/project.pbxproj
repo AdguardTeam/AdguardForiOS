@@ -691,6 +691,7 @@
 		7ED3D37023CCD55C0014734A /* EditBlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */; };
 		7ED712E62375CF0D00EF4492 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF75A6A234B6000006ED3E5 /* whotracksme.json */; };
 		7ED712E72375CF0E00EF4492 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF75A6A234B6000006ED3E5 /* whotracksme.json */; };
+		7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
 		7EE7E1DA22E9DAC200B2799A /* FiltersMasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */; };
 		7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */; };
@@ -1971,6 +1972,7 @@
 		7EDAC0A722F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/UserFilter.strings; sourceTree = "<group>"; };
 		7EDAC0A822F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		7EDAC0AB22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverterTest.swift; sourceTree = "<group>"; };
 		7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UtilsTest.swift"; sourceTree = "<group>"; };
 		7EE7E1D922E9DAC200B2799A /* FiltersMasterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMasterController.swift; sourceTree = "<group>"; };
 		7EE7E1DB22E9DB1400B2799A /* SearchFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterController.swift; sourceTree = "<group>"; };
@@ -3213,6 +3215,7 @@
 				D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */,
 				7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */,
 				7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */,
+				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -5702,6 +5705,7 @@
 				D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */,
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0D5949A23AA3CAD0033CAF3 /* ADBTable.m in Sources */,
+				7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */,
 				65EC9BD91BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				D0C37ECF22A687B30004337D /* DnsProvidersService.swift in Sources */,
 				D0C37ED022A687D20004337D /* DnsProxyService.swift in Sources */,

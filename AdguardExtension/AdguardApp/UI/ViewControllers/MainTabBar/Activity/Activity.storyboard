@@ -1176,6 +1176,9 @@
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                         </variation>
+                                        <connections>
+                                            <segue destination="hiO-0L-XhV" kind="show" id="1uN-5y-5rj"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1656,6 +1659,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8PR-4f-d4r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3217" y="526"/>
+        </scene>
+        <!--License-->
+        <scene sceneID="heo-cW-Yf9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="License" id="hiO-0L-XhV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nv6-2o-0pf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QoU-xn-DX6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2649" y="526"/>
         </scene>
     </scenes>
     <resources>

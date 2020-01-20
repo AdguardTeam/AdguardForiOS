@@ -192,8 +192,8 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                 </variation>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
-                                                                <rect key="frame" x="32" y="93" width="142" height="45"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
+                                                                <rect key="frame" x="32" y="93" width="181" height="45"/>
                                                                 <color key="backgroundColor" red="0.27058823529411763" green="0.70196078431372544" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="750" constant="45" id="3E7-jt-e9m"/>
