@@ -20,10 +20,16 @@ import Foundation
 
 class GradientButton: UIButton {
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        makeFontAdjustable()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
     }
+
     /**
      Applies gradient to UIButton
      First color: #45b3a4
@@ -39,4 +45,14 @@ class GradientButton: UIButton {
         layer.insertSublayer(sublayer, at: 0)
         return sublayer
     }()
+    
+    private func makeFontAdjustable(){
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.titleLabel?.minimumScaleFactor = 0.01
+        self.clipsToBounds = true
+        self.titleLabel?.numberOfLines = 0
+        self.titleLabel?.baselineAdjustment = .alignCenters
+        self.titleLabel?.lineBreakMode = .byClipping
+        self.titleLabel?.textAlignment = .center
+    }
 }
