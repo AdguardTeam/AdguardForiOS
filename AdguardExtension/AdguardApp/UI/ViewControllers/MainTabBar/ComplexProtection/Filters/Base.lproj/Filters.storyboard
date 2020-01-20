@@ -1307,6 +1307,8 @@
                         <viewLayoutGuide key="safeArea" id="Z7J-YU-ItZ"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="kCb-lJ-BLL" id="j6j-hX-8Kg"/>
+                        <outlet property="cancelButton" destination="mEm-ll-QZR" id="mZW-Tm-PR6"/>
                         <outlet property="contentView" destination="uWd-ZI-H88" id="X41-Tq-trT"/>
                         <outlet property="homepage" destination="t8x-PU-hFK" id="u88-YF-b9O"/>
                         <outlet property="homepageTopConstraint" destination="dsH-aw-gew" id="1lS-wJ-Bxe"/>
@@ -1620,6 +1622,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Drw-h6-s5g"/>
                     <connections>
+                        <outlet property="cancelButton" destination="OpB-AR-Og7" id="XDi-rB-xLI"/>
                         <outlet property="contentView" destination="oG1-6A-zBh" id="Kyd-85-mQi"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="1q9-aB-hcK" id="i41-B8-xGP"/>
                         <outlet property="nextButton" destination="nch-wu-mKC" id="UQb-xc-grG"/>
