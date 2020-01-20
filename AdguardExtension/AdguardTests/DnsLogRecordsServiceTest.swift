@@ -32,7 +32,7 @@ class DnsLogRecordsServiceTest: XCTestCase {
     }
     
     func testAddRecord() {
-        let recordToSave = DnsLogRecord(domain: "domain", date: Date(), elapsed: 100, type: "type", answer: "answer", server: "server", upstreamAddr: "upstream", bytesSent: 100, bytesReceived: 100, status: .processed, userStatus: .none, blockRules: nil, matchedFilterIds: nil)
+        let recordToSave = DnsLogRecord(domain: "domain", date: Date(), elapsed: 100, type: "type", answer: "answer", server: "server", upstreamAddr: "upstream", bytesSent: 100, bytesReceived: 100, status: .processed, userStatus: .none, blockRules: nil, matchedFilterIds: nil, originalAnswer: "", answerStatus: "NOERROR")
         service.writeRecords([recordToSave])
         
         let records = service.readRecords()

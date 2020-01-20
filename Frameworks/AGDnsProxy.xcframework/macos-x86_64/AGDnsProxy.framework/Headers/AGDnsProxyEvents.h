@@ -18,6 +18,7 @@
 @property(nonatomic, readonly) NSArray<NSNumber *> *filterListIds; /**< Filter lists IDs of corresponding rules */
 @property(nonatomic, readonly) BOOL whitelist; /**< True if filtering rule is whitelist */
 @property(nonatomic, readonly) NSString *error; /**< If not empty, contains the error text (occurred while processing the DNS query) */
+@property(nonatomic, readonly) BOOL cacheHit; /**<True if this response was served from the cache */
 @end
 
 /**
