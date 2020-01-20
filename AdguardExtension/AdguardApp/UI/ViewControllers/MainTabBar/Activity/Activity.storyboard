@@ -1380,7 +1380,7 @@
                                                                 <action selector="checkBoxTapped:" destination="SQZ-I4-mzW" eventType="touchUpInside" id="vJx-A0-aNz"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...some.domain.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-02-VU8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-02-VU8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                             <rect key="frame" x="64" y="16" width="334" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="aUL-mh-Tdg"/>
