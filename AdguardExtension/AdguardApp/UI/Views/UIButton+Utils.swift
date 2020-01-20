@@ -19,8 +19,12 @@
 import Foundation
 
 extension UIButton {
-    
+    /**
+     Makes button's title uppercased
+     
+     if title string is empty it will make title text nil
+     */
     func makeTitleTextUppercased(){
-        setTitle(self.titleLabel?.text?.uppercased(), for: .normal)
+        setTitle(titleLabel?.text?.uppercased(), for: state)
     }
 }
