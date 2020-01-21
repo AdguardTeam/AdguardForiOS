@@ -64,6 +64,9 @@
 /* (User Filter Screen) dns blacklist input helper */
 "dns_blacklist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will block connection";
 
+/* (User Filter Screen) dns whitelist input helper */
+"dns_whitelist_helper" = "Enter here the domain names separated by line breaks, which will be allowed to connect";
+
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
 
