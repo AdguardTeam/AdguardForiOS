@@ -46,8 +46,8 @@
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS server";
 
-/* Class = "UILabel"; text = "Add filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "Add filter";
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "Add a filter";
 
 /* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
 "PFY-Cq-NFN.text" = "This module can block tracking domains and encrypt your DNS traffic";
