@@ -25,9 +25,6 @@ protocol DnsFiltersServiceProtocol {
     // list of dns filters
     var filters: [DnsFilter] { get }
     
-    // Counts all filters
-    var allFiltersCount: Int { get }
-    
     // Counts enabled filters
     var enabledFiltersCount: Int { get }
     
@@ -156,13 +153,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
 class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var filters = [DnsFilter]()
-    
-    var allFiltersCount: Int {
-        get {
-            return filters.count
-        }
-    }
-    
+
     var enabledFiltersCount: Int {
         get {
             var count = 0

@@ -10,9 +10,6 @@
 /* Class = "UINavigationItem"; title = "   "; ObjectID = "7uS-9h-kri"; */
 "7uS-9h-kri.title" = "   ";
 
-/* Class = "UILabel"; text = "ON"; ObjectID = "8zX-PY-5pt"; */
-"8zX-PY-5pt.text" = "ON";
-
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Name:";
 
@@ -59,7 +56,7 @@
 "eAd-RZ-bHN.text" = "Add custom filter lists here";
 
 /* Class = "UILabel"; text = "Safari whitelist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Safari whitelist";
+"f3z-Yh-zY2.text" = "Safari Whitelist";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filters";

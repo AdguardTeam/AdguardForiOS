@@ -2,7 +2,7 @@
 "support_unexpected_error" = "An unexpected error occurred. Please contact the support team.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Cannot convert rules. An unexpected error occurred. Please contact the support team.";
+"support_rule_converting_error" = "Cannot convert rules due to an unexpected error. Please contact the support team.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Cannot initialize converter to JSON format.";
@@ -14,7 +14,7 @@
 "rule_converting_error" = "Cannot convert the filter rule. Rule text is invalid.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Cannot convert user rules.";
+"filter_rules_converting_error" = "Cannot add these user rules to Safari";
 
 /* Alert title. On error. */
 "common_error_title" = "Error";
@@ -29,7 +29,7 @@
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Safari Whitelist (inverted)";
+"inverted_whitelist_title" = "Whitelist (inverted)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applying changes...";
@@ -50,7 +50,7 @@
 "try_for_free" = "Try for free";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Safari Whitelist";
+"whitelist_title" = "Whitelist";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
@@ -61,14 +61,17 @@
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will disable Safari filtering.";
 
-/* (User Filter Screen) dns blacklist input helper */
-"dns_blacklist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will block connection";
-
-/* (User Filter Screen) dns whitelist input helper */
-"dns_whitelist_helper" = "Enter here the domain names separated by line breaks, which will be allowed to connect";
-
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Protection is enabled";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Some content blockers are disabled";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Protection is disabled";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "START TRIAL";
@@ -89,10 +92,10 @@
 "not_premium_message" = "You have successfully logged into your AdGuard account, but there are no license keys that allow you to activate the Premium version.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "You have successfully logged in to your AdGuard account! The Premium version of AdGuard for iOS has been activated.";
+"login_success_message" = "You have successfully logged into your AdGuard account! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "You have successfully logged in to your AdGuard account, but the license keys that allow you to activate the Premium version have expired.";
+"login_premium_expired_message" = "You have successfully logged into your AdGuard account, but the license keys that allow you to activate the Premium version have expired.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
@@ -117,9 +120,6 @@
 
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filters updated: %@";
-
-/* (UserFilterController) System blacklist description */
-"blacklist_text" = "Enter here the domain names. AdGuard will prevent loading of these domains.";
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "You can add your own rules here.<br>Read this <a href=\"%@\">note about the rule syntax</a>";
@@ -176,7 +176,7 @@
 "action_export_logs" = "Export logs";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Cannot send a bug report. You may not have set up an email on your device.";
+"bug_report_sending_error" = "Cannot send a bug report. You may not have email configured on your device.";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "Filter update error";
@@ -198,9 +198,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
-
-/* MainMenuController - filters menu description */
-"filters_description_format" = "%1$d out of %2$d enabled";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
@@ -254,7 +251,7 @@
 "dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocks ads and tracking servers";
+"dns_provider_ad_blocking_summary" = "Blocks ads and tracking systems";
 
 /* MainMenuController - dns privacy menu description */
 "no_dns_server_selected" = "No server selected";
@@ -365,7 +362,7 @@
 "common_warning_title" = "Warning";
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
-"filter_rules_maximum" = "You have exceeded the maximum number of the filter rules.";
+"filter_rules_maximum" = "You have exceeded the maximum number of filter rules.";
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Lifetime";
@@ -515,7 +512,7 @@
 "common_select_all" = "Select all";
 
 /*(ListOfRules) Add domain title */
-"add_domain" = "Add domain";
+"add_domain" = "Add a domain";
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Add a new rule";
