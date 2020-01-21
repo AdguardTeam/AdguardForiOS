@@ -61,8 +61,8 @@
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "Request details";
 
-/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "Security filters, DNS privacy, custom filters etc.";
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "Security filters, DNS privacy, custom filters, etc.";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
 "amQ-gv-yFM.normalTitle" = "Copied";
@@ -133,8 +133,8 @@
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
 "tJd-oY-zOt.normalTitle" = "Copied";
 
-/* Class = "UILabel"; text = "Choose the domain level blocking:"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Choose the domain level blocking:";
+/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Choose the domain level";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Block request";

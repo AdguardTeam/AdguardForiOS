@@ -76,8 +76,8 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Server";
 
-/* Class = "UILabel"; text = "Add custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "Add custom DNS server";
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Add a custom DNS server";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS server address";
@@ -91,8 +91,8 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet's equivalent of a phone book. They maintain a directory of domain names and translate them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "DNS (Domain Name System) is the Internet's equivalent of a phone book. They maintain a directory of domain names and translate them to IP adresses";
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses";
 
 /* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "System Blacklist";
@@ -112,8 +112,8 @@
 /* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "DNS requests blocking";
 
-/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters etc.";
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters, etc.";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "Filters";

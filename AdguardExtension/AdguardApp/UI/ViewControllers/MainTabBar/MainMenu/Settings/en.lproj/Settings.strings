@@ -1,7 +1,7 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "Reset";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "8jT-85-XFp"; */
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatible with other VPN apps, unstable";
 
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
@@ -22,7 +22,7 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Restart protection when  network changes"; ObjectID = "JPH-xu-Z3J"; */
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "Restart protection when network changes";
 
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
@@ -37,8 +37,8 @@
 /* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Developer mode";
 
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "If this setting is enabled, AdGuard will ignore generic “cosmetic” rules. This will speed up pages rendering in exchange for filtering quality";
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
+"PV8-kf-b2c.text" = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Reset statistics";
@@ -55,8 +55,8 @@
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Auto-update over Wi-Fi only";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "You have 6 content blockers, each of them can contain 50,000 rules";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
+"XFM-ii-xUV.text" = "You have 6 content blockers, each of them can contain up to 50,000 rules";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
@@ -82,8 +82,8 @@
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity";
 
-/* Class = "UILabel"; text = "Allow to show the status of filter downloading and protection progress"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "Allow to show the status of filter downloading and protection progress";
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
+"mdJ-Nh-wTi.text" = "Show filter updates progress bar";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Other";
@@ -94,8 +94,8 @@
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
 "q05-UZ-zAB.text" = "Unblock ads everywhere except for the websites from this list";
 
-/* Class = "UILabel"; text = "Show more special data and options"; ObjectID = "qUy-uy-QiF"; */
-"qUy-uy-QiF.text" = "Show more special data and options";
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "Enables additional settings for advanced users";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates";
