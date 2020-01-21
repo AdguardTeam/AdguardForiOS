@@ -61,6 +61,9 @@
 /* (User Filter Screen) Whitelist input helper */
 "whitelist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will disable Safari filtering.";
 
+/* (User Filter Screen) dns blacklist input helper */
+"dns_blacklist_helper" = "Enter here the domain names separated by line breaks, for which AdGuard will block connection";
+
 /* YES Button caption in alert */
 "common_action_yes" = "YES";
 
