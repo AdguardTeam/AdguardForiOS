@@ -262,7 +262,7 @@ def export_localizable_file(path, locale):
         raise FileNotFoundError(localized_file)
     
     # Now upload the file
-    upload_file(localized_file, file_ext, locale, file_name)
+    upload_file(localized_file, "macosx", locale, file_name)
     return
 
 

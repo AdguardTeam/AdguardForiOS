@@ -275,8 +275,8 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiS-6i-NUq" userLabel="Requests View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="138" height="96.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIf-j0-9oP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="26" width="175" height="22"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIf-j0-9oP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                        <rect key="frame" x="4" y="26" width="130" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="22" id="z4l-xF-SKa">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -356,8 +356,8 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="427-Te-NP9" userLabel="Blocked View">
                                                                 <rect key="frame" x="138" y="0.0" width="138" height="96.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxe-Kt-6aQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="26" width="175" height="22"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxe-Kt-6aQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                        <rect key="frame" x="4" y="26" width="130" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="22" id="tjw-yK-BJI">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -436,7 +436,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHS-lb-bSq" userLabel="Data Saved View">
                                                                 <rect key="frame" x="276" y="0.0" width="138" height="96.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbr-WF-bsX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbr-WF-bsX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                         <rect key="frame" x="4" y="26" width="130" height="22"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="22" id="tJ0-Ye-T3H">
