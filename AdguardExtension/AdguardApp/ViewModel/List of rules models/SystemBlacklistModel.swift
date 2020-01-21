@@ -85,7 +85,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     
     var helperLabelText: String {
         get {
-            return ACLocalizedString("dns_blacklist_helper", nil)
+            return ""
         }
     }
     
