@@ -27,7 +27,6 @@ class AddCustomFilterController: BottomAlertController {
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var urlTextFieldPlaceholder: UILabel!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -82,7 +81,6 @@ class AddCustomFilterController: BottomAlertController {
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
         let enabled = sender.text != "" && sender.text != nil
-        urlTextFieldPlaceholder.isHidden = enabled
         nextButton.isEnabled = enabled
     }
     
@@ -123,7 +121,6 @@ class AddCustomFilterController: BottomAlertController {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
-        urlTextFieldPlaceholder.textColor = theme.placeholderTextColor
     }
 }
 

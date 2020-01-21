@@ -246,6 +246,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupTextField(_ textField: UITextField) {
+        let placeHolderText = textField.placeholder ?? ""
+        textField.attributedPlaceholder = NSAttributedString(string: placeHolderText,
+        attributes: [NSAttributedString.Key.foregroundColor: placeholderTextColor])
+        
         textField.textColor = configuration.darkTheme ? .white : .darkGray
         textField.keyboardAppearance = configuration.darkTheme ? .dark : .light
     }
