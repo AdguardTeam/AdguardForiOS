@@ -133,7 +133,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
                 ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
             }
             else {
-                strongSelf.importRules(text) { errorMessage in
+                strongSelf.importDomains(text) { errorMessage in
                     ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
                 }
             }
@@ -226,7 +226,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     /**
      parse plain text to array of rules. Save it to list of rules and reload safari content blockers
     */
-    private func importRules(_ plainText: String, errorHandler: @escaping (_ error: String)->Void) {
+    private func importDomains(_ plainText: String, errorHandler: @escaping (_ error: String)->Void) {
         
         let ruleStrings = plainText.components(separatedBy: .newlines)
         
