@@ -118,7 +118,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
         }
         get {
             guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
-                return AELightThemeMode
+                return AESystemDefaultThemeMode
             }
             return AEThemeMode.init(themeMode)
         }
