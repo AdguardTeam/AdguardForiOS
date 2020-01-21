@@ -31,13 +31,18 @@ class DnsFiltersServiceTest: XCTestCase {
     override func tearDown() {
     }
     
-    func testAddWhitelistDomain() {
-        let converter: DomainsConverterProtocol = DomainsConverter()
+    func testAddWhitelistRule() {
         
-        let domainToCheck = converter.whitelistRuleFromDomain("google.com")
-        filtersService.addWhitelistDomain(domainToCheck)
+        filtersService.addWhitelistRule("@@||google.com^")
+        filtersService.addWhitelistRule("@@||apple.com^")
         
-        let domains = filtersService.whitelistDomains
-        XCTAssertEqual(domains, [domainToCheck])
+        XCTAssertEqual(filtersService.whitelistRules, ["@@||google.com^", "@@||apple.com^"])
+    }
+    
+    func testRemoveWhitelistRule2() {
+        
+        filtersService.whitelistRules = ["@@||google.com^", "@@||apple.com^", "@@||example.org^"]
+        filtersService.removeWhitelistRules(["@@||apple.com^"])
+        XCTAssertEqual(filtersService.whitelistRules, ["@@||google.com^", "@@||example.org^"])
     }
 }

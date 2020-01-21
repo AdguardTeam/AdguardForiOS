@@ -85,7 +85,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         if type == .addDomainToWhitelist {
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
             logRecord.logRecord.userRule = rule
-            dnsFiltersService.addWhitelistDomain(rule)
+            dnsFiltersService.addWhitelistRule(rule)
             set(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist, rule)
         } else if type == .addRuleToUserFlter {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain

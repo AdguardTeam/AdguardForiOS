@@ -116,7 +116,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         self.vpnManager = vpnManager
         
-        allRules = dnsFiltersService.whitelistDomains.map { RuleInfo(domainsConverter.whitelistDomainFromRule($0), false, true, theme) }
+        allRules = dnsFiltersService.whitelistRules.map { RuleInfo(domainsConverter.whitelistDomainFromRule($0), false, true, theme) }
     }
     
     // MARK: - Main functions
@@ -159,7 +159,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             return
         }
         
-        rules.forEach({ dnsFiltersService.addWhitelistDomain(domainsConverter.whitelistRuleFromDomain($0)) })
+        rules.forEach({ dnsFiltersService.addWhitelistRule(domainsConverter.whitelistRuleFromDomain($0)) })
         
         allRules.append(contentsOf: rules.map { RuleInfo($0, false, true, theme) })
             
@@ -173,7 +173,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         }
     
         allRules[index].rule = newText
-        dnsFiltersService.whitelistDomains = allRules.map { domainsConverter.whitelistRuleFromDomain($0.rule) }
+        dnsFiltersService.whitelistRules = allRules.map { domainsConverter.whitelistRuleFromDomain($0.rule) }
            
         completionHandler()
         delegate?.listOfRulesChanged()
@@ -191,7 +191,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             }
         }
         allRules = newRules
-        dnsFiltersService.whitelistDomains = allRules.map({ domainsConverter.whitelistRuleFromDomain($0.rule) })
+        dnsFiltersService.whitelistRules = allRules.map({ domainsConverter.whitelistRuleFromDomain($0.rule) })
         
         delegate?.listOfRulesChanged()
     }
@@ -204,7 +204,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         }
         
         allRules.remove(at: index)
-        dnsFiltersService.whitelistDomains = allRules.map { domainsConverter.whitelistRuleFromDomain($0.rule) }
+        dnsFiltersService.whitelistRules = allRules.map { domainsConverter.whitelistRuleFromDomain($0.rule) }
         
         delegate?.listOfRulesChanged()
         completionHandler()
@@ -241,7 +241,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
             
             newRules.append(trimmedRuleString)
         }
-        dnsFiltersService.whitelistDomains = newRules.map({domainsConverter.whitelistRuleFromDomain($0)})
+        dnsFiltersService.whitelistRules = newRules.map({domainsConverter.whitelistRuleFromDomain($0)})
         allRules = newRules.map { RuleInfo($0, false, true, theme) }
         delegate?.listOfRulesChanged()
     }

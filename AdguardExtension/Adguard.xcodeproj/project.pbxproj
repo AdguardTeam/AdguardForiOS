@@ -3207,6 +3207,7 @@
 				D0D5949623AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift */,
 				D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */,
 				D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */,
+				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 				D02C080121BEAA2100796714 /* FiltersServiceTest.swift */,
 				D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */,
 				D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */,
@@ -3216,7 +3217,6 @@
 				D07A811B23B5036E00181E54 /* SharedResourcesTest.swift */,
 				7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */,
 				7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */,
-				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
