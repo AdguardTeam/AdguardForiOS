@@ -1005,6 +1005,7 @@
 		D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */; };
 		D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */; };
 		D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
+		D0593EC023D5DAD300E030A1 /* DnsLogRecordsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5949623AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift */; };
 		D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
@@ -5207,6 +5208,7 @@
 				659887101CF83580003ECD1C /* FMDatabase.m in Sources */,
 				659887111CF83580003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */,
+				D0593EC023D5DAD300E030A1 /* DnsLogRecordsServiceTest.swift in Sources */,
 				659887121CF83580003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				659887131CF83580003ECD1C /* FMDatabaseQueue.m in Sources */,
 				D031A125219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
