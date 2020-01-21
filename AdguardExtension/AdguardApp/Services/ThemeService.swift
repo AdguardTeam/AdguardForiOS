@@ -246,13 +246,17 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupTextField(_ textField: UITextField) {
+        let placeHolderText = textField.placeholder ?? ""
+        textField.attributedPlaceholder = NSAttributedString(string: placeHolderText,
+        attributes: [NSAttributedString.Key.foregroundColor: placeholderTextColor])
+        
         textField.textColor = configuration.darkTheme ? .white : .darkGray
-        textField.keyboardAppearance = configuration.darkTheme ? .dark : .default
+        textField.keyboardAppearance = configuration.darkTheme ? .dark : .light
     }
     
     func setupTextView(_ textView: UITextView) {
         textView.textColor = configuration.darkTheme ? .white : .darkGray
-        textView.keyboardAppearance = configuration.darkTheme ? .dark : .default
+        textView.keyboardAppearance = configuration.darkTheme ? .dark : .light
     }
     
     func setupTable(_ table: UITableView) {

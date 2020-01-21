@@ -84,8 +84,8 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         var detailsString = String(format: "type: %@", record.logRecord.type)
         let timeString = record.logRecord.time()
         
-        if record.logRecord.answer == "" {
-            detailsString += ", NXDOMAIN"
+        if record.logRecord.answerStatus?.count ?? 0 > 0 && record.logRecord.answerStatus != "NOERROR" {
+            detailsString += ", \(record.logRecord.answerStatus!)"
         }
 
         cell.domain.text = record.logRecord.domain
@@ -104,7 +104,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
             type = .blocked
         }
         
-        setupRecordCell(cell: cell, type: type)
+        setupRecordCell(cell: cell, type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
         theme.setupLabel(cell.domain)
         theme.setupLabel(cell.details)
@@ -169,26 +169,27 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         model.obtainRecords()
     }
     
-    private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType){
-        if type == .normal {
-            theme.setupTableCell(cell)
-            return
-        }
+    private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType, dnsStatus: String){
+        
         var logSelectedCellColor: UIColor = .clear
         var logBlockedCellColor: UIColor = .clear
         
-        switch type {
-        case .blocked:
+        switch (type, dnsStatus) {
+        case (.blocked, _):
             logSelectedCellColor = UIColor(hexString: "#4DDF3812")
             logBlockedCellColor = UIColor(hexString: "#33DF3812")
-        case .tracked:
+        case (.tracked, _):
             logSelectedCellColor = UIColor(hexString: "#4Df5a623")
             logBlockedCellColor = UIColor(hexString: "#33f5a623")
-        case .whitelisted:
+        case (.whitelisted, _):
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        default:
-            return
+        case (.normal, "NOERROR"):
+            logSelectedCellColor = theme.selectedCellColor
+            logBlockedCellColor = .clear
+        case (.normal, _): // error
+            logSelectedCellColor = UIColor(hexString: "#4DDF3812")
+            logBlockedCellColor = UIColor(hexString: "#33DF3812")
         }
         
         let bgColorView = UIView()

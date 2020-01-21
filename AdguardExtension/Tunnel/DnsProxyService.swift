@@ -88,10 +88,13 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         dnsRecordsWriter.userFilterId = userFilterId as NSNumber?
         dnsRecordsWriter.otherFilterIds = otherFilterIds as [NSNumber]
         
-        let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeoutMs: 10000, serverIp: nil)
+        guard let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeoutMs: 3000, serverIp: nil) else {
+            DDLogError("(DnsProxyService) error - can not create upstream: \(fallback), bootstrap: \(bootstrapDnsArray)")
+            return false
+        }
         
-        let dns64Settings = AGDns64Settings(upstream: upstream, maxTries: 2, waitTimeMs: 10000)
-        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtlSecs: 2, dns64Settings: dns64Settings, listeners: nil, ipv6Available: ipv6Available, blockIpv6: false)
+        let dns64Settings = AGDns64Settings(upstreams: [upstream], maxTries: 2, waitTimeMs: 3000)
+        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtlSecs: 2, dns64Settings: dns64Settings, listeners: nil, ipv6Available: ipv6Available, blockIpv6: false, blockingMode: .AGBM_DEFAULT, customBlockingIpv4: nil, customBlockingIpv6: nil, dnsCacheSize: 128)
         agproxy = AGDnsProxy(config: config, handler: events)
         
         return agproxy != nil

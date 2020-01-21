@@ -51,8 +51,10 @@ class DnsLogRecord: NSObject, NSCoding {
     var userStatus: DnsLogRecordUserStatus
     let blockRules: [String]?
     let matchedFilterIds: [Int]?
+    let originalAnswer: String?
+    let answerStatus: String?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?, originalAnswer: String?, answerStatus: String?) {
         
         self.domain = domain
         self.date = date
@@ -67,6 +69,8 @@ class DnsLogRecord: NSObject, NSCoding {
         self.userStatus = userStatus
         self.blockRules = blockRules
         self.matchedFilterIds = matchedFilterIds
+        self.originalAnswer = originalAnswer
+        self.answerStatus = answerStatus
         
         self.rowid = -1
         
@@ -90,6 +94,8 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(userStatus.rawValue, forKey: "userStatus")
         aCoder.encode(blockRules, forKey: "blockRules")
         aCoder.encode(matchedFilterIds,forKey: "matchedFilterIds")
+        aCoder.encode(originalAnswer, forKey: "originalAnswer")
+        aCoder.encode(answerStatus, forKey: "answerStatus")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -109,6 +115,9 @@ class DnsLogRecord: NSObject, NSCoding {
         self.userStatus = DnsLogRecordUserStatus.init(rawValue: aDecoder.decodeInteger(forKey: "userStatus")) ?? .none
         self.blockRules = aDecoder.decodeObject(forKey: "blockRules") as? [String]
         self.matchedFilterIds = aDecoder.decodeObject(forKey: "matchedFilterIds") as? [Int]
+        self.originalAnswer = aDecoder.decodeObject(forKey: "originalAnswer") as? String
+        self.answerStatus = aDecoder.decodeObject(forKey: "answerStatus") as? String
+        
         self.rowid = -1
     }
 }

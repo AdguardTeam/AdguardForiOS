@@ -80,7 +80,8 @@ class AddCustomFilterController: BottomAlertController {
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
-        nextButton.isEnabled = sender.text != "" && sender.text != nil
+        let enabled = sender.text != "" && sender.text != nil
+        nextButton.isEnabled = enabled
     }
     
     
