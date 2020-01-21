@@ -47,7 +47,7 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         super.viewWillAppear(animated)
         updateTheme()
         vpnService.notifier = self
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
     override func viewDidLoad() {
@@ -73,15 +73,15 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
     // MARK: - VpnServiceNotifierDelegate methods
     
     func tunnelModeChanged() {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
     func vpnConfigurationChanged(with error: Error?) {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
     func cancelledAddingVpnConfiguration() {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("no_dns_server_selected")
+        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
     // MARK: - Actions

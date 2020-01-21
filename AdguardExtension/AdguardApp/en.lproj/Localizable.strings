@@ -251,7 +251,7 @@
 "dns_provider_ad_blocking_summary" = "Blocks ads and tracking systems";
 
 /* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "No server selected";
+"system_dns_server" = "System DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Enabled %1$d out of %2$d";

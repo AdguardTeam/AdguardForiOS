@@ -351,7 +351,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
             return vpnManager.activeDnsServer!.name
         }
         else if vpnManager.activeDnsServer?.dnsProtocol == nil {
-            return ACLocalizedString("no_dns_server_selected", nil)
+            return ACLocalizedString("system_dns_server", nil)
         }
         else {
             let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
