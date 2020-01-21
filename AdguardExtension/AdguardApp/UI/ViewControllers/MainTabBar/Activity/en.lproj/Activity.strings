@@ -31,6 +31,9 @@
 /* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
 "HUm-JT-lZs.text" = "Time";
 
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
+"HgO-j6-UT3.normalTitle" = "Copied";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "CANCEL";
 
@@ -42,6 +45,9 @@
 
 /* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
 "ORQ-AZ-NIU.text" = "Size";
+
+/* Class = "UILabel"; text = "Original answer"; ObjectID = "RjM-Qn-ufh"; */
+"RjM-Qn-ufh.text" = "Original answer";
 
 /* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
 "S05-ei-beX.title" = "DNS request details";
@@ -70,6 +76,9 @@
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dU9-gV-MqN"; */
 "dU9-gV-MqN.normalTitle" = "Copied";
 
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
+"dWi-vv-Ca0.normalTitle" = "Copied";
+
 /* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
 "dsD-0w-qic.title" = "Clear";
 
@@ -84,6 +93,9 @@
 
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "BACK";
+
+/* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
+"i4m-2Q-3Ki.text" = "DNS status";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Block request";
