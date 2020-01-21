@@ -59,7 +59,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             self?.updateTheme()
         }
         
-        setupBackButton()
+        setupBackItem()
         
         deleteButton.makeTitleTextUppercased()
     }
@@ -118,6 +118,17 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
                 self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.5)
             }
         }
+    }
+    
+    /**
+     We use different image and method, because the title is glitching while view controller is beeing popped up
+     */
+    private func setupBackItem(){
+        let imgBackArrow = UIImage(named: "arrow_back") ?? UIImage()
+        navigationController?.navigationBar.backIndicatorImage = imgBackArrow
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBackArrow
+        navigationController?.navigationBar.backItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
     }
     
     // MARK: - FilterDetailsControllerAnimationDelegate

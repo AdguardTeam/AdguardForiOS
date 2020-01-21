@@ -214,6 +214,9 @@
 /* (MainMenuController) DNS server disabled state */
 "dns_server_disabled" = "disabled";
 
+/* MainMenuController - filters menu description */
+"filters_description_format" = "%1$d out of %2$d enabled";
+
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
 
