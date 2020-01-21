@@ -252,7 +252,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupTextView(_ textView: UITextView) {
         textView.textColor = configuration.darkTheme ? .white : .darkGray
-        textView.keyboardAppearance = configuration.darkTheme ? .dark : .default
+        textView.keyboardAppearance = configuration.darkTheme ? .dark : .light
     }
     
     func setupTable(_ table: UITableView) {
