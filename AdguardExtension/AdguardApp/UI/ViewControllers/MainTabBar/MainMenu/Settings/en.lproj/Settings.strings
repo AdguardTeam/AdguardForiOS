@@ -2,7 +2,7 @@
 "2s7-mz-LlB.title" = "Reset";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "8jT-85-XFp"; */
-"8jT-85-XFp.text" = "Incompatible with other VPN apps,  unstable";
+"8jT-85-XFp.text" = "Incompatible with other VPN apps, unstable";
 
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
 "Bjk-AC-5fy.text" = "Tunnel mode";
@@ -23,7 +23,7 @@
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
 /* Class = "UILabel"; text = "Restart protection when  network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "Restart protection when  network changes";
+"JPH-xu-Z3J.text" = "Restart protection when network changes";
 
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
 "KSL-dU-yfA.text" = "Content blockers";

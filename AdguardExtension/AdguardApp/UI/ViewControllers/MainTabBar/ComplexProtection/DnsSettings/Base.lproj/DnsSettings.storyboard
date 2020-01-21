@@ -353,7 +353,7 @@
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters etc." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-X6-fFy" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-X6-fFy" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="8" width="318" height="68"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <nil key="textColor"/>
@@ -1181,8 +1181,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-tk-ohH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="16" width="366" height="72.5"/>
-                                            <string key="text">DNS (Domain Name System) is the Internet's equivalent of a phone book. They maintain a directory of domain names and translate them to IP adresses</string>
+                                            <rect key="frame" x="24" y="16" width="366" height="54.5"/>
+                                            <string key="text">DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1377,7 +1377,7 @@
                                                 <constraint firstAttribute="height" constant="24" id="Hx6-pn-HXe"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add custom DNS server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-rO-z2K">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a custom DNS server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-rO-z2K">
                                             <rect key="frame" x="58" y="19.5" width="340" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>

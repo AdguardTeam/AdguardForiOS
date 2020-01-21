@@ -101,7 +101,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_caption", nil)
         case .systemBlacklist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
+            return ACLocalizedString("add_blacklist_rule_caption", nil)
         case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
         case .safariWhitelist:
