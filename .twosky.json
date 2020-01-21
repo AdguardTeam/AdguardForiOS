@@ -40,22 +40,27 @@
         "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/en.lproj/MainMenu.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings/en.lproj/Settings.strings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules/en.lproj/UserFilter.strings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules/en.lproj/UserFilter.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/Activity/en.lproj/Activity.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/en.lproj/MainPage.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/en.lproj/Protection.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding/en.lproj/Onboarding.strings",
+        "AdguardExtension/AdGuardTodayExtension/en.lproj/MainInterface.strings"
     ],
     "storyboard_dirs": [
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/Activity",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/DnsSettings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/Filters",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/License",
-      "AdguardExtension/AdGuardTodayExtension",
-      "AdguardExtension/ActionExtension",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/Activity",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/DnsSettings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/Filters",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/License",
+        "AdguardExtension/AdGuardTodayExtension",
+        "AdguardExtension/ActionExtension",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules"
     ]
   }
 ]
