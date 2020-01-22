@@ -141,7 +141,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var vpnService: VpnServiceProtocol = { ServiceLocator.shared.getService()! }()
-    
+    private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     
@@ -252,6 +252,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Nav Bar Actions
     
     @objc private func updateFilters(_ sender: Any) {
+        
+        var safariUpdateEnded = false
+        var dnsUpdateEnded = false
+        let endUpdate: ()->Void = { [weak self] in
+            if safariUpdateEnded && dnsUpdateEnded {
+                self?.updateEnded()
+            }
+        }
+        
         mainPageModel?.updateFilters(start: {
             DispatchQueue.main.async { [weak self] in
                 self?.updateStarted()
@@ -260,14 +269,23 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }, finish: { [weak self] (message) in
             DispatchQueue.main.async {
                 self?.protectionStatusLabel.text = message
-                self?.updateEnded()
+                safariUpdateEnded = true
+                endUpdate()
             }
         }, error: { [weak self] (message) in
             DispatchQueue.main.async {
                 self?.protectionStatusLabel.text = message
-                self?.updateEnded()
+                safariUpdateEnded = true
+                endUpdate()
             }
         })
+        
+        dnsFiltersService.updateFilters(networking: ACNNetworking()) {
+            DispatchQueue.main.async {
+                dnsUpdateEnded = true
+                endUpdate()
+            }
+        }
     }
     
     // MARK: - Protection Status Actions

@@ -708,6 +708,11 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
     enabled:(BOOL)enabled
     filteringMobileDataEnabled:(BOOL)filteringMobileDataEnabled
     filteringWifiDataEnabled:(BOOL)filteringWifiDataEnabled {
+    
+    // do not update configuration for not premium users
+    if (!_configuration.proStatus) {
+        return;
+    }
 
     [_busyLock lock];
     _busy = YES;
