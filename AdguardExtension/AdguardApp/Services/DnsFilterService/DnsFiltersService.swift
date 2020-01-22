@@ -36,7 +36,7 @@ protocol DnsFiltersServiceProtocol {
     
     // dns whitelist rules
     // automaticaly updates vpn settings when changed
-    var whitelistDomains: [String] { get set }
+    var whitelistRules: [String] { get set }
     
     // dns user filter rules
     // automaticaly updates vpn settings when changed
@@ -64,10 +64,10 @@ protocol DnsFiltersServiceProtocol {
     // resets service settings
     func reset()
     
-    // adds a domain to whitelist filter and restarts the tunnel
-    func addWhitelistDomain(_ domain: String)
+    // adds a rule to whitelist filter and restarts the tunnel
+    func addWhitelistRule(_ rule: String)
     
-    // adds a domain to user filter and restarts the tunnel
+    // adds a rule to user filter and restarts the tunnel
     func addBlacklistRule(_ rule: String)
     
     // removes rules(!not domains) from whitelist and restarts the tunnel
@@ -185,7 +185,6 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let resources: AESharedResourcesProtocol
     private let vpnManager: APVPNManagerProtocol?
     private let parser = AASFilterSubscriptionParser()
-    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
         
     init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?) {
         self.resources = resources
@@ -225,7 +224,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
 
             // todo: do not read all rules to get counter
             let systemWhiteListEnabled = resources.systemWhitelistEnabled
-            if whitelistDomains.count > 0 && systemWhiteListEnabled {
+            if whitelistRules.count > 0 && systemWhiteListEnabled {
                 json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId)])
             }
             
@@ -238,12 +237,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
     }
     
-    var whitelistDomains: [String] {
+    var whitelistRules: [String] {
         get {
             return loadWhitelistRules()
         }
         set {
-            saveWhitlistDomains(domains: newValue)
+            saveWhitlistRules(rules: newValue)
         }
     }
         
@@ -361,17 +360,16 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     // MARK: - working with user filters
     
-    func addWhitelistDomain(_ domain: String) {
-        let trimmed = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        whitelistDomains.append(trimmed)
+    func addWhitelistRule(_ rule: String) {
+        whitelistRules.append(rule)
     }
     
     func removeWhitelistRules(_ rules: [String]) {
         var allRules = loadWhitelistRules()
         allRules.removeAll { rules.contains($0) }
-        willChangeValue(for: \.whitelistDomains)
-        saveWhitlistDomains(domains: allRules)
-        didChangeValue(for: \.whitelistDomains)
+        willChangeValue(for: \.whitelistRules)
+        saveWhitlistRules(rules: allRules)
+        didChangeValue(for: \.whitelistRules)
     }
     
     func addBlacklistRule(_ rule: String) {
@@ -447,14 +445,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         var rules = string.components(separatedBy: .newlines)
         rules = rules.filter { !$0.isEmpty }
-        rules = rules.map({ domainsConverter.whitelistRuleFromDomain($0) })
         
         return rules
     }
     
-    private func saveWhitlistDomains(domains:[String]) {
-        var rules = domains.map({ domainsConverter.whitelistDomainFromRule($0) })
-        rules.append("") // temporary fix dnslibs bug
+    private func saveWhitlistRules(rules:[String]) {
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
             resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
             vpnManager?.restartTunnel()
