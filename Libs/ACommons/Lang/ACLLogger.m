@@ -98,44 +98,13 @@ static ACLLogger *singletonLogger;
 #ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         [DDLog addLogger:[DDOSLogger sharedInstance]];
+        _fileLogger.logFileManager.maximumNumberOfLogFiles = 20;
 #endif
         
         _initialized = YES;
     }
 }
 
-#elif TARGET_OS_MAC
-
-- (void)initLogger:(NSString *)appName{
-    
-    if (!_initialized) {
-        
-        // Determines logs directory.
-        NSString *logsDirectory;
-        if (appName) {
-            
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-            NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-            logsDirectory = [[basePath stringByAppendingPathComponent:@"Logs"] stringByAppendingPathComponent:appName];
-        }
-        
-        //
-        DDLogFileManagerDefault *defaultLogFileManager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:logsDirectory];
-        
-        _fileLogger = [[ACLFileLogger alloc] initWithLogFileManager:defaultLogFileManager];
-        _fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        _fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-        _fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
-        
-        [DDLog addLogger:_fileLogger];
-#ifdef DEBUG
-        [DDLog addLogger:[DDTTYLogger sharedInstance]];
-#endif
-        
-        _initialized = YES;
-    }
-}
-/// Initializing of logger.
 #endif
 
 /////////////////////////////////////////////////////////////////////
