@@ -250,7 +250,7 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blocks ads and tracking systems";
 
-/* MainMenuController - dns privacy menu description */
+/* MainMenuController - System DNS Title, when a server is not selected */
 "system_dns_server" = "System DNS";
 
 /* MainMenuController - filters menu description */
