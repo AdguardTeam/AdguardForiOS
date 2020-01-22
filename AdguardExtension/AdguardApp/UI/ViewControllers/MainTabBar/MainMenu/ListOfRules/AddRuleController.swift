@@ -152,7 +152,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_title", nil)
         case .systemBlacklist:
-            return ACLocalizedString("add_whitelist_domain_title", nil)
+            return ACLocalizedString("add_blacklist_rule_title", nil)
         case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_title", nil)
         case .safariWhitelist:
@@ -169,7 +169,7 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         case .safariUserfilter:
             return ACLocalizedString("add_blacklist_rule_caption", nil)
         case .systemBlacklist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
+            return ACLocalizedString("add_blacklist_rule_caption", nil)
         case .systemWhitelist:
             return ACLocalizedString("add_whitelist_domain_caption", nil)
         case .safariWhitelist:

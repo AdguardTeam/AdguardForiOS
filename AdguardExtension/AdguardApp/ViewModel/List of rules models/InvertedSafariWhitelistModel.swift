@@ -81,7 +81,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
 
     var helperLabelText: String {
         get {
-            return ACLocalizedString("whitelist_helper", nil)
+            return ""
         }
     }
     

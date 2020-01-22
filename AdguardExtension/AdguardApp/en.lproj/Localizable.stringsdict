@@ -51,7 +51,7 @@
 			<key>one</key>
 			<string>One day free full access</string>
 			<key>other</key>
-			<string>%d - days free full access</string>
+			<string>%d-day free full access</string>
 		</dict>
 	</dict>
 	<key>getPro_full_access_weeks</key>
@@ -67,7 +67,7 @@
 			<key>one</key>
 			<string>One week free full access</string>
 			<key>other</key>
-			<string>%d - weeks free full access</string>
+			<string>%d-week free full access</string>
 		</dict>
 	</dict>
 	<key>getPro_full_access_months</key>
@@ -81,9 +81,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>One monts free full access</string>
+			<string>One month free full access</string>
 			<key>other</key>
-			<string>%d - months free full access</string>
+			<string>%d-month free full access</string>
 		</dict>
 	</dict>
 	<key>getPro_full_access_years</key>
@@ -99,7 +99,7 @@
 			<key>one</key>
 			<string>One year free full access</string>
 			<key>other</key>
-			<string>%d - years free full access</string>
+			<string>%d-year free full access</string>
 		</dict>
 	</dict>
 	<key>getPro_screen_days</key>

@@ -31,29 +31,36 @@
       "uk": "Ukrainian"
     },
     "localizable_files": [
-      "AdguardExtension/AdguardApp/en.lproj/Localizable.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/About/en.lproj/About.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings/en.lproj/DnsSettings.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/Filters/en.lproj/Filters.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/License/en.lproj/License.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu/en.lproj/MainMenu.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen/en.lproj/MainScreen.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/Settings/en.lproj/Settings.strings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/ListOfRules/en.lproj/UserFilter.strings",
-      "AdguardExtension/AdguardApp/en.lproj/Localizable.stringsdict",
-      "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About/en.lproj/About.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/DnsSettings/en.lproj/DnsSettings.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/Filters/en.lproj/Filters.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/License/en.lproj/License.strings",
+        "AdguardExtension/AdguardApp/en.lproj/Localizable.strings",
+        "AdguardExtension/AdguardApp/en.lproj/Localizable.stringsdict",
+        "AdguardExtension/ActionExtension/en.lproj/MainInterface.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/en.lproj/MainMenu.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings/en.lproj/Settings.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules/en.lproj/UserFilter.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/Activity/en.lproj/Activity.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/en.lproj/MainPage.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/en.lproj/Protection.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding/en.lproj/Onboarding.strings",
+        "AdguardExtension/AdGuardTodayExtension/en.lproj/MainInterface.strings"
     ],
     "storyboard_dirs": [
-      "AdguardExtension/AdguardApp",
-      "AdguardExtension/ActionExtension",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/About",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/DnsSettings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/Filters",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/License",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainMenu",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/MainScreen",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/Settings",
-      "AdguardExtension/AdguardApp/UI/ViewControllers/ListOfRules"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/Activity",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/DnsSettings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/Filters",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/License",
+        "AdguardExtension/AdGuardTodayExtension",
+        "AdguardExtension/ActionExtension",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules"
     ]
   }
 ]

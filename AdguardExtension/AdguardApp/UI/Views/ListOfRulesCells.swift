@@ -122,12 +122,12 @@ class AddRuleCell: UITableViewCell {
     }
     
     private func setupLabel(){
-        if type == .safariUserfilter{
+        if type == .safariUserfilter {
             addRuleLabel.font = UIFont(name: "PTMono-Regular", size: 15.0)
             addRuleLabel.text = ACLocalizedString("add_new_rule", nil)
         } else {
             addRuleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-            addRuleLabel.text = ACLocalizedString("add_domain", nil)
+            addRuleLabel.text = type == .systemBlacklist ? String.localizedString("add_new_rule") : String.localizedString("add_domain")
         }
         addRuleLabel.textColor = UIColor(hexString: "#67b279")
     }

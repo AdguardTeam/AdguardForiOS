@@ -82,7 +82,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
 
     var helperLabelText: String {
         get {
-            return ACLocalizedString("dns_whitelist_helper", nil)
+            return ""
         }
     }
     

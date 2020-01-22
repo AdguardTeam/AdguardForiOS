@@ -82,8 +82,9 @@ class RequestsBlockingController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let filtersDescriptionText = String(format: ACLocalizedString("filters_description_format", nil), dnsFiltersService.enabledFiltersCount, dnsFiltersService.allFiltersCount)
+    
+        let filtersDescriptionFormat = String.localizedString("safari_filters_format")
+        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount)
         filtersLabel.text = filtersDescriptionText
     }
     
