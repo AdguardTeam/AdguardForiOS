@@ -145,10 +145,14 @@
             ^(const char *msg, int length) {
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
+#if DEBUG
+                    [[ACLLogger singleton] flush];
+#endif
                 }
             }];
 
 #if DEBUG
+        [AGLogger setLevel: AGLL_DEBUG];
         [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
 #endif
         
