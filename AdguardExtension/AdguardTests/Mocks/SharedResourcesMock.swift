@@ -5,7 +5,7 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
     
     var safariProtectionEnabled: Bool = true
     
-    lazy var userDefaults: UserDefaults = {
+    var userDefaults: UserDefaults = {
         let userDefaults = UserDefaults(suiteName: "TestDefaults")
         userDefaults?.removePersistentDomain(forName: "TestDefaults")
         userDefaults?.synchronize()
