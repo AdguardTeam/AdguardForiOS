@@ -483,6 +483,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RDS-1r-fn1">
                                                     <rect key="frame" x="341" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="vhg-so-nlx"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="useSimplifiedFiltersAction:" destination="71r-k4-iOF" eventType="valueChanged" id="c1M-wJ-S3h"/>
                                                     </connections>
@@ -528,6 +531,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8eF-Ky-7cU">
                                                     <rect key="frame" x="341" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="9fz-PR-5Mz"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="showProgressbarAction:" destination="71r-k4-iOF" eventType="valueChanged" id="pFG-q7-mKa"/>
                                                     </connections>
@@ -546,8 +552,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eMr-q7-6cf">
-                                        <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eMr-q7-6cf">
+                                        <rect key="frame" x="0.0" y="116" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eMr-q7-6cf" id="3mC-Nc-p0V">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -564,6 +570,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAq-Ld-n9T">
                                                     <rect key="frame" x="341" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="Oqe-Hr-Afs"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="restartProtectionAction:" destination="71r-k4-iOF" eventType="valueChanged" id="GQZ-dY-QON"/>
                                                     </connections>
@@ -581,12 +590,12 @@
                                             <constraints>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="trailing" secondItem="JPH-xu-Z3J" secondAttribute="trailing" id="23o-3y-13g"/>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="leading" secondItem="JPH-xu-Z3J" secondAttribute="leading" id="BHP-Pz-is2"/>
-                                                <constraint firstItem="hAq-Ld-n9T" firstAttribute="leading" secondItem="JPH-xu-Z3J" secondAttribute="trailing" constant="24" id="NQM-8u-dA7"/>
-                                                <constraint firstAttribute="trailing" secondItem="hAq-Ld-n9T" secondAttribute="trailing" constant="24" id="NQx-ir-H3b"/>
+                                                <constraint firstItem="hAq-Ld-n9T" firstAttribute="leading" secondItem="JPH-xu-Z3J" secondAttribute="trailing" constant="24" id="FDi-WD-jYb"/>
                                                 <constraint firstItem="JPH-xu-Z3J" firstAttribute="leading" secondItem="3mC-Nc-p0V" secondAttribute="leading" constant="24" id="Nby-wy-NIs"/>
                                                 <constraint firstItem="hAq-Ld-n9T" firstAttribute="top" secondItem="3mC-Nc-p0V" secondAttribute="top" constant="16" id="PW0-RS-rgh"/>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="top" secondItem="JPH-xu-Z3J" secondAttribute="bottom" constant="3" id="Vht-0C-Q2V"/>
                                                 <constraint firstItem="JPH-xu-Z3J" firstAttribute="top" secondItem="3mC-Nc-p0V" secondAttribute="top" constant="16" id="ZK6-n7-GDu"/>
+                                                <constraint firstAttribute="trailing" secondItem="hAq-Ld-n9T" secondAttribute="trailing" constant="24" id="oFz-7h-D80"/>
                                                 <constraint firstAttribute="bottom" secondItem="aRS-WH-mRj" secondAttribute="bottom" constant="16" id="qWg-2d-hcL"/>
                                             </constraints>
                                         </tableViewCellContentView>
