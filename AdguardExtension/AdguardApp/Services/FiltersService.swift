@@ -569,10 +569,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 group.iconName = "language-group-icon"
             case FilterGroupId.security:
                 group.iconName = "security-group-icon"
-                group.disabledIconName = "security-group-icon-disabled"
             case FilterGroupId.custom:
                 group.iconName = "custom-group-icon"
-                group.disabledIconName = "custom-group-icon-disabled"
             case FilterGroupId.other:
                 group.iconName = "other-group-icon"
             case FilterGroupId.privacy:

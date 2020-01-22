@@ -106,24 +106,16 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         
         theme.setupLabels(cell.themableLabels)
         
-        var trailingConstraint: CGFloat = 0
         if group.proOnly && !configuration.proStatus {
-            cell.enabledSwitch.isHidden = true
-            cell.getPremiumButton.isHidden = false
-            cell.descriptionLabel.text = group.groupId == FilterGroupId.security ? ACLocalizedString("security_description", nil) : ACLocalizedString("custom_description", nil)
+            cell.enabledSwitch.isUserInteractionEnabled = false
+            cell.descriptionLabel.text = group.groupId == FilterGroupId.security ? String.localizedString("security_description") : String.localizedString("custom_description")
             cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
             cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
-            trailingConstraint = cell.getPremiumButton.frame.width + 10.0 + 15.0
         } else {
-            cell.enabledSwitch.isHidden = false
-            cell.getPremiumButton.isHidden = true
+            cell.enabledSwitch.isUserInteractionEnabled = true
             cell.icon.tintColor = UIColor(hexString: "#67b279")
-            trailingConstraint = cell.enabledSwitch.frame.width + 10.0 + 15.0
         }
         
-        cell.descriptionTrailingConstraint.constant = trailingConstraint
-        cell.nameTrailingConstraint.constant = trailingConstraint
-
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
         
