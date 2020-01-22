@@ -148,6 +148,10 @@ typedef void (^logCallback)(const char *msg, int length);
  */
 @property(nonatomic, readonly) NSArray<AGDnsUpstream *> *upstreams;
 /**
+ * Fallback upstreams settings
+ */
+@property(nonatomic, readonly) NSArray<AGDnsUpstream *> *fallbacks;
+/**
  * Filter files with identifiers
  */
 @property(nonatomic, readonly) NSDictionary<NSNumber *,NSString *> *filters;
@@ -189,6 +193,7 @@ typedef void (^logCallback)(const char *msg, int length);
 @property(nonatomic, readonly) NSUInteger dnsCacheSize;
 
 - (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
+        fallbacks: (NSArray<AGDnsUpstream *> *) fallbacks
         filters: (NSDictionary<NSNumber *,NSString *> *) filters
         blockedResponseTtlSecs: (NSInteger) blockedResponseTtlSecs
         dns64Settings: (AGDns64Settings *) dns64Settings
