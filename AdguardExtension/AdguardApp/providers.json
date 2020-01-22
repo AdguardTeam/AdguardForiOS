@@ -215,7 +215,7 @@
           "id": "cloudflare",
           "name": "cloudflare",
           "upstreams":[
-            "https://dns.cloudflare.com/dns-query"
+            "https://cloudflare-dns.com/dns-query"
           ]
         },
         {

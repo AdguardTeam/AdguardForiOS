@@ -27,6 +27,7 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var restoreButton: RoundRectButton!
     @IBOutlet weak var periodButton: RoundRectButton!
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
+    @IBOutlet weak var subscribedView: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var logoImage: ThemeableImageView!
@@ -53,12 +54,9 @@ class GetProTableController: UITableViewController {
     
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
-    private let purchaseRow = 5
-    private let customRow = 4
-    private let privacyRow = 3
-    private let securityRow = 2
-    private let subscribedRow = 6
-    private let descriptionRow = 7
+    private let featuresRow = 2
+    private let purchaseRow = 3
+    private let descriptionRow = 4
     
     var selectedProduct: Product?
     
@@ -103,10 +101,7 @@ class GetProTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // hide "you are subscribed" row
-        
-        if indexPath.row == subscribedRow && !configuration.proStatus {
-            return 0
-        }
+        subscribedView.isHidden = !configuration.proStatus
         
         // hide purchase row for premium users
         if indexPath.row == purchaseRow && configuration.proStatus {
@@ -204,6 +199,7 @@ class GetProTableController: UITableViewController {
         }
         theme.setupLabels(themableLabels)
         theme.setupImage(logoImage)
+        setPurchaseDescription()
     }
     
     private func setPurchaseDescription() {
