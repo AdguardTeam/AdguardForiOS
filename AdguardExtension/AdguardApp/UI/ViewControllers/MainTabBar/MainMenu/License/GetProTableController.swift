@@ -199,6 +199,7 @@ class GetProTableController: UITableViewController {
         }
         theme.setupLabels(themableLabels)
         theme.setupImage(logoImage)
+        setPurchaseDescription()
     }
     
     private func setPurchaseDescription() {
