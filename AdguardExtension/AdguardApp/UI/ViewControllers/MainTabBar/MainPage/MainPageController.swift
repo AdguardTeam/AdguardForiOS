@@ -172,6 +172,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chartModel?.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
         
+        let periodType = resources.sharedDefaults().integer(forKey: StatisticsPeriodType)
+        dateTypeChanged(dateType: ChartDateType(rawValue: periodType) ?? .alltime)
+        
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
         if let recognizer = contentBlockersGestureRecognizer {
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
@@ -403,6 +406,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - DateTypeChangedProtocol method
     
     func dateTypeChanged(dateType: ChartDateType) {
+        resources.sharedDefaults().set(dateType.rawValue, forKey: StatisticsPeriodType)
         changeDateTypeButton(dateType: dateType)
         chartModel?.chartDateType = dateType
     }
