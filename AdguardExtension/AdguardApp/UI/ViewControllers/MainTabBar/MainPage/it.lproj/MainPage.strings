@@ -1,3 +1,8 @@
+/* Class = "UILabel"; text = "Be stronger  with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Sii più forte con PREMIUM!";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "RISOLVERE";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Periodo";
@@ -37,3 +42,6 @@
 
 /* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
 "kfe-5H-fB1.normalTitle" = "Tutto il periodo";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "RISOLVERE";
