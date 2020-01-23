@@ -38,13 +38,13 @@
 "saved_data_message" = "This information is based on the number of blocked DNS requests. The statistics are an estimate due to technical impossibility to calculate the exact amount of ads, trackers and other threats that could have been downloaded by the user if the domain had not been initially blocked.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ Kb";
+"kb_unit" = "%@ KB";
 
 /* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ Mb";
+"mb_unit" = "%@ MB";
 
 /* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ Gb";
+"gb_unit" = "%@ GB";
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Try for free";
@@ -119,16 +119,16 @@
 "filter_date_format" = "Filters updated: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add your own rules here.<br>Read this <a href=\"%@\">note about the rule syntax</a>";
+"blacklist_text_format" = "You can add your own rules here.<br>Read this <a href="%@">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains ignoring all other settings";
+"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains ignoring all other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Enter here the domain names separated by line breaks. AdGuard will allow all connections to these domains";
+"dns_whitelist_text" = "Enter here the domain names separated by line breaks. AdGuard will allow all connections to these domains.";
 
 /* (UserFilterController) dns blacklist description */
 "dns_blacklist_text_format" = "This Blacklist supports <a href=\"%@\">AdGuard's DNS syntax</a>. Enter here the rules separated by line breaks. AdGuard will block all connections to domains that match these rules.";
@@ -449,7 +449,7 @@
 "add_to_blacklist" = "ADD TO BLACKLIST";
 
 /*(GroupsController) Security description without premium  */
-"security_description" = "Allow to block phishing sites and other dangerous domains. Available for Premium users";
+"security_description" = "Allow to block phishing sites and other dangerous domains. Available to Premium users";
 
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Allows adding third-party filters. Available to Premium users";
@@ -572,7 +572,7 @@
 "common_action_more" = "More";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "You've tried to add a duplicate filter. This filter is already on the list";
+"filter_exists" = "You've tried to add a duplicate filter. This filter is already on the list.";
 
 /*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
 "changes_not_applied" = "Changes were not applied";
