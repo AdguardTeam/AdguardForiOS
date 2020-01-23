@@ -1,14 +1,47 @@
-/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
+/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
+"2s7-mz-LlB.title" = "リセット";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "他のVPNアプリと互換性なし、不安定";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
+"Bjk-AC-5fy.text" = "Tunnelモード";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
 "ChK-gV-7pc.title" = "一般設定";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "他のVPNアプリと互換性なし";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "ダーク（暗い）";
 
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
-"PyT-Id-Sle.text" = "この設定を有効にすると、AdGuardは汎用の“整形”ルールを無視します。フィルタリングの質と引き換えにページの読み込みを高速化します。";
+/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "自信のあるユーザー様用 (※詳しくなければ変更しないほうがおすすめです)";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
-"TCQ-IQ-R5g.text" = "シンプル化されたフィルタを使用する";
+/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
+"GGp-kp-YJI.text" = "Split-Tunnel";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
+"JPH-xu-Z3J.text" = "ネットワーク変更時に保護を再起動する";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
+"KSL-dU-yfA.text" = "コンテンツブロッカー";
+
+/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
+"KVr-dC-Lo5.title" = "Tunnelモード";
+
+/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
+"Ll9-il-kpC.title" = "詳細設定";
+
+/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "デベロッパモード";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
+"PV8-kf-b2c.text" = "この設定をONにすると、AdGuardは汎用の“整形”ルールを無視します。フィルタリングの質は下がるが、ページ読込速度はアップします。";
+
+/* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
+"QEc-dY-TtB.text" = "統計をリセット";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "システム・デフォルト";
@@ -16,26 +49,44 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "テーマ";
 
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
+"W6u-T8-UVZ.text" = "シンプル化されたフィルタを使用する";
+
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Wi-Fi接続時のみフィルタを自動更新";
 
-/* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "bVh-Of-Oxm"; */
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
+"XFM-ii-xUV.text" = "コンテンツブロッカーは6つあり、それぞれに50,000本までのルールを含めることができます（計30万本）";
+
+/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
+"aIJ-gX-03k.text" = "Full-Tunnel";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
+"aRS-WH-mRj.text" = "AdGuard実行中にインターネット接続の問題が発生している場合は、このオプションをONにしてください。";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
+"aoV-et-2ku.text" = "ステータスバーを表示する";
+
+/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
 "bVh-Of-Oxm.text" = "ホワイトリストを逆転させる";
 
-/* Class = "UILabel"; text = "Content Blockers"; ObjectID = "c1p-jc-Itq"; */
-"c1p-jc-Itq.text" = "コンテンツブロッカー";
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
+"eIa-RB-Phv.text" = "詳細設定";
 
-/* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
-"crJ-Vv-yrm.headerTitle" = "詳細設定";
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "Full-Tunnel（VPNアイコンなし）";
 
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running."; ObjectID = "mta-fv-reE"; */
-"mta-fv-reE.text" = "AdGuard実行中にインターネット接続の問題が発生した場合は、このオプションをONにしてください。";
+/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
+"gxl-pG-zh1.text" = "「パーソナルVPN」系アプリと互換性あり";
+
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "jmQ-ze-hFG"; */
+"jmQ-ze-hFG.text" = "Split-Tunnelモードでは、AdGuardはいわゆる「パーソナルVPN」系アプリと互換性があります。しかし、このモードでは、接続性が悪い場合にシステムによってバイパスされる（“すり抜かれる”）可能性があります。";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
+"mdJ-Nh-wTi.text" = "フィルタダウンロードと保護の進行状況を表示する";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "その他";
-
-/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "nvD-bF-pnp"; */
-"nvD-bF-pnp.text" = "ネットワーク変更時に再起動する";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "ライト（明るい）";
@@ -43,8 +94,11 @@
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
 "q05-UZ-zAB.text" = "このリスト以外のウェブサイトで広告をブロックしないようにします。";
 
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "詳しいユーザー様のための高度な設定モードをオンにします。";
+
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "この設定をONにすると、AdGuardはバックグラウンドでのフィルタ更新をWi-Fiのみで行います（モバイル通信を使いません）。";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "コンテンツブロッカーは6つあり、それぞれに50000本までのルールを含めることができます（計25万本）";
+/* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
+"wYq-g0-5k6.text" = "このオプションはすべての統計データ（リクエスト数など）をクリアします";

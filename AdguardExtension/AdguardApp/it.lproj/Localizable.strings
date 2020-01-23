@@ -14,7 +14,7 @@
 "rule_converting_error" = "Non posso convertire la regola del filtro. Testo della regola non corretto.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Impossibile convertire le regole del filtro utente. Una delle regole contiene un errore. Controlla la regola accanto all'attuale posizione del cursore.";
+"filter_rules_converting_error" = "Impossibile impostare le regole utente nel Safari";
 
 /* Alert title. On error. */
 "common_error_title" = "Errore";
@@ -35,13 +35,10 @@
 "whitelist_title" = "Whitelist";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "Filtro Utente";
+"user_filter_title" = "Regole utente";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "Inserisci qui le tue regole personalizzate, separate da interruzioni di riga";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "Inserisci qui i nomi di dominio separati da interruzioni di riga, per i quali AdGuard disabiliterà il filtraggio di Safari.";
 
 /* YES Button caption in alert */
 "common_action_yes" = "SI";
@@ -60,6 +57,9 @@
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "ACQUISTA";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Password smarrita?";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Il tuo account Premium è scaduto";
@@ -97,16 +97,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Filtri abilitati: %d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Disabilita";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtri aggiornati: %@";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti Web.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard abiliterà il filtraggio in Safari solo per questi siti Web.";
@@ -131,18 +123,6 @@
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Dominio:";
-
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Importa";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Importa";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Esporta";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Esporta";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Segnalare bloccaggio incorretto";
@@ -171,9 +151,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versione %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "aggiornato %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, compatibile con le app \"VPN Personale\"";
 
@@ -182,9 +159,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (senza icona VPN), incompatibile con altre app VPN, meno stabile";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "disabilitato";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blocca annunci, tracker e siti di phishing";
@@ -211,9 +185,6 @@
 "safe_dns_description" = "Servizio DNS di SafeDNS";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "Criptaggio";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "Sicurezza";
 
 /* Dns Feature Name */
@@ -227,9 +198,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Blocco delle pubblicità";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "Non permette a terzi di spiare le attività effettuate durante le ricerche";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blocca il phishing noto e altri domini pericolosi";
@@ -246,14 +214,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blocca gli annunci e i server di monitoraggio";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "Nessun server selezionato";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Abilitati  %1$d di %2$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Copiato negli appunti";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Standard";
@@ -276,12 +238,6 @@
 /* login error message */
 "login_error_message" = "Si è verificato un errore durante l'accesso";
 
-/* purchase secription format */
-"purchase_description_format" = "Informazioni sull'abbonamento AdGuard:<br><br>• Il pagamento verrà addebitato sul tuo account iTunes alla conferma dell'acquisto.<br>• L'abbonamento viene rinnovato automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente.<br>• Il canone di rinnovo dell'abbonamento verrà addebitato entro 24 ore prima della fine del periodo corrente. Gli abbonamenti possono essere gestiti e il rinnovo automatico può essere disattivato nelle impostazioni dell'account iTunes dopo l'acquisto di un abbonamento.<br><br><a href=%1$@@>Politica sulla privacy</a> <br><br><a href=%2$@>Termini di utilizzo</a>";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>Politica sulla privacy</a> <br><br><a href=%2$@>Termini di utilizzo</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
@@ -297,29 +253,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "Attendere per favore...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "Ho appena installato AdGuard AdBlocker per iOS.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "Controlla questo link:";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "Tema";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Altro";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Avanzate";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Blocchi di contenuto";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtri:";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "Impostazioni generali";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Devi prima abilitare la VPN";
@@ -344,9 +288,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Prima di poter utilizzare questa estensione dell'azione, %1$@ deve eseguire una configurazione iniziale. Avvia l'applicazione principale %2$@ per consentirle di farlo.";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "Non è possibile inviare un messaggio al team di supporto. Non hai ancora configurato il tuo account e-mail.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Si osservi che il Blocco contenuti è disabilitato. Ciò significa che gli annunci non saranno filtrati indipendentemente dalle impostazioni di AdGuard. Abilita il Blocco contenuti AdGuard nelle impostazioni Safari per avviare il filtraggio.";
@@ -384,20 +325,98 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Paga una volta e usa le funzionalità AdGuard Premium su tutti i tuoi dispositivi!";
 
-/* (TrialController) alert text title if there is no internet */
-"no_internet" = "Senza connessione Internet";
-
-/* (TrialController) alert text message if there is no internet */
-"no_internet_message" = "Connettiti a Internet per iniziare la prova gratuita";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail o password errate";
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "L'account è bloccato";
 
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Il account è temporaneamente bloccato";
+
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Token 2FA non valido";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "Procedendo, dichiari di accettare i <a href=\"%@\">Termini e condizioni</a> e <a href=\"%@\">l'EULA</a>.";
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Sconosciuto";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Estensioni";
+
+/*(ListOfRules) Select title */
+"common_select" = "Seleziona";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Modifica";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Elimina";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Seleziona tutto";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Aggiungi un dominio";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Aggiungi una nuova regola";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 ore";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Un giorno";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 giorni";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 giorni";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Tutto il periodo";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "I blocchi di contenuto sono in fase di aggiornamento ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Caricamento dei filtri ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Le regole sono in fase di conversione ...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Nuovo filtro personalizzato";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Nuovo filtro DNS";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "La protezione è disabilitata";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "La protezione è abilitata";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Protezione di sistema e quella per Safari";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Blocco dei contenuti per Safari";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Tutti i moduli di protezione sono disabilitati";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "Protezione di sistema";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Queste informazioni sono state caricate dal servizio WhoTrackMe.com";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "Più di info";

@@ -11,7 +11,7 @@
 "70b-CS-wqh.title" = "Logout";
 
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "You have a license activated";
+"FLH-Qd-Atk.text" = "All Premium features are available";
 
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "Set your own rules";
@@ -47,7 +47,7 @@
 "gLL-6o-GGa.text" = "System protection";
 
 /* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "You are subscribed";
+"hjF-1C-hFa.text" = "Premium is activated";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restore purchase";

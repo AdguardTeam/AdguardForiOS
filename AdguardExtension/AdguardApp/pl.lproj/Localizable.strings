@@ -13,17 +13,11 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "Nie mogę przekonwertować reguły filtra. Reguła tekstowa jest niepoprawna.";
 
-/* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Nie mogę przekonwertować reguł filtra użytkownika. Jedna z reguł zawiera błąd. Sprawdź regułę obok obecnego położenia kursora.";
-
 /* Alert title. On error. */
 "common_error_title" = "Błąd";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Nie można wczytać filtrów do przeglądarki Safari. Ostatnie zmiany nie zostały zapisane.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Nie można wczytać filtrów do przeglądarki Safari. Spróbuj wyczyścić reguły użytkownika i białą listę lub zmienić zestaw użytych filtrów.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NIE";
@@ -34,14 +28,8 @@
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Biała lista";
 
-/* (User Filter Screen) Title */
-"user_filter_title" = "Filtr użytkownika";
-
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "Wpisz własne reguły, separowane linią przerywaną";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "Wpisz tutaj nazwy domen separowane linią przerywaną w których AdGuard wyłączy filtrowanie w Safari.";
 
 /* YES Button caption in alert */
 "common_action_yes" = "TAK";
@@ -94,16 +82,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Włączone filtry: %d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Wyłączony";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "Wersja filtrów: %@\n            \n";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Wprowadź tutaj swoje własne reguły<br>Przeczytaj tą <a href=\"%@\">notatkę o składni reguł</a>.\n            \n";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Wprowadź tutaj nazwy domen. AdGuard wyłączy filtrowanie w Safari dla tych stron";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Wprowadź tutaj nazwy domen. AdGuard umożliwi filtrowanie w Safari tylko dla tych stron";
@@ -113,9 +93,6 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Dodaj regułę";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Dodaj domenę";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -129,26 +106,11 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domena:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Zaimportuj białą listę";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Importuj czarną listę";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Eksportuj białą listę";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Eksportuj czarną listę";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Zgłoś nieprawidłowe zablokowanie";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Zgłoszenie błędu";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Skontaktuj się z pomocą techniczną";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Eksportuj logi";
@@ -168,9 +130,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "wersja %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "zaktualizowano %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatybilny z aplikacjami “Personal VPN” ";
 
@@ -179,9 +138,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (bez ikony VPN), niekompatybilny z innymi aplikacjami VPN, mniej stabilny";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "wyłączone";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokuje reklamy, trackery i strony phishingowe";
@@ -208,9 +164,6 @@
 "safe_dns_description" = "Usługa DNS od SafeDNS";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "Szyfrowanie";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "Bezpieczeństwo";
 
 /* Dns Feature Name */
@@ -224,9 +177,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Blokowanie reklam";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "Nie pozwala osobom trzecim szpiegować Twojej aktywności przeglądania";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokuje znane domeny phishingowe";
@@ -243,14 +193,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokuje reklamy i serwery śledzące";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "Nie wybrano serwera";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Włączone %1$d z %2$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Skopiowane do schowka";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Regularny";
@@ -288,29 +232,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "Proszę czekać...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "Właśnie zainstalowałem(am) bloker reklam AdGuard dla iOS.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "Jeśli chcesz tak jak ja, surfować po internecie bez reklam, sprawdź go:";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "Motyw";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Inne";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Zaawansowane";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Blokowanie treści";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtry:";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "Ustawienia główne";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ reguł zostało użytych";
@@ -329,9 +261,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Przed użyciem tego rozszerzenia %1$@ musi wykonać wstępną konfigurację. Uruchom główną aplikację %2$@, aby to zrobła.";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "Nie można wysłać wiadomości do działu pomocy technicznej, ponieważ nie skonfigurowano konta e-mail.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Zauważ, że blokowanie treści jest wyłączone. Oznacza to, że reklamy nie będą filtrowane bez względu na ustawienia AdGuard. Włącz blokowanie treści AdGuard w ustawieniach Safari, aby rozpocząć filtrowanie.";

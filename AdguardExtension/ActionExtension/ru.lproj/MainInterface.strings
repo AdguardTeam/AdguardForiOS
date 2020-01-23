@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
 "0yx-Eh-Ah4.text" = "Заблокировать элемент на этой странице";
 
-/* Class = "UILabel"; text = "Contact support"; ObjectID = "Wrl-xu-3kv"; */
-"Wrl-xu-3kv.text" = "Сообщить в поддержку";
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "Написать в поддержку";
 
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
 "Znm-Yl-fWN.text" = "Нажмите здесь, чтобы использовать инструмент для удаления пропущенных объявлений или вообще любого элемента, который вы не хотите видеть на странице";

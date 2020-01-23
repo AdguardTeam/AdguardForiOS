@@ -2,7 +2,7 @@
 "support_unexpected_error" = "非預期性的錯誤已發生。請與支援團隊聯繫。";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "無法轉換規則。非預期性的錯誤已發生。請與支援團隊聯繫。";
+"support_rule_converting_error" = "由於非預期性的錯誤，無法轉換規則。請與支援團隊聯繫。";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "無法初始化轉換器為 JSON 格式。";
@@ -14,7 +14,7 @@
 "rule_converting_error" = "無法轉換該過濾器規則。規則文字為無效的。";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "無法轉換使用者過濾器規則。";
+"filter_rules_converting_error" = "無法對 Safari 增加這些使用者規則";
 
 /* Alert title. On error. */
 "common_error_title" = "錯誤";
@@ -23,7 +23,7 @@
 "safari_filters_loading_error" = "過濾器無法被載進 Safari。因此，您最近的更改未被套用。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和白名單，或更改已使用的過濾器之設定。";
+"load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和白名單，或更改已使用的過濾器之集合。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -35,13 +35,10 @@
 "whitelist_title" = "白名單";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "使用者過濾器";
+"user_filter_title" = "使用者規則";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "於此輸入您自己的規則，被換行分隔";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "於此輸入被換行分隔之域名，AdGuard 將對於那些禁用 Safari 過濾。";
 
 /* YES Button caption in alert */
 "common_action_yes" = "是";
@@ -100,16 +97,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "已啟用過濾器：%d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "已禁用";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "過濾器被更新：%@";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "於此您可增加您自己的規則<br>閱讀這個<a href=\"%@\">關於規則語法之說明</a>。";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站禁用過濾。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
@@ -121,7 +110,7 @@
 "add_blacklist_rule_title" = "增加規則";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "增加網域";
+"add_whitelist_domain_title" = "輸入一個網域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -134,18 +123,6 @@
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "網域：";
-
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "匯入";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "匯入";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "匯出";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "匯出";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "報告不正確的封鎖";
@@ -160,7 +137,7 @@
 "action_export_logs" = "匯出記錄";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "無法傳送程式錯誤報告。您可能尚未於您的裝置上設置電子郵件帳號。";
+"bug_report_sending_error" = "無法傳送程式錯誤報告。您可能於您的裝置上沒有已配置的電子郵件帳號。";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "過濾器更新出錯";
@@ -174,9 +151,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "版本 %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "已更新 %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "分離的隧道，與\"個人級 VPN\"應用程式相容";
 
@@ -185,9 +159,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖像），與其它的 VPN 應用程式不相容，較不穩定的";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "已禁用";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS 是一種保護您的隱私免於不同的計數器、分析的系統及網路釣魚的網站之替代的方式";
@@ -214,9 +185,6 @@
 "safe_dns_description" = "由 SafeDNS 提供之 DNS 服務";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "加密";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "安全性";
 
 /* Dns Feature Name */
@@ -232,9 +200,6 @@
 "dns_provider_ad_blocking_tag" = "廣告封鎖";
 
 /* Dns Feature description */
-"dns_provider_encryption_summary" = "不讓第三方監視您的瀏覽活動";
-
-/* Dns Feature description */
 "dns_provider_secure_summary" = "封鎖已知的網路釣魚和其它危險的網域";
 
 /* Dns Feature description */
@@ -247,16 +212,13 @@
 "dns_provider_safe_search_summary" = "無論何時盡可能，安全搜尋在瀏覽器中被強制執行";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "封鎖廣告和追蹤伺服器";
+"dns_provider_ad_blocking_summary" = "封鎖廣告和追蹤系統";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "無已選擇的伺服器";
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "系統 DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已啟用 %2$d 當中的 %1$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "被拷貝到剪貼板";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "一般的";
@@ -280,10 +242,10 @@
 "login_error_message" = "當登入時，錯誤已發生。";
 
 /* purchase secription format */
-"purchase_description_format" = "關於 AdGuard 訂閱：<br><br>• 付款將在購買確認時被記在您的 iTunes 帳戶上。<br>• 除非在現行的週期結束前至少 24 小時自動續訂被關掉，否則該訂閱被自動地續訂。<br>• 該訂閱續訂費用將在現行的週期結束前 24 小時內被收費。您的訂閱可被管理，且在購買訂閱後，您的自動續訂可在您的 iTunes 帳戶設定裡被關掉。<br><br><a href=%1$@>隱私政策</a> <br><br><a href=%2$@>使用條款</a>";
+"purchase_description_format" = "關於 AdGuard 訂閱：<br><br>• 付款將在購買確認時被記在您的 iTunes 帳戶上。<br><br>• 除非在現行的週期結束前至少 24 小時自動續訂被關掉，否則該訂閱被自動地續訂。<br><br>• 該訂閱續訂費用將在現行的週期結束前 24 小時內被收費。<br><br>您的訂閱可被管理，且在購買訂閱後，您的自動續訂可在您的 iTunes 帳戶設定裡被關掉。<br><br><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>隱私政策</a> <br><br><a href=%2$@>使用條款</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "確定";
@@ -300,29 +262,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "請稍候…";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "我剛已為 iOS 安裝 AdGuard 廣告封鎖器。";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "如果您想要如我瀏覽無廣告的網路，購買它：";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "主題";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "其它的";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "進階的";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "內容阻擋器";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "過濾器：";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "一般的設定";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "您需要先啟用 VPN";
@@ -347,9 +297,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始的配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "無法傳送訊息給支援團隊。您尚未配置您的電子郵件帳號。";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "注意，內容阻擋器被禁用。那表示不管 AdGuard 設定如何，廣告將不被過濾。請在 Safari 設定中啟用 AdGuard 內容阻擋器以開始過濾。";
@@ -387,12 +334,6 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "付一次費用，然後於所有您的裝置上使用 AdGuard 高級版功能！";
 
-/* (TrialController) alert text title if there is no internet */
-"no_internet" = "無網際網路";
-
-/* (TrialController) alert text message if there is no internet */
-"no_internet_message" = "請連線到網際網路以開始您的免費試用";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正確的電子郵件地址或密碼";
 
@@ -400,10 +341,7 @@
 "account_is_disabled_error" = "帳戶被封鎖";
 
 /* (LoginController) locked account mesage */
-"account_is_locked_error" = "帳戶被暫時地鎖上";
+"account_is_locked_error" = "帳戶被暫時地鎖定";
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "無效的雙因素驗證（2FA）權杖";
-
-/* (LoginController) terms and eula text */
-"login_terms_string" = "透過繼續，您接受該<a href=\"%@\">條款和條件</a>及<a href=\"%@\">終端用戶授權協定</a>。";

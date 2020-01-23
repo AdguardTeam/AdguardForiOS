@@ -5,11 +5,5 @@
 /* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
 "KkR-EM-giI.text" = "Fórum";
 
-/* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "Hogyan kell használni";
-
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
 "ncc-Hk-ota.title" = "Magunkról";
-
-/* Class = "UILabel"; text = "Site"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "Webhely";

@@ -3,7 +3,47 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>trial_screen_days</key>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 правило включено</string>
+        <key>few</key>
+        <string>%d правила включено</string>
+        <key>many</key>
+        <string>%d правил включено</string>
+        <key>other</key>
+        <string>%d правил включено</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 фильтр включен</string>
+        <key>few</key>
+        <string>%d фильтра включены</string>
+        <key>many</key>
+        <string>%d фильтров включено</string>
+        <key>other</key>
+        <string>%d фильтров включено</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@days@</string>
@@ -14,16 +54,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ДЕНЬ</string>
+        <string>Бесплатный полный доступ на один день</string>
         <key>few</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЯ</string>
+        <string>Бесплатный полный доступ на %d дня</string>
         <key>many</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
+        <string>Бесплатный полный доступ на %d дней</string>
         <key>other</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ДНЕЙ</string>
+        <string>Бесплатный полный доступ на %d дней</string>
       </dict>
     </dict>
-    <key>trial_screen_weeks</key>
+    <key>getPro_full_access_weeks</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@weeks@</string>
@@ -34,16 +74,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДНУ НЕДЕЛЮ</string>
+        <string>Бесплатный полный доступ на одну неделю</string>
         <key>few</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛИ</string>
+        <string>Бесплатный полный доступ на %d недели</string>
         <key>many</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
+        <string>Бесплатный полный доступ на %d недель</string>
         <key>other</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d НЕДЕЛЬ</string>
+        <string>Бесплатный полный доступ на %d недель</string>
       </dict>
     </dict>
-    <key>trial_screen_months</key>
+    <key>getPro_full_access_months</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@months@</string>
@@ -54,16 +94,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН МЕСЯЦ</string>
+        <string>Бесплатный полный доступ на один месяц</string>
         <key>few</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦА</string>
+        <string>Бесплатный полный доступ на %d месяца</string>
         <key>many</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
+        <string>Бесплатный полный доступ на %d месяцев</string>
         <key>other</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d МЕСЯЦЕВ</string>
+        <string>Бесплатный полный доступ на %d месяцев</string>
       </dict>
     </dict>
-    <key>trial_screen_years</key>
+    <key>getPro_full_access_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@years@</string>
@@ -74,13 +114,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА ОДИН ГОД</string>
+        <string>Бесплатный полный доступ на один год</string>
         <key>few</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ГОДА</string>
+        <string>Бесплатный полный доступ на %d года</string>
         <key>many</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
+        <string>Бесплатный полный доступ на %d лет</string>
         <key>other</key>
-        <string>ПРОБНЫЙ ПЕРИОД С ПОЛНЫМ ДОСТУПОМ НА %d ЛЕТ</string>
+        <string>Бесплатный полный доступ на %d лет</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -161,86 +201,6 @@
         <string>Начните ваш первый пробный период на %d лет</string>
         <key>other</key>
         <string>Начните ваш первый пробный период на %d лет</string>
-      </dict>
-    </dict>
-    <key>trial_label_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Бесплатный пробный период на один день</string>
-        <key>few</key>
-        <string>Бесплатный пробный период на %d дня</string>
-        <key>many</key>
-        <string>Бесплатный пробный период на %d дней</string>
-        <key>other</key>
-        <string>Бесплатный пробный период на %d дней</string>
-      </dict>
-    </dict>
-    <key>trial_label_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Бесплатный пробный период на одну неделю</string>
-        <key>few</key>
-        <string>Бесплатный пробный период на %d недели</string>
-        <key>many</key>
-        <string>Бесплатный пробный период на %d недель</string>
-        <key>other</key>
-        <string>Бесплатный пробный период на %d недель</string>
-      </dict>
-    </dict>
-    <key>trial_label_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Бесплатный пробный период на один месяц</string>
-        <key>few</key>
-        <string>Бесплатный пробный период на %d месяца</string>
-        <key>many</key>
-        <string>Бесплатный пробный период на %d месяцев</string>
-        <key>other</key>
-        <string>Бесплатный пробный период на %d месяцев</string>
-      </dict>
-    </dict>
-    <key>trial_label_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Бесплатный пробный период на один год</string>
-        <key>few</key>
-        <string>Бесплатный пробный период на %d года</string>
-        <key>many</key>
-        <string>Бесплатный пробный период на %d лет</string>
-        <key>other</key>
-        <string>Бесплатный пробный период на %d лет</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

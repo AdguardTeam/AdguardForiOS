@@ -1,80 +1,65 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
 "03E-rd-Slw.normalTitle" = "標準";
 
-/* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "サーバーを選択";
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
+"0ZJ-BI-849.text" = "ネットワーク設定";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "名称";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "3b3-d2-03o"; */
-"3b3-d2-03o.text" = "他のVPNアプリと互換性なし";
-
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "カスタムDNS設定をセット";
+
+/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
+"4rw-Lb-MJH.title" = "DNSサーバー";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP、sdns://、https:// もしくは tls://";
 
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "6db-7F-O0d"; */
-"6db-7F-O0d.title" = "Tunnelモード";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "保存";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "6y8-H6-3Rj"; */
-"6y8-H6-3Rj.text" = "他のVPNアプリと互換性なし、不安定";
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "AdGuardはこのリストに入っているドメインをブロックしません。";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "AdGuardはこのリストに入っているドメインをブロックします。";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "保存して選択";
 
-/* Class = "UINavigationItem"; title = "DNS Privacy"; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "DNSプライバシー";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
-"EkI-hK-XDG.text" = "アドレス";
+/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "DNSリクエストをブロック";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
-"IVH-4P-uIk.text" = "ドメイン";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "Ina-3I-qVn"; */
-"Ina-3I-qVn.text" = "DNSプライバシー";
-
-/* Class = "UILabel"; text = "Type"; ObjectID = "Itg-uX-XAd"; */
-"Itg-uX-XAd.text" = "タイプ";
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "高度なネットワーク設定";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "選択";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "サーバー";
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "DNSサーバー";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
-"Mni-fx-xGW.text" = "時刻";
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "フィルタを追加する";
 
-/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "OJU-gT-SmT"; */
-"OJU-gT-SmT.text" = "Split-Tunnel";
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "このモジュールは追跡ドメインをブロックしDNS通信を暗号化することができます。";
 
-/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "SL2-Kq-gMW"; */
-"SL2-Kq-gMW.text" = "「パーソナルVPN」系アプリと互換性あり";
+/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "システム全体でブロック";
 
-/* Class = "UILabel"; text = "DNS protocol can be exploited by ISPs and third parties to spy on your traffic or even hijack it. We protect your privacy by encrypting your DNS connections, just select any DNS server from the list."; ObjectID = "SMK-iz-f9G"; */
-"SMK-iz-f9G.text" = "DNSプロトコルは、ユーザ様のトラフィックを盗み見たり、それを乗っ取ったりするためにISPや第三者によって悪用される可能性があります。 私たちはユーザ様のDNS接続を暗号化することでユーザ様のプライバシーを保護します。下のリストから任意のDNSサーバーを選択するだけで十分です。";
+/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
+"VR9-fh-ogr.title" = "ネットワーク設定";
 
-/* Class = "UILabel"; text = "Responses"; ObjectID = "TQm-1H-bNl"; */
-"TQm-1H-bNl.text" = "レスポンス";
+/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "システム・ホワイトリスト";
 
-/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
-"TTc-NW-AJa.text" = "Full-Tunnel";
-
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
-"VxP-fd-4kT.text" = "Split-Tunnelモードでは、AdGuardはいわゆる「パーソナルVPN」系アプリと互換性があります。 しかし、このモードでは、接続性が悪い場合にシステムによってバイパスされる可能性があります。";
-
-/* Class = "UILabel"; text = "DNS Requests Log"; ObjectID = "WsR-6Z-pxB"; */
-"WsR-6Z-pxB.text" = "DNSリクエストログ";
+/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
+"ZCR-6u-jrf.text" = "おすすめDNSプロバイダ";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "キャンセル";
@@ -88,8 +73,8 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "サーバー";
 
-/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
-"d69-Gd-SZp.text" = "Full-Tunnel（VPNアイコンなし）";
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "カスタムDNSサーバーを追加する";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNSサーバアドレス";
@@ -103,11 +88,11 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "Monitor all DNS requests on your device and manage them"; ObjectID = "hoU-PM-icY"; */
-"hoU-PM-icY.text" = "お使いのデバイス上のすべてのDNSリクエストを監視し、管理できます";
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "ドメインネームシステム (DNS) は、インターネットにおける電話帳のようなものです。DNSはドメイン名のディレクトリを維持しつつ、ドメイン名をIPアドレスに変換します。";
 
-/* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "DNSリクエストログ";
+/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "システム・ブラックリスト";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "キャンセル";
@@ -115,23 +100,26 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "名称";
 
-/* Class = "UIButton"; normalTitle = "Add custom DNS server"; ObjectID = "mBx-dq-oa2"; */
-"mBx-dq-oa2.normalTitle" = "カスタムDNSサーバーを追加する";
-
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "ウェブサイト";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "削除";
 
-/* Class = "UILabel"; text = "Tunnel Mode"; ObjectID = "pPC-fU-UPD"; */
-"pPC-fU-UPD.text" = "Tunnelモード";
+/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "DNSリクエストをブロック";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "サーバー";
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "セキュリティ・フィルタ、DNSプライバシー、\nカスタム・フィルタなど";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "フィルタ";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "サーバー名";
+
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "このモジュールは追跡ドメインをブロックしDNS通信を暗号化することができます。";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNSサーバアドレス";
@@ -139,8 +127,8 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "プロトコルを選択";
 
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
-"ve4-Qn-Yj6.title" = "DNSリクエストの詳細";
+/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
+"w0g-Xg-HG0.title" = "DNSフィルタ";
 
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
-"xe9-vq-pF6.text" = "経過時間";
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "フィルタと除外";
