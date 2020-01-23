@@ -94,7 +94,18 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         
         let dns64Settings = AGDns64Settings(upstreams: [upstream], maxTries: 2, waitTimeMs: 3000)
-        let config = AGDnsProxyConfig(upstreams: agUpstreams, filters: filters, blockedResponseTtlSecs: 2, dns64Settings: dns64Settings, listeners: nil, ipv6Available: ipv6Available, blockIpv6: false, blockingMode: .AGBM_DEFAULT, customBlockingIpv4: nil, customBlockingIpv6: nil, dnsCacheSize: 128)
+        let config = AGDnsProxyConfig(upstreams: agUpstreams,
+                                      fallbacks: nil,
+                                      filters: filters,
+                                      blockedResponseTtlSecs: 2,
+                                      dns64Settings: dns64Settings,
+                                      listeners: nil,
+                                      ipv6Available: ipv6Available,
+                                      blockIpv6: false,
+                                      blockingMode: .AGBM_DEFAULT,
+                                      customBlockingIpv4: nil,
+                                      customBlockingIpv6: nil,
+                                      dnsCacheSize: 128)
         agproxy = AGDnsProxy(config: config, handler: events)
         
         return agproxy != nil
