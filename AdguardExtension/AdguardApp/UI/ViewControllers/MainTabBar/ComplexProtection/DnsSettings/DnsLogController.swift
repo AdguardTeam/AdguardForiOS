@@ -174,17 +174,17 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         var logSelectedCellColor: UIColor = .clear
         var logBlockedCellColor: UIColor = .clear
         
-        switch (type, dnsStatus) {
-        case (.blocked, _):
+        switch type {
+        case .blocked:
             logSelectedCellColor = UIColor(hexString: "#4DDF3812")
             logBlockedCellColor = UIColor(hexString: "#33DF3812")
-        case (.tracked, _):
+        case .tracked:
             logSelectedCellColor = UIColor(hexString: "#4Df5a623")
             logBlockedCellColor = UIColor(hexString: "#33f5a623")
-        case (.whitelisted, _):
+        case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        case (.normal, _):
+        case .normal:
             logSelectedCellColor = theme.selectedCellColor
             logBlockedCellColor = .clear
         }
