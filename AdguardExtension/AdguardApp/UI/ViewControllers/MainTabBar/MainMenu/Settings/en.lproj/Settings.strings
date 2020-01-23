@@ -22,8 +22,8 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Restart protection when  network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "Restart protection when  network changes";
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
+"JPH-xu-Z3J.text" = "Restart protection when network changes";
 
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
 "KSL-dU-yfA.text" = "Content blockers";
