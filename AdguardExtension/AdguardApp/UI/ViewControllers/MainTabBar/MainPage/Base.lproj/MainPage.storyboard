@@ -550,15 +550,6 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8E-Jo-8op">
                                 <rect key="frame" x="0.0" y="725" width="414" height="0.0"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-gP-TsG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="14" width="246" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjI-86-pkN">
                                         <rect key="frame" x="374" y="-12" width="24" height="24"/>
                                         <constraints>
@@ -593,13 +584,22 @@
                                             <action selector="fixItTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="c1B-Dq-5dM"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-gP-TsG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="-8.5" width="246" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="wjI-86-pkN" secondAttribute="trailing" constant="16" id="0E1-Ck-w9v"/>
                                     <constraint firstItem="46F-Jh-wHm" firstAttribute="centerY" secondItem="FcP-gP-TsG" secondAttribute="centerY" id="0H1-0a-TfY"/>
                                     <constraint firstItem="46F-Jh-wHm" firstAttribute="leading" secondItem="FcP-gP-TsG" secondAttribute="trailing" constant="16" id="6t4-Gm-w6g"/>
-                                    <constraint firstItem="FcP-gP-TsG" firstAttribute="top" secondItem="k8E-Jo-8op" secondAttribute="top" constant="14" id="RfU-nN-MGm"/>
+                                    <constraint firstItem="FcP-gP-TsG" firstAttribute="centerY" secondItem="k8E-Jo-8op" secondAttribute="centerY" id="DA8-zB-0XO"/>
                                     <constraint firstItem="FcP-gP-TsG" firstAttribute="leading" secondItem="k8E-Jo-8op" secondAttribute="leading" constant="16" id="W5m-HE-JmP"/>
                                     <constraint firstItem="wjI-86-pkN" firstAttribute="leading" secondItem="46F-Jh-wHm" secondAttribute="trailing" constant="16" id="XYO-Us-6iV"/>
                                     <constraint firstAttribute="height" id="eSv-Jc-dfo"/>
