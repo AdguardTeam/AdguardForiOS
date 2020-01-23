@@ -16,5 +16,5 @@
 /* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari";
 
-/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists in AdGuard settings"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists in AdGuard settings";
+/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below";
