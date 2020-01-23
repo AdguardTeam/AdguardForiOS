@@ -184,12 +184,9 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         case (.whitelisted, _):
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        case (.normal, "NOERROR"):
+        case (.normal, _):
             logSelectedCellColor = theme.selectedCellColor
             logBlockedCellColor = .clear
-        case (.normal, _): // error
-            logSelectedCellColor = UIColor(hexString: "#4DDF3812")
-            logBlockedCellColor = UIColor(hexString: "#33DF3812")
         }
         
         let bgColorView = UIView()
