@@ -56,7 +56,7 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
         return false
     }
     
-    init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
+    @objc init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
         self.resources = resources
         self.systemAppearenceIsDark = systemAppearenceIsDark
     }

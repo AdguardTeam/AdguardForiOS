@@ -56,7 +56,7 @@ protocol DnsFiltersServiceProtocol {
     func deleteFilter(_ filter: DnsFilter)
     
     // Updates filters with new meta
-    func updateFilters(networking: ACNNetworkingProtocol)
+    func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?)
     
     // resets service settings
     func reset()
@@ -175,12 +175,13 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
     private let vpnManager: APVPNManagerProtocol?
+    private let configuration: ConfigurationServiceProtocol
     private let parser = AASFilterSubscriptionParser()
         
-    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?) {
+    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?, configuration: ConfigurationServiceProtocol) {
         self.resources = resources
         self.vpnManager = vpnManager
-        
+        self.configuration = configuration
         super.init()
         readFiltersMeta()
     }
@@ -311,14 +312,38 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         vpnManager?.restartTunnel()
     }
     
-    func updateFilters(networking: ACNNetworkingProtocol){
+    func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
         
-        filtersAreUpdating = true
+        if !configuration.proStatus {
+            callback?()
+            return
+        }
         
-        for (i,filter) in filters.enumerated() {
-            if let url = URL(string: filter.subscriptionUrl ?? ""){
-                parser.parse(from: url, networking: networking) {[weak self] (result, error) in
+        DispatchQueue(label: "update dns filters").async { [weak self] in
+            
+            defer {
+                callback?()
+            }
+            
+            guard let self = self else { return }
+            
+            self.filtersAreUpdating = true
+            
+            let group = DispatchGroup()
+            
+            for (i,filter) in self.filters.enumerated() {
+                guard let url = URL(string: filter.subscriptionUrl ?? "") else { return }
+                
+                group.enter()
+                
+                self.parser.parse(from: url, networking: networking) {[weak self] (result, error) in
+                    
+                    defer {
+                        group.leave()
+                    }
+                    
                     guard let self = self else { return }
+                    
                     if let parserError = error {
                         DDLogError("Failed updating dns filters with error: \(parserError)")
                         return
@@ -341,8 +366,14 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                     }
                 }
             }
+            
+            group.wait()
+            if self.vpnManager?.enabled ?? false {
+                self.vpnManager?.restartTunnel()
+            }
+            
+            self.filtersAreUpdating = false
         }
-        filtersAreUpdating = false
     }
     
     func reset() {
