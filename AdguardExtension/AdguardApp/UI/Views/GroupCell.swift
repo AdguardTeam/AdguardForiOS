@@ -27,9 +27,4 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var separator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
-    @IBOutlet weak var getPremiumButton: RoundRectButton!
-    
-    @IBOutlet weak var nameTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionTrailingConstraint: NSLayoutConstraint!
 }
