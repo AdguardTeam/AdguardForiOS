@@ -88,6 +88,9 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "DNS (Domain Name System) é l'equivalente di una rubrica telefonica di Internet. Mantiene una directory di nomi degli domini e li traduce in indirizzi IP.";
+
 /* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Blacklist di sistema";
 

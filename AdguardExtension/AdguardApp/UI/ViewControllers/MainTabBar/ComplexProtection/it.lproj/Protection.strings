@@ -1,0 +1,20 @@
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
+"884-Hm-mb6.text" = "Protezione Safari";
+
+/* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+"P9C-72-GAw.text" = "premium";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "cnF-td-Ba1"; */
+"cnF-td-Ba1.text" = "Protezione di sistema";
+
+/* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+"l1g-hs-4EK.text" = "gratis";
+
+/* Class = "UINavigationItem"; title = "Protection"; ObjectID = "mwP-h9-R34"; */
+"mwP-h9-R34.title" = "Protezione";
+
+/* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Questo modulo protegge dall' inseguimento in tutto il sistema. Crittografa le tue richieste DNS e blocca il tracciamento dei domini in tutte le applicazioni, non solo in Safari";
+
+/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Questo modulo blocca gli annunci e i tracker sui siti web aperti in Safari. È possibile scegliere tra diverse liste di filtri o aggiungere i propri nelle impostazioni seguenti";
