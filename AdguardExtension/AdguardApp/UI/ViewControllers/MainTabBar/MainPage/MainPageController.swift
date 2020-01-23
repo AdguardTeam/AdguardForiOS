@@ -256,9 +256,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         var safariUpdateEnded = false
         var dnsUpdateEnded = false
         let endUpdate: ()->Void = { [weak self] in
-            if safariUpdateEnded && dnsUpdateEnded {
+            switch(safariUpdateEnded, dnsUpdateEnded){
+            case (true, true):
                 self?.updateEnded()
+            case (true, false):
+                self?.protectionStatusLabel.text = ACLocalizedString("update_filter_start_message", nil)
+            default:
+                break
             }
+            
         }
         
         mainPageModel?.updateFilters(start: {
