@@ -37,8 +37,8 @@ protocol NumberOfRequestsChangedDelegate: class {
     func numberOfRequestsChanged()
 }
 
-enum ChartDateType {
-    case today, day, week, month, alltime
+enum ChartDateType: Int {
+    case alltime = 0, month, week, day, today
     
     func getTimeInterval(requestsDates: [Date]) -> (begin: Date, end: Date){
         let firstDate: Date = requestsDates.first ?? now()
